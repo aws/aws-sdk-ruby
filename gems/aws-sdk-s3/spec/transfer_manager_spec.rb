@@ -23,6 +23,47 @@ module Aws
         end
       end
 
+      describe '#download_directory' do
+        let(:temp_dir) { Dir.mktmpdir }
+
+        before do
+          client.stub_responses(
+            :list_objects_v2,
+            {
+              contents: [{ key: 'file1.txt', size: 100 }, { key: 'file2.txt', size: 100 }],
+              is_truncated: false
+            }
+          )
+          client.stub_responses(:get_object, { body: 'content' })
+        end
+
+        after do
+          FileUtils.rm_rf(temp_dir)
+        end
+
+        it 'returns results when download succeeds' do
+          result = subject.download_directory(temp_dir, bucket: 'bucket')
+          expect(result[:completed_downloads]).to eq(2)
+          expect(result[:failed_downloads]).to eq(0)
+        end
+
+        it 'raises when download errors' do
+          client.stub_responses(:get_object, 'AccessDenied')
+
+          expect do
+            subject.download_directory(temp_dir, bucket: 'bucket', ignore_failure: false)
+          end.to raise_error(DirectoryDownloadError)
+        end
+
+        it 'calls progress callback when given' do
+          progress_calls = []
+          callback = proc { |bytes, files| progress_calls << { bytes: bytes, files: files } }
+
+          subject.download_directory(temp_dir, bucket: 'bucket', progress_callback: callback)
+          expect(progress_calls.length).to eq(2)
+        end
+      end
+
       describe '#download_file', :jruby_flaky do
         let(:path) { Tempfile.new('destination').path }
 
@@ -189,8 +230,8 @@ module Aws
               .to receive(:custom_stream).and_call_original
             allow_any_instance_of(Aws::Plugins::ChecksumAlgorithm::AwsChunkedTrailerDigestIO)
               .to receive(:read).and_wrap_original do |method, size|
-              read_sizes << size
-              method.call(size)
+                read_sizes << size
+                method.call(size)
             end
 
             tm.upload_file(test_file, bucket: 'test-bucket', key: 'test-key', http_chunk_size: chunk_size)
@@ -216,8 +257,8 @@ module Aws
 
             allow_any_instance_of(Aws::Plugins::ChecksumAlgorithm::AwsChunkedTrailerDigestIO)
               .to receive(:read).and_wrap_original do |method, size|
-              read_sizes << size
-              method.call(size)
+                read_sizes << size
+                method.call(size)
             end
             tm.upload_file(test_file, bucket: 'test-bucket', key: 'test-key')
             server_thread.join

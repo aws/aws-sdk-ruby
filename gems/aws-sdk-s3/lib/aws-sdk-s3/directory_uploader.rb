@@ -45,7 +45,7 @@ module Aws
       private
 
       def build_opts(source_directory, bucket, opts)
-        uploader_opts = { progress_callback: opts[:progress_callback], ignore_failure:  opts[:ignore_failure] || false }
+        uploader_opts = { progress_callback: opts[:progress_callback], ignore_failure: opts[:ignore_failure] || false }
         producer_opts = {
           directory_uploader: self,
           source_dir: source_directory,
@@ -54,13 +54,13 @@ module Aws
           recursive: opts[:recursive] || false,
           follow_symlinks: opts[:follow_symlinks] || false,
           filter_callback: opts[:filter_callback],
-          request_callback: opts[:request_callback],
+          request_callback: opts[:request_callback]
         }
         [uploader_opts, producer_opts]
       end
 
       def build_result(upload_count, errors)
-        if @abort_requested
+        if abort_requested
           msg = "directory upload failed: #{errors.map(&:message).join('; ')}"
           raise DirectoryUploadError.new(msg, errors)
         else
@@ -84,27 +84,29 @@ module Aws
         completion_queue = Queue.new
         upload_attempts = 0
         errors = []
-        producer.each do |file|
-          break if abort_requested
+        begin
+          producer.each do |file|
+            break if abort_requested
 
-          upload_attempts += 1
-          @queue_executor.post(file) do |f|
-            uploader.upload(f.path, f.params)
-            progress&.call(File.size(f.path))
-          rescue StandardError => e
-            @mutex.synchronize do
-              errors << StandardError.new("Upload failed for #{File.basename(f.path)}: #{e.message}")
+            upload_attempts += 1
+            @queue_executor.post(file) do |f|
+              uploader.upload(f.path, f.params)
+              progress&.call(File.size(f.path))
+            rescue StandardError => e
+              @mutex.synchronize do
+                errors << StandardError.new("Upload failed for #{File.basename(f.path)}: #{e.message}")
+              end
+              handle_error(opts)
+            ensure
+              completion_queue << :done
             end
-            handle_error(opts)
-          ensure
-            completion_queue << :done
           end
+        rescue StandardError => e
+          request_abort
+          @queue_executor.kill
+          raise e
         end
-        upload_attempts.times do
-          break if abort_requested
-
-          completion_queue.pop
-        end
+        upload_attempts.times { completion_queue.pop }
         [upload_attempts, errors]
       end
 
@@ -170,17 +172,16 @@ module Aws
             break if @directory_uploader.abort_requested
 
             entry_path = File.join(@source_dir, entry)
+            stat = nil
             if @follow_symlinks
               stat = File.stat(entry_path)
               next if stat.directory?
-
-              next unless stat.file?
             else
               stat = File.lstat(entry_path)
               next if stat.symlink? || stat.directory?
-
-              next unless stat.file?
             end
+
+            next unless stat.file?
             next unless include_file?(entry_path, entry)
 
             @file_queue << build_upload_entry(entry_path, entry)
@@ -217,7 +218,7 @@ module Aws
 
             if stat.directory?
               handle_directory(full_path, entry, key_prefix, ancestors)
-            elsif stat.file?  # skip non-file types
+            elsif stat.file? # skip non-file types
               key = key_prefix.empty? ? entry : File.join(key_prefix, entry)
               @file_queue << build_upload_entry(full_path, key)
             end

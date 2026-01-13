@@ -72,6 +72,17 @@ module Aws
         end
       end
 
+      def download_object(entry, downloader, opts, progress, errors)
+        raise entry.error if entry.error
+
+        FileUtils.mkdir_p(File.dirname(entry.path)) unless Dir.exist?(File.dirname(entry.path))
+        downloader.download(entry.path, entry.params)
+        progress&.call(File.size(entry.path))
+      rescue StandardError => e
+        @mutex.synchronize { errors << e }
+        handle_error(opts)
+      end
+
       def handle_error(opts)
         return if opts[:ignore_failure]
 
@@ -84,26 +95,22 @@ module Aws
         completion_queue = Queue.new
         download_attempts = 0
         errors = []
-        producer.each do |object|
-          break if abort_requested
+        begin
+          producer.each do |object|
+            break if abort_requested
 
-          download_attempts += 1
-          @queue_executor.post(object) do |o|
-            raise o.error if o.error
-
-            dir_path = File.dirname(o.path)
-            FileUtils.mkdir_p(dir_path) unless dir_path == opts[:destination] || Dir.exist?(dir_path)
-
-            downloader.download(o.path, o.params)
-            progress&.call(File.size(o.path))
-          rescue StandardError => e
-            @mutex.synchronize do
-              errors << e
+            download_attempts += 1
+            @queue_executor.post(object) do |o|
+              download_object(o, downloader, opts, progress, errors)
+            ensure
+              completion_queue << :done
             end
-            handle_error(opts)
-          ensure
-            completion_queue << :done
           end
+        rescue StandardError => e
+          request_abort # Producer failed (e.g., list_objects error) - abort immediately
+          @queue_executor.kill
+
+          raise e
         end
         download_attempts.times { completion_queue.pop }
         [download_attempts, errors]
@@ -158,8 +165,8 @@ module Aws
           params = { bucket: @bucket, key: key }
           params = apply_request_callback(key, params) if @request_callback
 
-          normalize_key = normalize_key(key)
-          full_path = File.join(@destination_dir, normalize_key)
+          normalized_key = normalize_key(key)
+          full_path = File.join(@destination_dir, normalized_key)
           error = nil
 
           expanded = File.expand_path(full_path)
@@ -169,19 +176,6 @@ module Aws
           end
 
           DownloadEntry.new(path: full_path, params: params, error: error)
-        end
-
-        def stream_objects(continuation_token: nil)
-          resp = @client.list_objects_v2(bucket: @bucket, prefix: @s3_prefix, continuation_token: continuation_token)
-          resp.contents&.each do |o|
-            break if @directory_downloader.abort_requested
-
-            next if o.key.end_with?('/') && o.size.zero?
-            next unless include_object?(o.key)
-
-            @object_queue << build_object_entry(o.key)
-          end
-          stream_objects(continuation_token: resp.next_continuation_token) if resp.next_continuation_token
         end
 
         def include_object?(key)
@@ -196,6 +190,19 @@ module Aws
             key = key.delete_prefix(prefix)
           end
           File::SEPARATOR == '/' ? key : key.tr('/', File::SEPARATOR)
+        end
+
+        def stream_objects(continuation_token: nil)
+          resp = @client.list_objects_v2(bucket: @bucket, prefix: @s3_prefix, continuation_token: continuation_token)
+          resp.contents&.each do |o|
+            break if @directory_downloader.abort_requested
+
+            next if o.key.end_with?('/') && o.size.zero?
+            next unless include_object?(o.key)
+
+            @object_queue << build_object_entry(o.key)
+          end
+          stream_objects(continuation_token: resp.next_continuation_token) if resp.next_continuation_token
         end
 
         # @api private
