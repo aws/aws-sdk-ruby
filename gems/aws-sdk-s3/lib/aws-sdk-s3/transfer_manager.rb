@@ -90,7 +90,7 @@ module Aws
       #   For example, with prefix '`photos/2024/`', an object '`photos/2024/vacation/beach.jpg`'
       #   is downloaded to '`<destination>/vacation/beach.jpg`'.
       #
-      # @option options [Proc] :ignore_failure (false)
+      # @option options [Boolean] :ignore_failure (false)
       #   How to handle individual file download failures:
       #   * `false` (default) - Cancel all ongoing requests, terminate the ongoing downloads and raise an exception
       #   * `true` - Continue downloading remaining objects, report failures in result.
@@ -114,7 +114,7 @@ module Aws
       # @return [Hash] Returns a hash with download statistics:
       #   * `:completed_downloads` - Number of objects successfully downloaded
       #   * `:failed_downloads` - Number of objects that failed to download
-      #   * `:errors` - Array of errors for failed downloads
+      #   * `:errors` - Array of errors for failed downloads (only present when failures occur)
       def download_directory(destination, bucket:, **options)
         executor = @executor || DefaultExecutor.new
         downloader = DirectoryDownloader.new(client: @client, executor: executor)
@@ -236,15 +236,15 @@ module Aws
       #   * `false` (default) - only files in the top-level directory are uploaded, subdirectories are ignored.
       #   * `true` - all files and subdirectories are uploaded recursively.
       #
-      # @option options [Proc] :follow_symlinks (false)
+      # @option options [Boolean] :follow_symlinks (false)
       #   Whether to follow symbolic links when traversing the file tree:
       #   * `false` (default) - symbolic links are ignored and not uploaded.
       #   * `true` - symbolic links are followed and their target files/directories are uploaded.
       #
-      # @option options [Proc] :ignore_failure (false)
+      # @option options [Boolean] :ignore_failure (false)
       #   How to handle individual file upload failures:
       #   * `false` (default) - Cancel all ongoing requests, terminate the directory upload, and raise an exception
-      #   * `true` - Ignore the failure and continue the transfer for other objects
+      #   * `true` - Ignore the failure and continue the transfer for other files
       #
       # @option options [Proc] :filter_callback (nil)
       #   A Proc to filter which files to upload. Called for each discovered file with the file path.
@@ -258,14 +258,14 @@ module Aws
       #   A Proc that will be called as files are uploaded.
       #   It will be invoked with `transferred_bytes` and `transferred_files`.
       #
-      # @option option [Integer] :http_chunk_size (16384) Size in bytes for each chunk when streaming request bodies
+      # @option options [Integer] :http_chunk_size (16384) Size in bytes for each chunk when streaming request bodies
       #   over HTTP. Controls the buffer size used when sending data to S3. Larger values may improve throughput by
       #   reducing the number of network writes, but use more memory. Custom values must be at least 16KB.
       #   Only Ruby MRI is supported.
       #
       # @raise [DirectoryUploadError] Raised when the upload fails
-      #   * Directory traversal failure (permission denied, broken symlink, etc.)
       #   * Upload failure with `ignore_failure: false` (default)
+      #   * Directory traversal failure (permission denied, broken symlink, etc.)
       #
       # @return [Hash] Returns a hash with upload statistics:
       #   * `:completed_uploads` - Number of files successfully uploaded

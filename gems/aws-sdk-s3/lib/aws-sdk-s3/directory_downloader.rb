@@ -44,7 +44,7 @@ module Aws
       def build_opts(destination, bucket, opts)
         download_opts = {
           progress_callback: opts[:progress_callback],
-          destination: opts[:destination],
+          destination: destination,
           ignore_failure: opts[:ignore_failure] || false
         }
         producer_opts = {
