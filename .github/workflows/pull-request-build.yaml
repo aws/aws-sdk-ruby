@@ -1,10 +1,7 @@
 name: Build SDK
 on:
-#  pull_request_review:
-#    types: [ submitted ]
-#    branches: [ version-3 ]
-  pull_request:
-    types: [ opened, synchronize, ready_for_review ]
+  pull_request_review:
+    types: [ submitted ]
     branches: [ version-3 ]
   workflow_dispatch:
 
@@ -18,14 +15,12 @@ env:
   SCRIPT_LOCATION: 'workflows/start-pull-request-build/pull-request-build-v1.sh'
 
   # custom variables
-  IAM_ROLE_ARN: 'arn:aws:iam::664418967014:role/AwsSdkRubyGitHubRole' # dev account role for testing
-#  IAM_ROLE_ARN: 'arn:aws:iam::525369684841:role/AwsSdkRubyGitHubRole'
+  IAM_ROLE_ARN: 'arn:aws:iam::525369684841:role/AwsSdkRubyGitHubRole'
   ROLE_SESSION_DURATION_SECONDS: 7200
 
 jobs:
   aws-sdk-pr-build:
-#    if: github.event.review.state == 'approved'
-    if: github.event.pull_request.draft == false
+    if: github.event.review.state == 'approved'
     runs-on: ubuntu-latest
     permissions:
       id-token: write
