@@ -158,7 +158,7 @@ module Aws
             client.stub_responses(:get_object, { body: 'x' * 100 })
 
             progress_calls = []
-            callback = ->(bytes) { progress_calls << bytes }
+            callback = ->(bytes, _files) { progress_calls << bytes }
 
             downloader.download(temp_dir, bucket: 'test-bucket', progress_callback: callback)
 

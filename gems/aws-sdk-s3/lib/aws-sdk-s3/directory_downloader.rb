@@ -89,7 +89,6 @@ module Aws
 
           download_attempts += 1
           @queue_executor.post(object) do |o|
-
             raise o.error if o.error
 
             dir_path = File.dirname(o.path)
@@ -106,9 +105,7 @@ module Aws
             completion_queue << :done
           end
         end
-        download_attempts.times do
-          completion_queue.pop
-        end
+        download_attempts.times { completion_queue.pop }
         [download_attempts, errors]
       end
 
@@ -144,7 +141,7 @@ module Aws
             yield object
           end
         ensure
-          producer_thread.join
+          producer_thread.value
         end
 
         private
