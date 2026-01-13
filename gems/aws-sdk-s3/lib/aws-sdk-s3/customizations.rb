@@ -21,7 +21,7 @@ module Aws
     autoload :MultipartUploadError, 'aws-sdk-s3/multipart_upload_error'
     autoload :DirectoryProgress, 'aws-sdk-s3/directory_progress'
     autoload :DirectoryDownloadError, 'aws-sdk-s3/directory_download_error'
-    autoload :DirectoryDownloader, '.aws-sdk-s3/directory_downloader'
+    autoload :DirectoryDownloader, 'aws-sdk-s3/directory_downloader'
     autoload :DirectoryUploadError, 'aws-sdk-s3/directory_upload_error'
     autoload :DirectoryUploader, 'aws-sdk-s3/directory_uploader'
     autoload :ObjectCopier, 'aws-sdk-s3/object_copier'

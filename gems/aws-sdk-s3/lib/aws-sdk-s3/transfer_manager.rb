@@ -49,7 +49,6 @@ module Aws
     #     executor.shutdown # You must shutdown custom executors
     #
     class TransferManager
-
       # @param [Hash] options
       # @option options [S3::Client] :client (S3::Client.new)
       #   The S3 client to use for {TransferManager} operations. If not provided, a new default client
@@ -69,6 +68,60 @@ module Aws
 
       # @return [Object]
       attr_reader :executor
+
+      # Downloads objects in a S3 bucket to a local directory.
+      #
+      # @example Downloading a directory
+      #     tm = TransferManager.new
+      #     tm.download_directory('/local/path', bucket: 'my-bucket')
+      #     # => {completed_downloads: 7, failed_downloads: 0, errors: 0}
+      #
+      # @param [String] destination
+      #  The location directory path to download objects to. Created if it doesn't exist.
+      #
+      # @param [String] bucket
+      #   The name of the bucket to download from.
+      #
+      # @param [Hash] options
+      #
+      # @option options [String] :s3_prefix (nil)
+      #   Lists the download to objects whose begin with the specific prefix. The prefix is stripped from
+      #   object key when downloading.
+      #   For example, with prefix '`photos/2024/`', an object '`photos/2024/vacation/beach.jpg`'
+      #   is downloaded to '`<destination>/vacation/beach.jpg`'.
+      #
+      # @option options [Proc] :ignore_failure (false)
+      #   How to handle individual file download failures:
+      #   * `false` (default) - Cancel all ongoing requests, terminate the ongoing downloads and raise an exception
+      #   * `true` - Continue downloading remaining objects, report failures in result.
+      #
+      # @option options [Proc] :filter_callback (nil)
+      #   A Proc to filter which objects to download. Called with an object key.
+      #   Return `true` to download the object, `false` to skip it.
+      #
+      # @option options [Proc] :request_callback (nil)
+      #   A Proc to modify download parameters for each object. Called with download parameters hash.
+      #   Must return the modified parameters.
+      #
+      # @option options [Proc] :progress_callback (nil)
+      #   A Proc that will be called as objects are downloaded.
+      #   It will be invoked with `transferred_bytes` and `transferred_files`.
+      #
+      # @raise [DirectoryDownloadError] Raised when:
+      #   * Download fails with `ignore_failure: false` (default)
+      #   * Path traversal detected in object key
+      #
+      # @return [Hash] Returns a hash with download statistics:
+      #   * `:completed_downloads` - Number of objects successfully downloaded
+      #   * `:failed_downloads` - Number of objects that failed to download
+      #   * `:errors` - Array of errors for failed downloads
+      def download_directory(destination, bucket:, **options)
+        executor = @executor || DefaultExecutor.new
+        downloader = DirectoryDownloader.new(client: @client, executor: executor)
+        result = downloader.download(destination, bucket: bucket, **options)
+        executor.shutdown unless @executor
+        result
+      end
 
       # Downloads a file in S3 to a path on disk.
       #

@@ -39,7 +39,7 @@ module Aws
         build_result(uploads, errors)
       ensure
         @abort_requested = false
-        @queue_executor.shutdown
+        @queue_executor&.shutdown
       end
 
       private
