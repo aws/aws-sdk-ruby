@@ -91,7 +91,6 @@ module Aws
         rescue StandardError => e
           errors << e
           request_abort
-          @queue_executor&.kill
         end
         upload_attempts.times { completion_queue.pop }
         [upload_attempts, errors]
