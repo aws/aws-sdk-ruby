@@ -192,14 +192,12 @@ module Aws
           stream_objects(continuation_token: resp.next_continuation_token) if resp.next_continuation_token
         end
 
-        def validate_path(full_path, key)
-          expanded = File.expand_path(full_path)
-          expanded_dest = File.expand_path(@destination_dir) + File::SEPARATOR
-          return if expanded.start_with?(expanded_dest)
+        def validate_path(key)
+          segments = key.split('/')
+          return unless segments.any? { |s| s == '..' || s == '.' }
 
-          DirectoryDownloadError.new("Path traversal detected for key: #{key}")
+          DirectoryDownloadError.new("Invalid key '#{key}': contains '.' or '..' path segments")
         end
-
 
         # @api private
         class DownloadEntry
