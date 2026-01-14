@@ -104,7 +104,6 @@ module Aws
         request_abort unless opts[:ignore_failure]
       end
 
-
       # @api private
       class FileProducer
         include Enumerable
@@ -147,7 +146,7 @@ module Aws
             yield file
           end
         ensure
-          producer_thread.value
+          producer_thread.join
           raise err if err
         end
 
