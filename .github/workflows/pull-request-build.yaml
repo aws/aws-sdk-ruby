@@ -4,7 +4,6 @@ on:
     types: [ submitted ]
     branches: [ version-3 ]
   workflow_dispatch:
-    branches: [ ** ]
 
 concurrency:
   group: start-pull-request-build-${{ github.ref }}
