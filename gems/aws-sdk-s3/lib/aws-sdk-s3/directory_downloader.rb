@@ -192,7 +192,7 @@ module Aws
           segments = path.split('/')
           return unless segments.any? { |s| %w[. ..].include?(s) }
 
-          DirectoryDownloadError.new("Invalid key '#{key}': contains '.' or '..' path segments")
+          DirectoryDownloadError.new("invalid key '#{key}': contains '.' or '..' path segments")
         end
 
         # @api private

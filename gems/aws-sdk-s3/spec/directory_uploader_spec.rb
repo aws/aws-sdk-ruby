@@ -1,9 +1,6 @@
 # frozen_string_literal: true
 
-require_relative 'spec_helper'
 require_relative 'transfer_manger_spec_helper'
-require 'tempfile'
-require 'tmpdir'
 
 module Aws
   module S3
@@ -114,7 +111,7 @@ module Aws
           end
 
           it 'continues uploading after failure when true' do
-            client.stub_responses(:put_object, ->(context) {
+            client.stub_responses(:put_object, lambda { |context|
               %w[small.txt medium.log].include?(context.params[:key]) ? 'AccessDenied' : {}
             })
 
@@ -129,7 +126,7 @@ module Aws
           it 'excludes files' do
             uploaded_keys = []
             allow(client).to receive(:put_object) { |p| uploaded_keys << p[:key] }
-            filter_callback = lambda { |_p, name| !name.end_with?('.bin') }
+            filter_callback = ->(_path, file) { !file.end_with?('.bin') }
             result = uploader.upload(temp_dir, 'test-bucket', filter_callback: filter_callback)
 
             expect(uploaded_keys).not_to include('huge.bin')
@@ -141,7 +138,7 @@ module Aws
           it 'modifies upload parameters' do
             uploaded_params = []
             allow(client).to receive(:put_object) { |p| uploaded_params << p }
-            request_callback = lambda do |_p, params|
+            request_callback = lambda do |_path, params|
               params[:storage_class] = 'GLACIER'
               params
             end

@@ -1,5 +1,10 @@
 # frozen_string_literal: true
 
+require_relative 'spec_helper'
+require 'tempfile'
+require 'tmpdir'
+require 'socket'
+
 # Spec helper for transfer manager-related tests
 module TransferManagerSpecHelper
   class << self

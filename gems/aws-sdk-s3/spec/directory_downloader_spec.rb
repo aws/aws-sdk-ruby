@@ -1,9 +1,6 @@
 # frozen_string_literal: true
 
-require_relative 'spec_helper'
 require_relative 'transfer_manger_spec_helper'
-require 'tempfile'
-require 'tmpdir'
 
 module Aws
   module S3
@@ -63,15 +60,29 @@ module Aws
           end.to raise_error(ArgumentError, /invalid destination/)
         end
 
+        it 'raises when object key contains path traversal sequences' do
+          client.stub_responses(
+            :list_objects_v2,
+            { contents: [{ key: 'foo/../bar.txt', size: 100 }], is_truncated: false }
+          )
+
+          expect do
+            downloader.download(temp_dir, bucket: 'bucket')
+          end.to raise_error(DirectoryDownloadError, /invalid key/)
+        end
+
         context 's3 prefix' do
           it 'removes prefixes to all keys when set' do
-            client.stub_responses(:list_objects_v2, {
-              contents: [
-                { key: 'prefix/file1.txt', size: 100 },
-                { key: 'prefix/subdir/file2.txt', size: 100 }
-              ],
-              is_truncated: false
-            })
+            client.stub_responses(
+              :list_objects_v2,
+              {
+                contents: [
+                  { key: 'prefix/file1.txt', size: 100 },
+                  { key: 'prefix/subdir/file2.txt', size: 100 }
+                ],
+                is_truncated: false
+              }
+            )
             result = downloader.download(temp_dir, bucket: 'test-bucket', s3_prefix: 'prefix')
 
             expect(result[:completed_downloads]).to eq(2)
@@ -90,7 +101,7 @@ module Aws
           end
 
           it 'continues downloading after failure when true' do
-            client.stub_responses(:get_object, ->(context) {
+            client.stub_responses(:get_object, lambda { |context|
               if context.params[:key] == 'file2.json'
                 'AccessDenied'
               else
@@ -116,16 +127,23 @@ module Aws
 
         context 'request callbacks' do
           it 'modifies download parameters' do
-            client.stub_responses(:list_objects_v2, {
-              contents: [{ key: 'file.txt', size: 100 }],
-              is_truncated: false
-            })
-            client.stub_responses(:get_object, ->(context) {
-              received_params = context.params
-              expect(received_params[:version_id]).to eq('v1')
-              { body: 'content' }
-            })
-            callback = ->(_key, params) {
+            client.stub_responses(
+              :list_objects_v2,
+              {
+                contents: [{ key: 'file.txt', size: 100 }],
+                is_truncated: false
+              }
+            )
+
+            client.stub_responses(
+              :get_object,
+              lambda { |context|
+                received_params = context.params
+                expect(received_params[:version_id]).to eq('v1')
+                { body: 'content' }
+              }
+            )
+            callback = lambda { |_key, params|
               params[:version_id] = 'v1'
               params
             }
@@ -135,13 +153,16 @@ module Aws
 
         context 'progress callbacks' do
           it 'reports progress' do
-            client.stub_responses(:list_objects_v2, {
-              contents: [
-                { key: 'file1.txt', size: 100 },
-                { key: 'file2.txt', size: 200 }
-              ],
-              is_truncated: false
-            })
+            client.stub_responses(
+              :list_objects_v2,
+              {
+                contents: [
+                  { key: 'file1.txt', size: 100 },
+                  { key: 'file2.txt', size: 200 }
+                ],
+                is_truncated: false
+              }
+            )
             client.stub_responses(:get_object, { body: 'x' * 100 })
             progress_calls = []
             callback = ->(bytes, _files) { progress_calls << bytes }
