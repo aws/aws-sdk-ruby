@@ -7,7 +7,9 @@ module Aws
     #
     # * upload a file with multipart upload
     # * upload a stream with multipart upload
-    # * download a S3 object with multipart download
+    # * upload all files in a directory to an S3 bucket recursively or non-recursively
+    # * download an S3 object with multipart download
+    # * download all objects in an S3 bucket with same prefix to a local directory
     # * track transfer progress by using progress listener
     #
     # ## Executor Management
@@ -71,13 +73,44 @@ module Aws
 
       # Downloads objects in a S3 bucket to a local directory.
       #
-      # @example Downloading a directory
+      # The downloaded directory structure will match the provided S3 virtual bucket. For example,
+      # assume that you have the following keys in your bucket:
+      #
+      # * sample.jpg
+      # * photos/2022/January/sample.jpg
+      # * photos/2022/February/sample1.jpg
+      # * photos/2022/February/sample2.jpg
+      # * photos/2022/February/sample3.jpg
+      #
+      # Given a request to download bucket to a destination with path of `/test`, the downloaded
+      # directory would look like this:
+      #
+      # ```
+      # |- test
+      #   |- sample.jpg
+      #   |- photos
+      #      |- 2022
+      #          |- January
+      #             |- sample.jpg
+      #          |- February
+      #             |- sample1.jpg
+      #             |- sample2.jpg
+      #             |- sample3.jpg
+      # ```
+      #
+      # Directory markers (zero-byte objects ending with `/`) are skipped during download.
+      # Existing files with same name as downloaded objects will be overwritten.
+      #
+      # Object keys containing path traversal sequences (`..` or `.`) will raise an error.
+      #
+      # @example Downloading buckets to a local directory
       #     tm = TransferManager.new
       #     tm.download_directory('/local/path', bucket: 'my-bucket')
       #     # => {completed_downloads: 7, failed_downloads: 0, errors: 0}
       #
       # @param [String] destination
       #  The location directory path to download objects to. Created if it doesn't exist.
+      #  If files with the same names already exist in the destination, they will be overwritten.
       #
       # @param [String] bucket
       #   The name of the bucket to download from.
@@ -85,10 +118,10 @@ module Aws
       # @param [Hash] options
       #
       # @option options [String] :s3_prefix (nil)
-      #   Lists the download to objects whose begin with the specific prefix. The prefix is stripped from
+      #   Limit the download to objects that begin with the specific prefix. The prefix is stripped from
       #   object key when downloading.
-      #   For example, with prefix '`photos/2024/`', an object '`photos/2024/vacation/beach.jpg`'
-      #   is downloaded to '`<destination>/vacation/beach.jpg`'.
+      #   For example, with prefix `photos/2024/`, an object `photos/2024/vacation/beach.jpg`
+      #   is downloaded to `<destination>/vacation/beach.jpg`.
       #
       # @option options [Boolean] :ignore_failure (false)
       #   How to handle individual file download failures:
@@ -96,22 +129,21 @@ module Aws
       #   * `true` - Continue downloading remaining objects, report failures in result.
       #
       # @option options [Proc] :filter_callback (nil)
-      #   A Proc to filter which objects to download. Called with an object key.
+      #   A Proc to filter which objects to download. Called with `(key)` for each object.
       #   Return `true` to download the object, `false` to skip it.
       #
       # @option options [Proc] :request_callback (nil)
-      #   A Proc to modify download parameters for each object. Called with download parameters hash.
+      #   A Proc to modify download parameters for each object. Called with `(key, params)`.
       #   Must return the modified parameters.
       #
       # @option options [Proc] :progress_callback (nil)
       #   A Proc that will be called as objects are downloaded.
       #   It will be invoked with `transferred_bytes` and `transferred_files`.
       #
-      # @raise [DirectoryDownloadError] Raised when:
-      #   * Download fails with `ignore_failure: false` (default)
-      #   * Path traversal detected in object key
+      # @raise [DirectoryDownloadError] Raised when download fails with `ignore_failure: false` (default)
       #
       # @return [Hash] Returns a hash with download statistics:
+      #
       #   * `:completed_downloads` - Number of objects successfully downloaded
       #   * `:failed_downloads` - Number of objects that failed to download
       #   * `:errors` - Array of errors for failed downloads (only present when failures occur)
@@ -206,7 +238,42 @@ module Aws
         true
       end
 
-      # Uploads a directory from disk to S3.
+      # Uploads all files under the given directory to the provided S3 bucket.
+      # The key name transformation depends on the optional prefix.
+      #
+      # By default, all subdirectories will be uploaded non-recursively and symbolic links are not
+      # followed automatically. Assume you have a local directory `/test` with the following structure:
+      #
+      # ```
+      # |- test
+      #   |- sample.jpg
+      #   |- photos
+      #      |- 2022
+      #          |- January
+      #             |- sample.jpg
+      #          |- February
+      #             |- sample1.jpg
+      #             |- sample2.jpg
+      #             |- sample3.jpg
+      # ```
+      #
+      # Give a request to upload directory `/test` to an S3 bucket on default setting, the target bucket will have the
+      # following S3 objects:
+      #
+      # * sample.jpg
+      #
+      # If `:recursive` set to `true`, the target bucket will have the following S3 buckets:
+      #
+      # * sample.jpg
+      # * photos/2022/January/sample.jpg
+      # * photos/2022/February/sample1.jpg
+      # * photos/2022/February/sample2.jpg
+      # * photos/2022/February/sample3.jpg
+      #
+      # Only regular files are uploaded; special files (sockets, pipes, devices) are skipped.
+      # Symlink cycles are detected and skipped when following symlinks.
+      # Empty directories are not represented in S3. Existing S3 objects with the same key are
+      # overwritten.
       #
       # @example Uploading a directory
       #     tm = TransferManager.new
@@ -233,25 +300,29 @@ module Aws
       #
       # @option options [Boolean] :recursive (false)
       #   Whether to upload directories recursively:
+      #
       #   * `false` (default) - only files in the top-level directory are uploaded, subdirectories are ignored.
       #   * `true` - all files and subdirectories are uploaded recursively.
       #
       # @option options [Boolean] :follow_symlinks (false)
       #   Whether to follow symbolic links when traversing the file tree:
+      #
       #   * `false` (default) - symbolic links are ignored and not uploaded.
-      #   * `true` - symbolic links are followed and their target files/directories are uploaded.
+      #   * `true` - symbolic links are followed and their target files/directories are uploaded. Symlink cycles
+      #     are detected and skipped.
       #
       # @option options [Boolean] :ignore_failure (false)
       #   How to handle individual file upload failures:
+      #
       #   * `false` (default) - Cancel all ongoing requests, terminate the directory upload, and raise an exception
       #   * `true` - Ignore the failure and continue the transfer for other files
       #
       # @option options [Proc] :filter_callback (nil)
-      #   A Proc to filter which files to upload. Called for each discovered file with the file path.
+      #   A Proc to filter which files to upload. Called with `(file_path, file_name)` for each file.
       #   Return `true` to upload the file, `false` to skip it.
       #
       # @option options [Proc] :request_callback (nil)
-      #   A Proc to modify upload parameters for each file. Called with upload parameters hash.
+      #   A Proc to modify upload parameters for each file. Called with `(file_path, params)`.
       #   Must return the modified parameters.
       #
       # @option options [Proc] :progress_callback (nil)
@@ -263,11 +334,13 @@ module Aws
       #   reducing the number of network writes, but use more memory. Custom values must be at least 16KB.
       #   Only Ruby MRI is supported.
       #
-      # @raise [DirectoryUploadError] Raised when the upload fails
+      # @raise [DirectoryUploadError] Raised when:
+      #
       #   * Upload failure with `ignore_failure: false` (default)
       #   * Directory traversal failure (permission denied, broken symlink, etc.)
       #
       # @return [Hash] Returns a hash with upload statistics:
+      #
       #   * `:completed_uploads` - Number of files successfully uploaded
       #   * `:failed_uploads` - Number of files that failed to upload
       #   * `:errors` - Array of error objects for failed uploads (only present when failures occur)
