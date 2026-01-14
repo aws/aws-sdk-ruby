@@ -46,7 +46,10 @@ jobs:
         id: pr
         if: github.event_name == 'workflow_dispatch'
         run: |
+          echo "Looking for PR with head branch: ${{ github.ref_name }}"
+          gh pr list --repo "${{ github.repository }}" --head "${{ github.ref_name }}" --json number,headRefName
           PR_NUMBER=$(gh pr list --repo "${{ github.repository }}" --head "${{ github.ref_name }}" --json number --jq '.[0].number // ""')
+          echo "Found PR number: $PR_NUMBER"
           echo "number=$PR_NUMBER" >> $GITHUB_OUTPUT
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
