@@ -89,7 +89,7 @@ module Aws
             end
           end
         rescue StandardError => e
-          errors << e
+          @mutex.synchronize { errors << e }
           request_abort
         end
         upload_attempts.times { completion_queue.pop }
@@ -100,10 +100,8 @@ module Aws
         uploader.upload(entry.path, entry.params)
         progress&.call(File.size(entry.path))
       rescue StandardError => e
-        errors << e
-        unless opts[:ignore_failure]
-          request_abort
-        end
+        @mutex.synchronize { errors << e }
+        request_abort unless opts[:ignore_failure]
       end
 
 
