@@ -4,6 +4,7 @@ on:
     types: [ submitted ]
     branches: [ version-3 ]
   workflow_dispatch:
+    branches: [ ** ]
 
 concurrency:
   group: start-pull-request-build-${{ github.ref }}
@@ -43,7 +44,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           REPO: ${{ github.repository }}
-          HEAD_REF: ${{ github.event.pull_request.head.ref }}
+          HEAD_REF: ${{ github.event.pull_request.head.ref || github.ref_name }}
           PR_NUMBER: ${{ github.event.pull_request.number }}
           RUN_ID: ${{ github.run_id }}
         run: |
