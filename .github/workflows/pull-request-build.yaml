@@ -20,7 +20,7 @@ env:
 
 jobs:
   aws-sdk-pr-build:
-    if: github.event.review.state == 'approved'
+    if: ${{ github.event_name == 'workflow_dispatch' || github.event.review.state == 'approved' }}
     runs-on: ubuntu-latest
     permissions:
       id-token: write
