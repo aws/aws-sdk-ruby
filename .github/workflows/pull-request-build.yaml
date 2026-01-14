@@ -47,7 +47,9 @@ jobs:
         if: github.event_name == 'workflow_dispatch'
         run: |
           echo "Looking for PR with head branch: ${{ github.ref_name }}"
-          gh pr list --repo "${{ github.repository }}" --state all --json number,headRefName --jq '.[] | select(.headRefName=="${{ github.ref_name }}")'
+          echo "All PRs:"
+          gh pr list --repo "${{ github.repository }}" --state all --limit 20 --json number,headRefName,baseRefName
+          echo "Searching for match..."
           PR_NUMBER=$(gh pr list --repo "${{ github.repository }}" --state all --json number,headRefName --jq '.[] | select(.headRefName=="${{ github.ref_name }}") | .number' | head -1)
           echo "Found PR number: $PR_NUMBER"
           echo "number=${PR_NUMBER:-}" >> $GITHUB_OUTPUT
