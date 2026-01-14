@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.16.0 (2026-01-12)
+------------------
+
+* Feature - This release introduces WiFi Simple Setup (WSS) enabling device provisioning via barcode scanning with automated network discovery, authentication, and credential provisioning. Additionally, it introduces 2P Device Capability Rediscovery for updating hub-managed device capabilities post-onboarding.
+
 1.15.0 (2026-01-08)
 ------------------
 

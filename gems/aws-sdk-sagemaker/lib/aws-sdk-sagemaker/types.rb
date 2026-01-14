@@ -3963,8 +3963,8 @@ module Aws::SageMaker
     # The metadata of the Amazon Bedrock custom model deployment.
     #
     # @!attribute [rw] arn
-    #   The Amazon Resource Name (ARN) of the metadata for the Amazon
-    #   Bedrock custom model deployment.
+    #   The Amazon Resource Name (ARN) for the Amazon Bedrock custom model
+    #   deployment.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/BedrockCustomModelDeploymentMetadata AWS API Documentation
@@ -3978,8 +3978,7 @@ module Aws::SageMaker
     # The metadata of the Amazon Bedrock custom model.
     #
     # @!attribute [rw] arn
-    #   The Amazon Resource Name (ARN) of the Amazon Bedrock custom model
-    #   metadata.
+    #   The Amazon Resource Name (ARN) of the Amazon Bedrock custom model.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/BedrockCustomModelMetadata AWS API Documentation
@@ -3993,8 +3992,7 @@ module Aws::SageMaker
     # The metadata of the Amazon Bedrock model import.
     #
     # @!attribute [rw] arn
-    #   The Amazon Resource Name (ARN) of the Amazon Bedrock model import
-    #   metadata.
+    #   The Amazon Resource Name (ARN) of the Amazon Bedrock model import.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/BedrockModelImportMetadata AWS API Documentation
@@ -4009,7 +4007,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) of the Amazon Bedrock provisioned
-    #   model throughput metadata.
+    #   model throughput.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/BedrockProvisionedModelThroughputMetadata AWS API Documentation
@@ -28763,7 +28761,7 @@ module Aws::SageMaker
     # The metadata of the inference component.
     #
     # @!attribute [rw] arn
-    #   The Amazon Resource Name (ARN) of the inference component metadata.
+    #   The Amazon Resource Name (ARN) of the inference component.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/InferenceComponentMetadata AWS API Documentation
@@ -30720,19 +30718,19 @@ module Aws::SageMaker
     # and contexts.
     #
     # @!attribute [rw] action_arns
-    #   The Amazon Resource Name (ARN) of the lineage metadata action.
+    #   The Amazon Resource Name (ARN) of the lineage action.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] artifact_arns
-    #   The Amazon Resource Name (ARN) of the lineage metadata artifact.
+    #   The Amazon Resource Name (ARN) of the lineage artifact.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] context_arns
-    #   The Amazon Resource Name (ARN) of the lineage metadata context.
+    #   The Amazon Resource Name (ARN) of the lineage context.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] associations
-    #   The lineage metadata associations.
+    #   The lineage associations.
     #   @return [Array<Types::AssociationInfo>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/LineageMetadata AWS API Documentation
@@ -38839,11 +38837,12 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] is_checkpoint
-    #   The checkpoint of the model package.
+    #   Specifies whether the model data is a training checkpoint.
     #   @return [Boolean]
     #
     # @!attribute [rw] base_model
-    #   The base model of the package.
+    #   Identifies the foundation model that was used as the starting point
+    #   for model customization.
     #   @return [Types::BaseModel]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ModelPackageContainerDefinition AWS API Documentation
@@ -48270,7 +48269,7 @@ module Aws::SageMaker
     #   @return [Integer]
     #
     # @!attribute [rw] mlflow_experiment_name
-    #   The MLflow experiment name of the start execution.
+    #   The MLflow experiment name of the pipeline execution.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/StartPipelineExecutionRequest AWS API Documentation
@@ -52267,10 +52266,15 @@ module Aws::SageMaker
     #   The unique identifier of the UltraServer.
     #   @return [String]
     #
+    # @!attribute [rw] type
+    #   The type of the UltraServer.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UltraServerInfo AWS API Documentation
     #
     class UltraServerInfo < Struct.new(
-      :id)
+      :id,
+      :type)
       SENSITIVE = []
       include Aws::Structure
     end

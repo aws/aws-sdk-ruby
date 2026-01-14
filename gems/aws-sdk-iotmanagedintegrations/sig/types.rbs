@@ -228,6 +228,7 @@ module Aws::IoTManagedIntegrations
       attr_accessor credential_locker_id: ::String
       attr_accessor authentication_material: ::String
       attr_accessor authentication_material_type: ("CUSTOM_PROTOCOL_QR_BAR_CODE" | "WIFI_SETUP_QR_BAR_CODE" | "ZWAVE_QR_BAR_CODE" | "ZIGBEE_QR_BAR_CODE" | "DISCOVERED_DEVICE")
+      attr_accessor wi_fi_simple_setup_configuration: Types::WiFiSimpleSetupConfiguration
       attr_accessor serial_number: ::String
       attr_accessor brand: ::String
       attr_accessor model: ::String
@@ -250,7 +251,7 @@ module Aws::IoTManagedIntegrations
     end
 
     class CreateNotificationConfigurationRequest
-      attr_accessor event_type: ("DEVICE_COMMAND" | "DEVICE_COMMAND_REQUEST" | "DEVICE_DISCOVERY_STATUS" | "DEVICE_EVENT" | "DEVICE_LIFE_CYCLE" | "DEVICE_STATE" | "DEVICE_OTA" | "CONNECTOR_ASSOCIATION" | "ACCOUNT_ASSOCIATION" | "CONNECTOR_ERROR_REPORT")
+      attr_accessor event_type: ("DEVICE_COMMAND" | "DEVICE_COMMAND_REQUEST" | "DEVICE_DISCOVERY_STATUS" | "DEVICE_EVENT" | "DEVICE_LIFE_CYCLE" | "DEVICE_STATE" | "DEVICE_OTA" | "DEVICE_WSS" | "CONNECTOR_ASSOCIATION" | "ACCOUNT_ASSOCIATION" | "CONNECTOR_ERROR_REPORT")
       attr_accessor destination_name: ::String
       attr_accessor client_token: ::String
       attr_accessor tags: ::Hash[::String, ::String]
@@ -258,7 +259,7 @@ module Aws::IoTManagedIntegrations
     end
 
     class CreateNotificationConfigurationResponse
-      attr_accessor event_type: ("DEVICE_COMMAND" | "DEVICE_COMMAND_REQUEST" | "DEVICE_DISCOVERY_STATUS" | "DEVICE_EVENT" | "DEVICE_LIFE_CYCLE" | "DEVICE_STATE" | "DEVICE_OTA" | "CONNECTOR_ASSOCIATION" | "ACCOUNT_ASSOCIATION" | "CONNECTOR_ERROR_REPORT")
+      attr_accessor event_type: ("DEVICE_COMMAND" | "DEVICE_COMMAND_REQUEST" | "DEVICE_DISCOVERY_STATUS" | "DEVICE_EVENT" | "DEVICE_LIFE_CYCLE" | "DEVICE_STATE" | "DEVICE_OTA" | "DEVICE_WSS" | "CONNECTOR_ASSOCIATION" | "ACCOUNT_ASSOCIATION" | "CONNECTOR_ERROR_REPORT")
       SENSITIVE: []
     end
 
@@ -362,7 +363,7 @@ module Aws::IoTManagedIntegrations
     end
 
     class DeleteNotificationConfigurationRequest
-      attr_accessor event_type: ("DEVICE_COMMAND" | "DEVICE_COMMAND_REQUEST" | "DEVICE_DISCOVERY_STATUS" | "DEVICE_EVENT" | "DEVICE_LIFE_CYCLE" | "DEVICE_STATE" | "DEVICE_OTA" | "CONNECTOR_ASSOCIATION" | "ACCOUNT_ASSOCIATION" | "CONNECTOR_ERROR_REPORT")
+      attr_accessor event_type: ("DEVICE_COMMAND" | "DEVICE_COMMAND_REQUEST" | "DEVICE_DISCOVERY_STATUS" | "DEVICE_EVENT" | "DEVICE_LIFE_CYCLE" | "DEVICE_STATE" | "DEVICE_OTA" | "DEVICE_WSS" | "CONNECTOR_ASSOCIATION" | "ACCOUNT_ASSOCIATION" | "CONNECTOR_ERROR_REPORT")
       SENSITIVE: []
     end
 
@@ -407,7 +408,7 @@ module Aws::IoTManagedIntegrations
 
     class DeviceDiscoverySummary
       attr_accessor id: ::String
-      attr_accessor discovery_type: ("ZWAVE" | "ZIGBEE" | "CLOUD" | "CUSTOM")
+      attr_accessor discovery_type: ("ZWAVE" | "ZIGBEE" | "CLOUD" | "CUSTOM" | "CONTROLLER_CAPABILITY_REDISCOVERY")
       attr_accessor status: ("RUNNING" | "SUCCEEDED" | "FAILED" | "TIMED_OUT")
       SENSITIVE: []
     end
@@ -552,7 +553,7 @@ module Aws::IoTManagedIntegrations
     class GetDeviceDiscoveryResponse
       attr_accessor id: ::String
       attr_accessor arn: ::String
-      attr_accessor discovery_type: ("ZWAVE" | "ZIGBEE" | "CLOUD" | "CUSTOM")
+      attr_accessor discovery_type: ("ZWAVE" | "ZIGBEE" | "CLOUD" | "CUSTOM" | "CONTROLLER_CAPABILITY_REDISCOVERY")
       attr_accessor status: ("RUNNING" | "SUCCEEDED" | "FAILED" | "TIMED_OUT")
       attr_accessor started_at: ::Time
       attr_accessor controller_id: ::String
@@ -664,6 +665,7 @@ module Aws::IoTManagedIntegrations
       attr_accessor hub_network_mode: ("STANDARD" | "NETWORK_WIDE_EXCLUSION")
       attr_accessor meta_data: ::Hash[::String, ::String]
       attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor wi_fi_simple_setup_configuration: Types::WiFiSimpleSetupConfiguration
       SENSITIVE: [:owner, :model, :brand, :serial_number, :universal_product_code, :international_article_number, :connector_device_id, :device_specific_key, :mac_address, :classification, :tags]
     end
 
@@ -678,12 +680,12 @@ module Aws::IoTManagedIntegrations
     end
 
     class GetNotificationConfigurationRequest
-      attr_accessor event_type: ("DEVICE_COMMAND" | "DEVICE_COMMAND_REQUEST" | "DEVICE_DISCOVERY_STATUS" | "DEVICE_EVENT" | "DEVICE_LIFE_CYCLE" | "DEVICE_STATE" | "DEVICE_OTA" | "CONNECTOR_ASSOCIATION" | "ACCOUNT_ASSOCIATION" | "CONNECTOR_ERROR_REPORT")
+      attr_accessor event_type: ("DEVICE_COMMAND" | "DEVICE_COMMAND_REQUEST" | "DEVICE_DISCOVERY_STATUS" | "DEVICE_EVENT" | "DEVICE_LIFE_CYCLE" | "DEVICE_STATE" | "DEVICE_OTA" | "DEVICE_WSS" | "CONNECTOR_ASSOCIATION" | "ACCOUNT_ASSOCIATION" | "CONNECTOR_ERROR_REPORT")
       SENSITIVE: []
     end
 
     class GetNotificationConfigurationResponse
-      attr_accessor event_type: ("DEVICE_COMMAND" | "DEVICE_COMMAND_REQUEST" | "DEVICE_DISCOVERY_STATUS" | "DEVICE_EVENT" | "DEVICE_LIFE_CYCLE" | "DEVICE_STATE" | "DEVICE_OTA" | "CONNECTOR_ASSOCIATION" | "ACCOUNT_ASSOCIATION" | "CONNECTOR_ERROR_REPORT")
+      attr_accessor event_type: ("DEVICE_COMMAND" | "DEVICE_COMMAND_REQUEST" | "DEVICE_DISCOVERY_STATUS" | "DEVICE_EVENT" | "DEVICE_LIFE_CYCLE" | "DEVICE_STATE" | "DEVICE_OTA" | "DEVICE_WSS" | "CONNECTOR_ASSOCIATION" | "ACCOUNT_ASSOCIATION" | "CONNECTOR_ERROR_REPORT")
       attr_accessor destination_name: ::String
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
@@ -867,7 +869,7 @@ module Aws::IoTManagedIntegrations
     class ListDeviceDiscoveriesRequest
       attr_accessor next_token: ::String
       attr_accessor max_results: ::Integer
-      attr_accessor type_filter: ("ZWAVE" | "ZIGBEE" | "CLOUD" | "CUSTOM")
+      attr_accessor type_filter: ("ZWAVE" | "ZIGBEE" | "CLOUD" | "CUSTOM" | "CONTROLLER_CAPABILITY_REDISCOVERY")
       attr_accessor status_filter: ("RUNNING" | "SUCCEEDED" | "FAILED" | "TIMED_OUT")
       SENSITIVE: []
     end
@@ -1131,7 +1133,7 @@ module Aws::IoTManagedIntegrations
     end
 
     class NotificationConfigurationSummary
-      attr_accessor event_type: ("DEVICE_COMMAND" | "DEVICE_COMMAND_REQUEST" | "DEVICE_DISCOVERY_STATUS" | "DEVICE_EVENT" | "DEVICE_LIFE_CYCLE" | "DEVICE_STATE" | "DEVICE_OTA" | "CONNECTOR_ASSOCIATION" | "ACCOUNT_ASSOCIATION" | "CONNECTOR_ERROR_REPORT")
+      attr_accessor event_type: ("DEVICE_COMMAND" | "DEVICE_COMMAND_REQUEST" | "DEVICE_DISCOVERY_STATUS" | "DEVICE_EVENT" | "DEVICE_LIFE_CYCLE" | "DEVICE_STATE" | "DEVICE_OTA" | "DEVICE_WSS" | "CONNECTOR_ASSOCIATION" | "ACCOUNT_ASSOCIATION" | "CONNECTOR_ERROR_REPORT")
       attr_accessor destination_name: ::String
       SENSITIVE: []
     end
@@ -1398,7 +1400,7 @@ module Aws::IoTManagedIntegrations
     end
 
     class StartDeviceDiscoveryRequest
-      attr_accessor discovery_type: ("ZWAVE" | "ZIGBEE" | "CLOUD" | "CUSTOM")
+      attr_accessor discovery_type: ("ZWAVE" | "ZIGBEE" | "CLOUD" | "CUSTOM" | "CONTROLLER_CAPABILITY_REDISCOVERY")
       attr_accessor custom_protocol_detail: ::Hash[::String, ::String]
       attr_accessor controller_identifier: ::String
       attr_accessor connector_association_identifier: ::String
@@ -1407,6 +1409,8 @@ module Aws::IoTManagedIntegrations
       attr_accessor authentication_material_type: ("ZWAVE_INSTALL_CODE")
       attr_accessor client_token: ::String
       attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor protocol: ("ZWAVE" | "ZIGBEE" | "CUSTOM")
+      attr_accessor end_device_identifier: ::String
       SENSITIVE: [:authentication_material, :tags]
     end
 
@@ -1515,6 +1519,7 @@ module Aws::IoTManagedIntegrations
       attr_accessor owner: ::String
       attr_accessor credential_locker_id: ::String
       attr_accessor serial_number: ::String
+      attr_accessor wi_fi_simple_setup_configuration: Types::WiFiSimpleSetupConfiguration
       attr_accessor brand: ::String
       attr_accessor model: ::String
       attr_accessor name: ::String
@@ -1528,7 +1533,7 @@ module Aws::IoTManagedIntegrations
     end
 
     class UpdateNotificationConfigurationRequest
-      attr_accessor event_type: ("DEVICE_COMMAND" | "DEVICE_COMMAND_REQUEST" | "DEVICE_DISCOVERY_STATUS" | "DEVICE_EVENT" | "DEVICE_LIFE_CYCLE" | "DEVICE_STATE" | "DEVICE_OTA" | "CONNECTOR_ASSOCIATION" | "ACCOUNT_ASSOCIATION" | "CONNECTOR_ERROR_REPORT")
+      attr_accessor event_type: ("DEVICE_COMMAND" | "DEVICE_COMMAND_REQUEST" | "DEVICE_DISCOVERY_STATUS" | "DEVICE_EVENT" | "DEVICE_LIFE_CYCLE" | "DEVICE_STATE" | "DEVICE_OTA" | "DEVICE_WSS" | "CONNECTOR_ASSOCIATION" | "ACCOUNT_ASSOCIATION" | "CONNECTOR_ERROR_REPORT")
       attr_accessor destination_name: ::String
       SENSITIVE: []
     end
@@ -1542,6 +1547,13 @@ module Aws::IoTManagedIntegrations
 
     class ValidationException
       attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class WiFiSimpleSetupConfiguration
+      attr_accessor enable_as_provisioner: bool
+      attr_accessor enable_as_provisionee: bool
+      attr_accessor timeout_in_minutes: ::Integer
       SENSITIVE: []
     end
   end

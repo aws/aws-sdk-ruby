@@ -8,110 +8,74 @@
 Feature: Smoke tests for IoTManagedIntegrations
 
   @iotmanagedintegrations @smoke
-  Scenario: ListManagedThingAccountAssociationsSuccess
+  Scenario: GetManagedThingCapabilitiesNotFound
     Given I create a 'Aws::IoTManagedIntegrations' client with config:
       """
 {"region":"us-east-1","use_fips_endpoint":false,"use_dualstack_endpoint":false}
       """
-    When I call the operation 'list_managed_thing_account_associations' with params:
-      """
-{"managed_thing_id":"sample-thing-id"}
-      """
-    Then I expect an error was not raised
-
-  @iotmanagedintegrations @smoke
-  Scenario: ListManagedAccountAssociationsWithPagination
-    Given I create a 'Aws::IoTManagedIntegrations' client with config:
-      """
-{"region":"us-east-1","use_fips_endpoint":false,"use_dualstack_endpoint":false}
-      """
-    When I call the operation 'list_managed_thing_account_associations' with params:
-      """
-{"managed_thing_id":"sample-thing-id","max_results":5}
-      """
-    Then I expect an error was not raised
-
-  @iotmanagedintegrations @smoke
-  Scenario: GetDeviceDiscoveryNotFound
-    Given I create a 'Aws::IoTManagedIntegrations' client with config:
-      """
-{"region":"us-east-1","use_fips_endpoint":false,"use_dualstack_endpoint":false}
-      """
-    When I call the operation 'get_device_discovery' with params:
+    When I call the operation 'get_managed_thing_capabilities' with params:
       """
 {"identifier":"nonExistentId"}
       """
     Then I expect a 'Aws::IoTManagedIntegrations::Errors::ResourceNotFoundException' was raised
 
   @iotmanagedintegrations @smoke
-  Scenario: GetManagedThingCertificateNotFound
+  Scenario: GetConnectorDestinationNotFound
     Given I create a 'Aws::IoTManagedIntegrations' client with config:
       """
 {"region":"us-east-1","use_fips_endpoint":false,"use_dualstack_endpoint":false}
       """
-    When I call the operation 'get_managed_thing_certificate' with params:
+    When I call the operation 'get_connector_destination' with params:
       """
-{"identifier":"nonExistentId"}
+{"identifier":"nonExistentDestination"}
       """
     Then I expect a 'Aws::IoTManagedIntegrations::Errors::ResourceNotFoundException' was raised
 
   @iotmanagedintegrations @smoke
-  Scenario: GetManagedThingConnectivityDataNotFound
+  Scenario: ListProvisioningProfilesSuccess
     Given I create a 'Aws::IoTManagedIntegrations' client with config:
       """
 {"region":"us-east-1","use_fips_endpoint":false,"use_dualstack_endpoint":false}
       """
-    When I call the operation 'get_managed_thing_connectivity_data' with params:
-      """
-{"identifier":"nonExistentId"}
-      """
-    Then I expect a 'Aws::IoTManagedIntegrations::Errors::ResourceNotFoundException' was raised
-
-  @iotmanagedintegrations @smoke
-  Scenario: GetRuntimeLogConfigurationNotFound
-    Given I create a 'Aws::IoTManagedIntegrations' client with config:
-      """
-{"region":"us-east-1","use_fips_endpoint":false,"use_dualstack_endpoint":false}
-      """
-    When I call the operation 'get_runtime_log_configuration' with params:
-      """
-{"managed_thing_id":"nonExistentId"}
-      """
-    Then I expect a 'Aws::IoTManagedIntegrations::Errors::ResourceNotFoundException' was raised
-
-  @iotmanagedintegrations @smoke
-  Scenario: ListNotificationConfigurationsSuccess
-    Given I create a 'Aws::IoTManagedIntegrations' client with config:
-      """
-{"region":"us-east-1","use_fips_endpoint":false,"use_dualstack_endpoint":false}
-      """
-    When I call the operation 'list_notification_configurations' with params:
+    When I call the operation 'list_provisioning_profiles' with params:
       """
 {}
       """
     Then I expect an error was not raised
 
   @iotmanagedintegrations @smoke
-  Scenario: ListNotificationConfigurationsWithPagination
+  Scenario: ListProvisioningProfilesWithPagination
     Given I create a 'Aws::IoTManagedIntegrations' client with config:
       """
 {"region":"us-east-1","use_fips_endpoint":false,"use_dualstack_endpoint":false}
       """
-    When I call the operation 'list_notification_configurations' with params:
+    When I call the operation 'list_provisioning_profiles' with params:
       """
 {"max_results":5}
       """
     Then I expect an error was not raised
 
   @iotmanagedintegrations @smoke
-  Scenario: GetCredentialLockerNotFound
+  Scenario: GetDefaultEncryptionConfigurationSuccess
     Given I create a 'Aws::IoTManagedIntegrations' client with config:
       """
 {"region":"us-east-1","use_fips_endpoint":false,"use_dualstack_endpoint":false}
       """
-    When I call the operation 'get_credential_locker' with params:
+    When I call the operation 'get_default_encryption_configuration' with params:
       """
-{"identifier":"nonExistentId"}
+{}
+      """
+    Then I expect an error was not raised
+
+  @iotmanagedintegrations @smoke
+  Scenario: GetDefaultEncryptionConfigurationNotFound
+    Given I create a 'Aws::IoTManagedIntegrations' client with config:
+      """
+{"region":"us-east-1","use_fips_endpoint":false,"use_dualstack_endpoint":false}
+      """
+    When I call the operation 'get_default_encryption_configuration' with params:
+      """
+{}
       """
     Then I expect a 'Aws::IoTManagedIntegrations::Errors::ResourceNotFoundException' was raised
 
@@ -140,98 +104,26 @@ Feature: Smoke tests for IoTManagedIntegrations
     Then I expect an error was not raised
 
   @iotmanagedintegrations @smoke
-  Scenario: GetCustomEndpointSuccess
+  Scenario: GetOtaTaskNotFound
     Given I create a 'Aws::IoTManagedIntegrations' client with config:
       """
 {"region":"us-east-1","use_fips_endpoint":false,"use_dualstack_endpoint":false}
       """
-    When I call the operation 'get_custom_endpoint' with params:
+    When I call the operation 'get_ota_task' with params:
       """
-{}
+{"identifier":"nonExistentTaskId"}
       """
-    Then I expect an error was not raised
+    Then I expect a 'Aws::IoTManagedIntegrations::Errors::ResourceNotFoundException' was raised
 
   @iotmanagedintegrations @smoke
-  Scenario: ListDiscoveredDevicesNotFound
+  Scenario: GetCredentialLockerNotFound
     Given I create a 'Aws::IoTManagedIntegrations' client with config:
       """
 {"region":"us-east-1","use_fips_endpoint":false,"use_dualstack_endpoint":false}
       """
-    When I call the operation 'list_discovered_devices' with params:
+    When I call the operation 'get_credential_locker' with params:
       """
 {"identifier":"nonExistentId"}
-      """
-    Then I expect a 'Aws::IoTManagedIntegrations::Errors::ResourceNotFoundException' was raised
-
-  @iotmanagedintegrations @smoke
-  Scenario: ListDiscoveredDevicesWithPagination
-    Given I create a 'Aws::IoTManagedIntegrations' client with config:
-      """
-{"region":"us-east-1","use_fips_endpoint":false,"use_dualstack_endpoint":false}
-      """
-    When I call the operation 'list_discovered_devices' with params:
-      """
-{"identifier":"testDiscoveryId","max_results":5}
-      """
-    Then I expect a 'Aws::IoTManagedIntegrations::Errors::ResourceNotFoundException' was raised
-
-  @iotmanagedintegrations @smoke
-  Scenario: GetDefaultEncryptionConfigurationSuccess
-    Given I create a 'Aws::IoTManagedIntegrations' client with config:
-      """
-{"region":"us-east-1","use_fips_endpoint":false,"use_dualstack_endpoint":false}
-      """
-    When I call the operation 'get_default_encryption_configuration' with params:
-      """
-{}
-      """
-    Then I expect an error was not raised
-
-  @iotmanagedintegrations @smoke
-  Scenario: GetDefaultEncryptionConfigurationNotFound
-    Given I create a 'Aws::IoTManagedIntegrations' client with config:
-      """
-{"region":"us-east-1","use_fips_endpoint":false,"use_dualstack_endpoint":false}
-      """
-    When I call the operation 'get_default_encryption_configuration' with params:
-      """
-{}
-      """
-    Then I expect a 'Aws::IoTManagedIntegrations::Errors::ResourceNotFoundException' was raised
-
-  @iotmanagedintegrations @smoke
-  Scenario: ListSchemaVersionsSuccess
-    Given I create a 'Aws::IoTManagedIntegrations' client with config:
-      """
-{"region":"us-east-1","use_fips_endpoint":false,"use_dualstack_endpoint":false}
-      """
-    When I call the operation 'list_schema_versions' with params:
-      """
-{"type":"capability"}
-      """
-    Then I expect an error was not raised
-
-  @iotmanagedintegrations @smoke
-  Scenario: ListManagedThingSchemasNotFound
-    Given I create a 'Aws::IoTManagedIntegrations' client with config:
-      """
-{"region":"us-east-1","use_fips_endpoint":false,"use_dualstack_endpoint":false}
-      """
-    When I call the operation 'list_managed_thing_schemas' with params:
-      """
-{"identifier":"nonExistentId"}
-      """
-    Then I expect a 'Aws::IoTManagedIntegrations::Errors::ResourceNotFoundException' was raised
-
-  @iotmanagedintegrations @smoke
-  Scenario: ListManagedThingSchemasWithPagination
-    Given I create a 'Aws::IoTManagedIntegrations' client with config:
-      """
-{"region":"us-east-1","use_fips_endpoint":false,"use_dualstack_endpoint":false}
-      """
-    When I call the operation 'list_managed_thing_schemas' with params:
-      """
-{"identifier":"testId","max_results":5}
       """
     Then I expect a 'Aws::IoTManagedIntegrations::Errors::ResourceNotFoundException' was raised
 
@@ -248,6 +140,54 @@ Feature: Smoke tests for IoTManagedIntegrations
     Then I expect a 'Aws::IoTManagedIntegrations::Errors::ResourceNotFoundException' was raised
 
   @iotmanagedintegrations @smoke
+  Scenario: ListTagsForResourceNotFound
+    Given I create a 'Aws::IoTManagedIntegrations' client with config:
+      """
+{"region":"us-east-1","use_fips_endpoint":false,"use_dualstack_endpoint":false}
+      """
+    When I call the operation 'list_tags_for_resource' with params:
+      """
+{"resource_arn":"arn:aws:iotmanagedintegrations:us-east-1:123456789012:managed-thing/nonexistent"}
+      """
+    Then I expect a 'Aws::IoTManagedIntegrations::Errors::ResourceNotFoundException' was raised
+
+  @iotmanagedintegrations @smoke
+  Scenario: ListTagsForResourceSuccess
+    Given I create a 'Aws::IoTManagedIntegrations' client with config:
+      """
+{"region":"us-east-1","use_fips_endpoint":false,"use_dualstack_endpoint":false}
+      """
+    When I call the operation 'list_tags_for_resource' with params:
+      """
+{"resource_arn":"arn:aws:iotmanagedintegrations:us-east-1:123456789012:managed-thing/test123"}
+      """
+    Then I expect an error was not raised
+
+  @iotmanagedintegrations @smoke
+  Scenario: GetRuntimeLogConfigurationNotFound
+    Given I create a 'Aws::IoTManagedIntegrations' client with config:
+      """
+{"region":"us-east-1","use_fips_endpoint":false,"use_dualstack_endpoint":false}
+      """
+    When I call the operation 'get_runtime_log_configuration' with params:
+      """
+{"managed_thing_id":"nonExistentId"}
+      """
+    Then I expect a 'Aws::IoTManagedIntegrations::Errors::ResourceNotFoundException' was raised
+
+  @iotmanagedintegrations @smoke
+  Scenario: GetManagedThingConnectivityDataNotFound
+    Given I create a 'Aws::IoTManagedIntegrations' client with config:
+      """
+{"region":"us-east-1","use_fips_endpoint":false,"use_dualstack_endpoint":false}
+      """
+    When I call the operation 'get_managed_thing_connectivity_data' with params:
+      """
+{"identifier":"nonExistentId"}
+      """
+    Then I expect a 'Aws::IoTManagedIntegrations::Errors::ResourceNotFoundException' was raised
+
+  @iotmanagedintegrations @smoke
   Scenario: GetNotificationConfigurationNotFound
     Given I create a 'Aws::IoTManagedIntegrations' client with config:
       """
@@ -260,110 +200,26 @@ Feature: Smoke tests for IoTManagedIntegrations
     Then I expect a 'Aws::IoTManagedIntegrations::Errors::ResourceNotFoundException' was raised
 
   @iotmanagedintegrations @smoke
-  Scenario: ListConnectorDestinationsSuccess
+  Scenario: ListManagedThingAccountAssociationsSuccess
     Given I create a 'Aws::IoTManagedIntegrations' client with config:
       """
 {"region":"us-east-1","use_fips_endpoint":false,"use_dualstack_endpoint":false}
       """
-    When I call the operation 'list_connector_destinations' with params:
+    When I call the operation 'list_managed_thing_account_associations' with params:
       """
-{}
+{"managed_thing_id":"sample-thing-id"}
       """
     Then I expect an error was not raised
 
   @iotmanagedintegrations @smoke
-  Scenario: ListConnectorDestinationsWithPagination
+  Scenario: ListManagedAccountAssociationsWithPagination
     Given I create a 'Aws::IoTManagedIntegrations' client with config:
       """
 {"region":"us-east-1","use_fips_endpoint":false,"use_dualstack_endpoint":false}
       """
-    When I call the operation 'list_connector_destinations' with params:
+    When I call the operation 'list_managed_thing_account_associations' with params:
       """
-{"max_results":5}
-      """
-    Then I expect an error was not raised
-
-  @iotmanagedintegrations @smoke
-  Scenario: GetConnectorDestinationNotFound
-    Given I create a 'Aws::IoTManagedIntegrations' client with config:
-      """
-{"region":"us-east-1","use_fips_endpoint":false,"use_dualstack_endpoint":false}
-      """
-    When I call the operation 'get_connector_destination' with params:
-      """
-{"identifier":"nonExistentDestination"}
-      """
-    Then I expect a 'Aws::IoTManagedIntegrations::Errors::ResourceNotFoundException' was raised
-
-  @iotmanagedintegrations @smoke
-  Scenario: GetManagedThingStateNotFound
-    Given I create a 'Aws::IoTManagedIntegrations' client with config:
-      """
-{"region":"us-east-1","use_fips_endpoint":false,"use_dualstack_endpoint":false}
-      """
-    When I call the operation 'get_managed_thing_state' with params:
-      """
-{"managed_thing_id":"nonExistentId"}
-      """
-    Then I expect a 'Aws::IoTManagedIntegrations::Errors::ResourceNotFoundException' was raised
-
-  @iotmanagedintegrations @smoke
-  Scenario: GetManagedThingMetaDataNotFound
-    Given I create a 'Aws::IoTManagedIntegrations' client with config:
-      """
-{"region":"us-east-1","use_fips_endpoint":false,"use_dualstack_endpoint":false}
-      """
-    When I call the operation 'get_managed_thing_meta_data' with params:
-      """
-{"identifier":"nonExistentId"}
-      """
-    Then I expect a 'Aws::IoTManagedIntegrations::Errors::ResourceNotFoundException' was raised
-
-  @iotmanagedintegrations @smoke
-  Scenario: ListCredentialLockersSuccess
-    Given I create a 'Aws::IoTManagedIntegrations' client with config:
-      """
-{"region":"us-east-1","use_fips_endpoint":false,"use_dualstack_endpoint":false}
-      """
-    When I call the operation 'list_credential_lockers' with params:
-      """
-{}
-      """
-    Then I expect an error was not raised
-
-  @iotmanagedintegrations @smoke
-  Scenario: ListCredentialLockersWithPagination
-    Given I create a 'Aws::IoTManagedIntegrations' client with config:
-      """
-{"region":"us-east-1","use_fips_endpoint":false,"use_dualstack_endpoint":false}
-      """
-    When I call the operation 'list_credential_lockers' with params:
-      """
-{"max_results":5}
-      """
-    Then I expect an error was not raised
-
-  @iotmanagedintegrations @smoke
-  Scenario: ListManagedThingsSuccess
-    Given I create a 'Aws::IoTManagedIntegrations' client with config:
-      """
-{"region":"us-east-1","use_fips_endpoint":false,"use_dualstack_endpoint":false}
-      """
-    When I call the operation 'list_managed_things' with params:
-      """
-{}
-      """
-    Then I expect an error was not raised
-
-  @iotmanagedintegrations @smoke
-  Scenario: ListManagedThingsWithPagination
-    Given I create a 'Aws::IoTManagedIntegrations' client with config:
-      """
-{"region":"us-east-1","use_fips_endpoint":false,"use_dualstack_endpoint":false}
-      """
-    When I call the operation 'list_managed_things' with params:
-      """
-{"max_results":5}
+{"managed_thing_id":"sample-thing-id","max_results":5}
       """
     Then I expect an error was not raised
 
@@ -392,60 +248,72 @@ Feature: Smoke tests for IoTManagedIntegrations
     Then I expect a 'Aws::IoTManagedIntegrations::Errors::ResourceNotFoundException' was raised
 
   @iotmanagedintegrations @smoke
-  Scenario: GetEventLogConfigurationNotFound
+  Scenario: ListManagedThingsSuccess
     Given I create a 'Aws::IoTManagedIntegrations' client with config:
       """
 {"region":"us-east-1","use_fips_endpoint":false,"use_dualstack_endpoint":false}
       """
-    When I call the operation 'get_event_log_configuration' with params:
-      """
-{"id":"nonExistentId"}
-      """
-    Then I expect a 'Aws::IoTManagedIntegrations::Errors::ResourceNotFoundException' was raised
-
-  @iotmanagedintegrations @smoke
-  Scenario: ListOtaTasksSuccess
-    Given I create a 'Aws::IoTManagedIntegrations' client with config:
-      """
-{"region":"us-east-1","use_fips_endpoint":false,"use_dualstack_endpoint":false}
-      """
-    When I call the operation 'list_ota_tasks' with params:
+    When I call the operation 'list_managed_things' with params:
       """
 {}
       """
     Then I expect an error was not raised
 
   @iotmanagedintegrations @smoke
-  Scenario: ListOtaTasksWithPagination
+  Scenario: ListManagedThingsWithPagination
     Given I create a 'Aws::IoTManagedIntegrations' client with config:
       """
 {"region":"us-east-1","use_fips_endpoint":false,"use_dualstack_endpoint":false}
       """
-    When I call the operation 'list_ota_tasks' with params:
+    When I call the operation 'list_managed_things' with params:
       """
 {"max_results":5}
       """
     Then I expect an error was not raised
 
   @iotmanagedintegrations @smoke
-  Scenario: ListOtaTaskConfigurationsSuccess
+  Scenario: ListCredentialLockersSuccess
     Given I create a 'Aws::IoTManagedIntegrations' client with config:
       """
 {"region":"us-east-1","use_fips_endpoint":false,"use_dualstack_endpoint":false}
       """
-    When I call the operation 'list_ota_task_configurations' with params:
+    When I call the operation 'list_credential_lockers' with params:
       """
 {}
       """
     Then I expect an error was not raised
 
   @iotmanagedintegrations @smoke
-  Scenario: ListOtaTaskConfigurationsWithPagination
+  Scenario: ListCredentialLockersWithPagination
     Given I create a 'Aws::IoTManagedIntegrations' client with config:
       """
 {"region":"us-east-1","use_fips_endpoint":false,"use_dualstack_endpoint":false}
       """
-    When I call the operation 'list_ota_task_configurations' with params:
+    When I call the operation 'list_credential_lockers' with params:
+      """
+{"max_results":5}
+      """
+    Then I expect an error was not raised
+
+  @iotmanagedintegrations @smoke
+  Scenario: ListDestinationsSuccess
+    Given I create a 'Aws::IoTManagedIntegrations' client with config:
+      """
+{"region":"us-east-1","use_fips_endpoint":false,"use_dualstack_endpoint":false}
+      """
+    When I call the operation 'list_destinations' with params:
+      """
+{}
+      """
+    Then I expect an error was not raised
+
+  @iotmanagedintegrations @smoke
+  Scenario: ListDestinationsWithPagination
+    Given I create a 'Aws::IoTManagedIntegrations' client with config:
+      """
+{"region":"us-east-1","use_fips_endpoint":false,"use_dualstack_endpoint":false}
+      """
+    When I call the operation 'list_destinations' with params:
       """
 {"max_results":5}
       """
@@ -488,6 +356,18 @@ Feature: Smoke tests for IoTManagedIntegrations
     Then I expect a 'Aws::IoTManagedIntegrations::Errors::ResourceNotFoundException' was raised
 
   @iotmanagedintegrations @smoke
+  Scenario: GetDeviceDiscoveryNotFound
+    Given I create a 'Aws::IoTManagedIntegrations' client with config:
+      """
+{"region":"us-east-1","use_fips_endpoint":false,"use_dualstack_endpoint":false}
+      """
+    When I call the operation 'get_device_discovery' with params:
+      """
+{"identifier":"nonExistentId"}
+      """
+    Then I expect a 'Aws::IoTManagedIntegrations::Errors::ResourceNotFoundException' was raised
+
+  @iotmanagedintegrations @smoke
   Scenario: GetManagedThingNotFound
     Given I create a 'Aws::IoTManagedIntegrations' client with config:
       """
@@ -500,38 +380,38 @@ Feature: Smoke tests for IoTManagedIntegrations
     Then I expect a 'Aws::IoTManagedIntegrations::Errors::ResourceNotFoundException' was raised
 
   @iotmanagedintegrations @smoke
-  Scenario: GetSchemaVersionNotFound
+  Scenario: ListOtaTaskConfigurationsSuccess
     Given I create a 'Aws::IoTManagedIntegrations' client with config:
       """
 {"region":"us-east-1","use_fips_endpoint":false,"use_dualstack_endpoint":false}
       """
-    When I call the operation 'get_schema_version' with params:
+    When I call the operation 'list_ota_task_configurations' with params:
       """
-{"type":"capability","schema_versioned_id":"non.existent.schema@1.0"}
+{}
       """
-    Then I expect a 'Aws::IoTManagedIntegrations::Errors::ResourceNotFoundException' was raised
+    Then I expect an error was not raised
 
   @iotmanagedintegrations @smoke
-  Scenario: ListTagsForResourceNotFound
+  Scenario: ListOtaTaskConfigurationsWithPagination
     Given I create a 'Aws::IoTManagedIntegrations' client with config:
       """
 {"region":"us-east-1","use_fips_endpoint":false,"use_dualstack_endpoint":false}
       """
-    When I call the operation 'list_tags_for_resource' with params:
+    When I call the operation 'list_ota_task_configurations' with params:
       """
-{"resource_arn":"arn:aws:iotmanagedintegrations:us-east-1:123456789012:managed-thing/nonexistent"}
+{"max_results":5}
       """
-    Then I expect a 'Aws::IoTManagedIntegrations::Errors::ResourceNotFoundException' was raised
+    Then I expect an error was not raised
 
   @iotmanagedintegrations @smoke
-  Scenario: ListTagsForResourceSuccess
+  Scenario: ListSchemaVersionsSuccess
     Given I create a 'Aws::IoTManagedIntegrations' client with config:
       """
 {"region":"us-east-1","use_fips_endpoint":false,"use_dualstack_endpoint":false}
       """
-    When I call the operation 'list_tags_for_resource' with params:
+    When I call the operation 'list_schema_versions' with params:
       """
-{"resource_arn":"arn:aws:iotmanagedintegrations:us-east-1:123456789012:managed-thing/test123"}
+{"type":"capability"}
       """
     Then I expect an error was not raised
 
@@ -560,50 +440,14 @@ Feature: Smoke tests for IoTManagedIntegrations
     Then I expect a 'Aws::IoTManagedIntegrations::Errors::ResourceNotFoundException' was raised
 
   @iotmanagedintegrations @smoke
-  Scenario: ListDestinationsSuccess
+  Scenario: ListOtaTaskExecutionsNotFound
     Given I create a 'Aws::IoTManagedIntegrations' client with config:
       """
 {"region":"us-east-1","use_fips_endpoint":false,"use_dualstack_endpoint":false}
       """
-    When I call the operation 'list_destinations' with params:
-      """
-{}
-      """
-    Then I expect an error was not raised
-
-  @iotmanagedintegrations @smoke
-  Scenario: ListDestinationsWithPagination
-    Given I create a 'Aws::IoTManagedIntegrations' client with config:
-      """
-{"region":"us-east-1","use_fips_endpoint":false,"use_dualstack_endpoint":false}
-      """
-    When I call the operation 'list_destinations' with params:
-      """
-{"max_results":5}
-      """
-    Then I expect an error was not raised
-
-  @iotmanagedintegrations @smoke
-  Scenario: GetOtaTaskNotFound
-    Given I create a 'Aws::IoTManagedIntegrations' client with config:
-      """
-{"region":"us-east-1","use_fips_endpoint":false,"use_dualstack_endpoint":false}
-      """
-    When I call the operation 'get_ota_task' with params:
+    When I call the operation 'list_ota_task_executions' with params:
       """
 {"identifier":"nonExistentTaskId"}
-      """
-    Then I expect a 'Aws::IoTManagedIntegrations::Errors::ResourceNotFoundException' was raised
-
-  @iotmanagedintegrations @smoke
-  Scenario: GetManagedThingCapabilitiesNotFound
-    Given I create a 'Aws::IoTManagedIntegrations' client with config:
-      """
-{"region":"us-east-1","use_fips_endpoint":false,"use_dualstack_endpoint":false}
-      """
-    When I call the operation 'get_managed_thing_capabilities' with params:
-      """
-{"identifier":"nonExistentId"}
       """
     Then I expect a 'Aws::IoTManagedIntegrations::Errors::ResourceNotFoundException' was raised
 
@@ -632,26 +476,26 @@ Feature: Smoke tests for IoTManagedIntegrations
     Then I expect an error was not raised
 
   @iotmanagedintegrations @smoke
-  Scenario: ListOtaTaskExecutionsNotFound
+  Scenario: GetManagedThingMetaDataNotFound
     Given I create a 'Aws::IoTManagedIntegrations' client with config:
       """
 {"region":"us-east-1","use_fips_endpoint":false,"use_dualstack_endpoint":false}
       """
-    When I call the operation 'list_ota_task_executions' with params:
+    When I call the operation 'get_managed_thing_meta_data' with params:
       """
-{"identifier":"nonExistentTaskId"}
+{"identifier":"nonExistentId"}
       """
     Then I expect a 'Aws::IoTManagedIntegrations::Errors::ResourceNotFoundException' was raised
 
   @iotmanagedintegrations @smoke
-  Scenario: GetOtaTaskConfigurationNotFound
+  Scenario: GetManagedThingCertificateNotFound
     Given I create a 'Aws::IoTManagedIntegrations' client with config:
       """
 {"region":"us-east-1","use_fips_endpoint":false,"use_dualstack_endpoint":false}
       """
-    When I call the operation 'get_ota_task_configuration' with params:
+    When I call the operation 'get_managed_thing_certificate' with params:
       """
-{"identifier":"nonExistentConfigId"}
+{"identifier":"nonExistentId"}
       """
     Then I expect a 'Aws::IoTManagedIntegrations::Errors::ResourceNotFoundException' was raised
 
@@ -668,25 +512,181 @@ Feature: Smoke tests for IoTManagedIntegrations
     Then I expect a 'Aws::IoTManagedIntegrations::Errors::ResourceNotFoundException' was raised
 
   @iotmanagedintegrations @smoke
-  Scenario: ListProvisioningProfilesSuccess
+  Scenario: GetOtaTaskConfigurationNotFound
     Given I create a 'Aws::IoTManagedIntegrations' client with config:
       """
 {"region":"us-east-1","use_fips_endpoint":false,"use_dualstack_endpoint":false}
       """
-    When I call the operation 'list_provisioning_profiles' with params:
+    When I call the operation 'get_ota_task_configuration' with params:
+      """
+{"identifier":"nonExistentConfigId"}
+      """
+    Then I expect a 'Aws::IoTManagedIntegrations::Errors::ResourceNotFoundException' was raised
+
+  @iotmanagedintegrations @smoke
+  Scenario: ListOtaTasksSuccess
+    Given I create a 'Aws::IoTManagedIntegrations' client with config:
+      """
+{"region":"us-east-1","use_fips_endpoint":false,"use_dualstack_endpoint":false}
+      """
+    When I call the operation 'list_ota_tasks' with params:
       """
 {}
       """
     Then I expect an error was not raised
 
   @iotmanagedintegrations @smoke
-  Scenario: ListProvisioningProfilesWithPagination
+  Scenario: ListOtaTasksWithPagination
     Given I create a 'Aws::IoTManagedIntegrations' client with config:
       """
 {"region":"us-east-1","use_fips_endpoint":false,"use_dualstack_endpoint":false}
       """
-    When I call the operation 'list_provisioning_profiles' with params:
+    When I call the operation 'list_ota_tasks' with params:
       """
 {"max_results":5}
       """
     Then I expect an error was not raised
+
+  @iotmanagedintegrations @smoke
+  Scenario: GetManagedThingStateNotFound
+    Given I create a 'Aws::IoTManagedIntegrations' client with config:
+      """
+{"region":"us-east-1","use_fips_endpoint":false,"use_dualstack_endpoint":false}
+      """
+    When I call the operation 'get_managed_thing_state' with params:
+      """
+{"managed_thing_id":"nonExistentId"}
+      """
+    Then I expect a 'Aws::IoTManagedIntegrations::Errors::ResourceNotFoundException' was raised
+
+  @iotmanagedintegrations @smoke
+  Scenario: GetEventLogConfigurationNotFound
+    Given I create a 'Aws::IoTManagedIntegrations' client with config:
+      """
+{"region":"us-east-1","use_fips_endpoint":false,"use_dualstack_endpoint":false}
+      """
+    When I call the operation 'get_event_log_configuration' with params:
+      """
+{"id":"nonExistentId"}
+      """
+    Then I expect a 'Aws::IoTManagedIntegrations::Errors::ResourceNotFoundException' was raised
+
+  @iotmanagedintegrations @smoke
+  Scenario: ListConnectorDestinationsSuccess
+    Given I create a 'Aws::IoTManagedIntegrations' client with config:
+      """
+{"region":"us-east-1","use_fips_endpoint":false,"use_dualstack_endpoint":false}
+      """
+    When I call the operation 'list_connector_destinations' with params:
+      """
+{}
+      """
+    Then I expect an error was not raised
+
+  @iotmanagedintegrations @smoke
+  Scenario: ListConnectorDestinationsWithPagination
+    Given I create a 'Aws::IoTManagedIntegrations' client with config:
+      """
+{"region":"us-east-1","use_fips_endpoint":false,"use_dualstack_endpoint":false}
+      """
+    When I call the operation 'list_connector_destinations' with params:
+      """
+{"max_results":5}
+      """
+    Then I expect an error was not raised
+
+  @iotmanagedintegrations @smoke
+  Scenario: GetCustomEndpointSuccess
+    Given I create a 'Aws::IoTManagedIntegrations' client with config:
+      """
+{"region":"us-east-1","use_fips_endpoint":false,"use_dualstack_endpoint":false}
+      """
+    When I call the operation 'get_custom_endpoint' with params:
+      """
+{}
+      """
+    Then I expect an error was not raised
+
+  @iotmanagedintegrations @smoke
+  Scenario: ListNotificationConfigurationsSuccess
+    Given I create a 'Aws::IoTManagedIntegrations' client with config:
+      """
+{"region":"us-east-1","use_fips_endpoint":false,"use_dualstack_endpoint":false}
+      """
+    When I call the operation 'list_notification_configurations' with params:
+      """
+{}
+      """
+    Then I expect an error was not raised
+
+  @iotmanagedintegrations @smoke
+  Scenario: ListNotificationConfigurationsWithPagination
+    Given I create a 'Aws::IoTManagedIntegrations' client with config:
+      """
+{"region":"us-east-1","use_fips_endpoint":false,"use_dualstack_endpoint":false}
+      """
+    When I call the operation 'list_notification_configurations' with params:
+      """
+{"max_results":5}
+      """
+    Then I expect an error was not raised
+
+  @iotmanagedintegrations @smoke
+  Scenario: ListManagedThingSchemasNotFound
+    Given I create a 'Aws::IoTManagedIntegrations' client with config:
+      """
+{"region":"us-east-1","use_fips_endpoint":false,"use_dualstack_endpoint":false}
+      """
+    When I call the operation 'list_managed_thing_schemas' with params:
+      """
+{"identifier":"nonExistentId"}
+      """
+    Then I expect a 'Aws::IoTManagedIntegrations::Errors::ResourceNotFoundException' was raised
+
+  @iotmanagedintegrations @smoke
+  Scenario: ListManagedThingSchemasWithPagination
+    Given I create a 'Aws::IoTManagedIntegrations' client with config:
+      """
+{"region":"us-east-1","use_fips_endpoint":false,"use_dualstack_endpoint":false}
+      """
+    When I call the operation 'list_managed_thing_schemas' with params:
+      """
+{"identifier":"testId","max_results":5}
+      """
+    Then I expect a 'Aws::IoTManagedIntegrations::Errors::ResourceNotFoundException' was raised
+
+  @iotmanagedintegrations @smoke
+  Scenario: GetSchemaVersionNotFound
+    Given I create a 'Aws::IoTManagedIntegrations' client with config:
+      """
+{"region":"us-east-1","use_fips_endpoint":false,"use_dualstack_endpoint":false}
+      """
+    When I call the operation 'get_schema_version' with params:
+      """
+{"type":"capability","schema_versioned_id":"non.existent.schema@1.0"}
+      """
+    Then I expect a 'Aws::IoTManagedIntegrations::Errors::ResourceNotFoundException' was raised
+
+  @iotmanagedintegrations @smoke
+  Scenario: ListDiscoveredDevicesNotFound
+    Given I create a 'Aws::IoTManagedIntegrations' client with config:
+      """
+{"region":"us-east-1","use_fips_endpoint":false,"use_dualstack_endpoint":false}
+      """
+    When I call the operation 'list_discovered_devices' with params:
+      """
+{"identifier":"nonExistentId"}
+      """
+    Then I expect a 'Aws::IoTManagedIntegrations::Errors::ResourceNotFoundException' was raised
+
+  @iotmanagedintegrations @smoke
+  Scenario: ListDiscoveredDevicesWithPagination
+    Given I create a 'Aws::IoTManagedIntegrations' client with config:
+      """
+{"region":"us-east-1","use_fips_endpoint":false,"use_dualstack_endpoint":false}
+      """
+    When I call the operation 'list_discovered_devices' with params:
+      """
+{"identifier":"testDiscoveryId","max_results":5}
+      """
+    Then I expect a 'Aws::IoTManagedIntegrations::Errors::ResourceNotFoundException' was raised

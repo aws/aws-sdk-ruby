@@ -49,12 +49,13 @@ module Aws::DataZone
   end
   autoload :Client, 'aws-sdk-datazone/client'
   autoload :Errors, 'aws-sdk-datazone/errors'
+  autoload :Waiters, 'aws-sdk-datazone/waiters'
   autoload :Resource, 'aws-sdk-datazone/resource'
   autoload :EndpointParameters, 'aws-sdk-datazone/endpoint_parameters'
   autoload :EndpointProvider, 'aws-sdk-datazone/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-datazone/endpoints'
 
-  GEM_VERSION = '1.64.0'
+  GEM_VERSION = '1.65.0'
 
 end
 

@@ -10909,6 +10909,7 @@ module Aws::SageMaker
 
     class UltraServerInfo
       attr_accessor id: ::String
+      attr_accessor type: ::String
       SENSITIVE: []
     end
 

@@ -10923,8 +10923,8 @@ module Aws::SageMaker
     SearchTrainingPlanOfferingsRequest.add_member(:ultra_server_count, Shapes::ShapeRef.new(shape: UltraServerCount, location_name: "UltraServerCount"))
     SearchTrainingPlanOfferingsRequest.add_member(:start_time_after, Shapes::ShapeRef.new(shape: Timestamp, location_name: "StartTimeAfter"))
     SearchTrainingPlanOfferingsRequest.add_member(:end_time_before, Shapes::ShapeRef.new(shape: Timestamp, location_name: "EndTimeBefore"))
-    SearchTrainingPlanOfferingsRequest.add_member(:duration_hours, Shapes::ShapeRef.new(shape: TrainingPlanDurationHoursInput, required: true, location_name: "DurationHours"))
-    SearchTrainingPlanOfferingsRequest.add_member(:target_resources, Shapes::ShapeRef.new(shape: SageMakerResourceNames, required: true, location_name: "TargetResources"))
+    SearchTrainingPlanOfferingsRequest.add_member(:duration_hours, Shapes::ShapeRef.new(shape: TrainingPlanDurationHoursInput, location_name: "DurationHours"))
+    SearchTrainingPlanOfferingsRequest.add_member(:target_resources, Shapes::ShapeRef.new(shape: SageMakerResourceNames, location_name: "TargetResources"))
     SearchTrainingPlanOfferingsRequest.struct_class = Types::SearchTrainingPlanOfferingsRequest
 
     SearchTrainingPlanOfferingsResponse.add_member(:training_plan_offerings, Shapes::ShapeRef.new(shape: TrainingPlanOfferings, required: true, location_name: "TrainingPlanOfferings"))
@@ -11739,6 +11739,7 @@ module Aws::SageMaker
     UltraServer.struct_class = Types::UltraServer
 
     UltraServerInfo.add_member(:id, Shapes::ShapeRef.new(shape: String, location_name: "Id"))
+    UltraServerInfo.add_member(:type, Shapes::ShapeRef.new(shape: String, location_name: "Type"))
     UltraServerInfo.struct_class = Types::UltraServerInfo
 
     UltraServerSummary.add_member(:ultra_server_type, Shapes::ShapeRef.new(shape: UltraServerType, required: true, location_name: "UltraServerType"))

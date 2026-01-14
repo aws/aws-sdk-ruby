@@ -14138,6 +14138,7 @@ module Aws::SageMaker
     #   resp.node_details.current_image_id #=> String
     #   resp.node_details.desired_image_id #=> String
     #   resp.node_details.ultra_server_info.id #=> String
+    #   resp.node_details.ultra_server_info.type #=> String
     #   resp.node_details.kubernetes_config.current_labels #=> Hash
     #   resp.node_details.kubernetes_config.current_labels["ClusterKubernetesLabelKey"] #=> String
     #   resp.node_details.kubernetes_config.desired_labels #=> Hash
@@ -20961,6 +20962,7 @@ module Aws::SageMaker
     #   resp.cluster_node_summaries[0].instance_status.status #=> String, one of "Running", "Failure", "Pending", "ShuttingDown", "SystemUpdating", "DeepHealthCheckInProgress", "NotFound"
     #   resp.cluster_node_summaries[0].instance_status.message #=> String
     #   resp.cluster_node_summaries[0].ultra_server_info.id #=> String
+    #   resp.cluster_node_summaries[0].ultra_server_info.type #=> String
     #   resp.cluster_node_summaries[0].private_dns_hostname #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListClusterNodes AWS API Documentation
@@ -27190,10 +27192,10 @@ module Aws::SageMaker
     #   A filter to search for reserved capacity offerings with an end time
     #   before a specified date.
     #
-    # @option params [required, Integer] :duration_hours
+    # @option params [Integer] :duration_hours
     #   The desired duration in hours for the training plan offerings.
     #
-    # @option params [required, Array<String>] :target_resources
+    # @option params [Array<String>] :target_resources
     #   The target resources (e.g., SageMaker Training Jobs, SageMaker
     #   HyperPod, SageMaker Endpoints) to search for in the offerings.
     #
@@ -27222,8 +27224,8 @@ module Aws::SageMaker
     #     ultra_server_count: 1,
     #     start_time_after: Time.now,
     #     end_time_before: Time.now,
-    #     duration_hours: 1, # required
-    #     target_resources: ["training-job"], # required, accepts training-job, hyperpod-cluster, endpoint
+    #     duration_hours: 1,
+    #     target_resources: ["training-job"], # accepts training-job, hyperpod-cluster, endpoint
     #   })
     #
     # @example Response structure
@@ -27520,7 +27522,7 @@ module Aws::SageMaker
     #   The ID of the pipeline version to start execution from.
     #
     # @option params [String] :mlflow_experiment_name
-    #   The MLflow experiment name of the start execution.
+    #   The MLflow experiment name of the pipeline execution.
     #
     # @return [Types::StartPipelineExecutionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -32181,7 +32183,7 @@ module Aws::SageMaker
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.346.0'
+      context[:gem_version] = '1.347.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

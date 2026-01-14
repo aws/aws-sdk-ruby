@@ -102,8 +102,8 @@ module Aws::Billing
     #   @return [String]
     #
     # @!attribute [rw] data_filter_expression
-    #   See [Expression][1]. Billing view only supports `LINKED_ACCOUNT` and
-    #   `Tags`.
+    #   See [Expression][1]. Billing view only supports `LINKED_ACCOUNT`,
+    #   `Tags`, and `CostCategories`.
     #
     #
     #
@@ -261,6 +261,25 @@ module Aws::Billing
       include Aws::Structure
     end
 
+    # The Cost Categories values used for filtering the costs.
+    #
+    # @!attribute [rw] key
+    #   The unique name of the Cost Category.
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   The specific value of the Cost Category.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billing-2023-09-07/CostCategoryValues AWS API Documentation
+    #
+    class CostCategoryValues < Struct.new(
+      :key,
+      :values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] name
     #   The name of the billing view.
     #   @return [String]
@@ -275,8 +294,8 @@ module Aws::Billing
     #   @return [Array<String>]
     #
     # @!attribute [rw] data_filter_expression
-    #   See [Expression][1]. Billing view only supports `LINKED_ACCOUNT` and
-    #   `Tags`.
+    #   See [Expression][1]. Billing view only supports `LINKED_ACCOUNT`,
+    #   `Tags`, and `CostCategories`.
     #
     #
     #
@@ -415,8 +434,8 @@ module Aws::Billing
       include Aws::Structure
     end
 
-    # See [Expression][1]. Billing view only supports `LINKED_ACCOUNT` and
-    # `Tags`.
+    # See [Expression][1]. Billing view only supports `LINKED_ACCOUNT`,
+    # `Tags`, and `CostCategories`.
     #
     #
     #
@@ -430,6 +449,10 @@ module Aws::Billing
     #   The specific `Tag` to use for `Expression`.
     #   @return [Types::TagValues]
     #
+    # @!attribute [rw] cost_categories
+    #   The filter that's based on `CostCategory` values.
+    #   @return [Types::CostCategoryValues]
+    #
     # @!attribute [rw] time_range
     #   Specifies a time range filter for the billing view data.
     #   @return [Types::TimeRange]
@@ -439,6 +462,7 @@ module Aws::Billing
     class Expression < Struct.new(
       :dimensions,
       :tags,
+      :cost_categories,
       :time_range)
       SENSITIVE = []
       include Aws::Structure
@@ -861,8 +885,8 @@ module Aws::Billing
     #   @return [String]
     #
     # @!attribute [rw] data_filter_expression
-    #   See [Expression][1]. Billing view only supports `LINKED_ACCOUNT` and
-    #   `Tags`.
+    #   See [Expression][1]. Billing view only supports `LINKED_ACCOUNT`,
+    #   `Tags`, and `CostCategories`.
     #
     #
     #

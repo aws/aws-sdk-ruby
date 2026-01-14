@@ -547,8 +547,8 @@ module Aws::Billing
     #   view.
     #
     # @option params [Types::Expression] :data_filter_expression
-    #   See [Expression][1]. Billing view only supports `LINKED_ACCOUNT` and
-    #   `Tags`.
+    #   See [Expression][1]. Billing view only supports `LINKED_ACCOUNT`,
+    #   `Tags`, and `CostCategories`.
     #
     #
     #
@@ -611,6 +611,10 @@ module Aws::Billing
     #       },
     #       tags: {
     #         key: "TagKey", # required
+    #         values: ["Value"], # required
+    #       },
+    #       cost_categories: {
+    #         key: "CostCategoryName", # required
     #         values: ["Value"], # required
     #       },
     #       time_range: {
@@ -795,6 +799,9 @@ module Aws::Billing
     #   resp.billing_view.data_filter_expression.tags.key #=> String
     #   resp.billing_view.data_filter_expression.tags.values #=> Array
     #   resp.billing_view.data_filter_expression.tags.values[0] #=> String
+    #   resp.billing_view.data_filter_expression.cost_categories.key #=> String
+    #   resp.billing_view.data_filter_expression.cost_categories.values #=> Array
+    #   resp.billing_view.data_filter_expression.cost_categories.values[0] #=> String
     #   resp.billing_view.data_filter_expression.time_range.begin_date_inclusive #=> Time
     #   resp.billing_view.data_filter_expression.time_range.end_date_inclusive #=> Time
     #   resp.billing_view.created_at #=> Time
@@ -1190,8 +1197,8 @@ module Aws::Billing
     #   The description of the billing view.
     #
     # @option params [Types::Expression] :data_filter_expression
-    #   See [Expression][1]. Billing view only supports `LINKED_ACCOUNT` and
-    #   `Tags`.
+    #   See [Expression][1]. Billing view only supports `LINKED_ACCOUNT`,
+    #   `Tags`, and `CostCategories`.
     #
     #
     #
@@ -1240,6 +1247,10 @@ module Aws::Billing
     #         key: "TagKey", # required
     #         values: ["Value"], # required
     #       },
+    #       cost_categories: {
+    #         key: "CostCategoryName", # required
+    #         values: ["Value"], # required
+    #       },
     #       time_range: {
     #         begin_date_inclusive: Time.now,
     #         end_date_inclusive: Time.now,
@@ -1279,7 +1290,7 @@ module Aws::Billing
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-billing'
-      context[:gem_version] = '1.20.0'
+      context[:gem_version] = '1.21.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

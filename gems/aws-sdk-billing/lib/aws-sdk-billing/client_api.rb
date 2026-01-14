@@ -38,6 +38,8 @@ module Aws::Billing
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     ClientToken = Shapes::StringShape.new(name: 'ClientToken')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
+    CostCategoryName = Shapes::StringShape.new(name: 'CostCategoryName')
+    CostCategoryValues = Shapes::StructureShape.new(name: 'CostCategoryValues')
     CreateBillingViewRequest = Shapes::StructureShape.new(name: 'CreateBillingViewRequest')
     CreateBillingViewResponse = Shapes::StructureShape.new(name: 'CreateBillingViewResponse')
     DeleteBillingViewRequest = Shapes::StructureShape.new(name: 'DeleteBillingViewRequest')
@@ -157,6 +159,10 @@ module Aws::Billing
     ConflictException.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, required: true, location_name: "resourceType"))
     ConflictException.struct_class = Types::ConflictException
 
+    CostCategoryValues.add_member(:key, Shapes::ShapeRef.new(shape: CostCategoryName, required: true, location_name: "key"))
+    CostCategoryValues.add_member(:values, Shapes::ShapeRef.new(shape: Values, required: true, location_name: "values"))
+    CostCategoryValues.struct_class = Types::CostCategoryValues
+
     CreateBillingViewRequest.add_member(:name, Shapes::ShapeRef.new(shape: BillingViewName, required: true, location_name: "name"))
     CreateBillingViewRequest.add_member(:description, Shapes::ShapeRef.new(shape: BillingViewDescription, location_name: "description"))
     CreateBillingViewRequest.add_member(:source_views, Shapes::ShapeRef.new(shape: BillingViewSourceViewsList, required: true, location_name: "sourceViews"))
@@ -189,6 +195,7 @@ module Aws::Billing
 
     Expression.add_member(:dimensions, Shapes::ShapeRef.new(shape: DimensionValues, location_name: "dimensions"))
     Expression.add_member(:tags, Shapes::ShapeRef.new(shape: TagValues, location_name: "tags"))
+    Expression.add_member(:cost_categories, Shapes::ShapeRef.new(shape: CostCategoryValues, location_name: "costCategories"))
     Expression.add_member(:time_range, Shapes::ShapeRef.new(shape: TimeRange, location_name: "timeRange"))
     Expression.struct_class = Types::Expression
 

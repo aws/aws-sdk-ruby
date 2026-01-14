@@ -8838,10 +8838,10 @@ module Aws
                                             ?ultra_server_count: ::Integer,
                                             ?start_time_after: ::Time,
                                             ?end_time_before: ::Time,
-                                            duration_hours: ::Integer,
-                                            target_resources: Array[("training-job" | "hyperpod-cluster" | "endpoint")]
+                                            ?duration_hours: ::Integer,
+                                            ?target_resources: Array[("training-job" | "hyperpod-cluster" | "endpoint")]
                                           ) -> _SearchTrainingPlanOfferingsResponseSuccess
-                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SearchTrainingPlanOfferingsResponseSuccess
+                                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SearchTrainingPlanOfferingsResponseSuccess
 
       interface _SendPipelineExecutionStepFailureResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::SendPipelineExecutionStepFailureResponse]

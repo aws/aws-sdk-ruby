@@ -76,6 +76,12 @@ module Aws::Billing
       SENSITIVE: []
     end
 
+    class CostCategoryValues
+      attr_accessor key: ::String
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
     class CreateBillingViewRequest
       attr_accessor name: ::String
       attr_accessor description: ::String
@@ -123,6 +129,7 @@ module Aws::Billing
     class Expression
       attr_accessor dimensions: Types::DimensionValues
       attr_accessor tags: Types::TagValues
+      attr_accessor cost_categories: Types::CostCategoryValues
       attr_accessor time_range: Types::TimeRange
       SENSITIVE: []
     end

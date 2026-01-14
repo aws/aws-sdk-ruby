@@ -177,6 +177,8 @@ module Aws::IoTManagedIntegrations
     DiscoveryType = Shapes::StringShape.new(name: 'DiscoveryType')
     DisplayName = Shapes::StringShape.new(name: 'DisplayName')
     DurationInMinutes = Shapes::IntegerShape.new(name: 'DurationInMinutes')
+    EnableAsProvisionee = Shapes::BooleanShape.new(name: 'EnableAsProvisionee')
+    EnableAsProvisioner = Shapes::BooleanShape.new(name: 'EnableAsProvisioner')
     EncryptionType = Shapes::StringShape.new(name: 'EncryptionType')
     EndTime = Shapes::StringShape.new(name: 'EndTime')
     EndpointAddress = Shapes::StringShape.new(name: 'EndpointAddress')
@@ -379,6 +381,7 @@ module Aws::IoTManagedIntegrations
     ProactiveRefreshTokenRenewal = Shapes::StructureShape.new(name: 'ProactiveRefreshTokenRenewal')
     ProactiveRefreshTokenRenewalDaysBeforeRenewalInteger = Shapes::IntegerShape.new(name: 'ProactiveRefreshTokenRenewalDaysBeforeRenewalInteger')
     PropertyName = Shapes::StringShape.new(name: 'PropertyName')
+    ProtocolType = Shapes::StringShape.new(name: 'ProtocolType')
     ProvisioningProfileArn = Shapes::StringShape.new(name: 'ProvisioningProfileArn')
     ProvisioningProfileId = Shapes::StringShape.new(name: 'ProvisioningProfileId')
     ProvisioningProfileListDefinition = Shapes::ListShape.new(name: 'ProvisioningProfileListDefinition')
@@ -458,6 +461,7 @@ module Aws::IoTManagedIntegrations
     ThirdPartyUserId = Shapes::StringShape.new(name: 'ThirdPartyUserId')
     ThresholdPercentage = Shapes::FloatShape.new(name: 'ThresholdPercentage')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
+    TimeoutInMinutes = Shapes::IntegerShape.new(name: 'TimeoutInMinutes')
     TokenEndpointAuthenticationScheme = Shapes::StringShape.new(name: 'TokenEndpointAuthenticationScheme')
     TokenUrl = Shapes::StringShape.new(name: 'TokenUrl')
     TraceId = Shapes::StringShape.new(name: 'TraceId')
@@ -478,6 +482,7 @@ module Aws::IoTManagedIntegrations
     UploadPeriodMinutes = Shapes::IntegerShape.new(name: 'UploadPeriodMinutes')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
     ValidationSchema = Shapes::DocumentShape.new(name: 'ValidationSchema', document: true)
+    WiFiSimpleSetupConfiguration = Shapes::StructureShape.new(name: 'WiFiSimpleSetupConfiguration')
 
     AbortConfigCriteria.add_member(:action, Shapes::ShapeRef.new(shape: AbortCriteriaAction, location_name: "Action"))
     AbortConfigCriteria.add_member(:failure_type, Shapes::ShapeRef.new(shape: AbortCriteriaFailureType, location_name: "FailureType"))
@@ -666,6 +671,7 @@ module Aws::IoTManagedIntegrations
     CreateManagedThingRequest.add_member(:credential_locker_id, Shapes::ShapeRef.new(shape: CredentialLockerId, location_name: "CredentialLockerId"))
     CreateManagedThingRequest.add_member(:authentication_material, Shapes::ShapeRef.new(shape: AuthMaterialString, required: true, location_name: "AuthenticationMaterial"))
     CreateManagedThingRequest.add_member(:authentication_material_type, Shapes::ShapeRef.new(shape: AuthMaterialType, required: true, location_name: "AuthenticationMaterialType"))
+    CreateManagedThingRequest.add_member(:wi_fi_simple_setup_configuration, Shapes::ShapeRef.new(shape: WiFiSimpleSetupConfiguration, location_name: "WiFiSimpleSetupConfiguration"))
     CreateManagedThingRequest.add_member(:serial_number, Shapes::ShapeRef.new(shape: SerialNumber, location_name: "SerialNumber"))
     CreateManagedThingRequest.add_member(:brand, Shapes::ShapeRef.new(shape: Brand, location_name: "Brand"))
     CreateManagedThingRequest.add_member(:model, Shapes::ShapeRef.new(shape: Model, location_name: "Model"))
@@ -1006,6 +1012,7 @@ module Aws::IoTManagedIntegrations
     GetManagedThingResponse.add_member(:hub_network_mode, Shapes::ShapeRef.new(shape: HubNetworkMode, location_name: "HubNetworkMode"))
     GetManagedThingResponse.add_member(:meta_data, Shapes::ShapeRef.new(shape: MetaData, location_name: "MetaData"))
     GetManagedThingResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "Tags"))
+    GetManagedThingResponse.add_member(:wi_fi_simple_setup_configuration, Shapes::ShapeRef.new(shape: WiFiSimpleSetupConfiguration, location_name: "WiFiSimpleSetupConfiguration"))
     GetManagedThingResponse.struct_class = Types::GetManagedThingResponse
 
     GetManagedThingStateRequest.add_member(:managed_thing_id, Shapes::ShapeRef.new(shape: ManagedThingId, required: true, location: "uri", location_name: "ManagedThingId"))
@@ -1591,6 +1598,8 @@ module Aws::IoTManagedIntegrations
     StartDeviceDiscoveryRequest.add_member(:authentication_material_type, Shapes::ShapeRef.new(shape: DiscoveryAuthMaterialType, location_name: "AuthenticationMaterialType"))
     StartDeviceDiscoveryRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken"))
     StartDeviceDiscoveryRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, deprecated: true, location_name: "Tags", metadata: {"deprecatedMessage" => "Tags have been deprecated from this api", "deprecatedSince" => "06-25-2025"}))
+    StartDeviceDiscoveryRequest.add_member(:protocol, Shapes::ShapeRef.new(shape: ProtocolType, location_name: "Protocol"))
+    StartDeviceDiscoveryRequest.add_member(:end_device_identifier, Shapes::ShapeRef.new(shape: ManagedThingId, location_name: "EndDeviceIdentifier"))
     StartDeviceDiscoveryRequest.struct_class = Types::StartDeviceDiscoveryRequest
 
     StartDeviceDiscoveryResponse.add_member(:id, Shapes::ShapeRef.new(shape: DeviceDiscoveryId, location_name: "Id"))
@@ -1680,6 +1689,7 @@ module Aws::IoTManagedIntegrations
     UpdateManagedThingRequest.add_member(:owner, Shapes::ShapeRef.new(shape: Owner, location_name: "Owner"))
     UpdateManagedThingRequest.add_member(:credential_locker_id, Shapes::ShapeRef.new(shape: CredentialLockerId, location_name: "CredentialLockerId"))
     UpdateManagedThingRequest.add_member(:serial_number, Shapes::ShapeRef.new(shape: SerialNumber, location_name: "SerialNumber"))
+    UpdateManagedThingRequest.add_member(:wi_fi_simple_setup_configuration, Shapes::ShapeRef.new(shape: WiFiSimpleSetupConfiguration, location_name: "WiFiSimpleSetupConfiguration"))
     UpdateManagedThingRequest.add_member(:brand, Shapes::ShapeRef.new(shape: Brand, location_name: "Brand"))
     UpdateManagedThingRequest.add_member(:model, Shapes::ShapeRef.new(shape: Model, location_name: "Model"))
     UpdateManagedThingRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "Name"))
@@ -1702,6 +1712,11 @@ module Aws::IoTManagedIntegrations
 
     ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     ValidationException.struct_class = Types::ValidationException
+
+    WiFiSimpleSetupConfiguration.add_member(:enable_as_provisioner, Shapes::ShapeRef.new(shape: EnableAsProvisioner, location_name: "EnableAsProvisioner"))
+    WiFiSimpleSetupConfiguration.add_member(:enable_as_provisionee, Shapes::ShapeRef.new(shape: EnableAsProvisionee, location_name: "EnableAsProvisionee"))
+    WiFiSimpleSetupConfiguration.add_member(:timeout_in_minutes, Shapes::ShapeRef.new(shape: TimeoutInMinutes, location_name: "TimeoutInMinutes"))
+    WiFiSimpleSetupConfiguration.struct_class = Types::WiFiSimpleSetupConfiguration
 
 
     # @api private
@@ -2042,6 +2057,7 @@ module Aws::IoTManagedIntegrations
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)

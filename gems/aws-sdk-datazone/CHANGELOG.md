@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.65.0 (2026-01-13)
+------------------
+
+* Feature - Adds support for IAM role subscriptions to Glue table listings via CreateSubscriptionRequest API. Also adds owningIamPrincipalArn filter to List APIs and subscriptionGrantCreationMode parameter to subscription target APIs for controlling grant creation behavior.
+
 1.64.0 (2026-01-08)
 ------------------
 

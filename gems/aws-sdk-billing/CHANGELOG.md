@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.21.0 (2026-01-12)
+------------------
+
+* Feature - Cost Categories filtering support to BillingView data filter expressions through the new costCategories parameter, enabling users to filter billing views by AWS Cost Categories for more granular cost management and allocation.
+
 1.20.0 (2026-01-08)
 ------------------
 

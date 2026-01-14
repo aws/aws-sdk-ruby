@@ -894,6 +894,10 @@ module Aws::IoTManagedIntegrations
     #   The type of authentication material used for device connectivity setup
     #   requests.
     #
+    # @option params [Types::WiFiSimpleSetupConfiguration] :wi_fi_simple_setup_configuration
+    #   The Wi-Fi Simple Setup configuration for the managed thing, which
+    #   defines provisioning capabilities and timeout settings.
+    #
     # @option params [String] :serial_number
     #   The serial number of the device.
     #
@@ -958,6 +962,11 @@ module Aws::IoTManagedIntegrations
     #     credential_locker_id: "CredentialLockerId",
     #     authentication_material: "AuthMaterialString", # required
     #     authentication_material_type: "CUSTOM_PROTOCOL_QR_BAR_CODE", # required, accepts CUSTOM_PROTOCOL_QR_BAR_CODE, WIFI_SETUP_QR_BAR_CODE, ZWAVE_QR_BAR_CODE, ZIGBEE_QR_BAR_CODE, DISCOVERED_DEVICE
+    #     wi_fi_simple_setup_configuration: {
+    #       enable_as_provisioner: false,
+    #       enable_as_provisionee: false,
+    #       timeout_in_minutes: 1,
+    #     },
     #     serial_number: "SerialNumber",
     #     brand: "Brand",
     #     model: "Model",
@@ -1046,7 +1055,7 @@ module Aws::IoTManagedIntegrations
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_notification_configuration({
-    #     event_type: "DEVICE_COMMAND", # required, accepts DEVICE_COMMAND, DEVICE_COMMAND_REQUEST, DEVICE_DISCOVERY_STATUS, DEVICE_EVENT, DEVICE_LIFE_CYCLE, DEVICE_STATE, DEVICE_OTA, CONNECTOR_ASSOCIATION, ACCOUNT_ASSOCIATION, CONNECTOR_ERROR_REPORT
+    #     event_type: "DEVICE_COMMAND", # required, accepts DEVICE_COMMAND, DEVICE_COMMAND_REQUEST, DEVICE_DISCOVERY_STATUS, DEVICE_EVENT, DEVICE_LIFE_CYCLE, DEVICE_STATE, DEVICE_OTA, DEVICE_WSS, CONNECTOR_ASSOCIATION, ACCOUNT_ASSOCIATION, CONNECTOR_ERROR_REPORT
     #     destination_name: "DestinationName", # required
     #     client_token: "ClientToken",
     #     tags: {
@@ -1056,7 +1065,7 @@ module Aws::IoTManagedIntegrations
     #
     # @example Response structure
     #
-    #   resp.event_type #=> String, one of "DEVICE_COMMAND", "DEVICE_COMMAND_REQUEST", "DEVICE_DISCOVERY_STATUS", "DEVICE_EVENT", "DEVICE_LIFE_CYCLE", "DEVICE_STATE", "DEVICE_OTA", "CONNECTOR_ASSOCIATION", "ACCOUNT_ASSOCIATION", "CONNECTOR_ERROR_REPORT"
+    #   resp.event_type #=> String, one of "DEVICE_COMMAND", "DEVICE_COMMAND_REQUEST", "DEVICE_DISCOVERY_STATUS", "DEVICE_EVENT", "DEVICE_LIFE_CYCLE", "DEVICE_STATE", "DEVICE_OTA", "DEVICE_WSS", "CONNECTOR_ASSOCIATION", "ACCOUNT_ASSOCIATION", "CONNECTOR_ERROR_REPORT"
     #
     # @overload create_notification_configuration(params = {})
     # @param [Hash] params ({})
@@ -1479,7 +1488,7 @@ module Aws::IoTManagedIntegrations
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_notification_configuration({
-    #     event_type: "DEVICE_COMMAND", # required, accepts DEVICE_COMMAND, DEVICE_COMMAND_REQUEST, DEVICE_DISCOVERY_STATUS, DEVICE_EVENT, DEVICE_LIFE_CYCLE, DEVICE_STATE, DEVICE_OTA, CONNECTOR_ASSOCIATION, ACCOUNT_ASSOCIATION, CONNECTOR_ERROR_REPORT
+    #     event_type: "DEVICE_COMMAND", # required, accepts DEVICE_COMMAND, DEVICE_COMMAND_REQUEST, DEVICE_DISCOVERY_STATUS, DEVICE_EVENT, DEVICE_LIFE_CYCLE, DEVICE_STATE, DEVICE_OTA, DEVICE_WSS, CONNECTOR_ASSOCIATION, ACCOUNT_ASSOCIATION, CONNECTOR_ERROR_REPORT
     #   })
     #
     # @overload delete_notification_configuration(params = {})
@@ -1894,7 +1903,7 @@ module Aws::IoTManagedIntegrations
     #
     #   resp.id #=> String
     #   resp.arn #=> String
-    #   resp.discovery_type #=> String, one of "ZWAVE", "ZIGBEE", "CLOUD", "CUSTOM"
+    #   resp.discovery_type #=> String, one of "ZWAVE", "ZIGBEE", "CLOUD", "CUSTOM", "CONTROLLER_CAPABILITY_REDISCOVERY"
     #   resp.status #=> String, one of "RUNNING", "SUCCEEDED", "FAILED", "TIMED_OUT"
     #   resp.started_at #=> Time
     #   resp.controller_id #=> String
@@ -1996,6 +2005,7 @@ module Aws::IoTManagedIntegrations
     #   * {Types::GetManagedThingResponse#hub_network_mode #hub_network_mode} => String
     #   * {Types::GetManagedThingResponse#meta_data #meta_data} => Hash&lt;String,String&gt;
     #   * {Types::GetManagedThingResponse#tags #tags} => Hash&lt;String,String&gt;
+    #   * {Types::GetManagedThingResponse#wi_fi_simple_setup_configuration #wi_fi_simple_setup_configuration} => Types::WiFiSimpleSetupConfiguration
     #
     # @example Request syntax with placeholder values
     #
@@ -2033,6 +2043,9 @@ module Aws::IoTManagedIntegrations
     #   resp.meta_data["AttributeName"] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
+    #   resp.wi_fi_simple_setup_configuration.enable_as_provisioner #=> Boolean
+    #   resp.wi_fi_simple_setup_configuration.enable_as_provisionee #=> Boolean
+    #   resp.wi_fi_simple_setup_configuration.timeout_in_minutes #=> Integer
     #
     # @overload get_managed_thing(params = {})
     # @param [Hash] params ({})
@@ -2244,12 +2257,12 @@ module Aws::IoTManagedIntegrations
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_notification_configuration({
-    #     event_type: "DEVICE_COMMAND", # required, accepts DEVICE_COMMAND, DEVICE_COMMAND_REQUEST, DEVICE_DISCOVERY_STATUS, DEVICE_EVENT, DEVICE_LIFE_CYCLE, DEVICE_STATE, DEVICE_OTA, CONNECTOR_ASSOCIATION, ACCOUNT_ASSOCIATION, CONNECTOR_ERROR_REPORT
+    #     event_type: "DEVICE_COMMAND", # required, accepts DEVICE_COMMAND, DEVICE_COMMAND_REQUEST, DEVICE_DISCOVERY_STATUS, DEVICE_EVENT, DEVICE_LIFE_CYCLE, DEVICE_STATE, DEVICE_OTA, DEVICE_WSS, CONNECTOR_ASSOCIATION, ACCOUNT_ASSOCIATION, CONNECTOR_ERROR_REPORT
     #   })
     #
     # @example Response structure
     #
-    #   resp.event_type #=> String, one of "DEVICE_COMMAND", "DEVICE_COMMAND_REQUEST", "DEVICE_DISCOVERY_STATUS", "DEVICE_EVENT", "DEVICE_LIFE_CYCLE", "DEVICE_STATE", "DEVICE_OTA", "CONNECTOR_ASSOCIATION", "ACCOUNT_ASSOCIATION", "CONNECTOR_ERROR_REPORT"
+    #   resp.event_type #=> String, one of "DEVICE_COMMAND", "DEVICE_COMMAND_REQUEST", "DEVICE_DISCOVERY_STATUS", "DEVICE_EVENT", "DEVICE_LIFE_CYCLE", "DEVICE_STATE", "DEVICE_OTA", "DEVICE_WSS", "CONNECTOR_ASSOCIATION", "ACCOUNT_ASSOCIATION", "CONNECTOR_ERROR_REPORT"
     #   resp.destination_name #=> String
     #   resp.created_at #=> Time
     #   resp.updated_at #=> Time
@@ -2790,7 +2803,7 @@ module Aws::IoTManagedIntegrations
     #   resp = client.list_device_discoveries({
     #     next_token: "NextToken",
     #     max_results: 1,
-    #     type_filter: "ZWAVE", # accepts ZWAVE, ZIGBEE, CLOUD, CUSTOM
+    #     type_filter: "ZWAVE", # accepts ZWAVE, ZIGBEE, CLOUD, CUSTOM, CONTROLLER_CAPABILITY_REDISCOVERY
     #     status_filter: "RUNNING", # accepts RUNNING, SUCCEEDED, FAILED, TIMED_OUT
     #   })
     #
@@ -2798,7 +2811,7 @@ module Aws::IoTManagedIntegrations
     #
     #   resp.items #=> Array
     #   resp.items[0].id #=> String
-    #   resp.items[0].discovery_type #=> String, one of "ZWAVE", "ZIGBEE", "CLOUD", "CUSTOM"
+    #   resp.items[0].discovery_type #=> String, one of "ZWAVE", "ZIGBEE", "CLOUD", "CUSTOM", "CONTROLLER_CAPABILITY_REDISCOVERY"
     #   resp.items[0].status #=> String, one of "RUNNING", "SUCCEEDED", "FAILED", "TIMED_OUT"
     #   resp.next_token #=> String
     #
@@ -3023,7 +3036,12 @@ module Aws::IoTManagedIntegrations
     #   Filter on the serial number of the device.
     #
     # @option params [String] :provisioning_status_filter
-    #   Filter on the status of the device.
+    #   Filter on the status of the device. For more information, see [Device
+    #   Provisioning][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot-mi/latest/devguide/device-provisioning.html
     #
     # @option params [String] :next_token
     #   A token that can be used to retrieve the next set of results.
@@ -3110,7 +3128,7 @@ module Aws::IoTManagedIntegrations
     # @example Response structure
     #
     #   resp.notification_configuration_list #=> Array
-    #   resp.notification_configuration_list[0].event_type #=> String, one of "DEVICE_COMMAND", "DEVICE_COMMAND_REQUEST", "DEVICE_DISCOVERY_STATUS", "DEVICE_EVENT", "DEVICE_LIFE_CYCLE", "DEVICE_STATE", "DEVICE_OTA", "CONNECTOR_ASSOCIATION", "ACCOUNT_ASSOCIATION", "CONNECTOR_ERROR_REPORT"
+    #   resp.notification_configuration_list[0].event_type #=> String, one of "DEVICE_COMMAND", "DEVICE_COMMAND_REQUEST", "DEVICE_DISCOVERY_STATUS", "DEVICE_EVENT", "DEVICE_LIFE_CYCLE", "DEVICE_STATE", "DEVICE_OTA", "DEVICE_WSS", "CONNECTOR_ASSOCIATION", "ACCOUNT_ASSOCIATION", "CONNECTOR_ERROR_REPORT"
     #   resp.notification_configuration_list[0].destination_name #=> String
     #   resp.next_token #=> String
     #
@@ -3488,8 +3506,7 @@ module Aws::IoTManagedIntegrations
       req.send_request(options)
     end
 
-    # Set the runtime log configuration for a specific managed thing or for
-    # all managed things as a group.
+    # Set the runtime log configuration for a specific managed thing.
     #
     # @option params [required, String] :managed_thing_id
     #   The id for a managed thing.
@@ -3902,6 +3919,23 @@ module Aws::IoTManagedIntegrations
     #   A set of key/value pairs that are used to manage the device discovery
     #   request.
     #
+    # @option params [String] :protocol
+    #   The protocol type for capability rediscovery (ZWAVE, ZIGBEE, or
+    #   CUSTOM).
+    #
+    #   <note markdown="1"> This parameter is only available when the discovery type is
+    #   CONTROLLER\_CAPABILITY\_REDISCOVERY.
+    #
+    #    </note>
+    #
+    # @option params [String] :end_device_identifier
+    #   The unique id of the end device for capability rediscovery.
+    #
+    #   <note markdown="1"> This parameter is only available when the discovery type is
+    #   CONTROLLER\_CAPABILITY\_REDISCOVERY.
+    #
+    #    </note>
+    #
     # @return [Types::StartDeviceDiscoveryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartDeviceDiscoveryResponse#id #id} => String
@@ -3910,7 +3944,7 @@ module Aws::IoTManagedIntegrations
     # @example Request syntax with placeholder values
     #
     #   resp = client.start_device_discovery({
-    #     discovery_type: "ZWAVE", # required, accepts ZWAVE, ZIGBEE, CLOUD, CUSTOM
+    #     discovery_type: "ZWAVE", # required, accepts ZWAVE, ZIGBEE, CLOUD, CUSTOM, CONTROLLER_CAPABILITY_REDISCOVERY
     #     custom_protocol_detail: {
     #       "CustomProtocolDetailKey" => "CustomProtocolDetailValue",
     #     },
@@ -3923,6 +3957,8 @@ module Aws::IoTManagedIntegrations
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
+    #     protocol: "ZWAVE", # accepts ZWAVE, ZIGBEE, CUSTOM
+    #     end_device_identifier: "ManagedThingId",
     #   })
     #
     # @example Response structure
@@ -4187,6 +4223,10 @@ module Aws::IoTManagedIntegrations
     # @option params [String] :serial_number
     #   The serial number of the device.
     #
+    # @option params [Types::WiFiSimpleSetupConfiguration] :wi_fi_simple_setup_configuration
+    #   The Wi-Fi Simple Setup configuration for the managed thing, which
+    #   defines provisioning capabilities and timeout settings.
+    #
     # @option params [String] :brand
     #   The brand of the device.
     #
@@ -4225,6 +4265,11 @@ module Aws::IoTManagedIntegrations
     #     owner: "Owner",
     #     credential_locker_id: "CredentialLockerId",
     #     serial_number: "SerialNumber",
+    #     wi_fi_simple_setup_configuration: {
+    #       enable_as_provisioner: false,
+    #       enable_as_provisionee: false,
+    #       timeout_in_minutes: 1,
+    #     },
     #     brand: "Brand",
     #     model: "Model",
     #     name: "Name",
@@ -4287,7 +4332,7 @@ module Aws::IoTManagedIntegrations
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_notification_configuration({
-    #     event_type: "DEVICE_COMMAND", # required, accepts DEVICE_COMMAND, DEVICE_COMMAND_REQUEST, DEVICE_DISCOVERY_STATUS, DEVICE_EVENT, DEVICE_LIFE_CYCLE, DEVICE_STATE, DEVICE_OTA, CONNECTOR_ASSOCIATION, ACCOUNT_ASSOCIATION, CONNECTOR_ERROR_REPORT
+    #     event_type: "DEVICE_COMMAND", # required, accepts DEVICE_COMMAND, DEVICE_COMMAND_REQUEST, DEVICE_DISCOVERY_STATUS, DEVICE_EVENT, DEVICE_LIFE_CYCLE, DEVICE_STATE, DEVICE_OTA, DEVICE_WSS, CONNECTOR_ASSOCIATION, ACCOUNT_ASSOCIATION, CONNECTOR_ERROR_REPORT
     #     destination_name: "DestinationName", # required
     #   })
     #
@@ -4344,7 +4389,7 @@ module Aws::IoTManagedIntegrations
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-iotmanagedintegrations'
-      context[:gem_version] = '1.15.0'
+      context[:gem_version] = '1.16.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,39 +1,8 @@
 {
   "version" : 2,
   "testCases" : [ {
-    "id" : "ListManagedThingAccountAssociationsSuccess",
-    "operationName" : "ListManagedThingAccountAssociations",
-    "input" : {
-      "ManagedThingId" : "sample-thing-id"
-    },
-    "expectation" : {
-      "success" : { }
-    },
-    "config" : {
-      "region" : "us-east-1",
-      "useFips" : false,
-      "useDualstack" : false,
-      "useAccountIdRouting" : true
-    }
-  }, {
-    "id" : "ListManagedAccountAssociationsWithPagination",
-    "operationName" : "ListManagedThingAccountAssociations",
-    "input" : {
-      "ManagedThingId" : "sample-thing-id",
-      "MaxResults" : 5
-    },
-    "expectation" : {
-      "success" : { }
-    },
-    "config" : {
-      "region" : "us-east-1",
-      "useFips" : false,
-      "useDualstack" : false,
-      "useAccountIdRouting" : true
-    }
-  }, {
-    "id" : "GetDeviceDiscoveryNotFound",
-    "operationName" : "GetDeviceDiscovery",
+    "id" : "GetManagedThingCapabilitiesNotFound",
+    "operationName" : "GetManagedThingCapabilities",
     "input" : {
       "Identifier" : "nonExistentId"
     },
@@ -49,10 +18,10 @@
       "useAccountIdRouting" : true
     }
   }, {
-    "id" : "GetManagedThingCertificateNotFound",
-    "operationName" : "GetManagedThingCertificate",
+    "id" : "GetConnectorDestinationNotFound",
+    "operationName" : "GetConnectorDestination",
     "input" : {
-      "Identifier" : "nonExistentId"
+      "Identifier" : "nonExistentDestination"
     },
     "expectation" : {
       "failure" : {
@@ -66,42 +35,8 @@
       "useAccountIdRouting" : true
     }
   }, {
-    "id" : "GetManagedThingConnectivityDataNotFound",
-    "operationName" : "GetManagedThingConnectivityData",
-    "input" : {
-      "Identifier" : "nonExistentId"
-    },
-    "expectation" : {
-      "failure" : {
-        "errorId" : "ResourceNotFoundException"
-      }
-    },
-    "config" : {
-      "region" : "us-east-1",
-      "useFips" : false,
-      "useDualstack" : false,
-      "useAccountIdRouting" : true
-    }
-  }, {
-    "id" : "GetRuntimeLogConfigurationNotFound",
-    "operationName" : "GetRuntimeLogConfiguration",
-    "input" : {
-      "ManagedThingId" : "nonExistentId"
-    },
-    "expectation" : {
-      "failure" : {
-        "errorId" : "ResourceNotFoundException"
-      }
-    },
-    "config" : {
-      "region" : "us-east-1",
-      "useFips" : false,
-      "useDualstack" : false,
-      "useAccountIdRouting" : true
-    }
-  }, {
-    "id" : "ListNotificationConfigurationsSuccess",
-    "operationName" : "ListNotificationConfigurations",
+    "id" : "ListProvisioningProfilesSuccess",
+    "operationName" : "ListProvisioningProfiles",
     "input" : { },
     "expectation" : {
       "success" : { }
@@ -113,8 +48,8 @@
       "useAccountIdRouting" : true
     }
   }, {
-    "id" : "ListNotificationConfigurationsWithPagination",
-    "operationName" : "ListNotificationConfigurations",
+    "id" : "ListProvisioningProfilesWithPagination",
+    "operationName" : "ListProvisioningProfiles",
     "input" : {
       "MaxResults" : 5
     },
@@ -128,11 +63,22 @@
       "useAccountIdRouting" : true
     }
   }, {
-    "id" : "GetCredentialLockerNotFound",
-    "operationName" : "GetCredentialLocker",
-    "input" : {
-      "Identifier" : "nonExistentId"
+    "id" : "GetDefaultEncryptionConfigurationSuccess",
+    "operationName" : "GetDefaultEncryptionConfiguration",
+    "input" : { },
+    "expectation" : {
+      "success" : { }
     },
+    "config" : {
+      "region" : "us-east-1",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "GetDefaultEncryptionConfigurationNotFound",
+    "operationName" : "GetDefaultEncryptionConfiguration",
+    "input" : { },
     "expectation" : {
       "failure" : {
         "errorId" : "ResourceNotFoundException"
@@ -173,11 +119,15 @@
       "useAccountIdRouting" : true
     }
   }, {
-    "id" : "GetCustomEndpointSuccess",
-    "operationName" : "GetCustomEndpoint",
-    "input" : { },
+    "id" : "GetOtaTaskNotFound",
+    "operationName" : "GetOtaTask",
+    "input" : {
+      "Identifier" : "nonExistentTaskId"
+    },
     "expectation" : {
-      "success" : { }
+      "failure" : {
+        "errorId" : "ResourceNotFoundException"
+      }
     },
     "config" : {
       "region" : "us-east-1",
@@ -186,106 +136,10 @@
       "useAccountIdRouting" : true
     }
   }, {
-    "id" : "ListDiscoveredDevicesNotFound",
-    "operationName" : "ListDiscoveredDevices",
+    "id" : "GetCredentialLockerNotFound",
+    "operationName" : "GetCredentialLocker",
     "input" : {
       "Identifier" : "nonExistentId"
-    },
-    "expectation" : {
-      "failure" : {
-        "errorId" : "ResourceNotFoundException"
-      }
-    },
-    "config" : {
-      "region" : "us-east-1",
-      "useFips" : false,
-      "useDualstack" : false,
-      "useAccountIdRouting" : true
-    }
-  }, {
-    "id" : "ListDiscoveredDevicesWithPagination",
-    "operationName" : "ListDiscoveredDevices",
-    "input" : {
-      "Identifier" : "testDiscoveryId",
-      "MaxResults" : 5
-    },
-    "expectation" : {
-      "failure" : {
-        "errorId" : "ResourceNotFoundException"
-      }
-    },
-    "config" : {
-      "region" : "us-east-1",
-      "useFips" : false,
-      "useDualstack" : false,
-      "useAccountIdRouting" : true
-    }
-  }, {
-    "id" : "GetDefaultEncryptionConfigurationSuccess",
-    "operationName" : "GetDefaultEncryptionConfiguration",
-    "input" : { },
-    "expectation" : {
-      "success" : { }
-    },
-    "config" : {
-      "region" : "us-east-1",
-      "useFips" : false,
-      "useDualstack" : false,
-      "useAccountIdRouting" : true
-    }
-  }, {
-    "id" : "GetDefaultEncryptionConfigurationNotFound",
-    "operationName" : "GetDefaultEncryptionConfiguration",
-    "input" : { },
-    "expectation" : {
-      "failure" : {
-        "errorId" : "ResourceNotFoundException"
-      }
-    },
-    "config" : {
-      "region" : "us-east-1",
-      "useFips" : false,
-      "useDualstack" : false,
-      "useAccountIdRouting" : true
-    }
-  }, {
-    "id" : "ListSchemaVersionsSuccess",
-    "operationName" : "ListSchemaVersions",
-    "input" : {
-      "Type" : "capability"
-    },
-    "expectation" : {
-      "success" : { }
-    },
-    "config" : {
-      "region" : "us-east-1",
-      "useFips" : false,
-      "useDualstack" : false,
-      "useAccountIdRouting" : true
-    }
-  }, {
-    "id" : "ListManagedThingSchemasNotFound",
-    "operationName" : "ListManagedThingSchemas",
-    "input" : {
-      "Identifier" : "nonExistentId"
-    },
-    "expectation" : {
-      "failure" : {
-        "errorId" : "ResourceNotFoundException"
-      }
-    },
-    "config" : {
-      "region" : "us-east-1",
-      "useFips" : false,
-      "useDualstack" : false,
-      "useAccountIdRouting" : true
-    }
-  }, {
-    "id" : "ListManagedThingSchemasWithPagination",
-    "operationName" : "ListManagedThingSchemas",
-    "input" : {
-      "Identifier" : "testId",
-      "MaxResults" : 5
     },
     "expectation" : {
       "failure" : {
@@ -316,6 +170,72 @@
       "useAccountIdRouting" : true
     }
   }, {
+    "id" : "ListTagsForResourceNotFound",
+    "operationName" : "ListTagsForResource",
+    "input" : {
+      "ResourceArn" : "arn:aws:iotmanagedintegrations:us-east-1:123456789012:managed-thing/nonexistent"
+    },
+    "expectation" : {
+      "failure" : {
+        "errorId" : "ResourceNotFoundException"
+      }
+    },
+    "config" : {
+      "region" : "us-east-1",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "ListTagsForResourceSuccess",
+    "operationName" : "ListTagsForResource",
+    "input" : {
+      "ResourceArn" : "arn:aws:iotmanagedintegrations:us-east-1:123456789012:managed-thing/test123"
+    },
+    "expectation" : {
+      "success" : { }
+    },
+    "config" : {
+      "region" : "us-east-1",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "GetRuntimeLogConfigurationNotFound",
+    "operationName" : "GetRuntimeLogConfiguration",
+    "input" : {
+      "ManagedThingId" : "nonExistentId"
+    },
+    "expectation" : {
+      "failure" : {
+        "errorId" : "ResourceNotFoundException"
+      }
+    },
+    "config" : {
+      "region" : "us-east-1",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "GetManagedThingConnectivityDataNotFound",
+    "operationName" : "GetManagedThingConnectivityData",
+    "input" : {
+      "Identifier" : "nonExistentId"
+    },
+    "expectation" : {
+      "failure" : {
+        "errorId" : "ResourceNotFoundException"
+      }
+    },
+    "config" : {
+      "region" : "us-east-1",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
     "id" : "GetNotificationConfigurationNotFound",
     "operationName" : "GetNotificationConfiguration",
     "input" : {
@@ -333,23 +253,10 @@
       "useAccountIdRouting" : true
     }
   }, {
-    "id" : "ListConnectorDestinationsSuccess",
-    "operationName" : "ListConnectorDestinations",
-    "input" : { },
-    "expectation" : {
-      "success" : { }
-    },
-    "config" : {
-      "region" : "us-east-1",
-      "useFips" : false,
-      "useDualstack" : false,
-      "useAccountIdRouting" : true
-    }
-  }, {
-    "id" : "ListConnectorDestinationsWithPagination",
-    "operationName" : "ListConnectorDestinations",
+    "id" : "ListManagedThingAccountAssociationsSuccess",
+    "operationName" : "ListManagedThingAccountAssociations",
     "input" : {
-      "MaxResults" : 5
+      "ManagedThingId" : "sample-thing-id"
     },
     "expectation" : {
       "success" : { }
@@ -361,101 +268,10 @@
       "useAccountIdRouting" : true
     }
   }, {
-    "id" : "GetConnectorDestinationNotFound",
-    "operationName" : "GetConnectorDestination",
+    "id" : "ListManagedAccountAssociationsWithPagination",
+    "operationName" : "ListManagedThingAccountAssociations",
     "input" : {
-      "Identifier" : "nonExistentDestination"
-    },
-    "expectation" : {
-      "failure" : {
-        "errorId" : "ResourceNotFoundException"
-      }
-    },
-    "config" : {
-      "region" : "us-east-1",
-      "useFips" : false,
-      "useDualstack" : false,
-      "useAccountIdRouting" : true
-    }
-  }, {
-    "id" : "GetManagedThingStateNotFound",
-    "operationName" : "GetManagedThingState",
-    "input" : {
-      "ManagedThingId" : "nonExistentId"
-    },
-    "expectation" : {
-      "failure" : {
-        "errorId" : "ResourceNotFoundException"
-      }
-    },
-    "config" : {
-      "region" : "us-east-1",
-      "useFips" : false,
-      "useDualstack" : false,
-      "useAccountIdRouting" : true
-    }
-  }, {
-    "id" : "GetManagedThingMetaDataNotFound",
-    "operationName" : "GetManagedThingMetaData",
-    "input" : {
-      "Identifier" : "nonExistentId"
-    },
-    "expectation" : {
-      "failure" : {
-        "errorId" : "ResourceNotFoundException"
-      }
-    },
-    "config" : {
-      "region" : "us-east-1",
-      "useFips" : false,
-      "useDualstack" : false,
-      "useAccountIdRouting" : true
-    }
-  }, {
-    "id" : "ListCredentialLockersSuccess",
-    "operationName" : "ListCredentialLockers",
-    "input" : { },
-    "expectation" : {
-      "success" : { }
-    },
-    "config" : {
-      "region" : "us-east-1",
-      "useFips" : false,
-      "useDualstack" : false,
-      "useAccountIdRouting" : true
-    }
-  }, {
-    "id" : "ListCredentialLockersWithPagination",
-    "operationName" : "ListCredentialLockers",
-    "input" : {
-      "MaxResults" : 5
-    },
-    "expectation" : {
-      "success" : { }
-    },
-    "config" : {
-      "region" : "us-east-1",
-      "useFips" : false,
-      "useDualstack" : false,
-      "useAccountIdRouting" : true
-    }
-  }, {
-    "id" : "ListManagedThingsSuccess",
-    "operationName" : "ListManagedThings",
-    "input" : { },
-    "expectation" : {
-      "success" : { }
-    },
-    "config" : {
-      "region" : "us-east-1",
-      "useFips" : false,
-      "useDualstack" : false,
-      "useAccountIdRouting" : true
-    }
-  }, {
-    "id" : "ListManagedThingsWithPagination",
-    "operationName" : "ListManagedThings",
-    "input" : {
+      "ManagedThingId" : "sample-thing-id",
       "MaxResults" : 5
     },
     "expectation" : {
@@ -502,25 +318,8 @@
       "useAccountIdRouting" : true
     }
   }, {
-    "id" : "GetEventLogConfigurationNotFound",
-    "operationName" : "GetEventLogConfiguration",
-    "input" : {
-      "Id" : "nonExistentId"
-    },
-    "expectation" : {
-      "failure" : {
-        "errorId" : "ResourceNotFoundException"
-      }
-    },
-    "config" : {
-      "region" : "us-east-1",
-      "useFips" : false,
-      "useDualstack" : false,
-      "useAccountIdRouting" : true
-    }
-  }, {
-    "id" : "ListOtaTasksSuccess",
-    "operationName" : "ListOtaTasks",
+    "id" : "ListManagedThingsSuccess",
+    "operationName" : "ListManagedThings",
     "input" : { },
     "expectation" : {
       "success" : { }
@@ -532,8 +331,8 @@
       "useAccountIdRouting" : true
     }
   }, {
-    "id" : "ListOtaTasksWithPagination",
-    "operationName" : "ListOtaTasks",
+    "id" : "ListManagedThingsWithPagination",
+    "operationName" : "ListManagedThings",
     "input" : {
       "MaxResults" : 5
     },
@@ -547,8 +346,8 @@
       "useAccountIdRouting" : true
     }
   }, {
-    "id" : "ListOtaTaskConfigurationsSuccess",
-    "operationName" : "ListOtaTaskConfigurations",
+    "id" : "ListCredentialLockersSuccess",
+    "operationName" : "ListCredentialLockers",
     "input" : { },
     "expectation" : {
       "success" : { }
@@ -560,8 +359,36 @@
       "useAccountIdRouting" : true
     }
   }, {
-    "id" : "ListOtaTaskConfigurationsWithPagination",
-    "operationName" : "ListOtaTaskConfigurations",
+    "id" : "ListCredentialLockersWithPagination",
+    "operationName" : "ListCredentialLockers",
+    "input" : {
+      "MaxResults" : 5
+    },
+    "expectation" : {
+      "success" : { }
+    },
+    "config" : {
+      "region" : "us-east-1",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "ListDestinationsSuccess",
+    "operationName" : "ListDestinations",
+    "input" : { },
+    "expectation" : {
+      "success" : { }
+    },
+    "config" : {
+      "region" : "us-east-1",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "ListDestinationsWithPagination",
+    "operationName" : "ListDestinations",
     "input" : {
       "MaxResults" : 5
     },
@@ -620,6 +447,23 @@
       "useAccountIdRouting" : true
     }
   }, {
+    "id" : "GetDeviceDiscoveryNotFound",
+    "operationName" : "GetDeviceDiscovery",
+    "input" : {
+      "Identifier" : "nonExistentId"
+    },
+    "expectation" : {
+      "failure" : {
+        "errorId" : "ResourceNotFoundException"
+      }
+    },
+    "config" : {
+      "region" : "us-east-1",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
     "id" : "GetManagedThingNotFound",
     "operationName" : "GetManagedThing",
     "input" : {
@@ -637,16 +481,11 @@
       "useAccountIdRouting" : true
     }
   }, {
-    "id" : "GetSchemaVersionNotFound",
-    "operationName" : "GetSchemaVersion",
-    "input" : {
-      "Type" : "capability",
-      "SchemaVersionedId" : "non.existent.schema@1.0"
-    },
+    "id" : "ListOtaTaskConfigurationsSuccess",
+    "operationName" : "ListOtaTaskConfigurations",
+    "input" : { },
     "expectation" : {
-      "failure" : {
-        "errorId" : "ResourceNotFoundException"
-      }
+      "success" : { }
     },
     "config" : {
       "region" : "us-east-1",
@@ -655,15 +494,13 @@
       "useAccountIdRouting" : true
     }
   }, {
-    "id" : "ListTagsForResourceNotFound",
-    "operationName" : "ListTagsForResource",
+    "id" : "ListOtaTaskConfigurationsWithPagination",
+    "operationName" : "ListOtaTaskConfigurations",
     "input" : {
-      "ResourceArn" : "arn:aws:iotmanagedintegrations:us-east-1:123456789012:managed-thing/nonexistent"
+      "MaxResults" : 5
     },
     "expectation" : {
-      "failure" : {
-        "errorId" : "ResourceNotFoundException"
-      }
+      "success" : { }
     },
     "config" : {
       "region" : "us-east-1",
@@ -672,10 +509,10 @@
       "useAccountIdRouting" : true
     }
   }, {
-    "id" : "ListTagsForResourceSuccess",
-    "operationName" : "ListTagsForResource",
+    "id" : "ListSchemaVersionsSuccess",
+    "operationName" : "ListSchemaVersions",
     "input" : {
-      "ResourceArn" : "arn:aws:iotmanagedintegrations:us-east-1:123456789012:managed-thing/test123"
+      "Type" : "capability"
     },
     "expectation" : {
       "success" : { }
@@ -717,55 +554,10 @@
       "useAccountIdRouting" : true
     }
   }, {
-    "id" : "ListDestinationsSuccess",
-    "operationName" : "ListDestinations",
-    "input" : { },
-    "expectation" : {
-      "success" : { }
-    },
-    "config" : {
-      "region" : "us-east-1",
-      "useFips" : false,
-      "useDualstack" : false,
-      "useAccountIdRouting" : true
-    }
-  }, {
-    "id" : "ListDestinationsWithPagination",
-    "operationName" : "ListDestinations",
-    "input" : {
-      "MaxResults" : 5
-    },
-    "expectation" : {
-      "success" : { }
-    },
-    "config" : {
-      "region" : "us-east-1",
-      "useFips" : false,
-      "useDualstack" : false,
-      "useAccountIdRouting" : true
-    }
-  }, {
-    "id" : "GetOtaTaskNotFound",
-    "operationName" : "GetOtaTask",
+    "id" : "ListOtaTaskExecutionsNotFound",
+    "operationName" : "ListOtaTaskExecutions",
     "input" : {
       "Identifier" : "nonExistentTaskId"
-    },
-    "expectation" : {
-      "failure" : {
-        "errorId" : "ResourceNotFoundException"
-      }
-    },
-    "config" : {
-      "region" : "us-east-1",
-      "useFips" : false,
-      "useDualstack" : false,
-      "useAccountIdRouting" : true
-    }
-  }, {
-    "id" : "GetManagedThingCapabilitiesNotFound",
-    "operationName" : "GetManagedThingCapabilities",
-    "input" : {
-      "Identifier" : "nonExistentId"
     },
     "expectation" : {
       "failure" : {
@@ -807,10 +599,10 @@
       "useAccountIdRouting" : true
     }
   }, {
-    "id" : "ListOtaTaskExecutionsNotFound",
-    "operationName" : "ListOtaTaskExecutions",
+    "id" : "GetManagedThingMetaDataNotFound",
+    "operationName" : "GetManagedThingMetaData",
     "input" : {
-      "Identifier" : "nonExistentTaskId"
+      "Identifier" : "nonExistentId"
     },
     "expectation" : {
       "failure" : {
@@ -824,10 +616,10 @@
       "useAccountIdRouting" : true
     }
   }, {
-    "id" : "GetOtaTaskConfigurationNotFound",
-    "operationName" : "GetOtaTaskConfiguration",
+    "id" : "GetManagedThingCertificateNotFound",
+    "operationName" : "GetManagedThingCertificate",
     "input" : {
-      "Identifier" : "nonExistentConfigId"
+      "Identifier" : "nonExistentId"
     },
     "expectation" : {
       "failure" : {
@@ -858,8 +650,25 @@
       "useAccountIdRouting" : true
     }
   }, {
-    "id" : "ListProvisioningProfilesSuccess",
-    "operationName" : "ListProvisioningProfiles",
+    "id" : "GetOtaTaskConfigurationNotFound",
+    "operationName" : "GetOtaTaskConfiguration",
+    "input" : {
+      "Identifier" : "nonExistentConfigId"
+    },
+    "expectation" : {
+      "failure" : {
+        "errorId" : "ResourceNotFoundException"
+      }
+    },
+    "config" : {
+      "region" : "us-east-1",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "ListOtaTasksSuccess",
+    "operationName" : "ListOtaTasks",
     "input" : { },
     "expectation" : {
       "success" : { }
@@ -871,13 +680,204 @@
       "useAccountIdRouting" : true
     }
   }, {
-    "id" : "ListProvisioningProfilesWithPagination",
-    "operationName" : "ListProvisioningProfiles",
+    "id" : "ListOtaTasksWithPagination",
+    "operationName" : "ListOtaTasks",
     "input" : {
       "MaxResults" : 5
     },
     "expectation" : {
       "success" : { }
+    },
+    "config" : {
+      "region" : "us-east-1",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "GetManagedThingStateNotFound",
+    "operationName" : "GetManagedThingState",
+    "input" : {
+      "ManagedThingId" : "nonExistentId"
+    },
+    "expectation" : {
+      "failure" : {
+        "errorId" : "ResourceNotFoundException"
+      }
+    },
+    "config" : {
+      "region" : "us-east-1",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "GetEventLogConfigurationNotFound",
+    "operationName" : "GetEventLogConfiguration",
+    "input" : {
+      "Id" : "nonExistentId"
+    },
+    "expectation" : {
+      "failure" : {
+        "errorId" : "ResourceNotFoundException"
+      }
+    },
+    "config" : {
+      "region" : "us-east-1",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "ListConnectorDestinationsSuccess",
+    "operationName" : "ListConnectorDestinations",
+    "input" : { },
+    "expectation" : {
+      "success" : { }
+    },
+    "config" : {
+      "region" : "us-east-1",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "ListConnectorDestinationsWithPagination",
+    "operationName" : "ListConnectorDestinations",
+    "input" : {
+      "MaxResults" : 5
+    },
+    "expectation" : {
+      "success" : { }
+    },
+    "config" : {
+      "region" : "us-east-1",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "GetCustomEndpointSuccess",
+    "operationName" : "GetCustomEndpoint",
+    "input" : { },
+    "expectation" : {
+      "success" : { }
+    },
+    "config" : {
+      "region" : "us-east-1",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "ListNotificationConfigurationsSuccess",
+    "operationName" : "ListNotificationConfigurations",
+    "input" : { },
+    "expectation" : {
+      "success" : { }
+    },
+    "config" : {
+      "region" : "us-east-1",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "ListNotificationConfigurationsWithPagination",
+    "operationName" : "ListNotificationConfigurations",
+    "input" : {
+      "MaxResults" : 5
+    },
+    "expectation" : {
+      "success" : { }
+    },
+    "config" : {
+      "region" : "us-east-1",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "ListManagedThingSchemasNotFound",
+    "operationName" : "ListManagedThingSchemas",
+    "input" : {
+      "Identifier" : "nonExistentId"
+    },
+    "expectation" : {
+      "failure" : {
+        "errorId" : "ResourceNotFoundException"
+      }
+    },
+    "config" : {
+      "region" : "us-east-1",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "ListManagedThingSchemasWithPagination",
+    "operationName" : "ListManagedThingSchemas",
+    "input" : {
+      "Identifier" : "testId",
+      "MaxResults" : 5
+    },
+    "expectation" : {
+      "failure" : {
+        "errorId" : "ResourceNotFoundException"
+      }
+    },
+    "config" : {
+      "region" : "us-east-1",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "GetSchemaVersionNotFound",
+    "operationName" : "GetSchemaVersion",
+    "input" : {
+      "Type" : "capability",
+      "SchemaVersionedId" : "non.existent.schema@1.0"
+    },
+    "expectation" : {
+      "failure" : {
+        "errorId" : "ResourceNotFoundException"
+      }
+    },
+    "config" : {
+      "region" : "us-east-1",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "ListDiscoveredDevicesNotFound",
+    "operationName" : "ListDiscoveredDevices",
+    "input" : {
+      "Identifier" : "nonExistentId"
+    },
+    "expectation" : {
+      "failure" : {
+        "errorId" : "ResourceNotFoundException"
+      }
+    },
+    "config" : {
+      "region" : "us-east-1",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "ListDiscoveredDevicesWithPagination",
+    "operationName" : "ListDiscoveredDevices",
+    "input" : {
+      "Identifier" : "testDiscoveryId",
+      "MaxResults" : 5
+    },
+    "expectation" : {
+      "failure" : {
+        "errorId" : "ResourceNotFoundException"
+      }
     },
     "config" : {
       "region" : "us-east-1",

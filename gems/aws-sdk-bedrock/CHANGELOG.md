@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.73.0 (2026-01-13)
+------------------
+
+* Feature - This change will increase TestCase guardContent input size from 1024 to 2028 characters and PolicyBuildDocumentDescription from 2000 to 4000 characters
+
 1.72.0 (2026-01-08)
 ------------------
 

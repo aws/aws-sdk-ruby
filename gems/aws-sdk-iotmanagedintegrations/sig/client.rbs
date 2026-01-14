@@ -200,6 +200,11 @@ module Aws
                                   ?credential_locker_id: ::String,
                                   authentication_material: ::String,
                                   authentication_material_type: ("CUSTOM_PROTOCOL_QR_BAR_CODE" | "WIFI_SETUP_QR_BAR_CODE" | "ZWAVE_QR_BAR_CODE" | "ZIGBEE_QR_BAR_CODE" | "DISCOVERED_DEVICE"),
+                                  ?wi_fi_simple_setup_configuration: {
+                                    enable_as_provisioner: bool?,
+                                    enable_as_provisionee: bool?,
+                                    timeout_in_minutes: ::Integer?
+                                  },
                                   ?serial_number: ::String,
                                   ?brand: ::String,
                                   ?model: ::String,
@@ -244,11 +249,11 @@ module Aws
 
       interface _CreateNotificationConfigurationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateNotificationConfigurationResponse]
-        def event_type: () -> ("DEVICE_COMMAND" | "DEVICE_COMMAND_REQUEST" | "DEVICE_DISCOVERY_STATUS" | "DEVICE_EVENT" | "DEVICE_LIFE_CYCLE" | "DEVICE_STATE" | "DEVICE_OTA" | "CONNECTOR_ASSOCIATION" | "ACCOUNT_ASSOCIATION" | "CONNECTOR_ERROR_REPORT")
+        def event_type: () -> ("DEVICE_COMMAND" | "DEVICE_COMMAND_REQUEST" | "DEVICE_DISCOVERY_STATUS" | "DEVICE_EVENT" | "DEVICE_LIFE_CYCLE" | "DEVICE_STATE" | "DEVICE_OTA" | "DEVICE_WSS" | "CONNECTOR_ASSOCIATION" | "ACCOUNT_ASSOCIATION" | "CONNECTOR_ERROR_REPORT")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTManagedIntegrations/Client.html#create_notification_configuration-instance_method
       def create_notification_configuration: (
-                                               event_type: ("DEVICE_COMMAND" | "DEVICE_COMMAND_REQUEST" | "DEVICE_DISCOVERY_STATUS" | "DEVICE_EVENT" | "DEVICE_LIFE_CYCLE" | "DEVICE_STATE" | "DEVICE_OTA" | "CONNECTOR_ASSOCIATION" | "ACCOUNT_ASSOCIATION" | "CONNECTOR_ERROR_REPORT"),
+                                               event_type: ("DEVICE_COMMAND" | "DEVICE_COMMAND_REQUEST" | "DEVICE_DISCOVERY_STATUS" | "DEVICE_EVENT" | "DEVICE_LIFE_CYCLE" | "DEVICE_STATE" | "DEVICE_OTA" | "DEVICE_WSS" | "CONNECTOR_ASSOCIATION" | "ACCOUNT_ASSOCIATION" | "CONNECTOR_ERROR_REPORT"),
                                                destination_name: ::String,
                                                ?client_token: ::String,
                                                ?tags: Hash[::String, ::String]
@@ -397,7 +402,7 @@ module Aws
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTManagedIntegrations/Client.html#delete_notification_configuration-instance_method
       def delete_notification_configuration: (
-                                               event_type: ("DEVICE_COMMAND" | "DEVICE_COMMAND_REQUEST" | "DEVICE_DISCOVERY_STATUS" | "DEVICE_EVENT" | "DEVICE_LIFE_CYCLE" | "DEVICE_STATE" | "DEVICE_OTA" | "CONNECTOR_ASSOCIATION" | "ACCOUNT_ASSOCIATION" | "CONNECTOR_ERROR_REPORT")
+                                               event_type: ("DEVICE_COMMAND" | "DEVICE_COMMAND_REQUEST" | "DEVICE_DISCOVERY_STATUS" | "DEVICE_EVENT" | "DEVICE_LIFE_CYCLE" | "DEVICE_STATE" | "DEVICE_OTA" | "DEVICE_WSS" | "CONNECTOR_ASSOCIATION" | "ACCOUNT_ASSOCIATION" | "CONNECTOR_ERROR_REPORT")
                                              ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 
@@ -531,7 +536,7 @@ module Aws
         include ::Seahorse::Client::_ResponseSuccess[Types::GetDeviceDiscoveryResponse]
         def id: () -> ::String
         def arn: () -> ::String
-        def discovery_type: () -> ("ZWAVE" | "ZIGBEE" | "CLOUD" | "CUSTOM")
+        def discovery_type: () -> ("ZWAVE" | "ZIGBEE" | "CLOUD" | "CUSTOM" | "CONTROLLER_CAPABILITY_REDISCOVERY")
         def status: () -> ("RUNNING" | "SUCCEEDED" | "FAILED" | "TIMED_OUT")
         def started_at: () -> ::Time
         def controller_id: () -> ::String
@@ -597,6 +602,7 @@ module Aws
         def hub_network_mode: () -> ("STANDARD" | "NETWORK_WIDE_EXCLUSION")
         def meta_data: () -> ::Hash[::String, ::String]
         def tags: () -> ::Hash[::String, ::String]
+        def wi_fi_simple_setup_configuration: () -> Types::WiFiSimpleSetupConfiguration
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTManagedIntegrations/Client.html#get_managed_thing-instance_method
       def get_managed_thing: (
@@ -663,7 +669,7 @@ module Aws
 
       interface _GetNotificationConfigurationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetNotificationConfigurationResponse]
-        def event_type: () -> ("DEVICE_COMMAND" | "DEVICE_COMMAND_REQUEST" | "DEVICE_DISCOVERY_STATUS" | "DEVICE_EVENT" | "DEVICE_LIFE_CYCLE" | "DEVICE_STATE" | "DEVICE_OTA" | "CONNECTOR_ASSOCIATION" | "ACCOUNT_ASSOCIATION" | "CONNECTOR_ERROR_REPORT")
+        def event_type: () -> ("DEVICE_COMMAND" | "DEVICE_COMMAND_REQUEST" | "DEVICE_DISCOVERY_STATUS" | "DEVICE_EVENT" | "DEVICE_LIFE_CYCLE" | "DEVICE_STATE" | "DEVICE_OTA" | "DEVICE_WSS" | "CONNECTOR_ASSOCIATION" | "ACCOUNT_ASSOCIATION" | "CONNECTOR_ERROR_REPORT")
         def destination_name: () -> ::String
         def created_at: () -> ::Time
         def updated_at: () -> ::Time
@@ -671,7 +677,7 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTManagedIntegrations/Client.html#get_notification_configuration-instance_method
       def get_notification_configuration: (
-                                            event_type: ("DEVICE_COMMAND" | "DEVICE_COMMAND_REQUEST" | "DEVICE_DISCOVERY_STATUS" | "DEVICE_EVENT" | "DEVICE_LIFE_CYCLE" | "DEVICE_STATE" | "DEVICE_OTA" | "CONNECTOR_ASSOCIATION" | "ACCOUNT_ASSOCIATION" | "CONNECTOR_ERROR_REPORT")
+                                            event_type: ("DEVICE_COMMAND" | "DEVICE_COMMAND_REQUEST" | "DEVICE_DISCOVERY_STATUS" | "DEVICE_EVENT" | "DEVICE_LIFE_CYCLE" | "DEVICE_STATE" | "DEVICE_OTA" | "DEVICE_WSS" | "CONNECTOR_ASSOCIATION" | "ACCOUNT_ASSOCIATION" | "CONNECTOR_ERROR_REPORT")
                                           ) -> _GetNotificationConfigurationResponseSuccess
                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetNotificationConfigurationResponseSuccess
 
@@ -832,7 +838,7 @@ module Aws
       def list_device_discoveries: (
                                      ?next_token: ::String,
                                      ?max_results: ::Integer,
-                                     ?type_filter: ("ZWAVE" | "ZIGBEE" | "CLOUD" | "CUSTOM"),
+                                     ?type_filter: ("ZWAVE" | "ZIGBEE" | "CLOUD" | "CUSTOM" | "CONTROLLER_CAPABILITY_REDISCOVERY"),
                                      ?status_filter: ("RUNNING" | "SUCCEEDED" | "FAILED" | "TIMED_OUT")
                                    ) -> _ListDeviceDiscoveriesResponseSuccess
                                  | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDeviceDiscoveriesResponseSuccess
@@ -1203,7 +1209,7 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTManagedIntegrations/Client.html#start_device_discovery-instance_method
       def start_device_discovery: (
-                                    discovery_type: ("ZWAVE" | "ZIGBEE" | "CLOUD" | "CUSTOM"),
+                                    discovery_type: ("ZWAVE" | "ZIGBEE" | "CLOUD" | "CUSTOM" | "CONTROLLER_CAPABILITY_REDISCOVERY"),
                                     ?custom_protocol_detail: Hash[::String, ::String],
                                     ?controller_identifier: ::String,
                                     ?connector_association_identifier: ::String,
@@ -1211,7 +1217,9 @@ module Aws
                                     ?authentication_material: ::String,
                                     ?authentication_material_type: ("ZWAVE_INSTALL_CODE"),
                                     ?client_token: ::String,
-                                    ?tags: Hash[::String, ::String]
+                                    ?tags: Hash[::String, ::String],
+                                    ?protocol: ("ZWAVE" | "ZIGBEE" | "CUSTOM"),
+                                    ?end_device_identifier: ::String
                                   ) -> _StartDeviceDiscoveryResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartDeviceDiscoveryResponseSuccess
 
@@ -1296,6 +1304,11 @@ module Aws
                                   ?owner: ::String,
                                   ?credential_locker_id: ::String,
                                   ?serial_number: ::String,
+                                  ?wi_fi_simple_setup_configuration: {
+                                    enable_as_provisioner: bool?,
+                                    enable_as_provisionee: bool?,
+                                    timeout_in_minutes: ::Integer?
+                                  },
                                   ?brand: ::String,
                                   ?model: ::String,
                                   ?name: ::String,
@@ -1338,7 +1351,7 @@ module Aws
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTManagedIntegrations/Client.html#update_notification_configuration-instance_method
       def update_notification_configuration: (
-                                               event_type: ("DEVICE_COMMAND" | "DEVICE_COMMAND_REQUEST" | "DEVICE_DISCOVERY_STATUS" | "DEVICE_EVENT" | "DEVICE_LIFE_CYCLE" | "DEVICE_STATE" | "DEVICE_OTA" | "CONNECTOR_ASSOCIATION" | "ACCOUNT_ASSOCIATION" | "CONNECTOR_ERROR_REPORT"),
+                                               event_type: ("DEVICE_COMMAND" | "DEVICE_COMMAND_REQUEST" | "DEVICE_DISCOVERY_STATUS" | "DEVICE_EVENT" | "DEVICE_LIFE_CYCLE" | "DEVICE_STATE" | "DEVICE_OTA" | "DEVICE_WSS" | "CONNECTOR_ASSOCIATION" | "ACCOUNT_ASSOCIATION" | "CONNECTOR_ERROR_REPORT"),
                                                destination_name: ::String
                                              ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]

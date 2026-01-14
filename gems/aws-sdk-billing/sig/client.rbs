@@ -109,6 +109,10 @@ module Aws
                                      key: ::String,
                                      values: Array[::String]
                                    }?,
+                                   cost_categories: {
+                                     key: ::String,
+                                     values: Array[::String]
+                                   }?,
                                    time_range: {
                                      begin_date_inclusive: ::Time?,
                                      end_date_inclusive: ::Time?
@@ -257,6 +261,10 @@ module Aws
                                      values: Array[::String]
                                    }?,
                                    tags: {
+                                     key: ::String,
+                                     values: Array[::String]
+                                   }?,
+                                   cost_categories: {
                                      key: ::String,
                                      values: Array[::String]
                                    }?,

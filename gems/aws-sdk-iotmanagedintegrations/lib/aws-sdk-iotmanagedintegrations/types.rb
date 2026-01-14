@@ -774,6 +774,11 @@ module Aws::IoTManagedIntegrations
     #   setup requests.
     #   @return [String]
     #
+    # @!attribute [rw] wi_fi_simple_setup_configuration
+    #   The Wi-Fi Simple Setup configuration for the managed thing, which
+    #   defines provisioning capabilities and timeout settings.
+    #   @return [Types::WiFiSimpleSetupConfiguration]
+    #
     # @!attribute [rw] serial_number
     #   The serial number of the device.
     #   @return [String]
@@ -841,6 +846,7 @@ module Aws::IoTManagedIntegrations
       :credential_locker_id,
       :authentication_material,
       :authentication_material_type,
+      :wi_fi_simple_setup_configuration,
       :serial_number,
       :brand,
       :model,
@@ -2103,7 +2109,12 @@ module Aws::IoTManagedIntegrations
     #
     # @!attribute [rw] provisioning_status
     #   The provisioning status of the device in the provisioning workflow
-    #   for onboarding to IoT managed integrations.
+    #   for onboarding to IoT managed integrations. For more information,
+    #   see [Device Provisioning][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot-mi/latest/devguide/device-provisioning.html
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -2203,6 +2214,11 @@ module Aws::IoTManagedIntegrations
     #   A set of key/value pairs that are used to manage the managed thing.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] wi_fi_simple_setup_configuration
+    #   The Wi-Fi Simple Setup configuration for the managed thing, which
+    #   defines provisioning capabilities and timeout settings.
+    #   @return [Types::WiFiSimpleSetupConfiguration]
+    #
     class GetManagedThingResponse < Struct.new(
       :id,
       :arn,
@@ -2229,7 +2245,8 @@ module Aws::IoTManagedIntegrations
       :activated_at,
       :hub_network_mode,
       :meta_data,
-      :tags)
+      :tags,
+      :wi_fi_simple_setup_configuration)
       SENSITIVE = [:owner, :model, :brand, :serial_number, :universal_product_code, :international_article_number, :connector_device_id, :device_specific_key, :mac_address, :classification, :tags]
       include Aws::Structure
     end
@@ -3059,7 +3076,12 @@ module Aws::IoTManagedIntegrations
     #   @return [String]
     #
     # @!attribute [rw] provisioning_status_filter
-    #   Filter on the status of the device.
+    #   Filter on the status of the device. For more information, see
+    #   [Device Provisioning][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot-mi/latest/devguide/device-provisioning.html
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -3443,7 +3465,12 @@ module Aws::IoTManagedIntegrations
     #
     # @!attribute [rw] provisioning_status
     #   The provisioning status of the device in the provisioning workflow
-    #   for onboarding to IoT managed integrations.
+    #   for onboarding to IoT managed integrations. For more information,
+    #   see [Device Provisioning][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot-mi/latest/devguide/device-provisioning.html
     #   @return [String]
     #
     # @!attribute [rw] role
@@ -4611,6 +4638,25 @@ module Aws::IoTManagedIntegrations
     #   discovery request.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] protocol
+    #   The protocol type for capability rediscovery (ZWAVE, ZIGBEE, or
+    #   CUSTOM).
+    #
+    #   <note markdown="1"> This parameter is only available when the discovery type is
+    #   CONTROLLER\_CAPABILITY\_REDISCOVERY.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @!attribute [rw] end_device_identifier
+    #   The unique id of the end device for capability rediscovery.
+    #
+    #   <note markdown="1"> This parameter is only available when the discovery type is
+    #   CONTROLLER\_CAPABILITY\_REDISCOVERY.
+    #
+    #    </note>
+    #   @return [String]
+    #
     class StartDeviceDiscoveryRequest < Struct.new(
       :discovery_type,
       :custom_protocol_detail,
@@ -4620,7 +4666,9 @@ module Aws::IoTManagedIntegrations
       :authentication_material,
       :authentication_material_type,
       :client_token,
-      :tags)
+      :tags,
+      :protocol,
+      :end_device_identifier)
       SENSITIVE = [:authentication_material, :tags]
       include Aws::Structure
     end
@@ -4934,6 +4982,11 @@ module Aws::IoTManagedIntegrations
     #   The serial number of the device.
     #   @return [String]
     #
+    # @!attribute [rw] wi_fi_simple_setup_configuration
+    #   The Wi-Fi Simple Setup configuration for the managed thing, which
+    #   defines provisioning capabilities and timeout settings.
+    #   @return [Types::WiFiSimpleSetupConfiguration]
+    #
     # @!attribute [rw] brand
     #   The brand of the device.
     #   @return [String]
@@ -4977,6 +5030,7 @@ module Aws::IoTManagedIntegrations
       :owner,
       :credential_locker_id,
       :serial_number,
+      :wi_fi_simple_setup_configuration,
       :brand,
       :model,
       :name,
@@ -5033,6 +5087,32 @@ module Aws::IoTManagedIntegrations
     #
     class ValidationException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The Wi-Fi Simple Setup configuration for the managed thing, which
+    # defines provisioning capabilities and timeout settings.
+    #
+    # @!attribute [rw] enable_as_provisioner
+    #   Indicates whether the device can act as a provisioner in Wi-Fi
+    #   Simple Setup, allowing it to configure other devices.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] enable_as_provisionee
+    #   Indicates whether the device can act as a provisionee in Wi-Fi
+    #   Simple Setup, allowing it to be configured by other devices.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] timeout_in_minutes
+    #   The timeout duration in minutes for Wi-Fi Simple Setup. Valid range
+    #   is 5 to 15 minutes.
+    #   @return [Integer]
+    #
+    class WiFiSimpleSetupConfiguration < Struct.new(
+      :enable_as_provisioner,
+      :enable_as_provisionee,
+      :timeout_in_minutes)
       SENSITIVE = []
       include Aws::Structure
     end

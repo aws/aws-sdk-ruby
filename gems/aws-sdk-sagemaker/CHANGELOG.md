@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.347.0 (2026-01-12)
+------------------
+
+* Feature - Added ultraServerType to the UltraServerInfo structure to support server type identification for SageMaker HyperPod
+
 1.346.0 (2026-01-08)
 ------------------
 
