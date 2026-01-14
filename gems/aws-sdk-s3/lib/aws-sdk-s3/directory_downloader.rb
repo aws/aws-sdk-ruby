@@ -148,10 +148,6 @@ module Aws
           @request_callback&.call(key, params.dup)
         end
 
-        # TODO: need to normalize full path to match Java behavior
-        #  for example:
-        #    ruby current behavior: "some/path/../data.dat" -> "some/data.dat"
-        #    java behavior: should be "some/path/data.dat"
         def build_object_entry(key)
           params = { bucket: @bucket, key: key }
           params = apply_request_callback(key, params) if @request_callback
