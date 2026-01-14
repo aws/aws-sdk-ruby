@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require_relative 'spec_helper'
-require_relative 'directory_helper'
+require_relative 'transfer_manger_spec_helper'
 require 'tempfile'
 require 'tmpdir'
 
@@ -28,7 +28,7 @@ module Aws
         let(:temp_dir) { Dir.mktmpdir }
 
         before do
-          DirectoryHelper.create_test_directory_structure(temp_dir)
+          TransferManagerSpecHelper.create_test_directory_structure(temp_dir)
         end
 
         after do

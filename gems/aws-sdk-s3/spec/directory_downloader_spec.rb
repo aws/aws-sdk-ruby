@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require_relative 'spec_helper'
-require_relative 'directory_helper'
+require_relative 'transfer_manger_spec_helper'
 require 'tempfile'
 require 'tmpdir'
 

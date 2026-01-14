@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-# Directory spec helper
-module DirectoryHelper
+# Spec helper for transfer manager-related tests
+module TransferManagerSpecHelper
   class << self
     def create_test_directory_structure(base_dir)
       # Root files
@@ -34,6 +34,39 @@ module DirectoryHelper
       File.symlink(base_dir, File.join(subdir1, 'parent_link'))
       File.symlink(File.join(base_dir, 'target.txt'), File.join(base_dir, 'link1.txt'))
       File.symlink(File.join(base_dir, 'link1.txt'), File.join(base_dir, 'link2.txt'))
+    end
+
+    def start_mirror_server(chunk_size)
+      server = TCPServer.new('127.0.0.1', 0)
+      port = server.addr[1]
+      chunks = []
+
+      server_thread = Thread.new do
+        Timeout.timeout(10) do
+          client = server.accept
+          headers = ''
+          while (line = client.gets)
+            headers += line
+            break if line.strip.empty?
+          end
+
+          if headers.include?('Expect: 100-continue')
+            client.write("HTTP/1.1 100 Continue\r\n\r\n")
+
+            loop do
+              sleep(0.01) # needs wait between reads
+              data = client.read_nonblock(chunk_size, exception: false)
+              break if data == :wait_readable || data.nil?
+
+              chunks << data.size
+            end
+          end
+          client.write("HTTP/1.1 200 OK\r\nContent-Length: 0\r\n\r\n")
+        ensure
+          client.close
+        end
+      end
+      [server, server_thread, port]
     end
 
     private

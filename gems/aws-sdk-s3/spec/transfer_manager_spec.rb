@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require_relative 'spec_helper'
-require_relative 'directory_helper'
+require_relative 'transfer_manger_spec_helper'
 require 'socket'
 require 'tempfile'
 
@@ -97,7 +97,7 @@ module Aws
         let(:temp_dir) { Dir.mktmpdir }
 
         before do
-          DirectoryHelper.create_test_directory_structure(temp_dir)
+          TransferManagerSpecHelper.create_test_directory_structure(temp_dir)
         end
 
         after do
@@ -180,43 +180,10 @@ module Aws
             end
           end
 
-          def start_mirror_server(chunk_size)
-            server = TCPServer.new('127.0.0.1', 0)
-            port = server.addr[1]
-            chunks = []
-
-            server_thread = Thread.new do
-              Timeout.timeout(10) do
-                client = server.accept
-                headers = ''
-                while (line = client.gets)
-                  headers += line
-                  break if line.strip.empty?
-                end
-
-                if headers.include?('Expect: 100-continue')
-                  client.write("HTTP/1.1 100 Continue\r\n\r\n")
-
-                  loop do
-                    sleep(0.01) # needs wait between reads
-                    data = client.read_nonblock(chunk_size, exception: false)
-                    break if data == :wait_readable || data.nil?
-
-                    chunks << data.size
-                  end
-                end
-                client.write("HTTP/1.1 200 OK\r\nContent-Length: 0\r\n\r\n")
-              ensure
-                client.close
-              end
-            end
-            [server, server_thread, port]
-          end
-
           it 'uses the given chunk size when uploading' do
             WebMock.disable!
             chunk_size = 32_768
-            server, server_thread, port = start_mirror_server(chunk_size)
+            server, server_thread, port = TransferManagerSpecHelper.start_mirror_server(chunk_size)
             client = Aws::S3::Client.new(
               endpoint: "http://127.0.0.1:#{port}",
               region: 'us-east-1',
@@ -245,7 +212,7 @@ module Aws
           it 'uses default chunk size' do
             WebMock.disable!
             chunk_size = 16_384
-            server, server_thread, port = start_mirror_server(chunk_size)
+            server, server_thread, port = TransferManagerSpecHelper.start_mirror_server(chunk_size)
             client = Aws::S3::Client.new(
               endpoint: "http://127.0.0.1:#{port}",
               region: 'us-east-1',
