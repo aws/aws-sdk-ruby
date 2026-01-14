@@ -188,9 +188,9 @@ module Aws
           stream_objects(continuation_token: resp.next_continuation_token) if resp.next_continuation_token
         end
 
-        def validate_path(key)
-          segments = key.split('/')
-          return unless segments.any? { |s| s == '..' || s == '.' }
+        def validate_path(path, key)
+          segments = path.split('/')
+          return unless segments.any? { |s| %w[. ..].include?(s) }
 
           DirectoryDownloadError.new("Invalid key '#{key}': contains '.' or '..' path segments")
         end
