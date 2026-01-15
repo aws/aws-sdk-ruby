@@ -1975,7 +1975,6 @@ module Aws::RDS
     #   resp.db_snapshot.db_system_id #=> String
     #   resp.db_snapshot.multi_tenant #=> Boolean
     #   resp.db_snapshot.dedicated_log_volume #=> Boolean
-    #   resp.db_snapshot.snapshot_availability_zone #=> String
     #   resp.db_snapshot.additional_storage_volumes #=> Array
     #   resp.db_snapshot.additional_storage_volumes[0].volume_name #=> String
     #   resp.db_snapshot.additional_storage_volumes[0].allocated_storage #=> Integer
@@ -1983,6 +1982,7 @@ module Aws::RDS
     #   resp.db_snapshot.additional_storage_volumes[0].max_allocated_storage #=> Integer
     #   resp.db_snapshot.additional_storage_volumes[0].storage_throughput #=> Integer
     #   resp.db_snapshot.additional_storage_volumes[0].storage_type #=> String
+    #   resp.db_snapshot.snapshot_availability_zone #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CopyDBSnapshot AWS API Documentation
     #
@@ -2265,7 +2265,7 @@ module Aws::RDS
     #     blue_green_deployment: {
     #       blue_green_deployment_identifier: "bgd-v53303651eexfake", 
     #       blue_green_deployment_name: "bgd-cli-test-instance", 
-    #       create_time: Time.parse("2022-02-25T21:18:51.183000+00:00"), 
+    #       create_time: Time.parse("2022-02-25T21:18:51.183Z"), 
     #       source: "arn:aws:rds:us-east-1:123456789012:db:my-db-instance", 
     #       status: "PROVISIONING", 
     #       switchover_details: [
@@ -2320,7 +2320,7 @@ module Aws::RDS
     #     blue_green_deployment: {
     #       blue_green_deployment_identifier: "bgd-wi89nwzglccsfake", 
     #       blue_green_deployment_name: "my-blue-green-deployment", 
-    #       create_time: Time.parse("2022-02-25T21:12:00.288000+00:00"), 
+    #       create_time: Time.parse("2022-02-25T21:12:00.288Z"), 
     #       source: "arn:aws:rds:us-east-1:123456789012:cluster:my-aurora-mysql-cluster", 
     #       status: "PROVISIONING", 
     #       switchover_details: [
@@ -2472,6 +2472,10 @@ module Aws::RDS
     #   for your CEV. For example, a valid bucket name is `123456789012/cev1`.
     #   If this setting isn't specified, no prefix is assumed.
     #
+    # @option params [Array<String>] :database_installation_files
+    #   The database installation files (ISO and EXE) uploaded to Amazon S3
+    #   for your database engine version to import to Amazon RDS.
+    #
     # @option params [String] :image_id
     #   The ID of the Amazon Machine Image (AMI). For RDS Custom for SQL
     #   Server, an AMI ID is required to create a CEV. For RDS Custom for
@@ -2566,10 +2570,6 @@ module Aws::RDS
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
     #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Tagging.html
     #
-    # @option params [Array<String>] :database_installation_files
-    #   The database installation files (ISO and EXE) uploaded to Amazon S3
-    #   for your database engine version to import to Amazon RDS.
-    #
     # @return [Types::DBEngineVersion] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DBEngineVersion#engine #engine} => String
@@ -2577,12 +2577,14 @@ module Aws::RDS
     #   * {Types::DBEngineVersion#engine_version #engine_version} => String
     #   * {Types::DBEngineVersion#database_installation_files_s3_bucket_name #database_installation_files_s3_bucket_name} => String
     #   * {Types::DBEngineVersion#database_installation_files_s3_prefix #database_installation_files_s3_prefix} => String
+    #   * {Types::DBEngineVersion#database_installation_files #database_installation_files} => Array&lt;String&gt;
     #   * {Types::DBEngineVersion#custom_db_engine_version_manifest #custom_db_engine_version_manifest} => String
     #   * {Types::DBEngineVersion#db_parameter_group_family #db_parameter_group_family} => String
     #   * {Types::DBEngineVersion#db_engine_description #db_engine_description} => String
     #   * {Types::DBEngineVersion#db_engine_version_arn #db_engine_version_arn} => String
     #   * {Types::DBEngineVersion#db_engine_version_description #db_engine_version_description} => String
     #   * {Types::DBEngineVersion#default_character_set #default_character_set} => Types::CharacterSet
+    #   * {Types::DBEngineVersion#failure_reason #failure_reason} => String
     #   * {Types::DBEngineVersion#image #image} => Types::CustomDBEngineVersionAMI
     #   * {Types::DBEngineVersion#db_engine_media_type #db_engine_media_type} => String
     #   * {Types::DBEngineVersion#kms_key_id #kms_key_id} => String
@@ -2607,8 +2609,6 @@ module Aws::RDS
     #   * {Types::DBEngineVersion#supports_local_write_forwarding #supports_local_write_forwarding} => Boolean
     #   * {Types::DBEngineVersion#supports_integrations #supports_integrations} => Boolean
     #   * {Types::DBEngineVersion#serverless_v2_features_support #serverless_v2_features_support} => Types::ServerlessV2FeaturesSupport
-    #   * {Types::DBEngineVersion#database_installation_files #database_installation_files} => Array&lt;String&gt;
-    #   * {Types::DBEngineVersion#failure_reason #failure_reason} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -2617,6 +2617,7 @@ module Aws::RDS
     #     engine_version: "CustomEngineVersion", # required
     #     database_installation_files_s3_bucket_name: "BucketName",
     #     database_installation_files_s3_prefix: "String255",
+    #     database_installation_files: ["String"],
     #     image_id: "String255",
     #     kms_key_id: "KmsKeyIdOrArn",
     #     source_custom_db_engine_version_identifier: "String255",
@@ -2629,7 +2630,6 @@ module Aws::RDS
     #         value: "String",
     #       },
     #     ],
-    #     database_installation_files: ["String"],
     #   })
     #
     # @example Response structure
@@ -2639,6 +2639,8 @@ module Aws::RDS
     #   resp.engine_version #=> String
     #   resp.database_installation_files_s3_bucket_name #=> String
     #   resp.database_installation_files_s3_prefix #=> String
+    #   resp.database_installation_files #=> Array
+    #   resp.database_installation_files[0] #=> String
     #   resp.custom_db_engine_version_manifest #=> String
     #   resp.db_parameter_group_family #=> String
     #   resp.db_engine_description #=> String
@@ -2646,6 +2648,7 @@ module Aws::RDS
     #   resp.db_engine_version_description #=> String
     #   resp.default_character_set.character_set_name #=> String
     #   resp.default_character_set.character_set_description #=> String
+    #   resp.failure_reason #=> String
     #   resp.image.image_id #=> String
     #   resp.image.status #=> String
     #   resp.db_engine_media_type #=> String
@@ -2696,9 +2699,6 @@ module Aws::RDS
     #   resp.supports_integrations #=> Boolean
     #   resp.serverless_v2_features_support.min_capacity #=> Float
     #   resp.serverless_v2_features_support.max_capacity #=> Float
-    #   resp.database_installation_files #=> Array
-    #   resp.database_installation_files[0] #=> String
-    #   resp.failure_reason #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateCustomDBEngineVersion AWS API Documentation
     #
@@ -5817,6 +5817,13 @@ module Aws::RDS
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html
     #
+    # @option params [Array<Types::AdditionalStorageVolume>] :additional_storage_volumes
+    #   A list of additional storage volumes to create for the DB instance.
+    #   You can create up to three additional storage volumes using the names
+    #   `rdsdbdata2`, `rdsdbdata3`, and `rdsdbdata4`. Additional storage
+    #   volumes are supported for RDS for Oracle and RDS for SQL Server DB
+    #   instances only.
+    #
     # @option params [Array<Types::TagSpecification>] :tag_specifications
     #   Tags to assign to resources associated with the DB instance.
     #
@@ -5839,13 +5846,6 @@ module Aws::RDS
     #
     #   This option is only valid for RDS for PostgreSQL and Aurora PostgreSQL
     #   engines.
-    #
-    # @option params [Array<Types::AdditionalStorageVolume>] :additional_storage_volumes
-    #   A list of additional storage volumes to create for the DB instance.
-    #   You can create up to three additional storage volumes using the names
-    #   `rdsdbdata2`, `rdsdbdata3`, and `rdsdbdata4`. Additional storage
-    #   volumes are supported for RDS for Oracle and RDS for SQL Server DB
-    #   instances only.
     #
     # @return [Types::CreateDBInstanceResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -6038,6 +6038,16 @@ module Aws::RDS
     #     multi_tenant: false,
     #     dedicated_log_volume: false,
     #     engine_lifecycle_support: "String",
+    #     additional_storage_volumes: [
+    #       {
+    #         volume_name: "String", # required
+    #         allocated_storage: 1,
+    #         iops: 1,
+    #         max_allocated_storage: 1,
+    #         storage_throughput: 1,
+    #         storage_type: "String",
+    #       },
+    #     ],
     #     tag_specifications: [
     #       {
     #         resource_type: "String",
@@ -6050,16 +6060,6 @@ module Aws::RDS
     #       },
     #     ],
     #     master_user_authentication_type: "password", # accepts password, iam-db-auth
-    #     additional_storage_volumes: [
-    #       {
-    #         volume_name: "String", # required
-    #         allocated_storage: 1,
-    #         iops: 1,
-    #         max_allocated_storage: 1,
-    #         storage_throughput: 1,
-    #         storage_type: "String",
-    #       },
-    #     ],
     #   })
     #
     # @example Response structure
@@ -6998,6 +6998,13 @@ module Aws::RDS
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html
     #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL.html
     #
+    # @option params [Array<Types::AdditionalStorageVolume>] :additional_storage_volumes
+    #   A list of additional storage volumes to create for the DB instance.
+    #   You can create up to three additional storage volumes using the names
+    #   `rdsdbdata2`, `rdsdbdata3`, and `rdsdbdata4`. Additional storage
+    #   volumes are supported for RDS for Oracle and RDS for SQL Server DB
+    #   instances only.
+    #
     # @option params [Array<Types::TagSpecification>] :tag_specifications
     #   Tags to assign to resources associated with the DB instance.
     #
@@ -7006,13 +7013,6 @@ module Aws::RDS
     #   * `auto-backup` - The DB instance's automated backup.
     #
     #   ^
-    #
-    # @option params [Array<Types::AdditionalStorageVolume>] :additional_storage_volumes
-    #   A list of additional storage volumes to create for the DB instance.
-    #   You can create up to three additional storage volumes using the names
-    #   `rdsdbdata2`, `rdsdbdata3`, and `rdsdbdata4`. Additional storage
-    #   volumes are supported for RDS for Oracle and RDS for SQL Server DB
-    #   instances only.
     #
     # @option params [String] :source_region
     #   The source region of the snapshot. This is only needed when the
@@ -7041,7 +7041,7 @@ module Aws::RDS
     #       iam_database_authentication_enabled: false, 
     #       monitoring_interval: 0, 
     #       read_replica_source_db_instance_identifier: "test-instance", 
-    #     }, # Some output ommitted.
+    #     }, 
     #   }
     #
     # @example Request syntax with placeholder values
@@ -7104,6 +7104,16 @@ module Aws::RDS
     #     dedicated_log_volume: false,
     #     upgrade_storage_config: false,
     #     ca_certificate_identifier: "String",
+    #     additional_storage_volumes: [
+    #       {
+    #         volume_name: "String", # required
+    #         allocated_storage: 1,
+    #         iops: 1,
+    #         max_allocated_storage: 1,
+    #         storage_throughput: 1,
+    #         storage_type: "String",
+    #       },
+    #     ],
     #     tag_specifications: [
     #       {
     #         resource_type: "String",
@@ -7113,16 +7123,6 @@ module Aws::RDS
     #             value: "String",
     #           },
     #         ],
-    #       },
-    #     ],
-    #     additional_storage_volumes: [
-    #       {
-    #         volume_name: "String", # required
-    #         allocated_storage: 1,
-    #         iops: 1,
-    #         max_allocated_storage: 1,
-    #         storage_throughput: 1,
-    #         storage_type: "String",
     #       },
     #     ],
     #     source_region: "String",
@@ -8123,7 +8123,6 @@ module Aws::RDS
     #   resp.db_snapshot.db_system_id #=> String
     #   resp.db_snapshot.multi_tenant #=> Boolean
     #   resp.db_snapshot.dedicated_log_volume #=> Boolean
-    #   resp.db_snapshot.snapshot_availability_zone #=> String
     #   resp.db_snapshot.additional_storage_volumes #=> Array
     #   resp.db_snapshot.additional_storage_volumes[0].volume_name #=> String
     #   resp.db_snapshot.additional_storage_volumes[0].allocated_storage #=> Integer
@@ -8131,6 +8130,7 @@ module Aws::RDS
     #   resp.db_snapshot.additional_storage_volumes[0].max_allocated_storage #=> Integer
     #   resp.db_snapshot.additional_storage_volumes[0].storage_throughput #=> Integer
     #   resp.db_snapshot.additional_storage_volumes[0].storage_type #=> String
+    #   resp.db_snapshot.snapshot_availability_zone #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBSnapshot AWS API Documentation
     #
@@ -9172,8 +9172,8 @@ module Aws::RDS
     #     blue_green_deployment: {
     #       blue_green_deployment_identifier: "bgd-v53303651eexfake", 
     #       blue_green_deployment_name: "bgd-cli-test-instance", 
-    #       create_time: Time.parse("2022-02-25T21:18:51.183000+00:00"), 
-    #       delete_time: Time.parse("2022-02-25T22:25:31.331000+00:00"), 
+    #       create_time: Time.parse("2022-02-25T21:18:51.183Z"), 
+    #       delete_time: Time.parse("2022-02-25T22:25:31.331Z"), 
     #       source: "arn:aws:rds:us-east-1:123456789012:db:my-db-instance", 
     #       status: "DELETING", 
     #       switchover_details: [
@@ -9234,8 +9234,8 @@ module Aws::RDS
     #     blue_green_deployment: {
     #       blue_green_deployment_identifier: "bgd-wi89nwzglccsfake", 
     #       blue_green_deployment_name: "my-blue-green-deployment", 
-    #       create_time: Time.parse("2022-02-25T21:12:00.288000+00:00"), 
-    #       delete_time: Time.parse("2022-02-25T22:29:11.336000+00:00"), 
+    #       create_time: Time.parse("2022-02-25T21:12:00.288Z"), 
+    #       delete_time: Time.parse("2022-02-25T22:29:11.336Z"), 
     #       source: "arn:aws:rds:us-east-1:123456789012:cluster:my-aurora-mysql-cluster", 
     #       status: "DELETING", 
     #       switchover_details: [
@@ -9396,12 +9396,14 @@ module Aws::RDS
     #   * {Types::DBEngineVersion#engine_version #engine_version} => String
     #   * {Types::DBEngineVersion#database_installation_files_s3_bucket_name #database_installation_files_s3_bucket_name} => String
     #   * {Types::DBEngineVersion#database_installation_files_s3_prefix #database_installation_files_s3_prefix} => String
+    #   * {Types::DBEngineVersion#database_installation_files #database_installation_files} => Array&lt;String&gt;
     #   * {Types::DBEngineVersion#custom_db_engine_version_manifest #custom_db_engine_version_manifest} => String
     #   * {Types::DBEngineVersion#db_parameter_group_family #db_parameter_group_family} => String
     #   * {Types::DBEngineVersion#db_engine_description #db_engine_description} => String
     #   * {Types::DBEngineVersion#db_engine_version_arn #db_engine_version_arn} => String
     #   * {Types::DBEngineVersion#db_engine_version_description #db_engine_version_description} => String
     #   * {Types::DBEngineVersion#default_character_set #default_character_set} => Types::CharacterSet
+    #   * {Types::DBEngineVersion#failure_reason #failure_reason} => String
     #   * {Types::DBEngineVersion#image #image} => Types::CustomDBEngineVersionAMI
     #   * {Types::DBEngineVersion#db_engine_media_type #db_engine_media_type} => String
     #   * {Types::DBEngineVersion#kms_key_id #kms_key_id} => String
@@ -9426,8 +9428,6 @@ module Aws::RDS
     #   * {Types::DBEngineVersion#supports_local_write_forwarding #supports_local_write_forwarding} => Boolean
     #   * {Types::DBEngineVersion#supports_integrations #supports_integrations} => Boolean
     #   * {Types::DBEngineVersion#serverless_v2_features_support #serverless_v2_features_support} => Types::ServerlessV2FeaturesSupport
-    #   * {Types::DBEngineVersion#database_installation_files #database_installation_files} => Array&lt;String&gt;
-    #   * {Types::DBEngineVersion#failure_reason #failure_reason} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -9443,6 +9443,8 @@ module Aws::RDS
     #   resp.engine_version #=> String
     #   resp.database_installation_files_s3_bucket_name #=> String
     #   resp.database_installation_files_s3_prefix #=> String
+    #   resp.database_installation_files #=> Array
+    #   resp.database_installation_files[0] #=> String
     #   resp.custom_db_engine_version_manifest #=> String
     #   resp.db_parameter_group_family #=> String
     #   resp.db_engine_description #=> String
@@ -9450,6 +9452,7 @@ module Aws::RDS
     #   resp.db_engine_version_description #=> String
     #   resp.default_character_set.character_set_name #=> String
     #   resp.default_character_set.character_set_description #=> String
+    #   resp.failure_reason #=> String
     #   resp.image.image_id #=> String
     #   resp.image.status #=> String
     #   resp.db_engine_media_type #=> String
@@ -9500,9 +9503,6 @@ module Aws::RDS
     #   resp.supports_integrations #=> Boolean
     #   resp.serverless_v2_features_support.min_capacity #=> Float
     #   resp.serverless_v2_features_support.max_capacity #=> Float
-    #   resp.database_installation_files #=> Array
-    #   resp.database_installation_files[0] #=> String
-    #   resp.failure_reason #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteCustomDBEngineVersion AWS API Documentation
     #
@@ -9611,7 +9611,7 @@ module Aws::RDS
     #       db_cluster_parameter_group: "default.aurora-postgresql10", 
     #       db_subnet_group: "default-vpc-aa11bb22", 
     #       status: "available", 
-    #     }, # Some output ommitted.
+    #     }, 
     #   }
     #
     # @example Request syntax with placeholder values
@@ -10199,7 +10199,7 @@ module Aws::RDS
     #     db_instance: {
     #       db_instance_identifier: "test-instance", 
     #       db_instance_status: "deleting", 
-    #     }, # Some output ommitted.
+    #     }, 
     #   }
     #
     # @example Request syntax with placeholder values
@@ -10876,7 +10876,6 @@ module Aws::RDS
     #   resp.db_snapshot.db_system_id #=> String
     #   resp.db_snapshot.multi_tenant #=> Boolean
     #   resp.db_snapshot.dedicated_log_volume #=> Boolean
-    #   resp.db_snapshot.snapshot_availability_zone #=> String
     #   resp.db_snapshot.additional_storage_volumes #=> Array
     #   resp.db_snapshot.additional_storage_volumes[0].volume_name #=> String
     #   resp.db_snapshot.additional_storage_volumes[0].allocated_storage #=> Integer
@@ -10884,6 +10883,7 @@ module Aws::RDS
     #   resp.db_snapshot.additional_storage_volumes[0].max_allocated_storage #=> Integer
     #   resp.db_snapshot.additional_storage_volumes[0].storage_throughput #=> Integer
     #   resp.db_snapshot.additional_storage_volumes[0].storage_type #=> String
+    #   resp.db_snapshot.snapshot_availability_zone #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBSnapshot AWS API Documentation
     #
@@ -11520,7 +11520,7 @@ module Aws::RDS
     #       {
     #         blue_green_deployment_identifier: "bgd-v53303651eexfake", 
     #         blue_green_deployment_name: "bgd-cli-test-instance", 
-    #         create_time: Time.parse("2022-02-25T21:18:51.183000+00:00"), 
+    #         create_time: Time.parse("2022-02-25T21:18:51.183Z"), 
     #         source: "arn:aws:rds:us-east-1:123456789012:db:my-db-instance", 
     #         status: "AVAILABLE", 
     #         switchover_details: [
@@ -11582,7 +11582,7 @@ module Aws::RDS
     #       {
     #         blue_green_deployment_identifier: "bgd-wi89nwzglccsfake", 
     #         blue_green_deployment_name: "my-blue-green-deployment", 
-    #         create_time: Time.parse("2022-02-25T21:12:00.288000+00:00"), 
+    #         create_time: Time.parse("2022-02-25T21:12:00.288Z"), 
     #         source: "arn:aws:rds:us-east-1:123456789012:cluster:my-aurora-mysql-cluster", 
     #         status: "AVAILABLE", 
     #         switchover_details: [
@@ -11655,7 +11655,7 @@ module Aws::RDS
     #       {
     #         blue_green_deployment_identifier: "bgd-wi89nwzglccsfake", 
     #         blue_green_deployment_name: "my-blue-green-deployment", 
-    #         create_time: Time.parse("2022-02-25T22:38:49.522000+00:00"), 
+    #         create_time: Time.parse("2022-02-25T22:38:49.522Z"), 
     #         source: "arn:aws:rds:us-east-1:123456789012:cluster:my-aurora-mysql-cluster-old1", 
     #         status: "SWITCHOVER_COMPLETED", 
     #         switchover_details: [
@@ -11827,8 +11827,8 @@ module Aws::RDS
     #         certificate_type: "CA", 
     #         customer_override: false, 
     #         thumbprint: "24a97b91cbe86911190576c35c36aab4fEXAMPLE", 
-    #         valid_from: Time.parse("2021-05-25T22:41:55+00:00"), 
-    #         valid_till: Time.parse("2121-05-25T23:41:55+00:00"), 
+    #         valid_from: Time.parse("2021-05-25T22:41:55Z"), 
+    #         valid_till: Time.parse("2121-05-25T23:41:55Z"), 
     #       }, 
     #       {
     #         certificate_arn: "arn:aws:rds:us-east-1::cert:rds-ca-rsa4096-g1", 
@@ -11836,18 +11836,18 @@ module Aws::RDS
     #         certificate_type: "CA", 
     #         customer_override: false, 
     #         thumbprint: "9da6fa7fd2ec09c569a400d876b01b0c1EXAMPLE", 
-    #         valid_from: Time.parse("2021-05-25T22:38:35+00:00"), 
-    #         valid_till: Time.parse("2121-05-25T23:38:35+00:00"), 
+    #         valid_from: Time.parse("2021-05-25T22:38:35Z"), 
+    #         valid_till: Time.parse("2121-05-25T23:38:35Z"), 
     #       }, 
     #       {
     #         certificate_arn: "arn:aws:rds:us-east-1::cert:rds-ca-rsa2048-g1", 
     #         certificate_identifier: "rds-ca-rsa2048-g1", 
     #         certificate_type: "CA", 
     #         customer_override: true, 
-    #         customer_override_valid_till: Time.parse("2061-05-25T23:34:57+00:00"), 
+    #         customer_override_valid_till: Time.parse("2061-05-25T23:34:57Z"), 
     #         thumbprint: "2fa77ef894d983ba9d37ad699c84ab0f6EXAMPLE", 
-    #         valid_from: Time.parse("2021-05-25T22:34:57+00:00"), 
-    #         valid_till: Time.parse("2061-05-25T23:34:57+00:00"), 
+    #         valid_from: Time.parse("2021-05-25T22:34:57Z"), 
+    #         valid_till: Time.parse("2061-05-25T23:34:57Z"), 
     #       }, 
     #       {
     #         certificate_arn: "arn:aws:rds:us-east-1::cert:rds-ca-2019", 
@@ -11855,8 +11855,8 @@ module Aws::RDS
     #         certificate_type: "CA", 
     #         customer_override: false, 
     #         thumbprint: "f0ed823ed14447bab557fdf3e49274669EXAMPLE", 
-    #         valid_from: Time.parse("2019-09-19T18:16:53+00:00"), 
-    #         valid_till: Time.parse("2024-08-22T17:08:50+00:00"), 
+    #         valid_from: Time.parse("2019-09-19T18:16:53Z"), 
+    #         valid_till: Time.parse("2024-08-22T17:08:50Z"), 
     #       }, 
     #     ], 
     #   }
@@ -12554,7 +12554,7 @@ module Aws::RDS
     #           "provisioned", 
     #         ], 
     #       }, 
-    #     ], # Some output ommitted.
+    #     ], 
     #   }
     #
     # @example Request syntax with placeholder values
@@ -13468,7 +13468,7 @@ module Aws::RDS
     #           }, 
     #         ], 
     #       }, 
-    #     ], # Some output ommitted.
+    #     ], 
     #   }
     #
     # @example Request syntax with placeholder values
@@ -13500,6 +13500,8 @@ module Aws::RDS
     #   resp.db_engine_versions[0].engine_version #=> String
     #   resp.db_engine_versions[0].database_installation_files_s3_bucket_name #=> String
     #   resp.db_engine_versions[0].database_installation_files_s3_prefix #=> String
+    #   resp.db_engine_versions[0].database_installation_files #=> Array
+    #   resp.db_engine_versions[0].database_installation_files[0] #=> String
     #   resp.db_engine_versions[0].custom_db_engine_version_manifest #=> String
     #   resp.db_engine_versions[0].db_parameter_group_family #=> String
     #   resp.db_engine_versions[0].db_engine_description #=> String
@@ -13507,6 +13509,7 @@ module Aws::RDS
     #   resp.db_engine_versions[0].db_engine_version_description #=> String
     #   resp.db_engine_versions[0].default_character_set.character_set_name #=> String
     #   resp.db_engine_versions[0].default_character_set.character_set_description #=> String
+    #   resp.db_engine_versions[0].failure_reason #=> String
     #   resp.db_engine_versions[0].image.image_id #=> String
     #   resp.db_engine_versions[0].image.status #=> String
     #   resp.db_engine_versions[0].db_engine_media_type #=> String
@@ -13557,9 +13560,6 @@ module Aws::RDS
     #   resp.db_engine_versions[0].supports_integrations #=> Boolean
     #   resp.db_engine_versions[0].serverless_v2_features_support.min_capacity #=> Float
     #   resp.db_engine_versions[0].serverless_v2_features_support.max_capacity #=> Float
-    #   resp.db_engine_versions[0].database_installation_files #=> Array
-    #   resp.db_engine_versions[0].database_installation_files[0] #=> String
-    #   resp.db_engine_versions[0].failure_reason #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBEngineVersions AWS API Documentation
     #
@@ -13843,7 +13843,7 @@ module Aws::RDS
     #         engine: "mysql", 
     #         master_username: "admin", 
     #       }, 
-    #     ], # Some output ommitted.
+    #     ], 
     #   }
     #
     # @example Request syntax with placeholder values
@@ -14357,7 +14357,7 @@ module Aws::RDS
     #         db_parameter_group_name: "default.mariadb10.1", 
     #         description: "Default parameter group for mariadb10.1", 
     #       }, 
-    #     ], # Some output ommitted.
+    #     ], 
     #   }
     #
     # @example Request syntax with placeholder values
@@ -14472,7 +14472,7 @@ module Aws::RDS
     #         parameter_name: "auto_generate_certs", 
     #         source: "engine-default", 
     #       }, 
-    #     ], # Some output omitted.
+    #     ], 
     #   }
     #
     # @example Request syntax with placeholder values
@@ -15663,7 +15663,6 @@ module Aws::RDS
     #   resp.db_snapshots[0].db_system_id #=> String
     #   resp.db_snapshots[0].multi_tenant #=> Boolean
     #   resp.db_snapshots[0].dedicated_log_volume #=> Boolean
-    #   resp.db_snapshots[0].snapshot_availability_zone #=> String
     #   resp.db_snapshots[0].additional_storage_volumes #=> Array
     #   resp.db_snapshots[0].additional_storage_volumes[0].volume_name #=> String
     #   resp.db_snapshots[0].additional_storage_volumes[0].allocated_storage #=> Integer
@@ -15671,6 +15670,7 @@ module Aws::RDS
     #   resp.db_snapshots[0].additional_storage_volumes[0].max_allocated_storage #=> Integer
     #   resp.db_snapshots[0].additional_storage_volumes[0].storage_throughput #=> Integer
     #   resp.db_snapshots[0].additional_storage_volumes[0].storage_type #=> String
+    #   resp.db_snapshots[0].snapshot_availability_zone #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -15854,6 +15854,8 @@ module Aws::RDS
     #
     #   * {Types::DescribeEngineDefaultClusterParametersResult#engine_defaults #engine_defaults} => Types::EngineDefaults
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     #
     # @example Example: To describe the default engine and system parameter information for the Aurora database engine
     #
@@ -15880,7 +15882,7 @@ module Aws::RDS
     #           ], 
     #         }, 
     #       ], 
-    #     }, # Some output omitted.
+    #     }, 
     #   }
     #
     # @example Request syntax with placeholder values
@@ -16082,7 +16084,7 @@ module Aws::RDS
     #           source: "engine-default", 
     #         }, 
     #       ], 
-    #     }, # Some output omitted.
+    #     }, 
     #   }
     #
     # @example Request syntax with placeholder values
@@ -16315,7 +16317,7 @@ module Aws::RDS
     #         status: "creating", 
     #         subscription_creation_time: "2018-07-31 23:22:01.893", 
     #       }, 
-    #     ], # Some output omitted.
+    #     ], 
     #   }
     #
     # @example Request syntax with placeholder values
@@ -17049,7 +17051,7 @@ module Aws::RDS
     #         requires_auto_minor_engine_version_upgrade: false, 
     #         vpc_only: false, 
     #       }, 
-    #     ], # Some output omitted.
+    #     ], 
     #   }
     #
     # @example Request syntax with placeholder values
@@ -17415,7 +17417,7 @@ module Aws::RDS
     #         supports_storage_encryption: true, 
     #         vpc: true, 
     #       }, 
-    #     ], # Some output omitted.
+    #     ], 
     #   }
     #
     # @example Request syntax with placeholder values
@@ -17483,8 +17485,8 @@ module Aws::RDS
     #   resp.orderable_db_instance_options[0].supported_network_types[0] #=> String
     #   resp.orderable_db_instance_options[0].supports_clusters #=> Boolean
     #   resp.orderable_db_instance_options[0].supports_dedicated_log_volume #=> Boolean
-    #   resp.orderable_db_instance_options[0].supports_http_endpoint #=> Boolean
     #   resp.orderable_db_instance_options[0].supports_additional_storage_volumes #=> Boolean
+    #   resp.orderable_db_instance_options[0].supports_http_endpoint #=> Boolean
     #   resp.orderable_db_instance_options[0].available_additional_storage_volumes_options #=> Array
     #   resp.orderable_db_instance_options[0].available_additional_storage_volumes_options[0].supports_storage_autoscaling #=> Boolean
     #   resp.orderable_db_instance_options[0].available_additional_storage_volumes_options[0].supports_storage_throughput #=> Boolean
@@ -17870,7 +17872,7 @@ module Aws::RDS
     #         reserved_db_instances_offering_id: "005bdee3-9ef4-4182-aa0c-58ef7cb6c2f8", 
     #         usage_price: 0, 
     #       }, 
-    #     ], # Some output omitted.
+    #     ], 
     #   }
     #
     # @example Request syntax with placeholder values
@@ -18290,7 +18292,7 @@ module Aws::RDS
     #           storage_type: "gp2", 
     #         }, 
     #       ], 
-    #     }, # Some output omitted.
+    #     }, 
     #   }
     #
     # @example Request syntax with placeholder values
@@ -19388,12 +19390,14 @@ module Aws::RDS
     #   * {Types::DBEngineVersion#engine_version #engine_version} => String
     #   * {Types::DBEngineVersion#database_installation_files_s3_bucket_name #database_installation_files_s3_bucket_name} => String
     #   * {Types::DBEngineVersion#database_installation_files_s3_prefix #database_installation_files_s3_prefix} => String
+    #   * {Types::DBEngineVersion#database_installation_files #database_installation_files} => Array&lt;String&gt;
     #   * {Types::DBEngineVersion#custom_db_engine_version_manifest #custom_db_engine_version_manifest} => String
     #   * {Types::DBEngineVersion#db_parameter_group_family #db_parameter_group_family} => String
     #   * {Types::DBEngineVersion#db_engine_description #db_engine_description} => String
     #   * {Types::DBEngineVersion#db_engine_version_arn #db_engine_version_arn} => String
     #   * {Types::DBEngineVersion#db_engine_version_description #db_engine_version_description} => String
     #   * {Types::DBEngineVersion#default_character_set #default_character_set} => Types::CharacterSet
+    #   * {Types::DBEngineVersion#failure_reason #failure_reason} => String
     #   * {Types::DBEngineVersion#image #image} => Types::CustomDBEngineVersionAMI
     #   * {Types::DBEngineVersion#db_engine_media_type #db_engine_media_type} => String
     #   * {Types::DBEngineVersion#kms_key_id #kms_key_id} => String
@@ -19418,8 +19422,6 @@ module Aws::RDS
     #   * {Types::DBEngineVersion#supports_local_write_forwarding #supports_local_write_forwarding} => Boolean
     #   * {Types::DBEngineVersion#supports_integrations #supports_integrations} => Boolean
     #   * {Types::DBEngineVersion#serverless_v2_features_support #serverless_v2_features_support} => Types::ServerlessV2FeaturesSupport
-    #   * {Types::DBEngineVersion#database_installation_files #database_installation_files} => Array&lt;String&gt;
-    #   * {Types::DBEngineVersion#failure_reason #failure_reason} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -19437,6 +19439,8 @@ module Aws::RDS
     #   resp.engine_version #=> String
     #   resp.database_installation_files_s3_bucket_name #=> String
     #   resp.database_installation_files_s3_prefix #=> String
+    #   resp.database_installation_files #=> Array
+    #   resp.database_installation_files[0] #=> String
     #   resp.custom_db_engine_version_manifest #=> String
     #   resp.db_parameter_group_family #=> String
     #   resp.db_engine_description #=> String
@@ -19444,6 +19448,7 @@ module Aws::RDS
     #   resp.db_engine_version_description #=> String
     #   resp.default_character_set.character_set_name #=> String
     #   resp.default_character_set.character_set_description #=> String
+    #   resp.failure_reason #=> String
     #   resp.image.image_id #=> String
     #   resp.image.status #=> String
     #   resp.db_engine_media_type #=> String
@@ -19494,9 +19499,6 @@ module Aws::RDS
     #   resp.supports_integrations #=> Boolean
     #   resp.serverless_v2_features_support.min_capacity #=> Float
     #   resp.serverless_v2_features_support.max_capacity #=> Float
-    #   resp.database_installation_files #=> Array
-    #   resp.database_installation_files[0] #=> String
-    #   resp.failure_reason #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyCustomDBEngineVersion AWS API Documentation
     #
@@ -22060,6 +22062,12 @@ module Aws::RDS
     #     parameter group with `--db-parameter-group-name` and a new option
     #     group with `--option-group-name`.
     #
+    # @option params [Array<Types::ModifyAdditionalStorageVolume>] :additional_storage_volumes
+    #   A list of additional storage volumes to modify or delete for the DB
+    #   instance. You can create up to 3 additional storage volumes.
+    #   Additional storage volumes are supported for RDS for Oracle and RDS
+    #   for SQL Server DB instances only.
+    #
     # @option params [Array<Types::TagSpecification>] :tag_specifications
     #   Tags to assign to resources associated with the DB instance.
     #
@@ -22082,12 +22090,6 @@ module Aws::RDS
     #
     #   This option is only valid for RDS for PostgreSQL and Aurora PostgreSQL
     #   engines.
-    #
-    # @option params [Array<Types::ModifyAdditionalStorageVolume>] :additional_storage_volumes
-    #   A list of additional storage volumes to modify or delete for the DB
-    #   instance. You can create up to 3 additional storage volumes.
-    #   Additional storage volumes are supported for RDS for Oracle and RDS
-    #   for SQL Server DB instances only.
     #
     # @return [Types::ModifyDBInstanceResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -22141,7 +22143,7 @@ module Aws::RDS
     #       ], 
     #       secondary_availability_zone: "us-west-2c", 
     #       storage_type: "gp2", 
-    #     }, # Some output ommitted.
+    #     }, 
     #   }
     #
     # @example Request syntax with placeholder values
@@ -22216,6 +22218,17 @@ module Aws::RDS
     #     multi_tenant: false,
     #     dedicated_log_volume: false,
     #     engine: "String",
+    #     additional_storage_volumes: [
+    #       {
+    #         volume_name: "String", # required
+    #         allocated_storage: 1,
+    #         iops: 1,
+    #         max_allocated_storage: 1,
+    #         storage_throughput: 1,
+    #         storage_type: "String",
+    #         set_for_delete: false,
+    #       },
+    #     ],
     #     tag_specifications: [
     #       {
     #         resource_type: "String",
@@ -22228,17 +22241,6 @@ module Aws::RDS
     #       },
     #     ],
     #     master_user_authentication_type: "password", # accepts password, iam-db-auth
-    #     additional_storage_volumes: [
-    #       {
-    #         volume_name: "String", # required
-    #         allocated_storage: 1,
-    #         iops: 1,
-    #         max_allocated_storage: 1,
-    #         storage_throughput: 1,
-    #         storage_type: "String",
-    #         set_for_delete: false,
-    #       },
-    #     ],
     #   })
     #
     # @example Response structure
@@ -22757,7 +22759,7 @@ module Aws::RDS
     #       max_idle_connections_percent: 1,
     #       connection_borrow_timeout: 1,
     #       session_pinning_filters: ["String"],
-    #       init_query: "String",
+    #       init_query: "OperatorSensitiveString",
     #     },
     #     new_name: "String",
     #   })
@@ -23150,7 +23152,6 @@ module Aws::RDS
     #   resp.db_snapshot.db_system_id #=> String
     #   resp.db_snapshot.multi_tenant #=> Boolean
     #   resp.db_snapshot.dedicated_log_volume #=> Boolean
-    #   resp.db_snapshot.snapshot_availability_zone #=> String
     #   resp.db_snapshot.additional_storage_volumes #=> Array
     #   resp.db_snapshot.additional_storage_volumes[0].volume_name #=> String
     #   resp.db_snapshot.additional_storage_volumes[0].allocated_storage #=> Integer
@@ -23158,6 +23159,7 @@ module Aws::RDS
     #   resp.db_snapshot.additional_storage_volumes[0].max_allocated_storage #=> Integer
     #   resp.db_snapshot.additional_storage_volumes[0].storage_throughput #=> Integer
     #   resp.db_snapshot.additional_storage_volumes[0].storage_type #=> String
+    #   resp.db_snapshot.snapshot_availability_zone #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBSnapshot AWS API Documentation
     #
@@ -24212,7 +24214,7 @@ module Aws::RDS
     #       db_instance_status: "modifying", 
     #       read_replica_source_db_instance_identifier: "test-instance", 
     #       storage_type: "standard", 
-    #     }, # Some output ommitted.
+    #     }, 
     #   }
     #
     # @example Request syntax with placeholder values
@@ -24973,7 +24975,7 @@ module Aws::RDS
     #       }, 
     #       engine: "mysql", 
     #       master_username: "admin", 
-    #     }, # Some output ommitted.
+    #     }, 
     #   }
     #
     # @example Request syntax with placeholder values
@@ -28858,6 +28860,13 @@ module Aws::RDS
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html
     #
+    # @option params [Array<Types::AdditionalStorageVolume>] :additional_storage_volumes
+    #   A list of additional storage volumes to create for the DB instance.
+    #   You can create up to three additional storage volumes using the names
+    #   `rdsdbdata2`, `rdsdbdata3`, and `rdsdbdata4`. Additional storage
+    #   volumes are supported for RDS for Oracle and RDS for SQL Server DB
+    #   instances only.
+    #
     # @option params [Array<Types::TagSpecification>] :tag_specifications
     #   Tags to assign to resources associated with the DB instance.
     #
@@ -28907,13 +28916,6 @@ module Aws::RDS
     #   Amazon Web Services account has a different default KMS key for each
     #   Amazon Web Services Region.
     #
-    # @option params [Array<Types::AdditionalStorageVolume>] :additional_storage_volumes
-    #   A list of additional storage volumes to create for the DB instance.
-    #   You can create up to three additional storage volumes using the names
-    #   `rdsdbdata2`, `rdsdbdata3`, and `rdsdbdata4`. Additional storage
-    #   volumes are supported for RDS for Oracle and RDS for SQL Server DB
-    #   instances only.
-    #
     # @return [Types::RestoreDBInstanceFromDBSnapshotResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RestoreDBInstanceFromDBSnapshotResult#db_instance #db_instance} => Types::DBInstance
@@ -28953,7 +28955,7 @@ module Aws::RDS
     #       preferred_maintenance_window: "mon:07:37-mon:08:07", 
     #       read_replica_db_instance_identifiers: [
     #       ], 
-    #     }, # Some output ommitted.
+    #     }, 
     #   }
     #
     # @example Request syntax with placeholder values
@@ -29011,6 +29013,16 @@ module Aws::RDS
     #     dedicated_log_volume: false,
     #     ca_certificate_identifier: "String",
     #     engine_lifecycle_support: "String",
+    #     additional_storage_volumes: [
+    #       {
+    #         volume_name: "String", # required
+    #         allocated_storage: 1,
+    #         iops: 1,
+    #         max_allocated_storage: 1,
+    #         storage_throughput: 1,
+    #         storage_type: "String",
+    #       },
+    #     ],
     #     tag_specifications: [
     #       {
     #         resource_type: "String",
@@ -29024,16 +29036,6 @@ module Aws::RDS
     #     ],
     #     manage_master_user_password: false,
     #     master_user_secret_kms_key_id: "String",
-    #     additional_storage_volumes: [
-    #       {
-    #         volume_name: "String", # required
-    #         allocated_storage: 1,
-    #         iops: 1,
-    #         max_allocated_storage: 1,
-    #         storage_throughput: 1,
-    #         storage_type: "String",
-    #       },
-    #     ],
     #   })
     #
     # @example Response structure
@@ -29800,6 +29802,13 @@ module Aws::RDS
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html
     #
+    # @option params [Array<Types::AdditionalStorageVolume>] :additional_storage_volumes
+    #   A list of additional storage volumes to modify or delete for the DB
+    #   instance. You can modify or delete up to three additional storage
+    #   volumes using the names `rdsdbdata2`, `rdsdbdata3`, and `rdsdbdata4`.
+    #   Additional storage volumes are supported for RDS for Oracle and RDS
+    #   for SQL Server DB instances only.
+    #
     # @option params [Array<Types::TagSpecification>] :tag_specifications
     #   Tags to assign to resources associated with the DB instance.
     #
@@ -29808,13 +29817,6 @@ module Aws::RDS
     #   * `auto-backup` - The DB instance's automated backup.
     #
     #   ^
-    #
-    # @option params [Array<Types::AdditionalStorageVolume>] :additional_storage_volumes
-    #   A list of additional storage volumes to modify or delete for the DB
-    #   instance. You can modify or delete up to three additional storage
-    #   volumes using the names `rdsdbdata2`, `rdsdbdata3`, and `rdsdbdata4`.
-    #   Additional storage volumes are supported for RDS for Oracle and RDS
-    #   for SQL Server DB instances only.
     #
     # @return [Types::RestoreDBInstanceFromS3Result] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -29885,6 +29887,16 @@ module Aws::RDS
     #     dedicated_log_volume: false,
     #     ca_certificate_identifier: "String",
     #     engine_lifecycle_support: "String",
+    #     additional_storage_volumes: [
+    #       {
+    #         volume_name: "String", # required
+    #         allocated_storage: 1,
+    #         iops: 1,
+    #         max_allocated_storage: 1,
+    #         storage_throughput: 1,
+    #         storage_type: "String",
+    #       },
+    #     ],
     #     tag_specifications: [
     #       {
     #         resource_type: "String",
@@ -29894,16 +29906,6 @@ module Aws::RDS
     #             value: "String",
     #           },
     #         ],
-    #       },
-    #     ],
-    #     additional_storage_volumes: [
-    #       {
-    #         volume_name: "String", # required
-    #         allocated_storage: 1,
-    #         iops: 1,
-    #         max_allocated_storage: 1,
-    #         storage_throughput: 1,
-    #         storage_type: "String",
     #       },
     #     ],
     #   })
@@ -30732,6 +30734,13 @@ module Aws::RDS
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html
     #
+    # @option params [Array<Types::AdditionalStorageVolume>] :additional_storage_volumes
+    #   A list of additional storage volumes to restore to the DB instance.
+    #   You can restore up to three additional storage volumes using the names
+    #   `rdsdbdata2`, `rdsdbdata3`, and `rdsdbdata4`. Additional storage
+    #   volumes are supported for RDS for Oracle and RDS for SQL Server DB
+    #   instances only.
+    #
     # @option params [Array<Types::TagSpecification>] :tag_specifications
     #   Tags to assign to resources associated with the DB instance.
     #
@@ -30780,13 +30789,6 @@ module Aws::RDS
     #   There is a default KMS key for your Amazon Web Services account. Your
     #   Amazon Web Services account has a different default KMS key for each
     #   Amazon Web Services Region.
-    #
-    # @option params [Array<Types::AdditionalStorageVolume>] :additional_storage_volumes
-    #   A list of additional storage volumes to restore to the DB instance.
-    #   You can restore up to three additional storage volumes using the names
-    #   `rdsdbdata2`, `rdsdbdata3`, and `rdsdbdata4`. Additional storage
-    #   volumes are supported for RDS for Oracle and RDS for SQL Server DB
-    #   instances only.
     #
     # @return [Types::RestoreDBInstanceToPointInTimeResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -30948,6 +30950,16 @@ module Aws::RDS
     #     dedicated_log_volume: false,
     #     ca_certificate_identifier: "String",
     #     engine_lifecycle_support: "String",
+    #     additional_storage_volumes: [
+    #       {
+    #         volume_name: "String", # required
+    #         allocated_storage: 1,
+    #         iops: 1,
+    #         max_allocated_storage: 1,
+    #         storage_throughput: 1,
+    #         storage_type: "String",
+    #       },
+    #     ],
     #     tag_specifications: [
     #       {
     #         resource_type: "String",
@@ -30961,16 +30973,6 @@ module Aws::RDS
     #     ],
     #     manage_master_user_password: false,
     #     master_user_secret_kms_key_id: "String",
-    #     additional_storage_volumes: [
-    #       {
-    #         volume_name: "String", # required
-    #         allocated_storage: 1,
-    #         iops: 1,
-    #         max_allocated_storage: 1,
-    #         storage_throughput: 1,
-    #         storage_type: "String",
-    #       },
-    #     ],
     #   })
     #
     # @example Response structure
@@ -31407,7 +31409,7 @@ module Aws::RDS
     #       backup_retention_period: 1, 
     #       db_cluster_identifier: "mydbcluster", 
     #       database_name: "mydb", 
-    #     }, # Some output ommitted.
+    #     }, 
     #   }
     #
     # @example Request syntax with placeholder values
@@ -31607,7 +31609,7 @@ module Aws::RDS
     #   {
     #     db_instance: {
     #       db_instance_status: "starting", 
-    #     }, # Some output ommitted.
+    #     }, 
     #   }
     #
     # @example Request syntax with placeholder values
@@ -32280,7 +32282,7 @@ module Aws::RDS
     #       backup_retention_period: 1, 
     #       db_cluster_identifier: "mydbcluster", 
     #       database_name: "mydb", 
-    #     }, # Some output ommitted.
+    #     }, 
     #   }
     #
     # @example Request syntax with placeholder values
@@ -32487,7 +32489,7 @@ module Aws::RDS
     #   {
     #     db_instance: {
     #       db_instance_status: "stopping", 
-    #     }, # Some output ommitted.
+    #     }, 
     #   }
     #
     # @example Request syntax with placeholder values
@@ -32860,7 +32862,7 @@ module Aws::RDS
     #     blue_green_deployment: {
     #       blue_green_deployment_identifier: "bgd-v53303651eexfake", 
     #       blue_green_deployment_name: "bgd-cli-test-instance", 
-    #       create_time: Time.parse("2022-02-25T22:33:22.225000+00:00"), 
+    #       create_time: Time.parse("2022-02-25T22:33:22.225Z"), 
     #       source: "arn:aws:rds:us-east-1:123456789012:db:my-db-instance", 
     #       status: "SWITCHOVER_IN_PROGRESS", 
     #       switchover_details: [
@@ -32921,7 +32923,7 @@ module Aws::RDS
     #     blue_green_deployment: {
     #       blue_green_deployment_identifier: "bgd-wi89nwzglccsfake", 
     #       blue_green_deployment_name: "my-blue-green-deployment", 
-    #       create_time: Time.parse("2022-02-25T22:38:49.522000+00:00"), 
+    #       create_time: Time.parse("2022-02-25T22:38:49.522Z"), 
     #       source: "arn:aws:rds:us-east-1:123456789012:cluster:my-aurora-mysql-cluster", 
     #       status: "SWITCHOVER_IN_PROGRESS", 
     #       switchover_details: [
@@ -33340,7 +33342,7 @@ module Aws::RDS
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.304.0'
+      context[:gem_version] = '1.305.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

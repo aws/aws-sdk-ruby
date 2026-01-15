@@ -1189,10 +1189,16 @@ module Aws::RedshiftServerless
     #   An array of parameters to set for advanced control over a database.
     #   The options are `auto_mv`, `datestyle`,
     #   `enable_case_sensitive_identifier`, `enable_user_activity_logging`,
-    #   `query_group`, `search_path`, `require_ssl`, `use_fips_ssl`, and query
-    #   monitoring metrics that let you define performance boundaries. For
-    #   more information about query monitoring rules and available metrics,
-    #   see [ Query monitoring metrics for Amazon Redshift Serverless][1].
+    #   `query_group`, `search_path`, `require_ssl`, `use_fips_ssl`, and
+    #   either `wlm_json_configuration` or query monitoring metrics that let
+    #   you define performance boundaries. You can either specify individual
+    #   query monitoring metrics (such as `max_scan_row_count`,
+    #   `max_query_execution_time`) or use `wlm_json_configuration` to define
+    #   query queues with rules, but not both. If you're using
+    #   `wlm_json_configuration`, the maximum size of `parameterValue` is 8000
+    #   characters. For more information about query monitoring rules and
+    #   available metrics, see [ Query monitoring metrics for Amazon Redshift
+    #   Serverless][1].
     #
     #
     #
@@ -1202,6 +1208,12 @@ module Aws::RedshiftServerless
     #   The value that specifies whether to turn on enhanced virtual private
     #   cloud (VPC) routing, which forces Amazon Redshift Serverless to route
     #   traffic through your VPC instead of over the internet.
+    #
+    # @option params [Boolean] :extra_compute_for_automatic_optimization
+    #   If `true`, allocates additional compute resources for running
+    #   automatic optimization operations.
+    #
+    #   Default: false
     #
     # @option params [String] :ip_address_type
     #   The IP address type that the workgroup supports. Possible values are
@@ -1258,6 +1270,7 @@ module Aws::RedshiftServerless
     #       },
     #     ],
     #     enhanced_vpc_routing: false,
+    #     extra_compute_for_automatic_optimization: false,
     #     ip_address_type: "IpAddressType",
     #     max_capacity: 1,
     #     namespace_name: "NamespaceName", # required
@@ -1303,6 +1316,7 @@ module Aws::RedshiftServerless
     #   resp.workgroup.endpoint.vpc_endpoints[0].vpc_endpoint_id #=> String
     #   resp.workgroup.endpoint.vpc_endpoints[0].vpc_id #=> String
     #   resp.workgroup.enhanced_vpc_routing #=> Boolean
+    #   resp.workgroup.extra_compute_for_automatic_optimization #=> Boolean
     #   resp.workgroup.ip_address_type #=> String
     #   resp.workgroup.max_capacity #=> Integer
     #   resp.workgroup.namespace_name #=> String
@@ -1684,6 +1698,7 @@ module Aws::RedshiftServerless
     #   resp.workgroup.endpoint.vpc_endpoints[0].vpc_endpoint_id #=> String
     #   resp.workgroup.endpoint.vpc_endpoints[0].vpc_id #=> String
     #   resp.workgroup.enhanced_vpc_routing #=> Boolean
+    #   resp.workgroup.extra_compute_for_automatic_optimization #=> Boolean
     #   resp.workgroup.ip_address_type #=> String
     #   resp.workgroup.max_capacity #=> Integer
     #   resp.workgroup.namespace_name #=> String
@@ -2363,6 +2378,7 @@ module Aws::RedshiftServerless
     #   resp.workgroup.endpoint.vpc_endpoints[0].vpc_endpoint_id #=> String
     #   resp.workgroup.endpoint.vpc_endpoints[0].vpc_id #=> String
     #   resp.workgroup.enhanced_vpc_routing #=> Boolean
+    #   resp.workgroup.extra_compute_for_automatic_optimization #=> Boolean
     #   resp.workgroup.ip_address_type #=> String
     #   resp.workgroup.max_capacity #=> Integer
     #   resp.workgroup.namespace_name #=> String
@@ -3219,6 +3235,7 @@ module Aws::RedshiftServerless
     #   resp.workgroups[0].endpoint.vpc_endpoints[0].vpc_endpoint_id #=> String
     #   resp.workgroups[0].endpoint.vpc_endpoints[0].vpc_id #=> String
     #   resp.workgroups[0].enhanced_vpc_routing #=> Boolean
+    #   resp.workgroups[0].extra_compute_for_automatic_optimization #=> Boolean
     #   resp.workgroups[0].ip_address_type #=> String
     #   resp.workgroups[0].max_capacity #=> Integer
     #   resp.workgroups[0].namespace_name #=> String
@@ -4209,10 +4226,16 @@ module Aws::RedshiftServerless
     #   An array of parameters to set for advanced control over a database.
     #   The options are `auto_mv`, `datestyle`,
     #   `enable_case_sensitive_identifier`, `enable_user_activity_logging`,
-    #   `query_group`, `search_path`, `require_ssl`, `use_fips_ssl`, and query
-    #   monitoring metrics that let you define performance boundaries. For
-    #   more information about query monitoring rules and available metrics,
-    #   see [ Query monitoring metrics for Amazon Redshift Serverless][1].
+    #   `query_group`, `search_path`, `require_ssl`, `use_fips_ssl`, and
+    #   either `wlm_json_configuration` or query monitoring metrics that let
+    #   you define performance boundaries. You can either specify individual
+    #   query monitoring metrics (such as `max_scan_row_count`,
+    #   `max_query_execution_time`) or use `wlm_json_configuration` to define
+    #   query queues with rules, but not both. If you're using
+    #   `wlm_json_configuration`, the maximum size of `parameterValue` is 8000
+    #   characters. For more information about query monitoring rules and
+    #   available metrics, see [ Query monitoring metrics for Amazon Redshift
+    #   Serverless][1].
     #
     #
     #
@@ -4222,6 +4245,12 @@ module Aws::RedshiftServerless
     #   The value that specifies whether to turn on enhanced virtual private
     #   cloud (VPC) routing, which forces Amazon Redshift Serverless to route
     #   traffic through your VPC.
+    #
+    # @option params [Boolean] :extra_compute_for_automatic_optimization
+    #   If `true`, allocates additional compute resources for running
+    #   automatic optimization operations.
+    #
+    #   Default: false
     #
     # @option params [String] :ip_address_type
     #   The IP address type that the workgroup supports. Possible values are
@@ -4273,6 +4302,7 @@ module Aws::RedshiftServerless
     #       },
     #     ],
     #     enhanced_vpc_routing: false,
+    #     extra_compute_for_automatic_optimization: false,
     #     ip_address_type: "IpAddressType",
     #     max_capacity: 1,
     #     port: 1,
@@ -4311,6 +4341,7 @@ module Aws::RedshiftServerless
     #   resp.workgroup.endpoint.vpc_endpoints[0].vpc_endpoint_id #=> String
     #   resp.workgroup.endpoint.vpc_endpoints[0].vpc_id #=> String
     #   resp.workgroup.enhanced_vpc_routing #=> Boolean
+    #   resp.workgroup.extra_compute_for_automatic_optimization #=> Boolean
     #   resp.workgroup.ip_address_type #=> String
     #   resp.workgroup.max_capacity #=> Integer
     #   resp.workgroup.namespace_name #=> String
@@ -4358,7 +4389,7 @@ module Aws::RedshiftServerless
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-redshiftserverless'
-      context[:gem_version] = '1.62.0'
+      context[:gem_version] = '1.63.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

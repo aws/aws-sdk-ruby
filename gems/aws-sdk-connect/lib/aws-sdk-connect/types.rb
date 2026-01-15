@@ -1082,6 +1082,34 @@ module Aws::Connect
     #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #   @return [String]
     #
+    # @!attribute [rw] hours_of_operation_id
+    #   The identifier of the child hours of operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] parent_hours_of_operation_configs
+    #   The Amazon Resource Names (ARNs) of the parent hours of operation
+    #   resources to associate with the child hours of operation resource.
+    #   @return [Array<Types::ParentHoursOfOperationConfig>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/AssociateHoursOfOperationsRequest AWS API Documentation
+    #
+    class AssociateHoursOfOperationsRequest < Struct.new(
+      :instance_id,
+      :hours_of_operation_id,
+      :parent_hours_of_operation_configs)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #   @return [String]
+    #
     # @!attribute [rw] resource_type
     #   A valid resource type. To [enable streaming for real-time analysis
     #   of contacts][1], use the following types:
@@ -1297,6 +1325,9 @@ module Aws::Connect
     #
     # @!attribute [rw] manual_assignment_queue_configs
     #   The manual assignment queues to associate with this routing profile.
+    #
+    #   Note: Use this config for chat, email, and task contacts. It does
+    #   not support voice contacts.
     #   @return [Array<Types::RoutingProfileManualAssignmentQueueConfig>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/AssociateRoutingProfileQueuesRequest AWS API Documentation
@@ -5654,6 +5685,23 @@ module Aws::Connect
     #   The date until when the hours of operation override is effective.
     #   @return [String]
     #
+    # @!attribute [rw] recurrence_config
+    #   Configuration for a recurring event.
+    #   @return [Types::RecurrenceConfig]
+    #
+    # @!attribute [rw] override_type
+    #   Whether the override will be defined as a *standard* or as a
+    #   *recurring event*.
+    #
+    #   For more information about how override types are applied, see
+    #   [Build your list of overrides][1] in the <i> Administrator
+    #   Guide</i>.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/https:/docs.aws.amazon.com/connect/latest/adminguide/hours-of-operation-overrides.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateHoursOfOperationOverrideRequest AWS API Documentation
     #
     class CreateHoursOfOperationOverrideRequest < Struct.new(
@@ -5663,7 +5711,9 @@ module Aws::Connect
       :description,
       :config,
       :effective_from,
-      :effective_till)
+      :effective_till,
+      :recurrence_config,
+      :override_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5706,6 +5756,18 @@ module Aws::Connect
     #   time, and end time.
     #   @return [Array<Types::HoursOfOperationConfig>]
     #
+    # @!attribute [rw] parent_hours_of_operation_configs
+    #   Configuration for parent hours of operations. Eg: ResourceArn.
+    #
+    #   For more information about parent hours of operations, see [Link
+    #   overrides from different hours of operation][1] in the <i>
+    #   Administrator Guide</i>.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/https:/docs.aws.amazon.com/connect/latest/adminguide/hours-of-operation-overrides.html
+    #   @return [Array<Types::ParentHoursOfOperationConfig>]
+    #
     # @!attribute [rw] tags
     #   The tags used to organize, track, or control access for this
     #   resource. For example, \{ "Tags": \{"key1":"value1",
@@ -5720,6 +5782,7 @@ module Aws::Connect
       :description,
       :time_zone,
       :config,
+      :parent_hours_of_operation_configs,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -6414,6 +6477,9 @@ module Aws::Connect
     #   during a CreateRoutingProfile API request. It is different from the
     #   quota of 50 queues per routing profile per instance that is listed
     #   in Amazon Connect service quotas.
+    #
+    #   Note: Use this config for chat, email, and task contacts. It does
+    #   not support voice contacts.
     #   @return [Array<Types::RoutingProfileManualAssignmentQueueConfig>]
     #
     # @!attribute [rw] media_concurrencies
@@ -10561,6 +10627,35 @@ module Aws::Connect
     #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #   @return [String]
     #
+    # @!attribute [rw] hours_of_operation_id
+    #   The identifier of the child hours of operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] parent_hours_of_operation_ids
+    #   The Amazon Resource Names (ARNs) of the parent hours of operation
+    #   resources to disassociate with the child hours of operation
+    #   resource.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DisassociateHoursOfOperationsRequest AWS API Documentation
+    #
+    class DisassociateHoursOfOperationsRequest < Struct.new(
+      :instance_id,
+      :hours_of_operation_id,
+      :parent_hours_of_operation_ids)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #   @return [String]
+    #
     # @!attribute [rw] association_id
     #   The existing association identifier that uniquely identifies the
     #   resource type and storage config for the given instance ID.
@@ -11055,6 +11150,27 @@ module Aws::Connect
     class EffectiveHoursOfOperations < Struct.new(
       :date,
       :operational_hours)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the hours of operation overrides which contribute to
+    # effective hours of operations.
+    #
+    # @!attribute [rw] date
+    #   The date that the hours of operation override applies to.
+    #   @return [String]
+    #
+    # @!attribute [rw] override_hours
+    #   Information about the hours of operation overrides that apply to a
+    #   specific date.
+    #   @return [Array<Types::OverrideHour>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/EffectiveOverrideHours AWS API Documentation
+    #
+    class EffectiveOverrideHours < Struct.new(
+      :date,
+      :override_hours)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -14344,6 +14460,19 @@ module Aws::Connect
     #   Information about the effective hours of operations.
     #   @return [Array<Types::EffectiveHoursOfOperations>]
     #
+    # @!attribute [rw] effective_override_hours_list
+    #   Information about override configurations applied to the base hours
+    #   of operation to calculate the effective hours.
+    #
+    #   For more information about how override types are applied, see
+    #   [Build your list of overrides][1] in the <i> Administrator
+    #   Guide</i>.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/https:/docs.aws.amazon.com/connect/latest/adminguide/hours-of-operation-overrides.html
+    #   @return [Array<Types::EffectiveOverrideHours>]
+    #
     # @!attribute [rw] time_zone
     #   The time zone for the hours of operation.
     #   @return [String]
@@ -14352,6 +14481,7 @@ module Aws::Connect
     #
     class GetEffectiveHoursOfOperationsResponse < Struct.new(
       :effective_hours_of_operation_list,
+      :effective_override_hours_list,
       :time_zone)
       SENSITIVE = []
       include Aws::Structure
@@ -17851,6 +17981,10 @@ module Aws::Connect
     #   Configuration information for the hours of operation.
     #   @return [Array<Types::HoursOfOperationConfig>]
     #
+    # @!attribute [rw] parent_hours_of_operations
+    #   Information about parent hours of operations.
+    #   @return [Array<Types::HoursOfOperationsIdentifier>]
+    #
     # @!attribute [rw] tags
     #   The tags used to organize, track, or control access for this
     #   resource. For example, \{ "Tags": \{"key1":"value1",
@@ -17875,6 +18009,7 @@ module Aws::Connect
       :description,
       :time_zone,
       :config,
+      :parent_hours_of_operations,
       :tags,
       :last_modified_time,
       :last_modified_region)
@@ -17942,6 +18077,15 @@ module Aws::Connect
     #   The date until the hours of operation override is effective.
     #   @return [String]
     #
+    # @!attribute [rw] recurrence_config
+    #   Configuration for a recurring event.
+    #   @return [Types::RecurrenceConfig]
+    #
+    # @!attribute [rw] override_type
+    #   Whether the override will be defined as a *standard* or as a
+    #   *recurring event*.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/HoursOfOperationOverride AWS API Documentation
     #
     class HoursOfOperationOverride < Struct.new(
@@ -17952,7 +18096,9 @@ module Aws::Connect
       :description,
       :config,
       :effective_from,
-      :effective_till)
+      :effective_till,
+      :recurrence_config,
+      :override_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -18122,6 +18268,30 @@ module Aws::Connect
     class HoursOfOperationTimeSlice < Struct.new(
       :hours,
       :minutes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Identifier for a hours of operations resource: ARN, ID, Name
+    #
+    # @!attribute [rw] name
+    #   Name of the hours of operation
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   Unique identifier of the hours of operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   Amazon Resource Name (ARN) of the hours of operations.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/HoursOfOperationsIdentifier AWS API Documentation
+    #
+    class HoursOfOperationsIdentifier < Struct.new(
+      :name,
+      :id,
+      :arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -19261,6 +19431,70 @@ module Aws::Connect
     class ListBotsResponse < Struct.new(
       :lex_bots,
       :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #   @return [String]
+    #
+    # @!attribute [rw] hours_of_operation_id
+    #   The identifier of the parent hours of operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return per page. The default
+    #   MaxResult size is 100.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListChildHoursOfOperationsRequest AWS API Documentation
+    #
+    class ListChildHoursOfOperationsRequest < Struct.new(
+      :instance_id,
+      :hours_of_operation_id,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   If there are additional results, this is the token for the next set
+    #   of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] child_hours_of_operations_summary_list
+    #   Information about the hours of operation.
+    #   @return [Array<Types::HoursOfOperationsIdentifier>]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The timestamp when this resource was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_region
+    #   The Amazon Web Services Region where this resource was last
+    #   modified.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListChildHoursOfOperationsResponse AWS API Documentation
+    #
+    class ListChildHoursOfOperationsResponse < Struct.new(
+      :next_token,
+      :child_hours_of_operations_summary_list,
+      :last_modified_time,
+      :last_modified_region)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -23077,6 +23311,37 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # Information about hours of operation override
+    #
+    # @!attribute [rw] start
+    #   The start time or end time for an hours of operation override.
+    #   @return [Types::OverrideTimeSlice]
+    #
+    # @!attribute [rw] end
+    #   The start time or end time for an hours of operation override.
+    #   @return [Types::OverrideTimeSlice]
+    #
+    # @!attribute [rw] override_name
+    #   Unique identifier name for the override.
+    #   @return [String]
+    #
+    # @!attribute [rw] operational_status
+    #   Indicates whether the status is open or closed during the override
+    #   period. This status determines how the override modifies the base
+    #   hours of operation schedule.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/OverrideHour AWS API Documentation
+    #
+    class OverrideHour < Struct.new(
+      :start,
+      :end,
+      :override_name,
+      :operational_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The start time or end time for an hours of operation override.
     #
     # @!attribute [rw] hours
@@ -23216,6 +23481,20 @@ module Aws::Connect
       :default,
       :active,
       :contrast_text)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains configuration for the parent hours of operation.
+    #
+    # @!attribute [rw] hours_of_operation_id
+    #   The identifier for the hours of operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ParentHoursOfOperationConfig AWS API Documentation
+    #
+    class ParentHoursOfOperationConfig < Struct.new(
+      :hours_of_operation_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -25232,6 +25511,91 @@ module Aws::Connect
       :status,
       :deletion_reason,
       :unprocessed_transcript_location)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Defines the recurrence configuration for overrides. This configuration
+    # uses a recurrence pattern to specify when and how frequently an event
+    # should repeat.
+    #
+    # @!attribute [rw] recurrence_pattern
+    #   The recurrence pattern that defines how the event repeats. Example:
+    #   Frequency, Interval, ByMonth, ByMonthDay, ByWeekdayOccurrence
+    #   @return [Types::RecurrencePattern]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/RecurrenceConfig AWS API Documentation
+    #
+    class RecurrenceConfig < Struct.new(
+      :recurrence_pattern)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the detailed pattern for event recurrence. Use this to
+    # define complex scheduling rules such as "every 2nd Tuesday of the
+    # month" or "every 3 months on the 15th".
+    #
+    # @!attribute [rw] frequency
+    #   Defines how often the pattern repeats. This is the base unit for the
+    #   recurrence schedule and works in conjunction with the Interval field
+    #   to determine the exact repetition sequence.
+    #   @return [String]
+    #
+    # @!attribute [rw] interval
+    #   Specifies the number of frequency units between each occurrence.
+    #   Must be a positive integer.
+    #
+    #   Examples: To repeat every week, set Interval=1 with WEEKLY
+    #   frequency. To repeat every two months, set Interval=2 with MONTHLY
+    #   frequency.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] by_month
+    #   Specifies which month the event should occur in (1-12, where
+    #   1=January, 12=December). Used with YEARLY frequency to schedule
+    #   events in specific month.
+    #
+    #   Note: It does not accept multiple values in the same list
+    #   @return [Array<Integer>]
+    #
+    # @!attribute [rw] by_month_day
+    #   Specifies which day of the month the event should occur on (1-31).
+    #   Used with MONTHLY or YEARLY frequency to schedule events on specific
+    #   date within a month.
+    #
+    #   Examples: \[15\] for events on the 15th of each month, \[-1\] for
+    #   events on the last day of month.
+    #
+    #   Note: It does not accept multiple values in the same list. If a
+    #   specified day doesn't exist in a particular month (e.g., day 31 in
+    #   February), the event will be skipped for that month. This field
+    #   cannot be used simultaneously with ByWeekdayOccurrence as they
+    #   represent different scheduling approaches (specific dates vs.
+    #   relative weekday positions).
+    #   @return [Array<Integer>]
+    #
+    # @!attribute [rw] by_weekday_occurrence
+    #   Specifies which occurrence of a weekday within the month the event
+    #   should occur on. Must be used with MONTHLY or YEARLY frequency.
+    #
+    #   Example: 2 corresponds to second occurrence of the weekday in the
+    #   month. -1 corresponds to last occurrence of the weekday in the month
+    #
+    #   The weekday itself is specified separately in the
+    #   HoursOfOperationConfig. Example: To schedule the recurring event for
+    #   the 2nd Thursday of April every year, set ByWeekdayOccurrence=\[2\],
+    #   Day=THURSDAY, ByMonth=\[4\], Frequency: YEARLY and INTERVAL=1.
+    #   @return [Array<Integer>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/RecurrencePattern AWS API Documentation
+    #
+    class RecurrencePattern < Struct.new(
+      :frequency,
+      :interval,
+      :by_month,
+      :by_month_day,
+      :by_weekday_occurrence)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -32483,6 +32847,23 @@ module Aws::Connect
     #   The date until the hours of operation override is effective.
     #   @return [String]
     #
+    # @!attribute [rw] recurrence_config
+    #   Configuration for a recurring event.
+    #   @return [Types::RecurrenceConfig]
+    #
+    # @!attribute [rw] override_type
+    #   Whether the override will be defined as a *standard* or as a
+    #   *recurring event*.
+    #
+    #   For more information about how override types are applied, see
+    #   [Build your list of overrides][1] in the <i> Administrator
+    #   Guide</i>.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/https:/docs.aws.amazon.com/connect/latest/adminguide/hours-of-operation-overrides.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateHoursOfOperationOverrideRequest AWS API Documentation
     #
     class UpdateHoursOfOperationOverrideRequest < Struct.new(
@@ -32493,7 +32874,9 @@ module Aws::Connect
       :description,
       :config,
       :effective_from,
-      :effective_till)
+      :effective_till,
+      :recurrence_config,
+      :override_type)
       SENSITIVE = []
       include Aws::Structure
     end

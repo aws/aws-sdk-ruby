@@ -276,6 +276,13 @@ module Aws::Connect
     class AssociateFlowResponse < Aws::EmptyStructure
     end
 
+    class AssociateHoursOfOperationsRequest
+      attr_accessor instance_id: ::String
+      attr_accessor hours_of_operation_id: ::String
+      attr_accessor parent_hours_of_operation_configs: ::Array[Types::ParentHoursOfOperationConfig]
+      SENSITIVE: []
+    end
+
     class AssociateInstanceStorageConfigRequest
       attr_accessor instance_id: ::String
       attr_accessor resource_type: ("CHAT_TRANSCRIPTS" | "CALL_RECORDINGS" | "SCHEDULED_REPORTS" | "MEDIA_STREAMS" | "CONTACT_TRACE_RECORDS" | "AGENT_EVENTS" | "REAL_TIME_CONTACT_ANALYSIS_SEGMENTS" | "ATTACHMENTS" | "CONTACT_EVALUATIONS" | "SCREEN_RECORDINGS" | "REAL_TIME_CONTACT_ANALYSIS_CHAT_SEGMENTS" | "REAL_TIME_CONTACT_ANALYSIS_VOICE_SEGMENTS" | "EMAIL_MESSAGES")
@@ -1350,6 +1357,8 @@ module Aws::Connect
       attr_accessor config: ::Array[Types::HoursOfOperationOverrideConfig]
       attr_accessor effective_from: ::String
       attr_accessor effective_till: ::String
+      attr_accessor recurrence_config: Types::RecurrenceConfig
+      attr_accessor override_type: ("STANDARD" | "OPEN" | "CLOSED")
       SENSITIVE: []
     end
 
@@ -1364,6 +1373,7 @@ module Aws::Connect
       attr_accessor description: ::String
       attr_accessor time_zone: ::String
       attr_accessor config: ::Array[Types::HoursOfOperationConfig]
+      attr_accessor parent_hours_of_operation_configs: ::Array[Types::ParentHoursOfOperationConfig]
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
     end
@@ -2659,6 +2669,13 @@ module Aws::Connect
     class DisassociateFlowResponse < Aws::EmptyStructure
     end
 
+    class DisassociateHoursOfOperationsRequest
+      attr_accessor instance_id: ::String
+      attr_accessor hours_of_operation_id: ::String
+      attr_accessor parent_hours_of_operation_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
     class DisassociateInstanceStorageConfigRequest
       attr_accessor instance_id: ::String
       attr_accessor association_id: ::String
@@ -2788,6 +2805,12 @@ module Aws::Connect
     class EffectiveHoursOfOperations
       attr_accessor date: ::String
       attr_accessor operational_hours: ::Array[Types::OperationalHour]
+      SENSITIVE: []
+    end
+
+    class EffectiveOverrideHours
+      attr_accessor date: ::String
+      attr_accessor override_hours: ::Array[Types::OverrideHour]
       SENSITIVE: []
     end
 
@@ -3646,6 +3669,7 @@ module Aws::Connect
 
     class GetEffectiveHoursOfOperationsResponse
       attr_accessor effective_hours_of_operation_list: ::Array[Types::EffectiveHoursOfOperations]
+      attr_accessor effective_override_hours_list: ::Array[Types::EffectiveOverrideHours]
       attr_accessor time_zone: ::String
       SENSITIVE: []
     end
@@ -3897,6 +3921,7 @@ module Aws::Connect
       attr_accessor description: ::String
       attr_accessor time_zone: ::String
       attr_accessor config: ::Array[Types::HoursOfOperationConfig]
+      attr_accessor parent_hours_of_operations: ::Array[Types::HoursOfOperationsIdentifier]
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor last_modified_time: ::Time
       attr_accessor last_modified_region: ::String
@@ -3919,6 +3944,8 @@ module Aws::Connect
       attr_accessor config: ::Array[Types::HoursOfOperationOverrideConfig]
       attr_accessor effective_from: ::String
       attr_accessor effective_till: ::String
+      attr_accessor recurrence_config: Types::RecurrenceConfig
+      attr_accessor override_type: ("STANDARD" | "OPEN" | "CLOSED")
       SENSITIVE: []
     end
 
@@ -3961,6 +3988,13 @@ module Aws::Connect
     class HoursOfOperationTimeSlice
       attr_accessor hours: ::Integer
       attr_accessor minutes: ::Integer
+      SENSITIVE: []
+    end
+
+    class HoursOfOperationsIdentifier
+      attr_accessor name: ::String
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
       SENSITIVE: []
     end
 
@@ -4267,6 +4301,22 @@ module Aws::Connect
     class ListBotsResponse
       attr_accessor lex_bots: ::Array[Types::LexBotConfig]
       attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListChildHoursOfOperationsRequest
+      attr_accessor instance_id: ::String
+      attr_accessor hours_of_operation_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListChildHoursOfOperationsResponse
+      attr_accessor next_token: ::String
+      attr_accessor child_hours_of_operations_summary_list: ::Array[Types::HoursOfOperationsIdentifier]
+      attr_accessor last_modified_time: ::Time
+      attr_accessor last_modified_region: ::String
       SENSITIVE: []
     end
 
@@ -5268,6 +5318,14 @@ module Aws::Connect
       SENSITIVE: []
     end
 
+    class OverrideHour
+      attr_accessor start: Types::OverrideTimeSlice
+      attr_accessor end: Types::OverrideTimeSlice
+      attr_accessor override_name: ::String
+      attr_accessor operational_status: ("OPEN" | "CLOSED")
+      SENSITIVE: []
+    end
+
     class OverrideTimeSlice
       attr_accessor hours: ::Integer
       attr_accessor minutes: ::Integer
@@ -5304,6 +5362,11 @@ module Aws::Connect
       attr_accessor default: ::String
       attr_accessor active: ::String
       attr_accessor contrast_text: ::String
+      SENSITIVE: []
+    end
+
+    class ParentHoursOfOperationConfig
+      attr_accessor hours_of_operation_id: ::String
       SENSITIVE: []
     end
 
@@ -5834,6 +5897,20 @@ module Aws::Connect
       attr_accessor status: ("AVAILABLE" | "DELETED")
       attr_accessor deletion_reason: ::String
       attr_accessor unprocessed_transcript_location: ::String
+      SENSITIVE: []
+    end
+
+    class RecurrenceConfig
+      attr_accessor recurrence_pattern: Types::RecurrencePattern
+      SENSITIVE: []
+    end
+
+    class RecurrencePattern
+      attr_accessor frequency: ("WEEKLY" | "MONTHLY" | "YEARLY")
+      attr_accessor interval: ::Integer
+      attr_accessor by_month: ::Array[::Integer]
+      attr_accessor by_month_day: ::Array[::Integer]
+      attr_accessor by_weekday_occurrence: ::Array[::Integer]
       SENSITIVE: []
     end
 
@@ -7556,6 +7633,8 @@ module Aws::Connect
       attr_accessor config: ::Array[Types::HoursOfOperationOverrideConfig]
       attr_accessor effective_from: ::String
       attr_accessor effective_till: ::String
+      attr_accessor recurrence_config: Types::RecurrenceConfig
+      attr_accessor override_type: ("STANDARD" | "OPEN" | "CLOSED")
       SENSITIVE: []
     end
 

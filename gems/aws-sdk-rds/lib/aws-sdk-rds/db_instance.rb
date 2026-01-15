@@ -1060,6 +1060,16 @@ module Aws::RDS
     #     multi_tenant: false,
     #     dedicated_log_volume: false,
     #     engine_lifecycle_support: "String",
+    #     additional_storage_volumes: [
+    #       {
+    #         volume_name: "String", # required
+    #         allocated_storage: 1,
+    #         iops: 1,
+    #         max_allocated_storage: 1,
+    #         storage_throughput: 1,
+    #         storage_type: "String",
+    #       },
+    #     ],
     #     tag_specifications: [
     #       {
     #         resource_type: "String",
@@ -1072,16 +1082,6 @@ module Aws::RDS
     #       },
     #     ],
     #     master_user_authentication_type: "password", # accepts password, iam-db-auth
-    #     additional_storage_volumes: [
-    #       {
-    #         volume_name: "String", # required
-    #         allocated_storage: 1,
-    #         iops: 1,
-    #         max_allocated_storage: 1,
-    #         storage_throughput: 1,
-    #         storage_type: "String",
-    #       },
-    #     ],
     #   })
     # @param [Hash] options ({})
     # @option options [String] :db_name
@@ -2313,6 +2313,12 @@ module Aws::RDS
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html
+    # @option options [Array<Types::AdditionalStorageVolume>] :additional_storage_volumes
+    #   A list of additional storage volumes to create for the DB instance.
+    #   You can create up to three additional storage volumes using the names
+    #   `rdsdbdata2`, `rdsdbdata3`, and `rdsdbdata4`. Additional storage
+    #   volumes are supported for RDS for Oracle and RDS for SQL Server DB
+    #   instances only.
     # @option options [Array<Types::TagSpecification>] :tag_specifications
     #   Tags to assign to resources associated with the DB instance.
     #
@@ -2334,12 +2340,6 @@ module Aws::RDS
     #
     #   This option is only valid for RDS for PostgreSQL and Aurora PostgreSQL
     #   engines.
-    # @option options [Array<Types::AdditionalStorageVolume>] :additional_storage_volumes
-    #   A list of additional storage volumes to create for the DB instance.
-    #   You can create up to three additional storage volumes using the names
-    #   `rdsdbdata2`, `rdsdbdata3`, and `rdsdbdata4`. Additional storage
-    #   volumes are supported for RDS for Oracle and RDS for SQL Server DB
-    #   instances only.
     # @return [DBInstance]
     def create(options = {})
       options = options.merge(db_instance_identifier: @id)
@@ -2412,6 +2412,16 @@ module Aws::RDS
     #     dedicated_log_volume: false,
     #     upgrade_storage_config: false,
     #     ca_certificate_identifier: "String",
+    #     additional_storage_volumes: [
+    #       {
+    #         volume_name: "String", # required
+    #         allocated_storage: 1,
+    #         iops: 1,
+    #         max_allocated_storage: 1,
+    #         storage_throughput: 1,
+    #         storage_type: "String",
+    #       },
+    #     ],
     #     tag_specifications: [
     #       {
     #         resource_type: "String",
@@ -2421,16 +2431,6 @@ module Aws::RDS
     #             value: "String",
     #           },
     #         ],
-    #       },
-    #     ],
-    #     additional_storage_volumes: [
-    #       {
-    #         volume_name: "String", # required
-    #         allocated_storage: 1,
-    #         iops: 1,
-    #         max_allocated_storage: 1,
-    #         storage_throughput: 1,
-    #         storage_type: "String",
     #       },
     #     ],
     #     source_region: "String",
@@ -3068,6 +3068,12 @@ module Aws::RDS
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html
     #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL.html
+    # @option options [Array<Types::AdditionalStorageVolume>] :additional_storage_volumes
+    #   A list of additional storage volumes to create for the DB instance.
+    #   You can create up to three additional storage volumes using the names
+    #   `rdsdbdata2`, `rdsdbdata3`, and `rdsdbdata4`. Additional storage
+    #   volumes are supported for RDS for Oracle and RDS for SQL Server DB
+    #   instances only.
     # @option options [Array<Types::TagSpecification>] :tag_specifications
     #   Tags to assign to resources associated with the DB instance.
     #
@@ -3076,12 +3082,6 @@ module Aws::RDS
     #   * `auto-backup` - The DB instance's automated backup.
     #
     #   ^
-    # @option options [Array<Types::AdditionalStorageVolume>] :additional_storage_volumes
-    #   A list of additional storage volumes to create for the DB instance.
-    #   You can create up to three additional storage volumes using the names
-    #   `rdsdbdata2`, `rdsdbdata3`, and `rdsdbdata4`. Additional storage
-    #   volumes are supported for RDS for Oracle and RDS for SQL Server DB
-    #   instances only.
     # @option options [String] :source_region
     #   The source region of the snapshot. This is only needed when the
     #   shapshot is encrypted and in a different region.
@@ -3286,6 +3286,17 @@ module Aws::RDS
     #     multi_tenant: false,
     #     dedicated_log_volume: false,
     #     engine: "String",
+    #     additional_storage_volumes: [
+    #       {
+    #         volume_name: "String", # required
+    #         allocated_storage: 1,
+    #         iops: 1,
+    #         max_allocated_storage: 1,
+    #         storage_throughput: 1,
+    #         storage_type: "String",
+    #         set_for_delete: false,
+    #       },
+    #     ],
     #     tag_specifications: [
     #       {
     #         resource_type: "String",
@@ -3298,17 +3309,6 @@ module Aws::RDS
     #       },
     #     ],
     #     master_user_authentication_type: "password", # accepts password, iam-db-auth
-    #     additional_storage_volumes: [
-    #       {
-    #         volume_name: "String", # required
-    #         allocated_storage: 1,
-    #         iops: 1,
-    #         max_allocated_storage: 1,
-    #         storage_throughput: 1,
-    #         storage_type: "String",
-    #         set_for_delete: false,
-    #       },
-    #     ],
     #   })
     # @param [Hash] options ({})
     # @option options [Integer] :allocated_storage
@@ -4395,6 +4395,11 @@ module Aws::RDS
     #     parameter group. To avoid reverting to the default, specify a new
     #     parameter group with `--db-parameter-group-name` and a new option
     #     group with `--option-group-name`.
+    # @option options [Array<Types::ModifyAdditionalStorageVolume>] :additional_storage_volumes
+    #   A list of additional storage volumes to modify or delete for the DB
+    #   instance. You can create up to 3 additional storage volumes.
+    #   Additional storage volumes are supported for RDS for Oracle and RDS
+    #   for SQL Server DB instances only.
     # @option options [Array<Types::TagSpecification>] :tag_specifications
     #   Tags to assign to resources associated with the DB instance.
     #
@@ -4416,11 +4421,6 @@ module Aws::RDS
     #
     #   This option is only valid for RDS for PostgreSQL and Aurora PostgreSQL
     #   engines.
-    # @option options [Array<Types::ModifyAdditionalStorageVolume>] :additional_storage_volumes
-    #   A list of additional storage volumes to modify or delete for the DB
-    #   instance. You can create up to 3 additional storage volumes.
-    #   Additional storage volumes are supported for RDS for Oracle and RDS
-    #   for SQL Server DB instances only.
     # @return [DBInstance]
     def modify(options = {})
       options = options.merge(db_instance_identifier: @id)
@@ -4590,6 +4590,16 @@ module Aws::RDS
     #     dedicated_log_volume: false,
     #     ca_certificate_identifier: "String",
     #     engine_lifecycle_support: "String",
+    #     additional_storage_volumes: [
+    #       {
+    #         volume_name: "String", # required
+    #         allocated_storage: 1,
+    #         iops: 1,
+    #         max_allocated_storage: 1,
+    #         storage_throughput: 1,
+    #         storage_type: "String",
+    #       },
+    #     ],
     #     tag_specifications: [
     #       {
     #         resource_type: "String",
@@ -4603,16 +4613,6 @@ module Aws::RDS
     #     ],
     #     manage_master_user_password: false,
     #     master_user_secret_kms_key_id: "String",
-    #     additional_storage_volumes: [
-    #       {
-    #         volume_name: "String", # required
-    #         allocated_storage: 1,
-    #         iops: 1,
-    #         max_allocated_storage: 1,
-    #         storage_throughput: 1,
-    #         storage_type: "String",
-    #       },
-    #     ],
     #   })
     # @param [Hash] options ({})
     # @option options [required, String] :target_db_instance_identifier
@@ -5175,6 +5175,12 @@ module Aws::RDS
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html
+    # @option options [Array<Types::AdditionalStorageVolume>] :additional_storage_volumes
+    #   A list of additional storage volumes to restore to the DB instance.
+    #   You can restore up to three additional storage volumes using the names
+    #   `rdsdbdata2`, `rdsdbdata3`, and `rdsdbdata4`. Additional storage
+    #   volumes are supported for RDS for Oracle and RDS for SQL Server DB
+    #   instances only.
     # @option options [Array<Types::TagSpecification>] :tag_specifications
     #   Tags to assign to resources associated with the DB instance.
     #
@@ -5221,12 +5227,6 @@ module Aws::RDS
     #   There is a default KMS key for your Amazon Web Services account. Your
     #   Amazon Web Services account has a different default KMS key for each
     #   Amazon Web Services Region.
-    # @option options [Array<Types::AdditionalStorageVolume>] :additional_storage_volumes
-    #   A list of additional storage volumes to restore to the DB instance.
-    #   You can restore up to three additional storage volumes using the names
-    #   `rdsdbdata2`, `rdsdbdata3`, and `rdsdbdata4`. Additional storage
-    #   volumes are supported for RDS for Oracle and RDS for SQL Server DB
-    #   instances only.
     # @return [DBInstance]
     def restore(options = {})
       options = options.merge(source_db_instance_identifier: @id)

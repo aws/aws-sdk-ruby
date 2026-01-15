@@ -402,8 +402,10 @@ module Aws
       def update_whats_app_message_template: (
                                                id: ::String,
                                                meta_template_id: ::String,
+                                               ?parameter_format: ::String,
                                                ?template_category: ::String,
-                                               ?template_components: ::String
+                                               ?template_components: ::String,
+                                               ?cta_url_link_tracking_opted_out: bool
                                              ) -> _UpdateWhatsAppMessageTemplateResponseSuccess
                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateWhatsAppMessageTemplateResponseSuccess
     end

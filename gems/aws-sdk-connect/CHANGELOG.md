@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.235.0 (2026-01-14)
+------------------
+
+* Feature - Amazon Connect makes it easier to manage contact center operating hours by enabling automated scheduling for recurring events like holidays and maintenance windows. Set up recurring patterns (weekly, monthly, etc.) or link to another hours of operation to inherit overrides.
+
 1.234.0 (2026-01-08)
 ------------------
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.63.0 (2026-01-14)
+------------------
+
+* Feature - Adds support for enabling extra compute resources for automatic optimization during create and update operations in Amazon Redshift Serverless workgroups.
+
 1.62.0 (2026-01-08)
 ------------------
 

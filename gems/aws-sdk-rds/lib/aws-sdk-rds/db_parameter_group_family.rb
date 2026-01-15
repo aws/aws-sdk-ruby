@@ -172,42 +172,28 @@ module Aws::RDS
     #         values: ["String"], # required
     #       },
     #     ],
-    #     max_records: 1,
-    #     marker: "String",
     #   })
     # @param [Hash] options ({})
     # @option options [Array<Types::Filter>] :filters
     #   This parameter isn't currently supported.
-    # @option options [Integer] :max_records
-    #   The maximum number of records to include in the response. If more
-    #   records exist than the specified `MaxRecords` value, a pagination
-    #   token called a marker is included in the response so you can retrieve
-    #   the remaining results.
-    #
-    #   Default: 100
-    #
-    #   Constraints: Minimum 20, maximum 100.
-    # @option options [String] :marker
-    #   An optional pagination token provided by a previous
-    #   `DescribeEngineDefaultClusterParameters` request. If this parameter is
-    #   specified, the response includes only records beyond the marker, up to
-    #   the value specified by `MaxRecords`.
     # @return [Parameter::Collection]
     def engine_default_cluster_parameters(options = {})
       batches = Enumerator.new do |y|
-        batch = []
         options = options.merge(db_parameter_group_family: @name)
         resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
           @client.describe_engine_default_cluster_parameters(options)
         end
-        resp.data.engine_defaults.parameters.each do |p|
-          batch << Parameter.new(
-            name: p.parameter_name,
-            data: p,
-            client: @client
-          )
+        resp.each_page do |page|
+          batch = []
+          page.data.engine_defaults.parameters.each do |p|
+            batch << Parameter.new(
+              name: p.parameter_name,
+              data: p,
+              client: @client
+            )
+          end
+          y.yield(batch)
         end
-        y.yield(batch)
       end
       Parameter::Collection.new(batches)
     end

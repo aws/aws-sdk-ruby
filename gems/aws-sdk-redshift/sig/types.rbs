@@ -252,6 +252,7 @@ module Aws::Redshift
       attr_accessor multi_az_secondary: Types::SecondaryClusterInfo
       attr_accessor lakehouse_registration_status: ::String
       attr_accessor catalog_arn: ::String
+      attr_accessor extra_compute_for_automatic_optimization: ::String
       SENSITIVE: []
     end
 
@@ -536,6 +537,7 @@ module Aws::Redshift
       attr_accessor multi_az: bool
       attr_accessor redshift_idc_application_arn: ::String
       attr_accessor catalog_name: ::String
+      attr_accessor extra_compute_for_automatic_optimization: bool
       SENSITIVE: [:master_user_password]
     end
 
@@ -735,7 +737,7 @@ module Aws::Redshift
 
     class CreateUsageLimitMessage
       attr_accessor cluster_identifier: ::String
-      attr_accessor feature_type: ("spectrum" | "concurrency-scaling" | "cross-region-datasharing")
+      attr_accessor feature_type: ("spectrum" | "concurrency-scaling" | "cross-region-datasharing" | "extra-compute-for-automatic-optimization")
       attr_accessor limit_type: ("time" | "data-scanned")
       attr_accessor amount: ::Integer
       attr_accessor period: ("daily" | "weekly" | "monthly")
@@ -1334,7 +1336,7 @@ module Aws::Redshift
     class DescribeUsageLimitsMessage
       attr_accessor usage_limit_id: ::String
       attr_accessor cluster_identifier: ::String
-      attr_accessor feature_type: ("spectrum" | "concurrency-scaling" | "cross-region-datasharing")
+      attr_accessor feature_type: ("spectrum" | "concurrency-scaling" | "cross-region-datasharing" | "extra-compute-for-automatic-optimization")
       attr_accessor max_records: ::Integer
       attr_accessor marker: ::String
       attr_accessor tag_keys: ::Array[::String]
@@ -1991,6 +1993,7 @@ module Aws::Redshift
       attr_accessor master_password_secret_kms_key_id: ::String
       attr_accessor ip_address_type: ::String
       attr_accessor multi_az: bool
+      attr_accessor extra_compute_for_automatic_optimization: bool
       SENSITIVE: [:master_user_password]
     end
 
@@ -3025,7 +3028,7 @@ module Aws::Redshift
     class UsageLimit
       attr_accessor usage_limit_id: ::String
       attr_accessor cluster_identifier: ::String
-      attr_accessor feature_type: ("spectrum" | "concurrency-scaling" | "cross-region-datasharing")
+      attr_accessor feature_type: ("spectrum" | "concurrency-scaling" | "cross-region-datasharing" | "extra-compute-for-automatic-optimization")
       attr_accessor limit_type: ("time" | "data-scanned")
       attr_accessor amount: ::Integer
       attr_accessor period: ("daily" | "weekly" | "monthly")

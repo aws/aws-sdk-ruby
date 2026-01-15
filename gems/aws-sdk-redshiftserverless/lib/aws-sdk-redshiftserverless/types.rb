@@ -63,10 +63,13 @@ module Aws::RedshiftServerless
     #   The key of the parameter. The options are `auto_mv`, `datestyle`,
     #   `enable_case_sensitive_identifier`, `enable_user_activity_logging`,
     #   `query_group`, `search_path`, `require_ssl`, `use_fips_ssl`, and
-    #   query monitoring metrics that let you define performance boundaries.
-    #   For more information about query monitoring rules and available
-    #   metrics, see [Query monitoring metrics for Amazon Redshift
-    #   Serverless][1].
+    #   either `wlm_json_configuration` or query monitoring metrics that let
+    #   you define performance boundaries. You can either specify individual
+    #   query monitoring metrics (such as `max_scan_row_count`,
+    #   `max_query_execution_time`) or use `wlm_json_configuration` to
+    #   define query queues with rules, but not both. For more information
+    #   about query monitoring rules and available metrics, see [Query
+    #   monitoring metrics for Amazon Redshift Serverless][1].
     #
     #
     #
@@ -675,10 +678,15 @@ module Aws::RedshiftServerless
     #   The options are `auto_mv`, `datestyle`,
     #   `enable_case_sensitive_identifier`, `enable_user_activity_logging`,
     #   `query_group`, `search_path`, `require_ssl`, `use_fips_ssl`, and
-    #   query monitoring metrics that let you define performance boundaries.
-    #   For more information about query monitoring rules and available
-    #   metrics, see [ Query monitoring metrics for Amazon Redshift
-    #   Serverless][1].
+    #   either `wlm_json_configuration` or query monitoring metrics that let
+    #   you define performance boundaries. You can either specify individual
+    #   query monitoring metrics (such as `max_scan_row_count`,
+    #   `max_query_execution_time`) or use `wlm_json_configuration` to
+    #   define query queues with rules, but not both. If you're using
+    #   `wlm_json_configuration`, the maximum size of `parameterValue` is
+    #   8000 characters. For more information about query monitoring rules
+    #   and available metrics, see [ Query monitoring metrics for Amazon
+    #   Redshift Serverless][1].
     #
     #
     #
@@ -689,6 +697,13 @@ module Aws::RedshiftServerless
     #   The value that specifies whether to turn on enhanced virtual private
     #   cloud (VPC) routing, which forces Amazon Redshift Serverless to
     #   route traffic through your VPC instead of over the internet.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] extra_compute_for_automatic_optimization
+    #   If `true`, allocates additional compute resources for running
+    #   automatic optimization operations.
+    #
+    #   Default: false
     #   @return [Boolean]
     #
     # @!attribute [rw] ip_address_type
@@ -748,6 +763,7 @@ module Aws::RedshiftServerless
       :base_capacity,
       :config_parameters,
       :enhanced_vpc_routing,
+      :extra_compute_for_automatic_optimization,
       :ip_address_type,
       :max_capacity,
       :namespace_name,
@@ -4075,10 +4091,15 @@ module Aws::RedshiftServerless
     #   The options are `auto_mv`, `datestyle`,
     #   `enable_case_sensitive_identifier`, `enable_user_activity_logging`,
     #   `query_group`, `search_path`, `require_ssl`, `use_fips_ssl`, and
-    #   query monitoring metrics that let you define performance boundaries.
-    #   For more information about query monitoring rules and available
-    #   metrics, see [ Query monitoring metrics for Amazon Redshift
-    #   Serverless][1].
+    #   either `wlm_json_configuration` or query monitoring metrics that let
+    #   you define performance boundaries. You can either specify individual
+    #   query monitoring metrics (such as `max_scan_row_count`,
+    #   `max_query_execution_time`) or use `wlm_json_configuration` to
+    #   define query queues with rules, but not both. If you're using
+    #   `wlm_json_configuration`, the maximum size of `parameterValue` is
+    #   8000 characters. For more information about query monitoring rules
+    #   and available metrics, see [ Query monitoring metrics for Amazon
+    #   Redshift Serverless][1].
     #
     #
     #
@@ -4089,6 +4110,13 @@ module Aws::RedshiftServerless
     #   The value that specifies whether to turn on enhanced virtual private
     #   cloud (VPC) routing, which forces Amazon Redshift Serverless to
     #   route traffic through your VPC.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] extra_compute_for_automatic_optimization
+    #   If `true`, allocates additional compute resources for running
+    #   automatic optimization operations.
+    #
+    #   Default: false
     #   @return [Boolean]
     #
     # @!attribute [rw] ip_address_type
@@ -4141,6 +4169,7 @@ module Aws::RedshiftServerless
       :base_capacity,
       :config_parameters,
       :enhanced_vpc_routing,
+      :extra_compute_for_automatic_optimization,
       :ip_address_type,
       :max_capacity,
       :port,
@@ -4289,10 +4318,15 @@ module Aws::RedshiftServerless
     #   The options are `auto_mv`, `datestyle`,
     #   `enable_case_sensitive_identifier`, `enable_user_activity_logging`,
     #   `query_group`, `search_path`, `require_ssl`, `use_fips_ssl`, and
-    #   query monitoring metrics that let you define performance boundaries.
-    #   For more information about query monitoring rules and available
-    #   metrics, see [ Query monitoring metrics for Amazon Redshift
-    #   Serverless][1].
+    #   either `wlm_json_configuration` or query monitoring metrics that let
+    #   you define performance boundaries. You can either specify individual
+    #   query monitoring metrics (such as `max_scan_row_count`,
+    #   `max_query_execution_time`) or use `wlm_json_configuration` to
+    #   define query queues with rules, but not both. If you're using
+    #   `wlm_json_configuration`, the maximum size of `parameterValue` is
+    #   8000 characters. For more information about query monitoring rules
+    #   and available metrics, see [ Query monitoring metrics for Amazon
+    #   Redshift Serverless][1].
     #
     #
     #
@@ -4329,6 +4363,14 @@ module Aws::RedshiftServerless
     #   The value that specifies whether to enable enhanced virtual private
     #   cloud (VPC) routing, which forces Amazon Redshift Serverless to
     #   route traffic through your VPC.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] extra_compute_for_automatic_optimization
+    #   A boolean value that, if `true`, indicates that the workgroup
+    #   allocates additional compute resources to run automatic optimization
+    #   operations.
+    #
+    #   Default: false
     #   @return [Boolean]
     #
     # @!attribute [rw] ip_address_type
@@ -4427,6 +4469,7 @@ module Aws::RedshiftServerless
       :custom_domain_name,
       :endpoint,
       :enhanced_vpc_routing,
+      :extra_compute_for_automatic_optimization,
       :ip_address_type,
       :max_capacity,
       :namespace_name,

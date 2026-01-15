@@ -64,6 +64,14 @@ module Aws::RDS
       data[:database_installation_files_s3_prefix]
     end
 
+    # The database installation files (ISO and EXE) uploaded to Amazon S3
+    # for your database engine version to import to Amazon RDS. Required for
+    # `sqlserver-dev-ee`.
+    # @return [Array<String>]
+    def database_installation_files
+      data[:database_installation_files]
+    end
+
     # JSON string that lists the installation files and parameters that RDS
     # Custom uses to create a custom engine version (CEV). RDS Custom
     # applies the patches in the order in which they're listed in the
@@ -110,6 +118,14 @@ module Aws::RDS
     # @return [Types::CharacterSet]
     def default_character_set
       data[:default_character_set]
+    end
+
+    # The reason that the custom engine version creation for
+    # `sqlserver-dev-ee` failed with an `incompatible-installation-media`
+    # status.
+    # @return [String]
+    def failure_reason
+      data[:failure_reason]
     end
 
     # The EC2 image
@@ -315,22 +331,6 @@ module Aws::RDS
     # @return [Types::ServerlessV2FeaturesSupport]
     def serverless_v2_features_support
       data[:serverless_v2_features_support]
-    end
-
-    # The database installation files (ISO and EXE) uploaded to Amazon S3
-    # for your database engine version to import to Amazon RDS. Required for
-    # `sqlserver-dev-ee`.
-    # @return [Array<String>]
-    def database_installation_files
-      data[:database_installation_files]
-    end
-
-    # The reason that the custom engine version creation for
-    # `sqlserver-dev-ee` failed with an `incompatible-installation-media`
-    # status.
-    # @return [String]
-    def failure_reason
-      data[:failure_reason]
     end
 
     # @!endgroup

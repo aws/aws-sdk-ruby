@@ -239,7 +239,7 @@ module Aws::RDS
       attr_accessor connection_borrow_timeout: ::Integer
       attr_accessor session_pinning_filters: ::Array[::String]
       attr_accessor init_query: ::String
-      SENSITIVE: []
+      SENSITIVE: [:init_query]
     end
 
     class ConnectionPoolConfigurationInfo
@@ -248,7 +248,7 @@ module Aws::RDS
       attr_accessor connection_borrow_timeout: ::Integer
       attr_accessor session_pinning_filters: ::Array[::String]
       attr_accessor init_query: ::String
-      SENSITIVE: []
+      SENSITIVE: [:init_query]
     end
 
     class ContextAttribute
@@ -362,6 +362,7 @@ module Aws::RDS
       attr_accessor engine_version: ::String
       attr_accessor database_installation_files_s3_bucket_name: ::String
       attr_accessor database_installation_files_s3_prefix: ::String
+      attr_accessor database_installation_files: ::Array[::String]
       attr_accessor image_id: ::String
       attr_accessor kms_key_id: ::String
       attr_accessor source_custom_db_engine_version_identifier: ::String
@@ -369,7 +370,6 @@ module Aws::RDS
       attr_accessor description: ::String
       attr_accessor manifest: ::String
       attr_accessor tags: ::Array[Types::Tag]
-      attr_accessor database_installation_files: ::Array[::String]
       SENSITIVE: []
     end
 
@@ -541,9 +541,9 @@ module Aws::RDS
       attr_accessor multi_tenant: bool
       attr_accessor dedicated_log_volume: bool
       attr_accessor engine_lifecycle_support: ::String
+      attr_accessor additional_storage_volumes: ::Array[Types::AdditionalStorageVolume]
       attr_accessor tag_specifications: ::Array[Types::TagSpecification]
       attr_accessor master_user_authentication_type: ("password" | "iam-db-auth")
-      attr_accessor additional_storage_volumes: ::Array[Types::AdditionalStorageVolume]
       SENSITIVE: [:master_user_password, :tde_credential_password]
     end
 
@@ -595,8 +595,8 @@ module Aws::RDS
       attr_accessor dedicated_log_volume: bool
       attr_accessor upgrade_storage_config: bool
       attr_accessor ca_certificate_identifier: ::String
-      attr_accessor tag_specifications: ::Array[Types::TagSpecification]
       attr_accessor additional_storage_volumes: ::Array[Types::AdditionalStorageVolume]
+      attr_accessor tag_specifications: ::Array[Types::TagSpecification]
       attr_accessor source_region: ::String
       SENSITIVE: [:pre_signed_url]
     end
@@ -1135,12 +1135,14 @@ module Aws::RDS
       attr_accessor engine_version: ::String
       attr_accessor database_installation_files_s3_bucket_name: ::String
       attr_accessor database_installation_files_s3_prefix: ::String
+      attr_accessor database_installation_files: ::Array[::String]
       attr_accessor custom_db_engine_version_manifest: ::String
       attr_accessor db_parameter_group_family: ::String
       attr_accessor db_engine_description: ::String
       attr_accessor db_engine_version_arn: ::String
       attr_accessor db_engine_version_description: ::String
       attr_accessor default_character_set: Types::CharacterSet
+      attr_accessor failure_reason: ::String
       attr_accessor image: Types::CustomDBEngineVersionAMI
       attr_accessor db_engine_media_type: ::String
       attr_accessor kms_key_id: ::String
@@ -1165,8 +1167,6 @@ module Aws::RDS
       attr_accessor supports_local_write_forwarding: bool
       attr_accessor supports_integrations: bool
       attr_accessor serverless_v2_features_support: Types::ServerlessV2FeaturesSupport
-      attr_accessor database_installation_files: ::Array[::String]
-      attr_accessor failure_reason: ::String
       SENSITIVE: []
     end
 
@@ -1630,8 +1630,8 @@ module Aws::RDS
       attr_accessor db_system_id: ::String
       attr_accessor multi_tenant: bool
       attr_accessor dedicated_log_volume: bool
-      attr_accessor snapshot_availability_zone: ::String
       attr_accessor additional_storage_volumes: ::Array[Types::AdditionalStorageVolume]
+      attr_accessor snapshot_availability_zone: ::String
       SENSITIVE: []
     end
 
@@ -3067,9 +3067,9 @@ module Aws::RDS
       attr_accessor multi_tenant: bool
       attr_accessor dedicated_log_volume: bool
       attr_accessor engine: ::String
+      attr_accessor additional_storage_volumes: ::Array[Types::ModifyAdditionalStorageVolume]
       attr_accessor tag_specifications: ::Array[Types::TagSpecification]
       attr_accessor master_user_authentication_type: ("password" | "iam-db-auth")
-      attr_accessor additional_storage_volumes: ::Array[Types::ModifyAdditionalStorageVolume]
       SENSITIVE: [:master_user_password, :tde_credential_password]
     end
 
@@ -3402,8 +3402,8 @@ module Aws::RDS
       attr_accessor supported_network_types: ::Array[::String]
       attr_accessor supports_clusters: bool
       attr_accessor supports_dedicated_log_volume: bool
-      attr_accessor supports_http_endpoint: bool
       attr_accessor supports_additional_storage_volumes: bool
+      attr_accessor supports_http_endpoint: bool
       attr_accessor available_additional_storage_volumes_options: ::Array[Types::AvailableAdditionalStorageVolumesOption]
       SENSITIVE: []
     end
@@ -3944,10 +3944,10 @@ module Aws::RDS
       attr_accessor dedicated_log_volume: bool
       attr_accessor ca_certificate_identifier: ::String
       attr_accessor engine_lifecycle_support: ::String
+      attr_accessor additional_storage_volumes: ::Array[Types::AdditionalStorageVolume]
       attr_accessor tag_specifications: ::Array[Types::TagSpecification]
       attr_accessor manage_master_user_password: bool
       attr_accessor master_user_secret_kms_key_id: ::String
-      attr_accessor additional_storage_volumes: ::Array[Types::AdditionalStorageVolume]
       SENSITIVE: [:tde_credential_password]
     end
 
@@ -4009,8 +4009,8 @@ module Aws::RDS
       attr_accessor dedicated_log_volume: bool
       attr_accessor ca_certificate_identifier: ::String
       attr_accessor engine_lifecycle_support: ::String
-      attr_accessor tag_specifications: ::Array[Types::TagSpecification]
       attr_accessor additional_storage_volumes: ::Array[Types::AdditionalStorageVolume]
+      attr_accessor tag_specifications: ::Array[Types::TagSpecification]
       SENSITIVE: [:master_user_password]
     end
 
@@ -4066,10 +4066,10 @@ module Aws::RDS
       attr_accessor dedicated_log_volume: bool
       attr_accessor ca_certificate_identifier: ::String
       attr_accessor engine_lifecycle_support: ::String
+      attr_accessor additional_storage_volumes: ::Array[Types::AdditionalStorageVolume]
       attr_accessor tag_specifications: ::Array[Types::TagSpecification]
       attr_accessor manage_master_user_password: bool
       attr_accessor master_user_secret_kms_key_id: ::String
-      attr_accessor additional_storage_volumes: ::Array[Types::AdditionalStorageVolume]
       SENSITIVE: [:tde_credential_password]
     end
 

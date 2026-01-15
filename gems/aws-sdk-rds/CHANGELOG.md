@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.305.0 (2026-01-14)
+------------------
+
+* Feature - no feature changes. model migrated to Smithy
+
 1.304.0 (2026-01-08)
 ------------------
 

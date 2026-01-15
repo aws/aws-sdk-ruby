@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.20.0 (2026-01-14)
+------------------
+
+* Feature - This release clarifies WhatsApp template operations as a resource-authenticated operation via the parent WhatsApp Business Account. It also introduces new parameters for parameter format, CTA URL link tracking, and template body examples, and increases the phone number ID length.
+
 1.19.0 (2026-01-08)
 ------------------
 

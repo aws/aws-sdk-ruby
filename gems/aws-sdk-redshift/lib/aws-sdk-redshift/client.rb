@@ -1697,6 +1697,12 @@ module Aws::Redshift
     #
     #   Example: `my-catalog_01`
     #
+    # @option params [Boolean] :extra_compute_for_automatic_optimization
+    #   If `true`, allocates additional compute resources for running
+    #   automatic optimization operations.
+    #
+    #   Default: false
+    #
     # @return [Types::CreateClusterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateClusterResult#cluster #cluster} => Types::Cluster
@@ -1749,6 +1755,7 @@ module Aws::Redshift
     #     multi_az: false,
     #     redshift_idc_application_arn: "String",
     #     catalog_name: "CatalogNameString",
+    #     extra_compute_for_automatic_optimization: false,
     #   })
     #
     # @example Response structure
@@ -1886,6 +1893,7 @@ module Aws::Redshift
     #   resp.cluster.multi_az_secondary.cluster_nodes[0].public_ip_address #=> String
     #   resp.cluster.lakehouse_registration_status #=> String
     #   resp.cluster.catalog_arn #=> String
+    #   resp.cluster.extra_compute_for_automatic_optimization #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateCluster AWS API Documentation
     #
@@ -3202,7 +3210,9 @@ module Aws::Redshift
     #   `LimitType` must be `data-scanned`. If `FeatureType` is
     #   `concurrency-scaling`, then `LimitType` must be `time`. If
     #   `FeatureType` is `cross-region-datasharing`, then `LimitType` must be
-    #   `data-scanned`.
+    #   `data-scanned`. If `FeatureType` is
+    #   `extra-compute-for-automatic-optimization`, then `LimitType` must be
+    #   `time`.
     #
     # @option params [required, Integer] :amount
     #   The limit amount. If time-based, this amount is in minutes. If
@@ -3236,7 +3246,7 @@ module Aws::Redshift
     #
     #   resp = client.create_usage_limit({
     #     cluster_identifier: "String", # required
-    #     feature_type: "spectrum", # required, accepts spectrum, concurrency-scaling, cross-region-datasharing
+    #     feature_type: "spectrum", # required, accepts spectrum, concurrency-scaling, cross-region-datasharing, extra-compute-for-automatic-optimization
     #     limit_type: "time", # required, accepts time, data-scanned
     #     amount: 1, # required
     #     period: "daily", # accepts daily, weekly, monthly
@@ -3253,7 +3263,7 @@ module Aws::Redshift
     #
     #   resp.usage_limit_id #=> String
     #   resp.cluster_identifier #=> String
-    #   resp.feature_type #=> String, one of "spectrum", "concurrency-scaling", "cross-region-datasharing"
+    #   resp.feature_type #=> String, one of "spectrum", "concurrency-scaling", "cross-region-datasharing", "extra-compute-for-automatic-optimization"
     #   resp.limit_type #=> String, one of "time", "data-scanned"
     #   resp.amount #=> Integer
     #   resp.period #=> String, one of "daily", "weekly", "monthly"
@@ -3570,6 +3580,7 @@ module Aws::Redshift
     #   resp.cluster.multi_az_secondary.cluster_nodes[0].public_ip_address #=> String
     #   resp.cluster.lakehouse_registration_status #=> String
     #   resp.cluster.catalog_arn #=> String
+    #   resp.cluster.extra_compute_for_automatic_optimization #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DeleteCluster AWS API Documentation
     #
@@ -5330,6 +5341,7 @@ module Aws::Redshift
     #   resp.clusters[0].multi_az_secondary.cluster_nodes[0].public_ip_address #=> String
     #   resp.clusters[0].lakehouse_registration_status #=> String
     #   resp.clusters[0].catalog_arn #=> String
+    #   resp.clusters[0].extra_compute_for_automatic_optimization #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -7653,7 +7665,7 @@ module Aws::Redshift
     #   resp = client.describe_usage_limits({
     #     usage_limit_id: "String",
     #     cluster_identifier: "String",
-    #     feature_type: "spectrum", # accepts spectrum, concurrency-scaling, cross-region-datasharing
+    #     feature_type: "spectrum", # accepts spectrum, concurrency-scaling, cross-region-datasharing, extra-compute-for-automatic-optimization
     #     max_records: 1,
     #     marker: "String",
     #     tag_keys: ["String"],
@@ -7665,7 +7677,7 @@ module Aws::Redshift
     #   resp.usage_limits #=> Array
     #   resp.usage_limits[0].usage_limit_id #=> String
     #   resp.usage_limits[0].cluster_identifier #=> String
-    #   resp.usage_limits[0].feature_type #=> String, one of "spectrum", "concurrency-scaling", "cross-region-datasharing"
+    #   resp.usage_limits[0].feature_type #=> String, one of "spectrum", "concurrency-scaling", "cross-region-datasharing", "extra-compute-for-automatic-optimization"
     #   resp.usage_limits[0].limit_type #=> String, one of "time", "data-scanned"
     #   resp.usage_limits[0].amount #=> Integer
     #   resp.usage_limits[0].period #=> String, one of "daily", "weekly", "monthly"
@@ -7890,6 +7902,7 @@ module Aws::Redshift
     #   resp.cluster.multi_az_secondary.cluster_nodes[0].public_ip_address #=> String
     #   resp.cluster.lakehouse_registration_status #=> String
     #   resp.cluster.catalog_arn #=> String
+    #   resp.cluster.extra_compute_for_automatic_optimization #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DisableSnapshotCopy AWS API Documentation
     #
@@ -8230,6 +8243,7 @@ module Aws::Redshift
     #   resp.cluster.multi_az_secondary.cluster_nodes[0].public_ip_address #=> String
     #   resp.cluster.lakehouse_registration_status #=> String
     #   resp.cluster.catalog_arn #=> String
+    #   resp.cluster.extra_compute_for_automatic_optimization #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/EnableSnapshotCopy AWS API Documentation
     #
@@ -8392,6 +8406,7 @@ module Aws::Redshift
     #   resp.cluster.multi_az_secondary.cluster_nodes[0].public_ip_address #=> String
     #   resp.cluster.lakehouse_registration_status #=> String
     #   resp.cluster.catalog_arn #=> String
+    #   resp.cluster.extra_compute_for_automatic_optimization #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/FailoverPrimaryCompute AWS API Documentation
     #
@@ -9362,6 +9377,12 @@ module Aws::Redshift
     #   Availability Zone, the cluster will be modified to be deployed in two
     #   Availability Zones.
     #
+    # @option params [Boolean] :extra_compute_for_automatic_optimization
+    #   If `true`, allocates additional compute resources for running
+    #   automatic optimization operations.
+    #
+    #   Default: false
+    #
     # @return [Types::ModifyClusterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ModifyClusterResult#cluster #cluster} => Types::Cluster
@@ -9398,6 +9419,7 @@ module Aws::Redshift
     #     master_password_secret_kms_key_id: "String",
     #     ip_address_type: "String",
     #     multi_az: false,
+    #     extra_compute_for_automatic_optimization: false,
     #   })
     #
     # @example Response structure
@@ -9535,6 +9557,7 @@ module Aws::Redshift
     #   resp.cluster.multi_az_secondary.cluster_nodes[0].public_ip_address #=> String
     #   resp.cluster.lakehouse_registration_status #=> String
     #   resp.cluster.catalog_arn #=> String
+    #   resp.cluster.extra_compute_for_automatic_optimization #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyCluster AWS API Documentation
     #
@@ -9704,6 +9727,7 @@ module Aws::Redshift
     #   resp.cluster.multi_az_secondary.cluster_nodes[0].public_ip_address #=> String
     #   resp.cluster.lakehouse_registration_status #=> String
     #   resp.cluster.catalog_arn #=> String
+    #   resp.cluster.extra_compute_for_automatic_optimization #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyClusterDbRevision AWS API Documentation
     #
@@ -9889,6 +9913,7 @@ module Aws::Redshift
     #   resp.cluster.multi_az_secondary.cluster_nodes[0].public_ip_address #=> String
     #   resp.cluster.lakehouse_registration_status #=> String
     #   resp.cluster.catalog_arn #=> String
+    #   resp.cluster.extra_compute_for_automatic_optimization #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyClusterIamRoles AWS API Documentation
     #
@@ -10074,6 +10099,7 @@ module Aws::Redshift
     #   resp.cluster.multi_az_secondary.cluster_nodes[0].public_ip_address #=> String
     #   resp.cluster.lakehouse_registration_status #=> String
     #   resp.cluster.catalog_arn #=> String
+    #   resp.cluster.extra_compute_for_automatic_optimization #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyClusterMaintenance AWS API Documentation
     #
@@ -11083,6 +11109,7 @@ module Aws::Redshift
     #   resp.cluster.multi_az_secondary.cluster_nodes[0].public_ip_address #=> String
     #   resp.cluster.lakehouse_registration_status #=> String
     #   resp.cluster.catalog_arn #=> String
+    #   resp.cluster.extra_compute_for_automatic_optimization #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifySnapshotCopyRetentionPeriod AWS API Documentation
     #
@@ -11183,7 +11210,7 @@ module Aws::Redshift
     #
     #   resp.usage_limit_id #=> String
     #   resp.cluster_identifier #=> String
-    #   resp.feature_type #=> String, one of "spectrum", "concurrency-scaling", "cross-region-datasharing"
+    #   resp.feature_type #=> String, one of "spectrum", "concurrency-scaling", "cross-region-datasharing", "extra-compute-for-automatic-optimization"
     #   resp.limit_type #=> String, one of "time", "data-scanned"
     #   resp.amount #=> Integer
     #   resp.period #=> String, one of "daily", "weekly", "monthly"
@@ -11351,6 +11378,7 @@ module Aws::Redshift
     #   resp.cluster.multi_az_secondary.cluster_nodes[0].public_ip_address #=> String
     #   resp.cluster.lakehouse_registration_status #=> String
     #   resp.cluster.catalog_arn #=> String
+    #   resp.cluster.extra_compute_for_automatic_optimization #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/PauseCluster AWS API Documentation
     #
@@ -11616,6 +11644,7 @@ module Aws::Redshift
     #   resp.cluster.multi_az_secondary.cluster_nodes[0].public_ip_address #=> String
     #   resp.cluster.lakehouse_registration_status #=> String
     #   resp.cluster.catalog_arn #=> String
+    #   resp.cluster.extra_compute_for_automatic_optimization #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RebootCluster AWS API Documentation
     #
@@ -11975,6 +12004,7 @@ module Aws::Redshift
     #   resp.cluster.multi_az_secondary.cluster_nodes[0].public_ip_address #=> String
     #   resp.cluster.lakehouse_registration_status #=> String
     #   resp.cluster.catalog_arn #=> String
+    #   resp.cluster.extra_compute_for_automatic_optimization #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ResizeCluster AWS API Documentation
     #
@@ -12505,6 +12535,7 @@ module Aws::Redshift
     #   resp.cluster.multi_az_secondary.cluster_nodes[0].public_ip_address #=> String
     #   resp.cluster.lakehouse_registration_status #=> String
     #   resp.cluster.catalog_arn #=> String
+    #   resp.cluster.extra_compute_for_automatic_optimization #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RestoreFromClusterSnapshot AWS API Documentation
     #
@@ -12765,6 +12796,7 @@ module Aws::Redshift
     #   resp.cluster.multi_az_secondary.cluster_nodes[0].public_ip_address #=> String
     #   resp.cluster.lakehouse_registration_status #=> String
     #   resp.cluster.catalog_arn #=> String
+    #   resp.cluster.extra_compute_for_automatic_optimization #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ResumeCluster AWS API Documentation
     #
@@ -13162,6 +13194,7 @@ module Aws::Redshift
     #   resp.cluster.multi_az_secondary.cluster_nodes[0].public_ip_address #=> String
     #   resp.cluster.lakehouse_registration_status #=> String
     #   resp.cluster.catalog_arn #=> String
+    #   resp.cluster.extra_compute_for_automatic_optimization #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RotateEncryptionKey AWS API Documentation
     #
@@ -13242,7 +13275,7 @@ module Aws::Redshift
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-redshift'
-      context[:gem_version] = '1.153.0'
+      context[:gem_version] = '1.154.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

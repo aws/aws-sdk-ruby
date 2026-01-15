@@ -562,6 +562,11 @@ module Aws::SocialMessaging
 
     # Creates a new WhatsApp message template from a custom definition.
     #
+    # <note markdown="1"> Amazon Web Services End User Messaging Social does not store any
+    # WhatsApp message template content.
+    #
+    #  </note>
+    #
     # @option params [required, String, StringIO, File] :template_definition
     #   The complete template definition as a JSON blob.
     #
@@ -719,7 +724,7 @@ module Aws::SocialMessaging
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/social-messaging/latest/APIReference/API_GetLinkedWhatsAppBusinessAccountPhoneNumber.html
+    #   [1]: https://docs.aws.amazon.com/social-messaging/latest/APIReference/API_GetLinkedWhatsAppBusinessAccount.html
     #
     # @return [Types::DeleteWhatsAppMessageMediaOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -862,8 +867,8 @@ module Aws::SocialMessaging
       req.send_request(options)
     end
 
-    # Use your WhatsApp phone number id to get the WABA account id and phone
-    # number details.
+    # Retrieve the WABA account id and phone number details of a WhatsApp
+    # business account phone number.
     #
     # @option params [required, String] :id
     #   The unique identifier of the phone number. Phone number identifiers
@@ -873,7 +878,7 @@ module Aws::SocialMessaging
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/social-messaging/latest/APIReference/API_GetLinkedWhatsAppBusinessAccountPhoneNumber.html
+    #   [1]: https://docs.aws.amazon.com/social-messaging/latest/APIReference/API_GetLinkedWhatsAppBusinessAccount.html
     #
     # @return [Types::GetLinkedWhatsAppBusinessAccountPhoneNumberOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -924,7 +929,7 @@ module Aws::SocialMessaging
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/social-messaging/latest/APIReference/API_GetLinkedWhatsAppBusinessAccountPhoneNumber.html
+    #   [1]: https://docs.aws.amazon.com/social-messaging/latest/APIReference/API_GetLinkedWhatsAppBusinessAccount.html
     #
     # @option params [Boolean] :metadata_only
     #   Set to `True` to get only the metadata for the file.
@@ -1188,6 +1193,8 @@ module Aws::SocialMessaging
     #   resp.meta_library_templates[0].template_buttons[0].supported_apps[0] #=> Hash
     #   resp.meta_library_templates[0].template_buttons[0].supported_apps[0]["SupportedAppKeyString"] #=> String
     #   resp.meta_library_templates[0].template_id #=> String
+    #   resp.meta_library_templates[0].template_body_example_params #=> Array
+    #   resp.meta_library_templates[0].template_body_example_params[0] #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/socialmessaging-2024-01-01/ListWhatsAppTemplateLibrary AWS API Documentation
@@ -1217,7 +1224,7 @@ module Aws::SocialMessaging
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/social-messaging/latest/APIReference/API_GetLinkedWhatsAppBusinessAccountPhoneNumber.html
+    #   [1]: https://docs.aws.amazon.com/social-messaging/latest/APIReference/API_GetLinkedWhatsAppBusinessAccount.html
     #
     # @option params [Types::S3PresignedUrl] :source_s3_presigned_url
     #   The source presign url of the media file.
@@ -1317,7 +1324,7 @@ module Aws::SocialMessaging
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/social-messaging/latest/APIReference/API_GetLinkedWhatsAppBusinessAccountPhoneNumber.html
+    #   [1]: https://docs.aws.amazon.com/social-messaging/latest/APIReference/API_GetLinkedWhatsAppBusinessAccount.html
     #
     # @option params [required, String, StringIO, File] :message
     #   The message to send through WhatsApp. The length is in KB. The message
@@ -1442,12 +1449,20 @@ module Aws::SocialMessaging
     # @option params [required, String] :meta_template_id
     #   The numeric ID of the template assigned by Meta.
     #
+    # @option params [String] :parameter_format
+    #   The format specification for parameters in the template, this can be
+    #   either 'named' or 'positional'.
+    #
     # @option params [String] :template_category
     #   The new category for the template (for example, UTILITY or MARKETING).
     #
     # @option params [String, StringIO, File] :template_components
     #   The updated components of the template as a JSON blob (maximum 3000
     #   characters).
+    #
+    # @option params [Boolean] :cta_url_link_tracking_opted_out
+    #   When true, disables click tracking for call-to-action URL buttons in
+    #   the template.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1456,8 +1471,10 @@ module Aws::SocialMessaging
     #   resp = client.update_whats_app_message_template({
     #     id: "LinkedWhatsAppBusinessAccountId", # required
     #     meta_template_id: "MetaTemplateId", # required
+    #     parameter_format: "MetaParameterFormat",
     #     template_category: "MetaTemplateCategory",
     #     template_components: "data",
+    #     cta_url_link_tracking_opted_out: false,
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/socialmessaging-2024-01-01/UpdateWhatsAppMessageTemplate AWS API Documentation
@@ -1487,7 +1504,7 @@ module Aws::SocialMessaging
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-socialmessaging'
-      context[:gem_version] = '1.19.0'
+      context[:gem_version] = '1.20.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -874,6 +874,7 @@ module Aws::Redshift
     Cluster.add_member(:multi_az_secondary, Shapes::ShapeRef.new(shape: SecondaryClusterInfo, location_name: "MultiAZSecondary"))
     Cluster.add_member(:lakehouse_registration_status, Shapes::ShapeRef.new(shape: String, location_name: "LakehouseRegistrationStatus"))
     Cluster.add_member(:catalog_arn, Shapes::ShapeRef.new(shape: String, location_name: "CatalogArn"))
+    Cluster.add_member(:extra_compute_for_automatic_optimization, Shapes::ShapeRef.new(shape: String, location_name: "ExtraComputeForAutomaticOptimization"))
     Cluster.struct_class = Types::Cluster
 
     ClusterAlreadyExistsFault.struct_class = Types::ClusterAlreadyExistsFault
@@ -1109,6 +1110,7 @@ module Aws::Redshift
     CreateClusterMessage.add_member(:multi_az, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "MultiAZ"))
     CreateClusterMessage.add_member(:redshift_idc_application_arn, Shapes::ShapeRef.new(shape: String, location_name: "RedshiftIdcApplicationArn"))
     CreateClusterMessage.add_member(:catalog_name, Shapes::ShapeRef.new(shape: CatalogNameString, location_name: "CatalogName"))
+    CreateClusterMessage.add_member(:extra_compute_for_automatic_optimization, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "ExtraComputeForAutomaticOptimization"))
     CreateClusterMessage.struct_class = Types::CreateClusterMessage
 
     CreateClusterParameterGroupMessage.add_member(:parameter_group_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ParameterGroupName"))
@@ -2215,6 +2217,7 @@ module Aws::Redshift
     ModifyClusterMessage.add_member(:master_password_secret_kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "MasterPasswordSecretKmsKeyId"))
     ModifyClusterMessage.add_member(:ip_address_type, Shapes::ShapeRef.new(shape: String, location_name: "IpAddressType"))
     ModifyClusterMessage.add_member(:multi_az, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "MultiAZ"))
+    ModifyClusterMessage.add_member(:extra_compute_for_automatic_optimization, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "ExtraComputeForAutomaticOptimization"))
     ModifyClusterMessage.struct_class = Types::ModifyClusterMessage
 
     ModifyClusterParameterGroupMessage.add_member(:parameter_group_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ParameterGroupName"))

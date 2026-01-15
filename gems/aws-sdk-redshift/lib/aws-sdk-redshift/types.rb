@@ -964,6 +964,14 @@ module Aws::Redshift
     #   with the cluster enabled with Amazon Redshift federated permissions.
     #   @return [String]
     #
+    # @!attribute [rw] extra_compute_for_automatic_optimization
+    #   A boolean value that, if `true`, indicates that the cluster
+    #   allocates additional compute resources to run automatic optimization
+    #   operations.
+    #
+    #   Default: false
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/Cluster AWS API Documentation
     #
     class Cluster < Struct.new(
@@ -1028,7 +1036,8 @@ module Aws::Redshift
       :multi_az,
       :multi_az_secondary,
       :lakehouse_registration_status,
-      :catalog_arn)
+      :catalog_arn,
+      :extra_compute_for_automatic_optimization)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2385,6 +2394,13 @@ module Aws::Redshift
     #   Example: `my-catalog_01`
     #   @return [String]
     #
+    # @!attribute [rw] extra_compute_for_automatic_optimization
+    #   If `true`, allocates additional compute resources for running
+    #   automatic optimization operations.
+    #
+    #   Default: false
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateClusterMessage AWS API Documentation
     #
     class CreateClusterMessage < Struct.new(
@@ -2427,7 +2443,8 @@ module Aws::Redshift
       :ip_address_type,
       :multi_az,
       :redshift_idc_application_arn,
-      :catalog_name)
+      :catalog_name,
+      :extra_compute_for_automatic_optimization)
       SENSITIVE = [:master_user_password]
       include Aws::Structure
     end
@@ -3282,7 +3299,9 @@ module Aws::Redshift
     #   then `LimitType` must be `data-scanned`. If `FeatureType` is
     #   `concurrency-scaling`, then `LimitType` must be `time`. If
     #   `FeatureType` is `cross-region-datasharing`, then `LimitType` must
-    #   be `data-scanned`.
+    #   be `data-scanned`. If `FeatureType` is
+    #   `extra-compute-for-automatic-optimization`, then `LimitType` must be
+    #   `time`.
     #   @return [String]
     #
     # @!attribute [rw] amount
@@ -8657,6 +8676,13 @@ module Aws::Redshift
     #   two Availability Zones.
     #   @return [Boolean]
     #
+    # @!attribute [rw] extra_compute_for_automatic_optimization
+    #   If `true`, allocates additional compute resources for running
+    #   automatic optimization operations.
+    #
+    #   Default: false
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyClusterMessage AWS API Documentation
     #
     class ModifyClusterMessage < Struct.new(
@@ -8688,7 +8714,8 @@ module Aws::Redshift
       :manage_master_password,
       :master_password_secret_kms_key_id,
       :ip_address_type,
-      :multi_az)
+      :multi_az,
+      :extra_compute_for_automatic_optimization)
       SENSITIVE = [:master_user_password]
       include Aws::Structure
     end

@@ -201,7 +201,7 @@ module Aws::SocialMessaging
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/social-messaging/latest/APIReference/API_GetLinkedWhatsAppBusinessAccountPhoneNumber.html
+    #   [1]: https://docs.aws.amazon.com/social-messaging/latest/APIReference/API_GetLinkedWhatsAppBusinessAccount.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/socialmessaging-2024-01-01/DeleteWhatsAppMessageMediaInput AWS API Documentation
@@ -334,7 +334,7 @@ module Aws::SocialMessaging
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/social-messaging/latest/APIReference/API_GetLinkedWhatsAppBusinessAccountPhoneNumber.html
+    #   [1]: https://docs.aws.amazon.com/social-messaging/latest/APIReference/API_GetLinkedWhatsAppBusinessAccount.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/socialmessaging-2024-01-01/GetLinkedWhatsAppBusinessAccountPhoneNumberInput AWS API Documentation
@@ -375,7 +375,7 @@ module Aws::SocialMessaging
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/social-messaging/latest/APIReference/API_GetLinkedWhatsAppBusinessAccountPhoneNumber.html
+    #   [1]: https://docs.aws.amazon.com/social-messaging/latest/APIReference/API_GetLinkedWhatsAppBusinessAccount.html
     #   @return [String]
     #
     # @!attribute [rw] metadata_only
@@ -407,7 +407,7 @@ module Aws::SocialMessaging
     #   @return [String]
     #
     # @!attribute [rw] file_size
-    #   The file size of the media, in KB.
+    #   The size of the media file, in KB.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/socialmessaging-2024-01-01/GetWhatsAppMessageMediaOutput AWS API Documentation
@@ -968,6 +968,11 @@ module Aws::SocialMessaging
     #   The ID of the template in Meta's library.
     #   @return [String]
     #
+    # @!attribute [rw] template_body_example_params
+    #   Example parameter values for the template body, used to demonstrate
+    #   how dynamic content appears in the template.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/socialmessaging-2024-01-01/MetaLibraryTemplateDefinition AWS API Documentation
     #
     class MetaLibraryTemplateDefinition < Struct.new(
@@ -980,7 +985,8 @@ module Aws::SocialMessaging
       :template_header,
       :template_body,
       :template_buttons,
-      :template_id)
+      :template_id,
+      :template_body_example_params)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -993,7 +999,7 @@ module Aws::SocialMessaging
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/social-messaging/latest/APIReference/API_GetLinkedWhatsAppBusinessAccountPhoneNumber.html
+    #   [1]: https://docs.aws.amazon.com/social-messaging/latest/APIReference/API_GetLinkedWhatsAppBusinessAccount.html
     #   @return [String]
     #
     # @!attribute [rw] source_s3_presigned_url
@@ -1076,7 +1082,16 @@ module Aws::SocialMessaging
     #   @return [String]
     #
     # @!attribute [rw] key
-    #   The object key of the media file.
+    #   The S3 key prefix that defines the storage location of your media
+    #   files. The prefix works like a folder path in S3, and is combined
+    #   with the WhatsApp mediaId to create the final file path.
+    #
+    #   For example, if a media file's WhatsApp mediaId is `123.ogg`, and
+    #   the key is `audio/example.ogg`, the final file path is
+    #   `audio/example.ogg123.ogg`.
+    #
+    #   For the same mediaId, a key of `audio/` results in the file path
+    #   `audio/123.ogg`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/socialmessaging-2024-01-01/S3File AWS API Documentation
@@ -1129,7 +1144,7 @@ module Aws::SocialMessaging
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/social-messaging/latest/APIReference/API_GetLinkedWhatsAppBusinessAccountPhoneNumber.html
+    #   [1]: https://docs.aws.amazon.com/social-messaging/latest/APIReference/API_GetLinkedWhatsAppBusinessAccount.html
     #   @return [String]
     #
     # @!attribute [rw] message
@@ -1315,6 +1330,11 @@ module Aws::SocialMessaging
     #   The numeric ID of the template assigned by Meta.
     #   @return [String]
     #
+    # @!attribute [rw] parameter_format
+    #   The format specification for parameters in the template, this can be
+    #   either 'named' or 'positional'.
+    #   @return [String]
+    #
     # @!attribute [rw] template_category
     #   The new category for the template (for example, UTILITY or
     #   MARKETING).
@@ -1325,13 +1345,20 @@ module Aws::SocialMessaging
     #   characters).
     #   @return [String]
     #
+    # @!attribute [rw] cta_url_link_tracking_opted_out
+    #   When true, disables click tracking for call-to-action URL buttons in
+    #   the template.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/socialmessaging-2024-01-01/UpdateWhatsAppMessageTemplateInput AWS API Documentation
     #
     class UpdateWhatsAppMessageTemplateInput < Struct.new(
       :id,
       :meta_template_id,
+      :parameter_format,
       :template_category,
-      :template_components)
+      :template_components,
+      :cta_url_link_tracking_opted_out)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1358,12 +1385,13 @@ module Aws::SocialMessaging
     # @!attribute [rw] id
     #   The unique identifier of the originating phone number associated
     #   with the media. Phone number identifiers are formatted as
-    #   `phone-number-id-01234567890123456789012345678901`. Use
-    #   [GetLinkedWhatsAppBusinessAccount][1] to find a phone number's id.
+    #   `phone-number-id-01234567890123456789012345678901`. Use the
+    #   [GetLinkedWhatsAppBusinessAccount][1] API action to find a phone
+    #   number's id.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/social-messaging/latest/APIReference/API_GetLinkedWhatsAppBusinessAccountPhoneNumber.html
+    #   [1]: https://docs.aws.amazon.com/social-messaging/latest/APIReference/API_GetLinkedWhatsAppBusinessAccount.html
     #   @return [String]
     #
     # @!attribute [rw] two_factor_pin

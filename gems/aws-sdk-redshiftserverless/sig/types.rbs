@@ -178,6 +178,7 @@ module Aws::RedshiftServerless
       attr_accessor base_capacity: ::Integer
       attr_accessor config_parameters: ::Array[Types::ConfigParameter]
       attr_accessor enhanced_vpc_routing: bool
+      attr_accessor extra_compute_for_automatic_optimization: bool
       attr_accessor ip_address_type: ::String
       attr_accessor max_capacity: ::Integer
       attr_accessor namespace_name: ::String
@@ -1134,6 +1135,7 @@ module Aws::RedshiftServerless
       attr_accessor base_capacity: ::Integer
       attr_accessor config_parameters: ::Array[Types::ConfigParameter]
       attr_accessor enhanced_vpc_routing: bool
+      attr_accessor extra_compute_for_automatic_optimization: bool
       attr_accessor ip_address_type: ::String
       attr_accessor max_capacity: ::Integer
       attr_accessor port: ::Integer
@@ -1190,6 +1192,7 @@ module Aws::RedshiftServerless
       attr_accessor custom_domain_name: ::String
       attr_accessor endpoint: Types::Endpoint
       attr_accessor enhanced_vpc_routing: bool
+      attr_accessor extra_compute_for_automatic_optimization: bool
       attr_accessor ip_address_type: ::String
       attr_accessor max_capacity: ::Integer
       attr_accessor namespace_name: ::String

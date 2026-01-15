@@ -296,6 +296,7 @@ module Aws::SocialMessaging
       attr_accessor template_body: ::String
       attr_accessor template_buttons: ::Array[Types::LibraryTemplateButtonList]
       attr_accessor template_id: ::String
+      attr_accessor template_body_example_params: ::Array[::String]
       SENSITIVE: []
     end
 
@@ -395,8 +396,10 @@ module Aws::SocialMessaging
     class UpdateWhatsAppMessageTemplateInput
       attr_accessor id: ::String
       attr_accessor meta_template_id: ::String
+      attr_accessor parameter_format: ::String
       attr_accessor template_category: ::String
       attr_accessor template_components: ::String
+      attr_accessor cta_url_link_tracking_opted_out: bool
       SENSITIVE: []
     end
 

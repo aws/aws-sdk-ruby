@@ -5393,7 +5393,7 @@ module Aws::CostExplorer
     #   types based on the latest version. If the filter is present, the
     #   result only includes Cost Categories that supports input resource
     #   type. If the filter isn't provided, no filtering is applied. The
-    #   valid values are `billing:rispgroupsharing`.
+    #   valid values are `billing:rispgroupsharing` and `billing:billingview`.
     #
     # @return [Types::ListCostCategoryDefinitionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -6185,7 +6185,7 @@ module Aws::CostExplorer
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-costexplorer'
-      context[:gem_version] = '1.145.0'
+      context[:gem_version] = '1.146.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

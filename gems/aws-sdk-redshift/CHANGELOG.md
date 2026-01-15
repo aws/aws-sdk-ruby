@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.154.0 (2026-01-14)
+------------------
+
+* Feature - Adds support for enabling extra compute resources for automatic optimization during create and modify operations in Amazon Redshift clusters.
+
 1.153.0 (2026-01-08)
 ------------------
 

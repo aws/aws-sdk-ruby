@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.155.0 (2026-01-14)
+------------------
+
+* Feature - Added support for BOTTLEROCKET NVIDIA FIPS AMIs to AMI types in US regions.
+
 1.154.0 (2026-01-08)
 ------------------
 

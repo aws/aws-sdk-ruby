@@ -5843,7 +5843,8 @@ module Aws::CostExplorer
     #   resource types based on the latest version. If the filter is
     #   present, the result only includes Cost Categories that supports
     #   input resource type. If the filter isn't provided, no filtering is
-    #   applied. The valid values are `billing:rispgroupsharing`.
+    #   applied. The valid values are `billing:rispgroupsharing` and
+    #   `billing:billingview`.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/ListCostCategoryDefinitionsRequest AWS API Documentation

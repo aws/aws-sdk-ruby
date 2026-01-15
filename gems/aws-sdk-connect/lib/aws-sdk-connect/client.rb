@@ -974,6 +974,52 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # Associates a set of hours of operations with another hours of
+    # operation. Refer to Administrator Guide [ here ][1] for more
+    # information on inheriting overrides from parent hours of operation(s).
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/hours-of-operation-overrides.html
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #
+    # @option params [required, String] :hours_of_operation_id
+    #   The identifier of the child hours of operation.
+    #
+    # @option params [required, Array<Types::ParentHoursOfOperationConfig>] :parent_hours_of_operation_configs
+    #   The Amazon Resource Names (ARNs) of the parent hours of operation
+    #   resources to associate with the child hours of operation resource.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.associate_hours_of_operations({
+    #     instance_id: "InstanceId", # required
+    #     hours_of_operation_id: "HoursOfOperationId", # required
+    #     parent_hours_of_operation_configs: [ # required
+    #       {
+    #         hours_of_operation_id: "HoursOfOperationId",
+    #       },
+    #     ],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/AssociateHoursOfOperations AWS API Documentation
+    #
+    # @overload associate_hours_of_operations(params = {})
+    # @param [Hash] params ({})
+    def associate_hours_of_operations(params = {}, options = {})
+      req = build_request(:associate_hours_of_operations, params)
+      req.send_request(options)
+    end
+
     # This API is in preview release for Amazon Connect and is subject to
     # change.
     #
@@ -1288,6 +1334,9 @@ module Aws::Connect
     #
     # @option params [Array<Types::RoutingProfileManualAssignmentQueueConfig>] :manual_assignment_queue_configs
     #   The manual assignment queues to associate with this routing profile.
+    #
+    #   Note: Use this config for chat, email, and task contacts. It does not
+    #   support voice contacts.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -3413,6 +3462,17 @@ module Aws::Connect
     #   Configuration information for the hours of operation: day, start time,
     #   and end time.
     #
+    # @option params [Array<Types::ParentHoursOfOperationConfig>] :parent_hours_of_operation_configs
+    #   Configuration for parent hours of operations. Eg: ResourceArn.
+    #
+    #   For more information about parent hours of operations, see [Link
+    #   overrides from different hours of operation][1] in the <i>
+    #   Administrator Guide</i>.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/https:/docs.aws.amazon.com/connect/latest/adminguide/hours-of-operation-overrides.html
+    #
     # @option params [Hash<String,String>] :tags
     #   The tags used to organize, track, or control access for this resource.
     #   For example, \{ "Tags": \{"key1":"value1", "key2":"value2"}
@@ -3441,6 +3501,11 @@ module Aws::Connect
     #           hours: 1, # required
     #           minutes: 1, # required
     #         },
+    #       },
+    #     ],
+    #     parent_hours_of_operation_configs: [
+    #       {
+    #         hours_of_operation_id: "HoursOfOperationId",
     #       },
     #     ],
     #     tags: {
@@ -3487,6 +3552,20 @@ module Aws::Connect
     # @option params [required, String] :effective_till
     #   The date until when the hours of operation override is effective.
     #
+    # @option params [Types::RecurrenceConfig] :recurrence_config
+    #   Configuration for a recurring event.
+    #
+    # @option params [String] :override_type
+    #   Whether the override will be defined as a *standard* or as a
+    #   *recurring event*.
+    #
+    #   For more information about how override types are applied, see [Build
+    #   your list of overrides][1] in the <i> Administrator Guide</i>.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/https:/docs.aws.amazon.com/connect/latest/adminguide/hours-of-operation-overrides.html
+    #
     # @return [Types::CreateHoursOfOperationOverrideResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateHoursOfOperationOverrideResponse#hours_of_operation_override_id #hours_of_operation_override_id} => String
@@ -3513,6 +3592,16 @@ module Aws::Connect
     #     ],
     #     effective_from: "HoursOfOperationOverrideYearMonthDayDateFormat", # required
     #     effective_till: "HoursOfOperationOverrideYearMonthDayDateFormat", # required
+    #     recurrence_config: {
+    #       recurrence_pattern: { # required
+    #         frequency: "WEEKLY", # required, accepts WEEKLY, MONTHLY, YEARLY
+    #         interval: 1, # required
+    #         by_month: [1],
+    #         by_month_day: [1],
+    #         by_weekday_occurrence: [1],
+    #       },
+    #     },
+    #     override_type: "STANDARD", # accepts STANDARD, OPEN, CLOSED
     #   })
     #
     # @example Response structure
@@ -4318,6 +4407,9 @@ module Aws::Connect
     #   during a CreateRoutingProfile API request. It is different from the
     #   quota of 50 queues per routing profile per instance that is listed in
     #   Amazon Connect service quotas.
+    #
+    #   Note: Use this config for chat, email, and task contacts. It does not
+    #   support voice contacts.
     #
     # @option params [required, Array<Types::MediaConcurrency>] :media_concurrencies
     #   The channels that agents can handle in the Contact Control Panel (CCP)
@@ -7848,6 +7940,10 @@ module Aws::Connect
     #   resp.hours_of_operation.config[0].start_time.minutes #=> Integer
     #   resp.hours_of_operation.config[0].end_time.hours #=> Integer
     #   resp.hours_of_operation.config[0].end_time.minutes #=> Integer
+    #   resp.hours_of_operation.parent_hours_of_operations #=> Array
+    #   resp.hours_of_operation.parent_hours_of_operations[0].name #=> String
+    #   resp.hours_of_operation.parent_hours_of_operations[0].id #=> String
+    #   resp.hours_of_operation.parent_hours_of_operations[0].arn #=> String
     #   resp.hours_of_operation.tags #=> Hash
     #   resp.hours_of_operation.tags["TagKey"] #=> String
     #   resp.hours_of_operation.last_modified_time #=> Time
@@ -7900,6 +7996,15 @@ module Aws::Connect
     #   resp.hours_of_operation_override.config[0].end_time.minutes #=> Integer
     #   resp.hours_of_operation_override.effective_from #=> String
     #   resp.hours_of_operation_override.effective_till #=> String
+    #   resp.hours_of_operation_override.recurrence_config.recurrence_pattern.frequency #=> String, one of "WEEKLY", "MONTHLY", "YEARLY"
+    #   resp.hours_of_operation_override.recurrence_config.recurrence_pattern.interval #=> Integer
+    #   resp.hours_of_operation_override.recurrence_config.recurrence_pattern.by_month #=> Array
+    #   resp.hours_of_operation_override.recurrence_config.recurrence_pattern.by_month[0] #=> Integer
+    #   resp.hours_of_operation_override.recurrence_config.recurrence_pattern.by_month_day #=> Array
+    #   resp.hours_of_operation_override.recurrence_config.recurrence_pattern.by_month_day[0] #=> Integer
+    #   resp.hours_of_operation_override.recurrence_config.recurrence_pattern.by_weekday_occurrence #=> Array
+    #   resp.hours_of_operation_override.recurrence_config.recurrence_pattern.by_weekday_occurrence[0] #=> Integer
+    #   resp.hours_of_operation_override.override_type #=> String, one of "STANDARD", "OPEN", "CLOSED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeHoursOfOperationOverride AWS API Documentation
     #
@@ -9301,6 +9406,48 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # Disassociates a set of hours of operations with another hours of
+    # operation. Refer to Administrator Guide [ here ][1] for more
+    # information on inheriting overrides from parent hours of operation(s).
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/hours-of-operation-overrides.html
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #
+    # @option params [required, String] :hours_of_operation_id
+    #   The identifier of the child hours of operation.
+    #
+    # @option params [required, Array<String>] :parent_hours_of_operation_ids
+    #   The Amazon Resource Names (ARNs) of the parent hours of operation
+    #   resources to disassociate with the child hours of operation resource.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disassociate_hours_of_operations({
+    #     instance_id: "InstanceId", # required
+    #     hours_of_operation_id: "HoursOfOperationId", # required
+    #     parent_hours_of_operation_ids: ["HoursOfOperationId"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DisassociateHoursOfOperations AWS API Documentation
+    #
+    # @overload disassociate_hours_of_operations(params = {})
+    # @param [Hash] params ({})
+    def disassociate_hours_of_operations(params = {}, options = {})
+      req = build_request(:disassociate_hours_of_operations, params)
+      req.send_request(options)
+    end
+
     # This API is in preview release for Amazon Connect and is subject to
     # change.
     #
@@ -10581,6 +10728,7 @@ module Aws::Connect
     # @return [Types::GetEffectiveHoursOfOperationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetEffectiveHoursOfOperationsResponse#effective_hours_of_operation_list #effective_hours_of_operation_list} => Array&lt;Types::EffectiveHoursOfOperations&gt;
+    #   * {Types::GetEffectiveHoursOfOperationsResponse#effective_override_hours_list #effective_override_hours_list} => Array&lt;Types::EffectiveOverrideHours&gt;
     #   * {Types::GetEffectiveHoursOfOperationsResponse#time_zone #time_zone} => String
     #
     # @example Request syntax with placeholder values
@@ -10601,6 +10749,15 @@ module Aws::Connect
     #   resp.effective_hours_of_operation_list[0].operational_hours[0].start.minutes #=> Integer
     #   resp.effective_hours_of_operation_list[0].operational_hours[0].end.hours #=> Integer
     #   resp.effective_hours_of_operation_list[0].operational_hours[0].end.minutes #=> Integer
+    #   resp.effective_override_hours_list #=> Array
+    #   resp.effective_override_hours_list[0].date #=> String
+    #   resp.effective_override_hours_list[0].override_hours #=> Array
+    #   resp.effective_override_hours_list[0].override_hours[0].start.hours #=> Integer
+    #   resp.effective_override_hours_list[0].override_hours[0].start.minutes #=> Integer
+    #   resp.effective_override_hours_list[0].override_hours[0].end.hours #=> Integer
+    #   resp.effective_override_hours_list[0].override_hours[0].end.minutes #=> Integer
+    #   resp.effective_override_hours_list[0].override_hours[0].override_name #=> String
+    #   resp.effective_override_hours_list[0].override_hours[0].operational_status #=> String, one of "OPEN", "CLOSED"
     #   resp.time_zone #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/GetEffectiveHoursOfOperations AWS API Documentation
@@ -13980,6 +14137,74 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # Provides information about the child hours of operations for the
+    # specified parent hours of operation.
+    #
+    # For more information about child hours of operations, see [Link
+    # overrides from different hours of operation][1] in the <i>
+    # Administrator Guide</i>.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #
+    # @option params [required, String] :hours_of_operation_id
+    #   The identifier of the parent hours of operation.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per page. The default
+    #   MaxResult size is 100.
+    #
+    # @return [Types::ListChildHoursOfOperationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListChildHoursOfOperationsResponse#next_token #next_token} => String
+    #   * {Types::ListChildHoursOfOperationsResponse#child_hours_of_operations_summary_list #child_hours_of_operations_summary_list} => Array&lt;Types::HoursOfOperationsIdentifier&gt;
+    #   * {Types::ListChildHoursOfOperationsResponse#last_modified_time #last_modified_time} => Time
+    #   * {Types::ListChildHoursOfOperationsResponse#last_modified_region #last_modified_region} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_child_hours_of_operations({
+    #     instance_id: "InstanceId", # required
+    #     hours_of_operation_id: "HoursOfOperationId", # required
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.child_hours_of_operations_summary_list #=> Array
+    #   resp.child_hours_of_operations_summary_list[0].name #=> String
+    #   resp.child_hours_of_operations_summary_list[0].id #=> String
+    #   resp.child_hours_of_operations_summary_list[0].arn #=> String
+    #   resp.last_modified_time #=> Time
+    #   resp.last_modified_region #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListChildHoursOfOperations AWS API Documentation
+    #
+    # @overload list_child_hours_of_operations(params = {})
+    # @param [Hash] params ({})
+    def list_child_hours_of_operations(params = {}, options = {})
+      req = build_request(:list_child_hours_of_operations, params)
+      req.send_request(options)
+    end
+
     # Lists contact evaluations in the specified Amazon Connect instance.
     #
     # @option params [required, String] :instance_id
@@ -15039,6 +15264,15 @@ module Aws::Connect
     #   resp.hours_of_operation_override_list[0].config[0].end_time.minutes #=> Integer
     #   resp.hours_of_operation_override_list[0].effective_from #=> String
     #   resp.hours_of_operation_override_list[0].effective_till #=> String
+    #   resp.hours_of_operation_override_list[0].recurrence_config.recurrence_pattern.frequency #=> String, one of "WEEKLY", "MONTHLY", "YEARLY"
+    #   resp.hours_of_operation_override_list[0].recurrence_config.recurrence_pattern.interval #=> Integer
+    #   resp.hours_of_operation_override_list[0].recurrence_config.recurrence_pattern.by_month #=> Array
+    #   resp.hours_of_operation_override_list[0].recurrence_config.recurrence_pattern.by_month[0] #=> Integer
+    #   resp.hours_of_operation_override_list[0].recurrence_config.recurrence_pattern.by_month_day #=> Array
+    #   resp.hours_of_operation_override_list[0].recurrence_config.recurrence_pattern.by_month_day[0] #=> Integer
+    #   resp.hours_of_operation_override_list[0].recurrence_config.recurrence_pattern.by_weekday_occurrence #=> Array
+    #   resp.hours_of_operation_override_list[0].recurrence_config.recurrence_pattern.by_weekday_occurrence[0] #=> Integer
+    #   resp.hours_of_operation_override_list[0].override_type #=> String, one of "STANDARD", "OPEN", "CLOSED"
     #   resp.last_modified_region #=> String
     #   resp.last_modified_time #=> Time
     #
@@ -18984,6 +19218,15 @@ module Aws::Connect
     #   resp.hours_of_operation_overrides[0].config[0].end_time.minutes #=> Integer
     #   resp.hours_of_operation_overrides[0].effective_from #=> String
     #   resp.hours_of_operation_overrides[0].effective_till #=> String
+    #   resp.hours_of_operation_overrides[0].recurrence_config.recurrence_pattern.frequency #=> String, one of "WEEKLY", "MONTHLY", "YEARLY"
+    #   resp.hours_of_operation_overrides[0].recurrence_config.recurrence_pattern.interval #=> Integer
+    #   resp.hours_of_operation_overrides[0].recurrence_config.recurrence_pattern.by_month #=> Array
+    #   resp.hours_of_operation_overrides[0].recurrence_config.recurrence_pattern.by_month[0] #=> Integer
+    #   resp.hours_of_operation_overrides[0].recurrence_config.recurrence_pattern.by_month_day #=> Array
+    #   resp.hours_of_operation_overrides[0].recurrence_config.recurrence_pattern.by_month_day[0] #=> Integer
+    #   resp.hours_of_operation_overrides[0].recurrence_config.recurrence_pattern.by_weekday_occurrence #=> Array
+    #   resp.hours_of_operation_overrides[0].recurrence_config.recurrence_pattern.by_weekday_occurrence[0] #=> Integer
+    #   resp.hours_of_operation_overrides[0].override_type #=> String, one of "STANDARD", "OPEN", "CLOSED"
     #   resp.next_token #=> String
     #   resp.approximate_total_count #=> Integer
     #
@@ -19090,6 +19333,10 @@ module Aws::Connect
     #   resp.hours_of_operations[0].config[0].start_time.minutes #=> Integer
     #   resp.hours_of_operations[0].config[0].end_time.hours #=> Integer
     #   resp.hours_of_operations[0].config[0].end_time.minutes #=> Integer
+    #   resp.hours_of_operations[0].parent_hours_of_operations #=> Array
+    #   resp.hours_of_operations[0].parent_hours_of_operations[0].name #=> String
+    #   resp.hours_of_operations[0].parent_hours_of_operations[0].id #=> String
+    #   resp.hours_of_operations[0].parent_hours_of_operations[0].arn #=> String
     #   resp.hours_of_operations[0].tags #=> Hash
     #   resp.hours_of_operations[0].tags["TagKey"] #=> String
     #   resp.hours_of_operations[0].last_modified_time #=> Time
@@ -24543,6 +24790,20 @@ module Aws::Connect
     # @option params [String] :effective_till
     #   The date until the hours of operation override is effective.
     #
+    # @option params [Types::RecurrenceConfig] :recurrence_config
+    #   Configuration for a recurring event.
+    #
+    # @option params [String] :override_type
+    #   Whether the override will be defined as a *standard* or as a
+    #   *recurring event*.
+    #
+    #   For more information about how override types are applied, see [Build
+    #   your list of overrides][1] in the <i> Administrator Guide</i>.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/https:/docs.aws.amazon.com/connect/latest/adminguide/hours-of-operation-overrides.html
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -24568,6 +24829,16 @@ module Aws::Connect
     #     ],
     #     effective_from: "HoursOfOperationOverrideYearMonthDayDateFormat",
     #     effective_till: "HoursOfOperationOverrideYearMonthDayDateFormat",
+    #     recurrence_config: {
+    #       recurrence_pattern: { # required
+    #         frequency: "WEEKLY", # required, accepts WEEKLY, MONTHLY, YEARLY
+    #         interval: 1, # required
+    #         by_month: [1],
+    #         by_month_day: [1],
+    #         by_weekday_occurrence: [1],
+    #       },
+    #     },
+    #     override_type: "STANDARD", # accepts STANDARD, OPEN, CLOSED
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateHoursOfOperationOverride AWS API Documentation
@@ -26859,7 +27130,7 @@ module Aws::Connect
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-connect'
-      context[:gem_version] = '1.234.0'
+      context[:gem_version] = '1.235.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

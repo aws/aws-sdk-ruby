@@ -292,20 +292,20 @@ module Aws::RDS
       data[:dedicated_log_volume]
     end
 
-    # Specifies the name of the Availability Zone where RDS stores the DB
-    # snapshot. This value is valid only for snapshots that RDS stores on a
-    # Dedicated Local Zone.
-    # @return [String]
-    def snapshot_availability_zone
-      data[:snapshot_availability_zone]
-    end
-
     # The additional storage volumes associated with the DB snapshot. RDS
     # supports additional storage volumes for RDS for Oracle and RDS for SQL
     # Server.
     # @return [Array<Types::AdditionalStorageVolume>]
     def additional_storage_volumes
       data[:additional_storage_volumes]
+    end
+
+    # Specifies the name of the Availability Zone where RDS stores the DB
+    # snapshot. This value is valid only for snapshots that RDS stores on a
+    # Dedicated Local Zone.
+    # @return [String]
+    def snapshot_availability_zone
+      data[:snapshot_availability_zone]
     end
 
     # @!endgroup
@@ -752,6 +752,16 @@ module Aws::RDS
     #     dedicated_log_volume: false,
     #     ca_certificate_identifier: "String",
     #     engine_lifecycle_support: "String",
+    #     additional_storage_volumes: [
+    #       {
+    #         volume_name: "String", # required
+    #         allocated_storage: 1,
+    #         iops: 1,
+    #         max_allocated_storage: 1,
+    #         storage_throughput: 1,
+    #         storage_type: "String",
+    #       },
+    #     ],
     #     tag_specifications: [
     #       {
     #         resource_type: "String",
@@ -765,16 +775,6 @@ module Aws::RDS
     #     ],
     #     manage_master_user_password: false,
     #     master_user_secret_kms_key_id: "String",
-    #     additional_storage_volumes: [
-    #       {
-    #         volume_name: "String", # required
-    #         allocated_storage: 1,
-    #         iops: 1,
-    #         max_allocated_storage: 1,
-    #         storage_throughput: 1,
-    #         storage_type: "String",
-    #       },
-    #     ],
     #   })
     # @param [Hash] options ({})
     # @option options [required, String] :db_instance_identifier
@@ -1310,6 +1310,12 @@ module Aws::RDS
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html
+    # @option options [Array<Types::AdditionalStorageVolume>] :additional_storage_volumes
+    #   A list of additional storage volumes to create for the DB instance.
+    #   You can create up to three additional storage volumes using the names
+    #   `rdsdbdata2`, `rdsdbdata3`, and `rdsdbdata4`. Additional storage
+    #   volumes are supported for RDS for Oracle and RDS for SQL Server DB
+    #   instances only.
     # @option options [Array<Types::TagSpecification>] :tag_specifications
     #   Tags to assign to resources associated with the DB instance.
     #
@@ -1356,12 +1362,6 @@ module Aws::RDS
     #   There is a default KMS key for your Amazon Web Services account. Your
     #   Amazon Web Services account has a different default KMS key for each
     #   Amazon Web Services Region.
-    # @option options [Array<Types::AdditionalStorageVolume>] :additional_storage_volumes
-    #   A list of additional storage volumes to create for the DB instance.
-    #   You can create up to three additional storage volumes using the names
-    #   `rdsdbdata2`, `rdsdbdata3`, and `rdsdbdata4`. Additional storage
-    #   volumes are supported for RDS for Oracle and RDS for SQL Server DB
-    #   instances only.
     # @return [DBInstance]
     def restore(options = {})
       options = options.merge(db_snapshot_identifier: @snapshot_id)

@@ -373,6 +373,16 @@ module Aws
                     ?multi_tenant: bool,
                     ?dedicated_log_volume: bool,
                     ?engine_lifecycle_support: ::String,
+                    ?additional_storage_volumes: Array[
+                      {
+                        volume_name: ::String,
+                        allocated_storage: ::Integer?,
+                        iops: ::Integer?,
+                        max_allocated_storage: ::Integer?,
+                        storage_throughput: ::Integer?,
+                        storage_type: ::String?
+                      },
+                    ],
                     ?tag_specifications: Array[
                       {
                         resource_type: ::String?,
@@ -384,17 +394,7 @@ module Aws
                         ]?
                       },
                     ],
-                    ?master_user_authentication_type: ("password" | "iam-db-auth"),
-                    ?additional_storage_volumes: Array[
-                      {
-                        volume_name: ::String,
-                        allocated_storage: ::Integer?,
-                        iops: ::Integer?,
-                        max_allocated_storage: ::Integer?,
-                        storage_throughput: ::Integer?,
-                        storage_type: ::String?
-                      },
-                    ]
+                    ?master_user_authentication_type: ("password" | "iam-db-auth")
                   ) -> DBInstance
                 | (?Hash[Symbol, untyped]) -> DBInstance
 
@@ -456,6 +456,16 @@ module Aws
                                  ?dedicated_log_volume: bool,
                                  ?upgrade_storage_config: bool,
                                  ?ca_certificate_identifier: ::String,
+                                 ?additional_storage_volumes: Array[
+                                   {
+                                     volume_name: ::String,
+                                     allocated_storage: ::Integer?,
+                                     iops: ::Integer?,
+                                     max_allocated_storage: ::Integer?,
+                                     storage_throughput: ::Integer?,
+                                     storage_type: ::String?
+                                   },
+                                 ],
                                  ?tag_specifications: Array[
                                    {
                                      resource_type: ::String?,
@@ -465,16 +475,6 @@ module Aws
                                          value: ::String?
                                        },
                                      ]?
-                                   },
-                                 ],
-                                 ?additional_storage_volumes: Array[
-                                   {
-                                     volume_name: ::String,
-                                     allocated_storage: ::Integer?,
-                                     iops: ::Integer?,
-                                     max_allocated_storage: ::Integer?,
-                                     storage_throughput: ::Integer?,
-                                     storage_type: ::String?
                                    },
                                  ],
                                  ?source_region: ::String
@@ -571,6 +571,17 @@ module Aws
                     ?multi_tenant: bool,
                     ?dedicated_log_volume: bool,
                     ?engine: ::String,
+                    ?additional_storage_volumes: Array[
+                      {
+                        volume_name: ::String,
+                        allocated_storage: ::Integer?,
+                        iops: ::Integer?,
+                        max_allocated_storage: ::Integer?,
+                        storage_throughput: ::Integer?,
+                        storage_type: ::String?,
+                        set_for_delete: bool?
+                      },
+                    ],
                     ?tag_specifications: Array[
                       {
                         resource_type: ::String?,
@@ -582,18 +593,7 @@ module Aws
                         ]?
                       },
                     ],
-                    ?master_user_authentication_type: ("password" | "iam-db-auth"),
-                    ?additional_storage_volumes: Array[
-                      {
-                        volume_name: ::String,
-                        allocated_storage: ::Integer?,
-                        iops: ::Integer?,
-                        max_allocated_storage: ::Integer?,
-                        storage_throughput: ::Integer?,
-                        storage_type: ::String?,
-                        set_for_delete: bool?
-                      },
-                    ]
+                    ?master_user_authentication_type: ("password" | "iam-db-auth")
                   ) -> DBInstance
                 | (?Hash[Symbol, untyped]) -> DBInstance
 
@@ -678,6 +678,16 @@ module Aws
                      ?dedicated_log_volume: bool,
                      ?ca_certificate_identifier: ::String,
                      ?engine_lifecycle_support: ::String,
+                     ?additional_storage_volumes: Array[
+                       {
+                         volume_name: ::String,
+                         allocated_storage: ::Integer?,
+                         iops: ::Integer?,
+                         max_allocated_storage: ::Integer?,
+                         storage_throughput: ::Integer?,
+                         storage_type: ::String?
+                       },
+                     ],
                      ?tag_specifications: Array[
                        {
                          resource_type: ::String?,
@@ -690,17 +700,7 @@ module Aws
                        },
                      ],
                      ?manage_master_user_password: bool,
-                     ?master_user_secret_kms_key_id: ::String,
-                     ?additional_storage_volumes: Array[
-                       {
-                         volume_name: ::String,
-                         allocated_storage: ::Integer?,
-                         iops: ::Integer?,
-                         max_allocated_storage: ::Integer?,
-                         storage_throughput: ::Integer?,
-                         storage_type: ::String?
-                       },
-                     ]
+                     ?master_user_secret_kms_key_id: ::String
                    ) -> DBInstance
                  | (?Hash[Symbol, untyped]) -> DBInstance
 

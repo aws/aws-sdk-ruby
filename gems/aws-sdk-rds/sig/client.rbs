@@ -320,12 +320,14 @@ module Aws
         def engine_version: () -> ::String
         def database_installation_files_s3_bucket_name: () -> ::String
         def database_installation_files_s3_prefix: () -> ::String
+        def database_installation_files: () -> ::Array[::String]
         def custom_db_engine_version_manifest: () -> ::String
         def db_parameter_group_family: () -> ::String
         def db_engine_description: () -> ::String
         def db_engine_version_arn: () -> ::String
         def db_engine_version_description: () -> ::String
         def default_character_set: () -> Types::CharacterSet
+        def failure_reason: () -> ::String
         def image: () -> Types::CustomDBEngineVersionAMI
         def db_engine_media_type: () -> ::String
         def kms_key_id: () -> ::String
@@ -350,8 +352,6 @@ module Aws
         def supports_local_write_forwarding: () -> bool
         def supports_integrations: () -> bool
         def serverless_v2_features_support: () -> Types::ServerlessV2FeaturesSupport
-        def database_installation_files: () -> ::Array[::String]
-        def failure_reason: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/Client.html#create_custom_db_engine_version-instance_method
       def create_custom_db_engine_version: (
@@ -359,6 +359,7 @@ module Aws
                                              engine_version: ::String,
                                              ?database_installation_files_s3_bucket_name: ::String,
                                              ?database_installation_files_s3_prefix: ::String,
+                                             ?database_installation_files: Array[::String],
                                              ?image_id: ::String,
                                              ?kms_key_id: ::String,
                                              ?source_custom_db_engine_version_identifier: ::String,
@@ -370,8 +371,7 @@ module Aws
                                                  key: ::String?,
                                                  value: ::String?
                                                },
-                                             ],
-                                             ?database_installation_files: Array[::String]
+                                             ]
                                            ) -> _CreateCustomDBEngineVersionResponseSuccess
                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateCustomDBEngineVersionResponseSuccess
 
@@ -617,6 +617,16 @@ module Aws
                                 ?multi_tenant: bool,
                                 ?dedicated_log_volume: bool,
                                 ?engine_lifecycle_support: ::String,
+                                ?additional_storage_volumes: Array[
+                                  {
+                                    volume_name: ::String,
+                                    allocated_storage: ::Integer?,
+                                    iops: ::Integer?,
+                                    max_allocated_storage: ::Integer?,
+                                    storage_throughput: ::Integer?,
+                                    storage_type: ::String?
+                                  },
+                                ],
                                 ?tag_specifications: Array[
                                   {
                                     resource_type: ::String?,
@@ -628,17 +638,7 @@ module Aws
                                     ]?
                                   },
                                 ],
-                                ?master_user_authentication_type: ("password" | "iam-db-auth"),
-                                ?additional_storage_volumes: Array[
-                                  {
-                                    volume_name: ::String,
-                                    allocated_storage: ::Integer?,
-                                    iops: ::Integer?,
-                                    max_allocated_storage: ::Integer?,
-                                    storage_throughput: ::Integer?,
-                                    storage_type: ::String?
-                                  },
-                                ]
+                                ?master_user_authentication_type: ("password" | "iam-db-auth")
                               ) -> _CreateDBInstanceResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDBInstanceResponseSuccess
 
@@ -705,6 +705,16 @@ module Aws
                                              ?dedicated_log_volume: bool,
                                              ?upgrade_storage_config: bool,
                                              ?ca_certificate_identifier: ::String,
+                                             ?additional_storage_volumes: Array[
+                                               {
+                                                 volume_name: ::String,
+                                                 allocated_storage: ::Integer?,
+                                                 iops: ::Integer?,
+                                                 max_allocated_storage: ::Integer?,
+                                                 storage_throughput: ::Integer?,
+                                                 storage_type: ::String?
+                                               },
+                                             ],
                                              ?tag_specifications: Array[
                                                {
                                                  resource_type: ::String?,
@@ -714,16 +724,6 @@ module Aws
                                                      value: ::String?
                                                    },
                                                  ]?
-                                               },
-                                             ],
-                                             ?additional_storage_volumes: Array[
-                                               {
-                                                 volume_name: ::String,
-                                                 allocated_storage: ::Integer?,
-                                                 iops: ::Integer?,
-                                                 max_allocated_storage: ::Integer?,
-                                                 storage_throughput: ::Integer?,
-                                                 storage_type: ::String?
                                                },
                                              ],
                                              ?source_region: ::String
@@ -1025,12 +1025,14 @@ module Aws
         def engine_version: () -> ::String
         def database_installation_files_s3_bucket_name: () -> ::String
         def database_installation_files_s3_prefix: () -> ::String
+        def database_installation_files: () -> ::Array[::String]
         def custom_db_engine_version_manifest: () -> ::String
         def db_parameter_group_family: () -> ::String
         def db_engine_description: () -> ::String
         def db_engine_version_arn: () -> ::String
         def db_engine_version_description: () -> ::String
         def default_character_set: () -> Types::CharacterSet
+        def failure_reason: () -> ::String
         def image: () -> Types::CustomDBEngineVersionAMI
         def db_engine_media_type: () -> ::String
         def kms_key_id: () -> ::String
@@ -1055,8 +1057,6 @@ module Aws
         def supports_local_write_forwarding: () -> bool
         def supports_integrations: () -> bool
         def serverless_v2_features_support: () -> Types::ServerlessV2FeaturesSupport
-        def database_installation_files: () -> ::Array[::String]
-        def failure_reason: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/Client.html#delete_custom_db_engine_version-instance_method
       def delete_custom_db_engine_version: (
@@ -2306,12 +2306,14 @@ module Aws
         def engine_version: () -> ::String
         def database_installation_files_s3_bucket_name: () -> ::String
         def database_installation_files_s3_prefix: () -> ::String
+        def database_installation_files: () -> ::Array[::String]
         def custom_db_engine_version_manifest: () -> ::String
         def db_parameter_group_family: () -> ::String
         def db_engine_description: () -> ::String
         def db_engine_version_arn: () -> ::String
         def db_engine_version_description: () -> ::String
         def default_character_set: () -> Types::CharacterSet
+        def failure_reason: () -> ::String
         def image: () -> Types::CustomDBEngineVersionAMI
         def db_engine_media_type: () -> ::String
         def kms_key_id: () -> ::String
@@ -2336,8 +2338,6 @@ module Aws
         def supports_local_write_forwarding: () -> bool
         def supports_integrations: () -> bool
         def serverless_v2_features_support: () -> Types::ServerlessV2FeaturesSupport
-        def database_installation_files: () -> ::Array[::String]
-        def failure_reason: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/Client.html#modify_custom_db_engine_version-instance_method
       def modify_custom_db_engine_version: (
@@ -2553,6 +2553,17 @@ module Aws
                                 ?multi_tenant: bool,
                                 ?dedicated_log_volume: bool,
                                 ?engine: ::String,
+                                ?additional_storage_volumes: Array[
+                                  {
+                                    volume_name: ::String,
+                                    allocated_storage: ::Integer?,
+                                    iops: ::Integer?,
+                                    max_allocated_storage: ::Integer?,
+                                    storage_throughput: ::Integer?,
+                                    storage_type: ::String?,
+                                    set_for_delete: bool?
+                                  },
+                                ],
                                 ?tag_specifications: Array[
                                   {
                                     resource_type: ::String?,
@@ -2564,18 +2575,7 @@ module Aws
                                     ]?
                                   },
                                 ],
-                                ?master_user_authentication_type: ("password" | "iam-db-auth"),
-                                ?additional_storage_volumes: Array[
-                                  {
-                                    volume_name: ::String,
-                                    allocated_storage: ::Integer?,
-                                    iops: ::Integer?,
-                                    max_allocated_storage: ::Integer?,
-                                    storage_throughput: ::Integer?,
-                                    storage_type: ::String?,
-                                    set_for_delete: bool?
-                                  },
-                                ]
+                                ?master_user_authentication_type: ("password" | "iam-db-auth")
                               ) -> _ModifyDBInstanceResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ModifyDBInstanceResponseSuccess
 
@@ -3318,6 +3318,16 @@ module Aws
                                                   ?dedicated_log_volume: bool,
                                                   ?ca_certificate_identifier: ::String,
                                                   ?engine_lifecycle_support: ::String,
+                                                  ?additional_storage_volumes: Array[
+                                                    {
+                                                      volume_name: ::String,
+                                                      allocated_storage: ::Integer?,
+                                                      iops: ::Integer?,
+                                                      max_allocated_storage: ::Integer?,
+                                                      storage_throughput: ::Integer?,
+                                                      storage_type: ::String?
+                                                    },
+                                                  ],
                                                   ?tag_specifications: Array[
                                                     {
                                                       resource_type: ::String?,
@@ -3330,17 +3340,7 @@ module Aws
                                                     },
                                                   ],
                                                   ?manage_master_user_password: bool,
-                                                  ?master_user_secret_kms_key_id: ::String,
-                                                  ?additional_storage_volumes: Array[
-                                                    {
-                                                      volume_name: ::String,
-                                                      allocated_storage: ::Integer?,
-                                                      iops: ::Integer?,
-                                                      max_allocated_storage: ::Integer?,
-                                                      storage_throughput: ::Integer?,
-                                                      storage_type: ::String?
-                                                    },
-                                                  ]
+                                                  ?master_user_secret_kms_key_id: ::String
                                                 ) -> _RestoreDBInstanceFromDBSnapshotResponseSuccess
                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RestoreDBInstanceFromDBSnapshotResponseSuccess
 
@@ -3412,6 +3412,16 @@ module Aws
                                          ?dedicated_log_volume: bool,
                                          ?ca_certificate_identifier: ::String,
                                          ?engine_lifecycle_support: ::String,
+                                         ?additional_storage_volumes: Array[
+                                           {
+                                             volume_name: ::String,
+                                             allocated_storage: ::Integer?,
+                                             iops: ::Integer?,
+                                             max_allocated_storage: ::Integer?,
+                                             storage_throughput: ::Integer?,
+                                             storage_type: ::String?
+                                           },
+                                         ],
                                          ?tag_specifications: Array[
                                            {
                                              resource_type: ::String?,
@@ -3421,16 +3431,6 @@ module Aws
                                                  value: ::String?
                                                },
                                              ]?
-                                           },
-                                         ],
-                                         ?additional_storage_volumes: Array[
-                                           {
-                                             volume_name: ::String,
-                                             allocated_storage: ::Integer?,
-                                             iops: ::Integer?,
-                                             max_allocated_storage: ::Integer?,
-                                             storage_throughput: ::Integer?,
-                                             storage_type: ::String?
                                            },
                                          ]
                                        ) -> _RestoreDBInstanceFromS3ResponseSuccess
@@ -3498,6 +3498,16 @@ module Aws
                                                   ?dedicated_log_volume: bool,
                                                   ?ca_certificate_identifier: ::String,
                                                   ?engine_lifecycle_support: ::String,
+                                                  ?additional_storage_volumes: Array[
+                                                    {
+                                                      volume_name: ::String,
+                                                      allocated_storage: ::Integer?,
+                                                      iops: ::Integer?,
+                                                      max_allocated_storage: ::Integer?,
+                                                      storage_throughput: ::Integer?,
+                                                      storage_type: ::String?
+                                                    },
+                                                  ],
                                                   ?tag_specifications: Array[
                                                     {
                                                       resource_type: ::String?,
@@ -3510,17 +3520,7 @@ module Aws
                                                     },
                                                   ],
                                                   ?manage_master_user_password: bool,
-                                                  ?master_user_secret_kms_key_id: ::String,
-                                                  ?additional_storage_volumes: Array[
-                                                    {
-                                                      volume_name: ::String,
-                                                      allocated_storage: ::Integer?,
-                                                      iops: ::Integer?,
-                                                      max_allocated_storage: ::Integer?,
-                                                      storage_throughput: ::Integer?,
-                                                      storage_type: ::String?
-                                                    },
-                                                  ]
+                                                  ?master_user_secret_kms_key_id: ::String
                                                 ) -> _RestoreDBInstanceToPointInTimeResponseSuccess
                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RestoreDBInstanceToPointInTimeResponseSuccess
 

@@ -20,7 +20,7 @@ env:
 
 jobs:
   aws-sdk-pr-build:
-    if: github.event.review.state == 'approved'
+    if: ${{ github.event_name == 'workflow_dispatch' || github.event.review.state == 'approved' }}
     runs-on: ubuntu-latest
     permissions:
       id-token: write
@@ -35,16 +35,27 @@ jobs:
           role-session-name: PullRequestBuildGitHubAction
           role-duration-seconds: '$ROLE_SESSION_DURATION_SECONDS'
           aws-region: us-west-2
+      - name: Checkout
+        if: github.event_name == 'workflow_dispatch'
+        uses: actions/checkout@v4
       - name: Download Build Script
         run: |
           aws s3 cp s3://aws-sdk-builds-github-assets-prod-us-west-2/$SCRIPT_LOCATION ./$DOWNLOAD_FOLDER/$SCRIPT_LOCATION --no-progress
           chmod +x ./$DOWNLOAD_FOLDER/$SCRIPT_LOCATION
+      - name: Get PR Number
+        id: pr
+        if: github.event_name == 'workflow_dispatch'
+        run: |
+          PR_NUMBER=$(gh pr list --repo "${{ github.repository }}" --state all --head "${{ github.ref_name }}" --json number --jq '.[0].number // ""')
+          echo "number=${PR_NUMBER:-}" >> $GITHUB_OUTPUT
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Build
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           REPO: ${{ github.repository }}
-          HEAD_REF: ${{ github.event.pull_request.head.ref }}
-          PR_NUMBER: ${{ github.event.pull_request.number }}
+          HEAD_REF: ${{ github.event.pull_request.head.ref || github.ref_name }}
+          PR_NUMBER: ${{ github.event.pull_request.number || steps.pr.outputs.number }}
           RUN_ID: ${{ github.run_id }}
         run: |
           ./$DOWNLOAD_FOLDER/$SCRIPT_LOCATION \

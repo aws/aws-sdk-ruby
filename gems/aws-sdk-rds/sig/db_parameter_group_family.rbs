@@ -34,9 +34,7 @@ module Aws
                                                    name: ::String,
                                                    values: Array[::String]
                                                  },
-                                               ],
-                                               ?max_records: ::Integer,
-                                               ?marker: ::String
+                                               ]
                                              ) -> Parameter::Collection
                                            | (?Hash[Symbol, untyped]) -> Parameter::Collection
 

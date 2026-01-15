@@ -314,7 +314,8 @@ module Aws
                             ?ip_address_type: ::String,
                             ?multi_az: bool,
                             ?redshift_idc_application_arn: ::String,
-                            ?catalog_name: ::String
+                            ?catalog_name: ::String,
+                            ?extra_compute_for_automatic_optimization: bool
                           ) -> _CreateClusterResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateClusterResponseSuccess
 
@@ -670,7 +671,7 @@ module Aws
         include ::Seahorse::Client::_ResponseSuccess[Types::UsageLimit]
         def usage_limit_id: () -> ::String
         def cluster_identifier: () -> ::String
-        def feature_type: () -> ("spectrum" | "concurrency-scaling" | "cross-region-datasharing")
+        def feature_type: () -> ("spectrum" | "concurrency-scaling" | "cross-region-datasharing" | "extra-compute-for-automatic-optimization")
         def limit_type: () -> ("time" | "data-scanned")
         def amount: () -> ::Integer
         def period: () -> ("daily" | "weekly" | "monthly")
@@ -680,7 +681,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#create_usage_limit-instance_method
       def create_usage_limit: (
                                 cluster_identifier: ::String,
-                                feature_type: ("spectrum" | "concurrency-scaling" | "cross-region-datasharing"),
+                                feature_type: ("spectrum" | "concurrency-scaling" | "cross-region-datasharing" | "extra-compute-for-automatic-optimization"),
                                 limit_type: ("time" | "data-scanned"),
                                 amount: ::Integer,
                                 ?period: ("daily" | "weekly" | "monthly"),
@@ -1515,7 +1516,7 @@ module Aws
       def describe_usage_limits: (
                                    ?usage_limit_id: ::String,
                                    ?cluster_identifier: ::String,
-                                   ?feature_type: ("spectrum" | "concurrency-scaling" | "cross-region-datasharing"),
+                                   ?feature_type: ("spectrum" | "concurrency-scaling" | "cross-region-datasharing" | "extra-compute-for-automatic-optimization"),
                                    ?max_records: ::Integer,
                                    ?marker: ::String,
                                    ?tag_keys: Array[::String],
@@ -1767,7 +1768,8 @@ module Aws
                             ?manage_master_password: bool,
                             ?master_password_secret_kms_key_id: ::String,
                             ?ip_address_type: ::String,
-                            ?multi_az: bool
+                            ?multi_az: bool,
+                            ?extra_compute_for_automatic_optimization: bool
                           ) -> _ModifyClusterResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ModifyClusterResponseSuccess
 
@@ -2075,7 +2077,7 @@ module Aws
         include ::Seahorse::Client::_ResponseSuccess[Types::UsageLimit]
         def usage_limit_id: () -> ::String
         def cluster_identifier: () -> ::String
-        def feature_type: () -> ("spectrum" | "concurrency-scaling" | "cross-region-datasharing")
+        def feature_type: () -> ("spectrum" | "concurrency-scaling" | "cross-region-datasharing" | "extra-compute-for-automatic-optimization")
         def limit_type: () -> ("time" | "data-scanned")
         def amount: () -> ::Integer
         def period: () -> ("daily" | "weekly" | "monthly")

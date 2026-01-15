@@ -177,6 +177,18 @@ module Aws
                           ) -> _AssociateFlowResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateFlowResponseSuccess
 
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#associate_hours_of_operations-instance_method
+      def associate_hours_of_operations: (
+                                           instance_id: ::String,
+                                           hours_of_operation_id: ::String,
+                                           parent_hours_of_operation_configs: Array[
+                                             {
+                                               hours_of_operation_id: ::String?
+                                             },
+                                           ]
+                                         ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
       interface _AssociateInstanceStorageConfigResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::AssociateInstanceStorageConfigResponse]
         def association_id: () -> ::String
@@ -964,6 +976,11 @@ module Aws
                                            }
                                          },
                                        ],
+                                       ?parent_hours_of_operation_configs: Array[
+                                         {
+                                           hours_of_operation_id: ::String?
+                                         },
+                                       ],
                                        ?tags: Hash[::String, ::String]
                                      ) -> _CreateHoursOfOperationResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateHoursOfOperationResponseSuccess
@@ -992,7 +1009,17 @@ module Aws
                                                   },
                                                 ],
                                                 effective_from: ::String,
-                                                effective_till: ::String
+                                                effective_till: ::String,
+                                                ?recurrence_config: {
+                                                  recurrence_pattern: {
+                                                    frequency: ("WEEKLY" | "MONTHLY" | "YEARLY"),
+                                                    interval: ::Integer,
+                                                    by_month: Array[::Integer]?,
+                                                    by_month_day: Array[::Integer]?,
+                                                    by_weekday_occurrence: Array[::Integer]?
+                                                  }
+                                                },
+                                                ?override_type: ("STANDARD" | "OPEN" | "CLOSED")
                                               ) -> _CreateHoursOfOperationOverrideResponseSuccess
                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateHoursOfOperationOverrideResponseSuccess
 
@@ -2387,6 +2414,14 @@ module Aws
                              ) -> _DisassociateFlowResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateFlowResponseSuccess
 
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#disassociate_hours_of_operations-instance_method
+      def disassociate_hours_of_operations: (
+                                              instance_id: ::String,
+                                              hours_of_operation_id: ::String,
+                                              parent_hours_of_operation_ids: Array[::String]
+                                            ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#disassociate_instance_storage_config-instance_method
       def disassociate_instance_storage_config: (
                                                   instance_id: ::String,
@@ -2658,6 +2693,7 @@ module Aws
       interface _GetEffectiveHoursOfOperationsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetEffectiveHoursOfOperationsResponse]
         def effective_hours_of_operation_list: () -> ::Array[Types::EffectiveHoursOfOperations]
+        def effective_override_hours_list: () -> ::Array[Types::EffectiveOverrideHours]
         def time_zone: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#get_effective_hours_of_operations-instance_method
@@ -2953,6 +2989,22 @@ module Aws
                        lex_version: ("V1" | "V2")
                      ) -> _ListBotsResponseSuccess
                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListBotsResponseSuccess
+
+      interface _ListChildHoursOfOperationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListChildHoursOfOperationsResponse]
+        def next_token: () -> ::String
+        def child_hours_of_operations_summary_list: () -> ::Array[Types::HoursOfOperationsIdentifier]
+        def last_modified_time: () -> ::Time
+        def last_modified_region: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#list_child_hours_of_operations-instance_method
+      def list_child_hours_of_operations: (
+                                            instance_id: ::String,
+                                            hours_of_operation_id: ::String,
+                                            ?next_token: ::String,
+                                            ?max_results: ::Integer
+                                          ) -> _ListChildHoursOfOperationsResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListChildHoursOfOperationsResponseSuccess
 
       interface _ListContactEvaluationsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListContactEvaluationsResponse]
@@ -6271,7 +6323,17 @@ module Aws
                                                   },
                                                 ],
                                                 ?effective_from: ::String,
-                                                ?effective_till: ::String
+                                                ?effective_till: ::String,
+                                                ?recurrence_config: {
+                                                  recurrence_pattern: {
+                                                    frequency: ("WEEKLY" | "MONTHLY" | "YEARLY"),
+                                                    interval: ::Integer,
+                                                    by_month: Array[::Integer]?,
+                                                    by_month_day: Array[::Integer]?,
+                                                    by_weekday_occurrence: Array[::Integer]?
+                                                  }
+                                                },
+                                                ?override_type: ("STANDARD" | "OPEN" | "CLOSED")
                                               ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 

@@ -572,6 +572,7 @@ module Aws::RDS
     ModifyTenantDatabaseMessage = Shapes::StructureShape.new(name: 'ModifyTenantDatabaseMessage')
     ModifyTenantDatabaseResult = Shapes::StructureShape.new(name: 'ModifyTenantDatabaseResult')
     NetworkTypeNotSupported = Shapes::StructureShape.new(name: 'NetworkTypeNotSupported', error: {"code" => "NetworkTypeNotSupported", "httpStatusCode" => 400, "senderFault" => true})
+    OperatorSensitiveString = Shapes::StringShape.new(name: 'OperatorSensitiveString')
     Option = Shapes::StructureShape.new(name: 'Option')
     OptionConfiguration = Shapes::StructureShape.new(name: 'OptionConfiguration')
     OptionConfigurationList = Shapes::ListShape.new(name: 'OptionConfigurationList')
@@ -992,14 +993,14 @@ module Aws::RDS
     ConnectionPoolConfiguration.add_member(:max_idle_connections_percent, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxIdleConnectionsPercent"))
     ConnectionPoolConfiguration.add_member(:connection_borrow_timeout, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "ConnectionBorrowTimeout"))
     ConnectionPoolConfiguration.add_member(:session_pinning_filters, Shapes::ShapeRef.new(shape: StringList, location_name: "SessionPinningFilters"))
-    ConnectionPoolConfiguration.add_member(:init_query, Shapes::ShapeRef.new(shape: String, location_name: "InitQuery"))
+    ConnectionPoolConfiguration.add_member(:init_query, Shapes::ShapeRef.new(shape: OperatorSensitiveString, location_name: "InitQuery"))
     ConnectionPoolConfiguration.struct_class = Types::ConnectionPoolConfiguration
 
     ConnectionPoolConfigurationInfo.add_member(:max_connections_percent, Shapes::ShapeRef.new(shape: Integer, location_name: "MaxConnectionsPercent"))
     ConnectionPoolConfigurationInfo.add_member(:max_idle_connections_percent, Shapes::ShapeRef.new(shape: Integer, location_name: "MaxIdleConnectionsPercent"))
     ConnectionPoolConfigurationInfo.add_member(:connection_borrow_timeout, Shapes::ShapeRef.new(shape: Integer, location_name: "ConnectionBorrowTimeout"))
     ConnectionPoolConfigurationInfo.add_member(:session_pinning_filters, Shapes::ShapeRef.new(shape: StringList, location_name: "SessionPinningFilters"))
-    ConnectionPoolConfigurationInfo.add_member(:init_query, Shapes::ShapeRef.new(shape: String, location_name: "InitQuery"))
+    ConnectionPoolConfigurationInfo.add_member(:init_query, Shapes::ShapeRef.new(shape: OperatorSensitiveString, location_name: "InitQuery"))
     ConnectionPoolConfigurationInfo.struct_class = Types::ConnectionPoolConfigurationInfo
 
     ContextAttribute.add_member(:key, Shapes::ShapeRef.new(shape: String, location_name: "Key"))
@@ -1087,6 +1088,7 @@ module Aws::RDS
     CreateCustomDBEngineVersionMessage.add_member(:engine_version, Shapes::ShapeRef.new(shape: CustomEngineVersion, required: true, location_name: "EngineVersion"))
     CreateCustomDBEngineVersionMessage.add_member(:database_installation_files_s3_bucket_name, Shapes::ShapeRef.new(shape: BucketName, location_name: "DatabaseInstallationFilesS3BucketName"))
     CreateCustomDBEngineVersionMessage.add_member(:database_installation_files_s3_prefix, Shapes::ShapeRef.new(shape: String255, location_name: "DatabaseInstallationFilesS3Prefix"))
+    CreateCustomDBEngineVersionMessage.add_member(:database_installation_files, Shapes::ShapeRef.new(shape: StringList, location_name: "DatabaseInstallationFiles"))
     CreateCustomDBEngineVersionMessage.add_member(:image_id, Shapes::ShapeRef.new(shape: String255, location_name: "ImageId"))
     CreateCustomDBEngineVersionMessage.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyIdOrArn, location_name: "KMSKeyId"))
     CreateCustomDBEngineVersionMessage.add_member(:source_custom_db_engine_version_identifier, Shapes::ShapeRef.new(shape: String255, location_name: "SourceCustomDbEngineVersionIdentifier"))
@@ -1094,7 +1096,6 @@ module Aws::RDS
     CreateCustomDBEngineVersionMessage.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
     CreateCustomDBEngineVersionMessage.add_member(:manifest, Shapes::ShapeRef.new(shape: CustomDBEngineVersionManifest, location_name: "Manifest"))
     CreateCustomDBEngineVersionMessage.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
-    CreateCustomDBEngineVersionMessage.add_member(:database_installation_files, Shapes::ShapeRef.new(shape: StringList, location_name: "DatabaseInstallationFiles"))
     CreateCustomDBEngineVersionMessage.struct_class = Types::CreateCustomDBEngineVersionMessage
 
     CreateDBClusterEndpointMessage.add_member(:db_cluster_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DBClusterIdentifier"))
@@ -1250,9 +1251,9 @@ module Aws::RDS
     CreateDBInstanceMessage.add_member(:multi_tenant, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "MultiTenant"))
     CreateDBInstanceMessage.add_member(:dedicated_log_volume, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "DedicatedLogVolume"))
     CreateDBInstanceMessage.add_member(:engine_lifecycle_support, Shapes::ShapeRef.new(shape: String, location_name: "EngineLifecycleSupport"))
+    CreateDBInstanceMessage.add_member(:additional_storage_volumes, Shapes::ShapeRef.new(shape: AdditionalStorageVolumesList, location_name: "AdditionalStorageVolumes"))
     CreateDBInstanceMessage.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecifications"))
     CreateDBInstanceMessage.add_member(:master_user_authentication_type, Shapes::ShapeRef.new(shape: MasterUserAuthenticationType, location_name: "MasterUserAuthenticationType"))
-    CreateDBInstanceMessage.add_member(:additional_storage_volumes, Shapes::ShapeRef.new(shape: AdditionalStorageVolumesList, location_name: "AdditionalStorageVolumes"))
     CreateDBInstanceMessage.struct_class = Types::CreateDBInstanceMessage
 
     CreateDBInstanceReadReplicaMessage.add_member(:db_instance_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DBInstanceIdentifier"))
@@ -1302,8 +1303,8 @@ module Aws::RDS
     CreateDBInstanceReadReplicaMessage.add_member(:dedicated_log_volume, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "DedicatedLogVolume"))
     CreateDBInstanceReadReplicaMessage.add_member(:upgrade_storage_config, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "UpgradeStorageConfig"))
     CreateDBInstanceReadReplicaMessage.add_member(:ca_certificate_identifier, Shapes::ShapeRef.new(shape: String, location_name: "CACertificateIdentifier"))
-    CreateDBInstanceReadReplicaMessage.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecifications"))
     CreateDBInstanceReadReplicaMessage.add_member(:additional_storage_volumes, Shapes::ShapeRef.new(shape: AdditionalStorageVolumesList, location_name: "AdditionalStorageVolumes"))
+    CreateDBInstanceReadReplicaMessage.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecifications"))
     CreateDBInstanceReadReplicaMessage.add_member(:source_region, Shapes::ShapeRef.new(shape: String, location_name: "SourceRegion"))
     CreateDBInstanceReadReplicaMessage.struct_class = Types::CreateDBInstanceReadReplicaMessage
 
@@ -1751,12 +1752,14 @@ module Aws::RDS
     DBEngineVersion.add_member(:engine_version, Shapes::ShapeRef.new(shape: String, location_name: "EngineVersion"))
     DBEngineVersion.add_member(:database_installation_files_s3_bucket_name, Shapes::ShapeRef.new(shape: String, location_name: "DatabaseInstallationFilesS3BucketName"))
     DBEngineVersion.add_member(:database_installation_files_s3_prefix, Shapes::ShapeRef.new(shape: String, location_name: "DatabaseInstallationFilesS3Prefix"))
+    DBEngineVersion.add_member(:database_installation_files, Shapes::ShapeRef.new(shape: StringList, location_name: "DatabaseInstallationFiles"))
     DBEngineVersion.add_member(:custom_db_engine_version_manifest, Shapes::ShapeRef.new(shape: CustomDBEngineVersionManifest, location_name: "CustomDBEngineVersionManifest"))
     DBEngineVersion.add_member(:db_parameter_group_family, Shapes::ShapeRef.new(shape: String, location_name: "DBParameterGroupFamily"))
     DBEngineVersion.add_member(:db_engine_description, Shapes::ShapeRef.new(shape: String, location_name: "DBEngineDescription"))
     DBEngineVersion.add_member(:db_engine_version_arn, Shapes::ShapeRef.new(shape: String, location_name: "DBEngineVersionArn"))
     DBEngineVersion.add_member(:db_engine_version_description, Shapes::ShapeRef.new(shape: String, location_name: "DBEngineVersionDescription"))
     DBEngineVersion.add_member(:default_character_set, Shapes::ShapeRef.new(shape: CharacterSet, location_name: "DefaultCharacterSet"))
+    DBEngineVersion.add_member(:failure_reason, Shapes::ShapeRef.new(shape: String, location_name: "FailureReason"))
     DBEngineVersion.add_member(:image, Shapes::ShapeRef.new(shape: CustomDBEngineVersionAMI, location_name: "Image"))
     DBEngineVersion.add_member(:db_engine_media_type, Shapes::ShapeRef.new(shape: String, location_name: "DBEngineMediaType"))
     DBEngineVersion.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "KMSKeyId"))
@@ -1781,8 +1784,6 @@ module Aws::RDS
     DBEngineVersion.add_member(:supports_local_write_forwarding, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "SupportsLocalWriteForwarding"))
     DBEngineVersion.add_member(:supports_integrations, Shapes::ShapeRef.new(shape: Boolean, location_name: "SupportsIntegrations"))
     DBEngineVersion.add_member(:serverless_v2_features_support, Shapes::ShapeRef.new(shape: ServerlessV2FeaturesSupport, location_name: "ServerlessV2FeaturesSupport"))
-    DBEngineVersion.add_member(:database_installation_files, Shapes::ShapeRef.new(shape: StringList, location_name: "DatabaseInstallationFiles"))
-    DBEngineVersion.add_member(:failure_reason, Shapes::ShapeRef.new(shape: String, location_name: "FailureReason"))
     DBEngineVersion.struct_class = Types::DBEngineVersion
 
     DBEngineVersionList.member = Shapes::ShapeRef.new(shape: DBEngineVersion, location_name: "DBEngineVersion")
@@ -2199,8 +2200,8 @@ module Aws::RDS
     DBSnapshot.add_member(:db_system_id, Shapes::ShapeRef.new(shape: String, location_name: "DBSystemId"))
     DBSnapshot.add_member(:multi_tenant, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "MultiTenant"))
     DBSnapshot.add_member(:dedicated_log_volume, Shapes::ShapeRef.new(shape: Boolean, location_name: "DedicatedLogVolume"))
-    DBSnapshot.add_member(:snapshot_availability_zone, Shapes::ShapeRef.new(shape: String, location_name: "SnapshotAvailabilityZone"))
     DBSnapshot.add_member(:additional_storage_volumes, Shapes::ShapeRef.new(shape: AdditionalStorageVolumesList, location_name: "AdditionalStorageVolumes"))
+    DBSnapshot.add_member(:snapshot_availability_zone, Shapes::ShapeRef.new(shape: String, location_name: "SnapshotAvailabilityZone"))
     DBSnapshot.struct_class = Types::DBSnapshot
 
     DBSnapshotAlreadyExistsFault.struct_class = Types::DBSnapshotAlreadyExistsFault
@@ -3324,9 +3325,9 @@ module Aws::RDS
     ModifyDBInstanceMessage.add_member(:multi_tenant, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "MultiTenant"))
     ModifyDBInstanceMessage.add_member(:dedicated_log_volume, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "DedicatedLogVolume"))
     ModifyDBInstanceMessage.add_member(:engine, Shapes::ShapeRef.new(shape: String, location_name: "Engine"))
+    ModifyDBInstanceMessage.add_member(:additional_storage_volumes, Shapes::ShapeRef.new(shape: ModifyAdditionalStorageVolumesList, location_name: "AdditionalStorageVolumes"))
     ModifyDBInstanceMessage.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecifications"))
     ModifyDBInstanceMessage.add_member(:master_user_authentication_type, Shapes::ShapeRef.new(shape: MasterUserAuthenticationType, location_name: "MasterUserAuthenticationType"))
-    ModifyDBInstanceMessage.add_member(:additional_storage_volumes, Shapes::ShapeRef.new(shape: ModifyAdditionalStorageVolumesList, location_name: "AdditionalStorageVolumes"))
     ModifyDBInstanceMessage.struct_class = Types::ModifyDBInstanceMessage
 
     ModifyDBInstanceResult.add_member(:db_instance, Shapes::ShapeRef.new(shape: DBInstance, location_name: "DBInstance"))
@@ -3607,8 +3608,8 @@ module Aws::RDS
     OrderableDBInstanceOption.add_member(:supported_network_types, Shapes::ShapeRef.new(shape: StringList, location_name: "SupportedNetworkTypes"))
     OrderableDBInstanceOption.add_member(:supports_clusters, Shapes::ShapeRef.new(shape: Boolean, location_name: "SupportsClusters"))
     OrderableDBInstanceOption.add_member(:supports_dedicated_log_volume, Shapes::ShapeRef.new(shape: Boolean, location_name: "SupportsDedicatedLogVolume"))
-    OrderableDBInstanceOption.add_member(:supports_http_endpoint, Shapes::ShapeRef.new(shape: Boolean, location_name: "SupportsHttpEndpoint"))
     OrderableDBInstanceOption.add_member(:supports_additional_storage_volumes, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "SupportsAdditionalStorageVolumes"))
+    OrderableDBInstanceOption.add_member(:supports_http_endpoint, Shapes::ShapeRef.new(shape: Boolean, location_name: "SupportsHttpEndpoint"))
     OrderableDBInstanceOption.add_member(:available_additional_storage_volumes_options, Shapes::ShapeRef.new(shape: AvailableAdditionalStorageVolumesOptionList, location_name: "AvailableAdditionalStorageVolumesOptions"))
     OrderableDBInstanceOption.struct_class = Types::OrderableDBInstanceOption
 
@@ -4070,10 +4071,10 @@ module Aws::RDS
     RestoreDBInstanceFromDBSnapshotMessage.add_member(:dedicated_log_volume, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "DedicatedLogVolume"))
     RestoreDBInstanceFromDBSnapshotMessage.add_member(:ca_certificate_identifier, Shapes::ShapeRef.new(shape: String, location_name: "CACertificateIdentifier"))
     RestoreDBInstanceFromDBSnapshotMessage.add_member(:engine_lifecycle_support, Shapes::ShapeRef.new(shape: String, location_name: "EngineLifecycleSupport"))
+    RestoreDBInstanceFromDBSnapshotMessage.add_member(:additional_storage_volumes, Shapes::ShapeRef.new(shape: AdditionalStorageVolumesList, location_name: "AdditionalStorageVolumes"))
     RestoreDBInstanceFromDBSnapshotMessage.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecifications"))
     RestoreDBInstanceFromDBSnapshotMessage.add_member(:manage_master_user_password, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "ManageMasterUserPassword"))
     RestoreDBInstanceFromDBSnapshotMessage.add_member(:master_user_secret_kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "MasterUserSecretKmsKeyId"))
-    RestoreDBInstanceFromDBSnapshotMessage.add_member(:additional_storage_volumes, Shapes::ShapeRef.new(shape: AdditionalStorageVolumesList, location_name: "AdditionalStorageVolumes"))
     RestoreDBInstanceFromDBSnapshotMessage.struct_class = Types::RestoreDBInstanceFromDBSnapshotMessage
 
     RestoreDBInstanceFromDBSnapshotResult.add_member(:db_instance, Shapes::ShapeRef.new(shape: DBInstance, location_name: "DBInstance"))
@@ -4131,8 +4132,8 @@ module Aws::RDS
     RestoreDBInstanceFromS3Message.add_member(:dedicated_log_volume, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "DedicatedLogVolume"))
     RestoreDBInstanceFromS3Message.add_member(:ca_certificate_identifier, Shapes::ShapeRef.new(shape: String, location_name: "CACertificateIdentifier"))
     RestoreDBInstanceFromS3Message.add_member(:engine_lifecycle_support, Shapes::ShapeRef.new(shape: String, location_name: "EngineLifecycleSupport"))
-    RestoreDBInstanceFromS3Message.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecifications"))
     RestoreDBInstanceFromS3Message.add_member(:additional_storage_volumes, Shapes::ShapeRef.new(shape: AdditionalStorageVolumesList, location_name: "AdditionalStorageVolumes"))
+    RestoreDBInstanceFromS3Message.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecifications"))
     RestoreDBInstanceFromS3Message.struct_class = Types::RestoreDBInstanceFromS3Message
 
     RestoreDBInstanceFromS3Result.add_member(:db_instance, Shapes::ShapeRef.new(shape: DBInstance, location_name: "DBInstance"))
@@ -4184,10 +4185,10 @@ module Aws::RDS
     RestoreDBInstanceToPointInTimeMessage.add_member(:dedicated_log_volume, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "DedicatedLogVolume"))
     RestoreDBInstanceToPointInTimeMessage.add_member(:ca_certificate_identifier, Shapes::ShapeRef.new(shape: String, location_name: "CACertificateIdentifier"))
     RestoreDBInstanceToPointInTimeMessage.add_member(:engine_lifecycle_support, Shapes::ShapeRef.new(shape: String, location_name: "EngineLifecycleSupport"))
+    RestoreDBInstanceToPointInTimeMessage.add_member(:additional_storage_volumes, Shapes::ShapeRef.new(shape: AdditionalStorageVolumesList, location_name: "AdditionalStorageVolumes"))
     RestoreDBInstanceToPointInTimeMessage.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecifications"))
     RestoreDBInstanceToPointInTimeMessage.add_member(:manage_master_user_password, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "ManageMasterUserPassword"))
     RestoreDBInstanceToPointInTimeMessage.add_member(:master_user_secret_kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "MasterUserSecretKmsKeyId"))
-    RestoreDBInstanceToPointInTimeMessage.add_member(:additional_storage_volumes, Shapes::ShapeRef.new(shape: AdditionalStorageVolumesList, location_name: "AdditionalStorageVolumes"))
     RestoreDBInstanceToPointInTimeMessage.struct_class = Types::RestoreDBInstanceToPointInTimeMessage
 
     RestoreDBInstanceToPointInTimeResult.add_member(:db_instance, Shapes::ShapeRef.new(shape: DBInstance, location_name: "DBInstance"))
@@ -4559,6 +4560,7 @@ module Aws::RDS
         "serviceFullName" => "Amazon Relational Database Service",
         "serviceId" => "RDS",
         "signatureVersion" => "v4",
+        "signingName" => "rds",
         "uid" => "rds-2014-10-31",
         "xmlNamespace" => "http://rds.amazonaws.com/doc/2014-10-31/",
       }
@@ -4569,10 +4571,10 @@ module Aws::RDS
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: AddRoleToDBClusterMessage)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
-        o.errors << Shapes::ShapeRef.new(shape: DBClusterNotFoundFault)
-        o.errors << Shapes::ShapeRef.new(shape: DBClusterRoleAlreadyExistsFault)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidDBClusterStateFault)
         o.errors << Shapes::ShapeRef.new(shape: DBClusterRoleQuotaExceededFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDBClusterStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBClusterRoleAlreadyExistsFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBClusterNotFoundFault)
       end)
 
       api.add_operation(:add_role_to_db_instance, Seahorse::Model::Operation.new.tap do |o|
@@ -4581,10 +4583,10 @@ module Aws::RDS
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: AddRoleToDBInstanceMessage)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
-        o.errors << Shapes::ShapeRef.new(shape: DBInstanceNotFoundFault)
-        o.errors << Shapes::ShapeRef.new(shape: DBInstanceRoleAlreadyExistsFault)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidDBInstanceStateFault)
         o.errors << Shapes::ShapeRef.new(shape: DBInstanceRoleQuotaExceededFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBInstanceNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDBInstanceStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBInstanceRoleAlreadyExistsFault)
       end)
 
       api.add_operation(:add_source_identifier_to_subscription, Seahorse::Model::Operation.new.tap do |o|
@@ -4593,8 +4595,8 @@ module Aws::RDS
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: AddSourceIdentifierToSubscriptionMessage)
         o.output = Shapes::ShapeRef.new(shape: AddSourceIdentifierToSubscriptionResult)
-        o.errors << Shapes::ShapeRef.new(shape: SubscriptionNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: SourceNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: SubscriptionNotFoundFault)
       end)
 
       api.add_operation(:add_tags_to_resource, Seahorse::Model::Operation.new.tap do |o|
@@ -4603,20 +4605,20 @@ module Aws::RDS
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: AddTagsToResourceMessage)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
-        o.errors << Shapes::ShapeRef.new(shape: DBInstanceNotFoundFault)
-        o.errors << Shapes::ShapeRef.new(shape: DBClusterNotFoundFault)
-        o.errors << Shapes::ShapeRef.new(shape: DBSnapshotNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: DBProxyNotFoundFault)
-        o.errors << Shapes::ShapeRef.new(shape: DBProxyEndpointNotFoundFault)
-        o.errors << Shapes::ShapeRef.new(shape: DBProxyTargetGroupNotFoundFault)
-        o.errors << Shapes::ShapeRef.new(shape: BlueGreenDeploymentNotFoundFault)
-        o.errors << Shapes::ShapeRef.new(shape: TenantDatabaseNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: DBSnapshotTenantDatabaseNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: IntegrationNotFoundFault)
-        o.errors << Shapes::ShapeRef.new(shape: DBShardGroupNotFoundFault)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidDBClusterStateFault)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidDBInstanceStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: TenantDatabaseNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: BlueGreenDeploymentNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBSnapshotNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBProxyEndpointNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidDBClusterEndpointStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDBInstanceStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBShardGroupNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBClusterNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBInstanceNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBProxyTargetGroupNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDBClusterStateFault)
       end)
 
       api.add_operation(:apply_pending_maintenance_action, Seahorse::Model::Operation.new.tap do |o|
@@ -4636,10 +4638,10 @@ module Aws::RDS
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: AuthorizeDBSecurityGroupIngressMessage)
         o.output = Shapes::ShapeRef.new(shape: AuthorizeDBSecurityGroupIngressResult)
-        o.errors << Shapes::ShapeRef.new(shape: DBSecurityGroupNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidDBSecurityGroupStateFault)
-        o.errors << Shapes::ShapeRef.new(shape: AuthorizationAlreadyExistsFault)
         o.errors << Shapes::ShapeRef.new(shape: AuthorizationQuotaExceededFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBSecurityGroupNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: AuthorizationAlreadyExistsFault)
       end)
 
       api.add_operation(:backtrack_db_cluster, Seahorse::Model::Operation.new.tap do |o|
@@ -4648,8 +4650,8 @@ module Aws::RDS
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: BacktrackDBClusterMessage)
         o.output = Shapes::ShapeRef.new(shape: DBClusterBacktrack)
-        o.errors << Shapes::ShapeRef.new(shape: DBClusterNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidDBClusterStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBClusterNotFoundFault)
       end)
 
       api.add_operation(:cancel_export_task, Seahorse::Model::Operation.new.tap do |o|
@@ -4669,8 +4671,8 @@ module Aws::RDS
         o.input = Shapes::ShapeRef.new(shape: CopyDBClusterParameterGroupMessage)
         o.output = Shapes::ShapeRef.new(shape: CopyDBClusterParameterGroupResult)
         o.errors << Shapes::ShapeRef.new(shape: DBParameterGroupNotFoundFault)
-        o.errors << Shapes::ShapeRef.new(shape: DBParameterGroupQuotaExceededFault)
         o.errors << Shapes::ShapeRef.new(shape: DBParameterGroupAlreadyExistsFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBParameterGroupQuotaExceededFault)
       end)
 
       api.add_operation(:copy_db_cluster_snapshot, Seahorse::Model::Operation.new.tap do |o|
@@ -4679,11 +4681,11 @@ module Aws::RDS
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: CopyDBClusterSnapshotMessage)
         o.output = Shapes::ShapeRef.new(shape: CopyDBClusterSnapshotResult)
-        o.errors << Shapes::ShapeRef.new(shape: DBClusterSnapshotAlreadyExistsFault)
         o.errors << Shapes::ShapeRef.new(shape: DBClusterSnapshotNotFoundFault)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidDBClusterStateFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidDBClusterSnapshotStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDBClusterStateFault)
         o.errors << Shapes::ShapeRef.new(shape: SnapshotQuotaExceededFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBClusterSnapshotAlreadyExistsFault)
         o.errors << Shapes::ShapeRef.new(shape: KMSKeyNotAccessibleFault)
       end)
 
@@ -4704,12 +4706,12 @@ module Aws::RDS
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: CopyDBSnapshotMessage)
         o.output = Shapes::ShapeRef.new(shape: CopyDBSnapshotResult)
-        o.errors << Shapes::ShapeRef.new(shape: DBSnapshotAlreadyExistsFault)
-        o.errors << Shapes::ShapeRef.new(shape: DBSnapshotNotFoundFault)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidDBSnapshotStateFault)
         o.errors << Shapes::ShapeRef.new(shape: SnapshotQuotaExceededFault)
-        o.errors << Shapes::ShapeRef.new(shape: KMSKeyNotAccessibleFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBSnapshotNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: CustomAvailabilityZoneNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDBSnapshotStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: KMSKeyNotAccessibleFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBSnapshotAlreadyExistsFault)
       end)
 
       api.add_operation(:copy_option_group, Seahorse::Model::Operation.new.tap do |o|
@@ -4718,9 +4720,9 @@ module Aws::RDS
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: CopyOptionGroupMessage)
         o.output = Shapes::ShapeRef.new(shape: CopyOptionGroupResult)
-        o.errors << Shapes::ShapeRef.new(shape: OptionGroupAlreadyExistsFault)
         o.errors << Shapes::ShapeRef.new(shape: OptionGroupNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: OptionGroupQuotaExceededFault)
+        o.errors << Shapes::ShapeRef.new(shape: OptionGroupAlreadyExistsFault)
       end)
 
       api.add_operation(:create_blue_green_deployment, Seahorse::Model::Operation.new.tap do |o|
@@ -4729,18 +4731,18 @@ module Aws::RDS
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: CreateBlueGreenDeploymentRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateBlueGreenDeploymentResponse)
-        o.errors << Shapes::ShapeRef.new(shape: DBInstanceNotFoundFault)
-        o.errors << Shapes::ShapeRef.new(shape: DBClusterNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: StorageQuotaExceededFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBParameterGroupNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: BlueGreenDeploymentAlreadyExistsFault)
         o.errors << Shapes::ShapeRef.new(shape: SourceDatabaseNotSupportedFault)
         o.errors << Shapes::ShapeRef.new(shape: SourceClusterNotSupportedFault)
-        o.errors << Shapes::ShapeRef.new(shape: BlueGreenDeploymentAlreadyExistsFault)
-        o.errors << Shapes::ShapeRef.new(shape: DBParameterGroupNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDBInstanceStateFault)
         o.errors << Shapes::ShapeRef.new(shape: DBClusterParameterGroupNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBClusterNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBInstanceNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDBClusterStateFault)
         o.errors << Shapes::ShapeRef.new(shape: InstanceQuotaExceededFault)
         o.errors << Shapes::ShapeRef.new(shape: DBClusterQuotaExceededFault)
-        o.errors << Shapes::ShapeRef.new(shape: StorageQuotaExceededFault)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidDBInstanceStateFault)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidDBClusterStateFault)
       end)
 
       api.add_operation(:create_custom_db_engine_version, Seahorse::Model::Operation.new.tap do |o|
@@ -4749,13 +4751,13 @@ module Aws::RDS
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: CreateCustomDBEngineVersionMessage)
         o.output = Shapes::ShapeRef.new(shape: DBEngineVersion)
-        o.errors << Shapes::ShapeRef.new(shape: CustomDBEngineVersionAlreadyExistsFault)
-        o.errors << Shapes::ShapeRef.new(shape: CustomDBEngineVersionQuotaExceededFault)
-        o.errors << Shapes::ShapeRef.new(shape: KMSKeyNotAccessibleFault)
-        o.errors << Shapes::ShapeRef.new(shape: Ec2ImagePropertiesNotSupportedFault)
-        o.errors << Shapes::ShapeRef.new(shape: CreateCustomDBEngineVersionFault)
         o.errors << Shapes::ShapeRef.new(shape: CustomDBEngineVersionNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: Ec2ImagePropertiesNotSupportedFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidCustomDBEngineVersionStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: CustomDBEngineVersionQuotaExceededFault)
+        o.errors << Shapes::ShapeRef.new(shape: CreateCustomDBEngineVersionFault)
+        o.errors << Shapes::ShapeRef.new(shape: KMSKeyNotAccessibleFault)
+        o.errors << Shapes::ShapeRef.new(shape: CustomDBEngineVersionAlreadyExistsFault)
       end)
 
       api.add_operation(:create_db_cluster, Seahorse::Model::Operation.new.tap do |o|
@@ -4764,30 +4766,30 @@ module Aws::RDS
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: CreateDBClusterMessage)
         o.output = Shapes::ShapeRef.new(shape: CreateDBClusterResult)
-        o.errors << Shapes::ShapeRef.new(shape: DBClusterAlreadyExistsFault)
-        o.errors << Shapes::ShapeRef.new(shape: InsufficientDBInstanceCapacityFault)
-        o.errors << Shapes::ShapeRef.new(shape: InsufficientStorageClusterCapacityFault)
-        o.errors << Shapes::ShapeRef.new(shape: DBClusterQuotaExceededFault)
-        o.errors << Shapes::ShapeRef.new(shape: StorageQuotaExceededFault)
-        o.errors << Shapes::ShapeRef.new(shape: DBSubnetGroupNotFoundFault)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidVPCNetworkStateFault)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidDBClusterStateFault)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidDBSubnetGroupFault)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidDBSubnetGroupStateFault)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidSubnet)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidDBInstanceStateFault)
-        o.errors << Shapes::ShapeRef.new(shape: DBClusterParameterGroupNotFoundFault)
-        o.errors << Shapes::ShapeRef.new(shape: KMSKeyNotAccessibleFault)
-        o.errors << Shapes::ShapeRef.new(shape: DBClusterNotFoundFault)
-        o.errors << Shapes::ShapeRef.new(shape: DBInstanceNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: DBSubnetGroupDoesNotCoverEnoughAZs)
-        o.errors << Shapes::ShapeRef.new(shape: GlobalClusterNotFoundFault)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidGlobalClusterStateFault)
-        o.errors << Shapes::ShapeRef.new(shape: NetworkTypeNotSupported)
-        o.errors << Shapes::ShapeRef.new(shape: DomainNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDBSubnetGroupFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBClusterParameterGroupNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InsufficientDBInstanceCapacityFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidSubnet)
+        o.errors << Shapes::ShapeRef.new(shape: DBClusterNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: VpcEncryptionControlViolationException)
         o.errors << Shapes::ShapeRef.new(shape: StorageTypeNotSupportedFault)
         o.errors << Shapes::ShapeRef.new(shape: OptionGroupNotFoundFault)
-        o.errors << Shapes::ShapeRef.new(shape: VpcEncryptionControlViolationException)
+        o.errors << Shapes::ShapeRef.new(shape: DBInstanceNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBClusterAlreadyExistsFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidGlobalClusterStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: NetworkTypeNotSupported)
+        o.errors << Shapes::ShapeRef.new(shape: GlobalClusterNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: StorageQuotaExceededFault)
+        o.errors << Shapes::ShapeRef.new(shape: DomainNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InsufficientStorageClusterCapacityFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDBInstanceStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: KMSKeyNotAccessibleFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidVPCNetworkStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDBClusterStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDBSubnetGroupStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBSubnetGroupNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBClusterQuotaExceededFault)
       end)
 
       api.add_operation(:create_db_cluster_endpoint, Seahorse::Model::Operation.new.tap do |o|
@@ -4796,12 +4798,12 @@ module Aws::RDS
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: CreateDBClusterEndpointMessage)
         o.output = Shapes::ShapeRef.new(shape: DBClusterEndpoint)
-        o.errors << Shapes::ShapeRef.new(shape: DBClusterEndpointQuotaExceededFault)
         o.errors << Shapes::ShapeRef.new(shape: DBClusterEndpointAlreadyExistsFault)
-        o.errors << Shapes::ShapeRef.new(shape: DBClusterNotFoundFault)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidDBClusterStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBClusterEndpointQuotaExceededFault)
         o.errors << Shapes::ShapeRef.new(shape: DBInstanceNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDBClusterStateFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidDBInstanceStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBClusterNotFoundFault)
       end)
 
       api.add_operation(:create_db_cluster_parameter_group, Seahorse::Model::Operation.new.tap do |o|
@@ -4810,8 +4812,8 @@ module Aws::RDS
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: CreateDBClusterParameterGroupMessage)
         o.output = Shapes::ShapeRef.new(shape: CreateDBClusterParameterGroupResult)
-        o.errors << Shapes::ShapeRef.new(shape: DBParameterGroupQuotaExceededFault)
         o.errors << Shapes::ShapeRef.new(shape: DBParameterGroupAlreadyExistsFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBParameterGroupQuotaExceededFault)
       end)
 
       api.add_operation(:create_db_cluster_snapshot, Seahorse::Model::Operation.new.tap do |o|
@@ -4820,11 +4822,11 @@ module Aws::RDS
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: CreateDBClusterSnapshotMessage)
         o.output = Shapes::ShapeRef.new(shape: CreateDBClusterSnapshotResult)
-        o.errors << Shapes::ShapeRef.new(shape: DBClusterSnapshotAlreadyExistsFault)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidDBClusterStateFault)
-        o.errors << Shapes::ShapeRef.new(shape: DBClusterNotFoundFault)
-        o.errors << Shapes::ShapeRef.new(shape: SnapshotQuotaExceededFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidDBClusterSnapshotStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDBClusterStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: SnapshotQuotaExceededFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBClusterSnapshotAlreadyExistsFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBClusterNotFoundFault)
       end)
 
       api.add_operation(:create_db_instance, Seahorse::Model::Operation.new.tap do |o|
@@ -4833,29 +4835,29 @@ module Aws::RDS
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: CreateDBInstanceMessage)
         o.output = Shapes::ShapeRef.new(shape: CreateDBInstanceResult)
-        o.errors << Shapes::ShapeRef.new(shape: DBInstanceAlreadyExistsFault)
-        o.errors << Shapes::ShapeRef.new(shape: InsufficientDBInstanceCapacityFault)
+        o.errors << Shapes::ShapeRef.new(shape: AuthorizationNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: DBParameterGroupNotFoundFault)
-        o.errors << Shapes::ShapeRef.new(shape: DBSecurityGroupNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBSubnetGroupDoesNotCoverEnoughAZs)
+        o.errors << Shapes::ShapeRef.new(shape: InsufficientDBInstanceCapacityFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidSubnet)
+        o.errors << Shapes::ShapeRef.new(shape: DBClusterNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: VpcEncryptionControlViolationException)
+        o.errors << Shapes::ShapeRef.new(shape: ProvisionedIopsNotAvailableInAZFault)
+        o.errors << Shapes::ShapeRef.new(shape: StorageTypeNotSupportedFault)
+        o.errors << Shapes::ShapeRef.new(shape: OptionGroupNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: NetworkTypeNotSupported)
         o.errors << Shapes::ShapeRef.new(shape: InstanceQuotaExceededFault)
         o.errors << Shapes::ShapeRef.new(shape: StorageQuotaExceededFault)
-        o.errors << Shapes::ShapeRef.new(shape: DBSubnetGroupNotFoundFault)
-        o.errors << Shapes::ShapeRef.new(shape: DBSubnetGroupDoesNotCoverEnoughAZs)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidDBClusterStateFault)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidSubnet)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidVPCNetworkStateFault)
-        o.errors << Shapes::ShapeRef.new(shape: ProvisionedIopsNotAvailableInAZFault)
-        o.errors << Shapes::ShapeRef.new(shape: OptionGroupNotFoundFault)
-        o.errors << Shapes::ShapeRef.new(shape: DBClusterNotFoundFault)
-        o.errors << Shapes::ShapeRef.new(shape: StorageTypeNotSupportedFault)
-        o.errors << Shapes::ShapeRef.new(shape: AuthorizationNotFoundFault)
-        o.errors << Shapes::ShapeRef.new(shape: KMSKeyNotAccessibleFault)
-        o.errors << Shapes::ShapeRef.new(shape: DomainNotFoundFault)
-        o.errors << Shapes::ShapeRef.new(shape: NetworkTypeNotSupported)
         o.errors << Shapes::ShapeRef.new(shape: BackupPolicyNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: DomainNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: CertificateNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: KMSKeyNotAccessibleFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBInstanceAlreadyExistsFault)
         o.errors << Shapes::ShapeRef.new(shape: TenantDatabaseQuotaExceededFault)
-        o.errors << Shapes::ShapeRef.new(shape: VpcEncryptionControlViolationException)
+        o.errors << Shapes::ShapeRef.new(shape: DBSecurityGroupNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidVPCNetworkStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDBClusterStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBSubnetGroupNotFoundFault)
       end)
 
       api.add_operation(:create_db_instance_read_replica, Seahorse::Model::Operation.new.tap do |o|
@@ -4864,31 +4866,31 @@ module Aws::RDS
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: CreateDBInstanceReadReplicaMessage)
         o.output = Shapes::ShapeRef.new(shape: CreateDBInstanceReadReplicaResult)
-        o.errors << Shapes::ShapeRef.new(shape: DBInstanceAlreadyExistsFault)
-        o.errors << Shapes::ShapeRef.new(shape: InsufficientDBInstanceCapacityFault)
         o.errors << Shapes::ShapeRef.new(shape: DBParameterGroupNotFoundFault)
-        o.errors << Shapes::ShapeRef.new(shape: DBSecurityGroupNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBSubnetGroupDoesNotCoverEnoughAZs)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDBSubnetGroupFault)
+        o.errors << Shapes::ShapeRef.new(shape: InsufficientDBInstanceCapacityFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidSubnet)
+        o.errors << Shapes::ShapeRef.new(shape: DBClusterNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: VpcEncryptionControlViolationException)
+        o.errors << Shapes::ShapeRef.new(shape: ProvisionedIopsNotAvailableInAZFault)
+        o.errors << Shapes::ShapeRef.new(shape: StorageTypeNotSupportedFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBSubnetGroupNotAllowedFault)
+        o.errors << Shapes::ShapeRef.new(shape: OptionGroupNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBInstanceNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: NetworkTypeNotSupported)
         o.errors << Shapes::ShapeRef.new(shape: InstanceQuotaExceededFault)
         o.errors << Shapes::ShapeRef.new(shape: StorageQuotaExceededFault)
-        o.errors << Shapes::ShapeRef.new(shape: DBInstanceNotFoundFault)
-        o.errors << Shapes::ShapeRef.new(shape: DBClusterNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: DomainNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: CertificateNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidDBInstanceStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: KMSKeyNotAccessibleFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBInstanceAlreadyExistsFault)
+        o.errors << Shapes::ShapeRef.new(shape: TenantDatabaseQuotaExceededFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBSecurityGroupNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidVPCNetworkStateFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidDBClusterStateFault)
         o.errors << Shapes::ShapeRef.new(shape: DBSubnetGroupNotFoundFault)
-        o.errors << Shapes::ShapeRef.new(shape: DBSubnetGroupDoesNotCoverEnoughAZs)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidSubnet)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidVPCNetworkStateFault)
-        o.errors << Shapes::ShapeRef.new(shape: ProvisionedIopsNotAvailableInAZFault)
-        o.errors << Shapes::ShapeRef.new(shape: OptionGroupNotFoundFault)
-        o.errors << Shapes::ShapeRef.new(shape: DBSubnetGroupNotAllowedFault)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidDBSubnetGroupFault)
-        o.errors << Shapes::ShapeRef.new(shape: StorageTypeNotSupportedFault)
-        o.errors << Shapes::ShapeRef.new(shape: KMSKeyNotAccessibleFault)
-        o.errors << Shapes::ShapeRef.new(shape: NetworkTypeNotSupported)
-        o.errors << Shapes::ShapeRef.new(shape: DomainNotFoundFault)
-        o.errors << Shapes::ShapeRef.new(shape: TenantDatabaseQuotaExceededFault)
-        o.errors << Shapes::ShapeRef.new(shape: CertificateNotFoundFault)
-        o.errors << Shapes::ShapeRef.new(shape: VpcEncryptionControlViolationException)
       end)
 
       api.add_operation(:create_db_parameter_group, Seahorse::Model::Operation.new.tap do |o|
@@ -4897,8 +4899,8 @@ module Aws::RDS
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: CreateDBParameterGroupMessage)
         o.output = Shapes::ShapeRef.new(shape: CreateDBParameterGroupResult)
-        o.errors << Shapes::ShapeRef.new(shape: DBParameterGroupQuotaExceededFault)
         o.errors << Shapes::ShapeRef.new(shape: DBParameterGroupAlreadyExistsFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBParameterGroupQuotaExceededFault)
       end)
 
       api.add_operation(:create_db_proxy, Seahorse::Model::Operation.new.tap do |o|
@@ -4907,8 +4909,8 @@ module Aws::RDS
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: CreateDBProxyRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateDBProxyResponse)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidSubnet)
         o.errors << Shapes::ShapeRef.new(shape: DBProxyAlreadyExistsFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidSubnet)
         o.errors << Shapes::ShapeRef.new(shape: DBProxyQuotaExceededFault)
       end)
 
@@ -4918,11 +4920,11 @@ module Aws::RDS
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: CreateDBProxyEndpointRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateDBProxyEndpointResponse)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidSubnet)
         o.errors << Shapes::ShapeRef.new(shape: DBProxyNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: DBProxyEndpointAlreadyExistsFault)
-        o.errors << Shapes::ShapeRef.new(shape: DBProxyEndpointQuotaExceededFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidDBProxyStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBProxyEndpointQuotaExceededFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidSubnet)
       end)
 
       api.add_operation(:create_db_security_group, Seahorse::Model::Operation.new.tap do |o|
@@ -4931,8 +4933,8 @@ module Aws::RDS
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: CreateDBSecurityGroupMessage)
         o.output = Shapes::ShapeRef.new(shape: CreateDBSecurityGroupResult)
-        o.errors << Shapes::ShapeRef.new(shape: DBSecurityGroupAlreadyExistsFault)
         o.errors << Shapes::ShapeRef.new(shape: DBSecurityGroupQuotaExceededFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBSecurityGroupAlreadyExistsFault)
         o.errors << Shapes::ShapeRef.new(shape: DBSecurityGroupNotSupportedFault)
       end)
 
@@ -4942,13 +4944,13 @@ module Aws::RDS
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: CreateDBShardGroupMessage)
         o.output = Shapes::ShapeRef.new(shape: DBShardGroup)
-        o.errors << Shapes::ShapeRef.new(shape: DBShardGroupAlreadyExistsFault)
-        o.errors << Shapes::ShapeRef.new(shape: DBClusterNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: MaxDBShardGroupLimitReached)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidDBClusterStateFault)
-        o.errors << Shapes::ShapeRef.new(shape: UnsupportedDBEngineVersionFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBShardGroupAlreadyExistsFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidVPCNetworkStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDBClusterStateFault)
         o.errors << Shapes::ShapeRef.new(shape: NetworkTypeNotSupported)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedDBEngineVersionFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBClusterNotFoundFault)
       end)
 
       api.add_operation(:create_db_snapshot, Seahorse::Model::Operation.new.tap do |o|
@@ -4957,10 +4959,10 @@ module Aws::RDS
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: CreateDBSnapshotMessage)
         o.output = Shapes::ShapeRef.new(shape: CreateDBSnapshotResult)
-        o.errors << Shapes::ShapeRef.new(shape: DBSnapshotAlreadyExistsFault)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidDBInstanceStateFault)
         o.errors << Shapes::ShapeRef.new(shape: DBInstanceNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: SnapshotQuotaExceededFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDBInstanceStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBSnapshotAlreadyExistsFault)
       end)
 
       api.add_operation(:create_db_subnet_group, Seahorse::Model::Operation.new.tap do |o|
@@ -4970,9 +4972,9 @@ module Aws::RDS
         o.input = Shapes::ShapeRef.new(shape: CreateDBSubnetGroupMessage)
         o.output = Shapes::ShapeRef.new(shape: CreateDBSubnetGroupResult)
         o.errors << Shapes::ShapeRef.new(shape: DBSubnetGroupAlreadyExistsFault)
-        o.errors << Shapes::ShapeRef.new(shape: DBSubnetGroupQuotaExceededFault)
-        o.errors << Shapes::ShapeRef.new(shape: DBSubnetQuotaExceededFault)
         o.errors << Shapes::ShapeRef.new(shape: DBSubnetGroupDoesNotCoverEnoughAZs)
+        o.errors << Shapes::ShapeRef.new(shape: DBSubnetQuotaExceededFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBSubnetGroupQuotaExceededFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidSubnet)
       end)
 
@@ -4982,13 +4984,13 @@ module Aws::RDS
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: CreateEventSubscriptionMessage)
         o.output = Shapes::ShapeRef.new(shape: CreateEventSubscriptionResult)
-        o.errors << Shapes::ShapeRef.new(shape: EventSubscriptionQuotaExceededFault)
-        o.errors << Shapes::ShapeRef.new(shape: SubscriptionAlreadyExistFault)
-        o.errors << Shapes::ShapeRef.new(shape: SNSInvalidTopicFault)
-        o.errors << Shapes::ShapeRef.new(shape: SNSNoAuthorizationFault)
         o.errors << Shapes::ShapeRef.new(shape: SNSTopicArnNotFoundFault)
-        o.errors << Shapes::ShapeRef.new(shape: SubscriptionCategoryNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: SourceNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: SNSInvalidTopicFault)
+        o.errors << Shapes::ShapeRef.new(shape: SubscriptionAlreadyExistFault)
+        o.errors << Shapes::ShapeRef.new(shape: SubscriptionCategoryNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: EventSubscriptionQuotaExceededFault)
+        o.errors << Shapes::ShapeRef.new(shape: SNSNoAuthorizationFault)
       end)
 
       api.add_operation(:create_global_cluster, Seahorse::Model::Operation.new.tap do |o|
@@ -4997,12 +4999,12 @@ module Aws::RDS
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: CreateGlobalClusterMessage)
         o.output = Shapes::ShapeRef.new(shape: CreateGlobalClusterResult)
-        o.errors << Shapes::ShapeRef.new(shape: GlobalClusterAlreadyExistsFault)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: GlobalClusterQuotaExceededFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidDBClusterStateFault)
-        o.errors << Shapes::ShapeRef.new(shape: DBClusterNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidDBShardGroupStateFault)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: GlobalClusterAlreadyExistsFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBClusterNotFoundFault)
       end)
 
       api.add_operation(:create_integration, Seahorse::Model::Operation.new.tap do |o|
@@ -5011,12 +5013,12 @@ module Aws::RDS
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: CreateIntegrationMessage)
         o.output = Shapes::ShapeRef.new(shape: Integration)
-        o.errors << Shapes::ShapeRef.new(shape: DBClusterNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: IntegrationQuotaExceededFault)
         o.errors << Shapes::ShapeRef.new(shape: DBInstanceNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: IntegrationAlreadyExistsFault)
-        o.errors << Shapes::ShapeRef.new(shape: IntegrationQuotaExceededFault)
         o.errors << Shapes::ShapeRef.new(shape: KMSKeyNotAccessibleFault)
         o.errors << Shapes::ShapeRef.new(shape: IntegrationConflictOperationFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBClusterNotFoundFault)
       end)
 
       api.add_operation(:create_option_group, Seahorse::Model::Operation.new.tap do |o|
@@ -5025,8 +5027,8 @@ module Aws::RDS
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: CreateOptionGroupMessage)
         o.output = Shapes::ShapeRef.new(shape: CreateOptionGroupResult)
-        o.errors << Shapes::ShapeRef.new(shape: OptionGroupAlreadyExistsFault)
         o.errors << Shapes::ShapeRef.new(shape: OptionGroupQuotaExceededFault)
+        o.errors << Shapes::ShapeRef.new(shape: OptionGroupAlreadyExistsFault)
       end)
 
       api.add_operation(:create_tenant_database, Seahorse::Model::Operation.new.tap do |o|
@@ -5036,10 +5038,10 @@ module Aws::RDS
         o.input = Shapes::ShapeRef.new(shape: CreateTenantDatabaseMessage)
         o.output = Shapes::ShapeRef.new(shape: CreateTenantDatabaseResult)
         o.errors << Shapes::ShapeRef.new(shape: DBInstanceNotFoundFault)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidDBInstanceStateFault)
         o.errors << Shapes::ShapeRef.new(shape: TenantDatabaseAlreadyExistsFault)
-        o.errors << Shapes::ShapeRef.new(shape: TenantDatabaseQuotaExceededFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDBInstanceStateFault)
         o.errors << Shapes::ShapeRef.new(shape: KMSKeyNotAccessibleFault)
+        o.errors << Shapes::ShapeRef.new(shape: TenantDatabaseQuotaExceededFault)
       end)
 
       api.add_operation(:delete_blue_green_deployment, Seahorse::Model::Operation.new.tap do |o|
@@ -5048,8 +5050,8 @@ module Aws::RDS
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DeleteBlueGreenDeploymentRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteBlueGreenDeploymentResponse)
-        o.errors << Shapes::ShapeRef.new(shape: BlueGreenDeploymentNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidBlueGreenDeploymentStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: BlueGreenDeploymentNotFoundFault)
       end)
 
       api.add_operation(:delete_custom_db_engine_version, Seahorse::Model::Operation.new.tap do |o|
@@ -5068,14 +5070,14 @@ module Aws::RDS
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DeleteDBClusterMessage)
         o.output = Shapes::ShapeRef.new(shape: DeleteDBClusterResult)
-        o.errors << Shapes::ShapeRef.new(shape: DBClusterNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDBClusterSnapshotStateFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidDBClusterStateFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidGlobalClusterStateFault)
-        o.errors << Shapes::ShapeRef.new(shape: DBClusterSnapshotAlreadyExistsFault)
         o.errors << Shapes::ShapeRef.new(shape: SnapshotQuotaExceededFault)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidDBClusterSnapshotStateFault)
-        o.errors << Shapes::ShapeRef.new(shape: DBClusterAutomatedBackupQuotaExceededFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBClusterSnapshotAlreadyExistsFault)
         o.errors << Shapes::ShapeRef.new(shape: KMSKeyNotAccessibleFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBClusterAutomatedBackupQuotaExceededFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBClusterNotFoundFault)
       end)
 
       api.add_operation(:delete_db_cluster_automated_backup, Seahorse::Model::Operation.new.tap do |o|
@@ -5084,8 +5086,8 @@ module Aws::RDS
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DeleteDBClusterAutomatedBackupMessage)
         o.output = Shapes::ShapeRef.new(shape: DeleteDBClusterAutomatedBackupResult)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidDBClusterAutomatedBackupStateFault)
         o.errors << Shapes::ShapeRef.new(shape: DBClusterAutomatedBackupNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDBClusterAutomatedBackupStateFault)
       end)
 
       api.add_operation(:delete_db_cluster_endpoint, Seahorse::Model::Operation.new.tap do |o|
@@ -5094,9 +5096,9 @@ module Aws::RDS
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DeleteDBClusterEndpointMessage)
         o.output = Shapes::ShapeRef.new(shape: DBClusterEndpoint)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidDBClusterEndpointStateFault)
         o.errors << Shapes::ShapeRef.new(shape: DBClusterEndpointNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidDBClusterStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDBClusterEndpointStateFault)
       end)
 
       api.add_operation(:delete_db_cluster_parameter_group, Seahorse::Model::Operation.new.tap do |o|
@@ -5105,8 +5107,8 @@ module Aws::RDS
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DeleteDBClusterParameterGroupMessage)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
-        o.errors << Shapes::ShapeRef.new(shape: InvalidDBParameterGroupStateFault)
         o.errors << Shapes::ShapeRef.new(shape: DBParameterGroupNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDBParameterGroupStateFault)
       end)
 
       api.add_operation(:delete_db_cluster_snapshot, Seahorse::Model::Operation.new.tap do |o|
@@ -5115,8 +5117,8 @@ module Aws::RDS
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DeleteDBClusterSnapshotMessage)
         o.output = Shapes::ShapeRef.new(shape: DeleteDBClusterSnapshotResult)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidDBClusterSnapshotStateFault)
         o.errors << Shapes::ShapeRef.new(shape: DBClusterSnapshotNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDBClusterSnapshotStateFault)
       end)
 
       api.add_operation(:delete_db_instance, Seahorse::Model::Operation.new.tap do |o|
@@ -5125,13 +5127,13 @@ module Aws::RDS
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DeleteDBInstanceMessage)
         o.output = Shapes::ShapeRef.new(shape: DeleteDBInstanceResult)
-        o.errors << Shapes::ShapeRef.new(shape: DBInstanceNotFoundFault)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidDBInstanceStateFault)
-        o.errors << Shapes::ShapeRef.new(shape: DBSnapshotAlreadyExistsFault)
-        o.errors << Shapes::ShapeRef.new(shape: SnapshotQuotaExceededFault)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidDBClusterStateFault)
         o.errors << Shapes::ShapeRef.new(shape: DBInstanceAutomatedBackupQuotaExceededFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBInstanceNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDBClusterStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: SnapshotQuotaExceededFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDBInstanceStateFault)
         o.errors << Shapes::ShapeRef.new(shape: KMSKeyNotAccessibleFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBSnapshotAlreadyExistsFault)
       end)
 
       api.add_operation(:delete_db_instance_automated_backup, Seahorse::Model::Operation.new.tap do |o|
@@ -5150,8 +5152,8 @@ module Aws::RDS
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DeleteDBParameterGroupMessage)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
-        o.errors << Shapes::ShapeRef.new(shape: InvalidDBParameterGroupStateFault)
         o.errors << Shapes::ShapeRef.new(shape: DBParameterGroupNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDBParameterGroupStateFault)
       end)
 
       api.add_operation(:delete_db_proxy, Seahorse::Model::Operation.new.tap do |o|
@@ -5170,8 +5172,8 @@ module Aws::RDS
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DeleteDBProxyEndpointRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteDBProxyEndpointResponse)
-        o.errors << Shapes::ShapeRef.new(shape: DBProxyEndpointNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidDBProxyEndpointStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBProxyEndpointNotFoundFault)
       end)
 
       api.add_operation(:delete_db_security_group, Seahorse::Model::Operation.new.tap do |o|
@@ -5190,9 +5192,9 @@ module Aws::RDS
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DeleteDBShardGroupMessage)
         o.output = Shapes::ShapeRef.new(shape: DBShardGroup)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDBClusterStateFault)
         o.errors << Shapes::ShapeRef.new(shape: DBShardGroupNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidDBShardGroupStateFault)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidDBClusterStateFault)
       end)
 
       api.add_operation(:delete_db_snapshot, Seahorse::Model::Operation.new.tap do |o|
@@ -5201,8 +5203,8 @@ module Aws::RDS
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DeleteDBSnapshotMessage)
         o.output = Shapes::ShapeRef.new(shape: DeleteDBSnapshotResult)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidDBSnapshotStateFault)
         o.errors << Shapes::ShapeRef.new(shape: DBSnapshotNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDBSnapshotStateFault)
       end)
 
       api.add_operation(:delete_db_subnet_group, Seahorse::Model::Operation.new.tap do |o|
@@ -5211,8 +5213,8 @@ module Aws::RDS
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DeleteDBSubnetGroupMessage)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
-        o.errors << Shapes::ShapeRef.new(shape: InvalidDBSubnetGroupStateFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidDBSubnetStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDBSubnetGroupStateFault)
         o.errors << Shapes::ShapeRef.new(shape: DBSubnetGroupNotFoundFault)
       end)
 
@@ -5232,8 +5234,8 @@ module Aws::RDS
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DeleteGlobalClusterMessage)
         o.output = Shapes::ShapeRef.new(shape: DeleteGlobalClusterResult)
-        o.errors << Shapes::ShapeRef.new(shape: GlobalClusterNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidGlobalClusterStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: GlobalClusterNotFoundFault)
       end)
 
       api.add_operation(:delete_integration, Seahorse::Model::Operation.new.tap do |o|
@@ -5242,9 +5244,9 @@ module Aws::RDS
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DeleteIntegrationMessage)
         o.output = Shapes::ShapeRef.new(shape: Integration)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidIntegrationStateFault)
         o.errors << Shapes::ShapeRef.new(shape: IntegrationNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: IntegrationConflictOperationFault)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidIntegrationStateFault)
       end)
 
       api.add_operation(:delete_option_group, Seahorse::Model::Operation.new.tap do |o|
@@ -5263,8 +5265,8 @@ module Aws::RDS
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DeleteTenantDatabaseMessage)
         o.output = Shapes::ShapeRef.new(shape: DeleteTenantDatabaseResult)
-        o.errors << Shapes::ShapeRef.new(shape: DBInstanceNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: TenantDatabaseNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBInstanceNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidDBInstanceStateFault)
         o.errors << Shapes::ShapeRef.new(shape: DBSnapshotAlreadyExistsFault)
       end)
@@ -5275,10 +5277,10 @@ module Aws::RDS
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DeregisterDBProxyTargetsRequest)
         o.output = Shapes::ShapeRef.new(shape: DeregisterDBProxyTargetsResponse)
-        o.errors << Shapes::ShapeRef.new(shape: DBProxyTargetNotFoundFault)
-        o.errors << Shapes::ShapeRef.new(shape: DBProxyTargetGroupNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: DBProxyNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBProxyTargetGroupNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidDBProxyStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBProxyTargetNotFoundFault)
       end)
 
       api.add_operation(:describe_account_attributes, Seahorse::Model::Operation.new.tap do |o|
@@ -5340,8 +5342,8 @@ module Aws::RDS
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeDBClusterBacktracksMessage)
         o.output = Shapes::ShapeRef.new(shape: DBClusterBacktrackMessage)
-        o.errors << Shapes::ShapeRef.new(shape: DBClusterNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: DBClusterBacktrackNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBClusterNotFoundFault)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_records",
           tokens: {
@@ -5593,9 +5595,9 @@ module Aws::RDS
         o.input = Shapes::ShapeRef.new(shape: DescribeDBProxyTargetsRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeDBProxyTargetsResponse)
         o.errors << Shapes::ShapeRef.new(shape: DBProxyNotFoundFault)
-        o.errors << Shapes::ShapeRef.new(shape: DBProxyTargetNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: DBProxyTargetGroupNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidDBProxyStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBProxyTargetNotFoundFault)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_records",
           tokens: {
@@ -5703,6 +5705,12 @@ module Aws::RDS
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeEngineDefaultClusterParametersMessage)
         o.output = Shapes::ShapeRef.new(shape: DescribeEngineDefaultClusterParametersResult)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_records",
+          tokens: {
+            "engine_defaults.marker" => "marker"
+          }
+        )
       end)
 
       api.add_operation(:describe_engine_default_parameters, Seahorse::Model::Operation.new.tap do |o|
@@ -5972,9 +5980,9 @@ module Aws::RDS
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: FailoverDBClusterMessage)
         o.output = Shapes::ShapeRef.new(shape: FailoverDBClusterResult)
-        o.errors << Shapes::ShapeRef.new(shape: DBClusterNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidDBClusterStateFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidDBInstanceStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBClusterNotFoundFault)
       end)
 
       api.add_operation(:failover_global_cluster, Seahorse::Model::Operation.new.tap do |o|
@@ -5983,9 +5991,9 @@ module Aws::RDS
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: FailoverGlobalClusterMessage)
         o.output = Shapes::ShapeRef.new(shape: FailoverGlobalClusterResult)
-        o.errors << Shapes::ShapeRef.new(shape: GlobalClusterNotFoundFault)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidGlobalClusterStateFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidDBClusterStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidGlobalClusterStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: GlobalClusterNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: DBClusterNotFoundFault)
       end)
 
@@ -5995,17 +6003,17 @@ module Aws::RDS
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ListTagsForResourceMessage)
         o.output = Shapes::ShapeRef.new(shape: TagListMessage)
-        o.errors << Shapes::ShapeRef.new(shape: DBInstanceNotFoundFault)
-        o.errors << Shapes::ShapeRef.new(shape: DBSnapshotNotFoundFault)
-        o.errors << Shapes::ShapeRef.new(shape: DBClusterNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: DBProxyNotFoundFault)
-        o.errors << Shapes::ShapeRef.new(shape: DBProxyTargetGroupNotFoundFault)
-        o.errors << Shapes::ShapeRef.new(shape: DBProxyEndpointNotFoundFault)
-        o.errors << Shapes::ShapeRef.new(shape: BlueGreenDeploymentNotFoundFault)
-        o.errors << Shapes::ShapeRef.new(shape: TenantDatabaseNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: DBSnapshotTenantDatabaseNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: IntegrationNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: TenantDatabaseNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: BlueGreenDeploymentNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBSnapshotNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBProxyEndpointNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: DBShardGroupNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBClusterNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBInstanceNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBProxyTargetGroupNotFoundFault)
       end)
 
       api.add_operation(:modify_activity_stream, Seahorse::Model::Operation.new.tap do |o|
@@ -6014,9 +6022,9 @@ module Aws::RDS
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ModifyActivityStreamRequest)
         o.output = Shapes::ShapeRef.new(shape: ModifyActivityStreamResponse)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidDBInstanceStateFault)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: DBInstanceNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDBInstanceStateFault)
       end)
 
       api.add_operation(:modify_certificates, Seahorse::Model::Operation.new.tap do |o|
@@ -6034,9 +6042,9 @@ module Aws::RDS
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ModifyCurrentDBClusterCapacityMessage)
         o.output = Shapes::ShapeRef.new(shape: DBClusterCapacityInfo)
-        o.errors << Shapes::ShapeRef.new(shape: DBClusterNotFoundFault)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidDBClusterStateFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidDBClusterCapacityFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDBClusterStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBClusterNotFoundFault)
       end)
 
       api.add_operation(:modify_custom_db_engine_version, Seahorse::Model::Operation.new.tap do |o|
@@ -6055,27 +6063,27 @@ module Aws::RDS
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ModifyDBClusterMessage)
         o.output = Shapes::ShapeRef.new(shape: ModifyDBClusterResult)
-        o.errors << Shapes::ShapeRef.new(shape: DBClusterNotFoundFault)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidDBClusterStateFault)
         o.errors << Shapes::ShapeRef.new(shape: StorageQuotaExceededFault)
-        o.errors << Shapes::ShapeRef.new(shape: DBSubnetGroupNotFoundFault)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidVPCNetworkStateFault)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidDBSubnetGroupStateFault)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidSubnet)
-        o.errors << Shapes::ShapeRef.new(shape: DBClusterParameterGroupNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: DBParameterGroupNotFoundFault)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidDBSecurityGroupStateFault)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidDBInstanceStateFault)
-        o.errors << Shapes::ShapeRef.new(shape: DBClusterAlreadyExistsFault)
-        o.errors << Shapes::ShapeRef.new(shape: DBInstanceAlreadyExistsFault)
-        o.errors << Shapes::ShapeRef.new(shape: NetworkTypeNotSupported)
         o.errors << Shapes::ShapeRef.new(shape: DomainNotFoundFault)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidGlobalClusterStateFault)
-        o.errors << Shapes::ShapeRef.new(shape: StorageTypeNotSupportedFault)
-        o.errors << Shapes::ShapeRef.new(shape: StorageTypeNotAvailableFault)
-        o.errors << Shapes::ShapeRef.new(shape: OptionGroupNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDBInstanceStateFault)
         o.errors << Shapes::ShapeRef.new(shape: KMSKeyNotAccessibleFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBClusterParameterGroupNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBInstanceAlreadyExistsFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidSubnet)
+        o.errors << Shapes::ShapeRef.new(shape: DBClusterNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: VpcEncryptionControlViolationException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDBSecurityGroupStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: StorageTypeNotAvailableFault)
+        o.errors << Shapes::ShapeRef.new(shape: StorageTypeNotSupportedFault)
+        o.errors << Shapes::ShapeRef.new(shape: OptionGroupNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidVPCNetworkStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDBClusterStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBClusterAlreadyExistsFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidGlobalClusterStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: NetworkTypeNotSupported)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDBSubnetGroupStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBSubnetGroupNotFoundFault)
       end)
 
       api.add_operation(:modify_db_cluster_endpoint, Seahorse::Model::Operation.new.tap do |o|
@@ -6084,10 +6092,10 @@ module Aws::RDS
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ModifyDBClusterEndpointMessage)
         o.output = Shapes::ShapeRef.new(shape: DBClusterEndpoint)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidDBClusterStateFault)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidDBClusterEndpointStateFault)
         o.errors << Shapes::ShapeRef.new(shape: DBClusterEndpointNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: DBInstanceNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDBClusterStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDBClusterEndpointStateFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidDBInstanceStateFault)
       end)
 
@@ -6108,8 +6116,8 @@ module Aws::RDS
         o.input = Shapes::ShapeRef.new(shape: ModifyDBClusterSnapshotAttributeMessage)
         o.output = Shapes::ShapeRef.new(shape: ModifyDBClusterSnapshotAttributeResult)
         o.errors << Shapes::ShapeRef.new(shape: DBClusterSnapshotNotFoundFault)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidDBClusterSnapshotStateFault)
         o.errors << Shapes::ShapeRef.new(shape: SharedSnapshotQuotaExceededFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDBClusterSnapshotStateFault)
       end)
 
       api.add_operation(:modify_db_instance, Seahorse::Model::Operation.new.tap do |o|
@@ -6118,28 +6126,28 @@ module Aws::RDS
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ModifyDBInstanceMessage)
         o.output = Shapes::ShapeRef.new(shape: ModifyDBInstanceResult)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidDBInstanceStateFault)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidDBSecurityGroupStateFault)
-        o.errors << Shapes::ShapeRef.new(shape: DBInstanceAlreadyExistsFault)
-        o.errors << Shapes::ShapeRef.new(shape: DBInstanceNotFoundFault)
-        o.errors << Shapes::ShapeRef.new(shape: DBSecurityGroupNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: AuthorizationNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: DBParameterGroupNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InsufficientDBInstanceCapacityFault)
-        o.errors << Shapes::ShapeRef.new(shape: StorageQuotaExceededFault)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidVPCNetworkStateFault)
-        o.errors << Shapes::ShapeRef.new(shape: ProvisionedIopsNotAvailableInAZFault)
-        o.errors << Shapes::ShapeRef.new(shape: OptionGroupNotFoundFault)
-        o.errors << Shapes::ShapeRef.new(shape: DBUpgradeDependencyFailureFault)
-        o.errors << Shapes::ShapeRef.new(shape: StorageTypeNotSupportedFault)
-        o.errors << Shapes::ShapeRef.new(shape: AuthorizationNotFoundFault)
-        o.errors << Shapes::ShapeRef.new(shape: CertificateNotFoundFault)
-        o.errors << Shapes::ShapeRef.new(shape: DomainNotFoundFault)
-        o.errors << Shapes::ShapeRef.new(shape: BackupPolicyNotFoundFault)
-        o.errors << Shapes::ShapeRef.new(shape: KMSKeyNotAccessibleFault)
-        o.errors << Shapes::ShapeRef.new(shape: NetworkTypeNotSupported)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidDBClusterStateFault)
-        o.errors << Shapes::ShapeRef.new(shape: TenantDatabaseQuotaExceededFault)
         o.errors << Shapes::ShapeRef.new(shape: VpcEncryptionControlViolationException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDBSecurityGroupStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: ProvisionedIopsNotAvailableInAZFault)
+        o.errors << Shapes::ShapeRef.new(shape: StorageTypeNotSupportedFault)
+        o.errors << Shapes::ShapeRef.new(shape: OptionGroupNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBInstanceNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: NetworkTypeNotSupported)
+        o.errors << Shapes::ShapeRef.new(shape: StorageQuotaExceededFault)
+        o.errors << Shapes::ShapeRef.new(shape: BackupPolicyNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: DomainNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: CertificateNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDBInstanceStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: KMSKeyNotAccessibleFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBInstanceAlreadyExistsFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBUpgradeDependencyFailureFault)
+        o.errors << Shapes::ShapeRef.new(shape: TenantDatabaseQuotaExceededFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBSecurityGroupNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidVPCNetworkStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDBClusterStateFault)
       end)
 
       api.add_operation(:modify_db_parameter_group, Seahorse::Model::Operation.new.tap do |o|
@@ -6169,9 +6177,9 @@ module Aws::RDS
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ModifyDBProxyEndpointRequest)
         o.output = Shapes::ShapeRef.new(shape: ModifyDBProxyEndpointResponse)
-        o.errors << Shapes::ShapeRef.new(shape: DBProxyEndpointNotFoundFault)
-        o.errors << Shapes::ShapeRef.new(shape: DBProxyEndpointAlreadyExistsFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidDBProxyEndpointStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBProxyEndpointAlreadyExistsFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBProxyEndpointNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidDBProxyStateFault)
       end)
 
@@ -6200,8 +6208,8 @@ module Aws::RDS
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ModifyDBShardGroupMessage)
         o.output = Shapes::ShapeRef.new(shape: DBShardGroup)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidDBClusterStateFault)
         o.errors << Shapes::ShapeRef.new(shape: DBShardGroupAlreadyExistsFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDBClusterStateFault)
         o.errors << Shapes::ShapeRef.new(shape: DBShardGroupNotFoundFault)
       end)
 
@@ -6222,9 +6230,9 @@ module Aws::RDS
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ModifyDBSnapshotAttributeMessage)
         o.output = Shapes::ShapeRef.new(shape: ModifyDBSnapshotAttributeResult)
+        o.errors << Shapes::ShapeRef.new(shape: SharedSnapshotQuotaExceededFault)
         o.errors << Shapes::ShapeRef.new(shape: DBSnapshotNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidDBSnapshotStateFault)
-        o.errors << Shapes::ShapeRef.new(shape: SharedSnapshotQuotaExceededFault)
       end)
 
       api.add_operation(:modify_db_subnet_group, Seahorse::Model::Operation.new.tap do |o|
@@ -6233,11 +6241,11 @@ module Aws::RDS
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ModifyDBSubnetGroupMessage)
         o.output = Shapes::ShapeRef.new(shape: ModifyDBSubnetGroupResult)
-        o.errors << Shapes::ShapeRef.new(shape: DBSubnetGroupNotFoundFault)
-        o.errors << Shapes::ShapeRef.new(shape: DBSubnetQuotaExceededFault)
         o.errors << Shapes::ShapeRef.new(shape: SubnetAlreadyInUse)
         o.errors << Shapes::ShapeRef.new(shape: DBSubnetGroupDoesNotCoverEnoughAZs)
+        o.errors << Shapes::ShapeRef.new(shape: DBSubnetQuotaExceededFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidDBSubnetGroupStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBSubnetGroupNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidSubnet)
       end)
 
@@ -6247,12 +6255,12 @@ module Aws::RDS
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ModifyEventSubscriptionMessage)
         o.output = Shapes::ShapeRef.new(shape: ModifyEventSubscriptionResult)
-        o.errors << Shapes::ShapeRef.new(shape: EventSubscriptionQuotaExceededFault)
-        o.errors << Shapes::ShapeRef.new(shape: SubscriptionNotFoundFault)
-        o.errors << Shapes::ShapeRef.new(shape: SNSInvalidTopicFault)
-        o.errors << Shapes::ShapeRef.new(shape: SNSNoAuthorizationFault)
         o.errors << Shapes::ShapeRef.new(shape: SNSTopicArnNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: SNSInvalidTopicFault)
         o.errors << Shapes::ShapeRef.new(shape: SubscriptionCategoryNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: SubscriptionNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: EventSubscriptionQuotaExceededFault)
+        o.errors << Shapes::ShapeRef.new(shape: SNSNoAuthorizationFault)
       end)
 
       api.add_operation(:modify_global_cluster, Seahorse::Model::Operation.new.tap do |o|
@@ -6261,11 +6269,11 @@ module Aws::RDS
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ModifyGlobalClusterMessage)
         o.output = Shapes::ShapeRef.new(shape: ModifyGlobalClusterResult)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDBClusterStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidGlobalClusterStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDBInstanceStateFault)
         o.errors << Shapes::ShapeRef.new(shape: GlobalClusterNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: GlobalClusterAlreadyExistsFault)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidGlobalClusterStateFault)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidDBClusterStateFault)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidDBInstanceStateFault)
       end)
 
       api.add_operation(:modify_integration, Seahorse::Model::Operation.new.tap do |o|
@@ -6274,8 +6282,8 @@ module Aws::RDS
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ModifyIntegrationMessage)
         o.output = Shapes::ShapeRef.new(shape: Integration)
-        o.errors << Shapes::ShapeRef.new(shape: IntegrationNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidIntegrationStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: IntegrationNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: IntegrationConflictOperationFault)
       end)
 
@@ -6285,8 +6293,8 @@ module Aws::RDS
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ModifyOptionGroupMessage)
         o.output = Shapes::ShapeRef.new(shape: ModifyOptionGroupResult)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidOptionGroupStateFault)
         o.errors << Shapes::ShapeRef.new(shape: OptionGroupNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidOptionGroupStateFault)
       end)
 
       api.add_operation(:modify_tenant_database, Seahorse::Model::Operation.new.tap do |o|
@@ -6295,8 +6303,8 @@ module Aws::RDS
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ModifyTenantDatabaseMessage)
         o.output = Shapes::ShapeRef.new(shape: ModifyTenantDatabaseResult)
-        o.errors << Shapes::ShapeRef.new(shape: DBInstanceNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: TenantDatabaseNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBInstanceNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: TenantDatabaseAlreadyExistsFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidDBInstanceStateFault)
         o.errors << Shapes::ShapeRef.new(shape: KMSKeyNotAccessibleFault)
@@ -6308,8 +6316,8 @@ module Aws::RDS
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: PromoteReadReplicaMessage)
         o.output = Shapes::ShapeRef.new(shape: PromoteReadReplicaResult)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidDBInstanceStateFault)
         o.errors << Shapes::ShapeRef.new(shape: DBInstanceNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDBInstanceStateFault)
       end)
 
       api.add_operation(:promote_read_replica_db_cluster, Seahorse::Model::Operation.new.tap do |o|
@@ -6318,8 +6326,8 @@ module Aws::RDS
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: PromoteReadReplicaDBClusterMessage)
         o.output = Shapes::ShapeRef.new(shape: PromoteReadReplicaDBClusterResult)
-        o.errors << Shapes::ShapeRef.new(shape: DBClusterNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidDBClusterStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBClusterNotFoundFault)
       end)
 
       api.add_operation(:purchase_reserved_db_instances_offering, Seahorse::Model::Operation.new.tap do |o|
@@ -6328,8 +6336,8 @@ module Aws::RDS
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: PurchaseReservedDBInstancesOfferingMessage)
         o.output = Shapes::ShapeRef.new(shape: PurchaseReservedDBInstancesOfferingResult)
-        o.errors << Shapes::ShapeRef.new(shape: ReservedDBInstancesOfferingNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: ReservedDBInstanceAlreadyExistsFault)
+        o.errors << Shapes::ShapeRef.new(shape: ReservedDBInstancesOfferingNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: ReservedDBInstanceQuotaExceededFault)
       end)
 
@@ -6339,9 +6347,9 @@ module Aws::RDS
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: RebootDBClusterMessage)
         o.output = Shapes::ShapeRef.new(shape: RebootDBClusterResult)
-        o.errors << Shapes::ShapeRef.new(shape: DBClusterNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidDBClusterStateFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidDBInstanceStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBClusterNotFoundFault)
       end)
 
       api.add_operation(:reboot_db_instance, Seahorse::Model::Operation.new.tap do |o|
@@ -6350,8 +6358,8 @@ module Aws::RDS
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: RebootDBInstanceMessage)
         o.output = Shapes::ShapeRef.new(shape: RebootDBInstanceResult)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidDBInstanceStateFault)
         o.errors << Shapes::ShapeRef.new(shape: DBInstanceNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDBInstanceStateFault)
         o.errors << Shapes::ShapeRef.new(shape: KMSKeyNotAccessibleFault)
       end)
 
@@ -6371,15 +6379,15 @@ module Aws::RDS
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: RegisterDBProxyTargetsRequest)
         o.output = Shapes::ShapeRef.new(shape: RegisterDBProxyTargetsResponse)
-        o.errors << Shapes::ShapeRef.new(shape: DBProxyNotFoundFault)
-        o.errors << Shapes::ShapeRef.new(shape: DBProxyTargetGroupNotFoundFault)
-        o.errors << Shapes::ShapeRef.new(shape: DBClusterNotFoundFault)
-        o.errors << Shapes::ShapeRef.new(shape: DBInstanceNotFoundFault)
-        o.errors << Shapes::ShapeRef.new(shape: DBProxyTargetAlreadyRegisteredFault)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidDBInstanceStateFault)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidDBClusterStateFault)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidDBProxyStateFault)
         o.errors << Shapes::ShapeRef.new(shape: InsufficientAvailableIPsInSubnetFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBProxyNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBInstanceNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBProxyTargetGroupNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDBClusterStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDBInstanceStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDBProxyStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBProxyTargetAlreadyRegisteredFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBClusterNotFoundFault)
       end)
 
       api.add_operation(:remove_from_global_cluster, Seahorse::Model::Operation.new.tap do |o|
@@ -6388,9 +6396,9 @@ module Aws::RDS
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: RemoveFromGlobalClusterMessage)
         o.output = Shapes::ShapeRef.new(shape: RemoveFromGlobalClusterResult)
-        o.errors << Shapes::ShapeRef.new(shape: GlobalClusterNotFoundFault)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidGlobalClusterStateFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidDBClusterStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidGlobalClusterStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: GlobalClusterNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: DBClusterNotFoundFault)
       end)
 
@@ -6400,9 +6408,9 @@ module Aws::RDS
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: RemoveRoleFromDBClusterMessage)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
-        o.errors << Shapes::ShapeRef.new(shape: DBClusterNotFoundFault)
-        o.errors << Shapes::ShapeRef.new(shape: DBClusterRoleNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidDBClusterStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBClusterRoleNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBClusterNotFoundFault)
       end)
 
       api.add_operation(:remove_role_from_db_instance, Seahorse::Model::Operation.new.tap do |o|
@@ -6422,8 +6430,8 @@ module Aws::RDS
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: RemoveSourceIdentifierFromSubscriptionMessage)
         o.output = Shapes::ShapeRef.new(shape: RemoveSourceIdentifierFromSubscriptionResult)
-        o.errors << Shapes::ShapeRef.new(shape: SubscriptionNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: SourceNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: SubscriptionNotFoundFault)
       end)
 
       api.add_operation(:remove_tags_from_resource, Seahorse::Model::Operation.new.tap do |o|
@@ -6432,20 +6440,20 @@ module Aws::RDS
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: RemoveTagsFromResourceMessage)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
-        o.errors << Shapes::ShapeRef.new(shape: DBInstanceNotFoundFault)
-        o.errors << Shapes::ShapeRef.new(shape: DBSnapshotNotFoundFault)
-        o.errors << Shapes::ShapeRef.new(shape: DBClusterNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: DBProxyNotFoundFault)
-        o.errors << Shapes::ShapeRef.new(shape: DBProxyEndpointNotFoundFault)
-        o.errors << Shapes::ShapeRef.new(shape: DBProxyTargetGroupNotFoundFault)
-        o.errors << Shapes::ShapeRef.new(shape: BlueGreenDeploymentNotFoundFault)
-        o.errors << Shapes::ShapeRef.new(shape: TenantDatabaseNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: DBSnapshotTenantDatabaseNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: IntegrationNotFoundFault)
-        o.errors << Shapes::ShapeRef.new(shape: DBShardGroupNotFoundFault)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidDBClusterStateFault)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidDBInstanceStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: TenantDatabaseNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: BlueGreenDeploymentNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBSnapshotNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBProxyEndpointNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidDBClusterEndpointStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDBInstanceStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBShardGroupNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBClusterNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBInstanceNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBProxyTargetGroupNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDBClusterStateFault)
       end)
 
       api.add_operation(:reset_db_cluster_parameter_group, Seahorse::Model::Operation.new.tap do |o|
@@ -6454,8 +6462,8 @@ module Aws::RDS
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ResetDBClusterParameterGroupMessage)
         o.output = Shapes::ShapeRef.new(shape: DBClusterParameterGroupNameMessage)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidDBParameterGroupStateFault)
         o.errors << Shapes::ShapeRef.new(shape: DBParameterGroupNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDBParameterGroupStateFault)
       end)
 
       api.add_operation(:reset_db_parameter_group, Seahorse::Model::Operation.new.tap do |o|
@@ -6464,8 +6472,8 @@ module Aws::RDS
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ResetDBParameterGroupMessage)
         o.output = Shapes::ShapeRef.new(shape: DBParameterGroupNameMessage)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidDBParameterGroupStateFault)
         o.errors << Shapes::ShapeRef.new(shape: DBParameterGroupNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDBParameterGroupStateFault)
       end)
 
       api.add_operation(:restore_db_cluster_from_s3, Seahorse::Model::Operation.new.tap do |o|
@@ -6474,22 +6482,22 @@ module Aws::RDS
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: RestoreDBClusterFromS3Message)
         o.output = Shapes::ShapeRef.new(shape: RestoreDBClusterFromS3Result)
-        o.errors << Shapes::ShapeRef.new(shape: DBClusterAlreadyExistsFault)
-        o.errors << Shapes::ShapeRef.new(shape: DBClusterQuotaExceededFault)
         o.errors << Shapes::ShapeRef.new(shape: StorageQuotaExceededFault)
-        o.errors << Shapes::ShapeRef.new(shape: DBSubnetGroupNotFoundFault)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidVPCNetworkStateFault)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidDBClusterStateFault)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidDBSubnetGroupStateFault)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidSubnet)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidS3BucketFault)
-        o.errors << Shapes::ShapeRef.new(shape: DBClusterParameterGroupNotFoundFault)
-        o.errors << Shapes::ShapeRef.new(shape: KMSKeyNotAccessibleFault)
-        o.errors << Shapes::ShapeRef.new(shape: DBClusterNotFoundFault)
-        o.errors << Shapes::ShapeRef.new(shape: NetworkTypeNotSupported)
         o.errors << Shapes::ShapeRef.new(shape: DomainNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InsufficientStorageClusterCapacityFault)
+        o.errors << Shapes::ShapeRef.new(shape: KMSKeyNotAccessibleFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBClusterParameterGroupNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidSubnet)
+        o.errors << Shapes::ShapeRef.new(shape: DBClusterNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: StorageTypeNotSupportedFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidVPCNetworkStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDBClusterStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBClusterAlreadyExistsFault)
+        o.errors << Shapes::ShapeRef.new(shape: NetworkTypeNotSupported)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDBSubnetGroupStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBSubnetGroupNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidS3BucketFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBClusterQuotaExceededFault)
       end)
 
       api.add_operation(:restore_db_cluster_from_snapshot, Seahorse::Model::Operation.new.tap do |o|
@@ -6498,31 +6506,29 @@ module Aws::RDS
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: RestoreDBClusterFromSnapshotMessage)
         o.output = Shapes::ShapeRef.new(shape: RestoreDBClusterFromSnapshotResult)
-        o.errors << Shapes::ShapeRef.new(shape: DBClusterAlreadyExistsFault)
-        o.errors << Shapes::ShapeRef.new(shape: DBClusterQuotaExceededFault)
-        o.errors << Shapes::ShapeRef.new(shape: StorageQuotaExceededFault)
-        o.errors << Shapes::ShapeRef.new(shape: DBSubnetGroupNotFoundFault)
-        o.errors << Shapes::ShapeRef.new(shape: DBSnapshotNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: DBClusterSnapshotNotFoundFault)
-        o.errors << Shapes::ShapeRef.new(shape: InsufficientDBClusterCapacityFault)
-        o.errors << Shapes::ShapeRef.new(shape: InsufficientStorageClusterCapacityFault)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidDBSnapshotStateFault)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidDBClusterSnapshotStateFault)
-        o.errors << Shapes::ShapeRef.new(shape: StorageQuotaExceededFault)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidVPCNetworkStateFault)
         o.errors << Shapes::ShapeRef.new(shape: DBSubnetGroupDoesNotCoverEnoughAZs)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidRestoreFault)
-        o.errors << Shapes::ShapeRef.new(shape: DBSubnetGroupNotFoundFault)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidSubnet)
-        o.errors << Shapes::ShapeRef.new(shape: OptionGroupNotFoundFault)
-        o.errors << Shapes::ShapeRef.new(shape: KMSKeyNotAccessibleFault)
-        o.errors << Shapes::ShapeRef.new(shape: NetworkTypeNotSupported)
-        o.errors << Shapes::ShapeRef.new(shape: DomainNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDBSnapshotStateFault)
         o.errors << Shapes::ShapeRef.new(shape: DBClusterParameterGroupNotFoundFault)
-        o.errors << Shapes::ShapeRef.new(shape: StorageTypeNotSupportedFault)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidDBInstanceStateFault)
         o.errors << Shapes::ShapeRef.new(shape: InsufficientDBInstanceCapacityFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidSubnet)
         o.errors << Shapes::ShapeRef.new(shape: VpcEncryptionControlViolationException)
+        o.errors << Shapes::ShapeRef.new(shape: StorageTypeNotSupportedFault)
+        o.errors << Shapes::ShapeRef.new(shape: OptionGroupNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDBClusterSnapshotStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBClusterAlreadyExistsFault)
+        o.errors << Shapes::ShapeRef.new(shape: NetworkTypeNotSupported)
+        o.errors << Shapes::ShapeRef.new(shape: InsufficientDBClusterCapacityFault)
+        o.errors << Shapes::ShapeRef.new(shape: StorageQuotaExceededFault)
+        o.errors << Shapes::ShapeRef.new(shape: DomainNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBSnapshotNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InsufficientStorageClusterCapacityFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDBInstanceStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: KMSKeyNotAccessibleFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidVPCNetworkStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBSubnetGroupNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRestoreFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBClusterQuotaExceededFault)
       end)
 
       api.add_operation(:restore_db_cluster_to_point_in_time, Seahorse::Model::Operation.new.tap do |o|
@@ -6531,29 +6537,29 @@ module Aws::RDS
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: RestoreDBClusterToPointInTimeMessage)
         o.output = Shapes::ShapeRef.new(shape: RestoreDBClusterToPointInTimeResult)
-        o.errors << Shapes::ShapeRef.new(shape: DBClusterAlreadyExistsFault)
-        o.errors << Shapes::ShapeRef.new(shape: DBClusterNotFoundFault)
-        o.errors << Shapes::ShapeRef.new(shape: DBClusterQuotaExceededFault)
         o.errors << Shapes::ShapeRef.new(shape: DBClusterSnapshotNotFoundFault)
-        o.errors << Shapes::ShapeRef.new(shape: DBSubnetGroupNotFoundFault)
-        o.errors << Shapes::ShapeRef.new(shape: InsufficientDBClusterCapacityFault)
-        o.errors << Shapes::ShapeRef.new(shape: InsufficientStorageClusterCapacityFault)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidDBClusterSnapshotStateFault)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidDBClusterStateFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidDBSnapshotStateFault)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidRestoreFault)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidSubnet)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidVPCNetworkStateFault)
-        o.errors << Shapes::ShapeRef.new(shape: KMSKeyNotAccessibleFault)
-        o.errors << Shapes::ShapeRef.new(shape: OptionGroupNotFoundFault)
-        o.errors << Shapes::ShapeRef.new(shape: StorageQuotaExceededFault)
-        o.errors << Shapes::ShapeRef.new(shape: NetworkTypeNotSupported)
-        o.errors << Shapes::ShapeRef.new(shape: DomainNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: DBClusterParameterGroupNotFoundFault)
-        o.errors << Shapes::ShapeRef.new(shape: StorageTypeNotSupportedFault)
-        o.errors << Shapes::ShapeRef.new(shape: DBClusterAutomatedBackupNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InsufficientDBInstanceCapacityFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidSubnet)
+        o.errors << Shapes::ShapeRef.new(shape: DBClusterNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: VpcEncryptionControlViolationException)
+        o.errors << Shapes::ShapeRef.new(shape: StorageTypeNotSupportedFault)
+        o.errors << Shapes::ShapeRef.new(shape: OptionGroupNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDBClusterSnapshotStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBClusterAlreadyExistsFault)
+        o.errors << Shapes::ShapeRef.new(shape: NetworkTypeNotSupported)
+        o.errors << Shapes::ShapeRef.new(shape: InsufficientDBClusterCapacityFault)
+        o.errors << Shapes::ShapeRef.new(shape: StorageQuotaExceededFault)
+        o.errors << Shapes::ShapeRef.new(shape: DomainNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InsufficientStorageClusterCapacityFault)
+        o.errors << Shapes::ShapeRef.new(shape: KMSKeyNotAccessibleFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBClusterAutomatedBackupNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidVPCNetworkStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDBClusterStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBSubnetGroupNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRestoreFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBClusterQuotaExceededFault)
       end)
 
       api.add_operation(:restore_db_instance_from_db_snapshot, Seahorse::Model::Operation.new.tap do |o|
@@ -6562,31 +6568,31 @@ module Aws::RDS
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: RestoreDBInstanceFromDBSnapshotMessage)
         o.output = Shapes::ShapeRef.new(shape: RestoreDBInstanceFromDBSnapshotResult)
-        o.errors << Shapes::ShapeRef.new(shape: DBInstanceAlreadyExistsFault)
-        o.errors << Shapes::ShapeRef.new(shape: DBSnapshotNotFoundFault)
-        o.errors << Shapes::ShapeRef.new(shape: InstanceQuotaExceededFault)
-        o.errors << Shapes::ShapeRef.new(shape: InsufficientDBInstanceCapacityFault)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidDBSnapshotStateFault)
-        o.errors << Shapes::ShapeRef.new(shape: StorageQuotaExceededFault)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidVPCNetworkStateFault)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidRestoreFault)
-        o.errors << Shapes::ShapeRef.new(shape: DBSubnetGroupNotFoundFault)
-        o.errors << Shapes::ShapeRef.new(shape: DBSubnetGroupDoesNotCoverEnoughAZs)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidSubnet)
-        o.errors << Shapes::ShapeRef.new(shape: ProvisionedIopsNotAvailableInAZFault)
-        o.errors << Shapes::ShapeRef.new(shape: OptionGroupNotFoundFault)
-        o.errors << Shapes::ShapeRef.new(shape: StorageTypeNotSupportedFault)
         o.errors << Shapes::ShapeRef.new(shape: AuthorizationNotFoundFault)
-        o.errors << Shapes::ShapeRef.new(shape: KMSKeyNotAccessibleFault)
-        o.errors << Shapes::ShapeRef.new(shape: DBSecurityGroupNotFoundFault)
-        o.errors << Shapes::ShapeRef.new(shape: DomainNotFoundFault)
-        o.errors << Shapes::ShapeRef.new(shape: DBParameterGroupNotFoundFault)
-        o.errors << Shapes::ShapeRef.new(shape: NetworkTypeNotSupported)
-        o.errors << Shapes::ShapeRef.new(shape: BackupPolicyNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: DBClusterSnapshotNotFoundFault)
-        o.errors << Shapes::ShapeRef.new(shape: CertificateNotFoundFault)
-        o.errors << Shapes::ShapeRef.new(shape: TenantDatabaseQuotaExceededFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBParameterGroupNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBSubnetGroupDoesNotCoverEnoughAZs)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDBSnapshotStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: InsufficientDBInstanceCapacityFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidSubnet)
         o.errors << Shapes::ShapeRef.new(shape: VpcEncryptionControlViolationException)
+        o.errors << Shapes::ShapeRef.new(shape: ProvisionedIopsNotAvailableInAZFault)
+        o.errors << Shapes::ShapeRef.new(shape: StorageTypeNotSupportedFault)
+        o.errors << Shapes::ShapeRef.new(shape: OptionGroupNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: NetworkTypeNotSupported)
+        o.errors << Shapes::ShapeRef.new(shape: InstanceQuotaExceededFault)
+        o.errors << Shapes::ShapeRef.new(shape: StorageQuotaExceededFault)
+        o.errors << Shapes::ShapeRef.new(shape: BackupPolicyNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: DomainNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBSnapshotNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: CertificateNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: KMSKeyNotAccessibleFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBInstanceAlreadyExistsFault)
+        o.errors << Shapes::ShapeRef.new(shape: TenantDatabaseQuotaExceededFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBSecurityGroupNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidVPCNetworkStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBSubnetGroupNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRestoreFault)
       end)
 
       api.add_operation(:restore_db_instance_from_s3, Seahorse::Model::Operation.new.tap do |o|
@@ -6595,26 +6601,26 @@ module Aws::RDS
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: RestoreDBInstanceFromS3Message)
         o.output = Shapes::ShapeRef.new(shape: RestoreDBInstanceFromS3Result)
-        o.errors << Shapes::ShapeRef.new(shape: DBInstanceAlreadyExistsFault)
-        o.errors << Shapes::ShapeRef.new(shape: InsufficientDBInstanceCapacityFault)
-        o.errors << Shapes::ShapeRef.new(shape: DBParameterGroupNotFoundFault)
-        o.errors << Shapes::ShapeRef.new(shape: DBSecurityGroupNotFoundFault)
-        o.errors << Shapes::ShapeRef.new(shape: InstanceQuotaExceededFault)
-        o.errors << Shapes::ShapeRef.new(shape: StorageQuotaExceededFault)
-        o.errors << Shapes::ShapeRef.new(shape: DBSubnetGroupNotFoundFault)
-        o.errors << Shapes::ShapeRef.new(shape: DBSubnetGroupDoesNotCoverEnoughAZs)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidSubnet)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidVPCNetworkStateFault)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidS3BucketFault)
-        o.errors << Shapes::ShapeRef.new(shape: ProvisionedIopsNotAvailableInAZFault)
-        o.errors << Shapes::ShapeRef.new(shape: OptionGroupNotFoundFault)
-        o.errors << Shapes::ShapeRef.new(shape: StorageTypeNotSupportedFault)
         o.errors << Shapes::ShapeRef.new(shape: AuthorizationNotFoundFault)
-        o.errors << Shapes::ShapeRef.new(shape: KMSKeyNotAccessibleFault)
-        o.errors << Shapes::ShapeRef.new(shape: NetworkTypeNotSupported)
+        o.errors << Shapes::ShapeRef.new(shape: StorageQuotaExceededFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBParameterGroupNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: BackupPolicyNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBSubnetGroupDoesNotCoverEnoughAZs)
         o.errors << Shapes::ShapeRef.new(shape: CertificateNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: KMSKeyNotAccessibleFault)
+        o.errors << Shapes::ShapeRef.new(shape: InsufficientDBInstanceCapacityFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBInstanceAlreadyExistsFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidSubnet)
         o.errors << Shapes::ShapeRef.new(shape: VpcEncryptionControlViolationException)
+        o.errors << Shapes::ShapeRef.new(shape: ProvisionedIopsNotAvailableInAZFault)
+        o.errors << Shapes::ShapeRef.new(shape: StorageTypeNotSupportedFault)
+        o.errors << Shapes::ShapeRef.new(shape: OptionGroupNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBSecurityGroupNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidVPCNetworkStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: NetworkTypeNotSupported)
+        o.errors << Shapes::ShapeRef.new(shape: InstanceQuotaExceededFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBSubnetGroupNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidS3BucketFault)
       end)
 
       api.add_operation(:restore_db_instance_to_point_in_time, Seahorse::Model::Operation.new.tap do |o|
@@ -6623,32 +6629,32 @@ module Aws::RDS
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: RestoreDBInstanceToPointInTimeMessage)
         o.output = Shapes::ShapeRef.new(shape: RestoreDBInstanceToPointInTimeResult)
-        o.errors << Shapes::ShapeRef.new(shape: DBInstanceAlreadyExistsFault)
-        o.errors << Shapes::ShapeRef.new(shape: DBInstanceNotFoundFault)
-        o.errors << Shapes::ShapeRef.new(shape: InstanceQuotaExceededFault)
-        o.errors << Shapes::ShapeRef.new(shape: InsufficientDBInstanceCapacityFault)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidDBInstanceStateFault)
-        o.errors << Shapes::ShapeRef.new(shape: PointInTimeRestoreNotEnabledFault)
-        o.errors << Shapes::ShapeRef.new(shape: StorageQuotaExceededFault)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidVPCNetworkStateFault)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidRestoreFault)
-        o.errors << Shapes::ShapeRef.new(shape: DBSubnetGroupNotFoundFault)
-        o.errors << Shapes::ShapeRef.new(shape: DBSubnetGroupDoesNotCoverEnoughAZs)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidSubnet)
-        o.errors << Shapes::ShapeRef.new(shape: ProvisionedIopsNotAvailableInAZFault)
-        o.errors << Shapes::ShapeRef.new(shape: OptionGroupNotFoundFault)
-        o.errors << Shapes::ShapeRef.new(shape: StorageTypeNotSupportedFault)
         o.errors << Shapes::ShapeRef.new(shape: AuthorizationNotFoundFault)
-        o.errors << Shapes::ShapeRef.new(shape: KMSKeyNotAccessibleFault)
-        o.errors << Shapes::ShapeRef.new(shape: DBSecurityGroupNotFoundFault)
-        o.errors << Shapes::ShapeRef.new(shape: DomainNotFoundFault)
-        o.errors << Shapes::ShapeRef.new(shape: BackupPolicyNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: DBParameterGroupNotFoundFault)
-        o.errors << Shapes::ShapeRef.new(shape: NetworkTypeNotSupported)
-        o.errors << Shapes::ShapeRef.new(shape: DBInstanceAutomatedBackupNotFoundFault)
-        o.errors << Shapes::ShapeRef.new(shape: TenantDatabaseQuotaExceededFault)
-        o.errors << Shapes::ShapeRef.new(shape: CertificateNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBSubnetGroupDoesNotCoverEnoughAZs)
+        o.errors << Shapes::ShapeRef.new(shape: InsufficientDBInstanceCapacityFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidSubnet)
         o.errors << Shapes::ShapeRef.new(shape: VpcEncryptionControlViolationException)
+        o.errors << Shapes::ShapeRef.new(shape: ProvisionedIopsNotAvailableInAZFault)
+        o.errors << Shapes::ShapeRef.new(shape: StorageTypeNotSupportedFault)
+        o.errors << Shapes::ShapeRef.new(shape: OptionGroupNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBInstanceNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBInstanceAutomatedBackupNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: NetworkTypeNotSupported)
+        o.errors << Shapes::ShapeRef.new(shape: InstanceQuotaExceededFault)
+        o.errors << Shapes::ShapeRef.new(shape: StorageQuotaExceededFault)
+        o.errors << Shapes::ShapeRef.new(shape: BackupPolicyNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: DomainNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: CertificateNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDBInstanceStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: KMSKeyNotAccessibleFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBInstanceAlreadyExistsFault)
+        o.errors << Shapes::ShapeRef.new(shape: TenantDatabaseQuotaExceededFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBSecurityGroupNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidVPCNetworkStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: PointInTimeRestoreNotEnabledFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBSubnetGroupNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRestoreFault)
       end)
 
       api.add_operation(:revoke_db_security_group_ingress, Seahorse::Model::Operation.new.tap do |o|
@@ -6657,9 +6663,9 @@ module Aws::RDS
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: RevokeDBSecurityGroupIngressMessage)
         o.output = Shapes::ShapeRef.new(shape: RevokeDBSecurityGroupIngressResult)
-        o.errors << Shapes::ShapeRef.new(shape: DBSecurityGroupNotFoundFault)
-        o.errors << Shapes::ShapeRef.new(shape: AuthorizationNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidDBSecurityGroupStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: AuthorizationNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBSecurityGroupNotFoundFault)
       end)
 
       api.add_operation(:start_activity_stream, Seahorse::Model::Operation.new.tap do |o|
@@ -6668,12 +6674,12 @@ module Aws::RDS
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: StartActivityStreamRequest)
         o.output = Shapes::ShapeRef.new(shape: StartActivityStreamResponse)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidDBInstanceStateFault)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidDBClusterStateFault)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundFault)
-        o.errors << Shapes::ShapeRef.new(shape: DBClusterNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: DBInstanceNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDBClusterStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDBInstanceStateFault)
         o.errors << Shapes::ShapeRef.new(shape: KMSKeyNotAccessibleFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBClusterNotFoundFault)
       end)
 
       api.add_operation(:start_db_cluster, Seahorse::Model::Operation.new.tap do |o|
@@ -6682,11 +6688,11 @@ module Aws::RDS
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: StartDBClusterMessage)
         o.output = Shapes::ShapeRef.new(shape: StartDBClusterResult)
-        o.errors << Shapes::ShapeRef.new(shape: DBClusterNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidDBClusterStateFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidDBInstanceStateFault)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidDBShardGroupStateFault)
         o.errors << Shapes::ShapeRef.new(shape: KMSKeyNotAccessibleFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDBShardGroupStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBClusterNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: VpcEncryptionControlViolationException)
       end)
 
@@ -6696,18 +6702,18 @@ module Aws::RDS
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: StartDBInstanceMessage)
         o.output = Shapes::ShapeRef.new(shape: StartDBInstanceResult)
-        o.errors << Shapes::ShapeRef.new(shape: DBInstanceNotFoundFault)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidDBInstanceStateFault)
-        o.errors << Shapes::ShapeRef.new(shape: InsufficientDBInstanceCapacityFault)
-        o.errors << Shapes::ShapeRef.new(shape: DBSubnetGroupNotFoundFault)
-        o.errors << Shapes::ShapeRef.new(shape: DBSubnetGroupDoesNotCoverEnoughAZs)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidDBClusterStateFault)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidSubnet)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidVPCNetworkStateFault)
-        o.errors << Shapes::ShapeRef.new(shape: DBClusterNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: AuthorizationNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBSubnetGroupDoesNotCoverEnoughAZs)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDBInstanceStateFault)
         o.errors << Shapes::ShapeRef.new(shape: KMSKeyNotAccessibleFault)
+        o.errors << Shapes::ShapeRef.new(shape: InsufficientDBInstanceCapacityFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidSubnet)
+        o.errors << Shapes::ShapeRef.new(shape: DBClusterNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: VpcEncryptionControlViolationException)
+        o.errors << Shapes::ShapeRef.new(shape: DBInstanceNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidVPCNetworkStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDBClusterStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBSubnetGroupNotFoundFault)
       end)
 
       api.add_operation(:start_db_instance_automated_backups_replication, Seahorse::Model::Operation.new.tap do |o|
@@ -6716,12 +6722,12 @@ module Aws::RDS
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: StartDBInstanceAutomatedBackupsReplicationMessage)
         o.output = Shapes::ShapeRef.new(shape: StartDBInstanceAutomatedBackupsReplicationResult)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDBInstanceAutomatedBackupStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: StorageTypeNotSupportedFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBInstanceAutomatedBackupQuotaExceededFault)
         o.errors << Shapes::ShapeRef.new(shape: DBInstanceNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidDBInstanceStateFault)
         o.errors << Shapes::ShapeRef.new(shape: KMSKeyNotAccessibleFault)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidDBInstanceAutomatedBackupStateFault)
-        o.errors << Shapes::ShapeRef.new(shape: DBInstanceAutomatedBackupQuotaExceededFault)
-        o.errors << Shapes::ShapeRef.new(shape: StorageTypeNotSupportedFault)
       end)
 
       api.add_operation(:start_export_task, Seahorse::Model::Operation.new.tap do |o|
@@ -6730,16 +6736,16 @@ module Aws::RDS
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: StartExportTaskMessage)
         o.output = Shapes::ShapeRef.new(shape: ExportTask)
-        o.errors << Shapes::ShapeRef.new(shape: DBSnapshotNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: DBClusterSnapshotNotFoundFault)
-        o.errors << Shapes::ShapeRef.new(shape: DBClusterNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: ExportTaskAlreadyExistsFault)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidS3BucketFault)
-        o.errors << Shapes::ShapeRef.new(shape: IamRoleNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBSnapshotNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: IamRoleMissingPermissionsFault)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidExportOnlyFault)
-        o.errors << Shapes::ShapeRef.new(shape: KMSKeyNotAccessibleFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidExportSourceStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: KMSKeyNotAccessibleFault)
+        o.errors << Shapes::ShapeRef.new(shape: IamRoleNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidExportOnlyFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidS3BucketFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBClusterNotFoundFault)
       end)
 
       api.add_operation(:stop_activity_stream, Seahorse::Model::Operation.new.tap do |o|
@@ -6748,11 +6754,11 @@ module Aws::RDS
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: StopActivityStreamRequest)
         o.output = Shapes::ShapeRef.new(shape: StopActivityStreamResponse)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidDBInstanceStateFault)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidDBClusterStateFault)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundFault)
-        o.errors << Shapes::ShapeRef.new(shape: DBClusterNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: DBInstanceNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDBClusterStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDBInstanceStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBClusterNotFoundFault)
       end)
 
       api.add_operation(:stop_db_cluster, Seahorse::Model::Operation.new.tap do |o|
@@ -6761,10 +6767,10 @@ module Aws::RDS
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: StopDBClusterMessage)
         o.output = Shapes::ShapeRef.new(shape: StopDBClusterResult)
-        o.errors << Shapes::ShapeRef.new(shape: DBClusterNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidDBClusterStateFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidDBInstanceStateFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidDBShardGroupStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBClusterNotFoundFault)
       end)
 
       api.add_operation(:stop_db_instance, Seahorse::Model::Operation.new.tap do |o|
@@ -6774,10 +6780,10 @@ module Aws::RDS
         o.input = Shapes::ShapeRef.new(shape: StopDBInstanceMessage)
         o.output = Shapes::ShapeRef.new(shape: StopDBInstanceResult)
         o.errors << Shapes::ShapeRef.new(shape: DBInstanceNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDBClusterStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: SnapshotQuotaExceededFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidDBInstanceStateFault)
         o.errors << Shapes::ShapeRef.new(shape: DBSnapshotAlreadyExistsFault)
-        o.errors << Shapes::ShapeRef.new(shape: SnapshotQuotaExceededFault)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidDBClusterStateFault)
       end)
 
       api.add_operation(:stop_db_instance_automated_backups_replication, Seahorse::Model::Operation.new.tap do |o|
@@ -6796,8 +6802,8 @@ module Aws::RDS
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: SwitchoverBlueGreenDeploymentRequest)
         o.output = Shapes::ShapeRef.new(shape: SwitchoverBlueGreenDeploymentResponse)
-        o.errors << Shapes::ShapeRef.new(shape: BlueGreenDeploymentNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidBlueGreenDeploymentStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: BlueGreenDeploymentNotFoundFault)
       end)
 
       api.add_operation(:switchover_global_cluster, Seahorse::Model::Operation.new.tap do |o|
@@ -6806,9 +6812,9 @@ module Aws::RDS
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: SwitchoverGlobalClusterMessage)
         o.output = Shapes::ShapeRef.new(shape: SwitchoverGlobalClusterResult)
-        o.errors << Shapes::ShapeRef.new(shape: GlobalClusterNotFoundFault)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidGlobalClusterStateFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidDBClusterStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidGlobalClusterStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: GlobalClusterNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: DBClusterNotFoundFault)
       end)
 

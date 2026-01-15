@@ -99,40 +99,40 @@ module Aws::RDS
             operation_name: :describe_db_clusters,
             acceptors: [
               {
-                "expected" => "available",
                 "matcher" => "pathAll",
+                "argument" => "db_clusters[].status",
                 "state" => "success",
-                "argument" => "db_clusters[].status"
+                "expected" => "available"
               },
               {
-                "expected" => "deleted",
                 "matcher" => "pathAny",
+                "argument" => "db_clusters[].status",
                 "state" => "failure",
-                "argument" => "db_clusters[].status"
+                "expected" => "deleted"
               },
               {
-                "expected" => "deleting",
                 "matcher" => "pathAny",
+                "argument" => "db_clusters[].status",
                 "state" => "failure",
-                "argument" => "db_clusters[].status"
+                "expected" => "deleting"
               },
               {
-                "expected" => "failed",
                 "matcher" => "pathAny",
+                "argument" => "db_clusters[].status",
                 "state" => "failure",
-                "argument" => "db_clusters[].status"
+                "expected" => "failed"
               },
               {
-                "expected" => "incompatible-restore",
                 "matcher" => "pathAny",
+                "argument" => "db_clusters[].status",
                 "state" => "failure",
-                "argument" => "db_clusters[].status"
+                "expected" => "incompatible-restore"
               },
               {
-                "expected" => "incompatible-parameters",
                 "matcher" => "pathAny",
+                "argument" => "db_clusters[].status",
                 "state" => "failure",
-                "argument" => "db_clusters[].status"
+                "expected" => "incompatible-parameters"
               }
             ]
           )
@@ -167,39 +167,39 @@ module Aws::RDS
             operation_name: :describe_db_clusters,
             acceptors: [
               {
-                "expected" => true,
                 "matcher" => "path",
+                "argument" => "length(db_clusters) == `0`",
                 "state" => "success",
-                "argument" => "length(db_clusters) == `0`"
+                "expected" => true
               },
               {
-                "expected" => "DBClusterNotFoundFault",
                 "matcher" => "error",
-                "state" => "success"
+                "state" => "success",
+                "expected" => "DBClusterNotFoundFault"
               },
               {
-                "expected" => "creating",
                 "matcher" => "pathAny",
+                "argument" => "db_clusters[].status",
                 "state" => "failure",
-                "argument" => "db_clusters[].status"
+                "expected" => "creating"
               },
               {
-                "expected" => "modifying",
                 "matcher" => "pathAny",
+                "argument" => "db_clusters[].status",
                 "state" => "failure",
-                "argument" => "db_clusters[].status"
+                "expected" => "modifying"
               },
               {
-                "expected" => "rebooting",
                 "matcher" => "pathAny",
+                "argument" => "db_clusters[].status",
                 "state" => "failure",
-                "argument" => "db_clusters[].status"
+                "expected" => "rebooting"
               },
               {
-                "expected" => "resetting-master-credentials",
                 "matcher" => "pathAny",
+                "argument" => "db_clusters[].status",
                 "state" => "failure",
-                "argument" => "db_clusters[].status"
+                "expected" => "resetting-master-credentials"
               }
             ]
           )
@@ -234,40 +234,40 @@ module Aws::RDS
             operation_name: :describe_db_cluster_snapshots,
             acceptors: [
               {
-                "expected" => "available",
                 "matcher" => "pathAll",
+                "argument" => "db_cluster_snapshots[].status",
                 "state" => "success",
-                "argument" => "db_cluster_snapshots[].status"
+                "expected" => "available"
               },
               {
-                "expected" => "deleted",
                 "matcher" => "pathAny",
+                "argument" => "db_cluster_snapshots[].status",
                 "state" => "failure",
-                "argument" => "db_cluster_snapshots[].status"
+                "expected" => "deleted"
               },
               {
-                "expected" => "deleting",
                 "matcher" => "pathAny",
+                "argument" => "db_cluster_snapshots[].status",
                 "state" => "failure",
-                "argument" => "db_cluster_snapshots[].status"
+                "expected" => "deleting"
               },
               {
-                "expected" => "failed",
                 "matcher" => "pathAny",
+                "argument" => "db_cluster_snapshots[].status",
                 "state" => "failure",
-                "argument" => "db_cluster_snapshots[].status"
+                "expected" => "failed"
               },
               {
-                "expected" => "incompatible-restore",
                 "matcher" => "pathAny",
+                "argument" => "db_cluster_snapshots[].status",
                 "state" => "failure",
-                "argument" => "db_cluster_snapshots[].status"
+                "expected" => "incompatible-restore"
               },
               {
-                "expected" => "incompatible-parameters",
                 "matcher" => "pathAny",
+                "argument" => "db_cluster_snapshots[].status",
                 "state" => "failure",
-                "argument" => "db_cluster_snapshots[].status"
+                "expected" => "incompatible-parameters"
               }
             ]
           )
@@ -302,39 +302,39 @@ module Aws::RDS
             operation_name: :describe_db_cluster_snapshots,
             acceptors: [
               {
-                "expected" => true,
                 "matcher" => "path",
+                "argument" => "length(db_cluster_snapshots) == `0`",
                 "state" => "success",
-                "argument" => "length(db_cluster_snapshots) == `0`"
+                "expected" => true
               },
               {
-                "expected" => "DBClusterSnapshotNotFoundFault",
                 "matcher" => "error",
-                "state" => "success"
+                "state" => "success",
+                "expected" => "DBClusterSnapshotNotFoundFault"
               },
               {
-                "expected" => "creating",
                 "matcher" => "pathAny",
+                "argument" => "db_cluster_snapshots[].status",
                 "state" => "failure",
-                "argument" => "db_cluster_snapshots[].status"
+                "expected" => "creating"
               },
               {
-                "expected" => "modifying",
                 "matcher" => "pathAny",
+                "argument" => "db_cluster_snapshots[].status",
                 "state" => "failure",
-                "argument" => "db_cluster_snapshots[].status"
+                "expected" => "modifying"
               },
               {
-                "expected" => "rebooting",
                 "matcher" => "pathAny",
+                "argument" => "db_cluster_snapshots[].status",
                 "state" => "failure",
-                "argument" => "db_cluster_snapshots[].status"
+                "expected" => "rebooting"
               },
               {
-                "expected" => "resetting-master-credentials",
                 "matcher" => "pathAny",
+                "argument" => "db_cluster_snapshots[].status",
                 "state" => "failure",
-                "argument" => "db_cluster_snapshots[].status"
+                "expected" => "resetting-master-credentials"
               }
             ]
           )
@@ -369,40 +369,40 @@ module Aws::RDS
             operation_name: :describe_db_instances,
             acceptors: [
               {
-                "expected" => "available",
                 "matcher" => "pathAll",
+                "argument" => "db_instances[].db_instance_status",
                 "state" => "success",
-                "argument" => "db_instances[].db_instance_status"
+                "expected" => "available"
               },
               {
-                "expected" => "deleted",
                 "matcher" => "pathAny",
+                "argument" => "db_instances[].db_instance_status",
                 "state" => "failure",
-                "argument" => "db_instances[].db_instance_status"
+                "expected" => "deleted"
               },
               {
-                "expected" => "deleting",
                 "matcher" => "pathAny",
+                "argument" => "db_instances[].db_instance_status",
                 "state" => "failure",
-                "argument" => "db_instances[].db_instance_status"
+                "expected" => "deleting"
               },
               {
-                "expected" => "failed",
                 "matcher" => "pathAny",
+                "argument" => "db_instances[].db_instance_status",
                 "state" => "failure",
-                "argument" => "db_instances[].db_instance_status"
+                "expected" => "failed"
               },
               {
-                "expected" => "incompatible-restore",
                 "matcher" => "pathAny",
+                "argument" => "db_instances[].db_instance_status",
                 "state" => "failure",
-                "argument" => "db_instances[].db_instance_status"
+                "expected" => "incompatible-restore"
               },
               {
-                "expected" => "incompatible-parameters",
                 "matcher" => "pathAny",
+                "argument" => "db_instances[].db_instance_status",
                 "state" => "failure",
-                "argument" => "db_instances[].db_instance_status"
+                "expected" => "incompatible-parameters"
               }
             ]
           )
@@ -437,39 +437,39 @@ module Aws::RDS
             operation_name: :describe_db_instances,
             acceptors: [
               {
-                "expected" => true,
                 "matcher" => "path",
+                "argument" => "length(db_instances) == `0`",
                 "state" => "success",
-                "argument" => "length(db_instances) == `0`"
+                "expected" => true
               },
               {
-                "expected" => "DBInstanceNotFound",
                 "matcher" => "error",
-                "state" => "success"
+                "state" => "success",
+                "expected" => "DBInstanceNotFound"
               },
               {
-                "expected" => "creating",
                 "matcher" => "pathAny",
+                "argument" => "db_instances[].db_instance_status",
                 "state" => "failure",
-                "argument" => "db_instances[].db_instance_status"
+                "expected" => "creating"
               },
               {
-                "expected" => "modifying",
                 "matcher" => "pathAny",
+                "argument" => "db_instances[].db_instance_status",
                 "state" => "failure",
-                "argument" => "db_instances[].db_instance_status"
+                "expected" => "modifying"
               },
               {
-                "expected" => "rebooting",
                 "matcher" => "pathAny",
+                "argument" => "db_instances[].db_instance_status",
                 "state" => "failure",
-                "argument" => "db_instances[].db_instance_status"
+                "expected" => "rebooting"
               },
               {
-                "expected" => "resetting-master-credentials",
                 "matcher" => "pathAny",
+                "argument" => "db_instances[].db_instance_status",
                 "state" => "failure",
-                "argument" => "db_instances[].db_instance_status"
+                "expected" => "resetting-master-credentials"
               }
             ]
           )
@@ -504,40 +504,40 @@ module Aws::RDS
             operation_name: :describe_db_snapshots,
             acceptors: [
               {
-                "expected" => "available",
                 "matcher" => "pathAll",
+                "argument" => "db_snapshots[].status",
                 "state" => "success",
-                "argument" => "db_snapshots[].status"
+                "expected" => "available"
               },
               {
-                "expected" => "deleted",
                 "matcher" => "pathAny",
+                "argument" => "db_snapshots[].status",
                 "state" => "failure",
-                "argument" => "db_snapshots[].status"
+                "expected" => "deleted"
               },
               {
-                "expected" => "deleting",
                 "matcher" => "pathAny",
+                "argument" => "db_snapshots[].status",
                 "state" => "failure",
-                "argument" => "db_snapshots[].status"
+                "expected" => "deleting"
               },
               {
-                "expected" => "failed",
                 "matcher" => "pathAny",
+                "argument" => "db_snapshots[].status",
                 "state" => "failure",
-                "argument" => "db_snapshots[].status"
+                "expected" => "failed"
               },
               {
-                "expected" => "incompatible-restore",
                 "matcher" => "pathAny",
+                "argument" => "db_snapshots[].status",
                 "state" => "failure",
-                "argument" => "db_snapshots[].status"
+                "expected" => "incompatible-restore"
               },
               {
-                "expected" => "incompatible-parameters",
                 "matcher" => "pathAny",
+                "argument" => "db_snapshots[].status",
                 "state" => "failure",
-                "argument" => "db_snapshots[].status"
+                "expected" => "incompatible-parameters"
               }
             ]
           )
@@ -572,39 +572,39 @@ module Aws::RDS
             operation_name: :describe_db_snapshots,
             acceptors: [
               {
-                "expected" => true,
                 "matcher" => "path",
+                "argument" => "length(db_snapshots) == `0`",
                 "state" => "success",
-                "argument" => "length(db_snapshots) == `0`"
+                "expected" => true
               },
               {
-                "expected" => "DBSnapshotNotFound",
                 "matcher" => "error",
-                "state" => "success"
+                "state" => "success",
+                "expected" => "DBSnapshotNotFound"
               },
               {
-                "expected" => "creating",
                 "matcher" => "pathAny",
+                "argument" => "db_snapshots[].status",
                 "state" => "failure",
-                "argument" => "db_snapshots[].status"
+                "expected" => "creating"
               },
               {
-                "expected" => "modifying",
                 "matcher" => "pathAny",
+                "argument" => "db_snapshots[].status",
                 "state" => "failure",
-                "argument" => "db_snapshots[].status"
+                "expected" => "modifying"
               },
               {
-                "expected" => "rebooting",
                 "matcher" => "pathAny",
+                "argument" => "db_snapshots[].status",
                 "state" => "failure",
-                "argument" => "db_snapshots[].status"
+                "expected" => "rebooting"
               },
               {
-                "expected" => "resetting-master-credentials",
                 "matcher" => "pathAny",
+                "argument" => "db_snapshots[].status",
                 "state" => "failure",
-                "argument" => "db_snapshots[].status"
+                "expected" => "resetting-master-credentials"
               }
             ]
           )
@@ -639,28 +639,28 @@ module Aws::RDS
             operation_name: :describe_tenant_databases,
             acceptors: [
               {
-                "expected" => "available",
                 "matcher" => "pathAll",
+                "argument" => "tenant_databases[].status",
                 "state" => "success",
-                "argument" => "tenant_databases[].status"
+                "expected" => "available"
               },
               {
-                "expected" => "deleted",
                 "matcher" => "pathAny",
+                "argument" => "tenant_databases[].status",
                 "state" => "failure",
-                "argument" => "tenant_databases[].status"
+                "expected" => "deleted"
               },
               {
-                "expected" => "incompatible-parameters",
                 "matcher" => "pathAny",
+                "argument" => "tenant_databases[].status",
                 "state" => "failure",
-                "argument" => "tenant_databases[].status"
+                "expected" => "incompatible-parameters"
               },
               {
-                "expected" => "incompatible-restore",
                 "matcher" => "pathAny",
+                "argument" => "tenant_databases[].status",
                 "state" => "failure",
-                "argument" => "tenant_databases[].status"
+                "expected" => "incompatible-restore"
               }
             ]
           )
@@ -695,15 +695,15 @@ module Aws::RDS
             operation_name: :describe_tenant_databases,
             acceptors: [
               {
-                "expected" => true,
                 "matcher" => "path",
+                "argument" => "length(tenant_databases) == `0`",
                 "state" => "success",
-                "argument" => "length(tenant_databases) == `0`"
+                "expected" => true
               },
               {
-                "expected" => "DBInstanceNotFoundFault",
                 "matcher" => "error",
-                "state" => "success"
+                "state" => "success",
+                "expected" => "DBInstanceNotFoundFault"
               }
             ]
           )
