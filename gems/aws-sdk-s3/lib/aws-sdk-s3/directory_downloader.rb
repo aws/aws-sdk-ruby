@@ -7,7 +7,6 @@ module Aws
       def initialize(options = {})
         @client = options[:client]
         @executor = options[:executor]
-        @queue_executor = DefaultExecutor.new
         @abort_requested = false
         @mutex = Mutex.new
       end
@@ -36,7 +35,6 @@ module Aws
         build_result(downloads, errors)
       ensure
         @abort_requested = false
-        @queue_executor&.shutdown
       end
 
       private
@@ -85,6 +83,7 @@ module Aws
 
       def process_download_queue(producer, downloader, opts)
         progress = DirectoryProgress.new(opts[:progress_callback]) if opts[:progress_callback]
+        queue_executor = DefaultExecutor.new
         completion_queue = Queue.new
         download_attempts = 0
         errors = []
@@ -93,7 +92,7 @@ module Aws
             break if abort_requested
 
             download_attempts += 1
-            @queue_executor.post(object) do |o|
+            queue_executor.post(object) do |o|
               download_object(o, downloader, opts, progress, errors)
             ensure
               completion_queue << :done
@@ -105,6 +104,8 @@ module Aws
         end
         download_attempts.times { completion_queue.pop }
         [download_attempts, errors]
+      ensure
+        queue_executor&.shutdown
       end
 
       # @api private

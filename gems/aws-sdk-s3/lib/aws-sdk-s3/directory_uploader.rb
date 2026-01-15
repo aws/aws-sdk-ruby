@@ -9,7 +9,6 @@ module Aws
       def initialize(opts = {})
         @client = opts[:client]
         @executor = opts[:executor]
-        @queue_executor = DefaultExecutor.new
         @abort_requested = false
         @mutex = Mutex.new
       end
@@ -39,7 +38,6 @@ module Aws
         build_result(uploads, errors)
       ensure
         @abort_requested = false
-        @queue_executor&.shutdown
       end
 
       private
@@ -74,6 +72,7 @@ module Aws
 
       def process_upload_queue(producer, uploader, opts)
         progress = DirectoryProgress.new(opts[:progress_callback]) if opts[:progress_callback]
+        queue_executor = DefaultExecutor.new
         completion_queue = Queue.new
         upload_attempts = 0
         errors = []
@@ -82,7 +81,7 @@ module Aws
             break if abort_requested
 
             upload_attempts += 1
-            @queue_executor.post(file) do |f|
+            queue_executor.post(file) do |f|
               upload_file(f, uploader, opts, progress, errors)
             ensure
               completion_queue << :done
@@ -94,6 +93,8 @@ module Aws
         end
         upload_attempts.times { completion_queue.pop }
         [upload_attempts, errors]
+      ensure
+        queue_executor&.shutdown
       end
 
       def upload_file(entry, uploader, opts, progress, errors)
