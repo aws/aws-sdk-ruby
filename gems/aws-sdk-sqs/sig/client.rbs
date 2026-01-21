@@ -29,6 +29,7 @@ module Aws
                       ?defaults_mode: String,
                       ?disable_host_prefix_injection: bool,
                       ?disable_request_compression: bool,
+                      ?disable_url_region_detection: bool,
                       ?endpoint: String,
                       ?endpoint_cache_max_entries: Integer,
                       ?endpoint_cache_max_threads: Integer,

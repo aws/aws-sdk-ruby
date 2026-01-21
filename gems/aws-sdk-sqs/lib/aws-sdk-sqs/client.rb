@@ -217,6 +217,9 @@ module Aws::SQS
     #     When set to 'true' the request body will not be compressed
     #     for supported operations.
     #
+    #   @option options [Boolean] :disable_url_region_detection (false)
+    #     When set to `true`, the region will not be extracted from a provided queue url. Defaults to `false`.
+    #
     #   @option options [String, URI::HTTPS, URI::HTTP] :endpoint
     #     Normally you should not configure the `:endpoint` option
     #     directly. This is normally constructed from the `:region`
