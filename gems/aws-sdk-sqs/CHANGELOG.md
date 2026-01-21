@@ -1,7 +1,7 @@
 Unreleased Changes
 ------------------
 
-* Feature - Support disabling queue url region detection.
+* Feature - Support disabling queue url region detection through `disable_url_region_detection`.
 
 1.110.0 (2026-01-16)
 ------------------
