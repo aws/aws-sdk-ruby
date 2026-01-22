@@ -11,7 +11,7 @@ module Aws
         # When set to 'false', the signing region will be modified to use the region
         # extracted from a provided queue url if it differs from the configured region.
         option(
-          :disable_url_region_detection,
+          :disable_queue_url_region_detection,
           default: false,
           doc_type: 'Boolean',
           docstring: <<~DOCS)
@@ -35,7 +35,7 @@ module Aws
           # If the region in the queue url is not the configured
           # region, then we will modify signing to use it
           def update_region(context, queue_url)
-            return if context.config.disable_url_region_detection
+            return if context.config.disable_queue_url_region_detection
 
             if (queue_region = parse_region(queue_url)) &&
                queue_region != context.config.region

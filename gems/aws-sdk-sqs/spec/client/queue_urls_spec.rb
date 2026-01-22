@@ -82,12 +82,12 @@ module Aws
               .to include('us-west-2')
           end
 
-          it 'disables region detection when disable_url_region_detection is true' do
+          it 'disables region detection when disable_queue_url_region_detection is true' do
             url = 'https://sqs.us-west-2.amazonaws.com/1234567890/demo'
             client = Client.new(
               stub_responses: true,
               region: 'us-east-1',
-              disable_url_region_detection: true
+              disable_queue_url_region_detection: true
             )
             resp = client.send(method, params.merge(queue_url: url))
             expect(resp.context.http_request.headers['authorization'])
@@ -101,7 +101,7 @@ module Aws
             client = Client.new(
               stub_responses: true,
               region: 'us-east-1',
-              disable_url_region_detection: true
+              disable_queue_url_region_detection: true
             )
             resp = client.send(method, params.merge(queue_url: url))
             expect(resp.context.http_request.headers['authorization'])
