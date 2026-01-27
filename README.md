@@ -1,4 +1,4 @@
-# AWS SDK for Ruby - Version 3
+# AWS SDK for Ruby - Version 3 test
 
 [![Gem Version](https://badge.fury.io/rb/aws-sdk-core.svg)](https://badge.fury.io/rb/aws-sdk-core)
 [![Build Status](https://github.com/aws/aws-sdk-ruby/workflows/CI/badge.svg)](https://github.com/aws/aws-sdk-ruby/actions)
