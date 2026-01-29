@@ -33,7 +33,7 @@ module Aws
         @status_code = status_code
         @body = body
         msg = "HTTP #{status_code}"
-        msg += ": #{body[0..200]}" if body && !body.empty?
+        msg += ": #{body}" if body && !body.empty?
         super(msg)
       end
     end
