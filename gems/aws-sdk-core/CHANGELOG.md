@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Include HTTP status code and body in errors whehn retrieving ECS credentials and Instance Profile credentials.
+
 3.241.4 (2026-01-16)
 ------------------
 
