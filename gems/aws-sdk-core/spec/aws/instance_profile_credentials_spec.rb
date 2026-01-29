@@ -451,6 +451,26 @@ module Aws
           expect(c.credentials.session_token).to be(nil)
           expect(c.expiration).to be(nil)
         end
+
+        it 'returns empty credentials on non-200 response from profile endpoint' do
+          stub_request(:get, "#{ipv4_endpoint_creds_path}profile-name")
+            .with(headers: { 'x-aws-ec2-metadata-token' => 'my-token' })
+            .to_return(status: 404, body: 'Not Found')
+          expect_any_instance_of(InstanceProfileCredentials).to receive(:warn)
+            .with(/Error retrieving instance profile credentials: HTTP 404: Not Found/)
+          c = InstanceProfileCredentials.new(backoff: 0, retries: 0)
+          expect(c.set?).to be(false)
+        end
+
+        it 'returns empty credentials on non-200 response from metadata service' do
+          stub_request(:get, ipv4_endpoint + path)
+            .with(headers: { 'x-aws-ec2-metadata-token' => 'my-token' })
+            .to_return(status: 503, body: 'Service Unavailable')
+          expect_any_instance_of(InstanceProfileCredentials).to receive(:warn)
+            .with(/Error retrieving instance profile credentials: HTTP 503: Service Unavailable/)
+          c = InstanceProfileCredentials.new(backoff: 0, retries: 0)
+          expect(c.set?).to be(false)
+        end
       end
     end
 
