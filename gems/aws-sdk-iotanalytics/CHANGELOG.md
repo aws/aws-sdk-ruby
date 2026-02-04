@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - IoT Analytics has been removed from the SDK because it has been discontinued.
+
 1.93.0 (2026-01-16)
 ------------------
 

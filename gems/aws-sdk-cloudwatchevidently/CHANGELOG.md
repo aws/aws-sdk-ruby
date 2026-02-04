@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - CloudWatch Evidently has been removed from the SDK because it has been discontinued.
+
 1.53.0 (2026-01-26)
 ------------------
 
