@@ -221,6 +221,8 @@ module Aws::RAM
     #   * An ARN of an IAM user, for example:
     #     `iam::123456789012user/username`
     #
+    #   * A service principal name, for example: `service-id.amazonaws.com`
+    #
     #   <note markdown="1"> Not all resource types can be shared with IAM roles and users. For
     #   more information, see [Sharing with IAM roles and users][2] in the
     #   *Resource Access Manager User Guide*.
@@ -254,8 +256,13 @@ module Aws::RAM
     #   @return [String]
     #
     # @!attribute [rw] sources
-    #   Specifies from which source accounts the service principal has
-    #   access to the resources in this resource share.
+    #   Specifies source constraints (accounts, ARNs, organization IDs, or
+    #   organization paths) that limit when service principals can access
+    #   resources in this resource share. When a service principal attempts
+    #   to access a shared resource, validation is performed to ensure the
+    #   request originates from one of the specified sources. This helps
+    #   prevent confused deputy attacks by applying constraints on where
+    #   service principals can access resources from.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/AssociateResourceShareRequest AWS API Documentation
@@ -389,6 +396,54 @@ module Aws::RAM
       include Aws::Structure
     end
 
+    # Information about a source association in a resource share. Source
+    # associations control which sources can be used with service
+    # principals.
+    #
+    # @!attribute [rw] resource_share_arn
+    #   The Amazon Resource Name (ARN) of the resource share that contains
+    #   the source association.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_id
+    #   The identifier of the source. This can be an account ID, Amazon
+    #   Resource Name (ARN), organization ID, or organization path.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_type
+    #   The type of source.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the source association.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_updated_time
+    #   The date and time when the source association was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] creation_time
+    #   The date and time when the source association was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] status_message
+    #   A message about the status of the source association.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/AssociatedSource AWS API Documentation
+    #
+    class AssociatedSource < Struct.new(
+      :resource_share_arn,
+      :source_id,
+      :source_type,
+      :status,
+      :last_updated_time,
+      :creation_time,
+      :status_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] name
     #   Specifies the name of the customer managed permission. The name must
     #   be unique within the Amazon Web Services Region.
@@ -398,10 +453,12 @@ module Aws::RAM
     #   Specifies the name of the resource type that this customer managed
     #   permission applies to.
     #
-    #   The format is ` <service-code>:<resource-type> ` and is not case
+    #   The format is ` <service-code>:<resource-type> ` and is case
     #   sensitive. For example, to specify an Amazon EC2 Subnet, you can use
-    #   the string `ec2:subnet`. To see the list of valid values for this
-    #   parameter, query the ListResourceTypes operation.
+    #   the string `ec2:Subnet`. To see the list of valid values for this
+    #   parameter, query the ListResourceTypes operation. This value must
+    #   match the display name of the resource (available in
+    #   `ListResourceTypes`).
     #   @return [String]
     #
     # @!attribute [rw] policy_template
@@ -617,6 +674,8 @@ module Aws::RAM
     #   * An ARN of an IAM user, for example:
     #     `iam::123456789012user/username`
     #
+    #   * A service principal name, for example: `service-id.amazonaws.com`
+    #
     #   <note markdown="1"> Not all resource types can be shared with IAM roles and users. For
     #   more information, see [Sharing with IAM roles and users][2] in the
     #   *Resource Access Manager User Guide*.
@@ -678,8 +737,13 @@ module Aws::RAM
     #   @return [Array<String>]
     #
     # @!attribute [rw] sources
-    #   Specifies from which source accounts the service principal has
-    #   access to the resources in this resource share.
+    #   Specifies source constraints (accounts, ARNs, organization IDs, or
+    #   organization paths) that limit when service principals can access
+    #   resources in this resource share. When a service principal attempts
+    #   to access a shared resource, validation is performed to ensure the
+    #   request originates from one of the specified sources. This helps
+    #   prevent confused deputy attacks by applying constraints on where
+    #   service principals can access resources from.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/CreateResourceShareRequest AWS API Documentation
@@ -1040,6 +1104,8 @@ module Aws::RAM
     #   * An ARN of an IAM user, for example:
     #     `iam::123456789012user/username`
     #
+    #   * A service principal name, for example: `service-id.amazonaws.com`
+    #
     #   <note markdown="1"> Not all resource types can be shared with IAM roles and users. For
     #   more information, see [Sharing with IAM roles and users][2] in the
     #   *Resource Access Manager User Guide*.
@@ -1073,8 +1139,11 @@ module Aws::RAM
     #   @return [String]
     #
     # @!attribute [rw] sources
-    #   Specifies from which source accounts the service principal no longer
-    #   has access to the resources in this resource share.
+    #   Specifies source constraints (accounts, ARNs, organization IDs, or
+    #   organization paths) to remove from the resource share. This enables
+    #   granular management of source constraints while maintaining service
+    #   principal associations. At least one source must remain when service
+    #   principals are present.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/DisassociateResourceShareRequest AWS API Documentation
@@ -2004,6 +2073,8 @@ module Aws::RAM
     #   * An ARN of an IAM user, for example:
     #     `iam::123456789012user/username`
     #
+    #   * A service principal name, for example: `service-id.amazonaws.com`
+    #
     #   <note markdown="1"> Not all resource types can be shared with IAM roles and users. For
     #   more information, see [Sharing with IAM roles and users][2] in the
     #   *Resource Access Manager User Guide*.
@@ -2402,6 +2473,67 @@ module Aws::RAM
     #
     class ListResourcesResponse < Struct.new(
       :resources,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resource_share_arns
+    #   The Amazon Resource Names (ARNs) of the resource shares for which
+    #   you want to retrieve source associations.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] source_id
+    #   The identifier of the source for which you want to retrieve
+    #   associations. This can be an account ID, Amazon Resource Name (ARN),
+    #   organization ID, or organization path.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_type
+    #   The type of source for which you want to retrieve associations.
+    #   @return [String]
+    #
+    # @!attribute [rw] association_status
+    #   The status of the source associations that you want to retrieve.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token that indicates the next set of results to
+    #   retrieve.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/ListSourceAssociationsRequest AWS API Documentation
+    #
+    class ListSourceAssociationsRequest < Struct.new(
+      :resource_share_arns,
+      :source_id,
+      :source_type,
+      :association_status,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] source_associations
+    #   Information about the source associations.
+    #   @return [Array<Types::AssociatedSource>]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token to use to retrieve the next page of results.
+    #   This value is `null` when there are no more results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/ListSourceAssociationsResponse AWS API Documentation
+    #
+    class ListSourceAssociationsResponse < Struct.new(
+      :source_associations,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -3283,8 +3415,9 @@ module Aws::RAM
     end
 
     # The operation failed because it would exceed the limit for resource
-    # shares for your account. To view the limits for your Amazon Web
-    # Services account, see the [RAM page in the Service Quotas console][1].
+    # shares for your account. You can associate up to 100 resources per
+    # call. To view the limits for your Amazon Web Services account, see the
+    # [RAM page in the Service Quotas console][1].
     #
     #
     #
@@ -3708,6 +3841,10 @@ module Aws::RAM
 
     # A tag key and optional list of possible values that you can use to
     # filter results for tagged resources.
+    #
+    # <note markdown="1"> Multiple tag filters are evaluated as an OR condition.
+    #
+    #  </note>
     #
     # @!attribute [rw] tag_key
     #   The tag key. This must have a valid string value and can't be

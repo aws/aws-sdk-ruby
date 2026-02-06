@@ -425,6 +425,15 @@ module Aws::Budgets
     #   which are compared to your actual costs or usage.
     #   @return [Array<Types::BudgetedAndActualAmounts>]
     #
+    # @!attribute [rw] filter_expression
+    #   The filtering dimensions for the budget and their corresponding
+    #   values.
+    #   @return [Types::Expression]
+    #
+    # @!attribute [rw] metrics
+    #   The definition for how the budget data is aggregated.
+    #   @return [Array<String>]
+    #
     class BudgetPerformanceHistory < Struct.new(
       :budget_name,
       :budget_type,
@@ -432,7 +441,9 @@ module Aws::Budgets
       :cost_types,
       :time_unit,
       :billing_view_arn,
-      :budgeted_and_actual_amounts_list)
+      :budgeted_and_actual_amounts_list,
+      :filter_expression,
+      :metrics)
       SENSITIVE = []
       include Aws::Structure
     end

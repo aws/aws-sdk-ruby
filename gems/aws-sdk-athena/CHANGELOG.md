@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.117.0 (2026-02-05)
+------------------
+
+* Feature - Reduces the minimum TargetDpus to create or update capacity reservations from 24 to 4.
+
+1.116.0 (2026-01-16)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.115.0 (2026-01-08)
 ------------------
 

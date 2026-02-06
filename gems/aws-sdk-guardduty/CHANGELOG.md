@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.143.0 (2026-01-22)
+------------------
+
+* Feature - Adding new enum value for ScanStatusReason
+
+1.142.0 (2026-01-16)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.141.0 (2026-01-08)
 ------------------
 

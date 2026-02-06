@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.133.0 (2026-02-03)
+------------------
+
+* Feature - AWS Batch Array Job Visibility feature support. Includes new statusSummaryLastUpdatedAt for array job parent DescribeJobs responses for the last time the statusSummary was updated. Includes both statusSummary and statusSummaryLastUpdatedAt in ListJobs responses for array job parents.
+
+1.132.0 (2026-01-16)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.131.0 (2026-01-08)
 ------------------
 

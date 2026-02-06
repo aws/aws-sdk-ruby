@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.18.0 (2026-02-05)
+------------------
+
+* Feature - Support Browser profile persistence (cookies and local storage) across sessions for AgentCore Browser.
+
+1.17.0 (2026-01-21)
+------------------
+
+* Feature - Supports custom browser extensions for AgentCore Browser and increased message payloads up to 100KB per message in an Event for AgentCore Memory
+
+1.16.0 (2026-01-16)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.15.0 (2026-01-08)
 ------------------
 

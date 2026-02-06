@@ -1178,7 +1178,13 @@ module Aws
                                   ?template_ssm_document_details: {
                                     document_name: ::String,
                                     document_version: ::String?
-                                  }
+                                  },
+                                  ?tags: Array[
+                                    {
+                                      key: ::String?,
+                                      value: ::String?
+                                    },
+                                  ]
                                 ) -> _PutConformancePackResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutConformancePackResponseSuccess
 

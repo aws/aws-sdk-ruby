@@ -4910,7 +4910,7 @@ module Aws::DataSync
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-datasync'
-      context[:gem_version] = '1.118.0'
+      context[:gem_version] = '1.119.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

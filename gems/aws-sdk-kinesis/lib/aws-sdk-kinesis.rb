@@ -73,7 +73,7 @@ module Aws::Kinesis
   autoload :AsyncClient, 'aws-sdk-kinesis/async_client'
   autoload :EventStreams, 'aws-sdk-kinesis/event_streams'
 
-  GEM_VERSION = '1.95.0'
+  GEM_VERSION = '1.97.0'
 
 end
 

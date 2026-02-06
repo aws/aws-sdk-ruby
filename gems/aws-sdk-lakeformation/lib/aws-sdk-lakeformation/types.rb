@@ -445,6 +445,20 @@ module Aws::LakeFormation
       include Aws::Structure
     end
 
+    # Multiple resources exist with the same Amazon S3 location
+    #
+    # @!attribute [rw] message
+    #   A message describing the problem.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/ConflictException AWS API Documentation
+    #
+    class ConflictException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] table_data
     #   A `DataCellsFilter` structure containing information about the data
     #   cells filter.
@@ -1803,6 +1817,78 @@ module Aws::LakeFormation
       include Aws::Structure
     end
 
+    # @!attribute [rw] duration_seconds
+    #   The time period, between 900 and 43,200 seconds, for the timeout of
+    #   the temporary credentials.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] audit_context
+    #   A structure used to include auditing information on the privileged
+    #   API.
+    #   @return [Types::AuditContext]
+    #
+    # @!attribute [rw] data_locations
+    #   The Amazon S3 data location that you want to access.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] credentials_scope
+    #   The credential scope is determined by the caller's Lake Formation
+    #   permission on the associated table. Credential scope can be either:
+    #
+    #   * READ - Provides read-only access to the data location.
+    #
+    #   * READ\_WRITE - Provides both read and write access to the data
+    #     location.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/GetTemporaryDataLocationCredentialsRequest AWS API Documentation
+    #
+    class GetTemporaryDataLocationCredentialsRequest < Struct.new(
+      :duration_seconds,
+      :audit_context,
+      :data_locations,
+      :credentials_scope)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] credentials
+    #   A temporary set of credentials for an Lake Formation user. These
+    #   credentials are scoped down to only access the raw data sources that
+    #   the user has access to.
+    #
+    #   The temporary security credentials consist of an access key and a
+    #   session token. The access key consists of an access key ID and a
+    #   secret key. When the credentials are created, they are associated
+    #   with an IAM access control policy that limits what the user can do
+    #   when using the credentials.
+    #   @return [Types::TemporaryCredentials]
+    #
+    # @!attribute [rw] accessible_data_locations
+    #   Refers to the Amazon S3 locations that can be accessed through the
+    #   `GetTemporaryCredentialsForLocation` API operation.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] credentials_scope
+    #   The credential scope is determined by the caller's Lake Formation
+    #   permission on the associated table. Credential scope can be either:
+    #
+    #   * READ - Provides read-only access to the data location.
+    #
+    #   * READ\_WRITE - Provides both read and write access to the data
+    #     location.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/GetTemporaryDataLocationCredentialsResponse AWS API Documentation
+    #
+    class GetTemporaryDataLocationCredentialsResponse < Struct.new(
+      :credentials,
+      :accessible_data_locations,
+      :credentials_scope)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] table_arn
     #   The ARN of the partitions' table.
     #   @return [String]
@@ -3121,6 +3207,11 @@ module Aws::LakeFormation
     #   supported Lake Formation operations on the registered data location.
     #   @return [Boolean]
     #
+    # @!attribute [rw] expected_resource_owner_account
+    #   The Amazon Web Services account that owns the Glue tables associated
+    #   with specific Amazon S3 locations.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/RegisterResourceRequest AWS API Documentation
     #
     class RegisterResourceRequest < Struct.new(
@@ -3129,7 +3220,8 @@ module Aws::LakeFormation
       :role_arn,
       :with_federation,
       :hybrid_access_enabled,
-      :with_privileged_access)
+      :with_privileged_access,
+      :expected_resource_owner_account)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3272,6 +3364,26 @@ module Aws::LakeFormation
     #   supported Lake Formation operations on the registered data location.
     #   @return [Boolean]
     #
+    # @!attribute [rw] verification_status
+    #   Indicates whether the registered role has sufficient permissions to
+    #   access registered Amazon S3 location. Verification Status can be one
+    #   of the following:
+    #
+    #   * VERIFIED - Registered role has sufficient permissions to access
+    #     registered Amazon S3 location.
+    #
+    #   * NOT\_VERIFIED - Registered role does not have sufficient
+    #     permissions to access registered Amazon S3 location.
+    #
+    #   * VERIFICATION\_FAILED - Unable to verify if the registered role can
+    #     access the registered Amazon S3 location.
+    #   @return [String]
+    #
+    # @!attribute [rw] expected_resource_owner_account
+    #   The Amazon Web Services account that owns the Glue tables associated
+    #   with specific Amazon S3 locations.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/ResourceInfo AWS API Documentation
     #
     class ResourceInfo < Struct.new(
@@ -3280,7 +3392,9 @@ module Aws::LakeFormation
       :last_modified,
       :with_federation,
       :hybrid_access_enabled,
-      :with_privileged_access)
+      :with_privileged_access,
+      :verification_status,
+      :expected_resource_owner_account)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3793,6 +3907,43 @@ module Aws::LakeFormation
       include Aws::Structure
     end
 
+    # A temporary set of credentials for an Lake Formation user. These
+    # credentials are scoped down to only access the raw data sources that
+    # the user has access to.
+    #
+    # The temporary security credentials consist of an access key and a
+    # session token. The access key consists of an access key ID and a
+    # secret key. When the credentials are created, they are associated with
+    # an IAM access control policy that limits what the user can do when
+    # using the credentials.
+    #
+    # @!attribute [rw] access_key_id
+    #   The access key ID for the temporary credentials.
+    #   @return [String]
+    #
+    # @!attribute [rw] secret_access_key
+    #   The secret key for the temporary credentials.
+    #   @return [String]
+    #
+    # @!attribute [rw] session_token
+    #   The session token for the temporary credentials.
+    #   @return [String]
+    #
+    # @!attribute [rw] expiration
+    #   The date and time when the temporary credentials expire.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/TemporaryCredentials AWS API Documentation
+    #
+    class TemporaryCredentials < Struct.new(
+      :access_key_id,
+      :secret_access_key,
+      :session_token,
+      :expiration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains details about an error where the query request was throttled.
     #
     # @!attribute [rw] message
@@ -4039,13 +4190,19 @@ module Aws::LakeFormation
     #   S3 bucket policies.
     #   @return [Boolean]
     #
+    # @!attribute [rw] expected_resource_owner_account
+    #   The Amazon Web Services account that owns the Glue tables associated
+    #   with specific Amazon S3 locations.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/UpdateResourceRequest AWS API Documentation
     #
     class UpdateResourceRequest < Struct.new(
       :role_arn,
       :resource_arn,
       :with_federation,
-      :hybrid_access_enabled)
+      :hybrid_access_enabled,
+      :expected_resource_owner_account)
       SENSITIVE = []
       include Aws::Structure
     end

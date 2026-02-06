@@ -253,6 +253,8 @@ module Aws
         def name: () -> ::String
         def created_at: () -> ::Time
         def view_port: () -> Types::ViewPort
+        def extensions: () -> ::Array[Types::BrowserExtension]
+        def profile_configuration: () -> Types::BrowserProfileConfiguration
         def session_timeout_seconds: () -> ::Integer
         def status: () -> ("READY" | "TERMINATED")
         def streams: () -> Types::BrowserSessionStream
@@ -590,6 +592,24 @@ module Aws
                                    ) -> _RetrieveMemoryRecordsResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RetrieveMemoryRecordsResponseSuccess
 
+      interface _SaveBrowserSessionProfileResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SaveBrowserSessionProfileResponse]
+        def profile_identifier: () -> ::String
+        def browser_identifier: () -> ::String
+        def session_id: () -> ::String
+        def last_updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCore/Client.html#save_browser_session_profile-instance_method
+      def save_browser_session_profile: (
+                                          ?trace_id: ::String,
+                                          ?trace_parent: ::String,
+                                          profile_identifier: ::String,
+                                          browser_identifier: ::String,
+                                          session_id: ::String,
+                                          ?client_token: ::String
+                                        ) -> _SaveBrowserSessionProfileResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SaveBrowserSessionProfileResponseSuccess
+
       interface _StartBrowserSessionResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::StartBrowserSessionResponse]
         def browser_identifier: () -> ::String
@@ -607,6 +627,20 @@ module Aws
                                    ?view_port: {
                                      width: ::Integer,
                                      height: ::Integer
+                                   },
+                                   ?extensions: Array[
+                                     {
+                                       location: {
+                                         s3: {
+                                           bucket: ::String,
+                                           prefix: ::String,
+                                           version_id: ::String?
+                                         }?
+                                       }
+                                     },
+                                   ],
+                                   ?profile_configuration: {
+                                     profile_identifier: ::String
                                    },
                                    ?client_token: ::String
                                  ) -> _StartBrowserSessionResponseSuccess

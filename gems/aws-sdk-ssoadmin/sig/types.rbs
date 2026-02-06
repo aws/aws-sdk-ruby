@@ -61,6 +61,17 @@ module Aws::SSOAdmin
       SENSITIVE: []
     end
 
+    class AddRegionRequest
+      attr_accessor instance_arn: ::String
+      attr_accessor region_name: ::String
+      SENSITIVE: []
+    end
+
+    class AddRegionResponse
+      attr_accessor status: ("ACTIVE" | "ADDING" | "REMOVING")
+      SENSITIVE: []
+    end
+
     class Application
       attr_accessor application_arn: ::String
       attr_accessor application_provider_arn: ::String
@@ -71,6 +82,7 @@ module Aws::SSOAdmin
       attr_accessor portal_options: Types::PortalOptions
       attr_accessor description: ::String
       attr_accessor created_date: ::Time
+      attr_accessor created_from: ::String
       SENSITIVE: []
     end
 
@@ -420,6 +432,7 @@ module Aws::SSOAdmin
       attr_accessor portal_options: Types::PortalOptions
       attr_accessor description: ::String
       attr_accessor created_date: ::Time
+      attr_accessor created_from: ::String
       SENSITIVE: []
     end
 
@@ -471,6 +484,20 @@ module Aws::SSOAdmin
 
     class DescribePermissionSetResponse
       attr_accessor permission_set: Types::PermissionSet
+      SENSITIVE: []
+    end
+
+    class DescribeRegionRequest
+      attr_accessor instance_arn: ::String
+      attr_accessor region_name: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeRegionResponse
+      attr_accessor region_name: ::String
+      attr_accessor status: ("ACTIVE" | "ADDING" | "REMOVING")
+      attr_accessor added_date: ::Time
+      attr_accessor is_primary_region: bool
       SENSITIVE: []
     end
 
@@ -925,6 +952,19 @@ module Aws::SSOAdmin
       SENSITIVE: []
     end
 
+    class ListRegionsRequest
+      attr_accessor instance_arn: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListRegionsResponse
+      attr_accessor regions: ::Array[Types::RegionMetadata]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class ListTagsForResourceRequest
       attr_accessor instance_arn: ::String
       attr_accessor resource_arn: ::String
@@ -1083,6 +1123,25 @@ module Aws::SSOAdmin
     end
 
     class RefreshTokenGrant < Aws::EmptyStructure
+    end
+
+    class RegionMetadata
+      attr_accessor region_name: ::String
+      attr_accessor status: ("ACTIVE" | "ADDING" | "REMOVING")
+      attr_accessor added_date: ::Time
+      attr_accessor is_primary_region: bool
+      SENSITIVE: []
+    end
+
+    class RemoveRegionRequest
+      attr_accessor instance_arn: ::String
+      attr_accessor region_name: ::String
+      SENSITIVE: []
+    end
+
+    class RemoveRegionResponse
+      attr_accessor status: ("ACTIVE" | "ADDING" | "REMOVING")
+      SENSITIVE: []
     end
 
     class ResourceNotFoundException

@@ -84,18 +84,18 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LaunchWizard/Client.html#create_deployment-instance_method
       def create_deployment: (
+                               workload_name: ::String,
                                deployment_pattern_name: ::String,
-                               ?dry_run: bool,
                                name: ::String,
                                specifications: Hash[::String, ::String],
-                               ?tags: Hash[::String, ::String],
-                               workload_name: ::String
+                               ?dry_run: bool,
+                               ?tags: Hash[::String, ::String]
                              ) -> _CreateDeploymentResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDeploymentResponseSuccess
 
       interface _DeleteDeploymentResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteDeploymentOutput]
-        def status: () -> ("COMPLETED" | "CREATING" | "DELETE_IN_PROGRESS" | "DELETE_INITIATING" | "DELETE_FAILED" | "DELETED" | "FAILED" | "IN_PROGRESS" | "VALIDATING")
+        def status: () -> ("COMPLETED" | "CREATING" | "DELETE_IN_PROGRESS" | "DELETE_INITIATING" | "DELETE_FAILED" | "DELETED" | "FAILED" | "IN_PROGRESS" | "VALIDATING" | "UPDATE_IN_PROGRESS" | "UPDATE_COMPLETED" | "UPDATE_FAILED" | "UPDATE_ROLLBACK_COMPLETED" | "UPDATE_ROLLBACK_FAILED")
         def status_reason: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LaunchWizard/Client.html#delete_deployment-instance_method
@@ -114,6 +114,18 @@ module Aws
                           ) -> _GetDeploymentResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDeploymentResponseSuccess
 
+      interface _GetDeploymentPatternVersionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDeploymentPatternVersionOutput]
+        def deployment_pattern_version: () -> Types::DeploymentPatternVersionDataSummary
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LaunchWizard/Client.html#get_deployment_pattern_version-instance_method
+      def get_deployment_pattern_version: (
+                                            workload_name: ::String,
+                                            deployment_pattern_name: ::String,
+                                            deployment_pattern_version_name: ::String
+                                          ) -> _GetDeploymentPatternVersionResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDeploymentPatternVersionResponseSuccess
+
       interface _GetWorkloadResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetWorkloadOutput]
         def workload: () -> Types::WorkloadData
@@ -130,8 +142,8 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LaunchWizard/Client.html#get_workload_deployment_pattern-instance_method
       def get_workload_deployment_pattern: (
-                                             deployment_pattern_name: ::String,
-                                             workload_name: ::String
+                                             workload_name: ::String,
+                                             deployment_pattern_name: ::String
                                            ) -> _GetWorkloadDeploymentPatternResponseSuccess
                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetWorkloadDeploymentPatternResponseSuccess
 
@@ -147,6 +159,26 @@ module Aws
                                     ?next_token: ::String
                                   ) -> _ListDeploymentEventsResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDeploymentEventsResponseSuccess
+
+      interface _ListDeploymentPatternVersionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDeploymentPatternVersionsOutput]
+        def deployment_pattern_versions: () -> ::Array[Types::DeploymentPatternVersionDataSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LaunchWizard/Client.html#list_deployment_pattern_versions-instance_method
+      def list_deployment_pattern_versions: (
+                                              workload_name: ::String,
+                                              deployment_pattern_name: ::String,
+                                              ?max_results: ::Integer,
+                                              ?next_token: ::String,
+                                              ?filters: Array[
+                                                {
+                                                  name: ("updateFromVersion"),
+                                                  values: Array[::String]
+                                                },
+                                              ]
+                                            ) -> _ListDeploymentPatternVersionsResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDeploymentPatternVersionsResponseSuccess
 
       interface _ListDeploymentsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListDeploymentsOutput]
@@ -178,21 +210,21 @@ module Aws
 
       interface _ListWorkloadDeploymentPatternsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListWorkloadDeploymentPatternsOutput]
-        def next_token: () -> ::String
         def workload_deployment_patterns: () -> ::Array[Types::WorkloadDeploymentPatternDataSummary]
+        def next_token: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LaunchWizard/Client.html#list_workload_deployment_patterns-instance_method
       def list_workload_deployment_patterns: (
+                                               workload_name: ::String,
                                                ?max_results: ::Integer,
-                                               ?next_token: ::String,
-                                               workload_name: ::String
+                                               ?next_token: ::String
                                              ) -> _ListWorkloadDeploymentPatternsResponseSuccess
                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListWorkloadDeploymentPatternsResponseSuccess
 
       interface _ListWorkloadsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListWorkloadsOutput]
-        def next_token: () -> ::String
         def workloads: () -> ::Array[Types::WorkloadDataSummary]
+        def next_token: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LaunchWizard/Client.html#list_workloads-instance_method
       def list_workloads: (
@@ -220,6 +252,21 @@ module Aws
                             tag_keys: Array[::String]
                           ) -> _UntagResourceResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateDeploymentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateDeploymentOutput]
+        def deployment: () -> Types::DeploymentDataSummary
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LaunchWizard/Client.html#update_deployment-instance_method
+      def update_deployment: (
+                               deployment_id: ::String,
+                               specifications: Hash[::String, ::String],
+                               ?workload_version_name: ::String,
+                               ?deployment_pattern_version_name: ::String,
+                               ?dry_run: bool,
+                               ?force: bool
+                             ) -> _UpdateDeploymentResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDeploymentResponseSuccess
     end
   end
 end

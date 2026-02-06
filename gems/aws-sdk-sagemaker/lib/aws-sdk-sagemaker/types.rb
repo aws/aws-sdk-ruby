@@ -16205,6 +16205,12 @@ module Aws::SageMaker
     #   Failure reason of the cluster policy.
     #   @return [String]
     #
+    # @!attribute [rw] status_details
+    #   Additional details about the status of the cluster policy. This
+    #   field provides context when the policy is in a non-active state,
+    #   such as during creation, updates, or if failures occur.
+    #   @return [Hash<String,String>]
+    #
     # @!attribute [rw] cluster_arn
     #   ARN of the cluster where the cluster policy is applied.
     #   @return [String]
@@ -16246,6 +16252,7 @@ module Aws::SageMaker
       :cluster_scheduler_config_version,
       :status,
       :failure_reason,
+      :status_details,
       :cluster_arn,
       :scheduler_config,
       :description,
@@ -46009,11 +46016,20 @@ module Aws::SageMaker
     #   Default is `50`.
     #   @return [Integer]
     #
+    # @!attribute [rw] absolute_borrow_limits
+    #   The absolute limits on compute resources that can be borrowed from
+    #   idle compute. When specified, these limits define the maximum amount
+    #   of specific resource types (such as accelerators, vCPU, or memory)
+    #   that an entity can borrow, regardless of the percentage-based
+    #   `BorrowLimit`.
+    #   @return [Array<Types::ComputeQuotaResourceConfig>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ResourceSharingConfig AWS API Documentation
     #
     class ResourceSharingConfig < Struct.new(
       :strategy,
-      :borrow_limit)
+      :borrow_limit,
+      :absolute_borrow_limits)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -46812,11 +46828,18 @@ module Aws::SageMaker
     #   Default is `Enabled`.
     #   @return [String]
     #
+    # @!attribute [rw] idle_resource_sharing
+    #   Configuration for sharing idle compute resources across entities in
+    #   the cluster. When enabled, unallocated resources are automatically
+    #   calculated and made available for entities to borrow.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/SchedulerConfig AWS API Documentation
     #
     class SchedulerConfig < Struct.new(
       :priority_classes,
-      :fair_share)
+      :fair_share,
+      :idle_resource_sharing)
       SENSITIVE = []
       include Aws::Structure
     end

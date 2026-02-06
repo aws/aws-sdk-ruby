@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.21.0 (2026-02-03)
+------------------
+
+* Feature - Added support for optional style parameters in maps, including 3D terrain and 3D Buildings
+
+1.20.0 (2026-01-16)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.19.0 (2026-01-08)
 ------------------
 

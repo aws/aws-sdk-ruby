@@ -9947,7 +9947,7 @@ module Aws::Redshift
     # @option params [Integer] :defer_maintenance_duration
     #   An integer indicating the duration of the maintenance window in days.
     #   If you specify a duration, you can't specify an end time. The
-    #   duration must be 45 days or less.
+    #   duration must be 60 days or less.
     #
     # @return [Types::ModifyClusterMaintenanceResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -13275,7 +13275,7 @@ module Aws::Redshift
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-redshift'
-      context[:gem_version] = '1.154.0'
+      context[:gem_version] = '1.156.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -382,6 +382,8 @@ module Aws::Connect
     CreateSecurityProfileResponse = Shapes::StructureShape.new(name: 'CreateSecurityProfileResponse')
     CreateTaskTemplateRequest = Shapes::StructureShape.new(name: 'CreateTaskTemplateRequest')
     CreateTaskTemplateResponse = Shapes::StructureShape.new(name: 'CreateTaskTemplateResponse')
+    CreateTestCaseRequest = Shapes::StructureShape.new(name: 'CreateTestCaseRequest')
+    CreateTestCaseResponse = Shapes::StructureShape.new(name: 'CreateTestCaseResponse')
     CreateTrafficDistributionGroupRequest = Shapes::StructureShape.new(name: 'CreateTrafficDistributionGroupRequest')
     CreateTrafficDistributionGroupResponse = Shapes::StructureShape.new(name: 'CreateTrafficDistributionGroupResponse')
     CreateUseCaseRequest = Shapes::StructureShape.new(name: 'CreateUseCaseRequest')
@@ -499,6 +501,8 @@ module Aws::Connect
     DeleteSecurityProfileRequest = Shapes::StructureShape.new(name: 'DeleteSecurityProfileRequest')
     DeleteTaskTemplateRequest = Shapes::StructureShape.new(name: 'DeleteTaskTemplateRequest')
     DeleteTaskTemplateResponse = Shapes::StructureShape.new(name: 'DeleteTaskTemplateResponse')
+    DeleteTestCaseRequest = Shapes::StructureShape.new(name: 'DeleteTestCaseRequest')
+    DeleteTestCaseResponse = Shapes::StructureShape.new(name: 'DeleteTestCaseResponse')
     DeleteTrafficDistributionGroupRequest = Shapes::StructureShape.new(name: 'DeleteTrafficDistributionGroupRequest')
     DeleteTrafficDistributionGroupResponse = Shapes::StructureShape.new(name: 'DeleteTrafficDistributionGroupResponse')
     DeleteUseCaseRequest = Shapes::StructureShape.new(name: 'DeleteUseCaseRequest')
@@ -564,6 +568,8 @@ module Aws::Connect
     DescribeRuleResponse = Shapes::StructureShape.new(name: 'DescribeRuleResponse')
     DescribeSecurityProfileRequest = Shapes::StructureShape.new(name: 'DescribeSecurityProfileRequest')
     DescribeSecurityProfileResponse = Shapes::StructureShape.new(name: 'DescribeSecurityProfileResponse')
+    DescribeTestCaseRequest = Shapes::StructureShape.new(name: 'DescribeTestCaseRequest')
+    DescribeTestCaseResponse = Shapes::StructureShape.new(name: 'DescribeTestCaseResponse')
     DescribeTrafficDistributionGroupRequest = Shapes::StructureShape.new(name: 'DescribeTrafficDistributionGroupRequest')
     DescribeTrafficDistributionGroupResponse = Shapes::StructureShape.new(name: 'DescribeTrafficDistributionGroupResponse')
     DescribeUserHierarchyGroupRequest = Shapes::StructureShape.new(name: 'DescribeUserHierarchyGroupRequest')
@@ -771,6 +777,15 @@ module Aws::Connect
     EvaluationQuestionAnswerAnalysisDetails = Shapes::UnionShape.new(name: 'EvaluationQuestionAnswerAnalysisDetails')
     EvaluationQuestionAnswerAnalysisType = Shapes::StringShape.new(name: 'EvaluationQuestionAnswerAnalysisType')
     EvaluationQuestionInputDetails = Shapes::StructureShape.new(name: 'EvaluationQuestionInputDetails')
+    EvaluationReviewConfiguration = Shapes::StructureShape.new(name: 'EvaluationReviewConfiguration')
+    EvaluationReviewMetadata = Shapes::StructureShape.new(name: 'EvaluationReviewMetadata')
+    EvaluationReviewNotificationRecipient = Shapes::StructureShape.new(name: 'EvaluationReviewNotificationRecipient')
+    EvaluationReviewNotificationRecipientList = Shapes::ListShape.new(name: 'EvaluationReviewNotificationRecipientList')
+    EvaluationReviewNotificationRecipientType = Shapes::StringShape.new(name: 'EvaluationReviewNotificationRecipientType')
+    EvaluationReviewNotificationRecipientValue = Shapes::StructureShape.new(name: 'EvaluationReviewNotificationRecipientValue')
+    EvaluationReviewRequestComment = Shapes::StructureShape.new(name: 'EvaluationReviewRequestComment')
+    EvaluationReviewRequestCommentContent = Shapes::StringShape.new(name: 'EvaluationReviewRequestCommentContent')
+    EvaluationReviewRequestCommentList = Shapes::ListShape.new(name: 'EvaluationReviewRequestCommentList')
     EvaluationScore = Shapes::StructureShape.new(name: 'EvaluationScore')
     EvaluationScorePercentage = Shapes::FloatShape.new(name: 'EvaluationScorePercentage')
     EvaluationScoresMap = Shapes::MapShape.new(name: 'EvaluationScoresMap')
@@ -798,6 +813,10 @@ module Aws::Connect
     EventBridgeActionDefinition = Shapes::StructureShape.new(name: 'EventBridgeActionDefinition')
     EventBridgeActionName = Shapes::StringShape.new(name: 'EventBridgeActionName')
     EventSourceName = Shapes::StringShape.new(name: 'EventSourceName')
+    ExecutionRecord = Shapes::StructureShape.new(name: 'ExecutionRecord')
+    ExecutionRecordList = Shapes::ListShape.new(name: 'ExecutionRecordList')
+    ExecutionRecordStatus = Shapes::StringShape.new(name: 'ExecutionRecordStatus')
+    ExecutionRecordString = Shapes::StringShape.new(name: 'ExecutionRecordString')
     Expiry = Shapes::StructureShape.new(name: 'Expiry')
     ExpiryDurationInMinutes = Shapes::IntegerShape.new(name: 'ExpiryDurationInMinutes')
     ExportLocation = Shapes::StringShape.new(name: 'ExportLocation')
@@ -865,6 +884,8 @@ module Aws::Connect
     GetPromptFileResponse = Shapes::StructureShape.new(name: 'GetPromptFileResponse')
     GetTaskTemplateRequest = Shapes::StructureShape.new(name: 'GetTaskTemplateRequest')
     GetTaskTemplateResponse = Shapes::StructureShape.new(name: 'GetTaskTemplateResponse')
+    GetTestCaseExecutionSummaryRequest = Shapes::StructureShape.new(name: 'GetTestCaseExecutionSummaryRequest')
+    GetTestCaseExecutionSummaryResponse = Shapes::StructureShape.new(name: 'GetTestCaseExecutionSummaryResponse')
     GetTrafficDistributionRequest = Shapes::StructureShape.new(name: 'GetTrafficDistributionRequest')
     GetTrafficDistributionResponse = Shapes::StructureShape.new(name: 'GetTrafficDistributionResponse')
     GlobalResiliencyMetadata = Shapes::StructureShape.new(name: 'GlobalResiliencyMetadata')
@@ -977,6 +998,7 @@ module Aws::Connect
     InvalidParameterException = Shapes::StructureShape.new(name: 'InvalidParameterException')
     InvalidRequestException = Shapes::StructureShape.new(name: 'InvalidRequestException')
     InvalidRequestExceptionReason = Shapes::UnionShape.new(name: 'InvalidRequestExceptionReason')
+    InvalidTestCaseException = Shapes::StructureShape.new(name: 'InvalidTestCaseException')
     InvisibleFieldInfo = Shapes::StructureShape.new(name: 'InvisibleFieldInfo')
     InvisibleTaskTemplateFields = Shapes::ListShape.new(name: 'InvisibleTaskTemplateFields')
     IpCidr = Shapes::StringShape.new(name: 'IpCidr')
@@ -1105,6 +1127,12 @@ module Aws::Connect
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     ListTaskTemplatesRequest = Shapes::StructureShape.new(name: 'ListTaskTemplatesRequest')
     ListTaskTemplatesResponse = Shapes::StructureShape.new(name: 'ListTaskTemplatesResponse')
+    ListTestCaseExecutionRecordsRequest = Shapes::StructureShape.new(name: 'ListTestCaseExecutionRecordsRequest')
+    ListTestCaseExecutionRecordsResponse = Shapes::StructureShape.new(name: 'ListTestCaseExecutionRecordsResponse')
+    ListTestCaseExecutionsRequest = Shapes::StructureShape.new(name: 'ListTestCaseExecutionsRequest')
+    ListTestCaseExecutionsResponse = Shapes::StructureShape.new(name: 'ListTestCaseExecutionsResponse')
+    ListTestCasesRequest = Shapes::StructureShape.new(name: 'ListTestCasesRequest')
+    ListTestCasesResponse = Shapes::StructureShape.new(name: 'ListTestCasesResponse')
     ListTrafficDistributionGroupUsersRequest = Shapes::StructureShape.new(name: 'ListTrafficDistributionGroupUsersRequest')
     ListTrafficDistributionGroupUsersResponse = Shapes::StructureShape.new(name: 'ListTrafficDistributionGroupUsersResponse')
     ListTrafficDistributionGroupsRequest = Shapes::StructureShape.new(name: 'ListTrafficDistributionGroupsRequest')
@@ -1203,6 +1231,7 @@ module Aws::Connect
     NumberReference = Shapes::StructureShape.new(name: 'NumberReference')
     NumericQuestionPropertyAutomationLabel = Shapes::StringShape.new(name: 'NumericQuestionPropertyAutomationLabel')
     NumericQuestionPropertyValueAutomation = Shapes::StructureShape.new(name: 'NumericQuestionPropertyValueAutomation')
+    ObservationSummary = Shapes::StructureShape.new(name: 'ObservationSummary')
     OperatingSystem = Shapes::StringShape.new(name: 'OperatingSystem')
     OperationalHour = Shapes::StructureShape.new(name: 'OperationalHour')
     OperationalHours = Shapes::ListShape.new(name: 'OperationalHours')
@@ -1563,6 +1592,8 @@ module Aws::Connect
     SearchRoutingProfilesResponse = Shapes::StructureShape.new(name: 'SearchRoutingProfilesResponse')
     SearchSecurityProfilesRequest = Shapes::StructureShape.new(name: 'SearchSecurityProfilesRequest')
     SearchSecurityProfilesResponse = Shapes::StructureShape.new(name: 'SearchSecurityProfilesResponse')
+    SearchTestCasesRequest = Shapes::StructureShape.new(name: 'SearchTestCasesRequest')
+    SearchTestCasesResponse = Shapes::StructureShape.new(name: 'SearchTestCasesResponse')
     SearchText = Shapes::StringShape.new(name: 'SearchText')
     SearchTextList = Shapes::ListShape.new(name: 'SearchTextList')
     SearchUserHierarchyGroupsRequest = Shapes::StructureShape.new(name: 'SearchUserHierarchyGroupsRequest')
@@ -1673,6 +1704,8 @@ module Aws::Connect
     StartScreenSharingResponse = Shapes::StructureShape.new(name: 'StartScreenSharingResponse')
     StartTaskContactRequest = Shapes::StructureShape.new(name: 'StartTaskContactRequest')
     StartTaskContactResponse = Shapes::StructureShape.new(name: 'StartTaskContactResponse')
+    StartTestCaseExecutionRequest = Shapes::StructureShape.new(name: 'StartTestCaseExecutionRequest')
+    StartTestCaseExecutionResponse = Shapes::StructureShape.new(name: 'StartTestCaseExecutionResponse')
     StartWebRTCContactRequest = Shapes::StructureShape.new(name: 'StartWebRTCContactRequest')
     StartWebRTCContactResponse = Shapes::StructureShape.new(name: 'StartWebRTCContactResponse')
     StateTransition = Shapes::StructureShape.new(name: 'StateTransition')
@@ -1689,6 +1722,8 @@ module Aws::Connect
     StopContactResponse = Shapes::StructureShape.new(name: 'StopContactResponse')
     StopContactStreamingRequest = Shapes::StructureShape.new(name: 'StopContactStreamingRequest')
     StopContactStreamingResponse = Shapes::StructureShape.new(name: 'StopContactStreamingResponse')
+    StopTestCaseExecutionRequest = Shapes::StructureShape.new(name: 'StopTestCaseExecutionRequest')
+    StopTestCaseExecutionResponse = Shapes::StructureShape.new(name: 'StopTestCaseExecutionResponse')
     StorageType = Shapes::StringShape.new(name: 'StorageType')
     StreamingId = Shapes::StringShape.new(name: 'StreamingId')
     String = Shapes::StringShape.new(name: 'String')
@@ -1729,6 +1764,8 @@ module Aws::Connect
     TargetListType = Shapes::StringShape.new(name: 'TargetListType')
     TargetSlaMinutes = Shapes::IntegerShape.new(name: 'TargetSlaMinutes')
     TaskActionDefinition = Shapes::StructureShape.new(name: 'TaskActionDefinition')
+    TaskAttachment = Shapes::StructureShape.new(name: 'TaskAttachment')
+    TaskAttachments = Shapes::ListShape.new(name: 'TaskAttachments')
     TaskDescriptionExpression = Shapes::StringShape.new(name: 'TaskDescriptionExpression')
     TaskNameExpression = Shapes::StringShape.new(name: 'TaskNameExpression')
     TaskTemplateArn = Shapes::StringShape.new(name: 'TaskTemplateArn')
@@ -1755,6 +1792,27 @@ module Aws::Connect
     TemplateAttributes = Shapes::StructureShape.new(name: 'TemplateAttributes')
     TemplateId = Shapes::StringShape.new(name: 'TemplateId')
     TemplatedMessageConfig = Shapes::StructureShape.new(name: 'TemplatedMessageConfig')
+    TestCase = Shapes::StructureShape.new(name: 'TestCase')
+    TestCaseContent = Shapes::StringShape.new(name: 'TestCaseContent')
+    TestCaseDescription = Shapes::StringShape.new(name: 'TestCaseDescription')
+    TestCaseEntryPoint = Shapes::StructureShape.new(name: 'TestCaseEntryPoint')
+    TestCaseEntryPointType = Shapes::StringShape.new(name: 'TestCaseEntryPointType')
+    TestCaseExecution = Shapes::StructureShape.new(name: 'TestCaseExecution')
+    TestCaseExecutionId = Shapes::StringShape.new(name: 'TestCaseExecutionId')
+    TestCaseExecutionList = Shapes::ListShape.new(name: 'TestCaseExecutionList')
+    TestCaseExecutionStatus = Shapes::StringShape.new(name: 'TestCaseExecutionStatus')
+    TestCaseId = Shapes::StringShape.new(name: 'TestCaseId')
+    TestCaseInitializationData = Shapes::StringShape.new(name: 'TestCaseInitializationData')
+    TestCaseName = Shapes::StringShape.new(name: 'TestCaseName')
+    TestCaseResourceId = Shapes::StringShape.new(name: 'TestCaseResourceId')
+    TestCaseSearchConditionList = Shapes::ListShape.new(name: 'TestCaseSearchConditionList')
+    TestCaseSearchCriteria = Shapes::StructureShape.new(name: 'TestCaseSearchCriteria')
+    TestCaseSearchFilter = Shapes::StructureShape.new(name: 'TestCaseSearchFilter')
+    TestCaseSearchSummaryList = Shapes::ListShape.new(name: 'TestCaseSearchSummaryList')
+    TestCaseSha256 = Shapes::StringShape.new(name: 'TestCaseSha256')
+    TestCaseStatus = Shapes::StringShape.new(name: 'TestCaseStatus')
+    TestCaseSummary = Shapes::StructureShape.new(name: 'TestCaseSummary')
+    TestCaseSummaryList = Shapes::ListShape.new(name: 'TestCaseSummaryList')
     ThemeImageLink = Shapes::StringShape.new(name: 'ThemeImageLink')
     ThemeString = Shapes::StringShape.new(name: 'ThemeString')
     Threshold = Shapes::StructureShape.new(name: 'Threshold')
@@ -1861,6 +1919,8 @@ module Aws::Connect
     UpdateSecurityProfileRequest = Shapes::StructureShape.new(name: 'UpdateSecurityProfileRequest')
     UpdateTaskTemplateRequest = Shapes::StructureShape.new(name: 'UpdateTaskTemplateRequest')
     UpdateTaskTemplateResponse = Shapes::StructureShape.new(name: 'UpdateTaskTemplateResponse')
+    UpdateTestCaseRequest = Shapes::StructureShape.new(name: 'UpdateTestCaseRequest')
+    UpdateTestCaseResponse = Shapes::StructureShape.new(name: 'UpdateTestCaseResponse')
     UpdateTrafficDistributionRequest = Shapes::StructureShape.new(name: 'UpdateTrafficDistributionRequest')
     UpdateTrafficDistributionResponse = Shapes::StructureShape.new(name: 'UpdateTrafficDistributionResponse')
     UpdateUserHierarchyGroupNameRequest = Shapes::StructureShape.new(name: 'UpdateUserHierarchyGroupNameRequest')
@@ -1970,6 +2030,7 @@ module Aws::Connect
     VocabularyState = Shapes::StringShape.new(name: 'VocabularyState')
     VocabularySummary = Shapes::StructureShape.new(name: 'VocabularySummary')
     VocabularySummaryList = Shapes::ListShape.new(name: 'VocabularySummaryList')
+    VoiceCallEntryPointParameters = Shapes::StructureShape.new(name: 'VoiceCallEntryPointParameters')
     VoiceRecordingConfiguration = Shapes::StructureShape.new(name: 'VoiceRecordingConfiguration')
     VoiceRecordingTrack = Shapes::StringShape.new(name: 'VoiceRecordingTrack')
     WeekdayOccurrenceInteger = Shapes::IntegerShape.new(name: 'WeekdayOccurrenceInteger')
@@ -2951,6 +3012,7 @@ module Aws::Connect
     ContactSearchSummary.add_member(:segment_attributes, Shapes::ShapeRef.new(shape: ContactSearchSummarySegmentAttributes, location_name: "SegmentAttributes"))
     ContactSearchSummary.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "Name"))
     ContactSearchSummary.add_member(:routing_criteria, Shapes::ShapeRef.new(shape: RoutingCriteria, location_name: "RoutingCriteria"))
+    ContactSearchSummary.add_member(:tags, Shapes::ShapeRef.new(shape: ContactTagMap, location_name: "Tags"))
     ContactSearchSummary.add_member(:global_resiliency_metadata, Shapes::ShapeRef.new(shape: GlobalResiliencyMetadata, location_name: "GlobalResiliencyMetadata"))
     ContactSearchSummary.struct_class = Types::ContactSearchSummary
 
@@ -3141,6 +3203,7 @@ module Aws::Connect
     CreateEvaluationFormRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     CreateEvaluationFormRequest.add_member(:as_draft, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "AsDraft"))
     CreateEvaluationFormRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    CreateEvaluationFormRequest.add_member(:review_configuration, Shapes::ShapeRef.new(shape: EvaluationReviewConfiguration, location_name: "ReviewConfiguration"))
     CreateEvaluationFormRequest.add_member(:target_configuration, Shapes::ShapeRef.new(shape: EvaluationFormTargetConfiguration, location_name: "TargetConfiguration"))
     CreateEvaluationFormRequest.add_member(:language_configuration, Shapes::ShapeRef.new(shape: EvaluationFormLanguageConfiguration, location_name: "LanguageConfiguration"))
     CreateEvaluationFormRequest.struct_class = Types::CreateEvaluationFormRequest
@@ -3338,6 +3401,23 @@ module Aws::Connect
     CreateTaskTemplateResponse.add_member(:id, Shapes::ShapeRef.new(shape: TaskTemplateId, required: true, location_name: "Id"))
     CreateTaskTemplateResponse.add_member(:arn, Shapes::ShapeRef.new(shape: TaskTemplateArn, required: true, location_name: "Arn"))
     CreateTaskTemplateResponse.struct_class = Types::CreateTaskTemplateResponse
+
+    CreateTestCaseRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceIdOrArn, required: true, location: "uri", location_name: "InstanceId"))
+    CreateTestCaseRequest.add_member(:name, Shapes::ShapeRef.new(shape: TestCaseName, required: true, location_name: "Name"))
+    CreateTestCaseRequest.add_member(:description, Shapes::ShapeRef.new(shape: TestCaseDescription, location_name: "Description"))
+    CreateTestCaseRequest.add_member(:content, Shapes::ShapeRef.new(shape: TestCaseContent, required: true, location_name: "Content"))
+    CreateTestCaseRequest.add_member(:entry_point, Shapes::ShapeRef.new(shape: TestCaseEntryPoint, location_name: "EntryPoint"))
+    CreateTestCaseRequest.add_member(:initialization_data, Shapes::ShapeRef.new(shape: TestCaseInitializationData, location_name: "InitializationData"))
+    CreateTestCaseRequest.add_member(:status, Shapes::ShapeRef.new(shape: TestCaseStatus, location_name: "Status"))
+    CreateTestCaseRequest.add_member(:test_case_id, Shapes::ShapeRef.new(shape: TestCaseId, location: "header", location_name: "x-amz-resource-id"))
+    CreateTestCaseRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    CreateTestCaseRequest.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location: "header", location_name: "x-amz-last-modified-time"))
+    CreateTestCaseRequest.add_member(:last_modified_region, Shapes::ShapeRef.new(shape: RegionName, location: "header", location_name: "x-amz-last-modified-region"))
+    CreateTestCaseRequest.struct_class = Types::CreateTestCaseRequest
+
+    CreateTestCaseResponse.add_member(:test_case_id, Shapes::ShapeRef.new(shape: TestCaseId, location_name: "TestCaseId"))
+    CreateTestCaseResponse.add_member(:test_case_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "TestCaseArn"))
+    CreateTestCaseResponse.struct_class = Types::CreateTestCaseResponse
 
     CreateTrafficDistributionGroupRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name128, required: true, location_name: "Name"))
     CreateTrafficDistributionGroupRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description250, location_name: "Description"))
@@ -3776,6 +3856,12 @@ module Aws::Connect
 
     DeleteTaskTemplateResponse.struct_class = Types::DeleteTaskTemplateResponse
 
+    DeleteTestCaseRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceIdOrArn, required: true, location: "uri", location_name: "InstanceId"))
+    DeleteTestCaseRequest.add_member(:test_case_id, Shapes::ShapeRef.new(shape: TestCaseId, required: true, location: "uri", location_name: "TestCaseId"))
+    DeleteTestCaseRequest.struct_class = Types::DeleteTestCaseRequest
+
+    DeleteTestCaseResponse.struct_class = Types::DeleteTestCaseResponse
+
     DeleteTrafficDistributionGroupRequest.add_member(:traffic_distribution_group_id, Shapes::ShapeRef.new(shape: TrafficDistributionGroupIdOrArn, required: true, location: "uri", location_name: "TrafficDistributionGroupId"))
     DeleteTrafficDistributionGroupRequest.struct_class = Types::DeleteTrafficDistributionGroupRequest
 
@@ -4016,6 +4102,14 @@ module Aws::Connect
 
     DescribeSecurityProfileResponse.add_member(:security_profile, Shapes::ShapeRef.new(shape: SecurityProfile, location_name: "SecurityProfile"))
     DescribeSecurityProfileResponse.struct_class = Types::DescribeSecurityProfileResponse
+
+    DescribeTestCaseRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceIdOrArn, required: true, location: "uri", location_name: "InstanceId"))
+    DescribeTestCaseRequest.add_member(:test_case_id, Shapes::ShapeRef.new(shape: TestCaseId, required: true, location: "uri", location_name: "TestCaseId"))
+    DescribeTestCaseRequest.add_member(:status, Shapes::ShapeRef.new(shape: TestCaseStatus, location: "querystring", location_name: "status"))
+    DescribeTestCaseRequest.struct_class = Types::DescribeTestCaseRequest
+
+    DescribeTestCaseResponse.add_member(:test_case, Shapes::ShapeRef.new(shape: TestCase, location_name: "TestCase"))
+    DescribeTestCaseResponse.struct_class = Types::DescribeTestCaseResponse
 
     DescribeTrafficDistributionGroupRequest.add_member(:traffic_distribution_group_id, Shapes::ShapeRef.new(shape: TrafficDistributionGroupIdOrArn, required: true, location: "uri", location_name: "TrafficDistributionGroupId"))
     DescribeTrafficDistributionGroupRequest.struct_class = Types::DescribeTrafficDistributionGroupRequest
@@ -4389,6 +4483,7 @@ module Aws::Connect
     EvaluationForm.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "LastModifiedTime"))
     EvaluationForm.add_member(:last_modified_by, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "LastModifiedBy"))
     EvaluationForm.add_member(:auto_evaluation_configuration, Shapes::ShapeRef.new(shape: EvaluationFormAutoEvaluationConfiguration, location_name: "AutoEvaluationConfiguration"))
+    EvaluationForm.add_member(:review_configuration, Shapes::ShapeRef.new(shape: EvaluationReviewConfiguration, location_name: "ReviewConfiguration"))
     EvaluationForm.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     EvaluationForm.add_member(:target_configuration, Shapes::ShapeRef.new(shape: EvaluationFormTargetConfiguration, location_name: "TargetConfiguration"))
     EvaluationForm.add_member(:language_configuration, Shapes::ShapeRef.new(shape: EvaluationFormLanguageConfiguration, location_name: "LanguageConfiguration"))
@@ -4407,6 +4502,7 @@ module Aws::Connect
     EvaluationFormContent.add_member(:auto_evaluation_configuration, Shapes::ShapeRef.new(shape: EvaluationFormAutoEvaluationConfiguration, location_name: "AutoEvaluationConfiguration"))
     EvaluationFormContent.add_member(:target_configuration, Shapes::ShapeRef.new(shape: EvaluationFormTargetConfiguration, location_name: "TargetConfiguration"))
     EvaluationFormContent.add_member(:language_configuration, Shapes::ShapeRef.new(shape: EvaluationFormLanguageConfiguration, location_name: "LanguageConfiguration"))
+    EvaluationFormContent.add_member(:review_configuration, Shapes::ShapeRef.new(shape: EvaluationReviewConfiguration, location_name: "ReviewConfiguration"))
     EvaluationFormContent.struct_class = Types::EvaluationFormContent
 
     EvaluationFormItem.add_member(:section, Shapes::ShapeRef.new(shape: EvaluationFormSection, location_name: "Section"))
@@ -4648,6 +4744,7 @@ module Aws::Connect
     EvaluationMetadata.add_member(:score, Shapes::ShapeRef.new(shape: EvaluationScore, location_name: "Score"))
     EvaluationMetadata.add_member(:auto_evaluation, Shapes::ShapeRef.new(shape: AutoEvaluationDetails, location_name: "AutoEvaluation"))
     EvaluationMetadata.add_member(:acknowledgement, Shapes::ShapeRef.new(shape: EvaluationAcknowledgement, location_name: "Acknowledgement"))
+    EvaluationMetadata.add_member(:review, Shapes::ShapeRef.new(shape: EvaluationReviewMetadata, location_name: "Review"))
     EvaluationMetadata.add_member(:contact_participant, Shapes::ShapeRef.new(shape: EvaluationContactParticipant, location_name: "ContactParticipant"))
     EvaluationMetadata.add_member(:sampling_job_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "SamplingJobId"))
     EvaluationMetadata.struct_class = Types::EvaluationMetadata
@@ -4668,6 +4765,32 @@ module Aws::Connect
 
     EvaluationQuestionInputDetails.add_member(:transcript_type, Shapes::ShapeRef.new(shape: EvaluationTranscriptType, location_name: "TranscriptType"))
     EvaluationQuestionInputDetails.struct_class = Types::EvaluationQuestionInputDetails
+
+    EvaluationReviewConfiguration.add_member(:review_notification_recipients, Shapes::ShapeRef.new(shape: EvaluationReviewNotificationRecipientList, required: true, location_name: "ReviewNotificationRecipients"))
+    EvaluationReviewConfiguration.add_member(:eligibility_days, Shapes::ShapeRef.new(shape: Integer, location_name: "EligibilityDays"))
+    EvaluationReviewConfiguration.struct_class = Types::EvaluationReviewConfiguration
+
+    EvaluationReviewMetadata.add_member(:review_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "ReviewId"))
+    EvaluationReviewMetadata.add_member(:created_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreatedTime"))
+    EvaluationReviewMetadata.add_member(:created_by, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "CreatedBy"))
+    EvaluationReviewMetadata.add_member(:review_request_comments, Shapes::ShapeRef.new(shape: EvaluationReviewRequestCommentList, required: true, location_name: "ReviewRequestComments"))
+    EvaluationReviewMetadata.struct_class = Types::EvaluationReviewMetadata
+
+    EvaluationReviewNotificationRecipient.add_member(:type, Shapes::ShapeRef.new(shape: EvaluationReviewNotificationRecipientType, required: true, location_name: "Type"))
+    EvaluationReviewNotificationRecipient.add_member(:value, Shapes::ShapeRef.new(shape: EvaluationReviewNotificationRecipientValue, required: true, location_name: "Value"))
+    EvaluationReviewNotificationRecipient.struct_class = Types::EvaluationReviewNotificationRecipient
+
+    EvaluationReviewNotificationRecipientList.member = Shapes::ShapeRef.new(shape: EvaluationReviewNotificationRecipient)
+
+    EvaluationReviewNotificationRecipientValue.add_member(:user_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "UserId"))
+    EvaluationReviewNotificationRecipientValue.struct_class = Types::EvaluationReviewNotificationRecipientValue
+
+    EvaluationReviewRequestComment.add_member(:comment, Shapes::ShapeRef.new(shape: EvaluationReviewRequestCommentContent, location_name: "Comment"))
+    EvaluationReviewRequestComment.add_member(:created_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedTime"))
+    EvaluationReviewRequestComment.add_member(:created_by, Shapes::ShapeRef.new(shape: ARN, location_name: "CreatedBy"))
+    EvaluationReviewRequestComment.struct_class = Types::EvaluationReviewRequestComment
+
+    EvaluationReviewRequestCommentList.member = Shapes::ShapeRef.new(shape: EvaluationReviewRequestComment)
 
     EvaluationScore.add_member(:percentage, Shapes::ShapeRef.new(shape: EvaluationScorePercentage, location_name: "Percentage"))
     EvaluationScore.add_member(:not_applicable, Shapes::ShapeRef.new(shape: Boolean, location_name: "NotApplicable"))
@@ -4770,6 +4893,14 @@ module Aws::Connect
 
     EventBridgeActionDefinition.add_member(:name, Shapes::ShapeRef.new(shape: EventBridgeActionName, required: true, location_name: "Name"))
     EventBridgeActionDefinition.struct_class = Types::EventBridgeActionDefinition
+
+    ExecutionRecord.add_member(:observation_id, Shapes::ShapeRef.new(shape: TestCaseResourceId, location_name: "ObservationId"))
+    ExecutionRecord.add_member(:status, Shapes::ShapeRef.new(shape: ExecutionRecordStatus, location_name: "Status"))
+    ExecutionRecord.add_member(:timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "Timestamp"))
+    ExecutionRecord.add_member(:record, Shapes::ShapeRef.new(shape: ExecutionRecordString, location_name: "Record"))
+    ExecutionRecord.struct_class = Types::ExecutionRecord
+
+    ExecutionRecordList.member = Shapes::ShapeRef.new(shape: ExecutionRecord)
 
     Expiry.add_member(:duration_in_seconds, Shapes::ShapeRef.new(shape: DurationInSeconds, location_name: "DurationInSeconds"))
     Expiry.add_member(:expiry_timestamp, Shapes::ShapeRef.new(shape: timestamp, location_name: "ExpiryTimestamp"))
@@ -5004,6 +5135,17 @@ module Aws::Connect
     GetTaskTemplateResponse.add_member(:created_time, Shapes::ShapeRef.new(shape: timestamp, location_name: "CreatedTime"))
     GetTaskTemplateResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     GetTaskTemplateResponse.struct_class = Types::GetTaskTemplateResponse
+
+    GetTestCaseExecutionSummaryRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
+    GetTestCaseExecutionSummaryRequest.add_member(:test_case_id, Shapes::ShapeRef.new(shape: TestCaseId, required: true, location: "uri", location_name: "TestCaseId"))
+    GetTestCaseExecutionSummaryRequest.add_member(:test_case_execution_id, Shapes::ShapeRef.new(shape: TestCaseExecutionId, required: true, location: "uri", location_name: "TestCaseExecutionId"))
+    GetTestCaseExecutionSummaryRequest.struct_class = Types::GetTestCaseExecutionSummaryRequest
+
+    GetTestCaseExecutionSummaryResponse.add_member(:start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "StartTime"))
+    GetTestCaseExecutionSummaryResponse.add_member(:end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "EndTime"))
+    GetTestCaseExecutionSummaryResponse.add_member(:status, Shapes::ShapeRef.new(shape: TestCaseExecutionStatus, location_name: "Status"))
+    GetTestCaseExecutionSummaryResponse.add_member(:observation_summary, Shapes::ShapeRef.new(shape: ObservationSummary, location_name: "ObservationSummary"))
+    GetTestCaseExecutionSummaryResponse.struct_class = Types::GetTestCaseExecutionSummaryResponse
 
     GetTrafficDistributionRequest.add_member(:id, Shapes::ShapeRef.new(shape: TrafficDistributionGroupIdOrArn, required: true, location: "uri", location_name: "Id"))
     GetTrafficDistributionRequest.struct_class = Types::GetTrafficDistributionRequest
@@ -5327,6 +5469,9 @@ module Aws::Connect
     InvalidRequestExceptionReason.add_member_subclass(:attached_file_invalid_request_exception_reason, Types::InvalidRequestExceptionReason::AttachedFileInvalidRequestExceptionReason)
     InvalidRequestExceptionReason.add_member_subclass(:unknown, Types::InvalidRequestExceptionReason::Unknown)
     InvalidRequestExceptionReason.struct_class = Types::InvalidRequestExceptionReason
+
+    InvalidTestCaseException.add_member(:problems, Shapes::ShapeRef.new(shape: Problems, location_name: "Problems"))
+    InvalidTestCaseException.struct_class = Types::InvalidTestCaseException
 
     InvisibleFieldInfo.add_member(:id, Shapes::ShapeRef.new(shape: TaskTemplateFieldIdentifier, location_name: "Id"))
     InvisibleFieldInfo.struct_class = Types::InvisibleFieldInfo
@@ -5903,6 +6048,41 @@ module Aws::Connect
     ListTaskTemplatesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListTaskTemplatesResponse.struct_class = Types::ListTaskTemplatesResponse
 
+    ListTestCaseExecutionRecordsRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
+    ListTestCaseExecutionRecordsRequest.add_member(:test_case_id, Shapes::ShapeRef.new(shape: TestCaseId, required: true, location: "uri", location_name: "TestCaseId"))
+    ListTestCaseExecutionRecordsRequest.add_member(:test_case_execution_id, Shapes::ShapeRef.new(shape: TestCaseExecutionId, required: true, location: "uri", location_name: "TestCaseExecutionId"))
+    ListTestCaseExecutionRecordsRequest.add_member(:status, Shapes::ShapeRef.new(shape: TestCaseExecutionStatus, location: "querystring", location_name: "status"))
+    ListTestCaseExecutionRecordsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
+    ListTestCaseExecutionRecordsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResult100, location: "querystring", location_name: "maxResults", metadata: {"box" => true}))
+    ListTestCaseExecutionRecordsRequest.struct_class = Types::ListTestCaseExecutionRecordsRequest
+
+    ListTestCaseExecutionRecordsResponse.add_member(:execution_records, Shapes::ShapeRef.new(shape: ExecutionRecordList, location_name: "ExecutionRecords"))
+    ListTestCaseExecutionRecordsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: LargeNextToken, location_name: "NextToken"))
+    ListTestCaseExecutionRecordsResponse.struct_class = Types::ListTestCaseExecutionRecordsResponse
+
+    ListTestCaseExecutionsRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
+    ListTestCaseExecutionsRequest.add_member(:test_case_id, Shapes::ShapeRef.new(shape: TestCaseId, location: "querystring", location_name: "testCaseId"))
+    ListTestCaseExecutionsRequest.add_member(:test_case_name, Shapes::ShapeRef.new(shape: TestCaseName, location: "querystring", location_name: "testCaseName"))
+    ListTestCaseExecutionsRequest.add_member(:start_time, Shapes::ShapeRef.new(shape: Timestamp, location: "querystring", location_name: "startTime"))
+    ListTestCaseExecutionsRequest.add_member(:end_time, Shapes::ShapeRef.new(shape: Timestamp, location: "querystring", location_name: "endTime"))
+    ListTestCaseExecutionsRequest.add_member(:status, Shapes::ShapeRef.new(shape: TestCaseExecutionStatus, location: "querystring", location_name: "status"))
+    ListTestCaseExecutionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
+    ListTestCaseExecutionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResult100, location: "querystring", location_name: "maxResults", metadata: {"box" => true}))
+    ListTestCaseExecutionsRequest.struct_class = Types::ListTestCaseExecutionsRequest
+
+    ListTestCaseExecutionsResponse.add_member(:test_case_executions, Shapes::ShapeRef.new(shape: TestCaseExecutionList, location_name: "TestCaseExecutions"))
+    ListTestCaseExecutionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListTestCaseExecutionsResponse.struct_class = Types::ListTestCaseExecutionsResponse
+
+    ListTestCasesRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
+    ListTestCasesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
+    ListTestCasesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResult1000, location: "querystring", location_name: "maxResults", metadata: {"box" => true}))
+    ListTestCasesRequest.struct_class = Types::ListTestCasesRequest
+
+    ListTestCasesResponse.add_member(:test_case_summary_list, Shapes::ShapeRef.new(shape: TestCaseSummaryList, location_name: "TestCaseSummaryList"))
+    ListTestCasesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListTestCasesResponse.struct_class = Types::ListTestCasesResponse
+
     ListTrafficDistributionGroupUsersRequest.add_member(:traffic_distribution_group_id, Shapes::ShapeRef.new(shape: TrafficDistributionGroupIdOrArn, required: true, location: "uri", location_name: "TrafficDistributionGroupId"))
     ListTrafficDistributionGroupUsersRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResult10, location: "querystring", location_name: "maxResults", metadata: {"box" => true}))
     ListTrafficDistributionGroupUsersRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
@@ -6135,6 +6315,11 @@ module Aws::Connect
 
     NumericQuestionPropertyValueAutomation.add_member(:label, Shapes::ShapeRef.new(shape: NumericQuestionPropertyAutomationLabel, required: true, location_name: "Label"))
     NumericQuestionPropertyValueAutomation.struct_class = Types::NumericQuestionPropertyValueAutomation
+
+    ObservationSummary.add_member(:total_observations, Shapes::ShapeRef.new(shape: Count, location_name: "TotalObservations"))
+    ObservationSummary.add_member(:observations_passed, Shapes::ShapeRef.new(shape: Count, location_name: "ObservationsPassed"))
+    ObservationSummary.add_member(:observations_failed, Shapes::ShapeRef.new(shape: Count, location_name: "ObservationsFailed"))
+    ObservationSummary.struct_class = Types::ObservationSummary
 
     OperationalHour.add_member(:start, Shapes::ShapeRef.new(shape: OverrideTimeSlice, location_name: "Start"))
     OperationalHour.add_member(:end, Shapes::ShapeRef.new(shape: OverrideTimeSlice, location_name: "End"))
@@ -7051,6 +7236,7 @@ module Aws::Connect
     SearchCriteria.add_member(:searchable_contact_attributes, Shapes::ShapeRef.new(shape: SearchableContactAttributes, location_name: "SearchableContactAttributes"))
     SearchCriteria.add_member(:searchable_segment_attributes, Shapes::ShapeRef.new(shape: SearchableSegmentAttributes, location_name: "SearchableSegmentAttributes"))
     SearchCriteria.add_member(:active_regions, Shapes::ShapeRef.new(shape: ActiveRegionList, location_name: "ActiveRegions"))
+    SearchCriteria.add_member(:contact_tags, Shapes::ShapeRef.new(shape: ControlPlaneTagFilter, location_name: "ContactTags"))
     SearchCriteria.struct_class = Types::SearchCriteria
 
     SearchDataTablesRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location_name: "InstanceId"))
@@ -7194,6 +7380,18 @@ module Aws::Connect
     SearchSecurityProfilesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken2500, location_name: "NextToken"))
     SearchSecurityProfilesResponse.add_member(:approximate_total_count, Shapes::ShapeRef.new(shape: ApproximateTotalCount, location_name: "ApproximateTotalCount"))
     SearchSecurityProfilesResponse.struct_class = Types::SearchSecurityProfilesResponse
+
+    SearchTestCasesRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceIdOrArn, required: true, location_name: "InstanceId"))
+    SearchTestCasesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken2500, location_name: "NextToken"))
+    SearchTestCasesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResult100, location_name: "MaxResults", metadata: {"box" => true}))
+    SearchTestCasesRequest.add_member(:search_filter, Shapes::ShapeRef.new(shape: TestCaseSearchFilter, location_name: "SearchFilter"))
+    SearchTestCasesRequest.add_member(:search_criteria, Shapes::ShapeRef.new(shape: TestCaseSearchCriteria, location_name: "SearchCriteria"))
+    SearchTestCasesRequest.struct_class = Types::SearchTestCasesRequest
+
+    SearchTestCasesResponse.add_member(:test_cases, Shapes::ShapeRef.new(shape: TestCaseSearchSummaryList, location_name: "TestCases"))
+    SearchTestCasesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken2500, location_name: "NextToken"))
+    SearchTestCasesResponse.add_member(:approximate_total_count, Shapes::ShapeRef.new(shape: ApproximateTotalCount, location_name: "ApproximateTotalCount"))
+    SearchTestCasesResponse.struct_class = Types::SearchTestCasesResponse
 
     SearchTextList.member = Shapes::ShapeRef.new(shape: SearchText)
 
@@ -7615,10 +7813,21 @@ module Aws::Connect
     StartTaskContactRequest.add_member(:quick_connect_id, Shapes::ShapeRef.new(shape: QuickConnectId, location_name: "QuickConnectId"))
     StartTaskContactRequest.add_member(:related_contact_id, Shapes::ShapeRef.new(shape: ContactId, location_name: "RelatedContactId"))
     StartTaskContactRequest.add_member(:segment_attributes, Shapes::ShapeRef.new(shape: SegmentAttributes, location_name: "SegmentAttributes"))
+    StartTaskContactRequest.add_member(:attachments, Shapes::ShapeRef.new(shape: TaskAttachments, location_name: "Attachments"))
     StartTaskContactRequest.struct_class = Types::StartTaskContactRequest
 
     StartTaskContactResponse.add_member(:contact_id, Shapes::ShapeRef.new(shape: ContactId, location_name: "ContactId"))
     StartTaskContactResponse.struct_class = Types::StartTaskContactResponse
+
+    StartTestCaseExecutionRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
+    StartTestCaseExecutionRequest.add_member(:test_case_id, Shapes::ShapeRef.new(shape: TestCaseId, required: true, location: "uri", location_name: "TestCaseId"))
+    StartTestCaseExecutionRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken"))
+    StartTestCaseExecutionRequest.struct_class = Types::StartTestCaseExecutionRequest
+
+    StartTestCaseExecutionResponse.add_member(:test_case_execution_id, Shapes::ShapeRef.new(shape: TestCaseExecutionId, location_name: "TestCaseExecutionId"))
+    StartTestCaseExecutionResponse.add_member(:test_case_id, Shapes::ShapeRef.new(shape: TestCaseId, location_name: "TestCaseId"))
+    StartTestCaseExecutionResponse.add_member(:status, Shapes::ShapeRef.new(shape: TestCaseExecutionStatus, location_name: "Status"))
+    StartTestCaseExecutionResponse.struct_class = Types::StartTestCaseExecutionResponse
 
     StartWebRTCContactRequest.add_member(:attributes, Shapes::ShapeRef.new(shape: Attributes, location_name: "Attributes"))
     StartWebRTCContactRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
@@ -7678,6 +7887,14 @@ module Aws::Connect
     StopContactStreamingRequest.struct_class = Types::StopContactStreamingRequest
 
     StopContactStreamingResponse.struct_class = Types::StopContactStreamingResponse
+
+    StopTestCaseExecutionRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
+    StopTestCaseExecutionRequest.add_member(:test_case_execution_id, Shapes::ShapeRef.new(shape: TestCaseExecutionId, required: true, location: "uri", location_name: "TestCaseExecutionId"))
+    StopTestCaseExecutionRequest.add_member(:test_case_id, Shapes::ShapeRef.new(shape: TestCaseId, required: true, location: "uri", location_name: "TestCaseId"))
+    StopTestCaseExecutionRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken"))
+    StopTestCaseExecutionRequest.struct_class = Types::StopTestCaseExecutionRequest
+
+    StopTestCaseExecutionResponse.struct_class = Types::StopTestCaseExecutionResponse
 
     StringCondition.add_member(:field_name, Shapes::ShapeRef.new(shape: String, location_name: "FieldName"))
     StringCondition.add_member(:value, Shapes::ShapeRef.new(shape: String, location_name: "Value"))
@@ -7769,6 +7986,12 @@ module Aws::Connect
     TaskActionDefinition.add_member(:references, Shapes::ShapeRef.new(shape: ContactReferences, location_name: "References"))
     TaskActionDefinition.struct_class = Types::TaskActionDefinition
 
+    TaskAttachment.add_member(:file_name, Shapes::ShapeRef.new(shape: FileName, required: true, location_name: "FileName"))
+    TaskAttachment.add_member(:s3_url, Shapes::ShapeRef.new(shape: PreSignedAttachmentUrl, required: true, location_name: "S3Url"))
+    TaskAttachment.struct_class = Types::TaskAttachment
+
+    TaskAttachments.member = Shapes::ShapeRef.new(shape: TaskAttachment)
+
     TaskTemplateConstraints.add_member(:required_fields, Shapes::ShapeRef.new(shape: RequiredTaskTemplateFields, location_name: "RequiredFields"))
     TaskTemplateConstraints.add_member(:read_only_fields, Shapes::ShapeRef.new(shape: ReadOnlyTaskTemplateFields, location_name: "ReadOnlyFields"))
     TaskTemplateConstraints.add_member(:invisible_fields, Shapes::ShapeRef.new(shape: InvisibleTaskTemplateFields, location_name: "InvisibleFields"))
@@ -7820,6 +8043,57 @@ module Aws::Connect
     TemplatedMessageConfig.add_member(:message_template_id, Shapes::ShapeRef.new(shape: MessageTemplateId, required: true, location_name: "MessageTemplateId"))
     TemplatedMessageConfig.add_member(:template_attributes, Shapes::ShapeRef.new(shape: TemplateAttributes, required: true, location_name: "TemplateAttributes"))
     TemplatedMessageConfig.struct_class = Types::TemplatedMessageConfig
+
+    TestCase.add_member(:arn, Shapes::ShapeRef.new(shape: ARN, location_name: "Arn"))
+    TestCase.add_member(:id, Shapes::ShapeRef.new(shape: TestCaseId, location_name: "Id"))
+    TestCase.add_member(:name, Shapes::ShapeRef.new(shape: TestCaseName, location_name: "Name"))
+    TestCase.add_member(:content, Shapes::ShapeRef.new(shape: TestCaseContent, location_name: "Content"))
+    TestCase.add_member(:entry_point, Shapes::ShapeRef.new(shape: TestCaseEntryPoint, location_name: "EntryPoint"))
+    TestCase.add_member(:initialization_data, Shapes::ShapeRef.new(shape: TestCaseInitializationData, location_name: "InitializationData"))
+    TestCase.add_member(:description, Shapes::ShapeRef.new(shape: TestCaseDescription, location_name: "Description"))
+    TestCase.add_member(:status, Shapes::ShapeRef.new(shape: TestCaseStatus, location_name: "Status"))
+    TestCase.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTime"))
+    TestCase.add_member(:last_modified_region, Shapes::ShapeRef.new(shape: RegionName, location_name: "LastModifiedRegion"))
+    TestCase.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    TestCase.add_member(:test_case_sha_256, Shapes::ShapeRef.new(shape: TestCaseSha256, location_name: "TestCaseSha256"))
+    TestCase.struct_class = Types::TestCase
+
+    TestCaseEntryPoint.add_member(:type, Shapes::ShapeRef.new(shape: TestCaseEntryPointType, location_name: "Type"))
+    TestCaseEntryPoint.add_member(:voice_call_entry_point_parameters, Shapes::ShapeRef.new(shape: VoiceCallEntryPointParameters, location_name: "VoiceCallEntryPointParameters"))
+    TestCaseEntryPoint.struct_class = Types::TestCaseEntryPoint
+
+    TestCaseExecution.add_member(:start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "StartTime"))
+    TestCaseExecution.add_member(:end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "EndTime"))
+    TestCaseExecution.add_member(:test_case_execution_id, Shapes::ShapeRef.new(shape: TestCaseExecutionId, location_name: "TestCaseExecutionId"))
+    TestCaseExecution.add_member(:test_case_id, Shapes::ShapeRef.new(shape: TestCaseId, location_name: "TestCaseId"))
+    TestCaseExecution.add_member(:test_case_execution_status, Shapes::ShapeRef.new(shape: TestCaseExecutionStatus, location_name: "TestCaseExecutionStatus"))
+    TestCaseExecution.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    TestCaseExecution.struct_class = Types::TestCaseExecution
+
+    TestCaseExecutionList.member = Shapes::ShapeRef.new(shape: TestCaseExecution)
+
+    TestCaseSearchConditionList.member = Shapes::ShapeRef.new(shape: TestCaseSearchCriteria)
+
+    TestCaseSearchCriteria.add_member(:or_conditions, Shapes::ShapeRef.new(shape: TestCaseSearchConditionList, location_name: "OrConditions"))
+    TestCaseSearchCriteria.add_member(:and_conditions, Shapes::ShapeRef.new(shape: TestCaseSearchConditionList, location_name: "AndConditions"))
+    TestCaseSearchCriteria.add_member(:string_condition, Shapes::ShapeRef.new(shape: StringCondition, location_name: "StringCondition"))
+    TestCaseSearchCriteria.add_member(:status_condition, Shapes::ShapeRef.new(shape: TestCaseStatus, location_name: "StatusCondition"))
+    TestCaseSearchCriteria.struct_class = Types::TestCaseSearchCriteria
+
+    TestCaseSearchFilter.add_member(:tag_filter, Shapes::ShapeRef.new(shape: ControlPlaneTagFilter, location_name: "TagFilter"))
+    TestCaseSearchFilter.struct_class = Types::TestCaseSearchFilter
+
+    TestCaseSearchSummaryList.member = Shapes::ShapeRef.new(shape: TestCase)
+
+    TestCaseSummary.add_member(:id, Shapes::ShapeRef.new(shape: TestCaseId, location_name: "Id"))
+    TestCaseSummary.add_member(:arn, Shapes::ShapeRef.new(shape: ARN, location_name: "Arn"))
+    TestCaseSummary.add_member(:name, Shapes::ShapeRef.new(shape: ContactFlowName, location_name: "Name"))
+    TestCaseSummary.add_member(:status, Shapes::ShapeRef.new(shape: TestCaseStatus, location_name: "Status"))
+    TestCaseSummary.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTime"))
+    TestCaseSummary.add_member(:last_modified_region, Shapes::ShapeRef.new(shape: RegionName, location_name: "LastModifiedRegion"))
+    TestCaseSummary.struct_class = Types::TestCaseSummary
+
+    TestCaseSummaryList.member = Shapes::ShapeRef.new(shape: TestCaseSummary)
 
     Threshold.add_member(:comparison, Shapes::ShapeRef.new(shape: Comparison, location_name: "Comparison"))
     Threshold.add_member(:threshold_value, Shapes::ShapeRef.new(shape: ThresholdValue, location_name: "ThresholdValue", metadata: {"box" => true}))
@@ -8073,6 +8347,7 @@ module Aws::Connect
     UpdateEvaluationFormRequest.add_member(:items, Shapes::ShapeRef.new(shape: EvaluationFormItemsList, required: true, location_name: "Items"))
     UpdateEvaluationFormRequest.add_member(:scoring_strategy, Shapes::ShapeRef.new(shape: EvaluationFormScoringStrategy, location_name: "ScoringStrategy"))
     UpdateEvaluationFormRequest.add_member(:auto_evaluation_configuration, Shapes::ShapeRef.new(shape: EvaluationFormAutoEvaluationConfiguration, location_name: "AutoEvaluationConfiguration"))
+    UpdateEvaluationFormRequest.add_member(:review_configuration, Shapes::ShapeRef.new(shape: EvaluationReviewConfiguration, location_name: "ReviewConfiguration"))
     UpdateEvaluationFormRequest.add_member(:as_draft, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "AsDraft"))
     UpdateEvaluationFormRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     UpdateEvaluationFormRequest.add_member(:target_configuration, Shapes::ShapeRef.new(shape: EvaluationFormTargetConfiguration, location_name: "TargetConfiguration"))
@@ -8287,6 +8562,20 @@ module Aws::Connect
     UpdateTaskTemplateResponse.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: timestamp, location_name: "LastModifiedTime"))
     UpdateTaskTemplateResponse.add_member(:created_time, Shapes::ShapeRef.new(shape: timestamp, location_name: "CreatedTime"))
     UpdateTaskTemplateResponse.struct_class = Types::UpdateTaskTemplateResponse
+
+    UpdateTestCaseRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceIdOrArn, required: true, location: "uri", location_name: "InstanceId"))
+    UpdateTestCaseRequest.add_member(:test_case_id, Shapes::ShapeRef.new(shape: TestCaseId, required: true, location: "uri", location_name: "TestCaseId"))
+    UpdateTestCaseRequest.add_member(:content, Shapes::ShapeRef.new(shape: TestCaseContent, location_name: "Content"))
+    UpdateTestCaseRequest.add_member(:entry_point, Shapes::ShapeRef.new(shape: TestCaseEntryPoint, location_name: "EntryPoint"))
+    UpdateTestCaseRequest.add_member(:initialization_data, Shapes::ShapeRef.new(shape: TestCaseInitializationData, location_name: "InitializationData"))
+    UpdateTestCaseRequest.add_member(:name, Shapes::ShapeRef.new(shape: TestCaseName, location_name: "Name"))
+    UpdateTestCaseRequest.add_member(:description, Shapes::ShapeRef.new(shape: TestCaseDescription, location_name: "Description"))
+    UpdateTestCaseRequest.add_member(:status, Shapes::ShapeRef.new(shape: TestCaseStatus, location_name: "Status"))
+    UpdateTestCaseRequest.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location: "header", location_name: "x-amz-last-modified-time"))
+    UpdateTestCaseRequest.add_member(:last_modified_region, Shapes::ShapeRef.new(shape: RegionName, location: "header", location_name: "x-amz-last-modified-region"))
+    UpdateTestCaseRequest.struct_class = Types::UpdateTestCaseRequest
+
+    UpdateTestCaseResponse.struct_class = Types::UpdateTestCaseResponse
 
     UpdateTrafficDistributionRequest.add_member(:id, Shapes::ShapeRef.new(shape: TrafficDistributionGroupIdOrArn, required: true, location: "uri", location_name: "Id"))
     UpdateTrafficDistributionRequest.add_member(:telephony_config, Shapes::ShapeRef.new(shape: TelephonyConfig, location_name: "TelephonyConfig"))
@@ -8644,6 +8933,11 @@ module Aws::Connect
     VocabularySummary.struct_class = Types::VocabularySummary
 
     VocabularySummaryList.member = Shapes::ShapeRef.new(shape: VocabularySummary)
+
+    VoiceCallEntryPointParameters.add_member(:source_phone_number, Shapes::ShapeRef.new(shape: PhoneNumber, location_name: "SourcePhoneNumber"))
+    VoiceCallEntryPointParameters.add_member(:destination_phone_number, Shapes::ShapeRef.new(shape: PhoneNumber, location_name: "DestinationPhoneNumber"))
+    VoiceCallEntryPointParameters.add_member(:flow_id, Shapes::ShapeRef.new(shape: ContactFlowId, location_name: "FlowId"))
+    VoiceCallEntryPointParameters.struct_class = Types::VoiceCallEntryPointParameters
 
     VoiceRecordingConfiguration.add_member(:voice_recording_track, Shapes::ShapeRef.new(shape: VoiceRecordingTrack, location_name: "VoiceRecordingTrack"))
     VoiceRecordingConfiguration.add_member(:ivr_recording_track, Shapes::ShapeRef.new(shape: IvrRecordingTrack, location_name: "IvrRecordingTrack"))
@@ -9606,6 +9900,25 @@ module Aws::Connect
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
       end)
 
+      api.add_operation(:create_test_case, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateTestCase"
+        o.http_method = "PUT"
+        o.http_request_uri = "/test-cases/{InstanceId}"
+        o.input = Shapes::ShapeRef.new(shape: CreateTestCaseRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateTestCaseResponse)
+        o.errors << Shapes::ShapeRef.new(shape: DuplicateResourceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidTestCaseException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: IdempotencyException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
       api.add_operation(:create_traffic_distribution_group, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateTrafficDistributionGroup"
         o.http_method = "PUT"
@@ -10086,6 +10399,20 @@ module Aws::Connect
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
       end)
 
+      api.add_operation(:delete_test_case, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteTestCase"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/test-cases/{InstanceId}/{TestCaseId}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteTestCaseRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteTestCaseResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+      end)
+
       api.add_operation(:delete_traffic_distribution_group, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteTrafficDistributionGroup"
         o.http_method = "DELETE"
@@ -10536,6 +10863,20 @@ module Aws::Connect
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+      end)
+
+      api.add_operation(:describe_test_case, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeTestCase"
+        o.http_method = "GET"
+        o.http_request_uri = "/test-cases/{InstanceId}/{TestCaseId}"
+        o.input = Shapes::ShapeRef.new(shape: DescribeTestCaseRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeTestCaseResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
       api.add_operation(:describe_traffic_distribution_group, Seahorse::Model::Operation.new.tap do |o|
@@ -11072,6 +11413,20 @@ module Aws::Connect
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+      end)
+
+      api.add_operation(:get_test_case_execution_summary, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetTestCaseExecutionSummary"
+        o.http_method = "GET"
+        o.http_request_uri = "/test-cases/{InstanceId}/{TestCaseId}/{TestCaseExecutionId}/summary"
+        o.input = Shapes::ShapeRef.new(shape: GetTestCaseExecutionSummaryRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetTestCaseExecutionSummaryResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
       api.add_operation(:get_traffic_distribution, Seahorse::Model::Operation.new.tap do |o|
@@ -12058,6 +12413,54 @@ module Aws::Connect
         )
       end)
 
+      api.add_operation(:list_test_case_execution_records, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListTestCaseExecutionRecords"
+        o.http_method = "GET"
+        o.http_request_uri = "/test-cases/{InstanceId}/{TestCaseId}/{TestCaseExecutionId}/records"
+        o.input = Shapes::ShapeRef.new(shape: ListTestCaseExecutionRecordsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListTestCaseExecutionRecordsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:list_test_case_executions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListTestCaseExecutions"
+        o.http_method = "GET"
+        o.http_request_uri = "/test-case-executions/{InstanceId}"
+        o.input = Shapes::ShapeRef.new(shape: ListTestCaseExecutionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListTestCaseExecutionsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:list_test_cases, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListTestCases"
+        o.http_method = "GET"
+        o.http_request_uri = "/test-cases-summary/{InstanceId}"
+        o.input = Shapes::ShapeRef.new(shape: ListTestCasesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListTestCasesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_traffic_distribution_group_users, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListTrafficDistributionGroupUsers"
         o.http_method = "GET"
@@ -12692,6 +13095,26 @@ module Aws::Connect
         )
       end)
 
+      api.add_operation(:search_test_cases, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "SearchTestCases"
+        o.http_method = "POST"
+        o.http_request_uri = "/search-test-cases"
+        o.input = Shapes::ShapeRef.new(shape: SearchTestCasesRequest)
+        o.output = Shapes::ShapeRef.new(shape: SearchTestCasesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:search_user_hierarchy_groups, Seahorse::Model::Operation.new.tap do |o|
         o.name = "SearchUserHierarchyGroups"
         o.http_method = "POST"
@@ -13006,6 +13429,21 @@ module Aws::Connect
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
       end)
 
+      api.add_operation(:start_test_case_execution, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartTestCaseExecution"
+        o.http_method = "PUT"
+        o.http_request_uri = "/test-cases/{InstanceId}/{TestCaseId}/start-execution"
+        o.input = Shapes::ShapeRef.new(shape: StartTestCaseExecutionRequest)
+        o.output = Shapes::ShapeRef.new(shape: StartTestCaseExecutionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
       api.add_operation(:start_web_rtc_contact, Seahorse::Model::Operation.new.tap do |o|
         o.name = "StartWebRTCContact"
         o.http_method = "PUT"
@@ -13069,6 +13507,20 @@ module Aws::Connect
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+      end)
+
+      api.add_operation(:stop_test_case_execution, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StopTestCaseExecution"
+        o.http_method = "POST"
+        o.http_request_uri = "/test-cases/{InstanceId}/{TestCaseId}/{TestCaseExecutionId}/stop-execution"
+        o.input = Shapes::ShapeRef.new(shape: StopTestCaseExecutionRequest)
+        o.output = Shapes::ShapeRef.new(shape: StopTestCaseExecutionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
       api.add_operation(:submit_contact_evaluation, Seahorse::Model::Operation.new.tap do |o|
@@ -13780,6 +14232,22 @@ module Aws::Connect
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+      end)
+
+      api.add_operation(:update_test_case, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateTestCase"
+        o.http_method = "POST"
+        o.http_request_uri = "/test-cases/{InstanceId}/{TestCaseId}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateTestCaseRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateTestCaseResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: DuplicateResourceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidTestCaseException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
       api.add_operation(:update_traffic_distribution, Seahorse::Model::Operation.new.tap do |o|

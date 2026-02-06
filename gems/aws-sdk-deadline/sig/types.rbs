@@ -313,6 +313,7 @@ module Aws::Deadline
       attr_accessor approximate_dollar_limit: ::Float
       attr_accessor actions: ::Array[Types::BudgetActionToAdd]
       attr_accessor schedule: Types::BudgetSchedule
+      attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: [:description]
     end
 
@@ -369,7 +370,9 @@ module Aws::Deadline
       attr_accessor max_retries_per_task: ::Integer
       attr_accessor max_worker_count: ::Integer
       attr_accessor source_job_id: ::String
-      SENSITIVE: [:template, :parameters]
+      attr_accessor name_override: ::String
+      attr_accessor description_override: ::String
+      SENSITIVE: [:template, :parameters, :description_override]
     end
 
     class CreateJobResponse
@@ -528,7 +531,7 @@ module Aws::Deadline
 
     class DateTimeFilterExpression
       attr_accessor name: ::String
-      attr_accessor operator: ("EQUAL" | "NOT_EQUAL" | "GREATER_THAN_EQUAL_TO" | "GREATER_THAN" | "LESS_THAN_EQUAL_TO" | "LESS_THAN")
+      attr_accessor operator: ("EQUAL" | "NOT_EQUAL" | "GREATER_THAN_EQUAL_TO" | "GREATER_THAN" | "LESS_THAN_EQUAL_TO" | "LESS_THAN" | "ANY_EQUALS" | "ALL_NOT_EQUALS")
       attr_accessor date_time: ::Time
       SENSITIVE: []
     end
@@ -1974,7 +1977,7 @@ module Aws::Deadline
 
     class ParameterFilterExpression
       attr_accessor name: ::String
-      attr_accessor operator: ("EQUAL" | "NOT_EQUAL" | "GREATER_THAN_EQUAL_TO" | "GREATER_THAN" | "LESS_THAN_EQUAL_TO" | "LESS_THAN")
+      attr_accessor operator: ("EQUAL" | "NOT_EQUAL" | "GREATER_THAN_EQUAL_TO" | "GREATER_THAN" | "LESS_THAN_EQUAL_TO" | "LESS_THAN" | "ANY_EQUALS" | "ALL_NOT_EQUALS")
       attr_accessor value: ::String
       SENSITIVE: []
     end
@@ -2092,6 +2095,7 @@ module Aws::Deadline
       attr_accessor parameter_filter: Types::ParameterFilterExpression
       attr_accessor search_term_filter: Types::SearchTermFilterExpression
       attr_accessor string_filter: Types::StringFilterExpression
+      attr_accessor string_list_filter: Types::StringListFilterExpression
       attr_accessor group_filter: Types::SearchGroupedFilterExpressions
       attr_accessor unknown: untyped
       SENSITIVE: []
@@ -2103,6 +2107,8 @@ module Aws::Deadline
       class SearchTermFilter < SearchFilterExpression
       end
       class StringFilter < SearchFilterExpression
+      end
+      class StringListFilter < SearchFilterExpression
       end
       class GroupFilter < SearchFilterExpression
       end
@@ -2421,6 +2427,14 @@ module Aws::Deadline
     class StepParameter
       attr_accessor name: ::String
       attr_accessor type: ("INT" | "FLOAT" | "STRING" | "PATH" | "CHUNK_INT")
+      attr_accessor chunks: Types::StepParameterChunks
+      SENSITIVE: []
+    end
+
+    class StepParameterChunks
+      attr_accessor default_task_count: ::Integer
+      attr_accessor target_runtime_seconds: ::Integer
+      attr_accessor range_constraint: ("CONTIGUOUS" | "NONCONTIGUOUS")
       SENSITIVE: []
     end
 
@@ -2479,8 +2493,15 @@ module Aws::Deadline
 
     class StringFilterExpression
       attr_accessor name: ::String
-      attr_accessor operator: ("EQUAL" | "NOT_EQUAL" | "GREATER_THAN_EQUAL_TO" | "GREATER_THAN" | "LESS_THAN_EQUAL_TO" | "LESS_THAN")
+      attr_accessor operator: ("EQUAL" | "NOT_EQUAL" | "GREATER_THAN_EQUAL_TO" | "GREATER_THAN" | "LESS_THAN_EQUAL_TO" | "LESS_THAN" | "ANY_EQUALS" | "ALL_NOT_EQUALS")
       attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class StringListFilterExpression
+      attr_accessor name: ::String
+      attr_accessor operator: ("EQUAL" | "NOT_EQUAL" | "GREATER_THAN_EQUAL_TO" | "GREATER_THAN" | "LESS_THAN_EQUAL_TO" | "LESS_THAN" | "ANY_EQUALS" | "ALL_NOT_EQUALS")
+      attr_accessor values: ::Array[::String]
       SENSITIVE: []
     end
 
@@ -2565,6 +2586,7 @@ module Aws::Deadline
       attr_accessor ended_at: ::Time
       attr_accessor updated_at: ::Time
       attr_accessor updated_by: ::String
+      attr_accessor latest_session_action_id: ::String
       SENSITIVE: [:parameters]
     end
 
@@ -2654,10 +2676,12 @@ module Aws::Deadline
       attr_accessor max_retries_per_task: ::Integer
       attr_accessor lifecycle_status: ("ARCHIVED")
       attr_accessor max_worker_count: ::Integer
+      attr_accessor name: ::String
+      attr_accessor description: ::String
       attr_accessor farm_id: ::String
       attr_accessor queue_id: ::String
       attr_accessor job_id: ::String
-      SENSITIVE: []
+      SENSITIVE: [:description]
     end
 
     class UpdateJobResponse < Aws::EmptyStructure

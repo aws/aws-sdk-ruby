@@ -8318,7 +8318,7 @@ module Aws::Redshift
     # @!attribute [rw] defer_maintenance_duration
     #   An integer indicating the duration of the maintenance window in
     #   days. If you specify a duration, you can't specify an end time. The
-    #   duration must be 45 days or less.
+    #   duration must be 60 days or less.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyClusterMaintenanceMessage AWS API Documentation

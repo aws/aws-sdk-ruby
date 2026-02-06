@@ -5042,6 +5042,10 @@ module Aws::CognitoIdentityProvider
     #         lambda_version: "V1_0", 
     #       }, 
     #       define_auth_challenge: "arn:aws:lambda:us-east-1:123456789012:function:MyFunction", 
+    #       inbound_federation: {
+    #         lambda_arn: "arn:aws:lambda:us-east-1:123456789012:function:MyFunction", 
+    #         lambda_version: "V1_0", 
+    #       }, 
     #       kms_key_id: "arn:aws:kms:us-east-1:123456789012:key/a6c4f8e2-0c45-47db-925f-87854bc9e357", 
     #       post_authentication: "arn:aws:lambda:us-east-1:123456789012:function:MyFunction", 
     #       post_confirmation: "arn:aws:lambda:us-east-1:123456789012:function:MyFunction", 
@@ -5165,6 +5169,10 @@ module Aws::CognitoIdentityProvider
     #           lambda_version: "V1_0", 
     #         }, 
     #         define_auth_challenge: "arn:aws:lambda:us-east-1:123456789012:function:MyFunction", 
+    #         inbound_federation: {
+    #           lambda_arn: "arn:aws:lambda:us-east-1:123456789012:function:MyFunction", 
+    #           lambda_version: "V1_0", 
+    #         }, 
     #         kms_key_id: "arn:aws:kms:us-east-1:767671399759:key/4d43904c-8edf-4bb4-9fca-fb1a80e41cbe", 
     #         post_authentication: "arn:aws:lambda:us-east-1:123456789012:function:MyFunction", 
     #         post_confirmation: "arn:aws:lambda:us-east-1:123456789012:function:MyFunction", 
@@ -5486,6 +5494,10 @@ module Aws::CognitoIdentityProvider
     #         lambda_arn: "ArnType", # required
     #       },
     #       kms_key_id: "ArnType",
+    #       inbound_federation: {
+    #         lambda_version: "V1_0", # required, accepts V1_0
+    #         lambda_arn: "ArnType", # required
+    #       },
     #     },
     #     auto_verified_attributes: ["phone_number"], # accepts phone_number, email
     #     alias_attributes: ["phone_number"], # accepts phone_number, email, preferred_username
@@ -5602,6 +5614,8 @@ module Aws::CognitoIdentityProvider
     #   resp.user_pool.lambda_config.custom_email_sender.lambda_version #=> String, one of "V1_0"
     #   resp.user_pool.lambda_config.custom_email_sender.lambda_arn #=> String
     #   resp.user_pool.lambda_config.kms_key_id #=> String
+    #   resp.user_pool.lambda_config.inbound_federation.lambda_version #=> String, one of "V1_0"
+    #   resp.user_pool.lambda_config.inbound_federation.lambda_arn #=> String
     #   resp.user_pool.status #=> String, one of "Enabled", "Disabled"
     #   resp.user_pool.last_modified_date #=> Time
     #   resp.user_pool.creation_date #=> Time
@@ -6733,8 +6747,8 @@ module Aws::CognitoIdentityProvider
     # your Amazon Web Services account. Amazon Cognito retains deleted user
     # pools in an inactive state for 14 days, then begins a cleanup process
     # that fully removes them from Amazon Web Services systems. In case of
-    # accidental deletion, contact Amazon Web ServicesSupport within 14 days
-    # for restoration assistance.
+    # accidental deletion, contact Amazon Web Services Support within 14
+    # days for restoration assistance.
     #
     # Amazon Cognito begins full deletion of all resources from deleted user
     # pools after 14 days. In the case of large user pools, the cleanup
@@ -7311,6 +7325,8 @@ module Aws::CognitoIdentityProvider
     #   resp.user_pool.lambda_config.custom_email_sender.lambda_version #=> String, one of "V1_0"
     #   resp.user_pool.lambda_config.custom_email_sender.lambda_arn #=> String
     #   resp.user_pool.lambda_config.kms_key_id #=> String
+    #   resp.user_pool.lambda_config.inbound_federation.lambda_version #=> String, one of "V1_0"
+    #   resp.user_pool.lambda_config.inbound_federation.lambda_arn #=> String
     #   resp.user_pool.status #=> String, one of "Enabled", "Disabled"
     #   resp.user_pool.last_modified_date #=> Time
     #   resp.user_pool.creation_date #=> Time
@@ -9557,6 +9573,8 @@ module Aws::CognitoIdentityProvider
     #   resp.user_pools[0].lambda_config.custom_email_sender.lambda_version #=> String, one of "V1_0"
     #   resp.user_pools[0].lambda_config.custom_email_sender.lambda_arn #=> String
     #   resp.user_pools[0].lambda_config.kms_key_id #=> String
+    #   resp.user_pools[0].lambda_config.inbound_federation.lambda_version #=> String, one of "V1_0"
+    #   resp.user_pools[0].lambda_config.inbound_federation.lambda_arn #=> String
     #   resp.user_pools[0].status #=> String, one of "Enabled", "Disabled"
     #   resp.user_pools[0].last_modified_date #=> Time
     #   resp.user_pools[0].creation_date #=> Time
@@ -12721,6 +12739,10 @@ module Aws::CognitoIdentityProvider
     #         lambda_arn: "ArnType", # required
     #       },
     #       kms_key_id: "ArnType",
+    #       inbound_federation: {
+    #         lambda_version: "V1_0", # required, accepts V1_0
+    #         lambda_arn: "ArnType", # required
+    #       },
     #     },
     #     auto_verified_attributes: ["phone_number"], # accepts phone_number, email
     #     sms_verification_message: "SmsVerificationMessageType",
@@ -13512,7 +13534,7 @@ module Aws::CognitoIdentityProvider
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-cognitoidentityprovider'
-      context[:gem_version] = '1.134.0'
+      context[:gem_version] = '1.136.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

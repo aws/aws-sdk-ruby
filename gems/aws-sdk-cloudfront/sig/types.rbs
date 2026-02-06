@@ -835,6 +835,7 @@ module Aws::CloudFront
       attr_accessor origin_read_timeout: ::Integer
       attr_accessor origin_keepalive_timeout: ::Integer
       attr_accessor ip_address_type: ("ipv4" | "ipv6" | "dualstack")
+      attr_accessor origin_mtls_config: Types::OriginMtlsConfig
       SENSITIVE: []
     end
 
@@ -2905,6 +2906,11 @@ module Aws::CloudFront
     class OriginGroups
       attr_accessor quantity: ::Integer
       attr_accessor items: ::Array[Types::OriginGroup]
+      SENSITIVE: []
+    end
+
+    class OriginMtlsConfig
+      attr_accessor client_certificate_arn: ::String
       SENSITIVE: []
     end
 

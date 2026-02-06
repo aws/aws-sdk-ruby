@@ -5056,6 +5056,34 @@ module Aws::Glue
       req.send_request(options)
     end
 
+    # Deletes a custom connection type in Glue.
+    #
+    # The connection type must exist and be registered before it can be
+    # deleted. This operation supports cleanup of connection type resources
+    # and helps maintain proper lifecycle management of custom connection
+    # types.
+    #
+    # @option params [required, String] :connection_type
+    #   The name of the connection type to delete. Must reference an existing
+    #   registered connection type.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_connection_type({
+    #     connection_type: "NameString", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteConnectionType AWS API Documentation
+    #
+    # @overload delete_connection_type(params = {})
+    # @param [Hash] params ({})
+    def delete_connection_type(params = {}, options = {})
+      req = build_request(:delete_connection_type, params)
+      req.send_request(options)
+    end
+
     # Removes a specified crawler from the Glue Data Catalog, unless the
     # crawler state is `RUNNING`.
     #
@@ -5908,7 +5936,13 @@ module Aws::Glue
     end
 
     # The `DescribeConnectionType` API provides full details of the
-    # supported options for a given connection type in Glue.
+    # supported options for a given connection type in Glue. The response
+    # includes authentication configuration details that show supported
+    # authentication types and properties, and RestConfiguration for custom
+    # REST-based connection types registered via `RegisterConnectionType`.
+    #
+    # See also: `ListConnectionTypes`, `RegisterConnectionType`,
+    # `DeleteConnectionType`
     #
     # @option params [required, String] :connection_type
     #   The name of the connection type to be described.
@@ -5926,6 +5960,7 @@ module Aws::Glue
     #   * {Types::DescribeConnectionTypeResponse#athena_connection_properties #athena_connection_properties} => Hash&lt;String,Types::Property&gt;
     #   * {Types::DescribeConnectionTypeResponse#python_connection_properties #python_connection_properties} => Hash&lt;String,Types::Property&gt;
     #   * {Types::DescribeConnectionTypeResponse#spark_connection_properties #spark_connection_properties} => Hash&lt;String,Types::Property&gt;
+    #   * {Types::DescribeConnectionTypeResponse#rest_configuration #rest_configuration} => Types::RestConfiguration
     #
     # @example Request syntax with placeholder values
     #
@@ -5955,6 +5990,8 @@ module Aws::Glue
     #   resp.connection_properties["PropertyName"].allowed_values[0].value #=> String
     #   resp.connection_properties["PropertyName"].data_operation_scopes #=> Array
     #   resp.connection_properties["PropertyName"].data_operation_scopes[0] #=> String, one of "READ", "WRITE"
+    #   resp.connection_properties["PropertyName"].key_override #=> String
+    #   resp.connection_properties["PropertyName"].property_location #=> String, one of "HEADER", "BODY", "QUERY_PARAM", "PATH"
     #   resp.connection_options #=> Hash
     #   resp.connection_options["PropertyName"].name #=> String
     #   resp.connection_options["PropertyName"].description #=> String
@@ -5967,6 +6004,8 @@ module Aws::Glue
     #   resp.connection_options["PropertyName"].allowed_values[0].value #=> String
     #   resp.connection_options["PropertyName"].data_operation_scopes #=> Array
     #   resp.connection_options["PropertyName"].data_operation_scopes[0] #=> String, one of "READ", "WRITE"
+    #   resp.connection_options["PropertyName"].key_override #=> String
+    #   resp.connection_options["PropertyName"].property_location #=> String, one of "HEADER", "BODY", "QUERY_PARAM", "PATH"
     #   resp.authentication_configuration.authentication_type.name #=> String
     #   resp.authentication_configuration.authentication_type.description #=> String
     #   resp.authentication_configuration.authentication_type.required #=> Boolean
@@ -5978,6 +6017,8 @@ module Aws::Glue
     #   resp.authentication_configuration.authentication_type.allowed_values[0].value #=> String
     #   resp.authentication_configuration.authentication_type.data_operation_scopes #=> Array
     #   resp.authentication_configuration.authentication_type.data_operation_scopes[0] #=> String, one of "READ", "WRITE"
+    #   resp.authentication_configuration.authentication_type.key_override #=> String
+    #   resp.authentication_configuration.authentication_type.property_location #=> String, one of "HEADER", "BODY", "QUERY_PARAM", "PATH"
     #   resp.authentication_configuration.secret_arn.name #=> String
     #   resp.authentication_configuration.secret_arn.description #=> String
     #   resp.authentication_configuration.secret_arn.required #=> Boolean
@@ -5989,6 +6030,8 @@ module Aws::Glue
     #   resp.authentication_configuration.secret_arn.allowed_values[0].value #=> String
     #   resp.authentication_configuration.secret_arn.data_operation_scopes #=> Array
     #   resp.authentication_configuration.secret_arn.data_operation_scopes[0] #=> String, one of "READ", "WRITE"
+    #   resp.authentication_configuration.secret_arn.key_override #=> String
+    #   resp.authentication_configuration.secret_arn.property_location #=> String, one of "HEADER", "BODY", "QUERY_PARAM", "PATH"
     #   resp.authentication_configuration.o_auth_2_properties #=> Hash
     #   resp.authentication_configuration.o_auth_2_properties["PropertyName"].name #=> String
     #   resp.authentication_configuration.o_auth_2_properties["PropertyName"].description #=> String
@@ -6001,6 +6044,8 @@ module Aws::Glue
     #   resp.authentication_configuration.o_auth_2_properties["PropertyName"].allowed_values[0].value #=> String
     #   resp.authentication_configuration.o_auth_2_properties["PropertyName"].data_operation_scopes #=> Array
     #   resp.authentication_configuration.o_auth_2_properties["PropertyName"].data_operation_scopes[0] #=> String, one of "READ", "WRITE"
+    #   resp.authentication_configuration.o_auth_2_properties["PropertyName"].key_override #=> String
+    #   resp.authentication_configuration.o_auth_2_properties["PropertyName"].property_location #=> String, one of "HEADER", "BODY", "QUERY_PARAM", "PATH"
     #   resp.authentication_configuration.basic_authentication_properties #=> Hash
     #   resp.authentication_configuration.basic_authentication_properties["PropertyName"].name #=> String
     #   resp.authentication_configuration.basic_authentication_properties["PropertyName"].description #=> String
@@ -6013,6 +6058,8 @@ module Aws::Glue
     #   resp.authentication_configuration.basic_authentication_properties["PropertyName"].allowed_values[0].value #=> String
     #   resp.authentication_configuration.basic_authentication_properties["PropertyName"].data_operation_scopes #=> Array
     #   resp.authentication_configuration.basic_authentication_properties["PropertyName"].data_operation_scopes[0] #=> String, one of "READ", "WRITE"
+    #   resp.authentication_configuration.basic_authentication_properties["PropertyName"].key_override #=> String
+    #   resp.authentication_configuration.basic_authentication_properties["PropertyName"].property_location #=> String, one of "HEADER", "BODY", "QUERY_PARAM", "PATH"
     #   resp.authentication_configuration.custom_authentication_properties #=> Hash
     #   resp.authentication_configuration.custom_authentication_properties["PropertyName"].name #=> String
     #   resp.authentication_configuration.custom_authentication_properties["PropertyName"].description #=> String
@@ -6025,6 +6072,8 @@ module Aws::Glue
     #   resp.authentication_configuration.custom_authentication_properties["PropertyName"].allowed_values[0].value #=> String
     #   resp.authentication_configuration.custom_authentication_properties["PropertyName"].data_operation_scopes #=> Array
     #   resp.authentication_configuration.custom_authentication_properties["PropertyName"].data_operation_scopes[0] #=> String, one of "READ", "WRITE"
+    #   resp.authentication_configuration.custom_authentication_properties["PropertyName"].key_override #=> String
+    #   resp.authentication_configuration.custom_authentication_properties["PropertyName"].property_location #=> String, one of "HEADER", "BODY", "QUERY_PARAM", "PATH"
     #   resp.compute_environment_configurations #=> Hash
     #   resp.compute_environment_configurations["ComputeEnvironmentName"].name #=> String
     #   resp.compute_environment_configurations["ComputeEnvironmentName"].description #=> String
@@ -6043,6 +6092,8 @@ module Aws::Glue
     #   resp.compute_environment_configurations["ComputeEnvironmentName"].connection_options["PropertyName"].allowed_values[0].value #=> String
     #   resp.compute_environment_configurations["ComputeEnvironmentName"].connection_options["PropertyName"].data_operation_scopes #=> Array
     #   resp.compute_environment_configurations["ComputeEnvironmentName"].connection_options["PropertyName"].data_operation_scopes[0] #=> String, one of "READ", "WRITE"
+    #   resp.compute_environment_configurations["ComputeEnvironmentName"].connection_options["PropertyName"].key_override #=> String
+    #   resp.compute_environment_configurations["ComputeEnvironmentName"].connection_options["PropertyName"].property_location #=> String, one of "HEADER", "BODY", "QUERY_PARAM", "PATH"
     #   resp.compute_environment_configurations["ComputeEnvironmentName"].connection_property_name_overrides #=> Hash
     #   resp.compute_environment_configurations["ComputeEnvironmentName"].connection_property_name_overrides["PropertyName"] #=> String
     #   resp.compute_environment_configurations["ComputeEnvironmentName"].connection_option_name_overrides #=> Hash
@@ -6062,6 +6113,8 @@ module Aws::Glue
     #   resp.physical_connection_requirements["PropertyName"].allowed_values[0].value #=> String
     #   resp.physical_connection_requirements["PropertyName"].data_operation_scopes #=> Array
     #   resp.physical_connection_requirements["PropertyName"].data_operation_scopes[0] #=> String, one of "READ", "WRITE"
+    #   resp.physical_connection_requirements["PropertyName"].key_override #=> String
+    #   resp.physical_connection_requirements["PropertyName"].property_location #=> String, one of "HEADER", "BODY", "QUERY_PARAM", "PATH"
     #   resp.athena_connection_properties #=> Hash
     #   resp.athena_connection_properties["PropertyName"].name #=> String
     #   resp.athena_connection_properties["PropertyName"].description #=> String
@@ -6074,6 +6127,8 @@ module Aws::Glue
     #   resp.athena_connection_properties["PropertyName"].allowed_values[0].value #=> String
     #   resp.athena_connection_properties["PropertyName"].data_operation_scopes #=> Array
     #   resp.athena_connection_properties["PropertyName"].data_operation_scopes[0] #=> String, one of "READ", "WRITE"
+    #   resp.athena_connection_properties["PropertyName"].key_override #=> String
+    #   resp.athena_connection_properties["PropertyName"].property_location #=> String, one of "HEADER", "BODY", "QUERY_PARAM", "PATH"
     #   resp.python_connection_properties #=> Hash
     #   resp.python_connection_properties["PropertyName"].name #=> String
     #   resp.python_connection_properties["PropertyName"].description #=> String
@@ -6086,6 +6141,8 @@ module Aws::Glue
     #   resp.python_connection_properties["PropertyName"].allowed_values[0].value #=> String
     #   resp.python_connection_properties["PropertyName"].data_operation_scopes #=> Array
     #   resp.python_connection_properties["PropertyName"].data_operation_scopes[0] #=> String, one of "READ", "WRITE"
+    #   resp.python_connection_properties["PropertyName"].key_override #=> String
+    #   resp.python_connection_properties["PropertyName"].property_location #=> String, one of "HEADER", "BODY", "QUERY_PARAM", "PATH"
     #   resp.spark_connection_properties #=> Hash
     #   resp.spark_connection_properties["PropertyName"].name #=> String
     #   resp.spark_connection_properties["PropertyName"].description #=> String
@@ -6098,6 +6155,111 @@ module Aws::Glue
     #   resp.spark_connection_properties["PropertyName"].allowed_values[0].value #=> String
     #   resp.spark_connection_properties["PropertyName"].data_operation_scopes #=> Array
     #   resp.spark_connection_properties["PropertyName"].data_operation_scopes[0] #=> String, one of "READ", "WRITE"
+    #   resp.spark_connection_properties["PropertyName"].key_override #=> String
+    #   resp.spark_connection_properties["PropertyName"].property_location #=> String, one of "HEADER", "BODY", "QUERY_PARAM", "PATH"
+    #   resp.rest_configuration.global_source_configuration.request_method #=> String, one of "GET", "POST"
+    #   resp.rest_configuration.global_source_configuration.request_path #=> String
+    #   resp.rest_configuration.global_source_configuration.request_parameters #=> Array
+    #   resp.rest_configuration.global_source_configuration.request_parameters[0].name #=> String
+    #   resp.rest_configuration.global_source_configuration.request_parameters[0].key_override #=> String
+    #   resp.rest_configuration.global_source_configuration.request_parameters[0].required #=> Boolean
+    #   resp.rest_configuration.global_source_configuration.request_parameters[0].default_value #=> String
+    #   resp.rest_configuration.global_source_configuration.request_parameters[0].allowed_values #=> Array
+    #   resp.rest_configuration.global_source_configuration.request_parameters[0].allowed_values[0] #=> String
+    #   resp.rest_configuration.global_source_configuration.request_parameters[0].property_location #=> String, one of "HEADER", "BODY", "QUERY_PARAM", "PATH"
+    #   resp.rest_configuration.global_source_configuration.request_parameters[0].property_type #=> String, one of "USER_INPUT", "SECRET", "READ_ONLY", "UNUSED", "SECRET_OR_USER_INPUT"
+    #   resp.rest_configuration.global_source_configuration.response_configuration.result_path #=> String
+    #   resp.rest_configuration.global_source_configuration.response_configuration.error_path #=> String
+    #   resp.rest_configuration.global_source_configuration.pagination_configuration.cursor_configuration.next_page.key #=> String
+    #   resp.rest_configuration.global_source_configuration.pagination_configuration.cursor_configuration.next_page.default_value #=> String
+    #   resp.rest_configuration.global_source_configuration.pagination_configuration.cursor_configuration.next_page.property_location #=> String, one of "HEADER", "BODY", "QUERY_PARAM", "PATH"
+    #   resp.rest_configuration.global_source_configuration.pagination_configuration.cursor_configuration.next_page.value.content_path #=> String
+    #   resp.rest_configuration.global_source_configuration.pagination_configuration.cursor_configuration.next_page.value.header_key #=> String
+    #   resp.rest_configuration.global_source_configuration.pagination_configuration.cursor_configuration.limit_parameter.key #=> String
+    #   resp.rest_configuration.global_source_configuration.pagination_configuration.cursor_configuration.limit_parameter.default_value #=> String
+    #   resp.rest_configuration.global_source_configuration.pagination_configuration.cursor_configuration.limit_parameter.property_location #=> String, one of "HEADER", "BODY", "QUERY_PARAM", "PATH"
+    #   resp.rest_configuration.global_source_configuration.pagination_configuration.cursor_configuration.limit_parameter.value.content_path #=> String
+    #   resp.rest_configuration.global_source_configuration.pagination_configuration.cursor_configuration.limit_parameter.value.header_key #=> String
+    #   resp.rest_configuration.global_source_configuration.pagination_configuration.offset_configuration.offset_parameter.key #=> String
+    #   resp.rest_configuration.global_source_configuration.pagination_configuration.offset_configuration.offset_parameter.default_value #=> String
+    #   resp.rest_configuration.global_source_configuration.pagination_configuration.offset_configuration.offset_parameter.property_location #=> String, one of "HEADER", "BODY", "QUERY_PARAM", "PATH"
+    #   resp.rest_configuration.global_source_configuration.pagination_configuration.offset_configuration.offset_parameter.value.content_path #=> String
+    #   resp.rest_configuration.global_source_configuration.pagination_configuration.offset_configuration.offset_parameter.value.header_key #=> String
+    #   resp.rest_configuration.global_source_configuration.pagination_configuration.offset_configuration.limit_parameter.key #=> String
+    #   resp.rest_configuration.global_source_configuration.pagination_configuration.offset_configuration.limit_parameter.default_value #=> String
+    #   resp.rest_configuration.global_source_configuration.pagination_configuration.offset_configuration.limit_parameter.property_location #=> String, one of "HEADER", "BODY", "QUERY_PARAM", "PATH"
+    #   resp.rest_configuration.global_source_configuration.pagination_configuration.offset_configuration.limit_parameter.value.content_path #=> String
+    #   resp.rest_configuration.global_source_configuration.pagination_configuration.offset_configuration.limit_parameter.value.header_key #=> String
+    #   resp.rest_configuration.validation_endpoint_configuration.request_method #=> String, one of "GET", "POST"
+    #   resp.rest_configuration.validation_endpoint_configuration.request_path #=> String
+    #   resp.rest_configuration.validation_endpoint_configuration.request_parameters #=> Array
+    #   resp.rest_configuration.validation_endpoint_configuration.request_parameters[0].name #=> String
+    #   resp.rest_configuration.validation_endpoint_configuration.request_parameters[0].key_override #=> String
+    #   resp.rest_configuration.validation_endpoint_configuration.request_parameters[0].required #=> Boolean
+    #   resp.rest_configuration.validation_endpoint_configuration.request_parameters[0].default_value #=> String
+    #   resp.rest_configuration.validation_endpoint_configuration.request_parameters[0].allowed_values #=> Array
+    #   resp.rest_configuration.validation_endpoint_configuration.request_parameters[0].allowed_values[0] #=> String
+    #   resp.rest_configuration.validation_endpoint_configuration.request_parameters[0].property_location #=> String, one of "HEADER", "BODY", "QUERY_PARAM", "PATH"
+    #   resp.rest_configuration.validation_endpoint_configuration.request_parameters[0].property_type #=> String, one of "USER_INPUT", "SECRET", "READ_ONLY", "UNUSED", "SECRET_OR_USER_INPUT"
+    #   resp.rest_configuration.validation_endpoint_configuration.response_configuration.result_path #=> String
+    #   resp.rest_configuration.validation_endpoint_configuration.response_configuration.error_path #=> String
+    #   resp.rest_configuration.validation_endpoint_configuration.pagination_configuration.cursor_configuration.next_page.key #=> String
+    #   resp.rest_configuration.validation_endpoint_configuration.pagination_configuration.cursor_configuration.next_page.default_value #=> String
+    #   resp.rest_configuration.validation_endpoint_configuration.pagination_configuration.cursor_configuration.next_page.property_location #=> String, one of "HEADER", "BODY", "QUERY_PARAM", "PATH"
+    #   resp.rest_configuration.validation_endpoint_configuration.pagination_configuration.cursor_configuration.next_page.value.content_path #=> String
+    #   resp.rest_configuration.validation_endpoint_configuration.pagination_configuration.cursor_configuration.next_page.value.header_key #=> String
+    #   resp.rest_configuration.validation_endpoint_configuration.pagination_configuration.cursor_configuration.limit_parameter.key #=> String
+    #   resp.rest_configuration.validation_endpoint_configuration.pagination_configuration.cursor_configuration.limit_parameter.default_value #=> String
+    #   resp.rest_configuration.validation_endpoint_configuration.pagination_configuration.cursor_configuration.limit_parameter.property_location #=> String, one of "HEADER", "BODY", "QUERY_PARAM", "PATH"
+    #   resp.rest_configuration.validation_endpoint_configuration.pagination_configuration.cursor_configuration.limit_parameter.value.content_path #=> String
+    #   resp.rest_configuration.validation_endpoint_configuration.pagination_configuration.cursor_configuration.limit_parameter.value.header_key #=> String
+    #   resp.rest_configuration.validation_endpoint_configuration.pagination_configuration.offset_configuration.offset_parameter.key #=> String
+    #   resp.rest_configuration.validation_endpoint_configuration.pagination_configuration.offset_configuration.offset_parameter.default_value #=> String
+    #   resp.rest_configuration.validation_endpoint_configuration.pagination_configuration.offset_configuration.offset_parameter.property_location #=> String, one of "HEADER", "BODY", "QUERY_PARAM", "PATH"
+    #   resp.rest_configuration.validation_endpoint_configuration.pagination_configuration.offset_configuration.offset_parameter.value.content_path #=> String
+    #   resp.rest_configuration.validation_endpoint_configuration.pagination_configuration.offset_configuration.offset_parameter.value.header_key #=> String
+    #   resp.rest_configuration.validation_endpoint_configuration.pagination_configuration.offset_configuration.limit_parameter.key #=> String
+    #   resp.rest_configuration.validation_endpoint_configuration.pagination_configuration.offset_configuration.limit_parameter.default_value #=> String
+    #   resp.rest_configuration.validation_endpoint_configuration.pagination_configuration.offset_configuration.limit_parameter.property_location #=> String, one of "HEADER", "BODY", "QUERY_PARAM", "PATH"
+    #   resp.rest_configuration.validation_endpoint_configuration.pagination_configuration.offset_configuration.limit_parameter.value.content_path #=> String
+    #   resp.rest_configuration.validation_endpoint_configuration.pagination_configuration.offset_configuration.limit_parameter.value.header_key #=> String
+    #   resp.rest_configuration.entity_configurations #=> Hash
+    #   resp.rest_configuration.entity_configurations["EntityConfigurationMapKeyString"].source_configuration.request_method #=> String, one of "GET", "POST"
+    #   resp.rest_configuration.entity_configurations["EntityConfigurationMapKeyString"].source_configuration.request_path #=> String
+    #   resp.rest_configuration.entity_configurations["EntityConfigurationMapKeyString"].source_configuration.request_parameters #=> Array
+    #   resp.rest_configuration.entity_configurations["EntityConfigurationMapKeyString"].source_configuration.request_parameters[0].name #=> String
+    #   resp.rest_configuration.entity_configurations["EntityConfigurationMapKeyString"].source_configuration.request_parameters[0].key_override #=> String
+    #   resp.rest_configuration.entity_configurations["EntityConfigurationMapKeyString"].source_configuration.request_parameters[0].required #=> Boolean
+    #   resp.rest_configuration.entity_configurations["EntityConfigurationMapKeyString"].source_configuration.request_parameters[0].default_value #=> String
+    #   resp.rest_configuration.entity_configurations["EntityConfigurationMapKeyString"].source_configuration.request_parameters[0].allowed_values #=> Array
+    #   resp.rest_configuration.entity_configurations["EntityConfigurationMapKeyString"].source_configuration.request_parameters[0].allowed_values[0] #=> String
+    #   resp.rest_configuration.entity_configurations["EntityConfigurationMapKeyString"].source_configuration.request_parameters[0].property_location #=> String, one of "HEADER", "BODY", "QUERY_PARAM", "PATH"
+    #   resp.rest_configuration.entity_configurations["EntityConfigurationMapKeyString"].source_configuration.request_parameters[0].property_type #=> String, one of "USER_INPUT", "SECRET", "READ_ONLY", "UNUSED", "SECRET_OR_USER_INPUT"
+    #   resp.rest_configuration.entity_configurations["EntityConfigurationMapKeyString"].source_configuration.response_configuration.result_path #=> String
+    #   resp.rest_configuration.entity_configurations["EntityConfigurationMapKeyString"].source_configuration.response_configuration.error_path #=> String
+    #   resp.rest_configuration.entity_configurations["EntityConfigurationMapKeyString"].source_configuration.pagination_configuration.cursor_configuration.next_page.key #=> String
+    #   resp.rest_configuration.entity_configurations["EntityConfigurationMapKeyString"].source_configuration.pagination_configuration.cursor_configuration.next_page.default_value #=> String
+    #   resp.rest_configuration.entity_configurations["EntityConfigurationMapKeyString"].source_configuration.pagination_configuration.cursor_configuration.next_page.property_location #=> String, one of "HEADER", "BODY", "QUERY_PARAM", "PATH"
+    #   resp.rest_configuration.entity_configurations["EntityConfigurationMapKeyString"].source_configuration.pagination_configuration.cursor_configuration.next_page.value.content_path #=> String
+    #   resp.rest_configuration.entity_configurations["EntityConfigurationMapKeyString"].source_configuration.pagination_configuration.cursor_configuration.next_page.value.header_key #=> String
+    #   resp.rest_configuration.entity_configurations["EntityConfigurationMapKeyString"].source_configuration.pagination_configuration.cursor_configuration.limit_parameter.key #=> String
+    #   resp.rest_configuration.entity_configurations["EntityConfigurationMapKeyString"].source_configuration.pagination_configuration.cursor_configuration.limit_parameter.default_value #=> String
+    #   resp.rest_configuration.entity_configurations["EntityConfigurationMapKeyString"].source_configuration.pagination_configuration.cursor_configuration.limit_parameter.property_location #=> String, one of "HEADER", "BODY", "QUERY_PARAM", "PATH"
+    #   resp.rest_configuration.entity_configurations["EntityConfigurationMapKeyString"].source_configuration.pagination_configuration.cursor_configuration.limit_parameter.value.content_path #=> String
+    #   resp.rest_configuration.entity_configurations["EntityConfigurationMapKeyString"].source_configuration.pagination_configuration.cursor_configuration.limit_parameter.value.header_key #=> String
+    #   resp.rest_configuration.entity_configurations["EntityConfigurationMapKeyString"].source_configuration.pagination_configuration.offset_configuration.offset_parameter.key #=> String
+    #   resp.rest_configuration.entity_configurations["EntityConfigurationMapKeyString"].source_configuration.pagination_configuration.offset_configuration.offset_parameter.default_value #=> String
+    #   resp.rest_configuration.entity_configurations["EntityConfigurationMapKeyString"].source_configuration.pagination_configuration.offset_configuration.offset_parameter.property_location #=> String, one of "HEADER", "BODY", "QUERY_PARAM", "PATH"
+    #   resp.rest_configuration.entity_configurations["EntityConfigurationMapKeyString"].source_configuration.pagination_configuration.offset_configuration.offset_parameter.value.content_path #=> String
+    #   resp.rest_configuration.entity_configurations["EntityConfigurationMapKeyString"].source_configuration.pagination_configuration.offset_configuration.offset_parameter.value.header_key #=> String
+    #   resp.rest_configuration.entity_configurations["EntityConfigurationMapKeyString"].source_configuration.pagination_configuration.offset_configuration.limit_parameter.key #=> String
+    #   resp.rest_configuration.entity_configurations["EntityConfigurationMapKeyString"].source_configuration.pagination_configuration.offset_configuration.limit_parameter.default_value #=> String
+    #   resp.rest_configuration.entity_configurations["EntityConfigurationMapKeyString"].source_configuration.pagination_configuration.offset_configuration.limit_parameter.property_location #=> String, one of "HEADER", "BODY", "QUERY_PARAM", "PATH"
+    #   resp.rest_configuration.entity_configurations["EntityConfigurationMapKeyString"].source_configuration.pagination_configuration.offset_configuration.limit_parameter.value.content_path #=> String
+    #   resp.rest_configuration.entity_configurations["EntityConfigurationMapKeyString"].source_configuration.pagination_configuration.offset_configuration.limit_parameter.value.header_key #=> String
+    #   resp.rest_configuration.entity_configurations["EntityConfigurationMapKeyString"].schema #=> Hash
+    #   resp.rest_configuration.entity_configurations["EntityConfigurationMapKeyString"].schema["FieldDefinitionMapKeyString"].name #=> String
+    #   resp.rest_configuration.entity_configurations["EntityConfigurationMapKeyString"].schema["FieldDefinitionMapKeyString"].field_data_type #=> String, one of "INT", "SMALLINT", "BIGINT", "FLOAT", "LONG", "DATE", "BOOLEAN", "MAP", "ARRAY", "STRING", "TIMESTAMP", "DECIMAL", "BYTE", "SHORT", "DOUBLE", "STRUCT", "BINARY", "UNION"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DescribeConnectionType AWS API Documentation
     #
@@ -6156,7 +6318,7 @@ module Aws::Glue
     #   resp.fields[0].field_name #=> String
     #   resp.fields[0].label #=> String
     #   resp.fields[0].description #=> String
-    #   resp.fields[0].field_type #=> String, one of "INT", "SMALLINT", "BIGINT", "FLOAT", "LONG", "DATE", "BOOLEAN", "MAP", "ARRAY", "STRING", "TIMESTAMP", "DECIMAL", "BYTE", "SHORT", "DOUBLE", "STRUCT"
+    #   resp.fields[0].field_type #=> String, one of "INT", "SMALLINT", "BIGINT", "FLOAT", "LONG", "DATE", "BOOLEAN", "MAP", "ARRAY", "STRING", "TIMESTAMP", "DECIMAL", "BYTE", "SHORT", "DOUBLE", "STRUCT", "BINARY", "UNION"
     #   resp.fields[0].is_primary_key #=> Boolean
     #   resp.fields[0].is_nullable #=> Boolean
     #   resp.fields[0].is_retrievable #=> Boolean
@@ -12521,8 +12683,13 @@ module Aws::Glue
     # The `ListConnectionTypes` API provides a discovery mechanism to learn
     # available connection types in Glue. The response contains a list of
     # connection types with high-level details of what is supported for each
-    # connection type. The connection types listed are the set of supported
-    # options for the `ConnectionType` value in the `CreateConnection` API.
+    # connection type, including both built-in connection types and custom
+    # connection types registered via `RegisterConnectionType`. The
+    # connection types listed are the set of supported options for the
+    # `ConnectionType` value in the `CreateConnection` API.
+    #
+    # See also: `DescribeConnectionType`, `RegisterConnectionType`,
+    # `DeleteConnectionType`
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return.
@@ -14422,6 +14589,507 @@ module Aws::Glue
     # @param [Hash] params ({})
     def query_schema_version_metadata(params = {}, options = {})
       req = build_request(:query_schema_version_metadata, params)
+      req.send_request(options)
+    end
+
+    # Registers a custom connection type in Glue based on the configuration
+    # provided. This operation enables customers to configure custom
+    # connectors for any data source with REST-based APIs, eliminating the
+    # need for building custom Lambda connectors.
+    #
+    # The registered connection type stores details about how requests and
+    # responses are interpreted by REST sources, including connection
+    # properties, authentication configuration, and REST configuration with
+    # entity definitions. Once registered, customers can create connections
+    # using this connection type and work with them the same way as natively
+    # supported Glue connectors.
+    #
+    # Supports multiple authentication types including Basic, OAuth2 (Client
+    # Credentials, JWT Bearer, Authorization Code), and Custom Auth
+    # configurations.
+    #
+    # @option params [required, String] :connection_type
+    #   The name of the connection type. Must be between 1 and 255 characters
+    #   and must be prefixed with "REST-" to indicate it is a REST-based
+    #   connector.
+    #
+    # @option params [required, String] :integration_type
+    #   The integration type for the connection. Currently only "REST"
+    #   protocol is supported.
+    #
+    # @option params [String] :description
+    #   A description of the connection type. Can be up to 2048 characters and
+    #   provides details about the purpose and functionality of the connection
+    #   type.
+    #
+    # @option params [required, Types::ConnectionPropertiesConfiguration] :connection_properties
+    #   Defines the base URL and additional request parameters needed during
+    #   connection creation for this connection type.
+    #
+    # @option params [required, Types::ConnectorAuthenticationConfiguration] :connector_authentication_configuration
+    #   Defines the supported authentication types and required properties for
+    #   this connection type, including Basic, OAuth2, and Custom
+    #   authentication methods.
+    #
+    # @option params [required, Types::RestConfiguration] :rest_configuration
+    #   Defines the HTTP request and response configuration, validation
+    #   endpoint, and entity configurations for REST API interactions.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   The tags you assign to the connection type.
+    #
+    # @return [Types::RegisterConnectionTypeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::RegisterConnectionTypeResponse#connection_type_arn #connection_type_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.register_connection_type({
+    #     connection_type: "NameString", # required
+    #     integration_type: "REST", # required, accepts REST
+    #     description: "Description",
+    #     connection_properties: { # required
+    #       url: {
+    #         name: "PropertyName", # required
+    #         key_override: "ConnectorPropertyKey",
+    #         required: false, # required
+    #         default_value: "String",
+    #         allowed_values: ["String"],
+    #         property_location: "HEADER", # accepts HEADER, BODY, QUERY_PARAM, PATH
+    #         property_type: "USER_INPUT", # required, accepts USER_INPUT, SECRET, READ_ONLY, UNUSED, SECRET_OR_USER_INPUT
+    #       },
+    #       additional_request_parameters: [
+    #         {
+    #           name: "PropertyName", # required
+    #           key_override: "ConnectorPropertyKey",
+    #           required: false, # required
+    #           default_value: "String",
+    #           allowed_values: ["String"],
+    #           property_location: "HEADER", # accepts HEADER, BODY, QUERY_PARAM, PATH
+    #           property_type: "USER_INPUT", # required, accepts USER_INPUT, SECRET, READ_ONLY, UNUSED, SECRET_OR_USER_INPUT
+    #         },
+    #       ],
+    #     },
+    #     connector_authentication_configuration: { # required
+    #       authentication_types: ["BASIC"], # required, accepts BASIC, OAUTH2, CUSTOM, IAM
+    #       o_auth_2_properties: {
+    #         o_auth_2_grant_type: "CLIENT_CREDENTIALS", # required, accepts CLIENT_CREDENTIALS, JWT_BEARER, AUTHORIZATION_CODE
+    #         client_credentials_properties: {
+    #           token_url: {
+    #             name: "PropertyName", # required
+    #             key_override: "ConnectorPropertyKey",
+    #             required: false, # required
+    #             default_value: "String",
+    #             allowed_values: ["String"],
+    #             property_location: "HEADER", # accepts HEADER, BODY, QUERY_PARAM, PATH
+    #             property_type: "USER_INPUT", # required, accepts USER_INPUT, SECRET, READ_ONLY, UNUSED, SECRET_OR_USER_INPUT
+    #           },
+    #           request_method: "GET", # accepts GET, POST
+    #           content_type: "APPLICATION_JSON", # accepts APPLICATION_JSON, URL_ENCODED
+    #           client_id: {
+    #             name: "PropertyName", # required
+    #             key_override: "ConnectorPropertyKey",
+    #             required: false, # required
+    #             default_value: "String",
+    #             allowed_values: ["String"],
+    #             property_location: "HEADER", # accepts HEADER, BODY, QUERY_PARAM, PATH
+    #             property_type: "USER_INPUT", # required, accepts USER_INPUT, SECRET, READ_ONLY, UNUSED, SECRET_OR_USER_INPUT
+    #           },
+    #           client_secret: {
+    #             name: "PropertyName", # required
+    #             key_override: "ConnectorPropertyKey",
+    #             required: false, # required
+    #             default_value: "String",
+    #             allowed_values: ["String"],
+    #             property_location: "HEADER", # accepts HEADER, BODY, QUERY_PARAM, PATH
+    #             property_type: "USER_INPUT", # required, accepts USER_INPUT, SECRET, READ_ONLY, UNUSED, SECRET_OR_USER_INPUT
+    #           },
+    #           scope: {
+    #             name: "PropertyName", # required
+    #             key_override: "ConnectorPropertyKey",
+    #             required: false, # required
+    #             default_value: "String",
+    #             allowed_values: ["String"],
+    #             property_location: "HEADER", # accepts HEADER, BODY, QUERY_PARAM, PATH
+    #             property_type: "USER_INPUT", # required, accepts USER_INPUT, SECRET, READ_ONLY, UNUSED, SECRET_OR_USER_INPUT
+    #           },
+    #           token_url_parameters: [
+    #             {
+    #               name: "PropertyName", # required
+    #               key_override: "ConnectorPropertyKey",
+    #               required: false, # required
+    #               default_value: "String",
+    #               allowed_values: ["String"],
+    #               property_location: "HEADER", # accepts HEADER, BODY, QUERY_PARAM, PATH
+    #               property_type: "USER_INPUT", # required, accepts USER_INPUT, SECRET, READ_ONLY, UNUSED, SECRET_OR_USER_INPUT
+    #             },
+    #           ],
+    #         },
+    #         jwt_bearer_properties: {
+    #           token_url: {
+    #             name: "PropertyName", # required
+    #             key_override: "ConnectorPropertyKey",
+    #             required: false, # required
+    #             default_value: "String",
+    #             allowed_values: ["String"],
+    #             property_location: "HEADER", # accepts HEADER, BODY, QUERY_PARAM, PATH
+    #             property_type: "USER_INPUT", # required, accepts USER_INPUT, SECRET, READ_ONLY, UNUSED, SECRET_OR_USER_INPUT
+    #           },
+    #           request_method: "GET", # accepts GET, POST
+    #           content_type: "APPLICATION_JSON", # accepts APPLICATION_JSON, URL_ENCODED
+    #           jwt_token: {
+    #             name: "PropertyName", # required
+    #             key_override: "ConnectorPropertyKey",
+    #             required: false, # required
+    #             default_value: "String",
+    #             allowed_values: ["String"],
+    #             property_location: "HEADER", # accepts HEADER, BODY, QUERY_PARAM, PATH
+    #             property_type: "USER_INPUT", # required, accepts USER_INPUT, SECRET, READ_ONLY, UNUSED, SECRET_OR_USER_INPUT
+    #           },
+    #           token_url_parameters: [
+    #             {
+    #               name: "PropertyName", # required
+    #               key_override: "ConnectorPropertyKey",
+    #               required: false, # required
+    #               default_value: "String",
+    #               allowed_values: ["String"],
+    #               property_location: "HEADER", # accepts HEADER, BODY, QUERY_PARAM, PATH
+    #               property_type: "USER_INPUT", # required, accepts USER_INPUT, SECRET, READ_ONLY, UNUSED, SECRET_OR_USER_INPUT
+    #             },
+    #           ],
+    #         },
+    #         authorization_code_properties: {
+    #           authorization_code_url: {
+    #             name: "PropertyName", # required
+    #             key_override: "ConnectorPropertyKey",
+    #             required: false, # required
+    #             default_value: "String",
+    #             allowed_values: ["String"],
+    #             property_location: "HEADER", # accepts HEADER, BODY, QUERY_PARAM, PATH
+    #             property_type: "USER_INPUT", # required, accepts USER_INPUT, SECRET, READ_ONLY, UNUSED, SECRET_OR_USER_INPUT
+    #           },
+    #           authorization_code: {
+    #             name: "PropertyName", # required
+    #             key_override: "ConnectorPropertyKey",
+    #             required: false, # required
+    #             default_value: "String",
+    #             allowed_values: ["String"],
+    #             property_location: "HEADER", # accepts HEADER, BODY, QUERY_PARAM, PATH
+    #             property_type: "USER_INPUT", # required, accepts USER_INPUT, SECRET, READ_ONLY, UNUSED, SECRET_OR_USER_INPUT
+    #           },
+    #           redirect_uri: {
+    #             name: "PropertyName", # required
+    #             key_override: "ConnectorPropertyKey",
+    #             required: false, # required
+    #             default_value: "String",
+    #             allowed_values: ["String"],
+    #             property_location: "HEADER", # accepts HEADER, BODY, QUERY_PARAM, PATH
+    #             property_type: "USER_INPUT", # required, accepts USER_INPUT, SECRET, READ_ONLY, UNUSED, SECRET_OR_USER_INPUT
+    #           },
+    #           token_url: {
+    #             name: "PropertyName", # required
+    #             key_override: "ConnectorPropertyKey",
+    #             required: false, # required
+    #             default_value: "String",
+    #             allowed_values: ["String"],
+    #             property_location: "HEADER", # accepts HEADER, BODY, QUERY_PARAM, PATH
+    #             property_type: "USER_INPUT", # required, accepts USER_INPUT, SECRET, READ_ONLY, UNUSED, SECRET_OR_USER_INPUT
+    #           },
+    #           request_method: "GET", # accepts GET, POST
+    #           content_type: "APPLICATION_JSON", # accepts APPLICATION_JSON, URL_ENCODED
+    #           client_id: {
+    #             name: "PropertyName", # required
+    #             key_override: "ConnectorPropertyKey",
+    #             required: false, # required
+    #             default_value: "String",
+    #             allowed_values: ["String"],
+    #             property_location: "HEADER", # accepts HEADER, BODY, QUERY_PARAM, PATH
+    #             property_type: "USER_INPUT", # required, accepts USER_INPUT, SECRET, READ_ONLY, UNUSED, SECRET_OR_USER_INPUT
+    #           },
+    #           client_secret: {
+    #             name: "PropertyName", # required
+    #             key_override: "ConnectorPropertyKey",
+    #             required: false, # required
+    #             default_value: "String",
+    #             allowed_values: ["String"],
+    #             property_location: "HEADER", # accepts HEADER, BODY, QUERY_PARAM, PATH
+    #             property_type: "USER_INPUT", # required, accepts USER_INPUT, SECRET, READ_ONLY, UNUSED, SECRET_OR_USER_INPUT
+    #           },
+    #           scope: {
+    #             name: "PropertyName", # required
+    #             key_override: "ConnectorPropertyKey",
+    #             required: false, # required
+    #             default_value: "String",
+    #             allowed_values: ["String"],
+    #             property_location: "HEADER", # accepts HEADER, BODY, QUERY_PARAM, PATH
+    #             property_type: "USER_INPUT", # required, accepts USER_INPUT, SECRET, READ_ONLY, UNUSED, SECRET_OR_USER_INPUT
+    #           },
+    #           prompt: {
+    #             name: "PropertyName", # required
+    #             key_override: "ConnectorPropertyKey",
+    #             required: false, # required
+    #             default_value: "String",
+    #             allowed_values: ["String"],
+    #             property_location: "HEADER", # accepts HEADER, BODY, QUERY_PARAM, PATH
+    #             property_type: "USER_INPUT", # required, accepts USER_INPUT, SECRET, READ_ONLY, UNUSED, SECRET_OR_USER_INPUT
+    #           },
+    #           token_url_parameters: [
+    #             {
+    #               name: "PropertyName", # required
+    #               key_override: "ConnectorPropertyKey",
+    #               required: false, # required
+    #               default_value: "String",
+    #               allowed_values: ["String"],
+    #               property_location: "HEADER", # accepts HEADER, BODY, QUERY_PARAM, PATH
+    #               property_type: "USER_INPUT", # required, accepts USER_INPUT, SECRET, READ_ONLY, UNUSED, SECRET_OR_USER_INPUT
+    #             },
+    #           ],
+    #         },
+    #       },
+    #       basic_authentication_properties: {
+    #         username: {
+    #           name: "PropertyName", # required
+    #           key_override: "ConnectorPropertyKey",
+    #           required: false, # required
+    #           default_value: "String",
+    #           allowed_values: ["String"],
+    #           property_location: "HEADER", # accepts HEADER, BODY, QUERY_PARAM, PATH
+    #           property_type: "USER_INPUT", # required, accepts USER_INPUT, SECRET, READ_ONLY, UNUSED, SECRET_OR_USER_INPUT
+    #         },
+    #         password: {
+    #           name: "PropertyName", # required
+    #           key_override: "ConnectorPropertyKey",
+    #           required: false, # required
+    #           default_value: "String",
+    #           allowed_values: ["String"],
+    #           property_location: "HEADER", # accepts HEADER, BODY, QUERY_PARAM, PATH
+    #           property_type: "USER_INPUT", # required, accepts USER_INPUT, SECRET, READ_ONLY, UNUSED, SECRET_OR_USER_INPUT
+    #         },
+    #       },
+    #       custom_authentication_properties: {
+    #         authentication_parameters: [ # required
+    #           {
+    #             name: "PropertyName", # required
+    #             key_override: "ConnectorPropertyKey",
+    #             required: false, # required
+    #             default_value: "String",
+    #             allowed_values: ["String"],
+    #             property_location: "HEADER", # accepts HEADER, BODY, QUERY_PARAM, PATH
+    #             property_type: "USER_INPUT", # required, accepts USER_INPUT, SECRET, READ_ONLY, UNUSED, SECRET_OR_USER_INPUT
+    #           },
+    #         ],
+    #       },
+    #     },
+    #     rest_configuration: { # required
+    #       global_source_configuration: {
+    #         request_method: "GET", # accepts GET, POST
+    #         request_path: "PathString",
+    #         request_parameters: [
+    #           {
+    #             name: "PropertyName", # required
+    #             key_override: "ConnectorPropertyKey",
+    #             required: false, # required
+    #             default_value: "String",
+    #             allowed_values: ["String"],
+    #             property_location: "HEADER", # accepts HEADER, BODY, QUERY_PARAM, PATH
+    #             property_type: "USER_INPUT", # required, accepts USER_INPUT, SECRET, READ_ONLY, UNUSED, SECRET_OR_USER_INPUT
+    #           },
+    #         ],
+    #         response_configuration: {
+    #           result_path: "JsonPathString", # required
+    #           error_path: "JsonPathString",
+    #         },
+    #         pagination_configuration: {
+    #           cursor_configuration: {
+    #             next_page: { # required
+    #               key: "ConnectorPropertyKey",
+    #               default_value: "DefaultValue",
+    #               property_location: "HEADER", # accepts HEADER, BODY, QUERY_PARAM, PATH
+    #               value: {
+    #                 content_path: "JsonPathString",
+    #                 header_key: "ConnectorPropertyKey",
+    #               },
+    #             },
+    #             limit_parameter: {
+    #               key: "ConnectorPropertyKey",
+    #               default_value: "DefaultValue",
+    #               property_location: "HEADER", # accepts HEADER, BODY, QUERY_PARAM, PATH
+    #               value: {
+    #                 content_path: "JsonPathString",
+    #                 header_key: "ConnectorPropertyKey",
+    #               },
+    #             },
+    #           },
+    #           offset_configuration: {
+    #             offset_parameter: { # required
+    #               key: "ConnectorPropertyKey",
+    #               default_value: "DefaultValue",
+    #               property_location: "HEADER", # accepts HEADER, BODY, QUERY_PARAM, PATH
+    #               value: {
+    #                 content_path: "JsonPathString",
+    #                 header_key: "ConnectorPropertyKey",
+    #               },
+    #             },
+    #             limit_parameter: { # required
+    #               key: "ConnectorPropertyKey",
+    #               default_value: "DefaultValue",
+    #               property_location: "HEADER", # accepts HEADER, BODY, QUERY_PARAM, PATH
+    #               value: {
+    #                 content_path: "JsonPathString",
+    #                 header_key: "ConnectorPropertyKey",
+    #               },
+    #             },
+    #           },
+    #         },
+    #       },
+    #       validation_endpoint_configuration: {
+    #         request_method: "GET", # accepts GET, POST
+    #         request_path: "PathString",
+    #         request_parameters: [
+    #           {
+    #             name: "PropertyName", # required
+    #             key_override: "ConnectorPropertyKey",
+    #             required: false, # required
+    #             default_value: "String",
+    #             allowed_values: ["String"],
+    #             property_location: "HEADER", # accepts HEADER, BODY, QUERY_PARAM, PATH
+    #             property_type: "USER_INPUT", # required, accepts USER_INPUT, SECRET, READ_ONLY, UNUSED, SECRET_OR_USER_INPUT
+    #           },
+    #         ],
+    #         response_configuration: {
+    #           result_path: "JsonPathString", # required
+    #           error_path: "JsonPathString",
+    #         },
+    #         pagination_configuration: {
+    #           cursor_configuration: {
+    #             next_page: { # required
+    #               key: "ConnectorPropertyKey",
+    #               default_value: "DefaultValue",
+    #               property_location: "HEADER", # accepts HEADER, BODY, QUERY_PARAM, PATH
+    #               value: {
+    #                 content_path: "JsonPathString",
+    #                 header_key: "ConnectorPropertyKey",
+    #               },
+    #             },
+    #             limit_parameter: {
+    #               key: "ConnectorPropertyKey",
+    #               default_value: "DefaultValue",
+    #               property_location: "HEADER", # accepts HEADER, BODY, QUERY_PARAM, PATH
+    #               value: {
+    #                 content_path: "JsonPathString",
+    #                 header_key: "ConnectorPropertyKey",
+    #               },
+    #             },
+    #           },
+    #           offset_configuration: {
+    #             offset_parameter: { # required
+    #               key: "ConnectorPropertyKey",
+    #               default_value: "DefaultValue",
+    #               property_location: "HEADER", # accepts HEADER, BODY, QUERY_PARAM, PATH
+    #               value: {
+    #                 content_path: "JsonPathString",
+    #                 header_key: "ConnectorPropertyKey",
+    #               },
+    #             },
+    #             limit_parameter: { # required
+    #               key: "ConnectorPropertyKey",
+    #               default_value: "DefaultValue",
+    #               property_location: "HEADER", # accepts HEADER, BODY, QUERY_PARAM, PATH
+    #               value: {
+    #                 content_path: "JsonPathString",
+    #                 header_key: "ConnectorPropertyKey",
+    #               },
+    #             },
+    #           },
+    #         },
+    #       },
+    #       entity_configurations: {
+    #         "EntityConfigurationMapKeyString" => {
+    #           source_configuration: {
+    #             request_method: "GET", # accepts GET, POST
+    #             request_path: "PathString",
+    #             request_parameters: [
+    #               {
+    #                 name: "PropertyName", # required
+    #                 key_override: "ConnectorPropertyKey",
+    #                 required: false, # required
+    #                 default_value: "String",
+    #                 allowed_values: ["String"],
+    #                 property_location: "HEADER", # accepts HEADER, BODY, QUERY_PARAM, PATH
+    #                 property_type: "USER_INPUT", # required, accepts USER_INPUT, SECRET, READ_ONLY, UNUSED, SECRET_OR_USER_INPUT
+    #               },
+    #             ],
+    #             response_configuration: {
+    #               result_path: "JsonPathString", # required
+    #               error_path: "JsonPathString",
+    #             },
+    #             pagination_configuration: {
+    #               cursor_configuration: {
+    #                 next_page: { # required
+    #                   key: "ConnectorPropertyKey",
+    #                   default_value: "DefaultValue",
+    #                   property_location: "HEADER", # accepts HEADER, BODY, QUERY_PARAM, PATH
+    #                   value: {
+    #                     content_path: "JsonPathString",
+    #                     header_key: "ConnectorPropertyKey",
+    #                   },
+    #                 },
+    #                 limit_parameter: {
+    #                   key: "ConnectorPropertyKey",
+    #                   default_value: "DefaultValue",
+    #                   property_location: "HEADER", # accepts HEADER, BODY, QUERY_PARAM, PATH
+    #                   value: {
+    #                     content_path: "JsonPathString",
+    #                     header_key: "ConnectorPropertyKey",
+    #                   },
+    #                 },
+    #               },
+    #               offset_configuration: {
+    #                 offset_parameter: { # required
+    #                   key: "ConnectorPropertyKey",
+    #                   default_value: "DefaultValue",
+    #                   property_location: "HEADER", # accepts HEADER, BODY, QUERY_PARAM, PATH
+    #                   value: {
+    #                     content_path: "JsonPathString",
+    #                     header_key: "ConnectorPropertyKey",
+    #                   },
+    #                 },
+    #                 limit_parameter: { # required
+    #                   key: "ConnectorPropertyKey",
+    #                   default_value: "DefaultValue",
+    #                   property_location: "HEADER", # accepts HEADER, BODY, QUERY_PARAM, PATH
+    #                   value: {
+    #                     content_path: "JsonPathString",
+    #                     header_key: "ConnectorPropertyKey",
+    #                   },
+    #                 },
+    #               },
+    #             },
+    #           },
+    #           schema: {
+    #             "FieldDefinitionMapKeyString" => {
+    #               name: "String", # required
+    #               field_data_type: "INT", # required, accepts INT, SMALLINT, BIGINT, FLOAT, LONG, DATE, BOOLEAN, MAP, ARRAY, STRING, TIMESTAMP, DECIMAL, BYTE, SHORT, DOUBLE, STRUCT, BINARY, UNION
+    #             },
+    #           },
+    #         },
+    #       },
+    #     },
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.connection_type_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/RegisterConnectionType AWS API Documentation
+    #
+    # @overload register_connection_type(params = {})
+    # @param [Hash] params ({})
+    def register_connection_type(params = {}, options = {})
+      req = build_request(:register_connection_type, params)
       req.send_request(options)
     end
 
@@ -18325,7 +18993,7 @@ module Aws::Glue
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.247.0'
+      context[:gem_version] = '1.249.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

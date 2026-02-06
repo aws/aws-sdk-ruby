@@ -62,6 +62,17 @@ module Aws::RAM
       SENSITIVE: []
     end
 
+    class AssociatedSource
+      attr_accessor resource_share_arn: ::String
+      attr_accessor source_id: ::String
+      attr_accessor source_type: ::String
+      attr_accessor status: ::String
+      attr_accessor last_updated_time: ::Time
+      attr_accessor creation_time: ::Time
+      attr_accessor status_message: ::String
+      SENSITIVE: []
+    end
+
     class CreatePermissionRequest
       attr_accessor name: ::String
       attr_accessor resource_type: ::String
@@ -209,11 +220,11 @@ module Aws::RAM
     end
 
     class GetResourceShareAssociationsRequest
-      attr_accessor association_type: ("PRINCIPAL" | "RESOURCE")
+      attr_accessor association_type: ("PRINCIPAL" | "RESOURCE" | "SOURCE")
       attr_accessor resource_share_arns: ::Array[::String]
       attr_accessor resource_arn: ::String
       attr_accessor principal: ::String
-      attr_accessor association_status: ("ASSOCIATING" | "ASSOCIATED" | "FAILED" | "DISASSOCIATING" | "DISASSOCIATED")
+      attr_accessor association_status: ("ASSOCIATING" | "ASSOCIATED" | "FAILED" | "DISASSOCIATING" | "DISASSOCIATED" | "SUSPENDED" | "SUSPENDING" | "RESTORING")
       attr_accessor next_token: ::String
       attr_accessor max_results: ::Integer
       SENSITIVE: []
@@ -315,7 +326,7 @@ module Aws::RAM
     class ListPermissionAssociationsRequest
       attr_accessor permission_arn: ::String
       attr_accessor permission_version: ::Integer
-      attr_accessor association_status: ("ASSOCIATING" | "ASSOCIATED" | "FAILED" | "DISASSOCIATING" | "DISASSOCIATED")
+      attr_accessor association_status: ("ASSOCIATING" | "ASSOCIATED" | "FAILED" | "DISASSOCIATING" | "DISASSOCIATED" | "SUSPENDED" | "SUSPENDING" | "RESTORING")
       attr_accessor resource_type: ::String
       attr_accessor feature_set: ("CREATED_FROM_POLICY" | "PROMOTING_TO_STANDARD" | "STANDARD")
       attr_accessor default_version: bool
@@ -428,6 +439,22 @@ module Aws::RAM
 
     class ListResourcesResponse
       attr_accessor resources: ::Array[Types::Resource]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSourceAssociationsRequest
+      attr_accessor resource_share_arns: ::Array[::String]
+      attr_accessor source_id: ::String
+      attr_accessor source_type: ::String
+      attr_accessor association_status: ("ASSOCIATING" | "ASSOCIATED" | "FAILED" | "DISASSOCIATING" | "DISASSOCIATED" | "SUSPENDED" | "SUSPENDING" | "RESTORING")
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListSourceAssociationsResponse
+      attr_accessor source_associations: ::Array[Types::AssociatedSource]
       attr_accessor next_token: ::String
       SENSITIVE: []
     end
@@ -574,8 +601,8 @@ module Aws::RAM
       attr_accessor resource_share_arn: ::String
       attr_accessor resource_share_name: ::String
       attr_accessor associated_entity: ::String
-      attr_accessor association_type: ("PRINCIPAL" | "RESOURCE")
-      attr_accessor status: ("ASSOCIATING" | "ASSOCIATED" | "FAILED" | "DISASSOCIATING" | "DISASSOCIATED")
+      attr_accessor association_type: ("PRINCIPAL" | "RESOURCE" | "SOURCE")
+      attr_accessor status: ("ASSOCIATING" | "ASSOCIATED" | "FAILED" | "DISASSOCIATING" | "DISASSOCIATED" | "SUSPENDED" | "SUSPENDING" | "RESTORING")
       attr_accessor status_message: ::String
       attr_accessor creation_time: ::Time
       attr_accessor last_updated_time: ::Time

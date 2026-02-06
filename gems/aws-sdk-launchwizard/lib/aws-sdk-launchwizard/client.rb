@@ -480,6 +480,14 @@ module Aws::LaunchWizard
     # this operation are not available in the Launch Wizard console to use
     # the `Clone deployment` action on.
     #
+    # @option params [required, String] :workload_name
+    #   The name of the workload. You can use the [ `ListWorkloads` ][1]
+    #   operation to discover supported values for this parameter.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/launchwizard/latest/APIReference/API_ListWorkloads.html
+    #
     # @option params [required, String] :deployment_pattern_name
     #   The name of the deployment pattern supported by a given workload. You
     #   can use the [ `ListWorkloadDeploymentPatterns` ][1] operation to
@@ -488,12 +496,6 @@ module Aws::LaunchWizard
     #
     #
     #   [1]: https://docs.aws.amazon.com/launchwizard/latest/APIReference/API_ListWorkloadDeploymentPatterns.html
-    #
-    # @option params [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
     # @option params [required, String] :name
     #   The name of the deployment.
@@ -512,34 +514,91 @@ module Aws::LaunchWizard
     #   [1]: https://docs.aws.amazon.com/launchwizard/latest/APIReference/launch-wizard-specifications-sap.html
     #   [2]: https://docs.aws.amazon.com/launchwizard/latest/APIReference/API_GetWorkloadDeploymentPattern.html
     #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
     # @option params [Hash<String,String>] :tags
     #   The tags to add to the deployment.
-    #
-    # @option params [required, String] :workload_name
-    #   The name of the workload. You can use the [ `ListWorkloads` ][1]
-    #   operation to discover supported values for this parameter.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/launchwizard/latest/APIReference/API_ListWorkloads.html
     #
     # @return [Types::CreateDeploymentOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateDeploymentOutput#deployment_id #deployment_id} => String
     #
+    #
+    # @example Example: Deploy a given workload with given settings.
+    #
+    #   resp = client.create_deployment({
+    #     name: "TestDeployment1", 
+    #     deployment_pattern_name: "SapHanaSingle", 
+    #     dry_run: false, 
+    #     specifications: {
+    #       "CreateSecurityGroup" => "No", 
+    #       "DisableDeploymentRollback" => "Yes", 
+    #       "EnableEbsVolumeEncryption" => "Yes", 
+    #       "KeyPairName" => "keyName", 
+    #       "ProxyServerAddress" => "http://xyz.abc.com:8080", 
+    #       "SapSysGroupId" => "5003", 
+    #       "SapVirtualIPOptIn" => "No", 
+    #       "SaveDeploymentArtifacts" => "No", 
+    #       "SnsTopicArn" => "arn:aws:sns:us-east-1:111111222222:snsNameUsEast1.fifo", 
+    #       "Timezone" => "Pacific/Wake", 
+    #       "VpcId" => "vpc-1234566", 
+    #     }, 
+    #     workload_name: "SAP", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     deployment_id: "4c1b59c1-659c-467f-b6e9-6ef6f9d28e1d", 
+    #   }
+    #
+    # @example Example: Deploy a given workload with given settings and passing tags for Launch Wizard deployment resource.
+    #
+    #   resp = client.create_deployment({
+    #     name: "TestDeployment2", 
+    #     deployment_pattern_name: "SapHanaSingle", 
+    #     dry_run: false, 
+    #     specifications: {
+    #       "CreateSecurityGroup" => "No", 
+    #       "DisableDeploymentRollback" => "Yes", 
+    #       "EnableEbsVolumeEncryption" => "Yes", 
+    #       "KeyPairName" => "keyName", 
+    #       "ProxyServerAddress" => "http://xyz.abc.com:8080", 
+    #       "SapSysGroupId" => "5003", 
+    #       "SapVirtualIPOptIn" => "No", 
+    #       "SaveDeploymentArtifacts" => "No", 
+    #       "SnsTopicArn" => "arn:aws:sns:us-east-1:111111222222:snsNameUsEast1.fifo", 
+    #       "Timezone" => "Pacific/Wake", 
+    #       "VpcId" => "vpc-1234566", 
+    #     }, 
+    #     tags: {
+    #       "key1" => "val1", 
+    #       "key2" => "val2", 
+    #     }, 
+    #     workload_name: "SAP", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     deployment_id: "1111111-1111-1111-1111-111111111111", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_deployment({
+    #     workload_name: "WorkloadName", # required
     #     deployment_pattern_name: "DeploymentPatternName", # required
-    #     dry_run: false,
     #     name: "DeploymentName", # required
     #     specifications: { # required
     #       "KeyString" => "ValueString",
     #     },
+    #     dry_run: false,
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
-    #     workload_name: "WorkloadName", # required
     #   })
     #
     # @example Response structure
@@ -565,6 +624,19 @@ module Aws::LaunchWizard
     #   * {Types::DeleteDeploymentOutput#status #status} => String
     #   * {Types::DeleteDeploymentOutput#status_reason #status_reason} => String
     #
+    #
+    # @example Example: Delete a deployment.
+    #
+    #   resp = client.delete_deployment({
+    #     deployment_id: "4c1b59c1-659c-467f-b6e9-6ef6f9d28e1d", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     status: "DELETED", 
+    #     status_reason: "Finished processing DeleteApp request", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_deployment({
@@ -573,7 +645,7 @@ module Aws::LaunchWizard
     #
     # @example Response structure
     #
-    #   resp.status #=> String, one of "COMPLETED", "CREATING", "DELETE_IN_PROGRESS", "DELETE_INITIATING", "DELETE_FAILED", "DELETED", "FAILED", "IN_PROGRESS", "VALIDATING"
+    #   resp.status #=> String, one of "COMPLETED", "CREATING", "DELETE_IN_PROGRESS", "DELETE_INITIATING", "DELETE_FAILED", "DELETED", "FAILED", "IN_PROGRESS", "VALIDATING", "UPDATE_IN_PROGRESS", "UPDATE_COMPLETED", "UPDATE_FAILED", "UPDATE_ROLLBACK_COMPLETED", "UPDATE_ROLLBACK_FAILED"
     #   resp.status_reason #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/launch-wizard-2018-05-10/DeleteDeployment AWS API Documentation
@@ -594,6 +666,41 @@ module Aws::LaunchWizard
     #
     #   * {Types::GetDeploymentOutput#deployment #deployment} => Types::DeploymentData
     #
+    #
+    # @example Example: Get details about a given deployment.
+    #
+    #   resp = client.get_deployment({
+    #     deployment_id: "1111111-1111-1111-1111-111111111111", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     deployment: {
+    #       name: "SapHanaSingleForTest", 
+    #       created_at: Time.parse("2023-04-24T13:10:09.857Z"), 
+    #       deployment_arn: "arn:aws:launchwizard:us-east-1:123456789012:deployment/1111111-1111-1111-1111-111111111111", 
+    #       id: "1111111-1111-1111-1111-111111111111", 
+    #       specifications: {
+    #         "DisableDeploymentRollback" => "true", 
+    #         "Encryption" => "Yes", 
+    #         "KeyName" => "testLinuxInstance", 
+    #         "SAPTZ" => "America/Vancouver", 
+    #         "VPCID" => "vpc-1234567", 
+    #         "applicationName" => "SapHanaSingleForTest", 
+    #         "deploymentScenario" => "SapHanaSingle", 
+    #         "environmentType" => "production", 
+    #         "saveArtifactsS3Uri" => "s3://testbucket", 
+    #         "saveDeploymentArtifacts" => "Yes", 
+    #       }, 
+    #       status: "FAILED", 
+    #       tags: {
+    #         "key1" => "val1", 
+    #         "key2" => "val2", 
+    #       }, 
+    #       workload_name: "SapHanaSingle", 
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_deployment({
@@ -602,19 +709,20 @@ module Aws::LaunchWizard
     #
     # @example Response structure
     #
-    #   resp.deployment.created_at #=> Time
-    #   resp.deployment.deleted_at #=> Time
-    #   resp.deployment.deployment_arn #=> String
-    #   resp.deployment.id #=> String
     #   resp.deployment.name #=> String
+    #   resp.deployment.id #=> String
+    #   resp.deployment.workload_name #=> String
     #   resp.deployment.pattern_name #=> String
-    #   resp.deployment.resource_group #=> String
+    #   resp.deployment.status #=> String, one of "COMPLETED", "CREATING", "DELETE_IN_PROGRESS", "DELETE_INITIATING", "DELETE_FAILED", "DELETED", "FAILED", "IN_PROGRESS", "VALIDATING", "UPDATE_IN_PROGRESS", "UPDATE_COMPLETED", "UPDATE_FAILED", "UPDATE_ROLLBACK_COMPLETED", "UPDATE_ROLLBACK_FAILED"
+    #   resp.deployment.created_at #=> Time
+    #   resp.deployment.modified_at #=> Time
     #   resp.deployment.specifications #=> Hash
     #   resp.deployment.specifications["KeyString"] #=> String
-    #   resp.deployment.status #=> String, one of "COMPLETED", "CREATING", "DELETE_IN_PROGRESS", "DELETE_INITIATING", "DELETE_FAILED", "DELETED", "FAILED", "IN_PROGRESS", "VALIDATING"
+    #   resp.deployment.resource_group #=> String
+    #   resp.deployment.deleted_at #=> Time
     #   resp.deployment.tags #=> Hash
     #   resp.deployment.tags["TagKey"] #=> String
-    #   resp.deployment.workload_name #=> String
+    #   resp.deployment.deployment_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/launch-wizard-2018-05-10/GetDeployment AWS API Documentation
     #
@@ -622,6 +730,57 @@ module Aws::LaunchWizard
     # @param [Hash] params ({})
     def get_deployment(params = {}, options = {})
       req = build_request(:get_deployment, params)
+      req.send_request(options)
+    end
+
+    # Returns information about a deployment pattern version.
+    #
+    # @option params [required, String] :workload_name
+    #   The name of the workload. You can use the [ `ListWorkloads` ][1]
+    #   operation to discover supported values for this parameter.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/launchwizard/latest/APIReference/API_ListWorkloads.html
+    #
+    # @option params [required, String] :deployment_pattern_name
+    #   The name of the deployment pattern. You can use the [
+    #   `ListWorkloadDeploymentPatterns` ][1] operation to discover supported
+    #   values for this parameter.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/launchwizard/latest/APIReference/API_ListWorkloadDeploymentPatterns.html
+    #
+    # @option params [required, String] :deployment_pattern_version_name
+    #   The name of the deployment pattern version.
+    #
+    # @return [Types::GetDeploymentPatternVersionOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetDeploymentPatternVersionOutput#deployment_pattern_version #deployment_pattern_version} => Types::DeploymentPatternVersionDataSummary
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_deployment_pattern_version({
+    #     workload_name: "WorkloadName", # required
+    #     deployment_pattern_name: "DeploymentPatternName", # required
+    #     deployment_pattern_version_name: "DeploymentPatternVersionName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.deployment_pattern_version.deployment_pattern_version_name #=> String
+    #   resp.deployment_pattern_version.description #=> String
+    #   resp.deployment_pattern_version.documentation_url #=> String
+    #   resp.deployment_pattern_version.workload_name #=> String
+    #   resp.deployment_pattern_version.deployment_pattern_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/launch-wizard-2018-05-10/GetDeploymentPatternVersion AWS API Documentation
+    #
+    # @overload get_deployment_pattern_version(params = {})
+    # @param [Hash] params ({})
+    def get_deployment_pattern_version(params = {}, options = {})
+      req = build_request(:get_deployment_pattern_version, params)
       req.send_request(options)
     end
 
@@ -634,6 +793,25 @@ module Aws::LaunchWizard
     #
     #   * {Types::GetWorkloadOutput#workload #workload} => Types::WorkloadData
     #
+    #
+    # @example Example: Get details about a specific workload.
+    #
+    #   resp = client.get_workload({
+    #     workload_name: "SAP", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     workload: {
+    #       documentation_url: "https://docs.aws.amazon.com/launchwizard/latest/userguide/launch-wizard-sap.html", 
+    #       description: "Workload Description", 
+    #       display_name: "SAP", 
+    #       icon_url: "https://aws-lw-workload-assets-test-us-east-1.s3.amazonaws.com/amazon/SAP/icon.png?X-Amz-Security-Token=IQoJb3JpZ2luX2VjEAUaCXVzLWVhc3QtMSJHMEUCIC4l3GCH4o%2Bgq3pJzcD1YJmtrmyNCoEgG2RIayjDWf9kAiEAnMK5nYixaZLuF1s1UVoNd7xIbDrOQ8EAbhcZWexMp9cq7wIIrf%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARAEGgw1ODI1NTgxMjEyMDYiDHxMN%2BZ8CoPORzvo4yrDAtkVZlBVxLwnFmwHw005vo13LOUUbyajEpp3HNh%2BaBL8K2DLx7Kzi0UPPD6z8pL1eiFLHAQ9zZgVc7pLVQjBKOdcw1GmIADDepqYEb%2B8zLi7zwWP1JT72YbT6ZXSoWpb5NCqcyAvdK47b0Ae586s6VkWzoeJ65jR%2FgbJMhRpFpqVSP2XI6Rf6yA3%2BkQyUCk3RdyF4ljIL8Nf5nIFb%2BOMK2PZ8aJX85l1j7UpJE1rfNb1PitVcQz3KlW5xkiXfcWRKeVhgHRyuCEL3FY0DyPFdqe3NxcA0%2FzPgBq6Y9B41kM6af5u2kQRfQOjWejDpzpG7w40eaIKAYnhBkjIA9550geSLB7O%2FuAPQLI9fI2lVowIBUKsKVOr0%2FFGIzW3WM7%2BbEx%2FZ0mDkP1IhcpZdP7owC77K8O%2BXDgBCabAy48K3ndi%2BQKQMPXjz6YGOp4Bbgv9mVc3sE4KvXZv1skhnOYcOKGdCncIKLne0W%2BgO3URxyDQiyO2FhM3OekXDH83CNCyDVIpkgpWkvgXDSaZiD5mj0T9iqEeJzfh6uQvX1dRN%2BxI1eV0M7HKY2e7F%2BKNjeLhzKgKpSpDqFIUSjLeBlLLyQCNKuUiO3DMiy3rB89aX4b9wyC8au0SfGb72YyNLXjh6M1whcj1VNGePyw%3D&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20230809T202649Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Credential=ASIAYPIZLPT3GGDNTHTI%2F20230809%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=6a37e41e47208b426a5e7d32392d0815388cd0231187652204836943c37ad86a", 
+    #       status: "ACTIVE", 
+    #       workload_name: "SAP", 
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_workload({
@@ -642,13 +820,13 @@ module Aws::LaunchWizard
     #
     # @example Response structure
     #
-    #   resp.workload.description #=> String
+    #   resp.workload.workload_name #=> String
     #   resp.workload.display_name #=> String
+    #   resp.workload.status #=> String, one of "ACTIVE", "INACTIVE", "DISABLED", "DELETED"
+    #   resp.workload.description #=> String
     #   resp.workload.documentation_url #=> String
     #   resp.workload.icon_url #=> String
-    #   resp.workload.status #=> String, one of "ACTIVE", "INACTIVE", "DISABLED", "DELETED"
     #   resp.workload.status_message #=> String
-    #   resp.workload.workload_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/launch-wizard-2018-05-10/GetWorkload AWS API Documentation
     #
@@ -670,42 +848,80 @@ module Aws::LaunchWizard
     # [1]: https://docs.aws.amazon.com/launchwizard/latest/APIReference/API_ListWorkloads.html
     # [2]: https://docs.aws.amazon.com/launchwizard/latest/APIReference/API_ListWorkloadDeploymentPatterns.html
     #
-    # @option params [required, String] :deployment_pattern_name
-    #   The name of the deployment pattern.
-    #
     # @option params [required, String] :workload_name
     #   The name of the workload.
+    #
+    # @option params [required, String] :deployment_pattern_name
+    #   The name of the deployment pattern.
     #
     # @return [Types::GetWorkloadDeploymentPatternOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetWorkloadDeploymentPatternOutput#workload_deployment_pattern #workload_deployment_pattern} => Types::WorkloadDeploymentPatternData
     #
+    #
+    # @example Example: Get details about a specific Workload deployment pattern
+    #
+    #   resp = client.get_workload_deployment_pattern({
+    #     deployment_pattern_name: "adSelfManagedNewVpc", 
+    #     workload_name: "MicrosoftActiveDirectory", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     workload_deployment_pattern: {
+    #       deployment_pattern_name: "adSelfManagedNewVpc", 
+    #       deployment_pattern_version_name: "2024-03-19-14-00-09", 
+    #       description: "Builds a new AWS environment (VPC and other components), and deploys AD DS into this new VPC.", 
+    #       display_name: "Self-managed AD - new VPC", 
+    #       specifications: [
+    #         {
+    #           name: "NumberOfAZs", 
+    #           required: "Yes", 
+    #           description: "Number of Availability Zones to use in the VPC.", 
+    #         }, 
+    #         {
+    #           name: "AvailabilityZones", 
+    #           required: "Yes", 
+    #           description: "List of Availability Zones (AZs) to use for the subnets in the VPC.", 
+    #         }, 
+    #         {
+    #           name: "VPCCIDR", 
+    #           required: "Yes", 
+    #           description: "CIDR block for the VPC.", 
+    #         }, 
+    #       ], 
+    #       status: "ACTIVE", 
+    #       workload_name: "MicrosoftActiveDirectory", 
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_workload_deployment_pattern({
-    #     deployment_pattern_name: "DeploymentPatternName", # required
     #     workload_name: "WorkloadName", # required
+    #     deployment_pattern_name: "DeploymentPatternName", # required
     #   })
     #
     # @example Response structure
     #
+    #   resp.workload_deployment_pattern.workload_name #=> String
     #   resp.workload_deployment_pattern.deployment_pattern_name #=> String
-    #   resp.workload_deployment_pattern.description #=> String
+    #   resp.workload_deployment_pattern.workload_version_name #=> String
+    #   resp.workload_deployment_pattern.deployment_pattern_version_name #=> String
     #   resp.workload_deployment_pattern.display_name #=> String
-    #   resp.workload_deployment_pattern.specifications #=> Array
-    #   resp.workload_deployment_pattern.specifications[0].allowed_values #=> Array
-    #   resp.workload_deployment_pattern.specifications[0].allowed_values[0] #=> String
-    #   resp.workload_deployment_pattern.specifications[0].conditionals #=> Array
-    #   resp.workload_deployment_pattern.specifications[0].conditionals[0].comparator #=> String
-    #   resp.workload_deployment_pattern.specifications[0].conditionals[0].name #=> String
-    #   resp.workload_deployment_pattern.specifications[0].conditionals[0].value #=> String
-    #   resp.workload_deployment_pattern.specifications[0].description #=> String
-    #   resp.workload_deployment_pattern.specifications[0].name #=> String
-    #   resp.workload_deployment_pattern.specifications[0].required #=> String
+    #   resp.workload_deployment_pattern.description #=> String
     #   resp.workload_deployment_pattern.status #=> String, one of "ACTIVE", "INACTIVE", "DISABLED", "DELETED"
     #   resp.workload_deployment_pattern.status_message #=> String
-    #   resp.workload_deployment_pattern.workload_name #=> String
-    #   resp.workload_deployment_pattern.workload_version_name #=> String
+    #   resp.workload_deployment_pattern.specifications #=> Array
+    #   resp.workload_deployment_pattern.specifications[0].name #=> String
+    #   resp.workload_deployment_pattern.specifications[0].description #=> String
+    #   resp.workload_deployment_pattern.specifications[0].allowed_values #=> Array
+    #   resp.workload_deployment_pattern.specifications[0].allowed_values[0] #=> String
+    #   resp.workload_deployment_pattern.specifications[0].required #=> String
+    #   resp.workload_deployment_pattern.specifications[0].conditionals #=> Array
+    #   resp.workload_deployment_pattern.specifications[0].conditionals[0].name #=> String
+    #   resp.workload_deployment_pattern.specifications[0].conditionals[0].value #=> String
+    #   resp.workload_deployment_pattern.specifications[0].conditionals[0].comparator #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/launch-wizard-2018-05-10/GetWorkloadDeploymentPattern AWS API Documentation
     #
@@ -737,6 +953,33 @@ module Aws::LaunchWizard
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
+    #
+    # @example Example: List all actions taken during a deployment.
+    #
+    #   resp = client.list_deployment_events({
+    #     deployment_id: "4c1b59c1-659c-467f-b6e9-6ef6f9d28e1d", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     deployment_events: [
+    #       {
+    #         name: "Create secure parameter", 
+    #         description: "Creates a new secure parameter", 
+    #         status: "COMPLETED", 
+    #         status_reason: "", 
+    #         timestamp: Time.parse("2023-04-24T13:10:39.123Z"), 
+    #       }, 
+    #       {
+    #         name: "Create resource group", 
+    #         description: "Creates a resource group with all the application resources", 
+    #         status: "COMPLETED", 
+    #         status_reason: "", 
+    #         timestamp: Time.parse("2023-04-24T13:10:42.238Z"), 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_deployment_events({
@@ -748,8 +991,8 @@ module Aws::LaunchWizard
     # @example Response structure
     #
     #   resp.deployment_events #=> Array
-    #   resp.deployment_events[0].description #=> String
     #   resp.deployment_events[0].name #=> String
+    #   resp.deployment_events[0].description #=> String
     #   resp.deployment_events[0].status #=> String, one of "CANCELED", "CANCELING", "COMPLETED", "CREATED", "FAILED", "IN_PROGRESS", "PENDING", "TIMED_OUT"
     #   resp.deployment_events[0].status_reason #=> String
     #   resp.deployment_events[0].timestamp #=> Time
@@ -761,6 +1004,130 @@ module Aws::LaunchWizard
     # @param [Hash] params ({})
     def list_deployment_events(params = {}, options = {})
       req = build_request(:list_deployment_events, params)
+      req.send_request(options)
+    end
+
+    # Lists the deployment pattern versions.
+    #
+    # @option params [required, String] :workload_name
+    #   The name of the workload. You can use the [ `ListWorkloads` ][1]
+    #   operation to discover supported values for this parameter.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/launchwizard/latest/APIReference/API_ListWorkloads.html
+    #
+    # @option params [required, String] :deployment_pattern_name
+    #   The name of the deployment pattern. You can use the [
+    #   `ListWorkloadDeploymentPatterns` ][1] operation to discover supported
+    #   values for this parameter.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/launchwizard/latest/APIReference/API_ListWorkloadDeploymentPatterns.html
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of deployment pattern versions to list.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results.
+    #
+    # @option params [Array<Types::DeploymentPatternVersionFilter>] :filters
+    #   Filters to apply when listing deployment pattern versions.
+    #
+    # @return [Types::ListDeploymentPatternVersionsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListDeploymentPatternVersionsOutput#deployment_pattern_versions #deployment_pattern_versions} => Array&lt;Types::DeploymentPatternVersionDataSummary&gt;
+    #   * {Types::ListDeploymentPatternVersionsOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: List all visible versions for the given workload and deployment pattern.
+    #
+    #   resp = client.list_deployment_pattern_versions({
+    #     deployment_pattern_name: "default", 
+    #     workload_name: "security-automations-for-aws-waf", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     deployment_pattern_versions: [
+    #       {
+    #         deployment_pattern_name: "default", 
+    #         deployment_pattern_version_name: "4.0.6", 
+    #         workload_name: "security-automations-for-aws-waf", 
+    #       }, 
+    #       {
+    #         deployment_pattern_name: "default", 
+    #         deployment_pattern_version_name: "3.2.5", 
+    #         workload_name: "security-automations-for-aws-waf", 
+    #       }, 
+    #       {
+    #         deployment_pattern_name: "default", 
+    #         deployment_pattern_version_name: "3.1.0", 
+    #         workload_name: "security-automations-for-aws-waf", 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Example: List filtered versions for the given workload and deployment pattern.
+    #
+    #   resp = client.list_deployment_pattern_versions({
+    #     deployment_pattern_name: "default", 
+    #     filters: [
+    #       {
+    #         name: "updateFromVersion", 
+    #         values: [
+    #           "4.0.2", 
+    #         ], 
+    #       }, 
+    #     ], 
+    #     workload_name: "security-automations-for-aws-waf", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     deployment_pattern_versions: [
+    #       {
+    #         deployment_pattern_name: "default", 
+    #         deployment_pattern_version_name: "4.0.6", 
+    #         workload_name: "security-automations-for-aws-waf", 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_deployment_pattern_versions({
+    #     workload_name: "WorkloadName", # required
+    #     deployment_pattern_name: "DeploymentPatternName", # required
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #     filters: [
+    #       {
+    #         name: "updateFromVersion", # required, accepts updateFromVersion
+    #         values: ["DeploymentPatternVersionFilterValuesMemberString"], # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.deployment_pattern_versions #=> Array
+    #   resp.deployment_pattern_versions[0].deployment_pattern_version_name #=> String
+    #   resp.deployment_pattern_versions[0].description #=> String
+    #   resp.deployment_pattern_versions[0].documentation_url #=> String
+    #   resp.deployment_pattern_versions[0].workload_name #=> String
+    #   resp.deployment_pattern_versions[0].deployment_pattern_name #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/launch-wizard-2018-05-10/ListDeploymentPatternVersions AWS API Documentation
+    #
+    # @overload list_deployment_pattern_versions(params = {})
+    # @param [Hash] params ({})
+    def list_deployment_pattern_versions(params = {}, options = {})
+      req = build_request(:list_deployment_pattern_versions, params)
       req.send_request(options)
     end
 
@@ -791,6 +1158,34 @@ module Aws::LaunchWizard
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
+    #
+    # @example Example: List deployments in the account with filters.
+    #
+    #   resp = client.list_deployments({
+    #     filters: [
+    #       {
+    #         name: "DEPLOYMENT_STATUS", 
+    #         values: [
+    #           "IN_PROGRESS", 
+    #         ], 
+    #       }, 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     deployments: [
+    #       {
+    #         name: "SapHanaSingleForTest", 
+    #         created_at: Time.parse("2023-04-24T13:10:09.857Z"), 
+    #         id: "4c1b59c1-659c-467f-b6e9-6ef6f9d28e1d", 
+    #         pattern_name: "SapHanaSingle", 
+    #         status: "IN_PROGRESS", 
+    #         workload_name: "SAP", 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_deployments({
@@ -807,12 +1202,13 @@ module Aws::LaunchWizard
     # @example Response structure
     #
     #   resp.deployments #=> Array
-    #   resp.deployments[0].created_at #=> Time
-    #   resp.deployments[0].id #=> String
     #   resp.deployments[0].name #=> String
-    #   resp.deployments[0].pattern_name #=> String
-    #   resp.deployments[0].status #=> String, one of "COMPLETED", "CREATING", "DELETE_IN_PROGRESS", "DELETE_INITIATING", "DELETE_FAILED", "DELETED", "FAILED", "IN_PROGRESS", "VALIDATING"
+    #   resp.deployments[0].id #=> String
     #   resp.deployments[0].workload_name #=> String
+    #   resp.deployments[0].pattern_name #=> String
+    #   resp.deployments[0].status #=> String, one of "COMPLETED", "CREATING", "DELETE_IN_PROGRESS", "DELETE_INITIATING", "DELETE_FAILED", "DELETED", "FAILED", "IN_PROGRESS", "VALIDATING", "UPDATE_IN_PROGRESS", "UPDATE_COMPLETED", "UPDATE_FAILED", "UPDATE_ROLLBACK_COMPLETED", "UPDATE_ROLLBACK_FAILED"
+    #   resp.deployments[0].created_at #=> Time
+    #   resp.deployments[0].modified_at #=> Time
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/launch-wizard-2018-05-10/ListDeployments AWS API Documentation
@@ -832,6 +1228,21 @@ module Aws::LaunchWizard
     # @return [Types::ListTagsForResourceOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListTagsForResourceOutput#tags #tags} => Hash&lt;String,String&gt;
+    #
+    #
+    # @example Example: Listing tags on a Launch Wizard deployment resource.
+    #
+    #   resp = client.list_tags_for_resource({
+    #     resource_arn: "arn:aws:launchwizard:us-east-1:123456789012:deployment/11111111-1111-1111-1111-111111111111", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     tags: {
+    #       "key1" => "value1", 
+    #       "key2" => "value2", 
+    #     }, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -861,6 +1272,9 @@ module Aws::LaunchWizard
     #
     # [1]: https://docs.aws.amazon.com/launchwizard/latest/APIReference/API_ListWorkloads.html
     #
+    # @option params [required, String] :workload_name
+    #   The name of the workload.
+    #
     # @option params [Integer] :max_results
     #   The maximum number of items to return for this request. To get the
     #   next page of items, make another request with the token returned in
@@ -870,35 +1284,62 @@ module Aws::LaunchWizard
     #   The token returned from a previous paginated request. Pagination
     #   continues from the end of the items returned by the previous request.
     #
-    # @option params [required, String] :workload_name
-    #   The name of the workload.
-    #
     # @return [Types::ListWorkloadDeploymentPatternsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::ListWorkloadDeploymentPatternsOutput#next_token #next_token} => String
     #   * {Types::ListWorkloadDeploymentPatternsOutput#workload_deployment_patterns #workload_deployment_patterns} => Array&lt;Types::WorkloadDeploymentPatternDataSummary&gt;
+    #   * {Types::ListWorkloadDeploymentPatternsOutput#next_token #next_token} => String
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: List all available workloads supported by AWS Launch Wizard.
+    #
+    #   resp = client.list_workload_deployment_patterns({
+    #     workload_name: "SAP", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     workload_deployment_patterns: [
+    #       {
+    #         deployment_pattern_name: "SapHanaHA", 
+    #         deployment_pattern_version_name: "2023-08-02-01-00-00", 
+    #         description: "Deployment Option Description", 
+    #         display_name: "Deployment Option Display Name", 
+    #         status: "ACTIVE", 
+    #         workload_name: "SAP", 
+    #       }, 
+    #       {
+    #         deployment_pattern_name: "SapHanaMulti", 
+    #         deployment_pattern_version_name: "2023-08-02-01-00-00", 
+    #         description: "Deployment Option Description", 
+    #         display_name: "Deployment Option Display Name", 
+    #         status: "ACTIVE", 
+    #         workload_name: "SAP", 
+    #       }, 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_workload_deployment_patterns({
+    #     workload_name: "WorkloadName", # required
     #     max_results: 1,
     #     next_token: "NextToken",
-    #     workload_name: "WorkloadName", # required
     #   })
     #
     # @example Response structure
     #
-    #   resp.next_token #=> String
     #   resp.workload_deployment_patterns #=> Array
+    #   resp.workload_deployment_patterns[0].workload_name #=> String
     #   resp.workload_deployment_patterns[0].deployment_pattern_name #=> String
-    #   resp.workload_deployment_patterns[0].description #=> String
+    #   resp.workload_deployment_patterns[0].workload_version_name #=> String
+    #   resp.workload_deployment_patterns[0].deployment_pattern_version_name #=> String
     #   resp.workload_deployment_patterns[0].display_name #=> String
+    #   resp.workload_deployment_patterns[0].description #=> String
     #   resp.workload_deployment_patterns[0].status #=> String, one of "ACTIVE", "INACTIVE", "DISABLED", "DELETED"
     #   resp.workload_deployment_patterns[0].status_message #=> String
-    #   resp.workload_deployment_patterns[0].workload_name #=> String
-    #   resp.workload_deployment_patterns[0].workload_version_name #=> String
+    #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/launch-wizard-2018-05-10/ListWorkloadDeploymentPatterns AWS API Documentation
     #
@@ -928,10 +1369,32 @@ module Aws::LaunchWizard
     #
     # @return [Types::ListWorkloadsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::ListWorkloadsOutput#next_token #next_token} => String
     #   * {Types::ListWorkloadsOutput#workloads #workloads} => Array&lt;Types::WorkloadDataSummary&gt;
+    #   * {Types::ListWorkloadsOutput#next_token #next_token} => String
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: List all available workloads supported by AWS Launch Wizard.
+    #
+    #   resp = client.list_workloads({
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     workloads: [
+    #       {
+    #         display_name: "SAP", 
+    #         status: "ACTIVE", 
+    #         workload_name: "SAP", 
+    #       }, 
+    #       {
+    #         display_name: "MS SQL Server", 
+    #         status: "ACTIVE", 
+    #         workload_name: "SQL", 
+    #       }, 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -942,10 +1405,11 @@ module Aws::LaunchWizard
     #
     # @example Response structure
     #
-    #   resp.next_token #=> String
     #   resp.workloads #=> Array
-    #   resp.workloads[0].display_name #=> String
     #   resp.workloads[0].workload_name #=> String
+    #   resp.workloads[0].display_name #=> String
+    #   resp.workloads[0].status #=> String, one of "ACTIVE", "INACTIVE", "DISABLED", "DELETED"
+    #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/launch-wizard-2018-05-10/ListWorkloads AWS API Documentation
     #
@@ -965,6 +1429,21 @@ module Aws::LaunchWizard
     #   One or more tags to attach to the resource.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: Adding tags to a Launch Wizard deployment resource.
+    #
+    #   resp = client.tag_resource({
+    #     resource_arn: "arn:aws:launchwizard:us-east-1:123456789012:deployment/11111111-1111-1111-1111-111111111111", 
+    #     tags: {
+    #       "key1" => "value1", 
+    #       "key2" => "value2", 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -994,6 +1473,21 @@ module Aws::LaunchWizard
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: Removing tags on a Launch Wizard deployment resource.
+    #
+    #   resp = client.untag_resource({
+    #     resource_arn: "arn:aws:launchwizard:us-east-1:123456789012:deployment/11111111-1111-1111-1111-111111111111", 
+    #     tag_keys: [
+    #       "key1", 
+    #       "key2", 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.untag_resource({
@@ -1007,6 +1501,145 @@ module Aws::LaunchWizard
     # @param [Hash] params ({})
     def untag_resource(params = {}, options = {})
       req = build_request(:untag_resource, params)
+      req.send_request(options)
+    end
+
+    # Updates a deployment.
+    #
+    # @option params [required, String] :deployment_id
+    #   The ID of the deployment.
+    #
+    # @option params [required, Hash<String,String>] :specifications
+    #   The settings specified for the deployment. These settings define how
+    #   to deploy and configure your resources created by the deployment. For
+    #   more information about the specifications required for creating a
+    #   deployment for a SAP workload, see [SAP deployment specifications][1].
+    #   To retrieve the specifications required to create a deployment for
+    #   other workloads, use the [ `GetWorkloadDeploymentPattern` ][2]
+    #   operation.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/launchwizard/latest/APIReference/launch-wizard-specifications-sap.html
+    #   [2]: https://docs.aws.amazon.com/launchwizard/latest/APIReference/API_GetWorkloadDeploymentPattern.html
+    #
+    # @option params [String] :workload_version_name
+    #   The name of the workload version.
+    #
+    # @option params [String] :deployment_pattern_version_name
+    #   The name of the deployment pattern version.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @option params [Boolean] :force
+    #   Forces the update even if validation warnings are present.
+    #
+    # @return [Types::UpdateDeploymentOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateDeploymentOutput#deployment #deployment} => Types::DeploymentDataSummary
+    #
+    #
+    # @example Example: Edit deployment specifications.
+    #
+    #   resp = client.update_deployment({
+    #     deployment_id: "4c1b59c1-659c-467f-b6e9-6ef6f9d28e1d", 
+    #     dry_run: false, 
+    #     specifications: {
+    #       "CreateSecurityGroup" => "No", 
+    #       "DeploymentArtifactsS3Uri" => "aws-bucket-name", 
+    #       "DisableDeploymentRollback" => "No", 
+    #       "EnableEbsVolumeEncryption" => "No", 
+    #       "KeyPairName" => "keyName", 
+    #       "ProxyServerAddress" => "http://mno.abc.com:8080", 
+    #       "SapSysGroupId" => "5003", 
+    #       "SapVirtualIPOptIn" => "No", 
+    #       "SaveDeploymentArtifacts" => "Yes", 
+    #       "SnsTopicArn" => "arn:aws:sns:us-east-1:111111222222:snsNameUsEast1.fifo", 
+    #       "Timezone" => "Pacific/Wake", 
+    #       "VpcId" => "vpc-1234567", 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     deployment: {
+    #       name: "TestDeployment1", 
+    #       created_at: Time.parse(1736286728468), 
+    #       id: "4c1b59c1-659c-467f-b6e9-6ef6f9d28e1d", 
+    #       pattern_name: "SapHanaSingle", 
+    #       status: "UPDATE_IN_PROGRESS", 
+    #       workload_name: "SAP", 
+    #     }, 
+    #   }
+    #
+    # @example Example: Update deployment version.
+    #
+    #   resp = client.update_deployment({
+    #     deployment_id: "4c1b59c1-659c-467f-b6e9-6ef6f9d28e1d", 
+    #     deployment_pattern_version_name: "2.0.0", 
+    #     dry_run: false, 
+    #     specifications: {
+    #       "CreateSecurityGroup" => "No", 
+    #       "DeploymentArtifactsS3Uri" => "aws-bucket-name", 
+    #       "DisableDeploymentRollback" => "No", 
+    #       "EnableEbsVolumeEncryption" => "No", 
+    #       "KeyPairName" => "keyName", 
+    #       "NewParameter" => "Allow", 
+    #       "ProxyServerAddress" => "http://mno.abc.com:8080", 
+    #       "SapSysGroupId" => "5003", 
+    #       "SapVirtualIPOptIn" => "No", 
+    #       "SaveDeploymentArtifacts" => "Yes", 
+    #       "SnsTopicArn" => "arn:aws:sns:us-east-1:111111222222:snsNameUsEast1.fifo", 
+    #       "Timezone" => "Pacific/Wake", 
+    #       "VpcId" => "vpc-1234567", 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     deployment: {
+    #       name: "TestDeployment1", 
+    #       created_at: Time.parse(1736286728468), 
+    #       id: "4c1b59c1-659c-467f-b6e9-6ef6f9d28e1d", 
+    #       pattern_name: "SapHanaSingle", 
+    #       status: "UPDATE_IN_PROGRESS", 
+    #       workload_name: "SAP", 
+    #     }, 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_deployment({
+    #     deployment_id: "DeploymentId", # required
+    #     specifications: { # required
+    #       "KeyString" => "ValueString",
+    #     },
+    #     workload_version_name: "WorkloadVersionName",
+    #     deployment_pattern_version_name: "DeploymentPatternVersionName",
+    #     dry_run: false,
+    #     force: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.deployment.name #=> String
+    #   resp.deployment.id #=> String
+    #   resp.deployment.workload_name #=> String
+    #   resp.deployment.pattern_name #=> String
+    #   resp.deployment.status #=> String, one of "COMPLETED", "CREATING", "DELETE_IN_PROGRESS", "DELETE_INITIATING", "DELETE_FAILED", "DELETED", "FAILED", "IN_PROGRESS", "VALIDATING", "UPDATE_IN_PROGRESS", "UPDATE_COMPLETED", "UPDATE_FAILED", "UPDATE_ROLLBACK_COMPLETED", "UPDATE_ROLLBACK_FAILED"
+    #   resp.deployment.created_at #=> Time
+    #   resp.deployment.modified_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/launch-wizard-2018-05-10/UpdateDeployment AWS API Documentation
+    #
+    # @overload update_deployment(params = {})
+    # @param [Hash] params ({})
+    def update_deployment(params = {}, options = {})
+      req = build_request(:update_deployment, params)
       req.send_request(options)
     end
 
@@ -1028,7 +1661,7 @@ module Aws::LaunchWizard
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-launchwizard'
-      context[:gem_version] = '1.33.0'
+      context[:gem_version] = '1.34.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

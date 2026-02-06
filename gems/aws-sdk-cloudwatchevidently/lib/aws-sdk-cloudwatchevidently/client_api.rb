@@ -1022,9 +1022,11 @@ module Aws::CloudWatchEvidently
 
       api.metadata = {
         "apiVersion" => "2021-02-01",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "evidently",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",
+        "protocols" => ["rest-json"],
         "serviceFullName" => "Amazon CloudWatch Evidently",
         "serviceId" => "Evidently",
         "signatureVersion" => "v4",
@@ -1036,6 +1038,7 @@ module Aws::CloudWatchEvidently
         o.name = "BatchEvaluateFeature"
         o.http_method = "POST"
         o.http_request_uri = "/projects/{project}/evaluations"
+        o.deprecated = true
         o.endpoint_pattern = {
           "hostPrefix" => "dataplane.",
         }
@@ -1051,6 +1054,7 @@ module Aws::CloudWatchEvidently
         o.name = "CreateExperiment"
         o.http_method = "POST"
         o.http_request_uri = "/projects/{project}/experiments"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: CreateExperimentRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateExperimentResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -1064,6 +1068,7 @@ module Aws::CloudWatchEvidently
         o.name = "CreateFeature"
         o.http_method = "POST"
         o.http_request_uri = "/projects/{project}/features"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: CreateFeatureRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateFeatureResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -1077,6 +1082,7 @@ module Aws::CloudWatchEvidently
         o.name = "CreateLaunch"
         o.http_method = "POST"
         o.http_request_uri = "/projects/{project}/launches"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: CreateLaunchRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateLaunchResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -1090,6 +1096,7 @@ module Aws::CloudWatchEvidently
         o.name = "CreateProject"
         o.http_method = "POST"
         o.http_request_uri = "/projects"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: CreateProjectRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateProjectResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -1102,6 +1109,7 @@ module Aws::CloudWatchEvidently
         o.name = "CreateSegment"
         o.http_method = "POST"
         o.http_request_uri = "/segments"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: CreateSegmentRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateSegmentResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -1114,6 +1122,7 @@ module Aws::CloudWatchEvidently
         o.name = "DeleteExperiment"
         o.http_method = "DELETE"
         o.http_request_uri = "/projects/{project}/experiments/{experiment}"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: DeleteExperimentRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteExperimentResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -1128,6 +1137,7 @@ module Aws::CloudWatchEvidently
         o.name = "DeleteFeature"
         o.http_method = "DELETE"
         o.http_request_uri = "/projects/{project}/features/{feature}"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: DeleteFeatureRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteFeatureResponse)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
@@ -1141,6 +1151,7 @@ module Aws::CloudWatchEvidently
         o.name = "DeleteLaunch"
         o.http_method = "DELETE"
         o.http_request_uri = "/projects/{project}/launches/{launch}"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: DeleteLaunchRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteLaunchResponse)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
@@ -1154,6 +1165,7 @@ module Aws::CloudWatchEvidently
         o.name = "DeleteProject"
         o.http_method = "DELETE"
         o.http_request_uri = "/projects/{project}"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: DeleteProjectRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteProjectResponse)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
@@ -1167,6 +1179,7 @@ module Aws::CloudWatchEvidently
         o.name = "DeleteSegment"
         o.http_method = "DELETE"
         o.http_request_uri = "/segments/{segment}"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: DeleteSegmentRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteSegmentResponse)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
@@ -1180,6 +1193,7 @@ module Aws::CloudWatchEvidently
         o.name = "EvaluateFeature"
         o.http_method = "POST"
         o.http_request_uri = "/projects/{project}/evaluations/{feature}"
+        o.deprecated = true
         o.endpoint_pattern = {
           "hostPrefix" => "dataplane.",
         }
@@ -1195,6 +1209,7 @@ module Aws::CloudWatchEvidently
         o.name = "GetExperiment"
         o.http_method = "GET"
         o.http_request_uri = "/projects/{project}/experiments/{experiment}"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: GetExperimentRequest)
         o.output = Shapes::ShapeRef.new(shape: GetExperimentResponse)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
@@ -1207,6 +1222,7 @@ module Aws::CloudWatchEvidently
         o.name = "GetExperimentResults"
         o.http_method = "POST"
         o.http_request_uri = "/projects/{project}/experiments/{experiment}/results"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: GetExperimentResultsRequest)
         o.output = Shapes::ShapeRef.new(shape: GetExperimentResultsResponse)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
@@ -1220,6 +1236,7 @@ module Aws::CloudWatchEvidently
         o.name = "GetFeature"
         o.http_method = "GET"
         o.http_request_uri = "/projects/{project}/features/{feature}"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: GetFeatureRequest)
         o.output = Shapes::ShapeRef.new(shape: GetFeatureResponse)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
@@ -1232,6 +1249,7 @@ module Aws::CloudWatchEvidently
         o.name = "GetLaunch"
         o.http_method = "GET"
         o.http_request_uri = "/projects/{project}/launches/{launch}"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: GetLaunchRequest)
         o.output = Shapes::ShapeRef.new(shape: GetLaunchResponse)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
@@ -1244,6 +1262,7 @@ module Aws::CloudWatchEvidently
         o.name = "GetProject"
         o.http_method = "GET"
         o.http_request_uri = "/projects/{project}"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: GetProjectRequest)
         o.output = Shapes::ShapeRef.new(shape: GetProjectResponse)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
@@ -1256,6 +1275,7 @@ module Aws::CloudWatchEvidently
         o.name = "GetSegment"
         o.http_method = "GET"
         o.http_request_uri = "/segments/{segment}"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: GetSegmentRequest)
         o.output = Shapes::ShapeRef.new(shape: GetSegmentResponse)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
@@ -1268,6 +1288,7 @@ module Aws::CloudWatchEvidently
         o.name = "ListExperiments"
         o.http_method = "GET"
         o.http_request_uri = "/projects/{project}/experiments"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: ListExperimentsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListExperimentsResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -1285,6 +1306,7 @@ module Aws::CloudWatchEvidently
         o.name = "ListFeatures"
         o.http_method = "GET"
         o.http_request_uri = "/projects/{project}/features"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: ListFeaturesRequest)
         o.output = Shapes::ShapeRef.new(shape: ListFeaturesResponse)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
@@ -1303,6 +1325,7 @@ module Aws::CloudWatchEvidently
         o.name = "ListLaunches"
         o.http_method = "GET"
         o.http_request_uri = "/projects/{project}/launches"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: ListLaunchesRequest)
         o.output = Shapes::ShapeRef.new(shape: ListLaunchesResponse)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
@@ -1320,6 +1343,7 @@ module Aws::CloudWatchEvidently
         o.name = "ListProjects"
         o.http_method = "GET"
         o.http_request_uri = "/projects"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: ListProjectsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListProjectsResponse)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
@@ -1337,6 +1361,7 @@ module Aws::CloudWatchEvidently
         o.name = "ListSegmentReferences"
         o.http_method = "GET"
         o.http_request_uri = "/segments/{segment}/references"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: ListSegmentReferencesRequest)
         o.output = Shapes::ShapeRef.new(shape: ListSegmentReferencesResponse)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
@@ -1355,6 +1380,7 @@ module Aws::CloudWatchEvidently
         o.name = "ListSegments"
         o.http_method = "GET"
         o.http_request_uri = "/segments"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: ListSegmentsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListSegmentsResponse)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
@@ -1372,6 +1398,7 @@ module Aws::CloudWatchEvidently
         o.name = "ListTagsForResource"
         o.http_method = "GET"
         o.http_request_uri = "/tags/{resourceArn}"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: ListTagsForResourceRequest)
         o.output = Shapes::ShapeRef.new(shape: ListTagsForResourceResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -1383,6 +1410,7 @@ module Aws::CloudWatchEvidently
         o.name = "PutProjectEvents"
         o.http_method = "POST"
         o.http_request_uri = "/events/projects/{project}"
+        o.deprecated = true
         o.endpoint_pattern = {
           "hostPrefix" => "dataplane.",
         }
@@ -1398,6 +1426,7 @@ module Aws::CloudWatchEvidently
         o.name = "StartExperiment"
         o.http_method = "POST"
         o.http_request_uri = "/projects/{project}/experiments/{experiment}/start"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: StartExperimentRequest)
         o.output = Shapes::ShapeRef.new(shape: StartExperimentResponse)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
@@ -1412,6 +1441,7 @@ module Aws::CloudWatchEvidently
         o.name = "StartLaunch"
         o.http_method = "POST"
         o.http_request_uri = "/projects/{project}/launches/{launch}/start"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: StartLaunchRequest)
         o.output = Shapes::ShapeRef.new(shape: StartLaunchResponse)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
@@ -1426,6 +1456,7 @@ module Aws::CloudWatchEvidently
         o.name = "StopExperiment"
         o.http_method = "POST"
         o.http_request_uri = "/projects/{project}/experiments/{experiment}/cancel"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: StopExperimentRequest)
         o.output = Shapes::ShapeRef.new(shape: StopExperimentResponse)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
@@ -1440,6 +1471,7 @@ module Aws::CloudWatchEvidently
         o.name = "StopLaunch"
         o.http_method = "POST"
         o.http_request_uri = "/projects/{project}/launches/{launch}/cancel"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: StopLaunchRequest)
         o.output = Shapes::ShapeRef.new(shape: StopLaunchResponse)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
@@ -1452,6 +1484,7 @@ module Aws::CloudWatchEvidently
         o.name = "TagResource"
         o.http_method = "POST"
         o.http_request_uri = "/tags/{resourceArn}"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: TagResourceRequest)
         o.output = Shapes::ShapeRef.new(shape: TagResourceResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -1463,6 +1496,7 @@ module Aws::CloudWatchEvidently
         o.name = "TestSegmentPattern"
         o.http_method = "POST"
         o.http_request_uri = "/test-segment-pattern"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: TestSegmentPatternRequest)
         o.output = Shapes::ShapeRef.new(shape: TestSegmentPatternResponse)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
@@ -1474,6 +1508,7 @@ module Aws::CloudWatchEvidently
         o.name = "UntagResource"
         o.http_method = "DELETE"
         o.http_request_uri = "/tags/{resourceArn}"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: UntagResourceRequest)
         o.output = Shapes::ShapeRef.new(shape: UntagResourceResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -1485,6 +1520,7 @@ module Aws::CloudWatchEvidently
         o.name = "UpdateExperiment"
         o.http_method = "PATCH"
         o.http_request_uri = "/projects/{project}/experiments/{experiment}"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: UpdateExperimentRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateExperimentResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -1497,6 +1533,7 @@ module Aws::CloudWatchEvidently
         o.name = "UpdateFeature"
         o.http_method = "PATCH"
         o.http_request_uri = "/projects/{project}/features/{feature}"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: UpdateFeatureRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateFeatureResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -1510,6 +1547,7 @@ module Aws::CloudWatchEvidently
         o.name = "UpdateLaunch"
         o.http_method = "PATCH"
         o.http_request_uri = "/projects/{project}/launches/{launch}"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: UpdateLaunchRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateLaunchResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -1522,6 +1560,7 @@ module Aws::CloudWatchEvidently
         o.name = "UpdateProject"
         o.http_method = "PATCH"
         o.http_request_uri = "/projects/{project}"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: UpdateProjectRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateProjectResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -1535,6 +1574,7 @@ module Aws::CloudWatchEvidently
         o.name = "UpdateProjectDataDelivery"
         o.http_method = "PATCH"
         o.http_request_uri = "/projects/{project}/data-delivery"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: UpdateProjectDataDeliveryRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateProjectDataDeliveryResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)

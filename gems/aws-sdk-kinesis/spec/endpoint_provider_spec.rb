@@ -2128,5 +2128,524 @@ module Aws::Kinesis
       end
     end
 
+    context "StreamId test: OperationType not set with StreamId" do
+      let(:expected) do
+        {"error" => "Operation Type is not set. Please contact service team for resolution."}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-east-1", use_fips: false, use_dual_stack: false, stream_id: "af4lwng4k01746835071-xyz"})
+        expect do
+          subject.resolve_endpoint(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context "StreamId test: Stream endpoint targeting control operation type" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://af4lwng4k01746835071.xyz.control-kinesis.us-east-1.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-east-1", use_fips: false, use_dual_stack: false, operation_type: "control", stream_id: "af4lwng4k01746835071-xyz", stream_arn: "arn:aws:kinesis:us-east-1:123:stream/test-stream"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "StreamId test: Stream endpoint targeting data operation type" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://af4lwng4k01746835071.xyz.data-kinesis.us-east-1.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-east-1", use_fips: false, use_dual_stack: false, operation_type: "data", stream_id: "af4lwng4k01746835071-xyz", stream_arn: "arn:aws:kinesis:us-east-1:123:stream/test-stream"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling get_shard_iterator' do
+        client = Client.new(
+          region: 'us-east-1',
+          stub_responses: true
+        )
+        resp = client.get_shard_iterator(
+          shard_id: 'shardId-000000000001',
+          shard_iterator_type: 'LATEST',
+          stream_id: 'af4lwng4k01746835071-xyz',
+        )
+        expected_uri = URI.parse(expected['endpoint']['url'])
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.host)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.scheme)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.path)
+      end
+    end
+
+    context "StreamId test: Stream endpoint with fips targeting data operation type" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://af4lwng4k01746835071.xyz.data-kinesis-fips.us-east-1.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-east-1", use_fips: true, use_dual_stack: false, operation_type: "data", stream_id: "af4lwng4k01746835071-xyz", stream_arn: "arn:aws:kinesis:us-east-1:123:stream/test-stream"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "StreamId test: Stream endpoint with fips targeting control operation type" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://af4lwng4k01746835071.xyz.control-kinesis-fips.us-east-1.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-east-1", use_fips: true, use_dual_stack: false, operation_type: "control", stream_id: "af4lwng4k01746835071-xyz", stream_arn: "arn:aws:kinesis:us-east-1:123:stream/test-stream"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "StreamId test: Stream endpoint with Dual Stack and FIPS enabled" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://af4lwng4k01746835071.xyz.control-kinesis-fips.us-east-1.api.aws"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-east-1", use_fips: true, use_dual_stack: true, operation_type: "control", stream_id: "af4lwng4k01746835071-xyz", stream_arn: "arn:aws:kinesis:us-east-1:123:stream/test-stream"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "StreamId test: Stream endpoint with Dual Stack enabled" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://af4lwng4k01746835071.xyz.data-kinesis.us-west-1.api.aws"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-west-1", use_fips: false, use_dual_stack: true, operation_type: "data", stream_id: "af4lwng4k01746835071-xyz", stream_arn: "arn:aws:kinesis:us-west-1:123:stream/test-stream"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "StreamId test: Stream endpoint with FIPS and DualStack disabled" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://af4lwng4k01746835071.xyz.control-kinesis.us-west-1.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-west-1", use_fips: false, use_dual_stack: false, operation_type: "control", stream_id: "af4lwng4k01746835071-xyz", stream_arn: "arn:aws:kinesis:us-west-1:123:stream/test-stream"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling list_shards' do
+        client = Client.new(
+          region: 'us-west-1',
+          stub_responses: true
+        )
+        resp = client.list_shards(
+          stream_id: 'af4lwng4k01746835071-xyz',
+        )
+        expected_uri = URI.parse(expected['endpoint']['url'])
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.host)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.scheme)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.path)
+      end
+    end
+
+    context "StreamId test: Stream endpoint FIPS and DualStack disabled with endpoint" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://af4lwng4k01746835071.xyz.control-kinesis-pod1.us-east-1.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-east-1", use_fips: false, use_dual_stack: false, operation_type: "control", stream_id: "af4lwng4k01746835071-xyz", endpoint: "kinesis-pod1.us-east-1.amazonaws.com"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "StreamId test: Stream endpoint targeting data operation type with endpoint" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://af4lwng4k01746835071.xyz.data-kinesis-pod1.us-east-1.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-east-1", use_fips: false, use_dual_stack: false, operation_type: "data", stream_id: "af4lwng4k01746835071-xyz", endpoint: "kinesis-pod1.us-east-1.amazonaws.com"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "StreamId test: Stream endpoint with fips targeting data operation type with endpoint" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://af4lwng4k01746835071.xyz.data-kinesis-pod1-fips.us-east-1.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-east-1", use_fips: true, use_dual_stack: false, operation_type: "data", stream_id: "af4lwng4k01746835071-xyz", endpoint: "kinesis-pod1.us-east-1.amazonaws.com"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "StreamId test: Stream endpoint with fips targeting control operation type with endpoint" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://af4lwng4k01746835071.xyz.control-kinesis-pod1-fips.us-east-1.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-east-1", use_fips: true, use_dual_stack: false, operation_type: "control", stream_id: "af4lwng4k01746835071-xyz", endpoint: "kinesis-pod1.us-east-1.amazonaws.com"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "StreamId test: Stream endpoint with Dual Stack and FIPS enabled with endpoint" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://af4lwng4k01746835071.xyz.control-kinesis-pod1-fips.us-east-1.api.aws"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-east-1", use_fips: true, use_dual_stack: true, operation_type: "control", stream_id: "af4lwng4k01746835071-xyz", endpoint: "kinesis-pod1.us-east-1.amazonaws.com"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "StreamId test: Stream endpoint with Dual Stack enabled with endpoint" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://af4lwng4k01746835071.xyz.data-kinesis-pod1.us-east-1.api.aws"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-east-1", use_fips: false, use_dual_stack: true, operation_type: "data", stream_id: "af4lwng4k01746835071-xyz", endpoint: "kinesis-pod1.us-east-1.amazonaws.com"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "StreamId test: Stream endpoint targeting data operation type with https endpoint" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://af4lwng4k01746835071.xyz.data-kinesis-pod1.us-east-1.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-east-1", use_fips: false, use_dual_stack: false, operation_type: "data", stream_id: "af4lwng4k01746835071-xyz", endpoint: "https://kinesis-pod1.us-east-1.amazonaws.com"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "StreamId test: HTTPS endpoint with FIPS enabled targeting control operation type" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://af4lwng4k01746835071.xyz.control-kinesis-pod1-fips.us-east-1.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-east-1", use_fips: true, use_dual_stack: false, operation_type: "control", stream_id: "af4lwng4k01746835071-xyz", endpoint: "https://kinesis-pod1.us-east-1.amazonaws.com"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "StreamId test: HTTPS endpoint with FIPS enabled targeting data operation type" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://af4lwng4k01746835071.xyz.data-kinesis-pod1-fips.us-east-1.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-east-1", use_fips: true, use_dual_stack: false, operation_type: "data", stream_id: "af4lwng4k01746835071-xyz", endpoint: "https://kinesis-pod1.us-east-1.amazonaws.com"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "StreamId test: HTTPS endpoint with DualStack enabled targeting control operation type" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://af4lwng4k01746835071.xyz.control-kinesis-pod1.us-east-1.api.aws"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-east-1", use_fips: false, use_dual_stack: true, operation_type: "control", stream_id: "af4lwng4k01746835071-xyz", endpoint: "https://kinesis-pod1.us-east-1.amazonaws.com"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "StreamId test: HTTPS endpoint with DualStack enabled targeting data operation type" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://af4lwng4k01746835071.xyz.data-kinesis-pod1.us-east-1.api.aws"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-east-1", use_fips: false, use_dual_stack: true, operation_type: "data", stream_id: "af4lwng4k01746835071-xyz", endpoint: "https://kinesis-pod1.us-east-1.amazonaws.com"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "StreamId test: HTTPS endpoint with FIPS and DualStack enabled targeting control operation type" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://af4lwng4k01746835071.xyz.control-kinesis-pod1-fips.us-east-1.api.aws"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-east-1", use_fips: true, use_dual_stack: true, operation_type: "control", stream_id: "af4lwng4k01746835071-xyz", endpoint: "https://kinesis-pod1.us-east-1.amazonaws.com"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "StreamId test: HTTPS endpoint with FIPS and DualStack enabled targeting data operation type" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://af4lwng4k01746835071.xyz.data-kinesis-pod1-fips.us-east-1.api.aws"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-east-1", use_fips: true, use_dual_stack: true, operation_type: "data", stream_id: "af4lwng4k01746835071-xyz", endpoint: "https://kinesis-pod1.us-east-1.amazonaws.com"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "StreamId test: HTTPS endpoint with FIPS enabled in different region" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://af4lwng4k01746835071.xyz.data-kinesis-pod2-fips.us-west-2.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-west-2", use_fips: true, use_dual_stack: false, operation_type: "data", stream_id: "af4lwng4k01746835071-xyz", endpoint: "https://kinesis-pod2.us-west-2.amazonaws.com"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "StreamId test: HTTPS endpoint with DualStack enabled in different region" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://af4lwng4k01746835071.xyz.control-kinesis-pod2.us-west-2.api.aws"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-west-2", use_fips: false, use_dual_stack: true, operation_type: "control", stream_id: "af4lwng4k01746835071-xyz", endpoint: "https://kinesis-pod2.us-west-2.amazonaws.com"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "StreamId test: Stream endpoint with ConsumerARN targeting control operation type" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://af4lwng4k01746835071.xyz.control-kinesis.us-east-1.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-east-1", use_fips: false, use_dual_stack: false, operation_type: "control", stream_id: "af4lwng4k01746835071-xyz", consumer_arn: "arn:aws:kinesis:us-east-1:123:stream/test-stream/consumer/test-consumer:1525898737"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "StreamId test: Stream endpoint with ConsumerARN targeting data operation type" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://af4lwng4k01746835071.xyz.data-kinesis.us-east-1.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-east-1", use_fips: false, use_dual_stack: false, operation_type: "data", stream_id: "af4lwng4k01746835071-xyz", consumer_arn: "arn:aws:kinesis:us-east-1:123:stream/test-stream/consumer/test-consumer:1525898737"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "StreamId test: Stream endpoint with ResourceARN targeting control operation type" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://af4lwng4k01746835071.xyz.control-kinesis.us-east-1.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-east-1", use_fips: false, use_dual_stack: false, operation_type: "control", stream_id: "af4lwng4k01746835071-xyz", resource_arn: "arn:aws:kinesis:us-east-1:123:stream/test-stream"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "StreamId test: Stream endpoint with ResourceARN targeting data operation type" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://af4lwng4k01746835071.xyz.data-kinesis.us-east-1.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-east-1", use_fips: false, use_dual_stack: false, operation_type: "data", stream_id: "af4lwng4k01746835071-xyz", resource_arn: "arn:aws:kinesis:us-east-1:123:stream/test-stream"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "StreamId test: Invalid StreamId with ARN" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://123.data-kinesis.us-east-1.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-east-1", use_fips: false, use_dual_stack: false, operation_type: "data", stream_id: "af4lwng4k01746835071=xyz", resource_arn: "arn:aws:kinesis:us-east-1:123:stream/test-stream"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "StreamId test: Invalid streamId with custom endpoint" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://kinesis-pod2.us-west-2.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-west-2", use_fips: false, use_dual_stack: false, operation_type: "control", stream_id: "af4lwng4k01746835071=xyz", endpoint: "https://kinesis-pod2.us-west-2.amazonaws.com"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "StreamId test: Invalid streamId" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://kinesis.us-west-2.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-west-2", use_fips: false, use_dual_stack: false, operation_type: "control", stream_id: "af4lwng4k01746835071=xyz"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "StreamId test: Invalid streamId with custom endpoint and ARN" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://kinesis-pod2.us-west-2.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-west-2", use_fips: false, use_dual_stack: false, operation_type: "control", stream_id: "af4lwng4k01746835071=xyz", endpoint: "https://kinesis-pod2.us-west-2.amazonaws.com", resource_arn: "arn:aws:kinesis:us-east-1:123:stream/test-stream"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "StreamId test: Invalid streamId with longer prefix" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://123.control-kinesis.us-west-2.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-west-2", use_fips: false, use_dual_stack: false, operation_type: "control", stream_id: "af4lwng4k0174683507123-xyz", resource_arn: "arn:aws:kinesis:us-east-1:123:stream/test-stream"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "StreamId test: Invalid streamId with shorter prefix" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://123.control-kinesis.us-west-2.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-west-2", use_fips: false, use_dual_stack: false, operation_type: "control", stream_id: "af4lwng4k01746835-xyz", resource_arn: "arn:aws:kinesis:us-east-1:123:stream/test-stream"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "StreamId test: Invalid streamId with longer suffix" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://123.control-kinesis.us-west-2.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-west-2", use_fips: false, use_dual_stack: false, operation_type: "control", stream_id: "af4lwng4k01746835071-wxyz", resource_arn: "arn:aws:kinesis:us-east-1:123:stream/test-stream"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "StreamId test: Invalid streamId with shorter suffix" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://123.control-kinesis.us-west-2.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-west-2", use_fips: false, use_dual_stack: false, operation_type: "control", stream_id: "af4lwng4k01746835071-yz", resource_arn: "arn:aws:kinesis:us-east-1:123:stream/test-stream"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
   end
 end

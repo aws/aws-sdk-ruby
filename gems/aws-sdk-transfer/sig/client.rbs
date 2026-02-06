@@ -153,9 +153,13 @@ module Aws
                                 encryption_algorithm: ("AES128_CBC" | "AES192_CBC" | "AES256_CBC" | "DES_EDE3_CBC" | "NONE")?,
                                 signing_algorithm: ("SHA256" | "SHA384" | "SHA512" | "SHA1" | "NONE")?,
                                 mdn_signing_algorithm: ("SHA256" | "SHA384" | "SHA512" | "SHA1" | "NONE" | "DEFAULT")?,
-                                mdn_response: ("SYNC" | "NONE")?,
+                                mdn_response: ("SYNC" | "NONE" | "ASYNC")?,
                                 basic_auth_secret_id: ::String?,
-                                preserve_content_type: ("ENABLED" | "DISABLED")?
+                                preserve_content_type: ("ENABLED" | "DISABLED")?,
+                                async_mdn_config: {
+                                  url: ::String?,
+                                  server_ids: Array[::String]?
+                                }?
                               },
                               access_role: ::String,
                               ?logging_role: ::String,
@@ -947,7 +951,13 @@ module Aws
                                  ?send_file_paths: Array[::String],
                                  ?retrieve_file_paths: Array[::String],
                                  ?local_directory_path: ::String,
-                                 ?remote_directory_path: ::String
+                                 ?remote_directory_path: ::String,
+                                 ?custom_http_headers: Array[
+                                   {
+                                     key: ::String?,
+                                     value: ::String?
+                                   },
+                                 ]
                                ) -> _StartFileTransferResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartFileTransferResponseSuccess
 
@@ -1118,9 +1128,13 @@ module Aws
                                 encryption_algorithm: ("AES128_CBC" | "AES192_CBC" | "AES256_CBC" | "DES_EDE3_CBC" | "NONE")?,
                                 signing_algorithm: ("SHA256" | "SHA384" | "SHA512" | "SHA1" | "NONE")?,
                                 mdn_signing_algorithm: ("SHA256" | "SHA384" | "SHA512" | "SHA1" | "NONE" | "DEFAULT")?,
-                                mdn_response: ("SYNC" | "NONE")?,
+                                mdn_response: ("SYNC" | "NONE" | "ASYNC")?,
                                 basic_auth_secret_id: ::String?,
-                                preserve_content_type: ("ENABLED" | "DISABLED")?
+                                preserve_content_type: ("ENABLED" | "DISABLED")?,
+                                async_mdn_config: {
+                                  url: ::String?,
+                                  server_ids: Array[::String]?
+                                }?
                               },
                               ?access_role: ::String,
                               ?logging_role: ::String,

@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.135.0 (2026-02-03)
+------------------
+
+* Feature - Updated the CloseAccount description.
+
+1.134.0 (2026-01-16)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.133.0 (2026-01-08)
 ------------------
 

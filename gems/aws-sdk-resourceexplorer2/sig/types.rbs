@@ -440,6 +440,7 @@ module Aws::ResourceExplorer2
 
     class ServiceView
       attr_accessor service_view_arn: ::String
+      attr_accessor service_view_name: ::String
       attr_accessor filters: Types::SearchFilter
       attr_accessor included_properties: ::Array[Types::IncludedProperty]
       attr_accessor streaming_access_for_service: ::String
@@ -527,6 +528,7 @@ module Aws::ResourceExplorer2
 
     class View
       attr_accessor view_arn: ::String
+      attr_accessor view_name: ::String
       attr_accessor owner: ::String
       attr_accessor last_updated_at: ::Time
       attr_accessor scope: ::String

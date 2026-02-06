@@ -733,6 +733,7 @@ module Aws::EC2
     #   instance.attach_volume({
     #     device: "String", # required
     #     volume_id: "VolumeId", # required
+    #     ebs_card_index: 1,
     #     dry_run: false,
     #   })
     # @param [Hash] options ({})
@@ -741,6 +742,9 @@ module Aws::EC2
     # @option options [required, String] :volume_id
     #   The ID of the EBS volume. The volume and instance must be within the
     #   same Availability Zone.
+    # @option options [Integer] :ebs_card_index
+    #   The index of the EBS card. Some instance types support multiple EBS
+    #   cards. The default EBS card index is 0.
     # @option options [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
@@ -814,6 +818,7 @@ module Aws::EC2
     #           encrypted: false,
     #           volume_initialization_rate: 1,
     #           availability_zone_id: "String",
+    #           ebs_card_index: 1,
     #         },
     #         no_device: "String",
     #         device_name: "String",

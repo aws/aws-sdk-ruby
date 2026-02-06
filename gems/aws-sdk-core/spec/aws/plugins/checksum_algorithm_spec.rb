@@ -479,6 +479,22 @@ module Aws
           expect(resp.context[:http_checksum][:validated]).to eq('CRC32')
         end
       end
+
+      describe 'AwsChunkedTrailerDigestIO' do
+        it 'rewinds IO on initialization' do
+          io = StringIO.new('hello world')
+          io.read # move to EOF
+          expect(io.pos).to eq(11)
+
+          ChecksumAlgorithm::AwsChunkedTrailerDigestIO.new(
+            io: io,
+            algorithm: 'CRC32',
+            location_name: 'x-amz-checksum-crc32'
+          )
+
+          expect(io.pos).to eq(0)
+        end
+      end
     end
   end
 end

@@ -40,8 +40,12 @@ module Aws::BedrockRuntime
     Blob = Shapes::BlobShape.new(name: 'Blob')
     Body = Shapes::BlobShape.new(name: 'Body')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
+    CacheDetail = Shapes::StructureShape.new(name: 'CacheDetail')
+    CacheDetailInputTokensInteger = Shapes::IntegerShape.new(name: 'CacheDetailInputTokensInteger')
+    CacheDetailsList = Shapes::ListShape.new(name: 'CacheDetailsList')
     CachePointBlock = Shapes::StructureShape.new(name: 'CachePointBlock')
     CachePointType = Shapes::StringShape.new(name: 'CachePointType')
+    CacheTTL = Shapes::StringShape.new(name: 'CacheTTL')
     Citation = Shapes::StructureShape.new(name: 'Citation')
     CitationGeneratedContent = Shapes::UnionShape.new(name: 'CitationGeneratedContent')
     CitationGeneratedContentList = Shapes::ListShape.new(name: 'CitationGeneratedContentList')
@@ -249,6 +253,7 @@ module Aws::BedrockRuntime
     InvokeModelWithResponseStreamRequest = Shapes::StructureShape.new(name: 'InvokeModelWithResponseStreamRequest')
     InvokeModelWithResponseStreamResponse = Shapes::StructureShape.new(name: 'InvokeModelWithResponseStreamResponse')
     InvokedModelId = Shapes::StringShape.new(name: 'InvokedModelId')
+    JsonSchemaDefinition = Shapes::StructureShape.new(name: 'JsonSchemaDefinition')
     KmsKeyId = Shapes::StringShape.new(name: 'KmsKeyId')
     ListAsyncInvokesRequest = Shapes::StructureShape.new(name: 'ListAsyncInvokesRequest')
     ListAsyncInvokesResponse = Shapes::StructureShape.new(name: 'ListAsyncInvokesResponse')
@@ -268,6 +273,10 @@ module Aws::BedrockRuntime
     NonBlankString = Shapes::StringShape.new(name: 'NonBlankString')
     NonEmptyString = Shapes::StringShape.new(name: 'NonEmptyString')
     NonNegativeInteger = Shapes::IntegerShape.new(name: 'NonNegativeInteger')
+    OutputConfig = Shapes::StructureShape.new(name: 'OutputConfig')
+    OutputFormat = Shapes::StructureShape.new(name: 'OutputFormat')
+    OutputFormatStructure = Shapes::UnionShape.new(name: 'OutputFormatStructure')
+    OutputFormatType = Shapes::StringShape.new(name: 'OutputFormatType')
     PaginationToken = Shapes::StringShape.new(name: 'PaginationToken')
     PartBody = Shapes::BlobShape.new(name: 'PartBody')
     PayloadPart = Shapes::StructureShape.new(name: 'PayloadPart')
@@ -421,7 +430,14 @@ module Aws::BedrockRuntime
     BidirectionalOutputPayloadPart.add_member(:bytes, Shapes::ShapeRef.new(shape: PartBody, location_name: "bytes"))
     BidirectionalOutputPayloadPart.struct_class = Types::BidirectionalOutputPayloadPart
 
+    CacheDetail.add_member(:ttl, Shapes::ShapeRef.new(shape: CacheTTL, required: true, location_name: "ttl"))
+    CacheDetail.add_member(:input_tokens, Shapes::ShapeRef.new(shape: CacheDetailInputTokensInteger, required: true, location_name: "inputTokens"))
+    CacheDetail.struct_class = Types::CacheDetail
+
+    CacheDetailsList.member = Shapes::ShapeRef.new(shape: CacheDetail)
+
     CachePointBlock.add_member(:type, Shapes::ShapeRef.new(shape: CachePointType, required: true, location_name: "type"))
+    CachePointBlock.add_member(:ttl, Shapes::ShapeRef.new(shape: CacheTTL, location_name: "ttl"))
     CachePointBlock.struct_class = Types::CachePointBlock
 
     Citation.add_member(:title, Shapes::ShapeRef.new(shape: String, location_name: "title"))
@@ -571,6 +587,7 @@ module Aws::BedrockRuntime
     ConverseRequest.add_member(:request_metadata, Shapes::ShapeRef.new(shape: RequestMetadata, location_name: "requestMetadata"))
     ConverseRequest.add_member(:performance_config, Shapes::ShapeRef.new(shape: PerformanceConfiguration, location_name: "performanceConfig"))
     ConverseRequest.add_member(:service_tier, Shapes::ShapeRef.new(shape: ServiceTier, location_name: "serviceTier"))
+    ConverseRequest.add_member(:output_config, Shapes::ShapeRef.new(shape: OutputConfig, location_name: "outputConfig"))
     ConverseRequest.struct_class = Types::ConverseRequest
 
     ConverseRequestAdditionalModelResponseFieldPathsList.member = Shapes::ShapeRef.new(shape: ConverseRequestAdditionalModelResponseFieldPathsListMemberString)
@@ -620,6 +637,7 @@ module Aws::BedrockRuntime
     ConverseStreamRequest.add_member(:request_metadata, Shapes::ShapeRef.new(shape: RequestMetadata, location_name: "requestMetadata"))
     ConverseStreamRequest.add_member(:performance_config, Shapes::ShapeRef.new(shape: PerformanceConfiguration, location_name: "performanceConfig"))
     ConverseStreamRequest.add_member(:service_tier, Shapes::ShapeRef.new(shape: ServiceTier, location_name: "serviceTier"))
+    ConverseStreamRequest.add_member(:output_config, Shapes::ShapeRef.new(shape: OutputConfig, location_name: "outputConfig"))
     ConverseStreamRequest.struct_class = Types::ConverseStreamRequest
 
     ConverseStreamRequestAdditionalModelResponseFieldPathsList.member = Shapes::ShapeRef.new(shape: ConverseStreamRequestAdditionalModelResponseFieldPathsListMemberString)
@@ -1105,6 +1123,11 @@ module Aws::BedrockRuntime
     InvokeModelWithResponseStreamResponse[:payload] = :body
     InvokeModelWithResponseStreamResponse[:payload_member] = InvokeModelWithResponseStreamResponse.member(:body)
 
+    JsonSchemaDefinition.add_member(:schema, Shapes::ShapeRef.new(shape: String, required: true, location_name: "schema"))
+    JsonSchemaDefinition.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
+    JsonSchemaDefinition.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
+    JsonSchemaDefinition.struct_class = Types::JsonSchemaDefinition
+
     ListAsyncInvokesRequest.add_member(:submit_time_after, Shapes::ShapeRef.new(shape: Timestamp, location: "querystring", location_name: "submitTimeAfter"))
     ListAsyncInvokesRequest.add_member(:submit_time_before, Shapes::ShapeRef.new(shape: Timestamp, location: "querystring", location_name: "submitTimeBefore"))
     ListAsyncInvokesRequest.add_member(:status_equals, Shapes::ShapeRef.new(shape: AsyncInvokeStatus, location: "querystring", location_name: "statusEquals"))
@@ -1148,6 +1171,19 @@ module Aws::BedrockRuntime
 
     ModelTimeoutException.add_member(:message, Shapes::ShapeRef.new(shape: NonBlankString, location_name: "message"))
     ModelTimeoutException.struct_class = Types::ModelTimeoutException
+
+    OutputConfig.add_member(:text_format, Shapes::ShapeRef.new(shape: OutputFormat, location_name: "textFormat"))
+    OutputConfig.struct_class = Types::OutputConfig
+
+    OutputFormat.add_member(:type, Shapes::ShapeRef.new(shape: OutputFormatType, required: true, location_name: "type"))
+    OutputFormat.add_member(:structure, Shapes::ShapeRef.new(shape: OutputFormatStructure, required: true, location_name: "structure"))
+    OutputFormat.struct_class = Types::OutputFormat
+
+    OutputFormatStructure.add_member(:json_schema, Shapes::ShapeRef.new(shape: JsonSchemaDefinition, location_name: "jsonSchema"))
+    OutputFormatStructure.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    OutputFormatStructure.add_member_subclass(:json_schema, Types::OutputFormatStructure::JsonSchema)
+    OutputFormatStructure.add_member_subclass(:unknown, Types::OutputFormatStructure::Unknown)
+    OutputFormatStructure.struct_class = Types::OutputFormatStructure
 
     PayloadPart.add_member(:bytes, Shapes::ShapeRef.new(shape: PartBody, location_name: "bytes"))
     PayloadPart.struct_class = Types::PayloadPart
@@ -1275,6 +1311,7 @@ module Aws::BedrockRuntime
     TokenUsage.add_member(:total_tokens, Shapes::ShapeRef.new(shape: TokenUsageTotalTokensInteger, required: true, location_name: "totalTokens"))
     TokenUsage.add_member(:cache_read_input_tokens, Shapes::ShapeRef.new(shape: TokenUsageCacheReadInputTokensInteger, location_name: "cacheReadInputTokens"))
     TokenUsage.add_member(:cache_write_input_tokens, Shapes::ShapeRef.new(shape: TokenUsageCacheWriteInputTokensInteger, location_name: "cacheWriteInputTokens"))
+    TokenUsage.add_member(:cache_details, Shapes::ShapeRef.new(shape: CacheDetailsList, location_name: "cacheDetails"))
     TokenUsage.struct_class = Types::TokenUsage
 
     Tool.add_member(:tool_spec, Shapes::ShapeRef.new(shape: ToolSpecification, location_name: "toolSpec"))
@@ -1351,6 +1388,7 @@ module Aws::BedrockRuntime
     ToolSpecification.add_member(:name, Shapes::ShapeRef.new(shape: ToolName, required: true, location_name: "name"))
     ToolSpecification.add_member(:description, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "description"))
     ToolSpecification.add_member(:input_schema, Shapes::ShapeRef.new(shape: ToolInputSchema, required: true, location_name: "inputSchema"))
+    ToolSpecification.add_member(:strict, Shapes::ShapeRef.new(shape: Boolean, location_name: "strict"))
     ToolSpecification.struct_class = Types::ToolSpecification
 
     ToolUseBlock.add_member(:tool_use_id, Shapes::ShapeRef.new(shape: ToolUseId, required: true, location_name: "toolUseId"))

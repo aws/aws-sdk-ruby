@@ -54,7 +54,7 @@ module Aws::AppRunner
   autoload :EndpointProvider, 'aws-sdk-apprunner/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-apprunner/endpoints'
 
-  GEM_VERSION = '1.68.0'
+  GEM_VERSION = '1.69.0'
 
 end
 

@@ -286,7 +286,7 @@ module Aws
                                      bundle_description: ::String,
                                      image_id: ::String,
                                      compute_type: {
-                                       name: ("VALUE" | "STANDARD" | "PERFORMANCE" | "POWER" | "GRAPHICS" | "POWERPRO" | "GENERALPURPOSE_4XLARGE" | "GENERALPURPOSE_8XLARGE" | "GRAPHICSPRO" | "GRAPHICS_G4DN" | "GRAPHICSPRO_G4DN")?
+                                       name: ("VALUE" | "STANDARD" | "PERFORMANCE" | "POWER" | "GRAPHICS" | "POWERPRO" | "GENERALPURPOSE_4XLARGE" | "GENERALPURPOSE_8XLARGE" | "GRAPHICSPRO" | "GRAPHICS_G4DN" | "GRAPHICSPRO_G4DN" | "GRAPHICS_G6_XLARGE" | "GRAPHICS_G6_2XLARGE" | "GRAPHICS_G6_4XLARGE" | "GRAPHICS_G6_8XLARGE" | "GRAPHICS_G6_16XLARGE" | "GRAPHICS_GR6_4XLARGE" | "GRAPHICS_GR6_8XLARGE" | "GRAPHICS_G6F_LARGE" | "GRAPHICS_G6F_XLARGE" | "GRAPHICS_G6F_2XLARGE" | "GRAPHICS_G6F_4XLARGE" | "GRAPHICS_GR6F_4XLARGE")?
                                      },
                                      user_storage: {
                                        capacity: ::String
@@ -348,7 +348,7 @@ module Aws
                                      running_mode_auto_stop_timeout_in_minutes: ::Integer?,
                                      root_volume_size_gib: ::Integer?,
                                      user_volume_size_gib: ::Integer?,
-                                     compute_type_name: ("VALUE" | "STANDARD" | "PERFORMANCE" | "POWER" | "GRAPHICS" | "POWERPRO" | "GENERALPURPOSE_4XLARGE" | "GENERALPURPOSE_8XLARGE" | "GRAPHICSPRO" | "GRAPHICS_G4DN" | "GRAPHICSPRO_G4DN")?,
+                                     compute_type_name: ("VALUE" | "STANDARD" | "PERFORMANCE" | "POWER" | "GRAPHICS" | "POWERPRO" | "GENERALPURPOSE_4XLARGE" | "GENERALPURPOSE_8XLARGE" | "GRAPHICSPRO" | "GRAPHICS_G4DN" | "GRAPHICSPRO_G4DN" | "GRAPHICS_G6_XLARGE" | "GRAPHICS_G6_2XLARGE" | "GRAPHICS_G6_4XLARGE" | "GRAPHICS_G6_8XLARGE" | "GRAPHICS_G6_16XLARGE" | "GRAPHICS_GR6_4XLARGE" | "GRAPHICS_GR6_8XLARGE" | "GRAPHICS_G6F_LARGE" | "GRAPHICS_G6F_XLARGE" | "GRAPHICS_G6F_2XLARGE" | "GRAPHICS_G6F_4XLARGE" | "GRAPHICS_GR6F_4XLARGE")?,
                                      protocols: Array[("PCOIP" | "WSP")]?,
                                      operating_system_name: ("AMAZON_LINUX_2" | "UBUNTU_18_04" | "UBUNTU_20_04" | "UBUNTU_22_04" | "UNKNOWN" | "WINDOWS_10" | "WINDOWS_11" | "WINDOWS_7" | "WINDOWS_SERVER_2016" | "WINDOWS_SERVER_2019" | "WINDOWS_SERVER_2022" | "RHEL_8" | "ROCKY_8")?,
                                      global_accelerator: {
@@ -543,7 +543,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpaces/Client.html#describe_applications-instance_method
       def describe_applications: (
                                    ?application_ids: Array[::String],
-                                   ?compute_type_names: Array[("VALUE" | "STANDARD" | "PERFORMANCE" | "POWER" | "GRAPHICS" | "POWERPRO" | "GENERALPURPOSE_4XLARGE" | "GENERALPURPOSE_8XLARGE" | "GRAPHICSPRO" | "GRAPHICS_G4DN" | "GRAPHICSPRO_G4DN")],
+                                   ?compute_type_names: Array[("VALUE" | "STANDARD" | "PERFORMANCE" | "POWER" | "GRAPHICS" | "POWERPRO" | "GENERALPURPOSE_4XLARGE" | "GENERALPURPOSE_8XLARGE" | "GRAPHICSPRO" | "GRAPHICS_G4DN" | "GRAPHICSPRO_G4DN" | "GRAPHICS_G6_XLARGE" | "GRAPHICS_G6_2XLARGE" | "GRAPHICS_G6_4XLARGE" | "GRAPHICS_G6_8XLARGE" | "GRAPHICS_G6_16XLARGE" | "GRAPHICS_GR6_4XLARGE" | "GRAPHICS_GR6_8XLARGE" | "GRAPHICS_G6F_LARGE" | "GRAPHICS_G6F_XLARGE" | "GRAPHICS_G6F_2XLARGE" | "GRAPHICS_G6F_4XLARGE" | "GRAPHICS_GR6F_4XLARGE")],
                                    ?license_type: ("LICENSED" | "UNLICENSED"),
                                    ?operating_system_names: Array[("AMAZON_LINUX_2" | "UBUNTU_18_04" | "UBUNTU_20_04" | "UBUNTU_22_04" | "UNKNOWN" | "WINDOWS_10" | "WINDOWS_11" | "WINDOWS_7" | "WINDOWS_SERVER_2016" | "WINDOWS_SERVER_2019" | "WINDOWS_SERVER_2022" | "RHEL_8" | "ROCKY_8")],
                                    ?owner: ::String,
@@ -937,7 +937,7 @@ module Aws
       def import_custom_workspace_image: (
                                            image_name: ::String,
                                            image_description: ::String,
-                                           compute_type: ("BASE" | "GRAPHICS_G4DN"),
+                                           compute_type: ("BASE" | "GRAPHICS_G4DN" | "GRAPHICS_G6"),
                                            protocol: ("PCOIP" | "DCV" | "BYOP"),
                                            image_source: {
                                              ec2_import_task_id: ::String?,
@@ -1179,7 +1179,7 @@ module Aws
                                            running_mode_auto_stop_timeout_in_minutes: ::Integer?,
                                            root_volume_size_gib: ::Integer?,
                                            user_volume_size_gib: ::Integer?,
-                                           compute_type_name: ("VALUE" | "STANDARD" | "PERFORMANCE" | "POWER" | "GRAPHICS" | "POWERPRO" | "GENERALPURPOSE_4XLARGE" | "GENERALPURPOSE_8XLARGE" | "GRAPHICSPRO" | "GRAPHICS_G4DN" | "GRAPHICSPRO_G4DN")?,
+                                           compute_type_name: ("VALUE" | "STANDARD" | "PERFORMANCE" | "POWER" | "GRAPHICS" | "POWERPRO" | "GENERALPURPOSE_4XLARGE" | "GENERALPURPOSE_8XLARGE" | "GRAPHICSPRO" | "GRAPHICS_G4DN" | "GRAPHICSPRO_G4DN" | "GRAPHICS_G6_XLARGE" | "GRAPHICS_G6_2XLARGE" | "GRAPHICS_G6_4XLARGE" | "GRAPHICS_G6_8XLARGE" | "GRAPHICS_G6_16XLARGE" | "GRAPHICS_GR6_4XLARGE" | "GRAPHICS_GR6_8XLARGE" | "GRAPHICS_G6F_LARGE" | "GRAPHICS_G6F_XLARGE" | "GRAPHICS_G6F_2XLARGE" | "GRAPHICS_G6F_4XLARGE" | "GRAPHICS_GR6F_4XLARGE")?,
                                            protocols: Array[("PCOIP" | "WSP")]?,
                                            operating_system_name: ("AMAZON_LINUX_2" | "UBUNTU_18_04" | "UBUNTU_20_04" | "UBUNTU_22_04" | "UNKNOWN" | "WINDOWS_10" | "WINDOWS_11" | "WINDOWS_7" | "WINDOWS_SERVER_2016" | "WINDOWS_SERVER_2019" | "WINDOWS_SERVER_2022" | "RHEL_8" | "ROCKY_8")?,
                                            global_accelerator: {

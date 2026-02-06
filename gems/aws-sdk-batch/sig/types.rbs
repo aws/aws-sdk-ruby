@@ -15,6 +15,7 @@ module Aws::Batch
 
     class ArrayPropertiesDetail
       attr_accessor status_summary: ::Hash[::String, ::Integer]
+      attr_accessor status_summary_last_updated_at: ::Integer
       attr_accessor size: ::Integer
       attr_accessor index: ::Integer
       SENSITIVE: []
@@ -23,6 +24,8 @@ module Aws::Batch
     class ArrayPropertiesSummary
       attr_accessor size: ::Integer
       attr_accessor index: ::Integer
+      attr_accessor status_summary: ::Hash[::String, ::Integer]
+      attr_accessor status_summary_last_updated_at: ::Integer
       SENSITIVE: []
     end
 

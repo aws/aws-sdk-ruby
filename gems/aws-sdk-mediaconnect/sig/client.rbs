@@ -300,6 +300,9 @@ module Aws
                                       vpc_interface_name: ::String?
                                     }?
                                   }?,
+                                  ndi_source_settings: {
+                                    source_name: ::String?
+                                  }?,
                                   source_tags: Hash[::String, ::String]?,
                                   router_integration_state: ("ENABLED" | "DISABLED")?,
                                   router_integration_transit_decryption: {
@@ -596,6 +599,9 @@ module Aws
                                vpc_interface_name: ::String?
                              }?
                            }?,
+                           ndi_source_settings: {
+                             source_name: ::String?
+                           }?,
                            source_tags: Hash[::String, ::String]?,
                            router_integration_state: ("ENABLED" | "DISABLED")?,
                            router_integration_transit_decryption: {
@@ -667,6 +673,9 @@ module Aws
                                  vpc_interface_name: ::String?
                                }?
                              }?,
+                             ndi_source_settings: {
+                               source_name: ::String?
+                             }?,
                              source_tags: Hash[::String, ::String]?,
                              router_integration_state: ("ENABLED" | "DISABLED")?,
                              router_integration_transit_decryption: {
@@ -720,7 +729,7 @@ module Aws
                              },
                            ]?
                          },
-                         ?flow_size: ("MEDIUM" | "LARGE"),
+                         ?flow_size: ("MEDIUM" | "LARGE" | "LARGE_4X"),
                          ?ndi_config: {
                            ndi_state: ("ENABLED" | "DISABLED")?,
                            machine_name: ::String?,
@@ -731,6 +740,10 @@ module Aws
                                vpc_interface_adapter: ::String
                              },
                            ]?
+                         },
+                         ?encoding_config: {
+                           encoding_profile: ("DISTRIBUTION_H264_DEFAULT" | "CONTRIBUTION_H264_DEFAULT")?,
+                           video_max_bitrate: ::Integer?
                          },
                          ?flow_tags: Hash[::String, ::String]
                        ) -> _CreateFlowResponseSuccess
@@ -1123,6 +1136,7 @@ module Aws
         def messages: () -> ::Array[Types::MessageDetail]
         def timestamp: () -> ::Time
         def transport_media_info: () -> Types::TransportMediaInfo
+        def ndi_info: () -> Types::NdiSourceMetadataInfo
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaConnect/Client.html#describe_flow_source_metadata-instance_method
       def describe_flow_source_metadata: (
@@ -1810,7 +1824,11 @@ module Aws
                              },
                            ]?
                          },
-                         ?flow_size: ("MEDIUM" | "LARGE")
+                         ?flow_size: ("MEDIUM" | "LARGE" | "LARGE_4X"),
+                         ?encoding_config: {
+                           encoding_profile: ("DISTRIBUTION_H264_DEFAULT" | "CONTRIBUTION_H264_DEFAULT")?,
+                           video_max_bitrate: ::Integer?
+                         }
                        ) -> _UpdateFlowResponseSuccess
                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateFlowResponseSuccess
 
@@ -1994,6 +2012,9 @@ module Aws
                                   vpc_interface_attachment: {
                                     vpc_interface_name: ::String?
                                   }?
+                                },
+                                ?ndi_source_settings: {
+                                  source_name: ::String?
                                 },
                                 ?router_integration_state: ("ENABLED" | "DISABLED"),
                                 ?router_integration_transit_decryption: {
@@ -2319,6 +2340,10 @@ module Aws
                     arn: ::String
                   ) -> Client::_GetRouterOutputResponseSuccess
                     | (:output_standby waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetRouterOutputResponseSuccess
+                    | (:output_unrouted waiter_name, 
+                    arn: ::String
+                  ) -> Client::_GetRouterOutputResponseSuccess
+                    | (:output_unrouted waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetRouterOutputResponseSuccess
     end
   end
 end

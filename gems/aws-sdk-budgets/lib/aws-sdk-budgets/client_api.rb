@@ -250,6 +250,8 @@ module Aws::Budgets
     BudgetPerformanceHistory.add_member(:time_unit, Shapes::ShapeRef.new(shape: TimeUnit, location_name: "TimeUnit"))
     BudgetPerformanceHistory.add_member(:billing_view_arn, Shapes::ShapeRef.new(shape: BillingViewArn, location_name: "BillingViewArn"))
     BudgetPerformanceHistory.add_member(:budgeted_and_actual_amounts_list, Shapes::ShapeRef.new(shape: BudgetedAndActualAmountsList, location_name: "BudgetedAndActualAmountsList"))
+    BudgetPerformanceHistory.add_member(:filter_expression, Shapes::ShapeRef.new(shape: Expression, location_name: "FilterExpression"))
+    BudgetPerformanceHistory.add_member(:metrics, Shapes::ShapeRef.new(shape: Metrics, location_name: "Metrics"))
     BudgetPerformanceHistory.struct_class = Types::BudgetPerformanceHistory
 
     BudgetedAndActualAmounts.add_member(:budgeted_amount, Shapes::ShapeRef.new(shape: Spend, location_name: "BudgetedAmount"))

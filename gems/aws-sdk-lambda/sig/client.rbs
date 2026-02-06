@@ -271,6 +271,7 @@ module Aws
         def filter_criteria_error: () -> Types::FilterCriteriaError
         def event_source_mapping_arn: () -> ::String
         def metrics_config: () -> Types::EventSourceMappingMetricsConfig
+        def logging_config: () -> Types::EventSourceMappingLoggingConfig
         def provisioned_poller_config: () -> Types::ProvisionedPollerConfig
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lambda/Client.html#create_event_source_mapping-instance_method
@@ -361,7 +362,10 @@ module Aws
                                          },
                                          ?kms_key_arn: ::String,
                                          ?metrics_config: {
-                                           metrics: Array[("EventCount")]?
+                                           metrics: Array[("EventCount" | "ErrorCount" | "KafkaMetrics")]?
+                                         },
+                                         ?logging_config: {
+                                           system_log_level: ("DEBUG" | "INFO" | "WARN")?
                                          },
                                          ?provisioned_poller_config: {
                                            minimum_pollers: ::Integer?,
@@ -578,6 +582,7 @@ module Aws
         def filter_criteria_error: () -> Types::FilterCriteriaError
         def event_source_mapping_arn: () -> ::String
         def metrics_config: () -> Types::EventSourceMappingMetricsConfig
+        def logging_config: () -> Types::EventSourceMappingLoggingConfig
         def provisioned_poller_config: () -> Types::ProvisionedPollerConfig
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lambda/Client.html#delete_event_source_mapping-instance_method
@@ -764,6 +769,7 @@ module Aws
         def filter_criteria_error: () -> Types::FilterCriteriaError
         def event_source_mapping_arn: () -> ::String
         def metrics_config: () -> Types::EventSourceMappingMetricsConfig
+        def logging_config: () -> Types::EventSourceMappingLoggingConfig
         def provisioned_poller_config: () -> Types::ProvisionedPollerConfig
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lambda/Client.html#get_event_source_mapping-instance_method
@@ -1620,6 +1626,7 @@ module Aws
         def filter_criteria_error: () -> Types::FilterCriteriaError
         def event_source_mapping_arn: () -> ::String
         def metrics_config: () -> Types::EventSourceMappingMetricsConfig
+        def logging_config: () -> Types::EventSourceMappingLoggingConfig
         def provisioned_poller_config: () -> Types::ProvisionedPollerConfig
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lambda/Client.html#update_event_source_mapping-instance_method
@@ -1702,7 +1709,10 @@ module Aws
                                          },
                                          ?kms_key_arn: ::String,
                                          ?metrics_config: {
-                                           metrics: Array[("EventCount")]?
+                                           metrics: Array[("EventCount" | "ErrorCount" | "KafkaMetrics")]?
+                                         },
+                                         ?logging_config: {
+                                           system_log_level: ("DEBUG" | "INFO" | "WARN")?
                                          },
                                          ?provisioned_poller_config: {
                                            minimum_pollers: ::Integer?,

@@ -70,7 +70,9 @@ module Aws::Deadline
   # | waiter_name                     | params                               | :delay   | :max_attempts |
   # | ------------------------------- | ------------------------------------ | -------- | ------------- |
   # | fleet_active                    | {Client#get_fleet}                   | 5        | 180           |
+  # | job_complete                    | {Client#get_job}                     | 15       | 240           |
   # | job_create_complete             | {Client#get_job}                     | 1        | 120           |
+  # | job_succeeded                   | {Client#get_job}                     | 15       | 240           |
   # | license_endpoint_deleted        | {Client#get_license_endpoint}        | 10       | 234           |
   # | license_endpoint_valid          | {Client#get_license_endpoint}        | 10       | 114           |
   # | queue_fleet_association_stopped | {Client#get_queue_fleet_association} | 10       | 60            |
@@ -131,7 +133,76 @@ module Aws::Deadline
 
     end
 
-    # Wait until a Job is created. Use this after invoking CreateJob.
+    # Wait until a job reaches any terminal status. Waits up to 1 hour by default.
+    class JobComplete
+
+      # @param [Hash] options
+      # @option options [required, Client] :client
+      # @option options [Integer] :max_attempts (240)
+      # @option options [Integer] :delay (15)
+      # @option options [Proc] :before_attempt
+      # @option options [Proc] :before_wait
+      def initialize(options)
+        @client = options.fetch(:client)
+        @waiter = Aws::Waiters::Waiter.new({
+          max_attempts: 240,
+          delay: 15,
+          poller: Aws::Waiters::Poller.new(
+            operation_name: :get_job,
+            acceptors: [
+              {
+                "matcher" => "path",
+                "argument" => "task_run_status",
+                "state" => "success",
+                "expected" => "SUCCEEDED"
+              },
+              {
+                "matcher" => "path",
+                "argument" => "task_run_status",
+                "state" => "success",
+                "expected" => "FAILED"
+              },
+              {
+                "matcher" => "path",
+                "argument" => "task_run_status",
+                "state" => "success",
+                "expected" => "CANCELED"
+              },
+              {
+                "matcher" => "path",
+                "argument" => "task_run_status",
+                "state" => "success",
+                "expected" => "SUSPENDED"
+              },
+              {
+                "matcher" => "path",
+                "argument" => "task_run_status",
+                "state" => "success",
+                "expected" => "NOT_COMPATIBLE"
+              },
+              {
+                "matcher" => "path",
+                "argument" => "lifecycle_status",
+                "state" => "success",
+                "expected" => "ARCHIVED"
+              }
+            ]
+          )
+        }.merge(options))
+      end
+
+      # @option (see Client#get_job)
+      # @return (see Client#get_job)
+      def wait(params = {})
+        @waiter.wait(client: @client, params: params)
+      end
+
+      # @api private
+      attr_reader :waiter
+
+    end
+
+    # Wait until a job is created. Use this after invoking CreateJob.
     class JobCreateComplete
 
       # @param [Hash] options
@@ -183,6 +254,75 @@ module Aws::Deadline
                 "argument" => "lifecycle_status",
                 "state" => "failure",
                 "expected" => "CREATE_FAILED"
+              }
+            ]
+          )
+        }.merge(options))
+      end
+
+      # @option (see Client#get_job)
+      # @return (see Client#get_job)
+      def wait(params = {})
+        @waiter.wait(client: @client, params: params)
+      end
+
+      # @api private
+      attr_reader :waiter
+
+    end
+
+    # Wait until a job has succeeded. Fails if the job reaches a non-successful terminal status. Waits up to 1 hour by default.
+    class JobSucceeded
+
+      # @param [Hash] options
+      # @option options [required, Client] :client
+      # @option options [Integer] :max_attempts (240)
+      # @option options [Integer] :delay (15)
+      # @option options [Proc] :before_attempt
+      # @option options [Proc] :before_wait
+      def initialize(options)
+        @client = options.fetch(:client)
+        @waiter = Aws::Waiters::Waiter.new({
+          max_attempts: 240,
+          delay: 15,
+          poller: Aws::Waiters::Poller.new(
+            operation_name: :get_job,
+            acceptors: [
+              {
+                "matcher" => "path",
+                "argument" => "task_run_status",
+                "state" => "success",
+                "expected" => "SUCCEEDED"
+              },
+              {
+                "matcher" => "path",
+                "argument" => "task_run_status",
+                "state" => "failure",
+                "expected" => "FAILED"
+              },
+              {
+                "matcher" => "path",
+                "argument" => "task_run_status",
+                "state" => "failure",
+                "expected" => "CANCELED"
+              },
+              {
+                "matcher" => "path",
+                "argument" => "task_run_status",
+                "state" => "failure",
+                "expected" => "SUSPENDED"
+              },
+              {
+                "matcher" => "path",
+                "argument" => "task_run_status",
+                "state" => "failure",
+                "expected" => "NOT_COMPATIBLE"
+              },
+              {
+                "matcher" => "path",
+                "argument" => "lifecycle_status",
+                "state" => "failure",
+                "expected" => "ARCHIVED"
               }
             ]
           )

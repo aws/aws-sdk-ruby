@@ -3,6 +3,16 @@ Unreleased Changes
 
 * Feature - Added `#upload_directory` and `#download_directory` to `Aws::S3::TransferManager` for bulk directory transfers.
 
+1.213.0 (2026-01-28)
+------------------
+
+* Feature - Adds support for the UpdateObjectEncryption API to change the server-side encryption type of objects in general purpose buckets.
+
+1.212.0 (2026-01-16)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.211.0 (2026-01-08)
 ------------------
 

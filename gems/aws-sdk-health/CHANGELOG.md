@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.95.0 (2026-01-22)
+------------------
+
+* Feature - Updates the lower range for the maxResults request property for DescribeAffectedEntities, DescribeAffectedEntitiesForOrganization, DescribeEvents, and DescribeEventsForOrganization API request properties.
+
+1.94.0 (2026-01-16)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.93.0 (2026-01-08)
 ------------------
 

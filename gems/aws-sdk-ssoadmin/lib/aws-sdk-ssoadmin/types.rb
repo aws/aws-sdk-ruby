@@ -243,6 +243,41 @@ module Aws::SSOAdmin
       include Aws::Structure
     end
 
+    # @!attribute [rw] instance_arn
+    #   The Amazon Resource Name (ARN) of the IAM Identity Center instance
+    #   to replicate to the target Region.
+    #   @return [String]
+    #
+    # @!attribute [rw] region_name
+    #   The name of the Amazon Web Services Region to add to the IAM
+    #   Identity Center instance. The Region name must be 1-32 characters
+    #   long and follow the pattern of Amazon Web Services Region names (for
+    #   example, us-east-1).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/AddRegionRequest AWS API Documentation
+    #
+    class AddRegionRequest < Struct.new(
+      :instance_arn,
+      :region_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] status
+    #   The status of the Region after the Add operation. The status is
+    #   ADDING when the asynchronous workflow is in progress and changes to
+    #   ACTIVE when complete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/AddRegionResponse AWS API Documentation
+    #
+    class AddRegionResponse < Struct.new(
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A structure that describes an application that uses IAM Identity
     # Center for access management.
     #
@@ -285,6 +320,11 @@ module Aws::SSOAdmin
     #   The date and time when the application was originally created.
     #   @return [Time]
     #
+    # @!attribute [rw] created_from
+    #   The Amazon Web Services Region where the application was created in
+    #   IAM Identity Center.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/Application AWS API Documentation
     #
     class Application < Struct.new(
@@ -296,7 +336,8 @@ module Aws::SSOAdmin
       :status,
       :portal_options,
       :description,
-      :created_date)
+      :created_date,
+      :created_from)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1517,6 +1558,11 @@ module Aws::SSOAdmin
     #   The date the application was created.
     #   @return [Time]
     #
+    # @!attribute [rw] created_from
+    #   The Amazon Web Services Region where the application was created in
+    #   IAM Identity Center.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/DescribeApplicationResponse AWS API Documentation
     #
     class DescribeApplicationResponse < Struct.new(
@@ -1528,7 +1574,8 @@ module Aws::SSOAdmin
       :status,
       :portal_options,
       :description,
-      :created_date)
+      :created_date,
+      :created_from)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1707,6 +1754,64 @@ module Aws::SSOAdmin
     #
     class DescribePermissionSetResponse < Struct.new(
       :permission_set)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] instance_arn
+    #   The Amazon Resource Name (ARN) of the IAM Identity Center instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] region_name
+    #   The name of the Amazon Web Services Region to retrieve information
+    #   about. The Region name must be 1-32 characters long and follow the
+    #   pattern of Amazon Web Services Region names (for example,
+    #   us-east-1).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/DescribeRegionRequest AWS API Documentation
+    #
+    class DescribeRegionRequest < Struct.new(
+      :instance_arn,
+      :region_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] region_name
+    #   The Amazon Web Services Region name.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the Region. Valid values are ACTIVE (Region is
+    #   operational), ADDING (Region replication workflow is in progress),
+    #   or REMOVING (Region removal workflow is in progress).
+    #   @return [String]
+    #
+    # @!attribute [rw] added_date
+    #   The timestamp when the Region was added to the IAM Identity Center
+    #   instance. For the primary Region, this is the IAM Identity Center
+    #   instance creation time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] is_primary_region
+    #   Indicates whether this is the primary Region where the IAM Identity
+    #   Center instance was originally enabled. For more information on the
+    #   difference between the primary Region and additional Regions, see
+    #   [IAM Identity Center User Guide][1]
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/singlesignon/latest/userguide/multi-region-iam-identity-center.html
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/DescribeRegionResponse AWS API Documentation
+    #
+    class DescribeRegionResponse < Struct.new(
+      :region_name,
+      :status,
+      :added_date,
+      :is_primary_region)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3331,6 +3436,49 @@ module Aws::SSOAdmin
     end
 
     # @!attribute [rw] instance_arn
+    #   The Amazon Resource Name (ARN) of the IAM Identity Center instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in a single call. Default is
+    #   100.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token for the list API. Initially the value is null.
+    #   Use the output of previous API calls to make subsequent calls.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/ListRegionsRequest AWS API Documentation
+    #
+    class ListRegionsRequest < Struct.new(
+      :instance_arn,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] regions
+    #   The list of Regions enabled in the IAM Identity Center instance,
+    #   including Regions with ACTIVE, ADDING, or REMOVING status.
+    #   @return [Array<Types::RegionMetadata>]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token to be used in subsequent calls. If the value is
+    #   null, then there are no more entries.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/ListRegionsResponse AWS API Documentation
+    #
+    class ListRegionsResponse < Struct.new(
+      :regions,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] instance_arn
     #   The ARN of the IAM Identity Center instance under which the
     #   operation will be executed. For more information about ARNs, see
     #   [Amazon Resource Names (ARNs) and Amazon Web Services Service
@@ -3938,6 +4086,77 @@ module Aws::SSOAdmin
     #
     class RefreshTokenGrant < Aws::EmptyStructure; end
 
+    # Contains information about an enabled Region of an IAM Identity Center
+    # instance, including the Region name, status, date added, and whether
+    # it is the primary Region.
+    #
+    # @!attribute [rw] region_name
+    #   The Amazon Web Services Region name.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the Region. Valid values are ACTIVE (Region is
+    #   operational), ADDING (Region extension workflow is in progress), or
+    #   REMOVING (Region removal workflow is in progress).
+    #   @return [String]
+    #
+    # @!attribute [rw] added_date
+    #   The timestamp when the Region was added to the IAM Identity Center
+    #   instance. For the primary Region, this is the instance creation
+    #   time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] is_primary_region
+    #   Indicates whether this is the primary Region where the IAM Identity
+    #   Center instance was originally enabled. The primary Region cannot be
+    #   removed.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/RegionMetadata AWS API Documentation
+    #
+    class RegionMetadata < Struct.new(
+      :region_name,
+      :status,
+      :added_date,
+      :is_primary_region)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] instance_arn
+    #   The Amazon Resource Name (ARN) of the IAM Identity Center instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] region_name
+    #   The name of the Amazon Web Services Region to remove from the IAM
+    #   Identity Center instance. The Region name must be 1-32 characters
+    #   long and follow the pattern of Amazon Web Services Region names (for
+    #   example, us-east-1). The primary Region cannot be removed.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/RemoveRegionRequest AWS API Documentation
+    #
+    class RemoveRegionRequest < Struct.new(
+      :instance_arn,
+      :region_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] status
+    #   The status of the Region after the remove operation. The status is
+    #   REMOVING when the asynchronous workflow is in progress. The Region
+    #   record is deleted when the workflow completes.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/RemoveRegionResponse AWS API Documentation
+    #
+    class RemoveRegionResponse < Struct.new(
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Indicates that a requested resource is not found.
     #
     # @!attribute [rw] message
@@ -4340,9 +4559,9 @@ module Aws::SSOAdmin
     #
     # @!attribute [rw] encryption_configuration
     #   Specifies the encryption configuration for your IAM Identity Center
-    #   instance. You can use this to configure customer managed KMS keys
-    #   (CMK) or Amazon Web Services owned KMS keys for encrypting your
-    #   instance data.
+    #   instance. You can use this to configure customer managed KMS keys or
+    #   Amazon Web Services owned KMS keys for encrypting your instance
+    #   data.
     #   @return [Types::EncryptionConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/UpdateInstanceRequest AWS API Documentation

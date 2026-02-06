@@ -553,15 +553,6 @@ module Aws::MPA
     #   An array of `PolicyReference` objects. Contains a list of policies
     #   that define the permissions for team resources.
     #
-    #   The protected operation for a service integration might require
-    #   specific permissions. For more information, see [How other services
-    #   work with Multi-party approval][1] in the *Multi-party approval User
-    #   Guide*.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/mpa/latest/userguide/mpa-integrations.html
-    #
     # @option params [required, String] :name
     #   Name of the team.
     #
@@ -800,6 +791,9 @@ module Aws::MPA
     #   resp.approvers[0].primary_identity_id #=> String
     #   resp.approvers[0].primary_identity_source_arn #=> String
     #   resp.approvers[0].primary_identity_status #=> String, one of "PENDING", "ACCEPTED", "REJECTED", "INVALID"
+    #   resp.approvers[0].mfa_methods #=> Array
+    #   resp.approvers[0].mfa_methods[0].type #=> String, one of "EMAIL_OTP"
+    #   resp.approvers[0].mfa_methods[0].sync_status #=> String, one of "IN_SYNC", "OUT_OF_SYNC"
     #   resp.arn #=> String
     #   resp.description #=> String
     #   resp.name #=> String
@@ -824,6 +818,9 @@ module Aws::MPA
     #   resp.pending_update.approvers[0].primary_identity_id #=> String
     #   resp.pending_update.approvers[0].primary_identity_source_arn #=> String
     #   resp.pending_update.approvers[0].primary_identity_status #=> String, one of "PENDING", "ACCEPTED", "REJECTED", "INVALID"
+    #   resp.pending_update.approvers[0].mfa_methods #=> Array
+    #   resp.pending_update.approvers[0].mfa_methods[0].type #=> String, one of "EMAIL_OTP"
+    #   resp.pending_update.approvers[0].mfa_methods[0].sync_status #=> String, one of "IN_SYNC", "OUT_OF_SYNC"
     #   resp.pending_update.update_initiation_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mpa-2022-07-26/GetApprovalTeam AWS API Documentation
@@ -884,15 +881,6 @@ module Aws::MPA
 
     # Returns details for the version of a policy. Policies define the
     # permissions for team resources.
-    #
-    # The protected operation for a service integration might require
-    # specific permissions. For more information, see [How other services
-    # work with Multi-party approval][1] in the *Multi-party approval User
-    # Guide*.
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/mpa/latest/userguide/mpa-integrations.html
     #
     # @option params [required, String] :policy_version_arn
     #   Amazon Resource Name (ARN) for the policy.
@@ -1008,6 +996,7 @@ module Aws::MPA
     #   * {Types::GetSessionResponse#requester_comment #requester_comment} => String
     #   * {Types::GetSessionResponse#action_completion_strategy #action_completion_strategy} => String
     #   * {Types::GetSessionResponse#approver_responses #approver_responses} => Array&lt;Types::GetSessionResponseApproverResponse&gt;
+    #   * {Types::GetSessionResponse#additional_security_requirements #additional_security_requirements} => Array&lt;String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -1046,6 +1035,8 @@ module Aws::MPA
     #   resp.approver_responses[0].identity_id #=> String
     #   resp.approver_responses[0].response #=> String, one of "APPROVED", "REJECTED", "NO_RESPONSE"
     #   resp.approver_responses[0].response_time #=> Time
+    #   resp.additional_security_requirements #=> Array
+    #   resp.additional_security_requirements[0] #=> String, one of "APPROVER_VERIFICATION_REQUIRED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mpa-2022-07-26/GetSession AWS API Documentation
     #
@@ -1164,15 +1155,6 @@ module Aws::MPA
     # Returns a list of policies. Policies define the permissions for team
     # resources.
     #
-    # The protected operation for a service integration might require
-    # specific permissions. For more information, see [How other services
-    # work with Multi-party approval][1] in the *Multi-party approval User
-    # Guide*.
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/mpa/latest/userguide/mpa-integrations.html
-    #
     # @option params [Integer] :max_results
     #   The maximum number of items to return in the response. If more results
     #   exist than the specified `MaxResults` value, a token is included in
@@ -1218,15 +1200,6 @@ module Aws::MPA
 
     # Returns a list of the versions for policies. Policies define the
     # permissions for team resources.
-    #
-    # The protected operation for a service integration might require
-    # specific permissions. For more information, see [How other services
-    # work with Multi-party approval][1] in the *Multi-party approval User
-    # Guide*.
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/mpa/latest/userguide/mpa-integrations.html
     #
     # @option params [Integer] :max_results
     #   The maximum number of items to return in the response. If more results
@@ -1396,6 +1369,8 @@ module Aws::MPA
     #   resp.sessions[0].status_code #=> String, one of "REJECTED", "EXPIRED", "CONFIGURATION_CHANGED"
     #   resp.sessions[0].status_message #=> String
     #   resp.sessions[0].action_completion_strategy #=> String, one of "AUTO_COMPLETION_UPON_APPROVAL"
+    #   resp.sessions[0].additional_security_requirements #=> Array
+    #   resp.sessions[0].additional_security_requirements[0] #=> String, one of "APPROVER_VERIFICATION_REQUIRED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mpa-2022-07-26/ListSessions AWS API Documentation
     #
@@ -1557,6 +1532,9 @@ module Aws::MPA
     # @option params [required, String] :arn
     #   Amazon Resource Name (ARN) for the team.
     #
+    # @option params [Array<String>] :update_actions
+    #   A list of `UpdateAction` to perform when updating the team.
+    #
     # @return [Types::UpdateApprovalTeamResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateApprovalTeamResponse#version_id #version_id} => String
@@ -1577,6 +1555,7 @@ module Aws::MPA
     #     ],
     #     description: "Description",
     #     arn: "ApprovalTeamArn", # required
+    #     update_actions: ["SYNCHRONIZE_MFA_DEVICES"], # accepts SYNCHRONIZE_MFA_DEVICES
     #   })
     #
     # @example Response structure
@@ -1610,7 +1589,7 @@ module Aws::MPA
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-mpa'
-      context[:gem_version] = '1.10.0'
+      context[:gem_version] = '1.12.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

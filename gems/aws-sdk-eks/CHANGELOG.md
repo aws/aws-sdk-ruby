@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.157.0 (2026-02-04)
+------------------
+
+* Feature - Update delete cluster description
+
+1.156.0 (2026-01-16)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.155.0 (2026-01-14)
 ------------------
 

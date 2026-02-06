@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+3.242.0 (2026-02-02)
+------------------
+
+* Feature - Include HTTP status code and body in errors whehn retrieving ECS credentials and Instance Profile credentials.
+
+3.241.4 (2026-01-16)
+------------------
+
+* Issue - Rewind IO during initialization for `AwsChunkedTrailerDigestIO`.
+
 3.241.3 (2026-01-08)
 ------------------
 

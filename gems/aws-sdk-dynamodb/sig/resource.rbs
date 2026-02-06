@@ -118,14 +118,14 @@ module Aws
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DynamoDB/Resource.html#create_table-instance_method
       def create_table: (
-                          attribute_definitions: Array[
+                          ?attribute_definitions: Array[
                             {
                               attribute_name: ::String,
                               attribute_type: ("S" | "N" | "B")
                             },
                           ],
                           table_name: ::String,
-                          key_schema: Array[
+                          ?key_schema: Array[
                             {
                               attribute_name: ::String,
                               key_type: ("HASH" | "RANGE")
@@ -203,7 +203,9 @@ module Aws
                           ?on_demand_throughput: {
                             max_read_request_units: ::Integer?,
                             max_write_request_units: ::Integer?
-                          }
+                          },
+                          ?global_table_source_arn: ::String,
+                          ?global_table_settings_replication_mode: ("ENABLED" | "DISABLED" | "ENABLED_WITH_OVERRIDES")
                         ) -> Table
                       | (?Hash[Symbol, untyped]) -> Table
 

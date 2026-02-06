@@ -2806,6 +2806,7 @@ module Aws::Batch
     #   resp.jobs[0].node_properties.node_range_properties[0].consumable_resource_properties.consumable_resource_list[0].quantity #=> Integer
     #   resp.jobs[0].array_properties.status_summary #=> Hash
     #   resp.jobs[0].array_properties.status_summary["String"] #=> Integer
+    #   resp.jobs[0].array_properties.status_summary_last_updated_at #=> Integer
     #   resp.jobs[0].array_properties.size #=> Integer
     #   resp.jobs[0].array_properties.index #=> Integer
     #   resp.jobs[0].timeout.attempt_duration_seconds #=> Integer
@@ -3357,6 +3358,13 @@ module Aws::Batch
     #   and jobs with any status are returned. If you don't specify a status,
     #   only `RUNNING` jobs are returned.
     #
+    #   <note markdown="1"> Array job parents are updated to `PENDING` when any child job is
+    #   updated to `RUNNABLE` and remain in `PENDING` status while child jobs
+    #   are running. To view these jobs, filter by `PENDING` status until all
+    #   child jobs reach a terminal state.
+    #
+    #    </note>
+    #
     # @option params [Integer] :max_results
     #   The maximum number of results returned by `ListJobs` in a paginated
     #   output. When this parameter is used, `ListJobs` returns up to
@@ -3514,6 +3522,9 @@ module Aws::Batch
     #   resp.job_summary_list[0].container.reason #=> String
     #   resp.job_summary_list[0].array_properties.size #=> Integer
     #   resp.job_summary_list[0].array_properties.index #=> Integer
+    #   resp.job_summary_list[0].array_properties.status_summary #=> Hash
+    #   resp.job_summary_list[0].array_properties.status_summary["String"] #=> Integer
+    #   resp.job_summary_list[0].array_properties.status_summary_last_updated_at #=> Integer
     #   resp.job_summary_list[0].node_properties.is_main_node #=> Boolean
     #   resp.job_summary_list[0].node_properties.num_nodes #=> Integer
     #   resp.job_summary_list[0].node_properties.node_index #=> Integer
@@ -6130,7 +6141,7 @@ module Aws::Batch
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-batch'
-      context[:gem_version] = '1.131.0'
+      context[:gem_version] = '1.133.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

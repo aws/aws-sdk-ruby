@@ -3263,6 +3263,8 @@ module Aws::CleanRooms
     #   resp.protected_job.membership_arn #=> String
     #   resp.protected_job.create_time #=> Time
     #   resp.protected_job.job_parameters.analysis_template_arn #=> String
+    #   resp.protected_job.job_parameters.parameters #=> Hash
+    #   resp.protected_job.job_parameters.parameters["JobParameterName"] #=> String
     #   resp.protected_job.status #=> String, one of "SUBMITTED", "STARTED", "CANCELLED", "CANCELLING", "FAILED", "SUCCESS"
     #   resp.protected_job.result_configuration.output_configuration.s3.bucket #=> String
     #   resp.protected_job.result_configuration.output_configuration.s3.key_prefix #=> String
@@ -4884,6 +4886,9 @@ module Aws::CleanRooms
     #     membership_identifier: "MembershipIdentifier", # required
     #     job_parameters: { # required
     #       analysis_template_arn: "AnalysisTemplateArn", # required
+    #       parameters: {
+    #         "JobParameterName" => "JobParameterValue",
+    #       },
     #     },
     #     result_configuration: {
     #       output_configuration: { # required
@@ -4907,6 +4912,8 @@ module Aws::CleanRooms
     #   resp.protected_job.membership_arn #=> String
     #   resp.protected_job.create_time #=> Time
     #   resp.protected_job.job_parameters.analysis_template_arn #=> String
+    #   resp.protected_job.job_parameters.parameters #=> Hash
+    #   resp.protected_job.job_parameters.parameters["JobParameterName"] #=> String
     #   resp.protected_job.status #=> String, one of "SUBMITTED", "STARTED", "CANCELLED", "CANCELLING", "FAILED", "SUCCESS"
     #   resp.protected_job.result_configuration.output_configuration.s3.bucket #=> String
     #   resp.protected_job.result_configuration.output_configuration.s3.key_prefix #=> String
@@ -6068,6 +6075,8 @@ module Aws::CleanRooms
     #   resp.protected_job.membership_arn #=> String
     #   resp.protected_job.create_time #=> Time
     #   resp.protected_job.job_parameters.analysis_template_arn #=> String
+    #   resp.protected_job.job_parameters.parameters #=> Hash
+    #   resp.protected_job.job_parameters.parameters["JobParameterName"] #=> String
     #   resp.protected_job.status #=> String, one of "SUBMITTED", "STARTED", "CANCELLED", "CANCELLING", "FAILED", "SUCCESS"
     #   resp.protected_job.result_configuration.output_configuration.s3.bucket #=> String
     #   resp.protected_job.result_configuration.output_configuration.s3.key_prefix #=> String
@@ -6185,7 +6194,7 @@ module Aws::CleanRooms
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-cleanrooms'
-      context[:gem_version] = '1.65.0'
+      context[:gem_version] = '1.67.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

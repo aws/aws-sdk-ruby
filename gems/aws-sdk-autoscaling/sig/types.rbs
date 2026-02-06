@@ -143,6 +143,7 @@ module Aws::AutoScaling
       attr_accessor default_instance_warmup: ::Integer
       attr_accessor traffic_sources: ::Array[Types::TrafficSourceIdentifier]
       attr_accessor instance_maintenance_policy: Types::InstanceMaintenancePolicy
+      attr_accessor deletion_protection: ("none" | "prevent-force-deletion" | "prevent-all-deletion")
       attr_accessor availability_zone_distribution: Types::AvailabilityZoneDistribution
       attr_accessor availability_zone_impairment_policy: Types::AvailabilityZoneImpairmentPolicy
       attr_accessor capacity_reservation_specification: Types::CapacityReservationSpecification
@@ -305,6 +306,7 @@ module Aws::AutoScaling
       attr_accessor new_instances_protected_from_scale_in: bool
       attr_accessor capacity_rebalance: bool
       attr_accessor lifecycle_hook_specification_list: ::Array[Types::LifecycleHookSpecification]
+      attr_accessor deletion_protection: ("none" | "prevent-force-deletion" | "prevent-all-deletion")
       attr_accessor tags: ::Array[Types::Tag]
       attr_accessor service_linked_role_arn: ::String
       attr_accessor max_instance_lifetime: ::Integer
@@ -522,6 +524,7 @@ module Aws::AutoScaling
       attr_accessor include_deleted_groups: bool
       attr_accessor max_records: ::Integer
       attr_accessor next_token: ::String
+      attr_accessor filters: ::Array[Types::Filter]
       SENSITIVE: []
     end
 
@@ -1509,6 +1512,7 @@ module Aws::AutoScaling
       attr_accessor skip_zonal_shift_validation: bool
       attr_accessor capacity_reservation_specification: Types::CapacityReservationSpecification
       attr_accessor instance_lifecycle_policy: Types::InstanceLifecyclePolicy
+      attr_accessor deletion_protection: ("none" | "prevent-force-deletion" | "prevent-all-deletion")
       SENSITIVE: []
     end
 

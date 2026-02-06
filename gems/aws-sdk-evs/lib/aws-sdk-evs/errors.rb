@@ -27,6 +27,7 @@ module Aws::Evs
   # See {Seahorse::Client::RequestContext} for more information.
   #
   # ## Error Classes
+  # * {InternalServerException}
   # * {ResourceNotFoundException}
   # * {ServiceQuotaExceededException}
   # * {TagPolicyException}
@@ -39,6 +40,25 @@ module Aws::Evs
   module Errors
 
     extend Aws::Errors::DynamicErrors
+
+    class InternalServerException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Evs::Types::InternalServerException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+
+      def retryable?
+        true
+      end
+    end
 
     class ResourceNotFoundException < ServiceError
 

@@ -3108,6 +3108,88 @@
         ]
     },
     {
+        "description": "Test cases for XmlAttributesInMiddle operation",
+        "metadata": {
+            "apiVersion": "2019-12-16",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "restxml",
+            "protocol": "rest-xml",
+            "protocols": [
+                "rest-xml"
+            ],
+            "serviceFullName": "RestXml",
+            "serviceId": "Rest Xml Protocol",
+            "signatureVersion": "v4",
+            "signingName": "RestXml",
+            "uid": "rest-xml-protocol-2019-12-16"
+        },
+        "shapes": {
+            "String": {
+                "type": "string"
+            },
+            "XmlAttributesInMiddlePayloadResponse": {
+                "type": "structure",
+                "members": {
+                    "foo": {
+                        "shape": "String"
+                    },
+                    "attr": {
+                        "shape": "String",
+                        "locationName": "test",
+                        "xmlAttribute": true
+                    },
+                    "baz": {
+                        "shape": "String"
+                    }
+                }
+            },
+            "XmlAttributesInMiddleResponse": {
+                "type": "structure",
+                "members": {
+                    "payload": {
+                        "shape": "XmlAttributesInMiddlePayloadResponse"
+                    }
+                },
+                "payload": "payload"
+            }
+        },
+        "cases": [
+            {
+                "id": "XmlAttributesInMiddle",
+                "description": "Deserializes XML attributes on a payload when the xmlAttribute trait targets a member in the middle of the member list",
+                "given": {
+                    "name": "XmlAttributesInMiddle",
+                    "http": {
+                        "method": "PUT",
+                        "requestUri": "/XmlAttributesInMiddle",
+                        "responseCode": 200
+                    },
+                    "output": {
+                        "shape": "XmlAttributesInMiddleResponse"
+                    },
+                    "documentation": "<p>This example serializes an XML attribute on a payload when it's defined in the middle of the member list. This tests that implementations correctly write attributes immediately after the element start tag, which is critical for languages like C# where attribute writing must happen before child elements.</p>",
+                    "idempotent": true
+                },
+                "result": {
+                    "payload": {
+                        "foo": "Foo",
+                        "attr": "attributeValue",
+                        "baz": "Baz"
+                    }
+                },
+                "response": {
+                    "status_code": 200,
+                    "headers": {
+                        "Content-Type": "application/xml"
+                    },
+                    "body": "<XmlAttributesInMiddlePayloadResponse test=\"attributeValue\">\n    <foo>Foo</foo>\n    <baz>Baz</baz>\n</XmlAttributesInMiddlePayloadResponse>\n"
+                }
+            }
+        ]
+    },
+    {
         "description": "Test cases for XmlAttributesOnPayload operation",
         "metadata": {
             "apiVersion": "2019-12-16",

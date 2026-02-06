@@ -832,12 +832,20 @@ module Aws::GameLift
     #   in this request. There is no default value. You can't change a
     #   build's operating system later.
     #
-    #   <note markdown="1"> Amazon Linux 2 (AL2) will reach end of support on 6/30/2025. See more
+    #   <note markdown="1"> Amazon Linux 2 (AL2) will reach end of support on 6/30/2026. See more
     #   details in the [Amazon Linux 2 FAQs][1]. For game servers that are
     #   hosted on AL2 and use server SDK version 4.x for Amazon GameLift
     #   Servers, first update the game server build to server SDK 5.x, and
     #   then deploy to AL2023 instances. See [ Migrate to server SDK version
     #   5.][2]
+    #
+    #    </note>
+    #
+    #   <note markdown="1"> Windows Server 2016 will reach end of support on 1/12/2027. For game
+    #   servers that are hosted on Windows Server 2016 and use server SDK
+    #   version 4.x for Amazon GameLift Servers, first update the game server
+    #   build to server SDK 5.x, and then deploy to Windows Server 2022
+    #   instances. See [ Migrate to server SDK version 5.][2]
     #
     #    </note>
     #
@@ -1503,7 +1511,7 @@ module Aws::GameLift
     #
     #   Default value: `AMAZON_LINUX_2023`
     #
-    #   <note markdown="1"> Amazon Linux 2 (AL2) will reach end of support on 6/30/2025. See more
+    #   <note markdown="1"> Amazon Linux 2 (AL2) will reach end of support on 6/30/2026. See more
     #   details in the [Amazon Linux 2 FAQs][1]. For game servers that are
     #   hosted on AL2 and use server SDK version 4.x for Amazon GameLift
     #   Servers, first update the game server build to server SDK 5.x, and
@@ -2539,6 +2547,13 @@ module Aws::GameLift
     #   For example: `{"Key": "difficulty", "Value": "novice"}`. For an
     #   example, see [Create a game session with custom properties][1].
     #
+    #   <note markdown="1"> Avoid using periods (".") in property keys if you plan to search for
+    #   game sessions by properties. Property keys containing periods cannot
+    #   be searched and will be filtered out from search results due to search
+    #   index limitations.
+    #
+    #    </note>
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-client-api.html#game-properties-create
@@ -2749,6 +2764,10 @@ module Aws::GameLift
     #   request remains in the queue. When a request exceeds this time, the
     #   game session placement changes to a `TIMED_OUT` status. If you don't
     #   specify a request timeout, the queue uses a default value.
+    #
+    #   <note markdown="1"> The minimum value is 10 and the maximum value is 600.
+    #
+    #    </note>
     #
     # @option params [Array<Types::PlayerLatencyPolicy>] :player_latency_policies
     #   A set of policies that enforce a sliding cap on player latency when
@@ -3024,6 +3043,13 @@ module Aws::GameLift
     #   information is added to the new `GameSession` object that is created
     #   for a successful match. This parameter is not used if `FlexMatchMode`
     #   is set to `STANDALONE`.
+    #
+    #   <note markdown="1"> Avoid using periods (".") in property keys if you plan to search for
+    #   game sessions by properties. Property keys containing periods cannot
+    #   be searched and will be filtered out from search results due to search
+    #   index limitations.
+    #
+    #    </note>
     #
     # @option params [String] :game_session_data
     #   A set of custom game session properties, formatted as a single string
@@ -3497,6 +3523,11 @@ module Aws::GameLift
     #   [3]: https://docs.aws.amazon.com/gamelift/latest/apireference/API_UntagResource.html
     #   [4]: https://docs.aws.amazon.com/gamelift/latest/apireference/API_ListTagsForResource.html
     #
+    # @option params [String] :node_js_version
+    #   The Node.js version used for execution of your Realtime script. The
+    #   valid values are `10.x | 24.x`. By default, `NodeJsVersion` is `10.x`.
+    #   This value cannot be updated later.
+    #
     # @return [Types::CreateScriptOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateScriptOutput#script #script} => Types::Script
@@ -3519,6 +3550,7 @@ module Aws::GameLift
     #         value: "TagValue", # required
     #       },
     #     ],
+    #     node_js_version: "NodeJsVersion",
     #   })
     #
     # @example Response structure
@@ -3533,6 +3565,7 @@ module Aws::GameLift
     #   resp.script.storage_location.key #=> String
     #   resp.script.storage_location.role_arn #=> String
     #   resp.script.storage_location.object_version #=> String
+    #   resp.script.node_js_version #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/CreateScript AWS API Documentation
     #
@@ -5215,6 +5248,8 @@ module Aws::GameLift
     #   resp.fleet_capacity[0].game_server_container_group_counts.active #=> Integer
     #   resp.fleet_capacity[0].game_server_container_group_counts.idle #=> Integer
     #   resp.fleet_capacity[0].game_server_container_group_counts.terminating #=> Integer
+    #   resp.fleet_capacity[0].managed_capacity_configuration.zero_capacity_strategy #=> String, one of "MANUAL", "SCALE_TO_AND_FROM_ZERO"
+    #   resp.fleet_capacity[0].managed_capacity_configuration.scale_in_after_inactivity_minutes #=> Integer
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeFleetCapacity AWS API Documentation
@@ -5535,6 +5570,8 @@ module Aws::GameLift
     #   resp.fleet_capacity.game_server_container_group_counts.active #=> Integer
     #   resp.fleet_capacity.game_server_container_group_counts.idle #=> Integer
     #   resp.fleet_capacity.game_server_container_group_counts.terminating #=> Integer
+    #   resp.fleet_capacity.managed_capacity_configuration.zero_capacity_strategy #=> String, one of "MANUAL", "SCALE_TO_AND_FROM_ZERO"
+    #   resp.fleet_capacity.managed_capacity_configuration.scale_in_after_inactivity_minutes #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeFleetLocationCapacity AWS API Documentation
     #
@@ -7077,6 +7114,7 @@ module Aws::GameLift
     #   resp.script.storage_location.key #=> String
     #   resp.script.storage_location.role_arn #=> String
     #   resp.script.storage_location.object_version #=> String
+    #   resp.script.node_js_version #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeScript AWS API Documentation
     #
@@ -8565,6 +8603,7 @@ module Aws::GameLift
     #   resp.scripts[0].storage_location.key #=> String
     #   resp.scripts[0].storage_location.role_arn #=> String
     #   resp.scripts[0].storage_location.object_version #=> String
+    #   resp.scripts[0].node_js_version #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/ListScripts AWS API Documentation
@@ -9285,6 +9324,13 @@ module Aws::GameLift
     #   For examples of searching game sessions, see the ones below, and
     #   also see [Search game sessions by game property][3].
     #
+    #   <note markdown="1"> Avoid using periods (".") in property keys if you plan to search
+    #   for game sessions by properties. Property keys containing periods
+    #   cannot be searched and will be filtered out from search results due
+    #   to search index limitations.
+    #
+    #    </note>
+    #
     # * **maximumSessions** -- Maximum number of player sessions allowed for
     #   a game session.
     #
@@ -9639,6 +9685,13 @@ module Aws::GameLift
     # @option params [Array<Types::GameProperty>] :game_properties
     #   A set of key-value pairs that can store custom data in a game session.
     #   For example: `{"Key": "difficulty", "Value": "novice"}`.
+    #
+    #   <note markdown="1"> Avoid using periods (".") in property keys if you plan to search for
+    #   game sessions by properties. Property keys containing periods cannot
+    #   be searched and will be filtered out from search results due to search
+    #   index limitations.
+    #
+    #    </note>
     #
     # @option params [required, Integer] :maximum_player_session_count
     #   The maximum number of players that can be connected simultaneously to
@@ -11045,7 +11098,7 @@ module Aws::GameLift
     #   The platform that all containers in the group use. Containers in a
     #   group must run on the same operating system.
     #
-    #   <note markdown="1"> Amazon Linux 2 (AL2) will reach end of support on 6/30/2025. See more
+    #   <note markdown="1"> Amazon Linux 2 (AL2) will reach end of support on 6/30/2026. See more
     #   details in the [Amazon Linux 2 FAQs][1]. For game servers that are
     #   hosted on AL2 and use server SDK version 4.x for Amazon GameLift
     #   Servers, first update the game server build to server SDK 5.x, and
@@ -11333,8 +11386,6 @@ module Aws::GameLift
     # configuration. For fleets with multiple locations, use this operation
     # to manage capacity settings in each location individually.
     #
-    # Use this operation to set these fleet capacity properties:
-    #
     # * Minimum/maximum size: Set hard limits on the number of Amazon EC2
     #   instances allowed. If Amazon GameLift Servers receives a
     #   request--either through manual update or automatic scaling--it
@@ -11366,6 +11417,26 @@ module Aws::GameLift
     # location. You can track a fleet's current capacity by calling
     # [DescribeFleetCapacity][2] or [DescribeFleetLocationCapacity][3].
     #
+    # Use ManagedCapacityConfiguration with the
+    # "SCALE\_TO\_AND\_FROM\_ZERO" ZeroCapacityStrategy to enable Amazon
+    # GameLift Servers to fully manage the MinSize value, switching between
+    # 0 and 1 based on game session activity. This is ideal for eliminating
+    # compute costs during periods of no game activity. It is particularly
+    # beneficial during development when you're away from your desk,
+    # iterating on builds for extended periods, in production environments
+    # serving low-traffic locations, or for games with long, predictable
+    # downtime windows. By automatically managing capacity between 0 and 1
+    # instances, you avoid paying for idle instances while maintaining the
+    # ability to serve game sessions when demand arrives. Note that while
+    # scale-out is triggered immediately upon receiving a game session
+    # request, actual game session availability depends on your server
+    # process startup time, so this approach works best with multi-location
+    # Fleets where cold-start latency is tolerable. With a "MANUAL"
+    # ZeroCapacityStrategy Amazon GameLift Servers will not modify Fleet
+    # MinSize values automatically and will not scale out from zero
+    # instances in response to game sessions. This is configurable
+    # per-location.
+    #
     # **Learn more**
     #
     # [Scaling fleet capacity][4]
@@ -11389,7 +11460,9 @@ module Aws::GameLift
     #
     # @option params [Integer] :min_size
     #   The minimum number of instances that are allowed in the specified
-    #   fleet location. If this parameter is not set, the default is 0.
+    #   fleet location. If this parameter is not set, the default is 0. This
+    #   parameter cannot be set when using a ManagedCapacityConfiguration
+    #   where ZeroCapacityStrategy has a value of SCALE\_TO\_AND\_FROM\_ZERO.
     #
     # @option params [Integer] :max_size
     #   The maximum number of instances that are allowed in the specified
@@ -11399,11 +11472,16 @@ module Aws::GameLift
     #   The name of a remote location to update fleet capacity settings for,
     #   in the form of an Amazon Web Services Region code such as `us-west-2`.
     #
+    # @option params [Types::ManagedCapacityConfiguration] :managed_capacity_configuration
+    #   Configuration for Amazon GameLift Servers-managed capacity scaling
+    #   options.
+    #
     # @return [Types::UpdateFleetCapacityOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateFleetCapacityOutput#fleet_id #fleet_id} => String
     #   * {Types::UpdateFleetCapacityOutput#fleet_arn #fleet_arn} => String
     #   * {Types::UpdateFleetCapacityOutput#location #location} => String
+    #   * {Types::UpdateFleetCapacityOutput#managed_capacity_configuration #managed_capacity_configuration} => Types::ManagedCapacityConfiguration
     #
     # @example Request syntax with placeholder values
     #
@@ -11413,6 +11491,10 @@ module Aws::GameLift
     #     min_size: 1,
     #     max_size: 1,
     #     location: "LocationStringModel",
+    #     managed_capacity_configuration: {
+    #       zero_capacity_strategy: "MANUAL", # accepts MANUAL, SCALE_TO_AND_FROM_ZERO
+    #       scale_in_after_inactivity_minutes: 1,
+    #     },
     #   })
     #
     # @example Response structure
@@ -11420,6 +11502,8 @@ module Aws::GameLift
     #   resp.fleet_id #=> String
     #   resp.fleet_arn #=> String
     #   resp.location #=> String
+    #   resp.managed_capacity_configuration.zero_capacity_strategy #=> String, one of "MANUAL", "SCALE_TO_AND_FROM_ZERO"
+    #   resp.managed_capacity_configuration.scale_in_after_inactivity_minutes #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/UpdateFleetCapacity AWS API Documentation
     #
@@ -11783,6 +11867,13 @@ module Aws::GameLift
     #   There is no way to delete properties. For an example, see [Update the
     #   value of a game property][1].
     #
+    #   <note markdown="1"> Avoid using periods (".") in property keys if you plan to search for
+    #   game sessions by properties. Property keys containing periods cannot
+    #   be searched and will be filtered out from search results due to search
+    #   index limitations.
+    #
+    #    </note>
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-client-api.html#game-properties-update
@@ -11865,6 +11956,10 @@ module Aws::GameLift
     #   The maximum time, in seconds, that a new game session placement
     #   request remains in the queue. When a request exceeds this time, the
     #   game session placement changes to a `TIMED_OUT` status.
+    #
+    #   <note markdown="1"> The minimum value is 10 and the maximum value is 600.
+    #
+    #    </note>
     #
     # @option params [Array<Types::PlayerLatencyPolicy>] :player_latency_policies
     #   A set of policies that enforce a sliding cap on player latency when
@@ -12053,6 +12148,13 @@ module Aws::GameLift
     #   information is added to the new `GameSession` object that is created
     #   for a successful match. This parameter is not used if `FlexMatchMode`
     #   is set to `STANDALONE`.
+    #
+    #   <note markdown="1"> Avoid using periods (".") in property keys if you plan to search for
+    #   game sessions by properties. Property keys containing periods cannot
+    #   be searched and will be filtered out from search results due to search
+    #   index limitations.
+    #
+    #    </note>
     #
     # @option params [String] :game_session_data
     #   A set of custom game session properties, formatted as a single string
@@ -12328,6 +12430,7 @@ module Aws::GameLift
     #   resp.script.storage_location.key #=> String
     #   resp.script.storage_location.role_arn #=> String
     #   resp.script.storage_location.object_version #=> String
+    #   resp.script.node_js_version #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/UpdateScript AWS API Documentation
     #
@@ -12401,7 +12504,7 @@ module Aws::GameLift
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-gamelift'
-      context[:gem_version] = '1.116.0'
+      context[:gem_version] = '1.119.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

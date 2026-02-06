@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.80.0 (2026-01-26)
+------------------
+
+* Feature - Adds support for AWS Ground Station Telemetry.
+
+1.79.0 (2026-01-16)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.78.0 (2026-01-08)
 ------------------
 

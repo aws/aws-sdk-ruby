@@ -457,6 +457,9 @@ module Aws::Kinesis
     #   For this parameter, use the value you obtained when you called
     #   RegisterStreamConsumer.
     #
+    # @option params [String] :stream_id
+    #   Not Implemented. Reserved for future use.
+    #
     # @option params [required, String] :shard_id
     #   The ID of the shard you want to subscribe to. To see a list of all the
     #   shards for a given stream, use ListShards.
@@ -643,6 +646,7 @@ module Aws::Kinesis
     #
     #   async_resp = async_client.subscribe_to_shard({
     #     consumer_arn: "ConsumerARN", # required
+    #     stream_id: "StreamId",
     #     shard_id: "ShardId", # required
     #     starting_position: { # required
     #       type: "AT_SEQUENCE_NUMBER", # required, accepts AT_SEQUENCE_NUMBER, AFTER_SEQUENCE_NUMBER, TRIM_HORIZON, LATEST, AT_TIMESTAMP
@@ -745,7 +749,7 @@ module Aws::Kinesis
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-kinesis'
-      context[:gem_version] = '1.95.0'
+      context[:gem_version] = '1.97.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

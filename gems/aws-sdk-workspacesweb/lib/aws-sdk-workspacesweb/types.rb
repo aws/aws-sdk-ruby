@@ -1079,6 +1079,11 @@ module Aws::WorkSpacesWeb
     #   The maximum number of concurrent sessions for the portal.
     #   @return [Integer]
     #
+    # @!attribute [rw] portal_custom_domain
+    #   The custom domain of the web portal that users access in order to
+    #   start streaming sessions.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/CreatePortalRequest AWS API Documentation
     #
     class CreatePortalRequest < Struct.new(
@@ -1089,7 +1094,8 @@ module Aws::WorkSpacesWeb
       :client_token,
       :authentication_type,
       :instance_type,
-      :max_concurrent_sessions)
+      :max_concurrent_sessions,
+      :portal_custom_domain)
       SENSITIVE = [:display_name, :tags]
       include Aws::Structure
     end
@@ -3303,6 +3309,11 @@ module Aws::WorkSpacesWeb
     #   The maximum number of concurrent sessions for the portal.
     #   @return [Integer]
     #
+    # @!attribute [rw] portal_custom_domain
+    #   The custom domain of the web portal that users access in order to
+    #   start streaming sessions.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/Portal AWS API Documentation
     #
     class Portal < Struct.new(
@@ -3326,7 +3337,8 @@ module Aws::WorkSpacesWeb
       :customer_managed_key,
       :additional_encryption_context,
       :instance_type,
-      :max_concurrent_sessions)
+      :max_concurrent_sessions,
+      :portal_custom_domain)
       SENSITIVE = [:display_name]
       include Aws::Structure
     end
@@ -3421,6 +3433,11 @@ module Aws::WorkSpacesWeb
     #   The maximum number of concurrent sessions for the portal.
     #   @return [Integer]
     #
+    # @!attribute [rw] portal_custom_domain
+    #   The custom domain of the web portal that users access in order to
+    #   start streaming sessions.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/PortalSummary AWS API Documentation
     #
     class PortalSummary < Struct.new(
@@ -3441,7 +3458,8 @@ module Aws::WorkSpacesWeb
       :authentication_type,
       :ip_access_settings_arn,
       :instance_type,
-      :max_concurrent_sessions)
+      :max_concurrent_sessions,
+      :portal_custom_domain)
       SENSITIVE = [:display_name]
       include Aws::Structure
     end
@@ -4291,6 +4309,11 @@ module Aws::WorkSpacesWeb
     #   The maximum number of concurrent sessions for the portal.
     #   @return [Integer]
     #
+    # @!attribute [rw] portal_custom_domain
+    #   The custom domain of the web portal that users access in order to
+    #   start streaming sessions.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/UpdatePortalRequest AWS API Documentation
     #
     class UpdatePortalRequest < Struct.new(
@@ -4298,7 +4321,8 @@ module Aws::WorkSpacesWeb
       :display_name,
       :authentication_type,
       :instance_type,
-      :max_concurrent_sessions)
+      :max_concurrent_sessions,
+      :portal_custom_domain)
       SENSITIVE = [:display_name]
       include Aws::Structure
     end

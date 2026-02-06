@@ -1474,6 +1474,14 @@ module Aws::S3Control
     #         checksum_algorithm: "CRC32", # accepts CRC32, CRC32C, CRC64NVME, MD5, SHA1, SHA256
     #         checksum_type: "FULL_OBJECT", # accepts FULL_OBJECT, COMPOSITE
     #       },
+    #       s3_update_object_encryption: {
+    #         object_encryption: {
+    #           ssekms: {
+    #             kms_key_arn: "NonEmptyKmsKeyArnString", # required
+    #             bucket_key_enabled: false,
+    #           },
+    #         },
+    #       },
     #     },
     #     report: { # required
     #       bucket: "S3BucketArnString",
@@ -3010,6 +3018,8 @@ module Aws::S3Control
     #   resp.job.operation.s3_put_object_retention.retention.mode #=> String, one of "COMPLIANCE", "GOVERNANCE"
     #   resp.job.operation.s3_compute_object_checksum.checksum_algorithm #=> String, one of "CRC32", "CRC32C", "CRC64NVME", "MD5", "SHA1", "SHA256"
     #   resp.job.operation.s3_compute_object_checksum.checksum_type #=> String, one of "FULL_OBJECT", "COMPOSITE"
+    #   resp.job.operation.s3_update_object_encryption.object_encryption.ssekms.kms_key_arn #=> String
+    #   resp.job.operation.s3_update_object_encryption.object_encryption.ssekms.bucket_key_enabled #=> Boolean
     #   resp.job.priority #=> Integer
     #   resp.job.progress_summary.total_number_of_tasks #=> Integer
     #   resp.job.progress_summary.number_of_tasks_succeeded #=> Integer
@@ -5846,7 +5856,7 @@ module Aws::S3Control
     #   resp.jobs #=> Array
     #   resp.jobs[0].job_id #=> String
     #   resp.jobs[0].description #=> String
-    #   resp.jobs[0].operation #=> String, one of "LambdaInvoke", "S3PutObjectCopy", "S3PutObjectAcl", "S3PutObjectTagging", "S3DeleteObjectTagging", "S3InitiateRestoreObject", "S3PutObjectLegalHold", "S3PutObjectRetention", "S3ReplicateObject", "S3ComputeObjectChecksum"
+    #   resp.jobs[0].operation #=> String, one of "LambdaInvoke", "S3PutObjectCopy", "S3PutObjectAcl", "S3PutObjectTagging", "S3DeleteObjectTagging", "S3InitiateRestoreObject", "S3PutObjectLegalHold", "S3PutObjectRetention", "S3ReplicateObject", "S3ComputeObjectChecksum", "S3UpdateObjectEncryption"
     #   resp.jobs[0].priority #=> Integer
     #   resp.jobs[0].status #=> String, one of "Active", "Cancelled", "Cancelling", "Complete", "Completing", "Failed", "Failing", "New", "Paused", "Pausing", "Preparing", "Ready", "Suspended"
     #   resp.jobs[0].creation_time #=> Time
@@ -8204,7 +8214,7 @@ module Aws::S3Control
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-s3control'
-      context[:gem_version] = '1.124.0'
+      context[:gem_version] = '1.126.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

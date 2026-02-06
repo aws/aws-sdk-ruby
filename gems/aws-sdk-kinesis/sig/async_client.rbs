@@ -75,6 +75,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kinesis/AsyncClient.html#subscribe_to_shard-instance_method
       def subscribe_to_shard: (
                                 consumer_arn: ::String,
+                                ?stream_id: ::String,
                                 shard_id: ::String,
                                 starting_position: {
                                   type: ("AT_SEQUENCE_NUMBER" | "AFTER_SEQUENCE_NUMBER" | "TRIM_HORIZON" | "LATEST" | "AT_TIMESTAMP"),

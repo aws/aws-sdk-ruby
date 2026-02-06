@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.75.0 (2026-02-03)
+------------------
+
+* Feature - Adds support for Catalog API us-east-1 dualstack endpoint catalog-marketplace.us-east-1.api.aws
+
+1.74.0 (2026-01-16)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.73.0 (2026-01-08)
 ------------------
 

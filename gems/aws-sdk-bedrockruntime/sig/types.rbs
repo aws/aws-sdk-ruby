@@ -111,8 +111,15 @@ module Aws::BedrockRuntime
       SENSITIVE: [:bytes]
     end
 
+    class CacheDetail
+      attr_accessor ttl: ("5m" | "1h")
+      attr_accessor input_tokens: ::Integer
+      SENSITIVE: []
+    end
+
     class CachePointBlock
       attr_accessor type: ("default")
+      attr_accessor ttl: ("5m" | "1h")
       SENSITIVE: []
     end
 
@@ -334,6 +341,7 @@ module Aws::BedrockRuntime
       attr_accessor request_metadata: ::Hash[::String, ::String]
       attr_accessor performance_config: Types::PerformanceConfiguration
       attr_accessor service_tier: Types::ServiceTier
+      attr_accessor output_config: Types::OutputConfig
       SENSITIVE: [:prompt_variables, :request_metadata]
     end
 
@@ -377,6 +385,7 @@ module Aws::BedrockRuntime
       attr_accessor request_metadata: ::Hash[::String, ::String]
       attr_accessor performance_config: Types::PerformanceConfiguration
       attr_accessor service_tier: Types::ServiceTier
+      attr_accessor output_config: Types::OutputConfig
       SENSITIVE: [:prompt_variables, :request_metadata]
     end
 
@@ -974,6 +983,13 @@ module Aws::BedrockRuntime
       SENSITIVE: []
     end
 
+    class JsonSchemaDefinition
+      attr_accessor schema: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
     class ListAsyncInvokesRequest
       attr_accessor submit_time_after: ::Time
       attr_accessor submit_time_before: ::Time
@@ -1034,6 +1050,28 @@ module Aws::BedrockRuntime
       attr_accessor message: ::String
       attr_accessor event_type: untyped
       SENSITIVE: []
+    end
+
+    class OutputConfig
+      attr_accessor text_format: Types::OutputFormat
+      SENSITIVE: []
+    end
+
+    class OutputFormat
+      attr_accessor type: ("json_schema")
+      attr_accessor structure: Types::OutputFormatStructure
+      SENSITIVE: [:structure]
+    end
+
+    class OutputFormatStructure
+      attr_accessor json_schema: Types::JsonSchemaDefinition
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class JsonSchema < OutputFormatStructure
+      end
+      class Unknown < OutputFormatStructure
+      end
     end
 
     class PayloadPart
@@ -1206,6 +1244,7 @@ module Aws::BedrockRuntime
       attr_accessor total_tokens: ::Integer
       attr_accessor cache_read_input_tokens: ::Integer
       attr_accessor cache_write_input_tokens: ::Integer
+      attr_accessor cache_details: ::Array[Types::CacheDetail]
       SENSITIVE: []
     end
 
@@ -1319,6 +1358,7 @@ module Aws::BedrockRuntime
       attr_accessor name: ::String
       attr_accessor description: ::String
       attr_accessor input_schema: Types::ToolInputSchema
+      attr_accessor strict: bool
       SENSITIVE: []
     end
 

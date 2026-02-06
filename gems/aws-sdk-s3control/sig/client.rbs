@@ -360,6 +360,14 @@ module Aws
                           s3_compute_object_checksum: {
                             checksum_algorithm: ("CRC32" | "CRC32C" | "CRC64NVME" | "MD5" | "SHA1" | "SHA256")?,
                             checksum_type: ("FULL_OBJECT" | "COMPOSITE")?
+                          }?,
+                          s3_update_object_encryption: {
+                            object_encryption: {
+                              ssekms: {
+                                kms_key_arn: ::String,
+                                bucket_key_enabled: bool?
+                              }?
+                            }?
                           }?
                         },
                         report: {

@@ -563,13 +563,17 @@ module Aws::GroundStation
     #   Information about an uplink echo `Config`.
     #
     #   Parameters from the `AntennaUplinkConfig`, corresponding to the
-    #   specified `AntennaUplinkConfigArn`, are used when this
+    #   specified ` AntennaUplinkConfigArn`, are used when this
     #   `UplinkEchoConfig` is used in a contact.
     #   @return [Types::UplinkEchoConfig]
     #
     # @!attribute [rw] s3_recording_config
     #   Information about an S3 recording `Config`.
     #   @return [Types::S3RecordingConfig]
+    #
+    # @!attribute [rw] telemetry_sink_config
+    #   Information about a telemetry sink `Config`.
+    #   @return [Types::TelemetrySinkConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/ConfigTypeData AWS API Documentation
     #
@@ -581,6 +585,7 @@ module Aws::GroundStation
       :antenna_uplink_config,
       :uplink_echo_config,
       :s3_recording_config,
+      :telemetry_sink_config,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
@@ -593,6 +598,7 @@ module Aws::GroundStation
       class AntennaUplinkConfig < ConfigTypeData; end
       class UplinkEchoConfig < ConfigTypeData; end
       class S3RecordingConfig < ConfigTypeData; end
+      class TelemetrySinkConfig < ConfigTypeData; end
       class Unknown < ConfigTypeData; end
     end
 
@@ -778,17 +784,25 @@ module Aws::GroundStation
     # @!attribute [rw] contact_pre_pass_duration_seconds
     #   Amount of time, in seconds, before a contact starts that the Ground
     #   Station Dataflow Endpoint Group will be in a `PREPASS` state. A
-    #   Ground Station Dataflow Endpoint Group State Change event will be
-    #   emitted when the Dataflow Endpoint Group enters and exits the
+    #   [Ground Station Dataflow Endpoint Group State Change event][1] will
+    #   be emitted when the Dataflow Endpoint Group enters and exits the
     #   `PREPASS` state.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/ground-station/latest/ug/monitoring.automating-events.html
     #   @return [Integer]
     #
     # @!attribute [rw] contact_post_pass_duration_seconds
     #   Amount of time, in seconds, after a contact ends that the Ground
     #   Station Dataflow Endpoint Group will be in a `POSTPASS` state. A
-    #   Ground Station Dataflow Endpoint Group State Change event will be
-    #   emitted when the Dataflow Endpoint Group enters and exits the
+    #   [Ground Station Dataflow Endpoint Group State Change event][1] will
+    #   be emitted when the Dataflow Endpoint Group enters and exits the
     #   `POSTPASS` state.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/ground-station/latest/ug/monitoring.automating-events.html
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/CreateDataflowEndpointGroupRequest AWS API Documentation
@@ -809,17 +823,25 @@ module Aws::GroundStation
     # @!attribute [rw] contact_pre_pass_duration_seconds
     #   Amount of time, in seconds, before a contact starts that the Ground
     #   Station Dataflow Endpoint Group will be in a `PREPASS` state. A
-    #   Ground Station Dataflow Endpoint Group State Change event will be
-    #   emitted when the Dataflow Endpoint Group enters and exits the
+    #   [Ground Station Dataflow Endpoint Group State Change event][1] will
+    #   be emitted when the Dataflow Endpoint Group enters and exits the
     #   `PREPASS` state.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/ground-station/latest/ug/monitoring.automating-events.html
     #   @return [Integer]
     #
     # @!attribute [rw] contact_post_pass_duration_seconds
     #   Amount of time, in seconds, after a contact ends that the Ground
     #   Station Dataflow Endpoint Group will be in a `POSTPASS` state. A
-    #   Ground Station Dataflow Endpoint Group State Change event will be
-    #   emitted when the Dataflow Endpoint Group enters and exits the
+    #   [Ground Station Dataflow Endpoint Group State Change event][1] will
+    #   be emitted when the Dataflow Endpoint Group enters and exits the
     #   `POSTPASS` state.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/ground-station/latest/ug/monitoring.automating-events.html
     #   @return [Integer]
     #
     # @!attribute [rw] tags
@@ -953,11 +975,15 @@ module Aws::GroundStation
     #
     # @!attribute [rw] dataflow_edges
     #   A list of lists of ARNs. Each list of ARNs is an edge, with a *from*
-    #   `Config` and a *to* `Config`.
+    #   ` Config` and a *to* `Config`.
     #   @return [Array<Array<String>>]
     #
     # @!attribute [rw] tracking_config_arn
     #   ARN of a tracking `Config`.
+    #   @return [String]
+    #
+    # @!attribute [rw] telemetry_sink_config_arn
+    #   ARN of a telemetry sink `Config`.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -981,6 +1007,7 @@ module Aws::GroundStation
       :minimum_viable_contact_duration_seconds,
       :dataflow_edges,
       :tracking_config_arn,
+      :telemetry_sink_config_arn,
       :tags,
       :streams_kms_key,
       :streams_kms_role)
@@ -1658,7 +1685,7 @@ module Aws::GroundStation
     #
     #
     #
-    #   [1]: https://ccsds.org/wp-content/uploads/gravity_forms/5-448e85c647331d9cbaf66c096458bdd5/2025/01//502x0b3e1.pdf
+    #   [1]: https://ccsds.org/Pubs/502x0b3e1.pdf
     #   [2]: https://docs.aws.amazon.com/ground-station/latest/ug/providing-oem-ephemeris-data.html#oem-ephemeris-format
     #   @return [Types::OEMEphemeris]
     #
@@ -2260,11 +2287,15 @@ module Aws::GroundStation
     #
     # @!attribute [rw] dataflow_edges
     #   A list of lists of ARNs. Each list of ARNs is an edge, with a *from*
-    #   `Config` and a *to* `Config`.
+    #   ` Config` and a *to* `Config`.
     #   @return [Array<Array<String>>]
     #
     # @!attribute [rw] tracking_config_arn
     #   ARN of a tracking `Config`.
+    #   @return [String]
+    #
+    # @!attribute [rw] telemetry_sink_config_arn
+    #   ARN of a telemetry sink `Config`.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -2291,6 +2322,7 @@ module Aws::GroundStation
       :minimum_viable_contact_duration_seconds,
       :dataflow_edges,
       :tracking_config_arn,
+      :telemetry_sink_config_arn,
       :tags,
       :streams_kms_key,
       :streams_kms_role)
@@ -2422,6 +2454,25 @@ module Aws::GroundStation
     class InvalidParameterException < Struct.new(
       :message,
       :parameter_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information for telemetry delivery to Kinesis Data Streams.
+    #
+    # @!attribute [rw] kinesis_role_arn
+    #   ARN of the IAM Role used by AWS Ground Station to deliver telemetry.
+    #   @return [String]
+    #
+    # @!attribute [rw] kinesis_data_stream_arn
+    #   ARN of the Kinesis Data Stream to deliver telemetry to.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/KinesisDataStreamData AWS API Documentation
+    #
+    class KinesisDataStreamData < Struct.new(
+      :kinesis_role_arn,
+      :kinesis_data_stream_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2856,7 +2907,7 @@ module Aws::GroundStation
     #
     #
     #
-    # [1]: https://ccsds.org/wp-content/uploads/gravity_forms/5-448e85c647331d9cbaf66c096458bdd5/2025/01//502x0b3e1.pdf
+    # [1]: https://ccsds.org/Pubs/502x0b3e1.pdf
     # [2]: https://docs.aws.amazon.com/ground-station/latest/ug/providing-oem-ephemeris-data.html#oem-ephemeris-format
     #
     # @!attribute [rw] s3_object
@@ -3366,6 +3417,49 @@ module Aws::GroundStation
     #
     class TagResourceResponse < Aws::EmptyStructure; end
 
+    # Information about a telemetry sink `Config`.
+    #
+    # @!attribute [rw] telemetry_sink_type
+    #   The type of telemetry sink.
+    #   @return [String]
+    #
+    # @!attribute [rw] telemetry_sink_data
+    #   Information about the telemetry sink specified by the
+    #   `telemetrySinkType`.
+    #   @return [Types::TelemetrySinkData]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/TelemetrySinkConfig AWS API Documentation
+    #
+    class TelemetrySinkConfig < Struct.new(
+      :telemetry_sink_type,
+      :telemetry_sink_data)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about a telemetry sink.
+    #
+    # @note TelemetrySinkData is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note TelemetrySinkData is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of TelemetrySinkData corresponding to the set member.
+    #
+    # @!attribute [rw] kinesis_data_stream_data
+    #   Information about a telemetry sink of type `KINESIS_DATA_STREAM`.
+    #   @return [Types::KinesisDataStreamData]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/TelemetrySinkData AWS API Documentation
+    #
+    class TelemetrySinkData < Struct.new(
+      :kinesis_data_stream_data,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class KinesisDataStreamData < TelemetrySinkData; end
+      class Unknown < TelemetrySinkData; end
+    end
+
     # Time-tagged azimuth elevation pointing data.
     #
     # Specifies the antenna pointing direction at a specific time offset
@@ -3616,11 +3710,15 @@ module Aws::GroundStation
     #
     # @!attribute [rw] dataflow_edges
     #   A list of lists of ARNs. Each list of ARNs is an edge, with a *from*
-    #   `Config` and a *to* `Config`.
+    #   ` Config` and a *to* `Config`.
     #   @return [Array<Array<String>>]
     #
     # @!attribute [rw] tracking_config_arn
     #   ARN of a tracking `Config`.
+    #   @return [String]
+    #
+    # @!attribute [rw] telemetry_sink_config_arn
+    #   ARN of a telemetry sink `Config`.
     #   @return [String]
     #
     # @!attribute [rw] streams_kms_key
@@ -3641,6 +3739,7 @@ module Aws::GroundStation
       :minimum_viable_contact_duration_seconds,
       :dataflow_edges,
       :tracking_config_arn,
+      :telemetry_sink_config_arn,
       :streams_kms_key,
       :streams_kms_role)
       SENSITIVE = []
@@ -3742,7 +3841,7 @@ module Aws::GroundStation
     # Information about an uplink echo `Config`.
     #
     # Parameters from the `AntennaUplinkConfig`, corresponding to the
-    # specified `AntennaUplinkConfigArn`, are used when this
+    # specified ` AntennaUplinkConfigArn`, are used when this
     # `UplinkEchoConfig` is used in a contact.
     #
     # @!attribute [rw] enabled

@@ -943,6 +943,17 @@ module Aws
                                     ?client_token: ::String,
                                     ?as_draft: bool,
                                     ?tags: Hash[::String, ::String],
+                                    ?review_configuration: {
+                                      review_notification_recipients: Array[
+                                        {
+                                          type: ("USER_ID"),
+                                          value: {
+                                            user_id: ::String?
+                                          }
+                                        },
+                                      ],
+                                      eligibility_days: ::Integer?
+                                    },
                                     ?target_configuration: {
                                       contact_interaction_type: ("AGENT" | "AUTOMATED")
                                     },
@@ -1451,6 +1462,34 @@ module Aws
                                 ) -> _CreateTaskTemplateResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateTaskTemplateResponseSuccess
 
+      interface _CreateTestCaseResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateTestCaseResponse]
+        def test_case_id: () -> ::String
+        def test_case_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#create_test_case-instance_method
+      def create_test_case: (
+                              instance_id: ::String,
+                              name: ::String,
+                              ?description: ::String,
+                              content: ::String,
+                              ?entry_point: {
+                                type: ("VOICE_CALL")?,
+                                voice_call_entry_point_parameters: {
+                                  source_phone_number: ::String?,
+                                  destination_phone_number: ::String?,
+                                  flow_id: ::String?
+                                }?
+                              },
+                              ?initialization_data: ::String,
+                              ?status: ("PUBLISHED" | "SAVED"),
+                              ?test_case_id: ::String,
+                              ?tags: Hash[::String, ::String],
+                              ?last_modified_time: ::Time,
+                              ?last_modified_region: ::String
+                            ) -> _CreateTestCaseResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateTestCaseResponseSuccess
+
       interface _CreateTrafficDistributionGroupResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateTrafficDistributionGroupResponse]
         def id: () -> ::String
@@ -1910,6 +1949,16 @@ module Aws
                                 ) -> _DeleteTaskTemplateResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteTaskTemplateResponseSuccess
 
+      interface _DeleteTestCaseResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteTestCaseResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#delete_test_case-instance_method
+      def delete_test_case: (
+                              instance_id: ::String,
+                              test_case_id: ::String
+                            ) -> _DeleteTestCaseResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteTestCaseResponseSuccess
+
       interface _DeleteTrafficDistributionGroupResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteTrafficDistributionGroupResponse]
       end
@@ -2284,6 +2333,18 @@ module Aws
                                      ) -> _DescribeSecurityProfileResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeSecurityProfileResponseSuccess
 
+      interface _DescribeTestCaseResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeTestCaseResponse]
+        def test_case: () -> Types::TestCase
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#describe_test_case-instance_method
+      def describe_test_case: (
+                                instance_id: ::String,
+                                test_case_id: ::String,
+                                ?status: ("PUBLISHED" | "SAVED")
+                              ) -> _DescribeTestCaseResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeTestCaseResponseSuccess
+
       interface _DescribeTrafficDistributionGroupResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeTrafficDistributionGroupResponse]
         def traffic_distribution_group: () -> Types::TrafficDistributionGroup
@@ -2623,7 +2684,7 @@ module Aws
                                  contact_id: ::String,
                                  metrics: Array[
                                    {
-                                     name: ("POSITION_IN_QUEUE")
+                                     name: ("ESTIMATED_WAIT_TIME" | "POSITION_IN_QUEUE")
                                    },
                                  ]
                                ) -> _GetContactMetricsResponseSuccess
@@ -2651,7 +2712,7 @@ module Aws
                                      ?groupings: Array[("QUEUE" | "CHANNEL" | "ROUTING_PROFILE" | "ROUTING_STEP_EXPRESSION" | "AGENT_STATUS" | "SUBTYPE" | "VALIDATION_TEST_TYPE")],
                                      current_metrics: Array[
                                        {
-                                         name: ("AGENTS_ONLINE" | "AGENTS_AVAILABLE" | "AGENTS_ON_CALL" | "AGENTS_NON_PRODUCTIVE" | "AGENTS_AFTER_CONTACT_WORK" | "AGENTS_ERROR" | "AGENTS_STAFFED" | "CONTACTS_IN_QUEUE" | "OLDEST_CONTACT_AGE" | "CONTACTS_SCHEDULED" | "AGENTS_ON_CONTACT" | "SLOTS_ACTIVE" | "SLOTS_AVAILABLE")?,
+                                         name: ("AGENTS_ONLINE" | "AGENTS_AVAILABLE" | "AGENTS_ON_CALL" | "AGENTS_NON_PRODUCTIVE" | "AGENTS_AFTER_CONTACT_WORK" | "AGENTS_ERROR" | "AGENTS_STAFFED" | "CONTACTS_IN_QUEUE" | "OLDEST_CONTACT_AGE" | "CONTACTS_SCHEDULED" | "AGENTS_ON_CONTACT" | "SLOTS_ACTIVE" | "SLOTS_AVAILABLE" | "ESTIMATED_WAIT_TIME")?,
                                          metric_id: ::String?,
                                          unit: ("SECONDS" | "COUNT" | "PERCENT")?
                                        },
@@ -2660,7 +2721,7 @@ module Aws
                                      ?max_results: ::Integer,
                                      ?sort_criteria: Array[
                                        {
-                                         sort_by_metric: ("AGENTS_ONLINE" | "AGENTS_AVAILABLE" | "AGENTS_ON_CALL" | "AGENTS_NON_PRODUCTIVE" | "AGENTS_AFTER_CONTACT_WORK" | "AGENTS_ERROR" | "AGENTS_STAFFED" | "CONTACTS_IN_QUEUE" | "OLDEST_CONTACT_AGE" | "CONTACTS_SCHEDULED" | "AGENTS_ON_CONTACT" | "SLOTS_ACTIVE" | "SLOTS_AVAILABLE")?,
+                                         sort_by_metric: ("AGENTS_ONLINE" | "AGENTS_AVAILABLE" | "AGENTS_ON_CALL" | "AGENTS_NON_PRODUCTIVE" | "AGENTS_AFTER_CONTACT_WORK" | "AGENTS_ERROR" | "AGENTS_STAFFED" | "CONTACTS_IN_QUEUE" | "OLDEST_CONTACT_AGE" | "CONTACTS_SCHEDULED" | "AGENTS_ON_CONTACT" | "SLOTS_ACTIVE" | "SLOTS_AVAILABLE" | "ESTIMATED_WAIT_TIME")?,
                                          sort_order: ("ASCENDING" | "DESCENDING")?
                                        },
                                      ]
@@ -2853,6 +2914,21 @@ module Aws
                                ?snapshot_version: ::String
                              ) -> _GetTaskTemplateResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetTaskTemplateResponseSuccess
+
+      interface _GetTestCaseExecutionSummaryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetTestCaseExecutionSummaryResponse]
+        def start_time: () -> ::Time
+        def end_time: () -> ::Time
+        def status: () -> ("INITIATED" | "PASSED" | "FAILED" | "IN_PROGRESS" | "STOPPED")
+        def observation_summary: () -> Types::ObservationSummary
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#get_test_case_execution_summary-instance_method
+      def get_test_case_execution_summary: (
+                                             instance_id: ::String,
+                                             test_case_id: ::String,
+                                             test_case_execution_id: ::String
+                                           ) -> _GetTestCaseExecutionSummaryResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetTestCaseExecutionSummaryResponseSuccess
 
       interface _GetTrafficDistributionResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetTrafficDistributionResponse]
@@ -3631,6 +3707,53 @@ module Aws
                                ) -> _ListTaskTemplatesResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTaskTemplatesResponseSuccess
 
+      interface _ListTestCaseExecutionRecordsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTestCaseExecutionRecordsResponse]
+        def execution_records: () -> ::Array[Types::ExecutionRecord]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#list_test_case_execution_records-instance_method
+      def list_test_case_execution_records: (
+                                              instance_id: ::String,
+                                              test_case_id: ::String,
+                                              test_case_execution_id: ::String,
+                                              ?status: ("INITIATED" | "PASSED" | "FAILED" | "IN_PROGRESS" | "STOPPED"),
+                                              ?next_token: ::String,
+                                              ?max_results: ::Integer
+                                            ) -> _ListTestCaseExecutionRecordsResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTestCaseExecutionRecordsResponseSuccess
+
+      interface _ListTestCaseExecutionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTestCaseExecutionsResponse]
+        def test_case_executions: () -> ::Array[Types::TestCaseExecution]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#list_test_case_executions-instance_method
+      def list_test_case_executions: (
+                                       instance_id: ::String,
+                                       ?test_case_id: ::String,
+                                       ?test_case_name: ::String,
+                                       ?start_time: ::Time,
+                                       ?end_time: ::Time,
+                                       ?status: ("INITIATED" | "PASSED" | "FAILED" | "IN_PROGRESS" | "STOPPED"),
+                                       ?next_token: ::String,
+                                       ?max_results: ::Integer
+                                     ) -> _ListTestCaseExecutionsResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTestCaseExecutionsResponseSuccess
+
+      interface _ListTestCasesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTestCasesResponse]
+        def test_case_summary_list: () -> ::Array[Types::TestCaseSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#list_test_cases-instance_method
+      def list_test_cases: (
+                             instance_id: ::String,
+                             ?next_token: ::String,
+                             ?max_results: ::Integer
+                           ) -> _ListTestCasesResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTestCasesResponseSuccess
+
       interface _ListTrafficDistributionGroupUsersResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListTrafficDistributionGroupUsersResponse]
         def next_token: () -> ::String
@@ -4227,7 +4350,27 @@ module Aws
                                  ],
                                  match_type: ("MATCH_ALL" | "MATCH_ANY" | "MATCH_EXACT" | "MATCH_NONE")?
                                }?,
-                               active_regions: Array[::String]?
+                               active_regions: Array[::String]?,
+                               contact_tags: {
+                                 or_conditions: Array[
+                                   Array[
+                                     {
+                                       tag_key: ::String?,
+                                       tag_value: ::String?
+                                     },
+                                   ],
+                                 ]?,
+                                 and_conditions: Array[
+                                   {
+                                     tag_key: ::String?,
+                                     tag_value: ::String?
+                                   },
+                                 ]?,
+                                 tag_condition: {
+                                   tag_key: ::String?,
+                                   tag_value: ::String?
+                                 }?
+                               }?
                              },
                              ?max_results: ::Integer,
                              ?next_token: ::String,
@@ -4806,6 +4949,56 @@ module Aws
                                       }
                                     ) -> _SearchSecurityProfilesResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SearchSecurityProfilesResponseSuccess
+
+      interface _SearchTestCasesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SearchTestCasesResponse]
+        def test_cases: () -> ::Array[Types::TestCase]
+        def next_token: () -> ::String
+        def approximate_total_count: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#search_test_cases-instance_method
+      def search_test_cases: (
+                               instance_id: ::String,
+                               ?next_token: ::String,
+                               ?max_results: ::Integer,
+                               ?search_filter: {
+                                 tag_filter: {
+                                   or_conditions: Array[
+                                     Array[
+                                       {
+                                         tag_key: ::String?,
+                                         tag_value: ::String?
+                                       },
+                                     ],
+                                   ]?,
+                                   and_conditions: Array[
+                                     {
+                                       tag_key: ::String?,
+                                       tag_value: ::String?
+                                     },
+                                   ]?,
+                                   tag_condition: {
+                                     tag_key: ::String?,
+                                     tag_value: ::String?
+                                   }?
+                                 }?
+                               },
+                               ?search_criteria: {
+                                 or_conditions: Array[
+                                   untyped,
+                                 ]?,
+                                 and_conditions: Array[
+                                   untyped,
+                                 ]?,
+                                 string_condition: {
+                                   field_name: ::String?,
+                                   value: ::String?,
+                                   comparison_type: ("STARTS_WITH" | "CONTAINS" | "EXACT")?
+                                 }?,
+                                 status_condition: ("PUBLISHED" | "SAVED")?
+                               }
+                             ) -> _SearchTestCasesResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SearchTestCasesResponseSuccess
 
       interface _SearchUserHierarchyGroupsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::SearchUserHierarchyGroupsResponse]
@@ -5596,9 +5789,29 @@ module Aws
                                       untyped,
                                     ]?,
                                     value_arn: ::String?
-                                  }]
+                                  }],
+                                ?attachments: Array[
+                                  {
+                                    file_name: ::String,
+                                    s3_url: ::String
+                                  },
+                                ]
                               ) -> _StartTaskContactResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartTaskContactResponseSuccess
+
+      interface _StartTestCaseExecutionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartTestCaseExecutionResponse]
+        def test_case_execution_id: () -> ::String
+        def test_case_id: () -> ::String
+        def status: () -> ("INITIATED" | "PASSED" | "FAILED" | "IN_PROGRESS" | "STOPPED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#start_test_case_execution-instance_method
+      def start_test_case_execution: (
+                                       instance_id: ::String,
+                                       test_case_id: ::String,
+                                       ?client_token: ::String
+                                     ) -> _StartTestCaseExecutionResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartTestCaseExecutionResponseSuccess
 
       interface _StartWebRTCContactResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::StartWebRTCContactResponse]
@@ -5683,6 +5896,18 @@ module Aws
                                     streaming_id: ::String
                                   ) -> _StopContactStreamingResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopContactStreamingResponseSuccess
+
+      interface _StopTestCaseExecutionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StopTestCaseExecutionResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#stop_test_case_execution-instance_method
+      def stop_test_case_execution: (
+                                      instance_id: ::String,
+                                      test_case_execution_id: ::String,
+                                      test_case_id: ::String,
+                                      ?client_token: ::String
+                                    ) -> _StopTestCaseExecutionResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopTestCaseExecutionResponseSuccess
 
       interface _SubmitContactEvaluationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::SubmitContactEvaluationResponse]
@@ -6268,6 +6493,17 @@ module Aws
                                     ?auto_evaluation_configuration: {
                                       enabled: bool
                                     },
+                                    ?review_configuration: {
+                                      review_notification_recipients: Array[
+                                        {
+                                          type: ("USER_ID"),
+                                          value: {
+                                            user_id: ::String?
+                                          }
+                                        },
+                                      ],
+                                      eligibility_days: ::Integer?
+                                    },
                                     ?as_draft: bool,
                                     ?client_token: ::String,
                                     ?target_configuration: {
@@ -6822,6 +7058,31 @@ module Aws
                                   ]
                                 ) -> _UpdateTaskTemplateResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateTaskTemplateResponseSuccess
+
+      interface _UpdateTestCaseResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateTestCaseResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#update_test_case-instance_method
+      def update_test_case: (
+                              instance_id: ::String,
+                              test_case_id: ::String,
+                              ?content: ::String,
+                              ?entry_point: {
+                                type: ("VOICE_CALL")?,
+                                voice_call_entry_point_parameters: {
+                                  source_phone_number: ::String?,
+                                  destination_phone_number: ::String?,
+                                  flow_id: ::String?
+                                }?
+                              },
+                              ?initialization_data: ::String,
+                              ?name: ::String,
+                              ?description: ::String,
+                              ?status: ("PUBLISHED" | "SAVED"),
+                              ?last_modified_time: ::Time,
+                              ?last_modified_region: ::String
+                            ) -> _UpdateTestCaseResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateTestCaseResponseSuccess
 
       interface _UpdateTrafficDistributionResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateTrafficDistributionResponse]

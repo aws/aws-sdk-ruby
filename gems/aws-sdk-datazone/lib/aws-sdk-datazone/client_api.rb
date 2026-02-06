@@ -302,6 +302,8 @@ module Aws::DataZone
     DeleteAssetTypeOutput = Shapes::StructureShape.new(name: 'DeleteAssetTypeOutput')
     DeleteConnectionInput = Shapes::StructureShape.new(name: 'DeleteConnectionInput')
     DeleteConnectionOutput = Shapes::StructureShape.new(name: 'DeleteConnectionOutput')
+    DeleteDataExportConfigurationInput = Shapes::StructureShape.new(name: 'DeleteDataExportConfigurationInput')
+    DeleteDataExportConfigurationOutput = Shapes::StructureShape.new(name: 'DeleteDataExportConfigurationOutput')
     DeleteDataProductInput = Shapes::StructureShape.new(name: 'DeleteDataProductInput')
     DeleteDataProductOutput = Shapes::StructureShape.new(name: 'DeleteDataProductOutput')
     DeleteDataSourceInput = Shapes::StructureShape.new(name: 'DeleteDataSourceInput')
@@ -439,6 +441,7 @@ module Aws::DataZone
     FilterIds = Shapes::ListShape.new(name: 'FilterIds')
     FilterList = Shapes::ListShape.new(name: 'FilterList')
     FilterName = Shapes::StringShape.new(name: 'FilterName')
+    FilterOperator = Shapes::StringShape.new(name: 'FilterOperator')
     FilterStatus = Shapes::StringShape.new(name: 'FilterStatus')
     FilterValueString = Shapes::StringShape.new(name: 'FilterValueString')
     FirstName = Shapes::StringShape.new(name: 'FirstName')
@@ -725,6 +728,7 @@ module Aws::DataZone
     ListingSummary = Shapes::StructureShape.new(name: 'ListingSummary')
     ListingSummaryItem = Shapes::StructureShape.new(name: 'ListingSummaryItem')
     ListingSummaryItems = Shapes::ListShape.new(name: 'ListingSummaryItems')
+    Long = Shapes::IntegerShape.new(name: 'Long')
     LongDescription = Shapes::StringShape.new(name: 'LongDescription')
     ManagedEndpointCredentials = Shapes::StructureShape.new(name: 'ManagedEndpointCredentials')
     ManagedEndpointCredentialsIdString = Shapes::StringShape.new(name: 'ManagedEndpointCredentialsIdString')
@@ -2593,6 +2597,11 @@ module Aws::DataZone
     DeleteConnectionOutput.add_member(:status, Shapes::ShapeRef.new(shape: String, location_name: "status"))
     DeleteConnectionOutput.struct_class = Types::DeleteConnectionOutput
 
+    DeleteDataExportConfigurationInput.add_member(:domain_identifier, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainIdentifier"))
+    DeleteDataExportConfigurationInput.struct_class = Types::DeleteDataExportConfigurationInput
+
+    DeleteDataExportConfigurationOutput.struct_class = Types::DeleteDataExportConfigurationOutput
+
     DeleteDataProductInput.add_member(:domain_identifier, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainIdentifier"))
     DeleteDataProductInput.add_member(:identifier, Shapes::ShapeRef.new(shape: DataProductId, required: true, location: "uri", location_name: "identifier"))
     DeleteDataProductInput.struct_class = Types::DeleteDataProductInput
@@ -2998,7 +3007,9 @@ module Aws::DataZone
     FailureReasons.member = Shapes::ShapeRef.new(shape: ProjectDeletionError)
 
     Filter.add_member(:attribute, Shapes::ShapeRef.new(shape: Attribute, required: true, location_name: "attribute"))
-    Filter.add_member(:value, Shapes::ShapeRef.new(shape: FilterValueString, required: true, location_name: "value"))
+    Filter.add_member(:value, Shapes::ShapeRef.new(shape: FilterValueString, location_name: "value"))
+    Filter.add_member(:int_value, Shapes::ShapeRef.new(shape: Long, location_name: "intValue"))
+    Filter.add_member(:operator, Shapes::ShapeRef.new(shape: FilterOperator, location_name: "operator"))
     Filter.struct_class = Types::Filter
 
     FilterClause.add_member(:filter, Shapes::ShapeRef.new(shape: Filter, location_name: "filter"))
@@ -6894,6 +6905,21 @@ module Aws::DataZone
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+      end)
+
+      api.add_operation(:delete_data_export_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteDataExportConfiguration"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/v2/domains/{domainIdentifier}/data-export-configuration"
+        o.input = Shapes::ShapeRef.new(shape: DeleteDataExportConfigurationInput)
+        o.output = Shapes::ShapeRef.new(shape: DeleteDataExportConfigurationOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
       end)

@@ -3403,6 +3403,7 @@ module Aws::SageMaker
       attr_accessor cluster_scheduler_config_version: ::Integer
       attr_accessor status: ("Creating" | "CreateFailed" | "CreateRollbackFailed" | "Created" | "Updating" | "UpdateFailed" | "UpdateRollbackFailed" | "Updated" | "Deleting" | "DeleteFailed" | "DeleteRollbackFailed" | "Deleted")
       attr_accessor failure_reason: ::String
+      attr_accessor status_details: ::Hash[("PriorityClasses" | "FairShare" | "IdleResourceSharing"), ("Creating" | "CreateFailed" | "CreateRollbackFailed" | "Created" | "Updating" | "UpdateFailed" | "UpdateRollbackFailed" | "Updated" | "Deleting" | "DeleteFailed" | "DeleteRollbackFailed" | "Deleted")]
       attr_accessor cluster_arn: ::String
       attr_accessor scheduler_config: Types::SchedulerConfig
       attr_accessor description: ::String
@@ -9706,6 +9707,7 @@ module Aws::SageMaker
     class ResourceSharingConfig
       attr_accessor strategy: ("Lend" | "DontLend" | "LendAndBorrow")
       attr_accessor borrow_limit: ::Integer
+      attr_accessor absolute_borrow_limits: ::Array[Types::ComputeQuotaResourceConfig]
       SENSITIVE: []
     end
 
@@ -9845,6 +9847,7 @@ module Aws::SageMaker
     class SchedulerConfig
       attr_accessor priority_classes: ::Array[Types::PriorityClass]
       attr_accessor fair_share: ("Enabled" | "Disabled")
+      attr_accessor idle_resource_sharing: ("Enabled" | "Disabled")
       SENSITIVE: []
     end
 

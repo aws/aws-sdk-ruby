@@ -223,6 +223,7 @@ module Aws::DynamoDB
     GlobalTableGlobalSecondaryIndexSettingsUpdateList = Shapes::ListShape.new(name: 'GlobalTableGlobalSecondaryIndexSettingsUpdateList')
     GlobalTableList = Shapes::ListShape.new(name: 'GlobalTableList')
     GlobalTableNotFoundException = Shapes::StructureShape.new(name: 'GlobalTableNotFoundException')
+    GlobalTableSettingsReplicationMode = Shapes::StringShape.new(name: 'GlobalTableSettingsReplicationMode')
     GlobalTableStatus = Shapes::StringShape.new(name: 'GlobalTableStatus')
     GlobalTableWitnessDescription = Shapes::StructureShape.new(name: 'GlobalTableWitnessDescription')
     GlobalTableWitnessDescriptionList = Shapes::ListShape.new(name: 'GlobalTableWitnessDescriptionList')
@@ -760,9 +761,9 @@ module Aws::DynamoDB
     CreateReplicationGroupMemberAction.add_member(:table_class_override, Shapes::ShapeRef.new(shape: TableClass, location_name: "TableClassOverride"))
     CreateReplicationGroupMemberAction.struct_class = Types::CreateReplicationGroupMemberAction
 
-    CreateTableInput.add_member(:attribute_definitions, Shapes::ShapeRef.new(shape: AttributeDefinitions, required: true, location_name: "AttributeDefinitions"))
+    CreateTableInput.add_member(:attribute_definitions, Shapes::ShapeRef.new(shape: AttributeDefinitions, location_name: "AttributeDefinitions"))
     CreateTableInput.add_member(:table_name, Shapes::ShapeRef.new(shape: TableArn, required: true, location_name: "TableName", metadata: {"contextParam" => {"name" => "ResourceArn"}}))
-    CreateTableInput.add_member(:key_schema, Shapes::ShapeRef.new(shape: KeySchema, required: true, location_name: "KeySchema"))
+    CreateTableInput.add_member(:key_schema, Shapes::ShapeRef.new(shape: KeySchema, location_name: "KeySchema"))
     CreateTableInput.add_member(:local_secondary_indexes, Shapes::ShapeRef.new(shape: LocalSecondaryIndexList, location_name: "LocalSecondaryIndexes"))
     CreateTableInput.add_member(:global_secondary_indexes, Shapes::ShapeRef.new(shape: GlobalSecondaryIndexList, location_name: "GlobalSecondaryIndexes"))
     CreateTableInput.add_member(:billing_mode, Shapes::ShapeRef.new(shape: BillingMode, location_name: "BillingMode"))
@@ -775,6 +776,8 @@ module Aws::DynamoDB
     CreateTableInput.add_member(:warm_throughput, Shapes::ShapeRef.new(shape: WarmThroughput, location_name: "WarmThroughput"))
     CreateTableInput.add_member(:resource_policy, Shapes::ShapeRef.new(shape: ResourcePolicy, location_name: "ResourcePolicy"))
     CreateTableInput.add_member(:on_demand_throughput, Shapes::ShapeRef.new(shape: OnDemandThroughput, location_name: "OnDemandThroughput"))
+    CreateTableInput.add_member(:global_table_source_arn, Shapes::ShapeRef.new(shape: TableArn, location_name: "GlobalTableSourceArn"))
+    CreateTableInput.add_member(:global_table_settings_replication_mode, Shapes::ShapeRef.new(shape: GlobalTableSettingsReplicationMode, location_name: "GlobalTableSettingsReplicationMode"))
     CreateTableInput.struct_class = Types::CreateTableInput
 
     CreateTableOutput.add_member(:table_description, Shapes::ShapeRef.new(shape: TableDescription, location_name: "TableDescription"))
@@ -1555,6 +1558,7 @@ module Aws::DynamoDB
     ReplicaDescription.add_member(:global_secondary_indexes, Shapes::ShapeRef.new(shape: ReplicaGlobalSecondaryIndexDescriptionList, location_name: "GlobalSecondaryIndexes"))
     ReplicaDescription.add_member(:replica_inaccessible_date_time, Shapes::ShapeRef.new(shape: Date, location_name: "ReplicaInaccessibleDateTime"))
     ReplicaDescription.add_member(:replica_table_class_summary, Shapes::ShapeRef.new(shape: TableClassSummary, location_name: "ReplicaTableClassSummary"))
+    ReplicaDescription.add_member(:global_table_settings_replication_mode, Shapes::ShapeRef.new(shape: GlobalTableSettingsReplicationMode, location_name: "GlobalTableSettingsReplicationMode"))
     ReplicaDescription.struct_class = Types::ReplicaDescription
 
     ReplicaDescriptionList.member = Shapes::ShapeRef.new(shape: ReplicaDescription)
@@ -1803,6 +1807,7 @@ module Aws::DynamoDB
     TableDescription.add_member(:global_table_version, Shapes::ShapeRef.new(shape: String, location_name: "GlobalTableVersion"))
     TableDescription.add_member(:replicas, Shapes::ShapeRef.new(shape: ReplicaDescriptionList, location_name: "Replicas"))
     TableDescription.add_member(:global_table_witnesses, Shapes::ShapeRef.new(shape: GlobalTableWitnessDescriptionList, location_name: "GlobalTableWitnesses"))
+    TableDescription.add_member(:global_table_settings_replication_mode, Shapes::ShapeRef.new(shape: GlobalTableSettingsReplicationMode, location_name: "GlobalTableSettingsReplicationMode"))
     TableDescription.add_member(:restore_summary, Shapes::ShapeRef.new(shape: RestoreSummary, location_name: "RestoreSummary"))
     TableDescription.add_member(:sse_description, Shapes::ShapeRef.new(shape: SSEDescription, location_name: "SSEDescription"))
     TableDescription.add_member(:archival_summary, Shapes::ShapeRef.new(shape: ArchivalSummary, location_name: "ArchivalSummary"))

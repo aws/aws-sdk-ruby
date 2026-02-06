@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.104.0 (2026-01-22)
+------------------
+
+* Feature - Add Budget FilterExpression and Metrics fields to DescribeBudgetPerformanceHistory to support more granular filtering options.
+
+1.103.0 (2026-01-16)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.102.0 (2026-01-08)
 ------------------
 

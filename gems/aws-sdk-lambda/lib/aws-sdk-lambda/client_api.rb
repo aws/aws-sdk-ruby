@@ -166,9 +166,11 @@ module Aws::Lambda
     EventResult = Shapes::StructureShape.new(name: 'EventResult')
     EventSourceMappingArn = Shapes::StringShape.new(name: 'EventSourceMappingArn')
     EventSourceMappingConfiguration = Shapes::StructureShape.new(name: 'EventSourceMappingConfiguration')
+    EventSourceMappingLoggingConfig = Shapes::StructureShape.new(name: 'EventSourceMappingLoggingConfig')
     EventSourceMappingMetric = Shapes::StringShape.new(name: 'EventSourceMappingMetric')
     EventSourceMappingMetricList = Shapes::ListShape.new(name: 'EventSourceMappingMetricList')
     EventSourceMappingMetricsConfig = Shapes::StructureShape.new(name: 'EventSourceMappingMetricsConfig')
+    EventSourceMappingSystemLogLevel = Shapes::StringShape.new(name: 'EventSourceMappingSystemLogLevel')
     EventSourceMappingsList = Shapes::ListShape.new(name: 'EventSourceMappingsList')
     EventSourcePosition = Shapes::StringShape.new(name: 'EventSourcePosition')
     EventSourceToken = Shapes::StringShape.new(name: 'EventSourceToken')
@@ -851,6 +853,7 @@ module Aws::Lambda
     CreateEventSourceMappingRequest.add_member(:document_db_event_source_config, Shapes::ShapeRef.new(shape: DocumentDBEventSourceConfig, location_name: "DocumentDBEventSourceConfig"))
     CreateEventSourceMappingRequest.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KMSKeyArn, location_name: "KMSKeyArn"))
     CreateEventSourceMappingRequest.add_member(:metrics_config, Shapes::ShapeRef.new(shape: EventSourceMappingMetricsConfig, location_name: "MetricsConfig"))
+    CreateEventSourceMappingRequest.add_member(:logging_config, Shapes::ShapeRef.new(shape: EventSourceMappingLoggingConfig, location_name: "LoggingConfig"))
     CreateEventSourceMappingRequest.add_member(:provisioned_poller_config, Shapes::ShapeRef.new(shape: ProvisionedPollerConfig, location_name: "ProvisionedPollerConfig"))
     CreateEventSourceMappingRequest.struct_class = Types::CreateEventSourceMappingRequest
 
@@ -1105,8 +1108,12 @@ module Aws::Lambda
     EventSourceMappingConfiguration.add_member(:filter_criteria_error, Shapes::ShapeRef.new(shape: FilterCriteriaError, location_name: "FilterCriteriaError"))
     EventSourceMappingConfiguration.add_member(:event_source_mapping_arn, Shapes::ShapeRef.new(shape: EventSourceMappingArn, location_name: "EventSourceMappingArn"))
     EventSourceMappingConfiguration.add_member(:metrics_config, Shapes::ShapeRef.new(shape: EventSourceMappingMetricsConfig, location_name: "MetricsConfig"))
+    EventSourceMappingConfiguration.add_member(:logging_config, Shapes::ShapeRef.new(shape: EventSourceMappingLoggingConfig, location_name: "LoggingConfig"))
     EventSourceMappingConfiguration.add_member(:provisioned_poller_config, Shapes::ShapeRef.new(shape: ProvisionedPollerConfig, location_name: "ProvisionedPollerConfig"))
     EventSourceMappingConfiguration.struct_class = Types::EventSourceMappingConfiguration
+
+    EventSourceMappingLoggingConfig.add_member(:system_log_level, Shapes::ShapeRef.new(shape: EventSourceMappingSystemLogLevel, location_name: "SystemLogLevel"))
+    EventSourceMappingLoggingConfig.struct_class = Types::EventSourceMappingLoggingConfig
 
     EventSourceMappingMetricList.member = Shapes::ShapeRef.new(shape: EventSourceMappingMetric)
 
@@ -2187,6 +2194,7 @@ module Aws::Lambda
     UpdateEventSourceMappingRequest.add_member(:document_db_event_source_config, Shapes::ShapeRef.new(shape: DocumentDBEventSourceConfig, location_name: "DocumentDBEventSourceConfig"))
     UpdateEventSourceMappingRequest.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KMSKeyArn, location_name: "KMSKeyArn"))
     UpdateEventSourceMappingRequest.add_member(:metrics_config, Shapes::ShapeRef.new(shape: EventSourceMappingMetricsConfig, location_name: "MetricsConfig"))
+    UpdateEventSourceMappingRequest.add_member(:logging_config, Shapes::ShapeRef.new(shape: EventSourceMappingLoggingConfig, location_name: "LoggingConfig"))
     UpdateEventSourceMappingRequest.add_member(:provisioned_poller_config, Shapes::ShapeRef.new(shape: ProvisionedPollerConfig, location_name: "ProvisionedPollerConfig"))
     UpdateEventSourceMappingRequest.struct_class = Types::UpdateEventSourceMappingRequest
 

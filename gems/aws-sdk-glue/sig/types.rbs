@@ -180,6 +180,12 @@ module Aws::Glue
       SENSITIVE: [:password]
     end
 
+    class BasicAuthenticationProperties
+      attr_accessor username: Types::ConnectorProperty
+      attr_accessor password: Types::ConnectorProperty
+      SENSITIVE: []
+    end
+
     class BasicCatalogTarget
       attr_accessor name: ::String
       attr_accessor inputs: ::Array[::String]
@@ -698,6 +704,17 @@ module Aws::Glue
       SENSITIVE: []
     end
 
+    class ClientCredentialsProperties
+      attr_accessor token_url: Types::ConnectorProperty
+      attr_accessor request_method: ("GET" | "POST")
+      attr_accessor content_type: ("APPLICATION_JSON" | "URL_ENCODED")
+      attr_accessor client_id: Types::ConnectorProperty
+      attr_accessor client_secret: Types::ConnectorProperty
+      attr_accessor scope: Types::ConnectorProperty
+      attr_accessor token_url_parameters: ::Array[Types::ConnectorProperty]
+      SENSITIVE: []
+    end
+
     class CloudWatchEncryption
       attr_accessor cloud_watch_encryption_mode: ("DISABLED" | "SSE-KMS")
       attr_accessor kms_key_arn: ::String
@@ -1033,6 +1050,12 @@ module Aws::Glue
       SENSITIVE: []
     end
 
+    class ConnectionPropertiesConfiguration
+      attr_accessor url: Types::ConnectorProperty
+      attr_accessor additional_request_parameters: ::Array[Types::ConnectorProperty]
+      SENSITIVE: []
+    end
+
     class ConnectionTypeBrief
       attr_accessor connection_type: ("JDBC" | "SFTP" | "MONGODB" | "KAFKA" | "NETWORK" | "MARKETPLACE" | "CUSTOM" | "SALESFORCE" | "VIEW_VALIDATION_REDSHIFT" | "VIEW_VALIDATION_ATHENA" | "GOOGLEADS" | "GOOGLESHEETS" | "GOOGLEANALYTICS4" | "SERVICENOW" | "MARKETO" | "SAPODATA" | "ZENDESK" | "JIRACLOUD" | "NETSUITEERP" | "HUBSPOT" | "FACEBOOKADS" | "INSTAGRAMADS" | "ZOHOCRM" | "SALESFORCEPARDOT" | "SALESFORCEMARKETINGCLOUD" | "ADOBEANALYTICS" | "SLACK" | "LINKEDIN" | "MIXPANEL" | "ASANA" | "STRIPE" | "SMARTSHEET" | "DATADOG" | "WOOCOMMERCE" | "INTERCOM" | "SNAPCHATADS" | "PAYPAL" | "QUICKBOOKS" | "FACEBOOKPAGEINSIGHTS" | "FRESHDESK" | "TWILIO" | "DOCUSIGNMONITOR" | "FRESHSALES" | "ZOOM" | "GOOGLESEARCHCONSOLE" | "SALESFORCECOMMERCECLOUD" | "SAPCONCUR" | "DYNATRACE" | "MICROSOFTDYNAMIC365FINANCEANDOPS" | "MICROSOFTTEAMS" | "BLACKBAUDRAISEREDGENXT" | "MAILCHIMP" | "GITLAB" | "PENDO" | "PRODUCTBOARD" | "CIRCLECI" | "PIPEDIVE" | "SENDGRID" | "AZURECOSMOS" | "AZURESQL" | "BIGQUERY" | "BLACKBAUD" | "CLOUDERAHIVE" | "CLOUDERAIMPALA" | "CLOUDWATCH" | "CLOUDWATCHMETRICS" | "CMDB" | "DATALAKEGEN2" | "DB2" | "DB2AS400" | "DOCUMENTDB" | "DOMO" | "DYNAMODB" | "GOOGLECLOUDSTORAGE" | "HBASE" | "KUSTOMER" | "MICROSOFTDYNAMICS365CRM" | "MONDAY" | "MYSQL" | "OKTA" | "OPENSEARCH" | "ORACLE" | "PIPEDRIVE" | "POSTGRESQL" | "SAPHANA" | "SQLSERVER" | "SYNAPSE" | "TERADATA" | "TERADATANOS" | "TIMESTREAM" | "TPCDS" | "VERTICA")
       attr_accessor display_name: ::String
@@ -1058,6 +1081,29 @@ module Aws::Glue
       SENSITIVE: []
     end
 
+    class ConnectorAuthenticationConfiguration
+      attr_accessor authentication_types: ::Array[("BASIC" | "OAUTH2" | "CUSTOM" | "IAM")]
+      attr_accessor o_auth_2_properties: Types::ConnectorOAuth2Properties
+      attr_accessor basic_authentication_properties: Types::BasicAuthenticationProperties
+      attr_accessor custom_authentication_properties: Types::CustomAuthenticationProperties
+      SENSITIVE: []
+    end
+
+    class ConnectorAuthorizationCodeProperties
+      attr_accessor authorization_code_url: Types::ConnectorProperty
+      attr_accessor authorization_code: Types::ConnectorProperty
+      attr_accessor redirect_uri: Types::ConnectorProperty
+      attr_accessor token_url: Types::ConnectorProperty
+      attr_accessor request_method: ("GET" | "POST")
+      attr_accessor content_type: ("APPLICATION_JSON" | "URL_ENCODED")
+      attr_accessor client_id: Types::ConnectorProperty
+      attr_accessor client_secret: Types::ConnectorProperty
+      attr_accessor scope: Types::ConnectorProperty
+      attr_accessor prompt: Types::ConnectorProperty
+      attr_accessor token_url_parameters: ::Array[Types::ConnectorProperty]
+      SENSITIVE: []
+    end
+
     class ConnectorDataSource
       attr_accessor name: ::String
       attr_accessor connection_type: ::String
@@ -1071,6 +1117,25 @@ module Aws::Glue
       attr_accessor connection_type: ::String
       attr_accessor data: ::Hash[::String, ::String]
       attr_accessor inputs: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ConnectorOAuth2Properties
+      attr_accessor o_auth_2_grant_type: ("CLIENT_CREDENTIALS" | "JWT_BEARER" | "AUTHORIZATION_CODE")
+      attr_accessor client_credentials_properties: Types::ClientCredentialsProperties
+      attr_accessor jwt_bearer_properties: Types::JWTBearerProperties
+      attr_accessor authorization_code_properties: Types::ConnectorAuthorizationCodeProperties
+      SENSITIVE: []
+    end
+
+    class ConnectorProperty
+      attr_accessor name: ::String
+      attr_accessor key_override: ::String
+      attr_accessor required: bool
+      attr_accessor default_value: ::String
+      attr_accessor allowed_values: ::Array[::String]
+      attr_accessor property_location: ("HEADER" | "BODY" | "QUERY_PARAM" | "PATH")
+      attr_accessor property_type: ("USER_INPUT" | "SECRET" | "READ_ONLY" | "UNUSED" | "SECRET_OR_USER_INPUT")
       SENSITIVE: []
     end
 
@@ -1721,6 +1786,17 @@ module Aws::Glue
       SENSITIVE: []
     end
 
+    class CursorConfiguration
+      attr_accessor next_page: Types::ExtractedParameter
+      attr_accessor limit_parameter: Types::ExtractedParameter
+      SENSITIVE: []
+    end
+
+    class CustomAuthenticationProperties
+      attr_accessor authentication_parameters: ::Array[Types::ConnectorProperty]
+      SENSITIVE: []
+    end
+
     class CustomCode
       attr_accessor name: ::String
       attr_accessor inputs: ::Array[::String]
@@ -2100,6 +2176,14 @@ module Aws::Glue
     class DeleteConnectionResponse < Aws::EmptyStructure
     end
 
+    class DeleteConnectionTypeRequest
+      attr_accessor connection_type: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteConnectionTypeResponse < Aws::EmptyStructure
+    end
+
     class DeleteCrawlerRequest
       attr_accessor name: ::String
       SENSITIVE: []
@@ -2388,6 +2472,7 @@ module Aws::Glue
       attr_accessor athena_connection_properties: ::Hash[::String, Types::Property]
       attr_accessor python_connection_properties: ::Hash[::String, Types::Property]
       attr_accessor spark_connection_properties: ::Hash[::String, Types::Property]
+      attr_accessor rest_configuration: Types::RestConfiguration
       SENSITIVE: []
     end
 
@@ -2602,6 +2687,12 @@ module Aws::Glue
       SENSITIVE: []
     end
 
+    class EntityConfiguration
+      attr_accessor source_configuration: Types::SourceConfiguration
+      attr_accessor schema: ::Hash[::String, Types::FieldDefinition]
+      SENSITIVE: []
+    end
+
     class EntityNotFoundException
       attr_accessor message: ::String
       attr_accessor from_federation_source: bool
@@ -2671,6 +2762,14 @@ module Aws::Glue
       SENSITIVE: []
     end
 
+    class ExtractedParameter
+      attr_accessor key: ::String
+      attr_accessor default_value: ::String
+      attr_accessor property_location: ("HEADER" | "BODY" | "QUERY_PARAM" | "PATH")
+      attr_accessor value: Types::ResponseExtractionMapping
+      SENSITIVE: []
+    end
+
     class FederatedCatalog
       attr_accessor identifier: ::String
       attr_accessor connection_name: ::String
@@ -2714,7 +2813,7 @@ module Aws::Glue
       attr_accessor field_name: ::String
       attr_accessor label: ::String
       attr_accessor description: ::String
-      attr_accessor field_type: ("INT" | "SMALLINT" | "BIGINT" | "FLOAT" | "LONG" | "DATE" | "BOOLEAN" | "MAP" | "ARRAY" | "STRING" | "TIMESTAMP" | "DECIMAL" | "BYTE" | "SHORT" | "DOUBLE" | "STRUCT")
+      attr_accessor field_type: ("INT" | "SMALLINT" | "BIGINT" | "FLOAT" | "LONG" | "DATE" | "BOOLEAN" | "MAP" | "ARRAY" | "STRING" | "TIMESTAMP" | "DECIMAL" | "BYTE" | "SHORT" | "DOUBLE" | "STRUCT" | "BINARY" | "UNION")
       attr_accessor is_primary_key: bool
       attr_accessor is_nullable: bool
       attr_accessor is_retrievable: bool
@@ -2729,6 +2828,12 @@ module Aws::Glue
       attr_accessor parent_field: ::String
       attr_accessor native_data_type: ::String
       attr_accessor custom_properties: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class FieldDefinition
+      attr_accessor name: ::String
+      attr_accessor field_data_type: ("INT" | "SMALLINT" | "BIGINT" | "FLOAT" | "LONG" | "DATE" | "BOOLEAN" | "MAP" | "ARRAY" | "STRING" | "TIMESTAMP" | "DECIMAL" | "BYTE" | "SHORT" | "DOUBLE" | "STRUCT" | "BINARY" | "UNION")
       SENSITIVE: []
     end
 
@@ -4319,6 +4424,15 @@ module Aws::Glue
       SENSITIVE: []
     end
 
+    class JWTBearerProperties
+      attr_accessor token_url: Types::ConnectorProperty
+      attr_accessor request_method: ("GET" | "POST")
+      attr_accessor content_type: ("APPLICATION_JSON" | "URL_ENCODED")
+      attr_accessor jwt_token: Types::ConnectorProperty
+      attr_accessor token_url_parameters: ::Array[Types::ConnectorProperty]
+      SENSITIVE: []
+    end
+
     class JdbcTarget
       attr_accessor connection_name: ::String
       attr_accessor path: ::String
@@ -5194,6 +5308,12 @@ module Aws::Glue
       SENSITIVE: []
     end
 
+    class OffsetConfiguration
+      attr_accessor offset_parameter: Types::ExtractedParameter
+      attr_accessor limit_parameter: Types::ExtractedParameter
+      SENSITIVE: []
+    end
+
     class OpenTableFormatInput
       attr_accessor iceberg_input: Types::IcebergInput
       SENSITIVE: []
@@ -5269,6 +5389,12 @@ module Aws::Glue
       attr_accessor num_right_chars_to_exclude: ::Integer
       attr_accessor detection_parameters: ::String
       attr_accessor detection_sensitivity: ::String
+      SENSITIVE: []
+    end
+
+    class PaginationConfiguration
+      attr_accessor cursor_configuration: Types::CursorConfiguration
+      attr_accessor offset_configuration: Types::OffsetConfiguration
       SENSITIVE: []
     end
 
@@ -5378,6 +5504,8 @@ module Aws::Glue
       attr_accessor property_types: ::Array[("USER_INPUT" | "SECRET" | "READ_ONLY" | "UNUSED" | "SECRET_OR_USER_INPUT")]
       attr_accessor allowed_values: ::Array[Types::AllowedValue]
       attr_accessor data_operation_scopes: ::Array[("READ" | "WRITE")]
+      attr_accessor key_override: ::String
+      attr_accessor property_location: ("HEADER" | "BODY" | "QUERY_PARAM" | "PATH")
       SENSITIVE: []
     end
 
@@ -5527,6 +5655,22 @@ module Aws::Glue
       SENSITIVE: []
     end
 
+    class RegisterConnectionTypeRequest
+      attr_accessor connection_type: ::String
+      attr_accessor integration_type: ("REST")
+      attr_accessor description: ::String
+      attr_accessor connection_properties: Types::ConnectionPropertiesConfiguration
+      attr_accessor connector_authentication_configuration: Types::ConnectorAuthenticationConfiguration
+      attr_accessor rest_configuration: Types::RestConfiguration
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class RegisterConnectionTypeResponse
+      attr_accessor connection_type_arn: ::String
+      SENSITIVE: []
+    end
+
     class RegisterSchemaVersionInput
       attr_accessor schema_id: Types::SchemaId
       attr_accessor schema_definition: ::String
@@ -5620,6 +5764,25 @@ module Aws::Glue
     class ResourceUri
       attr_accessor resource_type: ("JAR" | "FILE" | "ARCHIVE")
       attr_accessor uri: ::String
+      SENSITIVE: []
+    end
+
+    class ResponseConfiguration
+      attr_accessor result_path: ::String
+      attr_accessor error_path: ::String
+      SENSITIVE: []
+    end
+
+    class ResponseExtractionMapping
+      attr_accessor content_path: ::String
+      attr_accessor header_key: ::String
+      SENSITIVE: []
+    end
+
+    class RestConfiguration
+      attr_accessor global_source_configuration: Types::SourceConfiguration
+      attr_accessor validation_endpoint_configuration: Types::SourceConfiguration
+      attr_accessor entity_configurations: ::Hash[::String, Types::EntityConfiguration]
       SENSITIVE: []
     end
 
@@ -6176,6 +6339,15 @@ module Aws::Glue
     class SortCriterion
       attr_accessor field_name: ::String
       attr_accessor sort: ("ASC" | "DESC")
+      SENSITIVE: []
+    end
+
+    class SourceConfiguration
+      attr_accessor request_method: ("GET" | "POST")
+      attr_accessor request_path: ::String
+      attr_accessor request_parameters: ::Array[Types::ConnectorProperty]
+      attr_accessor response_configuration: Types::ResponseConfiguration
+      attr_accessor pagination_configuration: Types::PaginationConfiguration
       SENSITIVE: []
     end
 

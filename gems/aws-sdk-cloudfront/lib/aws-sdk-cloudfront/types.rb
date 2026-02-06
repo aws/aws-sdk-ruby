@@ -3717,6 +3717,11 @@ module Aws::CloudFront
     #   choose `dualstack` to help optimize reliability.
     #   @return [String]
     #
+    # @!attribute [rw] origin_mtls_config
+    #   Configures mutual TLS authentication between CloudFront and your
+    #   origin server.
+    #   @return [Types::OriginMtlsConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CustomOriginConfig AWS API Documentation
     #
     class CustomOriginConfig < Struct.new(
@@ -3726,7 +3731,8 @@ module Aws::CloudFront
       :origin_ssl_protocols,
       :origin_read_timeout,
       :origin_keepalive_timeout,
-      :ip_address_type)
+      :ip_address_type,
+      :origin_mtls_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11738,6 +11744,23 @@ module Aws::CloudFront
     class OriginGroups < Struct.new(
       :quantity,
       :items)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configures mutual TLS authentication between CloudFront and your
+    # origin server.
+    #
+    # @!attribute [rw] client_certificate_arn
+    #   The Amazon Resource Name (ARN) of the client certificate stored in
+    #   Amazon Web Services Certificate Manager (ACM) that CloudFront uses
+    #   to authenticate with your origin using Mutual TLS.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/OriginMtlsConfig AWS API Documentation
+    #
+    class OriginMtlsConfig < Struct.new(
+      :client_certificate_arn)
       SENSITIVE = []
       include Aws::Structure
     end

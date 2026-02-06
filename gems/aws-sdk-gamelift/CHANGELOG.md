@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.119.0 (2026-01-29)
+------------------
+
+* Feature - Amazon GameLift Servers now supports automatic scaling to and from zero instances based on game session activity. Fleets scale down to zero following a defined period of no game session activity and scale up from zero when game sessions are requested, providing an option for cost optimization.
+
+1.118.0 (2026-01-22)
+------------------
+
+* Feature - Amazon GameLift Servers Realtime now supports Node.js 24.x runtime on the Amazon Linux 2023 operating system.
+
+1.117.0 (2026-01-16)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.116.0 (2026-01-08)
 ------------------
 

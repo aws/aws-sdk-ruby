@@ -30,6 +30,7 @@ module Aws::LakeFormation
   # * {AccessDeniedException}
   # * {AlreadyExistsException}
   # * {ConcurrentModificationException}
+  # * {ConflictException}
   # * {EntityNotFoundException}
   # * {ExpiredException}
   # * {GlueEncryptionException}
@@ -87,6 +88,21 @@ module Aws::LakeFormation
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::LakeFormation::Types::ConcurrentModificationException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class ConflictException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::LakeFormation::Types::ConflictException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

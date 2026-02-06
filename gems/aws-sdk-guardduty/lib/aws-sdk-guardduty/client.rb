@@ -3684,7 +3684,7 @@ module Aws::GuardDuty
     #   resp.scanned_resources[0].scanned_resource_arn #=> String
     #   resp.scanned_resources[0].scanned_resource_type #=> String, one of "EBS_RECOVERY_POINT", "EBS_SNAPSHOT", "EBS_VOLUME", "EC2_AMI", "EC2_INSTANCE", "EC2_RECOVERY_POINT", "S3_RECOVERY_POINT", "S3_BUCKET"
     #   resp.scanned_resources[0].scanned_resource_status #=> String, one of "RUNNING", "COMPLETED", "COMPLETED_WITH_ISSUES", "FAILED", "SKIPPED"
-    #   resp.scanned_resources[0].scan_status_reason #=> String, one of "ACCESS_DENIED", "RESOURCE_NOT_FOUND", "SNAPSHOT_SIZE_LIMIT_EXCEEDED", "RESOURCE_UNAVAILABLE", "INCONSISTENT_SOURCE", "INCREMENTAL_NO_DIFFERENCE", "NO_EBS_VOLUMES_FOUND", "UNSUPPORTED_PRODUCT_CODE_TYPE", "AMI_SNAPSHOT_LIMIT_EXCEEDED", "UNRELATED_RESOURCES", "BASE_RESOURCE_NOT_SCANNED", "BASE_CREATED_AFTER_TARGET", "UNSUPPORTED_FOR_INCREMENTAL", "UNSUPPORTED_AMI", "UNSUPPORTED_SNAPSHOT", "UNSUPPORTED_COMPOSITE_RECOVERY_POINT"
+    #   resp.scanned_resources[0].scan_status_reason #=> String, one of "ACCESS_DENIED", "RESOURCE_NOT_FOUND", "SNAPSHOT_SIZE_LIMIT_EXCEEDED", "RESOURCE_UNAVAILABLE", "INCONSISTENT_SOURCE", "INCREMENTAL_NO_DIFFERENCE", "NO_EBS_VOLUMES_FOUND", "UNSUPPORTED_PRODUCT_CODE_TYPE", "AMI_SNAPSHOT_LIMIT_EXCEEDED", "UNRELATED_RESOURCES", "BASE_RESOURCE_NOT_SCANNED", "BASE_CREATED_AFTER_TARGET", "UNSUPPORTED_FOR_INCREMENTAL", "UNSUPPORTED_AMI", "UNSUPPORTED_SNAPSHOT", "UNSUPPORTED_COMPOSITE_RECOVERY_POINT", "ALL_FILES_SKIPPED_OR_FAILED"
     #   resp.scanned_resources[0].resource_details.ebs_volume.volume_arn #=> String
     #   resp.scanned_resources[0].resource_details.ebs_volume.volume_type #=> String
     #   resp.scanned_resources[0].resource_details.ebs_volume.device_name #=> String
@@ -3701,7 +3701,7 @@ module Aws::GuardDuty
     #   resp.scan_configuration.recovery_point.backup_vault_name #=> String
     #   resp.scan_category #=> String, one of "FULL_SCAN", "INCREMENTAL_SCAN"
     #   resp.scan_status #=> String, one of "RUNNING", "COMPLETED", "COMPLETED_WITH_ISSUES", "FAILED", "SKIPPED"
-    #   resp.scan_status_reason #=> String, one of "ACCESS_DENIED", "RESOURCE_NOT_FOUND", "SNAPSHOT_SIZE_LIMIT_EXCEEDED", "RESOURCE_UNAVAILABLE", "INCONSISTENT_SOURCE", "INCREMENTAL_NO_DIFFERENCE", "NO_EBS_VOLUMES_FOUND", "UNSUPPORTED_PRODUCT_CODE_TYPE", "AMI_SNAPSHOT_LIMIT_EXCEEDED", "UNRELATED_RESOURCES", "BASE_RESOURCE_NOT_SCANNED", "BASE_CREATED_AFTER_TARGET", "UNSUPPORTED_FOR_INCREMENTAL", "UNSUPPORTED_AMI", "UNSUPPORTED_SNAPSHOT", "UNSUPPORTED_COMPOSITE_RECOVERY_POINT"
+    #   resp.scan_status_reason #=> String, one of "ACCESS_DENIED", "RESOURCE_NOT_FOUND", "SNAPSHOT_SIZE_LIMIT_EXCEEDED", "RESOURCE_UNAVAILABLE", "INCONSISTENT_SOURCE", "INCREMENTAL_NO_DIFFERENCE", "NO_EBS_VOLUMES_FOUND", "UNSUPPORTED_PRODUCT_CODE_TYPE", "AMI_SNAPSHOT_LIMIT_EXCEEDED", "UNRELATED_RESOURCES", "BASE_RESOURCE_NOT_SCANNED", "BASE_CREATED_AFTER_TARGET", "UNSUPPORTED_FOR_INCREMENTAL", "UNSUPPORTED_AMI", "UNSUPPORTED_SNAPSHOT", "UNSUPPORTED_COMPOSITE_RECOVERY_POINT", "ALL_FILES_SKIPPED_OR_FAILED"
     #   resp.scan_type #=> String, one of "BACKUP_INITIATED", "ON_DEMAND", "GUARDDUTY_INITIATED"
     #   resp.scan_started_at #=> Time
     #   resp.scan_completed_at #=> Time
@@ -6517,7 +6517,7 @@ module Aws::GuardDuty
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-guardduty'
-      context[:gem_version] = '1.141.0'
+      context[:gem_version] = '1.143.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

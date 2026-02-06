@@ -1888,6 +1888,11 @@ module Aws::MediaLive
     #   Linked Channel Settings for this channel.
     #   @return [Types::DescribeLinkedChannelSettings]
     #
+    # @!attribute [rw] channel_security_groups
+    #   A list of IDs for all the Input Security Groups attached to the
+    #   channel.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/Channel AWS API Documentation
     #
     class Channel < Struct.new(
@@ -1911,7 +1916,8 @@ module Aws::MediaLive
       :vpc,
       :anywhere_settings,
       :channel_engine_version,
-      :linked_channel_settings)
+      :linked_channel_settings,
+      :channel_security_groups)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2027,6 +2033,11 @@ module Aws::MediaLive
     #   Linked Channel Settings for this channel.
     #   @return [Types::DescribeLinkedChannelSettings]
     #
+    # @!attribute [rw] channel_security_groups
+    #   A list of IDs for all the Input Security Groups attached to the
+    #   channel.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ChannelSummary AWS API Documentation
     #
     class ChannelSummary < Struct.new(
@@ -2049,7 +2060,8 @@ module Aws::MediaLive
       :anywhere_settings,
       :channel_engine_version,
       :used_channel_engine_versions,
-      :linked_channel_settings)
+      :linked_channel_settings,
+      :channel_security_groups)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2214,6 +2226,11 @@ module Aws::MediaLive
     #   The linked channel settings for the channel.
     #   @return [Types::LinkedChannelSettings]
     #
+    # @!attribute [rw] channel_security_groups
+    #   A list of IDs for all the Input Security Groups attached to the
+    #   channel.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CreateChannel AWS API Documentation
     #
     class CreateChannel < Struct.new(
@@ -2234,7 +2251,8 @@ module Aws::MediaLive
       :anywhere_settings,
       :channel_engine_version,
       :dry_run,
-      :linked_channel_settings)
+      :linked_channel_settings,
+      :channel_security_groups)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2304,6 +2322,9 @@ module Aws::MediaLive
     #   Configuration for linked channel relationships
     #   @return [Types::LinkedChannelSettings]
     #
+    # @!attribute [rw] channel_security_groups
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CreateChannelRequest AWS API Documentation
     #
     class CreateChannelRequest < Struct.new(
@@ -2324,7 +2345,8 @@ module Aws::MediaLive
       :anywhere_settings,
       :channel_engine_version,
       :dry_run,
-      :linked_channel_settings)
+      :linked_channel_settings,
+      :channel_security_groups)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2500,9 +2522,9 @@ module Aws::MediaLive
     #   @return [Types::InputVpcRequest]
     #
     # @!attribute [rw] srt_settings
-    #   Configures the sources for this SRT input. For a single-pipeline
-    #   input, include one srtCallerSource in the array. For a
-    #   standard-pipeline input, include two srtCallerSource.
+    #   Configures the settings for SRT inputs. Provide either
+    #   srtCallerSources (for SRT\_CALLER type) OR srtListenerSettings (for
+    #   SRT\_LISTENER type), not both.
     #   @return [Types::SrtSettingsRequest]
     #
     # @!attribute [rw] input_network_location
@@ -2932,6 +2954,9 @@ module Aws::MediaLive
     #   Linked channel configuration details
     #   @return [Types::DescribeLinkedChannelSettings]
     #
+    # @!attribute [rw] channel_security_groups
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DeleteChannelResponse AWS API Documentation
     #
     class DeleteChannelResponse < Struct.new(
@@ -2955,7 +2980,8 @@ module Aws::MediaLive
       :vpc,
       :anywhere_settings,
       :channel_engine_version,
-      :linked_channel_settings)
+      :linked_channel_settings,
+      :channel_security_groups)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3334,6 +3360,9 @@ module Aws::MediaLive
     #   Linked channel configuration details
     #   @return [Types::DescribeLinkedChannelSettings]
     #
+    # @!attribute [rw] channel_security_groups
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeChannelResponse AWS API Documentation
     #
     class DescribeChannelResponse < Struct.new(
@@ -3357,7 +3386,8 @@ module Aws::MediaLive
       :vpc,
       :anywhere_settings,
       :channel_engine_version,
-      :linked_channel_settings)
+      :linked_channel_settings,
+      :channel_security_groups)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3576,7 +3606,7 @@ module Aws::MediaLive
     #   @return [String]
     #
     # @!attribute [rw] srt_settings
-    #   The configured sources for this SRT input.
+    #   The configured settings for SRT inputs (caller and listener).
     #   @return [Types::SrtSettings]
     #
     # @!attribute [rw] input_network_location
@@ -3660,6 +3690,9 @@ module Aws::MediaLive
     # @!attribute [rw] whitelist_rules
     #   @return [Array<Types::InputWhitelistRule>]
     #
+    # @!attribute [rw] channels
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeInputSecurityGroupResponse AWS API Documentation
     #
     class DescribeInputSecurityGroupResponse < Struct.new(
@@ -3668,7 +3701,8 @@ module Aws::MediaLive
       :inputs,
       :state,
       :tags,
-      :whitelist_rules)
+      :whitelist_rules,
+      :channels)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7623,6 +7657,11 @@ module Aws::MediaLive
     #   Whitelist rules and their sync status
     #   @return [Array<Types::InputWhitelistRule>]
     #
+    # @!attribute [rw] channels
+    #   The list of channels currently using this Input Security Group as
+    #   their channel security group.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/InputSecurityGroup AWS API Documentation
     #
     class InputSecurityGroup < Struct.new(
@@ -7631,7 +7670,8 @@ module Aws::MediaLive
       :inputs,
       :state,
       :tags,
-      :whitelist_rules)
+      :whitelist_rules,
+      :channels)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10501,11 +10541,16 @@ module Aws::MediaLive
     #   Pipeline Locking Settings
     #   @return [Types::PipelineLockingSettings]
     #
+    # @!attribute [rw] disabled_locking_settings
+    #   Disabled Locking Settings
+    #   @return [Types::DisabledLockingSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/OutputLockingSettings AWS API Documentation
     #
     class OutputLockingSettings < Struct.new(
       :epoch_locking_settings,
-      :pipeline_locking_settings)
+      :pipeline_locking_settings,
+      :disabled_locking_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10645,10 +10690,20 @@ module Aws::MediaLive
     #   will not be used for any locking decisions.
     #   @return [String]
     #
+    # @!attribute [rw] custom_epoch
+    #   Optional. Only applies to CMAF Ingest Output Group and MediaPackage
+    #   V2 Output Group Only. Enter a value here to use a custom epoch,
+    #   instead of the standard epoch (which started at 1970-01-01T00:00:00
+    #   UTC). Specify the start time of the custom epoch, in
+    #   YYYY-MM-DDTHH:MM:SS in UTC. The time must be 2000-01-01T00:00:00 or
+    #   later. Always set the MM:SS portion to 00:00.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/PipelineLockingSettings AWS API Documentation
     #
     class PipelineLockingSettings < Struct.new(
-      :pipeline_locking_method)
+      :pipeline_locking_method,
+      :custom_epoch)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11824,6 +11879,9 @@ module Aws::MediaLive
     #   Linked channel configuration details
     #   @return [Types::DescribeLinkedChannelSettings]
     #
+    # @!attribute [rw] channel_security_groups
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/StartChannelResponse AWS API Documentation
     #
     class StartChannelResponse < Struct.new(
@@ -11847,7 +11905,8 @@ module Aws::MediaLive
       :vpc,
       :anywhere_settings,
       :channel_engine_version,
-      :linked_channel_settings)
+      :linked_channel_settings,
+      :channel_security_groups)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -12276,6 +12335,9 @@ module Aws::MediaLive
     #   Linked channel configuration details
     #   @return [Types::DescribeLinkedChannelSettings]
     #
+    # @!attribute [rw] channel_security_groups
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/StopChannelResponse AWS API Documentation
     #
     class StopChannelResponse < Struct.new(
@@ -12299,7 +12361,8 @@ module Aws::MediaLive
       :vpc,
       :anywhere_settings,
       :channel_engine_version,
-      :linked_channel_settings)
+      :linked_channel_settings,
+      :channel_security_groups)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -12909,6 +12972,11 @@ module Aws::MediaLive
     #   The linked channel settings for the channel.
     #   @return [Types::LinkedChannelSettings]
     #
+    # @!attribute [rw] channel_security_groups
+    #   A list of IDs for all the Input Security Groups attached to the
+    #   channel.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateChannel AWS API Documentation
     #
     class UpdateChannel < Struct.new(
@@ -12924,7 +12992,8 @@ module Aws::MediaLive
       :channel_engine_version,
       :dry_run,
       :anywhere_settings,
-      :linked_channel_settings)
+      :linked_channel_settings,
+      :channel_security_groups)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13024,6 +13093,9 @@ module Aws::MediaLive
     #   Configuration for linked channel relationships
     #   @return [Types::LinkedChannelSettings]
     #
+    # @!attribute [rw] channel_security_groups
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateChannelRequest AWS API Documentation
     #
     class UpdateChannelRequest < Struct.new(
@@ -13040,7 +13112,8 @@ module Aws::MediaLive
       :channel_engine_version,
       :dry_run,
       :anywhere_settings,
-      :linked_channel_settings)
+      :linked_channel_settings,
+      :channel_security_groups)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13318,9 +13391,9 @@ module Aws::MediaLive
     #   @return [Array<Types::InputSourceRequest>]
     #
     # @!attribute [rw] srt_settings
-    #   Configures the sources for this SRT input. For a single-pipeline
-    #   input, include one srtCallerSource in the array. For a
-    #   standard-pipeline input, include two srtCallerSource.
+    #   Configures the settings for SRT inputs. Provide either
+    #   srtCallerSources (for SRT\_CALLER type) OR srtListenerSettings (for
+    #   SRT\_LISTENER type), not both.
     #   @return [Types::SrtSettingsRequest]
     #
     # @!attribute [rw] multicast_settings
@@ -14124,6 +14197,9 @@ module Aws::MediaLive
     #   Linked channel configuration details
     #   @return [Types::DescribeLinkedChannelSettings]
     #
+    # @!attribute [rw] channel_security_groups
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/RestartChannelPipelinesResponse AWS API Documentation
     #
     class RestartChannelPipelinesResponse < Struct.new(
@@ -14148,7 +14224,8 @@ module Aws::MediaLive
       :vpc,
       :anywhere_settings,
       :channel_engine_version,
-      :linked_channel_settings)
+      :linked_channel_settings,
+      :channel_security_groups)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -18354,30 +18431,42 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
-    # The configured sources for this SRT input.
+    # The configured settings for SRT inputs (caller and listener).
     #
     # @!attribute [rw] srt_caller_sources
     #   @return [Array<Types::SrtCallerSource>]
     #
+    # @!attribute [rw] srt_listener_settings
+    #   Settings for SRT Listener input.
+    #   @return [Types::SrtListenerSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/SrtSettings AWS API Documentation
     #
     class SrtSettings < Struct.new(
-      :srt_caller_sources)
+      :srt_caller_sources,
+      :srt_listener_settings)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # Configures the sources for this SRT input. For a single-pipeline
-    # input, include one srtCallerSource in the array. For a
-    # standard-pipeline input, include two srtCallerSource.
+    # Configures the settings for SRT inputs. Provide either
+    # srtCallerSources (for SRT\_CALLER type) OR srtListenerSettings (for
+    # SRT\_LISTENER type), not both.
     #
     # @!attribute [rw] srt_caller_sources
     #   @return [Array<Types::SrtCallerSourceRequest>]
     #
+    # @!attribute [rw] srt_listener_settings
+    #   Configuration for SRT Listener input. Encryption is REQUIRED for all
+    #   SRT Listener inputs for security reasons. You must provide
+    #   decryption settings including algorithm and passphrase secret ARN.
+    #   @return [Types::SrtListenerSettingsRequest]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/SrtSettingsRequest AWS API Documentation
     #
     class SrtSettingsRequest < Struct.new(
-      :srt_caller_sources)
+      :srt_caller_sources,
+      :srt_listener_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -18581,6 +18670,21 @@ module Aws::MediaLive
     #   quantization in the MediaLive user guide.
     #   @return [String]
     #
+    # @!attribute [rw] timecode_insertion
+    #   Controls how MediaLive inserts timecodes into the video output
+    #   encode. DISABLED: Do not insert timecodes. METADATA\_OBU: Include
+    #   timecodes. MediaLive inserts timecode metadata based on the timecode
+    #   from the source specified in the Timecode Config property. The
+    #   timecode metadata is a metadata OBU (Open Bitstream Unit) of type
+    #   METADATA\_TYPE\_TIMECODE, in accordance with
+    #   https://aomediacodec.github.io/av1-spec/#metadata-timecode-syntax.
+    #   @return [String]
+    #
+    # @!attribute [rw] bit_depth
+    #   Specifies the bit depth for the output encode. Choose a value. Or
+    #   leave the field empty to use the default, which is 8 bit.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/Av1Settings AWS API Documentation
     #
     class Av1Settings < Struct.new(
@@ -18605,7 +18709,9 @@ module Aws::MediaLive
       :rate_control_mode,
       :min_bitrate,
       :spatial_aq,
-      :temporal_aq)
+      :temporal_aq,
+      :timecode_insertion,
+      :bit_depth)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -20594,12 +20700,18 @@ module Aws::MediaLive
     #   running Elemental anywhere.
     #   @return [String]
     #
+    # @!attribute [rw] physical_interface_ip_addresses
+    #   The IP addresses associated with the physical interface on the node
+    #   hardware.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/NodeInterfaceMapping AWS API Documentation
     #
     class NodeInterfaceMapping < Struct.new(
       :logical_interface_name,
       :network_interface_mode,
-      :physical_interface_name)
+      :physical_interface_name,
+      :physical_interface_ip_addresses)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -20722,12 +20834,26 @@ module Aws::MediaLive
     #   A URL specifying a destination
     #   @return [String]
     #
+    # @!attribute [rw] connection_mode
+    #   Specifies the mode the output should use for connection
+    #   establishment. CALLER mode requires URL, LISTENER mode requires
+    #   port.
+    #   @return [String]
+    #
+    # @!attribute [rw] listener_port
+    #   Port number for listener mode connections (required when
+    #   connectionMode is LISTENER, must not be provided when connectionMode
+    #   is CALLER).
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/SrtOutputDestinationSettings AWS API Documentation
     #
     class SrtOutputDestinationSettings < Struct.new(
       :encryption_passphrase_secret_arn,
       :stream_id,
-      :url)
+      :url,
+      :connection_mode,
+      :listener_port)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -22623,6 +22749,121 @@ module Aws::MediaLive
     #
     class MediaPackageAdditionalDestinations < Struct.new(
       :destination)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Disabled Locking Settings
+    #
+    # @!attribute [rw] custom_epoch
+    #   Optional. Only applies to CMAF Ingest Output Group and MediaPackage
+    #   V2 Output Group. Enter a value here to use a custom epoch, instead
+    #   of the standard epoch (which started at 1970-01-01T00:00:00 UTC).
+    #   Specify the start time of the custom epoch, in YYYY-MM-DDTHH:MM:SS
+    #   in UTC. The time must be 2000-01-01T00:00:00 or later. Always set
+    #   the MM:SS portion to 00:00.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DisabledLockingSettings AWS API Documentation
+    #
+    class DisabledLockingSettings < Struct.new(
+      :custom_epoch)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Decryption settings for SRT listener. If present, both algorithm and
+    # passphraseSecretArn are required.
+    #
+    # @!attribute [rw] algorithm
+    #   The algorithm used to decrypt content.
+    #   @return [String]
+    #
+    # @!attribute [rw] passphrase_secret_arn
+    #   The ARN for the secret in Secrets Manager that holds the passphrase
+    #   for decryption.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/SrtListenerDecryption AWS API Documentation
+    #
+    class SrtListenerDecryption < Struct.new(
+      :algorithm,
+      :passphrase_secret_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Decryption settings. If specified, both algorithm and
+    # passphraseSecretArn are required.
+    #
+    # @!attribute [rw] algorithm
+    #   Required. The decryption algorithm.
+    #   @return [String]
+    #
+    # @!attribute [rw] passphrase_secret_arn
+    #   Required. The ARN for the secret in Secrets Manager that holds the
+    #   passphrase.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/SrtListenerDecryptionRequest AWS API Documentation
+    #
+    class SrtListenerDecryptionRequest < Struct.new(
+      :algorithm,
+      :passphrase_secret_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Settings for SRT Listener input.
+    #
+    # @!attribute [rw] decryption
+    #   Decryption settings for SRT listener. If present, both algorithm and
+    #   passphraseSecretArn are required.
+    #   @return [Types::SrtListenerDecryption]
+    #
+    # @!attribute [rw] minimum_latency
+    #   The preferred latency (in milliseconds) for implementing packet loss
+    #   and recovery. Range 120-15000.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] stream_id
+    #   The stream ID, if the upstream system uses this identifier.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/SrtListenerSettings AWS API Documentation
+    #
+    class SrtListenerSettings < Struct.new(
+      :decryption,
+      :minimum_latency,
+      :stream_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration for SRT Listener input. Encryption is REQUIRED for all
+    # SRT Listener inputs for security reasons. You must provide decryption
+    # settings including algorithm and passphrase secret ARN.
+    #
+    # @!attribute [rw] decryption
+    #   Decryption settings. If specified, both algorithm and
+    #   passphraseSecretArn are required.
+    #   @return [Types::SrtListenerDecryptionRequest]
+    #
+    # @!attribute [rw] minimum_latency
+    #   Required. The preferred latency in milliseconds for packet loss and
+    #   recovery. Range 120-15000.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] stream_id
+    #   Optional. The stream ID if the upstream system uses this identifier.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/SrtListenerSettingsRequest AWS API Documentation
+    #
+    class SrtListenerSettingsRequest < Struct.new(
+      :decryption,
+      :minimum_latency,
+      :stream_id)
       SENSITIVE = []
       include Aws::Structure
     end

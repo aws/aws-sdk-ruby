@@ -533,8 +533,8 @@ module Aws::RAM
     #   resp.resource_share_invitation.resource_share_associations[0].resource_share_arn #=> String
     #   resp.resource_share_invitation.resource_share_associations[0].resource_share_name #=> String
     #   resp.resource_share_invitation.resource_share_associations[0].associated_entity #=> String
-    #   resp.resource_share_invitation.resource_share_associations[0].association_type #=> String, one of "PRINCIPAL", "RESOURCE"
-    #   resp.resource_share_invitation.resource_share_associations[0].status #=> String, one of "ASSOCIATING", "ASSOCIATED", "FAILED", "DISASSOCIATING", "DISASSOCIATED"
+    #   resp.resource_share_invitation.resource_share_associations[0].association_type #=> String, one of "PRINCIPAL", "RESOURCE", "SOURCE"
+    #   resp.resource_share_invitation.resource_share_associations[0].status #=> String, one of "ASSOCIATING", "ASSOCIATED", "FAILED", "DISASSOCIATING", "DISASSOCIATED", "SUSPENDED", "SUSPENDING", "RESTORING"
     #   resp.resource_share_invitation.resource_share_associations[0].status_message #=> String
     #   resp.resource_share_invitation.resource_share_associations[0].creation_time #=> Time
     #   resp.resource_share_invitation.resource_share_associations[0].last_updated_time #=> Time
@@ -551,11 +551,11 @@ module Aws::RAM
       req.send_request(options)
     end
 
-    # Adds the specified list of principals and list of resources to a
-    # resource share. Principals that already have access to this resource
-    # share immediately receive access to the added resources. Newly added
-    # principals immediately receive access to the resources shared in this
-    # resource share.
+    # Adds the specified list of principals, resources, and source
+    # constraints to a resource share. Principals that already have access
+    # to this resource share immediately receive access to the added
+    # resources. Newly added principals immediately receive access to the
+    # resources shared in this resource share.
     #
     # @option params [required, String] :resource_share_arn
     #   Specifies the [Amazon Resource Name (ARN)][1] of the resource share
@@ -598,6 +598,8 @@ module Aws::RAM
     #
     #   * An ARN of an IAM user, for example: `iam::123456789012user/username`
     #
+    #   * A service principal name, for example: `service-id.amazonaws.com`
+    #
     #   <note markdown="1"> Not all resource types can be shared with IAM roles and users. For
     #   more information, see [Sharing with IAM roles and users][2] in the
     #   *Resource Access Manager User Guide*.
@@ -629,8 +631,13 @@ module Aws::RAM
     #   [1]: https://wikipedia.org/wiki/Universally_unique_identifier
     #
     # @option params [Array<String>] :sources
-    #   Specifies from which source accounts the service principal has access
-    #   to the resources in this resource share.
+    #   Specifies source constraints (accounts, ARNs, organization IDs, or
+    #   organization paths) that limit when service principals can access
+    #   resources in this resource share. When a service principal attempts to
+    #   access a shared resource, validation is performed to ensure the
+    #   request originates from one of the specified sources. This helps
+    #   prevent confused deputy attacks by applying constraints on where
+    #   service principals can access resources from.
     #
     # @return [Types::AssociateResourceShareResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -653,8 +660,8 @@ module Aws::RAM
     #   resp.resource_share_associations[0].resource_share_arn #=> String
     #   resp.resource_share_associations[0].resource_share_name #=> String
     #   resp.resource_share_associations[0].associated_entity #=> String
-    #   resp.resource_share_associations[0].association_type #=> String, one of "PRINCIPAL", "RESOURCE"
-    #   resp.resource_share_associations[0].status #=> String, one of "ASSOCIATING", "ASSOCIATED", "FAILED", "DISASSOCIATING", "DISASSOCIATED"
+    #   resp.resource_share_associations[0].association_type #=> String, one of "PRINCIPAL", "RESOURCE", "SOURCE"
+    #   resp.resource_share_associations[0].status #=> String, one of "ASSOCIATING", "ASSOCIATED", "FAILED", "DISASSOCIATING", "DISASSOCIATED", "SUSPENDED", "SUSPENDING", "RESTORING"
     #   resp.resource_share_associations[0].status_message #=> String
     #   resp.resource_share_associations[0].creation_time #=> Time
     #   resp.resource_share_associations[0].last_updated_time #=> Time
@@ -784,10 +791,12 @@ module Aws::RAM
     #   Specifies the name of the resource type that this customer managed
     #   permission applies to.
     #
-    #   The format is ` <service-code>:<resource-type> ` and is not case
+    #   The format is ` <service-code>:<resource-type> ` and is case
     #   sensitive. For example, to specify an Amazon EC2 Subnet, you can use
-    #   the string `ec2:subnet`. To see the list of valid values for this
-    #   parameter, query the ListResourceTypes operation.
+    #   the string `ec2:Subnet`. To see the list of valid values for this
+    #   parameter, query the ListResourceTypes operation. This value must
+    #   match the display name of the resource (available in
+    #   `ListResourceTypes`).
     #
     # @option params [required, String] :policy_template
     #   A string in JSON format string that contains the following elements of
@@ -1002,8 +1011,9 @@ module Aws::RAM
 
     # Creates a resource share. You can provide a list of the [Amazon
     # Resource Names (ARNs)][1] for the resources that you want to share, a
-    # list of principals you want to share the resources with, and the
-    # permissions to grant those principals.
+    # list of principals you want to share the resources with, the
+    # permissions to grant those principals, and optionally source
+    # constraints to enhance security for service principal sharing.
     #
     # <note markdown="1"> Sharing a resource makes it available for use by principals outside of
     # the Amazon Web Services account that created the resource. Sharing
@@ -1042,6 +1052,8 @@ module Aws::RAM
     #     `iam::123456789012:role/rolename`
     #
     #   * An ARN of an IAM user, for example: `iam::123456789012user/username`
+    #
+    #   * A service principal name, for example: `service-id.amazonaws.com`
     #
     #   <note markdown="1"> Not all resource types can be shared with IAM roles and users. For
     #   more information, see [Sharing with IAM roles and users][2] in the
@@ -1098,8 +1110,13 @@ module Aws::RAM
     #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #
     # @option params [Array<String>] :sources
-    #   Specifies from which source accounts the service principal has access
-    #   to the resources in this resource share.
+    #   Specifies source constraints (accounts, ARNs, organization IDs, or
+    #   organization paths) that limit when service principals can access
+    #   resources in this resource share. When a service principal attempts to
+    #   access a shared resource, validation is performed to ensure the
+    #   request originates from one of the specified sources. This helps
+    #   prevent confused deputy attacks by applying constraints on where
+    #   service principals can access resources from.
     #
     # @return [Types::CreateResourceShareResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1349,8 +1366,8 @@ module Aws::RAM
       req.send_request(options)
     end
 
-    # Removes the specified principals or resources from participating in
-    # the specified resource share.
+    # Removes the specified principals, resources, or source constraints
+    # from participating in the specified resource share.
     #
     # @option params [required, String] :resource_share_arn
     #   Specifies [Amazon Resource Name (ARN)][1] of the resource share that
@@ -1390,6 +1407,8 @@ module Aws::RAM
     #
     #   * An ARN of an IAM user, for example: `iam::123456789012user/username`
     #
+    #   * A service principal name, for example: `service-id.amazonaws.com`
+    #
     #   <note markdown="1"> Not all resource types can be shared with IAM roles and users. For
     #   more information, see [Sharing with IAM roles and users][2] in the
     #   *Resource Access Manager User Guide*.
@@ -1421,8 +1440,11 @@ module Aws::RAM
     #   [1]: https://wikipedia.org/wiki/Universally_unique_identifier
     #
     # @option params [Array<String>] :sources
-    #   Specifies from which source accounts the service principal no longer
-    #   has access to the resources in this resource share.
+    #   Specifies source constraints (accounts, ARNs, organization IDs, or
+    #   organization paths) to remove from the resource share. This enables
+    #   granular management of source constraints while maintaining service
+    #   principal associations. At least one source must remain when service
+    #   principals are present.
     #
     # @return [Types::DisassociateResourceShareResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1445,8 +1467,8 @@ module Aws::RAM
     #   resp.resource_share_associations[0].resource_share_arn #=> String
     #   resp.resource_share_associations[0].resource_share_name #=> String
     #   resp.resource_share_associations[0].associated_entity #=> String
-    #   resp.resource_share_associations[0].association_type #=> String, one of "PRINCIPAL", "RESOURCE"
-    #   resp.resource_share_associations[0].status #=> String, one of "ASSOCIATING", "ASSOCIATED", "FAILED", "DISASSOCIATING", "DISASSOCIATED"
+    #   resp.resource_share_associations[0].association_type #=> String, one of "PRINCIPAL", "RESOURCE", "SOURCE"
+    #   resp.resource_share_associations[0].status #=> String, one of "ASSOCIATING", "ASSOCIATED", "FAILED", "DISASSOCIATING", "DISASSOCIATED", "SUSPENDED", "SUSPENDING", "RESTORING"
     #   resp.resource_share_associations[0].status_message #=> String
     #   resp.resource_share_associations[0].creation_time #=> Time
     #   resp.resource_share_associations[0].last_updated_time #=> Time
@@ -1624,6 +1646,14 @@ module Aws::RAM
     # Retrieves the resource policies for the specified resources that you
     # own and have shared.
     #
+    # <note markdown="1"> Always check the `NextToken` response parameter for a `null` value
+    # when calling a paginated operation. These operations can occasionally
+    # return an empty set of results even when there are more results
+    # available. The `NextToken` response parameter value is `null` *only*
+    # when there are no more results to display.
+    #
+    #  </note>
+    #
     # @option params [required, Array<String>] :resource_arns
     #   Specifies the [Amazon Resource Names (ARNs)][1] of the resources whose
     #   policies you want to retrieve.
@@ -1687,6 +1717,14 @@ module Aws::RAM
 
     # Retrieves the lists of resources and principals that associated for
     # resource shares that you own.
+    #
+    # <note markdown="1"> Always check the `NextToken` response parameter for a `null` value
+    # when calling a paginated operation. These operations can occasionally
+    # return an empty set of results even when there are more results
+    # available. The `NextToken` response parameter value is `null` *only*
+    # when there are no more results to display.
+    #
+    #  </note>
     #
     # @option params [required, String] :association_type
     #   Specifies whether you want to retrieve the associations that involve a
@@ -1762,11 +1800,11 @@ module Aws::RAM
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_resource_share_associations({
-    #     association_type: "PRINCIPAL", # required, accepts PRINCIPAL, RESOURCE
+    #     association_type: "PRINCIPAL", # required, accepts PRINCIPAL, RESOURCE, SOURCE
     #     resource_share_arns: ["String"],
     #     resource_arn: "String",
     #     principal: "String",
-    #     association_status: "ASSOCIATING", # accepts ASSOCIATING, ASSOCIATED, FAILED, DISASSOCIATING, DISASSOCIATED
+    #     association_status: "ASSOCIATING", # accepts ASSOCIATING, ASSOCIATED, FAILED, DISASSOCIATING, DISASSOCIATED, SUSPENDED, SUSPENDING, RESTORING
     #     next_token: "String",
     #     max_results: 1,
     #   })
@@ -1777,8 +1815,8 @@ module Aws::RAM
     #   resp.resource_share_associations[0].resource_share_arn #=> String
     #   resp.resource_share_associations[0].resource_share_name #=> String
     #   resp.resource_share_associations[0].associated_entity #=> String
-    #   resp.resource_share_associations[0].association_type #=> String, one of "PRINCIPAL", "RESOURCE"
-    #   resp.resource_share_associations[0].status #=> String, one of "ASSOCIATING", "ASSOCIATED", "FAILED", "DISASSOCIATING", "DISASSOCIATED"
+    #   resp.resource_share_associations[0].association_type #=> String, one of "PRINCIPAL", "RESOURCE", "SOURCE"
+    #   resp.resource_share_associations[0].status #=> String, one of "ASSOCIATING", "ASSOCIATED", "FAILED", "DISASSOCIATING", "DISASSOCIATED", "SUSPENDED", "SUSPENDING", "RESTORING"
     #   resp.resource_share_associations[0].status_message #=> String
     #   resp.resource_share_associations[0].creation_time #=> Time
     #   resp.resource_share_associations[0].last_updated_time #=> Time
@@ -1796,6 +1834,14 @@ module Aws::RAM
 
     # Retrieves details about invitations that you have received for
     # resource shares.
+    #
+    # <note markdown="1"> Always check the `NextToken` response parameter for a `null` value
+    # when calling a paginated operation. These operations can occasionally
+    # return an empty set of results even when there are more results
+    # available. The `NextToken` response parameter value is `null` *only*
+    # when there are no more results to display.
+    #
+    #  </note>
     #
     # @option params [Array<String>] :resource_share_invitation_arns
     #   Specifies the [Amazon Resource Names (ARNs)][1] of the resource share
@@ -1863,8 +1909,8 @@ module Aws::RAM
     #   resp.resource_share_invitations[0].resource_share_associations[0].resource_share_arn #=> String
     #   resp.resource_share_invitations[0].resource_share_associations[0].resource_share_name #=> String
     #   resp.resource_share_invitations[0].resource_share_associations[0].associated_entity #=> String
-    #   resp.resource_share_invitations[0].resource_share_associations[0].association_type #=> String, one of "PRINCIPAL", "RESOURCE"
-    #   resp.resource_share_invitations[0].resource_share_associations[0].status #=> String, one of "ASSOCIATING", "ASSOCIATED", "FAILED", "DISASSOCIATING", "DISASSOCIATED"
+    #   resp.resource_share_invitations[0].resource_share_associations[0].association_type #=> String, one of "PRINCIPAL", "RESOURCE", "SOURCE"
+    #   resp.resource_share_invitations[0].resource_share_associations[0].status #=> String, one of "ASSOCIATING", "ASSOCIATED", "FAILED", "DISASSOCIATING", "DISASSOCIATED", "SUSPENDED", "SUSPENDING", "RESTORING"
     #   resp.resource_share_invitations[0].resource_share_associations[0].status_message #=> String
     #   resp.resource_share_invitations[0].resource_share_associations[0].creation_time #=> Time
     #   resp.resource_share_invitations[0].resource_share_associations[0].last_updated_time #=> Time
@@ -1883,6 +1929,14 @@ module Aws::RAM
 
     # Retrieves details about the resource shares that you own or that are
     # shared with you.
+    #
+    # <note markdown="1"> Always check the `NextToken` response parameter for a `null` value
+    # when calling a paginated operation. These operations can occasionally
+    # return an empty set of results even when there are more results
+    # available. The `NextToken` response parameter value is `null` *only*
+    # when there are no more results to display.
+    #
+    #  </note>
     #
     # @option params [Array<String>] :resource_share_arns
     #   Specifies the [Amazon Resource Names (ARNs)][1] of individual resource
@@ -2003,6 +2057,14 @@ module Aws::RAM
     # haven't accepted or rejected the invitation and the invitation
     # hasn't expired.
     #
+    # <note markdown="1"> Always check the `NextToken` response parameter for a `null` value
+    # when calling a paginated operation. These operations can occasionally
+    # return an empty set of results even when there are more results
+    # available. The `NextToken` response parameter value is `null` *only*
+    # when there are no more results to display.
+    #
+    #  </note>
+    #
     # @option params [required, String] :resource_share_invitation_arn
     #   Specifies the [Amazon Resource Name (ARN)][1] of the invitation. You
     #   can use GetResourceShareInvitations to find the ARN of the invitation.
@@ -2089,6 +2151,14 @@ module Aws::RAM
     # see which resource shares use which versions of the specified managed
     # permission.
     #
+    # <note markdown="1"> Always check the `NextToken` response parameter for a `null` value
+    # when calling a paginated operation. These operations can occasionally
+    # return an empty set of results even when there are more results
+    # available. The `NextToken` response parameter value is `null` *only*
+    # when there are no more results to display.
+    #
+    #  </note>
+    #
     # @option params [String] :permission_arn
     #   Specifies the [Amazon Resource Name (ARN)][1] of the managed
     #   permission.
@@ -2155,7 +2225,7 @@ module Aws::RAM
     #   resp = client.list_permission_associations({
     #     permission_arn: "String",
     #     permission_version: 1,
-    #     association_status: "ASSOCIATING", # accepts ASSOCIATING, ASSOCIATED, FAILED, DISASSOCIATING, DISASSOCIATED
+    #     association_status: "ASSOCIATING", # accepts ASSOCIATING, ASSOCIATED, FAILED, DISASSOCIATING, DISASSOCIATED, SUSPENDED, SUSPENDING, RESTORING
     #     resource_type: "String",
     #     feature_set: "CREATED_FROM_POLICY", # accepts CREATED_FROM_POLICY, PROMOTING_TO_STANDARD, STANDARD
     #     default_version: false,
@@ -2186,6 +2256,14 @@ module Aws::RAM
     end
 
     # Lists the available versions of the specified RAM permission.
+    #
+    # <note markdown="1"> Always check the `NextToken` response parameter for a `null` value
+    # when calling a paginated operation. These operations can occasionally
+    # return an empty set of results even when there are more results
+    # available. The `NextToken` response parameter value is `null` *only*
+    # when there are no more results to display.
+    #
+    #  </note>
     #
     # @option params [required, String] :permission_arn
     #   Specifies the [Amazon Resource Name (ARN)][1] of the RAM permission
@@ -2261,6 +2339,14 @@ module Aws::RAM
 
     # Retrieves a list of available RAM permissions that you can use for the
     # supported resource types.
+    #
+    # <note markdown="1"> Always check the `NextToken` response parameter for a `null` value
+    # when calling a paginated operation. These operations can occasionally
+    # return an empty set of results even when there are more results
+    # available. The `NextToken` response parameter value is `null` *only*
+    # when there are no more results to display.
+    #
+    #  </note>
     #
     # @option params [String] :resource_type
     #   Specifies that you want to list only those permissions that apply to
@@ -2348,6 +2434,14 @@ module Aws::RAM
     # Lists the principals that you are sharing resources with or that are
     # sharing resources with you.
     #
+    # <note markdown="1"> Always check the `NextToken` response parameter for a `null` value
+    # when calling a paginated operation. These operations can occasionally
+    # return an empty set of results even when there are more results
+    # available. The `NextToken` response parameter value is `null` *only*
+    # when there are no more results to display.
+    #
+    #  </note>
+    #
     # @option params [required, String] :resource_owner
     #   Specifies that you want to list information for only resource shares
     #   that match the following:
@@ -2385,6 +2479,8 @@ module Aws::RAM
     #     `iam::123456789012:role/rolename`
     #
     #   * An ARN of an IAM user, for example: `iam::123456789012user/username`
+    #
+    #   * A service principal name, for example: `service-id.amazonaws.com`
     #
     #   <note markdown="1"> Not all resource types can be shared with IAM roles and users. For
     #   more information, see [Sharing with IAM roles and users][2] in the
@@ -2473,6 +2569,14 @@ module Aws::RAM
     # Retrieves the current status of the asynchronous tasks performed by
     # RAM when you perform the ReplacePermissionAssociationsWork operation.
     #
+    # <note markdown="1"> Always check the `NextToken` response parameter for a `null` value
+    # when calling a paginated operation. These operations can occasionally
+    # return an empty set of results even when there are more results
+    # available. The `NextToken` response parameter value is `null` *only*
+    # when there are no more results to display.
+    #
+    #  </note>
+    #
     # @option params [Array<String>] :work_ids
     #   A list of IDs. These values come from the `id`field of the
     #   `replacePermissionAssociationsWork`structure returned by the
@@ -2541,6 +2645,14 @@ module Aws::RAM
     end
 
     # Lists the RAM permissions that are associated with a resource share.
+    #
+    # <note markdown="1"> Always check the `NextToken` response parameter for a `null` value
+    # when calling a paginated operation. These operations can occasionally
+    # return an empty set of results even when there are more results
+    # available. The `NextToken` response parameter value is `null` *only*
+    # when there are no more results to display.
+    #
+    #  </note>
     #
     # @option params [required, String] :resource_share_arn
     #   Specifies the [Amazon Resource Name (ARN)][1] of the resource share
@@ -2683,6 +2795,14 @@ module Aws::RAM
     # Lists the resources that you added to a resource share or the
     # resources that are shared with you.
     #
+    # <note markdown="1"> Always check the `NextToken` response parameter for a `null` value
+    # when calling a paginated operation. These operations can occasionally
+    # return an empty set of results even when there are more results
+    # available. The `NextToken` response parameter value is `null` *only*
+    # when there are no more results to display.
+    #
+    #  </note>
+    #
     # @option params [required, String] :resource_owner
     #   Specifies that you want to list only the resource shares that match
     #   the following:
@@ -2793,6 +2913,79 @@ module Aws::RAM
     # @param [Hash] params ({})
     def list_resources(params = {}, options = {})
       req = build_request(:list_resources, params)
+      req.send_request(options)
+    end
+
+    # Lists source associations for resource shares. Source associations
+    # control which sources can be used with service principals in resource
+    # shares. This operation provides visibility into source associations
+    # for resource share owners.
+    #
+    # You can filter the results by resource share Amazon Resource Name
+    # (ARN), source ID, source type, or association status. We recommend
+    # using pagination to ensure that the operation returns quickly and
+    # successfully.
+    #
+    # @option params [Array<String>] :resource_share_arns
+    #   The Amazon Resource Names (ARNs) of the resource shares for which you
+    #   want to retrieve source associations.
+    #
+    # @option params [String] :source_id
+    #   The identifier of the source for which you want to retrieve
+    #   associations. This can be an account ID, Amazon Resource Name (ARN),
+    #   organization ID, or organization path.
+    #
+    # @option params [String] :source_type
+    #   The type of source for which you want to retrieve associations.
+    #
+    # @option params [String] :association_status
+    #   The status of the source associations that you want to retrieve.
+    #
+    # @option params [String] :next_token
+    #   The pagination token that indicates the next set of results to
+    #   retrieve.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in a single call. To retrieve
+    #   the remaining results, make another call with the returned `nextToken`
+    #   value.
+    #
+    # @return [Types::ListSourceAssociationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListSourceAssociationsResponse#source_associations #source_associations} => Array&lt;Types::AssociatedSource&gt;
+    #   * {Types::ListSourceAssociationsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_source_associations({
+    #     resource_share_arns: ["String"],
+    #     source_id: "String",
+    #     source_type: "String",
+    #     association_status: "ASSOCIATING", # accepts ASSOCIATING, ASSOCIATED, FAILED, DISASSOCIATING, DISASSOCIATED, SUSPENDED, SUSPENDING, RESTORING
+    #     next_token: "String",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.source_associations #=> Array
+    #   resp.source_associations[0].resource_share_arn #=> String
+    #   resp.source_associations[0].source_id #=> String
+    #   resp.source_associations[0].source_type #=> String
+    #   resp.source_associations[0].status #=> String
+    #   resp.source_associations[0].last_updated_time #=> Time
+    #   resp.source_associations[0].creation_time #=> Time
+    #   resp.source_associations[0].status_message #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/ListSourceAssociations AWS API Documentation
+    #
+    # @overload list_source_associations(params = {})
+    # @param [Hash] params ({})
+    def list_source_associations(params = {}, options = {})
+      req = build_request(:list_source_associations, params)
       req.send_request(options)
     end
 
@@ -3009,8 +3202,8 @@ module Aws::RAM
     #   resp.resource_share_invitation.resource_share_associations[0].resource_share_arn #=> String
     #   resp.resource_share_invitation.resource_share_associations[0].resource_share_name #=> String
     #   resp.resource_share_invitation.resource_share_associations[0].associated_entity #=> String
-    #   resp.resource_share_invitation.resource_share_associations[0].association_type #=> String, one of "PRINCIPAL", "RESOURCE"
-    #   resp.resource_share_invitation.resource_share_associations[0].status #=> String, one of "ASSOCIATING", "ASSOCIATED", "FAILED", "DISASSOCIATING", "DISASSOCIATED"
+    #   resp.resource_share_invitation.resource_share_associations[0].association_type #=> String, one of "PRINCIPAL", "RESOURCE", "SOURCE"
+    #   resp.resource_share_invitation.resource_share_associations[0].status #=> String, one of "ASSOCIATING", "ASSOCIATED", "FAILED", "DISASSOCIATING", "DISASSOCIATED", "SUSPENDED", "SUSPENDING", "RESTORING"
     #   resp.resource_share_invitation.resource_share_associations[0].status_message #=> String
     #   resp.resource_share_invitation.resource_share_associations[0].creation_time #=> Time
     #   resp.resource_share_invitation.resource_share_associations[0].last_updated_time #=> Time
@@ -3380,7 +3573,7 @@ module Aws::RAM
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-ram'
-      context[:gem_version] = '1.82.0'
+      context[:gem_version] = '1.84.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

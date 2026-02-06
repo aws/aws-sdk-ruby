@@ -1956,14 +1956,14 @@ module Aws::ARCRegionswitch
     #   action.
     #
     # @option params [required, String] :action
-    #   The action to perform. Valid values are ACTIVATE (to shift traffic to
-    #   the target Region) or DEACTIVATE (to shift traffic away from the
+    #   The action to perform. Valid values are `activate` (to shift traffic
+    #   to the target Region) or `deactivate` (to shift traffic away from the
     #   target Region).
     #
     # @option params [String] :mode
-    #   The plan execution mode. Valid values are `Practice`, for testing
-    #   without making actual changes, or `Recovery`, for actual traffic
-    #   shifting and application recovery.
+    #   The plan execution mode. Valid values are `graceful`, for starting the
+    #   execution in graceful mode, or `ungraceful`, for starting the
+    #   execution in ungraceful mode.
     #
     # @option params [String] :comment
     #   An optional comment explaining why the plan execution is being
@@ -2520,7 +2520,7 @@ module Aws::ARCRegionswitch
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-arcregionswitch'
-      context[:gem_version] = '1.9.0'
+      context[:gem_version] = '1.11.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

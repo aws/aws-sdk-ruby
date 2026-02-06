@@ -1020,6 +1020,7 @@ module Aws::ECS
       attr_accessor monitoring: ("BASIC" | "DETAILED")
       attr_accessor capacity_option_type: ("ON_DEMAND" | "SPOT")
       attr_accessor instance_requirements: Types::InstanceRequirementsRequest
+      attr_accessor fips_enabled: bool
       SENSITIVE: []
     end
 

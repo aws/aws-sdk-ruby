@@ -28,6 +28,7 @@ module Aws
                         ?correct_clock_skew: bool,
                         ?defaults_mode: String,
                         ?disable_host_prefix_injection: bool,
+                        ?disable_queue_url_region_detection: bool,
                         ?disable_request_compression: bool,
                         ?endpoint: String,
                         ?endpoint_cache_max_entries: Integer,

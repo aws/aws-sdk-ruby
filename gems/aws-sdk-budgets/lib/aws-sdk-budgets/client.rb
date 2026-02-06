@@ -1524,6 +1524,28 @@ module Aws::Budgets
     #   resp.budget_performance_history.budgeted_and_actual_amounts_list[0].actual_amount.unit #=> String
     #   resp.budget_performance_history.budgeted_and_actual_amounts_list[0].time_period.start #=> Time
     #   resp.budget_performance_history.budgeted_and_actual_amounts_list[0].time_period.end #=> Time
+    #   resp.budget_performance_history.filter_expression.or #=> Array
+    #   resp.budget_performance_history.filter_expression.or[0] #=> Types::Expression
+    #   resp.budget_performance_history.filter_expression.and #=> Array
+    #   resp.budget_performance_history.filter_expression.and[0] #=> Types::Expression
+    #   resp.budget_performance_history.filter_expression.not #=> Types::Expression
+    #   resp.budget_performance_history.filter_expression.dimensions.key #=> String, one of "AZ", "INSTANCE_TYPE", "LINKED_ACCOUNT", "LINKED_ACCOUNT_NAME", "OPERATION", "PURCHASE_TYPE", "REGION", "SERVICE", "SERVICE_CODE", "USAGE_TYPE", "USAGE_TYPE_GROUP", "RECORD_TYPE", "OPERATING_SYSTEM", "TENANCY", "SCOPE", "PLATFORM", "SUBSCRIPTION_ID", "LEGAL_ENTITY_NAME", "INVOICING_ENTITY", "DEPLOYMENT_OPTION", "DATABASE_ENGINE", "CACHE_ENGINE", "INSTANCE_TYPE_FAMILY", "BILLING_ENTITY", "RESERVATION_ID", "RESOURCE_ID", "RIGHTSIZING_TYPE", "SAVINGS_PLANS_TYPE", "SAVINGS_PLAN_ARN", "PAYMENT_OPTION", "RESERVATION_MODIFIED", "TAG_KEY", "COST_CATEGORY_NAME"
+    #   resp.budget_performance_history.filter_expression.dimensions.values #=> Array
+    #   resp.budget_performance_history.filter_expression.dimensions.values[0] #=> String
+    #   resp.budget_performance_history.filter_expression.dimensions.match_options #=> Array
+    #   resp.budget_performance_history.filter_expression.dimensions.match_options[0] #=> String, one of "EQUALS", "ABSENT", "STARTS_WITH", "ENDS_WITH", "CONTAINS", "GREATER_THAN_OR_EQUAL", "CASE_SENSITIVE", "CASE_INSENSITIVE"
+    #   resp.budget_performance_history.filter_expression.tags.key #=> String
+    #   resp.budget_performance_history.filter_expression.tags.values #=> Array
+    #   resp.budget_performance_history.filter_expression.tags.values[0] #=> String
+    #   resp.budget_performance_history.filter_expression.tags.match_options #=> Array
+    #   resp.budget_performance_history.filter_expression.tags.match_options[0] #=> String, one of "EQUALS", "ABSENT", "STARTS_WITH", "ENDS_WITH", "CONTAINS", "GREATER_THAN_OR_EQUAL", "CASE_SENSITIVE", "CASE_INSENSITIVE"
+    #   resp.budget_performance_history.filter_expression.cost_categories.key #=> String
+    #   resp.budget_performance_history.filter_expression.cost_categories.values #=> Array
+    #   resp.budget_performance_history.filter_expression.cost_categories.values[0] #=> String
+    #   resp.budget_performance_history.filter_expression.cost_categories.match_options #=> Array
+    #   resp.budget_performance_history.filter_expression.cost_categories.match_options[0] #=> String, one of "EQUALS", "ABSENT", "STARTS_WITH", "ENDS_WITH", "CONTAINS", "GREATER_THAN_OR_EQUAL", "CASE_SENSITIVE", "CASE_INSENSITIVE"
+    #   resp.budget_performance_history.metrics #=> Array
+    #   resp.budget_performance_history.metrics[0] #=> String, one of "BlendedCost", "UnblendedCost", "AmortizedCost", "NetUnblendedCost", "NetAmortizedCost", "UsageQuantity", "NormalizedUsageAmount", "Hours"
     #   resp.next_token #=> String
     #
     # @overload describe_budget_performance_history(params = {})
@@ -2269,7 +2291,7 @@ module Aws::Budgets
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-budgets'
-      context[:gem_version] = '1.102.0'
+      context[:gem_version] = '1.104.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -49,6 +49,9 @@ module Aws::S3
       SENSITIVE: []
     end
 
+    class AccessDenied < Aws::EmptyStructure
+    end
+
     class AnalyticsAndOperator
       attr_accessor prefix: ::String
       attr_accessor tags: ::Array[Types::Tag]
@@ -1880,6 +1883,17 @@ module Aws::S3
     class ObjectAlreadyInActiveTierError < Aws::EmptyStructure
     end
 
+    class ObjectEncryption
+      attr_accessor ssekms: Types::SSEKMSEncryption
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Ssekms < ObjectEncryption
+      end
+      class Unknown < ObjectEncryption
+      end
+    end
+
     class ObjectIdentifier
       attr_accessor key: ::String
       attr_accessor version_id: ::String
@@ -2585,6 +2599,12 @@ module Aws::S3
       SENSITIVE: [:key_id]
     end
 
+    class SSEKMSEncryption
+      attr_accessor kms_key_arn: ::String
+      attr_accessor bucket_key_enabled: bool
+      SENSITIVE: [:kms_key_arn]
+    end
+
     class SSES3 < Aws::EmptyStructure
     end
 
@@ -2757,6 +2777,23 @@ module Aws::S3
       attr_accessor checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256" | "CRC64NVME")
       attr_accessor journal_table_configuration: Types::JournalTableConfigurationUpdates
       attr_accessor expected_bucket_owner: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateObjectEncryptionRequest
+      attr_accessor bucket: ::String
+      attr_accessor key: ::String
+      attr_accessor version_id: ::String
+      attr_accessor object_encryption: Types::ObjectEncryption
+      attr_accessor request_payer: ("requester")
+      attr_accessor expected_bucket_owner: ::String
+      attr_accessor content_md5: ::String
+      attr_accessor checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256" | "CRC64NVME")
+      SENSITIVE: []
+    end
+
+    class UpdateObjectEncryptionResponse
+      attr_accessor request_charged: ("requester")
       SENSITIVE: []
     end
 

@@ -11,6 +11,8 @@ module Aws
       class ServiceError < ::Aws::Errors::ServiceError
       end
 
+      class AccessDenied < ::Aws::Errors::ServiceError
+      end
       class BucketAlreadyExists < ::Aws::Errors::ServiceError
       end
       class BucketAlreadyOwnedByYou < ::Aws::Errors::ServiceError

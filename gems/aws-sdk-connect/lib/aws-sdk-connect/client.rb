@@ -3255,6 +3255,9 @@ module Aws::Connect
     #   For example, \{ "Tags": \{"key1":"value1", "key2":"value2"}
     #   }.
     #
+    # @option params [Types::EvaluationReviewConfiguration] :review_configuration
+    #   Configuration information about evaluation reviews.
+    #
     # @option params [Types::EvaluationFormTargetConfiguration] :target_configuration
     #   Configuration that specifies the target for the evaluation form.
     #
@@ -3416,6 +3419,17 @@ module Aws::Connect
     #     as_draft: false,
     #     tags: {
     #       "TagKey" => "TagValue",
+    #     },
+    #     review_configuration: {
+    #       review_notification_recipients: [ # required
+    #         {
+    #           type: "USER_ID", # required, accepts USER_ID
+    #           value: { # required
+    #             user_id: "ResourceId",
+    #           },
+    #         },
+    #       ],
+    #       eligibility_days: 1,
     #     },
     #     target_configuration: {
     #       contact_interaction_type: "AGENT", # required, accepts AGENT, AUTOMATED
@@ -4915,6 +4929,89 @@ module Aws::Connect
     # @param [Hash] params ({})
     def create_task_template(params = {}, options = {})
       req = build_request(:create_task_template, params)
+      req.send_request(options)
+    end
+
+    # Creates a test case with its content and metadata for the specified
+    # Amazon Connect instance.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance.
+    #
+    # @option params [required, String] :name
+    #   The name of the test.
+    #
+    # @option params [String] :description
+    #   The description of the test.
+    #
+    # @option params [required, String] :content
+    #   The JSON string that represents the content of the test.
+    #
+    # @option params [Types::TestCaseEntryPoint] :entry_point
+    #   Defines the starting point for your test.
+    #
+    # @option params [String] :initialization_data
+    #   Defines the initial custom attributes for your test.
+    #
+    # @option params [String] :status
+    #   Indicates the test status as either SAVED or PUBLISHED. The PUBLISHED
+    #   status will initiate validation on the content. The SAVED status does
+    #   not initiate validation of the content.
+    #
+    # @option params [String] :test_case_id
+    #   Id of the test case if you want to create it in a replica region using
+    #   Amazon Connect Global Resiliency
+    #
+    # @option params [Hash<String,String>] :tags
+    #   The tags used to organize, track, or control access for this resource.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :last_modified_time
+    #   The time at which the resource was last modified.
+    #
+    # @option params [String] :last_modified_region
+    #   The region in which the resource was last modified
+    #
+    # @return [Types::CreateTestCaseResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateTestCaseResponse#test_case_id #test_case_id} => String
+    #   * {Types::CreateTestCaseResponse#test_case_arn #test_case_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_test_case({
+    #     instance_id: "InstanceIdOrArn", # required
+    #     name: "TestCaseName", # required
+    #     description: "TestCaseDescription",
+    #     content: "TestCaseContent", # required
+    #     entry_point: {
+    #       type: "VOICE_CALL", # accepts VOICE_CALL
+    #       voice_call_entry_point_parameters: {
+    #         source_phone_number: "PhoneNumber",
+    #         destination_phone_number: "PhoneNumber",
+    #         flow_id: "ContactFlowId",
+    #       },
+    #     },
+    #     initialization_data: "TestCaseInitializationData",
+    #     status: "PUBLISHED", # accepts PUBLISHED, SAVED
+    #     test_case_id: "TestCaseId",
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #     last_modified_time: Time.now,
+    #     last_modified_region: "RegionName",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.test_case_id #=> String
+    #   resp.test_case_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateTestCase AWS API Documentation
+    #
+    # @overload create_test_case(params = {})
+    # @param [Hash] params ({})
+    def create_test_case(params = {}, options = {})
+      req = build_request(:create_test_case, params)
       req.send_request(options)
     end
 
@@ -6550,6 +6647,33 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # Deletes the test case that has already been created for the specified
+    # Amazon Connect instance.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance.
+    #
+    # @option params [required, String] :test_case_id
+    #   The identifier of the test case to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_test_case({
+    #     instance_id: "InstanceIdOrArn", # required
+    #     test_case_id: "TestCaseId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DeleteTestCase AWS API Documentation
+    #
+    # @overload delete_test_case(params = {})
+    # @param [Hash] params ({})
+    def delete_test_case(params = {}, options = {})
+      req = build_request(:delete_test_case, params)
+      req.send_request(options)
+    end
+
     # Deletes a traffic distribution group. This API can be called only in
     # the Region where the traffic distribution group is created.
     #
@@ -7310,6 +7434,13 @@ module Aws::Connect
     #   resp.evaluation.metadata.acknowledgement.acknowledged_time #=> Time
     #   resp.evaluation.metadata.acknowledgement.acknowledged_by #=> String
     #   resp.evaluation.metadata.acknowledgement.acknowledger_comment #=> String
+    #   resp.evaluation.metadata.review.review_id #=> String
+    #   resp.evaluation.metadata.review.created_time #=> Time
+    #   resp.evaluation.metadata.review.created_by #=> String
+    #   resp.evaluation.metadata.review.review_request_comments #=> Array
+    #   resp.evaluation.metadata.review.review_request_comments[0].comment #=> String
+    #   resp.evaluation.metadata.review.review_request_comments[0].created_time #=> Time
+    #   resp.evaluation.metadata.review.review_request_comments[0].created_by #=> String
     #   resp.evaluation.metadata.contact_participant.contact_participant_role #=> String, one of "AGENT", "SYSTEM", "CUSTOM_BOT"
     #   resp.evaluation.metadata.contact_participant.contact_participant_id #=> String
     #   resp.evaluation.metadata.sampling_job_id #=> String
@@ -7348,7 +7479,7 @@ module Aws::Connect
     #   resp.evaluation.answers["ResourceId"].suggested_answers[0].analysis_details.contact_lens.matched_rule_categories[0].points_of_interest[0].transcript_segment #=> String
     #   resp.evaluation.notes #=> Hash
     #   resp.evaluation.notes["ResourceId"].value #=> String
-    #   resp.evaluation.status #=> String, one of "DRAFT", "SUBMITTED"
+    #   resp.evaluation.status #=> String, one of "DRAFT", "SUBMITTED", "REVIEW_REQUESTED", "UNDER_REVIEW"
     #   resp.evaluation.scores #=> Hash
     #   resp.evaluation.scores["ResourceId"].percentage #=> Float
     #   resp.evaluation.scores["ResourceId"].not_applicable #=> Boolean
@@ -7428,6 +7559,10 @@ module Aws::Connect
     #   resp.evaluation_form.auto_evaluation_configuration.enabled #=> Boolean
     #   resp.evaluation_form.target_configuration.contact_interaction_type #=> String, one of "AGENT", "AUTOMATED"
     #   resp.evaluation_form.language_configuration.form_language #=> String, one of "de-DE", "en-US", "es-ES", "fr-FR", "it-IT", "pt-BR"
+    #   resp.evaluation_form.review_configuration.review_notification_recipients #=> Array
+    #   resp.evaluation_form.review_configuration.review_notification_recipients[0].type #=> String, one of "USER_ID"
+    #   resp.evaluation_form.review_configuration.review_notification_recipients[0].value.user_id #=> String
+    #   resp.evaluation_form.review_configuration.eligibility_days #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeContactEvaluation AWS API Documentation
     #
@@ -7889,6 +8024,10 @@ module Aws::Connect
     #   resp.evaluation_form.last_modified_time #=> Time
     #   resp.evaluation_form.last_modified_by #=> String
     #   resp.evaluation_form.auto_evaluation_configuration.enabled #=> Boolean
+    #   resp.evaluation_form.review_configuration.review_notification_recipients #=> Array
+    #   resp.evaluation_form.review_configuration.review_notification_recipients[0].type #=> String, one of "USER_ID"
+    #   resp.evaluation_form.review_configuration.review_notification_recipients[0].value.user_id #=> String
+    #   resp.evaluation_form.review_configuration.eligibility_days #=> Integer
     #   resp.evaluation_form.tags #=> Hash
     #   resp.evaluation_form.tags["TagKey"] #=> String
     #   resp.evaluation_form.target_configuration.contact_interaction_type #=> String, one of "AGENT", "AUTOMATED"
@@ -8663,6 +8802,61 @@ module Aws::Connect
     # @param [Hash] params ({})
     def describe_security_profile(params = {}, options = {})
       req = build_request(:describe_security_profile, params)
+      req.send_request(options)
+    end
+
+    # Describes the specified test case and allows you to get the content
+    # and metadata of the test case for the specified Amazon Connect
+    # instance.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance.
+    #
+    # @option params [required, String] :test_case_id
+    #   The identifier of the test case.
+    #
+    # @option params [String] :status
+    #   The status of the test case version to retrieve. If not specified,
+    #   returns the published version if available, otherwise returns the
+    #   saved version.
+    #
+    # @return [Types::DescribeTestCaseResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeTestCaseResponse#test_case #test_case} => Types::TestCase
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_test_case({
+    #     instance_id: "InstanceIdOrArn", # required
+    #     test_case_id: "TestCaseId", # required
+    #     status: "PUBLISHED", # accepts PUBLISHED, SAVED
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.test_case.arn #=> String
+    #   resp.test_case.id #=> String
+    #   resp.test_case.name #=> String
+    #   resp.test_case.content #=> String
+    #   resp.test_case.entry_point.type #=> String, one of "VOICE_CALL"
+    #   resp.test_case.entry_point.voice_call_entry_point_parameters.source_phone_number #=> String
+    #   resp.test_case.entry_point.voice_call_entry_point_parameters.destination_phone_number #=> String
+    #   resp.test_case.entry_point.voice_call_entry_point_parameters.flow_id #=> String
+    #   resp.test_case.initialization_data #=> String
+    #   resp.test_case.description #=> String
+    #   resp.test_case.status #=> String, one of "PUBLISHED", "SAVED"
+    #   resp.test_case.last_modified_time #=> Time
+    #   resp.test_case.last_modified_region #=> String
+    #   resp.test_case.tags #=> Hash
+    #   resp.test_case.tags["TagKey"] #=> String
+    #   resp.test_case.test_case_sha_256 #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeTestCase AWS API Documentation
+    #
+    # @overload describe_test_case(params = {})
+    # @param [Hash] params ({})
+    def describe_test_case(params = {}, options = {})
+      req = build_request(:describe_test_case, params)
       req.send_request(options)
     end
 
@@ -10181,28 +10375,32 @@ module Aws::Connect
       req.send_request(options)
     end
 
-    # Retrieves the position of the contact in the queue.
+    # Retrieves contact metric data for a specified contact.
     #
     # **Use cases**
     #
-    # Following are common uses cases for position in queue:
+    # Following are common use cases for position in queue and estimated
+    # wait time:
     #
-    # * Understand the expected wait experience of a contact.
+    # * Customer-Facing Wait Time Announcements - Display or announce the
+    #   estimated wait time and position in queue to customers before or
+    #   during their queue experience.
     #
-    # * Inform customers of their position in queue and potentially offer a
-    #   callback.
+    # * Callback Offerings - Offer customers a callback option when the
+    #   estimated wait time or position in queue exceeds a defined
+    #   threshold.
     #
-    # * Make data-driven routing decisions between primary and alternative
-    #   queues.
+    # * Queue Routing Decisions - Route incoming contacts to less congested
+    #   queues by comparing estimated wait time and position in queue across
+    #   multiple queues.
     #
-    # * Enhance queue visibility and leverage agent proficiencies to
-    #   streamline contact routing.
+    # * Self-Service Deflection - Redirect customers to self-service options
+    #   like chatbots or FAQs when estimated wait time is high or position
+    #   in queue is unfavorable.
     #
     # **Important things to know**
     #
-    # * The only way to retrieve the position of the contact in queue is by
-    #   using this API. You can't retrieve the position by using flows and
-    #   attributes.
+    # * Metrics are only available while the contact is actively in queue.
     #
     # * For more information, see the [Position in queue][1] metric in the
     #   *Amazon Connect Administrator Guide*.
@@ -10226,7 +10424,10 @@ module Aws::Connect
     #   The identifier of the contact in this instance of Amazon Connect.
     #
     # @option params [required, Array<Types::ContactMetricInfo>] :metrics
-    #   A list of contact-level metrics to retrieve.
+    #   A list of contact level metrics to retrieve.Supported metrics include
+    #   POSITION\_IN\_QUEUE (the contact's current position in the queue) and
+    #   ESTIMATED\_WAIT\_TIME (the predicted time in seconds until the contact
+    #   is connected to an agent)
     #
     # @return [Types::GetContactMetricsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -10241,7 +10442,7 @@ module Aws::Connect
     #     contact_id: "InstanceIdOrArn", # required
     #     metrics: [ # required
     #       {
-    #         name: "POSITION_IN_QUEUE", # required, accepts POSITION_IN_QUEUE
+    #         name: "ESTIMATED_WAIT_TIME", # required, accepts ESTIMATED_WAIT_TIME, POSITION_IN_QUEUE
     #       },
     #     ],
     #   })
@@ -10249,7 +10450,7 @@ module Aws::Connect
     # @example Response structure
     #
     #   resp.metric_results #=> Array
-    #   resp.metric_results[0].name #=> String, one of "POSITION_IN_QUEUE"
+    #   resp.metric_results[0].name #=> String, one of "ESTIMATED_WAIT_TIME", "POSITION_IN_QUEUE"
     #   resp.metric_results[0].value.number #=> Float
     #   resp.id #=> String
     #   resp.arn #=> String
@@ -10451,6 +10652,20 @@ module Aws::Connect
     #
     #     Name in real-time metrics report: [Scheduled][10]
     #
+    #   ESTIMATED\_WAIT\_TIME
+    #
+    #   : Unit: SECONDS
+    #
+    #     This metric supports filter and grouping combination only used for
+    #     core routing purpose. Valid filter and grouping use cases:
+    #
+    #     * Filter by a list of \[Queues\] and a list of \[Channels\], group
+    #       by \[“QUEUE”, “CHANNEL”\]
+    #
+    #     * Filter by a singleton list of \[Queue\], a singleton list of
+    #       \[Channel\], a list of \[RoutingStepExpression\], group by
+    #       \[“ROUTING\_STEP\_EXPRESSION”\].
+    #
     #   OLDEST\_CONTACT\_AGE
     #
     #   : Unit: SECONDS
@@ -10552,7 +10767,7 @@ module Aws::Connect
     #     groupings: ["QUEUE"], # accepts QUEUE, CHANNEL, ROUTING_PROFILE, ROUTING_STEP_EXPRESSION, AGENT_STATUS, SUBTYPE, VALIDATION_TEST_TYPE
     #     current_metrics: [ # required
     #       {
-    #         name: "AGENTS_ONLINE", # accepts AGENTS_ONLINE, AGENTS_AVAILABLE, AGENTS_ON_CALL, AGENTS_NON_PRODUCTIVE, AGENTS_AFTER_CONTACT_WORK, AGENTS_ERROR, AGENTS_STAFFED, CONTACTS_IN_QUEUE, OLDEST_CONTACT_AGE, CONTACTS_SCHEDULED, AGENTS_ON_CONTACT, SLOTS_ACTIVE, SLOTS_AVAILABLE
+    #         name: "AGENTS_ONLINE", # accepts AGENTS_ONLINE, AGENTS_AVAILABLE, AGENTS_ON_CALL, AGENTS_NON_PRODUCTIVE, AGENTS_AFTER_CONTACT_WORK, AGENTS_ERROR, AGENTS_STAFFED, CONTACTS_IN_QUEUE, OLDEST_CONTACT_AGE, CONTACTS_SCHEDULED, AGENTS_ON_CONTACT, SLOTS_ACTIVE, SLOTS_AVAILABLE, ESTIMATED_WAIT_TIME
     #         metric_id: "CurrentMetricId",
     #         unit: "SECONDS", # accepts SECONDS, COUNT, PERCENT
     #       },
@@ -10561,7 +10776,7 @@ module Aws::Connect
     #     max_results: 1,
     #     sort_criteria: [
     #       {
-    #         sort_by_metric: "AGENTS_ONLINE", # accepts AGENTS_ONLINE, AGENTS_AVAILABLE, AGENTS_ON_CALL, AGENTS_NON_PRODUCTIVE, AGENTS_AFTER_CONTACT_WORK, AGENTS_ERROR, AGENTS_STAFFED, CONTACTS_IN_QUEUE, OLDEST_CONTACT_AGE, CONTACTS_SCHEDULED, AGENTS_ON_CONTACT, SLOTS_ACTIVE, SLOTS_AVAILABLE
+    #         sort_by_metric: "AGENTS_ONLINE", # accepts AGENTS_ONLINE, AGENTS_AVAILABLE, AGENTS_ON_CALL, AGENTS_NON_PRODUCTIVE, AGENTS_AFTER_CONTACT_WORK, AGENTS_ERROR, AGENTS_STAFFED, CONTACTS_IN_QUEUE, OLDEST_CONTACT_AGE, CONTACTS_SCHEDULED, AGENTS_ON_CONTACT, SLOTS_ACTIVE, SLOTS_AVAILABLE, ESTIMATED_WAIT_TIME
     #         sort_order: "ASCENDING", # accepts ASCENDING, DESCENDING
     #       },
     #     ],
@@ -10582,7 +10797,7 @@ module Aws::Connect
     #   resp.metric_results[0].dimensions.subtype #=> String
     #   resp.metric_results[0].dimensions.validation_test_type #=> String
     #   resp.metric_results[0].collections #=> Array
-    #   resp.metric_results[0].collections[0].metric.name #=> String, one of "AGENTS_ONLINE", "AGENTS_AVAILABLE", "AGENTS_ON_CALL", "AGENTS_NON_PRODUCTIVE", "AGENTS_AFTER_CONTACT_WORK", "AGENTS_ERROR", "AGENTS_STAFFED", "CONTACTS_IN_QUEUE", "OLDEST_CONTACT_AGE", "CONTACTS_SCHEDULED", "AGENTS_ON_CONTACT", "SLOTS_ACTIVE", "SLOTS_AVAILABLE"
+    #   resp.metric_results[0].collections[0].metric.name #=> String, one of "AGENTS_ONLINE", "AGENTS_AVAILABLE", "AGENTS_ON_CALL", "AGENTS_NON_PRODUCTIVE", "AGENTS_AFTER_CONTACT_WORK", "AGENTS_ERROR", "AGENTS_STAFFED", "CONTACTS_IN_QUEUE", "OLDEST_CONTACT_AGE", "CONTACTS_SCHEDULED", "AGENTS_ON_CONTACT", "SLOTS_ACTIVE", "SLOTS_AVAILABLE", "ESTIMATED_WAIT_TIME"
     #   resp.metric_results[0].collections[0].metric.metric_id #=> String
     #   resp.metric_results[0].collections[0].metric.unit #=> String, one of "SECONDS", "COUNT", "PERCENT"
     #   resp.metric_results[0].collections[0].value #=> Float
@@ -13565,6 +13780,51 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # Retrieves an overview of a test execution that includes the status of
+    # the execution, start and end time, and observation summary.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance.
+    #
+    # @option params [required, String] :test_case_id
+    #   The identifier of the test case.
+    #
+    # @option params [required, String] :test_case_execution_id
+    #   The identifier of the test case execution.
+    #
+    # @return [Types::GetTestCaseExecutionSummaryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetTestCaseExecutionSummaryResponse#start_time #start_time} => Time
+    #   * {Types::GetTestCaseExecutionSummaryResponse#end_time #end_time} => Time
+    #   * {Types::GetTestCaseExecutionSummaryResponse#status #status} => String
+    #   * {Types::GetTestCaseExecutionSummaryResponse#observation_summary #observation_summary} => Types::ObservationSummary
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_test_case_execution_summary({
+    #     instance_id: "InstanceId", # required
+    #     test_case_id: "TestCaseId", # required
+    #     test_case_execution_id: "TestCaseExecutionId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.start_time #=> Time
+    #   resp.end_time #=> Time
+    #   resp.status #=> String, one of "INITIATED", "PASSED", "FAILED", "IN_PROGRESS", "STOPPED"
+    #   resp.observation_summary.total_observations #=> Integer
+    #   resp.observation_summary.observations_passed #=> Integer
+    #   resp.observation_summary.observations_failed #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/GetTestCaseExecutionSummary AWS API Documentation
+    #
+    # @overload get_test_case_execution_summary(params = {})
+    # @param [Hash] params ({})
+    def get_test_case_execution_summary(params = {}, options = {})
+      req = build_request(:get_test_case_execution_summary, params)
+      req.send_request(options)
+    end
+
     # Retrieves the current traffic distribution for a given traffic
     # distribution group.
     #
@@ -14249,7 +14509,7 @@ module Aws::Connect
     #   resp.evaluation_summary_list[0].evaluation_form_title #=> String
     #   resp.evaluation_summary_list[0].evaluation_form_id #=> String
     #   resp.evaluation_summary_list[0].calibration_session_id #=> String
-    #   resp.evaluation_summary_list[0].status #=> String, one of "DRAFT", "SUBMITTED"
+    #   resp.evaluation_summary_list[0].status #=> String, one of "DRAFT", "SUBMITTED", "REVIEW_REQUESTED", "UNDER_REVIEW"
     #   resp.evaluation_summary_list[0].auto_evaluation_enabled #=> Boolean
     #   resp.evaluation_summary_list[0].auto_evaluation_status #=> String, one of "IN_PROGRESS", "FAILED", "SUCCEEDED"
     #   resp.evaluation_summary_list[0].evaluator_arn #=> String
@@ -17010,6 +17270,181 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # Lists detailed steps of test case execution that includes all
+    # observations along with actions taken and data associated in the
+    # specified Amazon Connect instance.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance.
+    #
+    # @option params [required, String] :test_case_id
+    #   The identifier of the test case.
+    #
+    # @option params [required, String] :test_case_execution_id
+    #   The identifier of the test case execution.
+    #
+    # @option params [String] :status
+    #   Filter execution records by status.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per page.
+    #
+    # @return [Types::ListTestCaseExecutionRecordsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTestCaseExecutionRecordsResponse#execution_records #execution_records} => Array&lt;Types::ExecutionRecord&gt;
+    #   * {Types::ListTestCaseExecutionRecordsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_test_case_execution_records({
+    #     instance_id: "InstanceId", # required
+    #     test_case_id: "TestCaseId", # required
+    #     test_case_execution_id: "TestCaseExecutionId", # required
+    #     status: "INITIATED", # accepts INITIATED, PASSED, FAILED, IN_PROGRESS, STOPPED
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.execution_records #=> Array
+    #   resp.execution_records[0].observation_id #=> String
+    #   resp.execution_records[0].status #=> String, one of "PASSED", "FAILED", "IN_PROGRESS", "STOPPED"
+    #   resp.execution_records[0].timestamp #=> Time
+    #   resp.execution_records[0].record #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListTestCaseExecutionRecords AWS API Documentation
+    #
+    # @overload list_test_case_execution_records(params = {})
+    # @param [Hash] params ({})
+    def list_test_case_execution_records(params = {}, options = {})
+      req = build_request(:list_test_case_execution_records, params)
+      req.send_request(options)
+    end
+
+    # Lists all test case executions and allows filtering by test case id,
+    # test case name, start time, end time or status of the execution for
+    # the specified Amazon Connect instance.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance.
+    #
+    # @option params [String] :test_case_id
+    #   Filter executions by test case identifier.
+    #
+    # @option params [String] :test_case_name
+    #   Filter executions by test case name.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :start_time
+    #   Filter executions that started after this time.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :end_time
+    #   Filter executions that started before this time.
+    #
+    # @option params [String] :status
+    #   Filter executions by status.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per page.
+    #
+    # @return [Types::ListTestCaseExecutionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTestCaseExecutionsResponse#test_case_executions #test_case_executions} => Array&lt;Types::TestCaseExecution&gt;
+    #   * {Types::ListTestCaseExecutionsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_test_case_executions({
+    #     instance_id: "InstanceId", # required
+    #     test_case_id: "TestCaseId",
+    #     test_case_name: "TestCaseName",
+    #     start_time: Time.now,
+    #     end_time: Time.now,
+    #     status: "INITIATED", # accepts INITIATED, PASSED, FAILED, IN_PROGRESS, STOPPED
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.test_case_executions #=> Array
+    #   resp.test_case_executions[0].start_time #=> Time
+    #   resp.test_case_executions[0].end_time #=> Time
+    #   resp.test_case_executions[0].test_case_execution_id #=> String
+    #   resp.test_case_executions[0].test_case_id #=> String
+    #   resp.test_case_executions[0].test_case_execution_status #=> String, one of "INITIATED", "PASSED", "FAILED", "IN_PROGRESS", "STOPPED"
+    #   resp.test_case_executions[0].tags #=> Hash
+    #   resp.test_case_executions[0].tags["TagKey"] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListTestCaseExecutions AWS API Documentation
+    #
+    # @overload list_test_case_executions(params = {})
+    # @param [Hash] params ({})
+    def list_test_case_executions(params = {}, options = {})
+      req = build_request(:list_test_case_executions, params)
+      req.send_request(options)
+    end
+
+    # Lists the test cases present in the specific Amazon Connect instance.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per page.
+    #
+    # @return [Types::ListTestCasesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTestCasesResponse#test_case_summary_list #test_case_summary_list} => Array&lt;Types::TestCaseSummary&gt;
+    #   * {Types::ListTestCasesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_test_cases({
+    #     instance_id: "InstanceId", # required
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.test_case_summary_list #=> Array
+    #   resp.test_case_summary_list[0].id #=> String
+    #   resp.test_case_summary_list[0].arn #=> String
+    #   resp.test_case_summary_list[0].name #=> String
+    #   resp.test_case_summary_list[0].status #=> String, one of "PUBLISHED", "SAVED"
+    #   resp.test_case_summary_list[0].last_modified_time #=> Time
+    #   resp.test_case_summary_list[0].last_modified_region #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListTestCases AWS API Documentation
+    #
+    # @overload list_test_cases(params = {})
+    # @param [Hash] params ({})
+    def list_test_cases(params = {}, options = {})
+      req = build_request(:list_test_cases, params)
+      req.send_request(options)
+    end
+
     # Lists traffic distribution group users.
     #
     # @option params [required, String] :traffic_distribution_group_id
@@ -18278,7 +18713,7 @@ module Aws::Connect
     #   resp.evaluation_search_summary_list[0].metadata.review_id #=> String
     #   resp.evaluation_search_summary_list[0].metadata.contact_participant_role #=> String, one of "AGENT", "SYSTEM", "CUSTOM_BOT"
     #   resp.evaluation_search_summary_list[0].metadata.contact_participant_id #=> String
-    #   resp.evaluation_search_summary_list[0].status #=> String, one of "DRAFT", "SUBMITTED"
+    #   resp.evaluation_search_summary_list[0].status #=> String, one of "DRAFT", "SUBMITTED", "REVIEW_REQUESTED", "UNDER_REVIEW"
     #   resp.evaluation_search_summary_list[0].evaluation_type #=> String, one of "STANDARD", "CALIBRATION"
     #   resp.evaluation_search_summary_list[0].created_time #=> Time
     #   resp.evaluation_search_summary_list[0].last_modified_time #=> Time
@@ -18672,6 +19107,26 @@ module Aws::Connect
     #         match_type: "MATCH_ALL", # accepts MATCH_ALL, MATCH_ANY, MATCH_EXACT, MATCH_NONE
     #       },
     #       active_regions: ["RegionName"],
+    #       contact_tags: {
+    #         or_conditions: [
+    #           [
+    #             {
+    #               tag_key: "String",
+    #               tag_value: "String",
+    #             },
+    #           ],
+    #         ],
+    #         and_conditions: [
+    #           {
+    #             tag_key: "String",
+    #             tag_value: "String",
+    #           },
+    #         ],
+    #         tag_condition: {
+    #           tag_key: "String",
+    #           tag_value: "String",
+    #         },
+    #       },
     #     },
     #     max_results: 1,
     #     next_token: "LargeNextToken",
@@ -18733,6 +19188,8 @@ module Aws::Connect
     #   resp.contacts[0].routing_criteria.steps[0].status #=> String, one of "ACTIVE", "INACTIVE", "JOINED", "EXPIRED"
     #   resp.contacts[0].routing_criteria.activation_timestamp #=> Time
     #   resp.contacts[0].routing_criteria.index #=> Integer
+    #   resp.contacts[0].tags #=> Hash
+    #   resp.contacts[0].tags["ContactTagKey"] #=> String
     #   resp.contacts[0].global_resiliency_metadata.active_region #=> String
     #   resp.contacts[0].global_resiliency_metadata.origin_region #=> String
     #   resp.contacts[0].global_resiliency_metadata.traffic_distribution_group_id #=> String
@@ -20121,6 +20578,114 @@ module Aws::Connect
     # @param [Hash] params ({})
     def search_security_profiles(params = {}, options = {})
       req = build_request(:search_security_profiles, params)
+      req.send_request(options)
+    end
+
+    # Searches for test cases in the specified Amazon Connect instance, with
+    # optional filtering.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instance ID in the Amazon Resource Name (ARN) of the instance.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per page.
+    #
+    # @option params [Types::TestCaseSearchFilter] :search_filter
+    #   Filters to be applied to search results.
+    #
+    # @option params [Types::TestCaseSearchCriteria] :search_criteria
+    #   The search criteria to be used to return test cases.
+    #
+    # @return [Types::SearchTestCasesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::SearchTestCasesResponse#test_cases #test_cases} => Array&lt;Types::TestCase&gt;
+    #   * {Types::SearchTestCasesResponse#next_token #next_token} => String
+    #   * {Types::SearchTestCasesResponse#approximate_total_count #approximate_total_count} => Integer
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.search_test_cases({
+    #     instance_id: "InstanceIdOrArn", # required
+    #     next_token: "NextToken2500",
+    #     max_results: 1,
+    #     search_filter: {
+    #       tag_filter: {
+    #         or_conditions: [
+    #           [
+    #             {
+    #               tag_key: "String",
+    #               tag_value: "String",
+    #             },
+    #           ],
+    #         ],
+    #         and_conditions: [
+    #           {
+    #             tag_key: "String",
+    #             tag_value: "String",
+    #           },
+    #         ],
+    #         tag_condition: {
+    #           tag_key: "String",
+    #           tag_value: "String",
+    #         },
+    #       },
+    #     },
+    #     search_criteria: {
+    #       or_conditions: [
+    #         {
+    #           # recursive TestCaseSearchCriteria
+    #         },
+    #       ],
+    #       and_conditions: [
+    #         {
+    #           # recursive TestCaseSearchCriteria
+    #         },
+    #       ],
+    #       string_condition: {
+    #         field_name: "String",
+    #         value: "String",
+    #         comparison_type: "STARTS_WITH", # accepts STARTS_WITH, CONTAINS, EXACT
+    #       },
+    #       status_condition: "PUBLISHED", # accepts PUBLISHED, SAVED
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.test_cases #=> Array
+    #   resp.test_cases[0].arn #=> String
+    #   resp.test_cases[0].id #=> String
+    #   resp.test_cases[0].name #=> String
+    #   resp.test_cases[0].content #=> String
+    #   resp.test_cases[0].entry_point.type #=> String, one of "VOICE_CALL"
+    #   resp.test_cases[0].entry_point.voice_call_entry_point_parameters.source_phone_number #=> String
+    #   resp.test_cases[0].entry_point.voice_call_entry_point_parameters.destination_phone_number #=> String
+    #   resp.test_cases[0].entry_point.voice_call_entry_point_parameters.flow_id #=> String
+    #   resp.test_cases[0].initialization_data #=> String
+    #   resp.test_cases[0].description #=> String
+    #   resp.test_cases[0].status #=> String, one of "PUBLISHED", "SAVED"
+    #   resp.test_cases[0].last_modified_time #=> Time
+    #   resp.test_cases[0].last_modified_region #=> String
+    #   resp.test_cases[0].tags #=> Hash
+    #   resp.test_cases[0].tags["TagKey"] #=> String
+    #   resp.test_cases[0].test_case_sha_256 #=> String
+    #   resp.next_token #=> String
+    #   resp.approximate_total_count #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/SearchTestCases AWS API Documentation
+    #
+    # @overload search_test_cases(params = {})
+    # @param [Hash] params ({})
+    def search_test_cases(params = {}, options = {})
+      req = build_request(:search_test_cases, params)
       req.send_request(options)
     end
 
@@ -22551,6 +23116,10 @@ module Aws::Connect
     #
     #    </note>
     #
+    # @option params [Array<Types::TaskAttachment>] :attachments
+    #   List of S3 presigned URLs of task attachments and their file name. You
+    #   can have a maximum of 5 attachments per task.
+    #
     # @return [Types::StartTaskContactResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartTaskContactResponse#contact_id #contact_id} => String
@@ -22597,6 +23166,12 @@ module Aws::Connect
     #         value_arn: "SegmentAttributeValueString",
     #       },
     #     },
+    #     attachments: [
+    #       {
+    #         file_name: "FileName", # required
+    #         s3_url: "PreSignedAttachmentUrl", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -22609,6 +23184,53 @@ module Aws::Connect
     # @param [Hash] params ({})
     def start_task_contact(params = {}, options = {})
       req = build_request(:start_task_contact, params)
+      req.send_request(options)
+    end
+
+    # Starts executing a published test case.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance.
+    #
+    # @option params [required, String] :test_case_id
+    #   The identifier of the test case to execute.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. If not provided, the Amazon Web Services
+    #   SDK populates this field. For more information about idempotency, see
+    #   [Making retries safe with idempotent APIs][1].
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
+    #
+    # @return [Types::StartTestCaseExecutionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartTestCaseExecutionResponse#test_case_execution_id #test_case_execution_id} => String
+    #   * {Types::StartTestCaseExecutionResponse#test_case_id #test_case_id} => String
+    #   * {Types::StartTestCaseExecutionResponse#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_test_case_execution({
+    #     instance_id: "InstanceId", # required
+    #     test_case_id: "TestCaseId", # required
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.test_case_execution_id #=> String
+    #   resp.test_case_id #=> String
+    #   resp.status #=> String, one of "INITIATED", "PASSED", "FAILED", "IN_PROGRESS", "STOPPED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/StartTestCaseExecution AWS API Documentation
+    #
+    # @overload start_test_case_execution(params = {})
+    # @param [Hash] params ({})
+    def start_test_case_execution(params = {}, options = {})
+      req = build_request(:start_test_case_execution, params)
       req.send_request(options)
     end
 
@@ -22924,6 +23546,47 @@ module Aws::Connect
     # @param [Hash] params ({})
     def stop_contact_streaming(params = {}, options = {})
       req = build_request(:stop_contact_streaming, params)
+      req.send_request(options)
+    end
+
+    # Stops a running test execution.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance.
+    #
+    # @option params [required, String] :test_case_execution_id
+    #   The identifier of the test case execution to stop.
+    #
+    # @option params [required, String] :test_case_id
+    #   The identifier of the test case.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. If not provided, the Amazon Web Services
+    #   SDK populates this field. For more information about idempotency, see
+    #   [Making retries safe with idempotent APIs][1].
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.stop_test_case_execution({
+    #     instance_id: "InstanceId", # required
+    #     test_case_execution_id: "TestCaseExecutionId", # required
+    #     test_case_id: "TestCaseId", # required
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/StopTestCaseExecution AWS API Documentation
+    #
+    # @overload stop_test_case_execution(params = {})
+    # @param [Hash] params ({})
+    def stop_test_case_execution(params = {}, options = {})
+      req = build_request(:stop_test_case_execution, params)
       req.send_request(options)
     end
 
@@ -24501,6 +25164,9 @@ module Aws::Connect
     # @option params [Types::EvaluationFormAutoEvaluationConfiguration] :auto_evaluation_configuration
     #   Whether automated evaluations are enabled.
     #
+    # @option params [Types::EvaluationReviewConfiguration] :review_configuration
+    #   Configuration for evaluation review settings of the evaluation form.
+    #
     # @option params [Boolean] :as_draft
     #   A boolean flag indicating whether to update evaluation form to draft
     #   state.
@@ -24678,6 +25344,17 @@ module Aws::Connect
     #     },
     #     auto_evaluation_configuration: {
     #       enabled: false, # required
+    #     },
+    #     review_configuration: {
+    #       review_notification_recipients: [ # required
+    #         {
+    #           type: "USER_ID", # required, accepts USER_ID
+    #           value: { # required
+    #             user_id: "ResourceId",
+    #           },
+    #         },
+    #       ],
+    #       eligibility_days: 1,
     #     },
     #     as_draft: false,
     #     client_token: "ClientToken",
@@ -26350,6 +27027,76 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # Updates any of the metadata for a test case, such as the name,
+    # description, and status or content of an existing test case. This API
+    # doesn't allow customers to update the tags of the test case resource
+    # for the specified Amazon Connect instance.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance.
+    #
+    # @option params [required, String] :test_case_id
+    #   The identifier of the test case to update.
+    #
+    # @option params [String] :content
+    #   The JSON string that represents the content of the test.
+    #
+    # @option params [Types::TestCaseEntryPoint] :entry_point
+    #   Defines the starting point for your test.
+    #
+    # @option params [String] :initialization_data
+    #   Defines the test attributes for precise data representation.
+    #
+    # @option params [String] :name
+    #   The name of the test case.
+    #
+    # @option params [String] :description
+    #   The description of the test case.
+    #
+    # @option params [String] :status
+    #   Indicates the test status as either SAVED or PUBLISHED. The PUBLISHED
+    #   status will initiate validation on the content. The SAVED status does
+    #   not initiate validation of the content.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :last_modified_time
+    #   The time at which the resource was last modified.
+    #
+    # @option params [String] :last_modified_region
+    #   The region in which the resource was last modified
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_test_case({
+    #     instance_id: "InstanceIdOrArn", # required
+    #     test_case_id: "TestCaseId", # required
+    #     content: "TestCaseContent",
+    #     entry_point: {
+    #       type: "VOICE_CALL", # accepts VOICE_CALL
+    #       voice_call_entry_point_parameters: {
+    #         source_phone_number: "PhoneNumber",
+    #         destination_phone_number: "PhoneNumber",
+    #         flow_id: "ContactFlowId",
+    #       },
+    #     },
+    #     initialization_data: "TestCaseInitializationData",
+    #     name: "TestCaseName",
+    #     description: "TestCaseDescription",
+    #     status: "PUBLISHED", # accepts PUBLISHED, SAVED
+    #     last_modified_time: Time.now,
+    #     last_modified_region: "RegionName",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateTestCase AWS API Documentation
+    #
+    # @overload update_test_case(params = {})
+    # @param [Hash] params ({})
+    def update_test_case(params = {}, options = {})
+      req = build_request(:update_test_case, params)
+      req.send_request(options)
+    end
+
     # Updates the traffic distribution for a given traffic distribution
     # group.
     #
@@ -27130,7 +27877,7 @@ module Aws::Connect
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-connect'
-      context[:gem_version] = '1.235.0'
+      context[:gem_version] = '1.240.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

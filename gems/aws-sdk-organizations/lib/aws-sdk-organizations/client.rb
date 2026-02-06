@@ -872,12 +872,18 @@ module Aws::Organizations
     #   information on using CloudTrail with Organizations, see [Logging and
     #   monitoring in Organizations][2] in the *Organizations User Guide*.
     #
-    # <note markdown="1"> * You can close only 10% of member accounts, between 10 and 1000,
+    # <note markdown="1"> * Resources remaining within the account after closing will be
+    #   automatically deleted after 90 days. During this 90-day period, the
+    #   resources won't be available unless you contact Amazon Web Services
+    #   Support to reopen the account. After 90 days, you can't reopen an
+    #   account. You might still receive a [bill after account closure][3].
+    #
+    # * You can close only 10% of member accounts, between 10 and 1000,
     #   within a rolling 30 day period. This quota is not bound by a
     #   calendar month, but starts when you close an account. After you
     #   reach this limit, you can't close additional accounts. For more
-    #   information, see [Closing a member account in your organization][3]
-    #   and [Quotas for Organizations][4] in the *Organizations User Guide*.
+    #   information, see [Closing a member account in your organization][4]
+    #   and [Quotas for Organizations][5] in the *Organizations User Guide*.
     #
     # * To reinstate a closed account, contact Amazon Web Services Support
     #   within the 90-day grace period while the account is in SUSPENDED
@@ -887,7 +893,7 @@ module Aws::Organizations
     #   an Amazon Web Services GovCloud (US) account, the `CloseAccount`
     #   request will close both accounts. To learn important pre-closure
     #   details, see [ Closing an Amazon Web Services GovCloud (US)
-    #   account][5] in the <i> Amazon Web Services GovCloud User Guide</i>.
+    #   account][6] in the <i> Amazon Web Services GovCloud User Guide</i>.
     #
     #  </note>
     #
@@ -895,9 +901,10 @@ module Aws::Organizations
     #
     # [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html
     # [2]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_security_incident-response.html#orgs_cloudtrail-integration
-    # [3]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_close.html
-    # [4]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_reference_limits.html
-    # [5]: https://docs.aws.amazon.com/govcloud-us/latest/UserGuide/Closing-govcloud-account.html
+    # [3]: https://repost.aws/knowledge-center/closed-account-bill
+    # [4]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_close.html
+    # [5]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_reference_limits.html
+    # [6]: https://docs.aws.amazon.com/govcloud-us/latest/UserGuide/Closing-govcloud-account.html
     #
     # @option params [required, String] :account_id
     #   Retrieves the Amazon Web Services account Id for the current
@@ -6724,7 +6731,7 @@ module Aws::Organizations
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-organizations'
-      context[:gem_version] = '1.133.0'
+      context[:gem_version] = '1.135.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -2275,7 +2275,8 @@ module Aws::CleanRooms
 
     class ProtectedJobParameters
       attr_accessor analysis_template_arn: ::String
-      SENSITIVE: []
+      attr_accessor parameters: ::Hash[::String, ::String]
+      SENSITIVE: [:parameters]
     end
 
     class ProtectedJobReceiverConfiguration

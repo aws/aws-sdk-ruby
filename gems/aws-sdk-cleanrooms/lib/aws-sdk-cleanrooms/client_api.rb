@@ -352,6 +352,9 @@ module Aws::CleanRooms
     IdNamespaceType = Shapes::StringShape.new(name: 'IdNamespaceType')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
     JobComputePaymentConfig = Shapes::StructureShape.new(name: 'JobComputePaymentConfig')
+    JobParameterMap = Shapes::MapShape.new(name: 'JobParameterMap')
+    JobParameterName = Shapes::StringShape.new(name: 'JobParameterName')
+    JobParameterValue = Shapes::StringShape.new(name: 'JobParameterValue')
     JobType = Shapes::StringShape.new(name: 'JobType')
     JoinOperator = Shapes::StringShape.new(name: 'JoinOperator')
     JoinOperatorsList = Shapes::ListShape.new(name: 'JoinOperatorsList')
@@ -1884,6 +1887,9 @@ module Aws::CleanRooms
     JobComputePaymentConfig.add_member(:is_responsible, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "isResponsible"))
     JobComputePaymentConfig.struct_class = Types::JobComputePaymentConfig
 
+    JobParameterMap.key = Shapes::ShapeRef.new(shape: JobParameterName)
+    JobParameterMap.value = Shapes::ShapeRef.new(shape: JobParameterValue)
+
     JoinOperatorsList.member = Shapes::ShapeRef.new(shape: JoinOperator)
 
     ListAnalysisTemplatesInput.add_member(:membership_identifier, Shapes::ShapeRef.new(shape: MembershipIdentifier, required: true, location: "uri", location_name: "membershipIdentifier"))
@@ -2381,6 +2387,7 @@ module Aws::CleanRooms
     ProtectedJobOutputConfigurationOutput.struct_class = Types::ProtectedJobOutputConfigurationOutput
 
     ProtectedJobParameters.add_member(:analysis_template_arn, Shapes::ShapeRef.new(shape: AnalysisTemplateArn, required: true, location_name: "analysisTemplateArn"))
+    ProtectedJobParameters.add_member(:parameters, Shapes::ShapeRef.new(shape: JobParameterMap, location_name: "parameters"))
     ProtectedJobParameters.struct_class = Types::ProtectedJobParameters
 
     ProtectedJobReceiverAccountIds.member = Shapes::ShapeRef.new(shape: AccountId)

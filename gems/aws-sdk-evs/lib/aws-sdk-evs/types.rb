@@ -84,7 +84,7 @@ module Aws::Evs
     #     the environment, this check fails.
     #
     #   * `HOST_COUNT`: Checks that your environment has a minimum of 4
-    #     hosts, which is a requirement for VCF 5.2.1.
+    #     hosts.
     #
     #     If this check fails, you will need to add hosts so that your
     #     environment meets this minimum requirement. Amazon EVS only
@@ -150,12 +150,17 @@ module Aws::Evs
     #   The host that is created and added to the environment.
     #   @return [Types::HostInfoForCreate]
     #
+    # @!attribute [rw] esx_version
+    #   The ESX version to use for the host.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/evs-2023-07-27/CreateEnvironmentHostRequest AWS API Documentation
     #
     class CreateEnvironmentHostRequest < Struct.new(
       :client_token,
       :environment_id,
-      :host)
+      :host,
+      :esx_version)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -254,7 +259,7 @@ module Aws::Evs
     #   Connect virtual private gateway associations.
     #
     #   <note markdown="1"> Ensure that you specify a VPC that is adequately sized to
-    #   accommodate the \{evws} subnets.
+    #   accommodate the Amazon EVS subnets.
     #
     #    </note>
     #   @return [String]
@@ -267,8 +272,7 @@ module Aws::Evs
     #   @return [String]
     #
     # @!attribute [rw] vcf_version
-    #   The VCF version to use for the environment. Amazon EVS only supports
-    #   VCF version 5.2.1 at this time.
+    #   The VCF version to use for the environment.
     #   @return [String]
     #
     # @!attribute [rw] terms_accepted
@@ -306,7 +310,7 @@ module Aws::Evs
     #   @return [Types::InitialVlans]
     #
     # @!attribute [rw] hosts
-    #   The ESXi hosts to add to the environment. Amazon EVS requires that
+    #   The ESX hosts to add to the environment. Amazon EVS requires that
     #   you provide details for a minimum of 4 hosts during environment
     #   creation.
     #
@@ -770,11 +774,34 @@ module Aws::Evs
       include Aws::Structure
     end
 
-    # An ESXi host that runs on an Amazon EC2 bare metal instance. Four
-    # hosts are created in an Amazon EVS environment during environment
-    # creation. You can add hosts to an environment using the
-    # `CreateEnvironmentHost` operation. Amazon EVS supports 4-16 hosts per
-    # environment.
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/evs-2023-07-27/GetVersionsRequest AWS API Documentation
+    #
+    class GetVersionsRequest < Aws::EmptyStructure; end
+
+    # @!attribute [rw] vcf_versions
+    #   A list of VCF versions with their availability status, default ESX
+    #   version, and instance types.
+    #   @return [Array<Types::VcfVersionInfo>]
+    #
+    # @!attribute [rw] instance_type_esx_versions
+    #   A list of EC2 instance types and their available ESX versions.
+    #   @return [Array<Types::InstanceTypeEsxVersionsInfo>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/evs-2023-07-27/GetVersionsResponse AWS API Documentation
+    #
+    class GetVersionsResponse < Struct.new(
+      :vcf_versions,
+      :instance_type_esx_versions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An ESX host that runs on an Amazon EC2 bare metal instance. Four hosts
+    # are created in an Amazon EVS environment during environment creation.
+    # You can add hosts to an environment using the `CreateEnvironmentHost`
+    # operation. Amazon EVS supports 4-16 hosts per environment.
     #
     # @!attribute [rw] host_name
     #   The DNS hostname of the host. DNS hostnames for hosts must be unique
@@ -791,6 +818,10 @@ module Aws::Evs
     #
     # @!attribute [rw] instance_type
     #   The EC2 instance type of the host.
+    #
+    #   <note markdown="1"> Currently, Amazon EVS supports only the `i4i.metal` instance type.
+    #
+    #    </note>
     #
     #   <note markdown="1"> EC2 instances created through Amazon EVS do not support associating
     #   an IAM instance profile.
@@ -868,6 +899,10 @@ module Aws::Evs
     #
     # @!attribute [rw] instance_type
     #   The EC2 instance type that represents the host.
+    #
+    #   <note markdown="1"> Currently, Amazon EVS supports only the `i4i.metal` instance type.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] placement_group_id
@@ -925,8 +960,8 @@ module Aws::Evs
     #
     # @!attribute [rw] vmk_management
     #   The host VMkernel management VLAN subnet. This VLAN subnet carries
-    #   traffic for managing ESXi hosts and communicating with VMware
-    #   vCenter Server.
+    #   traffic for managing ESX hosts and communicating with VMware vCenter
+    #   Server.
     #   @return [Types::InitialVlanInfo]
     #
     # @!attribute [rw] vm_management
@@ -941,7 +976,7 @@ module Aws::Evs
     #
     # @!attribute [rw] v_san
     #   The vSAN VLAN subnet. This VLAN subnet carries the communication
-    #   between ESXi hosts to implement a vSAN shared storage pool.
+    #   between ESX hosts to implement a vSAN shared storage pool.
     #   @return [Types::InitialVlanInfo]
     #
     # @!attribute [rw] v_tep
@@ -974,7 +1009,7 @@ module Aws::Evs
     #   * The HCX public VLAN CIDR block must be added to the VPC as a
     #     secondary CIDR block.
     #
-    #   * Must have at least three Elastic IP addresses to be allocated from
+    #   * Must have at least two Elastic IP addresses to be allocated from
     #     the public IPAM pool for HCX components.
     #   @return [Types::InitialVlanInfo]
     #
@@ -1019,6 +1054,39 @@ module Aws::Evs
       :expansion_vlan_2,
       :is_hcx_public,
       :hcx_network_acl_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about ESX versions offered for each EC2 instance type.
+    #
+    # @!attribute [rw] instance_type
+    #   The EC2 instance type.
+    #   @return [String]
+    #
+    # @!attribute [rw] esx_versions
+    #   The list of ESX versions offered for this instance type.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/evs-2023-07-27/InstanceTypeEsxVersionsInfo AWS API Documentation
+    #
+    class InstanceTypeEsxVersionsInfo < Struct.new(
+      :instance_type,
+      :esx_versions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An internal server error occurred. Retry your request.
+    #
+    # @!attribute [rw] message
+    #   Describes the error encountered.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/evs-2023-07-27/InternalServerException AWS API Documentation
+    #
+    class InternalServerException < Struct.new(
+      :message)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1369,9 +1437,9 @@ module Aws::Evs
     #
     class TagResourceResponse < Aws::EmptyStructure; end
 
-    # The operation couldn't be performed because the service is throttling
-    # requests. This exception is thrown when there are too many requests
-    # accepted concurrently from the service endpoint.
+    # The operation could not be performed because the service is throttling
+    # requests. This exception is thrown when the service endpoint receives
+    # too many concurrent requests.
     #
     # @!attribute [rw] message
     #   Describes the error encountered.
@@ -1538,6 +1606,52 @@ module Aws::Evs
       :nsx_edge_2,
       :sddc_manager,
       :cloud_builder)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about a VCF versions provided by Amazon EVS, including its
+    # status, default ESX version, and EC2 instance types.
+    #
+    # @!attribute [rw] vcf_version
+    #   The VCF version number.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status for this VCF version. Valid values are:
+    #
+    #   * `AVAILABLE` - This VCF version is available to you.
+    #
+    #   * `RESTRICTED` - This VCF version has limited availability.
+    #
+    #   <note markdown="1"> If the version you need shows RESTRICTED, and you require, check out
+    #   [VCF versions and EC2 instance types provided by Amazon EVS][1] for
+    #   more information.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/evs/latest/userguide/versions-provided.html
+    #   @return [String]
+    #
+    # @!attribute [rw] default_esx_version
+    #   The default ESX version for this VCF version. It is based on
+    #   Broadcom's Bill Of Materials (BOM).
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_types
+    #   EC2 instance types provided by Amazon EVS for this VCF version for
+    #   creating environments.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/evs-2023-07-27/VcfVersionInfo AWS API Documentation
+    #
+    class VcfVersionInfo < Struct.new(
+      :vcf_version,
+      :status,
+      :default_esx_version,
+      :instance_types)
       SENSITIVE = []
       include Aws::Structure
     end

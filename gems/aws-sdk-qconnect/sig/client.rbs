@@ -514,12 +514,10 @@ module Aws
                               ?tags: Hash[::String, ::String],
                               ?description: ::String,
                               ?inference_configuration: {
-                                text_ai_prompt_inference_configuration: {
-                                  temperature: ::Float?,
-                                  top_p: ::Float?,
-                                  top_k: ::Integer?,
-                                  max_tokens_to_sample: ::Integer?
-                                }?
+                                temperature: ::Float?,
+                                top_p: ::Float?,
+                                top_k: ::Integer?,
+                                max_tokens_to_sample: ::Integer?
                               }
                             ) -> _CreateAIPromptResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAIPromptResponseSuccess
@@ -1586,14 +1584,14 @@ module Aws
         def assistant_id: () -> ::String
         def assistant_arn: () -> ::String
         def target_id: () -> ::String
-        def target_type: () -> ("RECOMMENDATION" | "RESULT")
+        def target_type: () -> ("RECOMMENDATION" | "RESULT" | "MESSAGE")
         def content_feedback: () -> Types::ContentFeedbackData
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QConnect/Client.html#put_feedback-instance_method
       def put_feedback: (
                           assistant_id: ::String,
                           target_id: ::String,
-                          target_type: ("RECOMMENDATION" | "RESULT"),
+                          target_type: ("RECOMMENDATION" | "RESULT" | "MESSAGE"),
                           content_feedback: {
                             generative_content_feedback_data: {
                               relevance: ("HELPFUL" | "NOT_HELPFUL")
@@ -2453,12 +2451,10 @@ module Aws
                               ?description: ::String,
                               ?model_id: ::String,
                               ?inference_configuration: {
-                                text_ai_prompt_inference_configuration: {
-                                  temperature: ::Float?,
-                                  top_p: ::Float?,
-                                  top_k: ::Integer?,
-                                  max_tokens_to_sample: ::Integer?
-                                }?
+                                temperature: ::Float?,
+                                top_p: ::Float?,
+                                top_k: ::Integer?,
+                                max_tokens_to_sample: ::Integer?
                               }
                             ) -> _UpdateAIPromptResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAIPromptResponseSuccess
@@ -2474,12 +2470,7 @@ module Aws
                                        configuration: {
                                          ai_agent_id: ::String
                                        },
-                                       ?orchestrator_configuration_list: Array[
-                                         {
-                                           ai_agent_id: ::String?,
-                                           orchestrator_use_case: ::String
-                                         },
-                                       ]
+                                       ?orchestrator_use_case: ::String
                                      ) -> _UpdateAssistantAIAgentResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAssistantAIAgentResponseSuccess
 

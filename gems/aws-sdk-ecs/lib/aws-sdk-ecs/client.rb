@@ -666,6 +666,7 @@ module Aws::ECS
     #           allowed_instance_types: ["AllowedInstanceType"],
     #           max_spot_price_as_percentage_of_optimal_on_demand_price: 1,
     #         },
+    #         fips_enabled: false,
     #       },
     #       propagate_tags: "CAPACITY_PROVIDER", # accepts CAPACITY_PROVIDER, NONE
     #       infrastructure_optimization: {
@@ -744,6 +745,7 @@ module Aws::ECS
     #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.allowed_instance_types #=> Array
     #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.allowed_instance_types[0] #=> String
     #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.max_spot_price_as_percentage_of_optimal_on_demand_price #=> Integer
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.fips_enabled #=> Boolean
     #   resp.capacity_provider.managed_instances_provider.propagate_tags #=> String, one of "CAPACITY_PROVIDER", "NONE"
     #   resp.capacity_provider.managed_instances_provider.infrastructure_optimization.scale_in_after #=> Integer
     #   resp.capacity_provider.update_status #=> String, one of "CREATE_IN_PROGRESS", "CREATE_COMPLETE", "CREATE_FAILED", "DELETE_IN_PROGRESS", "DELETE_COMPLETE", "DELETE_FAILED", "UPDATE_IN_PROGRESS", "UPDATE_COMPLETE", "UPDATE_FAILED"
@@ -3022,6 +3024,7 @@ module Aws::ECS
     #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.allowed_instance_types #=> Array
     #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.allowed_instance_types[0] #=> String
     #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.max_spot_price_as_percentage_of_optimal_on_demand_price #=> Integer
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.fips_enabled #=> Boolean
     #   resp.capacity_provider.managed_instances_provider.propagate_tags #=> String, one of "CAPACITY_PROVIDER", "NONE"
     #   resp.capacity_provider.managed_instances_provider.infrastructure_optimization.scale_in_after #=> Integer
     #   resp.capacity_provider.update_status #=> String, one of "CREATE_IN_PROGRESS", "CREATE_COMPLETE", "CREATE_FAILED", "DELETE_IN_PROGRESS", "DELETE_COMPLETE", "DELETE_FAILED", "UPDATE_IN_PROGRESS", "UPDATE_COMPLETE", "UPDATE_FAILED"
@@ -4557,6 +4560,7 @@ module Aws::ECS
     #   resp.capacity_providers[0].managed_instances_provider.instance_launch_template.instance_requirements.allowed_instance_types #=> Array
     #   resp.capacity_providers[0].managed_instances_provider.instance_launch_template.instance_requirements.allowed_instance_types[0] #=> String
     #   resp.capacity_providers[0].managed_instances_provider.instance_launch_template.instance_requirements.max_spot_price_as_percentage_of_optimal_on_demand_price #=> Integer
+    #   resp.capacity_providers[0].managed_instances_provider.instance_launch_template.fips_enabled #=> Boolean
     #   resp.capacity_providers[0].managed_instances_provider.propagate_tags #=> String, one of "CAPACITY_PROVIDER", "NONE"
     #   resp.capacity_providers[0].managed_instances_provider.infrastructure_optimization.scale_in_after #=> Integer
     #   resp.capacity_providers[0].update_status #=> String, one of "CREATE_IN_PROGRESS", "CREATE_COMPLETE", "CREATE_FAILED", "DELETE_IN_PROGRESS", "DELETE_COMPLETE", "DELETE_FAILED", "UPDATE_IN_PROGRESS", "UPDATE_COMPLETE", "UPDATE_FAILED"
@@ -11580,6 +11584,7 @@ module Aws::ECS
     #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.allowed_instance_types #=> Array
     #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.allowed_instance_types[0] #=> String
     #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.max_spot_price_as_percentage_of_optimal_on_demand_price #=> Integer
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.fips_enabled #=> Boolean
     #   resp.capacity_provider.managed_instances_provider.propagate_tags #=> String, one of "CAPACITY_PROVIDER", "NONE"
     #   resp.capacity_provider.managed_instances_provider.infrastructure_optimization.scale_in_after #=> Integer
     #   resp.capacity_provider.update_status #=> String, one of "CREATE_IN_PROGRESS", "CREATE_COMPLETE", "CREATE_FAILED", "DELETE_IN_PROGRESS", "DELETE_COMPLETE", "DELETE_FAILED", "UPDATE_IN_PROGRESS", "UPDATE_COMPLETE", "UPDATE_FAILED"
@@ -14033,7 +14038,7 @@ module Aws::ECS
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-ecs'
-      context[:gem_version] = '1.218.0'
+      context[:gem_version] = '1.220.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

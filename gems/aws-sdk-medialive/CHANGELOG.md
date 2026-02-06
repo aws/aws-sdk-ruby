@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.178.0 (2026-02-05)
+------------------
+
+* Feature - Outputs using the AV1 codec in CMAF Ingest output groups in MediaLive now have the ability to specify a target bit depth of 8 or 10.
+
+1.177.0 (2026-02-04)
+------------------
+
+* Feature - AWS Elemental MediaLive now supports SRT listener mode for inputs and outputs, in addition to the existing SRT caller mode.
+
+1.176.0 (2026-01-27)
+------------------
+
+* Feature - AWS Elemental MediaLive released two new features that allows customers 1) to set Output Timecode for AV1 encoder, 2) to set a Custom Epoch for CMAF Ingest and MediaPackage V2 output groups when using Pipeline Locking or Disabled Locking modes.
+
+1.175.0 (2026-01-16)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.174.0 (2026-01-09)
 ------------------
 

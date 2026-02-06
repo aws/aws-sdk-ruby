@@ -596,7 +596,8 @@ module Aws
                                key: ::String,
                                value: ::String
                              },
-                           ]
+                           ],
+                           ?node_js_version: ::String
                          ) -> _CreateScriptResponseSuccess
                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateScriptResponseSuccess
 
@@ -1857,6 +1858,7 @@ module Aws
         def fleet_id: () -> ::String
         def fleet_arn: () -> ::String
         def location: () -> ::String
+        def managed_capacity_configuration: () -> Types::ManagedCapacityConfiguration
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLift/Client.html#update_fleet_capacity-instance_method
       def update_fleet_capacity: (
@@ -1864,7 +1866,11 @@ module Aws
                                    ?desired_instances: ::Integer,
                                    ?min_size: ::Integer,
                                    ?max_size: ::Integer,
-                                   ?location: ::String
+                                   ?location: ::String,
+                                   ?managed_capacity_configuration: {
+                                     zero_capacity_strategy: ("MANUAL" | "SCALE_TO_AND_FROM_ZERO")?,
+                                     scale_in_after_inactivity_minutes: ::Integer?
+                                   }
                                  ) -> _UpdateFleetCapacityResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateFleetCapacityResponseSuccess
 

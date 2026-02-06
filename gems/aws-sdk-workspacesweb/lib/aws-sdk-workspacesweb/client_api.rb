@@ -242,6 +242,7 @@ module Aws::WorkSpacesWeb
     PaginationToken = Shapes::StringShape.new(name: 'PaginationToken')
     PatternName = Shapes::StringShape.new(name: 'PatternName')
     Portal = Shapes::StructureShape.new(name: 'Portal')
+    PortalCustomDomain = Shapes::StringShape.new(name: 'PortalCustomDomain')
     PortalEndpoint = Shapes::StringShape.new(name: 'PortalEndpoint')
     PortalId = Shapes::StringShape.new(name: 'PortalId')
     PortalList = Shapes::ListShape.new(name: 'PortalList')
@@ -550,6 +551,7 @@ module Aws::WorkSpacesWeb
     CreatePortalRequest.add_member(:authentication_type, Shapes::ShapeRef.new(shape: AuthenticationType, location_name: "authenticationType"))
     CreatePortalRequest.add_member(:instance_type, Shapes::ShapeRef.new(shape: InstanceType, location_name: "instanceType"))
     CreatePortalRequest.add_member(:max_concurrent_sessions, Shapes::ShapeRef.new(shape: MaxConcurrentSessions, location_name: "maxConcurrentSessions"))
+    CreatePortalRequest.add_member(:portal_custom_domain, Shapes::ShapeRef.new(shape: PortalCustomDomain, location_name: "portalCustomDomain"))
     CreatePortalRequest.struct_class = Types::CreatePortalRequest
 
     CreatePortalResponse.add_member(:portal_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "portalArn"))
@@ -1061,6 +1063,7 @@ module Aws::WorkSpacesWeb
     Portal.add_member(:additional_encryption_context, Shapes::ShapeRef.new(shape: EncryptionContextMap, location_name: "additionalEncryptionContext"))
     Portal.add_member(:instance_type, Shapes::ShapeRef.new(shape: InstanceType, location_name: "instanceType"))
     Portal.add_member(:max_concurrent_sessions, Shapes::ShapeRef.new(shape: MaxConcurrentSessions, location_name: "maxConcurrentSessions"))
+    Portal.add_member(:portal_custom_domain, Shapes::ShapeRef.new(shape: PortalCustomDomain, location_name: "portalCustomDomain"))
     Portal.struct_class = Types::Portal
 
     PortalList.member = Shapes::ShapeRef.new(shape: PortalSummary)
@@ -1083,6 +1086,7 @@ module Aws::WorkSpacesWeb
     PortalSummary.add_member(:ip_access_settings_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "ipAccessSettingsArn"))
     PortalSummary.add_member(:instance_type, Shapes::ShapeRef.new(shape: InstanceType, location_name: "instanceType"))
     PortalSummary.add_member(:max_concurrent_sessions, Shapes::ShapeRef.new(shape: MaxConcurrentSessions, location_name: "maxConcurrentSessions"))
+    PortalSummary.add_member(:portal_custom_domain, Shapes::ShapeRef.new(shape: PortalCustomDomain, location_name: "portalCustomDomain"))
     PortalSummary.struct_class = Types::PortalSummary
 
     RedactionPlaceHolder.add_member(:redaction_place_holder_type, Shapes::ShapeRef.new(shape: RedactionPlaceHolderType, required: true, location_name: "redactionPlaceHolderType"))
@@ -1251,6 +1255,7 @@ module Aws::WorkSpacesWeb
     UpdatePortalRequest.add_member(:authentication_type, Shapes::ShapeRef.new(shape: AuthenticationType, location_name: "authenticationType"))
     UpdatePortalRequest.add_member(:instance_type, Shapes::ShapeRef.new(shape: InstanceType, location_name: "instanceType"))
     UpdatePortalRequest.add_member(:max_concurrent_sessions, Shapes::ShapeRef.new(shape: MaxConcurrentSessions, location_name: "maxConcurrentSessions"))
+    UpdatePortalRequest.add_member(:portal_custom_domain, Shapes::ShapeRef.new(shape: PortalCustomDomain, location_name: "portalCustomDomain"))
     UpdatePortalRequest.struct_class = Types::UpdatePortalRequest
 
     UpdatePortalResponse.add_member(:portal, Shapes::ShapeRef.new(shape: Portal, location_name: "portal"))

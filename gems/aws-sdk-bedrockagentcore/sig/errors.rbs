@@ -29,6 +29,9 @@ module Aws
       class ResourceNotFoundException < ::Aws::Errors::ServiceError
         def message: () -> ::String
       end
+      class RetryableConflictException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
       class RuntimeClientError < ::Aws::Errors::ServiceError
         def message: () -> ::String
       end

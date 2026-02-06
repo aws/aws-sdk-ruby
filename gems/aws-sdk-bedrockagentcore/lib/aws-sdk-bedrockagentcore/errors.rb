@@ -33,6 +33,7 @@ module Aws::BedrockAgentCore
   # * {InternalServerException}
   # * {InvalidInputException}
   # * {ResourceNotFoundException}
+  # * {RetryableConflictException}
   # * {RuntimeClientError}
   # * {ServiceException}
   # * {ServiceQuotaExceededException}
@@ -134,6 +135,25 @@ module Aws::BedrockAgentCore
       # @return [String]
       def message
         @message || @data[:message]
+      end
+    end
+
+    class RetryableConflictException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::BedrockAgentCore::Types::RetryableConflictException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+
+      def retryable?
+        true
       end
     end
 

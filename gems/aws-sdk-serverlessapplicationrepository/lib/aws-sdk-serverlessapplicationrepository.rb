@@ -54,7 +54,7 @@ module Aws::ServerlessApplicationRepository
   autoload :EndpointProvider, 'aws-sdk-serverlessapplicationrepository/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-serverlessapplicationrepository/endpoints'
 
-  GEM_VERSION = '1.87.0'
+  GEM_VERSION = '1.88.0'
 
 end
 

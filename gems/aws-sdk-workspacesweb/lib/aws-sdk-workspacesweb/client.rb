@@ -1255,6 +1255,10 @@ module Aws::WorkSpacesWeb
     # @option params [Integer] :max_concurrent_sessions
     #   The maximum number of concurrent sessions for the portal.
     #
+    # @option params [String] :portal_custom_domain
+    #   The custom domain of the web portal that users access in order to
+    #   start streaming sessions.
+    #
     # @return [Types::CreatePortalResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreatePortalResponse#portal_arn #portal_arn} => String
@@ -1278,6 +1282,7 @@ module Aws::WorkSpacesWeb
     #     authentication_type: "Standard", # accepts Standard, IAM_Identity_Center
     #     instance_type: "standard.regular", # accepts standard.regular, standard.large, standard.xlarge
     #     max_concurrent_sessions: 1,
+    #     portal_custom_domain: "PortalCustomDomain",
     #   })
     #
     # @example Response structure
@@ -2416,6 +2421,7 @@ module Aws::WorkSpacesWeb
     #   resp.portal.additional_encryption_context["StringType"] #=> String
     #   resp.portal.instance_type #=> String, one of "standard.regular", "standard.large", "standard.xlarge"
     #   resp.portal.max_concurrent_sessions #=> Integer
+    #   resp.portal.portal_custom_domain #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/GetPortal AWS API Documentation
     #
@@ -3031,6 +3037,7 @@ module Aws::WorkSpacesWeb
     #   resp.portals[0].ip_access_settings_arn #=> String
     #   resp.portals[0].instance_type #=> String, one of "standard.regular", "standard.large", "standard.xlarge"
     #   resp.portals[0].max_concurrent_sessions #=> Integer
+    #   resp.portals[0].portal_custom_domain #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/ListPortals AWS API Documentation
@@ -3989,6 +3996,10 @@ module Aws::WorkSpacesWeb
     # @option params [Integer] :max_concurrent_sessions
     #   The maximum number of concurrent sessions for the portal.
     #
+    # @option params [String] :portal_custom_domain
+    #   The custom domain of the web portal that users access in order to
+    #   start streaming sessions.
+    #
     # @return [Types::UpdatePortalResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdatePortalResponse#portal #portal} => Types::Portal
@@ -4001,6 +4012,7 @@ module Aws::WorkSpacesWeb
     #     authentication_type: "Standard", # accepts Standard, IAM_Identity_Center
     #     instance_type: "standard.regular", # accepts standard.regular, standard.large, standard.xlarge
     #     max_concurrent_sessions: 1,
+    #     portal_custom_domain: "PortalCustomDomain",
     #   })
     #
     # @example Response structure
@@ -4027,6 +4039,7 @@ module Aws::WorkSpacesWeb
     #   resp.portal.additional_encryption_context["StringType"] #=> String
     #   resp.portal.instance_type #=> String, one of "standard.regular", "standard.large", "standard.xlarge"
     #   resp.portal.max_concurrent_sessions #=> Integer
+    #   resp.portal.portal_custom_domain #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/UpdatePortal AWS API Documentation
     #
@@ -4512,7 +4525,7 @@ module Aws::WorkSpacesWeb
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-workspacesweb'
-      context[:gem_version] = '1.56.0'
+      context[:gem_version] = '1.58.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

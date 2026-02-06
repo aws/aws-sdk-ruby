@@ -24,6 +24,7 @@ module Aws::S3
     AcceptRanges = Shapes::StringShape.new(name: 'AcceptRanges')
     AccessControlPolicy = Shapes::StructureShape.new(name: 'AccessControlPolicy')
     AccessControlTranslation = Shapes::StructureShape.new(name: 'AccessControlTranslation')
+    AccessDenied = Shapes::StructureShape.new(name: 'AccessDenied')
     AccessKeyIdValue = Shapes::StringShape.new(name: 'AccessKeyIdValue')
     AccessPointAlias = Shapes::BooleanShape.new(name: 'AccessPointAlias')
     AccessPointArn = Shapes::StringShape.new(name: 'AccessPointArn')
@@ -438,6 +439,7 @@ module Aws::S3
     NoSuchBucket = Shapes::StructureShape.new(name: 'NoSuchBucket')
     NoSuchKey = Shapes::StructureShape.new(name: 'NoSuchKey')
     NoSuchUpload = Shapes::StructureShape.new(name: 'NoSuchUpload')
+    NonEmptyKmsKeyArnString = Shapes::StringShape.new(name: 'NonEmptyKmsKeyArnString')
     NoncurrentVersionExpiration = Shapes::StructureShape.new(name: 'NoncurrentVersionExpiration')
     NoncurrentVersionTransition = Shapes::StructureShape.new(name: 'NoncurrentVersionTransition')
     NoncurrentVersionTransitionList = Shapes::ListShape.new(name: 'NoncurrentVersionTransitionList', flattened: true)
@@ -450,6 +452,7 @@ module Aws::S3
     ObjectAttributes = Shapes::StringShape.new(name: 'ObjectAttributes')
     ObjectAttributesList = Shapes::ListShape.new(name: 'ObjectAttributesList')
     ObjectCannedACL = Shapes::StringShape.new(name: 'ObjectCannedACL')
+    ObjectEncryption = Shapes::UnionShape.new(name: 'ObjectEncryption')
     ObjectIdentifier = Shapes::StructureShape.new(name: 'ObjectIdentifier')
     ObjectIdentifierList = Shapes::ListShape.new(name: 'ObjectIdentifierList', flattened: true)
     ObjectKey = Shapes::StringShape.new(name: 'ObjectKey')
@@ -616,6 +619,7 @@ module Aws::S3
     SSECustomerKey = Shapes::StringShape.new(name: 'SSECustomerKey')
     SSECustomerKeyMD5 = Shapes::StringShape.new(name: 'SSECustomerKeyMD5')
     SSEKMS = Shapes::StructureShape.new(name: 'SSEKMS', locationName: "SSE-KMS")
+    SSEKMSEncryption = Shapes::StructureShape.new(name: 'SSEKMSEncryption', locationName: "SSE-KMS")
     SSEKMSEncryptionContext = Shapes::StringShape.new(name: 'SSEKMSEncryptionContext')
     SSEKMSKeyId = Shapes::StringShape.new(name: 'SSEKMSKeyId')
     SSES3 = Shapes::StructureShape.new(name: 'SSES3', locationName: "SSE-S3")
@@ -678,6 +682,8 @@ module Aws::S3
     URI = Shapes::StringShape.new(name: 'URI')
     UpdateBucketMetadataInventoryTableConfigurationRequest = Shapes::StructureShape.new(name: 'UpdateBucketMetadataInventoryTableConfigurationRequest')
     UpdateBucketMetadataJournalTableConfigurationRequest = Shapes::StructureShape.new(name: 'UpdateBucketMetadataJournalTableConfigurationRequest')
+    UpdateObjectEncryptionRequest = Shapes::StructureShape.new(name: 'UpdateObjectEncryptionRequest')
+    UpdateObjectEncryptionResponse = Shapes::StructureShape.new(name: 'UpdateObjectEncryptionResponse')
     UploadIdMarker = Shapes::StringShape.new(name: 'UploadIdMarker')
     UploadPartCopyOutput = Shapes::StructureShape.new(name: 'UploadPartCopyOutput')
     UploadPartCopyRequest = Shapes::StructureShape.new(name: 'UploadPartCopyRequest')
@@ -720,6 +726,8 @@ module Aws::S3
 
     AccessControlTranslation.add_member(:owner, Shapes::ShapeRef.new(shape: OwnerOverride, required: true, location_name: "Owner"))
     AccessControlTranslation.struct_class = Types::AccessControlTranslation
+
+    AccessDenied.struct_class = Types::AccessDenied
 
     AllowedHeaders.member = Shapes::ShapeRef.new(shape: AllowedHeader)
 
@@ -2210,6 +2218,12 @@ module Aws::S3
 
     ObjectAttributesList.member = Shapes::ShapeRef.new(shape: ObjectAttributes)
 
+    ObjectEncryption.add_member(:ssekms, Shapes::ShapeRef.new(shape: SSEKMSEncryption, location_name: "SSE-KMS"))
+    ObjectEncryption.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    ObjectEncryption.add_member_subclass(:ssekms, Types::ObjectEncryption::Ssekms)
+    ObjectEncryption.add_member_subclass(:unknown, Types::ObjectEncryption::Unknown)
+    ObjectEncryption.struct_class = Types::ObjectEncryption
+
     ObjectIdentifier.add_member(:key, Shapes::ShapeRef.new(shape: ObjectKey, required: true, location_name: "Key"))
     ObjectIdentifier.add_member(:version_id, Shapes::ShapeRef.new(shape: ObjectVersionId, location_name: "VersionId"))
     ObjectIdentifier.add_member(:etag, Shapes::ShapeRef.new(shape: ETag, location_name: "ETag"))
@@ -2830,6 +2844,10 @@ module Aws::S3
     SSEKMS.add_member(:key_id, Shapes::ShapeRef.new(shape: SSEKMSKeyId, required: true, location_name: "KeyId"))
     SSEKMS.struct_class = Types::SSEKMS
 
+    SSEKMSEncryption.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: NonEmptyKmsKeyArnString, required: true, location_name: "KMSKeyArn"))
+    SSEKMSEncryption.add_member(:bucket_key_enabled, Shapes::ShapeRef.new(shape: BucketKeyEnabled, location_name: "BucketKeyEnabled"))
+    SSEKMSEncryption.struct_class = Types::SSEKMSEncryption
+
     SSES3.struct_class = Types::SSES3
 
     ScanRange.add_member(:start, Shapes::ShapeRef.new(shape: Start, location_name: "Start"))
@@ -2977,6 +2995,21 @@ module Aws::S3
     UpdateBucketMetadataJournalTableConfigurationRequest.struct_class = Types::UpdateBucketMetadataJournalTableConfigurationRequest
     UpdateBucketMetadataJournalTableConfigurationRequest[:payload] = :journal_table_configuration
     UpdateBucketMetadataJournalTableConfigurationRequest[:payload_member] = UpdateBucketMetadataJournalTableConfigurationRequest.member(:journal_table_configuration)
+
+    UpdateObjectEncryptionRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "Bucket", metadata: {"contextParam" => {"name" => "Bucket"}}))
+    UpdateObjectEncryptionRequest.add_member(:key, Shapes::ShapeRef.new(shape: ObjectKey, required: true, location: "uri", location_name: "Key"))
+    UpdateObjectEncryptionRequest.add_member(:version_id, Shapes::ShapeRef.new(shape: ObjectVersionId, location: "querystring", location_name: "versionId"))
+    UpdateObjectEncryptionRequest.add_member(:object_encryption, Shapes::ShapeRef.new(shape: ObjectEncryption, required: true, location_name: "ObjectEncryption", metadata: {"xmlNamespace" => {"uri" => "http://s3.amazonaws.com/doc/2006-03-01/"}}))
+    UpdateObjectEncryptionRequest.add_member(:request_payer, Shapes::ShapeRef.new(shape: RequestPayer, location: "header", location_name: "x-amz-request-payer"))
+    UpdateObjectEncryptionRequest.add_member(:expected_bucket_owner, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-expected-bucket-owner"))
+    UpdateObjectEncryptionRequest.add_member(:content_md5, Shapes::ShapeRef.new(shape: ContentMD5, location: "header", location_name: "Content-MD5"))
+    UpdateObjectEncryptionRequest.add_member(:checksum_algorithm, Shapes::ShapeRef.new(shape: ChecksumAlgorithm, location: "header", location_name: "x-amz-sdk-checksum-algorithm"))
+    UpdateObjectEncryptionRequest.struct_class = Types::UpdateObjectEncryptionRequest
+    UpdateObjectEncryptionRequest[:payload] = :object_encryption
+    UpdateObjectEncryptionRequest[:payload_member] = UpdateObjectEncryptionRequest.member(:object_encryption)
+
+    UpdateObjectEncryptionResponse.add_member(:request_charged, Shapes::ShapeRef.new(shape: RequestCharged, location: "header", location_name: "x-amz-request-charged"))
+    UpdateObjectEncryptionResponse.struct_class = Types::UpdateObjectEncryptionResponse
 
     UploadPartCopyOutput.add_member(:copy_source_version_id, Shapes::ShapeRef.new(shape: CopySourceVersionId, location: "header", location_name: "x-amz-copy-source-version-id"))
     UploadPartCopyOutput.add_member(:copy_part_result, Shapes::ShapeRef.new(shape: CopyPartResult, location_name: "CopyPartResult"))
@@ -4296,6 +4329,25 @@ module Aws::S3
         }
         o.input = Shapes::ShapeRef.new(shape: UpdateBucketMetadataJournalTableConfigurationRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+      end)
+
+      api.add_operation(:update_object_encryption, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateObjectEncryption"
+        o.http_method = "PUT"
+        o.http_request_uri = "/{Key+}?encryption"
+        o.http_checksum = {
+          "requestAlgorithmMember" => "checksum_algorithm",
+          "requestChecksumRequired" => true,
+        }
+        o.http_checksum = {
+          "requestAlgorithmMember" => "checksum_algorithm",
+          "requestChecksumRequired" => true,
+        }
+        o.input = Shapes::ShapeRef.new(shape: UpdateObjectEncryptionRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateObjectEncryptionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchKey)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequest)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
       end)
 
       api.add_operation(:upload_part, Seahorse::Model::Operation.new.tap do |o|

@@ -216,6 +216,10 @@ module Aws
                               },
                             ]?,
                             propagate_tags: ("TABLE" | "NONE")?
+                          },
+                          ?warm_throughput_specification: {
+                            read_units_per_second: ::Integer?,
+                            write_units_per_second: ::Integer?
                           }
                         ) -> _CreateTableResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateTableResponseSuccess
@@ -301,6 +305,7 @@ module Aws
         def replica_specifications: () -> ::Array[Types::ReplicaSpecificationSummary]
         def latest_stream_arn: () -> ::String
         def cdc_specification: () -> Types::CdcSpecificationSummary
+        def warm_throughput_specification: () -> Types::WarmThroughputSpecificationSummary
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Keyspaces/Client.html#get_table-instance_method
       def get_table: (
@@ -610,6 +615,10 @@ module Aws
                               },
                             ]?,
                             propagate_tags: ("TABLE" | "NONE")?
+                          },
+                          ?warm_throughput_specification: {
+                            read_units_per_second: ::Integer?,
+                            write_units_per_second: ::Integer?
                           }
                         ) -> _UpdateTableResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateTableResponseSuccess

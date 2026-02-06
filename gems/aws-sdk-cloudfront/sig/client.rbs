@@ -348,7 +348,10 @@ module Aws
                                            }?,
                                            origin_read_timeout: ::Integer?,
                                            origin_keepalive_timeout: ::Integer?,
-                                           ip_address_type: ("ipv4" | "ipv6" | "dualstack")?
+                                           ip_address_type: ("ipv4" | "ipv6" | "dualstack")?,
+                                           origin_mtls_config: {
+                                             client_certificate_arn: ::String
+                                           }?
                                          }?,
                                          vpc_origin_config: {
                                            vpc_origin_id: ::String,
@@ -709,7 +712,10 @@ module Aws
                                                        }?,
                                                        origin_read_timeout: ::Integer?,
                                                        origin_keepalive_timeout: ::Integer?,
-                                                       ip_address_type: ("ipv4" | "ipv6" | "dualstack")?
+                                                       ip_address_type: ("ipv4" | "ipv6" | "dualstack")?,
+                                                       origin_mtls_config: {
+                                                         client_certificate_arn: ::String
+                                                       }?
                                                      }?,
                                                      vpc_origin_config: {
                                                        vpc_origin_id: ::String,
@@ -2876,7 +2882,10 @@ module Aws
                                            }?,
                                            origin_read_timeout: ::Integer?,
                                            origin_keepalive_timeout: ::Integer?,
-                                           ip_address_type: ("ipv4" | "ipv6" | "dualstack")?
+                                           ip_address_type: ("ipv4" | "ipv6" | "dualstack")?,
+                                           origin_mtls_config: {
+                                             client_certificate_arn: ::String
+                                           }?
                                          }?,
                                          vpc_origin_config: {
                                            vpc_origin_id: ::String,

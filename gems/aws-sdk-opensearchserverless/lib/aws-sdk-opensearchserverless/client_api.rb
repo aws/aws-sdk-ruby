@@ -21,6 +21,8 @@ module Aws::OpenSearchServerless
     AccessPolicyType = Shapes::StringShape.new(name: 'AccessPolicyType')
     AccountSettingsDetail = Shapes::StructureShape.new(name: 'AccountSettingsDetail')
     Arn = Shapes::StringShape.new(name: 'Arn')
+    BatchGetCollectionGroupRequest = Shapes::StructureShape.new(name: 'BatchGetCollectionGroupRequest')
+    BatchGetCollectionGroupResponse = Shapes::StructureShape.new(name: 'BatchGetCollectionGroupResponse')
     BatchGetCollectionRequest = Shapes::StructureShape.new(name: 'BatchGetCollectionRequest')
     BatchGetCollectionResponse = Shapes::StructureShape.new(name: 'BatchGetCollectionResponse')
     BatchGetEffectiveLifecyclePolicyRequest = Shapes::StructureShape.new(name: 'BatchGetEffectiveLifecyclePolicyRequest')
@@ -37,6 +39,19 @@ module Aws::OpenSearchServerless
     CollectionErrorDetail = Shapes::StructureShape.new(name: 'CollectionErrorDetail')
     CollectionErrorDetails = Shapes::ListShape.new(name: 'CollectionErrorDetails')
     CollectionFilters = Shapes::StructureShape.new(name: 'CollectionFilters')
+    CollectionGroupCapacityLimits = Shapes::StructureShape.new(name: 'CollectionGroupCapacityLimits')
+    CollectionGroupDetail = Shapes::StructureShape.new(name: 'CollectionGroupDetail')
+    CollectionGroupDetails = Shapes::ListShape.new(name: 'CollectionGroupDetails')
+    CollectionGroupErrorDetail = Shapes::StructureShape.new(name: 'CollectionGroupErrorDetail')
+    CollectionGroupErrorDetails = Shapes::ListShape.new(name: 'CollectionGroupErrorDetails')
+    CollectionGroupId = Shapes::StringShape.new(name: 'CollectionGroupId')
+    CollectionGroupIds = Shapes::ListShape.new(name: 'CollectionGroupIds')
+    CollectionGroupIndexingCapacityValue = Shapes::FloatShape.new(name: 'CollectionGroupIndexingCapacityValue')
+    CollectionGroupName = Shapes::StringShape.new(name: 'CollectionGroupName')
+    CollectionGroupNames = Shapes::ListShape.new(name: 'CollectionGroupNames')
+    CollectionGroupSearchCapacityValue = Shapes::FloatShape.new(name: 'CollectionGroupSearchCapacityValue')
+    CollectionGroupSummaries = Shapes::ListShape.new(name: 'CollectionGroupSummaries')
+    CollectionGroupSummary = Shapes::StructureShape.new(name: 'CollectionGroupSummary')
     CollectionId = Shapes::StringShape.new(name: 'CollectionId')
     CollectionIds = Shapes::ListShape.new(name: 'CollectionIds')
     CollectionName = Shapes::StringShape.new(name: 'CollectionName')
@@ -51,6 +66,10 @@ module Aws::OpenSearchServerless
     CreateAccessPolicyRequest = Shapes::StructureShape.new(name: 'CreateAccessPolicyRequest')
     CreateAccessPolicyResponse = Shapes::StructureShape.new(name: 'CreateAccessPolicyResponse')
     CreateCollectionDetail = Shapes::StructureShape.new(name: 'CreateCollectionDetail')
+    CreateCollectionGroupDetail = Shapes::StructureShape.new(name: 'CreateCollectionGroupDetail')
+    CreateCollectionGroupRequest = Shapes::StructureShape.new(name: 'CreateCollectionGroupRequest')
+    CreateCollectionGroupRequestDescriptionString = Shapes::StringShape.new(name: 'CreateCollectionGroupRequestDescriptionString')
+    CreateCollectionGroupResponse = Shapes::StructureShape.new(name: 'CreateCollectionGroupResponse')
     CreateCollectionRequest = Shapes::StructureShape.new(name: 'CreateCollectionRequest')
     CreateCollectionRequestDescriptionString = Shapes::StringShape.new(name: 'CreateCollectionRequestDescriptionString')
     CreateCollectionResponse = Shapes::StructureShape.new(name: 'CreateCollectionResponse')
@@ -69,6 +88,8 @@ module Aws::OpenSearchServerless
     DeleteAccessPolicyRequest = Shapes::StructureShape.new(name: 'DeleteAccessPolicyRequest')
     DeleteAccessPolicyResponse = Shapes::StructureShape.new(name: 'DeleteAccessPolicyResponse')
     DeleteCollectionDetail = Shapes::StructureShape.new(name: 'DeleteCollectionDetail')
+    DeleteCollectionGroupRequest = Shapes::StructureShape.new(name: 'DeleteCollectionGroupRequest')
+    DeleteCollectionGroupResponse = Shapes::StructureShape.new(name: 'DeleteCollectionGroupResponse')
     DeleteCollectionRequest = Shapes::StructureShape.new(name: 'DeleteCollectionRequest')
     DeleteCollectionResponse = Shapes::StructureShape.new(name: 'DeleteCollectionResponse')
     DeleteIndexRequest = Shapes::StructureShape.new(name: 'DeleteIndexRequest')
@@ -87,6 +108,8 @@ module Aws::OpenSearchServerless
     EffectiveLifecyclePolicyDetails = Shapes::ListShape.new(name: 'EffectiveLifecyclePolicyDetails')
     EffectiveLifecyclePolicyErrorDetail = Shapes::StructureShape.new(name: 'EffectiveLifecyclePolicyErrorDetail')
     EffectiveLifecyclePolicyErrorDetails = Shapes::ListShape.new(name: 'EffectiveLifecyclePolicyErrorDetails')
+    EncryptionConfig = Shapes::StructureShape.new(name: 'EncryptionConfig')
+    EncryptionConfigKmsKeyArnString = Shapes::StringShape.new(name: 'EncryptionConfigKmsKeyArnString')
     FipsEndpoints = Shapes::StructureShape.new(name: 'FipsEndpoints')
     GetAccessPolicyRequest = Shapes::StructureShape.new(name: 'GetAccessPolicyRequest')
     GetAccessPolicyResponse = Shapes::StructureShape.new(name: 'GetAccessPolicyResponse')
@@ -109,6 +132,7 @@ module Aws::OpenSearchServerless
     IndexName = Shapes::StringShape.new(name: 'IndexName')
     IndexSchema = Shapes::DocumentShape.new(name: 'IndexSchema', document: true)
     IndexingCapacityValue = Shapes::IntegerShape.new(name: 'IndexingCapacityValue')
+    Integer = Shapes::IntegerShape.new(name: 'Integer')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
     LifecyclePolicyDetail = Shapes::StructureShape.new(name: 'LifecyclePolicyDetail')
     LifecyclePolicyDetails = Shapes::ListShape.new(name: 'LifecyclePolicyDetails')
@@ -127,6 +151,9 @@ module Aws::OpenSearchServerless
     ListAccessPoliciesRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListAccessPoliciesRequestMaxResultsInteger')
     ListAccessPoliciesRequestResourceList = Shapes::ListShape.new(name: 'ListAccessPoliciesRequestResourceList')
     ListAccessPoliciesResponse = Shapes::StructureShape.new(name: 'ListAccessPoliciesResponse')
+    ListCollectionGroupsRequest = Shapes::StructureShape.new(name: 'ListCollectionGroupsRequest')
+    ListCollectionGroupsRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListCollectionGroupsRequestMaxResultsInteger')
+    ListCollectionGroupsResponse = Shapes::StructureShape.new(name: 'ListCollectionGroupsResponse')
     ListCollectionsRequest = Shapes::StructureShape.new(name: 'ListCollectionsRequest')
     ListCollectionsRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListCollectionsRequestMaxResultsInteger')
     ListCollectionsResponse = Shapes::StructureShape.new(name: 'ListCollectionsResponse')
@@ -192,6 +219,10 @@ module Aws::OpenSearchServerless
     UpdateAccountSettingsRequest = Shapes::StructureShape.new(name: 'UpdateAccountSettingsRequest')
     UpdateAccountSettingsResponse = Shapes::StructureShape.new(name: 'UpdateAccountSettingsResponse')
     UpdateCollectionDetail = Shapes::StructureShape.new(name: 'UpdateCollectionDetail')
+    UpdateCollectionGroupDetail = Shapes::StructureShape.new(name: 'UpdateCollectionGroupDetail')
+    UpdateCollectionGroupRequest = Shapes::StructureShape.new(name: 'UpdateCollectionGroupRequest')
+    UpdateCollectionGroupRequestDescriptionString = Shapes::StringShape.new(name: 'UpdateCollectionGroupRequestDescriptionString')
+    UpdateCollectionGroupResponse = Shapes::StructureShape.new(name: 'UpdateCollectionGroupResponse')
     UpdateCollectionRequest = Shapes::StructureShape.new(name: 'UpdateCollectionRequest')
     UpdateCollectionRequestDescriptionString = Shapes::StringShape.new(name: 'UpdateCollectionRequestDescriptionString')
     UpdateCollectionResponse = Shapes::StructureShape.new(name: 'UpdateCollectionResponse')
@@ -253,6 +284,14 @@ module Aws::OpenSearchServerless
     AccountSettingsDetail.add_member(:capacity_limits, Shapes::ShapeRef.new(shape: CapacityLimits, location_name: "capacityLimits"))
     AccountSettingsDetail.struct_class = Types::AccountSettingsDetail
 
+    BatchGetCollectionGroupRequest.add_member(:ids, Shapes::ShapeRef.new(shape: CollectionGroupIds, location_name: "ids"))
+    BatchGetCollectionGroupRequest.add_member(:names, Shapes::ShapeRef.new(shape: CollectionGroupNames, location_name: "names"))
+    BatchGetCollectionGroupRequest.struct_class = Types::BatchGetCollectionGroupRequest
+
+    BatchGetCollectionGroupResponse.add_member(:collection_group_details, Shapes::ShapeRef.new(shape: CollectionGroupDetails, location_name: "collectionGroupDetails"))
+    BatchGetCollectionGroupResponse.add_member(:collection_group_error_details, Shapes::ShapeRef.new(shape: CollectionGroupErrorDetails, location_name: "collectionGroupErrorDetails"))
+    BatchGetCollectionGroupResponse.struct_class = Types::BatchGetCollectionGroupResponse
+
     BatchGetCollectionRequest.add_member(:ids, Shapes::ShapeRef.new(shape: CollectionIds, location_name: "ids"))
     BatchGetCollectionRequest.add_member(:names, Shapes::ShapeRef.new(shape: CollectionNames, location_name: "names"))
     BatchGetCollectionRequest.struct_class = Types::BatchGetCollectionRequest
@@ -302,6 +341,7 @@ module Aws::OpenSearchServerless
     CollectionDetail.add_member(:fips_endpoints, Shapes::ShapeRef.new(shape: FipsEndpoints, location_name: "fipsEndpoints"))
     CollectionDetail.add_member(:failure_code, Shapes::ShapeRef.new(shape: String, location_name: "failureCode"))
     CollectionDetail.add_member(:failure_message, Shapes::ShapeRef.new(shape: String, location_name: "failureMessage"))
+    CollectionDetail.add_member(:collection_group_name, Shapes::ShapeRef.new(shape: CollectionGroupName, location_name: "collectionGroupName"))
     CollectionDetail.struct_class = Types::CollectionDetail
 
     CollectionDetails.member = Shapes::ShapeRef.new(shape: CollectionDetail)
@@ -316,7 +356,49 @@ module Aws::OpenSearchServerless
 
     CollectionFilters.add_member(:name, Shapes::ShapeRef.new(shape: CollectionName, location_name: "name"))
     CollectionFilters.add_member(:status, Shapes::ShapeRef.new(shape: CollectionStatus, location_name: "status"))
+    CollectionFilters.add_member(:collection_group_name, Shapes::ShapeRef.new(shape: CollectionGroupName, location_name: "collectionGroupName"))
     CollectionFilters.struct_class = Types::CollectionFilters
+
+    CollectionGroupCapacityLimits.add_member(:max_indexing_capacity_in_ocu, Shapes::ShapeRef.new(shape: CollectionGroupIndexingCapacityValue, location_name: "maxIndexingCapacityInOCU"))
+    CollectionGroupCapacityLimits.add_member(:max_search_capacity_in_ocu, Shapes::ShapeRef.new(shape: CollectionGroupSearchCapacityValue, location_name: "maxSearchCapacityInOCU"))
+    CollectionGroupCapacityLimits.add_member(:min_indexing_capacity_in_ocu, Shapes::ShapeRef.new(shape: CollectionGroupIndexingCapacityValue, location_name: "minIndexingCapacityInOCU"))
+    CollectionGroupCapacityLimits.add_member(:min_search_capacity_in_ocu, Shapes::ShapeRef.new(shape: CollectionGroupSearchCapacityValue, location_name: "minSearchCapacityInOCU"))
+    CollectionGroupCapacityLimits.struct_class = Types::CollectionGroupCapacityLimits
+
+    CollectionGroupDetail.add_member(:id, Shapes::ShapeRef.new(shape: CollectionGroupId, location_name: "id"))
+    CollectionGroupDetail.add_member(:arn, Shapes::ShapeRef.new(shape: String, location_name: "arn"))
+    CollectionGroupDetail.add_member(:name, Shapes::ShapeRef.new(shape: CollectionGroupName, location_name: "name"))
+    CollectionGroupDetail.add_member(:standby_replicas, Shapes::ShapeRef.new(shape: StandbyReplicas, location_name: "standbyReplicas"))
+    CollectionGroupDetail.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
+    CollectionGroupDetail.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    CollectionGroupDetail.add_member(:created_date, Shapes::ShapeRef.new(shape: Long, location_name: "createdDate"))
+    CollectionGroupDetail.add_member(:capacity_limits, Shapes::ShapeRef.new(shape: CollectionGroupCapacityLimits, location_name: "capacityLimits"))
+    CollectionGroupDetail.add_member(:number_of_collections, Shapes::ShapeRef.new(shape: Integer, location_name: "numberOfCollections"))
+    CollectionGroupDetail.struct_class = Types::CollectionGroupDetail
+
+    CollectionGroupDetails.member = Shapes::ShapeRef.new(shape: CollectionGroupDetail)
+
+    CollectionGroupErrorDetail.add_member(:id, Shapes::ShapeRef.new(shape: CollectionGroupId, location_name: "id"))
+    CollectionGroupErrorDetail.add_member(:name, Shapes::ShapeRef.new(shape: CollectionGroupName, location_name: "name"))
+    CollectionGroupErrorDetail.add_member(:error_message, Shapes::ShapeRef.new(shape: String, location_name: "errorMessage"))
+    CollectionGroupErrorDetail.add_member(:error_code, Shapes::ShapeRef.new(shape: String, location_name: "errorCode"))
+    CollectionGroupErrorDetail.struct_class = Types::CollectionGroupErrorDetail
+
+    CollectionGroupErrorDetails.member = Shapes::ShapeRef.new(shape: CollectionGroupErrorDetail)
+
+    CollectionGroupIds.member = Shapes::ShapeRef.new(shape: CollectionGroupId)
+
+    CollectionGroupNames.member = Shapes::ShapeRef.new(shape: CollectionGroupName)
+
+    CollectionGroupSummaries.member = Shapes::ShapeRef.new(shape: CollectionGroupSummary)
+
+    CollectionGroupSummary.add_member(:id, Shapes::ShapeRef.new(shape: CollectionGroupId, location_name: "id"))
+    CollectionGroupSummary.add_member(:arn, Shapes::ShapeRef.new(shape: String, location_name: "arn"))
+    CollectionGroupSummary.add_member(:name, Shapes::ShapeRef.new(shape: CollectionGroupName, location_name: "name"))
+    CollectionGroupSummary.add_member(:number_of_collections, Shapes::ShapeRef.new(shape: Integer, location_name: "numberOfCollections"))
+    CollectionGroupSummary.add_member(:created_date, Shapes::ShapeRef.new(shape: Long, location_name: "createdDate"))
+    CollectionGroupSummary.add_member(:capacity_limits, Shapes::ShapeRef.new(shape: CollectionGroupCapacityLimits, location_name: "capacityLimits"))
+    CollectionGroupSummary.struct_class = Types::CollectionGroupSummary
 
     CollectionIds.member = Shapes::ShapeRef.new(shape: CollectionId)
 
@@ -328,6 +410,8 @@ module Aws::OpenSearchServerless
     CollectionSummary.add_member(:name, Shapes::ShapeRef.new(shape: CollectionName, location_name: "name"))
     CollectionSummary.add_member(:status, Shapes::ShapeRef.new(shape: CollectionStatus, location_name: "status"))
     CollectionSummary.add_member(:arn, Shapes::ShapeRef.new(shape: String, location_name: "arn"))
+    CollectionSummary.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: String, location_name: "kmsKeyArn"))
+    CollectionSummary.add_member(:collection_group_name, Shapes::ShapeRef.new(shape: CollectionGroupName, location_name: "collectionGroupName"))
     CollectionSummary.struct_class = Types::CollectionSummary
 
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
@@ -354,7 +438,29 @@ module Aws::OpenSearchServerless
     CreateCollectionDetail.add_member(:vector_options, Shapes::ShapeRef.new(shape: VectorOptions, location_name: "vectorOptions"))
     CreateCollectionDetail.add_member(:created_date, Shapes::ShapeRef.new(shape: Long, location_name: "createdDate"))
     CreateCollectionDetail.add_member(:last_modified_date, Shapes::ShapeRef.new(shape: Long, location_name: "lastModifiedDate"))
+    CreateCollectionDetail.add_member(:collection_group_name, Shapes::ShapeRef.new(shape: CollectionGroupName, location_name: "collectionGroupName"))
     CreateCollectionDetail.struct_class = Types::CreateCollectionDetail
+
+    CreateCollectionGroupDetail.add_member(:id, Shapes::ShapeRef.new(shape: CollectionGroupId, location_name: "id"))
+    CreateCollectionGroupDetail.add_member(:arn, Shapes::ShapeRef.new(shape: String, location_name: "arn"))
+    CreateCollectionGroupDetail.add_member(:name, Shapes::ShapeRef.new(shape: CollectionGroupName, location_name: "name"))
+    CreateCollectionGroupDetail.add_member(:standby_replicas, Shapes::ShapeRef.new(shape: StandbyReplicas, location_name: "standbyReplicas"))
+    CreateCollectionGroupDetail.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
+    CreateCollectionGroupDetail.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    CreateCollectionGroupDetail.add_member(:created_date, Shapes::ShapeRef.new(shape: Long, location_name: "createdDate"))
+    CreateCollectionGroupDetail.add_member(:capacity_limits, Shapes::ShapeRef.new(shape: CollectionGroupCapacityLimits, location_name: "capacityLimits"))
+    CreateCollectionGroupDetail.struct_class = Types::CreateCollectionGroupDetail
+
+    CreateCollectionGroupRequest.add_member(:name, Shapes::ShapeRef.new(shape: CollectionGroupName, required: true, location_name: "name"))
+    CreateCollectionGroupRequest.add_member(:standby_replicas, Shapes::ShapeRef.new(shape: StandbyReplicas, required: true, location_name: "standbyReplicas"))
+    CreateCollectionGroupRequest.add_member(:description, Shapes::ShapeRef.new(shape: CreateCollectionGroupRequestDescriptionString, location_name: "description"))
+    CreateCollectionGroupRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    CreateCollectionGroupRequest.add_member(:capacity_limits, Shapes::ShapeRef.new(shape: CollectionGroupCapacityLimits, location_name: "capacityLimits"))
+    CreateCollectionGroupRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
+    CreateCollectionGroupRequest.struct_class = Types::CreateCollectionGroupRequest
+
+    CreateCollectionGroupResponse.add_member(:create_collection_group_detail, Shapes::ShapeRef.new(shape: CreateCollectionGroupDetail, location_name: "createCollectionGroupDetail"))
+    CreateCollectionGroupResponse.struct_class = Types::CreateCollectionGroupResponse
 
     CreateCollectionRequest.add_member(:name, Shapes::ShapeRef.new(shape: CollectionName, required: true, location_name: "name"))
     CreateCollectionRequest.add_member(:type, Shapes::ShapeRef.new(shape: CollectionType, location_name: "type"))
@@ -362,6 +468,8 @@ module Aws::OpenSearchServerless
     CreateCollectionRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     CreateCollectionRequest.add_member(:standby_replicas, Shapes::ShapeRef.new(shape: StandbyReplicas, location_name: "standbyReplicas"))
     CreateCollectionRequest.add_member(:vector_options, Shapes::ShapeRef.new(shape: VectorOptions, location_name: "vectorOptions"))
+    CreateCollectionRequest.add_member(:collection_group_name, Shapes::ShapeRef.new(shape: CollectionGroupName, location_name: "collectionGroupName"))
+    CreateCollectionRequest.add_member(:encryption_config, Shapes::ShapeRef.new(shape: EncryptionConfig, location_name: "encryptionConfig"))
     CreateCollectionRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateCollectionRequest.struct_class = Types::CreateCollectionRequest
 
@@ -439,6 +547,12 @@ module Aws::OpenSearchServerless
     DeleteCollectionDetail.add_member(:status, Shapes::ShapeRef.new(shape: CollectionStatus, location_name: "status"))
     DeleteCollectionDetail.struct_class = Types::DeleteCollectionDetail
 
+    DeleteCollectionGroupRequest.add_member(:id, Shapes::ShapeRef.new(shape: CollectionGroupId, required: true, location_name: "id"))
+    DeleteCollectionGroupRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
+    DeleteCollectionGroupRequest.struct_class = Types::DeleteCollectionGroupRequest
+
+    DeleteCollectionGroupResponse.struct_class = Types::DeleteCollectionGroupResponse
+
     DeleteCollectionRequest.add_member(:id, Shapes::ShapeRef.new(shape: CollectionId, required: true, location_name: "id"))
     DeleteCollectionRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     DeleteCollectionRequest.struct_class = Types::DeleteCollectionRequest
@@ -501,6 +615,10 @@ module Aws::OpenSearchServerless
     EffectiveLifecyclePolicyErrorDetail.struct_class = Types::EffectiveLifecyclePolicyErrorDetail
 
     EffectiveLifecyclePolicyErrorDetails.member = Shapes::ShapeRef.new(shape: EffectiveLifecyclePolicyErrorDetail)
+
+    EncryptionConfig.add_member(:a_ws_owned_key, Shapes::ShapeRef.new(shape: Boolean, location_name: "aWSOwnedKey"))
+    EncryptionConfig.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: EncryptionConfigKmsKeyArnString, location_name: "kmsKeyArn"))
+    EncryptionConfig.struct_class = Types::EncryptionConfig
 
     FipsEndpoints.add_member(:collection_endpoint, Shapes::ShapeRef.new(shape: String, location_name: "collectionEndpoint"))
     FipsEndpoints.add_member(:dashboard_endpoint, Shapes::ShapeRef.new(shape: String, location_name: "dashboardEndpoint"))
@@ -617,6 +735,14 @@ module Aws::OpenSearchServerless
     ListAccessPoliciesResponse.add_member(:access_policy_summaries, Shapes::ShapeRef.new(shape: AccessPolicySummaries, location_name: "accessPolicySummaries"))
     ListAccessPoliciesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     ListAccessPoliciesResponse.struct_class = Types::ListAccessPoliciesResponse
+
+    ListCollectionGroupsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    ListCollectionGroupsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListCollectionGroupsRequestMaxResultsInteger, location_name: "maxResults"))
+    ListCollectionGroupsRequest.struct_class = Types::ListCollectionGroupsRequest
+
+    ListCollectionGroupsResponse.add_member(:collection_group_summaries, Shapes::ShapeRef.new(shape: CollectionGroupSummaries, location_name: "collectionGroupSummaries"))
+    ListCollectionGroupsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    ListCollectionGroupsResponse.struct_class = Types::ListCollectionGroupsResponse
 
     ListCollectionsRequest.add_member(:collection_filters, Shapes::ShapeRef.new(shape: CollectionFilters, location_name: "collectionFilters"))
     ListCollectionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
@@ -793,6 +919,24 @@ module Aws::OpenSearchServerless
     UpdateCollectionDetail.add_member(:last_modified_date, Shapes::ShapeRef.new(shape: Long, location_name: "lastModifiedDate"))
     UpdateCollectionDetail.struct_class = Types::UpdateCollectionDetail
 
+    UpdateCollectionGroupDetail.add_member(:id, Shapes::ShapeRef.new(shape: CollectionGroupId, location_name: "id"))
+    UpdateCollectionGroupDetail.add_member(:arn, Shapes::ShapeRef.new(shape: String, location_name: "arn"))
+    UpdateCollectionGroupDetail.add_member(:name, Shapes::ShapeRef.new(shape: CollectionGroupName, location_name: "name"))
+    UpdateCollectionGroupDetail.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
+    UpdateCollectionGroupDetail.add_member(:capacity_limits, Shapes::ShapeRef.new(shape: CollectionGroupCapacityLimits, location_name: "capacityLimits"))
+    UpdateCollectionGroupDetail.add_member(:created_date, Shapes::ShapeRef.new(shape: Long, location_name: "createdDate"))
+    UpdateCollectionGroupDetail.add_member(:last_modified_date, Shapes::ShapeRef.new(shape: Long, location_name: "lastModifiedDate"))
+    UpdateCollectionGroupDetail.struct_class = Types::UpdateCollectionGroupDetail
+
+    UpdateCollectionGroupRequest.add_member(:id, Shapes::ShapeRef.new(shape: CollectionGroupId, required: true, location_name: "id"))
+    UpdateCollectionGroupRequest.add_member(:description, Shapes::ShapeRef.new(shape: UpdateCollectionGroupRequestDescriptionString, location_name: "description"))
+    UpdateCollectionGroupRequest.add_member(:capacity_limits, Shapes::ShapeRef.new(shape: CollectionGroupCapacityLimits, location_name: "capacityLimits"))
+    UpdateCollectionGroupRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
+    UpdateCollectionGroupRequest.struct_class = Types::UpdateCollectionGroupRequest
+
+    UpdateCollectionGroupResponse.add_member(:update_collection_group_detail, Shapes::ShapeRef.new(shape: UpdateCollectionGroupDetail, location_name: "updateCollectionGroupDetail"))
+    UpdateCollectionGroupResponse.struct_class = Types::UpdateCollectionGroupResponse
+
     UpdateCollectionRequest.add_member(:id, Shapes::ShapeRef.new(shape: CollectionId, required: true, location_name: "id"))
     UpdateCollectionRequest.add_member(:description, Shapes::ShapeRef.new(shape: UpdateCollectionRequestDescriptionString, location_name: "description"))
     UpdateCollectionRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
@@ -934,6 +1078,16 @@ module Aws::OpenSearchServerless
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
+      api.add_operation(:batch_get_collection_group, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "BatchGetCollectionGroup"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: BatchGetCollectionGroupRequest)
+        o.output = Shapes::ShapeRef.new(shape: BatchGetCollectionGroupResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
       api.add_operation(:batch_get_effective_lifecycle_policy, Seahorse::Model::Operation.new.tap do |o|
         o.name = "BatchGetEffectiveLifecyclePolicy"
         o.http_method = "POST"
@@ -984,6 +1138,18 @@ module Aws::OpenSearchServerless
         o.output = Shapes::ShapeRef.new(shape: CreateCollectionResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: OcuLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+      end)
+
+      api.add_operation(:create_collection_group, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateCollectionGroup"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateCollectionGroupRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateCollectionGroupResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
@@ -1067,6 +1233,18 @@ module Aws::OpenSearchServerless
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DeleteCollectionRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteCollectionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
+      api.add_operation(:delete_collection_group, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteCollectionGroup"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteCollectionGroupRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteCollectionGroupResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -1201,6 +1379,22 @@ module Aws::OpenSearchServerless
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ListAccessPoliciesRequest)
         o.output = Shapes::ShapeRef.new(shape: ListAccessPoliciesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_collection_groups, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListCollectionGroups"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListCollectionGroupsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListCollectionGroupsResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o[:pager] = Aws::Pager.new(
@@ -1359,6 +1553,18 @@ module Aws::OpenSearchServerless
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
+      api.add_operation(:update_collection_group, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateCollectionGroup"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateCollectionGroupRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateCollectionGroupResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
       end)
 
       api.add_operation(:update_index, Seahorse::Model::Operation.new.tap do |o|

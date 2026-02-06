@@ -72,6 +72,9 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DynamoDB/Table.html#global_table_witnesses-instance_method
       def global_table_witnesses: () -> ::Array[Types::GlobalTableWitnessDescription]
 
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DynamoDB/Table.html#global_table_settings_replication_mode-instance_method
+      def global_table_settings_replication_mode: () -> ("ENABLED" | "DISABLED" | "ENABLED_WITH_OVERRIDES")
+
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DynamoDB/Table.html#restore_summary-instance_method
       def restore_summary: () -> Types::RestoreSummary
 

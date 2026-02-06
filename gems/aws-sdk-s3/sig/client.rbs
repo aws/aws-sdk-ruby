@@ -2428,6 +2428,28 @@ module Aws
                                                               ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 
+      interface _UpdateObjectEncryptionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateObjectEncryptionResponse]
+        def request_charged: () -> ("requester")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3/Client.html#update_object_encryption-instance_method
+      def update_object_encryption: (
+                                      bucket: ::String,
+                                      key: ::String,
+                                      ?version_id: ::String,
+                                      object_encryption: {
+                                        ssekms: {
+                                          kms_key_arn: ::String,
+                                          bucket_key_enabled: bool?
+                                        }?
+                                      },
+                                      ?request_payer: ("requester"),
+                                      ?expected_bucket_owner: ::String,
+                                      ?content_md5: ::String,
+                                      ?checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256" | "CRC64NVME")
+                                    ) -> _UpdateObjectEncryptionResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateObjectEncryptionResponseSuccess
+
       interface _UploadPartResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UploadPartOutput]
         def server_side_encryption: () -> ("AES256" | "aws:fsx" | "aws:kms" | "aws:kms:dsse")

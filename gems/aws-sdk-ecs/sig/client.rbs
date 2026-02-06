@@ -164,7 +164,8 @@ module Aws
                                             }?,
                                             allowed_instance_types: Array[::String]?,
                                             max_spot_price_as_percentage_of_optimal_on_demand_price: ::Integer?
-                                          }?
+                                          }?,
+                                          fips_enabled: bool?
                                         },
                                         propagate_tags: ("CAPACITY_PROVIDER" | "NONE")?,
                                         infrastructure_optimization: {

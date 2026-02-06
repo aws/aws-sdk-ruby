@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.69.0 (2026-02-03)
+------------------
+
+* Feature - Added new Region management APIs to support multi-Region replication in IAM Identity Center.
+
+1.68.0 (2026-01-16)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.67.0 (2026-01-08)
 ------------------
 

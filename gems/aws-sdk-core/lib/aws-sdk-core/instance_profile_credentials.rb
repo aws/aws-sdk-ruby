@@ -26,7 +26,17 @@ module Aws
     include RefreshingCredentials
 
     # @api private
-    class Non200Response < RuntimeError; end
+    class Non200Response < RuntimeError
+      attr_reader :status_code, :body
+
+      def initialize(status_code, body = nil)
+        @status_code = status_code
+        @body = body
+        msg = "HTTP #{status_code}"
+        msg += ": #{body}" if body && !body.empty?
+        super(msg)
+      end
+    end
 
     # @api private
     class TokenRetrivalError < RuntimeError; end
@@ -249,7 +259,7 @@ module Aws
       # The next retry should fetch it
       @token = nil
       @imds_v1_fallback = false
-      raise Non200Response
+      raise Non200Response.new(401, 'Token expired')
     end
 
     def token_set?
@@ -278,7 +288,7 @@ module Aws
       when 401
         raise TokenExpiredError
       else
-        raise Non200Response
+        raise Non200Response.new(response.code.to_i, response.body)
       end
     end
 
@@ -298,7 +308,7 @@ module Aws
       when 400
         raise TokenRetrivalError
       else
-        raise Non200Response
+        raise Non200Response.new(response.code.to_i, response.body)
       end
     end
 

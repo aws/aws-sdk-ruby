@@ -23,7 +23,7 @@ Aws::Plugins::GlobalConfiguration.add_identifier(:ssoadmin)
 # structure.
 #
 #     sso_admin = Aws::SSOAdmin::Client.new
-#     resp = sso_admin.attach_customer_managed_policy_reference_to_permission_set(params)
+#     resp = sso_admin.add_region(params)
 #
 # See {Client} for more information.
 #
@@ -55,7 +55,7 @@ module Aws::SSOAdmin
   autoload :EndpointProvider, 'aws-sdk-ssoadmin/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-ssoadmin/endpoints'
 
-  GEM_VERSION = '1.67.0'
+  GEM_VERSION = '1.69.0'
 
 end
 

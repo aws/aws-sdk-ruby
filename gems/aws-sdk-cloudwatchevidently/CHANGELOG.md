@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.53.0 (2026-01-26)
+------------------
+
+* Feature - Deprecate all Evidently API for AWS CloudWatch Evidently deprecation
+
+1.52.0 (2026-01-16)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.51.0 (2026-01-08)
 ------------------
 

@@ -91,7 +91,7 @@ module Aws
       interface _CreateConfigResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ConfigIdResponse]
         def config_id: () -> ::String
-        def config_type: () -> ("antenna-downlink" | "antenna-downlink-demod-decode" | "tracking" | "dataflow-endpoint" | "antenna-uplink" | "uplink-echo" | "s3-recording")
+        def config_type: () -> ("antenna-downlink" | "antenna-downlink-demod-decode" | "tracking" | "dataflow-endpoint" | "antenna-uplink" | "uplink-echo" | "s3-recording" | "telemetry-sink")
         def config_arn: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GroundStation/Client.html#create_config-instance_method
@@ -159,6 +159,15 @@ module Aws
                                bucket_arn: ::String,
                                role_arn: ::String,
                                prefix: ::String?
+                             }?,
+                             telemetry_sink_config: {
+                               telemetry_sink_type: ("KINESIS_DATA_STREAM"),
+                               telemetry_sink_data: {
+                                 kinesis_data_stream_data: {
+                                   kinesis_role_arn: ::String,
+                                   kinesis_data_stream_arn: ::String
+                                 }?
+                               }
                              }?
                            },
                            ?tags: Hash[::String, ::String]
@@ -421,6 +430,7 @@ module Aws
                                       Array[::String],
                                     ],
                                     tracking_config_arn: ::String,
+                                    ?telemetry_sink_config_arn: ::String,
                                     ?tags: Hash[::String, ::String],
                                     ?streams_kms_key: {
                                       kms_key_arn: ::String?,
@@ -434,13 +444,13 @@ module Aws
       interface _DeleteConfigResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ConfigIdResponse]
         def config_id: () -> ::String
-        def config_type: () -> ("antenna-downlink" | "antenna-downlink-demod-decode" | "tracking" | "dataflow-endpoint" | "antenna-uplink" | "uplink-echo" | "s3-recording")
+        def config_type: () -> ("antenna-downlink" | "antenna-downlink-demod-decode" | "tracking" | "dataflow-endpoint" | "antenna-uplink" | "uplink-echo" | "s3-recording" | "telemetry-sink")
         def config_arn: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GroundStation/Client.html#delete_config-instance_method
       def delete_config: (
                            config_id: ::String,
-                           config_type: ("antenna-downlink" | "antenna-downlink-demod-decode" | "tracking" | "dataflow-endpoint" | "antenna-uplink" | "uplink-echo" | "s3-recording")
+                           config_type: ("antenna-downlink" | "antenna-downlink-demod-decode" | "tracking" | "dataflow-endpoint" | "antenna-uplink" | "uplink-echo" | "s3-recording" | "telemetry-sink")
                          ) -> _DeleteConfigResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteConfigResponseSuccess
 
@@ -550,14 +560,14 @@ module Aws
         def config_id: () -> ::String
         def config_arn: () -> ::String
         def name: () -> ::String
-        def config_type: () -> ("antenna-downlink" | "antenna-downlink-demod-decode" | "tracking" | "dataflow-endpoint" | "antenna-uplink" | "uplink-echo" | "s3-recording")
+        def config_type: () -> ("antenna-downlink" | "antenna-downlink-demod-decode" | "tracking" | "dataflow-endpoint" | "antenna-uplink" | "uplink-echo" | "s3-recording" | "telemetry-sink")
         def config_data: () -> Types::ConfigTypeData
         def tags: () -> ::Hash[::String, ::String]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GroundStation/Client.html#get_config-instance_method
       def get_config: (
                         config_id: ::String,
-                        config_type: ("antenna-downlink" | "antenna-downlink-demod-decode" | "tracking" | "dataflow-endpoint" | "antenna-uplink" | "uplink-echo" | "s3-recording")
+                        config_type: ("antenna-downlink" | "antenna-downlink-demod-decode" | "tracking" | "dataflow-endpoint" | "antenna-uplink" | "uplink-echo" | "s3-recording" | "telemetry-sink")
                       ) -> _GetConfigResponseSuccess
                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetConfigResponseSuccess
 
@@ -602,6 +612,7 @@ module Aws
         def minimum_viable_contact_duration_seconds: () -> ::Integer
         def dataflow_edges: () -> ::Array[::Array[::String]]
         def tracking_config_arn: () -> ::String
+        def telemetry_sink_config_arn: () -> ::String
         def tags: () -> ::Hash[::String, ::String]
         def streams_kms_key: () -> Types::KmsKey
         def streams_kms_role: () -> ::String
@@ -836,14 +847,14 @@ module Aws
       interface _UpdateConfigResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ConfigIdResponse]
         def config_id: () -> ::String
-        def config_type: () -> ("antenna-downlink" | "antenna-downlink-demod-decode" | "tracking" | "dataflow-endpoint" | "antenna-uplink" | "uplink-echo" | "s3-recording")
+        def config_type: () -> ("antenna-downlink" | "antenna-downlink-demod-decode" | "tracking" | "dataflow-endpoint" | "antenna-uplink" | "uplink-echo" | "s3-recording" | "telemetry-sink")
         def config_arn: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GroundStation/Client.html#update_config-instance_method
       def update_config: (
                            config_id: ::String,
                            name: ::String,
-                           config_type: ("antenna-downlink" | "antenna-downlink-demod-decode" | "tracking" | "dataflow-endpoint" | "antenna-uplink" | "uplink-echo" | "s3-recording"),
+                           config_type: ("antenna-downlink" | "antenna-downlink-demod-decode" | "tracking" | "dataflow-endpoint" | "antenna-uplink" | "uplink-echo" | "s3-recording" | "telemetry-sink"),
                            config_data: {
                              antenna_downlink_config: {
                                spectrum_config: {
@@ -906,6 +917,15 @@ module Aws
                                bucket_arn: ::String,
                                role_arn: ::String,
                                prefix: ::String?
+                             }?,
+                             telemetry_sink_config: {
+                               telemetry_sink_type: ("KINESIS_DATA_STREAM"),
+                               telemetry_sink_data: {
+                                 kinesis_data_stream_data: {
+                                   kinesis_role_arn: ::String,
+                                   kinesis_data_stream_arn: ::String
+                                 }?
+                               }
                              }?
                            }
                          ) -> _UpdateConfigResponseSuccess
@@ -939,6 +959,7 @@ module Aws
                                       Array[::String],
                                     ],
                                     ?tracking_config_arn: ::String,
+                                    ?telemetry_sink_config_arn: ::String,
                                     ?streams_kms_key: {
                                       kms_key_arn: ::String?,
                                       kms_alias_arn: ::String?,

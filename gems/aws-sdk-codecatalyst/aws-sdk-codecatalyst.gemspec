@@ -25,7 +25,7 @@ Gem::Specification.new do |spec|
     'changelog_uri'   => 'https://github.com/aws/aws-sdk-ruby/tree/version-3/gems/aws-sdk-codecatalyst/CHANGELOG.md'
   }
 
-  spec.add_dependency('aws-sdk-core', '~> 3', '>= 3.241.3')
+  spec.add_dependency('aws-sdk-core', '~> 3', '>= 3.241.4')
 
   spec.required_ruby_version = '>= 2.7'
 end

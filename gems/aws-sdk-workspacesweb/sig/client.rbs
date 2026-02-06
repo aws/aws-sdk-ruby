@@ -325,7 +325,8 @@ module Aws
                            ?client_token: ::String,
                            ?authentication_type: ("Standard" | "IAM_Identity_Center"),
                            ?instance_type: ("standard.regular" | "standard.large" | "standard.xlarge"),
-                           ?max_concurrent_sessions: ::Integer
+                           ?max_concurrent_sessions: ::Integer,
+                           ?portal_custom_domain: ::String
                          ) -> _CreatePortalResponseSuccess
                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreatePortalResponseSuccess
 
@@ -1075,7 +1076,8 @@ module Aws
                            ?display_name: ::String,
                            ?authentication_type: ("Standard" | "IAM_Identity_Center"),
                            ?instance_type: ("standard.regular" | "standard.large" | "standard.xlarge"),
-                           ?max_concurrent_sessions: ::Integer
+                           ?max_concurrent_sessions: ::Integer,
+                           ?portal_custom_domain: ::String
                          ) -> _UpdatePortalResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdatePortalResponseSuccess
 

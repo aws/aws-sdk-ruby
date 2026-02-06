@@ -159,6 +159,8 @@ module Aws::GroundStation
     KeyAliasArn = Shapes::StringShape.new(name: 'KeyAliasArn')
     KeyAliasName = Shapes::StringShape.new(name: 'KeyAliasName')
     KeyArn = Shapes::StringShape.new(name: 'KeyArn')
+    KinesisDataStreamArn = Shapes::StringShape.new(name: 'KinesisDataStreamArn')
+    KinesisDataStreamData = Shapes::StructureShape.new(name: 'KinesisDataStreamData')
     KmsKey = Shapes::UnionShape.new(name: 'KmsKey')
     ListConfigsRequest = Shapes::StructureShape.new(name: 'ListConfigsRequest')
     ListConfigsResponse = Shapes::StructureShape.new(name: 'ListConfigsResponse')
@@ -226,6 +228,9 @@ module Aws::GroundStation
     TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
     TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
     TagsMap = Shapes::MapShape.new(name: 'TagsMap')
+    TelemetrySinkConfig = Shapes::StructureShape.new(name: 'TelemetrySinkConfig')
+    TelemetrySinkData = Shapes::UnionShape.new(name: 'TelemetrySinkData')
+    TelemetrySinkType = Shapes::StringShape.new(name: 'TelemetrySinkType')
     TimeAzEl = Shapes::StructureShape.new(name: 'TimeAzEl')
     TimeAzElList = Shapes::ListShape.new(name: 'TimeAzElList')
     TimeRange = Shapes::StructureShape.new(name: 'TimeRange')
@@ -375,6 +380,7 @@ module Aws::GroundStation
     ConfigTypeData.add_member(:antenna_uplink_config, Shapes::ShapeRef.new(shape: AntennaUplinkConfig, location_name: "antennaUplinkConfig"))
     ConfigTypeData.add_member(:uplink_echo_config, Shapes::ShapeRef.new(shape: UplinkEchoConfig, location_name: "uplinkEchoConfig"))
     ConfigTypeData.add_member(:s3_recording_config, Shapes::ShapeRef.new(shape: S3RecordingConfig, location_name: "s3RecordingConfig"))
+    ConfigTypeData.add_member(:telemetry_sink_config, Shapes::ShapeRef.new(shape: TelemetrySinkConfig, location_name: "telemetrySinkConfig"))
     ConfigTypeData.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     ConfigTypeData.add_member_subclass(:antenna_downlink_config, Types::ConfigTypeData::AntennaDownlinkConfig)
     ConfigTypeData.add_member_subclass(:tracking_config, Types::ConfigTypeData::TrackingConfig)
@@ -383,6 +389,7 @@ module Aws::GroundStation
     ConfigTypeData.add_member_subclass(:antenna_uplink_config, Types::ConfigTypeData::AntennaUplinkConfig)
     ConfigTypeData.add_member_subclass(:uplink_echo_config, Types::ConfigTypeData::UplinkEchoConfig)
     ConfigTypeData.add_member_subclass(:s3_recording_config, Types::ConfigTypeData::S3RecordingConfig)
+    ConfigTypeData.add_member_subclass(:telemetry_sink_config, Types::ConfigTypeData::TelemetrySinkConfig)
     ConfigTypeData.add_member_subclass(:unknown, Types::ConfigTypeData::Unknown)
     ConfigTypeData.struct_class = Types::ConfigTypeData
 
@@ -459,6 +466,7 @@ module Aws::GroundStation
     CreateMissionProfileRequest.add_member(:minimum_viable_contact_duration_seconds, Shapes::ShapeRef.new(shape: PositiveDurationInSeconds, required: true, location_name: "minimumViableContactDurationSeconds"))
     CreateMissionProfileRequest.add_member(:dataflow_edges, Shapes::ShapeRef.new(shape: DataflowEdgeList, required: true, location_name: "dataflowEdges"))
     CreateMissionProfileRequest.add_member(:tracking_config_arn, Shapes::ShapeRef.new(shape: ConfigArn, required: true, location_name: "trackingConfigArn"))
+    CreateMissionProfileRequest.add_member(:telemetry_sink_config_arn, Shapes::ShapeRef.new(shape: ConfigArn, location_name: "telemetrySinkConfigArn"))
     CreateMissionProfileRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
     CreateMissionProfileRequest.add_member(:streams_kms_key, Shapes::ShapeRef.new(shape: KmsKey, location_name: "streamsKmsKey"))
     CreateMissionProfileRequest.add_member(:streams_kms_role, Shapes::ShapeRef.new(shape: RoleArn, location_name: "streamsKmsRole"))
@@ -739,6 +747,7 @@ module Aws::GroundStation
     GetMissionProfileResponse.add_member(:minimum_viable_contact_duration_seconds, Shapes::ShapeRef.new(shape: PositiveDurationInSeconds, location_name: "minimumViableContactDurationSeconds"))
     GetMissionProfileResponse.add_member(:dataflow_edges, Shapes::ShapeRef.new(shape: DataflowEdgeList, location_name: "dataflowEdges"))
     GetMissionProfileResponse.add_member(:tracking_config_arn, Shapes::ShapeRef.new(shape: ConfigArn, location_name: "trackingConfigArn"))
+    GetMissionProfileResponse.add_member(:telemetry_sink_config_arn, Shapes::ShapeRef.new(shape: ConfigArn, location_name: "telemetrySinkConfigArn"))
     GetMissionProfileResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
     GetMissionProfileResponse.add_member(:streams_kms_key, Shapes::ShapeRef.new(shape: KmsKey, location_name: "streamsKmsKey"))
     GetMissionProfileResponse.add_member(:streams_kms_role, Shapes::ShapeRef.new(shape: RoleArn, location_name: "streamsKmsRole"))
@@ -776,6 +785,10 @@ module Aws::GroundStation
     InvalidParameterException.struct_class = Types::InvalidParameterException
 
     IpAddressList.member = Shapes::ShapeRef.new(shape: IpV4Address)
+
+    KinesisDataStreamData.add_member(:kinesis_role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "kinesisRoleArn"))
+    KinesisDataStreamData.add_member(:kinesis_data_stream_arn, Shapes::ShapeRef.new(shape: KinesisDataStreamArn, required: true, location_name: "kinesisDataStreamArn"))
+    KinesisDataStreamData.struct_class = Types::KinesisDataStreamData
 
     KmsKey.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KeyArn, location_name: "kmsKeyArn"))
     KmsKey.add_member(:kms_alias_arn, Shapes::ShapeRef.new(shape: KeyAliasArn, location_name: "kmsAliasArn"))
@@ -996,6 +1009,16 @@ module Aws::GroundStation
     TagsMap.key = Shapes::ShapeRef.new(shape: String)
     TagsMap.value = Shapes::ShapeRef.new(shape: String)
 
+    TelemetrySinkConfig.add_member(:telemetry_sink_type, Shapes::ShapeRef.new(shape: TelemetrySinkType, required: true, location_name: "telemetrySinkType"))
+    TelemetrySinkConfig.add_member(:telemetry_sink_data, Shapes::ShapeRef.new(shape: TelemetrySinkData, required: true, location_name: "telemetrySinkData"))
+    TelemetrySinkConfig.struct_class = Types::TelemetrySinkConfig
+
+    TelemetrySinkData.add_member(:kinesis_data_stream_data, Shapes::ShapeRef.new(shape: KinesisDataStreamData, location_name: "kinesisDataStreamData"))
+    TelemetrySinkData.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    TelemetrySinkData.add_member_subclass(:kinesis_data_stream_data, Types::TelemetrySinkData::KinesisDataStreamData)
+    TelemetrySinkData.add_member_subclass(:unknown, Types::TelemetrySinkData::Unknown)
+    TelemetrySinkData.struct_class = Types::TelemetrySinkData
+
     TimeAzEl.add_member(:dt, Shapes::ShapeRef.new(shape: Double, required: true, location_name: "dt"))
     TimeAzEl.add_member(:az, Shapes::ShapeRef.new(shape: Double, required: true, location_name: "az"))
     TimeAzEl.add_member(:el, Shapes::ShapeRef.new(shape: Double, required: true, location_name: "el"))
@@ -1047,6 +1070,7 @@ module Aws::GroundStation
     UpdateMissionProfileRequest.add_member(:minimum_viable_contact_duration_seconds, Shapes::ShapeRef.new(shape: PositiveDurationInSeconds, location_name: "minimumViableContactDurationSeconds"))
     UpdateMissionProfileRequest.add_member(:dataflow_edges, Shapes::ShapeRef.new(shape: DataflowEdgeList, location_name: "dataflowEdges"))
     UpdateMissionProfileRequest.add_member(:tracking_config_arn, Shapes::ShapeRef.new(shape: ConfigArn, location_name: "trackingConfigArn"))
+    UpdateMissionProfileRequest.add_member(:telemetry_sink_config_arn, Shapes::ShapeRef.new(shape: ConfigArn, location_name: "telemetrySinkConfigArn"))
     UpdateMissionProfileRequest.add_member(:streams_kms_key, Shapes::ShapeRef.new(shape: KmsKey, location_name: "streamsKmsKey"))
     UpdateMissionProfileRequest.add_member(:streams_kms_role, Shapes::ShapeRef.new(shape: RoleArn, location_name: "streamsKmsRole"))
     UpdateMissionProfileRequest.struct_class = Types::UpdateMissionProfileRequest

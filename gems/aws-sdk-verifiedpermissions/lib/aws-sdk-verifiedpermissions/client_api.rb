@@ -90,6 +90,11 @@ module Aws::VerifiedPermissions
     DeterminingPolicyList = Shapes::ListShape.new(name: 'DeterminingPolicyList')
     DiscoveryUrl = Shapes::StringShape.new(name: 'DiscoveryUrl')
     Duration = Shapes::StringShape.new(name: 'Duration')
+    EncryptionContext = Shapes::MapShape.new(name: 'EncryptionContext')
+    EncryptionContextKey = Shapes::StringShape.new(name: 'EncryptionContextKey')
+    EncryptionContextValue = Shapes::StringShape.new(name: 'EncryptionContextValue')
+    EncryptionSettings = Shapes::UnionShape.new(name: 'EncryptionSettings')
+    EncryptionState = Shapes::UnionShape.new(name: 'EncryptionState')
     EntitiesDefinition = Shapes::UnionShape.new(name: 'EntitiesDefinition')
     EntityAttributes = Shapes::MapShape.new(name: 'EntityAttributes')
     EntityCedarTags = Shapes::MapShape.new(name: 'EntityCedarTags')
@@ -129,6 +134,9 @@ module Aws::VerifiedPermissions
     IsAuthorizedWithTokenInput = Shapes::StructureShape.new(name: 'IsAuthorizedWithTokenInput')
     IsAuthorizedWithTokenOutput = Shapes::StructureShape.new(name: 'IsAuthorizedWithTokenOutput')
     Issuer = Shapes::StringShape.new(name: 'Issuer')
+    KmsEncryptionSettings = Shapes::StructureShape.new(name: 'KmsEncryptionSettings')
+    KmsEncryptionState = Shapes::StructureShape.new(name: 'KmsEncryptionState')
+    KmsKey = Shapes::StringShape.new(name: 'KmsKey')
     ListIdentitySourcesInput = Shapes::StructureShape.new(name: 'ListIdentitySourcesInput')
     ListIdentitySourcesMaxResults = Shapes::IntegerShape.new(name: 'ListIdentitySourcesMaxResults')
     ListIdentitySourcesOutput = Shapes::StructureShape.new(name: 'ListIdentitySourcesOutput')
@@ -212,6 +220,7 @@ module Aws::VerifiedPermissions
     TimestampFormat = Shapes::TimestampShape.new(name: 'TimestampFormat', timestampFormat: "iso8601")
     Token = Shapes::StringShape.new(name: 'Token')
     TooManyTagsException = Shapes::StructureShape.new(name: 'TooManyTagsException')
+    Unit = Shapes::StructureShape.new(name: 'Unit')
     UntagResourceInput = Shapes::StructureShape.new(name: 'UntagResourceInput')
     UntagResourceOutput = Shapes::StructureShape.new(name: 'UntagResourceOutput')
     UpdateCognitoGroupConfiguration = Shapes::StructureShape.new(name: 'UpdateCognitoGroupConfiguration')
@@ -483,6 +492,7 @@ module Aws::VerifiedPermissions
     CreatePolicyStoreInput.add_member(:validation_settings, Shapes::ShapeRef.new(shape: ValidationSettings, required: true, location_name: "validationSettings"))
     CreatePolicyStoreInput.add_member(:description, Shapes::ShapeRef.new(shape: PolicyStoreDescription, location_name: "description"))
     CreatePolicyStoreInput.add_member(:deletion_protection, Shapes::ShapeRef.new(shape: DeletionProtection, location_name: "deletionProtection"))
+    CreatePolicyStoreInput.add_member(:encryption_settings, Shapes::ShapeRef.new(shape: EncryptionSettings, location_name: "encryptionSettings"))
     CreatePolicyStoreInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     CreatePolicyStoreInput.struct_class = Types::CreatePolicyStoreInput
 
@@ -531,6 +541,25 @@ module Aws::VerifiedPermissions
     DeterminingPolicyItem.struct_class = Types::DeterminingPolicyItem
 
     DeterminingPolicyList.member = Shapes::ShapeRef.new(shape: DeterminingPolicyItem)
+
+    EncryptionContext.key = Shapes::ShapeRef.new(shape: EncryptionContextKey)
+    EncryptionContext.value = Shapes::ShapeRef.new(shape: EncryptionContextValue)
+
+    EncryptionSettings.add_member(:kms_encryption_settings, Shapes::ShapeRef.new(shape: KmsEncryptionSettings, location_name: "kmsEncryptionSettings"))
+    EncryptionSettings.add_member(:default, Shapes::ShapeRef.new(shape: Unit, location_name: "default"))
+    EncryptionSettings.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    EncryptionSettings.add_member_subclass(:kms_encryption_settings, Types::EncryptionSettings::KmsEncryptionSettings)
+    EncryptionSettings.add_member_subclass(:default, Types::EncryptionSettings::Default)
+    EncryptionSettings.add_member_subclass(:unknown, Types::EncryptionSettings::Unknown)
+    EncryptionSettings.struct_class = Types::EncryptionSettings
+
+    EncryptionState.add_member(:kms_encryption_state, Shapes::ShapeRef.new(shape: KmsEncryptionState, location_name: "kmsEncryptionState"))
+    EncryptionState.add_member(:default, Shapes::ShapeRef.new(shape: Unit, location_name: "default"))
+    EncryptionState.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    EncryptionState.add_member_subclass(:kms_encryption_state, Types::EncryptionState::KmsEncryptionState)
+    EncryptionState.add_member_subclass(:default, Types::EncryptionState::Default)
+    EncryptionState.add_member_subclass(:unknown, Types::EncryptionState::Unknown)
+    EncryptionState.struct_class = Types::EncryptionState
 
     EntitiesDefinition.add_member(:entity_list, Shapes::ShapeRef.new(shape: EntityList, location_name: "entityList"))
     EntitiesDefinition.add_member(:cedar_json, Shapes::ShapeRef.new(shape: CedarJson, location_name: "cedarJson"))
@@ -611,6 +640,7 @@ module Aws::VerifiedPermissions
     GetPolicyStoreOutput.add_member(:last_updated_date, Shapes::ShapeRef.new(shape: TimestampFormat, required: true, location_name: "lastUpdatedDate"))
     GetPolicyStoreOutput.add_member(:description, Shapes::ShapeRef.new(shape: PolicyStoreDescription, location_name: "description"))
     GetPolicyStoreOutput.add_member(:deletion_protection, Shapes::ShapeRef.new(shape: DeletionProtection, location_name: "deletionProtection"))
+    GetPolicyStoreOutput.add_member(:encryption_state, Shapes::ShapeRef.new(shape: EncryptionState, location_name: "encryptionState"))
     GetPolicyStoreOutput.add_member(:cedar_version, Shapes::ShapeRef.new(shape: CedarVersion, location_name: "cedarVersion"))
     GetPolicyStoreOutput.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     GetPolicyStoreOutput.struct_class = Types::GetPolicyStoreOutput
@@ -698,6 +728,14 @@ module Aws::VerifiedPermissions
     IsAuthorizedWithTokenOutput.add_member(:errors, Shapes::ShapeRef.new(shape: EvaluationErrorList, required: true, location_name: "errors"))
     IsAuthorizedWithTokenOutput.add_member(:principal, Shapes::ShapeRef.new(shape: EntityIdentifier, location_name: "principal"))
     IsAuthorizedWithTokenOutput.struct_class = Types::IsAuthorizedWithTokenOutput
+
+    KmsEncryptionSettings.add_member(:key, Shapes::ShapeRef.new(shape: KmsKey, required: true, location_name: "key"))
+    KmsEncryptionSettings.add_member(:encryption_context, Shapes::ShapeRef.new(shape: EncryptionContext, location_name: "encryptionContext"))
+    KmsEncryptionSettings.struct_class = Types::KmsEncryptionSettings
+
+    KmsEncryptionState.add_member(:key, Shapes::ShapeRef.new(shape: KmsKey, required: true, location_name: "key"))
+    KmsEncryptionState.add_member(:encryption_context, Shapes::ShapeRef.new(shape: EncryptionContext, required: true, location_name: "encryptionContext"))
+    KmsEncryptionState.struct_class = Types::KmsEncryptionState
 
     ListIdentitySourcesInput.add_member(:policy_store_id, Shapes::ShapeRef.new(shape: PolicyStoreId, required: true, location_name: "policyStoreId"))
     ListIdentitySourcesInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
@@ -971,6 +1009,8 @@ module Aws::VerifiedPermissions
     TooManyTagsException.add_member(:resource_name, Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "resourceName"))
     TooManyTagsException.struct_class = Types::TooManyTagsException
 
+    Unit.struct_class = Types::Unit
+
     UntagResourceInput.add_member(:resource_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "resourceArn"))
     UntagResourceInput.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location_name: "tagKeys"))
     UntagResourceInput.struct_class = Types::UntagResourceInput
@@ -1039,7 +1079,7 @@ module Aws::VerifiedPermissions
 
     UpdatePolicyInput.add_member(:policy_store_id, Shapes::ShapeRef.new(shape: PolicyStoreId, required: true, location_name: "policyStoreId"))
     UpdatePolicyInput.add_member(:policy_id, Shapes::ShapeRef.new(shape: PolicyId, required: true, location_name: "policyId"))
-    UpdatePolicyInput.add_member(:definition, Shapes::ShapeRef.new(shape: UpdatePolicyDefinition, required: true, location_name: "definition"))
+    UpdatePolicyInput.add_member(:definition, Shapes::ShapeRef.new(shape: UpdatePolicyDefinition, location_name: "definition"))
     UpdatePolicyInput.struct_class = Types::UpdatePolicyInput
 
     UpdatePolicyOutput.add_member(:policy_store_id, Shapes::ShapeRef.new(shape: PolicyStoreId, required: true, location_name: "policyStoreId"))

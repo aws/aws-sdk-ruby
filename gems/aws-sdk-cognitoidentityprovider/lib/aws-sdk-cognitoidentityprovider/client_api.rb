@@ -306,6 +306,8 @@ module Aws::CognitoIdentityProvider
     IdpIdentifiersListType = Shapes::ListShape.new(name: 'IdpIdentifiersListType')
     ImageFileType = Shapes::BlobShape.new(name: 'ImageFileType')
     ImageUrlType = Shapes::StringShape.new(name: 'ImageUrlType')
+    InboundFederationLambdaType = Shapes::StructureShape.new(name: 'InboundFederationLambdaType')
+    InboundFederationLambdaVersionType = Shapes::StringShape.new(name: 'InboundFederationLambdaVersionType')
     InitiateAuthRequest = Shapes::StructureShape.new(name: 'InitiateAuthRequest')
     InitiateAuthResponse = Shapes::StructureShape.new(name: 'InitiateAuthResponse')
     IntegerType = Shapes::IntegerShape.new(name: 'IntegerType')
@@ -1505,6 +1507,10 @@ module Aws::CognitoIdentityProvider
 
     IdpIdentifiersListType.member = Shapes::ShapeRef.new(shape: IdpIdentifierType)
 
+    InboundFederationLambdaType.add_member(:lambda_version, Shapes::ShapeRef.new(shape: InboundFederationLambdaVersionType, required: true, location_name: "LambdaVersion"))
+    InboundFederationLambdaType.add_member(:lambda_arn, Shapes::ShapeRef.new(shape: ArnType, required: true, location_name: "LambdaArn"))
+    InboundFederationLambdaType.struct_class = Types::InboundFederationLambdaType
+
     InitiateAuthRequest.add_member(:auth_flow, Shapes::ShapeRef.new(shape: AuthFlowType, required: true, location_name: "AuthFlow"))
     InitiateAuthRequest.add_member(:auth_parameters, Shapes::ShapeRef.new(shape: AuthParametersType, location_name: "AuthParameters"))
     InitiateAuthRequest.add_member(:client_metadata, Shapes::ShapeRef.new(shape: ClientMetadataType, location_name: "ClientMetadata"))
@@ -1563,6 +1569,7 @@ module Aws::CognitoIdentityProvider
     LambdaConfigType.add_member(:custom_sms_sender, Shapes::ShapeRef.new(shape: CustomSMSLambdaVersionConfigType, location_name: "CustomSMSSender"))
     LambdaConfigType.add_member(:custom_email_sender, Shapes::ShapeRef.new(shape: CustomEmailLambdaVersionConfigType, location_name: "CustomEmailSender"))
     LambdaConfigType.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: ArnType, location_name: "KMSKeyID"))
+    LambdaConfigType.add_member(:inbound_federation, Shapes::ShapeRef.new(shape: InboundFederationLambdaType, location_name: "InboundFederation"))
     LambdaConfigType.struct_class = Types::LambdaConfigType
 
     LimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: MessageType, location_name: "message"))

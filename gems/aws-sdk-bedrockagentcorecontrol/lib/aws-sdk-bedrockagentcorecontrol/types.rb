@@ -25,7 +25,7 @@ module Aws::BedrockAgentCoreControl
     end
 
     # Contains information about an agent runtime. An agent runtime is the
-    # execution environment for a Amazon Bedrock Agent.
+    # execution environment for a Amazon Bedrock AgentCore Agent.
     #
     # @!attribute [rw] agent_runtime_arn
     #   The Amazon Resource Name (ARN) of the agent runtime.
@@ -498,6 +498,71 @@ module Aws::BedrockAgentCoreControl
       include Aws::Structure
     end
 
+    # Contains summary information about a browser profile. A browser
+    # profile stores persistent browser data that can be reused across
+    # browser sessions.
+    #
+    # @!attribute [rw] profile_id
+    #   The unique identifier of the browser profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] profile_arn
+    #   The Amazon Resource Name (ARN) of the browser profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the browser profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the browser profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the browser profile. Possible values include
+    #   READY, SAVING, DELETING, and DELETED.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp when the browser profile was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_at
+    #   The timestamp when the browser profile was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_saved_at
+    #   The timestamp when browser session data was last saved to this
+    #   profile.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_saved_browser_session_id
+    #   The identifier of the browser session from which data was last saved
+    #   to this profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_saved_browser_id
+    #   The identifier of the browser from which data was last saved to this
+    #   profile.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/BrowserProfileSummary AWS API Documentation
+    #
+    class BrowserProfileSummary < Struct.new(
+      :profile_id,
+      :profile_arn,
+      :name,
+      :description,
+      :status,
+      :created_at,
+      :last_updated_at,
+      :last_saved_at,
+      :last_saved_browser_session_id,
+      :last_saved_browser_id)
+      SENSITIVE = [:description]
+      include Aws::Structure
+    end
+
     # Configuration for enabling browser signing capabilities that allow
     # agents to cryptographically identify themselves to websites using HTTP
     # message signatures.
@@ -534,7 +599,7 @@ module Aws::BedrockAgentCoreControl
     end
 
     # Contains summary information about a browser. A browser enables Amazon
-    # Bedrock Agent to interact with web content.
+    # Bedrock AgentCore Agent to interact with web content.
     #
     # @!attribute [rw] browser_id
     #   The unique identifier of the browser.
@@ -772,7 +837,7 @@ module Aws::BedrockAgentCoreControl
     end
 
     # Contains summary information about a code interpreter. A code
-    # interpreter enables Amazon Bedrock Agent to execute code.
+    # interpreter enables Amazon Bedrock AgentCore Agent to execute code.
     #
     # @!attribute [rw] code_interpreter_id
     #   The unique identifier of the code interpreter.
@@ -1156,6 +1221,70 @@ module Aws::BedrockAgentCoreControl
     end
 
     # @!attribute [rw] name
+    #   The name of the browser profile. The name must be unique within your
+    #   account and can contain alphanumeric characters and underscores.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the browser profile. Use this field to describe the
+    #   purpose or contents of the profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier to ensure that the operation
+    #   completes no more than one time. If this token matches a previous
+    #   request, Amazon Bedrock AgentCore ignores the request but does not
+    #   return an error.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A map of tag keys and values to assign to the browser profile. Tags
+    #   enable you to categorize your resources in different ways, for
+    #   example, by purpose, owner, or environment.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/CreateBrowserProfileRequest AWS API Documentation
+    #
+    class CreateBrowserProfileRequest < Struct.new(
+      :name,
+      :description,
+      :client_token,
+      :tags)
+      SENSITIVE = [:description]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] profile_id
+    #   The unique identifier of the created browser profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] profile_arn
+    #   The Amazon Resource Name (ARN) of the created browser profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp when the browser profile was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] status
+    #   The current status of the browser profile.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/CreateBrowserProfileResponse AWS API Documentation
+    #
+    class CreateBrowserProfileResponse < Struct.new(
+      :profile_id,
+      :profile_arn,
+      :created_at,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
     #   The name of the browser. The name must be unique within your
     #   account.
     #   @return [String]
@@ -1189,8 +1318,8 @@ module Aws::BedrockAgentCoreControl
     # @!attribute [rw] client_token
     #   A unique, case-sensitive identifier to ensure that the operation
     #   completes no more than one time. If this token matches a previous
-    #   request, Amazon Bedrock ignores the request but does not return an
-    #   error.
+    #   request, Amazon Bedrock AgentCore ignores the request but does not
+    #   return an error.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -1267,8 +1396,8 @@ module Aws::BedrockAgentCoreControl
     # @!attribute [rw] client_token
     #   A unique, case-sensitive identifier to ensure that the operation
     #   completes no more than one time. If this token matches a previous
-    #   request, Amazon Bedrock ignores the request but does not return an
-    #   error.
+    #   request, Amazon Bedrock AgentCore ignores the request but does not
+    #   return an error.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -1357,6 +1486,12 @@ module Aws::BedrockAgentCoreControl
     #   conversation sessions.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   A map of tag keys and values to assign to an AgentCore Evaluator.
+    #   Tags enable you to categorize your resources in different ways, for
+    #   example, by purpose, owner, or environment.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/CreateEvaluatorRequest AWS API Documentation
     #
     class CreateEvaluatorRequest < Struct.new(
@@ -1364,7 +1499,8 @@ module Aws::BedrockAgentCoreControl
       :evaluator_name,
       :description,
       :evaluator_config,
-      :level)
+      :level,
+      :tags)
       SENSITIVE = [:description]
       include Aws::Structure
     end
@@ -1936,6 +2072,12 @@ module Aws::BedrockAgentCoreControl
     #   upon creation. If true, evaluation begins automatically.
     #   @return [Boolean]
     #
+    # @!attribute [rw] tags
+    #   A map of tag keys and values to assign to an AgentCore Online
+    #   Evaluation Config. Tags enable you to categorize your resources in
+    #   different ways, for example, by purpose, owner, or environment.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/CreateOnlineEvaluationConfigRequest AWS API Documentation
     #
     class CreateOnlineEvaluationConfigRequest < Struct.new(
@@ -1946,7 +2088,8 @@ module Aws::BedrockAgentCoreControl
       :data_source_config,
       :evaluators,
       :evaluation_execution_role_arn,
-      :enable_on_create)
+      :enable_on_create,
+      :tags)
       SENSITIVE = [:description]
       include Aws::Structure
     end
@@ -2863,6 +3006,60 @@ module Aws::BedrockAgentCoreControl
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/DeleteApiKeyCredentialProviderResponse AWS API Documentation
     #
     class DeleteApiKeyCredentialProviderResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] profile_id
+    #   The unique identifier of the browser profile to delete.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier to ensure idempotency of the
+    #   request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/DeleteBrowserProfileRequest AWS API Documentation
+    #
+    class DeleteBrowserProfileRequest < Struct.new(
+      :profile_id,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] profile_id
+    #   The unique identifier of the deleted browser profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] profile_arn
+    #   The Amazon Resource Name (ARN) of the deleted browser profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the browser profile deletion.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_updated_at
+    #   The timestamp when the browser profile was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_saved_at
+    #   The timestamp when browser session data was last saved to this
+    #   profile before deletion.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/DeleteBrowserProfileResponse AWS API Documentation
+    #
+    class DeleteBrowserProfileResponse < Struct.new(
+      :profile_id,
+      :profile_arn,
+      :status,
+      :last_updated_at,
+      :last_saved_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @!attribute [rw] browser_id
     #   The unique identifier of the browser to delete.
@@ -4316,6 +4513,78 @@ module Aws::BedrockAgentCoreControl
       :created_time,
       :last_updated_time)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] profile_id
+    #   The unique identifier of the browser profile to retrieve.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/GetBrowserProfileRequest AWS API Documentation
+    #
+    class GetBrowserProfileRequest < Struct.new(
+      :profile_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] profile_id
+    #   The unique identifier of the browser profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] profile_arn
+    #   The Amazon Resource Name (ARN) of the browser profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the browser profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the browser profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the browser profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp when the browser profile was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_at
+    #   The timestamp when the browser profile was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_saved_at
+    #   The timestamp when browser session data was last saved to this
+    #   profile.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_saved_browser_session_id
+    #   The identifier of the browser session from which data was last saved
+    #   to this profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_saved_browser_id
+    #   The identifier of the browser from which data was last saved to this
+    #   profile.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/GetBrowserProfileResponse AWS API Documentation
+    #
+    class GetBrowserProfileResponse < Struct.new(
+      :profile_id,
+      :profile_arn,
+      :name,
+      :description,
+      :status,
+      :created_at,
+      :last_updated_at,
+      :last_saved_at,
+      :last_saved_browser_session_id,
+      :last_saved_browser_id)
+      SENSITIVE = [:description]
       include Aws::Structure
     end
 
@@ -5821,6 +6090,40 @@ module Aws::BedrockAgentCoreControl
     #
     class ListApiKeyCredentialProvidersResponse < Struct.new(
       :credential_providers,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in the response.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   A token to retrieve the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/ListBrowserProfilesRequest AWS API Documentation
+    #
+    class ListBrowserProfilesRequest < Struct.new(
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] profile_summaries
+    #   The list of browser profile summaries.
+    #   @return [Array<Types::BrowserProfileSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   A token to retrieve the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/ListBrowserProfilesResponse AWS API Documentation
+    #
+    class ListBrowserProfilesResponse < Struct.new(
+      :profile_summaries,
       :next_token)
       SENSITIVE = []
       include Aws::Structure

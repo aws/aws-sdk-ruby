@@ -7093,6 +7093,11 @@ module Aws::ConfigService
     #   document that is used to create a conformance pack.
     #   @return [Types::TemplateSSMDocumentDetails]
     #
+    # @!attribute [rw] tags
+    #   The tags for the conformance pack. Each tag consists of a key and an
+    #   optional value, both of which you define.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/PutConformancePackRequest AWS API Documentation
     #
     class PutConformancePackRequest < Struct.new(
@@ -7102,7 +7107,8 @@ module Aws::ConfigService
       :delivery_s3_bucket,
       :delivery_s3_key_prefix,
       :conformance_pack_input_parameters,
-      :template_ssm_document_details)
+      :template_ssm_document_details,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end

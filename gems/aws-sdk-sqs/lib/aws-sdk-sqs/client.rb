@@ -213,6 +213,9 @@ module Aws::SQS
     #   @option options [Boolean] :disable_host_prefix_injection (false)
     #     When `true`, the SDK will not prepend the modeled host prefix to the endpoint.
     #
+    #   @option options [Boolean] :disable_queue_url_region_detection (false)
+    #     When set to `true`, the region will not be extracted from a provided queue url. Defaults to `false`.
+    #
     #   @option options [Boolean] :disable_request_compression (false)
     #     When set to 'true' the request body will not be compressed
     #     for supported operations.
@@ -2980,7 +2983,7 @@ module Aws::SQS
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-sqs'
-      context[:gem_version] = '1.109.0'
+      context[:gem_version] = '1.111.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

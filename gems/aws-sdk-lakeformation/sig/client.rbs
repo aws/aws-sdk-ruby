@@ -856,6 +856,23 @@ module Aws
                              ) -> _GetTableObjectsResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetTableObjectsResponseSuccess
 
+      interface _GetTemporaryDataLocationCredentialsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetTemporaryDataLocationCredentialsResponse]
+        def credentials: () -> Types::TemporaryCredentials
+        def accessible_data_locations: () -> ::Array[::String]
+        def credentials_scope: () -> ("READ" | "READWRITE")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LakeFormation/Client.html#get_temporary_data_location_credentials-instance_method
+      def get_temporary_data_location_credentials: (
+                                                     ?duration_seconds: ::Integer,
+                                                     ?audit_context: {
+                                                       additional_audit_context: ::String?
+                                                     },
+                                                     ?data_locations: Array[::String],
+                                                     ?credentials_scope: ("READ" | "READWRITE")
+                                                   ) -> _GetTemporaryDataLocationCredentialsResponseSuccess
+                                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetTemporaryDataLocationCredentialsResponseSuccess
+
       interface _GetTemporaryGluePartitionCredentialsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetTemporaryGluePartitionCredentialsResponse]
         def access_key_id: () -> ::String
@@ -1299,7 +1316,8 @@ module Aws
                                ?role_arn: ::String,
                                ?with_federation: bool,
                                ?hybrid_access_enabled: bool,
-                               ?with_privileged_access: bool
+                               ?with_privileged_access: bool,
+                               ?expected_resource_owner_account: ::String
                              ) -> _RegisterResourceResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RegisterResourceResponseSuccess
 
@@ -1603,7 +1621,8 @@ module Aws
                              role_arn: ::String,
                              resource_arn: ::String,
                              ?with_federation: bool,
-                             ?hybrid_access_enabled: bool
+                             ?hybrid_access_enabled: bool,
+                             ?expected_resource_owner_account: ::String
                            ) -> _UpdateResourceResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateResourceResponseSuccess
 

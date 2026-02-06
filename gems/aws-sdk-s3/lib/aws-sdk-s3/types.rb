@@ -138,10 +138,10 @@ module Aws::S3
     #   Confirms that the requester knows that they will be charged for the
     #   request. Bucket owners need not specify this parameter in their
     #   requests. If either the source or destination S3 bucket has
-    #   Requester Pays enabled, the requester will pay for corresponding
-    #   charges to copy the object. For information about downloading
-    #   objects from Requester Pays buckets, see [Downloading Objects in
-    #   Requester Pays Buckets][1] in the *Amazon S3 User Guide*.
+    #   Requester Pays enabled, the requester will pay for the corresponding
+    #   charges. For information about downloading objects from Requester
+    #   Pays buckets, see [Downloading Objects in Requester Pays Buckets][1]
+    #   in the *Amazon S3 User Guide*.
     #
     #   <note markdown="1"> This functionality is not supported for directory buckets.
     #
@@ -243,6 +243,13 @@ module Aws::S3
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # You might receive this error for several reasons. For details, see the
+    # description of this API operation.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/AccessDenied AWS API Documentation
+    #
+    class AccessDenied < Aws::EmptyStructure; end
 
     # A conjunction (logical AND) of predicates, which is used in evaluating
     # a metrics filter. The operator must have at least two predicates in
@@ -1253,10 +1260,10 @@ module Aws::S3
     #   Confirms that the requester knows that they will be charged for the
     #   request. Bucket owners need not specify this parameter in their
     #   requests. If either the source or destination S3 bucket has
-    #   Requester Pays enabled, the requester will pay for corresponding
-    #   charges to copy the object. For information about downloading
-    #   objects from Requester Pays buckets, see [Downloading Objects in
-    #   Requester Pays Buckets][1] in the *Amazon S3 User Guide*.
+    #   Requester Pays enabled, the requester will pay for the corresponding
+    #   charges. For information about downloading objects from Requester
+    #   Pays buckets, see [Downloading Objects in Requester Pays Buckets][1]
+    #   in the *Amazon S3 User Guide*.
     #
     #   <note markdown="1"> This functionality is not supported for directory buckets.
     #
@@ -2431,10 +2438,10 @@ module Aws::S3
     #   Confirms that the requester knows that they will be charged for the
     #   request. Bucket owners need not specify this parameter in their
     #   requests. If either the source or destination S3 bucket has
-    #   Requester Pays enabled, the requester will pay for corresponding
-    #   charges to copy the object. For information about downloading
-    #   objects from Requester Pays buckets, see [Downloading Objects in
-    #   Requester Pays Buckets][1] in the *Amazon S3 User Guide*.
+    #   Requester Pays enabled, the requester will pay for the corresponding
+    #   charges. For information about downloading objects from Requester
+    #   Pays buckets, see [Downloading Objects in Requester Pays Buckets][1]
+    #   in the *Amazon S3 User Guide*.
     #
     #   <note markdown="1"> This functionality is not supported for directory buckets.
     #
@@ -3810,10 +3817,10 @@ module Aws::S3
     #   Confirms that the requester knows that they will be charged for the
     #   request. Bucket owners need not specify this parameter in their
     #   requests. If either the source or destination S3 bucket has
-    #   Requester Pays enabled, the requester will pay for corresponding
-    #   charges to copy the object. For information about downloading
-    #   objects from Requester Pays buckets, see [Downloading Objects in
-    #   Requester Pays Buckets][1] in the *Amazon S3 User Guide*.
+    #   Requester Pays enabled, the requester will pay for the corresponding
+    #   charges. For information about downloading objects from Requester
+    #   Pays buckets, see [Downloading Objects in Requester Pays Buckets][1]
+    #   in the *Amazon S3 User Guide*.
     #
     #   <note markdown="1"> This functionality is not supported for directory buckets.
     #
@@ -4749,10 +4756,10 @@ module Aws::S3
     #   Confirms that the requester knows that they will be charged for the
     #   request. Bucket owners need not specify this parameter in their
     #   requests. If either the source or destination S3 bucket has
-    #   Requester Pays enabled, the requester will pay for corresponding
-    #   charges to copy the object. For information about downloading
-    #   objects from Requester Pays buckets, see [Downloading Objects in
-    #   Requester Pays Buckets][1] in the *Amazon S3 User Guide*.
+    #   Requester Pays enabled, the requester will pay for the corresponding
+    #   charges. For information about downloading objects from Requester
+    #   Pays buckets, see [Downloading Objects in Requester Pays Buckets][1]
+    #   in the *Amazon S3 User Guide*.
     #
     #   <note markdown="1"> This functionality is not supported for directory buckets.
     #
@@ -5029,10 +5036,10 @@ module Aws::S3
     #   Confirms that the requester knows that they will be charged for the
     #   request. Bucket owners need not specify this parameter in their
     #   requests. If either the source or destination S3 bucket has
-    #   Requester Pays enabled, the requester will pay for corresponding
-    #   charges to copy the object. For information about downloading
-    #   objects from Requester Pays buckets, see [Downloading Objects in
-    #   Requester Pays Buckets][1] in the *Amazon S3 User Guide*.
+    #   Requester Pays enabled, the requester will pay for the corresponding
+    #   charges. For information about downloading objects from Requester
+    #   Pays buckets, see [Downloading Objects in Requester Pays Buckets][1]
+    #   in the *Amazon S3 User Guide*.
     #
     #   <note markdown="1"> This functionality is not supported for directory buckets.
     #
@@ -6520,10 +6527,10 @@ module Aws::S3
     #   Confirms that the requester knows that they will be charged for the
     #   request. Bucket owners need not specify this parameter in their
     #   requests. If either the source or destination S3 bucket has
-    #   Requester Pays enabled, the requester will pay for corresponding
-    #   charges to copy the object. For information about downloading
-    #   objects from Requester Pays buckets, see [Downloading Objects in
-    #   Requester Pays Buckets][1] in the *Amazon S3 User Guide*.
+    #   Requester Pays enabled, the requester will pay for the corresponding
+    #   charges. For information about downloading objects from Requester
+    #   Pays buckets, see [Downloading Objects in Requester Pays Buckets][1]
+    #   in the *Amazon S3 User Guide*.
     #
     #   <note markdown="1"> This functionality is not supported for directory buckets.
     #
@@ -7591,10 +7598,10 @@ module Aws::S3
     #   Confirms that the requester knows that they will be charged for the
     #   request. Bucket owners need not specify this parameter in their
     #   requests. If either the source or destination S3 bucket has
-    #   Requester Pays enabled, the requester will pay for corresponding
-    #   charges to copy the object. For information about downloading
-    #   objects from Requester Pays buckets, see [Downloading Objects in
-    #   Requester Pays Buckets][1] in the *Amazon S3 User Guide*.
+    #   Requester Pays enabled, the requester will pay for the corresponding
+    #   charges. For information about downloading objects from Requester
+    #   Pays buckets, see [Downloading Objects in Requester Pays Buckets][1]
+    #   in the *Amazon S3 User Guide*.
     #
     #   <note markdown="1"> This functionality is not supported for directory buckets.
     #
@@ -7893,10 +7900,10 @@ module Aws::S3
     #   Confirms that the requester knows that they will be charged for the
     #   request. Bucket owners need not specify this parameter in their
     #   requests. If either the source or destination S3 bucket has
-    #   Requester Pays enabled, the requester will pay for corresponding
-    #   charges to copy the object. For information about downloading
-    #   objects from Requester Pays buckets, see [Downloading Objects in
-    #   Requester Pays Buckets][1] in the *Amazon S3 User Guide*.
+    #   Requester Pays enabled, the requester will pay for the corresponding
+    #   charges. For information about downloading objects from Requester
+    #   Pays buckets, see [Downloading Objects in Requester Pays Buckets][1]
+    #   in the *Amazon S3 User Guide*.
     #
     #   <note markdown="1"> This functionality is not supported for directory buckets.
     #
@@ -7986,10 +7993,10 @@ module Aws::S3
     #   Confirms that the requester knows that they will be charged for the
     #   request. Bucket owners need not specify this parameter in their
     #   requests. If either the source or destination S3 bucket has
-    #   Requester Pays enabled, the requester will pay for corresponding
-    #   charges to copy the object. For information about downloading
-    #   objects from Requester Pays buckets, see [Downloading Objects in
-    #   Requester Pays Buckets][1] in the *Amazon S3 User Guide*.
+    #   Requester Pays enabled, the requester will pay for the corresponding
+    #   charges. For information about downloading objects from Requester
+    #   Pays buckets, see [Downloading Objects in Requester Pays Buckets][1]
+    #   in the *Amazon S3 User Guide*.
     #
     #   <note markdown="1"> This functionality is not supported for directory buckets.
     #
@@ -8737,10 +8744,10 @@ module Aws::S3
     #   Confirms that the requester knows that they will be charged for the
     #   request. Bucket owners need not specify this parameter in their
     #   requests. If either the source or destination S3 bucket has
-    #   Requester Pays enabled, the requester will pay for corresponding
-    #   charges to copy the object. For information about downloading
-    #   objects from Requester Pays buckets, see [Downloading Objects in
-    #   Requester Pays Buckets][1] in the *Amazon S3 User Guide*.
+    #   Requester Pays enabled, the requester will pay for the corresponding
+    #   charges. For information about downloading objects from Requester
+    #   Pays buckets, see [Downloading Objects in Requester Pays Buckets][1]
+    #   in the *Amazon S3 User Guide*.
     #
     #   <note markdown="1"> This functionality is not supported for directory buckets.
     #
@@ -8846,10 +8853,10 @@ module Aws::S3
     #   Confirms that the requester knows that they will be charged for the
     #   request. Bucket owners need not specify this parameter in their
     #   requests. If either the source or destination S3 bucket has
-    #   Requester Pays enabled, the requester will pay for corresponding
-    #   charges to copy the object. For information about downloading
-    #   objects from Requester Pays buckets, see [Downloading Objects in
-    #   Requester Pays Buckets][1] in the *Amazon S3 User Guide*.
+    #   Requester Pays enabled, the requester will pay for the corresponding
+    #   charges. For information about downloading objects from Requester
+    #   Pays buckets, see [Downloading Objects in Requester Pays Buckets][1]
+    #   in the *Amazon S3 User Guide*.
     #
     #   <note markdown="1"> This functionality is not supported for directory buckets.
     #
@@ -8950,10 +8957,10 @@ module Aws::S3
     #   Confirms that the requester knows that they will be charged for the
     #   request. Bucket owners need not specify this parameter in their
     #   requests. If either the source or destination S3 bucket has
-    #   Requester Pays enabled, the requester will pay for corresponding
-    #   charges to copy the object. For information about downloading
-    #   objects from Requester Pays buckets, see [Downloading Objects in
-    #   Requester Pays Buckets][1] in the *Amazon S3 User Guide*.
+    #   Requester Pays enabled, the requester will pay for the corresponding
+    #   charges. For information about downloading objects from Requester
+    #   Pays buckets, see [Downloading Objects in Requester Pays Buckets][1]
+    #   in the *Amazon S3 User Guide*.
     #
     #   <note markdown="1"> This functionality is not supported for directory buckets.
     #
@@ -9017,10 +9024,10 @@ module Aws::S3
     #   Confirms that the requester knows that they will be charged for the
     #   request. Bucket owners need not specify this parameter in their
     #   requests. If either the source or destination S3 bucket has
-    #   Requester Pays enabled, the requester will pay for corresponding
-    #   charges to copy the object. For information about downloading
-    #   objects from Requester Pays buckets, see [Downloading Objects in
-    #   Requester Pays Buckets][1] in the *Amazon S3 User Guide*.
+    #   Requester Pays enabled, the requester will pay for the corresponding
+    #   charges. For information about downloading objects from Requester
+    #   Pays buckets, see [Downloading Objects in Requester Pays Buckets][1]
+    #   in the *Amazon S3 User Guide*.
     #
     #   <note markdown="1"> This functionality is not supported for directory buckets.
     #
@@ -9956,10 +9963,10 @@ module Aws::S3
     #   Confirms that the requester knows that they will be charged for the
     #   request. Bucket owners need not specify this parameter in their
     #   requests. If either the source or destination S3 bucket has
-    #   Requester Pays enabled, the requester will pay for corresponding
-    #   charges to copy the object. For information about downloading
-    #   objects from Requester Pays buckets, see [Downloading Objects in
-    #   Requester Pays Buckets][1] in the *Amazon S3 User Guide*.
+    #   Requester Pays enabled, the requester will pay for the corresponding
+    #   charges. For information about downloading objects from Requester
+    #   Pays buckets, see [Downloading Objects in Requester Pays Buckets][1]
+    #   in the *Amazon S3 User Guide*.
     #
     #   <note markdown="1"> This functionality is not supported for directory buckets.
     #
@@ -10268,16 +10275,8 @@ module Aws::S3
       include Aws::Structure
     end
 
-    # You may receive this error in multiple cases. Depending on the reason
-    # for the error, you may receive one of the messages below:
-    #
-    # * Cannot specify both a write offset value and user-defined object
-    #   metadata for existing objects.
-    #
-    # * Checksum Type mismatch occurred, expected checksum Type: sha1,
-    #   actual checksum Type: crc32c.
-    #
-    # * Request body cannot be empty when 'write offset' is specified.
+    # A parameter or header in your request isn't valid. For details, see
+    # the description of this API operation.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/InvalidRequest AWS API Documentation
     #
@@ -11692,10 +11691,10 @@ module Aws::S3
     #   Confirms that the requester knows that they will be charged for the
     #   request. Bucket owners need not specify this parameter in their
     #   requests. If either the source or destination S3 bucket has
-    #   Requester Pays enabled, the requester will pay for corresponding
-    #   charges to copy the object. For information about downloading
-    #   objects from Requester Pays buckets, see [Downloading Objects in
-    #   Requester Pays Buckets][1] in the *Amazon S3 User Guide*.
+    #   Requester Pays enabled, the requester will pay for the corresponding
+    #   charges. For information about downloading objects from Requester
+    #   Pays buckets, see [Downloading Objects in Requester Pays Buckets][1]
+    #   in the *Amazon S3 User Guide*.
     #
     #   <note markdown="1"> This functionality is not supported for directory buckets.
     #
@@ -11916,10 +11915,10 @@ module Aws::S3
     #   Confirms that the requester knows that they will be charged for the
     #   request. Bucket owners need not specify this parameter in their
     #   requests. If either the source or destination S3 bucket has
-    #   Requester Pays enabled, the requester will pay for corresponding
-    #   charges to copy the object. For information about downloading
-    #   objects from Requester Pays buckets, see [Downloading Objects in
-    #   Requester Pays Buckets][1] in the *Amazon S3 User Guide*.
+    #   Requester Pays enabled, the requester will pay for the corresponding
+    #   charges. For information about downloading objects from Requester
+    #   Pays buckets, see [Downloading Objects in Requester Pays Buckets][1]
+    #   in the *Amazon S3 User Guide*.
     #
     #   <note markdown="1"> This functionality is not supported for directory buckets.
     #
@@ -12764,10 +12763,10 @@ module Aws::S3
     #   Confirms that the requester knows that they will be charged for the
     #   request. Bucket owners need not specify this parameter in their
     #   requests. If either the source or destination S3 bucket has
-    #   Requester Pays enabled, the requester will pay for corresponding
-    #   charges to copy the object. For information about downloading
-    #   objects from Requester Pays buckets, see [Downloading Objects in
-    #   Requester Pays Buckets][1] in the *Amazon S3 User Guide*.
+    #   Requester Pays enabled, the requester will pay for the corresponding
+    #   charges. For information about downloading objects from Requester
+    #   Pays buckets, see [Downloading Objects in Requester Pays Buckets][1]
+    #   in the *Amazon S3 User Guide*.
     #
     #   <note markdown="1"> This functionality is not supported for directory buckets.
     #
@@ -13595,6 +13594,32 @@ module Aws::S3
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ObjectAlreadyInActiveTierError AWS API Documentation
     #
     class ObjectAlreadyInActiveTierError < Aws::EmptyStructure; end
+
+    # The updated server-side encryption type for this object. The
+    # `UpdateObjectEncryption` operation supports the SSE-S3 and SSE-KMS
+    # encryption types.
+    #
+    # Valid Values: `SSES3` \| `SSEKMS`
+    #
+    # @note ObjectEncryption is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @!attribute [rw] ssekms
+    #   Specifies to update the object encryption type to server-side
+    #   encryption with Key Management Service (KMS) keys (SSE-KMS).
+    #   @return [Types::SSEKMSEncryption]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ObjectEncryption AWS API Documentation
+    #
+    class ObjectEncryption < Struct.new(
+      :ssekms,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Ssekms < ObjectEncryption; end
+      class Unknown < ObjectEncryption; end
+    end
 
     # Object Identifier is unique value to identify objects.
     #
@@ -15650,10 +15675,10 @@ module Aws::S3
     #   Confirms that the requester knows that they will be charged for the
     #   request. Bucket owners need not specify this parameter in their
     #   requests. If either the source or destination S3 bucket has
-    #   Requester Pays enabled, the requester will pay for corresponding
-    #   charges to copy the object. For information about downloading
-    #   objects from Requester Pays buckets, see [Downloading Objects in
-    #   Requester Pays Buckets][1] in the *Amazon S3 User Guide*.
+    #   Requester Pays enabled, the requester will pay for the corresponding
+    #   charges. For information about downloading objects from Requester
+    #   Pays buckets, see [Downloading Objects in Requester Pays Buckets][1]
+    #   in the *Amazon S3 User Guide*.
     #
     #   <note markdown="1"> This functionality is not supported for directory buckets.
     #
@@ -15759,10 +15784,10 @@ module Aws::S3
     #   Confirms that the requester knows that they will be charged for the
     #   request. Bucket owners need not specify this parameter in their
     #   requests. If either the source or destination S3 bucket has
-    #   Requester Pays enabled, the requester will pay for corresponding
-    #   charges to copy the object. For information about downloading
-    #   objects from Requester Pays buckets, see [Downloading Objects in
-    #   Requester Pays Buckets][1] in the *Amazon S3 User Guide*.
+    #   Requester Pays enabled, the requester will pay for the corresponding
+    #   charges. For information about downloading objects from Requester
+    #   Pays buckets, see [Downloading Objects in Requester Pays Buckets][1]
+    #   in the *Amazon S3 User Guide*.
     #
     #   <note markdown="1"> This functionality is not supported for directory buckets.
     #
@@ -15861,10 +15886,10 @@ module Aws::S3
     #   Confirms that the requester knows that they will be charged for the
     #   request. Bucket owners need not specify this parameter in their
     #   requests. If either the source or destination S3 bucket has
-    #   Requester Pays enabled, the requester will pay for corresponding
-    #   charges to copy the object. For information about downloading
-    #   objects from Requester Pays buckets, see [Downloading Objects in
-    #   Requester Pays Buckets][1] in the *Amazon S3 User Guide*.
+    #   Requester Pays enabled, the requester will pay for the corresponding
+    #   charges. For information about downloading objects from Requester
+    #   Pays buckets, see [Downloading Objects in Requester Pays Buckets][1]
+    #   in the *Amazon S3 User Guide*.
     #
     #   <note markdown="1"> This functionality is not supported for directory buckets.
     #
@@ -16811,10 +16836,10 @@ module Aws::S3
     #   Confirms that the requester knows that they will be charged for the
     #   request. Bucket owners need not specify this parameter in their
     #   requests. If either the source or destination S3 bucket has
-    #   Requester Pays enabled, the requester will pay for corresponding
-    #   charges to copy the object. For information about downloading
-    #   objects from Requester Pays buckets, see [Downloading Objects in
-    #   Requester Pays Buckets][1] in the *Amazon S3 User Guide*.
+    #   Requester Pays enabled, the requester will pay for the corresponding
+    #   charges. For information about downloading objects from Requester
+    #   Pays buckets, see [Downloading Objects in Requester Pays Buckets][1]
+    #   in the *Amazon S3 User Guide*.
     #
     #   <note markdown="1"> This functionality is not supported for directory buckets.
     #
@@ -16979,10 +17004,10 @@ module Aws::S3
     #   Confirms that the requester knows that they will be charged for the
     #   request. Bucket owners need not specify this parameter in their
     #   requests. If either the source or destination S3 bucket has
-    #   Requester Pays enabled, the requester will pay for corresponding
-    #   charges to copy the object. For information about downloading
-    #   objects from Requester Pays buckets, see [Downloading Objects in
-    #   Requester Pays Buckets][1] in the *Amazon S3 User Guide*.
+    #   Requester Pays enabled, the requester will pay for the corresponding
+    #   charges. For information about downloading objects from Requester
+    #   Pays buckets, see [Downloading Objects in Requester Pays Buckets][1]
+    #   in the *Amazon S3 User Guide*.
     #
     #   <note markdown="1"> This functionality is not supported for directory buckets.
     #
@@ -17951,10 +17976,10 @@ module Aws::S3
     #   Confirms that the requester knows that they will be charged for the
     #   request. Bucket owners need not specify this parameter in their
     #   requests. If either the source or destination S3 bucket has
-    #   Requester Pays enabled, the requester will pay for corresponding
-    #   charges to copy the object. For information about downloading
-    #   objects from Requester Pays buckets, see [Downloading Objects in
-    #   Requester Pays Buckets][1] in the *Amazon S3 User Guide*.
+    #   Requester Pays enabled, the requester will pay for the corresponding
+    #   charges. For information about downloading objects from Requester
+    #   Pays buckets, see [Downloading Objects in Requester Pays Buckets][1]
+    #   in the *Amazon S3 User Guide*.
     #
     #   <note markdown="1"> This functionality is not supported for directory buckets.
     #
@@ -18423,6 +18448,48 @@ module Aws::S3
     class SSEKMS < Struct.new(
       :key_id)
       SENSITIVE = [:key_id]
+      include Aws::Structure
+    end
+
+    # If `SSEKMS` is specified for `ObjectEncryption`, this data type
+    # specifies the Amazon Web Services KMS key Amazon Resource Name (ARN)
+    # to use and whether to use an S3 Bucket Key for server-side encryption
+    # using Key Management Service (KMS) keys (SSE-KMS).
+    #
+    # @!attribute [rw] kms_key_arn
+    #   Specifies the Amazon Web Services KMS key Amazon Resource Name (ARN)
+    #   to use for the updated server-side encryption type. Required if
+    #   `ObjectEncryption` specifies `SSEKMS`.
+    #
+    #   <note markdown="1"> You must specify the full Amazon Web Services KMS key ARN. The KMS
+    #   key ID and KMS key alias aren't supported.
+    #
+    #    </note>
+    #
+    #   Pattern: (`arn:aws[-a-z0-9]*:kms:[-a-z0-9]*:[0-9]{12}:key/.+`)
+    #   @return [String]
+    #
+    # @!attribute [rw] bucket_key_enabled
+    #   Specifies whether Amazon S3 should use an S3 Bucket Key for object
+    #   encryption with server-side encryption using Key Management Service
+    #   (KMS) keys (SSE-KMS). If this value isn't specified, it defaults to
+    #   `false`. Setting this value to `true` causes Amazon S3 to use an S3
+    #   Bucket Key for object encryption with SSE-KMS. For more information,
+    #   see [ Using Amazon S3 Bucket Keys][1] in the *Amazon S3 User Guide*.
+    #
+    #   Valid Values: `true` \| `false`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucket-key.html
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/SSEKMSEncryption AWS API Documentation
+    #
+    class SSEKMSEncryption < Struct.new(
+      :kms_key_arn,
+      :bucket_key_enabled)
+      SENSITIVE = [:kms_key_arn]
       include Aws::Structure
     end
 
@@ -19376,6 +19443,132 @@ module Aws::S3
       include Aws::Structure
     end
 
+    # @!attribute [rw] bucket
+    #   The name of the general purpose bucket that contains the specified
+    #   object key name.
+    #
+    #   When you use this operation with an access point attached to a
+    #   general purpose bucket, you must either provide the alias of the
+    #   access point in place of the bucket name or you must specify the
+    #   access point Amazon Resource Name (ARN). When using the access point
+    #   ARN, you must direct requests to the access point hostname. The
+    #   access point hostname takes the form `
+    #   AccessPointName-AccountId.s3-accesspoint.Region.amazonaws.com`. When
+    #   using this operation with an access point through the Amazon Web
+    #   Services SDKs, you provide the access point ARN in place of the
+    #   bucket name. For more information about access point ARNs, see [
+    #   Referencing access points][1] in the *Amazon S3 User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-points-naming.html
+    #   @return [String]
+    #
+    # @!attribute [rw] key
+    #   The key name of the object that you want to update the server-side
+    #   encryption type for.
+    #   @return [String]
+    #
+    # @!attribute [rw] version_id
+    #   The version ID of the object that you want to update the server-side
+    #   encryption type for.
+    #   @return [String]
+    #
+    # @!attribute [rw] object_encryption
+    #   The updated server-side encryption type for this object. The
+    #   `UpdateObjectEncryption` operation supports the SSE-S3 and SSE-KMS
+    #   encryption types.
+    #
+    #   Valid Values: `SSES3` \| `SSEKMS`
+    #   @return [Types::ObjectEncryption]
+    #
+    # @!attribute [rw] request_payer
+    #   Confirms that the requester knows that they will be charged for the
+    #   request. Bucket owners need not specify this parameter in their
+    #   requests. If either the source or destination S3 bucket has
+    #   Requester Pays enabled, the requester will pay for the corresponding
+    #   charges. For information about downloading objects from Requester
+    #   Pays buckets, see [Downloading Objects in Requester Pays Buckets][1]
+    #   in the *Amazon S3 User Guide*.
+    #
+    #   <note markdown="1"> This functionality is not supported for directory buckets.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
+    #   @return [String]
+    #
+    # @!attribute [rw] expected_bucket_owner
+    #   The account ID of the expected bucket owner. If the account ID that
+    #   you provide doesn't match the actual owner of the bucket, the
+    #   request fails with the HTTP status code `403 Forbidden` (access
+    #   denied).
+    #   @return [String]
+    #
+    # @!attribute [rw] content_md5
+    #   The MD5 hash for the request body. For requests made using the
+    #   Amazon Web Services Command Line Interface (CLI) or Amazon Web
+    #   Services SDKs, this field is calculated automatically.
+    #   @return [String]
+    #
+    # @!attribute [rw] checksum_algorithm
+    #   Indicates the algorithm used to create the checksum for the object
+    #   when you use an Amazon Web Services SDK. This header doesn't
+    #   provide any additional functionality if you don't use the SDK. When
+    #   you send this header, there must be a corresponding `x-amz-checksum`
+    #   or `x-amz-trailer` header sent. Otherwise, Amazon S3 fails the
+    #   request with the HTTP status code `400 Bad Request`. For more
+    #   information, see [ Checking object integrity ][1] in the *Amazon S3
+    #   User Guide*.
+    #
+    #   If you provide an individual checksum, Amazon S3 ignores any
+    #   provided `ChecksumAlgorithm` parameter.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/UpdateObjectEncryptionRequest AWS API Documentation
+    #
+    class UpdateObjectEncryptionRequest < Struct.new(
+      :bucket,
+      :key,
+      :version_id,
+      :object_encryption,
+      :request_payer,
+      :expected_bucket_owner,
+      :content_md5,
+      :checksum_algorithm)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] request_charged
+    #   If present, indicates that the requester was successfully charged
+    #   for the request. For more information, see [Using Requester Pays
+    #   buckets for storage transfers and usage][1] in the *Amazon Simple
+    #   Storage Service user guide*.
+    #
+    #   <note markdown="1"> This functionality is not supported for directory buckets.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/RequesterPaysBuckets.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/UpdateObjectEncryptionResponse AWS API Documentation
+    #
+    class UpdateObjectEncryptionResponse < Struct.new(
+      :request_charged)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] copy_source_version_id
     #   The version of the source object that was copied, if you have
     #   enabled versioning on the source bucket.
@@ -19740,10 +19933,10 @@ module Aws::S3
     #   Confirms that the requester knows that they will be charged for the
     #   request. Bucket owners need not specify this parameter in their
     #   requests. If either the source or destination S3 bucket has
-    #   Requester Pays enabled, the requester will pay for corresponding
-    #   charges to copy the object. For information about downloading
-    #   objects from Requester Pays buckets, see [Downloading Objects in
-    #   Requester Pays Buckets][1] in the *Amazon S3 User Guide*.
+    #   Requester Pays enabled, the requester will pay for the corresponding
+    #   charges. For information about downloading objects from Requester
+    #   Pays buckets, see [Downloading Objects in Requester Pays Buckets][1]
+    #   in the *Amazon S3 User Guide*.
     #
     #   <note markdown="1"> This functionality is not supported for directory buckets.
     #
@@ -20145,10 +20338,10 @@ module Aws::S3
     #   Confirms that the requester knows that they will be charged for the
     #   request. Bucket owners need not specify this parameter in their
     #   requests. If either the source or destination S3 bucket has
-    #   Requester Pays enabled, the requester will pay for corresponding
-    #   charges to copy the object. For information about downloading
-    #   objects from Requester Pays buckets, see [Downloading Objects in
-    #   Requester Pays Buckets][1] in the *Amazon S3 User Guide*.
+    #   Requester Pays enabled, the requester will pay for the corresponding
+    #   charges. For information about downloading objects from Requester
+    #   Pays buckets, see [Downloading Objects in Requester Pays Buckets][1]
+    #   in the *Amazon S3 User Guide*.
     #
     #   <note markdown="1"> This functionality is not supported for directory buckets.
     #

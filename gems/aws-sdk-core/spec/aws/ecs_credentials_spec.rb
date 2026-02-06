@@ -122,6 +122,24 @@ module Aws
             ECSCredentials.new
           end.to raise_error(ArgumentError, /without a credential path/)
         end
+
+        it 'returns empty credentials on non-200 response with error details' do
+          stub_request(:get, "http://169.254.170.2#{path}")
+            .to_return(status: 429, body: 'Rate limit exceeded')
+          expect_any_instance_of(ECSCredentials).to receive(:warn)
+            .with(/Error retrieving ECS Credentials: HTTP 429: Rate limit exceeded/)
+          c = ECSCredentials.new(backoff: 0, retries: 0)
+          expect(c.set?).to be(false)
+        end
+
+        it 'returns empty credentials on non-200 response without body' do
+          stub_request(:get, "http://169.254.170.2#{path}")
+            .to_return(status: 500, body: '')
+          expect_any_instance_of(ECSCredentials).to receive(:warn)
+            .with(/Error retrieving ECS Credentials: HTTP 500/)
+          c = ECSCredentials.new(backoff: 0, retries: 0)
+          expect(c.set?).to be(false)
+        end
       end
 
       context 'retries' do

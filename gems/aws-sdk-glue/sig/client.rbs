@@ -3168,6 +3168,15 @@ module Aws
                              ) -> _DeleteConnectionResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteConnectionResponseSuccess
 
+      interface _DeleteConnectionTypeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteConnectionTypeResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glue/Client.html#delete_connection_type-instance_method
+      def delete_connection_type: (
+                                    connection_type: ::String
+                                  ) -> _DeleteConnectionTypeResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteConnectionTypeResponseSuccess
+
       interface _DeleteCrawlerResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteCrawlerResponse]
       end
@@ -3472,6 +3481,7 @@ module Aws
         def athena_connection_properties: () -> ::Hash[::String, Types::Property]
         def python_connection_properties: () -> ::Hash[::String, Types::Property]
         def spark_connection_properties: () -> ::Hash[::String, Types::Property]
+        def rest_configuration: () -> Types::RestConfiguration
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glue/Client.html#describe_connection_type-instance_method
       def describe_connection_type: (
@@ -5457,6 +5467,442 @@ module Aws
                                            ?next_token: ::String
                                          ) -> _QuerySchemaVersionMetadataResponseSuccess
                                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _QuerySchemaVersionMetadataResponseSuccess
+
+      interface _RegisterConnectionTypeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RegisterConnectionTypeResponse]
+        def connection_type_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glue/Client.html#register_connection_type-instance_method
+      def register_connection_type: (
+                                      connection_type: ::String,
+                                      integration_type: ("REST"),
+                                      ?description: ::String,
+                                      connection_properties: {
+                                        url: {
+                                          name: ::String,
+                                          key_override: ::String?,
+                                          required: bool,
+                                          default_value: ::String?,
+                                          allowed_values: Array[::String]?,
+                                          property_location: ("HEADER" | "BODY" | "QUERY_PARAM" | "PATH")?,
+                                          property_type: ("USER_INPUT" | "SECRET" | "READ_ONLY" | "UNUSED" | "SECRET_OR_USER_INPUT")
+                                        }?,
+                                        additional_request_parameters: Array[
+                                          {
+                                            name: ::String,
+                                            key_override: ::String?,
+                                            required: bool,
+                                            default_value: ::String?,
+                                            allowed_values: Array[::String]?,
+                                            property_location: ("HEADER" | "BODY" | "QUERY_PARAM" | "PATH")?,
+                                            property_type: ("USER_INPUT" | "SECRET" | "READ_ONLY" | "UNUSED" | "SECRET_OR_USER_INPUT")
+                                          },
+                                        ]?
+                                      },
+                                      connector_authentication_configuration: {
+                                        authentication_types: Array[("BASIC" | "OAUTH2" | "CUSTOM" | "IAM")],
+                                        o_auth_2_properties: {
+                                          o_auth_2_grant_type: ("CLIENT_CREDENTIALS" | "JWT_BEARER" | "AUTHORIZATION_CODE"),
+                                          client_credentials_properties: {
+                                            token_url: {
+                                              name: ::String,
+                                              key_override: ::String?,
+                                              required: bool,
+                                              default_value: ::String?,
+                                              allowed_values: Array[::String]?,
+                                              property_location: ("HEADER" | "BODY" | "QUERY_PARAM" | "PATH")?,
+                                              property_type: ("USER_INPUT" | "SECRET" | "READ_ONLY" | "UNUSED" | "SECRET_OR_USER_INPUT")
+                                            }?,
+                                            request_method: ("GET" | "POST")?,
+                                            content_type: ("APPLICATION_JSON" | "URL_ENCODED")?,
+                                            client_id: {
+                                              name: ::String,
+                                              key_override: ::String?,
+                                              required: bool,
+                                              default_value: ::String?,
+                                              allowed_values: Array[::String]?,
+                                              property_location: ("HEADER" | "BODY" | "QUERY_PARAM" | "PATH")?,
+                                              property_type: ("USER_INPUT" | "SECRET" | "READ_ONLY" | "UNUSED" | "SECRET_OR_USER_INPUT")
+                                            }?,
+                                            client_secret: {
+                                              name: ::String,
+                                              key_override: ::String?,
+                                              required: bool,
+                                              default_value: ::String?,
+                                              allowed_values: Array[::String]?,
+                                              property_location: ("HEADER" | "BODY" | "QUERY_PARAM" | "PATH")?,
+                                              property_type: ("USER_INPUT" | "SECRET" | "READ_ONLY" | "UNUSED" | "SECRET_OR_USER_INPUT")
+                                            }?,
+                                            scope: {
+                                              name: ::String,
+                                              key_override: ::String?,
+                                              required: bool,
+                                              default_value: ::String?,
+                                              allowed_values: Array[::String]?,
+                                              property_location: ("HEADER" | "BODY" | "QUERY_PARAM" | "PATH")?,
+                                              property_type: ("USER_INPUT" | "SECRET" | "READ_ONLY" | "UNUSED" | "SECRET_OR_USER_INPUT")
+                                            }?,
+                                            token_url_parameters: Array[
+                                              {
+                                                name: ::String,
+                                                key_override: ::String?,
+                                                required: bool,
+                                                default_value: ::String?,
+                                                allowed_values: Array[::String]?,
+                                                property_location: ("HEADER" | "BODY" | "QUERY_PARAM" | "PATH")?,
+                                                property_type: ("USER_INPUT" | "SECRET" | "READ_ONLY" | "UNUSED" | "SECRET_OR_USER_INPUT")
+                                              },
+                                            ]?
+                                          }?,
+                                          jwt_bearer_properties: {
+                                            token_url: {
+                                              name: ::String,
+                                              key_override: ::String?,
+                                              required: bool,
+                                              default_value: ::String?,
+                                              allowed_values: Array[::String]?,
+                                              property_location: ("HEADER" | "BODY" | "QUERY_PARAM" | "PATH")?,
+                                              property_type: ("USER_INPUT" | "SECRET" | "READ_ONLY" | "UNUSED" | "SECRET_OR_USER_INPUT")
+                                            }?,
+                                            request_method: ("GET" | "POST")?,
+                                            content_type: ("APPLICATION_JSON" | "URL_ENCODED")?,
+                                            jwt_token: {
+                                              name: ::String,
+                                              key_override: ::String?,
+                                              required: bool,
+                                              default_value: ::String?,
+                                              allowed_values: Array[::String]?,
+                                              property_location: ("HEADER" | "BODY" | "QUERY_PARAM" | "PATH")?,
+                                              property_type: ("USER_INPUT" | "SECRET" | "READ_ONLY" | "UNUSED" | "SECRET_OR_USER_INPUT")
+                                            }?,
+                                            token_url_parameters: Array[
+                                              {
+                                                name: ::String,
+                                                key_override: ::String?,
+                                                required: bool,
+                                                default_value: ::String?,
+                                                allowed_values: Array[::String]?,
+                                                property_location: ("HEADER" | "BODY" | "QUERY_PARAM" | "PATH")?,
+                                                property_type: ("USER_INPUT" | "SECRET" | "READ_ONLY" | "UNUSED" | "SECRET_OR_USER_INPUT")
+                                              },
+                                            ]?
+                                          }?,
+                                          authorization_code_properties: {
+                                            authorization_code_url: {
+                                              name: ::String,
+                                              key_override: ::String?,
+                                              required: bool,
+                                              default_value: ::String?,
+                                              allowed_values: Array[::String]?,
+                                              property_location: ("HEADER" | "BODY" | "QUERY_PARAM" | "PATH")?,
+                                              property_type: ("USER_INPUT" | "SECRET" | "READ_ONLY" | "UNUSED" | "SECRET_OR_USER_INPUT")
+                                            }?,
+                                            authorization_code: {
+                                              name: ::String,
+                                              key_override: ::String?,
+                                              required: bool,
+                                              default_value: ::String?,
+                                              allowed_values: Array[::String]?,
+                                              property_location: ("HEADER" | "BODY" | "QUERY_PARAM" | "PATH")?,
+                                              property_type: ("USER_INPUT" | "SECRET" | "READ_ONLY" | "UNUSED" | "SECRET_OR_USER_INPUT")
+                                            }?,
+                                            redirect_uri: {
+                                              name: ::String,
+                                              key_override: ::String?,
+                                              required: bool,
+                                              default_value: ::String?,
+                                              allowed_values: Array[::String]?,
+                                              property_location: ("HEADER" | "BODY" | "QUERY_PARAM" | "PATH")?,
+                                              property_type: ("USER_INPUT" | "SECRET" | "READ_ONLY" | "UNUSED" | "SECRET_OR_USER_INPUT")
+                                            }?,
+                                            token_url: {
+                                              name: ::String,
+                                              key_override: ::String?,
+                                              required: bool,
+                                              default_value: ::String?,
+                                              allowed_values: Array[::String]?,
+                                              property_location: ("HEADER" | "BODY" | "QUERY_PARAM" | "PATH")?,
+                                              property_type: ("USER_INPUT" | "SECRET" | "READ_ONLY" | "UNUSED" | "SECRET_OR_USER_INPUT")
+                                            }?,
+                                            request_method: ("GET" | "POST")?,
+                                            content_type: ("APPLICATION_JSON" | "URL_ENCODED")?,
+                                            client_id: {
+                                              name: ::String,
+                                              key_override: ::String?,
+                                              required: bool,
+                                              default_value: ::String?,
+                                              allowed_values: Array[::String]?,
+                                              property_location: ("HEADER" | "BODY" | "QUERY_PARAM" | "PATH")?,
+                                              property_type: ("USER_INPUT" | "SECRET" | "READ_ONLY" | "UNUSED" | "SECRET_OR_USER_INPUT")
+                                            }?,
+                                            client_secret: {
+                                              name: ::String,
+                                              key_override: ::String?,
+                                              required: bool,
+                                              default_value: ::String?,
+                                              allowed_values: Array[::String]?,
+                                              property_location: ("HEADER" | "BODY" | "QUERY_PARAM" | "PATH")?,
+                                              property_type: ("USER_INPUT" | "SECRET" | "READ_ONLY" | "UNUSED" | "SECRET_OR_USER_INPUT")
+                                            }?,
+                                            scope: {
+                                              name: ::String,
+                                              key_override: ::String?,
+                                              required: bool,
+                                              default_value: ::String?,
+                                              allowed_values: Array[::String]?,
+                                              property_location: ("HEADER" | "BODY" | "QUERY_PARAM" | "PATH")?,
+                                              property_type: ("USER_INPUT" | "SECRET" | "READ_ONLY" | "UNUSED" | "SECRET_OR_USER_INPUT")
+                                            }?,
+                                            prompt: {
+                                              name: ::String,
+                                              key_override: ::String?,
+                                              required: bool,
+                                              default_value: ::String?,
+                                              allowed_values: Array[::String]?,
+                                              property_location: ("HEADER" | "BODY" | "QUERY_PARAM" | "PATH")?,
+                                              property_type: ("USER_INPUT" | "SECRET" | "READ_ONLY" | "UNUSED" | "SECRET_OR_USER_INPUT")
+                                            }?,
+                                            token_url_parameters: Array[
+                                              {
+                                                name: ::String,
+                                                key_override: ::String?,
+                                                required: bool,
+                                                default_value: ::String?,
+                                                allowed_values: Array[::String]?,
+                                                property_location: ("HEADER" | "BODY" | "QUERY_PARAM" | "PATH")?,
+                                                property_type: ("USER_INPUT" | "SECRET" | "READ_ONLY" | "UNUSED" | "SECRET_OR_USER_INPUT")
+                                              },
+                                            ]?
+                                          }?
+                                        }?,
+                                        basic_authentication_properties: {
+                                          username: {
+                                            name: ::String,
+                                            key_override: ::String?,
+                                            required: bool,
+                                            default_value: ::String?,
+                                            allowed_values: Array[::String]?,
+                                            property_location: ("HEADER" | "BODY" | "QUERY_PARAM" | "PATH")?,
+                                            property_type: ("USER_INPUT" | "SECRET" | "READ_ONLY" | "UNUSED" | "SECRET_OR_USER_INPUT")
+                                          }?,
+                                          password: {
+                                            name: ::String,
+                                            key_override: ::String?,
+                                            required: bool,
+                                            default_value: ::String?,
+                                            allowed_values: Array[::String]?,
+                                            property_location: ("HEADER" | "BODY" | "QUERY_PARAM" | "PATH")?,
+                                            property_type: ("USER_INPUT" | "SECRET" | "READ_ONLY" | "UNUSED" | "SECRET_OR_USER_INPUT")
+                                          }?
+                                        }?,
+                                        custom_authentication_properties: {
+                                          authentication_parameters: Array[
+                                            {
+                                              name: ::String,
+                                              key_override: ::String?,
+                                              required: bool,
+                                              default_value: ::String?,
+                                              allowed_values: Array[::String]?,
+                                              property_location: ("HEADER" | "BODY" | "QUERY_PARAM" | "PATH")?,
+                                              property_type: ("USER_INPUT" | "SECRET" | "READ_ONLY" | "UNUSED" | "SECRET_OR_USER_INPUT")
+                                            },
+                                          ]
+                                        }?
+                                      },
+                                      rest_configuration: {
+                                        global_source_configuration: {
+                                          request_method: ("GET" | "POST")?,
+                                          request_path: ::String?,
+                                          request_parameters: Array[
+                                            {
+                                              name: ::String,
+                                              key_override: ::String?,
+                                              required: bool,
+                                              default_value: ::String?,
+                                              allowed_values: Array[::String]?,
+                                              property_location: ("HEADER" | "BODY" | "QUERY_PARAM" | "PATH")?,
+                                              property_type: ("USER_INPUT" | "SECRET" | "READ_ONLY" | "UNUSED" | "SECRET_OR_USER_INPUT")
+                                            },
+                                          ]?,
+                                          response_configuration: {
+                                            result_path: ::String,
+                                            error_path: ::String?
+                                          }?,
+                                          pagination_configuration: {
+                                            cursor_configuration: {
+                                              next_page: {
+                                                key: ::String?,
+                                                default_value: ::String?,
+                                                property_location: ("HEADER" | "BODY" | "QUERY_PARAM" | "PATH")?,
+                                                value: {
+                                                  content_path: ::String?,
+                                                  header_key: ::String?
+                                                }?
+                                              },
+                                              limit_parameter: {
+                                                key: ::String?,
+                                                default_value: ::String?,
+                                                property_location: ("HEADER" | "BODY" | "QUERY_PARAM" | "PATH")?,
+                                                value: {
+                                                  content_path: ::String?,
+                                                  header_key: ::String?
+                                                }?
+                                              }?
+                                            }?,
+                                            offset_configuration: {
+                                              offset_parameter: {
+                                                key: ::String?,
+                                                default_value: ::String?,
+                                                property_location: ("HEADER" | "BODY" | "QUERY_PARAM" | "PATH")?,
+                                                value: {
+                                                  content_path: ::String?,
+                                                  header_key: ::String?
+                                                }?
+                                              },
+                                              limit_parameter: {
+                                                key: ::String?,
+                                                default_value: ::String?,
+                                                property_location: ("HEADER" | "BODY" | "QUERY_PARAM" | "PATH")?,
+                                                value: {
+                                                  content_path: ::String?,
+                                                  header_key: ::String?
+                                                }?
+                                              }
+                                            }?
+                                          }?
+                                        }?,
+                                        validation_endpoint_configuration: {
+                                          request_method: ("GET" | "POST")?,
+                                          request_path: ::String?,
+                                          request_parameters: Array[
+                                            {
+                                              name: ::String,
+                                              key_override: ::String?,
+                                              required: bool,
+                                              default_value: ::String?,
+                                              allowed_values: Array[::String]?,
+                                              property_location: ("HEADER" | "BODY" | "QUERY_PARAM" | "PATH")?,
+                                              property_type: ("USER_INPUT" | "SECRET" | "READ_ONLY" | "UNUSED" | "SECRET_OR_USER_INPUT")
+                                            },
+                                          ]?,
+                                          response_configuration: {
+                                            result_path: ::String,
+                                            error_path: ::String?
+                                          }?,
+                                          pagination_configuration: {
+                                            cursor_configuration: {
+                                              next_page: {
+                                                key: ::String?,
+                                                default_value: ::String?,
+                                                property_location: ("HEADER" | "BODY" | "QUERY_PARAM" | "PATH")?,
+                                                value: {
+                                                  content_path: ::String?,
+                                                  header_key: ::String?
+                                                }?
+                                              },
+                                              limit_parameter: {
+                                                key: ::String?,
+                                                default_value: ::String?,
+                                                property_location: ("HEADER" | "BODY" | "QUERY_PARAM" | "PATH")?,
+                                                value: {
+                                                  content_path: ::String?,
+                                                  header_key: ::String?
+                                                }?
+                                              }?
+                                            }?,
+                                            offset_configuration: {
+                                              offset_parameter: {
+                                                key: ::String?,
+                                                default_value: ::String?,
+                                                property_location: ("HEADER" | "BODY" | "QUERY_PARAM" | "PATH")?,
+                                                value: {
+                                                  content_path: ::String?,
+                                                  header_key: ::String?
+                                                }?
+                                              },
+                                              limit_parameter: {
+                                                key: ::String?,
+                                                default_value: ::String?,
+                                                property_location: ("HEADER" | "BODY" | "QUERY_PARAM" | "PATH")?,
+                                                value: {
+                                                  content_path: ::String?,
+                                                  header_key: ::String?
+                                                }?
+                                              }
+                                            }?
+                                          }?
+                                        }?,
+                                        entity_configurations: Hash[::String, {
+                                            source_configuration: {
+                                              request_method: ("GET" | "POST")?,
+                                              request_path: ::String?,
+                                              request_parameters: Array[
+                                                {
+                                                  name: ::String,
+                                                  key_override: ::String?,
+                                                  required: bool,
+                                                  default_value: ::String?,
+                                                  allowed_values: Array[::String]?,
+                                                  property_location: ("HEADER" | "BODY" | "QUERY_PARAM" | "PATH")?,
+                                                  property_type: ("USER_INPUT" | "SECRET" | "READ_ONLY" | "UNUSED" | "SECRET_OR_USER_INPUT")
+                                                },
+                                              ]?,
+                                              response_configuration: {
+                                                result_path: ::String,
+                                                error_path: ::String?
+                                              }?,
+                                              pagination_configuration: {
+                                                cursor_configuration: {
+                                                  next_page: {
+                                                    key: ::String?,
+                                                    default_value: ::String?,
+                                                    property_location: ("HEADER" | "BODY" | "QUERY_PARAM" | "PATH")?,
+                                                    value: {
+                                                      content_path: ::String?,
+                                                      header_key: ::String?
+                                                    }?
+                                                  },
+                                                  limit_parameter: {
+                                                    key: ::String?,
+                                                    default_value: ::String?,
+                                                    property_location: ("HEADER" | "BODY" | "QUERY_PARAM" | "PATH")?,
+                                                    value: {
+                                                      content_path: ::String?,
+                                                      header_key: ::String?
+                                                    }?
+                                                  }?
+                                                }?,
+                                                offset_configuration: {
+                                                  offset_parameter: {
+                                                    key: ::String?,
+                                                    default_value: ::String?,
+                                                    property_location: ("HEADER" | "BODY" | "QUERY_PARAM" | "PATH")?,
+                                                    value: {
+                                                      content_path: ::String?,
+                                                      header_key: ::String?
+                                                    }?
+                                                  },
+                                                  limit_parameter: {
+                                                    key: ::String?,
+                                                    default_value: ::String?,
+                                                    property_location: ("HEADER" | "BODY" | "QUERY_PARAM" | "PATH")?,
+                                                    value: {
+                                                      content_path: ::String?,
+                                                      header_key: ::String?
+                                                    }?
+                                                  }
+                                                }?
+                                              }?
+                                            }?,
+                                            schema: Hash[::String, {
+                                                name: ::String,
+                                                field_data_type: ("INT" | "SMALLINT" | "BIGINT" | "FLOAT" | "LONG" | "DATE" | "BOOLEAN" | "MAP" | "ARRAY" | "STRING" | "TIMESTAMP" | "DECIMAL" | "BYTE" | "SHORT" | "DOUBLE" | "STRUCT" | "BINARY" | "UNION")
+                                              }]?
+                                          }]?
+                                      },
+                                      ?tags: Hash[::String, ::String]
+                                    ) -> _RegisterConnectionTypeResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RegisterConnectionTypeResponseSuccess
 
       interface _RegisterSchemaVersionResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::RegisterSchemaVersionResponse]

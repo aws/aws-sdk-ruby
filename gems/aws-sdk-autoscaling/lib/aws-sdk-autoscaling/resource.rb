@@ -162,6 +162,7 @@ module Aws::AutoScaling
     #         role_arn: "XmlStringMaxLen255",
     #       },
     #     ],
+    #     deletion_protection: "none", # accepts none, prevent-force-deletion, prevent-all-deletion
     #     tags: [
     #       {
     #         resource_id: "XmlString",
@@ -407,6 +408,18 @@ module Aws::AutoScaling
     # @option options [Array<Types::LifecycleHookSpecification>] :lifecycle_hook_specification_list
     #   One or more lifecycle hooks to add to the Auto Scaling group before
     #   instances are launched.
+    # @option options [String] :deletion_protection
+    #   The deletion protection setting for the Auto Scaling group. This
+    #   setting helps safeguard your Auto Scaling group and its instances by
+    #   controlling whether the `DeleteAutoScalingGroup` operation is allowed.
+    #   When deletion protection is enabled, users cannot delete the Auto
+    #   Scaling group according to the specified protection level until the
+    #   setting is changed back to a less restrictive level.
+    #
+    #   The valid values are `none`, `prevent-force-deletion`, and
+    #   `prevent-all-deletion`.
+    #
+    #   Default: `none`
     # @option options [Array<Types::Tag>] :tags
     #   One or more tags. You can tag your Auto Scaling group and propagate
     #   the tags to the Amazon EC2 instances it launches. Tags are not
@@ -518,13 +531,20 @@ module Aws::AutoScaling
     #   The instance lifecycle policy for the Auto Scaling group. This policy
     #   controls instance behavior when an instance transitions through its
     #   lifecycle states. Configure retention triggers to specify when
-    #   instances should move to a `Retained` state for manual intervention
-    #   instead of automatic termination.
+    #   instances should move to a `Retained` state instead of automatic
+    #   termination.
+    #
+    #   For more information, see [ Control instance retention with instance
+    #   lifecycle policies][1] in the *Amazon EC2 Auto Scaling User Guide*.
     #
     #   <note markdown="1"> Instances in a Retained state will continue to incur standard EC2
     #   charges until terminated.
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/instance-lifecycle-policy.html
     # @return [AutoScalingGroup]
     def create_group(options = {})
       Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
@@ -803,21 +823,55 @@ module Aws::AutoScaling
     #     activity_ids: ["XmlString"],
     #     auto_scaling_group_name: "XmlStringMaxLen255",
     #     include_deleted_groups: false,
+    #     filters: [
+    #       {
+    #         name: "XmlString",
+    #         values: ["XmlString"],
+    #       },
+    #     ],
     #   })
     # @param [Hash] options ({})
     # @option options [Array<String>] :activity_ids
-    #   The activity IDs of the desired scaling activities. If you omit this
-    #   property, all activities for the past six weeks are described. If
-    #   unknown activities are requested, they are ignored with no error. If
-    #   you specify an Auto Scaling group, the results are limited to that
-    #   group.
+    #   The activity IDs of the desired scaling activities. If unknown
+    #   activity IDs are requested, they are ignored with no error. Only
+    #   activities started within the last six weeks can be returned
+    #   regardless of the activity IDs specified. If other filters are
+    #   specified with the request, only results matching all filter criteria
+    #   can be returned.
     #
     #   Array Members: Maximum number of 50 IDs.
     # @option options [String] :auto_scaling_group_name
     #   The name of the Auto Scaling group.
+    #
+    #   Omitting this property performs an account-wide operation, which can
+    #   result in slower or timed-out requests.
     # @option options [Boolean] :include_deleted_groups
     #   Indicates whether to include scaling activity from deleted Auto
     #   Scaling groups.
+    # @option options [Array<Types::Filter>] :filters
+    #   One or more filters to limit the results based on specific criteria.
+    #   The following filters are supported:
+    #
+    #   * `StartTimeLowerBound` - The earliest scaling activities to return
+    #     based on the activity start time. Scaling activities with a start
+    #     time earlier than this value are not included in the results. Only
+    #     activities started within the last six weeks can be returned
+    #     regardless of the value specified.
+    #
+    #   * `StartTimeUpperBound` - The latest scaling activities to return
+    #     based on the activity start time. Scaling activities with a start
+    #     time later than this value are not included in the results. Only
+    #     activities started within the last six weeks can be returned
+    #     regardless of the value specified.
+    #
+    #   * `Status` - The `StatusCode` value of the scaling activity. This
+    #     filter can only be used in combination with the
+    #     `AutoScalingGroupName` parameter. For valid `StatusCode` values, see
+    #     [Activity][1] in the *Amazon EC2 Auto Scaling API Reference*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_Activity.html
     # @return [Activity::Collection]
     def activities(options = {})
       batches = Enumerator.new do |y|

@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.154.0 (2026-01-22)
+------------------
+
+* Feature - This release adds support for Amazon EC2 Auto Scaling group deletion protection
+
+1.153.0 (2026-01-20)
+------------------
+
+* Feature - This release adds support for three new filters when describing scaling activities, StartTimeLowerBound, StartTimeUpperBound, and Status.
+
+1.152.0 (2026-01-16)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.151.0 (2026-01-08)
 ------------------
 

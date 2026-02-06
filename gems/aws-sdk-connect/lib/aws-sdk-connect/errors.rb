@@ -41,6 +41,7 @@ module Aws::Connect
   # * {InvalidContactFlowModuleException}
   # * {InvalidParameterException}
   # * {InvalidRequestException}
+  # * {InvalidTestCaseException}
   # * {LimitExceededException}
   # * {MaximumResultReturnedException}
   # * {OutboundContactNotPermittedException}
@@ -273,6 +274,21 @@ module Aws::Connect
       # @return [String]
       def reason
         @data[:reason]
+      end
+    end
+
+    class InvalidTestCaseException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Connect::Types::InvalidTestCaseException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def problems
+        @data[:problems]
       end
     end
 

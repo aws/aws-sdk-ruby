@@ -329,6 +329,7 @@ module Aws::VerifiedPermissions
       attr_accessor validation_settings: Types::ValidationSettings
       attr_accessor description: ::String
       attr_accessor deletion_protection: ("ENABLED" | "DISABLED")
+      attr_accessor encryption_settings: Types::EncryptionSettings
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: [:description]
     end
@@ -395,6 +396,34 @@ module Aws::VerifiedPermissions
     class DeterminingPolicyItem
       attr_accessor policy_id: ::String
       SENSITIVE: []
+    end
+
+    class EncryptionSettings
+      attr_accessor kms_encryption_settings: Types::KmsEncryptionSettings
+      attr_accessor default: Types::Unit
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class KmsEncryptionSettings < EncryptionSettings
+      end
+      class Default < EncryptionSettings
+      end
+      class Unknown < EncryptionSettings
+      end
+    end
+
+    class EncryptionState
+      attr_accessor kms_encryption_state: Types::KmsEncryptionState
+      attr_accessor default: Types::Unit
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class KmsEncryptionState < EncryptionState
+      end
+      class Default < EncryptionState
+      end
+      class Unknown < EncryptionState
+      end
     end
 
     class EntitiesDefinition
@@ -495,6 +524,7 @@ module Aws::VerifiedPermissions
       attr_accessor last_updated_date: ::Time
       attr_accessor description: ::String
       attr_accessor deletion_protection: ("ENABLED" | "DISABLED")
+      attr_accessor encryption_state: Types::EncryptionState
       attr_accessor cedar_version: ("CEDAR_2" | "CEDAR_4")
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: [:description]
@@ -605,6 +635,18 @@ module Aws::VerifiedPermissions
       attr_accessor determining_policies: ::Array[Types::DeterminingPolicyItem]
       attr_accessor errors: ::Array[Types::EvaluationErrorItem]
       attr_accessor principal: Types::EntityIdentifier
+      SENSITIVE: []
+    end
+
+    class KmsEncryptionSettings
+      attr_accessor key: ::String
+      attr_accessor encryption_context: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class KmsEncryptionState
+      attr_accessor key: ::String
+      attr_accessor encryption_context: ::Hash[::String, ::String]
       SENSITIVE: []
     end
 
@@ -978,6 +1020,9 @@ module Aws::VerifiedPermissions
       attr_accessor message: ::String
       attr_accessor resource_name: ::String
       SENSITIVE: []
+    end
+
+    class Unit < Aws::EmptyStructure
     end
 
     class UntagResourceInput

@@ -16,6 +16,7 @@ module Aws::Kinesis
       def self.build(context)
         Aws::Kinesis::EndpointParameters.create(
           context.config,
+          stream_id: context.params[:stream_id],
           stream_arn: context.params[:stream_arn],
           operation_type: "control",
         )
@@ -26,6 +27,7 @@ module Aws::Kinesis
       def self.build(context)
         Aws::Kinesis::EndpointParameters.create(
           context.config,
+          stream_id: context.params[:stream_id],
           stream_arn: context.params[:stream_arn],
           operation_type: "control",
         )
@@ -36,6 +38,7 @@ module Aws::Kinesis
       def self.build(context)
         Aws::Kinesis::EndpointParameters.create(
           context.config,
+          stream_id: context.params[:stream_id],
           operation_type: "control",
           resource_arn: context.params[:resource_arn],
         )
@@ -46,6 +49,7 @@ module Aws::Kinesis
       def self.build(context)
         Aws::Kinesis::EndpointParameters.create(
           context.config,
+          stream_id: context.params[:stream_id],
           stream_arn: context.params[:stream_arn],
           operation_type: "control",
         )
@@ -56,6 +60,7 @@ module Aws::Kinesis
       def self.build(context)
         Aws::Kinesis::EndpointParameters.create(
           context.config,
+          stream_id: context.params[:stream_id],
           stream_arn: context.params[:stream_arn],
           operation_type: "control",
           consumer_arn: context.params[:consumer_arn],
@@ -67,6 +72,7 @@ module Aws::Kinesis
       def self.build(context)
         Aws::Kinesis::EndpointParameters.create(
           context.config,
+          stream_id: context.params[:stream_id],
           stream_arn: context.params[:stream_arn],
           operation_type: "control",
         )
@@ -77,6 +83,7 @@ module Aws::Kinesis
       def self.build(context)
         Aws::Kinesis::EndpointParameters.create(
           context.config,
+          stream_id: context.params[:stream_id],
           stream_arn: context.params[:stream_arn],
           operation_type: "control",
           consumer_arn: context.params[:consumer_arn],
@@ -88,6 +95,7 @@ module Aws::Kinesis
       def self.build(context)
         Aws::Kinesis::EndpointParameters.create(
           context.config,
+          stream_id: context.params[:stream_id],
           stream_arn: context.params[:stream_arn],
           operation_type: "control",
         )
@@ -98,6 +106,7 @@ module Aws::Kinesis
       def self.build(context)
         Aws::Kinesis::EndpointParameters.create(
           context.config,
+          stream_id: context.params[:stream_id],
           stream_arn: context.params[:stream_arn],
           operation_type: "control",
         )
@@ -108,6 +117,7 @@ module Aws::Kinesis
       def self.build(context)
         Aws::Kinesis::EndpointParameters.create(
           context.config,
+          stream_id: context.params[:stream_id],
           stream_arn: context.params[:stream_arn],
           operation_type: "control",
         )
@@ -118,6 +128,7 @@ module Aws::Kinesis
       def self.build(context)
         Aws::Kinesis::EndpointParameters.create(
           context.config,
+          stream_id: context.params[:stream_id],
           stream_arn: context.params[:stream_arn],
           operation_type: "data",
         )
@@ -128,6 +139,7 @@ module Aws::Kinesis
       def self.build(context)
         Aws::Kinesis::EndpointParameters.create(
           context.config,
+          stream_id: context.params[:stream_id],
           operation_type: "control",
           resource_arn: context.params[:resource_arn],
         )
@@ -138,6 +150,7 @@ module Aws::Kinesis
       def self.build(context)
         Aws::Kinesis::EndpointParameters.create(
           context.config,
+          stream_id: context.params[:stream_id],
           stream_arn: context.params[:stream_arn],
           operation_type: "data",
         )
@@ -148,6 +161,7 @@ module Aws::Kinesis
       def self.build(context)
         Aws::Kinesis::EndpointParameters.create(
           context.config,
+          stream_id: context.params[:stream_id],
           stream_arn: context.params[:stream_arn],
           operation_type: "control",
         )
@@ -158,6 +172,7 @@ module Aws::Kinesis
       def self.build(context)
         Aws::Kinesis::EndpointParameters.create(
           context.config,
+          stream_id: context.params[:stream_id],
           stream_arn: context.params[:stream_arn],
           operation_type: "control",
         )
@@ -168,6 +183,7 @@ module Aws::Kinesis
       def self.build(context)
         Aws::Kinesis::EndpointParameters.create(
           context.config,
+          stream_id: context.params[:stream_id],
           stream_arn: context.params[:stream_arn],
           operation_type: "control",
         )
@@ -178,6 +194,7 @@ module Aws::Kinesis
       def self.build(context)
         Aws::Kinesis::EndpointParameters.create(
           context.config,
+          stream_id: context.params[:stream_id],
           operation_type: "control",
           resource_arn: context.params[:resource_arn],
         )
@@ -188,6 +205,7 @@ module Aws::Kinesis
       def self.build(context)
         Aws::Kinesis::EndpointParameters.create(
           context.config,
+          stream_id: context.params[:stream_id],
           stream_arn: context.params[:stream_arn],
           operation_type: "control",
         )
@@ -198,6 +216,7 @@ module Aws::Kinesis
       def self.build(context)
         Aws::Kinesis::EndpointParameters.create(
           context.config,
+          stream_id: context.params[:stream_id],
           stream_arn: context.params[:stream_arn],
           operation_type: "control",
         )
@@ -208,6 +227,7 @@ module Aws::Kinesis
       def self.build(context)
         Aws::Kinesis::EndpointParameters.create(
           context.config,
+          stream_id: context.params[:stream_id],
           stream_arn: context.params[:stream_arn],
           operation_type: "data",
         )
@@ -218,6 +238,7 @@ module Aws::Kinesis
       def self.build(context)
         Aws::Kinesis::EndpointParameters.create(
           context.config,
+          stream_id: context.params[:stream_id],
           stream_arn: context.params[:stream_arn],
           operation_type: "data",
         )
@@ -228,6 +249,7 @@ module Aws::Kinesis
       def self.build(context)
         Aws::Kinesis::EndpointParameters.create(
           context.config,
+          stream_id: context.params[:stream_id],
           operation_type: "control",
           resource_arn: context.params[:resource_arn],
         )
@@ -238,6 +260,7 @@ module Aws::Kinesis
       def self.build(context)
         Aws::Kinesis::EndpointParameters.create(
           context.config,
+          stream_id: context.params[:stream_id],
           stream_arn: context.params[:stream_arn],
           operation_type: "control",
         )
@@ -248,6 +271,7 @@ module Aws::Kinesis
       def self.build(context)
         Aws::Kinesis::EndpointParameters.create(
           context.config,
+          stream_id: context.params[:stream_id],
           stream_arn: context.params[:stream_arn],
           operation_type: "control",
         )
@@ -258,6 +282,7 @@ module Aws::Kinesis
       def self.build(context)
         Aws::Kinesis::EndpointParameters.create(
           context.config,
+          stream_id: context.params[:stream_id],
           stream_arn: context.params[:stream_arn],
           operation_type: "control",
         )
@@ -268,6 +293,7 @@ module Aws::Kinesis
       def self.build(context)
         Aws::Kinesis::EndpointParameters.create(
           context.config,
+          stream_id: context.params[:stream_id],
           stream_arn: context.params[:stream_arn],
           operation_type: "control",
         )
@@ -278,6 +304,7 @@ module Aws::Kinesis
       def self.build(context)
         Aws::Kinesis::EndpointParameters.create(
           context.config,
+          stream_id: context.params[:stream_id],
           stream_arn: context.params[:stream_arn],
           operation_type: "control",
         )
@@ -288,6 +315,7 @@ module Aws::Kinesis
       def self.build(context)
         Aws::Kinesis::EndpointParameters.create(
           context.config,
+          stream_id: context.params[:stream_id],
           operation_type: "data",
           consumer_arn: context.params[:consumer_arn],
         )
@@ -298,6 +326,7 @@ module Aws::Kinesis
       def self.build(context)
         Aws::Kinesis::EndpointParameters.create(
           context.config,
+          stream_id: context.params[:stream_id],
           operation_type: "control",
           resource_arn: context.params[:resource_arn],
         )
@@ -308,6 +337,7 @@ module Aws::Kinesis
       def self.build(context)
         Aws::Kinesis::EndpointParameters.create(
           context.config,
+          stream_id: context.params[:stream_id],
           operation_type: "control",
           resource_arn: context.params[:resource_arn],
         )
@@ -318,6 +348,7 @@ module Aws::Kinesis
       def self.build(context)
         Aws::Kinesis::EndpointParameters.create(
           context.config,
+          stream_id: context.params[:stream_id],
           stream_arn: context.params[:stream_arn],
           operation_type: "control",
         )
@@ -328,6 +359,7 @@ module Aws::Kinesis
       def self.build(context)
         Aws::Kinesis::EndpointParameters.create(
           context.config,
+          stream_id: context.params[:stream_id],
           stream_arn: context.params[:stream_arn],
           operation_type: "control",
         )
@@ -338,6 +370,7 @@ module Aws::Kinesis
       def self.build(context)
         Aws::Kinesis::EndpointParameters.create(
           context.config,
+          stream_id: context.params[:stream_id],
           stream_arn: context.params[:stream_arn],
           operation_type: "control",
         )
@@ -348,6 +381,7 @@ module Aws::Kinesis
       def self.build(context)
         Aws::Kinesis::EndpointParameters.create(
           context.config,
+          stream_id: context.params[:stream_id],
           stream_arn: context.params[:stream_arn],
           operation_type: "control",
         )

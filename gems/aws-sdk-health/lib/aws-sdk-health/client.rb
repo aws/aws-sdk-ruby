@@ -594,8 +594,8 @@ module Aws::Health
     #   returned, the response does not contain a pagination token value.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of items to return in one batch, between 10 and
-    #   100, inclusive.
+    #   The maximum number of items to return in one batch, between 1 and 100,
+    #   inclusive.
     #
     # @return [Types::DescribeAffectedEntitiesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -699,8 +699,8 @@ module Aws::Health
     #   returned, the response does not contain a pagination token value.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of items to return in one batch, between 10 and
-    #   100, inclusive.
+    #   The maximum number of items to return in one batch, between 1 and 100,
+    #   inclusive.
     #
     # @option params [Array<Types::EntityAccountFilter>] :organization_entity_account_filters
     #   A JSON set of elements including the `awsAccountId`, `eventArn` and a
@@ -1248,8 +1248,8 @@ module Aws::Health
     #   returned, the response does not contain a pagination token value.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of items to return in one batch, between 10 and
-    #   100, inclusive.
+    #   The maximum number of items to return in one batch, between 1 and 100,
+    #   inclusive.
     #
     # @option params [String] :locale
     #   The locale (language) to return information in. English (en) is the
@@ -1383,8 +1383,8 @@ module Aws::Health
     #   returned, the response does not contain a pagination token value.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of items to return in one batch, between 10 and
-    #   100, inclusive.
+    #   The maximum number of items to return in one batch, between 1 and 100,
+    #   inclusive.
     #
     # @option params [String] :locale
     #   The locale (language) to return information in. English (en) is the
@@ -1576,7 +1576,7 @@ module Aws::Health
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-health'
-      context[:gem_version] = '1.93.0'
+      context[:gem_version] = '1.95.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

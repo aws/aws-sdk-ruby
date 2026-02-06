@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.90.0 (2026-01-16)
+------------------
+
+* Feature - Documentation updates for Amazon Glacier's maintenance mode
+
 1.89.0 (2026-01-08)
 ------------------
 

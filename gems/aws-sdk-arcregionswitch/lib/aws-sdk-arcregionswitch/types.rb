@@ -43,9 +43,8 @@ module Aws::ARCRegionswitch
     #   @return [Time]
     #
     # @!attribute [rw] mode
-    #   The plan execution mode. Valid values are `Practice`, for testing
-    #   without making actual changes, or `Recovery`, for actual traffic
-    #   shifting and application recovery.
+    #   The plan execution mode. Valid values are `graceful`, for graceful
+    #   executions, or `ungraceful`, for ungraceful executions.
     #   @return [String]
     #
     # @!attribute [rw] execution_state
@@ -54,8 +53,8 @@ module Aws::ARCRegionswitch
     #   @return [String]
     #
     # @!attribute [rw] execution_action
-    #   The plan execution action. Valid values are `Activate`, to activate
-    #   an Amazon Web Services Region, or `Deactivate`, to deactivate a
+    #   The plan execution action. Valid values are `activate`, to activate
+    #   an Amazon Web Services Region, or `deactivate`, to deactivate a
     #   Region.
     #   @return [String]
     #
@@ -1064,9 +1063,8 @@ module Aws::ARCRegionswitch
     #   @return [Time]
     #
     # @!attribute [rw] mode
-    #   The plan execution mode. Valid values are `Practice`, for testing
-    #   without making actual changes, or `Recovery`, for actual traffic
-    #   shifting and application recovery.
+    #   The plan execution mode. Valid values are `graceful`, for graceful
+    #   executions, or `ungraceful`, for ungraceful executions.
     #   @return [String]
     #
     # @!attribute [rw] execution_state
@@ -1075,8 +1073,8 @@ module Aws::ARCRegionswitch
     #   @return [String]
     #
     # @!attribute [rw] execution_action
-    #   The plan execution action. Valid values are `Activate`, to activate
-    #   an Amazon Web Services Region, or `Deactivate`, to deactivate a
+    #   The plan execution action. Valid values are `activate`, to activate
+    #   an Amazon Web Services Region, or `deactivate`, to deactivate a
     #   Region.
     #   @return [String]
     #
@@ -2149,15 +2147,15 @@ module Aws::ARCRegionswitch
     #   @return [String]
     #
     # @!attribute [rw] action
-    #   The action to perform. Valid values are ACTIVATE (to shift traffic
-    #   to the target Region) or DEACTIVATE (to shift traffic away from the
-    #   target Region).
+    #   The action to perform. Valid values are `activate` (to shift traffic
+    #   to the target Region) or `deactivate` (to shift traffic away from
+    #   the target Region).
     #   @return [String]
     #
     # @!attribute [rw] mode
-    #   The plan execution mode. Valid values are `Practice`, for testing
-    #   without making actual changes, or `Recovery`, for actual traffic
-    #   shifting and application recovery.
+    #   The plan execution mode. Valid values are `graceful`, for starting
+    #   the execution in graceful mode, or `ungraceful`, for starting the
+    #   execution in ungraceful mode.
     #   @return [String]
     #
     # @!attribute [rw] comment
@@ -2316,7 +2314,7 @@ module Aws::ARCRegionswitch
     #
     # @!attribute [rw] action
     #   The action to perform when the trigger fires. Valid values include
-    #   ACTIVATE and DEACTIVATE.
+    #   `activate` and `deactivate`.
     #   @return [String]
     #
     # @!attribute [rw] conditions
@@ -2347,7 +2345,8 @@ module Aws::ARCRegionswitch
     #   @return [String]
     #
     # @!attribute [rw] condition
-    #   The condition that must be met. Valid values include ALARM and OK.
+    #   The condition that must be met. Valid values include `green` and
+    #   `red`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/arc-region-switch-2022-07-26/TriggerCondition AWS API Documentation
@@ -2522,8 +2521,8 @@ module Aws::ARCRegionswitch
     #   @return [Array<Types::Step>]
     #
     # @!attribute [rw] workflow_target_action
-    #   The action that the workflow performs. Valid values include ACTIVATE
-    #   and DEACTIVATE.
+    #   The action that the workflow performs. Valid values include
+    #   `activate` and `deactivate`.
     #   @return [String]
     #
     # @!attribute [rw] workflow_target_region

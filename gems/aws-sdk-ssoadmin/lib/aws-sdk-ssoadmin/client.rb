@@ -483,6 +483,64 @@ module Aws::SSOAdmin
 
     # @!group API Operations
 
+    # Adds a Region to an IAM Identity Center instance. This operation
+    # initiates an asynchronous workflow to replicate the IAM Identity
+    # Center instance to the target Region. The Region status is set to
+    # ADDING at first and changes to ACTIVE when the workflow completes.
+    #
+    # To use this operation, your IAM Identity Center instance and the
+    # target Region must meet the requirements described in the [IAM
+    # Identity Center User Guide][1].
+    #
+    # The following actions are related to `AddRegion`:
+    #
+    # * [RemoveRegion][2]
+    #
+    # * [DescribeRegion][3]
+    #
+    # * [ListRegions][4]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/singlesignon/latest/userguide/multi-region-iam-identity-center.html#multi-region-prerequisites
+    # [2]: https://docs.aws.amazon.com/singlesignon/latest/APIReference/API_RemoveRegion.html
+    # [3]: https://docs.aws.amazon.com/singlesignon/latest/APIReference/API_DescribeRegion.html
+    # [4]: https://docs.aws.amazon.com/singlesignon/latest/APIReference/API_ListRegions.html
+    #
+    # @option params [required, String] :instance_arn
+    #   The Amazon Resource Name (ARN) of the IAM Identity Center instance to
+    #   replicate to the target Region.
+    #
+    # @option params [required, String] :region_name
+    #   The name of the Amazon Web Services Region to add to the IAM Identity
+    #   Center instance. The Region name must be 1-32 characters long and
+    #   follow the pattern of Amazon Web Services Region names (for example,
+    #   us-east-1).
+    #
+    # @return [Types::AddRegionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::AddRegionResponse#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.add_region({
+    #     instance_arn: "InstanceArn", # required
+    #     region_name: "RegionName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.status #=> String, one of "ACTIVE", "ADDING", "REMOVING"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/AddRegion AWS API Documentation
+    #
+    # @overload add_region(params = {})
+    # @param [Hash] params ({})
+    def add_region(params = {}, options = {})
+      req = build_request(:add_region, params)
+      req.send_request(options)
+    end
+
     # Attaches the specified customer managed policy to the specified
     # PermissionSet.
     #
@@ -1582,6 +1640,7 @@ module Aws::SSOAdmin
     #   * {Types::DescribeApplicationResponse#portal_options #portal_options} => Types::PortalOptions
     #   * {Types::DescribeApplicationResponse#description #description} => String
     #   * {Types::DescribeApplicationResponse#created_date #created_date} => Time
+    #   * {Types::DescribeApplicationResponse#created_from #created_from} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1602,6 +1661,7 @@ module Aws::SSOAdmin
     #   resp.portal_options.visibility #=> String, one of "ENABLED", "DISABLED"
     #   resp.description #=> String
     #   resp.created_date #=> Time
+    #   resp.created_from #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/DescribeApplication AWS API Documentation
     #
@@ -1889,6 +1949,64 @@ module Aws::SSOAdmin
     # @param [Hash] params ({})
     def describe_permission_set_provisioning_status(params = {}, options = {})
       req = build_request(:describe_permission_set_provisioning_status, params)
+      req.send_request(options)
+    end
+
+    # Retrieves details about a specific Region enabled in an IAM Identity
+    # Center instance. Details include the Region name, current status
+    # (ACTIVE, ADDING, or REMOVING), the date when the Region was added, and
+    # whether it is the primary Region. The request must be made from one of
+    # the enabled Regions of the IAM Identity Center instance.
+    #
+    # The following actions are related to `DescribeRegion`:
+    #
+    # * [ AddRegion][1]
+    #
+    # * [RemoveRegion][2]
+    #
+    # * [ListRegions][3]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/singlesignon/latest/APIReference/API_AddRegion.html
+    # [2]: https://docs.aws.amazon.com/singlesignon/latest/APIReference/API_RemoveRegion.html
+    # [3]: https://docs.aws.amazon.com/singlesignon/latest/APIReference/API_ListRegions.html
+    #
+    # @option params [required, String] :instance_arn
+    #   The Amazon Resource Name (ARN) of the IAM Identity Center instance.
+    #
+    # @option params [required, String] :region_name
+    #   The name of the Amazon Web Services Region to retrieve information
+    #   about. The Region name must be 1-32 characters long and follow the
+    #   pattern of Amazon Web Services Region names (for example, us-east-1).
+    #
+    # @return [Types::DescribeRegionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeRegionResponse#region_name #region_name} => String
+    #   * {Types::DescribeRegionResponse#status #status} => String
+    #   * {Types::DescribeRegionResponse#added_date #added_date} => Time
+    #   * {Types::DescribeRegionResponse#is_primary_region #is_primary_region} => Boolean
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_region({
+    #     instance_arn: "InstanceArn", # required
+    #     region_name: "RegionName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.region_name #=> String
+    #   resp.status #=> String, one of "ACTIVE", "ADDING", "REMOVING"
+    #   resp.added_date #=> Time
+    #   resp.is_primary_region #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/DescribeRegion AWS API Documentation
+    #
+    # @overload describe_region(params = {})
+    # @param [Hash] params ({})
+    def describe_region(params = {}, options = {})
+      req = build_request(:describe_region, params)
       req.send_request(options)
     end
 
@@ -2957,6 +3075,7 @@ module Aws::SSOAdmin
     #   resp.applications[0].portal_options.visibility #=> String, one of "ENABLED", "DISABLED"
     #   resp.applications[0].description #=> String
     #   resp.applications[0].created_date #=> Time
+    #   resp.applications[0].created_from #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/ListApplications AWS API Documentation
@@ -3269,6 +3388,68 @@ module Aws::SSOAdmin
     # @param [Hash] params ({})
     def list_permission_sets_provisioned_to_account(params = {}, options = {})
       req = build_request(:list_permission_sets_provisioned_to_account, params)
+      req.send_request(options)
+    end
+
+    # Lists all enabled Regions of an IAM Identity Center instance,
+    # including those that are being added or removed. This operation
+    # returns Regions with ACTIVE, ADDING, or REMOVING status.
+    #
+    # The following actions are related to `ListRegions`:
+    #
+    # * [ AddRegion][1]
+    #
+    # * [RemoveRegion][2]
+    #
+    # * [DescribeRegion][3]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/singlesignon/latest/APIReference/API_AddRegion.html
+    # [2]: https://docs.aws.amazon.com/singlesignon/latest/APIReference/API_RemoveRegion.html
+    # [3]: https://docs.aws.amazon.com/singlesignon/latest/APIReference/API_DescribeRegion.html
+    #
+    # @option params [required, String] :instance_arn
+    #   The Amazon Resource Name (ARN) of the IAM Identity Center instance.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in a single call. Default is
+    #   100.
+    #
+    # @option params [String] :next_token
+    #   The pagination token for the list API. Initially the value is null.
+    #   Use the output of previous API calls to make subsequent calls.
+    #
+    # @return [Types::ListRegionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListRegionsResponse#regions #regions} => Array&lt;Types::RegionMetadata&gt;
+    #   * {Types::ListRegionsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_regions({
+    #     instance_arn: "InstanceArn", # required
+    #     max_results: 1,
+    #     next_token: "Token",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.regions #=> Array
+    #   resp.regions[0].region_name #=> String
+    #   resp.regions[0].status #=> String, one of "ACTIVE", "ADDING", "REMOVING"
+    #   resp.regions[0].added_date #=> Time
+    #   resp.regions[0].is_primary_region #=> Boolean
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/ListRegions AWS API Documentation
+    #
+    # @overload list_regions(params = {})
+    # @param [Hash] params ({})
+    def list_regions(params = {}, options = {})
+      req = build_request(:list_regions, params)
       req.send_request(options)
     end
 
@@ -3759,6 +3940,61 @@ module Aws::SSOAdmin
       req.send_request(options)
     end
 
+    # Removes an additional Region from an IAM Identity Center instance.
+    # This operation initiates an asynchronous workflow to clean up IAM
+    # Identity Center resources in the specified additional Region. The
+    # Region status is set to REMOVING and the Region record is deleted when
+    # the workflow completes. The request must be made from the primary
+    # Region. The target Region cannot be the primary Region, and no other
+    # add or remove Region workflows can be in progress.
+    #
+    # The following actions are related to `RemoveRegion`:
+    #
+    # * [ AddRegion][1]
+    #
+    # * [DescribeRegion][2]
+    #
+    # * [ListRegions][3]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/singlesignon/latest/APIReference/API_AddRegion.html
+    # [2]: https://docs.aws.amazon.com/singlesignon/latest/APIReference/API_DescribeRegion.html
+    # [3]: https://docs.aws.amazon.com/singlesignon/latest/APIReference/API_ListRegions.html
+    #
+    # @option params [required, String] :instance_arn
+    #   The Amazon Resource Name (ARN) of the IAM Identity Center instance.
+    #
+    # @option params [required, String] :region_name
+    #   The name of the Amazon Web Services Region to remove from the IAM
+    #   Identity Center instance. The Region name must be 1-32 characters long
+    #   and follow the pattern of Amazon Web Services Region names (for
+    #   example, us-east-1). The primary Region cannot be removed.
+    #
+    # @return [Types::RemoveRegionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::RemoveRegionResponse#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.remove_region({
+    #     instance_arn: "InstanceArn", # required
+    #     region_name: "RegionName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.status #=> String, one of "ACTIVE", "ADDING", "REMOVING"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/RemoveRegion AWS API Documentation
+    #
+    # @overload remove_region(params = {})
+    # @param [Hash] params ({})
+    def remove_region(params = {}, options = {})
+      req = build_request(:remove_region, params)
+      req.send_request(options)
+    end
+
     # Associates a set of tags with a specified resource.
     #
     # @option params [String] :instance_arn
@@ -3894,9 +4130,8 @@ module Aws::SSOAdmin
     #
     # @option params [Types::EncryptionConfiguration] :encryption_configuration
     #   Specifies the encryption configuration for your IAM Identity Center
-    #   instance. You can use this to configure customer managed KMS keys
-    #   (CMK) or Amazon Web Services owned KMS keys for encrypting your
-    #   instance data.
+    #   instance. You can use this to configure customer managed KMS keys or
+    #   Amazon Web Services owned KMS keys for encrypting your instance data.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -4076,7 +4311,7 @@ module Aws::SSOAdmin
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-ssoadmin'
-      context[:gem_version] = '1.67.0'
+      context[:gem_version] = '1.69.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

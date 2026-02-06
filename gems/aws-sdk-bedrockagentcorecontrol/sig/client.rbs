@@ -222,6 +222,22 @@ module Aws
                           ) -> _CreateBrowserResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateBrowserResponseSuccess
 
+      interface _CreateBrowserProfileResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateBrowserProfileResponse]
+        def profile_id: () -> ::String
+        def profile_arn: () -> ::String
+        def created_at: () -> ::Time
+        def status: () -> ("READY" | "DELETING" | "DELETED" | "SAVING")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#create_browser_profile-instance_method
+      def create_browser_profile: (
+                                    name: ::String,
+                                    ?description: ::String,
+                                    ?client_token: ::String,
+                                    ?tags: Hash[::String, ::String]
+                                  ) -> _CreateBrowserProfileResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateBrowserProfileResponseSuccess
+
       interface _CreateCodeInterpreterResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateCodeInterpreterResponse]
         def code_interpreter_id: () -> ::String
@@ -291,7 +307,8 @@ module Aws
                                   }
                                 }?
                               },
-                              level: ("TOOL_CALL" | "TRACE" | "SESSION")
+                              level: ("TOOL_CALL" | "TRACE" | "SESSION"),
+                              ?tags: Hash[::String, ::String]
                             ) -> _CreateEvaluatorResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateEvaluatorResponseSuccess
 
@@ -720,7 +737,8 @@ module Aws
                                                },
                                              ],
                                              evaluation_execution_role_arn: ::String,
-                                             enable_on_create: bool
+                                             enable_on_create: bool,
+                                             ?tags: Hash[::String, ::String]
                                            ) -> _CreateOnlineEvaluationConfigResponseSuccess
                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateOnlineEvaluationConfigResponseSuccess
 
@@ -832,6 +850,21 @@ module Aws
                             ?client_token: ::String
                           ) -> _DeleteBrowserResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteBrowserResponseSuccess
+
+      interface _DeleteBrowserProfileResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteBrowserProfileResponse]
+        def profile_id: () -> ::String
+        def profile_arn: () -> ::String
+        def status: () -> ("READY" | "DELETING" | "DELETED" | "SAVING")
+        def last_updated_at: () -> ::Time
+        def last_saved_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#delete_browser_profile-instance_method
+      def delete_browser_profile: (
+                                    profile_id: ::String,
+                                    ?client_token: ::String
+                                  ) -> _DeleteBrowserProfileResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteBrowserProfileResponseSuccess
 
       interface _DeleteCodeInterpreterResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteCodeInterpreterResponse]
@@ -1055,6 +1088,25 @@ module Aws
                          browser_id: ::String
                        ) -> _GetBrowserResponseSuccess
                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetBrowserResponseSuccess
+
+      interface _GetBrowserProfileResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetBrowserProfileResponse]
+        def profile_id: () -> ::String
+        def profile_arn: () -> ::String
+        def name: () -> ::String
+        def description: () -> ::String
+        def status: () -> ("READY" | "DELETING" | "DELETED" | "SAVING")
+        def created_at: () -> ::Time
+        def last_updated_at: () -> ::Time
+        def last_saved_at: () -> ::Time
+        def last_saved_browser_session_id: () -> ::String
+        def last_saved_browser_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#get_browser_profile-instance_method
+      def get_browser_profile: (
+                                 profile_id: ::String
+                               ) -> _GetBrowserProfileResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetBrowserProfileResponseSuccess
 
       interface _GetCodeInterpreterResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetCodeInterpreterResponse]
@@ -1337,6 +1389,18 @@ module Aws
                                                ?max_results: ::Integer
                                              ) -> _ListApiKeyCredentialProvidersResponseSuccess
                                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListApiKeyCredentialProvidersResponseSuccess
+
+      interface _ListBrowserProfilesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListBrowserProfilesResponse]
+        def profile_summaries: () -> ::Array[Types::BrowserProfileSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#list_browser_profiles-instance_method
+      def list_browser_profiles: (
+                                   ?max_results: ::Integer,
+                                   ?next_token: ::String
+                                 ) -> _ListBrowserProfilesResponseSuccess
+                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListBrowserProfilesResponseSuccess
 
       interface _ListBrowsersResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListBrowsersResponse]

@@ -1630,6 +1630,15 @@ module Aws
                              ) -> _DeleteConnectionResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteConnectionResponseSuccess
 
+      interface _DeleteDataExportConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteDataExportConfigurationOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#delete_data_export_configuration-instance_method
+      def delete_data_export_configuration: (
+                                              domain_identifier: ::String
+                                            ) -> _DeleteDataExportConfigurationResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteDataExportConfigurationResponseSuccess
+
       interface _DeleteDataProductResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteDataProductOutput]
       end
@@ -3469,7 +3478,9 @@ module Aws
                     ?filters: {
                       filter: {
                         attribute: ::String,
-                        value: ::String
+                        value: ::String?,
+                        int_value: ::Integer?,
+                        operator: ("EQ" | "LE" | "LT" | "GE" | "GT" | "TEXT_SEARCH")?
                       }?,
                       and: Array[
                         untyped,
@@ -3522,7 +3533,9 @@ module Aws
                              ?filters: {
                                filter: {
                                  attribute: ::String,
-                                 value: ::String
+                                 value: ::String?,
+                                 int_value: ::Integer?,
+                                 operator: ("EQ" | "LE" | "LT" | "GE" | "GT" | "TEXT_SEARCH")?
                                }?,
                                and: Array[
                                  untyped,
@@ -3566,7 +3579,9 @@ module Aws
                           ?filters: {
                             filter: {
                               attribute: ::String,
-                              value: ::String
+                              value: ::String?,
+                              int_value: ::Integer?,
+                              operator: ("EQ" | "LE" | "LT" | "GE" | "GT" | "TEXT_SEARCH")?
                             }?,
                             and: Array[
                               untyped,

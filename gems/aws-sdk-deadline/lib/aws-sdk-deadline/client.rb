@@ -1031,6 +1031,10 @@ module Aws::Deadline
     # @option params [required, Types::BudgetSchedule] :schedule
     #   The schedule to associate with this budget.
     #
+    # @option params [Hash<String,String>] :tags
+    #   Each tag consists of a tag key and a tag value. Tag keys and values
+    #   are both required, but tag values can be empty strings.
+    #
     # @return [Types::CreateBudgetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateBudgetResponse#budget_id #budget_id} => String
@@ -1058,6 +1062,9 @@ module Aws::Deadline
     #         start_time: Time.now, # required
     #         end_time: Time.now, # required
     #       },
+    #     },
+    #     tags: {
+    #       "String" => "String",
     #     },
     #   })
     #
@@ -1395,6 +1402,13 @@ module Aws::Deadline
     # @option params [String] :source_job_id
     #   The job ID for the source job.
     #
+    # @option params [String] :name_override
+    #   A custom name to override the job name derived from the job template.
+    #
+    # @option params [String] :description_override
+    #   A custom description to override the job description derived from the
+    #   job template.
+    #
     # @return [Types::CreateJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateJobResponse#job_id #job_id} => String
@@ -1435,6 +1449,8 @@ module Aws::Deadline
     #     max_retries_per_task: 1,
     #     max_worker_count: 1,
     #     source_job_id: "JobId",
+    #     name_override: "JobName",
+    #     description_override: "JobDescriptionOverride",
     #   })
     #
     # @example Response structure
@@ -1598,16 +1614,16 @@ module Aws::Deadline
     #   the content of this field.
     #
     # @option params [required, String] :identity_center_instance_arn
-    #   The Amazon Resource Name (ARN) of the IAM Identity Center instance
-    #   that authenticates monitor users.
+    #   The Amazon Resource Name of the IAM Identity Center instance that
+    #   authenticates monitor users.
     #
     # @option params [required, String] :subdomain
     #   The subdomain to use when creating the monitor URL. The full URL of
     #   the monitor is subdomain.Region.deadlinecloud.amazonaws.com.
     #
     # @option params [required, String] :role_arn
-    #   The Amazon Resource Name (ARN) of the IAM role that the monitor uses
-    #   to connect to Deadline Cloud. Every user that signs in to the monitor
+    #   The Amazon Resource Name of the IAM role that the monitor uses to
+    #   connect to Deadline Cloud. Every user that signs in to the monitor
     #   using IAM Identity Center uses this role to access Deadline Cloud
     #   resources.
     #
@@ -2808,7 +2824,9 @@ module Aws::Deadline
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
     #
+    #   * job_complete
     #   * job_create_complete
+    #   * job_succeeded
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/deadline-2023-10-12/GetJob AWS API Documentation
     #
@@ -3512,6 +3530,9 @@ module Aws::Deadline
     #   resp.parameter_space.parameters #=> Array
     #   resp.parameter_space.parameters[0].name #=> String
     #   resp.parameter_space.parameters[0].type #=> String, one of "INT", "FLOAT", "STRING", "PATH", "CHUNK_INT"
+    #   resp.parameter_space.parameters[0].chunks.default_task_count #=> Integer
+    #   resp.parameter_space.parameters[0].chunks.target_runtime_seconds #=> Integer
+    #   resp.parameter_space.parameters[0].chunks.range_constraint #=> String, one of "CONTIGUOUS", "NONCONTIGUOUS"
     #   resp.parameter_space.combination #=> String
     #   resp.description #=> String
     #
@@ -5451,19 +5472,16 @@ module Aws::Deadline
     #   The queue ID to use in the job search.
     #
     # @option params [Types::SearchGroupedFilterExpressions] :filter_expressions
-    #   The filter expression, `AND` or `OR`, to use when searching among a
-    #   group of search strings in a resource. You can use two groupings per
-    #   search each within parenthesis `()`.
+    #   The search terms for a resource.
     #
     # @option params [Array<Types::SearchSortExpression>] :sort_expressions
     #   The search terms for a resource.
     #
     # @option params [required, Integer] :item_offset
-    #   Defines how far into the scrollable list to start the return of
-    #   results.
+    #   The offset for the search results.
     #
     # @option params [Integer] :page_size
-    #   Specifies the number of items per page for the resource.
+    #   Specifies the number of results to return.
     #
     # @return [Types::SearchJobsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5481,12 +5499,12 @@ module Aws::Deadline
     #         {
     #           date_time_filter: {
     #             name: "String", # required
-    #             operator: "EQUAL", # required, accepts EQUAL, NOT_EQUAL, GREATER_THAN_EQUAL_TO, GREATER_THAN, LESS_THAN_EQUAL_TO, LESS_THAN
+    #             operator: "EQUAL", # required, accepts EQUAL, NOT_EQUAL, GREATER_THAN_EQUAL_TO, GREATER_THAN, LESS_THAN_EQUAL_TO, LESS_THAN, ANY_EQUALS, ALL_NOT_EQUALS
     #             date_time: Time.now, # required
     #           },
     #           parameter_filter: {
     #             name: "String", # required
-    #             operator: "EQUAL", # required, accepts EQUAL, NOT_EQUAL, GREATER_THAN_EQUAL_TO, GREATER_THAN, LESS_THAN_EQUAL_TO, LESS_THAN
+    #             operator: "EQUAL", # required, accepts EQUAL, NOT_EQUAL, GREATER_THAN_EQUAL_TO, GREATER_THAN, LESS_THAN_EQUAL_TO, LESS_THAN, ANY_EQUALS, ALL_NOT_EQUALS
     #             value: "ParameterValue", # required
     #           },
     #           search_term_filter: {
@@ -5495,8 +5513,13 @@ module Aws::Deadline
     #           },
     #           string_filter: {
     #             name: "String", # required
-    #             operator: "EQUAL", # required, accepts EQUAL, NOT_EQUAL, GREATER_THAN_EQUAL_TO, GREATER_THAN, LESS_THAN_EQUAL_TO, LESS_THAN
+    #             operator: "EQUAL", # required, accepts EQUAL, NOT_EQUAL, GREATER_THAN_EQUAL_TO, GREATER_THAN, LESS_THAN_EQUAL_TO, LESS_THAN, ANY_EQUALS, ALL_NOT_EQUALS
     #             value: "StringFilter", # required
+    #           },
+    #           string_list_filter: {
+    #             name: "String", # required
+    #             operator: "EQUAL", # required, accepts EQUAL, NOT_EQUAL, GREATER_THAN_EQUAL_TO, GREATER_THAN, LESS_THAN_EQUAL_TO, LESS_THAN, ANY_EQUALS, ALL_NOT_EQUALS
+    #             values: ["StringFilter"], # required
     #           },
     #           group_filter: {
     #             # recursive SearchGroupedFilterExpressions
@@ -5577,19 +5600,16 @@ module Aws::Deadline
     #   The job ID to use in the step search.
     #
     # @option params [Types::SearchGroupedFilterExpressions] :filter_expressions
-    #   The filter expression, `AND` or `OR`, to use when searching among a
-    #   group of search strings in a resource. You can use two groupings per
-    #   search each within parenthesis `()`.
+    #   The search terms for a resource.
     #
     # @option params [Array<Types::SearchSortExpression>] :sort_expressions
     #   The search terms for a resource.
     #
     # @option params [required, Integer] :item_offset
-    #   Defines how far into the scrollable list to start the return of
-    #   results.
+    #   The offset for the search results.
     #
     # @option params [Integer] :page_size
-    #   Specifies the number of items per page for the resource.
+    #   Specifies the number of results to return.
     #
     # @return [Types::SearchStepsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5608,12 +5628,12 @@ module Aws::Deadline
     #         {
     #           date_time_filter: {
     #             name: "String", # required
-    #             operator: "EQUAL", # required, accepts EQUAL, NOT_EQUAL, GREATER_THAN_EQUAL_TO, GREATER_THAN, LESS_THAN_EQUAL_TO, LESS_THAN
+    #             operator: "EQUAL", # required, accepts EQUAL, NOT_EQUAL, GREATER_THAN_EQUAL_TO, GREATER_THAN, LESS_THAN_EQUAL_TO, LESS_THAN, ANY_EQUALS, ALL_NOT_EQUALS
     #             date_time: Time.now, # required
     #           },
     #           parameter_filter: {
     #             name: "String", # required
-    #             operator: "EQUAL", # required, accepts EQUAL, NOT_EQUAL, GREATER_THAN_EQUAL_TO, GREATER_THAN, LESS_THAN_EQUAL_TO, LESS_THAN
+    #             operator: "EQUAL", # required, accepts EQUAL, NOT_EQUAL, GREATER_THAN_EQUAL_TO, GREATER_THAN, LESS_THAN_EQUAL_TO, LESS_THAN, ANY_EQUALS, ALL_NOT_EQUALS
     #             value: "ParameterValue", # required
     #           },
     #           search_term_filter: {
@@ -5622,8 +5642,13 @@ module Aws::Deadline
     #           },
     #           string_filter: {
     #             name: "String", # required
-    #             operator: "EQUAL", # required, accepts EQUAL, NOT_EQUAL, GREATER_THAN_EQUAL_TO, GREATER_THAN, LESS_THAN_EQUAL_TO, LESS_THAN
+    #             operator: "EQUAL", # required, accepts EQUAL, NOT_EQUAL, GREATER_THAN_EQUAL_TO, GREATER_THAN, LESS_THAN_EQUAL_TO, LESS_THAN, ANY_EQUALS, ALL_NOT_EQUALS
     #             value: "StringFilter", # required
+    #           },
+    #           string_list_filter: {
+    #             name: "String", # required
+    #             operator: "EQUAL", # required, accepts EQUAL, NOT_EQUAL, GREATER_THAN_EQUAL_TO, GREATER_THAN, LESS_THAN_EQUAL_TO, LESS_THAN, ANY_EQUALS, ALL_NOT_EQUALS
+    #             values: ["StringFilter"], # required
     #           },
     #           group_filter: {
     #             # recursive SearchGroupedFilterExpressions
@@ -5674,6 +5699,9 @@ module Aws::Deadline
     #   resp.steps[0].parameter_space.parameters #=> Array
     #   resp.steps[0].parameter_space.parameters[0].name #=> String
     #   resp.steps[0].parameter_space.parameters[0].type #=> String, one of "INT", "FLOAT", "STRING", "PATH", "CHUNK_INT"
+    #   resp.steps[0].parameter_space.parameters[0].chunks.default_task_count #=> Integer
+    #   resp.steps[0].parameter_space.parameters[0].chunks.target_runtime_seconds #=> Integer
+    #   resp.steps[0].parameter_space.parameters[0].chunks.range_constraint #=> String, one of "CONTIGUOUS", "NONCONTIGUOUS"
     #   resp.steps[0].parameter_space.combination #=> String
     #   resp.next_item_offset #=> Integer
     #   resp.total_results #=> Integer
@@ -5699,19 +5727,16 @@ module Aws::Deadline
     #   The job ID for the task search.
     #
     # @option params [Types::SearchGroupedFilterExpressions] :filter_expressions
-    #   The filter expression, `AND` or `OR`, to use when searching among a
-    #   group of search strings in a resource. You can use two groupings per
-    #   search each within parenthesis `()`.
+    #   The search terms for a resource.
     #
     # @option params [Array<Types::SearchSortExpression>] :sort_expressions
     #   The search terms for a resource.
     #
     # @option params [required, Integer] :item_offset
-    #   Defines how far into the scrollable list to start the return of
-    #   results.
+    #   The offset for the search results.
     #
     # @option params [Integer] :page_size
-    #   Specifies the number of items per page for the resource.
+    #   Specifies the number of results to return.
     #
     # @return [Types::SearchTasksResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5730,12 +5755,12 @@ module Aws::Deadline
     #         {
     #           date_time_filter: {
     #             name: "String", # required
-    #             operator: "EQUAL", # required, accepts EQUAL, NOT_EQUAL, GREATER_THAN_EQUAL_TO, GREATER_THAN, LESS_THAN_EQUAL_TO, LESS_THAN
+    #             operator: "EQUAL", # required, accepts EQUAL, NOT_EQUAL, GREATER_THAN_EQUAL_TO, GREATER_THAN, LESS_THAN_EQUAL_TO, LESS_THAN, ANY_EQUALS, ALL_NOT_EQUALS
     #             date_time: Time.now, # required
     #           },
     #           parameter_filter: {
     #             name: "String", # required
-    #             operator: "EQUAL", # required, accepts EQUAL, NOT_EQUAL, GREATER_THAN_EQUAL_TO, GREATER_THAN, LESS_THAN_EQUAL_TO, LESS_THAN
+    #             operator: "EQUAL", # required, accepts EQUAL, NOT_EQUAL, GREATER_THAN_EQUAL_TO, GREATER_THAN, LESS_THAN_EQUAL_TO, LESS_THAN, ANY_EQUALS, ALL_NOT_EQUALS
     #             value: "ParameterValue", # required
     #           },
     #           search_term_filter: {
@@ -5744,8 +5769,13 @@ module Aws::Deadline
     #           },
     #           string_filter: {
     #             name: "String", # required
-    #             operator: "EQUAL", # required, accepts EQUAL, NOT_EQUAL, GREATER_THAN_EQUAL_TO, GREATER_THAN, LESS_THAN_EQUAL_TO, LESS_THAN
+    #             operator: "EQUAL", # required, accepts EQUAL, NOT_EQUAL, GREATER_THAN_EQUAL_TO, GREATER_THAN, LESS_THAN_EQUAL_TO, LESS_THAN, ANY_EQUALS, ALL_NOT_EQUALS
     #             value: "StringFilter", # required
+    #           },
+    #           string_list_filter: {
+    #             name: "String", # required
+    #             operator: "EQUAL", # required, accepts EQUAL, NOT_EQUAL, GREATER_THAN_EQUAL_TO, GREATER_THAN, LESS_THAN_EQUAL_TO, LESS_THAN, ANY_EQUALS, ALL_NOT_EQUALS
+    #             values: ["StringFilter"], # required
     #           },
     #           group_filter: {
     #             # recursive SearchGroupedFilterExpressions
@@ -5793,6 +5823,7 @@ module Aws::Deadline
     #   resp.tasks[0].ended_at #=> Time
     #   resp.tasks[0].updated_at #=> Time
     #   resp.tasks[0].updated_by #=> String
+    #   resp.tasks[0].latest_session_action_id #=> String
     #   resp.next_item_offset #=> Integer
     #   resp.total_results #=> Integer
     #
@@ -5814,19 +5845,16 @@ module Aws::Deadline
     #   The fleet ID of the workers to search for.
     #
     # @option params [Types::SearchGroupedFilterExpressions] :filter_expressions
-    #   The filter expression, `AND` or `OR`, to use when searching among a
-    #   group of search strings in a resource. You can use two groupings per
-    #   search each within parenthesis `()`.
+    #   The search terms for a resource.
     #
     # @option params [Array<Types::SearchSortExpression>] :sort_expressions
     #   The search terms for a resource.
     #
     # @option params [required, Integer] :item_offset
-    #   Defines how far into the scrollable list to start the return of
-    #   results.
+    #   The offset for the search results.
     #
     # @option params [Integer] :page_size
-    #   Specifies the number of items per page for the resource.
+    #   Specifies the number of results to return.
     #
     # @return [Types::SearchWorkersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5844,12 +5872,12 @@ module Aws::Deadline
     #         {
     #           date_time_filter: {
     #             name: "String", # required
-    #             operator: "EQUAL", # required, accepts EQUAL, NOT_EQUAL, GREATER_THAN_EQUAL_TO, GREATER_THAN, LESS_THAN_EQUAL_TO, LESS_THAN
+    #             operator: "EQUAL", # required, accepts EQUAL, NOT_EQUAL, GREATER_THAN_EQUAL_TO, GREATER_THAN, LESS_THAN_EQUAL_TO, LESS_THAN, ANY_EQUALS, ALL_NOT_EQUALS
     #             date_time: Time.now, # required
     #           },
     #           parameter_filter: {
     #             name: "String", # required
-    #             operator: "EQUAL", # required, accepts EQUAL, NOT_EQUAL, GREATER_THAN_EQUAL_TO, GREATER_THAN, LESS_THAN_EQUAL_TO, LESS_THAN
+    #             operator: "EQUAL", # required, accepts EQUAL, NOT_EQUAL, GREATER_THAN_EQUAL_TO, GREATER_THAN, LESS_THAN_EQUAL_TO, LESS_THAN, ANY_EQUALS, ALL_NOT_EQUALS
     #             value: "ParameterValue", # required
     #           },
     #           search_term_filter: {
@@ -5858,8 +5886,13 @@ module Aws::Deadline
     #           },
     #           string_filter: {
     #             name: "String", # required
-    #             operator: "EQUAL", # required, accepts EQUAL, NOT_EQUAL, GREATER_THAN_EQUAL_TO, GREATER_THAN, LESS_THAN_EQUAL_TO, LESS_THAN
+    #             operator: "EQUAL", # required, accepts EQUAL, NOT_EQUAL, GREATER_THAN_EQUAL_TO, GREATER_THAN, LESS_THAN_EQUAL_TO, LESS_THAN, ANY_EQUALS, ALL_NOT_EQUALS
     #             value: "StringFilter", # required
+    #           },
+    #           string_list_filter: {
+    #             name: "String", # required
+    #             operator: "EQUAL", # required, accepts EQUAL, NOT_EQUAL, GREATER_THAN_EQUAL_TO, GREATER_THAN, LESS_THAN_EQUAL_TO, LESS_THAN, ANY_EQUALS, ALL_NOT_EQUALS
+    #             values: ["StringFilter"], # required
     #           },
     #           group_filter: {
     #             # recursive SearchGroupedFilterExpressions
@@ -6365,7 +6398,7 @@ module Aws::Deadline
     #   The task status to update the job's tasks to.
     #
     # @option params [Integer] :priority
-    #   The job priority to update.
+    #   The updated job priority.
     #
     # @option params [Integer] :max_failed_tasks_count
     #   The number of task failures before the job stops running and is marked
@@ -6394,6 +6427,12 @@ module Aws::Deadline
     #
     #   The maximum number of workers that can process tasks in the job.
     #
+    # @option params [String] :name
+    #   The updated job name.
+    #
+    # @option params [String] :description
+    #   The updated job description.
+    #
     # @option params [required, String] :farm_id
     #   The farm ID of the job to update.
     #
@@ -6415,6 +6454,8 @@ module Aws::Deadline
     #     max_retries_per_task: 1,
     #     lifecycle_status: "ARCHIVED", # accepts ARCHIVED
     #     max_worker_count: 1,
+    #     name: "JobName",
+    #     description: "JobDescriptionOverride",
     #     farm_id: "FarmId", # required
     #     queue_id: "QueueId", # required
     #     job_id: "JobId", # required
@@ -6502,8 +6543,7 @@ module Aws::Deadline
     #   the content of this field.
     #
     # @option params [String] :role_arn
-    #   The Amazon Resource Name (ARN) of the new IAM role to use with the
-    #   monitor.
+    #   The Amazon Resource Name of the new IAM role to use with the monitor.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -7129,7 +7169,7 @@ module Aws::Deadline
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-deadline'
-      context[:gem_version] = '1.41.0'
+      context[:gem_version] = '1.44.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
@@ -7198,7 +7238,9 @@ module Aws::Deadline
     # | waiter_name                     | params                               | :delay   | :max_attempts |
     # | ------------------------------- | ------------------------------------ | -------- | ------------- |
     # | fleet_active                    | {Client#get_fleet}                   | 5        | 180           |
+    # | job_complete                    | {Client#get_job}                     | 15       | 240           |
     # | job_create_complete             | {Client#get_job}                     | 1        | 120           |
+    # | job_succeeded                   | {Client#get_job}                     | 15       | 240           |
     # | license_endpoint_deleted        | {Client#get_license_endpoint}        | 10       | 234           |
     # | license_endpoint_valid          | {Client#get_license_endpoint}        | 10       | 114           |
     # | queue_fleet_association_stopped | {Client#get_queue_fleet_association} | 10       | 60            |
@@ -7256,7 +7298,9 @@ module Aws::Deadline
     def waiters
       {
         fleet_active: Waiters::FleetActive,
+        job_complete: Waiters::JobComplete,
         job_create_complete: Waiters::JobCreateComplete,
+        job_succeeded: Waiters::JobSucceeded,
         license_endpoint_deleted: Waiters::LicenseEndpointDeleted,
         license_endpoint_valid: Waiters::LicenseEndpointValid,
         queue_fleet_association_stopped: Waiters::QueueFleetAssociationStopped,

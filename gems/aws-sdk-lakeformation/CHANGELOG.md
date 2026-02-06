@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.85.0 (2026-01-16)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.84.0 (2026-01-15)
+------------------
+
+* Feature - API Changes for GTCForLocation feature. Includes a new API, GetTemporaryDataLocationCredentials and updates to the APIs RegisterResource and UpdateResource
+
 1.83.0 (2026-01-08)
 ------------------
 

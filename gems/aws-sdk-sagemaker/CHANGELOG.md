@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.349.0 (2026-01-27)
+------------------
+
+* Feature - Idle resource sharing enables teams to borrow unused compute resources in your SageMaker HyperPod cluster. This capability maximizes resource utilization by allowing teams to borrow idle compute capacity beyond their allocated compute quotas.
+
+1.348.0 (2026-01-16)
+------------------
+
+* Feature - Adding security consideration comments for lcc accessing execution role under root access
+
 1.347.0 (2026-01-12)
 ------------------
 

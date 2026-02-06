@@ -1664,6 +1664,8 @@ module Aws::LakeFormation
     #   resp.resource_info.with_federation #=> Boolean
     #   resp.resource_info.hybrid_access_enabled #=> Boolean
     #   resp.resource_info.with_privileged_access #=> Boolean
+    #   resp.resource_info.verification_status #=> String, one of "VERIFIED", "VERIFICATION_FAILED", "NOT_VERIFIED"
+    #   resp.resource_info.expected_resource_owner_account #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/DescribeResource AWS API Documentation
     #
@@ -2293,6 +2295,90 @@ module Aws::LakeFormation
     # @param [Hash] params ({})
     def get_table_objects(params = {}, options = {})
       req = build_request(:get_table_objects, params)
+      req.send_request(options)
+    end
+
+    # Allows a user or application in a secure environment to access data in
+    # a specific Amazon S3 location registered with Lake Formation by
+    # providing temporary scoped credentials that are limited to the
+    # requested data location and the caller's authorized access level.
+    #
+    # The API operation returns an error in the following scenarios:
+    #
+    # * The data location is not registered with Lake Formation.
+    #
+    # * No Glue table is associated with the data location.
+    #
+    # * The caller doesn't have required permissions on the associated
+    #   table. The caller must have `SELECT` or `SUPER` permissions on the
+    #   associated table, and credential vending for full table access must
+    #   be enabled in the data lake settings.
+    #
+    #   For more information, see [Application integration for full table
+    #   access][1].
+    #
+    # * The data location is in a different Amazon Web Services Region. Lake
+    #   Formation doesn't support cross-Region access when vending
+    #   credentials for a data location. Lake Formation only supports Amazon
+    #   S3 paths registered within the same Region as the API call.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/lake-formation/latest/dg/full-table-credential-vending.html
+    #
+    # @option params [Integer] :duration_seconds
+    #   The time period, between 900 and 43,200 seconds, for the timeout of
+    #   the temporary credentials.
+    #
+    # @option params [Types::AuditContext] :audit_context
+    #   A structure used to include auditing information on the privileged
+    #   API.
+    #
+    # @option params [Array<String>] :data_locations
+    #   The Amazon S3 data location that you want to access.
+    #
+    # @option params [String] :credentials_scope
+    #   The credential scope is determined by the caller's Lake Formation
+    #   permission on the associated table. Credential scope can be either:
+    #
+    #   * READ - Provides read-only access to the data location.
+    #
+    #   * READ\_WRITE - Provides both read and write access to the data
+    #     location.
+    #
+    # @return [Types::GetTemporaryDataLocationCredentialsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetTemporaryDataLocationCredentialsResponse#credentials #credentials} => Types::TemporaryCredentials
+    #   * {Types::GetTemporaryDataLocationCredentialsResponse#accessible_data_locations #accessible_data_locations} => Array&lt;String&gt;
+    #   * {Types::GetTemporaryDataLocationCredentialsResponse#credentials_scope #credentials_scope} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_temporary_data_location_credentials({
+    #     duration_seconds: 1,
+    #     audit_context: {
+    #       additional_audit_context: "AuditContextString",
+    #     },
+    #     data_locations: ["PathString"],
+    #     credentials_scope: "READ", # accepts READ, READWRITE
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.credentials.access_key_id #=> String
+    #   resp.credentials.secret_access_key #=> String
+    #   resp.credentials.session_token #=> String
+    #   resp.credentials.expiration #=> Time
+    #   resp.accessible_data_locations #=> Array
+    #   resp.accessible_data_locations[0] #=> String
+    #   resp.credentials_scope #=> String, one of "READ", "READWRITE"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/GetTemporaryDataLocationCredentials AWS API Documentation
+    #
+    # @overload get_temporary_data_location_credentials(params = {})
+    # @param [Hash] params ({})
+    def get_temporary_data_location_credentials(params = {}, options = {})
+      req = build_request(:get_temporary_data_location_credentials, params)
       req.send_request(options)
     end
 
@@ -3192,6 +3278,8 @@ module Aws::LakeFormation
     #   resp.resource_info_list[0].with_federation #=> Boolean
     #   resp.resource_info_list[0].hybrid_access_enabled #=> Boolean
     #   resp.resource_info_list[0].with_privileged_access #=> Boolean
+    #   resp.resource_info_list[0].verification_status #=> String, one of "VERIFIED", "VERIFICATION_FAILED", "NOT_VERIFIED"
+    #   resp.resource_info_list[0].expected_resource_owner_account #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/ListResources AWS API Documentation
@@ -3453,6 +3541,10 @@ module Aws::LakeFormation
     #   Grants the calling principal the permissions to perform all supported
     #   Lake Formation operations on the registered data location.
     #
+    # @option params [String] :expected_resource_owner_account
+    #   The Amazon Web Services account that owns the Glue tables associated
+    #   with specific Amazon S3 locations.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -3464,6 +3556,7 @@ module Aws::LakeFormation
     #     with_federation: false,
     #     hybrid_access_enabled: false,
     #     with_privileged_access: false,
+    #     expected_resource_owner_account: "AccountIdString",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/RegisterResource AWS API Documentation
@@ -4131,6 +4224,10 @@ module Aws::LakeFormation
     #   can be managed by both Lake Formation permissions as well as Amazon S3
     #   bucket policies.
     #
+    # @option params [String] :expected_resource_owner_account
+    #   The Amazon Web Services account that owns the Glue tables associated
+    #   with specific Amazon S3 locations.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -4140,6 +4237,7 @@ module Aws::LakeFormation
     #     resource_arn: "ResourceArnString", # required
     #     with_federation: false,
     #     hybrid_access_enabled: false,
+    #     expected_resource_owner_account: "AccountIdString",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/UpdateResource AWS API Documentation
@@ -4268,7 +4366,7 @@ module Aws::LakeFormation
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-lakeformation'
-      context[:gem_version] = '1.83.0'
+      context[:gem_version] = '1.85.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.126.0 (2026-01-28)
+------------------
+
+* Feature - Adds support for the UpdateObjectEncryption API to change the server-side encryption type of objects in general purpose buckets.
+
+1.125.0 (2026-01-16)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.124.0 (2026-01-08)
 ------------------
 

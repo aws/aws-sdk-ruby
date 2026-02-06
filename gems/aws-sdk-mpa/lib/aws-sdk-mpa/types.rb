@@ -166,15 +166,6 @@ module Aws::MPA
     # @!attribute [rw] policies
     #   An array of `PolicyReference` objects. Contains a list of policies
     #   that define the permissions for team resources.
-    #
-    #   The protected operation for a service integration might require
-    #   specific permissions. For more information, see [How other services
-    #   work with Multi-party approval][1] in the *Multi-party approval User
-    #   Guide*.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/mpa/latest/userguide/mpa-integrations.html
     #   @return [Array<Types::PolicyReference>]
     #
     # @!attribute [rw] name
@@ -468,15 +459,6 @@ module Aws::MPA
     # @!attribute [rw] policies
     #   An array of `PolicyReference` objects. Contains a list of policies
     #   that define the permissions for team resources.
-    #
-    #   The protected operation for a service integration might require
-    #   specific permissions. For more information, see [How other services
-    #   work with Multi-party approval][1] in the *Multi-party approval User
-    #   Guide*.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/mpa/latest/userguide/mpa-integrations.html
     #   @return [Array<Types::PolicyReference>]
     #
     # @!attribute [rw] last_update_time
@@ -536,6 +518,10 @@ module Aws::MPA
     #   by the identity source.
     #   @return [String]
     #
+    # @!attribute [rw] mfa_methods
+    #   Multi-factor authentication configuration for the approver
+    #   @return [Array<Types::MfaMethod>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mpa-2022-07-26/GetApprovalTeamResponseApprover AWS API Documentation
     #
     class GetApprovalTeamResponseApprover < Struct.new(
@@ -543,7 +529,8 @@ module Aws::MPA
       :response_time,
       :primary_identity_id,
       :primary_identity_source_arn,
-      :primary_identity_status)
+      :primary_identity_status,
+      :mfa_methods)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -621,15 +608,6 @@ module Aws::MPA
     # @!attribute [rw] policy_version
     #   A `PolicyVersion` object. Contains details for the version of the
     #   policy. Policies define the permissions for team resources.
-    #
-    #   The protected operation for a service integration might require
-    #   specific permissions. For more information, see [How other services
-    #   work with Multi-party approval][1] in the *Multi-party approval User
-    #   Guide*.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/mpa/latest/userguide/mpa-integrations.html
     #   @return [Types::PolicyVersion]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mpa-2022-07-26/GetPolicyVersionResponse AWS API Documentation
@@ -813,6 +791,10 @@ module Aws::MPA
     #   details for approver responses in the session.
     #   @return [Array<Types::GetSessionResponseApproverResponse>]
     #
+    # @!attribute [rw] additional_security_requirements
+    #   A list of `AdditionalSecurityRequirement` applied to the session.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mpa-2022-07-26/GetSessionResponse AWS API Documentation
     #
     class GetSessionResponse < Struct.new(
@@ -838,7 +820,8 @@ module Aws::MPA
       :requester_region,
       :requester_comment,
       :action_completion_strategy,
-      :approver_responses)
+      :approver_responses,
+      :additional_security_requirements)
       SENSITIVE = [:description, :metadata, :requester_comment]
       include Aws::Structure
     end
@@ -1310,15 +1293,6 @@ module Aws::MPA
     # @!attribute [rw] policies
     #   An array of `Policy` objects. Contains a list of policies that
     #   define the permissions for team resources.
-    #
-    #   The protected operation for a service integration might require
-    #   specific permissions. For more information, see [How other services
-    #   work with Multi-party approval][1] in the *Multi-party approval User
-    #   Guide*.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/mpa/latest/userguide/mpa-integrations.html
     #   @return [Array<Types::Policy>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mpa-2022-07-26/ListPoliciesResponse AWS API Documentation
@@ -1371,15 +1345,6 @@ module Aws::MPA
     #   An array of `PolicyVersionSummary` objects. Contains details for the
     #   version of the policies that define the permissions for team
     #   resources.
-    #
-    #   The protected operation for a service integration might require
-    #   specific permissions. For more information, see [How other services
-    #   work with Multi-party approval][1] in the *Multi-party approval User
-    #   Guide*.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/mpa/latest/userguide/mpa-integrations.html
     #   @return [Array<Types::PolicyVersionSummary>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mpa-2022-07-26/ListPolicyVersionsResponse AWS API Documentation
@@ -1610,6 +1575,10 @@ module Aws::MPA
     #   automatically using the requester's permissions, if approved.
     #   @return [String]
     #
+    # @!attribute [rw] additional_security_requirements
+    #   A list of `AdditionalSecurityRequirement` applied to the session.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mpa-2022-07-26/ListSessionsResponseSession AWS API Documentation
     #
     class ListSessionsResponseSession < Struct.new(
@@ -1629,7 +1598,8 @@ module Aws::MPA
       :status,
       :status_code,
       :status_message,
-      :action_completion_strategy)
+      :action_completion_strategy,
+      :additional_security_requirements)
       SENSITIVE = [:description]
       include Aws::Structure
     end
@@ -1655,6 +1625,26 @@ module Aws::MPA
     class ListTagsForResourceResponse < Struct.new(
       :tags)
       SENSITIVE = [:tags]
+      include Aws::Structure
+    end
+
+    # MFA configuration and sycnronization status for an approver
+    #
+    # @!attribute [rw] type
+    #   The type of MFA configuration used by the approver
+    #   @return [String]
+    #
+    # @!attribute [rw] sync_status
+    #   Indicates if the approver's MFA device is in-sync with the Identity
+    #   Source
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mpa-2022-07-26/MfaMethod AWS API Documentation
+    #
+    class MfaMethod < Struct.new(
+      :type,
+      :sync_status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1743,15 +1733,6 @@ module Aws::MPA
     # Contains details for a policy. Policies define what operations a team
     # that define the permissions for team resources.
     #
-    # The protected operation for a service integration might require
-    # specific permissions. For more information, see [How other services
-    # work with Multi-party approval][1] in the *Multi-party approval User
-    # Guide*.
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/mpa/latest/userguide/mpa-integrations.html
-    #
     # @!attribute [rw] arn
     #   Amazon Resource Name (ARN) for the policy.
     #   @return [String]
@@ -1782,15 +1763,6 @@ module Aws::MPA
     # Contains the Amazon Resource Name (ARN) for a policy. Policies define
     # what operations a team that define the permissions for team resources.
     #
-    # The protected operation for a service integration might require
-    # specific permissions. For more information, see [How other services
-    # work with Multi-party approval][1] in the *Multi-party approval User
-    # Guide*.
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/mpa/latest/userguide/mpa-integrations.html
-    #
     # @!attribute [rw] policy_arn
     #   Amazon Resource Name (ARN) for the policy.
     #   @return [String]
@@ -1805,15 +1777,6 @@ module Aws::MPA
 
     # Contains details for the version of a policy. Policies define what
     # operations a team that define the permissions for team resources.
-    #
-    # The protected operation for a service integration might require
-    # specific permissions. For more information, see [How other services
-    # work with Multi-party approval][1] in the *Multi-party approval User
-    # Guide*.
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/mpa/latest/userguide/mpa-integrations.html
     #
     # @!attribute [rw] arn
     #   Amazon Resource Name (ARN) for the team.
@@ -1846,7 +1809,7 @@ module Aws::MPA
     #
     #
     #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_groups_manage_attach-policy.html
-    #   [2]: https://docs.aws.amazon.com/access_policies_managed-deprecated.html
+    #   [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_managed-deprecated.html
     #   @return [String]
     #
     # @!attribute [rw] creation_time
@@ -1881,15 +1844,6 @@ module Aws::MPA
     # Contains details for the version of a policy. Policies define what
     # operations a team that define the permissions for team resources.
     #
-    # The protected operation for a service integration might require
-    # specific permissions. For more information, see [How other services
-    # work with Multi-party approval][1] in the *Multi-party approval User
-    # Guide*.
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/mpa/latest/userguide/mpa-integrations.html
-    #
     # @!attribute [rw] arn
     #   Amazon Resource Name (ARN) for the team.
     #   @return [String]
@@ -1921,7 +1875,7 @@ module Aws::MPA
     #
     #
     #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_groups_manage_attach-policy.html
-    #   [2]: https://docs.aws.amazon.com/access_policies_managed-deprecated.html
+    #   [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_managed-deprecated.html
     #   @return [String]
     #
     # @!attribute [rw] creation_time
@@ -2107,13 +2061,18 @@ module Aws::MPA
     #   Amazon Resource Name (ARN) for the team.
     #   @return [String]
     #
+    # @!attribute [rw] update_actions
+    #   A list of `UpdateAction` to perform when updating the team.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mpa-2022-07-26/UpdateApprovalTeamRequest AWS API Documentation
     #
     class UpdateApprovalTeamRequest < Struct.new(
       :approval_strategy,
       :approvers,
       :description,
-      :arn)
+      :arn,
+      :update_actions)
       SENSITIVE = [:description]
       include Aws::Structure
     end

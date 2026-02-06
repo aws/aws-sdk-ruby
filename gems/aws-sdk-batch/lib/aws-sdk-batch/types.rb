@@ -31,6 +31,11 @@ module Aws::Batch
     #   status. This parameter is returned for parent array jobs.
     #   @return [Hash<String,Integer>]
     #
+    # @!attribute [rw] status_summary_last_updated_at
+    #   The Unix timestamp (in milliseconds) for when the `statusSummary`
+    #   was last updated.
+    #   @return [Integer]
+    #
     # @!attribute [rw] size
     #   The size of the array job. This parameter is returned for parent
     #   array jobs.
@@ -45,6 +50,7 @@ module Aws::Batch
     #
     class ArrayPropertiesDetail < Struct.new(
       :status_summary,
+      :status_summary_last_updated_at,
       :size,
       :index)
       SENSITIVE = []
@@ -63,11 +69,23 @@ module Aws::Batch
     #   This parameter is returned for children of array jobs.
     #   @return [Integer]
     #
+    # @!attribute [rw] status_summary
+    #   A summary of the number of array job children in each available job
+    #   status. This parameter is returned for parent array jobs.
+    #   @return [Hash<String,Integer>]
+    #
+    # @!attribute [rw] status_summary_last_updated_at
+    #   The Unix timestamp (in milliseconds) for when the `statusSummary`
+    #   was last updated.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/ArrayPropertiesSummary AWS API Documentation
     #
     class ArrayPropertiesSummary < Struct.new(
       :size,
-      :index)
+      :index,
+      :status_summary,
+      :status_summary_last_updated_at)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6960,6 +6978,13 @@ module Aws::Batch
     #   `filters` parameter is specified, the `jobStatus` parameter is
     #   ignored and jobs with any status are returned. If you don't specify
     #   a status, only `RUNNING` jobs are returned.
+    #
+    #   <note markdown="1"> Array job parents are updated to `PENDING` when any child job is
+    #   updated to `RUNNABLE` and remain in `PENDING` status while child
+    #   jobs are running. To view these jobs, filter by `PENDING` status
+    #   until all child jobs reach a terminal state.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] max_results

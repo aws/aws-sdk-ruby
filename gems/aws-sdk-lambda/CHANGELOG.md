@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.175.0 (2026-01-28)
+------------------
+
+* Feature - We are launching ESM Metrics and logging for Kafka ESM to allow customers to monitor Kafka event processing using CloudWatch Metrics and Logs.
+
+1.174.0 (2026-01-16)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.173.0 (2026-01-08)
 ------------------
 

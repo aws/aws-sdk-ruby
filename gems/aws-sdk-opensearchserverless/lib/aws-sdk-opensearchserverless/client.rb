@@ -537,6 +537,7 @@ module Aws::OpenSearchServerless
     #   resp.collection_details[0].fips_endpoints.dashboard_endpoint #=> String
     #   resp.collection_details[0].failure_code #=> String
     #   resp.collection_details[0].failure_message #=> String
+    #   resp.collection_details[0].collection_group_name #=> String
     #   resp.collection_error_details #=> Array
     #   resp.collection_error_details[0].id #=> String
     #   resp.collection_error_details[0].name #=> String
@@ -549,6 +550,67 @@ module Aws::OpenSearchServerless
     # @param [Hash] params ({})
     def batch_get_collection(params = {}, options = {})
       req = build_request(:batch_get_collection, params)
+      req.send_request(options)
+    end
+
+    # Returns attributes for one or more collection groups, including
+    # capacity limits and the number of collections in each group. For more
+    # information, see [Creating and managing Amazon OpenSearch Serverless
+    # collections][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-manage.html
+    #
+    # @option params [Array<String>] :ids
+    #   A list of collection group IDs. You can't provide names and IDs in
+    #   the same request.
+    #
+    # @option params [Array<String>] :names
+    #   A list of collection group names. You can't provide names and IDs in
+    #   the same request.
+    #
+    # @return [Types::BatchGetCollectionGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchGetCollectionGroupResponse#collection_group_details #collection_group_details} => Array&lt;Types::CollectionGroupDetail&gt;
+    #   * {Types::BatchGetCollectionGroupResponse#collection_group_error_details #collection_group_error_details} => Array&lt;Types::CollectionGroupErrorDetail&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_get_collection_group({
+    #     ids: ["CollectionGroupId"],
+    #     names: ["CollectionGroupName"],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.collection_group_details #=> Array
+    #   resp.collection_group_details[0].id #=> String
+    #   resp.collection_group_details[0].arn #=> String
+    #   resp.collection_group_details[0].name #=> String
+    #   resp.collection_group_details[0].standby_replicas #=> String, one of "ENABLED", "DISABLED"
+    #   resp.collection_group_details[0].description #=> String
+    #   resp.collection_group_details[0].tags #=> Array
+    #   resp.collection_group_details[0].tags[0].key #=> String
+    #   resp.collection_group_details[0].tags[0].value #=> String
+    #   resp.collection_group_details[0].created_date #=> Integer
+    #   resp.collection_group_details[0].capacity_limits.max_indexing_capacity_in_ocu #=> Float
+    #   resp.collection_group_details[0].capacity_limits.max_search_capacity_in_ocu #=> Float
+    #   resp.collection_group_details[0].capacity_limits.min_indexing_capacity_in_ocu #=> Float
+    #   resp.collection_group_details[0].capacity_limits.min_search_capacity_in_ocu #=> Float
+    #   resp.collection_group_details[0].number_of_collections #=> Integer
+    #   resp.collection_group_error_details #=> Array
+    #   resp.collection_group_error_details[0].id #=> String
+    #   resp.collection_group_error_details[0].name #=> String
+    #   resp.collection_group_error_details[0].error_message #=> String
+    #   resp.collection_group_error_details[0].error_code #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearchserverless-2021-11-01/BatchGetCollectionGroup AWS API Documentation
+    #
+    # @overload batch_get_collection_group(params = {})
+    # @param [Hash] params ({})
+    def batch_get_collection_group(params = {}, options = {})
+      req = build_request(:batch_get_collection_group, params)
       req.send_request(options)
     end
 
@@ -794,6 +856,12 @@ module Aws::OpenSearchServerless
     #   Configuration options for vector search capabilities in the
     #   collection.
     #
+    # @option params [String] :collection_group_name
+    #   The name of the collection group to associate with the collection.
+    #
+    # @option params [Types::EncryptionConfig] :encryption_config
+    #   Encryption settings for the collection.
+    #
     # @option params [String] :client_token
     #   Unique, case-sensitive identifier to ensure idempotency of the
     #   request.
@@ -821,6 +889,11 @@ module Aws::OpenSearchServerless
     #     vector_options: {
     #       serverless_vector_acceleration: "ENABLED", # required, accepts ENABLED, DISABLED, ALLOWED
     #     },
+    #     collection_group_name: "CollectionGroupName",
+    #     encryption_config: {
+    #       a_ws_owned_key: false,
+    #       kms_key_arn: "EncryptionConfigKmsKeyArnString",
+    #     },
     #     client_token: "ClientToken",
     #   })
     #
@@ -837,6 +910,7 @@ module Aws::OpenSearchServerless
     #   resp.create_collection_detail.vector_options.serverless_vector_acceleration #=> String, one of "ENABLED", "DISABLED", "ALLOWED"
     #   resp.create_collection_detail.created_date #=> Integer
     #   resp.create_collection_detail.last_modified_date #=> Integer
+    #   resp.create_collection_detail.collection_group_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearchserverless-2021-11-01/CreateCollection AWS API Documentation
     #
@@ -844,6 +918,92 @@ module Aws::OpenSearchServerless
     # @param [Hash] params ({})
     def create_collection(params = {}, options = {})
       req = build_request(:create_collection, params)
+      req.send_request(options)
+    end
+
+    # Creates a collection group within OpenSearch Serverless. Collection
+    # groups let you manage OpenSearch Compute Units (OCUs) at a group
+    # level, with multiple collections sharing the group's capacity limits.
+    #
+    # For more information, see [Managing collection groups][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-collection-groups.html
+    #
+    # @option params [required, String] :name
+    #   The name of the collection group.
+    #
+    # @option params [required, String] :standby_replicas
+    #   Indicates whether standby replicas should be used for a collection
+    #   group.
+    #
+    # @option params [String] :description
+    #   A description of the collection group.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   An arbitrary set of tags (key–value pairs) to associate with the
+    #   OpenSearch Serverless collection group.
+    #
+    # @option params [Types::CollectionGroupCapacityLimits] :capacity_limits
+    #   The capacity limits for the collection group, in OpenSearch Compute
+    #   Units (OCUs). These limits control the maximum and minimum capacity
+    #   for collections within the group.
+    #
+    # @option params [String] :client_token
+    #   Unique, case-sensitive identifier to ensure idempotency of the
+    #   request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::CreateCollectionGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateCollectionGroupResponse#create_collection_group_detail #create_collection_group_detail} => Types::CreateCollectionGroupDetail
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_collection_group({
+    #     name: "CollectionGroupName", # required
+    #     standby_replicas: "ENABLED", # required, accepts ENABLED, DISABLED
+    #     description: "CreateCollectionGroupRequestDescriptionString",
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #     capacity_limits: {
+    #       max_indexing_capacity_in_ocu: 1.0,
+    #       max_search_capacity_in_ocu: 1.0,
+    #       min_indexing_capacity_in_ocu: 1.0,
+    #       min_search_capacity_in_ocu: 1.0,
+    #     },
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.create_collection_group_detail.id #=> String
+    #   resp.create_collection_group_detail.arn #=> String
+    #   resp.create_collection_group_detail.name #=> String
+    #   resp.create_collection_group_detail.standby_replicas #=> String, one of "ENABLED", "DISABLED"
+    #   resp.create_collection_group_detail.description #=> String
+    #   resp.create_collection_group_detail.tags #=> Array
+    #   resp.create_collection_group_detail.tags[0].key #=> String
+    #   resp.create_collection_group_detail.tags[0].value #=> String
+    #   resp.create_collection_group_detail.created_date #=> Integer
+    #   resp.create_collection_group_detail.capacity_limits.max_indexing_capacity_in_ocu #=> Float
+    #   resp.create_collection_group_detail.capacity_limits.max_search_capacity_in_ocu #=> Float
+    #   resp.create_collection_group_detail.capacity_limits.min_indexing_capacity_in_ocu #=> Float
+    #   resp.create_collection_group_detail.capacity_limits.min_search_capacity_in_ocu #=> Float
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearchserverless-2021-11-01/CreateCollectionGroup AWS API Documentation
+    #
+    # @overload create_collection_group(params = {})
+    # @param [Hash] params ({})
+    def create_collection_group(params = {}, options = {})
+      req = build_request(:create_collection_group, params)
       req.send_request(options)
     end
 
@@ -972,13 +1132,13 @@ module Aws::OpenSearchServerless
     #   A description of the security configuration.
     #
     # @option params [Types::SamlConfigOptions] :saml_options
-    #   Describes SAML options in in the form of a key-value map. This field
-    #   is required if you specify `SAML` for the `type` parameter.
+    #   Describes SAML options in the form of a key-value map. This field is
+    #   required if you specify `SAML` for the `type` parameter.
     #
     # @option params [Types::CreateIamIdentityCenterConfigOptions] :iam_identity_center_options
     #   Describes IAM Identity Center options in the form of a key-value map.
-    #   This field is required if you specify iamidentitycenter for the type
-    #   parameter.
+    #   This field is required if you specify `iamidentitycenter` for the
+    #   `type` parameter.
     #
     # @option params [Types::IamFederationConfigOptions] :iam_federation_options
     #   Describes IAM federation options in the form of a key-value map. This
@@ -1261,6 +1421,42 @@ module Aws::OpenSearchServerless
     # @param [Hash] params ({})
     def delete_collection(params = {}, options = {})
       req = build_request(:delete_collection, params)
+      req.send_request(options)
+    end
+
+    # Deletes a collection group. You can only delete empty collection
+    # groups that contain no collections. For more information, see
+    # [Creating and managing Amazon OpenSearch Serverless collections][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-manage.html
+    #
+    # @option params [required, String] :id
+    #   The unique identifier of the collection group to delete.
+    #
+    # @option params [String] :client_token
+    #   Unique, case-sensitive identifier to ensure idempotency of the
+    #   request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_collection_group({
+    #     id: "CollectionGroupId", # required
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearchserverless-2021-11-01/DeleteCollectionGroup AWS API Documentation
+    #
+    # @overload delete_collection_group(params = {})
+    # @param [Hash] params ({})
+    def delete_collection_group(params = {}, options = {})
+      req = build_request(:delete_collection_group, params)
       req.send_request(options)
     end
 
@@ -1738,6 +1934,60 @@ module Aws::OpenSearchServerless
       req.send_request(options)
     end
 
+    # Returns a list of collection groups. For more information, see
+    # [Creating and managing Amazon OpenSearch Serverless collections][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-manage.html
+    #
+    # @option params [String] :next_token
+    #   If your initial `ListCollectionGroups` operation returns a
+    #   `nextToken`, you can include the returned `nextToken` in subsequent
+    #   `ListCollectionGroups` operations, which returns results in the next
+    #   page.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return. Default is 20. You can use
+    #   `nextToken` to get the next page of results.
+    #
+    # @return [Types::ListCollectionGroupsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListCollectionGroupsResponse#collection_group_summaries #collection_group_summaries} => Array&lt;Types::CollectionGroupSummary&gt;
+    #   * {Types::ListCollectionGroupsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_collection_groups({
+    #     next_token: "String",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.collection_group_summaries #=> Array
+    #   resp.collection_group_summaries[0].id #=> String
+    #   resp.collection_group_summaries[0].arn #=> String
+    #   resp.collection_group_summaries[0].name #=> String
+    #   resp.collection_group_summaries[0].number_of_collections #=> Integer
+    #   resp.collection_group_summaries[0].created_date #=> Integer
+    #   resp.collection_group_summaries[0].capacity_limits.max_indexing_capacity_in_ocu #=> Float
+    #   resp.collection_group_summaries[0].capacity_limits.max_search_capacity_in_ocu #=> Float
+    #   resp.collection_group_summaries[0].capacity_limits.min_indexing_capacity_in_ocu #=> Float
+    #   resp.collection_group_summaries[0].capacity_limits.min_search_capacity_in_ocu #=> Float
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearchserverless-2021-11-01/ListCollectionGroups AWS API Documentation
+    #
+    # @overload list_collection_groups(params = {})
+    # @param [Hash] params ({})
+    def list_collection_groups(params = {}, options = {})
+      req = build_request(:list_collection_groups, params)
+      req.send_request(options)
+    end
+
     # Lists all OpenSearch Serverless collections. For more information, see
     # [Creating and managing Amazon OpenSearch Serverless collections][1].
     #
@@ -1775,6 +2025,7 @@ module Aws::OpenSearchServerless
     #     collection_filters: {
     #       name: "CollectionName",
     #       status: "CREATING", # accepts CREATING, DELETING, ACTIVE, FAILED
+    #       collection_group_name: "CollectionGroupName",
     #     },
     #     next_token: "String",
     #     max_results: 1,
@@ -1787,6 +2038,8 @@ module Aws::OpenSearchServerless
     #   resp.collection_summaries[0].name #=> String
     #   resp.collection_summaries[0].status #=> String, one of "CREATING", "DELETING", "ACTIVE", "FAILED"
     #   resp.collection_summaries[0].arn #=> String
+    #   resp.collection_summaries[0].kms_key_arn #=> String
+    #   resp.collection_summaries[0].collection_group_name #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearchserverless-2021-11-01/ListCollections AWS API Documentation
@@ -2298,6 +2551,65 @@ module Aws::OpenSearchServerless
       req.send_request(options)
     end
 
+    # Updates the description and capacity limits of a collection group.
+    #
+    # @option params [required, String] :id
+    #   The unique identifier of the collection group to update.
+    #
+    # @option params [String] :description
+    #   A new description for the collection group.
+    #
+    # @option params [Types::CollectionGroupCapacityLimits] :capacity_limits
+    #   Updated capacity limits for the collection group, in OpenSearch
+    #   Compute Units (OCUs).
+    #
+    # @option params [String] :client_token
+    #   Unique, case-sensitive identifier to ensure idempotency of the
+    #   request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::UpdateCollectionGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateCollectionGroupResponse#update_collection_group_detail #update_collection_group_detail} => Types::UpdateCollectionGroupDetail
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_collection_group({
+    #     id: "CollectionGroupId", # required
+    #     description: "UpdateCollectionGroupRequestDescriptionString",
+    #     capacity_limits: {
+    #       max_indexing_capacity_in_ocu: 1.0,
+    #       max_search_capacity_in_ocu: 1.0,
+    #       min_indexing_capacity_in_ocu: 1.0,
+    #       min_search_capacity_in_ocu: 1.0,
+    #     },
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.update_collection_group_detail.id #=> String
+    #   resp.update_collection_group_detail.arn #=> String
+    #   resp.update_collection_group_detail.name #=> String
+    #   resp.update_collection_group_detail.description #=> String
+    #   resp.update_collection_group_detail.capacity_limits.max_indexing_capacity_in_ocu #=> Float
+    #   resp.update_collection_group_detail.capacity_limits.max_search_capacity_in_ocu #=> Float
+    #   resp.update_collection_group_detail.capacity_limits.min_indexing_capacity_in_ocu #=> Float
+    #   resp.update_collection_group_detail.capacity_limits.min_search_capacity_in_ocu #=> Float
+    #   resp.update_collection_group_detail.created_date #=> Integer
+    #   resp.update_collection_group_detail.last_modified_date #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearchserverless-2021-11-01/UpdateCollectionGroup AWS API Documentation
+    #
+    # @overload update_collection_group(params = {})
+    # @param [Hash] params ({})
+    def update_collection_group(params = {}, options = {})
+      req = build_request(:update_collection_group, params)
+      req.send_request(options)
+    end
+
     # Updates an existing index in an OpenSearch Serverless collection. This
     # operation allows you to modify the index schema, including adding new
     # fields or changing field mappings. You can also enable automatic
@@ -2656,7 +2968,7 @@ module Aws::OpenSearchServerless
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-opensearchserverless'
-      context[:gem_version] = '1.52.0'
+      context[:gem_version] = '1.54.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

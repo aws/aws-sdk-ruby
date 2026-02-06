@@ -1940,6 +1940,7 @@ module Aws::ConfigService
     PutConformancePackRequest.add_member(:delivery_s3_key_prefix, Shapes::ShapeRef.new(shape: DeliveryS3KeyPrefix, location_name: "DeliveryS3KeyPrefix"))
     PutConformancePackRequest.add_member(:conformance_pack_input_parameters, Shapes::ShapeRef.new(shape: ConformancePackInputParameters, location_name: "ConformancePackInputParameters"))
     PutConformancePackRequest.add_member(:template_ssm_document_details, Shapes::ShapeRef.new(shape: TemplateSSMDocumentDetails, location_name: "TemplateSSMDocumentDetails"))
+    PutConformancePackRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagsList, location_name: "Tags"))
     PutConformancePackRequest.struct_class = Types::PutConformancePackRequest
 
     PutConformancePackResponse.add_member(:conformance_pack_arn, Shapes::ShapeRef.new(shape: ConformancePackArn, location_name: "ConformancePackArn"))

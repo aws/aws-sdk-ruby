@@ -54,7 +54,7 @@ module Aws::WorkDocs
   autoload :EndpointProvider, 'aws-sdk-workdocs/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-workdocs/endpoints'
 
-  GEM_VERSION = '1.85.0'
+  GEM_VERSION = '1.86.0'
 
 end
 

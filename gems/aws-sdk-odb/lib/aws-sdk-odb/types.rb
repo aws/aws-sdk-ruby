@@ -396,6 +396,11 @@ module Aws::Odb
     #   created with the allocated local storage.
     #   @return [Integer]
     #
+    # @!attribute [rw] iam_roles
+    #   The Amazon Web Services Identity and Access Management (IAM) service
+    #   roles associated with the Autonomous VM cluster.
+    #   @return [Array<Types::IamRole>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/CloudAutonomousVmCluster AWS API Documentation
     #
     class CloudAutonomousVmCluster < Struct.new(
@@ -449,7 +454,8 @@ module Aws::Odb
       :time_database_ssl_certificate_expires,
       :time_ords_certificate_expires,
       :time_zone,
-      :total_container_databases)
+      :total_container_databases,
+      :iam_roles)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -710,6 +716,12 @@ module Aws::Odb
     #   created in the Autonomous VM cluster.
     #   @return [Integer]
     #
+    # @!attribute [rw] iam_roles
+    #   The Amazon Web Services Identity and Access Management (IAM) service
+    #   roles associated with the Autonomous VM cluster in the summary
+    #   information.
+    #   @return [Array<Types::IamRole>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/CloudAutonomousVmClusterSummary AWS API Documentation
     #
     class CloudAutonomousVmClusterSummary < Struct.new(
@@ -763,7 +775,8 @@ module Aws::Odb
       :time_database_ssl_certificate_expires,
       :time_ords_certificate_expires,
       :time_zone,
-      :total_container_databases)
+      :total_container_databases,
+      :iam_roles)
       SENSITIVE = []
       include Aws::Structure
     end

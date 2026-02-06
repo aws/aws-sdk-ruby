@@ -39,6 +39,18 @@ module Aws::OpenSearchServerless
       SENSITIVE: []
     end
 
+    class BatchGetCollectionGroupRequest
+      attr_accessor ids: ::Array[::String]
+      attr_accessor names: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class BatchGetCollectionGroupResponse
+      attr_accessor collection_group_details: ::Array[Types::CollectionGroupDetail]
+      attr_accessor collection_group_error_details: ::Array[Types::CollectionGroupErrorDetail]
+      SENSITIVE: []
+    end
+
     class BatchGetCollectionRequest
       attr_accessor ids: ::Array[::String]
       attr_accessor names: ::Array[::String]
@@ -107,6 +119,7 @@ module Aws::OpenSearchServerless
       attr_accessor fips_endpoints: Types::FipsEndpoints
       attr_accessor failure_code: ::String
       attr_accessor failure_message: ::String
+      attr_accessor collection_group_name: ::String
       SENSITIVE: []
     end
 
@@ -121,6 +134,46 @@ module Aws::OpenSearchServerless
     class CollectionFilters
       attr_accessor name: ::String
       attr_accessor status: ("CREATING" | "DELETING" | "ACTIVE" | "FAILED")
+      attr_accessor collection_group_name: ::String
+      SENSITIVE: []
+    end
+
+    class CollectionGroupCapacityLimits
+      attr_accessor max_indexing_capacity_in_ocu: ::Float
+      attr_accessor max_search_capacity_in_ocu: ::Float
+      attr_accessor min_indexing_capacity_in_ocu: ::Float
+      attr_accessor min_search_capacity_in_ocu: ::Float
+      SENSITIVE: []
+    end
+
+    class CollectionGroupDetail
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor standby_replicas: ("ENABLED" | "DISABLED")
+      attr_accessor description: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor created_date: ::Integer
+      attr_accessor capacity_limits: Types::CollectionGroupCapacityLimits
+      attr_accessor number_of_collections: ::Integer
+      SENSITIVE: []
+    end
+
+    class CollectionGroupErrorDetail
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor error_message: ::String
+      attr_accessor error_code: ::String
+      SENSITIVE: []
+    end
+
+    class CollectionGroupSummary
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor number_of_collections: ::Integer
+      attr_accessor created_date: ::Integer
+      attr_accessor capacity_limits: Types::CollectionGroupCapacityLimits
       SENSITIVE: []
     end
 
@@ -129,6 +182,8 @@ module Aws::OpenSearchServerless
       attr_accessor name: ::String
       attr_accessor status: ("CREATING" | "DELETING" | "ACTIVE" | "FAILED")
       attr_accessor arn: ::String
+      attr_accessor kms_key_arn: ::String
+      attr_accessor collection_group_name: ::String
       SENSITIVE: []
     end
 
@@ -163,6 +218,34 @@ module Aws::OpenSearchServerless
       attr_accessor vector_options: Types::VectorOptions
       attr_accessor created_date: ::Integer
       attr_accessor last_modified_date: ::Integer
+      attr_accessor collection_group_name: ::String
+      SENSITIVE: []
+    end
+
+    class CreateCollectionGroupDetail
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor standby_replicas: ("ENABLED" | "DISABLED")
+      attr_accessor description: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor created_date: ::Integer
+      attr_accessor capacity_limits: Types::CollectionGroupCapacityLimits
+      SENSITIVE: []
+    end
+
+    class CreateCollectionGroupRequest
+      attr_accessor name: ::String
+      attr_accessor standby_replicas: ("ENABLED" | "DISABLED")
+      attr_accessor description: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor capacity_limits: Types::CollectionGroupCapacityLimits
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateCollectionGroupResponse
+      attr_accessor create_collection_group_detail: Types::CreateCollectionGroupDetail
       SENSITIVE: []
     end
 
@@ -173,6 +256,8 @@ module Aws::OpenSearchServerless
       attr_accessor tags: ::Array[Types::Tag]
       attr_accessor standby_replicas: ("ENABLED" | "DISABLED")
       attr_accessor vector_options: Types::VectorOptions
+      attr_accessor collection_group_name: ::String
+      attr_accessor encryption_config: Types::EncryptionConfig
       attr_accessor client_token: ::String
       SENSITIVE: []
     end
@@ -281,6 +366,15 @@ module Aws::OpenSearchServerless
       SENSITIVE: []
     end
 
+    class DeleteCollectionGroupRequest
+      attr_accessor id: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteCollectionGroupResponse < Aws::EmptyStructure
+    end
+
     class DeleteCollectionRequest
       attr_accessor id: ::String
       attr_accessor client_token: ::String
@@ -363,6 +457,12 @@ module Aws::OpenSearchServerless
       attr_accessor resource: ::String
       attr_accessor error_message: ::String
       attr_accessor error_code: ::String
+      SENSITIVE: []
+    end
+
+    class EncryptionConfig
+      attr_accessor a_ws_owned_key: bool
+      attr_accessor kms_key_arn: ::String
       SENSITIVE: []
     end
 
@@ -512,6 +612,18 @@ module Aws::OpenSearchServerless
 
     class ListAccessPoliciesResponse
       attr_accessor access_policy_summaries: ::Array[Types::AccessPolicySummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListCollectionGroupsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListCollectionGroupsResponse
+      attr_accessor collection_group_summaries: ::Array[Types::CollectionGroupSummary]
       attr_accessor next_token: ::String
       SENSITIVE: []
     end
@@ -734,6 +846,30 @@ module Aws::OpenSearchServerless
       attr_accessor arn: ::String
       attr_accessor created_date: ::Integer
       attr_accessor last_modified_date: ::Integer
+      SENSITIVE: []
+    end
+
+    class UpdateCollectionGroupDetail
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor capacity_limits: Types::CollectionGroupCapacityLimits
+      attr_accessor created_date: ::Integer
+      attr_accessor last_modified_date: ::Integer
+      SENSITIVE: []
+    end
+
+    class UpdateCollectionGroupRequest
+      attr_accessor id: ::String
+      attr_accessor description: ::String
+      attr_accessor capacity_limits: Types::CollectionGroupCapacityLimits
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateCollectionGroupResponse
+      attr_accessor update_collection_group_detail: Types::UpdateCollectionGroupDetail
       SENSITIVE: []
     end
 

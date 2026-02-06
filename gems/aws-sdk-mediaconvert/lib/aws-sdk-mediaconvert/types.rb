@@ -62,7 +62,10 @@ module Aws::MediaConvert
     #   (Receiver Mix): One channel, C. Includes audio description data from
     #   your stereo input. For more information see ETSI TS 101 154 Annex E.
     #   * 1.0 Mono: One channel, C. * 2.0 Stereo: Two channels, L, R. *
-    #   5.1 Surround: Six channels, C, L, R, Ls, Rs, LFE.
+    #   5.1 Surround: Six channels, C, L, R, Ls, Rs, LFE. To follow the
+    #   number of channels from your input audio, choose CODING\_MODE\_AUTO,
+    #   and the service will automatically choose from one of the coding
+    #   modes above.
     #   @return [String]
     #
     # @!attribute [rw] loudness_measurement_mode
@@ -296,8 +299,9 @@ module Aws::MediaConvert
     #
     # @!attribute [rw] channels
     #   Specify the number of channels in this output audio track. Valid
-    #   values are 1 and even numbers up to 64. For example, 1, 2, 4, 6, and
-    #   so on, up to 64.
+    #   values are 0, 1, and even numbers up to 64. Choose 0 to follow the
+    #   number of channels from your input audio. Otherwise, manually choose
+    #   from 1, 2, 4, 6, and so on, up to 64.
     #   @return [Integer]
     #
     # @!attribute [rw] sample_rate
@@ -3232,9 +3236,9 @@ module Aws::MediaConvert
     #
     # @!attribute [rw] format
     #   The format of your media file. For example: MP4, QuickTime (MOV),
-    #   Matroska (MKV), WebM or MXF. Note that this will be blank if your
-    #   media file has a format that the MediaConvert Probe operation does
-    #   not recognize.
+    #   Matroska (MKV), WebM, MXF or Wave. Note that this will be blank if
+    #   your media file has a format that the MediaConvert Probe operation
+    #   does not recognize.
     #   @return [String]
     #
     # @!attribute [rw] tracks
@@ -4304,6 +4308,17 @@ module Aws::MediaConvert
 
     # Create Dolby Vision Profile 5 or Profile 8.1 compatible video output.
     #
+    # @!attribute [rw] compatibility
+    #   When you set Compatibility mapping to Duplicate Stream, DolbyVision
+    #   streams that have a backward compatible base layer (e.g.,
+    #   DolbyVision 8.1) will cause a duplicate stream to be signaled in the
+    #   manifest as a duplicate stream. When you set Compatibility mapping
+    #   to Supplemntal Codecs, DolbyVision streams that have a backward
+    #   compatible base layer (e.g., DolbyVision 8.1) will cause the
+    #   associate stream in the manifest to include a SUPPLEMENTAL\_CODECS
+    #   property.
+    #   @return [String]
+    #
     # @!attribute [rw] l6_metadata
     #   Use these settings when you set DolbyVisionLevel6Mode to SPECIFY to
     #   override the MaxCLL and MaxFALL values in your input with new
@@ -4340,6 +4355,7 @@ module Aws::MediaConvert
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/DolbyVision AWS API Documentation
     #
     class DolbyVision < Struct.new(
+      :compatibility,
       :l6_metadata,
       :l6_mode,
       :mapping,
@@ -5608,9 +5624,10 @@ module Aws::MediaConvert
     #   @return [Integer]
     #
     # @!attribute [rw] channels
-    #   Specify the number of channels in this output audio track. Choosing
-    #   Mono on the console gives you 1 output channel; choosing Stereo
-    #   gives you 2. In the API, valid values are between 1 and 8.
+    #   Specify the number of channels in this output audio track. Valid
+    #   values are 0, 1, and even numbers up to 8. Choose 0 to follow the
+    #   number of channels from your input audio. Otherwise, manually choose
+    #   from 1, 2, 4, 6, and 8.
     #   @return [Integer]
     #
     # @!attribute [rw] sample_rate
@@ -10839,8 +10856,10 @@ module Aws::MediaConvert
     #
     # @!attribute [rw] channels
     #   Set Channels to specify the number of channels in this output audio
-    #   track. Choosing Mono in will give you 1 output channel; choosing
-    #   Stereo will give you 2. In the API, valid values are 1 and 2.
+    #   track. Choosing Follow input will use the number of channels found
+    #   in the audio source; choosing Mono will give you 1 output channel;
+    #   choosing Stereo will give you 2. In the API, valid values are 0, 1,
+    #   and 2.
     #   @return [Integer]
     #
     # @!attribute [rw] sample_rate
@@ -10867,8 +10886,9 @@ module Aws::MediaConvert
     #
     # @!attribute [rw] channels
     #   Specify the number of channels in this output audio track. Choosing
-    #   Mono gives you 1 output channel; choosing Stereo gives you 2. In the
-    #   API, valid values are 1 and 2.
+    #   Follow input will use the number of channels found in the audio
+    #   source; choosing Mono gives you 1 output channel; choosing Stereo
+    #   gives you 2. In the API, valid values are 0, 1, and 2.
     #   @return [Integer]
     #
     # @!attribute [rw] rate_control_mode
@@ -11665,6 +11685,14 @@ module Aws::MediaConvert
     #   https://docs.aws.amazon.com/mediaconvert/latest/ug/default-automatic-selection-of-mxf-profiles.html.
     #   @return [String]
     #
+    # @!attribute [rw] uncompressed_audio_wrapping
+    #   Choose the audio frame wrapping mode for PCM tracks in MXF outputs.
+    #   AUTO (default): Uses codec-appropriate defaults - BWF for H.264/AVC,
+    #   AES3 for MPEG2/XDCAM. AES3: Use AES3 frame wrapping with
+    #   SMPTE-compliant descriptors. This setting only takes effect when the
+    #   MXF profile is OP1a.
+    #   @return [String]
+    #
     # @!attribute [rw] xavc_profile_settings
     #   Specify the XAVC profile settings for MXF outputs when you set your
     #   MXF profile to XAVC.
@@ -11675,6 +11703,7 @@ module Aws::MediaConvert
     class MxfSettings < Struct.new(
       :afd_signaling,
       :profile,
+      :uncompressed_audio_wrapping,
       :xavc_profile_settings)
       SENSITIVE = []
       include Aws::Structure
@@ -12055,8 +12084,9 @@ module Aws::MediaConvert
     #
     # @!attribute [rw] channels
     #   Specify the number of channels in this output audio track. Choosing
-    #   Mono on gives you 1 output channel; choosing Stereo gives you 2. In
-    #   the API, valid values are 1 and 2.
+    #   Follow input will use the number of channels found in the audio
+    #   source; choosing Mono gives you 1 output channel; choosing Stereo
+    #   gives you 2. In the API, valid values are 0, 1, and 2.
     #   @return [Integer]
     #
     # @!attribute [rw] sample_rate
@@ -15311,12 +15341,12 @@ module Aws::MediaConvert
     # @!attribute [rw] streams
     #   Specify one or more video streams for MediaConvert to use from your
     #   HLS input. Enter an integer corresponding to the stream number, with
-    #   the first stream in your HLS multivariant playlist starting at 1.For
-    #   re-encoding workflows, MediaConvert uses the video stream that you
-    #   select with the highest bitrate as the input.For video passthrough
-    #   workflows, you specify whether to passthrough a single video stream
-    #   or multiple video streams under Video selector source in the output
-    #   video encoding settings.
+    #   the first stream in your HLS multivariant playlist starting at 1.
+    #   For re-encoding workflows, MediaConvert uses the video stream that
+    #   you select with the highest bitrate as the input. For video
+    #   passthrough workflows, you specify whether to passthrough a single
+    #   video stream or multiple video streams under Video selector source
+    #   in the output video encoding settings.
     #   @return [Array<Integer>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/VideoSelector AWS API Documentation
@@ -15344,9 +15374,10 @@ module Aws::MediaConvert
     #
     # @!attribute [rw] channels
     #   Optional. Specify the number of channels in this output audio track.
-    #   Choosing Mono on the console gives you 1 output channel; choosing
-    #   Stereo gives you 2. In the API, valid values are 1 and 2. The
-    #   default value is 2.
+    #   Choosing Follow input will use the number of channels found in the
+    #   audio source; choosing Mono on the console gives you 1 output
+    #   channel; choosing Stereo gives you 2. In the API, valid values are
+    #   0, 1, and 2. The default value is 2.
     #   @return [Integer]
     #
     # @!attribute [rw] sample_rate
@@ -15662,8 +15693,9 @@ module Aws::MediaConvert
     #
     # @!attribute [rw] channels
     #   Specify the number of channels in this output audio track. Valid
-    #   values are 1 and even numbers up to 64. For example, 1, 2, 4, 6, and
-    #   so on, up to 64.
+    #   values are 0, 1, and even numbers up to 64. Choose 0 to follow the
+    #   number of channels from your input audio. Otherwise, manually choose
+    #   from 1, 2, 4, 6, and so on, up to 64.
     #   @return [Integer]
     #
     # @!attribute [rw] format

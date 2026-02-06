@@ -761,8 +761,8 @@ module Aws::BedrockAgentCoreControl
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier to ensure that the operation
     #   completes no more than one time. If this token matches a previous
-    #   request, Amazon Bedrock ignores the request but does not return an
-    #   error.
+    #   request, Amazon Bedrock AgentCore ignores the request but does not
+    #   return an error.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -825,6 +825,67 @@ module Aws::BedrockAgentCoreControl
       req.send_request(options)
     end
 
+    # Creates a browser profile in Amazon Bedrock AgentCore. A browser
+    # profile stores persistent browser data such as cookies, local storage,
+    # session storage, and browsing history that can be saved from browser
+    # sessions and reused in subsequent sessions.
+    #
+    # @option params [required, String] :name
+    #   The name of the browser profile. The name must be unique within your
+    #   account and can contain alphanumeric characters and underscores.
+    #
+    # @option params [String] :description
+    #   A description of the browser profile. Use this field to describe the
+    #   purpose or contents of the profile.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier to ensure that the operation
+    #   completes no more than one time. If this token matches a previous
+    #   request, Amazon Bedrock AgentCore ignores the request but does not
+    #   return an error.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [Hash<String,String>] :tags
+    #   A map of tag keys and values to assign to the browser profile. Tags
+    #   enable you to categorize your resources in different ways, for
+    #   example, by purpose, owner, or environment.
+    #
+    # @return [Types::CreateBrowserProfileResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateBrowserProfileResponse#profile_id #profile_id} => String
+    #   * {Types::CreateBrowserProfileResponse#profile_arn #profile_arn} => String
+    #   * {Types::CreateBrowserProfileResponse#created_at #created_at} => Time
+    #   * {Types::CreateBrowserProfileResponse#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_browser_profile({
+    #     name: "BrowserProfileName", # required
+    #     description: "Description",
+    #     client_token: "ClientToken",
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.profile_id #=> String
+    #   resp.profile_arn #=> String
+    #   resp.created_at #=> Time
+    #   resp.status #=> String, one of "READY", "DELETING", "DELETED", "SAVING"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/CreateBrowserProfile AWS API Documentation
+    #
+    # @overload create_browser_profile(params = {})
+    # @param [Hash] params ({})
+    def create_browser_profile(params = {}, options = {})
+      req = build_request(:create_browser_profile, params)
+      req.send_request(options)
+    end
+
     # Creates a custom code interpreter.
     #
     # @option params [required, String] :name
@@ -846,8 +907,8 @@ module Aws::BedrockAgentCoreControl
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier to ensure that the operation
     #   completes no more than one time. If this token matches a previous
-    #   request, Amazon Bedrock ignores the request but does not return an
-    #   error.
+    #   request, Amazon Bedrock AgentCore ignores the request but does not
+    #   return an error.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -935,6 +996,11 @@ module Aws::BedrockAgentCoreControl
     #   single request-response interactions, or `SESSION` for entire
     #   conversation sessions.
     #
+    # @option params [Hash<String,String>] :tags
+    #   A map of tag keys and values to assign to an AgentCore Evaluator. Tags
+    #   enable you to categorize your resources in different ways, for
+    #   example, by purpose, owner, or environment.
+    #
     # @return [Types::CreateEvaluatorResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateEvaluatorResponse#evaluator_arn #evaluator_arn} => String
@@ -982,6 +1048,9 @@ module Aws::BedrockAgentCoreControl
     #       },
     #     },
     #     level: "TOOL_CALL", # required, accepts TOOL_CALL, TRACE, SESSION
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
     #   })
     #
     # @example Response structure
@@ -1915,6 +1984,11 @@ module Aws::BedrockAgentCoreControl
     #   Whether to enable the online evaluation configuration immediately upon
     #   creation. If true, evaluation begins automatically.
     #
+    # @option params [Hash<String,String>] :tags
+    #   A map of tag keys and values to assign to an AgentCore Online
+    #   Evaluation Config. Tags enable you to categorize your resources in
+    #   different ways, for example, by purpose, owner, or environment.
+    #
     # @return [Types::CreateOnlineEvaluationConfigResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateOnlineEvaluationConfigResponse#online_evaluation_config_arn #online_evaluation_config_arn} => String
@@ -1963,6 +2037,9 @@ module Aws::BedrockAgentCoreControl
     #     ],
     #     evaluation_execution_role_arn: "RoleArn", # required
     #     enable_on_create: false, # required
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
     #   })
     #
     # @example Response structure
@@ -2365,6 +2442,50 @@ module Aws::BedrockAgentCoreControl
     # @param [Hash] params ({})
     def delete_browser(params = {}, options = {})
       req = build_request(:delete_browser, params)
+      req.send_request(options)
+    end
+
+    # Deletes a browser profile.
+    #
+    # @option params [required, String] :profile_id
+    #   The unique identifier of the browser profile to delete.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier to ensure idempotency of the
+    #   request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::DeleteBrowserProfileResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteBrowserProfileResponse#profile_id #profile_id} => String
+    #   * {Types::DeleteBrowserProfileResponse#profile_arn #profile_arn} => String
+    #   * {Types::DeleteBrowserProfileResponse#status #status} => String
+    #   * {Types::DeleteBrowserProfileResponse#last_updated_at #last_updated_at} => Time
+    #   * {Types::DeleteBrowserProfileResponse#last_saved_at #last_saved_at} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_browser_profile({
+    #     profile_id: "BrowserProfileId", # required
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.profile_id #=> String
+    #   resp.profile_arn #=> String
+    #   resp.status #=> String, one of "READY", "DELETING", "DELETED", "SAVING"
+    #   resp.last_updated_at #=> Time
+    #   resp.last_saved_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/DeleteBrowserProfile AWS API Documentation
+    #
+    # @overload delete_browser_profile(params = {})
+    # @param [Hash] params ({})
+    def delete_browser_profile(params = {}, options = {})
+      req = build_request(:delete_browser_profile, params)
       req.send_request(options)
     end
 
@@ -3001,6 +3122,52 @@ module Aws::BedrockAgentCoreControl
     # @param [Hash] params ({})
     def get_browser(params = {}, options = {})
       req = build_request(:get_browser, params)
+      req.send_request(options)
+    end
+
+    # Gets information about a browser profile.
+    #
+    # @option params [required, String] :profile_id
+    #   The unique identifier of the browser profile to retrieve.
+    #
+    # @return [Types::GetBrowserProfileResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetBrowserProfileResponse#profile_id #profile_id} => String
+    #   * {Types::GetBrowserProfileResponse#profile_arn #profile_arn} => String
+    #   * {Types::GetBrowserProfileResponse#name #name} => String
+    #   * {Types::GetBrowserProfileResponse#description #description} => String
+    #   * {Types::GetBrowserProfileResponse#status #status} => String
+    #   * {Types::GetBrowserProfileResponse#created_at #created_at} => Time
+    #   * {Types::GetBrowserProfileResponse#last_updated_at #last_updated_at} => Time
+    #   * {Types::GetBrowserProfileResponse#last_saved_at #last_saved_at} => Time
+    #   * {Types::GetBrowserProfileResponse#last_saved_browser_session_id #last_saved_browser_session_id} => String
+    #   * {Types::GetBrowserProfileResponse#last_saved_browser_id #last_saved_browser_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_browser_profile({
+    #     profile_id: "BrowserProfileId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.profile_id #=> String
+    #   resp.profile_arn #=> String
+    #   resp.name #=> String
+    #   resp.description #=> String
+    #   resp.status #=> String, one of "READY", "DELETING", "DELETED", "SAVING"
+    #   resp.created_at #=> Time
+    #   resp.last_updated_at #=> Time
+    #   resp.last_saved_at #=> Time
+    #   resp.last_saved_browser_session_id #=> String
+    #   resp.last_saved_browser_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/GetBrowserProfile AWS API Documentation
+    #
+    # @overload get_browser_profile(params = {})
+    # @param [Hash] params ({})
+    def get_browser_profile(params = {}, options = {})
+      req = build_request(:get_browser_profile, params)
       req.send_request(options)
     end
 
@@ -4052,6 +4219,52 @@ module Aws::BedrockAgentCoreControl
       req.send_request(options)
     end
 
+    # Lists all browser profiles in your account.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in the response.
+    #
+    # @option params [String] :next_token
+    #   A token to retrieve the next page of results.
+    #
+    # @return [Types::ListBrowserProfilesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListBrowserProfilesResponse#profile_summaries #profile_summaries} => Array&lt;Types::BrowserProfileSummary&gt;
+    #   * {Types::ListBrowserProfilesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_browser_profiles({
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.profile_summaries #=> Array
+    #   resp.profile_summaries[0].profile_id #=> String
+    #   resp.profile_summaries[0].profile_arn #=> String
+    #   resp.profile_summaries[0].name #=> String
+    #   resp.profile_summaries[0].description #=> String
+    #   resp.profile_summaries[0].status #=> String, one of "READY", "DELETING", "DELETED", "SAVING"
+    #   resp.profile_summaries[0].created_at #=> Time
+    #   resp.profile_summaries[0].last_updated_at #=> Time
+    #   resp.profile_summaries[0].last_saved_at #=> Time
+    #   resp.profile_summaries[0].last_saved_browser_session_id #=> String
+    #   resp.profile_summaries[0].last_saved_browser_id #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/ListBrowserProfiles AWS API Documentation
+    #
+    # @overload list_browser_profiles(params = {})
+    # @param [Hash] params ({})
+    def list_browser_profiles(params = {}, options = {})
+      req = build_request(:list_browser_profiles, params)
+      req.send_request(options)
+    end
+
     # Lists all custom browsers in your account.
     #
     # @option params [Integer] :max_results
@@ -4692,7 +4905,7 @@ module Aws::BedrockAgentCoreControl
     # Lists the tags associated with the specified resource.
     #
     # <note markdown="1"> This feature is currently available only for AgentCore Runtime,
-    # Browser, Code Interpreter tool, and Gateway.
+    # Browser, Browser Profile, Code Interpreter tool, and Gateway.
     #
     #  </note>
     #
@@ -5043,7 +5256,7 @@ module Aws::BedrockAgentCoreControl
     # the tags associated with that resource are also deleted.
     #
     # <note markdown="1"> This feature is currently available only for AgentCore Runtime,
-    # Browser, Code Interpreter tool, and Gateway.
+    # Browser, Browser Profile, Code Interpreter tool, and Gateway.
     #
     #  </note>
     #
@@ -5076,7 +5289,7 @@ module Aws::BedrockAgentCoreControl
     # Removes the specified tags from the specified resource.
     #
     # <note markdown="1"> This feature is currently available only for AgentCore Runtime,
-    # Browser, Code Interpreter tool, and Gateway.
+    # Browser, Browser Profile, Code Interpreter tool, and Gateway.
     #
     #  </note>
     #
@@ -6632,7 +6845,7 @@ module Aws::BedrockAgentCoreControl
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrockagentcorecontrol'
-      context[:gem_version] = '1.21.0'
+      context[:gem_version] = '1.24.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

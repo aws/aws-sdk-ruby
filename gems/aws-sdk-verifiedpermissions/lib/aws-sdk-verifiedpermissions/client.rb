@@ -1716,6 +1716,14 @@ module Aws::VerifiedPermissions
     #
     #   The default state is `DISABLED`.
     #
+    # @option params [Types::EncryptionSettings] :encryption_settings
+    #   Specifies the encryption settings used to encrypt the policy store and
+    #   their child resources. Allows for the ability to use a customer owned
+    #   KMS key for encryption of data.
+    #
+    #   This is an optional field to be used when providing a customer-managed
+    #   KMS key for encryption.
+    #
     # @option params [Hash<String,String>] :tags
     #   The list of key-value pairs to associate with the policy store.
     #
@@ -1746,6 +1754,33 @@ module Aws::VerifiedPermissions
     #     policy_store_id: "C7v5xMplfFH3i3e4Jrzb1a", 
     #   }
     #
+    # @example Example: To create an encrypted policy store
+    #
+    #   # The following example creates a new policy store with encryption settings based on a provided KMS key.
+    #
+    #   resp = client.create_policy_store({
+    #     client_token: "a1b2c3d4-e5f6-a1b2-c3d4-TOKEN1111111", 
+    #     encryption_settings: {
+    #       kms_encryption_settings: {
+    #         key: "arn:aws:kms:us-east-1:123456789012:key/abcdefgh-ijkl-mnop-qrst-uvwxyz123456", 
+    #         encryption_context: {
+    #           "policy_store_owner" => "Tim", 
+    #         }, 
+    #       }, 
+    #     }, 
+    #     validation_settings: {
+    #       mode: "STRICT", 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     arn: "arn:aws:verifiedpermissions::123456789012:policy-store/C7v5xMplfFH3i3e4Jrzb1a", 
+    #     created_date: Time.parse("2024-08-12T18:20:50.99Z"), 
+    #     last_updated_date: Time.parse("2024-08-12T18:20:50.99Z"), 
+    #     policy_store_id: "C7v5xMplfFH3i3e4Jrzb1a", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_policy_store({
@@ -1755,6 +1790,16 @@ module Aws::VerifiedPermissions
     #     },
     #     description: "PolicyStoreDescription",
     #     deletion_protection: "ENABLED", # accepts ENABLED, DISABLED
+    #     encryption_settings: {
+    #       kms_encryption_settings: {
+    #         key: "KmsKey", # required
+    #         encryption_context: {
+    #           "EncryptionContextKey" => "EncryptionContextValue",
+    #         },
+    #       },
+    #       default: {
+    #       },
+    #     },
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
@@ -2268,6 +2313,7 @@ module Aws::VerifiedPermissions
     #   * {Types::GetPolicyStoreOutput#last_updated_date #last_updated_date} => Time
     #   * {Types::GetPolicyStoreOutput#description #description} => String
     #   * {Types::GetPolicyStoreOutput#deletion_protection #deletion_protection} => String
+    #   * {Types::GetPolicyStoreOutput#encryption_state #encryption_state} => Types::EncryptionState
     #   * {Types::GetPolicyStoreOutput#cedar_version #cedar_version} => String
     #   * {Types::GetPolicyStoreOutput#tags #tags} => Hash&lt;String,String&gt;
     #
@@ -2284,6 +2330,37 @@ module Aws::VerifiedPermissions
     #   {
     #     arn: "arn:aws:verifiedpermissions::123456789012:policy-store/C7v5xMplfFH3i3e4Jrzb1a", 
     #     created_date: Time.parse("2024-08-12T18:20:50.99Z"), 
+    #     encryption_state: {
+    #       default: {
+    #       }, 
+    #     }, 
+    #     last_updated_date: Time.parse("2024-08-12T18:20:50.99Z"), 
+    #     policy_store_id: "C7v5xMplfFH3i3e4Jrzb1a", 
+    #     validation_settings: {
+    #       mode: "STRICT", 
+    #     }, 
+    #   }
+    #
+    # @example Example: GetPolicyStore that is encrypted
+    #
+    #   # The following example retrieves details about the specified encrypted policy store.
+    #
+    #   resp = client.get_policy_store({
+    #     policy_store_id: "C7v5xMplfFH3i3e4Jrzb1a", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     arn: "arn:aws:verifiedpermissions::123456789012:policy-store/C7v5xMplfFH3i3e4Jrzb1a", 
+    #     created_date: Time.parse("2024-08-12T18:20:50.99Z"), 
+    #     encryption_state: {
+    #       kms_encryption_state: {
+    #         key: "arn:aws:kms:us-east-1:123456789012:key/abcdefgh-ijkl-mnop-qrst-uvwxyz123456", 
+    #         encryption_context: {
+    #           "policy_store_owner" => "Tim", 
+    #         }, 
+    #       }, 
+    #     }, 
     #     last_updated_date: Time.parse("2024-08-12T18:20:50.99Z"), 
     #     policy_store_id: "C7v5xMplfFH3i3e4Jrzb1a", 
     #     validation_settings: {
@@ -2307,6 +2384,9 @@ module Aws::VerifiedPermissions
     #   resp.last_updated_date #=> Time
     #   resp.description #=> String
     #   resp.deletion_protection #=> String, one of "ENABLED", "DISABLED"
+    #   resp.encryption_state.kms_encryption_state.key #=> String
+    #   resp.encryption_state.kms_encryption_state.encryption_context #=> Hash
+    #   resp.encryption_state.kms_encryption_state.encryption_context["EncryptionContextKey"] #=> String
     #   resp.cedar_version #=> String, one of "CEDAR_2", "CEDAR_4"
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
@@ -3807,7 +3887,7 @@ module Aws::VerifiedPermissions
     #
     #   [1]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListPolicies.html
     #
-    # @option params [required, Types::UpdatePolicyDefinition] :definition
+    # @option params [Types::UpdatePolicyDefinition] :definition
     #   Specifies the updated policy content that you want to replace on the
     #   specified policy. The content must be valid Cedar policy language
     #   text.
@@ -3873,7 +3953,7 @@ module Aws::VerifiedPermissions
     #   resp = client.update_policy({
     #     policy_store_id: "PolicyStoreId", # required
     #     policy_id: "PolicyId", # required
-    #     definition: { # required
+    #     definition: {
     #       static: {
     #         description: "StaticPolicyDescription",
     #         statement: "PolicyStatement", # required
@@ -4114,7 +4194,7 @@ module Aws::VerifiedPermissions
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-verifiedpermissions'
-      context[:gem_version] = '1.58.0'
+      context[:gem_version] = '1.61.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

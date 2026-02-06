@@ -247,14 +247,14 @@ module Aws::DynamoDB
     # @example Request syntax with placeholder values
     #
     #   table = dynamo_db.create_table({
-    #     attribute_definitions: [ # required
+    #     attribute_definitions: [
     #       {
     #         attribute_name: "KeySchemaAttributeName", # required
     #         attribute_type: "S", # required, accepts S, N, B
     #       },
     #     ],
     #     table_name: "TableArn", # required
-    #     key_schema: [ # required
+    #     key_schema: [
     #       {
     #         attribute_name: "KeySchemaAttributeName", # required
     #         key_type: "HASH", # required, accepts HASH, RANGE
@@ -333,15 +333,17 @@ module Aws::DynamoDB
     #       max_read_request_units: 1,
     #       max_write_request_units: 1,
     #     },
+    #     global_table_source_arn: "TableArn",
+    #     global_table_settings_replication_mode: "ENABLED", # accepts ENABLED, DISABLED, ENABLED_WITH_OVERRIDES
     #   })
     # @param [Hash] options ({})
-    # @option options [required, Array<Types::AttributeDefinition>] :attribute_definitions
+    # @option options [Array<Types::AttributeDefinition>] :attribute_definitions
     #   An array of attributes that describe the key schema for the table and
     #   indexes.
     # @option options [required, String] :table_name
     #   The name of the table to create. You can also provide the Amazon
     #   Resource Name (ARN) of the table in this parameter.
-    # @option options [required, Array<Types::KeySchemaElement>] :key_schema
+    # @option options [Array<Types::KeySchemaElement>] :key_schema
     #   Specifies the attributes that make up the primary key for a table or
     #   an index. The attributes in `KeySchema` must also be defined in the
     #   `AttributeDefinitions` array. For more information, see [Data
@@ -438,7 +440,8 @@ module Aws::DynamoDB
     #
     #
     #   * `KeySchema` - Specifies the key schema for the global secondary
-    #     index.
+    #     index. Each global secondary index supports up to 4 partition keys
+    #     and up to 4 sort keys.
     #
     #   * `Projection` - Specifies attributes that are copied (projected) from
     #     the table into the index. These are in addition to the primary key
@@ -568,6 +571,14 @@ module Aws::DynamoDB
     #   Sets the maximum number of read and write units for the specified
     #   table in on-demand capacity mode. If you use this parameter, you must
     #   specify `MaxReadRequestUnits`, `MaxWriteRequestUnits`, or both.
+    # @option options [String] :global_table_source_arn
+    #   The Amazon Resource Name (ARN) of the source table used for the
+    #   creation of a multi-account global table.
+    # @option options [String] :global_table_settings_replication_mode
+    #   Controls the settings synchronization mode for the global table. For
+    #   multi-account global tables, this parameter is required and the only
+    #   supported value is ENABLED. For same-account global tables, this
+    #   parameter is set to ENABLED\_WITH\_OVERRIDES.
     # @return [Table]
     def create_table(options = {})
       resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do

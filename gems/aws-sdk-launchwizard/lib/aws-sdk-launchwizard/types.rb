@@ -10,6 +10,15 @@
 module Aws::LaunchWizard
   module Types
 
+    # @!attribute [rw] workload_name
+    #   The name of the workload. You can use the [ `ListWorkloads` ][1]
+    #   operation to discover supported values for this parameter.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/launchwizard/latest/APIReference/API_ListWorkloads.html
+    #   @return [String]
+    #
     # @!attribute [rw] deployment_pattern_name
     #   The name of the deployment pattern supported by a given workload.
     #   You can use the [ `ListWorkloadDeploymentPatterns` ][1] operation to
@@ -19,13 +28,6 @@ module Aws::LaunchWizard
     #
     #   [1]: https://docs.aws.amazon.com/launchwizard/latest/APIReference/API_ListWorkloadDeploymentPatterns.html
     #   @return [String]
-    #
-    # @!attribute [rw] dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    #   @return [Boolean]
     #
     # @!attribute [rw] name
     #   The name of the deployment.
@@ -46,28 +48,26 @@ module Aws::LaunchWizard
     #   [2]: https://docs.aws.amazon.com/launchwizard/latest/APIReference/API_GetWorkloadDeploymentPattern.html
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] tags
     #   The tags to add to the deployment.
     #   @return [Hash<String,String>]
     #
-    # @!attribute [rw] workload_name
-    #   The name of the workload. You can use the [ `ListWorkloads` ][1]
-    #   operation to discover supported values for this parameter.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/launchwizard/latest/APIReference/API_ListWorkloads.html
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/launch-wizard-2018-05-10/CreateDeploymentInput AWS API Documentation
     #
     class CreateDeploymentInput < Struct.new(
+      :workload_name,
       :deployment_pattern_name,
-      :dry_run,
       :name,
       :specifications,
-      :tags,
-      :workload_name)
+      :dry_run,
+      :tags)
       SENSITIVE = [:specifications]
       include Aws::Structure
     end
@@ -116,12 +116,6 @@ module Aws::LaunchWizard
     # A field that details a condition of the specifications for a
     # deployment.
     #
-    # @!attribute [rw] comparator
-    #   The comparator of the condition.
-    #
-    #   Valid values: `Equal | NotEqual`
-    #   @return [String]
-    #
     # @!attribute [rw] name
     #   The name of the deployment condition.
     #   @return [String]
@@ -130,45 +124,51 @@ module Aws::LaunchWizard
     #   The value of the condition.
     #   @return [String]
     #
+    # @!attribute [rw] comparator
+    #   The comparator of the condition.
+    #
+    #   Valid values: `Equal | NotEqual`
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/launch-wizard-2018-05-10/DeploymentConditionalField AWS API Documentation
     #
     class DeploymentConditionalField < Struct.new(
-      :comparator,
       :name,
-      :value)
+      :value,
+      :comparator)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # The data associated with a deployment.
     #
-    # @!attribute [rw] created_at
-    #   The time the deployment was created.
-    #   @return [Time]
-    #
-    # @!attribute [rw] deleted_at
-    #   The time the deployment was deleted.
-    #   @return [Time]
-    #
-    # @!attribute [rw] deployment_arn
-    #   The Amazon Resource Name (ARN) of the deployment.
+    # @!attribute [rw] name
+    #   The name of the deployment.
     #   @return [String]
     #
     # @!attribute [rw] id
     #   The ID of the deployment.
     #   @return [String]
     #
-    # @!attribute [rw] name
-    #   The name of the deployment.
+    # @!attribute [rw] workload_name
+    #   The name of the workload.
     #   @return [String]
     #
     # @!attribute [rw] pattern_name
     #   The pattern name of the deployment.
     #   @return [String]
     #
-    # @!attribute [rw] resource_group
-    #   The resource group of the deployment.
+    # @!attribute [rw] status
+    #   The status of the deployment.
     #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The time the deployment was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] modified_at
+    #   The time the deployment was last modified.
+    #   @return [Time]
     #
     # @!attribute [rw] specifications
     #   The settings specified for the deployment. These settings define how
@@ -185,48 +185,53 @@ module Aws::LaunchWizard
     #   [2]: https://docs.aws.amazon.com/launchwizard/latest/APIReference/API_GetWorkloadDeploymentPattern.html
     #   @return [Hash<String,String>]
     #
-    # @!attribute [rw] status
-    #   The status of the deployment.
+    # @!attribute [rw] resource_group
+    #   The resource group of the deployment.
     #   @return [String]
+    #
+    # @!attribute [rw] deleted_at
+    #   The time the deployment was deleted.
+    #   @return [Time]
     #
     # @!attribute [rw] tags
     #   Information about the tags attached to a deployment.
     #   @return [Hash<String,String>]
     #
-    # @!attribute [rw] workload_name
-    #   The name of the workload.
+    # @!attribute [rw] deployment_arn
+    #   The Amazon Resource Name (ARN) of the deployment.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/launch-wizard-2018-05-10/DeploymentData AWS API Documentation
     #
     class DeploymentData < Struct.new(
-      :created_at,
-      :deleted_at,
-      :deployment_arn,
-      :id,
       :name,
+      :id,
+      :workload_name,
       :pattern_name,
-      :resource_group,
-      :specifications,
       :status,
+      :created_at,
+      :modified_at,
+      :specifications,
+      :resource_group,
+      :deleted_at,
       :tags,
-      :workload_name)
+      :deployment_arn)
       SENSITIVE = [:specifications]
       include Aws::Structure
     end
 
     # A summary of the deployment data.
     #
-    # @!attribute [rw] created_at
-    #   The time the deployment was created.
-    #   @return [Time]
+    # @!attribute [rw] name
+    #   The name of the deployment
+    #   @return [String]
     #
     # @!attribute [rw] id
     #   The ID of the deployment.
     #   @return [String]
     #
-    # @!attribute [rw] name
-    #   The name of the deployment
+    # @!attribute [rw] workload_name
+    #   The name of the workload.
     #   @return [String]
     #
     # @!attribute [rw] pattern_name
@@ -237,31 +242,36 @@ module Aws::LaunchWizard
     #   The status of the deployment.
     #   @return [String]
     #
-    # @!attribute [rw] workload_name
-    #   The name of the workload.
-    #   @return [String]
+    # @!attribute [rw] created_at
+    #   The time the deployment was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] modified_at
+    #   The time the deployment was last modified.
+    #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/launch-wizard-2018-05-10/DeploymentDataSummary AWS API Documentation
     #
     class DeploymentDataSummary < Struct.new(
-      :created_at,
-      :id,
       :name,
+      :id,
+      :workload_name,
       :pattern_name,
       :status,
-      :workload_name)
+      :created_at,
+      :modified_at)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # A summary of the deployment event data.
     #
-    # @!attribute [rw] description
-    #   The description of the deployment event.
-    #   @return [String]
-    #
     # @!attribute [rw] name
     #   The name of the deployment event.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the deployment event.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -279,8 +289,8 @@ module Aws::LaunchWizard
     # @see http://docs.aws.amazon.com/goto/WebAPI/launch-wizard-2018-05-10/DeploymentEventDataSummary AWS API Documentation
     #
     class DeploymentEventDataSummary < Struct.new(
-      :description,
       :name,
+      :description,
       :status,
       :status_reason,
       :timestamp)
@@ -312,36 +322,92 @@ module Aws::LaunchWizard
       include Aws::Structure
     end
 
-    # A field that details a specification of a deployment pattern.
+    # Describes a deployment pattern version summary.
     #
-    # @!attribute [rw] allowed_values
-    #   The allowed values of the deployment specification.
-    #   @return [Array<String>]
-    #
-    # @!attribute [rw] conditionals
-    #   The conditionals used for the deployment specification.
-    #   @return [Array<Types::DeploymentConditionalField>]
+    # @!attribute [rw] deployment_pattern_version_name
+    #   The name of the deployment pattern version.
+    #   @return [String]
     #
     # @!attribute [rw] description
-    #   The description of the deployment specification.
+    #   The description of the deployment pattern version.
     #   @return [String]
+    #
+    # @!attribute [rw] documentation_url
+    #   The URL of the documentation for the deployment pattern version.
+    #   @return [String]
+    #
+    # @!attribute [rw] workload_name
+    #   The name of the workload.
+    #   @return [String]
+    #
+    # @!attribute [rw] deployment_pattern_name
+    #   The name of the deployment pattern.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/launch-wizard-2018-05-10/DeploymentPatternVersionDataSummary AWS API Documentation
+    #
+    class DeploymentPatternVersionDataSummary < Struct.new(
+      :deployment_pattern_version_name,
+      :description,
+      :documentation_url,
+      :workload_name,
+      :deployment_pattern_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A filter for deployment pattern versions. Use this filter to specify
+    # criteria for querying deployment pattern versions in Launch Wizard.
+    #
+    # @!attribute [rw] name
+    #   The name of the filter attribute. Specifies which attribute to
+    #   filter on when querying deployment pattern versions.
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   The values to filter by. Contains the specific values to match
+    #   against when filtering deployment pattern versions.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/launch-wizard-2018-05-10/DeploymentPatternVersionFilter AWS API Documentation
+    #
+    class DeploymentPatternVersionFilter < Struct.new(
+      :name,
+      :values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A field that details a specification of a deployment pattern.
     #
     # @!attribute [rw] name
     #   The name of the deployment specification.
     #   @return [String]
     #
+    # @!attribute [rw] description
+    #   The description of the deployment specification.
+    #   @return [String]
+    #
+    # @!attribute [rw] allowed_values
+    #   The allowed values of the deployment specification.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] required
     #   Indicates if the deployment specification is required.
     #   @return [String]
     #
+    # @!attribute [rw] conditionals
+    #   The conditionals used for the deployment specification.
+    #   @return [Array<Types::DeploymentConditionalField>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/launch-wizard-2018-05-10/DeploymentSpecificationsField AWS API Documentation
     #
     class DeploymentSpecificationsField < Struct.new(
-      :allowed_values,
-      :conditionals,
-      :description,
       :name,
-      :required)
+      :description,
+      :allowed_values,
+      :required,
+      :conditionals)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -370,19 +436,64 @@ module Aws::LaunchWizard
       include Aws::Structure
     end
 
-    # @!attribute [rw] deployment_pattern_name
-    #   The name of the deployment pattern.
+    # @!attribute [rw] workload_name
+    #   The name of the workload. You can use the [ `ListWorkloads` ][1]
+    #   operation to discover supported values for this parameter.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/launchwizard/latest/APIReference/API_ListWorkloads.html
     #   @return [String]
     #
+    # @!attribute [rw] deployment_pattern_name
+    #   The name of the deployment pattern. You can use the [
+    #   `ListWorkloadDeploymentPatterns` ][1] operation to discover
+    #   supported values for this parameter.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/launchwizard/latest/APIReference/API_ListWorkloadDeploymentPatterns.html
+    #   @return [String]
+    #
+    # @!attribute [rw] deployment_pattern_version_name
+    #   The name of the deployment pattern version.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/launch-wizard-2018-05-10/GetDeploymentPatternVersionInput AWS API Documentation
+    #
+    class GetDeploymentPatternVersionInput < Struct.new(
+      :workload_name,
+      :deployment_pattern_name,
+      :deployment_pattern_version_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] deployment_pattern_version
+    #   The deployment pattern version.
+    #   @return [Types::DeploymentPatternVersionDataSummary]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/launch-wizard-2018-05-10/GetDeploymentPatternVersionOutput AWS API Documentation
+    #
+    class GetDeploymentPatternVersionOutput < Struct.new(
+      :deployment_pattern_version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] workload_name
     #   The name of the workload.
+    #   @return [String]
+    #
+    # @!attribute [rw] deployment_pattern_name
+    #   The name of the deployment pattern.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/launch-wizard-2018-05-10/GetWorkloadDeploymentPatternInput AWS API Documentation
     #
     class GetWorkloadDeploymentPatternInput < Struct.new(
-      :deployment_pattern_name,
-      :workload_name)
+      :workload_name,
+      :deployment_pattern_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -486,6 +597,66 @@ module Aws::LaunchWizard
       include Aws::Structure
     end
 
+    # @!attribute [rw] workload_name
+    #   The name of the workload. You can use the [ `ListWorkloads` ][1]
+    #   operation to discover supported values for this parameter.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/launchwizard/latest/APIReference/API_ListWorkloads.html
+    #   @return [String]
+    #
+    # @!attribute [rw] deployment_pattern_name
+    #   The name of the deployment pattern. You can use the [
+    #   `ListWorkloadDeploymentPatterns` ][1] operation to discover
+    #   supported values for this parameter.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/launchwizard/latest/APIReference/API_ListWorkloadDeploymentPatterns.html
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of deployment pattern versions to list.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   Filters to apply when listing deployment pattern versions.
+    #   @return [Array<Types::DeploymentPatternVersionFilter>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/launch-wizard-2018-05-10/ListDeploymentPatternVersionsInput AWS API Documentation
+    #
+    class ListDeploymentPatternVersionsInput < Struct.new(
+      :workload_name,
+      :deployment_pattern_name,
+      :max_results,
+      :next_token,
+      :filters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] deployment_pattern_versions
+    #   The deployment pattern versions.
+    #   @return [Array<Types::DeploymentPatternVersionDataSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/launch-wizard-2018-05-10/ListDeploymentPatternVersionsOutput AWS API Documentation
+    #
+    class ListDeploymentPatternVersionsOutput < Struct.new(
+      :deployment_pattern_versions,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] filters
     #   Filters to scope the results. The following filters are supported:
     #
@@ -560,6 +731,10 @@ module Aws::LaunchWizard
       include Aws::Structure
     end
 
+    # @!attribute [rw] workload_name
+    #   The name of the workload.
+    #   @return [String]
+    #
     # @!attribute [rw] max_results
     #   The maximum number of items to return for this request. To get the
     #   next page of items, make another request with the token returned in
@@ -572,34 +747,30 @@ module Aws::LaunchWizard
     #   request.
     #   @return [String]
     #
-    # @!attribute [rw] workload_name
-    #   The name of the workload.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/launch-wizard-2018-05-10/ListWorkloadDeploymentPatternsInput AWS API Documentation
     #
     class ListWorkloadDeploymentPatternsInput < Struct.new(
+      :workload_name,
       :max_results,
-      :next_token,
-      :workload_name)
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
 
+    # @!attribute [rw] workload_deployment_patterns
+    #   Describes the workload deployment patterns.
+    #   @return [Array<Types::WorkloadDeploymentPatternDataSummary>]
+    #
     # @!attribute [rw] next_token
     #   The token to include in another request to get the next page of
     #   items. This value is `null` when there are no more items to return.
     #   @return [String]
     #
-    # @!attribute [rw] workload_deployment_patterns
-    #   Describes the workload deployment patterns.
-    #   @return [Array<Types::WorkloadDeploymentPatternDataSummary>]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/launch-wizard-2018-05-10/ListWorkloadDeploymentPatternsOutput AWS API Documentation
     #
     class ListWorkloadDeploymentPatternsOutput < Struct.new(
-      :next_token,
-      :workload_deployment_patterns)
+      :workload_deployment_patterns,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -625,20 +796,20 @@ module Aws::LaunchWizard
       include Aws::Structure
     end
 
+    # @!attribute [rw] workloads
+    #   Information about the workloads.
+    #   @return [Array<Types::WorkloadDataSummary>]
+    #
     # @!attribute [rw] next_token
     #   The token to include in another request to get the next page of
     #   items. This value is `null` when there are no more items to return.
     #   @return [String]
     #
-    # @!attribute [rw] workloads
-    #   Information about the workloads.
-    #   @return [Array<Types::WorkloadDataSummary>]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/launch-wizard-2018-05-10/ListWorkloadsOutput AWS API Documentation
     #
     class ListWorkloadsOutput < Struct.new(
-      :next_token,
-      :workloads)
+      :workloads,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -712,6 +883,69 @@ module Aws::LaunchWizard
     #
     class UntagResourceOutput < Aws::EmptyStructure; end
 
+    # @!attribute [rw] deployment_id
+    #   The ID of the deployment.
+    #   @return [String]
+    #
+    # @!attribute [rw] specifications
+    #   The settings specified for the deployment. These settings define how
+    #   to deploy and configure your resources created by the deployment.
+    #   For more information about the specifications required for creating
+    #   a deployment for a SAP workload, see [SAP deployment
+    #   specifications][1]. To retrieve the specifications required to
+    #   create a deployment for other workloads, use the [
+    #   `GetWorkloadDeploymentPattern` ][2] operation.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/launchwizard/latest/APIReference/launch-wizard-specifications-sap.html
+    #   [2]: https://docs.aws.amazon.com/launchwizard/latest/APIReference/API_GetWorkloadDeploymentPattern.html
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] workload_version_name
+    #   The name of the workload version.
+    #   @return [String]
+    #
+    # @!attribute [rw] deployment_pattern_version_name
+    #   The name of the deployment pattern version.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] force
+    #   Forces the update even if validation warnings are present.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/launch-wizard-2018-05-10/UpdateDeploymentInput AWS API Documentation
+    #
+    class UpdateDeploymentInput < Struct.new(
+      :deployment_id,
+      :specifications,
+      :workload_version_name,
+      :deployment_pattern_version_name,
+      :dry_run,
+      :force)
+      SENSITIVE = [:specifications]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] deployment
+    #   The deployment.
+    #   @return [Types::DeploymentDataSummary]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/launch-wizard-2018-05-10/UpdateDeploymentOutput AWS API Documentation
+    #
+    class UpdateDeploymentOutput < Struct.new(
+      :deployment)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The input fails to satisfy the constraints specified by an Amazon Web
     # Services service.
     #
@@ -728,12 +962,22 @@ module Aws::LaunchWizard
 
     # Describes a workload.
     #
-    # @!attribute [rw] description
-    #   The description of a workload.
+    # @!attribute [rw] workload_name
+    #   The name of the workload.
     #   @return [String]
     #
     # @!attribute [rw] display_name
     #   The display name of a workload.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of a workload.
+    #
+    #   *You can list deployments in the `DISABLED` status.*
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of a workload.
     #   @return [String]
     #
     # @!attribute [rw] documentation_url
@@ -744,63 +988,80 @@ module Aws::LaunchWizard
     #   The URL of a workload icon.
     #   @return [String]
     #
-    # @!attribute [rw] status
-    #   The status of a workload.
-    #   @return [String]
-    #
     # @!attribute [rw] status_message
     #   The message about a workload's status.
-    #   @return [String]
-    #
-    # @!attribute [rw] workload_name
-    #   The name of the workload.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/launch-wizard-2018-05-10/WorkloadData AWS API Documentation
     #
     class WorkloadData < Struct.new(
-      :description,
+      :workload_name,
       :display_name,
+      :status,
+      :description,
       :documentation_url,
       :icon_url,
-      :status,
-      :status_message,
-      :workload_name)
+      :status_message)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # Describes workload data.
     #
+    # @!attribute [rw] workload_name
+    #   The name of the workload.
+    #   @return [String]
+    #
     # @!attribute [rw] display_name
     #   The display name of the workload data.
     #   @return [String]
     #
-    # @!attribute [rw] workload_name
-    #   The name of the workload.
+    # @!attribute [rw] status
+    #   The status of the workload.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/launch-wizard-2018-05-10/WorkloadDataSummary AWS API Documentation
     #
     class WorkloadDataSummary < Struct.new(
+      :workload_name,
       :display_name,
-      :workload_name)
+      :status)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # The data that details a workload deployment pattern.
     #
+    # @!attribute [rw] workload_name
+    #   The workload name of the deployment pattern.
+    #   @return [String]
+    #
     # @!attribute [rw] deployment_pattern_name
     #   The name of the deployment pattern.
+    #   @return [String]
+    #
+    # @!attribute [rw] workload_version_name
+    #   The workload version name of the deployment pattern.
+    #   @return [String]
+    #
+    # @!attribute [rw] deployment_pattern_version_name
+    #   The version name of the deployment pattern.
+    #   @return [String]
+    #
+    # @!attribute [rw] display_name
+    #   The display name of the deployment pattern.
     #   @return [String]
     #
     # @!attribute [rw] description
     #   The description of the deployment pattern.
     #   @return [String]
     #
-    # @!attribute [rw] display_name
-    #   The display name of the deployment pattern.
+    # @!attribute [rw] status
+    #   The status of the deployment pattern.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_message
+    #   The status message of the deployment pattern.
     #   @return [String]
     #
     # @!attribute [rw] specifications
@@ -818,49 +1079,46 @@ module Aws::LaunchWizard
     #   [2]: https://docs.aws.amazon.com/launchwizard/latest/APIReference/API_GetWorkloadDeploymentPattern.html
     #   @return [Array<Types::DeploymentSpecificationsField>]
     #
-    # @!attribute [rw] status
-    #   The status of the deployment pattern.
-    #   @return [String]
-    #
-    # @!attribute [rw] status_message
-    #   The status message of the deployment pattern.
-    #   @return [String]
-    #
-    # @!attribute [rw] workload_name
-    #   The workload name of the deployment pattern.
-    #   @return [String]
-    #
-    # @!attribute [rw] workload_version_name
-    #   The workload version name of the deployment pattern.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/launch-wizard-2018-05-10/WorkloadDeploymentPatternData AWS API Documentation
     #
     class WorkloadDeploymentPatternData < Struct.new(
+      :workload_name,
       :deployment_pattern_name,
-      :description,
+      :workload_version_name,
+      :deployment_pattern_version_name,
       :display_name,
-      :specifications,
+      :description,
       :status,
       :status_message,
-      :workload_name,
-      :workload_version_name)
+      :specifications)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # Describes a workload deployment pattern.
     #
+    # @!attribute [rw] workload_name
+    #   The name of the workload.
+    #   @return [String]
+    #
     # @!attribute [rw] deployment_pattern_name
     #   The name of a workload deployment pattern.
     #   @return [String]
     #
-    # @!attribute [rw] description
-    #   The description of a workload deployment pattern.
+    # @!attribute [rw] workload_version_name
+    #   The name of the workload deployment pattern version.
+    #   @return [String]
+    #
+    # @!attribute [rw] deployment_pattern_version_name
+    #   The version name of a workload deployment pattern.
     #   @return [String]
     #
     # @!attribute [rw] display_name
     #   The display name of a workload deployment pattern.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of a workload deployment pattern.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -871,24 +1129,17 @@ module Aws::LaunchWizard
     #   A message about a workload deployment pattern's status.
     #   @return [String]
     #
-    # @!attribute [rw] workload_name
-    #   The name of the workload.
-    #   @return [String]
-    #
-    # @!attribute [rw] workload_version_name
-    #   The name of the workload deployment pattern version.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/launch-wizard-2018-05-10/WorkloadDeploymentPatternDataSummary AWS API Documentation
     #
     class WorkloadDeploymentPatternDataSummary < Struct.new(
-      :deployment_pattern_name,
-      :description,
-      :display_name,
-      :status,
-      :status_message,
       :workload_name,
-      :workload_version_name)
+      :deployment_pattern_name,
+      :workload_version_name,
+      :deployment_pattern_version_name,
+      :display_name,
+      :description,
+      :status,
+      :status_message)
       SENSITIVE = []
       include Aws::Structure
     end

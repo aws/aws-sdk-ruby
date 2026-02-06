@@ -594,8 +594,8 @@ module Aws::MediaConnect
     #   @return [Integer]
     #
     # @!attribute [rw] ndi_program_name
-    #   A suffix for the names of the NDI sources that the flow creates. If
-    #   a custom name isn't specified, MediaConnect uses the output name.
+    #   A suffix for the name of the NDI® sender that the flow creates. If a
+    #   custom name isn't specified, MediaConnect uses the output name.
     #   @return [String]
     #
     # @!attribute [rw] output_tags
@@ -1271,14 +1271,21 @@ module Aws::MediaConnect
     #
     # @!attribute [rw] flow_size
     #   Determines the processing capacity and feature set of the flow. Set
-    #   this optional parameter to `LARGE` if you want to enable NDI outputs
-    #   on the flow.
+    #   this optional parameter to `LARGE` if you want to enable NDI sources
+    #   or outputs on the flow.
     #   @return [String]
     #
     # @!attribute [rw] ndi_config
-    #   Specifies the configuration settings for NDI outputs. Required when
-    #   the flow includes NDI outputs.
+    #   Specifies the configuration settings for a flow's NDI source or
+    #   output. Required when the flow includes an NDI source or output.
     #   @return [Types::NdiConfig]
+    #
+    # @!attribute [rw] encoding_config
+    #   The encoding configuration to apply to the NDI® source when
+    #   transcoding it to a transport stream for downstream distribution.
+    #   You can choose between several predefined encoding profiles based on
+    #   common use cases.
+    #   @return [Types::EncodingConfig]
     #
     # @!attribute [rw] flow_tags
     #   The key-value pairs that can be used to tag and organize the flow.
@@ -1300,6 +1307,7 @@ module Aws::MediaConnect
       :source_monitoring_config,
       :flow_size,
       :ndi_config,
+      :encoding_config,
       :flow_tags)
       SENSITIVE = []
       include Aws::Structure
@@ -1394,8 +1402,8 @@ module Aws::MediaConnect
     #   @return [String]
     #
     # @!attribute [rw] region_name
-    #   The AWS Region for the router input. Defaults to the current region
-    #   if not specified.
+    #   The Amazon Web Services Region for the router input. Defaults to the
+    #   current region if not specified.
     #   @return [String]
     #
     # @!attribute [rw] availability_zone
@@ -1464,8 +1472,8 @@ module Aws::MediaConnect
     #   @return [Types::RouterNetworkInterfaceConfiguration]
     #
     # @!attribute [rw] region_name
-    #   The AWS Region for the router network interface. Defaults to the
-    #   current region if not specified.
+    #   The Amazon Web Services Region for the router network interface.
+    #   Defaults to the current region if not specified.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -1527,8 +1535,8 @@ module Aws::MediaConnect
     #   @return [String]
     #
     # @!attribute [rw] region_name
-    #   The AWS Region for the router output. Defaults to the current region
-    #   if not specified.
+    #   The Amazon Web Services Region for the router output. Defaults to
+    #   the current region if not specified.
     #   @return [String]
     #
     # @!attribute [rw] availability_zone
@@ -1899,13 +1907,21 @@ module Aws::MediaConnect
     #   Information about the flow's transport media.
     #   @return [Types::TransportMediaInfo]
     #
+    # @!attribute [rw] ndi_info
+    #   The NDI® specific information about the flow's source. This
+    #   includes the current active NDI sender, a list of all discovered NDI
+    #   senders, the associated media streams for the active NDI sender, and
+    #   any relevant status messages.
+    #   @return [Types::NdiSourceMetadataInfo]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/DescribeFlowSourceMetadataResponse AWS API Documentation
     #
     class DescribeFlowSourceMetadataResponse < Struct.new(
       :flow_arn,
       :messages,
       :timestamp,
-      :transport_media_info)
+      :transport_media_info,
+      :ndi_info)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2123,6 +2139,37 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
+    # The encoding configuration to apply to the NDI® source when
+    # transcoding it to a transport stream for downstream distribution. You
+    # can choose between several predefined encoding profiles based on
+    # common use cases.
+    #
+    # @!attribute [rw] encoding_profile
+    #   The encoding profile to use when transcoding the NDI source content
+    #   to a transport stream. You can change this value while the flow is
+    #   running.
+    #   @return [String]
+    #
+    # @!attribute [rw] video_max_bitrate
+    #   The maximum video bitrate to use when transcoding the NDI source to
+    #   a transport stream. This parameter enables you to override the
+    #   default video bitrate within the encoding profile's supported
+    #   range.
+    #
+    #   The supported range is 10,000,000 - 50,000,000 bits per second
+    #   (bps). If you don't specify a value, MediaConnect uses the default
+    #   value of 20,000,000 bps.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/EncodingConfig AWS API Documentation
+    #
+    class EncodingConfig < Struct.new(
+      :encoding_profile,
+      :video_max_bitrate)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A collection of parameters that determine how MediaConnect will
     # convert the content. These fields only apply to outputs on flows that
     # have a CDI source.
@@ -2181,7 +2228,7 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
-    # Information about the encryption of the flow.
+    # Encryption information.
     #
     # @!attribute [rw] algorithm
     #   The type of algorithm that is used for the encryption (such as
@@ -2532,15 +2579,18 @@ module Aws::MediaConnect
     #   @return [Types::MonitoringConfig]
     #
     # @!attribute [rw] flow_size
-    #   Determines the processing capacity and feature set of the flow. Set
-    #   this optional parameter to LARGE if you want to enable NDI outputs
-    #   on the flow.
+    #   Determines the processing capacity and feature set of the flow.
     #   @return [String]
     #
     # @!attribute [rw] ndi_config
-    #   Specifies the configuration settings for NDI outputs. Required when
-    #   the flow includes NDI outputs.
+    #   Specifies the configuration settings for a flow's NDI source or
+    #   output. Required when the flow includes an NDI source or output.
     #   @return [Types::NdiConfig]
+    #
+    # @!attribute [rw] encoding_config
+    #   The encoding configuration to apply to the NDI® source when
+    #   transcoding it to a transport stream for downstream distribution.
+    #   @return [Types::EncodingConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/Flow AWS API Documentation
     #
@@ -2561,7 +2611,8 @@ module Aws::MediaConnect
       :maintenance,
       :source_monitoring_config,
       :flow_size,
-      :ndi_config)
+      :ndi_config,
+      :encoding_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2593,7 +2644,7 @@ module Aws::MediaConnect
     # @note FlowTransitEncryptionKeyConfiguration is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of FlowTransitEncryptionKeyConfiguration corresponding to the set member.
     #
     # @!attribute [rw] secrets_manager
-    #   The configuration settings for transit encryption using AWS Secrets
+    #   The configuration settings for transit encryption using Secrets
     #   Manager, including the secret ARN and role ARN.
     #   @return [Types::SecretsManagerEncryptionKeyConfiguration]
     #
@@ -4045,7 +4096,7 @@ module Aws::MediaConnect
     #   @return [Integer]
     #
     # @!attribute [rw] region_name
-    #   The AWS Region where the router input is located.
+    #   The Amazon Web Services Region where the router input is located.
     #   @return [String]
     #
     # @!attribute [rw] availability_zone
@@ -4143,7 +4194,8 @@ module Aws::MediaConnect
     #   @return [String]
     #
     # @!attribute [rw] region_name
-    #   The AWS Region where the router network interface is located.
+    #   The Amazon Web Services Region where the router network interface is
+    #   located.
     #   @return [String]
     #
     # @!attribute [rw] created_at
@@ -4201,7 +4253,7 @@ module Aws::MediaConnect
     #   @return [String]
     #
     # @!attribute [rw] region_name
-    #   The AWS Region where the router output is located.
+    #   The AAmazon Web Services Region where the router output is located.
     #   @return [String]
     #
     # @!attribute [rw] availability_zone
@@ -4457,8 +4509,7 @@ module Aws::MediaConnect
     # The encryption configuration that defines how content is encrypted
     # during transit between MediaConnect Router and MediaLive. This
     # configuration determines whether encryption keys are automatically
-    # managed by the service or manually managed through AWS Secrets
-    # Manager.
+    # managed by the service or manually managed through Secrets Manager.
     #
     # @!attribute [rw] encryption_key_type
     #   The type of encryption key to use for MediaLive transit encryption.
@@ -4484,7 +4535,7 @@ module Aws::MediaConnect
     # @note MediaLiveTransitEncryptionKeyConfiguration is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of MediaLiveTransitEncryptionKeyConfiguration corresponding to the set member.
     #
     # @!attribute [rw] secrets_manager
-    #   The configuration settings for transit encryption using AWS Secrets
+    #   The configuration settings for transit encryption using Secrets
     #   Manager, including the secret ARN and role ARN.
     #   @return [Types::SecretsManagerEncryptionKeyConfiguration]
     #
@@ -4919,12 +4970,14 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
-    # Specifies the configuration settings for NDI outputs. Required when
-    # the flow includes NDI outputs.
+    # Specifies the configuration settings for NDI sources and outputs.
     #
     # @!attribute [rw] ndi_state
-    #   A setting that controls whether NDI outputs can be used in the flow.
-    #   Must be ENABLED to add NDI outputs. Default is DISABLED.
+    #   A setting that controls whether NDI® sources or outputs can be used
+    #   in the flow.
+    #
+    #   The default value is `DISABLED`. This value must be set as `ENABLED`
+    #   for your flow to support NDI sources or outputs.
     #   @return [String]
     #
     # @!attribute [rw] machine_name
@@ -4949,7 +5002,7 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
-    # Specifies the configuration settings for individual NDI discovery
+    # Specifies the configuration settings for individual NDI® discovery
     # servers. A maximum of 3 servers is allowed.
     #
     # @!attribute [rw] discovery_server_address
@@ -4972,6 +5025,148 @@ module Aws::MediaConnect
       :discovery_server_address,
       :discovery_server_port,
       :vpc_interface_adapter)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Metadata about the audio and video media that is part of the NDI®
+    # source content. This includes details about the individual media
+    # streams.
+    #
+    # @!attribute [rw] streams
+    #   A list of the individual media streams that make up the NDI source.
+    #   This includes details about each stream's codec, resolution, frame
+    #   rate, audio channels, and other parameters.
+    #   @return [Array<Types::NdiMediaStreamInfo>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/NdiMediaInfo AWS API Documentation
+    #
+    class NdiMediaInfo < Struct.new(
+      :streams)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Detailed information about a single media stream that is part of an
+    # NDI® source. This includes details about the stream type, codec,
+    # resolution, frame rate, audio channels, and sample rate.
+    #
+    # @!attribute [rw] stream_type
+    #   The type of media stream (for example, `Video` or `Audio`).
+    #   @return [String]
+    #
+    # @!attribute [rw] codec
+    #   The codec used for the media stream. For NDI sources, use
+    #   `speed-hq`.
+    #   @return [String]
+    #
+    # @!attribute [rw] stream_id
+    #   A unique identifier for the media stream.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] scan_mode
+    #   The method used to display video frames. Used when the `streamType`
+    #   is `Video`.
+    #   @return [String]
+    #
+    # @!attribute [rw] frame_resolution
+    #   The width and height dimensions of the video frame in pixels. Used
+    #   when the `streamType` is `Video`.
+    #   @return [Types::FrameResolution]
+    #
+    # @!attribute [rw] frame_rate
+    #   The number of video frames displayed per second. Used when the
+    #   `streamType` is `Video`.
+    #   @return [String]
+    #
+    # @!attribute [rw] channels
+    #   The number of audio channels in the stream. Used when the
+    #   `streamType` is `Audio`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] sample_rate
+    #   The number of audio samples captured per second, measured in
+    #   kilohertz (kHz). Used when the `streamType` is `Audio`.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/NdiMediaStreamInfo AWS API Documentation
+    #
+    class NdiMediaStreamInfo < Struct.new(
+      :stream_type,
+      :codec,
+      :stream_id,
+      :scan_mode,
+      :frame_resolution,
+      :frame_rate,
+      :channels,
+      :sample_rate)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about a single NDI® sender, including its name.
+    #
+    # @!attribute [rw] source_name
+    #   The name of the upstream NDI sender.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/NdiSourceInfo AWS API Documentation
+    #
+    class NdiSourceInfo < Struct.new(
+      :source_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Comprehensive information about the NDI® source that's associated
+    # with a flow. This includes the currently active NDI source, a list of
+    # all discovered NDI senders, metadata about the media streams, and any
+    # relevant status messages.
+    #
+    # @!attribute [rw] active_source
+    #   The connected NDI sender that's currently sending source content to
+    #   the flow's NDI source.
+    #   @return [Types::NdiSourceInfo]
+    #
+    # @!attribute [rw] discovered_sources
+    #   A list of the available upstream NDI senders aggregated from all of
+    #   your configured discovery servers.
+    #   @return [Array<Types::NdiSourceInfo>]
+    #
+    # @!attribute [rw] media_info
+    #   Detailed information about the media streams (video, audio, and so
+    #   on) that are part of the active NDI source.
+    #   @return [Types::NdiMediaInfo]
+    #
+    # @!attribute [rw] messages
+    #   Any status messages or error codes related to the NDI source and its
+    #   metadata.
+    #   @return [Array<Types::MessageDetail>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/NdiSourceMetadataInfo AWS API Documentation
+    #
+    class NdiSourceMetadataInfo < Struct.new(
+      :active_source,
+      :discovered_sources,
+      :media_info,
+      :messages)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The settings for the NDI® source. This includes the exact name of the
+    # upstream NDI sender that you want to connect to your source.
+    #
+    # @!attribute [rw] source_name
+    #   The exact name of an existing NDI sender that's registered with
+    #   your discovery server. If included, the format of this name must be
+    #   `MACHINENAME (ProgramName)`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/NdiSourceSettings AWS API Documentation
+    #
+    class NdiSourceSettings < Struct.new(
+      :source_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5135,7 +5330,8 @@ module Aws::MediaConnect
     #     this value shows the address of the connected receiver.
     #
     #   * Peer IP addresses aren't available for entitlements, managed
-    #     MediaLive outputs, NDI outputs, and CDI/ST2110 outputs.
+    #     MediaLive outputs, NDI® sources and outputs, and CDI/ST2110
+    #     outputs.
     #
     #   * The peer IP address might not be visible for flows that haven't
     #     been started yet, or flows that were started before May 2025. In
@@ -5800,7 +5996,7 @@ module Aws::MediaConnect
     #   @return [Integer]
     #
     # @!attribute [rw] region_name
-    #   The AWS Region where the router input is located.
+    #   The Amazon Web Services Region where the router input is located.
     #   @return [String]
     #
     # @!attribute [rw] availability_zone
@@ -6223,7 +6419,7 @@ module Aws::MediaConnect
     # @note RouterInputTransitEncryptionKeyConfiguration is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of RouterInputTransitEncryptionKeyConfiguration corresponding to the set member.
     #
     # @!attribute [rw] secrets_manager
-    #   The configuration settings for transit encryption using AWS Secrets
+    #   The configuration settings for transit encryption using Secrets
     #   Manager, including the secret ARN and role ARN.
     #   @return [Types::SecretsManagerEncryptionKeyConfiguration]
     #
@@ -6284,7 +6480,8 @@ module Aws::MediaConnect
     #   @return [Integer]
     #
     # @!attribute [rw] region_name
-    #   The AWS Region where the router network interface is located.
+    #   The Amazon Web Services Region where the router network interface is
+    #   located.
     #   @return [String]
     #
     # @!attribute [rw] created_at
@@ -6433,7 +6630,7 @@ module Aws::MediaConnect
     #   @return [String]
     #
     # @!attribute [rw] region_name
-    #   The AWS Region where the router output is located.
+    #   The Amazon Web Services Region where the router output is located.
     #   @return [String]
     #
     # @!attribute [rw] availability_zone
@@ -6799,16 +6996,15 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
-    # The configuration settings for transit encryption using AWS Secrets
+    # The configuration settings for transit encryption using Secrets
     # Manager, including the secret ARN and role ARN.
     #
     # @!attribute [rw] secret_arn
-    #   The ARN of the AWS Secrets Manager secret used for transit
-    #   encryption.
+    #   The ARN of the Secrets Manager secret used for transit encryption.
     #   @return [String]
     #
     # @!attribute [rw] role_arn
-    #   The ARN of the IAM role assumed by MediaConnect to access the AWS
+    #   The ARN of the IAM role assumed by MediaConnect to access the
     #   Secrets Manager secret.
     #   @return [String]
     #
@@ -6958,6 +7154,11 @@ module Aws::MediaConnect
     #   bridge.
     #   @return [Types::SetGatewayBridgeSourceRequest]
     #
+    # @!attribute [rw] ndi_source_settings
+    #   The settings for the NDI® source. This includes the exact name of
+    #   the upstream NDI sender that you want to connect to your source.
+    #   @return [Types::NdiSourceSettings]
+    #
     # @!attribute [rw] source_tags
     #   The key-value pairs that can be used to tag and organize the source.
     #   @return [Hash<String,String>]
@@ -6995,6 +7196,7 @@ module Aws::MediaConnect
       :vpc_interface_name,
       :whitelist_cidr,
       :gateway_bridge_source,
+      :ndi_source_settings,
       :source_tags,
       :router_integration_state,
       :router_integration_transit_decryption)
@@ -7867,9 +8069,14 @@ module Aws::MediaConnect
     #   @return [Integer]
     #
     # @!attribute [rw] ndi_program_name
-    #   A suffix for the names of the NDI sources that the flow creates. If
-    #   a custom name isn't specified, MediaConnect uses the output name.
+    #   A suffix for the name of the NDI® sender that the flow creates. If a
+    #   custom name isn't specified, MediaConnect uses the output name.
     #   @return [String]
+    #
+    # @!attribute [rw] ndi_source_settings
+    #   The settings for the NDI source. This includes the exact name of the
+    #   upstream NDI sender that you want to connect to your source.
+    #   @return [Types::NdiSourceSettings]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/Transport AWS API Documentation
     #
@@ -7888,7 +8095,8 @@ module Aws::MediaConnect
       :source_listener_port,
       :stream_id,
       :ndi_speed_hq_quality,
-      :ndi_program_name)
+      :ndi_program_name,
+      :ndi_source_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8634,8 +8842,8 @@ module Aws::MediaConnect
     #   @return [String]
     #
     # @!attribute [rw] ndi_program_name
-    #   A suffix for the names of the NDI sources that the flow creates. If
-    #   a custom name isn't specified, MediaConnect uses the output name.
+    #   A suffix for the name of the NDI® sender that the flow creates. If a
+    #   custom name isn't specified, MediaConnect uses the output name.
     #   @return [String]
     #
     # @!attribute [rw] ndi_speed_hq_quality
@@ -8715,13 +8923,20 @@ module Aws::MediaConnect
     #   @return [Types::MonitoringConfig]
     #
     # @!attribute [rw] ndi_config
-    #   Specifies the configuration settings for NDI outputs. Required when
-    #   the flow includes NDI outputs.
+    #   Specifies the configuration settings for a flow's NDI source or
+    #   output. Required when the flow includes an NDI source or output.
     #   @return [Types::NdiConfig]
     #
     # @!attribute [rw] flow_size
     #   Determines the processing capacity and feature set of the flow.
     #   @return [String]
+    #
+    # @!attribute [rw] encoding_config
+    #   The encoding configuration to apply to the NDI® source when
+    #   transcoding it to a transport stream for downstream distribution.
+    #   You can choose between several predefined encoding profiles based on
+    #   common use cases.
+    #   @return [Types::EncodingConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/UpdateFlowRequest AWS API Documentation
     #
@@ -8731,7 +8946,8 @@ module Aws::MediaConnect
       :maintenance,
       :source_monitoring_config,
       :ndi_config,
-      :flow_size)
+      :flow_size,
+      :encoding_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8854,6 +9070,11 @@ module Aws::MediaConnect
     #   bridge.
     #   @return [Types::UpdateGatewayBridgeSourceRequest]
     #
+    # @!attribute [rw] ndi_source_settings
+    #   The settings for the NDI source. This includes the exact name of the
+    #   upstream NDI sender that you want to connect to your source.
+    #   @return [Types::NdiSourceSettings]
+    #
     # @!attribute [rw] router_integration_state
     #   Indicates whether to enable or disable router integration for this
     #   flow source.
@@ -8887,6 +9108,7 @@ module Aws::MediaConnect
       :vpc_interface_name,
       :whitelist_cidr,
       :gateway_bridge_source,
+      :ndi_source_settings,
       :router_integration_state,
       :router_integration_transit_decryption)
       SENSITIVE = []
@@ -8894,7 +9116,7 @@ module Aws::MediaConnect
     end
 
     # @!attribute [rw] flow_arn
-    #   The ARN of the flow that you was updated.
+    #   The ARN of the flow that you updated.
     #   @return [String]
     #
     # @!attribute [rw] source

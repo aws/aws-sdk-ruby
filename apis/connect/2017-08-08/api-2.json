@@ -1012,6 +1012,28 @@
         {"shape":"InternalServiceException"}
       ]
     },
+    "CreateTestCase":{
+      "name":"CreateTestCase",
+      "http":{
+        "method":"PUT",
+        "requestUri":"/test-cases/{InstanceId}"
+      },
+      "input":{"shape":"CreateTestCaseRequest"},
+      "output":{"shape":"CreateTestCaseResponse"},
+      "errors":[
+        {"shape":"DuplicateResourceException"},
+        {"shape":"InvalidTestCaseException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"InvalidRequestException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"IdempotencyException"},
+        {"shape":"ServiceQuotaExceededException"},
+        {"shape":"InternalServiceException"},
+        {"shape":"AccessDeniedException"}
+      ]
+    },
     "CreateTrafficDistributionGroup":{
       "name":"CreateTrafficDistributionGroup",
       "http":{
@@ -1586,6 +1608,23 @@
         {"shape":"InternalServiceException"}
       ]
     },
+    "DeleteTestCase":{
+      "name":"DeleteTestCase",
+      "http":{
+        "method":"DELETE",
+        "requestUri":"/test-cases/{InstanceId}/{TestCaseId}"
+      },
+      "input":{"shape":"DeleteTestCaseRequest"},
+      "output":{"shape":"DeleteTestCaseResponse"},
+      "errors":[
+        {"shape":"AccessDeniedException"},
+        {"shape":"InvalidRequestException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"InternalServiceException"}
+      ]
+    },
     "DeleteTrafficDistributionGroup":{
       "name":"DeleteTrafficDistributionGroup",
       "http":{
@@ -2135,6 +2174,23 @@
         {"shape":"ResourceNotFoundException"},
         {"shape":"ThrottlingException"},
         {"shape":"InternalServiceException"}
+      ]
+    },
+    "DescribeTestCase":{
+      "name":"DescribeTestCase",
+      "http":{
+        "method":"GET",
+        "requestUri":"/test-cases/{InstanceId}/{TestCaseId}"
+      },
+      "input":{"shape":"DescribeTestCaseRequest"},
+      "output":{"shape":"DescribeTestCaseResponse"},
+      "errors":[
+        {"shape":"InvalidParameterException"},
+        {"shape":"InvalidRequestException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"InternalServiceException"},
+        {"shape":"AccessDeniedException"}
       ]
     },
     "DescribeTrafficDistributionGroup":{
@@ -2743,6 +2799,23 @@
         {"shape":"ResourceNotFoundException"},
         {"shape":"ThrottlingException"},
         {"shape":"InternalServiceException"}
+      ]
+    },
+    "GetTestCaseExecutionSummary":{
+      "name":"GetTestCaseExecutionSummary",
+      "http":{
+        "method":"GET",
+        "requestUri":"/test-cases/{InstanceId}/{TestCaseId}/{TestCaseExecutionId}/summary"
+      },
+      "input":{"shape":"GetTestCaseExecutionSummaryRequest"},
+      "output":{"shape":"GetTestCaseExecutionSummaryResponse"},
+      "errors":[
+        {"shape":"InvalidParameterException"},
+        {"shape":"InvalidRequestException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"InternalServiceException"},
+        {"shape":"AccessDeniedException"}
       ]
     },
     "GetTrafficDistribution":{
@@ -3611,6 +3684,57 @@
         {"shape":"InternalServiceException"}
       ]
     },
+    "ListTestCaseExecutionRecords":{
+      "name":"ListTestCaseExecutionRecords",
+      "http":{
+        "method":"GET",
+        "requestUri":"/test-cases/{InstanceId}/{TestCaseId}/{TestCaseExecutionId}/records"
+      },
+      "input":{"shape":"ListTestCaseExecutionRecordsRequest"},
+      "output":{"shape":"ListTestCaseExecutionRecordsResponse"},
+      "errors":[
+        {"shape":"InvalidParameterException"},
+        {"shape":"InvalidRequestException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"InternalServiceException"},
+        {"shape":"AccessDeniedException"}
+      ]
+    },
+    "ListTestCaseExecutions":{
+      "name":"ListTestCaseExecutions",
+      "http":{
+        "method":"GET",
+        "requestUri":"/test-case-executions/{InstanceId}"
+      },
+      "input":{"shape":"ListTestCaseExecutionsRequest"},
+      "output":{"shape":"ListTestCaseExecutionsResponse"},
+      "errors":[
+        {"shape":"InvalidParameterException"},
+        {"shape":"InvalidRequestException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"InternalServiceException"},
+        {"shape":"AccessDeniedException"}
+      ]
+    },
+    "ListTestCases":{
+      "name":"ListTestCases",
+      "http":{
+        "method":"GET",
+        "requestUri":"/test-cases-summary/{InstanceId}"
+      },
+      "input":{"shape":"ListTestCasesRequest"},
+      "output":{"shape":"ListTestCasesResponse"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"AccessDeniedException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"InternalServiceException"}
+      ]
+    },
     "ListTrafficDistributionGroupUsers":{
       "name":"ListTrafficDistributionGroupUsers",
       "http":{
@@ -4202,6 +4326,23 @@
         {"shape":"InternalServiceException"}
       ]
     },
+    "SearchTestCases":{
+      "name":"SearchTestCases",
+      "http":{
+        "method":"POST",
+        "requestUri":"/search-test-cases"
+      },
+      "input":{"shape":"SearchTestCasesRequest"},
+      "output":{"shape":"SearchTestCasesResponse"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"AccessDeniedException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"InternalServiceException"}
+      ]
+    },
     "SearchUserHierarchyGroups":{
       "name":"SearchUserHierarchyGroups",
       "http":{
@@ -4541,6 +4682,24 @@
         {"shape":"InternalServiceException"}
       ]
     },
+    "StartTestCaseExecution":{
+      "name":"StartTestCaseExecution",
+      "http":{
+        "method":"PUT",
+        "requestUri":"/test-cases/{InstanceId}/{TestCaseId}/start-execution"
+      },
+      "input":{"shape":"StartTestCaseExecutionRequest"},
+      "output":{"shape":"StartTestCaseExecutionResponse"},
+      "errors":[
+        {"shape":"InvalidParameterException"},
+        {"shape":"InvalidRequestException"},
+        {"shape":"ServiceQuotaExceededException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"InternalServiceException"},
+        {"shape":"AccessDeniedException"}
+      ]
+    },
     "StartWebRTCContact":{
       "name":"StartWebRTCContact",
       "http":{
@@ -4619,6 +4778,23 @@
         {"shape":"InvalidParameterException"},
         {"shape":"ResourceNotFoundException"},
         {"shape":"InternalServiceException"}
+      ]
+    },
+    "StopTestCaseExecution":{
+      "name":"StopTestCaseExecution",
+      "http":{
+        "method":"POST",
+        "requestUri":"/test-cases/{InstanceId}/{TestCaseId}/{TestCaseExecutionId}/stop-execution"
+      },
+      "input":{"shape":"StopTestCaseExecutionRequest"},
+      "output":{"shape":"StopTestCaseExecutionResponse"},
+      "errors":[
+        {"shape":"InvalidParameterException"},
+        {"shape":"InvalidRequestException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"InternalServiceException"},
+        {"shape":"AccessDeniedException"}
       ]
     },
     "SubmitContactEvaluation":{
@@ -5461,6 +5637,25 @@
         {"shape":"ThrottlingException"},
         {"shape":"ServiceQuotaExceededException"},
         {"shape":"InternalServiceException"}
+      ]
+    },
+    "UpdateTestCase":{
+      "name":"UpdateTestCase",
+      "http":{
+        "method":"POST",
+        "requestUri":"/test-cases/{InstanceId}/{TestCaseId}"
+      },
+      "input":{"shape":"UpdateTestCaseRequest"},
+      "output":{"shape":"UpdateTestCaseResponse"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"DuplicateResourceException"},
+        {"shape":"InvalidTestCaseException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"InternalServiceException"},
+        {"shape":"AccessDeniedException"}
       ]
     },
     "UpdateTrafficDistribution":{
@@ -8122,7 +8317,10 @@
     },
     "ContactMetricName":{
       "type":"string",
-      "enum":["POSITION_IN_QUEUE"]
+      "enum":[
+        "ESTIMATED_WAIT_TIME",
+        "POSITION_IN_QUEUE"
+      ]
     },
     "ContactMetricResult":{
       "type":"structure",
@@ -8197,6 +8395,7 @@
         "SegmentAttributes":{"shape":"ContactSearchSummarySegmentAttributes"},
         "Name":{"shape":"Name"},
         "RoutingCriteria":{"shape":"RoutingCriteria"},
+        "Tags":{"shape":"ContactTagMap"},
         "GlobalResiliencyMetadata":{"shape":"GlobalResiliencyMetadata"}
       }
     },
@@ -8660,6 +8859,7 @@
         },
         "AsDraft":{"shape":"BoxedBoolean"},
         "Tags":{"shape":"TagMap"},
+        "ReviewConfiguration":{"shape":"EvaluationReviewConfiguration"},
         "TargetConfiguration":{"shape":"EvaluationFormTargetConfiguration"},
         "LanguageConfiguration":{"shape":"EvaluationFormLanguageConfiguration"}
       }
@@ -9130,6 +9330,50 @@
         "Arn":{"shape":"TaskTemplateArn"}
       }
     },
+    "CreateTestCaseRequest":{
+      "type":"structure",
+      "required":[
+        "InstanceId",
+        "Name",
+        "Content"
+      ],
+      "members":{
+        "InstanceId":{
+          "shape":"InstanceIdOrArn",
+          "location":"uri",
+          "locationName":"InstanceId"
+        },
+        "Name":{"shape":"TestCaseName"},
+        "Description":{"shape":"TestCaseDescription"},
+        "Content":{"shape":"TestCaseContent"},
+        "EntryPoint":{"shape":"TestCaseEntryPoint"},
+        "InitializationData":{"shape":"TestCaseInitializationData"},
+        "Status":{"shape":"TestCaseStatus"},
+        "TestCaseId":{
+          "shape":"TestCaseId",
+          "location":"header",
+          "locationName":"x-amz-resource-id"
+        },
+        "Tags":{"shape":"TagMap"},
+        "LastModifiedTime":{
+          "shape":"Timestamp",
+          "location":"header",
+          "locationName":"x-amz-last-modified-time"
+        },
+        "LastModifiedRegion":{
+          "shape":"RegionName",
+          "location":"header",
+          "locationName":"x-amz-last-modified-region"
+        }
+      }
+    },
+    "CreateTestCaseResponse":{
+      "type":"structure",
+      "members":{
+        "TestCaseId":{"shape":"TestCaseId"},
+        "TestCaseArn":{"shape":"ARN"}
+      }
+    },
     "CreateTrafficDistributionGroupRequest":{
       "type":"structure",
       "required":[
@@ -9457,7 +9701,8 @@
         "CONTACTS_SCHEDULED",
         "AGENTS_ON_CONTACT",
         "SLOTS_ACTIVE",
-        "SLOTS_AVAILABLE"
+        "SLOTS_AVAILABLE",
+        "ESTIMATED_WAIT_TIME"
       ]
     },
     "CurrentMetricResult":{
@@ -10463,6 +10708,29 @@
       "type":"structure",
       "members":{}
     },
+    "DeleteTestCaseRequest":{
+      "type":"structure",
+      "required":[
+        "InstanceId",
+        "TestCaseId"
+      ],
+      "members":{
+        "InstanceId":{
+          "shape":"InstanceIdOrArn",
+          "location":"uri",
+          "locationName":"InstanceId"
+        },
+        "TestCaseId":{
+          "shape":"TestCaseId",
+          "location":"uri",
+          "locationName":"TestCaseId"
+        }
+      }
+    },
+    "DeleteTestCaseResponse":{
+      "type":"structure",
+      "members":{}
+    },
     "DeleteTrafficDistributionGroupRequest":{
       "type":"structure",
       "required":["TrafficDistributionGroupId"],
@@ -11337,6 +11605,36 @@
       "type":"structure",
       "members":{
         "SecurityProfile":{"shape":"SecurityProfile"}
+      }
+    },
+    "DescribeTestCaseRequest":{
+      "type":"structure",
+      "required":[
+        "InstanceId",
+        "TestCaseId"
+      ],
+      "members":{
+        "InstanceId":{
+          "shape":"InstanceIdOrArn",
+          "location":"uri",
+          "locationName":"InstanceId"
+        },
+        "TestCaseId":{
+          "shape":"TestCaseId",
+          "location":"uri",
+          "locationName":"TestCaseId"
+        },
+        "Status":{
+          "shape":"TestCaseStatus",
+          "location":"querystring",
+          "locationName":"status"
+        }
+      }
+    },
+    "DescribeTestCaseResponse":{
+      "type":"structure",
+      "members":{
+        "TestCase":{"shape":"TestCase"}
       }
     },
     "DescribeTrafficDistributionGroupRequest":{
@@ -12533,6 +12831,7 @@
         "LastModifiedTime":{"shape":"Timestamp"},
         "LastModifiedBy":{"shape":"ARN"},
         "AutoEvaluationConfiguration":{"shape":"EvaluationFormAutoEvaluationConfiguration"},
+        "ReviewConfiguration":{"shape":"EvaluationReviewConfiguration"},
         "Tags":{"shape":"TagMap"},
         "TargetConfiguration":{"shape":"EvaluationFormTargetConfiguration"},
         "LanguageConfiguration":{"shape":"EvaluationFormLanguageConfiguration"}
@@ -12564,7 +12863,8 @@
         "ScoringStrategy":{"shape":"EvaluationFormScoringStrategy"},
         "AutoEvaluationConfiguration":{"shape":"EvaluationFormAutoEvaluationConfiguration"},
         "TargetConfiguration":{"shape":"EvaluationFormTargetConfiguration"},
-        "LanguageConfiguration":{"shape":"EvaluationFormLanguageConfiguration"}
+        "LanguageConfiguration":{"shape":"EvaluationFormLanguageConfiguration"},
+        "ReviewConfiguration":{"shape":"EvaluationReviewConfiguration"}
       }
     },
     "EvaluationFormDescription":{"type":"string"},
@@ -13119,6 +13419,7 @@
         "Score":{"shape":"EvaluationScore"},
         "AutoEvaluation":{"shape":"AutoEvaluationDetails"},
         "Acknowledgement":{"shape":"EvaluationAcknowledgement"},
+        "Review":{"shape":"EvaluationReviewMetadata"},
         "ContactParticipant":{"shape":"EvaluationContactParticipant"},
         "SamplingJobId":{"shape":"ResourceId"}
       }
@@ -13160,6 +13461,71 @@
       "members":{
         "TranscriptType":{"shape":"EvaluationTranscriptType"}
       }
+    },
+    "EvaluationReviewConfiguration":{
+      "type":"structure",
+      "required":["ReviewNotificationRecipients"],
+      "members":{
+        "ReviewNotificationRecipients":{"shape":"EvaluationReviewNotificationRecipientList"},
+        "EligibilityDays":{"shape":"Integer"}
+      }
+    },
+    "EvaluationReviewMetadata":{
+      "type":"structure",
+      "required":[
+        "CreatedTime",
+        "CreatedBy",
+        "ReviewRequestComments"
+      ],
+      "members":{
+        "ReviewId":{"shape":"ResourceId"},
+        "CreatedTime":{"shape":"Timestamp"},
+        "CreatedBy":{"shape":"ARN"},
+        "ReviewRequestComments":{"shape":"EvaluationReviewRequestCommentList"}
+      }
+    },
+    "EvaluationReviewNotificationRecipient":{
+      "type":"structure",
+      "required":[
+        "Type",
+        "Value"
+      ],
+      "members":{
+        "Type":{"shape":"EvaluationReviewNotificationRecipientType"},
+        "Value":{"shape":"EvaluationReviewNotificationRecipientValue"}
+      }
+    },
+    "EvaluationReviewNotificationRecipientList":{
+      "type":"list",
+      "member":{"shape":"EvaluationReviewNotificationRecipient"},
+      "min":1
+    },
+    "EvaluationReviewNotificationRecipientType":{
+      "type":"string",
+      "enum":["USER_ID"]
+    },
+    "EvaluationReviewNotificationRecipientValue":{
+      "type":"structure",
+      "members":{
+        "UserId":{"shape":"ResourceId"}
+      }
+    },
+    "EvaluationReviewRequestComment":{
+      "type":"structure",
+      "members":{
+        "Comment":{"shape":"EvaluationReviewRequestCommentContent"},
+        "CreatedTime":{"shape":"Timestamp"},
+        "CreatedBy":{"shape":"ARN"}
+      }
+    },
+    "EvaluationReviewRequestCommentContent":{
+      "type":"string",
+      "max":500
+    },
+    "EvaluationReviewRequestCommentList":{
+      "type":"list",
+      "member":{"shape":"EvaluationReviewRequestComment"},
+      "max":1
     },
     "EvaluationScore":{
       "type":"structure",
@@ -13264,7 +13630,9 @@
       "type":"string",
       "enum":[
         "DRAFT",
-        "SUBMITTED"
+        "SUBMITTED",
+        "REVIEW_REQUESTED",
+        "UNDER_REVIEW"
       ]
     },
     "EvaluationSuggestedAnswer":{
@@ -13406,6 +13774,29 @@
         "OnSlaBreach"
       ]
     },
+    "ExecutionRecord":{
+      "type":"structure",
+      "members":{
+        "ObservationId":{"shape":"TestCaseResourceId"},
+        "Status":{"shape":"ExecutionRecordStatus"},
+        "Timestamp":{"shape":"Timestamp"},
+        "Record":{"shape":"ExecutionRecordString"}
+      }
+    },
+    "ExecutionRecordList":{
+      "type":"list",
+      "member":{"shape":"ExecutionRecord"}
+    },
+    "ExecutionRecordStatus":{
+      "type":"string",
+      "enum":[
+        "PASSED",
+        "FAILED",
+        "IN_PROGRESS",
+        "STOPPED"
+      ]
+    },
+    "ExecutionRecordString":{"type":"string"},
     "Expiry":{
       "type":"structure",
       "members":{
@@ -14054,6 +14445,40 @@
         "LastModifiedTime":{"shape":"timestamp"},
         "CreatedTime":{"shape":"timestamp"},
         "Tags":{"shape":"TagMap"}
+      }
+    },
+    "GetTestCaseExecutionSummaryRequest":{
+      "type":"structure",
+      "required":[
+        "InstanceId",
+        "TestCaseId",
+        "TestCaseExecutionId"
+      ],
+      "members":{
+        "InstanceId":{
+          "shape":"InstanceId",
+          "location":"uri",
+          "locationName":"InstanceId"
+        },
+        "TestCaseId":{
+          "shape":"TestCaseId",
+          "location":"uri",
+          "locationName":"TestCaseId"
+        },
+        "TestCaseExecutionId":{
+          "shape":"TestCaseExecutionId",
+          "location":"uri",
+          "locationName":"TestCaseExecutionId"
+        }
+      }
+    },
+    "GetTestCaseExecutionSummaryResponse":{
+      "type":"structure",
+      "members":{
+        "StartTime":{"shape":"Timestamp"},
+        "EndTime":{"shape":"Timestamp"},
+        "Status":{"shape":"TestCaseExecutionStatus"},
+        "ObservationSummary":{"shape":"ObservationSummary"}
       }
     },
     "GetTrafficDistributionRequest":{
@@ -14907,6 +15332,14 @@
         "AttachedFileInvalidRequestExceptionReason":{"shape":"AttachedFileInvalidRequestExceptionReason"}
       },
       "union":true
+    },
+    "InvalidTestCaseException":{
+      "type":"structure",
+      "members":{
+        "Problems":{"shape":"Problems"}
+      },
+      "error":{"httpStatusCode":400},
+      "exception":true
     },
     "InvisibleFieldInfo":{
       "type":"structure",
@@ -16773,6 +17206,137 @@
         "NextToken":{"shape":"NextToken"}
       }
     },
+    "ListTestCaseExecutionRecordsRequest":{
+      "type":"structure",
+      "required":[
+        "InstanceId",
+        "TestCaseId",
+        "TestCaseExecutionId"
+      ],
+      "members":{
+        "InstanceId":{
+          "shape":"InstanceId",
+          "location":"uri",
+          "locationName":"InstanceId"
+        },
+        "TestCaseId":{
+          "shape":"TestCaseId",
+          "location":"uri",
+          "locationName":"TestCaseId"
+        },
+        "TestCaseExecutionId":{
+          "shape":"TestCaseExecutionId",
+          "location":"uri",
+          "locationName":"TestCaseExecutionId"
+        },
+        "Status":{
+          "shape":"TestCaseExecutionStatus",
+          "location":"querystring",
+          "locationName":"status"
+        },
+        "NextToken":{
+          "shape":"NextToken",
+          "location":"querystring",
+          "locationName":"nextToken"
+        },
+        "MaxResults":{
+          "shape":"MaxResult100",
+          "box":true,
+          "location":"querystring",
+          "locationName":"maxResults"
+        }
+      }
+    },
+    "ListTestCaseExecutionRecordsResponse":{
+      "type":"structure",
+      "members":{
+        "ExecutionRecords":{"shape":"ExecutionRecordList"},
+        "NextToken":{"shape":"LargeNextToken"}
+      }
+    },
+    "ListTestCaseExecutionsRequest":{
+      "type":"structure",
+      "required":["InstanceId"],
+      "members":{
+        "InstanceId":{
+          "shape":"InstanceId",
+          "location":"uri",
+          "locationName":"InstanceId"
+        },
+        "TestCaseId":{
+          "shape":"TestCaseId",
+          "location":"querystring",
+          "locationName":"testCaseId"
+        },
+        "TestCaseName":{
+          "shape":"TestCaseName",
+          "location":"querystring",
+          "locationName":"testCaseName"
+        },
+        "StartTime":{
+          "shape":"Timestamp",
+          "location":"querystring",
+          "locationName":"startTime"
+        },
+        "EndTime":{
+          "shape":"Timestamp",
+          "location":"querystring",
+          "locationName":"endTime"
+        },
+        "Status":{
+          "shape":"TestCaseExecutionStatus",
+          "location":"querystring",
+          "locationName":"status"
+        },
+        "NextToken":{
+          "shape":"NextToken",
+          "location":"querystring",
+          "locationName":"nextToken"
+        },
+        "MaxResults":{
+          "shape":"MaxResult100",
+          "box":true,
+          "location":"querystring",
+          "locationName":"maxResults"
+        }
+      }
+    },
+    "ListTestCaseExecutionsResponse":{
+      "type":"structure",
+      "members":{
+        "TestCaseExecutions":{"shape":"TestCaseExecutionList"},
+        "NextToken":{"shape":"NextToken"}
+      }
+    },
+    "ListTestCasesRequest":{
+      "type":"structure",
+      "required":["InstanceId"],
+      "members":{
+        "InstanceId":{
+          "shape":"InstanceId",
+          "location":"uri",
+          "locationName":"InstanceId"
+        },
+        "NextToken":{
+          "shape":"NextToken",
+          "location":"querystring",
+          "locationName":"nextToken"
+        },
+        "MaxResults":{
+          "shape":"MaxResult1000",
+          "box":true,
+          "location":"querystring",
+          "locationName":"maxResults"
+        }
+      }
+    },
+    "ListTestCasesResponse":{
+      "type":"structure",
+      "members":{
+        "TestCaseSummaryList":{"shape":"TestCaseSummaryList"},
+        "NextToken":{"shape":"NextToken"}
+      }
+    },
     "ListTrafficDistributionGroupUsersRequest":{
       "type":"structure",
       "required":["TrafficDistributionGroupId"],
@@ -17581,6 +18145,14 @@
       "required":["Label"],
       "members":{
         "Label":{"shape":"NumericQuestionPropertyAutomationLabel"}
+      }
+    },
+    "ObservationSummary":{
+      "type":"structure",
+      "members":{
+        "TotalObservations":{"shape":"Count"},
+        "ObservationsPassed":{"shape":"Count"},
+        "ObservationsFailed":{"shape":"Count"}
       }
     },
     "OperatingSystem":{
@@ -20274,7 +20846,8 @@
         "AdditionalTimeRange":{"shape":"SearchContactsAdditionalTimeRange"},
         "SearchableContactAttributes":{"shape":"SearchableContactAttributes"},
         "SearchableSegmentAttributes":{"shape":"SearchableSegmentAttributes"},
-        "ActiveRegions":{"shape":"ActiveRegionList"}
+        "ActiveRegions":{"shape":"ActiveRegionList"},
+        "ContactTags":{"shape":"ControlPlaneTagFilter"}
       }
     },
     "SearchDataTablesRequest":{
@@ -20532,6 +21105,28 @@
       "type":"structure",
       "members":{
         "SecurityProfiles":{"shape":"SecurityProfilesSearchSummaryList"},
+        "NextToken":{"shape":"NextToken2500"},
+        "ApproximateTotalCount":{"shape":"ApproximateTotalCount"}
+      }
+    },
+    "SearchTestCasesRequest":{
+      "type":"structure",
+      "required":["InstanceId"],
+      "members":{
+        "InstanceId":{"shape":"InstanceIdOrArn"},
+        "NextToken":{"shape":"NextToken2500"},
+        "MaxResults":{
+          "shape":"MaxResult100",
+          "box":true
+        },
+        "SearchFilter":{"shape":"TestCaseSearchFilter"},
+        "SearchCriteria":{"shape":"TestCaseSearchCriteria"}
+      }
+    },
+    "SearchTestCasesResponse":{
+      "type":"structure",
+      "members":{
+        "TestCases":{"shape":"TestCaseSearchSummaryList"},
         "NextToken":{"shape":"NextToken2500"},
         "ApproximateTotalCount":{"shape":"ApproximateTotalCount"}
       }
@@ -21512,13 +22107,42 @@
         "TaskTemplateId":{"shape":"TaskTemplateId"},
         "QuickConnectId":{"shape":"QuickConnectId"},
         "RelatedContactId":{"shape":"ContactId"},
-        "SegmentAttributes":{"shape":"SegmentAttributes"}
+        "SegmentAttributes":{"shape":"SegmentAttributes"},
+        "Attachments":{"shape":"TaskAttachments"}
       }
     },
     "StartTaskContactResponse":{
       "type":"structure",
       "members":{
         "ContactId":{"shape":"ContactId"}
+      }
+    },
+    "StartTestCaseExecutionRequest":{
+      "type":"structure",
+      "required":[
+        "InstanceId",
+        "TestCaseId"
+      ],
+      "members":{
+        "InstanceId":{
+          "shape":"InstanceId",
+          "location":"uri",
+          "locationName":"InstanceId"
+        },
+        "TestCaseId":{
+          "shape":"TestCaseId",
+          "location":"uri",
+          "locationName":"TestCaseId"
+        },
+        "ClientToken":{"shape":"ClientToken"}
+      }
+    },
+    "StartTestCaseExecutionResponse":{
+      "type":"structure",
+      "members":{
+        "TestCaseExecutionId":{"shape":"TestCaseExecutionId"},
+        "TestCaseId":{"shape":"TestCaseId"},
+        "Status":{"shape":"TestCaseExecutionStatus"}
       }
     },
     "StartWebRTCContactRequest":{
@@ -21651,6 +22275,36 @@
       }
     },
     "StopContactStreamingResponse":{
+      "type":"structure",
+      "members":{}
+    },
+    "StopTestCaseExecutionRequest":{
+      "type":"structure",
+      "required":[
+        "InstanceId",
+        "TestCaseExecutionId",
+        "TestCaseId"
+      ],
+      "members":{
+        "InstanceId":{
+          "shape":"InstanceId",
+          "location":"uri",
+          "locationName":"InstanceId"
+        },
+        "TestCaseExecutionId":{
+          "shape":"TestCaseExecutionId",
+          "location":"uri",
+          "locationName":"TestCaseExecutionId"
+        },
+        "TestCaseId":{
+          "shape":"TestCaseId",
+          "location":"uri",
+          "locationName":"TestCaseId"
+        },
+        "ClientToken":{"shape":"ClientToken"}
+      }
+    },
+    "StopTestCaseExecutionResponse":{
       "type":"structure",
       "members":{}
     },
@@ -21925,6 +22579,24 @@
         "References":{"shape":"ContactReferences"}
       }
     },
+    "TaskAttachment":{
+      "type":"structure",
+      "required":[
+        "FileName",
+        "S3Url"
+      ],
+      "members":{
+        "FileName":{"shape":"FileName"},
+        "S3Url":{"shape":"PreSignedAttachmentUrl"}
+      }
+    },
+    "TaskAttachments":{
+      "type":"list",
+      "member":{"shape":"TaskAttachment"},
+      "max":5,
+      "min":1,
+      "sensitive":true
+    },
     "TaskDescriptionExpression":{
       "type":"string",
       "max":4096,
@@ -22100,6 +22772,130 @@
         "MessageTemplateId":{"shape":"MessageTemplateId"},
         "TemplateAttributes":{"shape":"TemplateAttributes"}
       }
+    },
+    "TestCase":{
+      "type":"structure",
+      "members":{
+        "Arn":{"shape":"ARN"},
+        "Id":{"shape":"TestCaseId"},
+        "Name":{"shape":"TestCaseName"},
+        "Content":{"shape":"TestCaseContent"},
+        "EntryPoint":{"shape":"TestCaseEntryPoint"},
+        "InitializationData":{"shape":"TestCaseInitializationData"},
+        "Description":{"shape":"TestCaseDescription"},
+        "Status":{"shape":"TestCaseStatus"},
+        "LastModifiedTime":{"shape":"Timestamp"},
+        "LastModifiedRegion":{"shape":"RegionName"},
+        "Tags":{"shape":"TagMap"},
+        "TestCaseSha256":{"shape":"TestCaseSha256"}
+      }
+    },
+    "TestCaseContent":{"type":"string"},
+    "TestCaseDescription":{"type":"string"},
+    "TestCaseEntryPoint":{
+      "type":"structure",
+      "members":{
+        "Type":{"shape":"TestCaseEntryPointType"},
+        "VoiceCallEntryPointParameters":{"shape":"VoiceCallEntryPointParameters"}
+      }
+    },
+    "TestCaseEntryPointType":{
+      "type":"string",
+      "enum":["VOICE_CALL"]
+    },
+    "TestCaseExecution":{
+      "type":"structure",
+      "members":{
+        "StartTime":{"shape":"Timestamp"},
+        "EndTime":{"shape":"Timestamp"},
+        "TestCaseExecutionId":{"shape":"TestCaseExecutionId"},
+        "TestCaseId":{"shape":"TestCaseId"},
+        "TestCaseExecutionStatus":{"shape":"TestCaseExecutionStatus"},
+        "Tags":{"shape":"TagMap"}
+      }
+    },
+    "TestCaseExecutionId":{
+      "type":"string",
+      "max":500
+    },
+    "TestCaseExecutionList":{
+      "type":"list",
+      "member":{"shape":"TestCaseExecution"}
+    },
+    "TestCaseExecutionStatus":{
+      "type":"string",
+      "enum":[
+        "INITIATED",
+        "PASSED",
+        "FAILED",
+        "IN_PROGRESS",
+        "STOPPED"
+      ]
+    },
+    "TestCaseId":{
+      "type":"string",
+      "max":500
+    },
+    "TestCaseInitializationData":{"type":"string"},
+    "TestCaseName":{
+      "type":"string",
+      "min":1
+    },
+    "TestCaseResourceId":{
+      "type":"string",
+      "max":256,
+      "min":1
+    },
+    "TestCaseSearchConditionList":{
+      "type":"list",
+      "member":{"shape":"TestCaseSearchCriteria"}
+    },
+    "TestCaseSearchCriteria":{
+      "type":"structure",
+      "members":{
+        "OrConditions":{"shape":"TestCaseSearchConditionList"},
+        "AndConditions":{"shape":"TestCaseSearchConditionList"},
+        "StringCondition":{"shape":"StringCondition"},
+        "StatusCondition":{"shape":"TestCaseStatus"}
+      }
+    },
+    "TestCaseSearchFilter":{
+      "type":"structure",
+      "members":{
+        "TagFilter":{"shape":"ControlPlaneTagFilter"}
+      }
+    },
+    "TestCaseSearchSummaryList":{
+      "type":"list",
+      "member":{"shape":"TestCase"}
+    },
+    "TestCaseSha256":{
+      "type":"string",
+      "max":64,
+      "min":1,
+      "pattern":"^[a-zA-Z0-9]{64}$"
+    },
+    "TestCaseStatus":{
+      "type":"string",
+      "enum":[
+        "PUBLISHED",
+        "SAVED"
+      ]
+    },
+    "TestCaseSummary":{
+      "type":"structure",
+      "members":{
+        "Id":{"shape":"TestCaseId"},
+        "Arn":{"shape":"ARN"},
+        "Name":{"shape":"ContactFlowName"},
+        "Status":{"shape":"TestCaseStatus"},
+        "LastModifiedTime":{"shape":"Timestamp"},
+        "LastModifiedRegion":{"shape":"RegionName"}
+      }
+    },
+    "TestCaseSummaryList":{
+      "type":"list",
+      "member":{"shape":"TestCaseSummary"}
     },
     "ThemeImageLink":{
       "type":"string",
@@ -22897,6 +23693,7 @@
         "Items":{"shape":"EvaluationFormItemsList"},
         "ScoringStrategy":{"shape":"EvaluationFormScoringStrategy"},
         "AutoEvaluationConfiguration":{"shape":"EvaluationFormAutoEvaluationConfiguration"},
+        "ReviewConfiguration":{"shape":"EvaluationReviewConfiguration"},
         "AsDraft":{"shape":"BoxedBoolean"},
         "ClientToken":{
           "shape":"ClientToken",
@@ -23555,6 +24352,45 @@
         "LastModifiedTime":{"shape":"timestamp"},
         "CreatedTime":{"shape":"timestamp"}
       }
+    },
+    "UpdateTestCaseRequest":{
+      "type":"structure",
+      "required":[
+        "InstanceId",
+        "TestCaseId"
+      ],
+      "members":{
+        "InstanceId":{
+          "shape":"InstanceIdOrArn",
+          "location":"uri",
+          "locationName":"InstanceId"
+        },
+        "TestCaseId":{
+          "shape":"TestCaseId",
+          "location":"uri",
+          "locationName":"TestCaseId"
+        },
+        "Content":{"shape":"TestCaseContent"},
+        "EntryPoint":{"shape":"TestCaseEntryPoint"},
+        "InitializationData":{"shape":"TestCaseInitializationData"},
+        "Name":{"shape":"TestCaseName"},
+        "Description":{"shape":"TestCaseDescription"},
+        "Status":{"shape":"TestCaseStatus"},
+        "LastModifiedTime":{
+          "shape":"Timestamp",
+          "location":"header",
+          "locationName":"x-amz-last-modified-time"
+        },
+        "LastModifiedRegion":{
+          "shape":"RegionName",
+          "location":"header",
+          "locationName":"x-amz-last-modified-region"
+        }
+      }
+    },
+    "UpdateTestCaseResponse":{
+      "type":"structure",
+      "members":{}
     },
     "UpdateTrafficDistributionRequest":{
       "type":"structure",
@@ -24517,6 +25353,14 @@
     "VocabularySummaryList":{
       "type":"list",
       "member":{"shape":"VocabularySummary"}
+    },
+    "VoiceCallEntryPointParameters":{
+      "type":"structure",
+      "members":{
+        "SourcePhoneNumber":{"shape":"PhoneNumber"},
+        "DestinationPhoneNumber":{"shape":"PhoneNumber"},
+        "FlowId":{"shape":"ContactFlowId"}
+      }
     },
     "VoiceRecordingConfiguration":{
       "type":"structure",

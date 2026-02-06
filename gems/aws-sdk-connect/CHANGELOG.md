@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.240.0 (2026-01-30)
+------------------
+
+* Feature - This release adds Estimated Wait Time support to the GetContactMetrics API for Amazon Connect.
+
+1.239.0 (2026-01-28)
+------------------
+
+* Feature - Adds support for filtering search results based on tags assigned to contacts.
+
+1.238.0 (2026-01-27)
+------------------
+
+* Feature - Added support for task attachments. The StartTaskContact API now accepts file attachments, enabling customers to include files (.csv, .doc, .docx, .heic, .jfif, .jpeg, .jpg, .mov, .mp4, .pdf, .png, .ppt, .pptx, .rtf, .txt, etc.) when creating Task contacts. Supports up to 5 attachments per task.
+
+1.237.0 (2026-01-23)
+------------------
+
+* Feature - Amazon Connect now offers public APIs to programmatically configure and run automated tests for contact center experiences. Integrate testing into CICD pipelines, run multiple tests at scale, and retrieve results via API to automate validation of voice interactions and workflows.
+
+1.236.0 (2026-01-16)
+------------------
+
+* Feature - Adds support to allow customers to create form with Dispute configuration
+
 1.235.0 (2026-01-14)
 ------------------
 

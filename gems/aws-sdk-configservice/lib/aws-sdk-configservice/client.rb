@@ -5063,9 +5063,25 @@ module Aws::ConfigService
     #
     #  </note>
     #
+    # <note markdown="1"> **Tags are added at creation and cannot be updated with this
+    # operation**
+    #
+    #  `PutConformancePack` is an idempotent API. Subsequent requests won't
+    # create a duplicate resource if one was already created. If a following
+    # request has different `tags` values, Config will ignore these
+    # differences and treat it as an idempotent request of the previous. In
+    # this case, `tags` will not be updated, even if they are different.
+    #
+    #  Use [TagResource][2] and [UntagResource][3] to update tags after
+    # creation.
+    #
+    #  </note>
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/config/latest/developerguide/configlimits.html
+    # [2]: https://docs.aws.amazon.com/config/latest/APIReference/API_TagResource.html
+    # [3]: https://docs.aws.amazon.com/config/latest/APIReference/API_UntagResource.html
     #
     # @option params [required, String] :conformance_pack_name
     #   The unique name of the conformance pack you want to deploy.
@@ -5121,6 +5137,10 @@ module Aws::ConfigService
     #   Systems Manager document (SSM document) and the version of the SSM
     #   document that is used to create a conformance pack.
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   The tags for the conformance pack. Each tag consists of a key and an
+    #   optional value, both of which you define.
+    #
     # @return [Types::PutConformancePackResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::PutConformancePackResponse#conformance_pack_arn #conformance_pack_arn} => String
@@ -5143,6 +5163,12 @@ module Aws::ConfigService
     #       document_name: "SSMDocumentName", # required
     #       document_version: "SSMDocumentVersion",
     #     },
+    #     tags: [
+    #       {
+    #         key: "TagKey",
+    #         value: "TagValue",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -6612,7 +6638,7 @@ module Aws::ConfigService
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-configservice'
-      context[:gem_version] = '1.144.0'
+      context[:gem_version] = '1.146.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

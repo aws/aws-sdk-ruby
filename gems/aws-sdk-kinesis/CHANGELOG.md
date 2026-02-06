@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.97.0 (2026-02-03)
+------------------
+
+* Feature - Adds StreamId parameter to AWS Kinesis Data Streams APIs that is reserved for future use.
+
+1.96.0 (2026-01-16)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.95.0 (2026-01-08)
 ------------------
 

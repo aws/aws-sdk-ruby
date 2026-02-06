@@ -1428,8 +1428,16 @@ module Aws::Athena
       include Aws::Structure
     end
 
-    # Contains data processing unit (DPU) configuration settings and
-    # parameter mappings for a notebook engine.
+    # The engine configuration for the workgroup, which includes the
+    # minimum/maximum number of Data Processing Units (DPU) that queries
+    # should use when running in provisioned capacity. If not specified,
+    # Athena uses default values (Default value for min is 4 and for max is
+    # Minimum of 124 and allocated DPUs).
+    #
+    # To specify DPU values for PC queries the WG containing
+    # EngineConfiguration should have the following values: The name of the
+    # Classifications should be `athena-query-engine-properties`, with the
+    # only allowed properties as `max-dpu-count` and `min-dpu-count`.
     #
     # @!attribute [rw] coordinator_dpu_size
     #   The number of DPUs to use for the coordinator. A coordinator is a
@@ -4589,8 +4597,17 @@ module Aws::Athena
     #   @return [Types::ResultReuseConfiguration]
     #
     # @!attribute [rw] engine_configuration
-    #   Contains data processing unit (DPU) configuration settings and
-    #   parameter mappings for a notebook engine.
+    #   The engine configuration for the workgroup, which includes the
+    #   minimum/maximum number of Data Processing Units (DPU) that queries
+    #   should use when running in provisioned capacity. If not specified,
+    #   Athena uses default values (Default value for min is 4 and for max
+    #   is Minimum of 124 and allocated DPUs).
+    #
+    #   To specify minimum and maximum DPU values for Capacity Reservations
+    #   queries, the workgroup containing `EngineConfiguration` should have
+    #   the following values: The name of the `Classifications` should be
+    #   `athena-query-engine-properties`, with the only allowed properties
+    #   as `max-dpu-count` and `min-dpu-count`.
     #   @return [Types::EngineConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/StartQueryExecutionInput AWS API Documentation
@@ -5475,8 +5492,16 @@ module Aws::Athena
     #   @return [Types::MonitoringConfiguration]
     #
     # @!attribute [rw] engine_configuration
-    #   Contains data processing unit (DPU) configuration settings and
-    #   parameter mappings for a notebook engine.
+    #   The engine configuration for the workgroup, which includes the
+    #   minimum/maximum number of Data Processing Units (DPU) that queries
+    #   should use when running in provisioned capacity. If not specified,
+    #   Athena uses default values (Default value for min is 4 and for max
+    #   is Minimum of 124 and allocated DPUs).
+    #
+    #   To specify DPU values for PC queries the WG containing
+    #   EngineConfiguration should have the following values: The name of
+    #   the Classifications should be `athena-query-engine-properties`, with
+    #   the only allowed properties as `max-dpu-count` and `min-dpu-count`.
     #   @return [Types::EngineConfiguration]
     #
     # @!attribute [rw] customer_content_encryption_configuration
@@ -5646,8 +5671,16 @@ module Aws::Athena
     #   @return [Types::MonitoringConfiguration]
     #
     # @!attribute [rw] engine_configuration
-    #   Contains data processing unit (DPU) configuration settings and
-    #   parameter mappings for a notebook engine.
+    #   The engine configuration for the workgroup, which includes the
+    #   minimum/maximum number of Data Processing Units (DPU) that queries
+    #   should use when running in provisioned capacity. If not specified,
+    #   Athena uses default values (Default value for min is 4 and for max
+    #   is Minimum of 124 and allocated DPUs).
+    #
+    #   To specify DPU values for PC queries the WG containing
+    #   EngineConfiguration should have the following values: The name of
+    #   the Classifications should be `athena-query-engine-properties`, with
+    #   the only allowed properties as `max-dpu-count` and `min-dpu-count`.
     #   @return [Types::EngineConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/WorkGroupConfigurationUpdates AWS API Documentation

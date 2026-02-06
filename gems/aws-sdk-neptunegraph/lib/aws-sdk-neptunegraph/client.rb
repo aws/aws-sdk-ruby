@@ -921,9 +921,9 @@ module Aws::NeptuneGraph
       req.send_request(options)
     end
 
-    # Create a private graph endpoint to allow private access from to the
-    # graph from within a VPC. You can attach security groups to the private
-    # graph endpoint.
+    # Create a private graph endpoint to allow private access to the graph
+    # from within a VPC. You can attach security groups to the private graph
+    # endpoint.
     #
     # <note markdown="1"> VPC endpoint charges apply.
     #
@@ -939,7 +939,7 @@ module Aws::NeptuneGraph
     #   Subnets in which private graph endpoint ENIs are created.
     #
     # @option params [Array<String>] :vpc_security_group_ids
-    #   Security groups to be attached to the private graph endpoint..
+    #   Security groups to be attached to the private graph endpoint.
     #
     # @return [Types::CreatePrivateGraphEndpointOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1038,7 +1038,7 @@ module Aws::NeptuneGraph
       req.send_request(options)
     end
 
-    # Deletes the specifed graph snapshot.
+    # Deletes the specified graph snapshot.
     #
     # @option params [required, String] :snapshot_identifier
     #   ID of the graph snapshot to be deleted.
@@ -2274,7 +2274,7 @@ module Aws::NeptuneGraph
     # @option params [String] :format
     #   Specifies the format of Amazon S3 data to be imported. Valid values
     #   are CSV, which identifies the Gremlin CSV format or OPENCYPHER, which
-    #   identies the openCypher load format.
+    #   identifies the openCypher load format.
     #
     # @option params [String] :parquet_type
     #   The parquet type of the import task.
@@ -2567,7 +2567,7 @@ module Aws::NeptuneGraph
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-neptunegraph'
-      context[:gem_version] = '1.44.0'
+      context[:gem_version] = '1.46.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

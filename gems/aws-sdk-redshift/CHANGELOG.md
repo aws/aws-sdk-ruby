@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.156.0 (2026-02-04)
+------------------
+
+* Feature - We have increased the maximum duration for a deferred maintenance window from 45 days to 60 days for Amazon Redshift provisioned clusters. This enhancement provides customers with greater flexibility in scheduling patching and maintenance activities while also maintaining security compliance.
+
+1.155.0 (2026-01-16)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.154.0 (2026-01-14)
 ------------------
 

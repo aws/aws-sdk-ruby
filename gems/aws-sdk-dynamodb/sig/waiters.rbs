@@ -9,6 +9,47 @@ module Aws
   module DynamoDB
     module Waiters
 
+      class ContributorInsightsEnabled
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    table_name: ::String,
+                    ?index_name: ::String
+                  ) -> Client::_DescribeContributorInsightsResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_DescribeContributorInsightsResponseSuccess
+      end
+
+      class ExportCompleted
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    export_arn: ::String
+                  ) -> Client::_DescribeExportResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_DescribeExportResponseSuccess
+      end
+
+      class ImportCompleted
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    import_arn: ::String
+                  ) -> Client::_DescribeImportResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_DescribeImportResponseSuccess
+      end
+
+      class KinesisStreamingDestinationActive
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    table_name: ::String
+                  ) -> Client::_DescribeKinesisStreamingDestinationResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_DescribeKinesisStreamingDestinationResponseSuccess
+      end
+
       class TableExists
         def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
                       | (?Hash[Symbol, untyped]) -> void

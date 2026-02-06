@@ -354,8 +354,9 @@ module Aws::MediaConnect
       attr_accessor vpc_interfaces: ::Array[Types::VpcInterfaceRequest]
       attr_accessor maintenance: Types::AddMaintenance
       attr_accessor source_monitoring_config: Types::MonitoringConfig
-      attr_accessor flow_size: ("MEDIUM" | "LARGE")
+      attr_accessor flow_size: ("MEDIUM" | "LARGE" | "LARGE_4X")
       attr_accessor ndi_config: Types::NdiConfig
+      attr_accessor encoding_config: Types::EncodingConfig
       attr_accessor flow_tags: ::Hash[::String, ::String]
       SENSITIVE: []
     end
@@ -548,6 +549,7 @@ module Aws::MediaConnect
       attr_accessor messages: ::Array[Types::MessageDetail]
       attr_accessor timestamp: ::Time
       attr_accessor transport_media_info: Types::TransportMediaInfo
+      attr_accessor ndi_info: Types::NdiSourceMetadataInfo
       SENSITIVE: []
     end
 
@@ -619,6 +621,12 @@ module Aws::MediaConnect
     class EgressGatewayBridge
       attr_accessor instance_id: ::String
       attr_accessor max_bitrate: ::Integer
+      SENSITIVE: []
+    end
+
+    class EncodingConfig
+      attr_accessor encoding_profile: ("DISTRIBUTION_H264_DEFAULT" | "CONTRIBUTION_H264_DEFAULT")
+      attr_accessor video_max_bitrate: ::Integer
       SENSITIVE: []
     end
 
@@ -722,8 +730,9 @@ module Aws::MediaConnect
       attr_accessor vpc_interfaces: ::Array[Types::VpcInterface]
       attr_accessor maintenance: Types::Maintenance
       attr_accessor source_monitoring_config: Types::MonitoringConfig
-      attr_accessor flow_size: ("MEDIUM" | "LARGE")
+      attr_accessor flow_size: ("MEDIUM" | "LARGE" | "LARGE_4X")
       attr_accessor ndi_config: Types::NdiConfig
+      attr_accessor encoding_config: Types::EncodingConfig
       SENSITIVE: []
     end
 
@@ -1388,6 +1397,41 @@ module Aws::MediaConnect
       SENSITIVE: []
     end
 
+    class NdiMediaInfo
+      attr_accessor streams: ::Array[Types::NdiMediaStreamInfo]
+      SENSITIVE: []
+    end
+
+    class NdiMediaStreamInfo
+      attr_accessor stream_type: ::String
+      attr_accessor codec: ::String
+      attr_accessor stream_id: ::Integer
+      attr_accessor scan_mode: ("progressive" | "interlace" | "progressive-segmented-frame")
+      attr_accessor frame_resolution: Types::FrameResolution
+      attr_accessor frame_rate: ::String
+      attr_accessor channels: ::Integer
+      attr_accessor sample_rate: ::Integer
+      SENSITIVE: []
+    end
+
+    class NdiSourceInfo
+      attr_accessor source_name: ::String
+      SENSITIVE: []
+    end
+
+    class NdiSourceMetadataInfo
+      attr_accessor active_source: Types::NdiSourceInfo
+      attr_accessor discovered_sources: ::Array[Types::NdiSourceInfo]
+      attr_accessor media_info: Types::NdiMediaInfo
+      attr_accessor messages: ::Array[Types::MessageDetail]
+      SENSITIVE: []
+    end
+
+    class NdiSourceSettings
+      attr_accessor source_name: ::String
+      SENSITIVE: []
+    end
+
     class NotFoundException
       attr_accessor message: ::String
       SENSITIVE: []
@@ -1989,6 +2033,7 @@ module Aws::MediaConnect
       attr_accessor vpc_interface_name: ::String
       attr_accessor whitelist_cidr: ::String
       attr_accessor gateway_bridge_source: Types::SetGatewayBridgeSourceRequest
+      attr_accessor ndi_source_settings: Types::NdiSourceSettings
       attr_accessor source_tags: ::Hash[::String, ::String]
       attr_accessor router_integration_state: ("ENABLED" | "DISABLED")
       attr_accessor router_integration_transit_decryption: Types::FlowTransitEncryption
@@ -2226,6 +2271,7 @@ module Aws::MediaConnect
       attr_accessor stream_id: ::String
       attr_accessor ndi_speed_hq_quality: ::Integer
       attr_accessor ndi_program_name: ::String
+      attr_accessor ndi_source_settings: Types::NdiSourceSettings
       SENSITIVE: []
     end
 
@@ -2440,7 +2486,8 @@ module Aws::MediaConnect
       attr_accessor maintenance: Types::UpdateMaintenance
       attr_accessor source_monitoring_config: Types::MonitoringConfig
       attr_accessor ndi_config: Types::NdiConfig
-      attr_accessor flow_size: ("MEDIUM" | "LARGE")
+      attr_accessor flow_size: ("MEDIUM" | "LARGE" | "LARGE_4X")
+      attr_accessor encoding_config: Types::EncodingConfig
       SENSITIVE: []
     end
 
@@ -2470,6 +2517,7 @@ module Aws::MediaConnect
       attr_accessor vpc_interface_name: ::String
       attr_accessor whitelist_cidr: ::String
       attr_accessor gateway_bridge_source: Types::UpdateGatewayBridgeSourceRequest
+      attr_accessor ndi_source_settings: Types::NdiSourceSettings
       attr_accessor router_integration_state: ("ENABLED" | "DISABLED")
       attr_accessor router_integration_transit_decryption: Types::FlowTransitEncryption
       SENSITIVE: []

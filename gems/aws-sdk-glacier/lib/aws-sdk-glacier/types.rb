@@ -1827,13 +1827,21 @@ module Aws::Glacier
       include Aws::Structure
     end
 
+    # Returned if the request was made by a customer with no Amazon Glacier
+    # storage. The request is denied as the API is no longer supported for
+    # new customers. Please use Amazon S3 Glacier storage classes instead.
+    #
     # @!attribute [rw] type
+    #   Client
     #   @return [String]
     #
     # @!attribute [rw] code
+    #   400 Bad Request
     #   @return [String]
     #
     # @!attribute [rw] message
+    #   This API is no longer supported for new accounts. Please use Amazon
+    #   S3 Glacier storage classes instead.
     #   @return [String]
     #
     class NoLongerSupportedException < Struct.new(

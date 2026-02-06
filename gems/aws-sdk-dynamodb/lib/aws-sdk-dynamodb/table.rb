@@ -347,6 +347,23 @@ module Aws::DynamoDB
       data[:global_table_witnesses]
     end
 
+    # Indicates one of the settings synchronization modes for the global
+    # table:
+    #
+    # * `ENABLED`: Indicates that the settings synchronization mode for the
+    #   global table is enabled.
+    #
+    # * `DISABLED`: Indicates that the settings synchronization mode for the
+    #   global table is disabled.
+    #
+    # * `ENABLED_WITH_OVERRIDES`: This mode is set by default for a same
+    #   account global table. Indicates that certain global table settings
+    #   can be overridden.
+    # @return [String]
+    def global_table_settings_replication_mode
+      data[:global_table_settings_replication_mode]
+    end
+
     # Contains details for the restore.
     # @return [Types::RestoreSummary]
     def restore_summary

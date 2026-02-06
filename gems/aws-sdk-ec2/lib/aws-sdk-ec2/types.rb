@@ -3290,6 +3290,11 @@ module Aws::EC2
     #   same Availability Zone.
     #   @return [String]
     #
+    # @!attribute [rw] ebs_card_index
+    #   The index of the EBS card. Some instance types support multiple EBS
+    #   cards. The default EBS card index is 0.
+    #   @return [Integer]
+    #
     # @!attribute [rw] dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
@@ -3303,6 +3308,7 @@ module Aws::EC2
       :device,
       :instance_id,
       :volume_id,
+      :ebs_card_index,
       :dry_run)
       SENSITIVE = []
       include Aws::Structure
@@ -37640,6 +37646,11 @@ module Aws::EC2
     #   [6]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RunInstances.html
     #   @return [String]
     #
+    # @!attribute [rw] ebs_card_index
+    #   The index of the EBS card. Some instance types support multiple EBS
+    #   cards. The default EBS card index is 0.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EbsBlockDevice AWS API Documentation
     #
     class EbsBlockDevice < Struct.new(
@@ -37654,7 +37665,8 @@ module Aws::EC2
       :availability_zone,
       :encrypted,
       :volume_initialization_rate,
-      :availability_zone_id)
+      :availability_zone_id,
+      :ebs_card_index)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -37718,6 +37730,51 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # Describes the performance characteristics of an EBS card on the
+    # instance type.
+    #
+    # @!attribute [rw] ebs_card_index
+    #   The index of the EBS card.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] baseline_bandwidth_in_mbps
+    #   The baseline bandwidth performance for the EBS card, in Mbps.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] baseline_throughput_in_m_bps
+    #   The baseline throughput performance for the EBS card, in MBps.
+    #   @return [Float]
+    #
+    # @!attribute [rw] baseline_iops
+    #   The baseline IOPS performance for the EBS card.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] maximum_bandwidth_in_mbps
+    #   The maximum bandwidth performance for the EBS card, in Mbps.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] maximum_throughput_in_m_bps
+    #   The maximum throughput performance for the EBS card, in MBps.
+    #   @return [Float]
+    #
+    # @!attribute [rw] maximum_iops
+    #   The maximum IOPS performance for the EBS card.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EbsCardInfo AWS API Documentation
+    #
+    class EbsCardInfo < Struct.new(
+      :ebs_card_index,
+      :baseline_bandwidth_in_mbps,
+      :baseline_throughput_in_m_bps,
+      :baseline_iops,
+      :maximum_bandwidth_in_mbps,
+      :maximum_throughput_in_m_bps,
+      :maximum_iops)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes the Amazon EBS features supported by the instance type.
     #
     # @!attribute [rw] ebs_optimized_support
@@ -37764,6 +37821,14 @@ module Aws::EC2
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/volume_limits.html
     #   @return [String]
     #
+    # @!attribute [rw] maximum_ebs_cards
+    #   Indicates the number of EBS cards supported by the instance type.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] ebs_cards
+    #   Describes the EBS cards available for the instance type.
+    #   @return [Array<Types::EbsCardInfo>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EbsInfo AWS API Documentation
     #
     class EbsInfo < Struct.new(
@@ -37772,7 +37837,9 @@ module Aws::EC2
       :ebs_optimized_info,
       :nvme_support,
       :maximum_ebs_attachments,
-      :attachment_limit_type)
+      :attachment_limit_type,
+      :maximum_ebs_cards,
+      :ebs_cards)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -37812,6 +37879,11 @@ module Aws::EC2
     #   The service provider that manages the EBS volume.
     #   @return [Types::OperatorResponse]
     #
+    # @!attribute [rw] ebs_card_index
+    #   The index of the EBS card. Some instance types support multiple EBS
+    #   cards. The default EBS card index is 0.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EbsInstanceBlockDevice AWS API Documentation
     #
     class EbsInstanceBlockDevice < Struct.new(
@@ -37821,7 +37893,8 @@ module Aws::EC2
       :volume_id,
       :associated_resource,
       :volume_owner_id,
-      :operator)
+      :operator,
+      :ebs_card_index)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -44033,7 +44106,11 @@ module Aws::EC2
     end
 
     # @!attribute [rw] organization_targets
-    #   The Amazon Web Services Organizations targets for an IPAM policy.
+    #   The IDs of the Amazon Web Services Organizations targets.
+    #
+    #   A target can be an individual Amazon Web Services account or an
+    #   entity within an Amazon Web Services Organization to which an IPAM
+    #   policy can be applied.
     #   @return [Array<Types::IpamPolicyOrganizationTarget>]
     #
     # @!attribute [rw] next_token
@@ -46145,6 +46222,19 @@ module Aws::EC2
     #   The number of GPUs for the instance type.
     #   @return [Integer]
     #
+    # @!attribute [rw] logical_gpu_count
+    #   Total number of GPU devices of this type.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] gpu_partition_size
+    #   The size of each GPU as a fraction of a full GPU, between 0
+    #   (excluded) and 1 (included).
+    #   @return [Float]
+    #
+    # @!attribute [rw] workloads
+    #   A list of workload types this GPU supports.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] memory_info
     #   Describes the memory available to the GPU accelerator.
     #   @return [Types::GpuDeviceMemoryInfo]
@@ -46155,6 +46245,9 @@ module Aws::EC2
       :name,
       :manufacturer,
       :count,
+      :logical_gpu_count,
+      :gpu_partition_size,
+      :workloads,
       :memory_info)
       SENSITIVE = []
       include Aws::Structure
@@ -53543,8 +53636,11 @@ module Aws::EC2
     # The Amazon Web Services Organizations target for an IPAM policy.
     #
     # @!attribute [rw] organization_target_id
-    #   The ID of a Amazon Web Services Organizations target for an IPAM
-    #   policy.
+    #   The ID of the Amazon Web Services Organizations target.
+    #
+    #   A target can be an individual Amazon Web Services account or an
+    #   entity within an Amazon Web Services Organization to which an IPAM
+    #   policy can be applied.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/IpamPolicyOrganizationTarget AWS API Documentation
@@ -55876,6 +55972,11 @@ module Aws::EC2
     #   volume initialization rate was specified, the value is `null`.
     #   @return [Integer]
     #
+    # @!attribute [rw] ebs_card_index
+    #   The index of the EBS card. Some instance types support multiple EBS
+    #   cards. The default EBS card index is 0.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LaunchTemplateEbsBlockDevice AWS API Documentation
     #
     class LaunchTemplateEbsBlockDevice < Struct.new(
@@ -55887,7 +55988,8 @@ module Aws::EC2
       :volume_size,
       :volume_type,
       :throughput,
-      :volume_initialization_rate)
+      :volume_initialization_rate,
+      :ebs_card_index)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -56010,6 +56112,11 @@ module Aws::EC2
     #   [1]: https://docs.aws.amazon.com/ebs/latest/userguide/initalize-volume.html
     #   @return [Integer]
     #
+    # @!attribute [rw] ebs_card_index
+    #   The index of the EBS card. Some instance types support multiple EBS
+    #   cards. The default EBS card index is 0.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LaunchTemplateEbsBlockDeviceRequest AWS API Documentation
     #
     class LaunchTemplateEbsBlockDeviceRequest < Struct.new(
@@ -56021,7 +56128,8 @@ module Aws::EC2
       :volume_size,
       :volume_type,
       :throughput,
-      :volume_initialization_rate)
+      :volume_initialization_rate,
+      :ebs_card_index)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -65295,6 +65403,13 @@ module Aws::EC2
     #   The maximum number of network interfaces for the network card.
     #   @return [Integer]
     #
+    # @!attribute [rw] additional_flexible_network_interfaces
+    #   The number of additional network interfaces that can be attached to
+    #   an instance when using flexible Elastic Network Adapter (ENA)
+    #   queues. This number is in addition to the base number specified by
+    #   `maximumNetworkInterfaces`.
+    #   @return [Integer]
+    #
     # @!attribute [rw] baseline_bandwidth_in_gbps
     #   The baseline network performance of the network card, in Gbps.
     #   @return [Float]
@@ -65321,6 +65436,7 @@ module Aws::EC2
       :network_card_index,
       :network_performance,
       :maximum_network_interfaces,
+      :additional_flexible_network_interfaces,
       :baseline_bandwidth_in_gbps,
       :peak_bandwidth_in_gbps,
       :default_ena_queue_count_per_interface,
@@ -75131,13 +75247,18 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
     #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SearchTransitGatewayRoutesRequest AWS API Documentation
     #
     class SearchTransitGatewayRoutesRequest < Struct.new(
       :transit_gateway_route_table_id,
       :filters,
       :max_results,
-      :dry_run)
+      :dry_run,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -75150,11 +75271,17 @@ module Aws::EC2
     #   Indicates whether there are additional routes available.
     #   @return [Boolean]
     #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. This value is
+    #   `null` when there are no more results to return.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SearchTransitGatewayRoutesResult AWS API Documentation
     #
     class SearchTransitGatewayRoutesResult < Struct.new(
       :routes,
-      :additional_routes_available)
+      :additional_routes_available,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -83454,6 +83581,11 @@ module Aws::EC2
     #   Amazon Web Services-managed resources.
     #   @return [String]
     #
+    # @!attribute [rw] ebs_card_index
+    #   The index of the EBS card. Some instance types support multiple EBS
+    #   cards. The default EBS card index is 0.
+    #   @return [Integer]
+    #
     # @!attribute [rw] volume_id
     #   The ID of the volume.
     #   @return [String]
@@ -83486,6 +83618,7 @@ module Aws::EC2
       :delete_on_termination,
       :associated_resource,
       :instance_owning_service,
+      :ebs_card_index,
       :volume_id,
       :instance_id,
       :device,

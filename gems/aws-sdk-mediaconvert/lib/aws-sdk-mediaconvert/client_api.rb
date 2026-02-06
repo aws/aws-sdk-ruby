@@ -220,6 +220,7 @@ module Aws::MediaConvert
     DisassociateCertificateRequest = Shapes::StructureShape.new(name: 'DisassociateCertificateRequest')
     DisassociateCertificateResponse = Shapes::StructureShape.new(name: 'DisassociateCertificateResponse')
     DolbyVision = Shapes::StructureShape.new(name: 'DolbyVision')
+    DolbyVisionCompatibility = Shapes::StringShape.new(name: 'DolbyVisionCompatibility')
     DolbyVisionLevel6Metadata = Shapes::StructureShape.new(name: 'DolbyVisionLevel6Metadata')
     DolbyVisionLevel6Mode = Shapes::StringShape.new(name: 'DolbyVisionLevel6Mode')
     DolbyVisionMapping = Shapes::StringShape.new(name: 'DolbyVisionMapping')
@@ -547,6 +548,7 @@ module Aws::MediaConvert
     MxfAfdSignaling = Shapes::StringShape.new(name: 'MxfAfdSignaling')
     MxfProfile = Shapes::StringShape.new(name: 'MxfProfile')
     MxfSettings = Shapes::StructureShape.new(name: 'MxfSettings')
+    MxfUncompressedAudioWrapping = Shapes::StringShape.new(name: 'MxfUncompressedAudioWrapping')
     MxfXavcDurationMode = Shapes::StringShape.new(name: 'MxfXavcDurationMode')
     MxfXavcProfileSettings = Shapes::StructureShape.new(name: 'MxfXavcProfileSettings')
     NexGuardFileMarkerSettings = Shapes::StructureShape.new(name: 'NexGuardFileMarkerSettings')
@@ -778,6 +780,7 @@ module Aws::MediaConvert
     __integerMin0Max1466400000 = Shapes::IntegerShape.new(name: '__integerMin0Max1466400000')
     __integerMin0Max15 = Shapes::IntegerShape.new(name: '__integerMin0Max15')
     __integerMin0Max16 = Shapes::IntegerShape.new(name: '__integerMin0Max16')
+    __integerMin0Max2 = Shapes::IntegerShape.new(name: '__integerMin0Max2')
     __integerMin0Max2147483647 = Shapes::IntegerShape.new(name: '__integerMin0Max2147483647')
     __integerMin0Max255 = Shapes::IntegerShape.new(name: '__integerMin0Max255')
     __integerMin0Max3 = Shapes::IntegerShape.new(name: '__integerMin0Max3')
@@ -791,6 +794,7 @@ module Aws::MediaConvert
     __integerMin0Max5 = Shapes::IntegerShape.new(name: '__integerMin0Max5')
     __integerMin0Max500 = Shapes::IntegerShape.new(name: '__integerMin0Max500')
     __integerMin0Max50000 = Shapes::IntegerShape.new(name: '__integerMin0Max50000')
+    __integerMin0Max64 = Shapes::IntegerShape.new(name: '__integerMin0Max64')
     __integerMin0Max65534 = Shapes::IntegerShape.new(name: '__integerMin0Max65534')
     __integerMin0Max65535 = Shapes::IntegerShape.new(name: '__integerMin0Max65535')
     __integerMin0Max7 = Shapes::IntegerShape.new(name: '__integerMin0Max7')
@@ -817,7 +821,6 @@ module Aws::MediaConvert
     __integerMin1Max1001 = Shapes::IntegerShape.new(name: '__integerMin1Max1001')
     __integerMin1Max150 = Shapes::IntegerShape.new(name: '__integerMin1Max150')
     __integerMin1Max17895697 = Shapes::IntegerShape.new(name: '__integerMin1Max17895697')
-    __integerMin1Max2 = Shapes::IntegerShape.new(name: '__integerMin1Max2')
     __integerMin1Max20 = Shapes::IntegerShape.new(name: '__integerMin1Max20')
     __integerMin1Max2048 = Shapes::IntegerShape.new(name: '__integerMin1Max2048')
     __integerMin1Max2147483640 = Shapes::IntegerShape.new(name: '__integerMin1Max2147483640')
@@ -830,7 +833,6 @@ module Aws::MediaConvert
     __integerMin1Max6 = Shapes::IntegerShape.new(name: '__integerMin1Max6')
     __integerMin1Max60000 = Shapes::IntegerShape.new(name: '__integerMin1Max60000')
     __integerMin1Max64 = Shapes::IntegerShape.new(name: '__integerMin1Max64')
-    __integerMin1Max8 = Shapes::IntegerShape.new(name: '__integerMin1Max8')
     __integerMin1Max86400000 = Shapes::IntegerShape.new(name: '__integerMin1Max86400000')
     __integerMin2000Max30000 = Shapes::IntegerShape.new(name: '__integerMin2000Max30000')
     __integerMin22050Max192000 = Shapes::IntegerShape.new(name: '__integerMin22050Max192000')
@@ -1030,7 +1032,7 @@ module Aws::MediaConvert
     AdvancedInputFilterSettings.struct_class = Types::AdvancedInputFilterSettings
 
     AiffSettings.add_member(:bit_depth, Shapes::ShapeRef.new(shape: __integerMin16Max24, location_name: "bitDepth"))
-    AiffSettings.add_member(:channels, Shapes::ShapeRef.new(shape: __integerMin1Max64, location_name: "channels"))
+    AiffSettings.add_member(:channels, Shapes::ShapeRef.new(shape: __integerMin0Max64, location_name: "channels"))
     AiffSettings.add_member(:sample_rate, Shapes::ShapeRef.new(shape: __integerMin8000Max192000, location_name: "sampleRate"))
     AiffSettings.struct_class = Types::AiffSettings
 
@@ -1536,6 +1538,7 @@ module Aws::MediaConvert
 
     DisassociateCertificateResponse.struct_class = Types::DisassociateCertificateResponse
 
+    DolbyVision.add_member(:compatibility, Shapes::ShapeRef.new(shape: DolbyVisionCompatibility, location_name: "compatibility"))
     DolbyVision.add_member(:l6_metadata, Shapes::ShapeRef.new(shape: DolbyVisionLevel6Metadata, location_name: "l6Metadata"))
     DolbyVision.add_member(:l6_mode, Shapes::ShapeRef.new(shape: DolbyVisionLevel6Mode, location_name: "l6Mode"))
     DolbyVision.add_member(:mapping, Shapes::ShapeRef.new(shape: DolbyVisionMapping, location_name: "mapping"))
@@ -1698,7 +1701,7 @@ module Aws::MediaConvert
     FileSourceSettings.struct_class = Types::FileSourceSettings
 
     FlacSettings.add_member(:bit_depth, Shapes::ShapeRef.new(shape: __integerMin16Max24, location_name: "bitDepth"))
-    FlacSettings.add_member(:channels, Shapes::ShapeRef.new(shape: __integerMin1Max8, location_name: "channels"))
+    FlacSettings.add_member(:channels, Shapes::ShapeRef.new(shape: __integerMin0Max8, location_name: "channels"))
     FlacSettings.add_member(:sample_rate, Shapes::ShapeRef.new(shape: __integerMin22050Max192000, location_name: "sampleRate"))
     FlacSettings.struct_class = Types::FlacSettings
 
@@ -2355,12 +2358,12 @@ module Aws::MediaConvert
 
     Mp2Settings.add_member(:audio_description_mix, Shapes::ShapeRef.new(shape: Mp2AudioDescriptionMix, location_name: "audioDescriptionMix"))
     Mp2Settings.add_member(:bitrate, Shapes::ShapeRef.new(shape: __integerMin32000Max384000, location_name: "bitrate"))
-    Mp2Settings.add_member(:channels, Shapes::ShapeRef.new(shape: __integerMin1Max2, location_name: "channels"))
+    Mp2Settings.add_member(:channels, Shapes::ShapeRef.new(shape: __integerMin0Max2, location_name: "channels"))
     Mp2Settings.add_member(:sample_rate, Shapes::ShapeRef.new(shape: __integerMin32000Max48000, location_name: "sampleRate"))
     Mp2Settings.struct_class = Types::Mp2Settings
 
     Mp3Settings.add_member(:bitrate, Shapes::ShapeRef.new(shape: __integerMin16000Max320000, location_name: "bitrate"))
-    Mp3Settings.add_member(:channels, Shapes::ShapeRef.new(shape: __integerMin1Max2, location_name: "channels"))
+    Mp3Settings.add_member(:channels, Shapes::ShapeRef.new(shape: __integerMin0Max2, location_name: "channels"))
     Mp3Settings.add_member(:rate_control_mode, Shapes::ShapeRef.new(shape: Mp3RateControlMode, location_name: "rateControlMode"))
     Mp3Settings.add_member(:sample_rate, Shapes::ShapeRef.new(shape: __integerMin22050Max48000, location_name: "sampleRate"))
     Mp3Settings.add_member(:vbr_quality, Shapes::ShapeRef.new(shape: __integerMin0Max9, location_name: "vbrQuality"))
@@ -2448,6 +2451,7 @@ module Aws::MediaConvert
 
     MxfSettings.add_member(:afd_signaling, Shapes::ShapeRef.new(shape: MxfAfdSignaling, location_name: "afdSignaling"))
     MxfSettings.add_member(:profile, Shapes::ShapeRef.new(shape: MxfProfile, location_name: "profile"))
+    MxfSettings.add_member(:uncompressed_audio_wrapping, Shapes::ShapeRef.new(shape: MxfUncompressedAudioWrapping, location_name: "uncompressedAudioWrapping"))
     MxfSettings.add_member(:xavc_profile_settings, Shapes::ShapeRef.new(shape: MxfXavcProfileSettings, location_name: "xavcProfileSettings"))
     MxfSettings.struct_class = Types::MxfSettings
 
@@ -2503,7 +2507,7 @@ module Aws::MediaConvert
     NotFoundException.struct_class = Types::NotFoundException
 
     OpusSettings.add_member(:bitrate, Shapes::ShapeRef.new(shape: __integerMin32000Max192000, location_name: "bitrate"))
-    OpusSettings.add_member(:channels, Shapes::ShapeRef.new(shape: __integerMin1Max2, location_name: "channels"))
+    OpusSettings.add_member(:channels, Shapes::ShapeRef.new(shape: __integerMin0Max2, location_name: "channels"))
     OpusSettings.add_member(:sample_rate, Shapes::ShapeRef.new(shape: __integerMin16000Max48000, location_name: "sampleRate"))
     OpusSettings.struct_class = Types::OpusSettings
 
@@ -2964,7 +2968,7 @@ module Aws::MediaConvert
     VideoSelector.add_member(:streams, Shapes::ShapeRef.new(shape: __listOf__integerMin1Max2147483647, location_name: "streams"))
     VideoSelector.struct_class = Types::VideoSelector
 
-    VorbisSettings.add_member(:channels, Shapes::ShapeRef.new(shape: __integerMin1Max2, location_name: "channels"))
+    VorbisSettings.add_member(:channels, Shapes::ShapeRef.new(shape: __integerMin0Max2, location_name: "channels"))
     VorbisSettings.add_member(:sample_rate, Shapes::ShapeRef.new(shape: __integerMin22050Max48000, location_name: "sampleRate"))
     VorbisSettings.add_member(:vbr_quality, Shapes::ShapeRef.new(shape: __integerMinNegative1Max10, location_name: "vbrQuality"))
     VorbisSettings.struct_class = Types::VorbisSettings
@@ -3004,7 +3008,7 @@ module Aws::MediaConvert
     WarningGroup.struct_class = Types::WarningGroup
 
     WavSettings.add_member(:bit_depth, Shapes::ShapeRef.new(shape: __integerMin16Max24, location_name: "bitDepth"))
-    WavSettings.add_member(:channels, Shapes::ShapeRef.new(shape: __integerMin1Max64, location_name: "channels"))
+    WavSettings.add_member(:channels, Shapes::ShapeRef.new(shape: __integerMin0Max64, location_name: "channels"))
     WavSettings.add_member(:format, Shapes::ShapeRef.new(shape: WavFormat, location_name: "format"))
     WavSettings.add_member(:sample_rate, Shapes::ShapeRef.new(shape: __integerMin8000Max192000, location_name: "sampleRate"))
     WavSettings.struct_class = Types::WavSettings

@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.162.0 (2026-02-03)
+------------------
+
+* Feature - This change supports the creation of multi-account global tables. It adds two new arguments to CreateTable, GlobalTableSourceArn and GlobalTableSettingsReplicationMode. DescribeTable is also updated to include information about GlobalTableSettingsReplicationMode.
+
+1.161.0 (2026-01-22)
+------------------
+
+* Feature - Adds additional waiters to Amazon DynamoDB.
+
+1.160.0 (2026-01-16)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.159.0 (2026-01-08)
 ------------------
 

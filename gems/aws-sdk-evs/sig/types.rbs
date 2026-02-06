@@ -37,6 +37,7 @@ module Aws::Evs
       attr_accessor client_token: ::String
       attr_accessor environment_id: ::String
       attr_accessor host: Types::HostInfoForCreate
+      attr_accessor esx_version: ::String
       SENSITIVE: []
     end
 
@@ -54,7 +55,7 @@ module Aws::Evs
       attr_accessor service_access_security_groups: Types::ServiceAccessSecurityGroups
       attr_accessor vpc_id: ::String
       attr_accessor service_access_subnet_id: ::String
-      attr_accessor vcf_version: ("VCF-5.2.1")
+      attr_accessor vcf_version: ("VCF-5.2.1" | "VCF-5.2.2")
       attr_accessor terms_accepted: bool
       attr_accessor license_info: ::Array[Types::LicenseInfo]
       attr_accessor initial_vlans: Types::InitialVlans
@@ -124,7 +125,7 @@ module Aws::Evs
       attr_accessor environment_name: ::String
       attr_accessor vpc_id: ::String
       attr_accessor service_access_subnet_id: ::String
-      attr_accessor vcf_version: ("VCF-5.2.1")
+      attr_accessor vcf_version: ("VCF-5.2.1" | "VCF-5.2.2")
       attr_accessor terms_accepted: bool
       attr_accessor license_info: ::Array[Types::LicenseInfo]
       attr_accessor site_id: ::String
@@ -141,7 +142,7 @@ module Aws::Evs
     class EnvironmentSummary
       attr_accessor environment_id: ::String
       attr_accessor environment_name: ::String
-      attr_accessor vcf_version: ("VCF-5.2.1")
+      attr_accessor vcf_version: ("VCF-5.2.1" | "VCF-5.2.2")
       attr_accessor environment_status: ("PASSED" | "FAILED" | "UNKNOWN")
       attr_accessor environment_state: ("CREATING" | "CREATED" | "DELETING" | "DELETED" | "CREATE_FAILED")
       attr_accessor created_at: ::Time
@@ -157,6 +158,15 @@ module Aws::Evs
 
     class GetEnvironmentResponse
       attr_accessor environment: Types::Environment
+      SENSITIVE: []
+    end
+
+    class GetVersionsRequest < Aws::EmptyStructure
+    end
+
+    class GetVersionsResponse
+      attr_accessor vcf_versions: ::Array[Types::VcfVersionInfo]
+      attr_accessor instance_type_esx_versions: ::Array[Types::InstanceTypeEsxVersionsInfo]
       SENSITIVE: []
     end
 
@@ -203,6 +213,17 @@ module Aws::Evs
       attr_accessor expansion_vlan_2: Types::InitialVlanInfo
       attr_accessor is_hcx_public: bool
       attr_accessor hcx_network_acl_id: ::String
+      SENSITIVE: []
+    end
+
+    class InstanceTypeEsxVersionsInfo
+      attr_accessor instance_type: ("i4i.metal")
+      attr_accessor esx_versions: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
       SENSITIVE: []
     end
 
@@ -345,6 +366,14 @@ module Aws::Evs
       attr_accessor nsx_edge_2: ::String
       attr_accessor sddc_manager: ::String
       attr_accessor cloud_builder: ::String
+      SENSITIVE: []
+    end
+
+    class VcfVersionInfo
+      attr_accessor vcf_version: ("VCF-5.2.1" | "VCF-5.2.2")
+      attr_accessor status: ::String
+      attr_accessor default_esx_version: ::String
+      attr_accessor instance_types: ::Array[("i4i.metal")]
       SENSITIVE: []
     end
 

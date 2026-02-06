@@ -563,6 +563,12 @@ module Aws::Evs
     # deployment completes, you can configure VCF in the vSphere user
     # interface according to your needs.
     #
+    # When creating a new environment, the default ESX version for the
+    # selected VCF version will be used, you cannot choose a specific ESX
+    # version in `CreateEnvironment` action. When a host has been added with
+    # a specific ESX version, it can only be upgraded using vCenter
+    # Lifecycle Manager.
+    #
     # <note markdown="1"> You cannot use the `dedicatedHostId` and `placementGroupId` parameters
     # together in the same `CreateEnvironment` action. This results in a
     # `ValidationException` response.
@@ -639,7 +645,7 @@ module Aws::Evs
     #   Connect virtual private gateway associations.
     #
     #   <note markdown="1"> Ensure that you specify a VPC that is adequately sized to accommodate
-    #   the \{evws} subnets.
+    #   the Amazon EVS subnets.
     #
     #    </note>
     #
@@ -650,8 +656,7 @@ module Aws::Evs
     #   environment.
     #
     # @option params [required, String] :vcf_version
-    #   The VCF version to use for the environment. Amazon EVS only supports
-    #   VCF version 5.2.1 at this time.
+    #   The VCF version to use for the environment.
     #
     # @option params [required, Boolean] :terms_accepted
     #   Customer confirmation that the customer has purchased and will
@@ -684,7 +689,7 @@ module Aws::Evs
     #    </note>
     #
     # @option params [required, Array<Types::HostInfoForCreate>] :hosts
-    #   The ESXi hosts to add to the environment. Amazon EVS requires that you
+    #   The ESX hosts to add to the environment. Amazon EVS requires that you
     #   provide details for a minimum of 4 hosts during environment creation.
     #
     #   For each host, you must provide the desired hostname, EC2 SSH keypair
@@ -731,7 +736,7 @@ module Aws::Evs
     #     },
     #     vpc_id: "VpcId", # required
     #     service_access_subnet_id: "SubnetId", # required
-    #     vcf_version: "VCF-5.2.1", # required, accepts VCF-5.2.1
+    #     vcf_version: "VCF-5.2.1", # required, accepts VCF-5.2.1, VCF-5.2.2
     #     terms_accepted: false, # required
     #     license_info: [ # required
     #       {
@@ -810,7 +815,7 @@ module Aws::Evs
     #   resp.environment.environment_name #=> String
     #   resp.environment.vpc_id #=> String
     #   resp.environment.service_access_subnet_id #=> String
-    #   resp.environment.vcf_version #=> String, one of "VCF-5.2.1"
+    #   resp.environment.vcf_version #=> String, one of "VCF-5.2.1", "VCF-5.2.2"
     #   resp.environment.terms_accepted #=> Boolean
     #   resp.environment.license_info #=> Array
     #   resp.environment.license_info[0].solution_key #=> String
@@ -847,17 +852,25 @@ module Aws::Evs
       req.send_request(options)
     end
 
-    # Creates an ESXi host and adds it to an Amazon EVS environment. Amazon
+    # Creates an ESX host and adds it to an Amazon EVS environment. Amazon
     # EVS supports 4-16 hosts per environment.
     #
     # This action can only be used after the Amazon EVS environment is
     # deployed.
     #
     # You can use the `dedicatedHostId` parameter to specify an Amazon EC2
-    # Dedicated Host for ESXi host creation.
+    # Dedicated Host for ESX host creation.
     #
     # You can use the `placementGroupId` parameter to specify a cluster or
     # partition placement group to launch EC2 instances into.
+    #
+    # <note markdown="1"> If you don't specify an ESX version when adding hosts using
+    # `CreateEnvironmentHost` action, Amazon EVS automatically uses the
+    # default ESX version associated with your environment's VCF version.
+    # To find the default ESX version for a particular VCF version, use the
+    # `GetVersions` action.
+    #
+    #  </note>
     #
     # <note markdown="1"> You cannot use the `dedicatedHostId` and `placementGroupId` parameters
     # together in the same `CreateEnvironmentHost` action. This results in a
@@ -886,6 +899,9 @@ module Aws::Evs
     # @option params [required, Types::HostInfoForCreate] :host
     #   The host that is created and added to the environment.
     #
+    # @option params [String] :esx_version
+    #   The ESX version to use for the host.
+    #
     # @return [Types::CreateEnvironmentHostResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateEnvironmentHostResponse#environment_summary #environment_summary} => Types::EnvironmentSummary
@@ -903,13 +919,14 @@ module Aws::Evs
     #       placement_group_id: "PlacementGroupId",
     #       dedicated_host_id: "DedicatedHostId",
     #     },
+    #     esx_version: "EsxVersion",
     #   })
     #
     # @example Response structure
     #
     #   resp.environment_summary.environment_id #=> String
     #   resp.environment_summary.environment_name #=> String
-    #   resp.environment_summary.vcf_version #=> String, one of "VCF-5.2.1"
+    #   resp.environment_summary.vcf_version #=> String, one of "VCF-5.2.1", "VCF-5.2.2"
     #   resp.environment_summary.environment_status #=> String, one of "PASSED", "FAILED", "UNKNOWN"
     #   resp.environment_summary.environment_state #=> String, one of "CREATING", "CREATED", "DELETING", "DELETED", "CREATE_FAILED"
     #   resp.environment_summary.created_at #=> Time
@@ -989,7 +1006,7 @@ module Aws::Evs
     #   resp.environment.environment_name #=> String
     #   resp.environment.vpc_id #=> String
     #   resp.environment.service_access_subnet_id #=> String
-    #   resp.environment.vcf_version #=> String, one of "VCF-5.2.1"
+    #   resp.environment.vcf_version #=> String, one of "VCF-5.2.1", "VCF-5.2.2"
     #   resp.environment.terms_accepted #=> Boolean
     #   resp.environment.license_info #=> Array
     #   resp.environment.license_info[0].solution_key #=> String
@@ -1072,7 +1089,7 @@ module Aws::Evs
     #
     #   resp.environment_summary.environment_id #=> String
     #   resp.environment_summary.environment_name #=> String
-    #   resp.environment_summary.vcf_version #=> String, one of "VCF-5.2.1"
+    #   resp.environment_summary.vcf_version #=> String, one of "VCF-5.2.1", "VCF-5.2.2"
     #   resp.environment_summary.environment_status #=> String, one of "PASSED", "FAILED", "UNKNOWN"
     #   resp.environment_summary.environment_state #=> String, one of "CREATING", "CREATED", "DELETING", "DELETED", "CREATE_FAILED"
     #   resp.environment_summary.created_at #=> Time
@@ -1196,7 +1213,7 @@ module Aws::Evs
     #   resp.environment.environment_name #=> String
     #   resp.environment.vpc_id #=> String
     #   resp.environment.service_access_subnet_id #=> String
-    #   resp.environment.vcf_version #=> String, one of "VCF-5.2.1"
+    #   resp.environment.vcf_version #=> String, one of "VCF-5.2.1", "VCF-5.2.2"
     #   resp.environment.terms_accepted #=> Boolean
     #   resp.environment.license_info #=> Array
     #   resp.environment.license_info[0].solution_key #=> String
@@ -1230,6 +1247,37 @@ module Aws::Evs
     # @param [Hash] params ({})
     def get_environment(params = {}, options = {})
       req = build_request(:get_environment, params)
+      req.send_request(options)
+    end
+
+    # Returns information about VCF versions, ESX versions and EC2 instance
+    # types provided by Amazon EVS. For each VCF version, the response also
+    # includes the default ESX version and provided EC2 instance types.
+    #
+    # @return [Types::GetVersionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetVersionsResponse#vcf_versions #vcf_versions} => Array&lt;Types::VcfVersionInfo&gt;
+    #   * {Types::GetVersionsResponse#instance_type_esx_versions #instance_type_esx_versions} => Array&lt;Types::InstanceTypeEsxVersionsInfo&gt;
+    #
+    # @example Response structure
+    #
+    #   resp.vcf_versions #=> Array
+    #   resp.vcf_versions[0].vcf_version #=> String, one of "VCF-5.2.1", "VCF-5.2.2"
+    #   resp.vcf_versions[0].status #=> String
+    #   resp.vcf_versions[0].default_esx_version #=> String
+    #   resp.vcf_versions[0].instance_types #=> Array
+    #   resp.vcf_versions[0].instance_types[0] #=> String, one of "i4i.metal"
+    #   resp.instance_type_esx_versions #=> Array
+    #   resp.instance_type_esx_versions[0].instance_type #=> String, one of "i4i.metal"
+    #   resp.instance_type_esx_versions[0].esx_versions #=> Array
+    #   resp.instance_type_esx_versions[0].esx_versions[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/evs-2023-07-27/GetVersions AWS API Documentation
+    #
+    # @overload get_versions(params = {})
+    # @param [Hash] params ({})
+    def get_versions(params = {}, options = {})
+      req = build_request(:get_versions, params)
       req.send_request(options)
     end
 
@@ -1394,7 +1442,7 @@ module Aws::Evs
     #   resp.environment_summaries #=> Array
     #   resp.environment_summaries[0].environment_id #=> String
     #   resp.environment_summaries[0].environment_name #=> String
-    #   resp.environment_summaries[0].vcf_version #=> String, one of "VCF-5.2.1"
+    #   resp.environment_summaries[0].vcf_version #=> String, one of "VCF-5.2.1", "VCF-5.2.2"
     #   resp.environment_summaries[0].environment_status #=> String, one of "PASSED", "FAILED", "UNKNOWN"
     #   resp.environment_summaries[0].environment_state #=> String, one of "CREATING", "CREATED", "DELETING", "DELETED", "CREATE_FAILED"
     #   resp.environment_summaries[0].created_at #=> Time
@@ -1522,7 +1570,7 @@ module Aws::Evs
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-evs'
-      context[:gem_version] = '1.11.0'
+      context[:gem_version] = '1.13.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

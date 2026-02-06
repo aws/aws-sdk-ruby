@@ -1406,6 +1406,7 @@ module Aws::ECS
     InstanceLaunchTemplate.add_member(:monitoring, Shapes::ShapeRef.new(shape: ManagedInstancesMonitoringOptions, location_name: "monitoring"))
     InstanceLaunchTemplate.add_member(:capacity_option_type, Shapes::ShapeRef.new(shape: CapacityOptionType, location_name: "capacityOptionType"))
     InstanceLaunchTemplate.add_member(:instance_requirements, Shapes::ShapeRef.new(shape: InstanceRequirementsRequest, location_name: "instanceRequirements"))
+    InstanceLaunchTemplate.add_member(:fips_enabled, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "fipsEnabled"))
     InstanceLaunchTemplate.struct_class = Types::InstanceLaunchTemplate
 
     InstanceLaunchTemplateUpdate.add_member(:ec2_instance_profile_arn, Shapes::ShapeRef.new(shape: String, location_name: "ec2InstanceProfileArn"))

@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.24.0 (2026-02-05)
+------------------
+
+* Feature - Support Browser profile persistence (cookies and local storage) across sessions for AgentCore Browser.
+
+1.23.0 (2026-02-02)
+------------------
+
+* Feature - Adds tagging support for AgentCore Evaluations (evaluator and online evaluation config)
+
+1.22.0 (2026-01-16)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.21.0 (2026-01-09)
 ------------------
 

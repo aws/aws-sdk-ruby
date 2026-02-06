@@ -1695,6 +1695,7 @@ module Aws::ConfigService
       attr_accessor delivery_s3_key_prefix: ::String
       attr_accessor conformance_pack_input_parameters: ::Array[Types::ConformancePackInputParameter]
       attr_accessor template_ssm_document_details: Types::TemplateSSMDocumentDetails
+      attr_accessor tags: ::Array[Types::Tag]
       SENSITIVE: []
     end
 

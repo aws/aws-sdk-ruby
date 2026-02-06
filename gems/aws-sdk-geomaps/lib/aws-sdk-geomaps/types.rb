@@ -776,9 +776,11 @@ module Aws::GeoMaps
     #   * `Hillshade`: Displays the physical terrain details through shading
     #     and highlighting of elevation change and geographic features.
     #
-    #   ^
+    #   * `Terrain3D`: Displays physical terrain details and elevations as a
+    #     three-dimensional model.
     #
-    #   This parameter is valid only for the `Standard` map style.
+    #   `Hillshade` is valid only for the `Standard` and `Monochrome` map
+    #   styles.
     #   @return [String]
     #
     # @!attribute [rw] contour_density
@@ -786,7 +788,8 @@ module Aws::GeoMaps
     #   lines. The density value controls how densely the available contour
     #   line information is rendered on the map.
     #
-    #   This parameter is valid only for the `Standard` map style.
+    #   This parameter is valid only for the `Standard`, `Monochrome`, and
+    #   `Hybrid` map styles.
     #   @return [String]
     #
     # @!attribute [rw] traffic
@@ -805,6 +808,20 @@ module Aws::GeoMaps
     #   This parameter is valid only for the `Standard` map style.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] buildings
+    #   Adjusts how building details are rendered on the map.
+    #
+    #   The following building styles are currently supported:
+    #
+    #   * `Buildings3D`: Displays buildings as three-dimensional extrusions
+    #     on the map.
+    #
+    #   ^
+    #
+    #   `Buildings3D` is valid only for the `Standard` and `Monochrome` map
+    #   styles.
+    #   @return [String]
+    #
     # @!attribute [rw] key
     #   Optional: The API key to be used for authorization. Either an API
     #   key or valid SigV4 signature must be provided when making a request.
@@ -820,6 +837,7 @@ module Aws::GeoMaps
       :contour_density,
       :traffic,
       :travel_modes,
+      :buildings,
       :key)
       SENSITIVE = [:political_view, :key]
       include Aws::Structure
@@ -862,7 +880,8 @@ module Aws::GeoMaps
     # @!attribute [rw] tileset
     #   Specifies the desired tile set.
     #
-    #   Valid Values: `raster.satellite | vector.basemap`
+    #   Valid Values: `raster.satellite | vector.basemap | vector.traffic |
+    #   raster.dem`
     #   @return [String]
     #
     # @!attribute [rw] z

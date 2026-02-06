@@ -95,6 +95,7 @@ module Aws
       def attach_to_instance: (
                                 device: ::String,
                                 instance_id: ::String,
+                                ?ebs_card_index: ::Integer,
                                 ?dry_run: bool
                               ) -> Types::VolumeAttachment
                             | (?Hash[Symbol, untyped]) -> Types::VolumeAttachment

@@ -4243,6 +4243,18 @@ module Aws::S3Control
     #   object in the manifest.
     #   @return [Types::S3ComputeObjectChecksumOperation]
     #
+    # @!attribute [rw] s3_update_object_encryption
+    #   Updates the server-side encryption type of an existing encrypted
+    #   object in a general purpose bucket. You can use the
+    #   `UpdateObjectEncryption` operation to change encrypted objects from
+    #   server-side encryption with Amazon S3 managed keys (SSE-S3) to
+    #   server-side encryption with Key Management Service (KMS) keys
+    #   (SSE-KMS), or to apply S3 Bucket Keys. You can also use the
+    #   `UpdateObjectEncryption` operation to change the customer-managed
+    #   KMS key used to encrypt your data so that you can comply with custom
+    #   key-rotation standards.
+    #   @return [Types::S3UpdateObjectEncryptionOperation]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/JobOperation AWS API Documentation
     #
     class JobOperation < Struct.new(
@@ -4255,7 +4267,8 @@ module Aws::S3Control
       :s3_put_object_legal_hold,
       :s3_put_object_retention,
       :s3_replicate_object,
-      :s3_compute_object_checksum)
+      :s3_compute_object_checksum,
+      :s3_update_object_encryption)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5998,6 +6011,25 @@ module Aws::S3Control
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/NotSSEFilter AWS API Documentation
     #
     class NotSSEFilter < Aws::EmptyStructure; end
+
+    # The updated server-side encryption type for this object. The
+    # `UpdateObjectEncryption` operation supports the SSE-KMS encryption
+    # type.
+    #
+    # Valid Values: `SSEKMS`
+    #
+    # @!attribute [rw] ssekms
+    #   Specifies to update the object encryption type to server-side
+    #   encryption with Key Management Service (KMS) keys (SSE-KMS).
+    #   @return [Types::S3UpdateObjectEncryptionSSEKMS]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/ObjectEncryption AWS API Documentation
+    #
+    class ObjectEncryption < Struct.new(
+      :ssekms)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # An optional filter for the S3JobManifestGenerator that identifies the
     # subset of objects by encryption type.
@@ -8026,6 +8058,52 @@ module Aws::S3Control
     class S3Tag < Struct.new(
       :key,
       :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # With the `UpdateObjectEncryption` operation, you can atomically update
+    # the server-side encryption type of an existing object in a general
+    # purpose bucket without any data movement.
+    #
+    # @!attribute [rw] object_encryption
+    #   The updated server-side encryption type for this S3 object. The
+    #   `UpdateObjectEncryption` operation supports the SSE-KMS encryption
+    #   type.
+    #   @return [Types::ObjectEncryption]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/S3UpdateObjectEncryptionOperation AWS API Documentation
+    #
+    class S3UpdateObjectEncryptionOperation < Struct.new(
+      :object_encryption)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # If `SSEKMS` is specified for `UpdateObjectEncryption`, this data type
+    # specifies the Amazon Web Services KMS key Amazon Resource Name (ARN)
+    # to use and whether to use an S3 Bucket Key for server-side encryption
+    # using Key Management Service (KMS) keys (SSE-KMS).
+    #
+    # @!attribute [rw] kms_key_arn
+    #   Specifies the Amazon Web Services KMS key Amazon Resource Name (ARN)
+    #   to use for the updated server-side encryption type. Required if
+    #   `UpdateObjectEncryption` specifies `SSEKMS`.
+    #   @return [String]
+    #
+    # @!attribute [rw] bucket_key_enabled
+    #   Specifies whether Amazon S3 should use an S3 Bucket Key for object
+    #   encryption with server-side encryption using Key Management Service
+    #   (KMS) keys (SSE-KMS). If this value isn't specified, it defaults to
+    #   `false`. Setting this value to `true` causes Amazon S3 to use an S3
+    #   Bucket Key for update object encryption with SSE-KMS.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/S3UpdateObjectEncryptionSSEKMS AWS API Documentation
+    #
+    class S3UpdateObjectEncryptionSSEKMS < Struct.new(
+      :kms_key_arn,
+      :bucket_key_enabled)
       SENSITIVE = []
       include Aws::Structure
     end

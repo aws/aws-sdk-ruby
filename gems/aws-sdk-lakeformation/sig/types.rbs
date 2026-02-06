@@ -144,6 +144,11 @@ module Aws::LakeFormation
       SENSITIVE: []
     end
 
+    class ConflictException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
     class CreateDataCellsFilterRequest
       attr_accessor table_data: Types::DataCellsFilter
       SENSITIVE: []
@@ -534,6 +539,21 @@ module Aws::LakeFormation
       SENSITIVE: []
     end
 
+    class GetTemporaryDataLocationCredentialsRequest
+      attr_accessor duration_seconds: ::Integer
+      attr_accessor audit_context: Types::AuditContext
+      attr_accessor data_locations: ::Array[::String]
+      attr_accessor credentials_scope: ("READ" | "READWRITE")
+      SENSITIVE: []
+    end
+
+    class GetTemporaryDataLocationCredentialsResponse
+      attr_accessor credentials: Types::TemporaryCredentials
+      attr_accessor accessible_data_locations: ::Array[::String]
+      attr_accessor credentials_scope: ("READ" | "READWRITE")
+      SENSITIVE: []
+    end
+
     class GetTemporaryGluePartitionCredentialsRequest
       attr_accessor table_arn: ::String
       attr_accessor partition: Types::PartitionValueList
@@ -894,6 +914,7 @@ module Aws::LakeFormation
       attr_accessor with_federation: bool
       attr_accessor hybrid_access_enabled: bool
       attr_accessor with_privileged_access: bool
+      attr_accessor expected_resource_owner_account: ::String
       SENSITIVE: []
     end
 
@@ -932,6 +953,8 @@ module Aws::LakeFormation
       attr_accessor with_federation: bool
       attr_accessor hybrid_access_enabled: bool
       attr_accessor with_privileged_access: bool
+      attr_accessor verification_status: ("VERIFIED" | "VERIFICATION_FAILED" | "NOT_VERIFIED")
+      attr_accessor expected_resource_owner_account: ::String
       SENSITIVE: []
     end
 
@@ -1079,6 +1102,14 @@ module Aws::LakeFormation
       SENSITIVE: []
     end
 
+    class TemporaryCredentials
+      attr_accessor access_key_id: ::String
+      attr_accessor secret_access_key: ::String
+      attr_accessor session_token: ::String
+      attr_accessor expiration: ::Time
+      SENSITIVE: []
+    end
+
     class ThrottledException
       attr_accessor message: ::String
       SENSITIVE: []
@@ -1154,6 +1185,7 @@ module Aws::LakeFormation
       attr_accessor resource_arn: ::String
       attr_accessor with_federation: bool
       attr_accessor hybrid_access_enabled: bool
+      attr_accessor expected_resource_owner_account: ::String
       SENSITIVE: []
     end
 

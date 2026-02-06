@@ -1211,7 +1211,8 @@ module Aws
                                  type: ("PYSPARK"),
                                  membership_identifier: ::String,
                                  job_parameters: {
-                                   analysis_template_arn: ::String
+                                   analysis_template_arn: ::String,
+                                   parameters: Hash[::String, ::String]?
                                  },
                                  ?result_configuration: {
                                    output_configuration: {

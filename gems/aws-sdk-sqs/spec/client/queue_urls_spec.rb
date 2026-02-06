@@ -81,6 +81,32 @@ module Aws
             expect(resp.context.http_request.headers['authorization'])
               .to include('us-west-2')
           end
+
+          it 'disables region detection when disable_queue_url_region_detection is true' do
+            url = 'https://sqs.us-west-2.amazonaws.com/1234567890/demo'
+            client = Client.new(
+              stub_responses: true,
+              region: 'us-east-1',
+              disable_queue_url_region_detection: true
+            )
+            resp = client.send(method, params.merge(queue_url: url))
+            expect(resp.context.http_request.headers['authorization'])
+              .to include('us-east-1')
+            expect(resp.context.http_request.headers['authorization'])
+              .not_to include('us-west-2')
+          end
+
+          it 'uses configured region for custom endpoints when detection disabled' do
+            url = 'https://sqs.elb-proxy.elb-gamma.us-east-1.amazonaws.com/1234567890/demo'
+            client = Client.new(
+              stub_responses: true,
+              region: 'us-east-1',
+              disable_queue_url_region_detection: true
+            )
+            resp = client.send(method, params.merge(queue_url: url))
+            expect(resp.context.http_request.headers['authorization'])
+              .to include('us-east-1')
+          end
         end
       end
     end

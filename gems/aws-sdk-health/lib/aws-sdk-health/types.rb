@@ -251,7 +251,7 @@ module Aws::Health
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of items to return in one batch, between 10 and
+    #   The maximum number of items to return in one batch, between 1 and
     #   100, inclusive.
     #   @return [Integer]
     #
@@ -320,7 +320,7 @@ module Aws::Health
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of items to return in one batch, between 10 and
+    #   The maximum number of items to return in one batch, between 1 and
     #   100, inclusive.
     #   @return [Integer]
     #
@@ -620,7 +620,7 @@ module Aws::Health
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of items to return in one batch, between 10 and
+    #   The maximum number of items to return in one batch, between 1 and
     #   100, inclusive.
     #   @return [Integer]
     #
@@ -674,7 +674,7 @@ module Aws::Health
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of items to return in one batch, between 10 and
+    #   The maximum number of items to return in one batch, between 1 and
     #   100, inclusive.
     #   @return [Integer]
     #

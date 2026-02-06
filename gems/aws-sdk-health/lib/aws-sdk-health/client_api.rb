@@ -192,7 +192,7 @@ module Aws::Health
     DescribeAffectedEntitiesRequest.add_member(:filter, Shapes::ShapeRef.new(shape: EntityFilter, required: true, location_name: "filter"))
     DescribeAffectedEntitiesRequest.add_member(:locale, Shapes::ShapeRef.new(shape: locale, location_name: "locale"))
     DescribeAffectedEntitiesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: nextToken, location_name: "nextToken"))
-    DescribeAffectedEntitiesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: maxResults, location_name: "maxResults"))
+    DescribeAffectedEntitiesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: maxResultsLowerRange, location_name: "maxResults"))
     DescribeAffectedEntitiesRequest.struct_class = Types::DescribeAffectedEntitiesRequest
 
     DescribeAffectedEntitiesResponse.add_member(:entities, Shapes::ShapeRef.new(shape: EntityList, location_name: "entities"))
@@ -268,7 +268,7 @@ module Aws::Health
 
     DescribeEventsRequest.add_member(:filter, Shapes::ShapeRef.new(shape: EventFilter, location_name: "filter"))
     DescribeEventsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: nextToken, location_name: "nextToken"))
-    DescribeEventsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: maxResults, location_name: "maxResults"))
+    DescribeEventsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: maxResultsLowerRange, location_name: "maxResults"))
     DescribeEventsRequest.add_member(:locale, Shapes::ShapeRef.new(shape: locale, location_name: "locale"))
     DescribeEventsRequest.struct_class = Types::DescribeEventsRequest
 

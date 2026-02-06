@@ -748,6 +748,28 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # Basic authentication configuration that defines the username and
+    # password properties for HTTP Basic authentication.
+    #
+    # @!attribute [rw] username
+    #   The username property name to use for Basic authentication
+    #   credentials.
+    #   @return [Types::ConnectorProperty]
+    #
+    # @!attribute [rw] password
+    #   The password property name to use for Basic authentication
+    #   credentials.
+    #   @return [Types::ConnectorProperty]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/BasicAuthenticationProperties AWS API Documentation
+    #
+    class BasicAuthenticationProperties < Struct.new(
+      :username,
+      :password)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Specifies a target that uses a Glue Data Catalog table.
     #
     # @!attribute [rw] name
@@ -2581,6 +2603,55 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # OAuth2 client credentials configuration that defines the properties
+    # needed for the Client Credentials grant type flow.
+    #
+    # @!attribute [rw] token_url
+    #   The token endpoint URL where the client will request access tokens
+    #   using client credentials.
+    #   @return [Types::ConnectorProperty]
+    #
+    # @!attribute [rw] request_method
+    #   The HTTP method to use when making token requests, typically POST.
+    #   @return [String]
+    #
+    # @!attribute [rw] content_type
+    #   The content type to use for token requests, such as
+    #   application/x-www-form-urlencoded or application/json.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_id
+    #   The OAuth2 client identifier provided by the authorization server.
+    #   @return [Types::ConnectorProperty]
+    #
+    # @!attribute [rw] client_secret
+    #   The OAuth2 client secret provided by the authorization server.
+    #   @return [Types::ConnectorProperty]
+    #
+    # @!attribute [rw] scope
+    #   The OAuth2 scope that defines the level of access requested for the
+    #   client credentials flow.
+    #   @return [Types::ConnectorProperty]
+    #
+    # @!attribute [rw] token_url_parameters
+    #   Additional parameters to include in token URL requests as key-value
+    #   pairs.
+    #   @return [Array<Types::ConnectorProperty>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ClientCredentialsProperties AWS API Documentation
+    #
+    class ClientCredentialsProperties < Struct.new(
+      :token_url,
+      :request_method,
+      :content_type,
+      :client_id,
+      :client_secret,
+      :scope,
+      :token_url_parameters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Specifies how Amazon CloudWatch data should be encrypted.
     #
     # @!attribute [rw] cloud_watch_encryption_mode
@@ -4327,6 +4398,29 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # Configuration that defines the base URL and additional request
+    # parameters needed during connection creation.
+    #
+    # @!attribute [rw] url
+    #   The base instance URL for the endpoint that this connection type
+    #   will connect to.
+    #   @return [Types::ConnectorProperty]
+    #
+    # @!attribute [rw] additional_request_parameters
+    #   Key-value pairs of additional request parameters that may be needed
+    #   during connection creation, such as API versions or service-specific
+    #   configuration options.
+    #   @return [Array<Types::ConnectorProperty>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ConnectionPropertiesConfiguration AWS API Documentation
+    #
+    class ConnectionPropertiesConfiguration < Struct.new(
+      :url,
+      :additional_request_parameters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Brief information about a supported connection type returned by the
     # `ListConnectionTypes` API.
     #
@@ -4384,9 +4478,9 @@ module Aws::Glue
       include Aws::Structure
     end
 
-    # Represents a variant of a connection type in Glue Data Catalog.
-    # Connection type variants provide specific configurations and behaviors
-    # for different implementations of the same general connection type.
+    # Represents a variant of a connection type in Glue. Connection type
+    # variants provide specific configurations and behaviors for different
+    # implementations of the same general connection type.
     #
     # @!attribute [rw] connection_type_variant_name
     #   The unique identifier for the connection type variant. This name is
@@ -4429,6 +4523,115 @@ module Aws::Glue
     #
     class ConnectionsList < Struct.new(
       :connections)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration that defines the supported authentication types and
+    # required properties for the connection type.
+    #
+    # @!attribute [rw] authentication_types
+    #   A list of authentication types supported by this connection type,
+    #   such as Basic, OAuth2, or Custom authentication methods.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] o_auth_2_properties
+    #   OAuth2 configuration container that defines the authentication
+    #   properties and flow-specific configurations for OAuth2-based
+    #   connections.
+    #   @return [Types::ConnectorOAuth2Properties]
+    #
+    # @!attribute [rw] basic_authentication_properties
+    #   Basic authentication configuration that defines the username and
+    #   password properties for HTTP Basic authentication.
+    #   @return [Types::BasicAuthenticationProperties]
+    #
+    # @!attribute [rw] custom_authentication_properties
+    #   Custom authentication configuration that allows for flexible
+    #   authentication mechanisms beyond standard Basic and OAuth2 flows.
+    #   @return [Types::CustomAuthenticationProperties]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ConnectorAuthenticationConfiguration AWS API Documentation
+    #
+    class ConnectorAuthenticationConfiguration < Struct.new(
+      :authentication_types,
+      :o_auth_2_properties,
+      :basic_authentication_properties,
+      :custom_authentication_properties)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # OAuth2 authorization code configuration that defines the properties
+    # needed for the Authorization Code grant type flow.
+    #
+    # @!attribute [rw] authorization_code_url
+    #   The authorization endpoint URL where users will be redirected to
+    #   grant authorization.
+    #   @return [Types::ConnectorProperty]
+    #
+    # @!attribute [rw] authorization_code
+    #   The authorization code received from the authorization server after
+    #   user consent.
+    #   @return [Types::ConnectorProperty]
+    #
+    # @!attribute [rw] redirect_uri
+    #   The redirect URI that must match the URI registered with the
+    #   authorization server.
+    #   @return [Types::ConnectorProperty]
+    #
+    # @!attribute [rw] token_url
+    #   The token endpoint URL where the authorization code will be
+    #   exchanged for an access token.
+    #   @return [Types::ConnectorProperty]
+    #
+    # @!attribute [rw] request_method
+    #   The HTTP method to use when making token exchange requests,
+    #   typically POST.
+    #   @return [String]
+    #
+    # @!attribute [rw] content_type
+    #   The content type to use for token exchange requests, such as
+    #   application/x-www-form-urlencoded or application/json.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_id
+    #   The OAuth2 client identifier provided by the authorization server.
+    #   @return [Types::ConnectorProperty]
+    #
+    # @!attribute [rw] client_secret
+    #   The OAuth2 client secret provided by the authorization server.
+    #   @return [Types::ConnectorProperty]
+    #
+    # @!attribute [rw] scope
+    #   The OAuth2 scope that defines the level of access requested for the
+    #   authorization code flow.
+    #   @return [Types::ConnectorProperty]
+    #
+    # @!attribute [rw] prompt
+    #   The OAuth2 prompt parameter that controls the authorization
+    #   server's behavior during user authentication.
+    #   @return [Types::ConnectorProperty]
+    #
+    # @!attribute [rw] token_url_parameters
+    #   Additional parameters to include in token URL requests as key-value
+    #   pairs.
+    #   @return [Array<Types::ConnectorProperty>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ConnectorAuthorizationCodeProperties AWS API Documentation
+    #
+    class ConnectorAuthorizationCodeProperties < Struct.new(
+      :authorization_code_url,
+      :authorization_code,
+      :redirect_uri,
+      :token_url,
+      :request_method,
+      :content_type,
+      :client_id,
+      :client_secret,
+      :scope,
+      :prompt,
+      :token_url_parameters)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4529,6 +4732,89 @@ module Aws::Glue
       :connection_type,
       :data,
       :inputs)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # OAuth2 configuration container that defines the authentication
+    # properties and flow-specific configurations for OAuth2-based
+    # connections.
+    #
+    # @!attribute [rw] o_auth_2_grant_type
+    #   The OAuth2 grant type to use for authentication, such as
+    #   CLIENT\_CREDENTIALS, JWT\_BEARER, or AUTHORIZATION\_CODE.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_credentials_properties
+    #   Configuration properties specific to the OAuth2 Client Credentials
+    #   grant type flow.
+    #   @return [Types::ClientCredentialsProperties]
+    #
+    # @!attribute [rw] jwt_bearer_properties
+    #   Configuration properties specific to the OAuth2 JWT Bearer grant
+    #   type flow.
+    #   @return [Types::JWTBearerProperties]
+    #
+    # @!attribute [rw] authorization_code_properties
+    #   Configuration properties specific to the OAuth2 Authorization Code
+    #   grant type flow.
+    #   @return [Types::ConnectorAuthorizationCodeProperties]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ConnectorOAuth2Properties AWS API Documentation
+    #
+    class ConnectorOAuth2Properties < Struct.new(
+      :o_auth_2_grant_type,
+      :client_credentials_properties,
+      :jwt_bearer_properties,
+      :authorization_code_properties)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Defines a property configuration for connection types, default values,
+    # and where the property should be used in requests.
+    #
+    # @!attribute [rw] name
+    #   The name of the property.
+    #   @return [String]
+    #
+    # @!attribute [rw] key_override
+    #   A key name to use when sending this property in API requests, if
+    #   different from the display name.
+    #   @return [String]
+    #
+    # @!attribute [rw] required
+    #   Indicates whether the property is required.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] default_value
+    #   The default value for the property.
+    #   @return [String]
+    #
+    # @!attribute [rw] allowed_values
+    #   A list of `AllowedValue` objects representing the values allowed for
+    #   the property.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] property_location
+    #   Specifies where this property should be included in REST requests,
+    #   such as in headers, query parameters, or request body.
+    #   @return [String]
+    #
+    # @!attribute [rw] property_type
+    #   The data type of this property
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ConnectorProperty AWS API Documentation
+    #
+    class ConnectorProperty < Struct.new(
+      :name,
+      :key_override,
+      :required,
+      :default_value,
+      :allowed_values,
+      :property_location,
+      :property_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7584,6 +7870,44 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # Cursor-based pagination configuration that defines how to handle
+    # pagination using cursor tokens or next page identifiers.
+    #
+    # @!attribute [rw] next_page
+    #   The parameter name or JSON path that contains the cursor or token
+    #   for retrieving the next page of results.
+    #   @return [Types::ExtractedParameter]
+    #
+    # @!attribute [rw] limit_parameter
+    #   The parameter name used to specify the maximum number of results to
+    #   return per page.
+    #   @return [Types::ExtractedParameter]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CursorConfiguration AWS API Documentation
+    #
+    class CursorConfiguration < Struct.new(
+      :next_page,
+      :limit_parameter)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Custom authentication configuration that allows for flexible
+    # authentication mechanisms beyond standard Basic and OAuth2 flows.
+    #
+    # @!attribute [rw] authentication_parameters
+    #   A map of custom authentication parameters that define the specific
+    #   authentication mechanism and required properties.
+    #   @return [Array<Types::ConnectorProperty>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CustomAuthenticationProperties AWS API Documentation
+    #
+    class CustomAuthenticationProperties < Struct.new(
+      :authentication_parameters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Specifies a transform that uses custom code you provide to perform the
     # data transformation. The output is a collection of DynamicFrames.
     #
@@ -9021,6 +9345,23 @@ module Aws::Glue
     #
     class DeleteConnectionResponse < Aws::EmptyStructure; end
 
+    # @!attribute [rw] connection_type
+    #   The name of the connection type to delete. Must reference an
+    #   existing registered connection type.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteConnectionTypeRequest AWS API Documentation
+    #
+    class DeleteConnectionTypeRequest < Struct.new(
+      :connection_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteConnectionTypeResponse AWS API Documentation
+    #
+    class DeleteConnectionTypeResponse < Aws::EmptyStructure; end
+
     # @!attribute [rw] name
     #   The name of the crawler to remove.
     #   @return [String]
@@ -9839,6 +10180,11 @@ module Aws::Glue
     #   Connection properties specific to the Spark compute environment.
     #   @return [Hash<String,Types::Property>]
     #
+    # @!attribute [rw] rest_configuration
+    #   HTTP request and response configuration, validation endpoint, and
+    #   entity configurations for REST based data source.
+    #   @return [Types::RestConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DescribeConnectionTypeResponse AWS API Documentation
     #
     class DescribeConnectionTypeResponse < Struct.new(
@@ -9852,7 +10198,8 @@ module Aws::Glue
       :physical_connection_requirements,
       :athena_connection_properties,
       :python_connection_properties,
-      :spark_connection_properties)
+      :spark_connection_properties,
+      :rest_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10806,6 +11153,29 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # Configuration that defines how to interact with a specific data entity
+    # through the REST API, including its access patterns and schema
+    # definition.
+    #
+    # @!attribute [rw] source_configuration
+    #   The source configuration that defines how to make requests to access
+    #   this entity's data through the REST API.
+    #   @return [Types::SourceConfiguration]
+    #
+    # @!attribute [rw] schema
+    #   The schema definition for this entity, including field names, types,
+    #   and other metadata that describes the structure of the data.
+    #   @return [Hash<String,Types::FieldDefinition>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/EntityConfiguration AWS API Documentation
+    #
+    class EntityConfiguration < Struct.new(
+      :source_configuration,
+      :schema)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A specified entity does not exist
     #
     # @!attribute [rw] message
@@ -11053,6 +11423,40 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # Parameter extraction configuration that defines how to extract and map
+    # values from API responses to request parameters.
+    #
+    # @!attribute [rw] key
+    #   The parameter key name that will be used in subsequent requests.
+    #   @return [String]
+    #
+    # @!attribute [rw] default_value
+    #   The default value to use if the parameter cannot be extracted from
+    #   the response.
+    #   @return [String]
+    #
+    # @!attribute [rw] property_location
+    #   Specifies where this extracted parameter should be placed in
+    #   subsequent requests, such as in headers, query parameters, or
+    #   request body.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The JSON path or extraction mapping that defines how to extract the
+    #   parameter value from API responses.
+    #   @return [Types::ResponseExtractionMapping]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ExtractedParameter AWS API Documentation
+    #
+    class ExtractedParameter < Struct.new(
+      :key,
+      :default_value,
+      :property_location,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A catalog that points to an entity outside the Glue Data Catalog.
     #
     # @!attribute [rw] identifier
@@ -11293,6 +11697,26 @@ module Aws::Glue
       :parent_field,
       :native_data_type,
       :custom_properties)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Defines a field in an entity schema for REST connector data sources,
+    # specifying the field name and data type.
+    #
+    # @!attribute [rw] name
+    #   The name of the field in the entity schema.
+    #   @return [String]
+    #
+    # @!attribute [rw] field_data_type
+    #   The data type of the field.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/FieldDefinition AWS API Documentation
+    #
+    class FieldDefinition < Struct.new(
+      :name,
+      :field_data_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -17449,6 +17873,46 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # JWT bearer token configuration that defines the properties needed for
+    # the JWT Bearer grant type flow.
+    #
+    # @!attribute [rw] token_url
+    #   The token endpoint URL where the JWT bearer token will be exchanged
+    #   for an access token.
+    #   @return [Types::ConnectorProperty]
+    #
+    # @!attribute [rw] request_method
+    #   The HTTP method to use when making JWT bearer token requests,
+    #   typically POST.
+    #   @return [String]
+    #
+    # @!attribute [rw] content_type
+    #   The content type to use for JWT bearer token requests, such as
+    #   application/x-www-form-urlencoded or application/json.
+    #   @return [String]
+    #
+    # @!attribute [rw] jwt_token
+    #   The JWT token to be used in the bearer token grant flow for
+    #   authentication.
+    #   @return [Types::ConnectorProperty]
+    #
+    # @!attribute [rw] token_url_parameters
+    #   Additional parameters to include in token URL requests as key-value
+    #   pairs.
+    #   @return [Array<Types::ConnectorProperty>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/JWTBearerProperties AWS API Documentation
+    #
+    class JWTBearerProperties < Struct.new(
+      :token_url,
+      :request_method,
+      :content_type,
+      :jwt_token,
+      :token_url_parameters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Specifies a JDBC data store to crawl.
     #
     # @!attribute [rw] connection_name
@@ -21458,6 +21922,28 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # Offset-based pagination configuration that defines how to handle
+    # pagination using numeric offsets and limits.
+    #
+    # @!attribute [rw] offset_parameter
+    #   The parameter name used to specify the starting position or offset
+    #   for retrieving results.
+    #   @return [Types::ExtractedParameter]
+    #
+    # @!attribute [rw] limit_parameter
+    #   The parameter name used to specify the maximum number of results to
+    #   return per page.
+    #   @return [Types::ExtractedParameter]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/OffsetConfiguration AWS API Documentation
+    #
+    class OffsetConfiguration < Struct.new(
+      :offset_parameter,
+      :limit_parameter)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A structure representing an open format table.
     #
     # @!attribute [rw] iceberg_input
@@ -21748,6 +22234,29 @@ module Aws::Glue
       :num_right_chars_to_exclude,
       :detection_parameters,
       :detection_sensitivity)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration that defines how to handle paginated responses from REST
+    # APIs, supporting different pagination strategies used by various
+    # services.
+    #
+    # @!attribute [rw] cursor_configuration
+    #   Configuration for cursor-based pagination, where the API provides a
+    #   cursor or token to retrieve the next page of results.
+    #   @return [Types::CursorConfiguration]
+    #
+    # @!attribute [rw] offset_configuration
+    #   Configuration for offset-based pagination, where the API uses
+    #   numeric offsets and limits to control which results are returned.
+    #   @return [Types::OffsetConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/PaginationConfiguration AWS API Documentation
+    #
+    class PaginationConfiguration < Struct.new(
+      :cursor_configuration,
+      :offset_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -22146,6 +22655,16 @@ module Aws::Glue
     #   Indicates which data operations are applicable to the property.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] key_override
+    #   A key name to use when sending this property in API requests, if
+    #   different from the display name.
+    #   @return [String]
+    #
+    # @!attribute [rw] property_location
+    #   Specifies where this property should be included in REST requests,
+    #   such as in headers, query parameters, or request body.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/Property AWS API Documentation
     #
     class Property < Struct.new(
@@ -22155,7 +22674,9 @@ module Aws::Glue
       :default_value,
       :property_types,
       :allowed_values,
-      :data_operation_scopes)
+      :data_operation_scopes,
+      :key_override,
+      :property_location)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -22697,6 +23218,74 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # @!attribute [rw] connection_type
+    #   The name of the connection type. Must be between 1 and 255
+    #   characters and must be prefixed with "REST-" to indicate it is a
+    #   REST-based connector.
+    #   @return [String]
+    #
+    # @!attribute [rw] integration_type
+    #   The integration type for the connection. Currently only "REST"
+    #   protocol is supported.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the connection type. Can be up to 2048 characters
+    #   and provides details about the purpose and functionality of the
+    #   connection type.
+    #   @return [String]
+    #
+    # @!attribute [rw] connection_properties
+    #   Defines the base URL and additional request parameters needed during
+    #   connection creation for this connection type.
+    #   @return [Types::ConnectionPropertiesConfiguration]
+    #
+    # @!attribute [rw] connector_authentication_configuration
+    #   Defines the supported authentication types and required properties
+    #   for this connection type, including Basic, OAuth2, and Custom
+    #   authentication methods.
+    #   @return [Types::ConnectorAuthenticationConfiguration]
+    #
+    # @!attribute [rw] rest_configuration
+    #   Defines the HTTP request and response configuration, validation
+    #   endpoint, and entity configurations for REST API interactions.
+    #   @return [Types::RestConfiguration]
+    #
+    # @!attribute [rw] tags
+    #   The tags you assign to the connection type.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/RegisterConnectionTypeRequest AWS API Documentation
+    #
+    class RegisterConnectionTypeRequest < Struct.new(
+      :connection_type,
+      :integration_type,
+      :description,
+      :connection_properties,
+      :connector_authentication_configuration,
+      :rest_configuration,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the Amazon Resource Name (ARN) of the newly registered
+    # connection type.
+    #
+    # @!attribute [rw] connection_type_arn
+    #   The Amazon Resource Name (ARN) of the registered connection type.
+    #   This unique identifier can be used to reference the connection type
+    #   in other Glue operations.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/RegisterConnectionTypeResponse AWS API Documentation
+    #
+    class RegisterConnectionTypeResponse < Struct.new(
+      :connection_type_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] schema_id
     #   This is a wrapper structure to contain schema identity fields. The
     #   structure contains:
@@ -23021,6 +23610,81 @@ module Aws::Glue
     class ResourceUri < Struct.new(
       :resource_type,
       :uri)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration that defines how to parse JSON responses from REST API
+    # calls, including paths to result data and error information.
+    #
+    # @!attribute [rw] result_path
+    #   The JSON path expression that identifies where the actual result
+    #   data is located within the API response.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_path
+    #   The JSON path expression that identifies where error information is
+    #   located within API responses when requests fail.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ResponseConfiguration AWS API Documentation
+    #
+    class ResponseConfiguration < Struct.new(
+      :result_path,
+      :error_path)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration that defines how to extract values from HTTP response
+    # content or headers for use in subsequent requests or parameter
+    # mapping.
+    #
+    # @!attribute [rw] content_path
+    #   A JSON path expression that specifies how to extract a value from
+    #   the response body content.
+    #   @return [String]
+    #
+    # @!attribute [rw] header_key
+    #   The name of an HTTP response header from which to extract the value.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ResponseExtractionMapping AWS API Documentation
+    #
+    class ResponseExtractionMapping < Struct.new(
+      :content_path,
+      :header_key)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration that defines HTTP request and response handling,
+    # validation endpoints, and entity configurations for REST API
+    # interactions.
+    #
+    # @!attribute [rw] global_source_configuration
+    #   Global configuration settings that apply to all REST API requests
+    #   for this connection type, including common request methods, paths,
+    #   and parameters.
+    #   @return [Types::SourceConfiguration]
+    #
+    # @!attribute [rw] validation_endpoint_configuration
+    #   Configuration for the endpoint used to validate connection
+    #   credentials and test connectivity during connection creation.
+    #   @return [Types::SourceConfiguration]
+    #
+    # @!attribute [rw] entity_configurations
+    #   A map of entity configurations that define how to interact with
+    #   different data entities available through the REST API, including
+    #   their schemas and access patterns.
+    #   @return [Hash<String,Types::EntityConfiguration>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/RestConfiguration AWS API Documentation
+    #
+    class RestConfiguration < Struct.new(
+      :global_source_configuration,
+      :validation_endpoint_configuration,
+      :entity_configurations)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -25377,6 +26041,47 @@ module Aws::Glue
     class SortCriterion < Struct.new(
       :field_name,
       :sort)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration that defines how to make requests to endpoints,
+    # including request methods, paths, parameters, and response handling.
+    #
+    # @!attribute [rw] request_method
+    #   The HTTP method to use for requests to this endpoint, such as GET,
+    #   POST.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_path
+    #   The URL path for the REST endpoint, which may include parameter
+    #   placeholders that will be replaced with actual values during
+    #   requests.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_parameters
+    #   Configuration for request parameters that should be included in API
+    #   calls, such as query parameters, headers, or body content.
+    #   @return [Array<Types::ConnectorProperty>]
+    #
+    # @!attribute [rw] response_configuration
+    #   Configuration that defines how to parse and extract data from API
+    #   responses, including success and error handling.
+    #   @return [Types::ResponseConfiguration]
+    #
+    # @!attribute [rw] pagination_configuration
+    #   Configuration for handling paginated responses from the REST API,
+    #   supporting both cursor-based and offset-based pagination strategies.
+    #   @return [Types::PaginationConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/SourceConfiguration AWS API Documentation
+    #
+    class SourceConfiguration < Struct.new(
+      :request_method,
+      :request_path,
+      :request_parameters,
+      :response_configuration,
+      :pagination_configuration)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.61.0 (2026-02-04)
+------------------
+
+* Feature - Amazon Connect Cases now supports larger, multi-line text fields with up to 4,100 characters. Administrators can use the Admin UI to select the appropriate configuration (single-line or multi-line) on a per-field basis, improving case documentation capabilities.
+
+1.60.0 (2026-01-26)
+------------------
+
+* Feature - Amazon Connect now enables you to use tag-based access controls to define who can access specific cases. You can associate tags with case templates and configure security profiles to determine which users can access cases with those tags.
+
+1.59.0 (2026-01-16)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.58.0 (2026-01-08)
 ------------------
 

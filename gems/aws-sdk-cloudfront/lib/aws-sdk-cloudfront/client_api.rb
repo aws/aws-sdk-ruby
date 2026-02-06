@@ -563,6 +563,7 @@ module Aws::CloudFront
     OriginGroupSelectionCriteria = Shapes::StringShape.new(name: 'OriginGroupSelectionCriteria')
     OriginGroups = Shapes::StructureShape.new(name: 'OriginGroups')
     OriginList = Shapes::ListShape.new(name: 'OriginList')
+    OriginMtlsConfig = Shapes::StructureShape.new(name: 'OriginMtlsConfig')
     OriginProtocolPolicy = Shapes::StringShape.new(name: 'OriginProtocolPolicy')
     OriginRequestPolicy = Shapes::StructureShape.new(name: 'OriginRequestPolicy')
     OriginRequestPolicyAlreadyExists = Shapes::StructureShape.new(name: 'OriginRequestPolicyAlreadyExists')
@@ -1548,6 +1549,7 @@ module Aws::CloudFront
     CustomOriginConfig.add_member(:origin_read_timeout, Shapes::ShapeRef.new(shape: integer, location_name: "OriginReadTimeout"))
     CustomOriginConfig.add_member(:origin_keepalive_timeout, Shapes::ShapeRef.new(shape: integer, location_name: "OriginKeepaliveTimeout"))
     CustomOriginConfig.add_member(:ip_address_type, Shapes::ShapeRef.new(shape: IpAddressType, location_name: "IpAddressType"))
+    CustomOriginConfig.add_member(:origin_mtls_config, Shapes::ShapeRef.new(shape: OriginMtlsConfig, location_name: "OriginMtlsConfig"))
     CustomOriginConfig.struct_class = Types::CustomOriginConfig
 
     Customizations.add_member(:web_acl, Shapes::ShapeRef.new(shape: WebAclCustomization, location_name: "WebAcl"))
@@ -3164,6 +3166,9 @@ module Aws::CloudFront
     OriginGroups.struct_class = Types::OriginGroups
 
     OriginList.member = Shapes::ShapeRef.new(shape: Origin, location_name: "Origin")
+
+    OriginMtlsConfig.add_member(:client_certificate_arn, Shapes::ShapeRef.new(shape: string, required: true, location_name: "ClientCertificateArn"))
+    OriginMtlsConfig.struct_class = Types::OriginMtlsConfig
 
     OriginRequestPolicy.add_member(:id, Shapes::ShapeRef.new(shape: string, required: true, location_name: "Id"))
     OriginRequestPolicy.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: timestamp, required: true, location_name: "LastModifiedTime"))

@@ -319,6 +319,7 @@ module Aws::EC2
     #   volume.attach_to_instance({
     #     device: "String", # required
     #     instance_id: "InstanceId", # required
+    #     ebs_card_index: 1,
     #     dry_run: false,
     #   })
     # @param [Hash] options ({})
@@ -326,6 +327,9 @@ module Aws::EC2
     #   The device name (for example, `/dev/sdh` or `xvdh`).
     # @option options [required, String] :instance_id
     #   The ID of the instance.
+    # @option options [Integer] :ebs_card_index
+    #   The index of the EBS card. Some instance types support multiple EBS
+    #   cards. The default EBS card index is 0.
     # @option options [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.

@@ -20,7 +20,31 @@ module Aws
                 | (Hash[Symbol, untyped]) -> Client::_GetFleetResponseSuccess
       end
 
+      class JobComplete
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    farm_id: ::String,
+                    queue_id: ::String,
+                    job_id: ::String
+                  ) -> Client::_GetJobResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_GetJobResponseSuccess
+      end
+
       class JobCreateComplete
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    farm_id: ::String,
+                    queue_id: ::String,
+                    job_id: ::String
+                  ) -> Client::_GetJobResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_GetJobResponseSuccess
+      end
+
+      class JobSucceeded
         def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
                       | (?Hash[Symbol, untyped]) -> void
 

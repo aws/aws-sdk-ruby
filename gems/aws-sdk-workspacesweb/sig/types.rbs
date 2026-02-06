@@ -278,6 +278,7 @@ module Aws::WorkSpacesWeb
       attr_accessor authentication_type: ("Standard" | "IAM_Identity_Center")
       attr_accessor instance_type: ("standard.regular" | "standard.large" | "standard.xlarge")
       attr_accessor max_concurrent_sessions: ::Integer
+      attr_accessor portal_custom_domain: ::String
       SENSITIVE: [:display_name]
     end
 
@@ -983,6 +984,7 @@ module Aws::WorkSpacesWeb
       attr_accessor additional_encryption_context: ::Hash[::String, ::String]
       attr_accessor instance_type: ("standard.regular" | "standard.large" | "standard.xlarge")
       attr_accessor max_concurrent_sessions: ::Integer
+      attr_accessor portal_custom_domain: ::String
       SENSITIVE: [:display_name]
     end
 
@@ -1005,6 +1007,7 @@ module Aws::WorkSpacesWeb
       attr_accessor ip_access_settings_arn: ::String
       attr_accessor instance_type: ("standard.regular" | "standard.large" | "standard.xlarge")
       attr_accessor max_concurrent_sessions: ::Integer
+      attr_accessor portal_custom_domain: ::String
       SENSITIVE: [:display_name]
     end
 
@@ -1216,6 +1219,7 @@ module Aws::WorkSpacesWeb
       attr_accessor authentication_type: ("Standard" | "IAM_Identity_Center")
       attr_accessor instance_type: ("standard.regular" | "standard.large" | "standard.xlarge")
       attr_accessor max_concurrent_sessions: ::Integer
+      attr_accessor portal_custom_domain: ::String
       SENSITIVE: [:display_name]
     end
 

@@ -27,6 +27,7 @@ module Aws::S3
   # See {Seahorse::Client::RequestContext} for more information.
   #
   # ## Error Classes
+  # * {AccessDenied}
   # * {BucketAlreadyExists}
   # * {BucketAlreadyOwnedByYou}
   # * {EncryptionTypeMismatch}
@@ -46,6 +47,16 @@ module Aws::S3
   module Errors
 
     extend Aws::Errors::DynamicErrors
+
+    class AccessDenied < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::S3::Types::AccessDenied] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
 
     class BucketAlreadyExists < ServiceError
 

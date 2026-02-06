@@ -727,7 +727,11 @@ module Aws
                                   lambda_version: ("V1_0"),
                                   lambda_arn: ::String
                                 }?,
-                                kms_key_id: ::String?
+                                kms_key_id: ::String?,
+                                inbound_federation: {
+                                  lambda_version: ("V1_0"),
+                                  lambda_arn: ::String
+                                }?
                               },
                               ?auto_verified_attributes: Array[("phone_number" | "email")],
                               ?alias_attributes: Array[("phone_number" | "email" | "preferred_username")],
@@ -1902,7 +1906,11 @@ module Aws
                                   lambda_version: ("V1_0"),
                                   lambda_arn: ::String
                                 }?,
-                                kms_key_id: ::String?
+                                kms_key_id: ::String?,
+                                inbound_federation: {
+                                  lambda_version: ("V1_0"),
+                                  lambda_arn: ::String
+                                }?
                               },
                               ?auto_verified_attributes: Array[("phone_number" | "email")],
                               ?sms_verification_message: ::String,

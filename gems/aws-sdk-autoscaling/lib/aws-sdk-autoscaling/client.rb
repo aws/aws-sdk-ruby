@@ -616,9 +616,8 @@ module Aws::AutoScaling
       req.send_request(options)
     end
 
-    # <note markdown="1"> This API operation is superseded by
-    # [https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API\_AttachTrafficSources.html][1],
-    # which can attach multiple traffic sources types. We recommend using
+    # <note markdown="1"> This API operation is superseded by [AttachTrafficSources][1], which
+    # can attach multiple traffic sources types. We recommend using
     # `AttachTrafficSources` to simplify how you manage traffic sources.
     # However, we continue to support `AttachLoadBalancers`. You can use
     # both the original `AttachLoadBalancers` API operation and
@@ -1261,6 +1260,19 @@ module Aws::AutoScaling
     #   One or more lifecycle hooks to add to the Auto Scaling group before
     #   instances are launched.
     #
+    # @option params [String] :deletion_protection
+    #   The deletion protection setting for the Auto Scaling group. This
+    #   setting helps safeguard your Auto Scaling group and its instances by
+    #   controlling whether the `DeleteAutoScalingGroup` operation is allowed.
+    #   When deletion protection is enabled, users cannot delete the Auto
+    #   Scaling group according to the specified protection level until the
+    #   setting is changed back to a less restrictive level.
+    #
+    #   The valid values are `none`, `prevent-force-deletion`, and
+    #   `prevent-all-deletion`.
+    #
+    #   Default: `none`
+    #
     # @option params [Array<Types::Tag>] :tags
     #   One or more tags. You can tag your Auto Scaling group and propagate
     #   the tags to the Amazon EC2 instances it launches. Tags are not
@@ -1384,13 +1396,20 @@ module Aws::AutoScaling
     #   The instance lifecycle policy for the Auto Scaling group. This policy
     #   controls instance behavior when an instance transitions through its
     #   lifecycle states. Configure retention triggers to specify when
-    #   instances should move to a `Retained` state for manual intervention
-    #   instead of automatic termination.
+    #   instances should move to a `Retained` state instead of automatic
+    #   termination.
+    #
+    #   For more information, see [ Control instance retention with instance
+    #   lifecycle policies][1] in the *Amazon EC2 Auto Scaling User Guide*.
     #
     #   <note markdown="1"> Instances in a Retained state will continue to incur standard EC2
     #   charges until terminated.
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/instance-lifecycle-policy.html
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1643,6 +1662,7 @@ module Aws::AutoScaling
     #         role_arn: "XmlStringMaxLen255",
     #       },
     #     ],
+    #     deletion_protection: "none", # accepts none, prevent-force-deletion, prevent-all-deletion
     #     tags: [
     #       {
     #         resource_id: "XmlString",
@@ -2803,6 +2823,7 @@ module Aws::AutoScaling
     #   resp.auto_scaling_groups[0].traffic_sources[0].type #=> String
     #   resp.auto_scaling_groups[0].instance_maintenance_policy.min_healthy_percentage #=> Integer
     #   resp.auto_scaling_groups[0].instance_maintenance_policy.max_healthy_percentage #=> Integer
+    #   resp.auto_scaling_groups[0].deletion_protection #=> String, one of "none", "prevent-force-deletion", "prevent-all-deletion"
     #   resp.auto_scaling_groups[0].availability_zone_distribution.capacity_distribution_strategy #=> String, one of "balanced-only", "balanced-best-effort"
     #   resp.auto_scaling_groups[0].availability_zone_impairment_policy.zonal_shift_enabled #=> Boolean
     #   resp.auto_scaling_groups[0].availability_zone_impairment_policy.impaired_zone_health_check_behavior #=> String, one of "ReplaceUnhealthy", "IgnoreUnhealthy"
@@ -3971,16 +3992,20 @@ module Aws::AutoScaling
     # [2]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/CHAP_Troubleshooting.html
     #
     # @option params [Array<String>] :activity_ids
-    #   The activity IDs of the desired scaling activities. If you omit this
-    #   property, all activities for the past six weeks are described. If
-    #   unknown activities are requested, they are ignored with no error. If
-    #   you specify an Auto Scaling group, the results are limited to that
-    #   group.
+    #   The activity IDs of the desired scaling activities. If unknown
+    #   activity IDs are requested, they are ignored with no error. Only
+    #   activities started within the last six weeks can be returned
+    #   regardless of the activity IDs specified. If other filters are
+    #   specified with the request, only results matching all filter criteria
+    #   can be returned.
     #
     #   Array Members: Maximum number of 50 IDs.
     #
     # @option params [String] :auto_scaling_group_name
     #   The name of the Auto Scaling group.
+    #
+    #   Omitting this property performs an account-wide operation, which can
+    #   result in slower or timed-out requests.
     #
     # @option params [Boolean] :include_deleted_groups
     #   Indicates whether to include scaling activity from deleted Auto
@@ -3993,6 +4018,31 @@ module Aws::AutoScaling
     # @option params [String] :next_token
     #   The token for the next set of items to return. (You received this
     #   token from a previous call.)
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   One or more filters to limit the results based on specific criteria.
+    #   The following filters are supported:
+    #
+    #   * `StartTimeLowerBound` - The earliest scaling activities to return
+    #     based on the activity start time. Scaling activities with a start
+    #     time earlier than this value are not included in the results. Only
+    #     activities started within the last six weeks can be returned
+    #     regardless of the value specified.
+    #
+    #   * `StartTimeUpperBound` - The latest scaling activities to return
+    #     based on the activity start time. Scaling activities with a start
+    #     time later than this value are not included in the results. Only
+    #     activities started within the last six weeks can be returned
+    #     regardless of the value specified.
+    #
+    #   * `Status` - The `StatusCode` value of the scaling activity. This
+    #     filter can only be used in combination with the
+    #     `AutoScalingGroupName` parameter. For valid `StatusCode` values, see
+    #     [Activity][1] in the *Amazon EC2 Auto Scaling API Reference*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_Activity.html
     #
     # @return [Types::ActivitiesType] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4036,6 +4086,12 @@ module Aws::AutoScaling
     #     include_deleted_groups: false,
     #     max_records: 1,
     #     next_token: "XmlString",
+    #     filters: [
+    #       {
+    #         name: "XmlString",
+    #         values: ["XmlString"],
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -4663,7 +4719,7 @@ module Aws::AutoScaling
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_DescribeTrafficSources.html
+    # [1]: https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_DetachTrafficSources.html
     # [2]: https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_DescribeLoadBalancerTargetGroups.html
     # [3]: https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_AttachLoadBalancerTargetGroups.html
     # [4]: https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_AttachTrafficSources.html
@@ -6770,7 +6826,7 @@ module Aws::AutoScaling
     #   The name of the Auto Scaling group.
     #
     # @option params [String] :strategy
-    #   The strategy to use for the instance refresh. The only valid value is
+    #   The strategy to use for the instance refresh. The default value is
     #   `Rolling`.
     #
     # @option params [Types::DesiredConfiguration] :desired_configuration
@@ -7428,11 +7484,31 @@ module Aws::AutoScaling
     #   The capacity reservation specification for the Auto Scaling group.
     #
     # @option params [Types::InstanceLifecyclePolicy] :instance_lifecycle_policy
-    #   The instance lifecycle policy for the Auto Scaling group. Use this to
-    #   add, modify, or remove lifecycle policies that control instance
-    #   behavior when an instance transitions through its lifecycle states.
-    #   Configure retention triggers to specify when to preserve instances for
-    #   manual intervention.
+    #   The instance lifecycle policy for the Auto Scaling group. This policy
+    #   controls instance behavior when an instance transitions through its
+    #   lifecycle states. Configure retention triggers to specify when
+    #   instances should move to a `Retained` state instead of automatic
+    #   termination.
+    #
+    #   For more information, see [ Control instance retention with instance
+    #   lifecycle policies][1] in the *Amazon EC2 Auto Scaling User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/instance-lifecycle-policy.html
+    #
+    # @option params [String] :deletion_protection
+    #   The deletion protection setting for the Auto Scaling group. This
+    #   setting helps safeguard your Auto Scaling group and its instances by
+    #   controlling whether the `DeleteAutoScalingGroup` operation is allowed.
+    #   When deletion protection is enabled, users cannot delete the Auto
+    #   Scaling group according to the specified protection level until the
+    #   setting is changed back to a less restrictive level.
+    #
+    #   The valid values are `none`, `prevent-force-deletion`, and
+    #   `prevent-all-deletion`.
+    #
+    #   Default: `none`
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -7594,6 +7670,7 @@ module Aws::AutoScaling
     #         terminate_hook_abandon: "retain", # accepts retain, terminate
     #       },
     #     },
+    #     deletion_protection: "none", # accepts none, prevent-force-deletion, prevent-all-deletion
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/UpdateAutoScalingGroup AWS API Documentation
@@ -7623,7 +7700,7 @@ module Aws::AutoScaling
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-autoscaling'
-      context[:gem_version] = '1.151.0'
+      context[:gem_version] = '1.154.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

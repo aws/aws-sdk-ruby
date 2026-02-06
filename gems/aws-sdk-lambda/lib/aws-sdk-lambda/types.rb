@@ -1535,6 +1535,16 @@ module Aws::Lambda
     #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/monitoring-metrics-types.html#event-source-mapping-metrics
     #   @return [Types::EventSourceMappingMetricsConfig]
     #
+    # @!attribute [rw] logging_config
+    #   (Amazon MSK, and self-managed Apache Kafka only) The logging
+    #   configuration for your event source. For more information, see
+    #   [Event source mapping logging][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/esm-logging.html
+    #   @return [Types::EventSourceMappingLoggingConfig]
+    #
     # @!attribute [rw] provisioned_poller_config
     #   (Amazon SQS, Amazon MSK, and self-managed Apache Kafka only) The
     #   provisioned mode configuration for the event source. For more
@@ -1574,6 +1584,7 @@ module Aws::Lambda
       :document_db_event_source_config,
       :kms_key_arn,
       :metrics_config,
+      :logging_config,
       :provisioned_poller_config)
       SENSITIVE = []
       include Aws::Structure
@@ -3112,6 +3123,16 @@ module Aws::Lambda
     #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/monitoring-metrics-types.html#event-source-mapping-metrics
     #   @return [Types::EventSourceMappingMetricsConfig]
     #
+    # @!attribute [rw] logging_config
+    #   (Amazon MSK, and self-managed Apache Kafka only) The logging
+    #   configuration for your event source. For more information, see
+    #   [Event source mapping logging][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/esm-logging.html
+    #   @return [Types::EventSourceMappingLoggingConfig]
+    #
     # @!attribute [rw] provisioned_poller_config
     #   (Amazon SQS, Amazon MSK, and self-managed Apache Kafka only) The
     #   provisioned mode configuration for the event source. For more
@@ -3156,7 +3177,32 @@ module Aws::Lambda
       :filter_criteria_error,
       :event_source_mapping_arn,
       :metrics_config,
+      :logging_config,
       :provisioned_poller_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # (Amazon MSK, and self-managed Apache Kafka only) The logging
+    # configuration for your event source. Use this configuration object to
+    # define the level of logs for your event source mapping.
+    #
+    # @!attribute [rw] system_log_level
+    #   The log level you want your event source mapping to use. Lambda
+    #   event poller only sends system logs at the selected level of detail
+    #   and lower, where `DEBUG` is the highest level and `WARN` is the
+    #   lowest. For more information about these metrics, see [ Event source
+    #   mapping logging][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/esm-logging.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/EventSourceMappingLoggingConfig AWS API Documentation
+    #
+    class EventSourceMappingLoggingConfig < Struct.new(
+      :system_log_level)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3166,10 +3212,21 @@ module Aws::Lambda
     # source mapping to produce.
     #
     # @!attribute [rw] metrics
-    #   The metrics you want your event source mapping to produce. Include
-    #   `EventCount` to receive event source mapping metrics related to the
-    #   number of events processed by your event source mapping. For more
-    #   information about these metrics, see [ Event source mapping
+    #   The metrics you want your event source mapping to produce, including
+    #   `EventCount`, `ErrorCount`, `KafkaMetrics`.
+    #
+    #   * `EventCount` to receive metrics related to the number of events
+    #     processed by your event source mapping.
+    #
+    #   * `ErrorCount` (Amazon MSK and self-managed Apache Kafka) to receive
+    #     metrics related to the number of errors in your event source
+    #     mapping processing.
+    #
+    #   * `KafkaMetrics` (Amazon MSK and self-managed Apache Kafka) to
+    #     receive metrics related to the Kafka consumers from your event
+    #     source mapping.
+    #
+    #   For more information about these metrics, see [ Event source mapping
     #   metrics][1].
     #
     #
@@ -9166,6 +9223,12 @@ module Aws::Lambda
     #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/monitoring-metrics-types.html#event-source-mapping-metrics
     #   @return [Types::EventSourceMappingMetricsConfig]
     #
+    # @!attribute [rw] logging_config
+    #   (Amazon MSK, and self-managed Apache Kafka only) The logging
+    #   configuration for your event source. Use this configuration object
+    #   to define the level of logs for your event source mapping.
+    #   @return [Types::EventSourceMappingLoggingConfig]
+    #
     # @!attribute [rw] provisioned_poller_config
     #   (Amazon SQS, Amazon MSK, and self-managed Apache Kafka only) The
     #   provisioned mode configuration for the event source. For more
@@ -9199,6 +9262,7 @@ module Aws::Lambda
       :document_db_event_source_config,
       :kms_key_arn,
       :metrics_config,
+      :logging_config,
       :provisioned_poller_config)
       SENSITIVE = []
       include Aws::Structure

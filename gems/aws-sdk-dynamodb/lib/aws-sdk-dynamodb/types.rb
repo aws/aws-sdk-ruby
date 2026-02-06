@@ -1704,7 +1704,8 @@ module Aws::DynamoDB
     #   @return [String]
     #
     # @!attribute [rw] key_schema
-    #   The key schema for the global secondary index.
+    #   The key schema for the global secondary index. Global secondary
+    #   index supports up to 4 partition and up to 4 sort keys.
     #   @return [Array<Types::KeySchemaElement>]
     #
     # @!attribute [rw] projection
@@ -1984,7 +1985,8 @@ module Aws::DynamoDB
     #
     #
     #   * `KeySchema` - Specifies the key schema for the global secondary
-    #     index.
+    #     index. Each global secondary index supports up to 4 partition keys
+    #     and up to 4 sort keys.
     #
     #   * `Projection` - Specifies attributes that are copied (projected)
     #     from the table into the index. These are in addition to the
@@ -2137,6 +2139,18 @@ module Aws::DynamoDB
     #   must specify `MaxReadRequestUnits`, `MaxWriteRequestUnits`, or both.
     #   @return [Types::OnDemandThroughput]
     #
+    # @!attribute [rw] global_table_source_arn
+    #   The Amazon Resource Name (ARN) of the source table used for the
+    #   creation of a multi-account global table.
+    #   @return [String]
+    #
+    # @!attribute [rw] global_table_settings_replication_mode
+    #   Controls the settings synchronization mode for the global table. For
+    #   multi-account global tables, this parameter is required and the only
+    #   supported value is ENABLED. For same-account global tables, this
+    #   parameter is set to ENABLED\_WITH\_OVERRIDES.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/CreateTableInput AWS API Documentation
     #
     class CreateTableInput < Struct.new(
@@ -2154,7 +2168,9 @@ module Aws::DynamoDB
       :deletion_protection_enabled,
       :warm_throughput,
       :resource_policy,
-      :on_demand_throughput)
+      :on_demand_throughput,
+      :global_table_source_arn,
+      :global_table_settings_replication_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3796,7 +3812,7 @@ module Aws::DynamoDB
     #
     #   If you submit a request with the same client token but a change in
     #   other parameters within the 8-hour idempotency window, DynamoDB
-    #   returns an `ImportConflictException`.
+    #   returns an `ExportConflictException`.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -7368,6 +7384,21 @@ module Aws::DynamoDB
     #   Contains details of the table class.
     #   @return [Types::TableClassSummary]
     #
+    # @!attribute [rw] global_table_settings_replication_mode
+    #   Indicates one of the settings synchronization modes for the global
+    #   table replica:
+    #
+    #   * `ENABLED`: Indicates that the settings synchronization mode for
+    #     the global table replica is enabled.
+    #
+    #   * `DISABLED`: Indicates that the settings synchronization mode for
+    #     the global table replica is disabled.
+    #
+    #   * `ENABLED_WITH_OVERRIDES`: This mode is set by default for a same
+    #     account global table. Indicates that certain global table settings
+    #     can be overridden.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ReplicaDescription AWS API Documentation
     #
     class ReplicaDescription < Struct.new(
@@ -7381,7 +7412,8 @@ module Aws::DynamoDB
       :warm_throughput,
       :global_secondary_indexes,
       :replica_inaccessible_date_time,
-      :replica_table_class_summary)
+      :replica_table_class_summary,
+      :global_table_settings_replication_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9142,6 +9174,21 @@ module Aws::DynamoDB
     #   Only one witness Region can be configured per MRSC global table.
     #   @return [Array<Types::GlobalTableWitnessDescription>]
     #
+    # @!attribute [rw] global_table_settings_replication_mode
+    #   Indicates one of the settings synchronization modes for the global
+    #   table:
+    #
+    #   * `ENABLED`: Indicates that the settings synchronization mode for
+    #     the global table is enabled.
+    #
+    #   * `DISABLED`: Indicates that the settings synchronization mode for
+    #     the global table is disabled.
+    #
+    #   * `ENABLED_WITH_OVERRIDES`: This mode is set by default for a same
+    #     account global table. Indicates that certain global table settings
+    #     can be overridden.
+    #   @return [String]
+    #
     # @!attribute [rw] restore_summary
     #   Contains details for the restore.
     #   @return [Types::RestoreSummary]
@@ -9215,6 +9262,7 @@ module Aws::DynamoDB
       :global_table_version,
       :replicas,
       :global_table_witnesses,
+      :global_table_settings_replication_mode,
       :restore_summary,
       :sse_description,
       :archival_summary,
@@ -9712,11 +9760,10 @@ module Aws::DynamoDB
     #
     # * There is a user error, such as an invalid data format.
     #
-    # <note markdown="1"> If using Java, DynamoDB lists the cancellation reasons on the
-    # `CancellationReasons` property. This property is not set for other
-    # languages. Transaction cancellation reasons are ordered in the order
-    # of requested items, if an item has no error it will have `None` code
-    # and `Null` message.
+    # <note markdown="1"> DynamoDB lists the cancellation reasons on the `CancellationReasons`
+    # property. Transaction cancellation reasons are ordered in the order of
+    # requested items, if an item has no error it will have `None` code and
+    # `Null` message.
     #
     #  </note>
     #

@@ -608,6 +608,11 @@ module Aws::WorkspacesInstances
     #   Comprehensive configuration settings for the WorkSpaces Instance,
     #   including network, compute, and storage parameters.
     #
+    # @option params [Types::BillingConfiguration] :billing_configuration
+    #   Optional billing configuration for the WorkSpace Instance. Allows
+    #   customers to specify their preferred billing mode when creating a new
+    #   instance. Defaults to hourly billing if not specified.
+    #
     # @return [Types::CreateWorkspaceInstanceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateWorkspaceInstanceResponse#workspace_instance_id #workspace_instance_id} => String
@@ -793,6 +798,9 @@ module Aws::WorkspacesInstances
     #       ],
     #       user_data: "UserData",
     #     },
+    #     billing_configuration: {
+    #       billing_mode: "MONTHLY", # required, accepts MONTHLY, HOURLY
+    #     },
     #   })
     #
     # @example Response structure
@@ -831,6 +839,8 @@ module Aws::WorkspacesInstances
     end
 
     # Deletes the specified WorkSpace
+    #
+    # Usage of this API will result in deletion of the resource in question.
     #
     # @option params [required, String] :workspace_instance_id
     #   Unique identifier of the WorkSpaces Instance targeted for deletion.
@@ -898,6 +908,7 @@ module Aws::WorkspacesInstances
     #   * {Types::GetWorkspaceInstanceResponse#provision_state #provision_state} => String
     #   * {Types::GetWorkspaceInstanceResponse#workspace_instance_id #workspace_instance_id} => String
     #   * {Types::GetWorkspaceInstanceResponse#ec2_managed_instance #ec2_managed_instance} => Types::EC2ManagedInstance
+    #   * {Types::GetWorkspaceInstanceResponse#billing_configuration #billing_configuration} => Types::BillingConfiguration
     #
     # @example Request syntax with placeholder values
     #
@@ -917,6 +928,7 @@ module Aws::WorkspacesInstances
     #   resp.provision_state #=> String, one of "ALLOCATING", "ALLOCATED", "DEALLOCATING", "DEALLOCATED", "ERROR_ALLOCATING", "ERROR_DEALLOCATING"
     #   resp.workspace_instance_id #=> String
     #   resp.ec2_managed_instance.instance_id #=> String
+    #   resp.billing_configuration.billing_mode #=> String, one of "MONTHLY", "HOURLY"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-instances-2022-07-26/GetWorkspaceInstance AWS API Documentation
     #
@@ -938,6 +950,11 @@ module Aws::WorkspacesInstances
     #   Pagination token for retrieving subsequent pages of instance type
     #   results.
     #
+    # @option params [Types::InstanceConfigurationFilter] :instance_configuration_filter
+    #   Optional filter to narrow instance type results based on configuration
+    #   requirements. Only returns instance types that support the specified
+    #   combination of tenancy, platform type, and billing mode.
+    #
     # @return [Types::ListInstanceTypesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListInstanceTypesResponse#instance_types #instance_types} => Array&lt;Types::InstanceTypeInfo&gt;
@@ -950,12 +967,21 @@ module Aws::WorkspacesInstances
     #   resp = client.list_instance_types({
     #     max_results: 1,
     #     next_token: "NextToken",
+    #     instance_configuration_filter: {
+    #       billing_mode: "MONTHLY", # required, accepts MONTHLY, HOURLY
+    #       platform_type: "Windows", # required, accepts Windows, Windows BYOL, Linux/UNIX, Ubuntu Pro Linux, Red Hat Enterprise Linux, Red Hat BYOL Linux, SUSE Linux
+    #       tenancy: "SHARED", # required, accepts SHARED, DEDICATED
+    #     },
     #   })
     #
     # @example Response structure
     #
     #   resp.instance_types #=> Array
     #   resp.instance_types[0].instance_type #=> String
+    #   resp.instance_types[0].supported_instance_configurations #=> Array
+    #   resp.instance_types[0].supported_instance_configurations[0].billing_mode #=> String, one of "MONTHLY", "HOURLY"
+    #   resp.instance_types[0].supported_instance_configurations[0].platform_type #=> String, one of "Windows", "Windows BYOL", "Linux/UNIX", "Ubuntu Pro Linux", "Red Hat Enterprise Linux", "Red Hat BYOL Linux", "SUSE Linux"
+    #   resp.instance_types[0].supported_instance_configurations[0].tenancy #=> String, one of "SHARED", "DEDICATED"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-instances-2022-07-26/ListInstanceTypes AWS API Documentation
@@ -1156,7 +1182,7 @@ module Aws::WorkspacesInstances
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-workspacesinstances'
-      context[:gem_version] = '1.10.0'
+      context[:gem_version] = '1.12.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

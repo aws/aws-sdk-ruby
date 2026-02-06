@@ -3372,8 +3372,17 @@ module Aws::Athena
     #   Specifies the query result reuse behavior for the query.
     #
     # @option params [Types::EngineConfiguration] :engine_configuration
-    #   Contains data processing unit (DPU) configuration settings and
-    #   parameter mappings for a notebook engine.
+    #   The engine configuration for the workgroup, which includes the
+    #   minimum/maximum number of Data Processing Units (DPU) that queries
+    #   should use when running in provisioned capacity. If not specified,
+    #   Athena uses default values (Default value for min is 4 and for max is
+    #   Minimum of 124 and allocated DPUs).
+    #
+    #   To specify minimum and maximum DPU values for Capacity Reservations
+    #   queries, the workgroup containing `EngineConfiguration` should have
+    #   the following values: The name of the `Classifications` should be
+    #   `athena-query-engine-properties`, with the only allowed properties as
+    #   `max-dpu-count` and `min-dpu-count`.
     #
     # @return [Types::StartQueryExecutionOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4122,7 +4131,7 @@ module Aws::Athena
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-athena'
-      context[:gem_version] = '1.115.0'
+      context[:gem_version] = '1.117.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.146.0 (2026-01-21)
+------------------
+
+* Feature - AWS Config Conformance Packs now support tag-on-create through PutConformancePack API.
+
+1.145.0 (2026-01-16)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.144.0 (2026-01-08)
 ------------------
 

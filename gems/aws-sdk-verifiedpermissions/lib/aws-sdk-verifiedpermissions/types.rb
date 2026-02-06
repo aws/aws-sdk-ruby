@@ -1485,6 +1485,15 @@ module Aws::VerifiedPermissions
     #   The default state is `DISABLED`.
     #   @return [String]
     #
+    # @!attribute [rw] encryption_settings
+    #   Specifies the encryption settings used to encrypt the policy store
+    #   and their child resources. Allows for the ability to use a customer
+    #   owned KMS key for encryption of data.
+    #
+    #   This is an optional field to be used when providing a
+    #   customer-managed KMS key for encryption.
+    #   @return [Types::EncryptionSettings]
+    #
     # @!attribute [rw] tags
     #   The list of key-value pairs to associate with the policy store.
     #   @return [Hash<String,String>]
@@ -1496,6 +1505,7 @@ module Aws::VerifiedPermissions
       :validation_settings,
       :description,
       :deletion_protection,
+      :encryption_settings,
       :tags)
       SENSITIVE = [:description]
       include Aws::Structure
@@ -1717,6 +1727,82 @@ module Aws::VerifiedPermissions
       :policy_id)
       SENSITIVE = []
       include Aws::Structure
+    end
+
+    # A structure that contains the encryption configuration for the policy
+    # store and child resources.
+    #
+    # This data type is used as a request parameter in the
+    # [CreatePolicyStore][1] operation.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_CreatePolicyStore.html
+    #
+    # @note EncryptionSettings is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @!attribute [rw] kms_encryption_settings
+    #   The KMS encryption settings for this policy store to encrypt data
+    #   with. It will contain the customer-managed KMS key, and a
+    #   user-defined encryption context.
+    #   @return [Types::KmsEncryptionSettings]
+    #
+    # @!attribute [rw] default
+    #   This is the default encryption setting. The policy store uses an
+    #   Amazon Web Services owned key for encrypting data.
+    #   @return [Types::Unit]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/EncryptionSettings AWS API Documentation
+    #
+    class EncryptionSettings < Struct.new(
+      :kms_encryption_settings,
+      :default,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class KmsEncryptionSettings < EncryptionSettings; end
+      class Default < EncryptionSettings; end
+      class Unknown < EncryptionSettings; end
+    end
+
+    # A structure that contains the encryption configuration for the policy
+    # store and child resources.
+    #
+    # This data type is used as a response parameter field for the
+    # [GetPolicyStore][1] operation.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_GetPolicyStore.html
+    #
+    # @note EncryptionState is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of EncryptionState corresponding to the set member.
+    #
+    # @!attribute [rw] kms_encryption_state
+    #   The KMS encryption settings currently configured for this policy
+    #   store to encrypt data with. It contains the customer-managed KMS
+    #   key, and a user-defined encryption context.
+    #   @return [Types::KmsEncryptionState]
+    #
+    # @!attribute [rw] default
+    #   This is the default encryption state. The policy store is encrypted
+    #   using an Amazon Web Services owned key.
+    #   @return [Types::Unit]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/EncryptionState AWS API Documentation
+    #
+    class EncryptionState < Struct.new(
+      :kms_encryption_state,
+      :default,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class KmsEncryptionState < EncryptionState; end
+      class Default < EncryptionState; end
+      class Unknown < EncryptionState; end
     end
 
     # Contains the list of entities to be considered during an authorization
@@ -2119,6 +2205,11 @@ module Aws::VerifiedPermissions
     #   The default state is `DISABLED`.
     #   @return [String]
     #
+    # @!attribute [rw] encryption_state
+    #   A structure that contains the encryption configuration for the
+    #   policy store.
+    #   @return [Types::EncryptionState]
+    #
     # @!attribute [rw] cedar_version
     #   The version of the Cedar language used with policies, policy
     #   templates, and schemas in this policy store. For more information,
@@ -2143,6 +2234,7 @@ module Aws::VerifiedPermissions
       :last_updated_date,
       :description,
       :deletion_protection,
+      :encryption_state,
       :cedar_version,
       :tags)
       SENSITIVE = [:description]
@@ -2650,6 +2742,81 @@ module Aws::VerifiedPermissions
       :errors,
       :principal)
       SENSITIVE = [:errors]
+      include Aws::Structure
+    end
+
+    # A structure that contains the KMS encryption configuration for the
+    # policy store. The encryption settings determine what customer-managed
+    # KMS key will be used to encrypt all resources within the policy store,
+    # and any user-defined context key-value pairs to append during
+    # encryption processes.
+    #
+    # This data type is used as a field that is part of the
+    # [EncryptionSettings][1] type.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_EncryptionSettings.html
+    #
+    # @!attribute [rw] key
+    #   The customer-managed KMS key [Amazon Resource Name (ARN)][1], alias
+    #   or ID to be used for encryption processes.
+    #
+    #   Users can provide the full KMS key ARN, a KMS key alias, or a KMS
+    #   key ID, but it will be mapped to the full KMS key ARN after policy
+    #   store creation, and referenced when encrypting child resources.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   @return [String]
+    #
+    # @!attribute [rw] encryption_context
+    #   User-defined, additional context to be added to encryption
+    #   processes.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/KmsEncryptionSettings AWS API Documentation
+    #
+    class KmsEncryptionSettings < Struct.new(
+      :key,
+      :encryption_context)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A structure that contains the KMS encryption configuration for the
+    # policy store. The encryption state shows what customer-managed KMS key
+    # is being used to encrypt all resources within the policy store, and
+    # any user-defined context key-value pairs added during encryption
+    # processes.
+    #
+    # This data type is used as a field that is part of the
+    # [EncryptionState][1] type.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_EncryptionState.html
+    #
+    # @!attribute [rw] key
+    #   The customer-managed KMS key [Amazon Resource Name (ARN)][1] being
+    #   used for encryption processes.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   @return [String]
+    #
+    # @!attribute [rw] encryption_context
+    #   User-defined, additional context added to encryption processes.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/KmsEncryptionState AWS API Documentation
+    #
+    class KmsEncryptionState < Struct.new(
+      :key,
+      :encryption_context)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4219,6 +4386,12 @@ module Aws::VerifiedPermissions
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/Unit AWS API Documentation
+    #
+    class Unit < Aws::EmptyStructure; end
 
     # @!attribute [rw] resource_arn
     #   The ARN of the resource from which you are removing tags.

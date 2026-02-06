@@ -151,6 +151,20 @@ module Aws::BedrockAgentCoreControl
       SENSITIVE: []
     end
 
+    class BrowserProfileSummary
+      attr_accessor profile_id: ::String
+      attr_accessor profile_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor status: ("READY" | "DELETING" | "DELETED" | "SAVING")
+      attr_accessor created_at: ::Time
+      attr_accessor last_updated_at: ::Time
+      attr_accessor last_saved_at: ::Time
+      attr_accessor last_saved_browser_session_id: ::String
+      attr_accessor last_saved_browser_id: ::String
+      SENSITIVE: [:description]
+    end
+
     class BrowserSigningConfigInput
       attr_accessor enabled: bool
       SENSITIVE: []
@@ -341,6 +355,22 @@ module Aws::BedrockAgentCoreControl
       SENSITIVE: []
     end
 
+    class CreateBrowserProfileRequest
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor client_token: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: [:description]
+    end
+
+    class CreateBrowserProfileResponse
+      attr_accessor profile_id: ::String
+      attr_accessor profile_arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor status: ("READY" | "DELETING" | "DELETED" | "SAVING")
+      SENSITIVE: []
+    end
+
     class CreateBrowserRequest
       attr_accessor name: ::String
       attr_accessor description: ::String
@@ -385,6 +415,7 @@ module Aws::BedrockAgentCoreControl
       attr_accessor description: ::String
       attr_accessor evaluator_config: Types::EvaluatorConfig
       attr_accessor level: ("TOOL_CALL" | "TRACE" | "SESSION")
+      attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: [:description]
     end
 
@@ -506,6 +537,7 @@ module Aws::BedrockAgentCoreControl
       attr_accessor evaluators: ::Array[Types::EvaluatorReference]
       attr_accessor evaluation_execution_role_arn: ::String
       attr_accessor enable_on_create: bool
+      attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: [:description]
     end
 
@@ -801,6 +833,21 @@ module Aws::BedrockAgentCoreControl
     end
 
     class DeleteApiKeyCredentialProviderResponse < Aws::EmptyStructure
+    end
+
+    class DeleteBrowserProfileRequest
+      attr_accessor profile_id: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteBrowserProfileResponse
+      attr_accessor profile_id: ::String
+      attr_accessor profile_arn: ::String
+      attr_accessor status: ("READY" | "DELETING" | "DELETED" | "SAVING")
+      attr_accessor last_updated_at: ::Time
+      attr_accessor last_saved_at: ::Time
+      SENSITIVE: []
     end
 
     class DeleteBrowserRequest
@@ -1228,6 +1275,25 @@ module Aws::BedrockAgentCoreControl
       SENSITIVE: []
     end
 
+    class GetBrowserProfileRequest
+      attr_accessor profile_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetBrowserProfileResponse
+      attr_accessor profile_id: ::String
+      attr_accessor profile_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor status: ("READY" | "DELETING" | "DELETED" | "SAVING")
+      attr_accessor created_at: ::Time
+      attr_accessor last_updated_at: ::Time
+      attr_accessor last_saved_at: ::Time
+      attr_accessor last_saved_browser_session_id: ::String
+      attr_accessor last_saved_browser_id: ::String
+      SENSITIVE: [:description]
+    end
+
     class GetBrowserRequest
       attr_accessor browser_id: ::String
       SENSITIVE: []
@@ -1636,6 +1702,18 @@ module Aws::BedrockAgentCoreControl
 
     class ListApiKeyCredentialProvidersResponse
       attr_accessor credential_providers: ::Array[Types::ApiKeyCredentialProviderItem]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListBrowserProfilesRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListBrowserProfilesResponse
+      attr_accessor profile_summaries: ::Array[Types::BrowserProfileSummary]
       attr_accessor next_token: ::String
       SENSITIVE: []
     end

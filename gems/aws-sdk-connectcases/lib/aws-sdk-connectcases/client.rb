@@ -605,6 +605,7 @@ module Aws::ConnectCases
     #   resp.fields[0].deleted #=> Boolean
     #   resp.fields[0].created_time #=> Time
     #   resp.fields[0].last_modified_time #=> Time
+    #   resp.fields[0].attributes.text.is_multiline #=> Boolean
     #   resp.errors #=> Array
     #   resp.errors[0].id #=> String
     #   resp.errors[0].error_code #=> String
@@ -676,6 +677,10 @@ module Aws::ConnectCases
     # fields are taken as an array id/value pairs with a declared data
     # types.
     #
+    #  When creating a case from a template that has tag propagation
+    # configurations, the specified tags are automatically applied to the
+    # case.
+    #
     #  The following fields are required when creating a case:
     #
     #  * `customer_id` - You must provide the full customer profile ARN in
@@ -714,6 +719,10 @@ module Aws::ConnectCases
     # @option params [Types::UserUnion] :performed_by
     #   Represents the entity that performed the action.
     #
+    # @option params [Hash<String,String>] :tags
+    #   A map of of key-value pairs that represent tags on a resource. Tags
+    #   are used to organize, track, or control access for this resource.
+    #
     # @return [Types::CreateCaseResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateCaseResponse#case_id #case_id} => String
@@ -741,6 +750,9 @@ module Aws::ConnectCases
     #     performed_by: {
     #       user_arn: "UserArn",
     #       custom_entity: "CustomEntity",
+    #     },
+    #     tags: {
+    #       "MutableTagKey" => "TagValueString",
     #     },
     #   })
     #
@@ -946,6 +958,9 @@ module Aws::ConnectCases
     # @option params [String] :description
     #   The description of the field.
     #
+    # @option params [Types::FieldAttributes] :attributes
+    #   Union of field attributes.
+    #
     # @return [Types::CreateFieldResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateFieldResponse#field_id #field_id} => String
@@ -958,6 +973,11 @@ module Aws::ConnectCases
     #     name: "FieldName", # required
     #     type: "Text", # required, accepts Text, Number, Boolean, DateTime, SingleSelect, Url, User
     #     description: "FieldDescription",
+    #     attributes: {
+    #       text: {
+    #         is_multiline: false, # required
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
@@ -1254,6 +1274,11 @@ module Aws::ConnectCases
     #
     #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/case-field-conditions.html
     #
+    # @option params [Array<Types::TagPropagationConfiguration>] :tag_propagation_configurations
+    #   Defines tag propagation configuration for resources created within a
+    #   domain. Tags specified here will be automatically applied to resources
+    #   being created for the specified resource type.
+    #
     # @return [Types::CreateTemplateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateTemplateResponse#template_id #template_id} => String
@@ -1278,6 +1303,14 @@ module Aws::ConnectCases
     #       {
     #         case_rule_id: "CaseRuleId", # required
     #         field_id: "FieldId",
+    #       },
+    #     ],
+    #     tag_propagation_configurations: [
+    #       {
+    #         resource_type: "Cases", # required, accepts Cases
+    #         tag_map: { # required
+    #           "MutableTagKey" => "TagValueString",
+    #         },
     #       },
     #     ],
     #   })
@@ -1862,6 +1895,7 @@ module Aws::ConnectCases
     #   * {Types::GetTemplateResponse#created_time #created_time} => Time
     #   * {Types::GetTemplateResponse#last_modified_time #last_modified_time} => Time
     #   * {Types::GetTemplateResponse#rules #rules} => Array&lt;Types::TemplateRule&gt;
+    #   * {Types::GetTemplateResponse#tag_propagation_configurations #tag_propagation_configurations} => Array&lt;Types::TagPropagationConfiguration&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -1888,6 +1922,10 @@ module Aws::ConnectCases
     #   resp.rules #=> Array
     #   resp.rules[0].case_rule_id #=> String
     #   resp.rules[0].field_id #=> String
+    #   resp.tag_propagation_configurations #=> Array
+    #   resp.tag_propagation_configurations[0].resource_type #=> String, one of "Cases"
+    #   resp.tag_propagation_configurations[0].tag_map #=> Hash
+    #   resp.tag_propagation_configurations[0].tag_map["MutableTagKey"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connectcases-2022-10-03/GetTemplate AWS API Documentation
     #
@@ -2131,6 +2169,7 @@ module Aws::ConnectCases
     #   resp.fields[0].name #=> String
     #   resp.fields[0].type #=> String, one of "Text", "Number", "Boolean", "DateTime", "SingleSelect", "Url", "User"
     #   resp.fields[0].namespace #=> String, one of "System", "Custom"
+    #   resp.fields[0].attributes.text.is_multiline #=> Boolean
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connectcases-2022-10-03/ListFields AWS API Documentation
@@ -2274,6 +2313,10 @@ module Aws::ConnectCases
     #   resp.templates[0].template_arn #=> String
     #   resp.templates[0].name #=> String
     #   resp.templates[0].status #=> String, one of "Active", "Inactive"
+    #   resp.templates[0].tag_propagation_configurations #=> Array
+    #   resp.templates[0].tag_propagation_configurations[0].resource_type #=> String, one of "Cases"
+    #   resp.templates[0].tag_propagation_configurations[0].tag_map #=> Hash
+    #   resp.templates[0].tag_propagation_configurations[0].tag_map["MutableTagKey"] #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connectcases-2022-10-03/ListTemplates AWS API Documentation
@@ -2601,6 +2644,7 @@ module Aws::ConnectCases
     #
     #   * {Types::SearchCasesResponse#next_token #next_token} => String
     #   * {Types::SearchCasesResponse#cases #cases} => Array&lt;Types::SearchCasesResponseItem&gt;
+    #   * {Types::SearchCasesResponse#total_count #total_count} => Integer
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
@@ -2683,6 +2727,12 @@ module Aws::ConnectCases
     #       not: {
     #         # recursive CaseFilter
     #       },
+    #       tag: {
+    #         equal_to: {
+    #           key: "SearchTagKey",
+    #           value: "TagValueString",
+    #         },
+    #       },
     #       and_all: [
     #         {
     #           # recursive CaseFilter
@@ -2721,6 +2771,7 @@ module Aws::ConnectCases
     #   resp.cases[0].fields[0].value.user_arn_value #=> String
     #   resp.cases[0].tags #=> Hash
     #   resp.cases[0].tags["String"] #=> String
+    #   resp.total_count #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connectcases-2022-10-03/SearchCases AWS API Documentation
     #
@@ -3179,6 +3230,9 @@ module Aws::ConnectCases
     # @option params [String] :description
     #   The description of a field.
     #
+    # @option params [Types::FieldAttributes] :attributes
+    #   Union of field attributes.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -3188,6 +3242,11 @@ module Aws::ConnectCases
     #     field_id: "FieldId", # required
     #     name: "FieldName",
     #     description: "FieldDescription",
+    #     attributes: {
+    #       text: {
+    #         is_multiline: false, # required
+    #       },
+    #     },
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connectcases-2022-10-03/UpdateField AWS API Documentation
@@ -3330,6 +3389,11 @@ module Aws::ConnectCases
     #
     #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/case-field-conditions.html
     #
+    # @option params [Array<Types::TagPropagationConfiguration>] :tag_propagation_configurations
+    #   Defines tag propagation configuration for resources created within a
+    #   domain. Tags specified here will be automatically applied to resources
+    #   being created for the specified resource type.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -3352,6 +3416,14 @@ module Aws::ConnectCases
     #       {
     #         case_rule_id: "CaseRuleId", # required
     #         field_id: "FieldId",
+    #       },
+    #     ],
+    #     tag_propagation_configurations: [
+    #       {
+    #         resource_type: "Cases", # required, accepts Cases
+    #         tag_map: { # required
+    #           "MutableTagKey" => "TagValueString",
+    #         },
     #       },
     #     ],
     #   })
@@ -3383,7 +3455,7 @@ module Aws::ConnectCases
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-connectcases'
-      context[:gem_version] = '1.58.0'
+      context[:gem_version] = '1.61.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

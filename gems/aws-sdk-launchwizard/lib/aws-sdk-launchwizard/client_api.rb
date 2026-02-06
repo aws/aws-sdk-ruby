@@ -34,13 +34,23 @@ module Aws::LaunchWizard
     DeploymentId = Shapes::StringShape.new(name: 'DeploymentId')
     DeploymentName = Shapes::StringShape.new(name: 'DeploymentName')
     DeploymentPatternName = Shapes::StringShape.new(name: 'DeploymentPatternName')
+    DeploymentPatternVersionDataSummary = Shapes::StructureShape.new(name: 'DeploymentPatternVersionDataSummary')
+    DeploymentPatternVersionDataSummaryList = Shapes::ListShape.new(name: 'DeploymentPatternVersionDataSummaryList')
+    DeploymentPatternVersionFilter = Shapes::StructureShape.new(name: 'DeploymentPatternVersionFilter')
+    DeploymentPatternVersionFilterKey = Shapes::StringShape.new(name: 'DeploymentPatternVersionFilterKey')
+    DeploymentPatternVersionFilterValues = Shapes::ListShape.new(name: 'DeploymentPatternVersionFilterValues')
+    DeploymentPatternVersionFilterValuesMemberString = Shapes::StringShape.new(name: 'DeploymentPatternVersionFilterValuesMemberString')
+    DeploymentPatternVersionName = Shapes::StringShape.new(name: 'DeploymentPatternVersionName')
     DeploymentSpecifications = Shapes::MapShape.new(name: 'DeploymentSpecifications')
     DeploymentSpecificationsData = Shapes::ListShape.new(name: 'DeploymentSpecificationsData')
     DeploymentSpecificationsField = Shapes::StructureShape.new(name: 'DeploymentSpecificationsField')
     DeploymentStatus = Shapes::StringShape.new(name: 'DeploymentStatus')
     EventStatus = Shapes::StringShape.new(name: 'EventStatus')
+    FilterList = Shapes::ListShape.new(name: 'FilterList')
     GetDeploymentInput = Shapes::StructureShape.new(name: 'GetDeploymentInput')
     GetDeploymentOutput = Shapes::StructureShape.new(name: 'GetDeploymentOutput')
+    GetDeploymentPatternVersionInput = Shapes::StructureShape.new(name: 'GetDeploymentPatternVersionInput')
+    GetDeploymentPatternVersionOutput = Shapes::StructureShape.new(name: 'GetDeploymentPatternVersionOutput')
     GetWorkloadDeploymentPatternInput = Shapes::StructureShape.new(name: 'GetWorkloadDeploymentPatternInput')
     GetWorkloadDeploymentPatternOutput = Shapes::StructureShape.new(name: 'GetWorkloadDeploymentPatternOutput')
     GetWorkloadInput = Shapes::StructureShape.new(name: 'GetWorkloadInput')
@@ -49,6 +59,8 @@ module Aws::LaunchWizard
     KeyString = Shapes::StringShape.new(name: 'KeyString')
     ListDeploymentEventsInput = Shapes::StructureShape.new(name: 'ListDeploymentEventsInput')
     ListDeploymentEventsOutput = Shapes::StructureShape.new(name: 'ListDeploymentEventsOutput')
+    ListDeploymentPatternVersionsInput = Shapes::StructureShape.new(name: 'ListDeploymentPatternVersionsInput')
+    ListDeploymentPatternVersionsOutput = Shapes::StructureShape.new(name: 'ListDeploymentPatternVersionsOutput')
     ListDeploymentsInput = Shapes::StructureShape.new(name: 'ListDeploymentsInput')
     ListDeploymentsOutput = Shapes::StructureShape.new(name: 'ListDeploymentsOutput')
     ListTagsForResourceInput = Shapes::StructureShape.new(name: 'ListTagsForResourceInput')
@@ -75,6 +87,8 @@ module Aws::LaunchWizard
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     UntagResourceInput = Shapes::StructureShape.new(name: 'UntagResourceInput')
     UntagResourceOutput = Shapes::StructureShape.new(name: 'UntagResourceOutput')
+    UpdateDeploymentInput = Shapes::StructureShape.new(name: 'UpdateDeploymentInput')
+    UpdateDeploymentOutput = Shapes::StructureShape.new(name: 'UpdateDeploymentOutput')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
     ValueString = Shapes::StringShape.new(name: 'ValueString')
     WorkloadData = Shapes::StructureShape.new(name: 'WorkloadData')
@@ -90,12 +104,12 @@ module Aws::LaunchWizard
 
     AllowedValues.member = Shapes::ShapeRef.new(shape: ValueString)
 
+    CreateDeploymentInput.add_member(:workload_name, Shapes::ShapeRef.new(shape: WorkloadName, required: true, location_name: "workloadName"))
     CreateDeploymentInput.add_member(:deployment_pattern_name, Shapes::ShapeRef.new(shape: DeploymentPatternName, required: true, location_name: "deploymentPatternName"))
-    CreateDeploymentInput.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
     CreateDeploymentInput.add_member(:name, Shapes::ShapeRef.new(shape: DeploymentName, required: true, location_name: "name"))
     CreateDeploymentInput.add_member(:specifications, Shapes::ShapeRef.new(shape: DeploymentSpecifications, required: true, location_name: "specifications"))
+    CreateDeploymentInput.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
     CreateDeploymentInput.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
-    CreateDeploymentInput.add_member(:workload_name, Shapes::ShapeRef.new(shape: WorkloadName, required: true, location_name: "workloadName"))
     CreateDeploymentInput.struct_class = Types::CreateDeploymentInput
 
     CreateDeploymentOutput.add_member(:deployment_id, Shapes::ShapeRef.new(shape: DeploymentId, location_name: "deploymentId"))
@@ -108,36 +122,38 @@ module Aws::LaunchWizard
     DeleteDeploymentOutput.add_member(:status_reason, Shapes::ShapeRef.new(shape: String, location_name: "statusReason"))
     DeleteDeploymentOutput.struct_class = Types::DeleteDeploymentOutput
 
-    DeploymentConditionalField.add_member(:comparator, Shapes::ShapeRef.new(shape: String, location_name: "comparator"))
     DeploymentConditionalField.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
     DeploymentConditionalField.add_member(:value, Shapes::ShapeRef.new(shape: String, location_name: "value"))
+    DeploymentConditionalField.add_member(:comparator, Shapes::ShapeRef.new(shape: String, location_name: "comparator"))
     DeploymentConditionalField.struct_class = Types::DeploymentConditionalField
 
-    DeploymentData.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdAt"))
-    DeploymentData.add_member(:deleted_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "deletedAt"))
-    DeploymentData.add_member(:deployment_arn, Shapes::ShapeRef.new(shape: String, location_name: "deploymentArn"))
-    DeploymentData.add_member(:id, Shapes::ShapeRef.new(shape: DeploymentId, location_name: "id"))
     DeploymentData.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
-    DeploymentData.add_member(:pattern_name, Shapes::ShapeRef.new(shape: DeploymentPatternName, location_name: "patternName"))
-    DeploymentData.add_member(:resource_group, Shapes::ShapeRef.new(shape: String, location_name: "resourceGroup"))
-    DeploymentData.add_member(:specifications, Shapes::ShapeRef.new(shape: DeploymentSpecifications, location_name: "specifications"))
-    DeploymentData.add_member(:status, Shapes::ShapeRef.new(shape: DeploymentStatus, location_name: "status"))
-    DeploymentData.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    DeploymentData.add_member(:id, Shapes::ShapeRef.new(shape: DeploymentId, location_name: "id"))
     DeploymentData.add_member(:workload_name, Shapes::ShapeRef.new(shape: WorkloadName, location_name: "workloadName"))
+    DeploymentData.add_member(:pattern_name, Shapes::ShapeRef.new(shape: DeploymentPatternName, location_name: "patternName"))
+    DeploymentData.add_member(:status, Shapes::ShapeRef.new(shape: DeploymentStatus, location_name: "status"))
+    DeploymentData.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdAt"))
+    DeploymentData.add_member(:modified_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "modifiedAt"))
+    DeploymentData.add_member(:specifications, Shapes::ShapeRef.new(shape: DeploymentSpecifications, location_name: "specifications"))
+    DeploymentData.add_member(:resource_group, Shapes::ShapeRef.new(shape: String, location_name: "resourceGroup"))
+    DeploymentData.add_member(:deleted_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "deletedAt"))
+    DeploymentData.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    DeploymentData.add_member(:deployment_arn, Shapes::ShapeRef.new(shape: String, location_name: "deploymentArn"))
     DeploymentData.struct_class = Types::DeploymentData
 
-    DeploymentDataSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdAt"))
-    DeploymentDataSummary.add_member(:id, Shapes::ShapeRef.new(shape: DeploymentId, location_name: "id"))
     DeploymentDataSummary.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
+    DeploymentDataSummary.add_member(:id, Shapes::ShapeRef.new(shape: DeploymentId, location_name: "id"))
+    DeploymentDataSummary.add_member(:workload_name, Shapes::ShapeRef.new(shape: WorkloadName, location_name: "workloadName"))
     DeploymentDataSummary.add_member(:pattern_name, Shapes::ShapeRef.new(shape: DeploymentPatternName, location_name: "patternName"))
     DeploymentDataSummary.add_member(:status, Shapes::ShapeRef.new(shape: DeploymentStatus, location_name: "status"))
-    DeploymentDataSummary.add_member(:workload_name, Shapes::ShapeRef.new(shape: WorkloadName, location_name: "workloadName"))
+    DeploymentDataSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdAt"))
+    DeploymentDataSummary.add_member(:modified_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "modifiedAt"))
     DeploymentDataSummary.struct_class = Types::DeploymentDataSummary
 
     DeploymentDataSummaryList.member = Shapes::ShapeRef.new(shape: DeploymentDataSummary)
 
-    DeploymentEventDataSummary.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
     DeploymentEventDataSummary.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
+    DeploymentEventDataSummary.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
     DeploymentEventDataSummary.add_member(:status, Shapes::ShapeRef.new(shape: EventStatus, location_name: "status"))
     DeploymentEventDataSummary.add_member(:status_reason, Shapes::ShapeRef.new(shape: String, location_name: "statusReason"))
     DeploymentEventDataSummary.add_member(:timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "timestamp"))
@@ -153,17 +169,34 @@ module Aws::LaunchWizard
 
     DeploymentFilterValues.member = Shapes::ShapeRef.new(shape: DeploymentFilterValuesMemberString)
 
+    DeploymentPatternVersionDataSummary.add_member(:deployment_pattern_version_name, Shapes::ShapeRef.new(shape: String, location_name: "deploymentPatternVersionName"))
+    DeploymentPatternVersionDataSummary.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
+    DeploymentPatternVersionDataSummary.add_member(:documentation_url, Shapes::ShapeRef.new(shape: String, location_name: "documentationUrl"))
+    DeploymentPatternVersionDataSummary.add_member(:workload_name, Shapes::ShapeRef.new(shape: String, location_name: "workloadName"))
+    DeploymentPatternVersionDataSummary.add_member(:deployment_pattern_name, Shapes::ShapeRef.new(shape: String, location_name: "deploymentPatternName"))
+    DeploymentPatternVersionDataSummary.struct_class = Types::DeploymentPatternVersionDataSummary
+
+    DeploymentPatternVersionDataSummaryList.member = Shapes::ShapeRef.new(shape: DeploymentPatternVersionDataSummary)
+
+    DeploymentPatternVersionFilter.add_member(:name, Shapes::ShapeRef.new(shape: DeploymentPatternVersionFilterKey, required: true, location_name: "name"))
+    DeploymentPatternVersionFilter.add_member(:values, Shapes::ShapeRef.new(shape: DeploymentPatternVersionFilterValues, required: true, location_name: "values"))
+    DeploymentPatternVersionFilter.struct_class = Types::DeploymentPatternVersionFilter
+
+    DeploymentPatternVersionFilterValues.member = Shapes::ShapeRef.new(shape: DeploymentPatternVersionFilterValuesMemberString)
+
     DeploymentSpecifications.key = Shapes::ShapeRef.new(shape: KeyString)
     DeploymentSpecifications.value = Shapes::ShapeRef.new(shape: ValueString)
 
     DeploymentSpecificationsData.member = Shapes::ShapeRef.new(shape: DeploymentSpecificationsField)
 
-    DeploymentSpecificationsField.add_member(:allowed_values, Shapes::ShapeRef.new(shape: AllowedValues, location_name: "allowedValues"))
-    DeploymentSpecificationsField.add_member(:conditionals, Shapes::ShapeRef.new(shape: SpecificationsConditionalData, location_name: "conditionals"))
-    DeploymentSpecificationsField.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
     DeploymentSpecificationsField.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
+    DeploymentSpecificationsField.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
+    DeploymentSpecificationsField.add_member(:allowed_values, Shapes::ShapeRef.new(shape: AllowedValues, location_name: "allowedValues"))
     DeploymentSpecificationsField.add_member(:required, Shapes::ShapeRef.new(shape: String, location_name: "required"))
+    DeploymentSpecificationsField.add_member(:conditionals, Shapes::ShapeRef.new(shape: SpecificationsConditionalData, location_name: "conditionals"))
     DeploymentSpecificationsField.struct_class = Types::DeploymentSpecificationsField
+
+    FilterList.member = Shapes::ShapeRef.new(shape: DeploymentPatternVersionFilter)
 
     GetDeploymentInput.add_member(:deployment_id, Shapes::ShapeRef.new(shape: DeploymentId, required: true, location_name: "deploymentId"))
     GetDeploymentInput.struct_class = Types::GetDeploymentInput
@@ -171,8 +204,16 @@ module Aws::LaunchWizard
     GetDeploymentOutput.add_member(:deployment, Shapes::ShapeRef.new(shape: DeploymentData, location_name: "deployment"))
     GetDeploymentOutput.struct_class = Types::GetDeploymentOutput
 
-    GetWorkloadDeploymentPatternInput.add_member(:deployment_pattern_name, Shapes::ShapeRef.new(shape: DeploymentPatternName, required: true, location_name: "deploymentPatternName"))
+    GetDeploymentPatternVersionInput.add_member(:workload_name, Shapes::ShapeRef.new(shape: WorkloadName, required: true, location_name: "workloadName"))
+    GetDeploymentPatternVersionInput.add_member(:deployment_pattern_name, Shapes::ShapeRef.new(shape: DeploymentPatternName, required: true, location_name: "deploymentPatternName"))
+    GetDeploymentPatternVersionInput.add_member(:deployment_pattern_version_name, Shapes::ShapeRef.new(shape: DeploymentPatternVersionName, required: true, location_name: "deploymentPatternVersionName"))
+    GetDeploymentPatternVersionInput.struct_class = Types::GetDeploymentPatternVersionInput
+
+    GetDeploymentPatternVersionOutput.add_member(:deployment_pattern_version, Shapes::ShapeRef.new(shape: DeploymentPatternVersionDataSummary, location_name: "deploymentPatternVersion"))
+    GetDeploymentPatternVersionOutput.struct_class = Types::GetDeploymentPatternVersionOutput
+
     GetWorkloadDeploymentPatternInput.add_member(:workload_name, Shapes::ShapeRef.new(shape: WorkloadName, required: true, location_name: "workloadName"))
+    GetWorkloadDeploymentPatternInput.add_member(:deployment_pattern_name, Shapes::ShapeRef.new(shape: DeploymentPatternName, required: true, location_name: "deploymentPatternName"))
     GetWorkloadDeploymentPatternInput.struct_class = Types::GetWorkloadDeploymentPatternInput
 
     GetWorkloadDeploymentPatternOutput.add_member(:workload_deployment_pattern, Shapes::ShapeRef.new(shape: WorkloadDeploymentPatternData, location_name: "workloadDeploymentPattern"))
@@ -196,6 +237,17 @@ module Aws::LaunchWizard
     ListDeploymentEventsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListDeploymentEventsOutput.struct_class = Types::ListDeploymentEventsOutput
 
+    ListDeploymentPatternVersionsInput.add_member(:workload_name, Shapes::ShapeRef.new(shape: WorkloadName, required: true, location_name: "workloadName"))
+    ListDeploymentPatternVersionsInput.add_member(:deployment_pattern_name, Shapes::ShapeRef.new(shape: DeploymentPatternName, required: true, location_name: "deploymentPatternName"))
+    ListDeploymentPatternVersionsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxWorkloadResults, location_name: "maxResults"))
+    ListDeploymentPatternVersionsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListDeploymentPatternVersionsInput.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "filters"))
+    ListDeploymentPatternVersionsInput.struct_class = Types::ListDeploymentPatternVersionsInput
+
+    ListDeploymentPatternVersionsOutput.add_member(:deployment_pattern_versions, Shapes::ShapeRef.new(shape: DeploymentPatternVersionDataSummaryList, location_name: "deploymentPatternVersions"))
+    ListDeploymentPatternVersionsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListDeploymentPatternVersionsOutput.struct_class = Types::ListDeploymentPatternVersionsOutput
+
     ListDeploymentsInput.add_member(:filters, Shapes::ShapeRef.new(shape: DeploymentFilterList, location_name: "filters"))
     ListDeploymentsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxDeploymentResults, location_name: "maxResults"))
     ListDeploymentsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
@@ -211,21 +263,21 @@ module Aws::LaunchWizard
     ListTagsForResourceOutput.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     ListTagsForResourceOutput.struct_class = Types::ListTagsForResourceOutput
 
+    ListWorkloadDeploymentPatternsInput.add_member(:workload_name, Shapes::ShapeRef.new(shape: WorkloadName, required: true, location_name: "workloadName"))
     ListWorkloadDeploymentPatternsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxWorkloadDeploymentPatternResults, location_name: "maxResults"))
     ListWorkloadDeploymentPatternsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
-    ListWorkloadDeploymentPatternsInput.add_member(:workload_name, Shapes::ShapeRef.new(shape: WorkloadName, required: true, location_name: "workloadName"))
     ListWorkloadDeploymentPatternsInput.struct_class = Types::ListWorkloadDeploymentPatternsInput
 
-    ListWorkloadDeploymentPatternsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListWorkloadDeploymentPatternsOutput.add_member(:workload_deployment_patterns, Shapes::ShapeRef.new(shape: WorkloadDeploymentPatternDataSummaryList, location_name: "workloadDeploymentPatterns"))
+    ListWorkloadDeploymentPatternsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListWorkloadDeploymentPatternsOutput.struct_class = Types::ListWorkloadDeploymentPatternsOutput
 
     ListWorkloadsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxWorkloadResults, location_name: "maxResults"))
     ListWorkloadsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListWorkloadsInput.struct_class = Types::ListWorkloadsInput
 
-    ListWorkloadsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListWorkloadsOutput.add_member(:workloads, Shapes::ShapeRef.new(shape: WorkloadDataSummaryList, location_name: "workloads"))
+    ListWorkloadsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListWorkloadsOutput.struct_class = Types::ListWorkloadsOutput
 
     ResourceLimitException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
@@ -253,41 +305,55 @@ module Aws::LaunchWizard
 
     UntagResourceOutput.struct_class = Types::UntagResourceOutput
 
+    UpdateDeploymentInput.add_member(:deployment_id, Shapes::ShapeRef.new(shape: DeploymentId, required: true, location_name: "deploymentId"))
+    UpdateDeploymentInput.add_member(:specifications, Shapes::ShapeRef.new(shape: DeploymentSpecifications, required: true, location_name: "specifications"))
+    UpdateDeploymentInput.add_member(:workload_version_name, Shapes::ShapeRef.new(shape: WorkloadVersionName, location_name: "workloadVersionName"))
+    UpdateDeploymentInput.add_member(:deployment_pattern_version_name, Shapes::ShapeRef.new(shape: DeploymentPatternVersionName, location_name: "deploymentPatternVersionName"))
+    UpdateDeploymentInput.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
+    UpdateDeploymentInput.add_member(:force, Shapes::ShapeRef.new(shape: Boolean, location_name: "force"))
+    UpdateDeploymentInput.struct_class = Types::UpdateDeploymentInput
+
+    UpdateDeploymentOutput.add_member(:deployment, Shapes::ShapeRef.new(shape: DeploymentDataSummary, location_name: "deployment"))
+    UpdateDeploymentOutput.struct_class = Types::UpdateDeploymentOutput
+
     ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     ValidationException.struct_class = Types::ValidationException
 
-    WorkloadData.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
+    WorkloadData.add_member(:workload_name, Shapes::ShapeRef.new(shape: WorkloadName, location_name: "workloadName"))
     WorkloadData.add_member(:display_name, Shapes::ShapeRef.new(shape: String, location_name: "displayName"))
+    WorkloadData.add_member(:status, Shapes::ShapeRef.new(shape: WorkloadStatus, location_name: "status"))
+    WorkloadData.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
     WorkloadData.add_member(:documentation_url, Shapes::ShapeRef.new(shape: String, location_name: "documentationUrl"))
     WorkloadData.add_member(:icon_url, Shapes::ShapeRef.new(shape: String, location_name: "iconUrl"))
-    WorkloadData.add_member(:status, Shapes::ShapeRef.new(shape: WorkloadStatus, location_name: "status"))
     WorkloadData.add_member(:status_message, Shapes::ShapeRef.new(shape: String, location_name: "statusMessage"))
-    WorkloadData.add_member(:workload_name, Shapes::ShapeRef.new(shape: WorkloadName, location_name: "workloadName"))
     WorkloadData.struct_class = Types::WorkloadData
 
-    WorkloadDataSummary.add_member(:display_name, Shapes::ShapeRef.new(shape: String, location_name: "displayName"))
     WorkloadDataSummary.add_member(:workload_name, Shapes::ShapeRef.new(shape: WorkloadName, location_name: "workloadName"))
+    WorkloadDataSummary.add_member(:display_name, Shapes::ShapeRef.new(shape: String, location_name: "displayName"))
+    WorkloadDataSummary.add_member(:status, Shapes::ShapeRef.new(shape: WorkloadStatus, location_name: "status"))
     WorkloadDataSummary.struct_class = Types::WorkloadDataSummary
 
     WorkloadDataSummaryList.member = Shapes::ShapeRef.new(shape: WorkloadDataSummary)
 
+    WorkloadDeploymentPatternData.add_member(:workload_name, Shapes::ShapeRef.new(shape: WorkloadName, location_name: "workloadName"))
     WorkloadDeploymentPatternData.add_member(:deployment_pattern_name, Shapes::ShapeRef.new(shape: DeploymentPatternName, location_name: "deploymentPatternName"))
-    WorkloadDeploymentPatternData.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
+    WorkloadDeploymentPatternData.add_member(:workload_version_name, Shapes::ShapeRef.new(shape: WorkloadVersionName, location_name: "workloadVersionName"))
+    WorkloadDeploymentPatternData.add_member(:deployment_pattern_version_name, Shapes::ShapeRef.new(shape: DeploymentPatternVersionName, location_name: "deploymentPatternVersionName"))
     WorkloadDeploymentPatternData.add_member(:display_name, Shapes::ShapeRef.new(shape: String, location_name: "displayName"))
-    WorkloadDeploymentPatternData.add_member(:specifications, Shapes::ShapeRef.new(shape: DeploymentSpecificationsData, location_name: "specifications"))
+    WorkloadDeploymentPatternData.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
     WorkloadDeploymentPatternData.add_member(:status, Shapes::ShapeRef.new(shape: WorkloadDeploymentPatternStatus, location_name: "status"))
     WorkloadDeploymentPatternData.add_member(:status_message, Shapes::ShapeRef.new(shape: String, location_name: "statusMessage"))
-    WorkloadDeploymentPatternData.add_member(:workload_name, Shapes::ShapeRef.new(shape: WorkloadName, location_name: "workloadName"))
-    WorkloadDeploymentPatternData.add_member(:workload_version_name, Shapes::ShapeRef.new(shape: WorkloadVersionName, location_name: "workloadVersionName"))
+    WorkloadDeploymentPatternData.add_member(:specifications, Shapes::ShapeRef.new(shape: DeploymentSpecificationsData, location_name: "specifications"))
     WorkloadDeploymentPatternData.struct_class = Types::WorkloadDeploymentPatternData
 
+    WorkloadDeploymentPatternDataSummary.add_member(:workload_name, Shapes::ShapeRef.new(shape: WorkloadName, location_name: "workloadName"))
     WorkloadDeploymentPatternDataSummary.add_member(:deployment_pattern_name, Shapes::ShapeRef.new(shape: DeploymentPatternName, location_name: "deploymentPatternName"))
-    WorkloadDeploymentPatternDataSummary.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
+    WorkloadDeploymentPatternDataSummary.add_member(:workload_version_name, Shapes::ShapeRef.new(shape: WorkloadVersionName, location_name: "workloadVersionName"))
+    WorkloadDeploymentPatternDataSummary.add_member(:deployment_pattern_version_name, Shapes::ShapeRef.new(shape: DeploymentPatternVersionName, location_name: "deploymentPatternVersionName"))
     WorkloadDeploymentPatternDataSummary.add_member(:display_name, Shapes::ShapeRef.new(shape: String, location_name: "displayName"))
+    WorkloadDeploymentPatternDataSummary.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
     WorkloadDeploymentPatternDataSummary.add_member(:status, Shapes::ShapeRef.new(shape: WorkloadDeploymentPatternStatus, location_name: "status"))
     WorkloadDeploymentPatternDataSummary.add_member(:status_message, Shapes::ShapeRef.new(shape: String, location_name: "statusMessage"))
-    WorkloadDeploymentPatternDataSummary.add_member(:workload_name, Shapes::ShapeRef.new(shape: WorkloadName, location_name: "workloadName"))
-    WorkloadDeploymentPatternDataSummary.add_member(:workload_version_name, Shapes::ShapeRef.new(shape: WorkloadVersionName, location_name: "workloadVersionName"))
     WorkloadDeploymentPatternDataSummary.struct_class = Types::WorkloadDeploymentPatternDataSummary
 
     WorkloadDeploymentPatternDataSummaryList.member = Shapes::ShapeRef.new(shape: WorkloadDeploymentPatternDataSummary)
@@ -300,8 +366,8 @@ module Aws::LaunchWizard
 
       api.metadata = {
         "apiVersion" => "2018-05-10",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "launchwizard",
-        "jsonVersion" => "1.1",
         "protocol" => "rest-json",
         "protocols" => ["rest-json"],
         "serviceFullName" => "AWS Launch Wizard",
@@ -346,6 +412,16 @@ module Aws::LaunchWizard
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
+      api.add_operation(:get_deployment_pattern_version, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetDeploymentPatternVersion"
+        o.http_method = "POST"
+        o.http_request_uri = "/getDeploymentPatternVersion"
+        o.input = Shapes::ShapeRef.new(shape: GetDeploymentPatternVersionInput)
+        o.output = Shapes::ShapeRef.new(shape: GetDeploymentPatternVersionOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
       api.add_operation(:get_workload, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetWorkload"
         o.http_method = "POST"
@@ -374,6 +450,23 @@ module Aws::LaunchWizard
         o.http_request_uri = "/listDeploymentEvents"
         o.input = Shapes::ShapeRef.new(shape: ListDeploymentEventsInput)
         o.output = Shapes::ShapeRef.new(shape: ListDeploymentEventsOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_deployment_pattern_versions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListDeploymentPatternVersions"
+        o.http_method = "POST"
+        o.http_request_uri = "/listDeploymentPatternVersions"
+        o.input = Shapes::ShapeRef.new(shape: ListDeploymentPatternVersionsInput)
+        o.output = Shapes::ShapeRef.new(shape: ListDeploymentPatternVersionsOutput)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -462,6 +555,18 @@ module Aws::LaunchWizard
         o.http_request_uri = "/tags/{resourceArn}"
         o.input = Shapes::ShapeRef.new(shape: UntagResourceInput)
         o.output = Shapes::ShapeRef.new(shape: UntagResourceOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:update_deployment, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateDeployment"
+        o.http_method = "POST"
+        o.http_request_uri = "/updateDeployment"
+        o.input = Shapes::ShapeRef.new(shape: UpdateDeploymentInput)
+        o.output = Shapes::ShapeRef.new(shape: UpdateDeploymentOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceLimitException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)

@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.58.0 (2026-02-04)
+------------------
+
+* Feature - Support for configuring and managing custom domain names for WorkSpaces Secure Browser portals.
+
+1.57.0 (2026-01-16)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.56.0 (2026-01-08)
 ------------------
 

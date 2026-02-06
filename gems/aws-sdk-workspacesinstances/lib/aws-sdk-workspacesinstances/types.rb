@@ -54,6 +54,23 @@ module Aws::WorkspacesInstances
     #
     class AssociateVolumeResponse < Aws::EmptyStructure; end
 
+    # Defines billing configuration settings for WorkSpace Instances,
+    # containing the billing mode selection.
+    #
+    # @!attribute [rw] billing_mode
+    #   Specifies the billing mode for WorkSpace Instances. MONTHLY provides
+    #   fixed monthly rates for predictable budgeting, while HOURLY enables
+    #   pay-per-second billing for actual usage.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-instances-2022-07-26/BillingConfiguration AWS API Documentation
+    #
+    class BillingConfiguration < Struct.new(
+      :billing_mode)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Defines device mapping for WorkSpace Instance storage.
     #
     # @!attribute [rw] device_name
@@ -290,12 +307,19 @@ module Aws::WorkspacesInstances
     #   including network, compute, and storage parameters.
     #   @return [Types::ManagedInstanceRequest]
     #
+    # @!attribute [rw] billing_configuration
+    #   Optional billing configuration for the WorkSpace Instance. Allows
+    #   customers to specify their preferred billing mode when creating a
+    #   new instance. Defaults to hourly billing if not specified.
+    #   @return [Types::BillingConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-instances-2022-07-26/CreateWorkspaceInstanceRequest AWS API Documentation
     #
     class CreateWorkspaceInstanceRequest < Struct.new(
       :client_token,
       :tags,
-      :managed_instance)
+      :managed_instance,
+      :billing_configuration)
       SENSITIVE = [:client_token]
       include Aws::Structure
     end
@@ -567,6 +591,11 @@ module Aws::WorkspacesInstances
     #   Details of the associated EC2 managed instance.
     #   @return [Types::EC2ManagedInstance]
     #
+    # @!attribute [rw] billing_configuration
+    #   Returns the current billing configuration for the WorkSpace
+    #   Instance, indicating the active billing mode.
+    #   @return [Types::BillingConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-instances-2022-07-26/GetWorkspaceInstanceResponse AWS API Documentation
     #
     class GetWorkspaceInstanceResponse < Struct.new(
@@ -574,7 +603,8 @@ module Aws::WorkspacesInstances
       :ec2_instance_errors,
       :provision_state,
       :workspace_instance_id,
-      :ec2_managed_instance)
+      :ec2_managed_instance,
+      :billing_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -608,6 +638,39 @@ module Aws::WorkspacesInstances
     class IamInstanceProfileSpecification < Struct.new(
       :arn,
       :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Defines filtering criteria for WorkSpace Instance type searches.
+    # Combines multiple filter conditions including billing mode, platform
+    # type, and tenancy to help customers find instance types that meet
+    # their specific requirements.
+    #
+    # @!attribute [rw] billing_mode
+    #   Filters WorkSpace Instance types based on supported billing modes.
+    #   Allows customers to search for instance types that support their
+    #   preferred billing model, such as HOURLY or MONTHLY billing.
+    #   @return [String]
+    #
+    # @!attribute [rw] platform_type
+    #   Filters WorkSpace Instance types by operating system platform.
+    #   Allows customers to find instances that support their desired OS,
+    #   such as Windows, Linux/UNIX, Ubuntu Pro, RHEL, or SUSE.
+    #   @return [String]
+    #
+    # @!attribute [rw] tenancy
+    #   Filters WorkSpace Instance types by tenancy model. Allows customers
+    #   to find instances that match their tenancy requirements, such as
+    #   SHARED or DEDICATED.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-instances-2022-07-26/InstanceConfigurationFilter AWS API Documentation
+    #
+    class InstanceConfigurationFilter < Struct.new(
+      :billing_mode,
+      :platform_type,
+      :tenancy)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -833,10 +896,18 @@ module Aws::WorkspacesInstances
     #   Unique identifier for the WorkSpace Instance type.
     #   @return [String]
     #
+    # @!attribute [rw] supported_instance_configurations
+    #   Lists all valid combinations of tenancy, platform type, and billing
+    #   mode supported for the specific WorkSpace Instance type. Contains
+    #   the complete set of configuration options available for this
+    #   instance type.
+    #   @return [Array<Types::SupportedInstanceConfiguration>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-instances-2022-07-26/InstanceTypeInfo AWS API Documentation
     #
     class InstanceTypeInfo < Struct.new(
-      :instance_type)
+      :instance_type,
+      :supported_instance_configurations)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -915,11 +986,19 @@ module Aws::WorkspacesInstances
     #   results.
     #   @return [String]
     #
+    # @!attribute [rw] instance_configuration_filter
+    #   Optional filter to narrow instance type results based on
+    #   configuration requirements. Only returns instance types that support
+    #   the specified combination of tenancy, platform type, and billing
+    #   mode.
+    #   @return [Types::InstanceConfigurationFilter]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-instances-2022-07-26/ListInstanceTypesRequest AWS API Documentation
     #
     class ListInstanceTypesRequest < Struct.new(
       :max_results,
-      :next_token)
+      :next_token,
+      :instance_configuration_filter)
       SENSITIVE = [:next_token]
       include Aws::Structure
     end
@@ -1438,6 +1517,35 @@ module Aws::WorkspacesInstances
       :max_price,
       :spot_instance_type,
       :valid_until_utc)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents a single valid configuration combination that an instance
+    # type supports, combining tenancy, platform type, and billing mode into
+    # one complete configuration specification.
+    #
+    # @!attribute [rw] billing_mode
+    #   Specifies the billing mode supported in this configuration
+    #   combination.
+    #   @return [String]
+    #
+    # @!attribute [rw] platform_type
+    #   Specifies the operating system platform supported in this
+    #   configuration combination.
+    #   @return [String]
+    #
+    # @!attribute [rw] tenancy
+    #   Specifies the tenancy model supported in this configuration
+    #   combination.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-instances-2022-07-26/SupportedInstanceConfiguration AWS API Documentation
+    #
+    class SupportedInstanceConfiguration < Struct.new(
+      :billing_mode,
+      :platform_type,
+      :tenancy)
       SENSITIVE = []
       include Aws::Structure
     end

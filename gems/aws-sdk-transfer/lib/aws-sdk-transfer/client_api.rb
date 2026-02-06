@@ -20,6 +20,8 @@ module Aws::Transfer
     AgreementId = Shapes::StringShape.new(name: 'AgreementId')
     AgreementStatusType = Shapes::StringShape.new(name: 'AgreementStatusType')
     Arn = Shapes::StringShape.new(name: 'Arn')
+    As2AsyncMdnConnectorConfig = Shapes::StructureShape.new(name: 'As2AsyncMdnConnectorConfig')
+    As2AsyncMdnServerIds = Shapes::ListShape.new(name: 'As2AsyncMdnServerIds')
     As2ConnectorConfig = Shapes::StructureShape.new(name: 'As2ConnectorConfig')
     As2ConnectorSecretId = Shapes::StringShape.new(name: 'As2ConnectorSecretId')
     As2Id = Shapes::StringShape.new(name: 'As2Id')
@@ -65,6 +67,10 @@ module Aws::Transfer
     CreateWorkflowRequest = Shapes::StructureShape.new(name: 'CreateWorkflowRequest')
     CreateWorkflowResponse = Shapes::StructureShape.new(name: 'CreateWorkflowResponse')
     CustomDirectoriesType = Shapes::StructureShape.new(name: 'CustomDirectoriesType')
+    CustomHttpHeader = Shapes::StructureShape.new(name: 'CustomHttpHeader')
+    CustomHttpHeaderKeyType = Shapes::StringShape.new(name: 'CustomHttpHeaderKeyType')
+    CustomHttpHeaderValueType = Shapes::StringShape.new(name: 'CustomHttpHeaderValueType')
+    CustomHttpHeaders = Shapes::ListShape.new(name: 'CustomHttpHeaders')
     CustomStepDetails = Shapes::StructureShape.new(name: 'CustomStepDetails')
     CustomStepStatus = Shapes::StringShape.new(name: 'CustomStepStatus')
     CustomStepTarget = Shapes::StringShape.new(name: 'CustomStepTarget')
@@ -414,6 +420,12 @@ module Aws::Transfer
 
     AddressAllocationIds.member = Shapes::ShapeRef.new(shape: AddressAllocationId)
 
+    As2AsyncMdnConnectorConfig.add_member(:url, Shapes::ShapeRef.new(shape: Url, location_name: "Url"))
+    As2AsyncMdnConnectorConfig.add_member(:server_ids, Shapes::ShapeRef.new(shape: As2AsyncMdnServerIds, location_name: "ServerIds"))
+    As2AsyncMdnConnectorConfig.struct_class = Types::As2AsyncMdnConnectorConfig
+
+    As2AsyncMdnServerIds.member = Shapes::ShapeRef.new(shape: ServerId)
+
     As2ConnectorConfig.add_member(:local_profile_id, Shapes::ShapeRef.new(shape: ProfileId, location_name: "LocalProfileId"))
     As2ConnectorConfig.add_member(:partner_profile_id, Shapes::ShapeRef.new(shape: ProfileId, location_name: "PartnerProfileId"))
     As2ConnectorConfig.add_member(:message_subject, Shapes::ShapeRef.new(shape: MessageSubject, location_name: "MessageSubject"))
@@ -424,6 +436,7 @@ module Aws::Transfer
     As2ConnectorConfig.add_member(:mdn_response, Shapes::ShapeRef.new(shape: MdnResponse, location_name: "MdnResponse"))
     As2ConnectorConfig.add_member(:basic_auth_secret_id, Shapes::ShapeRef.new(shape: As2ConnectorSecretId, location_name: "BasicAuthSecretId"))
     As2ConnectorConfig.add_member(:preserve_content_type, Shapes::ShapeRef.new(shape: PreserveContentType, location_name: "PreserveContentType"))
+    As2ConnectorConfig.add_member(:async_mdn_config, Shapes::ShapeRef.new(shape: As2AsyncMdnConnectorConfig, location_name: "AsyncMdnConfig"))
     As2ConnectorConfig.struct_class = Types::As2ConnectorConfig
 
     As2Transports.member = Shapes::ShapeRef.new(shape: As2Transport)
@@ -574,6 +587,12 @@ module Aws::Transfer
     CustomDirectoriesType.add_member(:status_files_directory, Shapes::ShapeRef.new(shape: HomeDirectory, required: true, location_name: "StatusFilesDirectory"))
     CustomDirectoriesType.add_member(:temporary_files_directory, Shapes::ShapeRef.new(shape: HomeDirectory, required: true, location_name: "TemporaryFilesDirectory"))
     CustomDirectoriesType.struct_class = Types::CustomDirectoriesType
+
+    CustomHttpHeader.add_member(:key, Shapes::ShapeRef.new(shape: CustomHttpHeaderKeyType, location_name: "Key"))
+    CustomHttpHeader.add_member(:value, Shapes::ShapeRef.new(shape: CustomHttpHeaderValueType, location_name: "Value"))
+    CustomHttpHeader.struct_class = Types::CustomHttpHeader
+
+    CustomHttpHeaders.member = Shapes::ShapeRef.new(shape: CustomHttpHeader)
 
     CustomStepDetails.add_member(:name, Shapes::ShapeRef.new(shape: WorkflowStepName, location_name: "Name"))
     CustomStepDetails.add_member(:target, Shapes::ShapeRef.new(shape: CustomStepTarget, location_name: "Target"))
@@ -1342,6 +1361,7 @@ module Aws::Transfer
     StartFileTransferRequest.add_member(:retrieve_file_paths, Shapes::ShapeRef.new(shape: FilePaths, location_name: "RetrieveFilePaths"))
     StartFileTransferRequest.add_member(:local_directory_path, Shapes::ShapeRef.new(shape: FilePath, location_name: "LocalDirectoryPath"))
     StartFileTransferRequest.add_member(:remote_directory_path, Shapes::ShapeRef.new(shape: FilePath, location_name: "RemoteDirectoryPath"))
+    StartFileTransferRequest.add_member(:custom_http_headers, Shapes::ShapeRef.new(shape: CustomHttpHeaders, location_name: "CustomHttpHeaders"))
     StartFileTransferRequest.struct_class = Types::StartFileTransferRequest
 
     StartFileTransferResponse.add_member(:transfer_id, Shapes::ShapeRef.new(shape: TransferId, required: true, location_name: "TransferId"))

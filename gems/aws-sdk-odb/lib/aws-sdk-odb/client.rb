@@ -1441,6 +1441,11 @@ module Aws::Odb
     #   resp.cloud_autonomous_vm_cluster.time_ords_certificate_expires #=> Time
     #   resp.cloud_autonomous_vm_cluster.time_zone #=> String
     #   resp.cloud_autonomous_vm_cluster.total_container_databases #=> Integer
+    #   resp.cloud_autonomous_vm_cluster.iam_roles #=> Array
+    #   resp.cloud_autonomous_vm_cluster.iam_roles[0].iam_role_arn #=> String
+    #   resp.cloud_autonomous_vm_cluster.iam_roles[0].status #=> String, one of "ASSOCIATING", "DISASSOCIATING", "FAILED", "CONNECTED", "DISCONNECTED", "PARTIALLY_CONNECTED", "UNKNOWN"
+    #   resp.cloud_autonomous_vm_cluster.iam_roles[0].status_reason #=> String
+    #   resp.cloud_autonomous_vm_cluster.iam_roles[0].aws_integration #=> String, one of "KmsTde"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/GetCloudAutonomousVmCluster AWS API Documentation
     #
@@ -2102,6 +2107,11 @@ module Aws::Odb
     #   resp.cloud_autonomous_vm_clusters[0].time_ords_certificate_expires #=> Time
     #   resp.cloud_autonomous_vm_clusters[0].time_zone #=> String
     #   resp.cloud_autonomous_vm_clusters[0].total_container_databases #=> Integer
+    #   resp.cloud_autonomous_vm_clusters[0].iam_roles #=> Array
+    #   resp.cloud_autonomous_vm_clusters[0].iam_roles[0].iam_role_arn #=> String
+    #   resp.cloud_autonomous_vm_clusters[0].iam_roles[0].status #=> String, one of "ASSOCIATING", "DISASSOCIATING", "FAILED", "CONNECTED", "DISCONNECTED", "PARTIALLY_CONNECTED", "UNKNOWN"
+    #   resp.cloud_autonomous_vm_clusters[0].iam_roles[0].status_reason #=> String
+    #   resp.cloud_autonomous_vm_clusters[0].iam_roles[0].aws_integration #=> String, one of "KmsTde"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/ListCloudAutonomousVmClusters AWS API Documentation
     #
@@ -3210,7 +3220,7 @@ module Aws::Odb
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-odb'
-      context[:gem_version] = '1.12.0'
+      context[:gem_version] = '1.14.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

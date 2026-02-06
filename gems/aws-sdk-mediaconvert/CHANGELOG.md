@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.179.0 (2026-01-28)
+------------------
+
+* Feature - This release adds a follow source mode for audio output channel count, an AES audio frame wrapping option for MXF outputs, and an option to signal DolbyVision compatibility using the SUPPLEMENTAL-CODECS tag in HLS manifests.
+
+1.178.0 (2026-01-16)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.177.0 (2026-01-08)
 ------------------
 

@@ -278,7 +278,8 @@ module Aws
                                 }?
                               }?,
                               cache_point: {
-                                type: ("default")
+                                type: ("default"),
+                                ttl: ("5m" | "1h")?
                               }?,
                               reasoning_content: {
                                 reasoning_text: {
@@ -363,7 +364,8 @@ module Aws
                             }?
                           }?,
                           cache_point: {
-                            type: ("default")
+                            type: ("default"),
+                            ttl: ("5m" | "1h")?
                           }?
                         },
                       ],
@@ -382,13 +384,15 @@ module Aws
                               input_schema: {
                                 json: {
                                 }?
-                              }
+                              },
+                              strict: bool?
                             }?,
                             system_tool: {
                               name: ::String
                             }?,
                             cache_point: {
-                              type: ("default")
+                              type: ("default"),
+                              ttl: ("5m" | "1h")?
                             }?
                           },
                         ],
@@ -419,6 +423,18 @@ module Aws
                       },
                       ?service_tier: {
                         type: ("priority" | "default" | "flex" | "reserved")
+                      },
+                      ?output_config: {
+                        text_format: {
+                          type: ("json_schema"),
+                          structure: {
+                            json_schema: {
+                              schema: ::String,
+                              name: ::String?,
+                              description: ::String?
+                            }?
+                          }
+                        }?
                       }
                     ) -> _ConverseResponseSuccess
                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ConverseResponseSuccess
@@ -581,7 +597,8 @@ module Aws
                                        }?
                                      }?,
                                      cache_point: {
-                                       type: ("default")
+                                       type: ("default"),
+                                       ttl: ("5m" | "1h")?
                                      }?,
                                      reasoning_content: {
                                        reasoning_text: {
@@ -666,7 +683,8 @@ module Aws
                                    }?
                                  }?,
                                  cache_point: {
-                                   type: ("default")
+                                   type: ("default"),
+                                   ttl: ("5m" | "1h")?
                                  }?
                                },
                              ],
@@ -685,13 +703,15 @@ module Aws
                                      input_schema: {
                                        json: {
                                        }?
-                                     }
+                                     },
+                                     strict: bool?
                                    }?,
                                    system_tool: {
                                      name: ::String
                                    }?,
                                    cache_point: {
-                                     type: ("default")
+                                     type: ("default"),
+                                     ttl: ("5m" | "1h")?
                                    }?
                                  },
                                ],
@@ -723,6 +743,18 @@ module Aws
                              },
                              ?service_tier: {
                                type: ("priority" | "default" | "flex" | "reserved")
+                             },
+                             ?output_config: {
+                               text_format: {
+                                 type: ("json_schema"),
+                                 structure: {
+                                   json_schema: {
+                                     schema: ::String,
+                                     name: ::String?,
+                                     description: ::String?
+                                   }?
+                                 }
+                               }?
                              }
                            ) ?{ (*untyped) -> void } -> _ConverseStreamResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) ?{ (*untyped) -> void } -> _ConverseStreamResponseSuccess
@@ -890,7 +922,8 @@ module Aws
                                         }?
                                       }?,
                                       cache_point: {
-                                        type: ("default")
+                                        type: ("default"),
+                                        ttl: ("5m" | "1h")?
                                       }?,
                                       reasoning_content: {
                                         reasoning_text: {
@@ -975,7 +1008,8 @@ module Aws
                                     }?
                                   }?,
                                   cache_point: {
-                                    type: ("default")
+                                    type: ("default"),
+                                    ttl: ("5m" | "1h")?
                                   }?
                                 },
                               ]?,
@@ -988,13 +1022,15 @@ module Aws
                                       input_schema: {
                                         json: {
                                         }?
-                                      }
+                                      },
+                                      strict: bool?
                                     }?,
                                     system_tool: {
                                       name: ::String
                                     }?,
                                     cache_point: {
-                                      type: ("default")
+                                      type: ("default"),
+                                      ttl: ("5m" | "1h")?
                                     }?
                                   },
                                 ],

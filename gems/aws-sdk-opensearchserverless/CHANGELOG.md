@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.54.0 (2026-01-16)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.53.0 (2026-01-15)
+------------------
+
+* Feature - Collection groups in Amazon OpenSearch Serverless enables to organize multiple collections and enable compute resource sharing across collections with different KMS keys. This shared compute model reduces costs by eliminating the need for separate OpenSearch Compute Units (OCUs) for each KMS key.
+
 1.52.0 (2026-01-08)
 ------------------
 

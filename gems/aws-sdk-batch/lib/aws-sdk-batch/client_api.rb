@@ -326,12 +326,15 @@ module Aws::Batch
     ArrayProperties.struct_class = Types::ArrayProperties
 
     ArrayPropertiesDetail.add_member(:status_summary, Shapes::ShapeRef.new(shape: ArrayJobStatusSummary, location_name: "statusSummary"))
+    ArrayPropertiesDetail.add_member(:status_summary_last_updated_at, Shapes::ShapeRef.new(shape: Long, location_name: "statusSummaryLastUpdatedAt"))
     ArrayPropertiesDetail.add_member(:size, Shapes::ShapeRef.new(shape: Integer, location_name: "size"))
     ArrayPropertiesDetail.add_member(:index, Shapes::ShapeRef.new(shape: Integer, location_name: "index"))
     ArrayPropertiesDetail.struct_class = Types::ArrayPropertiesDetail
 
     ArrayPropertiesSummary.add_member(:size, Shapes::ShapeRef.new(shape: Integer, location_name: "size"))
     ArrayPropertiesSummary.add_member(:index, Shapes::ShapeRef.new(shape: Integer, location_name: "index"))
+    ArrayPropertiesSummary.add_member(:status_summary, Shapes::ShapeRef.new(shape: ArrayJobStatusSummary, location_name: "statusSummary"))
+    ArrayPropertiesSummary.add_member(:status_summary_last_updated_at, Shapes::ShapeRef.new(shape: Long, location_name: "statusSummaryLastUpdatedAt"))
     ArrayPropertiesSummary.struct_class = Types::ArrayPropertiesSummary
 
     AttemptContainerDetail.add_member(:container_instance_arn, Shapes::ShapeRef.new(shape: String, location_name: "containerInstanceArn"))

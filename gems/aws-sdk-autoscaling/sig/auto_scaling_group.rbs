@@ -114,6 +114,9 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/AutoScalingGroup.html#instance_maintenance_policy-instance_method
       def instance_maintenance_policy: () -> Types::InstanceMaintenancePolicy
 
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/AutoScalingGroup.html#deletion_protection-instance_method
+      def deletion_protection: () -> ("none" | "prevent-force-deletion" | "prevent-all-deletion")
+
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/AutoScalingGroup.html#availability_zone_distribution-instance_method
       def availability_zone_distribution: () -> Types::AvailabilityZoneDistribution
 
@@ -520,14 +523,21 @@ module Aws
                       retention_triggers: {
                         terminate_hook_abandon: ("retain" | "terminate")?
                       }?
-                    }
+                    },
+                    ?deletion_protection: ("none" | "prevent-force-deletion" | "prevent-all-deletion")
                   ) -> AutoScalingGroup
                 | (?Hash[Symbol, untyped]) -> AutoScalingGroup
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/AutoScalingGroup.html#activities-instance_method
       def activities: (
                         ?activity_ids: Array[::String],
-                        ?include_deleted_groups: bool
+                        ?include_deleted_groups: bool,
+                        ?filters: Array[
+                          {
+                            name: ::String?,
+                            values: Array[::String]?
+                          },
+                        ]
                       ) -> Activity::Collection
                     | (?Hash[Symbol, untyped]) -> Activity::Collection
 

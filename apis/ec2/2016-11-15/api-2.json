@@ -7283,6 +7283,7 @@
         "locationName":"item"
       }
     },
+    "AdditionalFlexibleNetworkInterfaces":{"type":"integer"},
     "Address":{
       "type":"structure",
       "members":{
@@ -8973,6 +8974,7 @@
         "Device":{"shape":"String"},
         "InstanceId":{"shape":"InstanceId"},
         "VolumeId":{"shape":"VolumeId"},
+        "EbsCardIndex":{"shape":"BoxedInteger"},
         "DryRun":{
           "shape":"Boolean",
           "locationName":"dryRun"
@@ -25464,7 +25466,8 @@
           "locationName":"encrypted"
         },
         "VolumeInitializationRate":{"shape":"Integer"},
-        "AvailabilityZoneId":{"shape":"String"}
+        "AvailabilityZoneId":{"shape":"String"},
+        "EbsCardIndex":{"shape":"Integer"}
       }
     },
     "EbsBlockDeviceResponse":{
@@ -25504,6 +25507,47 @@
         }
       }
     },
+    "EbsCardIndex":{"type":"integer"},
+    "EbsCardInfo":{
+      "type":"structure",
+      "members":{
+        "EbsCardIndex":{
+          "shape":"EbsCardIndex",
+          "locationName":"ebsCardIndex"
+        },
+        "BaselineBandwidthInMbps":{
+          "shape":"BaselineBandwidthInMbps",
+          "locationName":"baselineBandwidthInMbps"
+        },
+        "BaselineThroughputInMBps":{
+          "shape":"BaselineThroughputInMBps",
+          "locationName":"baselineThroughputInMBps"
+        },
+        "BaselineIops":{
+          "shape":"BaselineIops",
+          "locationName":"baselineIops"
+        },
+        "MaximumBandwidthInMbps":{
+          "shape":"MaximumBandwidthInMbps",
+          "locationName":"maximumBandwidthInMbps"
+        },
+        "MaximumThroughputInMBps":{
+          "shape":"MaximumThroughputInMBps",
+          "locationName":"maximumThroughputInMBps"
+        },
+        "MaximumIops":{
+          "shape":"MaximumIops",
+          "locationName":"maximumIops"
+        }
+      }
+    },
+    "EbsCardInfoList":{
+      "type":"list",
+      "member":{
+        "shape":"EbsCardInfo",
+        "locationName":"item"
+      }
+    },
     "EbsEncryptionSupport":{
       "type":"string",
       "enum":[
@@ -25537,6 +25581,14 @@
         "AttachmentLimitType":{
           "shape":"AttachmentLimitType",
           "locationName":"attachmentLimitType"
+        },
+        "MaximumEbsCards":{
+          "shape":"MaximumEbsCards",
+          "locationName":"maximumEbsCards"
+        },
+        "EbsCards":{
+          "shape":"EbsCardInfoList",
+          "locationName":"ebsCardSet"
         }
       }
     },
@@ -25570,6 +25622,10 @@
         "Operator":{
           "shape":"OperatorResponse",
           "locationName":"operator"
+        },
+        "EbsCardIndex":{
+          "shape":"Integer",
+          "locationName":"ebsCardIndex"
         }
       }
     },
@@ -30279,6 +30335,18 @@
           "shape":"GpuDeviceCount",
           "locationName":"count"
         },
+        "LogicalGpuCount":{
+          "shape":"LogicalGpuCount",
+          "locationName":"logicalGpuCount"
+        },
+        "GpuPartitionSize":{
+          "shape":"GpuPartitionSize",
+          "locationName":"gpuPartitionSize"
+        },
+        "Workloads":{
+          "shape":"WorkloadsList",
+          "locationName":"workloadSet"
+        },
         "MemoryInfo":{
           "shape":"GpuDeviceMemoryInfo",
           "locationName":"memoryInfo"
@@ -30317,6 +30385,7 @@
         }
       }
     },
+    "GpuPartitionSize":{"type":"double"},
     "GroupBy":{
       "type":"string",
       "enum":[
@@ -35232,7 +35301,81 @@
         "c8a.24xlarge",
         "c8a.48xlarge",
         "c8a.metal-24xl",
-        "c8a.metal-48xl"
+        "c8a.metal-48xl",
+        "c8gb.12xlarge",
+        "c8gb.16xlarge",
+        "c8gb.24xlarge",
+        "c8gb.2xlarge",
+        "c8gb.4xlarge",
+        "c8gb.8xlarge",
+        "c8gb.large",
+        "c8gb.medium",
+        "c8gb.metal-24xl",
+        "c8gb.xlarge",
+        "c8gb.48xlarge",
+        "c8gb.metal-48xl",
+        "m8gb.12xlarge",
+        "m8gb.16xlarge",
+        "m8gb.24xlarge",
+        "m8gb.2xlarge",
+        "m8gb.4xlarge",
+        "m8gb.8xlarge",
+        "m8gb.large",
+        "m8gb.medium",
+        "m8gb.xlarge",
+        "m8gb.48xlarge",
+        "m8gb.metal-24xl",
+        "m8gb.metal-48xl",
+        "m8gn.12xlarge",
+        "m8gn.16xlarge",
+        "m8gn.24xlarge",
+        "m8gn.2xlarge",
+        "m8gn.48xlarge",
+        "m8gn.4xlarge",
+        "m8gn.8xlarge",
+        "m8gn.large",
+        "m8gn.medium",
+        "m8gn.xlarge",
+        "m8gn.metal-24xl",
+        "m8gn.metal-48xl",
+        "x8aedz.12xlarge",
+        "x8aedz.24xlarge",
+        "x8aedz.3xlarge",
+        "x8aedz.6xlarge",
+        "x8aedz.large",
+        "x8aedz.metal-12xl",
+        "x8aedz.metal-24xl",
+        "x8aedz.xlarge",
+        "m8azn.medium",
+        "m8azn.large",
+        "m8azn.xlarge",
+        "m8azn.3xlarge",
+        "m8azn.6xlarge",
+        "m8azn.12xlarge",
+        "m8azn.24xlarge",
+        "m8azn.metal-12xl",
+        "m8azn.metal-24xl",
+        "x8i.large",
+        "x8i.xlarge",
+        "x8i.2xlarge",
+        "x8i.4xlarge",
+        "x8i.8xlarge",
+        "x8i.12xlarge",
+        "x8i.16xlarge",
+        "x8i.24xlarge",
+        "x8i.32xlarge",
+        "x8i.48xlarge",
+        "x8i.64xlarge",
+        "x8i.96xlarge",
+        "x8i.metal-48xl",
+        "x8i.metal-96xl",
+        "mac-m4max.metal",
+        "g7e.2xlarge",
+        "g7e.4xlarge",
+        "g7e.8xlarge",
+        "g7e.12xlarge",
+        "g7e.24xlarge",
+        "g7e.48xlarge"
       ]
     },
     "InstanceTypeHypervisor":{
@@ -38139,6 +38282,10 @@
         "VolumeInitializationRate":{
           "shape":"Integer",
           "locationName":"volumeInitializationRate"
+        },
+        "EbsCardIndex":{
+          "shape":"Integer",
+          "locationName":"ebsCardIndex"
         }
       }
     },
@@ -38153,7 +38300,8 @@
         "VolumeSize":{"shape":"Integer"},
         "VolumeType":{"shape":"VolumeType"},
         "Throughput":{"shape":"Integer"},
-        "VolumeInitializationRate":{"shape":"Integer"}
+        "VolumeInitializationRate":{"shape":"Integer"},
+        "EbsCardIndex":{"shape":"Integer"}
       }
     },
     "LaunchTemplateElasticInferenceAccelerator":{
@@ -39658,6 +39806,7 @@
         "kinesis-data-firehose"
       ]
     },
+    "LogicalGpuCount":{"type":"integer"},
     "Long":{"type":"long"},
     "MacHost":{
       "type":"structure",
@@ -39935,6 +40084,7 @@
       "min":0
     },
     "MaximumEbsAttachments":{"type":"integer"},
+    "MaximumEbsCards":{"type":"integer"},
     "MaximumEfaInterfaces":{"type":"integer"},
     "MaximumEnaQueueCount":{"type":"integer"},
     "MaximumEnaQueueCountPerInterface":{"type":"integer"},
@@ -42918,6 +43068,10 @@
         "MaximumNetworkInterfaces":{
           "shape":"MaxNetworkInterfaces",
           "locationName":"maximumNetworkInterfaces"
+        },
+        "AdditionalFlexibleNetworkInterfaces":{
+          "shape":"AdditionalFlexibleNetworkInterfaces",
+          "locationName":"additionalFlexibleNetworkInterfaces"
         },
         "BaselineBandwidthInGbps":{
           "shape":"BaselineBandwidthInGbps",
@@ -49675,7 +49829,8 @@
           "locationName":"Filter"
         },
         "MaxResults":{"shape":"TransitGatewayMaxResults"},
-        "DryRun":{"shape":"Boolean"}
+        "DryRun":{"shape":"Boolean"},
+        "NextToken":{"shape":"String"}
       }
     },
     "SearchTransitGatewayRoutesResult":{
@@ -49688,6 +49843,10 @@
         "AdditionalRoutesAvailable":{
           "shape":"Boolean",
           "locationName":"additionalRoutesAvailable"
+        },
+        "NextToken":{
+          "shape":"String",
+          "locationName":"nextToken"
         }
       }
     },
@@ -56197,6 +56356,10 @@
           "shape":"String",
           "locationName":"instanceOwningService"
         },
+        "EbsCardIndex":{
+          "shape":"Integer",
+          "locationName":"ebsCardIndex"
+        },
         "VolumeId":{
           "shape":"String",
           "locationName":"volumeId"
@@ -58001,6 +58164,14 @@
           "shape":"ByoipCidr",
           "locationName":"byoipCidr"
         }
+      }
+    },
+    "Workload":{"type":"string"},
+    "WorkloadsList":{
+      "type":"list",
+      "member":{
+        "shape":"Workload",
+        "locationName":"item"
       }
     },
     "ZoneIdStringList":{

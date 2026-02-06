@@ -18,6 +18,8 @@ module Aws::MPA
     AccountId = Shapes::StringShape.new(name: 'AccountId')
     ActionCompletionStrategy = Shapes::StringShape.new(name: 'ActionCompletionStrategy')
     ActionName = Shapes::StringShape.new(name: 'ActionName')
+    AdditionalSecurityRequirement = Shapes::StringShape.new(name: 'AdditionalSecurityRequirement')
+    AdditionalSecurityRequirements = Shapes::ListShape.new(name: 'AdditionalSecurityRequirements')
     ApprovalStrategy = Shapes::UnionShape.new(name: 'ApprovalStrategy')
     ApprovalStrategyResponse = Shapes::UnionShape.new(name: 'ApprovalStrategyResponse')
     ApprovalTeamArn = Shapes::StringShape.new(name: 'ApprovalTeamArn')
@@ -95,6 +97,10 @@ module Aws::MPA
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     Message = Shapes::StringShape.new(name: 'Message')
+    MfaMethod = Shapes::StructureShape.new(name: 'MfaMethod')
+    MfaMethods = Shapes::ListShape.new(name: 'MfaMethods')
+    MfaSyncStatus = Shapes::StringShape.new(name: 'MfaSyncStatus')
+    MfaType = Shapes::StringShape.new(name: 'MfaType')
     MofNApprovalStrategy = Shapes::StructureShape.new(name: 'MofNApprovalStrategy')
     MofNApprovalStrategyMinApprovalsRequiredInteger = Shapes::IntegerShape.new(name: 'MofNApprovalStrategyMinApprovalsRequiredInteger')
     Operator = Shapes::StringShape.new(name: 'Operator')
@@ -141,12 +147,16 @@ module Aws::MPA
     UnqualifiedPolicyArn = Shapes::StringShape.new(name: 'UnqualifiedPolicyArn')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
+    UpdateAction = Shapes::StringShape.new(name: 'UpdateAction')
+    UpdateActions = Shapes::ListShape.new(name: 'UpdateActions')
     UpdateApprovalTeamRequest = Shapes::StructureShape.new(name: 'UpdateApprovalTeamRequest')
     UpdateApprovalTeamResponse = Shapes::StructureShape.new(name: 'UpdateApprovalTeamResponse')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
 
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Message"))
     AccessDeniedException.struct_class = Types::AccessDeniedException
+
+    AdditionalSecurityRequirements.member = Shapes::ShapeRef.new(shape: AdditionalSecurityRequirement)
 
     ApprovalStrategy.add_member(:mof_n, Shapes::ShapeRef.new(shape: MofNApprovalStrategy, location_name: "MofN"))
     ApprovalStrategy.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
@@ -240,6 +250,7 @@ module Aws::MPA
     GetApprovalTeamResponseApprover.add_member(:primary_identity_id, Shapes::ShapeRef.new(shape: IdentityId, location_name: "PrimaryIdentityId"))
     GetApprovalTeamResponseApprover.add_member(:primary_identity_source_arn, Shapes::ShapeRef.new(shape: String, location_name: "PrimaryIdentitySourceArn"))
     GetApprovalTeamResponseApprover.add_member(:primary_identity_status, Shapes::ShapeRef.new(shape: IdentityStatus, location_name: "PrimaryIdentityStatus"))
+    GetApprovalTeamResponseApprover.add_member(:mfa_methods, Shapes::ShapeRef.new(shape: MfaMethods, location_name: "MfaMethods"))
     GetApprovalTeamResponseApprover.struct_class = Types::GetApprovalTeamResponseApprover
 
     GetApprovalTeamResponseApprovers.member = Shapes::ShapeRef.new(shape: GetApprovalTeamResponseApprover)
@@ -300,6 +311,7 @@ module Aws::MPA
     GetSessionResponse.add_member(:requester_comment, Shapes::ShapeRef.new(shape: RequesterComment, location_name: "RequesterComment"))
     GetSessionResponse.add_member(:action_completion_strategy, Shapes::ShapeRef.new(shape: ActionCompletionStrategy, location_name: "ActionCompletionStrategy"))
     GetSessionResponse.add_member(:approver_responses, Shapes::ShapeRef.new(shape: GetSessionResponseApproverResponses, location_name: "ApproverResponses"))
+    GetSessionResponse.add_member(:additional_security_requirements, Shapes::ShapeRef.new(shape: AdditionalSecurityRequirements, location_name: "AdditionalSecurityRequirements"))
     GetSessionResponse.struct_class = Types::GetSessionResponse
 
     GetSessionResponseApproverResponse.add_member(:approver_id, Shapes::ShapeRef.new(shape: ParticipantId, location_name: "ApproverId"))
@@ -446,6 +458,7 @@ module Aws::MPA
     ListSessionsResponseSession.add_member(:status_code, Shapes::ShapeRef.new(shape: SessionStatusCode, location_name: "StatusCode"))
     ListSessionsResponseSession.add_member(:status_message, Shapes::ShapeRef.new(shape: Message, location_name: "StatusMessage"))
     ListSessionsResponseSession.add_member(:action_completion_strategy, Shapes::ShapeRef.new(shape: ActionCompletionStrategy, location_name: "ActionCompletionStrategy"))
+    ListSessionsResponseSession.add_member(:additional_security_requirements, Shapes::ShapeRef.new(shape: AdditionalSecurityRequirements, location_name: "AdditionalSecurityRequirements"))
     ListSessionsResponseSession.struct_class = Types::ListSessionsResponseSession
 
     ListSessionsResponseSessions.member = Shapes::ShapeRef.new(shape: ListSessionsResponseSession)
@@ -455,6 +468,12 @@ module Aws::MPA
 
     ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
+
+    MfaMethod.add_member(:type, Shapes::ShapeRef.new(shape: MfaType, required: true, location_name: "Type"))
+    MfaMethod.add_member(:sync_status, Shapes::ShapeRef.new(shape: MfaSyncStatus, required: true, location_name: "SyncStatus"))
+    MfaMethod.struct_class = Types::MfaMethod
+
+    MfaMethods.member = Shapes::ShapeRef.new(shape: MfaMethod)
 
     MofNApprovalStrategy.add_member(:min_approvals_required, Shapes::ShapeRef.new(shape: MofNApprovalStrategyMinApprovalsRequiredInteger, required: true, location_name: "MinApprovalsRequired"))
     MofNApprovalStrategy.struct_class = Types::MofNApprovalStrategy
@@ -549,10 +568,13 @@ module Aws::MPA
 
     UntagResourceResponse.struct_class = Types::UntagResourceResponse
 
+    UpdateActions.member = Shapes::ShapeRef.new(shape: UpdateAction)
+
     UpdateApprovalTeamRequest.add_member(:approval_strategy, Shapes::ShapeRef.new(shape: ApprovalStrategy, location_name: "ApprovalStrategy"))
     UpdateApprovalTeamRequest.add_member(:approvers, Shapes::ShapeRef.new(shape: ApprovalTeamRequestApprovers, location_name: "Approvers"))
     UpdateApprovalTeamRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
     UpdateApprovalTeamRequest.add_member(:arn, Shapes::ShapeRef.new(shape: ApprovalTeamArn, required: true, location: "uri", location_name: "Arn"))
+    UpdateApprovalTeamRequest.add_member(:update_actions, Shapes::ShapeRef.new(shape: UpdateActions, location_name: "UpdateActions"))
     UpdateApprovalTeamRequest.struct_class = Types::UpdateApprovalTeamRequest
 
     UpdateApprovalTeamResponse.add_member(:version_id, Shapes::ShapeRef.new(shape: String, location_name: "VersionId"))

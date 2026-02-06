@@ -23,6 +23,11 @@ module Aws::WorkspacesInstances
     class AssociateVolumeResponse < Aws::EmptyStructure
     end
 
+    class BillingConfiguration
+      attr_accessor billing_mode: ("MONTHLY" | "HOURLY")
+      SENSITIVE: []
+    end
+
     class BlockDeviceMappingRequest
       attr_accessor device_name: ::String
       attr_accessor ebs: Types::EbsBlockDevice
@@ -87,6 +92,7 @@ module Aws::WorkspacesInstances
       attr_accessor client_token: ::String
       attr_accessor tags: ::Array[Types::Tag]
       attr_accessor managed_instance: Types::ManagedInstanceRequest
+      attr_accessor billing_configuration: Types::BillingConfiguration
       SENSITIVE: [:client_token]
     end
 
@@ -176,6 +182,7 @@ module Aws::WorkspacesInstances
       attr_accessor provision_state: ("ALLOCATING" | "ALLOCATED" | "DEALLOCATING" | "DEALLOCATED" | "ERROR_ALLOCATING" | "ERROR_DEALLOCATING")
       attr_accessor workspace_instance_id: ::String
       attr_accessor ec2_managed_instance: Types::EC2ManagedInstance
+      attr_accessor billing_configuration: Types::BillingConfiguration
       SENSITIVE: []
     end
 
@@ -187,6 +194,13 @@ module Aws::WorkspacesInstances
     class IamInstanceProfileSpecification
       attr_accessor arn: ::String
       attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class InstanceConfigurationFilter
+      attr_accessor billing_mode: ("MONTHLY" | "HOURLY")
+      attr_accessor platform_type: ("Windows" | "Windows BYOL" | "Linux/UNIX" | "Ubuntu Pro Linux" | "Red Hat Enterprise Linux" | "Red Hat BYOL Linux" | "SUSE Linux")
+      attr_accessor tenancy: ("SHARED" | "DEDICATED")
       SENSITIVE: []
     end
 
@@ -248,6 +262,7 @@ module Aws::WorkspacesInstances
 
     class InstanceTypeInfo
       attr_accessor instance_type: ::String
+      attr_accessor supported_instance_configurations: ::Array[Types::SupportedInstanceConfiguration]
       SENSITIVE: []
     end
 
@@ -275,6 +290,7 @@ module Aws::WorkspacesInstances
     class ListInstanceTypesRequest
       attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
+      attr_accessor instance_configuration_filter: Types::InstanceConfigurationFilter
       SENSITIVE: [:next_token]
     end
 
@@ -412,6 +428,13 @@ module Aws::WorkspacesInstances
       attr_accessor max_price: ::String
       attr_accessor spot_instance_type: ("one-time" | "persistent")
       attr_accessor valid_until_utc: ::Time
+      SENSITIVE: []
+    end
+
+    class SupportedInstanceConfiguration
+      attr_accessor billing_mode: ("MONTHLY" | "HOURLY")
+      attr_accessor platform_type: ("Windows" | "Windows BYOL" | "Linux/UNIX" | "Ubuntu Pro Linux" | "Red Hat Enterprise Linux" | "Red Hat BYOL Linux" | "SUSE Linux")
+      attr_accessor tenancy: ("SHARED" | "DEDICATED")
       SENSITIVE: []
     end
 

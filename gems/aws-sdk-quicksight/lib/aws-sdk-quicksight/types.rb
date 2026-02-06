@@ -4670,6 +4670,707 @@ module Aws::QuickSight
     #   systems.
     #   @return [String]
     #
+    # @!attribute [rw] generic_http_action
+    #   The ability to perform actions using REST API connection connectors.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_and_update_generic_http_action
+    #   The ability to create and update REST API connection actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_generic_http_action
+    #   The ability to share REST API connection actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_generic_http_action
+    #   The ability to use REST API connection actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] asana_action
+    #   The ability to perform actions using Asana connectors.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_and_update_asana_action
+    #   The ability to create and update Asana actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_asana_action
+    #   The ability to share Asana actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_asana_action
+    #   The ability to use Asana actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] slack_action
+    #   The ability to perform actions using Slack connectors.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_and_update_slack_action
+    #   The ability to create and update Slack actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_slack_action
+    #   The ability to share Slack actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_slack_action
+    #   The ability to use Slack actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_now_action
+    #   The ability to perform actions using ServiceNow connectors.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_and_update_service_now_action
+    #   The ability to create and update ServiceNow actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_service_now_action
+    #   The ability to share ServiceNow actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_service_now_action
+    #   The ability to use ServiceNow actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] salesforce_action
+    #   The ability to perform actions using Salesforce connectors.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_and_update_salesforce_action
+    #   The ability to create and update Salesforce actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_salesforce_action
+    #   The ability to share Salesforce actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_salesforce_action
+    #   The ability to use Salesforce actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] ms_exchange_action
+    #   The ability to perform actions using Microsoft Outlook connectors.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_and_update_ms_exchange_action
+    #   The ability to create and update Microsoft Outlook actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_ms_exchange_action
+    #   The ability to share Microsoft Outlook actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_ms_exchange_action
+    #   The ability to use Microsoft Outlook actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] pager_duty_action
+    #   The ability to perform actions using PagerDuty Advance connectors.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_and_update_pager_duty_action
+    #   The ability to create and update PagerDuty Advance actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_pager_duty_action
+    #   The ability to share PagerDuty Advance actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_pager_duty_action
+    #   The ability to use PagerDuty Advance actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] jira_action
+    #   The ability to perform actions using Jira connectors.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_and_update_jira_action
+    #   The ability to create and update Jira actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_jira_action
+    #   The ability to share Jira actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_jira_action
+    #   The ability to use Jira actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] confluence_action
+    #   The ability to perform actions using Atlassian Confluence Cloud
+    #   connectors.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_and_update_confluence_action
+    #   The ability to create and update Atlassian Confluence Cloud actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_confluence_action
+    #   The ability to share Atlassian Confluence Cloud actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_confluence_action
+    #   The ability to use Atlassian Confluence Cloud actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] one_drive_action
+    #   The ability to perform actions using Microsoft OneDrive connectors.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_and_update_one_drive_action
+    #   The ability to create and update Microsoft OneDrive actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_one_drive_action
+    #   The ability to share Microsoft OneDrive actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_one_drive_action
+    #   The ability to use Microsoft OneDrive actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_point_action
+    #   The ability to perform actions using Microsoft SharePoint Online
+    #   connectors.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_and_update_share_point_action
+    #   The ability to create and update Microsoft SharePoint Online
+    #   actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_share_point_action
+    #   The ability to share Microsoft SharePoint Online actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_share_point_action
+    #   The ability to use Microsoft SharePoint Online actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] ms_teams_action
+    #   The ability to perform actions using Microsoft Teams connectors.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_and_update_ms_teams_action
+    #   The ability to create and update Microsoft Teams actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_ms_teams_action
+    #   The ability to share Microsoft Teams actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_ms_teams_action
+    #   The ability to use Microsoft Teams actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] google_calendar_action
+    #   The ability to perform actions using Google Calendar connectors.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_and_update_google_calendar_action
+    #   The ability to create and update Google Calendar actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_google_calendar_action
+    #   The ability to share Google Calendar actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_google_calendar_action
+    #   The ability to use Google Calendar actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] zendesk_action
+    #   The ability to perform actions using Zendesk connectors.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_and_update_zendesk_action
+    #   The ability to create and update Zendesk actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_zendesk_action
+    #   The ability to share Zendesk actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_zendesk_action
+    #   The ability to use Zendesk actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] smartsheet_action
+    #   The ability to perform actions using Smartsheet connectors.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_and_update_smartsheet_action
+    #   The ability to create and update Smartsheet actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_smartsheet_action
+    #   The ability to share Smartsheet actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_smartsheet_action
+    #   The ability to use Smartsheet actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] sap_business_partner_action
+    #   The ability to perform actions using SAP Business Partner
+    #   connectors.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_and_update_sap_business_partner_action
+    #   The ability to create and update SAP Business Partner actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_sap_business_partner_action
+    #   The ability to share SAP Business Partner actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_sap_business_partner_action
+    #   The ability to use SAP Business Partner actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] sap_product_master_data_action
+    #   The ability to perform actions using SAP Product Master connectors.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_and_update_sap_product_master_data_action
+    #   The ability to create and update SAP Product Master actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_sap_product_master_data_action
+    #   The ability to share SAP Product Master actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_sap_product_master_data_action
+    #   The ability to use SAP Product Master actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] sap_physical_inventory_action
+    #   The ability to perform actions using SAP Physical Inventory
+    #   connectors.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_and_update_sap_physical_inventory_action
+    #   The ability to create and update SAP Physical Inventory actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_sap_physical_inventory_action
+    #   The ability to share SAP Physical Inventory actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_sap_physical_inventory_action
+    #   The ability to use SAP Physical Inventory actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] sap_bill_of_material_action
+    #   The ability to perform actions using SAP Bill of Materials
+    #   connectors.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_and_update_sap_bill_of_material_action
+    #   The ability to create and update SAP Bill of Materials actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_sap_bill_of_material_action
+    #   The ability to share SAP Bill of Materials actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_sap_bill_of_material_action
+    #   The ability to use SAP Bill of Materials actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] sap_material_stock_action
+    #   The ability to perform actions using SAP Material Stock connectors.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_and_update_sap_material_stock_action
+    #   The ability to create and update SAP Material Stock actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_sap_material_stock_action
+    #   The ability to share SAP Material Stock actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_sap_material_stock_action
+    #   The ability to use SAP Material Stock actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] fact_set_action
+    #   The ability to perform actions using FactSet connectors.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_and_update_fact_set_action
+    #   The ability to create and update FactSet actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_fact_set_action
+    #   The ability to share FactSet actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_fact_set_action
+    #   The ability to use FactSet actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] amazon_s_three_action
+    #   The ability to perform actions using Amazon S3 connectors.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_and_update_amazon_s_three_action
+    #   The ability to create and update Amazon S3 actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_amazon_s_three_action
+    #   The ability to share Amazon S3 actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_amazon_s_three_action
+    #   The ability to use Amazon S3 actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] textract_action
+    #   The ability to perform actions using Textract connectors.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_and_update_textract_action
+    #   The ability to create and update Textract actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_textract_action
+    #   The ability to share Textract actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_textract_action
+    #   The ability to use Textract actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] comprehend_action
+    #   The ability to perform actions using Comprehend connectors.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_and_update_comprehend_action
+    #   The ability to create and update Comprehend actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_comprehend_action
+    #   The ability to share Comprehend actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_comprehend_action
+    #   The ability to use Comprehend actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] comprehend_medical_action
+    #   The ability to perform actions using Comprehend Medical connectors.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_and_update_comprehend_medical_action
+    #   The ability to create and update Comprehend Medical actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_comprehend_medical_action
+    #   The ability to share Comprehend Medical actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_comprehend_medical_action
+    #   The ability to use Comprehend Medical actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] amazon_bedrock_ars_action
+    #   The ability to perform actions using Bedrock Agent connectors.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_and_update_amazon_bedrock_ars_action
+    #   The ability to create and update Bedrock Agent actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_amazon_bedrock_ars_action
+    #   The ability to share Bedrock Agent actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_amazon_bedrock_ars_action
+    #   The ability to use Bedrock Agent actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] amazon_bedrock_fs_action
+    #   The ability to perform actions using Bedrock Runtime connectors.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_and_update_amazon_bedrock_fs_action
+    #   The ability to create and update Bedrock Runtime actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_amazon_bedrock_fs_action
+    #   The ability to share Bedrock Runtime actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_amazon_bedrock_fs_action
+    #   The ability to use Bedrock Runtime actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] amazon_bedrock_krs_action
+    #   The ability to perform actions using Bedrock Data Automation Runtime
+    #   connectors.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_and_update_amazon_bedrock_krs_action
+    #   The ability to create and update Bedrock Data Automation Runtime
+    #   actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_amazon_bedrock_krs_action
+    #   The ability to share Bedrock Data Automation Runtime actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_amazon_bedrock_krs_action
+    #   The ability to use Bedrock Data Automation Runtime actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] mcp_action
+    #   The ability to perform actions using Model Context Protocol
+    #   connectors.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_and_update_mcp_action
+    #   The ability to create and update Model Context Protocol actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_mcp_action
+    #   The ability to share Model Context Protocol actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_mcp_action
+    #   The ability to use Model Context Protocol actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] open_api_action
+    #   The ability to perform actions using OpenAPI Specification
+    #   connectors.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_and_update_open_api_action
+    #   The ability to create and update OpenAPI Specification actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_open_api_action
+    #   The ability to share OpenAPI Specification actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_open_api_action
+    #   The ability to use OpenAPI Specification actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] sand_pgmi_action
+    #   The ability to perform actions using S&amp;P Global Market
+    #   Intelligence connectors.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_and_update_sand_pgmi_action
+    #   The ability to create and update S&amp;P Global Market Intelligence
+    #   actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_sand_pgmi_action
+    #   The ability to share S&amp;P Global Market Intelligence actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_sand_pgmi_action
+    #   The ability to use S&amp;P Global Market Intelligence actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] sand_p_global_energy_action
+    #   The ability to perform actions using S&amp;P Global Energy
+    #   connectors.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_and_update_sand_p_global_energy_action
+    #   The ability to create and update S&amp;P Global Energy actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_sand_p_global_energy_action
+    #   The ability to share S&amp;P Global Energy actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_sand_p_global_energy_action
+    #   The ability to use S&amp;P Global Energy actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] bamboo_hr_action
+    #   The ability to perform actions using BambooHR connectors.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_and_update_bamboo_hr_action
+    #   The ability to create and update BambooHR actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_bamboo_hr_action
+    #   The ability to share BambooHR actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_bamboo_hr_action
+    #   The ability to use BambooHR actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] box_agent_action
+    #   The ability to perform actions using Box Agent connectors.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_and_update_box_agent_action
+    #   The ability to create and update Box Agent actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_box_agent_action
+    #   The ability to share Box Agent actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_box_agent_action
+    #   The ability to use Box Agent actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] canva_agent_action
+    #   The ability to perform actions using Canva Agent connectors.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_and_update_canva_agent_action
+    #   The ability to create and update Canva Agent actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_canva_agent_action
+    #   The ability to share Canva Agent actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_canva_agent_action
+    #   The ability to use Canva Agent actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] github_action
+    #   The ability to perform actions using GitHub connectors.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_and_update_github_action
+    #   The ability to create and update GitHub actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_github_action
+    #   The ability to share GitHub actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_github_action
+    #   The ability to use GitHub actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] notion_action
+    #   The ability to perform actions using Notion connectors.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_and_update_notion_action
+    #   The ability to create and update Notion actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_notion_action
+    #   The ability to share Notion actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_notion_action
+    #   The ability to use Notion actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] linear_action
+    #   The ability to perform actions using Linear connectors.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_and_update_linear_action
+    #   The ability to create and update Linear actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_linear_action
+    #   The ability to share Linear actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_linear_action
+    #   The ability to use Linear actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] hugging_face_action
+    #   The ability to perform actions using HuggingFace connectors.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_and_update_hugging_face_action
+    #   The ability to create and update HuggingFace actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_hugging_face_action
+    #   The ability to share HuggingFace actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_hugging_face_action
+    #   The ability to use HuggingFace actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] monday_action
+    #   The ability to perform actions using Monday connectors.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_and_update_monday_action
+    #   The ability to create and update Monday actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_monday_action
+    #   The ability to share Monday actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_monday_action
+    #   The ability to use Monday actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] hubspot_action
+    #   The ability to perform actions using Hubspot connectors.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_and_update_hubspot_action
+    #   The ability to create and update Hubspot actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_hubspot_action
+    #   The ability to share Hubspot actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_hubspot_action
+    #   The ability to use Hubspot actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] intercom_action
+    #   The ability to perform actions using Intercom connectors.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_and_update_intercom_action
+    #   The ability to create and update Intercom actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_intercom_action
+    #   The ability to share Intercom actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_intercom_action
+    #   The ability to use Intercom actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] new_relic_action
+    #   The ability to perform actions using New Relic connectors.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_and_update_new_relic_action
+    #   The ability to create and update New Relic actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_new_relic_action
+    #   The ability to share New Relic actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_new_relic_action
+    #   The ability to use New Relic actions.
+    #   @return [String]
+    #
     # @!attribute [rw] space
     #   The ability to perform space-related actions.
     #   @return [String]
@@ -4726,6 +5427,178 @@ module Aws::QuickSight
       :use_agent_web_search,
       :knowledge_base,
       :action,
+      :generic_http_action,
+      :create_and_update_generic_http_action,
+      :share_generic_http_action,
+      :use_generic_http_action,
+      :asana_action,
+      :create_and_update_asana_action,
+      :share_asana_action,
+      :use_asana_action,
+      :slack_action,
+      :create_and_update_slack_action,
+      :share_slack_action,
+      :use_slack_action,
+      :service_now_action,
+      :create_and_update_service_now_action,
+      :share_service_now_action,
+      :use_service_now_action,
+      :salesforce_action,
+      :create_and_update_salesforce_action,
+      :share_salesforce_action,
+      :use_salesforce_action,
+      :ms_exchange_action,
+      :create_and_update_ms_exchange_action,
+      :share_ms_exchange_action,
+      :use_ms_exchange_action,
+      :pager_duty_action,
+      :create_and_update_pager_duty_action,
+      :share_pager_duty_action,
+      :use_pager_duty_action,
+      :jira_action,
+      :create_and_update_jira_action,
+      :share_jira_action,
+      :use_jira_action,
+      :confluence_action,
+      :create_and_update_confluence_action,
+      :share_confluence_action,
+      :use_confluence_action,
+      :one_drive_action,
+      :create_and_update_one_drive_action,
+      :share_one_drive_action,
+      :use_one_drive_action,
+      :share_point_action,
+      :create_and_update_share_point_action,
+      :share_share_point_action,
+      :use_share_point_action,
+      :ms_teams_action,
+      :create_and_update_ms_teams_action,
+      :share_ms_teams_action,
+      :use_ms_teams_action,
+      :google_calendar_action,
+      :create_and_update_google_calendar_action,
+      :share_google_calendar_action,
+      :use_google_calendar_action,
+      :zendesk_action,
+      :create_and_update_zendesk_action,
+      :share_zendesk_action,
+      :use_zendesk_action,
+      :smartsheet_action,
+      :create_and_update_smartsheet_action,
+      :share_smartsheet_action,
+      :use_smartsheet_action,
+      :sap_business_partner_action,
+      :create_and_update_sap_business_partner_action,
+      :share_sap_business_partner_action,
+      :use_sap_business_partner_action,
+      :sap_product_master_data_action,
+      :create_and_update_sap_product_master_data_action,
+      :share_sap_product_master_data_action,
+      :use_sap_product_master_data_action,
+      :sap_physical_inventory_action,
+      :create_and_update_sap_physical_inventory_action,
+      :share_sap_physical_inventory_action,
+      :use_sap_physical_inventory_action,
+      :sap_bill_of_material_action,
+      :create_and_update_sap_bill_of_material_action,
+      :share_sap_bill_of_material_action,
+      :use_sap_bill_of_material_action,
+      :sap_material_stock_action,
+      :create_and_update_sap_material_stock_action,
+      :share_sap_material_stock_action,
+      :use_sap_material_stock_action,
+      :fact_set_action,
+      :create_and_update_fact_set_action,
+      :share_fact_set_action,
+      :use_fact_set_action,
+      :amazon_s_three_action,
+      :create_and_update_amazon_s_three_action,
+      :share_amazon_s_three_action,
+      :use_amazon_s_three_action,
+      :textract_action,
+      :create_and_update_textract_action,
+      :share_textract_action,
+      :use_textract_action,
+      :comprehend_action,
+      :create_and_update_comprehend_action,
+      :share_comprehend_action,
+      :use_comprehend_action,
+      :comprehend_medical_action,
+      :create_and_update_comprehend_medical_action,
+      :share_comprehend_medical_action,
+      :use_comprehend_medical_action,
+      :amazon_bedrock_ars_action,
+      :create_and_update_amazon_bedrock_ars_action,
+      :share_amazon_bedrock_ars_action,
+      :use_amazon_bedrock_ars_action,
+      :amazon_bedrock_fs_action,
+      :create_and_update_amazon_bedrock_fs_action,
+      :share_amazon_bedrock_fs_action,
+      :use_amazon_bedrock_fs_action,
+      :amazon_bedrock_krs_action,
+      :create_and_update_amazon_bedrock_krs_action,
+      :share_amazon_bedrock_krs_action,
+      :use_amazon_bedrock_krs_action,
+      :mcp_action,
+      :create_and_update_mcp_action,
+      :share_mcp_action,
+      :use_mcp_action,
+      :open_api_action,
+      :create_and_update_open_api_action,
+      :share_open_api_action,
+      :use_open_api_action,
+      :sand_pgmi_action,
+      :create_and_update_sand_pgmi_action,
+      :share_sand_pgmi_action,
+      :use_sand_pgmi_action,
+      :sand_p_global_energy_action,
+      :create_and_update_sand_p_global_energy_action,
+      :share_sand_p_global_energy_action,
+      :use_sand_p_global_energy_action,
+      :bamboo_hr_action,
+      :create_and_update_bamboo_hr_action,
+      :share_bamboo_hr_action,
+      :use_bamboo_hr_action,
+      :box_agent_action,
+      :create_and_update_box_agent_action,
+      :share_box_agent_action,
+      :use_box_agent_action,
+      :canva_agent_action,
+      :create_and_update_canva_agent_action,
+      :share_canva_agent_action,
+      :use_canva_agent_action,
+      :github_action,
+      :create_and_update_github_action,
+      :share_github_action,
+      :use_github_action,
+      :notion_action,
+      :create_and_update_notion_action,
+      :share_notion_action,
+      :use_notion_action,
+      :linear_action,
+      :create_and_update_linear_action,
+      :share_linear_action,
+      :use_linear_action,
+      :hugging_face_action,
+      :create_and_update_hugging_face_action,
+      :share_hugging_face_action,
+      :use_hugging_face_action,
+      :monday_action,
+      :create_and_update_monday_action,
+      :share_monday_action,
+      :use_monday_action,
+      :hubspot_action,
+      :create_and_update_hubspot_action,
+      :share_hubspot_action,
+      :use_hubspot_action,
+      :intercom_action,
+      :create_and_update_intercom_action,
+      :share_intercom_action,
+      :use_intercom_action,
+      :new_relic_action,
+      :create_and_update_new_relic_action,
+      :share_new_relic_action,
+      :use_new_relic_action,
       :space,
       :chat_agent,
       :create_chat_agents,
@@ -19329,11 +20202,16 @@ module Aws::QuickSight
     #   Configuration options for the canvas of a free-form layout.
     #   @return [Types::FreeFormLayoutCanvasSizeOptions]
     #
+    # @!attribute [rw] groups
+    #   The groups that are included in a free-form layout.
+    #   @return [Array<Types::SheetLayoutGroup>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/FreeFormLayoutConfiguration AWS API Documentation
     #
     class FreeFormLayoutConfiguration < Struct.new(
       :elements,
-      :canvas_size_options)
+      :canvas_size_options,
+      :groups)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -19960,14 +20838,24 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] session_tags
-    #   The session tags used for row-level security. Before you use this
-    #   parameter, make sure that you have configured the relevant datasets
-    #   using the `DataSet$RowLevelPermissionTagConfiguration` parameter so
-    #   that session tags can be used to provide row-level security.
+    #   Session tags are user-specified strings that identify a session in
+    #   your application. You can use these tags to implement row-level
+    #   security (RLS) controls. Before you use the `SessionTags` parameter,
+    #   make sure that you have configured the relevant datasets using the
+    #   `DataSet$RowLevelPermissionTagConfiguration` parameter so that
+    #   session tags can be used to provide row-level security.
     #
-    #   These are not the tags used for the Amazon Web Services resource
-    #   tagging feature. For more information, see [Using Row-Level Security
-    #   (RLS) with Tags][1]in the *Amazon Quick Sight User Guide*.
+    #   When using session tags, you must call
+    #   `GenerateEmbedUrlForAnonymousUser` from a secure, trusted
+    #   environment. The API call passes session tags that enable
+    #   server-side data redaction by using the row-level security (RLS)
+    #   rules configured in your datasets. A secure, trusted environment has
+    #   access controls that you implement. These controls ensure that only
+    #   your server or authorized users can add or modify session tags.
+    #
+    #   Besides, these are not the tags used for the Amazon Web Services
+    #   resource tagging feature. For more information, see [Using Row-Level
+    #   Security (RLS) with Tags][1] in the *Amazon Quick Suite User Guide*.
     #
     #
     #
@@ -31548,14 +32436,14 @@ module Aws::QuickSight
     #   The state persistence settings of an embedded dashboard.
     #   @return [Types::StatePersistenceConfigurations]
     #
-    # @!attribute [rw] shared_view
-    #   The shared view settings of an embedded dashboard.
-    #   @return [Types::SharedViewConfigurations]
-    #
     # @!attribute [rw] bookmarks
     #   The bookmarks configuration for an embedded dashboard in Amazon
     #   Quick Sight.
     #   @return [Types::BookmarksConfigurations]
+    #
+    # @!attribute [rw] shared_view
+    #   The shared view settings of an embedded dashboard.
+    #   @return [Types::SharedViewConfigurations]
     #
     # @!attribute [rw] amazon_q_in_quick_sight
     #   The Amazon Q configurations of an embedded Amazon Quick Sight
@@ -31580,8 +32468,8 @@ module Aws::QuickSight
     #
     class RegisteredUserDashboardFeatureConfigurations < Struct.new(
       :state_persistence,
-      :shared_view,
       :bookmarks,
+      :shared_view,
       :amazon_q_in_quick_sight,
       :schedules,
       :recent_snapshots,
@@ -34461,6 +35349,44 @@ module Aws::QuickSight
     #
     class SheetLayoutElementMaximizationOption < Struct.new(
       :availability_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A group of elements within a sheet layout.
+    #
+    # @!attribute [rw] id
+    #   A unique identifier for the group.
+    #   @return [String]
+    #
+    # @!attribute [rw] members
+    #   The members of the group.
+    #   @return [Array<Types::SheetLayoutGroupMember>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/SheetLayoutGroup AWS API Documentation
+    #
+    class SheetLayoutGroup < Struct.new(
+      :id,
+      :members)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A member of a sheet layout group.
+    #
+    # @!attribute [rw] id
+    #   The unique identifier of the group member.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of the group member.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/SheetLayoutGroupMember AWS API Documentation
+    #
+    class SheetLayoutGroupMember < Struct.new(
+      :id,
+      :type)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -49,12 +49,13 @@ module Aws::GeoMaps
   end
   autoload :Client, 'aws-sdk-geomaps/client'
   autoload :Errors, 'aws-sdk-geomaps/errors'
+  autoload :Waiters, 'aws-sdk-geomaps/waiters'
   autoload :Resource, 'aws-sdk-geomaps/resource'
   autoload :EndpointParameters, 'aws-sdk-geomaps/endpoint_parameters'
   autoload :EndpointProvider, 'aws-sdk-geomaps/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-geomaps/endpoints'
 
-  GEM_VERSION = '1.19.0'
+  GEM_VERSION = '1.21.0'
 
 end
 

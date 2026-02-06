@@ -92,6 +92,8 @@ module Aws::Budgets
       attr_accessor time_unit: ("DAILY" | "MONTHLY" | "QUARTERLY" | "ANNUALLY" | "CUSTOM")
       attr_accessor billing_view_arn: ::String
       attr_accessor budgeted_and_actual_amounts_list: ::Array[Types::BudgetedAndActualAmounts]
+      attr_accessor filter_expression: Types::Expression
+      attr_accessor metrics: ::Array[("BlendedCost" | "UnblendedCost" | "AmortizedCost" | "NetUnblendedCost" | "NetAmortizedCost" | "UsageQuantity" | "NormalizedUsageAmount" | "Hours")]
       SENSITIVE: []
     end
 

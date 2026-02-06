@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.44.0 (2026-01-27)
+------------------
+
+* Feature - AWS Deadline Cloud now supports editing job names and descriptions after submission.
+
+1.43.0 (2026-01-16)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.42.0 (2026-01-15)
+------------------
+
+* Feature - AWS Deadline Cloud now supports tagging Budget resources with ABAC for permissions management and selecting up to 16 filter values in the monitor and Search API.
+
 1.41.0 (2026-01-08)
 ------------------
 

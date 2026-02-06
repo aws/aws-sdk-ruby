@@ -805,6 +805,7 @@ module Aws::MediaConnect
     #   resp.outputs[0].transport.stream_id #=> String
     #   resp.outputs[0].transport.ndi_speed_hq_quality #=> Integer
     #   resp.outputs[0].transport.ndi_program_name #=> String
+    #   resp.outputs[0].transport.ndi_source_settings.source_name #=> String
     #   resp.outputs[0].vpc_interface_attachment.vpc_interface_name #=> String
     #   resp.outputs[0].bridge_arn #=> String
     #   resp.outputs[0].bridge_ports #=> Array
@@ -892,6 +893,9 @@ module Aws::MediaConnect
     #             vpc_interface_name: "String",
     #           },
     #         },
+    #         ndi_source_settings: {
+    #           source_name: "String",
+    #         },
     #         source_tags: {
     #           "String" => "String",
     #         },
@@ -956,6 +960,7 @@ module Aws::MediaConnect
     #   resp.sources[0].transport.stream_id #=> String
     #   resp.sources[0].transport.ndi_speed_hq_quality #=> Integer
     #   resp.sources[0].transport.ndi_program_name #=> String
+    #   resp.sources[0].transport.ndi_source_settings.source_name #=> String
     #   resp.sources[0].vpc_interface_name #=> String
     #   resp.sources[0].whitelist_cidr #=> String
     #   resp.sources[0].gateway_bridge_source.bridge_arn #=> String
@@ -1467,12 +1472,18 @@ module Aws::MediaConnect
     #
     # @option params [String] :flow_size
     #   Determines the processing capacity and feature set of the flow. Set
-    #   this optional parameter to `LARGE` if you want to enable NDI outputs
-    #   on the flow.
+    #   this optional parameter to `LARGE` if you want to enable NDI sources
+    #   or outputs on the flow.
     #
     # @option params [Types::NdiConfig] :ndi_config
-    #   Specifies the configuration settings for NDI outputs. Required when
-    #   the flow includes NDI outputs.
+    #   Specifies the configuration settings for a flow's NDI source or
+    #   output. Required when the flow includes an NDI source or output.
+    #
+    # @option params [Types::EncodingConfig] :encoding_config
+    #   The encoding configuration to apply to the NDI® source when
+    #   transcoding it to a transport stream for downstream distribution. You
+    #   can choose between several predefined encoding profiles based on
+    #   common use cases.
     #
     # @option params [Hash<String,String>] :flow_tags
     #   The key-value pairs that can be used to tag and organize the flow.
@@ -1649,6 +1660,9 @@ module Aws::MediaConnect
     #           vpc_interface_name: "String",
     #         },
     #       },
+    #       ndi_source_settings: {
+    #         source_name: "String",
+    #       },
     #       source_tags: {
     #         "String" => "String",
     #       },
@@ -1722,6 +1736,9 @@ module Aws::MediaConnect
     #             vpc_interface_name: "String",
     #           },
     #         },
+    #         ndi_source_settings: {
+    #           source_name: "String",
+    #         },
     #         source_tags: {
     #           "String" => "String",
     #         },
@@ -1779,7 +1796,7 @@ module Aws::MediaConnect
     #         },
     #       ],
     #     },
-    #     flow_size: "MEDIUM", # accepts MEDIUM, LARGE
+    #     flow_size: "MEDIUM", # accepts MEDIUM, LARGE, LARGE_4X
     #     ndi_config: {
     #       ndi_state: "ENABLED", # accepts ENABLED, DISABLED
     #       machine_name: "String",
@@ -1790,6 +1807,10 @@ module Aws::MediaConnect
     #           vpc_interface_adapter: "String", # required
     #         },
     #       ],
+    #     },
+    #     encoding_config: {
+    #       encoding_profile: "DISTRIBUTION_H264_DEFAULT", # accepts DISTRIBUTION_H264_DEFAULT, CONTRIBUTION_H264_DEFAULT
+    #       video_max_bitrate: 1,
     #     },
     #     flow_tags: {
     #       "String" => "String",
@@ -1881,6 +1902,7 @@ module Aws::MediaConnect
     #   resp.flow.outputs[0].transport.stream_id #=> String
     #   resp.flow.outputs[0].transport.ndi_speed_hq_quality #=> Integer
     #   resp.flow.outputs[0].transport.ndi_program_name #=> String
+    #   resp.flow.outputs[0].transport.ndi_source_settings.source_name #=> String
     #   resp.flow.outputs[0].vpc_interface_attachment.vpc_interface_name #=> String
     #   resp.flow.outputs[0].bridge_arn #=> String
     #   resp.flow.outputs[0].bridge_ports #=> Array
@@ -1933,6 +1955,7 @@ module Aws::MediaConnect
     #   resp.flow.source.transport.stream_id #=> String
     #   resp.flow.source.transport.ndi_speed_hq_quality #=> Integer
     #   resp.flow.source.transport.ndi_program_name #=> String
+    #   resp.flow.source.transport.ndi_source_settings.source_name #=> String
     #   resp.flow.source.vpc_interface_name #=> String
     #   resp.flow.source.whitelist_cidr #=> String
     #   resp.flow.source.gateway_bridge_source.bridge_arn #=> String
@@ -1989,6 +2012,7 @@ module Aws::MediaConnect
     #   resp.flow.sources[0].transport.stream_id #=> String
     #   resp.flow.sources[0].transport.ndi_speed_hq_quality #=> Integer
     #   resp.flow.sources[0].transport.ndi_program_name #=> String
+    #   resp.flow.sources[0].transport.ndi_source_settings.source_name #=> String
     #   resp.flow.sources[0].vpc_interface_name #=> String
     #   resp.flow.sources[0].whitelist_cidr #=> String
     #   resp.flow.sources[0].gateway_bridge_source.bridge_arn #=> String
@@ -2023,13 +2047,15 @@ module Aws::MediaConnect
     #   resp.flow.source_monitoring_config.video_monitoring_settings[0].black_frames.threshold_seconds #=> Integer
     #   resp.flow.source_monitoring_config.video_monitoring_settings[0].frozen_frames.state #=> String, one of "ENABLED", "DISABLED"
     #   resp.flow.source_monitoring_config.video_monitoring_settings[0].frozen_frames.threshold_seconds #=> Integer
-    #   resp.flow.flow_size #=> String, one of "MEDIUM", "LARGE"
+    #   resp.flow.flow_size #=> String, one of "MEDIUM", "LARGE", "LARGE_4X"
     #   resp.flow.ndi_config.ndi_state #=> String, one of "ENABLED", "DISABLED"
     #   resp.flow.ndi_config.machine_name #=> String
     #   resp.flow.ndi_config.ndi_discovery_servers #=> Array
     #   resp.flow.ndi_config.ndi_discovery_servers[0].discovery_server_address #=> String
     #   resp.flow.ndi_config.ndi_discovery_servers[0].discovery_server_port #=> Integer
     #   resp.flow.ndi_config.ndi_discovery_servers[0].vpc_interface_adapter #=> String
+    #   resp.flow.encoding_config.encoding_profile #=> String, one of "DISTRIBUTION_H264_DEFAULT", "CONTRIBUTION_H264_DEFAULT"
+    #   resp.flow.encoding_config.video_max_bitrate #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/CreateFlow AWS API Documentation
     #
@@ -2118,8 +2144,8 @@ module Aws::MediaConnect
     #   The tier level for the router input.
     #
     # @option params [String] :region_name
-    #   The AWS Region for the router input. Defaults to the current region if
-    #   not specified.
+    #   The Amazon Web Services Region for the router input. Defaults to the
+    #   current region if not specified.
     #
     # @option params [String] :availability_zone
     #   The Availability Zone where you want to create the router input. This
@@ -2395,8 +2421,8 @@ module Aws::MediaConnect
     #   The configuration settings for the router network interface.
     #
     # @option params [String] :region_name
-    #   The AWS Region for the router network interface. Defaults to the
-    #   current region if not specified.
+    #   The Amazon Web Services Region for the router network interface.
+    #   Defaults to the current region if not specified.
     #
     # @option params [Hash<String,String>] :tags
     #   Key-value pairs that can be used to tag and organize this router
@@ -2485,8 +2511,8 @@ module Aws::MediaConnect
     #   The tier level for the router output.
     #
     # @option params [String] :region_name
-    #   The AWS Region for the router output. Defaults to the current region
-    #   if not specified.
+    #   The Amazon Web Services Region for the router output. Defaults to the
+    #   current region if not specified.
     #
     # @option params [String] :availability_zone
     #   The Availability Zone where you want to create the router output. This
@@ -3064,6 +3090,7 @@ module Aws::MediaConnect
     #   resp.flow.outputs[0].transport.stream_id #=> String
     #   resp.flow.outputs[0].transport.ndi_speed_hq_quality #=> Integer
     #   resp.flow.outputs[0].transport.ndi_program_name #=> String
+    #   resp.flow.outputs[0].transport.ndi_source_settings.source_name #=> String
     #   resp.flow.outputs[0].vpc_interface_attachment.vpc_interface_name #=> String
     #   resp.flow.outputs[0].bridge_arn #=> String
     #   resp.flow.outputs[0].bridge_ports #=> Array
@@ -3116,6 +3143,7 @@ module Aws::MediaConnect
     #   resp.flow.source.transport.stream_id #=> String
     #   resp.flow.source.transport.ndi_speed_hq_quality #=> Integer
     #   resp.flow.source.transport.ndi_program_name #=> String
+    #   resp.flow.source.transport.ndi_source_settings.source_name #=> String
     #   resp.flow.source.vpc_interface_name #=> String
     #   resp.flow.source.whitelist_cidr #=> String
     #   resp.flow.source.gateway_bridge_source.bridge_arn #=> String
@@ -3172,6 +3200,7 @@ module Aws::MediaConnect
     #   resp.flow.sources[0].transport.stream_id #=> String
     #   resp.flow.sources[0].transport.ndi_speed_hq_quality #=> Integer
     #   resp.flow.sources[0].transport.ndi_program_name #=> String
+    #   resp.flow.sources[0].transport.ndi_source_settings.source_name #=> String
     #   resp.flow.sources[0].vpc_interface_name #=> String
     #   resp.flow.sources[0].whitelist_cidr #=> String
     #   resp.flow.sources[0].gateway_bridge_source.bridge_arn #=> String
@@ -3206,13 +3235,15 @@ module Aws::MediaConnect
     #   resp.flow.source_monitoring_config.video_monitoring_settings[0].black_frames.threshold_seconds #=> Integer
     #   resp.flow.source_monitoring_config.video_monitoring_settings[0].frozen_frames.state #=> String, one of "ENABLED", "DISABLED"
     #   resp.flow.source_monitoring_config.video_monitoring_settings[0].frozen_frames.threshold_seconds #=> Integer
-    #   resp.flow.flow_size #=> String, one of "MEDIUM", "LARGE"
+    #   resp.flow.flow_size #=> String, one of "MEDIUM", "LARGE", "LARGE_4X"
     #   resp.flow.ndi_config.ndi_state #=> String, one of "ENABLED", "DISABLED"
     #   resp.flow.ndi_config.machine_name #=> String
     #   resp.flow.ndi_config.ndi_discovery_servers #=> Array
     #   resp.flow.ndi_config.ndi_discovery_servers[0].discovery_server_address #=> String
     #   resp.flow.ndi_config.ndi_discovery_servers[0].discovery_server_port #=> Integer
     #   resp.flow.ndi_config.ndi_discovery_servers[0].vpc_interface_adapter #=> String
+    #   resp.flow.encoding_config.encoding_profile #=> String, one of "DISTRIBUTION_H264_DEFAULT", "CONTRIBUTION_H264_DEFAULT"
+    #   resp.flow.encoding_config.video_max_bitrate #=> Integer
     #   resp.messages.errors #=> Array
     #   resp.messages.errors[0] #=> String
     #
@@ -3246,6 +3277,7 @@ module Aws::MediaConnect
     #   * {Types::DescribeFlowSourceMetadataResponse#messages #messages} => Array&lt;Types::MessageDetail&gt;
     #   * {Types::DescribeFlowSourceMetadataResponse#timestamp #timestamp} => Time
     #   * {Types::DescribeFlowSourceMetadataResponse#transport_media_info #transport_media_info} => Types::TransportMediaInfo
+    #   * {Types::DescribeFlowSourceMetadataResponse#ndi_info #ndi_info} => Types::NdiSourceMetadataInfo
     #
     # @example Request syntax with placeholder values
     #
@@ -3276,6 +3308,23 @@ module Aws::MediaConnect
     #   resp.transport_media_info.programs[0].streams[0].sample_rate #=> Integer
     #   resp.transport_media_info.programs[0].streams[0].sample_size #=> Integer
     #   resp.transport_media_info.programs[0].streams[0].stream_type #=> String
+    #   resp.ndi_info.active_source.source_name #=> String
+    #   resp.ndi_info.discovered_sources #=> Array
+    #   resp.ndi_info.discovered_sources[0].source_name #=> String
+    #   resp.ndi_info.media_info.streams #=> Array
+    #   resp.ndi_info.media_info.streams[0].stream_type #=> String
+    #   resp.ndi_info.media_info.streams[0].codec #=> String
+    #   resp.ndi_info.media_info.streams[0].stream_id #=> Integer
+    #   resp.ndi_info.media_info.streams[0].scan_mode #=> String, one of "progressive", "interlace", "progressive-segmented-frame"
+    #   resp.ndi_info.media_info.streams[0].frame_resolution.frame_height #=> Integer
+    #   resp.ndi_info.media_info.streams[0].frame_resolution.frame_width #=> Integer
+    #   resp.ndi_info.media_info.streams[0].frame_rate #=> String
+    #   resp.ndi_info.media_info.streams[0].channels #=> Integer
+    #   resp.ndi_info.media_info.streams[0].sample_rate #=> Integer
+    #   resp.ndi_info.messages #=> Array
+    #   resp.ndi_info.messages[0].code #=> String
+    #   resp.ndi_info.messages[0].message #=> String
+    #   resp.ndi_info.messages[0].resource_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/DescribeFlowSourceMetadata AWS API Documentation
     #
@@ -3823,6 +3872,7 @@ module Aws::MediaConnect
     #   * output_deleted
     #   * output_routed
     #   * output_standby
+    #   * output_unrouted
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/GetRouterOutput AWS API Documentation
     #
@@ -5584,6 +5634,29 @@ module Aws::MediaConnect
 
     # Updates an existing flow.
     #
+    # <note markdown="1"> Because `UpdateFlowSources` and `UpdateFlow` are separate operations,
+    # you can't change both the source type AND the flow size in a single
+    # request.
+    #
+    #  * If you have a `MEDIUM` flow and you want to change the flow source
+    #   to NDI®:
+    #
+    #   * First, use the `UpdateFlow` operation to upgrade the flow size to
+    #     `LARGE`.
+    #
+    #   * After that, you can then use the `UpdateFlowSource` operation to
+    #     configure the NDI source.
+    # * If you're switching from an NDI source to a transport stream (TS)
+    #   source and want to downgrade the flow size:
+    #
+    #   * First, use the `UpdateFlowSource` operation to change the flow
+    #     source type.
+    #
+    #   * After that, you can then use the `UpdateFlow` operation to
+    #     downgrade the flow size to `MEDIUM`.
+    #
+    #  </note>
+    #
     # @option params [required, String] :flow_arn
     #   The Amazon Resource Name (ARN) of the flow that you want to update.
     #
@@ -5597,11 +5670,17 @@ module Aws::MediaConnect
     #   The settings for source monitoring.
     #
     # @option params [Types::NdiConfig] :ndi_config
-    #   Specifies the configuration settings for NDI outputs. Required when
-    #   the flow includes NDI outputs.
+    #   Specifies the configuration settings for a flow's NDI source or
+    #   output. Required when the flow includes an NDI source or output.
     #
     # @option params [String] :flow_size
     #   Determines the processing capacity and feature set of the flow.
+    #
+    # @option params [Types::EncodingConfig] :encoding_config
+    #   The encoding configuration to apply to the NDI® source when
+    #   transcoding it to a transport stream for downstream distribution. You
+    #   can choose between several predefined encoding profiles based on
+    #   common use cases.
     #
     # @return [Types::UpdateFlowResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5659,7 +5738,11 @@ module Aws::MediaConnect
     #         },
     #       ],
     #     },
-    #     flow_size: "MEDIUM", # accepts MEDIUM, LARGE
+    #     flow_size: "MEDIUM", # accepts MEDIUM, LARGE, LARGE_4X
+    #     encoding_config: {
+    #       encoding_profile: "DISTRIBUTION_H264_DEFAULT", # accepts DISTRIBUTION_H264_DEFAULT, CONTRIBUTION_H264_DEFAULT
+    #       video_max_bitrate: 1,
+    #     },
     #   })
     #
     # @example Response structure
@@ -5747,6 +5830,7 @@ module Aws::MediaConnect
     #   resp.flow.outputs[0].transport.stream_id #=> String
     #   resp.flow.outputs[0].transport.ndi_speed_hq_quality #=> Integer
     #   resp.flow.outputs[0].transport.ndi_program_name #=> String
+    #   resp.flow.outputs[0].transport.ndi_source_settings.source_name #=> String
     #   resp.flow.outputs[0].vpc_interface_attachment.vpc_interface_name #=> String
     #   resp.flow.outputs[0].bridge_arn #=> String
     #   resp.flow.outputs[0].bridge_ports #=> Array
@@ -5799,6 +5883,7 @@ module Aws::MediaConnect
     #   resp.flow.source.transport.stream_id #=> String
     #   resp.flow.source.transport.ndi_speed_hq_quality #=> Integer
     #   resp.flow.source.transport.ndi_program_name #=> String
+    #   resp.flow.source.transport.ndi_source_settings.source_name #=> String
     #   resp.flow.source.vpc_interface_name #=> String
     #   resp.flow.source.whitelist_cidr #=> String
     #   resp.flow.source.gateway_bridge_source.bridge_arn #=> String
@@ -5855,6 +5940,7 @@ module Aws::MediaConnect
     #   resp.flow.sources[0].transport.stream_id #=> String
     #   resp.flow.sources[0].transport.ndi_speed_hq_quality #=> Integer
     #   resp.flow.sources[0].transport.ndi_program_name #=> String
+    #   resp.flow.sources[0].transport.ndi_source_settings.source_name #=> String
     #   resp.flow.sources[0].vpc_interface_name #=> String
     #   resp.flow.sources[0].whitelist_cidr #=> String
     #   resp.flow.sources[0].gateway_bridge_source.bridge_arn #=> String
@@ -5889,13 +5975,15 @@ module Aws::MediaConnect
     #   resp.flow.source_monitoring_config.video_monitoring_settings[0].black_frames.threshold_seconds #=> Integer
     #   resp.flow.source_monitoring_config.video_monitoring_settings[0].frozen_frames.state #=> String, one of "ENABLED", "DISABLED"
     #   resp.flow.source_monitoring_config.video_monitoring_settings[0].frozen_frames.threshold_seconds #=> Integer
-    #   resp.flow.flow_size #=> String, one of "MEDIUM", "LARGE"
+    #   resp.flow.flow_size #=> String, one of "MEDIUM", "LARGE", "LARGE_4X"
     #   resp.flow.ndi_config.ndi_state #=> String, one of "ENABLED", "DISABLED"
     #   resp.flow.ndi_config.machine_name #=> String
     #   resp.flow.ndi_config.ndi_discovery_servers #=> Array
     #   resp.flow.ndi_config.ndi_discovery_servers[0].discovery_server_address #=> String
     #   resp.flow.ndi_config.ndi_discovery_servers[0].discovery_server_port #=> Integer
     #   resp.flow.ndi_config.ndi_discovery_servers[0].vpc_interface_adapter #=> String
+    #   resp.flow.encoding_config.encoding_profile #=> String, one of "DISTRIBUTION_H264_DEFAULT", "CONTRIBUTION_H264_DEFAULT"
+    #   resp.flow.encoding_config.video_max_bitrate #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/UpdateFlow AWS API Documentation
     #
@@ -6156,7 +6244,7 @@ module Aws::MediaConnect
     #   MediaConnect leaves the value unchanged.
     #
     # @option params [String] :ndi_program_name
-    #   A suffix for the names of the NDI sources that the flow creates. If a
+    #   A suffix for the name of the NDI® sender that the flow creates. If a
     #   custom name isn't specified, MediaConnect uses the output name.
     #
     # @option params [Integer] :ndi_speed_hq_quality
@@ -6289,6 +6377,7 @@ module Aws::MediaConnect
     #   resp.output.transport.stream_id #=> String
     #   resp.output.transport.ndi_speed_hq_quality #=> Integer
     #   resp.output.transport.ndi_program_name #=> String
+    #   resp.output.transport.ndi_source_settings.source_name #=> String
     #   resp.output.vpc_interface_attachment.vpc_interface_name #=> String
     #   resp.output.bridge_arn #=> String
     #   resp.output.bridge_ports #=> Array
@@ -6311,6 +6400,29 @@ module Aws::MediaConnect
     end
 
     # Updates the source of a flow.
+    #
+    # <note markdown="1"> Because `UpdateFlowSources` and `UpdateFlow` are separate operations,
+    # you can't change both the source type AND the flow size in a single
+    # request.
+    #
+    #  * If you have a `MEDIUM` flow and you want to change the flow source
+    #   to NDI®:
+    #
+    #   * First, use the `UpdateFlow` operation to upgrade the flow size to
+    #     `LARGE`.
+    #
+    #   * After that, you can then use the `UpdateFlowSource` operation to
+    #     configure the NDI source.
+    # * If you're switching from an NDI source to a transport stream (TS)
+    #   source and want to downgrade the flow size:
+    #
+    #   * First, use the `UpdateFlowSource` operation to change the flow
+    #     source type.
+    #
+    #   * After that, you can then use the `UpdateFlow` operation to
+    #     downgrade the flow size to `MEDIUM`.
+    #
+    #  </note>
     #
     # @option params [Types::UpdateEncryption] :decryption
     #   The type of encryption that is used on the content ingested from the
@@ -6398,6 +6510,10 @@ module Aws::MediaConnect
     #   The source configuration for cloud flows receiving a stream from a
     #   bridge.
     #
+    # @option params [Types::NdiSourceSettings] :ndi_source_settings
+    #   The settings for the NDI source. This includes the exact name of the
+    #   upstream NDI sender that you want to connect to your source.
+    #
     # @option params [String] :router_integration_state
     #   Indicates whether to enable or disable router integration for this
     #   flow source.
@@ -6462,6 +6578,9 @@ module Aws::MediaConnect
     #         vpc_interface_name: "String",
     #       },
     #     },
+    #     ndi_source_settings: {
+    #       source_name: "String",
+    #     },
     #     router_integration_state: "ENABLED", # accepts ENABLED, DISABLED
     #     router_integration_transit_decryption: {
     #       encryption_key_type: "SECRETS_MANAGER", # accepts SECRETS_MANAGER, AUTOMATIC
@@ -6520,6 +6639,7 @@ module Aws::MediaConnect
     #   resp.source.transport.stream_id #=> String
     #   resp.source.transport.ndi_speed_hq_quality #=> Integer
     #   resp.source.transport.ndi_program_name #=> String
+    #   resp.source.transport.ndi_source_settings.source_name #=> String
     #   resp.source.vpc_interface_name #=> String
     #   resp.source.whitelist_cidr #=> String
     #   resp.source.gateway_bridge_source.bridge_arn #=> String
@@ -7118,7 +7238,7 @@ module Aws::MediaConnect
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-mediaconnect'
-      context[:gem_version] = '1.94.0'
+      context[:gem_version] = '1.96.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
@@ -7184,18 +7304,19 @@ module Aws::MediaConnect
     # The following table lists the valid waiter names, the operations they call,
     # and the default `:delay` and `:max_attempts` values.
     #
-    # | waiter_name    | params                     | :delay   | :max_attempts |
-    # | -------------- | -------------------------- | -------- | ------------- |
-    # | flow_active    | {Client#describe_flow}     | 3        | 40            |
-    # | flow_deleted   | {Client#describe_flow}     | 3        | 40            |
-    # | flow_standby   | {Client#describe_flow}     | 3        | 40            |
-    # | input_active   | {Client#get_router_input}  | 3        | 40            |
-    # | input_deleted  | {Client#get_router_input}  | 3        | 40            |
-    # | input_standby  | {Client#get_router_input}  | 3        | 40            |
-    # | output_active  | {Client#get_router_output} | 3        | 40            |
-    # | output_deleted | {Client#get_router_output} | 3        | 40            |
-    # | output_routed  | {Client#get_router_output} | 3        | 40            |
-    # | output_standby | {Client#get_router_output} | 3        | 40            |
+    # | waiter_name     | params                     | :delay   | :max_attempts |
+    # | --------------- | -------------------------- | -------- | ------------- |
+    # | flow_active     | {Client#describe_flow}     | 3        | 40            |
+    # | flow_deleted    | {Client#describe_flow}     | 3        | 40            |
+    # | flow_standby    | {Client#describe_flow}     | 3        | 40            |
+    # | input_active    | {Client#get_router_input}  | 3        | 40            |
+    # | input_deleted   | {Client#get_router_input}  | 3        | 40            |
+    # | input_standby   | {Client#get_router_input}  | 3        | 40            |
+    # | output_active   | {Client#get_router_output} | 3        | 40            |
+    # | output_deleted  | {Client#get_router_output} | 3        | 40            |
+    # | output_routed   | {Client#get_router_output} | 3        | 40            |
+    # | output_standby  | {Client#get_router_output} | 3        | 40            |
+    # | output_unrouted | {Client#get_router_output} | 3        | 40            |
     #
     # @raise [Errors::FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition
@@ -7255,7 +7376,8 @@ module Aws::MediaConnect
         output_active: Waiters::OutputActive,
         output_deleted: Waiters::OutputDeleted,
         output_routed: Waiters::OutputRouted,
-        output_standby: Waiters::OutputStandby
+        output_standby: Waiters::OutputStandby,
+        output_unrouted: Waiters::OutputUnrouted
       }
     end
 

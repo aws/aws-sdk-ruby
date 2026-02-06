@@ -2232,6 +2232,178 @@ module Aws::QuickSight
     #       use_agent_web_search: "DENY", # accepts DENY
     #       knowledge_base: "DENY", # accepts DENY
     #       action: "DENY", # accepts DENY
+    #       generic_http_action: "DENY", # accepts DENY
+    #       create_and_update_generic_http_action: "DENY", # accepts DENY
+    #       share_generic_http_action: "DENY", # accepts DENY
+    #       use_generic_http_action: "DENY", # accepts DENY
+    #       asana_action: "DENY", # accepts DENY
+    #       create_and_update_asana_action: "DENY", # accepts DENY
+    #       share_asana_action: "DENY", # accepts DENY
+    #       use_asana_action: "DENY", # accepts DENY
+    #       slack_action: "DENY", # accepts DENY
+    #       create_and_update_slack_action: "DENY", # accepts DENY
+    #       share_slack_action: "DENY", # accepts DENY
+    #       use_slack_action: "DENY", # accepts DENY
+    #       service_now_action: "DENY", # accepts DENY
+    #       create_and_update_service_now_action: "DENY", # accepts DENY
+    #       share_service_now_action: "DENY", # accepts DENY
+    #       use_service_now_action: "DENY", # accepts DENY
+    #       salesforce_action: "DENY", # accepts DENY
+    #       create_and_update_salesforce_action: "DENY", # accepts DENY
+    #       share_salesforce_action: "DENY", # accepts DENY
+    #       use_salesforce_action: "DENY", # accepts DENY
+    #       ms_exchange_action: "DENY", # accepts DENY
+    #       create_and_update_ms_exchange_action: "DENY", # accepts DENY
+    #       share_ms_exchange_action: "DENY", # accepts DENY
+    #       use_ms_exchange_action: "DENY", # accepts DENY
+    #       pager_duty_action: "DENY", # accepts DENY
+    #       create_and_update_pager_duty_action: "DENY", # accepts DENY
+    #       share_pager_duty_action: "DENY", # accepts DENY
+    #       use_pager_duty_action: "DENY", # accepts DENY
+    #       jira_action: "DENY", # accepts DENY
+    #       create_and_update_jira_action: "DENY", # accepts DENY
+    #       share_jira_action: "DENY", # accepts DENY
+    #       use_jira_action: "DENY", # accepts DENY
+    #       confluence_action: "DENY", # accepts DENY
+    #       create_and_update_confluence_action: "DENY", # accepts DENY
+    #       share_confluence_action: "DENY", # accepts DENY
+    #       use_confluence_action: "DENY", # accepts DENY
+    #       one_drive_action: "DENY", # accepts DENY
+    #       create_and_update_one_drive_action: "DENY", # accepts DENY
+    #       share_one_drive_action: "DENY", # accepts DENY
+    #       use_one_drive_action: "DENY", # accepts DENY
+    #       share_point_action: "DENY", # accepts DENY
+    #       create_and_update_share_point_action: "DENY", # accepts DENY
+    #       share_share_point_action: "DENY", # accepts DENY
+    #       use_share_point_action: "DENY", # accepts DENY
+    #       ms_teams_action: "DENY", # accepts DENY
+    #       create_and_update_ms_teams_action: "DENY", # accepts DENY
+    #       share_ms_teams_action: "DENY", # accepts DENY
+    #       use_ms_teams_action: "DENY", # accepts DENY
+    #       google_calendar_action: "DENY", # accepts DENY
+    #       create_and_update_google_calendar_action: "DENY", # accepts DENY
+    #       share_google_calendar_action: "DENY", # accepts DENY
+    #       use_google_calendar_action: "DENY", # accepts DENY
+    #       zendesk_action: "DENY", # accepts DENY
+    #       create_and_update_zendesk_action: "DENY", # accepts DENY
+    #       share_zendesk_action: "DENY", # accepts DENY
+    #       use_zendesk_action: "DENY", # accepts DENY
+    #       smartsheet_action: "DENY", # accepts DENY
+    #       create_and_update_smartsheet_action: "DENY", # accepts DENY
+    #       share_smartsheet_action: "DENY", # accepts DENY
+    #       use_smartsheet_action: "DENY", # accepts DENY
+    #       sap_business_partner_action: "DENY", # accepts DENY
+    #       create_and_update_sap_business_partner_action: "DENY", # accepts DENY
+    #       share_sap_business_partner_action: "DENY", # accepts DENY
+    #       use_sap_business_partner_action: "DENY", # accepts DENY
+    #       sap_product_master_data_action: "DENY", # accepts DENY
+    #       create_and_update_sap_product_master_data_action: "DENY", # accepts DENY
+    #       share_sap_product_master_data_action: "DENY", # accepts DENY
+    #       use_sap_product_master_data_action: "DENY", # accepts DENY
+    #       sap_physical_inventory_action: "DENY", # accepts DENY
+    #       create_and_update_sap_physical_inventory_action: "DENY", # accepts DENY
+    #       share_sap_physical_inventory_action: "DENY", # accepts DENY
+    #       use_sap_physical_inventory_action: "DENY", # accepts DENY
+    #       sap_bill_of_material_action: "DENY", # accepts DENY
+    #       create_and_update_sap_bill_of_material_action: "DENY", # accepts DENY
+    #       share_sap_bill_of_material_action: "DENY", # accepts DENY
+    #       use_sap_bill_of_material_action: "DENY", # accepts DENY
+    #       sap_material_stock_action: "DENY", # accepts DENY
+    #       create_and_update_sap_material_stock_action: "DENY", # accepts DENY
+    #       share_sap_material_stock_action: "DENY", # accepts DENY
+    #       use_sap_material_stock_action: "DENY", # accepts DENY
+    #       fact_set_action: "DENY", # accepts DENY
+    #       create_and_update_fact_set_action: "DENY", # accepts DENY
+    #       share_fact_set_action: "DENY", # accepts DENY
+    #       use_fact_set_action: "DENY", # accepts DENY
+    #       amazon_s_three_action: "DENY", # accepts DENY
+    #       create_and_update_amazon_s_three_action: "DENY", # accepts DENY
+    #       share_amazon_s_three_action: "DENY", # accepts DENY
+    #       use_amazon_s_three_action: "DENY", # accepts DENY
+    #       textract_action: "DENY", # accepts DENY
+    #       create_and_update_textract_action: "DENY", # accepts DENY
+    #       share_textract_action: "DENY", # accepts DENY
+    #       use_textract_action: "DENY", # accepts DENY
+    #       comprehend_action: "DENY", # accepts DENY
+    #       create_and_update_comprehend_action: "DENY", # accepts DENY
+    #       share_comprehend_action: "DENY", # accepts DENY
+    #       use_comprehend_action: "DENY", # accepts DENY
+    #       comprehend_medical_action: "DENY", # accepts DENY
+    #       create_and_update_comprehend_medical_action: "DENY", # accepts DENY
+    #       share_comprehend_medical_action: "DENY", # accepts DENY
+    #       use_comprehend_medical_action: "DENY", # accepts DENY
+    #       amazon_bedrock_ars_action: "DENY", # accepts DENY
+    #       create_and_update_amazon_bedrock_ars_action: "DENY", # accepts DENY
+    #       share_amazon_bedrock_ars_action: "DENY", # accepts DENY
+    #       use_amazon_bedrock_ars_action: "DENY", # accepts DENY
+    #       amazon_bedrock_fs_action: "DENY", # accepts DENY
+    #       create_and_update_amazon_bedrock_fs_action: "DENY", # accepts DENY
+    #       share_amazon_bedrock_fs_action: "DENY", # accepts DENY
+    #       use_amazon_bedrock_fs_action: "DENY", # accepts DENY
+    #       amazon_bedrock_krs_action: "DENY", # accepts DENY
+    #       create_and_update_amazon_bedrock_krs_action: "DENY", # accepts DENY
+    #       share_amazon_bedrock_krs_action: "DENY", # accepts DENY
+    #       use_amazon_bedrock_krs_action: "DENY", # accepts DENY
+    #       mcp_action: "DENY", # accepts DENY
+    #       create_and_update_mcp_action: "DENY", # accepts DENY
+    #       share_mcp_action: "DENY", # accepts DENY
+    #       use_mcp_action: "DENY", # accepts DENY
+    #       open_api_action: "DENY", # accepts DENY
+    #       create_and_update_open_api_action: "DENY", # accepts DENY
+    #       share_open_api_action: "DENY", # accepts DENY
+    #       use_open_api_action: "DENY", # accepts DENY
+    #       sand_pgmi_action: "DENY", # accepts DENY
+    #       create_and_update_sand_pgmi_action: "DENY", # accepts DENY
+    #       share_sand_pgmi_action: "DENY", # accepts DENY
+    #       use_sand_pgmi_action: "DENY", # accepts DENY
+    #       sand_p_global_energy_action: "DENY", # accepts DENY
+    #       create_and_update_sand_p_global_energy_action: "DENY", # accepts DENY
+    #       share_sand_p_global_energy_action: "DENY", # accepts DENY
+    #       use_sand_p_global_energy_action: "DENY", # accepts DENY
+    #       bamboo_hr_action: "DENY", # accepts DENY
+    #       create_and_update_bamboo_hr_action: "DENY", # accepts DENY
+    #       share_bamboo_hr_action: "DENY", # accepts DENY
+    #       use_bamboo_hr_action: "DENY", # accepts DENY
+    #       box_agent_action: "DENY", # accepts DENY
+    #       create_and_update_box_agent_action: "DENY", # accepts DENY
+    #       share_box_agent_action: "DENY", # accepts DENY
+    #       use_box_agent_action: "DENY", # accepts DENY
+    #       canva_agent_action: "DENY", # accepts DENY
+    #       create_and_update_canva_agent_action: "DENY", # accepts DENY
+    #       share_canva_agent_action: "DENY", # accepts DENY
+    #       use_canva_agent_action: "DENY", # accepts DENY
+    #       github_action: "DENY", # accepts DENY
+    #       create_and_update_github_action: "DENY", # accepts DENY
+    #       share_github_action: "DENY", # accepts DENY
+    #       use_github_action: "DENY", # accepts DENY
+    #       notion_action: "DENY", # accepts DENY
+    #       create_and_update_notion_action: "DENY", # accepts DENY
+    #       share_notion_action: "DENY", # accepts DENY
+    #       use_notion_action: "DENY", # accepts DENY
+    #       linear_action: "DENY", # accepts DENY
+    #       create_and_update_linear_action: "DENY", # accepts DENY
+    #       share_linear_action: "DENY", # accepts DENY
+    #       use_linear_action: "DENY", # accepts DENY
+    #       hugging_face_action: "DENY", # accepts DENY
+    #       create_and_update_hugging_face_action: "DENY", # accepts DENY
+    #       share_hugging_face_action: "DENY", # accepts DENY
+    #       use_hugging_face_action: "DENY", # accepts DENY
+    #       monday_action: "DENY", # accepts DENY
+    #       create_and_update_monday_action: "DENY", # accepts DENY
+    #       share_monday_action: "DENY", # accepts DENY
+    #       use_monday_action: "DENY", # accepts DENY
+    #       hubspot_action: "DENY", # accepts DENY
+    #       create_and_update_hubspot_action: "DENY", # accepts DENY
+    #       share_hubspot_action: "DENY", # accepts DENY
+    #       use_hubspot_action: "DENY", # accepts DENY
+    #       intercom_action: "DENY", # accepts DENY
+    #       create_and_update_intercom_action: "DENY", # accepts DENY
+    #       share_intercom_action: "DENY", # accepts DENY
+    #       use_intercom_action: "DENY", # accepts DENY
+    #       new_relic_action: "DENY", # accepts DENY
+    #       create_and_update_new_relic_action: "DENY", # accepts DENY
+    #       share_new_relic_action: "DENY", # accepts DENY
+    #       use_new_relic_action: "DENY", # accepts DENY
     #       space: "DENY", # accepts DENY
     #       chat_agent: "DENY", # accepts DENY
     #       create_chat_agents: "DENY", # accepts DENY
@@ -7787,6 +7959,178 @@ module Aws::QuickSight
     #   resp.custom_permissions.capabilities.use_agent_web_search #=> String, one of "DENY"
     #   resp.custom_permissions.capabilities.knowledge_base #=> String, one of "DENY"
     #   resp.custom_permissions.capabilities.action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.generic_http_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.create_and_update_generic_http_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.share_generic_http_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.use_generic_http_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.asana_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.create_and_update_asana_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.share_asana_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.use_asana_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.slack_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.create_and_update_slack_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.share_slack_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.use_slack_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.service_now_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.create_and_update_service_now_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.share_service_now_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.use_service_now_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.salesforce_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.create_and_update_salesforce_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.share_salesforce_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.use_salesforce_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.ms_exchange_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.create_and_update_ms_exchange_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.share_ms_exchange_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.use_ms_exchange_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.pager_duty_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.create_and_update_pager_duty_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.share_pager_duty_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.use_pager_duty_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.jira_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.create_and_update_jira_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.share_jira_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.use_jira_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.confluence_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.create_and_update_confluence_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.share_confluence_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.use_confluence_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.one_drive_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.create_and_update_one_drive_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.share_one_drive_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.use_one_drive_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.share_point_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.create_and_update_share_point_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.share_share_point_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.use_share_point_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.ms_teams_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.create_and_update_ms_teams_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.share_ms_teams_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.use_ms_teams_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.google_calendar_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.create_and_update_google_calendar_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.share_google_calendar_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.use_google_calendar_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.zendesk_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.create_and_update_zendesk_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.share_zendesk_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.use_zendesk_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.smartsheet_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.create_and_update_smartsheet_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.share_smartsheet_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.use_smartsheet_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.sap_business_partner_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.create_and_update_sap_business_partner_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.share_sap_business_partner_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.use_sap_business_partner_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.sap_product_master_data_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.create_and_update_sap_product_master_data_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.share_sap_product_master_data_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.use_sap_product_master_data_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.sap_physical_inventory_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.create_and_update_sap_physical_inventory_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.share_sap_physical_inventory_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.use_sap_physical_inventory_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.sap_bill_of_material_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.create_and_update_sap_bill_of_material_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.share_sap_bill_of_material_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.use_sap_bill_of_material_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.sap_material_stock_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.create_and_update_sap_material_stock_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.share_sap_material_stock_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.use_sap_material_stock_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.fact_set_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.create_and_update_fact_set_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.share_fact_set_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.use_fact_set_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.amazon_s_three_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.create_and_update_amazon_s_three_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.share_amazon_s_three_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.use_amazon_s_three_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.textract_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.create_and_update_textract_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.share_textract_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.use_textract_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.comprehend_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.create_and_update_comprehend_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.share_comprehend_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.use_comprehend_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.comprehend_medical_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.create_and_update_comprehend_medical_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.share_comprehend_medical_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.use_comprehend_medical_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.amazon_bedrock_ars_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.create_and_update_amazon_bedrock_ars_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.share_amazon_bedrock_ars_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.use_amazon_bedrock_ars_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.amazon_bedrock_fs_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.create_and_update_amazon_bedrock_fs_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.share_amazon_bedrock_fs_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.use_amazon_bedrock_fs_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.amazon_bedrock_krs_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.create_and_update_amazon_bedrock_krs_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.share_amazon_bedrock_krs_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.use_amazon_bedrock_krs_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.mcp_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.create_and_update_mcp_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.share_mcp_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.use_mcp_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.open_api_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.create_and_update_open_api_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.share_open_api_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.use_open_api_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.sand_pgmi_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.create_and_update_sand_pgmi_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.share_sand_pgmi_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.use_sand_pgmi_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.sand_p_global_energy_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.create_and_update_sand_p_global_energy_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.share_sand_p_global_energy_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.use_sand_p_global_energy_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.bamboo_hr_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.create_and_update_bamboo_hr_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.share_bamboo_hr_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.use_bamboo_hr_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.box_agent_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.create_and_update_box_agent_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.share_box_agent_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.use_box_agent_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.canva_agent_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.create_and_update_canva_agent_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.share_canva_agent_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.use_canva_agent_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.github_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.create_and_update_github_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.share_github_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.use_github_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.notion_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.create_and_update_notion_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.share_notion_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.use_notion_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.linear_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.create_and_update_linear_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.share_linear_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.use_linear_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.hugging_face_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.create_and_update_hugging_face_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.share_hugging_face_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.use_hugging_face_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.monday_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.create_and_update_monday_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.share_monday_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.use_monday_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.hubspot_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.create_and_update_hubspot_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.share_hubspot_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.use_hubspot_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.intercom_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.create_and_update_intercom_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.share_intercom_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.use_intercom_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.new_relic_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.create_and_update_new_relic_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.share_new_relic_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.use_new_relic_action #=> String, one of "DENY"
     #   resp.custom_permissions.capabilities.space #=> String, one of "DENY"
     #   resp.custom_permissions.capabilities.chat_agent #=> String, one of "DENY"
     #   resp.custom_permissions.capabilities.create_chat_agents #=> String, one of "DENY"
@@ -10788,14 +11132,24 @@ module Aws::QuickSight
     #   namespace, set this to `default`.
     #
     # @option params [Array<Types::SessionTag>] :session_tags
-    #   The session tags used for row-level security. Before you use this
-    #   parameter, make sure that you have configured the relevant datasets
-    #   using the `DataSet$RowLevelPermissionTagConfiguration` parameter so
-    #   that session tags can be used to provide row-level security.
+    #   Session tags are user-specified strings that identify a session in
+    #   your application. You can use these tags to implement row-level
+    #   security (RLS) controls. Before you use the `SessionTags` parameter,
+    #   make sure that you have configured the relevant datasets using the
+    #   `DataSet$RowLevelPermissionTagConfiguration` parameter so that session
+    #   tags can be used to provide row-level security.
     #
-    #   These are not the tags used for the Amazon Web Services resource
-    #   tagging feature. For more information, see [Using Row-Level Security
-    #   (RLS) with Tags][1]in the *Amazon Quick Sight User Guide*.
+    #   When using session tags, you must call
+    #   `GenerateEmbedUrlForAnonymousUser` from a secure, trusted environment.
+    #   The API call passes session tags that enable server-side data
+    #   redaction by using the row-level security (RLS) rules configured in
+    #   your datasets. A secure, trusted environment has access controls that
+    #   you implement. These controls ensure that only your server or
+    #   authorized users can add or modify session tags.
+    #
+    #   Besides, these are not the tags used for the Amazon Web Services
+    #   resource tagging feature. For more information, see [Using Row-Level
+    #   Security (RLS) with Tags][1] in the *Amazon Quick Suite User Guide*.
     #
     #
     #
@@ -10975,10 +11329,10 @@ module Aws::QuickSight
     #           state_persistence: {
     #             enabled: false, # required
     #           },
-    #           shared_view: {
+    #           bookmarks: {
     #             enabled: false, # required
     #           },
-    #           bookmarks: {
+    #           shared_view: {
     #             enabled: false, # required
     #           },
     #           amazon_q_in_quick_sight: {
@@ -11123,10 +11477,10 @@ module Aws::QuickSight
     #           state_persistence: {
     #             enabled: false, # required
     #           },
-    #           shared_view: {
+    #           bookmarks: {
     #             enabled: false, # required
     #           },
-    #           bookmarks: {
+    #           shared_view: {
     #             enabled: false, # required
     #           },
     #           amazon_q_in_quick_sight: {
@@ -11464,6 +11818,24 @@ module Aws::QuickSight
     # Web Services Identity Center, see [Identity Center documentation on
     # identity-enhanced IAM role sessions][4].
     #
+    # **Supported Regions**
+    #
+    # The GetIdentityContext API works only in regions that support at least
+    # one of these identity types:
+    #
+    # * Amazon Quick Sight native identity
+    #
+    # * IAM federated identity
+    #
+    # * Active Directory
+    #
+    # To use this API successfully, call it in the same region where your
+    # user's identity resides. For example, if your user's identity is in
+    # us-east-1, make the API call in us-east-1. For more information about
+    # managing identities in Amazon Quick Sight, see [Identity and access
+    # management in Amazon Quick Sight][5] in the Amazon Quick Sight User
+    # Guide.
+    #
     # **Getting Identity-Enhanced Credentials**
     #
     # To obtain identity-enhanced credentials, follow these steps:
@@ -11471,7 +11843,7 @@ module Aws::QuickSight
     # * Call the GetIdentityContext API to retrieve an identity token for
     #   the specified user.
     #
-    # * Use the identity token with the [STS AssumeRole API][5] to obtain
+    # * Use the identity token with the [STS AssumeRole API][6] to obtain
     #   identity-enhanced IAM role session credentials.
     #
     # **Usage with STS AssumeRole**
@@ -11494,7 +11866,8 @@ module Aws::QuickSight
     # [2]: https://docs.aws.amazon.com/quicksight/latest/APIReference/API_DescribeDashboardSnapshotJob.html
     # [3]: https://docs.aws.amazon.com/quicksight/latest/APIReference/API_DescribeDashboardSnapshotJobResult.html
     # [4]: https://docs.aws.amazon.com/singlesignon/latest/userguide/trustedidentitypropagation-identity-enhanced-iam-role-sessions.html
-    # [5]: https://docs.aws.amazon.com/STS/latest/APIReference/API_AssumeRole.html
+    # [5]: https://docs.aws.amazon.com/quicksight/latest/userguide/identity.html
+    # [6]: https://docs.aws.amazon.com/STS/latest/APIReference/API_AssumeRole.html
     #
     # @option params [required, String] :aws_account_id
     #   The ID for the Amazon Web Services account that the user whose
@@ -11982,6 +12355,178 @@ module Aws::QuickSight
     #   resp.custom_permissions_list[0].capabilities.use_agent_web_search #=> String, one of "DENY"
     #   resp.custom_permissions_list[0].capabilities.knowledge_base #=> String, one of "DENY"
     #   resp.custom_permissions_list[0].capabilities.action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.generic_http_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.create_and_update_generic_http_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.share_generic_http_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.use_generic_http_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.asana_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.create_and_update_asana_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.share_asana_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.use_asana_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.slack_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.create_and_update_slack_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.share_slack_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.use_slack_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.service_now_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.create_and_update_service_now_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.share_service_now_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.use_service_now_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.salesforce_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.create_and_update_salesforce_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.share_salesforce_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.use_salesforce_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.ms_exchange_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.create_and_update_ms_exchange_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.share_ms_exchange_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.use_ms_exchange_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.pager_duty_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.create_and_update_pager_duty_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.share_pager_duty_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.use_pager_duty_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.jira_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.create_and_update_jira_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.share_jira_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.use_jira_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.confluence_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.create_and_update_confluence_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.share_confluence_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.use_confluence_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.one_drive_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.create_and_update_one_drive_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.share_one_drive_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.use_one_drive_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.share_point_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.create_and_update_share_point_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.share_share_point_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.use_share_point_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.ms_teams_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.create_and_update_ms_teams_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.share_ms_teams_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.use_ms_teams_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.google_calendar_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.create_and_update_google_calendar_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.share_google_calendar_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.use_google_calendar_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.zendesk_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.create_and_update_zendesk_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.share_zendesk_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.use_zendesk_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.smartsheet_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.create_and_update_smartsheet_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.share_smartsheet_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.use_smartsheet_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.sap_business_partner_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.create_and_update_sap_business_partner_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.share_sap_business_partner_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.use_sap_business_partner_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.sap_product_master_data_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.create_and_update_sap_product_master_data_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.share_sap_product_master_data_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.use_sap_product_master_data_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.sap_physical_inventory_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.create_and_update_sap_physical_inventory_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.share_sap_physical_inventory_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.use_sap_physical_inventory_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.sap_bill_of_material_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.create_and_update_sap_bill_of_material_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.share_sap_bill_of_material_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.use_sap_bill_of_material_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.sap_material_stock_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.create_and_update_sap_material_stock_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.share_sap_material_stock_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.use_sap_material_stock_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.fact_set_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.create_and_update_fact_set_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.share_fact_set_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.use_fact_set_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.amazon_s_three_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.create_and_update_amazon_s_three_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.share_amazon_s_three_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.use_amazon_s_three_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.textract_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.create_and_update_textract_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.share_textract_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.use_textract_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.comprehend_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.create_and_update_comprehend_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.share_comprehend_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.use_comprehend_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.comprehend_medical_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.create_and_update_comprehend_medical_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.share_comprehend_medical_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.use_comprehend_medical_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.amazon_bedrock_ars_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.create_and_update_amazon_bedrock_ars_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.share_amazon_bedrock_ars_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.use_amazon_bedrock_ars_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.amazon_bedrock_fs_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.create_and_update_amazon_bedrock_fs_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.share_amazon_bedrock_fs_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.use_amazon_bedrock_fs_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.amazon_bedrock_krs_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.create_and_update_amazon_bedrock_krs_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.share_amazon_bedrock_krs_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.use_amazon_bedrock_krs_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.mcp_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.create_and_update_mcp_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.share_mcp_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.use_mcp_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.open_api_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.create_and_update_open_api_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.share_open_api_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.use_open_api_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.sand_pgmi_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.create_and_update_sand_pgmi_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.share_sand_pgmi_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.use_sand_pgmi_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.sand_p_global_energy_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.create_and_update_sand_p_global_energy_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.share_sand_p_global_energy_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.use_sand_p_global_energy_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.bamboo_hr_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.create_and_update_bamboo_hr_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.share_bamboo_hr_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.use_bamboo_hr_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.box_agent_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.create_and_update_box_agent_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.share_box_agent_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.use_box_agent_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.canva_agent_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.create_and_update_canva_agent_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.share_canva_agent_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.use_canva_agent_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.github_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.create_and_update_github_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.share_github_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.use_github_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.notion_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.create_and_update_notion_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.share_notion_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.use_notion_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.linear_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.create_and_update_linear_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.share_linear_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.use_linear_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.hugging_face_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.create_and_update_hugging_face_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.share_hugging_face_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.use_hugging_face_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.monday_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.create_and_update_monday_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.share_monday_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.use_monday_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.hubspot_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.create_and_update_hubspot_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.share_hubspot_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.use_hubspot_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.intercom_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.create_and_update_intercom_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.share_intercom_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.use_intercom_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.new_relic_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.create_and_update_new_relic_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.share_new_relic_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.use_new_relic_action #=> String, one of "DENY"
     #   resp.custom_permissions_list[0].capabilities.space #=> String, one of "DENY"
     #   resp.custom_permissions_list[0].capabilities.chat_agent #=> String, one of "DENY"
     #   resp.custom_permissions_list[0].capabilities.create_chat_agents #=> String, one of "DENY"
@@ -16045,11 +16590,16 @@ module Aws::QuickSight
     # output. You can request one or several of the following format
     # configurations in each API call.
     #
-    # * 1 Paginated PDF
+    # * 1 PDF
     #
     # * 1 Excel workbook that includes up to 5 table or pivot table visuals
     #
     # * 5 CSVs from table or pivot table visuals
+    #
+    # <note markdown="1"> Exporting CSV, Excel, or Pixel Perfect PDF reports requires Pixel
+    # Perfect Report Add-on.
+    #
+    #  </note>
     #
     # The status of a submitted job can be polled with the
     # `DescribeDashboardSnapshotJob` API. When you call the
@@ -17316,6 +17866,178 @@ module Aws::QuickSight
     #       use_agent_web_search: "DENY", # accepts DENY
     #       knowledge_base: "DENY", # accepts DENY
     #       action: "DENY", # accepts DENY
+    #       generic_http_action: "DENY", # accepts DENY
+    #       create_and_update_generic_http_action: "DENY", # accepts DENY
+    #       share_generic_http_action: "DENY", # accepts DENY
+    #       use_generic_http_action: "DENY", # accepts DENY
+    #       asana_action: "DENY", # accepts DENY
+    #       create_and_update_asana_action: "DENY", # accepts DENY
+    #       share_asana_action: "DENY", # accepts DENY
+    #       use_asana_action: "DENY", # accepts DENY
+    #       slack_action: "DENY", # accepts DENY
+    #       create_and_update_slack_action: "DENY", # accepts DENY
+    #       share_slack_action: "DENY", # accepts DENY
+    #       use_slack_action: "DENY", # accepts DENY
+    #       service_now_action: "DENY", # accepts DENY
+    #       create_and_update_service_now_action: "DENY", # accepts DENY
+    #       share_service_now_action: "DENY", # accepts DENY
+    #       use_service_now_action: "DENY", # accepts DENY
+    #       salesforce_action: "DENY", # accepts DENY
+    #       create_and_update_salesforce_action: "DENY", # accepts DENY
+    #       share_salesforce_action: "DENY", # accepts DENY
+    #       use_salesforce_action: "DENY", # accepts DENY
+    #       ms_exchange_action: "DENY", # accepts DENY
+    #       create_and_update_ms_exchange_action: "DENY", # accepts DENY
+    #       share_ms_exchange_action: "DENY", # accepts DENY
+    #       use_ms_exchange_action: "DENY", # accepts DENY
+    #       pager_duty_action: "DENY", # accepts DENY
+    #       create_and_update_pager_duty_action: "DENY", # accepts DENY
+    #       share_pager_duty_action: "DENY", # accepts DENY
+    #       use_pager_duty_action: "DENY", # accepts DENY
+    #       jira_action: "DENY", # accepts DENY
+    #       create_and_update_jira_action: "DENY", # accepts DENY
+    #       share_jira_action: "DENY", # accepts DENY
+    #       use_jira_action: "DENY", # accepts DENY
+    #       confluence_action: "DENY", # accepts DENY
+    #       create_and_update_confluence_action: "DENY", # accepts DENY
+    #       share_confluence_action: "DENY", # accepts DENY
+    #       use_confluence_action: "DENY", # accepts DENY
+    #       one_drive_action: "DENY", # accepts DENY
+    #       create_and_update_one_drive_action: "DENY", # accepts DENY
+    #       share_one_drive_action: "DENY", # accepts DENY
+    #       use_one_drive_action: "DENY", # accepts DENY
+    #       share_point_action: "DENY", # accepts DENY
+    #       create_and_update_share_point_action: "DENY", # accepts DENY
+    #       share_share_point_action: "DENY", # accepts DENY
+    #       use_share_point_action: "DENY", # accepts DENY
+    #       ms_teams_action: "DENY", # accepts DENY
+    #       create_and_update_ms_teams_action: "DENY", # accepts DENY
+    #       share_ms_teams_action: "DENY", # accepts DENY
+    #       use_ms_teams_action: "DENY", # accepts DENY
+    #       google_calendar_action: "DENY", # accepts DENY
+    #       create_and_update_google_calendar_action: "DENY", # accepts DENY
+    #       share_google_calendar_action: "DENY", # accepts DENY
+    #       use_google_calendar_action: "DENY", # accepts DENY
+    #       zendesk_action: "DENY", # accepts DENY
+    #       create_and_update_zendesk_action: "DENY", # accepts DENY
+    #       share_zendesk_action: "DENY", # accepts DENY
+    #       use_zendesk_action: "DENY", # accepts DENY
+    #       smartsheet_action: "DENY", # accepts DENY
+    #       create_and_update_smartsheet_action: "DENY", # accepts DENY
+    #       share_smartsheet_action: "DENY", # accepts DENY
+    #       use_smartsheet_action: "DENY", # accepts DENY
+    #       sap_business_partner_action: "DENY", # accepts DENY
+    #       create_and_update_sap_business_partner_action: "DENY", # accepts DENY
+    #       share_sap_business_partner_action: "DENY", # accepts DENY
+    #       use_sap_business_partner_action: "DENY", # accepts DENY
+    #       sap_product_master_data_action: "DENY", # accepts DENY
+    #       create_and_update_sap_product_master_data_action: "DENY", # accepts DENY
+    #       share_sap_product_master_data_action: "DENY", # accepts DENY
+    #       use_sap_product_master_data_action: "DENY", # accepts DENY
+    #       sap_physical_inventory_action: "DENY", # accepts DENY
+    #       create_and_update_sap_physical_inventory_action: "DENY", # accepts DENY
+    #       share_sap_physical_inventory_action: "DENY", # accepts DENY
+    #       use_sap_physical_inventory_action: "DENY", # accepts DENY
+    #       sap_bill_of_material_action: "DENY", # accepts DENY
+    #       create_and_update_sap_bill_of_material_action: "DENY", # accepts DENY
+    #       share_sap_bill_of_material_action: "DENY", # accepts DENY
+    #       use_sap_bill_of_material_action: "DENY", # accepts DENY
+    #       sap_material_stock_action: "DENY", # accepts DENY
+    #       create_and_update_sap_material_stock_action: "DENY", # accepts DENY
+    #       share_sap_material_stock_action: "DENY", # accepts DENY
+    #       use_sap_material_stock_action: "DENY", # accepts DENY
+    #       fact_set_action: "DENY", # accepts DENY
+    #       create_and_update_fact_set_action: "DENY", # accepts DENY
+    #       share_fact_set_action: "DENY", # accepts DENY
+    #       use_fact_set_action: "DENY", # accepts DENY
+    #       amazon_s_three_action: "DENY", # accepts DENY
+    #       create_and_update_amazon_s_three_action: "DENY", # accepts DENY
+    #       share_amazon_s_three_action: "DENY", # accepts DENY
+    #       use_amazon_s_three_action: "DENY", # accepts DENY
+    #       textract_action: "DENY", # accepts DENY
+    #       create_and_update_textract_action: "DENY", # accepts DENY
+    #       share_textract_action: "DENY", # accepts DENY
+    #       use_textract_action: "DENY", # accepts DENY
+    #       comprehend_action: "DENY", # accepts DENY
+    #       create_and_update_comprehend_action: "DENY", # accepts DENY
+    #       share_comprehend_action: "DENY", # accepts DENY
+    #       use_comprehend_action: "DENY", # accepts DENY
+    #       comprehend_medical_action: "DENY", # accepts DENY
+    #       create_and_update_comprehend_medical_action: "DENY", # accepts DENY
+    #       share_comprehend_medical_action: "DENY", # accepts DENY
+    #       use_comprehend_medical_action: "DENY", # accepts DENY
+    #       amazon_bedrock_ars_action: "DENY", # accepts DENY
+    #       create_and_update_amazon_bedrock_ars_action: "DENY", # accepts DENY
+    #       share_amazon_bedrock_ars_action: "DENY", # accepts DENY
+    #       use_amazon_bedrock_ars_action: "DENY", # accepts DENY
+    #       amazon_bedrock_fs_action: "DENY", # accepts DENY
+    #       create_and_update_amazon_bedrock_fs_action: "DENY", # accepts DENY
+    #       share_amazon_bedrock_fs_action: "DENY", # accepts DENY
+    #       use_amazon_bedrock_fs_action: "DENY", # accepts DENY
+    #       amazon_bedrock_krs_action: "DENY", # accepts DENY
+    #       create_and_update_amazon_bedrock_krs_action: "DENY", # accepts DENY
+    #       share_amazon_bedrock_krs_action: "DENY", # accepts DENY
+    #       use_amazon_bedrock_krs_action: "DENY", # accepts DENY
+    #       mcp_action: "DENY", # accepts DENY
+    #       create_and_update_mcp_action: "DENY", # accepts DENY
+    #       share_mcp_action: "DENY", # accepts DENY
+    #       use_mcp_action: "DENY", # accepts DENY
+    #       open_api_action: "DENY", # accepts DENY
+    #       create_and_update_open_api_action: "DENY", # accepts DENY
+    #       share_open_api_action: "DENY", # accepts DENY
+    #       use_open_api_action: "DENY", # accepts DENY
+    #       sand_pgmi_action: "DENY", # accepts DENY
+    #       create_and_update_sand_pgmi_action: "DENY", # accepts DENY
+    #       share_sand_pgmi_action: "DENY", # accepts DENY
+    #       use_sand_pgmi_action: "DENY", # accepts DENY
+    #       sand_p_global_energy_action: "DENY", # accepts DENY
+    #       create_and_update_sand_p_global_energy_action: "DENY", # accepts DENY
+    #       share_sand_p_global_energy_action: "DENY", # accepts DENY
+    #       use_sand_p_global_energy_action: "DENY", # accepts DENY
+    #       bamboo_hr_action: "DENY", # accepts DENY
+    #       create_and_update_bamboo_hr_action: "DENY", # accepts DENY
+    #       share_bamboo_hr_action: "DENY", # accepts DENY
+    #       use_bamboo_hr_action: "DENY", # accepts DENY
+    #       box_agent_action: "DENY", # accepts DENY
+    #       create_and_update_box_agent_action: "DENY", # accepts DENY
+    #       share_box_agent_action: "DENY", # accepts DENY
+    #       use_box_agent_action: "DENY", # accepts DENY
+    #       canva_agent_action: "DENY", # accepts DENY
+    #       create_and_update_canva_agent_action: "DENY", # accepts DENY
+    #       share_canva_agent_action: "DENY", # accepts DENY
+    #       use_canva_agent_action: "DENY", # accepts DENY
+    #       github_action: "DENY", # accepts DENY
+    #       create_and_update_github_action: "DENY", # accepts DENY
+    #       share_github_action: "DENY", # accepts DENY
+    #       use_github_action: "DENY", # accepts DENY
+    #       notion_action: "DENY", # accepts DENY
+    #       create_and_update_notion_action: "DENY", # accepts DENY
+    #       share_notion_action: "DENY", # accepts DENY
+    #       use_notion_action: "DENY", # accepts DENY
+    #       linear_action: "DENY", # accepts DENY
+    #       create_and_update_linear_action: "DENY", # accepts DENY
+    #       share_linear_action: "DENY", # accepts DENY
+    #       use_linear_action: "DENY", # accepts DENY
+    #       hugging_face_action: "DENY", # accepts DENY
+    #       create_and_update_hugging_face_action: "DENY", # accepts DENY
+    #       share_hugging_face_action: "DENY", # accepts DENY
+    #       use_hugging_face_action: "DENY", # accepts DENY
+    #       monday_action: "DENY", # accepts DENY
+    #       create_and_update_monday_action: "DENY", # accepts DENY
+    #       share_monday_action: "DENY", # accepts DENY
+    #       use_monday_action: "DENY", # accepts DENY
+    #       hubspot_action: "DENY", # accepts DENY
+    #       create_and_update_hubspot_action: "DENY", # accepts DENY
+    #       share_hubspot_action: "DENY", # accepts DENY
+    #       use_hubspot_action: "DENY", # accepts DENY
+    #       intercom_action: "DENY", # accepts DENY
+    #       create_and_update_intercom_action: "DENY", # accepts DENY
+    #       share_intercom_action: "DENY", # accepts DENY
+    #       use_intercom_action: "DENY", # accepts DENY
+    #       new_relic_action: "DENY", # accepts DENY
+    #       create_and_update_new_relic_action: "DENY", # accepts DENY
+    #       share_new_relic_action: "DENY", # accepts DENY
+    #       use_new_relic_action: "DENY", # accepts DENY
     #       space: "DENY", # accepts DENY
     #       chat_agent: "DENY", # accepts DENY
     #       create_chat_agents: "DENY", # accepts DENY
@@ -21131,7 +21853,7 @@ module Aws::QuickSight
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-quicksight'
-      context[:gem_version] = '1.169.0'
+      context[:gem_version] = '1.172.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

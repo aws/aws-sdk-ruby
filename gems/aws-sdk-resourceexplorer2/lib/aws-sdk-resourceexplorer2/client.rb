@@ -544,6 +544,7 @@ module Aws::ResourceExplorer2
     #
     #   resp.views #=> Array
     #   resp.views[0].view_arn #=> String
+    #   resp.views[0].view_name #=> String
     #   resp.views[0].owner #=> String
     #   resp.views[0].last_updated_at #=> Time
     #   resp.views[0].scope #=> String
@@ -817,6 +818,7 @@ module Aws::ResourceExplorer2
     # @example Response structure
     #
     #   resp.view.view_arn #=> String
+    #   resp.view.view_name #=> String
     #   resp.view.owner #=> String
     #   resp.view.last_updated_at #=> Time
     #   resp.view.scope #=> String
@@ -1151,6 +1153,7 @@ module Aws::ResourceExplorer2
     #   resp.regions[0].index.error_details.message #=> String
     #   resp.regions[0].view.status #=> String, one of "SUCCEEDED", "FAILED", "IN_PROGRESS", "SKIPPED"
     #   resp.regions[0].view.view.view_arn #=> String
+    #   resp.regions[0].view.view.view_name #=> String
     #   resp.regions[0].view.view.owner #=> String
     #   resp.regions[0].view.view.last_updated_at #=> Time
     #   resp.regions[0].view.view.scope #=> String
@@ -1214,6 +1217,7 @@ module Aws::ResourceExplorer2
     # @example Response structure
     #
     #   resp.view.service_view_arn #=> String
+    #   resp.view.service_view_name #=> String
     #   resp.view.filters.filter_string #=> String
     #   resp.view.included_properties #=> Array
     #   resp.view.included_properties[0].name #=> String
@@ -1253,6 +1257,7 @@ module Aws::ResourceExplorer2
     # @example Response structure
     #
     #   resp.view.view_arn #=> String
+    #   resp.view.view_name #=> String
     #   resp.view.owner #=> String
     #   resp.view.last_updated_at #=> Time
     #   resp.view.scope #=> String
@@ -2230,6 +2235,7 @@ module Aws::ResourceExplorer2
     # @example Response structure
     #
     #   resp.view.view_arn #=> String
+    #   resp.view.view_name #=> String
     #   resp.view.owner #=> String
     #   resp.view.last_updated_at #=> Time
     #   resp.view.scope #=> String
@@ -2264,7 +2270,7 @@ module Aws::ResourceExplorer2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-resourceexplorer2'
-      context[:gem_version] = '1.46.0'
+      context[:gem_version] = '1.47.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

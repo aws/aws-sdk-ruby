@@ -1902,6 +1902,10 @@ module Aws::ResourceExplorer2
     #   The Amazon Resource Name (ARN) of the service view.
     #   @return [String]
     #
+    # @!attribute [rw] service_view_name
+    #   The name of the service view.
+    #   @return [String]
+    #
     # @!attribute [rw] filters
     #   A search filter defines which resources can be part of a search
     #   query result set.
@@ -1926,6 +1930,7 @@ module Aws::ResourceExplorer2
     #
     class ServiceView < Struct.new(
       :service_view_arn,
+      :service_view_name,
       :filters,
       :included_properties,
       :streaming_access_for_service,
@@ -2239,6 +2244,10 @@ module Aws::ResourceExplorer2
     #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
+    # @!attribute [rw] view_name
+    #   The name of the view.
+    #   @return [String]
+    #
     # @!attribute [rw] owner
     #   The Amazon Web Services account that owns this view.
     #   @return [String]
@@ -2275,6 +2284,7 @@ module Aws::ResourceExplorer2
     #
     class View < Struct.new(
       :view_arn,
+      :view_name,
       :owner,
       :last_updated_at,
       :scope,

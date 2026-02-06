@@ -7040,6 +7040,31 @@ module Aws::CognitoIdentityProvider
       include Aws::Structure
     end
 
+    # The properties of an inbound federation Lambda trigger.
+    #
+    # @!attribute [rw] lambda_version
+    #   The user pool trigger version of the request that Amazon Cognito
+    #   sends to your Lambda function. Higher-numbered versions add fields
+    #   that support new features.
+    #
+    #   You must use a `LambdaVersion` of `V1_0` with an inbound federation
+    #   function.
+    #   @return [String]
+    #
+    # @!attribute [rw] lambda_arn
+    #   The Amazon Resource Name (ARN) of the function that you want to
+    #   assign to your Lambda trigger.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/InboundFederationLambdaType AWS API Documentation
+    #
+    class InboundFederationLambdaType < Struct.new(
+      :lambda_version,
+      :lambda_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Initiates the authentication request.
     #
     # @!attribute [rw] auth_flow
@@ -7697,6 +7722,12 @@ module Aws::CognitoIdentityProvider
     #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#master_keys
     #   @return [String]
     #
+    # @!attribute [rw] inbound_federation
+    #   The configuration of an inbound federation Lambda trigger. This
+    #   trigger can transform federated user attributes during the
+    #   authentication with external identity providers.
+    #   @return [Types::InboundFederationLambdaType]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/LambdaConfigType AWS API Documentation
     #
     class LambdaConfigType < Struct.new(
@@ -7713,7 +7744,8 @@ module Aws::CognitoIdentityProvider
       :pre_token_generation_config,
       :custom_sms_sender,
       :custom_email_sender,
-      :kms_key_id)
+      :kms_key_id,
+      :inbound_federation)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -12,7 +12,7 @@ module Aws::MediaConvert
       attr_accessor audio_description_broadcaster_mix: ("BROADCASTER_MIXED_AD" | "NORMAL")
       attr_accessor bitrate: ::Integer
       attr_accessor codec_profile: ("LC" | "HEV1" | "HEV2" | "XHE")
-      attr_accessor coding_mode: ("AD_RECEIVER_MIX" | "CODING_MODE_1_0" | "CODING_MODE_1_1" | "CODING_MODE_2_0" | "CODING_MODE_5_1")
+      attr_accessor coding_mode: ("AD_RECEIVER_MIX" | "CODING_MODE_1_0" | "CODING_MODE_1_1" | "CODING_MODE_2_0" | "CODING_MODE_5_1" | "CODING_MODE_AUTO")
       attr_accessor loudness_measurement_mode: ("PROGRAM" | "ANCHOR")
       attr_accessor rap_interval: ::Integer
       attr_accessor rate_control_mode: ("CBR" | "VBR")
@@ -27,7 +27,7 @@ module Aws::MediaConvert
     class Ac3Settings
       attr_accessor bitrate: ::Integer
       attr_accessor bitstream_mode: ("COMPLETE_MAIN" | "COMMENTARY" | "DIALOGUE" | "EMERGENCY" | "HEARING_IMPAIRED" | "MUSIC_AND_EFFECTS" | "VISUALLY_IMPAIRED" | "VOICE_OVER")
-      attr_accessor coding_mode: ("CODING_MODE_1_0" | "CODING_MODE_1_1" | "CODING_MODE_2_0" | "CODING_MODE_3_2_LFE")
+      attr_accessor coding_mode: ("CODING_MODE_1_0" | "CODING_MODE_1_1" | "CODING_MODE_2_0" | "CODING_MODE_3_2_LFE" | "CODING_MODE_AUTO")
       attr_accessor dialnorm: ::Integer
       attr_accessor dynamic_range_compression_line: ("FILM_STANDARD" | "FILM_LIGHT" | "MUSIC_STANDARD" | "MUSIC_LIGHT" | "SPEECH" | "NONE")
       attr_accessor dynamic_range_compression_profile: ("FILM_STANDARD" | "NONE")
@@ -480,7 +480,7 @@ module Aws::MediaConvert
 
     class Container
       attr_accessor duration: ::Float
-      attr_accessor format: ("mp4" | "quicktime" | "matroska" | "webm" | "mxf")
+      attr_accessor format: ("mp4" | "quicktime" | "matroska" | "webm" | "mxf" | "wave")
       attr_accessor tracks: ::Array[Types::Track]
       SENSITIVE: []
     end
@@ -696,6 +696,7 @@ module Aws::MediaConvert
     end
 
     class DolbyVision
+      attr_accessor compatibility: ("DUPLICATE_STREAM" | "SUPPLEMENTAL_CODECS")
       attr_accessor l6_metadata: Types::DolbyVisionLevel6Metadata
       attr_accessor l6_mode: ("PASSTHROUGH" | "RECALCULATE" | "SPECIFY")
       attr_accessor mapping: ("HDR10_NOMAP" | "HDR10_1000")
@@ -803,7 +804,7 @@ module Aws::MediaConvert
       attr_accessor attenuation_control: ("ATTENUATE_3_DB" | "NONE")
       attr_accessor bitrate: ::Integer
       attr_accessor bitstream_mode: ("COMPLETE_MAIN" | "COMMENTARY" | "EMERGENCY" | "HEARING_IMPAIRED" | "VISUALLY_IMPAIRED")
-      attr_accessor coding_mode: ("CODING_MODE_1_0" | "CODING_MODE_2_0" | "CODING_MODE_3_2")
+      attr_accessor coding_mode: ("CODING_MODE_1_0" | "CODING_MODE_2_0" | "CODING_MODE_3_2" | "CODING_MODE_AUTO")
       attr_accessor dc_filter: ("ENABLED" | "DISABLED")
       attr_accessor dialnorm: ::Integer
       attr_accessor dynamic_range_compression_line: ("NONE" | "FILM_STANDARD" | "FILM_LIGHT" | "MUSIC_STANDARD" | "MUSIC_LIGHT" | "SPEECH")
@@ -1813,6 +1814,7 @@ module Aws::MediaConvert
     class MxfSettings
       attr_accessor afd_signaling: ("NO_COPY" | "COPY_FROM_VIDEO")
       attr_accessor profile: ("D_10" | "XDCAM" | "OP1A" | "XAVC" | "XDCAM_RDD9")
+      attr_accessor uncompressed_audio_wrapping: ("AUTO" | "AES3")
       attr_accessor xavc_profile_settings: Types::MxfXavcProfileSettings
       SENSITIVE: []
     end

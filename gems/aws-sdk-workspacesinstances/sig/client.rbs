@@ -302,6 +302,9 @@ module Aws
                                            },
                                          ]?,
                                          user_data: ::String?
+                                       },
+                                       ?billing_configuration: {
+                                         billing_mode: ("MONTHLY" | "HOURLY")
                                        }
                                      ) -> _CreateWorkspaceInstanceResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateWorkspaceInstanceResponseSuccess
@@ -343,6 +346,7 @@ module Aws
         def provision_state: () -> ("ALLOCATING" | "ALLOCATED" | "DEALLOCATING" | "DEALLOCATED" | "ERROR_ALLOCATING" | "ERROR_DEALLOCATING")
         def workspace_instance_id: () -> ::String
         def ec2_managed_instance: () -> Types::EC2ManagedInstance
+        def billing_configuration: () -> Types::BillingConfiguration
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkspacesInstances/Client.html#get_workspace_instance-instance_method
       def get_workspace_instance: (
@@ -358,7 +362,12 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkspacesInstances/Client.html#list_instance_types-instance_method
       def list_instance_types: (
                                  ?max_results: ::Integer,
-                                 ?next_token: ::String
+                                 ?next_token: ::String,
+                                 ?instance_configuration_filter: {
+                                   billing_mode: ("MONTHLY" | "HOURLY"),
+                                   platform_type: ("Windows" | "Windows BYOL" | "Linux/UNIX" | "Ubuntu Pro Linux" | "Red Hat Enterprise Linux" | "Red Hat BYOL Linux" | "SUSE Linux"),
+                                   tenancy: ("SHARED" | "DEDICATED")
+                                 }
                                ) -> _ListInstanceTypesResponseSuccess
                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListInstanceTypesResponseSuccess
 

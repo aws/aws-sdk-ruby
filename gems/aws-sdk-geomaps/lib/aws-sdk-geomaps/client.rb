@@ -1218,16 +1218,19 @@ module Aws::GeoMaps
     #   * `Hillshade`: Displays the physical terrain details through shading
     #     and highlighting of elevation change and geographic features.
     #
-    #   ^
+    #   * `Terrain3D`: Displays physical terrain details and elevations as a
+    #     three-dimensional model.
     #
-    #   This parameter is valid only for the `Standard` map style.
+    #   `Hillshade` is valid only for the `Standard` and `Monochrome` map
+    #   styles.
     #
     # @option params [String] :contour_density
     #   Displays the shape and steepness of terrain features using elevation
     #   lines. The density value controls how densely the available contour
     #   line information is rendered on the map.
     #
-    #   This parameter is valid only for the `Standard` map style.
+    #   This parameter is valid only for the `Standard`, `Monochrome`, and
+    #   `Hybrid` map styles.
     #
     # @option params [String] :traffic
     #   Displays real-time traffic information overlay on map, such as
@@ -1242,6 +1245,19 @@ module Aws::GeoMaps
     #   the map.
     #
     #   This parameter is valid only for the `Standard` map style.
+    #
+    # @option params [String] :buildings
+    #   Adjusts how building details are rendered on the map.
+    #
+    #   The following building styles are currently supported:
+    #
+    #   * `Buildings3D`: Displays buildings as three-dimensional extrusions on
+    #     the map.
+    #
+    #   ^
+    #
+    #   `Buildings3D` is valid only for the `Standard` and `Monochrome` map
+    #   styles.
     #
     # @option params [String] :key
     #   Optional: The API key to be used for authorization. Either an API key
@@ -1260,10 +1276,11 @@ module Aws::GeoMaps
     #     style: "Standard", # required, accepts Standard, Monochrome, Hybrid, Satellite
     #     color_scheme: "Light", # accepts Light, Dark
     #     political_view: "CountryCode",
-    #     terrain: "Hillshade", # accepts Hillshade
+    #     terrain: "Hillshade", # accepts Hillshade, Terrain3D
     #     contour_density: "Medium", # accepts Medium
     #     traffic: "All", # accepts All
     #     travel_modes: ["Transit"], # accepts Transit, Truck
+    #     buildings: "Buildings3D", # accepts Buildings3D
     #     key: "ApiKey",
     #   })
     #
@@ -1301,7 +1318,8 @@ module Aws::GeoMaps
     # @option params [required, String] :tileset
     #   Specifies the desired tile set.
     #
-    #   Valid Values: `raster.satellite | vector.basemap`
+    #   Valid Values: `raster.satellite | vector.basemap | vector.traffic |
+    #   raster.dem`
     #
     # @option params [required, String] :z
     #   The zoom value for the map tile.
@@ -1370,7 +1388,7 @@ module Aws::GeoMaps
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-geomaps'
-      context[:gem_version] = '1.19.0'
+      context[:gem_version] = '1.21.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

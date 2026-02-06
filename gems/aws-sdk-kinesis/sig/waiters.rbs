@@ -17,7 +17,8 @@ module Aws
                     ?stream_name: ::String,
                     ?limit: ::Integer,
                     ?exclusive_start_shard_id: ::String,
-                    ?stream_arn: ::String
+                    ?stream_arn: ::String,
+                    ?stream_id: ::String
                   ) -> Client::_DescribeStreamResponseSuccess
                 | (?Hash[Symbol, untyped]) -> Client::_DescribeStreamResponseSuccess
       end
@@ -30,7 +31,8 @@ module Aws
                     ?stream_name: ::String,
                     ?limit: ::Integer,
                     ?exclusive_start_shard_id: ::String,
-                    ?stream_arn: ::String
+                    ?stream_arn: ::String,
+                    ?stream_id: ::String
                   ) -> Client::_DescribeStreamResponseSuccess
                 | (?Hash[Symbol, untyped]) -> Client::_DescribeStreamResponseSuccess
       end

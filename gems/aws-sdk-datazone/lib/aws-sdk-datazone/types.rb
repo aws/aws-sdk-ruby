@@ -6403,6 +6403,23 @@ module Aws::DataZone
     end
 
     # @!attribute [rw] domain_identifier
+    #   The domain ID for which you want to delete the data export
+    #   configuration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/DeleteDataExportConfigurationInput AWS API Documentation
+    #
+    class DeleteDataExportConfigurationInput < Struct.new(
+      :domain_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/DeleteDataExportConfigurationOutput AWS API Documentation
+    #
+    class DeleteDataExportConfigurationOutput < Aws::EmptyStructure; end
+
+    # @!attribute [rw] domain_identifier
     #   The ID of the Amazon DataZone domain in which the data product is
     #   deleted.
     #   @return [String]
@@ -8076,14 +8093,24 @@ module Aws::DataZone
     #   @return [String]
     #
     # @!attribute [rw] value
-    #   A search filter value in Amazon DataZone.
+    #   A search filter string value in Amazon DataZone.
+    #   @return [String]
+    #
+    # @!attribute [rw] int_value
+    #   A search filter integer value in Amazon DataZone.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] operator
+    #   Specifies the search filter operator.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/Filter AWS API Documentation
     #
     class Filter < Struct.new(
       :attribute,
-      :value)
+      :value,
+      :int_value,
+      :operator)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -16691,7 +16718,7 @@ module Aws::DataZone
     end
 
     # @!attribute [rw] domain_identifier
-    #   The domain ID where you want to create data export configuration
+    #   The domain ID for which you want to create data export configuration
     #   details.
     #   @return [String]
     #

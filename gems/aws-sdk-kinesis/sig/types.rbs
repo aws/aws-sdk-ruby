@@ -17,6 +17,7 @@ module Aws::Kinesis
       attr_accessor stream_name: ::String
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor stream_arn: ::String
+      attr_accessor stream_id: ::String
       SENSITIVE: []
     end
 
@@ -58,11 +59,13 @@ module Aws::Kinesis
       attr_accessor stream_name: ::String
       attr_accessor retention_period_hours: ::Integer
       attr_accessor stream_arn: ::String
+      attr_accessor stream_id: ::String
       SENSITIVE: []
     end
 
     class DeleteResourcePolicyInput
       attr_accessor resource_arn: ::String
+      attr_accessor stream_id: ::String
       SENSITIVE: []
     end
 
@@ -70,6 +73,7 @@ module Aws::Kinesis
       attr_accessor stream_name: ::String
       attr_accessor enforce_consumer_deletion: bool
       attr_accessor stream_arn: ::String
+      attr_accessor stream_id: ::String
       SENSITIVE: []
     end
 
@@ -77,6 +81,7 @@ module Aws::Kinesis
       attr_accessor stream_arn: ::String
       attr_accessor consumer_name: ::String
       attr_accessor consumer_arn: ::String
+      attr_accessor stream_id: ::String
       SENSITIVE: []
     end
 
@@ -103,6 +108,7 @@ module Aws::Kinesis
       attr_accessor stream_arn: ::String
       attr_accessor consumer_name: ::String
       attr_accessor consumer_arn: ::String
+      attr_accessor stream_id: ::String
       SENSITIVE: []
     end
 
@@ -116,6 +122,7 @@ module Aws::Kinesis
       attr_accessor limit: ::Integer
       attr_accessor exclusive_start_shard_id: ::String
       attr_accessor stream_arn: ::String
+      attr_accessor stream_id: ::String
       SENSITIVE: []
     end
 
@@ -127,6 +134,7 @@ module Aws::Kinesis
     class DescribeStreamSummaryInput
       attr_accessor stream_name: ::String
       attr_accessor stream_arn: ::String
+      attr_accessor stream_id: ::String
       SENSITIVE: []
     end
 
@@ -139,6 +147,7 @@ module Aws::Kinesis
       attr_accessor stream_name: ::String
       attr_accessor shard_level_metrics: ::Array[("IncomingBytes" | "IncomingRecords" | "OutgoingBytes" | "OutgoingRecords" | "WriteProvisionedThroughputExceeded" | "ReadProvisionedThroughputExceeded" | "IteratorAgeMilliseconds" | "ALL")]
       attr_accessor stream_arn: ::String
+      attr_accessor stream_id: ::String
       SENSITIVE: []
     end
 
@@ -146,6 +155,7 @@ module Aws::Kinesis
       attr_accessor stream_name: ::String
       attr_accessor shard_level_metrics: ::Array[("IncomingBytes" | "IncomingRecords" | "OutgoingBytes" | "OutgoingRecords" | "WriteProvisionedThroughputExceeded" | "ReadProvisionedThroughputExceeded" | "IteratorAgeMilliseconds" | "ALL")]
       attr_accessor stream_arn: ::String
+      attr_accessor stream_id: ::String
       SENSITIVE: []
     end
 
@@ -176,6 +186,7 @@ module Aws::Kinesis
       attr_accessor shard_iterator: ::String
       attr_accessor limit: ::Integer
       attr_accessor stream_arn: ::String
+      attr_accessor stream_id: ::String
       SENSITIVE: []
     end
 
@@ -189,6 +200,7 @@ module Aws::Kinesis
 
     class GetResourcePolicyInput
       attr_accessor resource_arn: ::String
+      attr_accessor stream_id: ::String
       SENSITIVE: []
     end
 
@@ -204,6 +216,7 @@ module Aws::Kinesis
       attr_accessor starting_sequence_number: ::String
       attr_accessor timestamp: ::Time
       attr_accessor stream_arn: ::String
+      attr_accessor stream_id: ::String
       SENSITIVE: []
     end
 
@@ -222,6 +235,7 @@ module Aws::Kinesis
       attr_accessor stream_name: ::String
       attr_accessor retention_period_hours: ::Integer
       attr_accessor stream_arn: ::String
+      attr_accessor stream_id: ::String
       SENSITIVE: []
     end
 
@@ -285,6 +299,7 @@ module Aws::Kinesis
       attr_accessor stream_creation_timestamp: ::Time
       attr_accessor shard_filter: Types::ShardFilter
       attr_accessor stream_arn: ::String
+      attr_accessor stream_id: ::String
       SENSITIVE: []
     end
 
@@ -299,6 +314,7 @@ module Aws::Kinesis
       attr_accessor next_token: ::String
       attr_accessor max_results: ::Integer
       attr_accessor stream_creation_timestamp: ::Time
+      attr_accessor stream_id: ::String
       SENSITIVE: []
     end
 
@@ -325,6 +341,7 @@ module Aws::Kinesis
 
     class ListTagsForResourceInput
       attr_accessor resource_arn: ::String
+      attr_accessor stream_id: ::String
       SENSITIVE: []
     end
 
@@ -338,6 +355,7 @@ module Aws::Kinesis
       attr_accessor exclusive_start_tag_key: ::String
       attr_accessor limit: ::Integer
       attr_accessor stream_arn: ::String
+      attr_accessor stream_id: ::String
       SENSITIVE: []
     end
 
@@ -352,6 +370,7 @@ module Aws::Kinesis
       attr_accessor shard_to_merge: ::String
       attr_accessor adjacent_shard_to_merge: ::String
       attr_accessor stream_arn: ::String
+      attr_accessor stream_id: ::String
       SENSITIVE: []
     end
 
@@ -380,6 +399,7 @@ module Aws::Kinesis
       attr_accessor explicit_hash_key: ::String
       attr_accessor sequence_number_for_ordering: ::String
       attr_accessor stream_arn: ::String
+      attr_accessor stream_id: ::String
       SENSITIVE: []
     end
 
@@ -394,6 +414,7 @@ module Aws::Kinesis
       attr_accessor records: ::Array[Types::PutRecordsRequestEntry]
       attr_accessor stream_name: ::String
       attr_accessor stream_arn: ::String
+      attr_accessor stream_id: ::String
       SENSITIVE: []
     end
 
@@ -421,6 +442,7 @@ module Aws::Kinesis
 
     class PutResourcePolicyInput
       attr_accessor resource_arn: ::String
+      attr_accessor stream_id: ::String
       attr_accessor policy: ::String
       SENSITIVE: []
     end
@@ -437,6 +459,7 @@ module Aws::Kinesis
     class RegisterStreamConsumerInput
       attr_accessor stream_arn: ::String
       attr_accessor consumer_name: ::String
+      attr_accessor stream_id: ::String
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
     end
@@ -450,6 +473,7 @@ module Aws::Kinesis
       attr_accessor stream_name: ::String
       attr_accessor tag_keys: ::Array[::String]
       attr_accessor stream_arn: ::String
+      attr_accessor stream_id: ::String
       SENSITIVE: []
     end
 
@@ -492,6 +516,7 @@ module Aws::Kinesis
       attr_accessor shard_to_split: ::String
       attr_accessor new_starting_hash_key: ::String
       attr_accessor stream_arn: ::String
+      attr_accessor stream_id: ::String
       SENSITIVE: []
     end
 
@@ -500,6 +525,7 @@ module Aws::Kinesis
       attr_accessor encryption_type: ("NONE" | "KMS")
       attr_accessor key_id: ::String
       attr_accessor stream_arn: ::String
+      attr_accessor stream_id: ::String
       SENSITIVE: []
     end
 
@@ -515,6 +541,7 @@ module Aws::Kinesis
       attr_accessor encryption_type: ("NONE" | "KMS")
       attr_accessor key_id: ::String
       attr_accessor stream_arn: ::String
+      attr_accessor stream_id: ::String
       SENSITIVE: []
     end
 
@@ -536,6 +563,7 @@ module Aws::Kinesis
     class StreamDescriptionSummary
       attr_accessor stream_name: ::String
       attr_accessor stream_arn: ::String
+      attr_accessor stream_id: ::String
       attr_accessor stream_status: ("CREATING" | "DELETING" | "ACTIVE" | "UPDATING")
       attr_accessor stream_mode_details: Types::StreamModeDetails
       attr_accessor retention_period_hours: ::Integer
@@ -575,6 +603,7 @@ module Aws::Kinesis
 
     class SubscribeToShardInput
       attr_accessor consumer_arn: ::String
+      attr_accessor stream_id: ::String
       attr_accessor shard_id: ::String
       attr_accessor starting_position: Types::StartingPosition
       SENSITIVE: []
@@ -594,12 +623,14 @@ module Aws::Kinesis
     class TagResourceInput
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor resource_arn: ::String
+      attr_accessor stream_id: ::String
       SENSITIVE: []
     end
 
     class UntagResourceInput
       attr_accessor tag_keys: ::Array[::String]
       attr_accessor resource_arn: ::String
+      attr_accessor stream_id: ::String
       SENSITIVE: []
     end
 
@@ -615,6 +646,7 @@ module Aws::Kinesis
 
     class UpdateMaxRecordSizeInput
       attr_accessor stream_arn: ::String
+      attr_accessor stream_id: ::String
       attr_accessor max_record_size_in_ki_b: ::Integer
       SENSITIVE: []
     end
@@ -624,6 +656,7 @@ module Aws::Kinesis
       attr_accessor target_shard_count: ::Integer
       attr_accessor scaling_type: ("UNIFORM_SCALING")
       attr_accessor stream_arn: ::String
+      attr_accessor stream_id: ::String
       SENSITIVE: []
     end
 
@@ -637,6 +670,7 @@ module Aws::Kinesis
 
     class UpdateStreamModeInput
       attr_accessor stream_arn: ::String
+      attr_accessor stream_id: ::String
       attr_accessor stream_mode_details: Types::StreamModeDetails
       attr_accessor warm_throughput_mi_bps: ::Integer
       SENSITIVE: []
@@ -645,6 +679,7 @@ module Aws::Kinesis
     class UpdateStreamWarmThroughputInput
       attr_accessor stream_arn: ::String
       attr_accessor stream_name: ::String
+      attr_accessor stream_id: ::String
       attr_accessor warm_throughput_mi_bps: ::Integer
       SENSITIVE: []
     end

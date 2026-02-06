@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.54.0 (2026-01-20)
+------------------
+
+* Feature - Adds support for managing table pre-warming in Amazon Keyspaces (for Apache Cassandra)
+
+1.53.0 (2026-01-16)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.52.0 (2026-01-08)
 ------------------
 

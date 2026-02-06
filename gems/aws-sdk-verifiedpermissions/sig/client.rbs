@@ -317,6 +317,14 @@ module Aws
                                  },
                                  ?description: ::String,
                                  ?deletion_protection: ("ENABLED" | "DISABLED"),
+                                 ?encryption_settings: {
+                                   kms_encryption_settings: {
+                                     key: ::String,
+                                     encryption_context: Hash[::String, ::String]?
+                                   }?,
+                                   default: {
+                                   }?
+                                 },
                                  ?tags: Hash[::String, ::String]
                                ) -> _CreatePolicyStoreResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreatePolicyStoreResponseSuccess
@@ -422,6 +430,7 @@ module Aws
         def last_updated_date: () -> ::Time
         def description: () -> ::String
         def deletion_protection: () -> ("ENABLED" | "DISABLED")
+        def encryption_state: () -> Types::EncryptionState
         def cedar_version: () -> ("CEDAR_2" | "CEDAR_4")
         def tags: () -> ::Hash[::String, ::String]
       end
@@ -765,7 +774,7 @@ module Aws
       def update_policy: (
                            policy_store_id: ::String,
                            policy_id: ::String,
-                           definition: {
+                           ?definition: {
                              static: {
                                description: ::String?,
                                statement: ::String

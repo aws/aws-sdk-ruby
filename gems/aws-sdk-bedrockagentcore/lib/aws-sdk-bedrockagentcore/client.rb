@@ -993,8 +993,8 @@ module Aws::BedrockAgentCore
     end
 
     # Retrieves detailed information about a specific browser session in
-    # Amazon Bedrock. This operation returns the session's configuration,
-    # current status, associated streams, and metadata.
+    # Amazon Bedrock AgentCore. This operation returns the session's
+    # configuration, current status, associated streams, and metadata.
     #
     # To get a browser session, you must specify both the browser identifier
     # and the session ID. The response includes information about the
@@ -1028,6 +1028,8 @@ module Aws::BedrockAgentCore
     #   * {Types::GetBrowserSessionResponse#name #name} => String
     #   * {Types::GetBrowserSessionResponse#created_at #created_at} => Time
     #   * {Types::GetBrowserSessionResponse#view_port #view_port} => Types::ViewPort
+    #   * {Types::GetBrowserSessionResponse#extensions #extensions} => Array&lt;Types::BrowserExtension&gt;
+    #   * {Types::GetBrowserSessionResponse#profile_configuration #profile_configuration} => Types::BrowserProfileConfiguration
     #   * {Types::GetBrowserSessionResponse#session_timeout_seconds #session_timeout_seconds} => Integer
     #   * {Types::GetBrowserSessionResponse#status #status} => String
     #   * {Types::GetBrowserSessionResponse#streams #streams} => Types::BrowserSessionStream
@@ -1049,6 +1051,11 @@ module Aws::BedrockAgentCore
     #   resp.created_at #=> Time
     #   resp.view_port.width #=> Integer
     #   resp.view_port.height #=> Integer
+    #   resp.extensions #=> Array
+    #   resp.extensions[0].location.s3.bucket #=> String
+    #   resp.extensions[0].location.s3.prefix #=> String
+    #   resp.extensions[0].location.s3.version_id #=> String
+    #   resp.profile_configuration.profile_identifier #=> String
     #   resp.session_timeout_seconds #=> Integer
     #   resp.status #=> String, one of "READY", "TERMINATED"
     #   resp.streams.automation_stream.stream_endpoint #=> String
@@ -1067,8 +1074,8 @@ module Aws::BedrockAgentCore
     end
 
     # Retrieves detailed information about a specific code interpreter
-    # session in Amazon Bedrock. This operation returns the session's
-    # configuration, current status, and metadata.
+    # session in Amazon Bedrock AgentCore. This operation returns the
+    # session's configuration, current status, and metadata.
     #
     # To get a code interpreter session, you must specify both the code
     # interpreter identifier and the session ID. The response includes
@@ -1508,13 +1515,13 @@ module Aws::BedrockAgentCore
     # @option params [required, String] :agent_runtime_arn
     #   The Amazon Web Services Resource Name (ARN) of the agent runtime to
     #   invoke. The ARN uniquely identifies the agent runtime resource in
-    #   Amazon Bedrock.
+    #   Amazon Bedrock AgentCore.
     #
     # @option params [String] :qualifier
     #   The qualifier to use for the agent runtime. This can be a version
     #   number or an endpoint name that points to a specific version. If not
-    #   specified, Amazon Bedrock uses the default version of the agent
-    #   runtime.
+    #   specified, Amazon Bedrock AgentCore uses the default version of the
+    #   agent runtime.
     #
     # @option params [String] :account_id
     #   The identifier of the Amazon Web Services account for the agent
@@ -1581,8 +1588,8 @@ module Aws::BedrockAgentCore
     end
 
     # Executes code within an active code interpreter session in Amazon
-    # Bedrock. This operation processes the provided code, runs it in a
-    # secure environment, and returns the execution results including
+    # Bedrock AgentCore. This operation processes the provided code, runs it
+    # in a secure environment, and returns the execution results including
     # output, errors, and generated visualizations.
     #
     # To execute code, you must specify the code interpreter identifier,
@@ -1946,9 +1953,10 @@ module Aws::BedrockAgentCore
       req.send_request(options)
     end
 
-    # Retrieves a list of browser sessions in Amazon Bedrock that match the
-    # specified criteria. This operation returns summary information about
-    # each session, including identifiers, status, and timestamps.
+    # Retrieves a list of browser sessions in Amazon Bedrock AgentCore that
+    # match the specified criteria. This operation returns summary
+    # information about each session, including identifiers, status, and
+    # timestamps.
     #
     # You can filter the results by browser identifier and session status.
     # The operation supports pagination to handle large result sets
@@ -1982,8 +1990,8 @@ module Aws::BedrockAgentCore
     # @option params [String] :next_token
     #   The token for the next set of results. Use the value returned in the
     #   previous response in the next request to retrieve the next set of
-    #   results. If not specified, Amazon Bedrock returns the first page of
-    #   results.
+    #   results. If not specified, Amazon Bedrock AgentCore returns the first
+    #   page of results.
     #
     # @option params [String] :status
     #   The status of the browser sessions to list. Valid values include
@@ -2024,10 +2032,10 @@ module Aws::BedrockAgentCore
       req.send_request(options)
     end
 
-    # Retrieves a list of code interpreter sessions in Amazon Bedrock that
-    # match the specified criteria. This operation returns summary
-    # information about each session, including identifiers, status, and
-    # timestamps.
+    # Retrieves a list of code interpreter sessions in Amazon Bedrock
+    # AgentCore that match the specified criteria. This operation returns
+    # summary information about each session, including identifiers, status,
+    # and timestamps.
     #
     # You can filter the results by code interpreter identifier and session
     # status. The operation supports pagination to handle large result sets
@@ -2061,8 +2069,8 @@ module Aws::BedrockAgentCore
     # @option params [String] :next_token
     #   The token for the next set of results. Use the value returned in the
     #   previous response in the next request to retrieve the next set of
-    #   results. If not specified, Amazon Bedrock returns the first page of
-    #   results.
+    #   results. If not specified, Amazon Bedrock AgentCore returns the first
+    #   page of results.
     #
     # @option params [String] :status
     #   The status of the code interpreter sessions to list. Valid values
@@ -2276,8 +2284,8 @@ module Aws::BedrockAgentCore
     #   memory records.
     #
     # @option params [required, String] :namespace
-    #   The namespace to filter memory records by. If specified, only memory
-    #   records in this namespace are returned.
+    #   The namespace prefix to filter memory records by. Returns all memory
+    #   records in namespaces that start with the provided prefix.
     #
     # @option params [String] :memory_strategy_id
     #   The memory strategy identifier to filter memory records by. If
@@ -2401,7 +2409,8 @@ module Aws::BedrockAgentCore
     #   memory records.
     #
     # @option params [required, String] :namespace
-    #   The namespace to filter memory records by.
+    #   The namespace prefix to filter memory records by. Searches for memory
+    #   records in namespaces that start with the provided prefix.
     #
     # @option params [required, Types::SearchCriteria] :search_criteria
     #   The search criteria to use for finding relevant memory records. This
@@ -2474,8 +2483,98 @@ module Aws::BedrockAgentCore
       req.send_request(options)
     end
 
-    # Creates and initializes a browser session in Amazon Bedrock. The
-    # session enables agents to navigate and interact with web content,
+    # Saves the current state of a browser session as a reusable profile in
+    # Amazon Bedrock AgentCore. A browser profile captures persistent
+    # browser data such as cookies and local storage from an active session,
+    # enabling you to reuse this data in future browser sessions.
+    #
+    # To save a browser session profile, you must specify the profile
+    # identifier, browser identifier, and session ID. The session must be
+    # active when saving the profile. Once saved, the profile can be used
+    # with the `StartBrowserSession` operation to initialize new sessions
+    # with the stored browser state.
+    #
+    # Browser profiles are useful for scenarios that require persistent
+    # authentication, maintaining user preferences across sessions, or
+    # continuing tasks that depend on previously stored browser data.
+    #
+    # The following operations are related to `SaveBrowserSessionProfile`:
+    #
+    # * [StartBrowserSession][1]
+    #
+    # * [GetBrowserSession][2]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock-agentcore/latest/APIReference/API_StartBrowserSession.html
+    # [2]: https://docs.aws.amazon.com/bedrock-agentcore/latest/APIReference/API_GetBrowserSession.html
+    #
+    # @option params [String] :trace_id
+    #   The trace identifier for request tracking.
+    #
+    # @option params [String] :trace_parent
+    #   The parent trace information for distributed tracing.
+    #
+    # @option params [required, String] :profile_identifier
+    #   The unique identifier for the browser profile. This identifier is used
+    #   to reference the profile when starting new browser sessions. The
+    #   identifier must follow the pattern of an alphanumeric name (up to 48
+    #   characters) followed by a hyphen and a 10-character alphanumeric
+    #   suffix.
+    #
+    # @option params [required, String] :browser_identifier
+    #   The unique identifier of the browser associated with the session from
+    #   which to save the profile.
+    #
+    # @option params [required, String] :session_id
+    #   The unique identifier of the browser session from which to save the
+    #   profile. The session must be active when saving the profile.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier to ensure that the API request
+    #   completes no more than one time. If this token matches a previous
+    #   request, Amazon Bedrock AgentCore ignores the request, but does not
+    #   return an error.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::SaveBrowserSessionProfileResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::SaveBrowserSessionProfileResponse#profile_identifier #profile_identifier} => String
+    #   * {Types::SaveBrowserSessionProfileResponse#browser_identifier #browser_identifier} => String
+    #   * {Types::SaveBrowserSessionProfileResponse#session_id #session_id} => String
+    #   * {Types::SaveBrowserSessionProfileResponse#last_updated_at #last_updated_at} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.save_browser_session_profile({
+    #     trace_id: "SaveBrowserSessionProfileRequestTraceIdString",
+    #     trace_parent: "SaveBrowserSessionProfileRequestTraceParentString",
+    #     profile_identifier: "BrowserProfileId", # required
+    #     browser_identifier: "String", # required
+    #     session_id: "BrowserSessionId", # required
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.profile_identifier #=> String
+    #   resp.browser_identifier #=> String
+    #   resp.session_id #=> String
+    #   resp.last_updated_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/SaveBrowserSessionProfile AWS API Documentation
+    #
+    # @overload save_browser_session_profile(params = {})
+    # @param [Hash] params ({})
+    def save_browser_session_profile(params = {}, options = {})
+      req = build_request(:save_browser_session_profile, params)
+      req.send_request(options)
+    end
+
+    # Creates and initializes a browser session in Amazon Bedrock AgentCore.
+    # The session enables agents to navigate and interact with web content,
     # extract information from websites, and perform web-based tasks as part
     # of their response generation.
     #
@@ -2490,13 +2589,16 @@ module Aws::BedrockAgentCore
     #
     # * [UpdateBrowserStream][2]
     #
-    # * [StopBrowserSession][3]
+    # * [SaveBrowserSessionProfile][3]
+    #
+    # * [StopBrowserSession][4]
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/bedrock-agentcore/latest/APIReference/API_GetBrowserSession.html
     # [2]: https://docs.aws.amazon.com/bedrock-agentcore/latest/APIReference/API_UpdateBrowserStream.html
-    # [3]: https://docs.aws.amazon.com/bedrock-agentcore/latest/APIReference/API_StopBrowserSession.html
+    # [3]: https://docs.aws.amazon.com/bedrock-agentcore/latest/APIReference/API_SaveBrowserSessionProfile.html
+    # [4]: https://docs.aws.amazon.com/bedrock-agentcore/latest/APIReference/API_StopBrowserSession.html
     #
     # @option params [String] :trace_id
     #   The trace identifier for request tracking.
@@ -2522,15 +2624,26 @@ module Aws::BedrockAgentCore
     # @option params [Types::ViewPort] :view_port
     #   The dimensions of the browser viewport for this session. This
     #   determines the visible area of the web content and affects how web
-    #   pages are rendered. If not specified, Amazon Bedrock uses a default
-    #   viewport size.
+    #   pages are rendered. If not specified, Amazon Bedrock AgentCore uses a
+    #   default viewport size.
+    #
+    # @option params [Array<Types::BrowserExtension>] :extensions
+    #   A list of browser extensions to load into the browser session.
+    #
+    # @option params [Types::BrowserProfileConfiguration] :profile_configuration
+    #   The browser profile configuration to use for this session. A browser
+    #   profile contains persistent data such as cookies and local storage
+    #   that can be reused across multiple browser sessions. If specified, the
+    #   session initializes with the profile's stored data, enabling
+    #   continuity for tasks that require authentication or personalized
+    #   settings.
     #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier to ensure that the API request
     #   completes no more than one time. If this token matches a previous
-    #   request, Amazon Bedrock ignores the request, but does not return an
-    #   error. This parameter helps prevent the creation of duplicate sessions
-    #   if there are temporary network issues.
+    #   request, Amazon Bedrock AgentCore ignores the request, but does not
+    #   return an error. This parameter helps prevent the creation of
+    #   duplicate sessions if there are temporary network issues.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -2554,6 +2667,20 @@ module Aws::BedrockAgentCore
     #       width: 1, # required
     #       height: 1, # required
     #     },
+    #     extensions: [
+    #       {
+    #         location: { # required
+    #           s3: {
+    #             bucket: "S3LocationBucketString", # required
+    #             prefix: "S3LocationPrefixString", # required
+    #             version_id: "S3LocationVersionIdString",
+    #           },
+    #         },
+    #       },
+    #     ],
+    #     profile_configuration: {
+    #       profile_identifier: "BrowserProfileId", # required
+    #     },
     #     client_token: "ClientToken",
     #   })
     #
@@ -2575,10 +2702,10 @@ module Aws::BedrockAgentCore
       req.send_request(options)
     end
 
-    # Creates and initializes a code interpreter session in Amazon Bedrock.
-    # The session enables agents to execute code as part of their response
-    # generation, supporting programming languages such as Python for data
-    # analysis, visualization, and computation tasks.
+    # Creates and initializes a code interpreter session in Amazon Bedrock
+    # AgentCore. The session enables agents to execute code as part of their
+    # response generation, supporting programming languages such as Python
+    # for data analysis, visualization, and computation tasks.
     #
     # To create a session, you must specify a code interpreter identifier
     # and a name. The session remains active until it times out or you
@@ -2622,9 +2749,9 @@ module Aws::BedrockAgentCore
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier to ensure that the API request
     #   completes no more than one time. If this token matches a previous
-    #   request, Amazon Bedrock ignores the request, but does not return an
-    #   error. This parameter helps prevent the creation of duplicate sessions
-    #   if there are temporary network issues.
+    #   request, Amazon Bedrock AgentCore ignores the request, but does not
+    #   return an error. This parameter helps prevent the creation of
+    #   duplicate sessions if there are temporary network issues.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -2710,9 +2837,9 @@ module Aws::BedrockAgentCore
       req.send_request(options)
     end
 
-    # Terminates an active browser session in Amazon Bedrock. This operation
-    # stops the session, releases associated resources, and makes the
-    # session unavailable for further use.
+    # Terminates an active browser session in Amazon Bedrock AgentCore. This
+    # operation stops the session, releases associated resources, and makes
+    # the session unavailable for further use.
     #
     # To stop a browser session, you must specify both the browser
     # identifier and the session ID. Once stopped, a session cannot be
@@ -2744,8 +2871,8 @@ module Aws::BedrockAgentCore
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier to ensure that the API request
     #   completes no more than one time. If this token matches a previous
-    #   request, Amazon Bedrock ignores the request, but does not return an
-    #   error.
+    #   request, Amazon Bedrock AgentCore ignores the request, but does not
+    #   return an error.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -2781,9 +2908,9 @@ module Aws::BedrockAgentCore
       req.send_request(options)
     end
 
-    # Terminates an active code interpreter session in Amazon Bedrock. This
-    # operation stops the session, releases associated resources, and makes
-    # the session unavailable for further use.
+    # Terminates an active code interpreter session in Amazon Bedrock
+    # AgentCore. This operation stops the session, releases associated
+    # resources, and makes the session unavailable for further use.
     #
     # To stop a code interpreter session, you must specify both the code
     # interpreter identifier and the session ID. Once stopped, a session
@@ -2817,8 +2944,8 @@ module Aws::BedrockAgentCore
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier to ensure that the API request
     #   completes no more than one time. If this token matches a previous
-    #   request, Amazon Bedrock ignores the request, but does not return an
-    #   error.
+    #   request, Amazon Bedrock AgentCore ignores the request, but does not
+    #   return an error.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -2980,7 +3107,7 @@ module Aws::BedrockAgentCore
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrockagentcore'
-      context[:gem_version] = '1.15.0'
+      context[:gem_version] = '1.18.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

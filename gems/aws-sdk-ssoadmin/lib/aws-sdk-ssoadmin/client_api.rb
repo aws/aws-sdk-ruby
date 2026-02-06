@@ -33,6 +33,8 @@ module Aws::SSOAdmin
     AccountId = Shapes::StringShape.new(name: 'AccountId')
     AccountList = Shapes::ListShape.new(name: 'AccountList')
     ActorPolicyDocument = Shapes::DocumentShape.new(name: 'ActorPolicyDocument', document: true)
+    AddRegionRequest = Shapes::StructureShape.new(name: 'AddRegionRequest')
+    AddRegionResponse = Shapes::StructureShape.new(name: 'AddRegionResponse')
     Application = Shapes::StructureShape.new(name: 'Application')
     ApplicationArn = Shapes::StringShape.new(name: 'ApplicationArn')
     ApplicationAssignment = Shapes::StructureShape.new(name: 'ApplicationAssignment')
@@ -121,6 +123,8 @@ module Aws::SSOAdmin
     DescribePermissionSetProvisioningStatusResponse = Shapes::StructureShape.new(name: 'DescribePermissionSetProvisioningStatusResponse')
     DescribePermissionSetRequest = Shapes::StructureShape.new(name: 'DescribePermissionSetRequest')
     DescribePermissionSetResponse = Shapes::StructureShape.new(name: 'DescribePermissionSetResponse')
+    DescribeRegionRequest = Shapes::StructureShape.new(name: 'DescribeRegionRequest')
+    DescribeRegionResponse = Shapes::StructureShape.new(name: 'DescribeRegionResponse')
     DescribeTrustedTokenIssuerRequest = Shapes::StructureShape.new(name: 'DescribeTrustedTokenIssuerRequest')
     DescribeTrustedTokenIssuerResponse = Shapes::StructureShape.new(name: 'DescribeTrustedTokenIssuerResponse')
     Description = Shapes::StringShape.new(name: 'Description')
@@ -163,6 +167,7 @@ module Aws::SSOAdmin
     InstanceStatus = Shapes::StringShape.new(name: 'InstanceStatus')
     InternalFailureMessage = Shapes::StringShape.new(name: 'InternalFailureMessage')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
+    IsPrimaryRegion = Shapes::BooleanShape.new(name: 'IsPrimaryRegion')
     JMESPath = Shapes::StringShape.new(name: 'JMESPath')
     JwksRetrievalOption = Shapes::StringShape.new(name: 'JwksRetrievalOption')
     JwtBearerGrant = Shapes::StructureShape.new(name: 'JwtBearerGrant')
@@ -209,6 +214,8 @@ module Aws::SSOAdmin
     ListPermissionSetsProvisionedToAccountResponse = Shapes::StructureShape.new(name: 'ListPermissionSetsProvisionedToAccountResponse')
     ListPermissionSetsRequest = Shapes::StructureShape.new(name: 'ListPermissionSetsRequest')
     ListPermissionSetsResponse = Shapes::StructureShape.new(name: 'ListPermissionSetsResponse')
+    ListRegionsRequest = Shapes::StructureShape.new(name: 'ListRegionsRequest')
+    ListRegionsResponse = Shapes::StructureShape.new(name: 'ListRegionsResponse')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     ListTrustedTokenIssuersRequest = Shapes::StructureShape.new(name: 'ListTrustedTokenIssuersRequest')
@@ -253,7 +260,13 @@ module Aws::SSOAdmin
     Reason = Shapes::StringShape.new(name: 'Reason')
     RedirectUris = Shapes::ListShape.new(name: 'RedirectUris')
     RefreshTokenGrant = Shapes::StructureShape.new(name: 'RefreshTokenGrant')
+    RegionMetadata = Shapes::StructureShape.new(name: 'RegionMetadata')
+    RegionMetadataList = Shapes::ListShape.new(name: 'RegionMetadataList')
+    RegionName = Shapes::StringShape.new(name: 'RegionName')
+    RegionStatus = Shapes::StringShape.new(name: 'RegionStatus')
     RelayState = Shapes::StringShape.new(name: 'RelayState')
+    RemoveRegionRequest = Shapes::StructureShape.new(name: 'RemoveRegionRequest')
+    RemoveRegionResponse = Shapes::StructureShape.new(name: 'RemoveRegionResponse')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     ResourceNotFoundExceptionReason = Shapes::StringShape.new(name: 'ResourceNotFoundExceptionReason')
     ResourceNotFoundMessage = Shapes::StringShape.new(name: 'ResourceNotFoundMessage')
@@ -367,6 +380,13 @@ module Aws::SSOAdmin
 
     AccountList.member = Shapes::ShapeRef.new(shape: AccountId)
 
+    AddRegionRequest.add_member(:instance_arn, Shapes::ShapeRef.new(shape: InstanceArn, required: true, location_name: "InstanceArn"))
+    AddRegionRequest.add_member(:region_name, Shapes::ShapeRef.new(shape: RegionName, required: true, location_name: "RegionName"))
+    AddRegionRequest.struct_class = Types::AddRegionRequest
+
+    AddRegionResponse.add_member(:status, Shapes::ShapeRef.new(shape: RegionStatus, location_name: "Status"))
+    AddRegionResponse.struct_class = Types::AddRegionResponse
+
     Application.add_member(:application_arn, Shapes::ShapeRef.new(shape: ApplicationArn, location_name: "ApplicationArn"))
     Application.add_member(:application_provider_arn, Shapes::ShapeRef.new(shape: ApplicationProviderArn, location_name: "ApplicationProviderArn"))
     Application.add_member(:name, Shapes::ShapeRef.new(shape: ApplicationNameType, location_name: "Name"))
@@ -376,6 +396,7 @@ module Aws::SSOAdmin
     Application.add_member(:portal_options, Shapes::ShapeRef.new(shape: PortalOptions, location_name: "PortalOptions"))
     Application.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
     Application.add_member(:created_date, Shapes::ShapeRef.new(shape: Date, location_name: "CreatedDate"))
+    Application.add_member(:created_from, Shapes::ShapeRef.new(shape: RegionName, location_name: "CreatedFrom"))
     Application.struct_class = Types::Application
 
     ApplicationAssignment.add_member(:application_arn, Shapes::ShapeRef.new(shape: ApplicationArn, required: true, location_name: "ApplicationArn"))
@@ -632,6 +653,7 @@ module Aws::SSOAdmin
     DescribeApplicationResponse.add_member(:portal_options, Shapes::ShapeRef.new(shape: PortalOptions, location_name: "PortalOptions"))
     DescribeApplicationResponse.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
     DescribeApplicationResponse.add_member(:created_date, Shapes::ShapeRef.new(shape: Date, location_name: "CreatedDate"))
+    DescribeApplicationResponse.add_member(:created_from, Shapes::ShapeRef.new(shape: RegionName, location_name: "CreatedFrom"))
     DescribeApplicationResponse.struct_class = Types::DescribeApplicationResponse
 
     DescribeInstanceAccessControlAttributeConfigurationRequest.add_member(:instance_arn, Shapes::ShapeRef.new(shape: InstanceArn, required: true, location_name: "InstanceArn"))
@@ -668,6 +690,16 @@ module Aws::SSOAdmin
 
     DescribePermissionSetResponse.add_member(:permission_set, Shapes::ShapeRef.new(shape: PermissionSet, location_name: "PermissionSet"))
     DescribePermissionSetResponse.struct_class = Types::DescribePermissionSetResponse
+
+    DescribeRegionRequest.add_member(:instance_arn, Shapes::ShapeRef.new(shape: InstanceArn, required: true, location_name: "InstanceArn"))
+    DescribeRegionRequest.add_member(:region_name, Shapes::ShapeRef.new(shape: RegionName, required: true, location_name: "RegionName"))
+    DescribeRegionRequest.struct_class = Types::DescribeRegionRequest
+
+    DescribeRegionResponse.add_member(:region_name, Shapes::ShapeRef.new(shape: RegionName, location_name: "RegionName"))
+    DescribeRegionResponse.add_member(:status, Shapes::ShapeRef.new(shape: RegionStatus, location_name: "Status"))
+    DescribeRegionResponse.add_member(:added_date, Shapes::ShapeRef.new(shape: Date, location_name: "AddedDate"))
+    DescribeRegionResponse.add_member(:is_primary_region, Shapes::ShapeRef.new(shape: IsPrimaryRegion, location_name: "IsPrimaryRegion"))
+    DescribeRegionResponse.struct_class = Types::DescribeRegionResponse
 
     DescribeTrustedTokenIssuerRequest.add_member(:trusted_token_issuer_arn, Shapes::ShapeRef.new(shape: TrustedTokenIssuerArn, required: true, location_name: "TrustedTokenIssuerArn"))
     DescribeTrustedTokenIssuerRequest.struct_class = Types::DescribeTrustedTokenIssuerRequest
@@ -982,6 +1014,15 @@ module Aws::SSOAdmin
     ListPermissionSetsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
     ListPermissionSetsResponse.struct_class = Types::ListPermissionSetsResponse
 
+    ListRegionsRequest.add_member(:instance_arn, Shapes::ShapeRef.new(shape: InstanceArn, required: true, location_name: "InstanceArn"))
+    ListRegionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    ListRegionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
+    ListRegionsRequest.struct_class = Types::ListRegionsRequest
+
+    ListRegionsResponse.add_member(:regions, Shapes::ShapeRef.new(shape: RegionMetadataList, location_name: "Regions"))
+    ListRegionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
+    ListRegionsResponse.struct_class = Types::ListRegionsResponse
+
     ListTagsForResourceRequest.add_member(:instance_arn, Shapes::ShapeRef.new(shape: InstanceArn, location_name: "InstanceArn"))
     ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: TaggableResourceArn, required: true, location_name: "ResourceArn"))
     ListTagsForResourceRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
@@ -1100,6 +1141,21 @@ module Aws::SSOAdmin
     RedirectUris.member = Shapes::ShapeRef.new(shape: URI)
 
     RefreshTokenGrant.struct_class = Types::RefreshTokenGrant
+
+    RegionMetadata.add_member(:region_name, Shapes::ShapeRef.new(shape: RegionName, location_name: "RegionName"))
+    RegionMetadata.add_member(:status, Shapes::ShapeRef.new(shape: RegionStatus, location_name: "Status"))
+    RegionMetadata.add_member(:added_date, Shapes::ShapeRef.new(shape: Date, location_name: "AddedDate"))
+    RegionMetadata.add_member(:is_primary_region, Shapes::ShapeRef.new(shape: IsPrimaryRegion, location_name: "IsPrimaryRegion"))
+    RegionMetadata.struct_class = Types::RegionMetadata
+
+    RegionMetadataList.member = Shapes::ShapeRef.new(shape: RegionMetadata)
+
+    RemoveRegionRequest.add_member(:instance_arn, Shapes::ShapeRef.new(shape: InstanceArn, required: true, location_name: "InstanceArn"))
+    RemoveRegionRequest.add_member(:region_name, Shapes::ShapeRef.new(shape: RegionName, required: true, location_name: "RegionName"))
+    RemoveRegionRequest.struct_class = Types::RemoveRegionRequest
+
+    RemoveRegionResponse.add_member(:status, Shapes::ShapeRef.new(shape: RegionStatus, location_name: "Status"))
+    RemoveRegionResponse.struct_class = Types::RemoveRegionResponse
 
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ResourceNotFoundMessage, location_name: "Message"))
     ResourceNotFoundException.add_member(:reason, Shapes::ShapeRef.new(shape: ResourceNotFoundExceptionReason, location_name: "Reason"))
@@ -1245,6 +1301,20 @@ module Aws::SSOAdmin
         "targetPrefix" => "SWBExternalService",
         "uid" => "sso-admin-2020-07-20",
       }
+
+      api.add_operation(:add_region, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AddRegion"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: AddRegionRequest)
+        o.output = Shapes::ShapeRef.new(shape: AddRegionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
 
       api.add_operation(:attach_customer_managed_policy_reference_to_permission_set, Seahorse::Model::Operation.new.tap do |o|
         o.name = "AttachCustomerManagedPolicyReferenceToPermissionSet"
@@ -1654,6 +1724,19 @@ module Aws::SSOAdmin
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribePermissionSetProvisioningStatusRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribePermissionSetProvisioningStatusResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
+      api.add_operation(:describe_region, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeRegion"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeRegionRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeRegionResponse)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -2130,6 +2213,24 @@ module Aws::SSOAdmin
         )
       end)
 
+      api.add_operation(:list_regions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListRegions"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListRegionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListRegionsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListTagsForResource"
         o.http_method = "POST"
@@ -2271,6 +2372,20 @@ module Aws::SSOAdmin
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: PutPermissionsBoundaryToPermissionSetRequest)
         o.output = Shapes::ShapeRef.new(shape: PutPermissionsBoundaryToPermissionSetResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:remove_region, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "RemoveRegion"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: RemoveRegionRequest)
+        o.output = Shapes::ShapeRef.new(shape: RemoveRegionResponse)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)

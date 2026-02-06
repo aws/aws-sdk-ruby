@@ -1220,6 +1220,12 @@ module Aws::CognitoIdentityProvider
       SENSITIVE: []
     end
 
+    class InboundFederationLambdaType
+      attr_accessor lambda_version: ("V1_0")
+      attr_accessor lambda_arn: ::String
+      SENSITIVE: []
+    end
+
     class InitiateAuthRequest
       attr_accessor auth_flow: ("USER_SRP_AUTH" | "REFRESH_TOKEN_AUTH" | "REFRESH_TOKEN" | "CUSTOM_AUTH" | "ADMIN_NO_SRP_AUTH" | "USER_PASSWORD_AUTH" | "ADMIN_USER_PASSWORD_AUTH" | "USER_AUTH")
       attr_accessor auth_parameters: ::Hash[::String, ::String]
@@ -1301,6 +1307,7 @@ module Aws::CognitoIdentityProvider
       attr_accessor custom_sms_sender: Types::CustomSMSLambdaVersionConfigType
       attr_accessor custom_email_sender: Types::CustomEmailLambdaVersionConfigType
       attr_accessor kms_key_id: ::String
+      attr_accessor inbound_federation: Types::InboundFederationLambdaType
       SENSITIVE: []
     end
 

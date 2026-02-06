@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.141.0 (2026-02-02)
+------------------
+
+* Feature - Add OriginMTLS support to CloudFront Distribution APIs
+
+1.140.0 (2026-01-16)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.139.0 (2026-01-09)
 ------------------
 

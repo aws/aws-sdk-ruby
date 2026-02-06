@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.12.0 (2026-01-20)
+------------------
+
+* Feature - Added billing configuration support for WorkSpaces Instances with monthly and hourly billing modes, including new filtering capabilities for instance type searches.
+
+1.11.0 (2026-01-16)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.10.0 (2026-01-08)
 ------------------
 

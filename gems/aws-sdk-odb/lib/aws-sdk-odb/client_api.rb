@@ -376,6 +376,7 @@ module Aws::Odb
     CloudAutonomousVmCluster.add_member(:time_ords_certificate_expires, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "timeOrdsCertificateExpires"))
     CloudAutonomousVmCluster.add_member(:time_zone, Shapes::ShapeRef.new(shape: String, location_name: "timeZone"))
     CloudAutonomousVmCluster.add_member(:total_container_databases, Shapes::ShapeRef.new(shape: Integer, location_name: "totalContainerDatabases"))
+    CloudAutonomousVmCluster.add_member(:iam_roles, Shapes::ShapeRef.new(shape: IamRoleList, location_name: "iamRoles"))
     CloudAutonomousVmCluster.struct_class = Types::CloudAutonomousVmCluster
 
     CloudAutonomousVmClusterList.member = Shapes::ShapeRef.new(shape: CloudAutonomousVmClusterSummary)
@@ -437,6 +438,7 @@ module Aws::Odb
     CloudAutonomousVmClusterSummary.add_member(:time_ords_certificate_expires, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "timeOrdsCertificateExpires"))
     CloudAutonomousVmClusterSummary.add_member(:time_zone, Shapes::ShapeRef.new(shape: String, location_name: "timeZone"))
     CloudAutonomousVmClusterSummary.add_member(:total_container_databases, Shapes::ShapeRef.new(shape: Integer, location_name: "totalContainerDatabases"))
+    CloudAutonomousVmClusterSummary.add_member(:iam_roles, Shapes::ShapeRef.new(shape: IamRoleList, location_name: "iamRoles"))
     CloudAutonomousVmClusterSummary.struct_class = Types::CloudAutonomousVmClusterSummary
 
     CloudExadataInfrastructure.add_member(:cloud_exadata_infrastructure_id, Shapes::ShapeRef.new(shape: ResourceIdOrArn, required: true, location_name: "cloudExadataInfrastructureId"))

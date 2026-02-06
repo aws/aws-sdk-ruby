@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.111.0 (2026-01-22)
+------------------
+
+* Feature - Support disabling queue url region detection through `disable_queue_url_region_detection`.
+
+1.110.0 (2026-01-16)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.109.0 (2026-01-08)
 ------------------
 

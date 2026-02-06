@@ -245,6 +245,7 @@ module Aws
         def requester_comment: () -> ::String
         def action_completion_strategy: () -> ("AUTO_COMPLETION_UPON_APPROVAL")
         def approver_responses: () -> ::Array[Types::GetSessionResponseApproverResponse]
+        def additional_security_requirements: () -> ::Array[("APPROVER_VERIFICATION_REQUIRED")]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MPA/Client.html#get_session-instance_method
       def get_session: (
@@ -394,7 +395,8 @@ module Aws
                                     },
                                   ],
                                   ?description: ::String,
-                                  arn: ::String
+                                  arn: ::String,
+                                  ?update_actions: Array[("SYNCHRONIZE_MFA_DEVICES")]
                                 ) -> _UpdateApprovalTeamResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateApprovalTeamResponseSuccess
     end

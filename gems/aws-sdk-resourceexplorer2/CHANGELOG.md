@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.47.0 (2026-01-16)
+------------------
+
+* Feature - Added ViewName to View-related responses and ServiceViewName to GetServiceView response.
+
 1.46.0 (2026-01-08)
 ------------------
 

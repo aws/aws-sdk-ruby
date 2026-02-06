@@ -6907,6 +6907,17 @@ module Aws::ECS
     #   specified criteria.
     #   @return [Types::InstanceRequirementsRequest]
     #
+    # @!attribute [rw] fips_enabled
+    #   Determines whether to enable FIPS 140-2 validated cryptographic
+    #   modules on EC2 instances launched by the capacity provider. If
+    #   `true`, instances use FIPS-compliant cryptographic algorithms and
+    #   modules for enhanced security compliance. If `false`, instances use
+    #   standard cryptographic implementations.
+    #
+    #   If not specified, instances are launched with FIPS enabled in AWS
+    #   GovCloud (US) regions and FIPS disabled in other regions.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/InstanceLaunchTemplate AWS API Documentation
     #
     class InstanceLaunchTemplate < Struct.new(
@@ -6915,7 +6926,8 @@ module Aws::ECS
       :storage_configuration,
       :monitoring,
       :capacity_option_type,
-      :instance_requirements)
+      :instance_requirements,
+      :fips_enabled)
       SENSITIVE = []
       include Aws::Structure
     end

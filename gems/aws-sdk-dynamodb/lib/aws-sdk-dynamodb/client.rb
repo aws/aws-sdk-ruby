@@ -1335,6 +1335,7 @@ module Aws::DynamoDB
     #   resp.global_table_description.replication_group[0].replica_inaccessible_date_time #=> Time
     #   resp.global_table_description.replication_group[0].replica_table_class_summary.table_class #=> String, one of "STANDARD", "STANDARD_INFREQUENT_ACCESS"
     #   resp.global_table_description.replication_group[0].replica_table_class_summary.last_update_date_time #=> Time
+    #   resp.global_table_description.replication_group[0].global_table_settings_replication_mode #=> String, one of "ENABLED", "DISABLED", "ENABLED_WITH_OVERRIDES"
     #   resp.global_table_description.global_table_arn #=> String
     #   resp.global_table_description.creation_date_time #=> Time
     #   resp.global_table_description.global_table_status #=> String, one of "CREATING", "ACTIVE", "DELETING", "UPDATING"
@@ -1368,7 +1369,7 @@ module Aws::DynamoDB
     #
     # You can use the `DescribeTable` action to check the table status.
     #
-    # @option params [required, Array<Types::AttributeDefinition>] :attribute_definitions
+    # @option params [Array<Types::AttributeDefinition>] :attribute_definitions
     #   An array of attributes that describe the key schema for the table and
     #   indexes.
     #
@@ -1376,7 +1377,7 @@ module Aws::DynamoDB
     #   The name of the table to create. You can also provide the Amazon
     #   Resource Name (ARN) of the table in this parameter.
     #
-    # @option params [required, Array<Types::KeySchemaElement>] :key_schema
+    # @option params [Array<Types::KeySchemaElement>] :key_schema
     #   Specifies the attributes that make up the primary key for a table or
     #   an index. The attributes in `KeySchema` must also be defined in the
     #   `AttributeDefinitions` array. For more information, see [Data
@@ -1475,7 +1476,8 @@ module Aws::DynamoDB
     #
     #
     #   * `KeySchema` - Specifies the key schema for the global secondary
-    #     index.
+    #     index. Each global secondary index supports up to 4 partition keys
+    #     and up to 4 sort keys.
     #
     #   * `Projection` - Specifies attributes that are copied (projected) from
     #     the table into the index. These are in addition to the primary key
@@ -1616,6 +1618,16 @@ module Aws::DynamoDB
     #   table in on-demand capacity mode. If you use this parameter, you must
     #   specify `MaxReadRequestUnits`, `MaxWriteRequestUnits`, or both.
     #
+    # @option params [String] :global_table_source_arn
+    #   The Amazon Resource Name (ARN) of the source table used for the
+    #   creation of a multi-account global table.
+    #
+    # @option params [String] :global_table_settings_replication_mode
+    #   Controls the settings synchronization mode for the global table. For
+    #   multi-account global tables, this parameter is required and the only
+    #   supported value is ENABLED. For same-account global tables, this
+    #   parameter is set to ENABLED\_WITH\_OVERRIDES.
+    #
     # @return [Types::CreateTableOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateTableOutput#table_description #table_description} => Types::TableDescription
@@ -1691,14 +1703,14 @@ module Aws::DynamoDB
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_table({
-    #     attribute_definitions: [ # required
+    #     attribute_definitions: [
     #       {
     #         attribute_name: "KeySchemaAttributeName", # required
     #         attribute_type: "S", # required, accepts S, N, B
     #       },
     #     ],
     #     table_name: "TableArn", # required
-    #     key_schema: [ # required
+    #     key_schema: [
     #       {
     #         attribute_name: "KeySchemaAttributeName", # required
     #         key_type: "HASH", # required, accepts HASH, RANGE
@@ -1777,6 +1789,8 @@ module Aws::DynamoDB
     #       max_read_request_units: 1,
     #       max_write_request_units: 1,
     #     },
+    #     global_table_source_arn: "TableArn",
+    #     global_table_settings_replication_mode: "ENABLED", # accepts ENABLED, DISABLED, ENABLED_WITH_OVERRIDES
     #   })
     #
     # @example Response structure
@@ -1861,9 +1875,11 @@ module Aws::DynamoDB
     #   resp.table_description.replicas[0].replica_inaccessible_date_time #=> Time
     #   resp.table_description.replicas[0].replica_table_class_summary.table_class #=> String, one of "STANDARD", "STANDARD_INFREQUENT_ACCESS"
     #   resp.table_description.replicas[0].replica_table_class_summary.last_update_date_time #=> Time
+    #   resp.table_description.replicas[0].global_table_settings_replication_mode #=> String, one of "ENABLED", "DISABLED", "ENABLED_WITH_OVERRIDES"
     #   resp.table_description.global_table_witnesses #=> Array
     #   resp.table_description.global_table_witnesses[0].region_name #=> String
     #   resp.table_description.global_table_witnesses[0].witness_status #=> String, one of "CREATING", "DELETING", "ACTIVE"
+    #   resp.table_description.global_table_settings_replication_mode #=> String, one of "ENABLED", "DISABLED", "ENABLED_WITH_OVERRIDES"
     #   resp.table_description.restore_summary.source_backup_arn #=> String
     #   resp.table_description.restore_summary.source_table_arn #=> String
     #   resp.table_description.restore_summary.restore_date_time #=> Time
@@ -2467,9 +2483,11 @@ module Aws::DynamoDB
     #   resp.table_description.replicas[0].replica_inaccessible_date_time #=> Time
     #   resp.table_description.replicas[0].replica_table_class_summary.table_class #=> String, one of "STANDARD", "STANDARD_INFREQUENT_ACCESS"
     #   resp.table_description.replicas[0].replica_table_class_summary.last_update_date_time #=> Time
+    #   resp.table_description.replicas[0].global_table_settings_replication_mode #=> String, one of "ENABLED", "DISABLED", "ENABLED_WITH_OVERRIDES"
     #   resp.table_description.global_table_witnesses #=> Array
     #   resp.table_description.global_table_witnesses[0].region_name #=> String
     #   resp.table_description.global_table_witnesses[0].witness_status #=> String, one of "CREATING", "DELETING", "ACTIVE"
+    #   resp.table_description.global_table_settings_replication_mode #=> String, one of "ENABLED", "DISABLED", "ENABLED_WITH_OVERRIDES"
     #   resp.table_description.restore_summary.source_backup_arn #=> String
     #   resp.table_description.restore_summary.source_table_arn #=> String
     #   resp.table_description.restore_summary.restore_date_time #=> Time
@@ -2669,6 +2687,11 @@ module Aws::DynamoDB
     #   resp.failure_exception.exception_description #=> String
     #   resp.contributor_insights_mode #=> String, one of "ACCESSED_AND_THROTTLED_KEYS", "THROTTLED_KEYS"
     #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
+    #
+    #   * contributor_insights_enabled
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DescribeContributorInsights AWS API Documentation
     #
     # @overload describe_contributor_insights(params = {})
@@ -2745,6 +2768,11 @@ module Aws::DynamoDB
     #   resp.export_description.incremental_export_specification.export_to_time #=> Time
     #   resp.export_description.incremental_export_specification.export_view_type #=> String, one of "NEW_IMAGE", "NEW_AND_OLD_IMAGES"
     #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
+    #
+    #   * export_completed
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DescribeExport AWS API Documentation
     #
     # @overload describe_export(params = {})
@@ -2809,6 +2837,7 @@ module Aws::DynamoDB
     #   resp.global_table_description.replication_group[0].replica_inaccessible_date_time #=> Time
     #   resp.global_table_description.replication_group[0].replica_table_class_summary.table_class #=> String, one of "STANDARD", "STANDARD_INFREQUENT_ACCESS"
     #   resp.global_table_description.replication_group[0].replica_table_class_summary.last_update_date_time #=> Time
+    #   resp.global_table_description.replication_group[0].global_table_settings_replication_mode #=> String, one of "ENABLED", "DISABLED", "ENABLED_WITH_OVERRIDES"
     #   resp.global_table_description.global_table_arn #=> String
     #   resp.global_table_description.creation_date_time #=> Time
     #   resp.global_table_description.global_table_status #=> String, one of "CREATING", "ACTIVE", "DELETING", "UPDATING"
@@ -2993,6 +3022,11 @@ module Aws::DynamoDB
     #   resp.import_table_description.failure_code #=> String
     #   resp.import_table_description.failure_message #=> String
     #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
+    #
+    #   * import_completed
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DescribeImport AWS API Documentation
     #
     # @overload describe_import(params = {})
@@ -3027,6 +3061,11 @@ module Aws::DynamoDB
     #   resp.kinesis_data_stream_destinations[0].destination_status #=> String, one of "ENABLING", "ACTIVE", "DISABLING", "DISABLED", "ENABLE_FAILED", "UPDATING"
     #   resp.kinesis_data_stream_destinations[0].destination_status_description #=> String
     #   resp.kinesis_data_stream_destinations[0].approximate_creation_date_time_precision #=> String, one of "MILLISECOND", "MICROSECOND"
+    #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
+    #
+    #   * kinesis_streaming_destination_active
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DescribeKinesisStreamingDestination AWS API Documentation
     #
@@ -3300,9 +3339,11 @@ module Aws::DynamoDB
     #   resp.table.replicas[0].replica_inaccessible_date_time #=> Time
     #   resp.table.replicas[0].replica_table_class_summary.table_class #=> String, one of "STANDARD", "STANDARD_INFREQUENT_ACCESS"
     #   resp.table.replicas[0].replica_table_class_summary.last_update_date_time #=> Time
+    #   resp.table.replicas[0].global_table_settings_replication_mode #=> String, one of "ENABLED", "DISABLED", "ENABLED_WITH_OVERRIDES"
     #   resp.table.global_table_witnesses #=> Array
     #   resp.table.global_table_witnesses[0].region_name #=> String
     #   resp.table.global_table_witnesses[0].witness_status #=> String, one of "CREATING", "DELETING", "ACTIVE"
+    #   resp.table.global_table_settings_replication_mode #=> String, one of "ENABLED", "DISABLED", "ENABLED_WITH_OVERRIDES"
     #   resp.table.restore_summary.source_backup_arn #=> String
     #   resp.table.restore_summary.source_table_arn #=> String
     #   resp.table.restore_summary.restore_date_time #=> Time
@@ -3775,7 +3816,7 @@ module Aws::DynamoDB
     #
     #   If you submit a request with the same client token but a change in
     #   other parameters within the 8-hour idempotency window, DynamoDB
-    #   returns an `ImportConflictException`.
+    #   returns an `ExportConflictException`.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -5901,9 +5942,11 @@ module Aws::DynamoDB
     #   resp.table_description.replicas[0].replica_inaccessible_date_time #=> Time
     #   resp.table_description.replicas[0].replica_table_class_summary.table_class #=> String, one of "STANDARD", "STANDARD_INFREQUENT_ACCESS"
     #   resp.table_description.replicas[0].replica_table_class_summary.last_update_date_time #=> Time
+    #   resp.table_description.replicas[0].global_table_settings_replication_mode #=> String, one of "ENABLED", "DISABLED", "ENABLED_WITH_OVERRIDES"
     #   resp.table_description.global_table_witnesses #=> Array
     #   resp.table_description.global_table_witnesses[0].region_name #=> String
     #   resp.table_description.global_table_witnesses[0].witness_status #=> String, one of "CREATING", "DELETING", "ACTIVE"
+    #   resp.table_description.global_table_settings_replication_mode #=> String, one of "ENABLED", "DISABLED", "ENABLED_WITH_OVERRIDES"
     #   resp.table_description.restore_summary.source_backup_arn #=> String
     #   resp.table_description.restore_summary.source_table_arn #=> String
     #   resp.table_description.restore_summary.restore_date_time #=> Time
@@ -6169,9 +6212,11 @@ module Aws::DynamoDB
     #   resp.table_description.replicas[0].replica_inaccessible_date_time #=> Time
     #   resp.table_description.replicas[0].replica_table_class_summary.table_class #=> String, one of "STANDARD", "STANDARD_INFREQUENT_ACCESS"
     #   resp.table_description.replicas[0].replica_table_class_summary.last_update_date_time #=> Time
+    #   resp.table_description.replicas[0].global_table_settings_replication_mode #=> String, one of "ENABLED", "DISABLED", "ENABLED_WITH_OVERRIDES"
     #   resp.table_description.global_table_witnesses #=> Array
     #   resp.table_description.global_table_witnesses[0].region_name #=> String
     #   resp.table_description.global_table_witnesses[0].witness_status #=> String, one of "CREATING", "DELETING", "ACTIVE"
+    #   resp.table_description.global_table_settings_replication_mode #=> String, one of "ENABLED", "DISABLED", "ENABLED_WITH_OVERRIDES"
     #   resp.table_description.restore_summary.source_backup_arn #=> String
     #   resp.table_description.restore_summary.source_table_arn #=> String
     #   resp.table_description.restore_summary.restore_date_time #=> Time
@@ -7284,6 +7329,7 @@ module Aws::DynamoDB
     #   resp.global_table_description.replication_group[0].replica_inaccessible_date_time #=> Time
     #   resp.global_table_description.replication_group[0].replica_table_class_summary.table_class #=> String, one of "STANDARD", "STANDARD_INFREQUENT_ACCESS"
     #   resp.global_table_description.replication_group[0].replica_table_class_summary.last_update_date_time #=> Time
+    #   resp.global_table_description.replication_group[0].global_table_settings_replication_mode #=> String, one of "ENABLED", "DISABLED", "ENABLED_WITH_OVERRIDES"
     #   resp.global_table_description.global_table_arn #=> String
     #   resp.global_table_description.creation_date_time #=> Time
     #   resp.global_table_description.global_table_status #=> String, one of "CREATING", "ACTIVE", "DELETING", "UPDATING"
@@ -8394,9 +8440,11 @@ module Aws::DynamoDB
     #   resp.table_description.replicas[0].replica_inaccessible_date_time #=> Time
     #   resp.table_description.replicas[0].replica_table_class_summary.table_class #=> String, one of "STANDARD", "STANDARD_INFREQUENT_ACCESS"
     #   resp.table_description.replicas[0].replica_table_class_summary.last_update_date_time #=> Time
+    #   resp.table_description.replicas[0].global_table_settings_replication_mode #=> String, one of "ENABLED", "DISABLED", "ENABLED_WITH_OVERRIDES"
     #   resp.table_description.global_table_witnesses #=> Array
     #   resp.table_description.global_table_witnesses[0].region_name #=> String
     #   resp.table_description.global_table_witnesses[0].witness_status #=> String, one of "CREATING", "DELETING", "ACTIVE"
+    #   resp.table_description.global_table_settings_replication_mode #=> String, one of "ENABLED", "DISABLED", "ENABLED_WITH_OVERRIDES"
     #   resp.table_description.restore_summary.source_backup_arn #=> String
     #   resp.table_description.restore_summary.source_table_arn #=> String
     #   resp.table_description.restore_summary.restore_date_time #=> Time
@@ -8681,7 +8729,7 @@ module Aws::DynamoDB
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-dynamodb'
-      context[:gem_version] = '1.159.0'
+      context[:gem_version] = '1.162.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
@@ -8747,10 +8795,14 @@ module Aws::DynamoDB
     # The following table lists the valid waiter names, the operations they call,
     # and the default `:delay` and `:max_attempts` values.
     #
-    # | waiter_name      | params                  | :delay   | :max_attempts |
-    # | ---------------- | ----------------------- | -------- | ------------- |
-    # | table_exists     | {Client#describe_table} | 20       | 25            |
-    # | table_not_exists | {Client#describe_table} | 20       | 25            |
+    # | waiter_name                          | params                                          | :delay   | :max_attempts |
+    # | ------------------------------------ | ----------------------------------------------- | -------- | ------------- |
+    # | contributor_insights_enabled         | {Client#describe_contributor_insights}          | 20       | 30            |
+    # | export_completed                     | {Client#describe_export}                        | 20       | 60            |
+    # | import_completed                     | {Client#describe_import}                        | 20       | 60            |
+    # | kinesis_streaming_destination_active | {Client#describe_kinesis_streaming_destination} | 20       | 30            |
+    # | table_exists                         | {Client#describe_table}                         | 20       | 25            |
+    # | table_not_exists                     | {Client#describe_table}                         | 20       | 25            |
     #
     # @raise [Errors::FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition
@@ -8801,6 +8853,10 @@ module Aws::DynamoDB
 
     def waiters
       {
+        contributor_insights_enabled: Waiters::ContributorInsightsEnabled,
+        export_completed: Waiters::ExportCompleted,
+        import_completed: Waiters::ImportCompleted,
+        kinesis_streaming_destination_active: Waiters::KinesisStreamingDestinationActive,
         table_exists: Waiters::TableExists,
         table_not_exists: Waiters::TableNotExists
       }

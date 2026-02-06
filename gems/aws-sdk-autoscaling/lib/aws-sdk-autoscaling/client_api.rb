@@ -120,6 +120,7 @@ module Aws::AutoScaling
     DeleteTagsType = Shapes::StructureShape.new(name: 'DeleteTagsType')
     DeleteWarmPoolAnswer = Shapes::StructureShape.new(name: 'DeleteWarmPoolAnswer')
     DeleteWarmPoolType = Shapes::StructureShape.new(name: 'DeleteWarmPoolType')
+    DeletionProtection = Shapes::StringShape.new(name: 'DeletionProtection')
     DescribeAccountLimitsAnswer = Shapes::StructureShape.new(name: 'DescribeAccountLimitsAnswer')
     DescribeAdjustmentTypesAnswer = Shapes::StructureShape.new(name: 'DescribeAdjustmentTypesAnswer')
     DescribeAutoScalingInstancesType = Shapes::StructureShape.new(name: 'DescribeAutoScalingInstancesType')
@@ -555,6 +556,7 @@ module Aws::AutoScaling
     AutoScalingGroup.add_member(:default_instance_warmup, Shapes::ShapeRef.new(shape: DefaultInstanceWarmup, location_name: "DefaultInstanceWarmup"))
     AutoScalingGroup.add_member(:traffic_sources, Shapes::ShapeRef.new(shape: TrafficSources, location_name: "TrafficSources"))
     AutoScalingGroup.add_member(:instance_maintenance_policy, Shapes::ShapeRef.new(shape: InstanceMaintenancePolicy, location_name: "InstanceMaintenancePolicy"))
+    AutoScalingGroup.add_member(:deletion_protection, Shapes::ShapeRef.new(shape: DeletionProtection, location_name: "DeletionProtection"))
     AutoScalingGroup.add_member(:availability_zone_distribution, Shapes::ShapeRef.new(shape: AvailabilityZoneDistribution, location_name: "AvailabilityZoneDistribution"))
     AutoScalingGroup.add_member(:availability_zone_impairment_policy, Shapes::ShapeRef.new(shape: AvailabilityZoneImpairmentPolicy, location_name: "AvailabilityZoneImpairmentPolicy"))
     AutoScalingGroup.add_member(:capacity_reservation_specification, Shapes::ShapeRef.new(shape: CapacityReservationSpecification, location_name: "CapacityReservationSpecification"))
@@ -700,6 +702,7 @@ module Aws::AutoScaling
     CreateAutoScalingGroupType.add_member(:new_instances_protected_from_scale_in, Shapes::ShapeRef.new(shape: InstanceProtected, location_name: "NewInstancesProtectedFromScaleIn"))
     CreateAutoScalingGroupType.add_member(:capacity_rebalance, Shapes::ShapeRef.new(shape: CapacityRebalanceEnabled, location_name: "CapacityRebalance"))
     CreateAutoScalingGroupType.add_member(:lifecycle_hook_specification_list, Shapes::ShapeRef.new(shape: LifecycleHookSpecifications, location_name: "LifecycleHookSpecificationList"))
+    CreateAutoScalingGroupType.add_member(:deletion_protection, Shapes::ShapeRef.new(shape: DeletionProtection, location_name: "DeletionProtection"))
     CreateAutoScalingGroupType.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     CreateAutoScalingGroupType.add_member(:service_linked_role_arn, Shapes::ShapeRef.new(shape: ResourceName, location_name: "ServiceLinkedRoleARN"))
     CreateAutoScalingGroupType.add_member(:max_instance_lifetime, Shapes::ShapeRef.new(shape: MaxInstanceLifetime, location_name: "MaxInstanceLifetime"))
@@ -859,6 +862,7 @@ module Aws::AutoScaling
     DescribeScalingActivitiesType.add_member(:include_deleted_groups, Shapes::ShapeRef.new(shape: IncludeDeletedGroups, location_name: "IncludeDeletedGroups"))
     DescribeScalingActivitiesType.add_member(:max_records, Shapes::ShapeRef.new(shape: MaxRecords, location_name: "MaxRecords"))
     DescribeScalingActivitiesType.add_member(:next_token, Shapes::ShapeRef.new(shape: XmlString, location_name: "NextToken"))
+    DescribeScalingActivitiesType.add_member(:filters, Shapes::ShapeRef.new(shape: Filters, location_name: "Filters"))
     DescribeScalingActivitiesType.struct_class = Types::DescribeScalingActivitiesType
 
     DescribeScheduledActionsType.add_member(:auto_scaling_group_name, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, location_name: "AutoScalingGroupName"))
@@ -1695,6 +1699,7 @@ module Aws::AutoScaling
     UpdateAutoScalingGroupType.add_member(:skip_zonal_shift_validation, Shapes::ShapeRef.new(shape: SkipZonalShiftValidation, location_name: "SkipZonalShiftValidation"))
     UpdateAutoScalingGroupType.add_member(:capacity_reservation_specification, Shapes::ShapeRef.new(shape: CapacityReservationSpecification, location_name: "CapacityReservationSpecification"))
     UpdateAutoScalingGroupType.add_member(:instance_lifecycle_policy, Shapes::ShapeRef.new(shape: InstanceLifecyclePolicy, location_name: "InstanceLifecyclePolicy"))
+    UpdateAutoScalingGroupType.add_member(:deletion_protection, Shapes::ShapeRef.new(shape: DeletionProtection, location_name: "DeletionProtection"))
     UpdateAutoScalingGroupType.struct_class = Types::UpdateAutoScalingGroupType
 
     VCpuCountRequest.add_member(:min, Shapes::ShapeRef.new(shape: NullablePositiveInteger, required: true, location_name: "Min"))

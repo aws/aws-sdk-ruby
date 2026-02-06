@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.49.0 (2026-01-23)
+------------------
+
+* Feature - Fixes incorrect types in the UpdateAssistantAIAgent API request, adds MESSAGE to TargetType enum, and other minor changes.
+
+1.48.0 (2026-01-16)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.47.0 (2026-01-15)
+------------------
+
+* Feature - Fix inference configuration shapes for the CreateAIPrompt and UpdateAIPrompt APIs, Modify Text Length Limit for SendMessage API
+
 1.46.0 (2026-01-08)
 ------------------
 

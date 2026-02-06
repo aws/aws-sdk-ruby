@@ -15,7 +15,17 @@ module Aws
     include RefreshingCredentials
 
     # @api private
-    class Non200Response < RuntimeError; end
+    class Non200Response < RuntimeError
+      attr_reader :status_code, :body
+
+      def initialize(status_code, body = nil)
+        @status_code = status_code
+        @body = body
+        msg = "HTTP #{status_code}"
+        msg += ": #{body}" if body && !body.empty?
+        super(msg)
+      end
+    end
 
     # Raised when the token file cannot be read.
     class TokenFileReadError < RuntimeError; end
@@ -251,7 +261,7 @@ module Aws
       request = Net::HTTP::Get.new(path)
       set_authorization_token(request)
       response = connection.request(request)
-      raise Non200Response unless response.code.to_i == 200
+      raise Non200Response.new(response.code.to_i, response.body) unless response.code.to_i == 200
 
       response.body
     end

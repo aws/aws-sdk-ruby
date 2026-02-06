@@ -206,6 +206,7 @@ module Aws
                               role_arn: ::String?
                             },
                           ],
+                          ?deletion_protection: ("none" | "prevent-force-deletion" | "prevent-all-deletion"),
                           ?tags: Array[
                             {
                               resource_id: ::String?,
@@ -303,7 +304,13 @@ module Aws
       def activities: (
                         ?activity_ids: Array[::String],
                         ?auto_scaling_group_name: ::String,
-                        ?include_deleted_groups: bool
+                        ?include_deleted_groups: bool,
+                        ?filters: Array[
+                          {
+                            name: ::String?,
+                            values: Array[::String]?
+                          },
+                        ]
                       ) -> Activity::Collection
                     | (?Hash[Symbol, untyped]) -> Activity::Collection
 

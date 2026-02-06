@@ -1073,6 +1073,8 @@ module Aws::MediaLive
     # @option params [Types::LinkedChannelSettings] :linked_channel_settings
     #   Configuration for linked channel relationships
     #
+    # @option params [Array<String>] :channel_security_groups
+    #
     # @return [Types::CreateChannelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateChannelResponse#channel #channel} => Types::Channel
@@ -1101,6 +1103,8 @@ module Aws::MediaLive
     #   resp.channel.destinations[0].srt_settings[0].encryption_passphrase_secret_arn #=> String
     #   resp.channel.destinations[0].srt_settings[0].stream_id #=> String
     #   resp.channel.destinations[0].srt_settings[0].url #=> String
+    #   resp.channel.destinations[0].srt_settings[0].connection_mode #=> String, one of "CALLER", "LISTENER"
+    #   resp.channel.destinations[0].srt_settings[0].listener_port #=> Integer
     #   resp.channel.destinations[0].logical_interface_names #=> Array
     #   resp.channel.destinations[0].logical_interface_names[0] #=> String
     #   resp.channel.egress_endpoints #=> Array
@@ -1283,6 +1287,8 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.global_configuration.output_locking_settings.epoch_locking_settings.custom_epoch #=> String
     #   resp.channel.encoder_settings.global_configuration.output_locking_settings.epoch_locking_settings.jam_sync_time #=> String
     #   resp.channel.encoder_settings.global_configuration.output_locking_settings.pipeline_locking_settings.pipeline_locking_method #=> String, one of "SOURCE_TIMECODE", "VIDEO_ALIGNMENT"
+    #   resp.channel.encoder_settings.global_configuration.output_locking_settings.pipeline_locking_settings.custom_epoch #=> String
+    #   resp.channel.encoder_settings.global_configuration.output_locking_settings.disabled_locking_settings.custom_epoch #=> String
     #   resp.channel.encoder_settings.motion_graphics_configuration.motion_graphics_insertion #=> String, one of "DISABLED", "ENABLED"
     #   resp.channel.encoder_settings.nielsen_configuration.distributor_id #=> String
     #   resp.channel.encoder_settings.nielsen_configuration.nielsen_pcm_to_id_3_tagging #=> String, one of "DISABLED", "ENABLED"
@@ -1817,6 +1823,8 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.av_1_settings.min_bitrate #=> Integer
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.av_1_settings.spatial_aq #=> String, one of "DISABLED", "ENABLED"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.av_1_settings.temporal_aq #=> String, one of "DISABLED", "ENABLED"
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.av_1_settings.timecode_insertion #=> String, one of "DISABLED", "METADATA_OBU"
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.av_1_settings.bit_depth #=> String, one of "DEPTH_10", "DEPTH_8"
     #   resp.channel.encoder_settings.video_descriptions[0].height #=> Integer
     #   resp.channel.encoder_settings.video_descriptions[0].name #=> String
     #   resp.channel.encoder_settings.video_descriptions[0].respond_to_afd #=> String, one of "NONE", "PASSTHROUGH", "RESPOND"
@@ -1931,6 +1939,8 @@ module Aws::MediaLive
     #   resp.channel.linked_channel_settings.primary_channel_settings.following_channel_arns #=> Array
     #   resp.channel.linked_channel_settings.primary_channel_settings.following_channel_arns[0] #=> String
     #   resp.channel.linked_channel_settings.primary_channel_settings.linked_channel_type #=> String, one of "FOLLOWING_CHANNEL", "PRIMARY_CHANNEL"
+    #   resp.channel.channel_security_groups #=> Array
+    #   resp.channel.channel_security_groups[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CreateChannel AWS API Documentation
     #
@@ -1974,9 +1984,9 @@ module Aws::MediaLive
     #   inputSecurityGroups property.
     #
     # @option params [Types::SrtSettingsRequest] :srt_settings
-    #   Configures the sources for this SRT input. For a single-pipeline
-    #   input, include one srtCallerSource in the array. For a
-    #   standard-pipeline input, include two srtCallerSource.
+    #   Configures the settings for SRT inputs. Provide either
+    #   srtCallerSources (for SRT\_CALLER type) OR srtListenerSettings (for
+    #   SRT\_LISTENER type), not both.
     #
     # @option params [String] :input_network_location
     #   With the introduction of MediaLive Anywhere, a MediaLive input can now
@@ -2041,7 +2051,7 @@ module Aws::MediaLive
     #     tags: {
     #       "__string" => "__string",
     #     },
-    #     type: "UDP_PUSH", # accepts UDP_PUSH, RTP_PUSH, RTMP_PUSH, RTMP_PULL, URL_PULL, MP4_FILE, MEDIACONNECT, INPUT_DEVICE, AWS_CDI, TS_FILE, SRT_CALLER, MULTICAST, SMPTE_2110_RECEIVER_GROUP, SDI, MEDIACONNECT_ROUTER
+    #     type: "UDP_PUSH", # accepts UDP_PUSH, RTP_PUSH, RTMP_PUSH, RTMP_PULL, URL_PULL, MP4_FILE, MEDIACONNECT, INPUT_DEVICE, AWS_CDI, TS_FILE, SRT_CALLER, MULTICAST, SMPTE_2110_RECEIVER_GROUP, SDI, MEDIACONNECT_ROUTER, SRT_LISTENER
     #     vpc: {
     #       security_group_ids: ["__string"],
     #       subnet_ids: ["__string"], # required
@@ -2059,6 +2069,14 @@ module Aws::MediaLive
     #           stream_id: "__string",
     #         },
     #       ],
+    #       srt_listener_settings: {
+    #         decryption: { # required
+    #           algorithm: "AES128", # required, accepts AES128, AES192, AES256
+    #           passphrase_secret_arn: "__string", # required
+    #         },
+    #         minimum_latency: 1, # required
+    #         stream_id: "__string",
+    #       },
     #     },
     #     input_network_location: "AWS", # accepts AWS, ON_PREMISES
     #     multicast_settings: {
@@ -2140,7 +2158,7 @@ module Aws::MediaLive
     #   resp.input.state #=> String, one of "CREATING", "DETACHED", "ATTACHED", "DELETING", "DELETED"
     #   resp.input.tags #=> Hash
     #   resp.input.tags["__string"] #=> String
-    #   resp.input.type #=> String, one of "UDP_PUSH", "RTP_PUSH", "RTMP_PUSH", "RTMP_PULL", "URL_PULL", "MP4_FILE", "MEDIACONNECT", "INPUT_DEVICE", "AWS_CDI", "TS_FILE", "SRT_CALLER", "MULTICAST", "SMPTE_2110_RECEIVER_GROUP", "SDI", "MEDIACONNECT_ROUTER"
+    #   resp.input.type #=> String, one of "UDP_PUSH", "RTP_PUSH", "RTMP_PUSH", "RTMP_PULL", "URL_PULL", "MP4_FILE", "MEDIACONNECT", "INPUT_DEVICE", "AWS_CDI", "TS_FILE", "SRT_CALLER", "MULTICAST", "SMPTE_2110_RECEIVER_GROUP", "SDI", "MEDIACONNECT_ROUTER", "SRT_LISTENER"
     #   resp.input.srt_settings.srt_caller_sources #=> Array
     #   resp.input.srt_settings.srt_caller_sources[0].decryption.algorithm #=> String, one of "AES128", "AES192", "AES256"
     #   resp.input.srt_settings.srt_caller_sources[0].decryption.passphrase_secret_arn #=> String
@@ -2148,6 +2166,10 @@ module Aws::MediaLive
     #   resp.input.srt_settings.srt_caller_sources[0].srt_listener_address #=> String
     #   resp.input.srt_settings.srt_caller_sources[0].srt_listener_port #=> String
     #   resp.input.srt_settings.srt_caller_sources[0].stream_id #=> String
+    #   resp.input.srt_settings.srt_listener_settings.decryption.algorithm #=> String, one of "AES128", "AES192", "AES256"
+    #   resp.input.srt_settings.srt_listener_settings.decryption.passphrase_secret_arn #=> String
+    #   resp.input.srt_settings.srt_listener_settings.minimum_latency #=> Integer
+    #   resp.input.srt_settings.srt_listener_settings.stream_id #=> String
     #   resp.input.input_network_location #=> String, one of "AWS", "ON_PREMISES"
     #   resp.input.multicast_settings.sources #=> Array
     #   resp.input.multicast_settings.sources[0].source_ip #=> String
@@ -2212,6 +2234,8 @@ module Aws::MediaLive
     #   resp.security_group.tags["__string"] #=> String
     #   resp.security_group.whitelist_rules #=> Array
     #   resp.security_group.whitelist_rules[0].cidr #=> String
+    #   resp.security_group.channels #=> Array
+    #   resp.security_group.channels[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CreateInputSecurityGroup AWS API Documentation
     #
@@ -2433,7 +2457,7 @@ module Aws::MediaLive
     #   resp.input.state #=> String, one of "CREATING", "DETACHED", "ATTACHED", "DELETING", "DELETED"
     #   resp.input.tags #=> Hash
     #   resp.input.tags["__string"] #=> String
-    #   resp.input.type #=> String, one of "UDP_PUSH", "RTP_PUSH", "RTMP_PUSH", "RTMP_PULL", "URL_PULL", "MP4_FILE", "MEDIACONNECT", "INPUT_DEVICE", "AWS_CDI", "TS_FILE", "SRT_CALLER", "MULTICAST", "SMPTE_2110_RECEIVER_GROUP", "SDI", "MEDIACONNECT_ROUTER"
+    #   resp.input.type #=> String, one of "UDP_PUSH", "RTP_PUSH", "RTMP_PUSH", "RTMP_PULL", "URL_PULL", "MP4_FILE", "MEDIACONNECT", "INPUT_DEVICE", "AWS_CDI", "TS_FILE", "SRT_CALLER", "MULTICAST", "SMPTE_2110_RECEIVER_GROUP", "SDI", "MEDIACONNECT_ROUTER", "SRT_LISTENER"
     #   resp.input.srt_settings.srt_caller_sources #=> Array
     #   resp.input.srt_settings.srt_caller_sources[0].decryption.algorithm #=> String, one of "AES128", "AES192", "AES256"
     #   resp.input.srt_settings.srt_caller_sources[0].decryption.passphrase_secret_arn #=> String
@@ -2441,6 +2465,10 @@ module Aws::MediaLive
     #   resp.input.srt_settings.srt_caller_sources[0].srt_listener_address #=> String
     #   resp.input.srt_settings.srt_caller_sources[0].srt_listener_port #=> String
     #   resp.input.srt_settings.srt_caller_sources[0].stream_id #=> String
+    #   resp.input.srt_settings.srt_listener_settings.decryption.algorithm #=> String, one of "AES128", "AES192", "AES256"
+    #   resp.input.srt_settings.srt_listener_settings.decryption.passphrase_secret_arn #=> String
+    #   resp.input.srt_settings.srt_listener_settings.minimum_latency #=> Integer
+    #   resp.input.srt_settings.srt_listener_settings.stream_id #=> String
     #   resp.input.input_network_location #=> String, one of "AWS", "ON_PREMISES"
     #   resp.input.multicast_settings.sources #=> Array
     #   resp.input.multicast_settings.sources[0].source_ip #=> String
@@ -2524,6 +2552,7 @@ module Aws::MediaLive
     #   * {Types::DeleteChannelResponse#anywhere_settings #anywhere_settings} => Types::DescribeAnywhereSettings
     #   * {Types::DeleteChannelResponse#channel_engine_version #channel_engine_version} => Types::ChannelEngineVersionResponse
     #   * {Types::DeleteChannelResponse#linked_channel_settings #linked_channel_settings} => Types::DescribeLinkedChannelSettings
+    #   * {Types::DeleteChannelResponse#channel_security_groups #channel_security_groups} => Array&lt;String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -2555,6 +2584,8 @@ module Aws::MediaLive
     #   resp.destinations[0].srt_settings[0].encryption_passphrase_secret_arn #=> String
     #   resp.destinations[0].srt_settings[0].stream_id #=> String
     #   resp.destinations[0].srt_settings[0].url #=> String
+    #   resp.destinations[0].srt_settings[0].connection_mode #=> String, one of "CALLER", "LISTENER"
+    #   resp.destinations[0].srt_settings[0].listener_port #=> Integer
     #   resp.destinations[0].logical_interface_names #=> Array
     #   resp.destinations[0].logical_interface_names[0] #=> String
     #   resp.egress_endpoints #=> Array
@@ -2737,6 +2768,8 @@ module Aws::MediaLive
     #   resp.encoder_settings.global_configuration.output_locking_settings.epoch_locking_settings.custom_epoch #=> String
     #   resp.encoder_settings.global_configuration.output_locking_settings.epoch_locking_settings.jam_sync_time #=> String
     #   resp.encoder_settings.global_configuration.output_locking_settings.pipeline_locking_settings.pipeline_locking_method #=> String, one of "SOURCE_TIMECODE", "VIDEO_ALIGNMENT"
+    #   resp.encoder_settings.global_configuration.output_locking_settings.pipeline_locking_settings.custom_epoch #=> String
+    #   resp.encoder_settings.global_configuration.output_locking_settings.disabled_locking_settings.custom_epoch #=> String
     #   resp.encoder_settings.motion_graphics_configuration.motion_graphics_insertion #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.nielsen_configuration.distributor_id #=> String
     #   resp.encoder_settings.nielsen_configuration.nielsen_pcm_to_id_3_tagging #=> String, one of "DISABLED", "ENABLED"
@@ -3271,6 +3304,8 @@ module Aws::MediaLive
     #   resp.encoder_settings.video_descriptions[0].codec_settings.av_1_settings.min_bitrate #=> Integer
     #   resp.encoder_settings.video_descriptions[0].codec_settings.av_1_settings.spatial_aq #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.av_1_settings.temporal_aq #=> String, one of "DISABLED", "ENABLED"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.av_1_settings.timecode_insertion #=> String, one of "DISABLED", "METADATA_OBU"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.av_1_settings.bit_depth #=> String, one of "DEPTH_10", "DEPTH_8"
     #   resp.encoder_settings.video_descriptions[0].height #=> Integer
     #   resp.encoder_settings.video_descriptions[0].name #=> String
     #   resp.encoder_settings.video_descriptions[0].respond_to_afd #=> String, one of "NONE", "PASSTHROUGH", "RESPOND"
@@ -3385,6 +3420,8 @@ module Aws::MediaLive
     #   resp.linked_channel_settings.primary_channel_settings.following_channel_arns #=> Array
     #   resp.linked_channel_settings.primary_channel_settings.following_channel_arns[0] #=> String
     #   resp.linked_channel_settings.primary_channel_settings.linked_channel_type #=> String, one of "FOLLOWING_CHANNEL", "PRIMARY_CHANNEL"
+    #   resp.channel_security_groups #=> Array
+    #   resp.channel_security_groups[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DeleteChannel AWS API Documentation
     #
@@ -3719,6 +3756,7 @@ module Aws::MediaLive
     #   * {Types::DescribeChannelResponse#anywhere_settings #anywhere_settings} => Types::DescribeAnywhereSettings
     #   * {Types::DescribeChannelResponse#channel_engine_version #channel_engine_version} => Types::ChannelEngineVersionResponse
     #   * {Types::DescribeChannelResponse#linked_channel_settings #linked_channel_settings} => Types::DescribeLinkedChannelSettings
+    #   * {Types::DescribeChannelResponse#channel_security_groups #channel_security_groups} => Array&lt;String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -3750,6 +3788,8 @@ module Aws::MediaLive
     #   resp.destinations[0].srt_settings[0].encryption_passphrase_secret_arn #=> String
     #   resp.destinations[0].srt_settings[0].stream_id #=> String
     #   resp.destinations[0].srt_settings[0].url #=> String
+    #   resp.destinations[0].srt_settings[0].connection_mode #=> String, one of "CALLER", "LISTENER"
+    #   resp.destinations[0].srt_settings[0].listener_port #=> Integer
     #   resp.destinations[0].logical_interface_names #=> Array
     #   resp.destinations[0].logical_interface_names[0] #=> String
     #   resp.egress_endpoints #=> Array
@@ -3932,6 +3972,8 @@ module Aws::MediaLive
     #   resp.encoder_settings.global_configuration.output_locking_settings.epoch_locking_settings.custom_epoch #=> String
     #   resp.encoder_settings.global_configuration.output_locking_settings.epoch_locking_settings.jam_sync_time #=> String
     #   resp.encoder_settings.global_configuration.output_locking_settings.pipeline_locking_settings.pipeline_locking_method #=> String, one of "SOURCE_TIMECODE", "VIDEO_ALIGNMENT"
+    #   resp.encoder_settings.global_configuration.output_locking_settings.pipeline_locking_settings.custom_epoch #=> String
+    #   resp.encoder_settings.global_configuration.output_locking_settings.disabled_locking_settings.custom_epoch #=> String
     #   resp.encoder_settings.motion_graphics_configuration.motion_graphics_insertion #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.nielsen_configuration.distributor_id #=> String
     #   resp.encoder_settings.nielsen_configuration.nielsen_pcm_to_id_3_tagging #=> String, one of "DISABLED", "ENABLED"
@@ -4466,6 +4508,8 @@ module Aws::MediaLive
     #   resp.encoder_settings.video_descriptions[0].codec_settings.av_1_settings.min_bitrate #=> Integer
     #   resp.encoder_settings.video_descriptions[0].codec_settings.av_1_settings.spatial_aq #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.av_1_settings.temporal_aq #=> String, one of "DISABLED", "ENABLED"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.av_1_settings.timecode_insertion #=> String, one of "DISABLED", "METADATA_OBU"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.av_1_settings.bit_depth #=> String, one of "DEPTH_10", "DEPTH_8"
     #   resp.encoder_settings.video_descriptions[0].height #=> Integer
     #   resp.encoder_settings.video_descriptions[0].name #=> String
     #   resp.encoder_settings.video_descriptions[0].respond_to_afd #=> String, one of "NONE", "PASSTHROUGH", "RESPOND"
@@ -4580,6 +4624,8 @@ module Aws::MediaLive
     #   resp.linked_channel_settings.primary_channel_settings.following_channel_arns #=> Array
     #   resp.linked_channel_settings.primary_channel_settings.following_channel_arns[0] #=> String
     #   resp.linked_channel_settings.primary_channel_settings.linked_channel_type #=> String, one of "FOLLOWING_CHANNEL", "PRIMARY_CHANNEL"
+    #   resp.channel_security_groups #=> Array
+    #   resp.channel_security_groups[0] #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -4668,7 +4714,7 @@ module Aws::MediaLive
     #   resp.state #=> String, one of "CREATING", "DETACHED", "ATTACHED", "DELETING", "DELETED"
     #   resp.tags #=> Hash
     #   resp.tags["__string"] #=> String
-    #   resp.type #=> String, one of "UDP_PUSH", "RTP_PUSH", "RTMP_PUSH", "RTMP_PULL", "URL_PULL", "MP4_FILE", "MEDIACONNECT", "INPUT_DEVICE", "AWS_CDI", "TS_FILE", "SRT_CALLER", "MULTICAST", "SMPTE_2110_RECEIVER_GROUP", "SDI", "MEDIACONNECT_ROUTER"
+    #   resp.type #=> String, one of "UDP_PUSH", "RTP_PUSH", "RTMP_PUSH", "RTMP_PULL", "URL_PULL", "MP4_FILE", "MEDIACONNECT", "INPUT_DEVICE", "AWS_CDI", "TS_FILE", "SRT_CALLER", "MULTICAST", "SMPTE_2110_RECEIVER_GROUP", "SDI", "MEDIACONNECT_ROUTER", "SRT_LISTENER"
     #   resp.srt_settings.srt_caller_sources #=> Array
     #   resp.srt_settings.srt_caller_sources[0].decryption.algorithm #=> String, one of "AES128", "AES192", "AES256"
     #   resp.srt_settings.srt_caller_sources[0].decryption.passphrase_secret_arn #=> String
@@ -4676,6 +4722,10 @@ module Aws::MediaLive
     #   resp.srt_settings.srt_caller_sources[0].srt_listener_address #=> String
     #   resp.srt_settings.srt_caller_sources[0].srt_listener_port #=> String
     #   resp.srt_settings.srt_caller_sources[0].stream_id #=> String
+    #   resp.srt_settings.srt_listener_settings.decryption.algorithm #=> String, one of "AES128", "AES192", "AES256"
+    #   resp.srt_settings.srt_listener_settings.decryption.passphrase_secret_arn #=> String
+    #   resp.srt_settings.srt_listener_settings.minimum_latency #=> Integer
+    #   resp.srt_settings.srt_listener_settings.stream_id #=> String
     #   resp.input_network_location #=> String, one of "AWS", "ON_PREMISES"
     #   resp.multicast_settings.sources #=> Array
     #   resp.multicast_settings.sources[0].source_ip #=> String
@@ -4853,6 +4903,7 @@ module Aws::MediaLive
     #   * {Types::DescribeInputSecurityGroupResponse#state #state} => String
     #   * {Types::DescribeInputSecurityGroupResponse#tags #tags} => Hash&lt;String,String&gt;
     #   * {Types::DescribeInputSecurityGroupResponse#whitelist_rules #whitelist_rules} => Array&lt;Types::InputWhitelistRule&gt;
+    #   * {Types::DescribeInputSecurityGroupResponse#channels #channels} => Array&lt;String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -4871,6 +4922,8 @@ module Aws::MediaLive
     #   resp.tags["__string"] #=> String
     #   resp.whitelist_rules #=> Array
     #   resp.whitelist_rules[0].cidr #=> String
+    #   resp.channels #=> Array
+    #   resp.channels[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeInputSecurityGroup AWS API Documentation
     #
@@ -5337,6 +5390,8 @@ module Aws::MediaLive
     #   resp.channels[0].destinations[0].srt_settings[0].encryption_passphrase_secret_arn #=> String
     #   resp.channels[0].destinations[0].srt_settings[0].stream_id #=> String
     #   resp.channels[0].destinations[0].srt_settings[0].url #=> String
+    #   resp.channels[0].destinations[0].srt_settings[0].connection_mode #=> String, one of "CALLER", "LISTENER"
+    #   resp.channels[0].destinations[0].srt_settings[0].listener_port #=> Integer
     #   resp.channels[0].destinations[0].logical_interface_names #=> Array
     #   resp.channels[0].destinations[0].logical_interface_names[0] #=> String
     #   resp.channels[0].egress_endpoints #=> Array
@@ -5439,6 +5494,8 @@ module Aws::MediaLive
     #   resp.channels[0].linked_channel_settings.primary_channel_settings.following_channel_arns #=> Array
     #   resp.channels[0].linked_channel_settings.primary_channel_settings.following_channel_arns[0] #=> String
     #   resp.channels[0].linked_channel_settings.primary_channel_settings.linked_channel_type #=> String, one of "FOLLOWING_CHANNEL", "PRIMARY_CHANNEL"
+    #   resp.channels[0].channel_security_groups #=> Array
+    #   resp.channels[0].channel_security_groups[0] #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ListChannels AWS API Documentation
@@ -5607,6 +5664,8 @@ module Aws::MediaLive
     #   resp.input_security_groups[0].tags["__string"] #=> String
     #   resp.input_security_groups[0].whitelist_rules #=> Array
     #   resp.input_security_groups[0].whitelist_rules[0].cidr #=> String
+    #   resp.input_security_groups[0].channels #=> Array
+    #   resp.input_security_groups[0].channels[0] #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ListInputSecurityGroups AWS API Documentation
@@ -5674,7 +5733,7 @@ module Aws::MediaLive
     #   resp.inputs[0].state #=> String, one of "CREATING", "DETACHED", "ATTACHED", "DELETING", "DELETED"
     #   resp.inputs[0].tags #=> Hash
     #   resp.inputs[0].tags["__string"] #=> String
-    #   resp.inputs[0].type #=> String, one of "UDP_PUSH", "RTP_PUSH", "RTMP_PUSH", "RTMP_PULL", "URL_PULL", "MP4_FILE", "MEDIACONNECT", "INPUT_DEVICE", "AWS_CDI", "TS_FILE", "SRT_CALLER", "MULTICAST", "SMPTE_2110_RECEIVER_GROUP", "SDI", "MEDIACONNECT_ROUTER"
+    #   resp.inputs[0].type #=> String, one of "UDP_PUSH", "RTP_PUSH", "RTMP_PUSH", "RTMP_PULL", "URL_PULL", "MP4_FILE", "MEDIACONNECT", "INPUT_DEVICE", "AWS_CDI", "TS_FILE", "SRT_CALLER", "MULTICAST", "SMPTE_2110_RECEIVER_GROUP", "SDI", "MEDIACONNECT_ROUTER", "SRT_LISTENER"
     #   resp.inputs[0].srt_settings.srt_caller_sources #=> Array
     #   resp.inputs[0].srt_settings.srt_caller_sources[0].decryption.algorithm #=> String, one of "AES128", "AES192", "AES256"
     #   resp.inputs[0].srt_settings.srt_caller_sources[0].decryption.passphrase_secret_arn #=> String
@@ -5682,6 +5741,10 @@ module Aws::MediaLive
     #   resp.inputs[0].srt_settings.srt_caller_sources[0].srt_listener_address #=> String
     #   resp.inputs[0].srt_settings.srt_caller_sources[0].srt_listener_port #=> String
     #   resp.inputs[0].srt_settings.srt_caller_sources[0].stream_id #=> String
+    #   resp.inputs[0].srt_settings.srt_listener_settings.decryption.algorithm #=> String, one of "AES128", "AES192", "AES256"
+    #   resp.inputs[0].srt_settings.srt_listener_settings.decryption.passphrase_secret_arn #=> String
+    #   resp.inputs[0].srt_settings.srt_listener_settings.minimum_latency #=> Integer
+    #   resp.inputs[0].srt_settings.srt_listener_settings.stream_id #=> String
     #   resp.inputs[0].input_network_location #=> String, one of "AWS", "ON_PREMISES"
     #   resp.inputs[0].multicast_settings.sources #=> Array
     #   resp.inputs[0].multicast_settings.sources[0].source_ip #=> String
@@ -6149,6 +6212,7 @@ module Aws::MediaLive
     #   * {Types::StartChannelResponse#anywhere_settings #anywhere_settings} => Types::DescribeAnywhereSettings
     #   * {Types::StartChannelResponse#channel_engine_version #channel_engine_version} => Types::ChannelEngineVersionResponse
     #   * {Types::StartChannelResponse#linked_channel_settings #linked_channel_settings} => Types::DescribeLinkedChannelSettings
+    #   * {Types::StartChannelResponse#channel_security_groups #channel_security_groups} => Array&lt;String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -6180,6 +6244,8 @@ module Aws::MediaLive
     #   resp.destinations[0].srt_settings[0].encryption_passphrase_secret_arn #=> String
     #   resp.destinations[0].srt_settings[0].stream_id #=> String
     #   resp.destinations[0].srt_settings[0].url #=> String
+    #   resp.destinations[0].srt_settings[0].connection_mode #=> String, one of "CALLER", "LISTENER"
+    #   resp.destinations[0].srt_settings[0].listener_port #=> Integer
     #   resp.destinations[0].logical_interface_names #=> Array
     #   resp.destinations[0].logical_interface_names[0] #=> String
     #   resp.egress_endpoints #=> Array
@@ -6362,6 +6428,8 @@ module Aws::MediaLive
     #   resp.encoder_settings.global_configuration.output_locking_settings.epoch_locking_settings.custom_epoch #=> String
     #   resp.encoder_settings.global_configuration.output_locking_settings.epoch_locking_settings.jam_sync_time #=> String
     #   resp.encoder_settings.global_configuration.output_locking_settings.pipeline_locking_settings.pipeline_locking_method #=> String, one of "SOURCE_TIMECODE", "VIDEO_ALIGNMENT"
+    #   resp.encoder_settings.global_configuration.output_locking_settings.pipeline_locking_settings.custom_epoch #=> String
+    #   resp.encoder_settings.global_configuration.output_locking_settings.disabled_locking_settings.custom_epoch #=> String
     #   resp.encoder_settings.motion_graphics_configuration.motion_graphics_insertion #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.nielsen_configuration.distributor_id #=> String
     #   resp.encoder_settings.nielsen_configuration.nielsen_pcm_to_id_3_tagging #=> String, one of "DISABLED", "ENABLED"
@@ -6896,6 +6964,8 @@ module Aws::MediaLive
     #   resp.encoder_settings.video_descriptions[0].codec_settings.av_1_settings.min_bitrate #=> Integer
     #   resp.encoder_settings.video_descriptions[0].codec_settings.av_1_settings.spatial_aq #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.av_1_settings.temporal_aq #=> String, one of "DISABLED", "ENABLED"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.av_1_settings.timecode_insertion #=> String, one of "DISABLED", "METADATA_OBU"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.av_1_settings.bit_depth #=> String, one of "DEPTH_10", "DEPTH_8"
     #   resp.encoder_settings.video_descriptions[0].height #=> Integer
     #   resp.encoder_settings.video_descriptions[0].name #=> String
     #   resp.encoder_settings.video_descriptions[0].respond_to_afd #=> String, one of "NONE", "PASSTHROUGH", "RESPOND"
@@ -7010,6 +7080,8 @@ module Aws::MediaLive
     #   resp.linked_channel_settings.primary_channel_settings.following_channel_arns #=> Array
     #   resp.linked_channel_settings.primary_channel_settings.following_channel_arns[0] #=> String
     #   resp.linked_channel_settings.primary_channel_settings.linked_channel_type #=> String, one of "FOLLOWING_CHANNEL", "PRIMARY_CHANNEL"
+    #   resp.channel_security_groups #=> Array
+    #   resp.channel_security_groups[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/StartChannel AWS API Documentation
     #
@@ -7151,6 +7223,7 @@ module Aws::MediaLive
     #   * {Types::StopChannelResponse#anywhere_settings #anywhere_settings} => Types::DescribeAnywhereSettings
     #   * {Types::StopChannelResponse#channel_engine_version #channel_engine_version} => Types::ChannelEngineVersionResponse
     #   * {Types::StopChannelResponse#linked_channel_settings #linked_channel_settings} => Types::DescribeLinkedChannelSettings
+    #   * {Types::StopChannelResponse#channel_security_groups #channel_security_groups} => Array&lt;String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -7182,6 +7255,8 @@ module Aws::MediaLive
     #   resp.destinations[0].srt_settings[0].encryption_passphrase_secret_arn #=> String
     #   resp.destinations[0].srt_settings[0].stream_id #=> String
     #   resp.destinations[0].srt_settings[0].url #=> String
+    #   resp.destinations[0].srt_settings[0].connection_mode #=> String, one of "CALLER", "LISTENER"
+    #   resp.destinations[0].srt_settings[0].listener_port #=> Integer
     #   resp.destinations[0].logical_interface_names #=> Array
     #   resp.destinations[0].logical_interface_names[0] #=> String
     #   resp.egress_endpoints #=> Array
@@ -7364,6 +7439,8 @@ module Aws::MediaLive
     #   resp.encoder_settings.global_configuration.output_locking_settings.epoch_locking_settings.custom_epoch #=> String
     #   resp.encoder_settings.global_configuration.output_locking_settings.epoch_locking_settings.jam_sync_time #=> String
     #   resp.encoder_settings.global_configuration.output_locking_settings.pipeline_locking_settings.pipeline_locking_method #=> String, one of "SOURCE_TIMECODE", "VIDEO_ALIGNMENT"
+    #   resp.encoder_settings.global_configuration.output_locking_settings.pipeline_locking_settings.custom_epoch #=> String
+    #   resp.encoder_settings.global_configuration.output_locking_settings.disabled_locking_settings.custom_epoch #=> String
     #   resp.encoder_settings.motion_graphics_configuration.motion_graphics_insertion #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.nielsen_configuration.distributor_id #=> String
     #   resp.encoder_settings.nielsen_configuration.nielsen_pcm_to_id_3_tagging #=> String, one of "DISABLED", "ENABLED"
@@ -7898,6 +7975,8 @@ module Aws::MediaLive
     #   resp.encoder_settings.video_descriptions[0].codec_settings.av_1_settings.min_bitrate #=> Integer
     #   resp.encoder_settings.video_descriptions[0].codec_settings.av_1_settings.spatial_aq #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.av_1_settings.temporal_aq #=> String, one of "DISABLED", "ENABLED"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.av_1_settings.timecode_insertion #=> String, one of "DISABLED", "METADATA_OBU"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.av_1_settings.bit_depth #=> String, one of "DEPTH_10", "DEPTH_8"
     #   resp.encoder_settings.video_descriptions[0].height #=> Integer
     #   resp.encoder_settings.video_descriptions[0].name #=> String
     #   resp.encoder_settings.video_descriptions[0].respond_to_afd #=> String, one of "NONE", "PASSTHROUGH", "RESPOND"
@@ -8012,6 +8091,8 @@ module Aws::MediaLive
     #   resp.linked_channel_settings.primary_channel_settings.following_channel_arns #=> Array
     #   resp.linked_channel_settings.primary_channel_settings.following_channel_arns[0] #=> String
     #   resp.linked_channel_settings.primary_channel_settings.linked_channel_type #=> String, one of "FOLLOWING_CHANNEL", "PRIMARY_CHANNEL"
+    #   resp.channel_security_groups #=> Array
+    #   resp.channel_security_groups[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/StopChannel AWS API Documentation
     #
@@ -8191,6 +8272,8 @@ module Aws::MediaLive
     # @option params [Types::LinkedChannelSettings] :linked_channel_settings
     #   Configuration for linked channel relationships
     #
+    # @option params [Array<String>] :channel_security_groups
+    #
     # @return [Types::UpdateChannelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateChannelResponse#channel #channel} => Types::Channel
@@ -8219,6 +8302,8 @@ module Aws::MediaLive
     #   resp.channel.destinations[0].srt_settings[0].encryption_passphrase_secret_arn #=> String
     #   resp.channel.destinations[0].srt_settings[0].stream_id #=> String
     #   resp.channel.destinations[0].srt_settings[0].url #=> String
+    #   resp.channel.destinations[0].srt_settings[0].connection_mode #=> String, one of "CALLER", "LISTENER"
+    #   resp.channel.destinations[0].srt_settings[0].listener_port #=> Integer
     #   resp.channel.destinations[0].logical_interface_names #=> Array
     #   resp.channel.destinations[0].logical_interface_names[0] #=> String
     #   resp.channel.egress_endpoints #=> Array
@@ -8401,6 +8486,8 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.global_configuration.output_locking_settings.epoch_locking_settings.custom_epoch #=> String
     #   resp.channel.encoder_settings.global_configuration.output_locking_settings.epoch_locking_settings.jam_sync_time #=> String
     #   resp.channel.encoder_settings.global_configuration.output_locking_settings.pipeline_locking_settings.pipeline_locking_method #=> String, one of "SOURCE_TIMECODE", "VIDEO_ALIGNMENT"
+    #   resp.channel.encoder_settings.global_configuration.output_locking_settings.pipeline_locking_settings.custom_epoch #=> String
+    #   resp.channel.encoder_settings.global_configuration.output_locking_settings.disabled_locking_settings.custom_epoch #=> String
     #   resp.channel.encoder_settings.motion_graphics_configuration.motion_graphics_insertion #=> String, one of "DISABLED", "ENABLED"
     #   resp.channel.encoder_settings.nielsen_configuration.distributor_id #=> String
     #   resp.channel.encoder_settings.nielsen_configuration.nielsen_pcm_to_id_3_tagging #=> String, one of "DISABLED", "ENABLED"
@@ -8935,6 +9022,8 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.av_1_settings.min_bitrate #=> Integer
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.av_1_settings.spatial_aq #=> String, one of "DISABLED", "ENABLED"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.av_1_settings.temporal_aq #=> String, one of "DISABLED", "ENABLED"
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.av_1_settings.timecode_insertion #=> String, one of "DISABLED", "METADATA_OBU"
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.av_1_settings.bit_depth #=> String, one of "DEPTH_10", "DEPTH_8"
     #   resp.channel.encoder_settings.video_descriptions[0].height #=> Integer
     #   resp.channel.encoder_settings.video_descriptions[0].name #=> String
     #   resp.channel.encoder_settings.video_descriptions[0].respond_to_afd #=> String, one of "NONE", "PASSTHROUGH", "RESPOND"
@@ -9049,6 +9138,8 @@ module Aws::MediaLive
     #   resp.channel.linked_channel_settings.primary_channel_settings.following_channel_arns #=> Array
     #   resp.channel.linked_channel_settings.primary_channel_settings.following_channel_arns[0] #=> String
     #   resp.channel.linked_channel_settings.primary_channel_settings.linked_channel_type #=> String, one of "FOLLOWING_CHANNEL", "PRIMARY_CHANNEL"
+    #   resp.channel.channel_security_groups #=> Array
+    #   resp.channel.channel_security_groups[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateChannel AWS API Documentation
     #
@@ -9107,6 +9198,8 @@ module Aws::MediaLive
     #             encryption_passphrase_secret_arn: "__string",
     #             stream_id: "__string",
     #             url: "__string",
+    #             connection_mode: "CALLER", # accepts CALLER, LISTENER
+    #             listener_port: 1,
     #           },
     #         ],
     #         logical_interface_names: ["__string"],
@@ -9138,6 +9231,8 @@ module Aws::MediaLive
     #   resp.channel.destinations[0].srt_settings[0].encryption_passphrase_secret_arn #=> String
     #   resp.channel.destinations[0].srt_settings[0].stream_id #=> String
     #   resp.channel.destinations[0].srt_settings[0].url #=> String
+    #   resp.channel.destinations[0].srt_settings[0].connection_mode #=> String, one of "CALLER", "LISTENER"
+    #   resp.channel.destinations[0].srt_settings[0].listener_port #=> Integer
     #   resp.channel.destinations[0].logical_interface_names #=> Array
     #   resp.channel.destinations[0].logical_interface_names[0] #=> String
     #   resp.channel.egress_endpoints #=> Array
@@ -9320,6 +9415,8 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.global_configuration.output_locking_settings.epoch_locking_settings.custom_epoch #=> String
     #   resp.channel.encoder_settings.global_configuration.output_locking_settings.epoch_locking_settings.jam_sync_time #=> String
     #   resp.channel.encoder_settings.global_configuration.output_locking_settings.pipeline_locking_settings.pipeline_locking_method #=> String, one of "SOURCE_TIMECODE", "VIDEO_ALIGNMENT"
+    #   resp.channel.encoder_settings.global_configuration.output_locking_settings.pipeline_locking_settings.custom_epoch #=> String
+    #   resp.channel.encoder_settings.global_configuration.output_locking_settings.disabled_locking_settings.custom_epoch #=> String
     #   resp.channel.encoder_settings.motion_graphics_configuration.motion_graphics_insertion #=> String, one of "DISABLED", "ENABLED"
     #   resp.channel.encoder_settings.nielsen_configuration.distributor_id #=> String
     #   resp.channel.encoder_settings.nielsen_configuration.nielsen_pcm_to_id_3_tagging #=> String, one of "DISABLED", "ENABLED"
@@ -9854,6 +9951,8 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.av_1_settings.min_bitrate #=> Integer
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.av_1_settings.spatial_aq #=> String, one of "DISABLED", "ENABLED"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.av_1_settings.temporal_aq #=> String, one of "DISABLED", "ENABLED"
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.av_1_settings.timecode_insertion #=> String, one of "DISABLED", "METADATA_OBU"
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.av_1_settings.bit_depth #=> String, one of "DEPTH_10", "DEPTH_8"
     #   resp.channel.encoder_settings.video_descriptions[0].height #=> Integer
     #   resp.channel.encoder_settings.video_descriptions[0].name #=> String
     #   resp.channel.encoder_settings.video_descriptions[0].respond_to_afd #=> String, one of "NONE", "PASSTHROUGH", "RESPOND"
@@ -9968,6 +10067,8 @@ module Aws::MediaLive
     #   resp.channel.linked_channel_settings.primary_channel_settings.following_channel_arns #=> Array
     #   resp.channel.linked_channel_settings.primary_channel_settings.following_channel_arns[0] #=> String
     #   resp.channel.linked_channel_settings.primary_channel_settings.linked_channel_type #=> String, one of "FOLLOWING_CHANNEL", "PRIMARY_CHANNEL"
+    #   resp.channel.channel_security_groups #=> Array
+    #   resp.channel.channel_security_groups[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateChannelClass AWS API Documentation
     #
@@ -9997,9 +10098,9 @@ module Aws::MediaLive
     # @option params [Array<Types::InputSourceRequest>] :sources
     #
     # @option params [Types::SrtSettingsRequest] :srt_settings
-    #   Configures the sources for this SRT input. For a single-pipeline
-    #   input, include one srtCallerSource in the array. For a
-    #   standard-pipeline input, include two srtCallerSource.
+    #   Configures the settings for SRT inputs. Provide either
+    #   srtCallerSources (for SRT\_CALLER type) OR srtListenerSettings (for
+    #   SRT\_LISTENER type), not both.
     #
     # @option params [Types::MulticastSettingsUpdateRequest] :multicast_settings
     #   Settings for a Multicast input. Contains a list of multicast Urls and
@@ -10072,6 +10173,14 @@ module Aws::MediaLive
     #           stream_id: "__string",
     #         },
     #       ],
+    #       srt_listener_settings: {
+    #         decryption: { # required
+    #           algorithm: "AES128", # required, accepts AES128, AES192, AES256
+    #           passphrase_secret_arn: "__string", # required
+    #         },
+    #         minimum_latency: 1, # required
+    #         stream_id: "__string",
+    #       },
     #     },
     #     multicast_settings: {
     #       sources: [
@@ -10146,7 +10255,7 @@ module Aws::MediaLive
     #   resp.input.state #=> String, one of "CREATING", "DETACHED", "ATTACHED", "DELETING", "DELETED"
     #   resp.input.tags #=> Hash
     #   resp.input.tags["__string"] #=> String
-    #   resp.input.type #=> String, one of "UDP_PUSH", "RTP_PUSH", "RTMP_PUSH", "RTMP_PULL", "URL_PULL", "MP4_FILE", "MEDIACONNECT", "INPUT_DEVICE", "AWS_CDI", "TS_FILE", "SRT_CALLER", "MULTICAST", "SMPTE_2110_RECEIVER_GROUP", "SDI", "MEDIACONNECT_ROUTER"
+    #   resp.input.type #=> String, one of "UDP_PUSH", "RTP_PUSH", "RTMP_PUSH", "RTMP_PULL", "URL_PULL", "MP4_FILE", "MEDIACONNECT", "INPUT_DEVICE", "AWS_CDI", "TS_FILE", "SRT_CALLER", "MULTICAST", "SMPTE_2110_RECEIVER_GROUP", "SDI", "MEDIACONNECT_ROUTER", "SRT_LISTENER"
     #   resp.input.srt_settings.srt_caller_sources #=> Array
     #   resp.input.srt_settings.srt_caller_sources[0].decryption.algorithm #=> String, one of "AES128", "AES192", "AES256"
     #   resp.input.srt_settings.srt_caller_sources[0].decryption.passphrase_secret_arn #=> String
@@ -10154,6 +10263,10 @@ module Aws::MediaLive
     #   resp.input.srt_settings.srt_caller_sources[0].srt_listener_address #=> String
     #   resp.input.srt_settings.srt_caller_sources[0].srt_listener_port #=> String
     #   resp.input.srt_settings.srt_caller_sources[0].stream_id #=> String
+    #   resp.input.srt_settings.srt_listener_settings.decryption.algorithm #=> String, one of "AES128", "AES192", "AES256"
+    #   resp.input.srt_settings.srt_listener_settings.decryption.passphrase_secret_arn #=> String
+    #   resp.input.srt_settings.srt_listener_settings.minimum_latency #=> Integer
+    #   resp.input.srt_settings.srt_listener_settings.stream_id #=> String
     #   resp.input.input_network_location #=> String, one of "AWS", "ON_PREMISES"
     #   resp.input.multicast_settings.sources #=> Array
     #   resp.input.multicast_settings.sources[0].source_ip #=> String
@@ -10360,6 +10473,8 @@ module Aws::MediaLive
     #   resp.security_group.tags["__string"] #=> String
     #   resp.security_group.whitelist_rules #=> Array
     #   resp.security_group.whitelist_rules[0].cidr #=> String
+    #   resp.security_group.channels #=> Array
+    #   resp.security_group.channels[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateInputSecurityGroup AWS API Documentation
     #
@@ -10626,6 +10741,7 @@ module Aws::MediaLive
     #   * {Types::RestartChannelPipelinesResponse#anywhere_settings #anywhere_settings} => Types::DescribeAnywhereSettings
     #   * {Types::RestartChannelPipelinesResponse#channel_engine_version #channel_engine_version} => Types::ChannelEngineVersionResponse
     #   * {Types::RestartChannelPipelinesResponse#linked_channel_settings #linked_channel_settings} => Types::DescribeLinkedChannelSettings
+    #   * {Types::RestartChannelPipelinesResponse#channel_security_groups #channel_security_groups} => Array&lt;String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -10658,6 +10774,8 @@ module Aws::MediaLive
     #   resp.destinations[0].srt_settings[0].encryption_passphrase_secret_arn #=> String
     #   resp.destinations[0].srt_settings[0].stream_id #=> String
     #   resp.destinations[0].srt_settings[0].url #=> String
+    #   resp.destinations[0].srt_settings[0].connection_mode #=> String, one of "CALLER", "LISTENER"
+    #   resp.destinations[0].srt_settings[0].listener_port #=> Integer
     #   resp.destinations[0].logical_interface_names #=> Array
     #   resp.destinations[0].logical_interface_names[0] #=> String
     #   resp.egress_endpoints #=> Array
@@ -10840,6 +10958,8 @@ module Aws::MediaLive
     #   resp.encoder_settings.global_configuration.output_locking_settings.epoch_locking_settings.custom_epoch #=> String
     #   resp.encoder_settings.global_configuration.output_locking_settings.epoch_locking_settings.jam_sync_time #=> String
     #   resp.encoder_settings.global_configuration.output_locking_settings.pipeline_locking_settings.pipeline_locking_method #=> String, one of "SOURCE_TIMECODE", "VIDEO_ALIGNMENT"
+    #   resp.encoder_settings.global_configuration.output_locking_settings.pipeline_locking_settings.custom_epoch #=> String
+    #   resp.encoder_settings.global_configuration.output_locking_settings.disabled_locking_settings.custom_epoch #=> String
     #   resp.encoder_settings.motion_graphics_configuration.motion_graphics_insertion #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.nielsen_configuration.distributor_id #=> String
     #   resp.encoder_settings.nielsen_configuration.nielsen_pcm_to_id_3_tagging #=> String, one of "DISABLED", "ENABLED"
@@ -11374,6 +11494,8 @@ module Aws::MediaLive
     #   resp.encoder_settings.video_descriptions[0].codec_settings.av_1_settings.min_bitrate #=> Integer
     #   resp.encoder_settings.video_descriptions[0].codec_settings.av_1_settings.spatial_aq #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.av_1_settings.temporal_aq #=> String, one of "DISABLED", "ENABLED"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.av_1_settings.timecode_insertion #=> String, one of "DISABLED", "METADATA_OBU"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.av_1_settings.bit_depth #=> String, one of "DEPTH_10", "DEPTH_8"
     #   resp.encoder_settings.video_descriptions[0].height #=> Integer
     #   resp.encoder_settings.video_descriptions[0].name #=> String
     #   resp.encoder_settings.video_descriptions[0].respond_to_afd #=> String, one of "NONE", "PASSTHROUGH", "RESPOND"
@@ -11489,6 +11611,8 @@ module Aws::MediaLive
     #   resp.linked_channel_settings.primary_channel_settings.following_channel_arns #=> Array
     #   resp.linked_channel_settings.primary_channel_settings.following_channel_arns[0] #=> String
     #   resp.linked_channel_settings.primary_channel_settings.linked_channel_type #=> String, one of "FOLLOWING_CHANNEL", "PRIMARY_CHANNEL"
+    #   resp.channel_security_groups #=> Array
+    #   resp.channel_security_groups[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/RestartChannelPipelines AWS API Documentation
     #
@@ -13390,6 +13514,8 @@ module Aws::MediaLive
     #   resp.node_interface_mappings[0].logical_interface_name #=> String
     #   resp.node_interface_mappings[0].network_interface_mode #=> String, one of "NAT", "BRIDGE"
     #   resp.node_interface_mappings[0].physical_interface_name #=> String
+    #   resp.node_interface_mappings[0].physical_interface_ip_addresses #=> Array
+    #   resp.node_interface_mappings[0].physical_interface_ip_addresses[0] #=> String
     #   resp.role #=> String, one of "BACKUP", "ACTIVE"
     #   resp.state #=> String, one of "CREATED", "REGISTERING", "READY_TO_ACTIVATE", "REGISTRATION_FAILED", "ACTIVATION_FAILED", "ACTIVE", "READY", "IN_USE", "DEREGISTERING", "DRAINING", "DEREGISTRATION_FAILED", "DEREGISTERED"
     #   resp.sdi_source_mappings #=> Array
@@ -13456,6 +13582,7 @@ module Aws::MediaLive
     #         logical_interface_name: "__string",
     #         network_interface_mode: "NAT", # accepts NAT, BRIDGE
     #         physical_interface_name: "__string",
+    #         physical_interface_ip_addresses: ["__string"],
     #       },
     #     ],
     #     request_id: "__string",
@@ -13650,6 +13777,8 @@ module Aws::MediaLive
     #   resp.node_interface_mappings[0].logical_interface_name #=> String
     #   resp.node_interface_mappings[0].network_interface_mode #=> String, one of "NAT", "BRIDGE"
     #   resp.node_interface_mappings[0].physical_interface_name #=> String
+    #   resp.node_interface_mappings[0].physical_interface_ip_addresses #=> Array
+    #   resp.node_interface_mappings[0].physical_interface_ip_addresses[0] #=> String
     #   resp.role #=> String, one of "BACKUP", "ACTIVE"
     #   resp.state #=> String, one of "CREATED", "REGISTERING", "READY_TO_ACTIVATE", "REGISTRATION_FAILED", "ACTIVATION_FAILED", "ACTIVE", "READY", "IN_USE", "DEREGISTERING", "DRAINING", "DEREGISTRATION_FAILED", "DEREGISTERED"
     #   resp.sdi_source_mappings #=> Array
@@ -13852,6 +13981,8 @@ module Aws::MediaLive
     #   resp.node_interface_mappings[0].logical_interface_name #=> String
     #   resp.node_interface_mappings[0].network_interface_mode #=> String, one of "NAT", "BRIDGE"
     #   resp.node_interface_mappings[0].physical_interface_name #=> String
+    #   resp.node_interface_mappings[0].physical_interface_ip_addresses #=> Array
+    #   resp.node_interface_mappings[0].physical_interface_ip_addresses[0] #=> String
     #   resp.role #=> String, one of "BACKUP", "ACTIVE"
     #   resp.state #=> String, one of "CREATED", "REGISTERING", "READY_TO_ACTIVATE", "REGISTRATION_FAILED", "ACTIVATION_FAILED", "ACTIVE", "READY", "IN_USE", "DEREGISTERING", "DRAINING", "DEREGISTRATION_FAILED", "DEREGISTERED"
     #   resp.sdi_source_mappings #=> Array
@@ -14051,6 +14182,8 @@ module Aws::MediaLive
     #   resp.nodes[0].node_interface_mappings[0].logical_interface_name #=> String
     #   resp.nodes[0].node_interface_mappings[0].network_interface_mode #=> String, one of "NAT", "BRIDGE"
     #   resp.nodes[0].node_interface_mappings[0].physical_interface_name #=> String
+    #   resp.nodes[0].node_interface_mappings[0].physical_interface_ip_addresses #=> Array
+    #   resp.nodes[0].node_interface_mappings[0].physical_interface_ip_addresses[0] #=> String
     #   resp.nodes[0].role #=> String, one of "BACKUP", "ACTIVE"
     #   resp.nodes[0].state #=> String, one of "CREATED", "REGISTERING", "READY_TO_ACTIVATE", "REGISTRATION_FAILED", "ACTIVATION_FAILED", "ACTIVE", "READY", "IN_USE", "DEREGISTERING", "DRAINING", "DEREGISTRATION_FAILED", "DEREGISTERED"
     #   resp.nodes[0].sdi_source_mappings #=> Array
@@ -14322,6 +14455,8 @@ module Aws::MediaLive
     #   resp.node_interface_mappings[0].logical_interface_name #=> String
     #   resp.node_interface_mappings[0].network_interface_mode #=> String, one of "NAT", "BRIDGE"
     #   resp.node_interface_mappings[0].physical_interface_name #=> String
+    #   resp.node_interface_mappings[0].physical_interface_ip_addresses #=> Array
+    #   resp.node_interface_mappings[0].physical_interface_ip_addresses[0] #=> String
     #   resp.role #=> String, one of "BACKUP", "ACTIVE"
     #   resp.state #=> String, one of "CREATED", "REGISTERING", "READY_TO_ACTIVATE", "REGISTRATION_FAILED", "ACTIVATION_FAILED", "ACTIVE", "READY", "IN_USE", "DEREGISTERING", "DRAINING", "DEREGISTRATION_FAILED", "DEREGISTERED"
     #   resp.sdi_source_mappings #=> Array
@@ -14387,6 +14522,8 @@ module Aws::MediaLive
     #   resp.node_interface_mappings[0].logical_interface_name #=> String
     #   resp.node_interface_mappings[0].network_interface_mode #=> String, one of "NAT", "BRIDGE"
     #   resp.node_interface_mappings[0].physical_interface_name #=> String
+    #   resp.node_interface_mappings[0].physical_interface_ip_addresses #=> Array
+    #   resp.node_interface_mappings[0].physical_interface_ip_addresses[0] #=> String
     #   resp.role #=> String, one of "BACKUP", "ACTIVE"
     #   resp.state #=> String, one of "CREATED", "REGISTERING", "READY_TO_ACTIVATE", "REGISTRATION_FAILED", "ACTIVATION_FAILED", "ACTIVE", "READY", "IN_USE", "DEREGISTERING", "DRAINING", "DEREGISTRATION_FAILED", "DEREGISTERED"
     #   resp.sdi_source_mappings #=> Array
@@ -14816,7 +14953,7 @@ module Aws::MediaLive
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-medialive'
-      context[:gem_version] = '1.174.0'
+      context[:gem_version] = '1.178.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

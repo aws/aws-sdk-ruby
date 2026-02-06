@@ -39,7 +39,7 @@ module Aws::QConnect
     AIGuardrailWordPolicyConfig = Shapes::StructureShape.new(name: 'AIGuardrailWordPolicyConfig')
     AIPromptAPIFormat = Shapes::StringShape.new(name: 'AIPromptAPIFormat')
     AIPromptData = Shapes::StructureShape.new(name: 'AIPromptData')
-    AIPromptInferenceConfiguration = Shapes::UnionShape.new(name: 'AIPromptInferenceConfiguration')
+    AIPromptInferenceConfiguration = Shapes::StructureShape.new(name: 'AIPromptInferenceConfiguration')
     AIPromptModelIdentifier = Shapes::StringShape.new(name: 'AIPromptModelIdentifier')
     AIPromptSummary = Shapes::StructureShape.new(name: 'AIPromptSummary')
     AIPromptSummaryList = Shapes::ListShape.new(name: 'AIPromptSummaryList')
@@ -587,7 +587,6 @@ module Aws::QConnect
     Tags = Shapes::MapShape.new(name: 'Tags')
     TargetType = Shapes::StringShape.new(name: 'TargetType')
     TextAIPrompt = Shapes::StringShape.new(name: 'TextAIPrompt')
-    TextAIPromptInferenceConfiguration = Shapes::StructureShape.new(name: 'TextAIPromptInferenceConfiguration')
     TextData = Shapes::StructureShape.new(name: 'TextData')
     TextFullAIPromptEditTemplateConfiguration = Shapes::StructureShape.new(name: 'TextFullAIPromptEditTemplateConfiguration')
     TextMessage = Shapes::StructureShape.new(name: 'TextMessage')
@@ -814,10 +813,10 @@ module Aws::QConnect
     AIPromptData.add_member(:status, Shapes::ShapeRef.new(shape: Status, location_name: "status"))
     AIPromptData.struct_class = Types::AIPromptData
 
-    AIPromptInferenceConfiguration.add_member(:text_ai_prompt_inference_configuration, Shapes::ShapeRef.new(shape: TextAIPromptInferenceConfiguration, location_name: "textAIPromptInferenceConfiguration"))
-    AIPromptInferenceConfiguration.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
-    AIPromptInferenceConfiguration.add_member_subclass(:text_ai_prompt_inference_configuration, Types::AIPromptInferenceConfiguration::TextAiPromptInferenceConfiguration)
-    AIPromptInferenceConfiguration.add_member_subclass(:unknown, Types::AIPromptInferenceConfiguration::Unknown)
+    AIPromptInferenceConfiguration.add_member(:temperature, Shapes::ShapeRef.new(shape: Probability, location_name: "temperature"))
+    AIPromptInferenceConfiguration.add_member(:top_p, Shapes::ShapeRef.new(shape: Probability, location_name: "topP"))
+    AIPromptInferenceConfiguration.add_member(:top_k, Shapes::ShapeRef.new(shape: TopK, location_name: "topK"))
+    AIPromptInferenceConfiguration.add_member(:max_tokens_to_sample, Shapes::ShapeRef.new(shape: MaxTokensToSample, location_name: "maxTokensToSample"))
     AIPromptInferenceConfiguration.struct_class = Types::AIPromptInferenceConfiguration
 
     AIPromptSummary.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "name"))
@@ -986,7 +985,7 @@ module Aws::QConnect
     CaseSummarizationAIAgentConfiguration.add_member(:locale, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "locale"))
     CaseSummarizationAIAgentConfiguration.struct_class = Types::CaseSummarizationAIAgentConfiguration
 
-    CaseSummarizationChunkDataDetails.add_member(:completion, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "completion"))
+    CaseSummarizationChunkDataDetails.add_member(:completion, Shapes::ShapeRef.new(shape: NonEmptySensitiveString, location_name: "completion"))
     CaseSummarizationChunkDataDetails.add_member(:next_chunk_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextChunkToken"))
     CaseSummarizationChunkDataDetails.struct_class = Types::CaseSummarizationChunkDataDetails
 
@@ -2998,12 +2997,6 @@ module Aws::QConnect
     Tags.key = Shapes::ShapeRef.new(shape: TagKey)
     Tags.value = Shapes::ShapeRef.new(shape: TagValue)
 
-    TextAIPromptInferenceConfiguration.add_member(:temperature, Shapes::ShapeRef.new(shape: Probability, location_name: "temperature"))
-    TextAIPromptInferenceConfiguration.add_member(:top_p, Shapes::ShapeRef.new(shape: Probability, location_name: "topP"))
-    TextAIPromptInferenceConfiguration.add_member(:top_k, Shapes::ShapeRef.new(shape: TopK, location_name: "topK"))
-    TextAIPromptInferenceConfiguration.add_member(:max_tokens_to_sample, Shapes::ShapeRef.new(shape: MaxTokensToSample, location_name: "maxTokensToSample"))
-    TextAIPromptInferenceConfiguration.struct_class = Types::TextAIPromptInferenceConfiguration
-
     TextData.add_member(:title, Shapes::ShapeRef.new(shape: DocumentText, location_name: "title"))
     TextData.add_member(:excerpt, Shapes::ShapeRef.new(shape: DocumentText, location_name: "excerpt"))
     TextData.struct_class = Types::TextData
@@ -3025,9 +3018,9 @@ module Aws::QConnect
 
     ToolConfiguration.add_member(:tool_name, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "toolName"))
     ToolConfiguration.add_member(:tool_type, Shapes::ShapeRef.new(shape: ToolType, required: true, location_name: "toolType"))
-    ToolConfiguration.add_member(:title, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "title"))
+    ToolConfiguration.add_member(:title, Shapes::ShapeRef.new(shape: NonEmptySensitiveString, location_name: "title"))
     ToolConfiguration.add_member(:tool_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "toolId"))
-    ToolConfiguration.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
+    ToolConfiguration.add_member(:description, Shapes::ShapeRef.new(shape: NonEmptySensitiveString, location_name: "description"))
     ToolConfiguration.add_member(:instruction, Shapes::ShapeRef.new(shape: ToolInstruction, location_name: "instruction"))
     ToolConfiguration.add_member(:override_input_values, Shapes::ShapeRef.new(shape: ToolOverrideInputValueList, location_name: "overrideInputValues"))
     ToolConfiguration.add_member(:output_filters, Shapes::ShapeRef.new(shape: ToolOutputFilterList, location_name: "outputFilters"))
@@ -3133,7 +3126,7 @@ module Aws::QConnect
     UpdateAssistantAIAgentRequest.add_member(:assistant_id, Shapes::ShapeRef.new(shape: UuidOrArn, required: true, location: "uri", location_name: "assistantId"))
     UpdateAssistantAIAgentRequest.add_member(:ai_agent_type, Shapes::ShapeRef.new(shape: AIAgentType, required: true, location_name: "aiAgentType"))
     UpdateAssistantAIAgentRequest.add_member(:configuration, Shapes::ShapeRef.new(shape: AIAgentConfigurationData, required: true, location_name: "configuration"))
-    UpdateAssistantAIAgentRequest.add_member(:orchestrator_configuration_list, Shapes::ShapeRef.new(shape: OrchestratorConfigurationList, location_name: "orchestratorConfigurationList"))
+    UpdateAssistantAIAgentRequest.add_member(:orchestrator_use_case, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "orchestratorUseCase"))
     UpdateAssistantAIAgentRequest.struct_class = Types::UpdateAssistantAIAgentRequest
 
     UpdateAssistantAIAgentResponse.add_member(:assistant, Shapes::ShapeRef.new(shape: AssistantData, location_name: "assistant"))

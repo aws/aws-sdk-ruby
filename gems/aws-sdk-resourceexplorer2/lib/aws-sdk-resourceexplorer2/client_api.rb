@@ -154,6 +154,7 @@ module Aws::ResourceExplorer2
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     ServiceView = Shapes::StructureShape.new(name: 'ServiceView')
     ServiceViewArnList = Shapes::ListShape.new(name: 'ServiceViewArnList')
+    ServiceViewName = Shapes::StringShape.new(name: 'ServiceViewName')
     StreamingAccessDetails = Shapes::StructureShape.new(name: 'StreamingAccessDetails')
     StreamingAccessDetailsList = Shapes::ListShape.new(name: 'StreamingAccessDetailsList')
     String = Shapes::StringShape.new(name: 'String')
@@ -508,6 +509,7 @@ module Aws::ResourceExplorer2
     ServiceQuotaExceededException.struct_class = Types::ServiceQuotaExceededException
 
     ServiceView.add_member(:service_view_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ServiceViewArn"))
+    ServiceView.add_member(:service_view_name, Shapes::ShapeRef.new(shape: ServiceViewName, location_name: "ServiceViewName"))
     ServiceView.add_member(:filters, Shapes::ShapeRef.new(shape: SearchFilter, location_name: "Filters"))
     ServiceView.add_member(:included_properties, Shapes::ShapeRef.new(shape: IncludedPropertyList, location_name: "IncludedProperties"))
     ServiceView.add_member(:streaming_access_for_service, Shapes::ShapeRef.new(shape: String, location_name: "StreamingAccessForService"))
@@ -578,6 +580,7 @@ module Aws::ResourceExplorer2
     ValidationExceptionFieldList.member = Shapes::ShapeRef.new(shape: ValidationExceptionField)
 
     View.add_member(:view_arn, Shapes::ShapeRef.new(shape: String, location_name: "ViewArn"))
+    View.add_member(:view_name, Shapes::ShapeRef.new(shape: ViewName, location_name: "ViewName"))
     View.add_member(:owner, Shapes::ShapeRef.new(shape: String, location_name: "Owner"))
     View.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "LastUpdatedAt"))
     View.add_member(:scope, Shapes::ShapeRef.new(shape: String, location_name: "Scope"))

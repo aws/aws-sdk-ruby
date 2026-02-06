@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.132.0 (2026-02-05)
+------------------
+
+* Feature - Adds support for the customer to send custom HTTP headers and configure an AS2 Connector to receive Asynchronous MDNs from their trading partner
+
+1.131.0 (2026-01-16)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.130.0 (2026-01-08)
 ------------------
 

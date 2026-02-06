@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.136.0 (2026-01-28)
+------------------
+
+* Feature - This release adds support for a new lambda trigger to transform federated user attributes during the authentication with external identity providers on Cognito Managed Login.
+
+1.135.0 (2026-01-16)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.134.0 (2026-01-08)
 ------------------
 

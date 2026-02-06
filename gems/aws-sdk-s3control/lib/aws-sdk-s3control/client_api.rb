@@ -342,6 +342,7 @@ module Aws::S3Control
     NotSSEFilter = Shapes::StructureShape.new(name: 'NotSSEFilter')
     ObjectAgeValue = Shapes::IntegerShape.new(name: 'ObjectAgeValue')
     ObjectCreationTime = Shapes::TimestampShape.new(name: 'ObjectCreationTime')
+    ObjectEncryption = Shapes::StructureShape.new(name: 'ObjectEncryption')
     ObjectEncryptionFilter = Shapes::UnionShape.new(name: 'ObjectEncryptionFilter')
     ObjectEncryptionFilterList = Shapes::ListShape.new(name: 'ObjectEncryptionFilterList')
     ObjectLambdaAccessPoint = Shapes::StructureShape.new(name: 'ObjectLambdaAccessPoint')
@@ -476,6 +477,8 @@ module Aws::S3Control
     S3StorageClass = Shapes::StringShape.new(name: 'S3StorageClass')
     S3Tag = Shapes::StructureShape.new(name: 'S3Tag')
     S3TagSet = Shapes::ListShape.new(name: 'S3TagSet')
+    S3UpdateObjectEncryptionOperation = Shapes::StructureShape.new(name: 'S3UpdateObjectEncryptionOperation')
+    S3UpdateObjectEncryptionSSEKMS = Shapes::StructureShape.new(name: 'S3UpdateObjectEncryptionSSEKMS', locationName: "SSE-KMS")
     S3UserMetadata = Shapes::MapShape.new(name: 'S3UserMetadata')
     SSECFilter = Shapes::StructureShape.new(name: 'SSECFilter')
     SSEKMS = Shapes::StructureShape.new(name: 'SSEKMS', locationName: "SSE-KMS")
@@ -1281,6 +1284,7 @@ module Aws::S3Control
     JobOperation.add_member(:s3_put_object_retention, Shapes::ShapeRef.new(shape: S3SetObjectRetentionOperation, location_name: "S3PutObjectRetention", metadata: {"box" => true}))
     JobOperation.add_member(:s3_replicate_object, Shapes::ShapeRef.new(shape: S3ReplicateObjectOperation, location_name: "S3ReplicateObject", metadata: {"box" => true}))
     JobOperation.add_member(:s3_compute_object_checksum, Shapes::ShapeRef.new(shape: S3ComputeObjectChecksumOperation, location_name: "S3ComputeObjectChecksum", metadata: {"box" => true}))
+    JobOperation.add_member(:s3_update_object_encryption, Shapes::ShapeRef.new(shape: S3UpdateObjectEncryptionOperation, location_name: "S3UpdateObjectEncryption", metadata: {"box" => true}))
     JobOperation.struct_class = Types::JobOperation
 
     JobProgressSummary.add_member(:total_number_of_tasks, Shapes::ShapeRef.new(shape: JobTotalNumberOfTasks, location_name: "TotalNumberOfTasks", metadata: {"box" => true}))
@@ -1582,6 +1586,9 @@ module Aws::S3Control
     NotFoundException.struct_class = Types::NotFoundException
 
     NotSSEFilter.struct_class = Types::NotSSEFilter
+
+    ObjectEncryption.add_member(:ssekms, Shapes::ShapeRef.new(shape: S3UpdateObjectEncryptionSSEKMS, location_name: "SSE-KMS"))
+    ObjectEncryption.struct_class = Types::ObjectEncryption
 
     ObjectEncryptionFilter.add_member(:sses3, Shapes::ShapeRef.new(shape: SSES3Filter, location_name: "SSE-S3"))
     ObjectEncryptionFilter.add_member(:ssekms, Shapes::ShapeRef.new(shape: SSEKMSFilter, location_name: "SSE-KMS"))
@@ -1940,6 +1947,13 @@ module Aws::S3Control
     S3Tag.struct_class = Types::S3Tag
 
     S3TagSet.member = Shapes::ShapeRef.new(shape: S3Tag)
+
+    S3UpdateObjectEncryptionOperation.add_member(:object_encryption, Shapes::ShapeRef.new(shape: ObjectEncryption, location_name: "ObjectEncryption"))
+    S3UpdateObjectEncryptionOperation.struct_class = Types::S3UpdateObjectEncryptionOperation
+
+    S3UpdateObjectEncryptionSSEKMS.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: NonEmptyKmsKeyArnString, required: true, location_name: "KMSKeyArn"))
+    S3UpdateObjectEncryptionSSEKMS.add_member(:bucket_key_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "BucketKeyEnabled", metadata: {"box" => true}))
+    S3UpdateObjectEncryptionSSEKMS.struct_class = Types::S3UpdateObjectEncryptionSSEKMS
 
     S3UserMetadata.key = Shapes::ShapeRef.new(shape: NonEmptyMaxLength1024String)
     S3UserMetadata.value = Shapes::ShapeRef.new(shape: MaxLength1024String)

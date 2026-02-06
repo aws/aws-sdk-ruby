@@ -130,6 +130,7 @@ module Aws::Deadline
     CustomerManagedWorkerCapabilities = Shapes::StructureShape.new(name: 'CustomerManagedWorkerCapabilities')
     DateTimeFilterExpression = Shapes::StructureShape.new(name: 'DateTimeFilterExpression')
     DefaultQueueBudgetAction = Shapes::StringShape.new(name: 'DefaultQueueBudgetAction')
+    DefaultTaskCount = Shapes::IntegerShape.new(name: 'DefaultTaskCount')
     DeleteBudgetRequest = Shapes::StructureShape.new(name: 'DeleteBudgetRequest')
     DeleteBudgetResponse = Shapes::StructureShape.new(name: 'DeleteBudgetResponse')
     DeleteFarmRequest = Shapes::StructureShape.new(name: 'DeleteFarmRequest')
@@ -283,6 +284,7 @@ module Aws::Deadline
     JobAttachmentSettings = Shapes::StructureShape.new(name: 'JobAttachmentSettings')
     JobAttachmentsFileSystem = Shapes::StringShape.new(name: 'JobAttachmentsFileSystem')
     JobDescription = Shapes::StringShape.new(name: 'JobDescription')
+    JobDescriptionOverride = Shapes::StringShape.new(name: 'JobDescriptionOverride')
     JobDetailsEntity = Shapes::StructureShape.new(name: 'JobDetailsEntity')
     JobDetailsError = Shapes::StructureShape.new(name: 'JobDetailsError')
     JobDetailsIdentifiers = Shapes::StructureShape.new(name: 'JobDetailsIdentifiers')
@@ -446,6 +448,7 @@ module Aws::Deadline
     QueueStatus = Shapes::StringShape.new(name: 'QueueStatus')
     QueueSummaries = Shapes::ListShape.new(name: 'QueueSummaries')
     QueueSummary = Shapes::StructureShape.new(name: 'QueueSummary')
+    RangeConstraint = Shapes::StringShape.new(name: 'RangeConstraint')
     RequiredFileSystemLocationNames = Shapes::ListShape.new(name: 'RequiredFileSystemLocationNames')
     ResourceName = Shapes::StringShape.new(name: 'ResourceName')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
@@ -536,6 +539,7 @@ module Aws::Deadline
     StepLifecycleStatus = Shapes::StringShape.new(name: 'StepLifecycleStatus')
     StepName = Shapes::StringShape.new(name: 'StepName')
     StepParameter = Shapes::StructureShape.new(name: 'StepParameter')
+    StepParameterChunks = Shapes::StructureShape.new(name: 'StepParameterChunks')
     StepParameterList = Shapes::ListShape.new(name: 'StepParameterList')
     StepParameterName = Shapes::StringShape.new(name: 'StepParameterName')
     StepParameterType = Shapes::StringShape.new(name: 'StepParameterType')
@@ -552,7 +556,9 @@ module Aws::Deadline
     String = Shapes::StringShape.new(name: 'String')
     StringFilter = Shapes::StringShape.new(name: 'StringFilter')
     StringFilterExpression = Shapes::StructureShape.new(name: 'StringFilterExpression')
+    StringFilterList = Shapes::ListShape.new(name: 'StringFilterList')
     StringList = Shapes::ListShape.new(name: 'StringList')
+    StringListFilterExpression = Shapes::StructureShape.new(name: 'StringListFilterExpression')
     Subdomain = Shapes::StringShape.new(name: 'Subdomain')
     SubnetId = Shapes::StringShape.new(name: 'SubnetId')
     SyncInputJobAttachmentsSessionActionDefinition = Shapes::StructureShape.new(name: 'SyncInputJobAttachmentsSessionActionDefinition')
@@ -562,6 +568,7 @@ module Aws::Deadline
     TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
     TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
     Tags = Shapes::MapShape.new(name: 'Tags')
+    TargetRuntimeSeconds = Shapes::IntegerShape.new(name: 'TargetRuntimeSeconds')
     TaskFailureRetryCount = Shapes::IntegerShape.new(name: 'TaskFailureRetryCount')
     TaskId = Shapes::StringShape.new(name: 'TaskId')
     TaskParameterValue = Shapes::UnionShape.new(name: 'TaskParameterValue')
@@ -905,6 +912,7 @@ module Aws::Deadline
     CreateBudgetRequest.add_member(:approximate_dollar_limit, Shapes::ShapeRef.new(shape: ConsumedUsageLimit, required: true, location_name: "approximateDollarLimit"))
     CreateBudgetRequest.add_member(:actions, Shapes::ShapeRef.new(shape: BudgetActionsToAdd, required: true, location_name: "actions"))
     CreateBudgetRequest.add_member(:schedule, Shapes::ShapeRef.new(shape: BudgetSchedule, required: true, location_name: "schedule"))
+    CreateBudgetRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     CreateBudgetRequest.struct_class = Types::CreateBudgetRequest
 
     CreateBudgetResponse.add_member(:budget_id, Shapes::ShapeRef.new(shape: BudgetId, required: true, location_name: "budgetId"))
@@ -949,6 +957,8 @@ module Aws::Deadline
     CreateJobRequest.add_member(:max_retries_per_task, Shapes::ShapeRef.new(shape: MaxRetriesPerTask, location_name: "maxRetriesPerTask"))
     CreateJobRequest.add_member(:max_worker_count, Shapes::ShapeRef.new(shape: MaxWorkerCount, location_name: "maxWorkerCount"))
     CreateJobRequest.add_member(:source_job_id, Shapes::ShapeRef.new(shape: JobId, location_name: "sourceJobId"))
+    CreateJobRequest.add_member(:name_override, Shapes::ShapeRef.new(shape: JobName, location_name: "nameOverride"))
+    CreateJobRequest.add_member(:description_override, Shapes::ShapeRef.new(shape: JobDescriptionOverride, location_name: "descriptionOverride"))
     CreateJobRequest.struct_class = Types::CreateJobRequest
 
     CreateJobResponse.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location_name: "jobId"))
@@ -1345,7 +1355,7 @@ module Aws::Deadline
     GetFarmResponse.add_member(:farm_id, Shapes::ShapeRef.new(shape: FarmId, required: true, location_name: "farmId"))
     GetFarmResponse.add_member(:display_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "displayName"))
     GetFarmResponse.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
-    GetFarmResponse.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, required: true, location_name: "kmsKeyArn"))
+    GetFarmResponse.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "kmsKeyArn"))
     GetFarmResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: CreatedAt, required: true, location_name: "createdAt"))
     GetFarmResponse.add_member(:created_by, Shapes::ShapeRef.new(shape: CreatedBy, required: true, location_name: "createdBy"))
     GetFarmResponse.add_member(:updated_at, Shapes::ShapeRef.new(shape: UpdatedAt, location_name: "updatedAt"))
@@ -2322,12 +2332,14 @@ module Aws::Deadline
     SearchFilterExpression.add_member(:parameter_filter, Shapes::ShapeRef.new(shape: ParameterFilterExpression, location_name: "parameterFilter"))
     SearchFilterExpression.add_member(:search_term_filter, Shapes::ShapeRef.new(shape: SearchTermFilterExpression, location_name: "searchTermFilter"))
     SearchFilterExpression.add_member(:string_filter, Shapes::ShapeRef.new(shape: StringFilterExpression, location_name: "stringFilter"))
+    SearchFilterExpression.add_member(:string_list_filter, Shapes::ShapeRef.new(shape: StringListFilterExpression, location_name: "stringListFilter"))
     SearchFilterExpression.add_member(:group_filter, Shapes::ShapeRef.new(shape: SearchGroupedFilterExpressions, location_name: "groupFilter"))
     SearchFilterExpression.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     SearchFilterExpression.add_member_subclass(:date_time_filter, Types::SearchFilterExpression::DateTimeFilter)
     SearchFilterExpression.add_member_subclass(:parameter_filter, Types::SearchFilterExpression::ParameterFilter)
     SearchFilterExpression.add_member_subclass(:search_term_filter, Types::SearchFilterExpression::SearchTermFilter)
     SearchFilterExpression.add_member_subclass(:string_filter, Types::SearchFilterExpression::StringFilter)
+    SearchFilterExpression.add_member_subclass(:string_list_filter, Types::SearchFilterExpression::StringListFilter)
     SearchFilterExpression.add_member_subclass(:group_filter, Types::SearchFilterExpression::GroupFilter)
     SearchFilterExpression.add_member_subclass(:unknown, Types::SearchFilterExpression::Unknown)
     SearchFilterExpression.struct_class = Types::SearchFilterExpression
@@ -2591,7 +2603,13 @@ module Aws::Deadline
 
     StepParameter.add_member(:name, Shapes::ShapeRef.new(shape: StepParameterName, required: true, location_name: "name"))
     StepParameter.add_member(:type, Shapes::ShapeRef.new(shape: StepParameterType, required: true, location_name: "type"))
+    StepParameter.add_member(:chunks, Shapes::ShapeRef.new(shape: StepParameterChunks, location_name: "chunks"))
     StepParameter.struct_class = Types::StepParameter
+
+    StepParameterChunks.add_member(:default_task_count, Shapes::ShapeRef.new(shape: DefaultTaskCount, required: true, location_name: "defaultTaskCount"))
+    StepParameterChunks.add_member(:target_runtime_seconds, Shapes::ShapeRef.new(shape: TargetRuntimeSeconds, location_name: "targetRuntimeSeconds"))
+    StepParameterChunks.add_member(:range_constraint, Shapes::ShapeRef.new(shape: RangeConstraint, required: true, location_name: "rangeConstraint"))
+    StepParameterChunks.struct_class = Types::StepParameterChunks
 
     StepParameterList.member = Shapes::ShapeRef.new(shape: StepParameter)
 
@@ -2651,7 +2669,14 @@ module Aws::Deadline
     StringFilterExpression.add_member(:value, Shapes::ShapeRef.new(shape: StringFilter, required: true, location_name: "value"))
     StringFilterExpression.struct_class = Types::StringFilterExpression
 
+    StringFilterList.member = Shapes::ShapeRef.new(shape: StringFilter)
+
     StringList.member = Shapes::ShapeRef.new(shape: String)
+
+    StringListFilterExpression.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "name"))
+    StringListFilterExpression.add_member(:operator, Shapes::ShapeRef.new(shape: ComparisonOperator, required: true, location_name: "operator"))
+    StringListFilterExpression.add_member(:values, Shapes::ShapeRef.new(shape: StringFilterList, required: true, location_name: "values"))
+    StringListFilterExpression.struct_class = Types::StringListFilterExpression
 
     SyncInputJobAttachmentsSessionActionDefinition.add_member(:step_id, Shapes::ShapeRef.new(shape: StepId, location_name: "stepId"))
     SyncInputJobAttachmentsSessionActionDefinition.struct_class = Types::SyncInputJobAttachmentsSessionActionDefinition
@@ -2724,6 +2749,7 @@ module Aws::Deadline
     TaskSearchSummary.add_member(:ended_at, Shapes::ShapeRef.new(shape: EndedAt, location_name: "endedAt"))
     TaskSearchSummary.add_member(:updated_at, Shapes::ShapeRef.new(shape: UpdatedAt, location_name: "updatedAt"))
     TaskSearchSummary.add_member(:updated_by, Shapes::ShapeRef.new(shape: UpdatedBy, location_name: "updatedBy"))
+    TaskSearchSummary.add_member(:latest_session_action_id, Shapes::ShapeRef.new(shape: SessionActionId, location_name: "latestSessionActionId"))
     TaskSearchSummary.struct_class = Types::TaskSearchSummary
 
     TaskSummaries.member = Shapes::ShapeRef.new(shape: TaskSummary)
@@ -2797,6 +2823,8 @@ module Aws::Deadline
     UpdateJobRequest.add_member(:max_retries_per_task, Shapes::ShapeRef.new(shape: MaxRetriesPerTask, location_name: "maxRetriesPerTask"))
     UpdateJobRequest.add_member(:lifecycle_status, Shapes::ShapeRef.new(shape: UpdateJobLifecycleStatus, location_name: "lifecycleStatus"))
     UpdateJobRequest.add_member(:max_worker_count, Shapes::ShapeRef.new(shape: MaxWorkerCount, location_name: "maxWorkerCount"))
+    UpdateJobRequest.add_member(:name, Shapes::ShapeRef.new(shape: JobName, location_name: "name"))
+    UpdateJobRequest.add_member(:description, Shapes::ShapeRef.new(shape: JobDescriptionOverride, location_name: "description"))
     UpdateJobRequest.add_member(:farm_id, Shapes::ShapeRef.new(shape: FarmId, required: true, location: "uri", location_name: "farmId"))
     UpdateJobRequest.add_member(:queue_id, Shapes::ShapeRef.new(shape: QueueId, required: true, location: "uri", location_name: "queueId"))
     UpdateJobRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location: "uri", location_name: "jobId"))

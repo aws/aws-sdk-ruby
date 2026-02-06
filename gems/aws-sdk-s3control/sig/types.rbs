@@ -943,7 +943,7 @@ module Aws::S3Control
     class JobListDescriptor
       attr_accessor job_id: ::String
       attr_accessor description: ::String
-      attr_accessor operation: ("LambdaInvoke" | "S3PutObjectCopy" | "S3PutObjectAcl" | "S3PutObjectTagging" | "S3DeleteObjectTagging" | "S3InitiateRestoreObject" | "S3PutObjectLegalHold" | "S3PutObjectRetention" | "S3ReplicateObject" | "S3ComputeObjectChecksum")
+      attr_accessor operation: ("LambdaInvoke" | "S3PutObjectCopy" | "S3PutObjectAcl" | "S3PutObjectTagging" | "S3DeleteObjectTagging" | "S3InitiateRestoreObject" | "S3PutObjectLegalHold" | "S3PutObjectRetention" | "S3ReplicateObject" | "S3ComputeObjectChecksum" | "S3UpdateObjectEncryption")
       attr_accessor priority: ::Integer
       attr_accessor status: ("Active" | "Cancelled" | "Cancelling" | "Complete" | "Completing" | "Failed" | "Failing" | "New" | "Paused" | "Pausing" | "Preparing" | "Ready" | "Suspended")
       attr_accessor creation_time: ::Time
@@ -1006,6 +1006,7 @@ module Aws::S3Control
       attr_accessor s3_put_object_retention: Types::S3SetObjectRetentionOperation
       attr_accessor s3_replicate_object: Types::S3ReplicateObjectOperation
       attr_accessor s3_compute_object_checksum: Types::S3ComputeObjectChecksumOperation
+      attr_accessor s3_update_object_encryption: Types::S3UpdateObjectEncryptionOperation
       SENSITIVE: []
     end
 
@@ -1400,6 +1401,11 @@ module Aws::S3Control
     end
 
     class NotSSEFilter < Aws::EmptyStructure
+    end
+
+    class ObjectEncryption
+      attr_accessor ssekms: Types::S3UpdateObjectEncryptionSSEKMS
+      SENSITIVE: []
     end
 
     class ObjectEncryptionFilter
@@ -1849,6 +1855,17 @@ module Aws::S3Control
     class S3Tag
       attr_accessor key: ::String
       attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class S3UpdateObjectEncryptionOperation
+      attr_accessor object_encryption: Types::ObjectEncryption
+      SENSITIVE: []
+    end
+
+    class S3UpdateObjectEncryptionSSEKMS
+      attr_accessor kms_key_arn: ::String
+      attr_accessor bucket_key_enabled: bool
       SENSITIVE: []
     end
 

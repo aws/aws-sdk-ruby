@@ -100,6 +100,7 @@ module Aws::Odb
       attr_accessor time_ords_certificate_expires: ::Time
       attr_accessor time_zone: ::String
       attr_accessor total_container_databases: ::Integer
+      attr_accessor iam_roles: ::Array[Types::IamRole]
       SENSITIVE: []
     end
 
@@ -161,6 +162,7 @@ module Aws::Odb
       attr_accessor time_ords_certificate_expires: ::Time
       attr_accessor time_zone: ::String
       attr_accessor total_container_databases: ::Integer
+      attr_accessor iam_roles: ::Array[Types::IamRole]
       SENSITIVE: []
     end
 

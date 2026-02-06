@@ -1278,6 +1278,17 @@ module Aws::S3
       end
     end
 
+    class UpdateObjectEncryption
+      def self.build(context)
+        Aws::S3::EndpointParameters.create(
+          context.config,
+          bucket: context.params[:bucket],
+          use_dual_stack: context[:use_dualstack_endpoint],
+          accelerate: context[:use_accelerate_endpoint],
+        )
+      end
+    end
+
     class UploadPart
       def self.build(context)
         Aws::S3::EndpointParameters.create(
@@ -1530,6 +1541,8 @@ module Aws::S3
         UpdateBucketMetadataInventoryTableConfiguration.build(context)
       when :update_bucket_metadata_journal_table_configuration
         UpdateBucketMetadataJournalTableConfiguration.build(context)
+      when :update_object_encryption
+        UpdateObjectEncryption.build(context)
       when :upload_part
         UploadPart.build(context)
       when :upload_part_copy

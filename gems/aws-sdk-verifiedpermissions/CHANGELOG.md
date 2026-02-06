@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.61.0 (2026-01-22)
+------------------
+
+* Feature - Adding documentation to user guide and API documentation for how customers can create new encrypted policy stores by passing in their customer managed key during policy store creation.
+
+1.60.0 (2026-01-20)
+------------------
+
+* Feature - Amazon Verified Permissions now supports encryption of resources by a customer managed KMS key. Customers can now create new encrypted policy stores by passing in their customer managed key during policy store creation.
+
+1.59.0 (2026-01-16)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.58.0 (2026-01-08)
 ------------------
 

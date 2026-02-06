@@ -4677,6 +4677,37 @@ module Aws::DataZone
       req.send_request(options)
     end
 
+    # Deletes data export configuration for a domain.
+    #
+    # This operation does not delete the S3 table created by the
+    # PutDataExportConfiguration operation.
+    #
+    # To temporarily disable export without deleting the configuration, use
+    # the PutDataExportConfiguration operation with the `--no-enable-export`
+    # flag instead. This allows you to re-enable export for the same domain
+    # using the `--enable-export` flag without deleting S3 table.
+    #
+    # @option params [required, String] :domain_identifier
+    #   The domain ID for which you want to delete the data export
+    #   configuration.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_data_export_configuration({
+    #     domain_identifier: "DomainId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/DeleteDataExportConfiguration AWS API Documentation
+    #
+    # @overload delete_data_export_configuration(params = {})
+    # @param [Hash] params ({})
+    def delete_data_export_configuration(params = {}, options = {})
+      req = build_request(:delete_data_export_configuration, params)
+      req.send_request(options)
+    end
+
     # Deletes a data product in Amazon DataZone.
     #
     # Prerequisites:
@@ -11026,14 +11057,28 @@ module Aws::DataZone
 
     # Creates data export configuration details.
     #
-    # In the current release, you can enable exporting asset metadata only
-    # for one domain per Amazon Web Services account per region. If you
-    # disable exporting asset metadata feature for a domain where it's
-    # already enabled, you cannot enable this feature for another domain in
-    # the same Amazon Web Services account and region.
+    # If you want to temporarily disable export and later re-enable it for
+    # the same domain, use the `--no-enable-export` flag to disable and the
+    # `--enable-export` flag to re-enable. This preserves the configuration
+    # and allows you to re-enable export without deleting S3 table.
+    #
+    # <note markdown="1"> You can enable asset metadata export for only one domain per account
+    # per Region. To enable export for a different domain, complete the
+    # following steps:
+    #
+    #  1.  Delete the export configuration for the currently enabled domain
+    #     using the DeleteDataExportConfiguration operation.
+    #
+    # 2.  Delete the asset S3 table under the aws-sagemaker-catalog S3 table
+    #     bucket. We recommend backing up the S3 table before deletion.
+    #
+    # 3.  Call the PutDataExportConfiguration API to enable export for the
+    #     new domain.
+    #
+    #  </note>
     #
     # @option params [required, String] :domain_identifier
-    #   The domain ID where you want to create data export configuration
+    #   The domain ID for which you want to create data export configuration
     #   details.
     #
     # @option params [required, Boolean] :enable_export
@@ -11617,6 +11662,38 @@ module Aws::DataZone
     # * For paginated results, be prepared to use --next-token to fetch
     #   additional pages.
     #
+    # To run a standard free-text search, the `searchText` parameter must be
+    # supplied. By default, all searchable fields are indexed for semantic
+    # search and will return semantic matches for SearchListings queries. To
+    # prevent semantic search indexing for a custom form attribute, see the
+    # [CreateFormType API documentation][1]. To run a lexical search query,
+    # enclose the query with double quotes (""). This will disable
+    # semantic search even for fields that have semantic search enabled and
+    # will only return results that contain the keywords wrapped by double
+    # quotes (order of tokens in the query is not enforced). Free-text
+    # search is supported for all attributes annotated with
+    # @amazon.datazone#searchable.
+    #
+    # To run a filtered search, provide filter clause using the `filters`
+    # parameter. To filter on glossary terms, use the special attribute
+    # `__DataZoneGlossaryTerms`. To filter on an indexed numeric attribute
+    # (i.e., a numeric attribute annotated with
+    # `@amazon.datazone#sortable`), provide a filter using the `intValue`
+    # parameter. The filters parameter can also be used to run more advanced
+    # free-text searches that target specific attributes (attributes must be
+    # annotated with `@amazon.datazone#searchable` for free-text search).
+    # Create/update timestamp filtering is supported using the special
+    # `creationTime`/`lastUpdatedTime` attributes. Filter types can be mixed
+    # and matched to power complex queries.
+    #
+    # To find out whether an attribute has been annotated and indexed for a
+    # given search type, use the GetFormType API to retrieve the form
+    # containing the attribute.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/datazone/latest/APIReference/API_CreateFormType.html
+    #
     # @option params [required, String] :domain_identifier
     #   The identifier of the Amazon DataZone domain.
     #
@@ -11680,7 +11757,9 @@ module Aws::DataZone
     #     filters: {
     #       filter: {
     #         attribute: "Attribute", # required
-    #         value: "FilterValueString", # required
+    #         value: "FilterValueString",
+    #         int_value: 1,
+    #         operator: "EQ", # accepts EQ, LE, LT, GE, GT, TEXT_SEARCH
     #       },
     #       and: [
     #         {
@@ -11897,7 +11976,7 @@ module Aws::DataZone
     # The SearchListings API gives users flexibility in specifying what kind
     # of search is run.
     #
-    # To run a free-text search, the `searchText` parameter must be
+    # To run a standard free-text search, the `searchText` parameter must be
     # supplied. By default, all searchable fields are indexed for semantic
     # search and will return semantic matches for SearchListings queries. To
     # prevent semantic search indexing for a custom form attribute, see the
@@ -11909,9 +11988,17 @@ module Aws::DataZone
     # search is supported for all attributes annotated with
     # @amazon.datazone#searchable.
     #
-    # To run a filtered search, provide filter clause using the filters
+    # To run a filtered search, provide filter clause using the `filters`
     # parameter. To filter on glossary terms, use the special attribute
-    # `__DataZoneGlossaryTerms`.
+    # `__DataZoneGlossaryTerms`. To filter on an indexed numeric attribute
+    # (i.e., a numeric attribute annotated with
+    # `@amazon.datazone#sortable`), provide a filter using the `intValue`
+    # parameter. The filters parameter can also be used to run more advanced
+    # free-text searches that target specific attributes (attributes must be
+    # annotated with `@amazon.datazone#searchable` for free-text search).
+    # Create/update timestamp filtering is supported using the special
+    # `creationTime`/`lastUpdatedTime` attributes. Filter types can be mixed
+    # and matched to power complex queries.
     #
     # To find out whether an attribute has been annotated and indexed for a
     # given search type, use the GetFormType API to retrieve the form
@@ -11982,7 +12069,9 @@ module Aws::DataZone
     #     filters: {
     #       filter: {
     #         attribute: "Attribute", # required
-    #         value: "FilterValueString", # required
+    #         value: "FilterValueString",
+    #         int_value: 1,
+    #         operator: "EQ", # accepts EQ, LE, LT, GE, GT, TEXT_SEARCH
     #       },
     #       and: [
     #         {
@@ -12169,7 +12258,9 @@ module Aws::DataZone
     #     filters: {
     #       filter: {
     #         attribute: "Attribute", # required
-    #         value: "FilterValueString", # required
+    #         value: "FilterValueString",
+    #         int_value: 1,
+    #         operator: "EQ", # accepts EQ, LE, LT, GE, GT, TEXT_SEARCH
     #       },
     #       and: [
     #         {
@@ -14816,7 +14907,7 @@ module Aws::DataZone
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-datazone'
-      context[:gem_version] = '1.65.0'
+      context[:gem_version] = '1.67.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -138,6 +138,7 @@ module Aws::MPA
       attr_accessor primary_identity_id: ::String
       attr_accessor primary_identity_source_arn: ::String
       attr_accessor primary_identity_status: ("PENDING" | "ACCEPTED" | "REJECTED" | "INVALID")
+      attr_accessor mfa_methods: ::Array[Types::MfaMethod]
       SENSITIVE: []
     end
 
@@ -212,6 +213,7 @@ module Aws::MPA
       attr_accessor requester_comment: ::String
       attr_accessor action_completion_strategy: ("AUTO_COMPLETION_UPON_APPROVAL")
       attr_accessor approver_responses: ::Array[Types::GetSessionResponseApproverResponse]
+      attr_accessor additional_security_requirements: ::Array[("APPROVER_VERIFICATION_REQUIRED")]
       SENSITIVE: [:description, :metadata, :requester_comment]
     end
 
@@ -406,6 +408,7 @@ module Aws::MPA
       attr_accessor status_code: ("REJECTED" | "EXPIRED" | "CONFIGURATION_CHANGED")
       attr_accessor status_message: ::String
       attr_accessor action_completion_strategy: ("AUTO_COMPLETION_UPON_APPROVAL")
+      attr_accessor additional_security_requirements: ::Array[("APPROVER_VERIFICATION_REQUIRED")]
       SENSITIVE: [:description]
     end
 
@@ -417,6 +420,12 @@ module Aws::MPA
     class ListTagsForResourceResponse
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: [:tags]
+    end
+
+    class MfaMethod
+      attr_accessor type: ("EMAIL_OTP")
+      attr_accessor sync_status: ("IN_SYNC" | "OUT_OF_SYNC")
+      SENSITIVE: []
     end
 
     class MofNApprovalStrategy
@@ -533,6 +542,7 @@ module Aws::MPA
       attr_accessor approvers: ::Array[Types::ApprovalTeamRequestApprover]
       attr_accessor description: ::String
       attr_accessor arn: ::String
+      attr_accessor update_actions: ::Array[("SYNCHRONIZE_MFA_DEVICES")]
       SENSITIVE: [:description]
     end
 

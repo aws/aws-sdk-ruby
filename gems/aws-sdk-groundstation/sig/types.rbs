@@ -141,14 +141,14 @@ module Aws::GroundStation
 
     class ConfigIdResponse
       attr_accessor config_id: ::String
-      attr_accessor config_type: ("antenna-downlink" | "antenna-downlink-demod-decode" | "tracking" | "dataflow-endpoint" | "antenna-uplink" | "uplink-echo" | "s3-recording")
+      attr_accessor config_type: ("antenna-downlink" | "antenna-downlink-demod-decode" | "tracking" | "dataflow-endpoint" | "antenna-uplink" | "uplink-echo" | "s3-recording" | "telemetry-sink")
       attr_accessor config_arn: ::String
       SENSITIVE: []
     end
 
     class ConfigListItem
       attr_accessor config_id: ::String
-      attr_accessor config_type: ("antenna-downlink" | "antenna-downlink-demod-decode" | "tracking" | "dataflow-endpoint" | "antenna-uplink" | "uplink-echo" | "s3-recording")
+      attr_accessor config_type: ("antenna-downlink" | "antenna-downlink-demod-decode" | "tracking" | "dataflow-endpoint" | "antenna-uplink" | "uplink-echo" | "s3-recording" | "telemetry-sink")
       attr_accessor config_arn: ::String
       attr_accessor name: ::String
       SENSITIVE: []
@@ -162,6 +162,7 @@ module Aws::GroundStation
       attr_accessor antenna_uplink_config: Types::AntennaUplinkConfig
       attr_accessor uplink_echo_config: Types::UplinkEchoConfig
       attr_accessor s3_recording_config: Types::S3RecordingConfig
+      attr_accessor telemetry_sink_config: Types::TelemetrySinkConfig
       attr_accessor unknown: untyped
       SENSITIVE: []
 
@@ -178,6 +179,8 @@ module Aws::GroundStation
       class UplinkEchoConfig < ConfigTypeData
       end
       class S3RecordingConfig < ConfigTypeData
+      end
+      class TelemetrySinkConfig < ConfigTypeData
       end
       class Unknown < ConfigTypeData
       end
@@ -275,6 +278,7 @@ module Aws::GroundStation
       attr_accessor minimum_viable_contact_duration_seconds: ::Integer
       attr_accessor dataflow_edges: ::Array[::Array[::String]]
       attr_accessor tracking_config_arn: ::String
+      attr_accessor telemetry_sink_config_arn: ::String
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor streams_kms_key: Types::KmsKey
       attr_accessor streams_kms_role: ::String
@@ -320,7 +324,7 @@ module Aws::GroundStation
 
     class DeleteConfigRequest
       attr_accessor config_id: ::String
-      attr_accessor config_type: ("antenna-downlink" | "antenna-downlink-demod-decode" | "tracking" | "dataflow-endpoint" | "antenna-uplink" | "uplink-echo" | "s3-recording")
+      attr_accessor config_type: ("antenna-downlink" | "antenna-downlink-demod-decode" | "tracking" | "dataflow-endpoint" | "antenna-uplink" | "uplink-echo" | "s3-recording" | "telemetry-sink")
       SENSITIVE: []
     end
 
@@ -398,7 +402,7 @@ module Aws::GroundStation
     end
 
     class Destination
-      attr_accessor config_type: ("antenna-downlink" | "antenna-downlink-demod-decode" | "tracking" | "dataflow-endpoint" | "antenna-uplink" | "uplink-echo" | "s3-recording")
+      attr_accessor config_type: ("antenna-downlink" | "antenna-downlink-demod-decode" | "tracking" | "dataflow-endpoint" | "antenna-uplink" | "uplink-echo" | "s3-recording" | "telemetry-sink")
       attr_accessor config_id: ::String
       attr_accessor config_details: Types::ConfigDetails
       attr_accessor dataflow_destination_region: ::String
@@ -592,7 +596,7 @@ module Aws::GroundStation
 
     class GetConfigRequest
       attr_accessor config_id: ::String
-      attr_accessor config_type: ("antenna-downlink" | "antenna-downlink-demod-decode" | "tracking" | "dataflow-endpoint" | "antenna-uplink" | "uplink-echo" | "s3-recording")
+      attr_accessor config_type: ("antenna-downlink" | "antenna-downlink-demod-decode" | "tracking" | "dataflow-endpoint" | "antenna-uplink" | "uplink-echo" | "s3-recording" | "telemetry-sink")
       SENSITIVE: []
     end
 
@@ -600,7 +604,7 @@ module Aws::GroundStation
       attr_accessor config_id: ::String
       attr_accessor config_arn: ::String
       attr_accessor name: ::String
-      attr_accessor config_type: ("antenna-downlink" | "antenna-downlink-demod-decode" | "tracking" | "dataflow-endpoint" | "antenna-uplink" | "uplink-echo" | "s3-recording")
+      attr_accessor config_type: ("antenna-downlink" | "antenna-downlink-demod-decode" | "tracking" | "dataflow-endpoint" | "antenna-uplink" | "uplink-echo" | "s3-recording" | "telemetry-sink")
       attr_accessor config_data: Types::ConfigTypeData
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
@@ -651,6 +655,7 @@ module Aws::GroundStation
       attr_accessor minimum_viable_contact_duration_seconds: ::Integer
       attr_accessor dataflow_edges: ::Array[::Array[::String]]
       attr_accessor tracking_config_arn: ::String
+      attr_accessor telemetry_sink_config_arn: ::String
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor streams_kms_key: Types::KmsKey
       attr_accessor streams_kms_role: ::String
@@ -693,6 +698,12 @@ module Aws::GroundStation
     class InvalidParameterException
       attr_accessor message: ::String
       attr_accessor parameter_name: ::String
+      SENSITIVE: []
+    end
+
+    class KinesisDataStreamData
+      attr_accessor kinesis_role_arn: ::String
+      attr_accessor kinesis_data_stream_arn: ::String
       SENSITIVE: []
     end
 
@@ -950,7 +961,7 @@ module Aws::GroundStation
     end
 
     class Source
-      attr_accessor config_type: ("antenna-downlink" | "antenna-downlink-demod-decode" | "tracking" | "dataflow-endpoint" | "antenna-uplink" | "uplink-echo" | "s3-recording")
+      attr_accessor config_type: ("antenna-downlink" | "antenna-downlink-demod-decode" | "tracking" | "dataflow-endpoint" | "antenna-uplink" | "uplink-echo" | "s3-recording" | "telemetry-sink")
       attr_accessor config_id: ::String
       attr_accessor config_details: Types::ConfigDetails
       attr_accessor dataflow_source_region: ::String
@@ -984,6 +995,23 @@ module Aws::GroundStation
     end
 
     class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class TelemetrySinkConfig
+      attr_accessor telemetry_sink_type: ("KINESIS_DATA_STREAM")
+      attr_accessor telemetry_sink_data: Types::TelemetrySinkData
+      SENSITIVE: []
+    end
+
+    class TelemetrySinkData
+      attr_accessor kinesis_data_stream_data: Types::KinesisDataStreamData
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class KinesisDataStreamData < TelemetrySinkData
+      end
+      class Unknown < TelemetrySinkData
+      end
     end
 
     class TimeAzEl
@@ -1034,7 +1062,7 @@ module Aws::GroundStation
     class UpdateConfigRequest
       attr_accessor config_id: ::String
       attr_accessor name: ::String
-      attr_accessor config_type: ("antenna-downlink" | "antenna-downlink-demod-decode" | "tracking" | "dataflow-endpoint" | "antenna-uplink" | "uplink-echo" | "s3-recording")
+      attr_accessor config_type: ("antenna-downlink" | "antenna-downlink-demod-decode" | "tracking" | "dataflow-endpoint" | "antenna-uplink" | "uplink-echo" | "s3-recording" | "telemetry-sink")
       attr_accessor config_data: Types::ConfigTypeData
       SENSITIVE: []
     end
@@ -1055,6 +1083,7 @@ module Aws::GroundStation
       attr_accessor minimum_viable_contact_duration_seconds: ::Integer
       attr_accessor dataflow_edges: ::Array[::Array[::String]]
       attr_accessor tracking_config_arn: ::String
+      attr_accessor telemetry_sink_config_arn: ::String
       attr_accessor streams_kms_key: Types::KmsKey
       attr_accessor streams_kms_role: ::String
       SENSITIVE: []

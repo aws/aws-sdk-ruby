@@ -120,7 +120,7 @@ module Aws::NeptuneGraph
     # @!attribute [rw] format
     #   Specifies the format of S3 data to be imported. Valid values are
     #   `CSV`, which identifies the [Gremlin CSV format][1] or `OPENCYPHER`,
-    #   which identies the [openCypher load format][2].
+    #   which identifies the [openCypher load format][2].
     #
     #
     #
@@ -638,7 +638,7 @@ module Aws::NeptuneGraph
     #   @return [Array<String>]
     #
     # @!attribute [rw] vpc_security_group_ids
-    #   Security groups to be attached to the private graph endpoint..
+    #   Security groups to be attached to the private graph endpoint.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-graph-2023-11-29/CreatePrivateGraphEndpointInput AWS API Documentation
@@ -665,7 +665,7 @@ module Aws::NeptuneGraph
     #   @return [String]
     #
     # @!attribute [rw] vpc_endpoint_id
-    #   Endpoint ID of the prviate grpah endpoint.
+    #   Endpoint ID of the private graph endpoint.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-graph-2023-11-29/CreatePrivateGraphEndpointOutput AWS API Documentation
@@ -994,7 +994,7 @@ module Aws::NeptuneGraph
       include Aws::Structure
     end
 
-    # Specifies whihc properties of that label should be included in the
+    # Specifies which properties of that label should be included in the
     # export.
     #
     # @!attribute [rw] properties
@@ -1438,7 +1438,7 @@ module Aws::NeptuneGraph
     # @!attribute [rw] format
     #   Specifies the format of S3 data to be imported. Valid values are
     #   `CSV`, which identifies the [Gremlin CSV format][1] or `OPENCYPHER`,
-    #   which identies the [openCypher load format][2].
+    #   which identifies the [openCypher load format][2].
     #
     #
     #
@@ -2906,7 +2906,7 @@ module Aws::NeptuneGraph
     # @!attribute [rw] format
     #   Specifies the format of Amazon S3 data to be imported. Valid values
     #   are CSV, which identifies the Gremlin CSV format or OPENCYPHER,
-    #   which identies the openCypher load format.
+    #   which identifies the openCypher load format.
     #   @return [String]
     #
     # @!attribute [rw] parquet_type
@@ -2965,7 +2965,7 @@ module Aws::NeptuneGraph
     # @!attribute [rw] format
     #   Specifies the format of Amazon S3 data to be imported. Valid values
     #   are CSV, which identifies the Gremlin CSV format or OPENCYPHER,
-    #   which identies the openCypher load format.
+    #   which identifies the openCypher load format.
     #   @return [String]
     #
     # @!attribute [rw] parquet_type

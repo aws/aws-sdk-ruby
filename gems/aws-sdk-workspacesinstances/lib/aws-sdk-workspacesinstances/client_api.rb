@@ -22,6 +22,8 @@ module Aws::WorkspacesInstances
     AutoRecoveryEnum = Shapes::StringShape.new(name: 'AutoRecoveryEnum')
     AvailabilityZone = Shapes::StringShape.new(name: 'AvailabilityZone')
     BandwidthWeightingEnum = Shapes::StringShape.new(name: 'BandwidthWeightingEnum')
+    BillingConfiguration = Shapes::StructureShape.new(name: 'BillingConfiguration')
+    BillingMode = Shapes::StringShape.new(name: 'BillingMode')
     BlockDeviceMappingRequest = Shapes::StructureShape.new(name: 'BlockDeviceMappingRequest')
     BlockDeviceMappings = Shapes::ListShape.new(name: 'BlockDeviceMappings')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
@@ -65,6 +67,8 @@ module Aws::WorkspacesInstances
     HttpTokensEnum = Shapes::StringShape.new(name: 'HttpTokensEnum')
     IamInstanceProfileSpecification = Shapes::StructureShape.new(name: 'IamInstanceProfileSpecification')
     ImageId = Shapes::StringShape.new(name: 'ImageId')
+    InstanceConfigurationFilter = Shapes::StructureShape.new(name: 'InstanceConfigurationFilter')
+    InstanceConfigurationTenancyEnum = Shapes::StringShape.new(name: 'InstanceConfigurationTenancyEnum')
     InstanceInterruptionBehaviorEnum = Shapes::StringShape.new(name: 'InstanceInterruptionBehaviorEnum')
     InstanceIpv6Address = Shapes::StructureShape.new(name: 'InstanceIpv6Address')
     InstanceMaintenanceOptionsRequest = Shapes::StructureShape.new(name: 'InstanceMaintenanceOptionsRequest')
@@ -91,6 +95,7 @@ module Aws::WorkspacesInstances
     KmsKeyId = Shapes::StringShape.new(name: 'KmsKeyId')
     LicenseConfigurationRequest = Shapes::StructureShape.new(name: 'LicenseConfigurationRequest')
     LicenseSpecifications = Shapes::ListShape.new(name: 'LicenseSpecifications')
+    ListInstanceTypesMaxResults = Shapes::IntegerShape.new(name: 'ListInstanceTypesMaxResults')
     ListInstanceTypesRequest = Shapes::StructureShape.new(name: 'ListInstanceTypesRequest')
     ListInstanceTypesResponse = Shapes::StructureShape.new(name: 'ListInstanceTypesResponse')
     ListRegionsRequest = Shapes::StructureShape.new(name: 'ListRegionsRequest')
@@ -108,6 +113,7 @@ module Aws::WorkspacesInstances
     NonNegativeInteger = Shapes::IntegerShape.new(name: 'NonNegativeInteger')
     Placement = Shapes::StructureShape.new(name: 'Placement')
     PlacementGroupId = Shapes::StringShape.new(name: 'PlacementGroupId')
+    PlatformTypeEnum = Shapes::StringShape.new(name: 'PlatformTypeEnum')
     PrivateDnsNameOptionsRequest = Shapes::StructureShape.new(name: 'PrivateDnsNameOptionsRequest')
     PrivateIpAddressSpecification = Shapes::StructureShape.new(name: 'PrivateIpAddressSpecification')
     PrivateIpAddresses = Shapes::ListShape.new(name: 'PrivateIpAddresses')
@@ -131,6 +137,8 @@ module Aws::WorkspacesInstances
     String128 = Shapes::StringShape.new(name: 'String128')
     String64 = Shapes::StringShape.new(name: 'String64')
     SubnetId = Shapes::StringShape.new(name: 'SubnetId')
+    SupportedInstanceConfiguration = Shapes::StructureShape.new(name: 'SupportedInstanceConfiguration')
+    SupportedInstanceConfigurations = Shapes::ListShape.new(name: 'SupportedInstanceConfigurations')
     Tag = Shapes::StructureShape.new(name: 'Tag')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
@@ -168,6 +176,9 @@ module Aws::WorkspacesInstances
     AssociateVolumeRequest.struct_class = Types::AssociateVolumeRequest
 
     AssociateVolumeResponse.struct_class = Types::AssociateVolumeResponse
+
+    BillingConfiguration.add_member(:billing_mode, Shapes::ShapeRef.new(shape: BillingMode, required: true, location_name: "BillingMode"))
+    BillingConfiguration.struct_class = Types::BillingConfiguration
 
     BlockDeviceMappingRequest.add_member(:device_name, Shapes::ShapeRef.new(shape: DeviceName, location_name: "DeviceName"))
     BlockDeviceMappingRequest.add_member(:ebs, Shapes::ShapeRef.new(shape: EbsBlockDevice, location_name: "Ebs"))
@@ -218,6 +229,7 @@ module Aws::WorkspacesInstances
     CreateWorkspaceInstanceRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     CreateWorkspaceInstanceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateWorkspaceInstanceRequest.add_member(:managed_instance, Shapes::ShapeRef.new(shape: ManagedInstanceRequest, required: true, location_name: "ManagedInstance"))
+    CreateWorkspaceInstanceRequest.add_member(:billing_configuration, Shapes::ShapeRef.new(shape: BillingConfiguration, location_name: "BillingConfiguration"))
     CreateWorkspaceInstanceRequest.struct_class = Types::CreateWorkspaceInstanceRequest
 
     CreateWorkspaceInstanceResponse.add_member(:workspace_instance_id, Shapes::ShapeRef.new(shape: WorkspaceInstanceId, location_name: "WorkspaceInstanceId"))
@@ -280,6 +292,7 @@ module Aws::WorkspacesInstances
     GetWorkspaceInstanceResponse.add_member(:provision_state, Shapes::ShapeRef.new(shape: ProvisionStateEnum, location_name: "ProvisionState"))
     GetWorkspaceInstanceResponse.add_member(:workspace_instance_id, Shapes::ShapeRef.new(shape: WorkspaceInstanceId, location_name: "WorkspaceInstanceId"))
     GetWorkspaceInstanceResponse.add_member(:ec2_managed_instance, Shapes::ShapeRef.new(shape: EC2ManagedInstance, location_name: "EC2ManagedInstance"))
+    GetWorkspaceInstanceResponse.add_member(:billing_configuration, Shapes::ShapeRef.new(shape: BillingConfiguration, location_name: "BillingConfiguration"))
     GetWorkspaceInstanceResponse.struct_class = Types::GetWorkspaceInstanceResponse
 
     HibernationOptionsRequest.add_member(:configured, Shapes::ShapeRef.new(shape: Boolean, location_name: "Configured"))
@@ -288,6 +301,11 @@ module Aws::WorkspacesInstances
     IamInstanceProfileSpecification.add_member(:arn, Shapes::ShapeRef.new(shape: ARN, location_name: "Arn"))
     IamInstanceProfileSpecification.add_member(:name, Shapes::ShapeRef.new(shape: String64, location_name: "Name"))
     IamInstanceProfileSpecification.struct_class = Types::IamInstanceProfileSpecification
+
+    InstanceConfigurationFilter.add_member(:billing_mode, Shapes::ShapeRef.new(shape: BillingMode, required: true, location_name: "BillingMode"))
+    InstanceConfigurationFilter.add_member(:platform_type, Shapes::ShapeRef.new(shape: PlatformTypeEnum, required: true, location_name: "PlatformType"))
+    InstanceConfigurationFilter.add_member(:tenancy, Shapes::ShapeRef.new(shape: InstanceConfigurationTenancyEnum, required: true, location_name: "Tenancy"))
+    InstanceConfigurationFilter.struct_class = Types::InstanceConfigurationFilter
 
     InstanceIpv6Address.add_member(:ipv_6_address, Shapes::ShapeRef.new(shape: Ipv6Address, location_name: "Ipv6Address"))
     InstanceIpv6Address.add_member(:is_primary_ipv_6, Shapes::ShapeRef.new(shape: Boolean, location_name: "IsPrimaryIpv6"))
@@ -334,6 +352,7 @@ module Aws::WorkspacesInstances
     InstanceNetworkPerformanceOptionsRequest.struct_class = Types::InstanceNetworkPerformanceOptionsRequest
 
     InstanceTypeInfo.add_member(:instance_type, Shapes::ShapeRef.new(shape: InstanceType, location_name: "InstanceType"))
+    InstanceTypeInfo.add_member(:supported_instance_configurations, Shapes::ShapeRef.new(shape: SupportedInstanceConfigurations, location_name: "SupportedInstanceConfigurations"))
     InstanceTypeInfo.struct_class = Types::InstanceTypeInfo
 
     InstanceTypes.member = Shapes::ShapeRef.new(shape: InstanceTypeInfo)
@@ -359,8 +378,9 @@ module Aws::WorkspacesInstances
 
     LicenseSpecifications.member = Shapes::ShapeRef.new(shape: LicenseConfigurationRequest)
 
-    ListInstanceTypesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    ListInstanceTypesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListInstanceTypesMaxResults, location_name: "MaxResults"))
     ListInstanceTypesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListInstanceTypesRequest.add_member(:instance_configuration_filter, Shapes::ShapeRef.new(shape: InstanceConfigurationFilter, location_name: "InstanceConfigurationFilter"))
     ListInstanceTypesRequest.struct_class = Types::ListInstanceTypesRequest
 
     ListInstanceTypesResponse.add_member(:instance_types, Shapes::ShapeRef.new(shape: InstanceTypes, required: true, location_name: "InstanceTypes"))
@@ -479,6 +499,13 @@ module Aws::WorkspacesInstances
     SpotMarketOptions.add_member(:spot_instance_type, Shapes::ShapeRef.new(shape: SpotInstanceTypeEnum, location_name: "SpotInstanceType"))
     SpotMarketOptions.add_member(:valid_until_utc, Shapes::ShapeRef.new(shape: Timestamp, location_name: "ValidUntilUtc"))
     SpotMarketOptions.struct_class = Types::SpotMarketOptions
+
+    SupportedInstanceConfiguration.add_member(:billing_mode, Shapes::ShapeRef.new(shape: BillingMode, location_name: "BillingMode"))
+    SupportedInstanceConfiguration.add_member(:platform_type, Shapes::ShapeRef.new(shape: PlatformTypeEnum, location_name: "PlatformType"))
+    SupportedInstanceConfiguration.add_member(:tenancy, Shapes::ShapeRef.new(shape: InstanceConfigurationTenancyEnum, location_name: "Tenancy"))
+    SupportedInstanceConfiguration.struct_class = Types::SupportedInstanceConfiguration
+
+    SupportedInstanceConfigurations.member = Shapes::ShapeRef.new(shape: SupportedInstanceConfiguration)
 
     Tag.add_member(:key, Shapes::ShapeRef.new(shape: TagKey, location_name: "Key"))
     Tag.add_member(:value, Shapes::ShapeRef.new(shape: TagValue, location_name: "Value"))

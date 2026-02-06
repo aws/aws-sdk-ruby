@@ -14,6 +14,7 @@ module Aws::SageMaker
 
     include Seahorse::Model
 
+    AbsoluteBorrowLimitResourceList = Shapes::ListShape.new(name: 'AbsoluteBorrowLimitResourceList')
     AcceleratorPartitionConfig = Shapes::StructureShape.new(name: 'AcceleratorPartitionConfig')
     AcceleratorPartitionConfigCountInteger = Shapes::IntegerShape.new(name: 'AcceleratorPartitionConfigCountInteger')
     AcceleratorsAmount = Shapes::IntegerShape.new(name: 'AcceleratorsAmount')
@@ -1278,6 +1279,7 @@ module Aws::SageMaker
     IdempotencyToken = Shapes::StringShape.new(name: 'IdempotencyToken')
     IdentityProviderOAuthSetting = Shapes::StructureShape.new(name: 'IdentityProviderOAuthSetting')
     IdentityProviderOAuthSettings = Shapes::ListShape.new(name: 'IdentityProviderOAuthSettings')
+    IdleResourceSharing = Shapes::StringShape.new(name: 'IdleResourceSharing')
     IdleSettings = Shapes::StructureShape.new(name: 'IdleSettings')
     IdleTimeoutInMinutes = Shapes::IntegerShape.new(name: 'IdleTimeoutInMinutes')
     Image = Shapes::StructureShape.new(name: 'Image')
@@ -2300,6 +2302,7 @@ module Aws::SageMaker
     ScheduleStatus = Shapes::StringShape.new(name: 'ScheduleStatus')
     ScheduledUpdateConfig = Shapes::StructureShape.new(name: 'ScheduledUpdateConfig')
     SchedulerConfig = Shapes::StructureShape.new(name: 'SchedulerConfig')
+    SchedulerConfigComponent = Shapes::StringShape.new(name: 'SchedulerConfigComponent')
     SchedulerResourceStatus = Shapes::StringShape.new(name: 'SchedulerResourceStatus')
     Scope = Shapes::StringShape.new(name: 'Scope')
     SearchExpression = Shapes::StructureShape.new(name: 'SearchExpression')
@@ -2408,6 +2411,7 @@ module Aws::SageMaker
     StartSessionResponse = Shapes::StructureShape.new(name: 'StartSessionResponse')
     Statistic = Shapes::StringShape.new(name: 'Statistic')
     StatusDetails = Shapes::StringShape.new(name: 'StatusDetails')
+    StatusDetailsMap = Shapes::MapShape.new(name: 'StatusDetailsMap')
     StatusMessage = Shapes::StringShape.new(name: 'StatusMessage')
     StepDescription = Shapes::StringShape.new(name: 'StepDescription')
     StepDisplayName = Shapes::StringShape.new(name: 'StepDisplayName')
@@ -2814,6 +2818,8 @@ module Aws::SageMaker
     WorkteamArn = Shapes::StringShape.new(name: 'WorkteamArn')
     WorkteamName = Shapes::StringShape.new(name: 'WorkteamName')
     Workteams = Shapes::ListShape.new(name: 'Workteams')
+
+    AbsoluteBorrowLimitResourceList.member = Shapes::ShapeRef.new(shape: ComputeQuotaResourceConfig)
 
     AcceleratorPartitionConfig.add_member(:type, Shapes::ShapeRef.new(shape: MIGProfileType, required: true, location_name: "Type"))
     AcceleratorPartitionConfig.add_member(:count, Shapes::ShapeRef.new(shape: AcceleratorPartitionConfigCountInteger, required: true, location_name: "Count", metadata: {"box" => true}))
@@ -5532,6 +5538,7 @@ module Aws::SageMaker
     DescribeClusterSchedulerConfigResponse.add_member(:cluster_scheduler_config_version, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "ClusterSchedulerConfigVersion", metadata: {"box" => true}))
     DescribeClusterSchedulerConfigResponse.add_member(:status, Shapes::ShapeRef.new(shape: SchedulerResourceStatus, required: true, location_name: "Status"))
     DescribeClusterSchedulerConfigResponse.add_member(:failure_reason, Shapes::ShapeRef.new(shape: FailureReason, location_name: "FailureReason"))
+    DescribeClusterSchedulerConfigResponse.add_member(:status_details, Shapes::ShapeRef.new(shape: StatusDetailsMap, location_name: "StatusDetails"))
     DescribeClusterSchedulerConfigResponse.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: ClusterArn, location_name: "ClusterArn"))
     DescribeClusterSchedulerConfigResponse.add_member(:scheduler_config, Shapes::ShapeRef.new(shape: SchedulerConfig, location_name: "SchedulerConfig"))
     DescribeClusterSchedulerConfigResponse.add_member(:description, Shapes::ShapeRef.new(shape: EntityDescription, location_name: "Description"))
@@ -10763,6 +10770,7 @@ module Aws::SageMaker
 
     ResourceSharingConfig.add_member(:strategy, Shapes::ShapeRef.new(shape: ResourceSharingStrategy, required: true, location_name: "Strategy"))
     ResourceSharingConfig.add_member(:borrow_limit, Shapes::ShapeRef.new(shape: BorrowLimit, location_name: "BorrowLimit"))
+    ResourceSharingConfig.add_member(:absolute_borrow_limits, Shapes::ShapeRef.new(shape: AbsoluteBorrowLimitResourceList, location_name: "AbsoluteBorrowLimits"))
     ResourceSharingConfig.struct_class = Types::ResourceSharingConfig
 
     ResourceSpec.add_member(:sage_maker_image_arn, Shapes::ShapeRef.new(shape: ImageArn, location_name: "SageMakerImageArn"))
@@ -10872,6 +10880,7 @@ module Aws::SageMaker
 
     SchedulerConfig.add_member(:priority_classes, Shapes::ShapeRef.new(shape: PriorityClassList, location_name: "PriorityClasses"))
     SchedulerConfig.add_member(:fair_share, Shapes::ShapeRef.new(shape: FairShare, location_name: "FairShare"))
+    SchedulerConfig.add_member(:idle_resource_sharing, Shapes::ShapeRef.new(shape: IdleResourceSharing, location_name: "IdleResourceSharing"))
     SchedulerConfig.struct_class = Types::SchedulerConfig
 
     SearchExpression.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filters"))
@@ -11127,6 +11136,9 @@ module Aws::SageMaker
     StartSessionResponse.add_member(:stream_url, Shapes::ShapeRef.new(shape: StreamUrl, location_name: "StreamUrl"))
     StartSessionResponse.add_member(:token_value, Shapes::ShapeRef.new(shape: TokenValue, location_name: "TokenValue"))
     StartSessionResponse.struct_class = Types::StartSessionResponse
+
+    StatusDetailsMap.key = Shapes::ShapeRef.new(shape: SchedulerConfigComponent)
+    StatusDetailsMap.value = Shapes::ShapeRef.new(shape: SchedulerResourceStatus)
 
     StopAutoMLJobRequest.add_member(:auto_ml_job_name, Shapes::ShapeRef.new(shape: AutoMLJobName, required: true, location_name: "AutoMLJobName"))
     StopAutoMLJobRequest.struct_class = Types::StopAutoMLJobRequest

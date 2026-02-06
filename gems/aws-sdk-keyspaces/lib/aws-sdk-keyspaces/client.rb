@@ -764,6 +764,20 @@ module Aws::Keyspaces
     # @option params [Types::CdcSpecification] :cdc_specification
     #   The CDC stream settings of the table.
     #
+    # @option params [Types::WarmThroughputSpecification] :warm_throughput_specification
+    #   Specifies the warm throughput settings for the table. Pre-warming a
+    #   table helps you avoid capacity exceeded exceptions by pre-provisioning
+    #   read and write capacity units to reduce cold start latency when your
+    #   table receives traffic.
+    #
+    #   For more information about pre-warming in Amazon Keyspaces, see
+    #   [Pre-warm a table in Amazon Keyspaces][1] in the *Amazon Keyspaces
+    #   Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/keyspaces/latest/devguide/warm-throughput.html
+    #
     # @return [Types::CreateTableResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateTableResponse#resource_arn #resource_arn} => String
@@ -882,6 +896,10 @@ module Aws::Keyspaces
     #         },
     #       ],
     #       propagate_tags: "TABLE", # accepts TABLE, NONE
+    #     },
+    #     warm_throughput_specification: {
+    #       read_units_per_second: 1,
+    #       write_units_per_second: 1,
     #     },
     #   })
     #
@@ -1139,6 +1157,7 @@ module Aws::Keyspaces
     #   * {Types::GetTableResponse#replica_specifications #replica_specifications} => Array&lt;Types::ReplicaSpecificationSummary&gt;
     #   * {Types::GetTableResponse#latest_stream_arn #latest_stream_arn} => String
     #   * {Types::GetTableResponse#cdc_specification #cdc_specification} => Types::CdcSpecificationSummary
+    #   * {Types::GetTableResponse#warm_throughput_specification #warm_throughput_specification} => Types::WarmThroughputSpecificationSummary
     #
     # @example Request syntax with placeholder values
     #
@@ -1183,9 +1202,15 @@ module Aws::Keyspaces
     #   resp.replica_specifications[0].capacity_specification.read_capacity_units #=> Integer
     #   resp.replica_specifications[0].capacity_specification.write_capacity_units #=> Integer
     #   resp.replica_specifications[0].capacity_specification.last_update_to_pay_per_request_timestamp #=> Time
+    #   resp.replica_specifications[0].warm_throughput_specification.read_units_per_second #=> Integer
+    #   resp.replica_specifications[0].warm_throughput_specification.write_units_per_second #=> Integer
+    #   resp.replica_specifications[0].warm_throughput_specification.status #=> String, one of "AVAILABLE", "UPDATING"
     #   resp.latest_stream_arn #=> String
     #   resp.cdc_specification.status #=> String, one of "ENABLED", "ENABLING", "DISABLED", "DISABLING"
     #   resp.cdc_specification.view_type #=> String, one of "NEW_IMAGE", "OLD_IMAGE", "KEYS_ONLY", "NEW_AND_OLD_IMAGES"
+    #   resp.warm_throughput_specification.read_units_per_second #=> Integer
+    #   resp.warm_throughput_specification.write_units_per_second #=> Integer
+    #   resp.warm_throughput_specification.status #=> String, one of "AVAILABLE", "UPDATING"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/keyspaces-2022-02-10/GetTable AWS API Documentation
     #
@@ -2139,6 +2164,11 @@ module Aws::Keyspaces
     # @option params [Types::CdcSpecification] :cdc_specification
     #   The CDC stream settings of the table.
     #
+    # @option params [Types::WarmThroughputSpecification] :warm_throughput_specification
+    #   Modifies the warm throughput settings for the table. You can update
+    #   the read and write capacity units to adjust the pre-provisioned
+    #   throughput.
+    #
     # @return [Types::UpdateTableResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateTableResponse#resource_arn #resource_arn} => String
@@ -2231,6 +2261,10 @@ module Aws::Keyspaces
     #       ],
     #       propagate_tags: "TABLE", # accepts TABLE, NONE
     #     },
+    #     warm_throughput_specification: {
+    #       read_units_per_second: 1,
+    #       write_units_per_second: 1,
+    #     },
     #   })
     #
     # @example Response structure
@@ -2264,7 +2298,7 @@ module Aws::Keyspaces
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-keyspaces'
-      context[:gem_version] = '1.52.0'
+      context[:gem_version] = '1.54.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

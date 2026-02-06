@@ -144,9 +144,11 @@ module Aws::MediaConnect
     DurationUnits = Shapes::StringShape.new(name: 'DurationUnits')
     EgressGatewayBridge = Shapes::StructureShape.new(name: 'EgressGatewayBridge')
     EncoderProfile = Shapes::StringShape.new(name: 'EncoderProfile')
+    EncodingConfig = Shapes::StructureShape.new(name: 'EncodingConfig')
     EncodingName = Shapes::StringShape.new(name: 'EncodingName')
     EncodingParameters = Shapes::StructureShape.new(name: 'EncodingParameters')
     EncodingParametersRequest = Shapes::StructureShape.new(name: 'EncodingParametersRequest')
+    EncodingProfile = Shapes::StringShape.new(name: 'EncodingProfile')
     Encryption = Shapes::StructureShape.new(name: 'Encryption')
     Entitlement = Shapes::StructureShape.new(name: 'Entitlement')
     EntitlementStatus = Shapes::StringShape.new(name: 'EntitlementStatus')
@@ -278,6 +280,11 @@ module Aws::MediaConnect
     MulticastSourceSettings = Shapes::StructureShape.new(name: 'MulticastSourceSettings')
     NdiConfig = Shapes::StructureShape.new(name: 'NdiConfig')
     NdiDiscoveryServerConfig = Shapes::StructureShape.new(name: 'NdiDiscoveryServerConfig')
+    NdiMediaInfo = Shapes::StructureShape.new(name: 'NdiMediaInfo')
+    NdiMediaStreamInfo = Shapes::StructureShape.new(name: 'NdiMediaStreamInfo')
+    NdiSourceInfo = Shapes::StructureShape.new(name: 'NdiSourceInfo')
+    NdiSourceMetadataInfo = Shapes::StructureShape.new(name: 'NdiSourceMetadataInfo')
+    NdiSourceSettings = Shapes::StructureShape.new(name: 'NdiSourceSettings')
     NdiState = Shapes::StringShape.new(name: 'NdiState')
     NetworkInterfaceType = Shapes::StringShape.new(name: 'NetworkInterfaceType')
     NotFoundException = Shapes::StructureShape.new(name: 'NotFoundException')
@@ -541,6 +548,8 @@ module Aws::MediaConnect
     __listOfMediaStreamSourceConfigurationRequest = Shapes::ListShape.new(name: '__listOfMediaStreamSourceConfigurationRequest')
     __listOfMessageDetail = Shapes::ListShape.new(name: '__listOfMessageDetail')
     __listOfNdiDiscoveryServerConfig = Shapes::ListShape.new(name: '__listOfNdiDiscoveryServerConfig')
+    __listOfNdiMediaStreamInfo = Shapes::ListShape.new(name: '__listOfNdiMediaStreamInfo')
+    __listOfNdiSourceInfo = Shapes::ListShape.new(name: '__listOfNdiSourceInfo')
     __listOfOffering = Shapes::ListShape.new(name: '__listOfOffering')
     __listOfOutput = Shapes::ListShape.new(name: '__listOfOutput')
     __listOfReservation = Shapes::ListShape.new(name: '__listOfReservation')
@@ -818,6 +827,7 @@ module Aws::MediaConnect
     CreateFlowRequest.add_member(:source_monitoring_config, Shapes::ShapeRef.new(shape: MonitoringConfig, location_name: "sourceMonitoringConfig"))
     CreateFlowRequest.add_member(:flow_size, Shapes::ShapeRef.new(shape: FlowSize, location_name: "flowSize"))
     CreateFlowRequest.add_member(:ndi_config, Shapes::ShapeRef.new(shape: NdiConfig, location_name: "ndiConfig"))
+    CreateFlowRequest.add_member(:encoding_config, Shapes::ShapeRef.new(shape: EncodingConfig, location_name: "encodingConfig"))
     CreateFlowRequest.add_member(:flow_tags, Shapes::ShapeRef.new(shape: __mapOfString, location_name: "flowTags"))
     CreateFlowRequest.struct_class = Types::CreateFlowRequest
 
@@ -949,6 +959,7 @@ module Aws::MediaConnect
     DescribeFlowSourceMetadataResponse.add_member(:messages, Shapes::ShapeRef.new(shape: __listOfMessageDetail, location_name: "messages"))
     DescribeFlowSourceMetadataResponse.add_member(:timestamp, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "timestamp"))
     DescribeFlowSourceMetadataResponse.add_member(:transport_media_info, Shapes::ShapeRef.new(shape: TransportMediaInfo, location_name: "transportMediaInfo"))
+    DescribeFlowSourceMetadataResponse.add_member(:ndi_info, Shapes::ShapeRef.new(shape: NdiSourceMetadataInfo, location_name: "ndiInfo"))
     DescribeFlowSourceMetadataResponse.struct_class = Types::DescribeFlowSourceMetadataResponse
 
     DescribeFlowSourceThumbnailRequest.add_member(:flow_arn, Shapes::ShapeRef.new(shape: FlowArn, required: true, location: "uri", location_name: "FlowArn"))
@@ -995,6 +1006,10 @@ module Aws::MediaConnect
     EgressGatewayBridge.add_member(:instance_id, Shapes::ShapeRef.new(shape: String, location_name: "instanceId"))
     EgressGatewayBridge.add_member(:max_bitrate, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "maxBitrate"))
     EgressGatewayBridge.struct_class = Types::EgressGatewayBridge
+
+    EncodingConfig.add_member(:encoding_profile, Shapes::ShapeRef.new(shape: EncodingProfile, location_name: "encodingProfile"))
+    EncodingConfig.add_member(:video_max_bitrate, Shapes::ShapeRef.new(shape: Integer, location_name: "videoMaxBitrate"))
+    EncodingConfig.struct_class = Types::EncodingConfig
 
     EncodingParameters.add_member(:compression_factor, Shapes::ShapeRef.new(shape: Double, required: true, location_name: "compressionFactor"))
     EncodingParameters.add_member(:encoder_profile, Shapes::ShapeRef.new(shape: EncoderProfile, required: true, location_name: "encoderProfile"))
@@ -1075,6 +1090,7 @@ module Aws::MediaConnect
     Flow.add_member(:source_monitoring_config, Shapes::ShapeRef.new(shape: MonitoringConfig, location_name: "sourceMonitoringConfig"))
     Flow.add_member(:flow_size, Shapes::ShapeRef.new(shape: FlowSize, location_name: "flowSize"))
     Flow.add_member(:ndi_config, Shapes::ShapeRef.new(shape: NdiConfig, location_name: "ndiConfig"))
+    Flow.add_member(:encoding_config, Shapes::ShapeRef.new(shape: EncodingConfig, location_name: "encodingConfig"))
     Flow.struct_class = Types::Flow
 
     FlowTransitEncryption.add_member(:encryption_key_type, Shapes::ShapeRef.new(shape: FlowTransitEncryptionKeyType, location_name: "encryptionKeyType"))
@@ -1548,6 +1564,31 @@ module Aws::MediaConnect
     NdiDiscoveryServerConfig.add_member(:vpc_interface_adapter, Shapes::ShapeRef.new(shape: String, required: true, location_name: "vpcInterfaceAdapter"))
     NdiDiscoveryServerConfig.struct_class = Types::NdiDiscoveryServerConfig
 
+    NdiMediaInfo.add_member(:streams, Shapes::ShapeRef.new(shape: __listOfNdiMediaStreamInfo, required: true, location_name: "streams"))
+    NdiMediaInfo.struct_class = Types::NdiMediaInfo
+
+    NdiMediaStreamInfo.add_member(:stream_type, Shapes::ShapeRef.new(shape: String, required: true, location_name: "streamType"))
+    NdiMediaStreamInfo.add_member(:codec, Shapes::ShapeRef.new(shape: String, required: true, location_name: "codec"))
+    NdiMediaStreamInfo.add_member(:stream_id, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "streamId"))
+    NdiMediaStreamInfo.add_member(:scan_mode, Shapes::ShapeRef.new(shape: ScanMode, location_name: "scanMode"))
+    NdiMediaStreamInfo.add_member(:frame_resolution, Shapes::ShapeRef.new(shape: FrameResolution, location_name: "frameResolution"))
+    NdiMediaStreamInfo.add_member(:frame_rate, Shapes::ShapeRef.new(shape: String, location_name: "frameRate"))
+    NdiMediaStreamInfo.add_member(:channels, Shapes::ShapeRef.new(shape: Integer, location_name: "channels"))
+    NdiMediaStreamInfo.add_member(:sample_rate, Shapes::ShapeRef.new(shape: Integer, location_name: "sampleRate"))
+    NdiMediaStreamInfo.struct_class = Types::NdiMediaStreamInfo
+
+    NdiSourceInfo.add_member(:source_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "sourceName"))
+    NdiSourceInfo.struct_class = Types::NdiSourceInfo
+
+    NdiSourceMetadataInfo.add_member(:active_source, Shapes::ShapeRef.new(shape: NdiSourceInfo, location_name: "activeSource"))
+    NdiSourceMetadataInfo.add_member(:discovered_sources, Shapes::ShapeRef.new(shape: __listOfNdiSourceInfo, required: true, location_name: "discoveredSources"))
+    NdiSourceMetadataInfo.add_member(:media_info, Shapes::ShapeRef.new(shape: NdiMediaInfo, required: true, location_name: "mediaInfo"))
+    NdiSourceMetadataInfo.add_member(:messages, Shapes::ShapeRef.new(shape: __listOfMessageDetail, required: true, location_name: "messages"))
+    NdiSourceMetadataInfo.struct_class = Types::NdiSourceMetadataInfo
+
+    NdiSourceSettings.add_member(:source_name, Shapes::ShapeRef.new(shape: String, location_name: "sourceName"))
+    NdiSourceSettings.struct_class = Types::NdiSourceSettings
+
     NotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     NotFoundException.struct_class = Types::NotFoundException
 
@@ -1997,6 +2038,7 @@ module Aws::MediaConnect
     SetSourceRequest.add_member(:vpc_interface_name, Shapes::ShapeRef.new(shape: String, location_name: "vpcInterfaceName"))
     SetSourceRequest.add_member(:whitelist_cidr, Shapes::ShapeRef.new(shape: String, location_name: "whitelistCidr"))
     SetSourceRequest.add_member(:gateway_bridge_source, Shapes::ShapeRef.new(shape: SetGatewayBridgeSourceRequest, location_name: "gatewayBridgeSource"))
+    SetSourceRequest.add_member(:ndi_source_settings, Shapes::ShapeRef.new(shape: NdiSourceSettings, location_name: "ndiSourceSettings"))
     SetSourceRequest.add_member(:source_tags, Shapes::ShapeRef.new(shape: __mapOfString, location_name: "sourceTags"))
     SetSourceRequest.add_member(:router_integration_state, Shapes::ShapeRef.new(shape: State, location_name: "routerIntegrationState"))
     SetSourceRequest.add_member(:router_integration_transit_decryption, Shapes::ShapeRef.new(shape: FlowTransitEncryption, location_name: "routerIntegrationTransitDecryption"))
@@ -2172,6 +2214,7 @@ module Aws::MediaConnect
     Transport.add_member(:stream_id, Shapes::ShapeRef.new(shape: String, location_name: "streamId"))
     Transport.add_member(:ndi_speed_hq_quality, Shapes::ShapeRef.new(shape: Integer, location_name: "ndiSpeedHqQuality"))
     Transport.add_member(:ndi_program_name, Shapes::ShapeRef.new(shape: String, location_name: "ndiProgramName"))
+    Transport.add_member(:ndi_source_settings, Shapes::ShapeRef.new(shape: NdiSourceSettings, location_name: "ndiSourceSettings"))
     Transport.struct_class = Types::Transport
 
     TransportMediaInfo.add_member(:programs, Shapes::ShapeRef.new(shape: __listOfTransportStreamProgram, required: true, location_name: "programs"))
@@ -2335,6 +2378,7 @@ module Aws::MediaConnect
     UpdateFlowRequest.add_member(:source_monitoring_config, Shapes::ShapeRef.new(shape: MonitoringConfig, location_name: "sourceMonitoringConfig"))
     UpdateFlowRequest.add_member(:ndi_config, Shapes::ShapeRef.new(shape: NdiConfig, location_name: "ndiConfig"))
     UpdateFlowRequest.add_member(:flow_size, Shapes::ShapeRef.new(shape: FlowSize, location_name: "flowSize"))
+    UpdateFlowRequest.add_member(:encoding_config, Shapes::ShapeRef.new(shape: EncodingConfig, location_name: "encodingConfig"))
     UpdateFlowRequest.struct_class = Types::UpdateFlowRequest
 
     UpdateFlowResponse.add_member(:flow, Shapes::ShapeRef.new(shape: Flow, location_name: "flow"))
@@ -2360,6 +2404,7 @@ module Aws::MediaConnect
     UpdateFlowSourceRequest.add_member(:vpc_interface_name, Shapes::ShapeRef.new(shape: String, location_name: "vpcInterfaceName"))
     UpdateFlowSourceRequest.add_member(:whitelist_cidr, Shapes::ShapeRef.new(shape: String, location_name: "whitelistCidr"))
     UpdateFlowSourceRequest.add_member(:gateway_bridge_source, Shapes::ShapeRef.new(shape: UpdateGatewayBridgeSourceRequest, location_name: "gatewayBridgeSource"))
+    UpdateFlowSourceRequest.add_member(:ndi_source_settings, Shapes::ShapeRef.new(shape: NdiSourceSettings, location_name: "ndiSourceSettings"))
     UpdateFlowSourceRequest.add_member(:router_integration_state, Shapes::ShapeRef.new(shape: State, location_name: "routerIntegrationState"))
     UpdateFlowSourceRequest.add_member(:router_integration_transit_decryption, Shapes::ShapeRef.new(shape: FlowTransitEncryption, location_name: "routerIntegrationTransitDecryption"))
     UpdateFlowSourceRequest.struct_class = Types::UpdateFlowSourceRequest
@@ -2509,6 +2554,10 @@ module Aws::MediaConnect
     __listOfMessageDetail.member = Shapes::ShapeRef.new(shape: MessageDetail)
 
     __listOfNdiDiscoveryServerConfig.member = Shapes::ShapeRef.new(shape: NdiDiscoveryServerConfig)
+
+    __listOfNdiMediaStreamInfo.member = Shapes::ShapeRef.new(shape: NdiMediaStreamInfo)
+
+    __listOfNdiSourceInfo.member = Shapes::ShapeRef.new(shape: NdiSourceInfo)
 
     __listOfOffering.member = Shapes::ShapeRef.new(shape: Offering)
 

@@ -913,9 +913,13 @@ module Aws::Transfer
     #       encryption_algorithm: "AES128_CBC", # accepts AES128_CBC, AES192_CBC, AES256_CBC, DES_EDE3_CBC, NONE
     #       signing_algorithm: "SHA256", # accepts SHA256, SHA384, SHA512, SHA1, NONE
     #       mdn_signing_algorithm: "SHA256", # accepts SHA256, SHA384, SHA512, SHA1, NONE, DEFAULT
-    #       mdn_response: "SYNC", # accepts SYNC, NONE
+    #       mdn_response: "SYNC", # accepts SYNC, NONE, ASYNC
     #       basic_auth_secret_id: "As2ConnectorSecretId",
     #       preserve_content_type: "ENABLED", # accepts ENABLED, DISABLED
+    #       async_mdn_config: {
+    #         url: "Url",
+    #         server_ids: ["ServerId"],
+    #       },
     #     },
     #     access_role: "Role", # required
     #     logging_role: "Role",
@@ -2417,9 +2421,12 @@ module Aws::Transfer
     #   resp.connector.as_2_config.encryption_algorithm #=> String, one of "AES128_CBC", "AES192_CBC", "AES256_CBC", "DES_EDE3_CBC", "NONE"
     #   resp.connector.as_2_config.signing_algorithm #=> String, one of "SHA256", "SHA384", "SHA512", "SHA1", "NONE"
     #   resp.connector.as_2_config.mdn_signing_algorithm #=> String, one of "SHA256", "SHA384", "SHA512", "SHA1", "NONE", "DEFAULT"
-    #   resp.connector.as_2_config.mdn_response #=> String, one of "SYNC", "NONE"
+    #   resp.connector.as_2_config.mdn_response #=> String, one of "SYNC", "NONE", "ASYNC"
     #   resp.connector.as_2_config.basic_auth_secret_id #=> String
     #   resp.connector.as_2_config.preserve_content_type #=> String, one of "ENABLED", "DISABLED"
+    #   resp.connector.as_2_config.async_mdn_config.url #=> String
+    #   resp.connector.as_2_config.async_mdn_config.server_ids #=> Array
+    #   resp.connector.as_2_config.async_mdn_config.server_ids[0] #=> String
     #   resp.connector.access_role #=> String
     #   resp.connector.logging_role #=> String
     #   resp.connector.tags #=> Array
@@ -4103,6 +4110,11 @@ module Aws::Transfer
     #   the destination for transferred files is the SFTP user's home
     #   directory.
     #
+    # @option params [Array<Types::CustomHttpHeader>] :custom_http_headers
+    #   An array of key-value pairs that represent custom HTTP headers to
+    #   include in AS2 messages. These headers are added to the AS2 message
+    #   when sending files to your trading partner.
+    #
     # @return [Types::StartFileTransferResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartFileTransferResponse#transfer_id #transfer_id} => String
@@ -4115,6 +4127,12 @@ module Aws::Transfer
     #     retrieve_file_paths: ["FilePath"],
     #     local_directory_path: "FilePath",
     #     remote_directory_path: "FilePath",
+    #     custom_http_headers: [
+    #       {
+    #         key: "CustomHttpHeaderKeyType",
+    #         value: "CustomHttpHeaderValueType",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -4931,9 +4949,13 @@ module Aws::Transfer
     #       encryption_algorithm: "AES128_CBC", # accepts AES128_CBC, AES192_CBC, AES256_CBC, DES_EDE3_CBC, NONE
     #       signing_algorithm: "SHA256", # accepts SHA256, SHA384, SHA512, SHA1, NONE
     #       mdn_signing_algorithm: "SHA256", # accepts SHA256, SHA384, SHA512, SHA1, NONE, DEFAULT
-    #       mdn_response: "SYNC", # accepts SYNC, NONE
+    #       mdn_response: "SYNC", # accepts SYNC, NONE, ASYNC
     #       basic_auth_secret_id: "As2ConnectorSecretId",
     #       preserve_content_type: "ENABLED", # accepts ENABLED, DISABLED
+    #       async_mdn_config: {
+    #         url: "Url",
+    #         server_ids: ["ServerId"],
+    #       },
     #     },
     #     access_role: "Role",
     #     logging_role: "Role",
@@ -5732,7 +5754,7 @@ module Aws::Transfer
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-transfer'
-      context[:gem_version] = '1.130.0'
+      context[:gem_version] = '1.132.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

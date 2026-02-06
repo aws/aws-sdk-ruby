@@ -55,7 +55,7 @@ module Aws::Repostspace
   autoload :EndpointProvider, 'aws-sdk-repostspace/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-repostspace/endpoints'
 
-  GEM_VERSION = '1.33.0'
+  GEM_VERSION = '1.34.0'
 
 end
 

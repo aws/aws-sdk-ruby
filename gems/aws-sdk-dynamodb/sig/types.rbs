@@ -330,6 +330,8 @@ module Aws::DynamoDB
       attr_accessor warm_throughput: Types::WarmThroughput
       attr_accessor resource_policy: ::String
       attr_accessor on_demand_throughput: Types::OnDemandThroughput
+      attr_accessor global_table_source_arn: ::String
+      attr_accessor global_table_settings_replication_mode: ("ENABLED" | "DISABLED" | "ENABLED_WITH_OVERRIDES")
       SENSITIVE: []
     end
 
@@ -1292,6 +1294,7 @@ module Aws::DynamoDB
       attr_accessor global_secondary_indexes: ::Array[Types::ReplicaGlobalSecondaryIndexDescription]
       attr_accessor replica_inaccessible_date_time: ::Time
       attr_accessor replica_table_class_summary: Types::TableClassSummary
+      attr_accessor global_table_settings_replication_mode: ("ENABLED" | "DISABLED" | "ENABLED_WITH_OVERRIDES")
       SENSITIVE: []
     end
 
@@ -1577,6 +1580,7 @@ module Aws::DynamoDB
       attr_accessor global_table_version: ::String
       attr_accessor replicas: ::Array[Types::ReplicaDescription]
       attr_accessor global_table_witnesses: ::Array[Types::GlobalTableWitnessDescription]
+      attr_accessor global_table_settings_replication_mode: ("ENABLED" | "DISABLED" | "ENABLED_WITH_OVERRIDES")
       attr_accessor restore_summary: Types::RestoreSummary
       attr_accessor sse_description: Types::SSEDescription
       attr_accessor archival_summary: Types::ArchivalSummary

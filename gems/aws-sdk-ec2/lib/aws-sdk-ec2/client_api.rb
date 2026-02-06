@@ -67,6 +67,7 @@ module Aws::EC2
     AddedPrincipalSet = Shapes::ListShape.new(name: 'AddedPrincipalSet')
     AdditionalDetail = Shapes::StructureShape.new(name: 'AdditionalDetail')
     AdditionalDetailList = Shapes::ListShape.new(name: 'AdditionalDetailList')
+    AdditionalFlexibleNetworkInterfaces = Shapes::IntegerShape.new(name: 'AdditionalFlexibleNetworkInterfaces')
     Address = Shapes::StructureShape.new(name: 'Address')
     AddressAttribute = Shapes::StructureShape.new(name: 'AddressAttribute')
     AddressAttributeName = Shapes::StringShape.new(name: 'AddressAttributeName')
@@ -1511,6 +1512,9 @@ module Aws::EC2
     DynamicRoutingValue = Shapes::StringShape.new(name: 'DynamicRoutingValue')
     EbsBlockDevice = Shapes::StructureShape.new(name: 'EbsBlockDevice')
     EbsBlockDeviceResponse = Shapes::StructureShape.new(name: 'EbsBlockDeviceResponse')
+    EbsCardIndex = Shapes::IntegerShape.new(name: 'EbsCardIndex')
+    EbsCardInfo = Shapes::StructureShape.new(name: 'EbsCardInfo')
+    EbsCardInfoList = Shapes::ListShape.new(name: 'EbsCardInfoList')
     EbsEncryptionSupport = Shapes::StringShape.new(name: 'EbsEncryptionSupport')
     EbsInfo = Shapes::StructureShape.new(name: 'EbsInfo')
     EbsInstanceBlockDevice = Shapes::StructureShape.new(name: 'EbsInstanceBlockDevice')
@@ -1892,6 +1896,7 @@ module Aws::EC2
     GpuDeviceMemorySize = Shapes::IntegerShape.new(name: 'GpuDeviceMemorySize')
     GpuDeviceName = Shapes::StringShape.new(name: 'GpuDeviceName')
     GpuInfo = Shapes::StructureShape.new(name: 'GpuInfo')
+    GpuPartitionSize = Shapes::FloatShape.new(name: 'GpuPartitionSize')
     GroupBy = Shapes::StringShape.new(name: 'GroupBy')
     GroupBySet = Shapes::ListShape.new(name: 'GroupBySet')
     GroupIdStringList = Shapes::ListShape.new(name: 'GroupIdStringList')
@@ -2499,6 +2504,7 @@ module Aws::EC2
     LockedSnapshotsInfo = Shapes::StructureShape.new(name: 'LockedSnapshotsInfo')
     LockedSnapshotsInfoList = Shapes::ListShape.new(name: 'LockedSnapshotsInfoList')
     LogDestinationType = Shapes::StringShape.new(name: 'LogDestinationType')
+    LogicalGpuCount = Shapes::IntegerShape.new(name: 'LogicalGpuCount')
     Long = Shapes::IntegerShape.new(name: 'Long')
     MacHost = Shapes::StructureShape.new(name: 'MacHost')
     MacHostList = Shapes::ListShape.new(name: 'MacHostList')
@@ -2530,6 +2536,7 @@ module Aws::EC2
     MaximumDaysSinceCreatedValue = Shapes::IntegerShape.new(name: 'MaximumDaysSinceCreatedValue')
     MaximumDaysSinceDeprecatedValue = Shapes::IntegerShape.new(name: 'MaximumDaysSinceDeprecatedValue')
     MaximumEbsAttachments = Shapes::IntegerShape.new(name: 'MaximumEbsAttachments')
+    MaximumEbsCards = Shapes::IntegerShape.new(name: 'MaximumEbsCards')
     MaximumEfaInterfaces = Shapes::IntegerShape.new(name: 'MaximumEfaInterfaces')
     MaximumEnaQueueCount = Shapes::IntegerShape.new(name: 'MaximumEnaQueueCount')
     MaximumEnaQueueCountPerInterface = Shapes::IntegerShape.new(name: 'MaximumEnaQueueCountPerInterface')
@@ -3881,6 +3888,8 @@ module Aws::EC2
     WeekDay = Shapes::StringShape.new(name: 'WeekDay')
     WithdrawByoipCidrRequest = Shapes::StructureShape.new(name: 'WithdrawByoipCidrRequest')
     WithdrawByoipCidrResult = Shapes::StructureShape.new(name: 'WithdrawByoipCidrResult')
+    Workload = Shapes::StringShape.new(name: 'Workload')
+    WorkloadsList = Shapes::ListShape.new(name: 'WorkloadsList')
     ZoneIdStringList = Shapes::ListShape.new(name: 'ZoneIdStringList')
     ZoneNameStringList = Shapes::ListShape.new(name: 'ZoneNameStringList')
     customerGatewayConfiguration = Shapes::StringShape.new(name: 'customerGatewayConfiguration')
@@ -4563,6 +4572,7 @@ module Aws::EC2
     AttachVolumeRequest.add_member(:device, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Device"))
     AttachVolumeRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location_name: "InstanceId"))
     AttachVolumeRequest.add_member(:volume_id, Shapes::ShapeRef.new(shape: VolumeId, required: true, location_name: "VolumeId"))
+    AttachVolumeRequest.add_member(:ebs_card_index, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "EbsCardIndex"))
     AttachVolumeRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
     AttachVolumeRequest.struct_class = Types::AttachVolumeRequest
 
@@ -10150,6 +10160,7 @@ module Aws::EC2
     EbsBlockDevice.add_member(:encrypted, Shapes::ShapeRef.new(shape: Boolean, location_name: "encrypted"))
     EbsBlockDevice.add_member(:volume_initialization_rate, Shapes::ShapeRef.new(shape: Integer, location_name: "VolumeInitializationRate"))
     EbsBlockDevice.add_member(:availability_zone_id, Shapes::ShapeRef.new(shape: String, location_name: "AvailabilityZoneId"))
+    EbsBlockDevice.add_member(:ebs_card_index, Shapes::ShapeRef.new(shape: Integer, location_name: "EbsCardIndex"))
     EbsBlockDevice.struct_class = Types::EbsBlockDevice
 
     EbsBlockDeviceResponse.add_member(:encrypted, Shapes::ShapeRef.new(shape: Boolean, location_name: "encrypted"))
@@ -10162,12 +10173,25 @@ module Aws::EC2
     EbsBlockDeviceResponse.add_member(:volume_type, Shapes::ShapeRef.new(shape: VolumeType, location_name: "volumeType"))
     EbsBlockDeviceResponse.struct_class = Types::EbsBlockDeviceResponse
 
+    EbsCardInfo.add_member(:ebs_card_index, Shapes::ShapeRef.new(shape: EbsCardIndex, location_name: "ebsCardIndex"))
+    EbsCardInfo.add_member(:baseline_bandwidth_in_mbps, Shapes::ShapeRef.new(shape: BaselineBandwidthInMbps, location_name: "baselineBandwidthInMbps"))
+    EbsCardInfo.add_member(:baseline_throughput_in_m_bps, Shapes::ShapeRef.new(shape: BaselineThroughputInMBps, location_name: "baselineThroughputInMBps"))
+    EbsCardInfo.add_member(:baseline_iops, Shapes::ShapeRef.new(shape: BaselineIops, location_name: "baselineIops"))
+    EbsCardInfo.add_member(:maximum_bandwidth_in_mbps, Shapes::ShapeRef.new(shape: MaximumBandwidthInMbps, location_name: "maximumBandwidthInMbps"))
+    EbsCardInfo.add_member(:maximum_throughput_in_m_bps, Shapes::ShapeRef.new(shape: MaximumThroughputInMBps, location_name: "maximumThroughputInMBps"))
+    EbsCardInfo.add_member(:maximum_iops, Shapes::ShapeRef.new(shape: MaximumIops, location_name: "maximumIops"))
+    EbsCardInfo.struct_class = Types::EbsCardInfo
+
+    EbsCardInfoList.member = Shapes::ShapeRef.new(shape: EbsCardInfo, location_name: "item")
+
     EbsInfo.add_member(:ebs_optimized_support, Shapes::ShapeRef.new(shape: EbsOptimizedSupport, location_name: "ebsOptimizedSupport"))
     EbsInfo.add_member(:encryption_support, Shapes::ShapeRef.new(shape: EbsEncryptionSupport, location_name: "encryptionSupport"))
     EbsInfo.add_member(:ebs_optimized_info, Shapes::ShapeRef.new(shape: EbsOptimizedInfo, location_name: "ebsOptimizedInfo"))
     EbsInfo.add_member(:nvme_support, Shapes::ShapeRef.new(shape: EbsNvmeSupport, location_name: "nvmeSupport"))
     EbsInfo.add_member(:maximum_ebs_attachments, Shapes::ShapeRef.new(shape: MaximumEbsAttachments, location_name: "maximumEbsAttachments"))
     EbsInfo.add_member(:attachment_limit_type, Shapes::ShapeRef.new(shape: AttachmentLimitType, location_name: "attachmentLimitType"))
+    EbsInfo.add_member(:maximum_ebs_cards, Shapes::ShapeRef.new(shape: MaximumEbsCards, location_name: "maximumEbsCards"))
+    EbsInfo.add_member(:ebs_cards, Shapes::ShapeRef.new(shape: EbsCardInfoList, location_name: "ebsCardSet"))
     EbsInfo.struct_class = Types::EbsInfo
 
     EbsInstanceBlockDevice.add_member(:attach_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "attachTime"))
@@ -10177,6 +10201,7 @@ module Aws::EC2
     EbsInstanceBlockDevice.add_member(:associated_resource, Shapes::ShapeRef.new(shape: String, location_name: "associatedResource"))
     EbsInstanceBlockDevice.add_member(:volume_owner_id, Shapes::ShapeRef.new(shape: String, location_name: "volumeOwnerId"))
     EbsInstanceBlockDevice.add_member(:operator, Shapes::ShapeRef.new(shape: OperatorResponse, location_name: "operator"))
+    EbsInstanceBlockDevice.add_member(:ebs_card_index, Shapes::ShapeRef.new(shape: Integer, location_name: "ebsCardIndex"))
     EbsInstanceBlockDevice.struct_class = Types::EbsInstanceBlockDevice
 
     EbsInstanceBlockDeviceSpecification.add_member(:volume_id, Shapes::ShapeRef.new(shape: VolumeId, location_name: "volumeId"))
@@ -11687,6 +11712,9 @@ module Aws::EC2
     GpuDeviceInfo.add_member(:name, Shapes::ShapeRef.new(shape: GpuDeviceName, location_name: "name"))
     GpuDeviceInfo.add_member(:manufacturer, Shapes::ShapeRef.new(shape: GpuDeviceManufacturerName, location_name: "manufacturer"))
     GpuDeviceInfo.add_member(:count, Shapes::ShapeRef.new(shape: GpuDeviceCount, location_name: "count"))
+    GpuDeviceInfo.add_member(:logical_gpu_count, Shapes::ShapeRef.new(shape: LogicalGpuCount, location_name: "logicalGpuCount"))
+    GpuDeviceInfo.add_member(:gpu_partition_size, Shapes::ShapeRef.new(shape: GpuPartitionSize, location_name: "gpuPartitionSize"))
+    GpuDeviceInfo.add_member(:workloads, Shapes::ShapeRef.new(shape: WorkloadsList, location_name: "workloadSet"))
     GpuDeviceInfo.add_member(:memory_info, Shapes::ShapeRef.new(shape: GpuDeviceMemoryInfo, location_name: "memoryInfo"))
     GpuDeviceInfo.struct_class = Types::GpuDeviceInfo
 
@@ -13413,6 +13441,7 @@ module Aws::EC2
     LaunchTemplateEbsBlockDevice.add_member(:volume_type, Shapes::ShapeRef.new(shape: VolumeType, location_name: "volumeType"))
     LaunchTemplateEbsBlockDevice.add_member(:throughput, Shapes::ShapeRef.new(shape: Integer, location_name: "throughput"))
     LaunchTemplateEbsBlockDevice.add_member(:volume_initialization_rate, Shapes::ShapeRef.new(shape: Integer, location_name: "volumeInitializationRate"))
+    LaunchTemplateEbsBlockDevice.add_member(:ebs_card_index, Shapes::ShapeRef.new(shape: Integer, location_name: "ebsCardIndex"))
     LaunchTemplateEbsBlockDevice.struct_class = Types::LaunchTemplateEbsBlockDevice
 
     LaunchTemplateEbsBlockDeviceRequest.add_member(:encrypted, Shapes::ShapeRef.new(shape: Boolean, location_name: "Encrypted"))
@@ -13424,6 +13453,7 @@ module Aws::EC2
     LaunchTemplateEbsBlockDeviceRequest.add_member(:volume_type, Shapes::ShapeRef.new(shape: VolumeType, location_name: "VolumeType"))
     LaunchTemplateEbsBlockDeviceRequest.add_member(:throughput, Shapes::ShapeRef.new(shape: Integer, location_name: "Throughput"))
     LaunchTemplateEbsBlockDeviceRequest.add_member(:volume_initialization_rate, Shapes::ShapeRef.new(shape: Integer, location_name: "VolumeInitializationRate"))
+    LaunchTemplateEbsBlockDeviceRequest.add_member(:ebs_card_index, Shapes::ShapeRef.new(shape: Integer, location_name: "EbsCardIndex"))
     LaunchTemplateEbsBlockDeviceRequest.struct_class = Types::LaunchTemplateEbsBlockDeviceRequest
 
     LaunchTemplateElasticInferenceAccelerator.add_member(:type, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Type"))
@@ -15052,6 +15082,7 @@ module Aws::EC2
     NetworkCardInfo.add_member(:network_card_index, Shapes::ShapeRef.new(shape: NetworkCardIndex, location_name: "networkCardIndex"))
     NetworkCardInfo.add_member(:network_performance, Shapes::ShapeRef.new(shape: NetworkPerformance, location_name: "networkPerformance"))
     NetworkCardInfo.add_member(:maximum_network_interfaces, Shapes::ShapeRef.new(shape: MaxNetworkInterfaces, location_name: "maximumNetworkInterfaces"))
+    NetworkCardInfo.add_member(:additional_flexible_network_interfaces, Shapes::ShapeRef.new(shape: AdditionalFlexibleNetworkInterfaces, location_name: "additionalFlexibleNetworkInterfaces"))
     NetworkCardInfo.add_member(:baseline_bandwidth_in_gbps, Shapes::ShapeRef.new(shape: BaselineBandwidthInGbps, location_name: "baselineBandwidthInGbps"))
     NetworkCardInfo.add_member(:peak_bandwidth_in_gbps, Shapes::ShapeRef.new(shape: PeakBandwidthInGbps, location_name: "peakBandwidthInGbps"))
     NetworkCardInfo.add_member(:default_ena_queue_count_per_interface, Shapes::ShapeRef.new(shape: DefaultEnaQueueCountPerInterface, location_name: "defaultEnaQueueCountPerInterface"))
@@ -16970,10 +17001,12 @@ module Aws::EC2
     SearchTransitGatewayRoutesRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, required: true, location_name: "Filter"))
     SearchTransitGatewayRoutesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: TransitGatewayMaxResults, location_name: "MaxResults"))
     SearchTransitGatewayRoutesRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    SearchTransitGatewayRoutesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     SearchTransitGatewayRoutesRequest.struct_class = Types::SearchTransitGatewayRoutesRequest
 
     SearchTransitGatewayRoutesResult.add_member(:routes, Shapes::ShapeRef.new(shape: TransitGatewayRouteList, location_name: "routeSet"))
     SearchTransitGatewayRoutesResult.add_member(:additional_routes_available, Shapes::ShapeRef.new(shape: Boolean, location_name: "additionalRoutesAvailable"))
+    SearchTransitGatewayRoutesResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     SearchTransitGatewayRoutesResult.struct_class = Types::SearchTransitGatewayRoutesResult
 
     SecurityGroup.add_member(:group_id, Shapes::ShapeRef.new(shape: String, location_name: "groupId"))
@@ -18674,6 +18707,7 @@ module Aws::EC2
     VolumeAttachment.add_member(:delete_on_termination, Shapes::ShapeRef.new(shape: Boolean, location_name: "deleteOnTermination"))
     VolumeAttachment.add_member(:associated_resource, Shapes::ShapeRef.new(shape: String, location_name: "associatedResource"))
     VolumeAttachment.add_member(:instance_owning_service, Shapes::ShapeRef.new(shape: String, location_name: "instanceOwningService"))
+    VolumeAttachment.add_member(:ebs_card_index, Shapes::ShapeRef.new(shape: Integer, location_name: "ebsCardIndex"))
     VolumeAttachment.add_member(:volume_id, Shapes::ShapeRef.new(shape: String, location_name: "volumeId"))
     VolumeAttachment.add_member(:instance_id, Shapes::ShapeRef.new(shape: String, location_name: "instanceId"))
     VolumeAttachment.add_member(:device, Shapes::ShapeRef.new(shape: String, location_name: "device"))
@@ -19128,6 +19162,8 @@ module Aws::EC2
 
     WithdrawByoipCidrResult.add_member(:byoip_cidr, Shapes::ShapeRef.new(shape: ByoipCidr, location_name: "byoipCidr"))
     WithdrawByoipCidrResult.struct_class = Types::WithdrawByoipCidrResult
+
+    WorkloadsList.member = Shapes::ShapeRef.new(shape: Workload, location_name: "item")
 
     ZoneIdStringList.member = Shapes::ShapeRef.new(shape: String, location_name: "ZoneId")
 
@@ -25970,6 +26006,13 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: SearchTransitGatewayRoutesRequest)
         o.output = Shapes::ShapeRef.new(shape: SearchTransitGatewayRoutesResult)
+        o[:pager] = Aws::Pager.new(
+          more_results: "additional_routes_available",
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:send_diagnostic_interrupt, Seahorse::Model::Operation.new.tap do |o|

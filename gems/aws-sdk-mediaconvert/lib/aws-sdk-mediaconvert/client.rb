@@ -745,7 +745,7 @@ module Aws::MediaConvert
     #               audio_description_broadcaster_mix: "BROADCASTER_MIXED_AD", # accepts BROADCASTER_MIXED_AD, NORMAL
     #               bitrate: 1,
     #               codec_profile: "LC", # accepts LC, HEV1, HEV2, XHE
-    #               coding_mode: "AD_RECEIVER_MIX", # accepts AD_RECEIVER_MIX, CODING_MODE_1_0, CODING_MODE_1_1, CODING_MODE_2_0, CODING_MODE_5_1
+    #               coding_mode: "AD_RECEIVER_MIX", # accepts AD_RECEIVER_MIX, CODING_MODE_1_0, CODING_MODE_1_1, CODING_MODE_2_0, CODING_MODE_5_1, CODING_MODE_AUTO
     #               loudness_measurement_mode: "PROGRAM", # accepts PROGRAM, ANCHOR
     #               rap_interval: 1,
     #               rate_control_mode: "CBR", # accepts CBR, VBR
@@ -758,7 +758,7 @@ module Aws::MediaConvert
     #             ac_3_settings: {
     #               bitrate: 1,
     #               bitstream_mode: "COMPLETE_MAIN", # accepts COMPLETE_MAIN, COMMENTARY, DIALOGUE, EMERGENCY, HEARING_IMPAIRED, MUSIC_AND_EFFECTS, VISUALLY_IMPAIRED, VOICE_OVER
-    #               coding_mode: "CODING_MODE_1_0", # accepts CODING_MODE_1_0, CODING_MODE_1_1, CODING_MODE_2_0, CODING_MODE_3_2_LFE
+    #               coding_mode: "CODING_MODE_1_0", # accepts CODING_MODE_1_0, CODING_MODE_1_1, CODING_MODE_2_0, CODING_MODE_3_2_LFE, CODING_MODE_AUTO
     #               dialnorm: 1,
     #               dynamic_range_compression_line: "FILM_STANDARD", # accepts FILM_STANDARD, FILM_LIGHT, MUSIC_STANDARD, MUSIC_LIGHT, SPEECH, NONE
     #               dynamic_range_compression_profile: "FILM_STANDARD", # accepts FILM_STANDARD, NONE
@@ -796,7 +796,7 @@ module Aws::MediaConvert
     #               attenuation_control: "ATTENUATE_3_DB", # accepts ATTENUATE_3_DB, NONE
     #               bitrate: 1,
     #               bitstream_mode: "COMPLETE_MAIN", # accepts COMPLETE_MAIN, COMMENTARY, EMERGENCY, HEARING_IMPAIRED, VISUALLY_IMPAIRED
-    #               coding_mode: "CODING_MODE_1_0", # accepts CODING_MODE_1_0, CODING_MODE_2_0, CODING_MODE_3_2
+    #               coding_mode: "CODING_MODE_1_0", # accepts CODING_MODE_1_0, CODING_MODE_2_0, CODING_MODE_3_2, CODING_MODE_AUTO
     #               dc_filter: "ENABLED", # accepts ENABLED, DISABLED
     #               dialnorm: 1,
     #               dynamic_range_compression_line: "NONE", # accepts NONE, FILM_STANDARD, FILM_LIGHT, MUSIC_STANDARD, MUSIC_LIGHT, SPEECH
@@ -1109,6 +1109,7 @@ module Aws::MediaConvert
     #         mxf_settings: {
     #           afd_signaling: "NO_COPY", # accepts NO_COPY, COPY_FROM_VIDEO
     #           profile: "D_10", # accepts D_10, XDCAM, OP1A, XAVC, XDCAM_RDD9
+    #           uncompressed_audio_wrapping: "AUTO", # accepts AUTO, AES3
     #           xavc_profile_settings: {
     #             duration_mode: "ALLOW_ANY_DURATION", # accepts ALLOW_ANY_DURATION, DROP_FRAMES_FOR_COMPLIANCE
     #             max_anc_data_size: 1,
@@ -1495,6 +1496,7 @@ module Aws::MediaConvert
     #             mode: "DEINTERLACE", # accepts DEINTERLACE, INVERSE_TELECINE, ADAPTIVE
     #           },
     #           dolby_vision: {
+    #             compatibility: "DUPLICATE_STREAM", # accepts DUPLICATE_STREAM, SUPPLEMENTAL_CODECS
     #             l6_metadata: {
     #               max_cll: 1,
     #               max_fall: 1,
@@ -1591,7 +1593,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.audio_descriptions[0].codec_settings.aac_settings.audio_description_broadcaster_mix #=> String, one of "BROADCASTER_MIXED_AD", "NORMAL"
     #   resp.preset.settings.audio_descriptions[0].codec_settings.aac_settings.bitrate #=> Integer
     #   resp.preset.settings.audio_descriptions[0].codec_settings.aac_settings.codec_profile #=> String, one of "LC", "HEV1", "HEV2", "XHE"
-    #   resp.preset.settings.audio_descriptions[0].codec_settings.aac_settings.coding_mode #=> String, one of "AD_RECEIVER_MIX", "CODING_MODE_1_0", "CODING_MODE_1_1", "CODING_MODE_2_0", "CODING_MODE_5_1"
+    #   resp.preset.settings.audio_descriptions[0].codec_settings.aac_settings.coding_mode #=> String, one of "AD_RECEIVER_MIX", "CODING_MODE_1_0", "CODING_MODE_1_1", "CODING_MODE_2_0", "CODING_MODE_5_1", "CODING_MODE_AUTO"
     #   resp.preset.settings.audio_descriptions[0].codec_settings.aac_settings.loudness_measurement_mode #=> String, one of "PROGRAM", "ANCHOR"
     #   resp.preset.settings.audio_descriptions[0].codec_settings.aac_settings.rap_interval #=> Integer
     #   resp.preset.settings.audio_descriptions[0].codec_settings.aac_settings.rate_control_mode #=> String, one of "CBR", "VBR"
@@ -1602,7 +1604,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.audio_descriptions[0].codec_settings.aac_settings.vbr_quality #=> String, one of "LOW", "MEDIUM_LOW", "MEDIUM_HIGH", "HIGH"
     #   resp.preset.settings.audio_descriptions[0].codec_settings.ac_3_settings.bitrate #=> Integer
     #   resp.preset.settings.audio_descriptions[0].codec_settings.ac_3_settings.bitstream_mode #=> String, one of "COMPLETE_MAIN", "COMMENTARY", "DIALOGUE", "EMERGENCY", "HEARING_IMPAIRED", "MUSIC_AND_EFFECTS", "VISUALLY_IMPAIRED", "VOICE_OVER"
-    #   resp.preset.settings.audio_descriptions[0].codec_settings.ac_3_settings.coding_mode #=> String, one of "CODING_MODE_1_0", "CODING_MODE_1_1", "CODING_MODE_2_0", "CODING_MODE_3_2_LFE"
+    #   resp.preset.settings.audio_descriptions[0].codec_settings.ac_3_settings.coding_mode #=> String, one of "CODING_MODE_1_0", "CODING_MODE_1_1", "CODING_MODE_2_0", "CODING_MODE_3_2_LFE", "CODING_MODE_AUTO"
     #   resp.preset.settings.audio_descriptions[0].codec_settings.ac_3_settings.dialnorm #=> Integer
     #   resp.preset.settings.audio_descriptions[0].codec_settings.ac_3_settings.dynamic_range_compression_line #=> String, one of "FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH", "NONE"
     #   resp.preset.settings.audio_descriptions[0].codec_settings.ac_3_settings.dynamic_range_compression_profile #=> String, one of "FILM_STANDARD", "NONE"
@@ -1634,7 +1636,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.audio_descriptions[0].codec_settings.eac_3_settings.attenuation_control #=> String, one of "ATTENUATE_3_DB", "NONE"
     #   resp.preset.settings.audio_descriptions[0].codec_settings.eac_3_settings.bitrate #=> Integer
     #   resp.preset.settings.audio_descriptions[0].codec_settings.eac_3_settings.bitstream_mode #=> String, one of "COMPLETE_MAIN", "COMMENTARY", "EMERGENCY", "HEARING_IMPAIRED", "VISUALLY_IMPAIRED"
-    #   resp.preset.settings.audio_descriptions[0].codec_settings.eac_3_settings.coding_mode #=> String, one of "CODING_MODE_1_0", "CODING_MODE_2_0", "CODING_MODE_3_2"
+    #   resp.preset.settings.audio_descriptions[0].codec_settings.eac_3_settings.coding_mode #=> String, one of "CODING_MODE_1_0", "CODING_MODE_2_0", "CODING_MODE_3_2", "CODING_MODE_AUTO"
     #   resp.preset.settings.audio_descriptions[0].codec_settings.eac_3_settings.dc_filter #=> String, one of "ENABLED", "DISABLED"
     #   resp.preset.settings.audio_descriptions[0].codec_settings.eac_3_settings.dialnorm #=> Integer
     #   resp.preset.settings.audio_descriptions[0].codec_settings.eac_3_settings.dynamic_range_compression_line #=> String, one of "NONE", "FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH"
@@ -1883,6 +1885,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.container_settings.mpd_settings.timed_metadata_value #=> String
     #   resp.preset.settings.container_settings.mxf_settings.afd_signaling #=> String, one of "NO_COPY", "COPY_FROM_VIDEO"
     #   resp.preset.settings.container_settings.mxf_settings.profile #=> String, one of "D_10", "XDCAM", "OP1A", "XAVC", "XDCAM_RDD9"
+    #   resp.preset.settings.container_settings.mxf_settings.uncompressed_audio_wrapping #=> String, one of "AUTO", "AES3"
     #   resp.preset.settings.container_settings.mxf_settings.xavc_profile_settings.duration_mode #=> String, one of "ALLOW_ANY_DURATION", "DROP_FRAMES_FOR_COMPLIANCE"
     #   resp.preset.settings.container_settings.mxf_settings.xavc_profile_settings.max_anc_data_size #=> Integer
     #   resp.preset.settings.video_description.afd_signaling #=> String, one of "NONE", "AUTO", "FIXED"
@@ -2205,6 +2208,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.video_preprocessors.deinterlacer.algorithm #=> String, one of "INTERPOLATE", "INTERPOLATE_TICKER", "BLEND", "BLEND_TICKER", "LINEAR_INTERPOLATION"
     #   resp.preset.settings.video_description.video_preprocessors.deinterlacer.control #=> String, one of "FORCE_ALL_FRAMES", "NORMAL"
     #   resp.preset.settings.video_description.video_preprocessors.deinterlacer.mode #=> String, one of "DEINTERLACE", "INVERSE_TELECINE", "ADAPTIVE"
+    #   resp.preset.settings.video_description.video_preprocessors.dolby_vision.compatibility #=> String, one of "DUPLICATE_STREAM", "SUPPLEMENTAL_CODECS"
     #   resp.preset.settings.video_description.video_preprocessors.dolby_vision.l6_metadata.max_cll #=> Integer
     #   resp.preset.settings.video_description.video_preprocessors.dolby_vision.l6_metadata.max_fall #=> Integer
     #   resp.preset.settings.video_description.video_preprocessors.dolby_vision.l6_mode #=> String, one of "PASSTHROUGH", "RECALCULATE", "SPECIFY"
@@ -2666,7 +2670,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.audio_descriptions[0].codec_settings.aac_settings.audio_description_broadcaster_mix #=> String, one of "BROADCASTER_MIXED_AD", "NORMAL"
     #   resp.preset.settings.audio_descriptions[0].codec_settings.aac_settings.bitrate #=> Integer
     #   resp.preset.settings.audio_descriptions[0].codec_settings.aac_settings.codec_profile #=> String, one of "LC", "HEV1", "HEV2", "XHE"
-    #   resp.preset.settings.audio_descriptions[0].codec_settings.aac_settings.coding_mode #=> String, one of "AD_RECEIVER_MIX", "CODING_MODE_1_0", "CODING_MODE_1_1", "CODING_MODE_2_0", "CODING_MODE_5_1"
+    #   resp.preset.settings.audio_descriptions[0].codec_settings.aac_settings.coding_mode #=> String, one of "AD_RECEIVER_MIX", "CODING_MODE_1_0", "CODING_MODE_1_1", "CODING_MODE_2_0", "CODING_MODE_5_1", "CODING_MODE_AUTO"
     #   resp.preset.settings.audio_descriptions[0].codec_settings.aac_settings.loudness_measurement_mode #=> String, one of "PROGRAM", "ANCHOR"
     #   resp.preset.settings.audio_descriptions[0].codec_settings.aac_settings.rap_interval #=> Integer
     #   resp.preset.settings.audio_descriptions[0].codec_settings.aac_settings.rate_control_mode #=> String, one of "CBR", "VBR"
@@ -2677,7 +2681,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.audio_descriptions[0].codec_settings.aac_settings.vbr_quality #=> String, one of "LOW", "MEDIUM_LOW", "MEDIUM_HIGH", "HIGH"
     #   resp.preset.settings.audio_descriptions[0].codec_settings.ac_3_settings.bitrate #=> Integer
     #   resp.preset.settings.audio_descriptions[0].codec_settings.ac_3_settings.bitstream_mode #=> String, one of "COMPLETE_MAIN", "COMMENTARY", "DIALOGUE", "EMERGENCY", "HEARING_IMPAIRED", "MUSIC_AND_EFFECTS", "VISUALLY_IMPAIRED", "VOICE_OVER"
-    #   resp.preset.settings.audio_descriptions[0].codec_settings.ac_3_settings.coding_mode #=> String, one of "CODING_MODE_1_0", "CODING_MODE_1_1", "CODING_MODE_2_0", "CODING_MODE_3_2_LFE"
+    #   resp.preset.settings.audio_descriptions[0].codec_settings.ac_3_settings.coding_mode #=> String, one of "CODING_MODE_1_0", "CODING_MODE_1_1", "CODING_MODE_2_0", "CODING_MODE_3_2_LFE", "CODING_MODE_AUTO"
     #   resp.preset.settings.audio_descriptions[0].codec_settings.ac_3_settings.dialnorm #=> Integer
     #   resp.preset.settings.audio_descriptions[0].codec_settings.ac_3_settings.dynamic_range_compression_line #=> String, one of "FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH", "NONE"
     #   resp.preset.settings.audio_descriptions[0].codec_settings.ac_3_settings.dynamic_range_compression_profile #=> String, one of "FILM_STANDARD", "NONE"
@@ -2709,7 +2713,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.audio_descriptions[0].codec_settings.eac_3_settings.attenuation_control #=> String, one of "ATTENUATE_3_DB", "NONE"
     #   resp.preset.settings.audio_descriptions[0].codec_settings.eac_3_settings.bitrate #=> Integer
     #   resp.preset.settings.audio_descriptions[0].codec_settings.eac_3_settings.bitstream_mode #=> String, one of "COMPLETE_MAIN", "COMMENTARY", "EMERGENCY", "HEARING_IMPAIRED", "VISUALLY_IMPAIRED"
-    #   resp.preset.settings.audio_descriptions[0].codec_settings.eac_3_settings.coding_mode #=> String, one of "CODING_MODE_1_0", "CODING_MODE_2_0", "CODING_MODE_3_2"
+    #   resp.preset.settings.audio_descriptions[0].codec_settings.eac_3_settings.coding_mode #=> String, one of "CODING_MODE_1_0", "CODING_MODE_2_0", "CODING_MODE_3_2", "CODING_MODE_AUTO"
     #   resp.preset.settings.audio_descriptions[0].codec_settings.eac_3_settings.dc_filter #=> String, one of "ENABLED", "DISABLED"
     #   resp.preset.settings.audio_descriptions[0].codec_settings.eac_3_settings.dialnorm #=> Integer
     #   resp.preset.settings.audio_descriptions[0].codec_settings.eac_3_settings.dynamic_range_compression_line #=> String, one of "NONE", "FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH"
@@ -2958,6 +2962,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.container_settings.mpd_settings.timed_metadata_value #=> String
     #   resp.preset.settings.container_settings.mxf_settings.afd_signaling #=> String, one of "NO_COPY", "COPY_FROM_VIDEO"
     #   resp.preset.settings.container_settings.mxf_settings.profile #=> String, one of "D_10", "XDCAM", "OP1A", "XAVC", "XDCAM_RDD9"
+    #   resp.preset.settings.container_settings.mxf_settings.uncompressed_audio_wrapping #=> String, one of "AUTO", "AES3"
     #   resp.preset.settings.container_settings.mxf_settings.xavc_profile_settings.duration_mode #=> String, one of "ALLOW_ANY_DURATION", "DROP_FRAMES_FOR_COMPLIANCE"
     #   resp.preset.settings.container_settings.mxf_settings.xavc_profile_settings.max_anc_data_size #=> Integer
     #   resp.preset.settings.video_description.afd_signaling #=> String, one of "NONE", "AUTO", "FIXED"
@@ -3280,6 +3285,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.video_preprocessors.deinterlacer.algorithm #=> String, one of "INTERPOLATE", "INTERPOLATE_TICKER", "BLEND", "BLEND_TICKER", "LINEAR_INTERPOLATION"
     #   resp.preset.settings.video_description.video_preprocessors.deinterlacer.control #=> String, one of "FORCE_ALL_FRAMES", "NORMAL"
     #   resp.preset.settings.video_description.video_preprocessors.deinterlacer.mode #=> String, one of "DEINTERLACE", "INVERSE_TELECINE", "ADAPTIVE"
+    #   resp.preset.settings.video_description.video_preprocessors.dolby_vision.compatibility #=> String, one of "DUPLICATE_STREAM", "SUPPLEMENTAL_CODECS"
     #   resp.preset.settings.video_description.video_preprocessors.dolby_vision.l6_metadata.max_cll #=> Integer
     #   resp.preset.settings.video_description.video_preprocessors.dolby_vision.l6_metadata.max_fall #=> Integer
     #   resp.preset.settings.video_description.video_preprocessors.dolby_vision.l6_mode #=> String, one of "PASSTHROUGH", "RECALCULATE", "SPECIFY"
@@ -3555,7 +3561,7 @@ module Aws::MediaConvert
     #   resp.presets[0].settings.audio_descriptions[0].codec_settings.aac_settings.audio_description_broadcaster_mix #=> String, one of "BROADCASTER_MIXED_AD", "NORMAL"
     #   resp.presets[0].settings.audio_descriptions[0].codec_settings.aac_settings.bitrate #=> Integer
     #   resp.presets[0].settings.audio_descriptions[0].codec_settings.aac_settings.codec_profile #=> String, one of "LC", "HEV1", "HEV2", "XHE"
-    #   resp.presets[0].settings.audio_descriptions[0].codec_settings.aac_settings.coding_mode #=> String, one of "AD_RECEIVER_MIX", "CODING_MODE_1_0", "CODING_MODE_1_1", "CODING_MODE_2_0", "CODING_MODE_5_1"
+    #   resp.presets[0].settings.audio_descriptions[0].codec_settings.aac_settings.coding_mode #=> String, one of "AD_RECEIVER_MIX", "CODING_MODE_1_0", "CODING_MODE_1_1", "CODING_MODE_2_0", "CODING_MODE_5_1", "CODING_MODE_AUTO"
     #   resp.presets[0].settings.audio_descriptions[0].codec_settings.aac_settings.loudness_measurement_mode #=> String, one of "PROGRAM", "ANCHOR"
     #   resp.presets[0].settings.audio_descriptions[0].codec_settings.aac_settings.rap_interval #=> Integer
     #   resp.presets[0].settings.audio_descriptions[0].codec_settings.aac_settings.rate_control_mode #=> String, one of "CBR", "VBR"
@@ -3566,7 +3572,7 @@ module Aws::MediaConvert
     #   resp.presets[0].settings.audio_descriptions[0].codec_settings.aac_settings.vbr_quality #=> String, one of "LOW", "MEDIUM_LOW", "MEDIUM_HIGH", "HIGH"
     #   resp.presets[0].settings.audio_descriptions[0].codec_settings.ac_3_settings.bitrate #=> Integer
     #   resp.presets[0].settings.audio_descriptions[0].codec_settings.ac_3_settings.bitstream_mode #=> String, one of "COMPLETE_MAIN", "COMMENTARY", "DIALOGUE", "EMERGENCY", "HEARING_IMPAIRED", "MUSIC_AND_EFFECTS", "VISUALLY_IMPAIRED", "VOICE_OVER"
-    #   resp.presets[0].settings.audio_descriptions[0].codec_settings.ac_3_settings.coding_mode #=> String, one of "CODING_MODE_1_0", "CODING_MODE_1_1", "CODING_MODE_2_0", "CODING_MODE_3_2_LFE"
+    #   resp.presets[0].settings.audio_descriptions[0].codec_settings.ac_3_settings.coding_mode #=> String, one of "CODING_MODE_1_0", "CODING_MODE_1_1", "CODING_MODE_2_0", "CODING_MODE_3_2_LFE", "CODING_MODE_AUTO"
     #   resp.presets[0].settings.audio_descriptions[0].codec_settings.ac_3_settings.dialnorm #=> Integer
     #   resp.presets[0].settings.audio_descriptions[0].codec_settings.ac_3_settings.dynamic_range_compression_line #=> String, one of "FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH", "NONE"
     #   resp.presets[0].settings.audio_descriptions[0].codec_settings.ac_3_settings.dynamic_range_compression_profile #=> String, one of "FILM_STANDARD", "NONE"
@@ -3598,7 +3604,7 @@ module Aws::MediaConvert
     #   resp.presets[0].settings.audio_descriptions[0].codec_settings.eac_3_settings.attenuation_control #=> String, one of "ATTENUATE_3_DB", "NONE"
     #   resp.presets[0].settings.audio_descriptions[0].codec_settings.eac_3_settings.bitrate #=> Integer
     #   resp.presets[0].settings.audio_descriptions[0].codec_settings.eac_3_settings.bitstream_mode #=> String, one of "COMPLETE_MAIN", "COMMENTARY", "EMERGENCY", "HEARING_IMPAIRED", "VISUALLY_IMPAIRED"
-    #   resp.presets[0].settings.audio_descriptions[0].codec_settings.eac_3_settings.coding_mode #=> String, one of "CODING_MODE_1_0", "CODING_MODE_2_0", "CODING_MODE_3_2"
+    #   resp.presets[0].settings.audio_descriptions[0].codec_settings.eac_3_settings.coding_mode #=> String, one of "CODING_MODE_1_0", "CODING_MODE_2_0", "CODING_MODE_3_2", "CODING_MODE_AUTO"
     #   resp.presets[0].settings.audio_descriptions[0].codec_settings.eac_3_settings.dc_filter #=> String, one of "ENABLED", "DISABLED"
     #   resp.presets[0].settings.audio_descriptions[0].codec_settings.eac_3_settings.dialnorm #=> Integer
     #   resp.presets[0].settings.audio_descriptions[0].codec_settings.eac_3_settings.dynamic_range_compression_line #=> String, one of "NONE", "FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH"
@@ -3847,6 +3853,7 @@ module Aws::MediaConvert
     #   resp.presets[0].settings.container_settings.mpd_settings.timed_metadata_value #=> String
     #   resp.presets[0].settings.container_settings.mxf_settings.afd_signaling #=> String, one of "NO_COPY", "COPY_FROM_VIDEO"
     #   resp.presets[0].settings.container_settings.mxf_settings.profile #=> String, one of "D_10", "XDCAM", "OP1A", "XAVC", "XDCAM_RDD9"
+    #   resp.presets[0].settings.container_settings.mxf_settings.uncompressed_audio_wrapping #=> String, one of "AUTO", "AES3"
     #   resp.presets[0].settings.container_settings.mxf_settings.xavc_profile_settings.duration_mode #=> String, one of "ALLOW_ANY_DURATION", "DROP_FRAMES_FOR_COMPLIANCE"
     #   resp.presets[0].settings.container_settings.mxf_settings.xavc_profile_settings.max_anc_data_size #=> Integer
     #   resp.presets[0].settings.video_description.afd_signaling #=> String, one of "NONE", "AUTO", "FIXED"
@@ -4169,6 +4176,7 @@ module Aws::MediaConvert
     #   resp.presets[0].settings.video_description.video_preprocessors.deinterlacer.algorithm #=> String, one of "INTERPOLATE", "INTERPOLATE_TICKER", "BLEND", "BLEND_TICKER", "LINEAR_INTERPOLATION"
     #   resp.presets[0].settings.video_description.video_preprocessors.deinterlacer.control #=> String, one of "FORCE_ALL_FRAMES", "NORMAL"
     #   resp.presets[0].settings.video_description.video_preprocessors.deinterlacer.mode #=> String, one of "DEINTERLACE", "INVERSE_TELECINE", "ADAPTIVE"
+    #   resp.presets[0].settings.video_description.video_preprocessors.dolby_vision.compatibility #=> String, one of "DUPLICATE_STREAM", "SUPPLEMENTAL_CODECS"
     #   resp.presets[0].settings.video_description.video_preprocessors.dolby_vision.l6_metadata.max_cll #=> Integer
     #   resp.presets[0].settings.video_description.video_preprocessors.dolby_vision.l6_metadata.max_fall #=> Integer
     #   resp.presets[0].settings.video_description.video_preprocessors.dolby_vision.l6_mode #=> String, one of "PASSTHROUGH", "RECALCULATE", "SPECIFY"
@@ -4395,7 +4403,7 @@ module Aws::MediaConvert
     #
     #   resp.probe_results #=> Array
     #   resp.probe_results[0].container.duration #=> Float
-    #   resp.probe_results[0].container.format #=> String, one of "mp4", "quicktime", "matroska", "webm", "mxf"
+    #   resp.probe_results[0].container.format #=> String, one of "mp4", "quicktime", "matroska", "webm", "mxf", "wave"
     #   resp.probe_results[0].container.tracks #=> Array
     #   resp.probe_results[0].container.tracks[0].audio_properties.bit_depth #=> Integer
     #   resp.probe_results[0].container.tracks[0].audio_properties.bit_rate #=> Integer
@@ -4765,7 +4773,7 @@ module Aws::MediaConvert
     #               audio_description_broadcaster_mix: "BROADCASTER_MIXED_AD", # accepts BROADCASTER_MIXED_AD, NORMAL
     #               bitrate: 1,
     #               codec_profile: "LC", # accepts LC, HEV1, HEV2, XHE
-    #               coding_mode: "AD_RECEIVER_MIX", # accepts AD_RECEIVER_MIX, CODING_MODE_1_0, CODING_MODE_1_1, CODING_MODE_2_0, CODING_MODE_5_1
+    #               coding_mode: "AD_RECEIVER_MIX", # accepts AD_RECEIVER_MIX, CODING_MODE_1_0, CODING_MODE_1_1, CODING_MODE_2_0, CODING_MODE_5_1, CODING_MODE_AUTO
     #               loudness_measurement_mode: "PROGRAM", # accepts PROGRAM, ANCHOR
     #               rap_interval: 1,
     #               rate_control_mode: "CBR", # accepts CBR, VBR
@@ -4778,7 +4786,7 @@ module Aws::MediaConvert
     #             ac_3_settings: {
     #               bitrate: 1,
     #               bitstream_mode: "COMPLETE_MAIN", # accepts COMPLETE_MAIN, COMMENTARY, DIALOGUE, EMERGENCY, HEARING_IMPAIRED, MUSIC_AND_EFFECTS, VISUALLY_IMPAIRED, VOICE_OVER
-    #               coding_mode: "CODING_MODE_1_0", # accepts CODING_MODE_1_0, CODING_MODE_1_1, CODING_MODE_2_0, CODING_MODE_3_2_LFE
+    #               coding_mode: "CODING_MODE_1_0", # accepts CODING_MODE_1_0, CODING_MODE_1_1, CODING_MODE_2_0, CODING_MODE_3_2_LFE, CODING_MODE_AUTO
     #               dialnorm: 1,
     #               dynamic_range_compression_line: "FILM_STANDARD", # accepts FILM_STANDARD, FILM_LIGHT, MUSIC_STANDARD, MUSIC_LIGHT, SPEECH, NONE
     #               dynamic_range_compression_profile: "FILM_STANDARD", # accepts FILM_STANDARD, NONE
@@ -4816,7 +4824,7 @@ module Aws::MediaConvert
     #               attenuation_control: "ATTENUATE_3_DB", # accepts ATTENUATE_3_DB, NONE
     #               bitrate: 1,
     #               bitstream_mode: "COMPLETE_MAIN", # accepts COMPLETE_MAIN, COMMENTARY, EMERGENCY, HEARING_IMPAIRED, VISUALLY_IMPAIRED
-    #               coding_mode: "CODING_MODE_1_0", # accepts CODING_MODE_1_0, CODING_MODE_2_0, CODING_MODE_3_2
+    #               coding_mode: "CODING_MODE_1_0", # accepts CODING_MODE_1_0, CODING_MODE_2_0, CODING_MODE_3_2, CODING_MODE_AUTO
     #               dc_filter: "ENABLED", # accepts ENABLED, DISABLED
     #               dialnorm: 1,
     #               dynamic_range_compression_line: "NONE", # accepts NONE, FILM_STANDARD, FILM_LIGHT, MUSIC_STANDARD, MUSIC_LIGHT, SPEECH
@@ -5129,6 +5137,7 @@ module Aws::MediaConvert
     #         mxf_settings: {
     #           afd_signaling: "NO_COPY", # accepts NO_COPY, COPY_FROM_VIDEO
     #           profile: "D_10", # accepts D_10, XDCAM, OP1A, XAVC, XDCAM_RDD9
+    #           uncompressed_audio_wrapping: "AUTO", # accepts AUTO, AES3
     #           xavc_profile_settings: {
     #             duration_mode: "ALLOW_ANY_DURATION", # accepts ALLOW_ANY_DURATION, DROP_FRAMES_FOR_COMPLIANCE
     #             max_anc_data_size: 1,
@@ -5515,6 +5524,7 @@ module Aws::MediaConvert
     #             mode: "DEINTERLACE", # accepts DEINTERLACE, INVERSE_TELECINE, ADAPTIVE
     #           },
     #           dolby_vision: {
+    #             compatibility: "DUPLICATE_STREAM", # accepts DUPLICATE_STREAM, SUPPLEMENTAL_CODECS
     #             l6_metadata: {
     #               max_cll: 1,
     #               max_fall: 1,
@@ -5608,7 +5618,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.audio_descriptions[0].codec_settings.aac_settings.audio_description_broadcaster_mix #=> String, one of "BROADCASTER_MIXED_AD", "NORMAL"
     #   resp.preset.settings.audio_descriptions[0].codec_settings.aac_settings.bitrate #=> Integer
     #   resp.preset.settings.audio_descriptions[0].codec_settings.aac_settings.codec_profile #=> String, one of "LC", "HEV1", "HEV2", "XHE"
-    #   resp.preset.settings.audio_descriptions[0].codec_settings.aac_settings.coding_mode #=> String, one of "AD_RECEIVER_MIX", "CODING_MODE_1_0", "CODING_MODE_1_1", "CODING_MODE_2_0", "CODING_MODE_5_1"
+    #   resp.preset.settings.audio_descriptions[0].codec_settings.aac_settings.coding_mode #=> String, one of "AD_RECEIVER_MIX", "CODING_MODE_1_0", "CODING_MODE_1_1", "CODING_MODE_2_0", "CODING_MODE_5_1", "CODING_MODE_AUTO"
     #   resp.preset.settings.audio_descriptions[0].codec_settings.aac_settings.loudness_measurement_mode #=> String, one of "PROGRAM", "ANCHOR"
     #   resp.preset.settings.audio_descriptions[0].codec_settings.aac_settings.rap_interval #=> Integer
     #   resp.preset.settings.audio_descriptions[0].codec_settings.aac_settings.rate_control_mode #=> String, one of "CBR", "VBR"
@@ -5619,7 +5629,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.audio_descriptions[0].codec_settings.aac_settings.vbr_quality #=> String, one of "LOW", "MEDIUM_LOW", "MEDIUM_HIGH", "HIGH"
     #   resp.preset.settings.audio_descriptions[0].codec_settings.ac_3_settings.bitrate #=> Integer
     #   resp.preset.settings.audio_descriptions[0].codec_settings.ac_3_settings.bitstream_mode #=> String, one of "COMPLETE_MAIN", "COMMENTARY", "DIALOGUE", "EMERGENCY", "HEARING_IMPAIRED", "MUSIC_AND_EFFECTS", "VISUALLY_IMPAIRED", "VOICE_OVER"
-    #   resp.preset.settings.audio_descriptions[0].codec_settings.ac_3_settings.coding_mode #=> String, one of "CODING_MODE_1_0", "CODING_MODE_1_1", "CODING_MODE_2_0", "CODING_MODE_3_2_LFE"
+    #   resp.preset.settings.audio_descriptions[0].codec_settings.ac_3_settings.coding_mode #=> String, one of "CODING_MODE_1_0", "CODING_MODE_1_1", "CODING_MODE_2_0", "CODING_MODE_3_2_LFE", "CODING_MODE_AUTO"
     #   resp.preset.settings.audio_descriptions[0].codec_settings.ac_3_settings.dialnorm #=> Integer
     #   resp.preset.settings.audio_descriptions[0].codec_settings.ac_3_settings.dynamic_range_compression_line #=> String, one of "FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH", "NONE"
     #   resp.preset.settings.audio_descriptions[0].codec_settings.ac_3_settings.dynamic_range_compression_profile #=> String, one of "FILM_STANDARD", "NONE"
@@ -5651,7 +5661,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.audio_descriptions[0].codec_settings.eac_3_settings.attenuation_control #=> String, one of "ATTENUATE_3_DB", "NONE"
     #   resp.preset.settings.audio_descriptions[0].codec_settings.eac_3_settings.bitrate #=> Integer
     #   resp.preset.settings.audio_descriptions[0].codec_settings.eac_3_settings.bitstream_mode #=> String, one of "COMPLETE_MAIN", "COMMENTARY", "EMERGENCY", "HEARING_IMPAIRED", "VISUALLY_IMPAIRED"
-    #   resp.preset.settings.audio_descriptions[0].codec_settings.eac_3_settings.coding_mode #=> String, one of "CODING_MODE_1_0", "CODING_MODE_2_0", "CODING_MODE_3_2"
+    #   resp.preset.settings.audio_descriptions[0].codec_settings.eac_3_settings.coding_mode #=> String, one of "CODING_MODE_1_0", "CODING_MODE_2_0", "CODING_MODE_3_2", "CODING_MODE_AUTO"
     #   resp.preset.settings.audio_descriptions[0].codec_settings.eac_3_settings.dc_filter #=> String, one of "ENABLED", "DISABLED"
     #   resp.preset.settings.audio_descriptions[0].codec_settings.eac_3_settings.dialnorm #=> Integer
     #   resp.preset.settings.audio_descriptions[0].codec_settings.eac_3_settings.dynamic_range_compression_line #=> String, one of "NONE", "FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH"
@@ -5900,6 +5910,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.container_settings.mpd_settings.timed_metadata_value #=> String
     #   resp.preset.settings.container_settings.mxf_settings.afd_signaling #=> String, one of "NO_COPY", "COPY_FROM_VIDEO"
     #   resp.preset.settings.container_settings.mxf_settings.profile #=> String, one of "D_10", "XDCAM", "OP1A", "XAVC", "XDCAM_RDD9"
+    #   resp.preset.settings.container_settings.mxf_settings.uncompressed_audio_wrapping #=> String, one of "AUTO", "AES3"
     #   resp.preset.settings.container_settings.mxf_settings.xavc_profile_settings.duration_mode #=> String, one of "ALLOW_ANY_DURATION", "DROP_FRAMES_FOR_COMPLIANCE"
     #   resp.preset.settings.container_settings.mxf_settings.xavc_profile_settings.max_anc_data_size #=> Integer
     #   resp.preset.settings.video_description.afd_signaling #=> String, one of "NONE", "AUTO", "FIXED"
@@ -6222,6 +6233,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.video_preprocessors.deinterlacer.algorithm #=> String, one of "INTERPOLATE", "INTERPOLATE_TICKER", "BLEND", "BLEND_TICKER", "LINEAR_INTERPOLATION"
     #   resp.preset.settings.video_description.video_preprocessors.deinterlacer.control #=> String, one of "FORCE_ALL_FRAMES", "NORMAL"
     #   resp.preset.settings.video_description.video_preprocessors.deinterlacer.mode #=> String, one of "DEINTERLACE", "INVERSE_TELECINE", "ADAPTIVE"
+    #   resp.preset.settings.video_description.video_preprocessors.dolby_vision.compatibility #=> String, one of "DUPLICATE_STREAM", "SUPPLEMENTAL_CODECS"
     #   resp.preset.settings.video_description.video_preprocessors.dolby_vision.l6_metadata.max_cll #=> Integer
     #   resp.preset.settings.video_description.video_preprocessors.dolby_vision.l6_metadata.max_fall #=> Integer
     #   resp.preset.settings.video_description.video_preprocessors.dolby_vision.l6_mode #=> String, one of "PASSTHROUGH", "RECALCULATE", "SPECIFY"
@@ -6371,7 +6383,7 @@ module Aws::MediaConvert
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-mediaconvert'
-      context[:gem_version] = '1.177.0'
+      context[:gem_version] = '1.179.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

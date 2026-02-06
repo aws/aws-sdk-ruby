@@ -13,6 +13,12 @@ module Aws::Transfer
       SENSITIVE: []
     end
 
+    class As2AsyncMdnConnectorConfig
+      attr_accessor url: ::String
+      attr_accessor server_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
     class As2ConnectorConfig
       attr_accessor local_profile_id: ::String
       attr_accessor partner_profile_id: ::String
@@ -21,10 +27,11 @@ module Aws::Transfer
       attr_accessor encryption_algorithm: ("AES128_CBC" | "AES192_CBC" | "AES256_CBC" | "DES_EDE3_CBC" | "NONE")
       attr_accessor signing_algorithm: ("SHA256" | "SHA384" | "SHA512" | "SHA1" | "NONE")
       attr_accessor mdn_signing_algorithm: ("SHA256" | "SHA384" | "SHA512" | "SHA1" | "NONE" | "DEFAULT")
-      attr_accessor mdn_response: ("SYNC" | "NONE")
+      attr_accessor mdn_response: ("SYNC" | "NONE" | "ASYNC")
       attr_accessor basic_auth_secret_id: ::String
       attr_accessor preserve_content_type: ("ENABLED" | "DISABLED")
-      SENSITIVE: []
+      attr_accessor async_mdn_config: Types::As2AsyncMdnConnectorConfig
+      SENSITIVE: [:message_subject]
     end
 
     class ConflictException
@@ -215,6 +222,12 @@ module Aws::Transfer
       attr_accessor status_files_directory: ::String
       attr_accessor temporary_files_directory: ::String
       SENSITIVE: []
+    end
+
+    class CustomHttpHeader
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: [:key, :value]
     end
 
     class CustomStepDetails
@@ -1213,6 +1226,7 @@ module Aws::Transfer
       attr_accessor retrieve_file_paths: ::Array[::String]
       attr_accessor local_directory_path: ::String
       attr_accessor remote_directory_path: ::String
+      attr_accessor custom_http_headers: ::Array[Types::CustomHttpHeader]
       SENSITIVE: []
     end
 

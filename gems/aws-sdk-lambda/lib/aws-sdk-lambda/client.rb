@@ -1432,6 +1432,15 @@ module Aws::Lambda
     #
     #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/monitoring-metrics-types.html#event-source-mapping-metrics
     #
+    # @option params [Types::EventSourceMappingLoggingConfig] :logging_config
+    #   (Amazon MSK, and self-managed Apache Kafka only) The logging
+    #   configuration for your event source. For more information, see [Event
+    #   source mapping logging][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/esm-logging.html
+    #
     # @option params [Types::ProvisionedPollerConfig] :provisioned_poller_config
     #   (Amazon SQS, Amazon MSK, and self-managed Apache Kafka only) The
     #   provisioned mode configuration for the event source. For more
@@ -1474,6 +1483,7 @@ module Aws::Lambda
     #   * {Types::EventSourceMappingConfiguration#filter_criteria_error #filter_criteria_error} => Types::FilterCriteriaError
     #   * {Types::EventSourceMappingConfiguration#event_source_mapping_arn #event_source_mapping_arn} => String
     #   * {Types::EventSourceMappingConfiguration#metrics_config #metrics_config} => Types::EventSourceMappingMetricsConfig
+    #   * {Types::EventSourceMappingConfiguration#logging_config #logging_config} => Types::EventSourceMappingLoggingConfig
     #   * {Types::EventSourceMappingConfiguration#provisioned_poller_config #provisioned_poller_config} => Types::ProvisionedPollerConfig
     #
     #
@@ -1591,7 +1601,10 @@ module Aws::Lambda
     #     },
     #     kms_key_arn: "KMSKeyArn",
     #     metrics_config: {
-    #       metrics: ["EventCount"], # accepts EventCount
+    #       metrics: ["EventCount"], # accepts EventCount, ErrorCount, KafkaMetrics
+    #     },
+    #     logging_config: {
+    #       system_log_level: "DEBUG", # accepts DEBUG, INFO, WARN
     #     },
     #     provisioned_poller_config: {
     #       minimum_pollers: 1,
@@ -1659,7 +1672,8 @@ module Aws::Lambda
     #   resp.filter_criteria_error.message #=> String
     #   resp.event_source_mapping_arn #=> String
     #   resp.metrics_config.metrics #=> Array
-    #   resp.metrics_config.metrics[0] #=> String, one of "EventCount"
+    #   resp.metrics_config.metrics[0] #=> String, one of "EventCount", "ErrorCount", "KafkaMetrics"
+    #   resp.logging_config.system_log_level #=> String, one of "DEBUG", "INFO", "WARN"
     #   resp.provisioned_poller_config.minimum_pollers #=> Integer
     #   resp.provisioned_poller_config.maximum_pollers #=> Integer
     #   resp.provisioned_poller_config.poller_group_name #=> String
@@ -2517,6 +2531,7 @@ module Aws::Lambda
     #   * {Types::EventSourceMappingConfiguration#filter_criteria_error #filter_criteria_error} => Types::FilterCriteriaError
     #   * {Types::EventSourceMappingConfiguration#event_source_mapping_arn #event_source_mapping_arn} => String
     #   * {Types::EventSourceMappingConfiguration#metrics_config #metrics_config} => Types::EventSourceMappingMetricsConfig
+    #   * {Types::EventSourceMappingConfiguration#logging_config #logging_config} => Types::EventSourceMappingLoggingConfig
     #   * {Types::EventSourceMappingConfiguration#provisioned_poller_config #provisioned_poller_config} => Types::ProvisionedPollerConfig
     #
     #
@@ -2604,7 +2619,8 @@ module Aws::Lambda
     #   resp.filter_criteria_error.message #=> String
     #   resp.event_source_mapping_arn #=> String
     #   resp.metrics_config.metrics #=> Array
-    #   resp.metrics_config.metrics[0] #=> String, one of "EventCount"
+    #   resp.metrics_config.metrics[0] #=> String, one of "EventCount", "ErrorCount", "KafkaMetrics"
+    #   resp.logging_config.system_log_level #=> String, one of "DEBUG", "INFO", "WARN"
     #   resp.provisioned_poller_config.minimum_pollers #=> Integer
     #   resp.provisioned_poller_config.maximum_pollers #=> Integer
     #   resp.provisioned_poller_config.poller_group_name #=> String
@@ -3543,6 +3559,7 @@ module Aws::Lambda
     #   * {Types::EventSourceMappingConfiguration#filter_criteria_error #filter_criteria_error} => Types::FilterCriteriaError
     #   * {Types::EventSourceMappingConfiguration#event_source_mapping_arn #event_source_mapping_arn} => String
     #   * {Types::EventSourceMappingConfiguration#metrics_config #metrics_config} => Types::EventSourceMappingMetricsConfig
+    #   * {Types::EventSourceMappingConfiguration#logging_config #logging_config} => Types::EventSourceMappingLoggingConfig
     #   * {Types::EventSourceMappingConfiguration#provisioned_poller_config #provisioned_poller_config} => Types::ProvisionedPollerConfig
     #
     #
@@ -3637,7 +3654,8 @@ module Aws::Lambda
     #   resp.filter_criteria_error.message #=> String
     #   resp.event_source_mapping_arn #=> String
     #   resp.metrics_config.metrics #=> Array
-    #   resp.metrics_config.metrics[0] #=> String, one of "EventCount"
+    #   resp.metrics_config.metrics[0] #=> String, one of "EventCount", "ErrorCount", "KafkaMetrics"
+    #   resp.logging_config.system_log_level #=> String, one of "DEBUG", "INFO", "WARN"
     #   resp.provisioned_poller_config.minimum_pollers #=> Integer
     #   resp.provisioned_poller_config.maximum_pollers #=> Integer
     #   resp.provisioned_poller_config.poller_group_name #=> String
@@ -4681,9 +4699,9 @@ module Aws::Lambda
     #   * {Types::GetProvisionedConcurrencyConfigResponse#last_modified #last_modified} => Time
     #
     #
-    # @example Example: To get a provisioned concurrency configuration
+    # @example Example: To view a provisioned concurrency configuration
     #
-    #   # The following example returns details for the provisioned concurrency configuration for the BLUE alias of the specified
+    #   # The following example displays details for the provisioned concurrency configuration for the BLUE alias of the specified
     #   # function.
     #
     #   resp = client.get_provisioned_concurrency_config({
@@ -4700,9 +4718,9 @@ module Aws::Lambda
     #     status: "READY", 
     #   }
     #
-    # @example Example: To view a provisioned concurrency configuration
+    # @example Example: To get a provisioned concurrency configuration
     #
-    #   # The following example displays details for the provisioned concurrency configuration for the BLUE alias of the specified
+    #   # The following example returns details for the provisioned concurrency configuration for the BLUE alias of the specified
     #   # function.
     #
     #   resp = client.get_provisioned_concurrency_config({
@@ -5749,7 +5767,8 @@ module Aws::Lambda
     #   resp.event_source_mappings[0].filter_criteria_error.message #=> String
     #   resp.event_source_mappings[0].event_source_mapping_arn #=> String
     #   resp.event_source_mappings[0].metrics_config.metrics #=> Array
-    #   resp.event_source_mappings[0].metrics_config.metrics[0] #=> String, one of "EventCount"
+    #   resp.event_source_mappings[0].metrics_config.metrics[0] #=> String, one of "EventCount", "ErrorCount", "KafkaMetrics"
+    #   resp.event_source_mappings[0].logging_config.system_log_level #=> String, one of "DEBUG", "INFO", "WARN"
     #   resp.event_source_mappings[0].provisioned_poller_config.minimum_pollers #=> Integer
     #   resp.event_source_mappings[0].provisioned_poller_config.maximum_pollers #=> Integer
     #   resp.event_source_mappings[0].provisioned_poller_config.poller_group_name #=> String
@@ -8524,6 +8543,11 @@ module Aws::Lambda
     #
     #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/monitoring-metrics-types.html#event-source-mapping-metrics
     #
+    # @option params [Types::EventSourceMappingLoggingConfig] :logging_config
+    #   (Amazon MSK, and self-managed Apache Kafka only) The logging
+    #   configuration for your event source. Use this configuration object to
+    #   define the level of logs for your event source mapping.
+    #
     # @option params [Types::ProvisionedPollerConfig] :provisioned_poller_config
     #   (Amazon SQS, Amazon MSK, and self-managed Apache Kafka only) The
     #   provisioned mode configuration for the event source. For more
@@ -8566,6 +8590,7 @@ module Aws::Lambda
     #   * {Types::EventSourceMappingConfiguration#filter_criteria_error #filter_criteria_error} => Types::FilterCriteriaError
     #   * {Types::EventSourceMappingConfiguration#event_source_mapping_arn #event_source_mapping_arn} => String
     #   * {Types::EventSourceMappingConfiguration#metrics_config #metrics_config} => Types::EventSourceMappingMetricsConfig
+    #   * {Types::EventSourceMappingConfiguration#logging_config #logging_config} => Types::EventSourceMappingLoggingConfig
     #   * {Types::EventSourceMappingConfiguration#provisioned_poller_config #provisioned_poller_config} => Types::ProvisionedPollerConfig
     #
     #
@@ -8673,7 +8698,10 @@ module Aws::Lambda
     #     },
     #     kms_key_arn: "KMSKeyArn",
     #     metrics_config: {
-    #       metrics: ["EventCount"], # accepts EventCount
+    #       metrics: ["EventCount"], # accepts EventCount, ErrorCount, KafkaMetrics
+    #     },
+    #     logging_config: {
+    #       system_log_level: "DEBUG", # accepts DEBUG, INFO, WARN
     #     },
     #     provisioned_poller_config: {
     #       minimum_pollers: 1,
@@ -8741,7 +8769,8 @@ module Aws::Lambda
     #   resp.filter_criteria_error.message #=> String
     #   resp.event_source_mapping_arn #=> String
     #   resp.metrics_config.metrics #=> Array
-    #   resp.metrics_config.metrics[0] #=> String, one of "EventCount"
+    #   resp.metrics_config.metrics[0] #=> String, one of "EventCount", "ErrorCount", "KafkaMetrics"
+    #   resp.logging_config.system_log_level #=> String, one of "DEBUG", "INFO", "WARN"
     #   resp.provisioned_poller_config.minimum_pollers #=> Integer
     #   resp.provisioned_poller_config.maximum_pollers #=> Integer
     #   resp.provisioned_poller_config.poller_group_name #=> String
@@ -9717,7 +9746,7 @@ module Aws::Lambda
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-lambda'
-      context[:gem_version] = '1.173.0'
+      context[:gem_version] = '1.175.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

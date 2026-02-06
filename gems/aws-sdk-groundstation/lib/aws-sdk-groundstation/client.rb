@@ -476,7 +476,18 @@ module Aws::GroundStation
 
     # @!group API Operations
 
-    # Cancels a contact with a specified contact ID.
+    # Cancels or stops a contact with a specified contact ID based on its
+    # position in the [contact lifecycle][1].
+    #
+    # For contacts that:
+    #
+    # * Have yet to start, the contact will be cancelled.
+    #
+    # * Have started but have yet to finish, the contact will be stopped.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/ground-station/latest/ug/contacts.lifecycle.html
     #
     # @option params [required, String] :contact_id
     #   UUID of a contact.
@@ -590,6 +601,15 @@ module Aws::GroundStation
     #         role_arn: "RoleArn", # required
     #         prefix: "S3KeyPrefix",
     #       },
+    #       telemetry_sink_config: {
+    #         telemetry_sink_type: "KINESIS_DATA_STREAM", # required, accepts KINESIS_DATA_STREAM
+    #         telemetry_sink_data: { # required
+    #           kinesis_data_stream_data: {
+    #             kinesis_role_arn: "RoleArn", # required
+    #             kinesis_data_stream_arn: "KinesisDataStreamArn", # required
+    #           },
+    #         },
+    #       },
     #     },
     #     tags: {
     #       "String" => "String",
@@ -599,7 +619,7 @@ module Aws::GroundStation
     # @example Response structure
     #
     #   resp.config_id #=> String
-    #   resp.config_type #=> String, one of "antenna-downlink", "antenna-downlink-demod-decode", "tracking", "dataflow-endpoint", "antenna-uplink", "uplink-echo", "s3-recording"
+    #   resp.config_type #=> String, one of "antenna-downlink", "antenna-downlink-demod-decode", "tracking", "dataflow-endpoint", "antenna-uplink", "uplink-echo", "s3-recording", "telemetry-sink"
     #   resp.config_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/CreateConfig AWS API Documentation
@@ -611,15 +631,15 @@ module Aws::GroundStation
       req.send_request(options)
     end
 
-    # Creates a `DataflowEndpoint` group containing the specified list of
-    # `DataflowEndpoint` objects.
+    # Creates a `DataflowEndpoint` group containing the specified list of `
+    # DataflowEndpoint` objects.
     #
-    # The `name` field in each endpoint is used in your mission profile
-    # `DataflowEndpointConfig` to specify which endpoints to use during a
+    # The `name` field in each endpoint is used in your mission profile `
+    # DataflowEndpointConfig` to specify which endpoints to use during a
     # contact.
     #
-    # When a contact uses multiple `DataflowEndpointConfig` objects, each
-    # `Config` must match a `DataflowEndpoint` in the same group.
+    # When a contact uses multiple `DataflowEndpointConfig` objects, each `
+    # Config` must match a `DataflowEndpoint` in the same group.
     #
     # @option params [required, Array<Types::EndpointDetails>] :endpoint_details
     #   Endpoint details of each endpoint in the dataflow endpoint group. All
@@ -639,16 +659,25 @@ module Aws::GroundStation
     #
     # @option params [Integer] :contact_pre_pass_duration_seconds
     #   Amount of time, in seconds, before a contact starts that the Ground
-    #   Station Dataflow Endpoint Group will be in a `PREPASS` state. A Ground
-    #   Station Dataflow Endpoint Group State Change event will be emitted
-    #   when the Dataflow Endpoint Group enters and exits the `PREPASS` state.
+    #   Station Dataflow Endpoint Group will be in a `PREPASS` state. A
+    #   [Ground Station Dataflow Endpoint Group State Change event][1] will be
+    #   emitted when the Dataflow Endpoint Group enters and exits the
+    #   `PREPASS` state.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/ground-station/latest/ug/monitoring.automating-events.html
     #
     # @option params [Integer] :contact_post_pass_duration_seconds
     #   Amount of time, in seconds, after a contact ends that the Ground
     #   Station Dataflow Endpoint Group will be in a `POSTPASS` state. A
-    #   Ground Station Dataflow Endpoint Group State Change event will be
+    #   [Ground Station Dataflow Endpoint Group State Change event][1] will be
     #   emitted when the Dataflow Endpoint Group enters and exits the
     #   `POSTPASS` state.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/ground-station/latest/ug/monitoring.automating-events.html
     #
     # @return [Types::DataflowEndpointGroupIdResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -771,31 +800,40 @@ module Aws::GroundStation
       req.send_request(options)
     end
 
-    # Creates a `DataflowEndpointGroupV2` containing the specified list of
-    # `DataflowEndpoint` objects.
+    # Creates a `DataflowEndpoint` group containing the specified list of
+    # Ground Station Agent based endpoints.
     #
-    # The `name` field in each endpoint is used in your mission profile
-    # `DataflowEndpointConfig` to specify which endpoints to use during a
+    # The `name` field in each endpoint is used in your mission profile `
+    # DataflowEndpointConfig` to specify which endpoints to use during a
     # contact.
     #
-    # When a contact uses multiple `DataflowEndpointConfig` objects, each
-    # `Config` must match a `DataflowEndpoint` in the same group.
+    # When a contact uses multiple `DataflowEndpointConfig` objects, each `
+    # Config` must match a `DataflowEndpoint` in the same group.
     #
     # @option params [required, Array<Types::CreateEndpointDetails>] :endpoints
     #   Dataflow endpoint group's endpoint definitions
     #
     # @option params [Integer] :contact_pre_pass_duration_seconds
     #   Amount of time, in seconds, before a contact starts that the Ground
-    #   Station Dataflow Endpoint Group will be in a `PREPASS` state. A Ground
-    #   Station Dataflow Endpoint Group State Change event will be emitted
-    #   when the Dataflow Endpoint Group enters and exits the `PREPASS` state.
+    #   Station Dataflow Endpoint Group will be in a `PREPASS` state. A
+    #   [Ground Station Dataflow Endpoint Group State Change event][1] will be
+    #   emitted when the Dataflow Endpoint Group enters and exits the
+    #   `PREPASS` state.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/ground-station/latest/ug/monitoring.automating-events.html
     #
     # @option params [Integer] :contact_post_pass_duration_seconds
     #   Amount of time, in seconds, after a contact ends that the Ground
     #   Station Dataflow Endpoint Group will be in a `POSTPASS` state. A
-    #   Ground Station Dataflow Endpoint Group State Change event will be
+    #   [Ground Station Dataflow Endpoint Group State Change event][1] will be
     #   emitted when the Dataflow Endpoint Group enters and exits the
     #   `POSTPASS` state.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/ground-station/latest/ug/monitoring.automating-events.html
     #
     # @option params [Hash<String,String>] :tags
     #   Tags of a V2 dataflow endpoint group.
@@ -1022,11 +1060,14 @@ module Aws::GroundStation
     #   contacts shorter than this duration.
     #
     # @option params [required, Array<Array>] :dataflow_edges
-    #   A list of lists of ARNs. Each list of ARNs is an edge, with a *from*
-    #   `Config` and a *to* `Config`.
+    #   A list of lists of ARNs. Each list of ARNs is an edge, with a *from* `
+    #   Config` and a *to* `Config`.
     #
     # @option params [required, String] :tracking_config_arn
     #   ARN of a tracking `Config`.
+    #
+    # @option params [String] :telemetry_sink_config_arn
+    #   ARN of a telemetry sink `Config`.
     #
     # @option params [Hash<String,String>] :tags
     #   Tags assigned to a mission profile.
@@ -1052,6 +1093,7 @@ module Aws::GroundStation
     #       ["ConfigArn"],
     #     ],
     #     tracking_config_arn: "ConfigArn", # required
+    #     telemetry_sink_config_arn: "ConfigArn",
     #     tags: {
     #       "String" => "String",
     #     },
@@ -1094,13 +1136,13 @@ module Aws::GroundStation
     #
     #   resp = client.delete_config({
     #     config_id: "Uuid", # required
-    #     config_type: "antenna-downlink", # required, accepts antenna-downlink, antenna-downlink-demod-decode, tracking, dataflow-endpoint, antenna-uplink, uplink-echo, s3-recording
+    #     config_type: "antenna-downlink", # required, accepts antenna-downlink, antenna-downlink-demod-decode, tracking, dataflow-endpoint, antenna-uplink, uplink-echo, s3-recording, telemetry-sink
     #   })
     #
     # @example Response structure
     #
     #   resp.config_id #=> String
-    #   resp.config_type #=> String, one of "antenna-downlink", "antenna-downlink-demod-decode", "tracking", "dataflow-endpoint", "antenna-uplink", "uplink-echo", "s3-recording"
+    #   resp.config_type #=> String, one of "antenna-downlink", "antenna-downlink-demod-decode", "tracking", "dataflow-endpoint", "antenna-uplink", "uplink-echo", "s3-recording", "telemetry-sink"
     #   resp.config_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/DeleteConfig AWS API Documentation
@@ -1246,7 +1288,7 @@ module Aws::GroundStation
     #   resp.tags["String"] #=> String
     #   resp.region #=> String
     #   resp.dataflow_list #=> Array
-    #   resp.dataflow_list[0].source.config_type #=> String, one of "antenna-downlink", "antenna-downlink-demod-decode", "tracking", "dataflow-endpoint", "antenna-uplink", "uplink-echo", "s3-recording"
+    #   resp.dataflow_list[0].source.config_type #=> String, one of "antenna-downlink", "antenna-downlink-demod-decode", "tracking", "dataflow-endpoint", "antenna-uplink", "uplink-echo", "s3-recording", "telemetry-sink"
     #   resp.dataflow_list[0].source.config_id #=> String
     #   resp.dataflow_list[0].source.config_details.endpoint_details.security_details.subnet_ids #=> Array
     #   resp.dataflow_list[0].source.config_details.endpoint_details.security_details.subnet_ids[0] #=> String
@@ -1295,7 +1337,7 @@ module Aws::GroundStation
     #   resp.dataflow_list[0].source.config_details.s3_recording_details.bucket_arn #=> String
     #   resp.dataflow_list[0].source.config_details.s3_recording_details.key_template #=> String
     #   resp.dataflow_list[0].source.dataflow_source_region #=> String
-    #   resp.dataflow_list[0].destination.config_type #=> String, one of "antenna-downlink", "antenna-downlink-demod-decode", "tracking", "dataflow-endpoint", "antenna-uplink", "uplink-echo", "s3-recording"
+    #   resp.dataflow_list[0].destination.config_type #=> String, one of "antenna-downlink", "antenna-downlink-demod-decode", "tracking", "dataflow-endpoint", "antenna-uplink", "uplink-echo", "s3-recording", "telemetry-sink"
     #   resp.dataflow_list[0].destination.config_id #=> String
     #   resp.dataflow_list[0].destination.config_details.endpoint_details.security_details.subnet_ids #=> Array
     #   resp.dataflow_list[0].destination.config_details.endpoint_details.security_details.subnet_ids[0] #=> String
@@ -1526,7 +1568,7 @@ module Aws::GroundStation
     #
     #   resp = client.get_config({
     #     config_id: "Uuid", # required
-    #     config_type: "antenna-downlink", # required, accepts antenna-downlink, antenna-downlink-demod-decode, tracking, dataflow-endpoint, antenna-uplink, uplink-echo, s3-recording
+    #     config_type: "antenna-downlink", # required, accepts antenna-downlink, antenna-downlink-demod-decode, tracking, dataflow-endpoint, antenna-uplink, uplink-echo, s3-recording, telemetry-sink
     #   })
     #
     # @example Response structure
@@ -1534,7 +1576,7 @@ module Aws::GroundStation
     #   resp.config_id #=> String
     #   resp.config_arn #=> String
     #   resp.name #=> String
-    #   resp.config_type #=> String, one of "antenna-downlink", "antenna-downlink-demod-decode", "tracking", "dataflow-endpoint", "antenna-uplink", "uplink-echo", "s3-recording"
+    #   resp.config_type #=> String, one of "antenna-downlink", "antenna-downlink-demod-decode", "tracking", "dataflow-endpoint", "antenna-uplink", "uplink-echo", "s3-recording", "telemetry-sink"
     #   resp.config_data.antenna_downlink_config.spectrum_config.center_frequency.value #=> Float
     #   resp.config_data.antenna_downlink_config.spectrum_config.center_frequency.units #=> String, one of "GHz", "MHz", "kHz"
     #   resp.config_data.antenna_downlink_config.spectrum_config.bandwidth.value #=> Float
@@ -1561,6 +1603,9 @@ module Aws::GroundStation
     #   resp.config_data.s3_recording_config.bucket_arn #=> String
     #   resp.config_data.s3_recording_config.role_arn #=> String
     #   resp.config_data.s3_recording_config.prefix #=> String
+    #   resp.config_data.telemetry_sink_config.telemetry_sink_type #=> String, one of "KINESIS_DATA_STREAM"
+    #   resp.config_data.telemetry_sink_config.telemetry_sink_data.kinesis_data_stream_data.kinesis_role_arn #=> String
+    #   resp.config_data.telemetry_sink_config.telemetry_sink_data.kinesis_data_stream_data.kinesis_data_stream_arn #=> String
     #   resp.tags #=> Hash
     #   resp.tags["String"] #=> String
     #
@@ -1711,6 +1756,7 @@ module Aws::GroundStation
     #   * {Types::GetMissionProfileResponse#minimum_viable_contact_duration_seconds #minimum_viable_contact_duration_seconds} => Integer
     #   * {Types::GetMissionProfileResponse#dataflow_edges #dataflow_edges} => Array&lt;Array&lt;String&gt;&gt;
     #   * {Types::GetMissionProfileResponse#tracking_config_arn #tracking_config_arn} => String
+    #   * {Types::GetMissionProfileResponse#telemetry_sink_config_arn #telemetry_sink_config_arn} => String
     #   * {Types::GetMissionProfileResponse#tags #tags} => Hash&lt;String,String&gt;
     #   * {Types::GetMissionProfileResponse#streams_kms_key #streams_kms_key} => Types::KmsKey
     #   * {Types::GetMissionProfileResponse#streams_kms_role #streams_kms_role} => String
@@ -1734,6 +1780,7 @@ module Aws::GroundStation
     #   resp.dataflow_edges[0] #=> Array
     #   resp.dataflow_edges[0][0] #=> String
     #   resp.tracking_config_arn #=> String
+    #   resp.telemetry_sink_config_arn #=> String
     #   resp.tags #=> Hash
     #   resp.tags["String"] #=> String
     #   resp.streams_kms_key.kms_key_arn #=> String
@@ -1818,7 +1865,7 @@ module Aws::GroundStation
     #   resp.next_token #=> String
     #   resp.config_list #=> Array
     #   resp.config_list[0].config_id #=> String
-    #   resp.config_list[0].config_type #=> String, one of "antenna-downlink", "antenna-downlink-demod-decode", "tracking", "dataflow-endpoint", "antenna-uplink", "uplink-echo", "s3-recording"
+    #   resp.config_list[0].config_type #=> String, one of "antenna-downlink", "antenna-downlink-demod-decode", "tracking", "dataflow-endpoint", "antenna-uplink", "uplink-echo", "s3-recording", "telemetry-sink"
     #   resp.config_list[0].config_arn #=> String
     #   resp.config_list[0].name #=> String
     #
@@ -1833,8 +1880,8 @@ module Aws::GroundStation
 
     # Returns a list of contacts.
     #
-    # If `statusList` contains AVAILABLE, the request must include
-    # `groundStation`, `missionprofileArn`, and `satelliteArn`.
+    # If `statusList` contains AVAILABLE, the request must include `
+    # groundStation`, `missionprofileArn`, and `satelliteArn`.
     #
     # @option params [Integer] :max_results
     #   Maximum number of contacts returned.
@@ -2452,7 +2499,7 @@ module Aws::GroundStation
     #   resp = client.update_config({
     #     config_id: "Uuid", # required
     #     name: "SafeName", # required
-    #     config_type: "antenna-downlink", # required, accepts antenna-downlink, antenna-downlink-demod-decode, tracking, dataflow-endpoint, antenna-uplink, uplink-echo, s3-recording
+    #     config_type: "antenna-downlink", # required, accepts antenna-downlink, antenna-downlink-demod-decode, tracking, dataflow-endpoint, antenna-uplink, uplink-echo, s3-recording, telemetry-sink
     #     config_data: { # required
     #       antenna_downlink_config: {
     #         spectrum_config: { # required
@@ -2516,13 +2563,22 @@ module Aws::GroundStation
     #         role_arn: "RoleArn", # required
     #         prefix: "S3KeyPrefix",
     #       },
+    #       telemetry_sink_config: {
+    #         telemetry_sink_type: "KINESIS_DATA_STREAM", # required, accepts KINESIS_DATA_STREAM
+    #         telemetry_sink_data: { # required
+    #           kinesis_data_stream_data: {
+    #             kinesis_role_arn: "RoleArn", # required
+    #             kinesis_data_stream_arn: "KinesisDataStreamArn", # required
+    #           },
+    #         },
+    #       },
     #     },
     #   })
     #
     # @example Response structure
     #
     #   resp.config_id #=> String
-    #   resp.config_type #=> String, one of "antenna-downlink", "antenna-downlink-demod-decode", "tracking", "dataflow-endpoint", "antenna-uplink", "uplink-echo", "s3-recording"
+    #   resp.config_type #=> String, one of "antenna-downlink", "antenna-downlink-demod-decode", "tracking", "dataflow-endpoint", "antenna-uplink", "uplink-echo", "s3-recording", "telemetry-sink"
     #   resp.config_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/UpdateConfig AWS API Documentation
@@ -2606,11 +2662,14 @@ module Aws::GroundStation
     #   contacts shorter than this duration.
     #
     # @option params [Array<Array>] :dataflow_edges
-    #   A list of lists of ARNs. Each list of ARNs is an edge, with a *from*
-    #   `Config` and a *to* `Config`.
+    #   A list of lists of ARNs. Each list of ARNs is an edge, with a *from* `
+    #   Config` and a *to* `Config`.
     #
     # @option params [String] :tracking_config_arn
     #   ARN of a tracking `Config`.
+    #
+    # @option params [String] :telemetry_sink_config_arn
+    #   ARN of a telemetry sink `Config`.
     #
     # @option params [Types::KmsKey] :streams_kms_key
     #   KMS key to use for encrypting streams.
@@ -2634,6 +2693,7 @@ module Aws::GroundStation
     #       ["ConfigArn"],
     #     ],
     #     tracking_config_arn: "ConfigArn",
+    #     telemetry_sink_config_arn: "ConfigArn",
     #     streams_kms_key: {
     #       kms_key_arn: "KeyArn",
     #       kms_alias_arn: "KeyAliasArn",
@@ -2673,7 +2733,7 @@ module Aws::GroundStation
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-groundstation'
-      context[:gem_version] = '1.78.0'
+      context[:gem_version] = '1.80.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

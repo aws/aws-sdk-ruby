@@ -79,6 +79,17 @@ module Aws
                   | (?Hash[Symbol, untyped]) -> instance
 
 
+      interface _AddRegionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AddRegionResponse]
+        def status: () -> ("ACTIVE" | "ADDING" | "REMOVING")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSOAdmin/Client.html#add_region-instance_method
+      def add_region: (
+                        instance_arn: ::String,
+                        region_name: ::String
+                      ) -> _AddRegionResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AddRegionResponseSuccess
+
       interface _AttachCustomerManagedPolicyReferenceToPermissionSetResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::AttachCustomerManagedPolicyReferenceToPermissionSetResponse]
       end
@@ -387,6 +398,7 @@ module Aws
         def portal_options: () -> Types::PortalOptions
         def description: () -> ::String
         def created_date: () -> ::Time
+        def created_from: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSOAdmin/Client.html#describe_application-instance_method
       def describe_application: (
@@ -471,6 +483,20 @@ module Aws
                                                          provision_permission_set_request_id: ::String
                                                        ) -> _DescribePermissionSetProvisioningStatusResponseSuccess
                                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribePermissionSetProvisioningStatusResponseSuccess
+
+      interface _DescribeRegionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeRegionResponse]
+        def region_name: () -> ::String
+        def status: () -> ("ACTIVE" | "ADDING" | "REMOVING")
+        def added_date: () -> ::Time
+        def is_primary_region: () -> bool
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSOAdmin/Client.html#describe_region-instance_method
+      def describe_region: (
+                             instance_arn: ::String,
+                             region_name: ::String
+                           ) -> _DescribeRegionResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeRegionResponseSuccess
 
       interface _DescribeTrustedTokenIssuerResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeTrustedTokenIssuerResponse]
@@ -847,6 +873,19 @@ module Aws
                                                        ) -> _ListPermissionSetsProvisionedToAccountResponseSuccess
                                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPermissionSetsProvisionedToAccountResponseSuccess
 
+      interface _ListRegionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListRegionsResponse]
+        def regions: () -> ::Array[Types::RegionMetadata]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSOAdmin/Client.html#list_regions-instance_method
+      def list_regions: (
+                          instance_arn: ::String,
+                          ?max_results: ::Integer,
+                          ?next_token: ::String
+                        ) -> _ListRegionsResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRegionsResponseSuccess
+
       interface _ListTagsForResourceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
         def tags: () -> ::Array[Types::Tag]
@@ -978,6 +1017,17 @@ module Aws
                                                         }
                                                       ) -> _PutPermissionsBoundaryToPermissionSetResponseSuccess
                                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutPermissionsBoundaryToPermissionSetResponseSuccess
+
+      interface _RemoveRegionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RemoveRegionResponse]
+        def status: () -> ("ACTIVE" | "ADDING" | "REMOVING")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSOAdmin/Client.html#remove_region-instance_method
+      def remove_region: (
+                           instance_arn: ::String,
+                           region_name: ::String
+                         ) -> _RemoveRegionResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RemoveRegionResponseSuccess
 
       interface _TagResourceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]

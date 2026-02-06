@@ -55,7 +55,7 @@ module Aws::DataZone
   autoload :EndpointProvider, 'aws-sdk-datazone/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-datazone/endpoints'
 
-  GEM_VERSION = '1.65.0'
+  GEM_VERSION = '1.67.0'
 
 end
 

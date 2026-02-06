@@ -10,6 +10,81 @@
 module Aws::Kinesis
   class EndpointProvider
     def resolve_endpoint(parameters)
+      if Aws::Endpoints::Matchers.set?(parameters.stream_id) && (stream_id_delimiter_value = Aws::Endpoints::Matchers.substring(parameters.stream_id, 20, 21, false)) && Aws::Endpoints::Matchers.string_equals?(stream_id_delimiter_value, "-") && (stream_id_delimiter_reversed_value = Aws::Endpoints::Matchers.substring(parameters.stream_id, 3, 4, true)) && Aws::Endpoints::Matchers.string_equals?(stream_id_delimiter_reversed_value, "-") && (stream_id_prefix_value = Aws::Endpoints::Matchers.substring(parameters.stream_id, 0, 20, false)) && (stream_id_suffix_value = Aws::Endpoints::Matchers.substring(parameters.stream_id, 21, 24, false)) && Aws::Endpoints::Matchers.set?(parameters.region) && (partition_result = Aws::Endpoints::Matchers.aws_partition(parameters.region)) && Aws::Endpoints::Matchers.not(Aws::Endpoints::Matchers.string_equals?(Aws::Endpoints::Matchers.attr(partition_result, "name"), "aws-iso")) && Aws::Endpoints::Matchers.not(Aws::Endpoints::Matchers.string_equals?(Aws::Endpoints::Matchers.attr(partition_result, "name"), "aws-iso-b"))
+        if Aws::Endpoints::Matchers.set?(parameters.operation_type)
+          if Aws::Endpoints::Matchers.set?(parameters.endpoint) && (https_custom_endpoint_delimiter_value = Aws::Endpoints::Matchers.substring(parameters.endpoint, 15, 16, false)) && Aws::Endpoints::Matchers.string_equals?(https_custom_endpoint_delimiter_value, "-") && (https_endpoint_delimiter_value = Aws::Endpoints::Matchers.substring(parameters.endpoint, 20, 21, false)) && Aws::Endpoints::Matchers.string_equals?(https_endpoint_delimiter_value, ".") && (https_custom_endpoint_suffix_value = Aws::Endpoints::Matchers.substring(parameters.endpoint, 15, 20, false))
+            if Aws::Endpoints::Matchers.boolean_equals?(parameters.use_fips, true) && Aws::Endpoints::Matchers.boolean_equals?(parameters.use_dual_stack, true)
+              if Aws::Endpoints::Matchers.boolean_equals?(Aws::Endpoints::Matchers.attr(partition_result, "supportsFIPS"), true)
+                if Aws::Endpoints::Matchers.boolean_equals?(Aws::Endpoints::Matchers.attr(partition_result, "supportsDualStack"), true)
+                  return Aws::Endpoints::Endpoint.new(url: "https://#{stream_id_prefix_value}.#{stream_id_suffix_value}.#{parameters.operation_type}-kinesis#{https_custom_endpoint_suffix_value}-fips.#{parameters.region}.#{partition_result['dualStackDnsSuffix']}", headers: {}, properties: {})
+                end
+                raise ArgumentError, "DualStack is enabled, but this partition does not support DualStack."
+              end
+              raise ArgumentError, "FIPS is enabled, but this partition does not support FIPS."
+            end
+            if Aws::Endpoints::Matchers.boolean_equals?(parameters.use_fips, true)
+              if Aws::Endpoints::Matchers.boolean_equals?(Aws::Endpoints::Matchers.attr(partition_result, "supportsFIPS"), true)
+                return Aws::Endpoints::Endpoint.new(url: "https://#{stream_id_prefix_value}.#{stream_id_suffix_value}.#{parameters.operation_type}-kinesis#{https_custom_endpoint_suffix_value}-fips.#{parameters.region}.#{partition_result['dnsSuffix']}", headers: {}, properties: {})
+              end
+              raise ArgumentError, "FIPS is enabled but this partition does not support FIPS"
+            end
+            if Aws::Endpoints::Matchers.boolean_equals?(parameters.use_dual_stack, true)
+              if Aws::Endpoints::Matchers.boolean_equals?(Aws::Endpoints::Matchers.attr(partition_result, "supportsDualStack"), true)
+                return Aws::Endpoints::Endpoint.new(url: "https://#{stream_id_prefix_value}.#{stream_id_suffix_value}.#{parameters.operation_type}-kinesis#{https_custom_endpoint_suffix_value}.#{parameters.region}.#{partition_result['dualStackDnsSuffix']}", headers: {}, properties: {})
+              end
+              raise ArgumentError, "DualStack is enabled but this partition does not support DualStack"
+            end
+            return Aws::Endpoints::Endpoint.new(url: "https://#{stream_id_prefix_value}.#{stream_id_suffix_value}.#{parameters.operation_type}-kinesis#{https_custom_endpoint_suffix_value}.#{parameters.region}.#{partition_result['dnsSuffix']}", headers: {}, properties: {})
+          end
+          if Aws::Endpoints::Matchers.set?(parameters.endpoint) && (plain_custom_endpoint_delimiter_value = Aws::Endpoints::Matchers.substring(parameters.endpoint, 7, 8, false)) && Aws::Endpoints::Matchers.string_equals?(plain_custom_endpoint_delimiter_value, "-") && (plain_endpoint_delimiter_value = Aws::Endpoints::Matchers.substring(parameters.endpoint, 12, 13, false)) && Aws::Endpoints::Matchers.string_equals?(plain_endpoint_delimiter_value, ".") && (plain_custom_endpoint_suffix_value = Aws::Endpoints::Matchers.substring(parameters.endpoint, 7, 12, false))
+            if Aws::Endpoints::Matchers.boolean_equals?(parameters.use_fips, true) && Aws::Endpoints::Matchers.boolean_equals?(parameters.use_dual_stack, true)
+              if Aws::Endpoints::Matchers.boolean_equals?(Aws::Endpoints::Matchers.attr(partition_result, "supportsFIPS"), true)
+                if Aws::Endpoints::Matchers.boolean_equals?(Aws::Endpoints::Matchers.attr(partition_result, "supportsDualStack"), true)
+                  return Aws::Endpoints::Endpoint.new(url: "https://#{stream_id_prefix_value}.#{stream_id_suffix_value}.#{parameters.operation_type}-kinesis#{plain_custom_endpoint_suffix_value}-fips.#{parameters.region}.#{partition_result['dualStackDnsSuffix']}", headers: {}, properties: {})
+                end
+                raise ArgumentError, "DualStack is enabled, but this partition does not support DualStack."
+              end
+              raise ArgumentError, "FIPS is enabled, but this partition does not support FIPS."
+            end
+            if Aws::Endpoints::Matchers.boolean_equals?(parameters.use_fips, true)
+              if Aws::Endpoints::Matchers.boolean_equals?(Aws::Endpoints::Matchers.attr(partition_result, "supportsFIPS"), true)
+                return Aws::Endpoints::Endpoint.new(url: "https://#{stream_id_prefix_value}.#{stream_id_suffix_value}.#{parameters.operation_type}-kinesis#{plain_custom_endpoint_suffix_value}-fips.#{parameters.region}.#{partition_result['dnsSuffix']}", headers: {}, properties: {})
+              end
+              raise ArgumentError, "FIPS is enabled but this partition does not support FIPS"
+            end
+            if Aws::Endpoints::Matchers.boolean_equals?(parameters.use_dual_stack, true)
+              if Aws::Endpoints::Matchers.boolean_equals?(Aws::Endpoints::Matchers.attr(partition_result, "supportsDualStack"), true)
+                return Aws::Endpoints::Endpoint.new(url: "https://#{stream_id_prefix_value}.#{stream_id_suffix_value}.#{parameters.operation_type}-kinesis#{plain_custom_endpoint_suffix_value}.#{parameters.region}.#{partition_result['dualStackDnsSuffix']}", headers: {}, properties: {})
+              end
+              raise ArgumentError, "DualStack is enabled but this partition does not support DualStack"
+            end
+            return Aws::Endpoints::Endpoint.new(url: "https://#{stream_id_prefix_value}.#{stream_id_suffix_value}.#{parameters.operation_type}-kinesis#{plain_custom_endpoint_suffix_value}.#{parameters.region}.#{partition_result['dnsSuffix']}", headers: {}, properties: {})
+          end
+          if Aws::Endpoints::Matchers.boolean_equals?(parameters.use_fips, true) && Aws::Endpoints::Matchers.boolean_equals?(parameters.use_dual_stack, true)
+            if Aws::Endpoints::Matchers.boolean_equals?(Aws::Endpoints::Matchers.attr(partition_result, "supportsFIPS"), true)
+              if Aws::Endpoints::Matchers.boolean_equals?(Aws::Endpoints::Matchers.attr(partition_result, "supportsDualStack"), true)
+                return Aws::Endpoints::Endpoint.new(url: "https://#{stream_id_prefix_value}.#{stream_id_suffix_value}.#{parameters.operation_type}-kinesis-fips.#{parameters.region}.#{partition_result['dualStackDnsSuffix']}", headers: {}, properties: {})
+              end
+              raise ArgumentError, "DualStack is enabled, but this partition does not support DualStack."
+            end
+            raise ArgumentError, "FIPS is enabled, but this partition does not support FIPS."
+          end
+          if Aws::Endpoints::Matchers.boolean_equals?(parameters.use_fips, true)
+            if Aws::Endpoints::Matchers.boolean_equals?(Aws::Endpoints::Matchers.attr(partition_result, "supportsFIPS"), true)
+              return Aws::Endpoints::Endpoint.new(url: "https://#{stream_id_prefix_value}.#{stream_id_suffix_value}.#{parameters.operation_type}-kinesis-fips.#{parameters.region}.#{partition_result['dnsSuffix']}", headers: {}, properties: {})
+            end
+            raise ArgumentError, "FIPS is enabled but this partition does not support FIPS"
+          end
+          if Aws::Endpoints::Matchers.boolean_equals?(parameters.use_dual_stack, true)
+            if Aws::Endpoints::Matchers.boolean_equals?(Aws::Endpoints::Matchers.attr(partition_result, "supportsDualStack"), true)
+              return Aws::Endpoints::Endpoint.new(url: "https://#{stream_id_prefix_value}.#{stream_id_suffix_value}.#{parameters.operation_type}-kinesis.#{parameters.region}.#{partition_result['dualStackDnsSuffix']}", headers: {}, properties: {})
+            end
+            raise ArgumentError, "DualStack is enabled but this partition does not support DualStack"
+          end
+          return Aws::Endpoints::Endpoint.new(url: "https://#{stream_id_prefix_value}.#{stream_id_suffix_value}.#{parameters.operation_type}-kinesis.#{parameters.region}.#{partition_result['dnsSuffix']}", headers: {}, properties: {})
+        end
+        raise ArgumentError, "Operation Type is not set. Please contact service team for resolution."
+      end
       if Aws::Endpoints::Matchers.set?(parameters.stream_arn) && Aws::Endpoints::Matchers.not(Aws::Endpoints::Matchers.set?(parameters.endpoint)) && Aws::Endpoints::Matchers.set?(parameters.region) && (partition_result = Aws::Endpoints::Matchers.aws_partition(parameters.region)) && Aws::Endpoints::Matchers.not(Aws::Endpoints::Matchers.string_equals?(Aws::Endpoints::Matchers.attr(partition_result, "name"), "aws-iso")) && Aws::Endpoints::Matchers.not(Aws::Endpoints::Matchers.string_equals?(Aws::Endpoints::Matchers.attr(partition_result, "name"), "aws-iso-b"))
         if (arn = Aws::Endpoints::Matchers.aws_parse_arn(parameters.stream_arn))
           if Aws::Endpoints::Matchers.valid_host_label?(Aws::Endpoints::Matchers.attr(arn, "accountId"), false)

@@ -71,6 +71,13 @@ module Aws::BedrockAgentCoreControl
     BrowserId = Shapes::StringShape.new(name: 'BrowserId')
     BrowserNetworkConfiguration = Shapes::StructureShape.new(name: 'BrowserNetworkConfiguration')
     BrowserNetworkMode = Shapes::StringShape.new(name: 'BrowserNetworkMode')
+    BrowserProfileArn = Shapes::StringShape.new(name: 'BrowserProfileArn')
+    BrowserProfileId = Shapes::StringShape.new(name: 'BrowserProfileId')
+    BrowserProfileName = Shapes::StringShape.new(name: 'BrowserProfileName')
+    BrowserProfileStatus = Shapes::StringShape.new(name: 'BrowserProfileStatus')
+    BrowserProfileSummaries = Shapes::ListShape.new(name: 'BrowserProfileSummaries')
+    BrowserProfileSummary = Shapes::StructureShape.new(name: 'BrowserProfileSummary')
+    BrowserSessionId = Shapes::StringShape.new(name: 'BrowserSessionId')
     BrowserSigningConfigInput = Shapes::StructureShape.new(name: 'BrowserSigningConfigInput')
     BrowserSigningConfigOutput = Shapes::StructureShape.new(name: 'BrowserSigningConfigOutput')
     BrowserStatus = Shapes::StringShape.new(name: 'BrowserStatus')
@@ -110,6 +117,8 @@ module Aws::BedrockAgentCoreControl
     CreateAgentRuntimeResponse = Shapes::StructureShape.new(name: 'CreateAgentRuntimeResponse')
     CreateApiKeyCredentialProviderRequest = Shapes::StructureShape.new(name: 'CreateApiKeyCredentialProviderRequest')
     CreateApiKeyCredentialProviderResponse = Shapes::StructureShape.new(name: 'CreateApiKeyCredentialProviderResponse')
+    CreateBrowserProfileRequest = Shapes::StructureShape.new(name: 'CreateBrowserProfileRequest')
+    CreateBrowserProfileResponse = Shapes::StructureShape.new(name: 'CreateBrowserProfileResponse')
     CreateBrowserRequest = Shapes::StructureShape.new(name: 'CreateBrowserRequest')
     CreateBrowserResponse = Shapes::StructureShape.new(name: 'CreateBrowserResponse')
     CreateCodeInterpreterRequest = Shapes::StructureShape.new(name: 'CreateCodeInterpreterRequest')
@@ -165,6 +174,8 @@ module Aws::BedrockAgentCoreControl
     DeleteAgentRuntimeResponse = Shapes::StructureShape.new(name: 'DeleteAgentRuntimeResponse')
     DeleteApiKeyCredentialProviderRequest = Shapes::StructureShape.new(name: 'DeleteApiKeyCredentialProviderRequest')
     DeleteApiKeyCredentialProviderResponse = Shapes::StructureShape.new(name: 'DeleteApiKeyCredentialProviderResponse')
+    DeleteBrowserProfileRequest = Shapes::StructureShape.new(name: 'DeleteBrowserProfileRequest')
+    DeleteBrowserProfileResponse = Shapes::StructureShape.new(name: 'DeleteBrowserProfileResponse')
     DeleteBrowserRequest = Shapes::StructureShape.new(name: 'DeleteBrowserRequest')
     DeleteBrowserResponse = Shapes::StructureShape.new(name: 'DeleteBrowserResponse')
     DeleteCodeInterpreterRequest = Shapes::StructureShape.new(name: 'DeleteCodeInterpreterRequest')
@@ -266,6 +277,8 @@ module Aws::BedrockAgentCoreControl
     GetAgentRuntimeResponse = Shapes::StructureShape.new(name: 'GetAgentRuntimeResponse')
     GetApiKeyCredentialProviderRequest = Shapes::StructureShape.new(name: 'GetApiKeyCredentialProviderRequest')
     GetApiKeyCredentialProviderResponse = Shapes::StructureShape.new(name: 'GetApiKeyCredentialProviderResponse')
+    GetBrowserProfileRequest = Shapes::StructureShape.new(name: 'GetBrowserProfileRequest')
+    GetBrowserProfileResponse = Shapes::StructureShape.new(name: 'GetBrowserProfileResponse')
     GetBrowserRequest = Shapes::StructureShape.new(name: 'GetBrowserRequest')
     GetBrowserResponse = Shapes::StructureShape.new(name: 'GetBrowserResponse')
     GetCodeInterpreterRequest = Shapes::StructureShape.new(name: 'GetCodeInterpreterRequest')
@@ -337,6 +350,8 @@ module Aws::BedrockAgentCoreControl
     ListAgentRuntimesResponse = Shapes::StructureShape.new(name: 'ListAgentRuntimesResponse')
     ListApiKeyCredentialProvidersRequest = Shapes::StructureShape.new(name: 'ListApiKeyCredentialProvidersRequest')
     ListApiKeyCredentialProvidersResponse = Shapes::StructureShape.new(name: 'ListApiKeyCredentialProvidersResponse')
+    ListBrowserProfilesRequest = Shapes::StructureShape.new(name: 'ListBrowserProfilesRequest')
+    ListBrowserProfilesResponse = Shapes::StructureShape.new(name: 'ListBrowserProfilesResponse')
     ListBrowsersRequest = Shapes::StructureShape.new(name: 'ListBrowsersRequest')
     ListBrowsersResponse = Shapes::StructureShape.new(name: 'ListBrowsersResponse')
     ListCodeInterpretersRequest = Shapes::StructureShape.new(name: 'ListCodeInterpretersRequest')
@@ -756,6 +771,20 @@ module Aws::BedrockAgentCoreControl
     BrowserNetworkConfiguration.add_member(:vpc_config, Shapes::ShapeRef.new(shape: VpcConfig, location_name: "vpcConfig"))
     BrowserNetworkConfiguration.struct_class = Types::BrowserNetworkConfiguration
 
+    BrowserProfileSummaries.member = Shapes::ShapeRef.new(shape: BrowserProfileSummary)
+
+    BrowserProfileSummary.add_member(:profile_id, Shapes::ShapeRef.new(shape: BrowserProfileId, required: true, location_name: "profileId"))
+    BrowserProfileSummary.add_member(:profile_arn, Shapes::ShapeRef.new(shape: BrowserProfileArn, required: true, location_name: "profileArn"))
+    BrowserProfileSummary.add_member(:name, Shapes::ShapeRef.new(shape: BrowserProfileName, required: true, location_name: "name"))
+    BrowserProfileSummary.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    BrowserProfileSummary.add_member(:status, Shapes::ShapeRef.new(shape: BrowserProfileStatus, required: true, location_name: "status"))
+    BrowserProfileSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "createdAt"))
+    BrowserProfileSummary.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "lastUpdatedAt"))
+    BrowserProfileSummary.add_member(:last_saved_at, Shapes::ShapeRef.new(shape: DateTimestamp, location_name: "lastSavedAt"))
+    BrowserProfileSummary.add_member(:last_saved_browser_session_id, Shapes::ShapeRef.new(shape: BrowserSessionId, location_name: "lastSavedBrowserSessionId"))
+    BrowserProfileSummary.add_member(:last_saved_browser_id, Shapes::ShapeRef.new(shape: BrowserId, location_name: "lastSavedBrowserId"))
+    BrowserProfileSummary.struct_class = Types::BrowserProfileSummary
+
     BrowserSigningConfigInput.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "enabled"))
     BrowserSigningConfigInput.struct_class = Types::BrowserSigningConfigInput
 
@@ -899,6 +928,18 @@ module Aws::BedrockAgentCoreControl
     CreateApiKeyCredentialProviderResponse.add_member(:credential_provider_arn, Shapes::ShapeRef.new(shape: ApiKeyCredentialProviderArnType, required: true, location_name: "credentialProviderArn"))
     CreateApiKeyCredentialProviderResponse.struct_class = Types::CreateApiKeyCredentialProviderResponse
 
+    CreateBrowserProfileRequest.add_member(:name, Shapes::ShapeRef.new(shape: BrowserProfileName, required: true, location_name: "name"))
+    CreateBrowserProfileRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    CreateBrowserProfileRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
+    CreateBrowserProfileRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
+    CreateBrowserProfileRequest.struct_class = Types::CreateBrowserProfileRequest
+
+    CreateBrowserProfileResponse.add_member(:profile_id, Shapes::ShapeRef.new(shape: BrowserProfileId, required: true, location_name: "profileId"))
+    CreateBrowserProfileResponse.add_member(:profile_arn, Shapes::ShapeRef.new(shape: BrowserProfileArn, required: true, location_name: "profileArn"))
+    CreateBrowserProfileResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "createdAt"))
+    CreateBrowserProfileResponse.add_member(:status, Shapes::ShapeRef.new(shape: BrowserProfileStatus, required: true, location_name: "status"))
+    CreateBrowserProfileResponse.struct_class = Types::CreateBrowserProfileResponse
+
     CreateBrowserRequest.add_member(:name, Shapes::ShapeRef.new(shape: SandboxName, required: true, location_name: "name"))
     CreateBrowserRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     CreateBrowserRequest.add_member(:execution_role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "executionRoleArn"))
@@ -934,6 +975,7 @@ module Aws::BedrockAgentCoreControl
     CreateEvaluatorRequest.add_member(:description, Shapes::ShapeRef.new(shape: EvaluatorDescription, location_name: "description"))
     CreateEvaluatorRequest.add_member(:evaluator_config, Shapes::ShapeRef.new(shape: EvaluatorConfig, required: true, location_name: "evaluatorConfig"))
     CreateEvaluatorRequest.add_member(:level, Shapes::ShapeRef.new(shape: EvaluatorLevel, required: true, location_name: "level"))
+    CreateEvaluatorRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
     CreateEvaluatorRequest.struct_class = Types::CreateEvaluatorRequest
 
     CreateEvaluatorResponse.add_member(:evaluator_arn, Shapes::ShapeRef.new(shape: CustomEvaluatorArn, required: true, location_name: "evaluatorArn"))
@@ -1035,6 +1077,7 @@ module Aws::BedrockAgentCoreControl
     CreateOnlineEvaluationConfigRequest.add_member(:evaluators, Shapes::ShapeRef.new(shape: EvaluatorList, required: true, location_name: "evaluators"))
     CreateOnlineEvaluationConfigRequest.add_member(:evaluation_execution_role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "evaluationExecutionRoleArn"))
     CreateOnlineEvaluationConfigRequest.add_member(:enable_on_create, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "enableOnCreate"))
+    CreateOnlineEvaluationConfigRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
     CreateOnlineEvaluationConfigRequest.struct_class = Types::CreateOnlineEvaluationConfigRequest
 
     CreateOnlineEvaluationConfigResponse.add_member(:online_evaluation_config_arn, Shapes::ShapeRef.new(shape: OnlineEvaluationConfigArn, required: true, location_name: "onlineEvaluationConfigArn"))
@@ -1235,6 +1278,17 @@ module Aws::BedrockAgentCoreControl
     DeleteApiKeyCredentialProviderRequest.struct_class = Types::DeleteApiKeyCredentialProviderRequest
 
     DeleteApiKeyCredentialProviderResponse.struct_class = Types::DeleteApiKeyCredentialProviderResponse
+
+    DeleteBrowserProfileRequest.add_member(:profile_id, Shapes::ShapeRef.new(shape: BrowserProfileId, required: true, location: "uri", location_name: "profileId"))
+    DeleteBrowserProfileRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "querystring", location_name: "clientToken", metadata: {"idempotencyToken" => true}))
+    DeleteBrowserProfileRequest.struct_class = Types::DeleteBrowserProfileRequest
+
+    DeleteBrowserProfileResponse.add_member(:profile_id, Shapes::ShapeRef.new(shape: BrowserProfileId, required: true, location_name: "profileId"))
+    DeleteBrowserProfileResponse.add_member(:profile_arn, Shapes::ShapeRef.new(shape: BrowserProfileArn, required: true, location_name: "profileArn"))
+    DeleteBrowserProfileResponse.add_member(:status, Shapes::ShapeRef.new(shape: BrowserProfileStatus, required: true, location_name: "status"))
+    DeleteBrowserProfileResponse.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "lastUpdatedAt"))
+    DeleteBrowserProfileResponse.add_member(:last_saved_at, Shapes::ShapeRef.new(shape: DateTimestamp, location_name: "lastSavedAt"))
+    DeleteBrowserProfileResponse.struct_class = Types::DeleteBrowserProfileResponse
 
     DeleteBrowserRequest.add_member(:browser_id, Shapes::ShapeRef.new(shape: BrowserId, required: true, location: "uri", location_name: "browserId"))
     DeleteBrowserRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "querystring", location_name: "clientToken", metadata: {"idempotencyToken" => true}))
@@ -1555,6 +1609,21 @@ module Aws::BedrockAgentCoreControl
     GetApiKeyCredentialProviderResponse.add_member(:last_updated_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "lastUpdatedTime"))
     GetApiKeyCredentialProviderResponse.struct_class = Types::GetApiKeyCredentialProviderResponse
 
+    GetBrowserProfileRequest.add_member(:profile_id, Shapes::ShapeRef.new(shape: BrowserProfileId, required: true, location: "uri", location_name: "profileId"))
+    GetBrowserProfileRequest.struct_class = Types::GetBrowserProfileRequest
+
+    GetBrowserProfileResponse.add_member(:profile_id, Shapes::ShapeRef.new(shape: BrowserProfileId, required: true, location_name: "profileId"))
+    GetBrowserProfileResponse.add_member(:profile_arn, Shapes::ShapeRef.new(shape: BrowserProfileArn, required: true, location_name: "profileArn"))
+    GetBrowserProfileResponse.add_member(:name, Shapes::ShapeRef.new(shape: BrowserProfileName, required: true, location_name: "name"))
+    GetBrowserProfileResponse.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    GetBrowserProfileResponse.add_member(:status, Shapes::ShapeRef.new(shape: BrowserProfileStatus, required: true, location_name: "status"))
+    GetBrowserProfileResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "createdAt"))
+    GetBrowserProfileResponse.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "lastUpdatedAt"))
+    GetBrowserProfileResponse.add_member(:last_saved_at, Shapes::ShapeRef.new(shape: DateTimestamp, location_name: "lastSavedAt"))
+    GetBrowserProfileResponse.add_member(:last_saved_browser_session_id, Shapes::ShapeRef.new(shape: BrowserSessionId, location_name: "lastSavedBrowserSessionId"))
+    GetBrowserProfileResponse.add_member(:last_saved_browser_id, Shapes::ShapeRef.new(shape: BrowserId, location_name: "lastSavedBrowserId"))
+    GetBrowserProfileResponse.struct_class = Types::GetBrowserProfileResponse
+
     GetBrowserRequest.add_member(:browser_id, Shapes::ShapeRef.new(shape: BrowserId, required: true, location: "uri", location_name: "browserId"))
     GetBrowserRequest.struct_class = Types::GetBrowserRequest
 
@@ -1859,6 +1928,14 @@ module Aws::BedrockAgentCoreControl
     ListApiKeyCredentialProvidersResponse.add_member(:credential_providers, Shapes::ShapeRef.new(shape: ApiKeyCredentialProviders, required: true, location_name: "credentialProviders"))
     ListApiKeyCredentialProvidersResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     ListApiKeyCredentialProvidersResponse.struct_class = Types::ListApiKeyCredentialProvidersResponse
+
+    ListBrowserProfilesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListBrowserProfilesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
+    ListBrowserProfilesRequest.struct_class = Types::ListBrowserProfilesRequest
+
+    ListBrowserProfilesResponse.add_member(:profile_summaries, Shapes::ShapeRef.new(shape: BrowserProfileSummaries, required: true, location_name: "profileSummaries"))
+    ListBrowserProfilesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListBrowserProfilesResponse.struct_class = Types::ListBrowserProfilesResponse
 
     ListBrowsersRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListBrowsersRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
@@ -2946,6 +3023,20 @@ module Aws::BedrockAgentCoreControl
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
+      api.add_operation(:create_browser_profile, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateBrowserProfile"
+        o.http_method = "PUT"
+        o.http_request_uri = "/browser-profiles"
+        o.input = Shapes::ShapeRef.new(shape: CreateBrowserProfileRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateBrowserProfileResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
       api.add_operation(:create_code_interpreter, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateCodeInterpreter"
         o.http_method = "PUT"
@@ -3144,6 +3235,20 @@ module Aws::BedrockAgentCoreControl
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:delete_browser_profile, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteBrowserProfile"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/browser-profiles/{profileId}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteBrowserProfileRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteBrowserProfileResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
@@ -3352,6 +3457,19 @@ module Aws::BedrockAgentCoreControl
         o.output = Shapes::ShapeRef.new(shape: GetBrowserResponse)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:get_browser_profile, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetBrowserProfile"
+        o.http_method = "GET"
+        o.http_request_uri = "/browser-profiles/{profileId}"
+        o.input = Shapes::ShapeRef.new(shape: GetBrowserProfileRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetBrowserProfileResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
@@ -3595,6 +3713,24 @@ module Aws::BedrockAgentCoreControl
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_browser_profiles, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListBrowserProfiles"
+        o.http_method = "POST"
+        o.http_request_uri = "/browser-profiles"
+        o.input = Shapes::ShapeRef.new(shape: ListBrowserProfilesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListBrowserProfilesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o[:pager] = Aws::Pager.new(

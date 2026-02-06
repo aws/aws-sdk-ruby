@@ -54,6 +54,9 @@ module Aws
         def message: () -> ::String
         def reason: () -> ::String
       end
+      class InvalidTestCaseException < ::Aws::Errors::ServiceError
+        def problems: () -> ::String
+      end
       class LimitExceededException < ::Aws::Errors::ServiceError
         def message: () -> ::String
       end

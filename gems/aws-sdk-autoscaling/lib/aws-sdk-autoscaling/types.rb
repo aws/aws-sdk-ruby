@@ -357,11 +357,12 @@ module Aws::AutoScaling
     #   @return [String]
     #
     # @!attribute [rw] launch_configuration_name
-    #   The name of the associated launch configuration.
+    #   The name of the associated launch configuration for the Auto Scaling
+    #   group.
     #   @return [String]
     #
     # @!attribute [rw] launch_template
-    #   The launch template for the group.
+    #   The launch template for the Auto Scaling group.
     #   @return [Types::LaunchTemplateSpecification]
     #
     # @!attribute [rw] mixed_instances_policy
@@ -369,15 +370,15 @@ module Aws::AutoScaling
     #   @return [Types::MixedInstancesPolicy]
     #
     # @!attribute [rw] min_size
-    #   The minimum size of the group.
+    #   The minimum size of the Auto Scaling group.
     #   @return [Integer]
     #
     # @!attribute [rw] max_size
-    #   The maximum size of the group.
+    #   The maximum size of the Auto Scaling group.
     #   @return [Integer]
     #
     # @!attribute [rw] desired_capacity
-    #   The desired size of the group.
+    #   The desired size of the Auto Scaling group.
     #   @return [Integer]
     #
     # @!attribute [rw] predicted_capacity
@@ -386,11 +387,12 @@ module Aws::AutoScaling
     #   @return [Integer]
     #
     # @!attribute [rw] default_cooldown
-    #   The duration of the default cooldown period, in seconds.
+    #   The duration of the default cooldown period, in seconds, for the
+    #   Auto Scaling group.
     #   @return [Integer]
     #
     # @!attribute [rw] availability_zones
-    #   One or more Availability Zones for the group.
+    #   One or more Availability Zones for the Auto Scaling group.
     #   @return [Array<String>]
     #
     # @!attribute [rw] load_balancer_names
@@ -403,41 +405,43 @@ module Aws::AutoScaling
     #   @return [Array<String>]
     #
     # @!attribute [rw] health_check_type
-    #   A comma-separated value string of one or more health check types.
+    #   One or more comma-separated health check types for the Auto Scaling
+    #   group.
     #   @return [String]
     #
     # @!attribute [rw] health_check_grace_period
-    #   The duration of the health check grace period, in seconds.
+    #   The duration of the health check grace period, in seconds, for the
+    #   Auto Scaling group.
     #   @return [Integer]
     #
     # @!attribute [rw] instances
-    #   The EC2 instances associated with the group.
+    #   The EC2 instances associated with the Auto Scaling group.
     #   @return [Array<Types::Instance>]
     #
     # @!attribute [rw] created_time
-    #   The date and time the group was created.
+    #   The date and time the Auto Scaling group was created.
     #   @return [Time]
     #
     # @!attribute [rw] suspended_processes
-    #   The suspended processes associated with the group.
+    #   The suspended processes associated with the Auto Scaling group.
     #   @return [Array<Types::SuspendedProcess>]
     #
     # @!attribute [rw] placement_group
-    #   The name of the placement group into which to launch your instances,
-    #   if any.
+    #   The name of the placement group into which to launch EC2 instances
+    #   for the Auto Scaling group.
     #   @return [String]
     #
     # @!attribute [rw] vpc_zone_identifier
-    #   One or more subnet IDs, if applicable, separated by commas.
+    #   One or more comma-separated subnet IDs for the Auto Scaling group.
     #   @return [String]
     #
     # @!attribute [rw] enabled_metrics
-    #   The metrics enabled for the group.
+    #   The metrics enabled for the Auto Scaling group.
     #   @return [Array<Types::EnabledMetric>]
     #
     # @!attribute [rw] status
-    #   The current state of the group when the [DeleteAutoScalingGroup][1]
-    #   operation is in progress.
+    #   The current state of the Auto Scaling group when the
+    #   [DeleteAutoScalingGroup][1] operation is in progress.
     #
     #
     #
@@ -445,19 +449,20 @@ module Aws::AutoScaling
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   The tags for the group.
+    #   The tags for the Auto Scaling group.
     #   @return [Array<Types::TagDescription>]
     #
     # @!attribute [rw] termination_policies
-    #   The termination policies for the group.
+    #   The termination policies for the Auto Scaling group.
     #   @return [Array<String>]
     #
     # @!attribute [rw] new_instances_protected_from_scale_in
-    #   Indicates whether newly launched instances are protected from
-    #   termination by Amazon EC2 Auto Scaling when scaling in. For more
-    #   information about preventing instances from terminating on scale in,
-    #   see [Use instance scale-in protection][1] in the *Amazon EC2 Auto
-    #   Scaling User Guide*.
+    #   Indicates whether newly launched EC2 instances are protected from
+    #   termination when scaling in for the Auto Scaling group.
+    #
+    #   For more information about preventing instances from terminating on
+    #   scale in, see [Use instance scale-in protection][1] in the *Amazon
+    #   EC2 Auto Scaling User Guide*.
     #
     #
     #
@@ -471,10 +476,8 @@ module Aws::AutoScaling
     #   @return [String]
     #
     # @!attribute [rw] max_instance_lifetime
-    #   The maximum amount of time, in seconds, that an instance can be in
-    #   service.
-    #
-    #   Valid Range: Minimum value of 0.
+    #   The maximum amount of time, in seconds, that an EC2 instance can be
+    #   in service for the Auto Scaling group.
     #   @return [Integer]
     #
     # @!attribute [rw] capacity_rebalance
@@ -500,7 +503,8 @@ module Aws::AutoScaling
     #   @return [String]
     #
     # @!attribute [rw] default_instance_warmup
-    #   The duration of the default instance warmup, in seconds.
+    #   The duration of the default EC2 instance warmup time, in seconds,
+    #   for the Auto Scaling group.
     #   @return [Integer]
     #
     # @!attribute [rw] traffic_sources
@@ -511,23 +515,25 @@ module Aws::AutoScaling
     #   An instance maintenance policy.
     #   @return [Types::InstanceMaintenancePolicy]
     #
+    # @!attribute [rw] deletion_protection
+    #   The deletion protection setting for the Auto Scaling group.
+    #   @return [String]
+    #
     # @!attribute [rw] availability_zone_distribution
-    #   The instance capacity distribution across Availability Zones.
+    #   The EC2 instance capacity distribution across Availability Zones for
+    #   the Auto Scaling group.
     #   @return [Types::AvailabilityZoneDistribution]
     #
     # @!attribute [rw] availability_zone_impairment_policy
-    #   The Availability Zone impairment policy.
+    #   The Availability Zone impairment policy for the Auto Scaling group.
     #   @return [Types::AvailabilityZoneImpairmentPolicy]
     #
     # @!attribute [rw] capacity_reservation_specification
-    #   The capacity reservation specification.
+    #   The capacity reservation specification for the Auto Scaling group.
     #   @return [Types::CapacityReservationSpecification]
     #
     # @!attribute [rw] instance_lifecycle_policy
-    #   The instance lifecycle policy applied to this Auto Scaling group.
-    #   This policy determines instance behavior when an instance
-    #   transitions through its lifecycle states. It provides additional
-    #   control over graceful instance management processes.
+    #   The instance lifecycle policy for the Auto Scaling group.
     #   @return [Types::InstanceLifecyclePolicy]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/AutoScalingGroup AWS API Documentation
@@ -568,6 +574,7 @@ module Aws::AutoScaling
       :default_instance_warmup,
       :traffic_sources,
       :instance_maintenance_policy,
+      :deletion_protection,
       :availability_zone_distribution,
       :availability_zone_impairment_policy,
       :capacity_reservation_specification,
@@ -662,12 +669,13 @@ module Aws::AutoScaling
     #
     #   Valid values: `Pending` \| `Pending:Wait` \| `Pending:Proceed` \|
     #   `Quarantined` \| `InService` \| `Terminating` \| `Terminating:Wait`
-    #   \| `Terminating:Proceed` \| `Terminated` \| `Detaching` \|
-    #   `Detached` \| `EnteringStandby` \| `Standby` \| `Warmed:Pending` \|
-    #   `Warmed:Pending:Wait` \| `Warmed:Pending:Proceed` \|
+    #   \| `Terminating:Proceed` \| `Terminating:Retained` \| `Terminated`
+    #   \| `Detaching` \| `Detached` \| `EnteringStandby` \| `Standby` \|
+    #   `Warmed:Pending` \| `Warmed:Pending:Wait` \|
+    #   `Warmed:Pending:Proceed` \| `Warmed:Pending:Retained` \|
     #   `Warmed:Terminating` \| `Warmed:Terminating:Wait` \|
-    #   `Warmed:Terminating:Proceed` \| `Warmed:Terminated` \|
-    #   `Warmed:Stopped` \| `Warmed:Running`
+    #   `Warmed:Terminating:Proceed` \| `Warmed:Terminating:Retained` \|
+    #   `Warmed:Terminated` \| `Warmed:Stopped` \| `Warmed:Running`
     #
     #
     #
@@ -1396,6 +1404,20 @@ module Aws::AutoScaling
     #   instances are launched.
     #   @return [Array<Types::LifecycleHookSpecification>]
     #
+    # @!attribute [rw] deletion_protection
+    #   The deletion protection setting for the Auto Scaling group. This
+    #   setting helps safeguard your Auto Scaling group and its instances by
+    #   controlling whether the `DeleteAutoScalingGroup` operation is
+    #   allowed. When deletion protection is enabled, users cannot delete
+    #   the Auto Scaling group according to the specified protection level
+    #   until the setting is changed back to a less restrictive level.
+    #
+    #   The valid values are `none`, `prevent-force-deletion`, and
+    #   `prevent-all-deletion`.
+    #
+    #   Default: `none`
+    #   @return [String]
+    #
     # @!attribute [rw] tags
     #   One or more tags. You can tag your Auto Scaling group and propagate
     #   the tags to the Amazon EC2 instances it launches. Tags are not
@@ -1533,13 +1555,20 @@ module Aws::AutoScaling
     #   The instance lifecycle policy for the Auto Scaling group. This
     #   policy controls instance behavior when an instance transitions
     #   through its lifecycle states. Configure retention triggers to
-    #   specify when instances should move to a `Retained` state for manual
-    #   intervention instead of automatic termination.
+    #   specify when instances should move to a `Retained` state instead of
+    #   automatic termination.
+    #
+    #   For more information, see [ Control instance retention with instance
+    #   lifecycle policies][1] in the *Amazon EC2 Auto Scaling User Guide*.
     #
     #   <note markdown="1"> Instances in a Retained state will continue to incur standard EC2
     #   charges until terminated.
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/instance-lifecycle-policy.html
     #   @return [Types::InstanceLifecyclePolicy]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/CreateAutoScalingGroupType AWS API Documentation
@@ -1565,6 +1594,7 @@ module Aws::AutoScaling
       :new_instances_protected_from_scale_in,
       :capacity_rebalance,
       :lifecycle_hook_specification_list,
+      :deletion_protection,
       :tags,
       :service_linked_role_arn,
       :max_instance_lifetime,
@@ -2457,17 +2487,21 @@ module Aws::AutoScaling
     end
 
     # @!attribute [rw] activity_ids
-    #   The activity IDs of the desired scaling activities. If you omit this
-    #   property, all activities for the past six weeks are described. If
-    #   unknown activities are requested, they are ignored with no error. If
-    #   you specify an Auto Scaling group, the results are limited to that
-    #   group.
+    #   The activity IDs of the desired scaling activities. If unknown
+    #   activity IDs are requested, they are ignored with no error. Only
+    #   activities started within the last six weeks can be returned
+    #   regardless of the activity IDs specified. If other filters are
+    #   specified with the request, only results matching all filter
+    #   criteria can be returned.
     #
     #   Array Members: Maximum number of 50 IDs.
     #   @return [Array<String>]
     #
     # @!attribute [rw] auto_scaling_group_name
     #   The name of the Auto Scaling group.
+    #
+    #   Omitting this property performs an account-wide operation, which can
+    #   result in slower or timed-out requests.
     #   @return [String]
     #
     # @!attribute [rw] include_deleted_groups
@@ -2485,6 +2519,32 @@ module Aws::AutoScaling
     #   token from a previous call.)
     #   @return [String]
     #
+    # @!attribute [rw] filters
+    #   One or more filters to limit the results based on specific criteria.
+    #   The following filters are supported:
+    #
+    #   * `StartTimeLowerBound` - The earliest scaling activities to return
+    #     based on the activity start time. Scaling activities with a start
+    #     time earlier than this value are not included in the results. Only
+    #     activities started within the last six weeks can be returned
+    #     regardless of the value specified.
+    #
+    #   * `StartTimeUpperBound` - The latest scaling activities to return
+    #     based on the activity start time. Scaling activities with a start
+    #     time later than this value are not included in the results. Only
+    #     activities started within the last six weeks can be returned
+    #     regardless of the value specified.
+    #
+    #   * `Status` - The `StatusCode` value of the scaling activity. This
+    #     filter can only be used in combination with the
+    #     `AutoScalingGroupName` parameter. For valid `StatusCode` values,
+    #     see [Activity][1] in the *Amazon EC2 Auto Scaling API Reference*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_Activity.html
+    #   @return [Array<Types::Filter>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeScalingActivitiesType AWS API Documentation
     #
     class DescribeScalingActivitiesType < Struct.new(
@@ -2492,7 +2552,8 @@ module Aws::AutoScaling
       :auto_scaling_group_name,
       :include_deleted_groups,
       :max_records,
-      :next_token)
+      :next_token,
+      :filters)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3321,10 +3382,11 @@ module Aws::AutoScaling
     #   The name of the filter.
     #
     #   The valid values for `Name` depend on which API operation you're
-    #   using with the filter ([DescribeAutoScalingGroups][1] or
-    #   [DescribeTags][2]).
+    #   using with the filter.
     #
-    #   **DescribeAutoScalingGroups**
+    #   <b> <a
+    #   href="https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_DescribeAutoScalingGroups.html">DescribeAutoScalingGroups</a>
+    #   </b>
     #
     #   Valid values for `Name` include the following:
     #
@@ -3340,7 +3402,9 @@ module Aws::AutoScaling
     #     value. The results only include information about the Auto Scaling
     #     groups associated with the specified key/value combination.
     #
-    #   **DescribeTags**
+    #   <b> <a
+    #   href="https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_DescribeTags.html">DescribeTags</a>
+    #   </b>
     #
     #   Valid values for `Name` include the following:
     #
@@ -3359,10 +3423,32 @@ module Aws::AutoScaling
     #     include information about the tags associated with the specified
     #     Boolean value.
     #
+    #   <b> <a
+    #   href="https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_DescribeScalingActivities.html">DescribeScalingActivities</a>
+    #   </b>
+    #
+    #   Valid values for `Name` include the following:
+    #
+    #   * `StartTimeLowerBound` - The earliest scaling activities to return
+    #     based on the activity start time. Scaling activities with a start
+    #     time earlier than this value are not included in the results. Only
+    #     activities started within the last six weeks can be returned
+    #     regardless of the value specified.
+    #
+    #   * `StartTimeUpperBound` - The latest scaling activities to return
+    #     based on the activity start time. Scaling activities with a start
+    #     time later than this value are not included in the results. Only
+    #     activities started within the last six weeks can be returned
+    #     regardless of the value specified.
+    #
+    #   * `Status` - The `StatusCode` value of the scaling activity. This
+    #     filter can only be used in combination with the
+    #     `AutoScalingGroupName` parameter. For valid `StatusCode` values,
+    #     see [Activity][1] in the *Amazon EC2 Auto Scaling API Reference*.
     #
     #
-    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_DescribeAutoScalingGroups.html
-    #   [2]: https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_DescribeTags.html
+    #
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_Activity.html
     #   @return [String]
     #
     # @!attribute [rw] values
@@ -3370,11 +3456,17 @@ module Aws::AutoScaling
     #
     #   If you specify multiple values for a filter, the values are
     #   automatically logically joined with an `OR`, and the request returns
-    #   all results that match any of the specified values. For example,
-    #   specify "tag:environment" for the filter name and
-    #   "production,development" for the filter values to find Auto
-    #   Scaling groups with the tag "environment=production" or
-    #   "environment=development".
+    #   all results that match any of the specified values.
+    #
+    #   **DescribeAutoScalingGroups example:** Specify "tag:environment"
+    #   for the filter name and "production,development" for the filter
+    #   values to find Auto Scaling groups with the tag
+    #   "environment=production" or "environment=development".
+    #
+    #   **DescribeScalingActivities example:** Specify "Status" for the
+    #   filter name and "Successful,Failed" for the filter values to find
+    #   scaling activities with a status of either "Successful" or
+    #   "Failed".
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/Filter AWS API Documentation
@@ -3590,17 +3682,25 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
-    # Defines the lifecycle policy for instances in an Auto Scaling group.
-    # This policy controls instance behavior when lifecycles transition and
-    # operations fail. Use lifecycle policies to ensure graceful shutdown
-    # for stateful workloads or applications requiring extended draining
-    # periods.
+    # The instance lifecycle policy for the Auto Scaling group. This policy
+    # controls instance behavior when an instance transitions through its
+    # lifecycle states. Configure retention triggers to specify when
+    # instances should move to a `Retained` state instead of automatic
+    # termination.
+    #
+    # For more information, see [ Control instance retention with instance
+    # lifecycle policies][1] in the *Amazon EC2 Auto Scaling User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/instance-lifecycle-policy.html
     #
     # @!attribute [rw] retention_triggers
     #   Specifies the conditions that trigger instance retention behavior.
-    #   These triggers determine when instances should move to a Retained
-    #   state instead of being terminated. This allows you to maintain
-    #   control over instance management when lifecycle operations fail.
+    #   These triggers determine when instances should move to a `Retained`
+    #   state instead of automatic termination. This allows you to maintain
+    #   control over instance management when lifecycles transition and
+    #   operations fail.
     #   @return [Types::RetentionTriggers]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/InstanceLifecyclePolicy AWS API Documentation
@@ -7194,8 +7294,8 @@ module Aws::AutoScaling
     #   due to failure, timeout, or explicit abandonment (calling
     #   CompleteLifecycleAction).
     #
-    #   Set to `Retain` to move instances to a `Retained` state. Set to
-    #   `Terminate` for default termination behavior.
+    #   Set to `retain` to move instances to a retained state. Set to
+    #   `terminate` for default termination behavior.
     #
     #   Retained instances don't count toward desired capacity and remain
     #   until you call `TerminateInstanceInAutoScalingGroup`.
@@ -7743,8 +7843,8 @@ module Aws::AutoScaling
     #   @return [String]
     #
     # @!attribute [rw] strategy
-    #   The strategy to use for the instance refresh. The only valid value
-    #   is `Rolling`.
+    #   The strategy to use for the instance refresh. The default value is
+    #   `Rolling`.
     #   @return [String]
     #
     # @!attribute [rw] desired_configuration
@@ -8615,12 +8715,33 @@ module Aws::AutoScaling
     #   @return [Types::CapacityReservationSpecification]
     #
     # @!attribute [rw] instance_lifecycle_policy
-    #   The instance lifecycle policy for the Auto Scaling group. Use this
-    #   to add, modify, or remove lifecycle policies that control instance
-    #   behavior when an instance transitions through its lifecycle states.
-    #   Configure retention triggers to specify when to preserve instances
-    #   for manual intervention.
+    #   The instance lifecycle policy for the Auto Scaling group. This
+    #   policy controls instance behavior when an instance transitions
+    #   through its lifecycle states. Configure retention triggers to
+    #   specify when instances should move to a `Retained` state instead of
+    #   automatic termination.
+    #
+    #   For more information, see [ Control instance retention with instance
+    #   lifecycle policies][1] in the *Amazon EC2 Auto Scaling User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/instance-lifecycle-policy.html
     #   @return [Types::InstanceLifecyclePolicy]
+    #
+    # @!attribute [rw] deletion_protection
+    #   The deletion protection setting for the Auto Scaling group. This
+    #   setting helps safeguard your Auto Scaling group and its instances by
+    #   controlling whether the `DeleteAutoScalingGroup` operation is
+    #   allowed. When deletion protection is enabled, users cannot delete
+    #   the Auto Scaling group according to the specified protection level
+    #   until the setting is changed back to a less restrictive level.
+    #
+    #   The valid values are `none`, `prevent-force-deletion`, and
+    #   `prevent-all-deletion`.
+    #
+    #   Default: `none`
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/UpdateAutoScalingGroupType AWS API Documentation
     #
@@ -8651,7 +8772,8 @@ module Aws::AutoScaling
       :availability_zone_impairment_policy,
       :skip_zonal_shift_validation,
       :capacity_reservation_specification,
-      :instance_lifecycle_policy)
+      :instance_lifecycle_policy,
+      :deletion_protection)
       SENSITIVE = []
       include Aws::Structure
     end

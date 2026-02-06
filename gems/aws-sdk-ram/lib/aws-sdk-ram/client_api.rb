@@ -22,6 +22,8 @@ module Aws::RAM
     AssociateResourceShareResponse = Shapes::StructureShape.new(name: 'AssociateResourceShareResponse')
     AssociatedPermission = Shapes::StructureShape.new(name: 'AssociatedPermission')
     AssociatedPermissionList = Shapes::ListShape.new(name: 'AssociatedPermissionList')
+    AssociatedSource = Shapes::StructureShape.new(name: 'AssociatedSource')
+    AssociatedSourceList = Shapes::ListShape.new(name: 'AssociatedSourceList')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     CreatePermissionRequest = Shapes::StructureShape.new(name: 'CreatePermissionRequest')
     CreatePermissionResponse = Shapes::StructureShape.new(name: 'CreatePermissionResponse')
@@ -79,6 +81,8 @@ module Aws::RAM
     ListResourceTypesResponse = Shapes::StructureShape.new(name: 'ListResourceTypesResponse')
     ListResourcesRequest = Shapes::StructureShape.new(name: 'ListResourcesRequest')
     ListResourcesResponse = Shapes::StructureShape.new(name: 'ListResourcesResponse')
+    ListSourceAssociationsRequest = Shapes::StructureShape.new(name: 'ListSourceAssociationsRequest')
+    ListSourceAssociationsResponse = Shapes::StructureShape.new(name: 'ListSourceAssociationsResponse')
     MalformedArnException = Shapes::StructureShape.new(name: 'MalformedArnException')
     MalformedPolicyTemplateException = Shapes::StructureShape.new(name: 'MalformedPolicyTemplateException')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
@@ -208,6 +212,17 @@ module Aws::RAM
     AssociatedPermission.struct_class = Types::AssociatedPermission
 
     AssociatedPermissionList.member = Shapes::ShapeRef.new(shape: AssociatedPermission)
+
+    AssociatedSource.add_member(:resource_share_arn, Shapes::ShapeRef.new(shape: String, location_name: "resourceShareArn"))
+    AssociatedSource.add_member(:source_id, Shapes::ShapeRef.new(shape: String, location_name: "sourceId"))
+    AssociatedSource.add_member(:source_type, Shapes::ShapeRef.new(shape: String, location_name: "sourceType"))
+    AssociatedSource.add_member(:status, Shapes::ShapeRef.new(shape: String, location_name: "status"))
+    AssociatedSource.add_member(:last_updated_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "lastUpdatedTime"))
+    AssociatedSource.add_member(:creation_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "creationTime"))
+    AssociatedSource.add_member(:status_message, Shapes::ShapeRef.new(shape: String, location_name: "statusMessage"))
+    AssociatedSource.struct_class = Types::AssociatedSource
+
+    AssociatedSourceList.member = Shapes::ShapeRef.new(shape: AssociatedSource)
 
     CreatePermissionRequest.add_member(:name, Shapes::ShapeRef.new(shape: PermissionName, required: true, location_name: "name"))
     CreatePermissionRequest.add_member(:resource_type, Shapes::ShapeRef.new(shape: String, required: true, location_name: "resourceType"))
@@ -471,6 +486,18 @@ module Aws::RAM
     ListResourcesResponse.add_member(:resources, Shapes::ShapeRef.new(shape: ResourceList, location_name: "resources"))
     ListResourcesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     ListResourcesResponse.struct_class = Types::ListResourcesResponse
+
+    ListSourceAssociationsRequest.add_member(:resource_share_arns, Shapes::ShapeRef.new(shape: ResourceShareArnList, location_name: "resourceShareArns"))
+    ListSourceAssociationsRequest.add_member(:source_id, Shapes::ShapeRef.new(shape: String, location_name: "sourceId"))
+    ListSourceAssociationsRequest.add_member(:source_type, Shapes::ShapeRef.new(shape: String, location_name: "sourceType"))
+    ListSourceAssociationsRequest.add_member(:association_status, Shapes::ShapeRef.new(shape: ResourceShareAssociationStatus, location_name: "associationStatus"))
+    ListSourceAssociationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    ListSourceAssociationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
+    ListSourceAssociationsRequest.struct_class = Types::ListSourceAssociationsRequest
+
+    ListSourceAssociationsResponse.add_member(:source_associations, Shapes::ShapeRef.new(shape: AssociatedSourceList, location_name: "sourceAssociations"))
+    ListSourceAssociationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    ListSourceAssociationsResponse.struct_class = Types::ListSourceAssociationsResponse
 
     MalformedArnException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     MalformedArnException.struct_class = Types::MalformedArnException
@@ -871,6 +898,7 @@ module Aws::RAM
         o.errors << Shapes::ShapeRef.new(shape: TagLimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ServerInternalException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:delete_permission, Seahorse::Model::Operation.new.tap do |o|
@@ -919,6 +947,7 @@ module Aws::RAM
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: ServerInternalException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:disassociate_resource_share, Seahorse::Model::Operation.new.tap do |o|
@@ -937,6 +966,7 @@ module Aws::RAM
         o.errors << Shapes::ShapeRef.new(shape: ServerInternalException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: UnknownResourceException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:disassociate_resource_share_permission, Seahorse::Model::Operation.new.tap do |o|
@@ -1243,6 +1273,26 @@ module Aws::RAM
         )
       end)
 
+      api.add_operation(:list_source_associations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListSourceAssociations"
+        o.http_method = "POST"
+        o.http_request_uri = "/listsourceassociations"
+        o.input = Shapes::ShapeRef.new(shape: ListSourceAssociationsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListSourceAssociationsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: UnknownResourceException)
+        o.errors << Shapes::ShapeRef.new(shape: MalformedArnException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ServerInternalException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:promote_permission_created_from_policy, Seahorse::Model::Operation.new.tap do |o|
         o.name = "PromotePermissionCreatedFromPolicy"
         o.http_method = "POST"
@@ -1250,6 +1300,7 @@ module Aws::RAM
         o.input = Shapes::ShapeRef.new(shape: PromotePermissionCreatedFromPolicyRequest)
         o.output = Shapes::ShapeRef.new(shape: PromotePermissionCreatedFromPolicyResponse)
         o.errors << Shapes::ShapeRef.new(shape: MalformedArnException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidPolicyException)
         o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: MissingRequiredParameterException)

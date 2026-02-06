@@ -2656,6 +2656,7 @@ module Aws::SageMaker
     #         },
     #       ],
     #       fair_share: "Enabled", # accepts Enabled, Disabled
+    #       idle_resource_sharing: "Enabled", # accepts Enabled, Disabled
     #     },
     #     description: "EntityDescription",
     #     tags: [
@@ -2970,6 +2971,19 @@ module Aws::SageMaker
     #       resource_sharing_config: {
     #         strategy: "Lend", # required, accepts Lend, DontLend, LendAndBorrow
     #         borrow_limit: 1,
+    #         absolute_borrow_limits: [
+    #           {
+    #             instance_type: "ml.p4d.24xlarge", # required, accepts ml.p4d.24xlarge, ml.p4de.24xlarge, ml.p5.48xlarge, ml.p5.4xlarge, ml.p6e-gb200.36xlarge, ml.trn1.32xlarge, ml.trn1n.32xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.12xlarge, ml.g5.16xlarge, ml.g5.24xlarge, ml.g5.48xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.c5n.large, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.g6.xlarge, ml.g6.2xlarge, ml.g6.4xlarge, ml.g6.8xlarge, ml.g6.16xlarge, ml.g6.12xlarge, ml.g6.24xlarge, ml.g6.48xlarge, ml.gr6.4xlarge, ml.gr6.8xlarge, ml.g6e.xlarge, ml.g6e.2xlarge, ml.g6e.4xlarge, ml.g6e.8xlarge, ml.g6e.16xlarge, ml.g6e.12xlarge, ml.g6e.24xlarge, ml.g6e.48xlarge, ml.p5e.48xlarge, ml.p5en.48xlarge, ml.p6-b200.48xlarge, ml.trn2.3xlarge, ml.trn2.48xlarge, ml.c6i.large, ml.c6i.xlarge, ml.c6i.2xlarge, ml.c6i.4xlarge, ml.c6i.8xlarge, ml.c6i.12xlarge, ml.c6i.16xlarge, ml.c6i.24xlarge, ml.c6i.32xlarge, ml.m6i.large, ml.m6i.xlarge, ml.m6i.2xlarge, ml.m6i.4xlarge, ml.m6i.8xlarge, ml.m6i.12xlarge, ml.m6i.16xlarge, ml.m6i.24xlarge, ml.m6i.32xlarge, ml.r6i.large, ml.r6i.xlarge, ml.r6i.2xlarge, ml.r6i.4xlarge, ml.r6i.8xlarge, ml.r6i.12xlarge, ml.r6i.16xlarge, ml.r6i.24xlarge, ml.r6i.32xlarge, ml.i3en.large, ml.i3en.xlarge, ml.i3en.2xlarge, ml.i3en.3xlarge, ml.i3en.6xlarge, ml.i3en.12xlarge, ml.i3en.24xlarge, ml.m7i.large, ml.m7i.xlarge, ml.m7i.2xlarge, ml.m7i.4xlarge, ml.m7i.8xlarge, ml.m7i.12xlarge, ml.m7i.16xlarge, ml.m7i.24xlarge, ml.m7i.48xlarge, ml.r7i.large, ml.r7i.xlarge, ml.r7i.2xlarge, ml.r7i.4xlarge, ml.r7i.8xlarge, ml.r7i.12xlarge, ml.r7i.16xlarge, ml.r7i.24xlarge, ml.r7i.48xlarge, ml.p6-b300.48xlarge
+    #             count: 1,
+    #             accelerators: 1,
+    #             v_cpu: 1.0,
+    #             memory_in_gi_b: 1.0,
+    #             accelerator_partition: {
+    #               type: "mig-1g.5gb", # required, accepts mig-1g.5gb, mig-1g.10gb, mig-1g.18gb, mig-1g.20gb, mig-1g.23gb, mig-1g.35gb, mig-1g.45gb, mig-1g.47gb, mig-2g.10gb, mig-2g.20gb, mig-2g.35gb, mig-2g.45gb, mig-2g.47gb, mig-3g.20gb, mig-3g.40gb, mig-3g.71gb, mig-3g.90gb, mig-3g.93gb, mig-4g.20gb, mig-4g.40gb, mig-4g.71gb, mig-4g.90gb, mig-4g.93gb, mig-7g.40gb, mig-7g.80gb, mig-7g.141gb, mig-7g.180gb, mig-7g.186gb
+    #               count: 1, # required
+    #             },
+    #           },
+    #         ],
     #       },
     #       preempt_team_tasks: "Never", # accepts Never, LowerPriority
     #     },
@@ -8589,6 +8603,14 @@ module Aws::SageMaker
     # For information about notebook instance lifestyle configurations, see
     # [Step 2.1: (Optional) Customize a Notebook Instance][1].
     #
+    # <note markdown="1"> Lifecycle configuration scripts execute with root access and the
+    # notebook instance's IAM execution role privileges. Grant this
+    # permission only to trusted principals. See [Customize a Notebook
+    # Instance Using a Lifecycle Configuration Script][1] for security best
+    # practices.
+    #
+    #  </note>
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/notebook-lifecycle-config.html
@@ -14180,6 +14202,7 @@ module Aws::SageMaker
     #   * {Types::DescribeClusterSchedulerConfigResponse#cluster_scheduler_config_version #cluster_scheduler_config_version} => Integer
     #   * {Types::DescribeClusterSchedulerConfigResponse#status #status} => String
     #   * {Types::DescribeClusterSchedulerConfigResponse#failure_reason #failure_reason} => String
+    #   * {Types::DescribeClusterSchedulerConfigResponse#status_details #status_details} => Hash&lt;String,String&gt;
     #   * {Types::DescribeClusterSchedulerConfigResponse#cluster_arn #cluster_arn} => String
     #   * {Types::DescribeClusterSchedulerConfigResponse#scheduler_config #scheduler_config} => Types::SchedulerConfig
     #   * {Types::DescribeClusterSchedulerConfigResponse#description #description} => String
@@ -14203,11 +14226,14 @@ module Aws::SageMaker
     #   resp.cluster_scheduler_config_version #=> Integer
     #   resp.status #=> String, one of "Creating", "CreateFailed", "CreateRollbackFailed", "Created", "Updating", "UpdateFailed", "UpdateRollbackFailed", "Updated", "Deleting", "DeleteFailed", "DeleteRollbackFailed", "Deleted"
     #   resp.failure_reason #=> String
+    #   resp.status_details #=> Hash
+    #   resp.status_details["SchedulerConfigComponent"] #=> String, one of "Creating", "CreateFailed", "CreateRollbackFailed", "Created", "Updating", "UpdateFailed", "UpdateRollbackFailed", "Updated", "Deleting", "DeleteFailed", "DeleteRollbackFailed", "Deleted"
     #   resp.cluster_arn #=> String
     #   resp.scheduler_config.priority_classes #=> Array
     #   resp.scheduler_config.priority_classes[0].name #=> String
     #   resp.scheduler_config.priority_classes[0].weight #=> Integer
     #   resp.scheduler_config.fair_share #=> String, one of "Enabled", "Disabled"
+    #   resp.scheduler_config.idle_resource_sharing #=> String, one of "Enabled", "Disabled"
     #   resp.description #=> String
     #   resp.creation_time #=> Time
     #   resp.created_by.user_profile_arn #=> String
@@ -14409,6 +14435,14 @@ module Aws::SageMaker
     #   resp.compute_quota_config.compute_quota_resources[0].accelerator_partition.count #=> Integer
     #   resp.compute_quota_config.resource_sharing_config.strategy #=> String, one of "Lend", "DontLend", "LendAndBorrow"
     #   resp.compute_quota_config.resource_sharing_config.borrow_limit #=> Integer
+    #   resp.compute_quota_config.resource_sharing_config.absolute_borrow_limits #=> Array
+    #   resp.compute_quota_config.resource_sharing_config.absolute_borrow_limits[0].instance_type #=> String, one of "ml.p4d.24xlarge", "ml.p4de.24xlarge", "ml.p5.48xlarge", "ml.p5.4xlarge", "ml.p6e-gb200.36xlarge", "ml.trn1.32xlarge", "ml.trn1n.32xlarge", "ml.g5.xlarge", "ml.g5.2xlarge", "ml.g5.4xlarge", "ml.g5.8xlarge", "ml.g5.12xlarge", "ml.g5.16xlarge", "ml.g5.24xlarge", "ml.g5.48xlarge", "ml.c5.large", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.12xlarge", "ml.c5.18xlarge", "ml.c5.24xlarge", "ml.c5n.large", "ml.c5n.2xlarge", "ml.c5n.4xlarge", "ml.c5n.9xlarge", "ml.c5n.18xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.8xlarge", "ml.m5.12xlarge", "ml.m5.16xlarge", "ml.m5.24xlarge", "ml.t3.medium", "ml.t3.large", "ml.t3.xlarge", "ml.t3.2xlarge", "ml.g6.xlarge", "ml.g6.2xlarge", "ml.g6.4xlarge", "ml.g6.8xlarge", "ml.g6.16xlarge", "ml.g6.12xlarge", "ml.g6.24xlarge", "ml.g6.48xlarge", "ml.gr6.4xlarge", "ml.gr6.8xlarge", "ml.g6e.xlarge", "ml.g6e.2xlarge", "ml.g6e.4xlarge", "ml.g6e.8xlarge", "ml.g6e.16xlarge", "ml.g6e.12xlarge", "ml.g6e.24xlarge", "ml.g6e.48xlarge", "ml.p5e.48xlarge", "ml.p5en.48xlarge", "ml.p6-b200.48xlarge", "ml.trn2.3xlarge", "ml.trn2.48xlarge", "ml.c6i.large", "ml.c6i.xlarge", "ml.c6i.2xlarge", "ml.c6i.4xlarge", "ml.c6i.8xlarge", "ml.c6i.12xlarge", "ml.c6i.16xlarge", "ml.c6i.24xlarge", "ml.c6i.32xlarge", "ml.m6i.large", "ml.m6i.xlarge", "ml.m6i.2xlarge", "ml.m6i.4xlarge", "ml.m6i.8xlarge", "ml.m6i.12xlarge", "ml.m6i.16xlarge", "ml.m6i.24xlarge", "ml.m6i.32xlarge", "ml.r6i.large", "ml.r6i.xlarge", "ml.r6i.2xlarge", "ml.r6i.4xlarge", "ml.r6i.8xlarge", "ml.r6i.12xlarge", "ml.r6i.16xlarge", "ml.r6i.24xlarge", "ml.r6i.32xlarge", "ml.i3en.large", "ml.i3en.xlarge", "ml.i3en.2xlarge", "ml.i3en.3xlarge", "ml.i3en.6xlarge", "ml.i3en.12xlarge", "ml.i3en.24xlarge", "ml.m7i.large", "ml.m7i.xlarge", "ml.m7i.2xlarge", "ml.m7i.4xlarge", "ml.m7i.8xlarge", "ml.m7i.12xlarge", "ml.m7i.16xlarge", "ml.m7i.24xlarge", "ml.m7i.48xlarge", "ml.r7i.large", "ml.r7i.xlarge", "ml.r7i.2xlarge", "ml.r7i.4xlarge", "ml.r7i.8xlarge", "ml.r7i.12xlarge", "ml.r7i.16xlarge", "ml.r7i.24xlarge", "ml.r7i.48xlarge", "ml.p6-b300.48xlarge"
+    #   resp.compute_quota_config.resource_sharing_config.absolute_borrow_limits[0].count #=> Integer
+    #   resp.compute_quota_config.resource_sharing_config.absolute_borrow_limits[0].accelerators #=> Integer
+    #   resp.compute_quota_config.resource_sharing_config.absolute_borrow_limits[0].v_cpu #=> Float
+    #   resp.compute_quota_config.resource_sharing_config.absolute_borrow_limits[0].memory_in_gi_b #=> Float
+    #   resp.compute_quota_config.resource_sharing_config.absolute_borrow_limits[0].accelerator_partition.type #=> String, one of "mig-1g.5gb", "mig-1g.10gb", "mig-1g.18gb", "mig-1g.20gb", "mig-1g.23gb", "mig-1g.35gb", "mig-1g.45gb", "mig-1g.47gb", "mig-2g.10gb", "mig-2g.20gb", "mig-2g.35gb", "mig-2g.45gb", "mig-2g.47gb", "mig-3g.20gb", "mig-3g.40gb", "mig-3g.71gb", "mig-3g.90gb", "mig-3g.93gb", "mig-4g.20gb", "mig-4g.40gb", "mig-4g.71gb", "mig-4g.90gb", "mig-4g.93gb", "mig-7g.40gb", "mig-7g.80gb", "mig-7g.141gb", "mig-7g.180gb", "mig-7g.186gb"
+    #   resp.compute_quota_config.resource_sharing_config.absolute_borrow_limits[0].accelerator_partition.count #=> Integer
     #   resp.compute_quota_config.preempt_team_tasks #=> String, one of "Never", "LowerPriority"
     #   resp.compute_quota_target.team_name #=> String
     #   resp.compute_quota_target.fair_share_weight #=> Integer
@@ -21431,6 +21465,14 @@ module Aws::SageMaker
     #   resp.compute_quota_summaries[0].compute_quota_config.compute_quota_resources[0].accelerator_partition.count #=> Integer
     #   resp.compute_quota_summaries[0].compute_quota_config.resource_sharing_config.strategy #=> String, one of "Lend", "DontLend", "LendAndBorrow"
     #   resp.compute_quota_summaries[0].compute_quota_config.resource_sharing_config.borrow_limit #=> Integer
+    #   resp.compute_quota_summaries[0].compute_quota_config.resource_sharing_config.absolute_borrow_limits #=> Array
+    #   resp.compute_quota_summaries[0].compute_quota_config.resource_sharing_config.absolute_borrow_limits[0].instance_type #=> String, one of "ml.p4d.24xlarge", "ml.p4de.24xlarge", "ml.p5.48xlarge", "ml.p5.4xlarge", "ml.p6e-gb200.36xlarge", "ml.trn1.32xlarge", "ml.trn1n.32xlarge", "ml.g5.xlarge", "ml.g5.2xlarge", "ml.g5.4xlarge", "ml.g5.8xlarge", "ml.g5.12xlarge", "ml.g5.16xlarge", "ml.g5.24xlarge", "ml.g5.48xlarge", "ml.c5.large", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.12xlarge", "ml.c5.18xlarge", "ml.c5.24xlarge", "ml.c5n.large", "ml.c5n.2xlarge", "ml.c5n.4xlarge", "ml.c5n.9xlarge", "ml.c5n.18xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.8xlarge", "ml.m5.12xlarge", "ml.m5.16xlarge", "ml.m5.24xlarge", "ml.t3.medium", "ml.t3.large", "ml.t3.xlarge", "ml.t3.2xlarge", "ml.g6.xlarge", "ml.g6.2xlarge", "ml.g6.4xlarge", "ml.g6.8xlarge", "ml.g6.16xlarge", "ml.g6.12xlarge", "ml.g6.24xlarge", "ml.g6.48xlarge", "ml.gr6.4xlarge", "ml.gr6.8xlarge", "ml.g6e.xlarge", "ml.g6e.2xlarge", "ml.g6e.4xlarge", "ml.g6e.8xlarge", "ml.g6e.16xlarge", "ml.g6e.12xlarge", "ml.g6e.24xlarge", "ml.g6e.48xlarge", "ml.p5e.48xlarge", "ml.p5en.48xlarge", "ml.p6-b200.48xlarge", "ml.trn2.3xlarge", "ml.trn2.48xlarge", "ml.c6i.large", "ml.c6i.xlarge", "ml.c6i.2xlarge", "ml.c6i.4xlarge", "ml.c6i.8xlarge", "ml.c6i.12xlarge", "ml.c6i.16xlarge", "ml.c6i.24xlarge", "ml.c6i.32xlarge", "ml.m6i.large", "ml.m6i.xlarge", "ml.m6i.2xlarge", "ml.m6i.4xlarge", "ml.m6i.8xlarge", "ml.m6i.12xlarge", "ml.m6i.16xlarge", "ml.m6i.24xlarge", "ml.m6i.32xlarge", "ml.r6i.large", "ml.r6i.xlarge", "ml.r6i.2xlarge", "ml.r6i.4xlarge", "ml.r6i.8xlarge", "ml.r6i.12xlarge", "ml.r6i.16xlarge", "ml.r6i.24xlarge", "ml.r6i.32xlarge", "ml.i3en.large", "ml.i3en.xlarge", "ml.i3en.2xlarge", "ml.i3en.3xlarge", "ml.i3en.6xlarge", "ml.i3en.12xlarge", "ml.i3en.24xlarge", "ml.m7i.large", "ml.m7i.xlarge", "ml.m7i.2xlarge", "ml.m7i.4xlarge", "ml.m7i.8xlarge", "ml.m7i.12xlarge", "ml.m7i.16xlarge", "ml.m7i.24xlarge", "ml.m7i.48xlarge", "ml.r7i.large", "ml.r7i.xlarge", "ml.r7i.2xlarge", "ml.r7i.4xlarge", "ml.r7i.8xlarge", "ml.r7i.12xlarge", "ml.r7i.16xlarge", "ml.r7i.24xlarge", "ml.r7i.48xlarge", "ml.p6-b300.48xlarge"
+    #   resp.compute_quota_summaries[0].compute_quota_config.resource_sharing_config.absolute_borrow_limits[0].count #=> Integer
+    #   resp.compute_quota_summaries[0].compute_quota_config.resource_sharing_config.absolute_borrow_limits[0].accelerators #=> Integer
+    #   resp.compute_quota_summaries[0].compute_quota_config.resource_sharing_config.absolute_borrow_limits[0].v_cpu #=> Float
+    #   resp.compute_quota_summaries[0].compute_quota_config.resource_sharing_config.absolute_borrow_limits[0].memory_in_gi_b #=> Float
+    #   resp.compute_quota_summaries[0].compute_quota_config.resource_sharing_config.absolute_borrow_limits[0].accelerator_partition.type #=> String, one of "mig-1g.5gb", "mig-1g.10gb", "mig-1g.18gb", "mig-1g.20gb", "mig-1g.23gb", "mig-1g.35gb", "mig-1g.45gb", "mig-1g.47gb", "mig-2g.10gb", "mig-2g.20gb", "mig-2g.35gb", "mig-2g.45gb", "mig-2g.47gb", "mig-3g.20gb", "mig-3g.40gb", "mig-3g.71gb", "mig-3g.90gb", "mig-3g.93gb", "mig-4g.20gb", "mig-4g.40gb", "mig-4g.71gb", "mig-4g.90gb", "mig-4g.93gb", "mig-7g.40gb", "mig-7g.80gb", "mig-7g.141gb", "mig-7g.180gb", "mig-7g.186gb"
+    #   resp.compute_quota_summaries[0].compute_quota_config.resource_sharing_config.absolute_borrow_limits[0].accelerator_partition.count #=> Integer
     #   resp.compute_quota_summaries[0].compute_quota_config.preempt_team_tasks #=> String, one of "Never", "LowerPriority"
     #   resp.compute_quota_summaries[0].compute_quota_target.team_name #=> String
     #   resp.compute_quota_summaries[0].compute_quota_target.fair_share_weight #=> Integer
@@ -28496,6 +28538,7 @@ module Aws::SageMaker
     #         },
     #       ],
     #       fair_share: "Enabled", # accepts Enabled, Disabled
+    #       idle_resource_sharing: "Enabled", # accepts Enabled, Disabled
     #     },
     #     description: "EntityDescription",
     #   })
@@ -28703,6 +28746,19 @@ module Aws::SageMaker
     #       resource_sharing_config: {
     #         strategy: "Lend", # required, accepts Lend, DontLend, LendAndBorrow
     #         borrow_limit: 1,
+    #         absolute_borrow_limits: [
+    #           {
+    #             instance_type: "ml.p4d.24xlarge", # required, accepts ml.p4d.24xlarge, ml.p4de.24xlarge, ml.p5.48xlarge, ml.p5.4xlarge, ml.p6e-gb200.36xlarge, ml.trn1.32xlarge, ml.trn1n.32xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.12xlarge, ml.g5.16xlarge, ml.g5.24xlarge, ml.g5.48xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.c5n.large, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.g6.xlarge, ml.g6.2xlarge, ml.g6.4xlarge, ml.g6.8xlarge, ml.g6.16xlarge, ml.g6.12xlarge, ml.g6.24xlarge, ml.g6.48xlarge, ml.gr6.4xlarge, ml.gr6.8xlarge, ml.g6e.xlarge, ml.g6e.2xlarge, ml.g6e.4xlarge, ml.g6e.8xlarge, ml.g6e.16xlarge, ml.g6e.12xlarge, ml.g6e.24xlarge, ml.g6e.48xlarge, ml.p5e.48xlarge, ml.p5en.48xlarge, ml.p6-b200.48xlarge, ml.trn2.3xlarge, ml.trn2.48xlarge, ml.c6i.large, ml.c6i.xlarge, ml.c6i.2xlarge, ml.c6i.4xlarge, ml.c6i.8xlarge, ml.c6i.12xlarge, ml.c6i.16xlarge, ml.c6i.24xlarge, ml.c6i.32xlarge, ml.m6i.large, ml.m6i.xlarge, ml.m6i.2xlarge, ml.m6i.4xlarge, ml.m6i.8xlarge, ml.m6i.12xlarge, ml.m6i.16xlarge, ml.m6i.24xlarge, ml.m6i.32xlarge, ml.r6i.large, ml.r6i.xlarge, ml.r6i.2xlarge, ml.r6i.4xlarge, ml.r6i.8xlarge, ml.r6i.12xlarge, ml.r6i.16xlarge, ml.r6i.24xlarge, ml.r6i.32xlarge, ml.i3en.large, ml.i3en.xlarge, ml.i3en.2xlarge, ml.i3en.3xlarge, ml.i3en.6xlarge, ml.i3en.12xlarge, ml.i3en.24xlarge, ml.m7i.large, ml.m7i.xlarge, ml.m7i.2xlarge, ml.m7i.4xlarge, ml.m7i.8xlarge, ml.m7i.12xlarge, ml.m7i.16xlarge, ml.m7i.24xlarge, ml.m7i.48xlarge, ml.r7i.large, ml.r7i.xlarge, ml.r7i.2xlarge, ml.r7i.4xlarge, ml.r7i.8xlarge, ml.r7i.12xlarge, ml.r7i.16xlarge, ml.r7i.24xlarge, ml.r7i.48xlarge, ml.p6-b300.48xlarge
+    #             count: 1,
+    #             accelerators: 1,
+    #             v_cpu: 1.0,
+    #             memory_in_gi_b: 1.0,
+    #             accelerator_partition: {
+    #               type: "mig-1g.5gb", # required, accepts mig-1g.5gb, mig-1g.10gb, mig-1g.18gb, mig-1g.20gb, mig-1g.23gb, mig-1g.35gb, mig-1g.45gb, mig-1g.47gb, mig-2g.10gb, mig-2g.20gb, mig-2g.35gb, mig-2g.45gb, mig-2g.47gb, mig-3g.20gb, mig-3g.40gb, mig-3g.71gb, mig-3g.90gb, mig-3g.93gb, mig-4g.20gb, mig-4g.40gb, mig-4g.71gb, mig-4g.90gb, mig-4g.93gb, mig-7g.40gb, mig-7g.80gb, mig-7g.141gb, mig-7g.180gb, mig-7g.186gb
+    #               count: 1, # required
+    #             },
+    #           },
+    #         ],
     #       },
     #       preempt_team_tasks: "Never", # accepts Never, LowerPriority
     #     },
@@ -30779,6 +30835,20 @@ module Aws::SageMaker
     # notebook instance to accommodate changes in your workload
     # requirements.
     #
+    # <note markdown="1"> This API can attach lifecycle configurations to notebook instances.
+    # Lifecycle configuration scripts execute with root access and the
+    # notebook instance's IAM execution role privileges. Principals with
+    # this permission and access to lifecycle configurations can execute
+    # code with the execution role's credentials. See [Customize a Notebook
+    # Instance Using a Lifecycle Configuration Script][1] for security best
+    # practices.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/notebook-lifecycle-config.html
+    #
     # @option params [required, String] :notebook_instance_name
     #   The name of the notebook instance to update.
     #
@@ -30940,9 +31010,19 @@ module Aws::SageMaker
     # Updates a notebook instance lifecycle configuration created with the
     # [CreateNotebookInstanceLifecycleConfig][1] API.
     #
+    # <note markdown="1"> Updates to lifecycle configurations affect all notebook instances
+    # using that configuration upon their next start. Lifecycle
+    # configuration scripts execute with root access and the notebook
+    # instance's IAM execution role privileges. Grant this permission only
+    # to trusted principals. See [Customize a Notebook Instance Using a
+    # Lifecycle Configuration Script][2] for security best practices.
+    #
+    #  </note>
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateNotebookInstanceLifecycleConfig.html
+    # [2]: https://docs.aws.amazon.com/sagemaker/latest/dg/notebook-lifecycle-config.html
     #
     # @option params [required, String] :notebook_instance_lifecycle_config_name
     #   The name of the lifecycle configuration.
@@ -32183,7 +32263,7 @@ module Aws::SageMaker
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.347.0'
+      context[:gem_version] = '1.349.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

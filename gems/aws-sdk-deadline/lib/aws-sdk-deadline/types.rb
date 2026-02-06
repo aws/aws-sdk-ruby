@@ -13,17 +13,47 @@ module Aws::Deadline
     # Provides information about the GPU accelerators used for jobs
     # processed by a fleet.
     #
+    # Accelerator capabilities cannot be used with wait-and-save fleets. If
+    # you specify accelerator capabilities, you must use either spot or
+    # on-demand instance market options.
+    #
+    # <note markdown="1"> Each accelerator type maps to specific EC2 instance families:
+    #
+    #  * `t4`: Uses G4dn instance family
+    #
+    # * `a10g`: Uses G5 instance family
+    #
+    # * `l4`: Uses G6 and Gr6 instance families
+    #
+    # * `l40s`: Uses G6e instance family
+    #
+    #  </note>
+    #
     # @!attribute [rw] selections
     #   A list of accelerator capabilities requested for this fleet. Only
     #   Amazon Elastic Compute Cloud instances that provide these
     #   capabilities will be used. For example, if you specify both L4 and
-    #   T4 chips, Deadline Cloud will use Amazon EC2 instances that have
-    #   either the L4 or the T4 chip installed.
+    #   T4 chips, Amazon Web Services Deadline Cloud will use Amazon EC2
+    #   instances that have either the L4 or the T4 chip installed.
+    #
+    #   * You must specify at least one accelerator selection.
+    #
+    #   * You cannot specify the same accelerator name multiple times in the
+    #     selections list.
+    #
+    #   * All accelerators in the selections must use the same runtime
+    #     version.
     #   @return [Array<Types::AcceleratorSelection>]
     #
     # @!attribute [rw] count
     #   The number of GPU accelerators specified for worker hosts in this
     #   fleet.
+    #
+    #   You must specify either `acceleratorCapabilities.count.max` or
+    #   `allowedInstanceTypes` when using accelerator capabilities. If you
+    #   don't specify a maximum count, Amazon Web Services Deadline Cloud
+    #   uses the instance types you specify in `allowedInstanceTypes` to
+    #   determine the maximum number of accelerators.
     #   @return [Types::AcceleratorCountRange]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/deadline-2023-10-12/AcceleratorCapabilities AWS API Documentation
@@ -61,23 +91,20 @@ module Aws::Deadline
     # @!attribute [rw] name
     #   The name of the chip used by the GPU accelerator.
     #
-    #   If you specify `l4` as the name of the accelerator, you must specify
-    #   `latest` or `grid:r570` as the runtime.
-    #
     #   The available GPU accelerators are:
     #
-    #   * `t4` - NVIDIA T4 Tensor Core GPU
+    #   * `t4` - NVIDIA T4 Tensor Core GPU (16 GiB memory)
     #
-    #   * `a10g` - NVIDIA A10G Tensor Core GPU
+    #   * `a10g` - NVIDIA A10G Tensor Core GPU (24 GiB memory)
     #
-    #   * `l4` - NVIDIA L4 Tensor Core GPU
+    #   * `l4` - NVIDIA L4 Tensor Core GPU (24 GiB memory)
     #
-    #   * `l40s` - NVIDIA L40S Tensor Core GPU
+    #   * `l40s` - NVIDIA L40S Tensor Core GPU (48 GiB memory)
     #   @return [String]
     #
     # @!attribute [rw] runtime
     #   Specifies the runtime driver to use for the GPU accelerator. You
-    #   must use the same runtime for all GPUs.
+    #   must use the same runtime for all GPUs in a fleet.
     #
     #   You can choose from the following runtimes:
     #
@@ -89,10 +116,24 @@ module Aws::Deadline
     #
     #   * `grid:r535` - [NVIDIA vGPU software 16][2]
     #
-    #   If you don't specify a runtime, Deadline Cloud uses `latest` as the
-    #   default. However, if you have multiple accelerators and specify
-    #   `latest` for some and leave others blank, Deadline Cloud raises an
-    #   exception.
+    #   If you don't specify a runtime, Amazon Web Services Deadline Cloud
+    #   uses `latest` as the default. However, if you have multiple
+    #   accelerators and specify `latest` for some and leave others blank,
+    #   Amazon Web Services Deadline Cloud raises an exception.
+    #
+    #   Not all runtimes are compatible with all accelerator types:
+    #
+    #    * `t4` and `a10g`: Support all runtimes (`grid:r570`, `grid:r535`)
+    #
+    #   * `l4` and `l40s`: Only support `grid:r570` and newer
+    #
+    #    All accelerators in a fleet must use the same runtime version. You
+    #   cannot mix different runtime versions within a single fleet.
+    #
+    #   <note markdown="1"> When you specify `latest`, it resolves to `grid:r570` for all
+    #   currently supported accelerators.
+    #
+    #    </note>
     #
     #
     #
@@ -264,7 +305,7 @@ module Aws::Deadline
     #   @return [Types::AssignedTaskRunSessionActionDefinition]
     #
     # @!attribute [rw] sync_input_job_attachments
-    #   The job attachment to sync with an assigned session action.
+    #   The job attachments to sync for the assigned session action.
     #   @return [Types::AssignedSyncInputJobAttachmentsSessionActionDefinition]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/deadline-2023-10-12/AssignedSessionActionDefinition AWS API Documentation
@@ -286,11 +327,12 @@ module Aws::Deadline
       class Unknown < AssignedSessionActionDefinition; end
     end
 
-    # The details for an assigned session action as it relates to a job
-    # attachment.
+    # The assigned session action definition for syncing input job
+    # attachments.
     #
     # @!attribute [rw] step_id
-    #   The step ID.
+    #   The step ID for the assigned sync input job attachments session
+    #   action.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/deadline-2023-10-12/AssignedSyncInputJobAttachmentsSessionActionDefinition AWS API Documentation
@@ -650,14 +692,14 @@ module Aws::Deadline
       include Aws::Structure
     end
 
-    # The attachments for jobs.
+    # The job attachments.
     #
     # @!attribute [rw] manifests
-    #   A list of manifests which describe job attachment configurations.
+    #   The manifest properties for the attachments.
     #   @return [Array<Types::ManifestProperties>]
     #
     # @!attribute [rw] file_system
-    #   The file system.
+    #   The file system location for the attachments.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/deadline-2023-10-12/Attachments AWS API Documentation
@@ -1025,6 +1067,11 @@ module Aws::Deadline
     #   The schedule to associate with this budget.
     #   @return [Types::BudgetSchedule]
     #
+    # @!attribute [rw] tags
+    #   Each tag consists of a tag key and a tag value. Tag keys and values
+    #   are both required, but tag values can be empty strings.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/deadline-2023-10-12/CreateBudgetRequest AWS API Documentation
     #
     class CreateBudgetRequest < Struct.new(
@@ -1035,7 +1082,8 @@ module Aws::Deadline
       :description,
       :approximate_dollar_limit,
       :actions,
-      :schedule)
+      :schedule,
+      :tags)
       SENSITIVE = [:description]
       include Aws::Structure
     end
@@ -1279,6 +1327,16 @@ module Aws::Deadline
     #   The job ID for the source job.
     #   @return [String]
     #
+    # @!attribute [rw] name_override
+    #   A custom name to override the job name derived from the job
+    #   template.
+    #   @return [String]
+    #
+    # @!attribute [rw] description_override
+    #   A custom description to override the job description derived from
+    #   the job template.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/deadline-2023-10-12/CreateJobRequest AWS API Documentation
     #
     class CreateJobRequest < Struct.new(
@@ -1295,8 +1353,10 @@ module Aws::Deadline
       :max_failed_tasks_count,
       :max_retries_per_task,
       :max_worker_count,
-      :source_job_id)
-      SENSITIVE = [:template, :parameters]
+      :source_job_id,
+      :name_override,
+      :description_override)
+      SENSITIVE = [:template, :parameters, :description_override]
       include Aws::Structure
     end
 
@@ -1450,8 +1510,8 @@ module Aws::Deadline
     #   @return [String]
     #
     # @!attribute [rw] identity_center_instance_arn
-    #   The Amazon Resource Name (ARN) of the IAM Identity Center instance
-    #   that authenticates monitor users.
+    #   The Amazon Resource Name of the IAM Identity Center instance that
+    #   authenticates monitor users.
     #   @return [String]
     #
     # @!attribute [rw] subdomain
@@ -1460,10 +1520,10 @@ module Aws::Deadline
     #   @return [String]
     #
     # @!attribute [rw] role_arn
-    #   The Amazon Resource Name (ARN) of the IAM role that the monitor uses
-    #   to connect to Deadline Cloud. Every user that signs in to the
-    #   monitor using IAM Identity Center uses this role to access Deadline
-    #   Cloud resources.
+    #   The Amazon Resource Name of the IAM role that the monitor uses to
+    #   connect to Deadline Cloud. Every user that signs in to the monitor
+    #   using IAM Identity Center uses this role to access Deadline Cloud
+    #   resources.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -1490,8 +1550,8 @@ module Aws::Deadline
     #   @return [String]
     #
     # @!attribute [rw] identity_center_application_arn
-    #   The Amazon Resource Name (ARN) that IAM Identity Center assigns to
-    #   the monitor.
+    #   The Amazon Resource Name that IAM Identity Center assigns to the
+    #   monitor.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/deadline-2023-10-12/CreateMonitorResponse AWS API Documentation
@@ -1802,32 +1862,22 @@ module Aws::Deadline
       include Aws::Structure
     end
 
-    # The details of a customer managed fleet configuration.
+    # The configuration details for a customer managed fleet.
     #
     # @!attribute [rw] mode
-    #   The Auto Scaling mode for the customer managed fleet configuration.
+    #   The Auto Scaling mode for the customer managed fleet.
     #   @return [String]
     #
     # @!attribute [rw] worker_capabilities
-    #   The worker capabilities for a customer managed fleet configuration.
+    #   The worker capabilities for the customer managed fleet.
     #   @return [Types::CustomerManagedWorkerCapabilities]
     #
     # @!attribute [rw] storage_profile_id
-    #   The storage profile ID.
+    #   The storage profile ID for the customer managed fleet.
     #   @return [String]
     #
     # @!attribute [rw] tag_propagation_mode
-    #   Specifies whether tags associated with a fleet are attached to
-    #   workers when the worker is launched.
-    #
-    #   When the `tagPropagationMode` is set to
-    #   `PROPAGATE_TAGS_TO_WORKERS_AT_LAUNCH` any tag associated with a
-    #   fleet is attached to workers when they launch. If the tags for a
-    #   fleet change, the tags associated with running workers **do not**
-    #   change.
-    #
-    #   If you don't specify `tagPropagationMode`, the default is
-    #   `NO_PROPAGATION`.
+    #   The tag propagation mode for the customer managed fleet.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/deadline-2023-10-12/CustomerManagedFleetConfiguration AWS API Documentation
@@ -3391,7 +3441,7 @@ module Aws::Deadline
     #   @return [String]
     #
     # @!attribute [rw] vpc_id
-    #   The VCP(virtual private cloud) ID associated with the license
+    #   The VPC (virtual private cloud) ID associated with the license
     #   endpoint.
     #   @return [String]
     #
@@ -3556,19 +3606,18 @@ module Aws::Deadline
     #   @return [String]
     #
     # @!attribute [rw] role_arn
-    #   The Amazon Resource Name (ARN) of the IAM role for the monitor.
-    #   Users of the monitor use this role to access Deadline Cloud
-    #   resources.
+    #   The Amazon Resource Name of the IAM role for the monitor. Users of
+    #   the monitor use this role to access Deadline Cloud resources.
     #   @return [String]
     #
     # @!attribute [rw] identity_center_instance_arn
-    #   The Amazon Resource Name (ARN) of the IAM Identity Center instance
+    #   The Amazon Resource Name of the IAM Identity Center instance
     #   responsible for authenticating monitor users.
     #   @return [String]
     #
     # @!attribute [rw] identity_center_application_arn
-    #   The Amazon Resource Name (ARN) that the IAM Identity Center assigned
-    #   to the monitor when it was created.
+    #   The Amazon Resource Name that the IAM Identity Center assigned to
+    #   the monitor when it was created.
     #   @return [String]
     #
     # @!attribute [rw] created_at
@@ -4524,7 +4573,7 @@ module Aws::Deadline
     #   @return [String]
     #
     # @!attribute [rw] latest_session_action_id
-    #   The latest session ID for the task.
+    #   The latest session action ID for the task.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/deadline-2023-10-12/GetTaskResponse AWS API Documentation
@@ -5164,7 +5213,7 @@ module Aws::Deadline
     #   @return [String]
     #
     # @!attribute [rw] target_task_run_status
-    #   The task status to start with on the job.
+    #   The task status to update the job's tasks to.
     #   @return [String]
     #
     # @!attribute [rw] task_run_status_counts
@@ -5332,7 +5381,7 @@ module Aws::Deadline
     #   @return [String]
     #
     # @!attribute [rw] target_task_run_status
-    #   The task status to start with on the job.
+    #   The task status to update the job's tasks to.
     #   @return [String]
     #
     # @!attribute [rw] task_run_status_counts
@@ -5410,7 +5459,7 @@ module Aws::Deadline
     #   @return [String]
     #
     # @!attribute [rw] vpc_id
-    #   The VCP(virtual private cloud) ID associated with the license
+    #   The VPC (virtual private cloud) ID associated with the license
     #   endpoint.
     #   @return [String]
     #
@@ -7180,19 +7229,18 @@ module Aws::Deadline
     #   @return [String]
     #
     # @!attribute [rw] role_arn
-    #   The Amazon Resource Name (ARN) of the IAM role for the monitor.
-    #   Users of the monitor use this role to access Deadline Cloud
-    #   resources.
+    #   The Amazon Resource Name of the IAM role for the monitor. Users of
+    #   the monitor use this role to access Deadline Cloud resources.
     #   @return [String]
     #
     # @!attribute [rw] identity_center_instance_arn
-    #   The Amazon Resource Name (ARN) of the IAM Identity Center instance
+    #   The Amazon Resource Name of the IAM Identity Center instance
     #   responsible for authenticating monitor users.
     #   @return [String]
     #
     # @!attribute [rw] identity_center_application_arn
-    #   The Amazon Resource Name (ARN) that the IAM Identity Center assigned
-    #   to the monitor when it was created.
+    #   The Amazon Resource Name that the IAM Identity Center assigned to
+    #   the monitor when it was created.
     #   @return [String]
     #
     # @!attribute [rw] created_at
@@ -7692,6 +7740,10 @@ module Aws::Deadline
     #   Filters by a string.
     #   @return [Types::StringFilterExpression]
     #
+    # @!attribute [rw] string_list_filter
+    #   Filters by a list of strings.
+    #   @return [Types::StringListFilterExpression]
+    #
     # @!attribute [rw] group_filter
     #   Filters by group.
     #   @return [Types::SearchGroupedFilterExpressions]
@@ -7703,6 +7755,7 @@ module Aws::Deadline
       :parameter_filter,
       :search_term_filter,
       :string_filter,
+      :string_list_filter,
       :group_filter,
       :unknown)
       SENSITIVE = []
@@ -7713,13 +7766,12 @@ module Aws::Deadline
       class ParameterFilter < SearchFilterExpression; end
       class SearchTermFilter < SearchFilterExpression; end
       class StringFilter < SearchFilterExpression; end
+      class StringListFilter < SearchFilterExpression; end
       class GroupFilter < SearchFilterExpression; end
       class Unknown < SearchFilterExpression; end
     end
 
-    # The filter expression, `AND` or `OR`, to use when searching among a
-    # group of search strings in a resource. You can use two groupings per
-    # search each within parenthesis `()`.
+    # The search terms for a resource.
     #
     # @!attribute [rw] filters
     #   The filters to use for the search.
@@ -7747,9 +7799,7 @@ module Aws::Deadline
     #   @return [Array<String>]
     #
     # @!attribute [rw] filter_expressions
-    #   The filter expression, `AND` or `OR`, to use when searching among a
-    #   group of search strings in a resource. You can use two groupings per
-    #   search each within parenthesis `()`.
+    #   The search terms for a resource.
     #   @return [Types::SearchGroupedFilterExpressions]
     #
     # @!attribute [rw] sort_expressions
@@ -7757,12 +7807,11 @@ module Aws::Deadline
     #   @return [Array<Types::SearchSortExpression>]
     #
     # @!attribute [rw] item_offset
-    #   Defines how far into the scrollable list to start the return of
-    #   results.
+    #   The offset for the search results.
     #   @return [Integer]
     #
     # @!attribute [rw] page_size
-    #   Specifies the number of items per page for the resource.
+    #   Specifies the number of results to return.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/deadline-2023-10-12/SearchJobsRequest AWS API Documentation
@@ -7783,7 +7832,7 @@ module Aws::Deadline
     #   @return [Array<Types::JobSearchSummary>]
     #
     # @!attribute [rw] next_item_offset
-    #   The next incremental starting point after the defined `itemOffset`.
+    #   The next item offset for the search results.
     #   @return [Integer]
     #
     # @!attribute [rw] total_results
@@ -7846,9 +7895,7 @@ module Aws::Deadline
     #   @return [String]
     #
     # @!attribute [rw] filter_expressions
-    #   The filter expression, `AND` or `OR`, to use when searching among a
-    #   group of search strings in a resource. You can use two groupings per
-    #   search each within parenthesis `()`.
+    #   The search terms for a resource.
     #   @return [Types::SearchGroupedFilterExpressions]
     #
     # @!attribute [rw] sort_expressions
@@ -7856,12 +7903,11 @@ module Aws::Deadline
     #   @return [Array<Types::SearchSortExpression>]
     #
     # @!attribute [rw] item_offset
-    #   Defines how far into the scrollable list to start the return of
-    #   results.
+    #   The offset for the search results.
     #   @return [Integer]
     #
     # @!attribute [rw] page_size
-    #   Specifies the number of items per page for the resource.
+    #   Specifies the number of results to return.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/deadline-2023-10-12/SearchStepsRequest AWS API Documentation
@@ -7883,7 +7929,7 @@ module Aws::Deadline
     #   @return [Array<Types::StepSearchSummary>]
     #
     # @!attribute [rw] next_item_offset
-    #   The next incremental starting point after the defined `itemOffset`.
+    #   The next item offset for the search results.
     #   @return [Integer]
     #
     # @!attribute [rw] total_results
@@ -7913,9 +7959,7 @@ module Aws::Deadline
     #   @return [String]
     #
     # @!attribute [rw] filter_expressions
-    #   The filter expression, `AND` or `OR`, to use when searching among a
-    #   group of search strings in a resource. You can use two groupings per
-    #   search each within parenthesis `()`.
+    #   The search terms for a resource.
     #   @return [Types::SearchGroupedFilterExpressions]
     #
     # @!attribute [rw] sort_expressions
@@ -7923,12 +7967,11 @@ module Aws::Deadline
     #   @return [Array<Types::SearchSortExpression>]
     #
     # @!attribute [rw] item_offset
-    #   Defines how far into the scrollable list to start the return of
-    #   results.
+    #   The offset for the search results.
     #   @return [Integer]
     #
     # @!attribute [rw] page_size
-    #   Specifies the number of items per page for the resource.
+    #   Specifies the number of results to return.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/deadline-2023-10-12/SearchTasksRequest AWS API Documentation
@@ -7950,7 +7993,7 @@ module Aws::Deadline
     #   @return [Array<Types::TaskSearchSummary>]
     #
     # @!attribute [rw] next_item_offset
-    #   The next incremental starting point after the defined `itemOffset`.
+    #   The next item offset for the search results.
     #   @return [Integer]
     #
     # @!attribute [rw] total_results
@@ -8003,9 +8046,7 @@ module Aws::Deadline
     #   @return [Array<String>]
     #
     # @!attribute [rw] filter_expressions
-    #   The filter expression, `AND` or `OR`, to use when searching among a
-    #   group of search strings in a resource. You can use two groupings per
-    #   search each within parenthesis `()`.
+    #   The search terms for a resource.
     #   @return [Types::SearchGroupedFilterExpressions]
     #
     # @!attribute [rw] sort_expressions
@@ -8013,12 +8054,11 @@ module Aws::Deadline
     #   @return [Array<Types::SearchSortExpression>]
     #
     # @!attribute [rw] item_offset
-    #   Defines how far into the scrollable list to start the return of
-    #   results.
+    #   The offset for the search results.
     #   @return [Integer]
     #
     # @!attribute [rw] page_size
-    #   Specifies the number of items per page for the resource.
+    #   Specifies the number of results to return.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/deadline-2023-10-12/SearchWorkersRequest AWS API Documentation
@@ -8039,7 +8079,7 @@ module Aws::Deadline
     #   @return [Array<Types::WorkerSearchSummary>]
     #
     # @!attribute [rw] next_item_offset
-    #   The next incremental starting point after the defined `itemOffset`.
+    #   The next item offset for the search results.
     #   @return [Integer]
     #
     # @!attribute [rw] total_results
@@ -8056,23 +8096,22 @@ module Aws::Deadline
       include Aws::Structure
     end
 
-    # The configuration details for a service managed Amazon EC2 fleet.
+    # The configuration details for a service managed EC2 fleet.
     #
     # @!attribute [rw] instance_capabilities
-    #   The Amazon EC2 instance capabilities.
+    #   The instance capabilities for the service managed EC2 fleet.
     #   @return [Types::ServiceManagedEc2InstanceCapabilities]
     #
     # @!attribute [rw] instance_market_options
-    #   The Amazon EC2 market type.
+    #   The instance market options for the service managed EC2 fleet.
     #   @return [Types::ServiceManagedEc2InstanceMarketOptions]
     #
     # @!attribute [rw] vpc_configuration
-    #   The VPC configuration details for a service managed Amazon EC2
-    #   fleet.
+    #   The VPC configuration for the service managed EC2 fleet.
     #   @return [Types::VpcConfiguration]
     #
     # @!attribute [rw] storage_profile_id
-    #   The storage profile ID.
+    #   The storage profile ID for the service managed EC2 fleet.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/deadline-2023-10-12/ServiceManagedEc2FleetConfiguration AWS API Documentation
@@ -8226,7 +8265,7 @@ module Aws::Deadline
     #   @return [Types::TaskRunSessionActionDefinition]
     #
     # @!attribute [rw] sync_input_job_attachments
-    #   The job attachments to sync with a session action.
+    #   The session action definition for syncing input job attachments.
     #   @return [Types::SyncInputJobAttachmentsSessionActionDefinition]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/deadline-2023-10-12/SessionActionDefinition AWS API Documentation
@@ -8265,7 +8304,8 @@ module Aws::Deadline
     #   @return [Types::TaskRunSessionActionDefinitionSummary]
     #
     # @!attribute [rw] sync_input_job_attachments
-    #   The job attachments to sync with the session action definition.
+    #   The session action definition summary for syncing input job
+    #   attachments.
     #   @return [Types::SyncInputJobAttachmentsSessionActionDefinitionSummary]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/deadline-2023-10-12/SessionActionDefinitionSummary AWS API Documentation
@@ -8774,11 +8814,41 @@ module Aws::Deadline
     #   The data type of the parameter.
     #   @return [String]
     #
+    # @!attribute [rw] chunks
+    #   The configuration for task chunking.
+    #   @return [Types::StepParameterChunks]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/deadline-2023-10-12/StepParameter AWS API Documentation
     #
     class StepParameter < Struct.new(
       :name,
-      :type)
+      :type,
+      :chunks)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Defines how a step parameter range should be divided into chunks.
+    #
+    # @!attribute [rw] default_task_count
+    #   The number of tasks to combine into a single chunk by default.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] target_runtime_seconds
+    #   The number of seconds to aim for when forming chunks.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] range_constraint
+    #   Specifies whether the chunked ranges must be contiguous or can have
+    #   gaps between them.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/deadline-2023-10-12/StepParameterChunks AWS API Documentation
+    #
+    class StepParameterChunks < Struct.new(
+      :default_task_count,
+      :target_runtime_seconds,
+      :range_constraint)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8853,7 +8923,7 @@ module Aws::Deadline
     #   @return [String]
     #
     # @!attribute [rw] target_task_run_status
-    #   The task status to start with on the job.
+    #   The task status to update the job's tasks to.
     #   @return [String]
     #
     # @!attribute [rw] task_run_status_counts
@@ -8969,7 +9039,7 @@ module Aws::Deadline
     #   @return [Integer]
     #
     # @!attribute [rw] target_task_run_status
-    #   The task status to start with on the job.
+    #   The task status to update the job's tasks to.
     #   @return [String]
     #
     # @!attribute [rw] created_at
@@ -9074,10 +9144,34 @@ module Aws::Deadline
       include Aws::Structure
     end
 
-    # The job attachment in a session action to sync.
+    # Searches for a particular list of strings.
+    #
+    # @!attribute [rw] name
+    #   The field name to search.
+    #   @return [String]
+    #
+    # @!attribute [rw] operator
+    #   The type of comparison to use for this search.
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   The list of string values to search for.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/deadline-2023-10-12/StringListFilterExpression AWS API Documentation
+    #
+    class StringListFilterExpression < Struct.new(
+      :name,
+      :operator,
+      :values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The session action definition for syncing input job attachments.
     #
     # @!attribute [rw] step_id
-    #   The step ID for the step in the job attachment.
+    #   The step ID for the sync input job attachments session action.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/deadline-2023-10-12/SyncInputJobAttachmentsSessionActionDefinition AWS API Documentation
@@ -9088,10 +9182,12 @@ module Aws::Deadline
       include Aws::Structure
     end
 
-    # The details of a synced job attachment.
+    # The summary of the session action definition for syncing input job
+    # attachments.
     #
     # @!attribute [rw] step_id
-    #   The step ID of the step in the job attachment.
+    #   The step ID for the sync input job attachments session action
+    #   summary.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/deadline-2023-10-12/SyncInputJobAttachmentsSessionActionDefinitionSummary AWS API Documentation
@@ -9309,6 +9405,10 @@ module Aws::Deadline
     #   The user or system that updated this resource.
     #   @return [String]
     #
+    # @!attribute [rw] latest_session_action_id
+    #   The latest session action ID for the task.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/deadline-2023-10-12/TaskSearchSummary AWS API Documentation
     #
     class TaskSearchSummary < Struct.new(
@@ -9323,7 +9423,8 @@ module Aws::Deadline
       :started_at,
       :ended_at,
       :updated_at,
-      :updated_by)
+      :updated_by,
+      :latest_session_action_id)
       SENSITIVE = [:parameters]
       include Aws::Structure
     end
@@ -9375,7 +9476,7 @@ module Aws::Deadline
     #   @return [String]
     #
     # @!attribute [rw] latest_session_action_id
-    #   The latest session action for the task.
+    #   The latest session action ID for the task.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/deadline-2023-10-12/TaskSummary AWS API Documentation
@@ -9663,7 +9764,7 @@ module Aws::Deadline
     #   @return [String]
     #
     # @!attribute [rw] priority
-    #   The job priority to update.
+    #   The updated job priority.
     #   @return [Integer]
     #
     # @!attribute [rw] max_failed_tasks_count
@@ -9697,6 +9798,14 @@ module Aws::Deadline
     #   The maximum number of workers that can process tasks in the job.
     #   @return [Integer]
     #
+    # @!attribute [rw] name
+    #   The updated job name.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The updated job description.
+    #   @return [String]
+    #
     # @!attribute [rw] farm_id
     #   The farm ID of the job to update.
     #   @return [String]
@@ -9719,10 +9828,12 @@ module Aws::Deadline
       :max_retries_per_task,
       :lifecycle_status,
       :max_worker_count,
+      :name,
+      :description,
       :farm_id,
       :queue_id,
       :job_id)
-      SENSITIVE = []
+      SENSITIVE = [:description]
       include Aws::Structure
     end
 
@@ -9801,7 +9912,7 @@ module Aws::Deadline
     #   @return [String]
     #
     # @!attribute [rw] role_arn
-    #   The Amazon Resource Name (ARN) of the new IAM role to use with the
+    #   The Amazon Resource Name of the new IAM role to use with the
     #   monitor.
     #   @return [String]
     #

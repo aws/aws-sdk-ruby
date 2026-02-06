@@ -372,6 +372,26 @@ module Aws::BedrockRuntime
       include Aws::Structure
     end
 
+    # Cache creation metrics for a specific TTL duration
+    #
+    # @!attribute [rw] ttl
+    #   TTL duration for these cached tokens
+    #   @return [String]
+    #
+    # @!attribute [rw] input_tokens
+    #   Number of tokens written to cache with this TTL (cache creation
+    #   tokens)
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-runtime-2023-09-30/CacheDetail AWS API Documentation
+    #
+    class CacheDetail < Struct.new(
+      :ttl,
+      :input_tokens)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Defines a section of content to be cached for reuse in subsequent API
     # calls.
     #
@@ -379,10 +399,17 @@ module Aws::BedrockRuntime
     #   Specifies the type of cache point within the CachePointBlock.
     #   @return [String]
     #
+    # @!attribute [rw] ttl
+    #   Optional TTL duration for cache entries. When specified, enables
+    #   extended TTL caching with the specified duration. When omitted, uses
+    #   `type` value for caching behavior.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-runtime-2023-09-30/CachePointBlock AWS API Documentation
     #
     class CachePointBlock < Struct.new(
-      :type)
+      :type,
+      :ttl)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1059,6 +1086,10 @@ module Aws::BedrockRuntime
     #   request.
     #   @return [Types::ServiceTier]
     #
+    # @!attribute [rw] output_config
+    #   Output configuration for a model response.
+    #   @return [Types::OutputConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-runtime-2023-09-30/ConverseRequest AWS API Documentation
     #
     class ConverseRequest < Struct.new(
@@ -1073,7 +1104,8 @@ module Aws::BedrockRuntime
       :additional_model_response_field_paths,
       :request_metadata,
       :performance_config,
-      :service_tier)
+      :service_tier,
+      :output_config)
       SENSITIVE = [:prompt_variables, :request_metadata]
       include Aws::Structure
     end
@@ -1314,6 +1346,10 @@ module Aws::BedrockRuntime
     #   request.
     #   @return [Types::ServiceTier]
     #
+    # @!attribute [rw] output_config
+    #   Output configuration for a model response.
+    #   @return [Types::OutputConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-runtime-2023-09-30/ConverseStreamRequest AWS API Documentation
     #
     class ConverseStreamRequest < Struct.new(
@@ -1328,7 +1364,8 @@ module Aws::BedrockRuntime
       :additional_model_response_field_paths,
       :request_metadata,
       :performance_config,
-      :service_tier)
+      :service_tier,
+      :output_config)
       SENSITIVE = [:prompt_variables, :request_metadata]
       include Aws::Structure
     end
@@ -3559,6 +3596,35 @@ module Aws::BedrockRuntime
       include Aws::Structure
     end
 
+    # JSON schema structured output format options.
+    #
+    # @!attribute [rw] schema
+    #   The JSON schema to constrain the model's output. For more
+    #   information, see [JSON Schema Reference][1].
+    #
+    #
+    #
+    #   [1]: https://json-schema.org/understanding-json-schema/reference
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the JSON schema.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the JSON schema.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-runtime-2023-09-30/JsonSchemaDefinition AWS API Documentation
+    #
+    class JsonSchemaDefinition < Struct.new(
+      :schema,
+      :name,
+      :description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] submit_time_after
     #   Include invocations submitted after this time.
     #   @return [Time]
@@ -3772,6 +3838,66 @@ module Aws::BedrockRuntime
       :event_type)
       SENSITIVE = []
       include Aws::Structure
+    end
+
+    # Output configuration for a model response in a call to [Converse][1]
+    # or [ConverseStream][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_Converse.html
+    # [2]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_ConverseStream.html
+    #
+    # @!attribute [rw] text_format
+    #   Structured output parameters to control the model's text response.
+    #   @return [Types::OutputFormat]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-runtime-2023-09-30/OutputConfig AWS API Documentation
+    #
+    class OutputConfig < Struct.new(
+      :text_format)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Structured output parameters to control the model's response.
+    #
+    # @!attribute [rw] type
+    #   The type of structured output format.
+    #   @return [String]
+    #
+    # @!attribute [rw] structure
+    #   The structure that the model's output must adhere to.
+    #   @return [Types::OutputFormatStructure]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-runtime-2023-09-30/OutputFormat AWS API Documentation
+    #
+    class OutputFormat < Struct.new(
+      :type,
+      :structure)
+      SENSITIVE = [:structure]
+      include Aws::Structure
+    end
+
+    # The structure that the model's output must adhere to.
+    #
+    # @note OutputFormatStructure is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @!attribute [rw] json_schema
+    #   A JSON schema structure that the model's output must adhere to.
+    #   @return [Types::JsonSchemaDefinition]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-runtime-2023-09-30/OutputFormatStructure AWS API Documentation
+    #
+    class OutputFormatStructure < Struct.new(
+      :json_schema,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class JsonSchema < OutputFormatStructure; end
+      class Unknown < OutputFormatStructure; end
     end
 
     # Payload content included in the response.
@@ -4304,6 +4430,11 @@ module Aws::BedrockRuntime
     #   The number of input tokens written to the cache for the request.
     #   @return [Integer]
     #
+    # @!attribute [rw] cache_details
+    #   Detailed breakdown of cache writes by TTL. Empty if no cache
+    #   creation occurred. Sorted by TTL duration (1h before 5m).
+    #   @return [Array<Types::CacheDetail>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-runtime-2023-09-30/TokenUsage AWS API Documentation
     #
     class TokenUsage < Struct.new(
@@ -4311,7 +4442,8 @@ module Aws::BedrockRuntime
       :output_tokens,
       :total_tokens,
       :cache_read_input_tokens,
-      :cache_write_input_tokens)
+      :cache_write_input_tokens,
+      :cache_details)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4639,12 +4771,18 @@ module Aws::BedrockRuntime
     #   The input schema for the tool in JSON format.
     #   @return [Types::ToolInputSchema]
     #
+    # @!attribute [rw] strict
+    #   Flag to enable structured output enforcement on a tool usage
+    #   response.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-runtime-2023-09-30/ToolSpecification AWS API Documentation
     #
     class ToolSpecification < Struct.new(
       :name,
       :description,
-      :input_schema)
+      :input_schema,
+      :strict)
       SENSITIVE = []
       include Aws::Structure
     end

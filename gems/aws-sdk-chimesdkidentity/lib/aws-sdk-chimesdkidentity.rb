@@ -54,7 +54,7 @@ module Aws::ChimeSDKIdentity
   autoload :EndpointProvider, 'aws-sdk-chimesdkidentity/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-chimesdkidentity/endpoints'
 
-  GEM_VERSION = '1.53.0'
+  GEM_VERSION = '1.54.0'
 
 end
 

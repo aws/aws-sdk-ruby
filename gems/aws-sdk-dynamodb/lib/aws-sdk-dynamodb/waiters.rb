@@ -67,12 +67,198 @@ module Aws::DynamoDB
   # The following table lists the valid waiter names, the operations they call,
   # and the default `:delay` and `:max_attempts` values.
   #
-  # | waiter_name      | params                  | :delay   | :max_attempts |
-  # | ---------------- | ----------------------- | -------- | ------------- |
-  # | table_exists     | {Client#describe_table} | 20       | 25            |
-  # | table_not_exists | {Client#describe_table} | 20       | 25            |
+  # | waiter_name                          | params                                          | :delay   | :max_attempts |
+  # | ------------------------------------ | ----------------------------------------------- | -------- | ------------- |
+  # | contributor_insights_enabled         | {Client#describe_contributor_insights}          | 20       | 30            |
+  # | export_completed                     | {Client#describe_export}                        | 20       | 60            |
+  # | import_completed                     | {Client#describe_import}                        | 20       | 60            |
+  # | kinesis_streaming_destination_active | {Client#describe_kinesis_streaming_destination} | 20       | 30            |
+  # | table_exists                         | {Client#describe_table}                         | 20       | 25            |
+  # | table_not_exists                     | {Client#describe_table}                         | 20       | 25            |
   #
   module Waiters
+
+    class ContributorInsightsEnabled
+
+      # @param [Hash] options
+      # @option options [required, Client] :client
+      # @option options [Integer] :max_attempts (30)
+      # @option options [Integer] :delay (20)
+      # @option options [Proc] :before_attempt
+      # @option options [Proc] :before_wait
+      def initialize(options)
+        @client = options.fetch(:client)
+        @waiter = Aws::Waiters::Waiter.new({
+          max_attempts: 30,
+          delay: 20,
+          poller: Aws::Waiters::Poller.new(
+            operation_name: :describe_contributor_insights,
+            acceptors: [
+              {
+                "state" => "success",
+                "matcher" => "path",
+                "argument" => "contributor_insights_status",
+                "expected" => "ENABLED"
+              },
+              {
+                "state" => "failure",
+                "matcher" => "path",
+                "argument" => "contributor_insights_status",
+                "expected" => "FAILED"
+              }
+            ]
+          )
+        }.merge(options))
+      end
+
+      # @option (see Client#describe_contributor_insights)
+      # @return (see Client#describe_contributor_insights)
+      def wait(params = {})
+        @waiter.wait(client: @client, params: params)
+      end
+
+      # @api private
+      attr_reader :waiter
+
+    end
+
+    class ExportCompleted
+
+      # @param [Hash] options
+      # @option options [required, Client] :client
+      # @option options [Integer] :max_attempts (60)
+      # @option options [Integer] :delay (20)
+      # @option options [Proc] :before_attempt
+      # @option options [Proc] :before_wait
+      def initialize(options)
+        @client = options.fetch(:client)
+        @waiter = Aws::Waiters::Waiter.new({
+          max_attempts: 60,
+          delay: 20,
+          poller: Aws::Waiters::Poller.new(
+            operation_name: :describe_export,
+            acceptors: [
+              {
+                "state" => "success",
+                "matcher" => "path",
+                "argument" => "export_description.export_status",
+                "expected" => "COMPLETED"
+              },
+              {
+                "state" => "failure",
+                "matcher" => "path",
+                "argument" => "export_description.export_status",
+                "expected" => "FAILED"
+              }
+            ]
+          )
+        }.merge(options))
+      end
+
+      # @option (see Client#describe_export)
+      # @return (see Client#describe_export)
+      def wait(params = {})
+        @waiter.wait(client: @client, params: params)
+      end
+
+      # @api private
+      attr_reader :waiter
+
+    end
+
+    class ImportCompleted
+
+      # @param [Hash] options
+      # @option options [required, Client] :client
+      # @option options [Integer] :max_attempts (60)
+      # @option options [Integer] :delay (20)
+      # @option options [Proc] :before_attempt
+      # @option options [Proc] :before_wait
+      def initialize(options)
+        @client = options.fetch(:client)
+        @waiter = Aws::Waiters::Waiter.new({
+          max_attempts: 60,
+          delay: 20,
+          poller: Aws::Waiters::Poller.new(
+            operation_name: :describe_import,
+            acceptors: [
+              {
+                "state" => "success",
+                "matcher" => "path",
+                "argument" => "import_table_description.import_status",
+                "expected" => "COMPLETED"
+              },
+              {
+                "state" => "failure",
+                "matcher" => "path",
+                "argument" => "import_table_description.import_status",
+                "expected" => "FAILED"
+              },
+              {
+                "state" => "failure",
+                "matcher" => "path",
+                "argument" => "import_table_description.import_status",
+                "expected" => "CANCELLED"
+              }
+            ]
+          )
+        }.merge(options))
+      end
+
+      # @option (see Client#describe_import)
+      # @return (see Client#describe_import)
+      def wait(params = {})
+        @waiter.wait(client: @client, params: params)
+      end
+
+      # @api private
+      attr_reader :waiter
+
+    end
+
+    class KinesisStreamingDestinationActive
+
+      # @param [Hash] options
+      # @option options [required, Client] :client
+      # @option options [Integer] :max_attempts (30)
+      # @option options [Integer] :delay (20)
+      # @option options [Proc] :before_attempt
+      # @option options [Proc] :before_wait
+      def initialize(options)
+        @client = options.fetch(:client)
+        @waiter = Aws::Waiters::Waiter.new({
+          max_attempts: 30,
+          delay: 20,
+          poller: Aws::Waiters::Poller.new(
+            operation_name: :describe_kinesis_streaming_destination,
+            acceptors: [
+              {
+                "state" => "success",
+                "matcher" => "pathAny",
+                "argument" => "kinesis_data_stream_destinations[].destination_status",
+                "expected" => "ACTIVE"
+              },
+              {
+                "state" => "failure",
+                "matcher" => "path",
+                "argument" => "length(kinesis_data_stream_destinations) > `0`  && length(kinesis_data_stream_destinations[?destination_status == 'DISABLED' || destination_status == 'ENABLE_FAILED']) ==  length(kinesis_data_stream_destinations)",
+                "expected" => true
+              }
+            ]
+          )
+        }.merge(options))
+      end
+
+      # @option (see Client#describe_kinesis_streaming_destination)
+      # @return (see Client#describe_kinesis_streaming_destination)
+      def wait(params = {})
+        @waiter.wait(client: @client, params: params)
+      end
+
+      # @api private
+      attr_reader :waiter
+
+    end
 
     class TableExists
 

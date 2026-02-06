@@ -115,6 +115,7 @@ module Aws::Keyspaces
       attr_accessor auto_scaling_specification: Types::AutoScalingSpecification
       attr_accessor replica_specifications: ::Array[Types::ReplicaSpecification]
       attr_accessor cdc_specification: Types::CdcSpecification
+      attr_accessor warm_throughput_specification: Types::WarmThroughputSpecification
       SENSITIVE: []
     end
 
@@ -229,6 +230,7 @@ module Aws::Keyspaces
       attr_accessor replica_specifications: ::Array[Types::ReplicaSpecificationSummary]
       attr_accessor latest_stream_arn: ::String
       attr_accessor cdc_specification: Types::CdcSpecificationSummary
+      attr_accessor warm_throughput_specification: Types::WarmThroughputSpecificationSummary
       SENSITIVE: []
     end
 
@@ -348,6 +350,7 @@ module Aws::Keyspaces
       attr_accessor region: ::String
       attr_accessor status: ("ACTIVE" | "CREATING" | "UPDATING" | "DELETING" | "DELETED" | "RESTORING" | "INACCESSIBLE_ENCRYPTION_CREDENTIALS")
       attr_accessor capacity_specification: Types::CapacitySpecificationSummary
+      attr_accessor warm_throughput_specification: Types::WarmThroughputSpecificationSummary
       SENSITIVE: []
     end
 
@@ -477,6 +480,7 @@ module Aws::Keyspaces
       attr_accessor auto_scaling_specification: Types::AutoScalingSpecification
       attr_accessor replica_specifications: ::Array[Types::ReplicaSpecification]
       attr_accessor cdc_specification: Types::CdcSpecification
+      attr_accessor warm_throughput_specification: Types::WarmThroughputSpecification
       SENSITIVE: []
     end
 
@@ -487,6 +491,19 @@ module Aws::Keyspaces
 
     class ValidationException
       attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class WarmThroughputSpecification
+      attr_accessor read_units_per_second: ::Integer
+      attr_accessor write_units_per_second: ::Integer
+      SENSITIVE: []
+    end
+
+    class WarmThroughputSpecificationSummary
+      attr_accessor read_units_per_second: ::Integer
+      attr_accessor write_units_per_second: ::Integer
+      attr_accessor status: ("AVAILABLE" | "UPDATING")
       SENSITIVE: []
     end
   end

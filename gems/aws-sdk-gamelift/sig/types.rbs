@@ -469,6 +469,7 @@ module Aws::GameLift
       attr_accessor storage_location: Types::S3Location
       attr_accessor zip_file: ::String
       attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor node_js_version: ::String
       SENSITIVE: []
     end
 
@@ -1116,6 +1117,7 @@ module Aws::GameLift
       attr_accessor instance_counts: Types::EC2InstanceCounts
       attr_accessor location: ::String
       attr_accessor game_server_container_group_counts: Types::GameServerContainerGroupCounts
+      attr_accessor managed_capacity_configuration: Types::ManagedCapacityConfiguration
       SENSITIVE: []
     end
 
@@ -1661,6 +1663,12 @@ module Aws::GameLift
       SENSITIVE: []
     end
 
+    class ManagedCapacityConfiguration
+      attr_accessor zero_capacity_strategy: ("MANUAL" | "SCALE_TO_AND_FROM_ZERO")
+      attr_accessor scale_in_after_inactivity_minutes: ::Integer
+      SENSITIVE: []
+    end
+
     class MatchedPlayerSession
       attr_accessor player_id: ::String
       attr_accessor player_session_id: ::String
@@ -1921,6 +1929,7 @@ module Aws::GameLift
       attr_accessor size_on_disk: ::Integer
       attr_accessor creation_time: ::Time
       attr_accessor storage_location: Types::S3Location
+      attr_accessor node_js_version: ::String
       SENSITIVE: []
     end
 
@@ -2234,6 +2243,7 @@ module Aws::GameLift
       attr_accessor min_size: ::Integer
       attr_accessor max_size: ::Integer
       attr_accessor location: ::String
+      attr_accessor managed_capacity_configuration: Types::ManagedCapacityConfiguration
       SENSITIVE: []
     end
 
@@ -2241,6 +2251,7 @@ module Aws::GameLift
       attr_accessor fleet_id: ::String
       attr_accessor fleet_arn: ::String
       attr_accessor location: ::String
+      attr_accessor managed_capacity_configuration: Types::ManagedCapacityConfiguration
       SENSITIVE: []
     end
 

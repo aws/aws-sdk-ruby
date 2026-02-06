@@ -107,7 +107,7 @@ module Aws
                                 },
                                 vpc_id: ::String,
                                 service_access_subnet_id: ::String,
-                                vcf_version: ("VCF-5.2.1"),
+                                vcf_version: ("VCF-5.2.1" | "VCF-5.2.2"),
                                 terms_accepted: bool,
                                 license_info: Array[
                                   {
@@ -191,7 +191,8 @@ module Aws
                                        instance_type: ("i4i.metal"),
                                        placement_group_id: ::String?,
                                        dedicated_host_id: ::String?
-                                     }
+                                     },
+                                     ?esx_version: ::String
                                    ) -> _CreateEnvironmentHostResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateEnvironmentHostResponseSuccess
 
@@ -241,6 +242,16 @@ module Aws
                              environment_id: ::String
                            ) -> _GetEnvironmentResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetEnvironmentResponseSuccess
+
+      interface _GetVersionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetVersionsResponse]
+        def vcf_versions: () -> ::Array[Types::VcfVersionInfo]
+        def instance_type_esx_versions: () -> ::Array[Types::InstanceTypeEsxVersionsInfo]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Evs/Client.html#get_versions-instance_method
+      def get_versions: (
+                        ) -> _GetVersionsResponseSuccess
+                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetVersionsResponseSuccess
 
       interface _ListEnvironmentHostsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListEnvironmentHostsResponse]

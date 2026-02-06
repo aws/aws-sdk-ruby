@@ -485,6 +485,7 @@ module Aws
 
         def initialize(options = {})
           @io = options.delete(:io)
+          @io.rewind if @io.respond_to?(:rewind)
           @location_name = options.delete(:location_name)
           @algorithm = options.delete(:algorithm)
           @digest = ChecksumAlgorithm.digest_for_algorithm(@algorithm)

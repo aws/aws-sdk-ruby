@@ -18,6 +18,7 @@ module Aws::GeoMaps
     ApiKey = Shapes::StringShape.new(name: 'ApiKey')
     Blob = Shapes::BlobShape.new(name: 'Blob')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
+    Buildings = Shapes::StringShape.new(name: 'Buildings')
     ColorScheme = Shapes::StringShape.new(name: 'ColorScheme')
     CompactOverlay = Shapes::StringShape.new(name: 'CompactOverlay')
     ContourDensity = Shapes::StringShape.new(name: 'ContourDensity')
@@ -138,6 +139,7 @@ module Aws::GeoMaps
     GetStyleDescriptorRequest.add_member(:contour_density, Shapes::ShapeRef.new(shape: ContourDensity, location: "querystring", location_name: "contour-density"))
     GetStyleDescriptorRequest.add_member(:traffic, Shapes::ShapeRef.new(shape: Traffic, location: "querystring", location_name: "traffic"))
     GetStyleDescriptorRequest.add_member(:travel_modes, Shapes::ShapeRef.new(shape: TravelModeList, location: "querystring", location_name: "travel-modes"))
+    GetStyleDescriptorRequest.add_member(:buildings, Shapes::ShapeRef.new(shape: Buildings, location: "querystring", location_name: "buildings"))
     GetStyleDescriptorRequest.add_member(:key, Shapes::ShapeRef.new(shape: ApiKey, location: "querystring", location_name: "key"))
     GetStyleDescriptorRequest.struct_class = Types::GetStyleDescriptorRequest
 

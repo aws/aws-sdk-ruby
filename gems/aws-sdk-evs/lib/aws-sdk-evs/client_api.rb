@@ -49,8 +49,12 @@ module Aws::Evs
     EnvironmentStateList = Shapes::ListShape.new(name: 'EnvironmentStateList')
     EnvironmentSummary = Shapes::StructureShape.new(name: 'EnvironmentSummary')
     EnvironmentSummaryList = Shapes::ListShape.new(name: 'EnvironmentSummaryList')
+    EsxVersion = Shapes::StringShape.new(name: 'EsxVersion')
+    EsxVersionList = Shapes::ListShape.new(name: 'EsxVersionList')
     GetEnvironmentRequest = Shapes::StructureShape.new(name: 'GetEnvironmentRequest')
     GetEnvironmentResponse = Shapes::StructureShape.new(name: 'GetEnvironmentResponse')
+    GetVersionsRequest = Shapes::StructureShape.new(name: 'GetVersionsRequest')
+    GetVersionsResponse = Shapes::StructureShape.new(name: 'GetVersionsResponse')
     Host = Shapes::StructureShape.new(name: 'Host')
     HostInfoForCreate = Shapes::StructureShape.new(name: 'HostInfoForCreate')
     HostInfoForCreateList = Shapes::ListShape.new(name: 'HostInfoForCreateList')
@@ -60,7 +64,11 @@ module Aws::Evs
     InitialVlanInfo = Shapes::StructureShape.new(name: 'InitialVlanInfo')
     InitialVlans = Shapes::StructureShape.new(name: 'InitialVlans')
     InstanceType = Shapes::StringShape.new(name: 'InstanceType')
+    InstanceTypeEsxVersionsInfo = Shapes::StructureShape.new(name: 'InstanceTypeEsxVersionsInfo')
+    InstanceTypeEsxVersionsList = Shapes::ListShape.new(name: 'InstanceTypeEsxVersionsList')
+    InstanceTypeList = Shapes::ListShape.new(name: 'InstanceTypeList')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
+    InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
     IpAddress = Shapes::StringShape.new(name: 'IpAddress')
     KeyName = Shapes::StringShape.new(name: 'KeyName')
     LicenseInfo = Shapes::StructureShape.new(name: 'LicenseInfo')
@@ -113,6 +121,8 @@ module Aws::Evs
     ValidationExceptionReason = Shapes::StringShape.new(name: 'ValidationExceptionReason')
     VcfHostnames = Shapes::StructureShape.new(name: 'VcfHostnames')
     VcfVersion = Shapes::StringShape.new(name: 'VcfVersion')
+    VcfVersionInfo = Shapes::StructureShape.new(name: 'VcfVersionInfo')
+    VcfVersionList = Shapes::ListShape.new(name: 'VcfVersionList')
     Vlan = Shapes::StructureShape.new(name: 'Vlan')
     VlanId = Shapes::IntegerShape.new(name: 'VlanId')
     VlanList = Shapes::ListShape.new(name: 'VlanList')
@@ -141,6 +151,7 @@ module Aws::Evs
     CreateEnvironmentHostRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateEnvironmentHostRequest.add_member(:environment_id, Shapes::ShapeRef.new(shape: EnvironmentId, required: true, location_name: "environmentId"))
     CreateEnvironmentHostRequest.add_member(:host, Shapes::ShapeRef.new(shape: HostInfoForCreate, required: true, location_name: "host"))
+    CreateEnvironmentHostRequest.add_member(:esx_version, Shapes::ShapeRef.new(shape: EsxVersion, location_name: "esxVersion"))
     CreateEnvironmentHostRequest.struct_class = Types::CreateEnvironmentHostRequest
 
     CreateEnvironmentHostResponse.add_member(:environment_summary, Shapes::ShapeRef.new(shape: EnvironmentSummary, location_name: "environmentSummary"))
@@ -235,11 +246,19 @@ module Aws::Evs
 
     EnvironmentSummaryList.member = Shapes::ShapeRef.new(shape: EnvironmentSummary)
 
+    EsxVersionList.member = Shapes::ShapeRef.new(shape: String)
+
     GetEnvironmentRequest.add_member(:environment_id, Shapes::ShapeRef.new(shape: EnvironmentId, required: true, location_name: "environmentId"))
     GetEnvironmentRequest.struct_class = Types::GetEnvironmentRequest
 
     GetEnvironmentResponse.add_member(:environment, Shapes::ShapeRef.new(shape: Environment, location_name: "environment"))
     GetEnvironmentResponse.struct_class = Types::GetEnvironmentResponse
+
+    GetVersionsRequest.struct_class = Types::GetVersionsRequest
+
+    GetVersionsResponse.add_member(:vcf_versions, Shapes::ShapeRef.new(shape: VcfVersionList, required: true, location_name: "vcfVersions"))
+    GetVersionsResponse.add_member(:instance_type_esx_versions, Shapes::ShapeRef.new(shape: InstanceTypeEsxVersionsList, required: true, location_name: "instanceTypeEsxVersions"))
+    GetVersionsResponse.struct_class = Types::GetVersionsResponse
 
     Host.add_member(:host_name, Shapes::ShapeRef.new(shape: HostName, location_name: "hostName"))
     Host.add_member(:ip_address, Shapes::ShapeRef.new(shape: IpAddress, location_name: "ipAddress"))
@@ -282,6 +301,17 @@ module Aws::Evs
     InitialVlans.add_member(:is_hcx_public, Shapes::ShapeRef.new(shape: Boolean, location_name: "isHcxPublic"))
     InitialVlans.add_member(:hcx_network_acl_id, Shapes::ShapeRef.new(shape: NetworkAclId, location_name: "hcxNetworkAclId"))
     InitialVlans.struct_class = Types::InitialVlans
+
+    InstanceTypeEsxVersionsInfo.add_member(:instance_type, Shapes::ShapeRef.new(shape: InstanceType, required: true, location_name: "instanceType"))
+    InstanceTypeEsxVersionsInfo.add_member(:esx_versions, Shapes::ShapeRef.new(shape: EsxVersionList, required: true, location_name: "esxVersions"))
+    InstanceTypeEsxVersionsInfo.struct_class = Types::InstanceTypeEsxVersionsInfo
+
+    InstanceTypeEsxVersionsList.member = Shapes::ShapeRef.new(shape: InstanceTypeEsxVersionsInfo)
+
+    InstanceTypeList.member = Shapes::ShapeRef.new(shape: InstanceType)
+
+    InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
+    InternalServerException.struct_class = Types::InternalServerException
 
     LicenseInfo.add_member(:solution_key, Shapes::ShapeRef.new(shape: SolutionKey, required: true, location_name: "solutionKey"))
     LicenseInfo.add_member(:vsan_key, Shapes::ShapeRef.new(shape: VSanLicenseKey, required: true, location_name: "vsanKey"))
@@ -399,6 +429,14 @@ module Aws::Evs
     VcfHostnames.add_member(:cloud_builder, Shapes::ShapeRef.new(shape: HostName, required: true, location_name: "cloudBuilder"))
     VcfHostnames.struct_class = Types::VcfHostnames
 
+    VcfVersionInfo.add_member(:vcf_version, Shapes::ShapeRef.new(shape: VcfVersion, required: true, location_name: "vcfVersion"))
+    VcfVersionInfo.add_member(:status, Shapes::ShapeRef.new(shape: String, required: true, location_name: "status"))
+    VcfVersionInfo.add_member(:default_esx_version, Shapes::ShapeRef.new(shape: String, required: true, location_name: "defaultEsxVersion"))
+    VcfVersionInfo.add_member(:instance_types, Shapes::ShapeRef.new(shape: InstanceTypeList, required: true, location_name: "instanceTypes"))
+    VcfVersionInfo.struct_class = Types::VcfVersionInfo
+
+    VcfVersionList.member = Shapes::ShapeRef.new(shape: VcfVersionInfo)
+
     Vlan.add_member(:vlan_id, Shapes::ShapeRef.new(shape: VlanId, location_name: "vlanId"))
     Vlan.add_member(:cidr, Shapes::ShapeRef.new(shape: Cidr, location_name: "cidr"))
     Vlan.add_member(:availability_zone, Shapes::ShapeRef.new(shape: String, location_name: "availabilityZone"))
@@ -506,6 +544,16 @@ module Aws::Evs
         o.output = Shapes::ShapeRef.new(shape: GetEnvironmentResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:get_versions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetVersions"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetVersionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetVersionsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
       api.add_operation(:list_environment_hosts, Seahorse::Model::Operation.new.tap do |o|

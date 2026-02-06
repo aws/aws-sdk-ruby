@@ -814,7 +814,7 @@ module Aws
                                           audio_description_broadcaster_mix: ("BROADCASTER_MIXED_AD" | "NORMAL")?,
                                           bitrate: ::Integer?,
                                           codec_profile: ("LC" | "HEV1" | "HEV2" | "XHE")?,
-                                          coding_mode: ("AD_RECEIVER_MIX" | "CODING_MODE_1_0" | "CODING_MODE_1_1" | "CODING_MODE_2_0" | "CODING_MODE_5_1")?,
+                                          coding_mode: ("AD_RECEIVER_MIX" | "CODING_MODE_1_0" | "CODING_MODE_1_1" | "CODING_MODE_2_0" | "CODING_MODE_5_1" | "CODING_MODE_AUTO")?,
                                           loudness_measurement_mode: ("PROGRAM" | "ANCHOR")?,
                                           rap_interval: ::Integer?,
                                           rate_control_mode: ("CBR" | "VBR")?,
@@ -827,7 +827,7 @@ module Aws
                                         ac_3_settings: {
                                           bitrate: ::Integer?,
                                           bitstream_mode: ("COMPLETE_MAIN" | "COMMENTARY" | "DIALOGUE" | "EMERGENCY" | "HEARING_IMPAIRED" | "MUSIC_AND_EFFECTS" | "VISUALLY_IMPAIRED" | "VOICE_OVER")?,
-                                          coding_mode: ("CODING_MODE_1_0" | "CODING_MODE_1_1" | "CODING_MODE_2_0" | "CODING_MODE_3_2_LFE")?,
+                                          coding_mode: ("CODING_MODE_1_0" | "CODING_MODE_1_1" | "CODING_MODE_2_0" | "CODING_MODE_3_2_LFE" | "CODING_MODE_AUTO")?,
                                           dialnorm: ::Integer?,
                                           dynamic_range_compression_line: ("FILM_STANDARD" | "FILM_LIGHT" | "MUSIC_STANDARD" | "MUSIC_LIGHT" | "SPEECH" | "NONE")?,
                                           dynamic_range_compression_profile: ("FILM_STANDARD" | "NONE")?,
@@ -865,7 +865,7 @@ module Aws
                                           attenuation_control: ("ATTENUATE_3_DB" | "NONE")?,
                                           bitrate: ::Integer?,
                                           bitstream_mode: ("COMPLETE_MAIN" | "COMMENTARY" | "EMERGENCY" | "HEARING_IMPAIRED" | "VISUALLY_IMPAIRED")?,
-                                          coding_mode: ("CODING_MODE_1_0" | "CODING_MODE_2_0" | "CODING_MODE_3_2")?,
+                                          coding_mode: ("CODING_MODE_1_0" | "CODING_MODE_2_0" | "CODING_MODE_3_2" | "CODING_MODE_AUTO")?,
                                           dc_filter: ("ENABLED" | "DISABLED")?,
                                           dialnorm: ::Integer?,
                                           dynamic_range_compression_line: ("NONE" | "FILM_STANDARD" | "FILM_LIGHT" | "MUSIC_STANDARD" | "MUSIC_LIGHT" | "SPEECH")?,
@@ -1179,6 +1179,7 @@ module Aws
                                     mxf_settings: {
                                       afd_signaling: ("NO_COPY" | "COPY_FROM_VIDEO")?,
                                       profile: ("D_10" | "XDCAM" | "OP1A" | "XAVC" | "XDCAM_RDD9")?,
+                                      uncompressed_audio_wrapping: ("AUTO" | "AES3")?,
                                       xavc_profile_settings: {
                                         duration_mode: ("ALLOW_ANY_DURATION" | "DROP_FRAMES_FOR_COMPLIANCE")?,
                                         max_anc_data_size: ::Integer?
@@ -1579,6 +1580,7 @@ module Aws
                                         mode: ("DEINTERLACE" | "INVERSE_TELECINE" | "ADAPTIVE")?
                                       }?,
                                       dolby_vision: {
+                                        compatibility: ("DUPLICATE_STREAM" | "SUPPLEMENTAL_CODECS")?,
                                         l6_metadata: {
                                           max_cll: ::Integer?,
                                           max_fall: ::Integer?
@@ -2361,7 +2363,7 @@ module Aws
                                                    audio_description_broadcaster_mix: ("BROADCASTER_MIXED_AD" | "NORMAL")?,
                                                    bitrate: ::Integer?,
                                                    codec_profile: ("LC" | "HEV1" | "HEV2" | "XHE")?,
-                                                   coding_mode: ("AD_RECEIVER_MIX" | "CODING_MODE_1_0" | "CODING_MODE_1_1" | "CODING_MODE_2_0" | "CODING_MODE_5_1")?,
+                                                   coding_mode: ("AD_RECEIVER_MIX" | "CODING_MODE_1_0" | "CODING_MODE_1_1" | "CODING_MODE_2_0" | "CODING_MODE_5_1" | "CODING_MODE_AUTO")?,
                                                    loudness_measurement_mode: ("PROGRAM" | "ANCHOR")?,
                                                    rap_interval: ::Integer?,
                                                    rate_control_mode: ("CBR" | "VBR")?,
@@ -2374,7 +2376,7 @@ module Aws
                                                  ac_3_settings: {
                                                    bitrate: ::Integer?,
                                                    bitstream_mode: ("COMPLETE_MAIN" | "COMMENTARY" | "DIALOGUE" | "EMERGENCY" | "HEARING_IMPAIRED" | "MUSIC_AND_EFFECTS" | "VISUALLY_IMPAIRED" | "VOICE_OVER")?,
-                                                   coding_mode: ("CODING_MODE_1_0" | "CODING_MODE_1_1" | "CODING_MODE_2_0" | "CODING_MODE_3_2_LFE")?,
+                                                   coding_mode: ("CODING_MODE_1_0" | "CODING_MODE_1_1" | "CODING_MODE_2_0" | "CODING_MODE_3_2_LFE" | "CODING_MODE_AUTO")?,
                                                    dialnorm: ::Integer?,
                                                    dynamic_range_compression_line: ("FILM_STANDARD" | "FILM_LIGHT" | "MUSIC_STANDARD" | "MUSIC_LIGHT" | "SPEECH" | "NONE")?,
                                                    dynamic_range_compression_profile: ("FILM_STANDARD" | "NONE")?,
@@ -2412,7 +2414,7 @@ module Aws
                                                    attenuation_control: ("ATTENUATE_3_DB" | "NONE")?,
                                                    bitrate: ::Integer?,
                                                    bitstream_mode: ("COMPLETE_MAIN" | "COMMENTARY" | "EMERGENCY" | "HEARING_IMPAIRED" | "VISUALLY_IMPAIRED")?,
-                                                   coding_mode: ("CODING_MODE_1_0" | "CODING_MODE_2_0" | "CODING_MODE_3_2")?,
+                                                   coding_mode: ("CODING_MODE_1_0" | "CODING_MODE_2_0" | "CODING_MODE_3_2" | "CODING_MODE_AUTO")?,
                                                    dc_filter: ("ENABLED" | "DISABLED")?,
                                                    dialnorm: ::Integer?,
                                                    dynamic_range_compression_line: ("NONE" | "FILM_STANDARD" | "FILM_LIGHT" | "MUSIC_STANDARD" | "MUSIC_LIGHT" | "SPEECH")?,
@@ -2726,6 +2728,7 @@ module Aws
                                              mxf_settings: {
                                                afd_signaling: ("NO_COPY" | "COPY_FROM_VIDEO")?,
                                                profile: ("D_10" | "XDCAM" | "OP1A" | "XAVC" | "XDCAM_RDD9")?,
+                                               uncompressed_audio_wrapping: ("AUTO" | "AES3")?,
                                                xavc_profile_settings: {
                                                  duration_mode: ("ALLOW_ANY_DURATION" | "DROP_FRAMES_FOR_COMPLIANCE")?,
                                                  max_anc_data_size: ::Integer?
@@ -3126,6 +3129,7 @@ module Aws
                                                  mode: ("DEINTERLACE" | "INVERSE_TELECINE" | "ADAPTIVE")?
                                                }?,
                                                dolby_vision: {
+                                                 compatibility: ("DUPLICATE_STREAM" | "SUPPLEMENTAL_CODECS")?,
                                                  l6_metadata: {
                                                    max_cll: ::Integer?,
                                                    max_fall: ::Integer?
@@ -3250,7 +3254,7 @@ module Aws
                                      audio_description_broadcaster_mix: ("BROADCASTER_MIXED_AD" | "NORMAL")?,
                                      bitrate: ::Integer?,
                                      codec_profile: ("LC" | "HEV1" | "HEV2" | "XHE")?,
-                                     coding_mode: ("AD_RECEIVER_MIX" | "CODING_MODE_1_0" | "CODING_MODE_1_1" | "CODING_MODE_2_0" | "CODING_MODE_5_1")?,
+                                     coding_mode: ("AD_RECEIVER_MIX" | "CODING_MODE_1_0" | "CODING_MODE_1_1" | "CODING_MODE_2_0" | "CODING_MODE_5_1" | "CODING_MODE_AUTO")?,
                                      loudness_measurement_mode: ("PROGRAM" | "ANCHOR")?,
                                      rap_interval: ::Integer?,
                                      rate_control_mode: ("CBR" | "VBR")?,
@@ -3263,7 +3267,7 @@ module Aws
                                    ac_3_settings: {
                                      bitrate: ::Integer?,
                                      bitstream_mode: ("COMPLETE_MAIN" | "COMMENTARY" | "DIALOGUE" | "EMERGENCY" | "HEARING_IMPAIRED" | "MUSIC_AND_EFFECTS" | "VISUALLY_IMPAIRED" | "VOICE_OVER")?,
-                                     coding_mode: ("CODING_MODE_1_0" | "CODING_MODE_1_1" | "CODING_MODE_2_0" | "CODING_MODE_3_2_LFE")?,
+                                     coding_mode: ("CODING_MODE_1_0" | "CODING_MODE_1_1" | "CODING_MODE_2_0" | "CODING_MODE_3_2_LFE" | "CODING_MODE_AUTO")?,
                                      dialnorm: ::Integer?,
                                      dynamic_range_compression_line: ("FILM_STANDARD" | "FILM_LIGHT" | "MUSIC_STANDARD" | "MUSIC_LIGHT" | "SPEECH" | "NONE")?,
                                      dynamic_range_compression_profile: ("FILM_STANDARD" | "NONE")?,
@@ -3301,7 +3305,7 @@ module Aws
                                      attenuation_control: ("ATTENUATE_3_DB" | "NONE")?,
                                      bitrate: ::Integer?,
                                      bitstream_mode: ("COMPLETE_MAIN" | "COMMENTARY" | "EMERGENCY" | "HEARING_IMPAIRED" | "VISUALLY_IMPAIRED")?,
-                                     coding_mode: ("CODING_MODE_1_0" | "CODING_MODE_2_0" | "CODING_MODE_3_2")?,
+                                     coding_mode: ("CODING_MODE_1_0" | "CODING_MODE_2_0" | "CODING_MODE_3_2" | "CODING_MODE_AUTO")?,
                                      dc_filter: ("ENABLED" | "DISABLED")?,
                                      dialnorm: ::Integer?,
                                      dynamic_range_compression_line: ("NONE" | "FILM_STANDARD" | "FILM_LIGHT" | "MUSIC_STANDARD" | "MUSIC_LIGHT" | "SPEECH")?,
@@ -3614,6 +3618,7 @@ module Aws
                                mxf_settings: {
                                  afd_signaling: ("NO_COPY" | "COPY_FROM_VIDEO")?,
                                  profile: ("D_10" | "XDCAM" | "OP1A" | "XAVC" | "XDCAM_RDD9")?,
+                                 uncompressed_audio_wrapping: ("AUTO" | "AES3")?,
                                  xavc_profile_settings: {
                                    duration_mode: ("ALLOW_ANY_DURATION" | "DROP_FRAMES_FOR_COMPLIANCE")?,
                                    max_anc_data_size: ::Integer?
@@ -4000,6 +4005,7 @@ module Aws
                                    mode: ("DEINTERLACE" | "INVERSE_TELECINE" | "ADAPTIVE")?
                                  }?,
                                  dolby_vision: {
+                                   compatibility: ("DUPLICATE_STREAM" | "SUPPLEMENTAL_CODECS")?,
                                    l6_metadata: {
                                      max_cll: ::Integer?,
                                      max_fall: ::Integer?
@@ -5074,7 +5080,7 @@ module Aws
                                                    audio_description_broadcaster_mix: ("BROADCASTER_MIXED_AD" | "NORMAL")?,
                                                    bitrate: ::Integer?,
                                                    codec_profile: ("LC" | "HEV1" | "HEV2" | "XHE")?,
-                                                   coding_mode: ("AD_RECEIVER_MIX" | "CODING_MODE_1_0" | "CODING_MODE_1_1" | "CODING_MODE_2_0" | "CODING_MODE_5_1")?,
+                                                   coding_mode: ("AD_RECEIVER_MIX" | "CODING_MODE_1_0" | "CODING_MODE_1_1" | "CODING_MODE_2_0" | "CODING_MODE_5_1" | "CODING_MODE_AUTO")?,
                                                    loudness_measurement_mode: ("PROGRAM" | "ANCHOR")?,
                                                    rap_interval: ::Integer?,
                                                    rate_control_mode: ("CBR" | "VBR")?,
@@ -5087,7 +5093,7 @@ module Aws
                                                  ac_3_settings: {
                                                    bitrate: ::Integer?,
                                                    bitstream_mode: ("COMPLETE_MAIN" | "COMMENTARY" | "DIALOGUE" | "EMERGENCY" | "HEARING_IMPAIRED" | "MUSIC_AND_EFFECTS" | "VISUALLY_IMPAIRED" | "VOICE_OVER")?,
-                                                   coding_mode: ("CODING_MODE_1_0" | "CODING_MODE_1_1" | "CODING_MODE_2_0" | "CODING_MODE_3_2_LFE")?,
+                                                   coding_mode: ("CODING_MODE_1_0" | "CODING_MODE_1_1" | "CODING_MODE_2_0" | "CODING_MODE_3_2_LFE" | "CODING_MODE_AUTO")?,
                                                    dialnorm: ::Integer?,
                                                    dynamic_range_compression_line: ("FILM_STANDARD" | "FILM_LIGHT" | "MUSIC_STANDARD" | "MUSIC_LIGHT" | "SPEECH" | "NONE")?,
                                                    dynamic_range_compression_profile: ("FILM_STANDARD" | "NONE")?,
@@ -5125,7 +5131,7 @@ module Aws
                                                    attenuation_control: ("ATTENUATE_3_DB" | "NONE")?,
                                                    bitrate: ::Integer?,
                                                    bitstream_mode: ("COMPLETE_MAIN" | "COMMENTARY" | "EMERGENCY" | "HEARING_IMPAIRED" | "VISUALLY_IMPAIRED")?,
-                                                   coding_mode: ("CODING_MODE_1_0" | "CODING_MODE_2_0" | "CODING_MODE_3_2")?,
+                                                   coding_mode: ("CODING_MODE_1_0" | "CODING_MODE_2_0" | "CODING_MODE_3_2" | "CODING_MODE_AUTO")?,
                                                    dc_filter: ("ENABLED" | "DISABLED")?,
                                                    dialnorm: ::Integer?,
                                                    dynamic_range_compression_line: ("NONE" | "FILM_STANDARD" | "FILM_LIGHT" | "MUSIC_STANDARD" | "MUSIC_LIGHT" | "SPEECH")?,
@@ -5439,6 +5445,7 @@ module Aws
                                              mxf_settings: {
                                                afd_signaling: ("NO_COPY" | "COPY_FROM_VIDEO")?,
                                                profile: ("D_10" | "XDCAM" | "OP1A" | "XAVC" | "XDCAM_RDD9")?,
+                                               uncompressed_audio_wrapping: ("AUTO" | "AES3")?,
                                                xavc_profile_settings: {
                                                  duration_mode: ("ALLOW_ANY_DURATION" | "DROP_FRAMES_FOR_COMPLIANCE")?,
                                                  max_anc_data_size: ::Integer?
@@ -5839,6 +5846,7 @@ module Aws
                                                  mode: ("DEINTERLACE" | "INVERSE_TELECINE" | "ADAPTIVE")?
                                                }?,
                                                dolby_vision: {
+                                                 compatibility: ("DUPLICATE_STREAM" | "SUPPLEMENTAL_CODECS")?,
                                                  l6_metadata: {
                                                    max_cll: ::Integer?,
                                                    max_fall: ::Integer?
@@ -5962,7 +5970,7 @@ module Aws
                                      audio_description_broadcaster_mix: ("BROADCASTER_MIXED_AD" | "NORMAL")?,
                                      bitrate: ::Integer?,
                                      codec_profile: ("LC" | "HEV1" | "HEV2" | "XHE")?,
-                                     coding_mode: ("AD_RECEIVER_MIX" | "CODING_MODE_1_0" | "CODING_MODE_1_1" | "CODING_MODE_2_0" | "CODING_MODE_5_1")?,
+                                     coding_mode: ("AD_RECEIVER_MIX" | "CODING_MODE_1_0" | "CODING_MODE_1_1" | "CODING_MODE_2_0" | "CODING_MODE_5_1" | "CODING_MODE_AUTO")?,
                                      loudness_measurement_mode: ("PROGRAM" | "ANCHOR")?,
                                      rap_interval: ::Integer?,
                                      rate_control_mode: ("CBR" | "VBR")?,
@@ -5975,7 +5983,7 @@ module Aws
                                    ac_3_settings: {
                                      bitrate: ::Integer?,
                                      bitstream_mode: ("COMPLETE_MAIN" | "COMMENTARY" | "DIALOGUE" | "EMERGENCY" | "HEARING_IMPAIRED" | "MUSIC_AND_EFFECTS" | "VISUALLY_IMPAIRED" | "VOICE_OVER")?,
-                                     coding_mode: ("CODING_MODE_1_0" | "CODING_MODE_1_1" | "CODING_MODE_2_0" | "CODING_MODE_3_2_LFE")?,
+                                     coding_mode: ("CODING_MODE_1_0" | "CODING_MODE_1_1" | "CODING_MODE_2_0" | "CODING_MODE_3_2_LFE" | "CODING_MODE_AUTO")?,
                                      dialnorm: ::Integer?,
                                      dynamic_range_compression_line: ("FILM_STANDARD" | "FILM_LIGHT" | "MUSIC_STANDARD" | "MUSIC_LIGHT" | "SPEECH" | "NONE")?,
                                      dynamic_range_compression_profile: ("FILM_STANDARD" | "NONE")?,
@@ -6013,7 +6021,7 @@ module Aws
                                      attenuation_control: ("ATTENUATE_3_DB" | "NONE")?,
                                      bitrate: ::Integer?,
                                      bitstream_mode: ("COMPLETE_MAIN" | "COMMENTARY" | "EMERGENCY" | "HEARING_IMPAIRED" | "VISUALLY_IMPAIRED")?,
-                                     coding_mode: ("CODING_MODE_1_0" | "CODING_MODE_2_0" | "CODING_MODE_3_2")?,
+                                     coding_mode: ("CODING_MODE_1_0" | "CODING_MODE_2_0" | "CODING_MODE_3_2" | "CODING_MODE_AUTO")?,
                                      dc_filter: ("ENABLED" | "DISABLED")?,
                                      dialnorm: ::Integer?,
                                      dynamic_range_compression_line: ("NONE" | "FILM_STANDARD" | "FILM_LIGHT" | "MUSIC_STANDARD" | "MUSIC_LIGHT" | "SPEECH")?,
@@ -6326,6 +6334,7 @@ module Aws
                                mxf_settings: {
                                  afd_signaling: ("NO_COPY" | "COPY_FROM_VIDEO")?,
                                  profile: ("D_10" | "XDCAM" | "OP1A" | "XAVC" | "XDCAM_RDD9")?,
+                                 uncompressed_audio_wrapping: ("AUTO" | "AES3")?,
                                  xavc_profile_settings: {
                                    duration_mode: ("ALLOW_ANY_DURATION" | "DROP_FRAMES_FOR_COMPLIANCE")?,
                                    max_anc_data_size: ::Integer?
@@ -6712,6 +6721,7 @@ module Aws
                                    mode: ("DEINTERLACE" | "INVERSE_TELECINE" | "ADAPTIVE")?
                                  }?,
                                  dolby_vision: {
+                                   compatibility: ("DUPLICATE_STREAM" | "SUPPLEMENTAL_CODECS")?,
                                    l6_metadata: {
                                      max_cll: ::Integer?,
                                      max_fall: ::Integer?

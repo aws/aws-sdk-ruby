@@ -23,6 +23,29 @@ module Aws::Transfer
       include Aws::Structure
     end
 
+    # Contains the configuration details for asynchronous Message
+    # Disposition Notification (MDN) responses in AS2 connectors. This
+    # configuration specifies where asynchronous MDN responses should be
+    # sent and which servers should handle them.
+    #
+    # @!attribute [rw] url
+    #   The URL endpoint where asynchronous MDN responses should be sent.
+    #   @return [String]
+    #
+    # @!attribute [rw] server_ids
+    #   A list of server identifiers that can handle asynchronous MDN
+    #   responses. You can specify between 1 and 10 server IDs.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/As2AsyncMdnConnectorConfig AWS API Documentation
+    #
+    class As2AsyncMdnConnectorConfig < Struct.new(
+      :url,
+      :server_ids)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains the details for an AS2 connector object. The connector object
     # is used for AS2 outbound processes, to connect the Transfer Family
     # customer with the trading partner.
@@ -127,6 +150,13 @@ module Aws::Transfer
     #   when you create an AS2 connector by calling the API directly.
     #   @return [String]
     #
+    # @!attribute [rw] async_mdn_config
+    #   Configuration settings for asynchronous Message Disposition
+    #   Notification (MDN) responses. This allows you to configure where
+    #   asynchronous MDN responses should be sent and which servers should
+    #   handle them.
+    #   @return [Types::As2AsyncMdnConnectorConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/As2ConnectorConfig AWS API Documentation
     #
     class As2ConnectorConfig < Struct.new(
@@ -139,8 +169,9 @@ module Aws::Transfer
       :mdn_signing_algorithm,
       :mdn_response,
       :basic_auth_secret_id,
-      :preserve_content_type)
-      SENSITIVE = []
+      :preserve_content_type,
+      :async_mdn_config)
+      SENSITIVE = [:message_subject]
       include Aws::Structure
     end
 
@@ -1511,6 +1542,26 @@ module Aws::Transfer
       :status_files_directory,
       :temporary_files_directory)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents a custom HTTP header that can be included in AS2 messages.
+    # Each header consists of a key-value pair.
+    #
+    # @!attribute [rw] key
+    #   The name of the custom HTTP header.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value of the custom HTTP header.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/CustomHttpHeader AWS API Documentation
+    #
+    class CustomHttpHeader < Struct.new(
+      :key,
+      :value)
+      SENSITIVE = [:key, :value]
       include Aws::Structure
     end
 
@@ -6262,6 +6313,12 @@ module Aws::Transfer
     #   SFTP user's home directory.
     #   @return [String]
     #
+    # @!attribute [rw] custom_http_headers
+    #   An array of key-value pairs that represent custom HTTP headers to
+    #   include in AS2 messages. These headers are added to the AS2 message
+    #   when sending files to your trading partner.
+    #   @return [Array<Types::CustomHttpHeader>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/StartFileTransferRequest AWS API Documentation
     #
     class StartFileTransferRequest < Struct.new(
@@ -6269,8 +6326,9 @@ module Aws::Transfer
       :send_file_paths,
       :retrieve_file_paths,
       :local_directory_path,
-      :remote_directory_path)
-      SENSITIVE = []
+      :remote_directory_path,
+      :custom_http_headers)
+      SENSITIVE = [:custom_http_headers]
       include Aws::Structure
     end
 

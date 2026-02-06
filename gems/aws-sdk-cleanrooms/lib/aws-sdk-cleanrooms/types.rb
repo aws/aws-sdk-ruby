@@ -240,9 +240,8 @@ module Aws::CleanRooms
     # literal data value in an analysis template.
     #
     # @!attribute [rw] name
-    #   The name of the parameter. The name must use only alphanumeric,
-    #   underscore (\_), or hyphen (-) characters but cannot start or end
-    #   with a hyphen.
+    #   The name of the parameter. The name must use only alphanumeric or
+    #   underscore (\_) characters.
     #   @return [String]
     #
     # @!attribute [rw] type
@@ -8131,11 +8130,18 @@ module Aws::CleanRooms
     #   The ARN of the analysis template.
     #   @return [String]
     #
+    # @!attribute [rw] parameters
+    #   Runtime configuration values passed to the PySpark analysis script.
+    #   Parameter names and types must match those defined in the analysis
+    #   template.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ProtectedJobParameters AWS API Documentation
     #
     class ProtectedJobParameters < Struct.new(
-      :analysis_template_arn)
-      SENSITIVE = []
+      :analysis_template_arn,
+      :parameters)
+      SENSITIVE = [:parameters]
       include Aws::Structure
     end
 
