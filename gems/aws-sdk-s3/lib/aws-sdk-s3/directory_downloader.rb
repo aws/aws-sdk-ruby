@@ -17,7 +17,7 @@ module Aws
         @mutex.synchronize { @abort_requested }
       end
 
-      def request_abort
+      def abort
         @mutex.synchronize { @abort_requested = true }
       end
 
@@ -78,7 +78,7 @@ module Aws
         progress&.call(File.size(entry.path))
       rescue StandardError => e
         @mutex.synchronize { errors << e }
-        request_abort unless opts[:ignore_failure]
+        abort unless opts[:ignore_failure]
       end
 
       def process_download_queue(producer, downloader, opts)
@@ -100,7 +100,7 @@ module Aws
           end
         rescue StandardError => e
           @mutex.synchronize { errors << e }
-          request_abort
+          abort
         end
         download_attempts.times { completion_queue.pop }
         [download_attempts, errors]

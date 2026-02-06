@@ -19,7 +19,7 @@ module Aws
         @mutex.synchronize { @abort_requested }
       end
 
-      def request_abort
+      def abort
         @mutex.synchronize { @abort_requested = true }
       end
 
@@ -89,7 +89,7 @@ module Aws
           end
         rescue StandardError => e
           @mutex.synchronize { errors << e }
-          request_abort
+          abort
         end
         upload_attempts.times { completion_queue.pop }
         [upload_attempts, errors]
@@ -102,7 +102,7 @@ module Aws
         progress&.call(File.size(entry.path))
       rescue StandardError => e
         @mutex.synchronize { errors << e }
-        request_abort unless opts[:ignore_failure]
+        abort unless opts[:ignore_failure]
       end
 
       # @api private
@@ -133,7 +133,7 @@ module Aws
               find_directly
             end
           rescue StandardError => e
-            @directory_uploader.request_abort
+            @directory_uploader.abort
             @file_queue.clear
 
             err = DirectoryUploadError.new("Directory traversal failed for '#{@source_dir}': #{e.message}")

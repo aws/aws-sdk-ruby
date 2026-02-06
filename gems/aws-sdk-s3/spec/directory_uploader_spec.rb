@@ -51,7 +51,7 @@ module Aws
           call_count = 0
           allow(client).to receive(:put_object) do
             call_count += 1
-            uploader.request_abort if call_count == 2
+            uploader.abort if call_count == 2
           end
 
           expect do
