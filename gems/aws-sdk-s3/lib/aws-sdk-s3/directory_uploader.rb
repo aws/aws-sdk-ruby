@@ -15,7 +15,7 @@ module Aws
 
       attr_reader :client, :executor
 
-      def abort_requested
+      def abort_requested?
         @mutex.synchronize { @abort_requested }
       end
 
@@ -58,7 +58,7 @@ module Aws
       end
 
       def build_result(upload_count, errors)
-        if abort_requested
+        if abort_requested?
           msg = "directory upload failed: #{errors.map(&:message).join('; ')}"
           raise DirectoryUploadError.new(msg, errors)
         else
@@ -78,7 +78,7 @@ module Aws
         errors = []
         begin
           producer.each do |file|
-            break if abort_requested
+            break if abort_requested?
 
             upload_attempts += 1
             queue_executor.post(file) do |f|
@@ -142,7 +142,7 @@ module Aws
           end
 
           while (file = @file_queue.shift) != DONE_MARKER
-            break if @directory_uploader.abort_requested
+            break if @directory_uploader.abort_requested?
 
             yield file
           end
@@ -168,7 +168,7 @@ module Aws
 
         def find_directly
           Dir.each_child(@source_dir) do |entry|
-            break if @directory_uploader.abort_requested
+            break if @directory_uploader.abort_requested?
 
             entry_path = File.join(@source_dir, entry)
             stat = nil
@@ -205,10 +205,10 @@ module Aws
         end
 
         def scan_directory(dir_path, key_prefix: '', ancestors: nil)
-          return if @directory_uploader.abort_requested
+          return if @directory_uploader.abort_requested?
 
           Dir.each_child(dir_path) do |entry|
-            break if @directory_uploader.abort_requested
+            break if @directory_uploader.abort_requested?
 
             full_path = File.join(dir_path, entry)
             next unless include_file?(full_path, entry)

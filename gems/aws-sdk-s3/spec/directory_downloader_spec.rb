@@ -12,7 +12,7 @@ module Aws
       describe '#initialize' do
         it 'constructs with default options' do
           downloader = DirectoryDownloader.new
-          expect(downloader.abort_requested).to be false
+          expect(downloader.abort_requested?).to be false
         end
 
         it 'accepts client and executor options' do

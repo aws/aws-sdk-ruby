@@ -12,7 +12,7 @@ module Aws
       describe '#initialize' do
         it 'constructs with default options' do
           uploader = DirectoryUploader.new
-          expect(uploader.abort_requested).to be false
+          expect(uploader.abort_requested?).to be false
         end
 
         it 'accepts client and executor options' do

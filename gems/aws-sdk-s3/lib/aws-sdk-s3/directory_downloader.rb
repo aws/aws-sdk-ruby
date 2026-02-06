@@ -13,7 +13,7 @@ module Aws
 
       attr_reader :client, :executor
 
-      def abort_requested
+      def abort_requested?
         @mutex.synchronize { @abort_requested }
       end
 
@@ -58,7 +58,7 @@ module Aws
       end
 
       def build_result(download_count, errors)
-        if abort_requested
+        if abort_requested?
           msg = "directory download failed: #{errors.map(&:message).join('; ')}"
           raise DirectoryDownloadError.new(msg, errors)
         else
@@ -89,7 +89,7 @@ module Aws
         errors = []
         begin
           producer.each do |object|
-            break if abort_requested
+            break if abort_requested?
 
             download_attempts += 1
             queue_executor.post(object) do |o|
@@ -135,7 +135,7 @@ module Aws
 
           # Yield objects from internal queue
           while (object = @object_queue.shift) != DONE_MARKER
-            break if @directory_downloader.abort_requested
+            break if @directory_downloader.abort_requested?
 
             yield object
           end
@@ -179,7 +179,7 @@ module Aws
         def stream_objects(continuation_token: nil)
           resp = @client.list_objects_v2(bucket: @bucket, prefix: @s3_prefix, continuation_token: continuation_token)
           resp.contents&.each do |o|
-            break if @directory_downloader.abort_requested
+            break if @directory_downloader.abort_requested?
 
             next if directory_marker?(o)
             next unless include_object?(o.key)
