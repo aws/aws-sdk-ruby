@@ -12,7 +12,6 @@ module Aws
     # transfer manager + multipart upload/download utilities
     autoload :DefaultExecutor, 'aws-sdk-s3/default_executor'
     autoload :FilePart, 'aws-sdk-s3/file_part'
-    autoload :DefaultExecutor, 'aws-sdk-s3/default_executor'
     autoload :FileUploader, 'aws-sdk-s3/file_uploader'
     autoload :FileDownloader, 'aws-sdk-s3/file_downloader'
     autoload :MultipartDownloadError, 'aws-sdk-s3/multipart_download_error'
