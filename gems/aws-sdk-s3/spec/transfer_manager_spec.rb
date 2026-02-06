@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative 'transfer_manger_spec_helper'
+require_relative 'transfer_manager_spec_helper'
 
 module Aws
   module S3
