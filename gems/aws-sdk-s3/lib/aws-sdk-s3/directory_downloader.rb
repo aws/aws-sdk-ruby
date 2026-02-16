@@ -152,9 +152,11 @@ module Aws
         def build_object_entry(key)
           params = { bucket: @bucket, key: key }
           params = apply_request_callback(key, params) if @request_callback
-          normalized_key = normalize_key(key)
-          full_path = File.join(@destination_dir, normalized_key)
-          error = validate_path(full_path, key)
+          error = validate_key(key)
+          return DownloadEntry.new(path: '', params: params, error: error) if error
+
+          updated_key = build_key(key)
+          full_path = normalize_path(File.join(@destination_dir, updated_key))
           DownloadEntry.new(path: full_path, params: params, error: error)
         end
 
@@ -168,12 +170,17 @@ module Aws
           obj.key.end_with?('/') && obj.size.zero?
         end
 
-        def normalize_key(key)
-          if @s3_prefix
-            prefix = @s3_prefix.end_with?('/') ? @s3_prefix : "#{@s3_prefix}/"
-            key = key.delete_prefix(prefix)
-          end
-          File::SEPARATOR == '/' ? key : key.tr('/', File::SEPARATOR)
+        def build_key(key)
+          return key unless @s3_prefix
+
+          prefix = @s3_prefix.end_with?('/') ? @s3_prefix : "#{@s3_prefix}/"
+          key.delete_prefix(prefix)
+        end
+
+        def normalize_path(path)
+          return path unless File::SEPARATOR == '/'
+
+          path.tr('/', File::SEPARATOR)
         end
 
         def stream_objects(continuation_token: nil)
@@ -189,8 +196,8 @@ module Aws
           stream_objects(continuation_token: resp.next_continuation_token) if resp.next_continuation_token
         end
 
-        def validate_path(path, key)
-          segments = path.split('/')
+        def validate_key(key)
+          segments = key.split('/')
           return unless segments.any? { |s| %w[. ..].include?(s) }
 
           DirectoryDownloadError.new("invalid key '#{key}': contains '.' or '..' path segments")
