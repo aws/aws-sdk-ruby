@@ -146,6 +146,20 @@ module Aws::RDS
       data[:storage_encrypted]
     end
 
+    # The number of days for which automatic DB snapshots are retained.
+    # @return [Integer]
+    def backup_retention_period
+      data[:backup_retention_period]
+    end
+
+    # The daily time range during which automated backups are created if
+    # automated backups are enabled, as determined by the
+    # `BackupRetentionPeriod`.
+    # @return [String]
+    def preferred_backup_window
+      data[:preferred_backup_window]
+    end
+
     # If `StorageEncrypted` is true, the Amazon Web Services KMS key
     # identifier for the encrypted DB cluster snapshot.
     #
@@ -605,6 +619,8 @@ module Aws::RDS
     #     enable_performance_insights: false,
     #     performance_insights_kms_key_id: "String",
     #     performance_insights_retention_period: 1,
+    #     backup_retention_period: 1,
+    #     preferred_backup_window: "String",
     #     engine_lifecycle_support: "String",
     #     tag_specifications: [
     #       {
@@ -1049,6 +1065,44 @@ module Aws::RDS
     #
     #   If you specify a retention period that isn't valid, such as `94`,
     #   Amazon RDS issues an error.
+    # @option options [Integer] :backup_retention_period
+    #   The number of days for which automated backups are retained. Specify a
+    #   minimum value of `1`.
+    #
+    #   Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters
+    #
+    #   Default: Uses existing setting
+    #
+    #   Constraints:
+    #
+    #   * Must be a value from 1 to 35.
+    #
+    #   ^
+    # @option options [String] :preferred_backup_window
+    #   The daily time range during which automated backups are created if
+    #   automated backups are enabled, using the `BackupRetentionPeriod`
+    #   parameter.
+    #
+    #   The default is a 30-minute window selected at random from an 8-hour
+    #   block of time for each Amazon Web Services Region. To view the time
+    #   blocks available, see [ Backup window][1] in the *Amazon Aurora User
+    #   Guide*.
+    #
+    #   Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters
+    #
+    #   Constraints:
+    #
+    #   * Must be in the format `hh24:mi-hh24:mi`.
+    #
+    #   * Must be in Universal Coordinated Time (UTC).
+    #
+    #   * Must not conflict with the preferred maintenance window.
+    #
+    #   * Must be at least 30 minutes.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.Managing.Backups.html#Aurora.Managing.Backups.BackupWindow
     # @option options [String] :engine_lifecycle_support
     #   The life cycle type for this DB cluster.
     #

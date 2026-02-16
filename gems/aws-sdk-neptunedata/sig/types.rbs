@@ -856,6 +856,7 @@ module Aws::Neptunedata
       attr_accessor queue_request: bool
       attr_accessor dependencies: ::Array[::String]
       attr_accessor user_provided_edge_ids: bool
+      attr_accessor edge_only_load: bool
       SENSITIVE: []
     end
 

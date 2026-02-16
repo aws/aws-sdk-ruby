@@ -2945,6 +2945,26 @@ module Aws::EKS
     #   like S3 buckets in the target account.
     #   @return [String]
     #
+    # @!attribute [rw] policy
+    #   An optional IAM policy in JSON format (as an escaped string) that
+    #   applies additional restrictions to this pod identity association
+    #   beyond the IAM policies attached to the IAM role. This policy is
+    #   applied as the intersection of the role's policies and this policy,
+    #   allowing you to reduce the permissions that applications in the pods
+    #   can use. Use this policy to enforce least privilege access while
+    #   still leveraging a shared IAM role across multiple applications.
+    #
+    #   **Important considerations**
+    #
+    #   * **Session tags:** When using this policy, `disableSessionTags`
+    #     must be set to `true`.
+    #
+    #   * **Target role permissions:** If you specify both a `TargetRoleArn`
+    #     and a policy, the policy restrictions apply only to the target
+    #     role's permissions, not to the initial role used for assuming the
+    #     target role.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/CreatePodIdentityAssociationRequest AWS API Documentation
     #
     class CreatePodIdentityAssociationRequest < Struct.new(
@@ -2955,7 +2975,8 @@ module Aws::EKS
       :client_request_token,
       :tags,
       :disable_session_tags,
-      :target_role_arn)
+      :target_role_arn,
+      :policy)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6745,6 +6766,16 @@ module Aws::EKS
     #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/confused-deputy.html
     #   @return [String]
     #
+    # @!attribute [rw] policy
+    #   An optional IAM policy in JSON format (as an escaped string) that
+    #   applies additional restrictions to this pod identity association
+    #   beyond the IAM policies attached to the IAM role. This policy is
+    #   applied as the intersection of the role's policies and this policy,
+    #   allowing you to reduce the permissions that applications in the pods
+    #   can use. Use this policy to enforce least privilege access while
+    #   still leveraging a shared IAM role across multiple applications.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/PodIdentityAssociation AWS API Documentation
     #
     class PodIdentityAssociation < Struct.new(
@@ -6760,7 +6791,8 @@ module Aws::EKS
       :owner_arn,
       :disable_session_tags,
       :target_role_arn,
-      :external_id)
+      :external_id,
+      :policy)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8379,6 +8411,26 @@ module Aws::EKS
     #   like S3 buckets in the target account.
     #   @return [String]
     #
+    # @!attribute [rw] policy
+    #   An optional IAM policy in JSON format (as an escaped string) that
+    #   applies additional restrictions to this pod identity association
+    #   beyond the IAM policies attached to the IAM role. This policy is
+    #   applied as the intersection of the role's policies and this policy,
+    #   allowing you to reduce the permissions that applications in the pods
+    #   can use. Use this policy to enforce least privilege access while
+    #   still leveraging a shared IAM role across multiple applications.
+    #
+    #   **Important considerations**
+    #
+    #   * **Session tags:** When using this policy, `disableSessionTags`
+    #     must be set to `true`.
+    #
+    #   * **Target role permissions:** If you specify both a `TargetRoleArn`
+    #     and a policy, the policy restrictions apply only to the target
+    #     role's permissions, not to the initial role used for assuming the
+    #     target role.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/UpdatePodIdentityAssociationRequest AWS API Documentation
     #
     class UpdatePodIdentityAssociationRequest < Struct.new(
@@ -8387,7 +8439,8 @@ module Aws::EKS
       :role_arn,
       :client_request_token,
       :disable_session_tags,
-      :target_role_arn)
+      :target_role_arn,
+      :policy)
       SENSITIVE = []
       include Aws::Structure
     end

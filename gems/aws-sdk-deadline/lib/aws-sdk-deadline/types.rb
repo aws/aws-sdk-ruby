@@ -1337,6 +1337,12 @@ module Aws::Deadline
     #   the job template.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   The tags to add to your job. Each tag consists of a tag key and a
+    #   tag value. Tag keys and values are both required, but tag values can
+    #   be empty strings.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/deadline-2023-10-12/CreateJobRequest AWS API Documentation
     #
     class CreateJobRequest < Struct.new(
@@ -1355,7 +1361,8 @@ module Aws::Deadline
       :max_worker_count,
       :source_job_id,
       :name_override,
-      :description_override)
+      :description_override,
+      :tags)
       SENSITIVE = [:template, :parameters, :description_override]
       include Aws::Structure
     end

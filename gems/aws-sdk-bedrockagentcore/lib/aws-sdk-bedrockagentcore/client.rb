@@ -1033,6 +1033,7 @@ module Aws::BedrockAgentCore
     #   * {Types::GetBrowserSessionResponse#session_timeout_seconds #session_timeout_seconds} => Integer
     #   * {Types::GetBrowserSessionResponse#status #status} => String
     #   * {Types::GetBrowserSessionResponse#streams #streams} => Types::BrowserSessionStream
+    #   * {Types::GetBrowserSessionResponse#proxy_configuration #proxy_configuration} => Types::ProxyConfiguration
     #   * {Types::GetBrowserSessionResponse#session_replay_artifact #session_replay_artifact} => String
     #   * {Types::GetBrowserSessionResponse#last_updated_at #last_updated_at} => Time
     #
@@ -1061,6 +1062,14 @@ module Aws::BedrockAgentCore
     #   resp.streams.automation_stream.stream_endpoint #=> String
     #   resp.streams.automation_stream.stream_status #=> String, one of "ENABLED", "DISABLED"
     #   resp.streams.live_view_stream.stream_endpoint #=> String
+    #   resp.proxy_configuration.proxies #=> Array
+    #   resp.proxy_configuration.proxies[0].external_proxy.server #=> String
+    #   resp.proxy_configuration.proxies[0].external_proxy.port #=> Integer
+    #   resp.proxy_configuration.proxies[0].external_proxy.domain_patterns #=> Array
+    #   resp.proxy_configuration.proxies[0].external_proxy.domain_patterns[0] #=> String
+    #   resp.proxy_configuration.proxies[0].external_proxy.credentials.basic_auth.secret_arn #=> String
+    #   resp.proxy_configuration.bypass.domain_patterns #=> Array
+    #   resp.proxy_configuration.bypass.domain_patterns[0] #=> String
     #   resp.session_replay_artifact #=> String
     #   resp.last_updated_at #=> Time
     #
@@ -2638,6 +2647,13 @@ module Aws::BedrockAgentCore
     #   continuity for tasks that require authentication or personalized
     #   settings.
     #
+    # @option params [Types::ProxyConfiguration] :proxy_configuration
+    #   Optional proxy configuration for routing browser traffic through
+    #   customer-specified proxy servers. When provided, enables HTTP Basic
+    #   authentication via Amazon Web Services Secrets Manager and
+    #   domain-based routing rules. Requires `secretsmanager:GetSecretValue`
+    #   IAM permission for the specified secret ARNs.
+    #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier to ensure that the API request
     #   completes no more than one time. If this token matches a previous
@@ -2680,6 +2696,25 @@ module Aws::BedrockAgentCore
     #     ],
     #     profile_configuration: {
     #       profile_identifier: "BrowserProfileId", # required
+    #     },
+    #     proxy_configuration: {
+    #       proxies: [ # required
+    #         {
+    #           external_proxy: {
+    #             server: "HostName", # required
+    #             port: 1, # required
+    #             domain_patterns: ["DomainPattern"],
+    #             credentials: {
+    #               basic_auth: {
+    #                 secret_arn: "SecretArn", # required
+    #               },
+    #             },
+    #           },
+    #         },
+    #       ],
+    #       bypass: {
+    #         domain_patterns: ["DomainPattern"],
+    #       },
     #     },
     #     client_token: "ClientToken",
     #   })
@@ -3107,7 +3142,7 @@ module Aws::BedrockAgentCore
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrockagentcore'
-      context[:gem_version] = '1.18.0'
+      context[:gem_version] = '1.19.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

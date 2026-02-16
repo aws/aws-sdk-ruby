@@ -591,6 +591,7 @@ module Aws
         def resource_snapshot_template_name: () -> ::String
         def revision: () -> ::Integer
         def payload: () -> Types::ResourceSnapshotPayload
+        def target_member_accounts: () -> ::Array[::String]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PartnerCentralSelling/Client.html#get_resource_snapshot-instance_method
       def get_resource_snapshot: (
@@ -765,7 +766,7 @@ module Aws
                                 ?next_token: ::String,
                                 ?sort: {
                                   sort_order: ("ASCENDING" | "DESCENDING"),
-                                  sort_by: ("LastModifiedDate" | "Identifier" | "CustomerCompanyName")
+                                  sort_by: ("LastModifiedDate" | "Identifier" | "CustomerCompanyName" | "CreatedDate")
                                 },
                                 ?last_modified_date: {
                                   after_last_modified_date: ::Time?,
@@ -774,7 +775,11 @@ module Aws
                                 ?identifier: Array[::String],
                                 ?life_cycle_stage: Array[("Prospect" | "Qualified" | "Technical Validation" | "Business Validation" | "Committed" | "Launched" | "Closed Lost")],
                                 ?life_cycle_review_status: Array[("Pending Submission" | "Submitted" | "In review" | "Approved" | "Rejected" | "Action Required")],
-                                ?customer_company_name: Array[::String]
+                                ?customer_company_name: Array[::String],
+                                ?created_date: {
+                                  after_created_date: ::Time?,
+                                  before_created_date: ::Time?
+                                }
                               ) -> _ListOpportunitiesResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListOpportunitiesResponseSuccess
 

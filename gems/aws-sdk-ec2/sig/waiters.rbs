@@ -376,6 +376,82 @@ module Aws
                 | (Hash[Symbol, untyped]) -> Client::_GetPasswordDataResponseSuccess
       end
 
+      class SecondaryNetworkCreateComplete
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    ?dry_run: bool,
+                    ?filters: Array[
+                      {
+                        name: ::String?,
+                        values: Array[::String]?
+                      },
+                    ],
+                    ?max_results: ::Integer,
+                    ?next_token: ::String,
+                    ?secondary_network_ids: Array[::String]
+                  ) -> Client::_DescribeSecondaryNetworksResponseSuccess
+                | (?Hash[Symbol, untyped]) -> Client::_DescribeSecondaryNetworksResponseSuccess
+      end
+
+      class SecondaryNetworkDeleteComplete
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    ?dry_run: bool,
+                    ?filters: Array[
+                      {
+                        name: ::String?,
+                        values: Array[::String]?
+                      },
+                    ],
+                    ?max_results: ::Integer,
+                    ?next_token: ::String,
+                    ?secondary_network_ids: Array[::String]
+                  ) -> Client::_DescribeSecondaryNetworksResponseSuccess
+                | (?Hash[Symbol, untyped]) -> Client::_DescribeSecondaryNetworksResponseSuccess
+      end
+
+      class SecondarySubnetCreateComplete
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    ?dry_run: bool,
+                    ?filters: Array[
+                      {
+                        name: ::String?,
+                        values: Array[::String]?
+                      },
+                    ],
+                    ?max_results: ::Integer,
+                    ?next_token: ::String,
+                    ?secondary_subnet_ids: Array[::String]
+                  ) -> Client::_DescribeSecondarySubnetsResponseSuccess
+                | (?Hash[Symbol, untyped]) -> Client::_DescribeSecondarySubnetsResponseSuccess
+      end
+
+      class SecondarySubnetDeleteComplete
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    ?dry_run: bool,
+                    ?filters: Array[
+                      {
+                        name: ::String?,
+                        values: Array[::String]?
+                      },
+                    ],
+                    ?max_results: ::Integer,
+                    ?next_token: ::String,
+                    ?secondary_subnet_ids: Array[::String]
+                  ) -> Client::_DescribeSecondarySubnetsResponseSuccess
+                | (?Hash[Symbol, untyped]) -> Client::_DescribeSecondarySubnetsResponseSuccess
+      end
+
       class SecurityGroupExists
         def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
                       | (?Hash[Symbol, untyped]) -> void

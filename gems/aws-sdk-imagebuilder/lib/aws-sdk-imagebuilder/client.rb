@@ -1653,7 +1653,7 @@ module Aws::Imagebuilder
     #       recipes: [
     #         {
     #           name: "ResourceName", # required
-    #           semantic_version: "VersionNumber", # required
+    #           semantic_version: "WildcardVersionNumber", # required
     #         },
     #       ],
     #       tag_map: {
@@ -6055,7 +6055,7 @@ module Aws::Imagebuilder
     #       recipes: [
     #         {
     #           name: "ResourceName", # required
-    #           semantic_version: "VersionNumber", # required
+    #           semantic_version: "WildcardVersionNumber", # required
     #         },
     #       ],
     #       tag_map: {
@@ -6096,7 +6096,7 @@ module Aws::Imagebuilder
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-imagebuilder'
-      context[:gem_version] = '1.97.0'
+      context[:gem_version] = '1.98.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

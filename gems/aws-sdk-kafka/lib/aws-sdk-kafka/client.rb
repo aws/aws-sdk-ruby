@@ -994,6 +994,49 @@ module Aws::Kafka
       req.send_request(options)
     end
 
+    # Creates a topic in the specified MSK cluster.
+    #
+    # @option params [required, String] :cluster_arn
+    #
+    # @option params [required, String] :topic_name
+    #
+    # @option params [required, Integer] :partition_count
+    #
+    # @option params [required, Integer] :replication_factor
+    #
+    # @option params [String] :configs
+    #
+    # @return [Types::CreateTopicResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateTopicResponse#topic_arn #topic_arn} => String
+    #   * {Types::CreateTopicResponse#topic_name #topic_name} => String
+    #   * {Types::CreateTopicResponse#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_topic({
+    #     cluster_arn: "__string", # required
+    #     topic_name: "__string", # required
+    #     partition_count: 1, # required
+    #     replication_factor: 1, # required
+    #     configs: "__string",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.topic_arn #=> String
+    #   resp.topic_name #=> String
+    #   resp.status #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/CreateTopic AWS API Documentation
+    #
+    # @overload create_topic(params = {})
+    # @param [Hash] params ({})
+    def create_topic(params = {}, options = {})
+      req = build_request(:create_topic, params)
+      req.send_request(options)
+    end
+
     # Creates a new Amazon MSK VPC connection.
     #
     # @option params [required, String] :target_cluster_arn
@@ -1153,6 +1196,40 @@ module Aws::Kafka
     # @param [Hash] params ({})
     def delete_replicator(params = {}, options = {})
       req = build_request(:delete_replicator, params)
+      req.send_request(options)
+    end
+
+    # Deletes a topic in the specified MSK cluster.
+    #
+    # @option params [required, String] :cluster_arn
+    #
+    # @option params [required, String] :topic_name
+    #
+    # @return [Types::DeleteTopicResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteTopicResponse#topic_arn #topic_arn} => String
+    #   * {Types::DeleteTopicResponse#topic_name #topic_name} => String
+    #   * {Types::DeleteTopicResponse#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_topic({
+    #     cluster_arn: "__string", # required
+    #     topic_name: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.topic_arn #=> String
+    #   resp.topic_name #=> String
+    #   resp.status #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/DeleteTopic AWS API Documentation
+    #
+    # @overload delete_topic(params = {})
+    # @param [Hash] params ({})
+    def delete_topic(params = {}, options = {})
+      req = build_request(:delete_topic, params)
       req.send_request(options)
     end
 
@@ -3604,6 +3681,47 @@ module Aws::Kafka
       req.send_request(options)
     end
 
+    # Updates the topic configuration or partition count in the specified
+    # MSK cluster.
+    #
+    # @option params [required, String] :cluster_arn
+    #
+    # @option params [required, String] :topic_name
+    #
+    # @option params [String] :configs
+    #
+    # @option params [Integer] :partition_count
+    #
+    # @return [Types::UpdateTopicResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateTopicResponse#topic_arn #topic_arn} => String
+    #   * {Types::UpdateTopicResponse#topic_name #topic_name} => String
+    #   * {Types::UpdateTopicResponse#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_topic({
+    #     cluster_arn: "__string", # required
+    #     topic_name: "__string", # required
+    #     configs: "__string",
+    #     partition_count: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.topic_arn #=> String
+    #   resp.topic_name #=> String
+    #   resp.status #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/UpdateTopic AWS API Documentation
+    #
+    # @overload update_topic(params = {})
+    # @param [Hash] params ({})
+    def update_topic(params = {}, options = {})
+      req = build_request(:update_topic, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -3622,7 +3740,7 @@ module Aws::Kafka
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-kafka'
-      context[:gem_version] = '1.104.0'
+      context[:gem_version] = '1.105.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

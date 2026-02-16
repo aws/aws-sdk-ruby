@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.22.0 (2026-02-09)
+------------------
+
+* Feature - Add the missing event type for WhatsApp
+
 1.21.0 (2026-01-16)
 ------------------
 

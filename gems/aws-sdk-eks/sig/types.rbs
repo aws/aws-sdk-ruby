@@ -539,7 +539,7 @@ module Aws::EKS
       attr_accessor disk_size: ::Integer
       attr_accessor subnets: ::Array[::String]
       attr_accessor instance_types: ::Array[::String]
-      attr_accessor ami_type: ("AL2_x86_64" | "AL2_x86_64_GPU" | "AL2_ARM_64" | "CUSTOM" | "BOTTLEROCKET_ARM_64" | "BOTTLEROCKET_x86_64" | "BOTTLEROCKET_ARM_64_FIPS" | "BOTTLEROCKET_x86_64_FIPS" | "BOTTLEROCKET_ARM_64_NVIDIA" | "BOTTLEROCKET_x86_64_NVIDIA" | "BOTTLEROCKET_ARM_64_NVIDIA_FIPS" | "BOTTLEROCKET_x86_64_NVIDIA_FIPS" | "WINDOWS_CORE_2019_x86_64" | "WINDOWS_FULL_2019_x86_64" | "WINDOWS_CORE_2022_x86_64" | "WINDOWS_FULL_2022_x86_64" | "AL2023_x86_64_STANDARD" | "AL2023_ARM_64_STANDARD" | "AL2023_x86_64_NEURON" | "AL2023_x86_64_NVIDIA" | "AL2023_ARM_64_NVIDIA")
+      attr_accessor ami_type: ("AL2_x86_64" | "AL2_x86_64_GPU" | "AL2_ARM_64" | "CUSTOM" | "BOTTLEROCKET_ARM_64" | "BOTTLEROCKET_x86_64" | "BOTTLEROCKET_ARM_64_FIPS" | "BOTTLEROCKET_x86_64_FIPS" | "BOTTLEROCKET_ARM_64_NVIDIA" | "BOTTLEROCKET_x86_64_NVIDIA" | "BOTTLEROCKET_ARM_64_NVIDIA_FIPS" | "BOTTLEROCKET_x86_64_NVIDIA_FIPS" | "WINDOWS_CORE_2019_x86_64" | "WINDOWS_FULL_2019_x86_64" | "WINDOWS_CORE_2022_x86_64" | "WINDOWS_FULL_2022_x86_64" | "WINDOWS_CORE_2025_x86_64" | "WINDOWS_FULL_2025_x86_64" | "AL2023_x86_64_STANDARD" | "AL2023_ARM_64_STANDARD" | "AL2023_x86_64_NEURON" | "AL2023_x86_64_NVIDIA" | "AL2023_ARM_64_NVIDIA")
       attr_accessor remote_access: Types::RemoteAccessConfig
       attr_accessor node_role: ::String
       attr_accessor labels: ::Hash[::String, ::String]
@@ -569,6 +569,7 @@ module Aws::EKS
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor disable_session_tags: bool
       attr_accessor target_role_arn: ::String
+      attr_accessor policy: ::String
       SENSITIVE: []
     end
 
@@ -1327,7 +1328,7 @@ module Aws::EKS
       attr_accessor instance_types: ::Array[::String]
       attr_accessor subnets: ::Array[::String]
       attr_accessor remote_access: Types::RemoteAccessConfig
-      attr_accessor ami_type: ("AL2_x86_64" | "AL2_x86_64_GPU" | "AL2_ARM_64" | "CUSTOM" | "BOTTLEROCKET_ARM_64" | "BOTTLEROCKET_x86_64" | "BOTTLEROCKET_ARM_64_FIPS" | "BOTTLEROCKET_x86_64_FIPS" | "BOTTLEROCKET_ARM_64_NVIDIA" | "BOTTLEROCKET_x86_64_NVIDIA" | "BOTTLEROCKET_ARM_64_NVIDIA_FIPS" | "BOTTLEROCKET_x86_64_NVIDIA_FIPS" | "WINDOWS_CORE_2019_x86_64" | "WINDOWS_FULL_2019_x86_64" | "WINDOWS_CORE_2022_x86_64" | "WINDOWS_FULL_2022_x86_64" | "AL2023_x86_64_STANDARD" | "AL2023_ARM_64_STANDARD" | "AL2023_x86_64_NEURON" | "AL2023_x86_64_NVIDIA" | "AL2023_ARM_64_NVIDIA")
+      attr_accessor ami_type: ("AL2_x86_64" | "AL2_x86_64_GPU" | "AL2_ARM_64" | "CUSTOM" | "BOTTLEROCKET_ARM_64" | "BOTTLEROCKET_x86_64" | "BOTTLEROCKET_ARM_64_FIPS" | "BOTTLEROCKET_x86_64_FIPS" | "BOTTLEROCKET_ARM_64_NVIDIA" | "BOTTLEROCKET_x86_64_NVIDIA" | "BOTTLEROCKET_ARM_64_NVIDIA_FIPS" | "BOTTLEROCKET_x86_64_NVIDIA_FIPS" | "WINDOWS_CORE_2019_x86_64" | "WINDOWS_FULL_2019_x86_64" | "WINDOWS_CORE_2022_x86_64" | "WINDOWS_FULL_2022_x86_64" | "WINDOWS_CORE_2025_x86_64" | "WINDOWS_FULL_2025_x86_64" | "AL2023_x86_64_STANDARD" | "AL2023_ARM_64_STANDARD" | "AL2023_x86_64_NEURON" | "AL2023_x86_64_NVIDIA" | "AL2023_ARM_64_NVIDIA")
       attr_accessor node_role: ::String
       attr_accessor labels: ::Hash[::String, ::String]
       attr_accessor taints: ::Array[Types::Taint]
@@ -1432,6 +1433,7 @@ module Aws::EKS
       attr_accessor disable_session_tags: bool
       attr_accessor target_role_arn: ::String
       attr_accessor external_id: ::String
+      attr_accessor policy: ::String
       SENSITIVE: []
     end
 
@@ -1605,7 +1607,7 @@ module Aws::EKS
     class Update
       attr_accessor id: ::String
       attr_accessor status: ("InProgress" | "Failed" | "Cancelled" | "Successful")
-      attr_accessor type: ("VersionUpdate" | "EndpointAccessUpdate" | "LoggingUpdate" | "ConfigUpdate" | "AssociateIdentityProviderConfig" | "DisassociateIdentityProviderConfig" | "AssociateEncryptionConfig" | "AddonUpdate" | "VpcConfigUpdate" | "AccessConfigUpdate" | "UpgradePolicyUpdate" | "ZonalShiftConfigUpdate" | "AutoModeUpdate" | "RemoteNetworkConfigUpdate" | "DeletionProtectionUpdate" | "ControlPlaneScalingConfigUpdate")
+      attr_accessor type: ("VersionUpdate" | "EndpointAccessUpdate" | "LoggingUpdate" | "ConfigUpdate" | "AssociateIdentityProviderConfig" | "DisassociateIdentityProviderConfig" | "AssociateEncryptionConfig" | "AddonUpdate" | "VpcConfigUpdate" | "AccessConfigUpdate" | "UpgradePolicyUpdate" | "ZonalShiftConfigUpdate" | "AutoModeUpdate" | "RemoteNetworkConfigUpdate" | "DeletionProtectionUpdate" | "ControlPlaneScalingConfigUpdate" | "VendedLogsUpdate")
       attr_accessor params: ::Array[Types::UpdateParam]
       attr_accessor created_at: ::Time
       attr_accessor errors: ::Array[Types::ErrorDetail]
@@ -1773,6 +1775,7 @@ module Aws::EKS
       attr_accessor client_request_token: ::String
       attr_accessor disable_session_tags: bool
       attr_accessor target_role_arn: ::String
+      attr_accessor policy: ::String
       SENSITIVE: []
     end
 

@@ -146,7 +146,7 @@ module Aws::ConnectCampaignsV2
 
     class CustomerProfilesIntegrationConfig
       attr_accessor domain_arn: ::String
-      attr_accessor object_type_names: ::Hash[("Campaign-Email" | "Campaign-SMS" | "Campaign-Telephony" | "Campaign-Orchestration"), ::String]
+      attr_accessor object_type_names: ::Hash[("Campaign-Email" | "Campaign-SMS" | "Campaign-Telephony" | "Campaign-Orchestration" | "Campaign-WhatsApp"), ::String]
       SENSITIVE: []
     end
 
@@ -157,7 +157,7 @@ module Aws::ConnectCampaignsV2
 
     class CustomerProfilesIntegrationSummary
       attr_accessor domain_arn: ::String
-      attr_accessor object_type_names: ::Hash[("Campaign-Email" | "Campaign-SMS" | "Campaign-Telephony" | "Campaign-Orchestration"), ::String]
+      attr_accessor object_type_names: ::Hash[("Campaign-Email" | "Campaign-SMS" | "Campaign-Telephony" | "Campaign-Orchestration" | "Campaign-WhatsApp"), ::String]
       SENSITIVE: []
     end
 

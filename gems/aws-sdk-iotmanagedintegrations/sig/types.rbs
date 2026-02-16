@@ -34,11 +34,19 @@ module Aws::IoTManagedIntegrations
 
     class AuthConfig
       attr_accessor o_auth: Types::OAuthConfig
+      attr_accessor general_authorization: ::Array[Types::AuthMaterial]
       SENSITIVE: []
     end
 
     class AuthConfigUpdate
       attr_accessor o_auth_update: Types::OAuthUpdate
+      attr_accessor general_authorization_update: Types::GeneralAuthorizationUpdate
+      SENSITIVE: []
+    end
+
+    class AuthMaterial
+      attr_accessor secrets_manager: Types::SecretsManager
+      attr_accessor auth_material_name: ::String
       SENSITIVE: []
     end
 
@@ -138,6 +146,7 @@ module Aws::IoTManagedIntegrations
       attr_accessor name: ::String
       attr_accessor description: ::String
       attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor general_authorization: Types::GeneralAuthorizationName
       SENSITIVE: [:tags]
     end
 
@@ -227,7 +236,7 @@ module Aws::IoTManagedIntegrations
       attr_accessor owner: ::String
       attr_accessor credential_locker_id: ::String
       attr_accessor authentication_material: ::String
-      attr_accessor authentication_material_type: ("CUSTOM_PROTOCOL_QR_BAR_CODE" | "WIFI_SETUP_QR_BAR_CODE" | "ZWAVE_QR_BAR_CODE" | "ZIGBEE_QR_BAR_CODE" | "DISCOVERED_DEVICE")
+      attr_accessor authentication_material_type: ("CUSTOM_PROTOCOL_QR_BAR_CODE" | "WIFI_SETUP_QR_BAR_CODE" | "ZWAVE_QR_BAR_CODE" | "ZIGBEE_QR_BAR_CODE" | "DISCOVERED_DEVICE" | "PRE_ONBOARDED_CLOUD")
       attr_accessor wi_fi_simple_setup_configuration: Types::WiFiSimpleSetupConfiguration
       attr_accessor serial_number: ::String
       attr_accessor brand: ::String
@@ -302,10 +311,11 @@ module Aws::IoTManagedIntegrations
     class CreateProvisioningProfileRequest
       attr_accessor provisioning_type: ("FLEET_PROVISIONING" | "JITR")
       attr_accessor ca_certificate: ::String
+      attr_accessor claim_certificate: ::String
       attr_accessor name: ::String
       attr_accessor client_token: ::String
       attr_accessor tags: ::Hash[::String, ::String]
-      SENSITIVE: [:ca_certificate, :tags]
+      SENSITIVE: [:ca_certificate, :claim_certificate, :tags]
     end
 
     class CreateProvisioningProfileResponse
@@ -403,7 +413,7 @@ module Aws::IoTManagedIntegrations
       attr_accessor capability_report: Types::MatterCapabilityReport
       attr_accessor capability_schemas: ::Array[Types::CapabilitySchemaItem]
       attr_accessor device_metadata: untyped
-      SENSITIVE: [:connector_device_id, :connector_device_name]
+      SENSITIVE: [:connector_device_id]
     end
 
     class DeviceDiscoverySummary
@@ -423,7 +433,7 @@ module Aws::IoTManagedIntegrations
       attr_accessor brand: ::String
       attr_accessor model: ::String
       attr_accessor authentication_material: ::String
-      SENSITIVE: [:connector_device_id, :connector_device_name, :brand, :model, :authentication_material]
+      SENSITIVE: [:connector_device_id, :brand, :model, :authentication_material]
     end
 
     class EndpointConfig
@@ -446,6 +456,17 @@ module Aws::IoTManagedIntegrations
       SENSITIVE: []
     end
 
+    class GeneralAuthorizationName
+      attr_accessor auth_material_name: ::String
+      SENSITIVE: []
+    end
+
+    class GeneralAuthorizationUpdate
+      attr_accessor auth_materials_to_add: ::Array[Types::AuthMaterial]
+      attr_accessor auth_materials_to_update: ::Array[Types::AuthMaterial]
+      SENSITIVE: []
+    end
+
     class GetAccountAssociationRequest
       attr_accessor account_association_id: ::String
       SENSITIVE: []
@@ -461,6 +482,7 @@ module Aws::IoTManagedIntegrations
       attr_accessor arn: ::String
       attr_accessor o_auth_authorization_url: ::String
       attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor general_authorization: Types::GeneralAuthorizationName
       SENSITIVE: [:o_auth_authorization_url, :tags]
     end
 
@@ -1046,6 +1068,7 @@ module Aws::IoTManagedIntegrations
     class ManagedThingAssociation
       attr_accessor managed_thing_id: ::String
       attr_accessor account_association_id: ::String
+      attr_accessor managed_thing_association_status: ("PRE_ASSOCIATED" | "ASSOCIATED")
       SENSITIVE: []
     end
 
@@ -1358,7 +1381,7 @@ module Aws::IoTManagedIntegrations
       attr_accessor trace_id: ::String
       attr_accessor devices: ::Array[Types::Device]
       attr_accessor matter_endpoint: Types::MatterEndpoint
-      SENSITIVE: [:user_id, :operation_version, :status_code, :message, :connector_device_id]
+      SENSITIVE: [:user_id, :message, :connector_device_id]
     end
 
     class SendConnectorEventResponse
@@ -1409,6 +1432,7 @@ module Aws::IoTManagedIntegrations
       attr_accessor authentication_material_type: ("ZWAVE_INSTALL_CODE")
       attr_accessor client_token: ::String
       attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor connector_device_id_list: ::Array[::String]
       attr_accessor protocol: ("ZWAVE" | "ZIGBEE" | "CUSTOM")
       attr_accessor end_device_identifier: ::String
       SENSITIVE: [:authentication_material, :tags]

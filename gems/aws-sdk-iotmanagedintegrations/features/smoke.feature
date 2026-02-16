@@ -356,6 +356,30 @@ Feature: Smoke tests for IoTManagedIntegrations
     Then I expect a 'Aws::IoTManagedIntegrations::Errors::ResourceNotFoundException' was raised
 
   @iotmanagedintegrations @smoke
+  Scenario: TagResourceNotFound
+    Given I create a 'Aws::IoTManagedIntegrations' client with config:
+      """
+{"region":"us-east-1","use_fips_endpoint":false,"use_dualstack_endpoint":false}
+      """
+    When I call the operation 'tag_resource' with params:
+      """
+{"resource_arn":"arn:aws:iotmanagedintegrations:us-east-1:123456789012:managed-thing/nonexistent","tags":{"key1":"value1"}}
+      """
+    Then I expect a 'Aws::IoTManagedIntegrations::Errors::ResourceNotFoundException' was raised
+
+  @iotmanagedintegrations @smoke
+  Scenario: TagResourceSuccess
+    Given I create a 'Aws::IoTManagedIntegrations' client with config:
+      """
+{"region":"us-east-1","use_fips_endpoint":false,"use_dualstack_endpoint":false}
+      """
+    When I call the operation 'tag_resource' with params:
+      """
+{"resource_arn":"arn:aws:iotmanagedintegrations:us-east-1:123456789012:managed-thing/test123","tags":{"key1":"value1","key2":"value2"}}
+      """
+    Then I expect an error was not raised
+
+  @iotmanagedintegrations @smoke
   Scenario: GetDeviceDiscoveryNotFound
     Given I create a 'Aws::IoTManagedIntegrations' client with config:
       """
@@ -450,6 +474,30 @@ Feature: Smoke tests for IoTManagedIntegrations
 {"identifier":"nonExistentTaskId"}
       """
     Then I expect a 'Aws::IoTManagedIntegrations::Errors::ResourceNotFoundException' was raised
+
+  @iotmanagedintegrations @smoke
+  Scenario: UntagResourceNotFound
+    Given I create a 'Aws::IoTManagedIntegrations' client with config:
+      """
+{"region":"us-east-1","use_fips_endpoint":false,"use_dualstack_endpoint":false}
+      """
+    When I call the operation 'untag_resource' with params:
+      """
+{"resource_arn":"arn:aws:iotmanagedintegrations:us-east-1:123456789012:managed-thing/nonexistent","tag_keys":["key1"]}
+      """
+    Then I expect a 'Aws::IoTManagedIntegrations::Errors::ResourceNotFoundException' was raised
+
+  @iotmanagedintegrations @smoke
+  Scenario: UntagResourceSuccess
+    Given I create a 'Aws::IoTManagedIntegrations' client with config:
+      """
+{"region":"us-east-1","use_fips_endpoint":false,"use_dualstack_endpoint":false}
+      """
+    When I call the operation 'untag_resource' with params:
+      """
+{"resource_arn":"arn:aws:iotmanagedintegrations:us-east-1:123456789012:managed-thing/test123","tag_keys":["key1","key2"]}
+      """
+    Then I expect an error was not raised
 
   @iotmanagedintegrations @smoke
   Scenario: ListCloudConnectorsSuccess

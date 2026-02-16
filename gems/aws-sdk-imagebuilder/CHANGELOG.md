@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.98.0 (2026-02-09)
+------------------
+
+* Feature - EC2 Image Builder now supports wildcard patterns in lifecycle policies with recipes and enhances the experience of tag-scoped policies.
+
 1.97.0 (2026-01-16)
 ------------------
 

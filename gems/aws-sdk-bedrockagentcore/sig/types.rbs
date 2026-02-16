@@ -30,6 +30,11 @@ module Aws::BedrockAgentCore
       SENSITIVE: []
     end
 
+    class BasicAuth
+      attr_accessor secret_arn: ::String
+      SENSITIVE: []
+    end
+
     class BatchCreateMemoryRecordsInput
       attr_accessor memory_id: ::String
       attr_accessor records: ::Array[Types::MemoryRecordCreateInput]
@@ -295,6 +300,14 @@ module Aws::BedrockAgentCore
       SENSITIVE: []
     end
 
+    class ExternalProxy
+      attr_accessor server: ::String
+      attr_accessor port: ::Integer
+      attr_accessor domain_patterns: ::Array[::String]
+      attr_accessor credentials: Types::ProxyCredentials
+      SENSITIVE: []
+    end
+
     class ExtractionJob
       attr_accessor job_id: ::String
       SENSITIVE: []
@@ -367,6 +380,7 @@ module Aws::BedrockAgentCore
       attr_accessor session_timeout_seconds: ::Integer
       attr_accessor status: ("READY" | "TERMINATED")
       attr_accessor streams: Types::BrowserSessionStream
+      attr_accessor proxy_configuration: Types::ProxyConfiguration
       attr_accessor session_replay_artifact: ::String
       attr_accessor last_updated_at: ::Time
       SENSITIVE: []
@@ -761,6 +775,39 @@ module Aws::BedrockAgentCore
       end
     end
 
+    class Proxy
+      attr_accessor external_proxy: Types::ExternalProxy
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class ExternalProxy < Proxy
+      end
+      class Unknown < Proxy
+      end
+    end
+
+    class ProxyBypass
+      attr_accessor domain_patterns: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ProxyConfiguration
+      attr_accessor proxies: ::Array[Types::Proxy]
+      attr_accessor bypass: Types::ProxyBypass
+      SENSITIVE: []
+    end
+
+    class ProxyCredentials
+      attr_accessor basic_auth: Types::BasicAuth
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class BasicAuth < ProxyCredentials
+      end
+      class Unknown < ProxyCredentials
+      end
+    end
+
     class ResourceContent
       attr_accessor type: ("text" | "blob")
       attr_accessor uri: ::String
@@ -890,6 +937,7 @@ module Aws::BedrockAgentCore
       attr_accessor view_port: Types::ViewPort
       attr_accessor extensions: ::Array[Types::BrowserExtension]
       attr_accessor profile_configuration: Types::BrowserProfileConfiguration
+      attr_accessor proxy_configuration: Types::ProxyConfiguration
       attr_accessor client_token: ::String
       SENSITIVE: []
     end

@@ -85,6 +85,12 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBSnapshot.html#encrypted-instance_method
       def encrypted: () -> bool
 
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBSnapshot.html#backup_retention_period-instance_method
+      def backup_retention_period: () -> ::Integer
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBSnapshot.html#preferred_backup_window-instance_method
+      def preferred_backup_window: () -> ::String
+
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBSnapshot.html#kms_key_id-instance_method
       def kms_key_id: () -> ::String
 
@@ -230,6 +236,8 @@ module Aws
                      ?custom_iam_instance_profile: ::String,
                      ?allocated_storage: ::Integer,
                      ?db_cluster_snapshot_identifier: ::String,
+                     ?backup_retention_period: ::Integer,
+                     ?preferred_backup_window: ::String,
                      ?dedicated_log_volume: bool,
                      ?ca_certificate_identifier: ::String,
                      ?engine_lifecycle_support: ::String,

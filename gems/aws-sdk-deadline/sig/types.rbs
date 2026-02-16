@@ -372,6 +372,7 @@ module Aws::Deadline
       attr_accessor source_job_id: ::String
       attr_accessor name_override: ::String
       attr_accessor description_override: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: [:template, :parameters, :description_override]
     end
 

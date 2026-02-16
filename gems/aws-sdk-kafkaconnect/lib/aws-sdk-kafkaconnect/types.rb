@@ -68,12 +68,17 @@ module Aws::KafkaConnect
     #   @return [Integer]
     #
     # @!attribute [rw] scale_in_policy
-    #   The sacle-in policy for the connector.
+    #   The scale-in policy for the connector.
     #   @return [Types::ScaleInPolicy]
     #
     # @!attribute [rw] scale_out_policy
-    #   The sacle-out policy for the connector.
+    #   The scale-out policy for the connector.
     #   @return [Types::ScaleOutPolicy]
+    #
+    # @!attribute [rw] max_autoscaling_task_count
+    #   The maximum number of tasks allocated to the connector during
+    #   autoscaling operations. Must be at least equal to maxWorkerCount.
+    #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kafkaconnect-2021-09-14/AutoScaling AWS API Documentation
     #
@@ -82,7 +87,8 @@ module Aws::KafkaConnect
       :mcu_count,
       :min_worker_count,
       :scale_in_policy,
-      :scale_out_policy)
+      :scale_out_policy,
+      :max_autoscaling_task_count)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -103,12 +109,17 @@ module Aws::KafkaConnect
     #   @return [Integer]
     #
     # @!attribute [rw] scale_in_policy
-    #   The sacle-in policy for the connector.
+    #   The scale-in policy for the connector.
     #   @return [Types::ScaleInPolicyDescription]
     #
     # @!attribute [rw] scale_out_policy
-    #   The sacle-out policy for the connector.&gt;
+    #   The scale-out policy for the connector.
     #   @return [Types::ScaleOutPolicyDescription]
+    #
+    # @!attribute [rw] max_autoscaling_task_count
+    #   The maximum number of tasks allocated to the connector during
+    #   autoscaling operations. Must be at least equal to maxWorkerCount.
+    #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kafkaconnect-2021-09-14/AutoScalingDescription AWS API Documentation
     #
@@ -117,7 +128,8 @@ module Aws::KafkaConnect
       :mcu_count,
       :min_worker_count,
       :scale_in_policy,
-      :scale_out_policy)
+      :scale_out_policy,
+      :max_autoscaling_task_count)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -138,12 +150,17 @@ module Aws::KafkaConnect
     #   @return [Integer]
     #
     # @!attribute [rw] scale_in_policy
-    #   The target sacle-in policy for the connector.
+    #   The target scale-in policy for the connector.
     #   @return [Types::ScaleInPolicyUpdate]
     #
     # @!attribute [rw] scale_out_policy
-    #   The target sacle-out policy for the connector.
+    #   The target scale-out policy for the connector.
     #   @return [Types::ScaleOutPolicyUpdate]
+    #
+    # @!attribute [rw] max_autoscaling_task_count
+    #   The maximum number of tasks allocated to the connector during
+    #   autoscaling operations. Must be at least equal to maxWorkerCount.
+    #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kafkaconnect-2021-09-14/AutoScalingUpdate AWS API Documentation
     #
@@ -152,7 +169,8 @@ module Aws::KafkaConnect
       :mcu_count,
       :min_worker_count,
       :scale_in_policy,
-      :scale_out_policy)
+      :scale_out_policy,
+      :max_autoscaling_task_count)
       SENSITIVE = []
       include Aws::Structure
     end

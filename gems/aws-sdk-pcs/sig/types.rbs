@@ -29,7 +29,7 @@ module Aws::PCS
       attr_accessor name: ::String
       attr_accessor id: ::String
       attr_accessor arn: ::String
-      attr_accessor status: ("CREATING" | "ACTIVE" | "UPDATING" | "DELETING" | "CREATE_FAILED" | "DELETE_FAILED" | "UPDATE_FAILED" | "SUSPENDING" | "SUSPENDED")
+      attr_accessor status: ("CREATING" | "ACTIVE" | "UPDATING" | "DELETING" | "CREATE_FAILED" | "DELETE_FAILED" | "UPDATE_FAILED" | "SUSPENDING" | "SUSPENDED" | "RESUMING")
       attr_accessor created_at: ::Time
       attr_accessor modified_at: ::Time
       attr_accessor scheduler: Types::Scheduler
@@ -65,7 +65,7 @@ module Aws::PCS
       attr_accessor arn: ::String
       attr_accessor created_at: ::Time
       attr_accessor modified_at: ::Time
-      attr_accessor status: ("CREATING" | "ACTIVE" | "UPDATING" | "DELETING" | "CREATE_FAILED" | "DELETE_FAILED" | "UPDATE_FAILED" | "SUSPENDING" | "SUSPENDED")
+      attr_accessor status: ("CREATING" | "ACTIVE" | "UPDATING" | "DELETING" | "CREATE_FAILED" | "DELETE_FAILED" | "UPDATE_FAILED" | "SUSPENDING" | "SUSPENDED" | "RESUMING")
       SENSITIVE: []
     end
 
@@ -76,7 +76,7 @@ module Aws::PCS
       attr_accessor cluster_id: ::String
       attr_accessor created_at: ::Time
       attr_accessor modified_at: ::Time
-      attr_accessor status: ("CREATING" | "ACTIVE" | "UPDATING" | "DELETING" | "CREATE_FAILED" | "DELETE_FAILED" | "UPDATE_FAILED" | "DELETED" | "SUSPENDING" | "SUSPENDED")
+      attr_accessor status: ("CREATING" | "ACTIVE" | "UPDATING" | "DELETING" | "CREATE_FAILED" | "DELETE_FAILED" | "UPDATE_FAILED" | "DELETED" | "SUSPENDING" | "SUSPENDED" | "RESUMING")
       attr_accessor ami_id: ::String
       attr_accessor subnet_ids: ::Array[::String]
       attr_accessor purchase_option: ("ONDEMAND" | "SPOT" | "CAPACITY_BLOCK")
@@ -112,7 +112,7 @@ module Aws::PCS
       attr_accessor cluster_id: ::String
       attr_accessor created_at: ::Time
       attr_accessor modified_at: ::Time
-      attr_accessor status: ("CREATING" | "ACTIVE" | "UPDATING" | "DELETING" | "CREATE_FAILED" | "DELETE_FAILED" | "UPDATE_FAILED" | "DELETED" | "SUSPENDING" | "SUSPENDED")
+      attr_accessor status: ("CREATING" | "ACTIVE" | "UPDATING" | "DELETING" | "CREATE_FAILED" | "DELETE_FAILED" | "UPDATE_FAILED" | "DELETED" | "SUSPENDING" | "SUSPENDED" | "RESUMING")
       SENSITIVE: []
     end
 
@@ -348,7 +348,7 @@ module Aws::PCS
       attr_accessor cluster_id: ::String
       attr_accessor created_at: ::Time
       attr_accessor modified_at: ::Time
-      attr_accessor status: ("CREATING" | "ACTIVE" | "UPDATING" | "DELETING" | "CREATE_FAILED" | "DELETE_FAILED" | "UPDATE_FAILED" | "SUSPENDING" | "SUSPENDED")
+      attr_accessor status: ("CREATING" | "ACTIVE" | "UPDATING" | "DELETING" | "CREATE_FAILED" | "DELETE_FAILED" | "UPDATE_FAILED" | "SUSPENDING" | "SUSPENDED" | "RESUMING")
       attr_accessor compute_node_group_configurations: ::Array[Types::ComputeNodeGroupConfiguration]
       attr_accessor slurm_configuration: Types::QueueSlurmConfiguration
       attr_accessor error_info: ::Array[Types::ErrorInfo]
@@ -372,7 +372,7 @@ module Aws::PCS
       attr_accessor cluster_id: ::String
       attr_accessor created_at: ::Time
       attr_accessor modified_at: ::Time
-      attr_accessor status: ("CREATING" | "ACTIVE" | "UPDATING" | "DELETING" | "CREATE_FAILED" | "DELETE_FAILED" | "UPDATE_FAILED" | "SUSPENDING" | "SUSPENDED")
+      attr_accessor status: ("CREATING" | "ACTIVE" | "UPDATING" | "DELETING" | "CREATE_FAILED" | "DELETE_FAILED" | "UPDATE_FAILED" | "SUSPENDING" | "SUSPENDED" | "RESUMING")
       SENSITIVE: []
     end
 

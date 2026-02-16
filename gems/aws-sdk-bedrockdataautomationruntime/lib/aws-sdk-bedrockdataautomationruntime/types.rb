@@ -297,6 +297,10 @@ module Aws::BedrockDataAutomationRuntime
     #   Encryption configuration.
     #   @return [Types::EncryptionConfiguration]
     #
+    # @!attribute [rw] output_configuration
+    #   Output configuration.
+    #   @return [Types::OutputConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-data-automation-runtime-2024-06-13/InvokeDataAutomationRequest AWS API Documentation
     #
     class InvokeDataAutomationRequest < Struct.new(
@@ -304,12 +308,17 @@ module Aws::BedrockDataAutomationRuntime
       :data_automation_configuration,
       :blueprints,
       :data_automation_profile_arn,
-      :encryption_configuration)
+      :encryption_configuration,
+      :output_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # Invoke Data Automation Response
+    #
+    # @!attribute [rw] output_configuration
+    #   Output configuration
+    #   @return [Types::OutputConfiguration]
     #
     # @!attribute [rw] semantic_modality
     #   Detected semantic modality
@@ -322,6 +331,7 @@ module Aws::BedrockDataAutomationRuntime
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-data-automation-runtime-2024-06-13/InvokeDataAutomationResponse AWS API Documentation
     #
     class InvokeDataAutomationResponse < Struct.new(
+      :output_configuration,
       :semantic_modality,
       :output_segments)
       SENSITIVE = []

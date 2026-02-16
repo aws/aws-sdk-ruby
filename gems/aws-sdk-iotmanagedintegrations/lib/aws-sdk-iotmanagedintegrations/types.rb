@@ -104,8 +104,13 @@ module Aws::IoTManagedIntegrations
     #   third-party service.
     #   @return [Types::OAuthConfig]
     #
+    # @!attribute [rw] general_authorization
+    #   The authorization materials for General Authorization.
+    #   @return [Array<Types::AuthMaterial>]
+    #
     class AuthConfig < Struct.new(
-      :o_auth)
+      :o_auth,
+      :general_authorization)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -118,8 +123,33 @@ module Aws::IoTManagedIntegrations
     #   configuration.
     #   @return [Types::OAuthUpdate]
     #
+    # @!attribute [rw] general_authorization_update
+    #   The General Authorization update information containing
+    #   authorization materials to add or update in Kinesis Data Streams.
+    #   @return [Types::GeneralAuthorizationUpdate]
+    #
     class AuthConfigUpdate < Struct.new(
-      :o_auth_update)
+      :o_auth_update,
+      :general_authorization_update)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The authorization material containing the Secrets Manager arn and
+    # version.
+    #
+    # @!attribute [rw] secrets_manager
+    #   Configuration for AWS Secrets Manager, used to securely store and
+    #   manage sensitive information for connector destinations.
+    #   @return [Types::SecretsManager]
+    #
+    # @!attribute [rw] auth_material_name
+    #   The name of the authorization material.
+    #   @return [String]
+    #
+    class AuthMaterial < Struct.new(
+      :secrets_manager,
+      :auth_material_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -461,19 +491,26 @@ module Aws::IoTManagedIntegrations
     #   association.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] general_authorization
+    #   The General Authorization reference by authorization material name.
+    #   @return [Types::GeneralAuthorizationName]
+    #
     class CreateAccountAssociationRequest < Struct.new(
       :client_token,
       :connector_destination_id,
       :name,
       :description,
-      :tags)
+      :tags,
+      :general_authorization)
       SENSITIVE = [:tags]
       include Aws::Structure
     end
 
     # @!attribute [rw] o_auth_authorization_url
     #   Third-party IoT platform OAuth authorization server URL backed with
-    #   all the required parameters to perform end-user authentication.
+    #   all the required parameters to perform end-user authentication. This
+    #   field will be empty when using General Authorization flows that do
+    #   not require OAuth.
     #   @return [String]
     #
     # @!attribute [rw] account_association_id
@@ -766,7 +803,7 @@ module Aws::IoTManagedIntegrations
     #
     # @!attribute [rw] authentication_material
     #   The authentication material defining the device connectivity setup
-    #   requests. The authentication materials used are the device bar code.
+    #   requests. The authorization materials used are the device bar code.
     #   @return [String]
     #
     # @!attribute [rw] authentication_material_type
@@ -1071,6 +1108,10 @@ module Aws::IoTManagedIntegrations
     #   The id of the certificate authority (CA) certificate.
     #   @return [String]
     #
+    # @!attribute [rw] claim_certificate
+    #   The claim certificate.
+    #   @return [String]
+    #
     # @!attribute [rw] name
     #   The name of the provisioning template.
     #   @return [String]
@@ -1093,10 +1134,11 @@ module Aws::IoTManagedIntegrations
     class CreateProvisioningProfileRequest < Struct.new(
       :provisioning_type,
       :ca_certificate,
+      :claim_certificate,
       :name,
       :client_token,
       :tags)
-      SENSITIVE = [:ca_certificate, :tags]
+      SENSITIVE = [:ca_certificate, :claim_certificate, :tags]
       include Aws::Structure
     end
 
@@ -1368,7 +1410,7 @@ module Aws::IoTManagedIntegrations
       :capability_report,
       :capability_schemas,
       :device_metadata)
-      SENSITIVE = [:connector_device_id, :connector_device_name]
+      SENSITIVE = [:connector_device_id]
       include Aws::Structure
     end
 
@@ -1450,7 +1492,7 @@ module Aws::IoTManagedIntegrations
       :brand,
       :model,
       :authentication_material)
-      SENSITIVE = [:connector_device_id, :connector_device_name, :brand, :model, :authentication_material]
+      SENSITIVE = [:connector_device_id, :brand, :model, :authentication_material]
       include Aws::Structure
     end
 
@@ -1521,6 +1563,36 @@ module Aws::IoTManagedIntegrations
       include Aws::Structure
     end
 
+    # The General Authorization reference by authorization material name.
+    #
+    # @!attribute [rw] auth_material_name
+    #   The name of the authorization material.
+    #   @return [String]
+    #
+    class GeneralAuthorizationName < Struct.new(
+      :auth_material_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The General Authorization update information containing authorization
+    # materials to add or update.
+    #
+    # @!attribute [rw] auth_materials_to_add
+    #   The authorization materials to add.
+    #   @return [Array<Types::AuthMaterial>]
+    #
+    # @!attribute [rw] auth_materials_to_update
+    #   The authorization materials to update.
+    #   @return [Array<Types::AuthMaterial>]
+    #
+    class GeneralAuthorizationUpdate < Struct.new(
+      :auth_materials_to_add,
+      :auth_materials_to_update)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] account_association_id
     #   The unique identifier of the account association to retrieve.
     #   @return [String]
@@ -1562,13 +1634,19 @@ module Aws::IoTManagedIntegrations
     #
     # @!attribute [rw] o_auth_authorization_url
     #   Third party IoT platform OAuth authorization server URL backed with
-    #   all the required parameters to perform end-user authentication.
+    #   all the required parameters to perform end-user authentication. This
+    #   field will be empty when using General Authorization flows that do
+    #   not require OAuth.
     #   @return [String]
     #
     # @!attribute [rw] tags
     #   A set of key/value pairs that are used to manage the account
     #   association.
     #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] general_authorization
+    #   The General Authorization reference by authorization material name.
+    #   @return [Types::GeneralAuthorizationName]
     #
     class GetAccountAssociationResponse < Struct.new(
       :account_association_id,
@@ -1579,7 +1657,8 @@ module Aws::IoTManagedIntegrations
       :description,
       :arn,
       :o_auth_authorization_url,
-      :tags)
+      :tags,
+      :general_authorization)
       SENSITIVE = [:o_auth_authorization_url, :tags]
       include Aws::Structure
     end
@@ -3335,7 +3414,8 @@ module Aws::IoTManagedIntegrations
     end
 
     # @!attribute [rw] resource_arn
-    #   The ARN of the resource for which to list tags.
+    #   The Amazon Resource Name (ARN) of the resource for which to list
+    #   tags.
     #   @return [String]
     #
     class ListTagsForResourceRequest < Struct.new(
@@ -3365,9 +3445,16 @@ module Aws::IoTManagedIntegrations
     #   The identifier of the account association in the association.
     #   @return [String]
     #
+    # @!attribute [rw] managed_thing_association_status
+    #   The status of the registration between the managed thing and the
+    #   account association. Indicates whether the device is pre-associated
+    #   or fully associated with the account association.
+    #   @return [String]
+    #
     class ManagedThingAssociation < Struct.new(
       :managed_thing_id,
-      :account_association_id)
+      :account_association_id,
+      :managed_thing_association_status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4491,7 +4578,7 @@ module Aws::IoTManagedIntegrations
       :trace_id,
       :devices,
       :matter_endpoint)
-      SENSITIVE = [:user_id, :operation_version, :status_code, :message, :connector_device_id]
+      SENSITIVE = [:user_id, :message, :connector_device_id]
       include Aws::Structure
     end
 
@@ -4580,7 +4667,8 @@ module Aws::IoTManagedIntegrations
     # @!attribute [rw] o_auth_authorization_url
     #   Third-party IoT platform OAuth authorization server URL with all
     #   required parameters to perform end-user authentication during the
-    #   refresh process.
+    #   refresh process. This field will be empty when using General
+    #   Authorization flows that do not require OAuth.
     #   @return [String]
     #
     class StartAccountAssociationRefreshResponse < Struct.new(
@@ -4638,6 +4726,10 @@ module Aws::IoTManagedIntegrations
     #   discovery request.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] connector_device_id_list
+    #   Used as a filter for PLA discoveries.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] protocol
     #   The protocol type for capability rediscovery (ZWAVE, ZIGBEE, or
     #   CUSTOM).
@@ -4667,9 +4759,10 @@ module Aws::IoTManagedIntegrations
       :authentication_material_type,
       :client_token,
       :tags,
+      :connector_device_id_list,
       :protocol,
       :end_device_identifier)
-      SENSITIVE = [:authentication_material, :tags]
+      SENSITIVE = [:authentication_material, :tags, :connector_device_id_list]
       include Aws::Structure
     end
 
@@ -4735,11 +4828,11 @@ module Aws::IoTManagedIntegrations
     end
 
     # @!attribute [rw] resource_arn
-    #   The ARN of the resource to which to add tags.
+    #   The Amazon Resource Name (ARN) of the resource to which to add tags.
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   A set of key/value pairs that are used to manage the resource
+    #   A set of key/value pairs that are used to manage the resource.
     #   @return [Hash<String,String>]
     #
     class TagResourceRequest < Struct.new(
@@ -4826,7 +4919,8 @@ module Aws::IoTManagedIntegrations
     end
 
     # @!attribute [rw] resource_arn
-    #   The ARN of the resource to which to add tags.
+    #   The Amazon Resource Name (ARN) of the resource from which to remove
+    #   tags.
     #   @return [String]
     #
     # @!attribute [rw] tag_keys

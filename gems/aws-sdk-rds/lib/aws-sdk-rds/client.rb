@@ -1521,6 +1521,8 @@ module Aws::RDS
     #   resp.db_cluster_snapshot.snapshot_type #=> String
     #   resp.db_cluster_snapshot.percent_progress #=> Integer
     #   resp.db_cluster_snapshot.storage_encrypted #=> Boolean
+    #   resp.db_cluster_snapshot.backup_retention_period #=> Integer
+    #   resp.db_cluster_snapshot.preferred_backup_window #=> String
     #   resp.db_cluster_snapshot.kms_key_id #=> String
     #   resp.db_cluster_snapshot.db_cluster_snapshot_arn #=> String
     #   resp.db_cluster_snapshot.source_db_cluster_snapshot_arn #=> String
@@ -1958,6 +1960,8 @@ module Aws::RDS
     #   resp.db_snapshot.storage_type #=> String
     #   resp.db_snapshot.tde_credential_arn #=> String
     #   resp.db_snapshot.encrypted #=> Boolean
+    #   resp.db_snapshot.backup_retention_period #=> Integer
+    #   resp.db_snapshot.preferred_backup_window #=> String
     #   resp.db_snapshot.kms_key_id #=> String
     #   resp.db_snapshot.db_snapshot_arn #=> String
     #   resp.db_snapshot.timezone #=> String
@@ -4471,6 +4475,8 @@ module Aws::RDS
     #   resp.db_cluster_snapshot.snapshot_type #=> String
     #   resp.db_cluster_snapshot.percent_progress #=> Integer
     #   resp.db_cluster_snapshot.storage_encrypted #=> Boolean
+    #   resp.db_cluster_snapshot.backup_retention_period #=> Integer
+    #   resp.db_cluster_snapshot.preferred_backup_window #=> String
     #   resp.db_cluster_snapshot.kms_key_id #=> String
     #   resp.db_cluster_snapshot.db_cluster_snapshot_arn #=> String
     #   resp.db_cluster_snapshot.source_db_cluster_snapshot_arn #=> String
@@ -8106,6 +8112,8 @@ module Aws::RDS
     #   resp.db_snapshot.storage_type #=> String
     #   resp.db_snapshot.tde_credential_arn #=> String
     #   resp.db_snapshot.encrypted #=> Boolean
+    #   resp.db_snapshot.backup_retention_period #=> Integer
+    #   resp.db_snapshot.preferred_backup_window #=> String
     #   resp.db_snapshot.kms_key_id #=> String
     #   resp.db_snapshot.db_snapshot_arn #=> String
     #   resp.db_snapshot.timezone #=> String
@@ -9816,6 +9824,7 @@ module Aws::RDS
     #   resp.db_cluster_automated_backup.engine_version #=> String
     #   resp.db_cluster_automated_backup.db_cluster_arn #=> String
     #   resp.db_cluster_automated_backup.backup_retention_period #=> Integer
+    #   resp.db_cluster_automated_backup.preferred_backup_window #=> String
     #   resp.db_cluster_automated_backup.engine_mode #=> String
     #   resp.db_cluster_automated_backup.availability_zones #=> Array
     #   resp.db_cluster_automated_backup.availability_zones[0] #=> String
@@ -10063,6 +10072,8 @@ module Aws::RDS
     #   resp.db_cluster_snapshot.snapshot_type #=> String
     #   resp.db_cluster_snapshot.percent_progress #=> Integer
     #   resp.db_cluster_snapshot.storage_encrypted #=> Boolean
+    #   resp.db_cluster_snapshot.backup_retention_period #=> Integer
+    #   resp.db_cluster_snapshot.preferred_backup_window #=> String
     #   resp.db_cluster_snapshot.kms_key_id #=> String
     #   resp.db_cluster_snapshot.db_cluster_snapshot_arn #=> String
     #   resp.db_cluster_snapshot.source_db_cluster_snapshot_arn #=> String
@@ -10493,6 +10504,7 @@ module Aws::RDS
     #   resp.db_instance_automated_backup.timezone #=> String
     #   resp.db_instance_automated_backup.iam_database_authentication_enabled #=> Boolean
     #   resp.db_instance_automated_backup.backup_retention_period #=> Integer
+    #   resp.db_instance_automated_backup.preferred_backup_window #=> String
     #   resp.db_instance_automated_backup.db_instance_automated_backups_arn #=> String
     #   resp.db_instance_automated_backup.db_instance_automated_backups_replications #=> Array
     #   resp.db_instance_automated_backup.db_instance_automated_backups_replications[0].db_instance_automated_backups_arn #=> String
@@ -10859,6 +10871,8 @@ module Aws::RDS
     #   resp.db_snapshot.storage_type #=> String
     #   resp.db_snapshot.tde_credential_arn #=> String
     #   resp.db_snapshot.encrypted #=> Boolean
+    #   resp.db_snapshot.backup_retention_period #=> Integer
+    #   resp.db_snapshot.preferred_backup_window #=> String
     #   resp.db_snapshot.kms_key_id #=> String
     #   resp.db_snapshot.db_snapshot_arn #=> String
     #   resp.db_snapshot.timezone #=> String
@@ -11993,6 +12007,7 @@ module Aws::RDS
     #   resp.db_cluster_automated_backups[0].engine_version #=> String
     #   resp.db_cluster_automated_backups[0].db_cluster_arn #=> String
     #   resp.db_cluster_automated_backups[0].backup_retention_period #=> Integer
+    #   resp.db_cluster_automated_backups[0].preferred_backup_window #=> String
     #   resp.db_cluster_automated_backups[0].engine_mode #=> String
     #   resp.db_cluster_automated_backups[0].availability_zones #=> Array
     #   resp.db_cluster_automated_backups[0].availability_zones[0] #=> String
@@ -12901,6 +12916,8 @@ module Aws::RDS
     #   resp.db_cluster_snapshots[0].snapshot_type #=> String
     #   resp.db_cluster_snapshots[0].percent_progress #=> Integer
     #   resp.db_cluster_snapshots[0].storage_encrypted #=> Boolean
+    #   resp.db_cluster_snapshots[0].backup_retention_period #=> Integer
+    #   resp.db_cluster_snapshots[0].preferred_backup_window #=> String
     #   resp.db_cluster_snapshots[0].kms_key_id #=> String
     #   resp.db_cluster_snapshots[0].db_cluster_snapshot_arn #=> String
     #   resp.db_cluster_snapshots[0].source_db_cluster_snapshot_arn #=> String
@@ -13725,6 +13742,7 @@ module Aws::RDS
     #   resp.db_instance_automated_backups[0].timezone #=> String
     #   resp.db_instance_automated_backups[0].iam_database_authentication_enabled #=> Boolean
     #   resp.db_instance_automated_backups[0].backup_retention_period #=> Integer
+    #   resp.db_instance_automated_backups[0].preferred_backup_window #=> String
     #   resp.db_instance_automated_backups[0].db_instance_automated_backups_arn #=> String
     #   resp.db_instance_automated_backups[0].db_instance_automated_backups_replications #=> Array
     #   resp.db_instance_automated_backups[0].db_instance_automated_backups_replications[0].db_instance_automated_backups_arn #=> String
@@ -15646,6 +15664,8 @@ module Aws::RDS
     #   resp.db_snapshots[0].storage_type #=> String
     #   resp.db_snapshots[0].tde_credential_arn #=> String
     #   resp.db_snapshots[0].encrypted #=> Boolean
+    #   resp.db_snapshots[0].backup_retention_period #=> Integer
+    #   resp.db_snapshots[0].preferred_backup_window #=> String
     #   resp.db_snapshots[0].kms_key_id #=> String
     #   resp.db_snapshots[0].db_snapshot_arn #=> String
     #   resp.db_snapshots[0].timezone #=> String
@@ -23135,6 +23155,8 @@ module Aws::RDS
     #   resp.db_snapshot.storage_type #=> String
     #   resp.db_snapshot.tde_credential_arn #=> String
     #   resp.db_snapshot.encrypted #=> Boolean
+    #   resp.db_snapshot.backup_retention_period #=> Integer
+    #   resp.db_snapshot.preferred_backup_window #=> String
     #   resp.db_snapshot.kms_key_id #=> String
     #   resp.db_snapshot.db_snapshot_arn #=> String
     #   resp.db_snapshot.timezone #=> String
@@ -27059,6 +27081,46 @@ module Aws::RDS
     #   If you specify a retention period that isn't valid, such as `94`,
     #   Amazon RDS issues an error.
     #
+    # @option params [Integer] :backup_retention_period
+    #   The number of days for which automated backups are retained. Specify a
+    #   minimum value of `1`.
+    #
+    #   Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters
+    #
+    #   Default: Uses existing setting
+    #
+    #   Constraints:
+    #
+    #   * Must be a value from 1 to 35.
+    #
+    #   ^
+    #
+    # @option params [String] :preferred_backup_window
+    #   The daily time range during which automated backups are created if
+    #   automated backups are enabled, using the `BackupRetentionPeriod`
+    #   parameter.
+    #
+    #   The default is a 30-minute window selected at random from an 8-hour
+    #   block of time for each Amazon Web Services Region. To view the time
+    #   blocks available, see [ Backup window][1] in the *Amazon Aurora User
+    #   Guide*.
+    #
+    #   Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters
+    #
+    #   Constraints:
+    #
+    #   * Must be in the format `hh24:mi-hh24:mi`.
+    #
+    #   * Must be in Universal Coordinated Time (UTC).
+    #
+    #   * Must not conflict with the preferred maintenance window.
+    #
+    #   * Must be at least 30 minutes.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.Managing.Backups.html#Aurora.Managing.Backups.BackupWindow
+    #
     # @option params [String] :engine_lifecycle_support
     #   The life cycle type for this DB cluster.
     #
@@ -27232,6 +27294,8 @@ module Aws::RDS
     #     enable_performance_insights: false,
     #     performance_insights_kms_key_id: "String",
     #     performance_insights_retention_period: 1,
+    #     backup_retention_period: 1,
+    #     preferred_backup_window: "String",
     #     engine_lifecycle_support: "String",
     #     tag_specifications: [
     #       {
@@ -27890,6 +27954,46 @@ module Aws::RDS
     #   If you specify a retention period that isn't valid, such as `94`,
     #   Amazon RDS issues an error.
     #
+    # @option params [Integer] :backup_retention_period
+    #   The number of days for which automated backups are retained. Specify a
+    #   minimum value of `1`.
+    #
+    #   Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters
+    #
+    #   Default: Uses existing setting
+    #
+    #   Constraints:
+    #
+    #   * Must be a value from 1 to 35.
+    #
+    #   ^
+    #
+    # @option params [String] :preferred_backup_window
+    #   The daily time range during which automated backups are created if
+    #   automated backups are enabled, using the `BackupRetentionPeriod`
+    #   parameter.
+    #
+    #   The default is a 30-minute window selected at random from an 8-hour
+    #   block of time for each Amazon Web Services Region. To view the time
+    #   blocks available, see [ Backup window][1] in the *Amazon Aurora User
+    #   Guide*.
+    #
+    #   Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters
+    #
+    #   Constraints:
+    #
+    #   * Must be in the format `hh24:mi-hh24:mi`.
+    #
+    #   * Must be in Universal Coordinated Time (UTC).
+    #
+    #   * Must not conflict with the preferred maintenance window.
+    #
+    #   * Must be at least 30 minutes.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.Managing.Backups.html#Aurora.Managing.Backups.BackupWindow
+    #
     # @option params [String] :engine_lifecycle_support
     #   The life cycle type for this DB cluster.
     #
@@ -28062,6 +28166,8 @@ module Aws::RDS
     #     enable_performance_insights: false,
     #     performance_insights_kms_key_id: "String",
     #     performance_insights_retention_period: 1,
+    #     backup_retention_period: 1,
+    #     preferred_backup_window: "String",
     #     engine_lifecycle_support: "String",
     #     tag_specifications: [
     #       {
@@ -28807,6 +28913,58 @@ module Aws::RDS
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/multi-az-db-clusters-concepts.html
     #
+    # @option params [Integer] :backup_retention_period
+    #   The number of days to retain automated backups. Setting this parameter
+    #   to a positive number enables backups. Setting this parameter to 0
+    #   disables automated backups.
+    #
+    #   <note markdown="1"> Enabling and disabling backups can result in a brief I/O suspension
+    #   that lasts from a few seconds to a few minutes, depending on the size
+    #   and class of your DB instance.
+    #
+    #    </note>
+    #
+    #   This setting doesn't apply to Amazon Aurora DB instances. The
+    #   retention period for automated backups is managed by the DB cluster.
+    #   For more information, see `ModifyDBCluster`.
+    #
+    #   Default: Uses existing setting
+    #
+    #   Constraints:
+    #
+    #   * Must be a value from 0 to 35.
+    #
+    #   * Can't be set to 0 if the DB instance is a source to read replicas.
+    #
+    #   * Can't be set to 0 for an RDS Custom for Oracle DB instance.
+    #
+    # @option params [String] :preferred_backup_window
+    #   The daily time range during which automated backups are created if
+    #   automated backups are enabled, as determined by the
+    #   `BackupRetentionPeriod` parameter. Changing this parameter doesn't
+    #   result in an outage and the change is asynchronously applied as soon
+    #   as possible. The default is a 30-minute window selected at random from
+    #   an 8-hour block of time for each Amazon Web Services Region. For more
+    #   information, see [Backup window][1] in the *Amazon RDS User Guide*.
+    #
+    #   This setting doesn't apply to Amazon Aurora DB instances. The daily
+    #   time range for creating automated backups is managed by the DB
+    #   cluster. For more information, see `ModifyDBCluster`.
+    #
+    #   Constraints:
+    #
+    #   * Must be in the format `hh24:mi-hh24:mi`.
+    #
+    #   * Must be in Universal Coordinated Time (UTC).
+    #
+    #   * Must not conflict with the preferred maintenance window.
+    #
+    #   * Must be at least 30 minutes.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithAutomatedBackups.html#USER_WorkingWithAutomatedBackups.BackupWindow
+    #
     # @option params [Boolean] :dedicated_log_volume
     #   Specifies whether to enable a dedicated log volume (DLV) for the DB
     #   instance.
@@ -29010,6 +29168,8 @@ module Aws::RDS
     #     custom_iam_instance_profile: "String",
     #     allocated_storage: 1,
     #     db_cluster_snapshot_identifier: "String",
+    #     backup_retention_period: 1,
+    #     preferred_backup_window: "String",
     #     dedicated_log_volume: false,
     #     ca_certificate_identifier: "String",
     #     engine_lifecycle_support: "String",
@@ -30681,6 +30841,58 @@ module Aws::RDS
     #
     #    </note>
     #
+    # @option params [Integer] :backup_retention_period
+    #   The number of days to retain automated backups. Setting this parameter
+    #   to a positive number enables backups. Setting this parameter to 0
+    #   disables automated backups.
+    #
+    #   <note markdown="1"> Enabling and disabling backups can result in a brief I/O suspension
+    #   that lasts from a few seconds to a few minutes, depending on the size
+    #   and class of your DB instance.
+    #
+    #    </note>
+    #
+    #   This setting doesn't apply to Amazon Aurora DB instances. The
+    #   retention period for automated backups is managed by the DB cluster.
+    #   For more information, see `ModifyDBCluster`.
+    #
+    #   Default: Uses existing setting
+    #
+    #   Constraints:
+    #
+    #   * Must be a value from 0 to 35.
+    #
+    #   * Can't be set to 0 if the DB instance is a source to read replicas.
+    #
+    #   * Can't be set to 0 for an RDS Custom for Oracle DB instance.
+    #
+    # @option params [String] :preferred_backup_window
+    #   The daily time range during which automated backups are created if
+    #   automated backups are enabled, as determined by the
+    #   `BackupRetentionPeriod` parameter. Changing this parameter doesn't
+    #   result in an outage and the change is asynchronously applied as soon
+    #   as possible. The default is a 30-minute window selected at random from
+    #   an 8-hour block of time for each Amazon Web Services Region. For more
+    #   information, see [Backup window][1] in the *Amazon RDS User Guide*.
+    #
+    #   This setting doesn't apply to Amazon Aurora DB instances. The daily
+    #   time range for creating automated backups is managed by the DB
+    #   cluster. For more information, see `ModifyDBCluster`.
+    #
+    #   Constraints:
+    #
+    #   * Must be in the format `hh24:mi-hh24:mi`.
+    #
+    #   * Must be in Universal Coordinated Time (UTC).
+    #
+    #   * Must not conflict with the preferred maintenance window.
+    #
+    #   * Must be at least 30 minutes.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithAutomatedBackups.html#USER_WorkingWithAutomatedBackups.BackupWindow
+    #
     # @option params [Boolean] :dedicated_log_volume
     #   Specifies whether to enable a dedicated log volume (DLV) for the DB
     #   instance.
@@ -30947,6 +31159,8 @@ module Aws::RDS
     #     backup_target: "String",
     #     custom_iam_instance_profile: "String",
     #     allocated_storage: 1,
+    #     backup_retention_period: 1,
+    #     preferred_backup_window: "String",
     #     dedicated_log_volume: false,
     #     ca_certificate_identifier: "String",
     #     engine_lifecycle_support: "String",
@@ -31959,6 +32173,7 @@ module Aws::RDS
     #   resp.db_instance_automated_backup.timezone #=> String
     #   resp.db_instance_automated_backup.iam_database_authentication_enabled #=> Boolean
     #   resp.db_instance_automated_backup.backup_retention_period #=> Integer
+    #   resp.db_instance_automated_backup.preferred_backup_window #=> String
     #   resp.db_instance_automated_backup.db_instance_automated_backups_arn #=> String
     #   resp.db_instance_automated_backup.db_instance_automated_backups_replications #=> Array
     #   resp.db_instance_automated_backup.db_instance_automated_backups_replications[0].db_instance_automated_backups_arn #=> String
@@ -32783,6 +32998,7 @@ module Aws::RDS
     #   resp.db_instance_automated_backup.timezone #=> String
     #   resp.db_instance_automated_backup.iam_database_authentication_enabled #=> Boolean
     #   resp.db_instance_automated_backup.backup_retention_period #=> Integer
+    #   resp.db_instance_automated_backup.preferred_backup_window #=> String
     #   resp.db_instance_automated_backup.db_instance_automated_backups_arn #=> String
     #   resp.db_instance_automated_backup.db_instance_automated_backups_replications #=> Array
     #   resp.db_instance_automated_backup.db_instance_automated_backups_replications[0].db_instance_automated_backups_arn #=> String
@@ -33342,7 +33558,7 @@ module Aws::RDS
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.306.0'
+      context[:gem_version] = '1.307.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

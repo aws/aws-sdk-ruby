@@ -675,6 +675,8 @@ module Aws
                      ?backup_target: ::String,
                      ?custom_iam_instance_profile: ::String,
                      ?allocated_storage: ::Integer,
+                     ?backup_retention_period: ::Integer,
+                     ?preferred_backup_window: ::String,
                      ?dedicated_log_volume: bool,
                      ?ca_certificate_identifier: ::String,
                      ?engine_lifecycle_support: ::String,

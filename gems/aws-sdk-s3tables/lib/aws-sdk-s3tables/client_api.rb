@@ -81,9 +81,18 @@ module Aws::S3Tables
     IcebergCompactionSettings = Shapes::StructureShape.new(name: 'IcebergCompactionSettings')
     IcebergCompactionStrategy = Shapes::StringShape.new(name: 'IcebergCompactionStrategy')
     IcebergMetadata = Shapes::StructureShape.new(name: 'IcebergMetadata')
+    IcebergNullOrder = Shapes::StringShape.new(name: 'IcebergNullOrder')
+    IcebergPartitionField = Shapes::StructureShape.new(name: 'IcebergPartitionField')
+    IcebergPartitionFieldList = Shapes::ListShape.new(name: 'IcebergPartitionFieldList')
+    IcebergPartitionSpec = Shapes::StructureShape.new(name: 'IcebergPartitionSpec')
     IcebergSchema = Shapes::StructureShape.new(name: 'IcebergSchema')
     IcebergSnapshotManagementSettings = Shapes::StructureShape.new(name: 'IcebergSnapshotManagementSettings')
+    IcebergSortDirection = Shapes::StringShape.new(name: 'IcebergSortDirection')
+    IcebergSortField = Shapes::StructureShape.new(name: 'IcebergSortField')
+    IcebergSortFieldList = Shapes::ListShape.new(name: 'IcebergSortFieldList')
+    IcebergSortOrder = Shapes::StructureShape.new(name: 'IcebergSortOrder')
     IcebergUnreferencedFileRemovalSettings = Shapes::StructureShape.new(name: 'IcebergUnreferencedFileRemovalSettings')
+    Integer = Shapes::IntegerShape.new(name: 'Integer')
     InternalServerErrorException = Shapes::StructureShape.new(name: 'InternalServerErrorException')
     JobStatus = Shapes::StringShape.new(name: 'JobStatus')
     LastSuccessfulReplicatedUpdate = Shapes::StructureShape.new(name: 'LastSuccessfulReplicatedUpdate')
@@ -449,8 +458,22 @@ module Aws::S3Tables
     IcebergCompactionSettings.struct_class = Types::IcebergCompactionSettings
 
     IcebergMetadata.add_member(:schema, Shapes::ShapeRef.new(shape: IcebergSchema, required: true, location_name: "schema"))
+    IcebergMetadata.add_member(:partition_spec, Shapes::ShapeRef.new(shape: IcebergPartitionSpec, location_name: "partitionSpec"))
+    IcebergMetadata.add_member(:write_order, Shapes::ShapeRef.new(shape: IcebergSortOrder, location_name: "writeOrder"))
     IcebergMetadata.add_member(:properties, Shapes::ShapeRef.new(shape: TableProperties, location_name: "properties"))
     IcebergMetadata.struct_class = Types::IcebergMetadata
+
+    IcebergPartitionField.add_member(:source_id, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "source-id"))
+    IcebergPartitionField.add_member(:transform, Shapes::ShapeRef.new(shape: String, required: true, location_name: "transform"))
+    IcebergPartitionField.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "name"))
+    IcebergPartitionField.add_member(:field_id, Shapes::ShapeRef.new(shape: Integer, location_name: "field-id"))
+    IcebergPartitionField.struct_class = Types::IcebergPartitionField
+
+    IcebergPartitionFieldList.member = Shapes::ShapeRef.new(shape: IcebergPartitionField)
+
+    IcebergPartitionSpec.add_member(:fields, Shapes::ShapeRef.new(shape: IcebergPartitionFieldList, required: true, location_name: "fields"))
+    IcebergPartitionSpec.add_member(:spec_id, Shapes::ShapeRef.new(shape: Integer, location_name: "spec-id"))
+    IcebergPartitionSpec.struct_class = Types::IcebergPartitionSpec
 
     IcebergSchema.add_member(:fields, Shapes::ShapeRef.new(shape: SchemaFieldList, required: true, location_name: "fields"))
     IcebergSchema.struct_class = Types::IcebergSchema
@@ -458,6 +481,18 @@ module Aws::S3Tables
     IcebergSnapshotManagementSettings.add_member(:min_snapshots_to_keep, Shapes::ShapeRef.new(shape: PositiveInteger, location_name: "minSnapshotsToKeep"))
     IcebergSnapshotManagementSettings.add_member(:max_snapshot_age_hours, Shapes::ShapeRef.new(shape: PositiveInteger, location_name: "maxSnapshotAgeHours"))
     IcebergSnapshotManagementSettings.struct_class = Types::IcebergSnapshotManagementSettings
+
+    IcebergSortField.add_member(:source_id, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "source-id"))
+    IcebergSortField.add_member(:transform, Shapes::ShapeRef.new(shape: String, required: true, location_name: "transform"))
+    IcebergSortField.add_member(:direction, Shapes::ShapeRef.new(shape: IcebergSortDirection, required: true, location_name: "direction"))
+    IcebergSortField.add_member(:null_order, Shapes::ShapeRef.new(shape: IcebergNullOrder, required: true, location_name: "null-order"))
+    IcebergSortField.struct_class = Types::IcebergSortField
+
+    IcebergSortFieldList.member = Shapes::ShapeRef.new(shape: IcebergSortField)
+
+    IcebergSortOrder.add_member(:order_id, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "order-id"))
+    IcebergSortOrder.add_member(:fields, Shapes::ShapeRef.new(shape: IcebergSortFieldList, required: true, location_name: "fields"))
+    IcebergSortOrder.struct_class = Types::IcebergSortOrder
 
     IcebergUnreferencedFileRemovalSettings.add_member(:unreferenced_days, Shapes::ShapeRef.new(shape: PositiveInteger, location_name: "unreferencedDays"))
     IcebergUnreferencedFileRemovalSettings.add_member(:non_current_days, Shapes::ShapeRef.new(shape: PositiveInteger, location_name: "nonCurrentDays"))
@@ -608,6 +643,7 @@ module Aws::S3Tables
     ReplicationInformation.add_member(:source_table_arn, Shapes::ShapeRef.new(shape: TableARN, required: true, location_name: "sourceTableARN"))
     ReplicationInformation.struct_class = Types::ReplicationInformation
 
+    SchemaField.add_member(:id, Shapes::ShapeRef.new(shape: Integer, location_name: "id"))
     SchemaField.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "name"))
     SchemaField.add_member(:type, Shapes::ShapeRef.new(shape: String, required: true, location_name: "type"))
     SchemaField.add_member(:required, Shapes::ShapeRef.new(shape: Boolean, location_name: "required"))

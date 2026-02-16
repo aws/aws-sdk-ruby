@@ -96,7 +96,8 @@ module Aws
                                   }?,
                                   scale_out_policy: {
                                     cpu_utilization_percentage: ::Integer
-                                  }?
+                                  }?,
+                                  max_autoscaling_task_count: ::Integer?
                                 }?,
                                 provisioned_capacity: {
                                   mcu_count: ::Integer,
@@ -410,7 +411,8 @@ module Aws
                                   },
                                   scale_out_policy: {
                                     cpu_utilization_percentage: ::Integer
-                                  }
+                                  },
+                                  max_autoscaling_task_count: ::Integer?
                                 }?,
                                 provisioned_capacity: {
                                   mcu_count: ::Integer,

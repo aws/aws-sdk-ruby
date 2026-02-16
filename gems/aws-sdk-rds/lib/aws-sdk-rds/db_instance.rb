@@ -4587,6 +4587,8 @@ module Aws::RDS
     #     backup_target: "String",
     #     custom_iam_instance_profile: "String",
     #     allocated_storage: 1,
+    #     backup_retention_period: 1,
+    #     preferred_backup_window: "String",
     #     dedicated_log_volume: false,
     #     ca_certificate_identifier: "String",
     #     engine_lifecycle_support: "String",
@@ -5125,6 +5127,56 @@ module Aws::RDS
     #   storage for future growth.
     #
     #    </note>
+    # @option options [Integer] :backup_retention_period
+    #   The number of days to retain automated backups. Setting this parameter
+    #   to a positive number enables backups. Setting this parameter to 0
+    #   disables automated backups.
+    #
+    #   <note markdown="1"> Enabling and disabling backups can result in a brief I/O suspension
+    #   that lasts from a few seconds to a few minutes, depending on the size
+    #   and class of your DB instance.
+    #
+    #    </note>
+    #
+    #   This setting doesn't apply to Amazon Aurora DB instances. The
+    #   retention period for automated backups is managed by the DB cluster.
+    #   For more information, see `ModifyDBCluster`.
+    #
+    #   Default: Uses existing setting
+    #
+    #   Constraints:
+    #
+    #   * Must be a value from 0 to 35.
+    #
+    #   * Can't be set to 0 if the DB instance is a source to read replicas.
+    #
+    #   * Can't be set to 0 for an RDS Custom for Oracle DB instance.
+    # @option options [String] :preferred_backup_window
+    #   The daily time range during which automated backups are created if
+    #   automated backups are enabled, as determined by the
+    #   `BackupRetentionPeriod` parameter. Changing this parameter doesn't
+    #   result in an outage and the change is asynchronously applied as soon
+    #   as possible. The default is a 30-minute window selected at random from
+    #   an 8-hour block of time for each Amazon Web Services Region. For more
+    #   information, see [Backup window][1] in the *Amazon RDS User Guide*.
+    #
+    #   This setting doesn't apply to Amazon Aurora DB instances. The daily
+    #   time range for creating automated backups is managed by the DB
+    #   cluster. For more information, see `ModifyDBCluster`.
+    #
+    #   Constraints:
+    #
+    #   * Must be in the format `hh24:mi-hh24:mi`.
+    #
+    #   * Must be in Universal Coordinated Time (UTC).
+    #
+    #   * Must not conflict with the preferred maintenance window.
+    #
+    #   * Must be at least 30 minutes.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithAutomatedBackups.html#USER_WorkingWithAutomatedBackups.BackupWindow
     # @option options [Boolean] :dedicated_log_volume
     #   Specifies whether to enable a dedicated log volume (DLV) for the DB
     #   instance.

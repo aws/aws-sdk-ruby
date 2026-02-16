@@ -93,10 +93,12 @@ module Aws::BedrockDataAutomationRuntime
       attr_accessor blueprints: ::Array[Types::Blueprint]
       attr_accessor data_automation_profile_arn: ::String
       attr_accessor encryption_configuration: Types::EncryptionConfiguration
+      attr_accessor output_configuration: Types::OutputConfiguration
       SENSITIVE: []
     end
 
     class InvokeDataAutomationResponse
+      attr_accessor output_configuration: Types::OutputConfiguration
       attr_accessor semantic_modality: ("DOCUMENT" | "IMAGE" | "AUDIO" | "VIDEO")
       attr_accessor output_segments: ::Array[Types::OutputSegment]
       SENSITIVE: []

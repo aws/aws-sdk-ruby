@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.601.0 (2026-02-13)
+------------------
+
+* Feature - This release adds geography information to EC2 region and availability zone APIs. DescribeRegions now includes a Geography field, while DescribeAvailabilityZones includes both Geography and SubGeography fields, enabling better geographic classification for AWS regions and zones.
+
+1.600.0 (2026-02-12)
+------------------
+
+* Feature - Launching nested virtualization. This feature allows you to run nested VMs inside virtual (non-bare metal) EC2 instances.
+
+1.599.0 (2026-02-11)
+------------------
+
+* Feature - R8i instances powered by custom Intel Xeon 6 processors available only on AWS with sustained all-core 3.9 GHz turbo frequency
+
+1.598.0 (2026-02-09)
+------------------
+
+* Feature - Amazon Secondary Networks is a networking feature that provides high-performance, low-latency connectivity for specialized workloads.
+
 1.597.0 (2026-01-29)
 ------------------
 

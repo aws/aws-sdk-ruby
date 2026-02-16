@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.134.0 (2026-02-11)
+------------------
+
+* Feature - Add support for listing jobs by share identifier and getting snapshots of active capacity utilization by job queue and share.
+
 1.133.0 (2026-02-03)
 ------------------
 

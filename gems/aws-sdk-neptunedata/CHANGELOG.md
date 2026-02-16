@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.39.0 (2026-02-09)
+------------------
+
+* Feature - Added edgeOnlyLoad boolean parameter to Neptune bulk load request. When TRUE, files are loaded in order without scanning. When FALSE (default), the loader scans files first, then loads vertex files before edge files automatically.
+
 1.38.0 (2026-01-16)
 ------------------
 

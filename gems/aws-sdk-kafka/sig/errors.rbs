@@ -43,6 +43,42 @@ module Aws
         def invalid_parameter: () -> ::String
         def message: () -> ::String
       end
+      class TopicExistsException < ::Aws::Errors::ServiceError
+        def invalid_parameter: () -> ::String
+        def message: () -> ::String
+      end
+      class ClusterConnectivityException < ::Aws::Errors::ServiceError
+        def invalid_parameter: () -> ::String
+        def message: () -> ::String
+      end
+      class KafkaTimeoutException < ::Aws::Errors::ServiceError
+        def invalid_parameter: () -> ::String
+        def message: () -> ::String
+      end
+      class UnknownTopicOrPartitionException < ::Aws::Errors::ServiceError
+        def invalid_parameter: () -> ::String
+        def message: () -> ::String
+      end
+      class ControllerMovedException < ::Aws::Errors::ServiceError
+        def invalid_parameter: () -> ::String
+        def message: () -> ::String
+      end
+      class NotControllerException < ::Aws::Errors::ServiceError
+        def invalid_parameter: () -> ::String
+        def message: () -> ::String
+      end
+      class ReassignmentInProgressException < ::Aws::Errors::ServiceError
+        def invalid_parameter: () -> ::String
+        def message: () -> ::String
+      end
+      class GroupSubscribedToTopicException < ::Aws::Errors::ServiceError
+        def invalid_parameter: () -> ::String
+        def message: () -> ::String
+      end
+      class KafkaRequestException < ::Aws::Errors::ServiceError
+        def invalid_parameter: () -> ::String
+        def message: () -> ::String
+      end
     end
   end
 end

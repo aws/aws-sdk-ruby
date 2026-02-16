@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.19.0 (2026-02-10)
+------------------
+
+* Feature - Added AgentCore browser proxy configuration support, allowing routing of browser traffic through HTTP and HTTPS proxy servers with authentication and bypass rules.
+
 1.18.0 (2026-02-05)
 ------------------
 

@@ -97,7 +97,7 @@ module Aws
       def threshold_metric_id: () -> ::String
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatch/Alarm.html#evaluation_state-instance_method
-      def evaluation_state: () -> ("PARTIAL_DATA")
+      def evaluation_state: () -> ("PARTIAL_DATA" | "EVALUATION_FAILURE" | "EVALUATION_ERROR")
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatch/Alarm.html#state_transitioned_timestamp-instance_method
       def state_transitioned_timestamp: () -> ::Time

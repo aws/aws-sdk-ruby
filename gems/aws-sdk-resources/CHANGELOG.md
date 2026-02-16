@@ -1,6 +1,13 @@
 Unreleased Changes
 ------------------
 
+3.252.0 (2026-02-09)
+------------------
+
+* Feature - Removed a dependency on the deprecated `aws-sdk-iotanalytics` gem.
+
+* Feature - Removed a dependency on the deprecated `aws-sdk-cloudwatchevidently` gem.
+
 3.251.0 (2025-12-23)
 ------------------
 

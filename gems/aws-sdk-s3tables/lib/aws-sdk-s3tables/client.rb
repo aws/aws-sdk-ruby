@@ -629,9 +629,32 @@ module Aws::S3Tables
     #         schema: { # required
     #           fields: [ # required
     #             {
+    #               id: 1,
     #               name: "String", # required
     #               type: "String", # required
     #               required: false,
+    #             },
+    #           ],
+    #         },
+    #         partition_spec: {
+    #           fields: [ # required
+    #             {
+    #               source_id: 1, # required
+    #               transform: "String", # required
+    #               name: "String", # required
+    #               field_id: 1,
+    #             },
+    #           ],
+    #           spec_id: 1,
+    #         },
+    #         write_order: {
+    #           order_id: 1, # required
+    #           fields: [ # required
+    #             {
+    #               source_id: 1, # required
+    #               transform: "String", # required
+    #               direction: "asc", # required, accepts asc, desc
+    #               null_order: "nulls-first", # required, accepts nulls-first, nulls-last
     #             },
     #           ],
     #         },
@@ -2938,7 +2961,7 @@ module Aws::S3Tables
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-s3tables'
-      context[:gem_version] = '1.25.0'
+      context[:gem_version] = '1.26.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -388,6 +388,7 @@ module Aws
       interface _DescribeServiceJobResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeServiceJobResponse]
         def attempts: () -> ::Array[Types::ServiceJobAttemptDetail]
+        def capacity_usage: () -> ::Array[Types::ServiceJobCapacityUsageDetail]
         def created_at: () -> ::Integer
         def is_terminated: () -> bool
         def job_arn: () -> ::String
@@ -396,6 +397,7 @@ module Aws
         def job_queue: () -> ::String
         def latest_attempt: () -> Types::LatestServiceJobAttempt
         def retry_strategy: () -> Types::ServiceJobRetryStrategy
+        def scheduled_at: () -> ::Integer
         def scheduling_priority: () -> ::Integer
         def service_request_payload: () -> ::String
         def service_job_type: () -> ("SAGEMAKER_TRAINING")
@@ -416,6 +418,7 @@ module Aws
       interface _GetJobQueueSnapshotResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetJobQueueSnapshotResponse]
         def front_of_queue: () -> Types::FrontOfQueueDetail
+        def queue_utilization: () -> Types::QueueSnapshotUtilizationDetail
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Batch/Client.html#get_job_queue_snapshot-instance_method
       def get_job_queue_snapshot: (

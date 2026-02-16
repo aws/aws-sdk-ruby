@@ -106,12 +106,35 @@ module Aws
                               schema: {
                                 fields: Array[
                                   {
+                                    id: ::Integer?,
                                     name: ::String,
                                     type: ::String,
                                     required: bool?
                                   },
                                 ]
                               },
+                              partition_spec: {
+                                fields: Array[
+                                  {
+                                    source_id: ::Integer,
+                                    transform: ::String,
+                                    name: ::String,
+                                    field_id: ::Integer?
+                                  },
+                                ],
+                                spec_id: ::Integer?
+                              }?,
+                              write_order: {
+                                order_id: ::Integer,
+                                fields: Array[
+                                  {
+                                    source_id: ::Integer,
+                                    transform: ::String,
+                                    direction: ("asc" | "desc"),
+                                    null_order: ("nulls-first" | "nulls-last")
+                                  },
+                                ]
+                              }?,
                               properties: Hash[::String, ::String]?
                             }?
                           },

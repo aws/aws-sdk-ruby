@@ -916,6 +916,7 @@ module Aws::RDS
       attr_accessor engine_version: ::String
       attr_accessor db_cluster_arn: ::String
       attr_accessor backup_retention_period: ::Integer
+      attr_accessor preferred_backup_window: ::String
       attr_accessor engine_mode: ::String
       attr_accessor availability_zones: ::Array[::String]
       attr_accessor port: ::Integer
@@ -1085,6 +1086,8 @@ module Aws::RDS
       attr_accessor snapshot_type: ::String
       attr_accessor percent_progress: ::Integer
       attr_accessor storage_encrypted: bool
+      attr_accessor backup_retention_period: ::Integer
+      attr_accessor preferred_backup_window: ::String
       attr_accessor kms_key_id: ::String
       attr_accessor db_cluster_snapshot_arn: ::String
       attr_accessor source_db_cluster_snapshot_arn: ::String
@@ -1299,6 +1302,7 @@ module Aws::RDS
       attr_accessor timezone: ::String
       attr_accessor iam_database_authentication_enabled: bool
       attr_accessor backup_retention_period: ::Integer
+      attr_accessor preferred_backup_window: ::String
       attr_accessor db_instance_automated_backups_arn: ::String
       attr_accessor db_instance_automated_backups_replications: ::Array[Types::DBInstanceAutomatedBackupsReplication]
       attr_accessor backup_target: ::String
@@ -1617,6 +1621,8 @@ module Aws::RDS
       attr_accessor storage_type: ::String
       attr_accessor tde_credential_arn: ::String
       attr_accessor encrypted: bool
+      attr_accessor backup_retention_period: ::Integer
+      attr_accessor preferred_backup_window: ::String
       attr_accessor kms_key_id: ::String
       attr_accessor db_snapshot_arn: ::String
       attr_accessor timezone: ::String
@@ -3846,6 +3852,8 @@ module Aws::RDS
       attr_accessor enable_performance_insights: bool
       attr_accessor performance_insights_kms_key_id: ::String
       attr_accessor performance_insights_retention_period: ::Integer
+      attr_accessor backup_retention_period: ::Integer
+      attr_accessor preferred_backup_window: ::String
       attr_accessor engine_lifecycle_support: ::String
       attr_accessor tag_specifications: ::Array[Types::TagSpecification]
       SENSITIVE: []
@@ -3891,6 +3899,8 @@ module Aws::RDS
       attr_accessor enable_performance_insights: bool
       attr_accessor performance_insights_kms_key_id: ::String
       attr_accessor performance_insights_retention_period: ::Integer
+      attr_accessor backup_retention_period: ::Integer
+      attr_accessor preferred_backup_window: ::String
       attr_accessor engine_lifecycle_support: ::String
       attr_accessor tag_specifications: ::Array[Types::TagSpecification]
       SENSITIVE: []
@@ -3941,6 +3951,8 @@ module Aws::RDS
       attr_accessor custom_iam_instance_profile: ::String
       attr_accessor allocated_storage: ::Integer
       attr_accessor db_cluster_snapshot_identifier: ::String
+      attr_accessor backup_retention_period: ::Integer
+      attr_accessor preferred_backup_window: ::String
       attr_accessor dedicated_log_volume: bool
       attr_accessor ca_certificate_identifier: ::String
       attr_accessor engine_lifecycle_support: ::String
@@ -4063,6 +4075,8 @@ module Aws::RDS
       attr_accessor backup_target: ::String
       attr_accessor custom_iam_instance_profile: ::String
       attr_accessor allocated_storage: ::Integer
+      attr_accessor backup_retention_period: ::Integer
+      attr_accessor preferred_backup_window: ::String
       attr_accessor dedicated_log_volume: bool
       attr_accessor ca_certificate_identifier: ::String
       attr_accessor engine_lifecycle_support: ::String

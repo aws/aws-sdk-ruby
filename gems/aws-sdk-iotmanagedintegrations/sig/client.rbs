@@ -91,7 +91,10 @@ module Aws
                                         connector_destination_id: ::String,
                                         ?name: ::String,
                                         ?description: ::String,
-                                        ?tags: Hash[::String, ::String]
+                                        ?tags: Hash[::String, ::String],
+                                        ?general_authorization: {
+                                          auth_material_name: ::String?
+                                        }
                                       ) -> _CreateAccountAssociationResponseSuccess
                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAccountAssociationResponseSuccess
 
@@ -122,7 +125,7 @@ module Aws
                                           ?name: ::String,
                                           ?description: ::String,
                                           cloud_connector_id: ::String,
-                                          auth_type: ("OAUTH"),
+                                          ?auth_type: ("OAUTH"),
                                           auth_config: {
                                             o_auth: {
                                               auth_url: ::String,
@@ -134,9 +137,18 @@ module Aws
                                                 enabled: bool?,
                                                 days_before_renewal: ::Integer?
                                               }?
-                                            }?
+                                            }?,
+                                            general_authorization: Array[
+                                              {
+                                                secrets_manager: {
+                                                  arn: ::String,
+                                                  version_id: ::String
+                                                },
+                                                auth_material_name: ::String
+                                              },
+                                            ]?
                                           },
-                                          secrets_manager: {
+                                          ?secrets_manager: {
                                             arn: ::String,
                                             version_id: ::String
                                           },
@@ -199,7 +211,7 @@ module Aws
                                   ?owner: ::String,
                                   ?credential_locker_id: ::String,
                                   authentication_material: ::String,
-                                  authentication_material_type: ("CUSTOM_PROTOCOL_QR_BAR_CODE" | "WIFI_SETUP_QR_BAR_CODE" | "ZWAVE_QR_BAR_CODE" | "ZIGBEE_QR_BAR_CODE" | "DISCOVERED_DEVICE"),
+                                  authentication_material_type: ("CUSTOM_PROTOCOL_QR_BAR_CODE" | "WIFI_SETUP_QR_BAR_CODE" | "ZWAVE_QR_BAR_CODE" | "ZIGBEE_QR_BAR_CODE" | "DISCOVERED_DEVICE" | "PRE_ONBOARDED_CLOUD"),
                                   ?wi_fi_simple_setup_configuration: {
                                     enable_as_provisioner: bool?,
                                     enable_as_provisionee: bool?,
@@ -351,6 +363,7 @@ module Aws
       def create_provisioning_profile: (
                                          provisioning_type: ("FLEET_PROVISIONING" | "JITR"),
                                          ?ca_certificate: ::String,
+                                         ?claim_certificate: ::String,
                                          ?name: ::String,
                                          ?client_token: ::String,
                                          ?tags: Hash[::String, ::String]
@@ -442,6 +455,7 @@ module Aws
         def arn: () -> ::String
         def o_auth_authorization_url: () -> ::String
         def tags: () -> ::Hash[::String, ::String]
+        def general_authorization: () -> Types::GeneralAuthorizationName
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTManagedIntegrations/Client.html#get_account_association-instance_method
       def get_account_association: (
@@ -1218,6 +1232,7 @@ module Aws
                                     ?authentication_material_type: ("ZWAVE_INSTALL_CODE"),
                                     ?client_token: ::String,
                                     ?tags: Hash[::String, ::String],
+                                    ?connector_device_id_list: Array[::String],
                                     ?protocol: ("ZWAVE" | "ZIGBEE" | "CUSTOM"),
                                     ?end_device_identifier: ::String
                                   ) -> _StartDeviceDiscoveryResponseSuccess
@@ -1272,6 +1287,26 @@ module Aws
                                                 enabled: bool?,
                                                 days_before_renewal: ::Integer?
                                               }?
+                                            }?,
+                                            general_authorization_update: {
+                                              auth_materials_to_add: Array[
+                                                {
+                                                  secrets_manager: {
+                                                    arn: ::String,
+                                                    version_id: ::String
+                                                  },
+                                                  auth_material_name: ::String
+                                                },
+                                              ]?,
+                                              auth_materials_to_update: Array[
+                                                {
+                                                  secrets_manager: {
+                                                    arn: ::String,
+                                                    version_id: ::String
+                                                  },
+                                                  auth_material_name: ::String
+                                                },
+                                              ]?
                                             }?
                                           },
                                           ?secrets_manager: {

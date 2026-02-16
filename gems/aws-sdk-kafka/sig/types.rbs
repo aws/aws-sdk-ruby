@@ -322,6 +322,22 @@ module Aws::Kafka
       SENSITIVE: []
     end
 
+    class CreateTopicRequest
+      attr_accessor cluster_arn: ::String
+      attr_accessor topic_name: ::String
+      attr_accessor partition_count: ::Integer
+      attr_accessor replication_factor: ::Integer
+      attr_accessor configs: ::String
+      SENSITIVE: []
+    end
+
+    class CreateTopicResponse
+      attr_accessor topic_arn: ::String
+      attr_accessor topic_name: ::String
+      attr_accessor status: ("CREATING" | "UPDATING" | "DELETING" | "ACTIVE")
+      SENSITIVE: []
+    end
+
     class CreateVpcConnectionRequest
       attr_accessor target_cluster_arn: ::String
       attr_accessor authentication: ::String
@@ -376,6 +392,19 @@ module Aws::Kafka
     class DeleteReplicatorResponse
       attr_accessor replicator_arn: ::String
       attr_accessor replicator_state: ("RUNNING" | "CREATING" | "UPDATING" | "DELETING" | "FAILED")
+      SENSITIVE: []
+    end
+
+    class DeleteTopicRequest
+      attr_accessor cluster_arn: ::String
+      attr_accessor topic_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteTopicResponse
+      attr_accessor topic_arn: ::String
+      attr_accessor topic_name: ::String
+      attr_accessor status: ("CREATING" | "UPDATING" | "DELETING" | "ACTIVE")
       SENSITIVE: []
     end
 
@@ -1183,6 +1212,60 @@ module Aws::Kafka
       SENSITIVE: []
     end
 
+    class TopicExistsException
+      attr_accessor invalid_parameter: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ClusterConnectivityException
+      attr_accessor invalid_parameter: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class KafkaTimeoutException
+      attr_accessor invalid_parameter: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UnknownTopicOrPartitionException
+      attr_accessor invalid_parameter: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ControllerMovedException
+      attr_accessor invalid_parameter: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class NotControllerException
+      attr_accessor invalid_parameter: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ReassignmentInProgressException
+      attr_accessor invalid_parameter: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class GroupSubscribedToTopicException
+      attr_accessor invalid_parameter: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class KafkaRequestException
+      attr_accessor invalid_parameter: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
     class UnprocessedScramSecret
       attr_accessor error_code: ::String
       attr_accessor error_message: ::String
@@ -1352,6 +1435,21 @@ module Aws::Kafka
       attr_accessor provisioned_throughput: Types::ProvisionedThroughput
       attr_accessor storage_mode: ("LOCAL" | "TIERED")
       attr_accessor volume_size_gb: ::Integer
+      SENSITIVE: []
+    end
+
+    class UpdateTopicRequest
+      attr_accessor cluster_arn: ::String
+      attr_accessor topic_name: ::String
+      attr_accessor configs: ::String
+      attr_accessor partition_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class UpdateTopicResponse
+      attr_accessor topic_arn: ::String
+      attr_accessor topic_name: ::String
+      attr_accessor status: ("CREATING" | "UPDATING" | "DELETING" | "ACTIVE")
       SENSITIVE: []
     end
 

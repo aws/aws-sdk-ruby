@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.242.0 (2026-02-13)
+------------------
+
+* Feature - API release for headerr notifications in the admin website. APIs allow customers to publish brief messages (including URLs) to a specified audience, and a new header icon will indicate when unread messages are available.
+
+1.241.0 (2026-02-10)
+------------------
+
+* Feature - Amazon Connect now supports per-channel auto-accept and After Contact Work (ACW) timeouts. Configure agents with auto-accept and ACW timeout settings for chat, tasks, emails, and callbacks. Use the new UpdateUserConfig API to manage these settings.
+
 1.240.0 (2026-01-30)
 ------------------
 

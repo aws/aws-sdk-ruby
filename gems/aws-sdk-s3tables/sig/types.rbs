@@ -382,7 +382,23 @@ module Aws::S3Tables
 
     class IcebergMetadata
       attr_accessor schema: Types::IcebergSchema
+      attr_accessor partition_spec: Types::IcebergPartitionSpec
+      attr_accessor write_order: Types::IcebergSortOrder
       attr_accessor properties: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class IcebergPartitionField
+      attr_accessor source_id: ::Integer
+      attr_accessor transform: ::String
+      attr_accessor name: ::String
+      attr_accessor field_id: ::Integer
+      SENSITIVE: []
+    end
+
+    class IcebergPartitionSpec
+      attr_accessor fields: ::Array[Types::IcebergPartitionField]
+      attr_accessor spec_id: ::Integer
       SENSITIVE: []
     end
 
@@ -394,6 +410,20 @@ module Aws::S3Tables
     class IcebergSnapshotManagementSettings
       attr_accessor min_snapshots_to_keep: ::Integer
       attr_accessor max_snapshot_age_hours: ::Integer
+      SENSITIVE: []
+    end
+
+    class IcebergSortField
+      attr_accessor source_id: ::Integer
+      attr_accessor transform: ::String
+      attr_accessor direction: ("asc" | "desc")
+      attr_accessor null_order: ("nulls-first" | "nulls-last")
+      SENSITIVE: []
+    end
+
+    class IcebergSortOrder
+      attr_accessor order_id: ::Integer
+      attr_accessor fields: ::Array[Types::IcebergSortField]
       SENSITIVE: []
     end
 
@@ -601,6 +631,7 @@ module Aws::S3Tables
     end
 
     class SchemaField
+      attr_accessor id: ::Integer
       attr_accessor name: ::String
       attr_accessor type: ::String
       attr_accessor required: bool

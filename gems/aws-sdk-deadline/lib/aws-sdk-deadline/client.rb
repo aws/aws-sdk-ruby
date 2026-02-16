@@ -1409,6 +1409,11 @@ module Aws::Deadline
     #   A custom description to override the job description derived from the
     #   job template.
     #
+    # @option params [Hash<String,String>] :tags
+    #   The tags to add to your job. Each tag consists of a tag key and a tag
+    #   value. Tag keys and values are both required, but tag values can be
+    #   empty strings.
+    #
     # @return [Types::CreateJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateJobResponse#job_id #job_id} => String
@@ -1451,6 +1456,9 @@ module Aws::Deadline
     #     source_job_id: "JobId",
     #     name_override: "JobName",
     #     description_override: "JobDescriptionOverride",
+    #     tags: {
+    #       "String" => "String",
+    #     },
     #   })
     #
     # @example Response structure
@@ -3413,7 +3421,7 @@ module Aws::Deadline
     #     farm_id: "FarmId", # required
     #     aggregation_id: "AggregationId", # required
     #     max_results: 1,
-    #     next_token: "String",
+    #     next_token: "NextToken",
     #   })
     #
     # @example Response structure
@@ -3795,7 +3803,7 @@ module Aws::Deadline
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_available_metered_products({
-    #     next_token: "String",
+    #     next_token: "NextToken",
     #     max_results: 1,
     #   })
     #
@@ -3843,7 +3851,7 @@ module Aws::Deadline
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_budgets({
-    #     next_token: "String",
+    #     next_token: "NextToken",
     #     farm_id: "FarmId", # required
     #     max_results: 1,
     #     status: "ACTIVE", # accepts ACTIVE, INACTIVE
@@ -3898,7 +3906,7 @@ module Aws::Deadline
     #
     #   resp = client.list_farm_members({
     #     farm_id: "FarmId", # required
-    #     next_token: "String",
+    #     next_token: "NextToken",
     #     max_results: 1,
     #   })
     #
@@ -3944,7 +3952,7 @@ module Aws::Deadline
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_farms({
-    #     next_token: "String",
+    #     next_token: "NextToken",
     #     principal_id: "IdentityCenterPrincipalId",
     #     max_results: 1,
     #   })
@@ -3998,7 +4006,7 @@ module Aws::Deadline
     #   resp = client.list_fleet_members({
     #     farm_id: "FarmId", # required
     #     fleet_id: "FleetId", # required
-    #     next_token: "String",
+    #     next_token: "NextToken",
     #     max_results: 1,
     #   })
     #
@@ -4062,7 +4070,7 @@ module Aws::Deadline
     #     principal_id: "IdentityCenterPrincipalId",
     #     display_name: "ResourceName",
     #     status: "ACTIVE", # accepts ACTIVE, CREATE_IN_PROGRESS, UPDATE_IN_PROGRESS, CREATE_FAILED, UPDATE_FAILED, SUSPENDED
-    #     next_token: "String",
+    #     next_token: "NextToken",
     #     max_results: 1,
     #   })
     #
@@ -4179,7 +4187,7 @@ module Aws::Deadline
     #     farm_id: "FarmId", # required
     #     queue_id: "QueueId", # required
     #     job_id: "JobId", # required
-    #     next_token: "String",
+    #     next_token: "NextToken",
     #     max_results: 1,
     #   })
     #
@@ -4236,7 +4244,7 @@ module Aws::Deadline
     #     farm_id: "FarmId", # required
     #     job_id: "JobId", # required
     #     queue_id: "QueueId", # required
-    #     next_token: "String",
+    #     next_token: "NextToken",
     #     max_results: 1,
     #   })
     #
@@ -4286,7 +4294,7 @@ module Aws::Deadline
     #     farm_id: "FarmId", # required
     #     principal_id: "IdentityCenterPrincipalId",
     #     queue_id: "QueueId", # required
-    #     next_token: "String",
+    #     next_token: "NextToken",
     #     max_results: 1,
     #   })
     #
@@ -4344,7 +4352,7 @@ module Aws::Deadline
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_license_endpoints({
-    #     next_token: "String",
+    #     next_token: "NextToken",
     #     max_results: 1,
     #   })
     #
@@ -4389,7 +4397,7 @@ module Aws::Deadline
     #
     #   resp = client.list_limits({
     #     farm_id: "FarmId", # required
-    #     next_token: "String",
+    #     next_token: "NextToken",
     #     max_results: 1,
     #   })
     #
@@ -4441,7 +4449,7 @@ module Aws::Deadline
     #
     #   resp = client.list_metered_products({
     #     license_endpoint_id: "LicenseEndpointId", # required
-    #     next_token: "String",
+    #     next_token: "NextToken",
     #     max_results: 1,
     #   })
     #
@@ -4483,7 +4491,7 @@ module Aws::Deadline
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_monitors({
-    #     next_token: "String",
+    #     next_token: "NextToken",
     #     max_results: 1,
     #   })
     #
@@ -4540,7 +4548,7 @@ module Aws::Deadline
     #   resp = client.list_queue_environments({
     #     farm_id: "FarmId", # required
     #     queue_id: "QueueId", # required
-    #     next_token: "String",
+    #     next_token: "NextToken",
     #     max_results: 1,
     #   })
     #
@@ -4593,7 +4601,7 @@ module Aws::Deadline
     #     farm_id: "FarmId", # required
     #     queue_id: "QueueId",
     #     fleet_id: "FleetId",
-    #     next_token: "String",
+    #     next_token: "NextToken",
     #     max_results: 1,
     #   })
     #
@@ -4657,7 +4665,7 @@ module Aws::Deadline
     #     farm_id: "FarmId", # required
     #     queue_id: "QueueId",
     #     limit_id: "LimitId",
-    #     next_token: "String",
+    #     next_token: "NextToken",
     #     max_results: 1,
     #   })
     #
@@ -4710,7 +4718,7 @@ module Aws::Deadline
     #   resp = client.list_queue_members({
     #     farm_id: "FarmId", # required
     #     queue_id: "QueueId", # required
-    #     next_token: "String",
+    #     next_token: "NextToken",
     #     max_results: 1,
     #   })
     #
@@ -4773,7 +4781,7 @@ module Aws::Deadline
     #     farm_id: "FarmId", # required
     #     principal_id: "IdentityCenterPrincipalId",
     #     status: "IDLE", # accepts IDLE, SCHEDULING, SCHEDULING_BLOCKED
-    #     next_token: "String",
+    #     next_token: "NextToken",
     #     max_results: 1,
     #   })
     #
@@ -4841,7 +4849,7 @@ module Aws::Deadline
     #     job_id: "JobId", # required
     #     session_id: "SessionId",
     #     task_id: "TaskId",
-    #     next_token: "String",
+    #     next_token: "NextToken",
     #     max_results: 1,
     #   })
     #
@@ -4911,7 +4919,7 @@ module Aws::Deadline
     #     farm_id: "FarmId", # required
     #     queue_id: "QueueId", # required
     #     job_id: "JobId", # required
-    #     next_token: "String",
+    #     next_token: "NextToken",
     #     max_results: 1,
     #   })
     #
@@ -4970,7 +4978,7 @@ module Aws::Deadline
     #     farm_id: "FarmId", # required
     #     fleet_id: "FleetId", # required
     #     worker_id: "WorkerId", # required
-    #     next_token: "String",
+    #     next_token: "NextToken",
     #     max_results: 1,
     #   })
     #
@@ -5031,7 +5039,7 @@ module Aws::Deadline
     #     queue_id: "QueueId", # required
     #     job_id: "JobId", # required
     #     step_id: "StepId", # required
-    #     next_token: "String",
+    #     next_token: "NextToken",
     #     max_results: 1,
     #   })
     #
@@ -5087,7 +5095,7 @@ module Aws::Deadline
     #     queue_id: "QueueId", # required
     #     job_id: "JobId", # required
     #     step_id: "StepId", # required
-    #     next_token: "String",
+    #     next_token: "NextToken",
     #     max_results: 1,
     #   })
     #
@@ -5139,7 +5147,7 @@ module Aws::Deadline
     #     farm_id: "FarmId", # required
     #     queue_id: "QueueId", # required
     #     job_id: "JobId", # required
-    #     next_token: "String",
+    #     next_token: "NextToken",
     #     max_results: 1,
     #   })
     #
@@ -5200,7 +5208,7 @@ module Aws::Deadline
     #
     #   resp = client.list_storage_profiles({
     #     farm_id: "FarmId", # required
-    #     next_token: "String",
+    #     next_token: "NextToken",
     #     max_results: 1,
     #   })
     #
@@ -5249,7 +5257,7 @@ module Aws::Deadline
     #   resp = client.list_storage_profiles_for_queue({
     #     farm_id: "FarmId", # required
     #     queue_id: "QueueId", # required
-    #     next_token: "String",
+    #     next_token: "NextToken",
     #     max_results: 1,
     #   })
     #
@@ -5335,7 +5343,7 @@ module Aws::Deadline
     #     queue_id: "QueueId", # required
     #     job_id: "JobId", # required
     #     step_id: "StepId", # required
-    #     next_token: "String",
+    #     next_token: "NextToken",
     #     max_results: 1,
     #   })
     #
@@ -5398,7 +5406,7 @@ module Aws::Deadline
     #   resp = client.list_workers({
     #     farm_id: "FarmId", # required
     #     fleet_id: "FleetId", # required
-    #     next_token: "String",
+    #     next_token: "NextToken",
     #     max_results: 1,
     #   })
     #
@@ -7169,7 +7177,7 @@ module Aws::Deadline
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-deadline'
-      context[:gem_version] = '1.44.0'
+      context[:gem_version] = '1.45.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

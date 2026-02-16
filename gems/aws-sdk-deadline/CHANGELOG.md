@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.45.0 (2026-02-06)
+------------------
+
+* Feature - Adds support for tagging jobs during job creation
+
 1.44.0 (2026-01-27)
 ------------------
 

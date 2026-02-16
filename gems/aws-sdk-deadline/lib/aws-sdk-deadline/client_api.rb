@@ -411,6 +411,7 @@ module Aws::Deadline
     MonitorSummaries = Shapes::ListShape.new(name: 'MonitorSummaries')
     MonitorSummary = Shapes::StructureShape.new(name: 'MonitorSummary')
     NextItemOffset = Shapes::IntegerShape.new(name: 'NextItemOffset')
+    NextToken = Shapes::StringShape.new(name: 'NextToken')
     OutputRelativeDirectoriesList = Shapes::ListShape.new(name: 'OutputRelativeDirectoriesList')
     OutputRelativeDirectoriesListMemberString = Shapes::StringShape.new(name: 'OutputRelativeDirectoriesListMemberString')
     ParameterFilterExpression = Shapes::StructureShape.new(name: 'ParameterFilterExpression')
@@ -959,6 +960,7 @@ module Aws::Deadline
     CreateJobRequest.add_member(:source_job_id, Shapes::ShapeRef.new(shape: JobId, location_name: "sourceJobId"))
     CreateJobRequest.add_member(:name_override, Shapes::ShapeRef.new(shape: JobName, location_name: "nameOverride"))
     CreateJobRequest.add_member(:description_override, Shapes::ShapeRef.new(shape: JobDescriptionOverride, location_name: "descriptionOverride"))
+    CreateJobRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     CreateJobRequest.struct_class = Types::CreateJobRequest
 
     CreateJobResponse.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location_name: "jobId"))
@@ -1587,11 +1589,11 @@ module Aws::Deadline
     GetSessionsStatisticsAggregationRequest.add_member(:farm_id, Shapes::ShapeRef.new(shape: FarmId, required: true, location: "uri", location_name: "farmId"))
     GetSessionsStatisticsAggregationRequest.add_member(:aggregation_id, Shapes::ShapeRef.new(shape: AggregationId, required: true, location: "querystring", location_name: "aggregationId"))
     GetSessionsStatisticsAggregationRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
-    GetSessionsStatisticsAggregationRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "nextToken"))
+    GetSessionsStatisticsAggregationRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
     GetSessionsStatisticsAggregationRequest.struct_class = Types::GetSessionsStatisticsAggregationRequest
 
     GetSessionsStatisticsAggregationResponse.add_member(:statistics, Shapes::ShapeRef.new(shape: StatisticsList, location_name: "statistics"))
-    GetSessionsStatisticsAggregationResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    GetSessionsStatisticsAggregationResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     GetSessionsStatisticsAggregationResponse.add_member(:status, Shapes::ShapeRef.new(shape: SessionsStatisticsAggregationStatus, required: true, location_name: "status"))
     GetSessionsStatisticsAggregationResponse.add_member(:status_message, Shapes::ShapeRef.new(shape: String, location_name: "statusMessage"))
     GetSessionsStatisticsAggregationResponse.struct_class = Types::GetSessionsStatisticsAggregationResponse
@@ -1878,182 +1880,182 @@ module Aws::Deadline
 
     ListAttributeCapabilityValue.member = Shapes::ShapeRef.new(shape: AttributeCapabilityValue)
 
-    ListAvailableMeteredProductsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "nextToken"))
+    ListAvailableMeteredProductsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
     ListAvailableMeteredProductsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListAvailableMeteredProductsRequest.struct_class = Types::ListAvailableMeteredProductsRequest
 
     ListAvailableMeteredProductsResponse.add_member(:metered_products, Shapes::ShapeRef.new(shape: MeteredProductSummaryList, required: true, location_name: "meteredProducts"))
-    ListAvailableMeteredProductsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    ListAvailableMeteredProductsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListAvailableMeteredProductsResponse.struct_class = Types::ListAvailableMeteredProductsResponse
 
-    ListBudgetsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "nextToken"))
+    ListBudgetsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
     ListBudgetsRequest.add_member(:farm_id, Shapes::ShapeRef.new(shape: FarmId, required: true, location: "uri", location_name: "farmId"))
     ListBudgetsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListBudgetsRequest.add_member(:status, Shapes::ShapeRef.new(shape: BudgetStatus, location: "querystring", location_name: "status"))
     ListBudgetsRequest.struct_class = Types::ListBudgetsRequest
 
-    ListBudgetsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    ListBudgetsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListBudgetsResponse.add_member(:budgets, Shapes::ShapeRef.new(shape: BudgetSummaries, required: true, location_name: "budgets"))
     ListBudgetsResponse.struct_class = Types::ListBudgetsResponse
 
     ListFarmMembersRequest.add_member(:farm_id, Shapes::ShapeRef.new(shape: FarmId, required: true, location: "uri", location_name: "farmId"))
-    ListFarmMembersRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "nextToken"))
+    ListFarmMembersRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
     ListFarmMembersRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListFarmMembersRequest.struct_class = Types::ListFarmMembersRequest
 
     ListFarmMembersResponse.add_member(:members, Shapes::ShapeRef.new(shape: FarmMembers, required: true, location_name: "members"))
-    ListFarmMembersResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    ListFarmMembersResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListFarmMembersResponse.struct_class = Types::ListFarmMembersResponse
 
-    ListFarmsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "nextToken"))
+    ListFarmsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
     ListFarmsRequest.add_member(:principal_id, Shapes::ShapeRef.new(shape: IdentityCenterPrincipalId, location: "querystring", location_name: "principalId"))
     ListFarmsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListFarmsRequest.struct_class = Types::ListFarmsRequest
 
-    ListFarmsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    ListFarmsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListFarmsResponse.add_member(:farms, Shapes::ShapeRef.new(shape: FarmSummaries, required: true, location_name: "farms"))
     ListFarmsResponse.struct_class = Types::ListFarmsResponse
 
     ListFleetMembersRequest.add_member(:farm_id, Shapes::ShapeRef.new(shape: FarmId, required: true, location: "uri", location_name: "farmId"))
     ListFleetMembersRequest.add_member(:fleet_id, Shapes::ShapeRef.new(shape: FleetId, required: true, location: "uri", location_name: "fleetId"))
-    ListFleetMembersRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "nextToken"))
+    ListFleetMembersRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
     ListFleetMembersRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListFleetMembersRequest.struct_class = Types::ListFleetMembersRequest
 
     ListFleetMembersResponse.add_member(:members, Shapes::ShapeRef.new(shape: FleetMembers, required: true, location_name: "members"))
-    ListFleetMembersResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    ListFleetMembersResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListFleetMembersResponse.struct_class = Types::ListFleetMembersResponse
 
     ListFleetsRequest.add_member(:farm_id, Shapes::ShapeRef.new(shape: FarmId, required: true, location: "uri", location_name: "farmId"))
     ListFleetsRequest.add_member(:principal_id, Shapes::ShapeRef.new(shape: IdentityCenterPrincipalId, location: "querystring", location_name: "principalId"))
     ListFleetsRequest.add_member(:display_name, Shapes::ShapeRef.new(shape: ResourceName, location: "querystring", location_name: "displayName"))
     ListFleetsRequest.add_member(:status, Shapes::ShapeRef.new(shape: FleetStatus, location: "querystring", location_name: "status"))
-    ListFleetsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "nextToken"))
+    ListFleetsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
     ListFleetsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListFleetsRequest.struct_class = Types::ListFleetsRequest
 
     ListFleetsResponse.add_member(:fleets, Shapes::ShapeRef.new(shape: FleetSummaries, required: true, location_name: "fleets"))
-    ListFleetsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    ListFleetsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListFleetsResponse.struct_class = Types::ListFleetsResponse
 
     ListJobMembersRequest.add_member(:farm_id, Shapes::ShapeRef.new(shape: FarmId, required: true, location: "uri", location_name: "farmId"))
     ListJobMembersRequest.add_member(:queue_id, Shapes::ShapeRef.new(shape: QueueId, required: true, location: "uri", location_name: "queueId"))
     ListJobMembersRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location: "uri", location_name: "jobId"))
-    ListJobMembersRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "nextToken"))
+    ListJobMembersRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
     ListJobMembersRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListJobMembersRequest.struct_class = Types::ListJobMembersRequest
 
     ListJobMembersResponse.add_member(:members, Shapes::ShapeRef.new(shape: JobMembers, required: true, location_name: "members"))
-    ListJobMembersResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    ListJobMembersResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListJobMembersResponse.struct_class = Types::ListJobMembersResponse
 
     ListJobParameterDefinitionsRequest.add_member(:farm_id, Shapes::ShapeRef.new(shape: FarmId, required: true, location: "uri", location_name: "farmId"))
     ListJobParameterDefinitionsRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location: "uri", location_name: "jobId"))
     ListJobParameterDefinitionsRequest.add_member(:queue_id, Shapes::ShapeRef.new(shape: QueueId, required: true, location: "uri", location_name: "queueId"))
-    ListJobParameterDefinitionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "nextToken"))
+    ListJobParameterDefinitionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
     ListJobParameterDefinitionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListJobParameterDefinitionsRequest.struct_class = Types::ListJobParameterDefinitionsRequest
 
     ListJobParameterDefinitionsResponse.add_member(:job_parameter_definitions, Shapes::ShapeRef.new(shape: JobParameterDefinitions, required: true, location_name: "jobParameterDefinitions"))
-    ListJobParameterDefinitionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    ListJobParameterDefinitionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListJobParameterDefinitionsResponse.struct_class = Types::ListJobParameterDefinitionsResponse
 
     ListJobsRequest.add_member(:farm_id, Shapes::ShapeRef.new(shape: FarmId, required: true, location: "uri", location_name: "farmId"))
     ListJobsRequest.add_member(:principal_id, Shapes::ShapeRef.new(shape: IdentityCenterPrincipalId, location: "querystring", location_name: "principalId"))
     ListJobsRequest.add_member(:queue_id, Shapes::ShapeRef.new(shape: QueueId, required: true, location: "uri", location_name: "queueId"))
-    ListJobsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "nextToken"))
+    ListJobsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
     ListJobsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListJobsRequest.struct_class = Types::ListJobsRequest
 
     ListJobsResponse.add_member(:jobs, Shapes::ShapeRef.new(shape: JobSummaries, required: true, location_name: "jobs"))
-    ListJobsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    ListJobsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListJobsResponse.struct_class = Types::ListJobsResponse
 
-    ListLicenseEndpointsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "nextToken"))
+    ListLicenseEndpointsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
     ListLicenseEndpointsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListLicenseEndpointsRequest.struct_class = Types::ListLicenseEndpointsRequest
 
     ListLicenseEndpointsResponse.add_member(:license_endpoints, Shapes::ShapeRef.new(shape: LicenseEndpointSummaries, required: true, location_name: "licenseEndpoints"))
-    ListLicenseEndpointsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    ListLicenseEndpointsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListLicenseEndpointsResponse.struct_class = Types::ListLicenseEndpointsResponse
 
     ListLimitsRequest.add_member(:farm_id, Shapes::ShapeRef.new(shape: FarmId, required: true, location: "uri", location_name: "farmId"))
-    ListLimitsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "nextToken"))
+    ListLimitsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
     ListLimitsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListLimitsRequest.struct_class = Types::ListLimitsRequest
 
     ListLimitsResponse.add_member(:limits, Shapes::ShapeRef.new(shape: LimitSummaries, required: true, location_name: "limits"))
-    ListLimitsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    ListLimitsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListLimitsResponse.struct_class = Types::ListLimitsResponse
 
     ListMeteredProductsRequest.add_member(:license_endpoint_id, Shapes::ShapeRef.new(shape: LicenseEndpointId, required: true, location: "uri", location_name: "licenseEndpointId"))
-    ListMeteredProductsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "nextToken"))
+    ListMeteredProductsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
     ListMeteredProductsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListMeteredProductsRequest.struct_class = Types::ListMeteredProductsRequest
 
     ListMeteredProductsResponse.add_member(:metered_products, Shapes::ShapeRef.new(shape: MeteredProductSummaryList, required: true, location_name: "meteredProducts"))
-    ListMeteredProductsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    ListMeteredProductsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListMeteredProductsResponse.struct_class = Types::ListMeteredProductsResponse
 
-    ListMonitorsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "nextToken"))
+    ListMonitorsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
     ListMonitorsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListMonitorsRequest.struct_class = Types::ListMonitorsRequest
 
-    ListMonitorsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    ListMonitorsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListMonitorsResponse.add_member(:monitors, Shapes::ShapeRef.new(shape: MonitorSummaries, required: true, location_name: "monitors"))
     ListMonitorsResponse.struct_class = Types::ListMonitorsResponse
 
     ListQueueEnvironmentsRequest.add_member(:farm_id, Shapes::ShapeRef.new(shape: FarmId, required: true, location: "uri", location_name: "farmId"))
     ListQueueEnvironmentsRequest.add_member(:queue_id, Shapes::ShapeRef.new(shape: QueueId, required: true, location: "uri", location_name: "queueId"))
-    ListQueueEnvironmentsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "nextToken"))
+    ListQueueEnvironmentsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
     ListQueueEnvironmentsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListQueueEnvironmentsRequest.struct_class = Types::ListQueueEnvironmentsRequest
 
     ListQueueEnvironmentsResponse.add_member(:environments, Shapes::ShapeRef.new(shape: QueueEnvironmentSummaries, required: true, location_name: "environments"))
-    ListQueueEnvironmentsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    ListQueueEnvironmentsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListQueueEnvironmentsResponse.struct_class = Types::ListQueueEnvironmentsResponse
 
     ListQueueFleetAssociationsRequest.add_member(:farm_id, Shapes::ShapeRef.new(shape: FarmId, required: true, location: "uri", location_name: "farmId"))
     ListQueueFleetAssociationsRequest.add_member(:queue_id, Shapes::ShapeRef.new(shape: QueueId, location: "querystring", location_name: "queueId"))
     ListQueueFleetAssociationsRequest.add_member(:fleet_id, Shapes::ShapeRef.new(shape: FleetId, location: "querystring", location_name: "fleetId"))
-    ListQueueFleetAssociationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "nextToken"))
+    ListQueueFleetAssociationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
     ListQueueFleetAssociationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListQueueFleetAssociationsRequest.struct_class = Types::ListQueueFleetAssociationsRequest
 
     ListQueueFleetAssociationsResponse.add_member(:queue_fleet_associations, Shapes::ShapeRef.new(shape: QueueFleetAssociationSummaries, required: true, location_name: "queueFleetAssociations"))
-    ListQueueFleetAssociationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    ListQueueFleetAssociationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListQueueFleetAssociationsResponse.struct_class = Types::ListQueueFleetAssociationsResponse
 
     ListQueueLimitAssociationsRequest.add_member(:farm_id, Shapes::ShapeRef.new(shape: FarmId, required: true, location: "uri", location_name: "farmId"))
     ListQueueLimitAssociationsRequest.add_member(:queue_id, Shapes::ShapeRef.new(shape: QueueId, location: "querystring", location_name: "queueId"))
     ListQueueLimitAssociationsRequest.add_member(:limit_id, Shapes::ShapeRef.new(shape: LimitId, location: "querystring", location_name: "limitId"))
-    ListQueueLimitAssociationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "nextToken"))
+    ListQueueLimitAssociationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
     ListQueueLimitAssociationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListQueueLimitAssociationsRequest.struct_class = Types::ListQueueLimitAssociationsRequest
 
     ListQueueLimitAssociationsResponse.add_member(:queue_limit_associations, Shapes::ShapeRef.new(shape: QueueLimitAssociationSummaries, required: true, location_name: "queueLimitAssociations"))
-    ListQueueLimitAssociationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    ListQueueLimitAssociationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListQueueLimitAssociationsResponse.struct_class = Types::ListQueueLimitAssociationsResponse
 
     ListQueueMembersRequest.add_member(:farm_id, Shapes::ShapeRef.new(shape: FarmId, required: true, location: "uri", location_name: "farmId"))
     ListQueueMembersRequest.add_member(:queue_id, Shapes::ShapeRef.new(shape: QueueId, required: true, location: "uri", location_name: "queueId"))
-    ListQueueMembersRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "nextToken"))
+    ListQueueMembersRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
     ListQueueMembersRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListQueueMembersRequest.struct_class = Types::ListQueueMembersRequest
 
     ListQueueMembersResponse.add_member(:members, Shapes::ShapeRef.new(shape: QueueMemberList, required: true, location_name: "members"))
-    ListQueueMembersResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    ListQueueMembersResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListQueueMembersResponse.struct_class = Types::ListQueueMembersResponse
 
     ListQueuesRequest.add_member(:farm_id, Shapes::ShapeRef.new(shape: FarmId, required: true, location: "uri", location_name: "farmId"))
     ListQueuesRequest.add_member(:principal_id, Shapes::ShapeRef.new(shape: IdentityCenterPrincipalId, location: "querystring", location_name: "principalId"))
     ListQueuesRequest.add_member(:status, Shapes::ShapeRef.new(shape: QueueStatus, location: "querystring", location_name: "status"))
-    ListQueuesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "nextToken"))
+    ListQueuesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
     ListQueuesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListQueuesRequest.struct_class = Types::ListQueuesRequest
 
     ListQueuesResponse.add_member(:queues, Shapes::ShapeRef.new(shape: QueueSummaries, required: true, location_name: "queues"))
-    ListQueuesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    ListQueuesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListQueuesResponse.struct_class = Types::ListQueuesResponse
 
     ListSessionActionsRequest.add_member(:farm_id, Shapes::ShapeRef.new(shape: FarmId, required: true, location: "uri", location_name: "farmId"))
@@ -2061,23 +2063,23 @@ module Aws::Deadline
     ListSessionActionsRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location: "uri", location_name: "jobId"))
     ListSessionActionsRequest.add_member(:session_id, Shapes::ShapeRef.new(shape: SessionId, location: "querystring", location_name: "sessionId"))
     ListSessionActionsRequest.add_member(:task_id, Shapes::ShapeRef.new(shape: TaskId, location: "querystring", location_name: "taskId"))
-    ListSessionActionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "nextToken"))
+    ListSessionActionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
     ListSessionActionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListSessionActionsRequest.struct_class = Types::ListSessionActionsRequest
 
     ListSessionActionsResponse.add_member(:session_actions, Shapes::ShapeRef.new(shape: SessionActionSummaries, required: true, location_name: "sessionActions"))
-    ListSessionActionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    ListSessionActionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListSessionActionsResponse.struct_class = Types::ListSessionActionsResponse
 
     ListSessionsForWorkerRequest.add_member(:farm_id, Shapes::ShapeRef.new(shape: FarmId, required: true, location: "uri", location_name: "farmId"))
     ListSessionsForWorkerRequest.add_member(:fleet_id, Shapes::ShapeRef.new(shape: FleetId, required: true, location: "uri", location_name: "fleetId"))
     ListSessionsForWorkerRequest.add_member(:worker_id, Shapes::ShapeRef.new(shape: WorkerId, required: true, location: "uri", location_name: "workerId"))
-    ListSessionsForWorkerRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "nextToken"))
+    ListSessionsForWorkerRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
     ListSessionsForWorkerRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListSessionsForWorkerRequest.struct_class = Types::ListSessionsForWorkerRequest
 
     ListSessionsForWorkerResponse.add_member(:sessions, Shapes::ShapeRef.new(shape: ListSessionsForWorkerSummaries, required: true, location_name: "sessions"))
-    ListSessionsForWorkerResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    ListSessionsForWorkerResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListSessionsForWorkerResponse.struct_class = Types::ListSessionsForWorkerResponse
 
     ListSessionsForWorkerSummaries.member = Shapes::ShapeRef.new(shape: WorkerSessionSummary)
@@ -2085,66 +2087,66 @@ module Aws::Deadline
     ListSessionsRequest.add_member(:farm_id, Shapes::ShapeRef.new(shape: FarmId, required: true, location: "uri", location_name: "farmId"))
     ListSessionsRequest.add_member(:queue_id, Shapes::ShapeRef.new(shape: QueueId, required: true, location: "uri", location_name: "queueId"))
     ListSessionsRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location: "uri", location_name: "jobId"))
-    ListSessionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "nextToken"))
+    ListSessionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
     ListSessionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListSessionsRequest.struct_class = Types::ListSessionsRequest
 
     ListSessionsResponse.add_member(:sessions, Shapes::ShapeRef.new(shape: SessionSummaries, required: true, location_name: "sessions"))
-    ListSessionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    ListSessionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListSessionsResponse.struct_class = Types::ListSessionsResponse
 
     ListStepConsumersRequest.add_member(:farm_id, Shapes::ShapeRef.new(shape: FarmId, required: true, location: "uri", location_name: "farmId"))
     ListStepConsumersRequest.add_member(:queue_id, Shapes::ShapeRef.new(shape: QueueId, required: true, location: "uri", location_name: "queueId"))
     ListStepConsumersRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location: "uri", location_name: "jobId"))
     ListStepConsumersRequest.add_member(:step_id, Shapes::ShapeRef.new(shape: StepId, required: true, location: "uri", location_name: "stepId"))
-    ListStepConsumersRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "nextToken"))
+    ListStepConsumersRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
     ListStepConsumersRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListStepConsumersRequestMaxResultsInteger, location: "querystring", location_name: "maxResults"))
     ListStepConsumersRequest.struct_class = Types::ListStepConsumersRequest
 
     ListStepConsumersResponse.add_member(:consumers, Shapes::ShapeRef.new(shape: StepConsumers, required: true, location_name: "consumers"))
-    ListStepConsumersResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    ListStepConsumersResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListStepConsumersResponse.struct_class = Types::ListStepConsumersResponse
 
     ListStepDependenciesRequest.add_member(:farm_id, Shapes::ShapeRef.new(shape: FarmId, required: true, location: "uri", location_name: "farmId"))
     ListStepDependenciesRequest.add_member(:queue_id, Shapes::ShapeRef.new(shape: QueueId, required: true, location: "uri", location_name: "queueId"))
     ListStepDependenciesRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location: "uri", location_name: "jobId"))
     ListStepDependenciesRequest.add_member(:step_id, Shapes::ShapeRef.new(shape: StepId, required: true, location: "uri", location_name: "stepId"))
-    ListStepDependenciesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "nextToken"))
+    ListStepDependenciesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
     ListStepDependenciesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListStepDependenciesRequestMaxResultsInteger, location: "querystring", location_name: "maxResults"))
     ListStepDependenciesRequest.struct_class = Types::ListStepDependenciesRequest
 
     ListStepDependenciesResponse.add_member(:dependencies, Shapes::ShapeRef.new(shape: StepDependencies, required: true, location_name: "dependencies"))
-    ListStepDependenciesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    ListStepDependenciesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListStepDependenciesResponse.struct_class = Types::ListStepDependenciesResponse
 
     ListStepsRequest.add_member(:farm_id, Shapes::ShapeRef.new(shape: FarmId, required: true, location: "uri", location_name: "farmId"))
     ListStepsRequest.add_member(:queue_id, Shapes::ShapeRef.new(shape: QueueId, required: true, location: "uri", location_name: "queueId"))
     ListStepsRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location: "uri", location_name: "jobId"))
-    ListStepsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "nextToken"))
+    ListStepsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
     ListStepsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListStepsRequest.struct_class = Types::ListStepsRequest
 
     ListStepsResponse.add_member(:steps, Shapes::ShapeRef.new(shape: StepSummaries, required: true, location_name: "steps"))
-    ListStepsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    ListStepsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListStepsResponse.struct_class = Types::ListStepsResponse
 
     ListStorageProfilesForQueueRequest.add_member(:farm_id, Shapes::ShapeRef.new(shape: FarmId, required: true, location: "uri", location_name: "farmId"))
     ListStorageProfilesForQueueRequest.add_member(:queue_id, Shapes::ShapeRef.new(shape: QueueId, required: true, location: "uri", location_name: "queueId"))
-    ListStorageProfilesForQueueRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "nextToken"))
+    ListStorageProfilesForQueueRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
     ListStorageProfilesForQueueRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListStorageProfilesForQueueRequest.struct_class = Types::ListStorageProfilesForQueueRequest
 
     ListStorageProfilesForQueueResponse.add_member(:storage_profiles, Shapes::ShapeRef.new(shape: StorageProfileSummaries, required: true, location_name: "storageProfiles"))
-    ListStorageProfilesForQueueResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    ListStorageProfilesForQueueResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListStorageProfilesForQueueResponse.struct_class = Types::ListStorageProfilesForQueueResponse
 
     ListStorageProfilesRequest.add_member(:farm_id, Shapes::ShapeRef.new(shape: FarmId, required: true, location: "uri", location_name: "farmId"))
-    ListStorageProfilesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "nextToken"))
+    ListStorageProfilesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
     ListStorageProfilesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListStorageProfilesRequest.struct_class = Types::ListStorageProfilesRequest
 
     ListStorageProfilesResponse.add_member(:storage_profiles, Shapes::ShapeRef.new(shape: StorageProfileSummaries, required: true, location_name: "storageProfiles"))
-    ListStorageProfilesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    ListStorageProfilesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListStorageProfilesResponse.struct_class = Types::ListStorageProfilesResponse
 
     ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "resourceArn"))
@@ -2157,21 +2159,21 @@ module Aws::Deadline
     ListTasksRequest.add_member(:queue_id, Shapes::ShapeRef.new(shape: QueueId, required: true, location: "uri", location_name: "queueId"))
     ListTasksRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location: "uri", location_name: "jobId"))
     ListTasksRequest.add_member(:step_id, Shapes::ShapeRef.new(shape: StepId, required: true, location: "uri", location_name: "stepId"))
-    ListTasksRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "nextToken"))
+    ListTasksRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
     ListTasksRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListTasksRequest.struct_class = Types::ListTasksRequest
 
     ListTasksResponse.add_member(:tasks, Shapes::ShapeRef.new(shape: TaskSummaries, required: true, location_name: "tasks"))
-    ListTasksResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    ListTasksResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListTasksResponse.struct_class = Types::ListTasksResponse
 
     ListWorkersRequest.add_member(:farm_id, Shapes::ShapeRef.new(shape: FarmId, required: true, location: "uri", location_name: "farmId"))
     ListWorkersRequest.add_member(:fleet_id, Shapes::ShapeRef.new(shape: FleetId, required: true, location: "uri", location_name: "fleetId"))
-    ListWorkersRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "nextToken"))
+    ListWorkersRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
     ListWorkersRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListWorkersRequest.struct_class = Types::ListWorkersRequest
 
-    ListWorkersResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    ListWorkersResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListWorkersResponse.add_member(:workers, Shapes::ShapeRef.new(shape: WorkerSummaries, required: true, location_name: "workers"))
     ListWorkersResponse.struct_class = Types::ListWorkersResponse
 

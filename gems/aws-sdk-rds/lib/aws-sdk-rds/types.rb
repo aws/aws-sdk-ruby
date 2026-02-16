@@ -8125,6 +8125,12 @@ module Aws::RDS
     #   The retention period for the automated backups.
     #   @return [Integer]
     #
+    # @!attribute [rw] preferred_backup_window
+    #   The daily time range during which automated backups are created if
+    #   automated backups are enabled, as determined by the
+    #   `BackupRetentionPeriod`.
+    #   @return [String]
+    #
     # @!attribute [rw] engine_mode
     #   The engine mode of the database engine for the automated backup.
     #   @return [String]
@@ -8212,6 +8218,7 @@ module Aws::RDS
       :engine_version,
       :db_cluster_arn,
       :backup_retention_period,
+      :preferred_backup_window,
       :engine_mode,
       :availability_zones,
       :port,
@@ -8844,6 +8851,16 @@ module Aws::RDS
     #   Indicates whether the DB cluster snapshot is encrypted.
     #   @return [Boolean]
     #
+    # @!attribute [rw] backup_retention_period
+    #   The number of days for which automatic DB snapshots are retained.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] preferred_backup_window
+    #   The daily time range during which automated backups are created if
+    #   automated backups are enabled, as determined by the
+    #   `BackupRetentionPeriod`.
+    #   @return [String]
+    #
     # @!attribute [rw] kms_key_id
     #   If `StorageEncrypted` is true, the Amazon Web Services KMS key
     #   identifier for the encrypted DB cluster snapshot.
@@ -8923,6 +8940,8 @@ module Aws::RDS
       :snapshot_type,
       :percent_progress,
       :storage_encrypted,
+      :backup_retention_period,
+      :preferred_backup_window,
       :kms_key_id,
       :db_cluster_snapshot_arn,
       :source_db_cluster_snapshot_arn,
@@ -10254,6 +10273,12 @@ module Aws::RDS
     #   The retention period for the automated backups.
     #   @return [Integer]
     #
+    # @!attribute [rw] preferred_backup_window
+    #   The daily time range during which automated backups are created if
+    #   automated backups are enabled, as determined by the
+    #   `BackupRetentionPeriod`.
+    #   @return [String]
+    #
     # @!attribute [rw] db_instance_automated_backups_arn
     #   The Amazon Resource Name (ARN) for the replicated automated backups.
     #   @return [String]
@@ -10332,6 +10357,7 @@ module Aws::RDS
       :timezone,
       :iam_database_authentication_enabled,
       :backup_retention_period,
+      :preferred_backup_window,
       :db_instance_automated_backups_arn,
       :db_instance_automated_backups_replications,
       :backup_target,
@@ -11696,6 +11722,16 @@ module Aws::RDS
     #   Indicates whether the DB snapshot is encrypted.
     #   @return [Boolean]
     #
+    # @!attribute [rw] backup_retention_period
+    #   The number of days for which automatic DB snapshots are retained.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] preferred_backup_window
+    #   The daily time range during which automated backups are created if
+    #   automated backups are enabled, as determined by the
+    #   `BackupRetentionPeriod`.
+    #   @return [String]
+    #
     # @!attribute [rw] kms_key_id
     #   If `Encrypted` is true, the Amazon Web Services KMS key identifier
     #   for the encrypted DB snapshot.
@@ -11822,6 +11858,8 @@ module Aws::RDS
       :storage_type,
       :tde_credential_arn,
       :encrypted,
+      :backup_retention_period,
+      :preferred_backup_window,
       :kms_key_id,
       :db_snapshot_arn,
       :timezone,
@@ -25011,6 +25049,48 @@ module Aws::RDS
     #   Amazon RDS issues an error.
     #   @return [Integer]
     #
+    # @!attribute [rw] backup_retention_period
+    #   The number of days for which automated backups are retained. Specify
+    #   a minimum value of `1`.
+    #
+    #   Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters
+    #
+    #   Default: Uses existing setting
+    #
+    #   Constraints:
+    #
+    #   * Must be a value from 1 to 35.
+    #
+    #   ^
+    #   @return [Integer]
+    #
+    # @!attribute [rw] preferred_backup_window
+    #   The daily time range during which automated backups are created if
+    #   automated backups are enabled, using the `BackupRetentionPeriod`
+    #   parameter.
+    #
+    #   The default is a 30-minute window selected at random from an 8-hour
+    #   block of time for each Amazon Web Services Region. To view the time
+    #   blocks available, see [ Backup window][1] in the *Amazon Aurora User
+    #   Guide*.
+    #
+    #   Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters
+    #
+    #   Constraints:
+    #
+    #   * Must be in the format `hh24:mi-hh24:mi`.
+    #
+    #   * Must be in Universal Coordinated Time (UTC).
+    #
+    #   * Must not conflict with the preferred maintenance window.
+    #
+    #   * Must be at least 30 minutes.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.Managing.Backups.html#Aurora.Managing.Backups.BackupWindow
+    #   @return [String]
+    #
     # @!attribute [rw] engine_lifecycle_support
     #   The life cycle type for this DB cluster.
     #
@@ -25097,6 +25177,8 @@ module Aws::RDS
       :enable_performance_insights,
       :performance_insights_kms_key_id,
       :performance_insights_retention_period,
+      :backup_retention_period,
+      :preferred_backup_window,
       :engine_lifecycle_support,
       :tag_specifications)
       SENSITIVE = []
@@ -25639,6 +25721,48 @@ module Aws::RDS
     #   Amazon RDS issues an error.
     #   @return [Integer]
     #
+    # @!attribute [rw] backup_retention_period
+    #   The number of days for which automated backups are retained. Specify
+    #   a minimum value of `1`.
+    #
+    #   Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters
+    #
+    #   Default: Uses existing setting
+    #
+    #   Constraints:
+    #
+    #   * Must be a value from 1 to 35.
+    #
+    #   ^
+    #   @return [Integer]
+    #
+    # @!attribute [rw] preferred_backup_window
+    #   The daily time range during which automated backups are created if
+    #   automated backups are enabled, using the `BackupRetentionPeriod`
+    #   parameter.
+    #
+    #   The default is a 30-minute window selected at random from an 8-hour
+    #   block of time for each Amazon Web Services Region. To view the time
+    #   blocks available, see [ Backup window][1] in the *Amazon Aurora User
+    #   Guide*.
+    #
+    #   Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters
+    #
+    #   Constraints:
+    #
+    #   * Must be in the format `hh24:mi-hh24:mi`.
+    #
+    #   * Must be in Universal Coordinated Time (UTC).
+    #
+    #   * Must not conflict with the preferred maintenance window.
+    #
+    #   * Must be at least 30 minutes.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.Managing.Backups.html#Aurora.Managing.Backups.BackupWindow
+    #   @return [String]
+    #
     # @!attribute [rw] engine_lifecycle_support
     #   The life cycle type for this DB cluster.
     #
@@ -25725,6 +25849,8 @@ module Aws::RDS
       :enable_performance_insights,
       :performance_insights_kms_key_id,
       :performance_insights_retention_period,
+      :backup_retention_period,
+      :preferred_backup_window,
       :engine_lifecycle_support,
       :tag_specifications)
       SENSITIVE = []
@@ -26354,6 +26480,62 @@ module Aws::RDS
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/multi-az-db-clusters-concepts.html
     #   @return [String]
     #
+    # @!attribute [rw] backup_retention_period
+    #   The number of days to retain automated backups. Setting this
+    #   parameter to a positive number enables backups. Setting this
+    #   parameter to 0 disables automated backups.
+    #
+    #   <note markdown="1"> Enabling and disabling backups can result in a brief I/O suspension
+    #   that lasts from a few seconds to a few minutes, depending on the
+    #   size and class of your DB instance.
+    #
+    #    </note>
+    #
+    #   This setting doesn't apply to Amazon Aurora DB instances. The
+    #   retention period for automated backups is managed by the DB cluster.
+    #   For more information, see `ModifyDBCluster`.
+    #
+    #   Default: Uses existing setting
+    #
+    #   Constraints:
+    #
+    #   * Must be a value from 0 to 35.
+    #
+    #   * Can't be set to 0 if the DB instance is a source to read
+    #     replicas.
+    #
+    #   * Can't be set to 0 for an RDS Custom for Oracle DB instance.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] preferred_backup_window
+    #   The daily time range during which automated backups are created if
+    #   automated backups are enabled, as determined by the
+    #   `BackupRetentionPeriod` parameter. Changing this parameter doesn't
+    #   result in an outage and the change is asynchronously applied as soon
+    #   as possible. The default is a 30-minute window selected at random
+    #   from an 8-hour block of time for each Amazon Web Services Region.
+    #   For more information, see [Backup window][1] in the *Amazon RDS User
+    #   Guide*.
+    #
+    #   This setting doesn't apply to Amazon Aurora DB instances. The daily
+    #   time range for creating automated backups is managed by the DB
+    #   cluster. For more information, see `ModifyDBCluster`.
+    #
+    #   Constraints:
+    #
+    #   * Must be in the format `hh24:mi-hh24:mi`.
+    #
+    #   * Must be in Universal Coordinated Time (UTC).
+    #
+    #   * Must not conflict with the preferred maintenance window.
+    #
+    #   * Must be at least 30 minutes.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithAutomatedBackups.html#USER_WorkingWithAutomatedBackups.BackupWindow
+    #   @return [String]
+    #
     # @!attribute [rw] dedicated_log_volume
     #   Specifies whether to enable a dedicated log volume (DLV) for the DB
     #   instance.
@@ -26513,6 +26695,8 @@ module Aws::RDS
       :custom_iam_instance_profile,
       :allocated_storage,
       :db_cluster_snapshot_identifier,
+      :backup_retention_period,
+      :preferred_backup_window,
       :dedicated_log_volume,
       :ca_certificate_identifier,
       :engine_lifecycle_support,
@@ -27874,6 +28058,62 @@ module Aws::RDS
     #    </note>
     #   @return [Integer]
     #
+    # @!attribute [rw] backup_retention_period
+    #   The number of days to retain automated backups. Setting this
+    #   parameter to a positive number enables backups. Setting this
+    #   parameter to 0 disables automated backups.
+    #
+    #   <note markdown="1"> Enabling and disabling backups can result in a brief I/O suspension
+    #   that lasts from a few seconds to a few minutes, depending on the
+    #   size and class of your DB instance.
+    #
+    #    </note>
+    #
+    #   This setting doesn't apply to Amazon Aurora DB instances. The
+    #   retention period for automated backups is managed by the DB cluster.
+    #   For more information, see `ModifyDBCluster`.
+    #
+    #   Default: Uses existing setting
+    #
+    #   Constraints:
+    #
+    #   * Must be a value from 0 to 35.
+    #
+    #   * Can't be set to 0 if the DB instance is a source to read
+    #     replicas.
+    #
+    #   * Can't be set to 0 for an RDS Custom for Oracle DB instance.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] preferred_backup_window
+    #   The daily time range during which automated backups are created if
+    #   automated backups are enabled, as determined by the
+    #   `BackupRetentionPeriod` parameter. Changing this parameter doesn't
+    #   result in an outage and the change is asynchronously applied as soon
+    #   as possible. The default is a 30-minute window selected at random
+    #   from an 8-hour block of time for each Amazon Web Services Region.
+    #   For more information, see [Backup window][1] in the *Amazon RDS User
+    #   Guide*.
+    #
+    #   This setting doesn't apply to Amazon Aurora DB instances. The daily
+    #   time range for creating automated backups is managed by the DB
+    #   cluster. For more information, see `ModifyDBCluster`.
+    #
+    #   Constraints:
+    #
+    #   * Must be in the format `hh24:mi-hh24:mi`.
+    #
+    #   * Must be in Universal Coordinated Time (UTC).
+    #
+    #   * Must not conflict with the preferred maintenance window.
+    #
+    #   * Must be at least 30 minutes.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithAutomatedBackups.html#USER_WorkingWithAutomatedBackups.BackupWindow
+    #   @return [String]
+    #
     # @!attribute [rw] dedicated_log_volume
     #   Specifies whether to enable a dedicated log volume (DLV) for the DB
     #   instance.
@@ -28037,6 +28277,8 @@ module Aws::RDS
       :backup_target,
       :custom_iam_instance_profile,
       :allocated_storage,
+      :backup_retention_period,
+      :preferred_backup_window,
       :dedicated_log_volume,
       :ca_certificate_identifier,
       :engine_lifecycle_support,

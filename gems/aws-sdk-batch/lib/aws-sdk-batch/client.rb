@@ -3121,6 +3121,7 @@ module Aws::Batch
     # @return [Types::DescribeServiceJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeServiceJobResponse#attempts #attempts} => Array&lt;Types::ServiceJobAttemptDetail&gt;
+    #   * {Types::DescribeServiceJobResponse#capacity_usage #capacity_usage} => Array&lt;Types::ServiceJobCapacityUsageDetail&gt;
     #   * {Types::DescribeServiceJobResponse#created_at #created_at} => Integer
     #   * {Types::DescribeServiceJobResponse#is_terminated #is_terminated} => Boolean
     #   * {Types::DescribeServiceJobResponse#job_arn #job_arn} => String
@@ -3129,6 +3130,7 @@ module Aws::Batch
     #   * {Types::DescribeServiceJobResponse#job_queue #job_queue} => String
     #   * {Types::DescribeServiceJobResponse#latest_attempt #latest_attempt} => Types::LatestServiceJobAttempt
     #   * {Types::DescribeServiceJobResponse#retry_strategy #retry_strategy} => Types::ServiceJobRetryStrategy
+    #   * {Types::DescribeServiceJobResponse#scheduled_at #scheduled_at} => Integer
     #   * {Types::DescribeServiceJobResponse#scheduling_priority #scheduling_priority} => Integer
     #   * {Types::DescribeServiceJobResponse#service_request_payload #service_request_payload} => String
     #   * {Types::DescribeServiceJobResponse#service_job_type #service_job_type} => String
@@ -3154,6 +3156,9 @@ module Aws::Batch
     #   resp.attempts[0].started_at #=> Integer
     #   resp.attempts[0].stopped_at #=> Integer
     #   resp.attempts[0].status_reason #=> String
+    #   resp.capacity_usage #=> Array
+    #   resp.capacity_usage[0].capacity_unit #=> String
+    #   resp.capacity_usage[0].quantity #=> Float
     #   resp.created_at #=> Integer
     #   resp.is_terminated #=> Boolean
     #   resp.job_arn #=> String
@@ -3166,6 +3171,7 @@ module Aws::Batch
     #   resp.retry_strategy.evaluate_on_exit #=> Array
     #   resp.retry_strategy.evaluate_on_exit[0].action #=> String, one of "RETRY", "EXIT"
     #   resp.retry_strategy.evaluate_on_exit[0].on_status_reason #=> String
+    #   resp.scheduled_at #=> Integer
     #   resp.scheduling_priority #=> Integer
     #   resp.service_request_payload #=> String
     #   resp.service_job_type #=> String, one of "SAGEMAKER_TRAINING"
@@ -3188,7 +3194,8 @@ module Aws::Batch
     end
 
     # Provides a list of the first 100 `RUNNABLE` jobs associated to a
-    # single job queue.
+    # single job queue and includes capacity utilization, including total
+    # usage and breakdown by share for fairshare scheduling job queues.
     #
     # @option params [required, String] :job_queue
     #   The job queue’s name or full queue Amazon Resource Name (ARN).
@@ -3196,6 +3203,7 @@ module Aws::Batch
     # @return [Types::GetJobQueueSnapshotResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetJobQueueSnapshotResponse#front_of_queue #front_of_queue} => Types::FrontOfQueueDetail
+    #   * {Types::GetJobQueueSnapshotResponse#queue_utilization #queue_utilization} => Types::QueueSnapshotUtilizationDetail
     #
     # @example Request syntax with placeholder values
     #
@@ -3209,6 +3217,16 @@ module Aws::Batch
     #   resp.front_of_queue.jobs[0].job_arn #=> String
     #   resp.front_of_queue.jobs[0].earliest_time_at_position #=> Integer
     #   resp.front_of_queue.last_updated_at #=> Integer
+    #   resp.queue_utilization.total_capacity_usage #=> Array
+    #   resp.queue_utilization.total_capacity_usage[0].capacity_unit #=> String
+    #   resp.queue_utilization.total_capacity_usage[0].quantity #=> Float
+    #   resp.queue_utilization.fairshare_utilization.active_share_count #=> Integer
+    #   resp.queue_utilization.fairshare_utilization.top_capacity_utilization #=> Array
+    #   resp.queue_utilization.fairshare_utilization.top_capacity_utilization[0].share_identifier #=> String
+    #   resp.queue_utilization.fairshare_utilization.top_capacity_utilization[0].capacity_usage #=> Array
+    #   resp.queue_utilization.fairshare_utilization.top_capacity_utilization[0].capacity_usage[0].capacity_unit #=> String
+    #   resp.queue_utilization.fairshare_utilization.top_capacity_utilization[0].capacity_usage[0].quantity #=> Float
+    #   resp.queue_utilization.last_updated_at #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/GetJobQueueSnapshot AWS API Documentation
     #
@@ -3335,10 +3353,6 @@ module Aws::Batch
     #
     # * An array job ID to return a list of the children for that job
     #
-    # You can filter the results by job status with the `jobStatus`
-    # parameter. If you don't specify a status, only `RUNNING` jobs are
-    # returned.
-    #
     # @option params [String] :job_queue
     #   The name or full Amazon Resource Name (ARN) of the job queue used to
     #   list jobs.
@@ -3355,8 +3369,9 @@ module Aws::Batch
     # @option params [String] :job_status
     #   The job status used to filter jobs in the specified queue. If the
     #   `filters` parameter is specified, the `jobStatus` parameter is ignored
-    #   and jobs with any status are returned. If you don't specify a status,
-    #   only `RUNNING` jobs are returned.
+    #   and jobs with any status are returned. The exception is the
+    #   `SHARE_IDENTIFIER` filter and `jobStatus` can be used together. If you
+    #   don't specify a status, only `RUNNING` jobs are returned.
     #
     #   <note markdown="1"> Array job parents are updated to `PENDING` when any child job is
     #   updated to `RUNNABLE` and remain in `PENDING` status while child jobs
@@ -3399,10 +3414,16 @@ module Aws::Batch
     #
     # @option params [Array<Types::KeyValuesPair>] :filters
     #   The filter to apply to the query. Only one filter can be used at a
-    #   time. When the filter is used, `jobStatus` is ignored. The filter
-    #   doesn't apply to child jobs in an array or multi-node parallel (MNP)
-    #   jobs. The results are sorted by the `createdAt` field, with the most
-    #   recent jobs being first.
+    #   time. When the filter is used, `jobStatus` is ignored with the
+    #   exception that `SHARE_IDENTIFIER` and `jobStatus` can be used
+    #   together. The filter doesn't apply to child jobs in an array or
+    #   multi-node parallel (MNP) jobs. The results are sorted by the
+    #   `createdAt` field, with the most recent jobs being first.
+    #
+    #   <note markdown="1"> The `SHARE_IDENTIFIER` filter and the `jobStatus` field can be used
+    #   together to filter results.
+    #
+    #    </note>
     #
     #   JOB\_NAME
     #
@@ -3444,6 +3465,11 @@ module Aws::Batch
     #     created. This corresponds to the `createdAt` value. The value is a
     #     string representation of the number of milliseconds since 00:00:00
     #     UTC (midnight) on January 1, 1970.
+    #
+    #   SHARE\_IDENTIFIER
+    #
+    #   : The value for the filter is the fairshare scheduling share
+    #     identifier.
     #
     # @return [Types::ListJobsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3513,7 +3539,12 @@ module Aws::Batch
     #   resp.job_summary_list[0].job_arn #=> String
     #   resp.job_summary_list[0].job_id #=> String
     #   resp.job_summary_list[0].job_name #=> String
+    #   resp.job_summary_list[0].capacity_usage #=> Array
+    #   resp.job_summary_list[0].capacity_usage[0].capacity_unit #=> String
+    #   resp.job_summary_list[0].capacity_usage[0].quantity #=> Float
     #   resp.job_summary_list[0].created_at #=> Integer
+    #   resp.job_summary_list[0].scheduled_at #=> Integer
+    #   resp.job_summary_list[0].share_identifier #=> String
     #   resp.job_summary_list[0].status #=> String, one of "SUBMITTED", "PENDING", "RUNNABLE", "STARTING", "RUNNING", "SUCCEEDED", "FAILED"
     #   resp.job_summary_list[0].status_reason #=> String
     #   resp.job_summary_list[0].started_at #=> Integer
@@ -3735,7 +3766,16 @@ module Aws::Batch
     #   The name or ARN of the job queue with which to list service jobs.
     #
     # @option params [String] :job_status
-    #   The job status with which to filter service jobs.
+    #   The job status used to filter service jobs in the specified queue. If
+    #   the `filters` parameter is specified, the `jobStatus` parameter is
+    #   ignored and jobs with any status are returned. The exception is the
+    #   `SHARE_IDENTIFIER` filter and `jobStatus` can be used together. If you
+    #   don't specify a status, only `RUNNING` jobs are returned.
+    #
+    #   <note markdown="1"> The `SHARE_IDENTIFIER` filter and the `jobStatus` field can be used
+    #   together to filter results.
+    #
+    #    </note>
     #
     # @option params [Integer] :max_results
     #   The maximum number of results returned by `ListServiceJobs` in
@@ -3761,9 +3801,15 @@ module Aws::Batch
     #
     # @option params [Array<Types::KeyValuesPair>] :filters
     #   The filter to apply to the query. Only one filter can be used at a
-    #   time. When the filter is used, `jobStatus` is ignored. The results are
-    #   sorted by the `createdAt` field, with the most recent jobs being
-    #   first.
+    #   time. When the filter is used, `jobStatus` is ignored with the
+    #   exception that `SHARE_IDENTIFIER` and `jobStatus` can be used
+    #   together. The results are sorted by the `createdAt` field, with the
+    #   most recent jobs being first.
+    #
+    #   <note markdown="1"> The `SHARE_IDENTIFIER` filter and the `jobStatus` field can be used
+    #   together to filter results.
+    #
+    #    </note>
     #
     #   JOB\_NAME
     #
@@ -3788,6 +3834,11 @@ module Aws::Batch
     #     created. This corresponds to the `createdAt` value. The value is a
     #     string representation of the number of milliseconds since 00:00:00
     #     UTC (midnight) on January 1, 1970.
+    #
+    #   SHARE\_IDENTIFIER
+    #
+    #   : The value for the filter is the fairshare scheduling share
+    #     identifier.
     #
     # @return [Types::ListServiceJobsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3816,10 +3867,14 @@ module Aws::Batch
     #   resp.job_summary_list #=> Array
     #   resp.job_summary_list[0].latest_attempt.service_resource_id.name #=> String, one of "TrainingJobArn"
     #   resp.job_summary_list[0].latest_attempt.service_resource_id.value #=> String
+    #   resp.job_summary_list[0].capacity_usage #=> Array
+    #   resp.job_summary_list[0].capacity_usage[0].capacity_unit #=> String
+    #   resp.job_summary_list[0].capacity_usage[0].quantity #=> Float
     #   resp.job_summary_list[0].created_at #=> Integer
     #   resp.job_summary_list[0].job_arn #=> String
     #   resp.job_summary_list[0].job_id #=> String
     #   resp.job_summary_list[0].job_name #=> String
+    #   resp.job_summary_list[0].scheduled_at #=> Integer
     #   resp.job_summary_list[0].service_job_type #=> String, one of "SAGEMAKER_TRAINING"
     #   resp.job_summary_list[0].share_identifier #=> String
     #   resp.job_summary_list[0].status #=> String, one of "SUBMITTED", "PENDING", "RUNNABLE", "SCHEDULED", "STARTING", "RUNNING", "SUCCEEDED", "FAILED"
@@ -6141,7 +6196,7 @@ module Aws::Batch
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-batch'
-      context[:gem_version] = '1.133.0'
+      context[:gem_version] = '1.134.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

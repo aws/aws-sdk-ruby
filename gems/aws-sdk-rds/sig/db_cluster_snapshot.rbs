@@ -67,6 +67,12 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBClusterSnapshot.html#storage_encrypted-instance_method
       def storage_encrypted: () -> bool
 
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBClusterSnapshot.html#backup_retention_period-instance_method
+      def backup_retention_period: () -> ::Integer
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBClusterSnapshot.html#preferred_backup_window-instance_method
+      def preferred_backup_window: () -> ::String
+
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBClusterSnapshot.html#kms_key_id-instance_method
       def kms_key_id: () -> ::String
 
@@ -194,6 +200,8 @@ module Aws
                      ?enable_performance_insights: bool,
                      ?performance_insights_kms_key_id: ::String,
                      ?performance_insights_retention_period: ::Integer,
+                     ?backup_retention_period: ::Integer,
+                     ?preferred_backup_window: ::String,
                      ?engine_lifecycle_support: ::String,
                      ?tag_specifications: Array[
                        {

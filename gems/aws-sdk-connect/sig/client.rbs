@@ -1068,6 +1068,24 @@ module Aws
                                           ) -> _CreateIntegrationAssociationResponseSuccess
                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateIntegrationAssociationResponseSuccess
 
+      interface _CreateNotificationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateNotificationResponse]
+        def notification_id: () -> ::String
+        def notification_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#create_notification-instance_method
+      def create_notification: (
+                                 instance_id: ::String,
+                                 ?expires_at: ::Time,
+                                 recipients: Array[::String],
+                                 ?priority: ("HIGH" | "LOW"),
+                                 content: Hash[("en_US" | "de_DE" | "es_ES" | "fr_FR" | "id_ID" | "it_IT" | "ja_JP" | "ko_KR" | "pt_BR" | "zh_CN" | "zh_TW"), ::String],
+                                 ?tags: Hash[::String, ::String],
+                                 ?predefined_notification_id: ::String,
+                                 ?client_token: ::String
+                               ) -> _CreateNotificationResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateNotificationResponseSuccess
+
       interface _CreateParticipantResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateParticipantResponse]
         def participant_credentials: () -> Types::ParticipantTokenCredentials
@@ -1535,8 +1553,8 @@ module Aws
                            secondary_email: ::String?,
                            mobile: ::String?
                          },
-                         phone_config: {
-                           phone_type: ("SOFT_PHONE" | "DESK_PHONE"),
+                         ?phone_config: {
+                           phone_type: ("SOFT_PHONE" | "DESK_PHONE")?,
                            auto_accept: bool?,
                            after_contact_work_time_limit: ::Integer?,
                            desk_phone_number: ::String?,
@@ -1547,6 +1565,43 @@ module Aws
                          routing_profile_id: ::String,
                          ?hierarchy_group_id: ::String,
                          instance_id: ::String,
+                         ?auto_accept_configs: Array[
+                           {
+                             channel: ("VOICE" | "CHAT" | "TASK" | "EMAIL"),
+                             auto_accept: bool,
+                             agent_first_callback_auto_accept: bool?
+                           },
+                         ],
+                         ?after_contact_work_configs: Array[
+                           {
+                             channel: ("VOICE" | "CHAT" | "TASK" | "EMAIL"),
+                             after_contact_work_config: {
+                               after_contact_work_time_limit: ::Integer?
+                             },
+                             agent_first_callback_after_contact_work_config: {
+                               after_contact_work_time_limit: ::Integer?
+                             }?
+                           },
+                         ],
+                         ?phone_number_configs: Array[
+                           {
+                             channel: ("VOICE" | "CHAT" | "TASK" | "EMAIL"),
+                             phone_type: ("SOFT_PHONE" | "DESK_PHONE"),
+                             phone_number: ::String?
+                           },
+                         ],
+                         ?persistent_connection_configs: Array[
+                           {
+                             channel: ("VOICE" | "CHAT" | "TASK" | "EMAIL"),
+                             persistent_connection: bool
+                           },
+                         ],
+                         ?voice_enhancement_configs: Array[
+                           {
+                             channel: ("VOICE" | "CHAT" | "TASK" | "EMAIL"),
+                             voice_enhancement_mode: ("VOICE_ISOLATION" | "NOISE_SUPPRESSION" | "NONE")
+                           },
+                         ],
                          ?tags: Hash[::String, ::String]
                        ) -> _CreateUserResponseSuccess
                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateUserResponseSuccess
@@ -1878,6 +1933,16 @@ module Aws
                                             integration_association_id: ::String
                                           ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _DeleteNotificationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteNotificationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#delete_notification-instance_method
+      def delete_notification: (
+                                 instance_id: ::String,
+                                 notification_id: ::String
+                               ) -> _DeleteNotificationResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteNotificationResponseSuccess
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#delete_predefined_attribute-instance_method
       def delete_predefined_attribute: (
@@ -2245,6 +2310,17 @@ module Aws
                                               resource_type: ("CHAT_TRANSCRIPTS" | "CALL_RECORDINGS" | "SCHEDULED_REPORTS" | "MEDIA_STREAMS" | "CONTACT_TRACE_RECORDS" | "AGENT_EVENTS" | "REAL_TIME_CONTACT_ANALYSIS_SEGMENTS" | "ATTACHMENTS" | "CONTACT_EVALUATIONS" | "SCREEN_RECORDINGS" | "REAL_TIME_CONTACT_ANALYSIS_CHAT_SEGMENTS" | "REAL_TIME_CONTACT_ANALYSIS_VOICE_SEGMENTS" | "EMAIL_MESSAGES")
                                             ) -> _DescribeInstanceStorageConfigResponseSuccess
                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeInstanceStorageConfigResponseSuccess
+
+      interface _DescribeNotificationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeNotificationResponse]
+        def notification: () -> Types::Notification
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#describe_notification-instance_method
+      def describe_notification: (
+                                   instance_id: ::String,
+                                   notification_id: ::String
+                                 ) -> _DescribeNotificationResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeNotificationResponseSuccess
 
       interface _DescribePhoneNumberResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribePhoneNumberResponse]
@@ -3428,6 +3504,19 @@ module Aws
                          ) -> _ListLexBotsResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListLexBotsResponseSuccess
 
+      interface _ListNotificationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListNotificationsResponse]
+        def next_token: () -> ::String
+        def notification_summary_list: () -> ::Array[Types::Notification]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#list_notifications-instance_method
+      def list_notifications: (
+                                instance_id: ::String,
+                                ?next_token: ::String,
+                                ?max_results: ::Integer
+                              ) -> _ListNotificationsResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListNotificationsResponseSuccess
+
       interface _ListPhoneNumbersResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListPhoneNumbersResponse]
         def phone_number_summary_list: () -> ::Array[Types::PhoneNumberSummary]
@@ -3806,6 +3895,20 @@ module Aws
                                         ?max_results: ::Integer
                                       ) -> _ListUserHierarchyGroupsResponseSuccess
                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListUserHierarchyGroupsResponseSuccess
+
+      interface _ListUserNotificationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListUserNotificationsResponse]
+        def user_notifications: () -> ::Array[Types::UserNotificationSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#list_user_notifications-instance_method
+      def list_user_notifications: (
+                                     instance_id: ::String,
+                                     ?next_token: ::String,
+                                     ?max_results: ::Integer,
+                                     user_id: ::String
+                                   ) -> _ListUserNotificationsResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListUserNotificationsResponseSuccess
 
       interface _ListUserProficienciesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListUserProficienciesResponse]
@@ -4654,6 +4757,59 @@ module Aws
                                         }
                                       ) -> _SearchHoursOfOperationsResponseSuccess
                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SearchHoursOfOperationsResponseSuccess
+
+      interface _SearchNotificationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SearchNotificationsResponse]
+        def notifications: () -> ::Array[Types::NotificationSearchSummary]
+        def next_token: () -> ::String
+        def approximate_total_count: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#search_notifications-instance_method
+      def search_notifications: (
+                                  instance_id: ::String,
+                                  ?next_token: ::String,
+                                  ?max_results: ::Integer,
+                                  ?search_filter: {
+                                    attribute_filter: {
+                                      or_conditions: Array[
+                                        {
+                                          tag_conditions: Array[
+                                            {
+                                              tag_key: ::String?,
+                                              tag_value: ::String?
+                                            },
+                                          ]?
+                                        },
+                                      ]?,
+                                      and_condition: {
+                                        tag_conditions: Array[
+                                          {
+                                            tag_key: ::String?,
+                                            tag_value: ::String?
+                                          },
+                                        ]?
+                                      }?,
+                                      tag_condition: {
+                                        tag_key: ::String?,
+                                        tag_value: ::String?
+                                      }?
+                                    }?
+                                  },
+                                  ?search_criteria: {
+                                    or_conditions: Array[
+                                      untyped,
+                                    ]?,
+                                    and_conditions: Array[
+                                      untyped,
+                                    ]?,
+                                    string_condition: {
+                                      field_name: ::String?,
+                                      value: ::String?,
+                                      comparison_type: ("STARTS_WITH" | "CONTAINS" | "EXACT")?
+                                    }?
+                                  }
+                                ) -> _SearchNotificationsResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SearchNotificationsResponseSuccess
 
       interface _SearchPredefinedAttributesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::SearchPredefinedAttributesResponse]
@@ -6617,6 +6773,17 @@ module Aws
                                           ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 
+      interface _UpdateNotificationContentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateNotificationContentResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#update_notification_content-instance_method
+      def update_notification_content: (
+                                         instance_id: ::String,
+                                         notification_id: ::String,
+                                         content: Hash[("en_US" | "de_DE" | "es_ES" | "fr_FR" | "id_ID" | "it_IT" | "ja_JP" | "ko_KR" | "pt_BR" | "zh_CN" | "zh_TW"), ::String]
+                                       ) -> _UpdateNotificationContentResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateNotificationContentResponseSuccess
+
       interface _UpdateParticipantAuthenticationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateParticipantAuthenticationResponse]
       end
@@ -7117,6 +7284,50 @@ module Aws
                                        ) -> _UpdateTrafficDistributionResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateTrafficDistributionResponseSuccess
 
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#update_user_config-instance_method
+      def update_user_config: (
+                                ?auto_accept_configs: Array[
+                                  {
+                                    channel: ("VOICE" | "CHAT" | "TASK" | "EMAIL"),
+                                    auto_accept: bool,
+                                    agent_first_callback_auto_accept: bool?
+                                  },
+                                ],
+                                ?after_contact_work_configs: Array[
+                                  {
+                                    channel: ("VOICE" | "CHAT" | "TASK" | "EMAIL"),
+                                    after_contact_work_config: {
+                                      after_contact_work_time_limit: ::Integer?
+                                    },
+                                    agent_first_callback_after_contact_work_config: {
+                                      after_contact_work_time_limit: ::Integer?
+                                    }?
+                                  },
+                                ],
+                                ?phone_number_configs: Array[
+                                  {
+                                    channel: ("VOICE" | "CHAT" | "TASK" | "EMAIL"),
+                                    phone_type: ("SOFT_PHONE" | "DESK_PHONE"),
+                                    phone_number: ::String?
+                                  },
+                                ],
+                                ?persistent_connection_configs: Array[
+                                  {
+                                    channel: ("VOICE" | "CHAT" | "TASK" | "EMAIL"),
+                                    persistent_connection: bool
+                                  },
+                                ],
+                                ?voice_enhancement_configs: Array[
+                                  {
+                                    channel: ("VOICE" | "CHAT" | "TASK" | "EMAIL"),
+                                    voice_enhancement_mode: ("VOICE_ISOLATION" | "NOISE_SUPPRESSION" | "NONE")
+                                  },
+                                ],
+                                user_id: ::String,
+                                instance_id: ::String
+                              ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#update_user_hierarchy-instance_method
       def update_user_hierarchy: (
                                    ?hierarchy_group_id: ::String,
@@ -7170,10 +7381,24 @@ module Aws
                                      ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 
+      interface _UpdateUserNotificationStatusResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateUserNotificationStatusResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#update_user_notification_status-instance_method
+      def update_user_notification_status: (
+                                             instance_id: ::String,
+                                             notification_id: ::String,
+                                             user_id: ::String,
+                                             status: ("READ" | "UNREAD" | "HIDDEN"),
+                                             ?last_modified_time: ::Time,
+                                             ?last_modified_region: ::String
+                                           ) -> _UpdateUserNotificationStatusResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateUserNotificationStatusResponseSuccess
+
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#update_user_phone_config-instance_method
       def update_user_phone_config: (
                                       phone_config: {
-                                        phone_type: ("SOFT_PHONE" | "DESK_PHONE"),
+                                        phone_type: ("SOFT_PHONE" | "DESK_PHONE")?,
                                         auto_accept: bool?,
                                         after_contact_work_time_limit: ::Integer?,
                                         desk_phone_number: ::String?,

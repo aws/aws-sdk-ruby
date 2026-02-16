@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.22.0 (2026-02-06)
+------------------
+
+* Feature - Add OutputConfiguration to InvokeDataAutomation input and output to support S3 output
+
 1.21.0 (2026-01-16)
 ------------------
 

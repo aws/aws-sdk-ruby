@@ -120,6 +120,21 @@ module Aws::PartnerCentralSelling
       SENSITIVE: []
     end
 
+    class AwsOpportunitySummaryFullView
+      attr_accessor related_opportunity_id: ::String
+      attr_accessor origin: ("AWS Referral" | "Partner Referral")
+      attr_accessor involvement_type: ("For Visibility Only" | "Co-Sell")
+      attr_accessor visibility: ("Full" | "Limited")
+      attr_accessor life_cycle: Types::AwsOpportunityLifeCycle
+      attr_accessor opportunity_team: ::Array[Types::AwsTeamMember]
+      attr_accessor insights: Types::AwsOpportunityInsights
+      attr_accessor involvement_type_change_reason: ("Expansion Opportunity" | "Change in Deal Information" | "Customer Requested" | "Technical Complexity" | "Risk Mitigation")
+      attr_accessor related_entity_ids: Types::AwsOpportunityRelatedEntities
+      attr_accessor customer: Types::AwsOpportunityCustomer
+      attr_accessor project: Types::AwsOpportunityProject
+      SENSITIVE: []
+    end
+
     class AwsProductDetails
       attr_accessor product_code: ::String
       attr_accessor service_code: ::String
@@ -284,6 +299,12 @@ module Aws::PartnerCentralSelling
     class CreateResourceSnapshotResponse
       attr_accessor arn: ::String
       attr_accessor revision: ::Integer
+      SENSITIVE: []
+    end
+
+    class CreatedDateFilter
+      attr_accessor after_created_date: ::Time
+      attr_accessor before_created_date: ::Time
       SENSITIVE: []
     end
 
@@ -559,6 +580,7 @@ module Aws::PartnerCentralSelling
       attr_accessor resource_snapshot_template_name: ::String
       attr_accessor revision: ::Integer
       attr_accessor payload: Types::ResourceSnapshotPayload
+      attr_accessor target_member_accounts: ::Array[::String]
       SENSITIVE: [:created_by]
     end
 
@@ -827,6 +849,7 @@ module Aws::PartnerCentralSelling
       attr_accessor life_cycle_stage: ::Array[("Prospect" | "Qualified" | "Technical Validation" | "Business Validation" | "Committed" | "Launched" | "Closed Lost")]
       attr_accessor life_cycle_review_status: ::Array[("Pending Submission" | "Submitted" | "In review" | "Approved" | "Rejected" | "Action Required")]
       attr_accessor customer_company_name: ::Array[::String]
+      attr_accessor created_date: Types::CreatedDateFilter
       SENSITIVE: []
     end
 
@@ -973,7 +996,7 @@ module Aws::PartnerCentralSelling
 
     class OpportunitySort
       attr_accessor sort_order: ("ASCENDING" | "DESCENDING")
-      attr_accessor sort_by: ("LastModifiedDate" | "Identifier" | "CustomerCompanyName")
+      attr_accessor sort_by: ("LastModifiedDate" | "Identifier" | "CustomerCompanyName" | "CreatedDate")
       SENSITIVE: []
     end
 
@@ -1115,10 +1138,13 @@ module Aws::PartnerCentralSelling
 
     class ResourceSnapshotPayload
       attr_accessor opportunity_summary: Types::OpportunitySummaryView
+      attr_accessor aws_opportunity_summary_full_view: Types::AwsOpportunitySummaryFullView
       attr_accessor unknown: untyped
       SENSITIVE: []
 
       class OpportunitySummary < ResourceSnapshotPayload
+      end
+      class AwsOpportunitySummaryFullView < ResourceSnapshotPayload
       end
       class Unknown < ResourceSnapshotPayload
       end

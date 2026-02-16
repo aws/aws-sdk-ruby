@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.18.0 (2026-02-06)
+------------------
+
+* Feature - Adding support for Custom(General) Authorization in managed integrations for AWS IoT Device Management cloud connectors.
+
 1.17.0 (2026-01-16)
 ------------------
 

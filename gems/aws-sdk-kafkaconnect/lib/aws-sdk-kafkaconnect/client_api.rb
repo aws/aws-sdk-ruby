@@ -165,6 +165,7 @@ module Aws::KafkaConnect
     AutoScaling.add_member(:min_worker_count, Shapes::ShapeRef.new(shape: __integer, required: true, location_name: "minWorkerCount"))
     AutoScaling.add_member(:scale_in_policy, Shapes::ShapeRef.new(shape: ScaleInPolicy, location_name: "scaleInPolicy"))
     AutoScaling.add_member(:scale_out_policy, Shapes::ShapeRef.new(shape: ScaleOutPolicy, location_name: "scaleOutPolicy"))
+    AutoScaling.add_member(:max_autoscaling_task_count, Shapes::ShapeRef.new(shape: __integer, location_name: "maxAutoscalingTaskCount"))
     AutoScaling.struct_class = Types::AutoScaling
 
     AutoScalingDescription.add_member(:max_worker_count, Shapes::ShapeRef.new(shape: __integer, location_name: "maxWorkerCount"))
@@ -172,6 +173,7 @@ module Aws::KafkaConnect
     AutoScalingDescription.add_member(:min_worker_count, Shapes::ShapeRef.new(shape: __integer, location_name: "minWorkerCount"))
     AutoScalingDescription.add_member(:scale_in_policy, Shapes::ShapeRef.new(shape: ScaleInPolicyDescription, location_name: "scaleInPolicy"))
     AutoScalingDescription.add_member(:scale_out_policy, Shapes::ShapeRef.new(shape: ScaleOutPolicyDescription, location_name: "scaleOutPolicy"))
+    AutoScalingDescription.add_member(:max_autoscaling_task_count, Shapes::ShapeRef.new(shape: __integer, location_name: "maxAutoscalingTaskCount"))
     AutoScalingDescription.struct_class = Types::AutoScalingDescription
 
     AutoScalingUpdate.add_member(:max_worker_count, Shapes::ShapeRef.new(shape: __integer, required: true, location_name: "maxWorkerCount"))
@@ -179,6 +181,7 @@ module Aws::KafkaConnect
     AutoScalingUpdate.add_member(:min_worker_count, Shapes::ShapeRef.new(shape: __integer, required: true, location_name: "minWorkerCount"))
     AutoScalingUpdate.add_member(:scale_in_policy, Shapes::ShapeRef.new(shape: ScaleInPolicyUpdate, required: true, location_name: "scaleInPolicy"))
     AutoScalingUpdate.add_member(:scale_out_policy, Shapes::ShapeRef.new(shape: ScaleOutPolicyUpdate, required: true, location_name: "scaleOutPolicy"))
+    AutoScalingUpdate.add_member(:max_autoscaling_task_count, Shapes::ShapeRef.new(shape: __integer, location_name: "maxAutoscalingTaskCount"))
     AutoScalingUpdate.struct_class = Types::AutoScalingUpdate
 
     BadRequestException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))

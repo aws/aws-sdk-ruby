@@ -61,6 +61,7 @@ module Aws::PartnerCentralSelling
     AwsOpportunityProject = Shapes::StructureShape.new(name: 'AwsOpportunityProject')
     AwsOpportunityRelatedEntities = Shapes::StructureShape.new(name: 'AwsOpportunityRelatedEntities')
     AwsOpportunityStage = Shapes::StringShape.new(name: 'AwsOpportunityStage')
+    AwsOpportunitySummaryFullView = Shapes::StructureShape.new(name: 'AwsOpportunitySummaryFullView')
     AwsOpportunityTeamMembersList = Shapes::ListShape.new(name: 'AwsOpportunityTeamMembersList')
     AwsPartition = Shapes::StringShape.new(name: 'AwsPartition')
     AwsProductDetails = Shapes::StructureShape.new(name: 'AwsProductDetails')
@@ -105,6 +106,7 @@ module Aws::PartnerCentralSelling
     CreateResourceSnapshotJobResponse = Shapes::StructureShape.new(name: 'CreateResourceSnapshotJobResponse')
     CreateResourceSnapshotRequest = Shapes::StructureShape.new(name: 'CreateResourceSnapshotRequest')
     CreateResourceSnapshotResponse = Shapes::StructureShape.new(name: 'CreateResourceSnapshotResponse')
+    CreatedDateFilter = Shapes::StructureShape.new(name: 'CreatedDateFilter')
     CurrencyCode = Shapes::StringShape.new(name: 'CurrencyCode')
     Customer = Shapes::StructureShape.new(name: 'Customer')
     CustomerAction = Shapes::StringShape.new(name: 'CustomerAction')
@@ -490,6 +492,19 @@ module Aws::PartnerCentralSelling
     AwsOpportunityRelatedEntities.add_member(:solutions, Shapes::ShapeRef.new(shape: SolutionIdentifiers, location_name: "Solutions"))
     AwsOpportunityRelatedEntities.struct_class = Types::AwsOpportunityRelatedEntities
 
+    AwsOpportunitySummaryFullView.add_member(:related_opportunity_id, Shapes::ShapeRef.new(shape: OpportunityIdentifier, location_name: "RelatedOpportunityId"))
+    AwsOpportunitySummaryFullView.add_member(:origin, Shapes::ShapeRef.new(shape: OpportunityOrigin, location_name: "Origin"))
+    AwsOpportunitySummaryFullView.add_member(:involvement_type, Shapes::ShapeRef.new(shape: SalesInvolvementType, location_name: "InvolvementType"))
+    AwsOpportunitySummaryFullView.add_member(:visibility, Shapes::ShapeRef.new(shape: Visibility, location_name: "Visibility"))
+    AwsOpportunitySummaryFullView.add_member(:life_cycle, Shapes::ShapeRef.new(shape: AwsOpportunityLifeCycle, location_name: "LifeCycle"))
+    AwsOpportunitySummaryFullView.add_member(:opportunity_team, Shapes::ShapeRef.new(shape: AwsOpportunityTeamMembersList, location_name: "OpportunityTeam"))
+    AwsOpportunitySummaryFullView.add_member(:insights, Shapes::ShapeRef.new(shape: AwsOpportunityInsights, location_name: "Insights"))
+    AwsOpportunitySummaryFullView.add_member(:involvement_type_change_reason, Shapes::ShapeRef.new(shape: InvolvementTypeChangeReason, location_name: "InvolvementTypeChangeReason"))
+    AwsOpportunitySummaryFullView.add_member(:related_entity_ids, Shapes::ShapeRef.new(shape: AwsOpportunityRelatedEntities, location_name: "RelatedEntityIds"))
+    AwsOpportunitySummaryFullView.add_member(:customer, Shapes::ShapeRef.new(shape: AwsOpportunityCustomer, location_name: "Customer"))
+    AwsOpportunitySummaryFullView.add_member(:project, Shapes::ShapeRef.new(shape: AwsOpportunityProject, location_name: "Project"))
+    AwsOpportunitySummaryFullView.struct_class = Types::AwsOpportunitySummaryFullView
+
     AwsOpportunityTeamMembersList.member = Shapes::ShapeRef.new(shape: AwsTeamMember)
 
     AwsProductDetails.add_member(:product_code, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ProductCode"))
@@ -630,6 +645,10 @@ module Aws::PartnerCentralSelling
     CreateResourceSnapshotResponse.add_member(:arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "Arn"))
     CreateResourceSnapshotResponse.add_member(:revision, Shapes::ShapeRef.new(shape: ResourceSnapshotRevision, location_name: "Revision"))
     CreateResourceSnapshotResponse.struct_class = Types::CreateResourceSnapshotResponse
+
+    CreatedDateFilter.add_member(:after_created_date, Shapes::ShapeRef.new(shape: DateTime, location_name: "AfterCreatedDate"))
+    CreatedDateFilter.add_member(:before_created_date, Shapes::ShapeRef.new(shape: DateTime, location_name: "BeforeCreatedDate"))
+    CreatedDateFilter.struct_class = Types::CreatedDateFilter
 
     Customer.add_member(:account, Shapes::ShapeRef.new(shape: Account, location_name: "Account"))
     Customer.add_member(:contacts, Shapes::ShapeRef.new(shape: CustomerContactsList, location_name: "Contacts"))
@@ -870,6 +889,7 @@ module Aws::PartnerCentralSelling
     GetResourceSnapshotResponse.add_member(:resource_snapshot_template_name, Shapes::ShapeRef.new(shape: ResourceTemplateName, location_name: "ResourceSnapshotTemplateName"))
     GetResourceSnapshotResponse.add_member(:revision, Shapes::ShapeRef.new(shape: ResourceSnapshotRevision, location_name: "Revision"))
     GetResourceSnapshotResponse.add_member(:payload, Shapes::ShapeRef.new(shape: ResourceSnapshotPayload, location_name: "Payload"))
+    GetResourceSnapshotResponse.add_member(:target_member_accounts, Shapes::ShapeRef.new(shape: AwsAccountIdOrAliasList, location_name: "TargetMemberAccounts"))
     GetResourceSnapshotResponse.struct_class = Types::GetResourceSnapshotResponse
 
     GetSellingSystemSettingsRequest.add_member(:catalog, Shapes::ShapeRef.new(shape: CatalogIdentifier, required: true, location_name: "Catalog"))
@@ -1088,6 +1108,7 @@ module Aws::PartnerCentralSelling
     ListOpportunitiesRequest.add_member(:life_cycle_stage, Shapes::ShapeRef.new(shape: ListOpportunitiesRequestLifeCycleStageList, location_name: "LifeCycleStage"))
     ListOpportunitiesRequest.add_member(:life_cycle_review_status, Shapes::ShapeRef.new(shape: ListOpportunitiesRequestLifeCycleReviewStatusList, location_name: "LifeCycleReviewStatus"))
     ListOpportunitiesRequest.add_member(:customer_company_name, Shapes::ShapeRef.new(shape: ListOpportunitiesRequestCustomerCompanyNameList, location_name: "CustomerCompanyName"))
+    ListOpportunitiesRequest.add_member(:created_date, Shapes::ShapeRef.new(shape: CreatedDateFilter, location_name: "CreatedDate"))
     ListOpportunitiesRequest.struct_class = Types::ListOpportunitiesRequest
 
     ListOpportunitiesRequestCustomerCompanyNameList.member = Shapes::ShapeRef.new(shape: String)
@@ -1327,8 +1348,10 @@ module Aws::PartnerCentralSelling
     ResourceSnapshotJobSummaryList.member = Shapes::ShapeRef.new(shape: ResourceSnapshotJobSummary)
 
     ResourceSnapshotPayload.add_member(:opportunity_summary, Shapes::ShapeRef.new(shape: OpportunitySummaryView, location_name: "OpportunitySummary"))
+    ResourceSnapshotPayload.add_member(:aws_opportunity_summary_full_view, Shapes::ShapeRef.new(shape: AwsOpportunitySummaryFullView, location_name: "AwsOpportunitySummaryFullView"))
     ResourceSnapshotPayload.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     ResourceSnapshotPayload.add_member_subclass(:opportunity_summary, Types::ResourceSnapshotPayload::OpportunitySummary)
+    ResourceSnapshotPayload.add_member_subclass(:aws_opportunity_summary_full_view, Types::ResourceSnapshotPayload::AwsOpportunitySummaryFullView)
     ResourceSnapshotPayload.add_member_subclass(:unknown, Types::ResourceSnapshotPayload::Unknown)
     ResourceSnapshotPayload.struct_class = Types::ResourceSnapshotPayload
 

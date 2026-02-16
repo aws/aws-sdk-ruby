@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.86.0 (2026-02-09)
+------------------
+
+* Feature - Allow cross account v5 in put data lake settings
+
 1.85.0 (2026-01-16)
 ------------------
 

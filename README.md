@@ -390,7 +390,6 @@ RubyGems.org page under "LINKS" section.
 | AWS Import/Export                                     | Aws::ImportExport                        | aws-sdk-importexport                        | 2010-06-01  |
 | AWS Invoicing                                         | Aws::Invoicing                           | aws-sdk-invoicing                           | 2024-12-01  |
 | AWS IoT                                               | Aws::IoT                                 | aws-sdk-iot                                 | 2015-05-28  |
-| AWS IoT Analytics                                     | Aws::IoTAnalytics                        | aws-sdk-iotanalytics                        | 2017-11-27  |
 | AWS IoT Core Device Advisor                           | Aws::IoTDeviceAdvisor                    | aws-sdk-iotdeviceadvisor                    | 2020-09-18  |
 | AWS IoT Data Plane                                    | Aws::IoTDataPlane                        | aws-sdk-iotdataplane                        | 2015-05-28  |
 | AWS IoT Events                                        | Aws::IoTEvents                           | aws-sdk-iotevents                           | 2018-07-27  |
@@ -514,7 +513,6 @@ RubyGems.org page under "LINKS" section.
 | Amazon CloudWatch Application Insights                | Aws::ApplicationInsights                 | aws-sdk-applicationinsights                 | 2018-11-25  |
 | Amazon CloudWatch Application Signals                 | Aws::ApplicationSignals                  | aws-sdk-applicationsignals                  | 2024-04-15  |
 | Amazon CloudWatch Events                              | Aws::CloudWatchEvents                    | aws-sdk-cloudwatchevents                    | 2015-10-07  |
-| Amazon CloudWatch Evidently                           | Aws::CloudWatchEvidently                 | aws-sdk-cloudwatchevidently                 | 2021-02-01  |
 | Amazon CloudWatch Internet Monitor                    | Aws::InternetMonitor                     | aws-sdk-internetmonitor                     | 2021-06-03  |
 | Amazon CloudWatch Logs                                | Aws::CloudWatchLogs                      | aws-sdk-cloudwatchlogs                      | 2014-03-28  |
 | Amazon CloudWatch Network Monitor                     | Aws::NetworkMonitor                      | aws-sdk-networkmonitor                      | 2023-08-01  |

@@ -358,6 +358,7 @@ module Aws::SageMaker
     ClusterCapacityRequirements = Shapes::StructureShape.new(name: 'ClusterCapacityRequirements')
     ClusterCapacityType = Shapes::StringShape.new(name: 'ClusterCapacityType')
     ClusterConfigMode = Shapes::StringShape.new(name: 'ClusterConfigMode')
+    ClusterDnsName = Shapes::StringShape.new(name: 'ClusterDnsName')
     ClusterEbsVolumeConfig = Shapes::StructureShape.new(name: 'ClusterEbsVolumeConfig')
     ClusterEbsVolumeSizeInGB = Shapes::IntegerShape.new(name: 'ClusterEbsVolumeSizeInGB')
     ClusterEventDetail = Shapes::StructureShape.new(name: 'ClusterEventDetail')
@@ -365,6 +366,9 @@ module Aws::SageMaker
     ClusterEventResourceType = Shapes::StringShape.new(name: 'ClusterEventResourceType')
     ClusterEventSummaries = Shapes::ListShape.new(name: 'ClusterEventSummaries')
     ClusterEventSummary = Shapes::StructureShape.new(name: 'ClusterEventSummary')
+    ClusterFsxLustreConfig = Shapes::StructureShape.new(name: 'ClusterFsxLustreConfig')
+    ClusterFsxMountPath = Shapes::StringShape.new(name: 'ClusterFsxMountPath')
+    ClusterFsxOpenZfsConfig = Shapes::StructureShape.new(name: 'ClusterFsxOpenZfsConfig')
     ClusterInstanceCount = Shapes::IntegerShape.new(name: 'ClusterInstanceCount')
     ClusterInstanceGroupDetails = Shapes::StructureShape.new(name: 'ClusterInstanceGroupDetails')
     ClusterInstanceGroupDetailsList = Shapes::ListShape.new(name: 'ClusterInstanceGroupDetailsList')
@@ -393,6 +397,7 @@ module Aws::SageMaker
     ClusterLifeCycleConfig = Shapes::StructureShape.new(name: 'ClusterLifeCycleConfig')
     ClusterLifeCycleConfigFileName = Shapes::StringShape.new(name: 'ClusterLifeCycleConfigFileName')
     ClusterMetadata = Shapes::StructureShape.new(name: 'ClusterMetadata')
+    ClusterMountName = Shapes::StringShape.new(name: 'ClusterMountName')
     ClusterName = Shapes::StringShape.new(name: 'ClusterName')
     ClusterNameOrArn = Shapes::StringShape.new(name: 'ClusterNameOrArn')
     ClusterNodeDetails = Shapes::StructureShape.new(name: 'ClusterNodeDetails')
@@ -408,6 +413,9 @@ module Aws::SageMaker
     ClusterOnDemandOptions = Shapes::StructureShape.new(name: 'ClusterOnDemandOptions')
     ClusterOrchestrator = Shapes::StructureShape.new(name: 'ClusterOrchestrator')
     ClusterOrchestratorEksConfig = Shapes::StructureShape.new(name: 'ClusterOrchestratorEksConfig')
+    ClusterOrchestratorSlurmConfig = Shapes::StructureShape.new(name: 'ClusterOrchestratorSlurmConfig')
+    ClusterPartitionName = Shapes::StringShape.new(name: 'ClusterPartitionName')
+    ClusterPartitionNames = Shapes::ListShape.new(name: 'ClusterPartitionNames')
     ClusterPrivateDnsHostname = Shapes::StringShape.new(name: 'ClusterPrivateDnsHostname')
     ClusterPrivatePrimaryIp = Shapes::StringShape.new(name: 'ClusterPrivatePrimaryIp')
     ClusterPrivatePrimaryIpv6 = Shapes::StringShape.new(name: 'ClusterPrivatePrimaryIpv6')
@@ -420,6 +428,10 @@ module Aws::SageMaker
     ClusterSchedulerConfigSummary = Shapes::StructureShape.new(name: 'ClusterSchedulerConfigSummary')
     ClusterSchedulerConfigSummaryList = Shapes::ListShape.new(name: 'ClusterSchedulerConfigSummaryList')
     ClusterSchedulerPriorityClassName = Shapes::StringShape.new(name: 'ClusterSchedulerPriorityClassName')
+    ClusterSlurmConfig = Shapes::StructureShape.new(name: 'ClusterSlurmConfig')
+    ClusterSlurmConfigDetails = Shapes::StructureShape.new(name: 'ClusterSlurmConfigDetails')
+    ClusterSlurmConfigStrategy = Shapes::StringShape.new(name: 'ClusterSlurmConfigStrategy')
+    ClusterSlurmNodeType = Shapes::StringShape.new(name: 'ClusterSlurmNodeType')
     ClusterSortBy = Shapes::StringShape.new(name: 'ClusterSortBy')
     ClusterSpotOptions = Shapes::StructureShape.new(name: 'ClusterSpotOptions')
     ClusterStatus = Shapes::StringShape.new(name: 'ClusterStatus')
@@ -3667,6 +3679,15 @@ module Aws::SageMaker
     ClusterEventSummary.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
     ClusterEventSummary.struct_class = Types::ClusterEventSummary
 
+    ClusterFsxLustreConfig.add_member(:dns_name, Shapes::ShapeRef.new(shape: ClusterDnsName, required: true, location_name: "DnsName"))
+    ClusterFsxLustreConfig.add_member(:mount_name, Shapes::ShapeRef.new(shape: ClusterMountName, required: true, location_name: "MountName"))
+    ClusterFsxLustreConfig.add_member(:mount_path, Shapes::ShapeRef.new(shape: ClusterFsxMountPath, location_name: "MountPath"))
+    ClusterFsxLustreConfig.struct_class = Types::ClusterFsxLustreConfig
+
+    ClusterFsxOpenZfsConfig.add_member(:dns_name, Shapes::ShapeRef.new(shape: ClusterDnsName, required: true, location_name: "DnsName"))
+    ClusterFsxOpenZfsConfig.add_member(:mount_path, Shapes::ShapeRef.new(shape: ClusterFsxMountPath, location_name: "MountPath"))
+    ClusterFsxOpenZfsConfig.struct_class = Types::ClusterFsxOpenZfsConfig
+
     ClusterInstanceGroupDetails.add_member(:current_count, Shapes::ShapeRef.new(shape: ClusterNonNegativeInstanceCount, location_name: "CurrentCount"))
     ClusterInstanceGroupDetails.add_member(:target_count, Shapes::ShapeRef.new(shape: ClusterInstanceCount, location_name: "TargetCount"))
     ClusterInstanceGroupDetails.add_member(:min_count, Shapes::ShapeRef.new(shape: ClusterInstanceCount, location_name: "MinCount"))
@@ -3690,6 +3711,7 @@ module Aws::SageMaker
     ClusterInstanceGroupDetails.add_member(:target_state_count, Shapes::ShapeRef.new(shape: ClusterInstanceCount, location_name: "TargetStateCount"))
     ClusterInstanceGroupDetails.add_member(:software_update_status, Shapes::ShapeRef.new(shape: SoftwareUpdateStatus, location_name: "SoftwareUpdateStatus"))
     ClusterInstanceGroupDetails.add_member(:active_software_update_config, Shapes::ShapeRef.new(shape: DeploymentConfiguration, location_name: "ActiveSoftwareUpdateConfig"))
+    ClusterInstanceGroupDetails.add_member(:slurm_config, Shapes::ShapeRef.new(shape: ClusterSlurmConfigDetails, location_name: "SlurmConfig"))
     ClusterInstanceGroupDetails.struct_class = Types::ClusterInstanceGroupDetails
 
     ClusterInstanceGroupDetailsList.member = Shapes::ShapeRef.new(shape: ClusterInstanceGroupDetails)
@@ -3708,6 +3730,7 @@ module Aws::SageMaker
     ClusterInstanceGroupSpecification.add_member(:scheduled_update_config, Shapes::ShapeRef.new(shape: ScheduledUpdateConfig, location_name: "ScheduledUpdateConfig"))
     ClusterInstanceGroupSpecification.add_member(:image_id, Shapes::ShapeRef.new(shape: ImageId, location_name: "ImageId"))
     ClusterInstanceGroupSpecification.add_member(:kubernetes_config, Shapes::ShapeRef.new(shape: ClusterKubernetesConfig, location_name: "KubernetesConfig"))
+    ClusterInstanceGroupSpecification.add_member(:slurm_config, Shapes::ShapeRef.new(shape: ClusterSlurmConfig, location_name: "SlurmConfig"))
     ClusterInstanceGroupSpecification.add_member(:capacity_requirements, Shapes::ShapeRef.new(shape: ClusterCapacityRequirements, location_name: "CapacityRequirements"))
     ClusterInstanceGroupSpecification.struct_class = Types::ClusterInstanceGroupSpecification
 
@@ -3724,8 +3747,12 @@ module Aws::SageMaker
     ClusterInstanceStatusDetails.struct_class = Types::ClusterInstanceStatusDetails
 
     ClusterInstanceStorageConfig.add_member(:ebs_volume_config, Shapes::ShapeRef.new(shape: ClusterEbsVolumeConfig, location_name: "EbsVolumeConfig"))
+    ClusterInstanceStorageConfig.add_member(:fsx_lustre_config, Shapes::ShapeRef.new(shape: ClusterFsxLustreConfig, location_name: "FsxLustreConfig"))
+    ClusterInstanceStorageConfig.add_member(:fsx_open_zfs_config, Shapes::ShapeRef.new(shape: ClusterFsxOpenZfsConfig, location_name: "FsxOpenZfsConfig"))
     ClusterInstanceStorageConfig.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     ClusterInstanceStorageConfig.add_member_subclass(:ebs_volume_config, Types::ClusterInstanceStorageConfig::EbsVolumeConfig)
+    ClusterInstanceStorageConfig.add_member_subclass(:fsx_lustre_config, Types::ClusterInstanceStorageConfig::FsxLustreConfig)
+    ClusterInstanceStorageConfig.add_member_subclass(:fsx_open_zfs_config, Types::ClusterInstanceStorageConfig::FsxOpenZfsConfig)
     ClusterInstanceStorageConfig.add_member_subclass(:unknown, Types::ClusterInstanceStorageConfig::Unknown)
     ClusterInstanceStorageConfig.struct_class = Types::ClusterInstanceStorageConfig
 
@@ -3808,10 +3835,16 @@ module Aws::SageMaker
     ClusterOnDemandOptions.struct_class = Types::ClusterOnDemandOptions
 
     ClusterOrchestrator.add_member(:eks, Shapes::ShapeRef.new(shape: ClusterOrchestratorEksConfig, location_name: "Eks"))
+    ClusterOrchestrator.add_member(:slurm, Shapes::ShapeRef.new(shape: ClusterOrchestratorSlurmConfig, location_name: "Slurm"))
     ClusterOrchestrator.struct_class = Types::ClusterOrchestrator
 
     ClusterOrchestratorEksConfig.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: EksClusterArn, required: true, location_name: "ClusterArn"))
     ClusterOrchestratorEksConfig.struct_class = Types::ClusterOrchestratorEksConfig
+
+    ClusterOrchestratorSlurmConfig.add_member(:slurm_config_strategy, Shapes::ShapeRef.new(shape: ClusterSlurmConfigStrategy, location_name: "SlurmConfigStrategy"))
+    ClusterOrchestratorSlurmConfig.struct_class = Types::ClusterOrchestratorSlurmConfig
+
+    ClusterPartitionNames.member = Shapes::ShapeRef.new(shape: ClusterPartitionName)
 
     ClusterRestrictedInstanceGroupDetails.add_member(:current_count, Shapes::ShapeRef.new(shape: ClusterNonNegativeInstanceCount, location_name: "CurrentCount"))
     ClusterRestrictedInstanceGroupDetails.add_member(:target_count, Shapes::ShapeRef.new(shape: ClusterInstanceCount, location_name: "TargetCount"))
@@ -3857,6 +3890,14 @@ module Aws::SageMaker
     ClusterSchedulerConfigSummary.struct_class = Types::ClusterSchedulerConfigSummary
 
     ClusterSchedulerConfigSummaryList.member = Shapes::ShapeRef.new(shape: ClusterSchedulerConfigSummary)
+
+    ClusterSlurmConfig.add_member(:node_type, Shapes::ShapeRef.new(shape: ClusterSlurmNodeType, required: true, location_name: "NodeType"))
+    ClusterSlurmConfig.add_member(:partition_names, Shapes::ShapeRef.new(shape: ClusterPartitionNames, location_name: "PartitionNames"))
+    ClusterSlurmConfig.struct_class = Types::ClusterSlurmConfig
+
+    ClusterSlurmConfigDetails.add_member(:node_type, Shapes::ShapeRef.new(shape: ClusterSlurmNodeType, required: true, location_name: "NodeType"))
+    ClusterSlurmConfigDetails.add_member(:partition_names, Shapes::ShapeRef.new(shape: ClusterPartitionNames, location_name: "PartitionNames"))
+    ClusterSlurmConfigDetails.struct_class = Types::ClusterSlurmConfigDetails
 
     ClusterSpotOptions.struct_class = Types::ClusterSpotOptions
 
@@ -11810,6 +11851,7 @@ module Aws::SageMaker
     UpdateClusterRequest.add_member(:node_provisioning_mode, Shapes::ShapeRef.new(shape: ClusterNodeProvisioningMode, location_name: "NodeProvisioningMode"))
     UpdateClusterRequest.add_member(:cluster_role, Shapes::ShapeRef.new(shape: RoleArn, location_name: "ClusterRole"))
     UpdateClusterRequest.add_member(:auto_scaling, Shapes::ShapeRef.new(shape: ClusterAutoScalingConfig, location_name: "AutoScaling"))
+    UpdateClusterRequest.add_member(:orchestrator, Shapes::ShapeRef.new(shape: ClusterOrchestrator, location_name: "Orchestrator"))
     UpdateClusterRequest.struct_class = Types::UpdateClusterRequest
 
     UpdateClusterResponse.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: ClusterArn, required: true, location_name: "ClusterArn"))

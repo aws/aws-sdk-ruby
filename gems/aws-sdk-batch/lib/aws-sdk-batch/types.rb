@@ -3310,6 +3310,12 @@ module Aws::Batch
     #   A list of job attempts associated with the service job.
     #   @return [Array<Types::ServiceJobAttemptDetail>]
     #
+    # @!attribute [rw] capacity_usage
+    #   The configured capacity for the service job, such as the number of
+    #   instances. The number of instances should be the same value as the
+    #   `serviceRequestPayload.InstanceCount` field.
+    #   @return [Array<Types::ServiceJobCapacityUsageDetail>]
+    #
     # @!attribute [rw] created_at
     #   The Unix timestamp (in milliseconds) for when the service job was
     #   created.
@@ -3343,6 +3349,12 @@ module Aws::Batch
     #   The retry strategy to use for failed service jobs that are submitted
     #   with this service job.
     #   @return [Types::ServiceJobRetryStrategy]
+    #
+    # @!attribute [rw] scheduled_at
+    #   The Unix timestamp (in milliseconds) for when the service job was
+    #   scheduled. This represents when the service job was dispatched to
+    #   SageMaker and the service job transitioned to the `SCHEDULED` state.
+    #   @return [Integer]
     #
     # @!attribute [rw] scheduling_priority
     #   The scheduling priority of the service job.
@@ -3400,6 +3412,7 @@ module Aws::Batch
     #
     class DescribeServiceJobResponse < Struct.new(
       :attempts,
+      :capacity_usage,
       :created_at,
       :is_terminated,
       :job_arn,
@@ -3408,6 +3421,7 @@ module Aws::Batch
       :job_queue,
       :latest_attempt,
       :retry_strategy,
+      :scheduled_at,
       :scheduling_priority,
       :service_request_payload,
       :service_job_type,
@@ -5405,6 +5419,51 @@ module Aws::Batch
       include Aws::Structure
     end
 
+    # The capacity usage for a fairshare scheduling job queue.
+    #
+    # @!attribute [rw] capacity_unit
+    #   The unit of measure for the capacity usage. For compute jobs, this
+    #   is `VCPU` for Amazon EC2 and `cpu` for Amazon EKS. For service jobs,
+    #   this is `NUM_INSTANCES`.
+    #   @return [String]
+    #
+    # @!attribute [rw] quantity
+    #   The quantity of capacity being used, measured in the units specified
+    #   by `capacityUnit`.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/FairshareCapacityUsage AWS API Documentation
+    #
+    class FairshareCapacityUsage < Struct.new(
+      :capacity_unit,
+      :quantity)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The capacity utilization for a specific share in a fairshare
+    # scheduling job queue, including the share identifier and its current
+    # usage.
+    #
+    # @!attribute [rw] share_identifier
+    #   The share identifier for the fairshare scheduling job queue.
+    #   @return [String]
+    #
+    # @!attribute [rw] capacity_usage
+    #   The capacity usage information for this share, including the unit of
+    #   measure and quantity being used. This is `VCPU` for Amazon EC2 and
+    #   `cpu` for Amazon EKS.
+    #   @return [Array<Types::FairshareCapacityUsage>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/FairshareCapacityUtilization AWS API Documentation
+    #
+    class FairshareCapacityUtilization < Struct.new(
+      :share_identifier,
+      :capacity_usage)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The fair-share scheduling policy details.
     #
     # @!attribute [rw] share_decay_seconds
@@ -5452,6 +5511,28 @@ module Aws::Batch
       :share_decay_seconds,
       :compute_reservation,
       :share_distribution)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The fairshare utilization for a job queue, including the number of
+    # active shares and top capacity utilization.
+    #
+    # @!attribute [rw] active_share_count
+    #   The total number of active shares in the fairshare scheduling job
+    #   queue that are currently utilizing capacity.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] top_capacity_utilization
+    #   A list of the top 20 shares with the highest capacity utilization,
+    #   ordered by usage amount.
+    #   @return [Array<Types::FairshareCapacityUtilization>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/FairshareUtilizationDetail AWS API Documentation
+    #
+    class FairshareUtilizationDetail < Struct.new(
+      :active_share_count,
+      :top_capacity_utilization)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5586,10 +5667,16 @@ module Aws::Batch
     #   jobs are ordered based on their job priority and share usage.
     #   @return [Types::FrontOfQueueDetail]
     #
+    # @!attribute [rw] queue_utilization
+    #   The job queue's capacity utilization, including total usage and
+    #   breakdown by fairshare scheduling queue.
+    #   @return [Types::QueueSnapshotUtilizationDetail]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/GetJobQueueSnapshotResponse AWS API Documentation
     #
     class GetJobQueueSnapshotResponse < Struct.new(
-      :front_of_queue)
+      :front_of_queue,
+      :queue_utilization)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5638,6 +5725,28 @@ module Aws::Batch
     #
     class ImagePullSecret < Struct.new(
       :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The capacity usage for a job, including the unit of measure and
+    # quantity of resources being used.
+    #
+    # @!attribute [rw] capacity_unit
+    #   The unit of measure for the capacity usage. This is `VCPU` for
+    #   Amazon EC2 and `cpu` for Amazon EKS.
+    #   @return [String]
+    #
+    # @!attribute [rw] quantity
+    #   The quantity of capacity being used by the job, measured in the
+    #   units specified by `capacityUnit`.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/JobCapacityUsageSummary AWS API Documentation
+    #
+    class JobCapacityUsageSummary < Struct.new(
+      :capacity_unit,
+      :quantity)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6202,6 +6311,11 @@ module Aws::Batch
     #   The job name.
     #   @return [String]
     #
+    # @!attribute [rw] capacity_usage
+    #   The configured capacity usage information for this job, including
+    #   the unit of measure and quantity of resources.
+    #   @return [Array<Types::JobCapacityUsageSummary>]
+    #
     # @!attribute [rw] created_at
     #   The Unix timestamp (in milliseconds) for when the job was created.
     #   For non-array jobs and parent array jobs, this is when the job
@@ -6213,6 +6327,21 @@ module Aws::Batch
     #
     #   [1]: https://docs.aws.amazon.com/batch/latest/APIReference/API_SubmitJob.html
     #   @return [Integer]
+    #
+    # @!attribute [rw] scheduled_at
+    #   The Unix timestamp (in milliseconds) for when the job was scheduled
+    #   for execution. For more information on job statues, see [Service job
+    #   status][1] in the *Batch User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/batch/latest/userguide/service-job-status.html
+    #   @return [Integer]
+    #
+    # @!attribute [rw] share_identifier
+    #   The share identifier for the fairshare scheduling queue that this
+    #   job is associated with.
+    #   @return [String]
     #
     # @!attribute [rw] status
     #   The current status for the job.
@@ -6263,7 +6392,10 @@ module Aws::Batch
       :job_arn,
       :job_id,
       :job_name,
+      :capacity_usage,
       :created_at,
+      :scheduled_at,
+      :share_identifier,
       :status,
       :status_reason,
       :started_at,
@@ -6892,7 +7024,7 @@ module Aws::Batch
     #   @return [String]
     #
     # @!attribute [rw] share_identifier
-    #   The fair-share scheduling policy identifier for the job.
+    #   The fair-share scheduling identifier for the job.
     #   @return [String]
     #
     # @!attribute [rw] job_status
@@ -6976,8 +7108,9 @@ module Aws::Batch
     # @!attribute [rw] job_status
     #   The job status used to filter jobs in the specified queue. If the
     #   `filters` parameter is specified, the `jobStatus` parameter is
-    #   ignored and jobs with any status are returned. If you don't specify
-    #   a status, only `RUNNING` jobs are returned.
+    #   ignored and jobs with any status are returned. The exception is the
+    #   `SHARE_IDENTIFIER` filter and `jobStatus` can be used together. If
+    #   you don't specify a status, only `RUNNING` jobs are returned.
     #
     #   <note markdown="1"> Array job parents are updated to `PENDING` when any child job is
     #   updated to `RUNNABLE` and remain in `PENDING` status while child
@@ -7024,10 +7157,16 @@ module Aws::Batch
     #
     # @!attribute [rw] filters
     #   The filter to apply to the query. Only one filter can be used at a
-    #   time. When the filter is used, `jobStatus` is ignored. The filter
-    #   doesn't apply to child jobs in an array or multi-node parallel
-    #   (MNP) jobs. The results are sorted by the `createdAt` field, with
-    #   the most recent jobs being first.
+    #   time. When the filter is used, `jobStatus` is ignored with the
+    #   exception that `SHARE_IDENTIFIER` and `jobStatus` can be used
+    #   together. The filter doesn't apply to child jobs in an array or
+    #   multi-node parallel (MNP) jobs. The results are sorted by the
+    #   `createdAt` field, with the most recent jobs being first.
+    #
+    #   <note markdown="1"> The `SHARE_IDENTIFIER` filter and the `jobStatus` field can be used
+    #   together to filter results.
+    #
+    #    </note>
     #
     #   JOB\_NAME
     #
@@ -7070,6 +7209,11 @@ module Aws::Batch
     #     created. This corresponds to the `createdAt` value. The value is a
     #     string representation of the number of milliseconds since 00:00:00
     #     UTC (midnight) on January 1, 1970.
+    #
+    #   SHARE\_IDENTIFIER
+    #
+    #   : The value for the filter is the fairshare scheduling share
+    #     identifier.
     #   @return [Array<Types::KeyValuesPair>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/ListJobsRequest AWS API Documentation
@@ -7170,7 +7314,16 @@ module Aws::Batch
     #   @return [String]
     #
     # @!attribute [rw] job_status
-    #   The job status with which to filter service jobs.
+    #   The job status used to filter service jobs in the specified queue.
+    #   If the `filters` parameter is specified, the `jobStatus` parameter
+    #   is ignored and jobs with any status are returned. The exception is
+    #   the `SHARE_IDENTIFIER` filter and `jobStatus` can be used together.
+    #   If you don't specify a status, only `RUNNING` jobs are returned.
+    #
+    #   <note markdown="1"> The `SHARE_IDENTIFIER` filter and the `jobStatus` field can be used
+    #   together to filter results.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -7201,9 +7354,15 @@ module Aws::Batch
     #
     # @!attribute [rw] filters
     #   The filter to apply to the query. Only one filter can be used at a
-    #   time. When the filter is used, `jobStatus` is ignored. The results
-    #   are sorted by the `createdAt` field, with the most recent jobs being
-    #   first.
+    #   time. When the filter is used, `jobStatus` is ignored with the
+    #   exception that `SHARE_IDENTIFIER` and `jobStatus` can be used
+    #   together. The results are sorted by the `createdAt` field, with the
+    #   most recent jobs being first.
+    #
+    #   <note markdown="1"> The `SHARE_IDENTIFIER` filter and the `jobStatus` field can be used
+    #   together to filter results.
+    #
+    #    </note>
     #
     #   JOB\_NAME
     #
@@ -7228,6 +7387,11 @@ module Aws::Batch
     #     created. This corresponds to the `createdAt` value. The value is a
     #     string representation of the number of milliseconds since 00:00:00
     #     UTC (midnight) on January 1, 1970.
+    #
+    #   SHARE\_IDENTIFIER
+    #
+    #   : The value for the filter is the fairshare scheduling share
+    #     identifier.
     #   @return [Array<Types::KeyValuesPair>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/ListServiceJobsRequest AWS API Documentation
@@ -7735,6 +7899,57 @@ module Aws::Batch
       :ecs_properties,
       :eks_properties,
       :consumable_resource_properties)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configured capacity usage for a job queue snapshot, including the
+    # unit of measure and quantity of resources being used.
+    #
+    # @!attribute [rw] capacity_unit
+    #   The unit of measure for the capacity usage. For compute jobs, this
+    #   is `VCPU` for Amazon EC2 and `cpu` for Amazon EKS. For service jobs,
+    #   this is `NUM_INSTANCES`.
+    #   @return [String]
+    #
+    # @!attribute [rw] quantity
+    #   The quantity of capacity being used in the queue snapshot, measured
+    #   in the units specified by `capacityUnit`.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/QueueSnapshotCapacityUsage AWS API Documentation
+    #
+    class QueueSnapshotCapacityUsage < Struct.new(
+      :capacity_unit,
+      :quantity)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The job queue utilization at a specific point in time, including total
+    # capacity usage and fairshare utilization breakdown.
+    #
+    # @!attribute [rw] total_capacity_usage
+    #   The total capacity usage for the entire job queue, for both
+    #   first-in, first-out (FIFO) and fairshare scheduling job queue.
+    #   @return [Array<Types::QueueSnapshotCapacityUsage>]
+    #
+    # @!attribute [rw] fairshare_utilization
+    #   The utilization information for a fairshare scheduling job queues,
+    #   including active share count and top capacity utilization by share.
+    #   @return [Types::FairshareUtilizationDetail]
+    #
+    # @!attribute [rw] last_updated_at
+    #   The Unix timestamp (in milliseconds) for when the queue utilization
+    #   information was last updated.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/QueueSnapshotUtilizationDetail AWS API Documentation
+    #
+    class QueueSnapshotUtilizationDetail < Struct.new(
+      :total_capacity_usage,
+      :fairshare_utilization,
+      :last_updated_at)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8440,6 +8655,50 @@ module Aws::Batch
       include Aws::Structure
     end
 
+    # The capacity usage for a service job, including the unit of measure
+    # and quantity of resources being consumed.
+    #
+    # @!attribute [rw] capacity_unit
+    #   The unit of measure for the service job capacity usage. For service
+    #   jobs, this is `NUM_INSTANCES`.
+    #   @return [String]
+    #
+    # @!attribute [rw] quantity
+    #   The quantity of capacity being used by the service job, measured in
+    #   the units specified by `capacityUnit`.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/ServiceJobCapacityUsageDetail AWS API Documentation
+    #
+    class ServiceJobCapacityUsageDetail < Struct.new(
+      :capacity_unit,
+      :quantity)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The capacity usage for a service job, including the unit of measure
+    # and quantity of resources being used.
+    #
+    # @!attribute [rw] capacity_unit
+    #   The unit of measure for the service job capacity usage. For service
+    #   jobs, this is `NUM_INSTANCES`.
+    #   @return [String]
+    #
+    # @!attribute [rw] quantity
+    #   The quantity of capacity being used by the service job, measured in
+    #   the units specified by `capacityUnit`.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/ServiceJobCapacityUsageSummary AWS API Documentation
+    #
+    class ServiceJobCapacityUsageSummary < Struct.new(
+      :capacity_unit,
+      :quantity)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Specifies conditions for when to exit or retry a service job based on
     # the exit status or status reason.
     #
@@ -8499,6 +8758,11 @@ module Aws::Batch
     #   Information about the latest attempt for the service job.
     #   @return [Types::LatestServiceJobAttempt]
     #
+    # @!attribute [rw] capacity_usage
+    #   The capacity usage information for this service job, including the
+    #   unit of measure and quantity of resources being used.
+    #   @return [Array<Types::ServiceJobCapacityUsageSummary>]
+    #
     # @!attribute [rw] created_at
     #   The Unix timestamp (in milliseconds) for when the service job was
     #   created.
@@ -8515,6 +8779,11 @@ module Aws::Batch
     # @!attribute [rw] job_name
     #   The name of the service job.
     #   @return [String]
+    #
+    # @!attribute [rw] scheduled_at
+    #   The Unix timestamp (in milliseconds) for when the service job was
+    #   scheduled for execution.
+    #   @return [Integer]
     #
     # @!attribute [rw] service_job_type
     #   The type of service job. For SageMaker Training jobs, this value is
@@ -8548,10 +8817,12 @@ module Aws::Batch
     #
     class ServiceJobSummary < Struct.new(
       :latest_attempt,
+      :capacity_usage,
       :created_at,
       :job_arn,
       :job_id,
       :job_name,
+      :scheduled_at,
       :service_job_type,
       :share_identifier,
       :status,

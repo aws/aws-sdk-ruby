@@ -847,6 +847,7 @@ module Aws::Neptunedata
     StartLoaderJobInput.add_member(:queue_request, Shapes::ShapeRef.new(shape: Boolean, location_name: "queueRequest"))
     StartLoaderJobInput.add_member(:dependencies, Shapes::ShapeRef.new(shape: StringList, location_name: "dependencies"))
     StartLoaderJobInput.add_member(:user_provided_edge_ids, Shapes::ShapeRef.new(shape: Boolean, location_name: "userProvidedEdgeIds"))
+    StartLoaderJobInput.add_member(:edge_only_load, Shapes::ShapeRef.new(shape: Boolean, location_name: "edgeOnlyLoad"))
     StartLoaderJobInput.struct_class = Types::StartLoaderJobInput
 
     StartLoaderJobOutput.add_member(:status, Shapes::ShapeRef.new(shape: String, required: true, location_name: "status"))

@@ -584,7 +584,8 @@ module Aws
                               ?update_single_cardinality_properties: bool,
                               ?queue_request: bool,
                               ?dependencies: Array[::String],
-                              ?user_provided_edge_ids: bool
+                              ?user_provided_edge_ids: bool,
+                              ?edge_only_load: bool
                             ) -> _StartLoaderJobResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartLoaderJobResponseSuccess
 

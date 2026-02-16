@@ -3313,6 +3313,22 @@ module Aws::Neptunedata
     #   had to be corrected, and must instead reload all the relationships.
     #   @return [Boolean]
     #
+    # @!attribute [rw] edge_only_load
+    #   <b> <code>edgeOnlyLoad</code> </b>   –   A flag that controls file
+    #   processing order during bulk loading.
+    #
+    #   *Allowed values*: `"TRUE"`, `"FALSE"`.
+    #
+    #   *Default value*: `"FALSE"`.
+    #
+    #   When this parameter is set to "FALSE", the loader automatically
+    #   loads vertex files first, then edge files afterwards. It does this
+    #   by first scanning all files to determine their contents (vertices or
+    #   edges). When this parameter is set to "TRUE", the loader skips the
+    #   initial scanning phase and immediately loads all files in the order
+    #   they appear.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptunedata-2023-08-01/StartLoaderJobInput AWS API Documentation
     #
     class StartLoaderJobInput < Struct.new(
@@ -3327,7 +3343,8 @@ module Aws::Neptunedata
       :update_single_cardinality_properties,
       :queue_request,
       :dependencies,
-      :user_provided_edge_ids)
+      :user_provided_edge_ids,
+      :edge_only_load)
       SENSITIVE = []
       include Aws::Structure
     end

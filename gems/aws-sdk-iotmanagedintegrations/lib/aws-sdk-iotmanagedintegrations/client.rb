@@ -500,6 +500,9 @@ module Aws::IoTManagedIntegrations
     #   A set of key/value pairs that are used to manage the account
     #   association.
     #
+    # @option params [Types::GeneralAuthorizationName] :general_authorization
+    #   The General Authorization reference by authorization material name.
+    #
     # @return [Types::CreateAccountAssociationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateAccountAssociationResponse#o_auth_authorization_url #o_auth_authorization_url} => String
@@ -516,6 +519,9 @@ module Aws::IoTManagedIntegrations
     #     description: "AccountAssociationDescription",
     #     tags: {
     #       "TagKey" => "TagValue",
+    #     },
+    #     general_authorization: {
+    #       auth_material_name: "AuthMaterialName",
     #     },
     #   })
     #
@@ -649,7 +655,7 @@ module Aws::IoTManagedIntegrations
     # @option params [required, String] :cloud_connector_id
     #   The identifier of the C2C connector.
     #
-    # @option params [required, String] :auth_type
+    # @option params [String] :auth_type
     #   The authentication type used for the connector destination, which
     #   determines how credentials and access are managed.
     #
@@ -658,7 +664,7 @@ module Aws::IoTManagedIntegrations
     #   destination, including OAuth settings and other authentication
     #   parameters.
     #
-    # @option params [required, Types::SecretsManager] :secrets_manager
+    # @option params [Types::SecretsManager] :secrets_manager
     #   The AWS Secrets Manager configuration used to securely store and
     #   manage sensitive information for the connector destination.
     #
@@ -681,7 +687,7 @@ module Aws::IoTManagedIntegrations
     #     name: "ConnectorDestinationName",
     #     description: "ConnectorDestinationDescription",
     #     cloud_connector_id: "CloudConnectorId", # required
-    #     auth_type: "OAUTH", # required, accepts OAUTH
+    #     auth_type: "OAUTH", # accepts OAUTH
     #     auth_config: { # required
     #       o_auth: {
     #         auth_url: "AuthUrl", # required
@@ -694,8 +700,17 @@ module Aws::IoTManagedIntegrations
     #           days_before_renewal: 1,
     #         },
     #       },
+    #       general_authorization: [
+    #         {
+    #           secrets_manager: { # required
+    #             arn: "SecretsManagerArn", # required
+    #             version_id: "SecretsManagerVersionId", # required
+    #           },
+    #           auth_material_name: "AuthMaterialName", # required
+    #         },
+    #       ],
     #     },
-    #     secrets_manager: { # required
+    #     secrets_manager: {
     #       arn: "SecretsManagerArn", # required
     #       version_id: "SecretsManagerVersionId", # required
     #     },
@@ -888,7 +903,7 @@ module Aws::IoTManagedIntegrations
     #
     # @option params [required, String] :authentication_material
     #   The authentication material defining the device connectivity setup
-    #   requests. The authentication materials used are the device bar code.
+    #   requests. The authorization materials used are the device bar code.
     #
     # @option params [required, String] :authentication_material_type
     #   The type of authentication material used for device connectivity setup
@@ -961,7 +976,7 @@ module Aws::IoTManagedIntegrations
     #     owner: "Owner",
     #     credential_locker_id: "CredentialLockerId",
     #     authentication_material: "AuthMaterialString", # required
-    #     authentication_material_type: "CUSTOM_PROTOCOL_QR_BAR_CODE", # required, accepts CUSTOM_PROTOCOL_QR_BAR_CODE, WIFI_SETUP_QR_BAR_CODE, ZWAVE_QR_BAR_CODE, ZIGBEE_QR_BAR_CODE, DISCOVERED_DEVICE
+    #     authentication_material_type: "CUSTOM_PROTOCOL_QR_BAR_CODE", # required, accepts CUSTOM_PROTOCOL_QR_BAR_CODE, WIFI_SETUP_QR_BAR_CODE, ZWAVE_QR_BAR_CODE, ZIGBEE_QR_BAR_CODE, DISCOVERED_DEVICE, PRE_ONBOARDED_CLOUD
     #     wi_fi_simple_setup_configuration: {
     #       enable_as_provisioner: false,
     #       enable_as_provisionee: false,
@@ -1258,6 +1273,9 @@ module Aws::IoTManagedIntegrations
     # @option params [String] :ca_certificate
     #   The id of the certificate authority (CA) certificate.
     #
+    # @option params [String] :claim_certificate
+    #   The claim certificate.
+    #
     # @option params [String] :name
     #   The name of the provisioning template.
     #
@@ -1288,6 +1306,7 @@ module Aws::IoTManagedIntegrations
     #   resp = client.create_provisioning_profile({
     #     provisioning_type: "FLEET_PROVISIONING", # required, accepts FLEET_PROVISIONING, JITR
     #     ca_certificate: "CaCertificate",
+    #     claim_certificate: "ClaimCertificate",
     #     name: "ProvisioningProfileName",
     #     client_token: "ClientToken",
     #     tags: {
@@ -1600,6 +1619,7 @@ module Aws::IoTManagedIntegrations
     #   * {Types::GetAccountAssociationResponse#arn #arn} => String
     #   * {Types::GetAccountAssociationResponse#o_auth_authorization_url #o_auth_authorization_url} => String
     #   * {Types::GetAccountAssociationResponse#tags #tags} => Hash&lt;String,String&gt;
+    #   * {Types::GetAccountAssociationResponse#general_authorization #general_authorization} => Types::GeneralAuthorizationName
     #
     # @example Request syntax with placeholder values
     #
@@ -1619,6 +1639,7 @@ module Aws::IoTManagedIntegrations
     #   resp.o_auth_authorization_url #=> String
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
+    #   resp.general_authorization.auth_material_name #=> String
     #
     # @overload get_account_association(params = {})
     # @param [Hash] params ({})
@@ -1741,6 +1762,10 @@ module Aws::IoTManagedIntegrations
     #   resp.auth_config.o_auth.o_auth_complete_redirect_url #=> String
     #   resp.auth_config.o_auth.proactive_refresh_token_renewal.enabled #=> Boolean
     #   resp.auth_config.o_auth.proactive_refresh_token_renewal.days_before_renewal #=> Integer
+    #   resp.auth_config.general_authorization #=> Array
+    #   resp.auth_config.general_authorization[0].secrets_manager.arn #=> String
+    #   resp.auth_config.general_authorization[0].secrets_manager.version_id #=> String
+    #   resp.auth_config.general_authorization[0].auth_material_name #=> String
     #   resp.secrets_manager.arn #=> String
     #   resp.secrets_manager.version_id #=> String
     #   resp.o_auth_complete_redirect_url #=> String
@@ -2948,6 +2973,7 @@ module Aws::IoTManagedIntegrations
     #   resp.items #=> Array
     #   resp.items[0].managed_thing_id #=> String
     #   resp.items[0].account_association_id #=> String
+    #   resp.items[0].managed_thing_association_status #=> String, one of "PRE_ASSOCIATED", "ASSOCIATED"
     #   resp.next_token #=> String
     #
     # @overload list_managed_thing_account_associations(params = {})
@@ -3409,10 +3435,10 @@ module Aws::IoTManagedIntegrations
       req.send_request(options)
     end
 
-    # List tags for the specified resource.
+    # Lists the tags for a specified resource.
     #
     # @option params [required, String] :resource_arn
-    #   The ARN of the resource for which to list tags.
+    #   The Amazon Resource Name (ARN) of the resource for which to list tags.
     #
     # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3919,6 +3945,9 @@ module Aws::IoTManagedIntegrations
     #   A set of key/value pairs that are used to manage the device discovery
     #   request.
     #
+    # @option params [Array<String>] :connector_device_id_list
+    #   Used as a filter for PLA discoveries.
+    #
     # @option params [String] :protocol
     #   The protocol type for capability rediscovery (ZWAVE, ZIGBEE, or
     #   CUSTOM).
@@ -3957,6 +3986,7 @@ module Aws::IoTManagedIntegrations
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
+    #     connector_device_id_list: ["ConnectorDeviceId"],
     #     protocol: "ZWAVE", # accepts ZWAVE, ZIGBEE, CUSTOM
     #     end_device_identifier: "ManagedThingId",
     #   })
@@ -3973,13 +4003,13 @@ module Aws::IoTManagedIntegrations
       req.send_request(options)
     end
 
-    # Add tags for the specified resource.
+    # Adds tags to a specified resource.
     #
     # @option params [required, String] :resource_arn
-    #   The ARN of the resource to which to add tags.
+    #   The Amazon Resource Name (ARN) of the resource to which to add tags.
     #
     # @option params [required, Hash<String,String>] :tags
-    #   A set of key/value pairs that are used to manage the resource
+    #   A set of key/value pairs that are used to manage the resource.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -3999,10 +4029,11 @@ module Aws::IoTManagedIntegrations
       req.send_request(options)
     end
 
-    # Remove tags for the specified resource.
+    # Removes tags from a specified resource.
     #
     # @option params [required, String] :resource_arn
-    #   The ARN of the resource to which to add tags.
+    #   The Amazon Resource Name (ARN) of the resource from which to remove
+    #   tags.
     #
     # @option params [required, Array<String>] :tag_keys
     #   A list of tag keys to remove from the resource.
@@ -4132,6 +4163,26 @@ module Aws::IoTManagedIntegrations
     #           enabled: false,
     #           days_before_renewal: 1,
     #         },
+    #       },
+    #       general_authorization_update: {
+    #         auth_materials_to_add: [
+    #           {
+    #             secrets_manager: { # required
+    #               arn: "SecretsManagerArn", # required
+    #               version_id: "SecretsManagerVersionId", # required
+    #             },
+    #             auth_material_name: "AuthMaterialName", # required
+    #           },
+    #         ],
+    #         auth_materials_to_update: [
+    #           {
+    #             secrets_manager: { # required
+    #               arn: "SecretsManagerArn", # required
+    #               version_id: "SecretsManagerVersionId", # required
+    #             },
+    #             auth_material_name: "AuthMaterialName", # required
+    #           },
+    #         ],
     #       },
     #     },
     #     secrets_manager: {
@@ -4389,7 +4440,7 @@ module Aws::IoTManagedIntegrations
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-iotmanagedintegrations'
-      context[:gem_version] = '1.17.0'
+      context[:gem_version] = '1.18.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -403,6 +403,22 @@ module Aws
                              ) -> _CreateReplicatorResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateReplicatorResponseSuccess
 
+      interface _CreateTopicResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateTopicResponse]
+        def topic_arn: () -> ::String
+        def topic_name: () -> ::String
+        def status: () -> ("CREATING" | "UPDATING" | "DELETING" | "ACTIVE")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kafka/Client.html#create_topic-instance_method
+      def create_topic: (
+                          cluster_arn: ::String,
+                          topic_name: ::String,
+                          partition_count: ::Integer,
+                          replication_factor: ::Integer,
+                          ?configs: ::String
+                        ) -> _CreateTopicResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateTopicResponseSuccess
+
       interface _CreateVpcConnectionResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateVpcConnectionResponse]
         def vpc_connection_arn: () -> ::String
@@ -459,6 +475,19 @@ module Aws
                                replicator_arn: ::String
                              ) -> _DeleteReplicatorResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteReplicatorResponseSuccess
+
+      interface _DeleteTopicResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteTopicResponse]
+        def topic_arn: () -> ::String
+        def topic_name: () -> ::String
+        def status: () -> ("CREATING" | "UPDATING" | "DELETING" | "ACTIVE")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kafka/Client.html#delete_topic-instance_method
+      def delete_topic: (
+                          cluster_arn: ::String,
+                          topic_name: ::String
+                        ) -> _DeleteTopicResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteTopicResponseSuccess
 
       interface _DeleteVpcConnectionResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteVpcConnectionResponse]
@@ -1162,6 +1191,21 @@ module Aws
                             ?volume_size_gb: ::Integer
                           ) -> _UpdateStorageResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateStorageResponseSuccess
+
+      interface _UpdateTopicResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateTopicResponse]
+        def topic_arn: () -> ::String
+        def topic_name: () -> ::String
+        def status: () -> ("CREATING" | "UPDATING" | "DELETING" | "ACTIVE")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kafka/Client.html#update_topic-instance_method
+      def update_topic: (
+                          cluster_arn: ::String,
+                          topic_name: ::String,
+                          ?configs: ::String,
+                          ?partition_count: ::Integer
+                        ) -> _UpdateTopicResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateTopicResponseSuccess
     end
   end
 end

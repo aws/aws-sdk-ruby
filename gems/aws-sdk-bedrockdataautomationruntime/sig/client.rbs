@@ -97,6 +97,7 @@ module Aws
 
       interface _InvokeDataAutomationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::InvokeDataAutomationResponse]
+        def output_configuration: () -> Types::OutputConfiguration
         def semantic_modality: () -> ("DOCUMENT" | "IMAGE" | "AUDIO" | "VIDEO")
         def output_segments: () -> ::Array[Types::OutputSegment]
       end
@@ -121,6 +122,9 @@ module Aws
                                     ?encryption_configuration: {
                                       kms_key_id: ::String,
                                       kms_encryption_context: Hash[::String, ::String]?
+                                    },
+                                    ?output_configuration: {
+                                      s3_uri: ::String
                                     }
                                   ) -> _InvokeDataAutomationResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _InvokeDataAutomationResponseSuccess

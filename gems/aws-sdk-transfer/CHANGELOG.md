@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.133.0 (2026-02-09)
+------------------
+
+* Feature - This release adds a documentation update for MdnResponse of type "ASYNC"
+
 1.132.0 (2026-02-05)
 ------------------
 

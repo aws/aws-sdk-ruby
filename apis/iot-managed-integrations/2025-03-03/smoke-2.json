@@ -447,6 +447,45 @@
       "useAccountIdRouting" : true
     }
   }, {
+    "id" : "TagResourceNotFound",
+    "operationName" : "TagResource",
+    "input" : {
+      "ResourceArn" : "arn:aws:iotmanagedintegrations:us-east-1:123456789012:managed-thing/nonexistent",
+      "Tags" : {
+        "key1" : "value1"
+      }
+    },
+    "expectation" : {
+      "failure" : {
+        "errorId" : "ResourceNotFoundException"
+      }
+    },
+    "config" : {
+      "region" : "us-east-1",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "TagResourceSuccess",
+    "operationName" : "TagResource",
+    "input" : {
+      "ResourceArn" : "arn:aws:iotmanagedintegrations:us-east-1:123456789012:managed-thing/test123",
+      "Tags" : {
+        "key1" : "value1",
+        "key2" : "value2"
+      }
+    },
+    "expectation" : {
+      "success" : { }
+    },
+    "config" : {
+      "region" : "us-east-1",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
     "id" : "GetDeviceDiscoveryNotFound",
     "operationName" : "GetDeviceDiscovery",
     "input" : {
@@ -563,6 +602,40 @@
       "failure" : {
         "errorId" : "ResourceNotFoundException"
       }
+    },
+    "config" : {
+      "region" : "us-east-1",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "UntagResourceNotFound",
+    "operationName" : "UntagResource",
+    "input" : {
+      "ResourceArn" : "arn:aws:iotmanagedintegrations:us-east-1:123456789012:managed-thing/nonexistent",
+      "TagKeys" : [ "key1" ]
+    },
+    "expectation" : {
+      "failure" : {
+        "errorId" : "ResourceNotFoundException"
+      }
+    },
+    "config" : {
+      "region" : "us-east-1",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "UntagResourceSuccess",
+    "operationName" : "UntagResource",
+    "input" : {
+      "ResourceArn" : "arn:aws:iotmanagedintegrations:us-east-1:123456789012:managed-thing/test123",
+      "TagKeys" : [ "key1", "key2" ]
+    },
+    "expectation" : {
+      "success" : { }
     },
     "config" : {
       "region" : "us-east-1",

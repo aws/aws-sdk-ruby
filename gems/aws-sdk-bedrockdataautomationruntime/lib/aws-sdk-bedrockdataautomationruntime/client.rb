@@ -540,8 +540,12 @@ module Aws::BedrockDataAutomationRuntime
     # @option params [Types::EncryptionConfiguration] :encryption_configuration
     #   Encryption configuration.
     #
+    # @option params [Types::OutputConfiguration] :output_configuration
+    #   Output configuration.
+    #
     # @return [Types::InvokeDataAutomationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
+    #   * {Types::InvokeDataAutomationResponse#output_configuration #output_configuration} => Types::OutputConfiguration
     #   * {Types::InvokeDataAutomationResponse#semantic_modality #semantic_modality} => String
     #   * {Types::InvokeDataAutomationResponse#output_segments #output_segments} => Array&lt;Types::OutputSegment&gt;
     #
@@ -570,10 +574,14 @@ module Aws::BedrockDataAutomationRuntime
     #         "EncryptionContextKey" => "EncryptionContextValue",
     #       },
     #     },
+    #     output_configuration: {
+    #       s3_uri: "S3Uri", # required
+    #     },
     #   })
     #
     # @example Response structure
     #
+    #   resp.output_configuration.s3_uri #=> String
     #   resp.semantic_modality #=> String, one of "DOCUMENT", "IMAGE", "AUDIO", "VIDEO"
     #   resp.output_segments #=> Array
     #   resp.output_segments[0].custom_output_status #=> String, one of "MATCH", "NO_MATCH"
@@ -794,7 +802,7 @@ module Aws::BedrockDataAutomationRuntime
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrockdataautomationruntime'
-      context[:gem_version] = '1.21.0'
+      context[:gem_version] = '1.22.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

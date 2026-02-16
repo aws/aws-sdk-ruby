@@ -258,6 +258,7 @@ module Aws
         def session_timeout_seconds: () -> ::Integer
         def status: () -> ("READY" | "TERMINATED")
         def streams: () -> Types::BrowserSessionStream
+        def proxy_configuration: () -> Types::ProxyConfiguration
         def session_replay_artifact: () -> ::String
         def last_updated_at: () -> ::Time
       end
@@ -641,6 +642,25 @@ module Aws
                                    ],
                                    ?profile_configuration: {
                                      profile_identifier: ::String
+                                   },
+                                   ?proxy_configuration: {
+                                     proxies: Array[
+                                       {
+                                         external_proxy: {
+                                           server: ::String,
+                                           port: ::Integer,
+                                           domain_patterns: Array[::String]?,
+                                           credentials: {
+                                             basic_auth: {
+                                               secret_arn: ::String
+                                             }?
+                                           }?
+                                         }?
+                                       },
+                                     ],
+                                     bypass: {
+                                       domain_patterns: Array[::String]?
+                                     }?
                                    },
                                    ?client_token: ::String
                                  ) -> _StartBrowserSessionResponseSuccess

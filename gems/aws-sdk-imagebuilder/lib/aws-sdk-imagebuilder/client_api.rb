@@ -1599,7 +1599,7 @@ module Aws::Imagebuilder
     LifecyclePolicyResourceSelection.struct_class = Types::LifecyclePolicyResourceSelection
 
     LifecyclePolicyResourceSelectionRecipe.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "name"))
-    LifecyclePolicyResourceSelectionRecipe.add_member(:semantic_version, Shapes::ShapeRef.new(shape: VersionNumber, required: true, location_name: "semanticVersion"))
+    LifecyclePolicyResourceSelectionRecipe.add_member(:semantic_version, Shapes::ShapeRef.new(shape: WildcardVersionNumber, required: true, location_name: "semanticVersion"))
     LifecyclePolicyResourceSelectionRecipe.struct_class = Types::LifecyclePolicyResourceSelectionRecipe
 
     LifecyclePolicyResourceSelectionRecipes.member = Shapes::ShapeRef.new(shape: LifecyclePolicyResourceSelectionRecipe)

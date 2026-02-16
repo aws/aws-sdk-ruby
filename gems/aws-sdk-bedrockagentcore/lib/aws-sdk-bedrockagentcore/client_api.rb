@@ -25,6 +25,7 @@ module Aws::BedrockAgentCore
     AutomationStream = Shapes::StructureShape.new(name: 'AutomationStream')
     AutomationStreamStatus = Shapes::StringShape.new(name: 'AutomationStreamStatus')
     AutomationStreamUpdate = Shapes::StructureShape.new(name: 'AutomationStreamUpdate')
+    BasicAuth = Shapes::StructureShape.new(name: 'BasicAuth')
     BatchCreateMemoryRecordsInput = Shapes::StructureShape.new(name: 'BatchCreateMemoryRecordsInput')
     BatchCreateMemoryRecordsOutput = Shapes::StructureShape.new(name: 'BatchCreateMemoryRecordsOutput')
     BatchDeleteMemoryRecordsInput = Shapes::StructureShape.new(name: 'BatchDeleteMemoryRecordsInput')
@@ -78,6 +79,8 @@ module Aws::BedrockAgentCore
     DeleteMemoryRecordInput = Shapes::StructureShape.new(name: 'DeleteMemoryRecordInput')
     DeleteMemoryRecordOutput = Shapes::StructureShape.new(name: 'DeleteMemoryRecordOutput')
     Document = Shapes::DocumentShape.new(name: 'Document', document: true)
+    DomainPattern = Shapes::StringShape.new(name: 'DomainPattern')
+    DomainPatterns = Shapes::ListShape.new(name: 'DomainPatterns')
     Double = Shapes::FloatShape.new(name: 'Double')
     DuplicateIdException = Shapes::StructureShape.new(name: 'DuplicateIdException')
     EvaluateRequest = Shapes::StructureShape.new(name: 'EvaluateRequest')
@@ -97,6 +100,8 @@ module Aws::BedrockAgentCore
     EventList = Shapes::ListShape.new(name: 'EventList')
     EventMetadataFilterExpression = Shapes::StructureShape.new(name: 'EventMetadataFilterExpression')
     EventMetadataFilterList = Shapes::ListShape.new(name: 'EventMetadataFilterList')
+    ExternalProxy = Shapes::StructureShape.new(name: 'ExternalProxy')
+    ExternalProxyPortInteger = Shapes::IntegerShape.new(name: 'ExternalProxyPortInteger')
     ExtractionJob = Shapes::StructureShape.new(name: 'ExtractionJob')
     ExtractionJobFilterInput = Shapes::StructureShape.new(name: 'ExtractionJobFilterInput')
     ExtractionJobMessages = Shapes::UnionShape.new(name: 'ExtractionJobMessages')
@@ -124,6 +129,7 @@ module Aws::BedrockAgentCore
     GetWorkloadAccessTokenForUserIdResponse = Shapes::StructureShape.new(name: 'GetWorkloadAccessTokenForUserIdResponse')
     GetWorkloadAccessTokenRequest = Shapes::StructureShape.new(name: 'GetWorkloadAccessTokenRequest')
     GetWorkloadAccessTokenResponse = Shapes::StructureShape.new(name: 'GetWorkloadAccessTokenResponse')
+    HostName = Shapes::StringShape.new(name: 'HostName')
     HttpResponseCode = Shapes::IntegerShape.new(name: 'HttpResponseCode')
     InputContentBlock = Shapes::StructureShape.new(name: 'InputContentBlock')
     InputContentBlockList = Shapes::ListShape.new(name: 'InputContentBlockList')
@@ -198,6 +204,11 @@ module Aws::BedrockAgentCore
     PayloadType = Shapes::UnionShape.new(name: 'PayloadType')
     PayloadTypeList = Shapes::ListShape.new(name: 'PayloadTypeList')
     ProgrammingLanguage = Shapes::StringShape.new(name: 'ProgrammingLanguage')
+    Proxy = Shapes::UnionShape.new(name: 'Proxy')
+    ProxyBypass = Shapes::StructureShape.new(name: 'ProxyBypass')
+    ProxyConfiguration = Shapes::StructureShape.new(name: 'ProxyConfiguration')
+    ProxyConfigurationProxiesList = Shapes::ListShape.new(name: 'ProxyConfigurationProxiesList')
+    ProxyCredentials = Shapes::UnionShape.new(name: 'ProxyCredentials')
     RequestIdentifier = Shapes::StringShape.new(name: 'RequestIdentifier')
     RequestUri = Shapes::StringShape.new(name: 'RequestUri')
     ResourceContent = Shapes::StructureShape.new(name: 'ResourceContent')
@@ -225,6 +236,7 @@ module Aws::BedrockAgentCore
     SearchCriteria = Shapes::StructureShape.new(name: 'SearchCriteria')
     SearchCriteriaSearchQueryString = Shapes::StringShape.new(name: 'SearchCriteriaSearchQueryString')
     SearchCriteriaTopKInteger = Shapes::IntegerShape.new(name: 'SearchCriteriaTopKInteger')
+    SecretArn = Shapes::StringShape.new(name: 'SecretArn')
     ServiceException = Shapes::StructureShape.new(name: 'ServiceException')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     SessionId = Shapes::StringShape.new(name: 'SessionId')
@@ -302,6 +314,9 @@ module Aws::BedrockAgentCore
 
     AutomationStreamUpdate.add_member(:stream_status, Shapes::ShapeRef.new(shape: AutomationStreamStatus, location_name: "streamStatus"))
     AutomationStreamUpdate.struct_class = Types::AutomationStreamUpdate
+
+    BasicAuth.add_member(:secret_arn, Shapes::ShapeRef.new(shape: SecretArn, required: true, location_name: "secretArn"))
+    BasicAuth.struct_class = Types::BasicAuth
 
     BatchCreateMemoryRecordsInput.add_member(:memory_id, Shapes::ShapeRef.new(shape: MemoryId, required: true, location: "uri", location_name: "memoryId"))
     BatchCreateMemoryRecordsInput.add_member(:records, Shapes::ShapeRef.new(shape: MemoryRecordsCreateInputList, required: true, location_name: "records"))
@@ -453,6 +468,8 @@ module Aws::BedrockAgentCore
     DeleteMemoryRecordOutput.add_member(:memory_record_id, Shapes::ShapeRef.new(shape: MemoryRecordId, required: true, location_name: "memoryRecordId"))
     DeleteMemoryRecordOutput.struct_class = Types::DeleteMemoryRecordOutput
 
+    DomainPatterns.member = Shapes::ShapeRef.new(shape: DomainPattern)
+
     DuplicateIdException.add_member(:message, Shapes::ShapeRef.new(shape: NonBlankString, location_name: "message"))
     DuplicateIdException.struct_class = Types::DuplicateIdException
 
@@ -511,6 +528,12 @@ module Aws::BedrockAgentCore
 
     EventMetadataFilterList.member = Shapes::ShapeRef.new(shape: EventMetadataFilterExpression)
 
+    ExternalProxy.add_member(:server, Shapes::ShapeRef.new(shape: HostName, required: true, location_name: "server"))
+    ExternalProxy.add_member(:port, Shapes::ShapeRef.new(shape: ExternalProxyPortInteger, required: true, location_name: "port"))
+    ExternalProxy.add_member(:domain_patterns, Shapes::ShapeRef.new(shape: DomainPatterns, location_name: "domainPatterns"))
+    ExternalProxy.add_member(:credentials, Shapes::ShapeRef.new(shape: ProxyCredentials, location_name: "credentials"))
+    ExternalProxy.struct_class = Types::ExternalProxy
+
     ExtractionJob.add_member(:job_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "jobId"))
     ExtractionJob.struct_class = Types::ExtractionJob
 
@@ -567,6 +590,7 @@ module Aws::BedrockAgentCore
     GetBrowserSessionResponse.add_member(:session_timeout_seconds, Shapes::ShapeRef.new(shape: BrowserSessionTimeout, location_name: "sessionTimeoutSeconds"))
     GetBrowserSessionResponse.add_member(:status, Shapes::ShapeRef.new(shape: BrowserSessionStatus, location_name: "status"))
     GetBrowserSessionResponse.add_member(:streams, Shapes::ShapeRef.new(shape: BrowserSessionStream, location_name: "streams"))
+    GetBrowserSessionResponse.add_member(:proxy_configuration, Shapes::ShapeRef.new(shape: ProxyConfiguration, location_name: "proxyConfiguration"))
     GetBrowserSessionResponse.add_member(:session_replay_artifact, Shapes::ShapeRef.new(shape: String, location_name: "sessionReplayArtifact"))
     GetBrowserSessionResponse.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: DateTimestamp, location_name: "lastUpdatedAt"))
     GetBrowserSessionResponse.struct_class = Types::GetBrowserSessionResponse
@@ -875,6 +899,27 @@ module Aws::BedrockAgentCore
 
     PayloadTypeList.member = Shapes::ShapeRef.new(shape: PayloadType)
 
+    Proxy.add_member(:external_proxy, Shapes::ShapeRef.new(shape: ExternalProxy, location_name: "externalProxy"))
+    Proxy.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    Proxy.add_member_subclass(:external_proxy, Types::Proxy::ExternalProxy)
+    Proxy.add_member_subclass(:unknown, Types::Proxy::Unknown)
+    Proxy.struct_class = Types::Proxy
+
+    ProxyBypass.add_member(:domain_patterns, Shapes::ShapeRef.new(shape: DomainPatterns, location_name: "domainPatterns"))
+    ProxyBypass.struct_class = Types::ProxyBypass
+
+    ProxyConfiguration.add_member(:proxies, Shapes::ShapeRef.new(shape: ProxyConfigurationProxiesList, required: true, location_name: "proxies"))
+    ProxyConfiguration.add_member(:bypass, Shapes::ShapeRef.new(shape: ProxyBypass, location_name: "bypass"))
+    ProxyConfiguration.struct_class = Types::ProxyConfiguration
+
+    ProxyConfigurationProxiesList.member = Shapes::ShapeRef.new(shape: Proxy)
+
+    ProxyCredentials.add_member(:basic_auth, Shapes::ShapeRef.new(shape: BasicAuth, location_name: "basicAuth"))
+    ProxyCredentials.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    ProxyCredentials.add_member_subclass(:basic_auth, Types::ProxyCredentials::BasicAuth)
+    ProxyCredentials.add_member_subclass(:unknown, Types::ProxyCredentials::Unknown)
+    ProxyCredentials.struct_class = Types::ProxyCredentials
+
     ResourceContent.add_member(:type, Shapes::ShapeRef.new(shape: ResourceContentType, required: true, location_name: "type"))
     ResourceContent.add_member(:uri, Shapes::ShapeRef.new(shape: String, location_name: "uri"))
     ResourceContent.add_member(:mime_type, Shapes::ShapeRef.new(shape: String, location_name: "mimeType"))
@@ -971,6 +1016,7 @@ module Aws::BedrockAgentCore
     StartBrowserSessionRequest.add_member(:view_port, Shapes::ShapeRef.new(shape: ViewPort, location_name: "viewPort"))
     StartBrowserSessionRequest.add_member(:extensions, Shapes::ShapeRef.new(shape: BrowserExtensions, location_name: "extensions"))
     StartBrowserSessionRequest.add_member(:profile_configuration, Shapes::ShapeRef.new(shape: BrowserProfileConfiguration, location_name: "profileConfiguration"))
+    StartBrowserSessionRequest.add_member(:proxy_configuration, Shapes::ShapeRef.new(shape: ProxyConfiguration, location_name: "proxyConfiguration"))
     StartBrowserSessionRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     StartBrowserSessionRequest.struct_class = Types::StartBrowserSessionRequest
 

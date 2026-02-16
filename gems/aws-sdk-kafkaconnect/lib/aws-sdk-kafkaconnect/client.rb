@@ -555,6 +555,7 @@ module Aws::KafkaConnect
     #         scale_out_policy: {
     #           cpu_utilization_percentage: 1, # required
     #         },
+    #         max_autoscaling_task_count: 1,
     #       },
     #       provisioned_capacity: {
     #         mcu_count: 1, # required
@@ -880,6 +881,7 @@ module Aws::KafkaConnect
     #   resp.capacity.auto_scaling.min_worker_count #=> Integer
     #   resp.capacity.auto_scaling.scale_in_policy.cpu_utilization_percentage #=> Integer
     #   resp.capacity.auto_scaling.scale_out_policy.cpu_utilization_percentage #=> Integer
+    #   resp.capacity.auto_scaling.max_autoscaling_task_count #=> Integer
     #   resp.capacity.provisioned_capacity.mcu_count #=> Integer
     #   resp.capacity.provisioned_capacity.worker_count #=> Integer
     #   resp.connector_arn #=> String
@@ -964,6 +966,7 @@ module Aws::KafkaConnect
     #   resp.origin_worker_setting.capacity.auto_scaling.min_worker_count #=> Integer
     #   resp.origin_worker_setting.capacity.auto_scaling.scale_in_policy.cpu_utilization_percentage #=> Integer
     #   resp.origin_worker_setting.capacity.auto_scaling.scale_out_policy.cpu_utilization_percentage #=> Integer
+    #   resp.origin_worker_setting.capacity.auto_scaling.max_autoscaling_task_count #=> Integer
     #   resp.origin_worker_setting.capacity.provisioned_capacity.mcu_count #=> Integer
     #   resp.origin_worker_setting.capacity.provisioned_capacity.worker_count #=> Integer
     #   resp.origin_connector_configuration #=> Hash
@@ -973,6 +976,7 @@ module Aws::KafkaConnect
     #   resp.target_worker_setting.capacity.auto_scaling.min_worker_count #=> Integer
     #   resp.target_worker_setting.capacity.auto_scaling.scale_in_policy.cpu_utilization_percentage #=> Integer
     #   resp.target_worker_setting.capacity.auto_scaling.scale_out_policy.cpu_utilization_percentage #=> Integer
+    #   resp.target_worker_setting.capacity.auto_scaling.max_autoscaling_task_count #=> Integer
     #   resp.target_worker_setting.capacity.provisioned_capacity.mcu_count #=> Integer
     #   resp.target_worker_setting.capacity.provisioned_capacity.worker_count #=> Integer
     #   resp.target_connector_configuration #=> Hash
@@ -1170,6 +1174,7 @@ module Aws::KafkaConnect
     #   resp.connectors[0].capacity.auto_scaling.min_worker_count #=> Integer
     #   resp.connectors[0].capacity.auto_scaling.scale_in_policy.cpu_utilization_percentage #=> Integer
     #   resp.connectors[0].capacity.auto_scaling.scale_out_policy.cpu_utilization_percentage #=> Integer
+    #   resp.connectors[0].capacity.auto_scaling.max_autoscaling_task_count #=> Integer
     #   resp.connectors[0].capacity.provisioned_capacity.mcu_count #=> Integer
     #   resp.connectors[0].capacity.provisioned_capacity.worker_count #=> Integer
     #   resp.connectors[0].connector_arn #=> String
@@ -1444,6 +1449,7 @@ module Aws::KafkaConnect
     #         scale_out_policy: { # required
     #           cpu_utilization_percentage: 1, # required
     #         },
+    #         max_autoscaling_task_count: 1,
     #       },
     #       provisioned_capacity: {
     #         mcu_count: 1, # required
@@ -1490,7 +1496,7 @@ module Aws::KafkaConnect
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-kafkaconnect'
-      context[:gem_version] = '1.53.0'
+      context[:gem_version] = '1.54.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

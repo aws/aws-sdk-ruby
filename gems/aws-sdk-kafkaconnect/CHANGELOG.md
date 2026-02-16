@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.54.0 (2026-02-11)
+------------------
+
+* Feature - Support configurable upper limits on task count during autoscaling operations via maxAutoscalingTaskCount parameter.
+
 1.53.0 (2026-01-16)
 ------------------
 

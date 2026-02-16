@@ -1069,7 +1069,7 @@ module Aws::CloudWatch
     #   resp.metric_alarms[0].metrics[0].period #=> Integer
     #   resp.metric_alarms[0].metrics[0].account_id #=> String
     #   resp.metric_alarms[0].threshold_metric_id #=> String
-    #   resp.metric_alarms[0].evaluation_state #=> String, one of "PARTIAL_DATA"
+    #   resp.metric_alarms[0].evaluation_state #=> String, one of "PARTIAL_DATA", "EVALUATION_FAILURE", "EVALUATION_ERROR"
     #   resp.metric_alarms[0].state_transitioned_timestamp #=> Time
     #   resp.next_token #=> String
     #
@@ -1191,7 +1191,7 @@ module Aws::CloudWatch
     #   resp.metric_alarms[0].metrics[0].period #=> Integer
     #   resp.metric_alarms[0].metrics[0].account_id #=> String
     #   resp.metric_alarms[0].threshold_metric_id #=> String
-    #   resp.metric_alarms[0].evaluation_state #=> String, one of "PARTIAL_DATA"
+    #   resp.metric_alarms[0].evaluation_state #=> String, one of "PARTIAL_DATA", "EVALUATION_FAILURE", "EVALUATION_ERROR"
     #   resp.metric_alarms[0].state_transitioned_timestamp #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/DescribeAlarmsForMetric AWS API Documentation
@@ -4402,7 +4402,7 @@ module Aws::CloudWatch
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-cloudwatch'
-      context[:gem_version] = '1.129.0'
+      context[:gem_version] = '1.130.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

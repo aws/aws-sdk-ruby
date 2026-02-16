@@ -609,7 +609,7 @@ module Aws::CloudWatch
       attr_accessor evaluate_low_sample_count_percentile: ::String
       attr_accessor metrics: ::Array[Types::MetricDataQuery]
       attr_accessor threshold_metric_id: ::String
-      attr_accessor evaluation_state: ("PARTIAL_DATA")
+      attr_accessor evaluation_state: ("PARTIAL_DATA" | "EVALUATION_FAILURE" | "EVALUATION_ERROR")
       attr_accessor state_transitioned_timestamp: ::Time
       SENSITIVE: []
     end

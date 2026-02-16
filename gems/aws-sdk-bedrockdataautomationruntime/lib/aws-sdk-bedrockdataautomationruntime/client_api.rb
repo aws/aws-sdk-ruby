@@ -144,10 +144,12 @@ module Aws::BedrockDataAutomationRuntime
     InvokeDataAutomationRequest.add_member(:blueprints, Shapes::ShapeRef.new(shape: BlueprintList, location_name: "blueprints"))
     InvokeDataAutomationRequest.add_member(:data_automation_profile_arn, Shapes::ShapeRef.new(shape: DataAutomationProfileArn, required: true, location_name: "dataAutomationProfileArn"))
     InvokeDataAutomationRequest.add_member(:encryption_configuration, Shapes::ShapeRef.new(shape: EncryptionConfiguration, location_name: "encryptionConfiguration"))
+    InvokeDataAutomationRequest.add_member(:output_configuration, Shapes::ShapeRef.new(shape: OutputConfiguration, location_name: "outputConfiguration"))
     InvokeDataAutomationRequest.struct_class = Types::InvokeDataAutomationRequest
 
+    InvokeDataAutomationResponse.add_member(:output_configuration, Shapes::ShapeRef.new(shape: OutputConfiguration, location_name: "outputConfiguration"))
     InvokeDataAutomationResponse.add_member(:semantic_modality, Shapes::ShapeRef.new(shape: SemanticModality, required: true, location_name: "semanticModality"))
-    InvokeDataAutomationResponse.add_member(:output_segments, Shapes::ShapeRef.new(shape: OutputSegmentList, required: true, location_name: "outputSegments"))
+    InvokeDataAutomationResponse.add_member(:output_segments, Shapes::ShapeRef.new(shape: OutputSegmentList, location_name: "outputSegments"))
     InvokeDataAutomationResponse.struct_class = Types::InvokeDataAutomationResponse
 
     ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: TaggableResourceArn, required: true, location_name: "resourceARN"))

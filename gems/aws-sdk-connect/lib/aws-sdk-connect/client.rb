@@ -3784,6 +3784,96 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # Creates a new notification to be delivered to specified recipients.
+    # Notifications can include localized content with embedded links, and
+    # an optional expiration time. Recipients can be specified as individual
+    # user ARNs or instance ARNs to target all users in an instance.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :expires_at
+    #   The timestamp when the notification should expire and no longer be
+    #   displayed to users. If not specified, defaults to one week from
+    #   creation.
+    #
+    # @option params [required, Array<String>] :recipients
+    #   A list of Amazon Resource Names (ARNs) identifying the recipients of
+    #   the notification. Can include user ARNs or instance ARNs to target all
+    #   users in an instance. Maximum of 200 recipients.
+    #
+    # @option params [String] :priority
+    #   The priority level of the notification. Valid values are HIGH and LOW.
+    #   High priority notifications are displayed above low priority
+    #   notifications.
+    #
+    # @option params [required, Hash<String,String>] :content
+    #   The localized content of the notification. A map where keys are locale
+    #   codes and values are the notification text in that locale. Content
+    #   supports markdown formatting and embedded links. Maximum 250
+    #   characters per locale.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   The tags used to organize, track, or control access for this resource.
+    #   For example, `{ "Tags": {"key1":"value1", "key2":"value2"} }`.
+    #
+    # @option params [String] :predefined_notification_id
+    #   The unique identifier for a notification.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. If not provided, the Amazon Web Services
+    #   SDK populates this field. For more information about idempotency, see
+    #   [Making retries safe with idempotent APIs][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
+    #
+    # @return [Types::CreateNotificationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateNotificationResponse#notification_id #notification_id} => String
+    #   * {Types::CreateNotificationResponse#notification_arn #notification_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_notification({
+    #     instance_id: "InstanceId", # required
+    #     expires_at: Time.now,
+    #     recipients: ["ARN"], # required
+    #     priority: "HIGH", # accepts HIGH, LOW
+    #     content: { # required
+    #       "en_US" => "LocalizedString",
+    #     },
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #     predefined_notification_id: "NotificationId",
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.notification_id #=> String
+    #   resp.notification_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateNotification AWS API Documentation
+    #
+    # @overload create_notification(params = {})
+    # @param [Hash] params ({})
+    def create_notification(params = {}, options = {})
+      req = build_request(:create_notification, params)
+      req.send_request(options)
+    end
+
     # Adds a new participant into an on-going chat contact or webRTC call.
     # For more information, see [Customize chat flow experiences by
     # integrating custom participants][1] or [Enable multi-user web, in-app,
@@ -5154,6 +5244,27 @@ module Aws::Connect
     # required if you are using Amazon Connect or SAML for identity
     # management.
     #
+    # <note markdown="1"> Fields in `PhoneConfig` cannot be set simultaneously with their
+    # corresponding channel-specific configuration parameters. Specifically:
+    #
+    #  * `PhoneConfig.AutoAccept` conflicts with `AutoAcceptConfigs`
+    #
+    # * `PhoneConfig.AfterContactWorkTimeLimit` conflicts with
+    #   `AfterContactWorkConfigs`
+    #
+    # * `PhoneConfig.PhoneType` and `PhoneConfig.PhoneNumber` conflict with
+    #   `PhoneNumberConfigs`
+    #
+    # * `PhoneConfig.PersistentConnection` conflicts with
+    #   `PersistentConnectionConfigs`
+    #
+    #  We recommend using channel-specific parameters such as
+    # `AutoAcceptConfigs`, `AfterContactWorkConfigs`, `PhoneNumberConfigs`,
+    # `PersistentConnectionConfigs`, and `VoiceEnhancementConfigs` for
+    # per-channel configuration.
+    #
+    #  </note>
+    #
     # For information about how to create users using the Amazon Connect
     # admin website, see [Add Users][2] in the *Amazon Connect Administrator
     # Guide*.
@@ -5185,8 +5296,12 @@ module Aws::Connect
     # @option params [Types::UserIdentityInfo] :identity_info
     #   The information about the identity of the user.
     #
-    # @option params [required, Types::UserPhoneConfig] :phone_config
-    #   The phone settings for the user.
+    # @option params [Types::UserPhoneConfig] :phone_config
+    #   The phone settings for the user. This parameter is optional. If not
+    #   provided, the user can be configured using channel-specific parameters
+    #   such as `AutoAcceptConfigs`, `AfterContactWorkConfigs`,
+    #   `PhoneNumberConfigs`, `PersistentConnectionConfigs`, and
+    #   `VoiceEnhancementConfigs`.
     #
     # @option params [String] :directory_user_id
     #   The identifier of the user account in the directory used for identity
@@ -5218,6 +5333,23 @@ module Aws::Connect
     #
     #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
+    # @option params [Array<Types::AutoAcceptConfig>] :auto_accept_configs
+    #   The list of auto-accept configuration settings for each channel.
+    #
+    # @option params [Array<Types::AfterContactWorkConfigPerChannel>] :after_contact_work_configs
+    #   The list of after contact work (ACW) timeout configuration settings
+    #   for each channel.
+    #
+    # @option params [Array<Types::PhoneNumberConfig>] :phone_number_configs
+    #   The list of phone number configuration settings for each channel.
+    #
+    # @option params [Array<Types::PersistentConnectionConfig>] :persistent_connection_configs
+    #   The list of persistent connection configuration settings for each
+    #   channel.
+    #
+    # @option params [Array<Types::VoiceEnhancementConfig>] :voice_enhancement_configs
+    #   The list of voice enhancement configuration settings for each channel.
+    #
     # @option params [Hash<String,String>] :tags
     #   The tags used to organize, track, or control access for this resource.
     #   For example, \{ "Tags": \{"key1":"value1", "key2":"value2"}
@@ -5240,11 +5372,11 @@ module Aws::Connect
     #       secondary_email: "Email",
     #       mobile: "PhoneNumber",
     #     },
-    #     phone_config: { # required
-    #       phone_type: "SOFT_PHONE", # required, accepts SOFT_PHONE, DESK_PHONE
+    #     phone_config: {
+    #       phone_type: "SOFT_PHONE", # accepts SOFT_PHONE, DESK_PHONE
     #       auto_accept: false,
     #       after_contact_work_time_limit: 1,
-    #       desk_phone_number: "PhoneNumber",
+    #       desk_phone_number: "SensitivePhoneNumber",
     #       persistent_connection: false,
     #     },
     #     directory_user_id: "DirectoryUserId",
@@ -5252,6 +5384,43 @@ module Aws::Connect
     #     routing_profile_id: "RoutingProfileId", # required
     #     hierarchy_group_id: "HierarchyGroupId",
     #     instance_id: "InstanceId", # required
+    #     auto_accept_configs: [
+    #       {
+    #         channel: "VOICE", # required, accepts VOICE, CHAT, TASK, EMAIL
+    #         auto_accept: false, # required
+    #         agent_first_callback_auto_accept: false,
+    #       },
+    #     ],
+    #     after_contact_work_configs: [
+    #       {
+    #         channel: "VOICE", # required, accepts VOICE, CHAT, TASK, EMAIL
+    #         after_contact_work_config: { # required
+    #           after_contact_work_time_limit: 1,
+    #         },
+    #         agent_first_callback_after_contact_work_config: {
+    #           after_contact_work_time_limit: 1,
+    #         },
+    #       },
+    #     ],
+    #     phone_number_configs: [
+    #       {
+    #         channel: "VOICE", # required, accepts VOICE, CHAT, TASK, EMAIL
+    #         phone_type: "SOFT_PHONE", # required, accepts SOFT_PHONE, DESK_PHONE
+    #         phone_number: "SensitivePhoneNumber",
+    #       },
+    #     ],
+    #     persistent_connection_configs: [
+    #       {
+    #         channel: "VOICE", # required, accepts VOICE, CHAT, TASK, EMAIL
+    #         persistent_connection: false, # required
+    #       },
+    #     ],
+    #     voice_enhancement_configs: [
+    #       {
+    #         channel: "VOICE", # required, accepts VOICE, CHAT, TASK, EMAIL
+    #         voice_enhancement_mode: "VOICE_ISOLATION", # required, accepts VOICE_ISOLATION, NOISE_SUPPRESSION, NONE
+    #       },
+    #     ],
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
@@ -6346,6 +6515,39 @@ module Aws::Connect
     # @param [Hash] params ({})
     def delete_integration_association(params = {}, options = {})
       req = build_request(:delete_integration_association, params)
+      req.send_request(options)
+    end
+
+    # Deletes a notification. Once deleted, the notification is no longer
+    # visible to all users and cannot be managed through the Admin Website
+    # or APIs.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #
+    # @option params [required, String] :notification_id
+    #   The unique identifier for the notification to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_notification({
+    #     instance_id: "InstanceId", # required
+    #     notification_id: "NotificationId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DeleteNotification AWS API Documentation
+    #
+    # @overload delete_notification(params = {})
+    # @param [Hash] params ({})
+    def delete_notification(params = {}, options = {})
+      req = build_request(:delete_notification, params)
       req.send_request(options)
     end
 
@@ -8314,6 +8516,56 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # Retrieves detailed information about a specific notification,
+    # including its content, priority, recipients, and metadata.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #
+    # @option params [required, String] :notification_id
+    #   The unique identifier for the notification.
+    #
+    # @return [Types::DescribeNotificationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeNotificationResponse#notification #notification} => Types::Notification
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_notification({
+    #     instance_id: "InstanceId", # required
+    #     notification_id: "NotificationId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.notification.content #=> Hash
+    #   resp.notification.content["LocaleCode"] #=> String
+    #   resp.notification.id #=> String
+    #   resp.notification.arn #=> String
+    #   resp.notification.priority #=> String, one of "URGENT", "HIGH", "LOW"
+    #   resp.notification.recipients #=> Array
+    #   resp.notification.recipients[0] #=> String
+    #   resp.notification.last_modified_time #=> Time
+    #   resp.notification.created_at #=> Time
+    #   resp.notification.expires_at #=> Time
+    #   resp.notification.last_modified_region #=> String
+    #   resp.notification.tags #=> Hash
+    #   resp.notification.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeNotification AWS API Documentation
+    #
+    # @overload describe_notification(params = {})
+    # @param [Hash] params ({})
+    def describe_notification(params = {}, options = {})
+      req = build_request(:describe_notification, params)
+      req.send_request(options)
+    end
+
     # Gets details and status of a phone number that’s claimed to your
     # Amazon Connect instance or traffic distribution group.
     #
@@ -8952,6 +9204,24 @@ module Aws::Connect
     #   resp.user.hierarchy_group_id #=> String
     #   resp.user.tags #=> Hash
     #   resp.user.tags["TagKey"] #=> String
+    #   resp.user.auto_accept_configs #=> Array
+    #   resp.user.auto_accept_configs[0].channel #=> String, one of "VOICE", "CHAT", "TASK", "EMAIL"
+    #   resp.user.auto_accept_configs[0].auto_accept #=> Boolean
+    #   resp.user.auto_accept_configs[0].agent_first_callback_auto_accept #=> Boolean
+    #   resp.user.after_contact_work_configs #=> Array
+    #   resp.user.after_contact_work_configs[0].channel #=> String, one of "VOICE", "CHAT", "TASK", "EMAIL"
+    #   resp.user.after_contact_work_configs[0].after_contact_work_config.after_contact_work_time_limit #=> Integer
+    #   resp.user.after_contact_work_configs[0].agent_first_callback_after_contact_work_config.after_contact_work_time_limit #=> Integer
+    #   resp.user.phone_number_configs #=> Array
+    #   resp.user.phone_number_configs[0].channel #=> String, one of "VOICE", "CHAT", "TASK", "EMAIL"
+    #   resp.user.phone_number_configs[0].phone_type #=> String, one of "SOFT_PHONE", "DESK_PHONE"
+    #   resp.user.phone_number_configs[0].phone_number #=> String
+    #   resp.user.persistent_connection_configs #=> Array
+    #   resp.user.persistent_connection_configs[0].channel #=> String, one of "VOICE", "CHAT", "TASK", "EMAIL"
+    #   resp.user.persistent_connection_configs[0].persistent_connection #=> Boolean
+    #   resp.user.voice_enhancement_configs #=> Array
+    #   resp.user.voice_enhancement_configs[0].channel #=> String, one of "VOICE", "CHAT", "TASK", "EMAIL"
+    #   resp.user.voice_enhancement_configs[0].voice_enhancement_mode #=> String, one of "VOICE_ISOLATION", "NOISE_SUPPRESSION", "NONE"
     #   resp.user.last_modified_time #=> Time
     #   resp.user.last_modified_region #=> String
     #
@@ -15955,6 +16225,65 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # Retrieves a paginated list of all notifications in the Amazon Connect
+    # instance.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response to retrieve the next page of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per page. Valid range is
+    #   1-100.
+    #
+    # @return [Types::ListNotificationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListNotificationsResponse#next_token #next_token} => String
+    #   * {Types::ListNotificationsResponse#notification_summary_list #notification_summary_list} => Array&lt;Types::Notification&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_notifications({
+    #     instance_id: "InstanceId", # required
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.notification_summary_list #=> Array
+    #   resp.notification_summary_list[0].content #=> Hash
+    #   resp.notification_summary_list[0].content["LocaleCode"] #=> String
+    #   resp.notification_summary_list[0].id #=> String
+    #   resp.notification_summary_list[0].arn #=> String
+    #   resp.notification_summary_list[0].priority #=> String, one of "URGENT", "HIGH", "LOW"
+    #   resp.notification_summary_list[0].recipients #=> Array
+    #   resp.notification_summary_list[0].recipients[0] #=> String
+    #   resp.notification_summary_list[0].last_modified_time #=> Time
+    #   resp.notification_summary_list[0].created_at #=> Time
+    #   resp.notification_summary_list[0].expires_at #=> Time
+    #   resp.notification_summary_list[0].last_modified_region #=> String
+    #   resp.notification_summary_list[0].tags #=> Hash
+    #   resp.notification_summary_list[0].tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListNotifications AWS API Documentation
+    #
+    # @overload list_notifications(params = {})
+    # @param [Hash] params ({})
+    def list_notifications(params = {}, options = {})
+      req = build_request(:list_notifications, params)
+      req.send_request(options)
+    end
+
     # Provides information about the phone numbers for the specified Amazon
     # Connect instance.
     #
@@ -17656,6 +17985,66 @@ module Aws::Connect
     # @param [Hash] params ({})
     def list_user_hierarchy_groups(params = {}, options = {})
       req = build_request(:list_user_hierarchy_groups, params)
+      req.send_request(options)
+    end
+
+    # Retrieves a paginated list of notifications for a specific user,
+    # including the notification status for that user.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response to retrieve the next page of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per page. Valid range is
+    #   1-1000.
+    #
+    # @option params [required, String] :user_id
+    #   The identifier of the user.
+    #
+    # @return [Types::ListUserNotificationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListUserNotificationsResponse#user_notifications #user_notifications} => Array&lt;Types::UserNotificationSummary&gt;
+    #   * {Types::ListUserNotificationsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_user_notifications({
+    #     instance_id: "InstanceId", # required
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #     user_id: "UserId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.user_notifications #=> Array
+    #   resp.user_notifications[0].notification_id #=> String
+    #   resp.user_notifications[0].notification_status #=> String, one of "READ", "UNREAD", "HIDDEN"
+    #   resp.user_notifications[0].instance_id #=> String
+    #   resp.user_notifications[0].recipient_id #=> String
+    #   resp.user_notifications[0].content #=> Hash
+    #   resp.user_notifications[0].content["LocaleCode"] #=> String
+    #   resp.user_notifications[0].priority #=> String, one of "URGENT", "HIGH", "LOW"
+    #   resp.user_notifications[0].source #=> String, one of "CUSTOMER", "RULES", "SYSTEM"
+    #   resp.user_notifications[0].created_at #=> Time
+    #   resp.user_notifications[0].expires_at #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListUserNotifications AWS API Documentation
+    #
+    # @overload list_user_notifications(params = {})
+    # @param [Hash] params ({})
+    def list_user_notifications(params = {}, options = {})
+      req = build_request(:list_user_notifications, params)
       req.send_request(options)
     end
 
@@ -19810,6 +20199,121 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # Searches for notifications based on specified criteria and filters.
+    # Returns a paginated list of notifications matching the search
+    # parameters, ordered by descending creation time. Supports filtering by
+    # content and tags.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response to retrieve the next page of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per page. Valid range is
+    #   1-100.
+    #
+    # @option params [Types::NotificationSearchFilter] :search_filter
+    #   Filters to apply to the search results, such as tag-based filters.
+    #
+    # @option params [Types::NotificationSearchCriteria] :search_criteria
+    #   The search criteria to apply when searching for notifications.
+    #   Supports filtering by notification ID and message content using
+    #   comparison types such as STARTS\_WITH, CONTAINS, and EXACT.
+    #
+    # @return [Types::SearchNotificationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::SearchNotificationsResponse#notifications #notifications} => Array&lt;Types::NotificationSearchSummary&gt;
+    #   * {Types::SearchNotificationsResponse#next_token #next_token} => String
+    #   * {Types::SearchNotificationsResponse#approximate_total_count #approximate_total_count} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.search_notifications({
+    #     instance_id: "InstanceId", # required
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #     search_filter: {
+    #       attribute_filter: {
+    #         or_conditions: [
+    #           {
+    #             tag_conditions: [
+    #               {
+    #                 tag_key: "String",
+    #                 tag_value: "String",
+    #               },
+    #             ],
+    #           },
+    #         ],
+    #         and_condition: {
+    #           tag_conditions: [
+    #             {
+    #               tag_key: "String",
+    #               tag_value: "String",
+    #             },
+    #           ],
+    #         },
+    #         tag_condition: {
+    #           tag_key: "String",
+    #           tag_value: "String",
+    #         },
+    #       },
+    #     },
+    #     search_criteria: {
+    #       or_conditions: [
+    #         {
+    #           # recursive NotificationSearchCriteria
+    #         },
+    #       ],
+    #       and_conditions: [
+    #         {
+    #           # recursive NotificationSearchCriteria
+    #         },
+    #       ],
+    #       string_condition: {
+    #         field_name: "String",
+    #         value: "String",
+    #         comparison_type: "STARTS_WITH", # accepts STARTS_WITH, CONTAINS, EXACT
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.notifications #=> Array
+    #   resp.notifications[0].id #=> String
+    #   resp.notifications[0].arn #=> String
+    #   resp.notifications[0].instance_id #=> String
+    #   resp.notifications[0].content #=> Hash
+    #   resp.notifications[0].content["LocaleCode"] #=> String
+    #   resp.notifications[0].priority #=> String, one of "URGENT", "HIGH", "LOW"
+    #   resp.notifications[0].recipients #=> Array
+    #   resp.notifications[0].recipients[0] #=> String
+    #   resp.notifications[0].created_at #=> Time
+    #   resp.notifications[0].expires_at #=> Time
+    #   resp.notifications[0].last_modified_region #=> String
+    #   resp.notifications[0].last_modified_time #=> Time
+    #   resp.notifications[0].tags #=> Hash
+    #   resp.notifications[0].tags["TagKey"] #=> String
+    #   resp.next_token #=> String
+    #   resp.approximate_total_count #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/SearchNotifications AWS API Documentation
+    #
+    # @overload search_notifications(params = {})
+    # @param [Hash] params ({})
+    def search_notifications(params = {}, options = {})
+      req = build_request(:search_notifications, params)
+      req.send_request(options)
+    end
+
     # Searches predefined attributes that meet certain criteria. A
     # *predefined attribute* is made up of a name and a value. You can use
     # predefined attributes for:
@@ -20989,6 +21493,24 @@ module Aws::Connect
     #   resp.users[0].tags #=> Hash
     #   resp.users[0].tags["TagKey"] #=> String
     #   resp.users[0].username #=> String
+    #   resp.users[0].auto_accept_configs #=> Array
+    #   resp.users[0].auto_accept_configs[0].channel #=> String, one of "VOICE", "CHAT", "TASK", "EMAIL"
+    #   resp.users[0].auto_accept_configs[0].auto_accept #=> Boolean
+    #   resp.users[0].auto_accept_configs[0].agent_first_callback_auto_accept #=> Boolean
+    #   resp.users[0].after_contact_work_configs #=> Array
+    #   resp.users[0].after_contact_work_configs[0].channel #=> String, one of "VOICE", "CHAT", "TASK", "EMAIL"
+    #   resp.users[0].after_contact_work_configs[0].after_contact_work_config.after_contact_work_time_limit #=> Integer
+    #   resp.users[0].after_contact_work_configs[0].agent_first_callback_after_contact_work_config.after_contact_work_time_limit #=> Integer
+    #   resp.users[0].phone_number_configs #=> Array
+    #   resp.users[0].phone_number_configs[0].channel #=> String, one of "VOICE", "CHAT", "TASK", "EMAIL"
+    #   resp.users[0].phone_number_configs[0].phone_type #=> String, one of "SOFT_PHONE", "DESK_PHONE"
+    #   resp.users[0].phone_number_configs[0].phone_number #=> String
+    #   resp.users[0].persistent_connection_configs #=> Array
+    #   resp.users[0].persistent_connection_configs[0].channel #=> String, one of "VOICE", "CHAT", "TASK", "EMAIL"
+    #   resp.users[0].persistent_connection_configs[0].persistent_connection #=> Boolean
+    #   resp.users[0].voice_enhancement_configs #=> Array
+    #   resp.users[0].voice_enhancement_configs[0].channel #=> String, one of "VOICE", "CHAT", "TASK", "EMAIL"
+    #   resp.users[0].voice_enhancement_configs[0].voice_enhancement_mode #=> String, one of "VOICE_ISOLATION", "NOISE_SUPPRESSION", "NONE"
     #   resp.next_token #=> String
     #   resp.approximate_total_count #=> Integer
     #
@@ -25675,6 +26197,45 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # Updates the localized content of an existing notification. This
+    # operation applies to all users for whom the notification was sent.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #
+    # @option params [required, String] :notification_id
+    #   The unique identifier for the notification to update.
+    #
+    # @option params [required, Hash<String,String>] :content
+    #   The updated localized content of the notification. A map of locale
+    #   codes and values. Maximum 500 characters per locale.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_notification_content({
+    #     instance_id: "InstanceId", # required
+    #     notification_id: "NotificationId", # required
+    #     content: { # required
+    #       "en_US" => "LocalizedString",
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateNotificationContent AWS API Documentation
+    #
+    # @overload update_notification_content(params = {})
+    # @param [Hash] params ({})
+    def update_notification_content(params = {}, options = {})
+      req = build_request(:update_notification_content, params)
+      req.send_request(options)
+    end
+
     # Instructs Amazon Connect to resume the authentication process. The
     # subsequent actions depend on the request body contents:
     #
@@ -27181,6 +27742,107 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # Updates the configuration settings for the specified user, including
+    # per-channel auto-accept and after contact work (ACW) timeout settings.
+    #
+    # <note markdown="1"> This operation replaces the UpdateUserPhoneConfig API. While
+    # UpdateUserPhoneConfig applies the same ACW timeout to all channels,
+    # UpdateUserConfig allows you to set different auto-accept and ACW
+    # timeout values for each channel type.
+    #
+    #  </note>
+    #
+    # @option params [Array<Types::AutoAcceptConfig>] :auto_accept_configs
+    #   The list of auto-accept configuration settings for each channel. When
+    #   auto-accept is enabled for a channel, available agents are
+    #   automatically connected to contacts from that channel without needing
+    #   to manually accept. Auto-accept connects agents to contacts in less
+    #   than one second.
+    #
+    # @option params [Array<Types::AfterContactWorkConfigPerChannel>] :after_contact_work_configs
+    #   The list of after contact work (ACW) timeout configuration settings
+    #   for each channel. ACW timeout specifies how many seconds agents have
+    #   for after contact work, such as entering notes about the contact. The
+    #   minimum setting is 1 second, and the maximum is 2,000,000 seconds (24
+    #   days). Enter 0 for an indefinite amount of time, meaning agents must
+    #   manually choose to end ACW.
+    #
+    # @option params [Array<Types::PhoneNumberConfig>] :phone_number_configs
+    #   The list of phone number configuration settings for each channel.
+    #
+    # @option params [Array<Types::PersistentConnectionConfig>] :persistent_connection_configs
+    #   The list of persistent connection configuration settings for each
+    #   channel.
+    #
+    # @option params [Array<Types::VoiceEnhancementConfig>] :voice_enhancement_configs
+    #   The list of voice enhancement configuration settings for each channel.
+    #
+    # @option params [required, String] :user_id
+    #   The identifier of the user account.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_user_config({
+    #     auto_accept_configs: [
+    #       {
+    #         channel: "VOICE", # required, accepts VOICE, CHAT, TASK, EMAIL
+    #         auto_accept: false, # required
+    #         agent_first_callback_auto_accept: false,
+    #       },
+    #     ],
+    #     after_contact_work_configs: [
+    #       {
+    #         channel: "VOICE", # required, accepts VOICE, CHAT, TASK, EMAIL
+    #         after_contact_work_config: { # required
+    #           after_contact_work_time_limit: 1,
+    #         },
+    #         agent_first_callback_after_contact_work_config: {
+    #           after_contact_work_time_limit: 1,
+    #         },
+    #       },
+    #     ],
+    #     phone_number_configs: [
+    #       {
+    #         channel: "VOICE", # required, accepts VOICE, CHAT, TASK, EMAIL
+    #         phone_type: "SOFT_PHONE", # required, accepts SOFT_PHONE, DESK_PHONE
+    #         phone_number: "SensitivePhoneNumber",
+    #       },
+    #     ],
+    #     persistent_connection_configs: [
+    #       {
+    #         channel: "VOICE", # required, accepts VOICE, CHAT, TASK, EMAIL
+    #         persistent_connection: false, # required
+    #       },
+    #     ],
+    #     voice_enhancement_configs: [
+    #       {
+    #         channel: "VOICE", # required, accepts VOICE, CHAT, TASK, EMAIL
+    #         voice_enhancement_mode: "VOICE_ISOLATION", # required, accepts VOICE_ISOLATION, NOISE_SUPPRESSION, NONE
+    #       },
+    #     ],
+    #     user_id: "UserId", # required
+    #     instance_id: "InstanceId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateUserConfig AWS API Documentation
+    #
+    # @overload update_user_config(params = {})
+    # @param [Hash] params ({})
+    def update_user_config(params = {}, options = {})
+      req = build_request(:update_user_config, params)
+      req.send_request(options)
+    end
+
     # Assigns the specified hierarchy group to the specified user.
     #
     # @option params [String] :hierarchy_group_id
@@ -27352,7 +28014,74 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # Updates the status of a notification for a specific user, such as
+    # marking it as read or hidden. Users can only update notification
+    # status for notifications that have been sent to them. READ status
+    # deprioritizes the notification and greys it out, while HIDDEN status
+    # removes it from the notification widget.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #
+    # @option params [required, String] :notification_id
+    #   The unique identifier for the notification.
+    #
+    # @option params [required, String] :user_id
+    #   The identifier of the user whose notification status is being updated.
+    #
+    # @option params [required, String] :status
+    #   The new status for the notification. Valid values are READ, UNREAD,
+    #   and HIDDEN.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :last_modified_time
+    #   The timestamp when the notification status was last modified. Used for
+    #   cross-region replication and optimistic locking.
+    #
+    # @option params [String] :last_modified_region
+    #   The AWS Region where the notification status was last modified. Used
+    #   for cross-region replication.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_user_notification_status({
+    #     instance_id: "InstanceId", # required
+    #     notification_id: "NotificationId", # required
+    #     user_id: "UserId", # required
+    #     status: "READ", # required, accepts READ, UNREAD, HIDDEN
+    #     last_modified_time: Time.now,
+    #     last_modified_region: "RegionName",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateUserNotificationStatus AWS API Documentation
+    #
+    # @overload update_user_notification_status(params = {})
+    # @param [Hash] params ({})
+    def update_user_notification_status(params = {}, options = {})
+      req = build_request(:update_user_notification_status, params)
+      req.send_request(options)
+    end
+
     # Updates the phone configuration settings for the specified user.
+    #
+    # <note markdown="1"> We recommend using the [UpdateUserConfig][1] API, which supports
+    # additional functionality that is not available in the
+    # UpdateUserPhoneConfig API, such as voice enhancement settings and
+    # per-channel configuration for auto-accept and After Contact Work (ACW)
+    # timeouts. In comparison, the UpdateUserPhoneConfig API will always set
+    # the same ACW timeouts to all channels the user handles.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/connect/latest/APIReference/API_UpdateUserConfig.html
     #
     # @option params [required, Types::UserPhoneConfig] :phone_config
     #   Information about phone configuration settings for the user.
@@ -27374,10 +28103,10 @@ module Aws::Connect
     #
     #   resp = client.update_user_phone_config({
     #     phone_config: { # required
-    #       phone_type: "SOFT_PHONE", # required, accepts SOFT_PHONE, DESK_PHONE
+    #       phone_type: "SOFT_PHONE", # accepts SOFT_PHONE, DESK_PHONE
     #       auto_accept: false,
     #       after_contact_work_time_limit: 1,
-    #       desk_phone_number: "PhoneNumber",
+    #       desk_phone_number: "SensitivePhoneNumber",
     #       persistent_connection: false,
     #     },
     #     user_id: "UserId", # required
@@ -27877,7 +28606,7 @@ module Aws::Connect
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-connect'
-      context[:gem_version] = '1.240.0'
+      context[:gem_version] = '1.242.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.41.0 (2026-02-09)
+------------------
+
+* Feature - Introduces RESUMING state for clusters, compute node groups, and queues.
+
 1.40.0 (2026-01-16)
 ------------------
 

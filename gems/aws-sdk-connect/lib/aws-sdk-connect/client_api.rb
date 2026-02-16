@@ -27,12 +27,16 @@ module Aws::Connect
     ActiveRegion = Shapes::StringShape.new(name: 'ActiveRegion')
     ActiveRegionList = Shapes::ListShape.new(name: 'ActiveRegionList')
     AdditionalEmailRecipients = Shapes::StructureShape.new(name: 'AdditionalEmailRecipients')
+    AfterContactWorkConfig = Shapes::StructureShape.new(name: 'AfterContactWorkConfig')
+    AfterContactWorkConfigPerChannel = Shapes::StructureShape.new(name: 'AfterContactWorkConfigPerChannel')
+    AfterContactWorkConfigs = Shapes::ListShape.new(name: 'AfterContactWorkConfigs')
     AfterContactWorkTimeLimit = Shapes::IntegerShape.new(name: 'AfterContactWorkTimeLimit')
     AgentAvailabilityTimer = Shapes::StringShape.new(name: 'AgentAvailabilityTimer')
     AgentConfig = Shapes::StructureShape.new(name: 'AgentConfig')
     AgentContactReference = Shapes::StructureShape.new(name: 'AgentContactReference')
     AgentContactReferenceList = Shapes::ListShape.new(name: 'AgentContactReferenceList')
     AgentFirst = Shapes::StructureShape.new(name: 'AgentFirst')
+    AgentFirstCallbackAutoAccept = Shapes::BooleanShape.new(name: 'AgentFirstCallbackAutoAccept')
     AgentFirstName = Shapes::StringShape.new(name: 'AgentFirstName')
     AgentHierarchyGroup = Shapes::StructureShape.new(name: 'AgentHierarchyGroup')
     AgentHierarchyGroups = Shapes::StructureShape.new(name: 'AgentHierarchyGroups')
@@ -158,6 +162,8 @@ module Aws::Connect
     AuthenticationProfileSummaryList = Shapes::ListShape.new(name: 'AuthenticationProfileSummaryList')
     AuthorizationCode = Shapes::StringShape.new(name: 'AuthorizationCode')
     AutoAccept = Shapes::BooleanShape.new(name: 'AutoAccept')
+    AutoAcceptConfig = Shapes::StructureShape.new(name: 'AutoAcceptConfig')
+    AutoAcceptConfigs = Shapes::ListShape.new(name: 'AutoAcceptConfigs')
     AutoEvaluationConfiguration = Shapes::StructureShape.new(name: 'AutoEvaluationConfiguration')
     AutoEvaluationDetails = Shapes::StructureShape.new(name: 'AutoEvaluationDetails')
     AutoEvaluationStatus = Shapes::StringShape.new(name: 'AutoEvaluationStatus')
@@ -243,6 +249,7 @@ module Aws::Connect
     Condition = Shapes::StructureShape.new(name: 'Condition')
     ConditionalOperationFailedException = Shapes::StructureShape.new(name: 'ConditionalOperationFailedException')
     Conditions = Shapes::ListShape.new(name: 'Conditions')
+    ConfigurableNotificationPriority = Shapes::StringShape.new(name: 'ConfigurableNotificationPriority')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     ConnectionData = Shapes::StructureShape.new(name: 'ConnectionData')
     Contact = Shapes::StructureShape.new(name: 'Contact')
@@ -360,6 +367,8 @@ module Aws::Connect
     CreateInstanceResponse = Shapes::StructureShape.new(name: 'CreateInstanceResponse')
     CreateIntegrationAssociationRequest = Shapes::StructureShape.new(name: 'CreateIntegrationAssociationRequest')
     CreateIntegrationAssociationResponse = Shapes::StructureShape.new(name: 'CreateIntegrationAssociationResponse')
+    CreateNotificationRequest = Shapes::StructureShape.new(name: 'CreateNotificationRequest')
+    CreateNotificationResponse = Shapes::StructureShape.new(name: 'CreateNotificationResponse')
     CreateParticipantRequest = Shapes::StructureShape.new(name: 'CreateParticipantRequest')
     CreateParticipantResponse = Shapes::StructureShape.new(name: 'CreateParticipantResponse')
     CreatePersistentContactAssociationRequest = Shapes::StructureShape.new(name: 'CreatePersistentContactAssociationRequest')
@@ -490,6 +499,8 @@ module Aws::Connect
     DeleteHoursOfOperationRequest = Shapes::StructureShape.new(name: 'DeleteHoursOfOperationRequest')
     DeleteInstanceRequest = Shapes::StructureShape.new(name: 'DeleteInstanceRequest')
     DeleteIntegrationAssociationRequest = Shapes::StructureShape.new(name: 'DeleteIntegrationAssociationRequest')
+    DeleteNotificationRequest = Shapes::StructureShape.new(name: 'DeleteNotificationRequest')
+    DeleteNotificationResponse = Shapes::StructureShape.new(name: 'DeleteNotificationResponse')
     DeletePredefinedAttributeRequest = Shapes::StructureShape.new(name: 'DeletePredefinedAttributeRequest')
     DeletePromptRequest = Shapes::StructureShape.new(name: 'DeletePromptRequest')
     DeletePushNotificationRegistrationRequest = Shapes::StructureShape.new(name: 'DeletePushNotificationRegistrationRequest')
@@ -552,6 +563,8 @@ module Aws::Connect
     DescribeInstanceResponse = Shapes::StructureShape.new(name: 'DescribeInstanceResponse')
     DescribeInstanceStorageConfigRequest = Shapes::StructureShape.new(name: 'DescribeInstanceStorageConfigRequest')
     DescribeInstanceStorageConfigResponse = Shapes::StructureShape.new(name: 'DescribeInstanceStorageConfigResponse')
+    DescribeNotificationRequest = Shapes::StructureShape.new(name: 'DescribeNotificationRequest')
+    DescribeNotificationResponse = Shapes::StructureShape.new(name: 'DescribeNotificationResponse')
     DescribePhoneNumberRequest = Shapes::StructureShape.new(name: 'DescribePhoneNumberRequest')
     DescribePhoneNumberResponse = Shapes::StructureShape.new(name: 'DescribePhoneNumberResponse')
     DescribePredefinedAttributeRequest = Shapes::StructureShape.new(name: 'DescribePredefinedAttributeRequest')
@@ -1087,6 +1100,8 @@ module Aws::Connect
     ListLambdaFunctionsResponse = Shapes::StructureShape.new(name: 'ListLambdaFunctionsResponse')
     ListLexBotsRequest = Shapes::StructureShape.new(name: 'ListLexBotsRequest')
     ListLexBotsResponse = Shapes::StructureShape.new(name: 'ListLexBotsResponse')
+    ListNotificationsRequest = Shapes::StructureShape.new(name: 'ListNotificationsRequest')
+    ListNotificationsResponse = Shapes::StructureShape.new(name: 'ListNotificationsResponse')
     ListPhoneNumbersRequest = Shapes::StructureShape.new(name: 'ListPhoneNumbersRequest')
     ListPhoneNumbersResponse = Shapes::StructureShape.new(name: 'ListPhoneNumbersResponse')
     ListPhoneNumbersSummary = Shapes::StructureShape.new(name: 'ListPhoneNumbersSummary')
@@ -1141,6 +1156,8 @@ module Aws::Connect
     ListUseCasesResponse = Shapes::StructureShape.new(name: 'ListUseCasesResponse')
     ListUserHierarchyGroupsRequest = Shapes::StructureShape.new(name: 'ListUserHierarchyGroupsRequest')
     ListUserHierarchyGroupsResponse = Shapes::StructureShape.new(name: 'ListUserHierarchyGroupsResponse')
+    ListUserNotificationsRequest = Shapes::StructureShape.new(name: 'ListUserNotificationsRequest')
+    ListUserNotificationsResponse = Shapes::StructureShape.new(name: 'ListUserNotificationsResponse')
     ListUserProficienciesRequest = Shapes::StructureShape.new(name: 'ListUserProficienciesRequest')
     ListUserProficienciesResponse = Shapes::StructureShape.new(name: 'ListUserProficienciesResponse')
     ListUsersRequest = Shapes::StructureShape.new(name: 'ListUsersRequest')
@@ -1155,6 +1172,8 @@ module Aws::Connect
     ListWorkspacePagesResponse = Shapes::StructureShape.new(name: 'ListWorkspacePagesResponse')
     ListWorkspacesRequest = Shapes::StructureShape.new(name: 'ListWorkspacesRequest')
     ListWorkspacesResponse = Shapes::StructureShape.new(name: 'ListWorkspacesResponse')
+    LocaleCode = Shapes::StringShape.new(name: 'LocaleCode')
+    LocalizedString = Shapes::StringShape.new(name: 'LocalizedString')
     Long = Shapes::IntegerShape.new(name: 'Long')
     MatchCriteria = Shapes::StructureShape.new(name: 'MatchCriteria')
     MaxResult10 = Shapes::IntegerShape.new(name: 'MaxResult10')
@@ -1219,9 +1238,21 @@ module Aws::Connect
     NextContacts = Shapes::ListShape.new(name: 'NextContacts')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     NextToken2500 = Shapes::StringShape.new(name: 'NextToken2500')
+    Notification = Shapes::StructureShape.new(name: 'Notification')
+    NotificationContent = Shapes::MapShape.new(name: 'NotificationContent')
     NotificationContentType = Shapes::StringShape.new(name: 'NotificationContentType')
     NotificationDeliveryType = Shapes::StringShape.new(name: 'NotificationDeliveryType')
+    NotificationId = Shapes::StringShape.new(name: 'NotificationId')
+    NotificationPriority = Shapes::StringShape.new(name: 'NotificationPriority')
     NotificationRecipientType = Shapes::StructureShape.new(name: 'NotificationRecipientType')
+    NotificationSearchConditionList = Shapes::ListShape.new(name: 'NotificationSearchConditionList')
+    NotificationSearchCriteria = Shapes::StructureShape.new(name: 'NotificationSearchCriteria')
+    NotificationSearchFilter = Shapes::StructureShape.new(name: 'NotificationSearchFilter')
+    NotificationSearchSummary = Shapes::StructureShape.new(name: 'NotificationSearchSummary')
+    NotificationSearchSummaryList = Shapes::ListShape.new(name: 'NotificationSearchSummaryList')
+    NotificationSource = Shapes::StringShape.new(name: 'NotificationSource')
+    NotificationStatus = Shapes::StringShape.new(name: 'NotificationStatus')
+    NotificationSummaryList = Shapes::ListShape.new(name: 'NotificationSummaryList')
     NullableBoolean = Shapes::BooleanShape.new(name: 'NullableBoolean')
     NullableDouble = Shapes::FloatShape.new(name: 'NullableDouble')
     NullableProficiencyLevel = Shapes::FloatShape.new(name: 'NullableProficiencyLevel')
@@ -1294,7 +1325,11 @@ module Aws::Connect
     PermissionsList = Shapes::ListShape.new(name: 'PermissionsList')
     PersistentChat = Shapes::StructureShape.new(name: 'PersistentChat')
     PersistentConnection = Shapes::BooleanShape.new(name: 'PersistentConnection')
+    PersistentConnectionConfig = Shapes::StructureShape.new(name: 'PersistentConnectionConfig')
+    PersistentConnectionConfigs = Shapes::ListShape.new(name: 'PersistentConnectionConfigs')
     PhoneNumber = Shapes::StringShape.new(name: 'PhoneNumber')
+    PhoneNumberConfig = Shapes::StructureShape.new(name: 'PhoneNumberConfig')
+    PhoneNumberConfigs = Shapes::ListShape.new(name: 'PhoneNumberConfigs')
     PhoneNumberCountryCode = Shapes::StringShape.new(name: 'PhoneNumberCountryCode')
     PhoneNumberCountryCodes = Shapes::ListShape.new(name: 'PhoneNumberCountryCodes')
     PhoneNumberDescription = Shapes::StringShape.new(name: 'PhoneNumberDescription')
@@ -1452,6 +1487,7 @@ module Aws::Connect
     RealTimeContactAnalysisTranscriptItemsWithContent = Shapes::ListShape.new(name: 'RealTimeContactAnalysisTranscriptItemsWithContent')
     RealtimeContactAnalysisSegment = Shapes::UnionShape.new(name: 'RealtimeContactAnalysisSegment')
     RealtimeContactAnalysisSegments = Shapes::ListShape.new(name: 'RealtimeContactAnalysisSegments')
+    RecipientList = Shapes::ListShape.new(name: 'RecipientList')
     RecordIds = Shapes::ListShape.new(name: 'RecordIds')
     RecordPrimaryValue = Shapes::StructureShape.new(name: 'RecordPrimaryValue')
     RecordingDeletionReason = Shapes::StringShape.new(name: 'RecordingDeletionReason')
@@ -1578,6 +1614,8 @@ module Aws::Connect
     SearchHoursOfOperationOverridesResponse = Shapes::StructureShape.new(name: 'SearchHoursOfOperationOverridesResponse')
     SearchHoursOfOperationsRequest = Shapes::StructureShape.new(name: 'SearchHoursOfOperationsRequest')
     SearchHoursOfOperationsResponse = Shapes::StructureShape.new(name: 'SearchHoursOfOperationsResponse')
+    SearchNotificationsRequest = Shapes::StructureShape.new(name: 'SearchNotificationsRequest')
+    SearchNotificationsResponse = Shapes::StructureShape.new(name: 'SearchNotificationsResponse')
     SearchPredefinedAttributesRequest = Shapes::StructureShape.new(name: 'SearchPredefinedAttributesRequest')
     SearchPredefinedAttributesResponse = Shapes::StructureShape.new(name: 'SearchPredefinedAttributesResponse')
     SearchPromptsRequest = Shapes::StructureShape.new(name: 'SearchPromptsRequest')
@@ -1658,6 +1696,7 @@ module Aws::Connect
     SendNotificationActionDefinition = Shapes::StructureShape.new(name: 'SendNotificationActionDefinition')
     SendOutboundEmailRequest = Shapes::StructureShape.new(name: 'SendOutboundEmailRequest')
     SendOutboundEmailResponse = Shapes::StructureShape.new(name: 'SendOutboundEmailResponse')
+    SensitivePhoneNumber = Shapes::StringShape.new(name: 'SensitivePhoneNumber')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     ServiceQuotaExceededExceptionReason = Shapes::UnionShape.new(name: 'ServiceQuotaExceededExceptionReason')
     SignInConfig = Shapes::StructureShape.new(name: 'SignInConfig')
@@ -1890,6 +1929,8 @@ module Aws::Connect
     UpdateHoursOfOperationRequest = Shapes::StructureShape.new(name: 'UpdateHoursOfOperationRequest')
     UpdateInstanceAttributeRequest = Shapes::StructureShape.new(name: 'UpdateInstanceAttributeRequest')
     UpdateInstanceStorageConfigRequest = Shapes::StructureShape.new(name: 'UpdateInstanceStorageConfigRequest')
+    UpdateNotificationContentRequest = Shapes::StructureShape.new(name: 'UpdateNotificationContentRequest')
+    UpdateNotificationContentResponse = Shapes::StructureShape.new(name: 'UpdateNotificationContentResponse')
     UpdateParticipantAuthenticationRequest = Shapes::StructureShape.new(name: 'UpdateParticipantAuthenticationRequest')
     UpdateParticipantAuthenticationResponse = Shapes::StructureShape.new(name: 'UpdateParticipantAuthenticationResponse')
     UpdateParticipantRoleConfigChannelInfo = Shapes::UnionShape.new(name: 'UpdateParticipantRoleConfigChannelInfo')
@@ -1923,10 +1964,13 @@ module Aws::Connect
     UpdateTestCaseResponse = Shapes::StructureShape.new(name: 'UpdateTestCaseResponse')
     UpdateTrafficDistributionRequest = Shapes::StructureShape.new(name: 'UpdateTrafficDistributionRequest')
     UpdateTrafficDistributionResponse = Shapes::StructureShape.new(name: 'UpdateTrafficDistributionResponse')
+    UpdateUserConfigRequest = Shapes::StructureShape.new(name: 'UpdateUserConfigRequest')
     UpdateUserHierarchyGroupNameRequest = Shapes::StructureShape.new(name: 'UpdateUserHierarchyGroupNameRequest')
     UpdateUserHierarchyRequest = Shapes::StructureShape.new(name: 'UpdateUserHierarchyRequest')
     UpdateUserHierarchyStructureRequest = Shapes::StructureShape.new(name: 'UpdateUserHierarchyStructureRequest')
     UpdateUserIdentityInfoRequest = Shapes::StructureShape.new(name: 'UpdateUserIdentityInfoRequest')
+    UpdateUserNotificationStatusRequest = Shapes::StructureShape.new(name: 'UpdateUserNotificationStatusRequest')
+    UpdateUserNotificationStatusResponse = Shapes::StructureShape.new(name: 'UpdateUserNotificationStatusResponse')
     UpdateUserPhoneConfigRequest = Shapes::StructureShape.new(name: 'UpdateUserPhoneConfigRequest')
     UpdateUserProficienciesRequest = Shapes::StructureShape.new(name: 'UpdateUserProficienciesRequest')
     UpdateUserRoutingProfileRequest = Shapes::StructureShape.new(name: 'UpdateUserRoutingProfileRequest')
@@ -1968,6 +2012,8 @@ module Aws::Connect
     UserIdentityInfoLite = Shapes::StructureShape.new(name: 'UserIdentityInfoLite')
     UserInfo = Shapes::StructureShape.new(name: 'UserInfo')
     UserNotFoundException = Shapes::StructureShape.new(name: 'UserNotFoundException')
+    UserNotificationSummary = Shapes::StructureShape.new(name: 'UserNotificationSummary')
+    UserNotificationSummaryList = Shapes::ListShape.new(name: 'UserNotificationSummaryList')
     UserPhoneConfig = Shapes::StructureShape.new(name: 'UserPhoneConfig')
     UserProficiency = Shapes::StructureShape.new(name: 'UserProficiency')
     UserProficiencyDisassociate = Shapes::StructureShape.new(name: 'UserProficiencyDisassociate')
@@ -2031,6 +2077,9 @@ module Aws::Connect
     VocabularySummary = Shapes::StructureShape.new(name: 'VocabularySummary')
     VocabularySummaryList = Shapes::ListShape.new(name: 'VocabularySummaryList')
     VoiceCallEntryPointParameters = Shapes::StructureShape.new(name: 'VoiceCallEntryPointParameters')
+    VoiceEnhancementConfig = Shapes::StructureShape.new(name: 'VoiceEnhancementConfig')
+    VoiceEnhancementConfigs = Shapes::ListShape.new(name: 'VoiceEnhancementConfigs')
+    VoiceEnhancementMode = Shapes::StringShape.new(name: 'VoiceEnhancementMode')
     VoiceRecordingConfiguration = Shapes::StructureShape.new(name: 'VoiceRecordingConfiguration')
     VoiceRecordingTrack = Shapes::StringShape.new(name: 'VoiceRecordingTrack')
     WeekdayOccurrenceInteger = Shapes::IntegerShape.new(name: 'WeekdayOccurrenceInteger')
@@ -2093,6 +2142,16 @@ module Aws::Connect
     AdditionalEmailRecipients.add_member(:to_list, Shapes::ShapeRef.new(shape: EmailRecipientsList, location_name: "ToList"))
     AdditionalEmailRecipients.add_member(:cc_list, Shapes::ShapeRef.new(shape: EmailRecipientsList, location_name: "CcList"))
     AdditionalEmailRecipients.struct_class = Types::AdditionalEmailRecipients
+
+    AfterContactWorkConfig.add_member(:after_contact_work_time_limit, Shapes::ShapeRef.new(shape: AfterContactWorkTimeLimit, location_name: "AfterContactWorkTimeLimit"))
+    AfterContactWorkConfig.struct_class = Types::AfterContactWorkConfig
+
+    AfterContactWorkConfigPerChannel.add_member(:channel, Shapes::ShapeRef.new(shape: Channel, required: true, location_name: "Channel"))
+    AfterContactWorkConfigPerChannel.add_member(:after_contact_work_config, Shapes::ShapeRef.new(shape: AfterContactWorkConfig, required: true, location_name: "AfterContactWorkConfig"))
+    AfterContactWorkConfigPerChannel.add_member(:agent_first_callback_after_contact_work_config, Shapes::ShapeRef.new(shape: AfterContactWorkConfig, location_name: "AgentFirstCallbackAfterContactWorkConfig"))
+    AfterContactWorkConfigPerChannel.struct_class = Types::AfterContactWorkConfigPerChannel
+
+    AfterContactWorkConfigs.member = Shapes::ShapeRef.new(shape: AfterContactWorkConfigPerChannel)
 
     AgentConfig.add_member(:distributions, Shapes::ShapeRef.new(shape: DistributionList, required: true, location_name: "Distributions"))
     AgentConfig.struct_class = Types::AgentConfig
@@ -2488,6 +2547,13 @@ module Aws::Connect
     AuthenticationProfileSummary.struct_class = Types::AuthenticationProfileSummary
 
     AuthenticationProfileSummaryList.member = Shapes::ShapeRef.new(shape: AuthenticationProfileSummary)
+
+    AutoAcceptConfig.add_member(:channel, Shapes::ShapeRef.new(shape: Channel, required: true, location_name: "Channel"))
+    AutoAcceptConfig.add_member(:auto_accept, Shapes::ShapeRef.new(shape: AutoAccept, required: true, location_name: "AutoAccept"))
+    AutoAcceptConfig.add_member(:agent_first_callback_auto_accept, Shapes::ShapeRef.new(shape: AgentFirstCallbackAutoAccept, location_name: "AgentFirstCallbackAutoAccept"))
+    AutoAcceptConfig.struct_class = Types::AutoAcceptConfig
+
+    AutoAcceptConfigs.member = Shapes::ShapeRef.new(shape: AutoAcceptConfig)
 
     AutoEvaluationConfiguration.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "Enabled"))
     AutoEvaluationConfiguration.struct_class = Types::AutoEvaluationConfiguration
@@ -3265,6 +3331,20 @@ module Aws::Connect
     CreateIntegrationAssociationResponse.add_member(:integration_association_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "IntegrationAssociationArn"))
     CreateIntegrationAssociationResponse.struct_class = Types::CreateIntegrationAssociationResponse
 
+    CreateNotificationRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
+    CreateNotificationRequest.add_member(:expires_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "ExpiresAt"))
+    CreateNotificationRequest.add_member(:recipients, Shapes::ShapeRef.new(shape: RecipientList, required: true, location_name: "Recipients"))
+    CreateNotificationRequest.add_member(:priority, Shapes::ShapeRef.new(shape: ConfigurableNotificationPriority, location_name: "Priority"))
+    CreateNotificationRequest.add_member(:content, Shapes::ShapeRef.new(shape: NotificationContent, required: true, location_name: "Content"))
+    CreateNotificationRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    CreateNotificationRequest.add_member(:predefined_notification_id, Shapes::ShapeRef.new(shape: NotificationId, location_name: "PredefinedNotificationId"))
+    CreateNotificationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
+    CreateNotificationRequest.struct_class = Types::CreateNotificationRequest
+
+    CreateNotificationResponse.add_member(:notification_id, Shapes::ShapeRef.new(shape: NotificationId, required: true, location_name: "NotificationId"))
+    CreateNotificationResponse.add_member(:notification_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "NotificationArn"))
+    CreateNotificationResponse.struct_class = Types::CreateNotificationResponse
+
     CreateParticipantRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location_name: "InstanceId"))
     CreateParticipantRequest.add_member(:contact_id, Shapes::ShapeRef.new(shape: ContactId, required: true, location_name: "ContactId"))
     CreateParticipantRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
@@ -3453,12 +3533,17 @@ module Aws::Connect
     CreateUserRequest.add_member(:username, Shapes::ShapeRef.new(shape: AgentUsername, required: true, location_name: "Username"))
     CreateUserRequest.add_member(:password, Shapes::ShapeRef.new(shape: Password, location_name: "Password"))
     CreateUserRequest.add_member(:identity_info, Shapes::ShapeRef.new(shape: UserIdentityInfo, location_name: "IdentityInfo"))
-    CreateUserRequest.add_member(:phone_config, Shapes::ShapeRef.new(shape: UserPhoneConfig, required: true, location_name: "PhoneConfig"))
+    CreateUserRequest.add_member(:phone_config, Shapes::ShapeRef.new(shape: UserPhoneConfig, location_name: "PhoneConfig"))
     CreateUserRequest.add_member(:directory_user_id, Shapes::ShapeRef.new(shape: DirectoryUserId, location_name: "DirectoryUserId"))
     CreateUserRequest.add_member(:security_profile_ids, Shapes::ShapeRef.new(shape: SecurityProfileIds, required: true, location_name: "SecurityProfileIds"))
     CreateUserRequest.add_member(:routing_profile_id, Shapes::ShapeRef.new(shape: RoutingProfileId, required: true, location_name: "RoutingProfileId"))
     CreateUserRequest.add_member(:hierarchy_group_id, Shapes::ShapeRef.new(shape: HierarchyGroupId, location_name: "HierarchyGroupId"))
     CreateUserRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
+    CreateUserRequest.add_member(:auto_accept_configs, Shapes::ShapeRef.new(shape: AutoAcceptConfigs, location_name: "AutoAcceptConfigs"))
+    CreateUserRequest.add_member(:after_contact_work_configs, Shapes::ShapeRef.new(shape: AfterContactWorkConfigs, location_name: "AfterContactWorkConfigs"))
+    CreateUserRequest.add_member(:phone_number_configs, Shapes::ShapeRef.new(shape: PhoneNumberConfigs, location_name: "PhoneNumberConfigs"))
+    CreateUserRequest.add_member(:persistent_connection_configs, Shapes::ShapeRef.new(shape: PersistentConnectionConfigs, location_name: "PersistentConnectionConfigs"))
+    CreateUserRequest.add_member(:voice_enhancement_configs, Shapes::ShapeRef.new(shape: VoiceEnhancementConfigs, location_name: "VoiceEnhancementConfigs"))
     CreateUserRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     CreateUserRequest.struct_class = Types::CreateUserRequest
 
@@ -3815,6 +3900,12 @@ module Aws::Connect
     DeleteIntegrationAssociationRequest.add_member(:integration_association_id, Shapes::ShapeRef.new(shape: IntegrationAssociationId, required: true, location: "uri", location_name: "IntegrationAssociationId"))
     DeleteIntegrationAssociationRequest.struct_class = Types::DeleteIntegrationAssociationRequest
 
+    DeleteNotificationRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
+    DeleteNotificationRequest.add_member(:notification_id, Shapes::ShapeRef.new(shape: NotificationId, required: true, location: "uri", location_name: "NotificationId"))
+    DeleteNotificationRequest.struct_class = Types::DeleteNotificationRequest
+
+    DeleteNotificationResponse.struct_class = Types::DeleteNotificationResponse
+
     DeletePredefinedAttributeRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
     DeletePredefinedAttributeRequest.add_member(:name, Shapes::ShapeRef.new(shape: PredefinedAttributeName, required: true, location: "uri", location_name: "Name"))
     DeletePredefinedAttributeRequest.struct_class = Types::DeletePredefinedAttributeRequest
@@ -4047,6 +4138,13 @@ module Aws::Connect
 
     DescribeInstanceStorageConfigResponse.add_member(:storage_config, Shapes::ShapeRef.new(shape: InstanceStorageConfig, location_name: "StorageConfig"))
     DescribeInstanceStorageConfigResponse.struct_class = Types::DescribeInstanceStorageConfigResponse
+
+    DescribeNotificationRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
+    DescribeNotificationRequest.add_member(:notification_id, Shapes::ShapeRef.new(shape: NotificationId, required: true, location: "uri", location_name: "NotificationId"))
+    DescribeNotificationRequest.struct_class = Types::DescribeNotificationRequest
+
+    DescribeNotificationResponse.add_member(:notification, Shapes::ShapeRef.new(shape: Notification, required: true, location_name: "Notification"))
+    DescribeNotificationResponse.struct_class = Types::DescribeNotificationResponse
 
     DescribePhoneNumberRequest.add_member(:phone_number_id, Shapes::ShapeRef.new(shape: PhoneNumberId, required: true, location: "uri", location_name: "PhoneNumberId"))
     DescribePhoneNumberRequest.struct_class = Types::DescribePhoneNumberRequest
@@ -5832,6 +5930,15 @@ module Aws::Connect
     ListLexBotsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListLexBotsResponse.struct_class = Types::ListLexBotsResponse
 
+    ListNotificationsRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
+    ListNotificationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
+    ListNotificationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResult100, location: "querystring", location_name: "maxResults", metadata: {"box" => true}))
+    ListNotificationsRequest.struct_class = Types::ListNotificationsRequest
+
+    ListNotificationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListNotificationsResponse.add_member(:notification_summary_list, Shapes::ShapeRef.new(shape: NotificationSummaryList, required: true, location_name: "NotificationSummaryList"))
+    ListNotificationsResponse.struct_class = Types::ListNotificationsResponse
+
     ListPhoneNumbersRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
     ListPhoneNumbersRequest.add_member(:phone_number_types, Shapes::ShapeRef.new(shape: PhoneNumberTypes, location: "querystring", location_name: "phoneNumberTypes"))
     ListPhoneNumbersRequest.add_member(:phone_number_country_codes, Shapes::ShapeRef.new(shape: PhoneNumberCountryCodes, location: "querystring", location_name: "phoneNumberCountryCodes"))
@@ -6120,6 +6227,16 @@ module Aws::Connect
     ListUserHierarchyGroupsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListUserHierarchyGroupsResponse.struct_class = Types::ListUserHierarchyGroupsResponse
 
+    ListUserNotificationsRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
+    ListUserNotificationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
+    ListUserNotificationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResult1000, location: "querystring", location_name: "maxResults", metadata: {"box" => true}))
+    ListUserNotificationsRequest.add_member(:user_id, Shapes::ShapeRef.new(shape: UserId, required: true, location: "uri", location_name: "UserId"))
+    ListUserNotificationsRequest.struct_class = Types::ListUserNotificationsRequest
+
+    ListUserNotificationsResponse.add_member(:user_notifications, Shapes::ShapeRef.new(shape: UserNotificationSummaryList, location_name: "UserNotifications"))
+    ListUserNotificationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListUserNotificationsResponse.struct_class = Types::ListUserNotificationsResponse
+
     ListUserProficienciesRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
     ListUserProficienciesRequest.add_member(:user_id, Shapes::ShapeRef.new(shape: UserId, required: true, location: "uri", location_name: "UserId"))
     ListUserProficienciesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
@@ -6299,9 +6416,51 @@ module Aws::Connect
 
     NextContacts.member = Shapes::ShapeRef.new(shape: NextContactEntry)
 
+    Notification.add_member(:content, Shapes::ShapeRef.new(shape: NotificationContent, location_name: "Content"))
+    Notification.add_member(:id, Shapes::ShapeRef.new(shape: NotificationId, required: true, location_name: "Id"))
+    Notification.add_member(:arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "Arn"))
+    Notification.add_member(:priority, Shapes::ShapeRef.new(shape: NotificationPriority, location_name: "Priority"))
+    Notification.add_member(:recipients, Shapes::ShapeRef.new(shape: RecipientList, location_name: "Recipients"))
+    Notification.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "LastModifiedTime"))
+    Notification.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedAt"))
+    Notification.add_member(:expires_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "ExpiresAt"))
+    Notification.add_member(:last_modified_region, Shapes::ShapeRef.new(shape: RegionName, location_name: "LastModifiedRegion"))
+    Notification.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    Notification.struct_class = Types::Notification
+
+    NotificationContent.key = Shapes::ShapeRef.new(shape: LocaleCode)
+    NotificationContent.value = Shapes::ShapeRef.new(shape: LocalizedString)
+
     NotificationRecipientType.add_member(:user_tags, Shapes::ShapeRef.new(shape: UserTagMap, location_name: "UserTags"))
     NotificationRecipientType.add_member(:user_ids, Shapes::ShapeRef.new(shape: UserIdList, location_name: "UserIds"))
     NotificationRecipientType.struct_class = Types::NotificationRecipientType
+
+    NotificationSearchConditionList.member = Shapes::ShapeRef.new(shape: NotificationSearchCriteria)
+
+    NotificationSearchCriteria.add_member(:or_conditions, Shapes::ShapeRef.new(shape: NotificationSearchConditionList, location_name: "OrConditions"))
+    NotificationSearchCriteria.add_member(:and_conditions, Shapes::ShapeRef.new(shape: NotificationSearchConditionList, location_name: "AndConditions"))
+    NotificationSearchCriteria.add_member(:string_condition, Shapes::ShapeRef.new(shape: StringCondition, location_name: "StringCondition"))
+    NotificationSearchCriteria.struct_class = Types::NotificationSearchCriteria
+
+    NotificationSearchFilter.add_member(:attribute_filter, Shapes::ShapeRef.new(shape: ControlPlaneAttributeFilter, location_name: "AttributeFilter"))
+    NotificationSearchFilter.struct_class = Types::NotificationSearchFilter
+
+    NotificationSearchSummary.add_member(:id, Shapes::ShapeRef.new(shape: NotificationId, location_name: "Id"))
+    NotificationSearchSummary.add_member(:arn, Shapes::ShapeRef.new(shape: ARN, location_name: "Arn"))
+    NotificationSearchSummary.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, location_name: "InstanceId"))
+    NotificationSearchSummary.add_member(:content, Shapes::ShapeRef.new(shape: NotificationContent, location_name: "Content"))
+    NotificationSearchSummary.add_member(:priority, Shapes::ShapeRef.new(shape: NotificationPriority, location_name: "Priority"))
+    NotificationSearchSummary.add_member(:recipients, Shapes::ShapeRef.new(shape: RecipientList, location_name: "Recipients"))
+    NotificationSearchSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedAt"))
+    NotificationSearchSummary.add_member(:expires_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "ExpiresAt"))
+    NotificationSearchSummary.add_member(:last_modified_region, Shapes::ShapeRef.new(shape: RegionName, location_name: "LastModifiedRegion"))
+    NotificationSearchSummary.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTime"))
+    NotificationSearchSummary.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    NotificationSearchSummary.struct_class = Types::NotificationSearchSummary
+
+    NotificationSearchSummaryList.member = Shapes::ShapeRef.new(shape: NotificationSearchSummary)
+
+    NotificationSummaryList.member = Shapes::ShapeRef.new(shape: Notification)
 
     NumberCondition.add_member(:field_name, Shapes::ShapeRef.new(shape: String, location_name: "FieldName"))
     NumberCondition.add_member(:min_value, Shapes::ShapeRef.new(shape: NullableProficiencyLimitValue, location_name: "MinValue"))
@@ -6466,6 +6625,19 @@ module Aws::Connect
     PersistentChat.add_member(:rehydration_type, Shapes::ShapeRef.new(shape: RehydrationType, location_name: "RehydrationType"))
     PersistentChat.add_member(:source_contact_id, Shapes::ShapeRef.new(shape: ContactId, location_name: "SourceContactId"))
     PersistentChat.struct_class = Types::PersistentChat
+
+    PersistentConnectionConfig.add_member(:channel, Shapes::ShapeRef.new(shape: Channel, required: true, location_name: "Channel"))
+    PersistentConnectionConfig.add_member(:persistent_connection, Shapes::ShapeRef.new(shape: PersistentConnection, required: true, location_name: "PersistentConnection", metadata: {"box" => true}))
+    PersistentConnectionConfig.struct_class = Types::PersistentConnectionConfig
+
+    PersistentConnectionConfigs.member = Shapes::ShapeRef.new(shape: PersistentConnectionConfig)
+
+    PhoneNumberConfig.add_member(:channel, Shapes::ShapeRef.new(shape: Channel, required: true, location_name: "Channel"))
+    PhoneNumberConfig.add_member(:phone_type, Shapes::ShapeRef.new(shape: PhoneType, required: true, location_name: "PhoneType"))
+    PhoneNumberConfig.add_member(:phone_number, Shapes::ShapeRef.new(shape: SensitivePhoneNumber, location_name: "PhoneNumber"))
+    PhoneNumberConfig.struct_class = Types::PhoneNumberConfig
+
+    PhoneNumberConfigs.member = Shapes::ShapeRef.new(shape: PhoneNumberConfig)
 
     PhoneNumberCountryCodes.member = Shapes::ShapeRef.new(shape: PhoneNumberCountryCode)
 
@@ -6850,6 +7022,8 @@ module Aws::Connect
     RealtimeContactAnalysisSegment.struct_class = Types::RealtimeContactAnalysisSegment
 
     RealtimeContactAnalysisSegments.member = Shapes::ShapeRef.new(shape: RealtimeContactAnalysisSegment)
+
+    RecipientList.member = Shapes::ShapeRef.new(shape: ARN)
 
     RecordIds.member = Shapes::ShapeRef.new(shape: DataTableId)
 
@@ -7298,6 +7472,18 @@ module Aws::Connect
     SearchHoursOfOperationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken2500, location_name: "NextToken"))
     SearchHoursOfOperationsResponse.add_member(:approximate_total_count, Shapes::ShapeRef.new(shape: ApproximateTotalCount, location_name: "ApproximateTotalCount"))
     SearchHoursOfOperationsResponse.struct_class = Types::SearchHoursOfOperationsResponse
+
+    SearchNotificationsRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location_name: "InstanceId"))
+    SearchNotificationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    SearchNotificationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResult100, location_name: "MaxResults", metadata: {"box" => true}))
+    SearchNotificationsRequest.add_member(:search_filter, Shapes::ShapeRef.new(shape: NotificationSearchFilter, location_name: "SearchFilter"))
+    SearchNotificationsRequest.add_member(:search_criteria, Shapes::ShapeRef.new(shape: NotificationSearchCriteria, location_name: "SearchCriteria"))
+    SearchNotificationsRequest.struct_class = Types::SearchNotificationsRequest
+
+    SearchNotificationsResponse.add_member(:notifications, Shapes::ShapeRef.new(shape: NotificationSearchSummaryList, location_name: "Notifications"))
+    SearchNotificationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    SearchNotificationsResponse.add_member(:approximate_total_count, Shapes::ShapeRef.new(shape: ApproximateTotalCount, location_name: "ApproximateTotalCount"))
+    SearchNotificationsResponse.struct_class = Types::SearchNotificationsResponse
 
     SearchPredefinedAttributesRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location_name: "InstanceId"))
     SearchPredefinedAttributesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken2500, location_name: "NextToken"))
@@ -8392,6 +8578,13 @@ module Aws::Connect
     UpdateInstanceStorageConfigRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     UpdateInstanceStorageConfigRequest.struct_class = Types::UpdateInstanceStorageConfigRequest
 
+    UpdateNotificationContentRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
+    UpdateNotificationContentRequest.add_member(:notification_id, Shapes::ShapeRef.new(shape: NotificationId, required: true, location: "uri", location_name: "NotificationId"))
+    UpdateNotificationContentRequest.add_member(:content, Shapes::ShapeRef.new(shape: NotificationContent, required: true, location_name: "Content"))
+    UpdateNotificationContentRequest.struct_class = Types::UpdateNotificationContentRequest
+
+    UpdateNotificationContentResponse.struct_class = Types::UpdateNotificationContentResponse
+
     UpdateParticipantAuthenticationRequest.add_member(:state, Shapes::ShapeRef.new(shape: ParticipantToken, required: true, location_name: "State"))
     UpdateParticipantAuthenticationRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location_name: "InstanceId"))
     UpdateParticipantAuthenticationRequest.add_member(:code, Shapes::ShapeRef.new(shape: AuthorizationCode, location_name: "Code"))
@@ -8585,6 +8778,15 @@ module Aws::Connect
 
     UpdateTrafficDistributionResponse.struct_class = Types::UpdateTrafficDistributionResponse
 
+    UpdateUserConfigRequest.add_member(:auto_accept_configs, Shapes::ShapeRef.new(shape: AutoAcceptConfigs, location_name: "AutoAcceptConfigs"))
+    UpdateUserConfigRequest.add_member(:after_contact_work_configs, Shapes::ShapeRef.new(shape: AfterContactWorkConfigs, location_name: "AfterContactWorkConfigs"))
+    UpdateUserConfigRequest.add_member(:phone_number_configs, Shapes::ShapeRef.new(shape: PhoneNumberConfigs, location_name: "PhoneNumberConfigs"))
+    UpdateUserConfigRequest.add_member(:persistent_connection_configs, Shapes::ShapeRef.new(shape: PersistentConnectionConfigs, location_name: "PersistentConnectionConfigs"))
+    UpdateUserConfigRequest.add_member(:voice_enhancement_configs, Shapes::ShapeRef.new(shape: VoiceEnhancementConfigs, location_name: "VoiceEnhancementConfigs"))
+    UpdateUserConfigRequest.add_member(:user_id, Shapes::ShapeRef.new(shape: UserId, required: true, location: "uri", location_name: "UserId"))
+    UpdateUserConfigRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
+    UpdateUserConfigRequest.struct_class = Types::UpdateUserConfigRequest
+
     UpdateUserHierarchyGroupNameRequest.add_member(:name, Shapes::ShapeRef.new(shape: HierarchyGroupName, required: true, location_name: "Name"))
     UpdateUserHierarchyGroupNameRequest.add_member(:hierarchy_group_id, Shapes::ShapeRef.new(shape: HierarchyGroupId, required: true, location: "uri", location_name: "HierarchyGroupId"))
     UpdateUserHierarchyGroupNameRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
@@ -8603,6 +8805,16 @@ module Aws::Connect
     UpdateUserIdentityInfoRequest.add_member(:user_id, Shapes::ShapeRef.new(shape: UserId, required: true, location: "uri", location_name: "UserId"))
     UpdateUserIdentityInfoRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
     UpdateUserIdentityInfoRequest.struct_class = Types::UpdateUserIdentityInfoRequest
+
+    UpdateUserNotificationStatusRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
+    UpdateUserNotificationStatusRequest.add_member(:notification_id, Shapes::ShapeRef.new(shape: NotificationId, required: true, location: "uri", location_name: "NotificationId"))
+    UpdateUserNotificationStatusRequest.add_member(:user_id, Shapes::ShapeRef.new(shape: UserId, required: true, location: "uri", location_name: "UserId"))
+    UpdateUserNotificationStatusRequest.add_member(:status, Shapes::ShapeRef.new(shape: NotificationStatus, required: true, location_name: "Status"))
+    UpdateUserNotificationStatusRequest.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location: "header", location_name: "x-amz-last-modified-time"))
+    UpdateUserNotificationStatusRequest.add_member(:last_modified_region, Shapes::ShapeRef.new(shape: RegionName, location: "header", location_name: "x-amz-last-modified-region"))
+    UpdateUserNotificationStatusRequest.struct_class = Types::UpdateUserNotificationStatusRequest
+
+    UpdateUserNotificationStatusResponse.struct_class = Types::UpdateUserNotificationStatusResponse
 
     UpdateUserPhoneConfigRequest.add_member(:phone_config, Shapes::ShapeRef.new(shape: UserPhoneConfig, required: true, location_name: "PhoneConfig"))
     UpdateUserPhoneConfigRequest.add_member(:user_id, Shapes::ShapeRef.new(shape: UserId, required: true, location: "uri", location_name: "UserId"))
@@ -8704,6 +8916,11 @@ module Aws::Connect
     User.add_member(:routing_profile_id, Shapes::ShapeRef.new(shape: RoutingProfileId, location_name: "RoutingProfileId"))
     User.add_member(:hierarchy_group_id, Shapes::ShapeRef.new(shape: HierarchyGroupId, location_name: "HierarchyGroupId"))
     User.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    User.add_member(:auto_accept_configs, Shapes::ShapeRef.new(shape: AutoAcceptConfigs, location_name: "AutoAcceptConfigs"))
+    User.add_member(:after_contact_work_configs, Shapes::ShapeRef.new(shape: AfterContactWorkConfigs, location_name: "AfterContactWorkConfigs"))
+    User.add_member(:phone_number_configs, Shapes::ShapeRef.new(shape: PhoneNumberConfigs, location_name: "PhoneNumberConfigs"))
+    User.add_member(:persistent_connection_configs, Shapes::ShapeRef.new(shape: PersistentConnectionConfigs, location_name: "PersistentConnectionConfigs"))
+    User.add_member(:voice_enhancement_configs, Shapes::ShapeRef.new(shape: VoiceEnhancementConfigs, location_name: "VoiceEnhancementConfigs"))
     User.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTime"))
     User.add_member(:last_modified_region, Shapes::ShapeRef.new(shape: RegionName, location_name: "LastModifiedRegion"))
     User.struct_class = Types::User
@@ -8761,10 +8978,23 @@ module Aws::Connect
     UserNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
     UserNotFoundException.struct_class = Types::UserNotFoundException
 
-    UserPhoneConfig.add_member(:phone_type, Shapes::ShapeRef.new(shape: PhoneType, required: true, location_name: "PhoneType"))
+    UserNotificationSummary.add_member(:notification_id, Shapes::ShapeRef.new(shape: NotificationId, location_name: "NotificationId"))
+    UserNotificationSummary.add_member(:notification_status, Shapes::ShapeRef.new(shape: NotificationStatus, location_name: "NotificationStatus"))
+    UserNotificationSummary.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, location_name: "InstanceId"))
+    UserNotificationSummary.add_member(:recipient_id, Shapes::ShapeRef.new(shape: AgentId, location_name: "RecipientId"))
+    UserNotificationSummary.add_member(:content, Shapes::ShapeRef.new(shape: NotificationContent, location_name: "Content"))
+    UserNotificationSummary.add_member(:priority, Shapes::ShapeRef.new(shape: NotificationPriority, location_name: "Priority"))
+    UserNotificationSummary.add_member(:source, Shapes::ShapeRef.new(shape: NotificationSource, location_name: "Source"))
+    UserNotificationSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedAt"))
+    UserNotificationSummary.add_member(:expires_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "ExpiresAt"))
+    UserNotificationSummary.struct_class = Types::UserNotificationSummary
+
+    UserNotificationSummaryList.member = Shapes::ShapeRef.new(shape: UserNotificationSummary)
+
+    UserPhoneConfig.add_member(:phone_type, Shapes::ShapeRef.new(shape: PhoneType, location_name: "PhoneType"))
     UserPhoneConfig.add_member(:auto_accept, Shapes::ShapeRef.new(shape: AutoAccept, location_name: "AutoAccept"))
     UserPhoneConfig.add_member(:after_contact_work_time_limit, Shapes::ShapeRef.new(shape: AfterContactWorkTimeLimit, location_name: "AfterContactWorkTimeLimit"))
-    UserPhoneConfig.add_member(:desk_phone_number, Shapes::ShapeRef.new(shape: PhoneNumber, location_name: "DeskPhoneNumber"))
+    UserPhoneConfig.add_member(:desk_phone_number, Shapes::ShapeRef.new(shape: SensitivePhoneNumber, location_name: "DeskPhoneNumber"))
     UserPhoneConfig.add_member(:persistent_connection, Shapes::ShapeRef.new(shape: PersistentConnection, location_name: "PersistentConnection", metadata: {"box" => true}))
     UserPhoneConfig.struct_class = Types::UserPhoneConfig
 
@@ -8812,6 +9042,11 @@ module Aws::Connect
     UserSearchSummary.add_member(:security_profile_ids, Shapes::ShapeRef.new(shape: SecurityProfileIds, location_name: "SecurityProfileIds"))
     UserSearchSummary.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     UserSearchSummary.add_member(:username, Shapes::ShapeRef.new(shape: AgentUsername, location_name: "Username"))
+    UserSearchSummary.add_member(:auto_accept_configs, Shapes::ShapeRef.new(shape: AutoAcceptConfigs, location_name: "AutoAcceptConfigs"))
+    UserSearchSummary.add_member(:after_contact_work_configs, Shapes::ShapeRef.new(shape: AfterContactWorkConfigs, location_name: "AfterContactWorkConfigs"))
+    UserSearchSummary.add_member(:phone_number_configs, Shapes::ShapeRef.new(shape: PhoneNumberConfigs, location_name: "PhoneNumberConfigs"))
+    UserSearchSummary.add_member(:persistent_connection_configs, Shapes::ShapeRef.new(shape: PersistentConnectionConfigs, location_name: "PersistentConnectionConfigs"))
+    UserSearchSummary.add_member(:voice_enhancement_configs, Shapes::ShapeRef.new(shape: VoiceEnhancementConfigs, location_name: "VoiceEnhancementConfigs"))
     UserSearchSummary.struct_class = Types::UserSearchSummary
 
     UserSearchSummaryList.member = Shapes::ShapeRef.new(shape: UserSearchSummary)
@@ -8938,6 +9173,12 @@ module Aws::Connect
     VoiceCallEntryPointParameters.add_member(:destination_phone_number, Shapes::ShapeRef.new(shape: PhoneNumber, location_name: "DestinationPhoneNumber"))
     VoiceCallEntryPointParameters.add_member(:flow_id, Shapes::ShapeRef.new(shape: ContactFlowId, location_name: "FlowId"))
     VoiceCallEntryPointParameters.struct_class = Types::VoiceCallEntryPointParameters
+
+    VoiceEnhancementConfig.add_member(:channel, Shapes::ShapeRef.new(shape: Channel, required: true, location_name: "Channel"))
+    VoiceEnhancementConfig.add_member(:voice_enhancement_mode, Shapes::ShapeRef.new(shape: VoiceEnhancementMode, required: true, location_name: "VoiceEnhancementMode"))
+    VoiceEnhancementConfig.struct_class = Types::VoiceEnhancementConfig
+
+    VoiceEnhancementConfigs.member = Shapes::ShapeRef.new(shape: VoiceEnhancementConfig)
 
     VoiceRecordingConfiguration.add_member(:voice_recording_track, Shapes::ShapeRef.new(shape: VoiceRecordingTrack, location_name: "VoiceRecordingTrack"))
     VoiceRecordingConfiguration.add_member(:ivr_recording_track, Shapes::ShapeRef.new(shape: IvrRecordingTrack, location_name: "IvrRecordingTrack"))
@@ -9740,6 +9981,21 @@ module Aws::Connect
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
+      api.add_operation(:create_notification, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateNotification"
+        o.http_method = "PUT"
+        o.http_request_uri = "/notifications/{InstanceId}"
+        o.input = Shapes::ShapeRef.new(shape: CreateNotificationRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateNotificationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: DuplicateResourceException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+      end)
+
       api.add_operation(:create_participant, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateParticipant"
         o.http_method = "POST"
@@ -10277,6 +10533,20 @@ module Aws::Connect
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
+      api.add_operation(:delete_notification, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteNotification"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/notifications/{InstanceId}/{NotificationId}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteNotificationRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteNotificationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+      end)
+
       api.add_operation(:delete_predefined_attribute, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeletePredefinedAttribute"
         o.http_method = "DELETE"
@@ -10759,6 +11029,20 @@ module Aws::Connect
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:describe_notification, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeNotification"
+        o.http_method = "GET"
+        o.http_request_uri = "/notifications/{InstanceId}/{NotificationId}"
+        o.input = Shapes::ShapeRef.new(shape: DescribeNotificationRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeNotificationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
       end)
 
       api.add_operation(:describe_phone_number, Seahorse::Model::Operation.new.tap do |o|
@@ -12057,6 +12341,20 @@ module Aws::Connect
         )
       end)
 
+      api.add_operation(:list_notifications, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListNotifications"
+        o.http_method = "GET"
+        o.http_request_uri = "/notifications/{InstanceId}"
+        o.input = Shapes::ShapeRef.new(shape: ListNotificationsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListNotificationsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+      end)
+
       api.add_operation(:list_phone_numbers, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListPhoneNumbers"
         o.http_method = "GET"
@@ -12535,6 +12833,20 @@ module Aws::Connect
         )
       end)
 
+      api.add_operation(:list_user_notifications, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListUserNotifications"
+        o.http_method = "GET"
+        o.http_request_uri = "/users/{InstanceId}/{UserId}/notifications"
+        o.input = Shapes::ShapeRef.new(shape: ListUserNotificationsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListUserNotificationsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+      end)
+
       api.add_operation(:list_user_proficiencies, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListUserProficiencies"
         o.http_method = "GET"
@@ -12959,6 +13271,20 @@ module Aws::Connect
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:search_notifications, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "SearchNotifications"
+        o.http_method = "POST"
+        o.http_request_uri = "/search-notifications"
+        o.input = Shapes::ShapeRef.new(shape: SearchNotificationsRequest)
+        o.output = Shapes::ShapeRef.new(shape: SearchNotificationsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
       end)
 
       api.add_operation(:search_predefined_attributes, Seahorse::Model::Operation.new.tap do |o|
@@ -13935,6 +14261,20 @@ module Aws::Connect
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
+      api.add_operation(:update_notification_content, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateNotificationContent"
+        o.http_method = "POST"
+        o.http_request_uri = "/notifications/{InstanceId}/{NotificationId}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateNotificationContentRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateNotificationContentResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+      end)
+
       api.add_operation(:update_participant_authentication, Seahorse::Model::Operation.new.tap do |o|
         o.name = "UpdateParticipantAuthentication"
         o.http_method = "POST"
@@ -14264,6 +14604,20 @@ module Aws::Connect
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
       end)
 
+      api.add_operation(:update_user_config, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateUserConfig"
+        o.http_method = "POST"
+        o.http_request_uri = "/users/{InstanceId}/{UserId}/config"
+        o.input = Shapes::ShapeRef.new(shape: UpdateUserConfigRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: ConditionalOperationFailedException)
+      end)
+
       api.add_operation(:update_user_hierarchy, Seahorse::Model::Operation.new.tap do |o|
         o.name = "UpdateUserHierarchy"
         o.http_method = "POST"
@@ -14316,6 +14670,20 @@ module Aws::Connect
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+      end)
+
+      api.add_operation(:update_user_notification_status, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateUserNotificationStatus"
+        o.http_method = "POST"
+        o.http_request_uri = "/users/{InstanceId}/{UserId}/notifications/{NotificationId}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateUserNotificationStatusRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateUserNotificationStatusResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
       end)
 
       api.add_operation(:update_user_phone_config, Seahorse::Model::Operation.new.tap do |o|

@@ -476,6 +476,7 @@ module Aws::Batch
 
     class DescribeServiceJobResponse
       attr_accessor attempts: ::Array[Types::ServiceJobAttemptDetail]
+      attr_accessor capacity_usage: ::Array[Types::ServiceJobCapacityUsageDetail]
       attr_accessor created_at: ::Integer
       attr_accessor is_terminated: bool
       attr_accessor job_arn: ::String
@@ -484,6 +485,7 @@ module Aws::Batch
       attr_accessor job_queue: ::String
       attr_accessor latest_attempt: Types::LatestServiceJobAttempt
       attr_accessor retry_strategy: Types::ServiceJobRetryStrategy
+      attr_accessor scheduled_at: ::Integer
       attr_accessor scheduling_priority: ::Integer
       attr_accessor service_request_payload: ::String
       attr_accessor service_job_type: ("SAGEMAKER_TRAINING")
@@ -770,10 +772,28 @@ module Aws::Batch
       SENSITIVE: []
     end
 
+    class FairshareCapacityUsage
+      attr_accessor capacity_unit: ::String
+      attr_accessor quantity: ::Float
+      SENSITIVE: []
+    end
+
+    class FairshareCapacityUtilization
+      attr_accessor share_identifier: ::String
+      attr_accessor capacity_usage: ::Array[Types::FairshareCapacityUsage]
+      SENSITIVE: []
+    end
+
     class FairsharePolicy
       attr_accessor share_decay_seconds: ::Integer
       attr_accessor compute_reservation: ::Integer
       attr_accessor share_distribution: ::Array[Types::ShareAttributes]
+      SENSITIVE: []
+    end
+
+    class FairshareUtilizationDetail
+      attr_accessor active_share_count: ::Integer
+      attr_accessor top_capacity_utilization: ::Array[Types::FairshareCapacityUtilization]
       SENSITIVE: []
     end
 
@@ -807,6 +827,7 @@ module Aws::Batch
 
     class GetJobQueueSnapshotResponse
       attr_accessor front_of_queue: Types::FrontOfQueueDetail
+      attr_accessor queue_utilization: Types::QueueSnapshotUtilizationDetail
       SENSITIVE: []
     end
 
@@ -817,6 +838,12 @@ module Aws::Batch
 
     class ImagePullSecret
       attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class JobCapacityUsageSummary
+      attr_accessor capacity_unit: ::String
+      attr_accessor quantity: ::Float
       SENSITIVE: []
     end
 
@@ -910,7 +937,10 @@ module Aws::Batch
       attr_accessor job_arn: ::String
       attr_accessor job_id: ::String
       attr_accessor job_name: ::String
+      attr_accessor capacity_usage: ::Array[Types::JobCapacityUsageSummary]
       attr_accessor created_at: ::Integer
+      attr_accessor scheduled_at: ::Integer
+      attr_accessor share_identifier: ::String
       attr_accessor status: ("SUBMITTED" | "PENDING" | "RUNNABLE" | "STARTING" | "RUNNING" | "SUCCEEDED" | "FAILED")
       attr_accessor status_reason: ::String
       attr_accessor started_at: ::Integer
@@ -1140,6 +1170,19 @@ module Aws::Batch
       SENSITIVE: []
     end
 
+    class QueueSnapshotCapacityUsage
+      attr_accessor capacity_unit: ::String
+      attr_accessor quantity: ::Float
+      SENSITIVE: []
+    end
+
+    class QueueSnapshotUtilizationDetail
+      attr_accessor total_capacity_usage: ::Array[Types::QueueSnapshotCapacityUsage]
+      attr_accessor fairshare_utilization: Types::FairshareUtilizationDetail
+      attr_accessor last_updated_at: ::Integer
+      SENSITIVE: []
+    end
+
     class RegisterJobDefinitionRequest
       attr_accessor job_definition_name: ::String
       attr_accessor type: ("container" | "multinode")
@@ -1237,6 +1280,18 @@ module Aws::Batch
       SENSITIVE: []
     end
 
+    class ServiceJobCapacityUsageDetail
+      attr_accessor capacity_unit: ::String
+      attr_accessor quantity: ::Float
+      SENSITIVE: []
+    end
+
+    class ServiceJobCapacityUsageSummary
+      attr_accessor capacity_unit: ::String
+      attr_accessor quantity: ::Float
+      SENSITIVE: []
+    end
+
     class ServiceJobEvaluateOnExit
       attr_accessor action: ("RETRY" | "EXIT")
       attr_accessor on_status_reason: ::String
@@ -1251,10 +1306,12 @@ module Aws::Batch
 
     class ServiceJobSummary
       attr_accessor latest_attempt: Types::LatestServiceJobAttempt
+      attr_accessor capacity_usage: ::Array[Types::ServiceJobCapacityUsageSummary]
       attr_accessor created_at: ::Integer
       attr_accessor job_arn: ::String
       attr_accessor job_id: ::String
       attr_accessor job_name: ::String
+      attr_accessor scheduled_at: ::Integer
       attr_accessor service_job_type: ("SAGEMAKER_TRAINING")
       attr_accessor share_identifier: ::String
       attr_accessor status: ("SUBMITTED" | "PENDING" | "RUNNABLE" | "SCHEDULED" | "STARTING" | "RUNNING" | "SUCCEEDED" | "FAILED")

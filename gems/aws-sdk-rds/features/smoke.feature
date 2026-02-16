@@ -20,30 +20,6 @@ Feature: Smoke tests for RDS
     Then I expect an error was raised
 
   @rds @smoke
-  Scenario: DescribeDBInstancesFailure
-    Given I create a 'Aws::RDS' client with config:
-      """
-{"region":"us-west-2","use_fips_endpoint":false,"use_dualstack_endpoint":false}
-      """
-    When I call the operation 'describe_db_instances' with params:
-      """
-{"db_instance_identifier":"fake-id"}
-      """
-    Then I expect an error was raised
-
-  @rds @smoke
-  Scenario: DescribeDBInstancesFailure
-    Given I create a 'Aws::RDS' client with config:
-      """
-{"region":"us-west-2","use_fips_endpoint":false,"use_dualstack_endpoint":false}
-      """
-    When I call the operation 'describe_db_instances' with params:
-      """
-{"db_instance_identifier":"fake-id"}
-      """
-    Then I expect an error was raised
-
-  @rds @smoke
   Scenario: DescribeDBEngineVersionsSuccess
     Given I create a 'Aws::RDS' client with config:
       """
@@ -56,16 +32,16 @@ Feature: Smoke tests for RDS
     Then I expect an error was not raised
 
   @rds @smoke
-  Scenario: DescribeDBEngineVersionsSuccess
+  Scenario: DescribeDBInstancesFailure
     Given I create a 'Aws::RDS' client with config:
       """
 {"region":"us-west-2","use_fips_endpoint":false,"use_dualstack_endpoint":false}
       """
-    When I call the operation 'describe_db_engine_versions' with params:
+    When I call the operation 'describe_db_instances' with params:
       """
-{}
+{"db_instance_identifier":"fake-id"}
       """
-    Then I expect an error was not raised
+    Then I expect an error was raised
 
   @rds @smoke
   Scenario: DescribeDBEngineVersionsSuccess
@@ -102,6 +78,30 @@ Feature: Smoke tests for RDS
 {}
       """
     Then I expect an error was not raised
+
+  @rds @smoke
+  Scenario: DescribeDBEngineVersionsSuccess
+    Given I create a 'Aws::RDS' client with config:
+      """
+{"region":"us-west-2","use_fips_endpoint":false,"use_dualstack_endpoint":false}
+      """
+    When I call the operation 'describe_db_engine_versions' with params:
+      """
+{}
+      """
+    Then I expect an error was not raised
+
+  @rds @smoke
+  Scenario: DescribeDBInstancesFailure
+    Given I create a 'Aws::RDS' client with config:
+      """
+{"region":"us-west-2","use_fips_endpoint":false,"use_dualstack_endpoint":false}
+      """
+    When I call the operation 'describe_db_instances' with params:
+      """
+{"db_instance_identifier":"fake-id"}
+      """
+    Then I expect an error was raised
 
   @rds @smoke
   Scenario: DescribeDBEngineVersionsSuccess

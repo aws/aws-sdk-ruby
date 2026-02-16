@@ -522,6 +522,8 @@ module Aws
                      ?enable_performance_insights: bool,
                      ?performance_insights_kms_key_id: ::String,
                      ?performance_insights_retention_period: ::Integer,
+                     ?backup_retention_period: ::Integer,
+                     ?preferred_backup_window: ::String,
                      ?engine_lifecycle_support: ::String,
                      ?tag_specifications: Array[
                        {

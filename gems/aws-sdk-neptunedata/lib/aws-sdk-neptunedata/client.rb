@@ -2982,6 +2982,21 @@ module Aws::Neptunedata
     #   loader cannot resume a failed load if any relationship file has had to
     #   be corrected, and must instead reload all the relationships.
     #
+    # @option params [Boolean] :edge_only_load
+    #   <b> <code>edgeOnlyLoad</code> </b>   –   A flag that controls file
+    #   processing order during bulk loading.
+    #
+    #   *Allowed values*: `"TRUE"`, `"FALSE"`.
+    #
+    #   *Default value*: `"FALSE"`.
+    #
+    #   When this parameter is set to "FALSE", the loader automatically
+    #   loads vertex files first, then edge files afterwards. It does this by
+    #   first scanning all files to determine their contents (vertices or
+    #   edges). When this parameter is set to "TRUE", the loader skips the
+    #   initial scanning phase and immediately loads all files in the order
+    #   they appear.
+    #
     # @return [Types::StartLoaderJobOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartLoaderJobOutput#status #status} => String
@@ -3004,6 +3019,7 @@ module Aws::Neptunedata
     #     queue_request: false,
     #     dependencies: ["String"],
     #     user_provided_edge_ids: false,
+    #     edge_only_load: false,
     #   })
     #
     # @example Response structure
@@ -3427,7 +3443,7 @@ module Aws::Neptunedata
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-neptunedata'
-      context[:gem_version] = '1.38.0'
+      context[:gem_version] = '1.39.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

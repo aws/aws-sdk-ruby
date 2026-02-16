@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.307.0 (2026-02-10)
+------------------
+
+* Feature - This release adds backup configuration for RDS and Aurora restores, letting customers set backup retention period and preferred backup window during restore. It also enables viewing backup settings when describing snapshots or automated backups for instances and clusters.
+
 1.306.0 (2026-01-16)
 ------------------
 

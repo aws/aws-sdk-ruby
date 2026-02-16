@@ -9,7 +9,11 @@ gem 'base64'
 gem 'bigdecimal'
 gem 'csv'
 gem 'http-2'
-gem 'irb'
+if defined?(JRUBY_VERSION)
+  gem 'irb', '< 1.17.0'
+else
+  gem 'irb'
+end
 gem 'jmespath'
 gem 'jruby-openssl' if defined?(JRUBY_VERSION)
 gem 'rdoc'

@@ -35,6 +35,15 @@ module Aws::Kafka
   # * {ServiceUnavailableException}
   # * {TooManyRequestsException}
   # * {UnauthorizedException}
+  # * {TopicExistsException}
+  # * {ClusterConnectivityException}
+  # * {KafkaTimeoutException}
+  # * {UnknownTopicOrPartitionException}
+  # * {ControllerMovedException}
+  # * {NotControllerException}
+  # * {ReassignmentInProgressException}
+  # * {GroupSubscribedToTopicException}
+  # * {KafkaRequestException}
   #
   # Additionally, error classes are dynamically generated for service errors based on the error code
   # if they are not defined above.
@@ -187,6 +196,186 @@ module Aws::Kafka
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::Kafka::Types::UnauthorizedException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def invalid_parameter
+        @data[:invalid_parameter]
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class TopicExistsException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Kafka::Types::TopicExistsException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def invalid_parameter
+        @data[:invalid_parameter]
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class ClusterConnectivityException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Kafka::Types::ClusterConnectivityException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def invalid_parameter
+        @data[:invalid_parameter]
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class KafkaTimeoutException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Kafka::Types::KafkaTimeoutException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def invalid_parameter
+        @data[:invalid_parameter]
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class UnknownTopicOrPartitionException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Kafka::Types::UnknownTopicOrPartitionException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def invalid_parameter
+        @data[:invalid_parameter]
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class ControllerMovedException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Kafka::Types::ControllerMovedException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def invalid_parameter
+        @data[:invalid_parameter]
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class NotControllerException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Kafka::Types::NotControllerException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def invalid_parameter
+        @data[:invalid_parameter]
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class ReassignmentInProgressException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Kafka::Types::ReassignmentInProgressException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def invalid_parameter
+        @data[:invalid_parameter]
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class GroupSubscribedToTopicException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Kafka::Types::GroupSubscribedToTopicException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def invalid_parameter
+        @data[:invalid_parameter]
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class KafkaRequestException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Kafka::Types::KafkaRequestException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

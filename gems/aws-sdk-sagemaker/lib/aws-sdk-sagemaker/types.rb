@@ -5445,6 +5445,53 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # Defines the configuration for attaching an Amazon FSx for Lustre file
+    # system to instances in a SageMaker HyperPod cluster instance group.
+    #
+    # @!attribute [rw] dns_name
+    #   The DNS name of the Amazon FSx for Lustre file system.
+    #   @return [String]
+    #
+    # @!attribute [rw] mount_name
+    #   The mount name of the Amazon FSx for Lustre file system.
+    #   @return [String]
+    #
+    # @!attribute [rw] mount_path
+    #   The local path where the Amazon FSx for Lustre file system is
+    #   mounted on instances.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ClusterFsxLustreConfig AWS API Documentation
+    #
+    class ClusterFsxLustreConfig < Struct.new(
+      :dns_name,
+      :mount_name,
+      :mount_path)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Defines the configuration for attaching an Amazon FSx for OpenZFS file
+    # system to instances in a SageMaker HyperPod cluster instance group.
+    #
+    # @!attribute [rw] dns_name
+    #   The DNS name of the Amazon FSx for OpenZFS file system.
+    #   @return [String]
+    #
+    # @!attribute [rw] mount_path
+    #   The local path where the Amazon FSx for OpenZFS file system is
+    #   mounted on instances.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ClusterFsxOpenZfsConfig AWS API Documentation
+    #
+    class ClusterFsxOpenZfsConfig < Struct.new(
+      :dns_name,
+      :mount_path)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Details of an instance group in a SageMaker HyperPod cluster.
     #
     # @!attribute [rw] current_count
@@ -5610,6 +5657,10 @@ module Aws::SageMaker
     #   The configuration to use when updating the AMI versions.
     #   @return [Types::DeploymentConfiguration]
     #
+    # @!attribute [rw] slurm_config
+    #   The Slurm configuration for the instance group.
+    #   @return [Types::ClusterSlurmConfigDetails]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ClusterInstanceGroupDetails AWS API Documentation
     #
     class ClusterInstanceGroupDetails < Struct.new(
@@ -5635,7 +5686,8 @@ module Aws::SageMaker
       :capacity_requirements,
       :target_state_count,
       :software_update_status,
-      :active_software_update_config)
+      :active_software_update_config,
+      :slurm_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5791,6 +5843,10 @@ module Aws::SageMaker
     #   for nodes in this instance group.
     #   @return [Types::ClusterKubernetesConfig]
     #
+    # @!attribute [rw] slurm_config
+    #   Specifies the Slurm configuration for the instance group.
+    #   @return [Types::ClusterSlurmConfig]
+    #
     # @!attribute [rw] capacity_requirements
     #   Specifies the capacity requirements for the instance group.
     #   @return [Types::ClusterCapacityRequirements]
@@ -5812,6 +5868,7 @@ module Aws::SageMaker
       :scheduled_update_config,
       :image_id,
       :kubernetes_config,
+      :slurm_config,
       :capacity_requirements)
       SENSITIVE = []
       include Aws::Structure
@@ -5879,16 +5936,32 @@ module Aws::SageMaker
     #   and mounted to `/opt/sagemaker`.
     #   @return [Types::ClusterEbsVolumeConfig]
     #
+    # @!attribute [rw] fsx_lustre_config
+    #   Defines the configuration for attaching an Amazon FSx for Lustre
+    #   file system to the instances in the SageMaker HyperPod cluster
+    #   instance group.
+    #   @return [Types::ClusterFsxLustreConfig]
+    #
+    # @!attribute [rw] fsx_open_zfs_config
+    #   Defines the configuration for attaching an Amazon FSx for OpenZFS
+    #   file system to the instances in the SageMaker HyperPod cluster
+    #   instance group.
+    #   @return [Types::ClusterFsxOpenZfsConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ClusterInstanceStorageConfig AWS API Documentation
     #
     class ClusterInstanceStorageConfig < Struct.new(
       :ebs_volume_config,
+      :fsx_lustre_config,
+      :fsx_open_zfs_config,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
       include Aws::Structure::Union
 
       class EbsVolumeConfig < ClusterInstanceStorageConfig; end
+      class FsxLustreConfig < ClusterInstanceStorageConfig; end
+      class FsxOpenZfsConfig < ClusterInstanceStorageConfig; end
       class Unknown < ClusterInstanceStorageConfig; end
     end
 
@@ -6264,10 +6337,16 @@ module Aws::SageMaker
     #   HyperPod cluster.
     #   @return [Types::ClusterOrchestratorEksConfig]
     #
+    # @!attribute [rw] slurm
+    #   The Slurm orchestrator configuration for the SageMaker HyperPod
+    #   cluster.
+    #   @return [Types::ClusterOrchestratorSlurmConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ClusterOrchestrator AWS API Documentation
     #
     class ClusterOrchestrator < Struct.new(
-      :eks)
+      :eks,
+      :slurm)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6284,6 +6363,22 @@ module Aws::SageMaker
     #
     class ClusterOrchestratorEksConfig < Struct.new(
       :cluster_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration settings for the Slurm orchestrator used with the
+    # SageMaker HyperPod cluster.
+    #
+    # @!attribute [rw] slurm_config_strategy
+    #   The strategy for managing partitions for the Slurm configuration.
+    #   Valid values are `Managed`, `Overwrite`, and `Merge`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ClusterOrchestratorSlurmConfig AWS API Documentation
+    #
+    class ClusterOrchestratorSlurmConfig < Struct.new(
+      :slurm_config_strategy)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6549,6 +6644,50 @@ module Aws::SageMaker
       :last_modified_time,
       :status,
       :cluster_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The Slurm configuration for an instance group in a SageMaker HyperPod
+    # cluster.
+    #
+    # @!attribute [rw] node_type
+    #   The type of Slurm node for the instance group. Valid values are
+    #   `Controller`, `Worker`, and `Login`.
+    #   @return [String]
+    #
+    # @!attribute [rw] partition_names
+    #   The list of Slurm partition names that the instance group belongs
+    #   to.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ClusterSlurmConfig AWS API Documentation
+    #
+    class ClusterSlurmConfig < Struct.new(
+      :node_type,
+      :partition_names)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The Slurm configuration details for an instance group in a SageMaker
+    # HyperPod cluster.
+    #
+    # @!attribute [rw] node_type
+    #   The type of Slurm node for the instance group. Valid values are
+    #   `Controller`, `Worker`, and `Login`.
+    #   @return [String]
+    #
+    # @!attribute [rw] partition_names
+    #   The list of Slurm partition names that the instance group belongs
+    #   to.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ClusterSlurmConfigDetails AWS API Documentation
+    #
+    class ClusterSlurmConfigDetails < Struct.new(
+      :node_type,
+      :partition_names)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8142,8 +8281,15 @@ module Aws::SageMaker
     #
     # @!attribute [rw] orchestrator
     #   The type of orchestrator to use for the SageMaker HyperPod cluster.
-    #   Currently, the only supported value is `"eks"`, which is to use an
-    #   Amazon Elastic Kubernetes Service cluster as the orchestrator.
+    #   Currently, supported values are `"Eks"` and `"Slurm"`, which is to
+    #   use an Amazon Elastic Kubernetes Service or Slurm cluster as the
+    #   orchestrator.
+    #
+    #   <note markdown="1"> If you specify the `Orchestrator` field, you must provide exactly
+    #   one orchestrator configuration: either `Eks` or `Slurm`. Specifying
+    #   both or providing an empty configuration returns a validation error.
+    #
+    #    </note>
     #   @return [Types::ClusterOrchestrator]
     #
     # @!attribute [rw] node_recovery
@@ -52588,6 +52734,10 @@ module Aws::SageMaker
     #   or disable automatic node scaling.
     #   @return [Types::ClusterAutoScalingConfig]
     #
+    # @!attribute [rw] orchestrator
+    #   The type of orchestrator used for the SageMaker HyperPod cluster.
+    #   @return [Types::ClusterOrchestrator]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateClusterRequest AWS API Documentation
     #
     class UpdateClusterRequest < Struct.new(
@@ -52599,7 +52749,8 @@ module Aws::SageMaker
       :instance_groups_to_delete,
       :node_provisioning_mode,
       :cluster_role,
-      :auto_scaling)
+      :auto_scaling,
+      :orchestrator)
       SENSITIVE = []
       include Aws::Structure
     end

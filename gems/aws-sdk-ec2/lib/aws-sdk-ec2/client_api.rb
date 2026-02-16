@@ -220,6 +220,8 @@ module Aws::EC2
     AvailabilityZone = Shapes::StructureShape.new(name: 'AvailabilityZone')
     AvailabilityZoneAddress = Shapes::StructureShape.new(name: 'AvailabilityZoneAddress')
     AvailabilityZoneAddresses = Shapes::ListShape.new(name: 'AvailabilityZoneAddresses')
+    AvailabilityZoneGeography = Shapes::StructureShape.new(name: 'AvailabilityZoneGeography')
+    AvailabilityZoneGeographyList = Shapes::ListShape.new(name: 'AvailabilityZoneGeographyList')
     AvailabilityZoneId = Shapes::StringShape.new(name: 'AvailabilityZoneId')
     AvailabilityZoneIdStringList = Shapes::ListShape.new(name: 'AvailabilityZoneIdStringList')
     AvailabilityZoneList = Shapes::ListShape.new(name: 'AvailabilityZoneList')
@@ -229,6 +231,8 @@ module Aws::EC2
     AvailabilityZoneOptInStatus = Shapes::StringShape.new(name: 'AvailabilityZoneOptInStatus')
     AvailabilityZoneState = Shapes::StringShape.new(name: 'AvailabilityZoneState')
     AvailabilityZoneStringList = Shapes::ListShape.new(name: 'AvailabilityZoneStringList')
+    AvailabilityZoneSubGeography = Shapes::StructureShape.new(name: 'AvailabilityZoneSubGeography')
+    AvailabilityZoneSubGeographyList = Shapes::ListShape.new(name: 'AvailabilityZoneSubGeographyList')
     AvailableCapacity = Shapes::StructureShape.new(name: 'AvailableCapacity')
     AvailableInstanceCapacityList = Shapes::ListShape.new(name: 'AvailableInstanceCapacityList')
     BandwidthWeightingType = Shapes::StringShape.new(name: 'BandwidthWeightingType')
@@ -607,6 +611,10 @@ module Aws::EC2
     CreateRouteServerResult = Shapes::StructureShape.new(name: 'CreateRouteServerResult')
     CreateRouteTableRequest = Shapes::StructureShape.new(name: 'CreateRouteTableRequest')
     CreateRouteTableResult = Shapes::StructureShape.new(name: 'CreateRouteTableResult')
+    CreateSecondaryNetworkRequest = Shapes::StructureShape.new(name: 'CreateSecondaryNetworkRequest')
+    CreateSecondaryNetworkResult = Shapes::StructureShape.new(name: 'CreateSecondaryNetworkResult')
+    CreateSecondarySubnetRequest = Shapes::StructureShape.new(name: 'CreateSecondarySubnetRequest')
+    CreateSecondarySubnetResult = Shapes::StructureShape.new(name: 'CreateSecondarySubnetResult')
     CreateSecurityGroupRequest = Shapes::StructureShape.new(name: 'CreateSecurityGroupRequest')
     CreateSecurityGroupResult = Shapes::StructureShape.new(name: 'CreateSecurityGroupResult')
     CreateSnapshotRequest = Shapes::StructureShape.new(name: 'CreateSnapshotRequest')
@@ -841,6 +849,10 @@ module Aws::EC2
     DeleteRouteServerRequest = Shapes::StructureShape.new(name: 'DeleteRouteServerRequest')
     DeleteRouteServerResult = Shapes::StructureShape.new(name: 'DeleteRouteServerResult')
     DeleteRouteTableRequest = Shapes::StructureShape.new(name: 'DeleteRouteTableRequest')
+    DeleteSecondaryNetworkRequest = Shapes::StructureShape.new(name: 'DeleteSecondaryNetworkRequest')
+    DeleteSecondaryNetworkResult = Shapes::StructureShape.new(name: 'DeleteSecondaryNetworkResult')
+    DeleteSecondarySubnetRequest = Shapes::StructureShape.new(name: 'DeleteSecondarySubnetRequest')
+    DeleteSecondarySubnetResult = Shapes::StructureShape.new(name: 'DeleteSecondarySubnetResult')
     DeleteSecurityGroupRequest = Shapes::StructureShape.new(name: 'DeleteSecurityGroupRequest')
     DeleteSecurityGroupResult = Shapes::StructureShape.new(name: 'DeleteSecurityGroupResult')
     DeleteSnapshotRequest = Shapes::StructureShape.new(name: 'DeleteSnapshotRequest')
@@ -1234,6 +1246,15 @@ module Aws::EC2
     DescribeScheduledInstanceAvailabilityResult = Shapes::StructureShape.new(name: 'DescribeScheduledInstanceAvailabilityResult')
     DescribeScheduledInstancesRequest = Shapes::StructureShape.new(name: 'DescribeScheduledInstancesRequest')
     DescribeScheduledInstancesResult = Shapes::StructureShape.new(name: 'DescribeScheduledInstancesResult')
+    DescribeSecondaryInterfacesMaxResults = Shapes::IntegerShape.new(name: 'DescribeSecondaryInterfacesMaxResults')
+    DescribeSecondaryInterfacesRequest = Shapes::StructureShape.new(name: 'DescribeSecondaryInterfacesRequest')
+    DescribeSecondaryInterfacesResult = Shapes::StructureShape.new(name: 'DescribeSecondaryInterfacesResult')
+    DescribeSecondaryNetworksMaxResults = Shapes::IntegerShape.new(name: 'DescribeSecondaryNetworksMaxResults')
+    DescribeSecondaryNetworksRequest = Shapes::StructureShape.new(name: 'DescribeSecondaryNetworksRequest')
+    DescribeSecondaryNetworksResult = Shapes::StructureShape.new(name: 'DescribeSecondaryNetworksResult')
+    DescribeSecondarySubnetsMaxResults = Shapes::IntegerShape.new(name: 'DescribeSecondarySubnetsMaxResults')
+    DescribeSecondarySubnetsRequest = Shapes::StructureShape.new(name: 'DescribeSecondarySubnetsRequest')
+    DescribeSecondarySubnetsResult = Shapes::StructureShape.new(name: 'DescribeSecondarySubnetsResult')
     DescribeSecurityGroupReferencesRequest = Shapes::StructureShape.new(name: 'DescribeSecurityGroupReferencesRequest')
     DescribeSecurityGroupReferencesResult = Shapes::StructureShape.new(name: 'DescribeSecurityGroupReferencesResult')
     DescribeSecurityGroupRulesMaxResults = Shapes::IntegerShape.new(name: 'DescribeSecurityGroupRulesMaxResults')
@@ -2136,6 +2157,15 @@ module Aws::EC2
     InstanceRequirements = Shapes::StructureShape.new(name: 'InstanceRequirements')
     InstanceRequirementsRequest = Shapes::StructureShape.new(name: 'InstanceRequirementsRequest')
     InstanceRequirementsWithMetadataRequest = Shapes::StructureShape.new(name: 'InstanceRequirementsWithMetadataRequest')
+    InstanceSecondaryInterface = Shapes::StructureShape.new(name: 'InstanceSecondaryInterface')
+    InstanceSecondaryInterfaceAttachment = Shapes::StructureShape.new(name: 'InstanceSecondaryInterfaceAttachment')
+    InstanceSecondaryInterfaceList = Shapes::ListShape.new(name: 'InstanceSecondaryInterfaceList')
+    InstanceSecondaryInterfacePrivateIpAddress = Shapes::StructureShape.new(name: 'InstanceSecondaryInterfacePrivateIpAddress')
+    InstanceSecondaryInterfacePrivateIpAddressList = Shapes::ListShape.new(name: 'InstanceSecondaryInterfacePrivateIpAddressList')
+    InstanceSecondaryInterfacePrivateIpAddressListRequest = Shapes::ListShape.new(name: 'InstanceSecondaryInterfacePrivateIpAddressListRequest')
+    InstanceSecondaryInterfacePrivateIpAddressRequest = Shapes::StructureShape.new(name: 'InstanceSecondaryInterfacePrivateIpAddressRequest')
+    InstanceSecondaryInterfaceSpecificationListRequest = Shapes::ListShape.new(name: 'InstanceSecondaryInterfaceSpecificationListRequest')
+    InstanceSecondaryInterfaceSpecificationRequest = Shapes::StructureShape.new(name: 'InstanceSecondaryInterfaceSpecificationRequest')
     InstanceSet = Shapes::ListShape.new(name: 'InstanceSet')
     InstanceSpecification = Shapes::StructureShape.new(name: 'InstanceSpecification')
     InstanceState = Shapes::StructureShape.new(name: 'InstanceState')
@@ -2318,6 +2348,7 @@ module Aws::EC2
     IpamSet = Shapes::ListShape.new(name: 'IpamSet')
     IpamState = Shapes::StringShape.new(name: 'IpamState')
     IpamTier = Shapes::StringShape.new(name: 'IpamTier')
+    Ipv4AddressesPerSecondaryInterface = Shapes::IntegerShape.new(name: 'Ipv4AddressesPerSecondaryInterface')
     Ipv4PoolCoipId = Shapes::StringShape.new(name: 'Ipv4PoolCoipId')
     Ipv4PoolEc2Id = Shapes::StringShape.new(name: 'Ipv4PoolEc2Id')
     Ipv4PrefixList = Shapes::ListShape.new(name: 'Ipv4PrefixList')
@@ -2413,6 +2444,10 @@ module Aws::EC2
     LaunchTemplateInstanceNetworkInterfaceSpecificationList = Shapes::ListShape.new(name: 'LaunchTemplateInstanceNetworkInterfaceSpecificationList')
     LaunchTemplateInstanceNetworkInterfaceSpecificationRequest = Shapes::StructureShape.new(name: 'LaunchTemplateInstanceNetworkInterfaceSpecificationRequest')
     LaunchTemplateInstanceNetworkInterfaceSpecificationRequestList = Shapes::ListShape.new(name: 'LaunchTemplateInstanceNetworkInterfaceSpecificationRequestList')
+    LaunchTemplateInstanceSecondaryInterfaceSpecification = Shapes::StructureShape.new(name: 'LaunchTemplateInstanceSecondaryInterfaceSpecification')
+    LaunchTemplateInstanceSecondaryInterfaceSpecificationList = Shapes::ListShape.new(name: 'LaunchTemplateInstanceSecondaryInterfaceSpecificationList')
+    LaunchTemplateInstanceSecondaryInterfaceSpecificationRequest = Shapes::StructureShape.new(name: 'LaunchTemplateInstanceSecondaryInterfaceSpecificationRequest')
+    LaunchTemplateInstanceSecondaryInterfaceSpecificationRequestList = Shapes::ListShape.new(name: 'LaunchTemplateInstanceSecondaryInterfaceSpecificationRequestList')
     LaunchTemplateLicenseConfiguration = Shapes::StructureShape.new(name: 'LaunchTemplateLicenseConfiguration')
     LaunchTemplateLicenseConfigurationRequest = Shapes::StructureShape.new(name: 'LaunchTemplateLicenseConfigurationRequest')
     LaunchTemplateLicenseList = Shapes::ListShape.new(name: 'LaunchTemplateLicenseList')
@@ -2542,6 +2577,7 @@ module Aws::EC2
     MaximumEnaQueueCountPerInterface = Shapes::IntegerShape.new(name: 'MaximumEnaQueueCountPerInterface')
     MaximumIops = Shapes::IntegerShape.new(name: 'MaximumIops')
     MaximumNetworkCards = Shapes::IntegerShape.new(name: 'MaximumNetworkCards')
+    MaximumSecondaryNetworkInterfaces = Shapes::IntegerShape.new(name: 'MaximumSecondaryNetworkInterfaces')
     MaximumThroughputInMBps = Shapes::FloatShape.new(name: 'MaximumThroughputInMBps')
     MediaAcceleratorInfo = Shapes::StructureShape.new(name: 'MediaAcceleratorInfo')
     MediaDeviceCount = Shapes::IntegerShape.new(name: 'MediaDeviceCount')
@@ -2757,6 +2793,7 @@ module Aws::EC2
     NatGatewayList = Shapes::ListShape.new(name: 'NatGatewayList')
     NatGatewayState = Shapes::StringShape.new(name: 'NatGatewayState')
     NativeApplicationOidcOptions = Shapes::StructureShape.new(name: 'NativeApplicationOidcOptions')
+    NestedVirtualizationSpecification = Shapes::StringShape.new(name: 'NestedVirtualizationSpecification')
     NetmaskLength = Shapes::IntegerShape.new(name: 'NetmaskLength')
     NetworkAcl = Shapes::StructureShape.new(name: 'NetworkAcl')
     NetworkAclAssociation = Shapes::StructureShape.new(name: 'NetworkAclAssociation')
@@ -2919,6 +2956,7 @@ module Aws::EC2
     PlacementGroupInfo = Shapes::StructureShape.new(name: 'PlacementGroupInfo')
     PlacementGroupList = Shapes::ListShape.new(name: 'PlacementGroupList')
     PlacementGroupName = Shapes::StringShape.new(name: 'PlacementGroupName')
+    PlacementGroupNameWithResolver = Shapes::StringShape.new(name: 'PlacementGroupNameWithResolver')
     PlacementGroupState = Shapes::StringShape.new(name: 'PlacementGroupState')
     PlacementGroupStrategy = Shapes::StringShape.new(name: 'PlacementGroupStrategy')
     PlacementGroupStrategyList = Shapes::ListShape.new(name: 'PlacementGroupStrategyList')
@@ -3028,6 +3066,8 @@ module Aws::EC2
     RecurringChargesList = Shapes::ListShape.new(name: 'RecurringChargesList')
     ReferencedSecurityGroup = Shapes::StructureShape.new(name: 'ReferencedSecurityGroup')
     Region = Shapes::StructureShape.new(name: 'Region')
+    RegionGeography = Shapes::StructureShape.new(name: 'RegionGeography')
+    RegionGeographyList = Shapes::ListShape.new(name: 'RegionGeographyList')
     RegionList = Shapes::ListShape.new(name: 'RegionList')
     RegionNameStringList = Shapes::ListShape.new(name: 'RegionNameStringList')
     RegionNames = Shapes::ListShape.new(name: 'RegionNames')
@@ -3294,6 +3334,39 @@ module Aws::EC2
     SearchTransitGatewayMulticastGroupsResult = Shapes::StructureShape.new(name: 'SearchTransitGatewayMulticastGroupsResult')
     SearchTransitGatewayRoutesRequest = Shapes::StructureShape.new(name: 'SearchTransitGatewayRoutesRequest')
     SearchTransitGatewayRoutesResult = Shapes::StructureShape.new(name: 'SearchTransitGatewayRoutesResult')
+    SecondaryInterface = Shapes::StructureShape.new(name: 'SecondaryInterface')
+    SecondaryInterfaceAttachment = Shapes::StructureShape.new(name: 'SecondaryInterfaceAttachment')
+    SecondaryInterfaceId = Shapes::StringShape.new(name: 'SecondaryInterfaceId')
+    SecondaryInterfaceIdList = Shapes::ListShape.new(name: 'SecondaryInterfaceIdList')
+    SecondaryInterfaceIpv4Address = Shapes::StructureShape.new(name: 'SecondaryInterfaceIpv4Address')
+    SecondaryInterfaceIpv4AddressList = Shapes::ListShape.new(name: 'SecondaryInterfaceIpv4AddressList')
+    SecondaryInterfaceList = Shapes::ListShape.new(name: 'SecondaryInterfaceList')
+    SecondaryInterfacePrivateIpAddressSpecification = Shapes::StructureShape.new(name: 'SecondaryInterfacePrivateIpAddressSpecification')
+    SecondaryInterfacePrivateIpAddressSpecificationList = Shapes::ListShape.new(name: 'SecondaryInterfacePrivateIpAddressSpecificationList')
+    SecondaryInterfacePrivateIpAddressSpecificationListRequest = Shapes::ListShape.new(name: 'SecondaryInterfacePrivateIpAddressSpecificationListRequest')
+    SecondaryInterfacePrivateIpAddressSpecificationRequest = Shapes::StructureShape.new(name: 'SecondaryInterfacePrivateIpAddressSpecificationRequest')
+    SecondaryInterfaceStatus = Shapes::StringShape.new(name: 'SecondaryInterfaceStatus')
+    SecondaryInterfaceType = Shapes::StringShape.new(name: 'SecondaryInterfaceType')
+    SecondaryNetwork = Shapes::StructureShape.new(name: 'SecondaryNetwork')
+    SecondaryNetworkCidrAssociationId = Shapes::StringShape.new(name: 'SecondaryNetworkCidrAssociationId')
+    SecondaryNetworkCidrBlockAssociationState = Shapes::StringShape.new(name: 'SecondaryNetworkCidrBlockAssociationState')
+    SecondaryNetworkId = Shapes::StringShape.new(name: 'SecondaryNetworkId')
+    SecondaryNetworkIdList = Shapes::ListShape.new(name: 'SecondaryNetworkIdList')
+    SecondaryNetworkIpv4CidrBlockAssociation = Shapes::StructureShape.new(name: 'SecondaryNetworkIpv4CidrBlockAssociation')
+    SecondaryNetworkIpv4CidrBlockAssociationList = Shapes::ListShape.new(name: 'SecondaryNetworkIpv4CidrBlockAssociationList')
+    SecondaryNetworkList = Shapes::ListShape.new(name: 'SecondaryNetworkList')
+    SecondaryNetworkState = Shapes::StringShape.new(name: 'SecondaryNetworkState')
+    SecondaryNetworkSupportedFlag = Shapes::BooleanShape.new(name: 'SecondaryNetworkSupportedFlag')
+    SecondaryNetworkType = Shapes::StringShape.new(name: 'SecondaryNetworkType')
+    SecondarySubnet = Shapes::StructureShape.new(name: 'SecondarySubnet')
+    SecondarySubnetCidrAssociationId = Shapes::StringShape.new(name: 'SecondarySubnetCidrAssociationId')
+    SecondarySubnetCidrBlockAssociationState = Shapes::StringShape.new(name: 'SecondarySubnetCidrBlockAssociationState')
+    SecondarySubnetId = Shapes::StringShape.new(name: 'SecondarySubnetId')
+    SecondarySubnetIdList = Shapes::ListShape.new(name: 'SecondarySubnetIdList')
+    SecondarySubnetIpv4CidrBlockAssociation = Shapes::StructureShape.new(name: 'SecondarySubnetIpv4CidrBlockAssociation')
+    SecondarySubnetIpv4CidrBlockAssociationList = Shapes::ListShape.new(name: 'SecondarySubnetIpv4CidrBlockAssociationList')
+    SecondarySubnetList = Shapes::ListShape.new(name: 'SecondarySubnetList')
+    SecondarySubnetState = Shapes::StringShape.new(name: 'SecondarySubnetState')
     SecretArn = Shapes::StringShape.new(name: 'SecretArn')
     SecurityGroup = Shapes::StructureShape.new(name: 'SecurityGroup')
     SecurityGroupForVpc = Shapes::StructureShape.new(name: 'SecurityGroupForVpc')
@@ -4672,6 +4745,8 @@ module Aws::EC2
     AvailabilityZone.add_member(:parent_zone_name, Shapes::ShapeRef.new(shape: String, location_name: "parentZoneName"))
     AvailabilityZone.add_member(:parent_zone_id, Shapes::ShapeRef.new(shape: String, location_name: "parentZoneId"))
     AvailabilityZone.add_member(:group_long_name, Shapes::ShapeRef.new(shape: String, location_name: "groupLongName"))
+    AvailabilityZone.add_member(:geography, Shapes::ShapeRef.new(shape: AvailabilityZoneGeographyList, location_name: "geographySet"))
+    AvailabilityZone.add_member(:sub_geography, Shapes::ShapeRef.new(shape: AvailabilityZoneSubGeographyList, location_name: "subGeographySet"))
     AvailabilityZone.add_member(:state, Shapes::ShapeRef.new(shape: AvailabilityZoneState, location_name: "zoneState"))
     AvailabilityZone.struct_class = Types::AvailabilityZone
 
@@ -4681,6 +4756,11 @@ module Aws::EC2
     AvailabilityZoneAddress.struct_class = Types::AvailabilityZoneAddress
 
     AvailabilityZoneAddresses.member = Shapes::ShapeRef.new(shape: AvailabilityZoneAddress, location_name: "AvailabilityZoneAddress")
+
+    AvailabilityZoneGeography.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
+    AvailabilityZoneGeography.struct_class = Types::AvailabilityZoneGeography
+
+    AvailabilityZoneGeographyList.member = Shapes::ShapeRef.new(shape: AvailabilityZoneGeography, location_name: "item")
 
     AvailabilityZoneIdStringList.member = Shapes::ShapeRef.new(shape: String, location_name: "AvailabilityZoneId")
 
@@ -4692,6 +4772,11 @@ module Aws::EC2
     AvailabilityZoneMessageList.member = Shapes::ShapeRef.new(shape: AvailabilityZoneMessage, location_name: "item")
 
     AvailabilityZoneStringList.member = Shapes::ShapeRef.new(shape: String, location_name: "AvailabilityZone")
+
+    AvailabilityZoneSubGeography.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
+    AvailabilityZoneSubGeography.struct_class = Types::AvailabilityZoneSubGeography
+
+    AvailabilityZoneSubGeographyList.member = Shapes::ShapeRef.new(shape: AvailabilityZoneSubGeography, location_name: "item")
 
     AvailableCapacity.add_member(:available_instance_capacity, Shapes::ShapeRef.new(shape: AvailableInstanceCapacityList, location_name: "availableInstanceCapacity"))
     AvailableCapacity.add_member(:available_v_cpus, Shapes::ShapeRef.new(shape: Integer, location_name: "availableVCpus"))
@@ -5500,11 +5585,13 @@ module Aws::EC2
     CpuOptions.add_member(:core_count, Shapes::ShapeRef.new(shape: Integer, location_name: "coreCount"))
     CpuOptions.add_member(:threads_per_core, Shapes::ShapeRef.new(shape: Integer, location_name: "threadsPerCore"))
     CpuOptions.add_member(:amd_sev_snp, Shapes::ShapeRef.new(shape: AmdSevSnpSpecification, location_name: "amdSevSnp"))
+    CpuOptions.add_member(:nested_virtualization, Shapes::ShapeRef.new(shape: NestedVirtualizationSpecification, location_name: "nestedVirtualization"))
     CpuOptions.struct_class = Types::CpuOptions
 
     CpuOptionsRequest.add_member(:core_count, Shapes::ShapeRef.new(shape: Integer, location_name: "CoreCount"))
     CpuOptionsRequest.add_member(:threads_per_core, Shapes::ShapeRef.new(shape: Integer, location_name: "ThreadsPerCore"))
     CpuOptionsRequest.add_member(:amd_sev_snp, Shapes::ShapeRef.new(shape: AmdSevSnpSpecification, location_name: "AmdSevSnp"))
+    CpuOptionsRequest.add_member(:nested_virtualization, Shapes::ShapeRef.new(shape: NestedVirtualizationSpecification, location_name: "NestedVirtualization"))
     CpuOptionsRequest.struct_class = Types::CpuOptionsRequest
 
     CpuPerformanceFactor.add_member(:references, Shapes::ShapeRef.new(shape: PerformanceFactorReferenceSet, location_name: "referenceSet"))
@@ -6293,6 +6380,30 @@ module Aws::EC2
     CreateRouteTableResult.add_member(:route_table, Shapes::ShapeRef.new(shape: RouteTable, location_name: "routeTable"))
     CreateRouteTableResult.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken"))
     CreateRouteTableResult.struct_class = Types::CreateRouteTableResult
+
+    CreateSecondaryNetworkRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
+    CreateSecondaryNetworkRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    CreateSecondaryNetworkRequest.add_member(:ipv_4_cidr_block, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Ipv4CidrBlock"))
+    CreateSecondaryNetworkRequest.add_member(:network_type, Shapes::ShapeRef.new(shape: SecondaryNetworkType, required: true, location_name: "NetworkType"))
+    CreateSecondaryNetworkRequest.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecification"))
+    CreateSecondaryNetworkRequest.struct_class = Types::CreateSecondaryNetworkRequest
+
+    CreateSecondaryNetworkResult.add_member(:secondary_network, Shapes::ShapeRef.new(shape: SecondaryNetwork, location_name: "secondaryNetwork"))
+    CreateSecondaryNetworkResult.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken"))
+    CreateSecondaryNetworkResult.struct_class = Types::CreateSecondaryNetworkResult
+
+    CreateSecondarySubnetRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
+    CreateSecondarySubnetRequest.add_member(:availability_zone, Shapes::ShapeRef.new(shape: AvailabilityZoneName, location_name: "AvailabilityZone"))
+    CreateSecondarySubnetRequest.add_member(:availability_zone_id, Shapes::ShapeRef.new(shape: AvailabilityZoneId, location_name: "AvailabilityZoneId"))
+    CreateSecondarySubnetRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    CreateSecondarySubnetRequest.add_member(:ipv_4_cidr_block, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Ipv4CidrBlock"))
+    CreateSecondarySubnetRequest.add_member(:secondary_network_id, Shapes::ShapeRef.new(shape: SecondaryNetworkId, required: true, location_name: "SecondaryNetworkId"))
+    CreateSecondarySubnetRequest.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecification"))
+    CreateSecondarySubnetRequest.struct_class = Types::CreateSecondarySubnetRequest
+
+    CreateSecondarySubnetResult.add_member(:secondary_subnet, Shapes::ShapeRef.new(shape: SecondarySubnet, location_name: "secondarySubnet"))
+    CreateSecondarySubnetResult.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken"))
+    CreateSecondarySubnetResult.struct_class = Types::CreateSecondarySubnetResult
 
     CreateSecurityGroupRequest.add_member(:description, Shapes::ShapeRef.new(shape: String, required: true, location_name: "GroupDescription"))
     CreateSecurityGroupRequest.add_member(:group_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "GroupName"))
@@ -7266,7 +7377,7 @@ module Aws::EC2
     DeleteNetworkInterfaceRequest.struct_class = Types::DeleteNetworkInterfaceRequest
 
     DeletePlacementGroupRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
-    DeletePlacementGroupRequest.add_member(:group_name, Shapes::ShapeRef.new(shape: PlacementGroupName, required: true, location_name: "groupName"))
+    DeletePlacementGroupRequest.add_member(:group_name, Shapes::ShapeRef.new(shape: PlacementGroupNameWithResolver, required: true, location_name: "groupName"))
     DeletePlacementGroupRequest.struct_class = Types::DeletePlacementGroupRequest
 
     DeletePublicIpv4PoolRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
@@ -7322,6 +7433,24 @@ module Aws::EC2
     DeleteRouteTableRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
     DeleteRouteTableRequest.add_member(:route_table_id, Shapes::ShapeRef.new(shape: RouteTableId, required: true, location_name: "routeTableId"))
     DeleteRouteTableRequest.struct_class = Types::DeleteRouteTableRequest
+
+    DeleteSecondaryNetworkRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
+    DeleteSecondaryNetworkRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    DeleteSecondaryNetworkRequest.add_member(:secondary_network_id, Shapes::ShapeRef.new(shape: SecondaryNetworkId, required: true, location_name: "SecondaryNetworkId"))
+    DeleteSecondaryNetworkRequest.struct_class = Types::DeleteSecondaryNetworkRequest
+
+    DeleteSecondaryNetworkResult.add_member(:secondary_network, Shapes::ShapeRef.new(shape: SecondaryNetwork, location_name: "secondaryNetwork"))
+    DeleteSecondaryNetworkResult.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken"))
+    DeleteSecondaryNetworkResult.struct_class = Types::DeleteSecondaryNetworkResult
+
+    DeleteSecondarySubnetRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
+    DeleteSecondarySubnetRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    DeleteSecondarySubnetRequest.add_member(:secondary_subnet_id, Shapes::ShapeRef.new(shape: SecondarySubnetId, required: true, location_name: "SecondarySubnetId"))
+    DeleteSecondarySubnetRequest.struct_class = Types::DeleteSecondarySubnetRequest
+
+    DeleteSecondarySubnetResult.add_member(:secondary_subnet, Shapes::ShapeRef.new(shape: SecondarySubnet, location_name: "secondarySubnet"))
+    DeleteSecondarySubnetResult.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken"))
+    DeleteSecondarySubnetResult.struct_class = Types::DeleteSecondarySubnetResult
 
     DeleteSecurityGroupRequest.add_member(:group_id, Shapes::ShapeRef.new(shape: SecurityGroupId, location_name: "GroupId"))
     DeleteSecurityGroupRequest.add_member(:group_name, Shapes::ShapeRef.new(shape: SecurityGroupName, location_name: "GroupName"))
@@ -9024,6 +9153,39 @@ module Aws::EC2
     DescribeScheduledInstancesResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     DescribeScheduledInstancesResult.add_member(:scheduled_instance_set, Shapes::ShapeRef.new(shape: ScheduledInstanceSet, location_name: "scheduledInstanceSet"))
     DescribeScheduledInstancesResult.struct_class = Types::DescribeScheduledInstancesResult
+
+    DescribeSecondaryInterfacesRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    DescribeSecondaryInterfacesRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filter"))
+    DescribeSecondaryInterfacesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: DescribeSecondaryInterfacesMaxResults, location_name: "MaxResults"))
+    DescribeSecondaryInterfacesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    DescribeSecondaryInterfacesRequest.add_member(:secondary_interface_ids, Shapes::ShapeRef.new(shape: SecondaryInterfaceIdList, location_name: "SecondaryInterfaceId"))
+    DescribeSecondaryInterfacesRequest.struct_class = Types::DescribeSecondaryInterfacesRequest
+
+    DescribeSecondaryInterfacesResult.add_member(:secondary_interfaces, Shapes::ShapeRef.new(shape: SecondaryInterfaceList, location_name: "secondaryInterfaceSet"))
+    DescribeSecondaryInterfacesResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    DescribeSecondaryInterfacesResult.struct_class = Types::DescribeSecondaryInterfacesResult
+
+    DescribeSecondaryNetworksRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    DescribeSecondaryNetworksRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filter"))
+    DescribeSecondaryNetworksRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: DescribeSecondaryNetworksMaxResults, location_name: "MaxResults"))
+    DescribeSecondaryNetworksRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    DescribeSecondaryNetworksRequest.add_member(:secondary_network_ids, Shapes::ShapeRef.new(shape: SecondaryNetworkIdList, location_name: "SecondaryNetworkId"))
+    DescribeSecondaryNetworksRequest.struct_class = Types::DescribeSecondaryNetworksRequest
+
+    DescribeSecondaryNetworksResult.add_member(:secondary_networks, Shapes::ShapeRef.new(shape: SecondaryNetworkList, location_name: "secondaryNetworkSet"))
+    DescribeSecondaryNetworksResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    DescribeSecondaryNetworksResult.struct_class = Types::DescribeSecondaryNetworksResult
+
+    DescribeSecondarySubnetsRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    DescribeSecondarySubnetsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filter"))
+    DescribeSecondarySubnetsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: DescribeSecondarySubnetsMaxResults, location_name: "MaxResults"))
+    DescribeSecondarySubnetsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    DescribeSecondarySubnetsRequest.add_member(:secondary_subnet_ids, Shapes::ShapeRef.new(shape: SecondarySubnetIdList, location_name: "SecondarySubnetId"))
+    DescribeSecondarySubnetsRequest.struct_class = Types::DescribeSecondarySubnetsRequest
+
+    DescribeSecondarySubnetsResult.add_member(:secondary_subnets, Shapes::ShapeRef.new(shape: SecondarySubnetList, location_name: "secondarySubnetSet"))
+    DescribeSecondarySubnetsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    DescribeSecondarySubnetsResult.struct_class = Types::DescribeSecondarySubnetsResult
 
     DescribeSecurityGroupReferencesRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     DescribeSecurityGroupReferencesRequest.add_member(:group_id, Shapes::ShapeRef.new(shape: GroupIds, required: true, location_name: "GroupId"))
@@ -12294,6 +12456,7 @@ module Aws::EC2
     Instance.add_member(:current_instance_boot_mode, Shapes::ShapeRef.new(shape: InstanceBootModeValues, location_name: "currentInstanceBootMode"))
     Instance.add_member(:network_performance_options, Shapes::ShapeRef.new(shape: InstanceNetworkPerformanceOptions, location_name: "networkPerformanceOptions"))
     Instance.add_member(:operator, Shapes::ShapeRef.new(shape: OperatorResponse, location_name: "operator"))
+    Instance.add_member(:secondary_interfaces, Shapes::ShapeRef.new(shape: InstanceSecondaryInterfaceList, location_name: "secondaryInterfaceSet"))
     Instance.add_member(:instance_id, Shapes::ShapeRef.new(shape: String, location_name: "instanceId"))
     Instance.add_member(:image_id, Shapes::ShapeRef.new(shape: String, location_name: "imageId"))
     Instance.add_member(:state, Shapes::ShapeRef.new(shape: InstanceState, location_name: "instanceState"))
@@ -12676,6 +12839,49 @@ module Aws::EC2
     InstanceRequirementsWithMetadataRequest.add_member(:virtualization_types, Shapes::ShapeRef.new(shape: VirtualizationTypeSet, location_name: "VirtualizationType"))
     InstanceRequirementsWithMetadataRequest.add_member(:instance_requirements, Shapes::ShapeRef.new(shape: InstanceRequirementsRequest, location_name: "InstanceRequirements"))
     InstanceRequirementsWithMetadataRequest.struct_class = Types::InstanceRequirementsWithMetadataRequest
+
+    InstanceSecondaryInterface.add_member(:attachment, Shapes::ShapeRef.new(shape: InstanceSecondaryInterfaceAttachment, location_name: "attachment"))
+    InstanceSecondaryInterface.add_member(:mac_address, Shapes::ShapeRef.new(shape: String, location_name: "macAddress"))
+    InstanceSecondaryInterface.add_member(:secondary_interface_id, Shapes::ShapeRef.new(shape: SecondaryInterfaceId, location_name: "secondaryInterfaceId"))
+    InstanceSecondaryInterface.add_member(:owner_id, Shapes::ShapeRef.new(shape: String, location_name: "ownerId"))
+    InstanceSecondaryInterface.add_member(:private_ip_addresses, Shapes::ShapeRef.new(shape: InstanceSecondaryInterfacePrivateIpAddressList, location_name: "privateIpAddressSet"))
+    InstanceSecondaryInterface.add_member(:source_dest_check, Shapes::ShapeRef.new(shape: Boolean, location_name: "sourceDestCheck"))
+    InstanceSecondaryInterface.add_member(:status, Shapes::ShapeRef.new(shape: SecondaryInterfaceStatus, location_name: "status"))
+    InstanceSecondaryInterface.add_member(:secondary_subnet_id, Shapes::ShapeRef.new(shape: SecondarySubnetId, location_name: "secondarySubnetId"))
+    InstanceSecondaryInterface.add_member(:secondary_network_id, Shapes::ShapeRef.new(shape: SecondaryNetworkId, location_name: "secondaryNetworkId"))
+    InstanceSecondaryInterface.add_member(:interface_type, Shapes::ShapeRef.new(shape: SecondaryInterfaceType, location_name: "interfaceType"))
+    InstanceSecondaryInterface.struct_class = Types::InstanceSecondaryInterface
+
+    InstanceSecondaryInterfaceAttachment.add_member(:attach_time, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "attachTime"))
+    InstanceSecondaryInterfaceAttachment.add_member(:attachment_id, Shapes::ShapeRef.new(shape: String, location_name: "attachmentId"))
+    InstanceSecondaryInterfaceAttachment.add_member(:delete_on_termination, Shapes::ShapeRef.new(shape: Boolean, location_name: "deleteOnTermination"))
+    InstanceSecondaryInterfaceAttachment.add_member(:device_index, Shapes::ShapeRef.new(shape: Integer, location_name: "deviceIndex"))
+    InstanceSecondaryInterfaceAttachment.add_member(:status, Shapes::ShapeRef.new(shape: AttachmentStatus, location_name: "status"))
+    InstanceSecondaryInterfaceAttachment.add_member(:network_card_index, Shapes::ShapeRef.new(shape: Integer, location_name: "networkCardIndex"))
+    InstanceSecondaryInterfaceAttachment.struct_class = Types::InstanceSecondaryInterfaceAttachment
+
+    InstanceSecondaryInterfaceList.member = Shapes::ShapeRef.new(shape: InstanceSecondaryInterface, location_name: "item")
+
+    InstanceSecondaryInterfacePrivateIpAddress.add_member(:private_ip_address, Shapes::ShapeRef.new(shape: String, location_name: "privateIpAddress"))
+    InstanceSecondaryInterfacePrivateIpAddress.struct_class = Types::InstanceSecondaryInterfacePrivateIpAddress
+
+    InstanceSecondaryInterfacePrivateIpAddressList.member = Shapes::ShapeRef.new(shape: InstanceSecondaryInterfacePrivateIpAddress, location_name: "item")
+
+    InstanceSecondaryInterfacePrivateIpAddressListRequest.member = Shapes::ShapeRef.new(shape: InstanceSecondaryInterfacePrivateIpAddressRequest, location_name: "item")
+
+    InstanceSecondaryInterfacePrivateIpAddressRequest.add_member(:private_ip_address, Shapes::ShapeRef.new(shape: String, required: true, location_name: "PrivateIpAddress"))
+    InstanceSecondaryInterfacePrivateIpAddressRequest.struct_class = Types::InstanceSecondaryInterfacePrivateIpAddressRequest
+
+    InstanceSecondaryInterfaceSpecificationListRequest.member = Shapes::ShapeRef.new(shape: InstanceSecondaryInterfaceSpecificationRequest, location_name: "item")
+
+    InstanceSecondaryInterfaceSpecificationRequest.add_member(:delete_on_termination, Shapes::ShapeRef.new(shape: Boolean, location_name: "DeleteOnTermination"))
+    InstanceSecondaryInterfaceSpecificationRequest.add_member(:device_index, Shapes::ShapeRef.new(shape: Integer, location_name: "DeviceIndex"))
+    InstanceSecondaryInterfaceSpecificationRequest.add_member(:private_ip_addresses, Shapes::ShapeRef.new(shape: InstanceSecondaryInterfacePrivateIpAddressListRequest, location_name: "PrivateIpAddress"))
+    InstanceSecondaryInterfaceSpecificationRequest.add_member(:private_ip_address_count, Shapes::ShapeRef.new(shape: Integer, location_name: "PrivateIpAddressCount"))
+    InstanceSecondaryInterfaceSpecificationRequest.add_member(:secondary_subnet_id, Shapes::ShapeRef.new(shape: SecondarySubnetId, location_name: "SecondarySubnetId"))
+    InstanceSecondaryInterfaceSpecificationRequest.add_member(:interface_type, Shapes::ShapeRef.new(shape: SecondaryInterfaceType, location_name: "InterfaceType"))
+    InstanceSecondaryInterfaceSpecificationRequest.add_member(:network_card_index, Shapes::ShapeRef.new(shape: Integer, location_name: "NetworkCardIndex"))
+    InstanceSecondaryInterfaceSpecificationRequest.struct_class = Types::InstanceSecondaryInterfaceSpecificationRequest
 
     InstanceSet.member = Shapes::ShapeRef.new(shape: InstanceTopology, location_name: "item")
 
@@ -13425,11 +13631,13 @@ module Aws::EC2
     LaunchTemplateCpuOptions.add_member(:core_count, Shapes::ShapeRef.new(shape: Integer, location_name: "coreCount"))
     LaunchTemplateCpuOptions.add_member(:threads_per_core, Shapes::ShapeRef.new(shape: Integer, location_name: "threadsPerCore"))
     LaunchTemplateCpuOptions.add_member(:amd_sev_snp, Shapes::ShapeRef.new(shape: AmdSevSnpSpecification, location_name: "amdSevSnp"))
+    LaunchTemplateCpuOptions.add_member(:nested_virtualization, Shapes::ShapeRef.new(shape: NestedVirtualizationSpecification, location_name: "nestedVirtualization"))
     LaunchTemplateCpuOptions.struct_class = Types::LaunchTemplateCpuOptions
 
     LaunchTemplateCpuOptionsRequest.add_member(:core_count, Shapes::ShapeRef.new(shape: Integer, location_name: "CoreCount"))
     LaunchTemplateCpuOptionsRequest.add_member(:threads_per_core, Shapes::ShapeRef.new(shape: Integer, location_name: "ThreadsPerCore"))
     LaunchTemplateCpuOptionsRequest.add_member(:amd_sev_snp, Shapes::ShapeRef.new(shape: AmdSevSnpSpecification, location_name: "AmdSevSnp"))
+    LaunchTemplateCpuOptionsRequest.add_member(:nested_virtualization, Shapes::ShapeRef.new(shape: NestedVirtualizationSpecification, location_name: "NestedVirtualization"))
     LaunchTemplateCpuOptionsRequest.struct_class = Types::LaunchTemplateCpuOptionsRequest
 
     LaunchTemplateEbsBlockDevice.add_member(:encrypted, Shapes::ShapeRef.new(shape: Boolean, location_name: "encrypted"))
@@ -13579,6 +13787,28 @@ module Aws::EC2
     LaunchTemplateInstanceNetworkInterfaceSpecificationRequest.struct_class = Types::LaunchTemplateInstanceNetworkInterfaceSpecificationRequest
 
     LaunchTemplateInstanceNetworkInterfaceSpecificationRequestList.member = Shapes::ShapeRef.new(shape: LaunchTemplateInstanceNetworkInterfaceSpecificationRequest, location_name: "InstanceNetworkInterfaceSpecification")
+
+    LaunchTemplateInstanceSecondaryInterfaceSpecification.add_member(:delete_on_termination, Shapes::ShapeRef.new(shape: Boolean, location_name: "deleteOnTermination"))
+    LaunchTemplateInstanceSecondaryInterfaceSpecification.add_member(:device_index, Shapes::ShapeRef.new(shape: Integer, location_name: "deviceIndex"))
+    LaunchTemplateInstanceSecondaryInterfaceSpecification.add_member(:private_ip_addresses, Shapes::ShapeRef.new(shape: SecondaryInterfacePrivateIpAddressSpecificationList, location_name: "privateIpAddressesSet"))
+    LaunchTemplateInstanceSecondaryInterfaceSpecification.add_member(:private_ip_address_count, Shapes::ShapeRef.new(shape: Integer, location_name: "privateIpAddressCount"))
+    LaunchTemplateInstanceSecondaryInterfaceSpecification.add_member(:secondary_subnet_id, Shapes::ShapeRef.new(shape: SecondarySubnetId, location_name: "secondarySubnetId"))
+    LaunchTemplateInstanceSecondaryInterfaceSpecification.add_member(:interface_type, Shapes::ShapeRef.new(shape: SecondaryInterfaceType, location_name: "interfaceType"))
+    LaunchTemplateInstanceSecondaryInterfaceSpecification.add_member(:network_card_index, Shapes::ShapeRef.new(shape: Integer, location_name: "networkCardIndex"))
+    LaunchTemplateInstanceSecondaryInterfaceSpecification.struct_class = Types::LaunchTemplateInstanceSecondaryInterfaceSpecification
+
+    LaunchTemplateInstanceSecondaryInterfaceSpecificationList.member = Shapes::ShapeRef.new(shape: LaunchTemplateInstanceSecondaryInterfaceSpecification, location_name: "item")
+
+    LaunchTemplateInstanceSecondaryInterfaceSpecificationRequest.add_member(:delete_on_termination, Shapes::ShapeRef.new(shape: Boolean, location_name: "DeleteOnTermination"))
+    LaunchTemplateInstanceSecondaryInterfaceSpecificationRequest.add_member(:device_index, Shapes::ShapeRef.new(shape: Integer, location_name: "DeviceIndex"))
+    LaunchTemplateInstanceSecondaryInterfaceSpecificationRequest.add_member(:private_ip_addresses, Shapes::ShapeRef.new(shape: SecondaryInterfacePrivateIpAddressSpecificationListRequest, location_name: "PrivateIpAddress"))
+    LaunchTemplateInstanceSecondaryInterfaceSpecificationRequest.add_member(:private_ip_address_count, Shapes::ShapeRef.new(shape: Integer, location_name: "PrivateIpAddressCount"))
+    LaunchTemplateInstanceSecondaryInterfaceSpecificationRequest.add_member(:secondary_subnet_id, Shapes::ShapeRef.new(shape: SecondarySubnetId, location_name: "SecondarySubnetId"))
+    LaunchTemplateInstanceSecondaryInterfaceSpecificationRequest.add_member(:interface_type, Shapes::ShapeRef.new(shape: SecondaryInterfaceType, location_name: "InterfaceType"))
+    LaunchTemplateInstanceSecondaryInterfaceSpecificationRequest.add_member(:network_card_index, Shapes::ShapeRef.new(shape: Integer, location_name: "NetworkCardIndex"))
+    LaunchTemplateInstanceSecondaryInterfaceSpecificationRequest.struct_class = Types::LaunchTemplateInstanceSecondaryInterfaceSpecificationRequest
+
+    LaunchTemplateInstanceSecondaryInterfaceSpecificationRequestList.member = Shapes::ShapeRef.new(shape: LaunchTemplateInstanceSecondaryInterfaceSpecificationRequest, location_name: "InstanceSecondaryInterfaceSpecification")
 
     LaunchTemplateLicenseConfiguration.add_member(:license_configuration_arn, Shapes::ShapeRef.new(shape: String, location_name: "licenseConfigurationArn"))
     LaunchTemplateLicenseConfiguration.struct_class = Types::LaunchTemplateLicenseConfiguration
@@ -14192,14 +14422,16 @@ module Aws::EC2
     ModifyInstanceConnectEndpointResult.struct_class = Types::ModifyInstanceConnectEndpointResult
 
     ModifyInstanceCpuOptionsRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location_name: "InstanceId"))
-    ModifyInstanceCpuOptionsRequest.add_member(:core_count, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "CoreCount"))
-    ModifyInstanceCpuOptionsRequest.add_member(:threads_per_core, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "ThreadsPerCore"))
+    ModifyInstanceCpuOptionsRequest.add_member(:core_count, Shapes::ShapeRef.new(shape: Integer, location_name: "CoreCount"))
+    ModifyInstanceCpuOptionsRequest.add_member(:threads_per_core, Shapes::ShapeRef.new(shape: Integer, location_name: "ThreadsPerCore"))
+    ModifyInstanceCpuOptionsRequest.add_member(:nested_virtualization, Shapes::ShapeRef.new(shape: NestedVirtualizationSpecification, location_name: "NestedVirtualization"))
     ModifyInstanceCpuOptionsRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     ModifyInstanceCpuOptionsRequest.struct_class = Types::ModifyInstanceCpuOptionsRequest
 
     ModifyInstanceCpuOptionsResult.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, location_name: "instanceId"))
     ModifyInstanceCpuOptionsResult.add_member(:core_count, Shapes::ShapeRef.new(shape: Integer, location_name: "coreCount"))
     ModifyInstanceCpuOptionsResult.add_member(:threads_per_core, Shapes::ShapeRef.new(shape: Integer, location_name: "threadsPerCore"))
+    ModifyInstanceCpuOptionsResult.add_member(:nested_virtualization, Shapes::ShapeRef.new(shape: NestedVirtualizationSpecification, location_name: "nestedVirtualization"))
     ModifyInstanceCpuOptionsResult.struct_class = Types::ModifyInstanceCpuOptionsResult
 
     ModifyInstanceCreditSpecificationRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
@@ -15107,6 +15339,9 @@ module Aws::EC2
     NetworkInfo.add_member(:ena_srd_supported, Shapes::ShapeRef.new(shape: EnaSrdSupported, location_name: "enaSrdSupported"))
     NetworkInfo.add_member(:bandwidth_weightings, Shapes::ShapeRef.new(shape: BandwidthWeightingTypeList, location_name: "bandwidthWeightings"))
     NetworkInfo.add_member(:flexible_ena_queues_support, Shapes::ShapeRef.new(shape: FlexibleEnaQueuesSupport, location_name: "flexibleEnaQueuesSupport"))
+    NetworkInfo.add_member(:secondary_network_supported, Shapes::ShapeRef.new(shape: SecondaryNetworkSupportedFlag, location_name: "secondaryNetworkSupported"))
+    NetworkInfo.add_member(:maximum_secondary_network_interfaces, Shapes::ShapeRef.new(shape: MaximumSecondaryNetworkInterfaces, location_name: "maximumSecondaryNetworkInterfaces"))
+    NetworkInfo.add_member(:ipv_4_addresses_per_secondary_interface, Shapes::ShapeRef.new(shape: Ipv4AddressesPerSecondaryInterface, location_name: "ipv4AddressesPerSecondaryInterface"))
     NetworkInfo.struct_class = Types::NetworkInfo
 
     NetworkInsightsAccessScope.add_member(:network_insights_access_scope_id, Shapes::ShapeRef.new(shape: NetworkInsightsAccessScopeId, location_name: "networkInsightsAccessScopeId"))
@@ -15883,9 +16118,15 @@ module Aws::EC2
     ReferencedSecurityGroup.struct_class = Types::ReferencedSecurityGroup
 
     Region.add_member(:opt_in_status, Shapes::ShapeRef.new(shape: String, location_name: "optInStatus"))
+    Region.add_member(:geography, Shapes::ShapeRef.new(shape: RegionGeographyList, location_name: "geographySet"))
     Region.add_member(:region_name, Shapes::ShapeRef.new(shape: String, location_name: "regionName"))
     Region.add_member(:endpoint, Shapes::ShapeRef.new(shape: String, location_name: "regionEndpoint"))
     Region.struct_class = Types::Region
+
+    RegionGeography.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
+    RegionGeography.struct_class = Types::RegionGeography
+
+    RegionGeographyList.member = Shapes::ShapeRef.new(shape: RegionGeography, location_name: "item")
 
     RegionList.member = Shapes::ShapeRef.new(shape: Region, location_name: "item")
 
@@ -16200,6 +16441,7 @@ module Aws::EC2
     RequestLaunchTemplateData.add_member(:disable_api_stop, Shapes::ShapeRef.new(shape: Boolean, location_name: "DisableApiStop"))
     RequestLaunchTemplateData.add_member(:operator, Shapes::ShapeRef.new(shape: OperatorRequest, location_name: "Operator"))
     RequestLaunchTemplateData.add_member(:network_performance_options, Shapes::ShapeRef.new(shape: LaunchTemplateNetworkPerformanceOptionsRequest, location_name: "NetworkPerformanceOptions"))
+    RequestLaunchTemplateData.add_member(:secondary_interfaces, Shapes::ShapeRef.new(shape: LaunchTemplateInstanceSecondaryInterfaceSpecificationRequestList, location_name: "SecondaryInterface"))
     RequestLaunchTemplateData.struct_class = Types::RequestLaunchTemplateData
 
     RequestSpotFleetRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
@@ -16492,6 +16734,7 @@ module Aws::EC2
     ResponseLaunchTemplateData.add_member(:disable_api_stop, Shapes::ShapeRef.new(shape: Boolean, location_name: "disableApiStop"))
     ResponseLaunchTemplateData.add_member(:operator, Shapes::ShapeRef.new(shape: OperatorResponse, location_name: "operator"))
     ResponseLaunchTemplateData.add_member(:network_performance_options, Shapes::ShapeRef.new(shape: LaunchTemplateNetworkPerformanceOptions, location_name: "networkPerformanceOptions"))
+    ResponseLaunchTemplateData.add_member(:secondary_interfaces, Shapes::ShapeRef.new(shape: LaunchTemplateInstanceSecondaryInterfaceSpecificationList, location_name: "secondaryInterfaceSet"))
     ResponseLaunchTemplateData.struct_class = Types::ResponseLaunchTemplateData
 
     RestorableByStringList.member = Shapes::ShapeRef.new(shape: String)
@@ -16819,6 +17062,7 @@ module Aws::EC2
     RunInstancesRequest.add_member(:enable_primary_ipv_6, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnablePrimaryIpv6"))
     RunInstancesRequest.add_member(:network_performance_options, Shapes::ShapeRef.new(shape: InstanceNetworkPerformanceOptionsRequest, location_name: "NetworkPerformanceOptions"))
     RunInstancesRequest.add_member(:operator, Shapes::ShapeRef.new(shape: OperatorRequest, location_name: "Operator"))
+    RunInstancesRequest.add_member(:secondary_interfaces, Shapes::ShapeRef.new(shape: InstanceSecondaryInterfaceSpecificationListRequest, location_name: "SecondaryInterface"))
     RunInstancesRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
     RunInstancesRequest.add_member(:disable_api_termination, Shapes::ShapeRef.new(shape: Boolean, location_name: "disableApiTermination"))
     RunInstancesRequest.add_member(:instance_initiated_shutdown_behavior, Shapes::ShapeRef.new(shape: ShutdownBehavior, location_name: "instanceInitiatedShutdownBehavior"))
@@ -17008,6 +17252,99 @@ module Aws::EC2
     SearchTransitGatewayRoutesResult.add_member(:additional_routes_available, Shapes::ShapeRef.new(shape: Boolean, location_name: "additionalRoutesAvailable"))
     SearchTransitGatewayRoutesResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     SearchTransitGatewayRoutesResult.struct_class = Types::SearchTransitGatewayRoutesResult
+
+    SecondaryInterface.add_member(:availability_zone, Shapes::ShapeRef.new(shape: AvailabilityZoneName, location_name: "availabilityZone"))
+    SecondaryInterface.add_member(:availability_zone_id, Shapes::ShapeRef.new(shape: AvailabilityZoneId, location_name: "availabilityZoneId"))
+    SecondaryInterface.add_member(:attachment, Shapes::ShapeRef.new(shape: SecondaryInterfaceAttachment, location_name: "attachment"))
+    SecondaryInterface.add_member(:mac_address, Shapes::ShapeRef.new(shape: String, location_name: "macAddress"))
+    SecondaryInterface.add_member(:owner_id, Shapes::ShapeRef.new(shape: String, location_name: "ownerId"))
+    SecondaryInterface.add_member(:private_ipv_4_addresses, Shapes::ShapeRef.new(shape: SecondaryInterfaceIpv4AddressList, location_name: "privateIpv4AddressSet"))
+    SecondaryInterface.add_member(:secondary_interface_id, Shapes::ShapeRef.new(shape: SecondaryInterfaceId, location_name: "secondaryInterfaceId"))
+    SecondaryInterface.add_member(:secondary_interface_arn, Shapes::ShapeRef.new(shape: String, location_name: "secondaryInterfaceArn"))
+    SecondaryInterface.add_member(:secondary_interface_type, Shapes::ShapeRef.new(shape: SecondaryInterfaceType, location_name: "secondaryInterfaceType"))
+    SecondaryInterface.add_member(:secondary_subnet_id, Shapes::ShapeRef.new(shape: SecondarySubnetId, location_name: "secondarySubnetId"))
+    SecondaryInterface.add_member(:secondary_network_id, Shapes::ShapeRef.new(shape: SecondaryNetworkId, location_name: "secondaryNetworkId"))
+    SecondaryInterface.add_member(:secondary_network_type, Shapes::ShapeRef.new(shape: SecondaryNetworkType, location_name: "secondaryNetworkType"))
+    SecondaryInterface.add_member(:source_dest_check, Shapes::ShapeRef.new(shape: Boolean, location_name: "sourceDestCheck"))
+    SecondaryInterface.add_member(:status, Shapes::ShapeRef.new(shape: SecondaryInterfaceStatus, location_name: "status"))
+    SecondaryInterface.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
+    SecondaryInterface.struct_class = Types::SecondaryInterface
+
+    SecondaryInterfaceAttachment.add_member(:attachment_id, Shapes::ShapeRef.new(shape: String, location_name: "attachmentId"))
+    SecondaryInterfaceAttachment.add_member(:attach_time, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "attachTime"))
+    SecondaryInterfaceAttachment.add_member(:delete_on_termination, Shapes::ShapeRef.new(shape: Boolean, location_name: "deleteOnTermination"))
+    SecondaryInterfaceAttachment.add_member(:device_index, Shapes::ShapeRef.new(shape: Integer, location_name: "deviceIndex"))
+    SecondaryInterfaceAttachment.add_member(:instance_id, Shapes::ShapeRef.new(shape: String, location_name: "instanceId"))
+    SecondaryInterfaceAttachment.add_member(:instance_owner_id, Shapes::ShapeRef.new(shape: String, location_name: "instanceOwnerId"))
+    SecondaryInterfaceAttachment.add_member(:network_card_index, Shapes::ShapeRef.new(shape: Integer, location_name: "networkCardIndex"))
+    SecondaryInterfaceAttachment.add_member(:status, Shapes::ShapeRef.new(shape: AttachmentStatus, location_name: "status"))
+    SecondaryInterfaceAttachment.struct_class = Types::SecondaryInterfaceAttachment
+
+    SecondaryInterfaceIdList.member = Shapes::ShapeRef.new(shape: SecondaryInterfaceId, location_name: "item")
+
+    SecondaryInterfaceIpv4Address.add_member(:private_ip_address, Shapes::ShapeRef.new(shape: String, location_name: "privateIpAddress"))
+    SecondaryInterfaceIpv4Address.struct_class = Types::SecondaryInterfaceIpv4Address
+
+    SecondaryInterfaceIpv4AddressList.member = Shapes::ShapeRef.new(shape: SecondaryInterfaceIpv4Address, location_name: "item")
+
+    SecondaryInterfaceList.member = Shapes::ShapeRef.new(shape: SecondaryInterface, location_name: "item")
+
+    SecondaryInterfacePrivateIpAddressSpecification.add_member(:private_ip_address, Shapes::ShapeRef.new(shape: String, location_name: "privateIpAddress"))
+    SecondaryInterfacePrivateIpAddressSpecification.struct_class = Types::SecondaryInterfacePrivateIpAddressSpecification
+
+    SecondaryInterfacePrivateIpAddressSpecificationList.member = Shapes::ShapeRef.new(shape: SecondaryInterfacePrivateIpAddressSpecification, location_name: "item")
+
+    SecondaryInterfacePrivateIpAddressSpecificationListRequest.member = Shapes::ShapeRef.new(shape: SecondaryInterfacePrivateIpAddressSpecificationRequest, location_name: "SecondaryInterfacePrivateIpAddressSpecification")
+
+    SecondaryInterfacePrivateIpAddressSpecificationRequest.add_member(:private_ip_address, Shapes::ShapeRef.new(shape: String, location_name: "PrivateIpAddress"))
+    SecondaryInterfacePrivateIpAddressSpecificationRequest.struct_class = Types::SecondaryInterfacePrivateIpAddressSpecificationRequest
+
+    SecondaryNetwork.add_member(:secondary_network_id, Shapes::ShapeRef.new(shape: SecondaryNetworkId, location_name: "secondaryNetworkId"))
+    SecondaryNetwork.add_member(:secondary_network_arn, Shapes::ShapeRef.new(shape: String, location_name: "secondaryNetworkArn"))
+    SecondaryNetwork.add_member(:owner_id, Shapes::ShapeRef.new(shape: String, location_name: "ownerId"))
+    SecondaryNetwork.add_member(:type, Shapes::ShapeRef.new(shape: SecondaryNetworkType, location_name: "type"))
+    SecondaryNetwork.add_member(:state, Shapes::ShapeRef.new(shape: SecondaryNetworkState, location_name: "state"))
+    SecondaryNetwork.add_member(:state_reason, Shapes::ShapeRef.new(shape: String, location_name: "stateReason"))
+    SecondaryNetwork.add_member(:ipv_4_cidr_block_associations, Shapes::ShapeRef.new(shape: SecondaryNetworkIpv4CidrBlockAssociationList, location_name: "ipv4CidrBlockAssociationSet"))
+    SecondaryNetwork.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
+    SecondaryNetwork.struct_class = Types::SecondaryNetwork
+
+    SecondaryNetworkIdList.member = Shapes::ShapeRef.new(shape: SecondaryNetworkId, location_name: "item")
+
+    SecondaryNetworkIpv4CidrBlockAssociation.add_member(:association_id, Shapes::ShapeRef.new(shape: SecondaryNetworkCidrAssociationId, location_name: "associationId"))
+    SecondaryNetworkIpv4CidrBlockAssociation.add_member(:cidr_block, Shapes::ShapeRef.new(shape: String, location_name: "cidrBlock"))
+    SecondaryNetworkIpv4CidrBlockAssociation.add_member(:state, Shapes::ShapeRef.new(shape: SecondaryNetworkCidrBlockAssociationState, location_name: "state"))
+    SecondaryNetworkIpv4CidrBlockAssociation.add_member(:state_reason, Shapes::ShapeRef.new(shape: String, location_name: "stateReason"))
+    SecondaryNetworkIpv4CidrBlockAssociation.struct_class = Types::SecondaryNetworkIpv4CidrBlockAssociation
+
+    SecondaryNetworkIpv4CidrBlockAssociationList.member = Shapes::ShapeRef.new(shape: SecondaryNetworkIpv4CidrBlockAssociation, location_name: "item")
+
+    SecondaryNetworkList.member = Shapes::ShapeRef.new(shape: SecondaryNetwork, location_name: "item")
+
+    SecondarySubnet.add_member(:secondary_subnet_id, Shapes::ShapeRef.new(shape: SecondarySubnetId, location_name: "secondarySubnetId"))
+    SecondarySubnet.add_member(:secondary_subnet_arn, Shapes::ShapeRef.new(shape: String, location_name: "secondarySubnetArn"))
+    SecondarySubnet.add_member(:secondary_network_id, Shapes::ShapeRef.new(shape: SecondaryNetworkId, location_name: "secondaryNetworkId"))
+    SecondarySubnet.add_member(:secondary_network_type, Shapes::ShapeRef.new(shape: SecondaryNetworkType, location_name: "secondaryNetworkType"))
+    SecondarySubnet.add_member(:owner_id, Shapes::ShapeRef.new(shape: String, location_name: "ownerId"))
+    SecondarySubnet.add_member(:availability_zone_id, Shapes::ShapeRef.new(shape: AvailabilityZoneId, location_name: "availabilityZoneId"))
+    SecondarySubnet.add_member(:availability_zone, Shapes::ShapeRef.new(shape: AvailabilityZoneName, location_name: "availabilityZone"))
+    SecondarySubnet.add_member(:ipv_4_cidr_block_associations, Shapes::ShapeRef.new(shape: SecondarySubnetIpv4CidrBlockAssociationList, location_name: "ipv4CidrBlockAssociationSet"))
+    SecondarySubnet.add_member(:state, Shapes::ShapeRef.new(shape: SecondarySubnetState, location_name: "state"))
+    SecondarySubnet.add_member(:state_reason, Shapes::ShapeRef.new(shape: String, location_name: "stateReason"))
+    SecondarySubnet.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
+    SecondarySubnet.struct_class = Types::SecondarySubnet
+
+    SecondarySubnetIdList.member = Shapes::ShapeRef.new(shape: SecondarySubnetId, location_name: "item")
+
+    SecondarySubnetIpv4CidrBlockAssociation.add_member(:association_id, Shapes::ShapeRef.new(shape: SecondarySubnetCidrAssociationId, location_name: "associationId"))
+    SecondarySubnetIpv4CidrBlockAssociation.add_member(:cidr_block, Shapes::ShapeRef.new(shape: String, location_name: "cidrBlock"))
+    SecondarySubnetIpv4CidrBlockAssociation.add_member(:state, Shapes::ShapeRef.new(shape: SecondarySubnetCidrBlockAssociationState, location_name: "state"))
+    SecondarySubnetIpv4CidrBlockAssociation.add_member(:state_reason, Shapes::ShapeRef.new(shape: String, location_name: "stateReason"))
+    SecondarySubnetIpv4CidrBlockAssociation.struct_class = Types::SecondarySubnetIpv4CidrBlockAssociation
+
+    SecondarySubnetIpv4CidrBlockAssociationList.member = Shapes::ShapeRef.new(shape: SecondarySubnetIpv4CidrBlockAssociation, location_name: "item")
+
+    SecondarySubnetList.member = Shapes::ShapeRef.new(shape: SecondarySubnet, location_name: "item")
 
     SecurityGroup.add_member(:group_id, Shapes::ShapeRef.new(shape: String, location_name: "groupId"))
     SecurityGroup.add_member(:ip_permissions_egress, Shapes::ShapeRef.new(shape: IpPermissionList, location_name: "ipPermissionsEgress"))
@@ -20167,6 +20504,22 @@ module Aws::EC2
         o.output = Shapes::ShapeRef.new(shape: CreateRouteTableResult)
       end)
 
+      api.add_operation(:create_secondary_network, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateSecondaryNetwork"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateSecondaryNetworkRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateSecondaryNetworkResult)
+      end)
+
+      api.add_operation(:create_secondary_subnet, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateSecondarySubnet"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateSecondarySubnetRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateSecondarySubnetResult)
+      end)
+
       api.add_operation(:create_security_group, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateSecurityGroup"
         o.http_method = "POST"
@@ -20901,6 +21254,22 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DeleteRouteTableRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+      end)
+
+      api.add_operation(:delete_secondary_network, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteSecondaryNetwork"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteSecondaryNetworkRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteSecondaryNetworkResult)
+      end)
+
+      api.add_operation(:delete_secondary_subnet, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteSecondarySubnet"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteSecondarySubnetRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteSecondarySubnetResult)
       end)
 
       api.add_operation(:delete_security_group, Seahorse::Model::Operation.new.tap do |o|
@@ -22772,6 +23141,48 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeScheduledInstancesRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeScheduledInstancesResult)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:describe_secondary_interfaces, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeSecondaryInterfaces"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeSecondaryInterfacesRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeSecondaryInterfacesResult)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:describe_secondary_networks, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeSecondaryNetworks"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeSecondaryNetworksRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeSecondaryNetworksResult)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:describe_secondary_subnets, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeSecondarySubnets"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeSecondarySubnetsRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeSecondarySubnetsResult)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {

@@ -54,7 +54,7 @@ module Aws::Batch
   autoload :EndpointProvider, 'aws-sdk-batch/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-batch/endpoints'
 
-  GEM_VERSION = '1.133.0'
+  GEM_VERSION = '1.134.0'
 
 end
 

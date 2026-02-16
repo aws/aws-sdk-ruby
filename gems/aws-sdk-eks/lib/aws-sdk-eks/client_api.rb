@@ -854,6 +854,7 @@ module Aws::EKS
     CreatePodIdentityAssociationRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     CreatePodIdentityAssociationRequest.add_member(:disable_session_tags, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "disableSessionTags"))
     CreatePodIdentityAssociationRequest.add_member(:target_role_arn, Shapes::ShapeRef.new(shape: String, location_name: "targetRoleArn"))
+    CreatePodIdentityAssociationRequest.add_member(:policy, Shapes::ShapeRef.new(shape: String, location_name: "policy"))
     CreatePodIdentityAssociationRequest.struct_class = Types::CreatePodIdentityAssociationRequest
 
     CreatePodIdentityAssociationResponse.add_member(:association, Shapes::ShapeRef.new(shape: PodIdentityAssociation, location_name: "association"))
@@ -1506,6 +1507,7 @@ module Aws::EKS
     PodIdentityAssociation.add_member(:disable_session_tags, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "disableSessionTags"))
     PodIdentityAssociation.add_member(:target_role_arn, Shapes::ShapeRef.new(shape: String, location_name: "targetRoleArn"))
     PodIdentityAssociation.add_member(:external_id, Shapes::ShapeRef.new(shape: String, location_name: "externalId"))
+    PodIdentityAssociation.add_member(:policy, Shapes::ShapeRef.new(shape: String, location_name: "policy"))
     PodIdentityAssociation.struct_class = Types::PodIdentityAssociation
 
     PodIdentityAssociationSummaries.member = Shapes::ShapeRef.new(shape: PodIdentityAssociationSummary)
@@ -1766,6 +1768,7 @@ module Aws::EKS
     UpdatePodIdentityAssociationRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: String, location_name: "clientRequestToken", metadata: {"idempotencyToken" => true}))
     UpdatePodIdentityAssociationRequest.add_member(:disable_session_tags, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "disableSessionTags"))
     UpdatePodIdentityAssociationRequest.add_member(:target_role_arn, Shapes::ShapeRef.new(shape: String, location_name: "targetRoleArn"))
+    UpdatePodIdentityAssociationRequest.add_member(:policy, Shapes::ShapeRef.new(shape: String, location_name: "policy"))
     UpdatePodIdentityAssociationRequest.struct_class = Types::UpdatePodIdentityAssociationRequest
 
     UpdatePodIdentityAssociationResponse.add_member(:association, Shapes::ShapeRef.new(shape: PodIdentityAssociation, location_name: "association"))

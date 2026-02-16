@@ -2059,6 +2059,7 @@ module Aws::PartnerCentralSelling
     #   * {Types::GetResourceSnapshotResponse#resource_snapshot_template_name #resource_snapshot_template_name} => String
     #   * {Types::GetResourceSnapshotResponse#revision #revision} => Integer
     #   * {Types::GetResourceSnapshotResponse#payload #payload} => Types::ResourceSnapshotPayload
+    #   * {Types::GetResourceSnapshotResponse#target_member_accounts #target_member_accounts} => Array&lt;String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -2132,6 +2133,80 @@ module Aws::PartnerCentralSelling
     #   resp.payload.opportunity_summary.related_entity_identifiers.solutions[0] #=> String
     #   resp.payload.opportunity_summary.related_entity_identifiers.aws_products #=> Array
     #   resp.payload.opportunity_summary.related_entity_identifiers.aws_products[0] #=> String
+    #   resp.payload.aws_opportunity_summary_full_view.related_opportunity_id #=> String
+    #   resp.payload.aws_opportunity_summary_full_view.origin #=> String, one of "AWS Referral", "Partner Referral"
+    #   resp.payload.aws_opportunity_summary_full_view.involvement_type #=> String, one of "For Visibility Only", "Co-Sell"
+    #   resp.payload.aws_opportunity_summary_full_view.visibility #=> String, one of "Full", "Limited"
+    #   resp.payload.aws_opportunity_summary_full_view.life_cycle.target_close_date #=> String
+    #   resp.payload.aws_opportunity_summary_full_view.life_cycle.closed_lost_reason #=> String, one of "Administrative", "Business Associate Agreement", "Company Acquired/Dissolved", "Competitive Offering", "Customer Data Requirement", "Customer Deficiency", "Customer Experience", "Delay / Cancellation of Project", "Duplicate", "Duplicate Opportunity", "Executive Blocker", "Failed Vetting", "Feature Limitation", "Financial/Commercial", "Insufficient Amazon Value", "Insufficient AWS Value", "International Constraints", "Legal / Tax / Regulatory", "Legal Terms and Conditions", "Lost to Competitor", "Lost to Competitor - Google", "Lost to Competitor - Microsoft", "Lost to Competitor - Other", "Lost to Competitor - Rackspace", "Lost to Competitor - SoftLayer", "Lost to Competitor - VMWare", "No Customer Reference", "No Integration Resources", "No Opportunity", "No Perceived Value of MP", "No Response", "Not Committed to AWS", "No Update", "On Premises Deployment", "Other", "Other (Details in Description)", "Partner Gap", "Past Due", "People/Relationship/Governance", "Platform Technology Limitation", "Preference for Competitor", "Price", "Product/Technology", "Product Not on AWS", "Security / Compliance", "Self-Service", "Technical Limitations", "Term Sheet Impasse"
+    #   resp.payload.aws_opportunity_summary_full_view.life_cycle.stage #=> String, one of "Not Started", "In Progress", "Prospect", "Engaged", "Identified", "Qualify", "Research", "Seller Engaged", "Evaluating", "Seller Registered", "Term Sheet Negotiation", "Contract Negotiation", "Onboarding", "Building Integration", "Qualified", "On-hold", "Technical Validation", "Business Validation", "Committed", "Launched", "Deferred to Partner", "Closed Lost", "Completed", "Closed Incomplete"
+    #   resp.payload.aws_opportunity_summary_full_view.life_cycle.next_steps #=> String
+    #   resp.payload.aws_opportunity_summary_full_view.life_cycle.next_steps_history #=> Array
+    #   resp.payload.aws_opportunity_summary_full_view.life_cycle.next_steps_history[0].value #=> String
+    #   resp.payload.aws_opportunity_summary_full_view.life_cycle.next_steps_history[0].time #=> Time
+    #   resp.payload.aws_opportunity_summary_full_view.opportunity_team #=> Array
+    #   resp.payload.aws_opportunity_summary_full_view.opportunity_team[0].email #=> String
+    #   resp.payload.aws_opportunity_summary_full_view.opportunity_team[0].first_name #=> String
+    #   resp.payload.aws_opportunity_summary_full_view.opportunity_team[0].last_name #=> String
+    #   resp.payload.aws_opportunity_summary_full_view.opportunity_team[0].business_title #=> String, one of "AWSSalesRep", "AWSAccountOwner", "WWPSPDM", "PDM", "PSM", "ISVSM"
+    #   resp.payload.aws_opportunity_summary_full_view.insights.next_best_actions #=> String
+    #   resp.payload.aws_opportunity_summary_full_view.insights.engagement_score #=> String, one of "High", "Medium", "Low"
+    #   resp.payload.aws_opportunity_summary_full_view.insights.aws_products_spend_insights_by_source.partner.currency_code #=> String, one of "USD", "EUR", "GBP", "AUD", "CAD", "CNY", "NZD", "INR", "JPY", "CHF", "SEK", "AED", "AFN", "ALL", "AMD", "ANG", "AOA", "ARS", "AWG", "AZN", "BAM", "BBD", "BDT", "BGN", "BHD", "BIF", "BMD", "BND", "BOB", "BOV", "BRL", "BSD", "BTN", "BWP", "BYN", "BZD", "CDF", "CHE", "CHW", "CLF", "CLP", "COP", "COU", "CRC", "CUC", "CUP", "CVE", "CZK", "DJF", "DKK", "DOP", "DZD", "EGP", "ERN", "ETB", "FJD", "FKP", "GEL", "GHS", "GIP", "GMD", "GNF", "GTQ", "GYD", "HKD", "HNL", "HRK", "HTG", "HUF", "IDR", "ILS", "IQD", "IRR", "ISK", "JMD", "JOD", "KES", "KGS", "KHR", "KMF", "KPW", "KRW", "KWD", "KYD", "KZT", "LAK", "LBP", "LKR", "LRD", "LSL", "LYD", "MAD", "MDL", "MGA", "MKD", "MMK", "MNT", "MOP", "MRU", "MUR", "MVR", "MWK", "MXN", "MXV", "MYR", "MZN", "NAD", "NGN", "NIO", "NOK", "NPR", "OMR", "PAB", "PEN", "PGK", "PHP", "PKR", "PLN", "PYG", "QAR", "RON", "RSD", "RUB", "RWF", "SAR", "SBD", "SCR", "SDG", "SGD", "SHP", "SLL", "SOS", "SRD", "SSP", "STN", "SVC", "SYP", "SZL", "THB", "TJS", "TMT", "TND", "TOP", "TRY", "TTD", "TWD", "TZS", "UAH", "UGX", "USN", "UYI", "UYU", "UZS", "VEF", "VND", "VUV", "WST", "XAF", "XCD", "XDR", "XOF", "XPF", "XSU", "XUA", "YER", "ZAR", "ZMW", "ZWL"
+    #   resp.payload.aws_opportunity_summary_full_view.insights.aws_products_spend_insights_by_source.partner.frequency #=> String, one of "Monthly"
+    #   resp.payload.aws_opportunity_summary_full_view.insights.aws_products_spend_insights_by_source.partner.total_amount #=> String
+    #   resp.payload.aws_opportunity_summary_full_view.insights.aws_products_spend_insights_by_source.partner.total_optimized_amount #=> String
+    #   resp.payload.aws_opportunity_summary_full_view.insights.aws_products_spend_insights_by_source.partner.total_potential_savings_amount #=> String
+    #   resp.payload.aws_opportunity_summary_full_view.insights.aws_products_spend_insights_by_source.partner.total_amount_by_category #=> Hash
+    #   resp.payload.aws_opportunity_summary_full_view.insights.aws_products_spend_insights_by_source.partner.total_amount_by_category["String"] #=> String
+    #   resp.payload.aws_opportunity_summary_full_view.insights.aws_products_spend_insights_by_source.partner.aws_products #=> Array
+    #   resp.payload.aws_opportunity_summary_full_view.insights.aws_products_spend_insights_by_source.partner.aws_products[0].product_code #=> String
+    #   resp.payload.aws_opportunity_summary_full_view.insights.aws_products_spend_insights_by_source.partner.aws_products[0].service_code #=> String
+    #   resp.payload.aws_opportunity_summary_full_view.insights.aws_products_spend_insights_by_source.partner.aws_products[0].categories #=> Array
+    #   resp.payload.aws_opportunity_summary_full_view.insights.aws_products_spend_insights_by_source.partner.aws_products[0].categories[0] #=> String
+    #   resp.payload.aws_opportunity_summary_full_view.insights.aws_products_spend_insights_by_source.partner.aws_products[0].amount #=> String
+    #   resp.payload.aws_opportunity_summary_full_view.insights.aws_products_spend_insights_by_source.partner.aws_products[0].optimized_amount #=> String
+    #   resp.payload.aws_opportunity_summary_full_view.insights.aws_products_spend_insights_by_source.partner.aws_products[0].potential_savings_amount #=> String
+    #   resp.payload.aws_opportunity_summary_full_view.insights.aws_products_spend_insights_by_source.partner.aws_products[0].optimizations #=> Array
+    #   resp.payload.aws_opportunity_summary_full_view.insights.aws_products_spend_insights_by_source.partner.aws_products[0].optimizations[0].description #=> String
+    #   resp.payload.aws_opportunity_summary_full_view.insights.aws_products_spend_insights_by_source.partner.aws_products[0].optimizations[0].savings_amount #=> String
+    #   resp.payload.aws_opportunity_summary_full_view.insights.aws_products_spend_insights_by_source.aws.currency_code #=> String, one of "USD", "EUR", "GBP", "AUD", "CAD", "CNY", "NZD", "INR", "JPY", "CHF", "SEK", "AED", "AFN", "ALL", "AMD", "ANG", "AOA", "ARS", "AWG", "AZN", "BAM", "BBD", "BDT", "BGN", "BHD", "BIF", "BMD", "BND", "BOB", "BOV", "BRL", "BSD", "BTN", "BWP", "BYN", "BZD", "CDF", "CHE", "CHW", "CLF", "CLP", "COP", "COU", "CRC", "CUC", "CUP", "CVE", "CZK", "DJF", "DKK", "DOP", "DZD", "EGP", "ERN", "ETB", "FJD", "FKP", "GEL", "GHS", "GIP", "GMD", "GNF", "GTQ", "GYD", "HKD", "HNL", "HRK", "HTG", "HUF", "IDR", "ILS", "IQD", "IRR", "ISK", "JMD", "JOD", "KES", "KGS", "KHR", "KMF", "KPW", "KRW", "KWD", "KYD", "KZT", "LAK", "LBP", "LKR", "LRD", "LSL", "LYD", "MAD", "MDL", "MGA", "MKD", "MMK", "MNT", "MOP", "MRU", "MUR", "MVR", "MWK", "MXN", "MXV", "MYR", "MZN", "NAD", "NGN", "NIO", "NOK", "NPR", "OMR", "PAB", "PEN", "PGK", "PHP", "PKR", "PLN", "PYG", "QAR", "RON", "RSD", "RUB", "RWF", "SAR", "SBD", "SCR", "SDG", "SGD", "SHP", "SLL", "SOS", "SRD", "SSP", "STN", "SVC", "SYP", "SZL", "THB", "TJS", "TMT", "TND", "TOP", "TRY", "TTD", "TWD", "TZS", "UAH", "UGX", "USN", "UYI", "UYU", "UZS", "VEF", "VND", "VUV", "WST", "XAF", "XCD", "XDR", "XOF", "XPF", "XSU", "XUA", "YER", "ZAR", "ZMW", "ZWL"
+    #   resp.payload.aws_opportunity_summary_full_view.insights.aws_products_spend_insights_by_source.aws.frequency #=> String, one of "Monthly"
+    #   resp.payload.aws_opportunity_summary_full_view.insights.aws_products_spend_insights_by_source.aws.total_amount #=> String
+    #   resp.payload.aws_opportunity_summary_full_view.insights.aws_products_spend_insights_by_source.aws.total_optimized_amount #=> String
+    #   resp.payload.aws_opportunity_summary_full_view.insights.aws_products_spend_insights_by_source.aws.total_potential_savings_amount #=> String
+    #   resp.payload.aws_opportunity_summary_full_view.insights.aws_products_spend_insights_by_source.aws.total_amount_by_category #=> Hash
+    #   resp.payload.aws_opportunity_summary_full_view.insights.aws_products_spend_insights_by_source.aws.total_amount_by_category["String"] #=> String
+    #   resp.payload.aws_opportunity_summary_full_view.insights.aws_products_spend_insights_by_source.aws.aws_products #=> Array
+    #   resp.payload.aws_opportunity_summary_full_view.insights.aws_products_spend_insights_by_source.aws.aws_products[0].product_code #=> String
+    #   resp.payload.aws_opportunity_summary_full_view.insights.aws_products_spend_insights_by_source.aws.aws_products[0].service_code #=> String
+    #   resp.payload.aws_opportunity_summary_full_view.insights.aws_products_spend_insights_by_source.aws.aws_products[0].categories #=> Array
+    #   resp.payload.aws_opportunity_summary_full_view.insights.aws_products_spend_insights_by_source.aws.aws_products[0].categories[0] #=> String
+    #   resp.payload.aws_opportunity_summary_full_view.insights.aws_products_spend_insights_by_source.aws.aws_products[0].amount #=> String
+    #   resp.payload.aws_opportunity_summary_full_view.insights.aws_products_spend_insights_by_source.aws.aws_products[0].optimized_amount #=> String
+    #   resp.payload.aws_opportunity_summary_full_view.insights.aws_products_spend_insights_by_source.aws.aws_products[0].potential_savings_amount #=> String
+    #   resp.payload.aws_opportunity_summary_full_view.insights.aws_products_spend_insights_by_source.aws.aws_products[0].optimizations #=> Array
+    #   resp.payload.aws_opportunity_summary_full_view.insights.aws_products_spend_insights_by_source.aws.aws_products[0].optimizations[0].description #=> String
+    #   resp.payload.aws_opportunity_summary_full_view.insights.aws_products_spend_insights_by_source.aws.aws_products[0].optimizations[0].savings_amount #=> String
+    #   resp.payload.aws_opportunity_summary_full_view.involvement_type_change_reason #=> String, one of "Expansion Opportunity", "Change in Deal Information", "Customer Requested", "Technical Complexity", "Risk Mitigation"
+    #   resp.payload.aws_opportunity_summary_full_view.related_entity_ids.aws_products #=> Array
+    #   resp.payload.aws_opportunity_summary_full_view.related_entity_ids.aws_products[0] #=> String
+    #   resp.payload.aws_opportunity_summary_full_view.related_entity_ids.solutions #=> Array
+    #   resp.payload.aws_opportunity_summary_full_view.related_entity_ids.solutions[0] #=> String
+    #   resp.payload.aws_opportunity_summary_full_view.customer.contacts #=> Array
+    #   resp.payload.aws_opportunity_summary_full_view.customer.contacts[0].email #=> String
+    #   resp.payload.aws_opportunity_summary_full_view.customer.contacts[0].first_name #=> String
+    #   resp.payload.aws_opportunity_summary_full_view.customer.contacts[0].last_name #=> String
+    #   resp.payload.aws_opportunity_summary_full_view.customer.contacts[0].business_title #=> String
+    #   resp.payload.aws_opportunity_summary_full_view.customer.contacts[0].phone #=> String
+    #   resp.payload.aws_opportunity_summary_full_view.project.expected_customer_spend #=> Array
+    #   resp.payload.aws_opportunity_summary_full_view.project.expected_customer_spend[0].amount #=> String
+    #   resp.payload.aws_opportunity_summary_full_view.project.expected_customer_spend[0].currency_code #=> String, one of "USD", "EUR", "GBP", "AUD", "CAD", "CNY", "NZD", "INR", "JPY", "CHF", "SEK", "AED", "AFN", "ALL", "AMD", "ANG", "AOA", "ARS", "AWG", "AZN", "BAM", "BBD", "BDT", "BGN", "BHD", "BIF", "BMD", "BND", "BOB", "BOV", "BRL", "BSD", "BTN", "BWP", "BYN", "BZD", "CDF", "CHE", "CHW", "CLF", "CLP", "COP", "COU", "CRC", "CUC", "CUP", "CVE", "CZK", "DJF", "DKK", "DOP", "DZD", "EGP", "ERN", "ETB", "FJD", "FKP", "GEL", "GHS", "GIP", "GMD", "GNF", "GTQ", "GYD", "HKD", "HNL", "HRK", "HTG", "HUF", "IDR", "ILS", "IQD", "IRR", "ISK", "JMD", "JOD", "KES", "KGS", "KHR", "KMF", "KPW", "KRW", "KWD", "KYD", "KZT", "LAK", "LBP", "LKR", "LRD", "LSL", "LYD", "MAD", "MDL", "MGA", "MKD", "MMK", "MNT", "MOP", "MRU", "MUR", "MVR", "MWK", "MXN", "MXV", "MYR", "MZN", "NAD", "NGN", "NIO", "NOK", "NPR", "OMR", "PAB", "PEN", "PGK", "PHP", "PKR", "PLN", "PYG", "QAR", "RON", "RSD", "RUB", "RWF", "SAR", "SBD", "SCR", "SDG", "SGD", "SHP", "SLL", "SOS", "SRD", "SSP", "STN", "SVC", "SYP", "SZL", "THB", "TJS", "TMT", "TND", "TOP", "TRY", "TTD", "TWD", "TZS", "UAH", "UGX", "USN", "UYI", "UYU", "UZS", "VEF", "VND", "VUV", "WST", "XAF", "XCD", "XDR", "XOF", "XPF", "XSU", "XUA", "YER", "ZAR", "ZMW", "ZWL"
+    #   resp.payload.aws_opportunity_summary_full_view.project.expected_customer_spend[0].frequency #=> String, one of "Monthly"
+    #   resp.payload.aws_opportunity_summary_full_view.project.expected_customer_spend[0].target_company #=> String
+    #   resp.payload.aws_opportunity_summary_full_view.project.expected_customer_spend[0].estimation_url #=> String
+    #   resp.payload.aws_opportunity_summary_full_view.project.aws_partition #=> String, one of "aws-eusc"
+    #   resp.target_member_accounts #=> Array
+    #   resp.target_member_accounts[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-selling-2022-07-26/GetResourceSnapshot AWS API Documentation
     #
@@ -2808,6 +2883,9 @@ module Aws::PartnerCentralSelling
     #   allows partners to search for opportunities associated with a specific
     #   customer by matching the provided company name string.
     #
+    # @option params [Types::CreatedDateFilter] :created_date
+    #   Filter opportunities by creation date criteria.
+    #
     # @return [Types::ListOpportunitiesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListOpportunitiesResponse#opportunity_summaries #opportunity_summaries} => Array&lt;Types::OpportunitySummary&gt;
@@ -2823,7 +2901,7 @@ module Aws::PartnerCentralSelling
     #     next_token: "String",
     #     sort: {
     #       sort_order: "ASCENDING", # required, accepts ASCENDING, DESCENDING
-    #       sort_by: "LastModifiedDate", # required, accepts LastModifiedDate, Identifier, CustomerCompanyName
+    #       sort_by: "LastModifiedDate", # required, accepts LastModifiedDate, Identifier, CustomerCompanyName, CreatedDate
     #     },
     #     last_modified_date: {
     #       after_last_modified_date: Time.now,
@@ -2833,6 +2911,10 @@ module Aws::PartnerCentralSelling
     #     life_cycle_stage: ["Prospect"], # accepts Prospect, Qualified, Technical Validation, Business Validation, Committed, Launched, Closed Lost
     #     life_cycle_review_status: ["Pending Submission"], # accepts Pending Submission, Submitted, In review, Approved, Rejected, Action Required
     #     customer_company_name: ["String"],
+    #     created_date: {
+    #       after_created_date: Time.now,
+    #       before_created_date: Time.now,
+    #     },
     #   })
     #
     # @example Response structure
@@ -4109,7 +4191,7 @@ module Aws::PartnerCentralSelling
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-partnercentralselling'
-      context[:gem_version] = '1.25.0'
+      context[:gem_version] = '1.26.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

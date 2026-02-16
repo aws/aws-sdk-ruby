@@ -35,8 +35,11 @@ module Aws::IoTManagedIntegrations
     AttributeValue = Shapes::StringShape.new(name: 'AttributeValue')
     AuthConfig = Shapes::StructureShape.new(name: 'AuthConfig')
     AuthConfigUpdate = Shapes::StructureShape.new(name: 'AuthConfigUpdate')
+    AuthMaterial = Shapes::StructureShape.new(name: 'AuthMaterial')
+    AuthMaterialName = Shapes::StringShape.new(name: 'AuthMaterialName')
     AuthMaterialString = Shapes::StringShape.new(name: 'AuthMaterialString')
     AuthMaterialType = Shapes::StringShape.new(name: 'AuthMaterialType')
+    AuthMaterials = Shapes::ListShape.new(name: 'AuthMaterials')
     AuthType = Shapes::StringShape.new(name: 'AuthType')
     AuthUrl = Shapes::StringShape.new(name: 'AuthUrl')
     BaseRatePerMinute = Shapes::IntegerShape.new(name: 'BaseRatePerMinute')
@@ -90,6 +93,7 @@ module Aws::IoTManagedIntegrations
     ConnectorDestinationName = Shapes::StringShape.new(name: 'ConnectorDestinationName')
     ConnectorDestinationSummary = Shapes::StructureShape.new(name: 'ConnectorDestinationSummary')
     ConnectorDeviceId = Shapes::StringShape.new(name: 'ConnectorDeviceId')
+    ConnectorDeviceIdList = Shapes::ListShape.new(name: 'ConnectorDeviceIdList')
     ConnectorDeviceName = Shapes::StringShape.new(name: 'ConnectorDeviceName')
     ConnectorEventMessage = Shapes::StringShape.new(name: 'ConnectorEventMessage')
     ConnectorEventOperation = Shapes::StringShape.new(name: 'ConnectorEventOperation')
@@ -196,6 +200,8 @@ module Aws::IoTManagedIntegrations
     ExecutionNumber = Shapes::IntegerShape.new(name: 'ExecutionNumber')
     ExponentialRolloutRate = Shapes::StructureShape.new(name: 'ExponentialRolloutRate')
     ExtrinsicSchemaId = Shapes::StringShape.new(name: 'ExtrinsicSchemaId')
+    GeneralAuthorizationName = Shapes::StructureShape.new(name: 'GeneralAuthorizationName')
+    GeneralAuthorizationUpdate = Shapes::StructureShape.new(name: 'GeneralAuthorizationUpdate')
     GetAccountAssociationRequest = Shapes::StructureShape.new(name: 'GetAccountAssociationRequest')
     GetAccountAssociationResponse = Shapes::StructureShape.new(name: 'GetAccountAssociationResponse')
     GetCloudConnectorRequest = Shapes::StructureShape.new(name: 'GetCloudConnectorRequest')
@@ -301,6 +307,7 @@ module Aws::IoTManagedIntegrations
     ManagedThingArn = Shapes::StringShape.new(name: 'ManagedThingArn')
     ManagedThingAssociation = Shapes::StructureShape.new(name: 'ManagedThingAssociation')
     ManagedThingAssociationList = Shapes::ListShape.new(name: 'ManagedThingAssociationList')
+    ManagedThingAssociationStatus = Shapes::StringShape.new(name: 'ManagedThingAssociationStatus')
     ManagedThingId = Shapes::StringShape.new(name: 'ManagedThingId')
     ManagedThingListDefinition = Shapes::ListShape.new(name: 'ManagedThingListDefinition')
     ManagedThingSchemaListDefinition = Shapes::ListShape.new(name: 'ManagedThingSchemaListDefinition')
@@ -348,7 +355,7 @@ module Aws::IoTManagedIntegrations
     NotificationConfigurationUpdatedAt = Shapes::TimestampShape.new(name: 'NotificationConfigurationUpdatedAt')
     NumberOfNotifiedThings = Shapes::IntegerShape.new(name: 'NumberOfNotifiedThings')
     NumberOfSucceededThings = Shapes::IntegerShape.new(name: 'NumberOfSucceededThings')
-    OAuthAuthorizationUrl = Shapes::StringShape.new(name: 'OAuthAuthorizationUrl')
+    OAuthAuthorizationUrlOutput = Shapes::StringShape.new(name: 'OAuthAuthorizationUrlOutput')
     OAuthCompleteRedirectUrl = Shapes::StringShape.new(name: 'OAuthCompleteRedirectUrl')
     OAuthConfig = Shapes::StructureShape.new(name: 'OAuthConfig')
     OAuthUpdate = Shapes::StructureShape.new(name: 'OAuthUpdate')
@@ -507,10 +514,18 @@ module Aws::IoTManagedIntegrations
     AccountAssociationListDefinition.member = Shapes::ShapeRef.new(shape: AccountAssociationItem)
 
     AuthConfig.add_member(:o_auth, Shapes::ShapeRef.new(shape: OAuthConfig, location_name: "oAuth"))
+    AuthConfig.add_member(:general_authorization, Shapes::ShapeRef.new(shape: AuthMaterials, location_name: "GeneralAuthorization"))
     AuthConfig.struct_class = Types::AuthConfig
 
     AuthConfigUpdate.add_member(:o_auth_update, Shapes::ShapeRef.new(shape: OAuthUpdate, location_name: "oAuthUpdate"))
+    AuthConfigUpdate.add_member(:general_authorization_update, Shapes::ShapeRef.new(shape: GeneralAuthorizationUpdate, location_name: "GeneralAuthorizationUpdate"))
     AuthConfigUpdate.struct_class = Types::AuthConfigUpdate
+
+    AuthMaterial.add_member(:secrets_manager, Shapes::ShapeRef.new(shape: SecretsManager, required: true, location_name: "SecretsManager"))
+    AuthMaterial.add_member(:auth_material_name, Shapes::ShapeRef.new(shape: AuthMaterialName, required: true, location_name: "AuthMaterialName"))
+    AuthMaterial.struct_class = Types::AuthMaterial
+
+    AuthMaterials.member = Shapes::ShapeRef.new(shape: AuthMaterial)
 
     CapabilityAction.add_member(:name, Shapes::ShapeRef.new(shape: CapabilityActionName, required: true, location_name: "name"))
     CapabilityAction.add_member(:ref, Shapes::ShapeRef.new(shape: ActionReference, location_name: "ref"))
@@ -590,6 +605,8 @@ module Aws::IoTManagedIntegrations
     ConnectorDestinationSummary.add_member(:id, Shapes::ShapeRef.new(shape: ConnectorDestinationId, location_name: "Id"))
     ConnectorDestinationSummary.struct_class = Types::ConnectorDestinationSummary
 
+    ConnectorDeviceIdList.member = Shapes::ShapeRef.new(shape: ConnectorDeviceId)
+
     ConnectorItem.add_member(:name, Shapes::ShapeRef.new(shape: DisplayName, required: true, location_name: "Name"))
     ConnectorItem.add_member(:endpoint_config, Shapes::ShapeRef.new(shape: EndpointConfig, required: true, location_name: "EndpointConfig"))
     ConnectorItem.add_member(:description, Shapes::ShapeRef.new(shape: CloudConnectorDescription, location_name: "Description"))
@@ -605,9 +622,10 @@ module Aws::IoTManagedIntegrations
     CreateAccountAssociationRequest.add_member(:name, Shapes::ShapeRef.new(shape: AccountAssociationName, location_name: "Name"))
     CreateAccountAssociationRequest.add_member(:description, Shapes::ShapeRef.new(shape: AccountAssociationDescription, location_name: "Description"))
     CreateAccountAssociationRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "Tags"))
+    CreateAccountAssociationRequest.add_member(:general_authorization, Shapes::ShapeRef.new(shape: GeneralAuthorizationName, location_name: "GeneralAuthorization"))
     CreateAccountAssociationRequest.struct_class = Types::CreateAccountAssociationRequest
 
-    CreateAccountAssociationResponse.add_member(:o_auth_authorization_url, Shapes::ShapeRef.new(shape: OAuthAuthorizationUrl, required: true, location_name: "OAuthAuthorizationUrl"))
+    CreateAccountAssociationResponse.add_member(:o_auth_authorization_url, Shapes::ShapeRef.new(shape: OAuthAuthorizationUrlOutput, required: true, location_name: "OAuthAuthorizationUrl"))
     CreateAccountAssociationResponse.add_member(:account_association_id, Shapes::ShapeRef.new(shape: AccountAssociationId, required: true, location_name: "AccountAssociationId"))
     CreateAccountAssociationResponse.add_member(:association_state, Shapes::ShapeRef.new(shape: AssociationState, required: true, location_name: "AssociationState"))
     CreateAccountAssociationResponse.add_member(:arn, Shapes::ShapeRef.new(shape: AccountAssociationArn, location_name: "Arn"))
@@ -626,9 +644,9 @@ module Aws::IoTManagedIntegrations
     CreateConnectorDestinationRequest.add_member(:name, Shapes::ShapeRef.new(shape: ConnectorDestinationName, location_name: "Name"))
     CreateConnectorDestinationRequest.add_member(:description, Shapes::ShapeRef.new(shape: ConnectorDestinationDescription, location_name: "Description"))
     CreateConnectorDestinationRequest.add_member(:cloud_connector_id, Shapes::ShapeRef.new(shape: CloudConnectorId, required: true, location_name: "CloudConnectorId"))
-    CreateConnectorDestinationRequest.add_member(:auth_type, Shapes::ShapeRef.new(shape: AuthType, required: true, location_name: "AuthType"))
+    CreateConnectorDestinationRequest.add_member(:auth_type, Shapes::ShapeRef.new(shape: AuthType, location_name: "AuthType"))
     CreateConnectorDestinationRequest.add_member(:auth_config, Shapes::ShapeRef.new(shape: AuthConfig, required: true, location_name: "AuthConfig"))
-    CreateConnectorDestinationRequest.add_member(:secrets_manager, Shapes::ShapeRef.new(shape: SecretsManager, required: true, location_name: "SecretsManager"))
+    CreateConnectorDestinationRequest.add_member(:secrets_manager, Shapes::ShapeRef.new(shape: SecretsManager, location_name: "SecretsManager"))
     CreateConnectorDestinationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     CreateConnectorDestinationRequest.struct_class = Types::CreateConnectorDestinationRequest
 
@@ -729,6 +747,7 @@ module Aws::IoTManagedIntegrations
 
     CreateProvisioningProfileRequest.add_member(:provisioning_type, Shapes::ShapeRef.new(shape: ProvisioningType, required: true, location_name: "ProvisioningType"))
     CreateProvisioningProfileRequest.add_member(:ca_certificate, Shapes::ShapeRef.new(shape: CaCertificate, location_name: "CaCertificate"))
+    CreateProvisioningProfileRequest.add_member(:claim_certificate, Shapes::ShapeRef.new(shape: ClaimCertificate, location_name: "ClaimCertificate"))
     CreateProvisioningProfileRequest.add_member(:name, Shapes::ShapeRef.new(shape: ProvisioningProfileName, location_name: "Name"))
     CreateProvisioningProfileRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     CreateProvisioningProfileRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "Tags"))
@@ -849,6 +868,13 @@ module Aws::IoTManagedIntegrations
     ExponentialRolloutRate.add_member(:rate_increase_criteria, Shapes::ShapeRef.new(shape: RolloutRateIncreaseCriteria, location_name: "RateIncreaseCriteria"))
     ExponentialRolloutRate.struct_class = Types::ExponentialRolloutRate
 
+    GeneralAuthorizationName.add_member(:auth_material_name, Shapes::ShapeRef.new(shape: AuthMaterialName, location_name: "AuthMaterialName"))
+    GeneralAuthorizationName.struct_class = Types::GeneralAuthorizationName
+
+    GeneralAuthorizationUpdate.add_member(:auth_materials_to_add, Shapes::ShapeRef.new(shape: AuthMaterials, location_name: "AuthMaterialsToAdd"))
+    GeneralAuthorizationUpdate.add_member(:auth_materials_to_update, Shapes::ShapeRef.new(shape: AuthMaterials, location_name: "AuthMaterialsToUpdate"))
+    GeneralAuthorizationUpdate.struct_class = Types::GeneralAuthorizationUpdate
+
     GetAccountAssociationRequest.add_member(:account_association_id, Shapes::ShapeRef.new(shape: AccountAssociationId, required: true, location: "uri", location_name: "AccountAssociationId"))
     GetAccountAssociationRequest.struct_class = Types::GetAccountAssociationRequest
 
@@ -859,8 +885,9 @@ module Aws::IoTManagedIntegrations
     GetAccountAssociationResponse.add_member(:name, Shapes::ShapeRef.new(shape: AccountAssociationName, location_name: "Name"))
     GetAccountAssociationResponse.add_member(:description, Shapes::ShapeRef.new(shape: AccountAssociationDescription, location_name: "Description"))
     GetAccountAssociationResponse.add_member(:arn, Shapes::ShapeRef.new(shape: AccountAssociationArn, location_name: "Arn"))
-    GetAccountAssociationResponse.add_member(:o_auth_authorization_url, Shapes::ShapeRef.new(shape: OAuthAuthorizationUrl, required: true, location_name: "OAuthAuthorizationUrl"))
+    GetAccountAssociationResponse.add_member(:o_auth_authorization_url, Shapes::ShapeRef.new(shape: OAuthAuthorizationUrlOutput, required: true, location_name: "OAuthAuthorizationUrl"))
     GetAccountAssociationResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "Tags"))
+    GetAccountAssociationResponse.add_member(:general_authorization, Shapes::ShapeRef.new(shape: GeneralAuthorizationName, location_name: "GeneralAuthorization"))
     GetAccountAssociationResponse.struct_class = Types::GetAccountAssociationResponse
 
     GetCloudConnectorRequest.add_member(:identifier, Shapes::ShapeRef.new(shape: CloudConnectorId, required: true, location: "uri", location_name: "Identifier"))
@@ -1281,6 +1308,7 @@ module Aws::IoTManagedIntegrations
 
     ManagedThingAssociation.add_member(:managed_thing_id, Shapes::ShapeRef.new(shape: ManagedThingId, location_name: "ManagedThingId"))
     ManagedThingAssociation.add_member(:account_association_id, Shapes::ShapeRef.new(shape: AccountAssociationId, location_name: "AccountAssociationId"))
+    ManagedThingAssociation.add_member(:managed_thing_association_status, Shapes::ShapeRef.new(shape: ManagedThingAssociationStatus, location_name: "ManagedThingAssociationStatus"))
     ManagedThingAssociation.struct_class = Types::ManagedThingAssociation
 
     ManagedThingAssociationList.member = Shapes::ShapeRef.new(shape: ManagedThingAssociation)
@@ -1586,7 +1614,7 @@ module Aws::IoTManagedIntegrations
     StartAccountAssociationRefreshRequest.add_member(:account_association_id, Shapes::ShapeRef.new(shape: AccountAssociationId, required: true, location: "uri", location_name: "AccountAssociationId"))
     StartAccountAssociationRefreshRequest.struct_class = Types::StartAccountAssociationRefreshRequest
 
-    StartAccountAssociationRefreshResponse.add_member(:o_auth_authorization_url, Shapes::ShapeRef.new(shape: OAuthAuthorizationUrl, required: true, location_name: "OAuthAuthorizationUrl"))
+    StartAccountAssociationRefreshResponse.add_member(:o_auth_authorization_url, Shapes::ShapeRef.new(shape: OAuthAuthorizationUrlOutput, required: true, location_name: "OAuthAuthorizationUrl"))
     StartAccountAssociationRefreshResponse.struct_class = Types::StartAccountAssociationRefreshResponse
 
     StartDeviceDiscoveryRequest.add_member(:discovery_type, Shapes::ShapeRef.new(shape: DiscoveryType, required: true, location_name: "DiscoveryType"))
@@ -1598,6 +1626,7 @@ module Aws::IoTManagedIntegrations
     StartDeviceDiscoveryRequest.add_member(:authentication_material_type, Shapes::ShapeRef.new(shape: DiscoveryAuthMaterialType, location_name: "AuthenticationMaterialType"))
     StartDeviceDiscoveryRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken"))
     StartDeviceDiscoveryRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, deprecated: true, location_name: "Tags", metadata: {"deprecatedMessage" => "Tags have been deprecated from this api", "deprecatedSince" => "06-25-2025"}))
+    StartDeviceDiscoveryRequest.add_member(:connector_device_id_list, Shapes::ShapeRef.new(shape: ConnectorDeviceIdList, location_name: "ConnectorDeviceIdList"))
     StartDeviceDiscoveryRequest.add_member(:protocol, Shapes::ShapeRef.new(shape: ProtocolType, location_name: "Protocol"))
     StartDeviceDiscoveryRequest.add_member(:end_device_identifier, Shapes::ShapeRef.new(shape: ManagedThingId, location_name: "EndDeviceIdentifier"))
     StartDeviceDiscoveryRequest.struct_class = Types::StartDeviceDiscoveryRequest
@@ -2831,6 +2860,7 @@ module Aws::IoTManagedIntegrations
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)

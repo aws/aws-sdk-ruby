@@ -1218,6 +1218,56 @@ module Aws::Kafka
       include Aws::Structure
     end
 
+    # Request body for CreateTopic.
+    #
+    # @!attribute [rw] cluster_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] topic_name
+    #   @return [String]
+    #
+    # @!attribute [rw] partition_count
+    #   @return [Integer]
+    #
+    # @!attribute [rw] replication_factor
+    #   @return [Integer]
+    #
+    # @!attribute [rw] configs
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/CreateTopicRequest AWS API Documentation
+    #
+    class CreateTopicRequest < Struct.new(
+      :cluster_arn,
+      :topic_name,
+      :partition_count,
+      :replication_factor,
+      :configs)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Response body for CreateTopic.
+    #
+    # @!attribute [rw] topic_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] topic_name
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/CreateTopicResponse AWS API Documentation
+    #
+    class CreateTopicResponse < Struct.new(
+      :topic_arn,
+      :topic_name,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Request body for CreateVpcConnection.
     #
     # @!attribute [rw] target_cluster_arn
@@ -1405,6 +1455,44 @@ module Aws::Kafka
     class DeleteReplicatorResponse < Struct.new(
       :replicator_arn,
       :replicator_state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Request body for DeleteTopic.
+    #
+    # @!attribute [rw] cluster_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] topic_name
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/DeleteTopicRequest AWS API Documentation
+    #
+    class DeleteTopicRequest < Struct.new(
+      :cluster_arn,
+      :topic_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Response body for DeleteTopic.
+    #
+    # @!attribute [rw] topic_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] topic_name
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/DeleteTopicResponse AWS API Documentation
+    #
+    class DeleteTopicResponse < Struct.new(
+      :topic_arn,
+      :topic_name,
+      :status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4129,6 +4217,159 @@ module Aws::Kafka
       include Aws::Structure
     end
 
+    # Returns information about an error.
+    #
+    # @!attribute [rw] invalid_parameter
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/TopicExistsException AWS API Documentation
+    #
+    class TopicExistsException < Struct.new(
+      :invalid_parameter,
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Returns information about an error.
+    #
+    # @!attribute [rw] invalid_parameter
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/ClusterConnectivityException AWS API Documentation
+    #
+    class ClusterConnectivityException < Struct.new(
+      :invalid_parameter,
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Returns information about an error.
+    #
+    # @!attribute [rw] invalid_parameter
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/KafkaTimeoutException AWS API Documentation
+    #
+    class KafkaTimeoutException < Struct.new(
+      :invalid_parameter,
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Returns information about an error.
+    #
+    # @!attribute [rw] invalid_parameter
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/UnknownTopicOrPartitionException AWS API Documentation
+    #
+    class UnknownTopicOrPartitionException < Struct.new(
+      :invalid_parameter,
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Returns information about an error.
+    #
+    # @!attribute [rw] invalid_parameter
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/ControllerMovedException AWS API Documentation
+    #
+    class ControllerMovedException < Struct.new(
+      :invalid_parameter,
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Returns information about an error.
+    #
+    # @!attribute [rw] invalid_parameter
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/NotControllerException AWS API Documentation
+    #
+    class NotControllerException < Struct.new(
+      :invalid_parameter,
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Returns information about an error.
+    #
+    # @!attribute [rw] invalid_parameter
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/ReassignmentInProgressException AWS API Documentation
+    #
+    class ReassignmentInProgressException < Struct.new(
+      :invalid_parameter,
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Returns information about an error.
+    #
+    # @!attribute [rw] invalid_parameter
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/GroupSubscribedToTopicException AWS API Documentation
+    #
+    class GroupSubscribedToTopicException < Struct.new(
+      :invalid_parameter,
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Returns information about an error.
+    #
+    # @!attribute [rw] invalid_parameter
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/KafkaRequestException AWS API Documentation
+    #
+    class KafkaRequestException < Struct.new(
+      :invalid_parameter,
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] error_code
     #   @return [String]
     #
@@ -4708,6 +4949,52 @@ module Aws::Kafka
       :provisioned_throughput,
       :storage_mode,
       :volume_size_gb)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Request body for UpdateTopic.
+    #
+    # @!attribute [rw] cluster_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] topic_name
+    #   @return [String]
+    #
+    # @!attribute [rw] configs
+    #   @return [String]
+    #
+    # @!attribute [rw] partition_count
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/UpdateTopicRequest AWS API Documentation
+    #
+    class UpdateTopicRequest < Struct.new(
+      :cluster_arn,
+      :topic_name,
+      :configs,
+      :partition_count)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Response body for UpdateTopic.
+    #
+    # @!attribute [rw] topic_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] topic_name
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/UpdateTopicResponse AWS API Documentation
+    #
+    class UpdateTopicResponse < Struct.new(
+      :topic_arn,
+      :topic_name,
+      :status)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -436,7 +436,7 @@ module Aws
                                               integration_config: {
                                                 customer_profiles: {
                                                   domain_arn: ::String,
-                                                  object_type_names: Hash[("Campaign-Email" | "Campaign-SMS" | "Campaign-Telephony" | "Campaign-Orchestration"), ::String]
+                                                  object_type_names: Hash[("Campaign-Email" | "Campaign-SMS" | "Campaign-Telephony" | "Campaign-Orchestration" | "Campaign-WhatsApp"), ::String]
                                                 }?,
                                                 q_connect: {
                                                   knowledge_base_arn: ::String

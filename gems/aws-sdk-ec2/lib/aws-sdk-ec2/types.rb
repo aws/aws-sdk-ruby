@@ -3868,6 +3868,16 @@ module Aws::EC2
     #   Wavelength Zone group.
     #   @return [String]
     #
+    # @!attribute [rw] geography
+    #   The geography information for the Availability Zone or Local Zone.
+    #   The geography is returned as a list.
+    #   @return [Array<Types::AvailabilityZoneGeography>]
+    #
+    # @!attribute [rw] sub_geography
+    #   The sub-geography information for the Availability Zone or Local
+    #   Zone. The sub-geography is returned as a list.
+    #   @return [Array<Types::AvailabilityZoneSubGeography>]
+    #
     # @!attribute [rw] state
     #   The state of the Availability Zone, Local Zone, or Wavelength Zone.
     #   The possible values are `available`, `unavailable`, and
@@ -3888,6 +3898,8 @@ module Aws::EC2
       :parent_zone_name,
       :parent_zone_id,
       :group_long_name,
+      :geography,
+      :sub_geography,
       :state)
       SENSITIVE = []
       include Aws::Structure
@@ -3947,6 +3959,21 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # Describes the geography information for an Availability Zone or Local
+    # Zone.
+    #
+    # @!attribute [rw] name
+    #   The name of the geography, for example, `United States of America`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AvailabilityZoneGeography AWS API Documentation
+    #
+    class AvailabilityZoneGeography < Struct.new(
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes a message about an Availability Zone, Local Zone, or
     # Wavelength Zone.
     #
@@ -3959,6 +3986,21 @@ module Aws::EC2
     #
     class AvailabilityZoneMessage < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the sub-geography information for an Availability Zone or
+    # Local Zone.
+    #
+    # @!attribute [rw] name
+    #   The name of the sub-geography, for example, `Oregon.`
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AvailabilityZoneSubGeography AWS API Documentation
+    #
+    class AvailabilityZoneSubGeography < Struct.new(
+      :name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8428,12 +8470,17 @@ module Aws::EC2
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/sev-snp.html
     #   @return [String]
     #
+    # @!attribute [rw] nested_virtualization
+    #   Indicates whether the instance is enabled for nested virtualization.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CpuOptions AWS API Documentation
     #
     class CpuOptions < Struct.new(
       :core_count,
       :threads_per_core,
-      :amd_sev_snp)
+      :amd_sev_snp,
+      :nested_virtualization)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8461,12 +8508,21 @@ module Aws::EC2
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/sev-snp.html
     #   @return [String]
     #
+    # @!attribute [rw] nested_virtualization
+    #   Indicates whether to enable the instance for nested virtualization.
+    #   Nested virtualization is supported only on 8th generation
+    #   Intel-based instance types (c8i, m8i, r8i, and their flex variants).
+    #   When nested virtualization is enabled, Virtual Secure Mode (VSM) is
+    #   automatically disabled for the instance.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CpuOptionsRequest AWS API Documentation
     #
     class CpuOptionsRequest < Struct.new(
       :core_count,
       :threads_per_core,
-      :amd_sev_snp)
+      :amd_sev_snp,
+      :nested_virtualization)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13670,6 +13726,151 @@ module Aws::EC2
     #
     class CreateRouteTableResult < Struct.new(
       :route_table,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] client_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. For more information, see [Ensure
+    #   Idempotency][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] ipv_4_cidr_block
+    #   The IPv4 CIDR block for the secondary network. The CIDR block size
+    #   must be between /12 and /28.
+    #   @return [String]
+    #
+    # @!attribute [rw] network_type
+    #   The type of secondary network.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_specifications
+    #   The tags to assign to the secondary network.
+    #   @return [Array<Types::TagSpecification>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateSecondaryNetworkRequest AWS API Documentation
+    #
+    class CreateSecondaryNetworkRequest < Struct.new(
+      :client_token,
+      :dry_run,
+      :ipv_4_cidr_block,
+      :network_type,
+      :tag_specifications)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] secondary_network
+    #   Information about the secondary network.
+    #   @return [Types::SecondaryNetwork]
+    #
+    # @!attribute [rw] client_token
+    #   Unique, case-sensitive identifier to ensure the idempotency of the
+    #   request. Only returned if a client token was provided in the
+    #   request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateSecondaryNetworkResult AWS API Documentation
+    #
+    class CreateSecondaryNetworkResult < Struct.new(
+      :secondary_network,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] client_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. For more information, see [Ensure
+    #   Idempotency][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
+    #   @return [String]
+    #
+    # @!attribute [rw] availability_zone
+    #   The Availability Zone for the secondary subnet. You cannot specify
+    #   both `AvailabilityZone` and `AvailabilityZoneId` in the same
+    #   request.
+    #   @return [String]
+    #
+    # @!attribute [rw] availability_zone_id
+    #   The ID of the Availability Zone for the secondary subnet. This
+    #   option is preferred over `AvailabilityZone` as it provides a
+    #   consistent identifier across Amazon Web Services accounts. You
+    #   cannot specify both `AvailabilityZone` and `AvailabilityZoneId` in
+    #   the same request.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] ipv_4_cidr_block
+    #   The IPv4 CIDR block for the secondary subnet. The CIDR block size
+    #   must be between /12 and /28.
+    #   @return [String]
+    #
+    # @!attribute [rw] secondary_network_id
+    #   The ID of the secondary network in which to create the secondary
+    #   subnet.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_specifications
+    #   The tags to assign to the secondary subnet.
+    #   @return [Array<Types::TagSpecification>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateSecondarySubnetRequest AWS API Documentation
+    #
+    class CreateSecondarySubnetRequest < Struct.new(
+      :client_token,
+      :availability_zone,
+      :availability_zone_id,
+      :dry_run,
+      :ipv_4_cidr_block,
+      :secondary_network_id,
+      :tag_specifications)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] secondary_subnet
+    #   Information about the secondary subnet.
+    #   @return [Types::SecondarySubnet]
+    #
+    # @!attribute [rw] client_token
+    #   Unique, case-sensitive identifier to ensure the idempotency of the
+    #   request. Only returned if a client token was provided in the
+    #   request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateSecondarySubnetResult AWS API Documentation
+    #
+    class CreateSecondarySubnetResult < Struct.new(
+      :secondary_subnet,
       :client_token)
       SENSITIVE = []
       include Aws::Structure
@@ -19183,6 +19384,112 @@ module Aws::EC2
     class DeleteRouteTableRequest < Struct.new(
       :dry_run,
       :route_table_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] client_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. For more information, see [Ensure
+    #   Idempotency][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] secondary_network_id
+    #   The ID of the secondary network.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteSecondaryNetworkRequest AWS API Documentation
+    #
+    class DeleteSecondaryNetworkRequest < Struct.new(
+      :client_token,
+      :dry_run,
+      :secondary_network_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] secondary_network
+    #   Information about the secondary network.
+    #   @return [Types::SecondaryNetwork]
+    #
+    # @!attribute [rw] client_token
+    #   Unique, case-sensitive identifier to ensure the idempotency of the
+    #   request. Only returned if a client token was provided in the
+    #   request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteSecondaryNetworkResult AWS API Documentation
+    #
+    class DeleteSecondaryNetworkResult < Struct.new(
+      :secondary_network,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] client_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. For more information, see [Ensure
+    #   Idempotency][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] secondary_subnet_id
+    #   The ID of the secondary subnet to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteSecondarySubnetRequest AWS API Documentation
+    #
+    class DeleteSecondarySubnetRequest < Struct.new(
+      :client_token,
+      :dry_run,
+      :secondary_subnet_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] secondary_subnet
+    #   Information about the secondary subnet being deleted.
+    #   @return [Types::SecondarySubnet]
+    #
+    # @!attribute [rw] client_token
+    #   Unique, case-sensitive identifier to ensure the idempotency of the
+    #   request. Only returned if a client token was provided in the
+    #   request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteSecondarySubnetResult AWS API Documentation
+    #
+    class DeleteSecondarySubnetResult < Struct.new(
+      :secondary_subnet,
+      :client_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -30524,6 +30831,284 @@ module Aws::EC2
     class DescribeScheduledInstancesResult < Struct.new(
       :next_token,
       :scheduled_instance_set)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] filters
+    #   The filters.
+    #
+    #   * `attachment.attachment-id` - The ID of the secondary interface
+    #     attachment.
+    #
+    #   * `attachment.instance-id` - The ID of the instance to which the
+    #     secondary interface is attached.
+    #
+    #   * `attachment.instance-owner-id` - The ID of the Amazon Web Services
+    #     account that owns the instance to which the secondary interface is
+    #     attached.
+    #
+    #   * `attachment.status` - The attachment status (`attaching` \|
+    #     `attached` \| `detaching` \| `detached`).
+    #
+    #   * `private-ipv4-addresses.private-ip-address` - The private IPv4
+    #     address associated with the secondary interface.
+    #
+    #   * `owner-id` - The ID of the Amazon Web Services account that owns
+    #     the secondary interface.
+    #
+    #   * `secondary-interface-arn` - The ARN of the secondary interface.
+    #
+    #   * `secondary-interface-id` - The ID of the secondary interface.
+    #
+    #   * `secondary-interface-type` - The type of secondary interface
+    #     (`secondary`).
+    #
+    #   * `secondary-network-id` - The ID of the secondary network.
+    #
+    #   * `secondary-network-type` - The type of the secondary network
+    #     (`rdma`).
+    #
+    #   * `secondary-subnet-id` - The ID of the secondary subnet.
+    #
+    #   * `status` - The status of the secondary interface (`available` \|
+    #     `in-use`).
+    #
+    #   * `tag`:&lt;key&gt; - The key/value combination of a tag assigned to
+    #     the resource. Use the tag key in the filter name and the tag value
+    #     as the filter value. For example, to find all resources that have
+    #     a tag with the key `Owner` and the value `TeamA`, specify
+    #     `tag:Owner` for the filter name and `TeamA` for the filter value.
+    #
+    #   * `tag-key` - The key of a tag assigned to the resource. Use this
+    #     filter to find all resources assigned a tag with a specific key,
+    #     regardless of the tag value.
+    #   @return [Array<Types::Filter>]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] secondary_interface_ids
+    #   The IDs of the secondary interfaces.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeSecondaryInterfacesRequest AWS API Documentation
+    #
+    class DescribeSecondaryInterfacesRequest < Struct.new(
+      :dry_run,
+      :filters,
+      :max_results,
+      :next_token,
+      :secondary_interface_ids)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] secondary_interfaces
+    #   Information about the secondary interfaces.
+    #   @return [Array<Types::SecondaryInterface>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. This value is
+    #   `null` when there are no more results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeSecondaryInterfacesResult AWS API Documentation
+    #
+    class DescribeSecondaryInterfacesResult < Struct.new(
+      :secondary_interfaces,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] filters
+    #   The filters. The following are the possible values:
+    #
+    #   * `ipv4-cidr-block-association.association-id` - The association ID
+    #     for an IPv4 CIDR block associated with the secondary network.
+    #
+    #   * `ipv4-cidr-block-association.cidr-block` - An IPv4 CIDR block
+    #     associated with the secondary network.
+    #
+    #   * `ipv4-cidr-block-association.state` - The state of an IPv4 CIDR
+    #     block associated with the secondary network.
+    #
+    #   * `owner-id` - The ID of the Amazon Web Services account that owns
+    #     the secondary network.
+    #
+    #   * `secondary-network-id` - The ID of the secondary network.
+    #
+    #   * `secondary-network-arn` - The ARN of the secondary network.
+    #
+    #   * `state` - The state of the secondary network (`create-in-progress`
+    #     \| `create-complete` \| `create-failed` \| `delete-in-progress` \|
+    #     `delete-complete` \| `delete-failed`).
+    #
+    #   * `tag`:&lt;key&gt; - The key/value combination of a tag assigned to
+    #     the resource. Use the tag key in the filter name and the tag value
+    #     as the filter value. For example, to find all resources that have
+    #     a tag with the key `Owner` and the value `TeamA`, specify
+    #     `tag:Owner` for the filter name and `TeamA` for the filter value.
+    #
+    #   * `tag-key` - The key of a tag assigned to the resource. Use this
+    #     filter to find all resources assigned a tag with a specific key,
+    #     regardless of the tag value.
+    #
+    #   * `type` - The type of the secondary network (`rdma`).
+    #   @return [Array<Types::Filter>]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] secondary_network_ids
+    #   The IDs of the secondary networks.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeSecondaryNetworksRequest AWS API Documentation
+    #
+    class DescribeSecondaryNetworksRequest < Struct.new(
+      :dry_run,
+      :filters,
+      :max_results,
+      :next_token,
+      :secondary_network_ids)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] secondary_networks
+    #   Information about the secondary networks.
+    #   @return [Array<Types::SecondaryNetwork>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. This value is
+    #   `null` when there are no more results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeSecondaryNetworksResult AWS API Documentation
+    #
+    class DescribeSecondaryNetworksResult < Struct.new(
+      :secondary_networks,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] filters
+    #   The filters.
+    #
+    #   * `ipv4-cidr-block-association.association-id` - The association ID
+    #     for an IPv4 CIDR block associated with the secondary subnet.
+    #
+    #   * `ipv4-cidr-block-association.cidr-block` - An IPv4 CIDR block
+    #     associated with the secondary subnet.
+    #
+    #   * `ipv4-cidr-block-association.state` - The state of an IPv4 CIDR
+    #     block associated with the secondary subnet.
+    #
+    #   * `owner-id` - The ID of the Amazon Web Services account that owns
+    #     the secondary subnet.
+    #
+    #   * `secondary-network-id` - The ID of the secondary network.
+    #
+    #   * `secondary-network-type` - The type of the secondary network
+    #     (`rdma`).
+    #
+    #   * `secondary-subnet-id` - The ID of the secondary subnet.
+    #
+    #   * `secondary-subnet-arn` - The ARN of the secondary subnet.
+    #
+    #   * `state` - The state of the secondary subnet (`create-in-progress`
+    #     \| `create-complete` \| `create-failed` \| `delete-in-progress` \|
+    #     `delete-complete` \| `delete-failed`).
+    #
+    #   * `tag`:&lt;key&gt; - The key/value combination of a tag assigned to
+    #     the resource. Use the tag key in the filter name and the tag value
+    #     as the filter value. For example, to find all resources that have
+    #     a tag with the key `Owner` and the value `TeamA`, specify
+    #     `tag:Owner` for the filter name and `TeamA` for the filter value.
+    #
+    #   * `tag-key` - The key of a tag assigned to the resource. Use this
+    #     filter to find all resources assigned a tag with a specific key,
+    #     regardless of the tag value.
+    #   @return [Array<Types::Filter>]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] secondary_subnet_ids
+    #   The IDs of the secondary subnets.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeSecondarySubnetsRequest AWS API Documentation
+    #
+    class DescribeSecondarySubnetsRequest < Struct.new(
+      :dry_run,
+      :filters,
+      :max_results,
+      :next_token,
+      :secondary_subnet_ids)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] secondary_subnets
+    #   Information about the secondary subnets.
+    #   @return [Array<Types::SecondarySubnet>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. This value is
+    #   `null` when there are no more results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeSecondarySubnetsResult AWS API Documentation
+    #
+    class DescribeSecondarySubnetsResult < Struct.new(
+      :secondary_subnets,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -49171,6 +49756,10 @@ module Aws::EC2
     #   The service provider that manages the instance.
     #   @return [Types::OperatorResponse]
     #
+    # @!attribute [rw] secondary_interfaces
+    #   The secondary interfaces for the instance.
+    #   @return [Array<Types::InstanceSecondaryInterface>]
+    #
     # @!attribute [rw] instance_id
     #   The ID of the instance.
     #   @return [String]
@@ -49320,6 +49909,7 @@ module Aws::EC2
       :current_instance_boot_mode,
       :network_performance_options,
       :operator,
+      :secondary_interfaces,
       :instance_id,
       :image_id,
       :state,
@@ -50173,13 +50763,13 @@ module Aws::EC2
     #
     # @!attribute [rw] instance_metadata_tags
     #   Indicates whether access to instance tags from the instance metadata
-    #   is enabled or disabled. For more information, see [Work with
-    #   instance tags using the instance metadata][1] in the *Amazon EC2
+    #   is enabled or disabled. For more information, see [View tags for
+    #   your EC2 instances using instance metadata][1] in the *Amazon EC2
     #   User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html#work-with-tags-in-IMDS
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/work-with-tags-in-IMDS.html
     #   @return [String]
     #
     # @!attribute [rw] managed_by
@@ -50265,14 +50855,14 @@ module Aws::EC2
     # @!attribute [rw] instance_metadata_tags
     #   Set to `enabled` to allow access to instance tags from the instance
     #   metadata. Set to `disabled` to turn off access to instance tags from
-    #   the instance metadata. For more information, see [Work with instance
-    #   tags using the instance metadata][1].
+    #   the instance metadata. For more information, see [View tags for your
+    #   EC2 instances using instance metadata][1].
     #
     #   Default: `disabled`
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html#work-with-tags-in-IMDS
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/work-with-tags-in-IMDS.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceMetadataOptionsRequest AWS API Documentation
@@ -50332,12 +50922,12 @@ module Aws::EC2
     #
     # @!attribute [rw] instance_metadata_tags
     #   Indicates whether access to instance tags from the instance metadata
-    #   is enabled or disabled. For more information, see [Work with
-    #   instance tags using the instance metadata][1].
+    #   is enabled or disabled. For more information, see [View tags for
+    #   your EC2 instances using instance metadata][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html#work-with-tags-in-IMDS
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/work-with-tags-in-IMDS.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceMetadataOptionsResponse AWS API Documentation
@@ -51960,6 +52550,186 @@ module Aws::EC2
       :architecture_types,
       :virtualization_types,
       :instance_requirements)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes a secondary interface attached to an instance.
+    #
+    # @!attribute [rw] attachment
+    #   The attachment information for the secondary interface.
+    #   @return [Types::InstanceSecondaryInterfaceAttachment]
+    #
+    # @!attribute [rw] mac_address
+    #   The MAC address of the secondary interface.
+    #   @return [String]
+    #
+    # @!attribute [rw] secondary_interface_id
+    #   The ID of the secondary interface.
+    #   @return [String]
+    #
+    # @!attribute [rw] owner_id
+    #   The Amazon Web Services account ID of the owner of the secondary
+    #   interface.
+    #   @return [String]
+    #
+    # @!attribute [rw] private_ip_addresses
+    #   The private IPv4 addresses associated with the secondary interface.
+    #   @return [Array<Types::InstanceSecondaryInterfacePrivateIpAddress>]
+    #
+    # @!attribute [rw] source_dest_check
+    #   Indicates whether source/destination checking is enabled.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] status
+    #   The status of the secondary interface.
+    #   @return [String]
+    #
+    # @!attribute [rw] secondary_subnet_id
+    #   The ID of the secondary subnet.
+    #   @return [String]
+    #
+    # @!attribute [rw] secondary_network_id
+    #   The ID of the secondary network.
+    #   @return [String]
+    #
+    # @!attribute [rw] interface_type
+    #   The type of secondary interface.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceSecondaryInterface AWS API Documentation
+    #
+    class InstanceSecondaryInterface < Struct.new(
+      :attachment,
+      :mac_address,
+      :secondary_interface_id,
+      :owner_id,
+      :private_ip_addresses,
+      :source_dest_check,
+      :status,
+      :secondary_subnet_id,
+      :secondary_network_id,
+      :interface_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the attachment of a secondary interface to an instance.
+    #
+    # @!attribute [rw] attach_time
+    #   The timestamp when the attachment was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] attachment_id
+    #   The ID of the attachment.
+    #   @return [String]
+    #
+    # @!attribute [rw] delete_on_termination
+    #   Indicates whether the secondary interface is deleted when the
+    #   instance is terminated.
+    #
+    #   The only supported value for this field is `true`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] device_index
+    #   The device index of the secondary interface.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] status
+    #   The attachment state.
+    #   @return [String]
+    #
+    # @!attribute [rw] network_card_index
+    #   The index of the network card.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceSecondaryInterfaceAttachment AWS API Documentation
+    #
+    class InstanceSecondaryInterfaceAttachment < Struct.new(
+      :attach_time,
+      :attachment_id,
+      :delete_on_termination,
+      :device_index,
+      :status,
+      :network_card_index)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes a private IPv4 address for a secondary interface.
+    #
+    # @!attribute [rw] private_ip_address
+    #   The private IPv4 address.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceSecondaryInterfacePrivateIpAddress AWS API Documentation
+    #
+    class InstanceSecondaryInterfacePrivateIpAddress < Struct.new(
+      :private_ip_address)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes a private IPv4 address for a secondary interface request.
+    #
+    # @!attribute [rw] private_ip_address
+    #   The private IPv4 address.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceSecondaryInterfacePrivateIpAddressRequest AWS API Documentation
+    #
+    class InstanceSecondaryInterfacePrivateIpAddressRequest < Struct.new(
+      :private_ip_address)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes a secondary interface specification for launching an
+    # instance.
+    #
+    # @!attribute [rw] delete_on_termination
+    #   Indicates whether the secondary interface is deleted when the
+    #   instance is terminated.
+    #
+    #   The only supported value for this field is `true`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] device_index
+    #   The device index for the secondary interface attachment.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] private_ip_addresses
+    #   The private IPv4 addresses to assign to the secondary interface.
+    #   @return [Array<Types::InstanceSecondaryInterfacePrivateIpAddressRequest>]
+    #
+    # @!attribute [rw] private_ip_address_count
+    #   The number of private IPv4 addresses to assign to the secondary
+    #   interface.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] secondary_subnet_id
+    #   The ID of the secondary subnet.
+    #   @return [String]
+    #
+    # @!attribute [rw] interface_type
+    #   The type of secondary interface.
+    #   @return [String]
+    #
+    # @!attribute [rw] network_card_index
+    #   The index of the network card. The network card must support
+    #   secondary interfaces.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceSecondaryInterfaceSpecificationRequest AWS API Documentation
+    #
+    class InstanceSecondaryInterfaceSpecificationRequest < Struct.new(
+      :delete_on_termination,
+      :device_index,
+      :private_ip_addresses,
+      :private_ip_address_count,
+      :secondary_subnet_id,
+      :interface_type,
+      :network_card_index)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -55887,12 +56657,17 @@ module Aws::EC2
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/sev-snp.html
     #   @return [String]
     #
+    # @!attribute [rw] nested_virtualization
+    #   Indicates whether the instance is enabled for nested virtualization.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LaunchTemplateCpuOptions AWS API Documentation
     #
     class LaunchTemplateCpuOptions < Struct.new(
       :core_count,
       :threads_per_core,
-      :amd_sev_snp)
+      :amd_sev_snp,
+      :nested_virtualization)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -55920,12 +56695,21 @@ module Aws::EC2
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/sev-snp.html
     #   @return [String]
     #
+    # @!attribute [rw] nested_virtualization
+    #   Indicates whether to enable the instance for nested virtualization.
+    #   Nested virtualization is supported only on 8th generation
+    #   Intel-based instance types (c8i, m8i, r8i, and their flex variants).
+    #   When nested virtualization is enabled, Virtual Secure Mode (VSM) is
+    #   automatically disabled for the instance.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LaunchTemplateCpuOptionsRequest AWS API Documentation
     #
     class LaunchTemplateCpuOptionsRequest < Struct.new(
       :core_count,
       :threads_per_core,
-      :amd_sev_snp)
+      :amd_sev_snp,
+      :nested_virtualization)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -56943,6 +57727,109 @@ module Aws::EC2
       :ena_srd_specification,
       :connection_tracking_specification,
       :ena_queue_count)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes a secondary interface specification in a launch template.
+    #
+    # @!attribute [rw] delete_on_termination
+    #   Indicates whether the secondary interface is deleted when the
+    #   instance is terminated.
+    #
+    #   The only supported value for this field is `true`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] device_index
+    #   The device index for the secondary interface attachment.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] private_ip_addresses
+    #   The private IPv4 addresses to assign to the secondary interface.
+    #
+    #   If you specify `privateIpAddresses` you cannot specify
+    #   `privateIpAddressCount`
+    #   @return [Array<Types::SecondaryInterfacePrivateIpAddressSpecification>]
+    #
+    # @!attribute [rw] private_ip_address_count
+    #   The number of private IPv4 addresses to assign to the secondary
+    #   interface.
+    #
+    #   If you specify `privateIpAddressCount` you cannot specify
+    #   `privateIpAddresses`
+    #   @return [Integer]
+    #
+    # @!attribute [rw] secondary_subnet_id
+    #   The ID of the secondary subnet.
+    #   @return [String]
+    #
+    # @!attribute [rw] interface_type
+    #   The type of secondary interface.
+    #   @return [String]
+    #
+    # @!attribute [rw] network_card_index
+    #   The index of the network card.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LaunchTemplateInstanceSecondaryInterfaceSpecification AWS API Documentation
+    #
+    class LaunchTemplateInstanceSecondaryInterfaceSpecification < Struct.new(
+      :delete_on_termination,
+      :device_index,
+      :private_ip_addresses,
+      :private_ip_address_count,
+      :secondary_subnet_id,
+      :interface_type,
+      :network_card_index)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes a secondary interface specification for a launch template
+    # request.
+    #
+    # @!attribute [rw] delete_on_termination
+    #   Indicates whether the secondary interface is deleted when the
+    #   instance is terminated.
+    #
+    #   The only supported value for this field is `true`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] device_index
+    #   The device index for the secondary interface attachment.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] private_ip_addresses
+    #   The private IPv4 addresses to assign to the secondary interface.
+    #   @return [Array<Types::SecondaryInterfacePrivateIpAddressSpecificationRequest>]
+    #
+    # @!attribute [rw] private_ip_address_count
+    #   The number of private IPv4 addresses to assign to the secondary
+    #   interface.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] secondary_subnet_id
+    #   The ID of the secondary subnet.
+    #   @return [String]
+    #
+    # @!attribute [rw] interface_type
+    #   The type of secondary interface.
+    #   @return [String]
+    #
+    # @!attribute [rw] network_card_index
+    #   The index of the network card.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LaunchTemplateInstanceSecondaryInterfaceSpecificationRequest AWS API Documentation
+    #
+    class LaunchTemplateInstanceSecondaryInterfaceSpecificationRequest < Struct.new(
+      :delete_on_termination,
+      :device_index,
+      :private_ip_addresses,
+      :private_ip_address_count,
+      :secondary_subnet_id,
+      :interface_type,
+      :network_card_index)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -60213,6 +61100,12 @@ module Aws::EC2
     #   The number of threads to run for each CPU core.
     #   @return [Integer]
     #
+    # @!attribute [rw] nested_virtualization
+    #   Indicates whether to enable or disable nested virtualization for the
+    #   instance. When nested virtualization is enabled, Virtual Secure Mode
+    #   (VSM) is automatically disabled for the instance.
+    #   @return [String]
+    #
     # @!attribute [rw] dry_run
     #   Checks whether you have the required permissions for the operation,
     #   without actually making the request, and provides an error response.
@@ -60226,6 +61119,7 @@ module Aws::EC2
       :instance_id,
       :core_count,
       :threads_per_core,
+      :nested_virtualization,
       :dry_run)
       SENSITIVE = []
       include Aws::Structure
@@ -60245,12 +61139,18 @@ module Aws::EC2
     #   specified instance after the update.
     #   @return [Integer]
     #
+    # @!attribute [rw] nested_virtualization
+    #   Indicates whether nested virtualization has been enabled or
+    #   disabled.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyInstanceCpuOptionsResult AWS API Documentation
     #
     class ModifyInstanceCpuOptionsResult < Struct.new(
       :instance_id,
       :core_count,
-      :threads_per_core)
+      :threads_per_core,
+      :nested_virtualization)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -60535,12 +61435,13 @@ module Aws::EC2
     #
     # @!attribute [rw] instance_metadata_tags
     #   Enables or disables access to an instance's tags from the instance
-    #   metadata. For more information, see [Work with instance tags using
-    #   the instance metadata][1] in the *Amazon EC2 User Guide*.
+    #   metadata. For more information, see [View tags for your EC2
+    #   instances using instance metadata][1] in the *Amazon EC2 User
+    #   Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html#work-with-tags-in-IMDS
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/work-with-tags-in-IMDS.html
     #   @return [String]
     #
     # @!attribute [rw] dry_run
@@ -60646,12 +61547,12 @@ module Aws::EC2
     # @!attribute [rw] instance_metadata_tags
     #   Set to `enabled` to allow access to instance tags from the instance
     #   metadata. Set to `disabled` to turn off access to instance tags from
-    #   the instance metadata. For more information, see [Work with instance
-    #   tags using the instance metadata][1].
+    #   the instance metadata. For more information, see [View tags for your
+    #   EC2 instances using instance metadata][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html#work-with-tags-in-IMDS
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/work-with-tags-in-IMDS.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyInstanceMetadataOptionsRequest AWS API Documentation
@@ -65514,6 +66415,19 @@ module Aws::EC2
     #   Indicates whether changing the number of ENA queues is supported.
     #   @return [String]
     #
+    # @!attribute [rw] secondary_network_supported
+    #   Indicates whether secondary interface attachments from secondary
+    #   network are supported.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] maximum_secondary_network_interfaces
+    #   The maximum number of secondary interfaces for the instance type.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] ipv_4_addresses_per_secondary_interface
+    #   The maximum number of IPv4 addresses per secondary interface.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/NetworkInfo AWS API Documentation
     #
     class NetworkInfo < Struct.new(
@@ -65531,7 +66445,10 @@ module Aws::EC2
       :encryption_in_transit_supported,
       :ena_srd_supported,
       :bandwidth_weightings,
-      :flexible_ena_queues_support)
+      :flexible_ena_queues_support,
+      :secondary_network_supported,
+      :maximum_secondary_network_interfaces,
+      :ipv_4_addresses_per_secondary_interface)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -69061,6 +69978,11 @@ module Aws::EC2
     #   `opt-in-not-required`, `opted-in`, and `not-opted-in`.
     #   @return [String]
     #
+    # @!attribute [rw] geography
+    #   The geography information for the Region. The geography is returned
+    #   as a list.
+    #   @return [Array<Types::RegionGeography>]
+    #
     # @!attribute [rw] region_name
     #   The name of the Region.
     #   @return [String]
@@ -69073,8 +69995,23 @@ module Aws::EC2
     #
     class Region < Struct.new(
       :opt_in_status,
+      :geography,
       :region_name,
       :endpoint)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the geography information for a Region.
+    #
+    # @!attribute [rw] name
+    #   The name of the geography, for example, `United States of America`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RegionGeography AWS API Documentation
+    #
+    class RegionGeography < Struct.new(
+      :name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -70912,6 +71849,11 @@ module Aws::EC2
     #   the type of workload that runs on your instance.
     #   @return [Types::LaunchTemplateNetworkPerformanceOptionsRequest]
     #
+    # @!attribute [rw] secondary_interfaces
+    #   The secondary interfaces to associate with instances launched from
+    #   the template.
+    #   @return [Array<Types::LaunchTemplateInstanceSecondaryInterfaceSpecificationRequest>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RequestLaunchTemplateData AWS API Documentation
     #
     class RequestLaunchTemplateData < Struct.new(
@@ -70947,7 +71889,8 @@ module Aws::EC2
       :maintenance_options,
       :disable_api_stop,
       :operator,
-      :network_performance_options)
+      :network_performance_options,
+      :secondary_interfaces)
       SENSITIVE = [:user_data]
       include Aws::Structure
     end
@@ -72382,6 +73325,10 @@ module Aws::EC2
     #   options for your instance.
     #   @return [Types::LaunchTemplateNetworkPerformanceOptions]
     #
+    # @!attribute [rw] secondary_interfaces
+    #   The secondary interfaces associated with the launch template.
+    #   @return [Array<Types::LaunchTemplateInstanceSecondaryInterfaceSpecification>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ResponseLaunchTemplateData AWS API Documentation
     #
     class ResponseLaunchTemplateData < Struct.new(
@@ -72417,7 +73364,8 @@ module Aws::EC2
       :maintenance_options,
       :disable_api_stop,
       :operator,
-      :network_performance_options)
+      :network_performance_options,
+      :secondary_interfaces)
       SENSITIVE = [:user_data]
       include Aws::Structure
     end
@@ -74181,6 +75129,10 @@ module Aws::EC2
     #   Reserved for internal use.
     #   @return [Types::OperatorRequest]
     #
+    # @!attribute [rw] secondary_interfaces
+    #   The secondary interfaces to associate with the instance.
+    #   @return [Array<Types::InstanceSecondaryInterfaceSpecificationRequest>]
+    #
     # @!attribute [rw] dry_run
     #   Checks whether you have the required permissions for the operation,
     #   without actually making the request, and provides an error response.
@@ -74298,6 +75250,7 @@ module Aws::EC2
       :enable_primary_ipv_6,
       :network_performance_options,
       :operator,
+      :secondary_interfaces,
       :dry_run,
       :disable_api_termination,
       :instance_initiated_shutdown_behavior,
@@ -75282,6 +76235,362 @@ module Aws::EC2
       :routes,
       :additional_routes_available,
       :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes a secondary interface.
+    #
+    # @!attribute [rw] availability_zone
+    #   The Availability Zone of the secondary interface.
+    #   @return [String]
+    #
+    # @!attribute [rw] availability_zone_id
+    #   The ID of the Availability Zone of the secondary interface.
+    #   @return [String]
+    #
+    # @!attribute [rw] attachment
+    #   The attachment information for the secondary interface.
+    #   @return [Types::SecondaryInterfaceAttachment]
+    #
+    # @!attribute [rw] mac_address
+    #   The MAC address of the secondary interface.
+    #   @return [String]
+    #
+    # @!attribute [rw] owner_id
+    #   The ID of the Amazon Web Services account that owns the secondary
+    #   interface.
+    #   @return [String]
+    #
+    # @!attribute [rw] private_ipv_4_addresses
+    #   The private IPv4 addresses associated with the secondary interface.
+    #   @return [Array<Types::SecondaryInterfaceIpv4Address>]
+    #
+    # @!attribute [rw] secondary_interface_id
+    #   The ID of the secondary interface.
+    #   @return [String]
+    #
+    # @!attribute [rw] secondary_interface_arn
+    #   The Amazon Resource Name (ARN) of the secondary interface.
+    #   @return [String]
+    #
+    # @!attribute [rw] secondary_interface_type
+    #   The type of secondary interface.
+    #   @return [String]
+    #
+    # @!attribute [rw] secondary_subnet_id
+    #   The ID of the secondary subnet.
+    #   @return [String]
+    #
+    # @!attribute [rw] secondary_network_id
+    #   The ID of the secondary network.
+    #   @return [String]
+    #
+    # @!attribute [rw] secondary_network_type
+    #   The type of the secondary network.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_dest_check
+    #   Indicates whether source/destination checking is enabled.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] status
+    #   The status of the secondary interface.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags assigned to the secondary interface.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SecondaryInterface AWS API Documentation
+    #
+    class SecondaryInterface < Struct.new(
+      :availability_zone,
+      :availability_zone_id,
+      :attachment,
+      :mac_address,
+      :owner_id,
+      :private_ipv_4_addresses,
+      :secondary_interface_id,
+      :secondary_interface_arn,
+      :secondary_interface_type,
+      :secondary_subnet_id,
+      :secondary_network_id,
+      :secondary_network_type,
+      :source_dest_check,
+      :status,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the attachment of a secondary interface to an instance.
+    #
+    # @!attribute [rw] attachment_id
+    #   The ID of the attachment.
+    #   @return [String]
+    #
+    # @!attribute [rw] attach_time
+    #   The timestamp when the attachment was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] delete_on_termination
+    #   Indicates whether the secondary interface is deleted when the
+    #   instance is terminated.
+    #
+    #   The only supported value for this field is `true`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] device_index
+    #   The device index of the secondary interface.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] instance_id
+    #   The ID of the instance to which the secondary interface is attached.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_owner_id
+    #   The Amazon Web Services account ID of the owner of the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] network_card_index
+    #   The index of the network card.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] status
+    #   The attachment state.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SecondaryInterfaceAttachment AWS API Documentation
+    #
+    class SecondaryInterfaceAttachment < Struct.new(
+      :attachment_id,
+      :attach_time,
+      :delete_on_termination,
+      :device_index,
+      :instance_id,
+      :instance_owner_id,
+      :network_card_index,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes a private IPv4 address for a secondary interface.
+    #
+    # @!attribute [rw] private_ip_address
+    #   The private IPv4 address.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SecondaryInterfaceIpv4Address AWS API Documentation
+    #
+    class SecondaryInterfaceIpv4Address < Struct.new(
+      :private_ip_address)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes a private IPv4 address specification for a secondary
+    # interface.
+    #
+    # @!attribute [rw] private_ip_address
+    #   The private IPv4 address.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SecondaryInterfacePrivateIpAddressSpecification AWS API Documentation
+    #
+    class SecondaryInterfacePrivateIpAddressSpecification < Struct.new(
+      :private_ip_address)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes a private IPv4 address specification for a secondary
+    # interface request.
+    #
+    # @!attribute [rw] private_ip_address
+    #   The private IPv4 address.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SecondaryInterfacePrivateIpAddressSpecificationRequest AWS API Documentation
+    #
+    class SecondaryInterfacePrivateIpAddressSpecificationRequest < Struct.new(
+      :private_ip_address)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes a secondary network.
+    #
+    # @!attribute [rw] secondary_network_id
+    #   The ID of the secondary network.
+    #   @return [String]
+    #
+    # @!attribute [rw] secondary_network_arn
+    #   The Amazon Resource Name (ARN) of the secondary network.
+    #   @return [String]
+    #
+    # @!attribute [rw] owner_id
+    #   The ID of the Amazon Web Services account that owns the secondary
+    #   network.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of the secondary network.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The state of the secondary network.
+    #   @return [String]
+    #
+    # @!attribute [rw] state_reason
+    #   The reason for the current state of the secondary network.
+    #   @return [String]
+    #
+    # @!attribute [rw] ipv_4_cidr_block_associations
+    #   Information about the IPv4 CIDR blocks associated with the secondary
+    #   network.
+    #   @return [Array<Types::SecondaryNetworkIpv4CidrBlockAssociation>]
+    #
+    # @!attribute [rw] tags
+    #   The tags assigned to the secondary network.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SecondaryNetwork AWS API Documentation
+    #
+    class SecondaryNetwork < Struct.new(
+      :secondary_network_id,
+      :secondary_network_arn,
+      :owner_id,
+      :type,
+      :state,
+      :state_reason,
+      :ipv_4_cidr_block_associations,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes an IPv4 CIDR block associated with a secondary network.
+    #
+    # @!attribute [rw] association_id
+    #   The association ID for the IPv4 CIDR block.
+    #   @return [String]
+    #
+    # @!attribute [rw] cidr_block
+    #   The IPv4 CIDR block.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The state of the CIDR block association.
+    #   @return [String]
+    #
+    # @!attribute [rw] state_reason
+    #   The reason for the current state of the CIDR block association.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SecondaryNetworkIpv4CidrBlockAssociation AWS API Documentation
+    #
+    class SecondaryNetworkIpv4CidrBlockAssociation < Struct.new(
+      :association_id,
+      :cidr_block,
+      :state,
+      :state_reason)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes a secondary subnet.
+    #
+    # @!attribute [rw] secondary_subnet_id
+    #   The ID of the secondary subnet.
+    #   @return [String]
+    #
+    # @!attribute [rw] secondary_subnet_arn
+    #   The Amazon Resource Name (ARN) of the secondary subnet.
+    #   @return [String]
+    #
+    # @!attribute [rw] secondary_network_id
+    #   The ID of the secondary network.
+    #   @return [String]
+    #
+    # @!attribute [rw] secondary_network_type
+    #   The type of the secondary network.
+    #   @return [String]
+    #
+    # @!attribute [rw] owner_id
+    #   The ID of the Amazon Web Services account that owns the secondary
+    #   subnet.
+    #   @return [String]
+    #
+    # @!attribute [rw] availability_zone_id
+    #   The ID of the Availability Zone of the secondary subnet.
+    #   @return [String]
+    #
+    # @!attribute [rw] availability_zone
+    #   The Availability Zone of the secondary subnet.
+    #   @return [String]
+    #
+    # @!attribute [rw] ipv_4_cidr_block_associations
+    #   Information about the IPv4 CIDR blocks associated with the secondary
+    #   subnet.
+    #   @return [Array<Types::SecondarySubnetIpv4CidrBlockAssociation>]
+    #
+    # @!attribute [rw] state
+    #   The state of the secondary subnet.
+    #   @return [String]
+    #
+    # @!attribute [rw] state_reason
+    #   The reason for the current state of the secondary subnet.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags assigned to the secondary subnet.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SecondarySubnet AWS API Documentation
+    #
+    class SecondarySubnet < Struct.new(
+      :secondary_subnet_id,
+      :secondary_subnet_arn,
+      :secondary_network_id,
+      :secondary_network_type,
+      :owner_id,
+      :availability_zone_id,
+      :availability_zone,
+      :ipv_4_cidr_block_associations,
+      :state,
+      :state_reason,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes an IPv4 CIDR block associated with a secondary subnet.
+    #
+    # @!attribute [rw] association_id
+    #   The association ID for the IPv4 CIDR block.
+    #   @return [String]
+    #
+    # @!attribute [rw] cidr_block
+    #   The IPv4 CIDR block.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The state of the CIDR block association.
+    #   @return [String]
+    #
+    # @!attribute [rw] state_reason
+    #   The reason for the current state of the CIDR block association.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SecondarySubnetIpv4CidrBlockAssociation AWS API Documentation
+    #
+    class SecondarySubnetIpv4CidrBlockAssociation < Struct.new(
+      :association_id,
+      :cidr_block,
+      :state,
+      :state_reason)
       SENSITIVE = []
       include Aws::Structure
     end

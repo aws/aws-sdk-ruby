@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.105.0 (2026-02-10)
+------------------
+
+* Feature - Amazon MSK adds three new APIs, CreateTopic, UpdateTopic, and DeleteTopic for managing Kafka topics in your MSK clusters.
+
 1.104.0 (2026-01-16)
 ------------------
 

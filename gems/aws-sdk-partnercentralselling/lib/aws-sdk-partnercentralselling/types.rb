@@ -441,7 +441,7 @@ module Aws::PartnerCentralSelling
     #
     # @!attribute [rw] aws_products_spend_insights_by_source
     #   Source-separated spend insights that provide independent analysis
-    #   for AWS predictions and partner estimates
+    #   for AWS recommendations and partner estimates.
     #   @return [Types::AwsProductsSpendInsightsBySource]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-selling-2022-07-26/AwsOpportunityInsights AWS API Documentation
@@ -519,8 +519,8 @@ module Aws::PartnerCentralSelling
     #
     # @!attribute [rw] aws_partition
     #   AWS partition where the opportunity will be deployed. Possible
-    #   values: 'aws-eusc' for AWS European Sovereign Cloud, `null` for
-    #   all other partitions
+    #   values: `aws-eusc` for AWS European Sovereign Cloud, `null` for all
+    #   other partitions.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-selling-2022-07-26/AwsOpportunityProject AWS API Documentation
@@ -557,39 +557,112 @@ module Aws::PartnerCentralSelling
       include Aws::Structure
     end
 
-    # AWS services with program eligibility indicators (MAP, modernization
-    # pathways), cost estimates, and optimization recommendations.
+    # Provides a comprehensive view of AwsOpportunitySummaryFullView
+    # template.
+    #
+    # @!attribute [rw] related_opportunity_id
+    #   Identifier of the related partner opportunity.
+    #   @return [String]
+    #
+    # @!attribute [rw] origin
+    #   Source origin of the AWS opportunity.
+    #   @return [String]
+    #
+    # @!attribute [rw] involvement_type
+    #   Type of AWS involvement in the opportunity.
+    #   @return [String]
+    #
+    # @!attribute [rw] visibility
+    #   Visibility level for the AWS opportunity.
+    #   @return [String]
+    #
+    # @!attribute [rw] life_cycle
+    #   Tracks the lifecycle of the AWS opportunity, including stages such
+    #   as qualification, validation, and closure. This field helps partners
+    #   understand the current status and progression of the opportunity.
+    #   @return [Types::AwsOpportunityLifeCycle]
+    #
+    # @!attribute [rw] opportunity_team
+    #   AWS team members involved in the opportunity.
+    #   @return [Array<Types::AwsTeamMember>]
+    #
+    # @!attribute [rw] insights
+    #   Contains insights provided by AWS for the opportunity, offering
+    #   recommendations and analysis that can help the partner optimize
+    #   their engagement and strategy.
+    #   @return [Types::AwsOpportunityInsights]
+    #
+    # @!attribute [rw] involvement_type_change_reason
+    #   Reason for changes in AWS involvement type for the opportunity.
+    #   @return [String]
+    #
+    # @!attribute [rw] related_entity_ids
+    #   Represents other entities related to the AWS opportunity, such as
+    #   AWS products, partner solutions, and marketplace offers. These
+    #   associations help build a complete picture of the solution being
+    #   sold.
+    #   @return [Types::AwsOpportunityRelatedEntities]
+    #
+    # @!attribute [rw] customer
+    #   Represents the customer associated with the AWS opportunity. This
+    #   field captures key details about the customer that are necessary for
+    #   managing the opportunity.
+    #   @return [Types::AwsOpportunityCustomer]
+    #
+    # @!attribute [rw] project
+    #   Captures details about the project associated with the opportunity,
+    #   including objectives, scope, and customer requirements.
+    #   @return [Types::AwsOpportunityProject]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-selling-2022-07-26/AwsOpportunitySummaryFullView AWS API Documentation
+    #
+    class AwsOpportunitySummaryFullView < Struct.new(
+      :related_opportunity_id,
+      :origin,
+      :involvement_type,
+      :visibility,
+      :life_cycle,
+      :opportunity_team,
+      :insights,
+      :involvement_type_change_reason,
+      :related_entity_ids,
+      :customer,
+      :project)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # List of AWS services with program eligibility indicators (MAP,
+    # modernization pathways), cost estimates, and optimization
+    # recommendations.
     #
     # @!attribute [rw] product_code
     #   AWS Partner Central product identifier used for opportunity
-    #   association
+    #   association.
     #   @return [String]
     #
     # @!attribute [rw] service_code
-    #   Pricing Calculator service code (links to original calculator URL)
+    #   Pricing Calculator service code.
     #   @return [String]
     #
     # @!attribute [rw] categories
-    #   List of program and pathway categories this product is eligible for
+    #   List of program and pathway categories this product is eligible for.
     #   @return [Array<String>]
     #
     # @!attribute [rw] amount
-    #   Baseline service cost before optimizations (may be null for
-    #   AWS-sourced predictions)
+    #   Baseline service cost before optimizations.
     #   @return [String]
     #
     # @!attribute [rw] optimized_amount
-    #   Service cost after applying optimizations (may be null for
-    #   AWS-sourced predictions)
+    #   Service cost after applying optimizations.
     #   @return [String]
     #
     # @!attribute [rw] potential_savings_amount
-    #   Service-specific cost reduction through optimizations (may be null
-    #   for AWS-sourced predictions)
+    #   Service-specific cost reduction through optimizations.
     #   @return [String]
     #
     # @!attribute [rw] optimizations
-    #   List of specific optimization recommendations for this product
+    #   List of specific optimization recommendations for this product.
     #   @return [Array<Types::AwsProductOptimization>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-selling-2022-07-26/AwsProductDetails AWS API Documentation
@@ -611,33 +684,32 @@ module Aws::PartnerCentralSelling
     # breakdowns, and detailed product-level insights.
     #
     # @!attribute [rw] currency_code
-    #   ISO 4217 currency code (e.g., "USD") ensuring consistent
-    #   representation across calculations
+    #   ISO 4217 currency code.
     #   @return [String]
     #
     # @!attribute [rw] frequency
-    #   Time period for spend amounts: "Monthly" or "Annually"
+    #   Time period for spend amounts.
     #   @return [String]
     #
     # @!attribute [rw] total_amount
-    #   Total estimated spend for this source before optimizations
+    #   Total estimated spend for this source before optimizations.
     #   @return [String]
     #
     # @!attribute [rw] total_optimized_amount
-    #   Total estimated spend after applying recommended optimizations
+    #   Total estimated spend after applying recommended optimizations.
     #   @return [String]
     #
     # @!attribute [rw] total_potential_savings_amount
-    #   Quantified savings achievable through implementing optimizations
+    #   Quantified savings achievable through implementing optimizations.
     #   @return [String]
     #
     # @!attribute [rw] total_amount_by_category
-    #   Spend amounts mapped to AWS programs and modernization pathways
+    #   Spend amounts mapped to AWS programs and modernization pathways.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] aws_products
     #   Product-level details including costs and optimization
-    #   recommendations
+    #   recommendations.
     #   @return [Array<Types::AwsProductDetails>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-selling-2022-07-26/AwsProductInsights AWS API Documentation
@@ -654,14 +726,16 @@ module Aws::PartnerCentralSelling
       include Aws::Structure
     end
 
-    # Details for a specific optimization recommendation
+    # Specific optimization strategies partners can implement to reduce
+    # costs.
     #
     # @!attribute [rw] description
-    #   Human-readable explanation of the optimization strategy
+    #   Human-readable explanation of the optimization strategy.
     #   @return [String]
     #
     # @!attribute [rw] savings_amount
-    #   Quantified cost savings achievable by implementing this optimization
+    #   Quantified cost savings achievable by implementing this
+    #   optimization.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-selling-2022-07-26/AwsProductOptimization AWS API Documentation
@@ -674,15 +748,14 @@ module Aws::PartnerCentralSelling
     end
 
     # Source-separated spend insights that provide independent analysis for
-    # AWS predictions and partner estimates
+    # AWS recommendations and partner estimates.
     #
     # @!attribute [rw] partner
-    #   Partner-sourced insights derived from Pricing Calculator URLs
-    #   including detailed service costs and optimizations
+    #   Partner-sourced insights derived from Pricing Calculator URLs.
     #   @return [Types::AwsProductInsights]
     #
     # @!attribute [rw] aws
-    #   AI-generated insights including recommended products from AWS
+    #   AI-generated insights including recommended products from AWS.
     #   @return [Types::AwsProductInsights]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-selling-2022-07-26/AwsProductsSpendInsightsBySource AWS API Documentation
@@ -1364,6 +1437,25 @@ module Aws::PartnerCentralSelling
     class CreateResourceSnapshotResponse < Struct.new(
       :arn,
       :revision)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Filter for opportunities based on creation date range.
+    #
+    # @!attribute [rw] after_created_date
+    #   Filter opportunities created after this date.
+    #   @return [Time]
+    #
+    # @!attribute [rw] before_created_date
+    #   Filter opportunities created before this date.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-selling-2022-07-26/CreatedDateFilter AWS API Documentation
+    #
+    class CreatedDateFilter < Struct.new(
+      :after_created_date,
+      :before_created_date)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2713,6 +2805,10 @@ module Aws::PartnerCentralSelling
     #   currently supporting opportunity summaries.
     #   @return [Types::ResourceSnapshotPayload]
     #
+    # @!attribute [rw] target_member_accounts
+    #   Target member accounts associated with the resource snapshot.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-selling-2022-07-26/GetResourceSnapshotResponse AWS API Documentation
     #
     class GetResourceSnapshotResponse < Struct.new(
@@ -2725,8 +2821,9 @@ module Aws::PartnerCentralSelling
       :resource_id,
       :resource_snapshot_template_name,
       :revision,
-      :payload)
-      SENSITIVE = [:created_by]
+      :payload,
+      :target_member_accounts)
+      SENSITIVE = [:created_by, :target_member_accounts]
       include Aws::Structure
     end
 
@@ -4195,6 +4292,10 @@ module Aws::PartnerCentralSelling
     #   specific customer by matching the provided company name string.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] created_date
+    #   Filter opportunities by creation date criteria.
+    #   @return [Types::CreatedDateFilter]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-selling-2022-07-26/ListOpportunitiesRequest AWS API Documentation
     #
     class ListOpportunitiesRequest < Struct.new(
@@ -4206,7 +4307,8 @@ module Aws::PartnerCentralSelling
       :identifier,
       :life_cycle_stage,
       :life_cycle_review_status,
-      :customer_company_name)
+      :customer_company_name,
+      :created_date)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5193,8 +5295,8 @@ module Aws::PartnerCentralSelling
     #
     # @!attribute [rw] aws_partition
     #   AWS partition where the opportunity will be deployed. Possible
-    #   values: 'aws-eusc' for AWS European Sovereign Cloud, `null` for
-    #   all other partitions
+    #   values: `aws-eusc` for AWS European Sovereign Cloud, `null` for all
+    #   other partitions.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-selling-2022-07-26/Project AWS API Documentation
@@ -5586,16 +5688,23 @@ module Aws::PartnerCentralSelling
     #   An object that contains an `opportunity`'s subset of fields.
     #   @return [Types::OpportunitySummaryView]
     #
+    # @!attribute [rw] aws_opportunity_summary_full_view
+    #   Provides a comprehensive view of AwsOpportunitySummaryFullView
+    #   template.
+    #   @return [Types::AwsOpportunitySummaryFullView]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-selling-2022-07-26/ResourceSnapshotPayload AWS API Documentation
     #
     class ResourceSnapshotPayload < Struct.new(
       :opportunity_summary,
+      :aws_opportunity_summary_full_view,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
       include Aws::Structure::Union
 
       class OpportunitySummary < ResourceSnapshotPayload; end
+      class AwsOpportunitySummaryFullView < ResourceSnapshotPayload; end
       class Unknown < ResourceSnapshotPayload; end
     end
 

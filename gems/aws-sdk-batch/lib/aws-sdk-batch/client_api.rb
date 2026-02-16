@@ -95,6 +95,7 @@ module Aws::Batch
     DeviceCgroupPermission = Shapes::StringShape.new(name: 'DeviceCgroupPermission')
     DeviceCgroupPermissions = Shapes::ListShape.new(name: 'DeviceCgroupPermissions')
     DevicesList = Shapes::ListShape.new(name: 'DevicesList')
+    Double = Shapes::FloatShape.new(name: 'Double')
     EFSAuthorizationConfig = Shapes::StructureShape.new(name: 'EFSAuthorizationConfig')
     EFSAuthorizationConfigIAM = Shapes::StringShape.new(name: 'EFSAuthorizationConfigIAM')
     EFSTransitEncryption = Shapes::StringShape.new(name: 'EFSTransitEncryption')
@@ -144,7 +145,12 @@ module Aws::Batch
     EphemeralStorage = Shapes::StructureShape.new(name: 'EphemeralStorage')
     EvaluateOnExit = Shapes::StructureShape.new(name: 'EvaluateOnExit')
     EvaluateOnExitList = Shapes::ListShape.new(name: 'EvaluateOnExitList')
+    FairshareCapacityUsage = Shapes::StructureShape.new(name: 'FairshareCapacityUsage')
+    FairshareCapacityUsageList = Shapes::ListShape.new(name: 'FairshareCapacityUsageList')
+    FairshareCapacityUtilization = Shapes::StructureShape.new(name: 'FairshareCapacityUtilization')
+    FairshareCapacityUtilizationList = Shapes::ListShape.new(name: 'FairshareCapacityUtilizationList')
     FairsharePolicy = Shapes::StructureShape.new(name: 'FairsharePolicy')
+    FairshareUtilizationDetail = Shapes::StructureShape.new(name: 'FairshareUtilizationDetail')
     FargatePlatformConfiguration = Shapes::StructureShape.new(name: 'FargatePlatformConfiguration')
     FirelensConfiguration = Shapes::StructureShape.new(name: 'FirelensConfiguration')
     FirelensConfigurationOptionsMap = Shapes::MapShape.new(name: 'FirelensConfigurationOptionsMap')
@@ -163,6 +169,8 @@ module Aws::Batch
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     JQState = Shapes::StringShape.new(name: 'JQState')
     JQStatus = Shapes::StringShape.new(name: 'JQStatus')
+    JobCapacityUsageSummary = Shapes::StructureShape.new(name: 'JobCapacityUsageSummary')
+    JobCapacityUsageSummaryList = Shapes::ListShape.new(name: 'JobCapacityUsageSummaryList')
     JobDefinition = Shapes::StructureShape.new(name: 'JobDefinition')
     JobDefinitionList = Shapes::ListShape.new(name: 'JobDefinitionList')
     JobDefinitionType = Shapes::StringShape.new(name: 'JobDefinitionType')
@@ -237,6 +245,9 @@ module Aws::Batch
     PlatformCapability = Shapes::StringShape.new(name: 'PlatformCapability')
     PlatformCapabilityList = Shapes::ListShape.new(name: 'PlatformCapabilityList')
     Quantity = Shapes::StringShape.new(name: 'Quantity')
+    QueueSnapshotCapacityUsage = Shapes::StructureShape.new(name: 'QueueSnapshotCapacityUsage')
+    QueueSnapshotCapacityUsageList = Shapes::ListShape.new(name: 'QueueSnapshotCapacityUsageList')
+    QueueSnapshotUtilizationDetail = Shapes::StructureShape.new(name: 'QueueSnapshotUtilizationDetail')
     RegisterJobDefinitionRequest = Shapes::StructureShape.new(name: 'RegisterJobDefinitionRequest')
     RegisterJobDefinitionResponse = Shapes::StructureShape.new(name: 'RegisterJobDefinitionResponse')
     RepositoryCredentials = Shapes::StructureShape.new(name: 'RepositoryCredentials')
@@ -262,6 +273,10 @@ module Aws::Batch
     ServiceEnvironmentType = Shapes::StringShape.new(name: 'ServiceEnvironmentType')
     ServiceJobAttemptDetail = Shapes::StructureShape.new(name: 'ServiceJobAttemptDetail')
     ServiceJobAttemptDetails = Shapes::ListShape.new(name: 'ServiceJobAttemptDetails')
+    ServiceJobCapacityUsageDetail = Shapes::StructureShape.new(name: 'ServiceJobCapacityUsageDetail')
+    ServiceJobCapacityUsageDetailList = Shapes::ListShape.new(name: 'ServiceJobCapacityUsageDetailList')
+    ServiceJobCapacityUsageSummary = Shapes::StructureShape.new(name: 'ServiceJobCapacityUsageSummary')
+    ServiceJobCapacityUsageSummaryList = Shapes::ListShape.new(name: 'ServiceJobCapacityUsageSummaryList')
     ServiceJobEvaluateOnExit = Shapes::StructureShape.new(name: 'ServiceJobEvaluateOnExit')
     ServiceJobEvaluateOnExitList = Shapes::ListShape.new(name: 'ServiceJobEvaluateOnExitList')
     ServiceJobRetryAction = Shapes::StringShape.new(name: 'ServiceJobRetryAction')
@@ -690,6 +705,7 @@ module Aws::Batch
     DescribeServiceJobRequest.struct_class = Types::DescribeServiceJobRequest
 
     DescribeServiceJobResponse.add_member(:attempts, Shapes::ShapeRef.new(shape: ServiceJobAttemptDetails, location_name: "attempts"))
+    DescribeServiceJobResponse.add_member(:capacity_usage, Shapes::ShapeRef.new(shape: ServiceJobCapacityUsageDetailList, location_name: "capacityUsage"))
     DescribeServiceJobResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: Long, location_name: "createdAt"))
     DescribeServiceJobResponse.add_member(:is_terminated, Shapes::ShapeRef.new(shape: Boolean, location_name: "isTerminated"))
     DescribeServiceJobResponse.add_member(:job_arn, Shapes::ShapeRef.new(shape: String, location_name: "jobArn"))
@@ -698,6 +714,7 @@ module Aws::Batch
     DescribeServiceJobResponse.add_member(:job_queue, Shapes::ShapeRef.new(shape: String, required: true, location_name: "jobQueue"))
     DescribeServiceJobResponse.add_member(:latest_attempt, Shapes::ShapeRef.new(shape: LatestServiceJobAttempt, location_name: "latestAttempt"))
     DescribeServiceJobResponse.add_member(:retry_strategy, Shapes::ShapeRef.new(shape: ServiceJobRetryStrategy, location_name: "retryStrategy"))
+    DescribeServiceJobResponse.add_member(:scheduled_at, Shapes::ShapeRef.new(shape: Long, location_name: "scheduledAt"))
     DescribeServiceJobResponse.add_member(:scheduling_priority, Shapes::ShapeRef.new(shape: Integer, location_name: "schedulingPriority"))
     DescribeServiceJobResponse.add_member(:service_request_payload, Shapes::ShapeRef.new(shape: String, location_name: "serviceRequestPayload"))
     DescribeServiceJobResponse.add_member(:service_job_type, Shapes::ShapeRef.new(shape: ServiceJobType, required: true, location_name: "serviceJobType"))
@@ -955,10 +972,26 @@ module Aws::Batch
 
     EvaluateOnExitList.member = Shapes::ShapeRef.new(shape: EvaluateOnExit)
 
+    FairshareCapacityUsage.add_member(:capacity_unit, Shapes::ShapeRef.new(shape: String, location_name: "capacityUnit"))
+    FairshareCapacityUsage.add_member(:quantity, Shapes::ShapeRef.new(shape: Double, location_name: "quantity"))
+    FairshareCapacityUsage.struct_class = Types::FairshareCapacityUsage
+
+    FairshareCapacityUsageList.member = Shapes::ShapeRef.new(shape: FairshareCapacityUsage)
+
+    FairshareCapacityUtilization.add_member(:share_identifier, Shapes::ShapeRef.new(shape: String, location_name: "shareIdentifier"))
+    FairshareCapacityUtilization.add_member(:capacity_usage, Shapes::ShapeRef.new(shape: FairshareCapacityUsageList, location_name: "capacityUsage"))
+    FairshareCapacityUtilization.struct_class = Types::FairshareCapacityUtilization
+
+    FairshareCapacityUtilizationList.member = Shapes::ShapeRef.new(shape: FairshareCapacityUtilization)
+
     FairsharePolicy.add_member(:share_decay_seconds, Shapes::ShapeRef.new(shape: Integer, location_name: "shareDecaySeconds"))
     FairsharePolicy.add_member(:compute_reservation, Shapes::ShapeRef.new(shape: Integer, location_name: "computeReservation"))
     FairsharePolicy.add_member(:share_distribution, Shapes::ShapeRef.new(shape: ShareAttributesList, location_name: "shareDistribution"))
     FairsharePolicy.struct_class = Types::FairsharePolicy
+
+    FairshareUtilizationDetail.add_member(:active_share_count, Shapes::ShapeRef.new(shape: Long, location_name: "activeShareCount"))
+    FairshareUtilizationDetail.add_member(:top_capacity_utilization, Shapes::ShapeRef.new(shape: FairshareCapacityUtilizationList, location_name: "topCapacityUtilization"))
+    FairshareUtilizationDetail.struct_class = Types::FairshareUtilizationDetail
 
     FargatePlatformConfiguration.add_member(:platform_version, Shapes::ShapeRef.new(shape: String, location_name: "platformVersion"))
     FargatePlatformConfiguration.struct_class = Types::FargatePlatformConfiguration
@@ -984,6 +1017,7 @@ module Aws::Batch
     GetJobQueueSnapshotRequest.struct_class = Types::GetJobQueueSnapshotRequest
 
     GetJobQueueSnapshotResponse.add_member(:front_of_queue, Shapes::ShapeRef.new(shape: FrontOfQueueDetail, location_name: "frontOfQueue"))
+    GetJobQueueSnapshotResponse.add_member(:queue_utilization, Shapes::ShapeRef.new(shape: QueueSnapshotUtilizationDetail, location_name: "queueUtilization"))
     GetJobQueueSnapshotResponse.struct_class = Types::GetJobQueueSnapshotResponse
 
     Host.add_member(:source_path, Shapes::ShapeRef.new(shape: String, location_name: "sourcePath"))
@@ -993,6 +1027,12 @@ module Aws::Batch
     ImagePullSecret.struct_class = Types::ImagePullSecret
 
     ImagePullSecrets.member = Shapes::ShapeRef.new(shape: ImagePullSecret)
+
+    JobCapacityUsageSummary.add_member(:capacity_unit, Shapes::ShapeRef.new(shape: String, location_name: "capacityUnit"))
+    JobCapacityUsageSummary.add_member(:quantity, Shapes::ShapeRef.new(shape: Double, location_name: "quantity"))
+    JobCapacityUsageSummary.struct_class = Types::JobCapacityUsageSummary
+
+    JobCapacityUsageSummaryList.member = Shapes::ShapeRef.new(shape: JobCapacityUsageSummary)
 
     JobDefinition.add_member(:job_definition_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "jobDefinitionName"))
     JobDefinition.add_member(:job_definition_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "jobDefinitionArn"))
@@ -1083,7 +1123,10 @@ module Aws::Batch
     JobSummary.add_member(:job_arn, Shapes::ShapeRef.new(shape: String, location_name: "jobArn"))
     JobSummary.add_member(:job_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "jobId"))
     JobSummary.add_member(:job_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "jobName"))
+    JobSummary.add_member(:capacity_usage, Shapes::ShapeRef.new(shape: JobCapacityUsageSummaryList, location_name: "capacityUsage"))
     JobSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: Long, location_name: "createdAt"))
+    JobSummary.add_member(:scheduled_at, Shapes::ShapeRef.new(shape: Long, location_name: "scheduledAt"))
+    JobSummary.add_member(:share_identifier, Shapes::ShapeRef.new(shape: String, location_name: "shareIdentifier"))
     JobSummary.add_member(:status, Shapes::ShapeRef.new(shape: JobStatus, location_name: "status"))
     JobSummary.add_member(:status_reason, Shapes::ShapeRef.new(shape: String, location_name: "statusReason"))
     JobSummary.add_member(:started_at, Shapes::ShapeRef.new(shape: Long, location_name: "startedAt"))
@@ -1296,6 +1339,17 @@ module Aws::Batch
 
     PlatformCapabilityList.member = Shapes::ShapeRef.new(shape: PlatformCapability)
 
+    QueueSnapshotCapacityUsage.add_member(:capacity_unit, Shapes::ShapeRef.new(shape: String, location_name: "capacityUnit"))
+    QueueSnapshotCapacityUsage.add_member(:quantity, Shapes::ShapeRef.new(shape: Double, location_name: "quantity"))
+    QueueSnapshotCapacityUsage.struct_class = Types::QueueSnapshotCapacityUsage
+
+    QueueSnapshotCapacityUsageList.member = Shapes::ShapeRef.new(shape: QueueSnapshotCapacityUsage)
+
+    QueueSnapshotUtilizationDetail.add_member(:total_capacity_usage, Shapes::ShapeRef.new(shape: QueueSnapshotCapacityUsageList, location_name: "totalCapacityUsage"))
+    QueueSnapshotUtilizationDetail.add_member(:fairshare_utilization, Shapes::ShapeRef.new(shape: FairshareUtilizationDetail, location_name: "fairshareUtilization"))
+    QueueSnapshotUtilizationDetail.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: Long, location_name: "lastUpdatedAt"))
+    QueueSnapshotUtilizationDetail.struct_class = Types::QueueSnapshotUtilizationDetail
+
     RegisterJobDefinitionRequest.add_member(:job_definition_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "jobDefinitionName"))
     RegisterJobDefinitionRequest.add_member(:type, Shapes::ShapeRef.new(shape: JobDefinitionType, required: true, location_name: "type"))
     RegisterJobDefinitionRequest.add_member(:parameters, Shapes::ShapeRef.new(shape: ParametersMap, location_name: "parameters"))
@@ -1381,6 +1435,18 @@ module Aws::Batch
 
     ServiceJobAttemptDetails.member = Shapes::ShapeRef.new(shape: ServiceJobAttemptDetail)
 
+    ServiceJobCapacityUsageDetail.add_member(:capacity_unit, Shapes::ShapeRef.new(shape: String, location_name: "capacityUnit"))
+    ServiceJobCapacityUsageDetail.add_member(:quantity, Shapes::ShapeRef.new(shape: Double, location_name: "quantity"))
+    ServiceJobCapacityUsageDetail.struct_class = Types::ServiceJobCapacityUsageDetail
+
+    ServiceJobCapacityUsageDetailList.member = Shapes::ShapeRef.new(shape: ServiceJobCapacityUsageDetail)
+
+    ServiceJobCapacityUsageSummary.add_member(:capacity_unit, Shapes::ShapeRef.new(shape: String, location_name: "capacityUnit"))
+    ServiceJobCapacityUsageSummary.add_member(:quantity, Shapes::ShapeRef.new(shape: Double, location_name: "quantity"))
+    ServiceJobCapacityUsageSummary.struct_class = Types::ServiceJobCapacityUsageSummary
+
+    ServiceJobCapacityUsageSummaryList.member = Shapes::ShapeRef.new(shape: ServiceJobCapacityUsageSummary)
+
     ServiceJobEvaluateOnExit.add_member(:action, Shapes::ShapeRef.new(shape: ServiceJobRetryAction, location_name: "action"))
     ServiceJobEvaluateOnExit.add_member(:on_status_reason, Shapes::ShapeRef.new(shape: String, location_name: "onStatusReason"))
     ServiceJobEvaluateOnExit.struct_class = Types::ServiceJobEvaluateOnExit
@@ -1392,10 +1458,12 @@ module Aws::Batch
     ServiceJobRetryStrategy.struct_class = Types::ServiceJobRetryStrategy
 
     ServiceJobSummary.add_member(:latest_attempt, Shapes::ShapeRef.new(shape: LatestServiceJobAttempt, location_name: "latestAttempt"))
+    ServiceJobSummary.add_member(:capacity_usage, Shapes::ShapeRef.new(shape: ServiceJobCapacityUsageSummaryList, location_name: "capacityUsage"))
     ServiceJobSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: Long, location_name: "createdAt"))
     ServiceJobSummary.add_member(:job_arn, Shapes::ShapeRef.new(shape: String, location_name: "jobArn"))
     ServiceJobSummary.add_member(:job_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "jobId"))
     ServiceJobSummary.add_member(:job_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "jobName"))
+    ServiceJobSummary.add_member(:scheduled_at, Shapes::ShapeRef.new(shape: Long, location_name: "scheduledAt"))
     ServiceJobSummary.add_member(:service_job_type, Shapes::ShapeRef.new(shape: ServiceJobType, required: true, location_name: "serviceJobType"))
     ServiceJobSummary.add_member(:share_identifier, Shapes::ShapeRef.new(shape: String, location_name: "shareIdentifier"))
     ServiceJobSummary.add_member(:status, Shapes::ShapeRef.new(shape: ServiceJobStatus, location_name: "status"))

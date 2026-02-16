@@ -437,7 +437,8 @@ module Aws
                         ?max_worker_count: ::Integer,
                         ?source_job_id: ::String,
                         ?name_override: ::String,
-                        ?description_override: ::String
+                        ?description_override: ::String,
+                        ?tags: Hash[::String, ::String]
                       ) -> _CreateJobResponseSuccess
                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateJobResponseSuccess
 

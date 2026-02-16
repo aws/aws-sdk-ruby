@@ -90,6 +90,10 @@ module Aws::EC2
   # | nat_gateway_deleted                          | {Client#describe_nat_gateways}                    | 15       | 40            |
   # | network_interface_available                  | {Client#describe_network_interfaces}              | 20       | 10            |
   # | password_data_available                      | {Client#get_password_data}                        | 15       | 40            |
+  # | secondary_network_create_complete            | {Client#describe_secondary_networks}              | 10       | 30            |
+  # | secondary_network_delete_complete            | {Client#describe_secondary_networks}              | 10       | 30            |
+  # | secondary_subnet_create_complete             | {Client#describe_secondary_subnets}               | 10       | 30            |
+  # | secondary_subnet_delete_complete             | {Client#describe_secondary_subnets}               | 10       | 30            |
   # | security_group_exists                        | {Client#describe_security_groups}                 | 5        | 6             |
   # | security_group_vpc_association_associated    | {Client#describe_security_group_vpc_associations} | 10       | 7             |
   # | security_group_vpc_association_disassociated | {Client#describe_security_group_vpc_associations} | 10       | 7             |
@@ -1037,6 +1041,192 @@ module Aws::EC2
 
       # @option (see Client#get_password_data)
       # @return (see Client#get_password_data)
+      def wait(params = {})
+        @waiter.wait(client: @client, params: params)
+      end
+
+      # @api private
+      attr_reader :waiter
+
+    end
+
+    class SecondaryNetworkCreateComplete
+
+      # @param [Hash] options
+      # @option options [required, Client] :client
+      # @option options [Integer] :max_attempts (30)
+      # @option options [Integer] :delay (10)
+      # @option options [Proc] :before_attempt
+      # @option options [Proc] :before_wait
+      def initialize(options)
+        @client = options.fetch(:client)
+        @waiter = Aws::Waiters::Waiter.new({
+          max_attempts: 30,
+          delay: 10,
+          poller: Aws::Waiters::Poller.new(
+            operation_name: :describe_secondary_networks,
+            acceptors: [
+              {
+                "expected" => "create-complete",
+                "matcher" => "pathAll",
+                "state" => "success",
+                "argument" => "secondary_networks[].state"
+              },
+              {
+                "expected" => "create-failed",
+                "matcher" => "pathAny",
+                "state" => "failure",
+                "argument" => "secondary_networks[].state"
+              },
+              {
+                "matcher" => "error",
+                "expected" => "InvalidSecondaryNetworkId.NotFound",
+                "state" => "retry"
+              }
+            ]
+          )
+        }.merge(options))
+      end
+
+      # @option (see Client#describe_secondary_networks)
+      # @return (see Client#describe_secondary_networks)
+      def wait(params = {})
+        @waiter.wait(client: @client, params: params)
+      end
+
+      # @api private
+      attr_reader :waiter
+
+    end
+
+    class SecondaryNetworkDeleteComplete
+
+      # @param [Hash] options
+      # @option options [required, Client] :client
+      # @option options [Integer] :max_attempts (30)
+      # @option options [Integer] :delay (10)
+      # @option options [Proc] :before_attempt
+      # @option options [Proc] :before_wait
+      def initialize(options)
+        @client = options.fetch(:client)
+        @waiter = Aws::Waiters::Waiter.new({
+          max_attempts: 30,
+          delay: 10,
+          poller: Aws::Waiters::Poller.new(
+            operation_name: :describe_secondary_networks,
+            acceptors: [
+              {
+                "expected" => "delete-complete",
+                "matcher" => "pathAll",
+                "state" => "success",
+                "argument" => "secondary_networks[].state"
+              },
+              {
+                "expected" => "delete-failed",
+                "matcher" => "pathAny",
+                "state" => "failure",
+                "argument" => "secondary_networks[].state"
+              }
+            ]
+          )
+        }.merge(options))
+      end
+
+      # @option (see Client#describe_secondary_networks)
+      # @return (see Client#describe_secondary_networks)
+      def wait(params = {})
+        @waiter.wait(client: @client, params: params)
+      end
+
+      # @api private
+      attr_reader :waiter
+
+    end
+
+    class SecondarySubnetCreateComplete
+
+      # @param [Hash] options
+      # @option options [required, Client] :client
+      # @option options [Integer] :max_attempts (30)
+      # @option options [Integer] :delay (10)
+      # @option options [Proc] :before_attempt
+      # @option options [Proc] :before_wait
+      def initialize(options)
+        @client = options.fetch(:client)
+        @waiter = Aws::Waiters::Waiter.new({
+          max_attempts: 30,
+          delay: 10,
+          poller: Aws::Waiters::Poller.new(
+            operation_name: :describe_secondary_subnets,
+            acceptors: [
+              {
+                "expected" => "create-complete",
+                "matcher" => "pathAll",
+                "state" => "success",
+                "argument" => "secondary_subnets[].state"
+              },
+              {
+                "expected" => "delete-failed",
+                "matcher" => "pathAny",
+                "state" => "failure",
+                "argument" => "secondary_subnets[].state"
+              },
+              {
+                "matcher" => "error",
+                "expected" => "InvalidSecondarySubnetId.NotFound",
+                "state" => "retry"
+              }
+            ]
+          )
+        }.merge(options))
+      end
+
+      # @option (see Client#describe_secondary_subnets)
+      # @return (see Client#describe_secondary_subnets)
+      def wait(params = {})
+        @waiter.wait(client: @client, params: params)
+      end
+
+      # @api private
+      attr_reader :waiter
+
+    end
+
+    class SecondarySubnetDeleteComplete
+
+      # @param [Hash] options
+      # @option options [required, Client] :client
+      # @option options [Integer] :max_attempts (30)
+      # @option options [Integer] :delay (10)
+      # @option options [Proc] :before_attempt
+      # @option options [Proc] :before_wait
+      def initialize(options)
+        @client = options.fetch(:client)
+        @waiter = Aws::Waiters::Waiter.new({
+          max_attempts: 30,
+          delay: 10,
+          poller: Aws::Waiters::Poller.new(
+            operation_name: :describe_secondary_subnets,
+            acceptors: [
+              {
+                "expected" => "delete-complete",
+                "matcher" => "pathAll",
+                "state" => "success",
+                "argument" => "secondary_subnets[].state"
+              },
+              {
+                "expected" => "delete-failed",
+                "matcher" => "pathAny",
+                "state" => "failure",
+                "argument" => "secondary_subnets[].state"
+              }
+            ]
+          )
+        }.merge(options))
+      end
+
+      # @option (see Client#describe_secondary_subnets)
+      # @return (see Client#describe_secondary_subnets)
       def wait(params = {})
         @waiter.wait(client: @client, params: params)
       end

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.69.0 (2026-02-13)
+------------------
+
+* Feature - Added .Net 10 (dotnet10) and Node 24.x (node24.x) runtime support for lambda package scanning
+
 1.68.0 (2026-01-16)
 ------------------
 

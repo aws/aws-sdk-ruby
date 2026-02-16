@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.26.0 (2026-02-06)
+------------------
+
+* Feature - Releasing AWS Opportunity Snapshots for SDK release.
+
 1.25.0 (2026-01-16)
 ------------------
 

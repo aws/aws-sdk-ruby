@@ -82,6 +82,32 @@ module Aws::BedrockAgentCore
       include Aws::Structure
     end
 
+    # Configuration for HTTP Basic Authentication using credentials stored
+    # in Amazon Web Services Secrets Manager. The secret must contain a JSON
+    # object with `username` and `password` string fields. Username allows
+    # alphanumeric characters and `@._+=-` symbols (pattern:
+    # `^[a-zA-Z0-9@._+=\-]+$`). Password allows alphanumeric characters and
+    # `@._+=-!#$%&*` symbols (pattern: `^[a-zA-Z0-9@._+=\-!#$%&*]+$`). Both
+    # fields have a maximum length of 256 characters.
+    #
+    # @!attribute [rw] secret_arn
+    #   The Amazon Resource Name (ARN) of the Amazon Web Services Secrets
+    #   Manager secret containing proxy credentials. The secret must be a
+    #   JSON object with `username` and `password` string fields that meet
+    #   validation requirements. The caller must have
+    #   `secretsmanager:GetSecretValue` permission for this ARN. Example
+    #   secret format: `{"username": "proxy_user", "password":
+    #   "secure_password"}`
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/BasicAuth AWS API Documentation
+    #
+    class BasicAuth < Struct.new(
+      :secret_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] memory_id
     #   The unique ID of the memory resource where records will be created.
     #   @return [String]
@@ -1033,6 +1059,45 @@ module Aws::BedrockAgentCore
       include Aws::Structure
     end
 
+    # Configuration for a customer-managed external proxy server. Includes
+    # server location, optional domain-based routing patterns, and
+    # authentication credentials.
+    #
+    # @!attribute [rw] server
+    #   The hostname of the proxy server. Must be a valid DNS hostname
+    #   (maximum 253 characters).
+    #   @return [String]
+    #
+    # @!attribute [rw] port
+    #   The port number of the proxy server. Valid range: 1-65535.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] domain_patterns
+    #   Optional array of domain patterns that should route through this
+    #   specific proxy. Supports `.example.com` for subdomain matching
+    #   (matches any subdomain of example.com) or `example.com` for exact
+    #   domain matching. If omitted, this proxy acts as a catch-all for
+    #   domains not matched by other proxies. Maximum 100 patterns per
+    #   proxy, each up to 253 characters.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] credentials
+    #   Optional authentication credentials for the proxy server. If
+    #   omitted, the proxy is accessed without authentication (useful for
+    #   IP-allowlisted proxies).
+    #   @return [Types::ProxyCredentials]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/ExternalProxy AWS API Documentation
+    #
+    class ExternalProxy < Struct.new(
+      :server,
+      :port,
+      :domain_patterns,
+      :credentials)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Represents the metadata of a memory extraction job such as the message
     # identifiers that compose this job.
     #
@@ -1281,6 +1346,14 @@ module Aws::BedrockAgentCore
     #   automation stream and live view stream.
     #   @return [Types::BrowserSessionStream]
     #
+    # @!attribute [rw] proxy_configuration
+    #   The active proxy configuration for this browser session. This field
+    #   is only present if proxy configuration was provided when the session
+    #   was started using `StartBrowserSession`. The configuration includes
+    #   proxy servers, domain bypass rules and the proxy authentication
+    #   credentials.
+    #   @return [Types::ProxyConfiguration]
+    #
     # @!attribute [rw] session_replay_artifact
     #   The artifact containing the session replay information.
     #   @return [String]
@@ -1302,6 +1375,7 @@ module Aws::BedrockAgentCore
       :session_timeout_seconds,
       :status,
       :streams,
+      :proxy_configuration,
       :session_replay_artifact,
       :last_updated_at)
       SENSITIVE = []
@@ -2673,6 +2747,100 @@ module Aws::BedrockAgentCore
       class Unknown < PayloadType; end
     end
 
+    # Union type representing different proxy configurations. Currently
+    # supports external customer-managed proxies.
+    #
+    # @note Proxy is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note Proxy is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of Proxy corresponding to the set member.
+    #
+    # @!attribute [rw] external_proxy
+    #   Configuration for an external customer-managed proxy server.
+    #   @return [Types::ExternalProxy]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/Proxy AWS API Documentation
+    #
+    class Proxy < Struct.new(
+      :external_proxy,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class ExternalProxy < Proxy; end
+      class Unknown < Proxy; end
+    end
+
+    # Configuration for domains that should bypass all proxies and connect
+    # directly to the internet. These bypass rules take precedence over all
+    # proxy routing rules.
+    #
+    # @!attribute [rw] domain_patterns
+    #   Array of domain patterns that should bypass the proxy. Supports
+    #   `.amazonaws.com` for subdomain matching or `amazonaws.com` for exact
+    #   domain matching. Requests to these domains connect directly without
+    #   using any proxy. Maximum 253 characters per pattern.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/ProxyBypass AWS API Documentation
+    #
+    class ProxyBypass < Struct.new(
+      :domain_patterns)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration for routing browser traffic through customer-managed
+    # proxy servers. Supports 1-5 proxy servers for domain-based routing and
+    # proxy bypass rules.
+    #
+    # @!attribute [rw] proxies
+    #   An array of 1-5 proxy server configurations for domain-based
+    #   routing. Each proxy can specify which domains it handles via
+    #   `domainPatterns`, enabling flexible routing of different traffic
+    #   through different proxies based on destination domain.
+    #   @return [Array<Types::Proxy>]
+    #
+    # @!attribute [rw] bypass
+    #   Optional configuration for domains that should bypass all proxies
+    #   and connect directly to their destination, like the internet. Takes
+    #   precedence over all proxy routing rules.
+    #   @return [Types::ProxyBypass]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/ProxyConfiguration AWS API Documentation
+    #
+    class ProxyConfiguration < Struct.new(
+      :proxies,
+      :bypass)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Union type representing different proxy authentication methods.
+    # Currently supports HTTP Basic Authentication (username and password).
+    #
+    # @note ProxyCredentials is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note ProxyCredentials is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ProxyCredentials corresponding to the set member.
+    #
+    # @!attribute [rw] basic_auth
+    #   HTTP Basic Authentication credentials (username and password) stored
+    #   in Amazon Web Services Secrets Manager.
+    #   @return [Types::BasicAuth]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/ProxyCredentials AWS API Documentation
+    #
+    class ProxyCredentials < Struct.new(
+      :basic_auth,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class BasicAuth < ProxyCredentials; end
+      class Unknown < ProxyCredentials; end
+    end
+
     # Contains information about resource content.
     #
     # @!attribute [rw] type
@@ -3127,6 +3295,14 @@ module Aws::BedrockAgentCore
     #   settings.
     #   @return [Types::BrowserProfileConfiguration]
     #
+    # @!attribute [rw] proxy_configuration
+    #   Optional proxy configuration for routing browser traffic through
+    #   customer-specified proxy servers. When provided, enables HTTP Basic
+    #   authentication via Amazon Web Services Secrets Manager and
+    #   domain-based routing rules. Requires `secretsmanager:GetSecretValue`
+    #   IAM permission for the specified secret ARNs.
+    #   @return [Types::ProxyConfiguration]
+    #
     # @!attribute [rw] client_token
     #   A unique, case-sensitive identifier to ensure that the API request
     #   completes no more than one time. If this token matches a previous
@@ -3149,6 +3325,7 @@ module Aws::BedrockAgentCore
       :view_port,
       :extensions,
       :profile_configuration,
+      :proxy_configuration,
       :client_token)
       SENSITIVE = []
       include Aws::Structure
