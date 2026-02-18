@@ -7,18 +7,14 @@ module Aws
       def initialize(options = {})
         @client = options[:client]
         @executor = options[:executor]
-        @abort_requested = false
+        @producer = nil
         @mutex = Mutex.new
       end
 
       attr_reader :client, :executor
 
-      def abort_requested?
-        @mutex.synchronize { @abort_requested }
-      end
-
       def abort
-        @mutex.synchronize { @abort_requested = true }
+        @producer&.close
       end
 
       def download(destination, bucket:, **options)
@@ -29,12 +25,10 @@ module Aws
         end
 
         download_opts, producer_opts = build_opts(destination, bucket, options)
+        @producer = ObjectProducer.new(producer_opts)
         downloader = FileDownloader.new(client: @client, executor: @executor)
-        producer = ObjectProducer.new(producer_opts)
-        downloads, errors = process_download_queue(producer, downloader, download_opts)
+        downloads, errors = process_download_queue(downloader, download_opts)
         build_result(downloads, errors)
-      ensure
-        @abort_requested = false
       end
 
       private
@@ -58,7 +52,7 @@ module Aws
       end
 
       def build_result(download_count, errors)
-        if abort_requested?
+        if @producer&.closed?
           msg = "directory download failed: #{errors.map(&:message).join('; ')}"
           raise DirectoryDownloadError.new(msg, errors)
         else
@@ -81,16 +75,14 @@ module Aws
         abort unless opts[:ignore_failure]
       end
 
-      def process_download_queue(producer, downloader, opts)
+      def process_download_queue(downloader, opts)
         progress = DirectoryProgress.new(opts[:progress_callback]) if opts[:progress_callback]
         queue_executor = DefaultExecutor.new
         completion_queue = Queue.new
         download_attempts = 0
         errors = []
         begin
-          producer.each do |object|
-            break if abort_requested?
-
+          @producer.each do |object|
             download_attempts += 1
             queue_executor.post(object) do |o|
               download_object(o, downloader, opts, progress, errors)
@@ -98,6 +90,8 @@ module Aws
               completion_queue << :done
             end
           end
+        rescue ClosedQueueError
+          # abort already requested
         rescue StandardError => e
           @mutex.synchronize { errors << e }
           abort
@@ -126,6 +120,15 @@ module Aws
           @object_queue = SizedQueue.new(DEFAULT_QUEUE_SIZE)
         end
 
+        def closed?
+          @object_queue.closed?
+        end
+
+        def close
+          @object_queue.close
+          @object_queue.clear
+        end
+
         def each
           producer_thread = Thread.new do
             stream_objects
@@ -135,12 +138,10 @@ module Aws
 
           # Yield objects from internal queue
           while (object = @object_queue.shift) != DONE_MARKER
-            break if @directory_downloader.abort_requested?
-
             yield object
           end
         ensure
-          producer_thread.join
+          producer_thread.value
         end
 
         private
@@ -178,7 +179,7 @@ module Aws
         end
 
         def normalize_path(path)
-          return path unless File::SEPARATOR == '/'
+          return path if File::SEPARATOR == '/'
 
           path.tr('/', File::SEPARATOR)
         end
@@ -186,8 +187,6 @@ module Aws
         def stream_objects(continuation_token: nil)
           resp = @client.list_objects_v2(bucket: @bucket, prefix: @s3_prefix, continuation_token: continuation_token)
           resp.contents&.each do |o|
-            break if @directory_downloader.abort_requested?
-
             next if directory_marker?(o)
             next unless include_object?(o.key)
 
