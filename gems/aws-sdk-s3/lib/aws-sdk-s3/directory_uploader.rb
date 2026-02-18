@@ -137,7 +137,7 @@ module Aws
           rescue StandardError => e
             raise DirectoryUploadError, "Directory traversal failed for '#{@source_dir}': #{e.message}"
           ensure
-            @file_queue << DONE_MARKER
+            @file_queue << DONE_MARKER unless closed?
           end
 
           while (file = @file_queue.shift) != DONE_MARKER

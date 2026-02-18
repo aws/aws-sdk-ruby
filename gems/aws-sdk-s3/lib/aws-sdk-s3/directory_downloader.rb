@@ -133,7 +133,7 @@ module Aws
           producer_thread = Thread.new do
             stream_objects
           ensure
-            @object_queue << DONE_MARKER
+            @object_queue << DONE_MARKER unless closed?
           end
 
           # Yield objects from internal queue
