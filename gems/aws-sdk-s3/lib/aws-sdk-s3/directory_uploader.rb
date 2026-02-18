@@ -9,18 +9,14 @@ module Aws
       def initialize(opts = {})
         @client = opts[:client]
         @executor = opts[:executor]
-        @abort_requested = false
+        @producer = nil
         @mutex = Mutex.new
       end
 
       attr_reader :client, :executor
 
-      def abort_requested?
-        @mutex.synchronize { @abort_requested }
-      end
-
       def abort
-        @mutex.synchronize { @abort_requested = true }
+        @producer&.close
       end
 
       def upload(source_directory, bucket, **opts)
@@ -33,11 +29,9 @@ module Aws
           executor: @executor
         )
         upload_opts, producer_opts = build_opts(source_directory, bucket, opts)
-        producer = FileProducer.new(producer_opts)
-        uploads, errors = process_upload_queue(producer, uploader, upload_opts)
+        @producer = FileProducer.new(producer_opts)
+        uploads, errors = process_upload_queue(uploader, upload_opts)
         build_result(uploads, errors)
-      ensure
-        @abort_requested = false
       end
 
       private
@@ -58,7 +52,7 @@ module Aws
       end
 
       def build_result(upload_count, errors)
-        if abort_requested?
+        if @producer&.closed?
           msg = "directory upload failed: #{errors.map(&:message).join('; ')}"
           raise DirectoryUploadError.new(msg, errors)
         else
@@ -70,16 +64,14 @@ module Aws
         end
       end
 
-      def process_upload_queue(producer, uploader, opts)
+      def process_upload_queue(uploader, opts)
         progress = DirectoryProgress.new(opts[:progress_callback]) if opts[:progress_callback]
         queue_executor = DefaultExecutor.new
         completion_queue = Queue.new
         upload_attempts = 0
         errors = []
         begin
-          producer.each do |file|
-            break if abort_requested?
-
+          @producer.each do |file|
             upload_attempts += 1
             queue_executor.post(file) do |f|
               upload_file(f, uploader, opts, progress, errors)
@@ -87,6 +79,8 @@ module Aws
               completion_queue << :done
             end
           end
+        rescue ClosedQueueError
+          # abort already requested
         rescue StandardError => e
           @mutex.synchronize { errors << e }
           abort
@@ -124,8 +118,16 @@ module Aws
           @file_queue = SizedQueue.new(DEFAULT_QUEUE_SIZE)
         end
 
+        def closed?
+          @file_queue.closed?
+        end
+
+        def close
+          @file_queue.close
+          @file_queue.clear
+        end
+
         def each
-          err = nil
           producer_thread = Thread.new do
             if @recursive
               find_recursively
@@ -133,22 +135,16 @@ module Aws
               find_directly
             end
           rescue StandardError => e
-            @directory_uploader.abort
-            @file_queue.clear
-
-            err = DirectoryUploadError.new("Directory traversal failed for '#{@source_dir}': #{e.message}")
+            raise DirectoryUploadError, "Directory traversal failed for '#{@source_dir}': #{e.message}"
           ensure
             @file_queue << DONE_MARKER
           end
 
           while (file = @file_queue.shift) != DONE_MARKER
-            break if @directory_uploader.abort_requested?
-
             yield file
           end
         ensure
-          producer_thread.join
-          raise err if err
+          producer_thread.value
         end
 
         private
@@ -168,8 +164,6 @@ module Aws
 
         def find_directly
           Dir.each_child(@source_dir) do |entry|
-            break if @directory_uploader.abort_requested?
-
             entry_path = File.join(@source_dir, entry)
             stat = nil
 
@@ -205,11 +199,7 @@ module Aws
         end
 
         def scan_directory(dir_path, key_prefix: '', ancestors: nil)
-          return if @directory_uploader.abort_requested?
-
           Dir.each_child(dir_path) do |entry|
-            break if @directory_uploader.abort_requested?
-
             full_path = File.join(dir_path, entry)
             next unless include_file?(full_path, entry)
 

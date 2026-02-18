@@ -10,11 +10,6 @@ module Aws
       let(:uploader) { DirectoryUploader.new(client: client, executor: executor) }
 
       describe '#initialize' do
-        it 'constructs with default options' do
-          uploader = DirectoryUploader.new
-          expect(uploader.abort_requested?).to be false
-        end
-
         it 'accepts client and executor options' do
           expect(uploader.client).to be(client)
           expect(uploader.executor).to be(executor)

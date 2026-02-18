@@ -10,11 +10,6 @@ module Aws
       let(:downloader) { DirectoryDownloader.new(client: client, executor: executor) }
 
       describe '#initialize' do
-        it 'constructs with default options' do
-          downloader = DirectoryDownloader.new
-          expect(downloader.abort_requested?).to be false
-        end
-
         it 'accepts client and executor options' do
           expect(downloader.client).to be(client)
           expect(downloader.executor).to be(executor)
