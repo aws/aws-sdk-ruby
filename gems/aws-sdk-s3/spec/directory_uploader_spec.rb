@@ -90,7 +90,7 @@ module Aws
         end
 
         context 'follow_symlinks option' do
-          it 'follows symlinks when true' do
+          it 'follows symlinks and skips cycles when true' do
             result = uploader.upload(temp_dir, 'test-bucket', recursive: true, follow_symlinks: true)
             expect(result[:completed_uploads]).to eq(14)
             expect(result[:failed_uploads]).to eq(0)

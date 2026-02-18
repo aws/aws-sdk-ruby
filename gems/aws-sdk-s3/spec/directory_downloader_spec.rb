@@ -22,14 +22,16 @@ module Aws
         before do
           client.stub_responses(
             :list_objects_v2,
-            {
-              contents: [
-                { key: 'file1.txt', size: 100 },
-                { key: 'file2.json', size: 100 },
-                { key: 'file3.txt', size: 100 }
-              ],
-              is_truncated: false
-            }
+            [
+              {
+                contents: [{ key: 'file1.txt', size: 100 }, { key: 'file2.json', size: 100 }],
+                is_truncated: true, next_continuation_token: 'token1'
+              },
+              {
+                contents: [{ key: 'file3.txt', size: 100 }],
+                is_truncated: false
+              }
+            ]
           )
           client.stub_responses(:get_object, { body: 'content' })
         end
@@ -44,6 +46,17 @@ module Aws
 
           expect(result[:completed_downloads]).to eq(0)
           expect(result[:failed_downloads]).to eq(0)
+        end
+
+        it 'skips directory marker objects' do
+          client.stub_responses(
+            :list_objects_v2,
+            { contents: [{ key: 'folder/', size: 0 }, { key: 'folder/file.txt', size: 100 }], is_truncated: false }
+          )
+          result = downloader.download(temp_dir, bucket: 'test-bucket')
+
+          expect(result[:completed_downloads]).to eq(1)
+          expect(File.exist?(File.join(temp_dir, 'folder', 'file.txt'))).to be true
         end
 
         it 'raises when given an invalid destination' do
