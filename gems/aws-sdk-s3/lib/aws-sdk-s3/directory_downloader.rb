@@ -79,16 +79,16 @@ module Aws
         progress = DirectoryProgress.new(opts[:progress_callback]) if opts[:progress_callback]
         queue_executor = DefaultExecutor.new
         completion_queue = Queue.new
-        download_attempts = 0
+        posted_count = 0
         errors = []
         begin
           @producer.each do |object|
-            download_attempts += 1
             queue_executor.post(object) do |o|
               download_object(o, downloader, opts, progress, errors)
             ensure
               completion_queue << :done
             end
+            posted_count += 1
           end
         rescue ClosedQueueError
           # abort already requested
@@ -96,8 +96,8 @@ module Aws
           @mutex.synchronize { errors << e }
           abort
         end
-        download_attempts.times { completion_queue.pop }
-        [download_attempts, errors]
+        posted_count.times { completion_queue.pop }
+        [posted_count, errors]
       ensure
         queue_executor&.shutdown
       end
@@ -132,12 +132,15 @@ module Aws
         def each
           producer_thread = Thread.new do
             stream_objects
-          ensure
-            @object_queue << DONE_MARKER unless closed?
+            @object_queue << DONE_MARKER
+          rescue ClosedQueueError
+            # abort requested
+          rescue StandardError => e
+            close
+            raise e
           end
 
-          # Yield objects from internal queue
-          while (object = @object_queue.shift) != DONE_MARKER
+          while (object = @object_queue.shift) && object != DONE_MARKER
             yield object
           end
         ensure

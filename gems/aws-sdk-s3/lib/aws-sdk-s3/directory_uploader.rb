@@ -68,16 +68,16 @@ module Aws
         progress = DirectoryProgress.new(opts[:progress_callback]) if opts[:progress_callback]
         queue_executor = DefaultExecutor.new
         completion_queue = Queue.new
-        upload_attempts = 0
+        posted_count = 0
         errors = []
         begin
           @producer.each do |file|
-            upload_attempts += 1
             queue_executor.post(file) do |f|
               upload_file(f, uploader, opts, progress, errors)
             ensure
               completion_queue << :done
             end
+            posted_count += 1
           end
         rescue ClosedQueueError
           # abort already requested
@@ -85,8 +85,8 @@ module Aws
           @mutex.synchronize { errors << e }
           abort
         end
-        upload_attempts.times { completion_queue.pop }
-        [upload_attempts, errors]
+        posted_count.times { completion_queue.pop }
+        [posted_count, errors]
       ensure
         queue_executor&.shutdown
       end
@@ -134,13 +134,16 @@ module Aws
             else
               find_directly
             end
+            @file_queue << DONE_MARKER
+          rescue ClosedQueueError
+            # abort requested
           rescue StandardError => e
+            # encountered a traversal error, we must abort immediately
+            close
             raise DirectoryUploadError, "Directory traversal failed for '#{@source_dir}': #{e.message}"
-          ensure
-            @file_queue << DONE_MARKER unless closed?
           end
 
-          while (file = @file_queue.shift) != DONE_MARKER
+          while (file = @file_queue.shift) && file != DONE_MARKER
             yield file
           end
         ensure
