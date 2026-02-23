@@ -158,6 +158,7 @@ module Aws::Kafka
     LoggingInfo = Shapes::StructureShape.new(name: 'LoggingInfo')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     MutableClusterInfo = Shapes::StructureShape.new(name: 'MutableClusterInfo')
+    NetworkType = Shapes::StringShape.new(name: 'NetworkType')
     NodeExporter = Shapes::StructureShape.new(name: 'NodeExporter')
     NodeExporterInfo = Shapes::StructureShape.new(name: 'NodeExporterInfo')
     NodeInfo = Shapes::StructureShape.new(name: 'NodeInfo')
@@ -196,6 +197,7 @@ module Aws::Kafka
     Scram = Shapes::StructureShape.new(name: 'Scram')
     Serverless = Shapes::StructureShape.new(name: 'Serverless')
     ServerlessClientAuthentication = Shapes::StructureShape.new(name: 'ServerlessClientAuthentication')
+    ServerlessConnectivityInfo = Shapes::StructureShape.new(name: 'ServerlessConnectivityInfo')
     ServerlessRequest = Shapes::StructureShape.new(name: 'ServerlessRequest')
     ServerlessSasl = Shapes::StructureShape.new(name: 'ServerlessSasl')
     ServiceUnavailableException = Shapes::StructureShape.new(name: 'ServiceUnavailableException')
@@ -459,6 +461,8 @@ module Aws::Kafka
     ClusterOperationV2Provisioned.add_member(:vpc_connection_info, Shapes::ShapeRef.new(shape: VpcConnectionInfo, location_name: "vpcConnectionInfo"))
     ClusterOperationV2Provisioned.struct_class = Types::ClusterOperationV2Provisioned
 
+    ClusterOperationV2Serverless.add_member(:source_cluster_info, Shapes::ShapeRef.new(shape: ServerlessConnectivityInfo, location_name: "sourceClusterInfo"))
+    ClusterOperationV2Serverless.add_member(:target_cluster_info, Shapes::ShapeRef.new(shape: ServerlessConnectivityInfo, location_name: "targetClusterInfo"))
     ClusterOperationV2Serverless.add_member(:vpc_connection_info, Shapes::ShapeRef.new(shape: VpcConnectionInfoServerless, location_name: "vpcConnectionInfo"))
     ClusterOperationV2Serverless.struct_class = Types::ClusterOperationV2Serverless
 
@@ -499,6 +503,7 @@ module Aws::Kafka
 
     ConnectivityInfo.add_member(:public_access, Shapes::ShapeRef.new(shape: PublicAccess, location_name: "publicAccess"))
     ConnectivityInfo.add_member(:vpc_connectivity, Shapes::ShapeRef.new(shape: VpcConnectivity, location_name: "vpcConnectivity"))
+    ConnectivityInfo.add_member(:network_type, Shapes::ShapeRef.new(shape: NetworkType, location_name: "networkType"))
     ConnectivityInfo.struct_class = Types::ConnectivityInfo
 
     ConsumerGroupReplication.add_member(:consumer_groups_to_exclude, Shapes::ShapeRef.new(shape: __listOf__stringMax256, location_name: "consumerGroupsToExclude"))
@@ -797,6 +802,10 @@ module Aws::Kafka
     GetBootstrapBrokersResponse.add_member(:bootstrap_broker_string_vpc_connectivity_tls, Shapes::ShapeRef.new(shape: __string, location_name: "bootstrapBrokerStringVpcConnectivityTls"))
     GetBootstrapBrokersResponse.add_member(:bootstrap_broker_string_vpc_connectivity_sasl_scram, Shapes::ShapeRef.new(shape: __string, location_name: "bootstrapBrokerStringVpcConnectivitySaslScram"))
     GetBootstrapBrokersResponse.add_member(:bootstrap_broker_string_vpc_connectivity_sasl_iam, Shapes::ShapeRef.new(shape: __string, location_name: "bootstrapBrokerStringVpcConnectivitySaslIam"))
+    GetBootstrapBrokersResponse.add_member(:bootstrap_broker_string_ipv_6, Shapes::ShapeRef.new(shape: __string, location_name: "bootstrapBrokerStringIpv6"))
+    GetBootstrapBrokersResponse.add_member(:bootstrap_broker_string_tls_ipv_6, Shapes::ShapeRef.new(shape: __string, location_name: "bootstrapBrokerStringTlsIpv6"))
+    GetBootstrapBrokersResponse.add_member(:bootstrap_broker_string_sasl_scram_ipv_6, Shapes::ShapeRef.new(shape: __string, location_name: "bootstrapBrokerStringSaslScramIpv6"))
+    GetBootstrapBrokersResponse.add_member(:bootstrap_broker_string_sasl_iam_ipv_6, Shapes::ShapeRef.new(shape: __string, location_name: "bootstrapBrokerStringSaslIamIpv6"))
     GetBootstrapBrokersResponse.struct_class = Types::GetBootstrapBrokersResponse
 
     GetClusterPolicyRequest.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "clusterArn"))
@@ -1153,10 +1162,14 @@ module Aws::Kafka
 
     Serverless.add_member(:vpc_configs, Shapes::ShapeRef.new(shape: __listOfVpcConfig, required: true, location_name: "vpcConfigs"))
     Serverless.add_member(:client_authentication, Shapes::ShapeRef.new(shape: ServerlessClientAuthentication, location_name: "clientAuthentication"))
+    Serverless.add_member(:connectivity_info, Shapes::ShapeRef.new(shape: ServerlessConnectivityInfo, location_name: "connectivityInfo"))
     Serverless.struct_class = Types::Serverless
 
     ServerlessClientAuthentication.add_member(:sasl, Shapes::ShapeRef.new(shape: ServerlessSasl, location_name: "sasl"))
     ServerlessClientAuthentication.struct_class = Types::ServerlessClientAuthentication
+
+    ServerlessConnectivityInfo.add_member(:network_type, Shapes::ShapeRef.new(shape: NetworkType, location_name: "networkType"))
+    ServerlessConnectivityInfo.struct_class = Types::ServerlessConnectivityInfo
 
     ServerlessRequest.add_member(:vpc_configs, Shapes::ShapeRef.new(shape: __listOfVpcConfig, required: true, location_name: "vpcConfigs"))
     ServerlessRequest.add_member(:client_authentication, Shapes::ShapeRef.new(shape: ServerlessClientAuthentication, location_name: "clientAuthentication"))

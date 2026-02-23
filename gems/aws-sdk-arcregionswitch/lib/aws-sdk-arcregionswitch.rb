@@ -55,7 +55,7 @@ module Aws::ARCRegionswitch
   autoload :EndpointProvider, 'aws-sdk-arcregionswitch/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-arcregionswitch/endpoints'
 
-  GEM_VERSION = '1.11.0'
+  GEM_VERSION = '1.12.0'
 
 end
 

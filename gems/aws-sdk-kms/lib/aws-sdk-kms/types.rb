@@ -1558,6 +1558,9 @@ module Aws::KMS
 
     # @!attribute [rw] ciphertext_blob
     #   Ciphertext to be decrypted. The blob includes metadata.
+    #
+    #   This parameter is required in all cases except when `DryRun` is
+    #   `true` and `DryRunModifiers` is set to `IGNORE_CIPHERTEXT`.
     #   @return [String]
     #
     # @!attribute [rw] encryption_context
@@ -1607,11 +1610,12 @@ module Aws::KMS
     #   operation throws an `IncorrectKeyException`.
     #
     #   This parameter is required only when the ciphertext was encrypted
-    #   under an asymmetric KMS key. If you used a symmetric encryption KMS
-    #   key, KMS can get the KMS key from metadata that it adds to the
-    #   symmetric ciphertext blob. However, it is always recommended as a
-    #   best practice. This practice ensures that you use the KMS key that
-    #   you intend.
+    #   under an asymmetric KMS key or when `DryRun` is `true` and
+    #   `DryRunModifiers` is set to `IGNORE_CIPHERTEXT`. If you used a
+    #   symmetric encryption KMS key, KMS can get the KMS key from metadata
+    #   that it adds to the symmetric ciphertext blob. However, it is always
+    #   recommended as a best practice. This practice ensures that you use
+    #   the KMS key that you intend.
     #
     #   To specify a KMS key, use its key ID, key ARN, alias name, or alias
     #   ARN. When using an alias name, prefix it with `"alias/"`. To specify
@@ -1687,6 +1691,23 @@ module Aws::KMS
     #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/testing-permissions.html
     #   @return [Boolean]
     #
+    # @!attribute [rw] dry_run_modifiers
+    #   Specifies the modifiers to apply to the dry run operation.
+    #   `DryRunModifiers` is an optional parameter that only applies when
+    #   `DryRun` is set to `true`.
+    #
+    #   When set to `IGNORE_CIPHERTEXT`, KMS performs only authorization
+    #   validation without ciphertext validation. This allows you to test
+    #   permissions without requiring a valid ciphertext blob.
+    #
+    #   To learn more about how to use this parameter, see [Testing your
+    #   permissions][1] in the *Key Management Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/testing-permissions.html
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/DecryptRequest AWS API Documentation
     #
     class DecryptRequest < Struct.new(
@@ -1696,7 +1717,8 @@ module Aws::KMS
       :key_id,
       :encryption_algorithm,
       :recipient,
-      :dry_run)
+      :dry_run,
+      :dry_run_modifiers)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5340,6 +5362,9 @@ module Aws::KMS
 
     # @!attribute [rw] ciphertext_blob
     #   Ciphertext of the data to reencrypt.
+    #
+    #   This parameter is required in all cases except when `DryRun` is
+    #   `true` and `DryRunModifiers` is set to `IGNORE_CIPHERTEXT`.
     #   @return [String]
     #
     # @!attribute [rw] source_encryption_context
@@ -5373,11 +5398,12 @@ module Aws::KMS
     #   operation throws an `IncorrectKeyException`.
     #
     #   This parameter is required only when the ciphertext was encrypted
-    #   under an asymmetric KMS key. If you used a symmetric encryption KMS
-    #   key, KMS can get the KMS key from metadata that it adds to the
-    #   symmetric ciphertext blob. However, it is always recommended as a
-    #   best practice. This practice ensures that you use the KMS key that
-    #   you intend.
+    #   under an asymmetric KMS key or when `DryRun` is `true` and
+    #   `DryRunModifiers` is set to `IGNORE_CIPHERTEXT`. If you used a
+    #   symmetric encryption KMS key, KMS can get the KMS key from metadata
+    #   that it adds to the symmetric ciphertext blob. However, it is always
+    #   recommended as a best practice. This practice ensures that you use
+    #   the KMS key that you intend.
     #
     #   To specify a KMS key, use its key ID, key ARN, alias name, or alias
     #   ARN. When using an alias name, prefix it with `"alias/"`. To specify
@@ -5503,6 +5529,23 @@ module Aws::KMS
     #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/testing-permissions.html
     #   @return [Boolean]
     #
+    # @!attribute [rw] dry_run_modifiers
+    #   Specifies the modifiers to apply to the dry run operation.
+    #   `DryRunModifiers` is an optional parameter that only applies when
+    #   `DryRun` is set to `true`.
+    #
+    #   When set to `IGNORE_CIPHERTEXT`, KMS performs only authorization
+    #   validation without ciphertext validation. This allows you to test
+    #   permissions without requiring a valid ciphertext blob.
+    #
+    #   To learn more about how to use this parameter, see [Testing your
+    #   permissions][1] in the *Key Management Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/testing-permissions.html
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/ReEncryptRequest AWS API Documentation
     #
     class ReEncryptRequest < Struct.new(
@@ -5514,7 +5557,8 @@ module Aws::KMS
       :source_encryption_algorithm,
       :destination_encryption_algorithm,
       :grant_tokens,
-      :dry_run)
+      :dry_run,
+      :dry_run_modifiers)
       SENSITIVE = []
       include Aws::Structure
     end

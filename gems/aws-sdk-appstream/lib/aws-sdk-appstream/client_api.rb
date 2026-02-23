@@ -449,6 +449,7 @@ module Aws::AppStream
     AppBlockBuilder.add_member(:app_block_builder_errors, Shapes::ShapeRef.new(shape: ResourceErrors, location_name: "AppBlockBuilderErrors"))
     AppBlockBuilder.add_member(:state_change_reason, Shapes::ShapeRef.new(shape: AppBlockBuilderStateChangeReason, location_name: "StateChangeReason"))
     AppBlockBuilder.add_member(:access_endpoints, Shapes::ShapeRef.new(shape: AccessEndpointList, location_name: "AccessEndpoints"))
+    AppBlockBuilder.add_member(:disable_imdsv1, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "DisableIMDSV1"))
     AppBlockBuilder.struct_class = Types::AppBlockBuilder
 
     AppBlockBuilderAppBlockAssociation.add_member(:app_block_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "AppBlockArn"))
@@ -603,6 +604,7 @@ module Aws::AppStream
     CreateAppBlockBuilderRequest.add_member(:enable_default_internet_access, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "EnableDefaultInternetAccess"))
     CreateAppBlockBuilderRequest.add_member(:iam_role_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "IamRoleArn"))
     CreateAppBlockBuilderRequest.add_member(:access_endpoints, Shapes::ShapeRef.new(shape: AccessEndpointList, location_name: "AccessEndpoints"))
+    CreateAppBlockBuilderRequest.add_member(:disable_imdsv1, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "DisableIMDSV1"))
     CreateAppBlockBuilderRequest.struct_class = Types::CreateAppBlockBuilderRequest
 
     CreateAppBlockBuilderResult.add_member(:app_block_builder, Shapes::ShapeRef.new(shape: AppBlockBuilder, location_name: "AppBlockBuilder"))
@@ -697,6 +699,7 @@ module Aws::AppStream
     CreateFleetRequest.add_member(:session_script_s3_location, Shapes::ShapeRef.new(shape: S3Location, location_name: "SessionScriptS3Location"))
     CreateFleetRequest.add_member(:max_sessions_per_instance, Shapes::ShapeRef.new(shape: Integer, location_name: "MaxSessionsPerInstance"))
     CreateFleetRequest.add_member(:root_volume_config, Shapes::ShapeRef.new(shape: VolumeConfig, location_name: "RootVolumeConfig"))
+    CreateFleetRequest.add_member(:disable_imdsv1, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "DisableIMDSV1"))
     CreateFleetRequest.struct_class = Types::CreateFleetRequest
 
     CreateFleetResult.add_member(:fleet, Shapes::ShapeRef.new(shape: Fleet, location_name: "Fleet"))
@@ -718,6 +721,7 @@ module Aws::AppStream
     CreateImageBuilderRequest.add_member(:root_volume_config, Shapes::ShapeRef.new(shape: VolumeConfig, location_name: "RootVolumeConfig"))
     CreateImageBuilderRequest.add_member(:softwares_to_install, Shapes::ShapeRef.new(shape: StringList, location_name: "SoftwaresToInstall"))
     CreateImageBuilderRequest.add_member(:softwares_to_uninstall, Shapes::ShapeRef.new(shape: StringList, location_name: "SoftwaresToUninstall"))
+    CreateImageBuilderRequest.add_member(:disable_imdsv1, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "DisableIMDSV1"))
     CreateImageBuilderRequest.struct_class = Types::CreateImageBuilderRequest
 
     CreateImageBuilderResult.add_member(:image_builder, Shapes::ShapeRef.new(shape: ImageBuilder, location_name: "ImageBuilder"))
@@ -1212,6 +1216,7 @@ module Aws::AppStream
     Fleet.add_member(:session_script_s3_location, Shapes::ShapeRef.new(shape: S3Location, location_name: "SessionScriptS3Location"))
     Fleet.add_member(:max_sessions_per_instance, Shapes::ShapeRef.new(shape: Integer, location_name: "MaxSessionsPerInstance"))
     Fleet.add_member(:root_volume_config, Shapes::ShapeRef.new(shape: VolumeConfig, location_name: "RootVolumeConfig"))
+    Fleet.add_member(:disable_imdsv1, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "DisableIMDSV1"))
     Fleet.struct_class = Types::Fleet
 
     FleetAttributes.member = Shapes::ShapeRef.new(shape: FleetAttribute)
@@ -1275,6 +1280,7 @@ module Aws::AppStream
     ImageBuilder.add_member(:access_endpoints, Shapes::ShapeRef.new(shape: AccessEndpointList, location_name: "AccessEndpoints"))
     ImageBuilder.add_member(:root_volume_config, Shapes::ShapeRef.new(shape: VolumeConfig, location_name: "RootVolumeConfig"))
     ImageBuilder.add_member(:latest_appstream_agent_version, Shapes::ShapeRef.new(shape: LatestAppstreamAgentVersion, location_name: "LatestAppstreamAgentVersion"))
+    ImageBuilder.add_member(:disable_imdsv1, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "DisableIMDSV1"))
     ImageBuilder.struct_class = Types::ImageBuilder
 
     ImageBuilderList.member = Shapes::ShapeRef.new(shape: ImageBuilder)
@@ -1566,6 +1572,7 @@ module Aws::AppStream
     UpdateAppBlockBuilderRequest.add_member(:iam_role_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "IamRoleArn"))
     UpdateAppBlockBuilderRequest.add_member(:access_endpoints, Shapes::ShapeRef.new(shape: AccessEndpointList, location_name: "AccessEndpoints"))
     UpdateAppBlockBuilderRequest.add_member(:attributes_to_delete, Shapes::ShapeRef.new(shape: AppBlockBuilderAttributes, location_name: "AttributesToDelete"))
+    UpdateAppBlockBuilderRequest.add_member(:disable_imdsv1, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "DisableIMDSV1"))
     UpdateAppBlockBuilderRequest.struct_class = Types::UpdateAppBlockBuilderRequest
 
     UpdateAppBlockBuilderResult.add_member(:app_block_builder, Shapes::ShapeRef.new(shape: AppBlockBuilder, location_name: "AppBlockBuilder"))
@@ -1627,6 +1634,7 @@ module Aws::AppStream
     UpdateFleetRequest.add_member(:session_script_s3_location, Shapes::ShapeRef.new(shape: S3Location, location_name: "SessionScriptS3Location"))
     UpdateFleetRequest.add_member(:max_sessions_per_instance, Shapes::ShapeRef.new(shape: Integer, location_name: "MaxSessionsPerInstance"))
     UpdateFleetRequest.add_member(:root_volume_config, Shapes::ShapeRef.new(shape: VolumeConfig, location_name: "RootVolumeConfig"))
+    UpdateFleetRequest.add_member(:disable_imdsv1, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "DisableIMDSV1"))
     UpdateFleetRequest.struct_class = Types::UpdateFleetRequest
 
     UpdateFleetResult.add_member(:fleet, Shapes::ShapeRef.new(shape: Fleet, location_name: "Fleet"))

@@ -476,8 +476,13 @@ module Aws::TrustedAdvisor
 
     # @!group API Operations
 
-    # Update one or more exclusion status for a list of recommendation
-    # resources
+    # Update one or more exclusion statuses for a list of recommendation
+    # resources. This API supports up to 25 unique recommendation resource
+    # ARNs per request. This API currently doesn't support prioritized
+    # recommendation resources. This API updates global recommendations,
+    # eliminating the need to call the API in each AWS Region. After
+    # submitting an exclusion update, note that it might take a few minutes
+    # for the changes to be reflected in the system.
     #
     # @option params [required, Array<Types::RecommendationResourceExclusion>] :recommendation_resource_exclusions
     #   A list of recommendation resource ARNs and exclusion status to update
@@ -485,6 +490,29 @@ module Aws::TrustedAdvisor
     # @return [Types::BatchUpdateRecommendationResourceExclusionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::BatchUpdateRecommendationResourceExclusionResponse#batch_update_recommendation_resource_exclusion_errors #batch_update_recommendation_resource_exclusion_errors} => Array&lt;Types::UpdateRecommendationResourceExclusionError&gt;
+    #
+    #
+    # @example Example: Batch updates the exclusion status for a list of recommendation resources
+    #
+    #   resp = client.batch_update_recommendation_resource_exclusion({
+    #     recommendation_resource_exclusions: [
+    #       {
+    #         arn: "arn:aws:trustedadvisor::000000000000:recommendation-resource/55fa4d2e-bbb7-491a-833b-5773e9589578/18959a1f1973cff8e706e9d9bde28bba36cd602a6b2cb86c8b61252835236010", 
+    #         is_excluded: true, 
+    #       }, 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     batch_update_recommendation_resource_exclusion_errors: [
+    #       {
+    #         arn: "arn:aws:trustedadvisor::000000000000:recommendation-resource/55fa4d2e-bbb7-491a-833b-5773e9589578/18959a1f1973cff8e706e9d9bde28bba36cd602a6b2cb86c8b61252835236010", 
+    #         error_code: "404", 
+    #         error_message: "Exception that the requested resource has not been found", 
+    #       }, 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -514,7 +542,9 @@ module Aws::TrustedAdvisor
     end
 
     # Get a specific recommendation within an AWS Organizations
-    # organization. This API supports only prioritized recommendations.
+    # organization. This API supports only prioritized recommendations and
+    # provides global priority recommendations, eliminating the need to call
+    # the API in each AWS Region.
     #
     # @option params [required, String] :organization_recommendation_identifier
     #   The Recommendation identifier
@@ -522,6 +552,39 @@ module Aws::TrustedAdvisor
     # @return [Types::GetOrganizationRecommendationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetOrganizationRecommendationResponse#organization_recommendation #organization_recommendation} => Types::OrganizationRecommendation
+    #
+    #
+    # @example Example: Get an AWS Organization's Recommendation by ARN
+    #
+    #   resp = client.get_organization_recommendation({
+    #     organization_recommendation_identifier: "arn:aws:trustedadvisor:::organization-recommendation/9534ec9b-bf3a-44e8-8213-2ed68b39d9d5", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     organization_recommendation: {
+    #       name: "Lambda Runtime Deprecation Warning", 
+    #       type: "priority", 
+    #       arn: "arn:aws:trustedadvisor:::organization-recommendation/9534ec9b-bf3a-44e8-8213-2ed68b39d9d5", 
+    #       aws_services: [
+    #         "lambda", 
+    #       ], 
+    #       check_arn: "arn:aws:trustedadvisor:::check/L4dfs2Q4C5", 
+    #       description: "One or more lambdas are using a deprecated runtime", 
+    #       id: "9534ec9b-bf3a-44e8-8213-2ed68b39d9d5", 
+    #       lifecycle_stage: "resolved", 
+    #       pillars: [
+    #         "security", 
+    #       ], 
+    #       resources_aggregates: {
+    #         error_count: 0, 
+    #         ok_count: 0, 
+    #         warning_count: 0, 
+    #       }, 
+    #       source: "ta_check", 
+    #       status: "warning", 
+    #     }, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -531,32 +594,33 @@ module Aws::TrustedAdvisor
     #
     # @example Response structure
     #
-    #   resp.organization_recommendation.arn #=> String
-    #   resp.organization_recommendation.aws_services #=> Array
-    #   resp.organization_recommendation.aws_services[0] #=> String
-    #   resp.organization_recommendation.check_arn #=> String
-    #   resp.organization_recommendation.created_at #=> Time
-    #   resp.organization_recommendation.created_by #=> String
-    #   resp.organization_recommendation.description #=> String
     #   resp.organization_recommendation.id #=> String
-    #   resp.organization_recommendation.last_updated_at #=> Time
+    #   resp.organization_recommendation.type #=> String, one of "standard", "priority"
+    #   resp.organization_recommendation.check_arn #=> String
+    #   resp.organization_recommendation.status #=> String, one of "ok", "warning", "error"
     #   resp.organization_recommendation.lifecycle_stage #=> String, one of "in_progress", "pending_response", "dismissed", "resolved"
-    #   resp.organization_recommendation.name #=> String
-    #   resp.organization_recommendation.pillar_specific_aggregates.cost_optimizing.estimated_monthly_savings #=> Float
-    #   resp.organization_recommendation.pillar_specific_aggregates.cost_optimizing.estimated_percent_monthly_savings #=> Float
     #   resp.organization_recommendation.pillars #=> Array
     #   resp.organization_recommendation.pillars[0] #=> String, one of "cost_optimizing", "performance", "security", "service_limits", "fault_tolerance", "operational_excellence"
-    #   resp.organization_recommendation.resolved_at #=> Time
-    #   resp.organization_recommendation.resources_aggregates.error_count #=> Integer
+    #   resp.organization_recommendation.source #=> String, one of "aws_config", "compute_optimizer", "cost_explorer", "lse", "manual", "pse", "rds", "resilience", "resilience_hub", "security_hub", "stir", "ta_check", "well_architected", "cost_optimization_hub"
+    #   resp.organization_recommendation.aws_services #=> Array
+    #   resp.organization_recommendation.aws_services[0] #=> String
+    #   resp.organization_recommendation.name #=> String
     #   resp.organization_recommendation.resources_aggregates.ok_count #=> Integer
     #   resp.organization_recommendation.resources_aggregates.warning_count #=> Integer
-    #   resp.organization_recommendation.source #=> String, one of "aws_config", "compute_optimizer", "cost_explorer", "lse", "manual", "pse", "rds", "resilience", "resilience_hub", "security_hub", "stir", "ta_check", "well_architected"
-    #   resp.organization_recommendation.status #=> String, one of "ok", "warning", "error"
-    #   resp.organization_recommendation.type #=> String, one of "standard", "priority"
-    #   resp.organization_recommendation.update_reason #=> String
-    #   resp.organization_recommendation.update_reason_code #=> String, one of "non_critical_account", "temporary_account", "valid_business_case", "other_methods_available", "low_priority", "not_applicable", "other"
+    #   resp.organization_recommendation.resources_aggregates.error_count #=> Integer
+    #   resp.organization_recommendation.resources_aggregates.excluded_count #=> Integer
+    #   resp.organization_recommendation.pillar_specific_aggregates.cost_optimizing.estimated_monthly_savings #=> Float
+    #   resp.organization_recommendation.pillar_specific_aggregates.cost_optimizing.estimated_percent_monthly_savings #=> Float
+    #   resp.organization_recommendation.created_at #=> Time
+    #   resp.organization_recommendation.last_updated_at #=> Time
+    #   resp.organization_recommendation.arn #=> String
+    #   resp.organization_recommendation.description #=> String
+    #   resp.organization_recommendation.created_by #=> String
     #   resp.organization_recommendation.updated_on_behalf_of #=> String
     #   resp.organization_recommendation.updated_on_behalf_of_job_title #=> String
+    #   resp.organization_recommendation.update_reason #=> String
+    #   resp.organization_recommendation.update_reason_code #=> String, one of "non_critical_account", "temporary_account", "valid_business_case", "other_methods_available", "low_priority", "not_applicable", "other"
+    #   resp.organization_recommendation.resolved_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/trustedadvisor-2022-09-15/GetOrganizationRecommendation AWS API Documentation
     #
@@ -567,49 +631,97 @@ module Aws::TrustedAdvisor
       req.send_request(options)
     end
 
-    # Get a specific Recommendation
+    # Get a specific Recommendation. This API provides global
+    # recommendations, eliminating the need to call the API in each AWS
+    # Region.
     #
     # @option params [required, String] :recommendation_identifier
     #   The Recommendation identifier
+    #
+    # @option params [String] :language
+    #   The ISO 639-1 code for the language that you want your recommendations
+    #   to appear in.
     #
     # @return [Types::GetRecommendationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetRecommendationResponse#recommendation #recommendation} => Types::Recommendation
     #
+    #
+    # @example Example: Get a Recommendation by ARN
+    #
+    #   resp = client.get_recommendation({
+    #     recommendation_identifier: "arn:aws:trustedadvisor::000000000000:recommendation/55fa4d2e-bbb7-491a-833b-5773e9589578", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     recommendation: {
+    #       name: "MFA Recommendation", 
+    #       type: "standard", 
+    #       arn: "arn:aws:trustedadvisor::000000000000:recommendation/55fa4d2e-bbb7-491a-833b-5773e9589578", 
+    #       aws_services: [
+    #         "iam", 
+    #       ], 
+    #       check_arn: "arn:aws:trustedadvisor:::check/7DAFEmoDos", 
+    #       description: "Enable multi-factor authentication", 
+    #       id: "55fa4d2e-bbb7-491a-833b-5773e9589578", 
+    #       last_updated_at: Time.parse("2023-11-01T15:57:58.673Z"), 
+    #       pillar_specific_aggregates: {
+    #         cost_optimizing: {
+    #           estimated_monthly_savings: 0.0, 
+    #           estimated_percent_monthly_savings: 0.0, 
+    #         }, 
+    #       }, 
+    #       pillars: [
+    #         "security", 
+    #       ], 
+    #       resources_aggregates: {
+    #         error_count: 1, 
+    #         ok_count: 0, 
+    #         warning_count: 0, 
+    #       }, 
+    #       source: "ta_check", 
+    #       status: "error", 
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_recommendation({
     #     recommendation_identifier: "AccountRecommendationIdentifier", # required
+    #     language: "en", # accepts en, ja, zh, fr, de, ko, zh_TW, it, es, pt_BR, id
     #   })
     #
     # @example Response structure
     #
-    #   resp.recommendation.arn #=> String
-    #   resp.recommendation.aws_services #=> Array
-    #   resp.recommendation.aws_services[0] #=> String
-    #   resp.recommendation.check_arn #=> String
-    #   resp.recommendation.created_at #=> Time
-    #   resp.recommendation.created_by #=> String
-    #   resp.recommendation.description #=> String
     #   resp.recommendation.id #=> String
-    #   resp.recommendation.last_updated_at #=> Time
+    #   resp.recommendation.type #=> String, one of "standard", "priority"
+    #   resp.recommendation.check_arn #=> String
+    #   resp.recommendation.status #=> String, one of "ok", "warning", "error"
     #   resp.recommendation.lifecycle_stage #=> String, one of "in_progress", "pending_response", "dismissed", "resolved"
-    #   resp.recommendation.name #=> String
-    #   resp.recommendation.pillar_specific_aggregates.cost_optimizing.estimated_monthly_savings #=> Float
-    #   resp.recommendation.pillar_specific_aggregates.cost_optimizing.estimated_percent_monthly_savings #=> Float
     #   resp.recommendation.pillars #=> Array
     #   resp.recommendation.pillars[0] #=> String, one of "cost_optimizing", "performance", "security", "service_limits", "fault_tolerance", "operational_excellence"
-    #   resp.recommendation.resolved_at #=> Time
-    #   resp.recommendation.resources_aggregates.error_count #=> Integer
+    #   resp.recommendation.source #=> String, one of "aws_config", "compute_optimizer", "cost_explorer", "lse", "manual", "pse", "rds", "resilience", "resilience_hub", "security_hub", "stir", "ta_check", "well_architected", "cost_optimization_hub"
+    #   resp.recommendation.aws_services #=> Array
+    #   resp.recommendation.aws_services[0] #=> String
+    #   resp.recommendation.name #=> String
     #   resp.recommendation.resources_aggregates.ok_count #=> Integer
     #   resp.recommendation.resources_aggregates.warning_count #=> Integer
-    #   resp.recommendation.source #=> String, one of "aws_config", "compute_optimizer", "cost_explorer", "lse", "manual", "pse", "rds", "resilience", "resilience_hub", "security_hub", "stir", "ta_check", "well_architected"
-    #   resp.recommendation.status #=> String, one of "ok", "warning", "error"
-    #   resp.recommendation.type #=> String, one of "standard", "priority"
-    #   resp.recommendation.update_reason #=> String
-    #   resp.recommendation.update_reason_code #=> String, one of "non_critical_account", "temporary_account", "valid_business_case", "other_methods_available", "low_priority", "not_applicable", "other"
+    #   resp.recommendation.resources_aggregates.error_count #=> Integer
+    #   resp.recommendation.resources_aggregates.excluded_count #=> Integer
+    #   resp.recommendation.pillar_specific_aggregates.cost_optimizing.estimated_monthly_savings #=> Float
+    #   resp.recommendation.pillar_specific_aggregates.cost_optimizing.estimated_percent_monthly_savings #=> Float
+    #   resp.recommendation.created_at #=> Time
+    #   resp.recommendation.last_updated_at #=> Time
+    #   resp.recommendation.arn #=> String
+    #   resp.recommendation.status_reason #=> String, one of "no_data_ok"
+    #   resp.recommendation.description #=> String
+    #   resp.recommendation.created_by #=> String
     #   resp.recommendation.updated_on_behalf_of #=> String
     #   resp.recommendation.updated_on_behalf_of_job_title #=> String
+    #   resp.recommendation.update_reason #=> String
+    #   resp.recommendation.update_reason_code #=> String, one of "non_critical_account", "temporary_account", "valid_business_case", "other_methods_available", "low_priority", "not_applicable", "other"
+    #   resp.recommendation.resolved_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/trustedadvisor-2022-09-15/GetRecommendation AWS API Documentation
     #
@@ -620,62 +732,157 @@ module Aws::TrustedAdvisor
       req.send_request(options)
     end
 
-    # List a filterable set of Checks
-    #
-    # @option params [String] :aws_service
-    #   The aws service associated with the check
-    #
-    # @option params [String] :language
-    #   The ISO 639-1 code for the language that you want your checks to
-    #   appear in.
-    #
-    # @option params [Integer] :max_results
-    #   The maximum number of results to return per page.
+    # List a filterable set of Checks. This API provides global
+    # recommendations, eliminating the need to call the API in each AWS
+    # Region.
     #
     # @option params [String] :next_token
     #   The token for the next set of results. Use the value returned in the
     #   previous response in the next request to retrieve the next set of
     #   results.
     #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per page.
+    #
     # @option params [String] :pillar
     #   The pillar of the check
+    #
+    # @option params [String] :aws_service
+    #   The aws service associated with the check
     #
     # @option params [String] :source
     #   The source of the check
     #
+    # @option params [String] :language
+    #   The ISO 639-1 code for the language that you want your checks to
+    #   appear in.
+    #
     # @return [Types::ListChecksResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::ListChecksResponse#check_summaries #check_summaries} => Array&lt;Types::CheckSummary&gt;
     #   * {Types::ListChecksResponse#next_token #next_token} => String
+    #   * {Types::ListChecksResponse#check_summaries #check_summaries} => Array&lt;Types::CheckSummary&gt;
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: List all AWS Trusted Advisor Checks
+    #
+    #   resp = client.list_checks({
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     check_summaries: [
+    #       {
+    #         metadata: {
+    #           "0" => "Region", 
+    #           "1" => "Security Group Name", 
+    #           "2" => "Security Group ID", 
+    #           "3" => "Protocol", 
+    #           "4" => "Port", 
+    #           "5" => "Status", 
+    #           "6" => "IP Range", 
+    #         }, 
+    #         name: "Security Groups - Unrestricted Access", 
+    #         arn: "arn:aws:trustedadvisor:::check/1iG5NDGVre", 
+    #         aws_services: [
+    #           "EC2", 
+    #         ], 
+    #         description: "Checks security groups for rules that allow unrestricted access to a resource. Unrestricted access increases opportunities for malicious activity (hacking, denial-of-service attacks, loss of data).\n<br>\n<br>Note: This check only evaluates security groups that you create and their inbound rules for IPv4 addresses. Security groups created by AWS Directory Services are flagged as red or yellow, but they don\u2019t pose a security risk and can be safely ignored or excluded. For more information, see the <a href=\"https://aws.amazon.com/premiumsupport/faqs/#AWS_Trusted_Advisor\" target=\"_blank\">Trusted Advisor FAQ</a>.\n<br>\n<br>\n<h4 class='headerBodyStyle'>Alert Criteria</h4>\n<br>\nRed: A security group rule has a source IP address with a /0 suffix for ports other than 25, 80, or 443.\n<br>\n<br>\n<h4 class='headerBodyStyle'>Recommended Action</h4>\n<br>\nRestrict access to only those IP addresses that require it. To restrict access to a specific IP address, set the suffix to /32 (for example, 192.0.2.10/32). Be sure to delete overly permissive rules after creating rules that are more restrictive.\n<br>\n<br>\n<h4 class='headerBodyStyle'>Additional Resources</h4>\n<br><a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-network-security.html\" target=\"_blank\">Amazon EC2 Security Groups</a><br>\n<a href=\"https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing\" target=\"_blank\">Classless Inter-Domain Routing</a> (Wikipedia)", 
+    #         id: "1iG5NDGVre", 
+    #         pillars: [
+    #           "security", 
+    #         ], 
+    #         source: "ta_check", 
+    #       }, 
+    #       {
+    #         metadata: {
+    #           "0" => "Region", 
+    #           "1" => "Family", 
+    #           "10" => "Upfront Cost of Reserved Instances", 
+    #           "11" => "Estimated cost of Reserved Instances (monthly)", 
+    #           "12" => "Estimated On-Demand Cost Post Recommended Reserved Instance Purchase (monthly)", 
+    #           "13" => "Estimated Break Even (months)", 
+    #           "14" => "Lookback Period (days)", 
+    #           "15" => "Term (years)", 
+    #           "2" => "Instance Type", 
+    #           "3" => "License Model", 
+    #           "4" => "Database Edition", 
+    #           "5" => "Database Engine", 
+    #           "6" => "Deployment Option", 
+    #           "7" => "Recommended number of Reserved Instances to purchase", 
+    #           "8" => "Expected Average Reserved Instance Utilization", 
+    #           "9" => "Estimated Savings with Recommendation (monthly)", 
+    #         }, 
+    #         name: "Amazon Relational Database Service (RDS) Reserved Instance Optimization", 
+    #         arn: "arn:aws:trustedadvisor:::check/1qazXsw23e", 
+    #         aws_services: [
+    #           "RDS", 
+    #         ], 
+    #         description: "Checks your usage of RDS and provides recommendations on purchase of Reserved Instances to help reduce costs incurred from using RDS On-Demand. AWS generates these recommendations by analyzing your On-Demand usage for the past 30 days. We then simulate every combination of reservations in the generated category of usage in order to identify the best number of each type of Reserved Instance to purchase to maximize your savings. This check covers recommendations based on partial upfront payment option with 1-year or 3-year commitment. This check is not available to accounts linked in Consolidated Billing. Recommendations are only available for the Paying Account.<br/><br/>\r\n<h4 class='headerBodyStyle'>Alert Criteria</h4><br/>\nYellow: Optimizing the purchase of RDS Reserved Instances can help reduce costs.<br/><br/>\r\n<h4 class='headerBodyStyle'>Recommended Action</h4><br/>\r\nSee the <a href=\"http://console.aws.amazon.com/billing/home?/costexplorer#/costexplorer\" target=\"_blank\">Cost Explorer</a> page for more detailed recommendations, customization options (e.g. look-back period, payment option, etc.) and to purchase RDS Reserved Instances.\n<br/>\n<br/>\n<h4 class='headerBodyStyle'>Additional Resources</h4><br/>\nInformation on RDS Reserved Instances and how they can save you money can be found <a href=\"http://aws.amazon.com/rds/reserved-instances/\" target=\"_blank\">here</a>.<br>\nFor more information on this recommendation, see <a href=\"http://aws.amazon.com/premiumsupport/technology/trusted-advisor/faqs/#Reserved_Instance_Optimization_Check_Questions\" target=\"_blank\">Reserved Instance Optimization Check Questions</a> in the Trusted Advisor FAQs.<br>\nFor more detailed description of fields, see <a href=\"http://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_ReservationPurchaseRecommendationDetail.html#awscostmanagement-Type-ReservationPurchaseRecommendationDetail-AverageUtilization\" target=\"_blank\">Cost Explorer documentation</a>", 
+    #         id: "1qazXsw23e", 
+    #         pillars: [
+    #           "cost_optimizing", 
+    #         ], 
+    #         source: "ta_check", 
+    #       }, 
+    #       {
+    #         metadata: {
+    #           "0" => "Region", 
+    #           "1" => "Family", 
+    #           "10" => "Lookback Period (days)", 
+    #           "11" => "Term (years)", 
+    #           "2" => "Node Type", 
+    #           "3" => "Recommended number of Reserved Nodes to purchase", 
+    #           "4" => "Expected Average Reserved Node Utilization", 
+    #           "5" => "Estimated Savings with Recommendation (monthly)", 
+    #           "6" => "Upfront Cost of Reserved Nodes", 
+    #           "7" => "Estimated cost of Reserved Nodes (monthly)", 
+    #           "8" => "Estimated On-Demand Cost Post Recommended Reserved Nodes Purchase (monthly)", 
+    #           "9" => "Estimated Break Even (months)", 
+    #         }, 
+    #         name: "Amazon Redshift Reserved Node Optimization", 
+    #         arn: "arn:aws:trustedadvisor:::check/1qw23er45t", 
+    #         aws_services: [
+    #           "Redshift", 
+    #         ], 
+    #         description: "Checks your usage of Redshift and provides recommendations on purchase of Reserved Nodes to help reduce costs incurred from using Redshift On-Demand. AWS generates these recommendations by analyzing your On-Demand usage for the past 30 days. We then simulate every combination of reservations in the generated category of usage in order to identify the best number of each type of Reserved Nodes to purchase to maximize your savings. This check covers recommendations based on partial upfront payment option with 1-year or 3-year commitment. This check is not available to accounts linked in Consolidated Billing. Recommendations are only available for the Paying Account.<br/><br/>\n<h4 class='headerBodyStyle'>Alert Criteria</h4><br/>Yellow: Optimizing the purchase of Redshift Reserved Nodes can help reduce costs.<br/><br/>\n<h4 class='headerBodyStyle'>Recommended Action</h4><br/>See the <a href=\"https://console.aws.amazon.com/billing/home?/costexplorer#/costexplorer\" target=\"_blank\">Cost Explorer</a> page for more detailed recommendations, customization options (e.g. look-back period, payment option, etc.) and to purchase Redshift Reserved Nodes.<br/><br/>\n<h4 class='headerBodyStyle'>Additional Resources</h4><br/>Information on Redshift Reserved Nodes and how they can save you money can be found <a href=\"http://docs.aws.amazon.com/redshift/latest/mgmt/purchase-reserved-node-instance.html\" target=\"_blank\">here</a>.<br>\nFor more information on this recommendation, see <a href=\"http://aws.amazon.com/premiumsupport/technology/trusted-advisor/faqs/#Reserved_Instance_Optimization_Check_Questions\" target=\"_blank\">Reserved Instance Optimization Check Questions</a> in the Trusted Advisor FAQs.<br/>\nFor more detailed description of fields, see <a href=\"http://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_ReservationPurchaseRecommendationDetail.html#awscostmanagement-Type-ReservationPurchaseRecommendationDetail-AverageUtilization\" target=\"_blank\">Cost Explorer documentation</a>", 
+    #         id: "1qw23er45t", 
+    #         pillars: [
+    #           "cost_optimizing", 
+    #         ], 
+    #         source: "ta_check", 
+    #       }, 
+    #     ], 
+    #     next_token: "<REDACTED>", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_checks({
-    #     aws_service: "RecommendationAwsService",
-    #     language: "en", # accepts en, ja, zh, fr, de, ko, zh_TW, it, es, pt_BR, id
-    #     max_results: 1,
     #     next_token: "ListChecksRequestNextTokenString",
+    #     max_results: 1,
     #     pillar: "cost_optimizing", # accepts cost_optimizing, performance, security, service_limits, fault_tolerance, operational_excellence
-    #     source: "aws_config", # accepts aws_config, compute_optimizer, cost_explorer, lse, manual, pse, rds, resilience, resilience_hub, security_hub, stir, ta_check, well_architected
+    #     aws_service: "RecommendationAwsService",
+    #     source: "aws_config", # accepts aws_config, compute_optimizer, cost_explorer, lse, manual, pse, rds, resilience, resilience_hub, security_hub, stir, ta_check, well_architected, cost_optimization_hub
+    #     language: "en", # accepts en, ja, zh, fr, de, ko, zh_TW, it, es, pt_BR, id
     #   })
     #
     # @example Response structure
     #
+    #   resp.next_token #=> String
     #   resp.check_summaries #=> Array
-    #   resp.check_summaries[0].arn #=> String
-    #   resp.check_summaries[0].aws_services #=> Array
-    #   resp.check_summaries[0].aws_services[0] #=> String
-    #   resp.check_summaries[0].description #=> String
     #   resp.check_summaries[0].id #=> String
-    #   resp.check_summaries[0].metadata #=> Hash
-    #   resp.check_summaries[0].metadata["String"] #=> String
+    #   resp.check_summaries[0].arn #=> String
     #   resp.check_summaries[0].name #=> String
+    #   resp.check_summaries[0].description #=> String
     #   resp.check_summaries[0].pillars #=> Array
     #   resp.check_summaries[0].pillars[0] #=> String, one of "cost_optimizing", "performance", "security", "service_limits", "fault_tolerance", "operational_excellence"
-    #   resp.check_summaries[0].source #=> String, one of "aws_config", "compute_optimizer", "cost_explorer", "lse", "manual", "pse", "rds", "resilience", "resilience_hub", "security_hub", "stir", "ta_check", "well_architected"
-    #   resp.next_token #=> String
+    #   resp.check_summaries[0].aws_services #=> Array
+    #   resp.check_summaries[0].aws_services[0] #=> String
+    #   resp.check_summaries[0].source #=> String, one of "aws_config", "compute_optimizer", "cost_explorer", "lse", "manual", "pse", "rds", "resilience", "resilience_hub", "security_hub", "stir", "ta_check", "well_architected", "cost_optimization_hub"
+    #   resp.check_summaries[0].metadata #=> Hash
+    #   resp.check_summaries[0].metadata["String"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/trustedadvisor-2022-09-15/ListChecks AWS API Documentation
     #
@@ -688,50 +895,73 @@ module Aws::TrustedAdvisor
 
     # Lists the accounts that own the resources for an organization
     # aggregate recommendation. This API only supports prioritized
-    # recommendations.
-    #
-    # @option params [String] :affected_account_id
-    #   An account affected by this organization recommendation
-    #
-    # @option params [Integer] :max_results
-    #   The maximum number of results to return per page.
+    # recommendations and provides global priority recommendations,
+    # eliminating the need to call the API in each AWS Region.
     #
     # @option params [String] :next_token
     #   The token for the next set of results. Use the value returned in the
     #   previous response in the next request to retrieve the next set of
     #   results.
     #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per page.
+    #
     # @option params [required, String] :organization_recommendation_identifier
     #   The Recommendation identifier
     #
+    # @option params [String] :affected_account_id
+    #   An account affected by this organization recommendation
+    #
     # @return [Types::ListOrganizationRecommendationAccountsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::ListOrganizationRecommendationAccountsResponse#account_recommendation_lifecycle_summaries #account_recommendation_lifecycle_summaries} => Array&lt;Types::AccountRecommendationLifecycleSummary&gt;
     #   * {Types::ListOrganizationRecommendationAccountsResponse#next_token #next_token} => String
+    #   * {Types::ListOrganizationRecommendationAccountsResponse#account_recommendation_lifecycle_summaries #account_recommendation_lifecycle_summaries} => Array&lt;Types::AccountRecommendationLifecycleSummary&gt;
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: List all Accounts for an AWS Organization's Recommendation
+    #
+    #   resp = client.list_organization_recommendation_accounts({
+    #     organization_recommendation_identifier: "arn:aws:trustedadvisor:::organization-recommendation/9534ec9b-bf3a-44e8-8213-2ed68b39d9d5", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     account_recommendation_lifecycle_summaries: [
+    #       {
+    #         account_id: "000000000000", 
+    #         account_recommendation_arn: "arn:aws:trustedadvisor::000000000000:recommendation/9534ec9b-bf3a-44e8-8213-2ed68b39d9d5", 
+    #         last_updated_at: Time.parse("2023-01-17T18:25:44.552Z"), 
+    #         lifecycle_stage: "resolved", 
+    #         update_reason: "Resolved issue", 
+    #         update_reason_code: "valid_business_case", 
+    #       }, 
+    #     ], 
+    #     next_token: "<REDACTED>", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_organization_recommendation_accounts({
-    #     affected_account_id: "AccountId",
-    #     max_results: 1,
     #     next_token: "ListOrganizationRecommendationAccountsRequestNextTokenString",
+    #     max_results: 1,
     #     organization_recommendation_identifier: "OrganizationRecommendationIdentifier", # required
+    #     affected_account_id: "AccountId",
     #   })
     #
     # @example Response structure
     #
+    #   resp.next_token #=> String
     #   resp.account_recommendation_lifecycle_summaries #=> Array
     #   resp.account_recommendation_lifecycle_summaries[0].account_id #=> String
     #   resp.account_recommendation_lifecycle_summaries[0].account_recommendation_arn #=> String
-    #   resp.account_recommendation_lifecycle_summaries[0].last_updated_at #=> Time
     #   resp.account_recommendation_lifecycle_summaries[0].lifecycle_stage #=> String, one of "in_progress", "pending_response", "dismissed", "resolved"
-    #   resp.account_recommendation_lifecycle_summaries[0].update_reason #=> String
-    #   resp.account_recommendation_lifecycle_summaries[0].update_reason_code #=> String, one of "non_critical_account", "temporary_account", "valid_business_case", "other_methods_available", "low_priority", "not_applicable", "other"
     #   resp.account_recommendation_lifecycle_summaries[0].updated_on_behalf_of #=> String
     #   resp.account_recommendation_lifecycle_summaries[0].updated_on_behalf_of_job_title #=> String
-    #   resp.next_token #=> String
+    #   resp.account_recommendation_lifecycle_summaries[0].update_reason #=> String
+    #   resp.account_recommendation_lifecycle_summaries[0].update_reason_code #=> String, one of "non_critical_account", "temporary_account", "valid_business_case", "other_methods_available", "low_priority", "not_applicable", "other"
+    #   resp.account_recommendation_lifecycle_summaries[0].last_updated_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/trustedadvisor-2022-09-15/ListOrganizationRecommendationAccounts AWS API Documentation
     #
@@ -743,30 +973,32 @@ module Aws::TrustedAdvisor
     end
 
     # List Resources of a Recommendation within an Organization. This API
-    # only supports prioritized recommendations.
-    #
-    # @option params [String] :affected_account_id
-    #   An account affected by this organization recommendation
-    #
-    # @option params [String] :exclusion_status
-    #   The exclusion status of the resource
-    #
-    # @option params [Integer] :max_results
-    #   The maximum number of results to return per page.
+    # only supports prioritized recommendations and provides global priority
+    # recommendations, eliminating the need to call the API in each AWS
+    # Region.
     #
     # @option params [String] :next_token
     #   The token for the next set of results. Use the value returned in the
     #   previous response in the next request to retrieve the next set of
     #   results.
     #
-    # @option params [required, String] :organization_recommendation_identifier
-    #   The AWS Organization organization's Recommendation identifier
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per page.
+    #
+    # @option params [String] :status
+    #   The status of the resource
+    #
+    # @option params [String] :exclusion_status
+    #   The exclusion status of the resource
     #
     # @option params [String] :region_code
     #   The AWS Region code of the resource
     #
-    # @option params [String] :status
-    #   The status of the resource
+    # @option params [required, String] :organization_recommendation_identifier
+    #   The AWS Organization organization's Recommendation identifier
+    #
+    # @option params [String] :affected_account_id
+    #   An account affected by this organization recommendation
     #
     # @return [Types::ListOrganizationRecommendationResourcesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -775,33 +1007,107 @@ module Aws::TrustedAdvisor
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
+    #
+    # @example Example: List all Resources for an AWS Organization's Recommendation
+    #
+    #   resp = client.list_organization_recommendation_resources({
+    #     organization_recommendation_identifier: "arn:aws:trustedadvisor:::organization-recommendation/5a694939-2e54-45a2-ae72-730598fa89d0", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     next_token: "<REDACTED>", 
+    #     organization_recommendation_resource_summaries: [
+    #       {
+    #         metadata: {
+    #           "0" => "14", 
+    #           "1" => "208.79999999999998", 
+    #           "2" => "database-1-instance-1", 
+    #           "3" => "db.r5.large", 
+    #           "4" => "false", 
+    #           "5" => "us-west-2", 
+    #           "6" => "arn:aws:rds:us-west-2:000000000000:db:database-1-instance-1", 
+    #           "7" => "1", 
+    #         }, 
+    #         arn: "arn:aws:trustedadvisor::000000000000:recommendation-resource/5a694939-2e54-45a2-ae72-730598fa89d0/bb38affc0ce0681d9a6cd13f30238ba03a8f63dfe7a379dc403c619119d86af", 
+    #         aws_resource_id: "database-1-instance-1", 
+    #         exclusion_status: "excluded", 
+    #         id: "bb38affc0ce0681d9a6cd13f302383ba03a8f63dfe7a379dc403c619119d86af", 
+    #         last_updated_at: Time.parse("2023-11-01T15:09:51.891Z"), 
+    #         recommendation_arn: "arn:aws:trustedadvisor:::organization-recommendation/5a694939-2e54-45a2-ae72-730598fa89d0", 
+    #         region_code: "us-west-2", 
+    #         status: "warning", 
+    #       }, 
+    #       {
+    #         metadata: {
+    #           "0" => "14", 
+    #           "1" => "31.679999999999996", 
+    #           "2" => "database-1", 
+    #           "3" => "db.t3.small", 
+    #           "4" => "false", 
+    #           "5" => "us-west-2", 
+    #           "6" => "arn:aws:rds:us-west-2:000000000000:db:database-1", 
+    #           "7" => "20", 
+    #         }, 
+    #         arn: "arn:aws:trustedadvisor::000000000000:recommendation-resource/5a694939-2e54-45a2-ae72-730598fa89d0/51fded4d7a3278818df9cfe344ff5762cec46c095a6763d1ba1ba53bd0e1b0e6", 
+    #         aws_resource_id: "database-1", 
+    #         exclusion_status: "excluded", 
+    #         id: "51fded4d7a3278818df9cfe344ff5762cec46c095a6763d1ba1ba53bd0e1b0e6", 
+    #         last_updated_at: Time.parse("2023-11-01T15:09:51.891Z"), 
+    #         recommendation_arn: "arn:aws:trustedadvisor:::organization-recommendation/5a694939-2e54-45a2-ae72-730598fa89d0", 
+    #         region_code: "us-west-2", 
+    #         status: "warning", 
+    #       }, 
+    #       {
+    #         metadata: {
+    #           "0" => "14", 
+    #           "1" => "187.20000000000002", 
+    #           "2" => "database-2-instance-1-us-west-2a", 
+    #           "3" => "db.r6g.large", 
+    #           "4" => "true", 
+    #           "5" => "us-west-2", 
+    #           "6" => "arn:aws:rds:us-west-2:000000000000:db:database-2-instance-1-us-west-2a", 
+    #           "7" => "1", 
+    #         }, 
+    #         arn: "arn:aws:trustedadvisor::000000000000:recommendation-resource/5a694939-2e54-45a2-ae72-730598fa89d0/f4d01bd20f4cd5372062aafc8786c489e48f0ead7cdab121463bf9f89e40a36b", 
+    #         aws_resource_id: "database-2-instance-1-us-west-2a", 
+    #         exclusion_status: "included", 
+    #         id: "f4d01bd20f4cd5372062aafc8786c489e48f0ead7cdab121463bf9f89e40a36b", 
+    #         last_updated_at: Time.parse("2023-11-01T15:09:51.891Z"), 
+    #         recommendation_arn: "arn:aws:trustedadvisor:::organization-recommendation/5a694939-2e54-45a2-ae72-730598fa89d0", 
+    #         region_code: "us-west-2", 
+    #         status: "warning", 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_organization_recommendation_resources({
-    #     affected_account_id: "AccountId",
-    #     exclusion_status: "excluded", # accepts excluded, included
-    #     max_results: 1,
     #     next_token: "ListOrganizationRecommendationResourcesRequestNextTokenString",
-    #     organization_recommendation_identifier: "OrganizationRecommendationIdentifier", # required
-    #     region_code: "String",
+    #     max_results: 1,
     #     status: "ok", # accepts ok, warning, error
+    #     exclusion_status: "excluded", # accepts excluded, included
+    #     region_code: "String",
+    #     organization_recommendation_identifier: "OrganizationRecommendationIdentifier", # required
+    #     affected_account_id: "AccountId",
     #   })
     #
     # @example Response structure
     #
     #   resp.next_token #=> String
     #   resp.organization_recommendation_resource_summaries #=> Array
-    #   resp.organization_recommendation_resource_summaries[0].account_id #=> String
+    #   resp.organization_recommendation_resource_summaries[0].id #=> String
     #   resp.organization_recommendation_resource_summaries[0].arn #=> String
     #   resp.organization_recommendation_resource_summaries[0].aws_resource_id #=> String
-    #   resp.organization_recommendation_resource_summaries[0].exclusion_status #=> String, one of "excluded", "included"
-    #   resp.organization_recommendation_resource_summaries[0].id #=> String
-    #   resp.organization_recommendation_resource_summaries[0].last_updated_at #=> Time
-    #   resp.organization_recommendation_resource_summaries[0].metadata #=> Hash
-    #   resp.organization_recommendation_resource_summaries[0].metadata["String"] #=> String
-    #   resp.organization_recommendation_resource_summaries[0].recommendation_arn #=> String
     #   resp.organization_recommendation_resource_summaries[0].region_code #=> String
     #   resp.organization_recommendation_resource_summaries[0].status #=> String, one of "ok", "warning", "error"
+    #   resp.organization_recommendation_resource_summaries[0].metadata #=> Hash
+    #   resp.organization_recommendation_resource_summaries[0].metadata["String"] #=> String
+    #   resp.organization_recommendation_resource_summaries[0].last_updated_at #=> Time
+    #   resp.organization_recommendation_resource_summaries[0].exclusion_status #=> String, one of "excluded", "included"
+    #   resp.organization_recommendation_resource_summaries[0].account_id #=> String
+    #   resp.organization_recommendation_resource_summaries[0].recommendation_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/trustedadvisor-2022-09-15/ListOrganizationRecommendationResources AWS API Documentation
     #
@@ -813,39 +1119,41 @@ module Aws::TrustedAdvisor
     end
 
     # List a filterable set of Recommendations within an Organization. This
-    # API only supports prioritized recommendations.
-    #
-    # @option params [Time,DateTime,Date,Integer,String] :after_last_updated_at
-    #   After the last update of the Recommendation
-    #
-    # @option params [String] :aws_service
-    #   The aws service associated with the Recommendation
-    #
-    # @option params [Time,DateTime,Date,Integer,String] :before_last_updated_at
-    #   Before the last update of the Recommendation
-    #
-    # @option params [String] :check_identifier
-    #   The check identifier of the Recommendation
-    #
-    # @option params [Integer] :max_results
-    #   The maximum number of results to return per page.
+    # API only supports prioritized recommendations and provides global
+    # priority recommendations, eliminating the need to call the API in each
+    # AWS Region.
     #
     # @option params [String] :next_token
     #   The token for the next set of results. Use the value returned in the
     #   previous response in the next request to retrieve the next set of
     #   results.
     #
-    # @option params [String] :pillar
-    #   The pillar of the Recommendation
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per page.
     #
-    # @option params [String] :source
-    #   The source of the Recommendation
+    # @option params [String] :type
+    #   The type of the Recommendation
     #
     # @option params [String] :status
     #   The status of the Recommendation
     #
-    # @option params [String] :type
-    #   The type of the Recommendation
+    # @option params [String] :pillar
+    #   The pillar of the Recommendation
+    #
+    # @option params [String] :aws_service
+    #   The aws service associated with the Recommendation
+    #
+    # @option params [String] :source
+    #   The source of the Recommendation
+    #
+    # @option params [String] :check_identifier
+    #   The check identifier of the Recommendation
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :after_last_updated_at
+    #   After the last update of the Recommendation
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :before_last_updated_at
+    #   Before the last update of the Recommendation
     #
     # @return [Types::ListOrganizationRecommendationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -854,44 +1162,170 @@ module Aws::TrustedAdvisor
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
+    #
+    # @example Example: List all of an AWS Organization's Recommendations
+    #
+    #   resp = client.list_organization_recommendations({
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     next_token: "<REDACTED>", 
+    #     organization_recommendation_summaries: [
+    #       {
+    #         name: "Lambda Runtime Deprecation Warning", 
+    #         type: "priority", 
+    #         arn: "arn:aws:trustedadvisor:::organization-recommendation/9534ec9b-bf3a-44e8-8213-2ed68b39d9d5", 
+    #         aws_services: [
+    #           "lambda", 
+    #         ], 
+    #         check_arn: "arn:aws:trustedadvisor:::check/L4dfs2Q4C5", 
+    #         id: "9534ec9b-bf3a-44e8-8213-2ed68b39d9d5", 
+    #         lifecycle_stage: "resolved", 
+    #         pillars: [
+    #           "security", 
+    #         ], 
+    #         resources_aggregates: {
+    #           error_count: 0, 
+    #           ok_count: 0, 
+    #           warning_count: 0, 
+    #         }, 
+    #         source: "ta_check", 
+    #         status: "warning", 
+    #       }, 
+    #       {
+    #         name: "Lambda Runtime Deprecation Warning", 
+    #         type: "priority", 
+    #         arn: "arn:aws:trustedadvisor:::organization-recommendation/4ecff4d4-1bc1-4c99-a5b8-0fff9ee500d6", 
+    #         aws_services: [
+    #           "lambda", 
+    #         ], 
+    #         check_arn: "arn:aws:trustedadvisor:::check/L4dfs2Q4C5", 
+    #         id: "4ecff4d4-1bc1-4c99-a5b8-0fff9ee500d6", 
+    #         lifecycle_stage: "resolved", 
+    #         pillars: [
+    #           "security", 
+    #         ], 
+    #         resources_aggregates: {
+    #           error_count: 0, 
+    #           ok_count: 0, 
+    #           warning_count: 0, 
+    #         }, 
+    #         source: "ta_check", 
+    #         status: "warning", 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Example: Filter and return a max of one AWS Organization Recommendation that is a part of the "security" pillar
+    #
+    #   resp = client.list_organization_recommendations({
+    #     max_results: 100, 
+    #     pillar: "security", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     next_token: "<REDACTED>", 
+    #     organization_recommendation_summaries: [
+    #       {
+    #         name: "Lambda Runtime Deprecation Warning", 
+    #         type: "priority", 
+    #         arn: "arn:aws:trustedadvisor:::organization-recommendation/9534ec9b-bf3a-44e8-8213-2ed68b39d9d5", 
+    #         aws_services: [
+    #           "lambda", 
+    #         ], 
+    #         check_arn: "arn:aws:trustedadvisor:::check/L4dfs2Q4C5", 
+    #         id: "9534ec9b-bf3a-44e8-8213-2ed68b39d9d5", 
+    #         lifecycle_stage: "resolved", 
+    #         pillars: [
+    #           "security", 
+    #         ], 
+    #         resources_aggregates: {
+    #           error_count: 0, 
+    #           ok_count: 0, 
+    #           warning_count: 0, 
+    #         }, 
+    #         source: "ta_check", 
+    #         status: "warning", 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Example: Use the "nextToken" returned from a previous request to fetch the next page of filtered AWS Organization Recommendations that are a part of the "security" pillar
+    #
+    #   resp = client.list_organization_recommendations({
+    #     max_results: 100, 
+    #     next_token: "<REDACTED>", 
+    #     pillar: "security", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     organization_recommendation_summaries: [
+    #       {
+    #         name: "Lambda Runtime Deprecation Warning", 
+    #         type: "priority", 
+    #         arn: "arn:aws:trustedadvisor:::organization-recommendation/4ecff4d4-1bc1-4c99-a5b8-0fff9ee500d6", 
+    #         aws_services: [
+    #           "lambda", 
+    #         ], 
+    #         check_arn: "arn:aws:trustedadvisor:::check/L4dfs2Q4C5", 
+    #         id: "4ecff4d4-1bc1-4c99-a5b8-0fff9ee500d6", 
+    #         lifecycle_stage: "resolved", 
+    #         pillars: [
+    #           "security", 
+    #         ], 
+    #         resources_aggregates: {
+    #           error_count: 0, 
+    #           ok_count: 0, 
+    #           warning_count: 0, 
+    #         }, 
+    #         source: "ta_check", 
+    #         status: "warning", 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_organization_recommendations({
-    #     after_last_updated_at: Time.now,
-    #     aws_service: "RecommendationAwsService",
-    #     before_last_updated_at: Time.now,
-    #     check_identifier: "CheckIdentifier",
-    #     max_results: 1,
     #     next_token: "ListOrganizationRecommendationsRequestNextTokenString",
-    #     pillar: "cost_optimizing", # accepts cost_optimizing, performance, security, service_limits, fault_tolerance, operational_excellence
-    #     source: "aws_config", # accepts aws_config, compute_optimizer, cost_explorer, lse, manual, pse, rds, resilience, resilience_hub, security_hub, stir, ta_check, well_architected
-    #     status: "ok", # accepts ok, warning, error
+    #     max_results: 1,
     #     type: "standard", # accepts standard, priority
+    #     status: "ok", # accepts ok, warning, error
+    #     pillar: "cost_optimizing", # accepts cost_optimizing, performance, security, service_limits, fault_tolerance, operational_excellence
+    #     aws_service: "RecommendationAwsService",
+    #     source: "aws_config", # accepts aws_config, compute_optimizer, cost_explorer, lse, manual, pse, rds, resilience, resilience_hub, security_hub, stir, ta_check, well_architected, cost_optimization_hub
+    #     check_identifier: "CheckIdentifier",
+    #     after_last_updated_at: Time.now,
+    #     before_last_updated_at: Time.now,
     #   })
     #
     # @example Response structure
     #
     #   resp.next_token #=> String
     #   resp.organization_recommendation_summaries #=> Array
-    #   resp.organization_recommendation_summaries[0].arn #=> String
-    #   resp.organization_recommendation_summaries[0].aws_services #=> Array
-    #   resp.organization_recommendation_summaries[0].aws_services[0] #=> String
-    #   resp.organization_recommendation_summaries[0].check_arn #=> String
-    #   resp.organization_recommendation_summaries[0].created_at #=> Time
     #   resp.organization_recommendation_summaries[0].id #=> String
-    #   resp.organization_recommendation_summaries[0].last_updated_at #=> Time
+    #   resp.organization_recommendation_summaries[0].type #=> String, one of "standard", "priority"
+    #   resp.organization_recommendation_summaries[0].check_arn #=> String
+    #   resp.organization_recommendation_summaries[0].status #=> String, one of "ok", "warning", "error"
     #   resp.organization_recommendation_summaries[0].lifecycle_stage #=> String, one of "in_progress", "pending_response", "dismissed", "resolved"
-    #   resp.organization_recommendation_summaries[0].name #=> String
-    #   resp.organization_recommendation_summaries[0].pillar_specific_aggregates.cost_optimizing.estimated_monthly_savings #=> Float
-    #   resp.organization_recommendation_summaries[0].pillar_specific_aggregates.cost_optimizing.estimated_percent_monthly_savings #=> Float
     #   resp.organization_recommendation_summaries[0].pillars #=> Array
     #   resp.organization_recommendation_summaries[0].pillars[0] #=> String, one of "cost_optimizing", "performance", "security", "service_limits", "fault_tolerance", "operational_excellence"
-    #   resp.organization_recommendation_summaries[0].resources_aggregates.error_count #=> Integer
+    #   resp.organization_recommendation_summaries[0].source #=> String, one of "aws_config", "compute_optimizer", "cost_explorer", "lse", "manual", "pse", "rds", "resilience", "resilience_hub", "security_hub", "stir", "ta_check", "well_architected", "cost_optimization_hub"
+    #   resp.organization_recommendation_summaries[0].aws_services #=> Array
+    #   resp.organization_recommendation_summaries[0].aws_services[0] #=> String
+    #   resp.organization_recommendation_summaries[0].name #=> String
     #   resp.organization_recommendation_summaries[0].resources_aggregates.ok_count #=> Integer
     #   resp.organization_recommendation_summaries[0].resources_aggregates.warning_count #=> Integer
-    #   resp.organization_recommendation_summaries[0].source #=> String, one of "aws_config", "compute_optimizer", "cost_explorer", "lse", "manual", "pse", "rds", "resilience", "resilience_hub", "security_hub", "stir", "ta_check", "well_architected"
-    #   resp.organization_recommendation_summaries[0].status #=> String, one of "ok", "warning", "error"
-    #   resp.organization_recommendation_summaries[0].type #=> String, one of "standard", "priority"
+    #   resp.organization_recommendation_summaries[0].resources_aggregates.error_count #=> Integer
+    #   resp.organization_recommendation_summaries[0].resources_aggregates.excluded_count #=> Integer
+    #   resp.organization_recommendation_summaries[0].pillar_specific_aggregates.cost_optimizing.estimated_monthly_savings #=> Float
+    #   resp.organization_recommendation_summaries[0].pillar_specific_aggregates.cost_optimizing.estimated_percent_monthly_savings #=> Float
+    #   resp.organization_recommendation_summaries[0].created_at #=> Time
+    #   resp.organization_recommendation_summaries[0].last_updated_at #=> Time
+    #   resp.organization_recommendation_summaries[0].arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/trustedadvisor-2022-09-15/ListOrganizationRecommendations AWS API Documentation
     #
@@ -902,27 +1336,33 @@ module Aws::TrustedAdvisor
       req.send_request(options)
     end
 
-    # List Resources of a Recommendation
-    #
-    # @option params [String] :exclusion_status
-    #   The exclusion status of the resource
-    #
-    # @option params [Integer] :max_results
-    #   The maximum number of results to return per page.
+    # List Resources of a Recommendation. This API provides global
+    # recommendations, eliminating the need to call the API in each AWS
+    # Region.
     #
     # @option params [String] :next_token
     #   The token for the next set of results. Use the value returned in the
     #   previous response in the next request to retrieve the next set of
     #   results.
     #
-    # @option params [required, String] :recommendation_identifier
-    #   The Recommendation identifier
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per page.
+    #
+    # @option params [String] :status
+    #   The status of the resource
+    #
+    # @option params [String] :exclusion_status
+    #   The exclusion status of the resource
     #
     # @option params [String] :region_code
     #   The AWS Region code of the resource
     #
-    # @option params [String] :status
-    #   The status of the resource
+    # @option params [required, String] :recommendation_identifier
+    #   The Recommendation identifier
+    #
+    # @option params [String] :language
+    #   The ISO 639-1 code for the language that you want your recommendations
+    #   to appear in.
     #
     # @return [Types::ListRecommendationResourcesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -931,31 +1371,106 @@ module Aws::TrustedAdvisor
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
+    #
+    # @example Example: List all Resources for a Recommendation
+    #
+    #   resp = client.list_recommendation_resources({
+    #     recommendation_identifier: "arn:aws:trustedadvisor::000000000000:recommendation/55fa4d2e-bbb7-491a-833b-5773e9589578", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     next_token: "<REDACTED>", 
+    #     recommendation_resource_summaries: [
+    #       {
+    #         metadata: {
+    #           "0" => "14", 
+    #           "1" => "123.12000000000002", 
+    #           "2" => "webcms-dev-01", 
+    #           "3" => "db.m6i.large", 
+    #           "4" => "false", 
+    #           "5" => "us-east-1", 
+    #           "6" => "arn:aws:rds:us-east-1:000000000000:db:webcms-dev-01", 
+    #           "7" => "20", 
+    #         }, 
+    #         arn: "arn:aws:trustedadvisor::000000000000:recommendation-resource/55fa4d2e-bbb7-491a-833b-5773e9589578/18959a1f1973cff8e706e9d9bde28bba36cd602a6b2cb86c8b61252835236010", 
+    #         aws_resource_id: "webcms-dev-01", 
+    #         exclusion_status: "excluded", 
+    #         id: "18959a1f1973cff8e706e9d9bde28bba36cd602a6b2cb86c8b61252835236010", 
+    #         last_updated_at: Time.parse("2023-11-01T15:09:51.891Z"), 
+    #         recommendation_arn: "arn:aws:trustedadvisor::000000000000:recommendation/55fa4d2e-bbb7-491a-833b-5773e9589578", 
+    #         region_code: "us-east-1", 
+    #         status: "warning", 
+    #       }, 
+    #       {
+    #         metadata: {
+    #           "0" => "14", 
+    #           "1" => "29.52", 
+    #           "2" => "aws-dev-db-stack-instance-1", 
+    #           "3" => "db.t2.small", 
+    #           "4" => "false", 
+    #           "5" => "us-east-1", 
+    #           "6" => "arn:aws:rds:us-east-1:000000000000:db:aws-dev-db-stack-instance-1", 
+    #           "7" => "1", 
+    #         }, 
+    #         arn: "arn:aws:trustedadvisor::000000000000:recommendation-resource/55fa4d2e-bbb7-491a-833b-5773e9589578/e6367ff500ac90db8e4adeb4892e39ee9c36bbf812dcbce4b9e4fefcec9eb63e", 
+    #         aws_resource_id: "aws-dev-db-stack-instance-1", 
+    #         exclusion_status: "included", 
+    #         id: "e6367ff500ac90db8e4adeb4892e39ee9c36bbf812dcbce4b9e4fefcec9eb63e", 
+    #         last_updated_at: Time.parse("2023-11-01T15:09:51.891Z"), 
+    #         recommendation_arn: "arn:aws:trustedadvisor::000000000000:recommendation/55fa4d2e-bbb7-491a-833b-5773e9589578", 
+    #         region_code: "us-east-1", 
+    #         status: "warning", 
+    #       }, 
+    #       {
+    #         metadata: {
+    #           "0" => "14", 
+    #           "1" => "114.48000000000002", 
+    #           "2" => "aws-awesome-apps-stack-db", 
+    #           "3" => "db.m6g.large", 
+    #           "4" => "false", 
+    #           "5" => "us-east-1", 
+    #           "6" => "arn:aws:rds:us-east-1:000000000000:db:aws-awesome-apps-stack-db", 
+    #           "7" => "100", 
+    #         }, 
+    #         arn: "arn:aws:trustedadvisor::000000000000:recommendation-resource/55fa4d2e-bbb7-491a-833b-5773e9589578/31aa78ba050a5015d2d38cca7f5f1ce88f70857c4e1c3ad03f8f9fd95dad7459", 
+    #         aws_resource_id: "aws-awesome-apps-stack-db", 
+    #         exclusion_status: "excluded", 
+    #         id: "31aa78ba050a5015d2d38cca7f5f1ce88f70857c4e1c3ad03f8f9fd95dad7459", 
+    #         last_updated_at: Time.parse("2023-11-01T15:09:51.891Z"), 
+    #         recommendation_arn: "arn:aws:trustedadvisor::000000000000:recommendation/55fa4d2e-bbb7-491a-833b-5773e9589578", 
+    #         region_code: "us-east-1", 
+    #         status: "warning", 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_recommendation_resources({
-    #     exclusion_status: "excluded", # accepts excluded, included
-    #     max_results: 1,
     #     next_token: "ListRecommendationResourcesRequestNextTokenString",
-    #     recommendation_identifier: "AccountRecommendationIdentifier", # required
-    #     region_code: "String",
+    #     max_results: 1,
     #     status: "ok", # accepts ok, warning, error
+    #     exclusion_status: "excluded", # accepts excluded, included
+    #     region_code: "String",
+    #     recommendation_identifier: "AccountRecommendationIdentifier", # required
+    #     language: "en", # accepts en, ja, zh, fr, de, ko, zh_TW, it, es, pt_BR, id
     #   })
     #
     # @example Response structure
     #
     #   resp.next_token #=> String
     #   resp.recommendation_resource_summaries #=> Array
+    #   resp.recommendation_resource_summaries[0].id #=> String
     #   resp.recommendation_resource_summaries[0].arn #=> String
     #   resp.recommendation_resource_summaries[0].aws_resource_id #=> String
-    #   resp.recommendation_resource_summaries[0].exclusion_status #=> String, one of "excluded", "included"
-    #   resp.recommendation_resource_summaries[0].id #=> String
-    #   resp.recommendation_resource_summaries[0].last_updated_at #=> Time
-    #   resp.recommendation_resource_summaries[0].metadata #=> Hash
-    #   resp.recommendation_resource_summaries[0].metadata["String"] #=> String
-    #   resp.recommendation_resource_summaries[0].recommendation_arn #=> String
     #   resp.recommendation_resource_summaries[0].region_code #=> String
     #   resp.recommendation_resource_summaries[0].status #=> String, one of "ok", "warning", "error"
+    #   resp.recommendation_resource_summaries[0].metadata #=> Hash
+    #   resp.recommendation_resource_summaries[0].metadata["String"] #=> String
+    #   resp.recommendation_resource_summaries[0].last_updated_at #=> Time
+    #   resp.recommendation_resource_summaries[0].exclusion_status #=> String, one of "excluded", "included"
+    #   resp.recommendation_resource_summaries[0].recommendation_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/trustedadvisor-2022-09-15/ListRecommendationResources AWS API Documentation
     #
@@ -966,39 +1481,45 @@ module Aws::TrustedAdvisor
       req.send_request(options)
     end
 
-    # List a filterable set of Recommendations
-    #
-    # @option params [Time,DateTime,Date,Integer,String] :after_last_updated_at
-    #   After the last update of the Recommendation
-    #
-    # @option params [String] :aws_service
-    #   The aws service associated with the Recommendation
-    #
-    # @option params [Time,DateTime,Date,Integer,String] :before_last_updated_at
-    #   Before the last update of the Recommendation
-    #
-    # @option params [String] :check_identifier
-    #   The check identifier of the Recommendation
-    #
-    # @option params [Integer] :max_results
-    #   The maximum number of results to return per page.
+    # List a filterable set of Recommendations. This API provides global
+    # recommendations, eliminating the need to call the API in each AWS
+    # Region.
     #
     # @option params [String] :next_token
     #   The token for the next set of results. Use the value returned in the
     #   previous response in the next request to retrieve the next set of
     #   results.
     #
-    # @option params [String] :pillar
-    #   The pillar of the Recommendation
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per page.
     #
-    # @option params [String] :source
-    #   The source of the Recommendation
+    # @option params [String] :type
+    #   The type of the Recommendation
     #
     # @option params [String] :status
     #   The status of the Recommendation
     #
-    # @option params [String] :type
-    #   The type of the Recommendation
+    # @option params [String] :pillar
+    #   The pillar of the Recommendation
+    #
+    # @option params [String] :aws_service
+    #   The aws service associated with the Recommendation
+    #
+    # @option params [String] :source
+    #   The source of the Recommendation
+    #
+    # @option params [String] :check_identifier
+    #   The check identifier of the Recommendation
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :after_last_updated_at
+    #   After the last update of the Recommendation
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :before_last_updated_at
+    #   Before the last update of the Recommendation
+    #
+    # @option params [String] :language
+    #   The ISO 639-1 code for the language that you want your recommendations
+    #   to appear in.
     #
     # @return [Types::ListRecommendationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1007,44 +1528,196 @@ module Aws::TrustedAdvisor
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
+    #
+    # @example Example: List all Recommendations
+    #
+    #   resp = client.list_recommendations({
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     next_token: "<REDACTED>", 
+    #     recommendation_summaries: [
+    #       {
+    #         name: "MFA Recommendation", 
+    #         type: "standard", 
+    #         arn: "arn:aws:trustedadvisor::000000000000:recommendation/55fa4d2e-bbb7-491a-833b-5773e9589578", 
+    #         aws_services: [
+    #           "iam", 
+    #         ], 
+    #         check_arn: "arn:aws:trustedadvisor:::check/7DAFEmoDos", 
+    #         id: "55fa4d2e-bbb7-491a-833b-5773e9589578", 
+    #         last_updated_at: Time.parse("2023-11-01T15:57:58.673Z"), 
+    #         pillar_specific_aggregates: {
+    #           cost_optimizing: {
+    #             estimated_monthly_savings: 0.0, 
+    #             estimated_percent_monthly_savings: 0.0, 
+    #           }, 
+    #         }, 
+    #         pillars: [
+    #           "security", 
+    #         ], 
+    #         resources_aggregates: {
+    #           error_count: 1, 
+    #           ok_count: 0, 
+    #           warning_count: 0, 
+    #         }, 
+    #         source: "ta_check", 
+    #         status: "error", 
+    #       }, 
+    #       {
+    #         name: "RDS clusters quota warning", 
+    #         type: "standard", 
+    #         arn: "arn:aws:trustedadvisor::000000000000:recommendation/8b602b6f-452d-4cb2-8a9e-c7650955d9cd", 
+    #         aws_services: [
+    #           "rds", 
+    #         ], 
+    #         check_arn: "arn:aws:trustedadvisor:::check/gjqMBn6pjz", 
+    #         id: "8b602b6f-452d-4cb2-8a9e-c7650955d9cd", 
+    #         last_updated_at: Time.parse("2023-11-01T15:58:17.397Z"), 
+    #         pillar_specific_aggregates: {
+    #           cost_optimizing: {
+    #             estimated_monthly_savings: 0.0, 
+    #             estimated_percent_monthly_savings: 0.0, 
+    #           }, 
+    #         }, 
+    #         pillars: [
+    #           "service_limits", 
+    #         ], 
+    #         resources_aggregates: {
+    #           error_count: 0, 
+    #           ok_count: 3, 
+    #           warning_count: 6, 
+    #         }, 
+    #         source: "ta_check", 
+    #         status: "warning", 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Example: Filter and return a max of one Recommendation that is a part of AWS IAM
+    #
+    #   resp = client.list_recommendations({
+    #     aws_service: "iam", 
+    #     max_results: 100, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     next_token: "<REDACTED>", 
+    #     recommendation_summaries: [
+    #       {
+    #         name: "MFA Recommendation", 
+    #         type: "standard", 
+    #         arn: "arn:aws:trustedadvisor::000000000000:recommendation/55fa4d2e-bbb7-491a-833b-5773e9589578", 
+    #         aws_services: [
+    #           "iam", 
+    #         ], 
+    #         check_arn: "arn:aws:trustedadvisor:::check/7DAFEmoDos", 
+    #         id: "55fa4d2e-bbb7-491a-833b-5773e9589578", 
+    #         last_updated_at: Time.parse("2023-11-01T15:57:58.673Z"), 
+    #         pillar_specific_aggregates: {
+    #           cost_optimizing: {
+    #             estimated_monthly_savings: 0.0, 
+    #             estimated_percent_monthly_savings: 0.0, 
+    #           }, 
+    #         }, 
+    #         pillars: [
+    #           "security", 
+    #         ], 
+    #         resources_aggregates: {
+    #           error_count: 1, 
+    #           ok_count: 0, 
+    #           warning_count: 0, 
+    #         }, 
+    #         source: "ta_check", 
+    #         status: "error", 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Example: Use the "nextToken" returned from a previous request to fetch the next page of filtered Recommendations
+    #
+    #   resp = client.list_recommendations({
+    #     aws_service: "rds", 
+    #     max_results: 100, 
+    #     next_token: "<REDACTED>", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     recommendation_summaries: [
+    #       {
+    #         name: "RDS clusters quota warning", 
+    #         type: "standard", 
+    #         arn: "arn:aws:trustedadvisor::000000000000:recommendation/8b602b6f-452d-4cb2-8a9e-c7650955d9cd", 
+    #         aws_services: [
+    #           "rds", 
+    #         ], 
+    #         check_arn: "arn:aws:trustedadvisor:::check/gjqMBn6pjz", 
+    #         id: "8b602b6f-452d-4cb2-8a9e-c7650955d9cd", 
+    #         last_updated_at: Time.parse("2023-11-01T15:58:17.397Z"), 
+    #         pillar_specific_aggregates: {
+    #           cost_optimizing: {
+    #             estimated_monthly_savings: 0.0, 
+    #             estimated_percent_monthly_savings: 0.0, 
+    #           }, 
+    #         }, 
+    #         pillars: [
+    #           "service_limits", 
+    #         ], 
+    #         resources_aggregates: {
+    #           error_count: 0, 
+    #           ok_count: 3, 
+    #           warning_count: 6, 
+    #         }, 
+    #         source: "ta_check", 
+    #         status: "warning", 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_recommendations({
-    #     after_last_updated_at: Time.now,
-    #     aws_service: "RecommendationAwsService",
-    #     before_last_updated_at: Time.now,
-    #     check_identifier: "CheckIdentifier",
-    #     max_results: 1,
     #     next_token: "ListRecommendationsRequestNextTokenString",
-    #     pillar: "cost_optimizing", # accepts cost_optimizing, performance, security, service_limits, fault_tolerance, operational_excellence
-    #     source: "aws_config", # accepts aws_config, compute_optimizer, cost_explorer, lse, manual, pse, rds, resilience, resilience_hub, security_hub, stir, ta_check, well_architected
-    #     status: "ok", # accepts ok, warning, error
+    #     max_results: 1,
     #     type: "standard", # accepts standard, priority
+    #     status: "ok", # accepts ok, warning, error
+    #     pillar: "cost_optimizing", # accepts cost_optimizing, performance, security, service_limits, fault_tolerance, operational_excellence
+    #     aws_service: "RecommendationAwsService",
+    #     source: "aws_config", # accepts aws_config, compute_optimizer, cost_explorer, lse, manual, pse, rds, resilience, resilience_hub, security_hub, stir, ta_check, well_architected, cost_optimization_hub
+    #     check_identifier: "CheckIdentifier",
+    #     after_last_updated_at: Time.now,
+    #     before_last_updated_at: Time.now,
+    #     language: "en", # accepts en, ja, zh, fr, de, ko, zh_TW, it, es, pt_BR, id
     #   })
     #
     # @example Response structure
     #
     #   resp.next_token #=> String
     #   resp.recommendation_summaries #=> Array
-    #   resp.recommendation_summaries[0].arn #=> String
-    #   resp.recommendation_summaries[0].aws_services #=> Array
-    #   resp.recommendation_summaries[0].aws_services[0] #=> String
-    #   resp.recommendation_summaries[0].check_arn #=> String
-    #   resp.recommendation_summaries[0].created_at #=> Time
     #   resp.recommendation_summaries[0].id #=> String
-    #   resp.recommendation_summaries[0].last_updated_at #=> Time
+    #   resp.recommendation_summaries[0].type #=> String, one of "standard", "priority"
+    #   resp.recommendation_summaries[0].check_arn #=> String
+    #   resp.recommendation_summaries[0].status #=> String, one of "ok", "warning", "error"
     #   resp.recommendation_summaries[0].lifecycle_stage #=> String, one of "in_progress", "pending_response", "dismissed", "resolved"
-    #   resp.recommendation_summaries[0].name #=> String
-    #   resp.recommendation_summaries[0].pillar_specific_aggregates.cost_optimizing.estimated_monthly_savings #=> Float
-    #   resp.recommendation_summaries[0].pillar_specific_aggregates.cost_optimizing.estimated_percent_monthly_savings #=> Float
     #   resp.recommendation_summaries[0].pillars #=> Array
     #   resp.recommendation_summaries[0].pillars[0] #=> String, one of "cost_optimizing", "performance", "security", "service_limits", "fault_tolerance", "operational_excellence"
-    #   resp.recommendation_summaries[0].resources_aggregates.error_count #=> Integer
+    #   resp.recommendation_summaries[0].source #=> String, one of "aws_config", "compute_optimizer", "cost_explorer", "lse", "manual", "pse", "rds", "resilience", "resilience_hub", "security_hub", "stir", "ta_check", "well_architected", "cost_optimization_hub"
+    #   resp.recommendation_summaries[0].aws_services #=> Array
+    #   resp.recommendation_summaries[0].aws_services[0] #=> String
+    #   resp.recommendation_summaries[0].name #=> String
     #   resp.recommendation_summaries[0].resources_aggregates.ok_count #=> Integer
     #   resp.recommendation_summaries[0].resources_aggregates.warning_count #=> Integer
-    #   resp.recommendation_summaries[0].source #=> String, one of "aws_config", "compute_optimizer", "cost_explorer", "lse", "manual", "pse", "rds", "resilience", "resilience_hub", "security_hub", "stir", "ta_check", "well_architected"
-    #   resp.recommendation_summaries[0].status #=> String, one of "ok", "warning", "error"
-    #   resp.recommendation_summaries[0].type #=> String, one of "standard", "priority"
+    #   resp.recommendation_summaries[0].resources_aggregates.error_count #=> Integer
+    #   resp.recommendation_summaries[0].resources_aggregates.excluded_count #=> Integer
+    #   resp.recommendation_summaries[0].pillar_specific_aggregates.cost_optimizing.estimated_monthly_savings #=> Float
+    #   resp.recommendation_summaries[0].pillar_specific_aggregates.cost_optimizing.estimated_percent_monthly_savings #=> Float
+    #   resp.recommendation_summaries[0].created_at #=> Time
+    #   resp.recommendation_summaries[0].last_updated_at #=> Time
+    #   resp.recommendation_summaries[0].arn #=> String
+    #   resp.recommendation_summaries[0].status_reason #=> String, one of "no_data_ok"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/trustedadvisor-2022-09-15/ListRecommendations AWS API Documentation
     #
@@ -1056,14 +1729,12 @@ module Aws::TrustedAdvisor
     end
 
     # Update the lifecycle of a Recommendation within an Organization. This
-    # API only supports prioritized recommendations.
+    # API only supports prioritized recommendations and updates global
+    # priority recommendations, eliminating the need to call the API in each
+    # AWS Region.
     #
     # @option params [required, String] :lifecycle_stage
     #   The new lifecycle stage
-    #
-    # @option params [required, String] :organization_recommendation_identifier
-    #   The Recommendation identifier for AWS Trusted Advisor Priority
-    #   recommendations
     #
     # @option params [String] :update_reason
     #   Reason for the lifecycle stage change
@@ -1071,15 +1742,33 @@ module Aws::TrustedAdvisor
     # @option params [String] :update_reason_code
     #   Reason code for the lifecycle state change
     #
+    # @option params [required, String] :organization_recommendation_identifier
+    #   The Recommendation identifier for AWS Trusted Advisor Priority
+    #   recommendations
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: Update the lifecycle stage of an AWS Organization's Recommendation that is managed by AWS Trusted Advisor Priority
+    #
+    #   resp = client.update_organization_recommendation_lifecycle({
+    #     lifecycle_stage: "dismissed", 
+    #     organization_recommendation_identifier: "arn:aws:trustedadvisor:::organization-recommendation/96b5e5ca-7930-444c-90c6-06d386128100", 
+    #     update_reason: "Does not apply to this resource", 
+    #     update_reason_code: "not_applicable", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_organization_recommendation_lifecycle({
     #     lifecycle_stage: "pending_response", # required, accepts pending_response, in_progress, dismissed, resolved
-    #     organization_recommendation_identifier: "OrganizationRecommendationIdentifier", # required
     #     update_reason: "RecommendationUpdateReason",
     #     update_reason_code: "non_critical_account", # accepts non_critical_account, temporary_account, valid_business_case, other_methods_available, low_priority, not_applicable, other
+    #     organization_recommendation_identifier: "OrganizationRecommendationIdentifier", # required
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/trustedadvisor-2022-09-15/UpdateOrganizationRecommendationLifecycle AWS API Documentation
@@ -1092,14 +1781,12 @@ module Aws::TrustedAdvisor
     end
 
     # Update the lifecyle of a Recommendation. This API only supports
-    # prioritized recommendations.
+    # prioritized recommendations and updates global priority
+    # recommendations, eliminating the need to call the API in each AWS
+    # Region.
     #
     # @option params [required, String] :lifecycle_stage
     #   The new lifecycle stage
-    #
-    # @option params [required, String] :recommendation_identifier
-    #   The Recommendation identifier for AWS Trusted Advisor Priority
-    #   recommendations
     #
     # @option params [String] :update_reason
     #   Reason for the lifecycle stage change
@@ -1107,15 +1794,33 @@ module Aws::TrustedAdvisor
     # @option params [String] :update_reason_code
     #   Reason code for the lifecycle state change
     #
+    # @option params [required, String] :recommendation_identifier
+    #   The Recommendation identifier for AWS Trusted Advisor Priority
+    #   recommendations
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: Update the lifecycle stage of a Recommendation managed by AWS Trusted Advisor Priority
+    #
+    #   resp = client.update_recommendation_lifecycle({
+    #     lifecycle_stage: "resolved", 
+    #     recommendation_identifier: "arn:aws:trustedadvisor::000000000000:recommendation/861c9c6e-f169-405a-8b59-537a8caccd7a", 
+    #     update_reason: "Resolved the recommendation", 
+    #     update_reason_code: "valid_business_case", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_recommendation_lifecycle({
     #     lifecycle_stage: "pending_response", # required, accepts pending_response, in_progress, dismissed, resolved
-    #     recommendation_identifier: "AccountRecommendationIdentifier", # required
     #     update_reason: "RecommendationUpdateReason",
     #     update_reason_code: "non_critical_account", # accepts non_critical_account, temporary_account, valid_business_case, other_methods_available, low_priority, not_applicable, other
+    #     recommendation_identifier: "AccountRecommendationIdentifier", # required
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/trustedadvisor-2022-09-15/UpdateRecommendationLifecycle AWS API Documentation
@@ -1145,7 +1850,7 @@ module Aws::TrustedAdvisor
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-trustedadvisor'
-      context[:gem_version] = '1.33.0'
+      context[:gem_version] = '1.34.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

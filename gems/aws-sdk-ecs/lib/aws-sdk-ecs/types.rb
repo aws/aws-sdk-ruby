@@ -1519,7 +1519,8 @@ module Aws::ECS
     #   `entryPoint`, update your container agent or enter your commands and
     #   arguments as `command` array items instead.
     #
-    #   The entry point that's passed to the container. This parameter maps
+    #    The entry point that's passed to the container. This parameter
+    #   maps
     #   to `Entrypoint` in the docker container create command and the
     #   `--entrypoint` option to docker run.
     #   @return [Array<String>]
@@ -2684,6 +2685,10 @@ module Aws::ECS
       include Aws::Structure
     end
 
+    # <zonbook />
+    #
+    # <xhtml />
+    #
     # @!attribute [rw] cluster_name
     #   The name of your cluster. If you don't specify a name for your
     #   cluster, you create a cluster that's named `default`. Up to 255
@@ -2823,6 +2828,10 @@ module Aws::ECS
       include Aws::Structure
     end
 
+    # <zonbook />
+    #
+    # <xhtml />
+    #
     # @!attribute [rw] cluster
     #   The full description of your new cluster.
     #   @return [Types::Cluster]
@@ -3050,6 +3059,10 @@ module Aws::ECS
       include Aws::Structure
     end
 
+    # <zonbook />
+    #
+    # <xhtml />
+    #
     # @!attribute [rw] cluster
     #   The short name or full Amazon Resource Name (ARN) of the cluster
     #   that you run your service on. If you do not specify a cluster, the
@@ -3508,6 +3521,10 @@ module Aws::ECS
       include Aws::Structure
     end
 
+    # <zonbook />
+    #
+    # <xhtml />
+    #
     # @!attribute [rw] service
     #   The full description of your service following the create call.
     #
@@ -3775,6 +3792,10 @@ module Aws::ECS
       include Aws::Structure
     end
 
+    # <zonbook />
+    #
+    # <xhtml />
+    #
     # @!attribute [rw] cluster
     #   The short name or full Amazon Resource Name (ARN) of the cluster
     #   that contains the resource to delete attributes. If you do not
@@ -3798,6 +3819,10 @@ module Aws::ECS
       include Aws::Structure
     end
 
+    # <zonbook />
+    #
+    # <xhtml />
+    #
     # @!attribute [rw] attributes
     #   A list of attribute objects that were successfully deleted from your
     #   resource.
@@ -3843,6 +3868,10 @@ module Aws::ECS
       include Aws::Structure
     end
 
+    # <zonbook />
+    #
+    # <xhtml />
+    #
     # @!attribute [rw] cluster
     #   The short name or full Amazon Resource Name (ARN) of the cluster to
     #   delete.
@@ -3856,6 +3885,10 @@ module Aws::ECS
       include Aws::Structure
     end
 
+    # <zonbook />
+    #
+    # <xhtml />
+    #
     # @!attribute [rw] cluster
     #   The full description of the deleted cluster.
     #   @return [Types::Cluster]
@@ -3894,6 +3927,10 @@ module Aws::ECS
       include Aws::Structure
     end
 
+    # <zonbook />
+    #
+    # <xhtml />
+    #
     # @!attribute [rw] cluster
     #   The short name or full Amazon Resource Name (ARN) of the cluster
     #   that hosts the service to delete. If you do not specify a cluster,
@@ -3920,6 +3957,10 @@ module Aws::ECS
       include Aws::Structure
     end
 
+    # <zonbook />
+    #
+    # <xhtml />
+    #
     # @!attribute [rw] service
     #   The full description of the deleted service.
     #   @return [Types::Service]
@@ -4117,13 +4158,14 @@ module Aws::ECS
     #   @return [Types::NetworkConfiguration]
     #
     # @!attribute [rw] rollout_state
-    #   <note markdown="1"> The `rolloutState` of a service is only returned for services that
+    #   <note markdown="1"> The `rolloutState` of a service is only returned
+    #   for services that
     #   use the rolling update (`ECS`) deployment type that aren't behind a
     #   Classic Load Balancer.
     #
     #    </note>
     #
-    #   The rollout state of the deployment. When a service deployment is
+    #    The rollout state of the deployment. When a service deployment is
     #   started, it begins in an `IN_PROGRESS` state. When the service
     #   reaches a steady state, the deployment transitions to a `COMPLETED`
     #   state. If the service fails to reach a steady state and circuit
@@ -4261,12 +4303,13 @@ module Aws::ECS
       include Aws::Structure
     end
 
-    # <note markdown="1"> The deployment circuit breaker can only be used for services using the
+    # <note markdown="1"> The deployment circuit breaker can only be used
+    # for services using the
     # rolling update (`ECS`) deployment type.
     #
     #  </note>
     #
-    # The **deployment circuit breaker** determines whether a service
+    #  The **deployment circuit breaker** determines whether a service
     # deployment will fail if the service can't reach a steady state. If it
     # is turned on, a service deployment will transition to a failed state
     # and stop launching new tasks. You can also configure Amazon ECS to
@@ -4274,7 +4317,7 @@ module Aws::ECS
     # failure. For more information, see [Rolling update][1] in the *Amazon
     # Elastic Container Service Developer Guide*.
     #
-    # For more information about API failure reasons, see [API failure
+    #  For more information about API failure reasons, see [API failure
     # reasons][2] in the *Amazon Elastic Container Service Developer Guide*.
     #
     #
@@ -4307,12 +4350,13 @@ module Aws::ECS
     # a deployment and the ordering of stopping and starting tasks.
     #
     # @!attribute [rw] deployment_circuit_breaker
-    #   <note markdown="1"> The deployment circuit breaker can only be used for services using
+    #   <note markdown="1"> The deployment circuit breaker can only be used
+    #   for services using
     #   the rolling update (`ECS`) deployment type.
     #
     #    </note>
     #
-    #   The **deployment circuit breaker** determines whether a service
+    #    The **deployment circuit breaker** determines whether a service
     #   deployment will fail if the service can't reach a steady state. If
     #   you use the deployment circuit breaker, a service deployment will
     #   transition to a failed state and stop launching new tasks. If you
@@ -4763,6 +4807,10 @@ module Aws::ECS
       include Aws::Structure
     end
 
+    # <zonbook />
+    #
+    # <xhtml />
+    #
     # @!attribute [rw] cluster
     #   The short name or full Amazon Resource Name (ARN) of the cluster
     #   that hosts the container instance to deregister. If you do not
@@ -4805,6 +4853,10 @@ module Aws::ECS
       include Aws::Structure
     end
 
+    # <zonbook />
+    #
+    # <xhtml />
+    #
     # @!attribute [rw] container_instance
     #   The container instance that was deregistered.
     #   @return [Types::ContainerInstance]
@@ -4817,6 +4869,10 @@ module Aws::ECS
       include Aws::Structure
     end
 
+    # <zonbook />
+    #
+    # <xhtml />
+    #
     # @!attribute [rw] task_definition
     #   The `family` and `revision` (`family:revision`) or full Amazon
     #   Resource Name (ARN) of the task definition to deregister. You must
@@ -4831,6 +4887,10 @@ module Aws::ECS
       include Aws::Structure
     end
 
+    # <zonbook />
+    #
+    # <xhtml />
+    #
     # @!attribute [rw] task_definition
     #   The full description of the deregistered task.
     #   @return [Types::TaskDefinition]
@@ -4926,6 +4986,10 @@ module Aws::ECS
       include Aws::Structure
     end
 
+    # <zonbook />
+    #
+    # <xhtml />
+    #
     # @!attribute [rw] clusters
     #   A list of up to 100 cluster names or full cluster Amazon Resource
     #   Name (ARN) entries. If you do not specify a cluster, the default
@@ -4963,6 +5027,10 @@ module Aws::ECS
       include Aws::Structure
     end
 
+    # <zonbook />
+    #
+    # <xhtml />
+    #
     # @!attribute [rw] clusters
     #   The list of clusters.
     #   @return [Array<Types::Cluster>]
@@ -4980,6 +5048,10 @@ module Aws::ECS
       include Aws::Structure
     end
 
+    # <zonbook />
+    #
+    # <xhtml />
+    #
     # @!attribute [rw] cluster
     #   The short name or full Amazon Resource Name (ARN) of the cluster
     #   that hosts the container instances to describe. If you do not
@@ -5013,6 +5085,10 @@ module Aws::ECS
       include Aws::Structure
     end
 
+    # <zonbook />
+    #
+    # <xhtml />
+    #
     # @!attribute [rw] container_instances
     #   The list of container instances.
     #   @return [Array<Types::ContainerInstance>]
@@ -5135,6 +5211,10 @@ module Aws::ECS
       include Aws::Structure
     end
 
+    # <zonbook />
+    #
+    # <xhtml />
+    #
     # @!attribute [rw] cluster
     #   The short name or full Amazon Resource Name (ARN)the cluster that
     #   hosts the service to describe. If you do not specify a cluster, the
@@ -5165,6 +5245,10 @@ module Aws::ECS
       include Aws::Structure
     end
 
+    # <zonbook />
+    #
+    # <xhtml />
+    #
     # @!attribute [rw] services
     #   The list of services described.
     #   @return [Array<Types::Service>]
@@ -5182,6 +5266,10 @@ module Aws::ECS
       include Aws::Structure
     end
 
+    # <zonbook />
+    #
+    # <xhtml />
+    #
     # @!attribute [rw] task_definition
     #   The `family` for the latest `ACTIVE` revision, `family` and
     #   `revision` (`family:revision`) for a specific revision in the
@@ -5204,6 +5292,10 @@ module Aws::ECS
       include Aws::Structure
     end
 
+    # <zonbook />
+    #
+    # <xhtml />
+    #
     # @!attribute [rw] task_definition
     #   The full task definition description.
     #   @return [Types::TaskDefinition]
@@ -5296,6 +5388,10 @@ module Aws::ECS
       include Aws::Structure
     end
 
+    # <zonbook />
+    #
+    # <xhtml />
+    #
     # @!attribute [rw] cluster
     #   The short name or full Amazon Resource Name (ARN) of the cluster
     #   that hosts the task or tasks to describe. If you do not specify a
@@ -5322,6 +5418,10 @@ module Aws::ECS
       include Aws::Structure
     end
 
+    # <zonbook />
+    #
+    # <xhtml />
+    #
     # @!attribute [rw] tasks
     #   The list of tasks.
     #   @return [Array<Types::Task>]
@@ -5365,6 +5465,10 @@ module Aws::ECS
       include Aws::Structure
     end
 
+    # <zonbook />
+    #
+    # <xhtml />
+    #
     # @!attribute [rw] container_instance
     #   The container instance ID or full ARN of the container instance. For
     #   more information about the ARN format, see [Amazon Resource Name
@@ -5389,6 +5493,10 @@ module Aws::ECS
       include Aws::Structure
     end
 
+    # <zonbook />
+    #
+    # <xhtml />
+    #
     # @!attribute [rw] endpoint
     #   The endpoint for the Amazon ECS agent to poll.
     #   @return [String]
@@ -5487,9 +5595,9 @@ module Aws::ECS
     #
     # @!attribute [rw] propagate_tags
     #   Determines whether to propagate the tags from the task definition to
-    #    the Amazon EBS volume. Tags can only propagate to a `SERVICE`
-    #   specified in  `ServiceVolumeConfiguration`. If no value is
-    #   specified, the tags aren't  propagated.
+    #   the Amazon EBS volume. Tags can only propagate to a `SERVICE`
+    #   specified in `ServiceVolumeConfiguration`. If no value is specified,
+    #   the tags aren't propagated.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/EBSTagSpecification AWS API Documentation
@@ -7603,6 +7711,10 @@ module Aws::ECS
       include Aws::Structure
     end
 
+    # <zonbook />
+    #
+    # <xhtml />
+    #
     # @!attribute [rw] attributes
     #   A list of attribute objects that meet the criteria of the request.
     #   @return [Array<Types::Attribute>]
@@ -7624,6 +7736,10 @@ module Aws::ECS
       include Aws::Structure
     end
 
+    # <zonbook />
+    #
+    # <xhtml />
+    #
     # @!attribute [rw] next_token
     #   The `nextToken` value returned from a `ListClusters` request
     #   indicating that more results are available to fulfill the request
@@ -7657,6 +7773,10 @@ module Aws::ECS
       include Aws::Structure
     end
 
+    # <zonbook />
+    #
+    # <xhtml />
+    #
     # @!attribute [rw] cluster_arns
     #   The list of full Amazon Resource Name (ARN) entries for each cluster
     #   that's associated with your account.
@@ -7678,6 +7798,10 @@ module Aws::ECS
       include Aws::Structure
     end
 
+    # <zonbook />
+    #
+    # <xhtml />
+    #
     # @!attribute [rw] cluster
     #   The short name or full Amazon Resource Name (ARN) of the cluster
     #   that hosts the container instances to list. If you do not specify a
@@ -7745,6 +7869,10 @@ module Aws::ECS
       include Aws::Structure
     end
 
+    # <zonbook />
+    #
+    # <xhtml />
+    #
     # @!attribute [rw] container_instance_arns
     #   The list of container instances with full ARN entries for each
     #   container instance associated with the specified cluster.
@@ -7934,6 +8062,10 @@ module Aws::ECS
       include Aws::Structure
     end
 
+    # <zonbook />
+    #
+    # <xhtml />
+    #
     # @!attribute [rw] cluster
     #   The short name or full Amazon Resource Name (ARN) of the cluster to
     #   use when filtering the `ListServices` results. If you do not specify
@@ -7991,6 +8123,10 @@ module Aws::ECS
       include Aws::Structure
     end
 
+    # <zonbook />
+    #
+    # <xhtml />
+    #
     # @!attribute [rw] service_arns
     #   The list of full ARN entries for each service that's associated
     #   with the specified cluster.
@@ -8039,6 +8175,10 @@ module Aws::ECS
       include Aws::Structure
     end
 
+    # <zonbook />
+    #
+    # <xhtml />
+    #
     # @!attribute [rw] family_prefix
     #   The `familyPrefix` is a string that's used to filter the results of
     #   `ListTaskDefinitionFamilies`. If you specify a `familyPrefix`, only
@@ -8095,6 +8235,10 @@ module Aws::ECS
       include Aws::Structure
     end
 
+    # <zonbook />
+    #
+    # <xhtml />
+    #
     # @!attribute [rw] families
     #   The list of task definition family names that match the
     #   `ListTaskDefinitionFamilies` request.
@@ -8117,6 +8261,10 @@ module Aws::ECS
       include Aws::Structure
     end
 
+    # <zonbook />
+    #
+    # <xhtml />
+    #
     # @!attribute [rw] family_prefix
     #   The full family name to filter the `ListTaskDefinitions` results
     #   with. Specifying a `familyPrefix` limits the listed task definitions
@@ -8179,6 +8327,10 @@ module Aws::ECS
       include Aws::Structure
     end
 
+    # <zonbook />
+    #
+    # <xhtml />
+    #
     # @!attribute [rw] task_definition_arns
     #   The list of task definition Amazon Resource Name (ARN) entries for
     #   the `ListTaskDefinitions` request.
@@ -8201,6 +8353,10 @@ module Aws::ECS
       include Aws::Structure
     end
 
+    # <zonbook />
+    #
+    # <xhtml />
+    #
     # @!attribute [rw] cluster
     #   The short name or full Amazon Resource Name (ARN) of the cluster to
     #   use when filtering the `ListTasks` results. If you do not specify a
@@ -8296,6 +8452,10 @@ module Aws::ECS
       include Aws::Structure
     end
 
+    # <zonbook />
+    #
+    # <xhtml />
+    #
     # @!attribute [rw] task_arns
     #   The list of task ARN entries for the `ListTasks` request.
     #   @return [Array<String>]
@@ -10553,6 +10713,10 @@ module Aws::ECS
       include Aws::Structure
     end
 
+    # <zonbook />
+    #
+    # <xhtml />
+    #
     # @!attribute [rw] cluster
     #   The short name or full Amazon Resource Name (ARN) of the cluster
     #   that contains the resource to apply attributes. If you do not
@@ -10574,6 +10738,10 @@ module Aws::ECS
       include Aws::Structure
     end
 
+    # <zonbook />
+    #
+    # <xhtml />
+    #
     # @!attribute [rw] attributes
     #   The attributes applied to your resource.
     #   @return [Array<Types::Attribute>]
@@ -10664,6 +10832,10 @@ module Aws::ECS
       include Aws::Structure
     end
 
+    # <zonbook />
+    #
+    # <xhtml />
+    #
     # @!attribute [rw] cluster
     #   The short name or full Amazon Resource Name (ARN) of the cluster to
     #   register your container instance with. If you do not specify a
@@ -10754,6 +10926,10 @@ module Aws::ECS
       include Aws::Structure
     end
 
+    # <zonbook />
+    #
+    # <xhtml />
+    #
     # @!attribute [rw] container_instance
     #   The container instance that was registered.
     #   @return [Types::ContainerInstance]
@@ -10766,6 +10942,10 @@ module Aws::ECS
       include Aws::Structure
     end
 
+    # <zonbook />
+    #
+    # <xhtml />
+    #
     # @!attribute [rw] family
     #   You must specify a `family` for a task definition. You can use it
     #   track multiple versions of the same task definition. The `family` is
@@ -11117,6 +11297,10 @@ module Aws::ECS
       include Aws::Structure
     end
 
+    # <zonbook />
+    #
+    # <xhtml />
+    #
     # @!attribute [rw] task_definition
     #   The full description of the registered task definition.
     #   @return [Types::TaskDefinition]
@@ -11300,6 +11484,10 @@ module Aws::ECS
       include Aws::Structure
     end
 
+    # <zonbook />
+    #
+    # <xhtml />
+    #
     # @!attribute [rw] capacity_provider_strategy
     #   The capacity provider strategy to use for the task.
     #
@@ -11598,6 +11786,10 @@ module Aws::ECS
       include Aws::Structure
     end
 
+    # <zonbook />
+    #
+    # <xhtml />
+    #
     # @!attribute [rw] tasks
     #   A full description of the tasks that were run. The tasks that were
     #   successfully placed on your cluster are described here.
@@ -13137,7 +13329,7 @@ module Aws::ECS
     #   was using when the snapshot was created. If there is a filesystem
     #   type mismatch, the tasks will fail to start.
     #
-    #   The available Linux filesystem types are  `ext3`, `ext4`, and `xfs`.
+    #   The available Linux filesystem types are `ext3`, `ext4`, and `xfs`.
     #   If no value is specified, the `xfs` filesystem type is used by
     #   default.
     #
@@ -13550,6 +13742,10 @@ module Aws::ECS
       include Aws::Structure
     end
 
+    # <zonbook />
+    #
+    # <xhtml />
+    #
     # @!attribute [rw] cluster
     #   The short name or full Amazon Resource Name (ARN) of the cluster
     #   where to start your task. If you do not specify a cluster, the
@@ -13703,6 +13899,10 @@ module Aws::ECS
       include Aws::Structure
     end
 
+    # <zonbook />
+    #
+    # <xhtml />
+    #
     # @!attribute [rw] tasks
     #   A full description of the tasks that were started. Each task that
     #   was successfully placed on your container instances is described.
@@ -13752,6 +13952,10 @@ module Aws::ECS
       include Aws::Structure
     end
 
+    # <zonbook />
+    #
+    # <xhtml />
+    #
     # @!attribute [rw] cluster
     #   The short name or full Amazon Resource Name (ARN) of the cluster
     #   that hosts the task to stop. If you do not specify a cluster, the
@@ -13784,6 +13988,10 @@ module Aws::ECS
       include Aws::Structure
     end
 
+    # <zonbook />
+    #
+    # <xhtml />
+    #
     # @!attribute [rw] task
     #   The task that was stopped.
     #   @return [Types::Task]
@@ -13826,6 +14034,10 @@ module Aws::ECS
       include Aws::Structure
     end
 
+    # <zonbook />
+    #
+    # <xhtml />
+    #
     # @!attribute [rw] cluster
     #   The short name or full ARN of the cluster that hosts the container.
     #   @return [String]
@@ -13874,6 +14086,10 @@ module Aws::ECS
       include Aws::Structure
     end
 
+    # <zonbook />
+    #
+    # <xhtml />
+    #
     # @!attribute [rw] acknowledgment
     #   Acknowledgement of the state change.
     #   @return [String]
@@ -13886,6 +14102,10 @@ module Aws::ECS
       include Aws::Structure
     end
 
+    # <zonbook />
+    #
+    # <xhtml />
+    #
     # @!attribute [rw] cluster
     #   The short name or full Amazon Resource Name (ARN) of the cluster
     #   that hosts the task.
@@ -13946,6 +14166,10 @@ module Aws::ECS
       include Aws::Structure
     end
 
+    # <zonbook />
+    #
+    # <xhtml />
+    #
     # @!attribute [rw] acknowledgment
     #   Acknowledgement of the state change.
     #   @return [String]
@@ -14968,7 +15192,7 @@ module Aws::ECS
     # @!attribute [rw] size_in_gi_b
     #   The total amount, in GiB, of the ephemeral storage to set for the
     #   task. The minimum supported value is `20` GiB and the maximum
-    #   supported value is  `200` GiB.
+    #   supported value is `200` GiB.
     #   @return [Integer]
     #
     # @!attribute [rw] kms_key_id
@@ -15175,7 +15399,7 @@ module Aws::ECS
     #   was using when the snapshot was created. If there is a filesystem
     #   type mismatch, the task will fail to start.
     #
-    #   The available filesystem types are  `ext3`, `ext4`, and `xfs`. If no
+    #   The available filesystem types are `ext3`, `ext4`, and `xfs`. If no
     #   value is specified, the `xfs` filesystem type is used by default.
     #   @return [String]
     #
@@ -15207,11 +15431,11 @@ module Aws::ECS
     #
     # @!attribute [rw] delete_on_termination
     #   Indicates whether the volume should be deleted on when the task
-    #   stops. If a value of `true` is specified,  Amazon ECS deletes the
+    #   stops. If a value of `true` is specified, Amazon ECS deletes the
     #   Amazon EBS volume on your behalf when the task goes into the
-    #   `STOPPED` state. If no value is specified, the  default value is
+    #   `STOPPED` state. If no value is specified, the default value is
     #   `true` is used. When set to `false`, Amazon ECS leaves the volume in
-    #   your  account.
+    #   your account.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/TaskManagedEBSVolumeTerminationPolicy AWS API Documentation
@@ -15873,6 +16097,10 @@ module Aws::ECS
       include Aws::Structure
     end
 
+    # <zonbook />
+    #
+    # <xhtml />
+    #
     # @!attribute [rw] cluster
     #   The short name or full Amazon Resource Name (ARN) of the cluster
     #   that your container instance is running on. If you do not specify a
@@ -15894,6 +16122,10 @@ module Aws::ECS
       include Aws::Structure
     end
 
+    # <zonbook />
+    #
+    # <xhtml />
+    #
     # @!attribute [rw] container_instance
     #   The container instance that the container agent was updated for.
     #   @return [Types::ContainerInstance]
@@ -15906,6 +16138,10 @@ module Aws::ECS
       include Aws::Structure
     end
 
+    # <zonbook />
+    #
+    # <xhtml />
+    #
     # @!attribute [rw] cluster
     #   The short name or full Amazon Resource Name (ARN) of the cluster
     #   that hosts the container instance to update. If you do not specify a
@@ -15936,6 +16172,10 @@ module Aws::ECS
       include Aws::Structure
     end
 
+    # <zonbook />
+    #
+    # <xhtml />
+    #
     # @!attribute [rw] container_instances
     #   The list of container instances.
     #   @return [Array<Types::ContainerInstance>]
@@ -16117,6 +16357,10 @@ module Aws::ECS
       include Aws::Structure
     end
 
+    # <zonbook />
+    #
+    # <xhtml />
+    #
     # @!attribute [rw] cluster
     #   The short name or full Amazon Resource Name (ARN) of the cluster
     #   that your service runs on. If you do not specify a cluster, the
@@ -16340,42 +16584,44 @@ module Aws::ECS
     #   @return [Boolean]
     #
     # @!attribute [rw] load_balancers
-    #   <note markdown="1"> You must have a service-linked role when you update this property
+    #   <note markdown="1"> You must have a service-linked role when you
+    #   update this property
     #
     #    </note>
     #
-    #   A list of Elastic Load Balancing load balancer objects. It contains
+    #    A list of Elastic Load Balancing load balancer objects. It contains
     #   the load balancer name, the container name, and the container port
     #   to access from the load balancer. The container name is as it
     #   appears in a container definition.
     #
-    #   When you add, update, or remove a load balancer configuration,
+    #    When you add, update, or remove a load balancer configuration,
     #   Amazon ECS starts new tasks with the updated Elastic Load Balancing
     #   configuration, and then stops the old tasks when the new tasks are
     #   running.
     #
-    #   For services that use rolling updates, you can add, update, or
+    #    For services that use rolling updates, you can add, update, or
     #   remove Elastic Load Balancing target groups. You can update from a
     #   single target group to multiple target groups and from multiple
     #   target groups to a single target group.
     #
-    #   For services that use blue/green deployments, you can update Elastic
+    #    For services that use blue/green deployments, you can update
+    #   Elastic
     #   Load Balancing target groups by using ` CreateDeployment ` through
     #   CodeDeploy. Note that multiple target groups are not supported for
     #   blue/green deployments. For more information see [Register multiple
     #   target groups with a service][1] in the *Amazon Elastic Container
     #   Service Developer Guide*.
     #
-    #   For services that use the external deployment controller, you can
+    #    For services that use the external deployment controller, you can
     #   add, update, or remove load balancers by using [CreateTaskSet][2].
     #   Note that multiple target groups are not supported for external
     #   deployments. For more information see [Register multiple target
     #   groups with a service][1] in the *Amazon Elastic Container Service
     #   Developer Guide*.
     #
-    #   You can remove existing `loadBalancers` by passing an empty list.
+    #    You can remove existing `loadBalancers` by passing an empty list.
     #
-    #   This parameter triggers a new service deployment.
+    #    This parameter triggers a new service deployment.
     #
     #
     #
@@ -16396,25 +16642,26 @@ module Aws::ECS
     #   @return [String]
     #
     # @!attribute [rw] service_registries
-    #   <note markdown="1"> You must have a service-linked role when you update this property.
+    #   <note markdown="1"> You must have a service-linked role when you
+    #   update this property.
     #
     #    For more information about the role see the `CreateService` request
     #   parameter [ `role` ][1].
     #
     #    </note>
     #
-    #   The details for the service discovery registries to assign to this
+    #    The details for the service discovery registries to assign to this
     #   service. For more information, see [Service Discovery][2].
     #
-    #   When you add, update, or remove the service registries
+    #    When you add, update, or remove the service registries
     #   configuration, Amazon ECS starts new tasks with the updated service
     #   registries configuration, and then stops the old tasks when the new
     #   tasks are running.
     #
-    #   You can remove existing `serviceRegistries` by passing an empty
+    #    You can remove existing `serviceRegistries` by passing an empty
     #   list.
     #
-    #   This parameter triggers a new service deployment.
+    #    This parameter triggers a new service deployment.
     #
     #
     #
@@ -16495,6 +16742,10 @@ module Aws::ECS
       include Aws::Structure
     end
 
+    # <zonbook />
+    #
+    # <xhtml />
+    #
     # @!attribute [rw] service
     #   The full description of your service following the update call.
     #   @return [Types::Service]
@@ -16837,7 +17088,7 @@ module Aws::ECS
     #
     # @!attribute [rw] role_arn
     #   The ARN of the IAM role to associate with this VPC Lattice
-    #   configuration. This is the Amazon ECS  infrastructure IAM role that
+    #   configuration. This is the Amazon ECS infrastructure IAM role that
     #   is used to manage your VPC Lattice infrastructure.
     #   @return [String]
     #

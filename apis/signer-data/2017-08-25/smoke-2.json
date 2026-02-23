@@ -1,0 +1,23 @@
+{
+  "version" : 2,
+  "testCases" : [ {
+    "id" : "GetRevocationStatusSuccess",
+    "operationName" : "GetRevocationStatus",
+    "input" : {
+      "signatureTimestamp" : 1700000000,
+      "platformId" : "Notation-OCI-SHA384-ECDSA",
+      "profileVersionArn" : "arn:aws:signer:us-east-1:123456789012:/signing-profiles/test-profile/v1",
+      "jobArn" : "arn:aws:signer:us-east-1:123456789012:/signing-jobs/test-job",
+      "certificateHashes" : [ "0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000" ]
+    },
+    "expectation" : {
+      "success" : { }
+    },
+    "config" : {
+      "region" : "us-east-1",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  } ]
+}

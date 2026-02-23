@@ -89,6 +89,7 @@ module Aws
                               ?description: ::String,
                               widgets: Array[
                                 {
+                                  id: ::String?,
                                   title: ::String,
                                   description: ::String?,
                                   width: ::Integer?,
@@ -425,6 +426,7 @@ module Aws
                               ?description: ::String,
                               ?widgets: Array[
                                 {
+                                  id: ::String?,
                                   title: ::String,
                                   description: ::String?,
                                   width: ::Integer?,

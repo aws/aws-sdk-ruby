@@ -83,6 +83,7 @@ module Aws::CleanRooms
     ApprovalStatus = Shapes::StringShape.new(name: 'ApprovalStatus')
     ApprovalStatusDetails = Shapes::StructureShape.new(name: 'ApprovalStatusDetails')
     ApprovalStatuses = Shapes::MapShape.new(name: 'ApprovalStatuses')
+    AthenaCatalogName = Shapes::StringShape.new(name: 'AthenaCatalogName')
     AthenaDatabaseName = Shapes::StringShape.new(name: 'AthenaDatabaseName')
     AthenaOutputLocation = Shapes::StringShape.new(name: 'AthenaOutputLocation')
     AthenaTableName = Shapes::StringShape.new(name: 'AthenaTableName')
@@ -860,6 +861,7 @@ module Aws::CleanRooms
     AthenaTableReference.add_member(:output_location, Shapes::ShapeRef.new(shape: AthenaOutputLocation, location_name: "outputLocation"))
     AthenaTableReference.add_member(:database_name, Shapes::ShapeRef.new(shape: AthenaDatabaseName, required: true, location_name: "databaseName"))
     AthenaTableReference.add_member(:table_name, Shapes::ShapeRef.new(shape: AthenaTableName, required: true, location_name: "tableName"))
+    AthenaTableReference.add_member(:catalog_name, Shapes::ShapeRef.new(shape: AthenaCatalogName, location_name: "catalogName"))
     AthenaTableReference.struct_class = Types::AthenaTableReference
 
     AutoApprovedChangeTypeList.member = Shapes::ShapeRef.new(shape: AutoApprovedChangeType)
@@ -2871,7 +2873,7 @@ module Aws::CleanRooms
     ValidationExceptionFieldList.member = Shapes::ShapeRef.new(shape: ValidationExceptionField)
 
     WorkerComputeConfiguration.add_member(:type, Shapes::ShapeRef.new(shape: WorkerComputeType, location_name: "type"))
-    WorkerComputeConfiguration.add_member(:number, Shapes::ShapeRef.new(shape: WorkerComputeConfigurationNumberInteger, location_name: "number"))
+    WorkerComputeConfiguration.add_member(:number, Shapes::ShapeRef.new(shape: WorkerComputeConfigurationNumberInteger, location_name: "number", metadata: {"box" => true}))
     WorkerComputeConfiguration.add_member(:properties, Shapes::ShapeRef.new(shape: WorkerComputeConfigurationProperties, location_name: "properties"))
     WorkerComputeConfiguration.struct_class = Types::WorkerComputeConfiguration
 

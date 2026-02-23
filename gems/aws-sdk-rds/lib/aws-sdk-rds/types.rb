@@ -7498,6 +7498,19 @@ module Aws::RDS
     #   Indicates whether the DB cluster is encrypted.
     #   @return [Boolean]
     #
+    # @!attribute [rw] storage_encryption_type
+    #   The type of encryption used to protect data at rest in the DB
+    #   cluster. Possible values:
+    #
+    #   * `none` - The DB cluster is not encrypted.
+    #
+    #   * `sse-rds` - The DB cluster is encrypted using an Amazon Web
+    #     Services owned KMS key.
+    #
+    #   * `sse-kms` - The DB cluster is encrypted using a customer managed
+    #     KMS key or Amazon Web Services managed KMS key.
+    #   @return [String]
+    #
     # @!attribute [rw] kms_key_id
     #   If `StorageEncrypted` is enabled, the Amazon Web Services KMS key
     #   identifier for the encrypted DB cluster.
@@ -7977,6 +7990,7 @@ module Aws::RDS
       :vpc_security_groups,
       :hosted_zone_id,
       :storage_encrypted,
+      :storage_encryption_type,
       :kms_key_id,
       :db_cluster_resource_id,
       :db_cluster_arn,
@@ -8105,6 +8119,19 @@ module Aws::RDS
     #   Indicates whether the source DB cluster is encrypted.
     #   @return [Boolean]
     #
+    # @!attribute [rw] storage_encryption_type
+    #   The type of encryption used to protect data at rest in the automated
+    #   backup. Possible values:
+    #
+    #   * `none` - The automated backup is not encrypted.
+    #
+    #   * `sse-rds` - The automated backup is encrypted using an Amazon Web
+    #     Services owned KMS key.
+    #
+    #   * `sse-kms` - The automated backup is encrypted using a customer
+    #     managed KMS key or Amazon Web Services managed KMS key.
+    #   @return [String]
+    #
     # @!attribute [rw] allocated_storage
     #   For all database engines except Amazon Aurora, `AllocatedStorage`
     #   specifies the allocated storage size in gibibytes (GiB). For Aurora,
@@ -8214,6 +8241,7 @@ module Aws::RDS
       :iam_database_authentication_enabled,
       :cluster_create_time,
       :storage_encrypted,
+      :storage_encryption_type,
       :allocated_storage,
       :engine_version,
       :db_cluster_arn,
@@ -8851,6 +8879,19 @@ module Aws::RDS
     #   Indicates whether the DB cluster snapshot is encrypted.
     #   @return [Boolean]
     #
+    # @!attribute [rw] storage_encryption_type
+    #   The type of encryption used to protect data at rest in the DB
+    #   cluster snapshot. Possible values:
+    #
+    #   * `none` - The DB cluster snapshot is not encrypted.
+    #
+    #   * `sse-rds` - The DB cluster snapshot is encrypted using an Amazon
+    #     Web Services owned KMS key.
+    #
+    #   * `sse-kms` - The DB cluster snapshot is encrypted using a customer
+    #     managed KMS key or Amazon Web Services managed KMS key.
+    #   @return [String]
+    #
     # @!attribute [rw] backup_retention_period
     #   The number of days for which automatic DB snapshots are retained.
     #   @return [Integer]
@@ -8940,6 +8981,7 @@ module Aws::RDS
       :snapshot_type,
       :percent_progress,
       :storage_encrypted,
+      :storage_encryption_type,
       :backup_retention_period,
       :preferred_backup_window,
       :kms_key_id,
@@ -9633,6 +9675,19 @@ module Aws::RDS
     #   The storage type associated with the DB instance.
     #   @return [String]
     #
+    # @!attribute [rw] storage_encryption_type
+    #   The type of encryption used to protect data at rest in the DB
+    #   instance. Possible values:
+    #
+    #   * `none` - The DB instance is not encrypted.
+    #
+    #   * `sse-rds` - The DB instance is encrypted using an Amazon Web
+    #     Services owned KMS key.
+    #
+    #   * `sse-kms` - The DB instance is encrypted using a customer managed
+    #     KMS key or Amazon Web Services managed KMS key.
+    #   @return [String]
+    #
     # @!attribute [rw] tde_credential_arn
     #   The ARN from the key store with which the instance is associated for
     #   TDE encryption.
@@ -10077,6 +10132,7 @@ module Aws::RDS
       :publicly_accessible,
       :status_infos,
       :storage_type,
+      :storage_encryption_type,
       :tde_credential_arn,
       :db_instance_port,
       :db_cluster_identifier,
@@ -10246,6 +10302,19 @@ module Aws::RDS
     #   Indicates whether the automated backup is encrypted.
     #   @return [Boolean]
     #
+    # @!attribute [rw] storage_encryption_type
+    #   The type of encryption used to protect data at rest in the automated
+    #   backup. Possible values:
+    #
+    #   * `none` - The automated backup is not encrypted.
+    #
+    #   * `sse-rds` - The automated backup is encrypted using an Amazon Web
+    #     Services owned KMS key.
+    #
+    #   * `sse-kms` - The automated backup is encrypted using a customer
+    #     managed KMS key or Amazon Web Services managed KMS key.
+    #   @return [String]
+    #
     # @!attribute [rw] storage_type
     #   The storage type associated with the automated backup.
     #   @return [String]
@@ -10352,6 +10421,7 @@ module Aws::RDS
       :option_group_name,
       :tde_credential_arn,
       :encrypted,
+      :storage_encryption_type,
       :storage_type,
       :kms_key_id,
       :timezone,
@@ -11722,6 +11792,19 @@ module Aws::RDS
     #   Indicates whether the DB snapshot is encrypted.
     #   @return [Boolean]
     #
+    # @!attribute [rw] storage_encryption_type
+    #   The type of encryption used to protect data at rest in the DB
+    #   snapshot. Possible values:
+    #
+    #   * `none` - The DB snapshot is not encrypted.
+    #
+    #   * `sse-rds` - The DB snapshot is encrypted using an Amazon Web
+    #     Services owned KMS key.
+    #
+    #   * `sse-kms` - The DB snapshot is encrypted using a customer managed
+    #     KMS key or Amazon Web Services managed KMS key.
+    #   @return [String]
+    #
     # @!attribute [rw] backup_retention_period
     #   The number of days for which automatic DB snapshots are retained.
     #   @return [Integer]
@@ -11858,6 +11941,7 @@ module Aws::RDS
       :storage_type,
       :tde_credential_arn,
       :encrypted,
+      :storage_encryption_type,
       :backup_retention_period,
       :preferred_backup_window,
       :kms_key_id,
@@ -17216,6 +17300,19 @@ module Aws::RDS
     #   The storage encryption setting for the global database cluster.
     #   @return [Boolean]
     #
+    # @!attribute [rw] storage_encryption_type
+    #   The type of encryption used to protect data at rest in the global
+    #   database cluster. Possible values:
+    #
+    #   * `none` - The global database cluster is not encrypted.
+    #
+    #   * `sse-rds` - The global database cluster is encrypted using an
+    #     Amazon Web Services owned KMS key.
+    #
+    #   * `sse-kms` - The global database cluster is encrypted using a
+    #     customer managed KMS key or Amazon Web Services managed KMS key.
+    #   @return [String]
+    #
     # @!attribute [rw] deletion_protection
     #   The deletion protection setting for the new global database cluster.
     #   @return [Boolean]
@@ -17264,6 +17361,7 @@ module Aws::RDS
       :engine_lifecycle_support,
       :database_name,
       :storage_encrypted,
+      :storage_encryption_type,
       :deletion_protection,
       :global_cluster_members,
       :endpoint,

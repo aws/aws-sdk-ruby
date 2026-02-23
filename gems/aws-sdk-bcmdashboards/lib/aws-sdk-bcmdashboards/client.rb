@@ -565,6 +565,7 @@ module Aws::BCMDashboards
     #     description: "Description",
     #     widgets: [ # required
     #       {
+    #         id: "WidgetId",
     #         title: "WidgetTitle", # required
     #         description: "Description",
     #         width: 1,
@@ -980,6 +981,7 @@ module Aws::BCMDashboards
     #   resp.description #=> String
     #   resp.type #=> String, one of "CUSTOM"
     #   resp.widgets #=> Array
+    #   resp.widgets[0].id #=> String
     #   resp.widgets[0].title #=> String
     #   resp.widgets[0].description #=> String
     #   resp.widgets[0].width #=> Integer
@@ -1466,6 +1468,7 @@ module Aws::BCMDashboards
     #     description: "Description",
     #     widgets: [
     #       {
+    #         id: "WidgetId",
     #         title: "WidgetTitle", # required
     #         description: "Description",
     #         width: 1,
@@ -1763,7 +1766,7 @@ module Aws::BCMDashboards
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bcmdashboards'
-      context[:gem_version] = '1.7.0'
+      context[:gem_version] = '1.8.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -599,6 +599,7 @@ module Aws::Kafka
     #             },
     #           },
     #         },
+    #         network_type: "IPV4", # accepts IPV4, DUAL
     #       },
     #       zone_ids: ["__string"],
     #     },
@@ -750,6 +751,7 @@ module Aws::Kafka
     #               },
     #             },
     #           },
+    #           network_type: "IPV4", # accepts IPV4, DUAL
     #         },
     #         zone_ids: ["__string"],
     #       },
@@ -1293,6 +1295,7 @@ module Aws::Kafka
     #   resp.cluster_info.broker_node_group_info.connectivity_info.vpc_connectivity.client_authentication.sasl.scram.enabled #=> Boolean
     #   resp.cluster_info.broker_node_group_info.connectivity_info.vpc_connectivity.client_authentication.sasl.iam.enabled #=> Boolean
     #   resp.cluster_info.broker_node_group_info.connectivity_info.vpc_connectivity.client_authentication.tls.enabled #=> Boolean
+    #   resp.cluster_info.broker_node_group_info.connectivity_info.network_type #=> String, one of "IPV4", "DUAL"
     #   resp.cluster_info.broker_node_group_info.zone_ids #=> Array
     #   resp.cluster_info.broker_node_group_info.zone_ids[0] #=> String
     #   resp.cluster_info.client_authentication.sasl.scram.enabled #=> Boolean
@@ -1385,6 +1388,7 @@ module Aws::Kafka
     #   resp.cluster_info.provisioned.broker_node_group_info.connectivity_info.vpc_connectivity.client_authentication.sasl.scram.enabled #=> Boolean
     #   resp.cluster_info.provisioned.broker_node_group_info.connectivity_info.vpc_connectivity.client_authentication.sasl.iam.enabled #=> Boolean
     #   resp.cluster_info.provisioned.broker_node_group_info.connectivity_info.vpc_connectivity.client_authentication.tls.enabled #=> Boolean
+    #   resp.cluster_info.provisioned.broker_node_group_info.connectivity_info.network_type #=> String, one of "IPV4", "DUAL"
     #   resp.cluster_info.provisioned.broker_node_group_info.zone_ids #=> Array
     #   resp.cluster_info.provisioned.broker_node_group_info.zone_ids[0] #=> String
     #   resp.cluster_info.provisioned.current_broker_software_info.configuration_arn #=> String
@@ -1421,6 +1425,7 @@ module Aws::Kafka
     #   resp.cluster_info.serverless.vpc_configs[0].security_group_ids #=> Array
     #   resp.cluster_info.serverless.vpc_configs[0].security_group_ids[0] #=> String
     #   resp.cluster_info.serverless.client_authentication.sasl.iam.enabled #=> Boolean
+    #   resp.cluster_info.serverless.connectivity_info.network_type #=> String, one of "IPV4", "DUAL"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/DescribeClusterV2 AWS API Documentation
     #
@@ -1492,6 +1497,7 @@ module Aws::Kafka
     #   resp.cluster_operation_info.source_cluster_info.connectivity_info.vpc_connectivity.client_authentication.sasl.scram.enabled #=> Boolean
     #   resp.cluster_operation_info.source_cluster_info.connectivity_info.vpc_connectivity.client_authentication.sasl.iam.enabled #=> Boolean
     #   resp.cluster_operation_info.source_cluster_info.connectivity_info.vpc_connectivity.client_authentication.tls.enabled #=> Boolean
+    #   resp.cluster_operation_info.source_cluster_info.connectivity_info.network_type #=> String, one of "IPV4", "DUAL"
     #   resp.cluster_operation_info.source_cluster_info.storage_mode #=> String, one of "LOCAL", "TIERED"
     #   resp.cluster_operation_info.source_cluster_info.broker_count_update_info.created_broker_ids #=> Array
     #   resp.cluster_operation_info.source_cluster_info.broker_count_update_info.created_broker_ids[0] #=> Float
@@ -1531,6 +1537,7 @@ module Aws::Kafka
     #   resp.cluster_operation_info.target_cluster_info.connectivity_info.vpc_connectivity.client_authentication.sasl.scram.enabled #=> Boolean
     #   resp.cluster_operation_info.target_cluster_info.connectivity_info.vpc_connectivity.client_authentication.sasl.iam.enabled #=> Boolean
     #   resp.cluster_operation_info.target_cluster_info.connectivity_info.vpc_connectivity.client_authentication.tls.enabled #=> Boolean
+    #   resp.cluster_operation_info.target_cluster_info.connectivity_info.network_type #=> String, one of "IPV4", "DUAL"
     #   resp.cluster_operation_info.target_cluster_info.storage_mode #=> String, one of "LOCAL", "TIERED"
     #   resp.cluster_operation_info.target_cluster_info.broker_count_update_info.created_broker_ids #=> Array
     #   resp.cluster_operation_info.target_cluster_info.broker_count_update_info.created_broker_ids[0] #=> Float
@@ -1611,6 +1618,7 @@ module Aws::Kafka
     #   resp.cluster_operation_info.provisioned.source_cluster_info.connectivity_info.vpc_connectivity.client_authentication.sasl.scram.enabled #=> Boolean
     #   resp.cluster_operation_info.provisioned.source_cluster_info.connectivity_info.vpc_connectivity.client_authentication.sasl.iam.enabled #=> Boolean
     #   resp.cluster_operation_info.provisioned.source_cluster_info.connectivity_info.vpc_connectivity.client_authentication.tls.enabled #=> Boolean
+    #   resp.cluster_operation_info.provisioned.source_cluster_info.connectivity_info.network_type #=> String, one of "IPV4", "DUAL"
     #   resp.cluster_operation_info.provisioned.source_cluster_info.storage_mode #=> String, one of "LOCAL", "TIERED"
     #   resp.cluster_operation_info.provisioned.source_cluster_info.broker_count_update_info.created_broker_ids #=> Array
     #   resp.cluster_operation_info.provisioned.source_cluster_info.broker_count_update_info.created_broker_ids[0] #=> Float
@@ -1650,6 +1658,7 @@ module Aws::Kafka
     #   resp.cluster_operation_info.provisioned.target_cluster_info.connectivity_info.vpc_connectivity.client_authentication.sasl.scram.enabled #=> Boolean
     #   resp.cluster_operation_info.provisioned.target_cluster_info.connectivity_info.vpc_connectivity.client_authentication.sasl.iam.enabled #=> Boolean
     #   resp.cluster_operation_info.provisioned.target_cluster_info.connectivity_info.vpc_connectivity.client_authentication.tls.enabled #=> Boolean
+    #   resp.cluster_operation_info.provisioned.target_cluster_info.connectivity_info.network_type #=> String, one of "IPV4", "DUAL"
     #   resp.cluster_operation_info.provisioned.target_cluster_info.storage_mode #=> String, one of "LOCAL", "TIERED"
     #   resp.cluster_operation_info.provisioned.target_cluster_info.broker_count_update_info.created_broker_ids #=> Array
     #   resp.cluster_operation_info.provisioned.target_cluster_info.broker_count_update_info.created_broker_ids[0] #=> Float
@@ -1661,6 +1670,8 @@ module Aws::Kafka
     #   resp.cluster_operation_info.provisioned.vpc_connection_info.user_identity.type #=> String, one of "AWSACCOUNT", "AWSSERVICE"
     #   resp.cluster_operation_info.provisioned.vpc_connection_info.user_identity.principal_id #=> String
     #   resp.cluster_operation_info.provisioned.vpc_connection_info.creation_time #=> Time
+    #   resp.cluster_operation_info.serverless.source_cluster_info.network_type #=> String, one of "IPV4", "DUAL"
+    #   resp.cluster_operation_info.serverless.target_cluster_info.network_type #=> String, one of "IPV4", "DUAL"
     #   resp.cluster_operation_info.serverless.vpc_connection_info.creation_time #=> Time
     #   resp.cluster_operation_info.serverless.vpc_connection_info.owner #=> String
     #   resp.cluster_operation_info.serverless.vpc_connection_info.user_identity.type #=> String, one of "AWSACCOUNT", "AWSSERVICE"
@@ -2024,6 +2035,10 @@ module Aws::Kafka
     #   * {Types::GetBootstrapBrokersResponse#bootstrap_broker_string_vpc_connectivity_tls #bootstrap_broker_string_vpc_connectivity_tls} => String
     #   * {Types::GetBootstrapBrokersResponse#bootstrap_broker_string_vpc_connectivity_sasl_scram #bootstrap_broker_string_vpc_connectivity_sasl_scram} => String
     #   * {Types::GetBootstrapBrokersResponse#bootstrap_broker_string_vpc_connectivity_sasl_iam #bootstrap_broker_string_vpc_connectivity_sasl_iam} => String
+    #   * {Types::GetBootstrapBrokersResponse#bootstrap_broker_string_ipv_6 #bootstrap_broker_string_ipv_6} => String
+    #   * {Types::GetBootstrapBrokersResponse#bootstrap_broker_string_tls_ipv_6 #bootstrap_broker_string_tls_ipv_6} => String
+    #   * {Types::GetBootstrapBrokersResponse#bootstrap_broker_string_sasl_scram_ipv_6 #bootstrap_broker_string_sasl_scram_ipv_6} => String
+    #   * {Types::GetBootstrapBrokersResponse#bootstrap_broker_string_sasl_iam_ipv_6 #bootstrap_broker_string_sasl_iam_ipv_6} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -2043,6 +2058,10 @@ module Aws::Kafka
     #   resp.bootstrap_broker_string_vpc_connectivity_tls #=> String
     #   resp.bootstrap_broker_string_vpc_connectivity_sasl_scram #=> String
     #   resp.bootstrap_broker_string_vpc_connectivity_sasl_iam #=> String
+    #   resp.bootstrap_broker_string_ipv_6 #=> String
+    #   resp.bootstrap_broker_string_tls_ipv_6 #=> String
+    #   resp.bootstrap_broker_string_sasl_scram_ipv_6 #=> String
+    #   resp.bootstrap_broker_string_sasl_iam_ipv_6 #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/GetBootstrapBrokers AWS API Documentation
     #
@@ -2156,6 +2175,7 @@ module Aws::Kafka
     #   resp.cluster_operation_info_list[0].source_cluster_info.connectivity_info.vpc_connectivity.client_authentication.sasl.scram.enabled #=> Boolean
     #   resp.cluster_operation_info_list[0].source_cluster_info.connectivity_info.vpc_connectivity.client_authentication.sasl.iam.enabled #=> Boolean
     #   resp.cluster_operation_info_list[0].source_cluster_info.connectivity_info.vpc_connectivity.client_authentication.tls.enabled #=> Boolean
+    #   resp.cluster_operation_info_list[0].source_cluster_info.connectivity_info.network_type #=> String, one of "IPV4", "DUAL"
     #   resp.cluster_operation_info_list[0].source_cluster_info.storage_mode #=> String, one of "LOCAL", "TIERED"
     #   resp.cluster_operation_info_list[0].source_cluster_info.broker_count_update_info.created_broker_ids #=> Array
     #   resp.cluster_operation_info_list[0].source_cluster_info.broker_count_update_info.created_broker_ids[0] #=> Float
@@ -2195,6 +2215,7 @@ module Aws::Kafka
     #   resp.cluster_operation_info_list[0].target_cluster_info.connectivity_info.vpc_connectivity.client_authentication.sasl.scram.enabled #=> Boolean
     #   resp.cluster_operation_info_list[0].target_cluster_info.connectivity_info.vpc_connectivity.client_authentication.sasl.iam.enabled #=> Boolean
     #   resp.cluster_operation_info_list[0].target_cluster_info.connectivity_info.vpc_connectivity.client_authentication.tls.enabled #=> Boolean
+    #   resp.cluster_operation_info_list[0].target_cluster_info.connectivity_info.network_type #=> String, one of "IPV4", "DUAL"
     #   resp.cluster_operation_info_list[0].target_cluster_info.storage_mode #=> String, one of "LOCAL", "TIERED"
     #   resp.cluster_operation_info_list[0].target_cluster_info.broker_count_update_info.created_broker_ids #=> Array
     #   resp.cluster_operation_info_list[0].target_cluster_info.broker_count_update_info.created_broker_ids[0] #=> Float
@@ -2302,6 +2323,7 @@ module Aws::Kafka
     #   resp.cluster_info_list[0].broker_node_group_info.connectivity_info.vpc_connectivity.client_authentication.sasl.scram.enabled #=> Boolean
     #   resp.cluster_info_list[0].broker_node_group_info.connectivity_info.vpc_connectivity.client_authentication.sasl.iam.enabled #=> Boolean
     #   resp.cluster_info_list[0].broker_node_group_info.connectivity_info.vpc_connectivity.client_authentication.tls.enabled #=> Boolean
+    #   resp.cluster_info_list[0].broker_node_group_info.connectivity_info.network_type #=> String, one of "IPV4", "DUAL"
     #   resp.cluster_info_list[0].broker_node_group_info.zone_ids #=> Array
     #   resp.cluster_info_list[0].broker_node_group_info.zone_ids[0] #=> String
     #   resp.cluster_info_list[0].client_authentication.sasl.scram.enabled #=> Boolean
@@ -2413,6 +2435,7 @@ module Aws::Kafka
     #   resp.cluster_info_list[0].provisioned.broker_node_group_info.connectivity_info.vpc_connectivity.client_authentication.sasl.scram.enabled #=> Boolean
     #   resp.cluster_info_list[0].provisioned.broker_node_group_info.connectivity_info.vpc_connectivity.client_authentication.sasl.iam.enabled #=> Boolean
     #   resp.cluster_info_list[0].provisioned.broker_node_group_info.connectivity_info.vpc_connectivity.client_authentication.tls.enabled #=> Boolean
+    #   resp.cluster_info_list[0].provisioned.broker_node_group_info.connectivity_info.network_type #=> String, one of "IPV4", "DUAL"
     #   resp.cluster_info_list[0].provisioned.broker_node_group_info.zone_ids #=> Array
     #   resp.cluster_info_list[0].provisioned.broker_node_group_info.zone_ids[0] #=> String
     #   resp.cluster_info_list[0].provisioned.current_broker_software_info.configuration_arn #=> String
@@ -2449,6 +2472,7 @@ module Aws::Kafka
     #   resp.cluster_info_list[0].serverless.vpc_configs[0].security_group_ids #=> Array
     #   resp.cluster_info_list[0].serverless.vpc_configs[0].security_group_ids[0] #=> String
     #   resp.cluster_info_list[0].serverless.client_authentication.sasl.iam.enabled #=> Boolean
+    #   resp.cluster_info_list[0].serverless.connectivity_info.network_type #=> String, one of "IPV4", "DUAL"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/ListClustersV2 AWS API Documentation
@@ -3369,6 +3393,7 @@ module Aws::Kafka
     #           },
     #         },
     #       },
+    #       network_type: "IPV4", # accepts IPV4, DUAL
     #     },
     #     current_version: "__string", # required
     #   })
@@ -3740,7 +3765,7 @@ module Aws::Kafka
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-kafka'
-      context[:gem_version] = '1.105.0'
+      context[:gem_version] = '1.106.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

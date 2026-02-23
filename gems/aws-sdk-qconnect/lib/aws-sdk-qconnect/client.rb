@@ -4577,7 +4577,7 @@ module Aws::QConnect
     #
     # @example Response structure
     #
-    #   resp.type #=> String, one of "TEXT"
+    #   resp.type #=> String, one of "TEXT", "TOOL_USE_RESULT"
     #   resp.response.value.text.value #=> String
     #   resp.response.value.text.citations #=> Array
     #   resp.response.value.text.citations[0].content_id #=> String
@@ -7309,7 +7309,7 @@ module Aws::QConnect
     #   resp = client.send_message({
     #     assistant_id: "UuidOrArn", # required
     #     session_id: "UuidOrArn", # required
-    #     type: "TEXT", # required, accepts TEXT
+    #     type: "TEXT", # required, accepts TEXT, TOOL_USE_RESULT
     #     message: { # required
     #       value: { # required
     #         text: {
@@ -9453,7 +9453,7 @@ module Aws::QConnect
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-qconnect'
-      context[:gem_version] = '1.49.0'
+      context[:gem_version] = '1.50.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

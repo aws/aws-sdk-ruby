@@ -228,6 +228,11 @@ module Aws::AppStream
     #   specified endpoints.
     #   @return [Array<Types::AccessEndpoint>]
     #
+    # @!attribute [rw] disable_imdsv1
+    #   Indicates whether Instance Metadata Service Version 1 (IMDSv1) is
+    #   disabled for the app block builder.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/AppBlockBuilder AWS API Documentation
     #
     class AppBlockBuilder < Struct.new(
@@ -244,7 +249,8 @@ module Aws::AppStream
       :created_time,
       :app_block_builder_errors,
       :state_change_reason,
-      :access_endpoints)
+      :access_endpoints,
+      :disable_imdsv1)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1007,6 +1013,11 @@ module Aws::AppStream
     #   specified endpoints.
     #   @return [Array<Types::AccessEndpoint>]
     #
+    # @!attribute [rw] disable_imdsv1
+    #   Set to true to disable Instance Metadata Service Version 1 (IMDSv1)
+    #   and enforce IMDSv2. Set to false to enable both IMDSv1 and IMDSv2.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateAppBlockBuilderRequest AWS API Documentation
     #
     class CreateAppBlockBuilderRequest < Struct.new(
@@ -1019,7 +1030,8 @@ module Aws::AppStream
       :vpc_config,
       :enable_default_internet_access,
       :iam_role_arn,
-      :access_endpoints)
+      :access_endpoints,
+      :disable_imdsv1)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1664,6 +1676,17 @@ module Aws::AppStream
     #   application requirements.
     #   @return [Types::VolumeConfig]
     #
+    # @!attribute [rw] disable_imdsv1
+    #   Set to true to disable Instance Metadata Service Version 1 (IMDSv1)
+    #   and enforce IMDSv2. Set to false to enable both IMDSv1 and IMDSv2.
+    #
+    #   <note markdown="1"> Before disabling IMDSv1, ensure your WorkSpaces Applications images
+    #   are running the agent version or managed image update released on or
+    #   after January 16, 2024 to support IMDSv2 enforcement.
+    #
+    #    </note>
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateFleetRequest AWS API Documentation
     #
     class CreateFleetRequest < Struct.new(
@@ -1689,7 +1712,8 @@ module Aws::AppStream
       :usb_device_filter_strings,
       :session_script_s3_location,
       :max_sessions_per_instance,
-      :root_volume_config)
+      :root_volume_config,
+      :disable_imdsv1)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2004,6 +2028,17 @@ module Aws::AppStream
     #   * Microsoft\_Project\_2024\_Standard\_64Bit
     #   @return [Array<String>]
     #
+    # @!attribute [rw] disable_imdsv1
+    #   Set to true to disable Instance Metadata Service Version 1 (IMDSv1)
+    #   and enforce IMDSv2. Set to false to enable both IMDSv1 and IMDSv2.
+    #
+    #   <note markdown="1"> Before disabling IMDSv1, ensure your WorkSpaces Applications images
+    #   are running the agent version or managed image update released on or
+    #   after January 16, 2024 to support IMDSv2 enforcement.
+    #
+    #    </note>
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateImageBuilderRequest AWS API Documentation
     #
     class CreateImageBuilderRequest < Struct.new(
@@ -2022,7 +2057,8 @@ module Aws::AppStream
       :access_endpoints,
       :root_volume_config,
       :softwares_to_install,
-      :softwares_to_uninstall)
+      :softwares_to_uninstall,
+      :disable_imdsv1)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4465,6 +4501,11 @@ module Aws::AppStream
     #   including the storage size in GB.
     #   @return [Types::VolumeConfig]
     #
+    # @!attribute [rw] disable_imdsv1
+    #   Indicates whether Instance Metadata Service Version 1 (IMDSv1) is
+    #   disabled for the fleet.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/Fleet AWS API Documentation
     #
     class Fleet < Struct.new(
@@ -4493,7 +4534,8 @@ module Aws::AppStream
       :usb_device_filter_strings,
       :session_script_s3_location,
       :max_sessions_per_instance,
-      :root_volume_config)
+      :root_volume_config,
+      :disable_imdsv1)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4893,6 +4935,11 @@ module Aws::AppStream
     #   Applications agent version or not.
     #   @return [String]
     #
+    # @!attribute [rw] disable_imdsv1
+    #   Indicates whether Instance Metadata Service Version 1 (IMDSv1) is
+    #   disabled for the image builder.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/ImageBuilder AWS API Documentation
     #
     class ImageBuilder < Struct.new(
@@ -4915,7 +4962,8 @@ module Aws::AppStream
       :appstream_agent_version,
       :access_endpoints,
       :root_volume_config,
-      :latest_appstream_agent_version)
+      :latest_appstream_agent_version,
+      :disable_imdsv1)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6180,6 +6228,11 @@ module Aws::AppStream
     #   The attributes to delete from the app block builder.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] disable_imdsv1
+    #   Set to true to disable Instance Metadata Service Version 1 (IMDSv1)
+    #   and enforce IMDSv2. Set to false to enable both IMDSv1 and IMDSv2.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/UpdateAppBlockBuilderRequest AWS API Documentation
     #
     class UpdateAppBlockBuilderRequest < Struct.new(
@@ -6192,7 +6245,8 @@ module Aws::AppStream
       :enable_default_internet_access,
       :iam_role_arn,
       :access_endpoints,
-      :attributes_to_delete)
+      :attributes_to_delete,
+      :disable_imdsv1)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6642,6 +6696,17 @@ module Aws::AppStream
     #   size.
     #   @return [Types::VolumeConfig]
     #
+    # @!attribute [rw] disable_imdsv1
+    #   Set to true to disable Instance Metadata Service Version 1 (IMDSv1)
+    #   and enforce IMDSv2. Set to false to enable both IMDSv1 and IMDSv2.
+    #
+    #   <note markdown="1"> Before disabling IMDSv1, ensure your WorkSpaces Applications images
+    #   are running the agent version or managed image update released on or
+    #   after January 16, 2024 to support IMDSv2 enforcement.
+    #
+    #    </note>
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/UpdateFleetRequest AWS API Documentation
     #
     class UpdateFleetRequest < Struct.new(
@@ -6667,7 +6732,8 @@ module Aws::AppStream
       :usb_device_filter_strings,
       :session_script_s3_location,
       :max_sessions_per_instance,
-      :root_volume_config)
+      :root_volume_config,
+      :disable_imdsv1)
       SENSITIVE = []
       include Aws::Structure
     end

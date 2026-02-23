@@ -2375,8 +2375,8 @@ module Aws::ECR
     # Retrieves the account setting value for the specified setting name.
     #
     # @option params [required, String] :name
-    #   The name of the account setting, such as `BASIC_SCAN_TYPE_VERSION` or
-    #   `REGISTRY_POLICY_SCOPE`.
+    #   The name of the account setting, such as `BASIC_SCAN_TYPE_VERSION`,
+    #   `REGISTRY_POLICY_SCOPE`, or `BLOB_MOUNTING`.
     #
     # @return [Types::GetAccountSettingResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2849,6 +2849,11 @@ module Aws::ECR
 
     # Lists the artifacts associated with a specified subject image.
     #
+    # <note markdown="1"> The IAM principal invoking this operation must have the
+    # `ecr:BatchGetImage` permission.
+    #
+    #  </note>
+    #
     # @option params [String] :registry_id
     #   The Amazon Web Services account ID associated with the registry that
     #   contains the repository in which to list image referrers. If you do
@@ -3263,14 +3268,13 @@ module Aws::ECR
     # scope.
     #
     # @option params [required, String] :name
-    #   The name of the account setting, such as `BASIC_SCAN_TYPE_VERSION` or
-    #   `REGISTRY_POLICY_SCOPE`.
+    #   The name of the account setting, such as `BASIC_SCAN_TYPE_VERSION`,
+    #   `REGISTRY_POLICY_SCOPE`, or `BLOB_MOUNTING`.
     #
     # @option params [required, String] :value
-    #   Setting value that is specified. The following are valid values for
-    #   the basic scan type being used: `AWS_NATIVE` or `CLAIR`. The following
-    #   are valid values for the registry policy scope being used: `V1` or
-    #   `V2`.
+    #   Setting value that is specified. Valid value for basic scan type:
+    #   `AWS_NATIVE`. Valid values for registry policy scope: `V1` or `V2`.
+    #   Valid values for blob mounting: `ENABLED` or `DISABLED`.
     #
     # @return [Types::PutAccountSettingResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4523,7 +4527,7 @@ module Aws::ECR
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-ecr'
-      context[:gem_version] = '1.119.0'
+      context[:gem_version] = '1.121.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

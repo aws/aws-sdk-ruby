@@ -166,6 +166,8 @@ module Aws::Kafka
     end
 
     class ClusterOperationV2Serverless
+      attr_accessor source_cluster_info: Types::ServerlessConnectivityInfo
+      attr_accessor target_cluster_info: Types::ServerlessConnectivityInfo
       attr_accessor vpc_connection_info: Types::VpcConnectionInfoServerless
       SENSITIVE: []
     end
@@ -239,6 +241,7 @@ module Aws::Kafka
     class ConnectivityInfo
       attr_accessor public_access: Types::PublicAccess
       attr_accessor vpc_connectivity: Types::VpcConnectivity
+      attr_accessor network_type: ("IPV4" | "DUAL")
       SENSITIVE: []
     end
 
@@ -633,6 +636,10 @@ module Aws::Kafka
       attr_accessor bootstrap_broker_string_vpc_connectivity_tls: ::String
       attr_accessor bootstrap_broker_string_vpc_connectivity_sasl_scram: ::String
       attr_accessor bootstrap_broker_string_vpc_connectivity_sasl_iam: ::String
+      attr_accessor bootstrap_broker_string_ipv_6: ::String
+      attr_accessor bootstrap_broker_string_tls_ipv_6: ::String
+      attr_accessor bootstrap_broker_string_sasl_scram_ipv_6: ::String
+      attr_accessor bootstrap_broker_string_sasl_iam_ipv_6: ::String
       SENSITIVE: []
     end
 
@@ -854,9 +861,15 @@ module Aws::Kafka
       SENSITIVE: []
     end
 
+    class ServerlessConnectivityInfo
+      attr_accessor network_type: ("IPV4" | "DUAL")
+      SENSITIVE: []
+    end
+
     class Serverless
       attr_accessor vpc_configs: ::Array[Types::VpcConfig]
       attr_accessor client_authentication: Types::ServerlessClientAuthentication
+      attr_accessor connectivity_info: Types::ServerlessConnectivityInfo
       SENSITIVE: []
     end
 

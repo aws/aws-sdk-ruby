@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.59.0 (2026-02-17)
+------------------
+
+* Feature - Adds support for branding customization without requiring a custom wallpaper.
+
 1.58.0 (2026-02-04)
 ------------------
 

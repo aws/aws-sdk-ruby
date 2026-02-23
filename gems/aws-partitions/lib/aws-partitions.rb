@@ -618,6 +618,7 @@ module Aws
             'ServiceQuotas' => 'servicequotas',
             'Shield' => 'shield',
             'Signer' => 'signer',
+            'SignerData' => 'data-signer',
             'Signin' => 'signin',
             'SimSpaceWeaver' => 'simspaceweaver',
             'SimpleDB' => 'sdb',

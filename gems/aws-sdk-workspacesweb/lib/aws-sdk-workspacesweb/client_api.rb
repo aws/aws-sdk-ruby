@@ -414,7 +414,7 @@ module Aws::WorkSpacesWeb
     BlockedCategories.member = Shapes::ShapeRef.new(shape: Category)
 
     BrandingConfiguration.add_member(:logo, Shapes::ShapeRef.new(shape: ImageMetadata, required: true, location_name: "logo"))
-    BrandingConfiguration.add_member(:wallpaper, Shapes::ShapeRef.new(shape: ImageMetadata, required: true, location_name: "wallpaper"))
+    BrandingConfiguration.add_member(:wallpaper, Shapes::ShapeRef.new(shape: ImageMetadata, location_name: "wallpaper"))
     BrandingConfiguration.add_member(:favicon, Shapes::ShapeRef.new(shape: ImageMetadata, required: true, location_name: "favicon"))
     BrandingConfiguration.add_member(:localized_strings, Shapes::ShapeRef.new(shape: LocalizedBrandingStringMap, required: true, location_name: "localizedStrings"))
     BrandingConfiguration.add_member(:color_theme, Shapes::ShapeRef.new(shape: ColorTheme, required: true, location_name: "colorTheme"))
@@ -422,7 +422,7 @@ module Aws::WorkSpacesWeb
     BrandingConfiguration.struct_class = Types::BrandingConfiguration
 
     BrandingConfigurationCreateInput.add_member(:logo, Shapes::ShapeRef.new(shape: IconImageInput, required: true, location_name: "logo"))
-    BrandingConfigurationCreateInput.add_member(:wallpaper, Shapes::ShapeRef.new(shape: WallpaperImageInput, required: true, location_name: "wallpaper"))
+    BrandingConfigurationCreateInput.add_member(:wallpaper, Shapes::ShapeRef.new(shape: WallpaperImageInput, location_name: "wallpaper"))
     BrandingConfigurationCreateInput.add_member(:favicon, Shapes::ShapeRef.new(shape: IconImageInput, required: true, location_name: "favicon"))
     BrandingConfigurationCreateInput.add_member(:localized_strings, Shapes::ShapeRef.new(shape: LocalizedBrandingStringMap, required: true, location_name: "localizedStrings"))
     BrandingConfigurationCreateInput.add_member(:color_theme, Shapes::ShapeRef.new(shape: ColorTheme, required: true, location_name: "colorTheme"))

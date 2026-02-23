@@ -184,7 +184,7 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/KMS/Client.html#decrypt-instance_method
       def decrypt: (
-                     ciphertext_blob: ::String,
+                     ?ciphertext_blob: ::String,
                      ?encryption_context: Hash[::String, ::String],
                      ?grant_tokens: Array[::String],
                      ?key_id: ::String,
@@ -193,9 +193,10 @@ module Aws
                        key_encryption_algorithm: ("RSAES_OAEP_SHA_256")?,
                        attestation_document: ::String?
                      },
-                     ?dry_run: bool
+                     ?dry_run: bool,
+                     ?dry_run_modifiers: Array[("IGNORE_CIPHERTEXT")]
                    ) -> _DecryptResponseSuccess
-                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DecryptResponseSuccess
+                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DecryptResponseSuccess
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/KMS/Client.html#delete_alias-instance_method
       def delete_alias: (
@@ -635,7 +636,7 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/KMS/Client.html#re_encrypt-instance_method
       def re_encrypt: (
-                        ciphertext_blob: ::String,
+                        ?ciphertext_blob: ::String,
                         ?source_encryption_context: Hash[::String, ::String],
                         ?source_key_id: ::String,
                         destination_key_id: ::String,
@@ -643,7 +644,8 @@ module Aws
                         ?source_encryption_algorithm: ("SYMMETRIC_DEFAULT" | "RSAES_OAEP_SHA_1" | "RSAES_OAEP_SHA_256" | "SM2PKE"),
                         ?destination_encryption_algorithm: ("SYMMETRIC_DEFAULT" | "RSAES_OAEP_SHA_1" | "RSAES_OAEP_SHA_256" | "SM2PKE"),
                         ?grant_tokens: Array[::String],
-                        ?dry_run: bool
+                        ?dry_run: bool,
+                        ?dry_run_modifiers: Array[("IGNORE_CIPHERTEXT")]
                       ) -> _ReEncryptResponseSuccess
                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ReEncryptResponseSuccess
 

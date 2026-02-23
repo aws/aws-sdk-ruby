@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.12.0 (2026-02-16)
+------------------
+
+* Feature - Clarify documentation on ARC Region Switch start-plan-execution operation
+
 1.11.0 (2026-02-05)
 ------------------
 

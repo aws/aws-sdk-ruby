@@ -1521,6 +1521,7 @@ module Aws::RDS
     #   resp.db_cluster_snapshot.snapshot_type #=> String
     #   resp.db_cluster_snapshot.percent_progress #=> Integer
     #   resp.db_cluster_snapshot.storage_encrypted #=> Boolean
+    #   resp.db_cluster_snapshot.storage_encryption_type #=> String, one of "none", "sse-kms", "sse-rds"
     #   resp.db_cluster_snapshot.backup_retention_period #=> Integer
     #   resp.db_cluster_snapshot.preferred_backup_window #=> String
     #   resp.db_cluster_snapshot.kms_key_id #=> String
@@ -1960,6 +1961,7 @@ module Aws::RDS
     #   resp.db_snapshot.storage_type #=> String
     #   resp.db_snapshot.tde_credential_arn #=> String
     #   resp.db_snapshot.encrypted #=> Boolean
+    #   resp.db_snapshot.storage_encryption_type #=> String, one of "none", "sse-kms", "sse-rds"
     #   resp.db_snapshot.backup_retention_period #=> Integer
     #   resp.db_snapshot.preferred_backup_window #=> String
     #   resp.db_snapshot.kms_key_id #=> String
@@ -3962,6 +3964,7 @@ module Aws::RDS
     #   resp.db_cluster.vpc_security_groups[0].status #=> String
     #   resp.db_cluster.hosted_zone_id #=> String
     #   resp.db_cluster.storage_encrypted #=> Boolean
+    #   resp.db_cluster.storage_encryption_type #=> String, one of "none", "sse-kms", "sse-rds"
     #   resp.db_cluster.kms_key_id #=> String
     #   resp.db_cluster.db_cluster_resource_id #=> String
     #   resp.db_cluster.db_cluster_arn #=> String
@@ -4475,6 +4478,7 @@ module Aws::RDS
     #   resp.db_cluster_snapshot.snapshot_type #=> String
     #   resp.db_cluster_snapshot.percent_progress #=> Integer
     #   resp.db_cluster_snapshot.storage_encrypted #=> Boolean
+    #   resp.db_cluster_snapshot.storage_encryption_type #=> String, one of "none", "sse-kms", "sse-rds"
     #   resp.db_cluster_snapshot.backup_retention_period #=> Integer
     #   resp.db_cluster_snapshot.preferred_backup_window #=> String
     #   resp.db_cluster_snapshot.kms_key_id #=> String
@@ -6167,6 +6171,7 @@ module Aws::RDS
     #   resp.db_instance.status_infos[0].status #=> String
     #   resp.db_instance.status_infos[0].message #=> String
     #   resp.db_instance.storage_type #=> String
+    #   resp.db_instance.storage_encryption_type #=> String, one of "none", "sse-kms", "sse-rds"
     #   resp.db_instance.tde_credential_arn #=> String
     #   resp.db_instance.db_instance_port #=> Integer
     #   resp.db_instance.db_cluster_identifier #=> String
@@ -7233,6 +7238,7 @@ module Aws::RDS
     #   resp.db_instance.status_infos[0].status #=> String
     #   resp.db_instance.status_infos[0].message #=> String
     #   resp.db_instance.storage_type #=> String
+    #   resp.db_instance.storage_encryption_type #=> String, one of "none", "sse-kms", "sse-rds"
     #   resp.db_instance.tde_credential_arn #=> String
     #   resp.db_instance.db_instance_port #=> Integer
     #   resp.db_instance.db_cluster_identifier #=> String
@@ -8112,6 +8118,7 @@ module Aws::RDS
     #   resp.db_snapshot.storage_type #=> String
     #   resp.db_snapshot.tde_credential_arn #=> String
     #   resp.db_snapshot.encrypted #=> Boolean
+    #   resp.db_snapshot.storage_encryption_type #=> String, one of "none", "sse-kms", "sse-rds"
     #   resp.db_snapshot.backup_retention_period #=> Integer
     #   resp.db_snapshot.preferred_backup_window #=> String
     #   resp.db_snapshot.kms_key_id #=> String
@@ -8657,6 +8664,7 @@ module Aws::RDS
     #   resp.global_cluster.engine_lifecycle_support #=> String
     #   resp.global_cluster.database_name #=> String
     #   resp.global_cluster.storage_encrypted #=> Boolean
+    #   resp.global_cluster.storage_encryption_type #=> String, one of "none", "sse-kms", "sse-rds"
     #   resp.global_cluster.deletion_protection #=> Boolean
     #   resp.global_cluster.global_cluster_members #=> Array
     #   resp.global_cluster.global_cluster_members[0].db_cluster_arn #=> String
@@ -9679,6 +9687,7 @@ module Aws::RDS
     #   resp.db_cluster.vpc_security_groups[0].status #=> String
     #   resp.db_cluster.hosted_zone_id #=> String
     #   resp.db_cluster.storage_encrypted #=> Boolean
+    #   resp.db_cluster.storage_encryption_type #=> String, one of "none", "sse-kms", "sse-rds"
     #   resp.db_cluster.kms_key_id #=> String
     #   resp.db_cluster.db_cluster_resource_id #=> String
     #   resp.db_cluster.db_cluster_arn #=> String
@@ -9820,6 +9829,7 @@ module Aws::RDS
     #   resp.db_cluster_automated_backup.iam_database_authentication_enabled #=> Boolean
     #   resp.db_cluster_automated_backup.cluster_create_time #=> Time
     #   resp.db_cluster_automated_backup.storage_encrypted #=> Boolean
+    #   resp.db_cluster_automated_backup.storage_encryption_type #=> String, one of "none", "sse-kms", "sse-rds"
     #   resp.db_cluster_automated_backup.allocated_storage #=> Integer
     #   resp.db_cluster_automated_backup.engine_version #=> String
     #   resp.db_cluster_automated_backup.db_cluster_arn #=> String
@@ -10072,6 +10082,7 @@ module Aws::RDS
     #   resp.db_cluster_snapshot.snapshot_type #=> String
     #   resp.db_cluster_snapshot.percent_progress #=> Integer
     #   resp.db_cluster_snapshot.storage_encrypted #=> Boolean
+    #   resp.db_cluster_snapshot.storage_encryption_type #=> String, one of "none", "sse-kms", "sse-rds"
     #   resp.db_cluster_snapshot.backup_retention_period #=> Integer
     #   resp.db_cluster_snapshot.preferred_backup_window #=> String
     #   resp.db_cluster_snapshot.kms_key_id #=> String
@@ -10321,6 +10332,7 @@ module Aws::RDS
     #   resp.db_instance.status_infos[0].status #=> String
     #   resp.db_instance.status_infos[0].message #=> String
     #   resp.db_instance.storage_type #=> String
+    #   resp.db_instance.storage_encryption_type #=> String, one of "none", "sse-kms", "sse-rds"
     #   resp.db_instance.tde_credential_arn #=> String
     #   resp.db_instance.db_instance_port #=> Integer
     #   resp.db_instance.db_cluster_identifier #=> String
@@ -10499,6 +10511,7 @@ module Aws::RDS
     #   resp.db_instance_automated_backup.option_group_name #=> String
     #   resp.db_instance_automated_backup.tde_credential_arn #=> String
     #   resp.db_instance_automated_backup.encrypted #=> Boolean
+    #   resp.db_instance_automated_backup.storage_encryption_type #=> String, one of "none", "sse-kms", "sse-rds"
     #   resp.db_instance_automated_backup.storage_type #=> String
     #   resp.db_instance_automated_backup.kms_key_id #=> String
     #   resp.db_instance_automated_backup.timezone #=> String
@@ -10871,6 +10884,7 @@ module Aws::RDS
     #   resp.db_snapshot.storage_type #=> String
     #   resp.db_snapshot.tde_credential_arn #=> String
     #   resp.db_snapshot.encrypted #=> Boolean
+    #   resp.db_snapshot.storage_encryption_type #=> String, one of "none", "sse-kms", "sse-rds"
     #   resp.db_snapshot.backup_retention_period #=> Integer
     #   resp.db_snapshot.preferred_backup_window #=> String
     #   resp.db_snapshot.kms_key_id #=> String
@@ -11079,6 +11093,7 @@ module Aws::RDS
     #   resp.global_cluster.engine_lifecycle_support #=> String
     #   resp.global_cluster.database_name #=> String
     #   resp.global_cluster.storage_encrypted #=> Boolean
+    #   resp.global_cluster.storage_encryption_type #=> String, one of "none", "sse-kms", "sse-rds"
     #   resp.global_cluster.deletion_protection #=> Boolean
     #   resp.global_cluster.global_cluster_members #=> Array
     #   resp.global_cluster.global_cluster_members[0].db_cluster_arn #=> String
@@ -12003,6 +12018,7 @@ module Aws::RDS
     #   resp.db_cluster_automated_backups[0].iam_database_authentication_enabled #=> Boolean
     #   resp.db_cluster_automated_backups[0].cluster_create_time #=> Time
     #   resp.db_cluster_automated_backups[0].storage_encrypted #=> Boolean
+    #   resp.db_cluster_automated_backups[0].storage_encryption_type #=> String, one of "none", "sse-kms", "sse-rds"
     #   resp.db_cluster_automated_backups[0].allocated_storage #=> Integer
     #   resp.db_cluster_automated_backups[0].engine_version #=> String
     #   resp.db_cluster_automated_backups[0].db_cluster_arn #=> String
@@ -12916,6 +12932,7 @@ module Aws::RDS
     #   resp.db_cluster_snapshots[0].snapshot_type #=> String
     #   resp.db_cluster_snapshots[0].percent_progress #=> Integer
     #   resp.db_cluster_snapshots[0].storage_encrypted #=> Boolean
+    #   resp.db_cluster_snapshots[0].storage_encryption_type #=> String, one of "none", "sse-kms", "sse-rds"
     #   resp.db_cluster_snapshots[0].backup_retention_period #=> Integer
     #   resp.db_cluster_snapshots[0].preferred_backup_window #=> String
     #   resp.db_cluster_snapshots[0].kms_key_id #=> String
@@ -13188,6 +13205,7 @@ module Aws::RDS
     #   resp.db_clusters[0].vpc_security_groups[0].status #=> String
     #   resp.db_clusters[0].hosted_zone_id #=> String
     #   resp.db_clusters[0].storage_encrypted #=> Boolean
+    #   resp.db_clusters[0].storage_encryption_type #=> String, one of "none", "sse-kms", "sse-rds"
     #   resp.db_clusters[0].kms_key_id #=> String
     #   resp.db_clusters[0].db_cluster_resource_id #=> String
     #   resp.db_clusters[0].db_cluster_arn #=> String
@@ -13737,6 +13755,7 @@ module Aws::RDS
     #   resp.db_instance_automated_backups[0].option_group_name #=> String
     #   resp.db_instance_automated_backups[0].tde_credential_arn #=> String
     #   resp.db_instance_automated_backups[0].encrypted #=> Boolean
+    #   resp.db_instance_automated_backups[0].storage_encryption_type #=> String, one of "none", "sse-kms", "sse-rds"
     #   resp.db_instance_automated_backups[0].storage_type #=> String
     #   resp.db_instance_automated_backups[0].kms_key_id #=> String
     #   resp.db_instance_automated_backups[0].timezone #=> String
@@ -13979,6 +13998,7 @@ module Aws::RDS
     #   resp.db_instances[0].status_infos[0].status #=> String
     #   resp.db_instances[0].status_infos[0].message #=> String
     #   resp.db_instances[0].storage_type #=> String
+    #   resp.db_instances[0].storage_encryption_type #=> String, one of "none", "sse-kms", "sse-rds"
     #   resp.db_instances[0].tde_credential_arn #=> String
     #   resp.db_instances[0].db_instance_port #=> Integer
     #   resp.db_instances[0].db_cluster_identifier #=> String
@@ -15664,6 +15684,7 @@ module Aws::RDS
     #   resp.db_snapshots[0].storage_type #=> String
     #   resp.db_snapshots[0].tde_credential_arn #=> String
     #   resp.db_snapshots[0].encrypted #=> Boolean
+    #   resp.db_snapshots[0].storage_encryption_type #=> String, one of "none", "sse-kms", "sse-rds"
     #   resp.db_snapshots[0].backup_retention_period #=> Integer
     #   resp.db_snapshots[0].preferred_backup_window #=> String
     #   resp.db_snapshots[0].kms_key_id #=> String
@@ -16832,6 +16853,7 @@ module Aws::RDS
     #   resp.global_clusters[0].engine_lifecycle_support #=> String
     #   resp.global_clusters[0].database_name #=> String
     #   resp.global_clusters[0].storage_encrypted #=> Boolean
+    #   resp.global_clusters[0].storage_encryption_type #=> String, one of "none", "sse-kms", "sse-rds"
     #   resp.global_clusters[0].deletion_protection #=> Boolean
     #   resp.global_clusters[0].global_cluster_members #=> Array
     #   resp.global_clusters[0].global_cluster_members[0].db_cluster_arn #=> String
@@ -18712,6 +18734,7 @@ module Aws::RDS
     #   resp.db_cluster.vpc_security_groups[0].status #=> String
     #   resp.db_cluster.hosted_zone_id #=> String
     #   resp.db_cluster.storage_encrypted #=> Boolean
+    #   resp.db_cluster.storage_encryption_type #=> String, one of "none", "sse-kms", "sse-rds"
     #   resp.db_cluster.kms_key_id #=> String
     #   resp.db_cluster.db_cluster_resource_id #=> String
     #   resp.db_cluster.db_cluster_arn #=> String
@@ -18937,6 +18960,7 @@ module Aws::RDS
     #   resp.global_cluster.engine_lifecycle_support #=> String
     #   resp.global_cluster.database_name #=> String
     #   resp.global_cluster.storage_encrypted #=> Boolean
+    #   resp.global_cluster.storage_encryption_type #=> String, one of "none", "sse-kms", "sse-rds"
     #   resp.global_cluster.deletion_protection #=> Boolean
     #   resp.global_cluster.global_cluster_members #=> Array
     #   resp.global_cluster.global_cluster_members[0].db_cluster_arn #=> String
@@ -20477,6 +20501,7 @@ module Aws::RDS
     #   resp.db_cluster.vpc_security_groups[0].status #=> String
     #   resp.db_cluster.hosted_zone_id #=> String
     #   resp.db_cluster.storage_encrypted #=> Boolean
+    #   resp.db_cluster.storage_encryption_type #=> String, one of "none", "sse-kms", "sse-rds"
     #   resp.db_cluster.kms_key_id #=> String
     #   resp.db_cluster.db_cluster_resource_id #=> String
     #   resp.db_cluster.db_cluster_arn #=> String
@@ -22362,6 +22387,7 @@ module Aws::RDS
     #   resp.db_instance.status_infos[0].status #=> String
     #   resp.db_instance.status_infos[0].message #=> String
     #   resp.db_instance.storage_type #=> String
+    #   resp.db_instance.storage_encryption_type #=> String, one of "none", "sse-kms", "sse-rds"
     #   resp.db_instance.tde_credential_arn #=> String
     #   resp.db_instance.db_instance_port #=> Integer
     #   resp.db_instance.db_cluster_identifier #=> String
@@ -23155,6 +23181,7 @@ module Aws::RDS
     #   resp.db_snapshot.storage_type #=> String
     #   resp.db_snapshot.tde_credential_arn #=> String
     #   resp.db_snapshot.encrypted #=> Boolean
+    #   resp.db_snapshot.storage_encryption_type #=> String, one of "none", "sse-kms", "sse-rds"
     #   resp.db_snapshot.backup_retention_period #=> Integer
     #   resp.db_snapshot.preferred_backup_window #=> String
     #   resp.db_snapshot.kms_key_id #=> String
@@ -23693,6 +23720,7 @@ module Aws::RDS
     #   resp.global_cluster.engine_lifecycle_support #=> String
     #   resp.global_cluster.database_name #=> String
     #   resp.global_cluster.storage_encrypted #=> Boolean
+    #   resp.global_cluster.storage_encryption_type #=> String, one of "none", "sse-kms", "sse-rds"
     #   resp.global_cluster.deletion_protection #=> Boolean
     #   resp.global_cluster.global_cluster_members #=> Array
     #   resp.global_cluster.global_cluster_members[0].db_cluster_arn #=> String
@@ -24357,6 +24385,7 @@ module Aws::RDS
     #   resp.db_instance.status_infos[0].status #=> String
     #   resp.db_instance.status_infos[0].message #=> String
     #   resp.db_instance.storage_type #=> String
+    #   resp.db_instance.storage_encryption_type #=> String, one of "none", "sse-kms", "sse-rds"
     #   resp.db_instance.tde_credential_arn #=> String
     #   resp.db_instance.db_instance_port #=> Integer
     #   resp.db_instance.db_cluster_identifier #=> String
@@ -24521,6 +24550,7 @@ module Aws::RDS
     #   resp.db_cluster.vpc_security_groups[0].status #=> String
     #   resp.db_cluster.hosted_zone_id #=> String
     #   resp.db_cluster.storage_encrypted #=> Boolean
+    #   resp.db_cluster.storage_encryption_type #=> String, one of "none", "sse-kms", "sse-rds"
     #   resp.db_cluster.kms_key_id #=> String
     #   resp.db_cluster.db_cluster_resource_id #=> String
     #   resp.db_cluster.db_cluster_arn #=> String
@@ -24827,6 +24857,7 @@ module Aws::RDS
     #   resp.db_cluster.vpc_security_groups[0].status #=> String
     #   resp.db_cluster.hosted_zone_id #=> String
     #   resp.db_cluster.storage_encrypted #=> Boolean
+    #   resp.db_cluster.storage_encryption_type #=> String, one of "none", "sse-kms", "sse-rds"
     #   resp.db_cluster.kms_key_id #=> String
     #   resp.db_cluster.db_cluster_resource_id #=> String
     #   resp.db_cluster.db_cluster_arn #=> String
@@ -25106,6 +25137,7 @@ module Aws::RDS
     #   resp.db_instance.status_infos[0].status #=> String
     #   resp.db_instance.status_infos[0].message #=> String
     #   resp.db_instance.storage_type #=> String
+    #   resp.db_instance.storage_encryption_type #=> String, one of "none", "sse-kms", "sse-rds"
     #   resp.db_instance.tde_credential_arn #=> String
     #   resp.db_instance.db_instance_port #=> Integer
     #   resp.db_instance.db_cluster_identifier #=> String
@@ -25385,6 +25417,7 @@ module Aws::RDS
     #   resp.global_cluster.engine_lifecycle_support #=> String
     #   resp.global_cluster.database_name #=> String
     #   resp.global_cluster.storage_encrypted #=> Boolean
+    #   resp.global_cluster.storage_encryption_type #=> String, one of "none", "sse-kms", "sse-rds"
     #   resp.global_cluster.deletion_protection #=> Boolean
     #   resp.global_cluster.global_cluster_members #=> Array
     #   resp.global_cluster.global_cluster_members[0].db_cluster_arn #=> String
@@ -26469,6 +26502,7 @@ module Aws::RDS
     #   resp.db_cluster.vpc_security_groups[0].status #=> String
     #   resp.db_cluster.hosted_zone_id #=> String
     #   resp.db_cluster.storage_encrypted #=> Boolean
+    #   resp.db_cluster.storage_encryption_type #=> String, one of "none", "sse-kms", "sse-rds"
     #   resp.db_cluster.kms_key_id #=> String
     #   resp.db_cluster.db_cluster_resource_id #=> String
     #   resp.db_cluster.db_cluster_arn #=> String
@@ -27358,6 +27392,7 @@ module Aws::RDS
     #   resp.db_cluster.vpc_security_groups[0].status #=> String
     #   resp.db_cluster.hosted_zone_id #=> String
     #   resp.db_cluster.storage_encrypted #=> Boolean
+    #   resp.db_cluster.storage_encryption_type #=> String, one of "none", "sse-kms", "sse-rds"
     #   resp.db_cluster.kms_key_id #=> String
     #   resp.db_cluster.db_cluster_resource_id #=> String
     #   resp.db_cluster.db_cluster_arn #=> String
@@ -28230,6 +28265,7 @@ module Aws::RDS
     #   resp.db_cluster.vpc_security_groups[0].status #=> String
     #   resp.db_cluster.hosted_zone_id #=> String
     #   resp.db_cluster.storage_encrypted #=> Boolean
+    #   resp.db_cluster.storage_encryption_type #=> String, one of "none", "sse-kms", "sse-rds"
     #   resp.db_cluster.kms_key_id #=> String
     #   resp.db_cluster.db_cluster_resource_id #=> String
     #   resp.db_cluster.db_cluster_arn #=> String
@@ -29297,6 +29333,7 @@ module Aws::RDS
     #   resp.db_instance.status_infos[0].status #=> String
     #   resp.db_instance.status_infos[0].message #=> String
     #   resp.db_instance.storage_type #=> String
+    #   resp.db_instance.storage_encryption_type #=> String, one of "none", "sse-kms", "sse-rds"
     #   resp.db_instance.tde_credential_arn #=> String
     #   resp.db_instance.db_instance_port #=> Integer
     #   resp.db_instance.db_cluster_identifier #=> String
@@ -30169,6 +30206,7 @@ module Aws::RDS
     #   resp.db_instance.status_infos[0].status #=> String
     #   resp.db_instance.status_infos[0].message #=> String
     #   resp.db_instance.storage_type #=> String
+    #   resp.db_instance.storage_encryption_type #=> String, one of "none", "sse-kms", "sse-rds"
     #   resp.db_instance.tde_credential_arn #=> String
     #   resp.db_instance.db_instance_port #=> Integer
     #   resp.db_instance.db_cluster_identifier #=> String
@@ -31288,6 +31326,7 @@ module Aws::RDS
     #   resp.db_instance.status_infos[0].status #=> String
     #   resp.db_instance.status_infos[0].message #=> String
     #   resp.db_instance.storage_type #=> String
+    #   resp.db_instance.storage_encryption_type #=> String, one of "none", "sse-kms", "sse-rds"
     #   resp.db_instance.tde_credential_arn #=> String
     #   resp.db_instance.db_instance_port #=> Integer
     #   resp.db_instance.db_cluster_identifier #=> String
@@ -31680,6 +31719,7 @@ module Aws::RDS
     #   resp.db_cluster.vpc_security_groups[0].status #=> String
     #   resp.db_cluster.hosted_zone_id #=> String
     #   resp.db_cluster.storage_encrypted #=> Boolean
+    #   resp.db_cluster.storage_encryption_type #=> String, one of "none", "sse-kms", "sse-rds"
     #   resp.db_cluster.kms_key_id #=> String
     #   resp.db_cluster.db_cluster_resource_id #=> String
     #   resp.db_cluster.db_cluster_arn #=> String
@@ -31931,6 +31971,7 @@ module Aws::RDS
     #   resp.db_instance.status_infos[0].status #=> String
     #   resp.db_instance.status_infos[0].message #=> String
     #   resp.db_instance.storage_type #=> String
+    #   resp.db_instance.storage_encryption_type #=> String, one of "none", "sse-kms", "sse-rds"
     #   resp.db_instance.tde_credential_arn #=> String
     #   resp.db_instance.db_instance_port #=> Integer
     #   resp.db_instance.db_cluster_identifier #=> String
@@ -32168,6 +32209,7 @@ module Aws::RDS
     #   resp.db_instance_automated_backup.option_group_name #=> String
     #   resp.db_instance_automated_backup.tde_credential_arn #=> String
     #   resp.db_instance_automated_backup.encrypted #=> Boolean
+    #   resp.db_instance_automated_backup.storage_encryption_type #=> String, one of "none", "sse-kms", "sse-rds"
     #   resp.db_instance_automated_backup.storage_type #=> String
     #   resp.db_instance_automated_backup.kms_key_id #=> String
     #   resp.db_instance_automated_backup.timezone #=> String
@@ -32554,6 +32596,7 @@ module Aws::RDS
     #   resp.db_cluster.vpc_security_groups[0].status #=> String
     #   resp.db_cluster.hosted_zone_id #=> String
     #   resp.db_cluster.storage_encrypted #=> Boolean
+    #   resp.db_cluster.storage_encryption_type #=> String, one of "none", "sse-kms", "sse-rds"
     #   resp.db_cluster.kms_key_id #=> String
     #   resp.db_cluster.db_cluster_resource_id #=> String
     #   resp.db_cluster.db_cluster_arn #=> String
@@ -32813,6 +32856,7 @@ module Aws::RDS
     #   resp.db_instance.status_infos[0].status #=> String
     #   resp.db_instance.status_infos[0].message #=> String
     #   resp.db_instance.storage_type #=> String
+    #   resp.db_instance.storage_encryption_type #=> String, one of "none", "sse-kms", "sse-rds"
     #   resp.db_instance.tde_credential_arn #=> String
     #   resp.db_instance.db_instance_port #=> Integer
     #   resp.db_instance.db_cluster_identifier #=> String
@@ -32993,6 +33037,7 @@ module Aws::RDS
     #   resp.db_instance_automated_backup.option_group_name #=> String
     #   resp.db_instance_automated_backup.tde_credential_arn #=> String
     #   resp.db_instance_automated_backup.encrypted #=> Boolean
+    #   resp.db_instance_automated_backup.storage_encryption_type #=> String, one of "none", "sse-kms", "sse-rds"
     #   resp.db_instance_automated_backup.storage_type #=> String
     #   resp.db_instance_automated_backup.kms_key_id #=> String
     #   resp.db_instance_automated_backup.timezone #=> String
@@ -33298,6 +33343,7 @@ module Aws::RDS
     #   resp.global_cluster.engine_lifecycle_support #=> String
     #   resp.global_cluster.database_name #=> String
     #   resp.global_cluster.storage_encrypted #=> Boolean
+    #   resp.global_cluster.storage_encryption_type #=> String, one of "none", "sse-kms", "sse-rds"
     #   resp.global_cluster.deletion_protection #=> Boolean
     #   resp.global_cluster.global_cluster_members #=> Array
     #   resp.global_cluster.global_cluster_members[0].db_cluster_arn #=> String
@@ -33448,6 +33494,7 @@ module Aws::RDS
     #   resp.db_instance.status_infos[0].status #=> String
     #   resp.db_instance.status_infos[0].message #=> String
     #   resp.db_instance.storage_type #=> String
+    #   resp.db_instance.storage_encryption_type #=> String, one of "none", "sse-kms", "sse-rds"
     #   resp.db_instance.tde_credential_arn #=> String
     #   resp.db_instance.db_instance_port #=> Integer
     #   resp.db_instance.db_cluster_identifier #=> String
@@ -33558,7 +33605,7 @@ module Aws::RDS
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.307.0'
+      context[:gem_version] = '1.308.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

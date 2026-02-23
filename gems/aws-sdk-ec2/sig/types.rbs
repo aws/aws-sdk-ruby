@@ -2804,6 +2804,7 @@ module Aws::EC2
       attr_accessor tag_specifications: ::Array[Types::TagSpecification]
       attr_accessor spread_level: ("host" | "rack")
       attr_accessor linked_group_id: ::String
+      attr_accessor operator: Types::OperatorRequest
       attr_accessor dry_run: bool
       attr_accessor group_name: ::String
       attr_accessor strategy: ("cluster" | "spread" | "partition")
@@ -14767,6 +14768,7 @@ module Aws::EC2
       attr_accessor group_arn: ::String
       attr_accessor spread_level: ("host" | "rack")
       attr_accessor linked_group_id: ::String
+      attr_accessor operator: Types::OperatorResponse
       SENSITIVE: []
     end
 

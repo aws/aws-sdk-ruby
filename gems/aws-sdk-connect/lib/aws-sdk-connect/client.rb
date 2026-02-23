@@ -3785,8 +3785,8 @@ module Aws::Connect
     end
 
     # Creates a new notification to be delivered to specified recipients.
-    # Notifications can include localized content with embedded links, and
-    # an optional expiration time. Recipients can be specified as individual
+    # Notifications can include localized content with links, and an
+    # optional expiration time. Recipients can be specified as individual
     # user ARNs or instance ARNs to target all users in an instance.
     #
     # @option params [required, String] :instance_id
@@ -3815,8 +3815,7 @@ module Aws::Connect
     # @option params [required, Hash<String,String>] :content
     #   The localized content of the notification. A map where keys are locale
     #   codes and values are the notification text in that locale. Content
-    #   supports markdown formatting and embedded links. Maximum 250
-    #   characters per locale.
+    #   supports links. Maximum 250 characters per locale.
     #
     # @option params [Hash<String,String>] :tags
     #   The tags used to organize, track, or control access for this resource.
@@ -28606,7 +28605,7 @@ module Aws::Connect
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-connect'
-      context[:gem_version] = '1.242.0'
+      context[:gem_version] = '1.243.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

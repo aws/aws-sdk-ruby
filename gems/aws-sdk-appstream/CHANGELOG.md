@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.128.0 (2026-02-20)
+------------------
+
+* Feature - Adding new attribute to disable IMDS v1 APIs for fleet, Image Builder and AppBlockBuilder instances.
+
 1.127.0 (2026-01-16)
 ------------------
 

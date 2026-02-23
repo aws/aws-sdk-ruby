@@ -84,9 +84,9 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ManagedGrafana/Client.html#associate_license-instance_method
       def associate_license: (
-                               ?grafana_token: ::String,
+                               workspace_id: ::String,
                                license_type: ("ENTERPRISE" | "ENTERPRISE_FREE_TRIAL"),
-                               workspace_id: ::String
+                               ?grafana_token: ::String
                              ) -> _AssociateLicenseResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateLicenseResponseSuccess
 
@@ -97,35 +97,36 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ManagedGrafana/Client.html#create_workspace-instance_method
       def create_workspace: (
                               account_access_type: ("CURRENT_ACCOUNT" | "ORGANIZATION"),
-                              authentication_providers: Array[("AWS_SSO" | "SAML")],
                               ?client_token: ::String,
-                              ?configuration: ::String,
-                              ?grafana_version: ::String,
-                              ?network_access_control: {
-                                prefix_list_ids: Array[::String],
-                                vpce_ids: Array[::String]
-                              },
                               ?organization_role_name: ::String,
                               permission_type: ("CUSTOMER_MANAGED" | "SERVICE_MANAGED"),
                               ?stack_set_name: ::String,
-                              ?tags: Hash[::String, ::String],
-                              ?vpc_configuration: {
-                                security_group_ids: Array[::String],
-                                subnet_ids: Array[::String]
-                              },
                               ?workspace_data_sources: Array[("AMAZON_OPENSEARCH_SERVICE" | "CLOUDWATCH" | "PROMETHEUS" | "XRAY" | "TIMESTREAM" | "SITEWISE" | "ATHENA" | "REDSHIFT" | "TWINMAKER")],
                               ?workspace_description: ::String,
                               ?workspace_name: ::String,
                               ?workspace_notification_destinations: Array[("SNS")],
                               ?workspace_organizational_units: Array[::String],
-                              ?workspace_role_arn: ::String
+                              ?workspace_role_arn: ::String,
+                              authentication_providers: Array[("AWS_SSO" | "SAML")],
+                              ?tags: Hash[::String, ::String],
+                              ?vpc_configuration: {
+                                security_group_ids: Array[::String],
+                                subnet_ids: Array[::String]
+                              },
+                              ?configuration: ::String,
+                              ?network_access_control: {
+                                prefix_list_ids: Array[::String],
+                                vpce_ids: Array[::String]
+                              },
+                              ?grafana_version: ::String,
+                              ?kms_key_id: ::String
                             ) -> _CreateWorkspaceResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateWorkspaceResponseSuccess
 
       interface _CreateWorkspaceApiKeyResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateWorkspaceApiKeyResponse]
-        def key: () -> ::String
         def key_name: () -> ::String
+        def key: () -> ::String
         def workspace_id: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ManagedGrafana/Client.html#create_workspace_api_key-instance_method
@@ -139,23 +140,23 @@ module Aws
 
       interface _CreateWorkspaceServiceAccountResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateWorkspaceServiceAccountResponse]
-        def grafana_role: () -> ("ADMIN" | "EDITOR" | "VIEWER")
         def id: () -> ::String
         def name: () -> ::String
+        def grafana_role: () -> ("ADMIN" | "EDITOR" | "VIEWER")
         def workspace_id: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ManagedGrafana/Client.html#create_workspace_service_account-instance_method
       def create_workspace_service_account: (
-                                              grafana_role: ("ADMIN" | "EDITOR" | "VIEWER"),
                                               name: ::String,
+                                              grafana_role: ("ADMIN" | "EDITOR" | "VIEWER"),
                                               workspace_id: ::String
                                             ) -> _CreateWorkspaceServiceAccountResponseSuccess
                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateWorkspaceServiceAccountResponseSuccess
 
       interface _CreateWorkspaceServiceAccountTokenResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateWorkspaceServiceAccountTokenResponse]
-        def service_account_id: () -> ::String
         def service_account_token: () -> Types::ServiceAccountTokenSummaryWithKey
+        def service_account_id: () -> ::String
         def workspace_id: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ManagedGrafana/Client.html#create_workspace_service_account_token-instance_method
@@ -203,14 +204,14 @@ module Aws
 
       interface _DeleteWorkspaceServiceAccountTokenResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteWorkspaceServiceAccountTokenResponse]
-        def service_account_id: () -> ::String
         def token_id: () -> ::String
+        def service_account_id: () -> ::String
         def workspace_id: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ManagedGrafana/Client.html#delete_workspace_service_account_token-instance_method
       def delete_workspace_service_account_token: (
-                                                    service_account_id: ::String,
                                                     token_id: ::String,
+                                                    service_account_id: ::String,
                                                     workspace_id: ::String
                                                   ) -> _DeleteWorkspaceServiceAccountTokenResponseSuccess
                                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteWorkspaceServiceAccountTokenResponseSuccess
@@ -252,8 +253,8 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ManagedGrafana/Client.html#disassociate_license-instance_method
       def disassociate_license: (
-                                  license_type: ("ENTERPRISE" | "ENTERPRISE_FREE_TRIAL"),
-                                  workspace_id: ::String
+                                  workspace_id: ::String,
+                                  license_type: ("ENTERPRISE" | "ENTERPRISE_FREE_TRIAL")
                                 ) -> _DisassociateLicenseResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateLicenseResponseSuccess
 
@@ -264,11 +265,11 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ManagedGrafana/Client.html#list_permissions-instance_method
       def list_permissions: (
-                              ?group_id: ::String,
                               ?max_results: ::Integer,
                               ?next_token: ::String,
-                              ?user_id: ::String,
                               ?user_type: ("SSO_USER" | "SSO_GROUP"),
+                              ?user_id: ::String,
+                              ?group_id: ::String,
                               workspace_id: ::String
                             ) -> _ListPermissionsResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPermissionsResponseSuccess
@@ -285,8 +286,8 @@ module Aws
 
       interface _ListVersionsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListVersionsResponse]
-        def grafana_versions: () -> ::Array[::String]
         def next_token: () -> ::String
+        def grafana_versions: () -> ::Array[::String]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ManagedGrafana/Client.html#list_versions-instance_method
       def list_versions: (
@@ -299,8 +300,8 @@ module Aws
       interface _ListWorkspaceServiceAccountTokensResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListWorkspaceServiceAccountTokensResponse]
         def next_token: () -> ::String
-        def service_account_id: () -> ::String
         def service_account_tokens: () -> ::Array[Types::ServiceAccountTokenSummary]
+        def service_account_id: () -> ::String
         def workspace_id: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ManagedGrafana/Client.html#list_workspace_service_account_tokens-instance_method
@@ -328,8 +329,8 @@ module Aws
 
       interface _ListWorkspacesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListWorkspacesResponse]
-        def next_token: () -> ::String
         def workspaces: () -> ::Array[Types::WorkspaceSummary]
+        def next_token: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ManagedGrafana/Client.html#list_workspaces-instance_method
       def list_workspaces: (
@@ -387,26 +388,26 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ManagedGrafana/Client.html#update_workspace-instance_method
       def update_workspace: (
                               ?account_access_type: ("CURRENT_ACCOUNT" | "ORGANIZATION"),
-                              ?network_access_control: {
-                                prefix_list_ids: Array[::String],
-                                vpce_ids: Array[::String]
-                              },
                               ?organization_role_name: ::String,
                               ?permission_type: ("CUSTOMER_MANAGED" | "SERVICE_MANAGED"),
-                              ?remove_network_access_configuration: bool,
-                              ?remove_vpc_configuration: bool,
                               ?stack_set_name: ::String,
-                              ?vpc_configuration: {
-                                security_group_ids: Array[::String],
-                                subnet_ids: Array[::String]
-                              },
                               ?workspace_data_sources: Array[("AMAZON_OPENSEARCH_SERVICE" | "CLOUDWATCH" | "PROMETHEUS" | "XRAY" | "TIMESTREAM" | "SITEWISE" | "ATHENA" | "REDSHIFT" | "TWINMAKER")],
                               ?workspace_description: ::String,
                               workspace_id: ::String,
                               ?workspace_name: ::String,
                               ?workspace_notification_destinations: Array[("SNS")],
                               ?workspace_organizational_units: Array[::String],
-                              ?workspace_role_arn: ::String
+                              ?workspace_role_arn: ::String,
+                              ?vpc_configuration: {
+                                security_group_ids: Array[::String],
+                                subnet_ids: Array[::String]
+                              },
+                              ?remove_vpc_configuration: bool,
+                              ?network_access_control: {
+                                prefix_list_ids: Array[::String],
+                                vpce_ids: Array[::String]
+                              },
+                              ?remove_network_access_configuration: bool
                             ) -> _UpdateWorkspaceResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateWorkspaceResponseSuccess
 
@@ -416,28 +417,28 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ManagedGrafana/Client.html#update_workspace_authentication-instance_method
       def update_workspace_authentication: (
+                                             workspace_id: ::String,
                                              authentication_providers: Array[("AWS_SSO" | "SAML")],
                                              ?saml_configuration: {
-                                               allowed_organizations: Array[::String]?,
-                                               assertion_attributes: {
-                                                 email: ::String?,
-                                                 groups: ::String?,
-                                                 login: ::String?,
-                                                 name: ::String?,
-                                                 org: ::String?,
-                                                 role: ::String?
-                                               }?,
                                                idp_metadata: {
                                                  url: ::String?,
                                                  xml: ::String?
                                                },
-                                               login_validity_duration: ::Integer?,
+                                               assertion_attributes: {
+                                                 name: ::String?,
+                                                 login: ::String?,
+                                                 email: ::String?,
+                                                 groups: ::String?,
+                                                 role: ::String?,
+                                                 org: ::String?
+                                               }?,
                                                role_values: {
-                                                 admin: Array[::String]?,
-                                                 editor: Array[::String]?
-                                               }?
-                                             },
-                                             workspace_id: ::String
+                                                 editor: Array[::String]?,
+                                                 admin: Array[::String]?
+                                               }?,
+                                               allowed_organizations: Array[::String]?,
+                                               login_validity_duration: ::Integer?
+                                             }
                                            ) -> _UpdateWorkspaceAuthenticationResponseSuccess
                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateWorkspaceAuthenticationResponseSuccess
 
@@ -447,8 +448,8 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ManagedGrafana/Client.html#update_workspace_configuration-instance_method
       def update_workspace_configuration: (
                                             configuration: ::String,
-                                            ?grafana_version: ::String,
-                                            workspace_id: ::String
+                                            workspace_id: ::String,
+                                            ?grafana_version: ::String
                                           ) -> _UpdateWorkspaceConfigurationResponseSuccess
                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateWorkspaceConfigurationResponseSuccess
     end

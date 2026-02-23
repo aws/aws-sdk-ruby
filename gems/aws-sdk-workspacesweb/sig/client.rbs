@@ -450,7 +450,7 @@ module Aws
                                     wallpaper: {
                                       blob: ::String?,
                                       s3_uri: ::String?
-                                    },
+                                    }?,
                                     favicon: {
                                       blob: ::String?,
                                       s3_uri: ::String?

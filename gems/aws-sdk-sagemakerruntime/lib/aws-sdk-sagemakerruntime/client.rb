@@ -747,6 +747,15 @@ module Aws::SageMakerRuntime
     # @option params [required, String] :input_location
     #   The Amazon S3 URI where the inference request payload is stored.
     #
+    # @option params [String] :s3_output_path_extension
+    #   The path extension that is appended to the Amazon S3 output path where
+    #   the inference response payload is stored.
+    #
+    # @option params [String] :filename
+    #   The filename for the inference response payload stored in Amazon S3.
+    #   If not specified, Amazon SageMaker AI generates a filename based on
+    #   the inference ID.
+    #
     # @option params [Integer] :request_ttl_seconds
     #   Maximum age in seconds a request can be in the queue before it is
     #   marked as expired. The default is 6 hours, or 21,600 seconds.
@@ -770,6 +779,8 @@ module Aws::SageMakerRuntime
     #     custom_attributes: "CustomAttributesHeader",
     #     inference_id: "InferenceId",
     #     input_location: "InputLocationHeader", # required
+    #     s3_output_path_extension: "S3OutputPathExtensionHeader",
+    #     filename: "FilenameHeader",
     #     request_ttl_seconds: 1,
     #     invocation_timeout_seconds: 1,
     #   })
@@ -1108,7 +1119,7 @@ module Aws::SageMakerRuntime
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-sagemakerruntime'
-      context[:gem_version] = '1.94.0'
+      context[:gem_version] = '1.95.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

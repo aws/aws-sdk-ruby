@@ -108,6 +108,9 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBCluster.html#storage_encrypted-instance_method
       def storage_encrypted: () -> bool
 
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBCluster.html#storage_encryption_type-instance_method
+      def storage_encryption_type: () -> ("none" | "sse-kms" | "sse-rds")
+
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBCluster.html#kms_key_id-instance_method
       def kms_key_id: () -> ::String
 

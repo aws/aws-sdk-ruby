@@ -1604,7 +1604,6 @@ module Aws::KMS
     #
     #
     # Multi-Region primary keys
-    # Imported key material
     #
     # : To create a multi-Region *primary key* in the local Amazon Web
     #   Services Region, use the `MultiRegion` parameter with a value of
@@ -1631,6 +1630,8 @@ module Aws::KMS
     #   Management Service Developer Guide*.
     #
     #
+    #
+    # Imported key material
     #
     # : To import your own key material into a KMS key, begin by creating a
     #   KMS key with no key material. To do this, use the `Origin` parameter
@@ -2591,8 +2592,11 @@ module Aws::KMS
     # [9]: https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html
     # [10]: https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency
     #
-    # @option params [required, String, StringIO, File] :ciphertext_blob
+    # @option params [String, StringIO, File] :ciphertext_blob
     #   Ciphertext to be decrypted. The blob includes metadata.
+    #
+    #   This parameter is required in all cases except when `DryRun` is `true`
+    #   and `DryRunModifiers` is set to `IGNORE_CIPHERTEXT`.
     #
     # @option params [Hash<String,String>] :encryption_context
     #   Specifies the encryption context to use when decrypting the data. An
@@ -2638,11 +2642,12 @@ module Aws::KMS
     #   `IncorrectKeyException`.
     #
     #   This parameter is required only when the ciphertext was encrypted
-    #   under an asymmetric KMS key. If you used a symmetric encryption KMS
-    #   key, KMS can get the KMS key from metadata that it adds to the
-    #   symmetric ciphertext blob. However, it is always recommended as a best
-    #   practice. This practice ensures that you use the KMS key that you
-    #   intend.
+    #   under an asymmetric KMS key or when `DryRun` is `true` and
+    #   `DryRunModifiers` is set to `IGNORE_CIPHERTEXT`. If you used a
+    #   symmetric encryption KMS key, KMS can get the KMS key from metadata
+    #   that it adds to the symmetric ciphertext blob. However, it is always
+    #   recommended as a best practice. This practice ensures that you use the
+    #   KMS key that you intend.
     #
     #   To specify a KMS key, use its key ID, key ARN, alias name, or alias
     #   ARN. When using an alias name, prefix it with `"alias/"`. To specify a
@@ -2706,6 +2711,22 @@ module Aws::KMS
     # @option params [Boolean] :dry_run
     #   Checks if your request will succeed. `DryRun` is an optional
     #   parameter.
+    #
+    #   To learn more about how to use this parameter, see [Testing your
+    #   permissions][1] in the *Key Management Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/testing-permissions.html
+    #
+    # @option params [Array<String>] :dry_run_modifiers
+    #   Specifies the modifiers to apply to the dry run operation.
+    #   `DryRunModifiers` is an optional parameter that only applies when
+    #   `DryRun` is set to `true`.
+    #
+    #   When set to `IGNORE_CIPHERTEXT`, KMS performs only authorization
+    #   validation without ciphertext validation. This allows you to test
+    #   permissions without requiring a valid ciphertext blob.
     #
     #   To learn more about how to use this parameter, see [Testing your
     #   permissions][1] in the *Key Management Service Developer Guide*.
@@ -2784,7 +2805,7 @@ module Aws::KMS
     # @example Request syntax with placeholder values
     #
     #   resp = client.decrypt({
-    #     ciphertext_blob: "data", # required
+    #     ciphertext_blob: "data",
     #     encryption_context: {
     #       "EncryptionContextKey" => "EncryptionContextValue",
     #     },
@@ -2796,6 +2817,7 @@ module Aws::KMS
     #       attestation_document: "data",
     #     },
     #     dry_run: false,
+    #     dry_run_modifiers: ["IGNORE_CIPHERTEXT"], # accepts IGNORE_CIPHERTEXT
     #   })
     #
     # @example Response structure
@@ -8398,8 +8420,11 @@ module Aws::KMS
     # [8]: https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html
     # [9]: https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency
     #
-    # @option params [required, String, StringIO, File] :ciphertext_blob
+    # @option params [String, StringIO, File] :ciphertext_blob
     #   Ciphertext of the data to reencrypt.
+    #
+    #   This parameter is required in all cases except when `DryRun` is `true`
+    #   and `DryRunModifiers` is set to `IGNORE_CIPHERTEXT`.
     #
     # @option params [Hash<String,String>] :source_encryption_context
     #   Specifies the encryption context to use to decrypt the ciphertext.
@@ -8430,11 +8455,12 @@ module Aws::KMS
     #   an `IncorrectKeyException`.
     #
     #   This parameter is required only when the ciphertext was encrypted
-    #   under an asymmetric KMS key. If you used a symmetric encryption KMS
-    #   key, KMS can get the KMS key from metadata that it adds to the
-    #   symmetric ciphertext blob. However, it is always recommended as a best
-    #   practice. This practice ensures that you use the KMS key that you
-    #   intend.
+    #   under an asymmetric KMS key or when `DryRun` is `true` and
+    #   `DryRunModifiers` is set to `IGNORE_CIPHERTEXT`. If you used a
+    #   symmetric encryption KMS key, KMS can get the KMS key from metadata
+    #   that it adds to the symmetric ciphertext blob. However, it is always
+    #   recommended as a best practice. This practice ensures that you use the
+    #   KMS key that you intend.
     #
     #   To specify a KMS key, use its key ID, key ARN, alias name, or alias
     #   ARN. When using an alias name, prefix it with `"alias/"`. To specify a
@@ -8552,6 +8578,22 @@ module Aws::KMS
     #
     #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/testing-permissions.html
     #
+    # @option params [Array<String>] :dry_run_modifiers
+    #   Specifies the modifiers to apply to the dry run operation.
+    #   `DryRunModifiers` is an optional parameter that only applies when
+    #   `DryRun` is set to `true`.
+    #
+    #   When set to `IGNORE_CIPHERTEXT`, KMS performs only authorization
+    #   validation without ciphertext validation. This allows you to test
+    #   permissions without requiring a valid ciphertext blob.
+    #
+    #   To learn more about how to use this parameter, see [Testing your
+    #   permissions][1] in the *Key Management Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/testing-permissions.html
+    #
     # @return [Types::ReEncryptResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ReEncryptResponse#ciphertext_blob #ciphertext_blob} => String
@@ -8586,7 +8628,7 @@ module Aws::KMS
     # @example Request syntax with placeholder values
     #
     #   resp = client.re_encrypt({
-    #     ciphertext_blob: "data", # required
+    #     ciphertext_blob: "data",
     #     source_encryption_context: {
     #       "EncryptionContextKey" => "EncryptionContextValue",
     #     },
@@ -8599,6 +8641,7 @@ module Aws::KMS
     #     destination_encryption_algorithm: "SYMMETRIC_DEFAULT", # accepts SYMMETRIC_DEFAULT, RSAES_OAEP_SHA_1, RSAES_OAEP_SHA_256, SM2PKE
     #     grant_tokens: ["GrantTokenType"],
     #     dry_run: false,
+    #     dry_run_modifiers: ["IGNORE_CIPHERTEXT"], # accepts IGNORE_CIPHERTEXT
     #   })
     #
     # @example Response structure
@@ -9239,7 +9282,7 @@ module Aws::KMS
     # automatically rotate, as scheduled, on April 14, 2024 and every 730
     # days thereafter.
     #
-    # <note markdown="1"> You can perform on-demand key rotation a **maximum of 10 times** per
+    # <note markdown="1"> You can perform on-demand key rotation a **maximum of 25 times** per
     # KMS key. You can use the KMS console to view the number of remaining
     # on-demand rotations available for a KMS key.
     #
@@ -11157,7 +11200,7 @@ module Aws::KMS
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-kms'
-      context[:gem_version] = '1.121.0'
+      context[:gem_version] = '1.122.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

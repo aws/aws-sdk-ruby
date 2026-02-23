@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.34.0 (2026-02-20)
+------------------
+
+* Feature - Adding a new enum attribute(statusReason) to TrustedAdvisorAPI response. This attribute explains reasoning behind check status for certain specific scenarios.
+
 1.33.0 (2026-01-16)
 ------------------
 

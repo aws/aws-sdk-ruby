@@ -49,12 +49,13 @@ module Aws::ManagedGrafana
   end
   autoload :Client, 'aws-sdk-managedgrafana/client'
   autoload :Errors, 'aws-sdk-managedgrafana/errors'
+  autoload :Waiters, 'aws-sdk-managedgrafana/waiters'
   autoload :Resource, 'aws-sdk-managedgrafana/resource'
   autoload :EndpointParameters, 'aws-sdk-managedgrafana/endpoint_parameters'
   autoload :EndpointProvider, 'aws-sdk-managedgrafana/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-managedgrafana/endpoints'
 
-  GEM_VERSION = '1.58.0'
+  GEM_VERSION = '1.59.0'
 
 end
 

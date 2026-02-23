@@ -93,16 +93,16 @@ module Aws::ECS
             operation_name: :describe_services,
             acceptors: [
               {
-                "expected" => "MISSING",
                 "matcher" => "pathAny",
+                "argument" => "failures[].reason",
                 "state" => "failure",
-                "argument" => "failures[].reason"
+                "expected" => "MISSING"
               },
               {
-                "expected" => "INACTIVE",
                 "matcher" => "pathAny",
+                "argument" => "services[].status",
                 "state" => "success",
-                "argument" => "services[].status"
+                "expected" => "INACTIVE"
               }
             ]
           )
@@ -137,28 +137,28 @@ module Aws::ECS
             operation_name: :describe_services,
             acceptors: [
               {
-                "expected" => "MISSING",
                 "matcher" => "pathAny",
+                "argument" => "failures[].reason",
                 "state" => "failure",
-                "argument" => "failures[].reason"
+                "expected" => "MISSING"
               },
               {
-                "expected" => "DRAINING",
                 "matcher" => "pathAny",
+                "argument" => "services[].status",
                 "state" => "failure",
-                "argument" => "services[].status"
+                "expected" => "DRAINING"
               },
               {
-                "expected" => "INACTIVE",
                 "matcher" => "pathAny",
+                "argument" => "services[].status",
                 "state" => "failure",
-                "argument" => "services[].status"
+                "expected" => "INACTIVE"
               },
               {
-                "expected" => true,
                 "matcher" => "path",
+                "argument" => "length(services[?!(length(deployments) == `1` && running_count == desired_count)]) == `0`",
                 "state" => "success",
-                "argument" => "length(services[?!(length(deployments) == `1` && running_count == desired_count)]) == `0`"
+                "expected" => true
               }
             ]
           )
@@ -193,22 +193,22 @@ module Aws::ECS
             operation_name: :describe_tasks,
             acceptors: [
               {
-                "expected" => "STOPPED",
                 "matcher" => "pathAny",
+                "argument" => "tasks[].last_status",
                 "state" => "failure",
-                "argument" => "tasks[].last_status"
+                "expected" => "STOPPED"
               },
               {
-                "expected" => "MISSING",
                 "matcher" => "pathAny",
+                "argument" => "failures[].reason",
                 "state" => "failure",
-                "argument" => "failures[].reason"
+                "expected" => "MISSING"
               },
               {
-                "expected" => "RUNNING",
                 "matcher" => "pathAll",
+                "argument" => "tasks[].last_status",
                 "state" => "success",
-                "argument" => "tasks[].last_status"
+                "expected" => "RUNNING"
               }
             ]
           )
@@ -242,10 +242,10 @@ module Aws::ECS
           poller: Aws::Waiters::Poller.new(
             operation_name: :describe_tasks,
             acceptors: [{
-              "expected" => "STOPPED",
               "matcher" => "pathAll",
+              "argument" => "tasks[].last_status",
               "state" => "success",
-              "argument" => "tasks[].last_status"
+              "expected" => "STOPPED"
             }]
           )
         }.merge(options))

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.8.0 (2026-02-19)
+------------------
+
+* Feature - The Billing and Cost Management GetDashboard API now returns identifier for each widget, enabling users to uniquely identify widgets within their dashboards.
+
 1.7.0 (2026-01-16)
 ------------------
 

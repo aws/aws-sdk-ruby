@@ -933,6 +933,10 @@ module Aws::CleanRooms
     #   The table reference.
     #   @return [String]
     #
+    # @!attribute [rw] catalog_name
+    #   The catalog name.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/AthenaTableReference AWS API Documentation
     #
     class AthenaTableReference < Struct.new(
@@ -940,7 +944,8 @@ module Aws::CleanRooms
       :work_group,
       :output_location,
       :database_name,
-      :table_name)
+      :table_name,
+      :catalog_name)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.95.0 (2026-02-20)
+------------------
+
+* Feature - Added support for S3OutputPathExtension and Filename parameters to the InvokeEndpointAsync API to allow users to customize the S3 output path and file name for async inference response payloads.
+
 1.94.0 (2026-01-16)
 ------------------
 

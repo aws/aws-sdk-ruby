@@ -126,6 +126,9 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBInstance.html#storage_type-instance_method
       def storage_type: () -> ::String
 
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBInstance.html#storage_encryption_type-instance_method
+      def storage_encryption_type: () -> ("none" | "sse-kms" | "sse-rds")
+
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBInstance.html#tde_credential_arn-instance_method
       def tde_credential_arn: () -> ::String
 

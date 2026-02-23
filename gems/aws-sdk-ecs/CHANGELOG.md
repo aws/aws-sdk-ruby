@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.221.0 (2026-02-20)
+------------------
+
+* Feature - Migrated to Smithy. No functional changes
+
 1.220.0 (2026-01-16)
 ------------------
 

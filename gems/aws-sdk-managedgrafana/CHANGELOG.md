@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.59.0 (2026-02-17)
+------------------
+
+* Feature - This release updates Amazon Managed Grafana's APIs to support customer managed KMS keys.
+
 1.58.0 (2026-01-16)
 ------------------
 

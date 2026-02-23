@@ -85,6 +85,9 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBSnapshot.html#encrypted-instance_method
       def encrypted: () -> bool
 
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBSnapshot.html#storage_encryption_type-instance_method
+      def storage_encryption_type: () -> ("none" | "sse-kms" | "sse-rds")
+
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBSnapshot.html#backup_retention_period-instance_method
       def backup_retention_period: () -> ::Integer
 

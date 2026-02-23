@@ -85,6 +85,12 @@ module Aws::EC2
       data[:linked_group_id]
     end
 
+    # The service provider that manages the Placement Group.
+    # @return [Types::OperatorResponse]
+    def operator
+      data[:operator]
+    end
+
     # @!endgroup
 
     # @return [Client]

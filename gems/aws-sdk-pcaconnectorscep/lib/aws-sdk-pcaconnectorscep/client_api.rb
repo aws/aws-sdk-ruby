@@ -69,6 +69,7 @@ module Aws::PcaConnectorScep
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
     ValidationExceptionReason = Shapes::StringShape.new(name: 'ValidationExceptionReason')
+    VpcEndpointId = Shapes::StringShape.new(name: 'VpcEndpointId')
 
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Message"))
     AccessDeniedException.struct_class = Types::AccessDeniedException
@@ -138,6 +139,7 @@ module Aws::PcaConnectorScep
 
     CreateConnectorRequest.add_member(:certificate_authority_arn, Shapes::ShapeRef.new(shape: CertificateAuthorityArn, required: true, location_name: "CertificateAuthorityArn"))
     CreateConnectorRequest.add_member(:mobile_device_management, Shapes::ShapeRef.new(shape: MobileDeviceManagement, location_name: "MobileDeviceManagement"))
+    CreateConnectorRequest.add_member(:vpc_endpoint_id, Shapes::ShapeRef.new(shape: VpcEndpointId, location_name: "VpcEndpointId"))
     CreateConnectorRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     CreateConnectorRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     CreateConnectorRequest.struct_class = Types::CreateConnectorRequest
@@ -266,8 +268,8 @@ module Aws::PcaConnectorScep
         o.http_request_uri = "/challenges"
         o.input = Shapes::ShapeRef.new(shape: CreateChallengeRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateChallengeResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)

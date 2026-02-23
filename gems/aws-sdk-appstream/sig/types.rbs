@@ -55,6 +55,7 @@ module Aws::AppStream
       attr_accessor app_block_builder_errors: ::Array[Types::ResourceError]
       attr_accessor state_change_reason: Types::AppBlockBuilderStateChangeReason
       attr_accessor access_endpoints: ::Array[Types::AccessEndpoint]
+      attr_accessor disable_imdsv1: bool
       SENSITIVE: []
     end
 
@@ -242,6 +243,7 @@ module Aws::AppStream
       attr_accessor enable_default_internet_access: bool
       attr_accessor iam_role_arn: ::String
       attr_accessor access_endpoints: ::Array[Types::AccessEndpoint]
+      attr_accessor disable_imdsv1: bool
       SENSITIVE: []
     end
 
@@ -364,6 +366,7 @@ module Aws::AppStream
       attr_accessor session_script_s3_location: Types::S3Location
       attr_accessor max_sessions_per_instance: ::Integer
       attr_accessor root_volume_config: Types::VolumeConfig
+      attr_accessor disable_imdsv1: bool
       SENSITIVE: []
     end
 
@@ -389,6 +392,7 @@ module Aws::AppStream
       attr_accessor root_volume_config: Types::VolumeConfig
       attr_accessor softwares_to_install: ::Array[::String]
       attr_accessor softwares_to_uninstall: ::Array[::String]
+      attr_accessor disable_imdsv1: bool
       SENSITIVE: []
     end
 
@@ -1057,6 +1061,7 @@ module Aws::AppStream
       attr_accessor session_script_s3_location: Types::S3Location
       attr_accessor max_sessions_per_instance: ::Integer
       attr_accessor root_volume_config: Types::VolumeConfig
+      attr_accessor disable_imdsv1: bool
       SENSITIVE: []
     end
 
@@ -1124,6 +1129,7 @@ module Aws::AppStream
       attr_accessor access_endpoints: ::Array[Types::AccessEndpoint]
       attr_accessor root_volume_config: Types::VolumeConfig
       attr_accessor latest_appstream_agent_version: ("TRUE" | "FALSE")
+      attr_accessor disable_imdsv1: bool
       SENSITIVE: []
     end
 
@@ -1484,6 +1490,7 @@ module Aws::AppStream
       attr_accessor iam_role_arn: ::String
       attr_accessor access_endpoints: ::Array[Types::AccessEndpoint]
       attr_accessor attributes_to_delete: ::Array[("IAM_ROLE_ARN" | "ACCESS_ENDPOINTS" | "VPC_CONFIGURATION_SECURITY_GROUP_IDS")]
+      attr_accessor disable_imdsv1: bool
       SENSITIVE: []
     end
 
@@ -1561,6 +1568,7 @@ module Aws::AppStream
       attr_accessor session_script_s3_location: Types::S3Location
       attr_accessor max_sessions_per_instance: ::Integer
       attr_accessor root_volume_config: Types::VolumeConfig
+      attr_accessor disable_imdsv1: bool
       SENSITIVE: []
     end
 

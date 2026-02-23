@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.50.0 (2026-02-16)
+------------------
+
+* Feature - Update MessageType enum to include missing types.
+
 1.49.0 (2026-01-23)
 ------------------
 

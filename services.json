@@ -1228,6 +1228,9 @@
   "Signer": {
     "models": "signer/2017-08-25"
   },
+  "SignerData": {
+    "models": "signer-data/2017-08-25"
+  },
   "Signin": {
     "models": "signin/2023-01-01",
     "gemName": "aws-sdk-core"

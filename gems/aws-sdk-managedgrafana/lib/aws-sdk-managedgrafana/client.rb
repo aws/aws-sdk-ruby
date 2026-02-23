@@ -486,14 +486,8 @@ module Aws::ManagedGrafana
     #
     # [1]: https://docs.aws.amazon.com/grafana/latest/userguide/upgrade-to-Grafana-Enterprise.html
     #
-    # @option params [String] :grafana_token
-    #   A token from Grafana Labs that ties your Amazon Web Services account
-    #   with a Grafana Labs account. For more information, see [Link your
-    #   account with Grafana Labs][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/grafana/latest/userguide/upgrade-to-Grafana-Enterprise.html#AMG-workspace-register-enterprise
+    # @option params [required, String] :workspace_id
+    #   The ID of the workspace to associate the license with.
     #
     # @option params [required, String] :license_type
     #   The type of license to associate with the workspace.
@@ -503,8 +497,14 @@ module Aws::ManagedGrafana
     #
     #    </note>
     #
-    # @option params [required, String] :workspace_id
-    #   The ID of the workspace to associate the license with.
+    # @option params [String] :grafana_token
+    #   A token from Grafana Labs that ties your Amazon Web Services account
+    #   with a Grafana Labs account. For more information, see [Link your
+    #   account with Grafana Labs][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/grafana/latest/userguide/upgrade-to-Grafana-Enterprise.html#AMG-workspace-register-enterprise
     #
     # @return [Types::AssociateLicenseResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -513,50 +513,51 @@ module Aws::ManagedGrafana
     # @example Request syntax with placeholder values
     #
     #   resp = client.associate_license({
-    #     grafana_token: "GrafanaToken",
-    #     license_type: "ENTERPRISE", # required, accepts ENTERPRISE, ENTERPRISE_FREE_TRIAL
     #     workspace_id: "WorkspaceId", # required
+    #     license_type: "ENTERPRISE", # required, accepts ENTERPRISE, ENTERPRISE_FREE_TRIAL
+    #     grafana_token: "GrafanaToken",
     #   })
     #
     # @example Response structure
     #
     #   resp.workspace.account_access_type #=> String, one of "CURRENT_ACCOUNT", "ORGANIZATION"
-    #   resp.workspace.authentication.providers #=> Array
-    #   resp.workspace.authentication.providers[0] #=> String, one of "AWS_SSO", "SAML"
-    #   resp.workspace.authentication.saml_configuration_status #=> String, one of "CONFIGURED", "NOT_CONFIGURED"
     #   resp.workspace.created #=> Time
     #   resp.workspace.data_sources #=> Array
     #   resp.workspace.data_sources[0] #=> String, one of "AMAZON_OPENSEARCH_SERVICE", "CLOUDWATCH", "PROMETHEUS", "XRAY", "TIMESTREAM", "SITEWISE", "ATHENA", "REDSHIFT", "TWINMAKER"
     #   resp.workspace.description #=> String
     #   resp.workspace.endpoint #=> String
-    #   resp.workspace.free_trial_consumed #=> Boolean
-    #   resp.workspace.free_trial_expiration #=> Time
-    #   resp.workspace.grafana_token #=> String
     #   resp.workspace.grafana_version #=> String
     #   resp.workspace.id #=> String
-    #   resp.workspace.license_expiration #=> Time
-    #   resp.workspace.license_type #=> String, one of "ENTERPRISE", "ENTERPRISE_FREE_TRIAL"
     #   resp.workspace.modified #=> Time
     #   resp.workspace.name #=> String
-    #   resp.workspace.network_access_control.prefix_list_ids #=> Array
-    #   resp.workspace.network_access_control.prefix_list_ids[0] #=> String
-    #   resp.workspace.network_access_control.vpce_ids #=> Array
-    #   resp.workspace.network_access_control.vpce_ids[0] #=> String
+    #   resp.workspace.organization_role_name #=> String
     #   resp.workspace.notification_destinations #=> Array
     #   resp.workspace.notification_destinations[0] #=> String, one of "SNS"
-    #   resp.workspace.organization_role_name #=> String
     #   resp.workspace.organizational_units #=> Array
     #   resp.workspace.organizational_units[0] #=> String
     #   resp.workspace.permission_type #=> String, one of "CUSTOMER_MANAGED", "SERVICE_MANAGED"
     #   resp.workspace.stack_set_name #=> String
     #   resp.workspace.status #=> String, one of "ACTIVE", "CREATING", "DELETING", "FAILED", "UPDATING", "UPGRADING", "DELETION_FAILED", "CREATION_FAILED", "UPDATE_FAILED", "UPGRADE_FAILED", "LICENSE_REMOVAL_FAILED", "VERSION_UPDATING", "VERSION_UPDATE_FAILED"
+    #   resp.workspace.workspace_role_arn #=> String
+    #   resp.workspace.license_type #=> String, one of "ENTERPRISE", "ENTERPRISE_FREE_TRIAL"
+    #   resp.workspace.free_trial_consumed #=> Boolean
+    #   resp.workspace.license_expiration #=> Time
+    #   resp.workspace.free_trial_expiration #=> Time
+    #   resp.workspace.authentication.providers #=> Array
+    #   resp.workspace.authentication.providers[0] #=> String, one of "AWS_SSO", "SAML"
+    #   resp.workspace.authentication.saml_configuration_status #=> String, one of "CONFIGURED", "NOT_CONFIGURED"
     #   resp.workspace.tags #=> Hash
     #   resp.workspace.tags["TagKey"] #=> String
     #   resp.workspace.vpc_configuration.security_group_ids #=> Array
     #   resp.workspace.vpc_configuration.security_group_ids[0] #=> String
     #   resp.workspace.vpc_configuration.subnet_ids #=> Array
     #   resp.workspace.vpc_configuration.subnet_ids[0] #=> String
-    #   resp.workspace.workspace_role_arn #=> String
+    #   resp.workspace.network_access_control.prefix_list_ids #=> Array
+    #   resp.workspace.network_access_control.prefix_list_ids[0] #=> String
+    #   resp.workspace.network_access_control.vpce_ids #=> Array
+    #   resp.workspace.network_access_control.vpce_ids[0] #=> String
+    #   resp.workspace.grafana_token #=> String
+    #   resp.workspace.kms_key_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/grafana-2020-08-18/AssociateLicense AWS API Documentation
     #
@@ -587,52 +588,12 @@ module Aws::ManagedGrafana
     #   which organizational units the workspace can access in the
     #   `workspaceOrganizationalUnits` parameter.
     #
-    # @option params [required, Array<String>] :authentication_providers
-    #   Specifies whether this workspace uses SAML 2.0, IAM Identity Center,
-    #   or both to authenticate users for using the Grafana console within a
-    #   workspace. For more information, see [User authentication in Amazon
-    #   Managed Grafana][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/grafana/latest/userguide/authentication-in-AMG.html
-    #
     # @option params [String] :client_token
     #   A unique, case-sensitive, user-provided identifier to ensure the
     #   idempotency of the request.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
-    #
-    # @option params [String] :configuration
-    #   The configuration string for the workspace that you create. For more
-    #   information about the format and configuration options available, see
-    #   [Working in your Grafana workspace][1].
-    #
-    #   **SDK automatically handles json encoding and base64 encoding for you
-    #   when the required value (Hash, Array, etc.) is provided according to
-    #   the description.**
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/grafana/latest/userguide/AMG-configure-workspace.html
-    #
-    # @option params [String] :grafana_version
-    #   Specifies the version of Grafana to support in the new workspace. If
-    #   not specified, defaults to the latest version (for example, 10.4).
-    #
-    #   To get a list of supported versions, use the `ListVersions` operation.
-    #
-    # @option params [Types::NetworkAccessConfiguration] :network_access_control
-    #   Configuration for network access to your workspace.
-    #
-    #   When this is configured, only listed IP addresses and VPC endpoints
-    #   will be able to access your workspace. Standard Grafana authentication
-    #   and authorization will still be required.
-    #
-    #   If this is not configured, or is removed, then all IP addresses and
-    #   VPC endpoints will be allowed. Standard Grafana authentication and
-    #   authorization will still be required.
     #
     # @option params [String] :organization_role_name
     #   The name of an IAM role that already exists to use with Organizations
@@ -670,18 +631,6 @@ module Aws::ManagedGrafana
     #   The name of the CloudFormation stack set to use to generate IAM roles
     #   to be used for this workspace.
     #
-    # @option params [Hash<String,String>] :tags
-    #   The list of tags associated with the workspace.
-    #
-    # @option params [Types::VpcConfiguration] :vpc_configuration
-    #   The configuration settings for an Amazon VPC that contains data
-    #   sources for your Grafana workspace to connect to.
-    #
-    #   <note markdown="1"> Connecting to a private VPC is not yet available in the Asia Pacific
-    #   (Seoul) Region (ap-northeast-2).
-    #
-    #    </note>
-    #
     # @option params [Array<String>] :workspace_data_sources
     #   This parameter is for internal use only, and should not be used.
     #
@@ -712,6 +661,62 @@ module Aws::ManagedGrafana
     #   managing the permissions for this role as new data sources or
     #   notification channels are added.
     #
+    # @option params [required, Array<String>] :authentication_providers
+    #   Specifies whether this workspace uses SAML 2.0, IAM Identity Center,
+    #   or both to authenticate users for using the Grafana console within a
+    #   workspace. For more information, see [User authentication in Amazon
+    #   Managed Grafana][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/grafana/latest/userguide/authentication-in-AMG.html
+    #
+    # @option params [Hash<String,String>] :tags
+    #   The list of tags associated with the workspace.
+    #
+    # @option params [Types::VpcConfiguration] :vpc_configuration
+    #   The configuration settings for an Amazon VPC that contains data
+    #   sources for your Grafana workspace to connect to.
+    #
+    #   <note markdown="1"> Connecting to a private VPC is not yet available in the Asia Pacific
+    #   (Seoul) Region (ap-northeast-2).
+    #
+    #    </note>
+    #
+    # @option params [String] :configuration
+    #   The configuration string for the workspace that you create. For more
+    #   information about the format and configuration options available, see
+    #   [Working in your Grafana workspace][1].
+    #
+    #   **SDK automatically handles json encoding and base64 encoding for you
+    #   when the required value (Hash, Array, etc.) is provided according to
+    #   the description.**
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/grafana/latest/userguide/AMG-configure-workspace.html
+    #
+    # @option params [Types::NetworkAccessConfiguration] :network_access_control
+    #   Configuration for network access to your workspace.
+    #
+    #   When this is configured, only listed IP addresses and VPC endpoints
+    #   will be able to access your workspace. Standard Grafana authentication
+    #   and authorization will still be required.
+    #
+    #   If this is not configured, or is removed, then all IP addresses and
+    #   VPC endpoints will be allowed. Standard Grafana authentication and
+    #   authorization will still be required.
+    #
+    # @option params [String] :grafana_version
+    #   Specifies the version of Grafana to support in the new workspace. If
+    #   not specified, defaults to the latest version (for example, 10.4).
+    #
+    #   To get a list of supported versions, use the `ListVersions` operation.
+    #
+    # @option params [String] :kms_key_id
+    #   The ID or ARN of the Key Management Service key to use for encrypting
+    #   workspace data.
+    #
     # @return [Types::CreateWorkspaceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateWorkspaceResponse#workspace #workspace} => Types::WorkspaceDescription
@@ -720,17 +725,17 @@ module Aws::ManagedGrafana
     #
     #   resp = client.create_workspace({
     #     account_access_type: "CURRENT_ACCOUNT", # required, accepts CURRENT_ACCOUNT, ORGANIZATION
-    #     authentication_providers: ["AWS_SSO"], # required, accepts AWS_SSO, SAML
     #     client_token: "ClientToken",
-    #     configuration: "OverridableConfigurationJson",
-    #     grafana_version: "GrafanaVersion",
-    #     network_access_control: {
-    #       prefix_list_ids: ["PrefixListId"], # required
-    #       vpce_ids: ["VpceId"], # required
-    #     },
     #     organization_role_name: "OrganizationRoleName",
     #     permission_type: "CUSTOMER_MANAGED", # required, accepts CUSTOMER_MANAGED, SERVICE_MANAGED
     #     stack_set_name: "StackSetName",
+    #     workspace_data_sources: ["AMAZON_OPENSEARCH_SERVICE"], # accepts AMAZON_OPENSEARCH_SERVICE, CLOUDWATCH, PROMETHEUS, XRAY, TIMESTREAM, SITEWISE, ATHENA, REDSHIFT, TWINMAKER
+    #     workspace_description: "Description",
+    #     workspace_name: "WorkspaceName",
+    #     workspace_notification_destinations: ["SNS"], # accepts SNS
+    #     workspace_organizational_units: ["OrganizationalUnit"],
+    #     workspace_role_arn: "IamRoleArn",
+    #     authentication_providers: ["AWS_SSO"], # required, accepts AWS_SSO, SAML
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
@@ -738,53 +743,55 @@ module Aws::ManagedGrafana
     #       security_group_ids: ["SecurityGroupId"], # required
     #       subnet_ids: ["SubnetId"], # required
     #     },
-    #     workspace_data_sources: ["AMAZON_OPENSEARCH_SERVICE"], # accepts AMAZON_OPENSEARCH_SERVICE, CLOUDWATCH, PROMETHEUS, XRAY, TIMESTREAM, SITEWISE, ATHENA, REDSHIFT, TWINMAKER
-    #     workspace_description: "Description",
-    #     workspace_name: "WorkspaceName",
-    #     workspace_notification_destinations: ["SNS"], # accepts SNS
-    #     workspace_organizational_units: ["OrganizationalUnit"],
-    #     workspace_role_arn: "IamRoleArn",
+    #     configuration: "OverridableConfigurationJson",
+    #     network_access_control: {
+    #       prefix_list_ids: ["PrefixListId"], # required
+    #       vpce_ids: ["VpceId"], # required
+    #     },
+    #     grafana_version: "GrafanaVersion",
+    #     kms_key_id: "KmsKeyId",
     #   })
     #
     # @example Response structure
     #
     #   resp.workspace.account_access_type #=> String, one of "CURRENT_ACCOUNT", "ORGANIZATION"
-    #   resp.workspace.authentication.providers #=> Array
-    #   resp.workspace.authentication.providers[0] #=> String, one of "AWS_SSO", "SAML"
-    #   resp.workspace.authentication.saml_configuration_status #=> String, one of "CONFIGURED", "NOT_CONFIGURED"
     #   resp.workspace.created #=> Time
     #   resp.workspace.data_sources #=> Array
     #   resp.workspace.data_sources[0] #=> String, one of "AMAZON_OPENSEARCH_SERVICE", "CLOUDWATCH", "PROMETHEUS", "XRAY", "TIMESTREAM", "SITEWISE", "ATHENA", "REDSHIFT", "TWINMAKER"
     #   resp.workspace.description #=> String
     #   resp.workspace.endpoint #=> String
-    #   resp.workspace.free_trial_consumed #=> Boolean
-    #   resp.workspace.free_trial_expiration #=> Time
-    #   resp.workspace.grafana_token #=> String
     #   resp.workspace.grafana_version #=> String
     #   resp.workspace.id #=> String
-    #   resp.workspace.license_expiration #=> Time
-    #   resp.workspace.license_type #=> String, one of "ENTERPRISE", "ENTERPRISE_FREE_TRIAL"
     #   resp.workspace.modified #=> Time
     #   resp.workspace.name #=> String
-    #   resp.workspace.network_access_control.prefix_list_ids #=> Array
-    #   resp.workspace.network_access_control.prefix_list_ids[0] #=> String
-    #   resp.workspace.network_access_control.vpce_ids #=> Array
-    #   resp.workspace.network_access_control.vpce_ids[0] #=> String
+    #   resp.workspace.organization_role_name #=> String
     #   resp.workspace.notification_destinations #=> Array
     #   resp.workspace.notification_destinations[0] #=> String, one of "SNS"
-    #   resp.workspace.organization_role_name #=> String
     #   resp.workspace.organizational_units #=> Array
     #   resp.workspace.organizational_units[0] #=> String
     #   resp.workspace.permission_type #=> String, one of "CUSTOMER_MANAGED", "SERVICE_MANAGED"
     #   resp.workspace.stack_set_name #=> String
     #   resp.workspace.status #=> String, one of "ACTIVE", "CREATING", "DELETING", "FAILED", "UPDATING", "UPGRADING", "DELETION_FAILED", "CREATION_FAILED", "UPDATE_FAILED", "UPGRADE_FAILED", "LICENSE_REMOVAL_FAILED", "VERSION_UPDATING", "VERSION_UPDATE_FAILED"
+    #   resp.workspace.workspace_role_arn #=> String
+    #   resp.workspace.license_type #=> String, one of "ENTERPRISE", "ENTERPRISE_FREE_TRIAL"
+    #   resp.workspace.free_trial_consumed #=> Boolean
+    #   resp.workspace.license_expiration #=> Time
+    #   resp.workspace.free_trial_expiration #=> Time
+    #   resp.workspace.authentication.providers #=> Array
+    #   resp.workspace.authentication.providers[0] #=> String, one of "AWS_SSO", "SAML"
+    #   resp.workspace.authentication.saml_configuration_status #=> String, one of "CONFIGURED", "NOT_CONFIGURED"
     #   resp.workspace.tags #=> Hash
     #   resp.workspace.tags["TagKey"] #=> String
     #   resp.workspace.vpc_configuration.security_group_ids #=> Array
     #   resp.workspace.vpc_configuration.security_group_ids[0] #=> String
     #   resp.workspace.vpc_configuration.subnet_ids #=> Array
     #   resp.workspace.vpc_configuration.subnet_ids[0] #=> String
-    #   resp.workspace.workspace_role_arn #=> String
+    #   resp.workspace.network_access_control.prefix_list_ids #=> Array
+    #   resp.workspace.network_access_control.prefix_list_ids[0] #=> String
+    #   resp.workspace.network_access_control.vpce_ids #=> Array
+    #   resp.workspace.network_access_control.vpce_ids[0] #=> String
+    #   resp.workspace.grafana_token #=> String
+    #   resp.workspace.kms_key_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/grafana-2020-08-18/CreateWorkspace AWS API Documentation
     #
@@ -828,8 +835,8 @@ module Aws::ManagedGrafana
     #
     # @return [Types::CreateWorkspaceApiKeyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::CreateWorkspaceApiKeyResponse#key #key} => String
     #   * {Types::CreateWorkspaceApiKeyResponse#key_name #key_name} => String
+    #   * {Types::CreateWorkspaceApiKeyResponse#key #key} => String
     #   * {Types::CreateWorkspaceApiKeyResponse#workspace_id #workspace_id} => String
     #
     # @example Request syntax with placeholder values
@@ -843,8 +850,8 @@ module Aws::ManagedGrafana
     #
     # @example Response structure
     #
-    #   resp.key #=> String
     #   resp.key_name #=> String
+    #   resp.key #=> String
     #   resp.workspace_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/grafana-2020-08-18/CreateWorkspaceApiKey AWS API Documentation
@@ -878,6 +885,11 @@ module Aws::ManagedGrafana
     # [1]: https://docs.aws.amazon.com/grafana/latest/userguide/service-accounts.html
     # [2]: https://docs.aws.amazon.com/grafana/latest/userguide/Using-Grafana-APIs.html
     #
+    # @option params [required, String] :name
+    #   A name for the service account. The name must be unique within the
+    #   workspace, as it determines the ID associated with the service
+    #   account.
+    #
     # @option params [required, String] :grafana_role
     #   The permission level to use for this service account.
     #
@@ -890,34 +902,29 @@ module Aws::ManagedGrafana
     #
     #   [1]: https://docs.aws.amazon.com/grafana/latest/userguide/Grafana-user-roles.html
     #
-    # @option params [required, String] :name
-    #   A name for the service account. The name must be unique within the
-    #   workspace, as it determines the ID associated with the service
-    #   account.
-    #
     # @option params [required, String] :workspace_id
     #   The ID of the workspace within which to create the service account.
     #
     # @return [Types::CreateWorkspaceServiceAccountResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::CreateWorkspaceServiceAccountResponse#grafana_role #grafana_role} => String
     #   * {Types::CreateWorkspaceServiceAccountResponse#id #id} => String
     #   * {Types::CreateWorkspaceServiceAccountResponse#name #name} => String
+    #   * {Types::CreateWorkspaceServiceAccountResponse#grafana_role #grafana_role} => String
     #   * {Types::CreateWorkspaceServiceAccountResponse#workspace_id #workspace_id} => String
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_workspace_service_account({
-    #     grafana_role: "ADMIN", # required, accepts ADMIN, EDITOR, VIEWER
     #     name: "ServiceAccountName", # required
+    #     grafana_role: "ADMIN", # required, accepts ADMIN, EDITOR, VIEWER
     #     workspace_id: "WorkspaceId", # required
     #   })
     #
     # @example Response structure
     #
-    #   resp.grafana_role #=> String, one of "ADMIN", "EDITOR", "VIEWER"
     #   resp.id #=> String
     #   resp.name #=> String
+    #   resp.grafana_role #=> String, one of "ADMIN", "EDITOR", "VIEWER"
     #   resp.workspace_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/grafana-2020-08-18/CreateWorkspaceServiceAccount AWS API Documentation
@@ -963,8 +970,8 @@ module Aws::ManagedGrafana
     #
     # @return [Types::CreateWorkspaceServiceAccountTokenResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::CreateWorkspaceServiceAccountTokenResponse#service_account_id #service_account_id} => String
     #   * {Types::CreateWorkspaceServiceAccountTokenResponse#service_account_token #service_account_token} => Types::ServiceAccountTokenSummaryWithKey
+    #   * {Types::CreateWorkspaceServiceAccountTokenResponse#service_account_id #service_account_id} => String
     #   * {Types::CreateWorkspaceServiceAccountTokenResponse#workspace_id #workspace_id} => String
     #
     # @example Request syntax with placeholder values
@@ -978,10 +985,10 @@ module Aws::ManagedGrafana
     #
     # @example Response structure
     #
-    #   resp.service_account_id #=> String
     #   resp.service_account_token.id #=> String
-    #   resp.service_account_token.key #=> String
     #   resp.service_account_token.name #=> String
+    #   resp.service_account_token.key #=> String
+    #   resp.service_account_id #=> String
     #   resp.workspace_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/grafana-2020-08-18/CreateWorkspaceServiceAccountToken AWS API Documentation
@@ -1011,42 +1018,43 @@ module Aws::ManagedGrafana
     # @example Response structure
     #
     #   resp.workspace.account_access_type #=> String, one of "CURRENT_ACCOUNT", "ORGANIZATION"
-    #   resp.workspace.authentication.providers #=> Array
-    #   resp.workspace.authentication.providers[0] #=> String, one of "AWS_SSO", "SAML"
-    #   resp.workspace.authentication.saml_configuration_status #=> String, one of "CONFIGURED", "NOT_CONFIGURED"
     #   resp.workspace.created #=> Time
     #   resp.workspace.data_sources #=> Array
     #   resp.workspace.data_sources[0] #=> String, one of "AMAZON_OPENSEARCH_SERVICE", "CLOUDWATCH", "PROMETHEUS", "XRAY", "TIMESTREAM", "SITEWISE", "ATHENA", "REDSHIFT", "TWINMAKER"
     #   resp.workspace.description #=> String
     #   resp.workspace.endpoint #=> String
-    #   resp.workspace.free_trial_consumed #=> Boolean
-    #   resp.workspace.free_trial_expiration #=> Time
-    #   resp.workspace.grafana_token #=> String
     #   resp.workspace.grafana_version #=> String
     #   resp.workspace.id #=> String
-    #   resp.workspace.license_expiration #=> Time
-    #   resp.workspace.license_type #=> String, one of "ENTERPRISE", "ENTERPRISE_FREE_TRIAL"
     #   resp.workspace.modified #=> Time
     #   resp.workspace.name #=> String
-    #   resp.workspace.network_access_control.prefix_list_ids #=> Array
-    #   resp.workspace.network_access_control.prefix_list_ids[0] #=> String
-    #   resp.workspace.network_access_control.vpce_ids #=> Array
-    #   resp.workspace.network_access_control.vpce_ids[0] #=> String
+    #   resp.workspace.organization_role_name #=> String
     #   resp.workspace.notification_destinations #=> Array
     #   resp.workspace.notification_destinations[0] #=> String, one of "SNS"
-    #   resp.workspace.organization_role_name #=> String
     #   resp.workspace.organizational_units #=> Array
     #   resp.workspace.organizational_units[0] #=> String
     #   resp.workspace.permission_type #=> String, one of "CUSTOMER_MANAGED", "SERVICE_MANAGED"
     #   resp.workspace.stack_set_name #=> String
     #   resp.workspace.status #=> String, one of "ACTIVE", "CREATING", "DELETING", "FAILED", "UPDATING", "UPGRADING", "DELETION_FAILED", "CREATION_FAILED", "UPDATE_FAILED", "UPGRADE_FAILED", "LICENSE_REMOVAL_FAILED", "VERSION_UPDATING", "VERSION_UPDATE_FAILED"
+    #   resp.workspace.workspace_role_arn #=> String
+    #   resp.workspace.license_type #=> String, one of "ENTERPRISE", "ENTERPRISE_FREE_TRIAL"
+    #   resp.workspace.free_trial_consumed #=> Boolean
+    #   resp.workspace.license_expiration #=> Time
+    #   resp.workspace.free_trial_expiration #=> Time
+    #   resp.workspace.authentication.providers #=> Array
+    #   resp.workspace.authentication.providers[0] #=> String, one of "AWS_SSO", "SAML"
+    #   resp.workspace.authentication.saml_configuration_status #=> String, one of "CONFIGURED", "NOT_CONFIGURED"
     #   resp.workspace.tags #=> Hash
     #   resp.workspace.tags["TagKey"] #=> String
     #   resp.workspace.vpc_configuration.security_group_ids #=> Array
     #   resp.workspace.vpc_configuration.security_group_ids[0] #=> String
     #   resp.workspace.vpc_configuration.subnet_ids #=> Array
     #   resp.workspace.vpc_configuration.subnet_ids[0] #=> String
-    #   resp.workspace.workspace_role_arn #=> String
+    #   resp.workspace.network_access_control.prefix_list_ids #=> Array
+    #   resp.workspace.network_access_control.prefix_list_ids[0] #=> String
+    #   resp.workspace.network_access_control.vpce_ids #=> Array
+    #   resp.workspace.network_access_control.vpce_ids[0] #=> String
+    #   resp.workspace.grafana_token #=> String
+    #   resp.workspace.kms_key_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/grafana-2020-08-18/DeleteWorkspace AWS API Documentation
     #
@@ -1147,33 +1155,33 @@ module Aws::ManagedGrafana
     # Service accounts are only available for workspaces that are compatible
     # with Grafana version 9 and above.
     #
-    # @option params [required, String] :service_account_id
-    #   The ID of the service account from which to delete the token.
-    #
     # @option params [required, String] :token_id
     #   The ID of the token to delete.
+    #
+    # @option params [required, String] :service_account_id
+    #   The ID of the service account from which to delete the token.
     #
     # @option params [required, String] :workspace_id
     #   The ID of the workspace from which to delete the token.
     #
     # @return [Types::DeleteWorkspaceServiceAccountTokenResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::DeleteWorkspaceServiceAccountTokenResponse#service_account_id #service_account_id} => String
     #   * {Types::DeleteWorkspaceServiceAccountTokenResponse#token_id #token_id} => String
+    #   * {Types::DeleteWorkspaceServiceAccountTokenResponse#service_account_id #service_account_id} => String
     #   * {Types::DeleteWorkspaceServiceAccountTokenResponse#workspace_id #workspace_id} => String
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_workspace_service_account_token({
-    #     service_account_id: "String", # required
     #     token_id: "String", # required
+    #     service_account_id: "String", # required
     #     workspace_id: "WorkspaceId", # required
     #   })
     #
     # @example Response structure
     #
-    #   resp.service_account_id #=> String
     #   resp.token_id #=> String
+    #   resp.service_account_id #=> String
     #   resp.workspace_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/grafana-2020-08-18/DeleteWorkspaceServiceAccountToken AWS API Documentation
@@ -1203,42 +1211,43 @@ module Aws::ManagedGrafana
     # @example Response structure
     #
     #   resp.workspace.account_access_type #=> String, one of "CURRENT_ACCOUNT", "ORGANIZATION"
-    #   resp.workspace.authentication.providers #=> Array
-    #   resp.workspace.authentication.providers[0] #=> String, one of "AWS_SSO", "SAML"
-    #   resp.workspace.authentication.saml_configuration_status #=> String, one of "CONFIGURED", "NOT_CONFIGURED"
     #   resp.workspace.created #=> Time
     #   resp.workspace.data_sources #=> Array
     #   resp.workspace.data_sources[0] #=> String, one of "AMAZON_OPENSEARCH_SERVICE", "CLOUDWATCH", "PROMETHEUS", "XRAY", "TIMESTREAM", "SITEWISE", "ATHENA", "REDSHIFT", "TWINMAKER"
     #   resp.workspace.description #=> String
     #   resp.workspace.endpoint #=> String
-    #   resp.workspace.free_trial_consumed #=> Boolean
-    #   resp.workspace.free_trial_expiration #=> Time
-    #   resp.workspace.grafana_token #=> String
     #   resp.workspace.grafana_version #=> String
     #   resp.workspace.id #=> String
-    #   resp.workspace.license_expiration #=> Time
-    #   resp.workspace.license_type #=> String, one of "ENTERPRISE", "ENTERPRISE_FREE_TRIAL"
     #   resp.workspace.modified #=> Time
     #   resp.workspace.name #=> String
-    #   resp.workspace.network_access_control.prefix_list_ids #=> Array
-    #   resp.workspace.network_access_control.prefix_list_ids[0] #=> String
-    #   resp.workspace.network_access_control.vpce_ids #=> Array
-    #   resp.workspace.network_access_control.vpce_ids[0] #=> String
+    #   resp.workspace.organization_role_name #=> String
     #   resp.workspace.notification_destinations #=> Array
     #   resp.workspace.notification_destinations[0] #=> String, one of "SNS"
-    #   resp.workspace.organization_role_name #=> String
     #   resp.workspace.organizational_units #=> Array
     #   resp.workspace.organizational_units[0] #=> String
     #   resp.workspace.permission_type #=> String, one of "CUSTOMER_MANAGED", "SERVICE_MANAGED"
     #   resp.workspace.stack_set_name #=> String
     #   resp.workspace.status #=> String, one of "ACTIVE", "CREATING", "DELETING", "FAILED", "UPDATING", "UPGRADING", "DELETION_FAILED", "CREATION_FAILED", "UPDATE_FAILED", "UPGRADE_FAILED", "LICENSE_REMOVAL_FAILED", "VERSION_UPDATING", "VERSION_UPDATE_FAILED"
+    #   resp.workspace.workspace_role_arn #=> String
+    #   resp.workspace.license_type #=> String, one of "ENTERPRISE", "ENTERPRISE_FREE_TRIAL"
+    #   resp.workspace.free_trial_consumed #=> Boolean
+    #   resp.workspace.license_expiration #=> Time
+    #   resp.workspace.free_trial_expiration #=> Time
+    #   resp.workspace.authentication.providers #=> Array
+    #   resp.workspace.authentication.providers[0] #=> String, one of "AWS_SSO", "SAML"
+    #   resp.workspace.authentication.saml_configuration_status #=> String, one of "CONFIGURED", "NOT_CONFIGURED"
     #   resp.workspace.tags #=> Hash
     #   resp.workspace.tags["TagKey"] #=> String
     #   resp.workspace.vpc_configuration.security_group_ids #=> Array
     #   resp.workspace.vpc_configuration.security_group_ids[0] #=> String
     #   resp.workspace.vpc_configuration.subnet_ids #=> Array
     #   resp.workspace.vpc_configuration.subnet_ids[0] #=> String
-    #   resp.workspace.workspace_role_arn #=> String
+    #   resp.workspace.network_access_control.prefix_list_ids #=> Array
+    #   resp.workspace.network_access_control.prefix_list_ids[0] #=> String
+    #   resp.workspace.network_access_control.vpce_ids #=> Array
+    #   resp.workspace.network_access_control.vpce_ids[0] #=> String
+    #   resp.workspace.grafana_token #=> String
+    #   resp.workspace.kms_key_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/grafana-2020-08-18/DescribeWorkspace AWS API Documentation
     #
@@ -1267,25 +1276,25 @@ module Aws::ManagedGrafana
     #
     # @example Response structure
     #
-    #   resp.authentication.aws_sso.sso_client_id #=> String
     #   resp.authentication.providers #=> Array
     #   resp.authentication.providers[0] #=> String, one of "AWS_SSO", "SAML"
-    #   resp.authentication.saml.configuration.allowed_organizations #=> Array
-    #   resp.authentication.saml.configuration.allowed_organizations[0] #=> String
-    #   resp.authentication.saml.configuration.assertion_attributes.email #=> String
-    #   resp.authentication.saml.configuration.assertion_attributes.groups #=> String
-    #   resp.authentication.saml.configuration.assertion_attributes.login #=> String
-    #   resp.authentication.saml.configuration.assertion_attributes.name #=> String
-    #   resp.authentication.saml.configuration.assertion_attributes.org #=> String
-    #   resp.authentication.saml.configuration.assertion_attributes.role #=> String
+    #   resp.authentication.saml.status #=> String, one of "CONFIGURED", "NOT_CONFIGURED"
     #   resp.authentication.saml.configuration.idp_metadata.url #=> String
     #   resp.authentication.saml.configuration.idp_metadata.xml #=> String
-    #   resp.authentication.saml.configuration.login_validity_duration #=> Integer
-    #   resp.authentication.saml.configuration.role_values.admin #=> Array
-    #   resp.authentication.saml.configuration.role_values.admin[0] #=> String
+    #   resp.authentication.saml.configuration.assertion_attributes.name #=> String
+    #   resp.authentication.saml.configuration.assertion_attributes.login #=> String
+    #   resp.authentication.saml.configuration.assertion_attributes.email #=> String
+    #   resp.authentication.saml.configuration.assertion_attributes.groups #=> String
+    #   resp.authentication.saml.configuration.assertion_attributes.role #=> String
+    #   resp.authentication.saml.configuration.assertion_attributes.org #=> String
     #   resp.authentication.saml.configuration.role_values.editor #=> Array
     #   resp.authentication.saml.configuration.role_values.editor[0] #=> String
-    #   resp.authentication.saml.status #=> String, one of "CONFIGURED", "NOT_CONFIGURED"
+    #   resp.authentication.saml.configuration.role_values.admin #=> Array
+    #   resp.authentication.saml.configuration.role_values.admin[0] #=> String
+    #   resp.authentication.saml.configuration.allowed_organizations #=> Array
+    #   resp.authentication.saml.configuration.allowed_organizations[0] #=> String
+    #   resp.authentication.saml.configuration.login_validity_duration #=> Integer
+    #   resp.authentication.aws_sso.sso_client_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/grafana-2020-08-18/DescribeWorkspaceAuthentication AWS API Documentation
     #
@@ -1328,11 +1337,11 @@ module Aws::ManagedGrafana
 
     # Removes the Grafana Enterprise license from a workspace.
     #
-    # @option params [required, String] :license_type
-    #   The type of license to remove from the workspace.
-    #
     # @option params [required, String] :workspace_id
     #   The ID of the workspace to remove the Grafana Enterprise license from.
+    #
+    # @option params [required, String] :license_type
+    #   The type of license to remove from the workspace.
     #
     # @return [Types::DisassociateLicenseResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1341,49 +1350,50 @@ module Aws::ManagedGrafana
     # @example Request syntax with placeholder values
     #
     #   resp = client.disassociate_license({
-    #     license_type: "ENTERPRISE", # required, accepts ENTERPRISE, ENTERPRISE_FREE_TRIAL
     #     workspace_id: "WorkspaceId", # required
+    #     license_type: "ENTERPRISE", # required, accepts ENTERPRISE, ENTERPRISE_FREE_TRIAL
     #   })
     #
     # @example Response structure
     #
     #   resp.workspace.account_access_type #=> String, one of "CURRENT_ACCOUNT", "ORGANIZATION"
-    #   resp.workspace.authentication.providers #=> Array
-    #   resp.workspace.authentication.providers[0] #=> String, one of "AWS_SSO", "SAML"
-    #   resp.workspace.authentication.saml_configuration_status #=> String, one of "CONFIGURED", "NOT_CONFIGURED"
     #   resp.workspace.created #=> Time
     #   resp.workspace.data_sources #=> Array
     #   resp.workspace.data_sources[0] #=> String, one of "AMAZON_OPENSEARCH_SERVICE", "CLOUDWATCH", "PROMETHEUS", "XRAY", "TIMESTREAM", "SITEWISE", "ATHENA", "REDSHIFT", "TWINMAKER"
     #   resp.workspace.description #=> String
     #   resp.workspace.endpoint #=> String
-    #   resp.workspace.free_trial_consumed #=> Boolean
-    #   resp.workspace.free_trial_expiration #=> Time
-    #   resp.workspace.grafana_token #=> String
     #   resp.workspace.grafana_version #=> String
     #   resp.workspace.id #=> String
-    #   resp.workspace.license_expiration #=> Time
-    #   resp.workspace.license_type #=> String, one of "ENTERPRISE", "ENTERPRISE_FREE_TRIAL"
     #   resp.workspace.modified #=> Time
     #   resp.workspace.name #=> String
-    #   resp.workspace.network_access_control.prefix_list_ids #=> Array
-    #   resp.workspace.network_access_control.prefix_list_ids[0] #=> String
-    #   resp.workspace.network_access_control.vpce_ids #=> Array
-    #   resp.workspace.network_access_control.vpce_ids[0] #=> String
+    #   resp.workspace.organization_role_name #=> String
     #   resp.workspace.notification_destinations #=> Array
     #   resp.workspace.notification_destinations[0] #=> String, one of "SNS"
-    #   resp.workspace.organization_role_name #=> String
     #   resp.workspace.organizational_units #=> Array
     #   resp.workspace.organizational_units[0] #=> String
     #   resp.workspace.permission_type #=> String, one of "CUSTOMER_MANAGED", "SERVICE_MANAGED"
     #   resp.workspace.stack_set_name #=> String
     #   resp.workspace.status #=> String, one of "ACTIVE", "CREATING", "DELETING", "FAILED", "UPDATING", "UPGRADING", "DELETION_FAILED", "CREATION_FAILED", "UPDATE_FAILED", "UPGRADE_FAILED", "LICENSE_REMOVAL_FAILED", "VERSION_UPDATING", "VERSION_UPDATE_FAILED"
+    #   resp.workspace.workspace_role_arn #=> String
+    #   resp.workspace.license_type #=> String, one of "ENTERPRISE", "ENTERPRISE_FREE_TRIAL"
+    #   resp.workspace.free_trial_consumed #=> Boolean
+    #   resp.workspace.license_expiration #=> Time
+    #   resp.workspace.free_trial_expiration #=> Time
+    #   resp.workspace.authentication.providers #=> Array
+    #   resp.workspace.authentication.providers[0] #=> String, one of "AWS_SSO", "SAML"
+    #   resp.workspace.authentication.saml_configuration_status #=> String, one of "CONFIGURED", "NOT_CONFIGURED"
     #   resp.workspace.tags #=> Hash
     #   resp.workspace.tags["TagKey"] #=> String
     #   resp.workspace.vpc_configuration.security_group_ids #=> Array
     #   resp.workspace.vpc_configuration.security_group_ids[0] #=> String
     #   resp.workspace.vpc_configuration.subnet_ids #=> Array
     #   resp.workspace.vpc_configuration.subnet_ids[0] #=> String
-    #   resp.workspace.workspace_role_arn #=> String
+    #   resp.workspace.network_access_control.prefix_list_ids #=> Array
+    #   resp.workspace.network_access_control.prefix_list_ids[0] #=> String
+    #   resp.workspace.network_access_control.vpce_ids #=> Array
+    #   resp.workspace.network_access_control.vpce_ids[0] #=> String
+    #   resp.workspace.grafana_token #=> String
+    #   resp.workspace.kms_key_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/grafana-2020-08-18/DisassociateLicense AWS API Documentation
     #
@@ -1401,9 +1411,6 @@ module Aws::ManagedGrafana
     # for that user or group are returned. If you do this, you can specify
     # only one `userId` or one `groupId`.
     #
-    # @option params [String] :group_id
-    #   (Optional) Limits the results to only the group that matches this ID.
-    #
     # @option params [Integer] :max_results
     #   The maximum number of results to include in the response.
     #
@@ -1411,13 +1418,16 @@ module Aws::ManagedGrafana
     #   The token to use when requesting the next set of results. You received
     #   this token from a previous `ListPermissions` operation.
     #
-    # @option params [String] :user_id
-    #   (Optional) Limits the results to only the user that matches this ID.
-    #
     # @option params [String] :user_type
     #   (Optional) If you specify `SSO_USER`, then only the permissions of IAM
     #   Identity Center users are returned. If you specify `SSO_GROUP`, only
     #   the permissions of IAM Identity Center groups are returned.
+    #
+    # @option params [String] :user_id
+    #   (Optional) Limits the results to only the user that matches this ID.
+    #
+    # @option params [String] :group_id
+    #   (Optional) Limits the results to only the group that matches this ID.
     #
     # @option params [required, String] :workspace_id
     #   The ID of the workspace to list permissions for. This parameter is
@@ -1433,11 +1443,11 @@ module Aws::ManagedGrafana
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_permissions({
-    #     group_id: "SsoId",
     #     max_results: 1,
     #     next_token: "PaginationToken",
-    #     user_id: "SsoId",
     #     user_type: "SSO_USER", # accepts SSO_USER, SSO_GROUP
+    #     user_id: "SsoId",
+    #     group_id: "SsoId",
     #     workspace_id: "WorkspaceId", # required
     #   })
     #
@@ -1445,9 +1455,9 @@ module Aws::ManagedGrafana
     #
     #   resp.next_token #=> String
     #   resp.permissions #=> Array
-    #   resp.permissions[0].role #=> String, one of "ADMIN", "EDITOR", "VIEWER"
     #   resp.permissions[0].user.id #=> String
     #   resp.permissions[0].user.type #=> String, one of "SSO_USER", "SSO_GROUP"
+    #   resp.permissions[0].role #=> String, one of "ADMIN", "EDITOR", "VIEWER"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/grafana-2020-08-18/ListPermissions AWS API Documentation
     #
@@ -1508,8 +1518,8 @@ module Aws::ManagedGrafana
     #
     # @return [Types::ListVersionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::ListVersionsResponse#grafana_versions #grafana_versions} => Array&lt;String&gt;
     #   * {Types::ListVersionsResponse#next_token #next_token} => String
+    #   * {Types::ListVersionsResponse#grafana_versions #grafana_versions} => Array&lt;String&gt;
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
@@ -1523,9 +1533,9 @@ module Aws::ManagedGrafana
     #
     # @example Response structure
     #
+    #   resp.next_token #=> String
     #   resp.grafana_versions #=> Array
     #   resp.grafana_versions[0] #=> String
-    #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/grafana-2020-08-18/ListVersions AWS API Documentation
     #
@@ -1564,8 +1574,8 @@ module Aws::ManagedGrafana
     # @return [Types::ListWorkspaceServiceAccountTokensResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListWorkspaceServiceAccountTokensResponse#next_token #next_token} => String
-    #   * {Types::ListWorkspaceServiceAccountTokensResponse#service_account_id #service_account_id} => String
     #   * {Types::ListWorkspaceServiceAccountTokensResponse#service_account_tokens #service_account_tokens} => Array&lt;Types::ServiceAccountTokenSummary&gt;
+    #   * {Types::ListWorkspaceServiceAccountTokensResponse#service_account_id #service_account_id} => String
     #   * {Types::ListWorkspaceServiceAccountTokensResponse#workspace_id #workspace_id} => String
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
@@ -1582,13 +1592,13 @@ module Aws::ManagedGrafana
     # @example Response structure
     #
     #   resp.next_token #=> String
-    #   resp.service_account_id #=> String
     #   resp.service_account_tokens #=> Array
+    #   resp.service_account_tokens[0].id #=> String
+    #   resp.service_account_tokens[0].name #=> String
     #   resp.service_account_tokens[0].created_at #=> Time
     #   resp.service_account_tokens[0].expires_at #=> Time
-    #   resp.service_account_tokens[0].id #=> String
     #   resp.service_account_tokens[0].last_used_at #=> Time
-    #   resp.service_account_tokens[0].name #=> String
+    #   resp.service_account_id #=> String
     #   resp.workspace_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/grafana-2020-08-18/ListWorkspaceServiceAccountTokens AWS API Documentation
@@ -1635,10 +1645,10 @@ module Aws::ManagedGrafana
     #
     #   resp.next_token #=> String
     #   resp.service_accounts #=> Array
-    #   resp.service_accounts[0].grafana_role #=> String, one of "ADMIN", "EDITOR", "VIEWER"
     #   resp.service_accounts[0].id #=> String
-    #   resp.service_accounts[0].is_disabled #=> String
     #   resp.service_accounts[0].name #=> String
+    #   resp.service_accounts[0].is_disabled #=> String
+    #   resp.service_accounts[0].grafana_role #=> String, one of "ADMIN", "EDITOR", "VIEWER"
     #   resp.workspace_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/grafana-2020-08-18/ListWorkspaceServiceAccounts AWS API Documentation
@@ -1656,7 +1666,7 @@ module Aws::ManagedGrafana
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AAMG/latest/APIReference/API_DescribeWorkspace.html
+    # [1]: https://docs.aws.amazon.com/grafana/latest/APIReference/API_DescribeWorkspace.html
     #
     # @option params [Integer] :max_results
     #   The maximum number of workspaces to include in the results.
@@ -1667,8 +1677,8 @@ module Aws::ManagedGrafana
     #
     # @return [Types::ListWorkspacesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::ListWorkspacesResponse#next_token #next_token} => String
     #   * {Types::ListWorkspacesResponse#workspaces #workspaces} => Array&lt;Types::WorkspaceSummary&gt;
+    #   * {Types::ListWorkspacesResponse#next_token #next_token} => String
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
@@ -1681,25 +1691,25 @@ module Aws::ManagedGrafana
     #
     # @example Response structure
     #
-    #   resp.next_token #=> String
     #   resp.workspaces #=> Array
-    #   resp.workspaces[0].authentication.providers #=> Array
-    #   resp.workspaces[0].authentication.providers[0] #=> String, one of "AWS_SSO", "SAML"
-    #   resp.workspaces[0].authentication.saml_configuration_status #=> String, one of "CONFIGURED", "NOT_CONFIGURED"
     #   resp.workspaces[0].created #=> Time
     #   resp.workspaces[0].description #=> String
     #   resp.workspaces[0].endpoint #=> String
-    #   resp.workspaces[0].grafana_token #=> String
     #   resp.workspaces[0].grafana_version #=> String
     #   resp.workspaces[0].id #=> String
-    #   resp.workspaces[0].license_type #=> String, one of "ENTERPRISE", "ENTERPRISE_FREE_TRIAL"
     #   resp.workspaces[0].modified #=> Time
     #   resp.workspaces[0].name #=> String
     #   resp.workspaces[0].notification_destinations #=> Array
     #   resp.workspaces[0].notification_destinations[0] #=> String, one of "SNS"
     #   resp.workspaces[0].status #=> String, one of "ACTIVE", "CREATING", "DELETING", "FAILED", "UPDATING", "UPGRADING", "DELETION_FAILED", "CREATION_FAILED", "UPDATE_FAILED", "UPGRADE_FAILED", "LICENSE_REMOVAL_FAILED", "VERSION_UPDATING", "VERSION_UPDATE_FAILED"
+    #   resp.workspaces[0].authentication.providers #=> Array
+    #   resp.workspaces[0].authentication.providers[0] #=> String, one of "AWS_SSO", "SAML"
+    #   resp.workspaces[0].authentication.saml_configuration_status #=> String, one of "CONFIGURED", "NOT_CONFIGURED"
     #   resp.workspaces[0].tags #=> Hash
     #   resp.workspaces[0].tags["TagKey"] #=> String
+    #   resp.workspaces[0].license_type #=> String, one of "ENTERPRISE", "ENTERPRISE_FREE_TRIAL"
+    #   resp.workspaces[0].grafana_token #=> String
+    #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/grafana-2020-08-18/ListWorkspaces AWS API Documentation
     #
@@ -1808,13 +1818,13 @@ module Aws::ManagedGrafana
     # @example Response structure
     #
     #   resp.errors #=> Array
+    #   resp.errors[0].code #=> Integer
+    #   resp.errors[0].message #=> String
     #   resp.errors[0].caused_by.action #=> String, one of "ADD", "REVOKE"
     #   resp.errors[0].caused_by.role #=> String, one of "ADMIN", "EDITOR", "VIEWER"
     #   resp.errors[0].caused_by.users #=> Array
     #   resp.errors[0].caused_by.users[0].id #=> String
     #   resp.errors[0].caused_by.users[0].type #=> String, one of "SSO_USER", "SSO_GROUP"
-    #   resp.errors[0].code #=> Integer
-    #   resp.errors[0].message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/grafana-2020-08-18/UpdatePermissions AWS API Documentation
     #
@@ -1848,17 +1858,6 @@ module Aws::ManagedGrafana
     #   same organization. If you specify `ORGANIZATION`, you must specify
     #   which organizational units the workspace can access in the
     #   `workspaceOrganizationalUnits` parameter.
-    #
-    # @option params [Types::NetworkAccessConfiguration] :network_access_control
-    #   The configuration settings for network access to your workspace.
-    #
-    #   When this is configured, only listed IP addresses and VPC endpoints
-    #   will be able to access your workspace. Standard Grafana authentication
-    #   and authorization will still be required.
-    #
-    #   If this is not configured, or is removed, then all IP addresses and
-    #   VPC endpoints will be allowed. Standard Grafana authentication and
-    #   authorization will still be required.
     #
     # @option params [String] :organization_role_name
     #   The name of an IAM role that already exists to use to access resources
@@ -1898,29 +1897,9 @@ module Aws::ManagedGrafana
     #   [1]: https://docs.aws.amazon.com/grafana/latest/userguide/AMG-manage-permissions.html
     #   [2]: https://docs.aws.amazon.com/grafana/latest/userguide/AMG-datasource-and-notification.html
     #
-    # @option params [Boolean] :remove_network_access_configuration
-    #   Whether to remove the network access configuration from the workspace.
-    #
-    #   Setting this to `true` and providing a `networkAccessControl` to set
-    #   will return an error.
-    #
-    #   If you remove this configuration by setting this to `true`, then all
-    #   IP addresses and VPC endpoints will be allowed. Standard Grafana
-    #   authentication and authorization will still be required.
-    #
-    # @option params [Boolean] :remove_vpc_configuration
-    #   Whether to remove the VPC configuration from the workspace.
-    #
-    #   Setting this to `true` and providing a `vpcConfiguration` to set will
-    #   return an error.
-    #
     # @option params [String] :stack_set_name
     #   The name of the CloudFormation stack set to use to generate IAM roles
     #   to be used for this workspace.
-    #
-    # @option params [Types::VpcConfiguration] :vpc_configuration
-    #   The configuration settings for an Amazon VPC that contains data
-    #   sources for your Grafana workspace to connect to.
     #
     # @option params [Array<String>] :workspace_data_sources
     #   This parameter is for internal use only, and should not be used.
@@ -1952,6 +1931,37 @@ module Aws::ManagedGrafana
     #   notification channels. If this workspace has `permissionType`
     #   `CUSTOMER_MANAGED`, then this role is required.
     #
+    # @option params [Types::VpcConfiguration] :vpc_configuration
+    #   The configuration settings for an Amazon VPC that contains data
+    #   sources for your Grafana workspace to connect to.
+    #
+    # @option params [Boolean] :remove_vpc_configuration
+    #   Whether to remove the VPC configuration from the workspace.
+    #
+    #   Setting this to `true` and providing a `vpcConfiguration` to set will
+    #   return an error.
+    #
+    # @option params [Types::NetworkAccessConfiguration] :network_access_control
+    #   The configuration settings for network access to your workspace.
+    #
+    #   When this is configured, only listed IP addresses and VPC endpoints
+    #   will be able to access your workspace. Standard Grafana authentication
+    #   and authorization will still be required.
+    #
+    #   If this is not configured, or is removed, then all IP addresses and
+    #   VPC endpoints will be allowed. Standard Grafana authentication and
+    #   authorization will still be required.
+    #
+    # @option params [Boolean] :remove_network_access_configuration
+    #   Whether to remove the network access configuration from the workspace.
+    #
+    #   Setting this to `true` and providing a `networkAccessControl` to set
+    #   will return an error.
+    #
+    #   If you remove this configuration by setting this to `true`, then all
+    #   IP addresses and VPC endpoints will be allowed. Standard Grafana
+    #   authentication and authorization will still be required.
+    #
     # @return [Types::UpdateWorkspaceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateWorkspaceResponse#workspace #workspace} => Types::WorkspaceDescription
@@ -1960,19 +1970,9 @@ module Aws::ManagedGrafana
     #
     #   resp = client.update_workspace({
     #     account_access_type: "CURRENT_ACCOUNT", # accepts CURRENT_ACCOUNT, ORGANIZATION
-    #     network_access_control: {
-    #       prefix_list_ids: ["PrefixListId"], # required
-    #       vpce_ids: ["VpceId"], # required
-    #     },
     #     organization_role_name: "OrganizationRoleName",
     #     permission_type: "CUSTOMER_MANAGED", # accepts CUSTOMER_MANAGED, SERVICE_MANAGED
-    #     remove_network_access_configuration: false,
-    #     remove_vpc_configuration: false,
     #     stack_set_name: "StackSetName",
-    #     vpc_configuration: {
-    #       security_group_ids: ["SecurityGroupId"], # required
-    #       subnet_ids: ["SubnetId"], # required
-    #     },
     #     workspace_data_sources: ["AMAZON_OPENSEARCH_SERVICE"], # accepts AMAZON_OPENSEARCH_SERVICE, CLOUDWATCH, PROMETHEUS, XRAY, TIMESTREAM, SITEWISE, ATHENA, REDSHIFT, TWINMAKER
     #     workspace_description: "Description",
     #     workspace_id: "WorkspaceId", # required
@@ -1980,47 +1980,58 @@ module Aws::ManagedGrafana
     #     workspace_notification_destinations: ["SNS"], # accepts SNS
     #     workspace_organizational_units: ["OrganizationalUnit"],
     #     workspace_role_arn: "IamRoleArn",
+    #     vpc_configuration: {
+    #       security_group_ids: ["SecurityGroupId"], # required
+    #       subnet_ids: ["SubnetId"], # required
+    #     },
+    #     remove_vpc_configuration: false,
+    #     network_access_control: {
+    #       prefix_list_ids: ["PrefixListId"], # required
+    #       vpce_ids: ["VpceId"], # required
+    #     },
+    #     remove_network_access_configuration: false,
     #   })
     #
     # @example Response structure
     #
     #   resp.workspace.account_access_type #=> String, one of "CURRENT_ACCOUNT", "ORGANIZATION"
-    #   resp.workspace.authentication.providers #=> Array
-    #   resp.workspace.authentication.providers[0] #=> String, one of "AWS_SSO", "SAML"
-    #   resp.workspace.authentication.saml_configuration_status #=> String, one of "CONFIGURED", "NOT_CONFIGURED"
     #   resp.workspace.created #=> Time
     #   resp.workspace.data_sources #=> Array
     #   resp.workspace.data_sources[0] #=> String, one of "AMAZON_OPENSEARCH_SERVICE", "CLOUDWATCH", "PROMETHEUS", "XRAY", "TIMESTREAM", "SITEWISE", "ATHENA", "REDSHIFT", "TWINMAKER"
     #   resp.workspace.description #=> String
     #   resp.workspace.endpoint #=> String
-    #   resp.workspace.free_trial_consumed #=> Boolean
-    #   resp.workspace.free_trial_expiration #=> Time
-    #   resp.workspace.grafana_token #=> String
     #   resp.workspace.grafana_version #=> String
     #   resp.workspace.id #=> String
-    #   resp.workspace.license_expiration #=> Time
-    #   resp.workspace.license_type #=> String, one of "ENTERPRISE", "ENTERPRISE_FREE_TRIAL"
     #   resp.workspace.modified #=> Time
     #   resp.workspace.name #=> String
-    #   resp.workspace.network_access_control.prefix_list_ids #=> Array
-    #   resp.workspace.network_access_control.prefix_list_ids[0] #=> String
-    #   resp.workspace.network_access_control.vpce_ids #=> Array
-    #   resp.workspace.network_access_control.vpce_ids[0] #=> String
+    #   resp.workspace.organization_role_name #=> String
     #   resp.workspace.notification_destinations #=> Array
     #   resp.workspace.notification_destinations[0] #=> String, one of "SNS"
-    #   resp.workspace.organization_role_name #=> String
     #   resp.workspace.organizational_units #=> Array
     #   resp.workspace.organizational_units[0] #=> String
     #   resp.workspace.permission_type #=> String, one of "CUSTOMER_MANAGED", "SERVICE_MANAGED"
     #   resp.workspace.stack_set_name #=> String
     #   resp.workspace.status #=> String, one of "ACTIVE", "CREATING", "DELETING", "FAILED", "UPDATING", "UPGRADING", "DELETION_FAILED", "CREATION_FAILED", "UPDATE_FAILED", "UPGRADE_FAILED", "LICENSE_REMOVAL_FAILED", "VERSION_UPDATING", "VERSION_UPDATE_FAILED"
+    #   resp.workspace.workspace_role_arn #=> String
+    #   resp.workspace.license_type #=> String, one of "ENTERPRISE", "ENTERPRISE_FREE_TRIAL"
+    #   resp.workspace.free_trial_consumed #=> Boolean
+    #   resp.workspace.license_expiration #=> Time
+    #   resp.workspace.free_trial_expiration #=> Time
+    #   resp.workspace.authentication.providers #=> Array
+    #   resp.workspace.authentication.providers[0] #=> String, one of "AWS_SSO", "SAML"
+    #   resp.workspace.authentication.saml_configuration_status #=> String, one of "CONFIGURED", "NOT_CONFIGURED"
     #   resp.workspace.tags #=> Hash
     #   resp.workspace.tags["TagKey"] #=> String
     #   resp.workspace.vpc_configuration.security_group_ids #=> Array
     #   resp.workspace.vpc_configuration.security_group_ids[0] #=> String
     #   resp.workspace.vpc_configuration.subnet_ids #=> Array
     #   resp.workspace.vpc_configuration.subnet_ids[0] #=> String
-    #   resp.workspace.workspace_role_arn #=> String
+    #   resp.workspace.network_access_control.prefix_list_ids #=> Array
+    #   resp.workspace.network_access_control.prefix_list_ids[0] #=> String
+    #   resp.workspace.network_access_control.vpce_ids #=> Array
+    #   resp.workspace.network_access_control.vpce_ids[0] #=> String
+    #   resp.workspace.grafana_token #=> String
+    #   resp.workspace.kms_key_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/grafana-2020-08-18/UpdateWorkspace AWS API Documentation
     #
@@ -2042,6 +2053,9 @@ module Aws::ManagedGrafana
     #
     #  </note>
     #
+    # @option params [required, String] :workspace_id
+    #   The ID of the workspace to update the authentication for.
+    #
     # @option params [required, Array<String>] :authentication_providers
     #   Specifies whether this workspace uses SAML 2.0, IAM Identity Center,
     #   or both to authenticate users for using the Grafana console within a
@@ -2058,9 +2072,6 @@ module Aws::ManagedGrafana
     #   the assertion attribute are to have the `Admin` and `Editor` roles in
     #   the workspace.
     #
-    # @option params [required, String] :workspace_id
-    #   The ID of the workspace to update the authentication for.
-    #
     # @return [Types::UpdateWorkspaceAuthenticationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateWorkspaceAuthenticationResponse#authentication #authentication} => Types::AuthenticationDescription
@@ -2068,51 +2079,51 @@ module Aws::ManagedGrafana
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_workspace_authentication({
+    #     workspace_id: "WorkspaceId", # required
     #     authentication_providers: ["AWS_SSO"], # required, accepts AWS_SSO, SAML
     #     saml_configuration: {
-    #       allowed_organizations: ["AllowedOrganization"],
-    #       assertion_attributes: {
-    #         email: "AssertionAttribute",
-    #         groups: "AssertionAttribute",
-    #         login: "AssertionAttribute",
-    #         name: "AssertionAttribute",
-    #         org: "AssertionAttribute",
-    #         role: "AssertionAttribute",
-    #       },
     #       idp_metadata: { # required
     #         url: "IdpMetadataUrl",
     #         xml: "String",
     #       },
-    #       login_validity_duration: 1,
-    #       role_values: {
-    #         admin: ["RoleValue"],
-    #         editor: ["RoleValue"],
+    #       assertion_attributes: {
+    #         name: "AssertionAttribute",
+    #         login: "AssertionAttribute",
+    #         email: "AssertionAttribute",
+    #         groups: "AssertionAttribute",
+    #         role: "AssertionAttribute",
+    #         org: "AssertionAttribute",
     #       },
+    #       role_values: {
+    #         editor: ["RoleValue"],
+    #         admin: ["RoleValue"],
+    #       },
+    #       allowed_organizations: ["AllowedOrganization"],
+    #       login_validity_duration: 1,
     #     },
-    #     workspace_id: "WorkspaceId", # required
     #   })
     #
     # @example Response structure
     #
-    #   resp.authentication.aws_sso.sso_client_id #=> String
     #   resp.authentication.providers #=> Array
     #   resp.authentication.providers[0] #=> String, one of "AWS_SSO", "SAML"
-    #   resp.authentication.saml.configuration.allowed_organizations #=> Array
-    #   resp.authentication.saml.configuration.allowed_organizations[0] #=> String
-    #   resp.authentication.saml.configuration.assertion_attributes.email #=> String
-    #   resp.authentication.saml.configuration.assertion_attributes.groups #=> String
-    #   resp.authentication.saml.configuration.assertion_attributes.login #=> String
-    #   resp.authentication.saml.configuration.assertion_attributes.name #=> String
-    #   resp.authentication.saml.configuration.assertion_attributes.org #=> String
-    #   resp.authentication.saml.configuration.assertion_attributes.role #=> String
+    #   resp.authentication.saml.status #=> String, one of "CONFIGURED", "NOT_CONFIGURED"
     #   resp.authentication.saml.configuration.idp_metadata.url #=> String
     #   resp.authentication.saml.configuration.idp_metadata.xml #=> String
-    #   resp.authentication.saml.configuration.login_validity_duration #=> Integer
-    #   resp.authentication.saml.configuration.role_values.admin #=> Array
-    #   resp.authentication.saml.configuration.role_values.admin[0] #=> String
+    #   resp.authentication.saml.configuration.assertion_attributes.name #=> String
+    #   resp.authentication.saml.configuration.assertion_attributes.login #=> String
+    #   resp.authentication.saml.configuration.assertion_attributes.email #=> String
+    #   resp.authentication.saml.configuration.assertion_attributes.groups #=> String
+    #   resp.authentication.saml.configuration.assertion_attributes.role #=> String
+    #   resp.authentication.saml.configuration.assertion_attributes.org #=> String
     #   resp.authentication.saml.configuration.role_values.editor #=> Array
     #   resp.authentication.saml.configuration.role_values.editor[0] #=> String
-    #   resp.authentication.saml.status #=> String, one of "CONFIGURED", "NOT_CONFIGURED"
+    #   resp.authentication.saml.configuration.role_values.admin #=> Array
+    #   resp.authentication.saml.configuration.role_values.admin[0] #=> String
+    #   resp.authentication.saml.configuration.allowed_organizations #=> Array
+    #   resp.authentication.saml.configuration.allowed_organizations[0] #=> String
+    #   resp.authentication.saml.configuration.login_validity_duration #=> Integer
+    #   resp.authentication.aws_sso.sso_client_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/grafana-2020-08-18/UpdateWorkspaceAuthentication AWS API Documentation
     #
@@ -2138,6 +2149,9 @@ module Aws::ManagedGrafana
     #
     #   [1]: https://docs.aws.amazon.com/grafana/latest/userguide/AMG-configure-workspace.html
     #
+    # @option params [required, String] :workspace_id
+    #   The ID of the workspace to update.
+    #
     # @option params [String] :grafana_version
     #   Specifies the version of Grafana to support in the workspace. If not
     #   specified, keeps the current version of the workspace.
@@ -2152,17 +2166,14 @@ module Aws::ManagedGrafana
     #
     #   [1]: https://docs.aws.amazon.com/grafana/latest/APIReference/API_ListVersions.html
     #
-    # @option params [required, String] :workspace_id
-    #   The ID of the workspace to update.
-    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_workspace_configuration({
     #     configuration: "OverridableConfigurationJson", # required
-    #     grafana_version: "GrafanaVersion",
     #     workspace_id: "WorkspaceId", # required
+    #     grafana_version: "GrafanaVersion",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/grafana-2020-08-18/UpdateWorkspaceConfiguration AWS API Documentation
@@ -2192,7 +2203,7 @@ module Aws::ManagedGrafana
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-managedgrafana'
-      context[:gem_version] = '1.58.0'
+      context[:gem_version] = '1.59.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -332,7 +332,8 @@ module Aws
                                          work_group: ::String,
                                          output_location: ::String?,
                                          database_name: ::String,
-                                         table_name: ::String
+                                         table_name: ::String,
+                                         catalog_name: ::String?
                                        }?
                                      },
                                      allowed_columns: Array[::String],
@@ -1388,7 +1389,8 @@ module Aws
                                          work_group: ::String,
                                          output_location: ::String?,
                                          database_name: ::String,
-                                         table_name: ::String
+                                         table_name: ::String,
+                                         catalog_name: ::String?
                                        }?
                                      },
                                      ?allowed_columns: Array[::String],

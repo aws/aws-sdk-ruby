@@ -6069,8 +6069,7 @@ module Aws::Connect
     # @!attribute [rw] content
     #   The localized content of the notification. A map where keys are
     #   locale codes and values are the notification text in that locale.
-    #   Content supports markdown formatting and embedded links. Maximum 250
-    #   characters per locale.
+    #   Content supports links. Maximum 250 characters per locale.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] tags

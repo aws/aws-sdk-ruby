@@ -494,6 +494,9 @@ module Aws
                                     ],
                                     ?spread_level: ("host" | "rack"),
                                     ?linked_group_id: ::String,
+                                    ?operator: {
+                                      principal: ::String?
+                                    },
                                     ?dry_run: bool,
                                     ?group_name: ::String,
                                     ?strategy: ("cluster" | "spread" | "partition")

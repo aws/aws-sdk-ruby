@@ -175,6 +175,7 @@ module Aws::KMS
       attr_accessor encryption_algorithm: ("SYMMETRIC_DEFAULT" | "RSAES_OAEP_SHA_1" | "RSAES_OAEP_SHA_256" | "SM2PKE")
       attr_accessor recipient: Types::RecipientInfo
       attr_accessor dry_run: bool
+      attr_accessor dry_run_modifiers: ::Array[("IGNORE_CIPHERTEXT")]
       SENSITIVE: []
     end
 
@@ -779,6 +780,7 @@ module Aws::KMS
       attr_accessor destination_encryption_algorithm: ("SYMMETRIC_DEFAULT" | "RSAES_OAEP_SHA_1" | "RSAES_OAEP_SHA_256" | "SM2PKE")
       attr_accessor grant_tokens: ::Array[::String]
       attr_accessor dry_run: bool
+      attr_accessor dry_run_modifiers: ::Array[("IGNORE_CIPHERTEXT")]
       SENSITIVE: []
     end
 

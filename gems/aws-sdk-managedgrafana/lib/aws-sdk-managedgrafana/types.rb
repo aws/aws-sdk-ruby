@@ -27,6 +27,16 @@ module Aws::ManagedGrafana
     # be used to define information about the users authenticated by the IdP
     # to use the workspace.
     #
+    # @!attribute [rw] name
+    #   The name of the attribute within the SAML assertion to use as the
+    #   user full "friendly" names for SAML users.
+    #   @return [String]
+    #
+    # @!attribute [rw] login
+    #   The name of the attribute within the SAML assertion to use as the
+    #   login names for SAML users.
+    #   @return [String]
+    #
     # @!attribute [rw] email
     #   The name of the attribute within the SAML assertion to use as the
     #   email names for SAML users.
@@ -37,14 +47,9 @@ module Aws::ManagedGrafana
     #   user full "friendly" names for user groups.
     #   @return [String]
     #
-    # @!attribute [rw] login
+    # @!attribute [rw] role
     #   The name of the attribute within the SAML assertion to use as the
-    #   login names for SAML users.
-    #   @return [String]
-    #
-    # @!attribute [rw] name
-    #   The name of the attribute within the SAML assertion to use as the
-    #   user full "friendly" names for SAML users.
+    #   user roles.
     #   @return [String]
     #
     # @!attribute [rw] org
@@ -52,32 +57,21 @@ module Aws::ManagedGrafana
     #   user full "friendly" names for the users' organizations.
     #   @return [String]
     #
-    # @!attribute [rw] role
-    #   The name of the attribute within the SAML assertion to use as the
-    #   user roles.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/grafana-2020-08-18/AssertionAttributes AWS API Documentation
     #
     class AssertionAttributes < Struct.new(
+      :name,
+      :login,
       :email,
       :groups,
-      :login,
-      :name,
-      :org,
-      :role)
+      :role,
+      :org)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # @!attribute [rw] grafana_token
-    #   A token from Grafana Labs that ties your Amazon Web Services account
-    #   with a Grafana Labs account. For more information, see [Link your
-    #   account with Grafana Labs][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/grafana/latest/userguide/upgrade-to-Grafana-Enterprise.html#AMG-workspace-register-enterprise
+    # @!attribute [rw] workspace_id
+    #   The ID of the workspace to associate the license with.
     #   @return [String]
     #
     # @!attribute [rw] license_type
@@ -89,16 +83,22 @@ module Aws::ManagedGrafana
     #    </note>
     #   @return [String]
     #
-    # @!attribute [rw] workspace_id
-    #   The ID of the workspace to associate the license with.
+    # @!attribute [rw] grafana_token
+    #   A token from Grafana Labs that ties your Amazon Web Services account
+    #   with a Grafana Labs account. For more information, see [Link your
+    #   account with Grafana Labs][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/grafana/latest/userguide/upgrade-to-Grafana-Enterprise.html#AMG-workspace-register-enterprise
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/grafana-2020-08-18/AssociateLicenseRequest AWS API Documentation
     #
     class AssociateLicenseRequest < Struct.new(
-      :grafana_token,
+      :workspace_id,
       :license_type,
-      :workspace_id)
+      :grafana_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -118,11 +118,6 @@ module Aws::ManagedGrafana
     # A structure containing information about the user authentication
     # methods used by the workspace.
     #
-    # @!attribute [rw] aws_sso
-    #   A structure containing information about how this workspace works
-    #   with IAM Identity Center.
-    #   @return [Types::AwsSsoAuthentication]
-    #
     # @!attribute [rw] providers
     #   Specifies whether this workspace uses IAM Identity Center, SAML, or
     #   both methods to authenticate users to use the Grafana console in the
@@ -135,12 +130,17 @@ module Aws::ManagedGrafana
     #   mapped to user information in the workspace.
     #   @return [Types::SamlAuthentication]
     #
+    # @!attribute [rw] aws_sso
+    #   A structure containing information about how this workspace works
+    #   with IAM Identity Center.
+    #   @return [Types::AwsSsoAuthentication]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/grafana-2020-08-18/AuthenticationDescription AWS API Documentation
     #
     class AuthenticationDescription < Struct.new(
-      :aws_sso,
       :providers,
-      :saml)
+      :saml,
+      :aws_sso)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -240,13 +240,13 @@ module Aws::ManagedGrafana
       include Aws::Structure
     end
 
+    # @!attribute [rw] key_name
+    #   The name of the key that was created.
+    #   @return [String]
+    #
     # @!attribute [rw] key
     #   The key token. Use this value as a bearer token to authenticate HTTP
     #   requests to the workspace.
-    #   @return [String]
-    #
-    # @!attribute [rw] key_name
-    #   The name of the key that was created.
     #   @return [String]
     #
     # @!attribute [rw] workspace_id
@@ -256,8 +256,8 @@ module Aws::ManagedGrafana
     # @see http://docs.aws.amazon.com/goto/WebAPI/grafana-2020-08-18/CreateWorkspaceApiKeyResponse AWS API Documentation
     #
     class CreateWorkspaceApiKeyResponse < Struct.new(
-      :key,
       :key_name,
+      :key,
       :workspace_id)
       SENSITIVE = [:key]
       include Aws::Structure
@@ -272,17 +272,6 @@ module Aws::ManagedGrafana
     #   `workspaceOrganizationalUnits` parameter.
     #   @return [String]
     #
-    # @!attribute [rw] authentication_providers
-    #   Specifies whether this workspace uses SAML 2.0, IAM Identity Center,
-    #   or both to authenticate users for using the Grafana console within a
-    #   workspace. For more information, see [User authentication in Amazon
-    #   Managed Grafana][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/grafana/latest/userguide/authentication-in-AMG.html
-    #   @return [Array<String>]
-    #
     # @!attribute [rw] client_token
     #   A unique, case-sensitive, user-provided identifier to ensure the
     #   idempotency of the request.
@@ -290,36 +279,6 @@ module Aws::ManagedGrafana
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
     #   @return [String]
-    #
-    # @!attribute [rw] configuration
-    #   The configuration string for the workspace that you create. For more
-    #   information about the format and configuration options available,
-    #   see [Working in your Grafana workspace][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/grafana/latest/userguide/AMG-configure-workspace.html
-    #   @return [String]
-    #
-    # @!attribute [rw] grafana_version
-    #   Specifies the version of Grafana to support in the new workspace. If
-    #   not specified, defaults to the latest version (for example, 10.4).
-    #
-    #   To get a list of supported versions, use the `ListVersions`
-    #   operation.
-    #   @return [String]
-    #
-    # @!attribute [rw] network_access_control
-    #   Configuration for network access to your workspace.
-    #
-    #   When this is configured, only listed IP addresses and VPC endpoints
-    #   will be able to access your workspace. Standard Grafana
-    #   authentication and authorization will still be required.
-    #
-    #   If this is not configured, or is removed, then all IP addresses and
-    #   VPC endpoints will be allowed. Standard Grafana authentication and
-    #   authorization will still be required.
-    #   @return [Types::NetworkAccessConfiguration]
     #
     # @!attribute [rw] organization_role_name
     #   The name of an IAM role that already exists to use with
@@ -360,20 +319,6 @@ module Aws::ManagedGrafana
     #   roles to be used for this workspace.
     #   @return [String]
     #
-    # @!attribute [rw] tags
-    #   The list of tags associated with the workspace.
-    #   @return [Hash<String,String>]
-    #
-    # @!attribute [rw] vpc_configuration
-    #   The configuration settings for an Amazon VPC that contains data
-    #   sources for your Grafana workspace to connect to.
-    #
-    #   <note markdown="1"> Connecting to a private VPC is not yet available in the Asia Pacific
-    #   (Seoul) Region (ap-northeast-2).
-    #
-    #    </note>
-    #   @return [Types::VpcConfiguration]
-    #
     # @!attribute [rw] workspace_data_sources
     #   This parameter is for internal use only, and should not be used.
     #   @return [Array<String>]
@@ -410,26 +355,87 @@ module Aws::ManagedGrafana
     #   notification channels are added.
     #   @return [String]
     #
+    # @!attribute [rw] authentication_providers
+    #   Specifies whether this workspace uses SAML 2.0, IAM Identity Center,
+    #   or both to authenticate users for using the Grafana console within a
+    #   workspace. For more information, see [User authentication in Amazon
+    #   Managed Grafana][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/grafana/latest/userguide/authentication-in-AMG.html
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] tags
+    #   The list of tags associated with the workspace.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] vpc_configuration
+    #   The configuration settings for an Amazon VPC that contains data
+    #   sources for your Grafana workspace to connect to.
+    #
+    #   <note markdown="1"> Connecting to a private VPC is not yet available in the Asia Pacific
+    #   (Seoul) Region (ap-northeast-2).
+    #
+    #    </note>
+    #   @return [Types::VpcConfiguration]
+    #
+    # @!attribute [rw] configuration
+    #   The configuration string for the workspace that you create. For more
+    #   information about the format and configuration options available,
+    #   see [Working in your Grafana workspace][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/grafana/latest/userguide/AMG-configure-workspace.html
+    #   @return [String]
+    #
+    # @!attribute [rw] network_access_control
+    #   Configuration for network access to your workspace.
+    #
+    #   When this is configured, only listed IP addresses and VPC endpoints
+    #   will be able to access your workspace. Standard Grafana
+    #   authentication and authorization will still be required.
+    #
+    #   If this is not configured, or is removed, then all IP addresses and
+    #   VPC endpoints will be allowed. Standard Grafana authentication and
+    #   authorization will still be required.
+    #   @return [Types::NetworkAccessConfiguration]
+    #
+    # @!attribute [rw] grafana_version
+    #   Specifies the version of Grafana to support in the new workspace. If
+    #   not specified, defaults to the latest version (for example, 10.4).
+    #
+    #   To get a list of supported versions, use the `ListVersions`
+    #   operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_key_id
+    #   The ID or ARN of the Key Management Service key to use for
+    #   encrypting workspace data.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/grafana-2020-08-18/CreateWorkspaceRequest AWS API Documentation
     #
     class CreateWorkspaceRequest < Struct.new(
       :account_access_type,
-      :authentication_providers,
       :client_token,
-      :configuration,
-      :grafana_version,
-      :network_access_control,
       :organization_role_name,
       :permission_type,
       :stack_set_name,
-      :tags,
-      :vpc_configuration,
       :workspace_data_sources,
       :workspace_description,
       :workspace_name,
       :workspace_notification_destinations,
       :workspace_organizational_units,
-      :workspace_role_arn)
+      :workspace_role_arn,
+      :authentication_providers,
+      :tags,
+      :vpc_configuration,
+      :configuration,
+      :network_access_control,
+      :grafana_version,
+      :kms_key_id)
       SENSITIVE = [:organization_role_name, :workspace_description, :workspace_name, :workspace_organizational_units, :workspace_role_arn]
       include Aws::Structure
     end
@@ -446,6 +452,12 @@ module Aws::ManagedGrafana
       include Aws::Structure
     end
 
+    # @!attribute [rw] name
+    #   A name for the service account. The name must be unique within the
+    #   workspace, as it determines the ID associated with the service
+    #   account.
+    #   @return [String]
+    #
     # @!attribute [rw] grafana_role
     #   The permission level to use for this service account.
     #
@@ -459,12 +471,6 @@ module Aws::ManagedGrafana
     #   [1]: https://docs.aws.amazon.com/grafana/latest/userguide/Grafana-user-roles.html
     #   @return [String]
     #
-    # @!attribute [rw] name
-    #   A name for the service account. The name must be unique within the
-    #   workspace, as it determines the ID associated with the service
-    #   account.
-    #   @return [String]
-    #
     # @!attribute [rw] workspace_id
     #   The ID of the workspace within which to create the service account.
     #   @return [String]
@@ -472,23 +478,23 @@ module Aws::ManagedGrafana
     # @see http://docs.aws.amazon.com/goto/WebAPI/grafana-2020-08-18/CreateWorkspaceServiceAccountRequest AWS API Documentation
     #
     class CreateWorkspaceServiceAccountRequest < Struct.new(
-      :grafana_role,
       :name,
+      :grafana_role,
       :workspace_id)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # @!attribute [rw] grafana_role
-    #   The permission level given to the service account.
-    #   @return [String]
-    #
     # @!attribute [rw] id
     #   The ID of the service account.
     #   @return [String]
     #
     # @!attribute [rw] name
     #   The name of the service account.
+    #   @return [String]
+    #
+    # @!attribute [rw] grafana_role
+    #   The permission level given to the service account.
     #   @return [String]
     #
     # @!attribute [rw] workspace_id
@@ -498,9 +504,9 @@ module Aws::ManagedGrafana
     # @see http://docs.aws.amazon.com/goto/WebAPI/grafana-2020-08-18/CreateWorkspaceServiceAccountResponse AWS API Documentation
     #
     class CreateWorkspaceServiceAccountResponse < Struct.new(
-      :grafana_role,
       :id,
       :name,
+      :grafana_role,
       :workspace_id)
       SENSITIVE = []
       include Aws::Structure
@@ -534,14 +540,14 @@ module Aws::ManagedGrafana
       include Aws::Structure
     end
 
-    # @!attribute [rw] service_account_id
-    #   The ID of the service account where the token was created.
-    #   @return [String]
-    #
     # @!attribute [rw] service_account_token
     #   Information about the created token, including the key. Be sure to
     #   store the key securely.
     #   @return [Types::ServiceAccountTokenSummaryWithKey]
+    #
+    # @!attribute [rw] service_account_id
+    #   The ID of the service account where the token was created.
+    #   @return [String]
     #
     # @!attribute [rw] workspace_id
     #   The ID of the workspace where the token was created.
@@ -550,8 +556,8 @@ module Aws::ManagedGrafana
     # @see http://docs.aws.amazon.com/goto/WebAPI/grafana-2020-08-18/CreateWorkspaceServiceAccountTokenResponse AWS API Documentation
     #
     class CreateWorkspaceServiceAccountTokenResponse < Struct.new(
-      :service_account_id,
       :service_account_token,
+      :service_account_id,
       :workspace_id)
       SENSITIVE = []
       include Aws::Structure
@@ -650,12 +656,12 @@ module Aws::ManagedGrafana
       include Aws::Structure
     end
 
-    # @!attribute [rw] service_account_id
-    #   The ID of the service account from which to delete the token.
-    #   @return [String]
-    #
     # @!attribute [rw] token_id
     #   The ID of the token to delete.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_account_id
+    #   The ID of the service account from which to delete the token.
     #   @return [String]
     #
     # @!attribute [rw] workspace_id
@@ -665,19 +671,19 @@ module Aws::ManagedGrafana
     # @see http://docs.aws.amazon.com/goto/WebAPI/grafana-2020-08-18/DeleteWorkspaceServiceAccountTokenRequest AWS API Documentation
     #
     class DeleteWorkspaceServiceAccountTokenRequest < Struct.new(
-      :service_account_id,
       :token_id,
+      :service_account_id,
       :workspace_id)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # @!attribute [rw] service_account_id
-    #   The ID of the service account where the token was deleted.
-    #   @return [String]
-    #
     # @!attribute [rw] token_id
     #   The ID of the token that was deleted.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_account_id
+    #   The ID of the service account where the token was deleted.
     #   @return [String]
     #
     # @!attribute [rw] workspace_id
@@ -687,8 +693,8 @@ module Aws::ManagedGrafana
     # @see http://docs.aws.amazon.com/goto/WebAPI/grafana-2020-08-18/DeleteWorkspaceServiceAccountTokenResponse AWS API Documentation
     #
     class DeleteWorkspaceServiceAccountTokenResponse < Struct.new(
-      :service_account_id,
       :token_id,
+      :service_account_id,
       :workspace_id)
       SENSITIVE = []
       include Aws::Structure
@@ -778,20 +784,20 @@ module Aws::ManagedGrafana
       include Aws::Structure
     end
 
-    # @!attribute [rw] license_type
-    #   The type of license to remove from the workspace.
-    #   @return [String]
-    #
     # @!attribute [rw] workspace_id
     #   The ID of the workspace to remove the Grafana Enterprise license
     #   from.
     #   @return [String]
     #
+    # @!attribute [rw] license_type
+    #   The type of license to remove from the workspace.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/grafana-2020-08-18/DisassociateLicenseRequest AWS API Documentation
     #
     class DisassociateLicenseRequest < Struct.new(
-      :license_type,
-      :workspace_id)
+      :workspace_id,
+      :license_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -860,11 +866,6 @@ module Aws::ManagedGrafana
       include Aws::Structure
     end
 
-    # @!attribute [rw] group_id
-    #   (Optional) Limits the results to only the group that matches this
-    #   ID.
-    #   @return [String]
-    #
     # @!attribute [rw] max_results
     #   The maximum number of results to include in the response.
     #   @return [Integer]
@@ -874,14 +875,19 @@ module Aws::ManagedGrafana
     #   received this token from a previous `ListPermissions` operation.
     #   @return [String]
     #
-    # @!attribute [rw] user_id
-    #   (Optional) Limits the results to only the user that matches this ID.
-    #   @return [String]
-    #
     # @!attribute [rw] user_type
     #   (Optional) If you specify `SSO_USER`, then only the permissions of
     #   IAM Identity Center users are returned. If you specify `SSO_GROUP`,
     #   only the permissions of IAM Identity Center groups are returned.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_id
+    #   (Optional) Limits the results to only the user that matches this ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] group_id
+    #   (Optional) Limits the results to only the group that matches this
+    #   ID.
     #   @return [String]
     #
     # @!attribute [rw] workspace_id
@@ -892,11 +898,11 @@ module Aws::ManagedGrafana
     # @see http://docs.aws.amazon.com/goto/WebAPI/grafana-2020-08-18/ListPermissionsRequest AWS API Documentation
     #
     class ListPermissionsRequest < Struct.new(
-      :group_id,
       :max_results,
       :next_token,
-      :user_id,
       :user_type,
+      :user_id,
+      :group_id,
       :workspace_id)
       SENSITIVE = []
       include Aws::Structure
@@ -969,22 +975,22 @@ module Aws::ManagedGrafana
       include Aws::Structure
     end
 
+    # @!attribute [rw] next_token
+    #   The token to use in a subsequent `ListVersions` operation to return
+    #   the next set of results.
+    #   @return [String]
+    #
     # @!attribute [rw] grafana_versions
     #   The Grafana versions available to create. If a workspace ID is
     #   included in the request, the Grafana versions to which this
     #   workspace can be upgraded.
     #   @return [Array<String>]
     #
-    # @!attribute [rw] next_token
-    #   The token to use in a subsequent `ListVersions` operation to return
-    #   the next set of results.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/grafana-2020-08-18/ListVersionsResponse AWS API Documentation
     #
     class ListVersionsResponse < Struct.new(
-      :grafana_versions,
-      :next_token)
+      :next_token,
+      :grafana_versions)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1022,13 +1028,13 @@ module Aws::ManagedGrafana
     #   The token to use when requesting the next set of service accounts.
     #   @return [String]
     #
-    # @!attribute [rw] service_account_id
-    #   The ID of the service account where the tokens reside.
-    #   @return [String]
-    #
     # @!attribute [rw] service_account_tokens
     #   An array of structures containing information about the tokens.
     #   @return [Array<Types::ServiceAccountTokenSummary>]
+    #
+    # @!attribute [rw] service_account_id
+    #   The ID of the service account where the tokens reside.
+    #   @return [String]
     #
     # @!attribute [rw] workspace_id
     #   The ID of the workspace where the tokens reside.
@@ -1038,8 +1044,8 @@ module Aws::ManagedGrafana
     #
     class ListWorkspaceServiceAccountTokensResponse < Struct.new(
       :next_token,
-      :service_account_id,
       :service_account_tokens,
+      :service_account_id,
       :workspace_id)
       SENSITIVE = []
       include Aws::Structure
@@ -1110,20 +1116,20 @@ module Aws::ManagedGrafana
       include Aws::Structure
     end
 
-    # @!attribute [rw] next_token
-    #   The token to use when requesting the next set of workspaces.
-    #   @return [String]
-    #
     # @!attribute [rw] workspaces
     #   An array of structures that contain some information about the
     #   workspaces in the account.
     #   @return [Array<Types::WorkspaceSummary>]
     #
+    # @!attribute [rw] next_token
+    #   The token to use when requesting the next set of workspaces.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/grafana-2020-08-18/ListWorkspacesResponse AWS API Documentation
     #
     class ListWorkspacesResponse < Struct.new(
-      :next_token,
-      :workspaces)
+      :workspaces,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1208,20 +1214,20 @@ module Aws::ManagedGrafana
     # A structure containing the identity of one user or group and the
     # `Admin`, `Editor`, or `Viewer` role that they have.
     #
+    # @!attribute [rw] user
+    #   A structure with the ID of the user or group with this role.
+    #   @return [Types::User]
+    #
     # @!attribute [rw] role
     #   Specifies whether the user or group has the `Admin`, `Editor`, or
     #   `Viewer` role.
     #   @return [String]
     #
-    # @!attribute [rw] user
-    #   A structure with the ID of the user or group with this role.
-    #   @return [Types::User]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/grafana-2020-08-18/PermissionEntry AWS API Documentation
     #
     class PermissionEntry < Struct.new(
-      :role,
-      :user)
+      :user,
+      :role)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1255,42 +1261,42 @@ module Aws::ManagedGrafana
     # in the workspace. SAML authenticated users not part of `Admin` or
     # `Editor` role groups have `Viewer` permission over the workspace.
     #
-    # @!attribute [rw] admin
-    #   A list of groups from the SAML assertion attribute to grant the
-    #   Grafana `Admin` role to.
-    #   @return [Array<String>]
-    #
     # @!attribute [rw] editor
     #   A list of groups from the SAML assertion attribute to grant the
     #   Grafana `Editor` role to.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] admin
+    #   A list of groups from the SAML assertion attribute to grant the
+    #   Grafana `Admin` role to.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/grafana-2020-08-18/RoleValues AWS API Documentation
     #
     class RoleValues < Struct.new(
-      :admin,
-      :editor)
-      SENSITIVE = [:admin, :editor]
+      :editor,
+      :admin)
+      SENSITIVE = [:editor, :admin]
       include Aws::Structure
     end
 
     # A structure containing information about how this workspace works with
     # SAML.
     #
+    # @!attribute [rw] status
+    #   Specifies whether the workspace's SAML configuration is complete.
+    #   @return [String]
+    #
     # @!attribute [rw] configuration
     #   A structure containing details about how this workspace works with
     #   SAML.
     #   @return [Types::SamlConfiguration]
     #
-    # @!attribute [rw] status
-    #   Specifies whether the workspace's SAML configuration is complete.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/grafana-2020-08-18/SamlAuthentication AWS API Documentation
     #
     class SamlAuthentication < Struct.new(
-      :configuration,
-      :status)
+      :status,
+      :configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1298,11 +1304,10 @@ module Aws::ManagedGrafana
     # A structure containing information about how this workspace works with
     # SAML.
     #
-    # @!attribute [rw] allowed_organizations
-    #   Lists which organizations defined in the SAML assertion are allowed
-    #   to use the Amazon Managed Grafana workspace. If this is empty, all
-    #   organizations in the assertion attribute have access.
-    #   @return [Array<String>]
+    # @!attribute [rw] idp_metadata
+    #   A structure containing the identity provider (IdP) metadata used to
+    #   integrate the identity provider with this workspace.
+    #   @return [Types::IdpMetadata]
     #
     # @!attribute [rw] assertion_attributes
     #   A structure that defines which attributes in the SAML assertion are
@@ -1310,43 +1315,43 @@ module Aws::ManagedGrafana
     #   that IdP to use the workspace.
     #   @return [Types::AssertionAttributes]
     #
-    # @!attribute [rw] idp_metadata
-    #   A structure containing the identity provider (IdP) metadata used to
-    #   integrate the identity provider with this workspace.
-    #   @return [Types::IdpMetadata]
-    #
-    # @!attribute [rw] login_validity_duration
-    #   How long a sign-on session by a SAML user is valid, before the user
-    #   has to sign on again.
-    #   @return [Integer]
-    #
     # @!attribute [rw] role_values
     #   A structure containing arrays that map group names in the SAML
     #   assertion to the Grafana `Admin` and `Editor` roles in the
     #   workspace.
     #   @return [Types::RoleValues]
     #
+    # @!attribute [rw] allowed_organizations
+    #   Lists which organizations defined in the SAML assertion are allowed
+    #   to use the Amazon Managed Grafana workspace. If this is empty, all
+    #   organizations in the assertion attribute have access.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] login_validity_duration
+    #   How long a sign-on session by a SAML user is valid, before the user
+    #   has to sign on again.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/grafana-2020-08-18/SamlConfiguration AWS API Documentation
     #
     class SamlConfiguration < Struct.new(
-      :allowed_organizations,
-      :assertion_attributes,
       :idp_metadata,
-      :login_validity_duration,
-      :role_values)
+      :assertion_attributes,
+      :role_values,
+      :allowed_organizations,
+      :login_validity_duration)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # A structure that contains the information about one service account.
     #
-    # @!attribute [rw] grafana_role
-    #   The role of the service account, which sets the permission level
-    #   used when calling Grafana APIs.
-    #   @return [String]
-    #
     # @!attribute [rw] id
     #   The unique ID of the service account.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the service account.
     #   @return [String]
     #
     # @!attribute [rw] is_disabled
@@ -1354,23 +1359,32 @@ module Aws::ManagedGrafana
     #   can be disabled and enabled in the Amazon Managed Grafana console.
     #   @return [String]
     #
-    # @!attribute [rw] name
-    #   The name of the service account.
+    # @!attribute [rw] grafana_role
+    #   The role of the service account, which sets the permission level
+    #   used when calling Grafana APIs.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/grafana-2020-08-18/ServiceAccountSummary AWS API Documentation
     #
     class ServiceAccountSummary < Struct.new(
-      :grafana_role,
       :id,
+      :name,
       :is_disabled,
-      :name)
+      :grafana_role)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # A structure that contains the information about a service account
     # token.
+    #
+    # @!attribute [rw] id
+    #   The unique ID of the service account token.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the service account token.
+    #   @return [String]
     #
     # @!attribute [rw] created_at
     #   When the service account token was created.
@@ -1380,26 +1394,18 @@ module Aws::ManagedGrafana
     #   When the service account token will expire.
     #   @return [Time]
     #
-    # @!attribute [rw] id
-    #   The unique ID of the service account token.
-    #   @return [String]
-    #
     # @!attribute [rw] last_used_at
     #   The last time the token was used to authorize a Grafana HTTP API.
     #   @return [Time]
     #
-    # @!attribute [rw] name
-    #   The name of the service account token.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/grafana-2020-08-18/ServiceAccountTokenSummary AWS API Documentation
     #
     class ServiceAccountTokenSummary < Struct.new(
+      :id,
+      :name,
       :created_at,
       :expires_at,
-      :id,
-      :last_used_at,
-      :name)
+      :last_used_at)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1418,21 +1424,21 @@ module Aws::ManagedGrafana
     #   The unique ID of the service account token.
     #   @return [String]
     #
+    # @!attribute [rw] name
+    #   The name of the service account token.
+    #   @return [String]
+    #
     # @!attribute [rw] key
     #   The key for the service account token. Used when making calls to the
     #   Grafana HTTP APIs to authenticate and authorize the requests.
-    #   @return [String]
-    #
-    # @!attribute [rw] name
-    #   The name of the service account token.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/grafana-2020-08-18/ServiceAccountTokenSummaryWithKey AWS API Documentation
     #
     class ServiceAccountTokenSummaryWithKey < Struct.new(
       :id,
-      :key,
-      :name)
+      :name,
+      :key)
       SENSITIVE = [:key]
       include Aws::Structure
     end
@@ -1441,10 +1447,6 @@ module Aws::ManagedGrafana
     #
     # @!attribute [rw] message
     #   A description of the error.
-    #   @return [String]
-    #
-    # @!attribute [rw] quota_code
-    #   The ID of the service quota that was exceeded.
     #   @return [String]
     #
     # @!attribute [rw] resource_id
@@ -1459,14 +1461,18 @@ module Aws::ManagedGrafana
     #   The value of a parameter in the request caused an error.
     #   @return [String]
     #
+    # @!attribute [rw] quota_code
+    #   The ID of the service quota that was exceeded.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/grafana-2020-08-18/ServiceQuotaExceededException AWS API Documentation
     #
     class ServiceQuotaExceededException < Struct.new(
       :message,
-      :quota_code,
       :resource_id,
       :resource_type,
-      :service_code)
+      :service_code,
+      :quota_code)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1501,6 +1507,10 @@ module Aws::ManagedGrafana
     #   A description of the error.
     #   @return [String]
     #
+    # @!attribute [rw] service_code
+    #   The ID of the service that is associated with the error.
+    #   @return [String]
+    #
     # @!attribute [rw] quota_code
     #   The ID of the service quota that was exceeded.
     #   @return [String]
@@ -1509,17 +1519,13 @@ module Aws::ManagedGrafana
     #   The value of a parameter in the request caused an error.
     #   @return [Integer]
     #
-    # @!attribute [rw] service_code
-    #   The ID of the service that is associated with the error.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/grafana-2020-08-18/ThrottlingException AWS API Documentation
     #
     class ThrottlingException < Struct.new(
       :message,
+      :service_code,
       :quota_code,
-      :retry_after_seconds,
-      :service_code)
+      :retry_after_seconds)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1552,10 +1558,6 @@ module Aws::ManagedGrafana
     #
     # [1]: https://docs.aws.amazon.com/grafana/latest/APIReference/API_UpdatePermissions.html
     #
-    # @!attribute [rw] caused_by
-    #   Specifies which permission update caused the error.
-    #   @return [Types::UpdateInstruction]
-    #
     # @!attribute [rw] code
     #   The error code.
     #   @return [Integer]
@@ -1564,12 +1566,16 @@ module Aws::ManagedGrafana
     #   The message for this error.
     #   @return [String]
     #
+    # @!attribute [rw] caused_by
+    #   Specifies which permission update caused the error.
+    #   @return [Types::UpdateInstruction]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/grafana-2020-08-18/UpdateError AWS API Documentation
     #
     class UpdateError < Struct.new(
-      :caused_by,
       :code,
-      :message)
+      :message,
+      :caused_by)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1635,6 +1641,10 @@ module Aws::ManagedGrafana
       include Aws::Structure
     end
 
+    # @!attribute [rw] workspace_id
+    #   The ID of the workspace to update the authentication for.
+    #   @return [String]
+    #
     # @!attribute [rw] authentication_providers
     #   Specifies whether this workspace uses SAML 2.0, IAM Identity Center,
     #   or both to authenticate users for using the Grafana console within a
@@ -1653,16 +1663,12 @@ module Aws::ManagedGrafana
     #   in the workspace.
     #   @return [Types::SamlConfiguration]
     #
-    # @!attribute [rw] workspace_id
-    #   The ID of the workspace to update the authentication for.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/grafana-2020-08-18/UpdateWorkspaceAuthenticationRequest AWS API Documentation
     #
     class UpdateWorkspaceAuthenticationRequest < Struct.new(
+      :workspace_id,
       :authentication_providers,
-      :saml_configuration,
-      :workspace_id)
+      :saml_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1690,6 +1696,10 @@ module Aws::ManagedGrafana
     #   [1]: https://docs.aws.amazon.com/grafana/latest/userguide/AMG-configure-workspace.html
     #   @return [String]
     #
+    # @!attribute [rw] workspace_id
+    #   The ID of the workspace to update.
+    #   @return [String]
+    #
     # @!attribute [rw] grafana_version
     #   Specifies the version of Grafana to support in the workspace. If not
     #   specified, keeps the current version of the workspace.
@@ -1705,16 +1715,12 @@ module Aws::ManagedGrafana
     #   [1]: https://docs.aws.amazon.com/grafana/latest/APIReference/API_ListVersions.html
     #   @return [String]
     #
-    # @!attribute [rw] workspace_id
-    #   The ID of the workspace to update.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/grafana-2020-08-18/UpdateWorkspaceConfigurationRequest AWS API Documentation
     #
     class UpdateWorkspaceConfigurationRequest < Struct.new(
       :configuration,
-      :grafana_version,
-      :workspace_id)
+      :workspace_id,
+      :grafana_version)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1731,18 +1737,6 @@ module Aws::ManagedGrafana
     #   specify which organizational units the workspace can access in the
     #   `workspaceOrganizationalUnits` parameter.
     #   @return [String]
-    #
-    # @!attribute [rw] network_access_control
-    #   The configuration settings for network access to your workspace.
-    #
-    #   When this is configured, only listed IP addresses and VPC endpoints
-    #   will be able to access your workspace. Standard Grafana
-    #   authentication and authorization will still be required.
-    #
-    #   If this is not configured, or is removed, then all IP addresses and
-    #   VPC endpoints will be allowed. Standard Grafana authentication and
-    #   authorization will still be required.
-    #   @return [Types::NetworkAccessConfiguration]
     #
     # @!attribute [rw] organization_role_name
     #   The name of an IAM role that already exists to use to access
@@ -1785,34 +1779,10 @@ module Aws::ManagedGrafana
     #   [2]: https://docs.aws.amazon.com/grafana/latest/userguide/AMG-datasource-and-notification.html
     #   @return [String]
     #
-    # @!attribute [rw] remove_network_access_configuration
-    #   Whether to remove the network access configuration from the
-    #   workspace.
-    #
-    #   Setting this to `true` and providing a `networkAccessControl` to set
-    #   will return an error.
-    #
-    #   If you remove this configuration by setting this to `true`, then all
-    #   IP addresses and VPC endpoints will be allowed. Standard Grafana
-    #   authentication and authorization will still be required.
-    #   @return [Boolean]
-    #
-    # @!attribute [rw] remove_vpc_configuration
-    #   Whether to remove the VPC configuration from the workspace.
-    #
-    #   Setting this to `true` and providing a `vpcConfiguration` to set
-    #   will return an error.
-    #   @return [Boolean]
-    #
     # @!attribute [rw] stack_set_name
     #   The name of the CloudFormation stack set to use to generate IAM
     #   roles to be used for this workspace.
     #   @return [String]
-    #
-    # @!attribute [rw] vpc_configuration
-    #   The configuration settings for an Amazon VPC that contains data
-    #   sources for your Grafana workspace to connect to.
-    #   @return [Types::VpcConfiguration]
     #
     # @!attribute [rw] workspace_data_sources
     #   This parameter is for internal use only, and should not be used.
@@ -1851,24 +1821,60 @@ module Aws::ManagedGrafana
     #   `CUSTOMER_MANAGED`, then this role is required.
     #   @return [String]
     #
+    # @!attribute [rw] vpc_configuration
+    #   The configuration settings for an Amazon VPC that contains data
+    #   sources for your Grafana workspace to connect to.
+    #   @return [Types::VpcConfiguration]
+    #
+    # @!attribute [rw] remove_vpc_configuration
+    #   Whether to remove the VPC configuration from the workspace.
+    #
+    #   Setting this to `true` and providing a `vpcConfiguration` to set
+    #   will return an error.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] network_access_control
+    #   The configuration settings for network access to your workspace.
+    #
+    #   When this is configured, only listed IP addresses and VPC endpoints
+    #   will be able to access your workspace. Standard Grafana
+    #   authentication and authorization will still be required.
+    #
+    #   If this is not configured, or is removed, then all IP addresses and
+    #   VPC endpoints will be allowed. Standard Grafana authentication and
+    #   authorization will still be required.
+    #   @return [Types::NetworkAccessConfiguration]
+    #
+    # @!attribute [rw] remove_network_access_configuration
+    #   Whether to remove the network access configuration from the
+    #   workspace.
+    #
+    #   Setting this to `true` and providing a `networkAccessControl` to set
+    #   will return an error.
+    #
+    #   If you remove this configuration by setting this to `true`, then all
+    #   IP addresses and VPC endpoints will be allowed. Standard Grafana
+    #   authentication and authorization will still be required.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/grafana-2020-08-18/UpdateWorkspaceRequest AWS API Documentation
     #
     class UpdateWorkspaceRequest < Struct.new(
       :account_access_type,
-      :network_access_control,
       :organization_role_name,
       :permission_type,
-      :remove_network_access_configuration,
-      :remove_vpc_configuration,
       :stack_set_name,
-      :vpc_configuration,
       :workspace_data_sources,
       :workspace_description,
       :workspace_id,
       :workspace_name,
       :workspace_notification_destinations,
       :workspace_organizational_units,
-      :workspace_role_arn)
+      :workspace_role_arn,
+      :vpc_configuration,
+      :remove_vpc_configuration,
+      :network_access_control,
+      :remove_network_access_configuration)
       SENSITIVE = [:organization_role_name, :workspace_description, :workspace_name, :workspace_organizational_units, :workspace_role_arn]
       include Aws::Structure
     end
@@ -1909,10 +1915,6 @@ module Aws::ManagedGrafana
 
     # The value of a parameter in the request caused an error.
     #
-    # @!attribute [rw] field_list
-    #   A list of fields that might be associated with the error.
-    #   @return [Array<Types::ValidationExceptionField>]
-    #
     # @!attribute [rw] message
     #   A description of the error.
     #   @return [String]
@@ -1921,12 +1923,16 @@ module Aws::ManagedGrafana
     #   The reason that the operation failed.
     #   @return [String]
     #
+    # @!attribute [rw] field_list
+    #   A list of fields that might be associated with the error.
+    #   @return [Array<Types::ValidationExceptionField>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/grafana-2020-08-18/ValidationException AWS API Documentation
     #
     class ValidationException < Struct.new(
-      :field_list,
       :message,
-      :reason)
+      :reason,
+      :field_list)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1934,19 +1940,19 @@ module Aws::ManagedGrafana
     # A structure that contains information about a request parameter that
     # caused an error.
     #
-    # @!attribute [rw] message
-    #   A message describing why this field couldn't be validated.
-    #   @return [String]
-    #
     # @!attribute [rw] name
     #   The name of the field that caused the validation error.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   A message describing why this field couldn't be validated.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/grafana-2020-08-18/ValidationExceptionField AWS API Documentation
     #
     class ValidationExceptionField < Struct.new(
-      :message,
-      :name)
+      :name,
+      :message)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1993,11 +1999,6 @@ module Aws::ManagedGrafana
     #   organizational units the workspace can access.
     #   @return [String]
     #
-    # @!attribute [rw] authentication
-    #   A structure that describes whether the workspace uses SAML, IAM
-    #   Identity Center, or both methods for user authentication.
-    #   @return [Types::AuthenticationSummary]
-    #
     # @!attribute [rw] created
     #   The date that the workspace was created.
     #   @return [Time]
@@ -2021,59 +2022,12 @@ module Aws::ManagedGrafana
     #   workspace.
     #   @return [String]
     #
-    # @!attribute [rw] free_trial_consumed
-    #   Specifies whether this workspace has already fully used its free
-    #   trial for Grafana Enterprise.
-    #
-    #   <note markdown="1"> Amazon Managed Grafana workspaces no longer support Grafana
-    #   Enterprise free trials.
-    #
-    #    </note>
-    #   @return [Boolean]
-    #
-    # @!attribute [rw] free_trial_expiration
-    #   If this workspace is currently in the free trial period for Grafana
-    #   Enterprise, this value specifies when that free trial ends.
-    #
-    #   <note markdown="1"> Amazon Managed Grafana workspaces no longer support Grafana
-    #   Enterprise free trials.
-    #
-    #    </note>
-    #   @return [Time]
-    #
-    # @!attribute [rw] grafana_token
-    #   The token that ties this workspace to a Grafana Labs account. For
-    #   more information, see [Link your account with Grafana Labs][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/grafana/latest/userguide/upgrade-to-Grafana-Enterprise.html#AMG-workspace-register-enterprise
-    #   @return [String]
-    #
     # @!attribute [rw] grafana_version
     #   The version of Grafana supported in this workspace.
     #   @return [String]
     #
     # @!attribute [rw] id
     #   The unique ID of this workspace.
-    #   @return [String]
-    #
-    # @!attribute [rw] license_expiration
-    #   If this workspace has a full Grafana Enterprise license purchased
-    #   through Amazon Web Services Marketplace, this specifies when the
-    #   license ends and will need to be renewed. Purchasing the Enterprise
-    #   plugins option through Amazon Managed Grafana does not have an
-    #   expiration. It is valid until the license is removed.
-    #   @return [Time]
-    #
-    # @!attribute [rw] license_type
-    #   Specifies whether this workspace has a full Grafana Enterprise
-    #   license.
-    #
-    #   <note markdown="1"> Amazon Managed Grafana workspaces no longer support Grafana
-    #   Enterprise free trials.
-    #
-    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] modified
@@ -2084,20 +2038,16 @@ module Aws::ManagedGrafana
     #   The name of the workspace.
     #   @return [String]
     #
-    # @!attribute [rw] network_access_control
-    #   The configuration settings for network access to your workspace.
-    #   @return [Types::NetworkAccessConfiguration]
+    # @!attribute [rw] organization_role_name
+    #   The name of the IAM role that is used to access resources through
+    #   Organizations.
+    #   @return [String]
     #
     # @!attribute [rw] notification_destinations
     #   The Amazon Web Services notification channels that Amazon Managed
     #   Grafana can automatically create IAM roles and permissions for, to
     #   allow Amazon Managed Grafana to use these channels.
     #   @return [Array<String>]
-    #
-    # @!attribute [rw] organization_role_name
-    #   The name of the IAM role that is used to access resources through
-    #   Organizations.
-    #   @return [String]
     #
     # @!attribute [rw] organizational_units
     #   Specifies the organizational units that this workspace is allowed to
@@ -2143,6 +2093,55 @@ module Aws::ManagedGrafana
     #   The current status of the workspace.
     #   @return [String]
     #
+    # @!attribute [rw] workspace_role_arn
+    #   The IAM role that grants permissions to the Amazon Web Services
+    #   resources that the workspace will view data from. This role must
+    #   already exist.
+    #   @return [String]
+    #
+    # @!attribute [rw] license_type
+    #   Specifies whether this workspace has a full Grafana Enterprise
+    #   license.
+    #
+    #   <note markdown="1"> Amazon Managed Grafana workspaces no longer support Grafana
+    #   Enterprise free trials.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @!attribute [rw] free_trial_consumed
+    #   Specifies whether this workspace has already fully used its free
+    #   trial for Grafana Enterprise.
+    #
+    #   <note markdown="1"> Amazon Managed Grafana workspaces no longer support Grafana
+    #   Enterprise free trials.
+    #
+    #    </note>
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] license_expiration
+    #   If this workspace has a full Grafana Enterprise license purchased
+    #   through Amazon Web Services Marketplace, this specifies when the
+    #   license ends and will need to be renewed. Purchasing the Enterprise
+    #   plugins option through Amazon Managed Grafana does not have an
+    #   expiration. It is valid until the license is removed.
+    #   @return [Time]
+    #
+    # @!attribute [rw] free_trial_expiration
+    #   If this workspace is currently in the free trial period for Grafana
+    #   Enterprise, this value specifies when that free trial ends.
+    #
+    #   <note markdown="1"> Amazon Managed Grafana workspaces no longer support Grafana
+    #   Enterprise free trials.
+    #
+    #    </note>
+    #   @return [Time]
+    #
+    # @!attribute [rw] authentication
+    #   A structure that describes whether the workspace uses SAML, IAM
+    #   Identity Center, or both methods for user authentication.
+    #   @return [Types::AuthenticationSummary]
+    #
     # @!attribute [rw] tags
     #   The list of tags associated with the workspace.
     #   @return [Hash<String,String>]
@@ -2152,51 +2151,59 @@ module Aws::ManagedGrafana
     #   (Amazon Virtual Private Cloud).
     #   @return [Types::VpcConfiguration]
     #
-    # @!attribute [rw] workspace_role_arn
-    #   The IAM role that grants permissions to the Amazon Web Services
-    #   resources that the workspace will view data from. This role must
-    #   already exist.
+    # @!attribute [rw] network_access_control
+    #   The configuration settings for network access to your workspace.
+    #   @return [Types::NetworkAccessConfiguration]
+    #
+    # @!attribute [rw] grafana_token
+    #   The token that ties this workspace to a Grafana Labs account. For
+    #   more information, see [Link your account with Grafana Labs][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/grafana/latest/userguide/upgrade-to-Grafana-Enterprise.html#AMG-workspace-register-enterprise
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_key_id
+    #   The ID or ARN of the Key Management Service key used for encrypting
+    #   workspace data.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/grafana-2020-08-18/WorkspaceDescription AWS API Documentation
     #
     class WorkspaceDescription < Struct.new(
       :account_access_type,
-      :authentication,
       :created,
       :data_sources,
       :description,
       :endpoint,
-      :free_trial_consumed,
-      :free_trial_expiration,
-      :grafana_token,
       :grafana_version,
       :id,
-      :license_expiration,
-      :license_type,
       :modified,
       :name,
-      :network_access_control,
-      :notification_destinations,
       :organization_role_name,
+      :notification_destinations,
       :organizational_units,
       :permission_type,
       :stack_set_name,
       :status,
+      :workspace_role_arn,
+      :license_type,
+      :free_trial_consumed,
+      :license_expiration,
+      :free_trial_expiration,
+      :authentication,
       :tags,
       :vpc_configuration,
-      :workspace_role_arn)
+      :network_access_control,
+      :grafana_token,
+      :kms_key_id)
       SENSITIVE = [:description, :name, :organization_role_name, :organizational_units, :workspace_role_arn]
       include Aws::Structure
     end
 
     # A structure that contains some information about one workspace in the
     # account.
-    #
-    # @!attribute [rw] authentication
-    #   A structure containing information about the authentication methods
-    #   used in the workspace.
-    #   @return [Types::AuthenticationSummary]
     #
     # @!attribute [rw] created
     #   The date that the workspace was created.
@@ -2211,31 +2218,12 @@ module Aws::ManagedGrafana
     #   workspace.
     #   @return [String]
     #
-    # @!attribute [rw] grafana_token
-    #   The token that ties this workspace to a Grafana Labs account. For
-    #   more information, see [Link your account with Grafana Labs][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/grafana/latest/userguide/upgrade-to-Grafana-Enterprise.html#AMG-workspace-register-enterprise
-    #   @return [String]
-    #
     # @!attribute [rw] grafana_version
     #   The Grafana version that the workspace is running.
     #   @return [String]
     #
     # @!attribute [rw] id
     #   The unique ID of the workspace.
-    #   @return [String]
-    #
-    # @!attribute [rw] license_type
-    #   Specifies whether this workspace has a full Grafana Enterprise
-    #   license.
-    #
-    #   <note markdown="1"> Amazon Managed Grafana workspaces no longer support Grafana
-    #   Enterprise free trials.
-    #
-    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] modified
@@ -2256,26 +2244,50 @@ module Aws::ManagedGrafana
     #   The current status of the workspace.
     #   @return [String]
     #
+    # @!attribute [rw] authentication
+    #   A structure containing information about the authentication methods
+    #   used in the workspace.
+    #   @return [Types::AuthenticationSummary]
+    #
     # @!attribute [rw] tags
     #   The list of tags associated with the workspace.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] license_type
+    #   Specifies whether this workspace has a full Grafana Enterprise
+    #   license.
+    #
+    #   <note markdown="1"> Amazon Managed Grafana workspaces no longer support Grafana
+    #   Enterprise free trials.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @!attribute [rw] grafana_token
+    #   The token that ties this workspace to a Grafana Labs account. For
+    #   more information, see [Link your account with Grafana Labs][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/grafana/latest/userguide/upgrade-to-Grafana-Enterprise.html#AMG-workspace-register-enterprise
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/grafana-2020-08-18/WorkspaceSummary AWS API Documentation
     #
     class WorkspaceSummary < Struct.new(
-      :authentication,
       :created,
       :description,
       :endpoint,
-      :grafana_token,
       :grafana_version,
       :id,
-      :license_type,
       :modified,
       :name,
       :notification_destinations,
       :status,
-      :tags)
+      :authentication,
+      :tags,
+      :license_type,
+      :grafana_token)
       SENSITIVE = [:description, :name]
       include Aws::Structure
     end

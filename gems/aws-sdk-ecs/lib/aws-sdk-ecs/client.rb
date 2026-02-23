@@ -5044,7 +5044,7 @@ module Aws::ECS
     #           requested_task_count: 0, 
     #           running_task_count: 0, 
     #         }, 
-    #         updated_at: Time.parse("2024-09-10T16:49:35.572000+00:00"), 
+    #         updated_at: Time.parse("2024-09-10T16:49:35.57Z"), 
     #       }, 
     #     ], 
     #   }
@@ -5175,7 +5175,7 @@ module Aws::ECS
     #     service_revisions: [
     #       {
     #         cluster_arn: "arn:aws:ecs:us-west-2:123456789012:cluster/example", 
-    #         created_at: Time.parse("2024-09-10T16:49:26.388000+00:00"), 
+    #         created_at: Time.parse("2024-09-10T16:49:26.39Z"), 
     #         launch_type: "FARGATE", 
     #         network_configuration: {
     #           awsvpc_configuration: {
@@ -5437,7 +5437,7 @@ module Aws::ECS
     #           {
     #             created_at: Time.parse("2016-08-29T16:25:58.520Z"), 
     #             id: "38c285e5-d335-4b68-8b15-e46dedc8e88d", 
-    #             message: "(service ecs-simple-service) was unable to place a task because no container instance met all of its requirements. The closest matching (container-instance 3f4de1c5-ffdd-4954-af7e-75b4be0c8841) is already using a port required by your task. For more information, see the Troubleshooting section of the Amazon ECS Developer Guide.", # In this example, there is a service event that shows unavailable cluster resources.
+    #             message: "(service ecs-simple-service) was unable to place a task because no container instance met all of its requirements. The closest matching (container-instance 3f4de1c5-ffdd-4954-af7e-75b4be0c8841) is already using a port required by your task. For more information, see the Troubleshooting section of the Amazon ECS Developer Guide.", 
     #           }, 
     #         ], 
     #         load_balancers: [
@@ -6340,12 +6340,13 @@ module Aws::ECS
       req.send_request(options)
     end
 
-    # <note markdown="1"> This action is only used by the Amazon ECS agent, and it is not
+    # <note markdown="1"> This action is only used by the Amazon ECS agent,
+    # and it is not
     # intended for use outside of the agent.
     #
     #  </note>
     #
-    # Returns an endpoint for the Amazon ECS agent to poll for updates.
+    #  Returns an endpoint for the Amazon ECS agent to poll for updates.
     #
     # @option params [String] :container_instance
     #   The container instance ID or full ARN of the container instance. For
@@ -8642,12 +8643,13 @@ module Aws::ECS
       req.send_request(options)
     end
 
-    # <note markdown="1"> This action is only used by the Amazon ECS agent, and it is not
+    # <note markdown="1"> This action is only used by the Amazon ECS agent,
+    # and it is not
     # intended for use outside of the agent.
     #
     #  </note>
     #
-    # Registers an EC2 instance into the specified cluster. This instance
+    #  Registers an EC2 instance into the specified cluster. This instance
     # becomes available to place containers on.
     #
     # @option params [String] :cluster
@@ -11005,12 +11007,13 @@ module Aws::ECS
       req.send_request(options)
     end
 
-    # <note markdown="1"> This action is only used by the Amazon ECS agent, and it is not
+    # <note markdown="1"> This action is only used by the Amazon ECS agent,
+    # and it is not
     # intended for use outside of the agent.
     #
     #  </note>
     #
-    # Sent to acknowledge that an attachment changed states.
+    #  Sent to acknowledge that an attachment changed states.
     #
     # @option params [String] :cluster
     #   The short name or full ARN of the cluster that hosts the container
@@ -11048,12 +11051,13 @@ module Aws::ECS
       req.send_request(options)
     end
 
-    # <note markdown="1"> This action is only used by the Amazon ECS agent, and it is not
+    # <note markdown="1"> This action is only used by the Amazon ECS agent,
+    # and it is not
     # intended for use outside of the agent.
     #
     #  </note>
     #
-    # Sent to acknowledge that a container changed states.
+    #  Sent to acknowledge that a container changed states.
     #
     # @option params [String] :cluster
     #   The short name or full ARN of the cluster that hosts the container.
@@ -11119,12 +11123,13 @@ module Aws::ECS
       req.send_request(options)
     end
 
-    # <note markdown="1"> This action is only used by the Amazon ECS agent, and it is not
+    # <note markdown="1"> This action is only used by the Amazon ECS agent,
+    # and it is not
     # intended for use outside of the agent.
     #
     #  </note>
     #
-    # Sent to acknowledge that a task changed states.
+    #  Sent to acknowledge that a task changed states.
     #
     # @option params [String] :cluster
     #   The short name or full Amazon Resource Name (ARN) of the cluster that
@@ -13002,42 +13007,44 @@ module Aws::ECS
     #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-using-tags.html
     #
     # @option params [Array<Types::LoadBalancer>] :load_balancers
-    #   <note markdown="1"> You must have a service-linked role when you update this property
+    #   <note markdown="1"> You must have a service-linked role when you
+    #   update this property
     #
     #    </note>
     #
-    #   A list of Elastic Load Balancing load balancer objects. It contains
+    #    A list of Elastic Load Balancing load balancer objects. It contains
     #   the load balancer name, the container name, and the container port to
     #   access from the load balancer. The container name is as it appears in
     #   a container definition.
     #
-    #   When you add, update, or remove a load balancer configuration, Amazon
+    #    When you add, update, or remove a load balancer configuration, Amazon
     #   ECS starts new tasks with the updated Elastic Load Balancing
     #   configuration, and then stops the old tasks when the new tasks are
     #   running.
     #
-    #   For services that use rolling updates, you can add, update, or remove
+    #    For services that use rolling updates, you can add, update, or remove
     #   Elastic Load Balancing target groups. You can update from a single
     #   target group to multiple target groups and from multiple target groups
     #   to a single target group.
     #
-    #   For services that use blue/green deployments, you can update Elastic
+    #    For services that use blue/green deployments, you can update Elastic
     #   Load Balancing target groups by using ` CreateDeployment ` through
     #   CodeDeploy. Note that multiple target groups are not supported for
     #   blue/green deployments. For more information see [Register multiple
     #   target groups with a service][1] in the *Amazon Elastic Container
     #   Service Developer Guide*.
     #
-    #   For services that use the external deployment controller, you can add,
+    #    For services that use the external deployment controller, you can
+    #   add,
     #   update, or remove load balancers by using [CreateTaskSet][2]. Note
     #   that multiple target groups are not supported for external
     #   deployments. For more information see [Register multiple target groups
     #   with a service][1] in the *Amazon Elastic Container Service Developer
     #   Guide*.
     #
-    #   You can remove existing `loadBalancers` by passing an empty list.
+    #    You can remove existing `loadBalancers` by passing an empty list.
     #
-    #   This parameter triggers a new service deployment.
+    #    This parameter triggers a new service deployment.
     #
     #
     #
@@ -13056,24 +13063,25 @@ module Aws::ECS
     #   This parameter doesn't trigger a new service deployment.
     #
     # @option params [Array<Types::ServiceRegistry>] :service_registries
-    #   <note markdown="1"> You must have a service-linked role when you update this property.
+    #   <note markdown="1"> You must have a service-linked role when you
+    #   update this property.
     #
     #    For more information about the role see the `CreateService` request
     #   parameter [ `role` ][1].
     #
     #    </note>
     #
-    #   The details for the service discovery registries to assign to this
+    #    The details for the service discovery registries to assign to this
     #   service. For more information, see [Service Discovery][2].
     #
-    #   When you add, update, or remove the service registries configuration,
+    #    When you add, update, or remove the service registries configuration,
     #   Amazon ECS starts new tasks with the updated service registries
     #   configuration, and then stops the old tasks when the new tasks are
     #   running.
     #
-    #   You can remove existing `serviceRegistries` by passing an empty list.
+    #    You can remove existing `serviceRegistries` by passing an empty list.
     #
-    #   This parameter triggers a new service deployment.
+    #    This parameter triggers a new service deployment.
     #
     #
     #
@@ -14038,7 +14046,7 @@ module Aws::ECS
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-ecs'
-      context[:gem_version] = '1.220.0'
+      context[:gem_version] = '1.221.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

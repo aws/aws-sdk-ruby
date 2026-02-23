@@ -255,6 +255,7 @@ module Aws::CleanRooms
       attr_accessor output_location: ::String
       attr_accessor database_name: ::String
       attr_accessor table_name: ::String
+      attr_accessor catalog_name: ::String
       SENSITIVE: []
     end
 

@@ -337,6 +337,21 @@ module Aws::RDS
       data[:storage_type]
     end
 
+    # The type of encryption used to protect data at rest in the DB
+    # instance. Possible values:
+    #
+    # * `none` - The DB instance is not encrypted.
+    #
+    # * `sse-rds` - The DB instance is encrypted using an Amazon Web
+    #   Services owned KMS key.
+    #
+    # * `sse-kms` - The DB instance is encrypted using a customer managed
+    #   KMS key or Amazon Web Services managed KMS key.
+    # @return [String]
+    def storage_encryption_type
+      data[:storage_encryption_type]
+    end
+
     # The ARN from the key store with which the instance is associated for
     # TDE encryption.
     # @return [String]

@@ -80,6 +80,8 @@ module Aws::KMS
     DisabledException = Shapes::StructureShape.new(name: 'DisabledException')
     DisconnectCustomKeyStoreRequest = Shapes::StructureShape.new(name: 'DisconnectCustomKeyStoreRequest')
     DisconnectCustomKeyStoreResponse = Shapes::StructureShape.new(name: 'DisconnectCustomKeyStoreResponse')
+    DryRunModifierList = Shapes::ListShape.new(name: 'DryRunModifierList')
+    DryRunModifierType = Shapes::StringShape.new(name: 'DryRunModifierType')
     DryRunOperationException = Shapes::StructureShape.new(name: 'DryRunOperationException')
     EnableKeyRequest = Shapes::StructureShape.new(name: 'EnableKeyRequest')
     EnableKeyRotationRequest = Shapes::StructureShape.new(name: 'EnableKeyRotationRequest')
@@ -372,13 +374,14 @@ module Aws::KMS
     CustomKeyStoresListEntry.add_member(:xks_proxy_configuration, Shapes::ShapeRef.new(shape: XksProxyConfigurationType, location_name: "XksProxyConfiguration"))
     CustomKeyStoresListEntry.struct_class = Types::CustomKeyStoresListEntry
 
-    DecryptRequest.add_member(:ciphertext_blob, Shapes::ShapeRef.new(shape: CiphertextType, required: true, location_name: "CiphertextBlob"))
+    DecryptRequest.add_member(:ciphertext_blob, Shapes::ShapeRef.new(shape: CiphertextType, location_name: "CiphertextBlob"))
     DecryptRequest.add_member(:encryption_context, Shapes::ShapeRef.new(shape: EncryptionContextType, location_name: "EncryptionContext"))
     DecryptRequest.add_member(:grant_tokens, Shapes::ShapeRef.new(shape: GrantTokenList, location_name: "GrantTokens"))
     DecryptRequest.add_member(:key_id, Shapes::ShapeRef.new(shape: KeyIdType, location_name: "KeyId"))
     DecryptRequest.add_member(:encryption_algorithm, Shapes::ShapeRef.new(shape: EncryptionAlgorithmSpec, location_name: "EncryptionAlgorithm"))
     DecryptRequest.add_member(:recipient, Shapes::ShapeRef.new(shape: RecipientInfo, location_name: "Recipient"))
     DecryptRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: NullableBooleanType, location_name: "DryRun"))
+    DecryptRequest.add_member(:dry_run_modifiers, Shapes::ShapeRef.new(shape: DryRunModifierList, location_name: "DryRunModifiers"))
     DecryptRequest.struct_class = Types::DecryptRequest
 
     DecryptResponse.add_member(:key_id, Shapes::ShapeRef.new(shape: KeyIdType, location_name: "KeyId"))
@@ -453,6 +456,8 @@ module Aws::KMS
     DisconnectCustomKeyStoreRequest.struct_class = Types::DisconnectCustomKeyStoreRequest
 
     DisconnectCustomKeyStoreResponse.struct_class = Types::DisconnectCustomKeyStoreResponse
+
+    DryRunModifierList.member = Shapes::ShapeRef.new(shape: DryRunModifierType)
 
     DryRunOperationException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessageType, location_name: "message"))
     DryRunOperationException.struct_class = Types::DryRunOperationException
@@ -825,7 +830,7 @@ module Aws::KMS
     PutKeyPolicyRequest.add_member(:bypass_policy_lockout_safety_check, Shapes::ShapeRef.new(shape: BooleanType, location_name: "BypassPolicyLockoutSafetyCheck"))
     PutKeyPolicyRequest.struct_class = Types::PutKeyPolicyRequest
 
-    ReEncryptRequest.add_member(:ciphertext_blob, Shapes::ShapeRef.new(shape: CiphertextType, required: true, location_name: "CiphertextBlob"))
+    ReEncryptRequest.add_member(:ciphertext_blob, Shapes::ShapeRef.new(shape: CiphertextType, location_name: "CiphertextBlob"))
     ReEncryptRequest.add_member(:source_encryption_context, Shapes::ShapeRef.new(shape: EncryptionContextType, location_name: "SourceEncryptionContext"))
     ReEncryptRequest.add_member(:source_key_id, Shapes::ShapeRef.new(shape: KeyIdType, location_name: "SourceKeyId"))
     ReEncryptRequest.add_member(:destination_key_id, Shapes::ShapeRef.new(shape: KeyIdType, required: true, location_name: "DestinationKeyId"))
@@ -834,6 +839,7 @@ module Aws::KMS
     ReEncryptRequest.add_member(:destination_encryption_algorithm, Shapes::ShapeRef.new(shape: EncryptionAlgorithmSpec, location_name: "DestinationEncryptionAlgorithm"))
     ReEncryptRequest.add_member(:grant_tokens, Shapes::ShapeRef.new(shape: GrantTokenList, location_name: "GrantTokens"))
     ReEncryptRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: NullableBooleanType, location_name: "DryRun"))
+    ReEncryptRequest.add_member(:dry_run_modifiers, Shapes::ShapeRef.new(shape: DryRunModifierList, location_name: "DryRunModifiers"))
     ReEncryptRequest.struct_class = Types::ReEncryptRequest
 
     ReEncryptResponse.add_member(:ciphertext_blob, Shapes::ShapeRef.new(shape: CiphertextType, location_name: "CiphertextBlob"))

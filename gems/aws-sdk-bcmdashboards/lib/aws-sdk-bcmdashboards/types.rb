@@ -944,6 +944,10 @@ module Aws::BCMDashboards
     # charts or tables and includes settings for data querying, filtering,
     # and visual presentation.
     #
+    # @!attribute [rw] id
+    #   The unique identifier for the widget.
+    #   @return [String]
+    #
     # @!attribute [rw] title
     #   The title of the widget.
     #   @return [String]
@@ -975,6 +979,7 @@ module Aws::BCMDashboards
     # @see http://docs.aws.amazon.com/goto/WebAPI/bcm-dashboards-2025-08-18/Widget AWS API Documentation
     #
     class Widget < Struct.new(
+      :id,
       :title,
       :description,
       :width,

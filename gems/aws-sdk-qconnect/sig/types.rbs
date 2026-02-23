@@ -1406,7 +1406,7 @@ module Aws::QConnect
     end
 
     class GetNextMessageResponse
-      attr_accessor type: ("TEXT")
+      attr_accessor type: ("TEXT" | "TOOL_USE_RESULT")
       attr_accessor response: Types::MessageOutput
       attr_accessor request_message_id: ::String
       attr_accessor conversation_state: Types::ConversationState
@@ -2722,7 +2722,7 @@ module Aws::QConnect
     class SendMessageRequest
       attr_accessor assistant_id: ::String
       attr_accessor session_id: ::String
-      attr_accessor type: ("TEXT")
+      attr_accessor type: ("TEXT" | "TOOL_USE_RESULT")
       attr_accessor message: Types::MessageInput
       attr_accessor ai_agent_id: ::String
       attr_accessor conversation_context: Types::ConversationContext

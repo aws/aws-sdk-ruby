@@ -49,12 +49,13 @@ module Aws::TrustedAdvisor
   end
   autoload :Client, 'aws-sdk-trustedadvisor/client'
   autoload :Errors, 'aws-sdk-trustedadvisor/errors'
+  autoload :Waiters, 'aws-sdk-trustedadvisor/waiters'
   autoload :Resource, 'aws-sdk-trustedadvisor/resource'
   autoload :EndpointParameters, 'aws-sdk-trustedadvisor/endpoint_parameters'
   autoload :EndpointProvider, 'aws-sdk-trustedadvisor/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-trustedadvisor/endpoints'
 
-  GEM_VERSION = '1.33.0'
+  GEM_VERSION = '1.34.0'
 
 end
 

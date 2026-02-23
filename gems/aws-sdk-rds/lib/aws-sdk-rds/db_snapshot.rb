@@ -179,6 +179,21 @@ module Aws::RDS
       data[:encrypted]
     end
 
+    # The type of encryption used to protect data at rest in the DB
+    # snapshot. Possible values:
+    #
+    # * `none` - The DB snapshot is not encrypted.
+    #
+    # * `sse-rds` - The DB snapshot is encrypted using an Amazon Web
+    #   Services owned KMS key.
+    #
+    # * `sse-kms` - The DB snapshot is encrypted using a customer managed
+    #   KMS key or Amazon Web Services managed KMS key.
+    # @return [String]
+    def storage_encryption_type
+      data[:storage_encryption_type]
+    end
+
     # The number of days for which automatic DB snapshots are retained.
     # @return [Integer]
     def backup_retention_period

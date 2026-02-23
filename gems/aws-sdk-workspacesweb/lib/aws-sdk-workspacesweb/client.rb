@@ -1635,8 +1635,8 @@ module Aws::WorkSpacesWeb
     # @option params [Types::BrandingConfigurationCreateInput] :branding_configuration_input
     #   The branding configuration input that customizes the appearance of the
     #   web portal for end users. This includes a custom logo, favicon,
-    #   wallpaper, localized strings, color theme, and an optional terms of
-    #   service.
+    #   localized strings, color theme, and optionally a wallpaper and terms
+    #   of service.
     #
     # @option params [String] :web_authn_allowed
     #   Specifies whether the user can use WebAuthn redirection for
@@ -1695,7 +1695,7 @@ module Aws::WorkSpacesWeb
     #         blob: "data",
     #         s3_uri: "S3Uri",
     #       },
-    #       wallpaper: { # required
+    #       wallpaper: {
     #         blob: "data",
     #         s3_uri: "S3Uri",
     #       },
@@ -4368,8 +4368,8 @@ module Aws::WorkSpacesWeb
     # @option params [Types::BrandingConfigurationUpdateInput] :branding_configuration_input
     #   The branding configuration that customizes the appearance of the web
     #   portal for end users. When updating user settings without an existing
-    #   branding configuration, all fields (logo, favicon, wallpaper,
-    #   localized strings, and color theme) are required except for terms of
+    #   branding configuration, all fields (logo, favicon, localized strings,
+    #   and color theme) are required except for wallpaper and terms of
     #   service. When updating user settings with an existing branding
     #   configuration, all fields are optional.
     #
@@ -4525,7 +4525,7 @@ module Aws::WorkSpacesWeb
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-workspacesweb'
-      context[:gem_version] = '1.58.0'
+      context[:gem_version] = '1.59.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

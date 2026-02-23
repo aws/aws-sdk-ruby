@@ -42,6 +42,9 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/PlacementGroup.html#linked_group_id-instance_method
       def linked_group_id: () -> ::String
 
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/PlacementGroup.html#operator-instance_method
+      def operator: () -> Types::OperatorResponse
+
       def client: () -> Client
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/PlacementGroup.html#load-instance_method

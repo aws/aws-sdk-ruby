@@ -14,19 +14,19 @@ module Aws::ManagedGrafana
     end
 
     class AssertionAttributes
+      attr_accessor name: ::String
+      attr_accessor login: ::String
       attr_accessor email: ::String
       attr_accessor groups: ::String
-      attr_accessor login: ::String
-      attr_accessor name: ::String
-      attr_accessor org: ::String
       attr_accessor role: ::String
+      attr_accessor org: ::String
       SENSITIVE: []
     end
 
     class AssociateLicenseRequest
-      attr_accessor grafana_token: ::String
-      attr_accessor license_type: ("ENTERPRISE" | "ENTERPRISE_FREE_TRIAL")
       attr_accessor workspace_id: ::String
+      attr_accessor license_type: ("ENTERPRISE" | "ENTERPRISE_FREE_TRIAL")
+      attr_accessor grafana_token: ::String
       SENSITIVE: []
     end
 
@@ -36,9 +36,9 @@ module Aws::ManagedGrafana
     end
 
     class AuthenticationDescription
-      attr_accessor aws_sso: Types::AwsSsoAuthentication
       attr_accessor providers: ::Array[("AWS_SSO" | "SAML")]
       attr_accessor saml: Types::SamlAuthentication
+      attr_accessor aws_sso: Types::AwsSsoAuthentication
       SENSITIVE: []
     end
 
@@ -69,30 +69,31 @@ module Aws::ManagedGrafana
     end
 
     class CreateWorkspaceApiKeyResponse
-      attr_accessor key: ::String
       attr_accessor key_name: ::String
+      attr_accessor key: ::String
       attr_accessor workspace_id: ::String
       SENSITIVE: [:key]
     end
 
     class CreateWorkspaceRequest
       attr_accessor account_access_type: ("CURRENT_ACCOUNT" | "ORGANIZATION")
-      attr_accessor authentication_providers: ::Array[("AWS_SSO" | "SAML")]
       attr_accessor client_token: ::String
-      attr_accessor configuration: ::String
-      attr_accessor grafana_version: ::String
-      attr_accessor network_access_control: Types::NetworkAccessConfiguration
       attr_accessor organization_role_name: ::String
       attr_accessor permission_type: ("CUSTOMER_MANAGED" | "SERVICE_MANAGED")
       attr_accessor stack_set_name: ::String
-      attr_accessor tags: ::Hash[::String, ::String]
-      attr_accessor vpc_configuration: Types::VpcConfiguration
       attr_accessor workspace_data_sources: ::Array[("AMAZON_OPENSEARCH_SERVICE" | "CLOUDWATCH" | "PROMETHEUS" | "XRAY" | "TIMESTREAM" | "SITEWISE" | "ATHENA" | "REDSHIFT" | "TWINMAKER")]
       attr_accessor workspace_description: ::String
       attr_accessor workspace_name: ::String
       attr_accessor workspace_notification_destinations: ::Array[("SNS")]
       attr_accessor workspace_organizational_units: ::Array[::String]
       attr_accessor workspace_role_arn: ::String
+      attr_accessor authentication_providers: ::Array[("AWS_SSO" | "SAML")]
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor vpc_configuration: Types::VpcConfiguration
+      attr_accessor configuration: ::String
+      attr_accessor network_access_control: Types::NetworkAccessConfiguration
+      attr_accessor grafana_version: ::String
+      attr_accessor kms_key_id: ::String
       SENSITIVE: [:organization_role_name, :workspace_description, :workspace_name, :workspace_organizational_units, :workspace_role_arn]
     end
 
@@ -102,16 +103,16 @@ module Aws::ManagedGrafana
     end
 
     class CreateWorkspaceServiceAccountRequest
-      attr_accessor grafana_role: ("ADMIN" | "EDITOR" | "VIEWER")
       attr_accessor name: ::String
+      attr_accessor grafana_role: ("ADMIN" | "EDITOR" | "VIEWER")
       attr_accessor workspace_id: ::String
       SENSITIVE: []
     end
 
     class CreateWorkspaceServiceAccountResponse
-      attr_accessor grafana_role: ("ADMIN" | "EDITOR" | "VIEWER")
       attr_accessor id: ::String
       attr_accessor name: ::String
+      attr_accessor grafana_role: ("ADMIN" | "EDITOR" | "VIEWER")
       attr_accessor workspace_id: ::String
       SENSITIVE: []
     end
@@ -125,8 +126,8 @@ module Aws::ManagedGrafana
     end
 
     class CreateWorkspaceServiceAccountTokenResponse
-      attr_accessor service_account_id: ::String
       attr_accessor service_account_token: Types::ServiceAccountTokenSummaryWithKey
+      attr_accessor service_account_id: ::String
       attr_accessor workspace_id: ::String
       SENSITIVE: []
     end
@@ -166,15 +167,15 @@ module Aws::ManagedGrafana
     end
 
     class DeleteWorkspaceServiceAccountTokenRequest
-      attr_accessor service_account_id: ::String
       attr_accessor token_id: ::String
+      attr_accessor service_account_id: ::String
       attr_accessor workspace_id: ::String
       SENSITIVE: []
     end
 
     class DeleteWorkspaceServiceAccountTokenResponse
-      attr_accessor service_account_id: ::String
       attr_accessor token_id: ::String
+      attr_accessor service_account_id: ::String
       attr_accessor workspace_id: ::String
       SENSITIVE: []
     end
@@ -211,8 +212,8 @@ module Aws::ManagedGrafana
     end
 
     class DisassociateLicenseRequest
-      attr_accessor license_type: ("ENTERPRISE" | "ENTERPRISE_FREE_TRIAL")
       attr_accessor workspace_id: ::String
+      attr_accessor license_type: ("ENTERPRISE" | "ENTERPRISE_FREE_TRIAL")
       SENSITIVE: []
     end
 
@@ -242,11 +243,11 @@ module Aws::ManagedGrafana
     end
 
     class ListPermissionsRequest
-      attr_accessor group_id: ::String
       attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
-      attr_accessor user_id: ::String
       attr_accessor user_type: ("SSO_USER" | "SSO_GROUP")
+      attr_accessor user_id: ::String
+      attr_accessor group_id: ::String
       attr_accessor workspace_id: ::String
       SENSITIVE: []
     end
@@ -275,8 +276,8 @@ module Aws::ManagedGrafana
     end
 
     class ListVersionsResponse
-      attr_accessor grafana_versions: ::Array[::String]
       attr_accessor next_token: ::String
+      attr_accessor grafana_versions: ::Array[::String]
       SENSITIVE: []
     end
 
@@ -290,8 +291,8 @@ module Aws::ManagedGrafana
 
     class ListWorkspaceServiceAccountTokensResponse
       attr_accessor next_token: ::String
-      attr_accessor service_account_id: ::String
       attr_accessor service_account_tokens: ::Array[Types::ServiceAccountTokenSummary]
+      attr_accessor service_account_id: ::String
       attr_accessor workspace_id: ::String
       SENSITIVE: []
     end
@@ -317,8 +318,8 @@ module Aws::ManagedGrafana
     end
 
     class ListWorkspacesResponse
-      attr_accessor next_token: ::String
       attr_accessor workspaces: ::Array[Types::WorkspaceSummary]
+      attr_accessor next_token: ::String
       SENSITIVE: []
     end
 
@@ -329,8 +330,8 @@ module Aws::ManagedGrafana
     end
 
     class PermissionEntry
-      attr_accessor role: ("ADMIN" | "EDITOR" | "VIEWER")
       attr_accessor user: Types::User
+      attr_accessor role: ("ADMIN" | "EDITOR" | "VIEWER")
       SENSITIVE: []
     end
 
@@ -342,56 +343,56 @@ module Aws::ManagedGrafana
     end
 
     class RoleValues
-      attr_accessor admin: ::Array[::String]
       attr_accessor editor: ::Array[::String]
-      SENSITIVE: [:admin, :editor]
+      attr_accessor admin: ::Array[::String]
+      SENSITIVE: [:editor, :admin]
     end
 
     class SamlAuthentication
-      attr_accessor configuration: Types::SamlConfiguration
       attr_accessor status: ("CONFIGURED" | "NOT_CONFIGURED")
+      attr_accessor configuration: Types::SamlConfiguration
       SENSITIVE: []
     end
 
     class SamlConfiguration
-      attr_accessor allowed_organizations: ::Array[::String]
-      attr_accessor assertion_attributes: Types::AssertionAttributes
       attr_accessor idp_metadata: Types::IdpMetadata
-      attr_accessor login_validity_duration: ::Integer
+      attr_accessor assertion_attributes: Types::AssertionAttributes
       attr_accessor role_values: Types::RoleValues
+      attr_accessor allowed_organizations: ::Array[::String]
+      attr_accessor login_validity_duration: ::Integer
       SENSITIVE: []
     end
 
     class ServiceAccountSummary
-      attr_accessor grafana_role: ("ADMIN" | "EDITOR" | "VIEWER")
       attr_accessor id: ::String
-      attr_accessor is_disabled: ::String
       attr_accessor name: ::String
+      attr_accessor is_disabled: ::String
+      attr_accessor grafana_role: ("ADMIN" | "EDITOR" | "VIEWER")
       SENSITIVE: []
     end
 
     class ServiceAccountTokenSummary
+      attr_accessor id: ::String
+      attr_accessor name: ::String
       attr_accessor created_at: ::Time
       attr_accessor expires_at: ::Time
-      attr_accessor id: ::String
       attr_accessor last_used_at: ::Time
-      attr_accessor name: ::String
       SENSITIVE: []
     end
 
     class ServiceAccountTokenSummaryWithKey
       attr_accessor id: ::String
-      attr_accessor key: ::String
       attr_accessor name: ::String
+      attr_accessor key: ::String
       SENSITIVE: [:key]
     end
 
     class ServiceQuotaExceededException
       attr_accessor message: ::String
-      attr_accessor quota_code: ::String
       attr_accessor resource_id: ::String
       attr_accessor resource_type: ::String
       attr_accessor service_code: ::String
+      attr_accessor quota_code: ::String
       SENSITIVE: []
     end
 
@@ -406,9 +407,9 @@ module Aws::ManagedGrafana
 
     class ThrottlingException
       attr_accessor message: ::String
+      attr_accessor service_code: ::String
       attr_accessor quota_code: ::String
       attr_accessor retry_after_seconds: ::Integer
-      attr_accessor service_code: ::String
       SENSITIVE: []
     end
 
@@ -422,9 +423,9 @@ module Aws::ManagedGrafana
     end
 
     class UpdateError
-      attr_accessor caused_by: Types::UpdateInstruction
       attr_accessor code: ::Integer
       attr_accessor message: ::String
+      attr_accessor caused_by: Types::UpdateInstruction
       SENSITIVE: []
     end
 
@@ -447,9 +448,9 @@ module Aws::ManagedGrafana
     end
 
     class UpdateWorkspaceAuthenticationRequest
+      attr_accessor workspace_id: ::String
       attr_accessor authentication_providers: ::Array[("AWS_SSO" | "SAML")]
       attr_accessor saml_configuration: Types::SamlConfiguration
-      attr_accessor workspace_id: ::String
       SENSITIVE: []
     end
 
@@ -460,8 +461,8 @@ module Aws::ManagedGrafana
 
     class UpdateWorkspaceConfigurationRequest
       attr_accessor configuration: ::String
-      attr_accessor grafana_version: ::String
       attr_accessor workspace_id: ::String
+      attr_accessor grafana_version: ::String
       SENSITIVE: []
     end
 
@@ -470,13 +471,9 @@ module Aws::ManagedGrafana
 
     class UpdateWorkspaceRequest
       attr_accessor account_access_type: ("CURRENT_ACCOUNT" | "ORGANIZATION")
-      attr_accessor network_access_control: Types::NetworkAccessConfiguration
       attr_accessor organization_role_name: ::String
       attr_accessor permission_type: ("CUSTOMER_MANAGED" | "SERVICE_MANAGED")
-      attr_accessor remove_network_access_configuration: bool
-      attr_accessor remove_vpc_configuration: bool
       attr_accessor stack_set_name: ::String
-      attr_accessor vpc_configuration: Types::VpcConfiguration
       attr_accessor workspace_data_sources: ::Array[("AMAZON_OPENSEARCH_SERVICE" | "CLOUDWATCH" | "PROMETHEUS" | "XRAY" | "TIMESTREAM" | "SITEWISE" | "ATHENA" | "REDSHIFT" | "TWINMAKER")]
       attr_accessor workspace_description: ::String
       attr_accessor workspace_id: ::String
@@ -484,6 +481,10 @@ module Aws::ManagedGrafana
       attr_accessor workspace_notification_destinations: ::Array[("SNS")]
       attr_accessor workspace_organizational_units: ::Array[::String]
       attr_accessor workspace_role_arn: ::String
+      attr_accessor vpc_configuration: Types::VpcConfiguration
+      attr_accessor remove_vpc_configuration: bool
+      attr_accessor network_access_control: Types::NetworkAccessConfiguration
+      attr_accessor remove_network_access_configuration: bool
       SENSITIVE: [:organization_role_name, :workspace_description, :workspace_name, :workspace_organizational_units, :workspace_role_arn]
     end
 
@@ -499,15 +500,15 @@ module Aws::ManagedGrafana
     end
 
     class ValidationException
-      attr_accessor field_list: ::Array[Types::ValidationExceptionField]
       attr_accessor message: ::String
       attr_accessor reason: ("UNKNOWN_OPERATION" | "CANNOT_PARSE" | "FIELD_VALIDATION_FAILED" | "OTHER")
+      attr_accessor field_list: ::Array[Types::ValidationExceptionField]
       SENSITIVE: []
     end
 
     class ValidationExceptionField
-      attr_accessor message: ::String
       attr_accessor name: ::String
+      attr_accessor message: ::String
       SENSITIVE: []
     end
 
@@ -519,47 +520,48 @@ module Aws::ManagedGrafana
 
     class WorkspaceDescription
       attr_accessor account_access_type: ("CURRENT_ACCOUNT" | "ORGANIZATION")
-      attr_accessor authentication: Types::AuthenticationSummary
       attr_accessor created: ::Time
       attr_accessor data_sources: ::Array[("AMAZON_OPENSEARCH_SERVICE" | "CLOUDWATCH" | "PROMETHEUS" | "XRAY" | "TIMESTREAM" | "SITEWISE" | "ATHENA" | "REDSHIFT" | "TWINMAKER")]
       attr_accessor description: ::String
       attr_accessor endpoint: ::String
-      attr_accessor free_trial_consumed: bool
-      attr_accessor free_trial_expiration: ::Time
-      attr_accessor grafana_token: ::String
       attr_accessor grafana_version: ::String
       attr_accessor id: ::String
-      attr_accessor license_expiration: ::Time
-      attr_accessor license_type: ("ENTERPRISE" | "ENTERPRISE_FREE_TRIAL")
       attr_accessor modified: ::Time
       attr_accessor name: ::String
-      attr_accessor network_access_control: Types::NetworkAccessConfiguration
-      attr_accessor notification_destinations: ::Array[("SNS")]
       attr_accessor organization_role_name: ::String
+      attr_accessor notification_destinations: ::Array[("SNS")]
       attr_accessor organizational_units: ::Array[::String]
       attr_accessor permission_type: ("CUSTOMER_MANAGED" | "SERVICE_MANAGED")
       attr_accessor stack_set_name: ::String
       attr_accessor status: ("ACTIVE" | "CREATING" | "DELETING" | "FAILED" | "UPDATING" | "UPGRADING" | "DELETION_FAILED" | "CREATION_FAILED" | "UPDATE_FAILED" | "UPGRADE_FAILED" | "LICENSE_REMOVAL_FAILED" | "VERSION_UPDATING" | "VERSION_UPDATE_FAILED")
+      attr_accessor workspace_role_arn: ::String
+      attr_accessor license_type: ("ENTERPRISE" | "ENTERPRISE_FREE_TRIAL")
+      attr_accessor free_trial_consumed: bool
+      attr_accessor license_expiration: ::Time
+      attr_accessor free_trial_expiration: ::Time
+      attr_accessor authentication: Types::AuthenticationSummary
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor vpc_configuration: Types::VpcConfiguration
-      attr_accessor workspace_role_arn: ::String
+      attr_accessor network_access_control: Types::NetworkAccessConfiguration
+      attr_accessor grafana_token: ::String
+      attr_accessor kms_key_id: ::String
       SENSITIVE: [:description, :name, :organization_role_name, :organizational_units, :workspace_role_arn]
     end
 
     class WorkspaceSummary
-      attr_accessor authentication: Types::AuthenticationSummary
       attr_accessor created: ::Time
       attr_accessor description: ::String
       attr_accessor endpoint: ::String
-      attr_accessor grafana_token: ::String
       attr_accessor grafana_version: ::String
       attr_accessor id: ::String
-      attr_accessor license_type: ("ENTERPRISE" | "ENTERPRISE_FREE_TRIAL")
       attr_accessor modified: ::Time
       attr_accessor name: ::String
       attr_accessor notification_destinations: ::Array[("SNS")]
       attr_accessor status: ("ACTIVE" | "CREATING" | "DELETING" | "FAILED" | "UPDATING" | "UPGRADING" | "DELETION_FAILED" | "CREATION_FAILED" | "UPDATE_FAILED" | "UPGRADE_FAILED" | "LICENSE_REMOVAL_FAILED" | "VERSION_UPDATING" | "VERSION_UPDATE_FAILED")
+      attr_accessor authentication: Types::AuthenticationSummary
       attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor license_type: ("ENTERPRISE" | "ENTERPRISE_FREE_TRIAL")
+      attr_accessor grafana_token: ::String
       SENSITIVE: [:description, :name]
     end
   end

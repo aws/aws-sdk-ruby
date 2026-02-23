@@ -11,7 +11,7 @@ Feature: Smoke tests for ECS
   Scenario: ListClustersSuccess
     Given I create a 'Aws::ECS' client with config:
       """
-{"region":"us-west-2"}
+{"region":"us-west-2","use_fips_endpoint":false,"use_dualstack_endpoint":false}
       """
     When I call the operation 'list_clusters' with params:
       """

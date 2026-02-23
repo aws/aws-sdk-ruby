@@ -1005,6 +1005,10 @@ module Aws::AppStream
     #   Administrators can connect to the app block builder only through the
     #   specified endpoints.
     #
+    # @option params [Boolean] :disable_imdsv1
+    #   Set to true to disable Instance Metadata Service Version 1 (IMDSv1)
+    #   and enforce IMDSv2. Set to false to enable both IMDSv1 and IMDSv2.
+    #
     # @return [Types::CreateAppBlockBuilderResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateAppBlockBuilderResult#app_block_builder #app_block_builder} => Types::AppBlockBuilder
@@ -1032,6 +1036,7 @@ module Aws::AppStream
     #         vpce_id: "String",
     #       },
     #     ],
+    #     disable_imdsv1: false,
     #   })
     #
     # @example Response structure
@@ -1059,6 +1064,7 @@ module Aws::AppStream
     #   resp.app_block_builder.access_endpoints #=> Array
     #   resp.app_block_builder.access_endpoints[0].endpoint_type #=> String, one of "STREAMING"
     #   resp.app_block_builder.access_endpoints[0].vpce_id #=> String
+    #   resp.app_block_builder.disable_imdsv1 #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateAppBlockBuilder AWS API Documentation
     #
@@ -1685,6 +1691,16 @@ module Aws::AppStream
     #   customize storage capacity from 200 GB up to 500 GB based on your
     #   application requirements.
     #
+    # @option params [Boolean] :disable_imdsv1
+    #   Set to true to disable Instance Metadata Service Version 1 (IMDSv1)
+    #   and enforce IMDSv2. Set to false to enable both IMDSv1 and IMDSv2.
+    #
+    #   <note markdown="1"> Before disabling IMDSv1, ensure your WorkSpaces Applications images
+    #   are running the agent version or managed image update released on or
+    #   after January 16, 2024 to support IMDSv2 enforcement.
+    #
+    #    </note>
+    #
     # @return [Types::CreateFleetResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateFleetResult#fleet #fleet} => Types::Fleet
@@ -1731,6 +1747,7 @@ module Aws::AppStream
     #     root_volume_config: {
     #       volume_size_in_gb: 1,
     #     },
+    #     disable_imdsv1: false,
     #   })
     #
     # @example Response structure
@@ -1776,6 +1793,7 @@ module Aws::AppStream
     #   resp.fleet.session_script_s3_location.s3_key #=> String
     #   resp.fleet.max_sessions_per_instance #=> Integer
     #   resp.fleet.root_volume_config.volume_size_in_gb #=> Integer
+    #   resp.fleet.disable_imdsv1 #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateFleet AWS API Documentation
     #
@@ -2074,6 +2092,16 @@ module Aws::AppStream
     #
     #   * Microsoft\_Project\_2024\_Standard\_64Bit
     #
+    # @option params [Boolean] :disable_imdsv1
+    #   Set to true to disable Instance Metadata Service Version 1 (IMDSv1)
+    #   and enforce IMDSv2. Set to false to enable both IMDSv1 and IMDSv2.
+    #
+    #   <note markdown="1"> Before disabling IMDSv1, ensure your WorkSpaces Applications images
+    #   are running the agent version or managed image update released on or
+    #   after January 16, 2024 to support IMDSv2 enforcement.
+    #
+    #    </note>
+    #
     # @return [Types::CreateImageBuilderResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateImageBuilderResult#image_builder #image_builder} => Types::ImageBuilder
@@ -2112,6 +2140,7 @@ module Aws::AppStream
     #     },
     #     softwares_to_install: ["String"],
     #     softwares_to_uninstall: ["String"],
+    #     disable_imdsv1: false,
     #   })
     #
     # @example Response structure
@@ -2149,6 +2178,7 @@ module Aws::AppStream
     #   resp.image_builder.access_endpoints[0].vpce_id #=> String
     #   resp.image_builder.root_volume_config.volume_size_in_gb #=> Integer
     #   resp.image_builder.latest_appstream_agent_version #=> String, one of "TRUE", "FALSE"
+    #   resp.image_builder.disable_imdsv1 #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateImageBuilder AWS API Documentation
     #
@@ -3115,6 +3145,7 @@ module Aws::AppStream
     #   resp.image_builder.access_endpoints[0].vpce_id #=> String
     #   resp.image_builder.root_volume_config.volume_size_in_gb #=> Integer
     #   resp.image_builder.latest_appstream_agent_version #=> String, one of "TRUE", "FALSE"
+    #   resp.image_builder.disable_imdsv1 #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DeleteImageBuilder AWS API Documentation
     #
@@ -3346,6 +3377,7 @@ module Aws::AppStream
     #   resp.app_block_builders[0].access_endpoints #=> Array
     #   resp.app_block_builders[0].access_endpoints[0].endpoint_type #=> String, one of "STREAMING"
     #   resp.app_block_builders[0].access_endpoints[0].vpce_id #=> String
+    #   resp.app_block_builders[0].disable_imdsv1 #=> Boolean
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeAppBlockBuilders AWS API Documentation
@@ -3744,6 +3776,7 @@ module Aws::AppStream
     #   resp.fleets[0].session_script_s3_location.s3_key #=> String
     #   resp.fleets[0].max_sessions_per_instance #=> Integer
     #   resp.fleets[0].root_volume_config.volume_size_in_gb #=> Integer
+    #   resp.fleets[0].disable_imdsv1 #=> Boolean
     #   resp.next_token #=> String
     #
     #
@@ -3824,6 +3857,7 @@ module Aws::AppStream
     #   resp.image_builders[0].access_endpoints[0].vpce_id #=> String
     #   resp.image_builders[0].root_volume_config.volume_size_in_gb #=> Integer
     #   resp.image_builders[0].latest_appstream_agent_version #=> String, one of "TRUE", "FALSE"
+    #   resp.image_builders[0].disable_imdsv1 #=> Boolean
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeImageBuilders AWS API Documentation
@@ -4951,6 +4985,7 @@ module Aws::AppStream
     #   resp.app_block_builder.access_endpoints #=> Array
     #   resp.app_block_builder.access_endpoints[0].endpoint_type #=> String, one of "STREAMING"
     #   resp.app_block_builder.access_endpoints[0].vpce_id #=> String
+    #   resp.app_block_builder.disable_imdsv1 #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/StartAppBlockBuilder AWS API Documentation
     #
@@ -5039,6 +5074,7 @@ module Aws::AppStream
     #   resp.image_builder.access_endpoints[0].vpce_id #=> String
     #   resp.image_builder.root_volume_config.volume_size_in_gb #=> Integer
     #   resp.image_builder.latest_appstream_agent_version #=> String, one of "TRUE", "FALSE"
+    #   resp.image_builder.disable_imdsv1 #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/StartImageBuilder AWS API Documentation
     #
@@ -5120,6 +5156,7 @@ module Aws::AppStream
     #   resp.app_block_builder.access_endpoints #=> Array
     #   resp.app_block_builder.access_endpoints[0].endpoint_type #=> String, one of "STREAMING"
     #   resp.app_block_builder.access_endpoints[0].vpce_id #=> String
+    #   resp.app_block_builder.disable_imdsv1 #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/StopAppBlockBuilder AWS API Documentation
     #
@@ -5202,6 +5239,7 @@ module Aws::AppStream
     #   resp.image_builder.access_endpoints[0].vpce_id #=> String
     #   resp.image_builder.root_volume_config.volume_size_in_gb #=> Integer
     #   resp.image_builder.latest_appstream_agent_version #=> String, one of "TRUE", "FALSE"
+    #   resp.image_builder.disable_imdsv1 #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/StopImageBuilder AWS API Documentation
     #
@@ -5371,6 +5409,10 @@ module Aws::AppStream
     # @option params [Array<String>] :attributes_to_delete
     #   The attributes to delete from the app block builder.
     #
+    # @option params [Boolean] :disable_imdsv1
+    #   Set to true to disable Instance Metadata Service Version 1 (IMDSv1)
+    #   and enforce IMDSv2. Set to false to enable both IMDSv1 and IMDSv2.
+    #
     # @return [Types::UpdateAppBlockBuilderResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateAppBlockBuilderResult#app_block_builder #app_block_builder} => Types::AppBlockBuilder
@@ -5396,6 +5438,7 @@ module Aws::AppStream
     #       },
     #     ],
     #     attributes_to_delete: ["IAM_ROLE_ARN"], # accepts IAM_ROLE_ARN, ACCESS_ENDPOINTS, VPC_CONFIGURATION_SECURITY_GROUP_IDS
+    #     disable_imdsv1: false,
     #   })
     #
     # @example Response structure
@@ -5423,6 +5466,7 @@ module Aws::AppStream
     #   resp.app_block_builder.access_endpoints #=> Array
     #   resp.app_block_builder.access_endpoints[0].endpoint_type #=> String, one of "STREAMING"
     #   resp.app_block_builder.access_endpoints[0].vpce_id #=> String
+    #   resp.app_block_builder.disable_imdsv1 #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/UpdateAppBlockBuilder AWS API Documentation
     #
@@ -5909,6 +5953,16 @@ module Aws::AppStream
     #   The updated configuration for the root volume of fleet instances. Note
     #   that volume size cannot be decreased below the image volume size.
     #
+    # @option params [Boolean] :disable_imdsv1
+    #   Set to true to disable Instance Metadata Service Version 1 (IMDSv1)
+    #   and enforce IMDSv2. Set to false to enable both IMDSv1 and IMDSv2.
+    #
+    #   <note markdown="1"> Before disabling IMDSv1, ensure your WorkSpaces Applications images
+    #   are running the agent version or managed image update released on or
+    #   after January 16, 2024 to support IMDSv2 enforcement.
+    #
+    #    </note>
+    #
     # @return [Types::UpdateFleetResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateFleetResult#fleet #fleet} => Types::Fleet
@@ -5953,6 +6007,7 @@ module Aws::AppStream
     #     root_volume_config: {
     #       volume_size_in_gb: 1,
     #     },
+    #     disable_imdsv1: false,
     #   })
     #
     # @example Response structure
@@ -5998,6 +6053,7 @@ module Aws::AppStream
     #   resp.fleet.session_script_s3_location.s3_key #=> String
     #   resp.fleet.max_sessions_per_instance #=> Integer
     #   resp.fleet.root_volume_config.volume_size_in_gb #=> Integer
+    #   resp.fleet.disable_imdsv1 #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/UpdateFleet AWS API Documentation
     #
@@ -6287,7 +6343,7 @@ module Aws::AppStream
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-appstream'
-      context[:gem_version] = '1.127.0'
+      context[:gem_version] = '1.128.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

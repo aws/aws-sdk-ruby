@@ -1073,6 +1073,26 @@ module Aws::SSM
     #   The details for the CloudWatch alarm you want to apply to an
     #   automation or command.
     #
+    # @option params [String] :association_dispatch_assume_role
+    #   A role used by association to take actions on your behalf. State
+    #   Manager will assume this role and call required APIs when dispatching
+    #   configurations to nodes. If not specified, [ service-linked role for
+    #   Systems Manager][1] will be used by default.
+    #
+    #   <note markdown="1"> It is recommended that you define a custom IAM role so that you have
+    #   full control of the permissions that State Manager has when taking
+    #   actions on your behalf.
+    #
+    #    Service-linked role support in State Manager is being phased out.
+    #   Associations relying on service-linked role may require updates in the
+    #   future to continue functioning properly.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/using-service-linked-roles.html
+    #
     # @return [Types::CreateAssociationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateAssociationResult#association_description #association_description} => Types::AssociationDescription
@@ -1156,6 +1176,7 @@ module Aws::SSM
     #         },
     #       ],
     #     },
+    #     association_dispatch_assume_role: "AssociationDispatchAssumeRoleArn",
     #   })
     #
     # @example Response structure
@@ -1229,6 +1250,7 @@ module Aws::SSM
     #   resp.association_description.triggered_alarms #=> Array
     #   resp.association_description.triggered_alarms[0].name #=> String
     #   resp.association_description.triggered_alarms[0].state #=> String, one of "UNKNOWN", "ALARM"
+    #   resp.association_description.association_dispatch_assume_role #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CreateAssociation AWS API Documentation
     #
@@ -1253,6 +1275,26 @@ module Aws::SSM
     #
     # @option params [required, Array<Types::CreateAssociationBatchRequestEntry>] :entries
     #   One or more associations.
+    #
+    # @option params [String] :association_dispatch_assume_role
+    #   A role used by association to take actions on your behalf. State
+    #   Manager will assume this role and call required APIs when dispatching
+    #   configurations to nodes. If not specified, [ service-linked role for
+    #   Systems Manager][1] will be used by default.
+    #
+    #   <note markdown="1"> It is recommended that you define a custom IAM role so that you have
+    #   full control of the permissions that State Manager has when taking
+    #   actions on your behalf.
+    #
+    #    Service-linked role support in State Manager is being phased out.
+    #   Associations relying on service-linked role may require updates in the
+    #   future to continue functioning properly.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/using-service-linked-roles.html
     #
     # @return [Types::CreateAssociationBatchResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1336,6 +1378,7 @@ module Aws::SSM
     #         },
     #       },
     #     ],
+    #     association_dispatch_assume_role: "AssociationDispatchAssumeRoleArn",
     #   })
     #
     # @example Response structure
@@ -1410,6 +1453,7 @@ module Aws::SSM
     #   resp.successful[0].triggered_alarms #=> Array
     #   resp.successful[0].triggered_alarms[0].name #=> String
     #   resp.successful[0].triggered_alarms[0].state #=> String, one of "UNKNOWN", "ALARM"
+    #   resp.successful[0].association_dispatch_assume_role #=> String
     #   resp.failed #=> Array
     #   resp.failed[0].entry.name #=> String
     #   resp.failed[0].entry.instance_id #=> String
@@ -1881,12 +1925,10 @@ module Aws::SSM
     #     This type of OpsItem is used by Change Manager for reviewing and
     #     approving or rejecting change requests.
     #
-    #     Amazon Web Services Systems Manager Change Manager will no longer be
-    #     open to new customers starting November 7, 2025. If you would like
-    #     to use Change Manager, sign up prior to that date. Existing
-    #     customers can continue to use the service as normal. For more
-    #     information, see [Amazon Web Services Systems Manager Change Manager
-    #     availability change][1].
+    #     Amazon Web Services Systems Manager Change Manager is no longer open
+    #     to new customers. Existing customers can continue to use the service
+    #     as normal. For more information, see [Amazon Web Services Systems
+    #     Manager Change Manager availability change][1].
     #
     #
     #
@@ -3192,6 +3234,7 @@ module Aws::SSM
     #   resp.association_description.triggered_alarms #=> Array
     #   resp.association_description.triggered_alarms[0].name #=> String
     #   resp.association_description.triggered_alarms[0].state #=> String, one of "UNKNOWN", "ALARM"
+    #   resp.association_description.association_dispatch_assume_role #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeAssociation AWS API Documentation
     #
@@ -7934,6 +7977,7 @@ module Aws::SSM
     #   resp.association_versions[0].target_maps[0] #=> Hash
     #   resp.association_versions[0].target_maps[0]["TargetMapKey"] #=> Array
     #   resp.association_versions[0].target_maps[0]["TargetMapKey"][0] #=> String
+    #   resp.association_versions[0].association_dispatch_assume_role #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ListAssociationVersions AWS API Documentation
@@ -8374,12 +8418,10 @@ module Aws::SSM
       req.send_request(options)
     end
 
-    # Amazon Web Services Systems Manager Change Manager will no longer be
-    # open to new customers starting November 7, 2025. If you would like to
-    # use Change Manager, sign up prior to that date. Existing customers can
-    # continue to use the service as normal. For more information, see
-    # [Amazon Web Services Systems Manager Change Manager availability
-    # change][1].
+    # Amazon Web Services Systems Manager Change Manager is no longer open
+    # to new customers. Existing customers can continue to use the service
+    # as normal. For more information, see [Amazon Web Services Systems
+    # Manager Change Manager availability change][1].
     #
     # Information about approval reviews for a version of a change template
     # in Change Manager.
@@ -11122,12 +11164,10 @@ module Aws::SSM
       req.send_request(options)
     end
 
-    # Amazon Web Services Systems Manager Change Manager will no longer be
-    # open to new customers starting November 7, 2025. If you would like to
-    # use Change Manager, sign up prior to that date. Existing customers can
-    # continue to use the service as normal. For more information, see
-    # [Amazon Web Services Systems Manager Change Manager availability
-    # change][1].
+    # Amazon Web Services Systems Manager Change Manager is no longer open
+    # to new customers. Existing customers can continue to use the service
+    # as normal. For more information, see [Amazon Web Services Systems
+    # Manager Change Manager availability change][1].
     #
     # Creates a change request for Change Manager. The Automation runbooks
     # specified in the change request run only after all required approvals
@@ -11845,6 +11885,26 @@ module Aws::SSM
     #   The details for the CloudWatch alarm you want to apply to an
     #   automation or command.
     #
+    # @option params [String] :association_dispatch_assume_role
+    #   A role used by association to take actions on your behalf. State
+    #   Manager will assume this role and call required APIs when dispatching
+    #   configurations to nodes. If not specified, [ service-linked role for
+    #   Systems Manager][1] will be used by default.
+    #
+    #   <note markdown="1"> It is recommended that you define a custom IAM role so that you have
+    #   full control of the permissions that State Manager has when taking
+    #   actions on your behalf.
+    #
+    #    Service-linked role support in State Manager is being phased out.
+    #   Associations relying on service-linked role may require updates in the
+    #   future to continue functioning properly.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/using-service-linked-roles.html
+    #
     # @return [Types::UpdateAssociationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateAssociationResult#association_description #association_description} => Types::AssociationDescription
@@ -11923,6 +11983,7 @@ module Aws::SSM
     #         },
     #       ],
     #     },
+    #     association_dispatch_assume_role: "AssociationDispatchAssumeRoleArn",
     #   })
     #
     # @example Response structure
@@ -11996,6 +12057,7 @@ module Aws::SSM
     #   resp.association_description.triggered_alarms #=> Array
     #   resp.association_description.triggered_alarms[0].name #=> String
     #   resp.association_description.triggered_alarms[0].state #=> String, one of "UNKNOWN", "ALARM"
+    #   resp.association_description.association_dispatch_assume_role #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateAssociation AWS API Documentation
     #
@@ -12111,6 +12173,7 @@ module Aws::SSM
     #   resp.association_description.triggered_alarms #=> Array
     #   resp.association_description.triggered_alarms[0].name #=> String
     #   resp.association_description.triggered_alarms[0].state #=> String, one of "UNKNOWN", "ALARM"
+    #   resp.association_description.association_dispatch_assume_role #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateAssociationStatus AWS API Documentation
     #
@@ -12287,12 +12350,10 @@ module Aws::SSM
       req.send_request(options)
     end
 
-    # Amazon Web Services Systems Manager Change Manager will no longer be
-    # open to new customers starting November 7, 2025. If you would like to
-    # use Change Manager, sign up prior to that date. Existing customers can
-    # continue to use the service as normal. For more information, see
-    # [Amazon Web Services Systems Manager Change Manager availability
-    # change][1].
+    # Amazon Web Services Systems Manager Change Manager is no longer open
+    # to new customers. Existing customers can continue to use the service
+    # as normal. For more information, see [Amazon Web Services Systems
+    # Manager Change Manager availability change][1].
     #
     # Updates information related to approval reviews for a specific version
     # of a change template in Change Manager.
@@ -13592,7 +13653,7 @@ module Aws::SSM
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-ssm'
-      context[:gem_version] = '1.210.0'
+      context[:gem_version] = '1.211.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -490,7 +490,7 @@ module Aws::PcaConnectorScep
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/C4SCEP_API/pca-connector-scep/latest/APIReference/API_ListConnectors.html
+    # [1]: https://docs.aws.amazon.com/pca-connector-scep/latest/APIReference/API_ListConnectors.html
     #
     # @option params [required, String] :connector_arn
     #   The Amazon Resource Name (ARN) of the connector that you want to
@@ -511,7 +511,7 @@ module Aws::PcaConnectorScep
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/C4SCEP_API/pca-connector-scep/latest/APIReference/API_CreateChallenge.html
+    #   [1]: https://docs.aws.amazon.com/pca-connector-scep/latest/APIReference/API_CreateChallenge.html
     #
     # @option params [Hash<String,String>] :tags
     #   The key-value pairs to associate with the resource.
@@ -593,6 +593,12 @@ module Aws::PcaConnectorScep
     #   [1]: https://docs.aws.amazon.com/privateca/latest/userguide/scep-connector.htmlc4scep-considerations-limitations.html
     #   [2]: https://docs.aws.amazon.com/privateca/latest/userguide/scep-connector.htmlconnector-for-scep-intune.html
     #
+    # @option params [String] :vpc_endpoint_id
+    #   If you don't supply a value, by default Connector for SCEP creates a
+    #   connector accessible over the public internet. If you provide a VPC
+    #   endpoint ID, creates a connector accessible only through that specific
+    #   VPC endpoint.
+    #
     # @option params [String] :client_token
     #   Custom string that can be used to distinguish between calls to the
     #   [CreateChallenge][1] action. Client tokens for `CreateChallenge` time
@@ -608,7 +614,7 @@ module Aws::PcaConnectorScep
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/C4SCEP_API/pca-connector-scep/latest/APIReference/API_CreateChallenge.html
+    #   [1]: https://docs.aws.amazon.com/pca-connector-scep/latest/APIReference/API_CreateChallenge.html
     #
     # @option params [Hash<String,String>] :tags
     #   The key-value pairs to associate with the resource.
@@ -627,6 +633,7 @@ module Aws::PcaConnectorScep
     #         domain: "AzureDomain", # required
     #       },
     #     },
+    #     vpc_endpoint_id: "VpcEndpointId",
     #     client_token: "ClientToken",
     #     tags: {
     #       "String" => "String",
@@ -650,7 +657,7 @@ module Aws::PcaConnectorScep
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/C4SCEP_API/pca-connector-scep/latest/APIReference/API_Challenge.html
+    # [1]: https://docs.aws.amazon.com/pca-connector-scep/latest/APIReference/API_Challenge.html
     #
     # @option params [required, String] :challenge_arn
     #   The Amazon Resource Name (ARN) of the challenge password to delete.
@@ -677,7 +684,7 @@ module Aws::PcaConnectorScep
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/C4SCEP_API/pca-connector-scep/latest/APIReference/API_Connector.html
+    # [1]: https://docs.aws.amazon.com/pca-connector-scep/latest/APIReference/API_Connector.html
     #
     # @option params [required, String] :connector_arn
     #   The Amazon Resource Name (ARN) of the connector to delete.
@@ -703,7 +710,7 @@ module Aws::PcaConnectorScep
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/C4SCEP_API/pca-connector-scep/latest/APIReference/API_Challenge.html
+    # [1]: https://docs.aws.amazon.com/pca-connector-scep/latest/APIReference/API_Challenge.html
     #
     # @option params [required, String] :challenge_arn
     #   The Amazon Resource Name (ARN) of the challenge.
@@ -738,7 +745,7 @@ module Aws::PcaConnectorScep
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/C4SCEP_API/pca-connector-scep/latest/APIReference/API_Challenge.html
+    # [1]: https://docs.aws.amazon.com/pca-connector-scep/latest/APIReference/API_Challenge.html
     #
     # @option params [required, String] :challenge_arn
     #   The Amazon Resource Name (ARN) of the challenge.
@@ -772,7 +779,7 @@ module Aws::PcaConnectorScep
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/C4SCEP_API/pca-connector-scep/latest/APIReference/API_Connector.html
+    # [1]: https://docs.aws.amazon.com/pca-connector-scep/latest/APIReference/API_Connector.html
     #
     # @option params [required, String] :connector_arn
     #   The Amazon Resource Name (ARN) of the connector.
@@ -798,7 +805,7 @@ module Aws::PcaConnectorScep
     #   resp.connector.open_id_configuration.subject #=> String
     #   resp.connector.open_id_configuration.audience #=> String
     #   resp.connector.status #=> String, one of "CREATING", "ACTIVE", "DELETING", "FAILED"
-    #   resp.connector.status_reason #=> String, one of "INTERNAL_FAILURE", "PRIVATECA_ACCESS_DENIED", "PRIVATECA_INVALID_STATE", "PRIVATECA_RESOURCE_NOT_FOUND"
+    #   resp.connector.status_reason #=> String, one of "INTERNAL_FAILURE", "PRIVATECA_ACCESS_DENIED", "PRIVATECA_INVALID_STATE", "PRIVATECA_RESOURCE_NOT_FOUND", "VPC_ENDPOINT_RESOURCE_NOT_FOUND", "VPC_ENDPOINT_DNS_ENTRIES_NOT_FOUND"
     #   resp.connector.endpoint #=> String
     #   resp.connector.created_at #=> Time
     #   resp.connector.updated_at #=> Time
@@ -904,7 +911,7 @@ module Aws::PcaConnectorScep
     #   resp.connectors[0].open_id_configuration.subject #=> String
     #   resp.connectors[0].open_id_configuration.audience #=> String
     #   resp.connectors[0].status #=> String, one of "CREATING", "ACTIVE", "DELETING", "FAILED"
-    #   resp.connectors[0].status_reason #=> String, one of "INTERNAL_FAILURE", "PRIVATECA_ACCESS_DENIED", "PRIVATECA_INVALID_STATE", "PRIVATECA_RESOURCE_NOT_FOUND"
+    #   resp.connectors[0].status_reason #=> String, one of "INTERNAL_FAILURE", "PRIVATECA_ACCESS_DENIED", "PRIVATECA_INVALID_STATE", "PRIVATECA_RESOURCE_NOT_FOUND", "VPC_ENDPOINT_RESOURCE_NOT_FOUND", "VPC_ENDPOINT_DNS_ENTRIES_NOT_FOUND"
     #   resp.connectors[0].endpoint #=> String
     #   resp.connectors[0].created_at #=> Time
     #   resp.connectors[0].updated_at #=> Time
@@ -1026,7 +1033,7 @@ module Aws::PcaConnectorScep
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-pcaconnectorscep'
-      context[:gem_version] = '1.27.0'
+      context[:gem_version] = '1.28.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

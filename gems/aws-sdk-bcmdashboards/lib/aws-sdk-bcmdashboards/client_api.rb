@@ -89,6 +89,7 @@ module Aws::BCMDashboards
     WidgetConfig = Shapes::StructureShape.new(name: 'WidgetConfig')
     WidgetConfigList = Shapes::ListShape.new(name: 'WidgetConfigList')
     WidgetHeight = Shapes::IntegerShape.new(name: 'WidgetHeight')
+    WidgetId = Shapes::StringShape.new(name: 'WidgetId')
     WidgetList = Shapes::ListShape.new(name: 'WidgetList')
     WidgetTitle = Shapes::StringShape.new(name: 'WidgetTitle')
     WidgetWidth = Shapes::IntegerShape.new(name: 'WidgetWidth')
@@ -305,6 +306,7 @@ module Aws::BCMDashboards
     ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: GenericString, required: true, location_name: "message"))
     ValidationException.struct_class = Types::ValidationException
 
+    Widget.add_member(:id, Shapes::ShapeRef.new(shape: WidgetId, location_name: "id"))
     Widget.add_member(:title, Shapes::ShapeRef.new(shape: WidgetTitle, required: true, location_name: "title"))
     Widget.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     Widget.add_member(:width, Shapes::ShapeRef.new(shape: WidgetWidth, location_name: "width"))

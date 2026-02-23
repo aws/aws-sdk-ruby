@@ -1341,6 +1341,7 @@ module Aws::CleanRooms
     #         output_location: "AthenaOutputLocation",
     #         database_name: "AthenaDatabaseName", # required
     #         table_name: "AthenaTableName", # required
+    #         catalog_name: "AthenaCatalogName",
     #       },
     #     },
     #     allowed_columns: ["ColumnName"], # required
@@ -1373,6 +1374,7 @@ module Aws::CleanRooms
     #   resp.configured_table.table_reference.athena.output_location #=> String
     #   resp.configured_table.table_reference.athena.database_name #=> String
     #   resp.configured_table.table_reference.athena.table_name #=> String
+    #   resp.configured_table.table_reference.athena.catalog_name #=> String
     #   resp.configured_table.create_time #=> Time
     #   resp.configured_table.update_time #=> Time
     #   resp.configured_table.analysis_rule_types #=> Array
@@ -2840,6 +2842,7 @@ module Aws::CleanRooms
     #   resp.configured_table.table_reference.athena.output_location #=> String
     #   resp.configured_table.table_reference.athena.database_name #=> String
     #   resp.configured_table.table_reference.athena.table_name #=> String
+    #   resp.configured_table.table_reference.athena.catalog_name #=> String
     #   resp.configured_table.create_time #=> Time
     #   resp.configured_table.update_time #=> Time
     #   resp.configured_table.analysis_rule_types #=> Array
@@ -5453,6 +5456,7 @@ module Aws::CleanRooms
     #         output_location: "AthenaOutputLocation",
     #         database_name: "AthenaDatabaseName", # required
     #         table_name: "AthenaTableName", # required
+    #         catalog_name: "AthenaCatalogName",
     #       },
     #     },
     #     allowed_columns: ["ColumnName"],
@@ -5482,6 +5486,7 @@ module Aws::CleanRooms
     #   resp.configured_table.table_reference.athena.output_location #=> String
     #   resp.configured_table.table_reference.athena.database_name #=> String
     #   resp.configured_table.table_reference.athena.table_name #=> String
+    #   resp.configured_table.table_reference.athena.catalog_name #=> String
     #   resp.configured_table.create_time #=> Time
     #   resp.configured_table.update_time #=> Time
     #   resp.configured_table.analysis_rule_types #=> Array
@@ -6194,7 +6199,7 @@ module Aws::CleanRooms
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-cleanrooms'
-      context[:gem_version] = '1.67.0'
+      context[:gem_version] = '1.68.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

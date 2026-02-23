@@ -351,7 +351,8 @@ module Aws::WorkSpacesWeb
     # @!attribute [rw] wallpaper
     #   The wallpaper image for the portal. Provide either a binary image
     #   file or an S3 URI pointing to the image file. Maximum 5 MB in JPEG
-    #   or PNG format.
+    #   or PNG format. If not provided, a default wallpaper will be used as
+    #   the background image.
     #   @return [Types::WallpaperImageInput]
     #
     # @!attribute [rw] favicon
@@ -1358,8 +1359,8 @@ module Aws::WorkSpacesWeb
     # @!attribute [rw] branding_configuration_input
     #   The branding configuration input that customizes the appearance of
     #   the web portal for end users. This includes a custom logo, favicon,
-    #   wallpaper, localized strings, color theme, and an optional terms of
-    #   service.
+    #   localized strings, color theme, and optionally a wallpaper and terms
+    #   of service.
     #   @return [Types::BrandingConfigurationCreateInput]
     #
     # @!attribute [rw] web_authn_allowed
@@ -4550,9 +4551,9 @@ module Aws::WorkSpacesWeb
     #   The branding configuration that customizes the appearance of the web
     #   portal for end users. When updating user settings without an
     #   existing branding configuration, all fields (logo, favicon,
-    #   wallpaper, localized strings, and color theme) are required except
-    #   for terms of service. When updating user settings with an existing
-    #   branding configuration, all fields are optional.
+    #   localized strings, and color theme) are required except for
+    #   wallpaper and terms of service. When updating user settings with an
+    #   existing branding configuration, all fields are optional.
     #   @return [Types::BrandingConfigurationUpdateInput]
     #
     # @!attribute [rw] web_authn_allowed

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.68.0 (2026-02-18)
+------------------
+
+* Feature - This release adds support for federated catalogs in Athena-sourced configured tables.
+
 1.67.0 (2026-01-16)
 ------------------
 

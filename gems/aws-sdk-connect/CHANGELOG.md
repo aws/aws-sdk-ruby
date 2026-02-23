@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.243.0 (2026-02-18)
+------------------
+
+* Feature - Correcting in-app notifications API documentation.
+
 1.242.0 (2026-02-13)
 ------------------
 

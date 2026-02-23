@@ -2679,6 +2679,7 @@ module Aws::ECS
         "serviceFullName" => "Amazon EC2 Container Service",
         "serviceId" => "ECS",
         "signatureVersion" => "v4",
+        "signingName" => "ecs",
         "targetPrefix" => "AmazonEC2ContainerServiceV20141113",
         "uid" => "ecs-2014-11-13",
       }
@@ -2689,13 +2690,13 @@ module Aws::ECS
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: CreateCapacityProviderRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateCapacityProviderResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ServerException)
-        o.errors << Shapes::ShapeRef.new(shape: ClientException)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ServerException)
         o.errors << Shapes::ShapeRef.new(shape: UpdateInProgressException)
-        o.errors << Shapes::ShapeRef.new(shape: UnsupportedFeatureException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
         o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedFeatureException)
       end)
 
       api.add_operation(:create_cluster, Seahorse::Model::Operation.new.tap do |o|
@@ -2704,10 +2705,10 @@ module Aws::ECS
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: CreateClusterRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateClusterResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ServerException)
-        o.errors << Shapes::ShapeRef.new(shape: ClientException)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: NamespaceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServerException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
       end)
 
       api.add_operation(:create_express_gateway_service, Seahorse::Model::Operation.new.tap do |o|
@@ -2717,12 +2718,12 @@ module Aws::ECS
         o.input = Shapes::ShapeRef.new(shape: CreateExpressGatewayServiceRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateExpressGatewayServiceResponse)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: PlatformUnknownException)
+        o.errors << Shapes::ShapeRef.new(shape: ServerException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: ClientException)
         o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
-        o.errors << Shapes::ShapeRef.new(shape: PlatformUnknownException)
         o.errors << Shapes::ShapeRef.new(shape: PlatformTaskDefinitionIncompatibilityException)
-        o.errors << Shapes::ShapeRef.new(shape: ServerException)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedFeatureException)
       end)
 
@@ -2732,15 +2733,15 @@ module Aws::ECS
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: CreateServiceRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateServiceResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ServerException)
-        o.errors << Shapes::ShapeRef.new(shape: ClientException)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
-        o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: UnsupportedFeatureException)
-        o.errors << Shapes::ShapeRef.new(shape: PlatformUnknownException)
-        o.errors << Shapes::ShapeRef.new(shape: PlatformTaskDefinitionIncompatibilityException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: PlatformUnknownException)
         o.errors << Shapes::ShapeRef.new(shape: NamespaceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServerException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: PlatformTaskDefinitionIncompatibilityException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedFeatureException)
       end)
 
       api.add_operation(:create_task_set, Seahorse::Model::Operation.new.tap do |o|
@@ -2749,17 +2750,17 @@ module Aws::ECS
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: CreateTaskSetRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateTaskSetResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ServerException)
-        o.errors << Shapes::ShapeRef.new(shape: ClientException)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
-        o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: UnsupportedFeatureException)
-        o.errors << Shapes::ShapeRef.new(shape: PlatformUnknownException)
-        o.errors << Shapes::ShapeRef.new(shape: PlatformTaskDefinitionIncompatibilityException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceNotActiveException)
+        o.errors << Shapes::ShapeRef.new(shape: PlatformUnknownException)
         o.errors << Shapes::ShapeRef.new(shape: NamespaceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceNotActiveException)
+        o.errors << Shapes::ShapeRef.new(shape: ServerException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: PlatformTaskDefinitionIncompatibilityException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedFeatureException)
       end)
 
       api.add_operation(:delete_account_setting, Seahorse::Model::Operation.new.tap do |o|
@@ -2769,8 +2770,8 @@ module Aws::ECS
         o.input = Shapes::ShapeRef.new(shape: DeleteAccountSettingRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteAccountSettingResponse)
         o.errors << Shapes::ShapeRef.new(shape: ServerException)
-        o.errors << Shapes::ShapeRef.new(shape: ClientException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
       end)
 
       api.add_operation(:delete_attributes, Seahorse::Model::Operation.new.tap do |o|
@@ -2779,9 +2780,9 @@ module Aws::ECS
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DeleteAttributesRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteAttributesResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: TargetNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundException)
       end)
 
       api.add_operation(:delete_capacity_provider, Seahorse::Model::Operation.new.tap do |o|
@@ -2791,10 +2792,10 @@ module Aws::ECS
         o.input = Shapes::ShapeRef.new(shape: DeleteCapacityProviderRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteCapacityProviderResponse)
         o.errors << Shapes::ShapeRef.new(shape: ServerException)
-        o.errors << Shapes::ShapeRef.new(shape: ClientException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
-        o.errors << Shapes::ShapeRef.new(shape: UnsupportedFeatureException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
         o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedFeatureException)
       end)
 
       api.add_operation(:delete_cluster, Seahorse::Model::Operation.new.tap do |o|
@@ -2803,15 +2804,15 @@ module Aws::ECS
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DeleteClusterRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteClusterResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ServerException)
-        o.errors << Shapes::ShapeRef.new(shape: ClientException)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
-        o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ClusterContainsCapacityProviderException)
         o.errors << Shapes::ShapeRef.new(shape: ClusterContainsContainerInstancesException)
         o.errors << Shapes::ShapeRef.new(shape: ClusterContainsServicesException)
+        o.errors << Shapes::ShapeRef.new(shape: ClusterContainsCapacityProviderException)
         o.errors << Shapes::ShapeRef.new(shape: ClusterContainsTasksException)
+        o.errors << Shapes::ShapeRef.new(shape: ServerException)
         o.errors << Shapes::ShapeRef.new(shape: UpdateInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundException)
       end)
 
       api.add_operation(:delete_express_gateway_service, Seahorse::Model::Operation.new.tap do |o|
@@ -2821,12 +2822,12 @@ module Aws::ECS
         o.input = Shapes::ShapeRef.new(shape: DeleteExpressGatewayServiceRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteExpressGatewayServiceResponse)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
-        o.errors << Shapes::ShapeRef.new(shape: ClientException)
-        o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
-        o.errors << Shapes::ShapeRef.new(shape: ServerException)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceNotActiveException)
+        o.errors << Shapes::ShapeRef.new(shape: ServerException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedFeatureException)
       end)
 
@@ -2837,10 +2838,10 @@ module Aws::ECS
         o.input = Shapes::ShapeRef.new(shape: DeleteServiceRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteServiceResponse)
         o.errors << Shapes::ShapeRef.new(shape: ServerException)
-        o.errors << Shapes::ShapeRef.new(shape: ClientException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
-        o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundException)
       end)
 
       api.add_operation(:delete_task_definitions, Seahorse::Model::Operation.new.tap do |o|
@@ -2850,9 +2851,9 @@ module Aws::ECS
         o.input = Shapes::ShapeRef.new(shape: DeleteTaskDefinitionsRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteTaskDefinitionsResponse)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
-        o.errors << Shapes::ShapeRef.new(shape: ClientException)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: ServerException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
       end)
 
       api.add_operation(:delete_task_set, Seahorse::Model::Operation.new.tap do |o|
@@ -2861,15 +2862,15 @@ module Aws::ECS
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DeleteTaskSetRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteTaskSetResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceNotActiveException)
         o.errors << Shapes::ShapeRef.new(shape: ServerException)
-        o.errors << Shapes::ShapeRef.new(shape: ClientException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: TaskSetNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedFeatureException)
-        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceNotActiveException)
-        o.errors << Shapes::ShapeRef.new(shape: TaskSetNotFoundException)
       end)
 
       api.add_operation(:deregister_container_instance, Seahorse::Model::Operation.new.tap do |o|
@@ -2879,8 +2880,8 @@ module Aws::ECS
         o.input = Shapes::ShapeRef.new(shape: DeregisterContainerInstanceRequest)
         o.output = Shapes::ShapeRef.new(shape: DeregisterContainerInstanceResponse)
         o.errors << Shapes::ShapeRef.new(shape: ServerException)
-        o.errors << Shapes::ShapeRef.new(shape: ClientException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
         o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundException)
       end)
 
@@ -2891,8 +2892,8 @@ module Aws::ECS
         o.input = Shapes::ShapeRef.new(shape: DeregisterTaskDefinitionRequest)
         o.output = Shapes::ShapeRef.new(shape: DeregisterTaskDefinitionResponse)
         o.errors << Shapes::ShapeRef.new(shape: ServerException)
-        o.errors << Shapes::ShapeRef.new(shape: ClientException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
       end)
 
       api.add_operation(:describe_capacity_providers, Seahorse::Model::Operation.new.tap do |o|
@@ -2902,10 +2903,10 @@ module Aws::ECS
         o.input = Shapes::ShapeRef.new(shape: DescribeCapacityProvidersRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeCapacityProvidersResponse)
         o.errors << Shapes::ShapeRef.new(shape: ServerException)
-        o.errors << Shapes::ShapeRef.new(shape: ClientException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
-        o.errors << Shapes::ShapeRef.new(shape: UnsupportedFeatureException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
         o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedFeatureException)
       end)
 
       api.add_operation(:describe_clusters, Seahorse::Model::Operation.new.tap do |o|
@@ -2915,8 +2916,8 @@ module Aws::ECS
         o.input = Shapes::ShapeRef.new(shape: DescribeClustersRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeClustersResponse)
         o.errors << Shapes::ShapeRef.new(shape: ServerException)
-        o.errors << Shapes::ShapeRef.new(shape: ClientException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
       end)
 
       api.add_operation(:describe_container_instances, Seahorse::Model::Operation.new.tap do |o|
@@ -2926,8 +2927,8 @@ module Aws::ECS
         o.input = Shapes::ShapeRef.new(shape: DescribeContainerInstancesRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeContainerInstancesResponse)
         o.errors << Shapes::ShapeRef.new(shape: ServerException)
-        o.errors << Shapes::ShapeRef.new(shape: ClientException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
         o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundException)
       end)
 
@@ -2938,11 +2939,11 @@ module Aws::ECS
         o.input = Shapes::ShapeRef.new(shape: DescribeExpressGatewayServiceRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeExpressGatewayServiceResponse)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
-        o.errors << Shapes::ShapeRef.new(shape: ClientException)
-        o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ServerException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedFeatureException)
       end)
 
@@ -2953,11 +2954,11 @@ module Aws::ECS
         o.input = Shapes::ShapeRef.new(shape: DescribeServiceDeploymentsRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeServiceDeploymentsResponse)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
-        o.errors << Shapes::ShapeRef.new(shape: ClientException)
-        o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: ServerException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedFeatureException)
       end)
 
@@ -2968,11 +2969,11 @@ module Aws::ECS
         o.input = Shapes::ShapeRef.new(shape: DescribeServiceRevisionsRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeServiceRevisionsResponse)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
-        o.errors << Shapes::ShapeRef.new(shape: ClientException)
-        o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: ServerException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedFeatureException)
       end)
 
@@ -2983,8 +2984,8 @@ module Aws::ECS
         o.input = Shapes::ShapeRef.new(shape: DescribeServicesRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeServicesResponse)
         o.errors << Shapes::ShapeRef.new(shape: ServerException)
-        o.errors << Shapes::ShapeRef.new(shape: ClientException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
         o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundException)
       end)
 
@@ -2995,8 +2996,8 @@ module Aws::ECS
         o.input = Shapes::ShapeRef.new(shape: DescribeTaskDefinitionRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeTaskDefinitionResponse)
         o.errors << Shapes::ShapeRef.new(shape: ServerException)
-        o.errors << Shapes::ShapeRef.new(shape: ClientException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
       end)
 
       api.add_operation(:describe_task_sets, Seahorse::Model::Operation.new.tap do |o|
@@ -3005,14 +3006,14 @@ module Aws::ECS
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeTaskSetsRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeTaskSetsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceNotActiveException)
         o.errors << Shapes::ShapeRef.new(shape: ServerException)
-        o.errors << Shapes::ShapeRef.new(shape: ClientException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedFeatureException)
-        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceNotActiveException)
       end)
 
       api.add_operation(:describe_tasks, Seahorse::Model::Operation.new.tap do |o|
@@ -3022,8 +3023,8 @@ module Aws::ECS
         o.input = Shapes::ShapeRef.new(shape: DescribeTasksRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeTasksResponse)
         o.errors << Shapes::ShapeRef.new(shape: ServerException)
-        o.errors << Shapes::ShapeRef.new(shape: ClientException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
         o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundException)
       end)
 
@@ -3043,12 +3044,12 @@ module Aws::ECS
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ExecuteCommandRequest)
         o.output = Shapes::ShapeRef.new(shape: ExecuteCommandResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ServerException)
-        o.errors << Shapes::ShapeRef.new(shape: ClientException)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
-        o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServerException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
         o.errors << Shapes::ShapeRef.new(shape: TargetNotConnectedException)
+        o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundException)
       end)
 
       api.add_operation(:get_task_protection, Seahorse::Model::Operation.new.tap do |o|
@@ -3058,11 +3059,11 @@ module Aws::ECS
         o.input = Shapes::ShapeRef.new(shape: GetTaskProtectionRequest)
         o.output = Shapes::ShapeRef.new(shape: GetTaskProtectionResponse)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
-        o.errors << Shapes::ShapeRef.new(shape: ClientException)
-        o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ServerException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedFeatureException)
       end)
 
@@ -3073,8 +3074,8 @@ module Aws::ECS
         o.input = Shapes::ShapeRef.new(shape: ListAccountSettingsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListAccountSettingsResponse)
         o.errors << Shapes::ShapeRef.new(shape: ServerException)
-        o.errors << Shapes::ShapeRef.new(shape: ClientException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -3089,8 +3090,8 @@ module Aws::ECS
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ListAttributesRequest)
         o.output = Shapes::ShapeRef.new(shape: ListAttributesResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -3106,8 +3107,8 @@ module Aws::ECS
         o.input = Shapes::ShapeRef.new(shape: ListClustersRequest)
         o.output = Shapes::ShapeRef.new(shape: ListClustersResponse)
         o.errors << Shapes::ShapeRef.new(shape: ServerException)
-        o.errors << Shapes::ShapeRef.new(shape: ClientException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -3123,8 +3124,8 @@ module Aws::ECS
         o.input = Shapes::ShapeRef.new(shape: ListContainerInstancesRequest)
         o.output = Shapes::ShapeRef.new(shape: ListContainerInstancesResponse)
         o.errors << Shapes::ShapeRef.new(shape: ServerException)
-        o.errors << Shapes::ShapeRef.new(shape: ClientException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
         o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
@@ -3141,9 +3142,9 @@ module Aws::ECS
         o.input = Shapes::ShapeRef.new(shape: ListServiceDeploymentsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListServiceDeploymentsResponse)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
-        o.errors << Shapes::ShapeRef.new(shape: ClientException)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: ServerException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedFeatureException)
       end)
@@ -3155,8 +3156,8 @@ module Aws::ECS
         o.input = Shapes::ShapeRef.new(shape: ListServicesRequest)
         o.output = Shapes::ShapeRef.new(shape: ListServicesResponse)
         o.errors << Shapes::ShapeRef.new(shape: ServerException)
-        o.errors << Shapes::ShapeRef.new(shape: ClientException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
         o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
@@ -3172,10 +3173,10 @@ module Aws::ECS
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ListServicesByNamespaceRequest)
         o.output = Shapes::ShapeRef.new(shape: ListServicesByNamespaceResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ServerException)
-        o.errors << Shapes::ShapeRef.new(shape: ClientException)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: NamespaceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServerException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -3191,9 +3192,9 @@ module Aws::ECS
         o.input = Shapes::ShapeRef.new(shape: ListTagsForResourceRequest)
         o.output = Shapes::ShapeRef.new(shape: ListTagsForResourceResponse)
         o.errors << Shapes::ShapeRef.new(shape: ServerException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: ClientException)
         o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
       end)
 
       api.add_operation(:list_task_definition_families, Seahorse::Model::Operation.new.tap do |o|
@@ -3203,8 +3204,8 @@ module Aws::ECS
         o.input = Shapes::ShapeRef.new(shape: ListTaskDefinitionFamiliesRequest)
         o.output = Shapes::ShapeRef.new(shape: ListTaskDefinitionFamiliesResponse)
         o.errors << Shapes::ShapeRef.new(shape: ServerException)
-        o.errors << Shapes::ShapeRef.new(shape: ClientException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -3220,8 +3221,8 @@ module Aws::ECS
         o.input = Shapes::ShapeRef.new(shape: ListTaskDefinitionsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListTaskDefinitionsResponse)
         o.errors << Shapes::ShapeRef.new(shape: ServerException)
-        o.errors << Shapes::ShapeRef.new(shape: ClientException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -3237,10 +3238,10 @@ module Aws::ECS
         o.input = Shapes::ShapeRef.new(shape: ListTasksRequest)
         o.output = Shapes::ShapeRef.new(shape: ListTasksResponse)
         o.errors << Shapes::ShapeRef.new(shape: ServerException)
-        o.errors << Shapes::ShapeRef.new(shape: ClientException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
-        o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -3256,8 +3257,8 @@ module Aws::ECS
         o.input = Shapes::ShapeRef.new(shape: PutAccountSettingRequest)
         o.output = Shapes::ShapeRef.new(shape: PutAccountSettingResponse)
         o.errors << Shapes::ShapeRef.new(shape: ServerException)
-        o.errors << Shapes::ShapeRef.new(shape: ClientException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
       end)
 
       api.add_operation(:put_account_setting_default, Seahorse::Model::Operation.new.tap do |o|
@@ -3267,8 +3268,8 @@ module Aws::ECS
         o.input = Shapes::ShapeRef.new(shape: PutAccountSettingDefaultRequest)
         o.output = Shapes::ShapeRef.new(shape: PutAccountSettingDefaultResponse)
         o.errors << Shapes::ShapeRef.new(shape: ServerException)
-        o.errors << Shapes::ShapeRef.new(shape: ClientException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
       end)
 
       api.add_operation(:put_attributes, Seahorse::Model::Operation.new.tap do |o|
@@ -3277,10 +3278,10 @@ module Aws::ECS
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: PutAttributesRequest)
         o.output = Shapes::ShapeRef.new(shape: PutAttributesResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: TargetNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AttributeLimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundException)
       end)
 
       api.add_operation(:put_cluster_capacity_providers, Seahorse::Model::Operation.new.tap do |o|
@@ -3290,11 +3291,11 @@ module Aws::ECS
         o.input = Shapes::ShapeRef.new(shape: PutClusterCapacityProvidersRequest)
         o.output = Shapes::ShapeRef.new(shape: PutClusterCapacityProvidersResponse)
         o.errors << Shapes::ShapeRef.new(shape: ServerException)
-        o.errors << Shapes::ShapeRef.new(shape: ClientException)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
-        o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
         o.errors << Shapes::ShapeRef.new(shape: UpdateInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundException)
       end)
 
       api.add_operation(:register_container_instance, Seahorse::Model::Operation.new.tap do |o|
@@ -3304,8 +3305,8 @@ module Aws::ECS
         o.input = Shapes::ShapeRef.new(shape: RegisterContainerInstanceRequest)
         o.output = Shapes::ShapeRef.new(shape: RegisterContainerInstanceResponse)
         o.errors << Shapes::ShapeRef.new(shape: ServerException)
-        o.errors << Shapes::ShapeRef.new(shape: ClientException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
       end)
 
       api.add_operation(:register_task_definition, Seahorse::Model::Operation.new.tap do |o|
@@ -3315,8 +3316,8 @@ module Aws::ECS
         o.input = Shapes::ShapeRef.new(shape: RegisterTaskDefinitionRequest)
         o.output = Shapes::ShapeRef.new(shape: RegisterTaskDefinitionResponse)
         o.errors << Shapes::ShapeRef.new(shape: ServerException)
-        o.errors << Shapes::ShapeRef.new(shape: ClientException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
       end)
 
       api.add_operation(:run_task, Seahorse::Model::Operation.new.tap do |o|
@@ -3325,16 +3326,16 @@ module Aws::ECS
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: RunTaskRequest)
         o.output = Shapes::ShapeRef.new(shape: RunTaskResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ServerException)
-        o.errors << Shapes::ShapeRef.new(shape: ClientException)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
-        o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: UnsupportedFeatureException)
-        o.errors << Shapes::ShapeRef.new(shape: PlatformUnknownException)
-        o.errors << Shapes::ShapeRef.new(shape: PlatformTaskDefinitionIncompatibilityException)
-        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
-        o.errors << Shapes::ShapeRef.new(shape: BlockedException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: PlatformUnknownException)
+        o.errors << Shapes::ShapeRef.new(shape: ServerException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: BlockedException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: PlatformTaskDefinitionIncompatibilityException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedFeatureException)
       end)
 
       api.add_operation(:start_task, Seahorse::Model::Operation.new.tap do |o|
@@ -3344,8 +3345,8 @@ module Aws::ECS
         o.input = Shapes::ShapeRef.new(shape: StartTaskRequest)
         o.output = Shapes::ShapeRef.new(shape: StartTaskResponse)
         o.errors << Shapes::ShapeRef.new(shape: ServerException)
-        o.errors << Shapes::ShapeRef.new(shape: ClientException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
         o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedFeatureException)
       end)
@@ -3356,11 +3357,11 @@ module Aws::ECS
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: StopServiceDeploymentRequest)
         o.output = Shapes::ShapeRef.new(shape: StopServiceDeploymentResponse)
-        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
-        o.errors << Shapes::ShapeRef.new(shape: ClientException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ServerException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceDeploymentNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedFeatureException)
       end)
@@ -3372,8 +3373,8 @@ module Aws::ECS
         o.input = Shapes::ShapeRef.new(shape: StopTaskRequest)
         o.output = Shapes::ShapeRef.new(shape: StopTaskResponse)
         o.errors << Shapes::ShapeRef.new(shape: ServerException)
-        o.errors << Shapes::ShapeRef.new(shape: ClientException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
         o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundException)
       end)
 
@@ -3383,10 +3384,10 @@ module Aws::ECS
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: SubmitAttachmentStateChangesRequest)
         o.output = Shapes::ShapeRef.new(shape: SubmitAttachmentStateChangesResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ServerException)
-        o.errors << Shapes::ShapeRef.new(shape: ClientException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ServerException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
       end)
 
       api.add_operation(:submit_container_state_change, Seahorse::Model::Operation.new.tap do |o|
@@ -3395,9 +3396,9 @@ module Aws::ECS
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: SubmitContainerStateChangeRequest)
         o.output = Shapes::ShapeRef.new(shape: SubmitContainerStateChangeResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ServerException)
         o.errors << Shapes::ShapeRef.new(shape: ClientException)
-        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
       api.add_operation(:submit_task_state_change, Seahorse::Model::Operation.new.tap do |o|
@@ -3406,10 +3407,10 @@ module Aws::ECS
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: SubmitTaskStateChangeRequest)
         o.output = Shapes::ShapeRef.new(shape: SubmitTaskStateChangeResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ServerException)
-        o.errors << Shapes::ShapeRef.new(shape: ClientException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ServerException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
       end)
 
       api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
@@ -3418,11 +3419,11 @@ module Aws::ECS
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: TagResourceRequest)
         o.output = Shapes::ShapeRef.new(shape: TagResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ServerException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: ClientException)
         o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
       end)
 
       api.add_operation(:untag_resource, Seahorse::Model::Operation.new.tap do |o|
@@ -3431,11 +3432,11 @@ module Aws::ECS
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: UntagResourceRequest)
         o.output = Shapes::ShapeRef.new(shape: UntagResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ServerException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: ClientException)
         o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
       end)
 
       api.add_operation(:update_capacity_provider, Seahorse::Model::Operation.new.tap do |o|
@@ -3445,10 +3446,10 @@ module Aws::ECS
         o.input = Shapes::ShapeRef.new(shape: UpdateCapacityProviderRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateCapacityProviderResponse)
         o.errors << Shapes::ShapeRef.new(shape: ServerException)
-        o.errors << Shapes::ShapeRef.new(shape: ClientException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
-        o.errors << Shapes::ShapeRef.new(shape: UnsupportedFeatureException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
         o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedFeatureException)
       end)
 
       api.add_operation(:update_cluster, Seahorse::Model::Operation.new.tap do |o|
@@ -3457,11 +3458,11 @@ module Aws::ECS
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: UpdateClusterRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateClusterResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NamespaceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ServerException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: ClientException)
         o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
-        o.errors << Shapes::ShapeRef.new(shape: NamespaceNotFoundException)
       end)
 
       api.add_operation(:update_cluster_settings, Seahorse::Model::Operation.new.tap do |o|
@@ -3471,9 +3472,9 @@ module Aws::ECS
         o.input = Shapes::ShapeRef.new(shape: UpdateClusterSettingsRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateClusterSettingsResponse)
         o.errors << Shapes::ShapeRef.new(shape: ServerException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: ClientException)
         o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
       end)
 
       api.add_operation(:update_container_agent, Seahorse::Model::Operation.new.tap do |o|
@@ -3482,13 +3483,13 @@ module Aws::ECS
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: UpdateContainerAgentRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateContainerAgentResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ServerException)
-        o.errors << Shapes::ShapeRef.new(shape: ClientException)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
-        o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: UpdateInProgressException)
         o.errors << Shapes::ShapeRef.new(shape: NoUpdateAvailableException)
         o.errors << Shapes::ShapeRef.new(shape: MissingVersionException)
+        o.errors << Shapes::ShapeRef.new(shape: ServerException)
+        o.errors << Shapes::ShapeRef.new(shape: UpdateInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundException)
       end)
 
       api.add_operation(:update_container_instances_state, Seahorse::Model::Operation.new.tap do |o|
@@ -3498,8 +3499,8 @@ module Aws::ECS
         o.input = Shapes::ShapeRef.new(shape: UpdateContainerInstancesStateRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateContainerInstancesStateResponse)
         o.errors << Shapes::ShapeRef.new(shape: ServerException)
-        o.errors << Shapes::ShapeRef.new(shape: ClientException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
         o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundException)
       end)
 
@@ -3510,12 +3511,12 @@ module Aws::ECS
         o.input = Shapes::ShapeRef.new(shape: UpdateExpressGatewayServiceRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateExpressGatewayServiceResponse)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
-        o.errors << Shapes::ShapeRef.new(shape: ClientException)
-        o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
-        o.errors << Shapes::ShapeRef.new(shape: ServerException)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceNotActiveException)
+        o.errors << Shapes::ShapeRef.new(shape: ServerException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedFeatureException)
       end)
 
@@ -3525,16 +3526,16 @@ module Aws::ECS
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: UpdateServiceRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateServiceResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ServerException)
-        o.errors << Shapes::ShapeRef.new(shape: ClientException)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
-        o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceNotActiveException)
-        o.errors << Shapes::ShapeRef.new(shape: PlatformUnknownException)
-        o.errors << Shapes::ShapeRef.new(shape: PlatformTaskDefinitionIncompatibilityException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: PlatformUnknownException)
         o.errors << Shapes::ShapeRef.new(shape: NamespaceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceNotActiveException)
+        o.errors << Shapes::ShapeRef.new(shape: ServerException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: PlatformTaskDefinitionIncompatibilityException)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedFeatureException)
       end)
 
@@ -3544,15 +3545,15 @@ module Aws::ECS
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: UpdateServicePrimaryTaskSetRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateServicePrimaryTaskSetResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceNotActiveException)
         o.errors << Shapes::ShapeRef.new(shape: ServerException)
-        o.errors << Shapes::ShapeRef.new(shape: ClientException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: TaskSetNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedFeatureException)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceNotActiveException)
-        o.errors << Shapes::ShapeRef.new(shape: TaskSetNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
       api.add_operation(:update_task_protection, Seahorse::Model::Operation.new.tap do |o|
@@ -3562,11 +3563,11 @@ module Aws::ECS
         o.input = Shapes::ShapeRef.new(shape: UpdateTaskProtectionRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateTaskProtectionResponse)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
-        o.errors << Shapes::ShapeRef.new(shape: ClientException)
-        o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ServerException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedFeatureException)
       end)
 
@@ -3576,15 +3577,15 @@ module Aws::ECS
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: UpdateTaskSetRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateTaskSetResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceNotActiveException)
         o.errors << Shapes::ShapeRef.new(shape: ServerException)
-        o.errors << Shapes::ShapeRef.new(shape: ClientException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: TaskSetNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedFeatureException)
-        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceNotActiveException)
-        o.errors << Shapes::ShapeRef.new(shape: TaskSetNotFoundException)
       end)
     end
 

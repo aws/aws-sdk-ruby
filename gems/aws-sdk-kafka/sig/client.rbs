@@ -130,7 +130,8 @@ module Aws
                                       enabled: bool?
                                     }?
                                   }?
-                                }?
+                                }?,
+                                network_type: ("IPV4" | "DUAL")?
                               }?,
                               zone_ids: Array[::String]?
                             },
@@ -247,7 +248,8 @@ module Aws
                                            enabled: bool?
                                          }?
                                        }?
-                                     }?
+                                     }?,
+                                     network_type: ("IPV4" | "DUAL")?
                                    }?,
                                    zone_ids: Array[::String]?
                                  },
@@ -665,6 +667,10 @@ module Aws
         def bootstrap_broker_string_vpc_connectivity_tls: () -> ::String
         def bootstrap_broker_string_vpc_connectivity_sasl_scram: () -> ::String
         def bootstrap_broker_string_vpc_connectivity_sasl_iam: () -> ::String
+        def bootstrap_broker_string_ipv_6: () -> ::String
+        def bootstrap_broker_string_tls_ipv_6: () -> ::String
+        def bootstrap_broker_string_sasl_scram_ipv_6: () -> ::String
+        def bootstrap_broker_string_sasl_iam_ipv_6: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kafka/Client.html#get_bootstrap_brokers-instance_method
       def get_bootstrap_brokers: (
@@ -1048,7 +1054,8 @@ module Aws
                                          enabled: bool?
                                        }?
                                      }?
-                                   }?
+                                   }?,
+                                   network_type: ("IPV4" | "DUAL")?
                                  },
                                  current_version: ::String
                                ) -> _UpdateConnectivityResponseSuccess

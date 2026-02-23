@@ -380,6 +380,7 @@ module Aws
   autoload :ServiceQuotas, 'aws-sdk-servicequotas'
   autoload :Shield, 'aws-sdk-shield'
   autoload :Signer, 'aws-sdk-signer'
+  autoload :SignerData, 'aws-sdk-signerdata'
   autoload :Signin, 'aws-sdk-core'
   autoload :SimSpaceWeaver, 'aws-sdk-simspaceweaver'
   autoload :SimpleDB, 'aws-sdk-simpledb'

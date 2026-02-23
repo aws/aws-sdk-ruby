@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.308.0 (2026-02-17)
+------------------
+
+* Feature - Adds support for the StorageEncryptionType field to specify encryption type for DB clusters, DB instances, snapshots, automated backups, and global clusters.
+
 1.307.0 (2026-02-10)
 ------------------
 

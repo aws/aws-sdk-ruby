@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.253.0 (2026-02-20)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-signerdata` gem.
+
 3.252.0 (2026-02-09)
 ------------------
 

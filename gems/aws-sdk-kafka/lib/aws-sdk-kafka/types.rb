@@ -626,6 +626,14 @@ module Aws::Kafka
 
     # Returns information about a serverless cluster operation.
     #
+    # @!attribute [rw] source_cluster_info
+    #   Source cluster connectivity information for the cluster.
+    #   @return [Types::ServerlessConnectivityInfo]
+    #
+    # @!attribute [rw] target_cluster_info
+    #   Target cluster connectivity information for the cluster.
+    #   @return [Types::ServerlessConnectivityInfo]
+    #
     # @!attribute [rw] vpc_connection_info
     #   Description of the VPC connection for CreateVpcConnection and
     #   DeleteVpcConnection operations.
@@ -634,6 +642,8 @@ module Aws::Kafka
     # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/ClusterOperationV2Serverless AWS API Documentation
     #
     class ClusterOperationV2Serverless < Struct.new(
+      :source_cluster_info,
+      :target_cluster_info,
       :vpc_connection_info)
       SENSITIVE = []
       include Aws::Structure
@@ -886,11 +896,20 @@ module Aws::Kafka
     #   VpcConnectivity control for brokers.
     #   @return [Types::VpcConnectivity]
     #
+    # @!attribute [rw] network_type
+    #   The network type of the cluster, which is IPv4 or DUAL. The DUAL
+    #   network type uses both IPv4 and IPv6 addresses for your cluster and
+    #   its resources.
+    #
+    #   By default, a cluster uses the IPv4 network type.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/ConnectivityInfo AWS API Documentation
     #
     class ConnectivityInfo < Struct.new(
       :public_access,
-      :vpc_connectivity)
+      :vpc_connectivity,
+      :network_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2262,6 +2281,26 @@ module Aws::Kafka
     #   pairs for VPC connectivity.
     #   @return [String]
     #
+    # @!attribute [rw] bootstrap_broker_string_ipv_6
+    #   A string that contains one or more DNS names (or IP) and port pairs
+    #   for IPv6 connectivity.
+    #   @return [String]
+    #
+    # @!attribute [rw] bootstrap_broker_string_tls_ipv_6
+    #   A string that contains one or more DNS names (or IP) and TLS port
+    #   pairs for IPv6 connectivity.
+    #   @return [String]
+    #
+    # @!attribute [rw] bootstrap_broker_string_sasl_scram_ipv_6
+    #   A string that contains one or more DNS names (or IP) and SASL SCRAM
+    #   port pairs for IPv6 connectivity.
+    #   @return [String]
+    #
+    # @!attribute [rw] bootstrap_broker_string_sasl_iam_ipv_6
+    #   A string that contains one or more DNS names (or IP) and SASL IAM
+    #   port pairs for IPv6 connectivity.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/GetBootstrapBrokersResponse AWS API Documentation
     #
     class GetBootstrapBrokersResponse < Struct.new(
@@ -2274,7 +2313,11 @@ module Aws::Kafka
       :bootstrap_broker_string_sasl_iam,
       :bootstrap_broker_string_vpc_connectivity_tls,
       :bootstrap_broker_string_vpc_connectivity_sasl_scram,
-      :bootstrap_broker_string_vpc_connectivity_sasl_iam)
+      :bootstrap_broker_string_vpc_connectivity_sasl_iam,
+      :bootstrap_broker_string_ipv_6,
+      :bootstrap_broker_string_tls_ipv_6,
+      :bootstrap_broker_string_sasl_scram_ipv_6,
+      :bootstrap_broker_string_sasl_iam_ipv_6)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3048,6 +3091,25 @@ module Aws::Kafka
       include Aws::Structure
     end
 
+    # Describes the cluster's connectivity information, such as its network
+    # type, which is IPv4 or DUAL.
+    #
+    # @!attribute [rw] network_type
+    #   The network type of the cluster, which is IPv4 or DUAL. The DUAL
+    #   network type uses both IPv4 and IPv6 addresses for your cluster and
+    #   its resources.
+    #
+    #   By default, a cluster uses the IPv4 network type.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/ServerlessConnectivityInfo AWS API Documentation
+    #
+    class ServerlessConnectivityInfo < Struct.new(
+      :network_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes the serverless cluster.
     #
     # @!attribute [rw] vpc_configs
@@ -3058,11 +3120,17 @@ module Aws::Kafka
     #   Information about the serverless cluster client authentication.
     #   @return [Types::ServerlessClientAuthentication]
     #
+    # @!attribute [rw] connectivity_info
+    #   Describes the cluster's connectivity information, such as its
+    #   network type, which is IPv4 or DUAL.
+    #   @return [Types::ServerlessConnectivityInfo]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/Serverless AWS API Documentation
     #
     class Serverless < Struct.new(
       :vpc_configs,
-      :client_authentication)
+      :client_authentication,
+      :connectivity_info)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -294,6 +294,7 @@ module Aws::BCMDashboards
     end
 
     class Widget
+      attr_accessor id: ::String
       attr_accessor title: ::String
       attr_accessor description: ::String
       attr_accessor width: ::Integer

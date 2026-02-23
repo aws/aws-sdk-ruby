@@ -13056,6 +13056,10 @@ module Aws::EC2
     #   Reserved for future use.
     #   @return [String]
     #
+    # @!attribute [rw] operator
+    #   Reserved for internal use.
+    #   @return [Types::OperatorRequest]
+    #
     # @!attribute [rw] dry_run
     #   Checks whether you have the required permissions for the operation,
     #   without actually making the request, and provides an error response.
@@ -13081,6 +13085,7 @@ module Aws::EC2
       :tag_specifications,
       :spread_level,
       :linked_group_id,
+      :operator,
       :dry_run,
       :group_name,
       :strategy)
@@ -68580,6 +68585,10 @@ module Aws::EC2
     #   Reserved for future use.
     #   @return [String]
     #
+    # @!attribute [rw] operator
+    #   The service provider that manages the Placement Group.
+    #   @return [Types::OperatorResponse]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/PlacementGroup AWS API Documentation
     #
     class PlacementGroup < Struct.new(
@@ -68591,7 +68600,8 @@ module Aws::EC2
       :tags,
       :group_arn,
       :spread_level,
-      :linked_group_id)
+      :linked_group_id,
+      :operator)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -1271,7 +1271,7 @@ module Aws
 
       interface _GetNextMessageResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetNextMessageResponse]
-        def type: () -> ("TEXT")
+        def type: () -> ("TEXT" | "TOOL_USE_RESULT")
         def response: () -> Types::MessageOutput
         def request_message_id: () -> ::String
         def conversation_state: () -> Types::ConversationState
@@ -1954,7 +1954,7 @@ module Aws
       def send_message: (
                           assistant_id: ::String,
                           session_id: ::String,
-                          type: ("TEXT"),
+                          type: ("TEXT" | "TOOL_USE_RESULT"),
                           message: {
                             value: {
                               text: {

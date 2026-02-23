@@ -1940,12 +1940,10 @@ module Aws::ARCRegionswitch
     end
 
     # Starts the execution of a Region switch plan. You can execute a plan
-    # in either PRACTICE or RECOVERY mode.
+    # in either `graceful` or `ungraceful` mode.
     #
-    # In PRACTICE mode, the execution simulates the steps without making
-    # actual changes to your application's traffic routing. In RECOVERY
-    # mode, the execution performs actual changes to shift traffic between
-    # Regions.
+    # Specifing `ungraceful` mode either changes the behavior of the
+    # execution blocks in a workflow or skips specific execution blocks.
     #
     # @option params [required, String] :plan_arn
     #   The Amazon Resource Name (ARN) of the plan to execute.
@@ -2520,7 +2518,7 @@ module Aws::ARCRegionswitch
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-arcregionswitch'
-      context[:gem_version] = '1.11.0'
+      context[:gem_version] = '1.12.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -238,7 +238,8 @@ module Aws
                                           endpoint_type: ("STREAMING"),
                                           vpce_id: ::String?
                                         },
-                                      ]
+                                      ],
+                                      ?disable_imdsv1: bool
                                     ) -> _CreateAppBlockBuilderResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAppBlockBuilderResponseSuccess
 
@@ -371,7 +372,8 @@ module Aws
                           ?max_sessions_per_instance: ::Integer,
                           ?root_volume_config: {
                             volume_size_in_gb: ::Integer?
-                          }
+                          },
+                          ?disable_imdsv1: bool
                         ) -> _CreateFleetResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateFleetResponseSuccess
 
@@ -409,7 +411,8 @@ module Aws
                                     volume_size_in_gb: ::Integer?
                                   },
                                   ?softwares_to_install: Array[::String],
-                                  ?softwares_to_uninstall: Array[::String]
+                                  ?softwares_to_uninstall: Array[::String],
+                                  ?disable_imdsv1: bool
                                 ) -> _CreateImageBuilderResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateImageBuilderResponseSuccess
 
@@ -1225,7 +1228,8 @@ module Aws
                                           vpce_id: ::String?
                                         },
                                       ],
-                                      ?attributes_to_delete: Array[("IAM_ROLE_ARN" | "ACCESS_ENDPOINTS" | "VPC_CONFIGURATION_SECURITY_GROUP_IDS")]
+                                      ?attributes_to_delete: Array[("IAM_ROLE_ARN" | "ACCESS_ENDPOINTS" | "VPC_CONFIGURATION_SECURITY_GROUP_IDS")],
+                                      ?disable_imdsv1: bool
                                     ) -> _UpdateAppBlockBuilderResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAppBlockBuilderResponseSuccess
 
@@ -1330,7 +1334,8 @@ module Aws
                           ?max_sessions_per_instance: ::Integer,
                           ?root_volume_config: {
                             volume_size_in_gb: ::Integer?
-                          }
+                          },
+                          ?disable_imdsv1: bool
                         ) -> _UpdateFleetResponseSuccess
                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateFleetResponseSuccess
 

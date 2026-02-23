@@ -1835,8 +1835,8 @@ module Aws::ECR
     end
 
     # @!attribute [rw] name
-    #   The name of the account setting, such as `BASIC_SCAN_TYPE_VERSION`
-    #   or `REGISTRY_POLICY_SCOPE`.
+    #   The name of the account setting, such as `BASIC_SCAN_TYPE_VERSION`,
+    #   `REGISTRY_POLICY_SCOPE`, or `BLOB_MOUNTING`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/GetAccountSettingRequest AWS API Documentation
@@ -1852,10 +1852,9 @@ module Aws::ECR
     #   @return [String]
     #
     # @!attribute [rw] value
-    #   The setting value for the setting name. The following are valid
-    #   values for the basic scan type being used: `AWS_NATIVE` or `CLAIR`.
-    #   The following are valid values for the registry policy scope being
-    #   used: `V1` or `V2`.
+    #   The setting value for the setting name. Valid value for basic scan
+    #   type: `AWS_NATIVE`. Valid values for registry policy scope: `V1` or
+    #   `V2`. Valid values for blob mounting: `ENABLED` or `DISABLED`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/GetAccountSettingResponse AWS API Documentation
@@ -3580,15 +3579,14 @@ module Aws::ECR
     end
 
     # @!attribute [rw] name
-    #   The name of the account setting, such as `BASIC_SCAN_TYPE_VERSION`
-    #   or `REGISTRY_POLICY_SCOPE`.
+    #   The name of the account setting, such as `BASIC_SCAN_TYPE_VERSION`,
+    #   `REGISTRY_POLICY_SCOPE`, or `BLOB_MOUNTING`.
     #   @return [String]
     #
     # @!attribute [rw] value
-    #   Setting value that is specified. The following are valid values for
-    #   the basic scan type being used: `AWS_NATIVE` or `CLAIR`. The
-    #   following are valid values for the registry policy scope being used:
-    #   `V1` or `V2`.
+    #   Setting value that is specified. Valid value for basic scan type:
+    #   `AWS_NATIVE`. Valid values for registry policy scope: `V1` or `V2`.
+    #   Valid values for blob mounting: `ENABLED` or `DISABLED`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/PutAccountSettingRequest AWS API Documentation
