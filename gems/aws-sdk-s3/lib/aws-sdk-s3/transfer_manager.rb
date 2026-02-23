@@ -140,6 +140,10 @@ module Aws
       #   A Proc that will be called as objects are downloaded.
       #   It will be invoked with `transferred_bytes` and `transferred_files`.
       #
+      # @option options [Integer] :thread_count (10)
+      #   The number of threads to use for multipart downloads of individual large files.
+      #   Only used when no custom executor is provided to the {TransferManager}.
+      #
       # @raise [DirectoryDownloadError] Raised when download fails with `ignore_failure: false` (default)
       #
       # @return [Hash] Returns a hash with download statistics:
@@ -148,7 +152,7 @@ module Aws
       #   * `:failed_downloads` - Number of objects that failed to download
       #   * `:errors` - Array of errors for failed downloads (only present when failures occur)
       def download_directory(destination, bucket:, **options)
-        executor = @executor || DefaultExecutor.new
+        executor = @executor || DefaultExecutor.new(max_threads: options.delete(:thread_count))
         downloader = DirectoryDownloader.new(client: @client, executor: executor)
         result = downloader.download(destination, bucket: bucket, **options)
         executor.shutdown unless @executor
@@ -205,8 +209,9 @@ module Aws
       #
       # @option options [Integer] :chunk_size required in `"get_range"` mode.
       #
-      # @option options [Integer] :thread_count (10) Customize threads used in the multipart download.
-      #   Only used when no custom executor is provided (creates {DefaultExecutor} with given thread count).
+      # @option options [Integer] :thread_count (10)
+      #   The number of threads to use for multipart downloads.
+      #   Only used when no custom executor is provided to the {TransferManager}.
       #
       # @option options [String] :checksum_mode ("ENABLED")
       #   This option is deprecated. Use `:response_checksum_validation` on your S3 client instead.
@@ -334,6 +339,10 @@ module Aws
       #   reducing the number of network writes, but use more memory. Custom values must be at least 16KB.
       #   Only Ruby MRI is supported.
       #
+      # @option options [Integer] :thread_count (10)
+      #   The number of threads to use for multipart uploads of individual large files.
+      #   Only used when no custom executor is provided to the {TransferManager}.
+      #
       # @raise [DirectoryUploadError] Raised when:
       #
       #   * Upload failure with `ignore_failure: false` (default)
@@ -345,7 +354,7 @@ module Aws
       #   * `:failed_uploads` - Number of files that failed to upload
       #   * `:errors` - Array of error objects for failed uploads (only present when failures occur)
       def upload_directory(source, bucket:, **options)
-        executor = @executor || DefaultExecutor.new
+        executor = @executor || DefaultExecutor.new(max_threads: options.delete(:thread_count))
         uploader = DirectoryUploader.new(client: @client, executor: executor)
         result = uploader.upload(source, bucket, **options.merge(http_chunk_size: resolve_http_chunk_size(options)))
         executor.shutdown unless @executor
@@ -401,8 +410,9 @@ module Aws
       #   Files larger han or equal to `:multipart_threshold` are uploaded using the S3 multipart upload APIs.
       #   Default threshold is `100MB`.
       #
-      # @option options [Integer] :thread_count (10) Customize threads used in the multipart upload.
-      #   Only used when no custom executor is provided (creates {DefaultExecutor} with the given thread count).
+      # @option options [Integer] :thread_count (10)
+      #   The number of threads to use for multipart uploads.
+      #   Only used when no custom executor is provided to the {TransferManager}.
       #
       # @option option [Integer] :http_chunk_size (16384) Size in bytes for each chunk when streaming request bodies
       #   over HTTP. Controls the buffer size used when sending data to S3. Larger values may improve throughput by
