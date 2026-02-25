@@ -88,7 +88,7 @@ module Aws
       end
 
       def process_download_queue(downloader, opts)
-        queue_executor = DefaultExecutor.new
+        queue_executor = DefaultExecutor.new(max_threads: 2)
         completion_queue = Queue.new
         posted_count = 0
         errors = []
