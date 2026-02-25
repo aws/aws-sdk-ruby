@@ -40,17 +40,20 @@ module Aws
           client: @client,
           executor: @executor
         )
-        upload_opts, producer_opts = build_opts(source_directory, bucket, opts)
-        @producer = FileProducer.new(producer_opts)
+        upload_opts = build_upload_opts(opts)
+        @producer = FileProducer.new(build_producer_opts(source_directory, bucket, opts))
         uploads, errors = process_upload_queue(uploader, upload_opts)
         build_result(uploads, errors)
       end
 
       private
 
-      def build_opts(source_directory, bucket, opts)
-        uploader_opts = { ignore_failure: opts[:ignore_failure] || false }
-        producer_opts = {
+      def build_upload_opts(opts)
+        { ignore_failure: opts[:ignore_failure] || false }
+      end
+
+      def build_producer_opts(source_directory, bucket, opts)
+        {
           directory_uploader: self,
           source_dir: source_directory,
           bucket: bucket,
@@ -60,7 +63,6 @@ module Aws
           filter_callback: opts[:filter_callback],
           request_callback: opts[:request_callback]
         }
-        [uploader_opts, producer_opts]
       end
 
       def build_result(upload_count, errors)

@@ -36,8 +36,8 @@ module Aws
           FileUtils.mkdir_p(destination)
         end
 
-        download_opts, producer_opts = build_opts(destination, bucket, options)
-        @producer = ObjectProducer.new(producer_opts)
+        download_opts = build_download_opts(destination, options)
+        @producer = ObjectProducer.new(build_producer_opts(destination, bucket, options))
         downloader = FileDownloader.new(client: @client, executor: @executor)
         downloads, errors = process_download_queue(downloader, download_opts)
         build_result(downloads, errors)
@@ -45,12 +45,15 @@ module Aws
 
       private
 
-      def build_opts(destination, bucket, opts)
-        download_opts = {
+      def build_download_opts(destination, opts)
+        {
           destination: destination,
           ignore_failure: opts[:ignore_failure] || false
         }
-        producer_opts = {
+      end
+
+      def build_producer_opts(destination, bucket, opts)
+        {
           client: @client,
           directory_downloader: self,
           destination: destination,
@@ -59,7 +62,6 @@ module Aws
           filter_callback: opts[:filter_callback],
           request_callback: opts[:request_callback]
         }
-        [download_opts, producer_opts]
       end
 
       def build_result(download_count, errors)
