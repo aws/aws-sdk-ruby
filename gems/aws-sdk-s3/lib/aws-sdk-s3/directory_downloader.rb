@@ -17,8 +17,8 @@ module Aws
     # we call abort which closes the queue - the producer catches ClosedQueueError and exits cleanly.
     class DirectoryDownloader
       def initialize(options = {})
-        @client = options[:client]
-        @executor = options[:executor]
+        @client = options[:client] || Client.new
+        @executor = options[:executor] || DefaultExecutor.new
         @producer = nil
         @mutex = Mutex.new
       end

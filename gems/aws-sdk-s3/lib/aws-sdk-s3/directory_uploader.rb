@@ -18,9 +18,9 @@ module Aws
     # Errors are collected in a mutex-protected array. On failure (unless ignore_failure is set),
     # we call abort which closes the queue - the producer catches ClosedQueueError and exits cleanly.
     class DirectoryUploader
-      def initialize(opts = {})
-        @client = opts[:client]
-        @executor = opts[:executor]
+      def initialize(options = {})
+        @client = options[:client] || Client.new
+        @executor = options[:executor] || DefaultExecutor.new
         @producer = nil
         @mutex = Mutex.new
       end
