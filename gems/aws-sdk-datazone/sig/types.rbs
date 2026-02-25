@@ -590,6 +590,8 @@ module Aws::DataZone
       attr_accessor s3_properties: Types::S3PropertiesInput
       attr_accessor amazon_q_properties: Types::AmazonQPropertiesInput
       attr_accessor mlflow_properties: Types::MlflowPropertiesInput
+      attr_accessor workflows_mwaa_properties: Types::WorkflowsMwaaPropertiesInput
+      attr_accessor workflows_serverless_properties: Types::WorkflowsServerlessPropertiesInput
       attr_accessor unknown: untyped
       SENSITIVE: []
 
@@ -613,6 +615,10 @@ module Aws::DataZone
       end
       class MlflowProperties < ConnectionPropertiesInput
       end
+      class WorkflowsMwaaProperties < ConnectionPropertiesInput
+      end
+      class WorkflowsServerlessProperties < ConnectionPropertiesInput
+      end
       class Unknown < ConnectionPropertiesInput
       end
     end
@@ -628,6 +634,8 @@ module Aws::DataZone
       attr_accessor s3_properties: Types::S3PropertiesOutput
       attr_accessor amazon_q_properties: Types::AmazonQPropertiesOutput
       attr_accessor mlflow_properties: Types::MlflowPropertiesOutput
+      attr_accessor workflows_mwaa_properties: Types::WorkflowsMwaaPropertiesOutput
+      attr_accessor workflows_serverless_properties: Types::WorkflowsServerlessPropertiesOutput
       attr_accessor unknown: untyped
       SENSITIVE: []
 
@@ -650,6 +658,10 @@ module Aws::DataZone
       class AmazonQProperties < ConnectionPropertiesOutput
       end
       class MlflowProperties < ConnectionPropertiesOutput
+      end
+      class WorkflowsMwaaProperties < ConnectionPropertiesOutput
+      end
+      class WorkflowsServerlessProperties < ConnectionPropertiesOutput
       end
       class Unknown < ConnectionPropertiesOutput
       end
@@ -6221,6 +6233,22 @@ module Aws::DataZone
     class ValidationException
       attr_accessor message: ::String
       SENSITIVE: []
+    end
+
+    class WorkflowsMwaaPropertiesInput
+      attr_accessor mwaa_environment_name: ::String
+      SENSITIVE: []
+    end
+
+    class WorkflowsMwaaPropertiesOutput
+      attr_accessor mwaa_environment_name: ::String
+      SENSITIVE: []
+    end
+
+    class WorkflowsServerlessPropertiesInput < Aws::EmptyStructure
+    end
+
+    class WorkflowsServerlessPropertiesOutput < Aws::EmptyStructure
     end
   end
 end

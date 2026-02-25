@@ -55,7 +55,7 @@ module Aws::Wickr
   autoload :EndpointProvider, 'aws-sdk-wickr/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-wickr/endpoints'
 
-  GEM_VERSION = '1.3.0'
+  GEM_VERSION = '1.4.0'
 
 end
 

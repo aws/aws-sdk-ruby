@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.179.0 (2026-02-24)
+------------------
+
+* Feature - AWS Elemental MediaLive - Added support for Elemental Inference for Smart Cropping and Clipping features for MediaLive.
+
 1.178.0 (2026-02-05)
 ------------------
 

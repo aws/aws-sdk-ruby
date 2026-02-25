@@ -76717,7 +76717,7 @@ module Aws
                                      {
                                        name: ::String,
                                        id: ::String?,
-                                       type: ("STRING" | "INTEGER" | "DECIMAL" | "DATETIME" | "BIT" | "BOOLEAN" | "JSON"),
+                                       type: ("STRING" | "INTEGER" | "DECIMAL" | "DATETIME" | "BIT" | "BOOLEAN" | "JSON" | "SEMISTRUCT"),
                                        sub_type: ("FLOAT" | "FIXED")?
                                      },
                                    ]
@@ -76730,7 +76730,7 @@ module Aws
                                      {
                                        name: ::String,
                                        id: ::String?,
-                                       type: ("STRING" | "INTEGER" | "DECIMAL" | "DATETIME" | "BIT" | "BOOLEAN" | "JSON"),
+                                       type: ("STRING" | "INTEGER" | "DECIMAL" | "DATETIME" | "BIT" | "BOOLEAN" | "JSON" | "SEMISTRUCT"),
                                        sub_type: ("FLOAT" | "FIXED")?
                                      },
                                    ]?
@@ -76749,7 +76749,7 @@ module Aws
                                      {
                                        name: ::String,
                                        id: ::String?,
-                                       type: ("STRING" | "INTEGER" | "DECIMAL" | "DATETIME" | "BIT" | "BOOLEAN" | "JSON"),
+                                       type: ("STRING" | "INTEGER" | "DECIMAL" | "DATETIME" | "BIT" | "BOOLEAN" | "JSON" | "SEMISTRUCT"),
                                        sub_type: ("FLOAT" | "FIXED")?
                                      },
                                    ]
@@ -76766,7 +76766,7 @@ module Aws
                                      {
                                        name: ::String,
                                        id: ::String?,
-                                       type: ("STRING" | "INTEGER" | "DECIMAL" | "DATETIME" | "BIT" | "BOOLEAN" | "JSON"),
+                                       type: ("STRING" | "INTEGER" | "DECIMAL" | "DATETIME" | "BIT" | "BOOLEAN" | "JSON" | "SEMISTRUCT"),
                                        sub_type: ("FLOAT" | "FIXED")?
                                      },
                                    ]
@@ -77030,7 +77030,7 @@ module Aws
                                        {
                                          name: ::String,
                                          id: ::String?,
-                                         type: ("STRING" | "INTEGER" | "DECIMAL" | "DATETIME" | "BIT" | "BOOLEAN" | "JSON"),
+                                         type: ("STRING" | "INTEGER" | "DECIMAL" | "DATETIME" | "BIT" | "BOOLEAN" | "JSON" | "SEMISTRUCT"),
                                          sub_type: ("FLOAT" | "FIXED")?
                                        },
                                      ]
@@ -195195,7 +195195,7 @@ module Aws
                                      {
                                        name: ::String,
                                        id: ::String?,
-                                       type: ("STRING" | "INTEGER" | "DECIMAL" | "DATETIME" | "BIT" | "BOOLEAN" | "JSON"),
+                                       type: ("STRING" | "INTEGER" | "DECIMAL" | "DATETIME" | "BIT" | "BOOLEAN" | "JSON" | "SEMISTRUCT"),
                                        sub_type: ("FLOAT" | "FIXED")?
                                      },
                                    ]
@@ -195208,7 +195208,7 @@ module Aws
                                      {
                                        name: ::String,
                                        id: ::String?,
-                                       type: ("STRING" | "INTEGER" | "DECIMAL" | "DATETIME" | "BIT" | "BOOLEAN" | "JSON"),
+                                       type: ("STRING" | "INTEGER" | "DECIMAL" | "DATETIME" | "BIT" | "BOOLEAN" | "JSON" | "SEMISTRUCT"),
                                        sub_type: ("FLOAT" | "FIXED")?
                                      },
                                    ]?
@@ -195227,7 +195227,7 @@ module Aws
                                      {
                                        name: ::String,
                                        id: ::String?,
-                                       type: ("STRING" | "INTEGER" | "DECIMAL" | "DATETIME" | "BIT" | "BOOLEAN" | "JSON"),
+                                       type: ("STRING" | "INTEGER" | "DECIMAL" | "DATETIME" | "BIT" | "BOOLEAN" | "JSON" | "SEMISTRUCT"),
                                        sub_type: ("FLOAT" | "FIXED")?
                                      },
                                    ]
@@ -195244,7 +195244,7 @@ module Aws
                                      {
                                        name: ::String,
                                        id: ::String?,
-                                       type: ("STRING" | "INTEGER" | "DECIMAL" | "DATETIME" | "BIT" | "BOOLEAN" | "JSON"),
+                                       type: ("STRING" | "INTEGER" | "DECIMAL" | "DATETIME" | "BIT" | "BOOLEAN" | "JSON" | "SEMISTRUCT"),
                                        sub_type: ("FLOAT" | "FIXED")?
                                      },
                                    ]
@@ -195494,7 +195494,7 @@ module Aws
                                        {
                                          name: ::String,
                                          id: ::String?,
-                                         type: ("STRING" | "INTEGER" | "DECIMAL" | "DATETIME" | "BIT" | "BOOLEAN" | "JSON"),
+                                         type: ("STRING" | "INTEGER" | "DECIMAL" | "DATETIME" | "BIT" | "BOOLEAN" | "JSON" | "SEMISTRUCT"),
                                          sub_type: ("FLOAT" | "FIXED")?
                                        },
                                      ]

@@ -1433,7 +1433,7 @@ module Aws
                                   height: ::Integer?,
                                   name: ::String,
                                   respond_to_afd: ("NONE" | "PASSTHROUGH" | "RESPOND")?,
-                                  scaling_behavior: ("DEFAULT" | "STRETCH_TO_OUTPUT")?,
+                                  scaling_behavior: ("DEFAULT" | "STRETCH_TO_OUTPUT" | "SMART_CROP")?,
                                   sharpness: ::Integer?,
                                   width: ::Integer?
                                 },
@@ -1625,7 +1625,10 @@ module Aws
                                 linked_channel_type: ("FOLLOWING_CHANNEL" | "PRIMARY_CHANNEL")?
                               }?
                             },
-                            ?channel_security_groups: Array[::String]
+                            ?channel_security_groups: Array[::String],
+                            ?inference_settings: {
+                              feed_arn: ::String?
+                            }
                           ) -> _CreateChannelResponseSuccess
                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateChannelResponseSuccess
 
@@ -1848,6 +1851,7 @@ module Aws
         def channel_engine_version: () -> Types::ChannelEngineVersionResponse
         def linked_channel_settings: () -> Types::DescribeLinkedChannelSettings
         def channel_security_groups: () -> ::Array[::String]
+        def inference_settings: () -> Types::DescribeInferenceSettings
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaLive/Client.html#delete_channel-instance_method
       def delete_channel: (
@@ -1984,6 +1988,7 @@ module Aws
         def channel_engine_version: () -> Types::ChannelEngineVersionResponse
         def linked_channel_settings: () -> Types::DescribeLinkedChannelSettings
         def channel_security_groups: () -> ::Array[::String]
+        def inference_settings: () -> Types::DescribeInferenceSettings
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaLive/Client.html#describe_channel-instance_method
       def describe_channel: (
@@ -2385,6 +2390,7 @@ module Aws
         def channel_engine_version: () -> Types::ChannelEngineVersionResponse
         def linked_channel_settings: () -> Types::DescribeLinkedChannelSettings
         def channel_security_groups: () -> ::Array[::String]
+        def inference_settings: () -> Types::DescribeInferenceSettings
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaLive/Client.html#start_channel-instance_method
       def start_channel: (
@@ -2453,6 +2459,7 @@ module Aws
         def channel_engine_version: () -> Types::ChannelEngineVersionResponse
         def linked_channel_settings: () -> Types::DescribeLinkedChannelSettings
         def channel_security_groups: () -> ::Array[::String]
+        def inference_settings: () -> Types::DescribeInferenceSettings
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaLive/Client.html#stop_channel-instance_method
       def stop_channel: (
@@ -3632,7 +3639,7 @@ module Aws
                                   height: ::Integer?,
                                   name: ::String,
                                   respond_to_afd: ("NONE" | "PASSTHROUGH" | "RESPOND")?,
-                                  scaling_behavior: ("DEFAULT" | "STRETCH_TO_OUTPUT")?,
+                                  scaling_behavior: ("DEFAULT" | "STRETCH_TO_OUTPUT" | "SMART_CROP")?,
                                   sharpness: ::Integer?,
                                   width: ::Integer?
                                 },
@@ -3817,7 +3824,10 @@ module Aws
                                 linked_channel_type: ("FOLLOWING_CHANNEL" | "PRIMARY_CHANNEL")?
                               }?
                             },
-                            ?channel_security_groups: Array[::String]
+                            ?channel_security_groups: Array[::String],
+                            ?inference_settings: {
+                              feed_arn: ::String?
+                            }
                           ) -> _UpdateChannelResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateChannelResponseSuccess
 
@@ -4153,6 +4163,7 @@ module Aws
         def channel_engine_version: () -> Types::ChannelEngineVersionResponse
         def linked_channel_settings: () -> Types::DescribeLinkedChannelSettings
         def channel_security_groups: () -> ::Array[::String]
+        def inference_settings: () -> Types::DescribeInferenceSettings
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaLive/Client.html#restart_channel_pipelines-instance_method
       def restart_channel_pipelines: (

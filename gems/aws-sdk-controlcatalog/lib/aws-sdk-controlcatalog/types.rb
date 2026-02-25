@@ -236,8 +236,8 @@ module Aws::ControlCatalog
     #
     # * **ExemptedPrincipalArns**: List of Amazon Web Services IAM principal
     #   ARNs exempted from the control. Each string is expected to be an IAM
-    #   principal that follows the pattern
-    #   `^arn:(aws|aws-us-gov):(iam|sts)::.+:.+$`
+    #   principal that follows the format
+    #   `arn:partition:service::account:resource`
     #
     #   Example:
     #   `["arn:aws:iam::*:role/ReadOnly","arn:aws:sts::*:assumed-role/ReadOnly/*"]`

@@ -368,6 +368,7 @@ RubyGems.org page under "LINKS" section.
 | AWS Directory Service Data                            | Aws::DirectoryServiceData                | aws-sdk-directoryservicedata                | 2023-05-31  |
 | AWS EC2 Instance Connect                              | Aws::EC2InstanceConnect                  | aws-sdk-ec2instanceconnect                  | 2018-04-02  |
 | AWS Elastic Beanstalk                                 | Aws::ElasticBeanstalk                    | aws-sdk-elasticbeanstalk                    | 2010-12-01  |
+| AWS Elemental Inference                               | Aws::ElementalInference                  | aws-sdk-elementalinference                  | 2018-11-14  |
 | AWS Elemental MediaConvert                            | Aws::MediaConvert                        | aws-sdk-mediaconvert                        | 2017-08-29  |
 | AWS Elemental MediaLive                               | Aws::MediaLive                           | aws-sdk-medialive                           | 2017-10-14  |
 | AWS Elemental MediaPackage                            | Aws::MediaPackage                        | aws-sdk-mediapackage                        | 2017-10-12  |

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.4.0 (2026-02-23)
+------------------
+
+* Feature - AWS Wickr now provides APIs to manage your Wickr OpenTDF integration. These APIs enable you to test and save your OpenTDF configuration allowing you to manage rooms based on Trusted Data Format attributes.
+
 1.3.0 (2026-01-16)
 ------------------
 

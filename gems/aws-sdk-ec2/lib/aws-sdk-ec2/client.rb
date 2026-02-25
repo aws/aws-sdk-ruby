@@ -1284,7 +1284,7 @@ module Aws::EC2
     #     client_token: "String",
     #     instance_type: "String",
     #     quantity: 1,
-    #     availability_zone: "String",
+    #     availability_zone: "AvailabilityZoneName",
     #   })
     #
     # @example Response structure
@@ -52357,6 +52357,7 @@ module Aws::EC2
     #   resp.account_level.instance_metadata_tags #=> String, one of "disabled", "enabled"
     #   resp.account_level.managed_by #=> String, one of "account", "declarative-policy"
     #   resp.account_level.managed_exception_message #=> String
+    #   resp.account_level.http_tokens_enforced #=> String, one of "disabled", "enabled"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetInstanceMetadataDefaults AWS API Documentation
     #
@@ -59425,6 +59426,17 @@ module Aws::EC2
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
+    # @option params [String] :http_tokens_enforced
+    #   Specifies whether to enforce the requirement of IMDSv2 on an instance
+    #   at the time of launch. When enforcement is enabled, the instance
+    #   can't launch unless IMDSv2 (`HttpTokens`) is set to `required`. For
+    #   more information, see [Enforce IMDSv2 at the account level][1] in the
+    #   *Amazon EC2 User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-IMDS-new-instances.html#enforce-imdsv2-at-the-account-level
+    #
     # @return [Types::ModifyInstanceMetadataDefaultsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ModifyInstanceMetadataDefaultsResult#return #return} => Boolean
@@ -59437,6 +59449,7 @@ module Aws::EC2
     #     http_endpoint: "disabled", # accepts disabled, enabled, no-preference
     #     instance_metadata_tags: "disabled", # accepts disabled, enabled, no-preference
     #     dry_run: false,
+    #     http_tokens_enforced: "disabled", # accepts disabled, enabled, no-preference
     #   })
     #
     # @example Response structure
@@ -73029,7 +73042,7 @@ module Aws::EC2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.603.0'
+      context[:gem_version] = '1.604.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

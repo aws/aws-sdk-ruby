@@ -11194,6 +11194,7 @@ module Aws::EC2
       attr_accessor instance_metadata_tags: ("disabled" | "enabled")
       attr_accessor managed_by: ("account" | "declarative-policy")
       attr_accessor managed_exception_message: ::String
+      attr_accessor http_tokens_enforced: ("disabled" | "enabled")
       SENSITIVE: []
     end
 
@@ -13174,6 +13175,7 @@ module Aws::EC2
       attr_accessor http_endpoint: ("disabled" | "enabled" | "no-preference")
       attr_accessor instance_metadata_tags: ("disabled" | "enabled" | "no-preference")
       attr_accessor dry_run: bool
+      attr_accessor http_tokens_enforced: ("disabled" | "enabled" | "no-preference")
       SENSITIVE: []
     end
 

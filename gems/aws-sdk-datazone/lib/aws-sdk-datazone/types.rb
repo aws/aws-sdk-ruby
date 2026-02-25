@@ -2045,6 +2045,14 @@ module Aws::DataZone
     #   The MLflow properties of a connection.
     #   @return [Types::MlflowPropertiesInput]
     #
+    # @!attribute [rw] workflows_mwaa_properties
+    #   The Amazon MWAA properties of a connection.
+    #   @return [Types::WorkflowsMwaaPropertiesInput]
+    #
+    # @!attribute [rw] workflows_serverless_properties
+    #   The MWAA serverless properties of a connection.
+    #   @return [Types::WorkflowsServerlessPropertiesInput]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/ConnectionPropertiesInput AWS API Documentation
     #
     class ConnectionPropertiesInput < Struct.new(
@@ -2058,6 +2066,8 @@ module Aws::DataZone
       :s3_properties,
       :amazon_q_properties,
       :mlflow_properties,
+      :workflows_mwaa_properties,
+      :workflows_serverless_properties,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
@@ -2073,6 +2083,8 @@ module Aws::DataZone
       class S3Properties < ConnectionPropertiesInput; end
       class AmazonQProperties < ConnectionPropertiesInput; end
       class MlflowProperties < ConnectionPropertiesInput; end
+      class WorkflowsMwaaProperties < ConnectionPropertiesInput; end
+      class WorkflowsServerlessProperties < ConnectionPropertiesInput; end
       class Unknown < ConnectionPropertiesInput; end
     end
 
@@ -2120,6 +2132,14 @@ module Aws::DataZone
     #   The MLflow properties of a connection.
     #   @return [Types::MlflowPropertiesOutput]
     #
+    # @!attribute [rw] workflows_mwaa_properties
+    #   The Amazon MWAA properties of a connection.
+    #   @return [Types::WorkflowsMwaaPropertiesOutput]
+    #
+    # @!attribute [rw] workflows_serverless_properties
+    #   The MWAA serverless properties of a connection.
+    #   @return [Types::WorkflowsServerlessPropertiesOutput]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/ConnectionPropertiesOutput AWS API Documentation
     #
     class ConnectionPropertiesOutput < Struct.new(
@@ -2133,6 +2153,8 @@ module Aws::DataZone
       :s3_properties,
       :amazon_q_properties,
       :mlflow_properties,
+      :workflows_mwaa_properties,
+      :workflows_serverless_properties,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
@@ -2148,6 +2170,8 @@ module Aws::DataZone
       class S3Properties < ConnectionPropertiesOutput; end
       class AmazonQProperties < ConnectionPropertiesOutput; end
       class MlflowProperties < ConnectionPropertiesOutput; end
+      class WorkflowsMwaaProperties < ConnectionPropertiesOutput; end
+      class WorkflowsServerlessProperties < ConnectionPropertiesOutput; end
       class Unknown < ConnectionPropertiesOutput; end
     end
 
@@ -22882,6 +22906,48 @@ module Aws::DataZone
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # The Amazon MWAA properties.
+    #
+    # @!attribute [rw] mwaa_environment_name
+    #   The MWAA environment name.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/WorkflowsMwaaPropertiesInput AWS API Documentation
+    #
+    class WorkflowsMwaaPropertiesInput < Struct.new(
+      :mwaa_environment_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The Amazon MWAA properties.
+    #
+    # @!attribute [rw] mwaa_environment_name
+    #   The MWAA environment name.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/WorkflowsMwaaPropertiesOutput AWS API Documentation
+    #
+    class WorkflowsMwaaPropertiesOutput < Struct.new(
+      :mwaa_environment_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The MWAA serverless properties.
+    #
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/WorkflowsServerlessPropertiesInput AWS API Documentation
+    #
+    class WorkflowsServerlessPropertiesInput < Aws::EmptyStructure; end
+
+    # The MWAA serverless properties.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/WorkflowsServerlessPropertiesOutput AWS API Documentation
+    #
+    class WorkflowsServerlessPropertiesOutput < Aws::EmptyStructure; end
 
   end
 end

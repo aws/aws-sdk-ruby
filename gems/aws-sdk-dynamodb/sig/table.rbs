@@ -358,7 +358,8 @@ module Aws
                     ?warm_throughput: {
                       read_units_per_second: ::Integer?,
                       write_units_per_second: ::Integer?
-                    }
+                    },
+                    ?global_table_settings_replication_mode: ("ENABLED" | "DISABLED" | "ENABLED_WITH_OVERRIDES")
                   ) -> Table
                 | (?Hash[Symbol, untyped]) -> Table
 

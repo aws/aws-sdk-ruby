@@ -28,6 +28,15 @@ module Aws::CloudWatch
       SENSITIVE: []
     end
 
+    class AlarmMuteRuleSummary
+      attr_accessor alarm_mute_rule_arn: ::String
+      attr_accessor expire_date: ::Time
+      attr_accessor status: ("SCHEDULED" | "ACTIVE" | "EXPIRED")
+      attr_accessor mute_type: ::String
+      attr_accessor last_updated_timestamp: ::Time
+      SENSITIVE: []
+    end
+
     class AnomalyDetector
       attr_accessor namespace: ::String
       attr_accessor metric_name: ::String
@@ -112,6 +121,11 @@ module Aws::CloudWatch
       attr_accessor maximum: ::Float
       attr_accessor unit: ("Seconds" | "Microseconds" | "Milliseconds" | "Bytes" | "Kilobytes" | "Megabytes" | "Gigabytes" | "Terabytes" | "Bits" | "Kilobits" | "Megabits" | "Gigabits" | "Terabits" | "Percent" | "Count" | "Bytes/Second" | "Kilobytes/Second" | "Megabytes/Second" | "Gigabytes/Second" | "Terabytes/Second" | "Bits/Second" | "Kilobits/Second" | "Megabits/Second" | "Gigabits/Second" | "Terabits/Second" | "Count/Second" | "None")
       attr_accessor extended_statistics: ::Hash[::String, ::Float]
+      SENSITIVE: []
+    end
+
+    class DeleteAlarmMuteRuleInput
+      attr_accessor alarm_mute_rule_name: ::String
       SENSITIVE: []
     end
 
@@ -308,6 +322,25 @@ module Aws::CloudWatch
       SENSITIVE: []
     end
 
+    class GetAlarmMuteRuleInput
+      attr_accessor alarm_mute_rule_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetAlarmMuteRuleOutput
+      attr_accessor name: ::String
+      attr_accessor alarm_mute_rule_arn: ::String
+      attr_accessor description: ::String
+      attr_accessor rule: Types::Rule
+      attr_accessor mute_targets: Types::MuteTargets
+      attr_accessor start_date: ::Time
+      attr_accessor expire_date: ::Time
+      attr_accessor status: ("SCHEDULED" | "ACTIVE" | "EXPIRED")
+      attr_accessor last_updated_timestamp: ::Time
+      attr_accessor mute_type: ::String
+      SENSITIVE: []
+    end
+
     class GetDashboardInput
       attr_accessor dashboard_name: ::String
       SENSITIVE: []
@@ -480,6 +513,20 @@ module Aws::CloudWatch
 
     class LimitExceededFault
       attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListAlarmMuteRulesInput
+      attr_accessor alarm_name: ::String
+      attr_accessor statuses: ::Array[("SCHEDULED" | "ACTIVE" | "EXPIRED")]
+      attr_accessor max_records: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAlarmMuteRulesOutput
+      attr_accessor alarm_mute_rule_summaries: ::Array[Types::AlarmMuteRuleSummary]
+      attr_accessor next_token: ::String
       SENSITIVE: []
     end
 
@@ -700,11 +747,27 @@ module Aws::CloudWatch
       SENSITIVE: []
     end
 
+    class MuteTargets
+      attr_accessor alarm_names: ::Array[::String]
+      SENSITIVE: []
+    end
+
     class PartialFailure
       attr_accessor failure_resource: ::String
       attr_accessor exception_type: ::String
       attr_accessor failure_code: ::String
       attr_accessor failure_description: ::String
+      SENSITIVE: []
+    end
+
+    class PutAlarmMuteRuleInput
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor rule: Types::Rule
+      attr_accessor mute_targets: Types::MuteTargets
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor start_date: ::Time
+      attr_accessor expire_date: ::Time
       SENSITIVE: []
     end
 
@@ -837,6 +900,18 @@ module Aws::CloudWatch
     class ResourceNotFoundException
       attr_accessor resource_type: ::String
       attr_accessor resource_id: ::String
+      SENSITIVE: []
+    end
+
+    class Rule
+      attr_accessor schedule: Types::Schedule
+      SENSITIVE: []
+    end
+
+    class Schedule
+      attr_accessor expression: ::String
+      attr_accessor duration: ::String
+      attr_accessor timezone: ::String
       SENSITIVE: []
     end
 

@@ -1444,6 +1444,48 @@ module Aws::Wickr
     end
 
     # @!attribute [rw] network_id
+    #   The ID of the Wickr network for which OpenTDF integration will be
+    #   retrieved.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wickr-2024-02-01/GetOpentdfConfigRequest AWS API Documentation
+    #
+    class GetOpentdfConfigRequest < Struct.new(
+      :network_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] client_id
+    #   The OIDC client ID used for authenticating with the OpenTDF
+    #   provider.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain
+    #   The domain of the OpenTDF server.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_secret
+    #   The OIDC client secret used for authenticating with the OpenTDF
+    #   provider.
+    #   @return [String]
+    #
+    # @!attribute [rw] provider
+    #   The provider of the OpenTDF platform.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wickr-2024-02-01/GetOpentdfConfigResponse AWS API Documentation
+    #
+    class GetOpentdfConfigResponse < Struct.new(
+      :client_id,
+      :domain,
+      :client_secret,
+      :provider)
+      SENSITIVE = [:client_secret]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] network_id
     #   The ID of the Wickr network containing the security group.
     #   @return [String]
     #
@@ -2281,12 +2323,18 @@ module Aws::Wickr
     #   for compliance and archiving purposes.
     #   @return [Boolean]
     #
+    # @!attribute [rw] enable_trusted_data_format
+    #   Configuration for OpenTDF integration at the network level,
+    #   enforcing ABAC decision making when operating in TDF enabled rooms.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wickr-2024-02-01/NetworkSettings AWS API Documentation
     #
     class NetworkSettings < Struct.new(
       :enable_client_metrics,
       :read_receipt_config,
-      :data_retention)
+      :data_retention,
+      :enable_trusted_data_format)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2776,6 +2824,79 @@ module Aws::Wickr
       :token_endpoint_auth_methods_supported,
       :microsoft_multi_refresh_token)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] network_id
+    #   The ID of the Wickr network for which OpenTDF integration will be
+    #   configured.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_id
+    #   The OIDC client ID used for authenticating with the OpenTDF
+    #   provider.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_secret
+    #   The OIDC client secret used for authenticating with the OpenTDF
+    #   provider
+    #   @return [String]
+    #
+    # @!attribute [rw] domain
+    #   The domain of the OpenTDF server.
+    #   @return [String]
+    #
+    # @!attribute [rw] provider
+    #   The provider of the OpenTDF platform.
+    #
+    #   <note markdown="1"> Currently only Virtru is supported as the OpenTDF provider.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Perform dry-run test connection of OpenTDF configuration (optional).
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wickr-2024-02-01/RegisterOpentdfConfigRequest AWS API Documentation
+    #
+    class RegisterOpentdfConfigRequest < Struct.new(
+      :network_id,
+      :client_id,
+      :client_secret,
+      :domain,
+      :provider,
+      :dry_run)
+      SENSITIVE = [:client_secret]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] client_id
+    #   The OIDC client ID used for authenticating with the OpenTDF
+    #   provider.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain
+    #   The domain of the OpenTDF server.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_secret
+    #   The OIDC client secret used for authenticating with the OpenTDF
+    #   provider.
+    #   @return [String]
+    #
+    # @!attribute [rw] provider
+    #   The provider of the OpenTDF platform.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wickr-2024-02-01/RegisterOpentdfConfigResponse AWS API Documentation
+    #
+    class RegisterOpentdfConfigResponse < Struct.new(
+      :client_id,
+      :domain,
+      :client_secret,
+      :provider)
+      SENSITIVE = [:client_secret]
       include Aws::Structure
     end
 
@@ -3717,10 +3838,15 @@ module Aws::Wickr
     #   the failure.
     #   @return [Array<Types::ErrorDetail>]
     #
+    # @!attribute [rw] message
+    #   A message describing the validation error error that occurred.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wickr-2024-02-01/ValidationError AWS API Documentation
     #
     class ValidationError < Struct.new(
-      :reasons)
+      :reasons,
+      :message)
       SENSITIVE = []
       include Aws::Structure
     end

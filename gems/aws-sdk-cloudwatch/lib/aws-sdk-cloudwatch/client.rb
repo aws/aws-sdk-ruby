@@ -483,6 +483,40 @@ module Aws::CloudWatch
 
     # @!group API Operations
 
+    # Deletes a specific alarm mute rule.
+    #
+    # When you delete a mute rule, any alarms that are currently being muted
+    # by that rule are immediately unmuted. If those alarms are in an ALARM
+    # state, their configured actions will trigger.
+    #
+    # This operation is idempotent. If you delete a mute rule that does not
+    # exist, the operation succeeds without returning an error.
+    #
+    # **Permissions**
+    #
+    # To delete a mute rule, you need the `cloudwatch:DeleteAlarmMuteRule`
+    # permission on the alarm mute rule resource.
+    #
+    # @option params [required, String] :alarm_mute_rule_name
+    #   The name of the alarm mute rule to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_alarm_mute_rule({
+    #     alarm_mute_rule_name: "Name", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/DeleteAlarmMuteRule AWS API Documentation
+    #
+    # @overload delete_alarm_mute_rule(params = {})
+    # @param [Hash] params ({})
+    def delete_alarm_mute_rule(params = {}, options = {})
+      req = build_request(:delete_alarm_mute_rule, params)
+      req.send_request(options)
+    end
+
     # Deletes the specified alarms. You can delete up to 100 alarms in one
     # operation. However, this total can include no more than one composite
     # alarm. For example, you could delete 99 metric alarms and one
@@ -1487,6 +1521,79 @@ module Aws::CloudWatch
       req.send_request(options)
     end
 
+    # Retrieves details for a specific alarm mute rule.
+    #
+    # This operation returns complete information about the mute rule,
+    # including its configuration, status, targeted alarms, and metadata.
+    #
+    # The returned status indicates the current state of the mute rule:
+    #
+    # * **SCHEDULED**: The mute rule is configured and will become active in
+    #   the future
+    #
+    # * **ACTIVE**: The mute rule is currently muting alarm actions
+    #
+    # * **EXPIRED**: The mute rule has passed its expiration date and will
+    #   no longer become active
+    #
+    # **Permissions**
+    #
+    # To retrieve details for a mute rule, you need the
+    # `cloudwatch:GetAlarmMuteRule` permission on the alarm mute rule
+    # resource.
+    #
+    # @option params [required, String] :alarm_mute_rule_name
+    #   The name of the alarm mute rule to retrieve.
+    #
+    # @return [Types::GetAlarmMuteRuleOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetAlarmMuteRuleOutput#name #name} => String
+    #   * {Types::GetAlarmMuteRuleOutput#alarm_mute_rule_arn #alarm_mute_rule_arn} => String
+    #   * {Types::GetAlarmMuteRuleOutput#description #description} => String
+    #   * {Types::GetAlarmMuteRuleOutput#rule #rule} => Types::Rule
+    #   * {Types::GetAlarmMuteRuleOutput#mute_targets #mute_targets} => Types::MuteTargets
+    #   * {Types::GetAlarmMuteRuleOutput#start_date #start_date} => Time
+    #   * {Types::GetAlarmMuteRuleOutput#expire_date #expire_date} => Time
+    #   * {Types::GetAlarmMuteRuleOutput#status #status} => String
+    #   * {Types::GetAlarmMuteRuleOutput#last_updated_timestamp #last_updated_timestamp} => Time
+    #   * {Types::GetAlarmMuteRuleOutput#mute_type #mute_type} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_alarm_mute_rule({
+    #     alarm_mute_rule_name: "Name", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.name #=> String
+    #   resp.alarm_mute_rule_arn #=> String
+    #   resp.description #=> String
+    #   resp.rule.schedule.expression #=> String
+    #   resp.rule.schedule.duration #=> String
+    #   resp.rule.schedule.timezone #=> String
+    #   resp.mute_targets.alarm_names #=> Array
+    #   resp.mute_targets.alarm_names[0] #=> String
+    #   resp.start_date #=> Time
+    #   resp.expire_date #=> Time
+    #   resp.status #=> String, one of "SCHEDULED", "ACTIVE", "EXPIRED"
+    #   resp.last_updated_timestamp #=> Time
+    #   resp.mute_type #=> String
+    #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
+    #
+    #   * alarm_mute_rule_exists
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/GetAlarmMuteRule AWS API Documentation
+    #
+    # @overload get_alarm_mute_rule(params = {})
+    # @param [Hash] params ({})
+    def get_alarm_mute_rule(params = {}, options = {})
+      req = build_request(:get_alarm_mute_rule, params)
+      req.send_request(options)
+    end
+
     # Displays the details of the dashboard that you specify.
     #
     # To copy an existing dashboard, use `GetDashboard`, and then use the
@@ -2258,6 +2365,72 @@ module Aws::CloudWatch
       req.send_request(options)
     end
 
+    # Lists alarm mute rules in your Amazon Web Services account and region.
+    #
+    # You can filter the results by alarm name to find all mute rules
+    # targeting a specific alarm, or by status to find rules that are
+    # scheduled, active, or expired.
+    #
+    # This operation supports pagination for accounts with many mute rules.
+    # Use the `MaxRecords` and `NextToken` parameters to retrieve results in
+    # multiple calls.
+    #
+    # **Permissions**
+    #
+    # To list mute rules, you need the `cloudwatch:ListAlarmMuteRules`
+    # permission.
+    #
+    # @option params [String] :alarm_name
+    #   Filter results to show only mute rules that target the specified alarm
+    #   name.
+    #
+    # @option params [Array<String>] :statuses
+    #   Filter results to show only mute rules with the specified statuses.
+    #   Valid values are `SCHEDULED`, `ACTIVE`, or `EXPIRED`.
+    #
+    # @option params [Integer] :max_records
+    #   The maximum number of mute rules to return in one call. The default is
+    #   50.
+    #
+    # @option params [String] :next_token
+    #   The token returned from a previous call to indicate where to continue
+    #   retrieving results.
+    #
+    # @return [Types::ListAlarmMuteRulesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListAlarmMuteRulesOutput#alarm_mute_rule_summaries #alarm_mute_rule_summaries} => Array&lt;Types::AlarmMuteRuleSummary&gt;
+    #   * {Types::ListAlarmMuteRulesOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_alarm_mute_rules({
+    #     alarm_name: "Name",
+    #     statuses: ["SCHEDULED"], # accepts SCHEDULED, ACTIVE, EXPIRED
+    #     max_records: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.alarm_mute_rule_summaries #=> Array
+    #   resp.alarm_mute_rule_summaries[0].alarm_mute_rule_arn #=> String
+    #   resp.alarm_mute_rule_summaries[0].expire_date #=> Time
+    #   resp.alarm_mute_rule_summaries[0].status #=> String, one of "SCHEDULED", "ACTIVE", "EXPIRED"
+    #   resp.alarm_mute_rule_summaries[0].mute_type #=> String
+    #   resp.alarm_mute_rule_summaries[0].last_updated_timestamp #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/ListAlarmMuteRules AWS API Documentation
+    #
+    # @overload list_alarm_mute_rules(params = {})
+    # @param [Hash] params ({})
+    def list_alarm_mute_rules(params = {}, options = {})
+      req = build_request(:list_alarm_mute_rules, params)
+      req.send_request(options)
+    end
+
     # Returns a list of the dashboards for your account. If you include
     # `DashboardNamePrefix`, only those dashboards with names starting with
     # the prefix are listed. Otherwise, all dashboards in your account are
@@ -2555,6 +2728,114 @@ module Aws::CloudWatch
     # @param [Hash] params ({})
     def list_tags_for_resource(params = {}, options = {})
       req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
+    # Creates or updates an alarm mute rule.
+    #
+    # Alarm mute rules automatically mute alarm actions during predefined
+    # time windows. When a mute rule is active, targeted alarms continue to
+    # evaluate metrics and transition between states, but their configured
+    # actions (such as Amazon SNS notifications or Auto Scaling actions) are
+    # muted.
+    #
+    # You can create mute rules with recurring schedules using `cron`
+    # expressions or one-time mute windows using `at` expressions. Each mute
+    # rule can target up to 100 specific alarms by name.
+    #
+    # If you specify a rule name that already exists, this operation updates
+    # the existing rule with the new configuration.
+    #
+    # **Permissions**
+    #
+    # To create or update a mute rule, you must have the
+    # `cloudwatch:PutAlarmMuteRule` permission on two types of resources:
+    # the alarm mute rule resource itself, and each alarm that the rule
+    # targets.
+    #
+    # For example, If you want to allow a user to create mute rules that
+    # target only specific alarms named "WebServerCPUAlarm" and
+    # "DatabaseConnectionAlarm", you would create an IAM policy with one
+    # statement granting `cloudwatch:PutAlarmMuteRule` on the alarm mute
+    # rule resource
+    # (`arn:aws:cloudwatch:[REGION]:123456789012:alarm-mute:*`), and another
+    # statement granting `cloudwatch:PutAlarmMuteRule` on the targeted alarm
+    # resources
+    # (`arn:aws:cloudwatch:[REGION]:123456789012:alarm:WebServerCPUAlarm`
+    # and
+    # `arn:aws:cloudwatch:[REGION]:123456789012:alarm:DatabaseConnectionAlarm`).
+    #
+    # You can also use IAM policy conditions to allow targeting alarms based
+    # on resource tags. For example, you can restrict users to create/update
+    # mute rules to only target alarms that have a specific tag key-value
+    # pair, such as `Team=TeamA`.
+    #
+    # @option params [required, String] :name
+    #   The name of the alarm mute rule. This name must be unique within your
+    #   Amazon Web Services account and region.
+    #
+    # @option params [String] :description
+    #   A description of the alarm mute rule that helps you identify its
+    #   purpose.
+    #
+    # @option params [required, Types::Rule] :rule
+    #   The configuration that defines when and how long alarms should be
+    #   muted.
+    #
+    # @option params [Types::MuteTargets] :mute_targets
+    #   Specifies which alarms this rule applies to.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   A list of key-value pairs to associate with the alarm mute rule. You
+    #   can use tags to categorize and manage your mute rules.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :start_date
+    #   The date and time after which the mute rule takes effect. If not
+    #   specified, the mute rule takes effect immediately upon creation and
+    #   the mutes are applied as per the schedule expression. This date and
+    #   time is interpreted according to the schedule timezone, or UTC if no
+    #   timezone is specified.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :expire_date
+    #   The date and time when the mute rule expires and is no longer
+    #   evaluated. After this time, the rule status becomes EXPIRED and will
+    #   no longer mute the targeted alarms. This date and time is interpreted
+    #   according to the schedule timezone, or UTC if no timezone is
+    #   specified.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_alarm_mute_rule({
+    #     name: "Name", # required
+    #     description: "AlarmDescription",
+    #     rule: { # required
+    #       schedule: { # required
+    #         expression: "Expression", # required
+    #         duration: "Duration", # required
+    #         timezone: "Timezone",
+    #       },
+    #     },
+    #     mute_targets: {
+    #       alarm_names: ["Name"], # required
+    #     },
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #     start_date: Time.now,
+    #     expire_date: Time.now,
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/PutAlarmMuteRule AWS API Documentation
+    #
+    # @overload put_alarm_mute_rule(params = {})
+    # @param [Hash] params ({})
+    def put_alarm_mute_rule(params = {}, options = {})
+      req = build_request(:put_alarm_mute_rule, params)
       req.send_request(options)
     end
 
@@ -4402,7 +4683,7 @@ module Aws::CloudWatch
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-cloudwatch'
-      context[:gem_version] = '1.130.0'
+      context[:gem_version] = '1.131.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
@@ -4468,10 +4749,11 @@ module Aws::CloudWatch
     # The following table lists the valid waiter names, the operations they call,
     # and the default `:delay` and `:max_attempts` values.
     #
-    # | waiter_name            | params                   | :delay   | :max_attempts |
-    # | ---------------------- | ------------------------ | -------- | ------------- |
-    # | alarm_exists           | {Client#describe_alarms} | 5        | 40            |
-    # | composite_alarm_exists | {Client#describe_alarms} | 5        | 40            |
+    # | waiter_name            | params                       | :delay   | :max_attempts |
+    # | ---------------------- | ---------------------------- | -------- | ------------- |
+    # | alarm_exists           | {Client#describe_alarms}     | 5        | 40            |
+    # | alarm_mute_rule_exists | {Client#get_alarm_mute_rule} | 5        | 40            |
+    # | composite_alarm_exists | {Client#describe_alarms}     | 5        | 40            |
     #
     # @raise [Errors::FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition
@@ -4523,6 +4805,7 @@ module Aws::CloudWatch
     def waiters
       {
         alarm_exists: Waiters::AlarmExists,
+        alarm_mute_rule_exists: Waiters::AlarmMuteRuleExists,
         composite_alarm_exists: Waiters::CompositeAlarmExists
       }
     end

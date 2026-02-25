@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.115.0 (2026-02-24)
+------------------
+
+* Feature - Fixed HTTP binding for DescribeDomainAutoTunes API to correctly pass request parameters as query parameters in the HTTP request.
+
 1.114.0 (2026-01-16)
 ------------------
 

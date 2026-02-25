@@ -12523,7 +12523,8 @@ module Aws
                                                ?http_put_response_hop_limit: ::Integer,
                                                ?http_endpoint: ("disabled" | "enabled" | "no-preference"),
                                                ?instance_metadata_tags: ("disabled" | "enabled" | "no-preference"),
-                                               ?dry_run: bool
+                                               ?dry_run: bool,
+                                               ?http_tokens_enforced: ("disabled" | "enabled" | "no-preference")
                                              ) -> _ModifyInstanceMetadataDefaultsResponseSuccess
                                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ModifyInstanceMetadataDefaultsResponseSuccess
 

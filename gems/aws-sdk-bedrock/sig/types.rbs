@@ -223,6 +223,29 @@ module Aws::Bedrock
       SENSITIVE: []
     end
 
+    class AutomatedReasoningPolicyAnnotatedChunk
+      attr_accessor page_number: ::Integer
+      attr_accessor content: ::Array[Types::AutomatedReasoningPolicyAnnotatedContent]
+      SENSITIVE: []
+    end
+
+    class AutomatedReasoningPolicyAnnotatedContent
+      attr_accessor line: Types::AutomatedReasoningPolicyAnnotatedLine
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Line < AutomatedReasoningPolicyAnnotatedContent
+      end
+      class Unknown < AutomatedReasoningPolicyAnnotatedContent
+      end
+    end
+
+    class AutomatedReasoningPolicyAnnotatedLine
+      attr_accessor line_number: ::Integer
+      attr_accessor line_text: ::String
+      SENSITIVE: [:line_text]
+    end
+
     class AutomatedReasoningPolicyAnnotation
       attr_accessor add_type: Types::AutomatedReasoningPolicyAddTypeAnnotation
       attr_accessor update_type: Types::AutomatedReasoningPolicyUpdateTypeAnnotation
@@ -270,6 +293,13 @@ module Aws::Bedrock
       end
     end
 
+    class AutomatedReasoningPolicyAtomicStatement
+      attr_accessor id: ::String
+      attr_accessor text: ::String
+      attr_accessor location: Types::AutomatedReasoningPolicyStatementLocation
+      SENSITIVE: [:text]
+    end
+
     class AutomatedReasoningPolicyBuildLog
       attr_accessor entries: ::Array[Types::AutomatedReasoningPolicyBuildLogEntry]
       SENSITIVE: []
@@ -282,12 +312,27 @@ module Aws::Bedrock
       SENSITIVE: []
     end
 
+    class AutomatedReasoningPolicyBuildResultAssetManifest
+      attr_accessor entries: ::Array[Types::AutomatedReasoningPolicyBuildResultAssetManifestEntry]
+      SENSITIVE: []
+    end
+
+    class AutomatedReasoningPolicyBuildResultAssetManifestEntry
+      attr_accessor asset_type: ("BUILD_LOG" | "QUALITY_REPORT" | "POLICY_DEFINITION" | "GENERATED_TEST_CASES" | "POLICY_SCENARIOS" | "FIDELITY_REPORT" | "ASSET_MANIFEST" | "SOURCE_DOCUMENT")
+      attr_accessor asset_name: ::String
+      attr_accessor asset_id: ::String
+      SENSITIVE: [:asset_name]
+    end
+
     class AutomatedReasoningPolicyBuildResultAssets
       attr_accessor policy_definition: Types::AutomatedReasoningPolicyDefinition
       attr_accessor quality_report: Types::AutomatedReasoningPolicyDefinitionQualityReport
       attr_accessor build_log: Types::AutomatedReasoningPolicyBuildLog
       attr_accessor generated_test_cases: Types::AutomatedReasoningPolicyGeneratedTestCases
       attr_accessor policy_scenarios: Types::AutomatedReasoningPolicyScenarios
+      attr_accessor asset_manifest: Types::AutomatedReasoningPolicyBuildResultAssetManifest
+      attr_accessor document: Types::AutomatedReasoningPolicySourceDocument
+      attr_accessor fidelity_report: Types::AutomatedReasoningPolicyFidelityReport
       attr_accessor unknown: untyped
       SENSITIVE: []
 
@@ -300,6 +345,12 @@ module Aws::Bedrock
       class GeneratedTestCases < AutomatedReasoningPolicyBuildResultAssets
       end
       class PolicyScenarios < AutomatedReasoningPolicyBuildResultAssets
+      end
+      class AssetManifest < AutomatedReasoningPolicyBuildResultAssets
+      end
+      class Document < AutomatedReasoningPolicyBuildResultAssets
+      end
+      class FidelityReport < AutomatedReasoningPolicyBuildResultAssets
       end
       class Unknown < AutomatedReasoningPolicyBuildResultAssets
       end
@@ -355,7 +406,7 @@ module Aws::Bedrock
       attr_accessor policy_arn: ::String
       attr_accessor build_workflow_id: ::String
       attr_accessor status: ("SCHEDULED" | "CANCEL_REQUESTED" | "PREPROCESSING" | "BUILDING" | "TESTING" | "COMPLETED" | "FAILED" | "CANCELLED")
-      attr_accessor build_workflow_type: ("INGEST_CONTENT" | "REFINE_POLICY" | "IMPORT_POLICY")
+      attr_accessor build_workflow_type: ("INGEST_CONTENT" | "REFINE_POLICY" | "IMPORT_POLICY" | "GENERATE_FIDELITY_REPORT")
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
       SENSITIVE: []
@@ -472,6 +523,26 @@ module Aws::Bedrock
       SENSITIVE: []
     end
 
+    class AutomatedReasoningPolicyFidelityReport
+      attr_accessor coverage_score: ::Float
+      attr_accessor accuracy_score: ::Float
+      attr_accessor rule_reports: ::Hash[::String, Types::AutomatedReasoningPolicyRuleReport]
+      attr_accessor variable_reports: ::Hash[::String, Types::AutomatedReasoningPolicyVariableReport]
+      attr_accessor document_sources: ::Array[Types::AutomatedReasoningPolicyReportSourceDocument]
+      SENSITIVE: []
+    end
+
+    class AutomatedReasoningPolicyGenerateFidelityReportContent
+      attr_accessor documents: ::Array[Types::AutomatedReasoningPolicyBuildWorkflowDocument]
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Documents < AutomatedReasoningPolicyGenerateFidelityReportContent
+      end
+      class Unknown < AutomatedReasoningPolicyGenerateFidelityReportContent
+      end
+    end
+
     class AutomatedReasoningPolicyGeneratedTestCase
       attr_accessor query_content: ::String
       attr_accessor guard_content: ::String
@@ -527,6 +598,24 @@ module Aws::Bedrock
     class AutomatedReasoningPolicyPlanning < Aws::EmptyStructure
     end
 
+    class AutomatedReasoningPolicyReportSourceDocument
+      attr_accessor document_name: ::String
+      attr_accessor document_hash: ::String
+      attr_accessor document_id: ::String
+      attr_accessor atomic_statements: ::Array[Types::AutomatedReasoningPolicyAtomicStatement]
+      attr_accessor document_content: ::Array[Types::AutomatedReasoningPolicyAnnotatedChunk]
+      SENSITIVE: [:document_name]
+    end
+
+    class AutomatedReasoningPolicyRuleReport
+      attr_accessor rule: ::String
+      attr_accessor grounding_statements: ::Array[Types::AutomatedReasoningPolicyStatementReference]
+      attr_accessor grounding_justifications: ::Array[::String]
+      attr_accessor accuracy_score: ::Float
+      attr_accessor accuracy_justification: ::String
+      SENSITIVE: [:accuracy_justification]
+    end
+
     class AutomatedReasoningPolicyScenario
       attr_accessor expression: ::String
       attr_accessor alternate_expression: ::String
@@ -537,6 +626,26 @@ module Aws::Bedrock
 
     class AutomatedReasoningPolicyScenarios
       attr_accessor policy_scenarios: ::Array[Types::AutomatedReasoningPolicyScenario]
+      SENSITIVE: []
+    end
+
+    class AutomatedReasoningPolicySourceDocument
+      attr_accessor document: ::String
+      attr_accessor document_content_type: ("pdf" | "txt")
+      attr_accessor document_name: ::String
+      attr_accessor document_description: ::String
+      attr_accessor document_hash: ::String
+      SENSITIVE: [:document, :document_name, :document_description]
+    end
+
+    class AutomatedReasoningPolicyStatementLocation
+      attr_accessor lines: ::Array[::Integer]
+      SENSITIVE: []
+    end
+
+    class AutomatedReasoningPolicyStatementReference
+      attr_accessor document_id: ::String
+      attr_accessor statement_id: ::String
       SENSITIVE: []
     end
 
@@ -646,15 +755,27 @@ module Aws::Bedrock
       SENSITIVE: []
     end
 
+    class AutomatedReasoningPolicyVariableReport
+      attr_accessor policy_variable: ::String
+      attr_accessor grounding_statements: ::Array[Types::AutomatedReasoningPolicyStatementReference]
+      attr_accessor grounding_justifications: ::Array[::String]
+      attr_accessor accuracy_score: ::Float
+      attr_accessor accuracy_justification: ::String
+      SENSITIVE: [:policy_variable, :accuracy_justification]
+    end
+
     class AutomatedReasoningPolicyWorkflowTypeContent
       attr_accessor documents: ::Array[Types::AutomatedReasoningPolicyBuildWorkflowDocument]
       attr_accessor policy_repair_assets: Types::AutomatedReasoningPolicyBuildWorkflowRepairContent
+      attr_accessor generate_fidelity_report_content: Types::AutomatedReasoningPolicyGenerateFidelityReportContent
       attr_accessor unknown: untyped
       SENSITIVE: []
 
       class Documents < AutomatedReasoningPolicyWorkflowTypeContent
       end
       class PolicyRepairAssets < AutomatedReasoningPolicyWorkflowTypeContent
+      end
+      class GenerateFidelityReportContent < AutomatedReasoningPolicyWorkflowTypeContent
       end
       class Unknown < AutomatedReasoningPolicyWorkflowTypeContent
       end
@@ -1488,7 +1609,7 @@ module Aws::Bedrock
       attr_accessor policy_arn: ::String
       attr_accessor build_workflow_id: ::String
       attr_accessor status: ("SCHEDULED" | "CANCEL_REQUESTED" | "PREPROCESSING" | "BUILDING" | "TESTING" | "COMPLETED" | "FAILED" | "CANCELLED")
-      attr_accessor build_workflow_type: ("INGEST_CONTENT" | "REFINE_POLICY" | "IMPORT_POLICY")
+      attr_accessor build_workflow_type: ("INGEST_CONTENT" | "REFINE_POLICY" | "IMPORT_POLICY" | "GENERATE_FIDELITY_REPORT")
       attr_accessor document_name: ::String
       attr_accessor document_content_type: ("pdf" | "txt")
       attr_accessor document_description: ::String
@@ -1500,7 +1621,8 @@ module Aws::Bedrock
     class GetAutomatedReasoningPolicyBuildWorkflowResultAssetsRequest
       attr_accessor policy_arn: ::String
       attr_accessor build_workflow_id: ::String
-      attr_accessor asset_type: ("BUILD_LOG" | "QUALITY_REPORT" | "POLICY_DEFINITION" | "GENERATED_TEST_CASES" | "POLICY_SCENARIOS")
+      attr_accessor asset_type: ("BUILD_LOG" | "QUALITY_REPORT" | "POLICY_DEFINITION" | "GENERATED_TEST_CASES" | "POLICY_SCENARIOS" | "FIDELITY_REPORT" | "ASSET_MANIFEST" | "SOURCE_DOCUMENT")
+      attr_accessor asset_id: ::String
       SENSITIVE: []
     end
 
@@ -3095,7 +3217,7 @@ module Aws::Bedrock
 
     class StartAutomatedReasoningPolicyBuildWorkflowRequest
       attr_accessor policy_arn: ::String
-      attr_accessor build_workflow_type: ("INGEST_CONTENT" | "REFINE_POLICY" | "IMPORT_POLICY")
+      attr_accessor build_workflow_type: ("INGEST_CONTENT" | "REFINE_POLICY" | "IMPORT_POLICY" | "GENERATE_FIDELITY_REPORT")
       attr_accessor client_request_token: ::String
       attr_accessor source_content: Types::AutomatedReasoningPolicyBuildWorkflowSource
       SENSITIVE: []

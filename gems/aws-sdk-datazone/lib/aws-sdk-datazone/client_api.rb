@@ -1174,6 +1174,10 @@ module Aws::DataZone
     Username = Shapes::StringShape.new(name: 'Username')
     UsernamePassword = Shapes::StructureShape.new(name: 'UsernamePassword')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
+    WorkflowsMwaaPropertiesInput = Shapes::StructureShape.new(name: 'WorkflowsMwaaPropertiesInput')
+    WorkflowsMwaaPropertiesOutput = Shapes::StructureShape.new(name: 'WorkflowsMwaaPropertiesOutput')
+    WorkflowsServerlessPropertiesInput = Shapes::StructureShape.new(name: 'WorkflowsServerlessPropertiesInput')
+    WorkflowsServerlessPropertiesOutput = Shapes::StructureShape.new(name: 'WorkflowsServerlessPropertiesOutput')
 
     AcceptChoice.add_member(:prediction_target, Shapes::ShapeRef.new(shape: String, required: true, location_name: "predictionTarget"))
     AcceptChoice.add_member(:prediction_choice, Shapes::ShapeRef.new(shape: Integer, location_name: "predictionChoice"))
@@ -1664,6 +1668,8 @@ module Aws::DataZone
     ConnectionPropertiesInput.add_member(:s3_properties, Shapes::ShapeRef.new(shape: S3PropertiesInput, location_name: "s3Properties"))
     ConnectionPropertiesInput.add_member(:amazon_q_properties, Shapes::ShapeRef.new(shape: AmazonQPropertiesInput, location_name: "amazonQProperties"))
     ConnectionPropertiesInput.add_member(:mlflow_properties, Shapes::ShapeRef.new(shape: MlflowPropertiesInput, location_name: "mlflowProperties"))
+    ConnectionPropertiesInput.add_member(:workflows_mwaa_properties, Shapes::ShapeRef.new(shape: WorkflowsMwaaPropertiesInput, location_name: "workflowsMwaaProperties"))
+    ConnectionPropertiesInput.add_member(:workflows_serverless_properties, Shapes::ShapeRef.new(shape: WorkflowsServerlessPropertiesInput, location_name: "workflowsServerlessProperties"))
     ConnectionPropertiesInput.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     ConnectionPropertiesInput.add_member_subclass(:athena_properties, Types::ConnectionPropertiesInput::AthenaProperties)
     ConnectionPropertiesInput.add_member_subclass(:glue_properties, Types::ConnectionPropertiesInput::GlueProperties)
@@ -1675,6 +1681,8 @@ module Aws::DataZone
     ConnectionPropertiesInput.add_member_subclass(:s3_properties, Types::ConnectionPropertiesInput::S3Properties)
     ConnectionPropertiesInput.add_member_subclass(:amazon_q_properties, Types::ConnectionPropertiesInput::AmazonQProperties)
     ConnectionPropertiesInput.add_member_subclass(:mlflow_properties, Types::ConnectionPropertiesInput::MlflowProperties)
+    ConnectionPropertiesInput.add_member_subclass(:workflows_mwaa_properties, Types::ConnectionPropertiesInput::WorkflowsMwaaProperties)
+    ConnectionPropertiesInput.add_member_subclass(:workflows_serverless_properties, Types::ConnectionPropertiesInput::WorkflowsServerlessProperties)
     ConnectionPropertiesInput.add_member_subclass(:unknown, Types::ConnectionPropertiesInput::Unknown)
     ConnectionPropertiesInput.struct_class = Types::ConnectionPropertiesInput
 
@@ -1688,6 +1696,8 @@ module Aws::DataZone
     ConnectionPropertiesOutput.add_member(:s3_properties, Shapes::ShapeRef.new(shape: S3PropertiesOutput, location_name: "s3Properties"))
     ConnectionPropertiesOutput.add_member(:amazon_q_properties, Shapes::ShapeRef.new(shape: AmazonQPropertiesOutput, location_name: "amazonQProperties"))
     ConnectionPropertiesOutput.add_member(:mlflow_properties, Shapes::ShapeRef.new(shape: MlflowPropertiesOutput, location_name: "mlflowProperties"))
+    ConnectionPropertiesOutput.add_member(:workflows_mwaa_properties, Shapes::ShapeRef.new(shape: WorkflowsMwaaPropertiesOutput, location_name: "workflowsMwaaProperties"))
+    ConnectionPropertiesOutput.add_member(:workflows_serverless_properties, Shapes::ShapeRef.new(shape: WorkflowsServerlessPropertiesOutput, location_name: "workflowsServerlessProperties"))
     ConnectionPropertiesOutput.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     ConnectionPropertiesOutput.add_member_subclass(:athena_properties, Types::ConnectionPropertiesOutput::AthenaProperties)
     ConnectionPropertiesOutput.add_member_subclass(:glue_properties, Types::ConnectionPropertiesOutput::GlueProperties)
@@ -1699,6 +1709,8 @@ module Aws::DataZone
     ConnectionPropertiesOutput.add_member_subclass(:s3_properties, Types::ConnectionPropertiesOutput::S3Properties)
     ConnectionPropertiesOutput.add_member_subclass(:amazon_q_properties, Types::ConnectionPropertiesOutput::AmazonQProperties)
     ConnectionPropertiesOutput.add_member_subclass(:mlflow_properties, Types::ConnectionPropertiesOutput::MlflowProperties)
+    ConnectionPropertiesOutput.add_member_subclass(:workflows_mwaa_properties, Types::ConnectionPropertiesOutput::WorkflowsMwaaProperties)
+    ConnectionPropertiesOutput.add_member_subclass(:workflows_serverless_properties, Types::ConnectionPropertiesOutput::WorkflowsServerlessProperties)
     ConnectionPropertiesOutput.add_member_subclass(:unknown, Types::ConnectionPropertiesOutput::Unknown)
     ConnectionPropertiesOutput.struct_class = Types::ConnectionPropertiesOutput
 
@@ -6233,6 +6245,16 @@ module Aws::DataZone
 
     ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, required: true, location_name: "message"))
     ValidationException.struct_class = Types::ValidationException
+
+    WorkflowsMwaaPropertiesInput.add_member(:mwaa_environment_name, Shapes::ShapeRef.new(shape: String, location_name: "mwaaEnvironmentName"))
+    WorkflowsMwaaPropertiesInput.struct_class = Types::WorkflowsMwaaPropertiesInput
+
+    WorkflowsMwaaPropertiesOutput.add_member(:mwaa_environment_name, Shapes::ShapeRef.new(shape: String, location_name: "mwaaEnvironmentName"))
+    WorkflowsMwaaPropertiesOutput.struct_class = Types::WorkflowsMwaaPropertiesOutput
+
+    WorkflowsServerlessPropertiesInput.struct_class = Types::WorkflowsServerlessPropertiesInput
+
+    WorkflowsServerlessPropertiesOutput.struct_class = Types::WorkflowsServerlessPropertiesOutput
 
 
     # @api private

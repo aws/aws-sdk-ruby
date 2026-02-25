@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.604.0 (2026-02-24)
+------------------
+
+* Feature - Adds httpTokensEnforced property to ModifyInstanceMetadataDefaults API. Set per account or manage organization-wide using declarative policies to prevent IMDSv1-enabled instance launch and block attempts to enable IMDSv1 on existing IMDSv2-only instances.
+
 1.603.0 (2026-02-17)
 ------------------
 

@@ -760,6 +760,74 @@ module Aws::Bedrock
       include Aws::Structure
     end
 
+    # Represents a portion of a source document with line number
+    # annotations. Chunks help organize document content for easier
+    # navigation and reference.
+    #
+    # @!attribute [rw] page_number
+    #   The page number where this chunk begins, if the document is divided
+    #   into pages.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] content
+    #   The lines of text contained within this chunk, each annotated with
+    #   its line number.
+    #   @return [Array<Types::AutomatedReasoningPolicyAnnotatedContent>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/AutomatedReasoningPolicyAnnotatedChunk AWS API Documentation
+    #
+    class AutomatedReasoningPolicyAnnotatedChunk < Struct.new(
+      :page_number,
+      :content)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents a content element within an annotated chunk. This union
+    # type allows for different types of content elements to be included in
+    # document chunks, such as individual lines of text with their line
+    # numbers.
+    #
+    # @note AutomatedReasoningPolicyAnnotatedContent is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of AutomatedReasoningPolicyAnnotatedContent corresponding to the set member.
+    #
+    # @!attribute [rw] line
+    #   An annotated line of text from the source document, including both
+    #   the line number and the text content.
+    #   @return [Types::AutomatedReasoningPolicyAnnotatedLine]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/AutomatedReasoningPolicyAnnotatedContent AWS API Documentation
+    #
+    class AutomatedReasoningPolicyAnnotatedContent < Struct.new(
+      :line,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Line < AutomatedReasoningPolicyAnnotatedContent; end
+      class Unknown < AutomatedReasoningPolicyAnnotatedContent; end
+    end
+
+    # Represents a single line of text from a source document, annotated
+    # with its line number for precise referencing.
+    #
+    # @!attribute [rw] line_number
+    #   The line number of this text within the source document.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] line_text
+    #   The actual text content of this line from the source document.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/AutomatedReasoningPolicyAnnotatedLine AWS API Documentation
+    #
+    class AutomatedReasoningPolicyAnnotatedLine < Struct.new(
+      :line_number,
+      :line_text)
+      SENSITIVE = [:line_text]
+      include Aws::Structure
+    end
+
     # Contains the various operations that can be performed on an Automated
     # Reasoning policy, including adding, updating, and deleting rules,
     # variables, and types.
@@ -869,6 +937,35 @@ module Aws::Bedrock
       class Unknown < AutomatedReasoningPolicyAnnotation; end
     end
 
+    # Represents a single, indivisible statement extracted from a source
+    # document. Atomic statements are the fundamental units used to ground
+    # policy rules and variables to their source material.
+    #
+    # @!attribute [rw] id
+    #   A unique identifier for this atomic statement within the fidelity
+    #   report.
+    #   @return [String]
+    #
+    # @!attribute [rw] text
+    #   The actual text content of the atomic statement as extracted from
+    #   the source document.
+    #   @return [String]
+    #
+    # @!attribute [rw] location
+    #   Information about where this statement appears in the source
+    #   document, including line numbers.
+    #   @return [Types::AutomatedReasoningPolicyStatementLocation]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/AutomatedReasoningPolicyAtomicStatement AWS API Documentation
+    #
+    class AutomatedReasoningPolicyAtomicStatement < Struct.new(
+      :id,
+      :text,
+      :location)
+      SENSITIVE = [:text]
+      include Aws::Structure
+    end
+
     # Contains detailed logging information about the policy build process,
     # including steps taken, decisions made, and any issues encountered.
     #
@@ -912,6 +1009,52 @@ module Aws::Bedrock
       include Aws::Structure
     end
 
+    # A catalog of all artifacts produced by a build workflow, providing a
+    # comprehensive list of available assets including their types and
+    # identifiers.
+    #
+    # @!attribute [rw] entries
+    #   The list of asset entries in the manifest, each describing an
+    #   available artifact that can be retrieved.
+    #   @return [Array<Types::AutomatedReasoningPolicyBuildResultAssetManifestEntry>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/AutomatedReasoningPolicyBuildResultAssetManifest AWS API Documentation
+    #
+    class AutomatedReasoningPolicyBuildResultAssetManifest < Struct.new(
+      :entries)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents a single entry in the asset manifest, describing one
+    # artifact produced by the build workflow.
+    #
+    # @!attribute [rw] asset_type
+    #   The type of asset (e.g., BUILD\_LOG, QUALITY\_REPORT,
+    #   POLICY\_DEFINITION, GENERATED\_TEST\_CASES, POLICY\_SCENARIOS,
+    #   FIDELITY\_REPORT, ASSET\_MANIFEST, SOURCE\_DOCUMENT).
+    #   @return [String]
+    #
+    # @!attribute [rw] asset_name
+    #   A human-readable name for the asset, if applicable. This helps
+    #   identify specific documents or reports within the workflow results.
+    #   @return [String]
+    #
+    # @!attribute [rw] asset_id
+    #   A unique identifier for the asset, if applicable. Use this ID when
+    #   requesting specific assets through the API.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/AutomatedReasoningPolicyBuildResultAssetManifestEntry AWS API Documentation
+    #
+    class AutomatedReasoningPolicyBuildResultAssetManifestEntry < Struct.new(
+      :asset_type,
+      :asset_name,
+      :asset_id)
+      SENSITIVE = [:asset_name]
+      include Aws::Structure
+    end
+
     # Contains the various assets generated during a policy build workflow,
     # including logs, quality reports, test cases, and the final policy
     # definition.
@@ -946,6 +1089,25 @@ module Aws::Bedrock
     #   policy.
     #   @return [Types::AutomatedReasoningPolicyScenarios]
     #
+    # @!attribute [rw] asset_manifest
+    #   A manifest listing all available artifacts produced by the build
+    #   workflow. This provides a catalog of all assets that can be
+    #   retrieved, including their types, names, and identifiers.
+    #   @return [Types::AutomatedReasoningPolicyBuildResultAssetManifest]
+    #
+    # @!attribute [rw] document
+    #   A source document that was used as input during the build workflow.
+    #   This allows you to retrieve the original documents that were
+    #   processed to generate the policy.
+    #   @return [Types::AutomatedReasoningPolicySourceDocument]
+    #
+    # @!attribute [rw] fidelity_report
+    #   A comprehensive fidelity report that measures how accurately the
+    #   generated policy represents the source documents. The report
+    #   includes coverage and accuracy scores, along with detailed grounding
+    #   information for rules and variables.
+    #   @return [Types::AutomatedReasoningPolicyFidelityReport]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/AutomatedReasoningPolicyBuildResultAssets AWS API Documentation
     #
     class AutomatedReasoningPolicyBuildResultAssets < Struct.new(
@@ -954,6 +1116,9 @@ module Aws::Bedrock
       :build_log,
       :generated_test_cases,
       :policy_scenarios,
+      :asset_manifest,
+      :document,
+      :fidelity_report,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
@@ -964,6 +1129,9 @@ module Aws::Bedrock
       class BuildLog < AutomatedReasoningPolicyBuildResultAssets; end
       class GeneratedTestCases < AutomatedReasoningPolicyBuildResultAssets; end
       class PolicyScenarios < AutomatedReasoningPolicyBuildResultAssets; end
+      class AssetManifest < AutomatedReasoningPolicyBuildResultAssets; end
+      class Document < AutomatedReasoningPolicyBuildResultAssets; end
+      class FidelityReport < AutomatedReasoningPolicyBuildResultAssets; end
       class Unknown < AutomatedReasoningPolicyBuildResultAssets; end
     end
 
@@ -1550,6 +1718,78 @@ module Aws::Bedrock
       include Aws::Structure
     end
 
+    # A comprehensive analysis report that measures how accurately a
+    # generated policy represents the source documents. The report includes
+    # coverage and accuracy scores, detailed grounding information linking
+    # policy elements to source statements, and annotated document content.
+    #
+    # @!attribute [rw] coverage_score
+    #   A score from 0.0 to 1.0 indicating how well the policy covers the
+    #   statements in the source documents. A higher score means more of the
+    #   source content is represented in the policy.
+    #   @return [Float]
+    #
+    # @!attribute [rw] accuracy_score
+    #   A score from 0.0 to 1.0 indicating how accurate the policy rules are
+    #   relative to the source documents. A higher score means the policy
+    #   rules more faithfully represent the source material.
+    #   @return [Float]
+    #
+    # @!attribute [rw] rule_reports
+    #   A mapping from rule identifiers to detailed fidelity reports for
+    #   each rule, showing which source statements ground each rule and how
+    #   accurate it is.
+    #   @return [Hash<String,Types::AutomatedReasoningPolicyRuleReport>]
+    #
+    # @!attribute [rw] variable_reports
+    #   A mapping from variable names to detailed fidelity reports for each
+    #   variable, showing which source statements ground each variable and
+    #   how accurate it is.
+    #   @return [Hash<String,Types::AutomatedReasoningPolicyVariableReport>]
+    #
+    # @!attribute [rw] document_sources
+    #   A list of source documents with their content broken down into
+    #   atomic statements and annotated with line numbers for precise
+    #   referencing.
+    #   @return [Array<Types::AutomatedReasoningPolicyReportSourceDocument>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/AutomatedReasoningPolicyFidelityReport AWS API Documentation
+    #
+    class AutomatedReasoningPolicyFidelityReport < Struct.new(
+      :coverage_score,
+      :accuracy_score,
+      :rule_reports,
+      :variable_reports,
+      :document_sources)
+      SENSITIVE = [:variable_reports]
+      include Aws::Structure
+    end
+
+    # Configuration for generating a fidelity report, which can either
+    # analyze new documents or update an existing fidelity report with a new
+    # policy definition.
+    #
+    # @note AutomatedReasoningPolicyGenerateFidelityReportContent is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @!attribute [rw] documents
+    #   Source documents to analyze for generating a new fidelity report.
+    #   The documents will be processed to create atomic statements and
+    #   grounding information.
+    #   @return [Array<Types::AutomatedReasoningPolicyBuildWorkflowDocument>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/AutomatedReasoningPolicyGenerateFidelityReportContent AWS API Documentation
+    #
+    class AutomatedReasoningPolicyGenerateFidelityReportContent < Struct.new(
+      :documents,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Documents < AutomatedReasoningPolicyGenerateFidelityReportContent; end
+      class Unknown < AutomatedReasoningPolicyGenerateFidelityReportContent; end
+    end
+
     # Represents a generated test case, consisting of query content, guard
     # content, and expected results.
     #
@@ -1711,6 +1951,85 @@ module Aws::Bedrock
     #
     class AutomatedReasoningPolicyPlanning < Aws::EmptyStructure; end
 
+    # Represents a source document that was analyzed during fidelity report
+    # generation, including the document's metadata and its content broken
+    # down into atomic statements.
+    #
+    # @!attribute [rw] document_name
+    #   The name of the source document that was analyzed.
+    #   @return [String]
+    #
+    # @!attribute [rw] document_hash
+    #   A SHA-256 hash of the document content, used for verification and
+    #   ensuring the document hasn't changed since analysis.
+    #   @return [String]
+    #
+    # @!attribute [rw] document_id
+    #   A unique identifier for this document within the fidelity report.
+    #   @return [String]
+    #
+    # @!attribute [rw] atomic_statements
+    #   The list of atomic statements extracted from this document,
+    #   representing the fundamental units of meaning used for grounding.
+    #   @return [Array<Types::AutomatedReasoningPolicyAtomicStatement>]
+    #
+    # @!attribute [rw] document_content
+    #   The document's content organized into annotated chunks with line
+    #   number information for precise referencing.
+    #   @return [Array<Types::AutomatedReasoningPolicyAnnotatedChunk>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/AutomatedReasoningPolicyReportSourceDocument AWS API Documentation
+    #
+    class AutomatedReasoningPolicyReportSourceDocument < Struct.new(
+      :document_name,
+      :document_hash,
+      :document_id,
+      :atomic_statements,
+      :document_content)
+      SENSITIVE = [:document_name]
+      include Aws::Structure
+    end
+
+    # Provides detailed fidelity analysis for a specific policy rule,
+    # including which source document statements support it and how accurate
+    # the rule is.
+    #
+    # @!attribute [rw] rule
+    #   The identifier of the policy rule being analyzed in this report.
+    #   @return [String]
+    #
+    # @!attribute [rw] grounding_statements
+    #   References to statements from the source documents that provide the
+    #   basis or justification for this rule.
+    #   @return [Array<Types::AutomatedReasoningPolicyStatementReference>]
+    #
+    # @!attribute [rw] grounding_justifications
+    #   Explanations describing how the source statements support and
+    #   justify this specific rule.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] accuracy_score
+    #   A score from 0.0 to 1.0 indicating how accurately this rule
+    #   represents the source material.
+    #   @return [Float]
+    #
+    # @!attribute [rw] accuracy_justification
+    #   A textual explanation of the accuracy score, describing why the rule
+    #   received this particular accuracy rating.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/AutomatedReasoningPolicyRuleReport AWS API Documentation
+    #
+    class AutomatedReasoningPolicyRuleReport < Struct.new(
+      :rule,
+      :grounding_statements,
+      :grounding_justifications,
+      :accuracy_score,
+      :accuracy_justification)
+      SENSITIVE = [:grounding_justifications, :accuracy_justification]
+      include Aws::Structure
+    end
+
     # Represents a test scenario used to validate an Automated Reasoning
     # policy, including the test conditions and expected outcomes.
     #
@@ -1756,6 +2075,82 @@ module Aws::Bedrock
     #
     class AutomatedReasoningPolicyScenarios < Struct.new(
       :policy_scenarios)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents a source document that was processed during a build
+    # workflow. Contains the document content, metadata, and a hash for
+    # verification.
+    #
+    # @!attribute [rw] document
+    #   The raw content of the source document as a binary blob.
+    #   @return [String]
+    #
+    # @!attribute [rw] document_content_type
+    #   The MIME type of the document (e.g., application/pdf, text/plain).
+    #   @return [String]
+    #
+    # @!attribute [rw] document_name
+    #   The name of the source document for identification purposes.
+    #   @return [String]
+    #
+    # @!attribute [rw] document_description
+    #   An optional description providing context about the document's
+    #   content and purpose.
+    #   @return [String]
+    #
+    # @!attribute [rw] document_hash
+    #   A SHA-256 hash of the document content, used for verification and
+    #   integrity checking.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/AutomatedReasoningPolicySourceDocument AWS API Documentation
+    #
+    class AutomatedReasoningPolicySourceDocument < Struct.new(
+      :document,
+      :document_content_type,
+      :document_name,
+      :document_description,
+      :document_hash)
+      SENSITIVE = [:document, :document_name, :document_description]
+      include Aws::Structure
+    end
+
+    # Describes the location of a statement within a source document using
+    # line numbers.
+    #
+    # @!attribute [rw] lines
+    #   The line numbers in the source document where this statement
+    #   appears.
+    #   @return [Array<Integer>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/AutomatedReasoningPolicyStatementLocation AWS API Documentation
+    #
+    class AutomatedReasoningPolicyStatementLocation < Struct.new(
+      :lines)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # References a specific atomic statement within a source document, used
+    # to link policy elements back to their source material.
+    #
+    # @!attribute [rw] document_id
+    #   The unique identifier of the document containing the referenced
+    #   statement.
+    #   @return [String]
+    #
+    # @!attribute [rw] statement_id
+    #   The unique identifier of the specific atomic statement being
+    #   referenced.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/AutomatedReasoningPolicyStatementReference AWS API Documentation
+    #
+    class AutomatedReasoningPolicyStatementReference < Struct.new(
+      :document_id,
+      :statement_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2145,6 +2540,46 @@ module Aws::Bedrock
       include Aws::Structure
     end
 
+    # Provides detailed fidelity analysis for a specific policy variable,
+    # including which source document statements support it and how accurate
+    # the variable definition is.
+    #
+    # @!attribute [rw] policy_variable
+    #   The name of the policy variable being analyzed in this report.
+    #   @return [String]
+    #
+    # @!attribute [rw] grounding_statements
+    #   References to statements from the source documents that provide the
+    #   basis or justification for this variable.
+    #   @return [Array<Types::AutomatedReasoningPolicyStatementReference>]
+    #
+    # @!attribute [rw] grounding_justifications
+    #   Explanations describing how the source statements support and
+    #   justify this specific variable definition.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] accuracy_score
+    #   A score from 0.0 to 1.0 indicating how accurately this variable
+    #   represents concepts from the source material.
+    #   @return [Float]
+    #
+    # @!attribute [rw] accuracy_justification
+    #   A textual explanation of the accuracy score, describing why the
+    #   variable received this particular accuracy rating.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/AutomatedReasoningPolicyVariableReport AWS API Documentation
+    #
+    class AutomatedReasoningPolicyVariableReport < Struct.new(
+      :policy_variable,
+      :grounding_statements,
+      :grounding_justifications,
+      :accuracy_score,
+      :accuracy_justification)
+      SENSITIVE = [:policy_variable, :grounding_justifications, :accuracy_justification]
+      include Aws::Structure
+    end
+
     # Defines the content and configuration for different types of policy
     # build workflows.
     #
@@ -2160,11 +2595,18 @@ module Aws::Bedrock
     #   including repair annotations and guidance.
     #   @return [Types::AutomatedReasoningPolicyBuildWorkflowRepairContent]
     #
+    # @!attribute [rw] generate_fidelity_report_content
+    #   The content configuration for generating a fidelity report workflow.
+    #   This can include source documents to analyze or an existing fidelity
+    #   report to update with a new policy definition.
+    #   @return [Types::AutomatedReasoningPolicyGenerateFidelityReportContent]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/AutomatedReasoningPolicyWorkflowTypeContent AWS API Documentation
     #
     class AutomatedReasoningPolicyWorkflowTypeContent < Struct.new(
       :documents,
       :policy_repair_assets,
+      :generate_fidelity_report_content,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
@@ -2172,6 +2614,7 @@ module Aws::Bedrock
 
       class Documents < AutomatedReasoningPolicyWorkflowTypeContent; end
       class PolicyRepairAssets < AutomatedReasoningPolicyWorkflowTypeContent; end
+      class GenerateFidelityReportContent < AutomatedReasoningPolicyWorkflowTypeContent; end
       class Unknown < AutomatedReasoningPolicyWorkflowTypeContent; end
     end
 
@@ -5381,7 +5824,16 @@ module Aws::Bedrock
     #
     # @!attribute [rw] asset_type
     #   The type of asset to retrieve (e.g., BUILD\_LOG, QUALITY\_REPORT,
-    #   POLICY\_DEFINITION).
+    #   POLICY\_DEFINITION, GENERATED\_TEST\_CASES, POLICY\_SCENARIOS,
+    #   FIDELITY\_REPORT, ASSET\_MANIFEST, SOURCE\_DOCUMENT).
+    #   @return [String]
+    #
+    # @!attribute [rw] asset_id
+    #   The unique identifier of the specific asset to retrieve when
+    #   multiple assets of the same type exist. This is required when
+    #   retrieving SOURCE\_DOCUMENT assets, as multiple source documents may
+    #   have been used in the workflow. The asset ID can be obtained from
+    #   the asset manifest.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/GetAutomatedReasoningPolicyBuildWorkflowResultAssetsRequest AWS API Documentation
@@ -5389,7 +5841,8 @@ module Aws::Bedrock
     class GetAutomatedReasoningPolicyBuildWorkflowResultAssetsRequest < Struct.new(
       :policy_arn,
       :build_workflow_id,
-      :asset_type)
+      :asset_type,
+      :asset_id)
       SENSITIVE = []
       include Aws::Structure
     end

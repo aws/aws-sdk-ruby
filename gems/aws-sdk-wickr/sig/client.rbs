@@ -409,6 +409,19 @@ module Aws
                          ) -> _GetOidcInfoResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetOidcInfoResponseSuccess
 
+      interface _GetOpentdfConfigResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetOpentdfConfigResponse]
+        def client_id: () -> ::String
+        def domain: () -> ::String
+        def client_secret: () -> ::String
+        def provider: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Wickr/Client.html#get_opentdf_config-instance_method
+      def get_opentdf_config: (
+                                network_id: ::String
+                              ) -> _GetOpentdfConfigResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetOpentdfConfigResponseSuccess
+
       interface _GetSecurityGroupResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetSecurityGroupResponse]
         def security_group: () -> Types::SecurityGroup
@@ -646,6 +659,24 @@ module Aws
                                      ) -> _RegisterOidcConfigTestResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RegisterOidcConfigTestResponseSuccess
 
+      interface _RegisterOpentdfConfigResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RegisterOpentdfConfigResponse]
+        def client_id: () -> ::String
+        def domain: () -> ::String
+        def client_secret: () -> ::String
+        def provider: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Wickr/Client.html#register_opentdf_config-instance_method
+      def register_opentdf_config: (
+                                     network_id: ::String,
+                                     client_id: ::String,
+                                     client_secret: ::String,
+                                     domain: ::String,
+                                     provider: ::String,
+                                     ?dry_run: bool
+                                   ) -> _RegisterOpentdfConfigResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RegisterOpentdfConfigResponseSuccess
+
       interface _UpdateBotResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateBotResponse]
         def message: () -> ::String
@@ -709,7 +740,8 @@ module Aws
                                        read_receipt_config: {
                                          status: ("DISABLED" | "ENABLED" | "FORCE_ENABLED")?
                                        }?,
-                                       data_retention: bool?
+                                       data_retention: bool?,
+                                       enable_trusted_data_format: bool?
                                      }
                                    ) -> _UpdateNetworkSettingsResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateNetworkSettingsResponseSuccess

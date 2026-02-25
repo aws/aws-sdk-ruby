@@ -144,6 +144,11 @@ module Aws::Wickr
       def reasons
         @data[:reasons]
       end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
     end
 
   end

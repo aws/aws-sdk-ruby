@@ -6097,7 +6097,7 @@ module Aws::QuickSight
     class InputColumn
       attr_accessor name: ::String
       attr_accessor id: ::String
-      attr_accessor type: ("STRING" | "INTEGER" | "DECIMAL" | "DATETIME" | "BIT" | "BOOLEAN" | "JSON")
+      attr_accessor type: ("STRING" | "INTEGER" | "DECIMAL" | "DATETIME" | "BIT" | "BOOLEAN" | "JSON" | "SEMISTRUCT")
       attr_accessor sub_type: ("FLOAT" | "FIXED")
       SENSITIVE: []
     end

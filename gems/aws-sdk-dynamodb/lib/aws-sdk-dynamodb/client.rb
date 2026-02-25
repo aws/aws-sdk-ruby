@@ -4504,7 +4504,8 @@ module Aws::DynamoDB
       req.send_request(options)
     end
 
-    # Lists completed exports within the past 90 days.
+    # Lists completed exports within the past 90 days, in reverse
+    # alphanumeric order of `ExportArn`.
     #
     # @option params [String] :table_arn
     #   The Amazon Resource Name (ARN) associated with the exported table.
@@ -4800,6 +4801,12 @@ module Aws::DynamoDB
     # key for the table. Since every record must contain that attribute, the
     # `attribute_not_exists` function will only succeed if no matching item
     # exists.
+    #
+    #  </note>
+    #
+    # <note markdown="1"> To determine whether `PutItem` overwrote an existing item, use
+    # `ReturnValues` set to `ALL_OLD`. If the response includes the
+    # `Attributes` element, an existing item was overwritten.
     #
     #  </note>
     #
@@ -7720,9 +7727,7 @@ module Aws::DynamoDB
     #       Both sets must have the same primitive data type. For example, if
     #       the existing data type is a set of strings, the `Value` must also
     #       be a set of strings.
-    #     The `ADD` action only supports Number and set data types. In
-    #     addition, `ADD` can only be used on top-level attributes, not nested
-    #     attributes.
+    #     The `ADD` action only supports Number and set data types.
     #
     #   * `DELETE` - Deletes an element from a set.
     #
@@ -7731,9 +7736,7 @@ module Aws::DynamoDB
     #     `[a,b,c]` and the `DELETE` action specifies `[a,c]`, then the final
     #     attribute value is `[b]`. Specifying an empty set is an error.
     #
-    #     The `DELETE` action only supports set data types. In addition,
-    #     `DELETE` can only be used on top-level attributes, not nested
-    #     attributes.
+    #     The `DELETE` action only supports set data types.
     #
     #   You can have many actions in a single expression, such as the
     #   following: `SET a=:value1, b=:value2 DELETE :value3, :value4, :value5`
@@ -8159,6 +8162,18 @@ module Aws::DynamoDB
     #   Represents the warm throughput (in read units per second and write
     #   units per second) for updating a table.
     #
+    # @option params [String] :global_table_settings_replication_mode
+    #   Controls the settings replication mode for a global table replica.
+    #   This attribute can be defined using UpdateTable operation only on a
+    #   regional table with values:
+    #
+    #   * `ENABLED`: Defines settings replication on a regional table to be
+    #     used as a source table for creating Multi-Account Global Table.
+    #
+    #   * `DISABLED`: Remove settings replication on a regional table.
+    #     Settings replication needs to be defined to ENABLED again in order
+    #     to create a Multi-Account Global Table using this table.
+    #
     # @return [Types::UpdateTableOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateTableOutput#table_description #table_description} => Types::TableDescription
@@ -8356,6 +8371,7 @@ module Aws::DynamoDB
     #       read_units_per_second: 1,
     #       write_units_per_second: 1,
     #     },
+    #     global_table_settings_replication_mode: "ENABLED", # accepts ENABLED, DISABLED, ENABLED_WITH_OVERRIDES
     #   })
     #
     # @example Response structure
@@ -8729,7 +8745,7 @@ module Aws::DynamoDB
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-dynamodb'
-      context[:gem_version] = '1.162.0'
+      context[:gem_version] = '1.163.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

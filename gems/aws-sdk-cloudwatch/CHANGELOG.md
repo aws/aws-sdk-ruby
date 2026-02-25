@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.131.0 (2026-02-24)
+------------------
+
+* Feature - This release adds the APIs (PutAlarmMuteRule, ListAlarmMuteRules, GetAlarmMuteRule and DeleteAlarmMuteRule) to manage a new Cloudwatch resource, AlarmMuteRules. AlarmMuteRules allow customers to temporarily mute alarm notifications during expected downtime periods.
+
 1.130.0 (2026-02-13)
 ------------------
 

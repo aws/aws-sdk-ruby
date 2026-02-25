@@ -1432,8 +1432,7 @@ module Aws::ConnectCases
       req.send_request(options)
     end
 
-    # Deletes a field from a cases template. You can delete up to 100 fields
-    # per domain.
+    # Deletes a field from a cases template.
     #
     # After a field is deleted:
     #
@@ -3455,7 +3454,7 @@ module Aws::ConnectCases
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-connectcases'
-      context[:gem_version] = '1.61.0'
+      context[:gem_version] = '1.62.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -194,6 +194,7 @@ module Aws::ObservabilityAdmin
     class DestinationLogsConfiguration
       attr_accessor logs_encryption_configuration: Types::LogsEncryptionConfiguration
       attr_accessor backup_configuration: Types::LogsBackupConfiguration
+      attr_accessor log_group_name_configuration: Types::LogGroupNameConfiguration
       SENSITIVE: []
     end
 
@@ -450,6 +451,11 @@ module Aws::ObservabilityAdmin
       SENSITIVE: []
     end
 
+    class LogGroupNameConfiguration
+      attr_accessor log_group_name_pattern: ::String
+      SENSITIVE: []
+    end
+
     class LoggingFilter
       attr_accessor filters: ::Array[Types::Filter]
       attr_accessor default_behavior: ("KEEP" | "DROP")
@@ -543,6 +549,7 @@ module Aws::ObservabilityAdmin
       attr_accessor resource_identifier: ::String
       attr_accessor resource_tags: ::Hash[::String, ::String]
       attr_accessor last_update_time_stamp: ::Integer
+      attr_accessor telemetry_source_type: ("VPC_FLOW_LOGS" | "ROUTE53_RESOLVER_QUERY_LOGS" | "EKS_AUDIT_LOGS" | "EKS_AUTHENTICATOR_LOGS" | "EKS_CONTROLLER_MANAGER_LOGS" | "EKS_SCHEDULER_LOGS" | "EKS_API_LOGS")
       SENSITIVE: []
     end
 

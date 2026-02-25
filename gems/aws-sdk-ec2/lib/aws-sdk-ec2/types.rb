@@ -50792,6 +50792,13 @@ module Aws::EC2
     #   declarative policy.
     #   @return [String]
     #
+    # @!attribute [rw] http_tokens_enforced
+    #   Indicates whether to enforce the requirement of IMDSv2 on an
+    #   instance at the time of launch. When enforcement is enabled, the
+    #   instance can't launch unless IMDSv2 (`HttpTokens`) is set to
+    #   `required`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceMetadataDefaultsResponse AWS API Documentation
     #
     class InstanceMetadataDefaultsResponse < Struct.new(
@@ -50800,7 +50807,8 @@ module Aws::EC2
       :http_endpoint,
       :instance_metadata_tags,
       :managed_by,
-      :managed_exception_message)
+      :managed_exception_message,
+      :http_tokens_enforced)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -61456,6 +61464,18 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
     #
+    # @!attribute [rw] http_tokens_enforced
+    #   Specifies whether to enforce the requirement of IMDSv2 on an
+    #   instance at the time of launch. When enforcement is enabled, the
+    #   instance can't launch unless IMDSv2 (`HttpTokens`) is set to
+    #   `required`. For more information, see [Enforce IMDSv2 at the account
+    #   level][1] in the *Amazon EC2 User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-IMDS-new-instances.html#enforce-imdsv2-at-the-account-level
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyInstanceMetadataDefaultsRequest AWS API Documentation
     #
     class ModifyInstanceMetadataDefaultsRequest < Struct.new(
@@ -61463,7 +61483,8 @@ module Aws::EC2
       :http_put_response_hop_limit,
       :http_endpoint,
       :instance_metadata_tags,
-      :dry_run)
+      :dry_run,
+      :http_tokens_enforced)
       SENSITIVE = []
       include Aws::Structure
     end

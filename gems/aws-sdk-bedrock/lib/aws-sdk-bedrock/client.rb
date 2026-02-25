@@ -3413,7 +3413,7 @@ module Aws::Bedrock
     #   resp.policy_arn #=> String
     #   resp.build_workflow_id #=> String
     #   resp.status #=> String, one of "SCHEDULED", "CANCEL_REQUESTED", "PREPROCESSING", "BUILDING", "TESTING", "COMPLETED", "FAILED", "CANCELLED"
-    #   resp.build_workflow_type #=> String, one of "INGEST_CONTENT", "REFINE_POLICY", "IMPORT_POLICY"
+    #   resp.build_workflow_type #=> String, one of "INGEST_CONTENT", "REFINE_POLICY", "IMPORT_POLICY", "GENERATE_FIDELITY_REPORT"
     #   resp.document_name #=> String
     #   resp.document_content_type #=> String, one of "pdf", "txt"
     #   resp.document_description #=> String
@@ -3443,7 +3443,15 @@ module Aws::Bedrock
     #
     # @option params [required, String] :asset_type
     #   The type of asset to retrieve (e.g., BUILD\_LOG, QUALITY\_REPORT,
-    #   POLICY\_DEFINITION).
+    #   POLICY\_DEFINITION, GENERATED\_TEST\_CASES, POLICY\_SCENARIOS,
+    #   FIDELITY\_REPORT, ASSET\_MANIFEST, SOURCE\_DOCUMENT).
+    #
+    # @option params [String] :asset_id
+    #   The unique identifier of the specific asset to retrieve when multiple
+    #   assets of the same type exist. This is required when retrieving
+    #   SOURCE\_DOCUMENT assets, as multiple source documents may have been
+    #   used in the workflow. The asset ID can be obtained from the asset
+    #   manifest.
     #
     # @return [Types::GetAutomatedReasoningPolicyBuildWorkflowResultAssetsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3456,7 +3464,8 @@ module Aws::Bedrock
     #   resp = client.get_automated_reasoning_policy_build_workflow_result_assets({
     #     policy_arn: "AutomatedReasoningPolicyArn", # required
     #     build_workflow_id: "AutomatedReasoningPolicyBuildWorkflowId", # required
-    #     asset_type: "BUILD_LOG", # required, accepts BUILD_LOG, QUALITY_REPORT, POLICY_DEFINITION, GENERATED_TEST_CASES, POLICY_SCENARIOS
+    #     asset_type: "BUILD_LOG", # required, accepts BUILD_LOG, QUALITY_REPORT, POLICY_DEFINITION, GENERATED_TEST_CASES, POLICY_SCENARIOS, FIDELITY_REPORT, ASSET_MANIFEST, SOURCE_DOCUMENT
+    #     asset_id: "AutomatedReasoningPolicyBuildResultAssetId",
     #   })
     #
     # @example Response structure
@@ -3583,6 +3592,49 @@ module Aws::Bedrock
     #   resp.build_workflow_assets.policy_scenarios.policy_scenarios[0].expected_result #=> String, one of "VALID", "INVALID", "SATISFIABLE", "IMPOSSIBLE", "TRANSLATION_AMBIGUOUS", "TOO_COMPLEX", "NO_TRANSLATION"
     #   resp.build_workflow_assets.policy_scenarios.policy_scenarios[0].rule_ids #=> Array
     #   resp.build_workflow_assets.policy_scenarios.policy_scenarios[0].rule_ids[0] #=> String
+    #   resp.build_workflow_assets.asset_manifest.entries #=> Array
+    #   resp.build_workflow_assets.asset_manifest.entries[0].asset_type #=> String, one of "BUILD_LOG", "QUALITY_REPORT", "POLICY_DEFINITION", "GENERATED_TEST_CASES", "POLICY_SCENARIOS", "FIDELITY_REPORT", "ASSET_MANIFEST", "SOURCE_DOCUMENT"
+    #   resp.build_workflow_assets.asset_manifest.entries[0].asset_name #=> String
+    #   resp.build_workflow_assets.asset_manifest.entries[0].asset_id #=> String
+    #   resp.build_workflow_assets.document.document #=> String
+    #   resp.build_workflow_assets.document.document_content_type #=> String, one of "pdf", "txt"
+    #   resp.build_workflow_assets.document.document_name #=> String
+    #   resp.build_workflow_assets.document.document_description #=> String
+    #   resp.build_workflow_assets.document.document_hash #=> String
+    #   resp.build_workflow_assets.fidelity_report.coverage_score #=> Float
+    #   resp.build_workflow_assets.fidelity_report.accuracy_score #=> Float
+    #   resp.build_workflow_assets.fidelity_report.rule_reports #=> Hash
+    #   resp.build_workflow_assets.fidelity_report.rule_reports["AutomatedReasoningPolicyDefinitionRuleId"].rule #=> String
+    #   resp.build_workflow_assets.fidelity_report.rule_reports["AutomatedReasoningPolicyDefinitionRuleId"].grounding_statements #=> Array
+    #   resp.build_workflow_assets.fidelity_report.rule_reports["AutomatedReasoningPolicyDefinitionRuleId"].grounding_statements[0].document_id #=> String
+    #   resp.build_workflow_assets.fidelity_report.rule_reports["AutomatedReasoningPolicyDefinitionRuleId"].grounding_statements[0].statement_id #=> String
+    #   resp.build_workflow_assets.fidelity_report.rule_reports["AutomatedReasoningPolicyDefinitionRuleId"].grounding_justifications #=> Array
+    #   resp.build_workflow_assets.fidelity_report.rule_reports["AutomatedReasoningPolicyDefinitionRuleId"].grounding_justifications[0] #=> String
+    #   resp.build_workflow_assets.fidelity_report.rule_reports["AutomatedReasoningPolicyDefinitionRuleId"].accuracy_score #=> Float
+    #   resp.build_workflow_assets.fidelity_report.rule_reports["AutomatedReasoningPolicyDefinitionRuleId"].accuracy_justification #=> String
+    #   resp.build_workflow_assets.fidelity_report.variable_reports #=> Hash
+    #   resp.build_workflow_assets.fidelity_report.variable_reports["AutomatedReasoningPolicyDefinitionVariableName"].policy_variable #=> String
+    #   resp.build_workflow_assets.fidelity_report.variable_reports["AutomatedReasoningPolicyDefinitionVariableName"].grounding_statements #=> Array
+    #   resp.build_workflow_assets.fidelity_report.variable_reports["AutomatedReasoningPolicyDefinitionVariableName"].grounding_statements[0].document_id #=> String
+    #   resp.build_workflow_assets.fidelity_report.variable_reports["AutomatedReasoningPolicyDefinitionVariableName"].grounding_statements[0].statement_id #=> String
+    #   resp.build_workflow_assets.fidelity_report.variable_reports["AutomatedReasoningPolicyDefinitionVariableName"].grounding_justifications #=> Array
+    #   resp.build_workflow_assets.fidelity_report.variable_reports["AutomatedReasoningPolicyDefinitionVariableName"].grounding_justifications[0] #=> String
+    #   resp.build_workflow_assets.fidelity_report.variable_reports["AutomatedReasoningPolicyDefinitionVariableName"].accuracy_score #=> Float
+    #   resp.build_workflow_assets.fidelity_report.variable_reports["AutomatedReasoningPolicyDefinitionVariableName"].accuracy_justification #=> String
+    #   resp.build_workflow_assets.fidelity_report.document_sources #=> Array
+    #   resp.build_workflow_assets.fidelity_report.document_sources[0].document_name #=> String
+    #   resp.build_workflow_assets.fidelity_report.document_sources[0].document_hash #=> String
+    #   resp.build_workflow_assets.fidelity_report.document_sources[0].document_id #=> String
+    #   resp.build_workflow_assets.fidelity_report.document_sources[0].atomic_statements #=> Array
+    #   resp.build_workflow_assets.fidelity_report.document_sources[0].atomic_statements[0].id #=> String
+    #   resp.build_workflow_assets.fidelity_report.document_sources[0].atomic_statements[0].text #=> String
+    #   resp.build_workflow_assets.fidelity_report.document_sources[0].atomic_statements[0].location.lines #=> Array
+    #   resp.build_workflow_assets.fidelity_report.document_sources[0].atomic_statements[0].location.lines[0] #=> Integer
+    #   resp.build_workflow_assets.fidelity_report.document_sources[0].document_content #=> Array
+    #   resp.build_workflow_assets.fidelity_report.document_sources[0].document_content[0].page_number #=> Integer
+    #   resp.build_workflow_assets.fidelity_report.document_sources[0].document_content[0].content #=> Array
+    #   resp.build_workflow_assets.fidelity_report.document_sources[0].document_content[0].content[0].line.line_number #=> Integer
+    #   resp.build_workflow_assets.fidelity_report.document_sources[0].document_content[0].content[0].line.line_text #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/GetAutomatedReasoningPolicyBuildWorkflowResultAssets AWS API Documentation
     #
@@ -5075,7 +5127,7 @@ module Aws::Bedrock
     #   resp.automated_reasoning_policy_build_workflow_summaries[0].policy_arn #=> String
     #   resp.automated_reasoning_policy_build_workflow_summaries[0].build_workflow_id #=> String
     #   resp.automated_reasoning_policy_build_workflow_summaries[0].status #=> String, one of "SCHEDULED", "CANCEL_REQUESTED", "PREPROCESSING", "BUILDING", "TESTING", "COMPLETED", "FAILED", "CANCELLED"
-    #   resp.automated_reasoning_policy_build_workflow_summaries[0].build_workflow_type #=> String, one of "INGEST_CONTENT", "REFINE_POLICY", "IMPORT_POLICY"
+    #   resp.automated_reasoning_policy_build_workflow_summaries[0].build_workflow_type #=> String, one of "INGEST_CONTENT", "REFINE_POLICY", "IMPORT_POLICY", "GENERATE_FIDELITY_REPORT"
     #   resp.automated_reasoning_policy_build_workflow_summaries[0].created_at #=> Time
     #   resp.automated_reasoning_policy_build_workflow_summaries[0].updated_at #=> Time
     #   resp.next_token #=> String
@@ -6818,7 +6870,7 @@ module Aws::Bedrock
     #
     #   resp = client.start_automated_reasoning_policy_build_workflow({
     #     policy_arn: "AutomatedReasoningPolicyArn", # required
-    #     build_workflow_type: "INGEST_CONTENT", # required, accepts INGEST_CONTENT, REFINE_POLICY, IMPORT_POLICY
+    #     build_workflow_type: "INGEST_CONTENT", # required, accepts INGEST_CONTENT, REFINE_POLICY, IMPORT_POLICY, GENERATE_FIDELITY_REPORT
     #     client_request_token: "IdempotencyToken",
     #     source_content: { # required
     #       policy_definition: {
@@ -6934,6 +6986,16 @@ module Aws::Bedrock
     #               ingest_content: {
     #                 content: "AutomatedReasoningPolicyAnnotationIngestContent", # required
     #               },
+    #             },
+    #           ],
+    #         },
+    #         generate_fidelity_report_content: {
+    #           documents: [
+    #             {
+    #               document: "data", # required
+    #               document_content_type: "pdf", # required, accepts pdf, txt
+    #               document_name: "AutomatedReasoningPolicyBuildDocumentName", # required
+    #               document_description: "AutomatedReasoningPolicyBuildDocumentDescription",
     #             },
     #           ],
     #         },
@@ -7818,7 +7880,7 @@ module Aws::Bedrock
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrock'
-      context[:gem_version] = '1.74.0'
+      context[:gem_version] = '1.75.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

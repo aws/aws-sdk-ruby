@@ -850,6 +850,7 @@ module Aws::PartnerCentralSelling
       attr_accessor life_cycle_review_status: ::Array[("Pending Submission" | "Submitted" | "In review" | "Approved" | "Rejected" | "Action Required")]
       attr_accessor customer_company_name: ::Array[::String]
       attr_accessor created_date: Types::CreatedDateFilter
+      attr_accessor target_close_date: Types::TargetCloseDateFilter
       SENSITIVE: []
     end
 
@@ -996,7 +997,7 @@ module Aws::PartnerCentralSelling
 
     class OpportunitySort
       attr_accessor sort_order: ("ASCENDING" | "DESCENDING")
-      attr_accessor sort_by: ("LastModifiedDate" | "Identifier" | "CustomerCompanyName" | "CreatedDate")
+      attr_accessor sort_by: ("LastModifiedDate" | "Identifier" | "CustomerCompanyName" | "CreatedDate" | "TargetCloseDate")
       SENSITIVE: []
     end
 
@@ -1305,6 +1306,12 @@ module Aws::PartnerCentralSelling
     end
 
     class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class TargetCloseDateFilter
+      attr_accessor after_target_close_date: ::String
+      attr_accessor before_target_close_date: ::String
+      SENSITIVE: []
     end
 
     class ThrottlingException

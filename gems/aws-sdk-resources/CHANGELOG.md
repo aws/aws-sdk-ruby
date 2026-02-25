@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.254.0 (2026-02-24)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-elementalinference` gem.
+
 3.253.0 (2026-02-20)
 ------------------
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.173.0 (2026-02-23)
+------------------
+
+* Feature - Adds support for SEMISTRUCT to InputColumn Type
+
 1.172.0 (2026-01-30)
 ------------------
 

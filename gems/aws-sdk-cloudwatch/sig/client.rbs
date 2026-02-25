@@ -79,6 +79,12 @@ module Aws
                   | (?Hash[Symbol, untyped]) -> instance
 
 
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatch/Client.html#delete_alarm_mute_rule-instance_method
+      def delete_alarm_mute_rule: (
+                                    alarm_mute_rule_name: ::String
+                                  ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatch/Client.html#delete_alarms-instance_method
       def delete_alarms: (
                            alarm_names: Array[::String]
@@ -306,6 +312,25 @@ module Aws
                                 ) -> _EnableInsightRulesResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _EnableInsightRulesResponseSuccess
 
+      interface _GetAlarmMuteRuleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAlarmMuteRuleOutput]
+        def name: () -> ::String
+        def alarm_mute_rule_arn: () -> ::String
+        def description: () -> ::String
+        def rule: () -> Types::Rule
+        def mute_targets: () -> Types::MuteTargets
+        def start_date: () -> ::Time
+        def expire_date: () -> ::Time
+        def status: () -> ("SCHEDULED" | "ACTIVE" | "EXPIRED")
+        def last_updated_timestamp: () -> ::Time
+        def mute_type: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatch/Client.html#get_alarm_mute_rule-instance_method
+      def get_alarm_mute_rule: (
+                                 alarm_mute_rule_name: ::String
+                               ) -> _GetAlarmMuteRuleResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAlarmMuteRuleResponseSuccess
+
       interface _GetDashboardResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetDashboardOutput]
         def dashboard_arn: () -> ::String
@@ -439,6 +464,20 @@ module Aws
                                    ) -> _GetMetricWidgetImageResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetMetricWidgetImageResponseSuccess
 
+      interface _ListAlarmMuteRulesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAlarmMuteRulesOutput]
+        def alarm_mute_rule_summaries: () -> ::Array[Types::AlarmMuteRuleSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatch/Client.html#list_alarm_mute_rules-instance_method
+      def list_alarm_mute_rules: (
+                                   ?alarm_name: ::String,
+                                   ?statuses: Array[("SCHEDULED" | "ACTIVE" | "EXPIRED")],
+                                   ?max_records: ::Integer,
+                                   ?next_token: ::String
+                                 ) -> _ListAlarmMuteRulesResponseSuccess
+                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAlarmMuteRulesResponseSuccess
+
       interface _ListDashboardsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListDashboardsOutput]
         def dashboard_entries: () -> ::Array[Types::DashboardEntry]
@@ -508,6 +547,31 @@ module Aws
                                     resource_arn: ::String
                                   ) -> _ListTagsForResourceResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatch/Client.html#put_alarm_mute_rule-instance_method
+      def put_alarm_mute_rule: (
+                                 name: ::String,
+                                 ?description: ::String,
+                                 rule: {
+                                   schedule: {
+                                     expression: ::String,
+                                     duration: ::String,
+                                     timezone: ::String?
+                                   }
+                                 },
+                                 ?mute_targets: {
+                                   alarm_names: Array[::String]
+                                 },
+                                 ?tags: Array[
+                                   {
+                                     key: ::String,
+                                     value: ::String
+                                   },
+                                 ],
+                                 ?start_date: ::Time,
+                                 ?expire_date: ::Time
+                               ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 
       interface _PutAnomalyDetectorResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::PutAnomalyDetectorOutput]
@@ -878,6 +942,10 @@ module Aws
                     ?next_token: ::String
                   ) -> Client::_DescribeAlarmsResponseSuccess
                     | (:alarm_exists waiter_name, ?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeAlarmsResponseSuccess
+                    | (:alarm_mute_rule_exists waiter_name, 
+                    alarm_mute_rule_name: ::String
+                  ) -> Client::_GetAlarmMuteRuleResponseSuccess
+                    | (:alarm_mute_rule_exists waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetAlarmMuteRuleResponseSuccess
                     | (:composite_alarm_exists waiter_name, 
                     ?alarm_names: Array[::String],
                     ?alarm_name_prefix: ::String,

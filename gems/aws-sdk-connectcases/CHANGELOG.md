@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.62.0 (2026-02-23)
+------------------
+
+* Feature - SearchCases API can now accept 25 fields in the request and response as opposed to the previous limit of 10. DeleteField's hard limit of 100 fields per domain has been lifted.
+
 1.61.0 (2026-02-04)
 ------------------
 

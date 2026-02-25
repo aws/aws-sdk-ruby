@@ -735,6 +735,11 @@ module Aws
                                  }?,
                                  mlflow_properties: {
                                    tracking_server_arn: ::String?
+                                 }?,
+                                 workflows_mwaa_properties: {
+                                   mwaa_environment_name: ::String?
+                                 }?,
+                                 workflows_serverless_properties: {
                                  }?
                                },
                                ?enable_trusted_identity_propagation: bool,

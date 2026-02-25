@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.1219.0 (2026-02-24)
+------------------
+
+* Feature - Added support for enumerating regions for  `Aws::ElementalInference`.
+
+1.1218.0 (2026-02-23)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
 1.1217.0 (2026-02-20)
 ------------------
 

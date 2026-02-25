@@ -993,7 +993,9 @@ module Aws::PartnerCentralSelling
     #   message from the sender, the invitation's receiver, and a payload.
     #   The `Payload` can be the `OpportunityInvitation`, which includes
     #   detailed structures for sender contacts, partner responsibilities,
-    #   customer information, and project details.
+    #   customer information, and project details, or `LeadInvitation`,
+    #   which includes structures for customer information and interaction
+    #   details.
     #   @return [Types::Invitation]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-selling-2022-07-26/CreateEngagementInvitationRequest AWS API Documentation
@@ -4296,6 +4298,12 @@ module Aws::PartnerCentralSelling
     #   Filter opportunities by creation date criteria.
     #   @return [Types::CreatedDateFilter]
     #
+    # @!attribute [rw] target_close_date
+    #   Filters opportunities based on their target close date. This filter
+    #   helps retrieve opportunities with an expected close date before or
+    #   after a specified date.
+    #   @return [Types::TargetCloseDateFilter]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-selling-2022-07-26/ListOpportunitiesRequest AWS API Documentation
     #
     class ListOpportunitiesRequest < Struct.new(
@@ -4308,7 +4316,8 @@ module Aws::PartnerCentralSelling
       :life_cycle_stage,
       :life_cycle_review_status,
       :customer_company_name,
-      :created_date)
+      :created_date,
+      :target_close_date)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6401,6 +6410,27 @@ module Aws::PartnerCentralSelling
     # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-selling-2022-07-26/TagResourceResponse AWS API Documentation
     #
     class TagResourceResponse < Aws::EmptyStructure; end
+
+    # Filters opportunities based on their target close date.
+    #
+    # @!attribute [rw] after_target_close_date
+    #   Filters opportunities with a target close date after this date. Use
+    #   the `YYYY-MM-DD` format.
+    #   @return [String]
+    #
+    # @!attribute [rw] before_target_close_date
+    #   Filters opportunities with a target close date before this date. Use
+    #   the `YYYY-MM-DD` format.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-selling-2022-07-26/TargetCloseDateFilter AWS API Documentation
+    #
+    class TargetCloseDateFilter < Struct.new(
+      :after_target_close_date,
+      :before_target_close_date)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # This error occurs when there are too many requests sent. Review the
     # provided quotas and adapt your usage to avoid throttling.

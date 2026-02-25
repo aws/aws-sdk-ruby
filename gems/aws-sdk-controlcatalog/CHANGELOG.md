@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.38.0 (2026-02-23)
+------------------
+
+* Feature - Updated ExemptedPrincipalArns parameter documentation for improved accuracy
+
 1.37.0 (2026-01-16)
 ------------------
 

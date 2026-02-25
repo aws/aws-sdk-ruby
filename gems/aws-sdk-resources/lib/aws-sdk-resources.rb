@@ -155,6 +155,7 @@ module Aws
   autoload :ElasticLoadBalancing, 'aws-sdk-elasticloadbalancing'
   autoload :ElasticLoadBalancingV2, 'aws-sdk-elasticloadbalancingv2'
   autoload :ElasticsearchService, 'aws-sdk-elasticsearchservice'
+  autoload :ElementalInference, 'aws-sdk-elementalinference'
   autoload :EntityResolution, 'aws-sdk-entityresolution'
   autoload :EventBridge, 'aws-sdk-eventbridge'
   autoload :Evs, 'aws-sdk-evs'

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.68.0 (2026-02-23)
+------------------
+
+* Feature - Add workflow properties support to connections APIs
+
 1.67.0 (2026-01-23)
 ------------------
 

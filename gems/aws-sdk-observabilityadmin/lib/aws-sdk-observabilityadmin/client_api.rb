@@ -114,6 +114,8 @@ module Aws::ObservabilityAdmin
     ListTelemetryRulesMaxResults = Shapes::IntegerShape.new(name: 'ListTelemetryRulesMaxResults')
     ListTelemetryRulesOutput = Shapes::StructureShape.new(name: 'ListTelemetryRulesOutput')
     LogDeliveryParameters = Shapes::StructureShape.new(name: 'LogDeliveryParameters')
+    LogGroupNameConfiguration = Shapes::StructureShape.new(name: 'LogGroupNameConfiguration')
+    LogGroupNamePattern = Shapes::StringShape.new(name: 'LogGroupNamePattern')
     LogType = Shapes::StringShape.new(name: 'LogType')
     LogTypes = Shapes::ListShape.new(name: 'LogTypes')
     LoggingFilter = Shapes::StructureShape.new(name: 'LoggingFilter')
@@ -345,6 +347,7 @@ module Aws::ObservabilityAdmin
 
     DestinationLogsConfiguration.add_member(:logs_encryption_configuration, Shapes::ShapeRef.new(shape: LogsEncryptionConfiguration, location_name: "LogsEncryptionConfiguration"))
     DestinationLogsConfiguration.add_member(:backup_configuration, Shapes::ShapeRef.new(shape: LogsBackupConfiguration, location_name: "BackupConfiguration"))
+    DestinationLogsConfiguration.add_member(:log_group_name_configuration, Shapes::ShapeRef.new(shape: LogGroupNameConfiguration, location_name: "LogGroupNameConfiguration"))
     DestinationLogsConfiguration.struct_class = Types::DestinationLogsConfiguration
 
     ELBLoadBalancerLoggingParameters.add_member(:output_format, Shapes::ShapeRef.new(shape: OutputFormat, location_name: "OutputFormat"))
@@ -533,6 +536,9 @@ module Aws::ObservabilityAdmin
     LogDeliveryParameters.add_member(:log_types, Shapes::ShapeRef.new(shape: LogTypes, location_name: "LogTypes"))
     LogDeliveryParameters.struct_class = Types::LogDeliveryParameters
 
+    LogGroupNameConfiguration.add_member(:log_group_name_pattern, Shapes::ShapeRef.new(shape: LogGroupNamePattern, required: true, location_name: "LogGroupNamePattern"))
+    LogGroupNameConfiguration.struct_class = Types::LogGroupNameConfiguration
+
     LogTypes.member = Shapes::ShapeRef.new(shape: LogType)
 
     LoggingFilter.add_member(:filters, Shapes::ShapeRef.new(shape: Filters, location_name: "Filters"))
@@ -627,6 +633,7 @@ module Aws::ObservabilityAdmin
     TelemetryConfiguration.add_member(:resource_identifier, Shapes::ShapeRef.new(shape: ResourceIdentifier, location_name: "ResourceIdentifier"))
     TelemetryConfiguration.add_member(:resource_tags, Shapes::ShapeRef.new(shape: TagMapOutput, location_name: "ResourceTags"))
     TelemetryConfiguration.add_member(:last_update_time_stamp, Shapes::ShapeRef.new(shape: Long, location_name: "LastUpdateTimeStamp"))
+    TelemetryConfiguration.add_member(:telemetry_source_type, Shapes::ShapeRef.new(shape: TelemetrySourceType, location_name: "TelemetrySourceType"))
     TelemetryConfiguration.struct_class = Types::TelemetryConfiguration
 
     TelemetryConfigurationState.key = Shapes::ShapeRef.new(shape: TelemetryType)

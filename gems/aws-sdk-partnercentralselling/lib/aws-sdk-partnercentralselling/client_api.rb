@@ -370,6 +370,7 @@ module Aws::PartnerCentralSelling
     TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
     TaggableResourceArn = Shapes::StringShape.new(name: 'TaggableResourceArn')
+    TargetCloseDateFilter = Shapes::StructureShape.new(name: 'TargetCloseDateFilter')
     TaskArn = Shapes::StringShape.new(name: 'TaskArn')
     TaskArnOrIdentifier = Shapes::StringShape.new(name: 'TaskArnOrIdentifier')
     TaskIdentifier = Shapes::StringShape.new(name: 'TaskIdentifier')
@@ -1109,6 +1110,7 @@ module Aws::PartnerCentralSelling
     ListOpportunitiesRequest.add_member(:life_cycle_review_status, Shapes::ShapeRef.new(shape: ListOpportunitiesRequestLifeCycleReviewStatusList, location_name: "LifeCycleReviewStatus"))
     ListOpportunitiesRequest.add_member(:customer_company_name, Shapes::ShapeRef.new(shape: ListOpportunitiesRequestCustomerCompanyNameList, location_name: "CustomerCompanyName"))
     ListOpportunitiesRequest.add_member(:created_date, Shapes::ShapeRef.new(shape: CreatedDateFilter, location_name: "CreatedDate"))
+    ListOpportunitiesRequest.add_member(:target_close_date, Shapes::ShapeRef.new(shape: TargetCloseDateFilter, location_name: "TargetCloseDate"))
     ListOpportunitiesRequest.struct_class = Types::ListOpportunitiesRequest
 
     ListOpportunitiesRequestCustomerCompanyNameList.member = Shapes::ShapeRef.new(shape: String)
@@ -1488,6 +1490,10 @@ module Aws::PartnerCentralSelling
     TagResourceRequest.struct_class = Types::TagResourceRequest
 
     TagResourceResponse.struct_class = Types::TagResourceResponse
+
+    TargetCloseDateFilter.add_member(:after_target_close_date, Shapes::ShapeRef.new(shape: Date, location_name: "AfterTargetCloseDate"))
+    TargetCloseDateFilter.add_member(:before_target_close_date, Shapes::ShapeRef.new(shape: Date, location_name: "BeforeTargetCloseDate"))
+    TargetCloseDateFilter.struct_class = Types::TargetCloseDateFilter
 
     TaskIdentifiers.member = Shapes::ShapeRef.new(shape: TaskArnOrIdentifier)
 

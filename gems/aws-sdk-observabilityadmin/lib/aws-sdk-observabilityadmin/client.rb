@@ -524,6 +524,9 @@ module Aws::ObservabilityAdmin
     #             region: "Region", # required
     #             kms_key_arn: "ResourceArn",
     #           },
+    #           log_group_name_configuration: {
+    #             log_group_name_pattern: "LogGroupNamePattern", # required
+    #           },
     #         },
     #       },
     #     },
@@ -1049,6 +1052,7 @@ module Aws::ObservabilityAdmin
     #   resp.centralization_rule.destination.destination_logs_configuration.logs_encryption_configuration.encryption_conflict_resolution_strategy #=> String, one of "ALLOW", "SKIP"
     #   resp.centralization_rule.destination.destination_logs_configuration.backup_configuration.region #=> String
     #   resp.centralization_rule.destination.destination_logs_configuration.backup_configuration.kms_key_arn #=> String
+    #   resp.centralization_rule.destination.destination_logs_configuration.log_group_name_configuration.log_group_name_pattern #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/GetCentralizationRuleForOrganization AWS API Documentation
     #
@@ -1501,6 +1505,7 @@ module Aws::ObservabilityAdmin
     #   resp.telemetry_configurations[0].resource_tags #=> Hash
     #   resp.telemetry_configurations[0].resource_tags["String"] #=> String
     #   resp.telemetry_configurations[0].last_update_time_stamp #=> Integer
+    #   resp.telemetry_configurations[0].telemetry_source_type #=> String, one of "VPC_FLOW_LOGS", "ROUTE53_RESOLVER_QUERY_LOGS", "EKS_AUDIT_LOGS", "EKS_AUTHENTICATOR_LOGS", "EKS_CONTROLLER_MANAGER_LOGS", "EKS_SCHEDULER_LOGS", "EKS_API_LOGS"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/ListResourceTelemetry AWS API Documentation
@@ -1584,6 +1589,7 @@ module Aws::ObservabilityAdmin
     #   resp.telemetry_configurations[0].resource_tags #=> Hash
     #   resp.telemetry_configurations[0].resource_tags["String"] #=> String
     #   resp.telemetry_configurations[0].last_update_time_stamp #=> Integer
+    #   resp.telemetry_configurations[0].telemetry_source_type #=> String, one of "VPC_FLOW_LOGS", "ROUTE53_RESOLVER_QUERY_LOGS", "EKS_AUDIT_LOGS", "EKS_AUTHENTICATOR_LOGS", "EKS_CONTROLLER_MANAGER_LOGS", "EKS_SCHEDULER_LOGS", "EKS_API_LOGS"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/ListResourceTelemetryForOrganization AWS API Documentation
@@ -2086,6 +2092,9 @@ module Aws::ObservabilityAdmin
     #             region: "Region", # required
     #             kms_key_arn: "ResourceArn",
     #           },
+    #           log_group_name_configuration: {
+    #             log_group_name_pattern: "LogGroupNamePattern", # required
+    #           },
     #         },
     #       },
     #     },
@@ -2156,8 +2165,7 @@ module Aws::ObservabilityAdmin
     # Okta Sources (SSO, Auth0)
     #
     # : **Updatable:** All Amazon Web Services Secrets Manager attributes,
-    #   `domain`, `range` (SSO only), OAuth2 credentials (`client_id`,
-    #   `client_secret`)
+    #   `domain`, `range`, OAuth2 credentials (`client_id`, `client_secret`)
     #
     # Palo Alto Networks
     #
@@ -2476,7 +2484,7 @@ module Aws::ObservabilityAdmin
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-observabilityadmin'
-      context[:gem_version] = '1.20.0'
+      context[:gem_version] = '1.21.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

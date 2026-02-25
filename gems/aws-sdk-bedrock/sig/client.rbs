@@ -1262,7 +1262,7 @@ module Aws
         def policy_arn: () -> ::String
         def build_workflow_id: () -> ::String
         def status: () -> ("SCHEDULED" | "CANCEL_REQUESTED" | "PREPROCESSING" | "BUILDING" | "TESTING" | "COMPLETED" | "FAILED" | "CANCELLED")
-        def build_workflow_type: () -> ("INGEST_CONTENT" | "REFINE_POLICY" | "IMPORT_POLICY")
+        def build_workflow_type: () -> ("INGEST_CONTENT" | "REFINE_POLICY" | "IMPORT_POLICY" | "GENERATE_FIDELITY_REPORT")
         def document_name: () -> ::String
         def document_content_type: () -> ("pdf" | "txt")
         def document_description: () -> ::String
@@ -1286,7 +1286,8 @@ module Aws
       def get_automated_reasoning_policy_build_workflow_result_assets: (
                                                                          policy_arn: ::String,
                                                                          build_workflow_id: ::String,
-                                                                         asset_type: ("BUILD_LOG" | "QUALITY_REPORT" | "POLICY_DEFINITION" | "GENERATED_TEST_CASES" | "POLICY_SCENARIOS")
+                                                                         asset_type: ("BUILD_LOG" | "QUALITY_REPORT" | "POLICY_DEFINITION" | "GENERATED_TEST_CASES" | "POLICY_SCENARIOS" | "FIDELITY_REPORT" | "ASSET_MANIFEST" | "SOURCE_DOCUMENT"),
+                                                                         ?asset_id: ::String
                                                                        ) -> _GetAutomatedReasoningPolicyBuildWorkflowResultAssetsResponseSuccess
                                                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAutomatedReasoningPolicyBuildWorkflowResultAssetsResponseSuccess
 
@@ -2043,7 +2044,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Bedrock/Client.html#start_automated_reasoning_policy_build_workflow-instance_method
       def start_automated_reasoning_policy_build_workflow: (
                                                              policy_arn: ::String,
-                                                             build_workflow_type: ("INGEST_CONTENT" | "REFINE_POLICY" | "IMPORT_POLICY"),
+                                                             build_workflow_type: ("INGEST_CONTENT" | "REFINE_POLICY" | "IMPORT_POLICY" | "GENERATE_FIDELITY_REPORT"),
                                                              ?client_request_token: ::String,
                                                              source_content: {
                                                                policy_definition: {
@@ -2161,6 +2162,16 @@ module Aws
                                                                        }?
                                                                      },
                                                                    ]
+                                                                 }?,
+                                                                 generate_fidelity_report_content: {
+                                                                   documents: Array[
+                                                                     {
+                                                                       document: ::String,
+                                                                       document_content_type: ("pdf" | "txt"),
+                                                                       document_name: ::String,
+                                                                       document_description: ::String?
+                                                                     },
+                                                                   ]?
                                                                  }?
                                                                }?
                                                              }

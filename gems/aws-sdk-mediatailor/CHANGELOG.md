@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.115.0 (2026-02-23)
+------------------
+
+* Feature - Updated endpoint rule set for dualstack endpoints. Added a new opt-in option to log raw ad decision server requests for Playback Configurations.
+
 1.114.0 (2026-01-16)
 ------------------
 

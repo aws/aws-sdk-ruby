@@ -394,6 +394,7 @@ module Aws
             'ElasticLoadBalancing' => 'elasticloadbalancing',
             'ElasticLoadBalancingV2' => 'elasticloadbalancing',
             'ElasticsearchService' => 'es',
+            'ElementalInference' => 'elemental-inference',
             'EntityResolution' => 'entityresolution',
             'EventBridge' => 'events',
             'Evs' => 'evs',

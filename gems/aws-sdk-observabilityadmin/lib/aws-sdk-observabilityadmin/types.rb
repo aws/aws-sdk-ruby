@@ -668,11 +668,19 @@ module Aws::ObservabilityAdmin
     #   the backup destination.
     #   @return [Types::LogsBackupConfiguration]
     #
+    # @!attribute [rw] log_group_name_configuration
+    #   Configuration that specifies a naming pattern for destination log
+    #   groups created during centralization. The pattern supports static
+    #   text and dynamic variables that are replaced with source attributes
+    #   when log groups are created.
+    #   @return [Types::LogGroupNameConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/DestinationLogsConfiguration AWS API Documentation
     #
     class DestinationLogsConfiguration < Struct.new(
       :logs_encryption_configuration,
-      :backup_configuration)
+      :backup_configuration,
+      :log_group_name_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1546,6 +1554,48 @@ module Aws::ObservabilityAdmin
       include Aws::Structure
     end
 
+    # Configuration that specifies a naming pattern for destination log
+    # groups created during centralization. The pattern supports static text
+    # and dynamic variables that are replaced with source attributes when
+    # log groups are created.
+    #
+    # @!attribute [rw] log_group_name_pattern
+    #   The pattern used to generate destination log group names during
+    #   centralization. The pattern can contain static text and dynamic
+    #   variables that are replaced with source attributes. If a variable
+    #   cannot be resolved, it inherits the value from its parent variable
+    #   in the hierarchy. The pattern must be between 1 and 512 characters.
+    #
+    #   Supported variables:
+    #
+    #   * **$\{source.logGroup}** — The original log group name from the
+    #     source account.
+    #
+    #   * **$\{source.accountId}** — The AWS account ID where the log
+    #     originated.
+    #
+    #   * **$\{source.region}** — The AWS Region where the log originated.
+    #
+    #   * **$\{source.org.id}** — The AWS Organization ID of the source
+    #     account.
+    #
+    #   * **$\{source.org.ouId}** — The organizational unit ID of the source
+    #     account.
+    #
+    #   * **$\{source.org.rootId}** — The organization Root ID.
+    #
+    #   * **$\{source.org.path}** — The organizational path from account to
+    #     root.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/LogGroupNameConfiguration AWS API Documentation
+    #
+    class LogGroupNameConfiguration < Struct.new(
+      :log_group_name_pattern)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Configuration that determines which WAF log records to keep or drop
     # based on specified conditions.
     #
@@ -1889,6 +1939,11 @@ module Aws::ObservabilityAdmin
     #   the resource. For example, `1728679196318`.
     #   @return [Integer]
     #
+    # @!attribute [rw] telemetry_source_type
+    #   Specifies the type of telemetry source for a resource, such as EKS
+    #   cluster logs.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/TelemetryConfiguration AWS API Documentation
     #
     class TelemetryConfiguration < Struct.new(
@@ -1897,7 +1952,8 @@ module Aws::ObservabilityAdmin
       :resource_type,
       :resource_identifier,
       :resource_tags,
-      :last_update_time_stamp)
+      :last_update_time_stamp,
+      :telemetry_source_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2011,8 +2067,39 @@ module Aws::ObservabilityAdmin
       include Aws::Structure
     end
 
-    # Defines the configuration for a telemetry pipeline, including how data
-    # flows from sources through processors to destinations.
+    # Defines the configuration for a pipeline, including how data flows
+    # from sources through processors to destinations. The configuration is
+    # specified in YAML format and must include a valid pipeline definition
+    # with required source and sink components. This pipeline enables
+    # end-to-end telemetry data collection, transformation, and delivery
+    # while supporting optional processing steps and extensions for enhanced
+    # functionality.
+    #
+    # The primary pipeline configuration section are:
+    #
+    # * **Source:** Defines where log data originates from (S3 buckets,
+    #   CloudWatch Logs, third-party APIs). Each pipeline must have exactly
+    #   one source.
+    #
+    # * **Processors (optional):** Transform, parse, and enrich log data as
+    #   it flows through the pipeline. Processors are applied sequentially
+    #   in the order they are defined.
+    #
+    # * **Sink:** Defines the destination where processed log data is sent.
+    #   Each pipeline must have exactly one sink.
+    #
+    # * **Extensions (optional):** Provide additional functionality such as
+    #   Amazon Web Services Secrets Manager integration for credential
+    #   management.
+    #
+    # For more details on each configuration section see [CloudWatch
+    # pipelines User Guide][1]. Additional comprehensive configuration
+    # examples can be found in the [CreateTelemetryPipeline API docs][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch-pipelines.html
+    # [2]: https://docs.aws.amazon.com/cloudwatch/latest/observabilityadmin/API_CreateTelemetryPipeline.html#API_CreateTelemetryPipeline_Examples
     #
     # @!attribute [rw] body
     #   The pipeline configuration body that defines the data processing

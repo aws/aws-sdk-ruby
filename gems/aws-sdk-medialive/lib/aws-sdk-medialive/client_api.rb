@@ -284,6 +284,7 @@ module Aws::MediaLive
     DescribeClusterResult = Shapes::StructureShape.new(name: 'DescribeClusterResult')
     DescribeClusterSummary = Shapes::StructureShape.new(name: 'DescribeClusterSummary')
     DescribeFollowerChannelSettings = Shapes::StructureShape.new(name: 'DescribeFollowerChannelSettings')
+    DescribeInferenceSettings = Shapes::StructureShape.new(name: 'DescribeInferenceSettings')
     DescribeInputDeviceRequest = Shapes::StructureShape.new(name: 'DescribeInputDeviceRequest')
     DescribeInputDeviceResponse = Shapes::StructureShape.new(name: 'DescribeInputDeviceResponse')
     DescribeInputDeviceThumbnailRequest = Shapes::StructureShape.new(name: 'DescribeInputDeviceThumbnailRequest')
@@ -515,6 +516,7 @@ module Aws::MediaLive
     Id3SegmentTaggingScheduleActionSettings = Shapes::StructureShape.new(name: 'Id3SegmentTaggingScheduleActionSettings')
     ImmediateModeScheduleActionStartSettings = Shapes::StructureShape.new(name: 'ImmediateModeScheduleActionStartSettings')
     IncludeFillerNalUnits = Shapes::StringShape.new(name: 'IncludeFillerNalUnits')
+    InferenceSettings = Shapes::StructureShape.new(name: 'InferenceSettings')
     Input = Shapes::StructureShape.new(name: 'Input')
     InputAttachment = Shapes::StructureShape.new(name: 'InputAttachment')
     InputChannelLevel = Shapes::StructureShape.new(name: 'InputChannelLevel')
@@ -1697,6 +1699,7 @@ module Aws::MediaLive
     Channel.add_member(:channel_engine_version, Shapes::ShapeRef.new(shape: ChannelEngineVersionResponse, location_name: "channelEngineVersion"))
     Channel.add_member(:linked_channel_settings, Shapes::ShapeRef.new(shape: DescribeLinkedChannelSettings, location_name: "linkedChannelSettings"))
     Channel.add_member(:channel_security_groups, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "channelSecurityGroups"))
+    Channel.add_member(:inference_settings, Shapes::ShapeRef.new(shape: DescribeInferenceSettings, location_name: "inferenceSettings"))
     Channel.struct_class = Types::Channel
 
     ChannelAlert.add_member(:alert_type, Shapes::ShapeRef.new(shape: __string, location_name: "alertType"))
@@ -1743,6 +1746,7 @@ module Aws::MediaLive
     ChannelSummary.add_member(:used_channel_engine_versions, Shapes::ShapeRef.new(shape: __listOfChannelEngineVersionResponse, location_name: "usedChannelEngineVersions"))
     ChannelSummary.add_member(:linked_channel_settings, Shapes::ShapeRef.new(shape: DescribeLinkedChannelSettings, location_name: "linkedChannelSettings"))
     ChannelSummary.add_member(:channel_security_groups, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "channelSecurityGroups"))
+    ChannelSummary.add_member(:inference_settings, Shapes::ShapeRef.new(shape: DescribeInferenceSettings, location_name: "inferenceSettings"))
     ChannelSummary.struct_class = Types::ChannelSummary
 
     ClaimDeviceRequest.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "id"))
@@ -1862,6 +1866,7 @@ module Aws::MediaLive
     CreateChannel.add_member(:dry_run, Shapes::ShapeRef.new(shape: __boolean, location_name: "dryRun"))
     CreateChannel.add_member(:linked_channel_settings, Shapes::ShapeRef.new(shape: LinkedChannelSettings, location_name: "linkedChannelSettings"))
     CreateChannel.add_member(:channel_security_groups, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "channelSecurityGroups"))
+    CreateChannel.add_member(:inference_settings, Shapes::ShapeRef.new(shape: InferenceSettings, location_name: "inferenceSettings"))
     CreateChannel.struct_class = Types::CreateChannel
 
     CreateChannelPlacementGroupRequest.add_member(:cluster_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "clusterId"))
@@ -1899,6 +1904,7 @@ module Aws::MediaLive
     CreateChannelRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: __boolean, location_name: "dryRun"))
     CreateChannelRequest.add_member(:linked_channel_settings, Shapes::ShapeRef.new(shape: LinkedChannelSettings, location_name: "linkedChannelSettings"))
     CreateChannelRequest.add_member(:channel_security_groups, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "channelSecurityGroups"))
+    CreateChannelRequest.add_member(:inference_settings, Shapes::ShapeRef.new(shape: InferenceSettings, location_name: "inferenceSettings"))
     CreateChannelRequest.struct_class = Types::CreateChannelRequest
 
     CreateChannelResponse.add_member(:channel, Shapes::ShapeRef.new(shape: Channel, location_name: "channel"))
@@ -2364,6 +2370,7 @@ module Aws::MediaLive
     DeleteChannelResponse.add_member(:channel_engine_version, Shapes::ShapeRef.new(shape: ChannelEngineVersionResponse, location_name: "channelEngineVersion"))
     DeleteChannelResponse.add_member(:linked_channel_settings, Shapes::ShapeRef.new(shape: DescribeLinkedChannelSettings, location_name: "linkedChannelSettings"))
     DeleteChannelResponse.add_member(:channel_security_groups, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "channelSecurityGroups"))
+    DeleteChannelResponse.add_member(:inference_settings, Shapes::ShapeRef.new(shape: DescribeInferenceSettings, location_name: "inferenceSettings"))
     DeleteChannelResponse.struct_class = Types::DeleteChannelResponse
 
     DeleteCloudWatchAlarmTemplateGroupRequest.add_member(:identifier, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "identifier"))
@@ -2566,6 +2573,7 @@ module Aws::MediaLive
     DescribeChannelResponse.add_member(:channel_engine_version, Shapes::ShapeRef.new(shape: ChannelEngineVersionResponse, location_name: "channelEngineVersion"))
     DescribeChannelResponse.add_member(:linked_channel_settings, Shapes::ShapeRef.new(shape: DescribeLinkedChannelSettings, location_name: "linkedChannelSettings"))
     DescribeChannelResponse.add_member(:channel_security_groups, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "channelSecurityGroups"))
+    DescribeChannelResponse.add_member(:inference_settings, Shapes::ShapeRef.new(shape: DescribeInferenceSettings, location_name: "inferenceSettings"))
     DescribeChannelResponse.struct_class = Types::DescribeChannelResponse
 
     DescribeClusterRequest.add_member(:cluster_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "clusterId"))
@@ -2604,6 +2612,9 @@ module Aws::MediaLive
     DescribeFollowerChannelSettings.add_member(:linked_channel_type, Shapes::ShapeRef.new(shape: LinkedChannelType, location_name: "linkedChannelType"))
     DescribeFollowerChannelSettings.add_member(:primary_channel_arn, Shapes::ShapeRef.new(shape: __string, location_name: "primaryChannelArn"))
     DescribeFollowerChannelSettings.struct_class = Types::DescribeFollowerChannelSettings
+
+    DescribeInferenceSettings.add_member(:feed_arn, Shapes::ShapeRef.new(shape: __string, location_name: "feedArn"))
+    DescribeInferenceSettings.struct_class = Types::DescribeInferenceSettings
 
     DescribeInputDeviceRequest.add_member(:input_device_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "inputDeviceId"))
     DescribeInputDeviceRequest.struct_class = Types::DescribeInputDeviceRequest
@@ -3460,6 +3471,9 @@ module Aws::MediaLive
     Id3SegmentTaggingScheduleActionSettings.struct_class = Types::Id3SegmentTaggingScheduleActionSettings
 
     ImmediateModeScheduleActionStartSettings.struct_class = Types::ImmediateModeScheduleActionStartSettings
+
+    InferenceSettings.add_member(:feed_arn, Shapes::ShapeRef.new(shape: __string, location_name: "feedArn"))
+    InferenceSettings.struct_class = Types::InferenceSettings
 
     Input.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
     Input.add_member(:attached_channels, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "attachedChannels"))
@@ -4696,6 +4710,7 @@ module Aws::MediaLive
     RestartChannelPipelinesResponse.add_member(:channel_engine_version, Shapes::ShapeRef.new(shape: ChannelEngineVersionResponse, location_name: "channelEngineVersion"))
     RestartChannelPipelinesResponse.add_member(:linked_channel_settings, Shapes::ShapeRef.new(shape: DescribeLinkedChannelSettings, location_name: "linkedChannelSettings"))
     RestartChannelPipelinesResponse.add_member(:channel_security_groups, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "channelSecurityGroups"))
+    RestartChannelPipelinesResponse.add_member(:inference_settings, Shapes::ShapeRef.new(shape: DescribeInferenceSettings, location_name: "inferenceSettings"))
     RestartChannelPipelinesResponse.struct_class = Types::RestartChannelPipelinesResponse
 
     Route.add_member(:cidr, Shapes::ShapeRef.new(shape: __string, location_name: "cidr"))
@@ -4994,6 +5009,7 @@ module Aws::MediaLive
     StartChannelResponse.add_member(:channel_engine_version, Shapes::ShapeRef.new(shape: ChannelEngineVersionResponse, location_name: "channelEngineVersion"))
     StartChannelResponse.add_member(:linked_channel_settings, Shapes::ShapeRef.new(shape: DescribeLinkedChannelSettings, location_name: "linkedChannelSettings"))
     StartChannelResponse.add_member(:channel_security_groups, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "channelSecurityGroups"))
+    StartChannelResponse.add_member(:inference_settings, Shapes::ShapeRef.new(shape: DescribeInferenceSettings, location_name: "inferenceSettings"))
     StartChannelResponse.struct_class = Types::StartChannelResponse
 
     StartDeleteMonitorDeploymentRequest.add_member(:identifier, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "identifier"))
@@ -5234,6 +5250,7 @@ module Aws::MediaLive
     StopChannelResponse.add_member(:channel_engine_version, Shapes::ShapeRef.new(shape: ChannelEngineVersionResponse, location_name: "channelEngineVersion"))
     StopChannelResponse.add_member(:linked_channel_settings, Shapes::ShapeRef.new(shape: DescribeLinkedChannelSettings, location_name: "linkedChannelSettings"))
     StopChannelResponse.add_member(:channel_security_groups, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "channelSecurityGroups"))
+    StopChannelResponse.add_member(:inference_settings, Shapes::ShapeRef.new(shape: DescribeInferenceSettings, location_name: "inferenceSettings"))
     StopChannelResponse.struct_class = Types::StopChannelResponse
 
     StopInputDeviceRequest.add_member(:input_device_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "inputDeviceId"))
@@ -5385,6 +5402,7 @@ module Aws::MediaLive
     UpdateChannel.add_member(:anywhere_settings, Shapes::ShapeRef.new(shape: AnywhereSettings, location_name: "anywhereSettings"))
     UpdateChannel.add_member(:linked_channel_settings, Shapes::ShapeRef.new(shape: LinkedChannelSettings, location_name: "linkedChannelSettings"))
     UpdateChannel.add_member(:channel_security_groups, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "channelSecurityGroups"))
+    UpdateChannel.add_member(:inference_settings, Shapes::ShapeRef.new(shape: InferenceSettings, location_name: "inferenceSettings"))
     UpdateChannel.struct_class = Types::UpdateChannel
 
     UpdateChannelClass.add_member(:channel_class, Shapes::ShapeRef.new(shape: ChannelClass, required: true, location_name: "channelClass"))
@@ -5429,6 +5447,7 @@ module Aws::MediaLive
     UpdateChannelRequest.add_member(:anywhere_settings, Shapes::ShapeRef.new(shape: AnywhereSettings, location_name: "anywhereSettings"))
     UpdateChannelRequest.add_member(:linked_channel_settings, Shapes::ShapeRef.new(shape: LinkedChannelSettings, location_name: "linkedChannelSettings"))
     UpdateChannelRequest.add_member(:channel_security_groups, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "channelSecurityGroups"))
+    UpdateChannelRequest.add_member(:inference_settings, Shapes::ShapeRef.new(shape: InferenceSettings, location_name: "inferenceSettings"))
     UpdateChannelRequest.struct_class = Types::UpdateChannelRequest
 
     UpdateChannelResponse.add_member(:channel, Shapes::ShapeRef.new(shape: Channel, location_name: "channel"))

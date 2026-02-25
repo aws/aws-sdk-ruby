@@ -2456,6 +2456,70 @@ module Aws::Wickr
       req.send_request(options)
     end
 
+    # Retrieves the OpenTDF integration configuration for a Wickr network.
+    #
+    # @option params [required, String] :network_id
+    #   The ID of the Wickr network for which OpenTDF integration will be
+    #   retrieved.
+    #
+    # @return [Types::GetOpentdfConfigResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetOpentdfConfigResponse#client_id #client_id} => String
+    #   * {Types::GetOpentdfConfigResponse#domain #domain} => String
+    #   * {Types::GetOpentdfConfigResponse#client_secret #client_secret} => String
+    #   * {Types::GetOpentdfConfigResponse#provider #provider} => String
+    #
+    #
+    # @example Example: Get OpenTDF info successfully
+    #
+    #   resp = client.get_opentdf_config({
+    #     network_id: "12345678", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     client_id: "client123", 
+    #     client_secret: "secret456", 
+    #     domain: "https://api.sample.com", 
+    #     provider: "virtru", 
+    #   }
+    #
+    # @example Example: Get OpenTDF info - not configured
+    #
+    #   resp = client.get_opentdf_config({
+    #     network_id: "12345678", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     client_id: "", 
+    #     client_secret: "", 
+    #     domain: "", 
+    #     provider: "", 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_opentdf_config({
+    #     network_id: "NetworkId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.client_id #=> String
+    #   resp.domain #=> String
+    #   resp.client_secret #=> String
+    #   resp.provider #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wickr-2024-02-01/GetOpentdfConfig AWS API Documentation
+    #
+    # @overload get_opentdf_config(params = {})
+    # @param [Hash] params ({})
+    def get_opentdf_config(params = {}, options = {})
+      req = build_request(:get_opentdf_config, params)
+      req.send_request(options)
+    end
+
     # Retrieves detailed information about a specific security group in a
     # Wickr network, including its settings, member counts, and
     # configuration.
@@ -4156,6 +4220,137 @@ module Aws::Wickr
       req.send_request(options)
     end
 
+    # Registers and saves OpenTDF configuration for a Wickr network,
+    # enabling attribute-based access control for Wickr through an OpenTDF
+    # provider.
+    #
+    # @option params [required, String] :network_id
+    #   The ID of the Wickr network for which OpenTDF integration will be
+    #   configured.
+    #
+    # @option params [required, String] :client_id
+    #   The OIDC client ID used for authenticating with the OpenTDF provider.
+    #
+    # @option params [required, String] :client_secret
+    #   The OIDC client secret used for authenticating with the OpenTDF
+    #   provider
+    #
+    # @option params [required, String] :domain
+    #   The domain of the OpenTDF server.
+    #
+    # @option params [required, String] :provider
+    #   The provider of the OpenTDF platform.
+    #
+    #   <note markdown="1"> Currently only Virtru is supported as the OpenTDF provider.
+    #
+    #    </note>
+    #
+    # @option params [Boolean] :dry_run
+    #   Perform dry-run test connection of OpenTDF configuration (optional).
+    #
+    # @return [Types::RegisterOpentdfConfigResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::RegisterOpentdfConfigResponse#client_id #client_id} => String
+    #   * {Types::RegisterOpentdfConfigResponse#domain #domain} => String
+    #   * {Types::RegisterOpentdfConfigResponse#client_secret #client_secret} => String
+    #   * {Types::RegisterOpentdfConfigResponse#provider #provider} => String
+    #
+    #
+    # @example Example: Save OpenTDF config successfully
+    #
+    #   resp = client.register_opentdf_config({
+    #     client_id: "client123", 
+    #     client_secret: "secret456", 
+    #     domain: "https://api.sample.com", 
+    #     network_id: "12345678", 
+    #     provider: "virtru", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     client_id: "client123", 
+    #     client_secret: "secret456", 
+    #     domain: "https://api.sample.com", 
+    #     provider: "virtru", 
+    #   }
+    #
+    # @example Example: Dry run saving OpenTDF config
+    #
+    #   resp = client.register_opentdf_config({
+    #     client_id: "client123", 
+    #     client_secret: "secret456", 
+    #     domain: "https://api.sample.com", 
+    #     dry_run: true, 
+    #     network_id: "12345678", 
+    #     provider: "virtru", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     client_id: "client123", 
+    #     client_secret: "secret456", 
+    #     domain: "https://api.sample.com", 
+    #     provider: "virtru", 
+    #   }
+    #
+    # @example Example: Dry run saving OpenTDF config - failed test
+    #
+    #   resp = client.register_opentdf_config({
+    #     client_id: "client123", 
+    #     client_secret: "secret456", 
+    #     domain: "https://api.sample.com", 
+    #     dry_run: true, 
+    #     network_id: "12345678", 
+    #     provider: "virtru", 
+    #   })
+    #
+    # @example Example: Save OpenTDF config - invalid provider
+    #
+    #   resp = client.register_opentdf_config({
+    #     client_id: "client123", 
+    #     client_secret: "secret456", 
+    #     domain: "https://api.sample.com", 
+    #     network_id: "12345678", 
+    #     provider: "invalid provider", 
+    #   })
+    #
+    # @example Example: Save OpenTDF config - network not found
+    #
+    #   resp = client.register_opentdf_config({
+    #     client_id: "client123", 
+    #     client_secret: "secret456", 
+    #     domain: "https://api.sample.com", 
+    #     network_id: "99999999", 
+    #     provider: "virtru", 
+    #   })
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.register_opentdf_config({
+    #     network_id: "NetworkId", # required
+    #     client_id: "GenericString", # required
+    #     client_secret: "SensitiveString", # required
+    #     domain: "GenericString", # required
+    #     provider: "GenericString", # required
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.client_id #=> String
+    #   resp.domain #=> String
+    #   resp.client_secret #=> String
+    #   resp.provider #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wickr-2024-02-01/RegisterOpentdfConfig AWS API Documentation
+    #
+    # @overload register_opentdf_config(params = {})
+    # @param [Hash] params ({})
+    def register_opentdf_config(params = {}, options = {})
+      req = build_request(:register_opentdf_config, params)
+      req.send_request(options)
+    end
+
     # Updates the properties of an existing bot in a Wickr network. This
     # operation allows you to modify the bot's display name, security
     # group, password, or suspension status.
@@ -4568,6 +4763,7 @@ module Aws::Wickr
     #         status: "DISABLED", # accepts DISABLED, ENABLED, FORCE_ENABLED
     #       },
     #       data_retention: false,
+    #       enable_trusted_data_format: false,
     #     },
     #   })
     #
@@ -4961,7 +5157,7 @@ module Aws::Wickr
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-wickr'
-      context[:gem_version] = '1.3.0'
+      context[:gem_version] = '1.4.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

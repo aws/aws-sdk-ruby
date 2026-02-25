@@ -2015,6 +2015,7 @@ module Aws::DynamoDB
     UpdateTableInput.add_member(:global_table_witness_updates, Shapes::ShapeRef.new(shape: GlobalTableWitnessGroupUpdateList, location_name: "GlobalTableWitnessUpdates"))
     UpdateTableInput.add_member(:on_demand_throughput, Shapes::ShapeRef.new(shape: OnDemandThroughput, location_name: "OnDemandThroughput"))
     UpdateTableInput.add_member(:warm_throughput, Shapes::ShapeRef.new(shape: WarmThroughput, location_name: "WarmThroughput"))
+    UpdateTableInput.add_member(:global_table_settings_replication_mode, Shapes::ShapeRef.new(shape: GlobalTableSettingsReplicationMode, location_name: "GlobalTableSettingsReplicationMode"))
     UpdateTableInput.struct_class = Types::UpdateTableInput
 
     UpdateTableOutput.add_member(:table_description, Shapes::ShapeRef.new(shape: TableDescription, location_name: "TableDescription"))

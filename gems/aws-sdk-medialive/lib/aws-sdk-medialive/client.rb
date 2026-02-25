@@ -1075,6 +1075,9 @@ module Aws::MediaLive
     #
     # @option params [Array<String>] :channel_security_groups
     #
+    # @option params [Types::InferenceSettings] :inference_settings
+    #   Configures Elemental Inference features in a channel.
+    #
     # @return [Types::CreateChannelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateChannelResponse#channel #channel} => Types::Channel
@@ -1828,7 +1831,7 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.video_descriptions[0].height #=> Integer
     #   resp.channel.encoder_settings.video_descriptions[0].name #=> String
     #   resp.channel.encoder_settings.video_descriptions[0].respond_to_afd #=> String, one of "NONE", "PASSTHROUGH", "RESPOND"
-    #   resp.channel.encoder_settings.video_descriptions[0].scaling_behavior #=> String, one of "DEFAULT", "STRETCH_TO_OUTPUT"
+    #   resp.channel.encoder_settings.video_descriptions[0].scaling_behavior #=> String, one of "DEFAULT", "STRETCH_TO_OUTPUT", "SMART_CROP"
     #   resp.channel.encoder_settings.video_descriptions[0].sharpness #=> Integer
     #   resp.channel.encoder_settings.video_descriptions[0].width #=> Integer
     #   resp.channel.encoder_settings.thumbnail_configuration.state #=> String, one of "AUTO", "DISABLED"
@@ -1941,6 +1944,7 @@ module Aws::MediaLive
     #   resp.channel.linked_channel_settings.primary_channel_settings.linked_channel_type #=> String, one of "FOLLOWING_CHANNEL", "PRIMARY_CHANNEL"
     #   resp.channel.channel_security_groups #=> Array
     #   resp.channel.channel_security_groups[0] #=> String
+    #   resp.channel.inference_settings.feed_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CreateChannel AWS API Documentation
     #
@@ -2553,6 +2557,7 @@ module Aws::MediaLive
     #   * {Types::DeleteChannelResponse#channel_engine_version #channel_engine_version} => Types::ChannelEngineVersionResponse
     #   * {Types::DeleteChannelResponse#linked_channel_settings #linked_channel_settings} => Types::DescribeLinkedChannelSettings
     #   * {Types::DeleteChannelResponse#channel_security_groups #channel_security_groups} => Array&lt;String&gt;
+    #   * {Types::DeleteChannelResponse#inference_settings #inference_settings} => Types::DescribeInferenceSettings
     #
     # @example Request syntax with placeholder values
     #
@@ -3309,7 +3314,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.video_descriptions[0].height #=> Integer
     #   resp.encoder_settings.video_descriptions[0].name #=> String
     #   resp.encoder_settings.video_descriptions[0].respond_to_afd #=> String, one of "NONE", "PASSTHROUGH", "RESPOND"
-    #   resp.encoder_settings.video_descriptions[0].scaling_behavior #=> String, one of "DEFAULT", "STRETCH_TO_OUTPUT"
+    #   resp.encoder_settings.video_descriptions[0].scaling_behavior #=> String, one of "DEFAULT", "STRETCH_TO_OUTPUT", "SMART_CROP"
     #   resp.encoder_settings.video_descriptions[0].sharpness #=> Integer
     #   resp.encoder_settings.video_descriptions[0].width #=> Integer
     #   resp.encoder_settings.thumbnail_configuration.state #=> String, one of "AUTO", "DISABLED"
@@ -3422,6 +3427,7 @@ module Aws::MediaLive
     #   resp.linked_channel_settings.primary_channel_settings.linked_channel_type #=> String, one of "FOLLOWING_CHANNEL", "PRIMARY_CHANNEL"
     #   resp.channel_security_groups #=> Array
     #   resp.channel_security_groups[0] #=> String
+    #   resp.inference_settings.feed_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DeleteChannel AWS API Documentation
     #
@@ -3757,6 +3763,7 @@ module Aws::MediaLive
     #   * {Types::DescribeChannelResponse#channel_engine_version #channel_engine_version} => Types::ChannelEngineVersionResponse
     #   * {Types::DescribeChannelResponse#linked_channel_settings #linked_channel_settings} => Types::DescribeLinkedChannelSettings
     #   * {Types::DescribeChannelResponse#channel_security_groups #channel_security_groups} => Array&lt;String&gt;
+    #   * {Types::DescribeChannelResponse#inference_settings #inference_settings} => Types::DescribeInferenceSettings
     #
     # @example Request syntax with placeholder values
     #
@@ -4513,7 +4520,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.video_descriptions[0].height #=> Integer
     #   resp.encoder_settings.video_descriptions[0].name #=> String
     #   resp.encoder_settings.video_descriptions[0].respond_to_afd #=> String, one of "NONE", "PASSTHROUGH", "RESPOND"
-    #   resp.encoder_settings.video_descriptions[0].scaling_behavior #=> String, one of "DEFAULT", "STRETCH_TO_OUTPUT"
+    #   resp.encoder_settings.video_descriptions[0].scaling_behavior #=> String, one of "DEFAULT", "STRETCH_TO_OUTPUT", "SMART_CROP"
     #   resp.encoder_settings.video_descriptions[0].sharpness #=> Integer
     #   resp.encoder_settings.video_descriptions[0].width #=> Integer
     #   resp.encoder_settings.thumbnail_configuration.state #=> String, one of "AUTO", "DISABLED"
@@ -4626,6 +4633,7 @@ module Aws::MediaLive
     #   resp.linked_channel_settings.primary_channel_settings.linked_channel_type #=> String, one of "FOLLOWING_CHANNEL", "PRIMARY_CHANNEL"
     #   resp.channel_security_groups #=> Array
     #   resp.channel_security_groups[0] #=> String
+    #   resp.inference_settings.feed_arn #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -5496,6 +5504,7 @@ module Aws::MediaLive
     #   resp.channels[0].linked_channel_settings.primary_channel_settings.linked_channel_type #=> String, one of "FOLLOWING_CHANNEL", "PRIMARY_CHANNEL"
     #   resp.channels[0].channel_security_groups #=> Array
     #   resp.channels[0].channel_security_groups[0] #=> String
+    #   resp.channels[0].inference_settings.feed_arn #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ListChannels AWS API Documentation
@@ -6213,6 +6222,7 @@ module Aws::MediaLive
     #   * {Types::StartChannelResponse#channel_engine_version #channel_engine_version} => Types::ChannelEngineVersionResponse
     #   * {Types::StartChannelResponse#linked_channel_settings #linked_channel_settings} => Types::DescribeLinkedChannelSettings
     #   * {Types::StartChannelResponse#channel_security_groups #channel_security_groups} => Array&lt;String&gt;
+    #   * {Types::StartChannelResponse#inference_settings #inference_settings} => Types::DescribeInferenceSettings
     #
     # @example Request syntax with placeholder values
     #
@@ -6969,7 +6979,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.video_descriptions[0].height #=> Integer
     #   resp.encoder_settings.video_descriptions[0].name #=> String
     #   resp.encoder_settings.video_descriptions[0].respond_to_afd #=> String, one of "NONE", "PASSTHROUGH", "RESPOND"
-    #   resp.encoder_settings.video_descriptions[0].scaling_behavior #=> String, one of "DEFAULT", "STRETCH_TO_OUTPUT"
+    #   resp.encoder_settings.video_descriptions[0].scaling_behavior #=> String, one of "DEFAULT", "STRETCH_TO_OUTPUT", "SMART_CROP"
     #   resp.encoder_settings.video_descriptions[0].sharpness #=> Integer
     #   resp.encoder_settings.video_descriptions[0].width #=> Integer
     #   resp.encoder_settings.thumbnail_configuration.state #=> String, one of "AUTO", "DISABLED"
@@ -7082,6 +7092,7 @@ module Aws::MediaLive
     #   resp.linked_channel_settings.primary_channel_settings.linked_channel_type #=> String, one of "FOLLOWING_CHANNEL", "PRIMARY_CHANNEL"
     #   resp.channel_security_groups #=> Array
     #   resp.channel_security_groups[0] #=> String
+    #   resp.inference_settings.feed_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/StartChannel AWS API Documentation
     #
@@ -7224,6 +7235,7 @@ module Aws::MediaLive
     #   * {Types::StopChannelResponse#channel_engine_version #channel_engine_version} => Types::ChannelEngineVersionResponse
     #   * {Types::StopChannelResponse#linked_channel_settings #linked_channel_settings} => Types::DescribeLinkedChannelSettings
     #   * {Types::StopChannelResponse#channel_security_groups #channel_security_groups} => Array&lt;String&gt;
+    #   * {Types::StopChannelResponse#inference_settings #inference_settings} => Types::DescribeInferenceSettings
     #
     # @example Request syntax with placeholder values
     #
@@ -7980,7 +7992,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.video_descriptions[0].height #=> Integer
     #   resp.encoder_settings.video_descriptions[0].name #=> String
     #   resp.encoder_settings.video_descriptions[0].respond_to_afd #=> String, one of "NONE", "PASSTHROUGH", "RESPOND"
-    #   resp.encoder_settings.video_descriptions[0].scaling_behavior #=> String, one of "DEFAULT", "STRETCH_TO_OUTPUT"
+    #   resp.encoder_settings.video_descriptions[0].scaling_behavior #=> String, one of "DEFAULT", "STRETCH_TO_OUTPUT", "SMART_CROP"
     #   resp.encoder_settings.video_descriptions[0].sharpness #=> Integer
     #   resp.encoder_settings.video_descriptions[0].width #=> Integer
     #   resp.encoder_settings.thumbnail_configuration.state #=> String, one of "AUTO", "DISABLED"
@@ -8093,6 +8105,7 @@ module Aws::MediaLive
     #   resp.linked_channel_settings.primary_channel_settings.linked_channel_type #=> String, one of "FOLLOWING_CHANNEL", "PRIMARY_CHANNEL"
     #   resp.channel_security_groups #=> Array
     #   resp.channel_security_groups[0] #=> String
+    #   resp.inference_settings.feed_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/StopChannel AWS API Documentation
     #
@@ -8273,6 +8286,9 @@ module Aws::MediaLive
     #   Configuration for linked channel relationships
     #
     # @option params [Array<String>] :channel_security_groups
+    #
+    # @option params [Types::InferenceSettings] :inference_settings
+    #   Configures Elemental Inference features in a channel.
     #
     # @return [Types::UpdateChannelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -9027,7 +9043,7 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.video_descriptions[0].height #=> Integer
     #   resp.channel.encoder_settings.video_descriptions[0].name #=> String
     #   resp.channel.encoder_settings.video_descriptions[0].respond_to_afd #=> String, one of "NONE", "PASSTHROUGH", "RESPOND"
-    #   resp.channel.encoder_settings.video_descriptions[0].scaling_behavior #=> String, one of "DEFAULT", "STRETCH_TO_OUTPUT"
+    #   resp.channel.encoder_settings.video_descriptions[0].scaling_behavior #=> String, one of "DEFAULT", "STRETCH_TO_OUTPUT", "SMART_CROP"
     #   resp.channel.encoder_settings.video_descriptions[0].sharpness #=> Integer
     #   resp.channel.encoder_settings.video_descriptions[0].width #=> Integer
     #   resp.channel.encoder_settings.thumbnail_configuration.state #=> String, one of "AUTO", "DISABLED"
@@ -9140,6 +9156,7 @@ module Aws::MediaLive
     #   resp.channel.linked_channel_settings.primary_channel_settings.linked_channel_type #=> String, one of "FOLLOWING_CHANNEL", "PRIMARY_CHANNEL"
     #   resp.channel.channel_security_groups #=> Array
     #   resp.channel.channel_security_groups[0] #=> String
+    #   resp.channel.inference_settings.feed_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateChannel AWS API Documentation
     #
@@ -9956,7 +9973,7 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.video_descriptions[0].height #=> Integer
     #   resp.channel.encoder_settings.video_descriptions[0].name #=> String
     #   resp.channel.encoder_settings.video_descriptions[0].respond_to_afd #=> String, one of "NONE", "PASSTHROUGH", "RESPOND"
-    #   resp.channel.encoder_settings.video_descriptions[0].scaling_behavior #=> String, one of "DEFAULT", "STRETCH_TO_OUTPUT"
+    #   resp.channel.encoder_settings.video_descriptions[0].scaling_behavior #=> String, one of "DEFAULT", "STRETCH_TO_OUTPUT", "SMART_CROP"
     #   resp.channel.encoder_settings.video_descriptions[0].sharpness #=> Integer
     #   resp.channel.encoder_settings.video_descriptions[0].width #=> Integer
     #   resp.channel.encoder_settings.thumbnail_configuration.state #=> String, one of "AUTO", "DISABLED"
@@ -10069,6 +10086,7 @@ module Aws::MediaLive
     #   resp.channel.linked_channel_settings.primary_channel_settings.linked_channel_type #=> String, one of "FOLLOWING_CHANNEL", "PRIMARY_CHANNEL"
     #   resp.channel.channel_security_groups #=> Array
     #   resp.channel.channel_security_groups[0] #=> String
+    #   resp.channel.inference_settings.feed_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateChannelClass AWS API Documentation
     #
@@ -10742,6 +10760,7 @@ module Aws::MediaLive
     #   * {Types::RestartChannelPipelinesResponse#channel_engine_version #channel_engine_version} => Types::ChannelEngineVersionResponse
     #   * {Types::RestartChannelPipelinesResponse#linked_channel_settings #linked_channel_settings} => Types::DescribeLinkedChannelSettings
     #   * {Types::RestartChannelPipelinesResponse#channel_security_groups #channel_security_groups} => Array&lt;String&gt;
+    #   * {Types::RestartChannelPipelinesResponse#inference_settings #inference_settings} => Types::DescribeInferenceSettings
     #
     # @example Request syntax with placeholder values
     #
@@ -11499,7 +11518,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.video_descriptions[0].height #=> Integer
     #   resp.encoder_settings.video_descriptions[0].name #=> String
     #   resp.encoder_settings.video_descriptions[0].respond_to_afd #=> String, one of "NONE", "PASSTHROUGH", "RESPOND"
-    #   resp.encoder_settings.video_descriptions[0].scaling_behavior #=> String, one of "DEFAULT", "STRETCH_TO_OUTPUT"
+    #   resp.encoder_settings.video_descriptions[0].scaling_behavior #=> String, one of "DEFAULT", "STRETCH_TO_OUTPUT", "SMART_CROP"
     #   resp.encoder_settings.video_descriptions[0].sharpness #=> Integer
     #   resp.encoder_settings.video_descriptions[0].width #=> Integer
     #   resp.encoder_settings.thumbnail_configuration.state #=> String, one of "AUTO", "DISABLED"
@@ -11613,6 +11632,7 @@ module Aws::MediaLive
     #   resp.linked_channel_settings.primary_channel_settings.linked_channel_type #=> String, one of "FOLLOWING_CHANNEL", "PRIMARY_CHANNEL"
     #   resp.channel_security_groups #=> Array
     #   resp.channel_security_groups[0] #=> String
+    #   resp.inference_settings.feed_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/RestartChannelPipelines AWS API Documentation
     #
@@ -14953,7 +14973,7 @@ module Aws::MediaLive
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-medialive'
-      context[:gem_version] = '1.178.0'
+      context[:gem_version] = '1.179.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

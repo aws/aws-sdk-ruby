@@ -10433,9 +10433,7 @@ module Aws::DynamoDB
     #       Both sets must have the same primitive data type. For example,
     #       if the existing data type is a set of strings, the `Value` must
     #       also be a set of strings.
-    #     The `ADD` action only supports Number and set data types. In
-    #     addition, `ADD` can only be used on top-level attributes, not
-    #     nested attributes.
+    #     The `ADD` action only supports Number and set data types.
     #
     #   * `DELETE` - Deletes an element from a set.
     #
@@ -10445,9 +10443,7 @@ module Aws::DynamoDB
     #     final attribute value is `[b]`. Specifying an empty set is an
     #     error.
     #
-    #     The `DELETE` action only supports set data types. In addition,
-    #     `DELETE` can only be used on top-level attributes, not nested
-    #     attributes.
+    #     The `DELETE` action only supports set data types.
     #
     #   You can have many actions in a single expression, such as the
     #   following: `SET a=:value1, b=:value2 DELETE :value3, :value4,
@@ -10920,6 +10916,19 @@ module Aws::DynamoDB
     #   units per second) for updating a table.
     #   @return [Types::WarmThroughput]
     #
+    # @!attribute [rw] global_table_settings_replication_mode
+    #   Controls the settings replication mode for a global table replica.
+    #   This attribute can be defined using UpdateTable operation only on a
+    #   regional table with values:
+    #
+    #   * `ENABLED`: Defines settings replication on a regional table to be
+    #     used as a source table for creating Multi-Account Global Table.
+    #
+    #   * `DISABLED`: Remove settings replication on a regional table.
+    #     Settings replication needs to be defined to ENABLED again in order
+    #     to create a Multi-Account Global Table using this table.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/UpdateTableInput AWS API Documentation
     #
     class UpdateTableInput < Struct.new(
@@ -10936,7 +10945,8 @@ module Aws::DynamoDB
       :multi_region_consistency,
       :global_table_witness_updates,
       :on_demand_throughput,
-      :warm_throughput)
+      :warm_throughput,
+      :global_table_settings_replication_mode)
       SENSITIVE = []
       include Aws::Structure
     end

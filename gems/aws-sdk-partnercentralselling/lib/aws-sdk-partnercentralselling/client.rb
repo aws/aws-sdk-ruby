@@ -940,7 +940,8 @@ module Aws::PartnerCentralSelling
     #   from the sender, the invitation's receiver, and a payload. The
     #   `Payload` can be the `OpportunityInvitation`, which includes detailed
     #   structures for sender contacts, partner responsibilities, customer
-    #   information, and project details.
+    #   information, and project details, or `LeadInvitation`, which includes
+    #   structures for customer information and interaction details.
     #
     # @return [Types::CreateEngagementInvitationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2886,6 +2887,11 @@ module Aws::PartnerCentralSelling
     # @option params [Types::CreatedDateFilter] :created_date
     #   Filter opportunities by creation date criteria.
     #
+    # @option params [Types::TargetCloseDateFilter] :target_close_date
+    #   Filters opportunities based on their target close date. This filter
+    #   helps retrieve opportunities with an expected close date before or
+    #   after a specified date.
+    #
     # @return [Types::ListOpportunitiesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListOpportunitiesResponse#opportunity_summaries #opportunity_summaries} => Array&lt;Types::OpportunitySummary&gt;
@@ -2901,7 +2907,7 @@ module Aws::PartnerCentralSelling
     #     next_token: "String",
     #     sort: {
     #       sort_order: "ASCENDING", # required, accepts ASCENDING, DESCENDING
-    #       sort_by: "LastModifiedDate", # required, accepts LastModifiedDate, Identifier, CustomerCompanyName, CreatedDate
+    #       sort_by: "LastModifiedDate", # required, accepts LastModifiedDate, Identifier, CustomerCompanyName, CreatedDate, TargetCloseDate
     #     },
     #     last_modified_date: {
     #       after_last_modified_date: Time.now,
@@ -2914,6 +2920,10 @@ module Aws::PartnerCentralSelling
     #     created_date: {
     #       after_created_date: Time.now,
     #       before_created_date: Time.now,
+    #     },
+    #     target_close_date: {
+    #       after_target_close_date: "Date",
+    #       before_target_close_date: "Date",
     #     },
     #   })
     #
@@ -4191,7 +4201,7 @@ module Aws::PartnerCentralSelling
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-partnercentralselling'
-      context[:gem_version] = '1.26.0'
+      context[:gem_version] = '1.27.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -23,7 +23,7 @@ Aws::Plugins::GlobalConfiguration.add_identifier(:cloudwatch)
 # structure.
 #
 #     cloud_watch = Aws::CloudWatch::Client.new
-#     resp = cloud_watch.delete_alarms(params)
+#     resp = cloud_watch.delete_alarm_mute_rule(params)
 #
 # See {Client} for more information.
 #
@@ -58,7 +58,7 @@ module Aws::CloudWatch
   autoload :CompositeAlarm, 'aws-sdk-cloudwatch/composite_alarm'
   autoload :Metric, 'aws-sdk-cloudwatch/metric'
 
-  GEM_VERSION = '1.130.0'
+  GEM_VERSION = '1.131.0'
 
 end
 

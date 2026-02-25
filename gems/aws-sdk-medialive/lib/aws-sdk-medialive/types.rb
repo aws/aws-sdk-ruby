@@ -1893,6 +1893,11 @@ module Aws::MediaLive
     #   channel.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] inference_settings
+    #   Include this setting to include Elemental Inference features in this
+    #   channel.
+    #   @return [Types::DescribeInferenceSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/Channel AWS API Documentation
     #
     class Channel < Struct.new(
@@ -1917,7 +1922,8 @@ module Aws::MediaLive
       :anywhere_settings,
       :channel_engine_version,
       :linked_channel_settings,
-      :channel_security_groups)
+      :channel_security_groups,
+      :inference_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2038,6 +2044,11 @@ module Aws::MediaLive
     #   channel.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] inference_settings
+    #   Include this setting to include Elemental Inference features in this
+    #   channel.
+    #   @return [Types::DescribeInferenceSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ChannelSummary AWS API Documentation
     #
     class ChannelSummary < Struct.new(
@@ -2061,7 +2072,8 @@ module Aws::MediaLive
       :channel_engine_version,
       :used_channel_engine_versions,
       :linked_channel_settings,
-      :channel_security_groups)
+      :channel_security_groups,
+      :inference_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2231,6 +2243,11 @@ module Aws::MediaLive
     #   channel.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] inference_settings
+    #   Include this setting to include Elemental Inference features in this
+    #   channel.
+    #   @return [Types::InferenceSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CreateChannel AWS API Documentation
     #
     class CreateChannel < Struct.new(
@@ -2252,7 +2269,8 @@ module Aws::MediaLive
       :channel_engine_version,
       :dry_run,
       :linked_channel_settings,
-      :channel_security_groups)
+      :channel_security_groups,
+      :inference_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2325,6 +2343,10 @@ module Aws::MediaLive
     # @!attribute [rw] channel_security_groups
     #   @return [Array<String>]
     #
+    # @!attribute [rw] inference_settings
+    #   Configures Elemental Inference features in a channel.
+    #   @return [Types::InferenceSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CreateChannelRequest AWS API Documentation
     #
     class CreateChannelRequest < Struct.new(
@@ -2346,7 +2368,8 @@ module Aws::MediaLive
       :channel_engine_version,
       :dry_run,
       :linked_channel_settings,
-      :channel_security_groups)
+      :channel_security_groups,
+      :inference_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2957,6 +2980,10 @@ module Aws::MediaLive
     # @!attribute [rw] channel_security_groups
     #   @return [Array<String>]
     #
+    # @!attribute [rw] inference_settings
+    #   Configures Elemental Inference features in a channel.
+    #   @return [Types::DescribeInferenceSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DeleteChannelResponse AWS API Documentation
     #
     class DeleteChannelResponse < Struct.new(
@@ -2981,7 +3008,8 @@ module Aws::MediaLive
       :anywhere_settings,
       :channel_engine_version,
       :linked_channel_settings,
-      :channel_security_groups)
+      :channel_security_groups,
+      :inference_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3363,6 +3391,10 @@ module Aws::MediaLive
     # @!attribute [rw] channel_security_groups
     #   @return [Array<String>]
     #
+    # @!attribute [rw] inference_settings
+    #   Configures Elemental Inference features in a channel.
+    #   @return [Types::DescribeInferenceSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeChannelResponse AWS API Documentation
     #
     class DescribeChannelResponse < Struct.new(
@@ -3387,7 +3419,8 @@ module Aws::MediaLive
       :anywhere_settings,
       :channel_engine_version,
       :linked_channel_settings,
-      :channel_security_groups)
+      :channel_security_groups,
+      :inference_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11882,6 +11915,10 @@ module Aws::MediaLive
     # @!attribute [rw] channel_security_groups
     #   @return [Array<String>]
     #
+    # @!attribute [rw] inference_settings
+    #   Configures Elemental Inference features in a channel.
+    #   @return [Types::DescribeInferenceSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/StartChannelResponse AWS API Documentation
     #
     class StartChannelResponse < Struct.new(
@@ -11906,7 +11943,8 @@ module Aws::MediaLive
       :anywhere_settings,
       :channel_engine_version,
       :linked_channel_settings,
-      :channel_security_groups)
+      :channel_security_groups,
+      :inference_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -12338,6 +12376,10 @@ module Aws::MediaLive
     # @!attribute [rw] channel_security_groups
     #   @return [Array<String>]
     #
+    # @!attribute [rw] inference_settings
+    #   Configures Elemental Inference features in a channel.
+    #   @return [Types::DescribeInferenceSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/StopChannelResponse AWS API Documentation
     #
     class StopChannelResponse < Struct.new(
@@ -12362,7 +12404,8 @@ module Aws::MediaLive
       :anywhere_settings,
       :channel_engine_version,
       :linked_channel_settings,
-      :channel_security_groups)
+      :channel_security_groups,
+      :inference_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -12977,6 +13020,11 @@ module Aws::MediaLive
     #   channel.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] inference_settings
+    #   Include this setting to include Elemental Inference features in this
+    #   channel.
+    #   @return [Types::InferenceSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateChannel AWS API Documentation
     #
     class UpdateChannel < Struct.new(
@@ -12993,7 +13041,8 @@ module Aws::MediaLive
       :dry_run,
       :anywhere_settings,
       :linked_channel_settings,
-      :channel_security_groups)
+      :channel_security_groups,
+      :inference_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13096,6 +13145,10 @@ module Aws::MediaLive
     # @!attribute [rw] channel_security_groups
     #   @return [Array<String>]
     #
+    # @!attribute [rw] inference_settings
+    #   Configures Elemental Inference features in a channel.
+    #   @return [Types::InferenceSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateChannelRequest AWS API Documentation
     #
     class UpdateChannelRequest < Struct.new(
@@ -13113,7 +13166,8 @@ module Aws::MediaLive
       :dry_run,
       :anywhere_settings,
       :linked_channel_settings,
-      :channel_security_groups)
+      :channel_security_groups,
+      :inference_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -14200,6 +14254,10 @@ module Aws::MediaLive
     # @!attribute [rw] channel_security_groups
     #   @return [Array<String>]
     #
+    # @!attribute [rw] inference_settings
+    #   Configures Elemental Inference features in a channel.
+    #   @return [Types::DescribeInferenceSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/RestartChannelPipelinesResponse AWS API Documentation
     #
     class RestartChannelPipelinesResponse < Struct.new(
@@ -14225,7 +14283,8 @@ module Aws::MediaLive
       :anywhere_settings,
       :channel_engine_version,
       :linked_channel_settings,
-      :channel_security_groups)
+      :channel_security_groups,
+      :inference_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -22864,6 +22923,36 @@ module Aws::MediaLive
       :decryption,
       :minimum_latency,
       :stream_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configures Elemental Inference features in a channel.
+    #
+    # @!attribute [rw] feed_arn
+    #   The ARN of the feed resource that is associated with this channel.
+    #   The feed is a resource in the Elemental Inference service.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeInferenceSettings AWS API Documentation
+    #
+    class DescribeInferenceSettings < Struct.new(
+      :feed_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configures Elemental Inference features in a channel.
+    #
+    # @!attribute [rw] feed_arn
+    #   The ARN of the feed resource that is associated with this channel.
+    #   The feed is a resource in the Elemental Inference service.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/InferenceSettings AWS API Documentation
+    #
+    class InferenceSettings < Struct.new(
+      :feed_arn)
       SENSITIVE = []
       include Aws::Structure
     end

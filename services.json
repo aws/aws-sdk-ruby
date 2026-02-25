@@ -485,6 +485,9 @@
   "ElasticsearchService": {
     "models": "es/2015-01-01"
   },
+  "ElementalInference": {
+    "models": "elementalinference/2018-11-14"
+  },
   "EntityResolution": {
     "models": "entityresolution/2018-05-10"
   },

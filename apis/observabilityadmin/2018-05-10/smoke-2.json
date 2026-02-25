@@ -1,11 +1,13 @@
 {
   "version" : 2,
   "testCases" : [ {
-    "id" : "GetTelemetryEvaluationStatus",
-    "operationName" : "GetTelemetryEvaluationStatus",
+    "id" : "GetTelemetryEvaluationStatusForOrganization",
+    "operationName" : "GetTelemetryEvaluationStatusForOrganization",
     "input" : { },
     "expectation" : {
-      "success" : { }
+      "failure" : {
+        "errorId" : "AccessDeniedException"
+      }
     },
     "config" : {
       "region" : "us-east-2",
@@ -14,13 +16,11 @@
       "useAccountIdRouting" : true
     }
   }, {
-    "id" : "GetTelemetryEvaluationStatusForOrganization",
-    "operationName" : "GetTelemetryEvaluationStatusForOrganization",
+    "id" : "GetTelemetryEvaluationStatus",
+    "operationName" : "GetTelemetryEvaluationStatus",
     "input" : { },
     "expectation" : {
-      "failure" : {
-        "errorId" : "AccessDeniedException"
-      }
+      "success" : { }
     },
     "config" : {
       "region" : "us-east-2",

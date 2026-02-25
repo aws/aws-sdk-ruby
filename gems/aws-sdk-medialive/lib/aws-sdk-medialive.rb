@@ -55,7 +55,7 @@ module Aws::MediaLive
   autoload :EndpointProvider, 'aws-sdk-medialive/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-medialive/endpoints'
 
-  GEM_VERSION = '1.178.0'
+  GEM_VERSION = '1.179.0'
 
 end
 

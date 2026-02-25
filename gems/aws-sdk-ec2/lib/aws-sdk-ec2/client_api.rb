@@ -736,6 +736,7 @@ module Aws::EC2
     DedicatedHostId = Shapes::StringShape.new(name: 'DedicatedHostId')
     DedicatedHostIdList = Shapes::ListShape.new(name: 'DedicatedHostIdList')
     DefaultEnaQueueCountPerInterface = Shapes::IntegerShape.new(name: 'DefaultEnaQueueCountPerInterface')
+    DefaultHttpTokensEnforcedState = Shapes::StringShape.new(name: 'DefaultHttpTokensEnforcedState')
     DefaultInstanceMetadataEndpointState = Shapes::StringShape.new(name: 'DefaultInstanceMetadataEndpointState')
     DefaultInstanceMetadataTagsState = Shapes::StringShape.new(name: 'DefaultInstanceMetadataTagsState')
     DefaultNetworkCardIndex = Shapes::IntegerShape.new(name: 'DefaultNetworkCardIndex')
@@ -1950,6 +1951,7 @@ module Aws::EC2
     HostTenancy = Shapes::StringShape.new(name: 'HostTenancy')
     HostnameType = Shapes::StringShape.new(name: 'HostnameType')
     Hour = Shapes::IntegerShape.new(name: 'Hour')
+    HttpTokensEnforcedState = Shapes::StringShape.new(name: 'HttpTokensEnforcedState')
     HttpTokensState = Shapes::StringShape.new(name: 'HttpTokensState')
     HypervisorType = Shapes::StringShape.new(name: 'HypervisorType')
     IKEVersionsList = Shapes::ListShape.new(name: 'IKEVersionsList')
@@ -4225,7 +4227,7 @@ module Aws::EC2
     AllocateHostsRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken"))
     AllocateHostsRequest.add_member(:instance_type, Shapes::ShapeRef.new(shape: String, location_name: "instanceType"))
     AllocateHostsRequest.add_member(:quantity, Shapes::ShapeRef.new(shape: Integer, location_name: "quantity"))
-    AllocateHostsRequest.add_member(:availability_zone, Shapes::ShapeRef.new(shape: String, location_name: "availabilityZone"))
+    AllocateHostsRequest.add_member(:availability_zone, Shapes::ShapeRef.new(shape: AvailabilityZoneName, location_name: "availabilityZone"))
     AllocateHostsRequest.struct_class = Types::AllocateHostsRequest
 
     AllocateHostsResult.add_member(:host_ids, Shapes::ShapeRef.new(shape: ResponseHostIdList, location_name: "hostIdSet"))
@@ -12675,6 +12677,7 @@ module Aws::EC2
     InstanceMetadataDefaultsResponse.add_member(:instance_metadata_tags, Shapes::ShapeRef.new(shape: InstanceMetadataTagsState, location_name: "instanceMetadataTags"))
     InstanceMetadataDefaultsResponse.add_member(:managed_by, Shapes::ShapeRef.new(shape: ManagedBy, location_name: "managedBy"))
     InstanceMetadataDefaultsResponse.add_member(:managed_exception_message, Shapes::ShapeRef.new(shape: String, location_name: "managedExceptionMessage"))
+    InstanceMetadataDefaultsResponse.add_member(:http_tokens_enforced, Shapes::ShapeRef.new(shape: HttpTokensEnforcedState, location_name: "httpTokensEnforced"))
     InstanceMetadataDefaultsResponse.struct_class = Types::InstanceMetadataDefaultsResponse
 
     InstanceMetadataOptionsRequest.add_member(:http_tokens, Shapes::ShapeRef.new(shape: HttpTokensState, location_name: "HttpTokens"))
@@ -14479,6 +14482,7 @@ module Aws::EC2
     ModifyInstanceMetadataDefaultsRequest.add_member(:http_endpoint, Shapes::ShapeRef.new(shape: DefaultInstanceMetadataEndpointState, location_name: "HttpEndpoint"))
     ModifyInstanceMetadataDefaultsRequest.add_member(:instance_metadata_tags, Shapes::ShapeRef.new(shape: DefaultInstanceMetadataTagsState, location_name: "InstanceMetadataTags"))
     ModifyInstanceMetadataDefaultsRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    ModifyInstanceMetadataDefaultsRequest.add_member(:http_tokens_enforced, Shapes::ShapeRef.new(shape: DefaultHttpTokensEnforcedState, location_name: "HttpTokensEnforced"))
     ModifyInstanceMetadataDefaultsRequest.struct_class = Types::ModifyInstanceMetadataDefaultsRequest
 
     ModifyInstanceMetadataDefaultsResult.add_member(:return, Shapes::ShapeRef.new(shape: Boolean, location_name: "return"))

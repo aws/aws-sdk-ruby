@@ -1848,6 +1848,7 @@ module Aws::DynamoDB
       attr_accessor global_table_witness_updates: ::Array[Types::GlobalTableWitnessGroupUpdate]
       attr_accessor on_demand_throughput: Types::OnDemandThroughput
       attr_accessor warm_throughput: Types::WarmThroughput
+      attr_accessor global_table_settings_replication_mode: ("ENABLED" | "DISABLED" | "ENABLED_WITH_OVERRIDES")
       SENSITIVE: []
     end
 
