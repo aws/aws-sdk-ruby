@@ -3,6 +3,18 @@
 module Aws
   module S3
     # @api private
+    # This is a one-shot class that downloads objects from a bucket to a local directory.
+    # This works as follows:
+    # * ObjectProducer runs in a background thread, calling `list_objects_v2` and
+    #   pushing entries into a SizedQueue (max: 100).
+    # * An internal executor pulls from that queue and posts work. Each task uses
+    #   FileDownloader to download objects then signals completion via `completion_queue`.
+    #
+    # We track how many tasks we posted, then pop that many times from `completion_queue`
+    # to wait for everything to finish.
+    #
+    # Errors are collected in a mutex-protected array. On failure (unless ignore_failure is set),
+    # we call abort which closes the queue - the producer catches ClosedQueueError and exits cleanly.
     class DirectoryDownloader
       def initialize(options = {})
         @client = options[:client]
