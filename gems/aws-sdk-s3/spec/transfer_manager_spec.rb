@@ -51,14 +51,6 @@ module Aws
             subject.download_directory(temp_dir, bucket: 'bucket', ignore_failure: false)
           end.to raise_error(DirectoryDownloadError)
         end
-
-        it 'calls progress callback when given' do
-          progress_calls = []
-          callback = proc { |bytes, files| progress_calls << { bytes: bytes, files: files } }
-
-          subject.download_directory(temp_dir, bucket: 'bucket', progress_callback: callback)
-          expect(progress_calls.length).to eq(2)
-        end
       end
 
       describe '#download_file', :jruby_flaky do
@@ -112,14 +104,6 @@ module Aws
           expect do
             subject.upload_directory(temp_dir, bucket: 'bucket', ignore_failure: false)
           end.to raise_error(DirectoryUploadError)
-        end
-
-        it 'calls progress callback when given' do
-          progress_calls = []
-          callback = proc { |bytes, files| progress_calls << { bytes: bytes, files: files } }
-
-          subject.upload_directory(temp_dir, bucket: 'bucket', progress_callback: callback)
-          expect(progress_calls.length).to eq(5)
         end
       end
 

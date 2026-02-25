@@ -35,7 +35,6 @@ module Aws
 
       def build_opts(destination, bucket, opts)
         download_opts = {
-          progress_callback: opts[:progress_callback],
           destination: destination,
           ignore_failure: opts[:ignore_failure] || false
         }
@@ -64,19 +63,17 @@ module Aws
         end
       end
 
-      def download_object(entry, downloader, opts, progress, errors)
+      def download_object(entry, downloader, errors, opts)
         raise entry.error if entry.error
 
         FileUtils.mkdir_p(File.dirname(entry.path)) unless Dir.exist?(File.dirname(entry.path))
         downloader.download(entry.path, entry.params)
-        progress&.call(File.size(entry.path))
       rescue StandardError => e
         @mutex.synchronize { errors << e }
         abort unless opts[:ignore_failure]
       end
 
       def process_download_queue(downloader, opts)
-        progress = DirectoryProgress.new(opts[:progress_callback]) if opts[:progress_callback]
         queue_executor = DefaultExecutor.new
         completion_queue = Queue.new
         posted_count = 0
@@ -84,7 +81,7 @@ module Aws
         begin
           @producer.each do |object|
             queue_executor.post(object) do |o|
-              download_object(o, downloader, opts, progress, errors)
+              download_object(o, downloader, errors, opts)
             ensure
               completion_queue << :done
             end

@@ -158,27 +158,6 @@ module Aws
             downloader.download(temp_dir, bucket: 'test-bucket', request_callback: callback)
           end
         end
-
-        context 'progress callbacks' do
-          it 'reports progress' do
-            client.stub_responses(
-              :list_objects_v2,
-              {
-                contents: [
-                  { key: 'file1.txt', size: 100 },
-                  { key: 'file2.txt', size: 200 }
-                ],
-                is_truncated: false
-              }
-            )
-            client.stub_responses(:get_object, { body: 'x' * 100 })
-            progress_calls = []
-            callback = ->(bytes, _files) { progress_calls << bytes }
-            downloader.download(temp_dir, bucket: 'test-bucket', progress_callback: callback)
-
-            expect(progress_calls.length).to eq(2)
-          end
-        end
       end
     end
   end

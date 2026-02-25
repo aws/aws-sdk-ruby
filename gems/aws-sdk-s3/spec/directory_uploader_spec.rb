@@ -143,18 +143,6 @@ module Aws
           end
         end
 
-        context 'progress callbacks' do
-          it 'reports progress' do
-            progress_calls = []
-
-            callback = proc do |bytes, files|
-              progress_calls << { total_bytes: bytes, files_completed: files }
-            end
-
-            uploader.upload(temp_dir, 'test-bucket', recursive: false, progress_callback: callback)
-            expect(progress_calls.length).to eq(5)
-          end
-        end
       end
     end
   end

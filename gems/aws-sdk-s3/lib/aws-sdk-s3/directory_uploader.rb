@@ -37,7 +37,7 @@ module Aws
       private
 
       def build_opts(source_directory, bucket, opts)
-        uploader_opts = { progress_callback: opts[:progress_callback], ignore_failure: opts[:ignore_failure] || false }
+        uploader_opts = { ignore_failure: opts[:ignore_failure] || false }
         producer_opts = {
           directory_uploader: self,
           source_dir: source_directory,
@@ -65,7 +65,6 @@ module Aws
       end
 
       def process_upload_queue(uploader, opts)
-        progress = DirectoryProgress.new(opts[:progress_callback]) if opts[:progress_callback]
         queue_executor = DefaultExecutor.new
         completion_queue = Queue.new
         posted_count = 0
@@ -73,7 +72,7 @@ module Aws
         begin
           @producer.each do |file|
             queue_executor.post(file) do |f|
-              upload_file(f, uploader, opts, progress, errors)
+              upload_file(f, uploader, errors, opts)
             ensure
               completion_queue << :done
             end
@@ -91,9 +90,8 @@ module Aws
         queue_executor&.shutdown
       end
 
-      def upload_file(entry, uploader, opts, progress, errors)
+      def upload_file(entry, uploader, errors, opts)
         uploader.upload(entry.path, entry.params)
-        progress&.call(File.size(entry.path))
       rescue StandardError => e
         @mutex.synchronize { errors << e }
         abort unless opts[:ignore_failure]

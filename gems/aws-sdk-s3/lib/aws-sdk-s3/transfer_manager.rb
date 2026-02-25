@@ -136,10 +136,6 @@ module Aws
       #   A Proc to modify download parameters for each object. Called with `(key, params)`.
       #   Must return the modified parameters.
       #
-      # @option options [Proc] :progress_callback (nil)
-      #   A Proc that will be called as objects are downloaded.
-      #   It will be invoked with `transferred_bytes` and `transferred_files`.
-      #
       # @option options [Integer] :thread_count (10)
       #   The number of threads to use for multipart downloads of individual large files.
       #   Only used when no custom executor is provided to the {TransferManager}.
@@ -329,10 +325,6 @@ module Aws
       # @option options [Proc] :request_callback (nil)
       #   A Proc to modify upload parameters for each file. Called with `(file_path, params)`.
       #   Must return the modified parameters.
-      #
-      # @option options [Proc] :progress_callback (nil)
-      #   A Proc that will be called as files are uploaded.
-      #   It will be invoked with `transferred_bytes` and `transferred_files`.
       #
       # @option options [Integer] :http_chunk_size (16384) Size in bytes for each chunk when streaming request bodies
       #   over HTTP. Controls the buffer size used when sending data to S3. Larger values may improve throughput by
