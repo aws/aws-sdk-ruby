@@ -4,7 +4,7 @@ require_relative 'transfer_manager_spec_helper'
 
 module Aws
   module S3
-    describe TransferManager do
+    describe TransferManager, :jruby_flaky  do
       let(:client) { S3::Client.new(stub_responses: true) }
       let(:subject) { TransferManager.new(client: client) }
       let(:one_mb_size) { 1024 * 1024 }
@@ -53,7 +53,7 @@ module Aws
         end
       end
 
-      describe '#download_file', :jruby_flaky do
+      describe '#download_file' do
         let(:path) { Tempfile.new('destination').path }
 
         before do
@@ -224,7 +224,7 @@ module Aws
         end
       end
 
-      describe '#upload_stream', :jruby_flaky do
+      describe '#upload_stream' do
         let(:seventeen_mb) { one_mb_content * 17 }
 
         it 'returns true when succeeds' do

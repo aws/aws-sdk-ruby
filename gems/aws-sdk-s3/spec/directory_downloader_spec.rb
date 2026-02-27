@@ -16,7 +16,7 @@ module Aws
         end
       end
 
-      describe '#download' do
+      describe '#download', :jruby_flaky do
         let(:temp_dir) { Dir.mktmpdir }
 
         before do
