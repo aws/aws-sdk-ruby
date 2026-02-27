@@ -18,8 +18,8 @@ module Aws
     class DirectoryDownloader
       def initialize(options = {})
         @client = options[:client] || Client.new
-        @logger = options[:logger]
         @executor = options[:executor] || DefaultExecutor.new
+        @logger = options[:logger]
         @producer = nil
         @mutex = Mutex.new
       end
@@ -83,7 +83,9 @@ module Aws
 
         FileUtils.mkdir_p(File.dirname(entry.path)) unless Dir.exist?(File.dirname(entry.path))
         downloader.download(entry.path, entry.params)
+        @logger&.debug("Downloaded #{entry.params[:key]} from #{entry.params[:bucket]} to #{entry.path}")
       rescue StandardError => e
+        @logger&.warn("Failed to download #{entry.params[:key]} from #{entry.params[:bucket]}")
         @mutex.synchronize { errors << e }
         abort unless opts[:ignore_failure]
       end
@@ -162,7 +164,10 @@ module Aws
         private
 
         def apply_request_callback(key, params)
-          @request_callback&.call(key, params.dup)
+          callback_params = @request_callback.call(key, params.dup)
+          return params unless callback_params.is_a?(Hash) && callback_params.any?
+
+          params.merge(callback_params)
         end
 
         def build_object_entry(key)

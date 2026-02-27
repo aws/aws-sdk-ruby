@@ -20,8 +20,8 @@ module Aws
     class DirectoryUploader
       def initialize(options = {})
         @client = options[:client] || Client.new
-        @logger = options[:logger]
         @executor = options[:executor] || DefaultExecutor.new
+        @logger = options[:logger]
         @producer = nil
         @mutex = Mutex.new
       end
@@ -107,7 +107,9 @@ module Aws
 
       def upload_file(entry, uploader, errors, opts)
         uploader.upload(entry.path, entry.params)
+        @logger&.debug("Uploaded #{entry.path} to #{entry.params[:bucket]} as #{entry.params[:key]}")
       rescue StandardError => e
+        @logger&.warn("Failed to upload #{entry.path} to #{entry.params[:bucket]}")
         @mutex.synchronize { errors << e }
         abort unless opts[:ignore_failure]
       end
