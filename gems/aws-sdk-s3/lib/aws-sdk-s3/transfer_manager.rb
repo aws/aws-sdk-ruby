@@ -55,14 +55,17 @@ module Aws
       # @option options [S3::Client] :client (S3::Client.new)
       #   The S3 client to use for {TransferManager} operations. If not provided, a new default client
       #   will be created automatically.
-      # @option options [Object] :executor
+      # @option options [Object] :executor (nil)
       #   The executor to use for multipart operations. Must implement the same interface as {DefaultExecutor}.
       #   If not provided, a new {DefaultExecutor} will be created automatically for each operation and
       #   shutdown after completion. When provided a custom executor, it will be reused across operations, and
       #   you are responsible for shutting it down when finished.
+      # @option options [Logger] :logger (nil)
+      #   The Logger instance for logging transfer operations. If not set, logging is disabled.
       def initialize(options = {})
         @client = options[:client] || Client.new
         @executor = options[:executor]
+        @logger = options[:logger]
       end
 
       # @return [S3::Client]
@@ -70,6 +73,9 @@ module Aws
 
       # @return [Object]
       attr_reader :executor
+
+      # @return [Logger]
+      attr_reader :logger
 
       # Downloads objects in a S3 bucket to a local directory.
       #
@@ -149,7 +155,7 @@ module Aws
       #   * `:errors` - Array of errors for failed downloads (only present when failures occur)
       def download_directory(destination, bucket:, **options)
         executor = @executor || DefaultExecutor.new(max_threads: options.delete(:thread_count))
-        downloader = DirectoryDownloader.new(client: @client, executor: executor)
+        downloader = DirectoryDownloader.new(client: @client, executor: executor, logger: @logger)
         result = downloader.download(destination, bucket: bucket, **options)
         executor.shutdown unless @executor
         result
@@ -347,7 +353,7 @@ module Aws
       #   * `:errors` - Array of error objects for failed uploads (only present when failures occur)
       def upload_directory(source, bucket:, **options)
         executor = @executor || DefaultExecutor.new(max_threads: options.delete(:thread_count))
-        uploader = DirectoryUploader.new(client: @client, executor: executor)
+        uploader = DirectoryUploader.new(client: @client, executor: executor, logger: @logger)
         result = uploader.upload(source, bucket, **options.merge(http_chunk_size: resolve_http_chunk_size(options)))
         executor.shutdown unless @executor
         result

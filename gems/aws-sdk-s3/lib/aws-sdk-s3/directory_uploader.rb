@@ -20,6 +20,7 @@ module Aws
     class DirectoryUploader
       def initialize(options = {})
         @client = options[:client] || Client.new
+        @logger = options[:logger]
         @executor = options[:executor] || DefaultExecutor.new
         @producer = nil
         @mutex = Mutex.new
