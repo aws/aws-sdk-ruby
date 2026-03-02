@@ -109,7 +109,7 @@ module Aws
         uploader.upload(entry.path, entry.params)
         @logger&.debug("Uploaded #{entry.path} to #{entry.params[:bucket]} as #{entry.params[:key]}")
       rescue StandardError => e
-        @logger&.warn("Failed to upload #{entry.path} to #{entry.params[:bucket]}")
+        @logger&.warn("Failed to upload #{entry.path} to #{entry.params[:bucket]}: #{e.message}")
         @mutex.synchronize { errors << e }
         abort unless opts[:ignore_failure]
       end

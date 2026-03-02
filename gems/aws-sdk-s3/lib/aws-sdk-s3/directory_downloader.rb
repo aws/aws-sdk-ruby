@@ -85,7 +85,7 @@ module Aws
         downloader.download(entry.path, entry.params)
         @logger&.debug("Downloaded #{entry.params[:key]} from #{entry.params[:bucket]} to #{entry.path}")
       rescue StandardError => e
-        @logger&.warn("Failed to download #{entry.params[:key]} from #{entry.params[:bucket]}")
+        @logger&.warn("Failed to download #{entry.params[:key]} from #{entry.params[:bucket]}: #{e.message}")
         @mutex.synchronize { errors << e }
         abort unless opts[:ignore_failure]
       end
