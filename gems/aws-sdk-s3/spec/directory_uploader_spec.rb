@@ -20,6 +20,7 @@ module Aws
         let(:temp_dir) { Dir.mktmpdir }
 
         before do
+          FileUtils.mkdir_p(temp_dir) unless Dir.exist?(temp_dir)
           TransferManagerSpecHelper.create_test_directory_structure(temp_dir)
         end
 
