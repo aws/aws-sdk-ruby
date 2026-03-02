@@ -105,6 +105,18 @@ module Aws
                                  ) -> _AddCustomAttributesResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AddCustomAttributesResponseSuccess
 
+      interface _AddUserPoolClientSecretResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AddUserPoolClientSecretResponse]
+        def client_secret_descriptor: () -> Types::ClientSecretDescriptorType
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CognitoIdentityProvider/Client.html#add_user_pool_client_secret-instance_method
+      def add_user_pool_client_secret: (
+                                         user_pool_id: ::String,
+                                         client_id: ::String,
+                                         ?client_secret: ::String
+                                       ) -> _AddUserPoolClientSecretResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AddUserPoolClientSecretResponseSuccess
+
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CognitoIdentityProvider/Client.html#admin_add_user_to_group-instance_method
       def admin_add_user_to_group: (
                                      user_pool_id: ::String,
@@ -825,6 +837,7 @@ module Aws
                                      user_pool_id: ::String,
                                      client_name: ::String,
                                      ?generate_secret: bool,
+                                     ?client_secret: ::String,
                                      ?refresh_token_validity: ::Integer,
                                      ?access_token_validity: ::Integer,
                                      ?id_token_validity: ::Integer,
@@ -940,6 +953,17 @@ module Aws
                                      client_id: ::String
                                    ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _DeleteUserPoolClientSecretResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteUserPoolClientSecretResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CognitoIdentityProvider/Client.html#delete_user_pool_client_secret-instance_method
+      def delete_user_pool_client_secret: (
+                                            user_pool_id: ::String,
+                                            client_id: ::String,
+                                            client_secret_id: ::String
+                                          ) -> _DeleteUserPoolClientSecretResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteUserPoolClientSecretResponseSuccess
 
       interface _DeleteUserPoolDomainResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteUserPoolDomainResponse]
@@ -1361,6 +1385,19 @@ module Aws
                                    ?pagination_token: ::String
                                  ) -> _ListUserImportJobsResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListUserImportJobsResponseSuccess
+
+      interface _ListUserPoolClientSecretsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListUserPoolClientSecretsResponse]
+        def client_secrets: () -> ::Array[Types::ClientSecretDescriptorType]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CognitoIdentityProvider/Client.html#list_user_pool_client_secrets-instance_method
+      def list_user_pool_client_secrets: (
+                                           user_pool_id: ::String,
+                                           client_id: ::String,
+                                           ?next_token: ::String
+                                         ) -> _ListUserPoolClientSecretsResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListUserPoolClientSecretsResponseSuccess
 
       interface _ListUserPoolClientsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListUserPoolClientsResponse]

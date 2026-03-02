@@ -34,13 +34,13 @@ module Aws::KeyspacesStreams
     #   The unique identifier of the shard iterator. A shard iterator
     #   specifies the position in the shard from which you want to start
     #   reading data records sequentially. You obtain this value by calling
-    #   the `GetShardIterator` operation. Each shard iterator is valid for
+    #   the `GetShardIterator ` operation. Each shard iterator is valid for
     #   15 minutes after creation.
     #   @return [String]
     #
     # @!attribute [rw] max_results
     #   The maximum number of records to return in a single `GetRecords`
-    #   request. Default value is 1000. You can specify a limit between 1
+    #   request. The default value is 100. You can specify a limit between 1
     #   and 1000, but the actual number returned might be less than the
     #   specified maximum if the size of the data for the returned records
     #   exceeds the internal size limit.
@@ -66,7 +66,7 @@ module Aws::KeyspacesStreams
     # @!attribute [rw] next_shard_iterator
     #   The next position in the shard from which to start sequentially
     #   reading data records. If null, the shard has been closed and the
-    #   requested iterator doesn't return any more data.
+    #   requested iterator will not return any more data.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/keyspacesstreams-2024-09-09/GetRecordsOutput AWS API Documentation
@@ -148,21 +148,22 @@ module Aws::KeyspacesStreams
     #
     # @!attribute [rw] max_results
     #   The maximum number of shard objects to return in a single
-    #   `GetStream` request. Default value is 100. The minimum value is 1
-    #   and the maximum value is 100.
+    #   `GetStream` request. The default value is 100. The minimum value is
+    #   1 and the maximum value is 100.
     #   @return [Integer]
     #
     # @!attribute [rw] shard_filter
     #   Optional filter criteria to apply when retrieving shards. You can
-    #   filter shards based on their state or other attributes to narrow
-    #   down the results returned by the `GetStream` operation.
+    #   filter shards based on their parent `shardID` to get a list of
+    #   children shards to narrow down the results returned by the
+    #   `GetStream` operation.
     #   @return [Types::ShardFilter]
     #
     # @!attribute [rw] next_token
     #   An optional pagination token provided by a previous `GetStream`
     #   operation. If this parameter is specified, the response includes
     #   only records beyond the token, up to the value specified by
-    #   `maxResults`.
+    #   `MaxResults`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/keyspacesstreams-2024-09-09/GetStreamInput AWS API Documentation
@@ -361,6 +362,11 @@ module Aws::KeyspacesStreams
     #   A 64-bit double-precision floating point value.
     #   @return [String]
     #
+    # @!attribute [rw] duration_t
+    #   A duration value with nanosecond precision, representing a period of
+    #   time encoded as 32-bit months, 32-bit days, and 64-bit nanoseconds.
+    #   @return [String]
+    #
     # @!attribute [rw] float_t
     #   A 32-bit single-precision floating point value.
     #   @return [String]
@@ -425,7 +431,7 @@ module Aws::KeyspacesStreams
     #   @return [String]
     #
     # @!attribute [rw] varint_t
-    #   A variable precision integer value with arbitrary length.
+    #   An integer value within the +/-10^38 range.
     #   @return [String]
     #
     # @!attribute [rw] udt_t
@@ -444,6 +450,7 @@ module Aws::KeyspacesStreams
       :date_t,
       :decimal_t,
       :double_t,
+      :duration_t,
       :float_t,
       :inet_t,
       :int_t,
@@ -474,6 +481,7 @@ module Aws::KeyspacesStreams
       class DateT < KeyspacesCellValue; end
       class DecimalT < KeyspacesCellValue; end
       class DoubleT < KeyspacesCellValue; end
+      class DurationT < KeyspacesCellValue; end
       class FloatT < KeyspacesCellValue; end
       class InetT < KeyspacesCellValue; end
       class IntT < KeyspacesCellValue; end
@@ -559,7 +567,7 @@ module Aws::KeyspacesStreams
     #
     # @!attribute [rw] max_results
     #   The maximum number of streams to return in a single `ListStreams`
-    #   request. Default value is 100. The minimum value is 1 and the
+    #   request. The default value is 100. The minimum value is 1 and the
     #   maximum value is 100.
     #   @return [Integer]
     #
@@ -592,7 +600,7 @@ module Aws::KeyspacesStreams
     #   A pagination token that can be used in a subsequent `ListStreams`
     #   request. This token is returned if the response contains more
     #   streams than can be returned in a single response based on the
-    #   `MaxResults` parameter.
+    #   `maxResults` parameter.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/keyspacesstreams-2024-09-09/ListStreamsOutput AWS API Documentation
@@ -788,6 +796,10 @@ module Aws::KeyspacesStreams
     # to handle this exception. Reducing your request frequency or
     # distributing requests more evenly can help avoid throughput
     # exceptions.
+    #
+    # This exception can also occur when more than two processes are reading
+    # from the same stream shard at the same time. Ensure that only one
+    # process reads from a stream shard at the same time.
     #
     # @!attribute [rw] message
     #   The request was denied due to request throttling. Reduce the

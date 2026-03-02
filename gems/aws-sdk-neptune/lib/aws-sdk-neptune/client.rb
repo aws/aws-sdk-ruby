@@ -2335,6 +2335,13 @@ module Aws::Neptune
     #   The deletion protection setting for the new global database. The
     #   global database can't be deleted when deletion protection is enabled.
     #
+    # @option params [String] :database_name
+    #   The name for the new global database (up to 64 alpha-numeric
+    #   characters.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   Tags to assign to the global cluster.
+    #
     # @option params [Boolean] :storage_encrypted
     #   The storage encryption setting for the new global database cluster.
     #
@@ -2350,6 +2357,13 @@ module Aws::Neptune
     #     engine: "String",
     #     engine_version: "String",
     #     deletion_protection: false,
+    #     database_name: "String",
+    #     tags: [
+    #       {
+    #         key: "String",
+    #         value: "String",
+    #       },
+    #     ],
     #     storage_encrypted: false,
     #   })
     #
@@ -2361,6 +2375,7 @@ module Aws::Neptune
     #   resp.global_cluster.status #=> String
     #   resp.global_cluster.engine #=> String
     #   resp.global_cluster.engine_version #=> String
+    #   resp.global_cluster.database_name #=> String
     #   resp.global_cluster.storage_encrypted #=> Boolean
     #   resp.global_cluster.deletion_protection #=> Boolean
     #   resp.global_cluster.global_cluster_members #=> Array
@@ -2372,6 +2387,9 @@ module Aws::Neptune
     #   resp.global_cluster.failover_state.from_db_cluster_arn #=> String
     #   resp.global_cluster.failover_state.to_db_cluster_arn #=> String
     #   resp.global_cluster.failover_state.is_data_loss_allowed #=> Boolean
+    #   resp.global_cluster.tag_list #=> Array
+    #   resp.global_cluster.tag_list[0].key #=> String
+    #   resp.global_cluster.tag_list[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/CreateGlobalCluster AWS API Documentation
     #
@@ -2987,6 +3005,7 @@ module Aws::Neptune
     #   resp.global_cluster.status #=> String
     #   resp.global_cluster.engine #=> String
     #   resp.global_cluster.engine_version #=> String
+    #   resp.global_cluster.database_name #=> String
     #   resp.global_cluster.storage_encrypted #=> Boolean
     #   resp.global_cluster.deletion_protection #=> Boolean
     #   resp.global_cluster.global_cluster_members #=> Array
@@ -2998,6 +3017,9 @@ module Aws::Neptune
     #   resp.global_cluster.failover_state.from_db_cluster_arn #=> String
     #   resp.global_cluster.failover_state.to_db_cluster_arn #=> String
     #   resp.global_cluster.failover_state.is_data_loss_allowed #=> Boolean
+    #   resp.global_cluster.tag_list #=> Array
+    #   resp.global_cluster.tag_list[0].key #=> String
+    #   resp.global_cluster.tag_list[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/DeleteGlobalCluster AWS API Documentation
     #
@@ -4590,6 +4612,7 @@ module Aws::Neptune
     #   resp.global_clusters[0].status #=> String
     #   resp.global_clusters[0].engine #=> String
     #   resp.global_clusters[0].engine_version #=> String
+    #   resp.global_clusters[0].database_name #=> String
     #   resp.global_clusters[0].storage_encrypted #=> Boolean
     #   resp.global_clusters[0].deletion_protection #=> Boolean
     #   resp.global_clusters[0].global_cluster_members #=> Array
@@ -4601,6 +4624,9 @@ module Aws::Neptune
     #   resp.global_clusters[0].failover_state.from_db_cluster_arn #=> String
     #   resp.global_clusters[0].failover_state.to_db_cluster_arn #=> String
     #   resp.global_clusters[0].failover_state.is_data_loss_allowed #=> Boolean
+    #   resp.global_clusters[0].tag_list #=> Array
+    #   resp.global_clusters[0].tag_list[0].key #=> String
+    #   resp.global_clusters[0].tag_list[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/DescribeGlobalClusters AWS API Documentation
     #
@@ -5025,6 +5051,7 @@ module Aws::Neptune
     #   resp.global_cluster.status #=> String
     #   resp.global_cluster.engine #=> String
     #   resp.global_cluster.engine_version #=> String
+    #   resp.global_cluster.database_name #=> String
     #   resp.global_cluster.storage_encrypted #=> Boolean
     #   resp.global_cluster.deletion_protection #=> Boolean
     #   resp.global_cluster.global_cluster_members #=> Array
@@ -5036,6 +5063,9 @@ module Aws::Neptune
     #   resp.global_cluster.failover_state.from_db_cluster_arn #=> String
     #   resp.global_cluster.failover_state.to_db_cluster_arn #=> String
     #   resp.global_cluster.failover_state.is_data_loss_allowed #=> Boolean
+    #   resp.global_cluster.tag_list #=> Array
+    #   resp.global_cluster.tag_list[0].key #=> String
+    #   resp.global_cluster.tag_list[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/FailoverGlobalCluster AWS API Documentation
     #
@@ -6373,6 +6403,7 @@ module Aws::Neptune
     #   resp.global_cluster.status #=> String
     #   resp.global_cluster.engine #=> String
     #   resp.global_cluster.engine_version #=> String
+    #   resp.global_cluster.database_name #=> String
     #   resp.global_cluster.storage_encrypted #=> Boolean
     #   resp.global_cluster.deletion_protection #=> Boolean
     #   resp.global_cluster.global_cluster_members #=> Array
@@ -6384,6 +6415,9 @@ module Aws::Neptune
     #   resp.global_cluster.failover_state.from_db_cluster_arn #=> String
     #   resp.global_cluster.failover_state.to_db_cluster_arn #=> String
     #   resp.global_cluster.failover_state.is_data_loss_allowed #=> Boolean
+    #   resp.global_cluster.tag_list #=> Array
+    #   resp.global_cluster.tag_list[0].key #=> String
+    #   resp.global_cluster.tag_list[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/ModifyGlobalCluster AWS API Documentation
     #
@@ -6669,6 +6703,7 @@ module Aws::Neptune
     #   resp.global_cluster.status #=> String
     #   resp.global_cluster.engine #=> String
     #   resp.global_cluster.engine_version #=> String
+    #   resp.global_cluster.database_name #=> String
     #   resp.global_cluster.storage_encrypted #=> Boolean
     #   resp.global_cluster.deletion_protection #=> Boolean
     #   resp.global_cluster.global_cluster_members #=> Array
@@ -6680,6 +6715,9 @@ module Aws::Neptune
     #   resp.global_cluster.failover_state.from_db_cluster_arn #=> String
     #   resp.global_cluster.failover_state.to_db_cluster_arn #=> String
     #   resp.global_cluster.failover_state.is_data_loss_allowed #=> Boolean
+    #   resp.global_cluster.tag_list #=> Array
+    #   resp.global_cluster.tag_list[0].key #=> String
+    #   resp.global_cluster.tag_list[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/RemoveFromGlobalCluster AWS API Documentation
     #
@@ -7744,6 +7782,7 @@ module Aws::Neptune
     #   resp.global_cluster.status #=> String
     #   resp.global_cluster.engine #=> String
     #   resp.global_cluster.engine_version #=> String
+    #   resp.global_cluster.database_name #=> String
     #   resp.global_cluster.storage_encrypted #=> Boolean
     #   resp.global_cluster.deletion_protection #=> Boolean
     #   resp.global_cluster.global_cluster_members #=> Array
@@ -7755,6 +7794,9 @@ module Aws::Neptune
     #   resp.global_cluster.failover_state.from_db_cluster_arn #=> String
     #   resp.global_cluster.failover_state.to_db_cluster_arn #=> String
     #   resp.global_cluster.failover_state.is_data_loss_allowed #=> Boolean
+    #   resp.global_cluster.tag_list #=> Array
+    #   resp.global_cluster.tag_list[0].key #=> String
+    #   resp.global_cluster.tag_list[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/SwitchoverGlobalCluster AWS API Documentation
     #
@@ -7783,7 +7825,7 @@ module Aws::Neptune
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-neptune'
-      context[:gem_version] = '1.99.0'
+      context[:gem_version] = '1.100.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -6833,6 +6833,7 @@ module Aws::SecurityHub
     ProductV2.add_member(:integration_v2_types, Shapes::ShapeRef.new(shape: IntegrationV2TypeList, location_name: "IntegrationV2Types"))
     ProductV2.add_member(:marketplace_url, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "MarketplaceUrl"))
     ProductV2.add_member(:activation_url, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ActivationUrl"))
+    ProductV2.add_member(:marketplace_product_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "MarketplaceProductId"))
     ProductV2.struct_class = Types::ProductV2
 
     ProductsList.member = Shapes::ShapeRef.new(shape: Product)

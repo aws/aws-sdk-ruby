@@ -10,6 +10,20 @@
 module Aws::CognitoIdentityProvider
   module Types
 
+    # This exception is thrown when you don't have sufficient permissions
+    # to perform the requested operation.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AccessDeniedException AWS API Documentation
+    #
+    class AccessDeniedException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The settings for user message delivery in forgot-password operations.
     # Contains preference for email or SMS message delivery of password
     # reset codes, or for admin-only password reset.
@@ -186,6 +200,49 @@ module Aws::CognitoIdentityProvider
     #
     class AddCustomAttributesResponse < Aws::EmptyStructure; end
 
+    # The request to create a new client secret for a user pool app client.
+    #
+    # @!attribute [rw] user_pool_id
+    #   The ID of the user pool that contains the app client.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_id
+    #   The ID of the app client for which you want to create a new secret.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_secret
+    #   The client secret value you want to use. If you don't provide this
+    #   parameter, Amazon Cognito generates a secure secret for you.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AddUserPoolClientSecretRequest AWS API Documentation
+    #
+    class AddUserPoolClientSecretRequest < Struct.new(
+      :user_pool_id,
+      :client_id,
+      :client_secret)
+      SENSITIVE = [:client_id, :client_secret]
+      include Aws::Structure
+    end
+
+    # The response from creating a new client secret.
+    #
+    # @!attribute [rw] client_secret_descriptor
+    #   The details of the newly created client secret, including its unique
+    #   identifier and creation timestamp. The ClientSecretValue is only
+    #   returned when Amazon Cognito generates the secret. For custom
+    #   secrets that you provide, the ClientSecretValue is not included in
+    #   the response.
+    #   @return [Types::ClientSecretDescriptorType]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AddUserPoolClientSecretResponse AWS API Documentation
+    #
+    class AddUserPoolClientSecretResponse < Struct.new(
+      :client_secret_descriptor)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] user_pool_id
     #   The ID of the user pool that contains the group that you want to add
     #   the user to.
@@ -230,20 +287,19 @@ module Aws::CognitoIdentityProvider
     #
     # @!attribute [rw] client_metadata
     #   A map of custom key-value pairs that you can provide as input for
-    #   any custom workflows that this action triggers.
+    #   any custom workflows that this action triggers. You create custom
+    #   workflows by assigning Lambda functions to user pool triggers.
     #
-    #   If your user pool configuration includes triggers, the
-    #   AdminConfirmSignUp API action invokes the Lambda function that is
-    #   specified for the *post confirmation* trigger. When Amazon Cognito
-    #   invokes this function, it passes a JSON payload, which the function
-    #   receives as input. In this payload, the `clientMetadata` attribute
-    #   provides the data that you assigned to the ClientMetadata parameter
-    #   in your AdminConfirmSignUp request. In your function code in Lambda,
-    #   you can process the ClientMetadata value to enhance your workflow
-    #   for your specific needs.
+    #   When Amazon Cognito invokes any of these functions, it passes a JSON
+    #   payload, which the function receives as input. This payload contains
+    #   a `clientMetadata` attribute that provides the data that you
+    #   assigned to the ClientMetadata parameter in your request. In your
+    #   function code, you can process the `clientMetadata` value to enhance
+    #   your workflow for your specific needs.
     #
-    #   For more information, see [ Using Lambda triggers][1] in the *Amazon
-    #   Cognito Developer Guide*.
+    #   To review the Lambda trigger types that Amazon Cognito invokes at
+    #   runtime with API requests, see [ Connecting API actions to Lambda
+    #   triggers][1] in the *Amazon Cognito Developer Guide*.
     #
     #   <note markdown="1"> When you use the `ClientMetadata` parameter, note that Amazon
     #   Cognito won't do the following:
@@ -262,7 +318,7 @@ module Aws::CognitoIdentityProvider
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-working-with-aws-lambda-triggers.html
+    #   [1]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-working-with-lambda-triggers.html#lambda-triggers-by-event
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminConfirmSignUpRequest AWS API Documentation
@@ -472,21 +528,19 @@ module Aws::CognitoIdentityProvider
     #
     # @!attribute [rw] client_metadata
     #   A map of custom key-value pairs that you can provide as input for
-    #   any custom workflows that this action triggers.
+    #   any custom workflows that this action triggers. You create custom
+    #   workflows by assigning Lambda functions to user pool triggers.
     #
-    #   You create custom workflows by assigning Lambda functions to user
-    #   pool triggers. When you use the AdminCreateUser API action, Amazon
-    #   Cognito invokes the function that is assigned to the *pre sign-up*
-    #   trigger. When Amazon Cognito invokes this function, it passes a JSON
+    #   When Amazon Cognito invokes any of these functions, it passes a JSON
     #   payload, which the function receives as input. This payload contains
-    #   a `ClientMetadata` attribute, which provides the data that you
-    #   assigned to the ClientMetadata parameter in your AdminCreateUser
-    #   request. In your function code in Lambda, you can process the
-    #   `clientMetadata` value to enhance your workflow for your specific
-    #   needs.
+    #   a `clientMetadata` attribute that provides the data that you
+    #   assigned to the ClientMetadata parameter in your request. In your
+    #   function code, you can process the `clientMetadata` value to enhance
+    #   your workflow for your specific needs.
     #
-    #   For more information, see [ Using Lambda triggers][1] in the *Amazon
-    #   Cognito Developer Guide*.
+    #   To review the Lambda trigger types that Amazon Cognito invokes at
+    #   runtime with API requests, see [ Connecting API actions to Lambda
+    #   triggers][1] in the *Amazon Cognito Developer Guide*.
     #
     #   <note markdown="1"> When you use the `ClientMetadata` parameter, note that Amazon
     #   Cognito won't do the following:
@@ -505,7 +559,7 @@ module Aws::CognitoIdentityProvider
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-working-with-aws-lambda-triggers.html
+    #   [1]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-working-with-lambda-triggers.html#lambda-triggers-by-event
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminCreateUserRequest AWS API Documentation
@@ -977,13 +1031,22 @@ module Aws::CognitoIdentityProvider
     #
     # @!attribute [rw] client_metadata
     #   A map of custom key-value pairs that you can provide as input for
-    #   certain custom workflows that this action triggers.
+    #   any custom workflows that this action triggers. You create custom
+    #   workflows by assigning Lambda functions to user pool triggers.
     #
-    #   You create custom workflows by assigning Lambda functions to user
-    #   pool triggers. When you use the AdminInitiateAuth API action, Amazon
-    #   Cognito invokes the Lambda functions that are specified for various
-    #   triggers. The ClientMetadata value is passed as input to the
-    #   functions for only the following triggers:
+    #   When Amazon Cognito invokes any of these functions, it passes a JSON
+    #   payload, which the function receives as input. This payload contains
+    #   a `clientMetadata` attribute that provides the data that you
+    #   assigned to the ClientMetadata parameter in your request. In your
+    #   function code, you can process the `clientMetadata` value to enhance
+    #   your workflow for your specific needs.
+    #
+    #   To review the Lambda trigger types that Amazon Cognito invokes at
+    #   runtime with API requests, see [ Connecting API actions to Lambda
+    #   triggers][1] in the *Amazon Cognito Developer Guide*.
+    #
+    #   The `ClientMetadata` value is passed as input to the functions for
+    #   only the following triggers:
     #
     #   * Pre signup
     #
@@ -991,17 +1054,8 @@ module Aws::CognitoIdentityProvider
     #
     #   * User migration
     #
-    #   When Amazon Cognito invokes the functions for these triggers, it
-    #   passes a JSON payload, which the function receives as input. This
-    #   payload contains a `validationData` attribute, which provides the
-    #   data that you assigned to the ClientMetadata parameter in your
-    #   AdminInitiateAuth request. In your function code in Lambda, you can
-    #   process the `validationData` value to enhance your workflow for your
-    #   specific needs.
-    #
-    #   When you use the AdminInitiateAuth API action, Amazon Cognito also
-    #   invokes the functions for the following triggers, but it doesn't
-    #   provide the ClientMetadata value as input:
+    #   This request also invokes the functions for the following triggers,
+    #   but doesn't pass `ClientMetadata`:
     #
     #   * Post authentication
     #
@@ -1016,9 +1070,6 @@ module Aws::CognitoIdentityProvider
     #   * Custom email sender
     #
     #   * Custom SMS sender
-    #
-    #   For more information, see [ Using Lambda triggers][1] in the *Amazon
-    #   Cognito Developer Guide*.
     #
     #   <note markdown="1"> When you use the `ClientMetadata` parameter, note that Amazon
     #   Cognito won't do the following:
@@ -1037,7 +1088,7 @@ module Aws::CognitoIdentityProvider
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-working-with-aws-lambda-triggers.html
+    #   [1]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-working-with-lambda-triggers.html#lambda-triggers-by-event
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] analytics_metadata
@@ -1548,21 +1599,19 @@ module Aws::CognitoIdentityProvider
     #
     # @!attribute [rw] client_metadata
     #   A map of custom key-value pairs that you can provide as input for
-    #   any custom workflows that this action triggers.
+    #   any custom workflows that this action triggers. You create custom
+    #   workflows by assigning Lambda functions to user pool triggers.
     #
-    #   You create custom workflows by assigning Lambda functions to user
-    #   pool triggers. The `AdminResetUserPassword` API operation invokes
-    #   the function that is assigned to the *custom message* trigger. When
-    #   Amazon Cognito invokes this function, it passes a JSON payload,
-    #   which the function receives as input. This payload contains a
-    #   `clientMetadata` attribute, which provides the data that you
-    #   assigned to the ClientMetadata parameter in your
-    #   AdminResetUserPassword request. In your function code in Lambda, you
-    #   can process the `clientMetadata` value to enhance your workflow for
-    #   your specific needs.
+    #   When Amazon Cognito invokes any of these functions, it passes a JSON
+    #   payload, which the function receives as input. This payload contains
+    #   a `clientMetadata` attribute that provides the data that you
+    #   assigned to the ClientMetadata parameter in your request. In your
+    #   function code, you can process the `clientMetadata` value to enhance
+    #   your workflow for your specific needs.
     #
-    #   For more information, see [ Using Lambda triggers][1] in the *Amazon
-    #   Cognito Developer Guide*.
+    #   To review the Lambda trigger types that Amazon Cognito invokes at
+    #   runtime with API requests, see [ Connecting API actions to Lambda
+    #   triggers][1] in the *Amazon Cognito Developer Guide*.
     #
     #   <note markdown="1"> When you use the `ClientMetadata` parameter, note that Amazon
     #   Cognito won't do the following:
@@ -1581,7 +1630,7 @@ module Aws::CognitoIdentityProvider
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-working-with-aws-lambda-triggers.html
+    #   [1]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-working-with-lambda-triggers.html#lambda-triggers-by-event
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminResetUserPasswordRequest AWS API Documentation
@@ -1901,39 +1950,19 @@ module Aws::CognitoIdentityProvider
     #
     # @!attribute [rw] client_metadata
     #   A map of custom key-value pairs that you can provide as input for
-    #   any custom workflows that this action triggers.
-    #
-    #   You create custom workflows by assigning Lambda functions to user
-    #   pool triggers. When you use the AdminRespondToAuthChallenge API
-    #   action, Amazon Cognito invokes any functions that you have assigned
-    #   to the following triggers:
-    #
-    #   * Pre sign-up
-    #
-    #   * custom message
-    #
-    #   * Post authentication
-    #
-    #   * User migration
-    #
-    #   * Pre token generation
-    #
-    #   * Define auth challenge
-    #
-    #   * Create auth challenge
-    #
-    #   * Verify auth challenge response
+    #   any custom workflows that this action triggers. You create custom
+    #   workflows by assigning Lambda functions to user pool triggers.
     #
     #   When Amazon Cognito invokes any of these functions, it passes a JSON
     #   payload, which the function receives as input. This payload contains
     #   a `clientMetadata` attribute that provides the data that you
-    #   assigned to the ClientMetadata parameter in your
-    #   AdminRespondToAuthChallenge request. In your function code in
-    #   Lambda, you can process the `clientMetadata` value to enhance your
-    #   workflow for your specific needs.
+    #   assigned to the ClientMetadata parameter in your request. In your
+    #   function code, you can process the `clientMetadata` value to enhance
+    #   your workflow for your specific needs.
     #
-    #   For more information, see [ Using Lambda triggers][1] in the *Amazon
-    #   Cognito Developer Guide*.
+    #   To review the Lambda trigger types that Amazon Cognito invokes at
+    #   runtime with API requests, see [ Connecting API actions to Lambda
+    #   triggers][1] in the *Amazon Cognito Developer Guide*.
     #
     #   <note markdown="1"> When you use the `ClientMetadata` parameter, note that Amazon
     #   Cognito won't do the following:
@@ -1952,7 +1981,7 @@ module Aws::CognitoIdentityProvider
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-working-with-aws-lambda-triggers.html
+    #   [1]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-working-with-lambda-triggers.html#lambda-triggers-by-event
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminRespondToAuthChallengeRequest AWS API Documentation
@@ -2110,9 +2139,7 @@ module Aws::CognitoIdentityProvider
     # @!attribute [rw] software_token_mfa_settings
     #   User preferences for time-based one-time password (TOTP) MFA.
     #   Activates or deactivates TOTP MFA and sets it as the preferred MFA
-    #   method when multiple methods are available. This operation can set
-    #   TOTP as a user's preferred MFA method before they register a TOTP
-    #   authenticator.
+    #   method when multiple methods are available.
     #   @return [Types::SoftwareTokenMfaSettingsType]
     #
     # @!attribute [rw] email_mfa_settings
@@ -2359,21 +2386,19 @@ module Aws::CognitoIdentityProvider
     #
     # @!attribute [rw] client_metadata
     #   A map of custom key-value pairs that you can provide as input for
-    #   any custom workflows that this action triggers.
+    #   any custom workflows that this action triggers. You create custom
+    #   workflows by assigning Lambda functions to user pool triggers.
     #
-    #   You create custom workflows by assigning Lambda functions to user
-    #   pool triggers. When you use the AdminUpdateUserAttributes API
-    #   action, Amazon Cognito invokes the function that is assigned to the
-    #   *custom message* trigger. When Amazon Cognito invokes this function,
-    #   it passes a JSON payload, which the function receives as input. This
-    #   payload contains a `clientMetadata` attribute, which provides the
-    #   data that you assigned to the ClientMetadata parameter in your
-    #   AdminUpdateUserAttributes request. In your function code in Lambda,
-    #   you can process the `clientMetadata` value to enhance your workflow
-    #   for your specific needs.
+    #   When Amazon Cognito invokes any of these functions, it passes a JSON
+    #   payload, which the function receives as input. This payload contains
+    #   a `clientMetadata` attribute that provides the data that you
+    #   assigned to the ClientMetadata parameter in your request. In your
+    #   function code, you can process the `clientMetadata` value to enhance
+    #   your workflow for your specific needs.
     #
-    #   For more information, see [ Using Lambda triggers][1] in the *Amazon
-    #   Cognito Developer Guide*.
+    #   To review the Lambda trigger types that Amazon Cognito invokes at
+    #   runtime with API requests, see [ Connecting API actions to Lambda
+    #   triggers][1] in the *Amazon Cognito Developer Guide*.
     #
     #   <note markdown="1"> When you use the `ClientMetadata` parameter, note that Amazon
     #   Cognito won't do the following:
@@ -2392,7 +2417,7 @@ module Aws::CognitoIdentityProvider
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-working-with-aws-lambda-triggers.html
+    #   [1]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-working-with-lambda-triggers.html#lambda-triggers-by-event
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminUpdateUserAttributesRequest AWS API Documentation
@@ -2654,7 +2679,19 @@ module Aws::CognitoIdentityProvider
     # The name and value of a user attribute.
     #
     # @!attribute [rw] name
-    #   The name of the attribute.
+    #   The name of the attribute, for example `email` or
+    #   `custom:department`.
+    #
+    #   In some older user pools, the regex pattern for acceptable values of
+    #   this parameter is `[\p{L}\p{M}\p{S}\p{N}\p{P}]+`. Older pools will
+    #   eventually be updated to use the new pattern. Affected user pools
+    #   are those created before May 2024 in US East (N. Virginia), US East
+    #   (Ohio), US West (N. California), US West (Oregon), Asia Pacific
+    #   (Mumbai), Asia Pacific (Tokyo), Asia Pacific (Seoul), Asia Pacific
+    #   (Singapore), Asia Pacific (Sydney), Canada (Central), Europe
+    #   (Frankfurt), Europe (Ireland), Europe (London), Europe (Paris),
+    #   Europe (Stockholm), Middle East (Bahrain), and South America (São
+    #   Paulo).
     #   @return [String]
     #
     # @!attribute [rw] value
@@ -2984,6 +3021,35 @@ module Aws::CognitoIdentityProvider
     #
     class ChangePasswordResponse < Aws::EmptyStructure; end
 
+    # Contains information about a client secret, including its unique
+    # identifier, value, and creation timestamp.
+    #
+    # @!attribute [rw] client_secret_id
+    #   The unique identifier for the client secret. This identifier follows
+    #   the format &lt;client-id&gt;--&lt;epoch-create-time&gt;.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_secret_value
+    #   The actual secret value. This is only returned when creating a new
+    #   secret and only if Amazon Cognito generated the secret. For custom
+    #   secrets that you provide, this field is not included in the
+    #   response.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_secret_create_date
+    #   The date and time when the client secret was created.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ClientSecretDescriptorType AWS API Documentation
+    #
+    class ClientSecretDescriptorType < Struct.new(
+      :client_secret_id,
+      :client_secret_value,
+      :client_secret_create_date)
+      SENSITIVE = [:client_secret_value]
+      include Aws::Structure
+    end
+
     # Configuration for the CloudWatch log group destination of user pool
     # detailed activity logging, or of user activity log export with threat
     # protection.
@@ -3267,21 +3333,19 @@ module Aws::CognitoIdentityProvider
     #
     # @!attribute [rw] client_metadata
     #   A map of custom key-value pairs that you can provide as input for
-    #   any custom workflows that this action triggers.
+    #   any custom workflows that this action triggers. You create custom
+    #   workflows by assigning Lambda functions to user pool triggers.
     #
-    #   You create custom workflows by assigning Lambda functions to user
-    #   pool triggers. When you use the ConfirmForgotPassword API action,
-    #   Amazon Cognito invokes the function that is assigned to the *post
-    #   confirmation* trigger. When Amazon Cognito invokes this function, it
-    #   passes a JSON payload, which the function receives as input. This
-    #   payload contains a `clientMetadata` attribute, which provides the
-    #   data that you assigned to the ClientMetadata parameter in your
-    #   ConfirmForgotPassword request. In your function code in Lambda, you
-    #   can process the `clientMetadata` value to enhance your workflow for
-    #   your specific needs.
+    #   When Amazon Cognito invokes any of these functions, it passes a JSON
+    #   payload, which the function receives as input. This payload contains
+    #   a `clientMetadata` attribute that provides the data that you
+    #   assigned to the ClientMetadata parameter in your request. In your
+    #   function code, you can process the `clientMetadata` value to enhance
+    #   your workflow for your specific needs.
     #
-    #   For more information, see [ Using Lambda triggers][1] in the *Amazon
-    #   Cognito Developer Guide*.
+    #   To review the Lambda trigger types that Amazon Cognito invokes at
+    #   runtime with API requests, see [ Connecting API actions to Lambda
+    #   triggers][1] in the *Amazon Cognito Developer Guide*.
     #
     #   <note markdown="1"> When you use the `ClientMetadata` parameter, note that Amazon
     #   Cognito won't do the following:
@@ -3300,7 +3364,7 @@ module Aws::CognitoIdentityProvider
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-working-with-aws-lambda-triggers.html
+    #   [1]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-working-with-lambda-triggers.html#lambda-triggers-by-event
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ConfirmForgotPasswordRequest AWS API Documentation
@@ -3403,21 +3467,19 @@ module Aws::CognitoIdentityProvider
     #
     # @!attribute [rw] client_metadata
     #   A map of custom key-value pairs that you can provide as input for
-    #   any custom workflows that this action triggers.
+    #   any custom workflows that this action triggers. You create custom
+    #   workflows by assigning Lambda functions to user pool triggers.
     #
-    #   You create custom workflows by assigning Lambda functions to user
-    #   pool triggers. When you use the ConfirmSignUp API action, Amazon
-    #   Cognito invokes the function that is assigned to the *post
-    #   confirmation* trigger. When Amazon Cognito invokes this function, it
-    #   passes a JSON payload, which the function receives as input. This
-    #   payload contains a `clientMetadata` attribute, which provides the
-    #   data that you assigned to the ClientMetadata parameter in your
-    #   ConfirmSignUp request. In your function code in Lambda, you can
-    #   process the `clientMetadata` value to enhance your workflow for your
-    #   specific needs.
+    #   When Amazon Cognito invokes any of these functions, it passes a JSON
+    #   payload, which the function receives as input. This payload contains
+    #   a `clientMetadata` attribute that provides the data that you
+    #   assigned to the ClientMetadata parameter in your request. In your
+    #   function code, you can process the `clientMetadata` value to enhance
+    #   your workflow for your specific needs.
     #
-    #   For more information, see [ Using Lambda triggers][1] in the *Amazon
-    #   Cognito Developer Guide*.
+    #   To review the Lambda trigger types that Amazon Cognito invokes at
+    #   runtime with API requests, see [ Connecting API actions to Lambda
+    #   triggers][1] in the *Amazon Cognito Developer Guide*.
     #
     #   <note markdown="1"> When you use the `ClientMetadata` parameter, note that Amazon
     #   Cognito won't do the following:
@@ -3436,7 +3498,7 @@ module Aws::CognitoIdentityProvider
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-working-with-aws-lambda-triggers.html
+    #   [1]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-working-with-lambda-triggers.html#lambda-triggers-by-event
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] session
@@ -4023,6 +4085,12 @@ module Aws::CognitoIdentityProvider
     #   [1]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-settings-client-apps.html#user-pool-settings-client-app-client-types
     #   @return [Boolean]
     #
+    # @!attribute [rw] client_secret
+    #   A custom client secret that you want to use for the app client. You
+    #   cannot specify both GenerateSecret as true and provide a
+    #   ClientSecret value.
+    #   @return [String]
+    #
     # @!attribute [rw] refresh_token_validity
     #   The refresh token time limit. After this limit expires, your user
     #   can't use their refresh token. To specify the time unit for
@@ -4223,10 +4291,12 @@ module Aws::CognitoIdentityProvider
     #
     #   See [OAuth 2.0 - Redirection Endpoint][1].
     #
-    #   Amazon Cognito requires HTTPS over HTTP except for http://localhost
-    #   for testing purposes only.
+    #   Amazon Cognito requires HTTPS over HTTP except for callback URLs to
+    #   `http://localhost`, `http://127.0.0.1` and `http://[::1]`. These
+    #   callback URLs are for testing purposes only. You can specify custom
+    #   TCP ports for your callback URLs.
     #
-    #   App callback URLs such as myapp://example are also supported.
+    #   App callback URLs such as `myapp://example` are also supported.
     #
     #
     #
@@ -4391,6 +4461,7 @@ module Aws::CognitoIdentityProvider
       :user_pool_id,
       :client_name,
       :generate_secret,
+      :client_secret,
       :refresh_token_validity,
       :access_token_validity,
       :id_token_validity,
@@ -4411,7 +4482,7 @@ module Aws::CognitoIdentityProvider
       :enable_propagate_additional_user_context_data,
       :auth_session_validity,
       :refresh_token_rotation)
-      SENSITIVE = []
+      SENSITIVE = [:client_secret]
       include Aws::Structure
     end
 
@@ -5007,6 +5078,37 @@ module Aws::CognitoIdentityProvider
       SENSITIVE = [:client_id]
       include Aws::Structure
     end
+
+    # The request to delete a specific client secret from a user pool app
+    # client.
+    #
+    # @!attribute [rw] user_pool_id
+    #   The ID of the user pool that contains the app client.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_id
+    #   The ID of the app client from which you want to delete the secret.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_secret_id
+    #   The unique identifier of the client secret you want to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DeleteUserPoolClientSecretRequest AWS API Documentation
+    #
+    class DeleteUserPoolClientSecretRequest < Struct.new(
+      :user_pool_id,
+      :client_id,
+      :client_secret_id)
+      SENSITIVE = [:client_id]
+      include Aws::Structure
+    end
+
+    # The response from deleting a client secret.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DeleteUserPoolClientSecretResponse AWS API Documentation
+    #
+    class DeleteUserPoolClientSecretResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] domain
     #   The domain that you want to delete. For custom domains, this is the
@@ -6082,22 +6184,19 @@ module Aws::CognitoIdentityProvider
     #
     # @!attribute [rw] client_metadata
     #   A map of custom key-value pairs that you can provide as input for
-    #   any custom workflows that this action triggers.
+    #   any custom workflows that this action triggers. You create custom
+    #   workflows by assigning Lambda functions to user pool triggers.
     #
-    #   You create custom workflows by assigning Lambda functions to user
-    #   pool triggers. When you use the ForgotPassword API action, Amazon
-    #   Cognito invokes any functions that are assigned to the following
-    #   triggers: *pre sign-up*, *custom message*, and *user migration*.
     #   When Amazon Cognito invokes any of these functions, it passes a JSON
     #   payload, which the function receives as input. This payload contains
-    #   a `clientMetadata` attribute, which provides the data that you
-    #   assigned to the ClientMetadata parameter in your ForgotPassword
-    #   request. In your function code in Lambda, you can process the
-    #   `clientMetadata` value to enhance your workflow for your specific
-    #   needs.
+    #   a `clientMetadata` attribute that provides the data that you
+    #   assigned to the ClientMetadata parameter in your request. In your
+    #   function code, you can process the `clientMetadata` value to enhance
+    #   your workflow for your specific needs.
     #
-    #   For more information, see [ Using Lambda triggers][1] in the *Amazon
-    #   Cognito Developer Guide*.
+    #   To review the Lambda trigger types that Amazon Cognito invokes at
+    #   runtime with API requests, see [ Connecting API actions to Lambda
+    #   triggers][1] in the *Amazon Cognito Developer Guide*.
     #
     #   <note markdown="1"> When you use the `ClientMetadata` parameter, note that Amazon
     #   Cognito won't do the following:
@@ -6116,7 +6215,7 @@ module Aws::CognitoIdentityProvider
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-working-with-aws-lambda-triggers.html
+    #   [1]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-working-with-lambda-triggers.html#lambda-triggers-by-event
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ForgotPasswordRequest AWS API Documentation
@@ -6380,15 +6479,19 @@ module Aws::CognitoIdentityProvider
     #
     # @!attribute [rw] client_metadata
     #   A map of custom key-value pairs that you can provide as input for
-    #   certain custom workflows that this action triggers.
+    #   any custom workflows that this action triggers. You create custom
+    #   workflows by assigning Lambda functions to user pool triggers.
     #
-    #   You create custom workflows by assigning Lambda functions to user
-    #   pool triggers. When you use the `GetTokensFromRefreshToken` API
-    #   action, Amazon Cognito invokes the Lambda function the pre token
-    #   generation trigger.
+    #   When Amazon Cognito invokes any of these functions, it passes a JSON
+    #   payload, which the function receives as input. This payload contains
+    #   a `clientMetadata` attribute that provides the data that you
+    #   assigned to the ClientMetadata parameter in your request. In your
+    #   function code, you can process the `clientMetadata` value to enhance
+    #   your workflow for your specific needs.
     #
-    #   For more information, see [ Using Lambda triggers][1] in the *Amazon
-    #   Cognito Developer Guide*.
+    #   To review the Lambda trigger types that Amazon Cognito invokes at
+    #   runtime with API requests, see [ Connecting API actions to Lambda
+    #   triggers][1] in the *Amazon Cognito Developer Guide*.
     #
     #   <note markdown="1"> When you use the `ClientMetadata` parameter, note that Amazon
     #   Cognito won't do the following:
@@ -6407,7 +6510,7 @@ module Aws::CognitoIdentityProvider
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-working-with-aws-lambda-triggers.html
+    #   [1]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-working-with-lambda-triggers.html#lambda-triggers-by-event
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/GetTokensFromRefreshTokenRequest AWS API Documentation
@@ -6482,21 +6585,19 @@ module Aws::CognitoIdentityProvider
     #
     # @!attribute [rw] client_metadata
     #   A map of custom key-value pairs that you can provide as input for
-    #   any custom workflows that this action triggers.
+    #   any custom workflows that this action triggers. You create custom
+    #   workflows by assigning Lambda functions to user pool triggers.
     #
-    #   You create custom workflows by assigning Lambda functions to user
-    #   pool triggers. When you use the GetUserAttributeVerificationCode API
-    #   action, Amazon Cognito invokes the function that is assigned to the
-    #   *custom message* trigger. When Amazon Cognito invokes this function,
-    #   it passes a JSON payload, which the function receives as input. This
-    #   payload contains a `clientMetadata` attribute, which provides the
-    #   data that you assigned to the ClientMetadata parameter in your
-    #   GetUserAttributeVerificationCode request. In your function code in
-    #   Lambda, you can process the `clientMetadata` value to enhance your
-    #   workflow for your specific needs.
+    #   When Amazon Cognito invokes any of these functions, it passes a JSON
+    #   payload, which the function receives as input. This payload contains
+    #   a `clientMetadata` attribute that provides the data that you
+    #   assigned to the ClientMetadata parameter in your request. In your
+    #   function code, you can process the `clientMetadata` value to enhance
+    #   your workflow for your specific needs.
     #
-    #   For more information, see [ Using Lambda triggers][1] in the *Amazon
-    #   Cognito Developer Guide*.
+    #   To review the Lambda trigger types that Amazon Cognito invokes at
+    #   runtime with API requests, see [ Connecting API actions to Lambda
+    #   triggers][1] in the *Amazon Cognito Developer Guide*.
     #
     #   <note markdown="1"> When you use the `ClientMetadata` parameter, note that Amazon
     #   Cognito won't do the following:
@@ -6515,7 +6616,7 @@ module Aws::CognitoIdentityProvider
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-working-with-aws-lambda-triggers.html
+    #   [1]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-working-with-lambda-triggers.html#lambda-triggers-by-event
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/GetUserAttributeVerificationCodeRequest AWS API Documentation
@@ -7175,29 +7276,31 @@ module Aws::CognitoIdentityProvider
     #
     # @!attribute [rw] client_metadata
     #   A map of custom key-value pairs that you can provide as input for
-    #   certain custom workflows that this action triggers.
+    #   any custom workflows that this action triggers. You create custom
+    #   workflows by assigning Lambda functions to user pool triggers.
     #
-    #   You create custom workflows by assigning Lambda functions to user
-    #   pool triggers. When you send an `InitiateAuth` request, Amazon
-    #   Cognito invokes the Lambda functions that are specified for various
-    #   triggers. The `ClientMetadata` value is passed as input to the
-    #   functions for only the following triggers.
+    #   When Amazon Cognito invokes any of these functions, it passes a JSON
+    #   payload, which the function receives as input. This payload contains
+    #   a `clientMetadata` attribute that provides the data that you
+    #   assigned to the ClientMetadata parameter in your request. In your
+    #   function code, you can process the `clientMetadata` value to enhance
+    #   your workflow for your specific needs.
     #
-    #   * Pre sign-up
+    #   To review the Lambda trigger types that Amazon Cognito invokes at
+    #   runtime with API requests, see [ Connecting API actions to Lambda
+    #   triggers][1] in the *Amazon Cognito Developer Guide*.
+    #
+    #   The `ClientMetadata` value is passed as input to the functions for
+    #   only the following triggers:
+    #
+    #   * Pre signup
     #
     #   * Pre authentication
     #
     #   * User migration
     #
-    #   When Amazon Cognito invokes the functions for these triggers, it
-    #   passes a JSON payload as input to the function. This payload
-    #   contains a `validationData` attribute with the data that you
-    #   assigned to the `ClientMetadata` parameter in your `InitiateAuth`
-    #   request. In your function, `validationData` can contribute to
-    #   operations that require data that isn't in the default payload.
-    #
-    #   `InitiateAuth` requests invokes the following triggers without
-    #   `ClientMetadata` as input.
+    #   This request also invokes the functions for the following triggers,
+    #   but doesn't pass `ClientMetadata`:
     #
     #   * Post authentication
     #
@@ -7212,9 +7315,6 @@ module Aws::CognitoIdentityProvider
     #   * Custom email sender
     #
     #   * Custom SMS sender
-    #
-    #   For more information, see [ Using Lambda triggers][1] in the *Amazon
-    #   Cognito Developer Guide*.
     #
     #   <note markdown="1"> When you use the `ClientMetadata` parameter, note that Amazon
     #   Cognito won't do the following:
@@ -7233,7 +7333,7 @@ module Aws::CognitoIdentityProvider
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-working-with-aws-lambda-triggers.html
+    #   [1]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-working-with-lambda-triggers.html#lambda-triggers-by-event
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] client_id
@@ -7445,6 +7545,20 @@ module Aws::CognitoIdentityProvider
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/InternalErrorException AWS API Documentation
     #
     class InternalErrorException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # This exception is thrown when Amazon Cognito encounters an internal
+    # server error.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/InternalServerException AWS API Documentation
+    #
+    class InternalServerException < Struct.new(
       :message)
       SENSITIVE = []
       include Aws::Structure
@@ -8114,6 +8228,63 @@ module Aws::CognitoIdentityProvider
       include Aws::Structure
     end
 
+    # The request to list client secrets for a user pool app client.
+    #
+    # @!attribute [rw] user_pool_id
+    #   The ID of the user pool that contains the app client.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_id
+    #   The ID of the app client whose secrets you want to list.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   This API operation returns a limited number of results. The
+    #   pagination token is an identifier that you can present in an
+    #   additional API request with the same parameters. When you include
+    #   the pagination token, Amazon Cognito returns the next set of items
+    #   after the current list. Subsequent requests return a new pagination
+    #   token. By use of this token, you can paginate through the full list
+    #   of items.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ListUserPoolClientSecretsRequest AWS API Documentation
+    #
+    class ListUserPoolClientSecretsRequest < Struct.new(
+      :user_pool_id,
+      :client_id,
+      :next_token)
+      SENSITIVE = [:client_id]
+      include Aws::Structure
+    end
+
+    # The response containing the list of client secret metadata. This
+    # response does not include a NextToken field as all secrets are
+    # returned in a single response.
+    #
+    # @!attribute [rw] client_secrets
+    #   A list of client secret descriptors containing the identifier and
+    #   creation date for each secret. For security reasons, the response
+    #   never reveals the actual secret value in ClientSecretValue.
+    #   @return [Array<Types::ClientSecretDescriptorType>]
+    #
+    # @!attribute [rw] next_token
+    #   The identifier that Amazon Cognito returned with the previous
+    #   request to this operation. When you include a pagination token in
+    #   your request, Amazon Cognito returns the next set of items in the
+    #   list. By use of this token, you can paginate through the full list
+    #   of items.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ListUserPoolClientSecretsResponse AWS API Documentation
+    #
+    class ListUserPoolClientSecretsResponse < Struct.new(
+      :client_secrets,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Represents the request to list the user pool clients.
     #
     # @!attribute [rw] user_pool_id
@@ -8229,7 +8400,10 @@ module Aws::CognitoIdentityProvider
     #
     # @!attribute [rw] limit
     #   The maximum number of groups that you want Amazon Cognito to return
-    #   in the response.
+    #   in the response. In some SDK contexts, this operation might return
+    #   fewer items than you specify in the `Limit` parameter without having
+    #   reached the end of the full list. If the response contains a
+    #   `PaginationToken`, then there are more results.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
@@ -8298,7 +8472,10 @@ module Aws::CognitoIdentityProvider
     #
     # @!attribute [rw] limit
     #   The maximum number of users that you want Amazon Cognito to return
-    #   in the response.
+    #   in the response. In some SDK contexts, this operation might return
+    #   fewer items than you specify in the `Limit` parameter without having
+    #   reached the end of the full list. If the response contains a
+    #   `PaginationToken`, then there are more results.
     #   @return [Integer]
     #
     # @!attribute [rw] pagination_token
@@ -8397,7 +8574,11 @@ module Aws::CognitoIdentityProvider
     #
     # @!attribute [rw] users
     #   An array of user pool users who match your query, and their
-    #   attributes.
+    #   attributes. Between different requests, you might observe variations
+    #   in the sequence that users in this response object are sorted into.
+    #   The sort order of users isn't guaranteed to follow a single
+    #   pattern, but the paginated list from a single chain of requests
+    #   won't return duplicates.
     #   @return [Array<Types::UserType>]
     #
     # @!attribute [rw] pagination_token
@@ -8770,7 +8951,9 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     #
     # @!attribute [rw] reply_to
-    #   The reply-to email address of an email template.
+    #   The reply-to email address of an email template. Can be an email
+    #   address in the format `admin@example.com` or `Administrator
+    #   <admin@example.com>`.
     #   @return [String]
     #
     # @!attribute [rw] source_arn
@@ -9176,21 +9359,19 @@ module Aws::CognitoIdentityProvider
     #
     # @!attribute [rw] client_metadata
     #   A map of custom key-value pairs that you can provide as input for
-    #   any custom workflows that this action triggers.
+    #   any custom workflows that this action triggers. You create custom
+    #   workflows by assigning Lambda functions to user pool triggers.
     #
-    #   You create custom workflows by assigning Lambda functions to user
-    #   pool triggers. When you use the ResendConfirmationCode API action,
-    #   Amazon Cognito invokes the function that is assigned to the *custom
-    #   message* trigger. When Amazon Cognito invokes this function, it
-    #   passes a JSON payload, which the function receives as input. This
-    #   payload contains a `clientMetadata` attribute, which provides the
-    #   data that you assigned to the ClientMetadata parameter in your
-    #   ResendConfirmationCode request. In your function code in Lambda, you
-    #   can process the `clientMetadata` value to enhance your workflow for
-    #   your specific needs.
+    #   When Amazon Cognito invokes any of these functions, it passes a JSON
+    #   payload, which the function receives as input. This payload contains
+    #   a `clientMetadata` attribute that provides the data that you
+    #   assigned to the ClientMetadata parameter in your request. In your
+    #   function code, you can process the `clientMetadata` value to enhance
+    #   your workflow for your specific needs.
     #
-    #   For more information, see [ Using Lambda triggers][1] in the *Amazon
-    #   Cognito Developer Guide*.
+    #   To review the Lambda trigger types that Amazon Cognito invokes at
+    #   runtime with API requests, see [ Connecting API actions to Lambda
+    #   triggers][1] in the *Amazon Cognito Developer Guide*.
     #
     #   <note markdown="1"> When you use the `ClientMetadata` parameter, note that Amazon
     #   Cognito won't do the following:
@@ -9209,7 +9390,7 @@ module Aws::CognitoIdentityProvider
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-working-with-aws-lambda-triggers.html
+    #   [1]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-working-with-lambda-triggers.html#lambda-triggers-by-event
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ResendConfirmationCodeRequest AWS API Documentation
@@ -9624,23 +9805,19 @@ module Aws::CognitoIdentityProvider
     #
     # @!attribute [rw] client_metadata
     #   A map of custom key-value pairs that you can provide as input for
-    #   any custom workflows that this action triggers.
+    #   any custom workflows that this action triggers. You create custom
+    #   workflows by assigning Lambda functions to user pool triggers.
     #
-    #   You create custom workflows by assigning Lambda functions to user
-    #   pool triggers. When you use the RespondToAuthChallenge API action,
-    #   Amazon Cognito invokes any functions that are assigned to the
-    #   following triggers: *post authentication*, *pre token generation*,
-    #   *define auth challenge*, *create auth challenge*, and *verify auth
-    #   challenge*. When Amazon Cognito invokes any of these functions, it
-    #   passes a JSON payload, which the function receives as input. This
-    #   payload contains a `clientMetadata` attribute, which provides the
-    #   data that you assigned to the ClientMetadata parameter in your
-    #   RespondToAuthChallenge request. In your function code in Lambda, you
-    #   can process the `clientMetadata` value to enhance your workflow for
-    #   your specific needs.
+    #   When Amazon Cognito invokes any of these functions, it passes a JSON
+    #   payload, which the function receives as input. This payload contains
+    #   a `clientMetadata` attribute that provides the data that you
+    #   assigned to the ClientMetadata parameter in your request. In your
+    #   function code, you can process the `clientMetadata` value to enhance
+    #   your workflow for your specific needs.
     #
-    #   For more information, see [ Using Lambda triggers][1] in the *Amazon
-    #   Cognito Developer Guide*.
+    #   To review the Lambda trigger types that Amazon Cognito invokes at
+    #   runtime with API requests, see [ Connecting API actions to Lambda
+    #   triggers][1] in the *Amazon Cognito Developer Guide*.
     #
     #   <note markdown="1"> When you use the `ClientMetadata` parameter, note that Amazon
     #   Cognito won't do the following:
@@ -9659,7 +9836,7 @@ module Aws::CognitoIdentityProvider
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-working-with-aws-lambda-triggers.html
+    #   [1]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-working-with-lambda-triggers.html#lambda-triggers-by-event
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/RespondToAuthChallengeRequest AWS API Documentation
@@ -10500,21 +10677,19 @@ module Aws::CognitoIdentityProvider
     #
     # @!attribute [rw] client_metadata
     #   A map of custom key-value pairs that you can provide as input for
-    #   any custom workflows that this action triggers.
+    #   any custom workflows that this action triggers. You create custom
+    #   workflows by assigning Lambda functions to user pool triggers.
     #
-    #   You create custom workflows by assigning Lambda functions to user
-    #   pool triggers. When you use the SignUp API action, Amazon Cognito
-    #   invokes any functions that are assigned to the following triggers:
-    #   *pre sign-up*, *custom message*, and *post confirmation*. When
-    #   Amazon Cognito invokes any of these functions, it passes a JSON
+    #   When Amazon Cognito invokes any of these functions, it passes a JSON
     #   payload, which the function receives as input. This payload contains
-    #   a `clientMetadata` attribute, which provides the data that you
-    #   assigned to the ClientMetadata parameter in your SignUp request. In
-    #   your function code in Lambda, you can process the `clientMetadata`
-    #   value to enhance your workflow for your specific needs.
+    #   a `clientMetadata` attribute that provides the data that you
+    #   assigned to the ClientMetadata parameter in your request. In your
+    #   function code, you can process the `clientMetadata` value to enhance
+    #   your workflow for your specific needs.
     #
-    #   For more information, see [ Using Lambda triggers][1] in the *Amazon
-    #   Cognito Developer Guide*.
+    #   To review the Lambda trigger types that Amazon Cognito invokes at
+    #   runtime with API requests, see [ Connecting API actions to Lambda
+    #   triggers][1] in the *Amazon Cognito Developer Guide*.
     #
     #   <note markdown="1"> When you use the `ClientMetadata` parameter, note that Amazon
     #   Cognito won't do the following:
@@ -10533,7 +10708,7 @@ module Aws::CognitoIdentityProvider
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-working-with-aws-lambda-triggers.html
+    #   [1]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-working-with-lambda-triggers.html#lambda-triggers-by-event
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/SignUpRequest AWS API Documentation
@@ -11795,21 +11970,19 @@ module Aws::CognitoIdentityProvider
     #
     # @!attribute [rw] client_metadata
     #   A map of custom key-value pairs that you can provide as input for
-    #   any custom workflows that this action initiates.
+    #   any custom workflows that this action triggers. You create custom
+    #   workflows by assigning Lambda functions to user pool triggers.
     #
-    #   You create custom workflows by assigning Lambda functions to user
-    #   pool triggers. When you use the UpdateUserAttributes API action,
-    #   Amazon Cognito invokes the function that is assigned to the *custom
-    #   message* trigger. When Amazon Cognito invokes this function, it
-    #   passes a JSON payload, which the function receives as input. This
-    #   payload contains a `clientMetadata` attribute, which provides the
-    #   data that you assigned to the ClientMetadata parameter in your
-    #   UpdateUserAttributes request. In your function code in Lambda, you
-    #   can process the `clientMetadata` value to enhance your workflow for
-    #   your specific needs.
+    #   When Amazon Cognito invokes any of these functions, it passes a JSON
+    #   payload, which the function receives as input. This payload contains
+    #   a `clientMetadata` attribute that provides the data that you
+    #   assigned to the ClientMetadata parameter in your request. In your
+    #   function code, you can process the `clientMetadata` value to enhance
+    #   your workflow for your specific needs.
     #
-    #   For more information, see [ Using Lambda triggers][1] in the *Amazon
-    #   Cognito Developer Guide*.
+    #   To review the Lambda trigger types that Amazon Cognito invokes at
+    #   runtime with API requests, see [ Connecting API actions to Lambda
+    #   triggers][1] in the *Amazon Cognito Developer Guide*.
     #
     #   <note markdown="1"> When you use the `ClientMetadata` parameter, note that Amazon
     #   Cognito won't do the following:
@@ -11828,7 +12001,7 @@ module Aws::CognitoIdentityProvider
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-working-with-aws-lambda-triggers.html
+    #   [1]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-working-with-lambda-triggers.html#lambda-triggers-by-event
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UpdateUserAttributesRequest AWS API Documentation
@@ -13126,8 +13299,10 @@ module Aws::CognitoIdentityProvider
     #
     #   See [OAuth 2.0 - Redirection Endpoint][1].
     #
-    #   Amazon Cognito requires HTTPS over HTTP except for http://localhost
-    #   for testing purposes only.
+    #   Amazon Cognito requires HTTPS over HTTP for callback URLs to
+    #   `http://localhost`, `http://127.0.0.1` and `http://[::1]`. These
+    #   callback URLs are for testing purposes only. You can specify custom
+    #   TCP ports for your callback URLs.
     #
     #   App callback URLs such as myapp://example are also supported.
     #
@@ -13153,8 +13328,10 @@ module Aws::CognitoIdentityProvider
     #
     #   See [OAuth 2.0 - Redirection Endpoint][1].
     #
-    #   Amazon Cognito requires HTTPS over HTTP except for http://localhost
-    #   for testing purposes only.
+    #   Amazon Cognito requires HTTPS over HTTP for callback URLs to
+    #   `http://localhost`, `http://127.0.0.1` and `http://[::1]`. These
+    #   callback URLs are for testing purposes only. You can specify custom
+    #   TCP ports for your callback URLs.
     #
     #   App callback URLs such as myapp://example are also supported.
     #

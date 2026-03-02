@@ -670,8 +670,8 @@ module Aws::BackupGateway
     #
     # @return [Types::GetBandwidthRateLimitScheduleOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::GetBandwidthRateLimitScheduleOutput#bandwidth_rate_limit_intervals #bandwidth_rate_limit_intervals} => Array&lt;Types::BandwidthRateLimitInterval&gt;
     #   * {Types::GetBandwidthRateLimitScheduleOutput#gateway_arn #gateway_arn} => String
+    #   * {Types::GetBandwidthRateLimitScheduleOutput#bandwidth_rate_limit_intervals #bandwidth_rate_limit_intervals} => Array&lt;Types::BandwidthRateLimitInterval&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -681,15 +681,15 @@ module Aws::BackupGateway
     #
     # @example Response structure
     #
+    #   resp.gateway_arn #=> String
     #   resp.bandwidth_rate_limit_intervals #=> Array
     #   resp.bandwidth_rate_limit_intervals[0].average_upload_rate_limit_in_bits_per_sec #=> Integer
+    #   resp.bandwidth_rate_limit_intervals[0].start_hour_of_day #=> Integer
+    #   resp.bandwidth_rate_limit_intervals[0].end_hour_of_day #=> Integer
+    #   resp.bandwidth_rate_limit_intervals[0].start_minute_of_hour #=> Integer
+    #   resp.bandwidth_rate_limit_intervals[0].end_minute_of_hour #=> Integer
     #   resp.bandwidth_rate_limit_intervals[0].days_of_week #=> Array
     #   resp.bandwidth_rate_limit_intervals[0].days_of_week[0] #=> Integer
-    #   resp.bandwidth_rate_limit_intervals[0].end_hour_of_day #=> Integer
-    #   resp.bandwidth_rate_limit_intervals[0].end_minute_of_hour #=> Integer
-    #   resp.bandwidth_rate_limit_intervals[0].start_hour_of_day #=> Integer
-    #   resp.bandwidth_rate_limit_intervals[0].start_minute_of_hour #=> Integer
-    #   resp.gateway_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-gateway-2021-01-01/GetBandwidthRateLimitSchedule AWS API Documentation
     #
@@ -729,6 +729,8 @@ module Aws::BackupGateway
     #   resp.gateway.maintenance_start_time.minute_of_hour #=> Integer
     #   resp.gateway.next_update_availability_time #=> Time
     #   resp.gateway.vpc_endpoint #=> String
+    #   resp.gateway.deprecation_date #=> Time
+    #   resp.gateway.software_version #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-gateway-2021-01-01/GetGateway AWS API Documentation
     #
@@ -762,12 +764,12 @@ module Aws::BackupGateway
     #   resp.hypervisor.host #=> String
     #   resp.hypervisor.hypervisor_arn #=> String
     #   resp.hypervisor.kms_key_arn #=> String
-    #   resp.hypervisor.last_successful_metadata_sync_time #=> Time
-    #   resp.hypervisor.latest_metadata_sync_status #=> String, one of "CREATED", "RUNNING", "FAILED", "PARTIALLY_FAILED", "SUCCEEDED"
-    #   resp.hypervisor.latest_metadata_sync_status_message #=> String
-    #   resp.hypervisor.log_group_arn #=> String
     #   resp.hypervisor.name #=> String
+    #   resp.hypervisor.log_group_arn #=> String
     #   resp.hypervisor.state #=> String, one of "PENDING", "ONLINE", "OFFLINE", "ERROR"
+    #   resp.hypervisor.last_successful_metadata_sync_time #=> Time
+    #   resp.hypervisor.latest_metadata_sync_status_message #=> String
+    #   resp.hypervisor.latest_metadata_sync_status #=> String, one of "CREATED", "RUNNING", "FAILED", "PARTIALLY_FAILED", "SUCCEEDED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-gateway-2021-01-01/GetHypervisor AWS API Documentation
     #
@@ -780,8 +782,8 @@ module Aws::BackupGateway
 
     # This action retrieves the property mappings for the specified
     # hypervisor. A hypervisor property mapping displays the relationship of
-    # entity properties available from the on-premises hypervisor to the
-    # properties available in Amazon Web Services.
+    # entity properties available from the hypervisor to the properties
+    # available in Amazon Web Services.
     #
     # @option params [required, String] :hypervisor_arn
     #   The Amazon Resource Name (ARN) of the hypervisor.
@@ -789,8 +791,8 @@ module Aws::BackupGateway
     # @return [Types::GetHypervisorPropertyMappingsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetHypervisorPropertyMappingsOutput#hypervisor_arn #hypervisor_arn} => String
-    #   * {Types::GetHypervisorPropertyMappingsOutput#iam_role_arn #iam_role_arn} => String
     #   * {Types::GetHypervisorPropertyMappingsOutput#vmware_to_aws_tag_mappings #vmware_to_aws_tag_mappings} => Array&lt;Types::VmwareToAwsTagMapping&gt;
+    #   * {Types::GetHypervisorPropertyMappingsOutput#iam_role_arn #iam_role_arn} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -801,12 +803,12 @@ module Aws::BackupGateway
     # @example Response structure
     #
     #   resp.hypervisor_arn #=> String
-    #   resp.iam_role_arn #=> String
     #   resp.vmware_to_aws_tag_mappings #=> Array
-    #   resp.vmware_to_aws_tag_mappings[0].aws_tag_key #=> String
-    #   resp.vmware_to_aws_tag_mappings[0].aws_tag_value #=> String
     #   resp.vmware_to_aws_tag_mappings[0].vmware_category #=> String
     #   resp.vmware_to_aws_tag_mappings[0].vmware_tag_name #=> String
+    #   resp.vmware_to_aws_tag_mappings[0].aws_tag_key #=> String
+    #   resp.vmware_to_aws_tag_mappings[0].aws_tag_value #=> String
+    #   resp.iam_role_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-gateway-2021-01-01/GetHypervisorPropertyMappings AWS API Documentation
     #
@@ -837,14 +839,14 @@ module Aws::BackupGateway
     #
     #   resp.virtual_machine.host_name #=> String
     #   resp.virtual_machine.hypervisor_id #=> String
-    #   resp.virtual_machine.last_backup_date #=> Time
     #   resp.virtual_machine.name #=> String
     #   resp.virtual_machine.path #=> String
     #   resp.virtual_machine.resource_arn #=> String
+    #   resp.virtual_machine.last_backup_date #=> Time
     #   resp.virtual_machine.vmware_tags #=> Array
     #   resp.virtual_machine.vmware_tags[0].vmware_category #=> String
-    #   resp.virtual_machine.vmware_tags[0].vmware_tag_description #=> String
     #   resp.virtual_machine.vmware_tags[0].vmware_tag_name #=> String
+    #   resp.virtual_machine.vmware_tags[0].vmware_tag_description #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-gateway-2021-01-01/GetVirtualMachine AWS API Documentation
     #
@@ -857,24 +859,24 @@ module Aws::BackupGateway
 
     # Connect to a hypervisor by importing its configuration.
     #
+    # @option params [required, String] :name
+    #   The name of the hypervisor.
+    #
     # @option params [required, String] :host
     #   The server host of the hypervisor. This can be either an IP address or
     #   a fully-qualified domain name (FQDN).
     #
-    # @option params [String] :kms_key_arn
-    #   The Key Management Service for the hypervisor.
-    #
-    # @option params [required, String] :name
-    #   The name of the hypervisor.
+    # @option params [String] :username
+    #   The username for the hypervisor.
     #
     # @option params [String] :password
     #   The password for the hypervisor.
     #
+    # @option params [String] :kms_key_arn
+    #   The Key Management Service for the hypervisor.
+    #
     # @option params [Array<Types::Tag>] :tags
     #   The tags of the hypervisor configuration to import.
-    #
-    # @option params [String] :username
-    #   The username for the hypervisor.
     #
     # @return [Types::ImportHypervisorConfigurationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -883,17 +885,17 @@ module Aws::BackupGateway
     # @example Request syntax with placeholder values
     #
     #   resp = client.import_hypervisor_configuration({
-    #     host: "Host", # required
-    #     kms_key_arn: "KmsKeyArn",
     #     name: "Name", # required
+    #     host: "Host", # required
+    #     username: "Username",
     #     password: "Password",
+    #     kms_key_arn: "KmsKeyArn",
     #     tags: [
     #       {
     #         key: "TagKey", # required
     #         value: "TagValue", # required
     #       },
     #     ],
-    #     username: "Username",
     #   })
     #
     # @example Response structure
@@ -1049,8 +1051,8 @@ module Aws::BackupGateway
     #
     # @return [Types::ListVirtualMachinesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::ListVirtualMachinesOutput#next_token #next_token} => String
     #   * {Types::ListVirtualMachinesOutput#virtual_machines #virtual_machines} => Array&lt;Types::VirtualMachine&gt;
+    #   * {Types::ListVirtualMachinesOutput#next_token #next_token} => String
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
@@ -1064,14 +1066,14 @@ module Aws::BackupGateway
     #
     # @example Response structure
     #
-    #   resp.next_token #=> String
     #   resp.virtual_machines #=> Array
     #   resp.virtual_machines[0].host_name #=> String
     #   resp.virtual_machines[0].hypervisor_id #=> String
-    #   resp.virtual_machines[0].last_backup_date #=> Time
     #   resp.virtual_machines[0].name #=> String
     #   resp.virtual_machines[0].path #=> String
     #   resp.virtual_machines[0].resource_arn #=> String
+    #   resp.virtual_machines[0].last_backup_date #=> Time
+    #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-gateway-2021-01-01/ListVirtualMachines AWS API Documentation
     #
@@ -1087,11 +1089,6 @@ module Aws::BackupGateway
     # schedule, which means no bandwidth rate limiting is in effect. Use
     # this to initiate a gateway's bandwidth rate limit schedule.
     #
-    # @option params [required, Array<Types::BandwidthRateLimitInterval>] :bandwidth_rate_limit_intervals
-    #   An array containing bandwidth rate limit schedule intervals for a
-    #   gateway. When no bandwidth rate limit intervals have been scheduled,
-    #   the array is empty.
-    #
     # @option params [required, String] :gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the [
     #   `ListGateways` ][1] operation to return a list of gateways for your
@@ -1101,6 +1098,11 @@ module Aws::BackupGateway
     #
     #   [1]: https://docs.aws.amazon.com/aws-backup/latest/devguide/API_BGW_ListGateways.html
     #
+    # @option params [required, Array<Types::BandwidthRateLimitInterval>] :bandwidth_rate_limit_intervals
+    #   An array containing bandwidth rate limit schedule intervals for a
+    #   gateway. When no bandwidth rate limit intervals have been scheduled,
+    #   the array is empty.
+    #
     # @return [Types::PutBandwidthRateLimitScheduleOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::PutBandwidthRateLimitScheduleOutput#gateway_arn #gateway_arn} => String
@@ -1108,17 +1110,17 @@ module Aws::BackupGateway
     # @example Request syntax with placeholder values
     #
     #   resp = client.put_bandwidth_rate_limit_schedule({
+    #     gateway_arn: "GatewayArn", # required
     #     bandwidth_rate_limit_intervals: [ # required
     #       {
     #         average_upload_rate_limit_in_bits_per_sec: 1,
-    #         days_of_week: [1], # required
-    #         end_hour_of_day: 1, # required
-    #         end_minute_of_hour: 1, # required
     #         start_hour_of_day: 1, # required
+    #         end_hour_of_day: 1, # required
     #         start_minute_of_hour: 1, # required
+    #         end_minute_of_hour: 1, # required
+    #         days_of_week: [1], # required
     #       },
     #     ],
-    #     gateway_arn: "GatewayArn", # required
     #   })
     #
     # @example Response structure
@@ -1136,18 +1138,18 @@ module Aws::BackupGateway
 
     # This action sets the property mappings for the specified hypervisor. A
     # hypervisor property mapping displays the relationship of entity
-    # properties available from the on-premises hypervisor to the properties
-    # available in Amazon Web Services.
+    # properties available from the hypervisor to the properties available
+    # in Amazon Web Services.
     #
     # @option params [required, String] :hypervisor_arn
     #   The Amazon Resource Name (ARN) of the hypervisor.
     #
+    # @option params [required, Array<Types::VmwareToAwsTagMapping>] :vmware_to_aws_tag_mappings
+    #   This action requests the mappings of VMware tags to the Amazon Web
+    #   Services tags.
+    #
     # @option params [required, String] :iam_role_arn
     #   The Amazon Resource Name (ARN) of the IAM role.
-    #
-    # @option params [required, Array<Types::VmwareToAwsTagMapping>] :vmware_to_aws_tag_mappings
-    #   This action requests the mappings of on-premises VMware tags to the
-    #   Amazon Web Services tags.
     #
     # @return [Types::PutHypervisorPropertyMappingsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1157,15 +1159,15 @@ module Aws::BackupGateway
     #
     #   resp = client.put_hypervisor_property_mappings({
     #     hypervisor_arn: "ServerArn", # required
-    #     iam_role_arn: "IamRoleArn", # required
     #     vmware_to_aws_tag_mappings: [ # required
     #       {
-    #         aws_tag_key: "TagKey", # required
-    #         aws_tag_value: "TagValue", # required
     #         vmware_category: "VmwareCategory", # required
     #         vmware_tag_name: "VmwareTagName", # required
+    #         aws_tag_key: "TagKey", # required
+    #         aws_tag_value: "TagValue", # required
     #       },
     #     ],
+    #     iam_role_arn: "IamRoleArn", # required
     #   })
     #
     # @example Response structure
@@ -1183,14 +1185,6 @@ module Aws::BackupGateway
 
     # Set the maintenance start time for a gateway.
     #
-    # @option params [Integer] :day_of_month
-    #   The day of the month start maintenance on a gateway.
-    #
-    #   Valid values range from `Sunday` to `Saturday`.
-    #
-    # @option params [Integer] :day_of_week
-    #   The day of the week to start maintenance on a gateway.
-    #
     # @option params [required, String] :gateway_arn
     #   The Amazon Resource Name (ARN) for the gateway, used to specify its
     #   maintenance start time.
@@ -1201,6 +1195,14 @@ module Aws::BackupGateway
     # @option params [required, Integer] :minute_of_hour
     #   The minute of the hour to start maintenance on a gateway.
     #
+    # @option params [Integer] :day_of_week
+    #   The day of the week to start maintenance on a gateway.
+    #
+    # @option params [Integer] :day_of_month
+    #   The day of the month start maintenance on a gateway.
+    #
+    #   Valid values range from `Sunday` to `Saturday`.
+    #
     # @return [Types::PutMaintenanceStartTimeOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::PutMaintenanceStartTimeOutput#gateway_arn #gateway_arn} => String
@@ -1208,11 +1210,11 @@ module Aws::BackupGateway
     # @example Request syntax with placeholder values
     #
     #   resp = client.put_maintenance_start_time({
-    #     day_of_month: 1,
-    #     day_of_week: 1,
     #     gateway_arn: "GatewayArn", # required
     #     hour_of_day: 1, # required
     #     minute_of_hour: 1, # required
+    #     day_of_week: 1,
+    #     day_of_month: 1,
     #   })
     #
     # @example Response structure
@@ -1305,11 +1307,11 @@ module Aws::BackupGateway
     #   The server host of the hypervisor. This can be either an IP address or
     #   a fully-qualified domain name (FQDN).
     #
-    # @option params [String] :password
-    #   The password for the hypervisor.
-    #
     # @option params [String] :username
     #   The username for the hypervisor.
+    #
+    # @option params [String] :password
+    #   The password for the hypervisor.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1318,8 +1320,8 @@ module Aws::BackupGateway
     #   resp = client.test_hypervisor_configuration({
     #     gateway_arn: "GatewayArn", # required
     #     host: "Host", # required
-    #     password: "Password",
     #     username: "Username",
+    #     password: "Password",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-gateway-2021-01-01/TestHypervisorConfiguration AWS API Documentation
@@ -1436,25 +1438,25 @@ module Aws::BackupGateway
     # password. Specify which hypervisor to update using the Amazon Resource
     # Name (ARN) of the hypervisor in your request.
     #
+    # @option params [required, String] :hypervisor_arn
+    #   The Amazon Resource Name (ARN) of the hypervisor to update.
+    #
     # @option params [String] :host
     #   The updated host of the hypervisor. This can be either an IP address
     #   or a fully-qualified domain name (FQDN).
     #
-    # @option params [required, String] :hypervisor_arn
-    #   The Amazon Resource Name (ARN) of the hypervisor to update.
-    #
-    # @option params [String] :log_group_arn
-    #   The Amazon Resource Name (ARN) of the group of gateways within the
-    #   requested log.
-    #
-    # @option params [String] :name
-    #   The updated name for the hypervisor
+    # @option params [String] :username
+    #   The updated username for the hypervisor.
     #
     # @option params [String] :password
     #   The updated password for the hypervisor.
     #
-    # @option params [String] :username
-    #   The updated username for the hypervisor.
+    # @option params [String] :name
+    #   The updated name for the hypervisor
+    #
+    # @option params [String] :log_group_arn
+    #   The Amazon Resource Name (ARN) of the group of gateways within the
+    #   requested log.
     #
     # @return [Types::UpdateHypervisorOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1463,12 +1465,12 @@ module Aws::BackupGateway
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_hypervisor({
-    #     host: "Host",
     #     hypervisor_arn: "ServerArn", # required
-    #     log_group_arn: "LogGroupArn",
-    #     name: "Name",
-    #     password: "Password",
+    #     host: "Host",
     #     username: "Username",
+    #     password: "Password",
+    #     name: "Name",
+    #     log_group_arn: "LogGroupArn",
     #   })
     #
     # @example Response structure
@@ -1502,7 +1504,7 @@ module Aws::BackupGateway
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-backupgateway'
-      context[:gem_version] = '1.48.0'
+      context[:gem_version] = '1.49.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

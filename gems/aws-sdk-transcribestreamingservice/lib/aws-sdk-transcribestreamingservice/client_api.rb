@@ -125,6 +125,7 @@ module Aws::TranscribeStreamingService
     Sentiment = Shapes::StringShape.new(name: 'Sentiment')
     ServiceUnavailableException = Shapes::StructureShape.new(name: 'ServiceUnavailableException')
     SessionId = Shapes::StringShape.new(name: 'SessionId')
+    SessionResumeWindow = Shapes::IntegerShape.new(name: 'SessionResumeWindow')
     Specialty = Shapes::StringShape.new(name: 'Specialty')
     Stable = Shapes::BooleanShape.new(name: 'Stable')
     StartCallAnalyticsStreamTranscriptionRequest = Shapes::StructureShape.new(name: 'StartCallAnalyticsStreamTranscriptionRequest')
@@ -576,6 +577,7 @@ module Aws::TranscribeStreamingService
     StartStreamTranscriptionRequest.add_member(:identify_multiple_languages, Shapes::ShapeRef.new(shape: Boolean, location: "header", location_name: "x-amzn-transcribe-identify-multiple-languages"))
     StartStreamTranscriptionRequest.add_member(:vocabulary_names, Shapes::ShapeRef.new(shape: VocabularyNames, location: "header", location_name: "x-amzn-transcribe-vocabulary-names"))
     StartStreamTranscriptionRequest.add_member(:vocabulary_filter_names, Shapes::ShapeRef.new(shape: VocabularyFilterNames, location: "header", location_name: "x-amzn-transcribe-vocabulary-filter-names"))
+    StartStreamTranscriptionRequest.add_member(:session_resume_window, Shapes::ShapeRef.new(shape: SessionResumeWindow, location: "header", location_name: "x-amzn-transcribe-session-resume-window"))
     StartStreamTranscriptionRequest.struct_class = Types::StartStreamTranscriptionRequest
     StartStreamTranscriptionRequest[:payload] = :audio_stream
     StartStreamTranscriptionRequest[:payload_member] = StartStreamTranscriptionRequest.member(:audio_stream)
@@ -604,6 +606,7 @@ module Aws::TranscribeStreamingService
     StartStreamTranscriptionResponse.add_member(:identify_multiple_languages, Shapes::ShapeRef.new(shape: Boolean, location: "header", location_name: "x-amzn-transcribe-identify-multiple-languages"))
     StartStreamTranscriptionResponse.add_member(:vocabulary_names, Shapes::ShapeRef.new(shape: VocabularyNames, location: "header", location_name: "x-amzn-transcribe-vocabulary-names"))
     StartStreamTranscriptionResponse.add_member(:vocabulary_filter_names, Shapes::ShapeRef.new(shape: VocabularyFilterNames, location: "header", location_name: "x-amzn-transcribe-vocabulary-filter-names"))
+    StartStreamTranscriptionResponse.add_member(:session_resume_window, Shapes::ShapeRef.new(shape: SessionResumeWindow, location: "header", location_name: "x-amzn-transcribe-session-resume-window"))
     StartStreamTranscriptionResponse.struct_class = Types::StartStreamTranscriptionResponse
     StartStreamTranscriptionResponse[:payload] = :transcript_result_stream
     StartStreamTranscriptionResponse[:payload_member] = StartStreamTranscriptionResponse.member(:transcript_result_stream)

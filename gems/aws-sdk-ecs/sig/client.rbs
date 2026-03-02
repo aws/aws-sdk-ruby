@@ -111,7 +111,7 @@ module Aws
                                             storage_size_gi_b: ::Integer?
                                           }?,
                                           monitoring: ("BASIC" | "DETAILED")?,
-                                          capacity_option_type: ("ON_DEMAND" | "SPOT")?,
+                                          capacity_option_type: ("ON_DEMAND" | "SPOT" | "RESERVED")?,
                                           instance_requirements: {
                                             v_cpu_count: {
                                               min: ::Integer,
@@ -165,7 +165,11 @@ module Aws
                                             allowed_instance_types: Array[::String]?,
                                             max_spot_price_as_percentage_of_optimal_on_demand_price: ::Integer?
                                           }?,
-                                          fips_enabled: bool?
+                                          fips_enabled: bool?,
+                                          capacity_reservations: {
+                                            reservation_group_arn: ::String?,
+                                            reservation_preference: ("RESERVATIONS_ONLY" | "RESERVATIONS_FIRST" | "RESERVATIONS_EXCLUDED")?
+                                          }?
                                         },
                                         propagate_tags: ("CAPACITY_PROVIDER" | "NONE")?,
                                         infrastructure_optimization: {
@@ -1808,6 +1812,10 @@ module Aws
                                             }?,
                                             allowed_instance_types: Array[::String]?,
                                             max_spot_price_as_percentage_of_optimal_on_demand_price: ::Integer?
+                                          }?,
+                                          capacity_reservations: {
+                                            reservation_group_arn: ::String?,
+                                            reservation_preference: ("RESERVATIONS_ONLY" | "RESERVATIONS_FIRST" | "RESERVATIONS_EXCLUDED")?
                                           }?
                                         },
                                         propagate_tags: ("CAPACITY_PROVIDER" | "NONE")?,

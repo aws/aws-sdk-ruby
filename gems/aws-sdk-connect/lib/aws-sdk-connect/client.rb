@@ -7636,6 +7636,8 @@ module Aws::Connect
     #   resp.evaluation.metadata.acknowledgement.acknowledged_by #=> String
     #   resp.evaluation.metadata.acknowledgement.acknowledger_comment #=> String
     #   resp.evaluation.metadata.review.review_id #=> String
+    #   resp.evaluation.metadata.review.requested_time #=> Time
+    #   resp.evaluation.metadata.review.requested_by #=> String
     #   resp.evaluation.metadata.review.created_time #=> Time
     #   resp.evaluation.metadata.review.created_by #=> String
     #   resp.evaluation.metadata.review.review_request_comments #=> Array
@@ -18963,10 +18965,7 @@ module Aws::Connect
     # * A Search operation, unlike a List operation, takes time to index
     #   changes to resource (create, update or delete). If you don't see
     #   updated information for recently changed contact evaluations, try
-    #   calling the API again in a few seconds. Contact Evaluations may not
-    #   be fully backfilled with historical data in all regions yet, however
-    #   all recently created Contact Evaluations should be available for
-    #   search.
+    #   calling the API again in a few seconds.
     #
     # ^
     #
@@ -28605,7 +28604,7 @@ module Aws::Connect
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-connect'
-      context[:gem_version] = '1.243.0'
+      context[:gem_version] = '1.244.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

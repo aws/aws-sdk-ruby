@@ -42,6 +42,7 @@ module Aws::MarketplaceEntitlementService
     Entitlement.add_member(:customer_aws_account_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "CustomerAWSAccountId"))
     Entitlement.add_member(:value, Shapes::ShapeRef.new(shape: EntitlementValue, location_name: "Value"))
     Entitlement.add_member(:expiration_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "ExpirationDate"))
+    Entitlement.add_member(:license_arn, Shapes::ShapeRef.new(shape: String, location_name: "LicenseArn"))
     Entitlement.struct_class = Types::Entitlement
 
     EntitlementList.member = Shapes::ShapeRef.new(shape: Entitlement)

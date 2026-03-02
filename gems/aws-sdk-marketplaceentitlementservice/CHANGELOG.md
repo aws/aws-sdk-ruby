@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.84.0 (2026-02-26)
+------------------
+
+* Feature - Added License Arn as a new optional filter for GetEntitlements and LicenseArn field in each entitlement in the response.
+
 1.83.0 (2026-01-16)
 ------------------
 

@@ -55,7 +55,7 @@ module Aws::Odb
   autoload :EndpointProvider, 'aws-sdk-odb/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-odb/endpoints'
 
-  GEM_VERSION = '1.14.0'
+  GEM_VERSION = '1.15.0'
 
 end
 

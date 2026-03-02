@@ -27,11 +27,11 @@ module Aws::BackupGateway
 
     class BandwidthRateLimitInterval
       attr_accessor average_upload_rate_limit_in_bits_per_sec: ::Integer
-      attr_accessor days_of_week: ::Array[::Integer]
-      attr_accessor end_hour_of_day: ::Integer
-      attr_accessor end_minute_of_hour: ::Integer
       attr_accessor start_hour_of_day: ::Integer
+      attr_accessor end_hour_of_day: ::Integer
       attr_accessor start_minute_of_hour: ::Integer
+      attr_accessor end_minute_of_hour: ::Integer
+      attr_accessor days_of_week: ::Array[::Integer]
       SENSITIVE: []
     end
 
@@ -102,6 +102,8 @@ module Aws::BackupGateway
       attr_accessor maintenance_start_time: Types::MaintenanceStartTime
       attr_accessor next_update_availability_time: ::Time
       attr_accessor vpc_endpoint: ::String
+      attr_accessor deprecation_date: ::Time
+      attr_accessor software_version: ::String
       SENSITIVE: []
     end
 
@@ -111,8 +113,8 @@ module Aws::BackupGateway
     end
 
     class GetBandwidthRateLimitScheduleOutput
-      attr_accessor bandwidth_rate_limit_intervals: ::Array[Types::BandwidthRateLimitInterval]
       attr_accessor gateway_arn: ::String
+      attr_accessor bandwidth_rate_limit_intervals: ::Array[Types::BandwidthRateLimitInterval]
       SENSITIVE: []
     end
 
@@ -143,8 +145,8 @@ module Aws::BackupGateway
 
     class GetHypervisorPropertyMappingsOutput
       attr_accessor hypervisor_arn: ::String
-      attr_accessor iam_role_arn: ::String
       attr_accessor vmware_to_aws_tag_mappings: ::Array[Types::VmwareToAwsTagMapping]
+      attr_accessor iam_role_arn: ::String
       SENSITIVE: []
     end
 
@@ -171,23 +173,23 @@ module Aws::BackupGateway
       attr_accessor host: ::String
       attr_accessor hypervisor_arn: ::String
       attr_accessor kms_key_arn: ::String
-      attr_accessor last_successful_metadata_sync_time: ::Time
-      attr_accessor latest_metadata_sync_status: ("CREATED" | "RUNNING" | "FAILED" | "PARTIALLY_FAILED" | "SUCCEEDED")
-      attr_accessor latest_metadata_sync_status_message: ::String
-      attr_accessor log_group_arn: ::String
       attr_accessor name: ::String
+      attr_accessor log_group_arn: ::String
       attr_accessor state: ("PENDING" | "ONLINE" | "OFFLINE" | "ERROR")
+      attr_accessor last_successful_metadata_sync_time: ::Time
+      attr_accessor latest_metadata_sync_status_message: ::String
+      attr_accessor latest_metadata_sync_status: ("CREATED" | "RUNNING" | "FAILED" | "PARTIALLY_FAILED" | "SUCCEEDED")
       SENSITIVE: []
     end
 
     class ImportHypervisorConfigurationInput
-      attr_accessor host: ::String
-      attr_accessor kms_key_arn: ::String
       attr_accessor name: ::String
-      attr_accessor password: ::String
-      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor host: ::String
       attr_accessor username: ::String
-      SENSITIVE: [:password, :username]
+      attr_accessor password: ::String
+      attr_accessor kms_key_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: [:username, :password]
     end
 
     class ImportHypervisorConfigurationOutput
@@ -244,8 +246,8 @@ module Aws::BackupGateway
     end
 
     class ListVirtualMachinesOutput
-      attr_accessor next_token: ::String
       attr_accessor virtual_machines: ::Array[Types::VirtualMachine]
+      attr_accessor next_token: ::String
       SENSITIVE: []
     end
 
@@ -258,8 +260,8 @@ module Aws::BackupGateway
     end
 
     class PutBandwidthRateLimitScheduleInput
-      attr_accessor bandwidth_rate_limit_intervals: ::Array[Types::BandwidthRateLimitInterval]
       attr_accessor gateway_arn: ::String
+      attr_accessor bandwidth_rate_limit_intervals: ::Array[Types::BandwidthRateLimitInterval]
       SENSITIVE: []
     end
 
@@ -270,8 +272,8 @@ module Aws::BackupGateway
 
     class PutHypervisorPropertyMappingsInput
       attr_accessor hypervisor_arn: ::String
-      attr_accessor iam_role_arn: ::String
       attr_accessor vmware_to_aws_tag_mappings: ::Array[Types::VmwareToAwsTagMapping]
+      attr_accessor iam_role_arn: ::String
       SENSITIVE: []
     end
 
@@ -281,11 +283,11 @@ module Aws::BackupGateway
     end
 
     class PutMaintenanceStartTimeInput
-      attr_accessor day_of_month: ::Integer
-      attr_accessor day_of_week: ::Integer
       attr_accessor gateway_arn: ::String
       attr_accessor hour_of_day: ::Integer
       attr_accessor minute_of_hour: ::Integer
+      attr_accessor day_of_week: ::Integer
+      attr_accessor day_of_month: ::Integer
       SENSITIVE: []
     end
 
@@ -330,9 +332,9 @@ module Aws::BackupGateway
     class TestHypervisorConfigurationInput
       attr_accessor gateway_arn: ::String
       attr_accessor host: ::String
-      attr_accessor password: ::String
       attr_accessor username: ::String
-      SENSITIVE: [:password, :username]
+      attr_accessor password: ::String
+      SENSITIVE: [:username, :password]
     end
 
     class TestHypervisorConfigurationOutput < Aws::EmptyStructure
@@ -377,13 +379,13 @@ module Aws::BackupGateway
     end
 
     class UpdateHypervisorInput
-      attr_accessor host: ::String
       attr_accessor hypervisor_arn: ::String
-      attr_accessor log_group_arn: ::String
-      attr_accessor name: ::String
-      attr_accessor password: ::String
+      attr_accessor host: ::String
       attr_accessor username: ::String
-      SENSITIVE: [:password, :username]
+      attr_accessor password: ::String
+      attr_accessor name: ::String
+      attr_accessor log_group_arn: ::String
+      SENSITIVE: [:username, :password]
     end
 
     class UpdateHypervisorOutput
@@ -400,36 +402,36 @@ module Aws::BackupGateway
     class VirtualMachine
       attr_accessor host_name: ::String
       attr_accessor hypervisor_id: ::String
-      attr_accessor last_backup_date: ::Time
       attr_accessor name: ::String
       attr_accessor path: ::String
       attr_accessor resource_arn: ::String
+      attr_accessor last_backup_date: ::Time
       SENSITIVE: []
     end
 
     class VirtualMachineDetails
       attr_accessor host_name: ::String
       attr_accessor hypervisor_id: ::String
-      attr_accessor last_backup_date: ::Time
       attr_accessor name: ::String
       attr_accessor path: ::String
       attr_accessor resource_arn: ::String
+      attr_accessor last_backup_date: ::Time
       attr_accessor vmware_tags: ::Array[Types::VmwareTag]
       SENSITIVE: []
     end
 
     class VmwareTag
       attr_accessor vmware_category: ::String
-      attr_accessor vmware_tag_description: ::String
       attr_accessor vmware_tag_name: ::String
+      attr_accessor vmware_tag_description: ::String
       SENSITIVE: []
     end
 
     class VmwareToAwsTagMapping
-      attr_accessor aws_tag_key: ::String
-      attr_accessor aws_tag_value: ::String
       attr_accessor vmware_category: ::String
       attr_accessor vmware_tag_name: ::String
+      attr_accessor aws_tag_key: ::String
+      attr_accessor aws_tag_value: ::String
       SENSITIVE: []
     end
   end

@@ -172,7 +172,10 @@ module Aws
                                    ?allow_external_principals: bool,
                                    ?client_token: ::String,
                                    ?permission_arns: Array[::String],
-                                   ?sources: Array[::String]
+                                   ?sources: Array[::String],
+                                   ?resource_share_configuration: {
+                                     retain_sharing_on_account_leave_organization: bool?
+                                   }
                                  ) -> _CreateResourceShareResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateResourceShareResponseSuccess
 

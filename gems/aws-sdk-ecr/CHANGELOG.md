@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.122.0 (2026-02-25)
+------------------
+
+* Feature - Update repository name regex to comply with OCI Distribution Specification
+
 1.121.0 (2026-02-19)
 ------------------
 

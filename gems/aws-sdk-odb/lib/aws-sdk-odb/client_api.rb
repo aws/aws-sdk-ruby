@@ -239,6 +239,8 @@ module Aws::Odb
     OdbPeeringConnectionList = Shapes::ListShape.new(name: 'OdbPeeringConnectionList')
     OdbPeeringConnectionSummary = Shapes::StructureShape.new(name: 'OdbPeeringConnectionSummary')
     PatchingModeType = Shapes::StringShape.new(name: 'PatchingModeType')
+    PeerNetworkRouteTableId = Shapes::StringShape.new(name: 'PeerNetworkRouteTableId')
+    PeerNetworkRouteTableIdList = Shapes::ListShape.new(name: 'PeerNetworkRouteTableIdList')
     PeeredCidr = Shapes::StringShape.new(name: 'PeeredCidr')
     PeeredCidrList = Shapes::ListShape.new(name: 'PeeredCidrList')
     PolicyDocument = Shapes::StringShape.new(name: 'PolicyDocument')
@@ -732,6 +734,7 @@ module Aws::Odb
     CreateOdbPeeringConnectionInput.add_member(:peer_network_id, Shapes::ShapeRef.new(shape: ResourceIdOrArn, required: true, location_name: "peerNetworkId"))
     CreateOdbPeeringConnectionInput.add_member(:display_name, Shapes::ShapeRef.new(shape: ResourceDisplayName, location_name: "displayName"))
     CreateOdbPeeringConnectionInput.add_member(:peer_network_cidrs_to_be_added, Shapes::ShapeRef.new(shape: PeeredCidrList, location_name: "peerNetworkCidrsToBeAdded"))
+    CreateOdbPeeringConnectionInput.add_member(:peer_network_route_table_ids, Shapes::ShapeRef.new(shape: PeerNetworkRouteTableIdList, location_name: "peerNetworkRouteTableIds"))
     CreateOdbPeeringConnectionInput.add_member(:client_token, Shapes::ShapeRef.new(shape: CreateOdbPeeringConnectionInputClientTokenString, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateOdbPeeringConnectionInput.add_member(:tags, Shapes::ShapeRef.new(shape: RequestTagMap, location_name: "tags"))
     CreateOdbPeeringConnectionInput.struct_class = Types::CreateOdbPeeringConnectionInput
@@ -1266,6 +1269,8 @@ module Aws::Odb
     OdbPeeringConnectionSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "createdAt"))
     OdbPeeringConnectionSummary.add_member(:percent_progress, Shapes::ShapeRef.new(shape: Float, location_name: "percentProgress"))
     OdbPeeringConnectionSummary.struct_class = Types::OdbPeeringConnectionSummary
+
+    PeerNetworkRouteTableIdList.member = Shapes::ShapeRef.new(shape: PeerNetworkRouteTableId)
 
     PeeredCidrList.member = Shapes::ShapeRef.new(shape: PeeredCidr)
 

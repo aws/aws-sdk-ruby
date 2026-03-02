@@ -1470,6 +1470,7 @@ module Aws
         def source_last_updated_timestamp_format: () -> ::String
         def max_available_profile_object_count: () -> ::Integer
         def max_profile_object_count: () -> ::Integer
+        def source_priority: () -> ::Integer
         def fields: () -> ::Hash[::String, Types::ObjectTypeField]
         def keys: () -> ::Hash[::String, ::Array[Types::ObjectTypeKey]]
         def created_at: () -> ::Time
@@ -2192,6 +2193,7 @@ module Aws
         def source_last_updated_timestamp_format: () -> ::String
         def max_profile_object_count: () -> ::Integer
         def max_available_profile_object_count: () -> ::Integer
+        def source_priority: () -> ::Integer
         def fields: () -> ::Hash[::String, Types::ObjectTypeField]
         def keys: () -> ::Hash[::String, ::Array[Types::ObjectTypeKey]]
         def created_at: () -> ::Time
@@ -2209,6 +2211,7 @@ module Aws
                                      ?allow_profile_creation: bool,
                                      ?source_last_updated_timestamp_format: ::String,
                                      ?max_profile_object_count: ::Integer,
+                                     ?source_priority: ::Integer,
                                      ?fields: Hash[::String, {
                                          source: ::String?,
                                          target: ::String?,
@@ -2216,7 +2219,7 @@ module Aws
                                        }],
                                      ?keys: Hash[::String, Array[
                                          {
-                                           standard_identifiers: Array[("PROFILE" | "ASSET" | "CASE" | "ORDER" | "COMMUNICATION_RECORD" | "AIR_PREFERENCE" | "HOTEL_PREFERENCE" | "AIR_BOOKING" | "AIR_SEGMENT" | "HOTEL_RESERVATION" | "HOTEL_STAY_REVENUE" | "LOYALTY" | "LOYALTY_TRANSACTION" | "LOYALTY_PROMOTION" | "UNIQUE" | "SECONDARY" | "LOOKUP_ONLY" | "NEW_ONLY")]?,
+                                           standard_identifiers: Array[("PROFILE" | "ASSET" | "CASE" | "DEVICE" | "WEB_ANALYTICS" | "ORDER" | "COMMUNICATION_RECORD" | "AIR_PREFERENCE" | "HOTEL_PREFERENCE" | "AIR_BOOKING" | "AIR_SEGMENT" | "HOTEL_RESERVATION" | "HOTEL_STAY_REVENUE" | "LOYALTY" | "LOYALTY_TRANSACTION" | "LOYALTY_PROMOTION" | "UNIQUE" | "SECONDARY" | "LOOKUP_ONLY" | "NEW_ONLY")]?,
                                            field_names: Array[::String]?
                                          },
                                        ]],

@@ -5662,6 +5662,131 @@ module Aws::WAFV2
       req.send_request(options)
     end
 
+    # Retrieves aggregated statistics about the top URI paths accessed by
+    # bot traffic for a specified web ACL and time window. You can use this
+    # operation to analyze which paths on your web application receive the
+    # most bot traffic and identify the specific bots accessing those paths.
+    # The operation supports filtering by bot category, organization, or
+    # name, and allows you to drill down into specific path prefixes to view
+    # detailed URI-level statistics.
+    #
+    # @option params [required, String] :web_acl_arn
+    #   The Amazon Resource Name (ARN) of the web ACL for which you want to
+    #   retrieve path statistics.
+    #
+    # @option params [required, String] :scope
+    #   Specifies whether the web ACL is for an Amazon Web Services CloudFront
+    #   distribution or for a regional application. A regional application can
+    #   be an Application Load Balancer, an AppSync GraphQL API, an Amazon
+    #   Cognito user pool, an Amazon Web Services App Runner service, or an
+    #   Amazon Web Services Verified Access instance.
+    #
+    # @option params [String] :uri_path_prefix
+    #   A URI path prefix to filter the results. When you specify this
+    #   parameter, the operation returns statistics for individual URIs within
+    #   the specified path prefix. For example, if you specify `/api`, the
+    #   response includes statistics for paths like `/api/v1/users` and
+    #   `/api/v2/orders`. If you don't specify this parameter, the operation
+    #   returns top-level path statistics.
+    #
+    # @option params [required, Types::TimeWindow] :time_window
+    #   The time window for which you want to retrieve path statistics. The
+    #   time window must be within the data retention period for your web ACL.
+    #
+    # @option params [String] :bot_category
+    #   Filters the results to include only traffic from bots in the specified
+    #   category. For example, you can filter by `ai` to see only AI crawler
+    #   traffic, or `search_engine` to see only search engine bot traffic.
+    #   When you apply this filter, the `Source` field is populated in the
+    #   response.
+    #
+    # @option params [String] :bot_organization
+    #   Filters the results to include only traffic from bots belonging to the
+    #   specified organization. For example, you can filter by `openai` or
+    #   `google`. When you apply this filter, the `Source` field is populated
+    #   in the response.
+    #
+    # @option params [String] :bot_name
+    #   Filters the results to include only traffic from the specified bot.
+    #   For example, you can filter by `gptbot` or `googlebot`. When you apply
+    #   this filter, the `Source` field is populated in the response.
+    #
+    # @option params [required, Integer] :limit
+    #   The maximum number of path statistics to return. Valid values are 1 to
+    #   100.
+    #
+    # @option params [required, Integer] :number_of_top_traffic_bots_per_path
+    #   The maximum number of top bots to include in the statistics for each
+    #   path. Valid values are 1 to 10.
+    #
+    # @option params [String] :next_marker
+    #   When you request a list of objects with a `Limit` setting, if the
+    #   number of objects that are still available for retrieval exceeds the
+    #   limit, WAF returns a `NextMarker` value in the response. To retrieve
+    #   the next batch of objects, provide the marker from the prior call in
+    #   your next request.
+    #
+    # @return [Types::GetTopPathStatisticsByTrafficResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetTopPathStatisticsByTrafficResponse#path_statistics #path_statistics} => Array&lt;Types::PathStatistics&gt;
+    #   * {Types::GetTopPathStatisticsByTrafficResponse#total_request_count #total_request_count} => Integer
+    #   * {Types::GetTopPathStatisticsByTrafficResponse#next_marker #next_marker} => String
+    #   * {Types::GetTopPathStatisticsByTrafficResponse#top_categories #top_categories} => Array&lt;Types::PathStatistics&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_top_path_statistics_by_traffic({
+    #     web_acl_arn: "ResourceArn", # required
+    #     scope: "CLOUDFRONT", # required, accepts CLOUDFRONT, REGIONAL
+    #     uri_path_prefix: "UriPathPrefixString",
+    #     time_window: { # required
+    #       start_time: Time.now, # required
+    #       end_time: Time.now, # required
+    #     },
+    #     bot_category: "FilterString",
+    #     bot_organization: "FilterString",
+    #     bot_name: "FilterString",
+    #     limit: 1, # required
+    #     number_of_top_traffic_bots_per_path: 1, # required
+    #     next_marker: "NextMarker",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.path_statistics #=> Array
+    #   resp.path_statistics[0].source.bot_category #=> String
+    #   resp.path_statistics[0].source.bot_organization #=> String
+    #   resp.path_statistics[0].source.bot_name #=> String
+    #   resp.path_statistics[0].path #=> String
+    #   resp.path_statistics[0].request_count #=> Integer
+    #   resp.path_statistics[0].percentage #=> Float
+    #   resp.path_statistics[0].top_bots #=> Array
+    #   resp.path_statistics[0].top_bots[0].bot_name #=> String
+    #   resp.path_statistics[0].top_bots[0].request_count #=> Integer
+    #   resp.path_statistics[0].top_bots[0].percentage #=> Float
+    #   resp.total_request_count #=> Integer
+    #   resp.next_marker #=> String
+    #   resp.top_categories #=> Array
+    #   resp.top_categories[0].source.bot_category #=> String
+    #   resp.top_categories[0].source.bot_organization #=> String
+    #   resp.top_categories[0].source.bot_name #=> String
+    #   resp.top_categories[0].path #=> String
+    #   resp.top_categories[0].request_count #=> Integer
+    #   resp.top_categories[0].percentage #=> Float
+    #   resp.top_categories[0].top_bots #=> Array
+    #   resp.top_categories[0].top_bots[0].bot_name #=> String
+    #   resp.top_categories[0].top_bots[0].request_count #=> Integer
+    #   resp.top_categories[0].top_bots[0].percentage #=> Float
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/GetTopPathStatisticsByTraffic AWS API Documentation
+    #
+    # @overload get_top_path_statistics_by_traffic(params = {})
+    # @param [Hash] params ({})
+    def get_top_path_statistics_by_traffic(params = {}, options = {})
+      req = build_request(:get_top_path_statistics_by_traffic, params)
+      req.send_request(options)
+    end
+
     # Retrieves the specified WebACL.
     #
     # @option params [String] :name
@@ -9642,7 +9767,7 @@ module Aws::WAFV2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-wafv2'
-      context[:gem_version] = '1.125.0'
+      context[:gem_version] = '1.126.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

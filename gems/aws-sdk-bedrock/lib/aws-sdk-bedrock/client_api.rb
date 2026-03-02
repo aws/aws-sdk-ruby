@@ -690,6 +690,7 @@ module Aws::Bedrock
     ModelInvocationJobSummaries = Shapes::ListShape.new(name: 'ModelInvocationJobSummaries')
     ModelInvocationJobSummary = Shapes::StructureShape.new(name: 'ModelInvocationJobSummary')
     ModelInvocationJobTimeoutDurationInHours = Shapes::IntegerShape.new(name: 'ModelInvocationJobTimeoutDurationInHours')
+    ModelInvocationType = Shapes::StringShape.new(name: 'ModelInvocationType')
     ModelModality = Shapes::StringShape.new(name: 'ModelModality')
     ModelModalityList = Shapes::ListShape.new(name: 'ModelModalityList')
     ModelName = Shapes::StringShape.new(name: 'ModelName')
@@ -1708,6 +1709,7 @@ module Aws::Bedrock
     CreateModelInvocationJobRequest.add_member(:vpc_config, Shapes::ShapeRef.new(shape: VpcConfig, location_name: "vpcConfig"))
     CreateModelInvocationJobRequest.add_member(:timeout_duration_in_hours, Shapes::ShapeRef.new(shape: ModelInvocationJobTimeoutDurationInHours, location_name: "timeoutDurationInHours"))
     CreateModelInvocationJobRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
+    CreateModelInvocationJobRequest.add_member(:model_invocation_type, Shapes::ShapeRef.new(shape: ModelInvocationType, location_name: "modelInvocationType"))
     CreateModelInvocationJobRequest.struct_class = Types::CreateModelInvocationJobRequest
 
     CreateModelInvocationJobResponse.add_member(:job_arn, Shapes::ShapeRef.new(shape: ModelInvocationJobArn, required: true, location_name: "jobArn"))
@@ -2056,6 +2058,10 @@ module Aws::Bedrock
     FoundationModelDetails.struct_class = Types::FoundationModelDetails
 
     FoundationModelLifecycle.add_member(:status, Shapes::ShapeRef.new(shape: FoundationModelLifecycleStatus, required: true, location_name: "status"))
+    FoundationModelLifecycle.add_member(:start_of_life_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "startOfLifeTime"))
+    FoundationModelLifecycle.add_member(:end_of_life_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "endOfLifeTime"))
+    FoundationModelLifecycle.add_member(:legacy_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "legacyTime"))
+    FoundationModelLifecycle.add_member(:public_extended_access_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "publicExtendedAccessTime"))
     FoundationModelLifecycle.struct_class = Types::FoundationModelLifecycle
 
     FoundationModelSummary.add_member(:model_arn, Shapes::ShapeRef.new(shape: FoundationModelArn, required: true, location_name: "modelArn"))
@@ -2366,6 +2372,7 @@ module Aws::Bedrock
     GetModelInvocationJobResponse.add_member(:vpc_config, Shapes::ShapeRef.new(shape: VpcConfig, location_name: "vpcConfig"))
     GetModelInvocationJobResponse.add_member(:timeout_duration_in_hours, Shapes::ShapeRef.new(shape: ModelInvocationJobTimeoutDurationInHours, location_name: "timeoutDurationInHours"))
     GetModelInvocationJobResponse.add_member(:job_expiration_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "jobExpirationTime"))
+    GetModelInvocationJobResponse.add_member(:model_invocation_type, Shapes::ShapeRef.new(shape: ModelInvocationType, location_name: "modelInvocationType"))
     GetModelInvocationJobResponse.struct_class = Types::GetModelInvocationJobResponse
 
     GetModelInvocationLoggingConfigurationRequest.struct_class = Types::GetModelInvocationLoggingConfigurationRequest
@@ -3129,6 +3136,7 @@ module Aws::Bedrock
     ModelInvocationJobSummary.add_member(:vpc_config, Shapes::ShapeRef.new(shape: VpcConfig, location_name: "vpcConfig"))
     ModelInvocationJobSummary.add_member(:timeout_duration_in_hours, Shapes::ShapeRef.new(shape: ModelInvocationJobTimeoutDurationInHours, location_name: "timeoutDurationInHours"))
     ModelInvocationJobSummary.add_member(:job_expiration_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "jobExpirationTime"))
+    ModelInvocationJobSummary.add_member(:model_invocation_type, Shapes::ShapeRef.new(shape: ModelInvocationType, location_name: "modelInvocationType"))
     ModelInvocationJobSummary.struct_class = Types::ModelInvocationJobSummary
 
     ModelModalityList.member = Shapes::ShapeRef.new(shape: ModelModality)

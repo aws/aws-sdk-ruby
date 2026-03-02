@@ -64,6 +64,8 @@ module Aws::ECS
     CapacityProviderType = Shapes::StringShape.new(name: 'CapacityProviderType')
     CapacityProviderUpdateStatus = Shapes::StringShape.new(name: 'CapacityProviderUpdateStatus')
     CapacityProviders = Shapes::ListShape.new(name: 'CapacityProviders')
+    CapacityReservationPreference = Shapes::StringShape.new(name: 'CapacityReservationPreference')
+    CapacityReservationRequest = Shapes::StructureShape.new(name: 'CapacityReservationRequest')
     ClientException = Shapes::StructureShape.new(name: 'ClientException')
     Cluster = Shapes::StructureShape.new(name: 'Cluster')
     ClusterConfiguration = Shapes::StructureShape.new(name: 'ClusterConfiguration')
@@ -657,6 +659,10 @@ module Aws::ECS
     CapacityProviderStrategyItem.struct_class = Types::CapacityProviderStrategyItem
 
     CapacityProviders.member = Shapes::ShapeRef.new(shape: CapacityProvider)
+
+    CapacityReservationRequest.add_member(:reservation_group_arn, Shapes::ShapeRef.new(shape: String, location_name: "reservationGroupArn"))
+    CapacityReservationRequest.add_member(:reservation_preference, Shapes::ShapeRef.new(shape: CapacityReservationPreference, location_name: "reservationPreference"))
+    CapacityReservationRequest.struct_class = Types::CapacityReservationRequest
 
     ClientException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     ClientException.struct_class = Types::ClientException
@@ -1407,6 +1413,7 @@ module Aws::ECS
     InstanceLaunchTemplate.add_member(:capacity_option_type, Shapes::ShapeRef.new(shape: CapacityOptionType, location_name: "capacityOptionType"))
     InstanceLaunchTemplate.add_member(:instance_requirements, Shapes::ShapeRef.new(shape: InstanceRequirementsRequest, location_name: "instanceRequirements"))
     InstanceLaunchTemplate.add_member(:fips_enabled, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "fipsEnabled"))
+    InstanceLaunchTemplate.add_member(:capacity_reservations, Shapes::ShapeRef.new(shape: CapacityReservationRequest, location_name: "capacityReservations"))
     InstanceLaunchTemplate.struct_class = Types::InstanceLaunchTemplate
 
     InstanceLaunchTemplateUpdate.add_member(:ec2_instance_profile_arn, Shapes::ShapeRef.new(shape: String, location_name: "ec2InstanceProfileArn"))
@@ -1414,6 +1421,7 @@ module Aws::ECS
     InstanceLaunchTemplateUpdate.add_member(:storage_configuration, Shapes::ShapeRef.new(shape: ManagedInstancesStorageConfiguration, location_name: "storageConfiguration"))
     InstanceLaunchTemplateUpdate.add_member(:monitoring, Shapes::ShapeRef.new(shape: ManagedInstancesMonitoringOptions, location_name: "monitoring"))
     InstanceLaunchTemplateUpdate.add_member(:instance_requirements, Shapes::ShapeRef.new(shape: InstanceRequirementsRequest, location_name: "instanceRequirements"))
+    InstanceLaunchTemplateUpdate.add_member(:capacity_reservations, Shapes::ShapeRef.new(shape: CapacityReservationRequest, location_name: "capacityReservations"))
     InstanceLaunchTemplateUpdate.struct_class = Types::InstanceLaunchTemplateUpdate
 
     InstanceRequirementsRequest.add_member(:v_cpu_count, Shapes::ShapeRef.new(shape: VCpuCountRangeRequest, required: true, location_name: "vCpuCount"))

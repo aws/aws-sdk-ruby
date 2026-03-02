@@ -114,6 +114,12 @@ module Aws::ECS
       SENSITIVE: []
     end
 
+    class CapacityReservationRequest
+      attr_accessor reservation_group_arn: ::String
+      attr_accessor reservation_preference: ("RESERVATIONS_ONLY" | "RESERVATIONS_FIRST" | "RESERVATIONS_EXCLUDED")
+      SENSITIVE: []
+    end
+
     class ClientException
       attr_accessor message: ::String
       SENSITIVE: []
@@ -1018,9 +1024,10 @@ module Aws::ECS
       attr_accessor network_configuration: Types::ManagedInstancesNetworkConfiguration
       attr_accessor storage_configuration: Types::ManagedInstancesStorageConfiguration
       attr_accessor monitoring: ("BASIC" | "DETAILED")
-      attr_accessor capacity_option_type: ("ON_DEMAND" | "SPOT")
+      attr_accessor capacity_option_type: ("ON_DEMAND" | "SPOT" | "RESERVED")
       attr_accessor instance_requirements: Types::InstanceRequirementsRequest
       attr_accessor fips_enabled: bool
+      attr_accessor capacity_reservations: Types::CapacityReservationRequest
       SENSITIVE: []
     end
 
@@ -1030,6 +1037,7 @@ module Aws::ECS
       attr_accessor storage_configuration: Types::ManagedInstancesStorageConfiguration
       attr_accessor monitoring: ("BASIC" | "DETAILED")
       attr_accessor instance_requirements: Types::InstanceRequirementsRequest
+      attr_accessor capacity_reservations: Types::CapacityReservationRequest
       SENSITIVE: []
     end
 

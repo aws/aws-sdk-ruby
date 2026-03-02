@@ -44,6 +44,7 @@ module Aws::Batch
     ComputeEnvironmentOrders = Shapes::ListShape.new(name: 'ComputeEnvironmentOrders')
     ComputeResource = Shapes::StructureShape.new(name: 'ComputeResource')
     ComputeResourceUpdate = Shapes::StructureShape.new(name: 'ComputeResourceUpdate')
+    ComputeScalingPolicy = Shapes::StructureShape.new(name: 'ComputeScalingPolicy')
     ConsumableResourceList = Shapes::ListShape.new(name: 'ConsumableResourceList')
     ConsumableResourceProperties = Shapes::StructureShape.new(name: 'ConsumableResourceProperties')
     ConsumableResourceRequirement = Shapes::StructureShape.new(name: 'ConsumableResourceRequirement')
@@ -439,6 +440,7 @@ module Aws::Batch
     ComputeResource.add_member(:spot_iam_fleet_role, Shapes::ShapeRef.new(shape: String, location_name: "spotIamFleetRole"))
     ComputeResource.add_member(:launch_template, Shapes::ShapeRef.new(shape: LaunchTemplateSpecification, location_name: "launchTemplate"))
     ComputeResource.add_member(:ec2_configuration, Shapes::ShapeRef.new(shape: Ec2ConfigurationList, location_name: "ec2Configuration"))
+    ComputeResource.add_member(:scaling_policy, Shapes::ShapeRef.new(shape: ComputeScalingPolicy, location_name: "scalingPolicy"))
     ComputeResource.struct_class = Types::ComputeResource
 
     ComputeResourceUpdate.add_member(:minv_cpus, Shapes::ShapeRef.new(shape: Integer, location_name: "minvCpus"))
@@ -458,7 +460,11 @@ module Aws::Batch
     ComputeResourceUpdate.add_member(:update_to_latest_image_version, Shapes::ShapeRef.new(shape: Boolean, location_name: "updateToLatestImageVersion"))
     ComputeResourceUpdate.add_member(:type, Shapes::ShapeRef.new(shape: CRType, location_name: "type"))
     ComputeResourceUpdate.add_member(:image_id, Shapes::ShapeRef.new(shape: String, location_name: "imageId"))
+    ComputeResourceUpdate.add_member(:scaling_policy, Shapes::ShapeRef.new(shape: ComputeScalingPolicy, location_name: "scalingPolicy"))
     ComputeResourceUpdate.struct_class = Types::ComputeResourceUpdate
+
+    ComputeScalingPolicy.add_member(:min_scale_down_delay_minutes, Shapes::ShapeRef.new(shape: Integer, location_name: "minScaleDownDelayMinutes"))
+    ComputeScalingPolicy.struct_class = Types::ComputeScalingPolicy
 
     ConsumableResourceList.member = Shapes::ShapeRef.new(shape: ConsumableResourceRequirement)
 

@@ -612,7 +612,7 @@ module Aws::ECS
     #           storage_size_gi_b: 1,
     #         },
     #         monitoring: "BASIC", # accepts BASIC, DETAILED
-    #         capacity_option_type: "ON_DEMAND", # accepts ON_DEMAND, SPOT
+    #         capacity_option_type: "ON_DEMAND", # accepts ON_DEMAND, SPOT, RESERVED
     #         instance_requirements: {
     #           v_cpu_count: { # required
     #             min: 1, # required
@@ -667,6 +667,10 @@ module Aws::ECS
     #           max_spot_price_as_percentage_of_optimal_on_demand_price: 1,
     #         },
     #         fips_enabled: false,
+    #         capacity_reservations: {
+    #           reservation_group_arn: "String",
+    #           reservation_preference: "RESERVATIONS_ONLY", # accepts RESERVATIONS_ONLY, RESERVATIONS_FIRST, RESERVATIONS_EXCLUDED
+    #         },
     #       },
     #       propagate_tags: "CAPACITY_PROVIDER", # accepts CAPACITY_PROVIDER, NONE
     #       infrastructure_optimization: {
@@ -703,7 +707,7 @@ module Aws::ECS
     #   resp.capacity_provider.managed_instances_provider.instance_launch_template.network_configuration.security_groups[0] #=> String
     #   resp.capacity_provider.managed_instances_provider.instance_launch_template.storage_configuration.storage_size_gi_b #=> Integer
     #   resp.capacity_provider.managed_instances_provider.instance_launch_template.monitoring #=> String, one of "BASIC", "DETAILED"
-    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.capacity_option_type #=> String, one of "ON_DEMAND", "SPOT"
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.capacity_option_type #=> String, one of "ON_DEMAND", "SPOT", "RESERVED"
     #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.v_cpu_count.min #=> Integer
     #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.v_cpu_count.max #=> Integer
     #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.memory_mi_b.min #=> Integer
@@ -746,6 +750,8 @@ module Aws::ECS
     #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.allowed_instance_types[0] #=> String
     #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.max_spot_price_as_percentage_of_optimal_on_demand_price #=> Integer
     #   resp.capacity_provider.managed_instances_provider.instance_launch_template.fips_enabled #=> Boolean
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.capacity_reservations.reservation_group_arn #=> String
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.capacity_reservations.reservation_preference #=> String, one of "RESERVATIONS_ONLY", "RESERVATIONS_FIRST", "RESERVATIONS_EXCLUDED"
     #   resp.capacity_provider.managed_instances_provider.propagate_tags #=> String, one of "CAPACITY_PROVIDER", "NONE"
     #   resp.capacity_provider.managed_instances_provider.infrastructure_optimization.scale_in_after #=> Integer
     #   resp.capacity_provider.update_status #=> String, one of "CREATE_IN_PROGRESS", "CREATE_COMPLETE", "CREATE_FAILED", "DELETE_IN_PROGRESS", "DELETE_COMPLETE", "DELETE_FAILED", "UPDATE_IN_PROGRESS", "UPDATE_COMPLETE", "UPDATE_FAILED"
@@ -2982,7 +2988,7 @@ module Aws::ECS
     #   resp.capacity_provider.managed_instances_provider.instance_launch_template.network_configuration.security_groups[0] #=> String
     #   resp.capacity_provider.managed_instances_provider.instance_launch_template.storage_configuration.storage_size_gi_b #=> Integer
     #   resp.capacity_provider.managed_instances_provider.instance_launch_template.monitoring #=> String, one of "BASIC", "DETAILED"
-    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.capacity_option_type #=> String, one of "ON_DEMAND", "SPOT"
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.capacity_option_type #=> String, one of "ON_DEMAND", "SPOT", "RESERVED"
     #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.v_cpu_count.min #=> Integer
     #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.v_cpu_count.max #=> Integer
     #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.memory_mi_b.min #=> Integer
@@ -3025,6 +3031,8 @@ module Aws::ECS
     #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.allowed_instance_types[0] #=> String
     #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.max_spot_price_as_percentage_of_optimal_on_demand_price #=> Integer
     #   resp.capacity_provider.managed_instances_provider.instance_launch_template.fips_enabled #=> Boolean
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.capacity_reservations.reservation_group_arn #=> String
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.capacity_reservations.reservation_preference #=> String, one of "RESERVATIONS_ONLY", "RESERVATIONS_FIRST", "RESERVATIONS_EXCLUDED"
     #   resp.capacity_provider.managed_instances_provider.propagate_tags #=> String, one of "CAPACITY_PROVIDER", "NONE"
     #   resp.capacity_provider.managed_instances_provider.infrastructure_optimization.scale_in_after #=> Integer
     #   resp.capacity_provider.update_status #=> String, one of "CREATE_IN_PROGRESS", "CREATE_COMPLETE", "CREATE_FAILED", "DELETE_IN_PROGRESS", "DELETE_COMPLETE", "DELETE_FAILED", "UPDATE_IN_PROGRESS", "UPDATE_COMPLETE", "UPDATE_FAILED"
@@ -4518,7 +4526,7 @@ module Aws::ECS
     #   resp.capacity_providers[0].managed_instances_provider.instance_launch_template.network_configuration.security_groups[0] #=> String
     #   resp.capacity_providers[0].managed_instances_provider.instance_launch_template.storage_configuration.storage_size_gi_b #=> Integer
     #   resp.capacity_providers[0].managed_instances_provider.instance_launch_template.monitoring #=> String, one of "BASIC", "DETAILED"
-    #   resp.capacity_providers[0].managed_instances_provider.instance_launch_template.capacity_option_type #=> String, one of "ON_DEMAND", "SPOT"
+    #   resp.capacity_providers[0].managed_instances_provider.instance_launch_template.capacity_option_type #=> String, one of "ON_DEMAND", "SPOT", "RESERVED"
     #   resp.capacity_providers[0].managed_instances_provider.instance_launch_template.instance_requirements.v_cpu_count.min #=> Integer
     #   resp.capacity_providers[0].managed_instances_provider.instance_launch_template.instance_requirements.v_cpu_count.max #=> Integer
     #   resp.capacity_providers[0].managed_instances_provider.instance_launch_template.instance_requirements.memory_mi_b.min #=> Integer
@@ -4561,6 +4569,8 @@ module Aws::ECS
     #   resp.capacity_providers[0].managed_instances_provider.instance_launch_template.instance_requirements.allowed_instance_types[0] #=> String
     #   resp.capacity_providers[0].managed_instances_provider.instance_launch_template.instance_requirements.max_spot_price_as_percentage_of_optimal_on_demand_price #=> Integer
     #   resp.capacity_providers[0].managed_instances_provider.instance_launch_template.fips_enabled #=> Boolean
+    #   resp.capacity_providers[0].managed_instances_provider.instance_launch_template.capacity_reservations.reservation_group_arn #=> String
+    #   resp.capacity_providers[0].managed_instances_provider.instance_launch_template.capacity_reservations.reservation_preference #=> String, one of "RESERVATIONS_ONLY", "RESERVATIONS_FIRST", "RESERVATIONS_EXCLUDED"
     #   resp.capacity_providers[0].managed_instances_provider.propagate_tags #=> String, one of "CAPACITY_PROVIDER", "NONE"
     #   resp.capacity_providers[0].managed_instances_provider.infrastructure_optimization.scale_in_after #=> Integer
     #   resp.capacity_providers[0].update_status #=> String, one of "CREATE_IN_PROGRESS", "CREATE_COMPLETE", "CREATE_FAILED", "DELETE_IN_PROGRESS", "DELETE_COMPLETE", "DELETE_FAILED", "UPDATE_IN_PROGRESS", "UPDATE_COMPLETE", "UPDATE_FAILED"
@@ -11517,6 +11527,10 @@ module Aws::ECS
     #           allowed_instance_types: ["AllowedInstanceType"],
     #           max_spot_price_as_percentage_of_optimal_on_demand_price: 1,
     #         },
+    #         capacity_reservations: {
+    #           reservation_group_arn: "String",
+    #           reservation_preference: "RESERVATIONS_ONLY", # accepts RESERVATIONS_ONLY, RESERVATIONS_FIRST, RESERVATIONS_EXCLUDED
+    #         },
     #       },
     #       propagate_tags: "CAPACITY_PROVIDER", # accepts CAPACITY_PROVIDER, NONE
     #       infrastructure_optimization: {
@@ -11547,7 +11561,7 @@ module Aws::ECS
     #   resp.capacity_provider.managed_instances_provider.instance_launch_template.network_configuration.security_groups[0] #=> String
     #   resp.capacity_provider.managed_instances_provider.instance_launch_template.storage_configuration.storage_size_gi_b #=> Integer
     #   resp.capacity_provider.managed_instances_provider.instance_launch_template.monitoring #=> String, one of "BASIC", "DETAILED"
-    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.capacity_option_type #=> String, one of "ON_DEMAND", "SPOT"
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.capacity_option_type #=> String, one of "ON_DEMAND", "SPOT", "RESERVED"
     #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.v_cpu_count.min #=> Integer
     #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.v_cpu_count.max #=> Integer
     #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.memory_mi_b.min #=> Integer
@@ -11590,6 +11604,8 @@ module Aws::ECS
     #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.allowed_instance_types[0] #=> String
     #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.max_spot_price_as_percentage_of_optimal_on_demand_price #=> Integer
     #   resp.capacity_provider.managed_instances_provider.instance_launch_template.fips_enabled #=> Boolean
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.capacity_reservations.reservation_group_arn #=> String
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.capacity_reservations.reservation_preference #=> String, one of "RESERVATIONS_ONLY", "RESERVATIONS_FIRST", "RESERVATIONS_EXCLUDED"
     #   resp.capacity_provider.managed_instances_provider.propagate_tags #=> String, one of "CAPACITY_PROVIDER", "NONE"
     #   resp.capacity_provider.managed_instances_provider.infrastructure_optimization.scale_in_after #=> Integer
     #   resp.capacity_provider.update_status #=> String, one of "CREATE_IN_PROGRESS", "CREATE_COMPLETE", "CREATE_FAILED", "DELETE_IN_PROGRESS", "DELETE_COMPLETE", "DELETE_FAILED", "UPDATE_IN_PROGRESS", "UPDATE_COMPLETE", "UPDATE_FAILED"
@@ -14046,7 +14062,7 @@ module Aws::ECS
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-ecs'
-      context[:gem_version] = '1.221.0'
+      context[:gem_version] = '1.222.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

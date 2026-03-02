@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.93.0 (2026-02-26)
+------------------
+
+* Feature - Added LicenseArn to ResolveCustomer response and BatchMeterUsage usage records. BatchMeterUsage now accepts LicenseArn in each UsageRecord to report usage at the license level. Added InvalidLicenseException error response for invalid license parameters.
+
 1.92.0 (2026-01-22)
 ------------------
 

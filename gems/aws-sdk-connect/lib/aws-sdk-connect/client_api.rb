@@ -4869,8 +4869,10 @@ module Aws::Connect
     EvaluationReviewConfiguration.struct_class = Types::EvaluationReviewConfiguration
 
     EvaluationReviewMetadata.add_member(:review_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "ReviewId"))
-    EvaluationReviewMetadata.add_member(:created_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreatedTime"))
-    EvaluationReviewMetadata.add_member(:created_by, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "CreatedBy"))
+    EvaluationReviewMetadata.add_member(:requested_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "RequestedTime"))
+    EvaluationReviewMetadata.add_member(:requested_by, Shapes::ShapeRef.new(shape: ARN, location_name: "RequestedBy"))
+    EvaluationReviewMetadata.add_member(:created_time, Shapes::ShapeRef.new(shape: Timestamp, deprecated: true, location_name: "CreatedTime", metadata: {"deprecatedMessage" => "CreatedTime is deprecated.", "deprecatedSince" => "02/17/2026"}))
+    EvaluationReviewMetadata.add_member(:created_by, Shapes::ShapeRef.new(shape: ARN, deprecated: true, location_name: "CreatedBy", metadata: {"deprecatedMessage" => "CreatedBy is deprecated.", "deprecatedSince" => "02/17/2026"}))
     EvaluationReviewMetadata.add_member(:review_request_comments, Shapes::ShapeRef.new(shape: EvaluationReviewRequestCommentList, required: true, location_name: "ReviewRequestComments"))
     EvaluationReviewMetadata.struct_class = Types::EvaluationReviewMetadata
 

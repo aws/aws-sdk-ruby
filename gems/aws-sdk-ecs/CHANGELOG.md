@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.222.0 (2026-02-26)
+------------------
+
+* Feature - Adding support for Capacity Reservations for ECS Managed Instances by introducing a new "capacityOptionType" value of "RESERVED" and new field "capacityReservations" for CreateCapacityProvider and UpdateCapacityProvider APIs.
+
 1.221.0 (2026-02-20)
 ------------------
 

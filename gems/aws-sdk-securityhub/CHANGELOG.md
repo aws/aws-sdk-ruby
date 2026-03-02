@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.152.0 (2026-02-26)
+------------------
+
+* Feature - Security Hub added EXTENDED PLAN integration type to DescribeProductsV2 and added metadata.product.vendor name GroupBy support to GetFindingStatisticsV2
+
 1.151.0 (2026-01-16)
 ------------------
 

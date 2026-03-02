@@ -2548,6 +2548,9 @@ module Aws::Bedrock
     #
     #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/tagging.html
     #
+    # @option params [String] :model_invocation_type
+    #   The invocation endpoint for ModelInvocationJob
+    #
     # @return [Types::CreateModelInvocationJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateModelInvocationJobResponse#job_arn #job_arn} => String
@@ -2584,6 +2587,7 @@ module Aws::Bedrock
     #         value: "TagValue", # required
     #       },
     #     ],
+    #     model_invocation_type: "InvokeModel", # accepts InvokeModel, Converse
     #   })
     #
     # @example Response structure
@@ -4259,6 +4263,10 @@ module Aws::Bedrock
     #   resp.model_details.inference_types_supported #=> Array
     #   resp.model_details.inference_types_supported[0] #=> String, one of "ON_DEMAND", "PROVISIONED"
     #   resp.model_details.model_lifecycle.status #=> String, one of "ACTIVE", "LEGACY"
+    #   resp.model_details.model_lifecycle.start_of_life_time #=> Time
+    #   resp.model_details.model_lifecycle.end_of_life_time #=> Time
+    #   resp.model_details.model_lifecycle.legacy_time #=> Time
+    #   resp.model_details.model_lifecycle.public_extended_access_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/GetFoundationModel AWS API Documentation
     #
@@ -4845,6 +4853,7 @@ module Aws::Bedrock
     #   * {Types::GetModelInvocationJobResponse#vpc_config #vpc_config} => Types::VpcConfig
     #   * {Types::GetModelInvocationJobResponse#timeout_duration_in_hours #timeout_duration_in_hours} => Integer
     #   * {Types::GetModelInvocationJobResponse#job_expiration_time #job_expiration_time} => Time
+    #   * {Types::GetModelInvocationJobResponse#model_invocation_type #model_invocation_type} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -4876,6 +4885,7 @@ module Aws::Bedrock
     #   resp.vpc_config.security_group_ids[0] #=> String
     #   resp.timeout_duration_in_hours #=> Integer
     #   resp.job_expiration_time #=> Time
+    #   resp.model_invocation_type #=> String, one of "InvokeModel", "Converse"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/GetModelInvocationJob AWS API Documentation
     #
@@ -5810,6 +5820,10 @@ module Aws::Bedrock
     #   resp.model_summaries[0].inference_types_supported #=> Array
     #   resp.model_summaries[0].inference_types_supported[0] #=> String, one of "ON_DEMAND", "PROVISIONED"
     #   resp.model_summaries[0].model_lifecycle.status #=> String, one of "ACTIVE", "LEGACY"
+    #   resp.model_summaries[0].model_lifecycle.start_of_life_time #=> Time
+    #   resp.model_summaries[0].model_lifecycle.end_of_life_time #=> Time
+    #   resp.model_summaries[0].model_lifecycle.legacy_time #=> Time
+    #   resp.model_summaries[0].model_lifecycle.public_extended_access_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/ListFoundationModels AWS API Documentation
     #
@@ -6489,6 +6503,7 @@ module Aws::Bedrock
     #   resp.invocation_job_summaries[0].vpc_config.security_group_ids[0] #=> String
     #   resp.invocation_job_summaries[0].timeout_duration_in_hours #=> Integer
     #   resp.invocation_job_summaries[0].job_expiration_time #=> Time
+    #   resp.invocation_job_summaries[0].model_invocation_type #=> String, one of "InvokeModel", "Converse"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/ListModelInvocationJobs AWS API Documentation
     #
@@ -7880,7 +7895,7 @@ module Aws::Bedrock
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrock'
-      context[:gem_version] = '1.75.0'
+      context[:gem_version] = '1.76.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

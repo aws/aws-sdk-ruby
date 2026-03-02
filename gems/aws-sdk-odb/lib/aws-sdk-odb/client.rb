@@ -1149,6 +1149,11 @@ module Aws::Odb
     #   blocks define the IP address ranges that can communicate through the
     #   peering connection.
     #
+    # @option params [Array<String>] :peer_network_route_table_ids
+    #   The unique identifier of the VPC route table for which a route to the
+    #   ODB network is automatically created during peering connection
+    #   establishment.
+    #
     # @option params [String] :client_token
     #   The client token for the ODB peering connection request.
     #
@@ -1178,6 +1183,7 @@ module Aws::Odb
     #     peer_network_id: "ResourceIdOrArn", # required
     #     display_name: "ResourceDisplayName",
     #     peer_network_cidrs_to_be_added: ["PeeredCidr"],
+    #     peer_network_route_table_ids: ["PeerNetworkRouteTableId"],
     #     client_token: "CreateOdbPeeringConnectionInputClientTokenString",
     #     tags: {
     #       "TagKey" => "TagValue",
@@ -3220,7 +3226,7 @@ module Aws::Odb
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-odb'
-      context[:gem_version] = '1.14.0'
+      context[:gem_version] = '1.15.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

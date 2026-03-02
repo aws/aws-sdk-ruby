@@ -54,7 +54,7 @@ module Aws::SecurityHub
   autoload :EndpointProvider, 'aws-sdk-securityhub/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-securityhub/endpoints'
 
-  GEM_VERSION = '1.151.0'
+  GEM_VERSION = '1.152.0'
 
 end
 

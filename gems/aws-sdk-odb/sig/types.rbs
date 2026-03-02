@@ -482,6 +482,7 @@ module Aws::Odb
       attr_accessor peer_network_id: ::String
       attr_accessor display_name: ::String
       attr_accessor peer_network_cidrs_to_be_added: ::Array[::String]
+      attr_accessor peer_network_route_table_ids: ::Array[::String]
       attr_accessor client_token: ::String
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []

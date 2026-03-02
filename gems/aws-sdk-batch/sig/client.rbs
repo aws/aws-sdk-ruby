@@ -136,7 +136,10 @@ module Aws
                                               image_id_override: ::String?,
                                               image_kubernetes_version: ::String?
                                             },
-                                          ]?
+                                          ]?,
+                                          scaling_policy: {
+                                            min_scale_down_delay_minutes: ::Integer?
+                                          }?
                                         },
                                         ?service_role: ::String,
                                         ?tags: Hash[::String, ::String],
@@ -1630,7 +1633,10 @@ module Aws
                                           ]?,
                                           update_to_latest_image_version: bool?,
                                           type: ("EC2" | "SPOT" | "FARGATE" | "FARGATE_SPOT")?,
-                                          image_id: ::String?
+                                          image_id: ::String?,
+                                          scaling_policy: {
+                                            min_scale_down_delay_minutes: ::Integer?
+                                          }?
                                         },
                                         ?service_role: ::String,
                                         ?update_policy: {

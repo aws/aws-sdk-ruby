@@ -3487,6 +3487,8 @@ module Aws::Connect
 
     class EvaluationReviewMetadata
       attr_accessor review_id: ::String
+      attr_accessor requested_time: ::Time
+      attr_accessor requested_by: ::String
       attr_accessor created_time: ::Time
       attr_accessor created_by: ::String
       attr_accessor review_request_comments: ::Array[Types::EvaluationReviewRequestComment]

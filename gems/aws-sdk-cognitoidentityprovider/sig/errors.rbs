@@ -11,6 +11,9 @@ module Aws
       class ServiceError < ::Aws::Errors::ServiceError
       end
 
+      class AccessDeniedException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
       class AliasExistsException < ::Aws::Errors::ServiceError
         def message: () -> ::String
       end
@@ -45,6 +48,9 @@ module Aws
         def message: () -> ::String
       end
       class InternalErrorException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InternalServerException < ::Aws::Errors::ServiceError
         def message: () -> ::String
       end
       class InvalidEmailRoleAccessPolicyException < ::Aws::Errors::ServiceError

@@ -485,13 +485,7 @@ module Aws::MarketplaceEntitlementService
 
     # GetEntitlements retrieves entitlement values for a given product. The
     # results can be filtered based on customer identifier, AWS account ID,
-    # or product dimensions.
-    #
-    # The `CustomerIdentifier` parameter is on path for deprecation. Use
-    # `CustomerAWSAccountID` instead.
-    #
-    #  These parameters are mutually exclusive. You can't specify both
-    # `CustomerIdentifier` and `CustomerAWSAccountID` in the same request.
+    # license ARN, or product dimensions.
     #
     # @option params [required, String] :product_code
     #   Product code is used to uniquely identify a product in AWS
@@ -504,8 +498,20 @@ module Aws::MarketplaceEntitlementService
     #   values. Filtered requests are *unioned* for each value in the value
     #   list, and then *intersected* for each filter key.
     #
-    #   `CustomerIdentifier` and `CustomerAWSAccountID` are mutually
-    #   exclusive. You can't specify both in the same request.
+    #   `CustomerIdentifier` and `CustomerAWSAccountId` are mutually exclusive
+    #   parameters. You must use one or the other, but not both in the same
+    #   request.
+    #
+    #   <note markdown="1"> If you're migrating an existing integration, use [Account Feeds][1]
+    #   to map `CustomerIdentifier` to `CustomerAWSAccountId`, and [Agreements
+    #   Feeds][2] to map `CustomerAWSAccountId` and `LicenseArn`.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/marketplace/latest/userguide/data-feed-account.html
+    #   [2]: https://docs.aws.amazon.com/marketplace/latest/userguide/data-feed-agreements.html
     #
     # @option params [String] :next_token
     #   For paginated calls to GetEntitlements, pass the NextToken from the
@@ -546,6 +552,7 @@ module Aws::MarketplaceEntitlementService
     #   resp.entitlements[0].value.boolean_value #=> Boolean
     #   resp.entitlements[0].value.string_value #=> String
     #   resp.entitlements[0].expiration_date #=> Time
+    #   resp.entitlements[0].license_arn #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/entitlement.marketplace-2017-01-11/GetEntitlements AWS API Documentation
@@ -575,7 +582,7 @@ module Aws::MarketplaceEntitlementService
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-marketplaceentitlementservice'
-      context[:gem_version] = '1.83.0'
+      context[:gem_version] = '1.84.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

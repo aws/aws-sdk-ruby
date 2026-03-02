@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.100.0 (2026-02-25)
+------------------
+
+* Feature - Neptune global clusters now supports tags
+
 1.99.0 (2026-01-16)
 ------------------
 

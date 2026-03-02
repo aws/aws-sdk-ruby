@@ -128,6 +128,7 @@ module Aws::Batch
       attr_accessor spot_iam_fleet_role: ::String
       attr_accessor launch_template: Types::LaunchTemplateSpecification
       attr_accessor ec2_configuration: ::Array[Types::Ec2Configuration]
+      attr_accessor scaling_policy: Types::ComputeScalingPolicy
       SENSITIVE: []
     end
 
@@ -149,6 +150,12 @@ module Aws::Batch
       attr_accessor update_to_latest_image_version: bool
       attr_accessor type: ("EC2" | "SPOT" | "FARGATE" | "FARGATE_SPOT")
       attr_accessor image_id: ::String
+      attr_accessor scaling_policy: Types::ComputeScalingPolicy
+      SENSITIVE: []
+    end
+
+    class ComputeScalingPolicy
+      attr_accessor min_scale_down_delay_minutes: ::Integer
       SENSITIVE: []
     end
 

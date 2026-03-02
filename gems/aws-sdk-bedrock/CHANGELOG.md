@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.76.0 (2026-02-27)
+------------------
+
+* Feature - Added four new model lifecycle date fields, startOfLifeTime, endOfLifeTime, legacyTime, and publicExtendedAccessTime. Adds support for using the Converse API with Bedrock Batch inference jobs.
+
 1.75.0 (2026-02-23)
 ------------------
 

@@ -699,6 +699,33 @@ module Aws::WAFV2
       include Aws::Structure
     end
 
+    # Statistics about a specific bot's traffic to a path, including the
+    # bot name, request count, and percentage of traffic.
+    #
+    # @!attribute [rw] bot_name
+    #   The name of the bot. For example, `gptbot` or `googlebot`.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_count
+    #   The number of requests from this bot to the associated path within
+    #   the specified time window.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] percentage
+    #   The percentage of total requests to the associated path that came
+    #   from this bot.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/BotStatistics AWS API Documentation
+    #
+    class BotStatistics < Struct.new(
+      :bot_name,
+      :request_count,
+      :percentage)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A rule statement that defines a string match search for WAF to apply
     # to web requests. The byte match statement provides the bytes to search
     # for, the location in requests that you want WAF to search, and other
@@ -3088,6 +3115,35 @@ module Aws::WAFV2
       include Aws::Structure
     end
 
+    # Information about the bot filter that was applied to the request. This
+    # structure is populated in the response when you filter by bot
+    # category, organization, or name.
+    #
+    # @!attribute [rw] bot_category
+    #   The bot category that was used to filter the results. For example,
+    #   `ai` or `search_engine`.
+    #   @return [String]
+    #
+    # @!attribute [rw] bot_organization
+    #   The bot organization that was used to filter the results. For
+    #   example, `OpenAI` or `Google`.
+    #   @return [String]
+    #
+    # @!attribute [rw] bot_name
+    #   The bot name that was used to filter the results. For example,
+    #   `gptbot` or `googlebot`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/FilterSource AWS API Documentation
+    #
+    class FilterSource < Struct.new(
+      :bot_category,
+      :bot_organization,
+      :bot_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A rule group that's defined for an Firewall Manager WAF policy.
     #
     # @!attribute [rw] name
@@ -3878,6 +3934,127 @@ module Aws::WAFV2
       :sampled_requests,
       :population_size,
       :time_window)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] web_acl_arn
+    #   The Amazon Resource Name (ARN) of the web ACL for which you want to
+    #   retrieve path statistics.
+    #   @return [String]
+    #
+    # @!attribute [rw] scope
+    #   Specifies whether the web ACL is for an Amazon Web Services
+    #   CloudFront distribution or for a regional application. A regional
+    #   application can be an Application Load Balancer, an AppSync GraphQL
+    #   API, an Amazon Cognito user pool, an Amazon Web Services App Runner
+    #   service, or an Amazon Web Services Verified Access instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] uri_path_prefix
+    #   A URI path prefix to filter the results. When you specify this
+    #   parameter, the operation returns statistics for individual URIs
+    #   within the specified path prefix. For example, if you specify
+    #   `/api`, the response includes statistics for paths like
+    #   `/api/v1/users` and `/api/v2/orders`. If you don't specify this
+    #   parameter, the operation returns top-level path statistics.
+    #   @return [String]
+    #
+    # @!attribute [rw] time_window
+    #   The time window for which you want to retrieve path statistics. The
+    #   time window must be within the data retention period for your web
+    #   ACL.
+    #   @return [Types::TimeWindow]
+    #
+    # @!attribute [rw] bot_category
+    #   Filters the results to include only traffic from bots in the
+    #   specified category. For example, you can filter by `ai` to see only
+    #   AI crawler traffic, or `search_engine` to see only search engine bot
+    #   traffic. When you apply this filter, the `Source` field is populated
+    #   in the response.
+    #   @return [String]
+    #
+    # @!attribute [rw] bot_organization
+    #   Filters the results to include only traffic from bots belonging to
+    #   the specified organization. For example, you can filter by `openai`
+    #   or `google`. When you apply this filter, the `Source` field is
+    #   populated in the response.
+    #   @return [String]
+    #
+    # @!attribute [rw] bot_name
+    #   Filters the results to include only traffic from the specified bot.
+    #   For example, you can filter by `gptbot` or `googlebot`. When you
+    #   apply this filter, the `Source` field is populated in the response.
+    #   @return [String]
+    #
+    # @!attribute [rw] limit
+    #   The maximum number of path statistics to return. Valid values are 1
+    #   to 100.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] number_of_top_traffic_bots_per_path
+    #   The maximum number of top bots to include in the statistics for each
+    #   path. Valid values are 1 to 10.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_marker
+    #   When you request a list of objects with a `Limit` setting, if the
+    #   number of objects that are still available for retrieval exceeds the
+    #   limit, WAF returns a `NextMarker` value in the response. To retrieve
+    #   the next batch of objects, provide the marker from the prior call in
+    #   your next request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/GetTopPathStatisticsByTrafficRequest AWS API Documentation
+    #
+    class GetTopPathStatisticsByTrafficRequest < Struct.new(
+      :web_acl_arn,
+      :scope,
+      :uri_path_prefix,
+      :time_window,
+      :bot_category,
+      :bot_organization,
+      :bot_name,
+      :limit,
+      :number_of_top_traffic_bots_per_path,
+      :next_marker)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] path_statistics
+    #   The list of path statistics, ordered by request count. Each entry
+    #   includes the path, request count, percentage of total traffic, and
+    #   the top bots accessing that path.
+    #   @return [Array<Types::PathStatistics>]
+    #
+    # @!attribute [rw] total_request_count
+    #   The total number of requests that match the query criteria within
+    #   the specified time window.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_marker
+    #   When you request a list of objects with a `Limit` setting, if the
+    #   number of objects that are still available for retrieval exceeds the
+    #   limit, WAF returns a `NextMarker` value in the response. To retrieve
+    #   the next batch of objects, provide the marker from the prior call in
+    #   your next request.
+    #   @return [String]
+    #
+    # @!attribute [rw] top_categories
+    #   Category-level aggregations for visualizing bot category to path
+    #   relationships. This field is only populated when no bot filters are
+    #   applied to the request. Each entry includes the bot category and the
+    #   paths accessed by bots in that category.
+    #   @return [Array<Types::PathStatistics>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/GetTopPathStatisticsByTrafficResponse AWS API Documentation
+    #
+    class GetTopPathStatisticsByTrafficResponse < Struct.new(
+      :path_statistics,
+      :total_request_count,
+      :next_marker,
+      :top_categories)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6629,6 +6806,47 @@ module Aws::WAFV2
     #
     class PasswordField < Struct.new(
       :identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Statistics about bot traffic to a specific URI path, including the
+    # path, request count, percentage of total traffic, and the top bots
+    # accessing that path.
+    #
+    # @!attribute [rw] source
+    #   Information about the bot filter that was applied to generate these
+    #   statistics. This field is only populated when you filter by bot
+    #   category, organization, or name.
+    #   @return [Types::FilterSource]
+    #
+    # @!attribute [rw] path
+    #   The URI path. For example, `/api/` or `/api/v1/users`.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_count
+    #   The number of requests to this path within the specified time
+    #   window.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] percentage
+    #   The percentage of total requests that were made to this path.
+    #   @return [Float]
+    #
+    # @!attribute [rw] top_bots
+    #   The list of top bots accessing this path, ordered by request count.
+    #   The number of bots included is determined by the
+    #   `NumberOfTopTrafficBotsPerPath` parameter in the request.
+    #   @return [Array<Types::BotStatistics>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/PathStatistics AWS API Documentation
+    #
+    class PathStatistics < Struct.new(
+      :source,
+      :path,
+      :request_count,
+      :percentage,
+      :top_bots)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.49.0 (2026-02-26)
+------------------
+
+* Feature - This release updates GetGateway API to include deprecationDate and softwareVersion in the response, enabling customers to track gateway software versions and upcoming deprecation dates.
+
 1.48.0 (2026-01-16)
 ------------------
 

@@ -413,6 +413,13 @@ module Aws
                                    ?engine: ::String,
                                    ?engine_version: ::String,
                                    ?deletion_protection: bool,
+                                   ?database_name: ::String,
+                                   ?tags: Array[
+                                     {
+                                       key: ::String?,
+                                       value: ::String?
+                                     },
+                                   ],
                                    ?storage_encrypted: bool
                                  ) -> _CreateGlobalClusterResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateGlobalClusterResponseSuccess

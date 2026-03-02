@@ -1087,6 +1087,7 @@ module Aws::Bedrock
       attr_accessor vpc_config: Types::VpcConfig
       attr_accessor timeout_duration_in_hours: ::Integer
       attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor model_invocation_type: ("InvokeModel" | "Converse")
       SENSITIVE: []
     end
 
@@ -1558,6 +1559,10 @@ module Aws::Bedrock
 
     class FoundationModelLifecycle
       attr_accessor status: ("ACTIVE" | "LEGACY")
+      attr_accessor start_of_life_time: ::Time
+      attr_accessor end_of_life_time: ::Time
+      attr_accessor legacy_time: ::Time
+      attr_accessor public_extended_access_time: ::Time
       SENSITIVE: []
     end
 
@@ -1950,6 +1955,7 @@ module Aws::Bedrock
       attr_accessor vpc_config: Types::VpcConfig
       attr_accessor timeout_duration_in_hours: ::Integer
       attr_accessor job_expiration_time: ::Time
+      attr_accessor model_invocation_type: ("InvokeModel" | "Converse")
       SENSITIVE: [:message]
     end
 
@@ -2898,6 +2904,7 @@ module Aws::Bedrock
       attr_accessor vpc_config: Types::VpcConfig
       attr_accessor timeout_duration_in_hours: ::Integer
       attr_accessor job_expiration_time: ::Time
+      attr_accessor model_invocation_type: ("InvokeModel" | "Converse")
       SENSITIVE: [:message]
     end
 

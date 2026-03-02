@@ -127,7 +127,7 @@ module Aws
                                        },
                                      ],
                                      retry_interval_minutes: ::Float,
-                                     region_to_run: ("activatingRegion" | "deactivatingRegion"),
+                                     region_to_run: ("activatingRegion" | "deactivatingRegion" | "activeRegion" | "inactiveRegion"),
                                      ungraceful: {
                                        behavior: ("skip")?
                                      }?
@@ -246,12 +246,24 @@ module Aws
                                      }?,
                                      global_cluster_identifier: ::String,
                                      database_cluster_arns: Array[::String]
+                                   }?,
+                                   rds_promote_read_replica_config: {
+                                     timeout_minutes: ::Integer?,
+                                     cross_account_role: ::String?,
+                                     external_id: ::String?,
+                                     db_instance_arn_map: Hash[::String, ::String]
+                                   }?,
+                                   rds_create_cross_region_read_replica_config: {
+                                     timeout_minutes: ::Integer?,
+                                     cross_account_role: ::String?,
+                                     external_id: ::String?,
+                                     db_instance_arn_map: Hash[::String, ::String]
                                    }?
                                  },
-                                 execution_block_type: ("CustomActionLambda" | "ManualApproval" | "AuroraGlobalDatabase" | "EC2AutoScaling" | "ARCRoutingControl" | "ARCRegionSwitchPlan" | "Parallel" | "ECSServiceScaling" | "EKSResourceScaling" | "Route53HealthCheck" | "DocumentDb")
+                                 execution_block_type: ("CustomActionLambda" | "ManualApproval" | "AuroraGlobalDatabase" | "EC2AutoScaling" | "ARCRoutingControl" | "ARCRegionSwitchPlan" | "Parallel" | "ECSServiceScaling" | "EKSResourceScaling" | "Route53HealthCheck" | "DocumentDb" | "RdsPromoteReadReplica" | "RdsCreateCrossRegionReplica")
                                },
                              ]?,
-                             workflow_target_action: ("activate" | "deactivate"),
+                             workflow_target_action: ("activate" | "deactivate" | "postRecovery"),
                              workflow_target_region: ::String?,
                              workflow_description: ::String?
                            },
@@ -268,7 +280,7 @@ module Aws
                            {
                              description: ::String?,
                              target_region: ::String,
-                             action: ("activate" | "deactivate"),
+                             action: ("activate" | "deactivate" | "postRecovery"),
                              conditions: Array[
                                {
                                  associated_alarm_name: ::String,
@@ -344,8 +356,9 @@ module Aws
         def end_time: () -> ::Time
         def mode: () -> ("graceful" | "ungraceful")
         def execution_state: () -> ("inProgress" | "pausedByFailedStep" | "pausedByOperator" | "completed" | "completedWithExceptions" | "canceled" | "planExecutionTimedOut" | "pendingManualApproval" | "failed" | "pending" | "completedMonitoringApplicationHealth")
-        def execution_action: () -> ("activate" | "deactivate")
+        def execution_action: () -> ("activate" | "deactivate" | "postRecovery")
         def execution_region: () -> ::String
+        def recovery_execution_id: () -> ::String
         def step_states: () -> ::Array[Types::StepState]
         def plan: () -> Types::Plan
         def actual_recovery_time: () -> ::String
@@ -476,10 +489,11 @@ module Aws
       def start_plan_execution: (
                                   plan_arn: ::String,
                                   target_region: ::String,
-                                  action: ("activate" | "deactivate"),
+                                  action: ("activate" | "deactivate" | "postRecovery"),
                                   ?mode: ("graceful" | "ungraceful"),
                                   ?comment: ::String,
-                                  ?latest_version: ::String
+                                  ?latest_version: ::String,
+                                  ?recovery_execution_id: ::String
                                 ) -> _StartPlanExecutionResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartPlanExecutionResponseSuccess
 
@@ -528,7 +542,7 @@ module Aws
                                        },
                                      ],
                                      retry_interval_minutes: ::Float,
-                                     region_to_run: ("activatingRegion" | "deactivatingRegion"),
+                                     region_to_run: ("activatingRegion" | "deactivatingRegion" | "activeRegion" | "inactiveRegion"),
                                      ungraceful: {
                                        behavior: ("skip")?
                                      }?
@@ -647,12 +661,24 @@ module Aws
                                      }?,
                                      global_cluster_identifier: ::String,
                                      database_cluster_arns: Array[::String]
+                                   }?,
+                                   rds_promote_read_replica_config: {
+                                     timeout_minutes: ::Integer?,
+                                     cross_account_role: ::String?,
+                                     external_id: ::String?,
+                                     db_instance_arn_map: Hash[::String, ::String]
+                                   }?,
+                                   rds_create_cross_region_read_replica_config: {
+                                     timeout_minutes: ::Integer?,
+                                     cross_account_role: ::String?,
+                                     external_id: ::String?,
+                                     db_instance_arn_map: Hash[::String, ::String]
                                    }?
                                  },
-                                 execution_block_type: ("CustomActionLambda" | "ManualApproval" | "AuroraGlobalDatabase" | "EC2AutoScaling" | "ARCRoutingControl" | "ARCRegionSwitchPlan" | "Parallel" | "ECSServiceScaling" | "EKSResourceScaling" | "Route53HealthCheck" | "DocumentDb")
+                                 execution_block_type: ("CustomActionLambda" | "ManualApproval" | "AuroraGlobalDatabase" | "EC2AutoScaling" | "ARCRoutingControl" | "ARCRegionSwitchPlan" | "Parallel" | "ECSServiceScaling" | "EKSResourceScaling" | "Route53HealthCheck" | "DocumentDb" | "RdsPromoteReadReplica" | "RdsCreateCrossRegionReplica")
                                },
                              ]?,
-                             workflow_target_action: ("activate" | "deactivate"),
+                             workflow_target_action: ("activate" | "deactivate" | "postRecovery"),
                              workflow_target_region: ::String?,
                              workflow_description: ::String?
                            },
@@ -669,7 +695,7 @@ module Aws
                            {
                              description: ::String?,
                              target_region: ::String,
-                             action: ("activate" | "deactivate"),
+                             action: ("activate" | "deactivate" | "postRecovery"),
                              conditions: Array[
                                {
                                  associated_alarm_name: ::String,

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.96.0 (2026-02-27)
+------------------
+
+* Feature - Updates the regex for validating availabilityZone strings used in the describe events filters.
+
 1.95.0 (2026-01-22)
 ------------------
 

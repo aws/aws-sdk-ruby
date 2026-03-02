@@ -847,6 +847,9 @@ module Aws::Batch
     #           image_kubernetes_version: "KubernetesVersion",
     #         },
     #       ],
+    #       scaling_policy: {
+    #         min_scale_down_delay_minutes: 1,
+    #       },
     #     },
     #     service_role: "String",
     #     tags: {
@@ -1631,6 +1634,7 @@ module Aws::Batch
     #   resp.compute_environments[0].compute_resources.ec2_configuration[0].image_type #=> String
     #   resp.compute_environments[0].compute_resources.ec2_configuration[0].image_id_override #=> String
     #   resp.compute_environments[0].compute_resources.ec2_configuration[0].image_kubernetes_version #=> String
+    #   resp.compute_environments[0].compute_resources.scaling_policy.min_scale_down_delay_minutes #=> Integer
     #   resp.compute_environments[0].service_role #=> String
     #   resp.compute_environments[0].update_policy.terminate_jobs_on_update #=> Boolean
     #   resp.compute_environments[0].update_policy.job_execution_timeout_minutes #=> Integer
@@ -5865,6 +5869,9 @@ module Aws::Batch
     #       update_to_latest_image_version: false,
     #       type: "EC2", # accepts EC2, SPOT, FARGATE, FARGATE_SPOT
     #       image_id: "String",
+    #       scaling_policy: {
+    #         min_scale_down_delay_minutes: 1,
+    #       },
     #     },
     #     service_role: "String",
     #     update_policy: {
@@ -6196,7 +6203,7 @@ module Aws::Batch
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-batch'
-      context[:gem_version] = '1.134.0'
+      context[:gem_version] = '1.136.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

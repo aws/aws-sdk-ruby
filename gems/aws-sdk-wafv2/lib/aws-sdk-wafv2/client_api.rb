@@ -49,6 +49,8 @@ module Aws::WAFV2
     Body = Shapes::StructureShape.new(name: 'Body')
     BodyParsingFallbackBehavior = Shapes::StringShape.new(name: 'BodyParsingFallbackBehavior')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
+    BotStatistics = Shapes::StructureShape.new(name: 'BotStatistics')
+    BotStatisticsList = Shapes::ListShape.new(name: 'BotStatisticsList')
     ByteMatchStatement = Shapes::StructureShape.new(name: 'ByteMatchStatement')
     CapacityUnit = Shapes::IntegerShape.new(name: 'CapacityUnit')
     CaptchaAction = Shapes::StructureShape.new(name: 'CaptchaAction')
@@ -147,6 +149,8 @@ module Aws::WAFV2
     Filter = Shapes::StructureShape.new(name: 'Filter')
     FilterBehavior = Shapes::StringShape.new(name: 'FilterBehavior')
     FilterRequirement = Shapes::StringShape.new(name: 'FilterRequirement')
+    FilterSource = Shapes::StructureShape.new(name: 'FilterSource')
+    FilterString = Shapes::StringShape.new(name: 'FilterString')
     Filters = Shapes::ListShape.new(name: 'Filters')
     FirewallManagerRuleGroup = Shapes::StructureShape.new(name: 'FirewallManagerRuleGroup')
     FirewallManagerRuleGroups = Shapes::ListShape.new(name: 'FirewallManagerRuleGroups')
@@ -177,6 +181,8 @@ module Aws::WAFV2
     GetRuleGroupResponse = Shapes::StructureShape.new(name: 'GetRuleGroupResponse')
     GetSampledRequestsRequest = Shapes::StructureShape.new(name: 'GetSampledRequestsRequest')
     GetSampledRequestsResponse = Shapes::StructureShape.new(name: 'GetSampledRequestsResponse')
+    GetTopPathStatisticsByTrafficRequest = Shapes::StructureShape.new(name: 'GetTopPathStatisticsByTrafficRequest')
+    GetTopPathStatisticsByTrafficResponse = Shapes::StructureShape.new(name: 'GetTopPathStatisticsByTrafficResponse')
     GetWebACLForResourceRequest = Shapes::StructureShape.new(name: 'GetWebACLForResourceRequest')
     GetWebACLForResourceResponse = Shapes::StructureShape.new(name: 'GetWebACLForResourceResponse')
     GetWebACLRequest = Shapes::StructureShape.new(name: 'GetWebACLRequest')
@@ -274,6 +280,7 @@ module Aws::WAFV2
     NextMarker = Shapes::StringShape.new(name: 'NextMarker')
     NoneAction = Shapes::StructureShape.new(name: 'NoneAction')
     NotStatement = Shapes::StructureShape.new(name: 'NotStatement')
+    NumberOfTopTrafficBotsPerPath = Shapes::IntegerShape.new(name: 'NumberOfTopTrafficBotsPerPath')
     OnSourceDDoSProtectionConfig = Shapes::StructureShape.new(name: 'OnSourceDDoSProtectionConfig')
     OrStatement = Shapes::StructureShape.new(name: 'OrStatement')
     OutputUrl = Shapes::StringShape.new(name: 'OutputUrl')
@@ -283,7 +290,12 @@ module Aws::WAFV2
     ParameterExceptionField = Shapes::StringShape.new(name: 'ParameterExceptionField')
     ParameterExceptionParameter = Shapes::StringShape.new(name: 'ParameterExceptionParameter')
     PasswordField = Shapes::StructureShape.new(name: 'PasswordField')
+    PathStatistics = Shapes::StructureShape.new(name: 'PathStatistics')
+    PathStatisticsLimit = Shapes::IntegerShape.new(name: 'PathStatisticsLimit')
+    PathStatisticsList = Shapes::ListShape.new(name: 'PathStatisticsList')
+    PathString = Shapes::StringShape.new(name: 'PathString')
     PayloadType = Shapes::StringShape.new(name: 'PayloadType')
+    PercentageValue = Shapes::FloatShape.new(name: 'PercentageValue')
     PhoneNumberField = Shapes::StructureShape.new(name: 'PhoneNumberField')
     PhoneNumberFields = Shapes::ListShape.new(name: 'PhoneNumberFields')
     Platform = Shapes::StringShape.new(name: 'Platform')
@@ -336,6 +348,7 @@ module Aws::WAFV2
     ReleaseSummary = Shapes::StructureShape.new(name: 'ReleaseSummary')
     RequestBody = Shapes::MapShape.new(name: 'RequestBody')
     RequestBodyAssociatedResourceTypeConfig = Shapes::StructureShape.new(name: 'RequestBodyAssociatedResourceTypeConfig')
+    RequestCount = Shapes::IntegerShape.new(name: 'RequestCount')
     RequestInspection = Shapes::StructureShape.new(name: 'RequestInspection')
     RequestInspectionACFP = Shapes::StructureShape.new(name: 'RequestInspectionACFP')
     RequiredPricingPlanName = Shapes::StringShape.new(name: 'RequiredPricingPlanName')
@@ -426,6 +439,7 @@ module Aws::WAFV2
     UpdateWebACLResponse = Shapes::StructureShape.new(name: 'UpdateWebACLResponse')
     UriFragment = Shapes::StructureShape.new(name: 'UriFragment')
     UriPath = Shapes::StructureShape.new(name: 'UriPath')
+    UriPathPrefixString = Shapes::StringShape.new(name: 'UriPathPrefixString')
     UsageOfAction = Shapes::StringShape.new(name: 'UsageOfAction')
     UsernameField = Shapes::StructureShape.new(name: 'UsernameField')
     VendorName = Shapes::StringShape.new(name: 'VendorName')
@@ -538,6 +552,13 @@ module Aws::WAFV2
 
     Body.add_member(:oversize_handling, Shapes::ShapeRef.new(shape: OversizeHandling, location_name: "OversizeHandling"))
     Body.struct_class = Types::Body
+
+    BotStatistics.add_member(:bot_name, Shapes::ShapeRef.new(shape: FilterString, required: true, location_name: "BotName"))
+    BotStatistics.add_member(:request_count, Shapes::ShapeRef.new(shape: RequestCount, required: true, location_name: "RequestCount"))
+    BotStatistics.add_member(:percentage, Shapes::ShapeRef.new(shape: PercentageValue, required: true, location_name: "Percentage"))
+    BotStatistics.struct_class = Types::BotStatistics
+
+    BotStatisticsList.member = Shapes::ShapeRef.new(shape: BotStatistics)
 
     ByteMatchStatement.add_member(:search_string, Shapes::ShapeRef.new(shape: SearchString, required: true, location_name: "SearchString"))
     ByteMatchStatement.add_member(:field_to_match, Shapes::ShapeRef.new(shape: FieldToMatch, required: true, location_name: "FieldToMatch"))
@@ -833,6 +854,11 @@ module Aws::WAFV2
     Filter.add_member(:conditions, Shapes::ShapeRef.new(shape: Conditions, required: true, location_name: "Conditions"))
     Filter.struct_class = Types::Filter
 
+    FilterSource.add_member(:bot_category, Shapes::ShapeRef.new(shape: FilterString, location_name: "BotCategory"))
+    FilterSource.add_member(:bot_organization, Shapes::ShapeRef.new(shape: FilterString, location_name: "BotOrganization"))
+    FilterSource.add_member(:bot_name, Shapes::ShapeRef.new(shape: FilterString, location_name: "BotName"))
+    FilterSource.struct_class = Types::FilterSource
+
     Filters.member = Shapes::ShapeRef.new(shape: Filter)
 
     FirewallManagerRuleGroup.add_member(:name, Shapes::ShapeRef.new(shape: EntityName, required: true, location_name: "Name"))
@@ -951,6 +977,24 @@ module Aws::WAFV2
     GetSampledRequestsResponse.add_member(:population_size, Shapes::ShapeRef.new(shape: PopulationSize, location_name: "PopulationSize"))
     GetSampledRequestsResponse.add_member(:time_window, Shapes::ShapeRef.new(shape: TimeWindow, location_name: "TimeWindow"))
     GetSampledRequestsResponse.struct_class = Types::GetSampledRequestsResponse
+
+    GetTopPathStatisticsByTrafficRequest.add_member(:web_acl_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "WebAclArn"))
+    GetTopPathStatisticsByTrafficRequest.add_member(:scope, Shapes::ShapeRef.new(shape: Scope, required: true, location_name: "Scope"))
+    GetTopPathStatisticsByTrafficRequest.add_member(:uri_path_prefix, Shapes::ShapeRef.new(shape: UriPathPrefixString, location_name: "UriPathPrefix"))
+    GetTopPathStatisticsByTrafficRequest.add_member(:time_window, Shapes::ShapeRef.new(shape: TimeWindow, required: true, location_name: "TimeWindow"))
+    GetTopPathStatisticsByTrafficRequest.add_member(:bot_category, Shapes::ShapeRef.new(shape: FilterString, location_name: "BotCategory"))
+    GetTopPathStatisticsByTrafficRequest.add_member(:bot_organization, Shapes::ShapeRef.new(shape: FilterString, location_name: "BotOrganization"))
+    GetTopPathStatisticsByTrafficRequest.add_member(:bot_name, Shapes::ShapeRef.new(shape: FilterString, location_name: "BotName"))
+    GetTopPathStatisticsByTrafficRequest.add_member(:limit, Shapes::ShapeRef.new(shape: PathStatisticsLimit, required: true, location_name: "Limit"))
+    GetTopPathStatisticsByTrafficRequest.add_member(:number_of_top_traffic_bots_per_path, Shapes::ShapeRef.new(shape: NumberOfTopTrafficBotsPerPath, required: true, location_name: "NumberOfTopTrafficBotsPerPath"))
+    GetTopPathStatisticsByTrafficRequest.add_member(:next_marker, Shapes::ShapeRef.new(shape: NextMarker, location_name: "NextMarker"))
+    GetTopPathStatisticsByTrafficRequest.struct_class = Types::GetTopPathStatisticsByTrafficRequest
+
+    GetTopPathStatisticsByTrafficResponse.add_member(:path_statistics, Shapes::ShapeRef.new(shape: PathStatisticsList, required: true, location_name: "PathStatistics"))
+    GetTopPathStatisticsByTrafficResponse.add_member(:total_request_count, Shapes::ShapeRef.new(shape: RequestCount, required: true, location_name: "TotalRequestCount"))
+    GetTopPathStatisticsByTrafficResponse.add_member(:next_marker, Shapes::ShapeRef.new(shape: NextMarker, location_name: "NextMarker"))
+    GetTopPathStatisticsByTrafficResponse.add_member(:top_categories, Shapes::ShapeRef.new(shape: PathStatisticsList, location_name: "TopCategories"))
+    GetTopPathStatisticsByTrafficResponse.struct_class = Types::GetTopPathStatisticsByTrafficResponse
 
     GetWebACLForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "ResourceArn"))
     GetWebACLForResourceRequest.struct_class = Types::GetWebACLForResourceRequest
@@ -1292,6 +1336,15 @@ module Aws::WAFV2
 
     PasswordField.add_member(:identifier, Shapes::ShapeRef.new(shape: FieldIdentifier, required: true, location_name: "Identifier"))
     PasswordField.struct_class = Types::PasswordField
+
+    PathStatistics.add_member(:source, Shapes::ShapeRef.new(shape: FilterSource, location_name: "Source"))
+    PathStatistics.add_member(:path, Shapes::ShapeRef.new(shape: PathString, required: true, location_name: "Path"))
+    PathStatistics.add_member(:request_count, Shapes::ShapeRef.new(shape: RequestCount, required: true, location_name: "RequestCount"))
+    PathStatistics.add_member(:percentage, Shapes::ShapeRef.new(shape: PercentageValue, required: true, location_name: "Percentage"))
+    PathStatistics.add_member(:top_bots, Shapes::ShapeRef.new(shape: BotStatisticsList, location_name: "TopBots"))
+    PathStatistics.struct_class = Types::PathStatistics
+
+    PathStatisticsList.member = Shapes::ShapeRef.new(shape: PathStatistics)
 
     PhoneNumberField.add_member(:identifier, Shapes::ShapeRef.new(shape: FieldIdentifier, required: true, location_name: "Identifier"))
     PhoneNumberField.struct_class = Types::PhoneNumberField
@@ -2256,6 +2309,19 @@ module Aws::WAFV2
         o.errors << Shapes::ShapeRef.new(shape: WAFNonexistentItemException)
         o.errors << Shapes::ShapeRef.new(shape: WAFInternalErrorException)
         o.errors << Shapes::ShapeRef.new(shape: WAFInvalidParameterException)
+      end)
+
+      api.add_operation(:get_top_path_statistics_by_traffic, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetTopPathStatisticsByTraffic"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetTopPathStatisticsByTrafficRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetTopPathStatisticsByTrafficResponse)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFNonexistentItemException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInvalidOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFFeatureNotIncludedInPricingPlanException)
       end)
 
       api.add_operation(:get_web_acl, Seahorse::Model::Operation.new.tap do |o|

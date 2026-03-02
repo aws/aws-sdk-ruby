@@ -476,15 +476,16 @@ module Aws::SecurityHub
 
     # @!group API Operations
 
-    # <note markdown="1"> We recommend using Organizations instead of Security Hub invitations
-    # to manage your member accounts. For information, see [Managing
-    # Security Hub administrator and member accounts with Organizations][1]
-    # in the *Security Hub User Guide*.
+    # <note markdown="1"> We recommend using Organizations instead of Security Hub CSPM
+    # invitations to manage your member accounts. For information, see
+    # [Managing Security Hub CSPM administrator and member accounts with
+    # Organizations][1] in the *Security Hub CSPM User Guide*.
     #
     #  </note>
     #
     # Accepts the invitation to be a member account and be monitored by the
-    # Security Hub administrator account that the invitation was sent from.
+    # Security Hub CSPM administrator account that the invitation was sent
+    # from.
     #
     # This operation is only used by member accounts that are not added
     # through Organizations.
@@ -498,11 +499,11 @@ module Aws::SecurityHub
     # [1]: https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-accounts-orgs.html
     #
     # @option params [required, String] :administrator_id
-    #   The account ID of the Security Hub administrator account that sent the
-    #   invitation.
+    #   The account ID of the Security Hub CSPM administrator account that
+    #   sent the invitation.
     #
     # @option params [required, String] :invitation_id
-    #   The identifier of the invitation sent from the Security Hub
+    #   The identifier of the invitation sent from the Security Hub CSPM
     #   administrator account.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
@@ -538,8 +539,8 @@ module Aws::SecurityHub
     # This method is deprecated. Instead, use
     # `AcceptAdministratorInvitation`.
     #
-    # The Security Hub console continues to use `AcceptInvitation`. It will
-    # eventually change to use `AcceptAdministratorInvitation`. Any IAM
+    # The Security Hub CSPM console continues to use `AcceptInvitation`. It
+    # will eventually change to use `AcceptAdministratorInvitation`. Any IAM
     # policies that specifically control access to this function must
     # continue to use `AcceptInvitation`. You should also add
     # `AcceptAdministratorInvitation` to your policies to ensure that the
@@ -547,7 +548,8 @@ module Aws::SecurityHub
     # `AcceptAdministratorInvitation`.
     #
     # Accepts the invitation to be a member account and be monitored by the
-    # Security Hub administrator account that the invitation was sent from.
+    # Security Hub CSPM administrator account that the invitation was sent
+    # from.
     #
     # This operation is only used by member accounts that are not added
     # through Organizations.
@@ -557,11 +559,11 @@ module Aws::SecurityHub
     # account.
     #
     # @option params [required, String] :master_id
-    #   The account ID of the Security Hub administrator account that sent the
-    #   invitation.
+    #   The account ID of the Security Hub CSPM administrator account that
+    #   sent the invitation.
     #
     # @option params [required, String] :invitation_id
-    #   The identifier of the invitation sent from the Security Hub
+    #   The identifier of the invitation sent from the Security Hub CSPM
     #   administrator account.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
@@ -647,7 +649,7 @@ module Aws::SecurityHub
     # `StandardsSubscriptionArns`.
     #
     # For more information, see [Security Standards][1] section of the
-    # *Security Hub User Guide*.
+    # *Security Hub CSPM User Guide*.
     #
     #
     #
@@ -714,7 +716,7 @@ module Aws::SecurityHub
     # obtain the ARN for a standard, use the `DescribeStandards` operation.
     #
     # For more information, see the [Security Standards][1] section of the
-    # *Security Hub User Guide*.
+    # *Security Hub CSPM User Guide*.
     #
     #
     #
@@ -1075,11 +1077,11 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
-    # Returns associations between an Security Hub configuration and a batch
-    # of target accounts, organizational units, or the root. Only the
-    # Security Hub delegated administrator can invoke this operation from
-    # the home Region. A configuration can refer to a configuration policy
-    # or to a self-managed configuration.
+    # Returns associations between an Security Hub CSPM configuration and a
+    # batch of target accounts, organizational units, or the root. Only the
+    # Security Hub CSPM delegated administrator can invoke this operation
+    # from the home Region. A configuration can refer to a configuration
+    # policy or to a self-managed configuration.
     #
     # @option params [required, Array<Types::ConfigurationPolicyAssociation>] :configuration_policy_association_identifiers
     #   Specifies one or more target account IDs, organizational unit (OU)
@@ -1401,8 +1403,8 @@ module Aws::SecurityHub
     end
 
     # Imports security findings generated by a finding provider into
-    # Security Hub. This action is requested by the finding provider to
-    # import its findings into Security Hub.
+    # Security Hub CSPM. This action is requested by the finding provider to
+    # import its findings into Security Hub CSPM.
     #
     # `BatchImportFindings` must be called by one of the following:
     #
@@ -1413,17 +1415,17 @@ module Aws::SecurityHub
     #   `BatchImportFindings` from needs to be the same as the
     #   `AwsAccountId` attribute for the finding.
     #
-    # * An Amazon Web Services account that Security Hub has allow-listed
-    #   for an official partner integration. In this case, you can call
-    #   `BatchImportFindings` from the allow-listed account and send
-    #   findings from different customer accounts in the same batch.
+    # * An Amazon Web Services account that Security Hub CSPM has
+    #   allow-listed for an official partner integration. In this case, you
+    #   can call `BatchImportFindings` from the allow-listed account and
+    #   send findings from different customer accounts in the same batch.
     #
     # The maximum allowed size for a finding is 240 Kb. An error is returned
     # for any finding larger than 240 Kb.
     #
     # After a finding is created, `BatchImportFindings` cannot be used to
     # update the following finding fields and objects, which Security Hub
-    # customers use to manage their investigation workflow.
+    # CSPM customers use to manage their investigation workflow.
     #
     # * `Note`
     #
@@ -1895,7 +1897,7 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
-    # Used by Security Hub customers to update information about their
+    # Used by Security Hub CSPM customers to update information about their
     # investigation into one or more findings. Requested by administrator
     # accounts or member accounts. Administrator accounts can update
     # findings for their account and their member accounts. A member account
@@ -1923,14 +1925,14 @@ module Aws::SecurityHub
     #
     # If you use this operation to update a finding, your updates don’t
     # affect the value for the `UpdatedAt` field of the finding. Also note
-    # that it can take several minutes for Security Hub to process your
+    # that it can take several minutes for Security Hub CSPM to process your
     # request and update each finding specified in the request.
     #
     # You can configure IAM policies to restrict access to fields and field
     # values. For example, you might not want member accounts to be able to
     # suppress findings or change the finding severity. For more information
     # see [Configuring access to BatchUpdateFindings][1] in the *Security
-    # Hub User Guide*.
+    # Hub CSPM User Guide*.
     #
     #
     #
@@ -2297,10 +2299,10 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
-    # Creates a custom action target in Security Hub.
+    # Creates a custom action target in Security Hub CSPM.
     #
-    # You can use custom actions on findings and insights in Security Hub to
-    # trigger target actions in Amazon CloudWatch Events.
+    # You can use custom actions on findings and insights in Security Hub
+    # CSPM to trigger target actions in Amazon CloudWatch Events.
     #
     # @option params [required, String] :name
     #   The name of the custom action target. Can contain up to 20 characters.
@@ -2413,9 +2415,9 @@ module Aws::SecurityHub
     #
     # @option params [String] :rule_status
     #   Whether the rule is active after it is created. If this parameter is
-    #   equal to `ENABLED`, Security Hub starts applying the rule to findings
-    #   and finding updates after the rule is created. To change the value of
-    #   this parameter after creating a rule, use [
+    #   equal to `ENABLED`, Security Hub CSPM starts applying the rule to
+    #   findings and finding updates after the rule is created. To change the
+    #   value of this parameter after creating a rule, use [
     #   `BatchUpdateAutomationRules` ][1].
     #
     #
@@ -2424,8 +2426,8 @@ module Aws::SecurityHub
     #
     # @option params [required, Integer] :rule_order
     #   An integer ranging from 1 to 1000 that represents the order in which
-    #   the rule action is applied to findings. Security Hub applies rules
-    #   with lower values for this parameter first.
+    #   the rule action is applied to findings. Security Hub CSPM applies
+    #   rules with lower values for this parameter first.
     #
     # @option params [required, String] :rule_name
     #   The name of the rule.
@@ -2437,15 +2439,16 @@ module Aws::SecurityHub
     #   Specifies whether a rule is the last to be applied with respect to a
     #   finding that matches the rule criteria. This is useful when a finding
     #   matches the criteria for multiple rules, and each rule has different
-    #   actions. If a rule is terminal, Security Hub applies the rule action
-    #   to a finding that matches the rule criteria and doesn't evaluate
-    #   other rules for the finding. By default, a rule isn't terminal.
+    #   actions. If a rule is terminal, Security Hub CSPM applies the rule
+    #   action to a finding that matches the rule criteria and doesn't
+    #   evaluate other rules for the finding. By default, a rule isn't
+    #   terminal.
     #
     # @option params [required, Types::AutomationRulesFindingFilters] :criteria
     #   A set of ASFF finding field attributes and corresponding expected
-    #   values that Security Hub uses to filter findings. If a rule is enabled
-    #   and a finding matches the conditions specified in this parameter,
-    #   Security Hub applies the rule action to the finding.
+    #   values that Security Hub CSPM uses to filter findings. If a rule is
+    #   enabled and a finding matches the conditions specified in this
+    #   parameter, Security Hub CSPM applies the rule action to the finding.
     #
     # @option params [required, Array<Types::AutomationRulesAction>] :actions
     #   One or more actions to update finding fields if a finding matches the
@@ -2987,8 +2990,8 @@ module Aws::SecurityHub
     end
 
     # Creates a configuration policy with the defined configuration. Only
-    # the Security Hub delegated administrator can invoke this operation
-    # from the home Region.
+    # the Security Hub CSPM delegated administrator can invoke this
+    # operation from the home Region.
     #
     # @option params [required, String] :name
     #   The name of the configuration policy. Alphanumeric characters and the
@@ -2998,20 +3001,21 @@ module Aws::SecurityHub
     #   The description of the configuration policy.
     #
     # @option params [required, Types::Policy] :configuration_policy
-    #   An object that defines how Security Hub is configured. It includes
-    #   whether Security Hub is enabled or disabled, a list of enabled
-    #   security standards, a list of enabled or disabled security controls,
-    #   and a list of custom parameter values for specified controls. If you
-    #   provide a list of security controls that are enabled in the
-    #   configuration policy, Security Hub disables all other controls
-    #   (including newly released controls). If you provide a list of security
-    #   controls that are disabled in the configuration policy, Security Hub
-    #   enables all other controls (including newly released controls).
+    #   An object that defines how Security Hub CSPM is configured. It
+    #   includes whether Security Hub CSPM is enabled or disabled, a list of
+    #   enabled security standards, a list of enabled or disabled security
+    #   controls, and a list of custom parameter values for specified
+    #   controls. If you provide a list of security controls that are enabled
+    #   in the configuration policy, Security Hub CSPM disables all other
+    #   controls (including newly released controls). If you provide a list of
+    #   security controls that are disabled in the configuration policy,
+    #   Security Hub CSPM enables all other controls (including newly released
+    #   controls).
     #
     # @option params [Hash<String,String>] :tags
     #   User-defined tags associated with a configuration policy. For more
-    #   information, see [Tagging Security Hub resources][1] in the *Security
-    #   Hub user guide*.
+    #   information, see [Tagging Security Hub CSPM resources][1] in the
+    #   *Security Hub CSPM user guide*.
     #
     #
     #
@@ -3257,8 +3261,8 @@ module Aws::SecurityHub
     # from the home Region only.
     #
     # For information about how cross-Region aggregation works, see
-    # [Understanding cross-Region aggregation in Security Hub][1] in the
-    # *Security Hub User Guide*.
+    # [Understanding cross-Region aggregation in Security Hub CSPM][1] in
+    # the *Security Hub CSPM User Guide*.
     #
     #
     #
@@ -3267,7 +3271,7 @@ module Aws::SecurityHub
     # @option params [required, String] :region_linking_mode
     #   Indicates whether to aggregate findings from all of the available
     #   Regions in the current partition. Also determines whether to
-    #   automatically aggregate findings from new Regions as Security Hub
+    #   automatically aggregate findings from new Regions as Security Hub CSPM
     #   supports them and you opt into them.
     #
     #   The selected option also determines how to use the Regions provided in
@@ -3276,18 +3280,18 @@ module Aws::SecurityHub
     #   The options are as follows:
     #
     #   * `ALL_REGIONS` - Aggregates findings from all of the Regions where
-    #     Security Hub is enabled. When you choose this option, Security Hub
-    #     also automatically aggregates findings from new Regions as Security
-    #     Hub supports them and you opt into them.
+    #     Security Hub CSPM is enabled. When you choose this option, Security
+    #     Hub CSPM also automatically aggregates findings from new Regions as
+    #     Security Hub CSPM supports them and you opt into them.
     #
     #   * `ALL_REGIONS_EXCEPT_SPECIFIED` - Aggregates findings from all of the
-    #     Regions where Security Hub is enabled, except for the Regions listed
-    #     in the `Regions` parameter. When you choose this option, Security
-    #     Hub also automatically aggregates findings from new Regions as
-    #     Security Hub supports them and you opt into them.
+    #     Regions where Security Hub CSPM is enabled, except for the Regions
+    #     listed in the `Regions` parameter. When you choose this option,
+    #     Security Hub CSPM also automatically aggregates findings from new
+    #     Regions as Security Hub CSPM supports them and you opt into them.
     #
     #   * `SPECIFIED_REGIONS` - Aggregates findings only from the Regions
-    #     listed in the `Regions` parameter. Security Hub does not
+    #     listed in the `Regions` parameter. Security Hub CSPM does not
     #     automatically aggregate findings from new Regions.
     #
     #   * `NO_REGIONS` - Aggregates no data because no Regions are selected as
@@ -3360,7 +3364,7 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
-    # Creates a custom insight in Security Hub. An insight is a
+    # Creates a custom insight in Security Hub CSPM. An insight is a
     # consolidation of findings that relate to a security issue that
     # requires attention or remediation.
     #
@@ -4131,11 +4135,11 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
-    # Creates a member association in Security Hub between the specified
-    # accounts and the account used to make the request, which is the
-    # administrator account. If you are integrated with Organizations, then
-    # the administrator account is designated by the organization management
-    # account.
+    # Creates a member association in Security Hub CSPM between the
+    # specified accounts and the account used to make the request, which is
+    # the administrator account. If you are integrated with Organizations,
+    # then the administrator account is designated by the organization
+    # management account.
     #
     # `CreateMembers` is always used to add accounts that are not
     # organization members.
@@ -4143,35 +4147,35 @@ module Aws::SecurityHub
     # For accounts that are managed using Organizations, `CreateMembers` is
     # only used in the following cases:
     #
-    # * Security Hub is not configured to automatically add new organization
-    #   accounts.
+    # * Security Hub CSPM is not configured to automatically add new
+    #   organization accounts.
     #
-    # * The account was disassociated or deleted in Security Hub.
+    # * The account was disassociated or deleted in Security Hub CSPM.
     #
-    # This action can only be used by an account that has Security Hub
-    # enabled. To enable Security Hub, you can use the `EnableSecurityHub`
-    # operation.
+    # This action can only be used by an account that has Security Hub CSPM
+    # enabled. To enable Security Hub CSPM, you can use the
+    # `EnableSecurityHub` operation.
     #
     # For accounts that are not organization members, you create the account
     # association and then send an invitation to the member account. To send
     # the invitation, you use the `InviteMembers` operation. If the account
     # owner accepts the invitation, the account becomes a member account in
-    # Security Hub.
+    # Security Hub CSPM.
     #
     # Accounts that are managed using Organizations don't receive an
-    # invitation. They automatically become a member account in Security
-    # Hub.
+    # invitation. They automatically become a member account in Security Hub
+    # CSPM.
     #
-    # * If the organization account does not have Security Hub enabled, then
-    #   Security Hub and the default standards are automatically enabled.
-    #   Note that Security Hub cannot be enabled automatically for the
-    #   organization management account. The organization management account
-    #   must enable Security Hub before the administrator account enables it
-    #   as a member account.
+    # * If the organization account does not have Security Hub CSPM enabled,
+    #   then Security Hub CSPM and the default standards are automatically
+    #   enabled. Note that Security Hub CSPM cannot be enabled automatically
+    #   for the organization management account. The organization management
+    #   account must enable Security Hub CSPM before the administrator
+    #   account enables it as a member account.
     #
-    # * For organization accounts that already have Security Hub enabled,
-    #   Security Hub does not make any other changes to those accounts. It
-    #   does not change their enabled standards or controls.
+    # * For organization accounts that already have Security Hub CSPM
+    #   enabled, Security Hub CSPM does not make any other changes to those
+    #   accounts. It does not change their enabled standards or controls.
     #
     # A permissions policy is added that permits the administrator account
     # to view the findings generated in the member account.
@@ -4181,9 +4185,9 @@ module Aws::SecurityHub
     # `DisassociateMembers` operation.
     #
     # @option params [required, Array<Types::AccountDetails>] :account_details
-    #   The list of accounts to associate with the Security Hub administrator
-    #   account. For each account, the list includes the account ID and
-    #   optionally the email address.
+    #   The list of accounts to associate with the Security Hub CSPM
+    #   administrator account. For each account, the list includes the account
+    #   ID and optionally the email address.
     #
     # @return [Types::CreateMembersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4286,14 +4290,14 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
-    # <note markdown="1"> We recommend using Organizations instead of Security Hub invitations
-    # to manage your member accounts. For information, see [Managing
-    # Security Hub administrator and member accounts with Organizations][1]
-    # in the *Security Hub User Guide*.
+    # <note markdown="1"> We recommend using Organizations instead of Security Hub CSPM
+    # invitations to manage your member accounts. For information, see
+    # [Managing Security Hub CSPM administrator and member accounts with
+    # Organizations][1] in the *Security Hub CSPM User Guide*.
     #
     #  </note>
     #
-    # Declines invitations to become a Security Hub member account.
+    # Declines invitations to become a Security Hub CSPM member account.
     #
     # A prospective member account uses this operation to decline an
     # invitation to become a member.
@@ -4354,7 +4358,7 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
-    # Deletes a custom action target from Security Hub.
+    # Deletes a custom action target from Security Hub CSPM.
     #
     # Deleting a custom action target does not affect any findings or
     # insights that were already sent to Amazon CloudWatch Events using the
@@ -4446,7 +4450,7 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
-    # Deletes a configuration policy. Only the Security Hub delegated
+    # Deletes a configuration policy. Only the Security Hub CSPM delegated
     # administrator can invoke this operation from the home Region. For the
     # deletion to succeed, you must first disassociate a configuration
     # policy from target accounts, organizational units, or the root by
@@ -4590,17 +4594,17 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
-    # <note markdown="1"> We recommend using Organizations instead of Security Hub invitations
-    # to manage your member accounts. For information, see [Managing
-    # Security Hub administrator and member accounts with Organizations][1]
-    # in the *Security Hub User Guide*.
+    # <note markdown="1"> We recommend using Organizations instead of Security Hub CSPM
+    # invitations to manage your member accounts. For information, see
+    # [Managing Security Hub CSPM administrator and member accounts with
+    # Organizations][1] in the *Security Hub CSPM User Guide*.
     #
     #  </note>
     #
-    # Deletes invitations to become a Security Hub member account.
+    # Deletes invitations to become a Security Hub CSPM member account.
     #
-    # A Security Hub administrator account can use this operation to delete
-    # invitations sent to one or more prospective member accounts.
+    # A Security Hub CSPM administrator account can use this operation to
+    # delete invitations sent to one or more prospective member accounts.
     #
     # This operation is only used to delete invitations that are sent to
     # prospective member accounts that aren't part of an Amazon Web
@@ -4659,7 +4663,7 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
-    # Deletes the specified member accounts from Security Hub.
+    # Deletes the specified member accounts from Security Hub CSPM.
     #
     # You can invoke this API only to delete accounts that became members
     # through invitation. You can't invoke this API to delete accounts that
@@ -4712,8 +4716,8 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
-    # Returns a list of the custom action targets in Security Hub in your
-    # account.
+    # Returns a list of the custom action targets in Security Hub CSPM in
+    # your account.
     #
     # @option params [Array<String>] :action_target_arns
     #   A list of custom action target ARNs for the custom action targets to
@@ -4787,7 +4791,7 @@ module Aws::SecurityHub
     end
 
     # Returns details about the Hub resource in your account, including the
-    # `HubArn` and the time when you enabled Security Hub.
+    # `HubArn` and the time when you enabled Security Hub CSPM.
     #
     # @option params [String] :hub_arn
     #   The ARN of the Hub resource to retrieve.
@@ -4840,8 +4844,8 @@ module Aws::SecurityHub
     end
 
     # Returns information about the way your organization is configured in
-    # Security Hub. Only the Security Hub administrator account can invoke
-    # this operation.
+    # Security Hub CSPM. Only the Security Hub CSPM administrator account
+    # can invoke this operation.
     #
     # @return [Types::DescribeOrganizationConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4888,7 +4892,7 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
-    # Returns information about product integrations in Security Hub.
+    # Returns information about product integrations in Security Hub CSPM.
     #
     # You can optionally provide an integration ARN. If you provide an
     # integration ARN, then the results only include that integration.
@@ -5022,9 +5026,10 @@ module Aws::SecurityHub
     #   resp.products_v2[0].categories #=> Array
     #   resp.products_v2[0].categories[0] #=> String
     #   resp.products_v2[0].integration_v2_types #=> Array
-    #   resp.products_v2[0].integration_v2_types[0] #=> String, one of "SEND_FINDINGS_TO_SECURITY_HUB", "RECEIVE_FINDINGS_FROM_SECURITY_HUB", "UPDATE_FINDINGS_IN_SECURITY_HUB"
+    #   resp.products_v2[0].integration_v2_types[0] #=> String, one of "SEND_FINDINGS_TO_SECURITY_HUB", "RECEIVE_FINDINGS_FROM_SECURITY_HUB", "UPDATE_FINDINGS_IN_SECURITY_HUB", "EXTENDED_PLAN"
     #   resp.products_v2[0].marketplace_url #=> String
     #   resp.products_v2[0].activation_url #=> String
+    #   resp.products_v2[0].marketplace_product_id #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DescribeProductsV2 AWS API Documentation
@@ -5057,7 +5062,7 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
-    # Returns a list of the available standards in Security Hub.
+    # Returns a list of the available standards in Security Hub CSPM.
     #
     # For each standard, the results include the standard ARN, the name, and
     # a description.
@@ -5257,9 +5262,9 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
-    # Disables the integration of the specified product with Security Hub.
-    # After the integration is disabled, findings from that product are no
-    # longer sent to Security Hub.
+    # Disables the integration of the specified product with Security Hub
+    # CSPM. After the integration is disabled, findings from that product
+    # are no longer sent to Security Hub CSPM.
     #
     # @option params [required, String] :product_subscription_arn
     #   The ARN of the integrated product to disable the integration for.
@@ -5291,16 +5296,16 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
-    # Disables a Security Hub administrator account. Can only be called by
-    # the organization management account.
+    # Disables a Security Hub CSPM administrator account. Can only be called
+    # by the organization management account.
     #
     # @option params [required, String] :admin_account_id
-    #   The Amazon Web Services account identifier of the Security Hub
+    #   The Amazon Web Services account identifier of the Security Hub CSPM
     #   administrator account.
     #
     # @option params [String] :feature
     #   The feature for which the delegated admin account is disabled.
-    #   Defaults to Security Hub if not specified.
+    #   Defaults to Security Hub CSPM if not specified.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -5330,20 +5335,22 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
-    # Disables Security Hub in your account only in the current Amazon Web
-    # Services Region. To disable Security Hub in all Regions, you must
-    # submit one request per Region where you have enabled Security Hub.
+    # Disables Security Hub CSPM in your account only in the current Amazon
+    # Web Services Region. To disable Security Hub CSPM in all Regions, you
+    # must submit one request per Region where you have enabled Security Hub
+    # CSPM.
     #
-    # You can't disable Security Hub in an account that is currently the
-    # Security Hub administrator.
+    # You can't disable Security Hub CSPM in an account that is currently
+    # the Security Hub CSPM administrator.
     #
-    # When you disable Security Hub, your existing findings and insights and
-    # any Security Hub configuration settings are deleted after 90 days and
-    # cannot be recovered. Any standards that were enabled are disabled, and
-    # your administrator and member account associations are removed.
+    # When you disable Security Hub CSPM, your existing findings and
+    # insights and any Security Hub CSPM configuration settings are deleted
+    # after 90 days and cannot be recovered. Any standards that were enabled
+    # are disabled, and your administrator and member account associations
+    # are removed.
     #
     # If you want to save your existing findings, you must export them
-    # before you disable Security Hub.
+    # before you disable Security Hub CSPM.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -5378,7 +5385,7 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
-    # Disassociates the current Security Hub member account from the
+    # Disassociates the current Security Hub CSPM member account from the
     # associated administrator account.
     #
     # This operation is only used by accounts that are not part of an
@@ -5407,7 +5414,7 @@ module Aws::SecurityHub
     # This method is deprecated. Instead, use
     # `DisassociateFromAdministratorAccount`.
     #
-    # The Security Hub console continues to use
+    # The Security Hub CSPM console continues to use
     # `DisassociateFromMasterAccount`. It will eventually change to use
     # `DisassociateFromAdministratorAccount`. Any IAM policies that
     # specifically control access to this function must continue to use
@@ -5416,7 +5423,7 @@ module Aws::SecurityHub
     # the correct permissions are in place after the console begins to use
     # `DisassociateFromAdministratorAccount`.
     #
-    # Disassociates the current Security Hub member account from the
+    # Disassociates the current Security Hub CSPM member account from the
     # associated administrator account.
     #
     # This operation is only used by accounts that are not part of an
@@ -5473,12 +5480,12 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
-    # Enables the integration of a partner product with Security Hub.
-    # Integrated products send findings to Security Hub.
+    # Enables the integration of a partner product with Security Hub CSPM.
+    # Integrated products send findings to Security Hub CSPM.
     #
     # When you enable a product integration, a permissions policy that
-    # grants permission for the product to send findings to Security Hub is
-    # applied.
+    # grants permission for the product to send findings to Security Hub
+    # CSPM is applied.
     #
     # @option params [required, String] :product_arn
     #   The ARN of the product to enable the integration for.
@@ -5521,16 +5528,17 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
-    # Designates the Security Hub administrator account for an organization.
-    # Can only be called by the organization management account.
+    # Designates the Security Hub CSPM administrator account for an
+    # organization. Can only be called by the organization management
+    # account.
     #
     # @option params [required, String] :admin_account_id
     #   The Amazon Web Services account identifier of the account to designate
-    #   as the Security Hub administrator account.
+    #   as the Security Hub CSPM administrator account.
     #
     # @option params [String] :feature
     #   The feature for which the delegated admin account is enabled. Defaults
-    #   to Security Hub if not specified.
+    #   to Security Hub CSPM if not specified.
     #
     # @return [Types::EnableOrganizationAdminAccountResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5568,15 +5576,15 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
-    # Enables Security Hub for your account in the current Region or the
-    # Region you specify in the request.
+    # Enables Security Hub CSPM for your account in the current Region or
+    # the Region you specify in the request.
     #
-    # When you enable Security Hub, you grant to Security Hub the
+    # When you enable Security Hub CSPM, you grant to Security Hub CSPM the
     # permissions necessary to gather findings from other services that are
-    # integrated with Security Hub.
+    # integrated with Security Hub CSPM.
     #
-    # When you use the `EnableSecurityHub` operation to enable Security Hub,
-    # you also automatically enable the following standards:
+    # When you use the `EnableSecurityHub` operation to enable Security Hub
+    # CSPM, you also automatically enable the following standards:
     #
     # * Center for Internet Security (CIS) Amazon Web Services Foundations
     #   Benchmark v1.2.0
@@ -5588,42 +5596,42 @@ module Aws::SecurityHub
     # To opt out of automatically enabled standards, set
     # `EnableDefaultStandards` to `false`.
     #
-    # After you enable Security Hub, to enable a standard, use the
+    # After you enable Security Hub CSPM, to enable a standard, use the
     # `BatchEnableStandards` operation. To disable a standard, use the
     # `BatchDisableStandards` operation.
     #
     # To learn more, see the [setup information][1] in the *Security Hub
-    # User Guide*.
+    # CSPM User Guide*.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-settingup.html
     #
     # @option params [Hash<String,String>] :tags
-    #   The tags to add to the hub resource when you enable Security Hub.
+    #   The tags to add to the hub resource when you enable Security Hub CSPM.
     #
     # @option params [Boolean] :enable_default_standards
-    #   Whether to enable the security standards that Security Hub has
+    #   Whether to enable the security standards that Security Hub CSPM has
     #   designated as automatically enabled. If you don't provide a value for
     #   `EnableDefaultStandards`, it is set to `true`. To not enable the
     #   automatically enabled standards, set `EnableDefaultStandards` to
     #   `false`.
     #
     # @option params [String] :control_finding_generator
-    #   This field, used when enabling Security Hub, specifies whether the
-    #   calling account has consolidated control findings turned on. If the
-    #   value for this field is set to `SECURITY_CONTROL`, Security Hub
-    #   generates a single finding for a control check even when the check
-    #   applies to multiple enabled standards.
+    #   This field, used when enabling Security Hub CSPM, specifies whether
+    #   the calling account has consolidated control findings turned on. If
+    #   the value for this field is set to `SECURITY_CONTROL`, Security Hub
+    #   CSPM generates a single finding for a control check even when the
+    #   check applies to multiple enabled standards.
     #
     #   If the value for this field is set to `STANDARD_CONTROL`, Security Hub
-    #   generates separate findings for a control check when the check applies
-    #   to multiple enabled standards.
+    #   CSPM generates separate findings for a control check when the check
+    #   applies to multiple enabled standards.
     #
     #   The value for this field in a member account matches the value in the
     #   administrator account. For accounts that aren't part of an
     #   organization, the default value of this field is `SECURITY_CONTROL` if
-    #   you enabled Security Hub on or after February 23, 2023.
+    #   you enabled Security Hub CSPM on or after February 23, 2023.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -5692,8 +5700,8 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
-    # Provides the details for the Security Hub administrator account for
-    # the current member account.
+    # Provides the details for the Security Hub CSPM administrator account
+    # for the current member account.
     #
     # Can be used by both member accounts that are managed using
     # Organizations and accounts that were invited manually.
@@ -5854,8 +5862,8 @@ module Aws::SecurityHub
     end
 
     # Provides information about a configuration policy. Only the Security
-    # Hub delegated administrator can invoke this operation from the home
-    # Region.
+    # Hub CSPM delegated administrator can invoke this operation from the
+    # home Region.
     #
     # @option params [required, String] :identifier
     #   The Amazon Resource Name (ARN) or universally unique identifier (UUID)
@@ -5966,7 +5974,7 @@ module Aws::SecurityHub
     # Returns the association between a configuration and a target account,
     # organizational unit, or the root. The configuration can be a
     # configuration policy or self-managed behavior. Only the Security Hub
-    # delegated administrator can invoke this operation from the home
+    # CSPM delegated administrator can invoke this operation from the home
     # Region.
     #
     # @option params [required, Types::Target] :target
@@ -6229,10 +6237,10 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
-    # Returns the history of a Security Hub finding. The history includes
-    # changes made to any fields in the Amazon Web Services Security Finding
-    # Format (ASFF) except top-level timestamp fields, such as the
-    # `CreatedAt` and `UpdatedAt` fields.
+    # Returns the history of a Security Hub CSPM finding. The history
+    # includes changes made to any fields in the Amazon Web Services
+    # Security Finding Format (ASFF) except top-level timestamp fields, such
+    # as the `CreatedAt` and `UpdatedAt` fields.
     #
     # This operation might return fewer results than the maximum number of
     # results (`MaxResults`) specified in a request, even when more results
@@ -6251,19 +6259,19 @@ module Aws::SecurityHub
     #   history.
     #
     #   If you provide values for both `StartTime` and `EndTime`, Security Hub
-    #   returns finding history for the specified time period. If you provide
-    #   a value for `StartTime` but not for `EndTime`, Security Hub returns
-    #   finding history from the `StartTime` to the time at which the API is
-    #   called. If you provide a value for `EndTime` but not for `StartTime`,
-    #   Security Hub returns finding history from the [CreatedAt][1] timestamp
-    #   of the finding to the `EndTime`. If you provide neither `StartTime`
-    #   nor `EndTime`, Security Hub returns finding history from the
-    #   `CreatedAt` timestamp of the finding to the time at which the API is
-    #   called. In all of these scenarios, the response is limited to 100
-    #   results.
+    #   CSPM returns finding history for the specified time period. If you
+    #   provide a value for `StartTime` but not for `EndTime`, Security Hub
+    #   CSPM returns finding history from the `StartTime` to the time at which
+    #   the API is called. If you provide a value for `EndTime` but not for
+    #   `StartTime`, Security Hub CSPM returns finding history from the
+    #   [CreatedAt][1] timestamp of the finding to the `EndTime`. If you
+    #   provide neither `StartTime` nor `EndTime`, Security Hub CSPM returns
+    #   finding history from the `CreatedAt` timestamp of the finding to the
+    #   time at which the API is called. In all of these scenarios, the
+    #   response is limited to 100 results.
     #
     #   For more information about the validation and formatting of timestamp
-    #   fields in Security Hub, see [Timestamps][2].
+    #   fields in Security Hub CSPM, see [Timestamps][2].
     #
     #
     #
@@ -6275,19 +6283,19 @@ module Aws::SecurityHub
     #   requested finding history.
     #
     #   If you provide values for both `StartTime` and `EndTime`, Security Hub
-    #   returns finding history for the specified time period. If you provide
-    #   a value for `StartTime` but not for `EndTime`, Security Hub returns
-    #   finding history from the `StartTime` to the time at which the API is
-    #   called. If you provide a value for `EndTime` but not for `StartTime`,
-    #   Security Hub returns finding history from the [CreatedAt][1] timestamp
-    #   of the finding to the `EndTime`. If you provide neither `StartTime`
-    #   nor `EndTime`, Security Hub returns finding history from the
-    #   `CreatedAt` timestamp of the finding to the time at which the API is
-    #   called. In all of these scenarios, the response is limited to 100
-    #   results.
+    #   CSPM returns finding history for the specified time period. If you
+    #   provide a value for `StartTime` but not for `EndTime`, Security Hub
+    #   CSPM returns finding history from the `StartTime` to the time at which
+    #   the API is called. If you provide a value for `EndTime` but not for
+    #   `StartTime`, Security Hub CSPM returns finding history from the
+    #   [CreatedAt][1] timestamp of the finding to the `EndTime`. If you
+    #   provide neither `StartTime` nor `EndTime`, Security Hub CSPM returns
+    #   finding history from the `CreatedAt` timestamp of the finding to the
+    #   time at which the API is called. In all of these scenarios, the
+    #   response is limited to 100 results.
     #
     #   For more information about the validation and formatting of timestamp
-    #   fields in Security Hub, see [Timestamps][2].
+    #   fields in Security Hub CSPM, see [Timestamps][2].
     #
     #
     #
@@ -6298,12 +6306,12 @@ module Aws::SecurityHub
     #   A token for pagination purposes. Provide `NULL` as the initial value.
     #   In subsequent requests, provide the token included in the response to
     #   get up to an additional 100 results of finding history. If you don’t
-    #   provide `NextToken`, Security Hub returns up to 100 results of finding
-    #   history for each request.
+    #   provide `NextToken`, Security Hub CSPM returns up to 100 results of
+    #   finding history for each request.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to be returned. If you don’t provide it,
-    #   Security Hub returns up to 100 results of finding history.
+    #   Security Hub CSPM returns up to 100 results of finding history.
     #
     # @return [Types::GetFindingHistoryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -6488,7 +6496,7 @@ module Aws::SecurityHub
     #           ],
     #           composite_operator: "AND", # accepts AND, OR
     #         },
-    #         group_by_field: "activity_name", # required, accepts activity_name, cloud.account.uid, cloud.provider, cloud.region, compliance.assessments.name, compliance.status, compliance.control, finding_info.title, finding_info.related_events.traits.category, finding_info.types, metadata.product.name, metadata.product.uid, resources.type, resources.uid, severity, status, vulnerabilities.fix_coverage, class_name, vulnerabilities.affected_packages.name, finding_info.analytic.name, compliance.standards, cloud.account.name, vendor_attributes.severity
+    #         group_by_field: "activity_name", # required, accepts activity_name, cloud.account.uid, cloud.provider, cloud.region, compliance.assessments.name, compliance.status, compliance.control, finding_info.title, finding_info.related_events.traits.category, finding_info.types, metadata.product.name, metadata.product.uid, resources.type, resources.uid, severity, status, vulnerabilities.fix_coverage, class_name, vulnerabilities.affected_packages.name, finding_info.analytic.name, compliance.standards, cloud.account.name, vendor_attributes.severity, metadata.product.vendor_name
     #       },
     #     ],
     #     sort_order: "asc", # accepts asc, desc
@@ -7589,8 +7597,8 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
-    # Lists the results of the Security Hub insight specified by the insight
-    # ARN.
+    # Lists the results of the Security Hub CSPM insight specified by the
+    # insight ARN.
     #
     # @option params [required, String] :insight_arn
     #   The ARN of the insight for which to return results.
@@ -8095,15 +8103,15 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
-    # <note markdown="1"> We recommend using Organizations instead of Security Hub invitations
-    # to manage your member accounts. For information, see [Managing
-    # Security Hub administrator and member accounts with Organizations][1]
-    # in the *Security Hub User Guide*.
+    # <note markdown="1"> We recommend using Organizations instead of Security Hub CSPM
+    # invitations to manage your member accounts. For information, see
+    # [Managing Security Hub CSPM administrator and member accounts with
+    # Organizations][1] in the *Security Hub CSPM User Guide*.
     #
     #  </note>
     #
-    # Returns the count of all Security Hub membership invitations that were
-    # sent to the calling member account, not including the currently
+    # Returns the count of all Security Hub CSPM membership invitations that
+    # were sent to the calling member account, not including the currently
     # accepted invitation.
     #
     #
@@ -8143,15 +8151,16 @@ module Aws::SecurityHub
 
     # This method is deprecated. Instead, use `GetAdministratorAccount`.
     #
-    # The Security Hub console continues to use `GetMasterAccount`. It will
-    # eventually change to use `GetAdministratorAccount`. Any IAM policies
-    # that specifically control access to this function must continue to use
-    # `GetMasterAccount`. You should also add `GetAdministratorAccount` to
-    # your policies to ensure that the correct permissions are in place
-    # after the console begins to use `GetAdministratorAccount`.
+    # The Security Hub CSPM console continues to use `GetMasterAccount`. It
+    # will eventually change to use `GetAdministratorAccount`. Any IAM
+    # policies that specifically control access to this function must
+    # continue to use `GetMasterAccount`. You should also add
+    # `GetAdministratorAccount` to your policies to ensure that the correct
+    # permissions are in place after the console begins to use
+    # `GetAdministratorAccount`.
     #
-    # Provides the details for the Security Hub administrator account for
-    # the current member account.
+    # Provides the details for the Security Hub CSPM administrator account
+    # for the current member account.
     #
     # Can be used by both member accounts that are managed using
     # Organizations and accounts that were invited manually.
@@ -8176,19 +8185,19 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
-    # Returns the details for the Security Hub member accounts for the
+    # Returns the details for the Security Hub CSPM member accounts for the
     # specified account IDs.
     #
-    # An administrator account can be either the delegated Security Hub
+    # An administrator account can be either the delegated Security Hub CSPM
     # administrator account for an organization or an administrator account
-    # that enabled Security Hub manually.
+    # that enabled Security Hub CSPM manually.
     #
     # The results include both member accounts that are managed using
     # Organizations and accounts that were invited manually.
     #
     # @option params [required, Array<String>] :account_ids
-    #   The list of account IDs for the Security Hub member accounts to return
-    #   the details for.
+    #   The list of account IDs for the Security Hub CSPM member accounts to
+    #   return the details for.
     #
     # @return [Types::GetMembersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -8671,16 +8680,16 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
-    # <note markdown="1"> We recommend using Organizations instead of Security Hub invitations
-    # to manage your member accounts. For information, see [Managing
-    # Security Hub administrator and member accounts with Organizations][1]
-    # in the *Security Hub User Guide*.
+    # <note markdown="1"> We recommend using Organizations instead of Security Hub CSPM
+    # invitations to manage your member accounts. For information, see
+    # [Managing Security Hub CSPM administrator and member accounts with
+    # Organizations][1] in the *Security Hub CSPM User Guide*.
     #
     #  </note>
     #
     # Invites other Amazon Web Services accounts to become member accounts
-    # for the Security Hub administrator account that the invitation is sent
-    # from.
+    # for the Security Hub CSPM administrator account that the invitation is
+    # sent from.
     #
     # This operation is only used to invite accounts that don't belong to
     # an Amazon Web Services organization. Organization accounts don't
@@ -8688,11 +8697,11 @@ module Aws::SecurityHub
     #
     # Before you can use this action to invite a member, you must first use
     # the `CreateMembers` action to create the member account in Security
-    # Hub.
+    # Hub CSPM.
     #
-    # When the account owner enables Security Hub and accepts the invitation
-    # to become a member account, the administrator account can view the
-    # findings generated in the member account.
+    # When the account owner enables Security Hub CSPM and accepts the
+    # invitation to become a member account, the administrator account can
+    # view the findings generated in the member account.
     #
     #
     #
@@ -8700,7 +8709,7 @@ module Aws::SecurityHub
     #
     # @option params [required, Array<String>] :account_ids
     #   The list of account IDs of the Amazon Web Services accounts to invite
-    #   to Security Hub as members.
+    #   to Security Hub CSPM as members.
     #
     # @return [Types::InviteMembersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -8919,7 +8928,7 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
-    # Lists the configuration policies that the Security Hub delegated
+    # Lists the configuration policies that the Security Hub CSPM delegated
     # administrator has created for your organization. Only the delegated
     # administrator can invoke this operation from the home Region.
     #
@@ -9002,8 +9011,9 @@ module Aws::SecurityHub
     end
 
     # Provides information about the associations for your configuration
-    # policies and self-managed behavior. Only the Security Hub delegated
-    # administrator can invoke this operation from the home Region.
+    # policies and self-managed behavior. Only the Security Hub CSPM
+    # delegated administrator can invoke this operation from the home
+    # Region.
     #
     # @option params [String] :next_token
     #   The `NextToken` value that's returned from a previous paginated
@@ -9149,7 +9159,7 @@ module Aws::SecurityHub
     end
 
     # Lists all findings-generating solutions (products) that you are
-    # subscribed to receive findings from in Security Hub.
+    # subscribed to receive findings from in Security Hub CSPM.
     #
     # @option params [String] :next_token
     #   The token that is required for pagination. On your first call to the
@@ -9267,15 +9277,15 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
-    # <note markdown="1"> We recommend using Organizations instead of Security Hub invitations
-    # to manage your member accounts. For information, see [Managing
-    # Security Hub administrator and member accounts with Organizations][1]
-    # in the *Security Hub User Guide*.
+    # <note markdown="1"> We recommend using Organizations instead of Security Hub CSPM
+    # invitations to manage your member accounts. For information, see
+    # [Managing Security Hub CSPM administrator and member accounts with
+    # Organizations][1] in the *Security Hub CSPM User Guide*.
     #
     #  </note>
     #
-    # Lists all Security Hub membership invitations that were sent to the
-    # calling account.
+    # Lists all Security Hub CSPM membership invitations that were sent to
+    # the calling account.
     #
     # Only accounts that are managed by invitation can use this operation.
     # Accounts that are managed using the integration with Organizations
@@ -9351,7 +9361,7 @@ module Aws::SecurityHub
     end
 
     # Lists details about all member accounts for the current Security Hub
-    # administrator account.
+    # CSPM administrator account.
     #
     # The results include both member accounts that belong to an
     # organization and member accounts that were invited manually.
@@ -9446,8 +9456,8 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
-    # Lists the Security Hub administrator accounts. Can only be called by
-    # the organization management account.
+    # Lists the Security Hub CSPM administrator accounts. Can only be called
+    # by the organization management account.
     #
     # @option params [Integer] :max_results
     #   The maximum number of items to return in the response.
@@ -9461,7 +9471,7 @@ module Aws::SecurityHub
     #
     # @option params [String] :feature
     #   The feature where the delegated administrator account is listed.
-    #   Defaults to Security Hub if not specified.
+    #   Defaults to Security Hub CSPM if not specified.
     #
     # @return [Types::ListOrganizationAdminAccountsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -9673,7 +9683,8 @@ module Aws::SecurityHub
     #   you can use in a subsequent API call to get the next 25 associations.
     #   This repeats until all associations for the specified control are
     #   returned. The number of results is limited by the number of supported
-    #   Security Hub standards that you've enabled in the calling account.
+    #   Security Hub CSPM standards that you've enabled in the calling
+    #   account.
     #
     # @return [Types::ListStandardsControlAssociationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -9844,7 +9855,7 @@ module Aws::SecurityHub
     # Associates a target account, organizational unit, or the root with a
     # specified configuration. The target can be associated with a
     # configuration policy or self-managed behavior. Only the Security Hub
-    # delegated administrator can invoke this operation from the home
+    # CSPM delegated administrator can invoke this operation from the home
     # Region.
     #
     # @option params [required, String] :configuration_policy_identifier
@@ -9926,7 +9937,7 @@ module Aws::SecurityHub
     # parent. If there’s no configuration to inherit, the target retains its
     # settings but becomes a self-managed account. A target can be
     # disassociated from a configuration policy or self-managed behavior.
-    # Only the Security Hub delegated administrator can invoke this
+    # Only the Security Hub CSPM delegated administrator can invoke this
     # operation from the home Region.
     #
     # @option params [Types::Target] :target
@@ -10056,7 +10067,7 @@ module Aws::SecurityHub
     end
 
     # Updates the name and description of a custom action target in Security
-    # Hub.
+    # Hub CSPM.
     #
     # @option params [required, String] :action_target_arn
     #   The ARN of the custom action target to update.
@@ -10272,7 +10283,7 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
-    # Updates a configuration policy. Only the Security Hub delegated
+    # Updates a configuration policy. Only the Security Hub CSPM delegated
     # administrator can invoke this operation from the home Region.
     #
     # @option params [required, String] :identifier
@@ -10290,15 +10301,16 @@ module Aws::SecurityHub
     #   The reason for updating the configuration policy.
     #
     # @option params [Types::Policy] :configuration_policy
-    #   An object that defines how Security Hub is configured. It includes
-    #   whether Security Hub is enabled or disabled, a list of enabled
-    #   security standards, a list of enabled or disabled security controls,
-    #   and a list of custom parameter values for specified controls. If you
-    #   provide a list of security controls that are enabled in the
-    #   configuration policy, Security Hub disables all other controls
-    #   (including newly released controls). If you provide a list of security
-    #   controls that are disabled in the configuration policy, Security Hub
-    #   enables all other controls (including newly released controls).
+    #   An object that defines how Security Hub CSPM is configured. It
+    #   includes whether Security Hub CSPM is enabled or disabled, a list of
+    #   enabled security standards, a list of enabled or disabled security
+    #   controls, and a list of custom parameter values for specified
+    #   controls. If you provide a list of security controls that are enabled
+    #   in the configuration policy, Security Hub CSPM disables all other
+    #   controls (including newly released controls). If you provide a list of
+    #   security controls that are disabled in the configuration policy,
+    #   Security Hub CSPM enables all other controls (including newly released
+    #   controls).
     #
     #   When updating a configuration policy, provide a complete list of
     #   standards that you want to enable and a complete list of controls that
@@ -10528,7 +10540,7 @@ module Aws::SecurityHub
     # @option params [required, String] :region_linking_mode
     #   Indicates whether to aggregate findings from all of the available
     #   Regions in the current partition. Also determines whether to
-    #   automatically aggregate findings from new Regions as Security Hub
+    #   automatically aggregate findings from new Regions as Security Hub CSPM
     #   supports them and you opt into them.
     #
     #   The selected option also determines how to use the Regions provided in
@@ -10537,18 +10549,18 @@ module Aws::SecurityHub
     #   The options are as follows:
     #
     #   * `ALL_REGIONS` - Aggregates findings from all of the Regions where
-    #     Security Hub is enabled. When you choose this option, Security Hub
-    #     also automatically aggregates findings from new Regions as Security
-    #     Hub supports them and you opt into them.
+    #     Security Hub CSPM is enabled. When you choose this option, Security
+    #     Hub CSPM also automatically aggregates findings from new Regions as
+    #     Security Hub CSPM supports them and you opt into them.
     #
     #   * `ALL_REGIONS_EXCEPT_SPECIFIED` - Aggregates findings from all of the
-    #     Regions where Security Hub is enabled, except for the Regions listed
-    #     in the `Regions` parameter. When you choose this option, Security
-    #     Hub also automatically aggregates findings from new Regions as
-    #     Security Hub supports them and you opt into them.
+    #     Regions where Security Hub CSPM is enabled, except for the Regions
+    #     listed in the `Regions` parameter. When you choose this option,
+    #     Security Hub CSPM also automatically aggregates findings from new
+    #     Regions as Security Hub CSPM supports them and you opt into them.
     #
     #   * `SPECIFIED_REGIONS` - Aggregates findings only from the Regions
-    #     listed in the `Regions` parameter. Security Hub does not
+    #     listed in the `Regions` parameter. Security Hub CSPM does not
     #     automatically aggregate findings from new Regions.
     #
     #   * `NO_REGIONS` - Aggregates no data because no Regions are selected as
@@ -10629,14 +10641,15 @@ module Aws::SecurityHub
     # `UpdateFindings`, use the `BatchUpdateFindings` operation.
     #
     # The `UpdateFindings` operation updates the `Note` and `RecordState` of
-    # the Security Hub aggregated findings that the filter attributes
+    # the Security Hub CSPM aggregated findings that the filter attributes
     # specify. Any member account that can view the finding can also see the
     # update to the finding.
     #
     # Finding updates made with `UpdateFindings` aren't persisted if the
     # same finding is later updated by the finding provider through the
-    # `BatchImportFindings` operation. In addition, Security Hub doesn't
-    # record updates made with `UpdateFindings` in the finding history.
+    # `BatchImportFindings` operation. In addition, Security Hub CSPM
+    # doesn't record updates made with `UpdateFindings` in the finding
+    # history.
     #
     # @option params [required, Types::AwsSecurityFindingFilters] :filters
     #   A collection of attributes that specify which findings you want to
@@ -11365,8 +11378,8 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
-    # Updates the Security Hub insight identified by the specified insight
-    # ARN.
+    # Updates the Security Hub CSPM insight identified by the specified
+    # insight ARN.
     #
     # @option params [required, String] :insight_arn
     #   The ARN of the insight that you want to update.
@@ -12119,30 +12132,32 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
-    # Updates the configuration of your organization in Security Hub. Only
-    # the Security Hub administrator account can invoke this operation.
+    # Updates the configuration of your organization in Security Hub CSPM.
+    # Only the Security Hub CSPM administrator account can invoke this
+    # operation.
     #
     # @option params [required, Boolean] :auto_enable
-    #   Whether to automatically enable Security Hub in new member accounts
-    #   when they join the organization.
+    #   Whether to automatically enable Security Hub CSPM in new member
+    #   accounts when they join the organization.
     #
-    #   If set to `true`, then Security Hub is automatically enabled in new
-    #   accounts. If set to `false`, then Security Hub isn't enabled in new
-    #   accounts automatically. The default value is `false`.
+    #   If set to `true`, then Security Hub CSPM is automatically enabled in
+    #   new accounts. If set to `false`, then Security Hub CSPM isn't enabled
+    #   in new accounts automatically. The default value is `false`.
     #
     #   If the `ConfigurationType` of your organization is set to `CENTRAL`,
     #   then this field is set to `false` and can't be changed in the home
     #   Region and linked Regions. However, in that case, the delegated
     #   administrator can create a configuration policy in which Security Hub
-    #   is enabled and associate the policy with new organization accounts.
+    #   CSPM is enabled and associate the policy with new organization
+    #   accounts.
     #
     # @option params [String] :auto_enable_standards
-    #   Whether to automatically enable Security Hub [default standards][1] in
-    #   new member accounts when they join the organization.
+    #   Whether to automatically enable Security Hub CSPM [default
+    #   standards][1] in new member accounts when they join the organization.
     #
     #   The default value of this parameter is equal to `DEFAULT`.
     #
-    #   If equal to `DEFAULT`, then Security Hub default standards are
+    #   If equal to `DEFAULT`, then Security Hub CSPM default standards are
     #   automatically enabled for new member accounts. If equal to `NONE`,
     #   then default standards are not automatically enabled for new member
     #   accounts.
@@ -12160,7 +12175,7 @@ module Aws::SecurityHub
     #
     # @option params [Types::OrganizationConfiguration] :organization_configuration
     #   Provides information about the way an organization is configured in
-    #   Security Hub.
+    #   Security Hub CSPM.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -12267,7 +12282,7 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
-    # Updates configuration options for Security Hub.
+    # Updates configuration options for Security Hub CSPM.
     #
     # @option params [Boolean] :auto_enable_controls
     #   Whether to automatically enable new controls when they are added to
@@ -12281,21 +12296,21 @@ module Aws::SecurityHub
     #   controls in the console and programmatically immediately after
     #   release. However, automatically enabled controls have a temporary
     #   default status of `DISABLED`. It can take up to several days for
-    #   Security Hub to process the control release and designate the control
-    #   as `ENABLED` in your account. During the processing period, you can
-    #   manually enable or disable a control, and Security Hub will maintain
-    #   that designation regardless of whether you have `AutoEnableControls`
-    #   set to `true`.
+    #   Security Hub CSPM to process the control release and designate the
+    #   control as `ENABLED` in your account. During the processing period,
+    #   you can manually enable or disable a control, and Security Hub CSPM
+    #   will maintain that designation regardless of whether you have
+    #   `AutoEnableControls` set to `true`.
     #
     # @option params [String] :control_finding_generator
     #   Updates whether the calling account has consolidated control findings
     #   turned on. If the value for this field is set to `SECURITY_CONTROL`,
-    #   Security Hub generates a single finding for a control check even when
-    #   the check applies to multiple enabled standards.
+    #   Security Hub CSPM generates a single finding for a control check even
+    #   when the check applies to multiple enabled standards.
     #
     #   If the value for this field is set to `STANDARD_CONTROL`, Security Hub
-    #   generates separate findings for a control check when the check applies
-    #   to multiple enabled standards.
+    #   CSPM generates separate findings for a control check when the check
+    #   applies to multiple enabled standards.
     #
     #   For accounts that are part of an organization, this value can only be
     #   updated in the administrator account.
@@ -12394,7 +12409,7 @@ module Aws::SecurityHub
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-securityhub'
-      context[:gem_version] = '1.151.0'
+      context[:gem_version] = '1.152.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

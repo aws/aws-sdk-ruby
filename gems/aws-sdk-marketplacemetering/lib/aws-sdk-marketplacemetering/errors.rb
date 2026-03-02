@@ -35,6 +35,7 @@ module Aws::MarketplaceMetering
   # * {InternalServiceErrorException}
   # * {InvalidCustomerIdentifierException}
   # * {InvalidEndpointRegionException}
+  # * {InvalidLicenseException}
   # * {InvalidProductCodeException}
   # * {InvalidPublicKeyVersionException}
   # * {InvalidRegionException}
@@ -162,6 +163,21 @@ module Aws::MarketplaceMetering
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::MarketplaceMetering::Types::InvalidEndpointRegionException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class InvalidLicenseException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::MarketplaceMetering::Types::InvalidLicenseException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

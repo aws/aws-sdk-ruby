@@ -112,6 +112,13 @@ module Aws::WAFV2
       SENSITIVE: []
     end
 
+    class BotStatistics
+      attr_accessor bot_name: ::String
+      attr_accessor request_count: ::Integer
+      attr_accessor percentage: ::Float
+      SENSITIVE: []
+    end
+
     class ByteMatchStatement
       attr_accessor search_string: ::String
       attr_accessor field_to_match: Types::FieldToMatch
@@ -503,6 +510,13 @@ module Aws::WAFV2
       SENSITIVE: []
     end
 
+    class FilterSource
+      attr_accessor bot_category: ::String
+      attr_accessor bot_organization: ::String
+      attr_accessor bot_name: ::String
+      SENSITIVE: []
+    end
+
     class FirewallManagerRuleGroup
       attr_accessor name: ::String
       attr_accessor priority: ::Integer
@@ -667,6 +681,28 @@ module Aws::WAFV2
       attr_accessor sampled_requests: ::Array[Types::SampledHTTPRequest]
       attr_accessor population_size: ::Integer
       attr_accessor time_window: Types::TimeWindow
+      SENSITIVE: []
+    end
+
+    class GetTopPathStatisticsByTrafficRequest
+      attr_accessor web_acl_arn: ::String
+      attr_accessor scope: ("CLOUDFRONT" | "REGIONAL")
+      attr_accessor uri_path_prefix: ::String
+      attr_accessor time_window: Types::TimeWindow
+      attr_accessor bot_category: ::String
+      attr_accessor bot_organization: ::String
+      attr_accessor bot_name: ::String
+      attr_accessor limit: ::Integer
+      attr_accessor number_of_top_traffic_bots_per_path: ::Integer
+      attr_accessor next_marker: ::String
+      SENSITIVE: []
+    end
+
+    class GetTopPathStatisticsByTrafficResponse
+      attr_accessor path_statistics: ::Array[Types::PathStatistics]
+      attr_accessor total_request_count: ::Integer
+      attr_accessor next_marker: ::String
+      attr_accessor top_categories: ::Array[Types::PathStatistics]
       SENSITIVE: []
     end
 
@@ -1106,6 +1142,15 @@ module Aws::WAFV2
 
     class PasswordField
       attr_accessor identifier: ::String
+      SENSITIVE: []
+    end
+
+    class PathStatistics
+      attr_accessor source: Types::FilterSource
+      attr_accessor path: ::String
+      attr_accessor request_count: ::Integer
+      attr_accessor percentage: ::Float
+      attr_accessor top_bots: ::Array[Types::BotStatistics]
       SENSITIVE: []
     end
 

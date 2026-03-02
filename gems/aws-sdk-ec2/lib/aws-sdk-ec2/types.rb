@@ -5148,6 +5148,10 @@ module Aws::EC2
     #   The currency of the payment for the Capacity Block extension.
     #   @return [String]
     #
+    # @!attribute [rw] zone_type
+    #   The type of zone where the Capacity Block extension is located.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CapacityBlockExtension AWS API Documentation
     #
     class CapacityBlockExtension < Struct.new(
@@ -5163,7 +5167,8 @@ module Aws::EC2
       :capacity_block_extension_start_date,
       :capacity_block_extension_end_date,
       :upfront_fee,
-      :currency_code)
+      :currency_code,
+      :zone_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5236,6 +5241,11 @@ module Aws::EC2
     #     account.
     #   @return [String]
     #
+    # @!attribute [rw] zone_type
+    #   The type of zone where the Capacity Block extension offering is
+    #   available.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CapacityBlockExtensionOffering AWS API Documentation
     #
     class CapacityBlockExtensionOffering < Struct.new(
@@ -5250,7 +5260,8 @@ module Aws::EC2
       :capacity_block_extension_duration_hours,
       :upfront_fee,
       :currency_code,
-      :tenancy)
+      :tenancy,
+      :zone_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5315,6 +5326,10 @@ module Aws::EC2
     #   minutes field would be **35**.
     #   @return [Integer]
     #
+    # @!attribute [rw] zone_type
+    #   The type of zone where the Capacity Block offering is available.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CapacityBlockOffering AWS API Documentation
     #
     class CapacityBlockOffering < Struct.new(
@@ -5330,7 +5345,8 @@ module Aws::EC2
       :tenancy,
       :ultraserver_type,
       :ultraserver_count,
-      :capacity_block_duration_minutes)
+      :capacity_block_duration_minutes,
+      :zone_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -21856,6 +21872,13 @@ module Aws::EC2
     #   The number of EC2 UltraServers in the offerings.
     #   @return [Integer]
     #
+    # @!attribute [rw] all_availability_zones
+    #   Include all Availability Zones and Local Zones, regardless of your
+    #   opt-in status. If you do not use this parameter, the results include
+    #   available offerings from all Availability Zones in the Amazon Web
+    #   Services Region and Local Zones you are opted into.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeCapacityBlockOfferingsRequest AWS API Documentation
     #
     class DescribeCapacityBlockOfferingsRequest < Struct.new(
@@ -21868,7 +21891,8 @@ module Aws::EC2
       :next_token,
       :max_results,
       :ultraserver_type,
-      :ultraserver_count)
+      :ultraserver_count,
+      :all_availability_zones)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -8,6 +8,11 @@
 module Aws::CognitoIdentityProvider
   module Types
 
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
     class AccountRecoverySettingType
       attr_accessor recovery_mechanisms: ::Array[Types::RecoveryOptionType]
       SENSITIVE: []
@@ -39,6 +44,18 @@ module Aws::CognitoIdentityProvider
     end
 
     class AddCustomAttributesResponse < Aws::EmptyStructure
+    end
+
+    class AddUserPoolClientSecretRequest
+      attr_accessor user_pool_id: ::String
+      attr_accessor client_id: ::String
+      attr_accessor client_secret: ::String
+      SENSITIVE: [:client_id, :client_secret]
+    end
+
+    class AddUserPoolClientSecretResponse
+      attr_accessor client_secret_descriptor: Types::ClientSecretDescriptorType
+      SENSITIVE: []
     end
 
     class AdminAddUserToGroupRequest
@@ -438,6 +455,13 @@ module Aws::CognitoIdentityProvider
     class ChangePasswordResponse < Aws::EmptyStructure
     end
 
+    class ClientSecretDescriptorType
+      attr_accessor client_secret_id: ::String
+      attr_accessor client_secret_value: ::String
+      attr_accessor client_secret_create_date: ::Time
+      SENSITIVE: [:client_secret_value]
+    end
+
     class CloudWatchLogsConfigurationType
       attr_accessor log_group_arn: ::String
       SENSITIVE: []
@@ -627,6 +651,7 @@ module Aws::CognitoIdentityProvider
       attr_accessor user_pool_id: ::String
       attr_accessor client_name: ::String
       attr_accessor generate_secret: bool
+      attr_accessor client_secret: ::String
       attr_accessor refresh_token_validity: ::Integer
       attr_accessor access_token_validity: ::Integer
       attr_accessor id_token_validity: ::Integer
@@ -647,7 +672,7 @@ module Aws::CognitoIdentityProvider
       attr_accessor enable_propagate_additional_user_context_data: bool
       attr_accessor auth_session_validity: ::Integer
       attr_accessor refresh_token_rotation: Types::RefreshTokenRotationType
-      SENSITIVE: []
+      SENSITIVE: [:client_secret]
     end
 
     class CreateUserPoolClientResponse
@@ -762,6 +787,16 @@ module Aws::CognitoIdentityProvider
       attr_accessor user_pool_id: ::String
       attr_accessor client_id: ::String
       SENSITIVE: [:client_id]
+    end
+
+    class DeleteUserPoolClientSecretRequest
+      attr_accessor user_pool_id: ::String
+      attr_accessor client_id: ::String
+      attr_accessor client_secret_id: ::String
+      SENSITIVE: [:client_id]
+    end
+
+    class DeleteUserPoolClientSecretResponse < Aws::EmptyStructure
     end
 
     class DeleteUserPoolDomainRequest
@@ -1251,6 +1286,11 @@ module Aws::CognitoIdentityProvider
       SENSITIVE: []
     end
 
+    class InternalServerException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
     class InvalidEmailRoleAccessPolicyException
       attr_accessor message: ::String
       SENSITIVE: []
@@ -1401,6 +1441,19 @@ module Aws::CognitoIdentityProvider
     class ListUserImportJobsResponse
       attr_accessor user_import_jobs: ::Array[Types::UserImportJobType]
       attr_accessor pagination_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListUserPoolClientSecretsRequest
+      attr_accessor user_pool_id: ::String
+      attr_accessor client_id: ::String
+      attr_accessor next_token: ::String
+      SENSITIVE: [:client_id]
+    end
+
+    class ListUserPoolClientSecretsResponse
+      attr_accessor client_secrets: ::Array[Types::ClientSecretDescriptorType]
+      attr_accessor next_token: ::String
       SENSITIVE: []
     end
 

@@ -3984,6 +3984,10 @@ module Aws::Bedrock
     #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/tagging.html
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] model_invocation_type
+    #   The invocation endpoint for ModelInvocationJob
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/CreateModelInvocationJobRequest AWS API Documentation
     #
     class CreateModelInvocationJobRequest < Struct.new(
@@ -3995,7 +3999,8 @@ module Aws::Bedrock
       :output_data_config,
       :vpc_config,
       :timeout_duration_in_hours,
-      :tags)
+      :tags,
+      :model_invocation_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5575,10 +5580,33 @@ module Aws::Bedrock
     #   deprecated (`LEGACY`.
     #   @return [String]
     #
+    # @!attribute [rw] start_of_life_time
+    #   Launch time when the model first becomes available
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_of_life_time
+    #   Time when the model is no longer available for use
+    #   @return [Time]
+    #
+    # @!attribute [rw] legacy_time
+    #   Time when the model enters legacy state. Models in legacy state can
+    #   still be used, but users should plan to transition to an Active
+    #   model before the end of life time
+    #   @return [Time]
+    #
+    # @!attribute [rw] public_extended_access_time
+    #   Public extended access portion of the legacy period, when users
+    #   should expect higher pricing
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/FoundationModelLifecycle AWS API Documentation
     #
     class FoundationModelLifecycle < Struct.new(
-      :status)
+      :status,
+      :start_of_life_time,
+      :end_of_life_time,
+      :legacy_time,
+      :public_extended_access_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7175,6 +7203,10 @@ module Aws::Bedrock
     #   The time at which the batch inference job times or timed out.
     #   @return [Time]
     #
+    # @!attribute [rw] model_invocation_type
+    #   The invocation endpoint for ModelInvocationJob
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/GetModelInvocationJobResponse AWS API Documentation
     #
     class GetModelInvocationJobResponse < Struct.new(
@@ -7192,7 +7224,8 @@ module Aws::Bedrock
       :output_data_config,
       :vpc_config,
       :timeout_duration_in_hours,
-      :job_expiration_time)
+      :job_expiration_time,
+      :model_invocation_type)
       SENSITIVE = [:message]
       include Aws::Structure
     end
@@ -11498,6 +11531,10 @@ module Aws::Bedrock
     #   The time at which the batch inference job times or timed out.
     #   @return [Time]
     #
+    # @!attribute [rw] model_invocation_type
+    #   The invocation endpoint for ModelInvocationJob
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/ModelInvocationJobSummary AWS API Documentation
     #
     class ModelInvocationJobSummary < Struct.new(
@@ -11515,7 +11552,8 @@ module Aws::Bedrock
       :output_data_config,
       :vpc_config,
       :timeout_duration_in_hours,
-      :job_expiration_time)
+      :job_expiration_time,
+      :model_invocation_type)
       SENSITIVE = [:message]
       include Aws::Structure
     end

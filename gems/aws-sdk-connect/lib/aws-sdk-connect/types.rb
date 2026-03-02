@@ -13551,6 +13551,14 @@ module Aws::Connect
     #   The unique identifier for the evaluation review.
     #   @return [String]
     #
+    # @!attribute [rw] requested_time
+    #   The timestamp when the evaluation review was requested.
+    #   @return [Time]
+    #
+    # @!attribute [rw] requested_by
+    #   The user who requested the evaluation review.
+    #   @return [String]
+    #
     # @!attribute [rw] created_time
     #   The timestamp when the evaluation review was created.
     #   @return [Time]
@@ -13567,6 +13575,8 @@ module Aws::Connect
     #
     class EvaluationReviewMetadata < Struct.new(
       :review_id,
+      :requested_time,
+      :requested_by,
       :created_time,
       :created_by,
       :review_request_comments)
@@ -13615,11 +13625,12 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] created_time
-    #   The timestamp when the review request comment was created.
+    #   The timestamp when the evaluation review request comment was
+    #   created.
     #   @return [Time]
     #
     # @!attribute [rw] created_by
-    #   The user who created the review request comment.
+    #   The user who created the evaluation review request comment.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/EvaluationReviewRequestComment AWS API Documentation

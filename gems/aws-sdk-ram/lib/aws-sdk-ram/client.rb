@@ -1118,6 +1118,9 @@ module Aws::RAM
     #   prevent confused deputy attacks by applying constraints on where
     #   service principals can access resources from.
     #
+    # @option params [Types::ResourceShareConfiguration] :resource_share_configuration
+    #   Specifies the configuration of this resource share.
+    #
     # @return [Types::CreateResourceShareResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateResourceShareResponse#resource_share #resource_share} => Types::ResourceShare
@@ -1139,6 +1142,9 @@ module Aws::RAM
     #     client_token: "String",
     #     permission_arns: ["String"],
     #     sources: ["String"],
+    #     resource_share_configuration: {
+    #       retain_sharing_on_account_leave_organization: false,
+    #     },
     #   })
     #
     # @example Response structure
@@ -1155,6 +1161,7 @@ module Aws::RAM
     #   resp.resource_share.creation_time #=> Time
     #   resp.resource_share.last_updated_time #=> Time
     #   resp.resource_share.feature_set #=> String, one of "CREATED_FROM_POLICY", "PROMOTING_TO_STANDARD", "STANDARD"
+    #   resp.resource_share.resource_share_configuration.retain_sharing_on_account_leave_organization #=> Boolean
     #   resp.client_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/CreateResourceShare AWS API Documentation
@@ -2041,6 +2048,7 @@ module Aws::RAM
     #   resp.resource_shares[0].creation_time #=> Time
     #   resp.resource_shares[0].last_updated_time #=> Time
     #   resp.resource_shares[0].feature_set #=> String, one of "CREATED_FROM_POLICY", "PROMOTING_TO_STANDARD", "STANDARD"
+    #   resp.resource_shares[0].resource_share_configuration.retain_sharing_on_account_leave_organization #=> Boolean
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/GetResourceShares AWS API Documentation
@@ -3544,6 +3552,7 @@ module Aws::RAM
     #   resp.resource_share.creation_time #=> Time
     #   resp.resource_share.last_updated_time #=> Time
     #   resp.resource_share.feature_set #=> String, one of "CREATED_FROM_POLICY", "PROMOTING_TO_STANDARD", "STANDARD"
+    #   resp.resource_share.resource_share_configuration.retain_sharing_on_account_leave_organization #=> Boolean
     #   resp.client_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/UpdateResourceShare AWS API Documentation
@@ -3573,7 +3582,7 @@ module Aws::RAM
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-ram'
-      context[:gem_version] = '1.84.0'
+      context[:gem_version] = '1.85.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

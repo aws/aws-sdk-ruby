@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.85.0 (2026-02-27)
+------------------
+
+* Feature - Resource owners can now specify ResourceShareConfiguration request parameter for CreateResourceShare API including RetainSharingOnAccountLeaveOrganization boolean parameter
+
 1.84.0 (2026-02-05)
 ------------------
 

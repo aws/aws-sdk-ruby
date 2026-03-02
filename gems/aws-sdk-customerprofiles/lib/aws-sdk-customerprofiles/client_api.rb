@@ -1509,6 +1509,7 @@ module Aws::CustomerProfiles
     GetProfileObjectTypeResponse.add_member(:source_last_updated_timestamp_format, Shapes::ShapeRef.new(shape: string1To255, location_name: "SourceLastUpdatedTimestampFormat"))
     GetProfileObjectTypeResponse.add_member(:max_available_profile_object_count, Shapes::ShapeRef.new(shape: minSize0, location_name: "MaxAvailableProfileObjectCount"))
     GetProfileObjectTypeResponse.add_member(:max_profile_object_count, Shapes::ShapeRef.new(shape: minSize1, location_name: "MaxProfileObjectCount"))
+    GetProfileObjectTypeResponse.add_member(:source_priority, Shapes::ShapeRef.new(shape: minSize1, location_name: "SourcePriority"))
     GetProfileObjectTypeResponse.add_member(:fields, Shapes::ShapeRef.new(shape: FieldMap, location_name: "Fields"))
     GetProfileObjectTypeResponse.add_member(:keys, Shapes::ShapeRef.new(shape: KeyMap, location_name: "Keys"))
     GetProfileObjectTypeResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: timestamp, location_name: "CreatedAt"))
@@ -1911,6 +1912,7 @@ module Aws::CustomerProfiles
     ListProfileObjectTypeItem.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: timestamp, location_name: "LastUpdatedAt"))
     ListProfileObjectTypeItem.add_member(:max_profile_object_count, Shapes::ShapeRef.new(shape: minSize1, location_name: "MaxProfileObjectCount"))
     ListProfileObjectTypeItem.add_member(:max_available_profile_object_count, Shapes::ShapeRef.new(shape: minSize0, location_name: "MaxAvailableProfileObjectCount"))
+    ListProfileObjectTypeItem.add_member(:source_priority, Shapes::ShapeRef.new(shape: minSize1, location_name: "SourcePriority"))
     ListProfileObjectTypeItem.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     ListProfileObjectTypeItem.struct_class = Types::ListProfileObjectTypeItem
 
@@ -2280,6 +2282,7 @@ module Aws::CustomerProfiles
     PutProfileObjectTypeRequest.add_member(:allow_profile_creation, Shapes::ShapeRef.new(shape: boolean, location_name: "AllowProfileCreation"))
     PutProfileObjectTypeRequest.add_member(:source_last_updated_timestamp_format, Shapes::ShapeRef.new(shape: string1To255, location_name: "SourceLastUpdatedTimestampFormat"))
     PutProfileObjectTypeRequest.add_member(:max_profile_object_count, Shapes::ShapeRef.new(shape: minSize1, location_name: "MaxProfileObjectCount"))
+    PutProfileObjectTypeRequest.add_member(:source_priority, Shapes::ShapeRef.new(shape: minSize1, location_name: "SourcePriority"))
     PutProfileObjectTypeRequest.add_member(:fields, Shapes::ShapeRef.new(shape: FieldMap, location_name: "Fields"))
     PutProfileObjectTypeRequest.add_member(:keys, Shapes::ShapeRef.new(shape: KeyMap, location_name: "Keys"))
     PutProfileObjectTypeRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
@@ -2294,6 +2297,7 @@ module Aws::CustomerProfiles
     PutProfileObjectTypeResponse.add_member(:source_last_updated_timestamp_format, Shapes::ShapeRef.new(shape: string1To255, location_name: "SourceLastUpdatedTimestampFormat"))
     PutProfileObjectTypeResponse.add_member(:max_profile_object_count, Shapes::ShapeRef.new(shape: minSize1, location_name: "MaxProfileObjectCount"))
     PutProfileObjectTypeResponse.add_member(:max_available_profile_object_count, Shapes::ShapeRef.new(shape: minSize0, location_name: "MaxAvailableProfileObjectCount"))
+    PutProfileObjectTypeResponse.add_member(:source_priority, Shapes::ShapeRef.new(shape: minSize1, location_name: "SourcePriority"))
     PutProfileObjectTypeResponse.add_member(:fields, Shapes::ShapeRef.new(shape: FieldMap, location_name: "Fields"))
     PutProfileObjectTypeResponse.add_member(:keys, Shapes::ShapeRef.new(shape: KeyMap, location_name: "Keys"))
     PutProfileObjectTypeResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: timestamp, location_name: "CreatedAt"))

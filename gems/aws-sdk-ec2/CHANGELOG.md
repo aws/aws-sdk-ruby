@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.606.0 (2026-02-26)
+------------------
+
+* Feature - Add c8id, m8id and hpc8a instance types.
+
+1.605.0 (2026-02-25)
+------------------
+
+* Feature - Add support for EC2 Capacity Blocks in Local Zones.
+
 1.604.0 (2026-02-24)
 ------------------
 

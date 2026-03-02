@@ -672,6 +672,42 @@ module Aws::ECS
       include Aws::Structure
     end
 
+    # The Capacity Reservation configurations to be used when using the
+    # `RESERVED` capacity option type.
+    #
+    # @!attribute [rw] reservation_group_arn
+    #   The ARN of the Capacity Reservation resource group in which to run
+    #   the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] reservation_preference
+    #   The preference on when capacity reservations should be used.
+    #
+    #   Valid values are:
+    #
+    #   * `RESERVATIONS_ONLY` - Exclusively launch instances into capacity
+    #     reservations that match the instance requirements configured for
+    #     the capacity provider. If none exist, instances will fail to
+    #     provision.
+    #
+    #   * `RESERVATIONS_FIRST` - Prefer to launch instances into a capacity
+    #     reservation if any exist that match the instance requirements
+    #     configured for the capacity provider. If none exist, fall back to
+    #     launching instances On-Demand.
+    #
+    #   * `RESERVATIONS_EXCLUDED` - Avoid using capacity reservations and
+    #     launch exclusively On-Demand.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/CapacityReservationRequest AWS API Documentation
+    #
+    class CapacityReservationRequest < Struct.new(
+      :reservation_group_arn,
+      :reservation_preference)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # These errors are usually caused by a client action. This client action
     # might be using an action or resource on behalf of a user that doesn't
     # have permissions to use the action or resource. Or, it might be
@@ -6980,8 +7016,8 @@ module Aws::ECS
     #
     # @!attribute [rw] capacity_option_type
     #   The capacity option type. This determines whether Amazon ECS
-    #   launches On-Demand or Spot Instances for your managed instance
-    #   capacity provider.
+    #   launches On-Demand, Spot or Capacity Reservation Instances for your
+    #   managed instance capacity provider.
     #
     #   Valid values are:
     #
@@ -6992,6 +7028,10 @@ module Aws::ECS
     #     capacity at reduced cost. Spot Instances can be interrupted by
     #     Amazon EC2 with a two-minute notification when the capacity is
     #     needed back.
+    #
+    #   * `RESERVED` - Launches Instances using Amazon EC2 Capacity
+    #     Reservations. Capacity Reservations allow you to reserve compute
+    #     capacity for Amazon EC2 instances in a specific Availability Zone.
     #
     #   The default is On-Demand
     #
@@ -7026,6 +7066,18 @@ module Aws::ECS
     #   GovCloud (US) regions and FIPS disabled in other regions.
     #   @return [Boolean]
     #
+    # @!attribute [rw] capacity_reservations
+    #   Capacity reservation specifications. You can specify:
+    #
+    #   * Capacity reservation preference
+    #
+    #   * Reservation resource group to be used for targeted capacity
+    #     reservations
+    #
+    #   Amazon ECS will launch instances according to the specified
+    #   criteria.
+    #   @return [Types::CapacityReservationRequest]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/InstanceLaunchTemplate AWS API Documentation
     #
     class InstanceLaunchTemplate < Struct.new(
@@ -7035,7 +7087,8 @@ module Aws::ECS
       :monitoring,
       :capacity_option_type,
       :instance_requirements,
-      :fips_enabled)
+      :fips_enabled,
+      :capacity_reservations)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7098,6 +7151,12 @@ module Aws::ECS
     #   types Amazon ECS selects for new instances.
     #   @return [Types::InstanceRequirementsRequest]
     #
+    # @!attribute [rw] capacity_reservations
+    #   The updated capacity reservations specifications for Amazon ECS
+    #   Managed Instances. Changes to capacity reservations settings apply
+    #   to new instances launched after the update.
+    #   @return [Types::CapacityReservationRequest]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/InstanceLaunchTemplateUpdate AWS API Documentation
     #
     class InstanceLaunchTemplateUpdate < Struct.new(
@@ -7105,7 +7164,8 @@ module Aws::ECS
       :network_configuration,
       :storage_configuration,
       :monitoring,
-      :instance_requirements)
+      :instance_requirements,
+      :capacity_reservations)
       SENSITIVE = []
       include Aws::Structure
     end

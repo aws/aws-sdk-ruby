@@ -1778,7 +1778,9 @@ module Aws::TranscribeStreamingService
     #   Values must be comma-separated and can include: `ADDRESS`,
     #   `BANK_ACCOUNT_NUMBER`, `BANK_ROUTING`, `CREDIT_DEBIT_CVV`,
     #   `CREDIT_DEBIT_EXPIRY`, `CREDIT_DEBIT_NUMBER`, `EMAIL`, `NAME`,
-    #   `PHONE`, `PIN`, `SSN`, or `ALL`.
+    #   `PHONE`, `PIN`, `SSN`, `AGE`, `DATE_TIME`, `LICENSE_PLATE`,
+    #   `PASSPORT_NUMBER`, `PASSWORD`, `USERNAME`,
+    #   `VEHICLE_IDENTIFICATION_NUMBER`, or `ALL`.
     #
     #   Note that if you include `PiiEntityTypes` in your request, you must
     #   also include `ContentIdentificationType` or `ContentRedactionType`.
@@ -1912,6 +1914,15 @@ module Aws::TranscribeStreamingService
     #
     #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/vocabulary-filtering.html
     #
+    # @option params [Integer] :session_resume_window
+    #   Specify the time window, in minutes, during which your transcription
+    #   session can be resumed, measured from the stream start time. This
+    #   optional parameter accepts integer values from 1 to 300 (5 hours).
+    #
+    #   For example, if your stream starts at 1 PM and you specify a
+    #   `SessionResumeWindow` of 30 minutes, you can reconnect to the session
+    #   as many times as you want until 1:30 PM.
+    #
     # @return [Types::StartStreamTranscriptionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartStreamTranscriptionResponse#request_id #request_id} => String
@@ -1938,6 +1949,7 @@ module Aws::TranscribeStreamingService
     #   * {Types::StartStreamTranscriptionResponse#identify_multiple_languages #identify_multiple_languages} => Boolean
     #   * {Types::StartStreamTranscriptionResponse#vocabulary_names #vocabulary_names} => String
     #   * {Types::StartStreamTranscriptionResponse#vocabulary_filter_names #vocabulary_filter_names} => String
+    #   * {Types::StartStreamTranscriptionResponse#session_resume_window #session_resume_window} => Integer
     #
     # @example Bi-directional EventStream Operation Example
     #   # You can signal input events after the initial request is established. Events
@@ -2062,6 +2074,7 @@ module Aws::TranscribeStreamingService
     #     identify_multiple_languages: false,
     #     vocabulary_names: "VocabularyNames",
     #     vocabulary_filter_names: "VocabularyFilterNames",
+    #     session_resume_window: 1,
     #   })
     #   # => Seahorse::Client::AsyncResponse
     #   async_resp.wait
@@ -2142,6 +2155,7 @@ module Aws::TranscribeStreamingService
     #   resp.identify_multiple_languages #=> Boolean
     #   resp.vocabulary_names #=> String
     #   resp.vocabulary_filter_names #=> String
+    #   resp.session_resume_window #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-streaming-2017-10-26/StartStreamTranscription AWS API Documentation
     #
@@ -2191,7 +2205,7 @@ module Aws::TranscribeStreamingService
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-transcribestreamingservice'
-      context[:gem_version] = '1.97.0'
+      context[:gem_version] = '1.98.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

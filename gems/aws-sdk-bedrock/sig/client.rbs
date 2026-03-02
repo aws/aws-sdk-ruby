@@ -1020,7 +1020,8 @@ module Aws
                                              key: ::String,
                                              value: ::String
                                            },
-                                         ]
+                                         ],
+                                         ?model_invocation_type: ("InvokeModel" | "Converse")
                                        ) -> _CreateModelInvocationJobResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateModelInvocationJobResponseSuccess
 
@@ -1586,6 +1587,7 @@ module Aws
         def vpc_config: () -> Types::VpcConfig
         def timeout_duration_in_hours: () -> ::Integer
         def job_expiration_time: () -> ::Time
+        def model_invocation_type: () -> ("InvokeModel" | "Converse")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Bedrock/Client.html#get_model_invocation_job-instance_method
       def get_model_invocation_job: (

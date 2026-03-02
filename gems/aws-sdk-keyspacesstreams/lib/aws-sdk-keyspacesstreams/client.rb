@@ -494,15 +494,15 @@ module Aws::KeyspacesStreams
     #   The unique identifier of the shard iterator. A shard iterator
     #   specifies the position in the shard from which you want to start
     #   reading data records sequentially. You obtain this value by calling
-    #   the `GetShardIterator` operation. Each shard iterator is valid for 15
+    #   the `GetShardIterator ` operation. Each shard iterator is valid for 15
     #   minutes after creation.
     #
     # @option params [Integer] :max_results
     #   The maximum number of records to return in a single `GetRecords`
-    #   request. Default value is 1000. You can specify a limit between 1 and
-    #   1000, but the actual number returned might be less than the specified
-    #   maximum if the size of the data for the returned records exceeds the
-    #   internal size limit.
+    #   request. The default value is 100. You can specify a limit between 1
+    #   and 1000, but the actual number returned might be less than the
+    #   specified maximum if the size of the data for the returned records
+    #   exceeds the internal size limit.
     #
     # @return [Types::GetRecordsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -531,6 +531,7 @@ module Aws::KeyspacesStreams
     #   resp.change_records[0].partition_keys["String"].date_t #=> String
     #   resp.change_records[0].partition_keys["String"].decimal_t #=> String
     #   resp.change_records[0].partition_keys["String"].double_t #=> String
+    #   resp.change_records[0].partition_keys["String"].duration_t #=> String
     #   resp.change_records[0].partition_keys["String"].float_t #=> String
     #   resp.change_records[0].partition_keys["String"].inet_t #=> String
     #   resp.change_records[0].partition_keys["String"].int_t #=> String
@@ -573,6 +574,7 @@ module Aws::KeyspacesStreams
     #   resp.change_records[0].clustering_keys["String"].date_t #=> String
     #   resp.change_records[0].clustering_keys["String"].decimal_t #=> String
     #   resp.change_records[0].clustering_keys["String"].double_t #=> String
+    #   resp.change_records[0].clustering_keys["String"].duration_t #=> String
     #   resp.change_records[0].clustering_keys["String"].float_t #=> String
     #   resp.change_records[0].clustering_keys["String"].inet_t #=> String
     #   resp.change_records[0].clustering_keys["String"].int_t #=> String
@@ -615,6 +617,7 @@ module Aws::KeyspacesStreams
     #   resp.change_records[0].new_image.value_cells["String"].value.date_t #=> String
     #   resp.change_records[0].new_image.value_cells["String"].value.decimal_t #=> String
     #   resp.change_records[0].new_image.value_cells["String"].value.double_t #=> String
+    #   resp.change_records[0].new_image.value_cells["String"].value.duration_t #=> String
     #   resp.change_records[0].new_image.value_cells["String"].value.float_t #=> String
     #   resp.change_records[0].new_image.value_cells["String"].value.inet_t #=> String
     #   resp.change_records[0].new_image.value_cells["String"].value.int_t #=> String
@@ -651,6 +654,7 @@ module Aws::KeyspacesStreams
     #   resp.change_records[0].new_image.static_cells["String"].value.date_t #=> String
     #   resp.change_records[0].new_image.static_cells["String"].value.decimal_t #=> String
     #   resp.change_records[0].new_image.static_cells["String"].value.double_t #=> String
+    #   resp.change_records[0].new_image.static_cells["String"].value.duration_t #=> String
     #   resp.change_records[0].new_image.static_cells["String"].value.float_t #=> String
     #   resp.change_records[0].new_image.static_cells["String"].value.inet_t #=> String
     #   resp.change_records[0].new_image.static_cells["String"].value.int_t #=> String
@@ -689,6 +693,7 @@ module Aws::KeyspacesStreams
     #   resp.change_records[0].old_image.value_cells["String"].value.date_t #=> String
     #   resp.change_records[0].old_image.value_cells["String"].value.decimal_t #=> String
     #   resp.change_records[0].old_image.value_cells["String"].value.double_t #=> String
+    #   resp.change_records[0].old_image.value_cells["String"].value.duration_t #=> String
     #   resp.change_records[0].old_image.value_cells["String"].value.float_t #=> String
     #   resp.change_records[0].old_image.value_cells["String"].value.inet_t #=> String
     #   resp.change_records[0].old_image.value_cells["String"].value.int_t #=> String
@@ -725,6 +730,7 @@ module Aws::KeyspacesStreams
     #   resp.change_records[0].old_image.static_cells["String"].value.date_t #=> String
     #   resp.change_records[0].old_image.static_cells["String"].value.decimal_t #=> String
     #   resp.change_records[0].old_image.static_cells["String"].value.double_t #=> String
+    #   resp.change_records[0].old_image.static_cells["String"].value.duration_t #=> String
     #   resp.change_records[0].old_image.static_cells["String"].value.float_t #=> String
     #   resp.change_records[0].old_image.static_cells["String"].value.inet_t #=> String
     #   resp.change_records[0].old_image.static_cells["String"].value.int_t #=> String
@@ -845,18 +851,19 @@ module Aws::KeyspacesStreams
     #
     # @option params [Integer] :max_results
     #   The maximum number of shard objects to return in a single `GetStream`
-    #   request. Default value is 100. The minimum value is 1 and the maximum
-    #   value is 100.
+    #   request. The default value is 100. The minimum value is 1 and the
+    #   maximum value is 100.
     #
     # @option params [Types::ShardFilter] :shard_filter
     #   Optional filter criteria to apply when retrieving shards. You can
-    #   filter shards based on their state or other attributes to narrow down
-    #   the results returned by the `GetStream` operation.
+    #   filter shards based on their parent `shardID` to get a list of
+    #   children shards to narrow down the results returned by the `GetStream`
+    #   operation.
     #
     # @option params [String] :next_token
     #   An optional pagination token provided by a previous `GetStream`
     #   operation. If this parameter is specified, the response includes only
-    #   records beyond the token, up to the value specified by `maxResults`.
+    #   records beyond the token, up to the value specified by `MaxResults`.
     #
     # @return [Types::GetStreamOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -928,8 +935,8 @@ module Aws::KeyspacesStreams
     #
     # @option params [Integer] :max_results
     #   The maximum number of streams to return in a single `ListStreams`
-    #   request. Default value is 100. The minimum value is 1 and the maximum
-    #   value is 100.
+    #   request. The default value is 100. The minimum value is 1 and the
+    #   maximum value is 100.
     #
     # @option params [String] :next_token
     #   An optional pagination token provided by a previous `ListStreams`
@@ -988,7 +995,7 @@ module Aws::KeyspacesStreams
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-keyspacesstreams'
-      context[:gem_version] = '1.12.0'
+      context[:gem_version] = '1.13.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

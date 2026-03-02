@@ -5009,6 +5009,7 @@ module Aws::EC2
     CapacityBlockExtension.add_member(:capacity_block_extension_end_date, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "capacityBlockExtensionEndDate"))
     CapacityBlockExtension.add_member(:upfront_fee, Shapes::ShapeRef.new(shape: String, location_name: "upfrontFee"))
     CapacityBlockExtension.add_member(:currency_code, Shapes::ShapeRef.new(shape: String, location_name: "currencyCode"))
+    CapacityBlockExtension.add_member(:zone_type, Shapes::ShapeRef.new(shape: String, location_name: "zoneType"))
     CapacityBlockExtension.struct_class = Types::CapacityBlockExtension
 
     CapacityBlockExtensionOffering.add_member(:capacity_block_extension_offering_id, Shapes::ShapeRef.new(shape: OfferingId, location_name: "capacityBlockExtensionOfferingId"))
@@ -5023,6 +5024,7 @@ module Aws::EC2
     CapacityBlockExtensionOffering.add_member(:upfront_fee, Shapes::ShapeRef.new(shape: String, location_name: "upfrontFee"))
     CapacityBlockExtensionOffering.add_member(:currency_code, Shapes::ShapeRef.new(shape: String, location_name: "currencyCode"))
     CapacityBlockExtensionOffering.add_member(:tenancy, Shapes::ShapeRef.new(shape: CapacityReservationTenancy, location_name: "tenancy"))
+    CapacityBlockExtensionOffering.add_member(:zone_type, Shapes::ShapeRef.new(shape: String, location_name: "zoneType"))
     CapacityBlockExtensionOffering.struct_class = Types::CapacityBlockExtensionOffering
 
     CapacityBlockExtensionOfferingSet.member = Shapes::ShapeRef.new(shape: CapacityBlockExtensionOffering, location_name: "item")
@@ -5044,6 +5046,7 @@ module Aws::EC2
     CapacityBlockOffering.add_member(:ultraserver_type, Shapes::ShapeRef.new(shape: String, location_name: "ultraserverType"))
     CapacityBlockOffering.add_member(:ultraserver_count, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "ultraserverCount"))
     CapacityBlockOffering.add_member(:capacity_block_duration_minutes, Shapes::ShapeRef.new(shape: Integer, location_name: "capacityBlockDurationMinutes"))
+    CapacityBlockOffering.add_member(:zone_type, Shapes::ShapeRef.new(shape: String, location_name: "zoneType"))
     CapacityBlockOffering.struct_class = Types::CapacityBlockOffering
 
     CapacityBlockOfferingSet.member = Shapes::ShapeRef.new(shape: CapacityBlockOffering, location_name: "item")
@@ -7907,6 +7910,7 @@ module Aws::EC2
     DescribeCapacityBlockOfferingsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: DescribeCapacityBlockOfferingsMaxResults, location_name: "MaxResults"))
     DescribeCapacityBlockOfferingsRequest.add_member(:ultraserver_type, Shapes::ShapeRef.new(shape: String, location_name: "UltraserverType"))
     DescribeCapacityBlockOfferingsRequest.add_member(:ultraserver_count, Shapes::ShapeRef.new(shape: Integer, location_name: "UltraserverCount"))
+    DescribeCapacityBlockOfferingsRequest.add_member(:all_availability_zones, Shapes::ShapeRef.new(shape: Boolean, location_name: "AllAvailabilityZones"))
     DescribeCapacityBlockOfferingsRequest.struct_class = Types::DescribeCapacityBlockOfferingsRequest
 
     DescribeCapacityBlockOfferingsResult.add_member(:capacity_block_offerings, Shapes::ShapeRef.new(shape: CapacityBlockOfferingSet, location_name: "capacityBlockOfferingSet"))

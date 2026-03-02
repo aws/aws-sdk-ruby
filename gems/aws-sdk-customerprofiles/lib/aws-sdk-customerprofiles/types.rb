@@ -4355,6 +4355,13 @@ module Aws::CustomerProfiles
     #   The amount of profile object max count assigned to the object type.
     #   @return [Integer]
     #
+    # @!attribute [rw] source_priority
+    #   An integer that determines the priority of this object type when
+    #   data from multiple sources is ingested. Lower values take priority.
+    #   Object types without a specified source priority default to the
+    #   lowest priority.
+    #   @return [Integer]
+    #
     # @!attribute [rw] fields
     #   A map of the name and ObjectType field.
     #   @return [Hash<String,Types::ObjectTypeField>]
@@ -4388,6 +4395,7 @@ module Aws::CustomerProfiles
       :source_last_updated_timestamp_format,
       :max_available_profile_object_count,
       :max_profile_object_count,
+      :source_priority,
       :fields,
       :keys,
       :created_at,
@@ -6297,6 +6305,13 @@ module Aws::CustomerProfiles
     #   The amount of provisioned profile object max count available.
     #   @return [Integer]
     #
+    # @!attribute [rw] source_priority
+    #   An integer that determines the priority of this object type when
+    #   data from multiple sources is ingested. Lower values take priority.
+    #   Object types without a specified source priority default to the
+    #   lowest priority.
+    #   @return [Integer]
+    #
     # @!attribute [rw] tags
     #   The tags used to organize, track, or control access for this
     #   resource.
@@ -6311,6 +6326,7 @@ module Aws::CustomerProfiles
       :last_updated_at,
       :max_profile_object_count,
       :max_available_profile_object_count,
+      :source_priority,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -7952,6 +7968,13 @@ module Aws::CustomerProfiles
     #   The amount of profile object max count assigned to the object type
     #   @return [Integer]
     #
+    # @!attribute [rw] source_priority
+    #   An integer that determines the priority of this object type when
+    #   data from multiple sources is ingested. Lower values take priority.
+    #   Object types without a specified source priority default to the
+    #   lowest priority.
+    #   @return [Integer]
+    #
     # @!attribute [rw] fields
     #   A map of the name and ObjectType field.
     #   @return [Hash<String,Types::ObjectTypeField>]
@@ -7977,6 +8000,7 @@ module Aws::CustomerProfiles
       :allow_profile_creation,
       :source_last_updated_timestamp_format,
       :max_profile_object_count,
+      :source_priority,
       :fields,
       :keys,
       :tags)
@@ -8033,6 +8057,13 @@ module Aws::CustomerProfiles
     #   The amount of provisioned profile object max count available.
     #   @return [Integer]
     #
+    # @!attribute [rw] source_priority
+    #   An integer that determines the priority of this object type when
+    #   data from multiple sources is ingested. Lower values take priority.
+    #   Object types without a specified source priority default to the
+    #   lowest priority.
+    #   @return [Integer]
+    #
     # @!attribute [rw] fields
     #   A map of the name and ObjectType field.
     #   @return [Hash<String,Types::ObjectTypeField>]
@@ -8066,6 +8097,7 @@ module Aws::CustomerProfiles
       :source_last_updated_timestamp_format,
       :max_profile_object_count,
       :max_available_profile_object_count,
+      :source_priority,
       :fields,
       :keys,
       :created_at,

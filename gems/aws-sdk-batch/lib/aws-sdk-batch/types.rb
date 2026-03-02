@@ -915,6 +915,15 @@ module Aws::Batch
     #    </note>
     #   @return [Array<Types::Ec2Configuration>]
     #
+    # @!attribute [rw] scaling_policy
+    #   The scaling policy configuration for the compute environment.
+    #
+    #   <note markdown="1"> This parameter isn't applicable to jobs that are running on Fargate
+    #   resources. Don't specify it.
+    #
+    #    </note>
+    #   @return [Types::ComputeScalingPolicy]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/ComputeResource AWS API Documentation
     #
     class ComputeResource < Struct.new(
@@ -934,7 +943,8 @@ module Aws::Batch
       :bid_percentage,
       :spot_iam_fleet_role,
       :launch_template,
-      :ec2_configuration)
+      :ec2_configuration,
+      :scaling_policy)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1437,6 +1447,15 @@ module Aws::Batch
     #   [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html#ecs-optimized-ami-linux-variants.html
     #   @return [String]
     #
+    # @!attribute [rw] scaling_policy
+    #   The scaling policy configuration for the compute environment.
+    #
+    #   <note markdown="1"> This parameter isn't applicable to jobs that are running on Fargate
+    #   resources. Don't specify it.
+    #
+    #    </note>
+    #   @return [Types::ComputeScalingPolicy]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/ComputeResourceUpdate AWS API Documentation
     #
     class ComputeResourceUpdate < Struct.new(
@@ -1456,7 +1475,39 @@ module Aws::Batch
       :ec2_configuration,
       :update_to_latest_image_version,
       :type,
-      :image_id)
+      :image_id,
+      :scaling_policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that represents a scaling policy for a compute environment.
+    #
+    # @!attribute [rw] min_scale_down_delay_minutes
+    #   The minimum time (in minutes) that Batch keeps instances running in
+    #   the compute environment after their jobs complete. For each
+    #   instance, the delay period begins when the last job finishes. If no
+    #   new jobs are placed on the instance during this delay, Batch
+    #   terminates the instance once the delay expires.
+    #
+    #   Valid Range: Minimum value of 20. Maximum value of 10080. Use 0 to
+    #   unset and disable the scale down delay.
+    #
+    #   <note markdown="1"> The scale down delay does not apply to:
+    #
+    #    * Instances being replaced during infrastructure updates
+    #
+    #   * Newly launched instances that have not yet run any jobs
+    #
+    #   * Spot instances reclaimed due to interruption
+    #
+    #    </note>
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/ComputeScalingPolicy AWS API Documentation
+    #
+    class ComputeScalingPolicy < Struct.new(
+      :min_scale_down_delay_minutes)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5424,7 +5475,7 @@ module Aws::Batch
     # @!attribute [rw] capacity_unit
     #   The unit of measure for the capacity usage. For compute jobs, this
     #   is `VCPU` for Amazon EC2 and `cpu` for Amazon EKS. For service jobs,
-    #   this is `NUM_INSTANCES`.
+    #   this is the instance type.
     #   @return [String]
     #
     # @!attribute [rw] quantity
@@ -7909,7 +7960,7 @@ module Aws::Batch
     # @!attribute [rw] capacity_unit
     #   The unit of measure for the capacity usage. For compute jobs, this
     #   is `VCPU` for Amazon EC2 and `cpu` for Amazon EKS. For service jobs,
-    #   this is `NUM_INSTANCES`.
+    #   this is the instance type.
     #   @return [String]
     #
     # @!attribute [rw] quantity
@@ -8660,7 +8711,7 @@ module Aws::Batch
     #
     # @!attribute [rw] capacity_unit
     #   The unit of measure for the service job capacity usage. For service
-    #   jobs, this is `NUM_INSTANCES`.
+    #   jobs, this is the instance type.
     #   @return [String]
     #
     # @!attribute [rw] quantity
@@ -8682,7 +8733,7 @@ module Aws::Batch
     #
     # @!attribute [rw] capacity_unit
     #   The unit of measure for the service job capacity usage. For service
-    #   jobs, this is `NUM_INSTANCES`.
+    #   jobs, this is the instance type.
     #   @return [String]
     #
     # @!attribute [rw] quantity

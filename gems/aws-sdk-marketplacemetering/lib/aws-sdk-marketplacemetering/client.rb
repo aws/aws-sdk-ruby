@@ -483,12 +483,13 @@ module Aws::MarketplaceMetering
 
     # @!group API Operations
 
-    # The `CustomerIdentifier` and `CustomerAWSAccountID` are mutually
-    # exclusive parameters. You must use one or the other, but not both in
-    # the same API request. For new implementations, we recommend using the
-    # `CustomerAWSAccountID`. Your current integration will continue to
-    # work. When updating your implementation, consider migrating to
-    # `CustomerAWSAccountID` for improved integration.
+    # Amazon Web Services Marketplace is introducing Concurrent Agreements,
+    # enabling buyers to make multiple purchases per Amazon Web Services
+    # account. Starting June 1, 2026, new SaaS products must use
+    # `CustomerAWSAccountId` (instead of `CustomerIdentifier`), `LicenseArn`
+    # (instead of `ProductCode`) to support this feature. Existing
+    # integrations will continue to work. Review the new integration for
+    # Concurrent Agreements [here][1].
     #
     # To post metering records for customers, SaaS applications call
     # `BatchMeterUsage`, which is used for metering SaaS flexible
@@ -513,23 +514,24 @@ module Aws::MarketplaceMetering
     # should be retried.
     #
     # For Amazon Web Services Regions that support `BatchMeterUsage`, see
-    # [BatchMeterUsage Region support][1].
+    # [BatchMeterUsage Region support][2].
     #
     # <note markdown="1"> For an example of `BatchMeterUsage`, see [ BatchMeterUsage code
-    # example][2] in the *Amazon Web Services Marketplace Seller Guide*.
+    # example][3] in the *Amazon Web Services Marketplace Seller Guide*.
     #
     #  </note>
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/marketplace/latest/APIReference/metering-regions.html#batchmeterusage-region-support
-    # [2]: https://docs.aws.amazon.com/marketplace/latest/userguide/saas-code-examples.html#saas-batchmeterusage-example
+    # [1]: https://catalog.workshops.aws/mpseller/en-US/saas/integration-for-concurrent-agreements
+    # [2]: https://docs.aws.amazon.com/marketplace/latest/APIReference/metering-regions.html#batchmeterusage-region-support
+    # [3]: https://docs.aws.amazon.com/marketplace/latest/userguide/saas-code-examples.html#saas-batchmeterusage-example
     #
     # @option params [required, Array<Types::UsageRecord>] :usage_records
     #   The set of `UsageRecords` to submit. `BatchMeterUsage` accepts up to
     #   25 `UsageRecords` at a time.
     #
-    # @option params [required, String] :product_code
+    # @option params [String] :product_code
     #   Product code is used to uniquely identify a product in Amazon Web
     #   Services Marketplace. The product code should be the same as the one
     #   used during the publishing of a new product.
@@ -560,9 +562,10 @@ module Aws::MarketplaceMetering
     #           },
     #         ],
     #         customer_aws_account_id: "CustomerAWSAccountId",
+    #         license_arn: "LicenseArn",
     #       },
     #     ],
-    #     product_code: "ProductCode", # required
+    #     product_code: "ProductCode",
     #   })
     #
     # @example Response structure
@@ -578,6 +581,7 @@ module Aws::MarketplaceMetering
     #   resp.results[0].usage_record.usage_allocations[0].tags[0].key #=> String
     #   resp.results[0].usage_record.usage_allocations[0].tags[0].value #=> String
     #   resp.results[0].usage_record.customer_aws_account_id #=> String
+    #   resp.results[0].usage_record.license_arn #=> String
     #   resp.results[0].metering_record_id #=> String
     #   resp.results[0].status #=> String, one of "Success", "CustomerNotSubscribed", "DuplicateRecord"
     #   resp.unprocessed_records #=> Array
@@ -591,6 +595,7 @@ module Aws::MarketplaceMetering
     #   resp.unprocessed_records[0].usage_allocations[0].tags[0].key #=> String
     #   resp.unprocessed_records[0].usage_allocations[0].tags[0].value #=> String
     #   resp.unprocessed_records[0].customer_aws_account_id #=> String
+    #   resp.unprocessed_records[0].license_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/meteringmarketplace-2016-01-14/BatchMeterUsage AWS API Documentation
     #
@@ -858,8 +863,8 @@ module Aws::MarketplaceMetering
     # registration process. When a buyer visits your website during the
     # registration process, the buyer submits a registration token through
     # their browser. The registration token is resolved through this API to
-    # obtain a `CustomerIdentifier` along with the `CustomerAWSAccountId`
-    # and `ProductCode`.
+    # obtain a `CustomerIdentifier` along with the `CustomerAWSAccountId`,
+    # `ProductCode`, and `LicenseArn`.
     #
     # <note markdown="1"> To successfully resolve the token, the API must be called from the
     # account that was used to publish the SaaS application. For an example
@@ -888,13 +893,14 @@ module Aws::MarketplaceMetering
     #   When a buyer visits your website during the registration process, the
     #   buyer submits a registration token through the browser. The
     #   registration token is resolved to obtain a `CustomerIdentifier` along
-    #   with the `CustomerAWSAccountId` and `ProductCode`.
+    #   with the `CustomerAWSAccountId`, `ProductCode`, and `LicenseArn`.
     #
     # @return [Types::ResolveCustomerResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ResolveCustomerResult#customer_identifier #customer_identifier} => String
     #   * {Types::ResolveCustomerResult#product_code #product_code} => String
     #   * {Types::ResolveCustomerResult#customer_aws_account_id #customer_aws_account_id} => String
+    #   * {Types::ResolveCustomerResult#license_arn #license_arn} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -907,6 +913,7 @@ module Aws::MarketplaceMetering
     #   resp.customer_identifier #=> String
     #   resp.product_code #=> String
     #   resp.customer_aws_account_id #=> String
+    #   resp.license_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/meteringmarketplace-2016-01-14/ResolveCustomer AWS API Documentation
     #
@@ -935,7 +942,7 @@ module Aws::MarketplaceMetering
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-marketplacemetering'
-      context[:gem_version] = '1.92.0'
+      context[:gem_version] = '1.93.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

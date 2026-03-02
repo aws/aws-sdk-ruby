@@ -2844,7 +2844,7 @@ module Aws::CustomerProfiles
     #   resp.detected_profile_object_types[0].keys #=> Hash
     #   resp.detected_profile_object_types[0].keys["name"] #=> Array
     #   resp.detected_profile_object_types[0].keys["name"][0].standard_identifiers #=> Array
-    #   resp.detected_profile_object_types[0].keys["name"][0].standard_identifiers[0] #=> String, one of "PROFILE", "ASSET", "CASE", "ORDER", "COMMUNICATION_RECORD", "AIR_PREFERENCE", "HOTEL_PREFERENCE", "AIR_BOOKING", "AIR_SEGMENT", "HOTEL_RESERVATION", "HOTEL_STAY_REVENUE", "LOYALTY", "LOYALTY_TRANSACTION", "LOYALTY_PROMOTION", "UNIQUE", "SECONDARY", "LOOKUP_ONLY", "NEW_ONLY"
+    #   resp.detected_profile_object_types[0].keys["name"][0].standard_identifiers[0] #=> String, one of "PROFILE", "ASSET", "CASE", "DEVICE", "WEB_ANALYTICS", "ORDER", "COMMUNICATION_RECORD", "AIR_PREFERENCE", "HOTEL_PREFERENCE", "AIR_BOOKING", "AIR_SEGMENT", "HOTEL_RESERVATION", "HOTEL_STAY_REVENUE", "LOYALTY", "LOYALTY_TRANSACTION", "LOYALTY_PROMOTION", "UNIQUE", "SECONDARY", "LOOKUP_ONLY", "NEW_ONLY"
     #   resp.detected_profile_object_types[0].keys["name"][0].field_names #=> Array
     #   resp.detected_profile_object_types[0].keys["name"][0].field_names[0] #=> String
     #
@@ -3696,6 +3696,7 @@ module Aws::CustomerProfiles
     #   * {Types::GetProfileObjectTypeResponse#source_last_updated_timestamp_format #source_last_updated_timestamp_format} => String
     #   * {Types::GetProfileObjectTypeResponse#max_available_profile_object_count #max_available_profile_object_count} => Integer
     #   * {Types::GetProfileObjectTypeResponse#max_profile_object_count #max_profile_object_count} => Integer
+    #   * {Types::GetProfileObjectTypeResponse#source_priority #source_priority} => Integer
     #   * {Types::GetProfileObjectTypeResponse#fields #fields} => Hash&lt;String,Types::ObjectTypeField&gt;
     #   * {Types::GetProfileObjectTypeResponse#keys #keys} => Hash&lt;String,Array&lt;Types::ObjectTypeKey&gt;&gt;
     #   * {Types::GetProfileObjectTypeResponse#created_at #created_at} => Time
@@ -3720,6 +3721,7 @@ module Aws::CustomerProfiles
     #   resp.source_last_updated_timestamp_format #=> String
     #   resp.max_available_profile_object_count #=> Integer
     #   resp.max_profile_object_count #=> Integer
+    #   resp.source_priority #=> Integer
     #   resp.fields #=> Hash
     #   resp.fields["fieldName"].source #=> String
     #   resp.fields["fieldName"].target #=> String
@@ -3727,7 +3729,7 @@ module Aws::CustomerProfiles
     #   resp.keys #=> Hash
     #   resp.keys["name"] #=> Array
     #   resp.keys["name"][0].standard_identifiers #=> Array
-    #   resp.keys["name"][0].standard_identifiers[0] #=> String, one of "PROFILE", "ASSET", "CASE", "ORDER", "COMMUNICATION_RECORD", "AIR_PREFERENCE", "HOTEL_PREFERENCE", "AIR_BOOKING", "AIR_SEGMENT", "HOTEL_RESERVATION", "HOTEL_STAY_REVENUE", "LOYALTY", "LOYALTY_TRANSACTION", "LOYALTY_PROMOTION", "UNIQUE", "SECONDARY", "LOOKUP_ONLY", "NEW_ONLY"
+    #   resp.keys["name"][0].standard_identifiers[0] #=> String, one of "PROFILE", "ASSET", "CASE", "DEVICE", "WEB_ANALYTICS", "ORDER", "COMMUNICATION_RECORD", "AIR_PREFERENCE", "HOTEL_PREFERENCE", "AIR_BOOKING", "AIR_SEGMENT", "HOTEL_RESERVATION", "HOTEL_STAY_REVENUE", "LOYALTY", "LOYALTY_TRANSACTION", "LOYALTY_PROMOTION", "UNIQUE", "SECONDARY", "LOOKUP_ONLY", "NEW_ONLY"
     #   resp.keys["name"][0].field_names #=> Array
     #   resp.keys["name"][0].field_names[0] #=> String
     #   resp.created_at #=> Time
@@ -3785,7 +3787,7 @@ module Aws::CustomerProfiles
     #   resp.keys #=> Hash
     #   resp.keys["name"] #=> Array
     #   resp.keys["name"][0].standard_identifiers #=> Array
-    #   resp.keys["name"][0].standard_identifiers[0] #=> String, one of "PROFILE", "ASSET", "CASE", "ORDER", "COMMUNICATION_RECORD", "AIR_PREFERENCE", "HOTEL_PREFERENCE", "AIR_BOOKING", "AIR_SEGMENT", "HOTEL_RESERVATION", "HOTEL_STAY_REVENUE", "LOYALTY", "LOYALTY_TRANSACTION", "LOYALTY_PROMOTION", "UNIQUE", "SECONDARY", "LOOKUP_ONLY", "NEW_ONLY"
+    #   resp.keys["name"][0].standard_identifiers[0] #=> String, one of "PROFILE", "ASSET", "CASE", "DEVICE", "WEB_ANALYTICS", "ORDER", "COMMUNICATION_RECORD", "AIR_PREFERENCE", "HOTEL_PREFERENCE", "AIR_BOOKING", "AIR_SEGMENT", "HOTEL_RESERVATION", "HOTEL_STAY_REVENUE", "LOYALTY", "LOYALTY_TRANSACTION", "LOYALTY_PROMOTION", "UNIQUE", "SECONDARY", "LOOKUP_ONLY", "NEW_ONLY"
     #   resp.keys["name"][0].field_names #=> Array
     #   resp.keys["name"][0].field_names[0] #=> String
     #
@@ -5381,6 +5383,7 @@ module Aws::CustomerProfiles
     #   resp.items[0].last_updated_at #=> Time
     #   resp.items[0].max_profile_object_count #=> Integer
     #   resp.items[0].max_available_profile_object_count #=> Integer
+    #   resp.items[0].source_priority #=> Integer
     #   resp.items[0].tags #=> Hash
     #   resp.items[0].tags["TagKey"] #=> String
     #   resp.next_token #=> String
@@ -6241,6 +6244,12 @@ module Aws::CustomerProfiles
     # @option params [Integer] :max_profile_object_count
     #   The amount of profile object max count assigned to the object type
     #
+    # @option params [Integer] :source_priority
+    #   An integer that determines the priority of this object type when data
+    #   from multiple sources is ingested. Lower values take priority. Object
+    #   types without a specified source priority default to the lowest
+    #   priority.
+    #
     # @option params [Hash<String,Types::ObjectTypeField>] :fields
     #   A map of the name and ObjectType field.
     #
@@ -6261,6 +6270,7 @@ module Aws::CustomerProfiles
     #   * {Types::PutProfileObjectTypeResponse#source_last_updated_timestamp_format #source_last_updated_timestamp_format} => String
     #   * {Types::PutProfileObjectTypeResponse#max_profile_object_count #max_profile_object_count} => Integer
     #   * {Types::PutProfileObjectTypeResponse#max_available_profile_object_count #max_available_profile_object_count} => Integer
+    #   * {Types::PutProfileObjectTypeResponse#source_priority #source_priority} => Integer
     #   * {Types::PutProfileObjectTypeResponse#fields #fields} => Hash&lt;String,Types::ObjectTypeField&gt;
     #   * {Types::PutProfileObjectTypeResponse#keys #keys} => Hash&lt;String,Array&lt;Types::ObjectTypeKey&gt;&gt;
     #   * {Types::PutProfileObjectTypeResponse#created_at #created_at} => Time
@@ -6279,6 +6289,7 @@ module Aws::CustomerProfiles
     #     allow_profile_creation: false,
     #     source_last_updated_timestamp_format: "string1To255",
     #     max_profile_object_count: 1,
+    #     source_priority: 1,
     #     fields: {
     #       "fieldName" => {
     #         source: "text",
@@ -6289,7 +6300,7 @@ module Aws::CustomerProfiles
     #     keys: {
     #       "name" => [
     #         {
-    #           standard_identifiers: ["PROFILE"], # accepts PROFILE, ASSET, CASE, ORDER, COMMUNICATION_RECORD, AIR_PREFERENCE, HOTEL_PREFERENCE, AIR_BOOKING, AIR_SEGMENT, HOTEL_RESERVATION, HOTEL_STAY_REVENUE, LOYALTY, LOYALTY_TRANSACTION, LOYALTY_PROMOTION, UNIQUE, SECONDARY, LOOKUP_ONLY, NEW_ONLY
+    #           standard_identifiers: ["PROFILE"], # accepts PROFILE, ASSET, CASE, DEVICE, WEB_ANALYTICS, ORDER, COMMUNICATION_RECORD, AIR_PREFERENCE, HOTEL_PREFERENCE, AIR_BOOKING, AIR_SEGMENT, HOTEL_RESERVATION, HOTEL_STAY_REVENUE, LOYALTY, LOYALTY_TRANSACTION, LOYALTY_PROMOTION, UNIQUE, SECONDARY, LOOKUP_ONLY, NEW_ONLY
     #           field_names: ["name"],
     #         },
     #       ],
@@ -6310,6 +6321,7 @@ module Aws::CustomerProfiles
     #   resp.source_last_updated_timestamp_format #=> String
     #   resp.max_profile_object_count #=> Integer
     #   resp.max_available_profile_object_count #=> Integer
+    #   resp.source_priority #=> Integer
     #   resp.fields #=> Hash
     #   resp.fields["fieldName"].source #=> String
     #   resp.fields["fieldName"].target #=> String
@@ -6317,7 +6329,7 @@ module Aws::CustomerProfiles
     #   resp.keys #=> Hash
     #   resp.keys["name"] #=> Array
     #   resp.keys["name"][0].standard_identifiers #=> Array
-    #   resp.keys["name"][0].standard_identifiers[0] #=> String, one of "PROFILE", "ASSET", "CASE", "ORDER", "COMMUNICATION_RECORD", "AIR_PREFERENCE", "HOTEL_PREFERENCE", "AIR_BOOKING", "AIR_SEGMENT", "HOTEL_RESERVATION", "HOTEL_STAY_REVENUE", "LOYALTY", "LOYALTY_TRANSACTION", "LOYALTY_PROMOTION", "UNIQUE", "SECONDARY", "LOOKUP_ONLY", "NEW_ONLY"
+    #   resp.keys["name"][0].standard_identifiers[0] #=> String, one of "PROFILE", "ASSET", "CASE", "DEVICE", "WEB_ANALYTICS", "ORDER", "COMMUNICATION_RECORD", "AIR_PREFERENCE", "HOTEL_PREFERENCE", "AIR_BOOKING", "AIR_SEGMENT", "HOTEL_RESERVATION", "HOTEL_STAY_REVENUE", "LOYALTY", "LOYALTY_TRANSACTION", "LOYALTY_PROMOTION", "UNIQUE", "SECONDARY", "LOOKUP_ONLY", "NEW_ONLY"
     #   resp.keys["name"][0].field_names #=> Array
     #   resp.keys["name"][0].field_names[0] #=> String
     #   resp.created_at #=> Time
@@ -7452,7 +7464,7 @@ module Aws::CustomerProfiles
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-customerprofiles'
-      context[:gem_version] = '1.79.0'
+      context[:gem_version] = '1.80.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

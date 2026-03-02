@@ -2455,6 +2455,12 @@ module Aws::Odb
     #   peering connection.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] peer_network_route_table_ids
+    #   The unique identifier of the VPC route table for which a route to
+    #   the ODB network is automatically created during peering connection
+    #   establishment.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] client_token
     #   The client token for the ODB peering connection request.
     #
@@ -2479,6 +2485,7 @@ module Aws::Odb
       :peer_network_id,
       :display_name,
       :peer_network_cidrs_to_be_added,
+      :peer_network_route_table_ids,
       :client_token,
       :tags)
       SENSITIVE = []
