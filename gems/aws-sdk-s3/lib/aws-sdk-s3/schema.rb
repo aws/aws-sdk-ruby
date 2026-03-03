@@ -1,0 +1,3631 @@
+# frozen_string_literal: true
+
+# This is generated code!
+
+module Aws::S3
+  # This module contains a schema composed of shapes used by the client.
+  module Schema
+
+    AbortDate = ::Smithy::Schema::Shapes::TimestampShape.new(id: "com.amazonaws.s3#AbortDate", name: "AbortDate")
+    AbortIncompleteMultipartUpload = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#AbortIncompleteMultipartUpload", name: "AbortIncompleteMultipartUpload")
+    AbortMultipartUploadOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#AbortMultipartUploadOutput", name: "AbortMultipartUploadOutput")
+    AbortMultipartUploadRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#AbortMultipartUploadRequest", name: "AbortMultipartUploadRequest")
+    AbortRuleId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#AbortRuleId", name: "AbortRuleId")
+    AccelerateConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#AccelerateConfiguration", name: "AccelerateConfiguration")
+    AcceptRanges = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#AcceptRanges", name: "AcceptRanges")
+    AccessControlPolicy = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#AccessControlPolicy", name: "AccessControlPolicy")
+    AccessControlTranslation = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#AccessControlTranslation", name: "AccessControlTranslation")
+    AccessKeyIdValue = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#AccessKeyIdValue", name: "AccessKeyIdValue")
+    AccessPointAlias = ::Smithy::Schema::Shapes::BooleanShape.new(id: "com.amazonaws.s3#AccessPointAlias", name: "AccessPointAlias")
+    AccessPointArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#AccessPointArn", name: "AccessPointArn")
+    AccountId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#AccountId", name: "AccountId")
+    AllowQuotedRecordDelimiter = ::Smithy::Schema::Shapes::BooleanShape.new(id: "com.amazonaws.s3#AllowQuotedRecordDelimiter", name: "AllowQuotedRecordDelimiter")
+    AllowedHeader = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#AllowedHeader", name: "AllowedHeader")
+    AllowedHeaders = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.s3#AllowedHeaders", name: "AllowedHeaders")
+    AllowedMethod = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#AllowedMethod", name: "AllowedMethod")
+    AllowedMethods = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.s3#AllowedMethods", name: "AllowedMethods")
+    AllowedOrigin = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#AllowedOrigin", name: "AllowedOrigin")
+    AllowedOrigins = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.s3#AllowedOrigins", name: "AllowedOrigins")
+    AnalyticsAndOperator = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#AnalyticsAndOperator", name: "AnalyticsAndOperator")
+    AnalyticsConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#AnalyticsConfiguration", name: "AnalyticsConfiguration")
+    AnalyticsConfigurationList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.s3#AnalyticsConfigurationList", name: "AnalyticsConfigurationList")
+    AnalyticsExportDestination = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#AnalyticsExportDestination", name: "AnalyticsExportDestination")
+    AnalyticsFilter = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.s3#AnalyticsFilter", name: "AnalyticsFilter")
+    AnalyticsId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#AnalyticsId", name: "AnalyticsId")
+    AnalyticsS3BucketDestination = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#AnalyticsS3BucketDestination", name: "AnalyticsS3BucketDestination")
+    AnalyticsS3ExportFileFormat = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.s3#AnalyticsS3ExportFileFormat", name: "AnalyticsS3ExportFileFormat")
+    ArchiveStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.s3#ArchiveStatus", name: "ArchiveStatus")
+    Body = ::Smithy::Schema::Shapes::BlobShape.new(id: "com.amazonaws.s3#Body", name: "Body")
+    Bucket = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#Bucket", name: "Bucket")
+    BucketAccelerateStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.s3#BucketAccelerateStatus", name: "BucketAccelerateStatus")
+    BucketAlreadyExists = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#BucketAlreadyExists", name: "BucketAlreadyExists", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 409})
+    BucketAlreadyOwnedByYou = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#BucketAlreadyOwnedByYou", name: "BucketAlreadyOwnedByYou", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 409})
+    BucketCannedACL = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.s3#BucketCannedACL", name: "BucketCannedACL")
+    BucketInfo = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#BucketInfo", name: "BucketInfo")
+    BucketKeyEnabled = ::Smithy::Schema::Shapes::BooleanShape.new(id: "com.amazonaws.s3#BucketKeyEnabled", name: "BucketKeyEnabled")
+    BucketLifecycleConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#BucketLifecycleConfiguration", name: "BucketLifecycleConfiguration")
+    BucketLocationConstraint = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.s3#BucketLocationConstraint", name: "BucketLocationConstraint")
+    BucketLocationName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#BucketLocationName", name: "BucketLocationName")
+    BucketLoggingStatus = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#BucketLoggingStatus", name: "BucketLoggingStatus")
+    BucketLogsPermission = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.s3#BucketLogsPermission", name: "BucketLogsPermission")
+    BucketName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#BucketName", name: "BucketName")
+    BucketRegion = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#BucketRegion", name: "BucketRegion")
+    BucketType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.s3#BucketType", name: "BucketType")
+    BucketVersioningStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.s3#BucketVersioningStatus", name: "BucketVersioningStatus")
+    Buckets = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.s3#Buckets", name: "Buckets")
+    BypassGovernanceRetention = ::Smithy::Schema::Shapes::BooleanShape.new(id: "com.amazonaws.s3#BypassGovernanceRetention", name: "BypassGovernanceRetention")
+    BytesProcessed = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.s3#BytesProcessed", name: "BytesProcessed")
+    BytesReturned = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.s3#BytesReturned", name: "BytesReturned")
+    BytesScanned = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.s3#BytesScanned", name: "BytesScanned")
+    CORSConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#CORSConfiguration", name: "CORSConfiguration")
+    CORSRule = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#CORSRule", name: "CORSRule")
+    CORSRules = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.s3#CORSRules", name: "CORSRules")
+    CSVInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#CSVInput", name: "CSVInput")
+    CSVOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#CSVOutput", name: "CSVOutput")
+    CacheControl = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#CacheControl", name: "CacheControl")
+    Checksum = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#Checksum", name: "Checksum")
+    ChecksumAlgorithm = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.s3#ChecksumAlgorithm", name: "ChecksumAlgorithm")
+    ChecksumAlgorithmList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.s3#ChecksumAlgorithmList", name: "ChecksumAlgorithmList")
+    ChecksumCRC32 = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#ChecksumCRC32", name: "ChecksumCRC32")
+    ChecksumCRC32C = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#ChecksumCRC32C", name: "ChecksumCRC32C")
+    ChecksumCRC64NVME = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#ChecksumCRC64NVME", name: "ChecksumCRC64NVME")
+    ChecksumMode = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.s3#ChecksumMode", name: "ChecksumMode")
+    ChecksumSHA1 = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#ChecksumSHA1", name: "ChecksumSHA1")
+    ChecksumSHA256 = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#ChecksumSHA256", name: "ChecksumSHA256")
+    ChecksumType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.s3#ChecksumType", name: "ChecksumType")
+    ClientToken = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#ClientToken", name: "ClientToken")
+    Code = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#Code", name: "Code")
+    Comments = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#Comments", name: "Comments")
+    CommonPrefix = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#CommonPrefix", name: "CommonPrefix")
+    CommonPrefixList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.s3#CommonPrefixList", name: "CommonPrefixList")
+    CompleteMultipartUploadOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#CompleteMultipartUploadOutput", name: "CompleteMultipartUploadOutput", traits: {"smithy.api#xmlName" => "CompleteMultipartUploadResult"})
+    CompleteMultipartUploadRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#CompleteMultipartUploadRequest", name: "CompleteMultipartUploadRequest")
+    CompletedMultipartUpload = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#CompletedMultipartUpload", name: "CompletedMultipartUpload")
+    CompletedPart = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#CompletedPart", name: "CompletedPart")
+    CompletedPartList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.s3#CompletedPartList", name: "CompletedPartList")
+    CompressionType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.s3#CompressionType", name: "CompressionType")
+    Condition = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#Condition", name: "Condition")
+    ConfirmRemoveSelfBucketAccess = ::Smithy::Schema::Shapes::BooleanShape.new(id: "com.amazonaws.s3#ConfirmRemoveSelfBucketAccess", name: "ConfirmRemoveSelfBucketAccess")
+    ContentDisposition = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#ContentDisposition", name: "ContentDisposition")
+    ContentEncoding = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#ContentEncoding", name: "ContentEncoding")
+    ContentLanguage = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#ContentLanguage", name: "ContentLanguage")
+    ContentLength = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.s3#ContentLength", name: "ContentLength")
+    ContentMD5 = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#ContentMD5", name: "ContentMD5")
+    ContentRange = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#ContentRange", name: "ContentRange")
+    ContentType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#ContentType", name: "ContentType")
+    ContinuationEvent = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#ContinuationEvent", name: "ContinuationEvent")
+    CopyObjectOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#CopyObjectOutput", name: "CopyObjectOutput")
+    CopyObjectRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#CopyObjectRequest", name: "CopyObjectRequest")
+    CopyObjectResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#CopyObjectResult", name: "CopyObjectResult")
+    CopyPartResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#CopyPartResult", name: "CopyPartResult")
+    CopySource = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#CopySource", name: "CopySource", traits: {"smithy.api#pattern" => "^\\/?.+\\/.+$"})
+    CopySourceIfMatch = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#CopySourceIfMatch", name: "CopySourceIfMatch")
+    CopySourceIfModifiedSince = ::Smithy::Schema::Shapes::TimestampShape.new(id: "com.amazonaws.s3#CopySourceIfModifiedSince", name: "CopySourceIfModifiedSince")
+    CopySourceIfNoneMatch = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#CopySourceIfNoneMatch", name: "CopySourceIfNoneMatch")
+    CopySourceIfUnmodifiedSince = ::Smithy::Schema::Shapes::TimestampShape.new(id: "com.amazonaws.s3#CopySourceIfUnmodifiedSince", name: "CopySourceIfUnmodifiedSince")
+    CopySourceRange = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#CopySourceRange", name: "CopySourceRange")
+    CopySourceSSECustomerAlgorithm = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#CopySourceSSECustomerAlgorithm", name: "CopySourceSSECustomerAlgorithm")
+    CopySourceSSECustomerKey = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#CopySourceSSECustomerKey", name: "CopySourceSSECustomerKey", traits: {"smithy.api#sensitive" => {}})
+    CopySourceSSECustomerKeyMD5 = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#CopySourceSSECustomerKeyMD5", name: "CopySourceSSECustomerKeyMD5")
+    CopySourceVersionId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#CopySourceVersionId", name: "CopySourceVersionId")
+    CreateBucketConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#CreateBucketConfiguration", name: "CreateBucketConfiguration")
+    CreateBucketMetadataConfigurationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#CreateBucketMetadataConfigurationRequest", name: "CreateBucketMetadataConfigurationRequest")
+    CreateBucketMetadataTableConfigurationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#CreateBucketMetadataTableConfigurationRequest", name: "CreateBucketMetadataTableConfigurationRequest")
+    CreateBucketOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#CreateBucketOutput", name: "CreateBucketOutput")
+    CreateBucketRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#CreateBucketRequest", name: "CreateBucketRequest")
+    CreateMultipartUploadOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#CreateMultipartUploadOutput", name: "CreateMultipartUploadOutput", traits: {"smithy.api#xmlName" => "InitiateMultipartUploadResult"})
+    CreateMultipartUploadRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#CreateMultipartUploadRequest", name: "CreateMultipartUploadRequest")
+    CreateSessionOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#CreateSessionOutput", name: "CreateSessionOutput", traits: {"smithy.api#xmlName" => "CreateSessionResult"})
+    CreateSessionRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#CreateSessionRequest", name: "CreateSessionRequest")
+    CreationDate = ::Smithy::Schema::Shapes::TimestampShape.new(id: "com.amazonaws.s3#CreationDate", name: "CreationDate")
+    DataRedundancy = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.s3#DataRedundancy", name: "DataRedundancy")
+    Date = ::Smithy::Schema::Shapes::TimestampShape.new(id: "com.amazonaws.s3#Date", name: "Date", traits: {"smithy.api#timestampFormat" => "date-time"})
+    Days = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.s3#Days", name: "Days")
+    DaysAfterInitiation = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.s3#DaysAfterInitiation", name: "DaysAfterInitiation")
+    DefaultRetention = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#DefaultRetention", name: "DefaultRetention")
+    Delete = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#Delete", name: "Delete")
+    DeleteBucketAnalyticsConfigurationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#DeleteBucketAnalyticsConfigurationRequest", name: "DeleteBucketAnalyticsConfigurationRequest")
+    DeleteBucketCorsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#DeleteBucketCorsRequest", name: "DeleteBucketCorsRequest")
+    DeleteBucketEncryptionRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#DeleteBucketEncryptionRequest", name: "DeleteBucketEncryptionRequest")
+    DeleteBucketIntelligentTieringConfigurationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#DeleteBucketIntelligentTieringConfigurationRequest", name: "DeleteBucketIntelligentTieringConfigurationRequest")
+    DeleteBucketInventoryConfigurationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#DeleteBucketInventoryConfigurationRequest", name: "DeleteBucketInventoryConfigurationRequest")
+    DeleteBucketLifecycleRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#DeleteBucketLifecycleRequest", name: "DeleteBucketLifecycleRequest")
+    DeleteBucketMetadataConfigurationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#DeleteBucketMetadataConfigurationRequest", name: "DeleteBucketMetadataConfigurationRequest")
+    DeleteBucketMetadataTableConfigurationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#DeleteBucketMetadataTableConfigurationRequest", name: "DeleteBucketMetadataTableConfigurationRequest")
+    DeleteBucketMetricsConfigurationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#DeleteBucketMetricsConfigurationRequest", name: "DeleteBucketMetricsConfigurationRequest")
+    DeleteBucketOwnershipControlsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#DeleteBucketOwnershipControlsRequest", name: "DeleteBucketOwnershipControlsRequest")
+    DeleteBucketPolicyRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#DeleteBucketPolicyRequest", name: "DeleteBucketPolicyRequest")
+    DeleteBucketReplicationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#DeleteBucketReplicationRequest", name: "DeleteBucketReplicationRequest")
+    DeleteBucketRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#DeleteBucketRequest", name: "DeleteBucketRequest")
+    DeleteBucketTaggingRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#DeleteBucketTaggingRequest", name: "DeleteBucketTaggingRequest")
+    DeleteBucketWebsiteRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#DeleteBucketWebsiteRequest", name: "DeleteBucketWebsiteRequest")
+    DeleteMarker = ::Smithy::Schema::Shapes::BooleanShape.new(id: "com.amazonaws.s3#DeleteMarker", name: "DeleteMarker")
+    DeleteMarkerEntry = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#DeleteMarkerEntry", name: "DeleteMarkerEntry")
+    DeleteMarkerReplication = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#DeleteMarkerReplication", name: "DeleteMarkerReplication")
+    DeleteMarkerReplicationStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.s3#DeleteMarkerReplicationStatus", name: "DeleteMarkerReplicationStatus")
+    DeleteMarkerVersionId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#DeleteMarkerVersionId", name: "DeleteMarkerVersionId")
+    DeleteMarkers = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.s3#DeleteMarkers", name: "DeleteMarkers")
+    DeleteObjectOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#DeleteObjectOutput", name: "DeleteObjectOutput")
+    DeleteObjectRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#DeleteObjectRequest", name: "DeleteObjectRequest")
+    DeleteObjectTaggingOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#DeleteObjectTaggingOutput", name: "DeleteObjectTaggingOutput")
+    DeleteObjectTaggingRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#DeleteObjectTaggingRequest", name: "DeleteObjectTaggingRequest")
+    DeleteObjectsOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#DeleteObjectsOutput", name: "DeleteObjectsOutput", traits: {"smithy.api#xmlName" => "DeleteResult"})
+    DeleteObjectsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#DeleteObjectsRequest", name: "DeleteObjectsRequest")
+    DeletePublicAccessBlockRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#DeletePublicAccessBlockRequest", name: "DeletePublicAccessBlockRequest")
+    DeletedObject = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#DeletedObject", name: "DeletedObject")
+    DeletedObjects = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.s3#DeletedObjects", name: "DeletedObjects")
+    Delimiter = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#Delimiter", name: "Delimiter")
+    Description = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#Description", name: "Description")
+    Destination = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#Destination", name: "Destination")
+    DestinationResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#DestinationResult", name: "DestinationResult")
+    DirectoryBucketToken = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#DirectoryBucketToken", name: "DirectoryBucketToken", traits: {"smithy.api#length" => {"min" => 0, "max" => 1024}})
+    DisplayName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#DisplayName", name: "DisplayName")
+    ETag = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#ETag", name: "ETag")
+    EmailAddress = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#EmailAddress", name: "EmailAddress")
+    EnableRequestProgress = ::Smithy::Schema::Shapes::BooleanShape.new(id: "com.amazonaws.s3#EnableRequestProgress", name: "EnableRequestProgress")
+    EncodingType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.s3#EncodingType", name: "EncodingType")
+    Encryption = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#Encryption", name: "Encryption")
+    EncryptionConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#EncryptionConfiguration", name: "EncryptionConfiguration")
+    EncryptionTypeMismatch = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#EncryptionTypeMismatch", name: "EncryptionTypeMismatch", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
+    End = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.s3#End", name: "End")
+    EndEvent = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#EndEvent", name: "EndEvent")
+    Error = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#Error", name: "Error")
+    ErrorCode = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#ErrorCode", name: "ErrorCode")
+    ErrorDetails = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#ErrorDetails", name: "ErrorDetails")
+    ErrorDocument = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#ErrorDocument", name: "ErrorDocument")
+    ErrorMessage = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#ErrorMessage", name: "ErrorMessage")
+    Errors = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.s3#Errors", name: "Errors")
+    Event = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.s3#Event", name: "Event")
+    EventBridgeConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#EventBridgeConfiguration", name: "EventBridgeConfiguration")
+    EventList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.s3#EventList", name: "EventList")
+    ExistingObjectReplication = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#ExistingObjectReplication", name: "ExistingObjectReplication")
+    ExistingObjectReplicationStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.s3#ExistingObjectReplicationStatus", name: "ExistingObjectReplicationStatus")
+    Expiration = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#Expiration", name: "Expiration")
+    ExpirationState = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.s3#ExpirationState", name: "ExpirationState")
+    ExpirationStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.s3#ExpirationStatus", name: "ExpirationStatus")
+    ExpiredObjectDeleteMarker = ::Smithy::Schema::Shapes::BooleanShape.new(id: "com.amazonaws.s3#ExpiredObjectDeleteMarker", name: "ExpiredObjectDeleteMarker")
+    Expires = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#Expires", name: "Expires")
+    ExposeHeader = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#ExposeHeader", name: "ExposeHeader")
+    ExposeHeaders = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.s3#ExposeHeaders", name: "ExposeHeaders")
+    Expression = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#Expression", name: "Expression")
+    ExpressionType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.s3#ExpressionType", name: "ExpressionType")
+    FetchOwner = ::Smithy::Schema::Shapes::BooleanShape.new(id: "com.amazonaws.s3#FetchOwner", name: "FetchOwner")
+    FieldDelimiter = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#FieldDelimiter", name: "FieldDelimiter")
+    FileHeaderInfo = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.s3#FileHeaderInfo", name: "FileHeaderInfo")
+    FilterRule = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#FilterRule", name: "FilterRule")
+    FilterRuleList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.s3#FilterRuleList", name: "FilterRuleList")
+    FilterRuleName = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.s3#FilterRuleName", name: "FilterRuleName")
+    FilterRuleValue = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#FilterRuleValue", name: "FilterRuleValue")
+    GetBucketAccelerateConfigurationOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#GetBucketAccelerateConfigurationOutput", name: "GetBucketAccelerateConfigurationOutput", traits: {"smithy.api#xmlName" => "AccelerateConfiguration"})
+    GetBucketAccelerateConfigurationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#GetBucketAccelerateConfigurationRequest", name: "GetBucketAccelerateConfigurationRequest")
+    GetBucketAclOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#GetBucketAclOutput", name: "GetBucketAclOutput", traits: {"smithy.api#xmlName" => "AccessControlPolicy"})
+    GetBucketAclRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#GetBucketAclRequest", name: "GetBucketAclRequest")
+    GetBucketAnalyticsConfigurationOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#GetBucketAnalyticsConfigurationOutput", name: "GetBucketAnalyticsConfigurationOutput")
+    GetBucketAnalyticsConfigurationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#GetBucketAnalyticsConfigurationRequest", name: "GetBucketAnalyticsConfigurationRequest")
+    GetBucketCorsOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#GetBucketCorsOutput", name: "GetBucketCorsOutput", traits: {"smithy.api#xmlName" => "CORSConfiguration"})
+    GetBucketCorsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#GetBucketCorsRequest", name: "GetBucketCorsRequest")
+    GetBucketEncryptionOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#GetBucketEncryptionOutput", name: "GetBucketEncryptionOutput")
+    GetBucketEncryptionRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#GetBucketEncryptionRequest", name: "GetBucketEncryptionRequest")
+    GetBucketIntelligentTieringConfigurationOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#GetBucketIntelligentTieringConfigurationOutput", name: "GetBucketIntelligentTieringConfigurationOutput")
+    GetBucketIntelligentTieringConfigurationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#GetBucketIntelligentTieringConfigurationRequest", name: "GetBucketIntelligentTieringConfigurationRequest")
+    GetBucketInventoryConfigurationOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#GetBucketInventoryConfigurationOutput", name: "GetBucketInventoryConfigurationOutput")
+    GetBucketInventoryConfigurationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#GetBucketInventoryConfigurationRequest", name: "GetBucketInventoryConfigurationRequest")
+    GetBucketLifecycleConfigurationOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#GetBucketLifecycleConfigurationOutput", name: "GetBucketLifecycleConfigurationOutput", traits: {"smithy.api#xmlName" => "LifecycleConfiguration"})
+    GetBucketLifecycleConfigurationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#GetBucketLifecycleConfigurationRequest", name: "GetBucketLifecycleConfigurationRequest")
+    GetBucketLocationOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#GetBucketLocationOutput", name: "GetBucketLocationOutput", traits: {"smithy.api#xmlName" => "LocationConstraint"})
+    GetBucketLocationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#GetBucketLocationRequest", name: "GetBucketLocationRequest")
+    GetBucketLoggingOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#GetBucketLoggingOutput", name: "GetBucketLoggingOutput", traits: {"smithy.api#xmlName" => "BucketLoggingStatus"})
+    GetBucketLoggingRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#GetBucketLoggingRequest", name: "GetBucketLoggingRequest")
+    GetBucketMetadataConfigurationOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#GetBucketMetadataConfigurationOutput", name: "GetBucketMetadataConfigurationOutput")
+    GetBucketMetadataConfigurationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#GetBucketMetadataConfigurationRequest", name: "GetBucketMetadataConfigurationRequest")
+    GetBucketMetadataConfigurationResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#GetBucketMetadataConfigurationResult", name: "GetBucketMetadataConfigurationResult")
+    GetBucketMetadataTableConfigurationOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#GetBucketMetadataTableConfigurationOutput", name: "GetBucketMetadataTableConfigurationOutput")
+    GetBucketMetadataTableConfigurationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#GetBucketMetadataTableConfigurationRequest", name: "GetBucketMetadataTableConfigurationRequest")
+    GetBucketMetadataTableConfigurationResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#GetBucketMetadataTableConfigurationResult", name: "GetBucketMetadataTableConfigurationResult")
+    GetBucketMetricsConfigurationOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#GetBucketMetricsConfigurationOutput", name: "GetBucketMetricsConfigurationOutput")
+    GetBucketMetricsConfigurationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#GetBucketMetricsConfigurationRequest", name: "GetBucketMetricsConfigurationRequest")
+    GetBucketNotificationConfigurationOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#GetBucketNotificationConfigurationOutput", name: "GetBucketNotificationConfigurationOutput")
+    GetBucketNotificationConfigurationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#GetBucketNotificationConfigurationRequest", name: "GetBucketNotificationConfigurationRequest")
+    GetBucketOwnershipControlsOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#GetBucketOwnershipControlsOutput", name: "GetBucketOwnershipControlsOutput")
+    GetBucketOwnershipControlsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#GetBucketOwnershipControlsRequest", name: "GetBucketOwnershipControlsRequest")
+    GetBucketPolicyOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#GetBucketPolicyOutput", name: "GetBucketPolicyOutput")
+    GetBucketPolicyRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#GetBucketPolicyRequest", name: "GetBucketPolicyRequest")
+    GetBucketPolicyStatusOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#GetBucketPolicyStatusOutput", name: "GetBucketPolicyStatusOutput")
+    GetBucketPolicyStatusRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#GetBucketPolicyStatusRequest", name: "GetBucketPolicyStatusRequest")
+    GetBucketReplicationOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#GetBucketReplicationOutput", name: "GetBucketReplicationOutput")
+    GetBucketReplicationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#GetBucketReplicationRequest", name: "GetBucketReplicationRequest")
+    GetBucketRequestPaymentOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#GetBucketRequestPaymentOutput", name: "GetBucketRequestPaymentOutput", traits: {"smithy.api#xmlName" => "RequestPaymentConfiguration"})
+    GetBucketRequestPaymentRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#GetBucketRequestPaymentRequest", name: "GetBucketRequestPaymentRequest")
+    GetBucketTaggingOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#GetBucketTaggingOutput", name: "GetBucketTaggingOutput", traits: {"smithy.api#xmlName" => "Tagging"})
+    GetBucketTaggingRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#GetBucketTaggingRequest", name: "GetBucketTaggingRequest")
+    GetBucketVersioningOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#GetBucketVersioningOutput", name: "GetBucketVersioningOutput", traits: {"smithy.api#xmlName" => "VersioningConfiguration"})
+    GetBucketVersioningRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#GetBucketVersioningRequest", name: "GetBucketVersioningRequest")
+    GetBucketWebsiteOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#GetBucketWebsiteOutput", name: "GetBucketWebsiteOutput", traits: {"smithy.api#xmlName" => "WebsiteConfiguration"})
+    GetBucketWebsiteRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#GetBucketWebsiteRequest", name: "GetBucketWebsiteRequest")
+    GetObjectAclOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#GetObjectAclOutput", name: "GetObjectAclOutput", traits: {"smithy.api#xmlName" => "AccessControlPolicy"})
+    GetObjectAclRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#GetObjectAclRequest", name: "GetObjectAclRequest")
+    GetObjectAttributesOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#GetObjectAttributesOutput", name: "GetObjectAttributesOutput", traits: {"smithy.api#xmlName" => "GetObjectAttributesResponse"})
+    GetObjectAttributesParts = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#GetObjectAttributesParts", name: "GetObjectAttributesParts")
+    GetObjectAttributesRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#GetObjectAttributesRequest", name: "GetObjectAttributesRequest")
+    GetObjectLegalHoldOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#GetObjectLegalHoldOutput", name: "GetObjectLegalHoldOutput")
+    GetObjectLegalHoldRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#GetObjectLegalHoldRequest", name: "GetObjectLegalHoldRequest")
+    GetObjectLockConfigurationOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#GetObjectLockConfigurationOutput", name: "GetObjectLockConfigurationOutput")
+    GetObjectLockConfigurationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#GetObjectLockConfigurationRequest", name: "GetObjectLockConfigurationRequest")
+    GetObjectOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#GetObjectOutput", name: "GetObjectOutput")
+    GetObjectRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#GetObjectRequest", name: "GetObjectRequest")
+    GetObjectResponseStatusCode = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.s3#GetObjectResponseStatusCode", name: "GetObjectResponseStatusCode")
+    GetObjectRetentionOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#GetObjectRetentionOutput", name: "GetObjectRetentionOutput")
+    GetObjectRetentionRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#GetObjectRetentionRequest", name: "GetObjectRetentionRequest")
+    GetObjectTaggingOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#GetObjectTaggingOutput", name: "GetObjectTaggingOutput", traits: {"smithy.api#xmlName" => "Tagging"})
+    GetObjectTaggingRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#GetObjectTaggingRequest", name: "GetObjectTaggingRequest")
+    GetObjectTorrentOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#GetObjectTorrentOutput", name: "GetObjectTorrentOutput")
+    GetObjectTorrentRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#GetObjectTorrentRequest", name: "GetObjectTorrentRequest")
+    GetPublicAccessBlockOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#GetPublicAccessBlockOutput", name: "GetPublicAccessBlockOutput")
+    GetPublicAccessBlockRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#GetPublicAccessBlockRequest", name: "GetPublicAccessBlockRequest")
+    GlacierJobParameters = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#GlacierJobParameters", name: "GlacierJobParameters")
+    Grant = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#Grant", name: "Grant")
+    GrantFullControl = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#GrantFullControl", name: "GrantFullControl")
+    GrantRead = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#GrantRead", name: "GrantRead")
+    GrantReadACP = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#GrantReadACP", name: "GrantReadACP")
+    GrantWrite = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#GrantWrite", name: "GrantWrite")
+    GrantWriteACP = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#GrantWriteACP", name: "GrantWriteACP")
+    Grantee = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#Grantee", name: "Grantee")
+    Grants = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.s3#Grants", name: "Grants")
+    HeadBucketOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#HeadBucketOutput", name: "HeadBucketOutput")
+    HeadBucketRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#HeadBucketRequest", name: "HeadBucketRequest")
+    HeadObjectOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#HeadObjectOutput", name: "HeadObjectOutput")
+    HeadObjectRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#HeadObjectRequest", name: "HeadObjectRequest")
+    HostName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#HostName", name: "HostName")
+    HttpErrorCodeReturnedEquals = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#HttpErrorCodeReturnedEquals", name: "HttpErrorCodeReturnedEquals")
+    HttpRedirectCode = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#HttpRedirectCode", name: "HttpRedirectCode")
+    ID = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#ID", name: "ID")
+    IdempotencyParameterMismatch = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#IdempotencyParameterMismatch", name: "IdempotencyParameterMismatch", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
+    IfMatch = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#IfMatch", name: "IfMatch")
+    IfMatchInitiatedTime = ::Smithy::Schema::Shapes::TimestampShape.new(id: "com.amazonaws.s3#IfMatchInitiatedTime", name: "IfMatchInitiatedTime", traits: {"smithy.api#timestampFormat" => "http-date"})
+    IfMatchLastModifiedTime = ::Smithy::Schema::Shapes::TimestampShape.new(id: "com.amazonaws.s3#IfMatchLastModifiedTime", name: "IfMatchLastModifiedTime", traits: {"smithy.api#timestampFormat" => "http-date"})
+    IfMatchSize = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.s3#IfMatchSize", name: "IfMatchSize")
+    IfModifiedSince = ::Smithy::Schema::Shapes::TimestampShape.new(id: "com.amazonaws.s3#IfModifiedSince", name: "IfModifiedSince")
+    IfNoneMatch = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#IfNoneMatch", name: "IfNoneMatch")
+    IfUnmodifiedSince = ::Smithy::Schema::Shapes::TimestampShape.new(id: "com.amazonaws.s3#IfUnmodifiedSince", name: "IfUnmodifiedSince")
+    IndexDocument = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#IndexDocument", name: "IndexDocument")
+    Initiated = ::Smithy::Schema::Shapes::TimestampShape.new(id: "com.amazonaws.s3#Initiated", name: "Initiated")
+    Initiator = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#Initiator", name: "Initiator")
+    InputSerialization = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#InputSerialization", name: "InputSerialization")
+    IntelligentTieringAccessTier = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.s3#IntelligentTieringAccessTier", name: "IntelligentTieringAccessTier")
+    IntelligentTieringAndOperator = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#IntelligentTieringAndOperator", name: "IntelligentTieringAndOperator")
+    IntelligentTieringConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#IntelligentTieringConfiguration", name: "IntelligentTieringConfiguration")
+    IntelligentTieringConfigurationList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.s3#IntelligentTieringConfigurationList", name: "IntelligentTieringConfigurationList")
+    IntelligentTieringDays = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.s3#IntelligentTieringDays", name: "IntelligentTieringDays")
+    IntelligentTieringFilter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#IntelligentTieringFilter", name: "IntelligentTieringFilter")
+    IntelligentTieringId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#IntelligentTieringId", name: "IntelligentTieringId")
+    IntelligentTieringStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.s3#IntelligentTieringStatus", name: "IntelligentTieringStatus")
+    InvalidObjectState = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#InvalidObjectState", name: "InvalidObjectState", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 403})
+    InvalidRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#InvalidRequest", name: "InvalidRequest", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
+    InvalidWriteOffset = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#InvalidWriteOffset", name: "InvalidWriteOffset", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
+    InventoryConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#InventoryConfiguration", name: "InventoryConfiguration")
+    InventoryConfigurationList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.s3#InventoryConfigurationList", name: "InventoryConfigurationList")
+    InventoryConfigurationState = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.s3#InventoryConfigurationState", name: "InventoryConfigurationState")
+    InventoryDestination = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#InventoryDestination", name: "InventoryDestination")
+    InventoryEncryption = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#InventoryEncryption", name: "InventoryEncryption")
+    InventoryFilter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#InventoryFilter", name: "InventoryFilter")
+    InventoryFormat = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.s3#InventoryFormat", name: "InventoryFormat")
+    InventoryFrequency = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.s3#InventoryFrequency", name: "InventoryFrequency")
+    InventoryId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#InventoryId", name: "InventoryId")
+    InventoryIncludedObjectVersions = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.s3#InventoryIncludedObjectVersions", name: "InventoryIncludedObjectVersions")
+    InventoryOptionalField = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.s3#InventoryOptionalField", name: "InventoryOptionalField")
+    InventoryOptionalFields = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.s3#InventoryOptionalFields", name: "InventoryOptionalFields")
+    InventoryS3BucketDestination = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#InventoryS3BucketDestination", name: "InventoryS3BucketDestination")
+    InventorySchedule = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#InventorySchedule", name: "InventorySchedule")
+    InventoryTableConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#InventoryTableConfiguration", name: "InventoryTableConfiguration")
+    InventoryTableConfigurationResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#InventoryTableConfigurationResult", name: "InventoryTableConfigurationResult")
+    InventoryTableConfigurationUpdates = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#InventoryTableConfigurationUpdates", name: "InventoryTableConfigurationUpdates")
+    IsEnabled = ::Smithy::Schema::Shapes::BooleanShape.new(id: "com.amazonaws.s3#IsEnabled", name: "IsEnabled")
+    IsLatest = ::Smithy::Schema::Shapes::BooleanShape.new(id: "com.amazonaws.s3#IsLatest", name: "IsLatest")
+    IsPublic = ::Smithy::Schema::Shapes::BooleanShape.new(id: "com.amazonaws.s3#IsPublic", name: "IsPublic")
+    IsRestoreInProgress = ::Smithy::Schema::Shapes::BooleanShape.new(id: "com.amazonaws.s3#IsRestoreInProgress", name: "IsRestoreInProgress")
+    IsTruncated = ::Smithy::Schema::Shapes::BooleanShape.new(id: "com.amazonaws.s3#IsTruncated", name: "IsTruncated")
+    JSONInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#JSONInput", name: "JSONInput")
+    JSONOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#JSONOutput", name: "JSONOutput")
+    JSONType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.s3#JSONType", name: "JSONType")
+    JournalTableConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#JournalTableConfiguration", name: "JournalTableConfiguration")
+    JournalTableConfigurationResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#JournalTableConfigurationResult", name: "JournalTableConfigurationResult")
+    JournalTableConfigurationUpdates = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#JournalTableConfigurationUpdates", name: "JournalTableConfigurationUpdates")
+    KMSContext = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#KMSContext", name: "KMSContext")
+    KeyCount = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.s3#KeyCount", name: "KeyCount")
+    KeyMarker = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#KeyMarker", name: "KeyMarker")
+    KeyPrefixEquals = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#KeyPrefixEquals", name: "KeyPrefixEquals")
+    KmsKeyArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#KmsKeyArn", name: "KmsKeyArn")
+    LambdaFunctionArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#LambdaFunctionArn", name: "LambdaFunctionArn")
+    LambdaFunctionConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#LambdaFunctionConfiguration", name: "LambdaFunctionConfiguration")
+    LambdaFunctionConfigurationList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.s3#LambdaFunctionConfigurationList", name: "LambdaFunctionConfigurationList")
+    LastModified = ::Smithy::Schema::Shapes::TimestampShape.new(id: "com.amazonaws.s3#LastModified", name: "LastModified")
+    LastModifiedTime = ::Smithy::Schema::Shapes::TimestampShape.new(id: "com.amazonaws.s3#LastModifiedTime", name: "LastModifiedTime", traits: {"smithy.api#timestampFormat" => "http-date"})
+    LifecycleExpiration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#LifecycleExpiration", name: "LifecycleExpiration")
+    LifecycleRule = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#LifecycleRule", name: "LifecycleRule")
+    LifecycleRuleAndOperator = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#LifecycleRuleAndOperator", name: "LifecycleRuleAndOperator")
+    LifecycleRuleFilter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#LifecycleRuleFilter", name: "LifecycleRuleFilter")
+    LifecycleRules = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.s3#LifecycleRules", name: "LifecycleRules")
+    ListBucketAnalyticsConfigurationsOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#ListBucketAnalyticsConfigurationsOutput", name: "ListBucketAnalyticsConfigurationsOutput", traits: {"smithy.api#xmlName" => "ListBucketAnalyticsConfigurationResult"})
+    ListBucketAnalyticsConfigurationsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#ListBucketAnalyticsConfigurationsRequest", name: "ListBucketAnalyticsConfigurationsRequest")
+    ListBucketIntelligentTieringConfigurationsOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#ListBucketIntelligentTieringConfigurationsOutput", name: "ListBucketIntelligentTieringConfigurationsOutput")
+    ListBucketIntelligentTieringConfigurationsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#ListBucketIntelligentTieringConfigurationsRequest", name: "ListBucketIntelligentTieringConfigurationsRequest")
+    ListBucketInventoryConfigurationsOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#ListBucketInventoryConfigurationsOutput", name: "ListBucketInventoryConfigurationsOutput", traits: {"smithy.api#xmlName" => "ListInventoryConfigurationsResult"})
+    ListBucketInventoryConfigurationsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#ListBucketInventoryConfigurationsRequest", name: "ListBucketInventoryConfigurationsRequest")
+    ListBucketMetricsConfigurationsOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#ListBucketMetricsConfigurationsOutput", name: "ListBucketMetricsConfigurationsOutput", traits: {"smithy.api#xmlName" => "ListMetricsConfigurationsResult"})
+    ListBucketMetricsConfigurationsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#ListBucketMetricsConfigurationsRequest", name: "ListBucketMetricsConfigurationsRequest")
+    ListBucketsOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#ListBucketsOutput", name: "ListBucketsOutput", traits: {"smithy.api#xmlName" => "ListAllMyBucketsResult"})
+    ListBucketsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#ListBucketsRequest", name: "ListBucketsRequest")
+    ListDirectoryBucketsOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#ListDirectoryBucketsOutput", name: "ListDirectoryBucketsOutput", traits: {"smithy.api#xmlName" => "ListAllMyDirectoryBucketsResult"})
+    ListDirectoryBucketsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#ListDirectoryBucketsRequest", name: "ListDirectoryBucketsRequest")
+    ListMultipartUploadsOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#ListMultipartUploadsOutput", name: "ListMultipartUploadsOutput", traits: {"smithy.api#xmlName" => "ListMultipartUploadsResult"})
+    ListMultipartUploadsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#ListMultipartUploadsRequest", name: "ListMultipartUploadsRequest")
+    ListObjectVersionsOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#ListObjectVersionsOutput", name: "ListObjectVersionsOutput", traits: {"smithy.api#xmlName" => "ListVersionsResult"})
+    ListObjectVersionsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#ListObjectVersionsRequest", name: "ListObjectVersionsRequest")
+    ListObjectsOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#ListObjectsOutput", name: "ListObjectsOutput", traits: {"smithy.api#xmlName" => "ListBucketResult"})
+    ListObjectsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#ListObjectsRequest", name: "ListObjectsRequest")
+    ListObjectsV2Output = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#ListObjectsV2Output", name: "ListObjectsV2Output", traits: {"smithy.api#xmlName" => "ListBucketResult"})
+    ListObjectsV2Request = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#ListObjectsV2Request", name: "ListObjectsV2Request")
+    ListPartsOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#ListPartsOutput", name: "ListPartsOutput", traits: {"smithy.api#xmlName" => "ListPartsResult"})
+    ListPartsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#ListPartsRequest", name: "ListPartsRequest")
+    Location = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#Location", name: "Location")
+    LocationInfo = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#LocationInfo", name: "LocationInfo")
+    LocationNameAsString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#LocationNameAsString", name: "LocationNameAsString")
+    LocationPrefix = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#LocationPrefix", name: "LocationPrefix")
+    LocationType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.s3#LocationType", name: "LocationType")
+    LoggingEnabled = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#LoggingEnabled", name: "LoggingEnabled")
+    MFA = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#MFA", name: "MFA")
+    MFADelete = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.s3#MFADelete", name: "MFADelete")
+    MFADeleteStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.s3#MFADeleteStatus", name: "MFADeleteStatus")
+    Marker = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#Marker", name: "Marker")
+    MaxAgeSeconds = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.s3#MaxAgeSeconds", name: "MaxAgeSeconds")
+    MaxBuckets = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.s3#MaxBuckets", name: "MaxBuckets", traits: {"smithy.api#range" => {"min" => 1, "max" => 10000}})
+    MaxDirectoryBuckets = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.s3#MaxDirectoryBuckets", name: "MaxDirectoryBuckets", traits: {"smithy.api#range" => {"min" => 0, "max" => 1000}})
+    MaxKeys = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.s3#MaxKeys", name: "MaxKeys")
+    MaxParts = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.s3#MaxParts", name: "MaxParts")
+    MaxUploads = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.s3#MaxUploads", name: "MaxUploads")
+    Message = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#Message", name: "Message")
+    Metadata = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.s3#Metadata", name: "Metadata")
+    MetadataConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#MetadataConfiguration", name: "MetadataConfiguration")
+    MetadataConfigurationResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#MetadataConfigurationResult", name: "MetadataConfigurationResult")
+    MetadataDirective = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.s3#MetadataDirective", name: "MetadataDirective")
+    MetadataEntry = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#MetadataEntry", name: "MetadataEntry")
+    MetadataKey = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#MetadataKey", name: "MetadataKey")
+    MetadataTableConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#MetadataTableConfiguration", name: "MetadataTableConfiguration")
+    MetadataTableConfigurationResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#MetadataTableConfigurationResult", name: "MetadataTableConfigurationResult")
+    MetadataTableEncryptionConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#MetadataTableEncryptionConfiguration", name: "MetadataTableEncryptionConfiguration")
+    MetadataTableStatus = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#MetadataTableStatus", name: "MetadataTableStatus")
+    MetadataValue = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#MetadataValue", name: "MetadataValue")
+    Metrics = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#Metrics", name: "Metrics")
+    MetricsAndOperator = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#MetricsAndOperator", name: "MetricsAndOperator")
+    MetricsConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#MetricsConfiguration", name: "MetricsConfiguration")
+    MetricsConfigurationList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.s3#MetricsConfigurationList", name: "MetricsConfigurationList")
+    MetricsFilter = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.s3#MetricsFilter", name: "MetricsFilter")
+    MetricsId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#MetricsId", name: "MetricsId")
+    MetricsStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.s3#MetricsStatus", name: "MetricsStatus")
+    Minutes = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.s3#Minutes", name: "Minutes")
+    MissingMeta = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.s3#MissingMeta", name: "MissingMeta")
+    MpuObjectSize = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.s3#MpuObjectSize", name: "MpuObjectSize")
+    MultipartUpload = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#MultipartUpload", name: "MultipartUpload")
+    MultipartUploadId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#MultipartUploadId", name: "MultipartUploadId")
+    MultipartUploadList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.s3#MultipartUploadList", name: "MultipartUploadList")
+    NextKeyMarker = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#NextKeyMarker", name: "NextKeyMarker")
+    NextMarker = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#NextMarker", name: "NextMarker")
+    NextPartNumberMarker = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#NextPartNumberMarker", name: "NextPartNumberMarker")
+    NextToken = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#NextToken", name: "NextToken")
+    NextUploadIdMarker = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#NextUploadIdMarker", name: "NextUploadIdMarker")
+    NextVersionIdMarker = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#NextVersionIdMarker", name: "NextVersionIdMarker")
+    NoSuchBucket = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#NoSuchBucket", name: "NoSuchBucket", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 404})
+    NoSuchKey = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#NoSuchKey", name: "NoSuchKey", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 404})
+    NoSuchUpload = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#NoSuchUpload", name: "NoSuchUpload", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 404})
+    NoncurrentVersionExpiration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#NoncurrentVersionExpiration", name: "NoncurrentVersionExpiration")
+    NoncurrentVersionTransition = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#NoncurrentVersionTransition", name: "NoncurrentVersionTransition")
+    NoncurrentVersionTransitionList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.s3#NoncurrentVersionTransitionList", name: "NoncurrentVersionTransitionList")
+    NotFound = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#NotFound", name: "NotFound", traits: {"smithy.api#error" => "client"})
+    NotificationConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#NotificationConfiguration", name: "NotificationConfiguration")
+    NotificationConfigurationFilter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#NotificationConfigurationFilter", name: "NotificationConfigurationFilter")
+    NotificationId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#NotificationId", name: "NotificationId")
+    Object = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#Object", name: "Object")
+    ObjectAlreadyInActiveTierError = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#ObjectAlreadyInActiveTierError", name: "ObjectAlreadyInActiveTierError", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 403})
+    ObjectAttributes = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.s3#ObjectAttributes", name: "ObjectAttributes")
+    ObjectAttributesList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.s3#ObjectAttributesList", name: "ObjectAttributesList")
+    ObjectCannedACL = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.s3#ObjectCannedACL", name: "ObjectCannedACL")
+    ObjectIdentifier = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#ObjectIdentifier", name: "ObjectIdentifier")
+    ObjectIdentifierList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.s3#ObjectIdentifierList", name: "ObjectIdentifierList")
+    ObjectKey = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#ObjectKey", name: "ObjectKey", traits: {"smithy.api#length" => {"min" => 1}})
+    ObjectList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.s3#ObjectList", name: "ObjectList")
+    ObjectLockConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#ObjectLockConfiguration", name: "ObjectLockConfiguration")
+    ObjectLockEnabled = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.s3#ObjectLockEnabled", name: "ObjectLockEnabled")
+    ObjectLockEnabledForBucket = ::Smithy::Schema::Shapes::BooleanShape.new(id: "com.amazonaws.s3#ObjectLockEnabledForBucket", name: "ObjectLockEnabledForBucket")
+    ObjectLockLegalHold = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#ObjectLockLegalHold", name: "ObjectLockLegalHold")
+    ObjectLockLegalHoldStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.s3#ObjectLockLegalHoldStatus", name: "ObjectLockLegalHoldStatus")
+    ObjectLockMode = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.s3#ObjectLockMode", name: "ObjectLockMode")
+    ObjectLockRetainUntilDate = ::Smithy::Schema::Shapes::TimestampShape.new(id: "com.amazonaws.s3#ObjectLockRetainUntilDate", name: "ObjectLockRetainUntilDate", traits: {"smithy.api#timestampFormat" => "date-time"})
+    ObjectLockRetention = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#ObjectLockRetention", name: "ObjectLockRetention")
+    ObjectLockRetentionMode = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.s3#ObjectLockRetentionMode", name: "ObjectLockRetentionMode")
+    ObjectLockRule = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#ObjectLockRule", name: "ObjectLockRule")
+    ObjectLockToken = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#ObjectLockToken", name: "ObjectLockToken")
+    ObjectNotInActiveTierError = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#ObjectNotInActiveTierError", name: "ObjectNotInActiveTierError", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 403})
+    ObjectOwnership = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.s3#ObjectOwnership", name: "ObjectOwnership")
+    ObjectPart = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#ObjectPart", name: "ObjectPart")
+    ObjectSize = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.s3#ObjectSize", name: "ObjectSize")
+    ObjectSizeGreaterThanBytes = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.s3#ObjectSizeGreaterThanBytes", name: "ObjectSizeGreaterThanBytes")
+    ObjectSizeLessThanBytes = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.s3#ObjectSizeLessThanBytes", name: "ObjectSizeLessThanBytes")
+    ObjectStorageClass = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.s3#ObjectStorageClass", name: "ObjectStorageClass")
+    ObjectVersion = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#ObjectVersion", name: "ObjectVersion")
+    ObjectVersionId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#ObjectVersionId", name: "ObjectVersionId")
+    ObjectVersionList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.s3#ObjectVersionList", name: "ObjectVersionList")
+    ObjectVersionStorageClass = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.s3#ObjectVersionStorageClass", name: "ObjectVersionStorageClass")
+    OptionalObjectAttributes = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.s3#OptionalObjectAttributes", name: "OptionalObjectAttributes")
+    OptionalObjectAttributesList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.s3#OptionalObjectAttributesList", name: "OptionalObjectAttributesList")
+    OutputLocation = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#OutputLocation", name: "OutputLocation")
+    OutputSerialization = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#OutputSerialization", name: "OutputSerialization")
+    Owner = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#Owner", name: "Owner")
+    OwnerOverride = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.s3#OwnerOverride", name: "OwnerOverride")
+    OwnershipControls = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#OwnershipControls", name: "OwnershipControls")
+    OwnershipControlsRule = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#OwnershipControlsRule", name: "OwnershipControlsRule")
+    OwnershipControlsRules = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.s3#OwnershipControlsRules", name: "OwnershipControlsRules")
+    ParquetInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#ParquetInput", name: "ParquetInput")
+    Part = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#Part", name: "Part")
+    PartNumber = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.s3#PartNumber", name: "PartNumber")
+    PartNumberMarker = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#PartNumberMarker", name: "PartNumberMarker")
+    PartitionDateSource = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.s3#PartitionDateSource", name: "PartitionDateSource")
+    PartitionedPrefix = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#PartitionedPrefix", name: "PartitionedPrefix", traits: {"smithy.api#xmlName" => "PartitionedPrefix"})
+    Parts = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.s3#Parts", name: "Parts")
+    PartsCount = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.s3#PartsCount", name: "PartsCount")
+    PartsList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.s3#PartsList", name: "PartsList")
+    Payer = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.s3#Payer", name: "Payer")
+    Permission = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.s3#Permission", name: "Permission")
+    Policy = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#Policy", name: "Policy")
+    PolicyStatus = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#PolicyStatus", name: "PolicyStatus")
+    Prefix = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#Prefix", name: "Prefix")
+    Priority = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.s3#Priority", name: "Priority")
+    Progress = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#Progress", name: "Progress")
+    ProgressEvent = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#ProgressEvent", name: "ProgressEvent")
+    Protocol = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.s3#Protocol", name: "Protocol")
+    PublicAccessBlockConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#PublicAccessBlockConfiguration", name: "PublicAccessBlockConfiguration")
+    PutBucketAccelerateConfigurationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#PutBucketAccelerateConfigurationRequest", name: "PutBucketAccelerateConfigurationRequest")
+    PutBucketAclRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#PutBucketAclRequest", name: "PutBucketAclRequest")
+    PutBucketAnalyticsConfigurationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#PutBucketAnalyticsConfigurationRequest", name: "PutBucketAnalyticsConfigurationRequest")
+    PutBucketCorsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#PutBucketCorsRequest", name: "PutBucketCorsRequest")
+    PutBucketEncryptionRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#PutBucketEncryptionRequest", name: "PutBucketEncryptionRequest")
+    PutBucketIntelligentTieringConfigurationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#PutBucketIntelligentTieringConfigurationRequest", name: "PutBucketIntelligentTieringConfigurationRequest")
+    PutBucketInventoryConfigurationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#PutBucketInventoryConfigurationRequest", name: "PutBucketInventoryConfigurationRequest")
+    PutBucketLifecycleConfigurationOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#PutBucketLifecycleConfigurationOutput", name: "PutBucketLifecycleConfigurationOutput")
+    PutBucketLifecycleConfigurationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#PutBucketLifecycleConfigurationRequest", name: "PutBucketLifecycleConfigurationRequest")
+    PutBucketLoggingRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#PutBucketLoggingRequest", name: "PutBucketLoggingRequest")
+    PutBucketMetricsConfigurationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#PutBucketMetricsConfigurationRequest", name: "PutBucketMetricsConfigurationRequest")
+    PutBucketNotificationConfigurationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#PutBucketNotificationConfigurationRequest", name: "PutBucketNotificationConfigurationRequest")
+    PutBucketOwnershipControlsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#PutBucketOwnershipControlsRequest", name: "PutBucketOwnershipControlsRequest")
+    PutBucketPolicyRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#PutBucketPolicyRequest", name: "PutBucketPolicyRequest")
+    PutBucketReplicationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#PutBucketReplicationRequest", name: "PutBucketReplicationRequest")
+    PutBucketRequestPaymentRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#PutBucketRequestPaymentRequest", name: "PutBucketRequestPaymentRequest")
+    PutBucketTaggingRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#PutBucketTaggingRequest", name: "PutBucketTaggingRequest")
+    PutBucketVersioningRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#PutBucketVersioningRequest", name: "PutBucketVersioningRequest")
+    PutBucketWebsiteRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#PutBucketWebsiteRequest", name: "PutBucketWebsiteRequest")
+    PutObjectAclOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#PutObjectAclOutput", name: "PutObjectAclOutput")
+    PutObjectAclRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#PutObjectAclRequest", name: "PutObjectAclRequest")
+    PutObjectLegalHoldOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#PutObjectLegalHoldOutput", name: "PutObjectLegalHoldOutput")
+    PutObjectLegalHoldRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#PutObjectLegalHoldRequest", name: "PutObjectLegalHoldRequest")
+    PutObjectLockConfigurationOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#PutObjectLockConfigurationOutput", name: "PutObjectLockConfigurationOutput")
+    PutObjectLockConfigurationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#PutObjectLockConfigurationRequest", name: "PutObjectLockConfigurationRequest")
+    PutObjectOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#PutObjectOutput", name: "PutObjectOutput")
+    PutObjectRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#PutObjectRequest", name: "PutObjectRequest")
+    PutObjectRetentionOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#PutObjectRetentionOutput", name: "PutObjectRetentionOutput")
+    PutObjectRetentionRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#PutObjectRetentionRequest", name: "PutObjectRetentionRequest")
+    PutObjectTaggingOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#PutObjectTaggingOutput", name: "PutObjectTaggingOutput")
+    PutObjectTaggingRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#PutObjectTaggingRequest", name: "PutObjectTaggingRequest")
+    PutPublicAccessBlockRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#PutPublicAccessBlockRequest", name: "PutPublicAccessBlockRequest")
+    QueueArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#QueueArn", name: "QueueArn")
+    QueueConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#QueueConfiguration", name: "QueueConfiguration")
+    QueueConfigurationList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.s3#QueueConfigurationList", name: "QueueConfigurationList")
+    Quiet = ::Smithy::Schema::Shapes::BooleanShape.new(id: "com.amazonaws.s3#Quiet", name: "Quiet")
+    QuoteCharacter = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#QuoteCharacter", name: "QuoteCharacter")
+    QuoteEscapeCharacter = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#QuoteEscapeCharacter", name: "QuoteEscapeCharacter")
+    QuoteFields = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.s3#QuoteFields", name: "QuoteFields")
+    Range = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#Range", name: "Range")
+    RecordDelimiter = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#RecordDelimiter", name: "RecordDelimiter")
+    RecordExpiration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#RecordExpiration", name: "RecordExpiration")
+    RecordExpirationDays = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.s3#RecordExpirationDays", name: "RecordExpirationDays")
+    RecordsEvent = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#RecordsEvent", name: "RecordsEvent")
+    Redirect = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#Redirect", name: "Redirect")
+    RedirectAllRequestsTo = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#RedirectAllRequestsTo", name: "RedirectAllRequestsTo")
+    Region = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#Region", name: "Region", traits: {"smithy.api#length" => {"min" => 0, "max" => 20}})
+    RenameObjectOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#RenameObjectOutput", name: "RenameObjectOutput")
+    RenameObjectRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#RenameObjectRequest", name: "RenameObjectRequest")
+    RenameSource = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#RenameSource", name: "RenameSource", traits: {"smithy.api#pattern" => "^\\/?.+\\/.+$"})
+    RenameSourceIfMatch = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#RenameSourceIfMatch", name: "RenameSourceIfMatch")
+    RenameSourceIfModifiedSince = ::Smithy::Schema::Shapes::TimestampShape.new(id: "com.amazonaws.s3#RenameSourceIfModifiedSince", name: "RenameSourceIfModifiedSince", traits: {"smithy.api#timestampFormat" => "http-date"})
+    RenameSourceIfNoneMatch = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#RenameSourceIfNoneMatch", name: "RenameSourceIfNoneMatch")
+    RenameSourceIfUnmodifiedSince = ::Smithy::Schema::Shapes::TimestampShape.new(id: "com.amazonaws.s3#RenameSourceIfUnmodifiedSince", name: "RenameSourceIfUnmodifiedSince", traits: {"smithy.api#timestampFormat" => "http-date"})
+    ReplaceKeyPrefixWith = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#ReplaceKeyPrefixWith", name: "ReplaceKeyPrefixWith")
+    ReplaceKeyWith = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#ReplaceKeyWith", name: "ReplaceKeyWith")
+    ReplicaKmsKeyID = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#ReplicaKmsKeyID", name: "ReplicaKmsKeyID")
+    ReplicaModifications = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#ReplicaModifications", name: "ReplicaModifications")
+    ReplicaModificationsStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.s3#ReplicaModificationsStatus", name: "ReplicaModificationsStatus")
+    ReplicationConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#ReplicationConfiguration", name: "ReplicationConfiguration")
+    ReplicationRule = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#ReplicationRule", name: "ReplicationRule")
+    ReplicationRuleAndOperator = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#ReplicationRuleAndOperator", name: "ReplicationRuleAndOperator")
+    ReplicationRuleFilter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#ReplicationRuleFilter", name: "ReplicationRuleFilter")
+    ReplicationRuleStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.s3#ReplicationRuleStatus", name: "ReplicationRuleStatus")
+    ReplicationRules = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.s3#ReplicationRules", name: "ReplicationRules")
+    ReplicationStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.s3#ReplicationStatus", name: "ReplicationStatus")
+    ReplicationTime = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#ReplicationTime", name: "ReplicationTime")
+    ReplicationTimeStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.s3#ReplicationTimeStatus", name: "ReplicationTimeStatus")
+    ReplicationTimeValue = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#ReplicationTimeValue", name: "ReplicationTimeValue")
+    RequestCharged = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.s3#RequestCharged", name: "RequestCharged")
+    RequestPayer = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.s3#RequestPayer", name: "RequestPayer")
+    RequestPaymentConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#RequestPaymentConfiguration", name: "RequestPaymentConfiguration")
+    RequestProgress = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#RequestProgress", name: "RequestProgress")
+    RequestRoute = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#RequestRoute", name: "RequestRoute")
+    RequestToken = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#RequestToken", name: "RequestToken")
+    ResponseCacheControl = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#ResponseCacheControl", name: "ResponseCacheControl")
+    ResponseContentDisposition = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#ResponseContentDisposition", name: "ResponseContentDisposition")
+    ResponseContentEncoding = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#ResponseContentEncoding", name: "ResponseContentEncoding")
+    ResponseContentLanguage = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#ResponseContentLanguage", name: "ResponseContentLanguage")
+    ResponseContentType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#ResponseContentType", name: "ResponseContentType")
+    ResponseExpires = ::Smithy::Schema::Shapes::TimestampShape.new(id: "com.amazonaws.s3#ResponseExpires", name: "ResponseExpires", traits: {"smithy.api#timestampFormat" => "http-date"})
+    Restore = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#Restore", name: "Restore")
+    RestoreExpiryDate = ::Smithy::Schema::Shapes::TimestampShape.new(id: "com.amazonaws.s3#RestoreExpiryDate", name: "RestoreExpiryDate")
+    RestoreObjectOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#RestoreObjectOutput", name: "RestoreObjectOutput")
+    RestoreObjectRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#RestoreObjectRequest", name: "RestoreObjectRequest")
+    RestoreOutputPath = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#RestoreOutputPath", name: "RestoreOutputPath")
+    RestoreRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#RestoreRequest", name: "RestoreRequest")
+    RestoreRequestType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.s3#RestoreRequestType", name: "RestoreRequestType")
+    RestoreStatus = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#RestoreStatus", name: "RestoreStatus")
+    Role = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#Role", name: "Role")
+    RoutingRule = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#RoutingRule", name: "RoutingRule")
+    RoutingRules = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.s3#RoutingRules", name: "RoutingRules")
+    S3KeyFilter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#S3KeyFilter", name: "S3KeyFilter")
+    S3Location = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#S3Location", name: "S3Location")
+    S3RegionalOrS3ExpressBucketArnString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#S3RegionalOrS3ExpressBucketArnString", name: "S3RegionalOrS3ExpressBucketArnString", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^arn:[^:]+:(s3|s3express):"})
+    S3TablesArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#S3TablesArn", name: "S3TablesArn")
+    S3TablesBucketArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#S3TablesBucketArn", name: "S3TablesBucketArn")
+    S3TablesBucketType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.s3#S3TablesBucketType", name: "S3TablesBucketType")
+    S3TablesDestination = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#S3TablesDestination", name: "S3TablesDestination")
+    S3TablesDestinationResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#S3TablesDestinationResult", name: "S3TablesDestinationResult")
+    S3TablesName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#S3TablesName", name: "S3TablesName")
+    S3TablesNamespace = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#S3TablesNamespace", name: "S3TablesNamespace")
+    SSECustomerAlgorithm = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#SSECustomerAlgorithm", name: "SSECustomerAlgorithm")
+    SSECustomerKey = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#SSECustomerKey", name: "SSECustomerKey", traits: {"smithy.api#sensitive" => {}})
+    SSECustomerKeyMD5 = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#SSECustomerKeyMD5", name: "SSECustomerKeyMD5")
+    SSEKMS = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#SSEKMS", name: "SSEKMS", traits: {"smithy.api#xmlName" => "SSE-KMS"})
+    SSEKMSEncryptionContext = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#SSEKMSEncryptionContext", name: "SSEKMSEncryptionContext", traits: {"smithy.api#sensitive" => {}})
+    SSEKMSKeyId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#SSEKMSKeyId", name: "SSEKMSKeyId", traits: {"smithy.api#sensitive" => {}})
+    SSES3 = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#SSES3", name: "SSES3", traits: {"smithy.api#xmlName" => "SSE-S3"})
+    ScanRange = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#ScanRange", name: "ScanRange")
+    SelectObjectContentEventStream = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.s3#SelectObjectContentEventStream", name: "SelectObjectContentEventStream", traits: {"smithy.api#streaming" => {}})
+    SelectObjectContentOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#SelectObjectContentOutput", name: "SelectObjectContentOutput")
+    SelectObjectContentRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#SelectObjectContentRequest", name: "SelectObjectContentRequest")
+    SelectParameters = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#SelectParameters", name: "SelectParameters")
+    ServerSideEncryption = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.s3#ServerSideEncryption", name: "ServerSideEncryption")
+    ServerSideEncryptionByDefault = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#ServerSideEncryptionByDefault", name: "ServerSideEncryptionByDefault")
+    ServerSideEncryptionConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#ServerSideEncryptionConfiguration", name: "ServerSideEncryptionConfiguration")
+    ServerSideEncryptionRule = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#ServerSideEncryptionRule", name: "ServerSideEncryptionRule")
+    ServerSideEncryptionRules = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.s3#ServerSideEncryptionRules", name: "ServerSideEncryptionRules")
+    SessionCredentialValue = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#SessionCredentialValue", name: "SessionCredentialValue", traits: {"smithy.api#sensitive" => {}})
+    SessionCredentials = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#SessionCredentials", name: "SessionCredentials")
+    SessionExpiration = ::Smithy::Schema::Shapes::TimestampShape.new(id: "com.amazonaws.s3#SessionExpiration", name: "SessionExpiration")
+    SessionMode = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.s3#SessionMode", name: "SessionMode")
+    Setting = ::Smithy::Schema::Shapes::BooleanShape.new(id: "com.amazonaws.s3#Setting", name: "Setting")
+    SimplePrefix = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#SimplePrefix", name: "SimplePrefix", traits: {"smithy.api#xmlName" => "SimplePrefix"})
+    Size = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.s3#Size", name: "Size")
+    SkipValidation = ::Smithy::Schema::Shapes::BooleanShape.new(id: "com.amazonaws.s3#SkipValidation", name: "SkipValidation")
+    SourceSelectionCriteria = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#SourceSelectionCriteria", name: "SourceSelectionCriteria")
+    SseKmsEncryptedObjects = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#SseKmsEncryptedObjects", name: "SseKmsEncryptedObjects")
+    SseKmsEncryptedObjectsStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.s3#SseKmsEncryptedObjectsStatus", name: "SseKmsEncryptedObjectsStatus")
+    Start = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.s3#Start", name: "Start")
+    StartAfter = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#StartAfter", name: "StartAfter")
+    Stats = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#Stats", name: "Stats")
+    StatsEvent = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#StatsEvent", name: "StatsEvent")
+    StorageClass = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.s3#StorageClass", name: "StorageClass")
+    StorageClassAnalysis = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#StorageClassAnalysis", name: "StorageClassAnalysis")
+    StorageClassAnalysisDataExport = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#StorageClassAnalysisDataExport", name: "StorageClassAnalysisDataExport")
+    StorageClassAnalysisSchemaVersion = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.s3#StorageClassAnalysisSchemaVersion", name: "StorageClassAnalysisSchemaVersion")
+    StreamingBlob = ::Smithy::Schema::Shapes::BlobShape.new(id: "com.amazonaws.s3#StreamingBlob", name: "StreamingBlob", traits: {"smithy.api#streaming" => {}})
+    Suffix = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#Suffix", name: "Suffix")
+    TableSseAlgorithm = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.s3#TableSseAlgorithm", name: "TableSseAlgorithm")
+    Tag = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#Tag", name: "Tag")
+    TagCount = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.s3#TagCount", name: "TagCount")
+    TagSet = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.s3#TagSet", name: "TagSet")
+    Tagging = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#Tagging", name: "Tagging")
+    TaggingDirective = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.s3#TaggingDirective", name: "TaggingDirective")
+    TaggingHeader = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#TaggingHeader", name: "TaggingHeader")
+    TargetBucket = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#TargetBucket", name: "TargetBucket")
+    TargetGrant = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#TargetGrant", name: "TargetGrant")
+    TargetGrants = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.s3#TargetGrants", name: "TargetGrants")
+    TargetObjectKeyFormat = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#TargetObjectKeyFormat", name: "TargetObjectKeyFormat")
+    TargetPrefix = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#TargetPrefix", name: "TargetPrefix")
+    Tier = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.s3#Tier", name: "Tier")
+    Tiering = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#Tiering", name: "Tiering")
+    TieringList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.s3#TieringList", name: "TieringList")
+    Token = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#Token", name: "Token")
+    TooManyParts = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#TooManyParts", name: "TooManyParts", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
+    TopicArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#TopicArn", name: "TopicArn")
+    TopicConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#TopicConfiguration", name: "TopicConfiguration")
+    TopicConfigurationList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.s3#TopicConfigurationList", name: "TopicConfigurationList")
+    Transition = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#Transition", name: "Transition")
+    TransitionDefaultMinimumObjectSize = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.s3#TransitionDefaultMinimumObjectSize", name: "TransitionDefaultMinimumObjectSize")
+    TransitionList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.s3#TransitionList", name: "TransitionList")
+    TransitionStorageClass = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.s3#TransitionStorageClass", name: "TransitionStorageClass")
+    Type = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.s3#Type", name: "Type")
+    URI = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#URI", name: "URI")
+    UpdateBucketMetadataInventoryTableConfigurationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#UpdateBucketMetadataInventoryTableConfigurationRequest", name: "UpdateBucketMetadataInventoryTableConfigurationRequest")
+    UpdateBucketMetadataJournalTableConfigurationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#UpdateBucketMetadataJournalTableConfigurationRequest", name: "UpdateBucketMetadataJournalTableConfigurationRequest")
+    UploadIdMarker = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#UploadIdMarker", name: "UploadIdMarker")
+    UploadPartCopyOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#UploadPartCopyOutput", name: "UploadPartCopyOutput")
+    UploadPartCopyRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#UploadPartCopyRequest", name: "UploadPartCopyRequest")
+    UploadPartOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#UploadPartOutput", name: "UploadPartOutput")
+    UploadPartRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#UploadPartRequest", name: "UploadPartRequest")
+    UserMetadata = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.s3#UserMetadata", name: "UserMetadata")
+    Value = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#Value", name: "Value")
+    VersionCount = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.s3#VersionCount", name: "VersionCount")
+    VersionIdMarker = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#VersionIdMarker", name: "VersionIdMarker")
+    VersioningConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#VersioningConfiguration", name: "VersioningConfiguration")
+    WebsiteConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#WebsiteConfiguration", name: "WebsiteConfiguration")
+    WebsiteRedirectLocation = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#WebsiteRedirectLocation", name: "WebsiteRedirectLocation")
+    WriteGetObjectResponseRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#WriteGetObjectResponseRequest", name: "WriteGetObjectResponseRequest")
+    WriteOffsetBytes = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.s3#WriteOffsetBytes", name: "WriteOffsetBytes")
+    Years = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.s3#Years", name: "Years")
+
+    AbortIncompleteMultipartUpload.add_member(:days_after_initiation, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DaysAfterInitiation, location_name: "DaysAfterInitiation"))
+    AbortIncompleteMultipartUpload.type = Types::AbortIncompleteMultipartUpload
+    AbortMultipartUploadOutput.add_member(:request_charged, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestCharged, location_name: "RequestCharged", traits: {"smithy.api#httpHeader" => "x-amz-request-charged"}))
+    AbortMultipartUploadOutput.type = Types::AbortMultipartUploadOutput
+    AbortMultipartUploadRequest.add_member(:bucket, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketName, location_name: "Bucket", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "Bucket"}}))
+    AbortMultipartUploadRequest.add_member(:key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectKey, location_name: "Key", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "Key"}}))
+    AbortMultipartUploadRequest.add_member(:upload_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MultipartUploadId, location_name: "UploadId", traits: {"smithy.api#httpQuery" => "uploadId", "smithy.api#required" => {}}))
+    AbortMultipartUploadRequest.add_member(:request_payer, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestPayer, location_name: "RequestPayer", traits: {"smithy.api#httpHeader" => "x-amz-request-payer"}))
+    AbortMultipartUploadRequest.add_member(:expected_bucket_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "ExpectedBucketOwner", traits: {"smithy.api#httpHeader" => "x-amz-expected-bucket-owner"}))
+    AbortMultipartUploadRequest.add_member(:if_match_initiated_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IfMatchInitiatedTime, location_name: "IfMatchInitiatedTime", traits: {"smithy.api#httpHeader" => "x-amz-if-match-initiated-time"}))
+    AbortMultipartUploadRequest.type = Types::AbortMultipartUploadRequest
+    AccelerateConfiguration.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketAccelerateStatus, location_name: "Status"))
+    AccelerateConfiguration.type = Types::AccelerateConfiguration
+    AccessControlPolicy.add_member(:grants, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Grants, location_name: "Grants", traits: {"smithy.api#xmlName" => "AccessControlList"}))
+    AccessControlPolicy.add_member(:owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Owner, location_name: "Owner"))
+    AccessControlPolicy.type = Types::AccessControlPolicy
+    AccessControlTranslation.add_member(:owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OwnerOverride, location_name: "Owner", traits: {"smithy.api#required" => {}}))
+    AccessControlTranslation.type = Types::AccessControlTranslation
+    AllowedHeaders.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AllowedHeader)
+    AllowedMethods.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AllowedMethod)
+    AllowedOrigins.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AllowedOrigin)
+    AnalyticsAndOperator.add_member(:prefix, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Prefix, location_name: "Prefix"))
+    AnalyticsAndOperator.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagSet, location_name: "Tags", traits: {"smithy.api#xmlFlattened" => {}, "smithy.api#xmlName" => "Tag"}))
+    AnalyticsAndOperator.type = Types::AnalyticsAndOperator
+    AnalyticsConfiguration.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AnalyticsId, location_name: "Id", traits: {"smithy.api#required" => {}}))
+    AnalyticsConfiguration.add_member(:filter, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AnalyticsFilter, location_name: "Filter"))
+    AnalyticsConfiguration.add_member(:storage_class_analysis, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StorageClassAnalysis, location_name: "StorageClassAnalysis", traits: {"smithy.api#required" => {}}))
+    AnalyticsConfiguration.type = Types::AnalyticsConfiguration
+    AnalyticsConfigurationList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AnalyticsConfiguration)
+    AnalyticsExportDestination.add_member(:s3_bucket_destination, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AnalyticsS3BucketDestination, location_name: "S3BucketDestination", traits: {"smithy.api#required" => {}}))
+    AnalyticsExportDestination.type = Types::AnalyticsExportDestination
+    AnalyticsFilter.add_member(:prefix, Types::AnalyticsFilter::Prefix, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Prefix, location_name: "Prefix"))
+    AnalyticsFilter.add_member(:tag, Types::AnalyticsFilter::Tag, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tag, location_name: "Tag"))
+    AnalyticsFilter.add_member(:and, Types::AnalyticsFilter::And, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AnalyticsAndOperator, location_name: "And"))
+    AnalyticsFilter.add_member(:unknown, Types::AnalyticsFilter::Unknown, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit))
+    AnalyticsFilter.type = Types::AnalyticsFilter
+    AnalyticsS3BucketDestination.add_member(:format, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AnalyticsS3ExportFileFormat, location_name: "Format", traits: {"smithy.api#required" => {}}))
+    AnalyticsS3BucketDestination.add_member(:bucket_account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "BucketAccountId"))
+    AnalyticsS3BucketDestination.add_member(:bucket, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketName, location_name: "Bucket", traits: {"smithy.api#required" => {}}))
+    AnalyticsS3BucketDestination.add_member(:prefix, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Prefix, location_name: "Prefix"))
+    AnalyticsS3BucketDestination.type = Types::AnalyticsS3BucketDestination
+    AnalyticsS3ExportFileFormat.add_member(:csv, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CSV", traits: {"smithy.api#enumValue" => "CSV"}))
+    ArchiveStatus.add_member(:archive_access, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ARCHIVE_ACCESS", traits: {"smithy.api#enumValue" => "ARCHIVE_ACCESS"}))
+    ArchiveStatus.add_member(:deep_archive_access, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DEEP_ARCHIVE_ACCESS", traits: {"smithy.api#enumValue" => "DEEP_ARCHIVE_ACCESS"}))
+    Bucket.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketName, location_name: "Name"))
+    Bucket.add_member(:creation_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreationDate, location_name: "CreationDate"))
+    Bucket.add_member(:bucket_region, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketRegion, location_name: "BucketRegion"))
+    Bucket.add_member(:bucket_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3RegionalOrS3ExpressBucketArnString, location_name: "BucketArn"))
+    Bucket.type = Types::Bucket
+    BucketAccelerateStatus.add_member(:enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Enabled", traits: {"smithy.api#enumValue" => "Enabled"}))
+    BucketAccelerateStatus.add_member(:suspended, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Suspended", traits: {"smithy.api#enumValue" => "Suspended"}))
+    BucketAlreadyExists.type = Types::BucketAlreadyExists
+    BucketAlreadyOwnedByYou.type = Types::BucketAlreadyOwnedByYou
+    BucketCannedACL.add_member(:private, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "private", traits: {"smithy.api#enumValue" => "private"}))
+    BucketCannedACL.add_member(:public_read, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "public_read", traits: {"smithy.api#enumValue" => "public-read"}))
+    BucketCannedACL.add_member(:public_read_write, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "public_read_write", traits: {"smithy.api#enumValue" => "public-read-write"}))
+    BucketCannedACL.add_member(:authenticated_read, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "authenticated_read", traits: {"smithy.api#enumValue" => "authenticated-read"}))
+    BucketInfo.add_member(:data_redundancy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataRedundancy, location_name: "DataRedundancy"))
+    BucketInfo.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketType, location_name: "Type"))
+    BucketInfo.type = Types::BucketInfo
+    BucketLifecycleConfiguration.add_member(:rules, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LifecycleRules, location_name: "Rules", traits: {"smithy.api#required" => {}, "smithy.api#xmlFlattened" => {}, "smithy.api#xmlName" => "Rule"}))
+    BucketLifecycleConfiguration.type = Types::BucketLifecycleConfiguration
+    BucketLocationConstraint.add_member(:af_south_1, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "af_south_1", traits: {"smithy.api#enumValue" => "af-south-1"}))
+    BucketLocationConstraint.add_member(:ap_east_1, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ap_east_1", traits: {"smithy.api#enumValue" => "ap-east-1"}))
+    BucketLocationConstraint.add_member(:ap_northeast_1, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ap_northeast_1", traits: {"smithy.api#enumValue" => "ap-northeast-1"}))
+    BucketLocationConstraint.add_member(:ap_northeast_2, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ap_northeast_2", traits: {"smithy.api#enumValue" => "ap-northeast-2"}))
+    BucketLocationConstraint.add_member(:ap_northeast_3, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ap_northeast_3", traits: {"smithy.api#enumValue" => "ap-northeast-3"}))
+    BucketLocationConstraint.add_member(:ap_south_1, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ap_south_1", traits: {"smithy.api#enumValue" => "ap-south-1"}))
+    BucketLocationConstraint.add_member(:ap_south_2, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ap_south_2", traits: {"smithy.api#enumValue" => "ap-south-2"}))
+    BucketLocationConstraint.add_member(:ap_southeast_1, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ap_southeast_1", traits: {"smithy.api#enumValue" => "ap-southeast-1"}))
+    BucketLocationConstraint.add_member(:ap_southeast_2, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ap_southeast_2", traits: {"smithy.api#enumValue" => "ap-southeast-2"}))
+    BucketLocationConstraint.add_member(:ap_southeast_3, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ap_southeast_3", traits: {"smithy.api#enumValue" => "ap-southeast-3"}))
+    BucketLocationConstraint.add_member(:ap_southeast_4, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ap_southeast_4", traits: {"smithy.api#enumValue" => "ap-southeast-4"}))
+    BucketLocationConstraint.add_member(:ap_southeast_5, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ap_southeast_5", traits: {"smithy.api#enumValue" => "ap-southeast-5"}))
+    BucketLocationConstraint.add_member(:ca_central_1, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ca_central_1", traits: {"smithy.api#enumValue" => "ca-central-1"}))
+    BucketLocationConstraint.add_member(:cn_north_1, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "cn_north_1", traits: {"smithy.api#enumValue" => "cn-north-1"}))
+    BucketLocationConstraint.add_member(:cn_northwest_1, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "cn_northwest_1", traits: {"smithy.api#enumValue" => "cn-northwest-1"}))
+    BucketLocationConstraint.add_member(:eu, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EU", traits: {"smithy.api#enumValue" => "EU"}))
+    BucketLocationConstraint.add_member(:eu_central_1, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "eu_central_1", traits: {"smithy.api#enumValue" => "eu-central-1"}))
+    BucketLocationConstraint.add_member(:eu_central_2, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "eu_central_2", traits: {"smithy.api#enumValue" => "eu-central-2"}))
+    BucketLocationConstraint.add_member(:eu_north_1, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "eu_north_1", traits: {"smithy.api#enumValue" => "eu-north-1"}))
+    BucketLocationConstraint.add_member(:eu_south_1, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "eu_south_1", traits: {"smithy.api#enumValue" => "eu-south-1"}))
+    BucketLocationConstraint.add_member(:eu_south_2, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "eu_south_2", traits: {"smithy.api#enumValue" => "eu-south-2"}))
+    BucketLocationConstraint.add_member(:eu_west_1, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "eu_west_1", traits: {"smithy.api#enumValue" => "eu-west-1"}))
+    BucketLocationConstraint.add_member(:eu_west_2, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "eu_west_2", traits: {"smithy.api#enumValue" => "eu-west-2"}))
+    BucketLocationConstraint.add_member(:eu_west_3, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "eu_west_3", traits: {"smithy.api#enumValue" => "eu-west-3"}))
+    BucketLocationConstraint.add_member(:il_central_1, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "il_central_1", traits: {"smithy.api#enumValue" => "il-central-1"}))
+    BucketLocationConstraint.add_member(:me_central_1, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "me_central_1", traits: {"smithy.api#enumValue" => "me-central-1"}))
+    BucketLocationConstraint.add_member(:me_south_1, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "me_south_1", traits: {"smithy.api#enumValue" => "me-south-1"}))
+    BucketLocationConstraint.add_member(:sa_east_1, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "sa_east_1", traits: {"smithy.api#enumValue" => "sa-east-1"}))
+    BucketLocationConstraint.add_member(:us_east_2, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "us_east_2", traits: {"smithy.api#enumValue" => "us-east-2"}))
+    BucketLocationConstraint.add_member(:us_gov_east_1, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "us_gov_east_1", traits: {"smithy.api#enumValue" => "us-gov-east-1"}))
+    BucketLocationConstraint.add_member(:us_gov_west_1, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "us_gov_west_1", traits: {"smithy.api#enumValue" => "us-gov-west-1"}))
+    BucketLocationConstraint.add_member(:us_west_1, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "us_west_1", traits: {"smithy.api#enumValue" => "us-west-1"}))
+    BucketLocationConstraint.add_member(:us_west_2, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "us_west_2", traits: {"smithy.api#enumValue" => "us-west-2"}))
+    BucketLoggingStatus.add_member(:logging_enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LoggingEnabled, location_name: "LoggingEnabled"))
+    BucketLoggingStatus.type = Types::BucketLoggingStatus
+    BucketLogsPermission.add_member(:full_control, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FULL_CONTROL", traits: {"smithy.api#enumValue" => "FULL_CONTROL"}))
+    BucketLogsPermission.add_member(:read, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "READ", traits: {"smithy.api#enumValue" => "READ"}))
+    BucketLogsPermission.add_member(:write, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "WRITE", traits: {"smithy.api#enumValue" => "WRITE"}))
+    BucketType.add_member(:directory, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Directory", traits: {"smithy.api#enumValue" => "Directory"}))
+    BucketVersioningStatus.add_member(:enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Enabled", traits: {"smithy.api#enumValue" => "Enabled"}))
+    BucketVersioningStatus.add_member(:suspended, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Suspended", traits: {"smithy.api#enumValue" => "Suspended"}))
+    Buckets.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Bucket, traits: {"smithy.api#xmlName" => "Bucket"})
+    CORSConfiguration.add_member(:cors_rules, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CORSRules, location_name: "CORSRules", traits: {"smithy.api#required" => {}, "smithy.api#xmlFlattened" => {}, "smithy.api#xmlName" => "CORSRule"}))
+    CORSConfiguration.type = Types::CORSConfiguration
+    CORSRule.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ID, location_name: "ID"))
+    CORSRule.add_member(:allowed_headers, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AllowedHeaders, location_name: "AllowedHeaders", traits: {"smithy.api#xmlFlattened" => {}, "smithy.api#xmlName" => "AllowedHeader"}))
+    CORSRule.add_member(:allowed_methods, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AllowedMethods, location_name: "AllowedMethods", traits: {"smithy.api#required" => {}, "smithy.api#xmlFlattened" => {}, "smithy.api#xmlName" => "AllowedMethod"}))
+    CORSRule.add_member(:allowed_origins, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AllowedOrigins, location_name: "AllowedOrigins", traits: {"smithy.api#required" => {}, "smithy.api#xmlFlattened" => {}, "smithy.api#xmlName" => "AllowedOrigin"}))
+    CORSRule.add_member(:expose_headers, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExposeHeaders, location_name: "ExposeHeaders", traits: {"smithy.api#xmlFlattened" => {}, "smithy.api#xmlName" => "ExposeHeader"}))
+    CORSRule.add_member(:max_age_seconds, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxAgeSeconds, location_name: "MaxAgeSeconds"))
+    CORSRule.type = Types::CORSRule
+    CORSRules.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CORSRule)
+    CSVInput.add_member(:file_header_info, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FileHeaderInfo, location_name: "FileHeaderInfo"))
+    CSVInput.add_member(:comments, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Comments, location_name: "Comments"))
+    CSVInput.add_member(:quote_escape_character, ::Smithy::Schema::Shapes::ShapeRef.new(shape: QuoteEscapeCharacter, location_name: "QuoteEscapeCharacter"))
+    CSVInput.add_member(:record_delimiter, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RecordDelimiter, location_name: "RecordDelimiter"))
+    CSVInput.add_member(:field_delimiter, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FieldDelimiter, location_name: "FieldDelimiter"))
+    CSVInput.add_member(:quote_character, ::Smithy::Schema::Shapes::ShapeRef.new(shape: QuoteCharacter, location_name: "QuoteCharacter"))
+    CSVInput.add_member(:allow_quoted_record_delimiter, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AllowQuotedRecordDelimiter, location_name: "AllowQuotedRecordDelimiter"))
+    CSVInput.type = Types::CSVInput
+    CSVOutput.add_member(:quote_fields, ::Smithy::Schema::Shapes::ShapeRef.new(shape: QuoteFields, location_name: "QuoteFields"))
+    CSVOutput.add_member(:quote_escape_character, ::Smithy::Schema::Shapes::ShapeRef.new(shape: QuoteEscapeCharacter, location_name: "QuoteEscapeCharacter"))
+    CSVOutput.add_member(:record_delimiter, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RecordDelimiter, location_name: "RecordDelimiter"))
+    CSVOutput.add_member(:field_delimiter, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FieldDelimiter, location_name: "FieldDelimiter"))
+    CSVOutput.add_member(:quote_character, ::Smithy::Schema::Shapes::ShapeRef.new(shape: QuoteCharacter, location_name: "QuoteCharacter"))
+    CSVOutput.type = Types::CSVOutput
+    Checksum.add_member(:checksum_crc32, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChecksumCRC32, location_name: "ChecksumCRC32"))
+    Checksum.add_member(:checksum_crc32_c, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChecksumCRC32C, location_name: "ChecksumCRC32C"))
+    Checksum.add_member(:checksum_crc64_nvme, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChecksumCRC64NVME, location_name: "ChecksumCRC64NVME"))
+    Checksum.add_member(:checksum_sha1, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChecksumSHA1, location_name: "ChecksumSHA1"))
+    Checksum.add_member(:checksum_sha256, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChecksumSHA256, location_name: "ChecksumSHA256"))
+    Checksum.add_member(:checksum_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChecksumType, location_name: "ChecksumType"))
+    Checksum.type = Types::Checksum
+    ChecksumAlgorithm.add_member(:crc32, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CRC32", traits: {"smithy.api#enumValue" => "CRC32"}))
+    ChecksumAlgorithm.add_member(:crc32_c, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CRC32C", traits: {"smithy.api#enumValue" => "CRC32C"}))
+    ChecksumAlgorithm.add_member(:sha1, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SHA1", traits: {"smithy.api#enumValue" => "SHA1"}))
+    ChecksumAlgorithm.add_member(:sha256, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SHA256", traits: {"smithy.api#enumValue" => "SHA256"}))
+    ChecksumAlgorithm.add_member(:crc64_nvme, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CRC64NVME", traits: {"smithy.api#enumValue" => "CRC64NVME"}))
+    ChecksumAlgorithmList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChecksumAlgorithm)
+    ChecksumMode.add_member(:enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ENABLED", traits: {"smithy.api#enumValue" => "ENABLED"}))
+    ChecksumType.add_member(:composite, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "COMPOSITE", traits: {"smithy.api#enumValue" => "COMPOSITE"}))
+    ChecksumType.add_member(:full_object, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FULL_OBJECT", traits: {"smithy.api#enumValue" => "FULL_OBJECT"}))
+    CommonPrefix.add_member(:prefix, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Prefix, location_name: "Prefix"))
+    CommonPrefix.type = Types::CommonPrefix
+    CommonPrefixList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommonPrefix)
+    CompleteMultipartUploadOutput.add_member(:location, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Location, location_name: "Location"))
+    CompleteMultipartUploadOutput.add_member(:bucket, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketName, location_name: "Bucket"))
+    CompleteMultipartUploadOutput.add_member(:key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectKey, location_name: "Key"))
+    CompleteMultipartUploadOutput.add_member(:expiration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Expiration, location_name: "Expiration", traits: {"smithy.api#httpHeader" => "x-amz-expiration"}))
+    CompleteMultipartUploadOutput.add_member(:e_tag, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ETag, location_name: "ETag"))
+    CompleteMultipartUploadOutput.add_member(:checksum_crc32, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChecksumCRC32, location_name: "ChecksumCRC32"))
+    CompleteMultipartUploadOutput.add_member(:checksum_crc32_c, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChecksumCRC32C, location_name: "ChecksumCRC32C"))
+    CompleteMultipartUploadOutput.add_member(:checksum_crc64_nvme, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChecksumCRC64NVME, location_name: "ChecksumCRC64NVME"))
+    CompleteMultipartUploadOutput.add_member(:checksum_sha1, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChecksumSHA1, location_name: "ChecksumSHA1"))
+    CompleteMultipartUploadOutput.add_member(:checksum_sha256, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChecksumSHA256, location_name: "ChecksumSHA256"))
+    CompleteMultipartUploadOutput.add_member(:checksum_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChecksumType, location_name: "ChecksumType"))
+    CompleteMultipartUploadOutput.add_member(:server_side_encryption, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServerSideEncryption, location_name: "ServerSideEncryption", traits: {"smithy.api#httpHeader" => "x-amz-server-side-encryption"}))
+    CompleteMultipartUploadOutput.add_member(:version_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectVersionId, location_name: "VersionId", traits: {"smithy.api#httpHeader" => "x-amz-version-id"}))
+    CompleteMultipartUploadOutput.add_member(:ssekms_key_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SSEKMSKeyId, location_name: "SSEKMSKeyId", traits: {"smithy.api#httpHeader" => "x-amz-server-side-encryption-aws-kms-key-id"}))
+    CompleteMultipartUploadOutput.add_member(:bucket_key_enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketKeyEnabled, location_name: "BucketKeyEnabled", traits: {"smithy.api#httpHeader" => "x-amz-server-side-encryption-bucket-key-enabled"}))
+    CompleteMultipartUploadOutput.add_member(:request_charged, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestCharged, location_name: "RequestCharged", traits: {"smithy.api#httpHeader" => "x-amz-request-charged"}))
+    CompleteMultipartUploadOutput.type = Types::CompleteMultipartUploadOutput
+    CompleteMultipartUploadRequest.add_member(:bucket, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketName, location_name: "Bucket", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "Bucket"}}))
+    CompleteMultipartUploadRequest.add_member(:key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectKey, location_name: "Key", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "Key"}}))
+    CompleteMultipartUploadRequest.add_member(:multipart_upload, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CompletedMultipartUpload, location_name: "MultipartUpload", traits: {"smithy.api#httpPayload" => {}, "smithy.api#xmlName" => "CompleteMultipartUpload"}))
+    CompleteMultipartUploadRequest.add_member(:upload_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MultipartUploadId, location_name: "UploadId", traits: {"smithy.api#httpQuery" => "uploadId", "smithy.api#required" => {}}))
+    CompleteMultipartUploadRequest.add_member(:checksum_crc32, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChecksumCRC32, location_name: "ChecksumCRC32", traits: {"smithy.api#httpHeader" => "x-amz-checksum-crc32"}))
+    CompleteMultipartUploadRequest.add_member(:checksum_crc32_c, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChecksumCRC32C, location_name: "ChecksumCRC32C", traits: {"smithy.api#httpHeader" => "x-amz-checksum-crc32c"}))
+    CompleteMultipartUploadRequest.add_member(:checksum_crc64_nvme, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChecksumCRC64NVME, location_name: "ChecksumCRC64NVME", traits: {"smithy.api#httpHeader" => "x-amz-checksum-crc64nvme"}))
+    CompleteMultipartUploadRequest.add_member(:checksum_sha1, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChecksumSHA1, location_name: "ChecksumSHA1", traits: {"smithy.api#httpHeader" => "x-amz-checksum-sha1"}))
+    CompleteMultipartUploadRequest.add_member(:checksum_sha256, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChecksumSHA256, location_name: "ChecksumSHA256", traits: {"smithy.api#httpHeader" => "x-amz-checksum-sha256"}))
+    CompleteMultipartUploadRequest.add_member(:checksum_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChecksumType, location_name: "ChecksumType", traits: {"smithy.api#httpHeader" => "x-amz-checksum-type"}))
+    CompleteMultipartUploadRequest.add_member(:mpu_object_size, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MpuObjectSize, location_name: "MpuObjectSize", traits: {"smithy.api#httpHeader" => "x-amz-mp-object-size"}))
+    CompleteMultipartUploadRequest.add_member(:request_payer, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestPayer, location_name: "RequestPayer", traits: {"smithy.api#httpHeader" => "x-amz-request-payer"}))
+    CompleteMultipartUploadRequest.add_member(:expected_bucket_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "ExpectedBucketOwner", traits: {"smithy.api#httpHeader" => "x-amz-expected-bucket-owner"}))
+    CompleteMultipartUploadRequest.add_member(:if_match, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IfMatch, location_name: "IfMatch", traits: {"smithy.api#httpHeader" => "If-Match"}))
+    CompleteMultipartUploadRequest.add_member(:if_none_match, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IfNoneMatch, location_name: "IfNoneMatch", traits: {"smithy.api#httpHeader" => "If-None-Match"}))
+    CompleteMultipartUploadRequest.add_member(:sse_customer_algorithm, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SSECustomerAlgorithm, location_name: "SSECustomerAlgorithm", traits: {"smithy.api#httpHeader" => "x-amz-server-side-encryption-customer-algorithm"}))
+    CompleteMultipartUploadRequest.add_member(:sse_customer_key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SSECustomerKey, location_name: "SSECustomerKey", traits: {"smithy.api#httpHeader" => "x-amz-server-side-encryption-customer-key"}))
+    CompleteMultipartUploadRequest.add_member(:sse_customer_key_md5, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SSECustomerKeyMD5, location_name: "SSECustomerKeyMD5", traits: {"smithy.api#httpHeader" => "x-amz-server-side-encryption-customer-key-MD5"}))
+    CompleteMultipartUploadRequest[:http_payload] = :multipart_upload
+    CompleteMultipartUploadRequest[:http_payload_member] = CompleteMultipartUploadRequest.member(:multipart_upload)
+    CompleteMultipartUploadRequest.type = Types::CompleteMultipartUploadRequest
+    CompletedMultipartUpload.add_member(:parts, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CompletedPartList, location_name: "Parts", traits: {"smithy.api#xmlFlattened" => {}, "smithy.api#xmlName" => "Part"}))
+    CompletedMultipartUpload.type = Types::CompletedMultipartUpload
+    CompletedPart.add_member(:e_tag, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ETag, location_name: "ETag"))
+    CompletedPart.add_member(:checksum_crc32, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChecksumCRC32, location_name: "ChecksumCRC32"))
+    CompletedPart.add_member(:checksum_crc32_c, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChecksumCRC32C, location_name: "ChecksumCRC32C"))
+    CompletedPart.add_member(:checksum_crc64_nvme, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChecksumCRC64NVME, location_name: "ChecksumCRC64NVME"))
+    CompletedPart.add_member(:checksum_sha1, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChecksumSHA1, location_name: "ChecksumSHA1"))
+    CompletedPart.add_member(:checksum_sha256, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChecksumSHA256, location_name: "ChecksumSHA256"))
+    CompletedPart.add_member(:part_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PartNumber, location_name: "PartNumber"))
+    CompletedPart.type = Types::CompletedPart
+    CompletedPartList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CompletedPart)
+    CompressionType.add_member(:none, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NONE", traits: {"smithy.api#enumValue" => "NONE"}))
+    CompressionType.add_member(:gzip, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "GZIP", traits: {"smithy.api#enumValue" => "GZIP"}))
+    CompressionType.add_member(:bzip2, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BZIP2", traits: {"smithy.api#enumValue" => "BZIP2"}))
+    Condition.add_member(:http_error_code_returned_equals, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HttpErrorCodeReturnedEquals, location_name: "HttpErrorCodeReturnedEquals"))
+    Condition.add_member(:key_prefix_equals, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyPrefixEquals, location_name: "KeyPrefixEquals"))
+    Condition.type = Types::Condition
+    ContinuationEvent.type = Types::ContinuationEvent
+    CopyObjectOutput.add_member(:copy_object_result, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CopyObjectResult, location_name: "CopyObjectResult", traits: {"smithy.api#httpPayload" => {}}))
+    CopyObjectOutput.add_member(:expiration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Expiration, location_name: "Expiration", traits: {"smithy.api#httpHeader" => "x-amz-expiration"}))
+    CopyObjectOutput.add_member(:copy_source_version_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CopySourceVersionId, location_name: "CopySourceVersionId", traits: {"smithy.api#httpHeader" => "x-amz-copy-source-version-id"}))
+    CopyObjectOutput.add_member(:version_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectVersionId, location_name: "VersionId", traits: {"smithy.api#httpHeader" => "x-amz-version-id"}))
+    CopyObjectOutput.add_member(:server_side_encryption, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServerSideEncryption, location_name: "ServerSideEncryption", traits: {"smithy.api#httpHeader" => "x-amz-server-side-encryption"}))
+    CopyObjectOutput.add_member(:sse_customer_algorithm, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SSECustomerAlgorithm, location_name: "SSECustomerAlgorithm", traits: {"smithy.api#httpHeader" => "x-amz-server-side-encryption-customer-algorithm"}))
+    CopyObjectOutput.add_member(:sse_customer_key_md5, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SSECustomerKeyMD5, location_name: "SSECustomerKeyMD5", traits: {"smithy.api#httpHeader" => "x-amz-server-side-encryption-customer-key-MD5"}))
+    CopyObjectOutput.add_member(:ssekms_key_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SSEKMSKeyId, location_name: "SSEKMSKeyId", traits: {"smithy.api#httpHeader" => "x-amz-server-side-encryption-aws-kms-key-id"}))
+    CopyObjectOutput.add_member(:ssekms_encryption_context, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SSEKMSEncryptionContext, location_name: "SSEKMSEncryptionContext", traits: {"smithy.api#httpHeader" => "x-amz-server-side-encryption-context"}))
+    CopyObjectOutput.add_member(:bucket_key_enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketKeyEnabled, location_name: "BucketKeyEnabled", traits: {"smithy.api#httpHeader" => "x-amz-server-side-encryption-bucket-key-enabled"}))
+    CopyObjectOutput.add_member(:request_charged, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestCharged, location_name: "RequestCharged", traits: {"smithy.api#httpHeader" => "x-amz-request-charged"}))
+    CopyObjectOutput[:http_payload] = :copy_object_result
+    CopyObjectOutput[:http_payload_member] = CopyObjectOutput.member(:copy_object_result)
+    CopyObjectOutput.type = Types::CopyObjectOutput
+    CopyObjectRequest.add_member(:acl, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectCannedACL, location_name: "ACL", traits: {"smithy.api#httpHeader" => "x-amz-acl"}))
+    CopyObjectRequest.add_member(:bucket, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketName, location_name: "Bucket", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "Bucket"}}))
+    CopyObjectRequest.add_member(:cache_control, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CacheControl, location_name: "CacheControl", traits: {"smithy.api#httpHeader" => "Cache-Control"}))
+    CopyObjectRequest.add_member(:checksum_algorithm, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChecksumAlgorithm, location_name: "ChecksumAlgorithm", traits: {"smithy.api#httpHeader" => "x-amz-checksum-algorithm"}))
+    CopyObjectRequest.add_member(:content_disposition, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContentDisposition, location_name: "ContentDisposition", traits: {"smithy.api#httpHeader" => "Content-Disposition"}))
+    CopyObjectRequest.add_member(:content_encoding, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContentEncoding, location_name: "ContentEncoding", traits: {"smithy.api#httpHeader" => "Content-Encoding"}))
+    CopyObjectRequest.add_member(:content_language, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContentLanguage, location_name: "ContentLanguage", traits: {"smithy.api#httpHeader" => "Content-Language"}))
+    CopyObjectRequest.add_member(:content_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContentType, location_name: "ContentType", traits: {"smithy.api#httpHeader" => "Content-Type"}))
+    CopyObjectRequest.add_member(:copy_source, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CopySource, location_name: "CopySource", traits: {"smithy.api#httpHeader" => "x-amz-copy-source", "smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "CopySource"}}))
+    CopyObjectRequest.add_member(:copy_source_if_match, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CopySourceIfMatch, location_name: "CopySourceIfMatch", traits: {"smithy.api#httpHeader" => "x-amz-copy-source-if-match"}))
+    CopyObjectRequest.add_member(:copy_source_if_modified_since, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CopySourceIfModifiedSince, location_name: "CopySourceIfModifiedSince", traits: {"smithy.api#httpHeader" => "x-amz-copy-source-if-modified-since"}))
+    CopyObjectRequest.add_member(:copy_source_if_none_match, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CopySourceIfNoneMatch, location_name: "CopySourceIfNoneMatch", traits: {"smithy.api#httpHeader" => "x-amz-copy-source-if-none-match"}))
+    CopyObjectRequest.add_member(:copy_source_if_unmodified_since, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CopySourceIfUnmodifiedSince, location_name: "CopySourceIfUnmodifiedSince", traits: {"smithy.api#httpHeader" => "x-amz-copy-source-if-unmodified-since"}))
+    CopyObjectRequest.add_member(:expires, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Expires, location_name: "Expires", traits: {"smithy.api#httpHeader" => "Expires"}))
+    CopyObjectRequest.add_member(:grant_full_control, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GrantFullControl, location_name: "GrantFullControl", traits: {"smithy.api#httpHeader" => "x-amz-grant-full-control"}))
+    CopyObjectRequest.add_member(:grant_read, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GrantRead, location_name: "GrantRead", traits: {"smithy.api#httpHeader" => "x-amz-grant-read"}))
+    CopyObjectRequest.add_member(:grant_read_acp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GrantReadACP, location_name: "GrantReadACP", traits: {"smithy.api#httpHeader" => "x-amz-grant-read-acp"}))
+    CopyObjectRequest.add_member(:grant_write_acp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GrantWriteACP, location_name: "GrantWriteACP", traits: {"smithy.api#httpHeader" => "x-amz-grant-write-acp"}))
+    CopyObjectRequest.add_member(:key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectKey, location_name: "Key", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "Key"}}))
+    CopyObjectRequest.add_member(:metadata, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Metadata, location_name: "Metadata", traits: {"smithy.api#httpPrefixHeaders" => "x-amz-meta-"}))
+    CopyObjectRequest.add_member(:metadata_directive, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MetadataDirective, location_name: "MetadataDirective", traits: {"smithy.api#httpHeader" => "x-amz-metadata-directive"}))
+    CopyObjectRequest.add_member(:tagging_directive, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TaggingDirective, location_name: "TaggingDirective", traits: {"smithy.api#httpHeader" => "x-amz-tagging-directive"}))
+    CopyObjectRequest.add_member(:server_side_encryption, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServerSideEncryption, location_name: "ServerSideEncryption", traits: {"smithy.api#httpHeader" => "x-amz-server-side-encryption"}))
+    CopyObjectRequest.add_member(:storage_class, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StorageClass, location_name: "StorageClass", traits: {"smithy.api#httpHeader" => "x-amz-storage-class"}))
+    CopyObjectRequest.add_member(:website_redirect_location, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WebsiteRedirectLocation, location_name: "WebsiteRedirectLocation", traits: {"smithy.api#httpHeader" => "x-amz-website-redirect-location"}))
+    CopyObjectRequest.add_member(:sse_customer_algorithm, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SSECustomerAlgorithm, location_name: "SSECustomerAlgorithm", traits: {"smithy.api#httpHeader" => "x-amz-server-side-encryption-customer-algorithm"}))
+    CopyObjectRequest.add_member(:sse_customer_key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SSECustomerKey, location_name: "SSECustomerKey", traits: {"smithy.api#httpHeader" => "x-amz-server-side-encryption-customer-key"}))
+    CopyObjectRequest.add_member(:sse_customer_key_md5, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SSECustomerKeyMD5, location_name: "SSECustomerKeyMD5", traits: {"smithy.api#httpHeader" => "x-amz-server-side-encryption-customer-key-MD5"}))
+    CopyObjectRequest.add_member(:ssekms_key_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SSEKMSKeyId, location_name: "SSEKMSKeyId", traits: {"smithy.api#httpHeader" => "x-amz-server-side-encryption-aws-kms-key-id"}))
+    CopyObjectRequest.add_member(:ssekms_encryption_context, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SSEKMSEncryptionContext, location_name: "SSEKMSEncryptionContext", traits: {"smithy.api#httpHeader" => "x-amz-server-side-encryption-context"}))
+    CopyObjectRequest.add_member(:bucket_key_enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketKeyEnabled, location_name: "BucketKeyEnabled", traits: {"smithy.api#httpHeader" => "x-amz-server-side-encryption-bucket-key-enabled"}))
+    CopyObjectRequest.add_member(:copy_source_sse_customer_algorithm, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CopySourceSSECustomerAlgorithm, location_name: "CopySourceSSECustomerAlgorithm", traits: {"smithy.api#httpHeader" => "x-amz-copy-source-server-side-encryption-customer-algorithm"}))
+    CopyObjectRequest.add_member(:copy_source_sse_customer_key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CopySourceSSECustomerKey, location_name: "CopySourceSSECustomerKey", traits: {"smithy.api#httpHeader" => "x-amz-copy-source-server-side-encryption-customer-key"}))
+    CopyObjectRequest.add_member(:copy_source_sse_customer_key_md5, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CopySourceSSECustomerKeyMD5, location_name: "CopySourceSSECustomerKeyMD5", traits: {"smithy.api#httpHeader" => "x-amz-copy-source-server-side-encryption-customer-key-MD5"}))
+    CopyObjectRequest.add_member(:request_payer, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestPayer, location_name: "RequestPayer", traits: {"smithy.api#httpHeader" => "x-amz-request-payer"}))
+    CopyObjectRequest.add_member(:tagging, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TaggingHeader, location_name: "Tagging", traits: {"smithy.api#httpHeader" => "x-amz-tagging"}))
+    CopyObjectRequest.add_member(:object_lock_mode, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectLockMode, location_name: "ObjectLockMode", traits: {"smithy.api#httpHeader" => "x-amz-object-lock-mode"}))
+    CopyObjectRequest.add_member(:object_lock_retain_until_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectLockRetainUntilDate, location_name: "ObjectLockRetainUntilDate", traits: {"smithy.api#httpHeader" => "x-amz-object-lock-retain-until-date"}))
+    CopyObjectRequest.add_member(:object_lock_legal_hold_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectLockLegalHoldStatus, location_name: "ObjectLockLegalHoldStatus", traits: {"smithy.api#httpHeader" => "x-amz-object-lock-legal-hold"}))
+    CopyObjectRequest.add_member(:expected_bucket_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "ExpectedBucketOwner", traits: {"smithy.api#httpHeader" => "x-amz-expected-bucket-owner"}))
+    CopyObjectRequest.add_member(:expected_source_bucket_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "ExpectedSourceBucketOwner", traits: {"smithy.api#httpHeader" => "x-amz-source-expected-bucket-owner"}))
+    CopyObjectRequest.type = Types::CopyObjectRequest
+    CopyObjectResult.add_member(:e_tag, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ETag, location_name: "ETag"))
+    CopyObjectResult.add_member(:last_modified, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LastModified, location_name: "LastModified"))
+    CopyObjectResult.add_member(:checksum_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChecksumType, location_name: "ChecksumType"))
+    CopyObjectResult.add_member(:checksum_crc32, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChecksumCRC32, location_name: "ChecksumCRC32"))
+    CopyObjectResult.add_member(:checksum_crc32_c, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChecksumCRC32C, location_name: "ChecksumCRC32C"))
+    CopyObjectResult.add_member(:checksum_crc64_nvme, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChecksumCRC64NVME, location_name: "ChecksumCRC64NVME"))
+    CopyObjectResult.add_member(:checksum_sha1, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChecksumSHA1, location_name: "ChecksumSHA1"))
+    CopyObjectResult.add_member(:checksum_sha256, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChecksumSHA256, location_name: "ChecksumSHA256"))
+    CopyObjectResult.type = Types::CopyObjectResult
+    CopyPartResult.add_member(:e_tag, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ETag, location_name: "ETag"))
+    CopyPartResult.add_member(:last_modified, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LastModified, location_name: "LastModified"))
+    CopyPartResult.add_member(:checksum_crc32, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChecksumCRC32, location_name: "ChecksumCRC32"))
+    CopyPartResult.add_member(:checksum_crc32_c, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChecksumCRC32C, location_name: "ChecksumCRC32C"))
+    CopyPartResult.add_member(:checksum_crc64_nvme, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChecksumCRC64NVME, location_name: "ChecksumCRC64NVME"))
+    CopyPartResult.add_member(:checksum_sha1, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChecksumSHA1, location_name: "ChecksumSHA1"))
+    CopyPartResult.add_member(:checksum_sha256, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChecksumSHA256, location_name: "ChecksumSHA256"))
+    CopyPartResult.type = Types::CopyPartResult
+    CreateBucketConfiguration.add_member(:location_constraint, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketLocationConstraint, location_name: "LocationConstraint"))
+    CreateBucketConfiguration.add_member(:location, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LocationInfo, location_name: "Location"))
+    CreateBucketConfiguration.add_member(:bucket, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketInfo, location_name: "Bucket"))
+    CreateBucketConfiguration.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagSet, location_name: "Tags"))
+    CreateBucketConfiguration.type = Types::CreateBucketConfiguration
+    CreateBucketMetadataConfigurationRequest.add_member(:bucket, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketName, location_name: "Bucket", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "Bucket"}}))
+    CreateBucketMetadataConfigurationRequest.add_member(:content_md5, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContentMD5, location_name: "ContentMD5", traits: {"smithy.api#httpHeader" => "Content-MD5"}))
+    CreateBucketMetadataConfigurationRequest.add_member(:checksum_algorithm, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChecksumAlgorithm, location_name: "ChecksumAlgorithm", traits: {"smithy.api#httpHeader" => "x-amz-sdk-checksum-algorithm"}))
+    CreateBucketMetadataConfigurationRequest.add_member(:metadata_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MetadataConfiguration, location_name: "MetadataConfiguration", traits: {"smithy.api#httpPayload" => {}, "smithy.api#required" => {}, "smithy.api#xmlName" => "MetadataConfiguration"}))
+    CreateBucketMetadataConfigurationRequest.add_member(:expected_bucket_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "ExpectedBucketOwner", traits: {"smithy.api#httpHeader" => "x-amz-expected-bucket-owner"}))
+    CreateBucketMetadataConfigurationRequest[:http_payload] = :metadata_configuration
+    CreateBucketMetadataConfigurationRequest[:http_payload_member] = CreateBucketMetadataConfigurationRequest.member(:metadata_configuration)
+    CreateBucketMetadataConfigurationRequest.type = Types::CreateBucketMetadataConfigurationRequest
+    CreateBucketMetadataTableConfigurationRequest.add_member(:bucket, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketName, location_name: "Bucket", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "Bucket"}}))
+    CreateBucketMetadataTableConfigurationRequest.add_member(:content_md5, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContentMD5, location_name: "ContentMD5", traits: {"smithy.api#httpHeader" => "Content-MD5"}))
+    CreateBucketMetadataTableConfigurationRequest.add_member(:checksum_algorithm, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChecksumAlgorithm, location_name: "ChecksumAlgorithm", traits: {"smithy.api#httpHeader" => "x-amz-sdk-checksum-algorithm"}))
+    CreateBucketMetadataTableConfigurationRequest.add_member(:metadata_table_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MetadataTableConfiguration, location_name: "MetadataTableConfiguration", traits: {"smithy.api#httpPayload" => {}, "smithy.api#required" => {}, "smithy.api#xmlName" => "MetadataTableConfiguration"}))
+    CreateBucketMetadataTableConfigurationRequest.add_member(:expected_bucket_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "ExpectedBucketOwner", traits: {"smithy.api#httpHeader" => "x-amz-expected-bucket-owner"}))
+    CreateBucketMetadataTableConfigurationRequest[:http_payload] = :metadata_table_configuration
+    CreateBucketMetadataTableConfigurationRequest[:http_payload_member] = CreateBucketMetadataTableConfigurationRequest.member(:metadata_table_configuration)
+    CreateBucketMetadataTableConfigurationRequest.type = Types::CreateBucketMetadataTableConfigurationRequest
+    CreateBucketOutput.add_member(:location, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Location, location_name: "Location", traits: {"smithy.api#httpHeader" => "Location"}))
+    CreateBucketOutput.add_member(:bucket_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3RegionalOrS3ExpressBucketArnString, location_name: "BucketArn", traits: {"smithy.api#httpHeader" => "x-amz-bucket-arn"}))
+    CreateBucketOutput.type = Types::CreateBucketOutput
+    CreateBucketRequest.add_member(:acl, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketCannedACL, location_name: "ACL", traits: {"smithy.api#httpHeader" => "x-amz-acl"}))
+    CreateBucketRequest.add_member(:bucket, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketName, location_name: "Bucket", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "Bucket"}}))
+    CreateBucketRequest.add_member(:create_bucket_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateBucketConfiguration, location_name: "CreateBucketConfiguration", traits: {"smithy.api#httpPayload" => {}, "smithy.api#xmlName" => "CreateBucketConfiguration"}))
+    CreateBucketRequest.add_member(:grant_full_control, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GrantFullControl, location_name: "GrantFullControl", traits: {"smithy.api#httpHeader" => "x-amz-grant-full-control"}))
+    CreateBucketRequest.add_member(:grant_read, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GrantRead, location_name: "GrantRead", traits: {"smithy.api#httpHeader" => "x-amz-grant-read"}))
+    CreateBucketRequest.add_member(:grant_read_acp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GrantReadACP, location_name: "GrantReadACP", traits: {"smithy.api#httpHeader" => "x-amz-grant-read-acp"}))
+    CreateBucketRequest.add_member(:grant_write, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GrantWrite, location_name: "GrantWrite", traits: {"smithy.api#httpHeader" => "x-amz-grant-write"}))
+    CreateBucketRequest.add_member(:grant_write_acp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GrantWriteACP, location_name: "GrantWriteACP", traits: {"smithy.api#httpHeader" => "x-amz-grant-write-acp"}))
+    CreateBucketRequest.add_member(:object_lock_enabled_for_bucket, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectLockEnabledForBucket, location_name: "ObjectLockEnabledForBucket", traits: {"smithy.api#httpHeader" => "x-amz-bucket-object-lock-enabled"}))
+    CreateBucketRequest.add_member(:object_ownership, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectOwnership, location_name: "ObjectOwnership", traits: {"smithy.api#httpHeader" => "x-amz-object-ownership"}))
+    CreateBucketRequest[:http_payload] = :create_bucket_configuration
+    CreateBucketRequest[:http_payload_member] = CreateBucketRequest.member(:create_bucket_configuration)
+    CreateBucketRequest.type = Types::CreateBucketRequest
+    CreateMultipartUploadOutput.add_member(:abort_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AbortDate, location_name: "AbortDate", traits: {"smithy.api#httpHeader" => "x-amz-abort-date"}))
+    CreateMultipartUploadOutput.add_member(:abort_rule_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AbortRuleId, location_name: "AbortRuleId", traits: {"smithy.api#httpHeader" => "x-amz-abort-rule-id"}))
+    CreateMultipartUploadOutput.add_member(:bucket, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketName, location_name: "Bucket", traits: {"smithy.api#xmlName" => "Bucket"}))
+    CreateMultipartUploadOutput.add_member(:key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectKey, location_name: "Key"))
+    CreateMultipartUploadOutput.add_member(:upload_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MultipartUploadId, location_name: "UploadId"))
+    CreateMultipartUploadOutput.add_member(:server_side_encryption, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServerSideEncryption, location_name: "ServerSideEncryption", traits: {"smithy.api#httpHeader" => "x-amz-server-side-encryption"}))
+    CreateMultipartUploadOutput.add_member(:sse_customer_algorithm, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SSECustomerAlgorithm, location_name: "SSECustomerAlgorithm", traits: {"smithy.api#httpHeader" => "x-amz-server-side-encryption-customer-algorithm"}))
+    CreateMultipartUploadOutput.add_member(:sse_customer_key_md5, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SSECustomerKeyMD5, location_name: "SSECustomerKeyMD5", traits: {"smithy.api#httpHeader" => "x-amz-server-side-encryption-customer-key-MD5"}))
+    CreateMultipartUploadOutput.add_member(:ssekms_key_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SSEKMSKeyId, location_name: "SSEKMSKeyId", traits: {"smithy.api#httpHeader" => "x-amz-server-side-encryption-aws-kms-key-id"}))
+    CreateMultipartUploadOutput.add_member(:ssekms_encryption_context, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SSEKMSEncryptionContext, location_name: "SSEKMSEncryptionContext", traits: {"smithy.api#httpHeader" => "x-amz-server-side-encryption-context"}))
+    CreateMultipartUploadOutput.add_member(:bucket_key_enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketKeyEnabled, location_name: "BucketKeyEnabled", traits: {"smithy.api#httpHeader" => "x-amz-server-side-encryption-bucket-key-enabled"}))
+    CreateMultipartUploadOutput.add_member(:request_charged, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestCharged, location_name: "RequestCharged", traits: {"smithy.api#httpHeader" => "x-amz-request-charged"}))
+    CreateMultipartUploadOutput.add_member(:checksum_algorithm, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChecksumAlgorithm, location_name: "ChecksumAlgorithm", traits: {"smithy.api#httpHeader" => "x-amz-checksum-algorithm"}))
+    CreateMultipartUploadOutput.add_member(:checksum_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChecksumType, location_name: "ChecksumType", traits: {"smithy.api#httpHeader" => "x-amz-checksum-type"}))
+    CreateMultipartUploadOutput.type = Types::CreateMultipartUploadOutput
+    CreateMultipartUploadRequest.add_member(:acl, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectCannedACL, location_name: "ACL", traits: {"smithy.api#httpHeader" => "x-amz-acl"}))
+    CreateMultipartUploadRequest.add_member(:bucket, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketName, location_name: "Bucket", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "Bucket"}}))
+    CreateMultipartUploadRequest.add_member(:cache_control, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CacheControl, location_name: "CacheControl", traits: {"smithy.api#httpHeader" => "Cache-Control"}))
+    CreateMultipartUploadRequest.add_member(:content_disposition, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContentDisposition, location_name: "ContentDisposition", traits: {"smithy.api#httpHeader" => "Content-Disposition"}))
+    CreateMultipartUploadRequest.add_member(:content_encoding, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContentEncoding, location_name: "ContentEncoding", traits: {"smithy.api#httpHeader" => "Content-Encoding"}))
+    CreateMultipartUploadRequest.add_member(:content_language, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContentLanguage, location_name: "ContentLanguage", traits: {"smithy.api#httpHeader" => "Content-Language"}))
+    CreateMultipartUploadRequest.add_member(:content_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContentType, location_name: "ContentType", traits: {"smithy.api#httpHeader" => "Content-Type"}))
+    CreateMultipartUploadRequest.add_member(:expires, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Expires, location_name: "Expires", traits: {"smithy.api#httpHeader" => "Expires"}))
+    CreateMultipartUploadRequest.add_member(:grant_full_control, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GrantFullControl, location_name: "GrantFullControl", traits: {"smithy.api#httpHeader" => "x-amz-grant-full-control"}))
+    CreateMultipartUploadRequest.add_member(:grant_read, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GrantRead, location_name: "GrantRead", traits: {"smithy.api#httpHeader" => "x-amz-grant-read"}))
+    CreateMultipartUploadRequest.add_member(:grant_read_acp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GrantReadACP, location_name: "GrantReadACP", traits: {"smithy.api#httpHeader" => "x-amz-grant-read-acp"}))
+    CreateMultipartUploadRequest.add_member(:grant_write_acp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GrantWriteACP, location_name: "GrantWriteACP", traits: {"smithy.api#httpHeader" => "x-amz-grant-write-acp"}))
+    CreateMultipartUploadRequest.add_member(:key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectKey, location_name: "Key", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "Key"}}))
+    CreateMultipartUploadRequest.add_member(:metadata, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Metadata, location_name: "Metadata", traits: {"smithy.api#httpPrefixHeaders" => "x-amz-meta-"}))
+    CreateMultipartUploadRequest.add_member(:server_side_encryption, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServerSideEncryption, location_name: "ServerSideEncryption", traits: {"smithy.api#httpHeader" => "x-amz-server-side-encryption"}))
+    CreateMultipartUploadRequest.add_member(:storage_class, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StorageClass, location_name: "StorageClass", traits: {"smithy.api#httpHeader" => "x-amz-storage-class"}))
+    CreateMultipartUploadRequest.add_member(:website_redirect_location, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WebsiteRedirectLocation, location_name: "WebsiteRedirectLocation", traits: {"smithy.api#httpHeader" => "x-amz-website-redirect-location"}))
+    CreateMultipartUploadRequest.add_member(:sse_customer_algorithm, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SSECustomerAlgorithm, location_name: "SSECustomerAlgorithm", traits: {"smithy.api#httpHeader" => "x-amz-server-side-encryption-customer-algorithm"}))
+    CreateMultipartUploadRequest.add_member(:sse_customer_key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SSECustomerKey, location_name: "SSECustomerKey", traits: {"smithy.api#httpHeader" => "x-amz-server-side-encryption-customer-key"}))
+    CreateMultipartUploadRequest.add_member(:sse_customer_key_md5, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SSECustomerKeyMD5, location_name: "SSECustomerKeyMD5", traits: {"smithy.api#httpHeader" => "x-amz-server-side-encryption-customer-key-MD5"}))
+    CreateMultipartUploadRequest.add_member(:ssekms_key_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SSEKMSKeyId, location_name: "SSEKMSKeyId", traits: {"smithy.api#httpHeader" => "x-amz-server-side-encryption-aws-kms-key-id"}))
+    CreateMultipartUploadRequest.add_member(:ssekms_encryption_context, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SSEKMSEncryptionContext, location_name: "SSEKMSEncryptionContext", traits: {"smithy.api#httpHeader" => "x-amz-server-side-encryption-context"}))
+    CreateMultipartUploadRequest.add_member(:bucket_key_enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketKeyEnabled, location_name: "BucketKeyEnabled", traits: {"smithy.api#httpHeader" => "x-amz-server-side-encryption-bucket-key-enabled"}))
+    CreateMultipartUploadRequest.add_member(:request_payer, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestPayer, location_name: "RequestPayer", traits: {"smithy.api#httpHeader" => "x-amz-request-payer"}))
+    CreateMultipartUploadRequest.add_member(:tagging, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TaggingHeader, location_name: "Tagging", traits: {"smithy.api#httpHeader" => "x-amz-tagging"}))
+    CreateMultipartUploadRequest.add_member(:object_lock_mode, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectLockMode, location_name: "ObjectLockMode", traits: {"smithy.api#httpHeader" => "x-amz-object-lock-mode"}))
+    CreateMultipartUploadRequest.add_member(:object_lock_retain_until_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectLockRetainUntilDate, location_name: "ObjectLockRetainUntilDate", traits: {"smithy.api#httpHeader" => "x-amz-object-lock-retain-until-date"}))
+    CreateMultipartUploadRequest.add_member(:object_lock_legal_hold_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectLockLegalHoldStatus, location_name: "ObjectLockLegalHoldStatus", traits: {"smithy.api#httpHeader" => "x-amz-object-lock-legal-hold"}))
+    CreateMultipartUploadRequest.add_member(:expected_bucket_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "ExpectedBucketOwner", traits: {"smithy.api#httpHeader" => "x-amz-expected-bucket-owner"}))
+    CreateMultipartUploadRequest.add_member(:checksum_algorithm, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChecksumAlgorithm, location_name: "ChecksumAlgorithm", traits: {"smithy.api#httpHeader" => "x-amz-checksum-algorithm"}))
+    CreateMultipartUploadRequest.add_member(:checksum_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChecksumType, location_name: "ChecksumType", traits: {"smithy.api#httpHeader" => "x-amz-checksum-type"}))
+    CreateMultipartUploadRequest.type = Types::CreateMultipartUploadRequest
+    CreateSessionOutput.add_member(:server_side_encryption, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServerSideEncryption, location_name: "ServerSideEncryption", traits: {"smithy.api#httpHeader" => "x-amz-server-side-encryption"}))
+    CreateSessionOutput.add_member(:ssekms_key_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SSEKMSKeyId, location_name: "SSEKMSKeyId", traits: {"smithy.api#httpHeader" => "x-amz-server-side-encryption-aws-kms-key-id"}))
+    CreateSessionOutput.add_member(:ssekms_encryption_context, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SSEKMSEncryptionContext, location_name: "SSEKMSEncryptionContext", traits: {"smithy.api#httpHeader" => "x-amz-server-side-encryption-context"}))
+    CreateSessionOutput.add_member(:bucket_key_enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketKeyEnabled, location_name: "BucketKeyEnabled", traits: {"smithy.api#httpHeader" => "x-amz-server-side-encryption-bucket-key-enabled"}))
+    CreateSessionOutput.add_member(:credentials, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SessionCredentials, location_name: "Credentials", traits: {"smithy.api#required" => {}, "smithy.api#xmlName" => "Credentials"}))
+    CreateSessionOutput.type = Types::CreateSessionOutput
+    CreateSessionRequest.add_member(:session_mode, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SessionMode, location_name: "SessionMode", traits: {"smithy.api#httpHeader" => "x-amz-create-session-mode"}))
+    CreateSessionRequest.add_member(:bucket, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketName, location_name: "Bucket", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "Bucket"}}))
+    CreateSessionRequest.add_member(:server_side_encryption, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServerSideEncryption, location_name: "ServerSideEncryption", traits: {"smithy.api#httpHeader" => "x-amz-server-side-encryption"}))
+    CreateSessionRequest.add_member(:ssekms_key_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SSEKMSKeyId, location_name: "SSEKMSKeyId", traits: {"smithy.api#httpHeader" => "x-amz-server-side-encryption-aws-kms-key-id"}))
+    CreateSessionRequest.add_member(:ssekms_encryption_context, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SSEKMSEncryptionContext, location_name: "SSEKMSEncryptionContext", traits: {"smithy.api#httpHeader" => "x-amz-server-side-encryption-context"}))
+    CreateSessionRequest.add_member(:bucket_key_enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketKeyEnabled, location_name: "BucketKeyEnabled", traits: {"smithy.api#httpHeader" => "x-amz-server-side-encryption-bucket-key-enabled"}))
+    CreateSessionRequest.type = Types::CreateSessionRequest
+    DataRedundancy.add_member(:single_availability_zone, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SingleAvailabilityZone", traits: {"smithy.api#enumValue" => "SingleAvailabilityZone"}))
+    DataRedundancy.add_member(:single_local_zone, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SingleLocalZone", traits: {"smithy.api#enumValue" => "SingleLocalZone"}))
+    DefaultRetention.add_member(:mode, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectLockRetentionMode, location_name: "Mode"))
+    DefaultRetention.add_member(:days, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Days, location_name: "Days"))
+    DefaultRetention.add_member(:years, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Years, location_name: "Years"))
+    DefaultRetention.type = Types::DefaultRetention
+    Delete.add_member(:objects, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectIdentifierList, location_name: "Objects", traits: {"smithy.api#required" => {}, "smithy.api#xmlFlattened" => {}, "smithy.api#xmlName" => "Object"}))
+    Delete.add_member(:quiet, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Quiet, location_name: "Quiet"))
+    Delete.type = Types::Delete
+    DeleteBucketAnalyticsConfigurationRequest.add_member(:bucket, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketName, location_name: "Bucket", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "Bucket"}}))
+    DeleteBucketAnalyticsConfigurationRequest.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AnalyticsId, location_name: "Id", traits: {"smithy.api#httpQuery" => "id", "smithy.api#required" => {}}))
+    DeleteBucketAnalyticsConfigurationRequest.add_member(:expected_bucket_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "ExpectedBucketOwner", traits: {"smithy.api#httpHeader" => "x-amz-expected-bucket-owner"}))
+    DeleteBucketAnalyticsConfigurationRequest.type = Types::DeleteBucketAnalyticsConfigurationRequest
+    DeleteBucketCorsRequest.add_member(:bucket, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketName, location_name: "Bucket", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "Bucket"}}))
+    DeleteBucketCorsRequest.add_member(:expected_bucket_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "ExpectedBucketOwner", traits: {"smithy.api#httpHeader" => "x-amz-expected-bucket-owner"}))
+    DeleteBucketCorsRequest.type = Types::DeleteBucketCorsRequest
+    DeleteBucketEncryptionRequest.add_member(:bucket, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketName, location_name: "Bucket", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "Bucket"}}))
+    DeleteBucketEncryptionRequest.add_member(:expected_bucket_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "ExpectedBucketOwner", traits: {"smithy.api#httpHeader" => "x-amz-expected-bucket-owner"}))
+    DeleteBucketEncryptionRequest.type = Types::DeleteBucketEncryptionRequest
+    DeleteBucketIntelligentTieringConfigurationRequest.add_member(:bucket, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketName, location_name: "Bucket", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "Bucket"}}))
+    DeleteBucketIntelligentTieringConfigurationRequest.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IntelligentTieringId, location_name: "Id", traits: {"smithy.api#httpQuery" => "id", "smithy.api#required" => {}}))
+    DeleteBucketIntelligentTieringConfigurationRequest.add_member(:expected_bucket_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "ExpectedBucketOwner", traits: {"smithy.api#httpHeader" => "x-amz-expected-bucket-owner"}))
+    DeleteBucketIntelligentTieringConfigurationRequest.type = Types::DeleteBucketIntelligentTieringConfigurationRequest
+    DeleteBucketInventoryConfigurationRequest.add_member(:bucket, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketName, location_name: "Bucket", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "Bucket"}}))
+    DeleteBucketInventoryConfigurationRequest.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InventoryId, location_name: "Id", traits: {"smithy.api#httpQuery" => "id", "smithy.api#required" => {}}))
+    DeleteBucketInventoryConfigurationRequest.add_member(:expected_bucket_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "ExpectedBucketOwner", traits: {"smithy.api#httpHeader" => "x-amz-expected-bucket-owner"}))
+    DeleteBucketInventoryConfigurationRequest.type = Types::DeleteBucketInventoryConfigurationRequest
+    DeleteBucketLifecycleRequest.add_member(:bucket, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketName, location_name: "Bucket", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "Bucket"}}))
+    DeleteBucketLifecycleRequest.add_member(:expected_bucket_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "ExpectedBucketOwner", traits: {"smithy.api#httpHeader" => "x-amz-expected-bucket-owner"}))
+    DeleteBucketLifecycleRequest.type = Types::DeleteBucketLifecycleRequest
+    DeleteBucketMetadataConfigurationRequest.add_member(:bucket, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketName, location_name: "Bucket", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "Bucket"}}))
+    DeleteBucketMetadataConfigurationRequest.add_member(:expected_bucket_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "ExpectedBucketOwner", traits: {"smithy.api#httpHeader" => "x-amz-expected-bucket-owner"}))
+    DeleteBucketMetadataConfigurationRequest.type = Types::DeleteBucketMetadataConfigurationRequest
+    DeleteBucketMetadataTableConfigurationRequest.add_member(:bucket, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketName, location_name: "Bucket", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "Bucket"}}))
+    DeleteBucketMetadataTableConfigurationRequest.add_member(:expected_bucket_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "ExpectedBucketOwner", traits: {"smithy.api#httpHeader" => "x-amz-expected-bucket-owner"}))
+    DeleteBucketMetadataTableConfigurationRequest.type = Types::DeleteBucketMetadataTableConfigurationRequest
+    DeleteBucketMetricsConfigurationRequest.add_member(:bucket, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketName, location_name: "Bucket", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "Bucket"}}))
+    DeleteBucketMetricsConfigurationRequest.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MetricsId, location_name: "Id", traits: {"smithy.api#httpQuery" => "id", "smithy.api#required" => {}}))
+    DeleteBucketMetricsConfigurationRequest.add_member(:expected_bucket_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "ExpectedBucketOwner", traits: {"smithy.api#httpHeader" => "x-amz-expected-bucket-owner"}))
+    DeleteBucketMetricsConfigurationRequest.type = Types::DeleteBucketMetricsConfigurationRequest
+    DeleteBucketOwnershipControlsRequest.add_member(:bucket, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketName, location_name: "Bucket", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "Bucket"}}))
+    DeleteBucketOwnershipControlsRequest.add_member(:expected_bucket_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "ExpectedBucketOwner", traits: {"smithy.api#httpHeader" => "x-amz-expected-bucket-owner"}))
+    DeleteBucketOwnershipControlsRequest.type = Types::DeleteBucketOwnershipControlsRequest
+    DeleteBucketPolicyRequest.add_member(:bucket, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketName, location_name: "Bucket", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "Bucket"}}))
+    DeleteBucketPolicyRequest.add_member(:expected_bucket_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "ExpectedBucketOwner", traits: {"smithy.api#httpHeader" => "x-amz-expected-bucket-owner"}))
+    DeleteBucketPolicyRequest.type = Types::DeleteBucketPolicyRequest
+    DeleteBucketReplicationRequest.add_member(:bucket, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketName, location_name: "Bucket", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "Bucket"}}))
+    DeleteBucketReplicationRequest.add_member(:expected_bucket_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "ExpectedBucketOwner", traits: {"smithy.api#httpHeader" => "x-amz-expected-bucket-owner"}))
+    DeleteBucketReplicationRequest.type = Types::DeleteBucketReplicationRequest
+    DeleteBucketRequest.add_member(:bucket, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketName, location_name: "Bucket", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "Bucket"}}))
+    DeleteBucketRequest.add_member(:expected_bucket_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "ExpectedBucketOwner", traits: {"smithy.api#httpHeader" => "x-amz-expected-bucket-owner"}))
+    DeleteBucketRequest.type = Types::DeleteBucketRequest
+    DeleteBucketTaggingRequest.add_member(:bucket, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketName, location_name: "Bucket", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "Bucket"}}))
+    DeleteBucketTaggingRequest.add_member(:expected_bucket_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "ExpectedBucketOwner", traits: {"smithy.api#httpHeader" => "x-amz-expected-bucket-owner"}))
+    DeleteBucketTaggingRequest.type = Types::DeleteBucketTaggingRequest
+    DeleteBucketWebsiteRequest.add_member(:bucket, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketName, location_name: "Bucket", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "Bucket"}}))
+    DeleteBucketWebsiteRequest.add_member(:expected_bucket_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "ExpectedBucketOwner", traits: {"smithy.api#httpHeader" => "x-amz-expected-bucket-owner"}))
+    DeleteBucketWebsiteRequest.type = Types::DeleteBucketWebsiteRequest
+    DeleteMarkerEntry.add_member(:owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Owner, location_name: "Owner"))
+    DeleteMarkerEntry.add_member(:key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectKey, location_name: "Key"))
+    DeleteMarkerEntry.add_member(:version_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectVersionId, location_name: "VersionId"))
+    DeleteMarkerEntry.add_member(:is_latest, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IsLatest, location_name: "IsLatest"))
+    DeleteMarkerEntry.add_member(:last_modified, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LastModified, location_name: "LastModified"))
+    DeleteMarkerEntry.type = Types::DeleteMarkerEntry
+    DeleteMarkerReplication.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteMarkerReplicationStatus, location_name: "Status"))
+    DeleteMarkerReplication.type = Types::DeleteMarkerReplication
+    DeleteMarkerReplicationStatus.add_member(:enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Enabled", traits: {"smithy.api#enumValue" => "Enabled"}))
+    DeleteMarkerReplicationStatus.add_member(:disabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Disabled", traits: {"smithy.api#enumValue" => "Disabled"}))
+    DeleteMarkers.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteMarkerEntry)
+    DeleteObjectOutput.add_member(:delete_marker, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteMarker, location_name: "DeleteMarker", traits: {"smithy.api#httpHeader" => "x-amz-delete-marker"}))
+    DeleteObjectOutput.add_member(:version_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectVersionId, location_name: "VersionId", traits: {"smithy.api#httpHeader" => "x-amz-version-id"}))
+    DeleteObjectOutput.add_member(:request_charged, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestCharged, location_name: "RequestCharged", traits: {"smithy.api#httpHeader" => "x-amz-request-charged"}))
+    DeleteObjectOutput.type = Types::DeleteObjectOutput
+    DeleteObjectRequest.add_member(:bucket, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketName, location_name: "Bucket", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "Bucket"}}))
+    DeleteObjectRequest.add_member(:key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectKey, location_name: "Key", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "Key"}}))
+    DeleteObjectRequest.add_member(:mfa, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MFA, location_name: "MFA", traits: {"smithy.api#httpHeader" => "x-amz-mfa"}))
+    DeleteObjectRequest.add_member(:version_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectVersionId, location_name: "VersionId", traits: {"smithy.api#httpQuery" => "versionId"}))
+    DeleteObjectRequest.add_member(:request_payer, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestPayer, location_name: "RequestPayer", traits: {"smithy.api#httpHeader" => "x-amz-request-payer"}))
+    DeleteObjectRequest.add_member(:bypass_governance_retention, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BypassGovernanceRetention, location_name: "BypassGovernanceRetention", traits: {"smithy.api#httpHeader" => "x-amz-bypass-governance-retention"}))
+    DeleteObjectRequest.add_member(:expected_bucket_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "ExpectedBucketOwner", traits: {"smithy.api#httpHeader" => "x-amz-expected-bucket-owner"}))
+    DeleteObjectRequest.add_member(:if_match, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IfMatch, location_name: "IfMatch", traits: {"smithy.api#httpHeader" => "If-Match"}))
+    DeleteObjectRequest.add_member(:if_match_last_modified_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IfMatchLastModifiedTime, location_name: "IfMatchLastModifiedTime", traits: {"smithy.api#httpHeader" => "x-amz-if-match-last-modified-time"}))
+    DeleteObjectRequest.add_member(:if_match_size, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IfMatchSize, location_name: "IfMatchSize", traits: {"smithy.api#httpHeader" => "x-amz-if-match-size"}))
+    DeleteObjectRequest.type = Types::DeleteObjectRequest
+    DeleteObjectTaggingOutput.add_member(:version_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectVersionId, location_name: "VersionId", traits: {"smithy.api#httpHeader" => "x-amz-version-id"}))
+    DeleteObjectTaggingOutput.type = Types::DeleteObjectTaggingOutput
+    DeleteObjectTaggingRequest.add_member(:bucket, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketName, location_name: "Bucket", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "Bucket"}}))
+    DeleteObjectTaggingRequest.add_member(:key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectKey, location_name: "Key", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteObjectTaggingRequest.add_member(:version_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectVersionId, location_name: "VersionId", traits: {"smithy.api#httpQuery" => "versionId"}))
+    DeleteObjectTaggingRequest.add_member(:expected_bucket_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "ExpectedBucketOwner", traits: {"smithy.api#httpHeader" => "x-amz-expected-bucket-owner"}))
+    DeleteObjectTaggingRequest.type = Types::DeleteObjectTaggingRequest
+    DeleteObjectsOutput.add_member(:deleted, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeletedObjects, location_name: "Deleted", traits: {"smithy.api#xmlFlattened" => {}}))
+    DeleteObjectsOutput.add_member(:request_charged, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestCharged, location_name: "RequestCharged", traits: {"smithy.api#httpHeader" => "x-amz-request-charged"}))
+    DeleteObjectsOutput.add_member(:errors, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Errors, location_name: "Errors", traits: {"smithy.api#xmlFlattened" => {}, "smithy.api#xmlName" => "Error"}))
+    DeleteObjectsOutput.type = Types::DeleteObjectsOutput
+    DeleteObjectsRequest.add_member(:bucket, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketName, location_name: "Bucket", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "Bucket"}}))
+    DeleteObjectsRequest.add_member(:delete, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Delete, location_name: "Delete", traits: {"smithy.api#httpPayload" => {}, "smithy.api#required" => {}, "smithy.api#xmlName" => "Delete"}))
+    DeleteObjectsRequest.add_member(:mfa, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MFA, location_name: "MFA", traits: {"smithy.api#httpHeader" => "x-amz-mfa"}))
+    DeleteObjectsRequest.add_member(:request_payer, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestPayer, location_name: "RequestPayer", traits: {"smithy.api#httpHeader" => "x-amz-request-payer"}))
+    DeleteObjectsRequest.add_member(:bypass_governance_retention, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BypassGovernanceRetention, location_name: "BypassGovernanceRetention", traits: {"smithy.api#httpHeader" => "x-amz-bypass-governance-retention"}))
+    DeleteObjectsRequest.add_member(:expected_bucket_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "ExpectedBucketOwner", traits: {"smithy.api#httpHeader" => "x-amz-expected-bucket-owner"}))
+    DeleteObjectsRequest.add_member(:checksum_algorithm, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChecksumAlgorithm, location_name: "ChecksumAlgorithm", traits: {"smithy.api#httpHeader" => "x-amz-sdk-checksum-algorithm"}))
+    DeleteObjectsRequest[:http_payload] = :delete
+    DeleteObjectsRequest[:http_payload_member] = DeleteObjectsRequest.member(:delete)
+    DeleteObjectsRequest.type = Types::DeleteObjectsRequest
+    DeletePublicAccessBlockRequest.add_member(:bucket, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketName, location_name: "Bucket", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "Bucket"}}))
+    DeletePublicAccessBlockRequest.add_member(:expected_bucket_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "ExpectedBucketOwner", traits: {"smithy.api#httpHeader" => "x-amz-expected-bucket-owner"}))
+    DeletePublicAccessBlockRequest.type = Types::DeletePublicAccessBlockRequest
+    DeletedObject.add_member(:key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectKey, location_name: "Key"))
+    DeletedObject.add_member(:version_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectVersionId, location_name: "VersionId"))
+    DeletedObject.add_member(:delete_marker, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteMarker, location_name: "DeleteMarker"))
+    DeletedObject.add_member(:delete_marker_version_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteMarkerVersionId, location_name: "DeleteMarkerVersionId"))
+    DeletedObject.type = Types::DeletedObject
+    DeletedObjects.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeletedObject)
+    Destination.add_member(:bucket, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketName, location_name: "Bucket", traits: {"smithy.api#required" => {}}))
+    Destination.add_member(:account, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "Account"))
+    Destination.add_member(:storage_class, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StorageClass, location_name: "StorageClass"))
+    Destination.add_member(:access_control_translation, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessControlTranslation, location_name: "AccessControlTranslation"))
+    Destination.add_member(:encryption_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionConfiguration, location_name: "EncryptionConfiguration"))
+    Destination.add_member(:replication_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReplicationTime, location_name: "ReplicationTime"))
+    Destination.add_member(:metrics, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Metrics, location_name: "Metrics"))
+    Destination.type = Types::Destination
+    DestinationResult.add_member(:table_bucket_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3TablesBucketType, location_name: "TableBucketType"))
+    DestinationResult.add_member(:table_bucket_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3TablesBucketArn, location_name: "TableBucketArn"))
+    DestinationResult.add_member(:table_namespace, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3TablesNamespace, location_name: "TableNamespace"))
+    DestinationResult.type = Types::DestinationResult
+    EncodingType.add_member(:url, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "url", traits: {"smithy.api#enumValue" => "url"}))
+    Encryption.add_member(:encryption_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServerSideEncryption, location_name: "EncryptionType", traits: {"smithy.api#required" => {}}))
+    Encryption.add_member(:kms_key_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SSEKMSKeyId, location_name: "KMSKeyId"))
+    Encryption.add_member(:kms_context, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KMSContext, location_name: "KMSContext"))
+    Encryption.type = Types::Encryption
+    EncryptionConfiguration.add_member(:replica_kms_key_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReplicaKmsKeyID, location_name: "ReplicaKmsKeyID"))
+    EncryptionConfiguration.type = Types::EncryptionConfiguration
+    EncryptionTypeMismatch.type = Types::EncryptionTypeMismatch
+    EndEvent.type = Types::EndEvent
+    Error.add_member(:key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectKey, location_name: "Key"))
+    Error.add_member(:version_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectVersionId, location_name: "VersionId"))
+    Error.add_member(:code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Code, location_name: "Code"))
+    Error.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
+    Error.type = Types::Error
+    ErrorDetails.add_member(:error_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorCode, location_name: "ErrorCode"))
+    ErrorDetails.add_member(:error_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "ErrorMessage"))
+    ErrorDetails.type = Types::ErrorDetails
+    ErrorDocument.add_member(:key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectKey, location_name: "Key", traits: {"smithy.api#required" => {}}))
+    ErrorDocument.type = Types::ErrorDocument
+    Errors.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Error)
+    Event.add_member(:s3_reduced_redundancy_lost_object, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "s3_ReducedRedundancyLostObject", traits: {"smithy.api#enumValue" => "s3:ReducedRedundancyLostObject"}))
+    Event.add_member(:s3_object_created_, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "s3_ObjectCreated_", traits: {"smithy.api#enumValue" => "s3:ObjectCreated:*"}))
+    Event.add_member(:s3_object_created_put, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "s3_ObjectCreated_Put", traits: {"smithy.api#enumValue" => "s3:ObjectCreated:Put"}))
+    Event.add_member(:s3_object_created_post, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "s3_ObjectCreated_Post", traits: {"smithy.api#enumValue" => "s3:ObjectCreated:Post"}))
+    Event.add_member(:s3_object_created_copy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "s3_ObjectCreated_Copy", traits: {"smithy.api#enumValue" => "s3:ObjectCreated:Copy"}))
+    Event.add_member(:s3_object_created_complete_multipart_upload, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "s3_ObjectCreated_CompleteMultipartUpload", traits: {"smithy.api#enumValue" => "s3:ObjectCreated:CompleteMultipartUpload"}))
+    Event.add_member(:s3_object_removed_, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "s3_ObjectRemoved_", traits: {"smithy.api#enumValue" => "s3:ObjectRemoved:*"}))
+    Event.add_member(:s3_object_removed_delete, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "s3_ObjectRemoved_Delete", traits: {"smithy.api#enumValue" => "s3:ObjectRemoved:Delete"}))
+    Event.add_member(:s3_object_removed_delete_marker_created, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "s3_ObjectRemoved_DeleteMarkerCreated", traits: {"smithy.api#enumValue" => "s3:ObjectRemoved:DeleteMarkerCreated"}))
+    Event.add_member(:s3_object_restore_, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "s3_ObjectRestore_", traits: {"smithy.api#enumValue" => "s3:ObjectRestore:*"}))
+    Event.add_member(:s3_object_restore_post, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "s3_ObjectRestore_Post", traits: {"smithy.api#enumValue" => "s3:ObjectRestore:Post"}))
+    Event.add_member(:s3_object_restore_completed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "s3_ObjectRestore_Completed", traits: {"smithy.api#enumValue" => "s3:ObjectRestore:Completed"}))
+    Event.add_member(:s3_replication_, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "s3_Replication_", traits: {"smithy.api#enumValue" => "s3:Replication:*"}))
+    Event.add_member(:s3_replication_operation_failed_replication, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "s3_Replication_OperationFailedReplication", traits: {"smithy.api#enumValue" => "s3:Replication:OperationFailedReplication"}))
+    Event.add_member(:s3_replication_operation_not_tracked, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "s3_Replication_OperationNotTracked", traits: {"smithy.api#enumValue" => "s3:Replication:OperationNotTracked"}))
+    Event.add_member(:s3_replication_operation_missed_threshold, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "s3_Replication_OperationMissedThreshold", traits: {"smithy.api#enumValue" => "s3:Replication:OperationMissedThreshold"}))
+    Event.add_member(:s3_replication_operation_replicated_after_threshold, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "s3_Replication_OperationReplicatedAfterThreshold", traits: {"smithy.api#enumValue" => "s3:Replication:OperationReplicatedAfterThreshold"}))
+    Event.add_member(:s3_object_restore_delete, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "s3_ObjectRestore_Delete", traits: {"smithy.api#enumValue" => "s3:ObjectRestore:Delete"}))
+    Event.add_member(:s3_lifecycle_transition, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "s3_LifecycleTransition", traits: {"smithy.api#enumValue" => "s3:LifecycleTransition"}))
+    Event.add_member(:s3_intelligent_tiering, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "s3_IntelligentTiering", traits: {"smithy.api#enumValue" => "s3:IntelligentTiering"}))
+    Event.add_member(:s3_object_acl_put, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "s3_ObjectAcl_Put", traits: {"smithy.api#enumValue" => "s3:ObjectAcl:Put"}))
+    Event.add_member(:s3_lifecycle_expiration_, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "s3_LifecycleExpiration_", traits: {"smithy.api#enumValue" => "s3:LifecycleExpiration:*"}))
+    Event.add_member(:s3_lifecycle_expiration_delete, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "s3_LifecycleExpiration_Delete", traits: {"smithy.api#enumValue" => "s3:LifecycleExpiration:Delete"}))
+    Event.add_member(:s3_lifecycle_expiration_delete_marker_created, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "s3_LifecycleExpiration_DeleteMarkerCreated", traits: {"smithy.api#enumValue" => "s3:LifecycleExpiration:DeleteMarkerCreated"}))
+    Event.add_member(:s3_object_tagging_, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "s3_ObjectTagging_", traits: {"smithy.api#enumValue" => "s3:ObjectTagging:*"}))
+    Event.add_member(:s3_object_tagging_put, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "s3_ObjectTagging_Put", traits: {"smithy.api#enumValue" => "s3:ObjectTagging:Put"}))
+    Event.add_member(:s3_object_tagging_delete, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "s3_ObjectTagging_Delete", traits: {"smithy.api#enumValue" => "s3:ObjectTagging:Delete"}))
+    EventBridgeConfiguration.type = Types::EventBridgeConfiguration
+    EventList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Event)
+    ExistingObjectReplication.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExistingObjectReplicationStatus, location_name: "Status", traits: {"smithy.api#required" => {}}))
+    ExistingObjectReplication.type = Types::ExistingObjectReplication
+    ExistingObjectReplicationStatus.add_member(:enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Enabled", traits: {"smithy.api#enumValue" => "Enabled"}))
+    ExistingObjectReplicationStatus.add_member(:disabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Disabled", traits: {"smithy.api#enumValue" => "Disabled"}))
+    ExpirationState.add_member(:enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ENABLED", traits: {"smithy.api#enumValue" => "ENABLED"}))
+    ExpirationState.add_member(:disabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
+    ExpirationStatus.add_member(:enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Enabled", traits: {"smithy.api#enumValue" => "Enabled"}))
+    ExpirationStatus.add_member(:disabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Disabled", traits: {"smithy.api#enumValue" => "Disabled"}))
+    ExposeHeaders.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExposeHeader)
+    ExpressionType.add_member(:sql, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SQL", traits: {"smithy.api#enumValue" => "SQL"}))
+    FileHeaderInfo.add_member(:use, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "USE", traits: {"smithy.api#enumValue" => "USE"}))
+    FileHeaderInfo.add_member(:ignore, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IGNORE", traits: {"smithy.api#enumValue" => "IGNORE"}))
+    FileHeaderInfo.add_member(:none, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "NONE", traits: {"smithy.api#enumValue" => "NONE"}))
+    FilterRule.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FilterRuleName, location_name: "Name"))
+    FilterRule.add_member(:value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FilterRuleValue, location_name: "Value"))
+    FilterRule.type = Types::FilterRule
+    FilterRuleList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: FilterRule)
+    FilterRuleName.add_member(:prefix, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "prefix", traits: {"smithy.api#enumValue" => "prefix"}))
+    FilterRuleName.add_member(:suffix, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "suffix", traits: {"smithy.api#enumValue" => "suffix"}))
+    GetBucketAccelerateConfigurationOutput.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketAccelerateStatus, location_name: "Status"))
+    GetBucketAccelerateConfigurationOutput.add_member(:request_charged, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestCharged, location_name: "RequestCharged", traits: {"smithy.api#httpHeader" => "x-amz-request-charged"}))
+    GetBucketAccelerateConfigurationOutput.type = Types::GetBucketAccelerateConfigurationOutput
+    GetBucketAccelerateConfigurationRequest.add_member(:bucket, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketName, location_name: "Bucket", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "Bucket"}}))
+    GetBucketAccelerateConfigurationRequest.add_member(:expected_bucket_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "ExpectedBucketOwner", traits: {"smithy.api#httpHeader" => "x-amz-expected-bucket-owner"}))
+    GetBucketAccelerateConfigurationRequest.add_member(:request_payer, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestPayer, location_name: "RequestPayer", traits: {"smithy.api#httpHeader" => "x-amz-request-payer"}))
+    GetBucketAccelerateConfigurationRequest.type = Types::GetBucketAccelerateConfigurationRequest
+    GetBucketAclOutput.add_member(:owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Owner, location_name: "Owner"))
+    GetBucketAclOutput.add_member(:grants, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Grants, location_name: "Grants", traits: {"smithy.api#xmlName" => "AccessControlList"}))
+    GetBucketAclOutput.type = Types::GetBucketAclOutput
+    GetBucketAclRequest.add_member(:bucket, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketName, location_name: "Bucket", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "Bucket"}}))
+    GetBucketAclRequest.add_member(:expected_bucket_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "ExpectedBucketOwner", traits: {"smithy.api#httpHeader" => "x-amz-expected-bucket-owner"}))
+    GetBucketAclRequest.type = Types::GetBucketAclRequest
+    GetBucketAnalyticsConfigurationOutput.add_member(:analytics_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AnalyticsConfiguration, location_name: "AnalyticsConfiguration", traits: {"smithy.api#httpPayload" => {}}))
+    GetBucketAnalyticsConfigurationOutput[:http_payload] = :analytics_configuration
+    GetBucketAnalyticsConfigurationOutput[:http_payload_member] = GetBucketAnalyticsConfigurationOutput.member(:analytics_configuration)
+    GetBucketAnalyticsConfigurationOutput.type = Types::GetBucketAnalyticsConfigurationOutput
+    GetBucketAnalyticsConfigurationRequest.add_member(:bucket, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketName, location_name: "Bucket", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "Bucket"}}))
+    GetBucketAnalyticsConfigurationRequest.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AnalyticsId, location_name: "Id", traits: {"smithy.api#httpQuery" => "id", "smithy.api#required" => {}}))
+    GetBucketAnalyticsConfigurationRequest.add_member(:expected_bucket_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "ExpectedBucketOwner", traits: {"smithy.api#httpHeader" => "x-amz-expected-bucket-owner"}))
+    GetBucketAnalyticsConfigurationRequest.type = Types::GetBucketAnalyticsConfigurationRequest
+    GetBucketCorsOutput.add_member(:cors_rules, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CORSRules, location_name: "CORSRules", traits: {"smithy.api#xmlFlattened" => {}, "smithy.api#xmlName" => "CORSRule"}))
+    GetBucketCorsOutput.type = Types::GetBucketCorsOutput
+    GetBucketCorsRequest.add_member(:bucket, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketName, location_name: "Bucket", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "Bucket"}}))
+    GetBucketCorsRequest.add_member(:expected_bucket_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "ExpectedBucketOwner", traits: {"smithy.api#httpHeader" => "x-amz-expected-bucket-owner"}))
+    GetBucketCorsRequest.type = Types::GetBucketCorsRequest
+    GetBucketEncryptionOutput.add_member(:server_side_encryption_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServerSideEncryptionConfiguration, location_name: "ServerSideEncryptionConfiguration", traits: {"smithy.api#httpPayload" => {}}))
+    GetBucketEncryptionOutput[:http_payload] = :server_side_encryption_configuration
+    GetBucketEncryptionOutput[:http_payload_member] = GetBucketEncryptionOutput.member(:server_side_encryption_configuration)
+    GetBucketEncryptionOutput.type = Types::GetBucketEncryptionOutput
+    GetBucketEncryptionRequest.add_member(:bucket, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketName, location_name: "Bucket", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "Bucket"}}))
+    GetBucketEncryptionRequest.add_member(:expected_bucket_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "ExpectedBucketOwner", traits: {"smithy.api#httpHeader" => "x-amz-expected-bucket-owner"}))
+    GetBucketEncryptionRequest.type = Types::GetBucketEncryptionRequest
+    GetBucketIntelligentTieringConfigurationOutput.add_member(:intelligent_tiering_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IntelligentTieringConfiguration, location_name: "IntelligentTieringConfiguration", traits: {"smithy.api#httpPayload" => {}}))
+    GetBucketIntelligentTieringConfigurationOutput[:http_payload] = :intelligent_tiering_configuration
+    GetBucketIntelligentTieringConfigurationOutput[:http_payload_member] = GetBucketIntelligentTieringConfigurationOutput.member(:intelligent_tiering_configuration)
+    GetBucketIntelligentTieringConfigurationOutput.type = Types::GetBucketIntelligentTieringConfigurationOutput
+    GetBucketIntelligentTieringConfigurationRequest.add_member(:bucket, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketName, location_name: "Bucket", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "Bucket"}}))
+    GetBucketIntelligentTieringConfigurationRequest.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IntelligentTieringId, location_name: "Id", traits: {"smithy.api#httpQuery" => "id", "smithy.api#required" => {}}))
+    GetBucketIntelligentTieringConfigurationRequest.add_member(:expected_bucket_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "ExpectedBucketOwner", traits: {"smithy.api#httpHeader" => "x-amz-expected-bucket-owner"}))
+    GetBucketIntelligentTieringConfigurationRequest.type = Types::GetBucketIntelligentTieringConfigurationRequest
+    GetBucketInventoryConfigurationOutput.add_member(:inventory_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InventoryConfiguration, location_name: "InventoryConfiguration", traits: {"smithy.api#httpPayload" => {}}))
+    GetBucketInventoryConfigurationOutput[:http_payload] = :inventory_configuration
+    GetBucketInventoryConfigurationOutput[:http_payload_member] = GetBucketInventoryConfigurationOutput.member(:inventory_configuration)
+    GetBucketInventoryConfigurationOutput.type = Types::GetBucketInventoryConfigurationOutput
+    GetBucketInventoryConfigurationRequest.add_member(:bucket, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketName, location_name: "Bucket", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "Bucket"}}))
+    GetBucketInventoryConfigurationRequest.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InventoryId, location_name: "Id", traits: {"smithy.api#httpQuery" => "id", "smithy.api#required" => {}}))
+    GetBucketInventoryConfigurationRequest.add_member(:expected_bucket_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "ExpectedBucketOwner", traits: {"smithy.api#httpHeader" => "x-amz-expected-bucket-owner"}))
+    GetBucketInventoryConfigurationRequest.type = Types::GetBucketInventoryConfigurationRequest
+    GetBucketLifecycleConfigurationOutput.add_member(:rules, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LifecycleRules, location_name: "Rules", traits: {"smithy.api#xmlFlattened" => {}, "smithy.api#xmlName" => "Rule"}))
+    GetBucketLifecycleConfigurationOutput.add_member(:transition_default_minimum_object_size, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TransitionDefaultMinimumObjectSize, location_name: "TransitionDefaultMinimumObjectSize", traits: {"smithy.api#httpHeader" => "x-amz-transition-default-minimum-object-size"}))
+    GetBucketLifecycleConfigurationOutput.type = Types::GetBucketLifecycleConfigurationOutput
+    GetBucketLifecycleConfigurationRequest.add_member(:bucket, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketName, location_name: "Bucket", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "Bucket"}}))
+    GetBucketLifecycleConfigurationRequest.add_member(:expected_bucket_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "ExpectedBucketOwner", traits: {"smithy.api#httpHeader" => "x-amz-expected-bucket-owner"}))
+    GetBucketLifecycleConfigurationRequest.type = Types::GetBucketLifecycleConfigurationRequest
+    GetBucketLocationOutput.add_member(:location_constraint, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketLocationConstraint, location_name: "LocationConstraint"))
+    GetBucketLocationOutput.type = Types::GetBucketLocationOutput
+    GetBucketLocationRequest.add_member(:bucket, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketName, location_name: "Bucket", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "Bucket"}}))
+    GetBucketLocationRequest.add_member(:expected_bucket_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "ExpectedBucketOwner", traits: {"smithy.api#httpHeader" => "x-amz-expected-bucket-owner"}))
+    GetBucketLocationRequest.type = Types::GetBucketLocationRequest
+    GetBucketLoggingOutput.add_member(:logging_enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LoggingEnabled, location_name: "LoggingEnabled"))
+    GetBucketLoggingOutput.type = Types::GetBucketLoggingOutput
+    GetBucketLoggingRequest.add_member(:bucket, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketName, location_name: "Bucket", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "Bucket"}}))
+    GetBucketLoggingRequest.add_member(:expected_bucket_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "ExpectedBucketOwner", traits: {"smithy.api#httpHeader" => "x-amz-expected-bucket-owner"}))
+    GetBucketLoggingRequest.type = Types::GetBucketLoggingRequest
+    GetBucketMetadataConfigurationOutput.add_member(:get_bucket_metadata_configuration_result, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetBucketMetadataConfigurationResult, location_name: "GetBucketMetadataConfigurationResult", traits: {"smithy.api#httpPayload" => {}}))
+    GetBucketMetadataConfigurationOutput[:http_payload] = :get_bucket_metadata_configuration_result
+    GetBucketMetadataConfigurationOutput[:http_payload_member] = GetBucketMetadataConfigurationOutput.member(:get_bucket_metadata_configuration_result)
+    GetBucketMetadataConfigurationOutput.type = Types::GetBucketMetadataConfigurationOutput
+    GetBucketMetadataConfigurationRequest.add_member(:bucket, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketName, location_name: "Bucket", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "Bucket"}}))
+    GetBucketMetadataConfigurationRequest.add_member(:expected_bucket_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "ExpectedBucketOwner", traits: {"smithy.api#httpHeader" => "x-amz-expected-bucket-owner"}))
+    GetBucketMetadataConfigurationRequest.type = Types::GetBucketMetadataConfigurationRequest
+    GetBucketMetadataConfigurationResult.add_member(:metadata_configuration_result, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MetadataConfigurationResult, location_name: "MetadataConfigurationResult", traits: {"smithy.api#required" => {}}))
+    GetBucketMetadataConfigurationResult.type = Types::GetBucketMetadataConfigurationResult
+    GetBucketMetadataTableConfigurationOutput.add_member(:get_bucket_metadata_table_configuration_result, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetBucketMetadataTableConfigurationResult, location_name: "GetBucketMetadataTableConfigurationResult", traits: {"smithy.api#httpPayload" => {}}))
+    GetBucketMetadataTableConfigurationOutput[:http_payload] = :get_bucket_metadata_table_configuration_result
+    GetBucketMetadataTableConfigurationOutput[:http_payload_member] = GetBucketMetadataTableConfigurationOutput.member(:get_bucket_metadata_table_configuration_result)
+    GetBucketMetadataTableConfigurationOutput.type = Types::GetBucketMetadataTableConfigurationOutput
+    GetBucketMetadataTableConfigurationRequest.add_member(:bucket, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketName, location_name: "Bucket", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "Bucket"}}))
+    GetBucketMetadataTableConfigurationRequest.add_member(:expected_bucket_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "ExpectedBucketOwner", traits: {"smithy.api#httpHeader" => "x-amz-expected-bucket-owner"}))
+    GetBucketMetadataTableConfigurationRequest.type = Types::GetBucketMetadataTableConfigurationRequest
+    GetBucketMetadataTableConfigurationResult.add_member(:metadata_table_configuration_result, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MetadataTableConfigurationResult, location_name: "MetadataTableConfigurationResult", traits: {"smithy.api#required" => {}}))
+    GetBucketMetadataTableConfigurationResult.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MetadataTableStatus, location_name: "Status", traits: {"smithy.api#required" => {}}))
+    GetBucketMetadataTableConfigurationResult.add_member(:error, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorDetails, location_name: "Error"))
+    GetBucketMetadataTableConfigurationResult.type = Types::GetBucketMetadataTableConfigurationResult
+    GetBucketMetricsConfigurationOutput.add_member(:metrics_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MetricsConfiguration, location_name: "MetricsConfiguration", traits: {"smithy.api#httpPayload" => {}}))
+    GetBucketMetricsConfigurationOutput[:http_payload] = :metrics_configuration
+    GetBucketMetricsConfigurationOutput[:http_payload_member] = GetBucketMetricsConfigurationOutput.member(:metrics_configuration)
+    GetBucketMetricsConfigurationOutput.type = Types::GetBucketMetricsConfigurationOutput
+    GetBucketMetricsConfigurationRequest.add_member(:bucket, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketName, location_name: "Bucket", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "Bucket"}}))
+    GetBucketMetricsConfigurationRequest.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MetricsId, location_name: "Id", traits: {"smithy.api#httpQuery" => "id", "smithy.api#required" => {}}))
+    GetBucketMetricsConfigurationRequest.add_member(:expected_bucket_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "ExpectedBucketOwner", traits: {"smithy.api#httpHeader" => "x-amz-expected-bucket-owner"}))
+    GetBucketMetricsConfigurationRequest.type = Types::GetBucketMetricsConfigurationRequest
+    GetBucketNotificationConfigurationOutput.add_member(:topic_configurations, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TopicConfigurationList, location_name: "TopicConfigurations", traits: {"smithy.api#xmlFlattened" => {}, "smithy.api#xmlName" => "TopicConfiguration"}))
+    GetBucketNotificationConfigurationOutput.add_member(:queue_configurations, ::Smithy::Schema::Shapes::ShapeRef.new(shape: QueueConfigurationList, location_name: "QueueConfigurations", traits: {"smithy.api#xmlFlattened" => {}, "smithy.api#xmlName" => "QueueConfiguration"}))
+    GetBucketNotificationConfigurationOutput.add_member(:lambda_function_configurations, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LambdaFunctionConfigurationList, location_name: "LambdaFunctionConfigurations", traits: {"smithy.api#xmlFlattened" => {}, "smithy.api#xmlName" => "CloudFunctionConfiguration"}))
+    GetBucketNotificationConfigurationOutput.add_member(:event_bridge_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EventBridgeConfiguration, location_name: "EventBridgeConfiguration"))
+    GetBucketNotificationConfigurationOutput.type = Types::GetBucketNotificationConfigurationOutput
+    GetBucketNotificationConfigurationRequest.add_member(:bucket, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketName, location_name: "Bucket", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "Bucket"}}))
+    GetBucketNotificationConfigurationRequest.add_member(:expected_bucket_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "ExpectedBucketOwner", traits: {"smithy.api#httpHeader" => "x-amz-expected-bucket-owner"}))
+    GetBucketNotificationConfigurationRequest.type = Types::GetBucketNotificationConfigurationRequest
+    GetBucketOwnershipControlsOutput.add_member(:ownership_controls, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OwnershipControls, location_name: "OwnershipControls", traits: {"smithy.api#httpPayload" => {}}))
+    GetBucketOwnershipControlsOutput[:http_payload] = :ownership_controls
+    GetBucketOwnershipControlsOutput[:http_payload_member] = GetBucketOwnershipControlsOutput.member(:ownership_controls)
+    GetBucketOwnershipControlsOutput.type = Types::GetBucketOwnershipControlsOutput
+    GetBucketOwnershipControlsRequest.add_member(:bucket, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketName, location_name: "Bucket", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "Bucket"}}))
+    GetBucketOwnershipControlsRequest.add_member(:expected_bucket_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "ExpectedBucketOwner", traits: {"smithy.api#httpHeader" => "x-amz-expected-bucket-owner"}))
+    GetBucketOwnershipControlsRequest.type = Types::GetBucketOwnershipControlsRequest
+    GetBucketPolicyOutput.add_member(:policy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Policy, location_name: "Policy", traits: {"smithy.api#httpPayload" => {}}))
+    GetBucketPolicyOutput[:http_payload] = :policy
+    GetBucketPolicyOutput[:http_payload_member] = GetBucketPolicyOutput.member(:policy)
+    GetBucketPolicyOutput.type = Types::GetBucketPolicyOutput
+    GetBucketPolicyRequest.add_member(:bucket, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketName, location_name: "Bucket", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "Bucket"}}))
+    GetBucketPolicyRequest.add_member(:expected_bucket_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "ExpectedBucketOwner", traits: {"smithy.api#httpHeader" => "x-amz-expected-bucket-owner"}))
+    GetBucketPolicyRequest.type = Types::GetBucketPolicyRequest
+    GetBucketPolicyStatusOutput.add_member(:policy_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PolicyStatus, location_name: "PolicyStatus", traits: {"smithy.api#httpPayload" => {}}))
+    GetBucketPolicyStatusOutput[:http_payload] = :policy_status
+    GetBucketPolicyStatusOutput[:http_payload_member] = GetBucketPolicyStatusOutput.member(:policy_status)
+    GetBucketPolicyStatusOutput.type = Types::GetBucketPolicyStatusOutput
+    GetBucketPolicyStatusRequest.add_member(:bucket, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketName, location_name: "Bucket", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "Bucket"}}))
+    GetBucketPolicyStatusRequest.add_member(:expected_bucket_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "ExpectedBucketOwner", traits: {"smithy.api#httpHeader" => "x-amz-expected-bucket-owner"}))
+    GetBucketPolicyStatusRequest.type = Types::GetBucketPolicyStatusRequest
+    GetBucketReplicationOutput.add_member(:replication_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReplicationConfiguration, location_name: "ReplicationConfiguration", traits: {"smithy.api#httpPayload" => {}}))
+    GetBucketReplicationOutput[:http_payload] = :replication_configuration
+    GetBucketReplicationOutput[:http_payload_member] = GetBucketReplicationOutput.member(:replication_configuration)
+    GetBucketReplicationOutput.type = Types::GetBucketReplicationOutput
+    GetBucketReplicationRequest.add_member(:bucket, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketName, location_name: "Bucket", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "Bucket"}}))
+    GetBucketReplicationRequest.add_member(:expected_bucket_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "ExpectedBucketOwner", traits: {"smithy.api#httpHeader" => "x-amz-expected-bucket-owner"}))
+    GetBucketReplicationRequest.type = Types::GetBucketReplicationRequest
+    GetBucketRequestPaymentOutput.add_member(:payer, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Payer, location_name: "Payer"))
+    GetBucketRequestPaymentOutput.type = Types::GetBucketRequestPaymentOutput
+    GetBucketRequestPaymentRequest.add_member(:bucket, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketName, location_name: "Bucket", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "Bucket"}}))
+    GetBucketRequestPaymentRequest.add_member(:expected_bucket_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "ExpectedBucketOwner", traits: {"smithy.api#httpHeader" => "x-amz-expected-bucket-owner"}))
+    GetBucketRequestPaymentRequest.type = Types::GetBucketRequestPaymentRequest
+    GetBucketTaggingOutput.add_member(:tag_set, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagSet, location_name: "TagSet", traits: {"smithy.api#required" => {}}))
+    GetBucketTaggingOutput.type = Types::GetBucketTaggingOutput
+    GetBucketTaggingRequest.add_member(:bucket, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketName, location_name: "Bucket", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "Bucket"}}))
+    GetBucketTaggingRequest.add_member(:expected_bucket_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "ExpectedBucketOwner", traits: {"smithy.api#httpHeader" => "x-amz-expected-bucket-owner"}))
+    GetBucketTaggingRequest.type = Types::GetBucketTaggingRequest
+    GetBucketVersioningOutput.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketVersioningStatus, location_name: "Status"))
+    GetBucketVersioningOutput.add_member(:mfa_delete, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MFADeleteStatus, location_name: "MFADelete", traits: {"smithy.api#xmlName" => "MfaDelete"}))
+    GetBucketVersioningOutput.type = Types::GetBucketVersioningOutput
+    GetBucketVersioningRequest.add_member(:bucket, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketName, location_name: "Bucket", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "Bucket"}}))
+    GetBucketVersioningRequest.add_member(:expected_bucket_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "ExpectedBucketOwner", traits: {"smithy.api#httpHeader" => "x-amz-expected-bucket-owner"}))
+    GetBucketVersioningRequest.type = Types::GetBucketVersioningRequest
+    GetBucketWebsiteOutput.add_member(:redirect_all_requests_to, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RedirectAllRequestsTo, location_name: "RedirectAllRequestsTo"))
+    GetBucketWebsiteOutput.add_member(:index_document, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IndexDocument, location_name: "IndexDocument"))
+    GetBucketWebsiteOutput.add_member(:error_document, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorDocument, location_name: "ErrorDocument"))
+    GetBucketWebsiteOutput.add_member(:routing_rules, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RoutingRules, location_name: "RoutingRules"))
+    GetBucketWebsiteOutput.type = Types::GetBucketWebsiteOutput
+    GetBucketWebsiteRequest.add_member(:bucket, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketName, location_name: "Bucket", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "Bucket"}}))
+    GetBucketWebsiteRequest.add_member(:expected_bucket_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "ExpectedBucketOwner", traits: {"smithy.api#httpHeader" => "x-amz-expected-bucket-owner"}))
+    GetBucketWebsiteRequest.type = Types::GetBucketWebsiteRequest
+    GetObjectAclOutput.add_member(:owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Owner, location_name: "Owner"))
+    GetObjectAclOutput.add_member(:grants, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Grants, location_name: "Grants", traits: {"smithy.api#xmlName" => "AccessControlList"}))
+    GetObjectAclOutput.add_member(:request_charged, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestCharged, location_name: "RequestCharged", traits: {"smithy.api#httpHeader" => "x-amz-request-charged"}))
+    GetObjectAclOutput.type = Types::GetObjectAclOutput
+    GetObjectAclRequest.add_member(:bucket, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketName, location_name: "Bucket", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "Bucket"}}))
+    GetObjectAclRequest.add_member(:key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectKey, location_name: "Key", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "Key"}}))
+    GetObjectAclRequest.add_member(:version_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectVersionId, location_name: "VersionId", traits: {"smithy.api#httpQuery" => "versionId"}))
+    GetObjectAclRequest.add_member(:request_payer, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestPayer, location_name: "RequestPayer", traits: {"smithy.api#httpHeader" => "x-amz-request-payer"}))
+    GetObjectAclRequest.add_member(:expected_bucket_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "ExpectedBucketOwner", traits: {"smithy.api#httpHeader" => "x-amz-expected-bucket-owner"}))
+    GetObjectAclRequest.type = Types::GetObjectAclRequest
+    GetObjectAttributesOutput.add_member(:delete_marker, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteMarker, location_name: "DeleteMarker", traits: {"smithy.api#httpHeader" => "x-amz-delete-marker"}))
+    GetObjectAttributesOutput.add_member(:last_modified, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LastModified, location_name: "LastModified", traits: {"smithy.api#httpHeader" => "Last-Modified"}))
+    GetObjectAttributesOutput.add_member(:version_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectVersionId, location_name: "VersionId", traits: {"smithy.api#httpHeader" => "x-amz-version-id"}))
+    GetObjectAttributesOutput.add_member(:request_charged, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestCharged, location_name: "RequestCharged", traits: {"smithy.api#httpHeader" => "x-amz-request-charged"}))
+    GetObjectAttributesOutput.add_member(:e_tag, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ETag, location_name: "ETag"))
+    GetObjectAttributesOutput.add_member(:checksum, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Checksum, location_name: "Checksum"))
+    GetObjectAttributesOutput.add_member(:object_parts, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetObjectAttributesParts, location_name: "ObjectParts"))
+    GetObjectAttributesOutput.add_member(:storage_class, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StorageClass, location_name: "StorageClass"))
+    GetObjectAttributesOutput.add_member(:object_size, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectSize, location_name: "ObjectSize"))
+    GetObjectAttributesOutput.type = Types::GetObjectAttributesOutput
+    GetObjectAttributesParts.add_member(:total_parts_count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PartsCount, location_name: "TotalPartsCount", traits: {"smithy.api#xmlName" => "PartsCount"}))
+    GetObjectAttributesParts.add_member(:part_number_marker, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PartNumberMarker, location_name: "PartNumberMarker"))
+    GetObjectAttributesParts.add_member(:next_part_number_marker, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextPartNumberMarker, location_name: "NextPartNumberMarker"))
+    GetObjectAttributesParts.add_member(:max_parts, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxParts, location_name: "MaxParts"))
+    GetObjectAttributesParts.add_member(:is_truncated, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IsTruncated, location_name: "IsTruncated"))
+    GetObjectAttributesParts.add_member(:parts, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PartsList, location_name: "Parts", traits: {"smithy.api#xmlFlattened" => {}, "smithy.api#xmlName" => "Part"}))
+    GetObjectAttributesParts.type = Types::GetObjectAttributesParts
+    GetObjectAttributesRequest.add_member(:bucket, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketName, location_name: "Bucket", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "Bucket"}}))
+    GetObjectAttributesRequest.add_member(:key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectKey, location_name: "Key", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetObjectAttributesRequest.add_member(:version_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectVersionId, location_name: "VersionId", traits: {"smithy.api#httpQuery" => "versionId"}))
+    GetObjectAttributesRequest.add_member(:max_parts, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxParts, location_name: "MaxParts", traits: {"smithy.api#httpHeader" => "x-amz-max-parts"}))
+    GetObjectAttributesRequest.add_member(:part_number_marker, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PartNumberMarker, location_name: "PartNumberMarker", traits: {"smithy.api#httpHeader" => "x-amz-part-number-marker"}))
+    GetObjectAttributesRequest.add_member(:sse_customer_algorithm, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SSECustomerAlgorithm, location_name: "SSECustomerAlgorithm", traits: {"smithy.api#httpHeader" => "x-amz-server-side-encryption-customer-algorithm"}))
+    GetObjectAttributesRequest.add_member(:sse_customer_key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SSECustomerKey, location_name: "SSECustomerKey", traits: {"smithy.api#httpHeader" => "x-amz-server-side-encryption-customer-key"}))
+    GetObjectAttributesRequest.add_member(:sse_customer_key_md5, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SSECustomerKeyMD5, location_name: "SSECustomerKeyMD5", traits: {"smithy.api#httpHeader" => "x-amz-server-side-encryption-customer-key-MD5"}))
+    GetObjectAttributesRequest.add_member(:request_payer, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestPayer, location_name: "RequestPayer", traits: {"smithy.api#httpHeader" => "x-amz-request-payer"}))
+    GetObjectAttributesRequest.add_member(:expected_bucket_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "ExpectedBucketOwner", traits: {"smithy.api#httpHeader" => "x-amz-expected-bucket-owner"}))
+    GetObjectAttributesRequest.add_member(:object_attributes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectAttributesList, location_name: "ObjectAttributes", traits: {"smithy.api#httpHeader" => "x-amz-object-attributes", "smithy.api#required" => {}}))
+    GetObjectAttributesRequest.type = Types::GetObjectAttributesRequest
+    GetObjectLegalHoldOutput.add_member(:legal_hold, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectLockLegalHold, location_name: "LegalHold", traits: {"smithy.api#httpPayload" => {}, "smithy.api#xmlName" => "LegalHold"}))
+    GetObjectLegalHoldOutput[:http_payload] = :legal_hold
+    GetObjectLegalHoldOutput[:http_payload_member] = GetObjectLegalHoldOutput.member(:legal_hold)
+    GetObjectLegalHoldOutput.type = Types::GetObjectLegalHoldOutput
+    GetObjectLegalHoldRequest.add_member(:bucket, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketName, location_name: "Bucket", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "Bucket"}}))
+    GetObjectLegalHoldRequest.add_member(:key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectKey, location_name: "Key", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetObjectLegalHoldRequest.add_member(:version_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectVersionId, location_name: "VersionId", traits: {"smithy.api#httpQuery" => "versionId"}))
+    GetObjectLegalHoldRequest.add_member(:request_payer, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestPayer, location_name: "RequestPayer", traits: {"smithy.api#httpHeader" => "x-amz-request-payer"}))
+    GetObjectLegalHoldRequest.add_member(:expected_bucket_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "ExpectedBucketOwner", traits: {"smithy.api#httpHeader" => "x-amz-expected-bucket-owner"}))
+    GetObjectLegalHoldRequest.type = Types::GetObjectLegalHoldRequest
+    GetObjectLockConfigurationOutput.add_member(:object_lock_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectLockConfiguration, location_name: "ObjectLockConfiguration", traits: {"smithy.api#httpPayload" => {}}))
+    GetObjectLockConfigurationOutput[:http_payload] = :object_lock_configuration
+    GetObjectLockConfigurationOutput[:http_payload_member] = GetObjectLockConfigurationOutput.member(:object_lock_configuration)
+    GetObjectLockConfigurationOutput.type = Types::GetObjectLockConfigurationOutput
+    GetObjectLockConfigurationRequest.add_member(:bucket, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketName, location_name: "Bucket", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "Bucket"}}))
+    GetObjectLockConfigurationRequest.add_member(:expected_bucket_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "ExpectedBucketOwner", traits: {"smithy.api#httpHeader" => "x-amz-expected-bucket-owner"}))
+    GetObjectLockConfigurationRequest.type = Types::GetObjectLockConfigurationRequest
+    GetObjectOutput.add_member(:body, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamingBlob, location_name: "Body", traits: {"smithy.api#default" => "", "smithy.api#httpPayload" => {}}))
+    GetObjectOutput.add_member(:delete_marker, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteMarker, location_name: "DeleteMarker", traits: {"smithy.api#httpHeader" => "x-amz-delete-marker"}))
+    GetObjectOutput.add_member(:accept_ranges, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AcceptRanges, location_name: "AcceptRanges", traits: {"smithy.api#httpHeader" => "accept-ranges"}))
+    GetObjectOutput.add_member(:expiration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Expiration, location_name: "Expiration", traits: {"smithy.api#httpHeader" => "x-amz-expiration"}))
+    GetObjectOutput.add_member(:restore, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Restore, location_name: "Restore", traits: {"smithy.api#httpHeader" => "x-amz-restore"}))
+    GetObjectOutput.add_member(:last_modified, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LastModified, location_name: "LastModified", traits: {"smithy.api#httpHeader" => "Last-Modified"}))
+    GetObjectOutput.add_member(:content_length, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContentLength, location_name: "ContentLength", traits: {"smithy.api#httpHeader" => "Content-Length"}))
+    GetObjectOutput.add_member(:e_tag, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ETag, location_name: "ETag", traits: {"smithy.api#httpHeader" => "ETag"}))
+    GetObjectOutput.add_member(:checksum_crc32, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChecksumCRC32, location_name: "ChecksumCRC32", traits: {"smithy.api#httpHeader" => "x-amz-checksum-crc32"}))
+    GetObjectOutput.add_member(:checksum_crc32_c, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChecksumCRC32C, location_name: "ChecksumCRC32C", traits: {"smithy.api#httpHeader" => "x-amz-checksum-crc32c"}))
+    GetObjectOutput.add_member(:checksum_crc64_nvme, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChecksumCRC64NVME, location_name: "ChecksumCRC64NVME", traits: {"smithy.api#httpHeader" => "x-amz-checksum-crc64nvme"}))
+    GetObjectOutput.add_member(:checksum_sha1, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChecksumSHA1, location_name: "ChecksumSHA1", traits: {"smithy.api#httpHeader" => "x-amz-checksum-sha1"}))
+    GetObjectOutput.add_member(:checksum_sha256, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChecksumSHA256, location_name: "ChecksumSHA256", traits: {"smithy.api#httpHeader" => "x-amz-checksum-sha256"}))
+    GetObjectOutput.add_member(:checksum_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChecksumType, location_name: "ChecksumType", traits: {"smithy.api#httpHeader" => "x-amz-checksum-type"}))
+    GetObjectOutput.add_member(:missing_meta, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MissingMeta, location_name: "MissingMeta", traits: {"smithy.api#httpHeader" => "x-amz-missing-meta"}))
+    GetObjectOutput.add_member(:version_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectVersionId, location_name: "VersionId", traits: {"smithy.api#httpHeader" => "x-amz-version-id"}))
+    GetObjectOutput.add_member(:cache_control, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CacheControl, location_name: "CacheControl", traits: {"smithy.api#httpHeader" => "Cache-Control"}))
+    GetObjectOutput.add_member(:content_disposition, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContentDisposition, location_name: "ContentDisposition", traits: {"smithy.api#httpHeader" => "Content-Disposition"}))
+    GetObjectOutput.add_member(:content_encoding, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContentEncoding, location_name: "ContentEncoding", traits: {"smithy.api#httpHeader" => "Content-Encoding"}))
+    GetObjectOutput.add_member(:content_language, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContentLanguage, location_name: "ContentLanguage", traits: {"smithy.api#httpHeader" => "Content-Language"}))
+    GetObjectOutput.add_member(:content_range, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContentRange, location_name: "ContentRange", traits: {"smithy.api#httpHeader" => "Content-Range"}))
+    GetObjectOutput.add_member(:content_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContentType, location_name: "ContentType", traits: {"smithy.api#httpHeader" => "Content-Type"}))
+    GetObjectOutput.add_member(:expires, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Expires, location_name: "Expires", traits: {"smithy.api#httpHeader" => "Expires"}))
+    GetObjectOutput.add_member(:website_redirect_location, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WebsiteRedirectLocation, location_name: "WebsiteRedirectLocation", traits: {"smithy.api#httpHeader" => "x-amz-website-redirect-location"}))
+    GetObjectOutput.add_member(:server_side_encryption, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServerSideEncryption, location_name: "ServerSideEncryption", traits: {"smithy.api#httpHeader" => "x-amz-server-side-encryption"}))
+    GetObjectOutput.add_member(:metadata, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Metadata, location_name: "Metadata", traits: {"smithy.api#httpPrefixHeaders" => "x-amz-meta-"}))
+    GetObjectOutput.add_member(:sse_customer_algorithm, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SSECustomerAlgorithm, location_name: "SSECustomerAlgorithm", traits: {"smithy.api#httpHeader" => "x-amz-server-side-encryption-customer-algorithm"}))
+    GetObjectOutput.add_member(:sse_customer_key_md5, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SSECustomerKeyMD5, location_name: "SSECustomerKeyMD5", traits: {"smithy.api#httpHeader" => "x-amz-server-side-encryption-customer-key-MD5"}))
+    GetObjectOutput.add_member(:ssekms_key_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SSEKMSKeyId, location_name: "SSEKMSKeyId", traits: {"smithy.api#httpHeader" => "x-amz-server-side-encryption-aws-kms-key-id"}))
+    GetObjectOutput.add_member(:bucket_key_enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketKeyEnabled, location_name: "BucketKeyEnabled", traits: {"smithy.api#httpHeader" => "x-amz-server-side-encryption-bucket-key-enabled"}))
+    GetObjectOutput.add_member(:storage_class, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StorageClass, location_name: "StorageClass", traits: {"smithy.api#httpHeader" => "x-amz-storage-class"}))
+    GetObjectOutput.add_member(:request_charged, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestCharged, location_name: "RequestCharged", traits: {"smithy.api#httpHeader" => "x-amz-request-charged"}))
+    GetObjectOutput.add_member(:replication_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReplicationStatus, location_name: "ReplicationStatus", traits: {"smithy.api#httpHeader" => "x-amz-replication-status"}))
+    GetObjectOutput.add_member(:parts_count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PartsCount, location_name: "PartsCount", traits: {"smithy.api#httpHeader" => "x-amz-mp-parts-count"}))
+    GetObjectOutput.add_member(:tag_count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagCount, location_name: "TagCount", traits: {"smithy.api#httpHeader" => "x-amz-tagging-count"}))
+    GetObjectOutput.add_member(:object_lock_mode, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectLockMode, location_name: "ObjectLockMode", traits: {"smithy.api#httpHeader" => "x-amz-object-lock-mode"}))
+    GetObjectOutput.add_member(:object_lock_retain_until_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectLockRetainUntilDate, location_name: "ObjectLockRetainUntilDate", traits: {"smithy.api#httpHeader" => "x-amz-object-lock-retain-until-date"}))
+    GetObjectOutput.add_member(:object_lock_legal_hold_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectLockLegalHoldStatus, location_name: "ObjectLockLegalHoldStatus", traits: {"smithy.api#httpHeader" => "x-amz-object-lock-legal-hold"}))
+    GetObjectOutput[:http_payload] = :body
+    GetObjectOutput[:http_payload_member] = GetObjectOutput.member(:body)
+    GetObjectOutput.type = Types::GetObjectOutput
+    GetObjectRequest.add_member(:bucket, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketName, location_name: "Bucket", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "Bucket"}}))
+    GetObjectRequest.add_member(:if_match, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IfMatch, location_name: "IfMatch", traits: {"smithy.api#httpHeader" => "If-Match"}))
+    GetObjectRequest.add_member(:if_modified_since, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IfModifiedSince, location_name: "IfModifiedSince", traits: {"smithy.api#httpHeader" => "If-Modified-Since"}))
+    GetObjectRequest.add_member(:if_none_match, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IfNoneMatch, location_name: "IfNoneMatch", traits: {"smithy.api#httpHeader" => "If-None-Match"}))
+    GetObjectRequest.add_member(:if_unmodified_since, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IfUnmodifiedSince, location_name: "IfUnmodifiedSince", traits: {"smithy.api#httpHeader" => "If-Unmodified-Since"}))
+    GetObjectRequest.add_member(:key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectKey, location_name: "Key", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "Key"}}))
+    GetObjectRequest.add_member(:range, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Range, location_name: "Range", traits: {"smithy.api#httpHeader" => "Range"}))
+    GetObjectRequest.add_member(:response_cache_control, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResponseCacheControl, location_name: "ResponseCacheControl", traits: {"smithy.api#httpQuery" => "response-cache-control"}))
+    GetObjectRequest.add_member(:response_content_disposition, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResponseContentDisposition, location_name: "ResponseContentDisposition", traits: {"smithy.api#httpQuery" => "response-content-disposition"}))
+    GetObjectRequest.add_member(:response_content_encoding, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResponseContentEncoding, location_name: "ResponseContentEncoding", traits: {"smithy.api#httpQuery" => "response-content-encoding"}))
+    GetObjectRequest.add_member(:response_content_language, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResponseContentLanguage, location_name: "ResponseContentLanguage", traits: {"smithy.api#httpQuery" => "response-content-language"}))
+    GetObjectRequest.add_member(:response_content_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResponseContentType, location_name: "ResponseContentType", traits: {"smithy.api#httpQuery" => "response-content-type"}))
+    GetObjectRequest.add_member(:response_expires, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResponseExpires, location_name: "ResponseExpires", traits: {"smithy.api#httpQuery" => "response-expires"}))
+    GetObjectRequest.add_member(:version_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectVersionId, location_name: "VersionId", traits: {"smithy.api#httpQuery" => "versionId"}))
+    GetObjectRequest.add_member(:sse_customer_algorithm, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SSECustomerAlgorithm, location_name: "SSECustomerAlgorithm", traits: {"smithy.api#httpHeader" => "x-amz-server-side-encryption-customer-algorithm"}))
+    GetObjectRequest.add_member(:sse_customer_key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SSECustomerKey, location_name: "SSECustomerKey", traits: {"smithy.api#httpHeader" => "x-amz-server-side-encryption-customer-key"}))
+    GetObjectRequest.add_member(:sse_customer_key_md5, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SSECustomerKeyMD5, location_name: "SSECustomerKeyMD5", traits: {"smithy.api#httpHeader" => "x-amz-server-side-encryption-customer-key-MD5"}))
+    GetObjectRequest.add_member(:request_payer, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestPayer, location_name: "RequestPayer", traits: {"smithy.api#httpHeader" => "x-amz-request-payer"}))
+    GetObjectRequest.add_member(:part_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PartNumber, location_name: "PartNumber", traits: {"smithy.api#httpQuery" => "partNumber"}))
+    GetObjectRequest.add_member(:expected_bucket_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "ExpectedBucketOwner", traits: {"smithy.api#httpHeader" => "x-amz-expected-bucket-owner"}))
+    GetObjectRequest.add_member(:checksum_mode, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChecksumMode, location_name: "ChecksumMode", traits: {"smithy.api#httpHeader" => "x-amz-checksum-mode"}))
+    GetObjectRequest.type = Types::GetObjectRequest
+    GetObjectRetentionOutput.add_member(:retention, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectLockRetention, location_name: "Retention", traits: {"smithy.api#httpPayload" => {}, "smithy.api#xmlName" => "Retention"}))
+    GetObjectRetentionOutput[:http_payload] = :retention
+    GetObjectRetentionOutput[:http_payload_member] = GetObjectRetentionOutput.member(:retention)
+    GetObjectRetentionOutput.type = Types::GetObjectRetentionOutput
+    GetObjectRetentionRequest.add_member(:bucket, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketName, location_name: "Bucket", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "Bucket"}}))
+    GetObjectRetentionRequest.add_member(:key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectKey, location_name: "Key", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetObjectRetentionRequest.add_member(:version_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectVersionId, location_name: "VersionId", traits: {"smithy.api#httpQuery" => "versionId"}))
+    GetObjectRetentionRequest.add_member(:request_payer, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestPayer, location_name: "RequestPayer", traits: {"smithy.api#httpHeader" => "x-amz-request-payer"}))
+    GetObjectRetentionRequest.add_member(:expected_bucket_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "ExpectedBucketOwner", traits: {"smithy.api#httpHeader" => "x-amz-expected-bucket-owner"}))
+    GetObjectRetentionRequest.type = Types::GetObjectRetentionRequest
+    GetObjectTaggingOutput.add_member(:version_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectVersionId, location_name: "VersionId", traits: {"smithy.api#httpHeader" => "x-amz-version-id"}))
+    GetObjectTaggingOutput.add_member(:tag_set, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagSet, location_name: "TagSet", traits: {"smithy.api#required" => {}}))
+    GetObjectTaggingOutput.type = Types::GetObjectTaggingOutput
+    GetObjectTaggingRequest.add_member(:bucket, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketName, location_name: "Bucket", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "Bucket"}}))
+    GetObjectTaggingRequest.add_member(:key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectKey, location_name: "Key", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetObjectTaggingRequest.add_member(:version_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectVersionId, location_name: "VersionId", traits: {"smithy.api#httpQuery" => "versionId"}))
+    GetObjectTaggingRequest.add_member(:expected_bucket_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "ExpectedBucketOwner", traits: {"smithy.api#httpHeader" => "x-amz-expected-bucket-owner"}))
+    GetObjectTaggingRequest.add_member(:request_payer, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestPayer, location_name: "RequestPayer", traits: {"smithy.api#httpHeader" => "x-amz-request-payer"}))
+    GetObjectTaggingRequest.type = Types::GetObjectTaggingRequest
+    GetObjectTorrentOutput.add_member(:body, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamingBlob, location_name: "Body", traits: {"smithy.api#default" => "", "smithy.api#httpPayload" => {}}))
+    GetObjectTorrentOutput.add_member(:request_charged, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestCharged, location_name: "RequestCharged", traits: {"smithy.api#httpHeader" => "x-amz-request-charged"}))
+    GetObjectTorrentOutput[:http_payload] = :body
+    GetObjectTorrentOutput[:http_payload_member] = GetObjectTorrentOutput.member(:body)
+    GetObjectTorrentOutput.type = Types::GetObjectTorrentOutput
+    GetObjectTorrentRequest.add_member(:bucket, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketName, location_name: "Bucket", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "Bucket"}}))
+    GetObjectTorrentRequest.add_member(:key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectKey, location_name: "Key", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetObjectTorrentRequest.add_member(:request_payer, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestPayer, location_name: "RequestPayer", traits: {"smithy.api#httpHeader" => "x-amz-request-payer"}))
+    GetObjectTorrentRequest.add_member(:expected_bucket_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "ExpectedBucketOwner", traits: {"smithy.api#httpHeader" => "x-amz-expected-bucket-owner"}))
+    GetObjectTorrentRequest.type = Types::GetObjectTorrentRequest
+    GetPublicAccessBlockOutput.add_member(:public_access_block_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PublicAccessBlockConfiguration, location_name: "PublicAccessBlockConfiguration", traits: {"smithy.api#httpPayload" => {}}))
+    GetPublicAccessBlockOutput[:http_payload] = :public_access_block_configuration
+    GetPublicAccessBlockOutput[:http_payload_member] = GetPublicAccessBlockOutput.member(:public_access_block_configuration)
+    GetPublicAccessBlockOutput.type = Types::GetPublicAccessBlockOutput
+    GetPublicAccessBlockRequest.add_member(:bucket, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketName, location_name: "Bucket", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "Bucket"}}))
+    GetPublicAccessBlockRequest.add_member(:expected_bucket_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "ExpectedBucketOwner", traits: {"smithy.api#httpHeader" => "x-amz-expected-bucket-owner"}))
+    GetPublicAccessBlockRequest.type = Types::GetPublicAccessBlockRequest
+    GlacierJobParameters.add_member(:tier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tier, location_name: "Tier", traits: {"smithy.api#required" => {}}))
+    GlacierJobParameters.type = Types::GlacierJobParameters
+    Grant.add_member(:grantee, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Grantee, location_name: "Grantee", traits: {"smithy.api#xmlNamespace" => {"uri" => "http://www.w3.org/2001/XMLSchema-instance", "prefix" => "xsi"}}))
+    Grant.add_member(:permission, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Permission, location_name: "Permission"))
+    Grant.type = Types::Grant
+    Grantee.add_member(:display_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DisplayName, location_name: "DisplayName"))
+    Grantee.add_member(:email_address, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EmailAddress, location_name: "EmailAddress"))
+    Grantee.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ID, location_name: "ID"))
+    Grantee.add_member(:uri, ::Smithy::Schema::Shapes::ShapeRef.new(shape: URI, location_name: "URI"))
+    Grantee.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Type, location_name: "Type", traits: {"smithy.api#required" => {}, "smithy.api#xmlAttribute" => {}, "smithy.api#xmlName" => "xsi:type"}))
+    Grantee.type = Types::Grantee
+    Grants.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Grant, traits: {"smithy.api#xmlName" => "Grant"})
+    HeadBucketOutput.add_member(:bucket_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3RegionalOrS3ExpressBucketArnString, location_name: "BucketArn", traits: {"smithy.api#httpHeader" => "x-amz-bucket-arn"}))
+    HeadBucketOutput.add_member(:bucket_location_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LocationType, location_name: "BucketLocationType", traits: {"smithy.api#httpHeader" => "x-amz-bucket-location-type"}))
+    HeadBucketOutput.add_member(:bucket_location_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketLocationName, location_name: "BucketLocationName", traits: {"smithy.api#httpHeader" => "x-amz-bucket-location-name"}))
+    HeadBucketOutput.add_member(:bucket_region, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Region, location_name: "BucketRegion", traits: {"smithy.api#httpHeader" => "x-amz-bucket-region"}))
+    HeadBucketOutput.add_member(:access_point_alias, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessPointAlias, location_name: "AccessPointAlias", traits: {"smithy.api#httpHeader" => "x-amz-access-point-alias"}))
+    HeadBucketOutput.type = Types::HeadBucketOutput
+    HeadBucketRequest.add_member(:bucket, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketName, location_name: "Bucket", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "Bucket"}}))
+    HeadBucketRequest.add_member(:expected_bucket_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "ExpectedBucketOwner", traits: {"smithy.api#httpHeader" => "x-amz-expected-bucket-owner"}))
+    HeadBucketRequest.type = Types::HeadBucketRequest
+    HeadObjectOutput.add_member(:delete_marker, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteMarker, location_name: "DeleteMarker", traits: {"smithy.api#httpHeader" => "x-amz-delete-marker"}))
+    HeadObjectOutput.add_member(:accept_ranges, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AcceptRanges, location_name: "AcceptRanges", traits: {"smithy.api#httpHeader" => "accept-ranges"}))
+    HeadObjectOutput.add_member(:expiration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Expiration, location_name: "Expiration", traits: {"smithy.api#httpHeader" => "x-amz-expiration"}))
+    HeadObjectOutput.add_member(:restore, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Restore, location_name: "Restore", traits: {"smithy.api#httpHeader" => "x-amz-restore"}))
+    HeadObjectOutput.add_member(:archive_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ArchiveStatus, location_name: "ArchiveStatus", traits: {"smithy.api#httpHeader" => "x-amz-archive-status"}))
+    HeadObjectOutput.add_member(:last_modified, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LastModified, location_name: "LastModified", traits: {"smithy.api#httpHeader" => "Last-Modified"}))
+    HeadObjectOutput.add_member(:content_length, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContentLength, location_name: "ContentLength", traits: {"smithy.api#httpHeader" => "Content-Length"}))
+    HeadObjectOutput.add_member(:checksum_crc32, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChecksumCRC32, location_name: "ChecksumCRC32", traits: {"smithy.api#httpHeader" => "x-amz-checksum-crc32"}))
+    HeadObjectOutput.add_member(:checksum_crc32_c, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChecksumCRC32C, location_name: "ChecksumCRC32C", traits: {"smithy.api#httpHeader" => "x-amz-checksum-crc32c"}))
+    HeadObjectOutput.add_member(:checksum_crc64_nvme, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChecksumCRC64NVME, location_name: "ChecksumCRC64NVME", traits: {"smithy.api#httpHeader" => "x-amz-checksum-crc64nvme"}))
+    HeadObjectOutput.add_member(:checksum_sha1, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChecksumSHA1, location_name: "ChecksumSHA1", traits: {"smithy.api#httpHeader" => "x-amz-checksum-sha1"}))
+    HeadObjectOutput.add_member(:checksum_sha256, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChecksumSHA256, location_name: "ChecksumSHA256", traits: {"smithy.api#httpHeader" => "x-amz-checksum-sha256"}))
+    HeadObjectOutput.add_member(:checksum_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChecksumType, location_name: "ChecksumType", traits: {"smithy.api#httpHeader" => "x-amz-checksum-type"}))
+    HeadObjectOutput.add_member(:e_tag, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ETag, location_name: "ETag", traits: {"smithy.api#httpHeader" => "ETag"}))
+    HeadObjectOutput.add_member(:missing_meta, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MissingMeta, location_name: "MissingMeta", traits: {"smithy.api#httpHeader" => "x-amz-missing-meta"}))
+    HeadObjectOutput.add_member(:version_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectVersionId, location_name: "VersionId", traits: {"smithy.api#httpHeader" => "x-amz-version-id"}))
+    HeadObjectOutput.add_member(:cache_control, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CacheControl, location_name: "CacheControl", traits: {"smithy.api#httpHeader" => "Cache-Control"}))
+    HeadObjectOutput.add_member(:content_disposition, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContentDisposition, location_name: "ContentDisposition", traits: {"smithy.api#httpHeader" => "Content-Disposition"}))
+    HeadObjectOutput.add_member(:content_encoding, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContentEncoding, location_name: "ContentEncoding", traits: {"smithy.api#httpHeader" => "Content-Encoding"}))
+    HeadObjectOutput.add_member(:content_language, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContentLanguage, location_name: "ContentLanguage", traits: {"smithy.api#httpHeader" => "Content-Language"}))
+    HeadObjectOutput.add_member(:content_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContentType, location_name: "ContentType", traits: {"smithy.api#httpHeader" => "Content-Type"}))
+    HeadObjectOutput.add_member(:content_range, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContentRange, location_name: "ContentRange", traits: {"smithy.api#httpHeader" => "Content-Range"}))
+    HeadObjectOutput.add_member(:expires, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Expires, location_name: "Expires", traits: {"smithy.api#httpHeader" => "Expires"}))
+    HeadObjectOutput.add_member(:website_redirect_location, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WebsiteRedirectLocation, location_name: "WebsiteRedirectLocation", traits: {"smithy.api#httpHeader" => "x-amz-website-redirect-location"}))
+    HeadObjectOutput.add_member(:server_side_encryption, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServerSideEncryption, location_name: "ServerSideEncryption", traits: {"smithy.api#httpHeader" => "x-amz-server-side-encryption"}))
+    HeadObjectOutput.add_member(:metadata, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Metadata, location_name: "Metadata", traits: {"smithy.api#httpPrefixHeaders" => "x-amz-meta-"}))
+    HeadObjectOutput.add_member(:sse_customer_algorithm, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SSECustomerAlgorithm, location_name: "SSECustomerAlgorithm", traits: {"smithy.api#httpHeader" => "x-amz-server-side-encryption-customer-algorithm"}))
+    HeadObjectOutput.add_member(:sse_customer_key_md5, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SSECustomerKeyMD5, location_name: "SSECustomerKeyMD5", traits: {"smithy.api#httpHeader" => "x-amz-server-side-encryption-customer-key-MD5"}))
+    HeadObjectOutput.add_member(:ssekms_key_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SSEKMSKeyId, location_name: "SSEKMSKeyId", traits: {"smithy.api#httpHeader" => "x-amz-server-side-encryption-aws-kms-key-id"}))
+    HeadObjectOutput.add_member(:bucket_key_enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketKeyEnabled, location_name: "BucketKeyEnabled", traits: {"smithy.api#httpHeader" => "x-amz-server-side-encryption-bucket-key-enabled"}))
+    HeadObjectOutput.add_member(:storage_class, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StorageClass, location_name: "StorageClass", traits: {"smithy.api#httpHeader" => "x-amz-storage-class"}))
+    HeadObjectOutput.add_member(:request_charged, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestCharged, location_name: "RequestCharged", traits: {"smithy.api#httpHeader" => "x-amz-request-charged"}))
+    HeadObjectOutput.add_member(:replication_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReplicationStatus, location_name: "ReplicationStatus", traits: {"smithy.api#httpHeader" => "x-amz-replication-status"}))
+    HeadObjectOutput.add_member(:parts_count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PartsCount, location_name: "PartsCount", traits: {"smithy.api#httpHeader" => "x-amz-mp-parts-count"}))
+    HeadObjectOutput.add_member(:tag_count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagCount, location_name: "TagCount", traits: {"smithy.api#httpHeader" => "x-amz-tagging-count"}))
+    HeadObjectOutput.add_member(:object_lock_mode, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectLockMode, location_name: "ObjectLockMode", traits: {"smithy.api#httpHeader" => "x-amz-object-lock-mode"}))
+    HeadObjectOutput.add_member(:object_lock_retain_until_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectLockRetainUntilDate, location_name: "ObjectLockRetainUntilDate", traits: {"smithy.api#httpHeader" => "x-amz-object-lock-retain-until-date"}))
+    HeadObjectOutput.add_member(:object_lock_legal_hold_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectLockLegalHoldStatus, location_name: "ObjectLockLegalHoldStatus", traits: {"smithy.api#httpHeader" => "x-amz-object-lock-legal-hold"}))
+    HeadObjectOutput.type = Types::HeadObjectOutput
+    HeadObjectRequest.add_member(:bucket, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketName, location_name: "Bucket", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "Bucket"}}))
+    HeadObjectRequest.add_member(:if_match, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IfMatch, location_name: "IfMatch", traits: {"smithy.api#httpHeader" => "If-Match"}))
+    HeadObjectRequest.add_member(:if_modified_since, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IfModifiedSince, location_name: "IfModifiedSince", traits: {"smithy.api#httpHeader" => "If-Modified-Since"}))
+    HeadObjectRequest.add_member(:if_none_match, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IfNoneMatch, location_name: "IfNoneMatch", traits: {"smithy.api#httpHeader" => "If-None-Match"}))
+    HeadObjectRequest.add_member(:if_unmodified_since, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IfUnmodifiedSince, location_name: "IfUnmodifiedSince", traits: {"smithy.api#httpHeader" => "If-Unmodified-Since"}))
+    HeadObjectRequest.add_member(:key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectKey, location_name: "Key", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "Key"}}))
+    HeadObjectRequest.add_member(:range, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Range, location_name: "Range", traits: {"smithy.api#httpHeader" => "Range"}))
+    HeadObjectRequest.add_member(:response_cache_control, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResponseCacheControl, location_name: "ResponseCacheControl", traits: {"smithy.api#httpQuery" => "response-cache-control"}))
+    HeadObjectRequest.add_member(:response_content_disposition, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResponseContentDisposition, location_name: "ResponseContentDisposition", traits: {"smithy.api#httpQuery" => "response-content-disposition"}))
+    HeadObjectRequest.add_member(:response_content_encoding, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResponseContentEncoding, location_name: "ResponseContentEncoding", traits: {"smithy.api#httpQuery" => "response-content-encoding"}))
+    HeadObjectRequest.add_member(:response_content_language, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResponseContentLanguage, location_name: "ResponseContentLanguage", traits: {"smithy.api#httpQuery" => "response-content-language"}))
+    HeadObjectRequest.add_member(:response_content_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResponseContentType, location_name: "ResponseContentType", traits: {"smithy.api#httpQuery" => "response-content-type"}))
+    HeadObjectRequest.add_member(:response_expires, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResponseExpires, location_name: "ResponseExpires", traits: {"smithy.api#httpQuery" => "response-expires"}))
+    HeadObjectRequest.add_member(:version_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectVersionId, location_name: "VersionId", traits: {"smithy.api#httpQuery" => "versionId"}))
+    HeadObjectRequest.add_member(:sse_customer_algorithm, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SSECustomerAlgorithm, location_name: "SSECustomerAlgorithm", traits: {"smithy.api#httpHeader" => "x-amz-server-side-encryption-customer-algorithm"}))
+    HeadObjectRequest.add_member(:sse_customer_key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SSECustomerKey, location_name: "SSECustomerKey", traits: {"smithy.api#httpHeader" => "x-amz-server-side-encryption-customer-key"}))
+    HeadObjectRequest.add_member(:sse_customer_key_md5, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SSECustomerKeyMD5, location_name: "SSECustomerKeyMD5", traits: {"smithy.api#httpHeader" => "x-amz-server-side-encryption-customer-key-MD5"}))
+    HeadObjectRequest.add_member(:request_payer, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestPayer, location_name: "RequestPayer", traits: {"smithy.api#httpHeader" => "x-amz-request-payer"}))
+    HeadObjectRequest.add_member(:part_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PartNumber, location_name: "PartNumber", traits: {"smithy.api#httpQuery" => "partNumber"}))
+    HeadObjectRequest.add_member(:expected_bucket_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "ExpectedBucketOwner", traits: {"smithy.api#httpHeader" => "x-amz-expected-bucket-owner"}))
+    HeadObjectRequest.add_member(:checksum_mode, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChecksumMode, location_name: "ChecksumMode", traits: {"smithy.api#httpHeader" => "x-amz-checksum-mode"}))
+    HeadObjectRequest.type = Types::HeadObjectRequest
+    IdempotencyParameterMismatch.type = Types::IdempotencyParameterMismatch
+    IndexDocument.add_member(:suffix, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Suffix, location_name: "Suffix", traits: {"smithy.api#required" => {}}))
+    IndexDocument.type = Types::IndexDocument
+    Initiator.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ID, location_name: "ID"))
+    Initiator.add_member(:display_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DisplayName, location_name: "DisplayName"))
+    Initiator.type = Types::Initiator
+    InputSerialization.add_member(:csv, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CSVInput, location_name: "CSV"))
+    InputSerialization.add_member(:compression_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CompressionType, location_name: "CompressionType"))
+    InputSerialization.add_member(:json, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JSONInput, location_name: "JSON"))
+    InputSerialization.add_member(:parquet, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ParquetInput, location_name: "Parquet"))
+    InputSerialization.type = Types::InputSerialization
+    IntelligentTieringAccessTier.add_member(:archive_access, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ARCHIVE_ACCESS", traits: {"smithy.api#enumValue" => "ARCHIVE_ACCESS"}))
+    IntelligentTieringAccessTier.add_member(:deep_archive_access, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DEEP_ARCHIVE_ACCESS", traits: {"smithy.api#enumValue" => "DEEP_ARCHIVE_ACCESS"}))
+    IntelligentTieringAndOperator.add_member(:prefix, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Prefix, location_name: "Prefix"))
+    IntelligentTieringAndOperator.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagSet, location_name: "Tags", traits: {"smithy.api#xmlFlattened" => {}, "smithy.api#xmlName" => "Tag"}))
+    IntelligentTieringAndOperator.type = Types::IntelligentTieringAndOperator
+    IntelligentTieringConfiguration.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IntelligentTieringId, location_name: "Id", traits: {"smithy.api#required" => {}}))
+    IntelligentTieringConfiguration.add_member(:filter, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IntelligentTieringFilter, location_name: "Filter"))
+    IntelligentTieringConfiguration.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IntelligentTieringStatus, location_name: "Status", traits: {"smithy.api#required" => {}}))
+    IntelligentTieringConfiguration.add_member(:tierings, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TieringList, location_name: "Tierings", traits: {"smithy.api#required" => {}, "smithy.api#xmlFlattened" => {}, "smithy.api#xmlName" => "Tiering"}))
+    IntelligentTieringConfiguration.type = Types::IntelligentTieringConfiguration
+    IntelligentTieringConfigurationList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: IntelligentTieringConfiguration)
+    IntelligentTieringFilter.add_member(:prefix, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Prefix, location_name: "Prefix"))
+    IntelligentTieringFilter.add_member(:tag, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tag, location_name: "Tag"))
+    IntelligentTieringFilter.add_member(:and, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IntelligentTieringAndOperator, location_name: "And"))
+    IntelligentTieringFilter.type = Types::IntelligentTieringFilter
+    IntelligentTieringStatus.add_member(:enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Enabled", traits: {"smithy.api#enumValue" => "Enabled"}))
+    IntelligentTieringStatus.add_member(:disabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Disabled", traits: {"smithy.api#enumValue" => "Disabled"}))
+    InvalidObjectState.add_member(:storage_class, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StorageClass, location_name: "StorageClass"))
+    InvalidObjectState.add_member(:access_tier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IntelligentTieringAccessTier, location_name: "AccessTier"))
+    InvalidObjectState.type = Types::InvalidObjectState
+    InvalidRequest.type = Types::InvalidRequest
+    InvalidWriteOffset.type = Types::InvalidWriteOffset
+    InventoryConfiguration.add_member(:destination, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InventoryDestination, location_name: "Destination", traits: {"smithy.api#required" => {}}))
+    InventoryConfiguration.add_member(:is_enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IsEnabled, location_name: "IsEnabled", traits: {"smithy.api#required" => {}}))
+    InventoryConfiguration.add_member(:filter, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InventoryFilter, location_name: "Filter"))
+    InventoryConfiguration.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InventoryId, location_name: "Id", traits: {"smithy.api#required" => {}}))
+    InventoryConfiguration.add_member(:included_object_versions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InventoryIncludedObjectVersions, location_name: "IncludedObjectVersions", traits: {"smithy.api#required" => {}}))
+    InventoryConfiguration.add_member(:optional_fields, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InventoryOptionalFields, location_name: "OptionalFields"))
+    InventoryConfiguration.add_member(:schedule, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InventorySchedule, location_name: "Schedule", traits: {"smithy.api#required" => {}}))
+    InventoryConfiguration.type = Types::InventoryConfiguration
+    InventoryConfigurationList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: InventoryConfiguration)
+    InventoryConfigurationState.add_member(:enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ENABLED", traits: {"smithy.api#enumValue" => "ENABLED"}))
+    InventoryConfigurationState.add_member(:disabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
+    InventoryDestination.add_member(:s3_bucket_destination, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InventoryS3BucketDestination, location_name: "S3BucketDestination", traits: {"smithy.api#required" => {}}))
+    InventoryDestination.type = Types::InventoryDestination
+    InventoryEncryption.add_member(:sses3, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SSES3, location_name: "SSES3", traits: {"smithy.api#xmlName" => "SSE-S3"}))
+    InventoryEncryption.add_member(:ssekms, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SSEKMS, location_name: "SSEKMS", traits: {"smithy.api#xmlName" => "SSE-KMS"}))
+    InventoryEncryption.type = Types::InventoryEncryption
+    InventoryFilter.add_member(:prefix, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Prefix, location_name: "Prefix", traits: {"smithy.api#required" => {}}))
+    InventoryFilter.type = Types::InventoryFilter
+    InventoryFormat.add_member(:csv, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CSV", traits: {"smithy.api#enumValue" => "CSV"}))
+    InventoryFormat.add_member(:orc, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ORC", traits: {"smithy.api#enumValue" => "ORC"}))
+    InventoryFormat.add_member(:parquet, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Parquet", traits: {"smithy.api#enumValue" => "Parquet"}))
+    InventoryFrequency.add_member(:daily, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Daily", traits: {"smithy.api#enumValue" => "Daily"}))
+    InventoryFrequency.add_member(:weekly, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Weekly", traits: {"smithy.api#enumValue" => "Weekly"}))
+    InventoryIncludedObjectVersions.add_member(:all, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "All", traits: {"smithy.api#enumValue" => "All"}))
+    InventoryIncludedObjectVersions.add_member(:current, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Current", traits: {"smithy.api#enumValue" => "Current"}))
+    InventoryOptionalField.add_member(:size, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Size", traits: {"smithy.api#enumValue" => "Size"}))
+    InventoryOptionalField.add_member(:last_modified_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LastModifiedDate", traits: {"smithy.api#enumValue" => "LastModifiedDate"}))
+    InventoryOptionalField.add_member(:storage_class, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "StorageClass", traits: {"smithy.api#enumValue" => "StorageClass"}))
+    InventoryOptionalField.add_member(:e_tag, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ETag", traits: {"smithy.api#enumValue" => "ETag"}))
+    InventoryOptionalField.add_member(:is_multipart_uploaded, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IsMultipartUploaded", traits: {"smithy.api#enumValue" => "IsMultipartUploaded"}))
+    InventoryOptionalField.add_member(:replication_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ReplicationStatus", traits: {"smithy.api#enumValue" => "ReplicationStatus"}))
+    InventoryOptionalField.add_member(:encryption_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EncryptionStatus", traits: {"smithy.api#enumValue" => "EncryptionStatus"}))
+    InventoryOptionalField.add_member(:object_lock_retain_until_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ObjectLockRetainUntilDate", traits: {"smithy.api#enumValue" => "ObjectLockRetainUntilDate"}))
+    InventoryOptionalField.add_member(:object_lock_mode, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ObjectLockMode", traits: {"smithy.api#enumValue" => "ObjectLockMode"}))
+    InventoryOptionalField.add_member(:object_lock_legal_hold_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ObjectLockLegalHoldStatus", traits: {"smithy.api#enumValue" => "ObjectLockLegalHoldStatus"}))
+    InventoryOptionalField.add_member(:intelligent_tiering_access_tier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "IntelligentTieringAccessTier", traits: {"smithy.api#enumValue" => "IntelligentTieringAccessTier"}))
+    InventoryOptionalField.add_member(:bucket_key_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BucketKeyStatus", traits: {"smithy.api#enumValue" => "BucketKeyStatus"}))
+    InventoryOptionalField.add_member(:checksum_algorithm, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ChecksumAlgorithm", traits: {"smithy.api#enumValue" => "ChecksumAlgorithm"}))
+    InventoryOptionalField.add_member(:object_access_control_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ObjectAccessControlList", traits: {"smithy.api#enumValue" => "ObjectAccessControlList"}))
+    InventoryOptionalField.add_member(:object_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ObjectOwner", traits: {"smithy.api#enumValue" => "ObjectOwner"}))
+    InventoryOptionalFields.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: InventoryOptionalField, traits: {"smithy.api#xmlName" => "Field"})
+    InventoryS3BucketDestination.add_member(:account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "AccountId"))
+    InventoryS3BucketDestination.add_member(:bucket, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketName, location_name: "Bucket", traits: {"smithy.api#required" => {}}))
+    InventoryS3BucketDestination.add_member(:format, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InventoryFormat, location_name: "Format", traits: {"smithy.api#required" => {}}))
+    InventoryS3BucketDestination.add_member(:prefix, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Prefix, location_name: "Prefix"))
+    InventoryS3BucketDestination.add_member(:encryption, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InventoryEncryption, location_name: "Encryption"))
+    InventoryS3BucketDestination.type = Types::InventoryS3BucketDestination
+    InventorySchedule.add_member(:frequency, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InventoryFrequency, location_name: "Frequency", traits: {"smithy.api#required" => {}}))
+    InventorySchedule.type = Types::InventorySchedule
+    InventoryTableConfiguration.add_member(:configuration_state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InventoryConfigurationState, location_name: "ConfigurationState", traits: {"smithy.api#required" => {}}))
+    InventoryTableConfiguration.add_member(:encryption_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MetadataTableEncryptionConfiguration, location_name: "EncryptionConfiguration"))
+    InventoryTableConfiguration.type = Types::InventoryTableConfiguration
+    InventoryTableConfigurationResult.add_member(:configuration_state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InventoryConfigurationState, location_name: "ConfigurationState", traits: {"smithy.api#required" => {}}))
+    InventoryTableConfigurationResult.add_member(:table_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MetadataTableStatus, location_name: "TableStatus"))
+    InventoryTableConfigurationResult.add_member(:error, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorDetails, location_name: "Error"))
+    InventoryTableConfigurationResult.add_member(:table_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3TablesName, location_name: "TableName"))
+    InventoryTableConfigurationResult.add_member(:table_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3TablesArn, location_name: "TableArn"))
+    InventoryTableConfigurationResult.type = Types::InventoryTableConfigurationResult
+    InventoryTableConfigurationUpdates.add_member(:configuration_state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InventoryConfigurationState, location_name: "ConfigurationState", traits: {"smithy.api#required" => {}}))
+    InventoryTableConfigurationUpdates.add_member(:encryption_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MetadataTableEncryptionConfiguration, location_name: "EncryptionConfiguration"))
+    InventoryTableConfigurationUpdates.type = Types::InventoryTableConfigurationUpdates
+    JSONInput.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JSONType, location_name: "Type"))
+    JSONInput.type = Types::JSONInput
+    JSONOutput.add_member(:record_delimiter, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RecordDelimiter, location_name: "RecordDelimiter"))
+    JSONOutput.type = Types::JSONOutput
+    JSONType.add_member(:document, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DOCUMENT", traits: {"smithy.api#enumValue" => "DOCUMENT"}))
+    JSONType.add_member(:lines, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LINES", traits: {"smithy.api#enumValue" => "LINES"}))
+    JournalTableConfiguration.add_member(:record_expiration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RecordExpiration, location_name: "RecordExpiration", traits: {"smithy.api#required" => {}}))
+    JournalTableConfiguration.add_member(:encryption_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MetadataTableEncryptionConfiguration, location_name: "EncryptionConfiguration"))
+    JournalTableConfiguration.type = Types::JournalTableConfiguration
+    JournalTableConfigurationResult.add_member(:table_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MetadataTableStatus, location_name: "TableStatus", traits: {"smithy.api#required" => {}}))
+    JournalTableConfigurationResult.add_member(:error, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorDetails, location_name: "Error"))
+    JournalTableConfigurationResult.add_member(:table_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3TablesName, location_name: "TableName", traits: {"smithy.api#required" => {}}))
+    JournalTableConfigurationResult.add_member(:table_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3TablesArn, location_name: "TableArn"))
+    JournalTableConfigurationResult.add_member(:record_expiration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RecordExpiration, location_name: "RecordExpiration", traits: {"smithy.api#required" => {}}))
+    JournalTableConfigurationResult.type = Types::JournalTableConfigurationResult
+    JournalTableConfigurationUpdates.add_member(:record_expiration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RecordExpiration, location_name: "RecordExpiration", traits: {"smithy.api#required" => {}}))
+    JournalTableConfigurationUpdates.type = Types::JournalTableConfigurationUpdates
+    LambdaFunctionConfiguration.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotificationId, location_name: "Id"))
+    LambdaFunctionConfiguration.add_member(:lambda_function_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LambdaFunctionArn, location_name: "LambdaFunctionArn", traits: {"smithy.api#required" => {}, "smithy.api#xmlName" => "CloudFunction"}))
+    LambdaFunctionConfiguration.add_member(:events, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EventList, location_name: "Events", traits: {"smithy.api#required" => {}, "smithy.api#xmlFlattened" => {}, "smithy.api#xmlName" => "Event"}))
+    LambdaFunctionConfiguration.add_member(:filter, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotificationConfigurationFilter, location_name: "Filter"))
+    LambdaFunctionConfiguration.type = Types::LambdaFunctionConfiguration
+    LambdaFunctionConfigurationList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: LambdaFunctionConfiguration)
+    LifecycleExpiration.add_member(:date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Date, location_name: "Date"))
+    LifecycleExpiration.add_member(:days, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Days, location_name: "Days"))
+    LifecycleExpiration.add_member(:expired_object_delete_marker, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExpiredObjectDeleteMarker, location_name: "ExpiredObjectDeleteMarker"))
+    LifecycleExpiration.type = Types::LifecycleExpiration
+    LifecycleRule.add_member(:expiration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LifecycleExpiration, location_name: "Expiration"))
+    LifecycleRule.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ID, location_name: "ID"))
+    LifecycleRule.add_member(:prefix, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Prefix, location_name: "Prefix", traits: {"smithy.api#deprecated" => {}}))
+    LifecycleRule.add_member(:filter, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LifecycleRuleFilter, location_name: "Filter"))
+    LifecycleRule.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExpirationStatus, location_name: "Status", traits: {"smithy.api#required" => {}}))
+    LifecycleRule.add_member(:transitions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TransitionList, location_name: "Transitions", traits: {"smithy.api#xmlFlattened" => {}, "smithy.api#xmlName" => "Transition"}))
+    LifecycleRule.add_member(:noncurrent_version_transitions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NoncurrentVersionTransitionList, location_name: "NoncurrentVersionTransitions", traits: {"smithy.api#xmlFlattened" => {}, "smithy.api#xmlName" => "NoncurrentVersionTransition"}))
+    LifecycleRule.add_member(:noncurrent_version_expiration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NoncurrentVersionExpiration, location_name: "NoncurrentVersionExpiration"))
+    LifecycleRule.add_member(:abort_incomplete_multipart_upload, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AbortIncompleteMultipartUpload, location_name: "AbortIncompleteMultipartUpload"))
+    LifecycleRule.type = Types::LifecycleRule
+    LifecycleRuleAndOperator.add_member(:prefix, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Prefix, location_name: "Prefix"))
+    LifecycleRuleAndOperator.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagSet, location_name: "Tags", traits: {"smithy.api#xmlFlattened" => {}, "smithy.api#xmlName" => "Tag"}))
+    LifecycleRuleAndOperator.add_member(:object_size_greater_than, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectSizeGreaterThanBytes, location_name: "ObjectSizeGreaterThan"))
+    LifecycleRuleAndOperator.add_member(:object_size_less_than, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectSizeLessThanBytes, location_name: "ObjectSizeLessThan"))
+    LifecycleRuleAndOperator.type = Types::LifecycleRuleAndOperator
+    LifecycleRuleFilter.add_member(:prefix, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Prefix, location_name: "Prefix"))
+    LifecycleRuleFilter.add_member(:tag, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tag, location_name: "Tag"))
+    LifecycleRuleFilter.add_member(:object_size_greater_than, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectSizeGreaterThanBytes, location_name: "ObjectSizeGreaterThan"))
+    LifecycleRuleFilter.add_member(:object_size_less_than, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectSizeLessThanBytes, location_name: "ObjectSizeLessThan"))
+    LifecycleRuleFilter.add_member(:and, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LifecycleRuleAndOperator, location_name: "And"))
+    LifecycleRuleFilter.type = Types::LifecycleRuleFilter
+    LifecycleRules.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: LifecycleRule)
+    ListBucketAnalyticsConfigurationsOutput.add_member(:is_truncated, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IsTruncated, location_name: "IsTruncated"))
+    ListBucketAnalyticsConfigurationsOutput.add_member(:continuation_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Token, location_name: "ContinuationToken"))
+    ListBucketAnalyticsConfigurationsOutput.add_member(:next_continuation_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextContinuationToken"))
+    ListBucketAnalyticsConfigurationsOutput.add_member(:analytics_configuration_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AnalyticsConfigurationList, location_name: "AnalyticsConfigurationList", traits: {"smithy.api#xmlFlattened" => {}, "smithy.api#xmlName" => "AnalyticsConfiguration"}))
+    ListBucketAnalyticsConfigurationsOutput.type = Types::ListBucketAnalyticsConfigurationsOutput
+    ListBucketAnalyticsConfigurationsRequest.add_member(:bucket, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketName, location_name: "Bucket", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "Bucket"}}))
+    ListBucketAnalyticsConfigurationsRequest.add_member(:continuation_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Token, location_name: "ContinuationToken", traits: {"smithy.api#httpQuery" => "continuation-token"}))
+    ListBucketAnalyticsConfigurationsRequest.add_member(:expected_bucket_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "ExpectedBucketOwner", traits: {"smithy.api#httpHeader" => "x-amz-expected-bucket-owner"}))
+    ListBucketAnalyticsConfigurationsRequest.type = Types::ListBucketAnalyticsConfigurationsRequest
+    ListBucketIntelligentTieringConfigurationsOutput.add_member(:is_truncated, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IsTruncated, location_name: "IsTruncated"))
+    ListBucketIntelligentTieringConfigurationsOutput.add_member(:continuation_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Token, location_name: "ContinuationToken"))
+    ListBucketIntelligentTieringConfigurationsOutput.add_member(:next_continuation_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextContinuationToken"))
+    ListBucketIntelligentTieringConfigurationsOutput.add_member(:intelligent_tiering_configuration_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IntelligentTieringConfigurationList, location_name: "IntelligentTieringConfigurationList", traits: {"smithy.api#xmlFlattened" => {}, "smithy.api#xmlName" => "IntelligentTieringConfiguration"}))
+    ListBucketIntelligentTieringConfigurationsOutput.type = Types::ListBucketIntelligentTieringConfigurationsOutput
+    ListBucketIntelligentTieringConfigurationsRequest.add_member(:bucket, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketName, location_name: "Bucket", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "Bucket"}}))
+    ListBucketIntelligentTieringConfigurationsRequest.add_member(:continuation_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Token, location_name: "ContinuationToken", traits: {"smithy.api#httpQuery" => "continuation-token"}))
+    ListBucketIntelligentTieringConfigurationsRequest.add_member(:expected_bucket_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "ExpectedBucketOwner", traits: {"smithy.api#httpHeader" => "x-amz-expected-bucket-owner"}))
+    ListBucketIntelligentTieringConfigurationsRequest.type = Types::ListBucketIntelligentTieringConfigurationsRequest
+    ListBucketInventoryConfigurationsOutput.add_member(:continuation_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Token, location_name: "ContinuationToken"))
+    ListBucketInventoryConfigurationsOutput.add_member(:inventory_configuration_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InventoryConfigurationList, location_name: "InventoryConfigurationList", traits: {"smithy.api#xmlFlattened" => {}, "smithy.api#xmlName" => "InventoryConfiguration"}))
+    ListBucketInventoryConfigurationsOutput.add_member(:is_truncated, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IsTruncated, location_name: "IsTruncated"))
+    ListBucketInventoryConfigurationsOutput.add_member(:next_continuation_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextContinuationToken"))
+    ListBucketInventoryConfigurationsOutput.type = Types::ListBucketInventoryConfigurationsOutput
+    ListBucketInventoryConfigurationsRequest.add_member(:bucket, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketName, location_name: "Bucket", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "Bucket"}}))
+    ListBucketInventoryConfigurationsRequest.add_member(:continuation_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Token, location_name: "ContinuationToken", traits: {"smithy.api#httpQuery" => "continuation-token"}))
+    ListBucketInventoryConfigurationsRequest.add_member(:expected_bucket_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "ExpectedBucketOwner", traits: {"smithy.api#httpHeader" => "x-amz-expected-bucket-owner"}))
+    ListBucketInventoryConfigurationsRequest.type = Types::ListBucketInventoryConfigurationsRequest
+    ListBucketMetricsConfigurationsOutput.add_member(:is_truncated, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IsTruncated, location_name: "IsTruncated"))
+    ListBucketMetricsConfigurationsOutput.add_member(:continuation_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Token, location_name: "ContinuationToken"))
+    ListBucketMetricsConfigurationsOutput.add_member(:next_continuation_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextContinuationToken"))
+    ListBucketMetricsConfigurationsOutput.add_member(:metrics_configuration_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MetricsConfigurationList, location_name: "MetricsConfigurationList", traits: {"smithy.api#xmlFlattened" => {}, "smithy.api#xmlName" => "MetricsConfiguration"}))
+    ListBucketMetricsConfigurationsOutput.type = Types::ListBucketMetricsConfigurationsOutput
+    ListBucketMetricsConfigurationsRequest.add_member(:bucket, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketName, location_name: "Bucket", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "Bucket"}}))
+    ListBucketMetricsConfigurationsRequest.add_member(:continuation_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Token, location_name: "ContinuationToken", traits: {"smithy.api#httpQuery" => "continuation-token"}))
+    ListBucketMetricsConfigurationsRequest.add_member(:expected_bucket_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "ExpectedBucketOwner", traits: {"smithy.api#httpHeader" => "x-amz-expected-bucket-owner"}))
+    ListBucketMetricsConfigurationsRequest.type = Types::ListBucketMetricsConfigurationsRequest
+    ListBucketsOutput.add_member(:buckets, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Buckets, location_name: "Buckets"))
+    ListBucketsOutput.add_member(:owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Owner, location_name: "Owner"))
+    ListBucketsOutput.add_member(:continuation_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "ContinuationToken"))
+    ListBucketsOutput.add_member(:prefix, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Prefix, location_name: "Prefix"))
+    ListBucketsOutput.type = Types::ListBucketsOutput
+    ListBucketsRequest.add_member(:max_buckets, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxBuckets, location_name: "MaxBuckets", traits: {"smithy.api#httpQuery" => "max-buckets"}))
+    ListBucketsRequest.add_member(:continuation_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Token, location_name: "ContinuationToken", traits: {"smithy.api#httpQuery" => "continuation-token"}))
+    ListBucketsRequest.add_member(:prefix, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Prefix, location_name: "Prefix", traits: {"smithy.api#httpQuery" => "prefix"}))
+    ListBucketsRequest.add_member(:bucket_region, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketRegion, location_name: "BucketRegion", traits: {"smithy.api#httpQuery" => "bucket-region"}))
+    ListBucketsRequest.type = Types::ListBucketsRequest
+    ListDirectoryBucketsOutput.add_member(:buckets, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Buckets, location_name: "Buckets"))
+    ListDirectoryBucketsOutput.add_member(:continuation_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryBucketToken, location_name: "ContinuationToken"))
+    ListDirectoryBucketsOutput.type = Types::ListDirectoryBucketsOutput
+    ListDirectoryBucketsRequest.add_member(:continuation_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryBucketToken, location_name: "ContinuationToken", traits: {"smithy.api#httpQuery" => "continuation-token"}))
+    ListDirectoryBucketsRequest.add_member(:max_directory_buckets, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxDirectoryBuckets, location_name: "MaxDirectoryBuckets", traits: {"smithy.api#httpQuery" => "max-directory-buckets"}))
+    ListDirectoryBucketsRequest.type = Types::ListDirectoryBucketsRequest
+    ListMultipartUploadsOutput.add_member(:bucket, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketName, location_name: "Bucket"))
+    ListMultipartUploadsOutput.add_member(:key_marker, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyMarker, location_name: "KeyMarker"))
+    ListMultipartUploadsOutput.add_member(:upload_id_marker, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UploadIdMarker, location_name: "UploadIdMarker"))
+    ListMultipartUploadsOutput.add_member(:next_key_marker, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextKeyMarker, location_name: "NextKeyMarker"))
+    ListMultipartUploadsOutput.add_member(:prefix, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Prefix, location_name: "Prefix"))
+    ListMultipartUploadsOutput.add_member(:delimiter, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Delimiter, location_name: "Delimiter"))
+    ListMultipartUploadsOutput.add_member(:next_upload_id_marker, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextUploadIdMarker, location_name: "NextUploadIdMarker"))
+    ListMultipartUploadsOutput.add_member(:max_uploads, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxUploads, location_name: "MaxUploads"))
+    ListMultipartUploadsOutput.add_member(:is_truncated, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IsTruncated, location_name: "IsTruncated"))
+    ListMultipartUploadsOutput.add_member(:uploads, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MultipartUploadList, location_name: "Uploads", traits: {"smithy.api#xmlFlattened" => {}, "smithy.api#xmlName" => "Upload"}))
+    ListMultipartUploadsOutput.add_member(:common_prefixes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommonPrefixList, location_name: "CommonPrefixes", traits: {"smithy.api#xmlFlattened" => {}}))
+    ListMultipartUploadsOutput.add_member(:encoding_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncodingType, location_name: "EncodingType"))
+    ListMultipartUploadsOutput.add_member(:request_charged, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestCharged, location_name: "RequestCharged", traits: {"smithy.api#httpHeader" => "x-amz-request-charged"}))
+    ListMultipartUploadsOutput.type = Types::ListMultipartUploadsOutput
+    ListMultipartUploadsRequest.add_member(:bucket, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketName, location_name: "Bucket", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "Bucket"}}))
+    ListMultipartUploadsRequest.add_member(:delimiter, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Delimiter, location_name: "Delimiter", traits: {"smithy.api#httpQuery" => "delimiter"}))
+    ListMultipartUploadsRequest.add_member(:encoding_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncodingType, location_name: "EncodingType", traits: {"smithy.api#httpQuery" => "encoding-type"}))
+    ListMultipartUploadsRequest.add_member(:key_marker, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyMarker, location_name: "KeyMarker", traits: {"smithy.api#httpQuery" => "key-marker"}))
+    ListMultipartUploadsRequest.add_member(:max_uploads, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxUploads, location_name: "MaxUploads", traits: {"smithy.api#httpQuery" => "max-uploads"}))
+    ListMultipartUploadsRequest.add_member(:prefix, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Prefix, location_name: "Prefix", traits: {"smithy.api#httpQuery" => "prefix", "smithy.rules#contextParam" => {"name" => "Prefix"}}))
+    ListMultipartUploadsRequest.add_member(:upload_id_marker, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UploadIdMarker, location_name: "UploadIdMarker", traits: {"smithy.api#httpQuery" => "upload-id-marker"}))
+    ListMultipartUploadsRequest.add_member(:expected_bucket_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "ExpectedBucketOwner", traits: {"smithy.api#httpHeader" => "x-amz-expected-bucket-owner"}))
+    ListMultipartUploadsRequest.add_member(:request_payer, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestPayer, location_name: "RequestPayer", traits: {"smithy.api#httpHeader" => "x-amz-request-payer"}))
+    ListMultipartUploadsRequest.type = Types::ListMultipartUploadsRequest
+    ListObjectVersionsOutput.add_member(:is_truncated, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IsTruncated, location_name: "IsTruncated"))
+    ListObjectVersionsOutput.add_member(:key_marker, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyMarker, location_name: "KeyMarker"))
+    ListObjectVersionsOutput.add_member(:version_id_marker, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VersionIdMarker, location_name: "VersionIdMarker"))
+    ListObjectVersionsOutput.add_member(:next_key_marker, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextKeyMarker, location_name: "NextKeyMarker"))
+    ListObjectVersionsOutput.add_member(:next_version_id_marker, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextVersionIdMarker, location_name: "NextVersionIdMarker"))
+    ListObjectVersionsOutput.add_member(:versions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectVersionList, location_name: "Versions", traits: {"smithy.api#xmlFlattened" => {}, "smithy.api#xmlName" => "Version"}))
+    ListObjectVersionsOutput.add_member(:delete_markers, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteMarkers, location_name: "DeleteMarkers", traits: {"smithy.api#xmlFlattened" => {}, "smithy.api#xmlName" => "DeleteMarker"}))
+    ListObjectVersionsOutput.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketName, location_name: "Name"))
+    ListObjectVersionsOutput.add_member(:prefix, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Prefix, location_name: "Prefix"))
+    ListObjectVersionsOutput.add_member(:delimiter, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Delimiter, location_name: "Delimiter"))
+    ListObjectVersionsOutput.add_member(:max_keys, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxKeys, location_name: "MaxKeys"))
+    ListObjectVersionsOutput.add_member(:common_prefixes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommonPrefixList, location_name: "CommonPrefixes", traits: {"smithy.api#xmlFlattened" => {}}))
+    ListObjectVersionsOutput.add_member(:encoding_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncodingType, location_name: "EncodingType"))
+    ListObjectVersionsOutput.add_member(:request_charged, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestCharged, location_name: "RequestCharged", traits: {"smithy.api#httpHeader" => "x-amz-request-charged"}))
+    ListObjectVersionsOutput.type = Types::ListObjectVersionsOutput
+    ListObjectVersionsRequest.add_member(:bucket, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketName, location_name: "Bucket", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "Bucket"}}))
+    ListObjectVersionsRequest.add_member(:delimiter, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Delimiter, location_name: "Delimiter", traits: {"smithy.api#httpQuery" => "delimiter"}))
+    ListObjectVersionsRequest.add_member(:encoding_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncodingType, location_name: "EncodingType", traits: {"smithy.api#httpQuery" => "encoding-type"}))
+    ListObjectVersionsRequest.add_member(:key_marker, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyMarker, location_name: "KeyMarker", traits: {"smithy.api#httpQuery" => "key-marker"}))
+    ListObjectVersionsRequest.add_member(:max_keys, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxKeys, location_name: "MaxKeys", traits: {"smithy.api#httpQuery" => "max-keys"}))
+    ListObjectVersionsRequest.add_member(:prefix, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Prefix, location_name: "Prefix", traits: {"smithy.api#httpQuery" => "prefix", "smithy.rules#contextParam" => {"name" => "Prefix"}}))
+    ListObjectVersionsRequest.add_member(:version_id_marker, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VersionIdMarker, location_name: "VersionIdMarker", traits: {"smithy.api#httpQuery" => "version-id-marker"}))
+    ListObjectVersionsRequest.add_member(:expected_bucket_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "ExpectedBucketOwner", traits: {"smithy.api#httpHeader" => "x-amz-expected-bucket-owner"}))
+    ListObjectVersionsRequest.add_member(:request_payer, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestPayer, location_name: "RequestPayer", traits: {"smithy.api#httpHeader" => "x-amz-request-payer"}))
+    ListObjectVersionsRequest.add_member(:optional_object_attributes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OptionalObjectAttributesList, location_name: "OptionalObjectAttributes", traits: {"smithy.api#httpHeader" => "x-amz-optional-object-attributes"}))
+    ListObjectVersionsRequest.type = Types::ListObjectVersionsRequest
+    ListObjectsOutput.add_member(:is_truncated, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IsTruncated, location_name: "IsTruncated"))
+    ListObjectsOutput.add_member(:marker, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Marker, location_name: "Marker"))
+    ListObjectsOutput.add_member(:next_marker, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextMarker, location_name: "NextMarker"))
+    ListObjectsOutput.add_member(:contents, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectList, location_name: "Contents", traits: {"smithy.api#xmlFlattened" => {}}))
+    ListObjectsOutput.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketName, location_name: "Name"))
+    ListObjectsOutput.add_member(:prefix, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Prefix, location_name: "Prefix"))
+    ListObjectsOutput.add_member(:delimiter, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Delimiter, location_name: "Delimiter"))
+    ListObjectsOutput.add_member(:max_keys, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxKeys, location_name: "MaxKeys"))
+    ListObjectsOutput.add_member(:common_prefixes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommonPrefixList, location_name: "CommonPrefixes", traits: {"smithy.api#xmlFlattened" => {}}))
+    ListObjectsOutput.add_member(:encoding_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncodingType, location_name: "EncodingType"))
+    ListObjectsOutput.add_member(:request_charged, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestCharged, location_name: "RequestCharged", traits: {"smithy.api#httpHeader" => "x-amz-request-charged"}))
+    ListObjectsOutput.type = Types::ListObjectsOutput
+    ListObjectsRequest.add_member(:bucket, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketName, location_name: "Bucket", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "Bucket"}}))
+    ListObjectsRequest.add_member(:delimiter, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Delimiter, location_name: "Delimiter", traits: {"smithy.api#httpQuery" => "delimiter"}))
+    ListObjectsRequest.add_member(:encoding_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncodingType, location_name: "EncodingType", traits: {"smithy.api#httpQuery" => "encoding-type"}))
+    ListObjectsRequest.add_member(:marker, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Marker, location_name: "Marker", traits: {"smithy.api#httpQuery" => "marker"}))
+    ListObjectsRequest.add_member(:max_keys, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxKeys, location_name: "MaxKeys", traits: {"smithy.api#httpQuery" => "max-keys"}))
+    ListObjectsRequest.add_member(:prefix, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Prefix, location_name: "Prefix", traits: {"smithy.api#httpQuery" => "prefix", "smithy.rules#contextParam" => {"name" => "Prefix"}}))
+    ListObjectsRequest.add_member(:request_payer, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestPayer, location_name: "RequestPayer", traits: {"smithy.api#httpHeader" => "x-amz-request-payer"}))
+    ListObjectsRequest.add_member(:expected_bucket_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "ExpectedBucketOwner", traits: {"smithy.api#httpHeader" => "x-amz-expected-bucket-owner"}))
+    ListObjectsRequest.add_member(:optional_object_attributes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OptionalObjectAttributesList, location_name: "OptionalObjectAttributes", traits: {"smithy.api#httpHeader" => "x-amz-optional-object-attributes"}))
+    ListObjectsRequest.type = Types::ListObjectsRequest
+    ListObjectsV2Output.add_member(:is_truncated, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IsTruncated, location_name: "IsTruncated"))
+    ListObjectsV2Output.add_member(:contents, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectList, location_name: "Contents", traits: {"smithy.api#xmlFlattened" => {}}))
+    ListObjectsV2Output.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketName, location_name: "Name"))
+    ListObjectsV2Output.add_member(:prefix, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Prefix, location_name: "Prefix"))
+    ListObjectsV2Output.add_member(:delimiter, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Delimiter, location_name: "Delimiter"))
+    ListObjectsV2Output.add_member(:max_keys, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxKeys, location_name: "MaxKeys"))
+    ListObjectsV2Output.add_member(:common_prefixes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CommonPrefixList, location_name: "CommonPrefixes", traits: {"smithy.api#xmlFlattened" => {}}))
+    ListObjectsV2Output.add_member(:encoding_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncodingType, location_name: "EncodingType"))
+    ListObjectsV2Output.add_member(:key_count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KeyCount, location_name: "KeyCount"))
+    ListObjectsV2Output.add_member(:continuation_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Token, location_name: "ContinuationToken"))
+    ListObjectsV2Output.add_member(:next_continuation_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: "NextContinuationToken"))
+    ListObjectsV2Output.add_member(:start_after, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartAfter, location_name: "StartAfter"))
+    ListObjectsV2Output.add_member(:request_charged, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestCharged, location_name: "RequestCharged", traits: {"smithy.api#httpHeader" => "x-amz-request-charged"}))
+    ListObjectsV2Output.type = Types::ListObjectsV2Output
+    ListObjectsV2Request.add_member(:bucket, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketName, location_name: "Bucket", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "Bucket"}}))
+    ListObjectsV2Request.add_member(:delimiter, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Delimiter, location_name: "Delimiter", traits: {"smithy.api#httpQuery" => "delimiter"}))
+    ListObjectsV2Request.add_member(:encoding_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncodingType, location_name: "EncodingType", traits: {"smithy.api#httpQuery" => "encoding-type"}))
+    ListObjectsV2Request.add_member(:max_keys, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxKeys, location_name: "MaxKeys", traits: {"smithy.api#httpQuery" => "max-keys"}))
+    ListObjectsV2Request.add_member(:prefix, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Prefix, location_name: "Prefix", traits: {"smithy.api#httpQuery" => "prefix", "smithy.rules#contextParam" => {"name" => "Prefix"}}))
+    ListObjectsV2Request.add_member(:continuation_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Token, location_name: "ContinuationToken", traits: {"smithy.api#httpQuery" => "continuation-token"}))
+    ListObjectsV2Request.add_member(:fetch_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FetchOwner, location_name: "FetchOwner", traits: {"smithy.api#httpQuery" => "fetch-owner"}))
+    ListObjectsV2Request.add_member(:start_after, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartAfter, location_name: "StartAfter", traits: {"smithy.api#httpQuery" => "start-after"}))
+    ListObjectsV2Request.add_member(:request_payer, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestPayer, location_name: "RequestPayer", traits: {"smithy.api#httpHeader" => "x-amz-request-payer"}))
+    ListObjectsV2Request.add_member(:expected_bucket_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "ExpectedBucketOwner", traits: {"smithy.api#httpHeader" => "x-amz-expected-bucket-owner"}))
+    ListObjectsV2Request.add_member(:optional_object_attributes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OptionalObjectAttributesList, location_name: "OptionalObjectAttributes", traits: {"smithy.api#httpHeader" => "x-amz-optional-object-attributes"}))
+    ListObjectsV2Request.type = Types::ListObjectsV2Request
+    ListPartsOutput.add_member(:abort_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AbortDate, location_name: "AbortDate", traits: {"smithy.api#httpHeader" => "x-amz-abort-date"}))
+    ListPartsOutput.add_member(:abort_rule_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AbortRuleId, location_name: "AbortRuleId", traits: {"smithy.api#httpHeader" => "x-amz-abort-rule-id"}))
+    ListPartsOutput.add_member(:bucket, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketName, location_name: "Bucket"))
+    ListPartsOutput.add_member(:key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectKey, location_name: "Key"))
+    ListPartsOutput.add_member(:upload_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MultipartUploadId, location_name: "UploadId"))
+    ListPartsOutput.add_member(:part_number_marker, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PartNumberMarker, location_name: "PartNumberMarker"))
+    ListPartsOutput.add_member(:next_part_number_marker, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextPartNumberMarker, location_name: "NextPartNumberMarker"))
+    ListPartsOutput.add_member(:max_parts, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxParts, location_name: "MaxParts"))
+    ListPartsOutput.add_member(:is_truncated, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IsTruncated, location_name: "IsTruncated"))
+    ListPartsOutput.add_member(:parts, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Parts, location_name: "Parts", traits: {"smithy.api#xmlFlattened" => {}, "smithy.api#xmlName" => "Part"}))
+    ListPartsOutput.add_member(:initiator, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Initiator, location_name: "Initiator"))
+    ListPartsOutput.add_member(:owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Owner, location_name: "Owner"))
+    ListPartsOutput.add_member(:storage_class, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StorageClass, location_name: "StorageClass"))
+    ListPartsOutput.add_member(:request_charged, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestCharged, location_name: "RequestCharged", traits: {"smithy.api#httpHeader" => "x-amz-request-charged"}))
+    ListPartsOutput.add_member(:checksum_algorithm, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChecksumAlgorithm, location_name: "ChecksumAlgorithm"))
+    ListPartsOutput.add_member(:checksum_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChecksumType, location_name: "ChecksumType"))
+    ListPartsOutput.type = Types::ListPartsOutput
+    ListPartsRequest.add_member(:bucket, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketName, location_name: "Bucket", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "Bucket"}}))
+    ListPartsRequest.add_member(:key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectKey, location_name: "Key", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "Key"}}))
+    ListPartsRequest.add_member(:max_parts, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxParts, location_name: "MaxParts", traits: {"smithy.api#httpQuery" => "max-parts"}))
+    ListPartsRequest.add_member(:part_number_marker, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PartNumberMarker, location_name: "PartNumberMarker", traits: {"smithy.api#httpQuery" => "part-number-marker"}))
+    ListPartsRequest.add_member(:upload_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MultipartUploadId, location_name: "UploadId", traits: {"smithy.api#httpQuery" => "uploadId", "smithy.api#required" => {}}))
+    ListPartsRequest.add_member(:request_payer, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestPayer, location_name: "RequestPayer", traits: {"smithy.api#httpHeader" => "x-amz-request-payer"}))
+    ListPartsRequest.add_member(:expected_bucket_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "ExpectedBucketOwner", traits: {"smithy.api#httpHeader" => "x-amz-expected-bucket-owner"}))
+    ListPartsRequest.add_member(:sse_customer_algorithm, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SSECustomerAlgorithm, location_name: "SSECustomerAlgorithm", traits: {"smithy.api#httpHeader" => "x-amz-server-side-encryption-customer-algorithm"}))
+    ListPartsRequest.add_member(:sse_customer_key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SSECustomerKey, location_name: "SSECustomerKey", traits: {"smithy.api#httpHeader" => "x-amz-server-side-encryption-customer-key"}))
+    ListPartsRequest.add_member(:sse_customer_key_md5, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SSECustomerKeyMD5, location_name: "SSECustomerKeyMD5", traits: {"smithy.api#httpHeader" => "x-amz-server-side-encryption-customer-key-MD5"}))
+    ListPartsRequest.type = Types::ListPartsRequest
+    LocationInfo.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LocationType, location_name: "Type"))
+    LocationInfo.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LocationNameAsString, location_name: "Name"))
+    LocationInfo.type = Types::LocationInfo
+    LocationType.add_member(:availability_zone, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AvailabilityZone", traits: {"smithy.api#enumValue" => "AvailabilityZone"}))
+    LocationType.add_member(:local_zone, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "LocalZone", traits: {"smithy.api#enumValue" => "LocalZone"}))
+    LoggingEnabled.add_member(:target_bucket, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TargetBucket, location_name: "TargetBucket", traits: {"smithy.api#required" => {}}))
+    LoggingEnabled.add_member(:target_grants, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TargetGrants, location_name: "TargetGrants"))
+    LoggingEnabled.add_member(:target_prefix, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TargetPrefix, location_name: "TargetPrefix", traits: {"smithy.api#required" => {}}))
+    LoggingEnabled.add_member(:target_object_key_format, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TargetObjectKeyFormat, location_name: "TargetObjectKeyFormat"))
+    LoggingEnabled.type = Types::LoggingEnabled
+    MFADelete.add_member(:enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Enabled", traits: {"smithy.api#enumValue" => "Enabled"}))
+    MFADelete.add_member(:disabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Disabled", traits: {"smithy.api#enumValue" => "Disabled"}))
+    MFADeleteStatus.add_member(:enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Enabled", traits: {"smithy.api#enumValue" => "Enabled"}))
+    MFADeleteStatus.add_member(:disabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Disabled", traits: {"smithy.api#enumValue" => "Disabled"}))
+    Metadata.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: MetadataKey)
+    Metadata.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: MetadataValue)
+    MetadataConfiguration.add_member(:journal_table_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JournalTableConfiguration, location_name: "JournalTableConfiguration", traits: {"smithy.api#required" => {}}))
+    MetadataConfiguration.add_member(:inventory_table_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InventoryTableConfiguration, location_name: "InventoryTableConfiguration"))
+    MetadataConfiguration.type = Types::MetadataConfiguration
+    MetadataConfigurationResult.add_member(:destination_result, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DestinationResult, location_name: "DestinationResult", traits: {"smithy.api#required" => {}}))
+    MetadataConfigurationResult.add_member(:journal_table_configuration_result, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JournalTableConfigurationResult, location_name: "JournalTableConfigurationResult"))
+    MetadataConfigurationResult.add_member(:inventory_table_configuration_result, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InventoryTableConfigurationResult, location_name: "InventoryTableConfigurationResult"))
+    MetadataConfigurationResult.type = Types::MetadataConfigurationResult
+    MetadataDirective.add_member(:copy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "COPY", traits: {"smithy.api#enumValue" => "COPY"}))
+    MetadataDirective.add_member(:replace, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "REPLACE", traits: {"smithy.api#enumValue" => "REPLACE"}))
+    MetadataEntry.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MetadataKey, location_name: "Name"))
+    MetadataEntry.add_member(:value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MetadataValue, location_name: "Value"))
+    MetadataEntry.type = Types::MetadataEntry
+    MetadataTableConfiguration.add_member(:s3_tables_destination, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3TablesDestination, location_name: "S3TablesDestination", traits: {"smithy.api#required" => {}}))
+    MetadataTableConfiguration.type = Types::MetadataTableConfiguration
+    MetadataTableConfigurationResult.add_member(:s3_tables_destination_result, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3TablesDestinationResult, location_name: "S3TablesDestinationResult", traits: {"smithy.api#required" => {}}))
+    MetadataTableConfigurationResult.type = Types::MetadataTableConfigurationResult
+    MetadataTableEncryptionConfiguration.add_member(:sse_algorithm, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TableSseAlgorithm, location_name: "SseAlgorithm", traits: {"smithy.api#required" => {}}))
+    MetadataTableEncryptionConfiguration.add_member(:kms_key_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "KmsKeyArn"))
+    MetadataTableEncryptionConfiguration.type = Types::MetadataTableEncryptionConfiguration
+    Metrics.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MetricsStatus, location_name: "Status", traits: {"smithy.api#required" => {}}))
+    Metrics.add_member(:event_threshold, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReplicationTimeValue, location_name: "EventThreshold"))
+    Metrics.type = Types::Metrics
+    MetricsAndOperator.add_member(:prefix, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Prefix, location_name: "Prefix"))
+    MetricsAndOperator.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagSet, location_name: "Tags", traits: {"smithy.api#xmlFlattened" => {}, "smithy.api#xmlName" => "Tag"}))
+    MetricsAndOperator.add_member(:access_point_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessPointArn, location_name: "AccessPointArn"))
+    MetricsAndOperator.type = Types::MetricsAndOperator
+    MetricsConfiguration.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MetricsId, location_name: "Id", traits: {"smithy.api#required" => {}}))
+    MetricsConfiguration.add_member(:filter, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MetricsFilter, location_name: "Filter"))
+    MetricsConfiguration.type = Types::MetricsConfiguration
+    MetricsConfigurationList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: MetricsConfiguration)
+    MetricsFilter.add_member(:prefix, Types::MetricsFilter::Prefix, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Prefix, location_name: "Prefix"))
+    MetricsFilter.add_member(:tag, Types::MetricsFilter::Tag, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tag, location_name: "Tag"))
+    MetricsFilter.add_member(:access_point_arn, Types::MetricsFilter::AccessPointArn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessPointArn, location_name: "AccessPointArn"))
+    MetricsFilter.add_member(:and, Types::MetricsFilter::And, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MetricsAndOperator, location_name: "And"))
+    MetricsFilter.add_member(:unknown, Types::MetricsFilter::Unknown, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit))
+    MetricsFilter.type = Types::MetricsFilter
+    MetricsStatus.add_member(:enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Enabled", traits: {"smithy.api#enumValue" => "Enabled"}))
+    MetricsStatus.add_member(:disabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Disabled", traits: {"smithy.api#enumValue" => "Disabled"}))
+    MultipartUpload.add_member(:upload_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MultipartUploadId, location_name: "UploadId"))
+    MultipartUpload.add_member(:key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectKey, location_name: "Key"))
+    MultipartUpload.add_member(:initiated, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Initiated, location_name: "Initiated"))
+    MultipartUpload.add_member(:storage_class, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StorageClass, location_name: "StorageClass"))
+    MultipartUpload.add_member(:owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Owner, location_name: "Owner"))
+    MultipartUpload.add_member(:initiator, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Initiator, location_name: "Initiator"))
+    MultipartUpload.add_member(:checksum_algorithm, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChecksumAlgorithm, location_name: "ChecksumAlgorithm"))
+    MultipartUpload.add_member(:checksum_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChecksumType, location_name: "ChecksumType"))
+    MultipartUpload.type = Types::MultipartUpload
+    MultipartUploadList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: MultipartUpload)
+    NoSuchBucket.type = Types::NoSuchBucket
+    NoSuchKey.type = Types::NoSuchKey
+    NoSuchUpload.type = Types::NoSuchUpload
+    NoncurrentVersionExpiration.add_member(:noncurrent_days, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Days, location_name: "NoncurrentDays"))
+    NoncurrentVersionExpiration.add_member(:newer_noncurrent_versions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VersionCount, location_name: "NewerNoncurrentVersions"))
+    NoncurrentVersionExpiration.type = Types::NoncurrentVersionExpiration
+    NoncurrentVersionTransition.add_member(:noncurrent_days, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Days, location_name: "NoncurrentDays"))
+    NoncurrentVersionTransition.add_member(:storage_class, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TransitionStorageClass, location_name: "StorageClass"))
+    NoncurrentVersionTransition.add_member(:newer_noncurrent_versions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VersionCount, location_name: "NewerNoncurrentVersions"))
+    NoncurrentVersionTransition.type = Types::NoncurrentVersionTransition
+    NoncurrentVersionTransitionList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: NoncurrentVersionTransition)
+    NotFound.type = Types::NotFound
+    NotificationConfiguration.add_member(:topic_configurations, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TopicConfigurationList, location_name: "TopicConfigurations", traits: {"smithy.api#xmlFlattened" => {}, "smithy.api#xmlName" => "TopicConfiguration"}))
+    NotificationConfiguration.add_member(:queue_configurations, ::Smithy::Schema::Shapes::ShapeRef.new(shape: QueueConfigurationList, location_name: "QueueConfigurations", traits: {"smithy.api#xmlFlattened" => {}, "smithy.api#xmlName" => "QueueConfiguration"}))
+    NotificationConfiguration.add_member(:lambda_function_configurations, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LambdaFunctionConfigurationList, location_name: "LambdaFunctionConfigurations", traits: {"smithy.api#xmlFlattened" => {}, "smithy.api#xmlName" => "CloudFunctionConfiguration"}))
+    NotificationConfiguration.add_member(:event_bridge_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EventBridgeConfiguration, location_name: "EventBridgeConfiguration"))
+    NotificationConfiguration.type = Types::NotificationConfiguration
+    NotificationConfigurationFilter.add_member(:key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3KeyFilter, location_name: "Key", traits: {"smithy.api#xmlName" => "S3Key"}))
+    NotificationConfigurationFilter.type = Types::NotificationConfigurationFilter
+    Object.add_member(:key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectKey, location_name: "Key"))
+    Object.add_member(:last_modified, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LastModified, location_name: "LastModified"))
+    Object.add_member(:e_tag, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ETag, location_name: "ETag"))
+    Object.add_member(:checksum_algorithm, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChecksumAlgorithmList, location_name: "ChecksumAlgorithm", traits: {"smithy.api#xmlFlattened" => {}}))
+    Object.add_member(:checksum_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChecksumType, location_name: "ChecksumType"))
+    Object.add_member(:size, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Size, location_name: "Size"))
+    Object.add_member(:storage_class, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectStorageClass, location_name: "StorageClass"))
+    Object.add_member(:owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Owner, location_name: "Owner"))
+    Object.add_member(:restore_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RestoreStatus, location_name: "RestoreStatus"))
+    Object.type = Types::Object
+    ObjectAlreadyInActiveTierError.type = Types::ObjectAlreadyInActiveTierError
+    ObjectAttributes.add_member(:etag, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ETAG", traits: {"smithy.api#enumValue" => "ETag"}))
+    ObjectAttributes.add_member(:checksum, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CHECKSUM", traits: {"smithy.api#enumValue" => "Checksum"}))
+    ObjectAttributes.add_member(:object_parts, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "OBJECT_PARTS", traits: {"smithy.api#enumValue" => "ObjectParts"}))
+    ObjectAttributes.add_member(:storage_class, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "STORAGE_CLASS", traits: {"smithy.api#enumValue" => "StorageClass"}))
+    ObjectAttributes.add_member(:object_size, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "OBJECT_SIZE", traits: {"smithy.api#enumValue" => "ObjectSize"}))
+    ObjectAttributesList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectAttributes)
+    ObjectCannedACL.add_member(:private, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "private", traits: {"smithy.api#enumValue" => "private"}))
+    ObjectCannedACL.add_member(:public_read, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "public_read", traits: {"smithy.api#enumValue" => "public-read"}))
+    ObjectCannedACL.add_member(:public_read_write, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "public_read_write", traits: {"smithy.api#enumValue" => "public-read-write"}))
+    ObjectCannedACL.add_member(:authenticated_read, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "authenticated_read", traits: {"smithy.api#enumValue" => "authenticated-read"}))
+    ObjectCannedACL.add_member(:aws_exec_read, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "aws_exec_read", traits: {"smithy.api#enumValue" => "aws-exec-read"}))
+    ObjectCannedACL.add_member(:bucket_owner_read, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "bucket_owner_read", traits: {"smithy.api#enumValue" => "bucket-owner-read"}))
+    ObjectCannedACL.add_member(:bucket_owner_full_control, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "bucket_owner_full_control", traits: {"smithy.api#enumValue" => "bucket-owner-full-control"}))
+    ObjectIdentifier.add_member(:key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectKey, location_name: "Key", traits: {"smithy.api#required" => {}}))
+    ObjectIdentifier.add_member(:version_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectVersionId, location_name: "VersionId"))
+    ObjectIdentifier.add_member(:e_tag, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ETag, location_name: "ETag"))
+    ObjectIdentifier.add_member(:last_modified_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LastModifiedTime, location_name: "LastModifiedTime"))
+    ObjectIdentifier.add_member(:size, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Size, location_name: "Size"))
+    ObjectIdentifier.type = Types::ObjectIdentifier
+    ObjectIdentifierList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectIdentifier)
+    ObjectList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Object)
+    ObjectLockConfiguration.add_member(:object_lock_enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectLockEnabled, location_name: "ObjectLockEnabled"))
+    ObjectLockConfiguration.add_member(:rule, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectLockRule, location_name: "Rule"))
+    ObjectLockConfiguration.type = Types::ObjectLockConfiguration
+    ObjectLockEnabled.add_member(:enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Enabled", traits: {"smithy.api#enumValue" => "Enabled"}))
+    ObjectLockLegalHold.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectLockLegalHoldStatus, location_name: "Status"))
+    ObjectLockLegalHold.type = Types::ObjectLockLegalHold
+    ObjectLockLegalHoldStatus.add_member(:on, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ON", traits: {"smithy.api#enumValue" => "ON"}))
+    ObjectLockLegalHoldStatus.add_member(:off, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "OFF", traits: {"smithy.api#enumValue" => "OFF"}))
+    ObjectLockMode.add_member(:governance, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "GOVERNANCE", traits: {"smithy.api#enumValue" => "GOVERNANCE"}))
+    ObjectLockMode.add_member(:compliance, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "COMPLIANCE", traits: {"smithy.api#enumValue" => "COMPLIANCE"}))
+    ObjectLockRetention.add_member(:mode, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectLockRetentionMode, location_name: "Mode"))
+    ObjectLockRetention.add_member(:retain_until_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Date, location_name: "RetainUntilDate"))
+    ObjectLockRetention.type = Types::ObjectLockRetention
+    ObjectLockRetentionMode.add_member(:governance, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "GOVERNANCE", traits: {"smithy.api#enumValue" => "GOVERNANCE"}))
+    ObjectLockRetentionMode.add_member(:compliance, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "COMPLIANCE", traits: {"smithy.api#enumValue" => "COMPLIANCE"}))
+    ObjectLockRule.add_member(:default_retention, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DefaultRetention, location_name: "DefaultRetention"))
+    ObjectLockRule.type = Types::ObjectLockRule
+    ObjectNotInActiveTierError.type = Types::ObjectNotInActiveTierError
+    ObjectOwnership.add_member(:bucket_owner_preferred, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BucketOwnerPreferred", traits: {"smithy.api#enumValue" => "BucketOwnerPreferred"}))
+    ObjectOwnership.add_member(:object_writer, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ObjectWriter", traits: {"smithy.api#enumValue" => "ObjectWriter"}))
+    ObjectOwnership.add_member(:bucket_owner_enforced, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BucketOwnerEnforced", traits: {"smithy.api#enumValue" => "BucketOwnerEnforced"}))
+    ObjectPart.add_member(:part_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PartNumber, location_name: "PartNumber"))
+    ObjectPart.add_member(:size, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Size, location_name: "Size"))
+    ObjectPart.add_member(:checksum_crc32, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChecksumCRC32, location_name: "ChecksumCRC32"))
+    ObjectPart.add_member(:checksum_crc32_c, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChecksumCRC32C, location_name: "ChecksumCRC32C"))
+    ObjectPart.add_member(:checksum_crc64_nvme, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChecksumCRC64NVME, location_name: "ChecksumCRC64NVME"))
+    ObjectPart.add_member(:checksum_sha1, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChecksumSHA1, location_name: "ChecksumSHA1"))
+    ObjectPart.add_member(:checksum_sha256, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChecksumSHA256, location_name: "ChecksumSHA256"))
+    ObjectPart.type = Types::ObjectPart
+    ObjectStorageClass.add_member(:standard, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "STANDARD", traits: {"smithy.api#enumValue" => "STANDARD"}))
+    ObjectStorageClass.add_member(:reduced_redundancy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "REDUCED_REDUNDANCY", traits: {"smithy.api#enumValue" => "REDUCED_REDUNDANCY"}))
+    ObjectStorageClass.add_member(:glacier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "GLACIER", traits: {"smithy.api#enumValue" => "GLACIER"}))
+    ObjectStorageClass.add_member(:standard_ia, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "STANDARD_IA", traits: {"smithy.api#enumValue" => "STANDARD_IA"}))
+    ObjectStorageClass.add_member(:onezone_ia, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ONEZONE_IA", traits: {"smithy.api#enumValue" => "ONEZONE_IA"}))
+    ObjectStorageClass.add_member(:intelligent_tiering, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INTELLIGENT_TIERING", traits: {"smithy.api#enumValue" => "INTELLIGENT_TIERING"}))
+    ObjectStorageClass.add_member(:deep_archive, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DEEP_ARCHIVE", traits: {"smithy.api#enumValue" => "DEEP_ARCHIVE"}))
+    ObjectStorageClass.add_member(:outposts, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "OUTPOSTS", traits: {"smithy.api#enumValue" => "OUTPOSTS"}))
+    ObjectStorageClass.add_member(:glacier_ir, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "GLACIER_IR", traits: {"smithy.api#enumValue" => "GLACIER_IR"}))
+    ObjectStorageClass.add_member(:snow, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SNOW", traits: {"smithy.api#enumValue" => "SNOW"}))
+    ObjectStorageClass.add_member(:express_onezone, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EXPRESS_ONEZONE", traits: {"smithy.api#enumValue" => "EXPRESS_ONEZONE"}))
+    ObjectStorageClass.add_member(:fsx_openzfs, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FSX_OPENZFS", traits: {"smithy.api#enumValue" => "FSX_OPENZFS"}))
+    ObjectVersion.add_member(:e_tag, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ETag, location_name: "ETag"))
+    ObjectVersion.add_member(:checksum_algorithm, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChecksumAlgorithmList, location_name: "ChecksumAlgorithm", traits: {"smithy.api#xmlFlattened" => {}}))
+    ObjectVersion.add_member(:checksum_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChecksumType, location_name: "ChecksumType"))
+    ObjectVersion.add_member(:size, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Size, location_name: "Size"))
+    ObjectVersion.add_member(:storage_class, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectVersionStorageClass, location_name: "StorageClass"))
+    ObjectVersion.add_member(:key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectKey, location_name: "Key"))
+    ObjectVersion.add_member(:version_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectVersionId, location_name: "VersionId"))
+    ObjectVersion.add_member(:is_latest, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IsLatest, location_name: "IsLatest"))
+    ObjectVersion.add_member(:last_modified, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LastModified, location_name: "LastModified"))
+    ObjectVersion.add_member(:owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Owner, location_name: "Owner"))
+    ObjectVersion.add_member(:restore_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RestoreStatus, location_name: "RestoreStatus"))
+    ObjectVersion.type = Types::ObjectVersion
+    ObjectVersionList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectVersion)
+    ObjectVersionStorageClass.add_member(:standard, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "STANDARD", traits: {"smithy.api#enumValue" => "STANDARD"}))
+    OptionalObjectAttributes.add_member(:restore_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "RESTORE_STATUS", traits: {"smithy.api#enumValue" => "RestoreStatus"}))
+    OptionalObjectAttributesList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: OptionalObjectAttributes)
+    OutputLocation.add_member(:s3, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3Location, location_name: "S3"))
+    OutputLocation.type = Types::OutputLocation
+    OutputSerialization.add_member(:csv, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CSVOutput, location_name: "CSV"))
+    OutputSerialization.add_member(:json, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JSONOutput, location_name: "JSON"))
+    OutputSerialization.type = Types::OutputSerialization
+    Owner.add_member(:display_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DisplayName, location_name: "DisplayName"))
+    Owner.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ID, location_name: "ID"))
+    Owner.type = Types::Owner
+    OwnerOverride.add_member(:destination, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Destination", traits: {"smithy.api#enumValue" => "Destination"}))
+    OwnershipControls.add_member(:rules, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OwnershipControlsRules, location_name: "Rules", traits: {"smithy.api#required" => {}, "smithy.api#xmlFlattened" => {}, "smithy.api#xmlName" => "Rule"}))
+    OwnershipControls.type = Types::OwnershipControls
+    OwnershipControlsRule.add_member(:object_ownership, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectOwnership, location_name: "ObjectOwnership", traits: {"smithy.api#required" => {}}))
+    OwnershipControlsRule.type = Types::OwnershipControlsRule
+    OwnershipControlsRules.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: OwnershipControlsRule)
+    ParquetInput.type = Types::ParquetInput
+    Part.add_member(:part_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PartNumber, location_name: "PartNumber"))
+    Part.add_member(:last_modified, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LastModified, location_name: "LastModified"))
+    Part.add_member(:e_tag, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ETag, location_name: "ETag"))
+    Part.add_member(:size, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Size, location_name: "Size"))
+    Part.add_member(:checksum_crc32, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChecksumCRC32, location_name: "ChecksumCRC32"))
+    Part.add_member(:checksum_crc32_c, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChecksumCRC32C, location_name: "ChecksumCRC32C"))
+    Part.add_member(:checksum_crc64_nvme, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChecksumCRC64NVME, location_name: "ChecksumCRC64NVME"))
+    Part.add_member(:checksum_sha1, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChecksumSHA1, location_name: "ChecksumSHA1"))
+    Part.add_member(:checksum_sha256, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChecksumSHA256, location_name: "ChecksumSHA256"))
+    Part.type = Types::Part
+    PartitionDateSource.add_member(:event_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EventTime", traits: {"smithy.api#enumValue" => "EventTime"}))
+    PartitionDateSource.add_member(:delivery_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DeliveryTime", traits: {"smithy.api#enumValue" => "DeliveryTime"}))
+    PartitionedPrefix.add_member(:partition_date_source, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PartitionDateSource, location_name: "PartitionDateSource"))
+    PartitionedPrefix.type = Types::PartitionedPrefix
+    Parts.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Part)
+    PartsList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectPart)
+    Payer.add_member(:requester, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Requester", traits: {"smithy.api#enumValue" => "Requester"}))
+    Payer.add_member(:bucket_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "BucketOwner", traits: {"smithy.api#enumValue" => "BucketOwner"}))
+    Permission.add_member(:full_control, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FULL_CONTROL", traits: {"smithy.api#enumValue" => "FULL_CONTROL"}))
+    Permission.add_member(:write, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "WRITE", traits: {"smithy.api#enumValue" => "WRITE"}))
+    Permission.add_member(:write_acp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "WRITE_ACP", traits: {"smithy.api#enumValue" => "WRITE_ACP"}))
+    Permission.add_member(:read, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "READ", traits: {"smithy.api#enumValue" => "READ"}))
+    Permission.add_member(:read_acp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "READ_ACP", traits: {"smithy.api#enumValue" => "READ_ACP"}))
+    PolicyStatus.add_member(:is_public, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IsPublic, location_name: "IsPublic", traits: {"smithy.api#xmlName" => "IsPublic"}))
+    PolicyStatus.type = Types::PolicyStatus
+    Progress.add_member(:bytes_scanned, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BytesScanned, location_name: "BytesScanned"))
+    Progress.add_member(:bytes_processed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BytesProcessed, location_name: "BytesProcessed"))
+    Progress.add_member(:bytes_returned, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BytesReturned, location_name: "BytesReturned"))
+    Progress.type = Types::Progress
+    ProgressEvent.add_member(:details, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Progress, location_name: "Details", traits: {"smithy.api#eventPayload" => {}}))
+    ProgressEvent.type = Types::ProgressEvent
+    Protocol.add_member(:http, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "http", traits: {"smithy.api#enumValue" => "http"}))
+    Protocol.add_member(:https, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "https", traits: {"smithy.api#enumValue" => "https"}))
+    PublicAccessBlockConfiguration.add_member(:block_public_acls, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Setting, location_name: "BlockPublicAcls", traits: {"smithy.api#xmlName" => "BlockPublicAcls"}))
+    PublicAccessBlockConfiguration.add_member(:ignore_public_acls, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Setting, location_name: "IgnorePublicAcls", traits: {"smithy.api#xmlName" => "IgnorePublicAcls"}))
+    PublicAccessBlockConfiguration.add_member(:block_public_policy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Setting, location_name: "BlockPublicPolicy", traits: {"smithy.api#xmlName" => "BlockPublicPolicy"}))
+    PublicAccessBlockConfiguration.add_member(:restrict_public_buckets, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Setting, location_name: "RestrictPublicBuckets", traits: {"smithy.api#xmlName" => "RestrictPublicBuckets"}))
+    PublicAccessBlockConfiguration.type = Types::PublicAccessBlockConfiguration
+    PutBucketAccelerateConfigurationRequest.add_member(:bucket, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketName, location_name: "Bucket", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "Bucket"}}))
+    PutBucketAccelerateConfigurationRequest.add_member(:accelerate_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccelerateConfiguration, location_name: "AccelerateConfiguration", traits: {"smithy.api#httpPayload" => {}, "smithy.api#required" => {}, "smithy.api#xmlName" => "AccelerateConfiguration"}))
+    PutBucketAccelerateConfigurationRequest.add_member(:expected_bucket_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "ExpectedBucketOwner", traits: {"smithy.api#httpHeader" => "x-amz-expected-bucket-owner"}))
+    PutBucketAccelerateConfigurationRequest.add_member(:checksum_algorithm, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChecksumAlgorithm, location_name: "ChecksumAlgorithm", traits: {"smithy.api#httpHeader" => "x-amz-sdk-checksum-algorithm"}))
+    PutBucketAccelerateConfigurationRequest[:http_payload] = :accelerate_configuration
+    PutBucketAccelerateConfigurationRequest[:http_payload_member] = PutBucketAccelerateConfigurationRequest.member(:accelerate_configuration)
+    PutBucketAccelerateConfigurationRequest.type = Types::PutBucketAccelerateConfigurationRequest
+    PutBucketAclRequest.add_member(:acl, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketCannedACL, location_name: "ACL", traits: {"smithy.api#httpHeader" => "x-amz-acl"}))
+    PutBucketAclRequest.add_member(:access_control_policy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessControlPolicy, location_name: "AccessControlPolicy", traits: {"smithy.api#httpPayload" => {}, "smithy.api#xmlName" => "AccessControlPolicy"}))
+    PutBucketAclRequest.add_member(:bucket, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketName, location_name: "Bucket", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "Bucket"}}))
+    PutBucketAclRequest.add_member(:content_md5, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContentMD5, location_name: "ContentMD5", traits: {"smithy.api#httpHeader" => "Content-MD5"}))
+    PutBucketAclRequest.add_member(:checksum_algorithm, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChecksumAlgorithm, location_name: "ChecksumAlgorithm", traits: {"smithy.api#httpHeader" => "x-amz-sdk-checksum-algorithm"}))
+    PutBucketAclRequest.add_member(:grant_full_control, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GrantFullControl, location_name: "GrantFullControl", traits: {"smithy.api#httpHeader" => "x-amz-grant-full-control"}))
+    PutBucketAclRequest.add_member(:grant_read, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GrantRead, location_name: "GrantRead", traits: {"smithy.api#httpHeader" => "x-amz-grant-read"}))
+    PutBucketAclRequest.add_member(:grant_read_acp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GrantReadACP, location_name: "GrantReadACP", traits: {"smithy.api#httpHeader" => "x-amz-grant-read-acp"}))
+    PutBucketAclRequest.add_member(:grant_write, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GrantWrite, location_name: "GrantWrite", traits: {"smithy.api#httpHeader" => "x-amz-grant-write"}))
+    PutBucketAclRequest.add_member(:grant_write_acp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GrantWriteACP, location_name: "GrantWriteACP", traits: {"smithy.api#httpHeader" => "x-amz-grant-write-acp"}))
+    PutBucketAclRequest.add_member(:expected_bucket_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "ExpectedBucketOwner", traits: {"smithy.api#httpHeader" => "x-amz-expected-bucket-owner"}))
+    PutBucketAclRequest[:http_payload] = :access_control_policy
+    PutBucketAclRequest[:http_payload_member] = PutBucketAclRequest.member(:access_control_policy)
+    PutBucketAclRequest.type = Types::PutBucketAclRequest
+    PutBucketAnalyticsConfigurationRequest.add_member(:bucket, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketName, location_name: "Bucket", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "Bucket"}}))
+    PutBucketAnalyticsConfigurationRequest.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AnalyticsId, location_name: "Id", traits: {"smithy.api#httpQuery" => "id", "smithy.api#required" => {}}))
+    PutBucketAnalyticsConfigurationRequest.add_member(:analytics_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AnalyticsConfiguration, location_name: "AnalyticsConfiguration", traits: {"smithy.api#httpPayload" => {}, "smithy.api#required" => {}, "smithy.api#xmlName" => "AnalyticsConfiguration"}))
+    PutBucketAnalyticsConfigurationRequest.add_member(:expected_bucket_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "ExpectedBucketOwner", traits: {"smithy.api#httpHeader" => "x-amz-expected-bucket-owner"}))
+    PutBucketAnalyticsConfigurationRequest[:http_payload] = :analytics_configuration
+    PutBucketAnalyticsConfigurationRequest[:http_payload_member] = PutBucketAnalyticsConfigurationRequest.member(:analytics_configuration)
+    PutBucketAnalyticsConfigurationRequest.type = Types::PutBucketAnalyticsConfigurationRequest
+    PutBucketCorsRequest.add_member(:bucket, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketName, location_name: "Bucket", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "Bucket"}}))
+    PutBucketCorsRequest.add_member(:cors_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CORSConfiguration, location_name: "CORSConfiguration", traits: {"smithy.api#httpPayload" => {}, "smithy.api#required" => {}, "smithy.api#xmlName" => "CORSConfiguration"}))
+    PutBucketCorsRequest.add_member(:content_md5, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContentMD5, location_name: "ContentMD5", traits: {"smithy.api#httpHeader" => "Content-MD5"}))
+    PutBucketCorsRequest.add_member(:checksum_algorithm, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChecksumAlgorithm, location_name: "ChecksumAlgorithm", traits: {"smithy.api#httpHeader" => "x-amz-sdk-checksum-algorithm"}))
+    PutBucketCorsRequest.add_member(:expected_bucket_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "ExpectedBucketOwner", traits: {"smithy.api#httpHeader" => "x-amz-expected-bucket-owner"}))
+    PutBucketCorsRequest[:http_payload] = :cors_configuration
+    PutBucketCorsRequest[:http_payload_member] = PutBucketCorsRequest.member(:cors_configuration)
+    PutBucketCorsRequest.type = Types::PutBucketCorsRequest
+    PutBucketEncryptionRequest.add_member(:bucket, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketName, location_name: "Bucket", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "Bucket"}}))
+    PutBucketEncryptionRequest.add_member(:content_md5, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContentMD5, location_name: "ContentMD5", traits: {"smithy.api#httpHeader" => "Content-MD5"}))
+    PutBucketEncryptionRequest.add_member(:checksum_algorithm, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChecksumAlgorithm, location_name: "ChecksumAlgorithm", traits: {"smithy.api#httpHeader" => "x-amz-sdk-checksum-algorithm"}))
+    PutBucketEncryptionRequest.add_member(:server_side_encryption_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServerSideEncryptionConfiguration, location_name: "ServerSideEncryptionConfiguration", traits: {"smithy.api#httpPayload" => {}, "smithy.api#required" => {}, "smithy.api#xmlName" => "ServerSideEncryptionConfiguration"}))
+    PutBucketEncryptionRequest.add_member(:expected_bucket_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "ExpectedBucketOwner", traits: {"smithy.api#httpHeader" => "x-amz-expected-bucket-owner"}))
+    PutBucketEncryptionRequest[:http_payload] = :server_side_encryption_configuration
+    PutBucketEncryptionRequest[:http_payload_member] = PutBucketEncryptionRequest.member(:server_side_encryption_configuration)
+    PutBucketEncryptionRequest.type = Types::PutBucketEncryptionRequest
+    PutBucketIntelligentTieringConfigurationRequest.add_member(:bucket, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketName, location_name: "Bucket", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "Bucket"}}))
+    PutBucketIntelligentTieringConfigurationRequest.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IntelligentTieringId, location_name: "Id", traits: {"smithy.api#httpQuery" => "id", "smithy.api#required" => {}}))
+    PutBucketIntelligentTieringConfigurationRequest.add_member(:expected_bucket_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "ExpectedBucketOwner", traits: {"smithy.api#httpHeader" => "x-amz-expected-bucket-owner"}))
+    PutBucketIntelligentTieringConfigurationRequest.add_member(:intelligent_tiering_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IntelligentTieringConfiguration, location_name: "IntelligentTieringConfiguration", traits: {"smithy.api#httpPayload" => {}, "smithy.api#required" => {}, "smithy.api#xmlName" => "IntelligentTieringConfiguration"}))
+    PutBucketIntelligentTieringConfigurationRequest[:http_payload] = :intelligent_tiering_configuration
+    PutBucketIntelligentTieringConfigurationRequest[:http_payload_member] = PutBucketIntelligentTieringConfigurationRequest.member(:intelligent_tiering_configuration)
+    PutBucketIntelligentTieringConfigurationRequest.type = Types::PutBucketIntelligentTieringConfigurationRequest
+    PutBucketInventoryConfigurationRequest.add_member(:bucket, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketName, location_name: "Bucket", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "Bucket"}}))
+    PutBucketInventoryConfigurationRequest.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InventoryId, location_name: "Id", traits: {"smithy.api#httpQuery" => "id", "smithy.api#required" => {}}))
+    PutBucketInventoryConfigurationRequest.add_member(:inventory_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InventoryConfiguration, location_name: "InventoryConfiguration", traits: {"smithy.api#httpPayload" => {}, "smithy.api#required" => {}, "smithy.api#xmlName" => "InventoryConfiguration"}))
+    PutBucketInventoryConfigurationRequest.add_member(:expected_bucket_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "ExpectedBucketOwner", traits: {"smithy.api#httpHeader" => "x-amz-expected-bucket-owner"}))
+    PutBucketInventoryConfigurationRequest[:http_payload] = :inventory_configuration
+    PutBucketInventoryConfigurationRequest[:http_payload_member] = PutBucketInventoryConfigurationRequest.member(:inventory_configuration)
+    PutBucketInventoryConfigurationRequest.type = Types::PutBucketInventoryConfigurationRequest
+    PutBucketLifecycleConfigurationOutput.add_member(:transition_default_minimum_object_size, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TransitionDefaultMinimumObjectSize, location_name: "TransitionDefaultMinimumObjectSize", traits: {"smithy.api#httpHeader" => "x-amz-transition-default-minimum-object-size"}))
+    PutBucketLifecycleConfigurationOutput.type = Types::PutBucketLifecycleConfigurationOutput
+    PutBucketLifecycleConfigurationRequest.add_member(:bucket, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketName, location_name: "Bucket", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "Bucket"}}))
+    PutBucketLifecycleConfigurationRequest.add_member(:checksum_algorithm, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChecksumAlgorithm, location_name: "ChecksumAlgorithm", traits: {"smithy.api#httpHeader" => "x-amz-sdk-checksum-algorithm"}))
+    PutBucketLifecycleConfigurationRequest.add_member(:lifecycle_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketLifecycleConfiguration, location_name: "LifecycleConfiguration", traits: {"smithy.api#httpPayload" => {}, "smithy.api#xmlName" => "LifecycleConfiguration"}))
+    PutBucketLifecycleConfigurationRequest.add_member(:expected_bucket_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "ExpectedBucketOwner", traits: {"smithy.api#httpHeader" => "x-amz-expected-bucket-owner"}))
+    PutBucketLifecycleConfigurationRequest.add_member(:transition_default_minimum_object_size, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TransitionDefaultMinimumObjectSize, location_name: "TransitionDefaultMinimumObjectSize", traits: {"smithy.api#httpHeader" => "x-amz-transition-default-minimum-object-size"}))
+    PutBucketLifecycleConfigurationRequest[:http_payload] = :lifecycle_configuration
+    PutBucketLifecycleConfigurationRequest[:http_payload_member] = PutBucketLifecycleConfigurationRequest.member(:lifecycle_configuration)
+    PutBucketLifecycleConfigurationRequest.type = Types::PutBucketLifecycleConfigurationRequest
+    PutBucketLoggingRequest.add_member(:bucket, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketName, location_name: "Bucket", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "Bucket"}}))
+    PutBucketLoggingRequest.add_member(:bucket_logging_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketLoggingStatus, location_name: "BucketLoggingStatus", traits: {"smithy.api#httpPayload" => {}, "smithy.api#required" => {}, "smithy.api#xmlName" => "BucketLoggingStatus"}))
+    PutBucketLoggingRequest.add_member(:content_md5, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContentMD5, location_name: "ContentMD5", traits: {"smithy.api#httpHeader" => "Content-MD5"}))
+    PutBucketLoggingRequest.add_member(:checksum_algorithm, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChecksumAlgorithm, location_name: "ChecksumAlgorithm", traits: {"smithy.api#httpHeader" => "x-amz-sdk-checksum-algorithm"}))
+    PutBucketLoggingRequest.add_member(:expected_bucket_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "ExpectedBucketOwner", traits: {"smithy.api#httpHeader" => "x-amz-expected-bucket-owner"}))
+    PutBucketLoggingRequest[:http_payload] = :bucket_logging_status
+    PutBucketLoggingRequest[:http_payload_member] = PutBucketLoggingRequest.member(:bucket_logging_status)
+    PutBucketLoggingRequest.type = Types::PutBucketLoggingRequest
+    PutBucketMetricsConfigurationRequest.add_member(:bucket, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketName, location_name: "Bucket", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "Bucket"}}))
+    PutBucketMetricsConfigurationRequest.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MetricsId, location_name: "Id", traits: {"smithy.api#httpQuery" => "id", "smithy.api#required" => {}}))
+    PutBucketMetricsConfigurationRequest.add_member(:metrics_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MetricsConfiguration, location_name: "MetricsConfiguration", traits: {"smithy.api#httpPayload" => {}, "smithy.api#required" => {}, "smithy.api#xmlName" => "MetricsConfiguration"}))
+    PutBucketMetricsConfigurationRequest.add_member(:expected_bucket_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "ExpectedBucketOwner", traits: {"smithy.api#httpHeader" => "x-amz-expected-bucket-owner"}))
+    PutBucketMetricsConfigurationRequest[:http_payload] = :metrics_configuration
+    PutBucketMetricsConfigurationRequest[:http_payload_member] = PutBucketMetricsConfigurationRequest.member(:metrics_configuration)
+    PutBucketMetricsConfigurationRequest.type = Types::PutBucketMetricsConfigurationRequest
+    PutBucketNotificationConfigurationRequest.add_member(:bucket, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketName, location_name: "Bucket", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "Bucket"}}))
+    PutBucketNotificationConfigurationRequest.add_member(:notification_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotificationConfiguration, location_name: "NotificationConfiguration", traits: {"smithy.api#httpPayload" => {}, "smithy.api#required" => {}, "smithy.api#xmlName" => "NotificationConfiguration"}))
+    PutBucketNotificationConfigurationRequest.add_member(:expected_bucket_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "ExpectedBucketOwner", traits: {"smithy.api#httpHeader" => "x-amz-expected-bucket-owner"}))
+    PutBucketNotificationConfigurationRequest.add_member(:skip_destination_validation, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SkipValidation, location_name: "SkipDestinationValidation", traits: {"smithy.api#httpHeader" => "x-amz-skip-destination-validation"}))
+    PutBucketNotificationConfigurationRequest[:http_payload] = :notification_configuration
+    PutBucketNotificationConfigurationRequest[:http_payload_member] = PutBucketNotificationConfigurationRequest.member(:notification_configuration)
+    PutBucketNotificationConfigurationRequest.type = Types::PutBucketNotificationConfigurationRequest
+    PutBucketOwnershipControlsRequest.add_member(:bucket, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketName, location_name: "Bucket", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "Bucket"}}))
+    PutBucketOwnershipControlsRequest.add_member(:content_md5, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContentMD5, location_name: "ContentMD5", traits: {"smithy.api#httpHeader" => "Content-MD5"}))
+    PutBucketOwnershipControlsRequest.add_member(:expected_bucket_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "ExpectedBucketOwner", traits: {"smithy.api#httpHeader" => "x-amz-expected-bucket-owner"}))
+    PutBucketOwnershipControlsRequest.add_member(:ownership_controls, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OwnershipControls, location_name: "OwnershipControls", traits: {"smithy.api#httpPayload" => {}, "smithy.api#required" => {}, "smithy.api#xmlName" => "OwnershipControls"}))
+    PutBucketOwnershipControlsRequest.add_member(:checksum_algorithm, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChecksumAlgorithm, location_name: "ChecksumAlgorithm", traits: {"smithy.api#httpHeader" => "x-amz-sdk-checksum-algorithm"}))
+    PutBucketOwnershipControlsRequest[:http_payload] = :ownership_controls
+    PutBucketOwnershipControlsRequest[:http_payload_member] = PutBucketOwnershipControlsRequest.member(:ownership_controls)
+    PutBucketOwnershipControlsRequest.type = Types::PutBucketOwnershipControlsRequest
+    PutBucketPolicyRequest.add_member(:bucket, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketName, location_name: "Bucket", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "Bucket"}}))
+    PutBucketPolicyRequest.add_member(:content_md5, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContentMD5, location_name: "ContentMD5", traits: {"smithy.api#httpHeader" => "Content-MD5"}))
+    PutBucketPolicyRequest.add_member(:checksum_algorithm, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChecksumAlgorithm, location_name: "ChecksumAlgorithm", traits: {"smithy.api#httpHeader" => "x-amz-sdk-checksum-algorithm"}))
+    PutBucketPolicyRequest.add_member(:confirm_remove_self_bucket_access, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfirmRemoveSelfBucketAccess, location_name: "ConfirmRemoveSelfBucketAccess", traits: {"smithy.api#httpHeader" => "x-amz-confirm-remove-self-bucket-access"}))
+    PutBucketPolicyRequest.add_member(:policy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Policy, location_name: "Policy", traits: {"smithy.api#httpPayload" => {}, "smithy.api#required" => {}}))
+    PutBucketPolicyRequest.add_member(:expected_bucket_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "ExpectedBucketOwner", traits: {"smithy.api#httpHeader" => "x-amz-expected-bucket-owner"}))
+    PutBucketPolicyRequest[:http_payload] = :policy
+    PutBucketPolicyRequest[:http_payload_member] = PutBucketPolicyRequest.member(:policy)
+    PutBucketPolicyRequest.type = Types::PutBucketPolicyRequest
+    PutBucketReplicationRequest.add_member(:bucket, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketName, location_name: "Bucket", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "Bucket"}}))
+    PutBucketReplicationRequest.add_member(:content_md5, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContentMD5, location_name: "ContentMD5", traits: {"smithy.api#httpHeader" => "Content-MD5"}))
+    PutBucketReplicationRequest.add_member(:checksum_algorithm, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChecksumAlgorithm, location_name: "ChecksumAlgorithm", traits: {"smithy.api#httpHeader" => "x-amz-sdk-checksum-algorithm"}))
+    PutBucketReplicationRequest.add_member(:replication_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReplicationConfiguration, location_name: "ReplicationConfiguration", traits: {"smithy.api#httpPayload" => {}, "smithy.api#required" => {}, "smithy.api#xmlName" => "ReplicationConfiguration"}))
+    PutBucketReplicationRequest.add_member(:token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectLockToken, location_name: "Token", traits: {"smithy.api#httpHeader" => "x-amz-bucket-object-lock-token"}))
+    PutBucketReplicationRequest.add_member(:expected_bucket_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "ExpectedBucketOwner", traits: {"smithy.api#httpHeader" => "x-amz-expected-bucket-owner"}))
+    PutBucketReplicationRequest[:http_payload] = :replication_configuration
+    PutBucketReplicationRequest[:http_payload_member] = PutBucketReplicationRequest.member(:replication_configuration)
+    PutBucketReplicationRequest.type = Types::PutBucketReplicationRequest
+    PutBucketRequestPaymentRequest.add_member(:bucket, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketName, location_name: "Bucket", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "Bucket"}}))
+    PutBucketRequestPaymentRequest.add_member(:content_md5, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContentMD5, location_name: "ContentMD5", traits: {"smithy.api#httpHeader" => "Content-MD5"}))
+    PutBucketRequestPaymentRequest.add_member(:checksum_algorithm, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChecksumAlgorithm, location_name: "ChecksumAlgorithm", traits: {"smithy.api#httpHeader" => "x-amz-sdk-checksum-algorithm"}))
+    PutBucketRequestPaymentRequest.add_member(:request_payment_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestPaymentConfiguration, location_name: "RequestPaymentConfiguration", traits: {"smithy.api#httpPayload" => {}, "smithy.api#required" => {}, "smithy.api#xmlName" => "RequestPaymentConfiguration"}))
+    PutBucketRequestPaymentRequest.add_member(:expected_bucket_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "ExpectedBucketOwner", traits: {"smithy.api#httpHeader" => "x-amz-expected-bucket-owner"}))
+    PutBucketRequestPaymentRequest[:http_payload] = :request_payment_configuration
+    PutBucketRequestPaymentRequest[:http_payload_member] = PutBucketRequestPaymentRequest.member(:request_payment_configuration)
+    PutBucketRequestPaymentRequest.type = Types::PutBucketRequestPaymentRequest
+    PutBucketTaggingRequest.add_member(:bucket, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketName, location_name: "Bucket", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "Bucket"}}))
+    PutBucketTaggingRequest.add_member(:content_md5, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContentMD5, location_name: "ContentMD5", traits: {"smithy.api#httpHeader" => "Content-MD5"}))
+    PutBucketTaggingRequest.add_member(:checksum_algorithm, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChecksumAlgorithm, location_name: "ChecksumAlgorithm", traits: {"smithy.api#httpHeader" => "x-amz-sdk-checksum-algorithm"}))
+    PutBucketTaggingRequest.add_member(:tagging, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tagging, location_name: "Tagging", traits: {"smithy.api#httpPayload" => {}, "smithy.api#required" => {}, "smithy.api#xmlName" => "Tagging"}))
+    PutBucketTaggingRequest.add_member(:expected_bucket_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "ExpectedBucketOwner", traits: {"smithy.api#httpHeader" => "x-amz-expected-bucket-owner"}))
+    PutBucketTaggingRequest[:http_payload] = :tagging
+    PutBucketTaggingRequest[:http_payload_member] = PutBucketTaggingRequest.member(:tagging)
+    PutBucketTaggingRequest.type = Types::PutBucketTaggingRequest
+    PutBucketVersioningRequest.add_member(:bucket, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketName, location_name: "Bucket", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "Bucket"}}))
+    PutBucketVersioningRequest.add_member(:content_md5, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContentMD5, location_name: "ContentMD5", traits: {"smithy.api#httpHeader" => "Content-MD5"}))
+    PutBucketVersioningRequest.add_member(:checksum_algorithm, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChecksumAlgorithm, location_name: "ChecksumAlgorithm", traits: {"smithy.api#httpHeader" => "x-amz-sdk-checksum-algorithm"}))
+    PutBucketVersioningRequest.add_member(:mfa, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MFA, location_name: "MFA", traits: {"smithy.api#httpHeader" => "x-amz-mfa"}))
+    PutBucketVersioningRequest.add_member(:versioning_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VersioningConfiguration, location_name: "VersioningConfiguration", traits: {"smithy.api#httpPayload" => {}, "smithy.api#required" => {}, "smithy.api#xmlName" => "VersioningConfiguration"}))
+    PutBucketVersioningRequest.add_member(:expected_bucket_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "ExpectedBucketOwner", traits: {"smithy.api#httpHeader" => "x-amz-expected-bucket-owner"}))
+    PutBucketVersioningRequest[:http_payload] = :versioning_configuration
+    PutBucketVersioningRequest[:http_payload_member] = PutBucketVersioningRequest.member(:versioning_configuration)
+    PutBucketVersioningRequest.type = Types::PutBucketVersioningRequest
+    PutBucketWebsiteRequest.add_member(:bucket, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketName, location_name: "Bucket", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "Bucket"}}))
+    PutBucketWebsiteRequest.add_member(:content_md5, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContentMD5, location_name: "ContentMD5", traits: {"smithy.api#httpHeader" => "Content-MD5"}))
+    PutBucketWebsiteRequest.add_member(:checksum_algorithm, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChecksumAlgorithm, location_name: "ChecksumAlgorithm", traits: {"smithy.api#httpHeader" => "x-amz-sdk-checksum-algorithm"}))
+    PutBucketWebsiteRequest.add_member(:website_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WebsiteConfiguration, location_name: "WebsiteConfiguration", traits: {"smithy.api#httpPayload" => {}, "smithy.api#required" => {}, "smithy.api#xmlName" => "WebsiteConfiguration"}))
+    PutBucketWebsiteRequest.add_member(:expected_bucket_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "ExpectedBucketOwner", traits: {"smithy.api#httpHeader" => "x-amz-expected-bucket-owner"}))
+    PutBucketWebsiteRequest[:http_payload] = :website_configuration
+    PutBucketWebsiteRequest[:http_payload_member] = PutBucketWebsiteRequest.member(:website_configuration)
+    PutBucketWebsiteRequest.type = Types::PutBucketWebsiteRequest
+    PutObjectAclOutput.add_member(:request_charged, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestCharged, location_name: "RequestCharged", traits: {"smithy.api#httpHeader" => "x-amz-request-charged"}))
+    PutObjectAclOutput.type = Types::PutObjectAclOutput
+    PutObjectAclRequest.add_member(:acl, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectCannedACL, location_name: "ACL", traits: {"smithy.api#httpHeader" => "x-amz-acl"}))
+    PutObjectAclRequest.add_member(:access_control_policy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessControlPolicy, location_name: "AccessControlPolicy", traits: {"smithy.api#httpPayload" => {}, "smithy.api#xmlName" => "AccessControlPolicy"}))
+    PutObjectAclRequest.add_member(:bucket, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketName, location_name: "Bucket", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "Bucket"}}))
+    PutObjectAclRequest.add_member(:content_md5, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContentMD5, location_name: "ContentMD5", traits: {"smithy.api#httpHeader" => "Content-MD5"}))
+    PutObjectAclRequest.add_member(:checksum_algorithm, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChecksumAlgorithm, location_name: "ChecksumAlgorithm", traits: {"smithy.api#httpHeader" => "x-amz-sdk-checksum-algorithm"}))
+    PutObjectAclRequest.add_member(:grant_full_control, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GrantFullControl, location_name: "GrantFullControl", traits: {"smithy.api#httpHeader" => "x-amz-grant-full-control"}))
+    PutObjectAclRequest.add_member(:grant_read, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GrantRead, location_name: "GrantRead", traits: {"smithy.api#httpHeader" => "x-amz-grant-read"}))
+    PutObjectAclRequest.add_member(:grant_read_acp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GrantReadACP, location_name: "GrantReadACP", traits: {"smithy.api#httpHeader" => "x-amz-grant-read-acp"}))
+    PutObjectAclRequest.add_member(:grant_write, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GrantWrite, location_name: "GrantWrite", traits: {"smithy.api#httpHeader" => "x-amz-grant-write"}))
+    PutObjectAclRequest.add_member(:grant_write_acp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GrantWriteACP, location_name: "GrantWriteACP", traits: {"smithy.api#httpHeader" => "x-amz-grant-write-acp"}))
+    PutObjectAclRequest.add_member(:key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectKey, location_name: "Key", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "Key"}}))
+    PutObjectAclRequest.add_member(:request_payer, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestPayer, location_name: "RequestPayer", traits: {"smithy.api#httpHeader" => "x-amz-request-payer"}))
+    PutObjectAclRequest.add_member(:version_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectVersionId, location_name: "VersionId", traits: {"smithy.api#httpQuery" => "versionId"}))
+    PutObjectAclRequest.add_member(:expected_bucket_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "ExpectedBucketOwner", traits: {"smithy.api#httpHeader" => "x-amz-expected-bucket-owner"}))
+    PutObjectAclRequest[:http_payload] = :access_control_policy
+    PutObjectAclRequest[:http_payload_member] = PutObjectAclRequest.member(:access_control_policy)
+    PutObjectAclRequest.type = Types::PutObjectAclRequest
+    PutObjectLegalHoldOutput.add_member(:request_charged, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestCharged, location_name: "RequestCharged", traits: {"smithy.api#httpHeader" => "x-amz-request-charged"}))
+    PutObjectLegalHoldOutput.type = Types::PutObjectLegalHoldOutput
+    PutObjectLegalHoldRequest.add_member(:bucket, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketName, location_name: "Bucket", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "Bucket"}}))
+    PutObjectLegalHoldRequest.add_member(:key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectKey, location_name: "Key", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    PutObjectLegalHoldRequest.add_member(:legal_hold, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectLockLegalHold, location_name: "LegalHold", traits: {"smithy.api#httpPayload" => {}, "smithy.api#xmlName" => "LegalHold"}))
+    PutObjectLegalHoldRequest.add_member(:request_payer, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestPayer, location_name: "RequestPayer", traits: {"smithy.api#httpHeader" => "x-amz-request-payer"}))
+    PutObjectLegalHoldRequest.add_member(:version_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectVersionId, location_name: "VersionId", traits: {"smithy.api#httpQuery" => "versionId"}))
+    PutObjectLegalHoldRequest.add_member(:content_md5, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContentMD5, location_name: "ContentMD5", traits: {"smithy.api#httpHeader" => "Content-MD5"}))
+    PutObjectLegalHoldRequest.add_member(:checksum_algorithm, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChecksumAlgorithm, location_name: "ChecksumAlgorithm", traits: {"smithy.api#httpHeader" => "x-amz-sdk-checksum-algorithm"}))
+    PutObjectLegalHoldRequest.add_member(:expected_bucket_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "ExpectedBucketOwner", traits: {"smithy.api#httpHeader" => "x-amz-expected-bucket-owner"}))
+    PutObjectLegalHoldRequest[:http_payload] = :legal_hold
+    PutObjectLegalHoldRequest[:http_payload_member] = PutObjectLegalHoldRequest.member(:legal_hold)
+    PutObjectLegalHoldRequest.type = Types::PutObjectLegalHoldRequest
+    PutObjectLockConfigurationOutput.add_member(:request_charged, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestCharged, location_name: "RequestCharged", traits: {"smithy.api#httpHeader" => "x-amz-request-charged"}))
+    PutObjectLockConfigurationOutput.type = Types::PutObjectLockConfigurationOutput
+    PutObjectLockConfigurationRequest.add_member(:bucket, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketName, location_name: "Bucket", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "Bucket"}}))
+    PutObjectLockConfigurationRequest.add_member(:object_lock_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectLockConfiguration, location_name: "ObjectLockConfiguration", traits: {"smithy.api#httpPayload" => {}, "smithy.api#xmlName" => "ObjectLockConfiguration"}))
+    PutObjectLockConfigurationRequest.add_member(:request_payer, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestPayer, location_name: "RequestPayer", traits: {"smithy.api#httpHeader" => "x-amz-request-payer"}))
+    PutObjectLockConfigurationRequest.add_member(:token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectLockToken, location_name: "Token", traits: {"smithy.api#httpHeader" => "x-amz-bucket-object-lock-token"}))
+    PutObjectLockConfigurationRequest.add_member(:content_md5, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContentMD5, location_name: "ContentMD5", traits: {"smithy.api#httpHeader" => "Content-MD5"}))
+    PutObjectLockConfigurationRequest.add_member(:checksum_algorithm, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChecksumAlgorithm, location_name: "ChecksumAlgorithm", traits: {"smithy.api#httpHeader" => "x-amz-sdk-checksum-algorithm"}))
+    PutObjectLockConfigurationRequest.add_member(:expected_bucket_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "ExpectedBucketOwner", traits: {"smithy.api#httpHeader" => "x-amz-expected-bucket-owner"}))
+    PutObjectLockConfigurationRequest[:http_payload] = :object_lock_configuration
+    PutObjectLockConfigurationRequest[:http_payload_member] = PutObjectLockConfigurationRequest.member(:object_lock_configuration)
+    PutObjectLockConfigurationRequest.type = Types::PutObjectLockConfigurationRequest
+    PutObjectOutput.add_member(:expiration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Expiration, location_name: "Expiration", traits: {"smithy.api#httpHeader" => "x-amz-expiration"}))
+    PutObjectOutput.add_member(:e_tag, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ETag, location_name: "ETag", traits: {"smithy.api#httpHeader" => "ETag"}))
+    PutObjectOutput.add_member(:checksum_crc32, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChecksumCRC32, location_name: "ChecksumCRC32", traits: {"smithy.api#httpHeader" => "x-amz-checksum-crc32"}))
+    PutObjectOutput.add_member(:checksum_crc32_c, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChecksumCRC32C, location_name: "ChecksumCRC32C", traits: {"smithy.api#httpHeader" => "x-amz-checksum-crc32c"}))
+    PutObjectOutput.add_member(:checksum_crc64_nvme, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChecksumCRC64NVME, location_name: "ChecksumCRC64NVME", traits: {"smithy.api#httpHeader" => "x-amz-checksum-crc64nvme"}))
+    PutObjectOutput.add_member(:checksum_sha1, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChecksumSHA1, location_name: "ChecksumSHA1", traits: {"smithy.api#httpHeader" => "x-amz-checksum-sha1"}))
+    PutObjectOutput.add_member(:checksum_sha256, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChecksumSHA256, location_name: "ChecksumSHA256", traits: {"smithy.api#httpHeader" => "x-amz-checksum-sha256"}))
+    PutObjectOutput.add_member(:checksum_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChecksumType, location_name: "ChecksumType", traits: {"smithy.api#httpHeader" => "x-amz-checksum-type"}))
+    PutObjectOutput.add_member(:server_side_encryption, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServerSideEncryption, location_name: "ServerSideEncryption", traits: {"smithy.api#httpHeader" => "x-amz-server-side-encryption"}))
+    PutObjectOutput.add_member(:version_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectVersionId, location_name: "VersionId", traits: {"smithy.api#httpHeader" => "x-amz-version-id"}))
+    PutObjectOutput.add_member(:sse_customer_algorithm, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SSECustomerAlgorithm, location_name: "SSECustomerAlgorithm", traits: {"smithy.api#httpHeader" => "x-amz-server-side-encryption-customer-algorithm"}))
+    PutObjectOutput.add_member(:sse_customer_key_md5, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SSECustomerKeyMD5, location_name: "SSECustomerKeyMD5", traits: {"smithy.api#httpHeader" => "x-amz-server-side-encryption-customer-key-MD5"}))
+    PutObjectOutput.add_member(:ssekms_key_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SSEKMSKeyId, location_name: "SSEKMSKeyId", traits: {"smithy.api#httpHeader" => "x-amz-server-side-encryption-aws-kms-key-id"}))
+    PutObjectOutput.add_member(:ssekms_encryption_context, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SSEKMSEncryptionContext, location_name: "SSEKMSEncryptionContext", traits: {"smithy.api#httpHeader" => "x-amz-server-side-encryption-context"}))
+    PutObjectOutput.add_member(:bucket_key_enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketKeyEnabled, location_name: "BucketKeyEnabled", traits: {"smithy.api#httpHeader" => "x-amz-server-side-encryption-bucket-key-enabled"}))
+    PutObjectOutput.add_member(:size, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Size, location_name: "Size", traits: {"smithy.api#httpHeader" => "x-amz-object-size"}))
+    PutObjectOutput.add_member(:request_charged, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestCharged, location_name: "RequestCharged", traits: {"smithy.api#httpHeader" => "x-amz-request-charged"}))
+    PutObjectOutput.type = Types::PutObjectOutput
+    PutObjectRequest.add_member(:acl, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectCannedACL, location_name: "ACL", traits: {"smithy.api#httpHeader" => "x-amz-acl"}))
+    PutObjectRequest.add_member(:body, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamingBlob, location_name: "Body", traits: {"smithy.api#default" => "", "smithy.api#httpPayload" => {}}))
+    PutObjectRequest.add_member(:bucket, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketName, location_name: "Bucket", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "Bucket"}}))
+    PutObjectRequest.add_member(:cache_control, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CacheControl, location_name: "CacheControl", traits: {"smithy.api#httpHeader" => "Cache-Control"}))
+    PutObjectRequest.add_member(:content_disposition, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContentDisposition, location_name: "ContentDisposition", traits: {"smithy.api#httpHeader" => "Content-Disposition"}))
+    PutObjectRequest.add_member(:content_encoding, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContentEncoding, location_name: "ContentEncoding", traits: {"smithy.api#httpHeader" => "Content-Encoding"}))
+    PutObjectRequest.add_member(:content_language, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContentLanguage, location_name: "ContentLanguage", traits: {"smithy.api#httpHeader" => "Content-Language"}))
+    PutObjectRequest.add_member(:content_length, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContentLength, location_name: "ContentLength", traits: {"smithy.api#httpHeader" => "Content-Length"}))
+    PutObjectRequest.add_member(:content_md5, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContentMD5, location_name: "ContentMD5", traits: {"smithy.api#httpHeader" => "Content-MD5"}))
+    PutObjectRequest.add_member(:content_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContentType, location_name: "ContentType", traits: {"smithy.api#httpHeader" => "Content-Type"}))
+    PutObjectRequest.add_member(:checksum_algorithm, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChecksumAlgorithm, location_name: "ChecksumAlgorithm", traits: {"smithy.api#httpHeader" => "x-amz-sdk-checksum-algorithm"}))
+    PutObjectRequest.add_member(:checksum_crc32, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChecksumCRC32, location_name: "ChecksumCRC32", traits: {"smithy.api#httpHeader" => "x-amz-checksum-crc32"}))
+    PutObjectRequest.add_member(:checksum_crc32_c, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChecksumCRC32C, location_name: "ChecksumCRC32C", traits: {"smithy.api#httpHeader" => "x-amz-checksum-crc32c"}))
+    PutObjectRequest.add_member(:checksum_crc64_nvme, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChecksumCRC64NVME, location_name: "ChecksumCRC64NVME", traits: {"smithy.api#httpHeader" => "x-amz-checksum-crc64nvme"}))
+    PutObjectRequest.add_member(:checksum_sha1, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChecksumSHA1, location_name: "ChecksumSHA1", traits: {"smithy.api#httpHeader" => "x-amz-checksum-sha1"}))
+    PutObjectRequest.add_member(:checksum_sha256, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChecksumSHA256, location_name: "ChecksumSHA256", traits: {"smithy.api#httpHeader" => "x-amz-checksum-sha256"}))
+    PutObjectRequest.add_member(:expires, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Expires, location_name: "Expires", traits: {"smithy.api#httpHeader" => "Expires"}))
+    PutObjectRequest.add_member(:if_match, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IfMatch, location_name: "IfMatch", traits: {"smithy.api#httpHeader" => "If-Match"}))
+    PutObjectRequest.add_member(:if_none_match, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IfNoneMatch, location_name: "IfNoneMatch", traits: {"smithy.api#httpHeader" => "If-None-Match"}))
+    PutObjectRequest.add_member(:grant_full_control, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GrantFullControl, location_name: "GrantFullControl", traits: {"smithy.api#httpHeader" => "x-amz-grant-full-control"}))
+    PutObjectRequest.add_member(:grant_read, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GrantRead, location_name: "GrantRead", traits: {"smithy.api#httpHeader" => "x-amz-grant-read"}))
+    PutObjectRequest.add_member(:grant_read_acp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GrantReadACP, location_name: "GrantReadACP", traits: {"smithy.api#httpHeader" => "x-amz-grant-read-acp"}))
+    PutObjectRequest.add_member(:grant_write_acp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GrantWriteACP, location_name: "GrantWriteACP", traits: {"smithy.api#httpHeader" => "x-amz-grant-write-acp"}))
+    PutObjectRequest.add_member(:key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectKey, location_name: "Key", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "Key"}}))
+    PutObjectRequest.add_member(:write_offset_bytes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WriteOffsetBytes, location_name: "WriteOffsetBytes", traits: {"smithy.api#httpHeader" => "x-amz-write-offset-bytes"}))
+    PutObjectRequest.add_member(:metadata, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Metadata, location_name: "Metadata", traits: {"smithy.api#httpPrefixHeaders" => "x-amz-meta-"}))
+    PutObjectRequest.add_member(:server_side_encryption, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServerSideEncryption, location_name: "ServerSideEncryption", traits: {"smithy.api#httpHeader" => "x-amz-server-side-encryption"}))
+    PutObjectRequest.add_member(:storage_class, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StorageClass, location_name: "StorageClass", traits: {"smithy.api#httpHeader" => "x-amz-storage-class"}))
+    PutObjectRequest.add_member(:website_redirect_location, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WebsiteRedirectLocation, location_name: "WebsiteRedirectLocation", traits: {"smithy.api#httpHeader" => "x-amz-website-redirect-location"}))
+    PutObjectRequest.add_member(:sse_customer_algorithm, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SSECustomerAlgorithm, location_name: "SSECustomerAlgorithm", traits: {"smithy.api#httpHeader" => "x-amz-server-side-encryption-customer-algorithm"}))
+    PutObjectRequest.add_member(:sse_customer_key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SSECustomerKey, location_name: "SSECustomerKey", traits: {"smithy.api#httpHeader" => "x-amz-server-side-encryption-customer-key"}))
+    PutObjectRequest.add_member(:sse_customer_key_md5, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SSECustomerKeyMD5, location_name: "SSECustomerKeyMD5", traits: {"smithy.api#httpHeader" => "x-amz-server-side-encryption-customer-key-MD5"}))
+    PutObjectRequest.add_member(:ssekms_key_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SSEKMSKeyId, location_name: "SSEKMSKeyId", traits: {"smithy.api#httpHeader" => "x-amz-server-side-encryption-aws-kms-key-id"}))
+    PutObjectRequest.add_member(:ssekms_encryption_context, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SSEKMSEncryptionContext, location_name: "SSEKMSEncryptionContext", traits: {"smithy.api#httpHeader" => "x-amz-server-side-encryption-context"}))
+    PutObjectRequest.add_member(:bucket_key_enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketKeyEnabled, location_name: "BucketKeyEnabled", traits: {"smithy.api#httpHeader" => "x-amz-server-side-encryption-bucket-key-enabled"}))
+    PutObjectRequest.add_member(:request_payer, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestPayer, location_name: "RequestPayer", traits: {"smithy.api#httpHeader" => "x-amz-request-payer"}))
+    PutObjectRequest.add_member(:tagging, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TaggingHeader, location_name: "Tagging", traits: {"smithy.api#httpHeader" => "x-amz-tagging"}))
+    PutObjectRequest.add_member(:object_lock_mode, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectLockMode, location_name: "ObjectLockMode", traits: {"smithy.api#httpHeader" => "x-amz-object-lock-mode"}))
+    PutObjectRequest.add_member(:object_lock_retain_until_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectLockRetainUntilDate, location_name: "ObjectLockRetainUntilDate", traits: {"smithy.api#httpHeader" => "x-amz-object-lock-retain-until-date"}))
+    PutObjectRequest.add_member(:object_lock_legal_hold_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectLockLegalHoldStatus, location_name: "ObjectLockLegalHoldStatus", traits: {"smithy.api#httpHeader" => "x-amz-object-lock-legal-hold"}))
+    PutObjectRequest.add_member(:expected_bucket_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "ExpectedBucketOwner", traits: {"smithy.api#httpHeader" => "x-amz-expected-bucket-owner"}))
+    PutObjectRequest[:http_payload] = :body
+    PutObjectRequest[:http_payload_member] = PutObjectRequest.member(:body)
+    PutObjectRequest.type = Types::PutObjectRequest
+    PutObjectRetentionOutput.add_member(:request_charged, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestCharged, location_name: "RequestCharged", traits: {"smithy.api#httpHeader" => "x-amz-request-charged"}))
+    PutObjectRetentionOutput.type = Types::PutObjectRetentionOutput
+    PutObjectRetentionRequest.add_member(:bucket, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketName, location_name: "Bucket", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "Bucket"}}))
+    PutObjectRetentionRequest.add_member(:key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectKey, location_name: "Key", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    PutObjectRetentionRequest.add_member(:retention, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectLockRetention, location_name: "Retention", traits: {"smithy.api#httpPayload" => {}, "smithy.api#xmlName" => "Retention"}))
+    PutObjectRetentionRequest.add_member(:request_payer, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestPayer, location_name: "RequestPayer", traits: {"smithy.api#httpHeader" => "x-amz-request-payer"}))
+    PutObjectRetentionRequest.add_member(:version_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectVersionId, location_name: "VersionId", traits: {"smithy.api#httpQuery" => "versionId"}))
+    PutObjectRetentionRequest.add_member(:bypass_governance_retention, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BypassGovernanceRetention, location_name: "BypassGovernanceRetention", traits: {"smithy.api#httpHeader" => "x-amz-bypass-governance-retention"}))
+    PutObjectRetentionRequest.add_member(:content_md5, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContentMD5, location_name: "ContentMD5", traits: {"smithy.api#httpHeader" => "Content-MD5"}))
+    PutObjectRetentionRequest.add_member(:checksum_algorithm, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChecksumAlgorithm, location_name: "ChecksumAlgorithm", traits: {"smithy.api#httpHeader" => "x-amz-sdk-checksum-algorithm"}))
+    PutObjectRetentionRequest.add_member(:expected_bucket_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "ExpectedBucketOwner", traits: {"smithy.api#httpHeader" => "x-amz-expected-bucket-owner"}))
+    PutObjectRetentionRequest[:http_payload] = :retention
+    PutObjectRetentionRequest[:http_payload_member] = PutObjectRetentionRequest.member(:retention)
+    PutObjectRetentionRequest.type = Types::PutObjectRetentionRequest
+    PutObjectTaggingOutput.add_member(:version_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectVersionId, location_name: "VersionId", traits: {"smithy.api#httpHeader" => "x-amz-version-id"}))
+    PutObjectTaggingOutput.type = Types::PutObjectTaggingOutput
+    PutObjectTaggingRequest.add_member(:bucket, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketName, location_name: "Bucket", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "Bucket"}}))
+    PutObjectTaggingRequest.add_member(:key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectKey, location_name: "Key", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    PutObjectTaggingRequest.add_member(:version_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectVersionId, location_name: "VersionId", traits: {"smithy.api#httpQuery" => "versionId"}))
+    PutObjectTaggingRequest.add_member(:content_md5, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContentMD5, location_name: "ContentMD5", traits: {"smithy.api#httpHeader" => "Content-MD5"}))
+    PutObjectTaggingRequest.add_member(:checksum_algorithm, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChecksumAlgorithm, location_name: "ChecksumAlgorithm", traits: {"smithy.api#httpHeader" => "x-amz-sdk-checksum-algorithm"}))
+    PutObjectTaggingRequest.add_member(:tagging, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tagging, location_name: "Tagging", traits: {"smithy.api#httpPayload" => {}, "smithy.api#required" => {}, "smithy.api#xmlName" => "Tagging"}))
+    PutObjectTaggingRequest.add_member(:expected_bucket_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "ExpectedBucketOwner", traits: {"smithy.api#httpHeader" => "x-amz-expected-bucket-owner"}))
+    PutObjectTaggingRequest.add_member(:request_payer, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestPayer, location_name: "RequestPayer", traits: {"smithy.api#httpHeader" => "x-amz-request-payer"}))
+    PutObjectTaggingRequest[:http_payload] = :tagging
+    PutObjectTaggingRequest[:http_payload_member] = PutObjectTaggingRequest.member(:tagging)
+    PutObjectTaggingRequest.type = Types::PutObjectTaggingRequest
+    PutPublicAccessBlockRequest.add_member(:bucket, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketName, location_name: "Bucket", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "Bucket"}}))
+    PutPublicAccessBlockRequest.add_member(:content_md5, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContentMD5, location_name: "ContentMD5", traits: {"smithy.api#httpHeader" => "Content-MD5"}))
+    PutPublicAccessBlockRequest.add_member(:checksum_algorithm, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChecksumAlgorithm, location_name: "ChecksumAlgorithm", traits: {"smithy.api#httpHeader" => "x-amz-sdk-checksum-algorithm"}))
+    PutPublicAccessBlockRequest.add_member(:public_access_block_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PublicAccessBlockConfiguration, location_name: "PublicAccessBlockConfiguration", traits: {"smithy.api#httpPayload" => {}, "smithy.api#required" => {}, "smithy.api#xmlName" => "PublicAccessBlockConfiguration"}))
+    PutPublicAccessBlockRequest.add_member(:expected_bucket_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "ExpectedBucketOwner", traits: {"smithy.api#httpHeader" => "x-amz-expected-bucket-owner"}))
+    PutPublicAccessBlockRequest[:http_payload] = :public_access_block_configuration
+    PutPublicAccessBlockRequest[:http_payload_member] = PutPublicAccessBlockRequest.member(:public_access_block_configuration)
+    PutPublicAccessBlockRequest.type = Types::PutPublicAccessBlockRequest
+    QueueConfiguration.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotificationId, location_name: "Id"))
+    QueueConfiguration.add_member(:queue_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: QueueArn, location_name: "QueueArn", traits: {"smithy.api#required" => {}, "smithy.api#xmlName" => "Queue"}))
+    QueueConfiguration.add_member(:events, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EventList, location_name: "Events", traits: {"smithy.api#required" => {}, "smithy.api#xmlFlattened" => {}, "smithy.api#xmlName" => "Event"}))
+    QueueConfiguration.add_member(:filter, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotificationConfigurationFilter, location_name: "Filter"))
+    QueueConfiguration.type = Types::QueueConfiguration
+    QueueConfigurationList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: QueueConfiguration)
+    QuoteFields.add_member(:always, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ALWAYS", traits: {"smithy.api#enumValue" => "ALWAYS"}))
+    QuoteFields.add_member(:asneeded, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ASNEEDED", traits: {"smithy.api#enumValue" => "ASNEEDED"}))
+    RecordExpiration.add_member(:expiration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExpirationState, location_name: "Expiration", traits: {"smithy.api#required" => {}}))
+    RecordExpiration.add_member(:days, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RecordExpirationDays, location_name: "Days"))
+    RecordExpiration.type = Types::RecordExpiration
+    RecordsEvent.add_member(:payload, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Body, location_name: "Payload", traits: {"smithy.api#eventPayload" => {}}))
+    RecordsEvent.type = Types::RecordsEvent
+    Redirect.add_member(:host_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HostName, location_name: "HostName"))
+    Redirect.add_member(:http_redirect_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HttpRedirectCode, location_name: "HttpRedirectCode"))
+    Redirect.add_member(:protocol, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Protocol, location_name: "Protocol"))
+    Redirect.add_member(:replace_key_prefix_with, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReplaceKeyPrefixWith, location_name: "ReplaceKeyPrefixWith"))
+    Redirect.add_member(:replace_key_with, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReplaceKeyWith, location_name: "ReplaceKeyWith"))
+    Redirect.type = Types::Redirect
+    RedirectAllRequestsTo.add_member(:host_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HostName, location_name: "HostName", traits: {"smithy.api#required" => {}}))
+    RedirectAllRequestsTo.add_member(:protocol, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Protocol, location_name: "Protocol"))
+    RedirectAllRequestsTo.type = Types::RedirectAllRequestsTo
+    RenameObjectOutput.type = Types::RenameObjectOutput
+    RenameObjectRequest.add_member(:bucket, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketName, location_name: "Bucket", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "Bucket"}}))
+    RenameObjectRequest.add_member(:key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectKey, location_name: "Key", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "Key"}}))
+    RenameObjectRequest.add_member(:rename_source, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RenameSource, location_name: "RenameSource", traits: {"smithy.api#httpHeader" => "x-amz-rename-source", "smithy.api#required" => {}}))
+    RenameObjectRequest.add_member(:destination_if_match, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IfMatch, location_name: "DestinationIfMatch", traits: {"smithy.api#httpHeader" => "If-Match"}))
+    RenameObjectRequest.add_member(:destination_if_none_match, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IfNoneMatch, location_name: "DestinationIfNoneMatch", traits: {"smithy.api#httpHeader" => "If-None-Match"}))
+    RenameObjectRequest.add_member(:destination_if_modified_since, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IfModifiedSince, location_name: "DestinationIfModifiedSince", traits: {"smithy.api#httpHeader" => "If-Modified-Since"}))
+    RenameObjectRequest.add_member(:destination_if_unmodified_since, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IfUnmodifiedSince, location_name: "DestinationIfUnmodifiedSince", traits: {"smithy.api#httpHeader" => "If-Unmodified-Since"}))
+    RenameObjectRequest.add_member(:source_if_match, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RenameSourceIfMatch, location_name: "SourceIfMatch", traits: {"smithy.api#httpHeader" => "x-amz-rename-source-if-match"}))
+    RenameObjectRequest.add_member(:source_if_none_match, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RenameSourceIfNoneMatch, location_name: "SourceIfNoneMatch", traits: {"smithy.api#httpHeader" => "x-amz-rename-source-if-none-match"}))
+    RenameObjectRequest.add_member(:source_if_modified_since, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RenameSourceIfModifiedSince, location_name: "SourceIfModifiedSince", traits: {"smithy.api#httpHeader" => "x-amz-rename-source-if-modified-since"}))
+    RenameObjectRequest.add_member(:source_if_unmodified_since, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RenameSourceIfUnmodifiedSince, location_name: "SourceIfUnmodifiedSince", traits: {"smithy.api#httpHeader" => "x-amz-rename-source-if-unmodified-since"}))
+    RenameObjectRequest.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", traits: {"smithy.api#httpHeader" => "x-amz-client-token", "smithy.api#idempotencyToken" => {}}))
+    RenameObjectRequest.type = Types::RenameObjectRequest
+    ReplicaModifications.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReplicaModificationsStatus, location_name: "Status", traits: {"smithy.api#required" => {}}))
+    ReplicaModifications.type = Types::ReplicaModifications
+    ReplicaModificationsStatus.add_member(:enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Enabled", traits: {"smithy.api#enumValue" => "Enabled"}))
+    ReplicaModificationsStatus.add_member(:disabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Disabled", traits: {"smithy.api#enumValue" => "Disabled"}))
+    ReplicationConfiguration.add_member(:role, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Role, location_name: "Role", traits: {"smithy.api#required" => {}}))
+    ReplicationConfiguration.add_member(:rules, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReplicationRules, location_name: "Rules", traits: {"smithy.api#required" => {}, "smithy.api#xmlFlattened" => {}, "smithy.api#xmlName" => "Rule"}))
+    ReplicationConfiguration.type = Types::ReplicationConfiguration
+    ReplicationRule.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ID, location_name: "ID"))
+    ReplicationRule.add_member(:priority, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Priority, location_name: "Priority"))
+    ReplicationRule.add_member(:prefix, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Prefix, location_name: "Prefix", traits: {"smithy.api#deprecated" => {}}))
+    ReplicationRule.add_member(:filter, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReplicationRuleFilter, location_name: "Filter"))
+    ReplicationRule.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReplicationRuleStatus, location_name: "Status", traits: {"smithy.api#required" => {}}))
+    ReplicationRule.add_member(:source_selection_criteria, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SourceSelectionCriteria, location_name: "SourceSelectionCriteria"))
+    ReplicationRule.add_member(:existing_object_replication, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExistingObjectReplication, location_name: "ExistingObjectReplication"))
+    ReplicationRule.add_member(:destination, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Destination, location_name: "Destination", traits: {"smithy.api#required" => {}}))
+    ReplicationRule.add_member(:delete_marker_replication, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteMarkerReplication, location_name: "DeleteMarkerReplication"))
+    ReplicationRule.type = Types::ReplicationRule
+    ReplicationRuleAndOperator.add_member(:prefix, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Prefix, location_name: "Prefix"))
+    ReplicationRuleAndOperator.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagSet, location_name: "Tags", traits: {"smithy.api#xmlFlattened" => {}, "smithy.api#xmlName" => "Tag"}))
+    ReplicationRuleAndOperator.type = Types::ReplicationRuleAndOperator
+    ReplicationRuleFilter.add_member(:prefix, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Prefix, location_name: "Prefix"))
+    ReplicationRuleFilter.add_member(:tag, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tag, location_name: "Tag"))
+    ReplicationRuleFilter.add_member(:and, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReplicationRuleAndOperator, location_name: "And"))
+    ReplicationRuleFilter.type = Types::ReplicationRuleFilter
+    ReplicationRuleStatus.add_member(:enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Enabled", traits: {"smithy.api#enumValue" => "Enabled"}))
+    ReplicationRuleStatus.add_member(:disabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Disabled", traits: {"smithy.api#enumValue" => "Disabled"}))
+    ReplicationRules.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReplicationRule)
+    ReplicationStatus.add_member(:complete, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "COMPLETE", traits: {"smithy.api#enumValue" => "COMPLETE"}))
+    ReplicationStatus.add_member(:pending, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "PENDING", traits: {"smithy.api#enumValue" => "PENDING"}))
+    ReplicationStatus.add_member(:failed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
+    ReplicationStatus.add_member(:replica, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "REPLICA", traits: {"smithy.api#enumValue" => "REPLICA"}))
+    ReplicationStatus.add_member(:completed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "COMPLETED", traits: {"smithy.api#enumValue" => "COMPLETED"}))
+    ReplicationTime.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReplicationTimeStatus, location_name: "Status", traits: {"smithy.api#required" => {}}))
+    ReplicationTime.add_member(:time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReplicationTimeValue, location_name: "Time", traits: {"smithy.api#required" => {}}))
+    ReplicationTime.type = Types::ReplicationTime
+    ReplicationTimeStatus.add_member(:enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Enabled", traits: {"smithy.api#enumValue" => "Enabled"}))
+    ReplicationTimeStatus.add_member(:disabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Disabled", traits: {"smithy.api#enumValue" => "Disabled"}))
+    ReplicationTimeValue.add_member(:minutes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Minutes, location_name: "Minutes"))
+    ReplicationTimeValue.type = Types::ReplicationTimeValue
+    RequestCharged.add_member(:requester, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "requester", traits: {"smithy.api#enumValue" => "requester"}))
+    RequestPayer.add_member(:requester, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "requester", traits: {"smithy.api#enumValue" => "requester"}))
+    RequestPaymentConfiguration.add_member(:payer, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Payer, location_name: "Payer", traits: {"smithy.api#required" => {}}))
+    RequestPaymentConfiguration.type = Types::RequestPaymentConfiguration
+    RequestProgress.add_member(:enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EnableRequestProgress, location_name: "Enabled"))
+    RequestProgress.type = Types::RequestProgress
+    RestoreObjectOutput.add_member(:request_charged, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestCharged, location_name: "RequestCharged", traits: {"smithy.api#httpHeader" => "x-amz-request-charged"}))
+    RestoreObjectOutput.add_member(:restore_output_path, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RestoreOutputPath, location_name: "RestoreOutputPath", traits: {"smithy.api#httpHeader" => "x-amz-restore-output-path"}))
+    RestoreObjectOutput.type = Types::RestoreObjectOutput
+    RestoreObjectRequest.add_member(:bucket, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketName, location_name: "Bucket", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "Bucket"}}))
+    RestoreObjectRequest.add_member(:key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectKey, location_name: "Key", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    RestoreObjectRequest.add_member(:version_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectVersionId, location_name: "VersionId", traits: {"smithy.api#httpQuery" => "versionId"}))
+    RestoreObjectRequest.add_member(:restore_request, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RestoreRequest, location_name: "RestoreRequest", traits: {"smithy.api#httpPayload" => {}, "smithy.api#xmlName" => "RestoreRequest"}))
+    RestoreObjectRequest.add_member(:request_payer, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestPayer, location_name: "RequestPayer", traits: {"smithy.api#httpHeader" => "x-amz-request-payer"}))
+    RestoreObjectRequest.add_member(:checksum_algorithm, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChecksumAlgorithm, location_name: "ChecksumAlgorithm", traits: {"smithy.api#httpHeader" => "x-amz-sdk-checksum-algorithm"}))
+    RestoreObjectRequest.add_member(:expected_bucket_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "ExpectedBucketOwner", traits: {"smithy.api#httpHeader" => "x-amz-expected-bucket-owner"}))
+    RestoreObjectRequest[:http_payload] = :restore_request
+    RestoreObjectRequest[:http_payload_member] = RestoreObjectRequest.member(:restore_request)
+    RestoreObjectRequest.type = Types::RestoreObjectRequest
+    RestoreRequest.add_member(:days, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Days, location_name: "Days"))
+    RestoreRequest.add_member(:glacier_job_parameters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GlacierJobParameters, location_name: "GlacierJobParameters"))
+    RestoreRequest.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RestoreRequestType, location_name: "Type"))
+    RestoreRequest.add_member(:tier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tier, location_name: "Tier"))
+    RestoreRequest.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
+    RestoreRequest.add_member(:select_parameters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SelectParameters, location_name: "SelectParameters"))
+    RestoreRequest.add_member(:output_location, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OutputLocation, location_name: "OutputLocation"))
+    RestoreRequest.type = Types::RestoreRequest
+    RestoreRequestType.add_member(:select, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SELECT", traits: {"smithy.api#enumValue" => "SELECT"}))
+    RestoreStatus.add_member(:is_restore_in_progress, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IsRestoreInProgress, location_name: "IsRestoreInProgress"))
+    RestoreStatus.add_member(:restore_expiry_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RestoreExpiryDate, location_name: "RestoreExpiryDate"))
+    RestoreStatus.type = Types::RestoreStatus
+    RoutingRule.add_member(:condition, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Condition, location_name: "Condition"))
+    RoutingRule.add_member(:redirect, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Redirect, location_name: "Redirect", traits: {"smithy.api#required" => {}}))
+    RoutingRule.type = Types::RoutingRule
+    RoutingRules.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RoutingRule, traits: {"smithy.api#xmlName" => "RoutingRule"})
+    S3KeyFilter.add_member(:filter_rules, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FilterRuleList, location_name: "FilterRules", traits: {"smithy.api#xmlFlattened" => {}, "smithy.api#xmlName" => "FilterRule"}))
+    S3KeyFilter.type = Types::S3KeyFilter
+    S3Location.add_member(:bucket_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketName, location_name: "BucketName", traits: {"smithy.api#required" => {}}))
+    S3Location.add_member(:prefix, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LocationPrefix, location_name: "Prefix", traits: {"smithy.api#required" => {}}))
+    S3Location.add_member(:encryption, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Encryption, location_name: "Encryption"))
+    S3Location.add_member(:canned_acl, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectCannedACL, location_name: "CannedACL"))
+    S3Location.add_member(:access_control_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Grants, location_name: "AccessControlList"))
+    S3Location.add_member(:tagging, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tagging, location_name: "Tagging"))
+    S3Location.add_member(:user_metadata, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserMetadata, location_name: "UserMetadata"))
+    S3Location.add_member(:storage_class, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StorageClass, location_name: "StorageClass"))
+    S3Location.type = Types::S3Location
+    S3TablesBucketType.add_member(:aws, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "aws", traits: {"smithy.api#enumValue" => "aws"}))
+    S3TablesBucketType.add_member(:customer, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "customer", traits: {"smithy.api#enumValue" => "customer"}))
+    S3TablesDestination.add_member(:table_bucket_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3TablesBucketArn, location_name: "TableBucketArn", traits: {"smithy.api#required" => {}}))
+    S3TablesDestination.add_member(:table_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3TablesName, location_name: "TableName", traits: {"smithy.api#required" => {}}))
+    S3TablesDestination.type = Types::S3TablesDestination
+    S3TablesDestinationResult.add_member(:table_bucket_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3TablesBucketArn, location_name: "TableBucketArn", traits: {"smithy.api#required" => {}}))
+    S3TablesDestinationResult.add_member(:table_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3TablesName, location_name: "TableName", traits: {"smithy.api#required" => {}}))
+    S3TablesDestinationResult.add_member(:table_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3TablesArn, location_name: "TableArn", traits: {"smithy.api#required" => {}}))
+    S3TablesDestinationResult.add_member(:table_namespace, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3TablesNamespace, location_name: "TableNamespace", traits: {"smithy.api#required" => {}}))
+    S3TablesDestinationResult.type = Types::S3TablesDestinationResult
+    SSEKMS.add_member(:key_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SSEKMSKeyId, location_name: "KeyId", traits: {"smithy.api#required" => {}}))
+    SSEKMS.type = Types::SSEKMS
+    SSES3.type = Types::SSES3
+    ScanRange.add_member(:start, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Start, location_name: "Start"))
+    ScanRange.add_member(:end, ::Smithy::Schema::Shapes::ShapeRef.new(shape: End, location_name: "End"))
+    ScanRange.type = Types::ScanRange
+    SelectObjectContentEventStream.add_member(:records, Types::SelectObjectContentEventStream::Records, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RecordsEvent, location_name: "Records"))
+    SelectObjectContentEventStream.add_member(:stats, Types::SelectObjectContentEventStream::Stats, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StatsEvent, location_name: "Stats"))
+    SelectObjectContentEventStream.add_member(:progress, Types::SelectObjectContentEventStream::Progress, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProgressEvent, location_name: "Progress"))
+    SelectObjectContentEventStream.add_member(:cont, Types::SelectObjectContentEventStream::Cont, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContinuationEvent, location_name: "Cont"))
+    SelectObjectContentEventStream.add_member(:end, Types::SelectObjectContentEventStream::End, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EndEvent, location_name: "End"))
+    SelectObjectContentEventStream.add_member(:unknown, Types::SelectObjectContentEventStream::Unknown, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit))
+    SelectObjectContentEventStream.type = Types::SelectObjectContentEventStream
+    SelectObjectContentOutput.add_member(:payload, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SelectObjectContentEventStream, location_name: "Payload", traits: {"smithy.api#httpPayload" => {}}))
+    SelectObjectContentOutput[:http_payload] = :payload
+    SelectObjectContentOutput[:http_payload_member] = SelectObjectContentOutput.member(:payload)
+    SelectObjectContentOutput.type = Types::SelectObjectContentOutput
+    SelectObjectContentRequest.add_member(:bucket, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketName, location_name: "Bucket", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "Bucket"}}))
+    SelectObjectContentRequest.add_member(:key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectKey, location_name: "Key", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    SelectObjectContentRequest.add_member(:sse_customer_algorithm, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SSECustomerAlgorithm, location_name: "SSECustomerAlgorithm", traits: {"smithy.api#httpHeader" => "x-amz-server-side-encryption-customer-algorithm"}))
+    SelectObjectContentRequest.add_member(:sse_customer_key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SSECustomerKey, location_name: "SSECustomerKey", traits: {"smithy.api#httpHeader" => "x-amz-server-side-encryption-customer-key"}))
+    SelectObjectContentRequest.add_member(:sse_customer_key_md5, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SSECustomerKeyMD5, location_name: "SSECustomerKeyMD5", traits: {"smithy.api#httpHeader" => "x-amz-server-side-encryption-customer-key-MD5"}))
+    SelectObjectContentRequest.add_member(:expression, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Expression, location_name: "Expression", traits: {"smithy.api#required" => {}}))
+    SelectObjectContentRequest.add_member(:expression_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExpressionType, location_name: "ExpressionType", traits: {"smithy.api#required" => {}}))
+    SelectObjectContentRequest.add_member(:request_progress, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestProgress, location_name: "RequestProgress"))
+    SelectObjectContentRequest.add_member(:input_serialization, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InputSerialization, location_name: "InputSerialization", traits: {"smithy.api#required" => {}}))
+    SelectObjectContentRequest.add_member(:output_serialization, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OutputSerialization, location_name: "OutputSerialization", traits: {"smithy.api#required" => {}}))
+    SelectObjectContentRequest.add_member(:scan_range, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ScanRange, location_name: "ScanRange"))
+    SelectObjectContentRequest.add_member(:expected_bucket_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "ExpectedBucketOwner", traits: {"smithy.api#httpHeader" => "x-amz-expected-bucket-owner"}))
+    SelectObjectContentRequest.type = Types::SelectObjectContentRequest
+    SelectParameters.add_member(:input_serialization, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InputSerialization, location_name: "InputSerialization", traits: {"smithy.api#required" => {}}))
+    SelectParameters.add_member(:expression_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExpressionType, location_name: "ExpressionType", traits: {"smithy.api#required" => {}}))
+    SelectParameters.add_member(:expression, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Expression, location_name: "Expression", traits: {"smithy.api#required" => {}}))
+    SelectParameters.add_member(:output_serialization, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OutputSerialization, location_name: "OutputSerialization", traits: {"smithy.api#required" => {}}))
+    SelectParameters.type = Types::SelectParameters
+    ServerSideEncryption.add_member(:aes256, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AES256", traits: {"smithy.api#enumValue" => "AES256"}))
+    ServerSideEncryption.add_member(:aws_fsx, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "aws_fsx", traits: {"smithy.api#enumValue" => "aws:fsx"}))
+    ServerSideEncryption.add_member(:aws_kms, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "aws_kms", traits: {"smithy.api#enumValue" => "aws:kms"}))
+    ServerSideEncryption.add_member(:aws_kms_dsse, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "aws_kms_dsse", traits: {"smithy.api#enumValue" => "aws:kms:dsse"}))
+    ServerSideEncryptionByDefault.add_member(:sse_algorithm, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServerSideEncryption, location_name: "SSEAlgorithm", traits: {"smithy.api#required" => {}}))
+    ServerSideEncryptionByDefault.add_member(:kms_master_key_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SSEKMSKeyId, location_name: "KMSMasterKeyID"))
+    ServerSideEncryptionByDefault.type = Types::ServerSideEncryptionByDefault
+    ServerSideEncryptionConfiguration.add_member(:rules, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServerSideEncryptionRules, location_name: "Rules", traits: {"smithy.api#required" => {}, "smithy.api#xmlFlattened" => {}, "smithy.api#xmlName" => "Rule"}))
+    ServerSideEncryptionConfiguration.type = Types::ServerSideEncryptionConfiguration
+    ServerSideEncryptionRule.add_member(:apply_server_side_encryption_by_default, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServerSideEncryptionByDefault, location_name: "ApplyServerSideEncryptionByDefault"))
+    ServerSideEncryptionRule.add_member(:bucket_key_enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketKeyEnabled, location_name: "BucketKeyEnabled"))
+    ServerSideEncryptionRule.type = Types::ServerSideEncryptionRule
+    ServerSideEncryptionRules.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServerSideEncryptionRule)
+    SessionCredentials.add_member(:access_key_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessKeyIdValue, location_name: "AccessKeyId", traits: {"smithy.api#required" => {}, "smithy.api#xmlName" => "AccessKeyId"}))
+    SessionCredentials.add_member(:secret_access_key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SessionCredentialValue, location_name: "SecretAccessKey", traits: {"smithy.api#required" => {}, "smithy.api#xmlName" => "SecretAccessKey"}))
+    SessionCredentials.add_member(:session_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SessionCredentialValue, location_name: "SessionToken", traits: {"smithy.api#required" => {}, "smithy.api#xmlName" => "SessionToken"}))
+    SessionCredentials.add_member(:expiration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SessionExpiration, location_name: "Expiration", traits: {"smithy.api#required" => {}, "smithy.api#xmlName" => "Expiration"}))
+    SessionCredentials.type = Types::SessionCredentials
+    SessionMode.add_member(:read_only, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ReadOnly", traits: {"smithy.api#enumValue" => "ReadOnly"}))
+    SessionMode.add_member(:read_write, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ReadWrite", traits: {"smithy.api#enumValue" => "ReadWrite"}))
+    SimplePrefix.type = Types::SimplePrefix
+    SourceSelectionCriteria.add_member(:sse_kms_encrypted_objects, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SseKmsEncryptedObjects, location_name: "SseKmsEncryptedObjects"))
+    SourceSelectionCriteria.add_member(:replica_modifications, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReplicaModifications, location_name: "ReplicaModifications"))
+    SourceSelectionCriteria.type = Types::SourceSelectionCriteria
+    SseKmsEncryptedObjects.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SseKmsEncryptedObjectsStatus, location_name: "Status", traits: {"smithy.api#required" => {}}))
+    SseKmsEncryptedObjects.type = Types::SseKmsEncryptedObjects
+    SseKmsEncryptedObjectsStatus.add_member(:enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Enabled", traits: {"smithy.api#enumValue" => "Enabled"}))
+    SseKmsEncryptedObjectsStatus.add_member(:disabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Disabled", traits: {"smithy.api#enumValue" => "Disabled"}))
+    Stats.add_member(:bytes_scanned, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BytesScanned, location_name: "BytesScanned"))
+    Stats.add_member(:bytes_processed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BytesProcessed, location_name: "BytesProcessed"))
+    Stats.add_member(:bytes_returned, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BytesReturned, location_name: "BytesReturned"))
+    Stats.type = Types::Stats
+    StatsEvent.add_member(:details, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Stats, location_name: "Details", traits: {"smithy.api#eventPayload" => {}}))
+    StatsEvent.type = Types::StatsEvent
+    StorageClass.add_member(:standard, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "STANDARD", traits: {"smithy.api#enumValue" => "STANDARD"}))
+    StorageClass.add_member(:reduced_redundancy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "REDUCED_REDUNDANCY", traits: {"smithy.api#enumValue" => "REDUCED_REDUNDANCY"}))
+    StorageClass.add_member(:standard_ia, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "STANDARD_IA", traits: {"smithy.api#enumValue" => "STANDARD_IA"}))
+    StorageClass.add_member(:onezone_ia, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ONEZONE_IA", traits: {"smithy.api#enumValue" => "ONEZONE_IA"}))
+    StorageClass.add_member(:intelligent_tiering, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INTELLIGENT_TIERING", traits: {"smithy.api#enumValue" => "INTELLIGENT_TIERING"}))
+    StorageClass.add_member(:glacier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "GLACIER", traits: {"smithy.api#enumValue" => "GLACIER"}))
+    StorageClass.add_member(:deep_archive, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DEEP_ARCHIVE", traits: {"smithy.api#enumValue" => "DEEP_ARCHIVE"}))
+    StorageClass.add_member(:outposts, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "OUTPOSTS", traits: {"smithy.api#enumValue" => "OUTPOSTS"}))
+    StorageClass.add_member(:glacier_ir, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "GLACIER_IR", traits: {"smithy.api#enumValue" => "GLACIER_IR"}))
+    StorageClass.add_member(:snow, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "SNOW", traits: {"smithy.api#enumValue" => "SNOW"}))
+    StorageClass.add_member(:express_onezone, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "EXPRESS_ONEZONE", traits: {"smithy.api#enumValue" => "EXPRESS_ONEZONE"}))
+    StorageClass.add_member(:fsx_openzfs, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "FSX_OPENZFS", traits: {"smithy.api#enumValue" => "FSX_OPENZFS"}))
+    StorageClassAnalysis.add_member(:data_export, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StorageClassAnalysisDataExport, location_name: "DataExport"))
+    StorageClassAnalysis.type = Types::StorageClassAnalysis
+    StorageClassAnalysisDataExport.add_member(:output_schema_version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StorageClassAnalysisSchemaVersion, location_name: "OutputSchemaVersion", traits: {"smithy.api#required" => {}}))
+    StorageClassAnalysisDataExport.add_member(:destination, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AnalyticsExportDestination, location_name: "Destination", traits: {"smithy.api#required" => {}}))
+    StorageClassAnalysisDataExport.type = Types::StorageClassAnalysisDataExport
+    StorageClassAnalysisSchemaVersion.add_member(:v_1, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "V_1", traits: {"smithy.api#enumValue" => "V_1"}))
+    TableSseAlgorithm.add_member(:aws_kms, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "aws_kms", traits: {"smithy.api#enumValue" => "aws:kms"}))
+    TableSseAlgorithm.add_member(:aes256, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AES256", traits: {"smithy.api#enumValue" => "AES256"}))
+    Tag.add_member(:key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectKey, location_name: "Key", traits: {"smithy.api#required" => {}}))
+    Tag.add_member(:value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Value, location_name: "Value", traits: {"smithy.api#required" => {}}))
+    Tag.type = Types::Tag
+    TagSet.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tag, traits: {"smithy.api#xmlName" => "Tag"})
+    Tagging.add_member(:tag_set, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagSet, location_name: "TagSet", traits: {"smithy.api#required" => {}}))
+    Tagging.type = Types::Tagging
+    TaggingDirective.add_member(:copy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "COPY", traits: {"smithy.api#enumValue" => "COPY"}))
+    TaggingDirective.add_member(:replace, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "REPLACE", traits: {"smithy.api#enumValue" => "REPLACE"}))
+    TargetGrant.add_member(:grantee, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Grantee, location_name: "Grantee", traits: {"smithy.api#xmlNamespace" => {"uri" => "http://www.w3.org/2001/XMLSchema-instance", "prefix" => "xsi"}}))
+    TargetGrant.add_member(:permission, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketLogsPermission, location_name: "Permission"))
+    TargetGrant.type = Types::TargetGrant
+    TargetGrants.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TargetGrant, traits: {"smithy.api#xmlName" => "Grant"})
+    TargetObjectKeyFormat.add_member(:simple_prefix, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SimplePrefix, location_name: "SimplePrefix", traits: {"smithy.api#xmlName" => "SimplePrefix"}))
+    TargetObjectKeyFormat.add_member(:partitioned_prefix, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PartitionedPrefix, location_name: "PartitionedPrefix", traits: {"smithy.api#xmlName" => "PartitionedPrefix"}))
+    TargetObjectKeyFormat.type = Types::TargetObjectKeyFormat
+    Tier.add_member(:standard, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Standard", traits: {"smithy.api#enumValue" => "Standard"}))
+    Tier.add_member(:bulk, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Bulk", traits: {"smithy.api#enumValue" => "Bulk"}))
+    Tier.add_member(:expedited, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Expedited", traits: {"smithy.api#enumValue" => "Expedited"}))
+    Tiering.add_member(:days, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IntelligentTieringDays, location_name: "Days", traits: {"smithy.api#required" => {}}))
+    Tiering.add_member(:access_tier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IntelligentTieringAccessTier, location_name: "AccessTier", traits: {"smithy.api#required" => {}}))
+    Tiering.type = Types::Tiering
+    TieringList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tiering)
+    TooManyParts.type = Types::TooManyParts
+    TopicConfiguration.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotificationId, location_name: "Id"))
+    TopicConfiguration.add_member(:topic_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TopicArn, location_name: "TopicArn", traits: {"smithy.api#required" => {}, "smithy.api#xmlName" => "Topic"}))
+    TopicConfiguration.add_member(:events, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EventList, location_name: "Events", traits: {"smithy.api#required" => {}, "smithy.api#xmlFlattened" => {}, "smithy.api#xmlName" => "Event"}))
+    TopicConfiguration.add_member(:filter, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotificationConfigurationFilter, location_name: "Filter"))
+    TopicConfiguration.type = Types::TopicConfiguration
+    TopicConfigurationList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TopicConfiguration)
+    Transition.add_member(:date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Date, location_name: "Date"))
+    Transition.add_member(:days, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Days, location_name: "Days"))
+    Transition.add_member(:storage_class, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TransitionStorageClass, location_name: "StorageClass"))
+    Transition.type = Types::Transition
+    TransitionDefaultMinimumObjectSize.add_member(:varies_by_storage_class, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "varies_by_storage_class", traits: {"smithy.api#enumValue" => "varies_by_storage_class"}))
+    TransitionDefaultMinimumObjectSize.add_member(:all_storage_classes_128_k, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "all_storage_classes_128K", traits: {"smithy.api#enumValue" => "all_storage_classes_128K"}))
+    TransitionList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Transition)
+    TransitionStorageClass.add_member(:glacier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "GLACIER", traits: {"smithy.api#enumValue" => "GLACIER"}))
+    TransitionStorageClass.add_member(:standard_ia, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "STANDARD_IA", traits: {"smithy.api#enumValue" => "STANDARD_IA"}))
+    TransitionStorageClass.add_member(:onezone_ia, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "ONEZONE_IA", traits: {"smithy.api#enumValue" => "ONEZONE_IA"}))
+    TransitionStorageClass.add_member(:intelligent_tiering, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "INTELLIGENT_TIERING", traits: {"smithy.api#enumValue" => "INTELLIGENT_TIERING"}))
+    TransitionStorageClass.add_member(:deep_archive, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "DEEP_ARCHIVE", traits: {"smithy.api#enumValue" => "DEEP_ARCHIVE"}))
+    TransitionStorageClass.add_member(:glacier_ir, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "GLACIER_IR", traits: {"smithy.api#enumValue" => "GLACIER_IR"}))
+    Type.add_member(:canonical_user, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "CanonicalUser", traits: {"smithy.api#enumValue" => "CanonicalUser"}))
+    Type.add_member(:amazon_customer_by_email, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "AmazonCustomerByEmail", traits: {"smithy.api#enumValue" => "AmazonCustomerByEmail"}))
+    Type.add_member(:group, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: "Group", traits: {"smithy.api#enumValue" => "Group"}))
+    UpdateBucketMetadataInventoryTableConfigurationRequest.add_member(:bucket, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketName, location_name: "Bucket", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "Bucket"}}))
+    UpdateBucketMetadataInventoryTableConfigurationRequest.add_member(:content_md5, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContentMD5, location_name: "ContentMD5", traits: {"smithy.api#httpHeader" => "Content-MD5"}))
+    UpdateBucketMetadataInventoryTableConfigurationRequest.add_member(:checksum_algorithm, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChecksumAlgorithm, location_name: "ChecksumAlgorithm", traits: {"smithy.api#httpHeader" => "x-amz-sdk-checksum-algorithm"}))
+    UpdateBucketMetadataInventoryTableConfigurationRequest.add_member(:inventory_table_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InventoryTableConfigurationUpdates, location_name: "InventoryTableConfiguration", traits: {"smithy.api#httpPayload" => {}, "smithy.api#required" => {}, "smithy.api#xmlName" => "InventoryTableConfiguration"}))
+    UpdateBucketMetadataInventoryTableConfigurationRequest.add_member(:expected_bucket_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "ExpectedBucketOwner", traits: {"smithy.api#httpHeader" => "x-amz-expected-bucket-owner"}))
+    UpdateBucketMetadataInventoryTableConfigurationRequest[:http_payload] = :inventory_table_configuration
+    UpdateBucketMetadataInventoryTableConfigurationRequest[:http_payload_member] = UpdateBucketMetadataInventoryTableConfigurationRequest.member(:inventory_table_configuration)
+    UpdateBucketMetadataInventoryTableConfigurationRequest.type = Types::UpdateBucketMetadataInventoryTableConfigurationRequest
+    UpdateBucketMetadataJournalTableConfigurationRequest.add_member(:bucket, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketName, location_name: "Bucket", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "Bucket"}}))
+    UpdateBucketMetadataJournalTableConfigurationRequest.add_member(:content_md5, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContentMD5, location_name: "ContentMD5", traits: {"smithy.api#httpHeader" => "Content-MD5"}))
+    UpdateBucketMetadataJournalTableConfigurationRequest.add_member(:checksum_algorithm, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChecksumAlgorithm, location_name: "ChecksumAlgorithm", traits: {"smithy.api#httpHeader" => "x-amz-sdk-checksum-algorithm"}))
+    UpdateBucketMetadataJournalTableConfigurationRequest.add_member(:journal_table_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JournalTableConfigurationUpdates, location_name: "JournalTableConfiguration", traits: {"smithy.api#httpPayload" => {}, "smithy.api#required" => {}, "smithy.api#xmlName" => "JournalTableConfiguration"}))
+    UpdateBucketMetadataJournalTableConfigurationRequest.add_member(:expected_bucket_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "ExpectedBucketOwner", traits: {"smithy.api#httpHeader" => "x-amz-expected-bucket-owner"}))
+    UpdateBucketMetadataJournalTableConfigurationRequest[:http_payload] = :journal_table_configuration
+    UpdateBucketMetadataJournalTableConfigurationRequest[:http_payload_member] = UpdateBucketMetadataJournalTableConfigurationRequest.member(:journal_table_configuration)
+    UpdateBucketMetadataJournalTableConfigurationRequest.type = Types::UpdateBucketMetadataJournalTableConfigurationRequest
+    UploadPartCopyOutput.add_member(:copy_source_version_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CopySourceVersionId, location_name: "CopySourceVersionId", traits: {"smithy.api#httpHeader" => "x-amz-copy-source-version-id"}))
+    UploadPartCopyOutput.add_member(:copy_part_result, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CopyPartResult, location_name: "CopyPartResult", traits: {"smithy.api#httpPayload" => {}}))
+    UploadPartCopyOutput.add_member(:server_side_encryption, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServerSideEncryption, location_name: "ServerSideEncryption", traits: {"smithy.api#httpHeader" => "x-amz-server-side-encryption"}))
+    UploadPartCopyOutput.add_member(:sse_customer_algorithm, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SSECustomerAlgorithm, location_name: "SSECustomerAlgorithm", traits: {"smithy.api#httpHeader" => "x-amz-server-side-encryption-customer-algorithm"}))
+    UploadPartCopyOutput.add_member(:sse_customer_key_md5, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SSECustomerKeyMD5, location_name: "SSECustomerKeyMD5", traits: {"smithy.api#httpHeader" => "x-amz-server-side-encryption-customer-key-MD5"}))
+    UploadPartCopyOutput.add_member(:ssekms_key_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SSEKMSKeyId, location_name: "SSEKMSKeyId", traits: {"smithy.api#httpHeader" => "x-amz-server-side-encryption-aws-kms-key-id"}))
+    UploadPartCopyOutput.add_member(:bucket_key_enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketKeyEnabled, location_name: "BucketKeyEnabled", traits: {"smithy.api#httpHeader" => "x-amz-server-side-encryption-bucket-key-enabled"}))
+    UploadPartCopyOutput.add_member(:request_charged, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestCharged, location_name: "RequestCharged", traits: {"smithy.api#httpHeader" => "x-amz-request-charged"}))
+    UploadPartCopyOutput[:http_payload] = :copy_part_result
+    UploadPartCopyOutput[:http_payload_member] = UploadPartCopyOutput.member(:copy_part_result)
+    UploadPartCopyOutput.type = Types::UploadPartCopyOutput
+    UploadPartCopyRequest.add_member(:bucket, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketName, location_name: "Bucket", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "Bucket"}}))
+    UploadPartCopyRequest.add_member(:copy_source, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CopySource, location_name: "CopySource", traits: {"smithy.api#httpHeader" => "x-amz-copy-source", "smithy.api#required" => {}}))
+    UploadPartCopyRequest.add_member(:copy_source_if_match, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CopySourceIfMatch, location_name: "CopySourceIfMatch", traits: {"smithy.api#httpHeader" => "x-amz-copy-source-if-match"}))
+    UploadPartCopyRequest.add_member(:copy_source_if_modified_since, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CopySourceIfModifiedSince, location_name: "CopySourceIfModifiedSince", traits: {"smithy.api#httpHeader" => "x-amz-copy-source-if-modified-since"}))
+    UploadPartCopyRequest.add_member(:copy_source_if_none_match, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CopySourceIfNoneMatch, location_name: "CopySourceIfNoneMatch", traits: {"smithy.api#httpHeader" => "x-amz-copy-source-if-none-match"}))
+    UploadPartCopyRequest.add_member(:copy_source_if_unmodified_since, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CopySourceIfUnmodifiedSince, location_name: "CopySourceIfUnmodifiedSince", traits: {"smithy.api#httpHeader" => "x-amz-copy-source-if-unmodified-since"}))
+    UploadPartCopyRequest.add_member(:copy_source_range, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CopySourceRange, location_name: "CopySourceRange", traits: {"smithy.api#httpHeader" => "x-amz-copy-source-range"}))
+    UploadPartCopyRequest.add_member(:key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectKey, location_name: "Key", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UploadPartCopyRequest.add_member(:part_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PartNumber, location_name: "PartNumber", traits: {"smithy.api#httpQuery" => "partNumber", "smithy.api#required" => {}}))
+    UploadPartCopyRequest.add_member(:upload_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MultipartUploadId, location_name: "UploadId", traits: {"smithy.api#httpQuery" => "uploadId", "smithy.api#required" => {}}))
+    UploadPartCopyRequest.add_member(:sse_customer_algorithm, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SSECustomerAlgorithm, location_name: "SSECustomerAlgorithm", traits: {"smithy.api#httpHeader" => "x-amz-server-side-encryption-customer-algorithm"}))
+    UploadPartCopyRequest.add_member(:sse_customer_key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SSECustomerKey, location_name: "SSECustomerKey", traits: {"smithy.api#httpHeader" => "x-amz-server-side-encryption-customer-key"}))
+    UploadPartCopyRequest.add_member(:sse_customer_key_md5, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SSECustomerKeyMD5, location_name: "SSECustomerKeyMD5", traits: {"smithy.api#httpHeader" => "x-amz-server-side-encryption-customer-key-MD5"}))
+    UploadPartCopyRequest.add_member(:copy_source_sse_customer_algorithm, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CopySourceSSECustomerAlgorithm, location_name: "CopySourceSSECustomerAlgorithm", traits: {"smithy.api#httpHeader" => "x-amz-copy-source-server-side-encryption-customer-algorithm"}))
+    UploadPartCopyRequest.add_member(:copy_source_sse_customer_key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CopySourceSSECustomerKey, location_name: "CopySourceSSECustomerKey", traits: {"smithy.api#httpHeader" => "x-amz-copy-source-server-side-encryption-customer-key"}))
+    UploadPartCopyRequest.add_member(:copy_source_sse_customer_key_md5, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CopySourceSSECustomerKeyMD5, location_name: "CopySourceSSECustomerKeyMD5", traits: {"smithy.api#httpHeader" => "x-amz-copy-source-server-side-encryption-customer-key-MD5"}))
+    UploadPartCopyRequest.add_member(:request_payer, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestPayer, location_name: "RequestPayer", traits: {"smithy.api#httpHeader" => "x-amz-request-payer"}))
+    UploadPartCopyRequest.add_member(:expected_bucket_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "ExpectedBucketOwner", traits: {"smithy.api#httpHeader" => "x-amz-expected-bucket-owner"}))
+    UploadPartCopyRequest.add_member(:expected_source_bucket_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "ExpectedSourceBucketOwner", traits: {"smithy.api#httpHeader" => "x-amz-source-expected-bucket-owner"}))
+    UploadPartCopyRequest.type = Types::UploadPartCopyRequest
+    UploadPartOutput.add_member(:server_side_encryption, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServerSideEncryption, location_name: "ServerSideEncryption", traits: {"smithy.api#httpHeader" => "x-amz-server-side-encryption"}))
+    UploadPartOutput.add_member(:e_tag, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ETag, location_name: "ETag", traits: {"smithy.api#httpHeader" => "ETag"}))
+    UploadPartOutput.add_member(:checksum_crc32, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChecksumCRC32, location_name: "ChecksumCRC32", traits: {"smithy.api#httpHeader" => "x-amz-checksum-crc32"}))
+    UploadPartOutput.add_member(:checksum_crc32_c, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChecksumCRC32C, location_name: "ChecksumCRC32C", traits: {"smithy.api#httpHeader" => "x-amz-checksum-crc32c"}))
+    UploadPartOutput.add_member(:checksum_crc64_nvme, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChecksumCRC64NVME, location_name: "ChecksumCRC64NVME", traits: {"smithy.api#httpHeader" => "x-amz-checksum-crc64nvme"}))
+    UploadPartOutput.add_member(:checksum_sha1, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChecksumSHA1, location_name: "ChecksumSHA1", traits: {"smithy.api#httpHeader" => "x-amz-checksum-sha1"}))
+    UploadPartOutput.add_member(:checksum_sha256, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChecksumSHA256, location_name: "ChecksumSHA256", traits: {"smithy.api#httpHeader" => "x-amz-checksum-sha256"}))
+    UploadPartOutput.add_member(:sse_customer_algorithm, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SSECustomerAlgorithm, location_name: "SSECustomerAlgorithm", traits: {"smithy.api#httpHeader" => "x-amz-server-side-encryption-customer-algorithm"}))
+    UploadPartOutput.add_member(:sse_customer_key_md5, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SSECustomerKeyMD5, location_name: "SSECustomerKeyMD5", traits: {"smithy.api#httpHeader" => "x-amz-server-side-encryption-customer-key-MD5"}))
+    UploadPartOutput.add_member(:ssekms_key_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SSEKMSKeyId, location_name: "SSEKMSKeyId", traits: {"smithy.api#httpHeader" => "x-amz-server-side-encryption-aws-kms-key-id"}))
+    UploadPartOutput.add_member(:bucket_key_enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketKeyEnabled, location_name: "BucketKeyEnabled", traits: {"smithy.api#httpHeader" => "x-amz-server-side-encryption-bucket-key-enabled"}))
+    UploadPartOutput.add_member(:request_charged, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestCharged, location_name: "RequestCharged", traits: {"smithy.api#httpHeader" => "x-amz-request-charged"}))
+    UploadPartOutput.type = Types::UploadPartOutput
+    UploadPartRequest.add_member(:body, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamingBlob, location_name: "Body", traits: {"smithy.api#default" => "", "smithy.api#httpPayload" => {}}))
+    UploadPartRequest.add_member(:bucket, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketName, location_name: "Bucket", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "Bucket"}}))
+    UploadPartRequest.add_member(:content_length, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContentLength, location_name: "ContentLength", traits: {"smithy.api#httpHeader" => "Content-Length"}))
+    UploadPartRequest.add_member(:content_md5, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContentMD5, location_name: "ContentMD5", traits: {"smithy.api#httpHeader" => "Content-MD5"}))
+    UploadPartRequest.add_member(:checksum_algorithm, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChecksumAlgorithm, location_name: "ChecksumAlgorithm", traits: {"smithy.api#httpHeader" => "x-amz-sdk-checksum-algorithm"}))
+    UploadPartRequest.add_member(:checksum_crc32, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChecksumCRC32, location_name: "ChecksumCRC32", traits: {"smithy.api#httpHeader" => "x-amz-checksum-crc32"}))
+    UploadPartRequest.add_member(:checksum_crc32_c, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChecksumCRC32C, location_name: "ChecksumCRC32C", traits: {"smithy.api#httpHeader" => "x-amz-checksum-crc32c"}))
+    UploadPartRequest.add_member(:checksum_crc64_nvme, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChecksumCRC64NVME, location_name: "ChecksumCRC64NVME", traits: {"smithy.api#httpHeader" => "x-amz-checksum-crc64nvme"}))
+    UploadPartRequest.add_member(:checksum_sha1, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChecksumSHA1, location_name: "ChecksumSHA1", traits: {"smithy.api#httpHeader" => "x-amz-checksum-sha1"}))
+    UploadPartRequest.add_member(:checksum_sha256, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChecksumSHA256, location_name: "ChecksumSHA256", traits: {"smithy.api#httpHeader" => "x-amz-checksum-sha256"}))
+    UploadPartRequest.add_member(:key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectKey, location_name: "Key", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "Key"}}))
+    UploadPartRequest.add_member(:part_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PartNumber, location_name: "PartNumber", traits: {"smithy.api#httpQuery" => "partNumber", "smithy.api#required" => {}}))
+    UploadPartRequest.add_member(:upload_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MultipartUploadId, location_name: "UploadId", traits: {"smithy.api#httpQuery" => "uploadId", "smithy.api#required" => {}}))
+    UploadPartRequest.add_member(:sse_customer_algorithm, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SSECustomerAlgorithm, location_name: "SSECustomerAlgorithm", traits: {"smithy.api#httpHeader" => "x-amz-server-side-encryption-customer-algorithm"}))
+    UploadPartRequest.add_member(:sse_customer_key, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SSECustomerKey, location_name: "SSECustomerKey", traits: {"smithy.api#httpHeader" => "x-amz-server-side-encryption-customer-key"}))
+    UploadPartRequest.add_member(:sse_customer_key_md5, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SSECustomerKeyMD5, location_name: "SSECustomerKeyMD5", traits: {"smithy.api#httpHeader" => "x-amz-server-side-encryption-customer-key-MD5"}))
+    UploadPartRequest.add_member(:request_payer, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestPayer, location_name: "RequestPayer", traits: {"smithy.api#httpHeader" => "x-amz-request-payer"}))
+    UploadPartRequest.add_member(:expected_bucket_owner, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: "ExpectedBucketOwner", traits: {"smithy.api#httpHeader" => "x-amz-expected-bucket-owner"}))
+    UploadPartRequest[:http_payload] = :body
+    UploadPartRequest[:http_payload_member] = UploadPartRequest.member(:body)
+    UploadPartRequest.type = Types::UploadPartRequest
+    UserMetadata.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: MetadataEntry, traits: {"smithy.api#xmlName" => "MetadataEntry"})
+    VersioningConfiguration.add_member(:mfa_delete, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MFADelete, location_name: "MFADelete", traits: {"smithy.api#xmlName" => "MfaDelete"}))
+    VersioningConfiguration.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketVersioningStatus, location_name: "Status"))
+    VersioningConfiguration.type = Types::VersioningConfiguration
+    WebsiteConfiguration.add_member(:error_document, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorDocument, location_name: "ErrorDocument"))
+    WebsiteConfiguration.add_member(:index_document, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IndexDocument, location_name: "IndexDocument"))
+    WebsiteConfiguration.add_member(:redirect_all_requests_to, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RedirectAllRequestsTo, location_name: "RedirectAllRequestsTo"))
+    WebsiteConfiguration.add_member(:routing_rules, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RoutingRules, location_name: "RoutingRules"))
+    WebsiteConfiguration.type = Types::WebsiteConfiguration
+    WriteGetObjectResponseRequest.add_member(:request_route, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestRoute, location_name: "RequestRoute", traits: {"smithy.api#hostLabel" => {}, "smithy.api#httpHeader" => "x-amz-request-route", "smithy.api#required" => {}}))
+    WriteGetObjectResponseRequest.add_member(:request_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestToken, location_name: "RequestToken", traits: {"smithy.api#httpHeader" => "x-amz-request-token", "smithy.api#required" => {}}))
+    WriteGetObjectResponseRequest.add_member(:body, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StreamingBlob, location_name: "Body", traits: {"smithy.api#default" => "", "smithy.api#httpPayload" => {}}))
+    WriteGetObjectResponseRequest.add_member(:status_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetObjectResponseStatusCode, location_name: "StatusCode", traits: {"smithy.api#httpHeader" => "x-amz-fwd-status"}))
+    WriteGetObjectResponseRequest.add_member(:error_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorCode, location_name: "ErrorCode", traits: {"smithy.api#httpHeader" => "x-amz-fwd-error-code"}))
+    WriteGetObjectResponseRequest.add_member(:error_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "ErrorMessage", traits: {"smithy.api#httpHeader" => "x-amz-fwd-error-message"}))
+    WriteGetObjectResponseRequest.add_member(:accept_ranges, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AcceptRanges, location_name: "AcceptRanges", traits: {"smithy.api#httpHeader" => "x-amz-fwd-header-accept-ranges"}))
+    WriteGetObjectResponseRequest.add_member(:cache_control, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CacheControl, location_name: "CacheControl", traits: {"smithy.api#httpHeader" => "x-amz-fwd-header-Cache-Control"}))
+    WriteGetObjectResponseRequest.add_member(:content_disposition, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContentDisposition, location_name: "ContentDisposition", traits: {"smithy.api#httpHeader" => "x-amz-fwd-header-Content-Disposition"}))
+    WriteGetObjectResponseRequest.add_member(:content_encoding, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContentEncoding, location_name: "ContentEncoding", traits: {"smithy.api#httpHeader" => "x-amz-fwd-header-Content-Encoding"}))
+    WriteGetObjectResponseRequest.add_member(:content_language, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContentLanguage, location_name: "ContentLanguage", traits: {"smithy.api#httpHeader" => "x-amz-fwd-header-Content-Language"}))
+    WriteGetObjectResponseRequest.add_member(:content_length, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContentLength, location_name: "ContentLength", traits: {"smithy.api#httpHeader" => "Content-Length"}))
+    WriteGetObjectResponseRequest.add_member(:content_range, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContentRange, location_name: "ContentRange", traits: {"smithy.api#httpHeader" => "x-amz-fwd-header-Content-Range"}))
+    WriteGetObjectResponseRequest.add_member(:content_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContentType, location_name: "ContentType", traits: {"smithy.api#httpHeader" => "x-amz-fwd-header-Content-Type"}))
+    WriteGetObjectResponseRequest.add_member(:checksum_crc32, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChecksumCRC32, location_name: "ChecksumCRC32", traits: {"smithy.api#httpHeader" => "x-amz-fwd-header-x-amz-checksum-crc32"}))
+    WriteGetObjectResponseRequest.add_member(:checksum_crc32_c, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChecksumCRC32C, location_name: "ChecksumCRC32C", traits: {"smithy.api#httpHeader" => "x-amz-fwd-header-x-amz-checksum-crc32c"}))
+    WriteGetObjectResponseRequest.add_member(:checksum_crc64_nvme, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChecksumCRC64NVME, location_name: "ChecksumCRC64NVME", traits: {"smithy.api#httpHeader" => "x-amz-fwd-header-x-amz-checksum-crc64nvme"}))
+    WriteGetObjectResponseRequest.add_member(:checksum_sha1, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChecksumSHA1, location_name: "ChecksumSHA1", traits: {"smithy.api#httpHeader" => "x-amz-fwd-header-x-amz-checksum-sha1"}))
+    WriteGetObjectResponseRequest.add_member(:checksum_sha256, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChecksumSHA256, location_name: "ChecksumSHA256", traits: {"smithy.api#httpHeader" => "x-amz-fwd-header-x-amz-checksum-sha256"}))
+    WriteGetObjectResponseRequest.add_member(:delete_marker, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteMarker, location_name: "DeleteMarker", traits: {"smithy.api#httpHeader" => "x-amz-fwd-header-x-amz-delete-marker"}))
+    WriteGetObjectResponseRequest.add_member(:e_tag, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ETag, location_name: "ETag", traits: {"smithy.api#httpHeader" => "x-amz-fwd-header-ETag"}))
+    WriteGetObjectResponseRequest.add_member(:expires, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Expires, location_name: "Expires", traits: {"smithy.api#httpHeader" => "x-amz-fwd-header-Expires"}))
+    WriteGetObjectResponseRequest.add_member(:expiration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Expiration, location_name: "Expiration", traits: {"smithy.api#httpHeader" => "x-amz-fwd-header-x-amz-expiration"}))
+    WriteGetObjectResponseRequest.add_member(:last_modified, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LastModified, location_name: "LastModified", traits: {"smithy.api#httpHeader" => "x-amz-fwd-header-Last-Modified"}))
+    WriteGetObjectResponseRequest.add_member(:missing_meta, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MissingMeta, location_name: "MissingMeta", traits: {"smithy.api#httpHeader" => "x-amz-fwd-header-x-amz-missing-meta"}))
+    WriteGetObjectResponseRequest.add_member(:metadata, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Metadata, location_name: "Metadata", traits: {"smithy.api#httpPrefixHeaders" => "x-amz-meta-"}))
+    WriteGetObjectResponseRequest.add_member(:object_lock_mode, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectLockMode, location_name: "ObjectLockMode", traits: {"smithy.api#httpHeader" => "x-amz-fwd-header-x-amz-object-lock-mode"}))
+    WriteGetObjectResponseRequest.add_member(:object_lock_legal_hold_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectLockLegalHoldStatus, location_name: "ObjectLockLegalHoldStatus", traits: {"smithy.api#httpHeader" => "x-amz-fwd-header-x-amz-object-lock-legal-hold"}))
+    WriteGetObjectResponseRequest.add_member(:object_lock_retain_until_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectLockRetainUntilDate, location_name: "ObjectLockRetainUntilDate", traits: {"smithy.api#httpHeader" => "x-amz-fwd-header-x-amz-object-lock-retain-until-date"}))
+    WriteGetObjectResponseRequest.add_member(:parts_count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PartsCount, location_name: "PartsCount", traits: {"smithy.api#httpHeader" => "x-amz-fwd-header-x-amz-mp-parts-count"}))
+    WriteGetObjectResponseRequest.add_member(:replication_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReplicationStatus, location_name: "ReplicationStatus", traits: {"smithy.api#httpHeader" => "x-amz-fwd-header-x-amz-replication-status"}))
+    WriteGetObjectResponseRequest.add_member(:request_charged, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RequestCharged, location_name: "RequestCharged", traits: {"smithy.api#httpHeader" => "x-amz-fwd-header-x-amz-request-charged"}))
+    WriteGetObjectResponseRequest.add_member(:restore, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Restore, location_name: "Restore", traits: {"smithy.api#httpHeader" => "x-amz-fwd-header-x-amz-restore"}))
+    WriteGetObjectResponseRequest.add_member(:server_side_encryption, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServerSideEncryption, location_name: "ServerSideEncryption", traits: {"smithy.api#httpHeader" => "x-amz-fwd-header-x-amz-server-side-encryption"}))
+    WriteGetObjectResponseRequest.add_member(:sse_customer_algorithm, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SSECustomerAlgorithm, location_name: "SSECustomerAlgorithm", traits: {"smithy.api#httpHeader" => "x-amz-fwd-header-x-amz-server-side-encryption-customer-algorithm"}))
+    WriteGetObjectResponseRequest.add_member(:ssekms_key_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SSEKMSKeyId, location_name: "SSEKMSKeyId", traits: {"smithy.api#httpHeader" => "x-amz-fwd-header-x-amz-server-side-encryption-aws-kms-key-id"}))
+    WriteGetObjectResponseRequest.add_member(:sse_customer_key_md5, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SSECustomerKeyMD5, location_name: "SSECustomerKeyMD5", traits: {"smithy.api#httpHeader" => "x-amz-fwd-header-x-amz-server-side-encryption-customer-key-MD5"}))
+    WriteGetObjectResponseRequest.add_member(:storage_class, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StorageClass, location_name: "StorageClass", traits: {"smithy.api#httpHeader" => "x-amz-fwd-header-x-amz-storage-class"}))
+    WriteGetObjectResponseRequest.add_member(:tag_count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagCount, location_name: "TagCount", traits: {"smithy.api#httpHeader" => "x-amz-fwd-header-x-amz-tagging-count"}))
+    WriteGetObjectResponseRequest.add_member(:version_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectVersionId, location_name: "VersionId", traits: {"smithy.api#httpHeader" => "x-amz-fwd-header-x-amz-version-id"}))
+    WriteGetObjectResponseRequest.add_member(:bucket_key_enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketKeyEnabled, location_name: "BucketKeyEnabled", traits: {"smithy.api#httpHeader" => "x-amz-fwd-header-x-amz-server-side-encryption-bucket-key-enabled"}))
+    WriteGetObjectResponseRequest[:http_payload] = :body
+    WriteGetObjectResponseRequest[:http_payload_member] = WriteGetObjectResponseRequest.member(:body)
+    WriteGetObjectResponseRequest.type = Types::WriteGetObjectResponseRequest
+
+    AmazonS3 = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
+      service.id = "com.amazonaws.s3#AmazonS3"
+      service.name = "AmazonS3"
+      service.version = "2006-03-01"
+      service.traits = {"aws.api#service" => {"sdkId" => "S3", "arnNamespace" => "s3", "cloudFormationName" => "S3", "cloudTrailEventSource" => "s3.amazonaws.com", "endpointPrefix" => "s3"}, "aws.auth#sigv4" => {"name" => "s3"}, "aws.protocols#restXml" => {"noErrorWrapping" => true}, "smithy.api#suppress" => ["RuleSetAuthSchemes"], "smithy.api#title" => "Amazon Simple Storage Service", "smithy.api#xmlNamespace" => {"uri" => "http://s3.amazonaws.com/doc/2006-03-01/"}, "smithy.rules#clientContextParams" => {"ForcePathStyle" => {"documentation" => "Forces this client to use path-style addressing for buckets.", "type" => "boolean"}, "UseArnRegion" => {"documentation" => "Enables this client to use an ARN's region when constructing an endpoint instead of the client's configured region.", "type" => "boolean"}, "DisableMultiRegionAccessPoints" => {"documentation" => "Disables this client's usage of Multi-Region Access Points.", "type" => "boolean"}, "Accelerate" => {"documentation" => "Enables this client to use S3 Transfer Acceleration endpoints.", "type" => "boolean"}, "DisableS3ExpressSessionAuth" => {"documentation" => "Disables this client's usage of Session Auth for S3Express       buckets and reverts to using conventional SigV4 for those.", "type" => "boolean"}}}
+      service.add_operation(:abort_multipart_upload, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.s3#AbortMultipartUpload"
+        operation.name = "AbortMultipartUpload"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AbortMultipartUploadRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AbortMultipartUploadOutput)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NoSuchUpload)
+        operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/{Bucket}/{Key+}?x-id=AbortMultipartUpload", "code" => 204}}
+      end)
+      service.add_operation(:complete_multipart_upload, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.s3#CompleteMultipartUpload"
+        operation.name = "CompleteMultipartUpload"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CompleteMultipartUploadRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CompleteMultipartUploadOutput)
+        operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/{Bucket}/{Key+}", "code" => 200}}
+      end)
+      service.add_operation(:copy_object, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.s3#CopyObject"
+        operation.name = "CopyObject"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CopyObjectRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CopyObjectOutput)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectNotInActiveTierError)
+        operation.traits = {"smithy.api#http" => {"method" => "PUT", "uri" => "/{Bucket}/{Key+}?x-id=CopyObject", "code" => 200}, "smithy.rules#staticContextParams" => {"DisableS3ExpressSessionAuth" => {"value" => true}}}
+      end)
+      service.add_operation(:create_bucket, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.s3#CreateBucket"
+        operation.name = "CreateBucket"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateBucketRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateBucketOutput)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketAlreadyExists)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BucketAlreadyOwnedByYou)
+        operation.traits = {"smithy.api#http" => {"method" => "PUT", "uri" => "/{Bucket}", "code" => 200}, "smithy.rules#staticContextParams" => {"UseS3ExpressControlEndpoint" => {"value" => true}, "DisableAccessPoints" => {"value" => true}}}
+      end)
+      service.add_operation(:create_bucket_metadata_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.s3#CreateBucketMetadataConfiguration"
+        operation.name = "CreateBucketMetadataConfiguration"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateBucketMetadataConfigurationRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
+        operation.traits = {"aws.protocols#httpChecksum" => {"requestAlgorithmMember" => "ChecksumAlgorithm", "requestChecksumRequired" => true}, "smithy.api#http" => {"method" => "POST", "uri" => "/{Bucket}?metadataConfiguration", "code" => 200}, "smithy.rules#staticContextParams" => {"UseS3ExpressControlEndpoint" => {"value" => true}}}
+      end)
+      service.add_operation(:create_bucket_metadata_table_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.s3#CreateBucketMetadataTableConfiguration"
+        operation.name = "CreateBucketMetadataTableConfiguration"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateBucketMetadataTableConfigurationRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
+        operation.traits = {"aws.protocols#httpChecksum" => {"requestAlgorithmMember" => "ChecksumAlgorithm", "requestChecksumRequired" => true}, "smithy.api#http" => {"method" => "POST", "uri" => "/{Bucket}?metadataTable", "code" => 200}, "smithy.rules#staticContextParams" => {"UseS3ExpressControlEndpoint" => {"value" => true}}}
+      end)
+      service.add_operation(:create_multipart_upload, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.s3#CreateMultipartUpload"
+        operation.name = "CreateMultipartUpload"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateMultipartUploadRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateMultipartUploadOutput)
+        operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/{Bucket}/{Key+}?uploads", "code" => 200}}
+      end)
+      service.add_operation(:create_session, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.s3#CreateSession"
+        operation.name = "CreateSession"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateSessionRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateSessionOutput)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NoSuchBucket)
+        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/{Bucket}?session", "code" => 200}, "smithy.rules#staticContextParams" => {"DisableS3ExpressSessionAuth" => {"value" => true}}}
+      end)
+      service.add_operation(:delete_bucket, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.s3#DeleteBucket"
+        operation.name = "DeleteBucket"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteBucketRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
+        operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/{Bucket}", "code" => 204}, "smithy.rules#staticContextParams" => {"UseS3ExpressControlEndpoint" => {"value" => true}}}
+      end)
+      service.add_operation(:delete_bucket_analytics_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.s3#DeleteBucketAnalyticsConfiguration"
+        operation.name = "DeleteBucketAnalyticsConfiguration"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteBucketAnalyticsConfigurationRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
+        operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/{Bucket}?analytics", "code" => 204}, "smithy.rules#staticContextParams" => {"UseS3ExpressControlEndpoint" => {"value" => true}}}
+      end)
+      service.add_operation(:delete_bucket_cors, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.s3#DeleteBucketCors"
+        operation.name = "DeleteBucketCors"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteBucketCorsRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
+        operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/{Bucket}?cors", "code" => 204}, "smithy.rules#staticContextParams" => {"UseS3ExpressControlEndpoint" => {"value" => true}}}
+      end)
+      service.add_operation(:delete_bucket_encryption, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.s3#DeleteBucketEncryption"
+        operation.name = "DeleteBucketEncryption"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteBucketEncryptionRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
+        operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/{Bucket}?encryption", "code" => 204}, "smithy.rules#staticContextParams" => {"UseS3ExpressControlEndpoint" => {"value" => true}}}
+      end)
+      service.add_operation(:delete_bucket_intelligent_tiering_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.s3#DeleteBucketIntelligentTieringConfiguration"
+        operation.name = "DeleteBucketIntelligentTieringConfiguration"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteBucketIntelligentTieringConfigurationRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
+        operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/{Bucket}?intelligent-tiering", "code" => 204}, "smithy.rules#staticContextParams" => {"UseS3ExpressControlEndpoint" => {"value" => true}}}
+      end)
+      service.add_operation(:delete_bucket_inventory_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.s3#DeleteBucketInventoryConfiguration"
+        operation.name = "DeleteBucketInventoryConfiguration"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteBucketInventoryConfigurationRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
+        operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/{Bucket}?inventory", "code" => 204}, "smithy.rules#staticContextParams" => {"UseS3ExpressControlEndpoint" => {"value" => true}}}
+      end)
+      service.add_operation(:delete_bucket_lifecycle, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.s3#DeleteBucketLifecycle"
+        operation.name = "DeleteBucketLifecycle"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteBucketLifecycleRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
+        operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/{Bucket}?lifecycle", "code" => 204}, "smithy.rules#staticContextParams" => {"UseS3ExpressControlEndpoint" => {"value" => true}}}
+      end)
+      service.add_operation(:delete_bucket_metadata_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.s3#DeleteBucketMetadataConfiguration"
+        operation.name = "DeleteBucketMetadataConfiguration"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteBucketMetadataConfigurationRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
+        operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/{Bucket}?metadataConfiguration", "code" => 204}, "smithy.rules#staticContextParams" => {"UseS3ExpressControlEndpoint" => {"value" => true}}}
+      end)
+      service.add_operation(:delete_bucket_metadata_table_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.s3#DeleteBucketMetadataTableConfiguration"
+        operation.name = "DeleteBucketMetadataTableConfiguration"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteBucketMetadataTableConfigurationRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
+        operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/{Bucket}?metadataTable", "code" => 204}, "smithy.rules#staticContextParams" => {"UseS3ExpressControlEndpoint" => {"value" => true}}}
+      end)
+      service.add_operation(:delete_bucket_metrics_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.s3#DeleteBucketMetricsConfiguration"
+        operation.name = "DeleteBucketMetricsConfiguration"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteBucketMetricsConfigurationRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
+        operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/{Bucket}?metrics", "code" => 204}, "smithy.rules#staticContextParams" => {"UseS3ExpressControlEndpoint" => {"value" => true}}}
+      end)
+      service.add_operation(:delete_bucket_ownership_controls, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.s3#DeleteBucketOwnershipControls"
+        operation.name = "DeleteBucketOwnershipControls"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteBucketOwnershipControlsRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
+        operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/{Bucket}?ownershipControls", "code" => 204}, "smithy.rules#staticContextParams" => {"UseS3ExpressControlEndpoint" => {"value" => true}}}
+      end)
+      service.add_operation(:delete_bucket_policy, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.s3#DeleteBucketPolicy"
+        operation.name = "DeleteBucketPolicy"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteBucketPolicyRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
+        operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/{Bucket}?policy", "code" => 204}, "smithy.rules#staticContextParams" => {"UseS3ExpressControlEndpoint" => {"value" => true}}}
+      end)
+      service.add_operation(:delete_bucket_replication, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.s3#DeleteBucketReplication"
+        operation.name = "DeleteBucketReplication"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteBucketReplicationRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
+        operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/{Bucket}?replication", "code" => 204}, "smithy.rules#staticContextParams" => {"UseS3ExpressControlEndpoint" => {"value" => true}}}
+      end)
+      service.add_operation(:delete_bucket_tagging, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.s3#DeleteBucketTagging"
+        operation.name = "DeleteBucketTagging"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteBucketTaggingRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
+        operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/{Bucket}?tagging", "code" => 204}, "smithy.rules#staticContextParams" => {"UseS3ExpressControlEndpoint" => {"value" => true}}}
+      end)
+      service.add_operation(:delete_bucket_website, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.s3#DeleteBucketWebsite"
+        operation.name = "DeleteBucketWebsite"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteBucketWebsiteRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
+        operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/{Bucket}?website", "code" => 204}, "smithy.rules#staticContextParams" => {"UseS3ExpressControlEndpoint" => {"value" => true}}}
+      end)
+      service.add_operation(:delete_object, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.s3#DeleteObject"
+        operation.name = "DeleteObject"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteObjectRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteObjectOutput)
+        operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/{Bucket}/{Key+}?x-id=DeleteObject", "code" => 204}}
+      end)
+      service.add_operation(:delete_object_tagging, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.s3#DeleteObjectTagging"
+        operation.name = "DeleteObjectTagging"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteObjectTaggingRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteObjectTaggingOutput)
+        operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/{Bucket}/{Key+}?tagging", "code" => 204}}
+      end)
+      service.add_operation(:delete_objects, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.s3#DeleteObjects"
+        operation.name = "DeleteObjects"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteObjectsRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteObjectsOutput)
+        operation.traits = {"aws.protocols#httpChecksum" => {"requestAlgorithmMember" => "ChecksumAlgorithm", "requestChecksumRequired" => true}, "smithy.api#http" => {"method" => "POST", "uri" => "/{Bucket}?delete", "code" => 200}}
+      end)
+      service.add_operation(:delete_public_access_block, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.s3#DeletePublicAccessBlock"
+        operation.name = "DeletePublicAccessBlock"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeletePublicAccessBlockRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
+        operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/{Bucket}?publicAccessBlock", "code" => 204}, "smithy.rules#staticContextParams" => {"UseS3ExpressControlEndpoint" => {"value" => true}}}
+      end)
+      service.add_operation(:get_bucket_accelerate_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.s3#GetBucketAccelerateConfiguration"
+        operation.name = "GetBucketAccelerateConfiguration"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetBucketAccelerateConfigurationRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetBucketAccelerateConfigurationOutput)
+        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/{Bucket}?accelerate", "code" => 200}, "smithy.rules#staticContextParams" => {"UseS3ExpressControlEndpoint" => {"value" => true}}}
+      end)
+      service.add_operation(:get_bucket_acl, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.s3#GetBucketAcl"
+        operation.name = "GetBucketAcl"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetBucketAclRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetBucketAclOutput)
+        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/{Bucket}?acl", "code" => 200}, "smithy.rules#staticContextParams" => {"UseS3ExpressControlEndpoint" => {"value" => true}}}
+      end)
+      service.add_operation(:get_bucket_analytics_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.s3#GetBucketAnalyticsConfiguration"
+        operation.name = "GetBucketAnalyticsConfiguration"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetBucketAnalyticsConfigurationRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetBucketAnalyticsConfigurationOutput)
+        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/{Bucket}?analytics&x-id=GetBucketAnalyticsConfiguration", "code" => 200}, "smithy.rules#staticContextParams" => {"UseS3ExpressControlEndpoint" => {"value" => true}}}
+      end)
+      service.add_operation(:get_bucket_cors, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.s3#GetBucketCors"
+        operation.name = "GetBucketCors"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetBucketCorsRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetBucketCorsOutput)
+        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/{Bucket}?cors", "code" => 200}, "smithy.rules#staticContextParams" => {"UseS3ExpressControlEndpoint" => {"value" => true}}}
+      end)
+      service.add_operation(:get_bucket_encryption, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.s3#GetBucketEncryption"
+        operation.name = "GetBucketEncryption"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetBucketEncryptionRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetBucketEncryptionOutput)
+        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/{Bucket}?encryption", "code" => 200}, "smithy.rules#staticContextParams" => {"UseS3ExpressControlEndpoint" => {"value" => true}}}
+      end)
+      service.add_operation(:get_bucket_intelligent_tiering_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.s3#GetBucketIntelligentTieringConfiguration"
+        operation.name = "GetBucketIntelligentTieringConfiguration"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetBucketIntelligentTieringConfigurationRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetBucketIntelligentTieringConfigurationOutput)
+        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/{Bucket}?intelligent-tiering&x-id=GetBucketIntelligentTieringConfiguration", "code" => 200}, "smithy.rules#staticContextParams" => {"UseS3ExpressControlEndpoint" => {"value" => true}}}
+      end)
+      service.add_operation(:get_bucket_inventory_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.s3#GetBucketInventoryConfiguration"
+        operation.name = "GetBucketInventoryConfiguration"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetBucketInventoryConfigurationRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetBucketInventoryConfigurationOutput)
+        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/{Bucket}?inventory&x-id=GetBucketInventoryConfiguration", "code" => 200}, "smithy.rules#staticContextParams" => {"UseS3ExpressControlEndpoint" => {"value" => true}}}
+      end)
+      service.add_operation(:get_bucket_lifecycle_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.s3#GetBucketLifecycleConfiguration"
+        operation.name = "GetBucketLifecycleConfiguration"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetBucketLifecycleConfigurationRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetBucketLifecycleConfigurationOutput)
+        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/{Bucket}?lifecycle", "code" => 200}, "smithy.rules#staticContextParams" => {"UseS3ExpressControlEndpoint" => {"value" => true}}}
+      end)
+      service.add_operation(:get_bucket_location, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.s3#GetBucketLocation"
+        operation.name = "GetBucketLocation"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetBucketLocationRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetBucketLocationOutput)
+        operation.traits = {"aws.customizations#s3UnwrappedXmlOutput" => {}, "smithy.api#http" => {"method" => "GET", "uri" => "/{Bucket}?location", "code" => 200}, "smithy.rules#staticContextParams" => {"UseS3ExpressControlEndpoint" => {"value" => true}}}
+      end)
+      service.add_operation(:get_bucket_logging, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.s3#GetBucketLogging"
+        operation.name = "GetBucketLogging"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetBucketLoggingRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetBucketLoggingOutput)
+        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/{Bucket}?logging", "code" => 200}, "smithy.rules#staticContextParams" => {"UseS3ExpressControlEndpoint" => {"value" => true}}}
+      end)
+      service.add_operation(:get_bucket_metadata_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.s3#GetBucketMetadataConfiguration"
+        operation.name = "GetBucketMetadataConfiguration"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetBucketMetadataConfigurationRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetBucketMetadataConfigurationOutput)
+        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/{Bucket}?metadataConfiguration", "code" => 200}, "smithy.rules#staticContextParams" => {"UseS3ExpressControlEndpoint" => {"value" => true}}}
+      end)
+      service.add_operation(:get_bucket_metadata_table_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.s3#GetBucketMetadataTableConfiguration"
+        operation.name = "GetBucketMetadataTableConfiguration"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetBucketMetadataTableConfigurationRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetBucketMetadataTableConfigurationOutput)
+        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/{Bucket}?metadataTable", "code" => 200}, "smithy.rules#staticContextParams" => {"UseS3ExpressControlEndpoint" => {"value" => true}}}
+      end)
+      service.add_operation(:get_bucket_metrics_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.s3#GetBucketMetricsConfiguration"
+        operation.name = "GetBucketMetricsConfiguration"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetBucketMetricsConfigurationRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetBucketMetricsConfigurationOutput)
+        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/{Bucket}?metrics&x-id=GetBucketMetricsConfiguration", "code" => 200}, "smithy.rules#staticContextParams" => {"UseS3ExpressControlEndpoint" => {"value" => true}}}
+      end)
+      service.add_operation(:get_bucket_notification_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.s3#GetBucketNotificationConfiguration"
+        operation.name = "GetBucketNotificationConfiguration"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetBucketNotificationConfigurationRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetBucketNotificationConfigurationOutput)
+        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/{Bucket}?notification", "code" => 200}, "smithy.rules#staticContextParams" => {"UseS3ExpressControlEndpoint" => {"value" => true}}}
+      end)
+      service.add_operation(:get_bucket_ownership_controls, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.s3#GetBucketOwnershipControls"
+        operation.name = "GetBucketOwnershipControls"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetBucketOwnershipControlsRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetBucketOwnershipControlsOutput)
+        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/{Bucket}?ownershipControls", "code" => 200}, "smithy.rules#staticContextParams" => {"UseS3ExpressControlEndpoint" => {"value" => true}}}
+      end)
+      service.add_operation(:get_bucket_policy, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.s3#GetBucketPolicy"
+        operation.name = "GetBucketPolicy"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetBucketPolicyRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetBucketPolicyOutput)
+        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/{Bucket}?policy", "code" => 200}, "smithy.rules#staticContextParams" => {"UseS3ExpressControlEndpoint" => {"value" => true}}}
+      end)
+      service.add_operation(:get_bucket_policy_status, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.s3#GetBucketPolicyStatus"
+        operation.name = "GetBucketPolicyStatus"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetBucketPolicyStatusRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetBucketPolicyStatusOutput)
+        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/{Bucket}?policyStatus", "code" => 200}, "smithy.rules#staticContextParams" => {"UseS3ExpressControlEndpoint" => {"value" => true}}}
+      end)
+      service.add_operation(:get_bucket_replication, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.s3#GetBucketReplication"
+        operation.name = "GetBucketReplication"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetBucketReplicationRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetBucketReplicationOutput)
+        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/{Bucket}?replication", "code" => 200}, "smithy.rules#staticContextParams" => {"UseS3ExpressControlEndpoint" => {"value" => true}}}
+      end)
+      service.add_operation(:get_bucket_request_payment, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.s3#GetBucketRequestPayment"
+        operation.name = "GetBucketRequestPayment"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetBucketRequestPaymentRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetBucketRequestPaymentOutput)
+        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/{Bucket}?requestPayment", "code" => 200}, "smithy.rules#staticContextParams" => {"UseS3ExpressControlEndpoint" => {"value" => true}}}
+      end)
+      service.add_operation(:get_bucket_tagging, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.s3#GetBucketTagging"
+        operation.name = "GetBucketTagging"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetBucketTaggingRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetBucketTaggingOutput)
+        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/{Bucket}?tagging", "code" => 200}, "smithy.rules#staticContextParams" => {"UseS3ExpressControlEndpoint" => {"value" => true}}}
+      end)
+      service.add_operation(:get_bucket_versioning, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.s3#GetBucketVersioning"
+        operation.name = "GetBucketVersioning"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetBucketVersioningRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetBucketVersioningOutput)
+        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/{Bucket}?versioning", "code" => 200}, "smithy.rules#staticContextParams" => {"UseS3ExpressControlEndpoint" => {"value" => true}}}
+      end)
+      service.add_operation(:get_bucket_website, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.s3#GetBucketWebsite"
+        operation.name = "GetBucketWebsite"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetBucketWebsiteRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetBucketWebsiteOutput)
+        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/{Bucket}?website", "code" => 200}, "smithy.rules#staticContextParams" => {"UseS3ExpressControlEndpoint" => {"value" => true}}}
+      end)
+      service.add_operation(:get_object, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.s3#GetObject"
+        operation.name = "GetObject"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetObjectRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetObjectOutput)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidObjectState)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NoSuchKey)
+        operation.traits = {"aws.protocols#httpChecksum" => {"requestValidationModeMember" => "ChecksumMode", "responseAlgorithms" => ["CRC64NVME", "CRC32", "CRC32C", "SHA256", "SHA1"]}, "smithy.api#http" => {"method" => "GET", "uri" => "/{Bucket}/{Key+}?x-id=GetObject", "code" => 200}}
+      end)
+      service.add_operation(:get_object_acl, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.s3#GetObjectAcl"
+        operation.name = "GetObjectAcl"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetObjectAclRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetObjectAclOutput)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NoSuchKey)
+        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/{Bucket}/{Key+}?acl", "code" => 200}}
+      end)
+      service.add_operation(:get_object_attributes, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.s3#GetObjectAttributes"
+        operation.name = "GetObjectAttributes"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetObjectAttributesRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetObjectAttributesOutput)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NoSuchKey)
+        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/{Bucket}/{Key+}?attributes", "code" => 200}}
+      end)
+      service.add_operation(:get_object_legal_hold, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.s3#GetObjectLegalHold"
+        operation.name = "GetObjectLegalHold"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetObjectLegalHoldRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetObjectLegalHoldOutput)
+        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/{Bucket}/{Key+}?legal-hold", "code" => 200}}
+      end)
+      service.add_operation(:get_object_lock_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.s3#GetObjectLockConfiguration"
+        operation.name = "GetObjectLockConfiguration"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetObjectLockConfigurationRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetObjectLockConfigurationOutput)
+        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/{Bucket}?object-lock", "code" => 200}}
+      end)
+      service.add_operation(:get_object_retention, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.s3#GetObjectRetention"
+        operation.name = "GetObjectRetention"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetObjectRetentionRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetObjectRetentionOutput)
+        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/{Bucket}/{Key+}?retention", "code" => 200}}
+      end)
+      service.add_operation(:get_object_tagging, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.s3#GetObjectTagging"
+        operation.name = "GetObjectTagging"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetObjectTaggingRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetObjectTaggingOutput)
+        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/{Bucket}/{Key+}?tagging", "code" => 200}}
+      end)
+      service.add_operation(:get_object_torrent, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.s3#GetObjectTorrent"
+        operation.name = "GetObjectTorrent"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetObjectTorrentRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetObjectTorrentOutput)
+        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/{Bucket}/{Key+}?torrent", "code" => 200}}
+      end)
+      service.add_operation(:get_public_access_block, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.s3#GetPublicAccessBlock"
+        operation.name = "GetPublicAccessBlock"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetPublicAccessBlockRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetPublicAccessBlockOutput)
+        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/{Bucket}?publicAccessBlock", "code" => 200}, "smithy.rules#staticContextParams" => {"UseS3ExpressControlEndpoint" => {"value" => true}}}
+      end)
+      service.add_operation(:head_bucket, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.s3#HeadBucket"
+        operation.name = "HeadBucket"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: HeadBucketRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: HeadBucketOutput)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFound)
+        operation.traits = {"smithy.api#http" => {"method" => "HEAD", "uri" => "/{Bucket}", "code" => 200}}
+      end)
+      service.add_operation(:head_object, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.s3#HeadObject"
+        operation.name = "HeadObject"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: HeadObjectRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: HeadObjectOutput)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFound)
+        operation.traits = {"smithy.api#http" => {"method" => "HEAD", "uri" => "/{Bucket}/{Key+}", "code" => 200}}
+      end)
+      service.add_operation(:list_bucket_analytics_configurations, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.s3#ListBucketAnalyticsConfigurations"
+        operation.name = "ListBucketAnalyticsConfigurations"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListBucketAnalyticsConfigurationsRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListBucketAnalyticsConfigurationsOutput)
+        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/{Bucket}?analytics&x-id=ListBucketAnalyticsConfigurations", "code" => 200}, "smithy.rules#staticContextParams" => {"UseS3ExpressControlEndpoint" => {"value" => true}}}
+      end)
+      service.add_operation(:list_bucket_intelligent_tiering_configurations, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.s3#ListBucketIntelligentTieringConfigurations"
+        operation.name = "ListBucketIntelligentTieringConfigurations"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListBucketIntelligentTieringConfigurationsRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListBucketIntelligentTieringConfigurationsOutput)
+        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/{Bucket}?intelligent-tiering&x-id=ListBucketIntelligentTieringConfigurations", "code" => 200}, "smithy.rules#staticContextParams" => {"UseS3ExpressControlEndpoint" => {"value" => true}}}
+      end)
+      service.add_operation(:list_bucket_inventory_configurations, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.s3#ListBucketInventoryConfigurations"
+        operation.name = "ListBucketInventoryConfigurations"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListBucketInventoryConfigurationsRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListBucketInventoryConfigurationsOutput)
+        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/{Bucket}?inventory&x-id=ListBucketInventoryConfigurations", "code" => 200}, "smithy.rules#staticContextParams" => {"UseS3ExpressControlEndpoint" => {"value" => true}}}
+      end)
+      service.add_operation(:list_bucket_metrics_configurations, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.s3#ListBucketMetricsConfigurations"
+        operation.name = "ListBucketMetricsConfigurations"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListBucketMetricsConfigurationsRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListBucketMetricsConfigurationsOutput)
+        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/{Bucket}?metrics&x-id=ListBucketMetricsConfigurations", "code" => 200}}
+      end)
+      service.add_operation(:list_buckets, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.s3#ListBuckets"
+        operation.name = "ListBuckets"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListBucketsRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListBucketsOutput)
+        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/?x-id=ListBuckets", "code" => 200}}
+        operation[:paginator] = Paginators::ListBuckets.new
+      end)
+      service.add_operation(:list_directory_buckets, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.s3#ListDirectoryBuckets"
+        operation.name = "ListDirectoryBuckets"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListDirectoryBucketsRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListDirectoryBucketsOutput)
+        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/?x-id=ListDirectoryBuckets", "code" => 200}, "smithy.rules#staticContextParams" => {"UseS3ExpressControlEndpoint" => {"value" => true}}}
+        operation[:paginator] = Paginators::ListDirectoryBuckets.new
+      end)
+      service.add_operation(:list_multipart_uploads, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.s3#ListMultipartUploads"
+        operation.name = "ListMultipartUploads"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListMultipartUploadsRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListMultipartUploadsOutput)
+        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/{Bucket}?uploads", "code" => 200}}
+      end)
+      service.add_operation(:list_object_versions, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.s3#ListObjectVersions"
+        operation.name = "ListObjectVersions"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListObjectVersionsRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListObjectVersionsOutput)
+        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/{Bucket}?versions", "code" => 200}}
+      end)
+      service.add_operation(:list_objects, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.s3#ListObjects"
+        operation.name = "ListObjects"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListObjectsRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListObjectsOutput)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NoSuchBucket)
+        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/{Bucket}", "code" => 200}}
+      end)
+      service.add_operation(:list_objects_v2, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.s3#ListObjectsV2"
+        operation.name = "ListObjectsV2"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListObjectsV2Request)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListObjectsV2Output)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NoSuchBucket)
+        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/{Bucket}?list-type=2", "code" => 200}}
+        operation[:paginator] = Paginators::ListObjectsV2.new
+      end)
+      service.add_operation(:list_parts, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.s3#ListParts"
+        operation.name = "ListParts"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListPartsRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListPartsOutput)
+        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/{Bucket}/{Key+}?x-id=ListParts", "code" => 200}}
+        operation[:paginator] = Paginators::ListParts.new
+      end)
+      service.add_operation(:put_bucket_accelerate_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.s3#PutBucketAccelerateConfiguration"
+        operation.name = "PutBucketAccelerateConfiguration"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutBucketAccelerateConfigurationRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
+        operation.traits = {"aws.protocols#httpChecksum" => {"requestAlgorithmMember" => "ChecksumAlgorithm"}, "smithy.api#http" => {"method" => "PUT", "uri" => "/{Bucket}?accelerate", "code" => 200}, "smithy.rules#staticContextParams" => {"UseS3ExpressControlEndpoint" => {"value" => true}}}
+      end)
+      service.add_operation(:put_bucket_acl, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.s3#PutBucketAcl"
+        operation.name = "PutBucketAcl"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutBucketAclRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
+        operation.traits = {"aws.protocols#httpChecksum" => {"requestAlgorithmMember" => "ChecksumAlgorithm", "requestChecksumRequired" => true}, "smithy.api#http" => {"method" => "PUT", "uri" => "/{Bucket}?acl", "code" => 200}, "smithy.rules#staticContextParams" => {"UseS3ExpressControlEndpoint" => {"value" => true}}}
+      end)
+      service.add_operation(:put_bucket_analytics_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.s3#PutBucketAnalyticsConfiguration"
+        operation.name = "PutBucketAnalyticsConfiguration"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutBucketAnalyticsConfigurationRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
+        operation.traits = {"smithy.api#http" => {"method" => "PUT", "uri" => "/{Bucket}?analytics", "code" => 200}, "smithy.rules#staticContextParams" => {"UseS3ExpressControlEndpoint" => {"value" => true}}}
+      end)
+      service.add_operation(:put_bucket_cors, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.s3#PutBucketCors"
+        operation.name = "PutBucketCors"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutBucketCorsRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
+        operation.traits = {"aws.protocols#httpChecksum" => {"requestAlgorithmMember" => "ChecksumAlgorithm", "requestChecksumRequired" => true}, "smithy.api#http" => {"method" => "PUT", "uri" => "/{Bucket}?cors", "code" => 200}, "smithy.rules#staticContextParams" => {"UseS3ExpressControlEndpoint" => {"value" => true}}}
+      end)
+      service.add_operation(:put_bucket_encryption, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.s3#PutBucketEncryption"
+        operation.name = "PutBucketEncryption"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutBucketEncryptionRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
+        operation.traits = {"aws.protocols#httpChecksum" => {"requestAlgorithmMember" => "ChecksumAlgorithm", "requestChecksumRequired" => true}, "smithy.api#http" => {"method" => "PUT", "uri" => "/{Bucket}?encryption", "code" => 200}, "smithy.rules#staticContextParams" => {"UseS3ExpressControlEndpoint" => {"value" => true}}}
+      end)
+      service.add_operation(:put_bucket_intelligent_tiering_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.s3#PutBucketIntelligentTieringConfiguration"
+        operation.name = "PutBucketIntelligentTieringConfiguration"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutBucketIntelligentTieringConfigurationRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
+        operation.traits = {"smithy.api#http" => {"method" => "PUT", "uri" => "/{Bucket}?intelligent-tiering", "code" => 200}, "smithy.rules#staticContextParams" => {"UseS3ExpressControlEndpoint" => {"value" => true}}}
+      end)
+      service.add_operation(:put_bucket_inventory_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.s3#PutBucketInventoryConfiguration"
+        operation.name = "PutBucketInventoryConfiguration"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutBucketInventoryConfigurationRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
+        operation.traits = {"smithy.api#http" => {"method" => "PUT", "uri" => "/{Bucket}?inventory", "code" => 200}, "smithy.rules#staticContextParams" => {"UseS3ExpressControlEndpoint" => {"value" => true}}}
+      end)
+      service.add_operation(:put_bucket_lifecycle_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.s3#PutBucketLifecycleConfiguration"
+        operation.name = "PutBucketLifecycleConfiguration"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutBucketLifecycleConfigurationRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutBucketLifecycleConfigurationOutput)
+        operation.traits = {"aws.protocols#httpChecksum" => {"requestAlgorithmMember" => "ChecksumAlgorithm", "requestChecksumRequired" => true}, "smithy.api#http" => {"method" => "PUT", "uri" => "/{Bucket}?lifecycle", "code" => 200}, "smithy.rules#staticContextParams" => {"UseS3ExpressControlEndpoint" => {"value" => true}}}
+      end)
+      service.add_operation(:put_bucket_logging, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.s3#PutBucketLogging"
+        operation.name = "PutBucketLogging"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutBucketLoggingRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
+        operation.traits = {"aws.protocols#httpChecksum" => {"requestAlgorithmMember" => "ChecksumAlgorithm", "requestChecksumRequired" => true}, "smithy.api#http" => {"method" => "PUT", "uri" => "/{Bucket}?logging", "code" => 200}, "smithy.rules#staticContextParams" => {"UseS3ExpressControlEndpoint" => {"value" => true}}}
+      end)
+      service.add_operation(:put_bucket_metrics_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.s3#PutBucketMetricsConfiguration"
+        operation.name = "PutBucketMetricsConfiguration"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutBucketMetricsConfigurationRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
+        operation.traits = {"smithy.api#http" => {"method" => "PUT", "uri" => "/{Bucket}?metrics", "code" => 200}, "smithy.rules#staticContextParams" => {"UseS3ExpressControlEndpoint" => {"value" => true}}}
+      end)
+      service.add_operation(:put_bucket_notification_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.s3#PutBucketNotificationConfiguration"
+        operation.name = "PutBucketNotificationConfiguration"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutBucketNotificationConfigurationRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
+        operation.traits = {"smithy.api#http" => {"method" => "PUT", "uri" => "/{Bucket}?notification", "code" => 200}, "smithy.rules#staticContextParams" => {"UseS3ExpressControlEndpoint" => {"value" => true}}}
+      end)
+      service.add_operation(:put_bucket_ownership_controls, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.s3#PutBucketOwnershipControls"
+        operation.name = "PutBucketOwnershipControls"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutBucketOwnershipControlsRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
+        operation.traits = {"aws.protocols#httpChecksum" => {"requestAlgorithmMember" => "ChecksumAlgorithm", "requestChecksumRequired" => true}, "smithy.api#http" => {"method" => "PUT", "uri" => "/{Bucket}?ownershipControls", "code" => 200}, "smithy.rules#staticContextParams" => {"UseS3ExpressControlEndpoint" => {"value" => true}}}
+      end)
+      service.add_operation(:put_bucket_policy, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.s3#PutBucketPolicy"
+        operation.name = "PutBucketPolicy"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutBucketPolicyRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
+        operation.traits = {"aws.protocols#httpChecksum" => {"requestAlgorithmMember" => "ChecksumAlgorithm", "requestChecksumRequired" => true}, "smithy.api#http" => {"method" => "PUT", "uri" => "/{Bucket}?policy", "code" => 200}, "smithy.rules#staticContextParams" => {"UseS3ExpressControlEndpoint" => {"value" => true}}}
+      end)
+      service.add_operation(:put_bucket_replication, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.s3#PutBucketReplication"
+        operation.name = "PutBucketReplication"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutBucketReplicationRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
+        operation.traits = {"aws.protocols#httpChecksum" => {"requestAlgorithmMember" => "ChecksumAlgorithm", "requestChecksumRequired" => true}, "smithy.api#http" => {"method" => "PUT", "uri" => "/{Bucket}?replication", "code" => 200}, "smithy.rules#staticContextParams" => {"UseS3ExpressControlEndpoint" => {"value" => true}}}
+      end)
+      service.add_operation(:put_bucket_request_payment, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.s3#PutBucketRequestPayment"
+        operation.name = "PutBucketRequestPayment"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutBucketRequestPaymentRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
+        operation.traits = {"aws.protocols#httpChecksum" => {"requestAlgorithmMember" => "ChecksumAlgorithm", "requestChecksumRequired" => true}, "smithy.api#http" => {"method" => "PUT", "uri" => "/{Bucket}?requestPayment", "code" => 200}, "smithy.rules#staticContextParams" => {"UseS3ExpressControlEndpoint" => {"value" => true}}}
+      end)
+      service.add_operation(:put_bucket_tagging, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.s3#PutBucketTagging"
+        operation.name = "PutBucketTagging"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutBucketTaggingRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
+        operation.traits = {"aws.protocols#httpChecksum" => {"requestAlgorithmMember" => "ChecksumAlgorithm", "requestChecksumRequired" => true}, "smithy.api#http" => {"method" => "PUT", "uri" => "/{Bucket}?tagging", "code" => 200}, "smithy.rules#staticContextParams" => {"UseS3ExpressControlEndpoint" => {"value" => true}}}
+      end)
+      service.add_operation(:put_bucket_versioning, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.s3#PutBucketVersioning"
+        operation.name = "PutBucketVersioning"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutBucketVersioningRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
+        operation.traits = {"aws.protocols#httpChecksum" => {"requestAlgorithmMember" => "ChecksumAlgorithm", "requestChecksumRequired" => true}, "smithy.api#http" => {"method" => "PUT", "uri" => "/{Bucket}?versioning", "code" => 200}, "smithy.rules#staticContextParams" => {"UseS3ExpressControlEndpoint" => {"value" => true}}}
+      end)
+      service.add_operation(:put_bucket_website, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.s3#PutBucketWebsite"
+        operation.name = "PutBucketWebsite"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutBucketWebsiteRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
+        operation.traits = {"aws.protocols#httpChecksum" => {"requestAlgorithmMember" => "ChecksumAlgorithm", "requestChecksumRequired" => true}, "smithy.api#http" => {"method" => "PUT", "uri" => "/{Bucket}?website", "code" => 200}, "smithy.rules#staticContextParams" => {"UseS3ExpressControlEndpoint" => {"value" => true}}}
+      end)
+      service.add_operation(:put_object, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.s3#PutObject"
+        operation.name = "PutObject"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutObjectRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutObjectOutput)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EncryptionTypeMismatch)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidRequest)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidWriteOffset)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyParts)
+        operation.traits = {"aws.protocols#httpChecksum" => {"requestAlgorithmMember" => "ChecksumAlgorithm"}, "smithy.api#http" => {"method" => "PUT", "uri" => "/{Bucket}/{Key+}?x-id=PutObject", "code" => 200}}
+      end)
+      service.add_operation(:put_object_acl, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.s3#PutObjectAcl"
+        operation.name = "PutObjectAcl"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutObjectAclRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutObjectAclOutput)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NoSuchKey)
+        operation.traits = {"aws.protocols#httpChecksum" => {"requestAlgorithmMember" => "ChecksumAlgorithm", "requestChecksumRequired" => true}, "smithy.api#http" => {"method" => "PUT", "uri" => "/{Bucket}/{Key+}?acl", "code" => 200}}
+      end)
+      service.add_operation(:put_object_legal_hold, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.s3#PutObjectLegalHold"
+        operation.name = "PutObjectLegalHold"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutObjectLegalHoldRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutObjectLegalHoldOutput)
+        operation.traits = {"aws.protocols#httpChecksum" => {"requestAlgorithmMember" => "ChecksumAlgorithm", "requestChecksumRequired" => true}, "smithy.api#http" => {"method" => "PUT", "uri" => "/{Bucket}/{Key+}?legal-hold", "code" => 200}}
+      end)
+      service.add_operation(:put_object_lock_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.s3#PutObjectLockConfiguration"
+        operation.name = "PutObjectLockConfiguration"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutObjectLockConfigurationRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutObjectLockConfigurationOutput)
+        operation.traits = {"aws.protocols#httpChecksum" => {"requestAlgorithmMember" => "ChecksumAlgorithm", "requestChecksumRequired" => true}, "smithy.api#http" => {"method" => "PUT", "uri" => "/{Bucket}?object-lock", "code" => 200}}
+      end)
+      service.add_operation(:put_object_retention, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.s3#PutObjectRetention"
+        operation.name = "PutObjectRetention"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutObjectRetentionRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutObjectRetentionOutput)
+        operation.traits = {"aws.protocols#httpChecksum" => {"requestAlgorithmMember" => "ChecksumAlgorithm", "requestChecksumRequired" => true}, "smithy.api#http" => {"method" => "PUT", "uri" => "/{Bucket}/{Key+}?retention", "code" => 200}}
+      end)
+      service.add_operation(:put_object_tagging, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.s3#PutObjectTagging"
+        operation.name = "PutObjectTagging"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutObjectTaggingRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutObjectTaggingOutput)
+        operation.traits = {"aws.protocols#httpChecksum" => {"requestAlgorithmMember" => "ChecksumAlgorithm", "requestChecksumRequired" => true}, "smithy.api#http" => {"method" => "PUT", "uri" => "/{Bucket}/{Key+}?tagging", "code" => 200}}
+      end)
+      service.add_operation(:put_public_access_block, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.s3#PutPublicAccessBlock"
+        operation.name = "PutPublicAccessBlock"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutPublicAccessBlockRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
+        operation.traits = {"aws.protocols#httpChecksum" => {"requestAlgorithmMember" => "ChecksumAlgorithm", "requestChecksumRequired" => true}, "smithy.api#http" => {"method" => "PUT", "uri" => "/{Bucket}?publicAccessBlock", "code" => 200}, "smithy.rules#staticContextParams" => {"UseS3ExpressControlEndpoint" => {"value" => true}}}
+      end)
+      service.add_operation(:rename_object, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.s3#RenameObject"
+        operation.name = "RenameObject"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RenameObjectRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RenameObjectOutput)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: IdempotencyParameterMismatch)
+        operation.traits = {"smithy.api#http" => {"method" => "PUT", "uri" => "/{Bucket}/{Key+}?renameObject", "code" => 200}}
+      end)
+      service.add_operation(:restore_object, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.s3#RestoreObject"
+        operation.name = "RestoreObject"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RestoreObjectRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RestoreObjectOutput)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ObjectAlreadyInActiveTierError)
+        operation.traits = {"aws.protocols#httpChecksum" => {"requestAlgorithmMember" => "ChecksumAlgorithm"}, "smithy.api#http" => {"method" => "POST", "uri" => "/{Bucket}/{Key+}?restore", "code" => 200}}
+      end)
+      service.add_operation(:select_object_content, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.s3#SelectObjectContent"
+        operation.name = "SelectObjectContent"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SelectObjectContentRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SelectObjectContentOutput)
+        operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/{Bucket}/{Key+}?select&select-type=2", "code" => 200}}
+      end)
+      service.add_operation(:update_bucket_metadata_inventory_table_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.s3#UpdateBucketMetadataInventoryTableConfiguration"
+        operation.name = "UpdateBucketMetadataInventoryTableConfiguration"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateBucketMetadataInventoryTableConfigurationRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
+        operation.traits = {"aws.protocols#httpChecksum" => {"requestAlgorithmMember" => "ChecksumAlgorithm", "requestChecksumRequired" => true}, "smithy.api#http" => {"method" => "PUT", "uri" => "/{Bucket}?metadataInventoryTable", "code" => 200}, "smithy.rules#staticContextParams" => {"UseS3ExpressControlEndpoint" => {"value" => true}}}
+      end)
+      service.add_operation(:update_bucket_metadata_journal_table_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.s3#UpdateBucketMetadataJournalTableConfiguration"
+        operation.name = "UpdateBucketMetadataJournalTableConfiguration"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateBucketMetadataJournalTableConfigurationRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
+        operation.traits = {"aws.protocols#httpChecksum" => {"requestAlgorithmMember" => "ChecksumAlgorithm", "requestChecksumRequired" => true}, "smithy.api#http" => {"method" => "PUT", "uri" => "/{Bucket}?metadataJournalTable", "code" => 200}, "smithy.rules#staticContextParams" => {"UseS3ExpressControlEndpoint" => {"value" => true}}}
+      end)
+      service.add_operation(:upload_part, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.s3#UploadPart"
+        operation.name = "UploadPart"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UploadPartRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UploadPartOutput)
+        operation.traits = {"aws.protocols#httpChecksum" => {"requestAlgorithmMember" => "ChecksumAlgorithm"}, "smithy.api#http" => {"method" => "PUT", "uri" => "/{Bucket}/{Key+}?x-id=UploadPart", "code" => 200}}
+      end)
+      service.add_operation(:upload_part_copy, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.s3#UploadPartCopy"
+        operation.name = "UploadPartCopy"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UploadPartCopyRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UploadPartCopyOutput)
+        operation.traits = {"smithy.api#http" => {"method" => "PUT", "uri" => "/{Bucket}/{Key+}?x-id=UploadPartCopy", "code" => 200}, "smithy.rules#staticContextParams" => {"DisableS3ExpressSessionAuth" => {"value" => true}}}
+      end)
+      service.add_operation(:write_get_object_response, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.s3#WriteGetObjectResponse"
+        operation.name = "WriteGetObjectResponse"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: WriteGetObjectResponseRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
+        operation.traits = {"aws.auth#unsignedPayload" => {}, "smithy.api#auth" => ["aws.auth#sigv4"], "smithy.api#endpoint" => {"hostPrefix" => "{RequestRoute}."}, "smithy.api#http" => {"method" => "POST", "uri" => "/WriteGetObjectResponse", "code" => 200}, "smithy.rules#staticContextParams" => {"UseObjectLambdaEndpoint" => {"value" => true}}}
+      end)
+    end
+
+    class << self
+      def type_registry
+        return @type_registry if @type_registry
+
+        shapes = constants.map { |sym| const_get(sym) }.select { |const| const.is_a?(::Smithy::Schema::Shapes::StructureShape) }
+        @type_registry = ::Smithy::Schema::TypeRegistry.new(shapes)
+      end
+    end
+  end
+end

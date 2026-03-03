@@ -1,15 +1,7 @@
 # frozen_string_literal: true
 
 task 'build' do
-  # TODO: These result in various errors:
-  #   aws-sdk-s3 => ArgumentError: Endpoint built-in not available for AWS::S3::ForcePathStyle
-  skip = %w[
-    aws-sdk-s3
-  ]
-
   BuildTools::Services.each do |service|
-    next if skip.include? service.gem_name
-
     Rake::Task["build:#{service.gem_name}"].invoke
   end
 end

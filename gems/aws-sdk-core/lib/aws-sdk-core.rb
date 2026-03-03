@@ -10,6 +10,7 @@ require_relative 'aws-sdk-core/arn_parser'
 require_relative 'aws-sdk-core/ec2_metadata'
 require_relative 'aws-sdk-core/endpoint_rules'
 require_relative 'aws-sdk-core/errors'
+require_relative 'aws-sdk-core/util'
 
 # Shared Config
 

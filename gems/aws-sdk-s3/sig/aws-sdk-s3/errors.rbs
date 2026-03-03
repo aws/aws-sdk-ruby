@@ -1,0 +1,34 @@
+module Aws::S3
+  module Errors
+    class BucketAlreadyExists < Smithy::Client::ServiceError
+    end
+    class BucketAlreadyOwnedByYou < Smithy::Client::ServiceError
+    end
+    class EncryptionTypeMismatch < Smithy::Client::ServiceError
+    end
+    class IdempotencyParameterMismatch < Smithy::Client::ServiceError
+    end
+    class InvalidObjectState < Smithy::Client::ServiceError
+      def storage_class: () -> String?
+      def access_tier: () -> String?
+    end
+    class InvalidRequest < Smithy::Client::ServiceError
+    end
+    class InvalidWriteOffset < Smithy::Client::ServiceError
+    end
+    class NoSuchBucket < Smithy::Client::ServiceError
+    end
+    class NoSuchKey < Smithy::Client::ServiceError
+    end
+    class NoSuchUpload < Smithy::Client::ServiceError
+    end
+    class NotFound < Smithy::Client::ServiceError
+    end
+    class ObjectAlreadyInActiveTierError < Smithy::Client::ServiceError
+    end
+    class ObjectNotInActiveTierError < Smithy::Client::ServiceError
+    end
+    class TooManyParts < Smithy::Client::ServiceError
+    end
+  end
+end

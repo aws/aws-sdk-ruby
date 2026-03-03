@@ -1,0 +1,41 @@
+module Aws::S3
+  class EndpointParameters
+    def initialize: (
+      ?bucket: String,
+      ?region: String,
+      ?use_fips: bool,
+      ?use_dual_stack: bool,
+      ?endpoint: String,
+      ?force_path_style: bool,
+      ?accelerate: bool,
+      ?use_global_endpoint: bool,
+      ?use_object_lambda_endpoint: bool,
+      ?key: String,
+      ?prefix: String,
+      ?copy_source: String,
+      ?disable_access_points: bool,
+      ?disable_multi_region_access_points: bool,
+      ?use_arn_region: bool,
+      ?use_s3_express_control_endpoint: bool,
+      ?disable_s3_express_session_auth: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    attr_accessor bucket: String?
+    attr_accessor region: String?
+    attr_accessor use_fips: bool?
+    attr_accessor use_dual_stack: bool?
+    attr_accessor endpoint: String?
+    attr_accessor force_path_style: bool?
+    attr_accessor accelerate: bool?
+    attr_accessor use_global_endpoint: bool?
+    attr_accessor use_object_lambda_endpoint: bool?
+    attr_accessor key: String?
+    attr_accessor prefix: String?
+    attr_accessor copy_source: String?
+    attr_accessor disable_access_points: bool?
+    attr_accessor disable_multi_region_access_points: bool?
+    attr_accessor use_arn_region: bool?
+    attr_accessor use_s3_express_control_endpoint: bool?
+    attr_accessor disable_s3_express_session_auth: bool?
+  end
+end

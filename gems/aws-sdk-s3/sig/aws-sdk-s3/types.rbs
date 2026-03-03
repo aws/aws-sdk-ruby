@@ -1,0 +1,6442 @@
+module Aws::S3
+  module Types
+
+    class AbortIncompleteMultipartUpload
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?days_after_initiation: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor days_after_initiation: Integer?
+    end
+
+    class AbortMultipartUploadOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?request_charged: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor request_charged: String?
+    end
+
+    class AbortMultipartUploadRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?key: String,
+        ?upload_id: String,
+        ?request_payer: String,
+        ?expected_bucket_owner: String,
+        ?if_match_initiated_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor key: String?
+      attr_accessor upload_id: String?
+      attr_accessor request_payer: String?
+      attr_accessor expected_bucket_owner: String?
+      attr_accessor if_match_initiated_time: Time?
+    end
+
+    class AccelerateConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+    end
+
+    class AccessControlPolicy
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?grants: Array[Types::Grant],
+        ?owner: Types::Owner,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor grants: Array[Types::Grant]?
+      attr_accessor owner: Types::Owner?
+    end
+
+    class AccessControlTranslation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?owner: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor owner: String?
+    end
+
+    class AnalyticsAndOperator
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?prefix: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor prefix: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class AnalyticsConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?filter: Types::AnalyticsFilter,
+        ?storage_class_analysis: Types::StorageClassAnalysis,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor filter: Types::AnalyticsFilter?
+      attr_accessor storage_class_analysis: Types::StorageClassAnalysis?
+    end
+
+    class AnalyticsExportDestination
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3_bucket_destination: Types::AnalyticsS3BucketDestination,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3_bucket_destination: Types::AnalyticsS3BucketDestination?
+    end
+
+    class AnalyticsFilter
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?prefix: String,
+        ?tag: Types::Tag,
+        ?and: Types::AnalyticsAndOperator,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor prefix: String?
+      attr_accessor tag: Types::Tag?
+      attr_accessor and: Types::AnalyticsAndOperator?
+
+      class Prefix < AnalyticsFilter
+      end
+      class Tag < AnalyticsFilter
+      end
+      class And < AnalyticsFilter
+      end
+      class Unknown < AnalyticsFilter
+      end
+    end
+
+    class AnalyticsS3BucketDestination
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?format: String,
+        ?bucket_account_id: String,
+        ?bucket: String,
+        ?prefix: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor format: String?
+      attr_accessor bucket_account_id: String?
+      attr_accessor bucket: String?
+      attr_accessor prefix: String?
+    end
+
+    module AnalyticsS3ExportFileFormat
+      CSV: String
+    end
+
+    module ArchiveStatus
+      ARCHIVE_ACCESS: String
+      DEEP_ARCHIVE_ACCESS: String
+    end
+
+    class Bucket
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?creation_date: Time,
+        ?bucket_region: String,
+        ?bucket_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor creation_date: Time?
+      attr_accessor bucket_region: String?
+      attr_accessor bucket_arn: String?
+    end
+
+    module BucketAccelerateStatus
+      Enabled: String
+      Suspended: String
+    end
+
+    class BucketAlreadyExists
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class BucketAlreadyOwnedByYou
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    module BucketCannedACL
+      private: String
+      public_read: String
+      public_read_write: String
+      authenticated_read: String
+    end
+
+    class BucketInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data_redundancy: String,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_redundancy: String?
+      attr_accessor type: String?
+    end
+
+    class BucketLifecycleConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rules: Array[Types::LifecycleRule],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rules: Array[Types::LifecycleRule]?
+    end
+
+    module BucketLocationConstraint
+      af_south_1: String
+      ap_east_1: String
+      ap_northeast_1: String
+      ap_northeast_2: String
+      ap_northeast_3: String
+      ap_south_1: String
+      ap_south_2: String
+      ap_southeast_1: String
+      ap_southeast_2: String
+      ap_southeast_3: String
+      ap_southeast_4: String
+      ap_southeast_5: String
+      ca_central_1: String
+      cn_north_1: String
+      cn_northwest_1: String
+      EU: String
+      eu_central_1: String
+      eu_central_2: String
+      eu_north_1: String
+      eu_south_1: String
+      eu_south_2: String
+      eu_west_1: String
+      eu_west_2: String
+      eu_west_3: String
+      il_central_1: String
+      me_central_1: String
+      me_south_1: String
+      sa_east_1: String
+      us_east_2: String
+      us_gov_east_1: String
+      us_gov_west_1: String
+      us_west_1: String
+      us_west_2: String
+    end
+
+    class BucketLoggingStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?logging_enabled: Types::LoggingEnabled,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor logging_enabled: Types::LoggingEnabled?
+    end
+
+    module BucketLogsPermission
+      FULL_CONTROL: String
+      READ: String
+      WRITE: String
+    end
+
+    module BucketType
+      Directory: String
+    end
+
+    module BucketVersioningStatus
+      Enabled: String
+      Suspended: String
+    end
+
+    class CORSConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cors_rules: Array[Types::CORSRule],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cors_rules: Array[Types::CORSRule]?
+    end
+
+    class CORSRule
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?allowed_headers: Array[String],
+        ?allowed_methods: Array[String],
+        ?allowed_origins: Array[String],
+        ?expose_headers: Array[String],
+        ?max_age_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor allowed_headers: Array[String]?
+      attr_accessor allowed_methods: Array[String]?
+      attr_accessor allowed_origins: Array[String]?
+      attr_accessor expose_headers: Array[String]?
+      attr_accessor max_age_seconds: Integer?
+    end
+
+    class CSVInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?file_header_info: String,
+        ?comments: String,
+        ?quote_escape_character: String,
+        ?record_delimiter: String,
+        ?field_delimiter: String,
+        ?quote_character: String,
+        ?allow_quoted_record_delimiter: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor file_header_info: String?
+      attr_accessor comments: String?
+      attr_accessor quote_escape_character: String?
+      attr_accessor record_delimiter: String?
+      attr_accessor field_delimiter: String?
+      attr_accessor quote_character: String?
+      attr_accessor allow_quoted_record_delimiter: bool?
+    end
+
+    class CSVOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?quote_fields: String,
+        ?quote_escape_character: String,
+        ?record_delimiter: String,
+        ?field_delimiter: String,
+        ?quote_character: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor quote_fields: String?
+      attr_accessor quote_escape_character: String?
+      attr_accessor record_delimiter: String?
+      attr_accessor field_delimiter: String?
+      attr_accessor quote_character: String?
+    end
+
+    class Checksum
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?checksum_crc32: String,
+        ?checksum_crc32_c: String,
+        ?checksum_crc64_nvme: String,
+        ?checksum_sha1: String,
+        ?checksum_sha256: String,
+        ?checksum_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor checksum_crc32: String?
+      attr_accessor checksum_crc32_c: String?
+      attr_accessor checksum_crc64_nvme: String?
+      attr_accessor checksum_sha1: String?
+      attr_accessor checksum_sha256: String?
+      attr_accessor checksum_type: String?
+    end
+
+    module ChecksumAlgorithm
+      CRC32: String
+      CRC32C: String
+      SHA1: String
+      SHA256: String
+      CRC64NVME: String
+    end
+
+    module ChecksumMode
+      ENABLED: String
+    end
+
+    module ChecksumType
+      COMPOSITE: String
+      FULL_OBJECT: String
+    end
+
+    class CommonPrefix
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?prefix: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor prefix: String?
+    end
+
+    class CompleteMultipartUploadOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?location: String,
+        ?bucket: String,
+        ?key: String,
+        ?expiration: String,
+        ?e_tag: String,
+        ?checksum_crc32: String,
+        ?checksum_crc32_c: String,
+        ?checksum_crc64_nvme: String,
+        ?checksum_sha1: String,
+        ?checksum_sha256: String,
+        ?checksum_type: String,
+        ?server_side_encryption: String,
+        ?version_id: String,
+        ?ssekms_key_id: String,
+        ?bucket_key_enabled: bool,
+        ?request_charged: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor location: String?
+      attr_accessor bucket: String?
+      attr_accessor key: String?
+      attr_accessor expiration: String?
+      attr_accessor e_tag: String?
+      attr_accessor checksum_crc32: String?
+      attr_accessor checksum_crc32_c: String?
+      attr_accessor checksum_crc64_nvme: String?
+      attr_accessor checksum_sha1: String?
+      attr_accessor checksum_sha256: String?
+      attr_accessor checksum_type: String?
+      attr_accessor server_side_encryption: String?
+      attr_accessor version_id: String?
+      attr_accessor ssekms_key_id: String?
+      attr_accessor bucket_key_enabled: bool?
+      attr_accessor request_charged: String?
+    end
+
+    class CompleteMultipartUploadRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?key: String,
+        ?multipart_upload: Types::CompletedMultipartUpload,
+        ?upload_id: String,
+        ?checksum_crc32: String,
+        ?checksum_crc32_c: String,
+        ?checksum_crc64_nvme: String,
+        ?checksum_sha1: String,
+        ?checksum_sha256: String,
+        ?checksum_type: String,
+        ?mpu_object_size: Integer,
+        ?request_payer: String,
+        ?expected_bucket_owner: String,
+        ?if_match: String,
+        ?if_none_match: String,
+        ?sse_customer_algorithm: String,
+        ?sse_customer_key: String,
+        ?sse_customer_key_md5: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor key: String?
+      attr_accessor multipart_upload: Types::CompletedMultipartUpload?
+      attr_accessor upload_id: String?
+      attr_accessor checksum_crc32: String?
+      attr_accessor checksum_crc32_c: String?
+      attr_accessor checksum_crc64_nvme: String?
+      attr_accessor checksum_sha1: String?
+      attr_accessor checksum_sha256: String?
+      attr_accessor checksum_type: String?
+      attr_accessor mpu_object_size: Integer?
+      attr_accessor request_payer: String?
+      attr_accessor expected_bucket_owner: String?
+      attr_accessor if_match: String?
+      attr_accessor if_none_match: String?
+      attr_accessor sse_customer_algorithm: String?
+      attr_accessor sse_customer_key: String?
+      attr_accessor sse_customer_key_md5: String?
+    end
+
+    class CompletedMultipartUpload
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?parts: Array[Types::CompletedPart],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor parts: Array[Types::CompletedPart]?
+    end
+
+    class CompletedPart
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?e_tag: String,
+        ?checksum_crc32: String,
+        ?checksum_crc32_c: String,
+        ?checksum_crc64_nvme: String,
+        ?checksum_sha1: String,
+        ?checksum_sha256: String,
+        ?part_number: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor e_tag: String?
+      attr_accessor checksum_crc32: String?
+      attr_accessor checksum_crc32_c: String?
+      attr_accessor checksum_crc64_nvme: String?
+      attr_accessor checksum_sha1: String?
+      attr_accessor checksum_sha256: String?
+      attr_accessor part_number: Integer?
+    end
+
+    module CompressionType
+      NONE: String
+      GZIP: String
+      BZIP2: String
+    end
+
+    class Condition
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?http_error_code_returned_equals: String,
+        ?key_prefix_equals: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor http_error_code_returned_equals: String?
+      attr_accessor key_prefix_equals: String?
+    end
+
+    class ContinuationEvent
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class CopyObjectOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?copy_object_result: Types::CopyObjectResult,
+        ?expiration: String,
+        ?copy_source_version_id: String,
+        ?version_id: String,
+        ?server_side_encryption: String,
+        ?sse_customer_algorithm: String,
+        ?sse_customer_key_md5: String,
+        ?ssekms_key_id: String,
+        ?ssekms_encryption_context: String,
+        ?bucket_key_enabled: bool,
+        ?request_charged: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor copy_object_result: Types::CopyObjectResult?
+      attr_accessor expiration: String?
+      attr_accessor copy_source_version_id: String?
+      attr_accessor version_id: String?
+      attr_accessor server_side_encryption: String?
+      attr_accessor sse_customer_algorithm: String?
+      attr_accessor sse_customer_key_md5: String?
+      attr_accessor ssekms_key_id: String?
+      attr_accessor ssekms_encryption_context: String?
+      attr_accessor bucket_key_enabled: bool?
+      attr_accessor request_charged: String?
+    end
+
+    class CopyObjectRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?acl: String,
+        ?bucket: String,
+        ?cache_control: String,
+        ?checksum_algorithm: String,
+        ?content_disposition: String,
+        ?content_encoding: String,
+        ?content_language: String,
+        ?content_type: String,
+        ?copy_source: String,
+        ?copy_source_if_match: String,
+        ?copy_source_if_modified_since: Time,
+        ?copy_source_if_none_match: String,
+        ?copy_source_if_unmodified_since: Time,
+        ?expires: String,
+        ?grant_full_control: String,
+        ?grant_read: String,
+        ?grant_read_acp: String,
+        ?grant_write_acp: String,
+        ?key: String,
+        ?metadata: Hash[String, String],
+        ?metadata_directive: String,
+        ?tagging_directive: String,
+        ?server_side_encryption: String,
+        ?storage_class: String,
+        ?website_redirect_location: String,
+        ?sse_customer_algorithm: String,
+        ?sse_customer_key: String,
+        ?sse_customer_key_md5: String,
+        ?ssekms_key_id: String,
+        ?ssekms_encryption_context: String,
+        ?bucket_key_enabled: bool,
+        ?copy_source_sse_customer_algorithm: String,
+        ?copy_source_sse_customer_key: String,
+        ?copy_source_sse_customer_key_md5: String,
+        ?request_payer: String,
+        ?tagging: String,
+        ?object_lock_mode: String,
+        ?object_lock_retain_until_date: Time,
+        ?object_lock_legal_hold_status: String,
+        ?expected_bucket_owner: String,
+        ?expected_source_bucket_owner: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor acl: String?
+      attr_accessor bucket: String?
+      attr_accessor cache_control: String?
+      attr_accessor checksum_algorithm: String?
+      attr_accessor content_disposition: String?
+      attr_accessor content_encoding: String?
+      attr_accessor content_language: String?
+      attr_accessor content_type: String?
+      attr_accessor copy_source: String?
+      attr_accessor copy_source_if_match: String?
+      attr_accessor copy_source_if_modified_since: Time?
+      attr_accessor copy_source_if_none_match: String?
+      attr_accessor copy_source_if_unmodified_since: Time?
+      attr_accessor expires: String?
+      attr_accessor grant_full_control: String?
+      attr_accessor grant_read: String?
+      attr_accessor grant_read_acp: String?
+      attr_accessor grant_write_acp: String?
+      attr_accessor key: String?
+      attr_accessor metadata: Hash[String, String]?
+      attr_accessor metadata_directive: String?
+      attr_accessor tagging_directive: String?
+      attr_accessor server_side_encryption: String?
+      attr_accessor storage_class: String?
+      attr_accessor website_redirect_location: String?
+      attr_accessor sse_customer_algorithm: String?
+      attr_accessor sse_customer_key: String?
+      attr_accessor sse_customer_key_md5: String?
+      attr_accessor ssekms_key_id: String?
+      attr_accessor ssekms_encryption_context: String?
+      attr_accessor bucket_key_enabled: bool?
+      attr_accessor copy_source_sse_customer_algorithm: String?
+      attr_accessor copy_source_sse_customer_key: String?
+      attr_accessor copy_source_sse_customer_key_md5: String?
+      attr_accessor request_payer: String?
+      attr_accessor tagging: String?
+      attr_accessor object_lock_mode: String?
+      attr_accessor object_lock_retain_until_date: Time?
+      attr_accessor object_lock_legal_hold_status: String?
+      attr_accessor expected_bucket_owner: String?
+      attr_accessor expected_source_bucket_owner: String?
+    end
+
+    class CopyObjectResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?e_tag: String,
+        ?last_modified: Time,
+        ?checksum_type: String,
+        ?checksum_crc32: String,
+        ?checksum_crc32_c: String,
+        ?checksum_crc64_nvme: String,
+        ?checksum_sha1: String,
+        ?checksum_sha256: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor e_tag: String?
+      attr_accessor last_modified: Time?
+      attr_accessor checksum_type: String?
+      attr_accessor checksum_crc32: String?
+      attr_accessor checksum_crc32_c: String?
+      attr_accessor checksum_crc64_nvme: String?
+      attr_accessor checksum_sha1: String?
+      attr_accessor checksum_sha256: String?
+    end
+
+    class CopyPartResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?e_tag: String,
+        ?last_modified: Time,
+        ?checksum_crc32: String,
+        ?checksum_crc32_c: String,
+        ?checksum_crc64_nvme: String,
+        ?checksum_sha1: String,
+        ?checksum_sha256: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor e_tag: String?
+      attr_accessor last_modified: Time?
+      attr_accessor checksum_crc32: String?
+      attr_accessor checksum_crc32_c: String?
+      attr_accessor checksum_crc64_nvme: String?
+      attr_accessor checksum_sha1: String?
+      attr_accessor checksum_sha256: String?
+    end
+
+    class CreateBucketConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?location_constraint: String,
+        ?location: Types::LocationInfo,
+        ?bucket: Types::BucketInfo,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor location_constraint: String?
+      attr_accessor location: Types::LocationInfo?
+      attr_accessor bucket: Types::BucketInfo?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateBucketMetadataConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?content_md5: String,
+        ?checksum_algorithm: String,
+        ?metadata_configuration: Types::MetadataConfiguration,
+        ?expected_bucket_owner: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor content_md5: String?
+      attr_accessor checksum_algorithm: String?
+      attr_accessor metadata_configuration: Types::MetadataConfiguration?
+      attr_accessor expected_bucket_owner: String?
+    end
+
+    class CreateBucketMetadataTableConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?content_md5: String,
+        ?checksum_algorithm: String,
+        ?metadata_table_configuration: Types::MetadataTableConfiguration,
+        ?expected_bucket_owner: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor content_md5: String?
+      attr_accessor checksum_algorithm: String?
+      attr_accessor metadata_table_configuration: Types::MetadataTableConfiguration?
+      attr_accessor expected_bucket_owner: String?
+    end
+
+    class CreateBucketOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?location: String,
+        ?bucket_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor location: String?
+      attr_accessor bucket_arn: String?
+    end
+
+    class CreateBucketRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?acl: String,
+        ?bucket: String,
+        ?create_bucket_configuration: Types::CreateBucketConfiguration,
+        ?grant_full_control: String,
+        ?grant_read: String,
+        ?grant_read_acp: String,
+        ?grant_write: String,
+        ?grant_write_acp: String,
+        ?object_lock_enabled_for_bucket: bool,
+        ?object_ownership: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor acl: String?
+      attr_accessor bucket: String?
+      attr_accessor create_bucket_configuration: Types::CreateBucketConfiguration?
+      attr_accessor grant_full_control: String?
+      attr_accessor grant_read: String?
+      attr_accessor grant_read_acp: String?
+      attr_accessor grant_write: String?
+      attr_accessor grant_write_acp: String?
+      attr_accessor object_lock_enabled_for_bucket: bool?
+      attr_accessor object_ownership: String?
+    end
+
+    class CreateMultipartUploadOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?abort_date: Time,
+        ?abort_rule_id: String,
+        ?bucket: String,
+        ?key: String,
+        ?upload_id: String,
+        ?server_side_encryption: String,
+        ?sse_customer_algorithm: String,
+        ?sse_customer_key_md5: String,
+        ?ssekms_key_id: String,
+        ?ssekms_encryption_context: String,
+        ?bucket_key_enabled: bool,
+        ?request_charged: String,
+        ?checksum_algorithm: String,
+        ?checksum_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor abort_date: Time?
+      attr_accessor abort_rule_id: String?
+      attr_accessor bucket: String?
+      attr_accessor key: String?
+      attr_accessor upload_id: String?
+      attr_accessor server_side_encryption: String?
+      attr_accessor sse_customer_algorithm: String?
+      attr_accessor sse_customer_key_md5: String?
+      attr_accessor ssekms_key_id: String?
+      attr_accessor ssekms_encryption_context: String?
+      attr_accessor bucket_key_enabled: bool?
+      attr_accessor request_charged: String?
+      attr_accessor checksum_algorithm: String?
+      attr_accessor checksum_type: String?
+    end
+
+    class CreateMultipartUploadRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?acl: String,
+        ?bucket: String,
+        ?cache_control: String,
+        ?content_disposition: String,
+        ?content_encoding: String,
+        ?content_language: String,
+        ?content_type: String,
+        ?expires: String,
+        ?grant_full_control: String,
+        ?grant_read: String,
+        ?grant_read_acp: String,
+        ?grant_write_acp: String,
+        ?key: String,
+        ?metadata: Hash[String, String],
+        ?server_side_encryption: String,
+        ?storage_class: String,
+        ?website_redirect_location: String,
+        ?sse_customer_algorithm: String,
+        ?sse_customer_key: String,
+        ?sse_customer_key_md5: String,
+        ?ssekms_key_id: String,
+        ?ssekms_encryption_context: String,
+        ?bucket_key_enabled: bool,
+        ?request_payer: String,
+        ?tagging: String,
+        ?object_lock_mode: String,
+        ?object_lock_retain_until_date: Time,
+        ?object_lock_legal_hold_status: String,
+        ?expected_bucket_owner: String,
+        ?checksum_algorithm: String,
+        ?checksum_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor acl: String?
+      attr_accessor bucket: String?
+      attr_accessor cache_control: String?
+      attr_accessor content_disposition: String?
+      attr_accessor content_encoding: String?
+      attr_accessor content_language: String?
+      attr_accessor content_type: String?
+      attr_accessor expires: String?
+      attr_accessor grant_full_control: String?
+      attr_accessor grant_read: String?
+      attr_accessor grant_read_acp: String?
+      attr_accessor grant_write_acp: String?
+      attr_accessor key: String?
+      attr_accessor metadata: Hash[String, String]?
+      attr_accessor server_side_encryption: String?
+      attr_accessor storage_class: String?
+      attr_accessor website_redirect_location: String?
+      attr_accessor sse_customer_algorithm: String?
+      attr_accessor sse_customer_key: String?
+      attr_accessor sse_customer_key_md5: String?
+      attr_accessor ssekms_key_id: String?
+      attr_accessor ssekms_encryption_context: String?
+      attr_accessor bucket_key_enabled: bool?
+      attr_accessor request_payer: String?
+      attr_accessor tagging: String?
+      attr_accessor object_lock_mode: String?
+      attr_accessor object_lock_retain_until_date: Time?
+      attr_accessor object_lock_legal_hold_status: String?
+      attr_accessor expected_bucket_owner: String?
+      attr_accessor checksum_algorithm: String?
+      attr_accessor checksum_type: String?
+    end
+
+    class CreateSessionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?server_side_encryption: String,
+        ?ssekms_key_id: String,
+        ?ssekms_encryption_context: String,
+        ?bucket_key_enabled: bool,
+        ?credentials: Types::SessionCredentials,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor server_side_encryption: String?
+      attr_accessor ssekms_key_id: String?
+      attr_accessor ssekms_encryption_context: String?
+      attr_accessor bucket_key_enabled: bool?
+      attr_accessor credentials: Types::SessionCredentials?
+    end
+
+    class CreateSessionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?session_mode: String,
+        ?bucket: String,
+        ?server_side_encryption: String,
+        ?ssekms_key_id: String,
+        ?ssekms_encryption_context: String,
+        ?bucket_key_enabled: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor session_mode: String?
+      attr_accessor bucket: String?
+      attr_accessor server_side_encryption: String?
+      attr_accessor ssekms_key_id: String?
+      attr_accessor ssekms_encryption_context: String?
+      attr_accessor bucket_key_enabled: bool?
+    end
+
+    module DataRedundancy
+      SingleAvailabilityZone: String
+      SingleLocalZone: String
+    end
+
+    class DefaultRetention
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?mode: String,
+        ?days: Integer,
+        ?years: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor mode: String?
+      attr_accessor days: Integer?
+      attr_accessor years: Integer?
+    end
+
+    class Delete
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?objects: Array[Types::ObjectIdentifier],
+        ?quiet: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor objects: Array[Types::ObjectIdentifier]?
+      attr_accessor quiet: bool?
+    end
+
+    class DeleteBucketAnalyticsConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?id: String,
+        ?expected_bucket_owner: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor id: String?
+      attr_accessor expected_bucket_owner: String?
+    end
+
+    class DeleteBucketCorsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?expected_bucket_owner: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor expected_bucket_owner: String?
+    end
+
+    class DeleteBucketEncryptionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?expected_bucket_owner: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor expected_bucket_owner: String?
+    end
+
+    class DeleteBucketIntelligentTieringConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?id: String,
+        ?expected_bucket_owner: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor id: String?
+      attr_accessor expected_bucket_owner: String?
+    end
+
+    class DeleteBucketInventoryConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?id: String,
+        ?expected_bucket_owner: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor id: String?
+      attr_accessor expected_bucket_owner: String?
+    end
+
+    class DeleteBucketLifecycleRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?expected_bucket_owner: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor expected_bucket_owner: String?
+    end
+
+    class DeleteBucketMetadataConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?expected_bucket_owner: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor expected_bucket_owner: String?
+    end
+
+    class DeleteBucketMetadataTableConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?expected_bucket_owner: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor expected_bucket_owner: String?
+    end
+
+    class DeleteBucketMetricsConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?id: String,
+        ?expected_bucket_owner: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor id: String?
+      attr_accessor expected_bucket_owner: String?
+    end
+
+    class DeleteBucketOwnershipControlsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?expected_bucket_owner: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor expected_bucket_owner: String?
+    end
+
+    class DeleteBucketPolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?expected_bucket_owner: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor expected_bucket_owner: String?
+    end
+
+    class DeleteBucketReplicationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?expected_bucket_owner: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor expected_bucket_owner: String?
+    end
+
+    class DeleteBucketRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?expected_bucket_owner: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor expected_bucket_owner: String?
+    end
+
+    class DeleteBucketTaggingRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?expected_bucket_owner: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor expected_bucket_owner: String?
+    end
+
+    class DeleteBucketWebsiteRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?expected_bucket_owner: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor expected_bucket_owner: String?
+    end
+
+    class DeleteMarkerEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?owner: Types::Owner,
+        ?key: String,
+        ?version_id: String,
+        ?is_latest: bool,
+        ?last_modified: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor owner: Types::Owner?
+      attr_accessor key: String?
+      attr_accessor version_id: String?
+      attr_accessor is_latest: bool?
+      attr_accessor last_modified: Time?
+    end
+
+    class DeleteMarkerReplication
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+    end
+
+    module DeleteMarkerReplicationStatus
+      Enabled: String
+      Disabled: String
+    end
+
+    class DeleteObjectOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?delete_marker: bool,
+        ?version_id: String,
+        ?request_charged: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor delete_marker: bool?
+      attr_accessor version_id: String?
+      attr_accessor request_charged: String?
+    end
+
+    class DeleteObjectRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?key: String,
+        ?mfa: String,
+        ?version_id: String,
+        ?request_payer: String,
+        ?bypass_governance_retention: bool,
+        ?expected_bucket_owner: String,
+        ?if_match: String,
+        ?if_match_last_modified_time: Time,
+        ?if_match_size: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor key: String?
+      attr_accessor mfa: String?
+      attr_accessor version_id: String?
+      attr_accessor request_payer: String?
+      attr_accessor bypass_governance_retention: bool?
+      attr_accessor expected_bucket_owner: String?
+      attr_accessor if_match: String?
+      attr_accessor if_match_last_modified_time: Time?
+      attr_accessor if_match_size: Integer?
+    end
+
+    class DeleteObjectTaggingOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?version_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor version_id: String?
+    end
+
+    class DeleteObjectTaggingRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?key: String,
+        ?version_id: String,
+        ?expected_bucket_owner: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor key: String?
+      attr_accessor version_id: String?
+      attr_accessor expected_bucket_owner: String?
+    end
+
+    class DeleteObjectsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?deleted: Array[Types::DeletedObject],
+        ?request_charged: String,
+        ?errors: Array[Types::Error],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor deleted: Array[Types::DeletedObject]?
+      attr_accessor request_charged: String?
+      attr_accessor errors: Array[Types::Error]?
+    end
+
+    class DeleteObjectsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?delete: Types::Delete,
+        ?mfa: String,
+        ?request_payer: String,
+        ?bypass_governance_retention: bool,
+        ?expected_bucket_owner: String,
+        ?checksum_algorithm: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor delete: Types::Delete?
+      attr_accessor mfa: String?
+      attr_accessor request_payer: String?
+      attr_accessor bypass_governance_retention: bool?
+      attr_accessor expected_bucket_owner: String?
+      attr_accessor checksum_algorithm: String?
+    end
+
+    class DeletePublicAccessBlockRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?expected_bucket_owner: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor expected_bucket_owner: String?
+    end
+
+    class DeletedObject
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?version_id: String,
+        ?delete_marker: bool,
+        ?delete_marker_version_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor version_id: String?
+      attr_accessor delete_marker: bool?
+      attr_accessor delete_marker_version_id: String?
+    end
+
+    class Destination
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?account: String,
+        ?storage_class: String,
+        ?access_control_translation: Types::AccessControlTranslation,
+        ?encryption_configuration: Types::EncryptionConfiguration,
+        ?replication_time: Types::ReplicationTime,
+        ?metrics: Types::Metrics,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor account: String?
+      attr_accessor storage_class: String?
+      attr_accessor access_control_translation: Types::AccessControlTranslation?
+      attr_accessor encryption_configuration: Types::EncryptionConfiguration?
+      attr_accessor replication_time: Types::ReplicationTime?
+      attr_accessor metrics: Types::Metrics?
+    end
+
+    class DestinationResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?table_bucket_type: String,
+        ?table_bucket_arn: String,
+        ?table_namespace: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor table_bucket_type: String?
+      attr_accessor table_bucket_arn: String?
+      attr_accessor table_namespace: String?
+    end
+
+    module EncodingType
+      url: String
+    end
+
+    class Encryption
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?encryption_type: String,
+        ?kms_key_id: String,
+        ?kms_context: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor encryption_type: String?
+      attr_accessor kms_key_id: String?
+      attr_accessor kms_context: String?
+    end
+
+    class EncryptionConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?replica_kms_key_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor replica_kms_key_id: String?
+    end
+
+    class EncryptionTypeMismatch
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class EndEvent
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class Error
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?version_id: String,
+        ?code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor version_id: String?
+      attr_accessor code: String?
+      attr_accessor message: String?
+    end
+
+    class ErrorDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?error_code: String,
+        ?error_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor error_code: String?
+      attr_accessor error_message: String?
+    end
+
+    class ErrorDocument
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+    end
+
+    module Event
+      s3_ReducedRedundancyLostObject: String
+      s3_ObjectCreated_: String
+      s3_ObjectCreated_Put: String
+      s3_ObjectCreated_Post: String
+      s3_ObjectCreated_Copy: String
+      s3_ObjectCreated_CompleteMultipartUpload: String
+      s3_ObjectRemoved_: String
+      s3_ObjectRemoved_Delete: String
+      s3_ObjectRemoved_DeleteMarkerCreated: String
+      s3_ObjectRestore_: String
+      s3_ObjectRestore_Post: String
+      s3_ObjectRestore_Completed: String
+      s3_Replication_: String
+      s3_Replication_OperationFailedReplication: String
+      s3_Replication_OperationNotTracked: String
+      s3_Replication_OperationMissedThreshold: String
+      s3_Replication_OperationReplicatedAfterThreshold: String
+      s3_ObjectRestore_Delete: String
+      s3_LifecycleTransition: String
+      s3_IntelligentTiering: String
+      s3_ObjectAcl_Put: String
+      s3_LifecycleExpiration_: String
+      s3_LifecycleExpiration_Delete: String
+      s3_LifecycleExpiration_DeleteMarkerCreated: String
+      s3_ObjectTagging_: String
+      s3_ObjectTagging_Put: String
+      s3_ObjectTagging_Delete: String
+    end
+
+    class EventBridgeConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ExistingObjectReplication
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+    end
+
+    module ExistingObjectReplicationStatus
+      Enabled: String
+      Disabled: String
+    end
+
+    module ExpirationState
+      ENABLED: String
+      DISABLED: String
+    end
+
+    module ExpirationStatus
+      Enabled: String
+      Disabled: String
+    end
+
+    module ExpressionType
+      SQL: String
+    end
+
+    module FileHeaderInfo
+      USE: String
+      IGNORE: String
+      NONE: String
+    end
+
+    class FilterRule
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor value: String?
+    end
+
+    module FilterRuleName
+      prefix: String
+      suffix: String
+    end
+
+    class GetBucketAccelerateConfigurationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?request_charged: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor request_charged: String?
+    end
+
+    class GetBucketAccelerateConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?expected_bucket_owner: String,
+        ?request_payer: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor expected_bucket_owner: String?
+      attr_accessor request_payer: String?
+    end
+
+    class GetBucketAclOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?owner: Types::Owner,
+        ?grants: Array[Types::Grant],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor owner: Types::Owner?
+      attr_accessor grants: Array[Types::Grant]?
+    end
+
+    class GetBucketAclRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?expected_bucket_owner: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor expected_bucket_owner: String?
+    end
+
+    class GetBucketAnalyticsConfigurationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?analytics_configuration: Types::AnalyticsConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor analytics_configuration: Types::AnalyticsConfiguration?
+    end
+
+    class GetBucketAnalyticsConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?id: String,
+        ?expected_bucket_owner: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor id: String?
+      attr_accessor expected_bucket_owner: String?
+    end
+
+    class GetBucketCorsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cors_rules: Array[Types::CORSRule],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cors_rules: Array[Types::CORSRule]?
+    end
+
+    class GetBucketCorsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?expected_bucket_owner: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor expected_bucket_owner: String?
+    end
+
+    class GetBucketEncryptionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?server_side_encryption_configuration: Types::ServerSideEncryptionConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor server_side_encryption_configuration: Types::ServerSideEncryptionConfiguration?
+    end
+
+    class GetBucketEncryptionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?expected_bucket_owner: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor expected_bucket_owner: String?
+    end
+
+    class GetBucketIntelligentTieringConfigurationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?intelligent_tiering_configuration: Types::IntelligentTieringConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor intelligent_tiering_configuration: Types::IntelligentTieringConfiguration?
+    end
+
+    class GetBucketIntelligentTieringConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?id: String,
+        ?expected_bucket_owner: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor id: String?
+      attr_accessor expected_bucket_owner: String?
+    end
+
+    class GetBucketInventoryConfigurationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?inventory_configuration: Types::InventoryConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor inventory_configuration: Types::InventoryConfiguration?
+    end
+
+    class GetBucketInventoryConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?id: String,
+        ?expected_bucket_owner: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor id: String?
+      attr_accessor expected_bucket_owner: String?
+    end
+
+    class GetBucketLifecycleConfigurationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rules: Array[Types::LifecycleRule],
+        ?transition_default_minimum_object_size: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rules: Array[Types::LifecycleRule]?
+      attr_accessor transition_default_minimum_object_size: String?
+    end
+
+    class GetBucketLifecycleConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?expected_bucket_owner: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor expected_bucket_owner: String?
+    end
+
+    class GetBucketLocationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?location_constraint: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor location_constraint: String?
+    end
+
+    class GetBucketLocationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?expected_bucket_owner: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor expected_bucket_owner: String?
+    end
+
+    class GetBucketLoggingOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?logging_enabled: Types::LoggingEnabled,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor logging_enabled: Types::LoggingEnabled?
+    end
+
+    class GetBucketLoggingRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?expected_bucket_owner: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor expected_bucket_owner: String?
+    end
+
+    class GetBucketMetadataConfigurationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?get_bucket_metadata_configuration_result: Types::GetBucketMetadataConfigurationResult,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor get_bucket_metadata_configuration_result: Types::GetBucketMetadataConfigurationResult?
+    end
+
+    class GetBucketMetadataConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?expected_bucket_owner: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor expected_bucket_owner: String?
+    end
+
+    class GetBucketMetadataConfigurationResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?metadata_configuration_result: Types::MetadataConfigurationResult,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor metadata_configuration_result: Types::MetadataConfigurationResult?
+    end
+
+    class GetBucketMetadataTableConfigurationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?get_bucket_metadata_table_configuration_result: Types::GetBucketMetadataTableConfigurationResult,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor get_bucket_metadata_table_configuration_result: Types::GetBucketMetadataTableConfigurationResult?
+    end
+
+    class GetBucketMetadataTableConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?expected_bucket_owner: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor expected_bucket_owner: String?
+    end
+
+    class GetBucketMetadataTableConfigurationResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?metadata_table_configuration_result: Types::MetadataTableConfigurationResult,
+        ?status: String,
+        ?error: Types::ErrorDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor metadata_table_configuration_result: Types::MetadataTableConfigurationResult?
+      attr_accessor status: String?
+      attr_accessor error: Types::ErrorDetails?
+    end
+
+    class GetBucketMetricsConfigurationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?metrics_configuration: Types::MetricsConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor metrics_configuration: Types::MetricsConfiguration?
+    end
+
+    class GetBucketMetricsConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?id: String,
+        ?expected_bucket_owner: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor id: String?
+      attr_accessor expected_bucket_owner: String?
+    end
+
+    class GetBucketNotificationConfigurationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?topic_configurations: Array[Types::TopicConfiguration],
+        ?queue_configurations: Array[Types::QueueConfiguration],
+        ?lambda_function_configurations: Array[Types::LambdaFunctionConfiguration],
+        ?event_bridge_configuration: Types::EventBridgeConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor topic_configurations: Array[Types::TopicConfiguration]?
+      attr_accessor queue_configurations: Array[Types::QueueConfiguration]?
+      attr_accessor lambda_function_configurations: Array[Types::LambdaFunctionConfiguration]?
+      attr_accessor event_bridge_configuration: Types::EventBridgeConfiguration?
+    end
+
+    class GetBucketNotificationConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?expected_bucket_owner: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor expected_bucket_owner: String?
+    end
+
+    class GetBucketOwnershipControlsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ownership_controls: Types::OwnershipControls,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ownership_controls: Types::OwnershipControls?
+    end
+
+    class GetBucketOwnershipControlsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?expected_bucket_owner: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor expected_bucket_owner: String?
+    end
+
+    class GetBucketPolicyOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy: String?
+    end
+
+    class GetBucketPolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?expected_bucket_owner: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor expected_bucket_owner: String?
+    end
+
+    class GetBucketPolicyStatusOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy_status: Types::PolicyStatus,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy_status: Types::PolicyStatus?
+    end
+
+    class GetBucketPolicyStatusRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?expected_bucket_owner: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor expected_bucket_owner: String?
+    end
+
+    class GetBucketReplicationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?replication_configuration: Types::ReplicationConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor replication_configuration: Types::ReplicationConfiguration?
+    end
+
+    class GetBucketReplicationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?expected_bucket_owner: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor expected_bucket_owner: String?
+    end
+
+    class GetBucketRequestPaymentOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?payer: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor payer: String?
+    end
+
+    class GetBucketRequestPaymentRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?expected_bucket_owner: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor expected_bucket_owner: String?
+    end
+
+    class GetBucketTaggingOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tag_set: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tag_set: Array[Types::Tag]?
+    end
+
+    class GetBucketTaggingRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?expected_bucket_owner: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor expected_bucket_owner: String?
+    end
+
+    class GetBucketVersioningOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?mfa_delete: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor mfa_delete: String?
+    end
+
+    class GetBucketVersioningRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?expected_bucket_owner: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor expected_bucket_owner: String?
+    end
+
+    class GetBucketWebsiteOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?redirect_all_requests_to: Types::RedirectAllRequestsTo,
+        ?index_document: Types::IndexDocument,
+        ?error_document: Types::ErrorDocument,
+        ?routing_rules: Array[Types::RoutingRule],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor redirect_all_requests_to: Types::RedirectAllRequestsTo?
+      attr_accessor index_document: Types::IndexDocument?
+      attr_accessor error_document: Types::ErrorDocument?
+      attr_accessor routing_rules: Array[Types::RoutingRule]?
+    end
+
+    class GetBucketWebsiteRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?expected_bucket_owner: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor expected_bucket_owner: String?
+    end
+
+    class GetObjectAclOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?owner: Types::Owner,
+        ?grants: Array[Types::Grant],
+        ?request_charged: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor owner: Types::Owner?
+      attr_accessor grants: Array[Types::Grant]?
+      attr_accessor request_charged: String?
+    end
+
+    class GetObjectAclRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?key: String,
+        ?version_id: String,
+        ?request_payer: String,
+        ?expected_bucket_owner: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor key: String?
+      attr_accessor version_id: String?
+      attr_accessor request_payer: String?
+      attr_accessor expected_bucket_owner: String?
+    end
+
+    class GetObjectAttributesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?delete_marker: bool,
+        ?last_modified: Time,
+        ?version_id: String,
+        ?request_charged: String,
+        ?e_tag: String,
+        ?checksum: Types::Checksum,
+        ?object_parts: Types::GetObjectAttributesParts,
+        ?storage_class: String,
+        ?object_size: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor delete_marker: bool?
+      attr_accessor last_modified: Time?
+      attr_accessor version_id: String?
+      attr_accessor request_charged: String?
+      attr_accessor e_tag: String?
+      attr_accessor checksum: Types::Checksum?
+      attr_accessor object_parts: Types::GetObjectAttributesParts?
+      attr_accessor storage_class: String?
+      attr_accessor object_size: Integer?
+    end
+
+    class GetObjectAttributesParts
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?total_parts_count: Integer,
+        ?part_number_marker: String,
+        ?next_part_number_marker: String,
+        ?max_parts: Integer,
+        ?is_truncated: bool,
+        ?parts: Array[Types::ObjectPart],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor total_parts_count: Integer?
+      attr_accessor part_number_marker: String?
+      attr_accessor next_part_number_marker: String?
+      attr_accessor max_parts: Integer?
+      attr_accessor is_truncated: bool?
+      attr_accessor parts: Array[Types::ObjectPart]?
+    end
+
+    class GetObjectAttributesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?key: String,
+        ?version_id: String,
+        ?max_parts: Integer,
+        ?part_number_marker: String,
+        ?sse_customer_algorithm: String,
+        ?sse_customer_key: String,
+        ?sse_customer_key_md5: String,
+        ?request_payer: String,
+        ?expected_bucket_owner: String,
+        ?object_attributes: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor key: String?
+      attr_accessor version_id: String?
+      attr_accessor max_parts: Integer?
+      attr_accessor part_number_marker: String?
+      attr_accessor sse_customer_algorithm: String?
+      attr_accessor sse_customer_key: String?
+      attr_accessor sse_customer_key_md5: String?
+      attr_accessor request_payer: String?
+      attr_accessor expected_bucket_owner: String?
+      attr_accessor object_attributes: Array[String]?
+    end
+
+    class GetObjectLegalHoldOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?legal_hold: Types::ObjectLockLegalHold,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor legal_hold: Types::ObjectLockLegalHold?
+    end
+
+    class GetObjectLegalHoldRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?key: String,
+        ?version_id: String,
+        ?request_payer: String,
+        ?expected_bucket_owner: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor key: String?
+      attr_accessor version_id: String?
+      attr_accessor request_payer: String?
+      attr_accessor expected_bucket_owner: String?
+    end
+
+    class GetObjectLockConfigurationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?object_lock_configuration: Types::ObjectLockConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor object_lock_configuration: Types::ObjectLockConfiguration?
+    end
+
+    class GetObjectLockConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?expected_bucket_owner: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor expected_bucket_owner: String?
+    end
+
+    class GetObjectOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?body: String,
+        ?delete_marker: bool,
+        ?accept_ranges: String,
+        ?expiration: String,
+        ?restore: String,
+        ?last_modified: Time,
+        ?content_length: Integer,
+        ?e_tag: String,
+        ?checksum_crc32: String,
+        ?checksum_crc32_c: String,
+        ?checksum_crc64_nvme: String,
+        ?checksum_sha1: String,
+        ?checksum_sha256: String,
+        ?checksum_type: String,
+        ?missing_meta: Integer,
+        ?version_id: String,
+        ?cache_control: String,
+        ?content_disposition: String,
+        ?content_encoding: String,
+        ?content_language: String,
+        ?content_range: String,
+        ?content_type: String,
+        ?expires: String,
+        ?website_redirect_location: String,
+        ?server_side_encryption: String,
+        ?metadata: Hash[String, String],
+        ?sse_customer_algorithm: String,
+        ?sse_customer_key_md5: String,
+        ?ssekms_key_id: String,
+        ?bucket_key_enabled: bool,
+        ?storage_class: String,
+        ?request_charged: String,
+        ?replication_status: String,
+        ?parts_count: Integer,
+        ?tag_count: Integer,
+        ?object_lock_mode: String,
+        ?object_lock_retain_until_date: Time,
+        ?object_lock_legal_hold_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor body: String?
+      attr_accessor delete_marker: bool?
+      attr_accessor accept_ranges: String?
+      attr_accessor expiration: String?
+      attr_accessor restore: String?
+      attr_accessor last_modified: Time?
+      attr_accessor content_length: Integer?
+      attr_accessor e_tag: String?
+      attr_accessor checksum_crc32: String?
+      attr_accessor checksum_crc32_c: String?
+      attr_accessor checksum_crc64_nvme: String?
+      attr_accessor checksum_sha1: String?
+      attr_accessor checksum_sha256: String?
+      attr_accessor checksum_type: String?
+      attr_accessor missing_meta: Integer?
+      attr_accessor version_id: String?
+      attr_accessor cache_control: String?
+      attr_accessor content_disposition: String?
+      attr_accessor content_encoding: String?
+      attr_accessor content_language: String?
+      attr_accessor content_range: String?
+      attr_accessor content_type: String?
+      attr_accessor expires: String?
+      attr_accessor website_redirect_location: String?
+      attr_accessor server_side_encryption: String?
+      attr_accessor metadata: Hash[String, String]?
+      attr_accessor sse_customer_algorithm: String?
+      attr_accessor sse_customer_key_md5: String?
+      attr_accessor ssekms_key_id: String?
+      attr_accessor bucket_key_enabled: bool?
+      attr_accessor storage_class: String?
+      attr_accessor request_charged: String?
+      attr_accessor replication_status: String?
+      attr_accessor parts_count: Integer?
+      attr_accessor tag_count: Integer?
+      attr_accessor object_lock_mode: String?
+      attr_accessor object_lock_retain_until_date: Time?
+      attr_accessor object_lock_legal_hold_status: String?
+    end
+
+    class GetObjectRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?if_match: String,
+        ?if_modified_since: Time,
+        ?if_none_match: String,
+        ?if_unmodified_since: Time,
+        ?key: String,
+        ?range: String,
+        ?response_cache_control: String,
+        ?response_content_disposition: String,
+        ?response_content_encoding: String,
+        ?response_content_language: String,
+        ?response_content_type: String,
+        ?response_expires: Time,
+        ?version_id: String,
+        ?sse_customer_algorithm: String,
+        ?sse_customer_key: String,
+        ?sse_customer_key_md5: String,
+        ?request_payer: String,
+        ?part_number: Integer,
+        ?expected_bucket_owner: String,
+        ?checksum_mode: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor if_match: String?
+      attr_accessor if_modified_since: Time?
+      attr_accessor if_none_match: String?
+      attr_accessor if_unmodified_since: Time?
+      attr_accessor key: String?
+      attr_accessor range: String?
+      attr_accessor response_cache_control: String?
+      attr_accessor response_content_disposition: String?
+      attr_accessor response_content_encoding: String?
+      attr_accessor response_content_language: String?
+      attr_accessor response_content_type: String?
+      attr_accessor response_expires: Time?
+      attr_accessor version_id: String?
+      attr_accessor sse_customer_algorithm: String?
+      attr_accessor sse_customer_key: String?
+      attr_accessor sse_customer_key_md5: String?
+      attr_accessor request_payer: String?
+      attr_accessor part_number: Integer?
+      attr_accessor expected_bucket_owner: String?
+      attr_accessor checksum_mode: String?
+    end
+
+    class GetObjectRetentionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?retention: Types::ObjectLockRetention,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor retention: Types::ObjectLockRetention?
+    end
+
+    class GetObjectRetentionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?key: String,
+        ?version_id: String,
+        ?request_payer: String,
+        ?expected_bucket_owner: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor key: String?
+      attr_accessor version_id: String?
+      attr_accessor request_payer: String?
+      attr_accessor expected_bucket_owner: String?
+    end
+
+    class GetObjectTaggingOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?version_id: String,
+        ?tag_set: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor version_id: String?
+      attr_accessor tag_set: Array[Types::Tag]?
+    end
+
+    class GetObjectTaggingRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?key: String,
+        ?version_id: String,
+        ?expected_bucket_owner: String,
+        ?request_payer: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor key: String?
+      attr_accessor version_id: String?
+      attr_accessor expected_bucket_owner: String?
+      attr_accessor request_payer: String?
+    end
+
+    class GetObjectTorrentOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?body: String,
+        ?request_charged: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor body: String?
+      attr_accessor request_charged: String?
+    end
+
+    class GetObjectTorrentRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?key: String,
+        ?request_payer: String,
+        ?expected_bucket_owner: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor key: String?
+      attr_accessor request_payer: String?
+      attr_accessor expected_bucket_owner: String?
+    end
+
+    class GetPublicAccessBlockOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?public_access_block_configuration: Types::PublicAccessBlockConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor public_access_block_configuration: Types::PublicAccessBlockConfiguration?
+    end
+
+    class GetPublicAccessBlockRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?expected_bucket_owner: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor expected_bucket_owner: String?
+    end
+
+    class GlacierJobParameters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tier: String?
+    end
+
+    class Grant
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?grantee: Types::Grantee,
+        ?permission: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor grantee: Types::Grantee?
+      attr_accessor permission: String?
+    end
+
+    class Grantee
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?display_name: String,
+        ?email_address: String,
+        ?id: String,
+        ?uri: String,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor display_name: String?
+      attr_accessor email_address: String?
+      attr_accessor id: String?
+      attr_accessor uri: String?
+      attr_accessor type: String?
+    end
+
+    class HeadBucketOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket_arn: String,
+        ?bucket_location_type: String,
+        ?bucket_location_name: String,
+        ?bucket_region: String,
+        ?access_point_alias: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket_arn: String?
+      attr_accessor bucket_location_type: String?
+      attr_accessor bucket_location_name: String?
+      attr_accessor bucket_region: String?
+      attr_accessor access_point_alias: bool?
+    end
+
+    class HeadBucketRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?expected_bucket_owner: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor expected_bucket_owner: String?
+    end
+
+    class HeadObjectOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?delete_marker: bool,
+        ?accept_ranges: String,
+        ?expiration: String,
+        ?restore: String,
+        ?archive_status: String,
+        ?last_modified: Time,
+        ?content_length: Integer,
+        ?checksum_crc32: String,
+        ?checksum_crc32_c: String,
+        ?checksum_crc64_nvme: String,
+        ?checksum_sha1: String,
+        ?checksum_sha256: String,
+        ?checksum_type: String,
+        ?e_tag: String,
+        ?missing_meta: Integer,
+        ?version_id: String,
+        ?cache_control: String,
+        ?content_disposition: String,
+        ?content_encoding: String,
+        ?content_language: String,
+        ?content_type: String,
+        ?content_range: String,
+        ?expires: String,
+        ?website_redirect_location: String,
+        ?server_side_encryption: String,
+        ?metadata: Hash[String, String],
+        ?sse_customer_algorithm: String,
+        ?sse_customer_key_md5: String,
+        ?ssekms_key_id: String,
+        ?bucket_key_enabled: bool,
+        ?storage_class: String,
+        ?request_charged: String,
+        ?replication_status: String,
+        ?parts_count: Integer,
+        ?tag_count: Integer,
+        ?object_lock_mode: String,
+        ?object_lock_retain_until_date: Time,
+        ?object_lock_legal_hold_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor delete_marker: bool?
+      attr_accessor accept_ranges: String?
+      attr_accessor expiration: String?
+      attr_accessor restore: String?
+      attr_accessor archive_status: String?
+      attr_accessor last_modified: Time?
+      attr_accessor content_length: Integer?
+      attr_accessor checksum_crc32: String?
+      attr_accessor checksum_crc32_c: String?
+      attr_accessor checksum_crc64_nvme: String?
+      attr_accessor checksum_sha1: String?
+      attr_accessor checksum_sha256: String?
+      attr_accessor checksum_type: String?
+      attr_accessor e_tag: String?
+      attr_accessor missing_meta: Integer?
+      attr_accessor version_id: String?
+      attr_accessor cache_control: String?
+      attr_accessor content_disposition: String?
+      attr_accessor content_encoding: String?
+      attr_accessor content_language: String?
+      attr_accessor content_type: String?
+      attr_accessor content_range: String?
+      attr_accessor expires: String?
+      attr_accessor website_redirect_location: String?
+      attr_accessor server_side_encryption: String?
+      attr_accessor metadata: Hash[String, String]?
+      attr_accessor sse_customer_algorithm: String?
+      attr_accessor sse_customer_key_md5: String?
+      attr_accessor ssekms_key_id: String?
+      attr_accessor bucket_key_enabled: bool?
+      attr_accessor storage_class: String?
+      attr_accessor request_charged: String?
+      attr_accessor replication_status: String?
+      attr_accessor parts_count: Integer?
+      attr_accessor tag_count: Integer?
+      attr_accessor object_lock_mode: String?
+      attr_accessor object_lock_retain_until_date: Time?
+      attr_accessor object_lock_legal_hold_status: String?
+    end
+
+    class HeadObjectRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?if_match: String,
+        ?if_modified_since: Time,
+        ?if_none_match: String,
+        ?if_unmodified_since: Time,
+        ?key: String,
+        ?range: String,
+        ?response_cache_control: String,
+        ?response_content_disposition: String,
+        ?response_content_encoding: String,
+        ?response_content_language: String,
+        ?response_content_type: String,
+        ?response_expires: Time,
+        ?version_id: String,
+        ?sse_customer_algorithm: String,
+        ?sse_customer_key: String,
+        ?sse_customer_key_md5: String,
+        ?request_payer: String,
+        ?part_number: Integer,
+        ?expected_bucket_owner: String,
+        ?checksum_mode: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor if_match: String?
+      attr_accessor if_modified_since: Time?
+      attr_accessor if_none_match: String?
+      attr_accessor if_unmodified_since: Time?
+      attr_accessor key: String?
+      attr_accessor range: String?
+      attr_accessor response_cache_control: String?
+      attr_accessor response_content_disposition: String?
+      attr_accessor response_content_encoding: String?
+      attr_accessor response_content_language: String?
+      attr_accessor response_content_type: String?
+      attr_accessor response_expires: Time?
+      attr_accessor version_id: String?
+      attr_accessor sse_customer_algorithm: String?
+      attr_accessor sse_customer_key: String?
+      attr_accessor sse_customer_key_md5: String?
+      attr_accessor request_payer: String?
+      attr_accessor part_number: Integer?
+      attr_accessor expected_bucket_owner: String?
+      attr_accessor checksum_mode: String?
+    end
+
+    class IdempotencyParameterMismatch
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class IndexDocument
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?suffix: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor suffix: String?
+    end
+
+    class Initiator
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?display_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor display_name: String?
+    end
+
+    class InputSerialization
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?csv: Types::CSVInput,
+        ?compression_type: String,
+        ?json: Types::JSONInput,
+        ?parquet: Types::ParquetInput,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor csv: Types::CSVInput?
+      attr_accessor compression_type: String?
+      attr_accessor json: Types::JSONInput?
+      attr_accessor parquet: Types::ParquetInput?
+    end
+
+    module IntelligentTieringAccessTier
+      ARCHIVE_ACCESS: String
+      DEEP_ARCHIVE_ACCESS: String
+    end
+
+    class IntelligentTieringAndOperator
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?prefix: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor prefix: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class IntelligentTieringConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?filter: Types::IntelligentTieringFilter,
+        ?status: String,
+        ?tierings: Array[Types::Tiering],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor filter: Types::IntelligentTieringFilter?
+      attr_accessor status: String?
+      attr_accessor tierings: Array[Types::Tiering]?
+    end
+
+    class IntelligentTieringFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?prefix: String,
+        ?tag: Types::Tag,
+        ?and: Types::IntelligentTieringAndOperator,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor prefix: String?
+      attr_accessor tag: Types::Tag?
+      attr_accessor and: Types::IntelligentTieringAndOperator?
+    end
+
+    module IntelligentTieringStatus
+      Enabled: String
+      Disabled: String
+    end
+
+    class InvalidObjectState
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?storage_class: String,
+        ?access_tier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor storage_class: String?
+      attr_accessor access_tier: String?
+    end
+
+    class InvalidRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class InvalidWriteOffset
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class InventoryConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?destination: Types::InventoryDestination,
+        ?is_enabled: bool,
+        ?filter: Types::InventoryFilter,
+        ?id: String,
+        ?included_object_versions: String,
+        ?optional_fields: Array[String],
+        ?schedule: Types::InventorySchedule,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor destination: Types::InventoryDestination?
+      attr_accessor is_enabled: bool?
+      attr_accessor filter: Types::InventoryFilter?
+      attr_accessor id: String?
+      attr_accessor included_object_versions: String?
+      attr_accessor optional_fields: Array[String]?
+      attr_accessor schedule: Types::InventorySchedule?
+    end
+
+    module InventoryConfigurationState
+      ENABLED: String
+      DISABLED: String
+    end
+
+    class InventoryDestination
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3_bucket_destination: Types::InventoryS3BucketDestination,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3_bucket_destination: Types::InventoryS3BucketDestination?
+    end
+
+    class InventoryEncryption
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sses3: Types::SSES3,
+        ?ssekms: Types::SSEKMS,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sses3: Types::SSES3?
+      attr_accessor ssekms: Types::SSEKMS?
+    end
+
+    class InventoryFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?prefix: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor prefix: String?
+    end
+
+    module InventoryFormat
+      CSV: String
+      ORC: String
+      Parquet: String
+    end
+
+    module InventoryFrequency
+      Daily: String
+      Weekly: String
+    end
+
+    module InventoryIncludedObjectVersions
+      All: String
+      Current: String
+    end
+
+    module InventoryOptionalField
+      Size: String
+      LastModifiedDate: String
+      StorageClass: String
+      ETag: String
+      IsMultipartUploaded: String
+      ReplicationStatus: String
+      EncryptionStatus: String
+      ObjectLockRetainUntilDate: String
+      ObjectLockMode: String
+      ObjectLockLegalHoldStatus: String
+      IntelligentTieringAccessTier: String
+      BucketKeyStatus: String
+      ChecksumAlgorithm: String
+      ObjectAccessControlList: String
+      ObjectOwner: String
+    end
+
+    class InventoryS3BucketDestination
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?bucket: String,
+        ?format: String,
+        ?prefix: String,
+        ?encryption: Types::InventoryEncryption,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor bucket: String?
+      attr_accessor format: String?
+      attr_accessor prefix: String?
+      attr_accessor encryption: Types::InventoryEncryption?
+    end
+
+    class InventorySchedule
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?frequency: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor frequency: String?
+    end
+
+    class InventoryTableConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration_state: String,
+        ?encryption_configuration: Types::MetadataTableEncryptionConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration_state: String?
+      attr_accessor encryption_configuration: Types::MetadataTableEncryptionConfiguration?
+    end
+
+    class InventoryTableConfigurationResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration_state: String,
+        ?table_status: String,
+        ?error: Types::ErrorDetails,
+        ?table_name: String,
+        ?table_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration_state: String?
+      attr_accessor table_status: String?
+      attr_accessor error: Types::ErrorDetails?
+      attr_accessor table_name: String?
+      attr_accessor table_arn: String?
+    end
+
+    class InventoryTableConfigurationUpdates
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration_state: String,
+        ?encryption_configuration: Types::MetadataTableEncryptionConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration_state: String?
+      attr_accessor encryption_configuration: Types::MetadataTableEncryptionConfiguration?
+    end
+
+    class JSONInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+    end
+
+    class JSONOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?record_delimiter: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor record_delimiter: String?
+    end
+
+    module JSONType
+      DOCUMENT: String
+      LINES: String
+    end
+
+    class JournalTableConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?record_expiration: Types::RecordExpiration,
+        ?encryption_configuration: Types::MetadataTableEncryptionConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor record_expiration: Types::RecordExpiration?
+      attr_accessor encryption_configuration: Types::MetadataTableEncryptionConfiguration?
+    end
+
+    class JournalTableConfigurationResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?table_status: String,
+        ?error: Types::ErrorDetails,
+        ?table_name: String,
+        ?table_arn: String,
+        ?record_expiration: Types::RecordExpiration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor table_status: String?
+      attr_accessor error: Types::ErrorDetails?
+      attr_accessor table_name: String?
+      attr_accessor table_arn: String?
+      attr_accessor record_expiration: Types::RecordExpiration?
+    end
+
+    class JournalTableConfigurationUpdates
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?record_expiration: Types::RecordExpiration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor record_expiration: Types::RecordExpiration?
+    end
+
+    class LambdaFunctionConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?lambda_function_arn: String,
+        ?events: Array[String],
+        ?filter: Types::NotificationConfigurationFilter,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor lambda_function_arn: String?
+      attr_accessor events: Array[String]?
+      attr_accessor filter: Types::NotificationConfigurationFilter?
+    end
+
+    class LifecycleExpiration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?date: Time,
+        ?days: Integer,
+        ?expired_object_delete_marker: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor date: Time?
+      attr_accessor days: Integer?
+      attr_accessor expired_object_delete_marker: bool?
+    end
+
+    class LifecycleRule
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?expiration: Types::LifecycleExpiration,
+        ?id: String,
+        ?prefix: String,
+        ?filter: Types::LifecycleRuleFilter,
+        ?status: String,
+        ?transitions: Array[Types::Transition],
+        ?noncurrent_version_transitions: Array[Types::NoncurrentVersionTransition],
+        ?noncurrent_version_expiration: Types::NoncurrentVersionExpiration,
+        ?abort_incomplete_multipart_upload: Types::AbortIncompleteMultipartUpload,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor expiration: Types::LifecycleExpiration?
+      attr_accessor id: String?
+      attr_accessor prefix: String?
+      attr_accessor filter: Types::LifecycleRuleFilter?
+      attr_accessor status: String?
+      attr_accessor transitions: Array[Types::Transition]?
+      attr_accessor noncurrent_version_transitions: Array[Types::NoncurrentVersionTransition]?
+      attr_accessor noncurrent_version_expiration: Types::NoncurrentVersionExpiration?
+      attr_accessor abort_incomplete_multipart_upload: Types::AbortIncompleteMultipartUpload?
+    end
+
+    class LifecycleRuleAndOperator
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?prefix: String,
+        ?tags: Array[Types::Tag],
+        ?object_size_greater_than: Integer,
+        ?object_size_less_than: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor prefix: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor object_size_greater_than: Integer?
+      attr_accessor object_size_less_than: Integer?
+    end
+
+    class LifecycleRuleFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?prefix: String,
+        ?tag: Types::Tag,
+        ?object_size_greater_than: Integer,
+        ?object_size_less_than: Integer,
+        ?and: Types::LifecycleRuleAndOperator,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor prefix: String?
+      attr_accessor tag: Types::Tag?
+      attr_accessor object_size_greater_than: Integer?
+      attr_accessor object_size_less_than: Integer?
+      attr_accessor and: Types::LifecycleRuleAndOperator?
+    end
+
+    class ListBucketAnalyticsConfigurationsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?is_truncated: bool,
+        ?continuation_token: String,
+        ?next_continuation_token: String,
+        ?analytics_configuration_list: Array[Types::AnalyticsConfiguration],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor is_truncated: bool?
+      attr_accessor continuation_token: String?
+      attr_accessor next_continuation_token: String?
+      attr_accessor analytics_configuration_list: Array[Types::AnalyticsConfiguration]?
+    end
+
+    class ListBucketAnalyticsConfigurationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?continuation_token: String,
+        ?expected_bucket_owner: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor continuation_token: String?
+      attr_accessor expected_bucket_owner: String?
+    end
+
+    class ListBucketIntelligentTieringConfigurationsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?is_truncated: bool,
+        ?continuation_token: String,
+        ?next_continuation_token: String,
+        ?intelligent_tiering_configuration_list: Array[Types::IntelligentTieringConfiguration],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor is_truncated: bool?
+      attr_accessor continuation_token: String?
+      attr_accessor next_continuation_token: String?
+      attr_accessor intelligent_tiering_configuration_list: Array[Types::IntelligentTieringConfiguration]?
+    end
+
+    class ListBucketIntelligentTieringConfigurationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?continuation_token: String,
+        ?expected_bucket_owner: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor continuation_token: String?
+      attr_accessor expected_bucket_owner: String?
+    end
+
+    class ListBucketInventoryConfigurationsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?continuation_token: String,
+        ?inventory_configuration_list: Array[Types::InventoryConfiguration],
+        ?is_truncated: bool,
+        ?next_continuation_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor continuation_token: String?
+      attr_accessor inventory_configuration_list: Array[Types::InventoryConfiguration]?
+      attr_accessor is_truncated: bool?
+      attr_accessor next_continuation_token: String?
+    end
+
+    class ListBucketInventoryConfigurationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?continuation_token: String,
+        ?expected_bucket_owner: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor continuation_token: String?
+      attr_accessor expected_bucket_owner: String?
+    end
+
+    class ListBucketMetricsConfigurationsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?is_truncated: bool,
+        ?continuation_token: String,
+        ?next_continuation_token: String,
+        ?metrics_configuration_list: Array[Types::MetricsConfiguration],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor is_truncated: bool?
+      attr_accessor continuation_token: String?
+      attr_accessor next_continuation_token: String?
+      attr_accessor metrics_configuration_list: Array[Types::MetricsConfiguration]?
+    end
+
+    class ListBucketMetricsConfigurationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?continuation_token: String,
+        ?expected_bucket_owner: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor continuation_token: String?
+      attr_accessor expected_bucket_owner: String?
+    end
+
+    class ListBucketsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?buckets: Array[Types::Bucket],
+        ?owner: Types::Owner,
+        ?continuation_token: String,
+        ?prefix: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor buckets: Array[Types::Bucket]?
+      attr_accessor owner: Types::Owner?
+      attr_accessor continuation_token: String?
+      attr_accessor prefix: String?
+    end
+
+    class ListBucketsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_buckets: Integer,
+        ?continuation_token: String,
+        ?prefix: String,
+        ?bucket_region: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_buckets: Integer?
+      attr_accessor continuation_token: String?
+      attr_accessor prefix: String?
+      attr_accessor bucket_region: String?
+    end
+
+    class ListDirectoryBucketsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?buckets: Array[Types::Bucket],
+        ?continuation_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor buckets: Array[Types::Bucket]?
+      attr_accessor continuation_token: String?
+    end
+
+    class ListDirectoryBucketsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?continuation_token: String,
+        ?max_directory_buckets: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor continuation_token: String?
+      attr_accessor max_directory_buckets: Integer?
+    end
+
+    class ListMultipartUploadsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?key_marker: String,
+        ?upload_id_marker: String,
+        ?next_key_marker: String,
+        ?prefix: String,
+        ?delimiter: String,
+        ?next_upload_id_marker: String,
+        ?max_uploads: Integer,
+        ?is_truncated: bool,
+        ?uploads: Array[Types::MultipartUpload],
+        ?common_prefixes: Array[Types::CommonPrefix],
+        ?encoding_type: String,
+        ?request_charged: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor key_marker: String?
+      attr_accessor upload_id_marker: String?
+      attr_accessor next_key_marker: String?
+      attr_accessor prefix: String?
+      attr_accessor delimiter: String?
+      attr_accessor next_upload_id_marker: String?
+      attr_accessor max_uploads: Integer?
+      attr_accessor is_truncated: bool?
+      attr_accessor uploads: Array[Types::MultipartUpload]?
+      attr_accessor common_prefixes: Array[Types::CommonPrefix]?
+      attr_accessor encoding_type: String?
+      attr_accessor request_charged: String?
+    end
+
+    class ListMultipartUploadsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?delimiter: String,
+        ?encoding_type: String,
+        ?key_marker: String,
+        ?max_uploads: Integer,
+        ?prefix: String,
+        ?upload_id_marker: String,
+        ?expected_bucket_owner: String,
+        ?request_payer: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor delimiter: String?
+      attr_accessor encoding_type: String?
+      attr_accessor key_marker: String?
+      attr_accessor max_uploads: Integer?
+      attr_accessor prefix: String?
+      attr_accessor upload_id_marker: String?
+      attr_accessor expected_bucket_owner: String?
+      attr_accessor request_payer: String?
+    end
+
+    class ListObjectVersionsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?is_truncated: bool,
+        ?key_marker: String,
+        ?version_id_marker: String,
+        ?next_key_marker: String,
+        ?next_version_id_marker: String,
+        ?versions: Array[Types::ObjectVersion],
+        ?delete_markers: Array[Types::DeleteMarkerEntry],
+        ?name: String,
+        ?prefix: String,
+        ?delimiter: String,
+        ?max_keys: Integer,
+        ?common_prefixes: Array[Types::CommonPrefix],
+        ?encoding_type: String,
+        ?request_charged: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor is_truncated: bool?
+      attr_accessor key_marker: String?
+      attr_accessor version_id_marker: String?
+      attr_accessor next_key_marker: String?
+      attr_accessor next_version_id_marker: String?
+      attr_accessor versions: Array[Types::ObjectVersion]?
+      attr_accessor delete_markers: Array[Types::DeleteMarkerEntry]?
+      attr_accessor name: String?
+      attr_accessor prefix: String?
+      attr_accessor delimiter: String?
+      attr_accessor max_keys: Integer?
+      attr_accessor common_prefixes: Array[Types::CommonPrefix]?
+      attr_accessor encoding_type: String?
+      attr_accessor request_charged: String?
+    end
+
+    class ListObjectVersionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?delimiter: String,
+        ?encoding_type: String,
+        ?key_marker: String,
+        ?max_keys: Integer,
+        ?prefix: String,
+        ?version_id_marker: String,
+        ?expected_bucket_owner: String,
+        ?request_payer: String,
+        ?optional_object_attributes: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor delimiter: String?
+      attr_accessor encoding_type: String?
+      attr_accessor key_marker: String?
+      attr_accessor max_keys: Integer?
+      attr_accessor prefix: String?
+      attr_accessor version_id_marker: String?
+      attr_accessor expected_bucket_owner: String?
+      attr_accessor request_payer: String?
+      attr_accessor optional_object_attributes: Array[String]?
+    end
+
+    class ListObjectsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?is_truncated: bool,
+        ?marker: String,
+        ?next_marker: String,
+        ?contents: Array[Types::Object],
+        ?name: String,
+        ?prefix: String,
+        ?delimiter: String,
+        ?max_keys: Integer,
+        ?common_prefixes: Array[Types::CommonPrefix],
+        ?encoding_type: String,
+        ?request_charged: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor is_truncated: bool?
+      attr_accessor marker: String?
+      attr_accessor next_marker: String?
+      attr_accessor contents: Array[Types::Object]?
+      attr_accessor name: String?
+      attr_accessor prefix: String?
+      attr_accessor delimiter: String?
+      attr_accessor max_keys: Integer?
+      attr_accessor common_prefixes: Array[Types::CommonPrefix]?
+      attr_accessor encoding_type: String?
+      attr_accessor request_charged: String?
+    end
+
+    class ListObjectsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?delimiter: String,
+        ?encoding_type: String,
+        ?marker: String,
+        ?max_keys: Integer,
+        ?prefix: String,
+        ?request_payer: String,
+        ?expected_bucket_owner: String,
+        ?optional_object_attributes: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor delimiter: String?
+      attr_accessor encoding_type: String?
+      attr_accessor marker: String?
+      attr_accessor max_keys: Integer?
+      attr_accessor prefix: String?
+      attr_accessor request_payer: String?
+      attr_accessor expected_bucket_owner: String?
+      attr_accessor optional_object_attributes: Array[String]?
+    end
+
+    class ListObjectsV2Output
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?is_truncated: bool,
+        ?contents: Array[Types::Object],
+        ?name: String,
+        ?prefix: String,
+        ?delimiter: String,
+        ?max_keys: Integer,
+        ?common_prefixes: Array[Types::CommonPrefix],
+        ?encoding_type: String,
+        ?key_count: Integer,
+        ?continuation_token: String,
+        ?next_continuation_token: String,
+        ?start_after: String,
+        ?request_charged: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor is_truncated: bool?
+      attr_accessor contents: Array[Types::Object]?
+      attr_accessor name: String?
+      attr_accessor prefix: String?
+      attr_accessor delimiter: String?
+      attr_accessor max_keys: Integer?
+      attr_accessor common_prefixes: Array[Types::CommonPrefix]?
+      attr_accessor encoding_type: String?
+      attr_accessor key_count: Integer?
+      attr_accessor continuation_token: String?
+      attr_accessor next_continuation_token: String?
+      attr_accessor start_after: String?
+      attr_accessor request_charged: String?
+    end
+
+    class ListObjectsV2Request
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?delimiter: String,
+        ?encoding_type: String,
+        ?max_keys: Integer,
+        ?prefix: String,
+        ?continuation_token: String,
+        ?fetch_owner: bool,
+        ?start_after: String,
+        ?request_payer: String,
+        ?expected_bucket_owner: String,
+        ?optional_object_attributes: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor delimiter: String?
+      attr_accessor encoding_type: String?
+      attr_accessor max_keys: Integer?
+      attr_accessor prefix: String?
+      attr_accessor continuation_token: String?
+      attr_accessor fetch_owner: bool?
+      attr_accessor start_after: String?
+      attr_accessor request_payer: String?
+      attr_accessor expected_bucket_owner: String?
+      attr_accessor optional_object_attributes: Array[String]?
+    end
+
+    class ListPartsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?abort_date: Time,
+        ?abort_rule_id: String,
+        ?bucket: String,
+        ?key: String,
+        ?upload_id: String,
+        ?part_number_marker: String,
+        ?next_part_number_marker: String,
+        ?max_parts: Integer,
+        ?is_truncated: bool,
+        ?parts: Array[Types::Part],
+        ?initiator: Types::Initiator,
+        ?owner: Types::Owner,
+        ?storage_class: String,
+        ?request_charged: String,
+        ?checksum_algorithm: String,
+        ?checksum_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor abort_date: Time?
+      attr_accessor abort_rule_id: String?
+      attr_accessor bucket: String?
+      attr_accessor key: String?
+      attr_accessor upload_id: String?
+      attr_accessor part_number_marker: String?
+      attr_accessor next_part_number_marker: String?
+      attr_accessor max_parts: Integer?
+      attr_accessor is_truncated: bool?
+      attr_accessor parts: Array[Types::Part]?
+      attr_accessor initiator: Types::Initiator?
+      attr_accessor owner: Types::Owner?
+      attr_accessor storage_class: String?
+      attr_accessor request_charged: String?
+      attr_accessor checksum_algorithm: String?
+      attr_accessor checksum_type: String?
+    end
+
+    class ListPartsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?key: String,
+        ?max_parts: Integer,
+        ?part_number_marker: String,
+        ?upload_id: String,
+        ?request_payer: String,
+        ?expected_bucket_owner: String,
+        ?sse_customer_algorithm: String,
+        ?sse_customer_key: String,
+        ?sse_customer_key_md5: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor key: String?
+      attr_accessor max_parts: Integer?
+      attr_accessor part_number_marker: String?
+      attr_accessor upload_id: String?
+      attr_accessor request_payer: String?
+      attr_accessor expected_bucket_owner: String?
+      attr_accessor sse_customer_algorithm: String?
+      attr_accessor sse_customer_key: String?
+      attr_accessor sse_customer_key_md5: String?
+    end
+
+    class LocationInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor name: String?
+    end
+
+    module LocationType
+      AvailabilityZone: String
+      LocalZone: String
+    end
+
+    class LoggingEnabled
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?target_bucket: String,
+        ?target_grants: Array[Types::TargetGrant],
+        ?target_prefix: String,
+        ?target_object_key_format: Types::TargetObjectKeyFormat,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor target_bucket: String?
+      attr_accessor target_grants: Array[Types::TargetGrant]?
+      attr_accessor target_prefix: String?
+      attr_accessor target_object_key_format: Types::TargetObjectKeyFormat?
+    end
+
+    module MFADelete
+      Enabled: String
+      Disabled: String
+    end
+
+    module MFADeleteStatus
+      Enabled: String
+      Disabled: String
+    end
+
+    class MetadataConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?journal_table_configuration: Types::JournalTableConfiguration,
+        ?inventory_table_configuration: Types::InventoryTableConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor journal_table_configuration: Types::JournalTableConfiguration?
+      attr_accessor inventory_table_configuration: Types::InventoryTableConfiguration?
+    end
+
+    class MetadataConfigurationResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?destination_result: Types::DestinationResult,
+        ?journal_table_configuration_result: Types::JournalTableConfigurationResult,
+        ?inventory_table_configuration_result: Types::InventoryTableConfigurationResult,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor destination_result: Types::DestinationResult?
+      attr_accessor journal_table_configuration_result: Types::JournalTableConfigurationResult?
+      attr_accessor inventory_table_configuration_result: Types::InventoryTableConfigurationResult?
+    end
+
+    module MetadataDirective
+      COPY: String
+      REPLACE: String
+    end
+
+    class MetadataEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor value: String?
+    end
+
+    class MetadataTableConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3_tables_destination: Types::S3TablesDestination,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3_tables_destination: Types::S3TablesDestination?
+    end
+
+    class MetadataTableConfigurationResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3_tables_destination_result: Types::S3TablesDestinationResult,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3_tables_destination_result: Types::S3TablesDestinationResult?
+    end
+
+    class MetadataTableEncryptionConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sse_algorithm: String,
+        ?kms_key_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sse_algorithm: String?
+      attr_accessor kms_key_arn: String?
+    end
+
+    class Metrics
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?event_threshold: Types::ReplicationTimeValue,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor event_threshold: Types::ReplicationTimeValue?
+    end
+
+    class MetricsAndOperator
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?prefix: String,
+        ?tags: Array[Types::Tag],
+        ?access_point_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor prefix: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor access_point_arn: String?
+    end
+
+    class MetricsConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?filter: Types::MetricsFilter,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor filter: Types::MetricsFilter?
+    end
+
+    class MetricsFilter
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?prefix: String,
+        ?tag: Types::Tag,
+        ?access_point_arn: String,
+        ?and: Types::MetricsAndOperator,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor prefix: String?
+      attr_accessor tag: Types::Tag?
+      attr_accessor access_point_arn: String?
+      attr_accessor and: Types::MetricsAndOperator?
+
+      class Prefix < MetricsFilter
+      end
+      class Tag < MetricsFilter
+      end
+      class AccessPointArn < MetricsFilter
+      end
+      class And < MetricsFilter
+      end
+      class Unknown < MetricsFilter
+      end
+    end
+
+    module MetricsStatus
+      Enabled: String
+      Disabled: String
+    end
+
+    class MultipartUpload
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?upload_id: String,
+        ?key: String,
+        ?initiated: Time,
+        ?storage_class: String,
+        ?owner: Types::Owner,
+        ?initiator: Types::Initiator,
+        ?checksum_algorithm: String,
+        ?checksum_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor upload_id: String?
+      attr_accessor key: String?
+      attr_accessor initiated: Time?
+      attr_accessor storage_class: String?
+      attr_accessor owner: Types::Owner?
+      attr_accessor initiator: Types::Initiator?
+      attr_accessor checksum_algorithm: String?
+      attr_accessor checksum_type: String?
+    end
+
+    class NoSuchBucket
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class NoSuchKey
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class NoSuchUpload
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class NoncurrentVersionExpiration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?noncurrent_days: Integer,
+        ?newer_noncurrent_versions: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor noncurrent_days: Integer?
+      attr_accessor newer_noncurrent_versions: Integer?
+    end
+
+    class NoncurrentVersionTransition
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?noncurrent_days: Integer,
+        ?storage_class: String,
+        ?newer_noncurrent_versions: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor noncurrent_days: Integer?
+      attr_accessor storage_class: String?
+      attr_accessor newer_noncurrent_versions: Integer?
+    end
+
+    class NotFound
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class NotificationConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?topic_configurations: Array[Types::TopicConfiguration],
+        ?queue_configurations: Array[Types::QueueConfiguration],
+        ?lambda_function_configurations: Array[Types::LambdaFunctionConfiguration],
+        ?event_bridge_configuration: Types::EventBridgeConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor topic_configurations: Array[Types::TopicConfiguration]?
+      attr_accessor queue_configurations: Array[Types::QueueConfiguration]?
+      attr_accessor lambda_function_configurations: Array[Types::LambdaFunctionConfiguration]?
+      attr_accessor event_bridge_configuration: Types::EventBridgeConfiguration?
+    end
+
+    class NotificationConfigurationFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: Types::S3KeyFilter,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: Types::S3KeyFilter?
+    end
+
+    class Object
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?last_modified: Time,
+        ?e_tag: String,
+        ?checksum_algorithm: Array[String],
+        ?checksum_type: String,
+        ?size: Integer,
+        ?storage_class: String,
+        ?owner: Types::Owner,
+        ?restore_status: Types::RestoreStatus,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor last_modified: Time?
+      attr_accessor e_tag: String?
+      attr_accessor checksum_algorithm: Array[String]?
+      attr_accessor checksum_type: String?
+      attr_accessor size: Integer?
+      attr_accessor storage_class: String?
+      attr_accessor owner: Types::Owner?
+      attr_accessor restore_status: Types::RestoreStatus?
+    end
+
+    class ObjectAlreadyInActiveTierError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    module ObjectAttributes
+      ETAG: String
+      CHECKSUM: String
+      OBJECT_PARTS: String
+      STORAGE_CLASS: String
+      OBJECT_SIZE: String
+    end
+
+    module ObjectCannedACL
+      private: String
+      public_read: String
+      public_read_write: String
+      authenticated_read: String
+      aws_exec_read: String
+      bucket_owner_read: String
+      bucket_owner_full_control: String
+    end
+
+    class ObjectIdentifier
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?version_id: String,
+        ?e_tag: String,
+        ?last_modified_time: Time,
+        ?size: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor version_id: String?
+      attr_accessor e_tag: String?
+      attr_accessor last_modified_time: Time?
+      attr_accessor size: Integer?
+    end
+
+    class ObjectLockConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?object_lock_enabled: String,
+        ?rule: Types::ObjectLockRule,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor object_lock_enabled: String?
+      attr_accessor rule: Types::ObjectLockRule?
+    end
+
+    module ObjectLockEnabled
+      Enabled: String
+    end
+
+    class ObjectLockLegalHold
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+    end
+
+    module ObjectLockLegalHoldStatus
+      ON: String
+      OFF: String
+    end
+
+    module ObjectLockMode
+      GOVERNANCE: String
+      COMPLIANCE: String
+    end
+
+    class ObjectLockRetention
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?mode: String,
+        ?retain_until_date: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor mode: String?
+      attr_accessor retain_until_date: Time?
+    end
+
+    module ObjectLockRetentionMode
+      GOVERNANCE: String
+      COMPLIANCE: String
+    end
+
+    class ObjectLockRule
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?default_retention: Types::DefaultRetention,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor default_retention: Types::DefaultRetention?
+    end
+
+    class ObjectNotInActiveTierError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    module ObjectOwnership
+      BucketOwnerPreferred: String
+      ObjectWriter: String
+      BucketOwnerEnforced: String
+    end
+
+    class ObjectPart
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?part_number: Integer,
+        ?size: Integer,
+        ?checksum_crc32: String,
+        ?checksum_crc32_c: String,
+        ?checksum_crc64_nvme: String,
+        ?checksum_sha1: String,
+        ?checksum_sha256: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor part_number: Integer?
+      attr_accessor size: Integer?
+      attr_accessor checksum_crc32: String?
+      attr_accessor checksum_crc32_c: String?
+      attr_accessor checksum_crc64_nvme: String?
+      attr_accessor checksum_sha1: String?
+      attr_accessor checksum_sha256: String?
+    end
+
+    module ObjectStorageClass
+      STANDARD: String
+      REDUCED_REDUNDANCY: String
+      GLACIER: String
+      STANDARD_IA: String
+      ONEZONE_IA: String
+      INTELLIGENT_TIERING: String
+      DEEP_ARCHIVE: String
+      OUTPOSTS: String
+      GLACIER_IR: String
+      SNOW: String
+      EXPRESS_ONEZONE: String
+      FSX_OPENZFS: String
+    end
+
+    class ObjectVersion
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?e_tag: String,
+        ?checksum_algorithm: Array[String],
+        ?checksum_type: String,
+        ?size: Integer,
+        ?storage_class: String,
+        ?key: String,
+        ?version_id: String,
+        ?is_latest: bool,
+        ?last_modified: Time,
+        ?owner: Types::Owner,
+        ?restore_status: Types::RestoreStatus,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor e_tag: String?
+      attr_accessor checksum_algorithm: Array[String]?
+      attr_accessor checksum_type: String?
+      attr_accessor size: Integer?
+      attr_accessor storage_class: String?
+      attr_accessor key: String?
+      attr_accessor version_id: String?
+      attr_accessor is_latest: bool?
+      attr_accessor last_modified: Time?
+      attr_accessor owner: Types::Owner?
+      attr_accessor restore_status: Types::RestoreStatus?
+    end
+
+    module ObjectVersionStorageClass
+      STANDARD: String
+    end
+
+    module OptionalObjectAttributes
+      RESTORE_STATUS: String
+    end
+
+    class OutputLocation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3: Types::S3Location,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3: Types::S3Location?
+    end
+
+    class OutputSerialization
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?csv: Types::CSVOutput,
+        ?json: Types::JSONOutput,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor csv: Types::CSVOutput?
+      attr_accessor json: Types::JSONOutput?
+    end
+
+    class Owner
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?display_name: String,
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor display_name: String?
+      attr_accessor id: String?
+    end
+
+    module OwnerOverride
+      Destination: String
+    end
+
+    class OwnershipControls
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rules: Array[Types::OwnershipControlsRule],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rules: Array[Types::OwnershipControlsRule]?
+    end
+
+    class OwnershipControlsRule
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?object_ownership: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor object_ownership: String?
+    end
+
+    class ParquetInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class Part
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?part_number: Integer,
+        ?last_modified: Time,
+        ?e_tag: String,
+        ?size: Integer,
+        ?checksum_crc32: String,
+        ?checksum_crc32_c: String,
+        ?checksum_crc64_nvme: String,
+        ?checksum_sha1: String,
+        ?checksum_sha256: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor part_number: Integer?
+      attr_accessor last_modified: Time?
+      attr_accessor e_tag: String?
+      attr_accessor size: Integer?
+      attr_accessor checksum_crc32: String?
+      attr_accessor checksum_crc32_c: String?
+      attr_accessor checksum_crc64_nvme: String?
+      attr_accessor checksum_sha1: String?
+      attr_accessor checksum_sha256: String?
+    end
+
+    module PartitionDateSource
+      EventTime: String
+      DeliveryTime: String
+    end
+
+    class PartitionedPrefix
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?partition_date_source: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor partition_date_source: String?
+    end
+
+    module Payer
+      Requester: String
+      BucketOwner: String
+    end
+
+    module Permission
+      FULL_CONTROL: String
+      WRITE: String
+      WRITE_ACP: String
+      READ: String
+      READ_ACP: String
+    end
+
+    class PolicyStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?is_public: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor is_public: bool?
+    end
+
+    class Progress
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bytes_scanned: Integer,
+        ?bytes_processed: Integer,
+        ?bytes_returned: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bytes_scanned: Integer?
+      attr_accessor bytes_processed: Integer?
+      attr_accessor bytes_returned: Integer?
+    end
+
+    class ProgressEvent
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?details: Types::Progress,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor details: Types::Progress?
+    end
+
+    module Protocol
+      http: String
+      https: String
+    end
+
+    class PublicAccessBlockConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?block_public_acls: bool,
+        ?ignore_public_acls: bool,
+        ?block_public_policy: bool,
+        ?restrict_public_buckets: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor block_public_acls: bool?
+      attr_accessor ignore_public_acls: bool?
+      attr_accessor block_public_policy: bool?
+      attr_accessor restrict_public_buckets: bool?
+    end
+
+    class PutBucketAccelerateConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?accelerate_configuration: Types::AccelerateConfiguration,
+        ?expected_bucket_owner: String,
+        ?checksum_algorithm: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor accelerate_configuration: Types::AccelerateConfiguration?
+      attr_accessor expected_bucket_owner: String?
+      attr_accessor checksum_algorithm: String?
+    end
+
+    class PutBucketAclRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?acl: String,
+        ?access_control_policy: Types::AccessControlPolicy,
+        ?bucket: String,
+        ?content_md5: String,
+        ?checksum_algorithm: String,
+        ?grant_full_control: String,
+        ?grant_read: String,
+        ?grant_read_acp: String,
+        ?grant_write: String,
+        ?grant_write_acp: String,
+        ?expected_bucket_owner: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor acl: String?
+      attr_accessor access_control_policy: Types::AccessControlPolicy?
+      attr_accessor bucket: String?
+      attr_accessor content_md5: String?
+      attr_accessor checksum_algorithm: String?
+      attr_accessor grant_full_control: String?
+      attr_accessor grant_read: String?
+      attr_accessor grant_read_acp: String?
+      attr_accessor grant_write: String?
+      attr_accessor grant_write_acp: String?
+      attr_accessor expected_bucket_owner: String?
+    end
+
+    class PutBucketAnalyticsConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?id: String,
+        ?analytics_configuration: Types::AnalyticsConfiguration,
+        ?expected_bucket_owner: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor id: String?
+      attr_accessor analytics_configuration: Types::AnalyticsConfiguration?
+      attr_accessor expected_bucket_owner: String?
+    end
+
+    class PutBucketCorsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?cors_configuration: Types::CORSConfiguration,
+        ?content_md5: String,
+        ?checksum_algorithm: String,
+        ?expected_bucket_owner: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor cors_configuration: Types::CORSConfiguration?
+      attr_accessor content_md5: String?
+      attr_accessor checksum_algorithm: String?
+      attr_accessor expected_bucket_owner: String?
+    end
+
+    class PutBucketEncryptionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?content_md5: String,
+        ?checksum_algorithm: String,
+        ?server_side_encryption_configuration: Types::ServerSideEncryptionConfiguration,
+        ?expected_bucket_owner: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor content_md5: String?
+      attr_accessor checksum_algorithm: String?
+      attr_accessor server_side_encryption_configuration: Types::ServerSideEncryptionConfiguration?
+      attr_accessor expected_bucket_owner: String?
+    end
+
+    class PutBucketIntelligentTieringConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?id: String,
+        ?expected_bucket_owner: String,
+        ?intelligent_tiering_configuration: Types::IntelligentTieringConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor id: String?
+      attr_accessor expected_bucket_owner: String?
+      attr_accessor intelligent_tiering_configuration: Types::IntelligentTieringConfiguration?
+    end
+
+    class PutBucketInventoryConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?id: String,
+        ?inventory_configuration: Types::InventoryConfiguration,
+        ?expected_bucket_owner: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor id: String?
+      attr_accessor inventory_configuration: Types::InventoryConfiguration?
+      attr_accessor expected_bucket_owner: String?
+    end
+
+    class PutBucketLifecycleConfigurationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?transition_default_minimum_object_size: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor transition_default_minimum_object_size: String?
+    end
+
+    class PutBucketLifecycleConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?checksum_algorithm: String,
+        ?lifecycle_configuration: Types::BucketLifecycleConfiguration,
+        ?expected_bucket_owner: String,
+        ?transition_default_minimum_object_size: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor checksum_algorithm: String?
+      attr_accessor lifecycle_configuration: Types::BucketLifecycleConfiguration?
+      attr_accessor expected_bucket_owner: String?
+      attr_accessor transition_default_minimum_object_size: String?
+    end
+
+    class PutBucketLoggingRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?bucket_logging_status: Types::BucketLoggingStatus,
+        ?content_md5: String,
+        ?checksum_algorithm: String,
+        ?expected_bucket_owner: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor bucket_logging_status: Types::BucketLoggingStatus?
+      attr_accessor content_md5: String?
+      attr_accessor checksum_algorithm: String?
+      attr_accessor expected_bucket_owner: String?
+    end
+
+    class PutBucketMetricsConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?id: String,
+        ?metrics_configuration: Types::MetricsConfiguration,
+        ?expected_bucket_owner: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor id: String?
+      attr_accessor metrics_configuration: Types::MetricsConfiguration?
+      attr_accessor expected_bucket_owner: String?
+    end
+
+    class PutBucketNotificationConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?notification_configuration: Types::NotificationConfiguration,
+        ?expected_bucket_owner: String,
+        ?skip_destination_validation: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor notification_configuration: Types::NotificationConfiguration?
+      attr_accessor expected_bucket_owner: String?
+      attr_accessor skip_destination_validation: bool?
+    end
+
+    class PutBucketOwnershipControlsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?content_md5: String,
+        ?expected_bucket_owner: String,
+        ?ownership_controls: Types::OwnershipControls,
+        ?checksum_algorithm: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor content_md5: String?
+      attr_accessor expected_bucket_owner: String?
+      attr_accessor ownership_controls: Types::OwnershipControls?
+      attr_accessor checksum_algorithm: String?
+    end
+
+    class PutBucketPolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?content_md5: String,
+        ?checksum_algorithm: String,
+        ?confirm_remove_self_bucket_access: bool,
+        ?policy: String,
+        ?expected_bucket_owner: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor content_md5: String?
+      attr_accessor checksum_algorithm: String?
+      attr_accessor confirm_remove_self_bucket_access: bool?
+      attr_accessor policy: String?
+      attr_accessor expected_bucket_owner: String?
+    end
+
+    class PutBucketReplicationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?content_md5: String,
+        ?checksum_algorithm: String,
+        ?replication_configuration: Types::ReplicationConfiguration,
+        ?token: String,
+        ?expected_bucket_owner: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor content_md5: String?
+      attr_accessor checksum_algorithm: String?
+      attr_accessor replication_configuration: Types::ReplicationConfiguration?
+      attr_accessor token: String?
+      attr_accessor expected_bucket_owner: String?
+    end
+
+    class PutBucketRequestPaymentRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?content_md5: String,
+        ?checksum_algorithm: String,
+        ?request_payment_configuration: Types::RequestPaymentConfiguration,
+        ?expected_bucket_owner: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor content_md5: String?
+      attr_accessor checksum_algorithm: String?
+      attr_accessor request_payment_configuration: Types::RequestPaymentConfiguration?
+      attr_accessor expected_bucket_owner: String?
+    end
+
+    class PutBucketTaggingRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?content_md5: String,
+        ?checksum_algorithm: String,
+        ?tagging: Types::Tagging,
+        ?expected_bucket_owner: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor content_md5: String?
+      attr_accessor checksum_algorithm: String?
+      attr_accessor tagging: Types::Tagging?
+      attr_accessor expected_bucket_owner: String?
+    end
+
+    class PutBucketVersioningRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?content_md5: String,
+        ?checksum_algorithm: String,
+        ?mfa: String,
+        ?versioning_configuration: Types::VersioningConfiguration,
+        ?expected_bucket_owner: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor content_md5: String?
+      attr_accessor checksum_algorithm: String?
+      attr_accessor mfa: String?
+      attr_accessor versioning_configuration: Types::VersioningConfiguration?
+      attr_accessor expected_bucket_owner: String?
+    end
+
+    class PutBucketWebsiteRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?content_md5: String,
+        ?checksum_algorithm: String,
+        ?website_configuration: Types::WebsiteConfiguration,
+        ?expected_bucket_owner: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor content_md5: String?
+      attr_accessor checksum_algorithm: String?
+      attr_accessor website_configuration: Types::WebsiteConfiguration?
+      attr_accessor expected_bucket_owner: String?
+    end
+
+    class PutObjectAclOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?request_charged: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor request_charged: String?
+    end
+
+    class PutObjectAclRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?acl: String,
+        ?access_control_policy: Types::AccessControlPolicy,
+        ?bucket: String,
+        ?content_md5: String,
+        ?checksum_algorithm: String,
+        ?grant_full_control: String,
+        ?grant_read: String,
+        ?grant_read_acp: String,
+        ?grant_write: String,
+        ?grant_write_acp: String,
+        ?key: String,
+        ?request_payer: String,
+        ?version_id: String,
+        ?expected_bucket_owner: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor acl: String?
+      attr_accessor access_control_policy: Types::AccessControlPolicy?
+      attr_accessor bucket: String?
+      attr_accessor content_md5: String?
+      attr_accessor checksum_algorithm: String?
+      attr_accessor grant_full_control: String?
+      attr_accessor grant_read: String?
+      attr_accessor grant_read_acp: String?
+      attr_accessor grant_write: String?
+      attr_accessor grant_write_acp: String?
+      attr_accessor key: String?
+      attr_accessor request_payer: String?
+      attr_accessor version_id: String?
+      attr_accessor expected_bucket_owner: String?
+    end
+
+    class PutObjectLegalHoldOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?request_charged: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor request_charged: String?
+    end
+
+    class PutObjectLegalHoldRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?key: String,
+        ?legal_hold: Types::ObjectLockLegalHold,
+        ?request_payer: String,
+        ?version_id: String,
+        ?content_md5: String,
+        ?checksum_algorithm: String,
+        ?expected_bucket_owner: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor key: String?
+      attr_accessor legal_hold: Types::ObjectLockLegalHold?
+      attr_accessor request_payer: String?
+      attr_accessor version_id: String?
+      attr_accessor content_md5: String?
+      attr_accessor checksum_algorithm: String?
+      attr_accessor expected_bucket_owner: String?
+    end
+
+    class PutObjectLockConfigurationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?request_charged: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor request_charged: String?
+    end
+
+    class PutObjectLockConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?object_lock_configuration: Types::ObjectLockConfiguration,
+        ?request_payer: String,
+        ?token: String,
+        ?content_md5: String,
+        ?checksum_algorithm: String,
+        ?expected_bucket_owner: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor object_lock_configuration: Types::ObjectLockConfiguration?
+      attr_accessor request_payer: String?
+      attr_accessor token: String?
+      attr_accessor content_md5: String?
+      attr_accessor checksum_algorithm: String?
+      attr_accessor expected_bucket_owner: String?
+    end
+
+    class PutObjectOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?expiration: String,
+        ?e_tag: String,
+        ?checksum_crc32: String,
+        ?checksum_crc32_c: String,
+        ?checksum_crc64_nvme: String,
+        ?checksum_sha1: String,
+        ?checksum_sha256: String,
+        ?checksum_type: String,
+        ?server_side_encryption: String,
+        ?version_id: String,
+        ?sse_customer_algorithm: String,
+        ?sse_customer_key_md5: String,
+        ?ssekms_key_id: String,
+        ?ssekms_encryption_context: String,
+        ?bucket_key_enabled: bool,
+        ?size: Integer,
+        ?request_charged: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor expiration: String?
+      attr_accessor e_tag: String?
+      attr_accessor checksum_crc32: String?
+      attr_accessor checksum_crc32_c: String?
+      attr_accessor checksum_crc64_nvme: String?
+      attr_accessor checksum_sha1: String?
+      attr_accessor checksum_sha256: String?
+      attr_accessor checksum_type: String?
+      attr_accessor server_side_encryption: String?
+      attr_accessor version_id: String?
+      attr_accessor sse_customer_algorithm: String?
+      attr_accessor sse_customer_key_md5: String?
+      attr_accessor ssekms_key_id: String?
+      attr_accessor ssekms_encryption_context: String?
+      attr_accessor bucket_key_enabled: bool?
+      attr_accessor size: Integer?
+      attr_accessor request_charged: String?
+    end
+
+    class PutObjectRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?acl: String,
+        ?body: String,
+        ?bucket: String,
+        ?cache_control: String,
+        ?content_disposition: String,
+        ?content_encoding: String,
+        ?content_language: String,
+        ?content_length: Integer,
+        ?content_md5: String,
+        ?content_type: String,
+        ?checksum_algorithm: String,
+        ?checksum_crc32: String,
+        ?checksum_crc32_c: String,
+        ?checksum_crc64_nvme: String,
+        ?checksum_sha1: String,
+        ?checksum_sha256: String,
+        ?expires: String,
+        ?if_match: String,
+        ?if_none_match: String,
+        ?grant_full_control: String,
+        ?grant_read: String,
+        ?grant_read_acp: String,
+        ?grant_write_acp: String,
+        ?key: String,
+        ?write_offset_bytes: Integer,
+        ?metadata: Hash[String, String],
+        ?server_side_encryption: String,
+        ?storage_class: String,
+        ?website_redirect_location: String,
+        ?sse_customer_algorithm: String,
+        ?sse_customer_key: String,
+        ?sse_customer_key_md5: String,
+        ?ssekms_key_id: String,
+        ?ssekms_encryption_context: String,
+        ?bucket_key_enabled: bool,
+        ?request_payer: String,
+        ?tagging: String,
+        ?object_lock_mode: String,
+        ?object_lock_retain_until_date: Time,
+        ?object_lock_legal_hold_status: String,
+        ?expected_bucket_owner: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor acl: String?
+      attr_accessor body: String?
+      attr_accessor bucket: String?
+      attr_accessor cache_control: String?
+      attr_accessor content_disposition: String?
+      attr_accessor content_encoding: String?
+      attr_accessor content_language: String?
+      attr_accessor content_length: Integer?
+      attr_accessor content_md5: String?
+      attr_accessor content_type: String?
+      attr_accessor checksum_algorithm: String?
+      attr_accessor checksum_crc32: String?
+      attr_accessor checksum_crc32_c: String?
+      attr_accessor checksum_crc64_nvme: String?
+      attr_accessor checksum_sha1: String?
+      attr_accessor checksum_sha256: String?
+      attr_accessor expires: String?
+      attr_accessor if_match: String?
+      attr_accessor if_none_match: String?
+      attr_accessor grant_full_control: String?
+      attr_accessor grant_read: String?
+      attr_accessor grant_read_acp: String?
+      attr_accessor grant_write_acp: String?
+      attr_accessor key: String?
+      attr_accessor write_offset_bytes: Integer?
+      attr_accessor metadata: Hash[String, String]?
+      attr_accessor server_side_encryption: String?
+      attr_accessor storage_class: String?
+      attr_accessor website_redirect_location: String?
+      attr_accessor sse_customer_algorithm: String?
+      attr_accessor sse_customer_key: String?
+      attr_accessor sse_customer_key_md5: String?
+      attr_accessor ssekms_key_id: String?
+      attr_accessor ssekms_encryption_context: String?
+      attr_accessor bucket_key_enabled: bool?
+      attr_accessor request_payer: String?
+      attr_accessor tagging: String?
+      attr_accessor object_lock_mode: String?
+      attr_accessor object_lock_retain_until_date: Time?
+      attr_accessor object_lock_legal_hold_status: String?
+      attr_accessor expected_bucket_owner: String?
+    end
+
+    class PutObjectRetentionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?request_charged: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor request_charged: String?
+    end
+
+    class PutObjectRetentionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?key: String,
+        ?retention: Types::ObjectLockRetention,
+        ?request_payer: String,
+        ?version_id: String,
+        ?bypass_governance_retention: bool,
+        ?content_md5: String,
+        ?checksum_algorithm: String,
+        ?expected_bucket_owner: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor key: String?
+      attr_accessor retention: Types::ObjectLockRetention?
+      attr_accessor request_payer: String?
+      attr_accessor version_id: String?
+      attr_accessor bypass_governance_retention: bool?
+      attr_accessor content_md5: String?
+      attr_accessor checksum_algorithm: String?
+      attr_accessor expected_bucket_owner: String?
+    end
+
+    class PutObjectTaggingOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?version_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor version_id: String?
+    end
+
+    class PutObjectTaggingRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?key: String,
+        ?version_id: String,
+        ?content_md5: String,
+        ?checksum_algorithm: String,
+        ?tagging: Types::Tagging,
+        ?expected_bucket_owner: String,
+        ?request_payer: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor key: String?
+      attr_accessor version_id: String?
+      attr_accessor content_md5: String?
+      attr_accessor checksum_algorithm: String?
+      attr_accessor tagging: Types::Tagging?
+      attr_accessor expected_bucket_owner: String?
+      attr_accessor request_payer: String?
+    end
+
+    class PutPublicAccessBlockRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?content_md5: String,
+        ?checksum_algorithm: String,
+        ?public_access_block_configuration: Types::PublicAccessBlockConfiguration,
+        ?expected_bucket_owner: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor content_md5: String?
+      attr_accessor checksum_algorithm: String?
+      attr_accessor public_access_block_configuration: Types::PublicAccessBlockConfiguration?
+      attr_accessor expected_bucket_owner: String?
+    end
+
+    class QueueConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?queue_arn: String,
+        ?events: Array[String],
+        ?filter: Types::NotificationConfigurationFilter,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor queue_arn: String?
+      attr_accessor events: Array[String]?
+      attr_accessor filter: Types::NotificationConfigurationFilter?
+    end
+
+    module QuoteFields
+      ALWAYS: String
+      ASNEEDED: String
+    end
+
+    class RecordExpiration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?expiration: String,
+        ?days: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor expiration: String?
+      attr_accessor days: Integer?
+    end
+
+    class RecordsEvent
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?payload: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor payload: String?
+    end
+
+    class Redirect
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?host_name: String,
+        ?http_redirect_code: String,
+        ?protocol: String,
+        ?replace_key_prefix_with: String,
+        ?replace_key_with: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor host_name: String?
+      attr_accessor http_redirect_code: String?
+      attr_accessor protocol: String?
+      attr_accessor replace_key_prefix_with: String?
+      attr_accessor replace_key_with: String?
+    end
+
+    class RedirectAllRequestsTo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?host_name: String,
+        ?protocol: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor host_name: String?
+      attr_accessor protocol: String?
+    end
+
+    class RenameObjectOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class RenameObjectRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?key: String,
+        ?rename_source: String,
+        ?destination_if_match: String,
+        ?destination_if_none_match: String,
+        ?destination_if_modified_since: Time,
+        ?destination_if_unmodified_since: Time,
+        ?source_if_match: String,
+        ?source_if_none_match: String,
+        ?source_if_modified_since: Time,
+        ?source_if_unmodified_since: Time,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor key: String?
+      attr_accessor rename_source: String?
+      attr_accessor destination_if_match: String?
+      attr_accessor destination_if_none_match: String?
+      attr_accessor destination_if_modified_since: Time?
+      attr_accessor destination_if_unmodified_since: Time?
+      attr_accessor source_if_match: String?
+      attr_accessor source_if_none_match: String?
+      attr_accessor source_if_modified_since: Time?
+      attr_accessor source_if_unmodified_since: Time?
+      attr_accessor client_token: String?
+    end
+
+    class ReplicaModifications
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+    end
+
+    module ReplicaModificationsStatus
+      Enabled: String
+      Disabled: String
+    end
+
+    class ReplicationConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?role: String,
+        ?rules: Array[Types::ReplicationRule],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor role: String?
+      attr_accessor rules: Array[Types::ReplicationRule]?
+    end
+
+    class ReplicationRule
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?priority: Integer,
+        ?prefix: String,
+        ?filter: Types::ReplicationRuleFilter,
+        ?status: String,
+        ?source_selection_criteria: Types::SourceSelectionCriteria,
+        ?existing_object_replication: Types::ExistingObjectReplication,
+        ?destination: Types::Destination,
+        ?delete_marker_replication: Types::DeleteMarkerReplication,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor priority: Integer?
+      attr_accessor prefix: String?
+      attr_accessor filter: Types::ReplicationRuleFilter?
+      attr_accessor status: String?
+      attr_accessor source_selection_criteria: Types::SourceSelectionCriteria?
+      attr_accessor existing_object_replication: Types::ExistingObjectReplication?
+      attr_accessor destination: Types::Destination?
+      attr_accessor delete_marker_replication: Types::DeleteMarkerReplication?
+    end
+
+    class ReplicationRuleAndOperator
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?prefix: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor prefix: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class ReplicationRuleFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?prefix: String,
+        ?tag: Types::Tag,
+        ?and: Types::ReplicationRuleAndOperator,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor prefix: String?
+      attr_accessor tag: Types::Tag?
+      attr_accessor and: Types::ReplicationRuleAndOperator?
+    end
+
+    module ReplicationRuleStatus
+      Enabled: String
+      Disabled: String
+    end
+
+    module ReplicationStatus
+      COMPLETE: String
+      PENDING: String
+      FAILED: String
+      REPLICA: String
+      COMPLETED: String
+    end
+
+    class ReplicationTime
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?time: Types::ReplicationTimeValue,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor time: Types::ReplicationTimeValue?
+    end
+
+    module ReplicationTimeStatus
+      Enabled: String
+      Disabled: String
+    end
+
+    class ReplicationTimeValue
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?minutes: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor minutes: Integer?
+    end
+
+    module RequestCharged
+      requester: String
+    end
+
+    module RequestPayer
+      requester: String
+    end
+
+    class RequestPaymentConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?payer: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor payer: String?
+    end
+
+    class RequestProgress
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enabled: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enabled: bool?
+    end
+
+    class RestoreObjectOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?request_charged: String,
+        ?restore_output_path: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor request_charged: String?
+      attr_accessor restore_output_path: String?
+    end
+
+    class RestoreObjectRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?key: String,
+        ?version_id: String,
+        ?restore_request: Types::RestoreRequest,
+        ?request_payer: String,
+        ?checksum_algorithm: String,
+        ?expected_bucket_owner: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor key: String?
+      attr_accessor version_id: String?
+      attr_accessor restore_request: Types::RestoreRequest?
+      attr_accessor request_payer: String?
+      attr_accessor checksum_algorithm: String?
+      attr_accessor expected_bucket_owner: String?
+    end
+
+    class RestoreRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?days: Integer,
+        ?glacier_job_parameters: Types::GlacierJobParameters,
+        ?type: String,
+        ?tier: String,
+        ?description: String,
+        ?select_parameters: Types::SelectParameters,
+        ?output_location: Types::OutputLocation,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor days: Integer?
+      attr_accessor glacier_job_parameters: Types::GlacierJobParameters?
+      attr_accessor type: String?
+      attr_accessor tier: String?
+      attr_accessor description: String?
+      attr_accessor select_parameters: Types::SelectParameters?
+      attr_accessor output_location: Types::OutputLocation?
+    end
+
+    module RestoreRequestType
+      SELECT: String
+    end
+
+    class RestoreStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?is_restore_in_progress: bool,
+        ?restore_expiry_date: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor is_restore_in_progress: bool?
+      attr_accessor restore_expiry_date: Time?
+    end
+
+    class RoutingRule
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?condition: Types::Condition,
+        ?redirect: Types::Redirect,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor condition: Types::Condition?
+      attr_accessor redirect: Types::Redirect?
+    end
+
+    class S3KeyFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?filter_rules: Array[Types::FilterRule],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor filter_rules: Array[Types::FilterRule]?
+    end
+
+    class S3Location
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket_name: String,
+        ?prefix: String,
+        ?encryption: Types::Encryption,
+        ?canned_acl: String,
+        ?access_control_list: Array[Types::Grant],
+        ?tagging: Types::Tagging,
+        ?user_metadata: Array[Types::MetadataEntry],
+        ?storage_class: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket_name: String?
+      attr_accessor prefix: String?
+      attr_accessor encryption: Types::Encryption?
+      attr_accessor canned_acl: String?
+      attr_accessor access_control_list: Array[Types::Grant]?
+      attr_accessor tagging: Types::Tagging?
+      attr_accessor user_metadata: Array[Types::MetadataEntry]?
+      attr_accessor storage_class: String?
+    end
+
+    module S3TablesBucketType
+      aws: String
+      customer: String
+    end
+
+    class S3TablesDestination
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?table_bucket_arn: String,
+        ?table_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor table_bucket_arn: String?
+      attr_accessor table_name: String?
+    end
+
+    class S3TablesDestinationResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?table_bucket_arn: String,
+        ?table_name: String,
+        ?table_arn: String,
+        ?table_namespace: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor table_bucket_arn: String?
+      attr_accessor table_name: String?
+      attr_accessor table_arn: String?
+      attr_accessor table_namespace: String?
+    end
+
+    class SSEKMS
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_id: String?
+    end
+
+    class SSES3
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ScanRange
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?start: Integer,
+        ?end: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor start: Integer?
+      attr_accessor end: Integer?
+    end
+
+    class SelectObjectContentEventStream
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?records: Types::RecordsEvent,
+        ?stats: Types::StatsEvent,
+        ?progress: Types::ProgressEvent,
+        ?cont: Types::ContinuationEvent,
+        ?end: Types::EndEvent,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor records: Types::RecordsEvent?
+      attr_accessor stats: Types::StatsEvent?
+      attr_accessor progress: Types::ProgressEvent?
+      attr_accessor cont: Types::ContinuationEvent?
+      attr_accessor end: Types::EndEvent?
+
+      class Records < SelectObjectContentEventStream
+      end
+      class Stats < SelectObjectContentEventStream
+      end
+      class Progress < SelectObjectContentEventStream
+      end
+      class Cont < SelectObjectContentEventStream
+      end
+      class End < SelectObjectContentEventStream
+      end
+      class Unknown < SelectObjectContentEventStream
+      end
+    end
+
+    class SelectObjectContentOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?payload: Types::SelectObjectContentEventStream,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor payload: Types::SelectObjectContentEventStream?
+    end
+
+    class SelectObjectContentRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?key: String,
+        ?sse_customer_algorithm: String,
+        ?sse_customer_key: String,
+        ?sse_customer_key_md5: String,
+        ?expression: String,
+        ?expression_type: String,
+        ?request_progress: Types::RequestProgress,
+        ?input_serialization: Types::InputSerialization,
+        ?output_serialization: Types::OutputSerialization,
+        ?scan_range: Types::ScanRange,
+        ?expected_bucket_owner: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor key: String?
+      attr_accessor sse_customer_algorithm: String?
+      attr_accessor sse_customer_key: String?
+      attr_accessor sse_customer_key_md5: String?
+      attr_accessor expression: String?
+      attr_accessor expression_type: String?
+      attr_accessor request_progress: Types::RequestProgress?
+      attr_accessor input_serialization: Types::InputSerialization?
+      attr_accessor output_serialization: Types::OutputSerialization?
+      attr_accessor scan_range: Types::ScanRange?
+      attr_accessor expected_bucket_owner: String?
+    end
+
+    class SelectParameters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?input_serialization: Types::InputSerialization,
+        ?expression_type: String,
+        ?expression: String,
+        ?output_serialization: Types::OutputSerialization,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor input_serialization: Types::InputSerialization?
+      attr_accessor expression_type: String?
+      attr_accessor expression: String?
+      attr_accessor output_serialization: Types::OutputSerialization?
+    end
+
+    module ServerSideEncryption
+      AES256: String
+      aws_fsx: String
+      aws_kms: String
+      aws_kms_dsse: String
+    end
+
+    class ServerSideEncryptionByDefault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sse_algorithm: String,
+        ?kms_master_key_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sse_algorithm: String?
+      attr_accessor kms_master_key_id: String?
+    end
+
+    class ServerSideEncryptionConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rules: Array[Types::ServerSideEncryptionRule],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rules: Array[Types::ServerSideEncryptionRule]?
+    end
+
+    class ServerSideEncryptionRule
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?apply_server_side_encryption_by_default: Types::ServerSideEncryptionByDefault,
+        ?bucket_key_enabled: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor apply_server_side_encryption_by_default: Types::ServerSideEncryptionByDefault?
+      attr_accessor bucket_key_enabled: bool?
+    end
+
+    class SessionCredentials
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?access_key_id: String,
+        ?secret_access_key: String,
+        ?session_token: String,
+        ?expiration: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor access_key_id: String?
+      attr_accessor secret_access_key: String?
+      attr_accessor session_token: String?
+      attr_accessor expiration: Time?
+    end
+
+    module SessionMode
+      ReadOnly: String
+      ReadWrite: String
+    end
+
+    class SimplePrefix
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class SourceSelectionCriteria
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sse_kms_encrypted_objects: Types::SseKmsEncryptedObjects,
+        ?replica_modifications: Types::ReplicaModifications,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sse_kms_encrypted_objects: Types::SseKmsEncryptedObjects?
+      attr_accessor replica_modifications: Types::ReplicaModifications?
+    end
+
+    class SseKmsEncryptedObjects
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+    end
+
+    module SseKmsEncryptedObjectsStatus
+      Enabled: String
+      Disabled: String
+    end
+
+    class Stats
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bytes_scanned: Integer,
+        ?bytes_processed: Integer,
+        ?bytes_returned: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bytes_scanned: Integer?
+      attr_accessor bytes_processed: Integer?
+      attr_accessor bytes_returned: Integer?
+    end
+
+    class StatsEvent
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?details: Types::Stats,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor details: Types::Stats?
+    end
+
+    module StorageClass
+      STANDARD: String
+      REDUCED_REDUNDANCY: String
+      STANDARD_IA: String
+      ONEZONE_IA: String
+      INTELLIGENT_TIERING: String
+      GLACIER: String
+      DEEP_ARCHIVE: String
+      OUTPOSTS: String
+      GLACIER_IR: String
+      SNOW: String
+      EXPRESS_ONEZONE: String
+      FSX_OPENZFS: String
+    end
+
+    class StorageClassAnalysis
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data_export: Types::StorageClassAnalysisDataExport,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_export: Types::StorageClassAnalysisDataExport?
+    end
+
+    class StorageClassAnalysisDataExport
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?output_schema_version: String,
+        ?destination: Types::AnalyticsExportDestination,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor output_schema_version: String?
+      attr_accessor destination: Types::AnalyticsExportDestination?
+    end
+
+    module StorageClassAnalysisSchemaVersion
+      V_1: String
+    end
+
+    module TableSseAlgorithm
+      aws_kms: String
+      AES256: String
+    end
+
+    class Tag
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class Tagging
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tag_set: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tag_set: Array[Types::Tag]?
+    end
+
+    module TaggingDirective
+      COPY: String
+      REPLACE: String
+    end
+
+    class TargetGrant
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?grantee: Types::Grantee,
+        ?permission: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor grantee: Types::Grantee?
+      attr_accessor permission: String?
+    end
+
+    class TargetObjectKeyFormat
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?simple_prefix: Types::SimplePrefix,
+        ?partitioned_prefix: Types::PartitionedPrefix,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor simple_prefix: Types::SimplePrefix?
+      attr_accessor partitioned_prefix: Types::PartitionedPrefix?
+    end
+
+    module Tier
+      Standard: String
+      Bulk: String
+      Expedited: String
+    end
+
+    class Tiering
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?days: Integer,
+        ?access_tier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor days: Integer?
+      attr_accessor access_tier: String?
+    end
+
+    class TooManyParts
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class TopicConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?topic_arn: String,
+        ?events: Array[String],
+        ?filter: Types::NotificationConfigurationFilter,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor topic_arn: String?
+      attr_accessor events: Array[String]?
+      attr_accessor filter: Types::NotificationConfigurationFilter?
+    end
+
+    class Transition
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?date: Time,
+        ?days: Integer,
+        ?storage_class: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor date: Time?
+      attr_accessor days: Integer?
+      attr_accessor storage_class: String?
+    end
+
+    module TransitionDefaultMinimumObjectSize
+      varies_by_storage_class: String
+      all_storage_classes_128K: String
+    end
+
+    module TransitionStorageClass
+      GLACIER: String
+      STANDARD_IA: String
+      ONEZONE_IA: String
+      INTELLIGENT_TIERING: String
+      DEEP_ARCHIVE: String
+      GLACIER_IR: String
+    end
+
+    module Type
+      CanonicalUser: String
+      AmazonCustomerByEmail: String
+      Group: String
+    end
+
+    class UpdateBucketMetadataInventoryTableConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?content_md5: String,
+        ?checksum_algorithm: String,
+        ?inventory_table_configuration: Types::InventoryTableConfigurationUpdates,
+        ?expected_bucket_owner: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor content_md5: String?
+      attr_accessor checksum_algorithm: String?
+      attr_accessor inventory_table_configuration: Types::InventoryTableConfigurationUpdates?
+      attr_accessor expected_bucket_owner: String?
+    end
+
+    class UpdateBucketMetadataJournalTableConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?content_md5: String,
+        ?checksum_algorithm: String,
+        ?journal_table_configuration: Types::JournalTableConfigurationUpdates,
+        ?expected_bucket_owner: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor content_md5: String?
+      attr_accessor checksum_algorithm: String?
+      attr_accessor journal_table_configuration: Types::JournalTableConfigurationUpdates?
+      attr_accessor expected_bucket_owner: String?
+    end
+
+    class UploadPartCopyOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?copy_source_version_id: String,
+        ?copy_part_result: Types::CopyPartResult,
+        ?server_side_encryption: String,
+        ?sse_customer_algorithm: String,
+        ?sse_customer_key_md5: String,
+        ?ssekms_key_id: String,
+        ?bucket_key_enabled: bool,
+        ?request_charged: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor copy_source_version_id: String?
+      attr_accessor copy_part_result: Types::CopyPartResult?
+      attr_accessor server_side_encryption: String?
+      attr_accessor sse_customer_algorithm: String?
+      attr_accessor sse_customer_key_md5: String?
+      attr_accessor ssekms_key_id: String?
+      attr_accessor bucket_key_enabled: bool?
+      attr_accessor request_charged: String?
+    end
+
+    class UploadPartCopyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?copy_source: String,
+        ?copy_source_if_match: String,
+        ?copy_source_if_modified_since: Time,
+        ?copy_source_if_none_match: String,
+        ?copy_source_if_unmodified_since: Time,
+        ?copy_source_range: String,
+        ?key: String,
+        ?part_number: Integer,
+        ?upload_id: String,
+        ?sse_customer_algorithm: String,
+        ?sse_customer_key: String,
+        ?sse_customer_key_md5: String,
+        ?copy_source_sse_customer_algorithm: String,
+        ?copy_source_sse_customer_key: String,
+        ?copy_source_sse_customer_key_md5: String,
+        ?request_payer: String,
+        ?expected_bucket_owner: String,
+        ?expected_source_bucket_owner: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor copy_source: String?
+      attr_accessor copy_source_if_match: String?
+      attr_accessor copy_source_if_modified_since: Time?
+      attr_accessor copy_source_if_none_match: String?
+      attr_accessor copy_source_if_unmodified_since: Time?
+      attr_accessor copy_source_range: String?
+      attr_accessor key: String?
+      attr_accessor part_number: Integer?
+      attr_accessor upload_id: String?
+      attr_accessor sse_customer_algorithm: String?
+      attr_accessor sse_customer_key: String?
+      attr_accessor sse_customer_key_md5: String?
+      attr_accessor copy_source_sse_customer_algorithm: String?
+      attr_accessor copy_source_sse_customer_key: String?
+      attr_accessor copy_source_sse_customer_key_md5: String?
+      attr_accessor request_payer: String?
+      attr_accessor expected_bucket_owner: String?
+      attr_accessor expected_source_bucket_owner: String?
+    end
+
+    class UploadPartOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?server_side_encryption: String,
+        ?e_tag: String,
+        ?checksum_crc32: String,
+        ?checksum_crc32_c: String,
+        ?checksum_crc64_nvme: String,
+        ?checksum_sha1: String,
+        ?checksum_sha256: String,
+        ?sse_customer_algorithm: String,
+        ?sse_customer_key_md5: String,
+        ?ssekms_key_id: String,
+        ?bucket_key_enabled: bool,
+        ?request_charged: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor server_side_encryption: String?
+      attr_accessor e_tag: String?
+      attr_accessor checksum_crc32: String?
+      attr_accessor checksum_crc32_c: String?
+      attr_accessor checksum_crc64_nvme: String?
+      attr_accessor checksum_sha1: String?
+      attr_accessor checksum_sha256: String?
+      attr_accessor sse_customer_algorithm: String?
+      attr_accessor sse_customer_key_md5: String?
+      attr_accessor ssekms_key_id: String?
+      attr_accessor bucket_key_enabled: bool?
+      attr_accessor request_charged: String?
+    end
+
+    class UploadPartRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?body: String,
+        ?bucket: String,
+        ?content_length: Integer,
+        ?content_md5: String,
+        ?checksum_algorithm: String,
+        ?checksum_crc32: String,
+        ?checksum_crc32_c: String,
+        ?checksum_crc64_nvme: String,
+        ?checksum_sha1: String,
+        ?checksum_sha256: String,
+        ?key: String,
+        ?part_number: Integer,
+        ?upload_id: String,
+        ?sse_customer_algorithm: String,
+        ?sse_customer_key: String,
+        ?sse_customer_key_md5: String,
+        ?request_payer: String,
+        ?expected_bucket_owner: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor body: String?
+      attr_accessor bucket: String?
+      attr_accessor content_length: Integer?
+      attr_accessor content_md5: String?
+      attr_accessor checksum_algorithm: String?
+      attr_accessor checksum_crc32: String?
+      attr_accessor checksum_crc32_c: String?
+      attr_accessor checksum_crc64_nvme: String?
+      attr_accessor checksum_sha1: String?
+      attr_accessor checksum_sha256: String?
+      attr_accessor key: String?
+      attr_accessor part_number: Integer?
+      attr_accessor upload_id: String?
+      attr_accessor sse_customer_algorithm: String?
+      attr_accessor sse_customer_key: String?
+      attr_accessor sse_customer_key_md5: String?
+      attr_accessor request_payer: String?
+      attr_accessor expected_bucket_owner: String?
+    end
+
+    class VersioningConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?mfa_delete: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor mfa_delete: String?
+      attr_accessor status: String?
+    end
+
+    class WebsiteConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?error_document: Types::ErrorDocument,
+        ?index_document: Types::IndexDocument,
+        ?redirect_all_requests_to: Types::RedirectAllRequestsTo,
+        ?routing_rules: Array[Types::RoutingRule],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor error_document: Types::ErrorDocument?
+      attr_accessor index_document: Types::IndexDocument?
+      attr_accessor redirect_all_requests_to: Types::RedirectAllRequestsTo?
+      attr_accessor routing_rules: Array[Types::RoutingRule]?
+    end
+
+    class WriteGetObjectResponseRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?request_route: String,
+        ?request_token: String,
+        ?body: String,
+        ?status_code: Integer,
+        ?error_code: String,
+        ?error_message: String,
+        ?accept_ranges: String,
+        ?cache_control: String,
+        ?content_disposition: String,
+        ?content_encoding: String,
+        ?content_language: String,
+        ?content_length: Integer,
+        ?content_range: String,
+        ?content_type: String,
+        ?checksum_crc32: String,
+        ?checksum_crc32_c: String,
+        ?checksum_crc64_nvme: String,
+        ?checksum_sha1: String,
+        ?checksum_sha256: String,
+        ?delete_marker: bool,
+        ?e_tag: String,
+        ?expires: String,
+        ?expiration: String,
+        ?last_modified: Time,
+        ?missing_meta: Integer,
+        ?metadata: Hash[String, String],
+        ?object_lock_mode: String,
+        ?object_lock_legal_hold_status: String,
+        ?object_lock_retain_until_date: Time,
+        ?parts_count: Integer,
+        ?replication_status: String,
+        ?request_charged: String,
+        ?restore: String,
+        ?server_side_encryption: String,
+        ?sse_customer_algorithm: String,
+        ?ssekms_key_id: String,
+        ?sse_customer_key_md5: String,
+        ?storage_class: String,
+        ?tag_count: Integer,
+        ?version_id: String,
+        ?bucket_key_enabled: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor request_route: String?
+      attr_accessor request_token: String?
+      attr_accessor body: String?
+      attr_accessor status_code: Integer?
+      attr_accessor error_code: String?
+      attr_accessor error_message: String?
+      attr_accessor accept_ranges: String?
+      attr_accessor cache_control: String?
+      attr_accessor content_disposition: String?
+      attr_accessor content_encoding: String?
+      attr_accessor content_language: String?
+      attr_accessor content_length: Integer?
+      attr_accessor content_range: String?
+      attr_accessor content_type: String?
+      attr_accessor checksum_crc32: String?
+      attr_accessor checksum_crc32_c: String?
+      attr_accessor checksum_crc64_nvme: String?
+      attr_accessor checksum_sha1: String?
+      attr_accessor checksum_sha256: String?
+      attr_accessor delete_marker: bool?
+      attr_accessor e_tag: String?
+      attr_accessor expires: String?
+      attr_accessor expiration: String?
+      attr_accessor last_modified: Time?
+      attr_accessor missing_meta: Integer?
+      attr_accessor metadata: Hash[String, String]?
+      attr_accessor object_lock_mode: String?
+      attr_accessor object_lock_legal_hold_status: String?
+      attr_accessor object_lock_retain_until_date: Time?
+      attr_accessor parts_count: Integer?
+      attr_accessor replication_status: String?
+      attr_accessor request_charged: String?
+      attr_accessor restore: String?
+      attr_accessor server_side_encryption: String?
+      attr_accessor sse_customer_algorithm: String?
+      attr_accessor ssekms_key_id: String?
+      attr_accessor sse_customer_key_md5: String?
+      attr_accessor storage_class: String?
+      attr_accessor tag_count: Integer?
+      attr_accessor version_id: String?
+      attr_accessor bucket_key_enabled: bool?
+    end
+  end
+end

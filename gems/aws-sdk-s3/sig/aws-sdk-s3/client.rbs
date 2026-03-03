@@ -1,0 +1,2275 @@
+module Aws::S3
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?account_id_endpoint_mode: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?auth_scheme_preference: Array[String],
+      ?convert_params: bool,
+      ?credentials_provider: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?disable_s3_express_session_auth: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::S3::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: Smithy::Client::Retry::ExponentialBackoff,
+      ?retry_base_delay: untyped,
+      ?retry_max_attempts: Integer,
+      ?retry_max_delay: untyped,
+      ?retry_strategy: String | Class,
+      ?s3_disable_multiregion_access_points: bool,
+      ?s3_force_path_style: bool,
+      ?s3_us_east_1_regional_endpoint: String,
+      ?s3_use_accelerate_endpoint: bool,
+      ?s3_use_arn_region: bool,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dualstack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _AbortMultipartUploadResponse
+      include Smithy::Client::_Response[Types::AbortMultipartUploadOutput]
+      def request_charged: () -> String?
+    end
+    def abort_multipart_upload: (
+      ?bucket: String,
+      ?key: String,
+      ?upload_id: String,
+      ?request_payer: String,
+      ?expected_bucket_owner: String,
+      ?if_match_initiated_time: Time
+    ) -> _AbortMultipartUploadResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AbortMultipartUploadResponse
+
+    interface _CompleteMultipartUploadResponse
+      include Smithy::Client::_Response[Types::CompleteMultipartUploadOutput]
+      def location: () -> String?
+      def bucket: () -> String?
+      def key: () -> String?
+      def expiration: () -> String?
+      def e_tag: () -> String?
+      def checksum_crc32: () -> String?
+      def checksum_crc32_c: () -> String?
+      def checksum_crc64_nvme: () -> String?
+      def checksum_sha1: () -> String?
+      def checksum_sha256: () -> String?
+      def checksum_type: () -> String?
+      def server_side_encryption: () -> String?
+      def version_id: () -> String?
+      def ssekms_key_id: () -> String?
+      def bucket_key_enabled: () -> bool?
+      def request_charged: () -> String?
+    end
+    def complete_multipart_upload: (
+      ?bucket: String,
+      ?key: String,
+      ?multipart_upload: {
+        parts: Array[
+          {
+            e_tag: String,
+            checksum_crc32: String,
+            checksum_crc32_c: String,
+            checksum_crc64_nvme: String,
+            checksum_sha1: String,
+            checksum_sha256: String,
+            part_number: Integer
+          }
+        ]
+      },
+      ?upload_id: String,
+      ?checksum_crc32: String,
+      ?checksum_crc32_c: String,
+      ?checksum_crc64_nvme: String,
+      ?checksum_sha1: String,
+      ?checksum_sha256: String,
+      ?checksum_type: String,
+      ?mpu_object_size: Integer,
+      ?request_payer: String,
+      ?expected_bucket_owner: String,
+      ?if_match: String,
+      ?if_none_match: String,
+      ?sse_customer_algorithm: String,
+      ?sse_customer_key: String,
+      ?sse_customer_key_md5: String
+    ) -> _CompleteMultipartUploadResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CompleteMultipartUploadResponse
+
+    interface _CopyObjectResponse
+      include Smithy::Client::_Response[Types::CopyObjectOutput]
+      def copy_object_result: () -> Types::CopyObjectResult?
+      def expiration: () -> String?
+      def copy_source_version_id: () -> String?
+      def version_id: () -> String?
+      def server_side_encryption: () -> String?
+      def sse_customer_algorithm: () -> String?
+      def sse_customer_key_md5: () -> String?
+      def ssekms_key_id: () -> String?
+      def ssekms_encryption_context: () -> String?
+      def bucket_key_enabled: () -> bool?
+      def request_charged: () -> String?
+    end
+    def copy_object: (
+      ?acl: String,
+      ?bucket: String,
+      ?cache_control: String,
+      ?checksum_algorithm: String,
+      ?content_disposition: String,
+      ?content_encoding: String,
+      ?content_language: String,
+      ?content_type: String,
+      ?copy_source: String,
+      ?copy_source_if_match: String,
+      ?copy_source_if_modified_since: Time,
+      ?copy_source_if_none_match: String,
+      ?copy_source_if_unmodified_since: Time,
+      ?expires: String,
+      ?grant_full_control: String,
+      ?grant_read: String,
+      ?grant_read_acp: String,
+      ?grant_write_acp: String,
+      ?key: String,
+      ?metadata: Hash[String, String],
+      ?metadata_directive: String,
+      ?tagging_directive: String,
+      ?server_side_encryption: String,
+      ?storage_class: String,
+      ?website_redirect_location: String,
+      ?sse_customer_algorithm: String,
+      ?sse_customer_key: String,
+      ?sse_customer_key_md5: String,
+      ?ssekms_key_id: String,
+      ?ssekms_encryption_context: String,
+      ?bucket_key_enabled: bool,
+      ?copy_source_sse_customer_algorithm: String,
+      ?copy_source_sse_customer_key: String,
+      ?copy_source_sse_customer_key_md5: String,
+      ?request_payer: String,
+      ?tagging: String,
+      ?object_lock_mode: String,
+      ?object_lock_retain_until_date: Time,
+      ?object_lock_legal_hold_status: String,
+      ?expected_bucket_owner: String,
+      ?expected_source_bucket_owner: String
+    ) -> _CopyObjectResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CopyObjectResponse
+
+    interface _CreateBucketResponse
+      include Smithy::Client::_Response[Types::CreateBucketOutput]
+      def location: () -> String?
+      def bucket_arn: () -> String?
+    end
+    def create_bucket: (
+      ?acl: String,
+      ?bucket: String,
+      ?create_bucket_configuration: {
+        location_constraint: String,
+        location: {
+          type: String,
+          name: String
+        },
+        bucket: {
+          data_redundancy: String,
+          type: String
+        },
+        tags: Array[
+          {
+            key: String,
+            value: String
+          }
+        ]
+      },
+      ?grant_full_control: String,
+      ?grant_read: String,
+      ?grant_read_acp: String,
+      ?grant_write: String,
+      ?grant_write_acp: String,
+      ?object_lock_enabled_for_bucket: bool,
+      ?object_ownership: String
+    ) -> _CreateBucketResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateBucketResponse
+
+    interface _CreateBucketMetadataConfigurationResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def create_bucket_metadata_configuration: (
+      ?bucket: String,
+      ?content_md5: String,
+      ?checksum_algorithm: String,
+      ?metadata_configuration: {
+        journal_table_configuration: {
+          record_expiration: {
+            expiration: String,
+            days: Integer
+          },
+          encryption_configuration: {
+            sse_algorithm: String,
+            kms_key_arn: String
+          }
+        },
+        inventory_table_configuration: {
+          configuration_state: String,
+          encryption_configuration: untyped
+        }
+      },
+      ?expected_bucket_owner: String
+    ) -> _CreateBucketMetadataConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateBucketMetadataConfigurationResponse
+
+    interface _CreateBucketMetadataTableConfigurationResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def create_bucket_metadata_table_configuration: (
+      ?bucket: String,
+      ?content_md5: String,
+      ?checksum_algorithm: String,
+      ?metadata_table_configuration: {
+        s3_tables_destination: {
+          table_bucket_arn: String,
+          table_name: String
+        }
+      },
+      ?expected_bucket_owner: String
+    ) -> _CreateBucketMetadataTableConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateBucketMetadataTableConfigurationResponse
+
+    interface _CreateMultipartUploadResponse
+      include Smithy::Client::_Response[Types::CreateMultipartUploadOutput]
+      def abort_date: () -> Time?
+      def abort_rule_id: () -> String?
+      def bucket: () -> String?
+      def key: () -> String?
+      def upload_id: () -> String?
+      def server_side_encryption: () -> String?
+      def sse_customer_algorithm: () -> String?
+      def sse_customer_key_md5: () -> String?
+      def ssekms_key_id: () -> String?
+      def ssekms_encryption_context: () -> String?
+      def bucket_key_enabled: () -> bool?
+      def request_charged: () -> String?
+      def checksum_algorithm: () -> String?
+      def checksum_type: () -> String?
+    end
+    def create_multipart_upload: (
+      ?acl: String,
+      ?bucket: String,
+      ?cache_control: String,
+      ?content_disposition: String,
+      ?content_encoding: String,
+      ?content_language: String,
+      ?content_type: String,
+      ?expires: String,
+      ?grant_full_control: String,
+      ?grant_read: String,
+      ?grant_read_acp: String,
+      ?grant_write_acp: String,
+      ?key: String,
+      ?metadata: Hash[String, String],
+      ?server_side_encryption: String,
+      ?storage_class: String,
+      ?website_redirect_location: String,
+      ?sse_customer_algorithm: String,
+      ?sse_customer_key: String,
+      ?sse_customer_key_md5: String,
+      ?ssekms_key_id: String,
+      ?ssekms_encryption_context: String,
+      ?bucket_key_enabled: bool,
+      ?request_payer: String,
+      ?tagging: String,
+      ?object_lock_mode: String,
+      ?object_lock_retain_until_date: Time,
+      ?object_lock_legal_hold_status: String,
+      ?expected_bucket_owner: String,
+      ?checksum_algorithm: String,
+      ?checksum_type: String
+    ) -> _CreateMultipartUploadResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateMultipartUploadResponse
+
+    interface _CreateSessionResponse
+      include Smithy::Client::_Response[Types::CreateSessionOutput]
+      def server_side_encryption: () -> String?
+      def ssekms_key_id: () -> String?
+      def ssekms_encryption_context: () -> String?
+      def bucket_key_enabled: () -> bool?
+      def credentials: () -> Types::SessionCredentials?
+    end
+    def create_session: (
+      ?session_mode: String,
+      ?bucket: String,
+      ?server_side_encryption: String,
+      ?ssekms_key_id: String,
+      ?ssekms_encryption_context: String,
+      ?bucket_key_enabled: bool
+    ) -> _CreateSessionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateSessionResponse
+
+    interface _DeleteBucketResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_bucket: (
+      ?bucket: String,
+      ?expected_bucket_owner: String
+    ) -> _DeleteBucketResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteBucketResponse
+
+    interface _DeleteBucketAnalyticsConfigurationResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_bucket_analytics_configuration: (
+      ?bucket: String,
+      ?id: String,
+      ?expected_bucket_owner: String
+    ) -> _DeleteBucketAnalyticsConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteBucketAnalyticsConfigurationResponse
+
+    interface _DeleteBucketCorsResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_bucket_cors: (
+      ?bucket: String,
+      ?expected_bucket_owner: String
+    ) -> _DeleteBucketCorsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteBucketCorsResponse
+
+    interface _DeleteBucketEncryptionResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_bucket_encryption: (
+      ?bucket: String,
+      ?expected_bucket_owner: String
+    ) -> _DeleteBucketEncryptionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteBucketEncryptionResponse
+
+    interface _DeleteBucketIntelligentTieringConfigurationResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_bucket_intelligent_tiering_configuration: (
+      ?bucket: String,
+      ?id: String,
+      ?expected_bucket_owner: String
+    ) -> _DeleteBucketIntelligentTieringConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteBucketIntelligentTieringConfigurationResponse
+
+    interface _DeleteBucketInventoryConfigurationResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_bucket_inventory_configuration: (
+      ?bucket: String,
+      ?id: String,
+      ?expected_bucket_owner: String
+    ) -> _DeleteBucketInventoryConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteBucketInventoryConfigurationResponse
+
+    interface _DeleteBucketLifecycleResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_bucket_lifecycle: (
+      ?bucket: String,
+      ?expected_bucket_owner: String
+    ) -> _DeleteBucketLifecycleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteBucketLifecycleResponse
+
+    interface _DeleteBucketMetadataConfigurationResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_bucket_metadata_configuration: (
+      ?bucket: String,
+      ?expected_bucket_owner: String
+    ) -> _DeleteBucketMetadataConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteBucketMetadataConfigurationResponse
+
+    interface _DeleteBucketMetadataTableConfigurationResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_bucket_metadata_table_configuration: (
+      ?bucket: String,
+      ?expected_bucket_owner: String
+    ) -> _DeleteBucketMetadataTableConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteBucketMetadataTableConfigurationResponse
+
+    interface _DeleteBucketMetricsConfigurationResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_bucket_metrics_configuration: (
+      ?bucket: String,
+      ?id: String,
+      ?expected_bucket_owner: String
+    ) -> _DeleteBucketMetricsConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteBucketMetricsConfigurationResponse
+
+    interface _DeleteBucketOwnershipControlsResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_bucket_ownership_controls: (
+      ?bucket: String,
+      ?expected_bucket_owner: String
+    ) -> _DeleteBucketOwnershipControlsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteBucketOwnershipControlsResponse
+
+    interface _DeleteBucketPolicyResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_bucket_policy: (
+      ?bucket: String,
+      ?expected_bucket_owner: String
+    ) -> _DeleteBucketPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteBucketPolicyResponse
+
+    interface _DeleteBucketReplicationResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_bucket_replication: (
+      ?bucket: String,
+      ?expected_bucket_owner: String
+    ) -> _DeleteBucketReplicationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteBucketReplicationResponse
+
+    interface _DeleteBucketTaggingResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_bucket_tagging: (
+      ?bucket: String,
+      ?expected_bucket_owner: String
+    ) -> _DeleteBucketTaggingResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteBucketTaggingResponse
+
+    interface _DeleteBucketWebsiteResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_bucket_website: (
+      ?bucket: String,
+      ?expected_bucket_owner: String
+    ) -> _DeleteBucketWebsiteResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteBucketWebsiteResponse
+
+    interface _DeleteObjectResponse
+      include Smithy::Client::_Response[Types::DeleteObjectOutput]
+      def delete_marker: () -> bool?
+      def version_id: () -> String?
+      def request_charged: () -> String?
+    end
+    def delete_object: (
+      ?bucket: String,
+      ?key: String,
+      ?mfa: String,
+      ?version_id: String,
+      ?request_payer: String,
+      ?bypass_governance_retention: bool,
+      ?expected_bucket_owner: String,
+      ?if_match: String,
+      ?if_match_last_modified_time: Time,
+      ?if_match_size: Integer
+    ) -> _DeleteObjectResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteObjectResponse
+
+    interface _DeleteObjectTaggingResponse
+      include Smithy::Client::_Response[Types::DeleteObjectTaggingOutput]
+      def version_id: () -> String?
+    end
+    def delete_object_tagging: (
+      ?bucket: String,
+      ?key: String,
+      ?version_id: String,
+      ?expected_bucket_owner: String
+    ) -> _DeleteObjectTaggingResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteObjectTaggingResponse
+
+    interface _DeleteObjectsResponse
+      include Smithy::Client::_Response[Types::DeleteObjectsOutput]
+      def deleted: () -> Array[Types::DeletedObject]?
+      def request_charged: () -> String?
+      def errors: () -> Array[Types::Error]?
+    end
+    def delete_objects: (
+      ?bucket: String,
+      ?delete: {
+        objects: Array[
+          {
+            key: String,
+            version_id: String,
+            e_tag: String,
+            last_modified_time: Time,
+            size: Integer
+          }
+        ],
+        quiet: bool
+      },
+      ?mfa: String,
+      ?request_payer: String,
+      ?bypass_governance_retention: bool,
+      ?expected_bucket_owner: String,
+      ?checksum_algorithm: String
+    ) -> _DeleteObjectsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteObjectsResponse
+
+    interface _DeletePublicAccessBlockResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_public_access_block: (
+      ?bucket: String,
+      ?expected_bucket_owner: String
+    ) -> _DeletePublicAccessBlockResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeletePublicAccessBlockResponse
+
+    interface _GetBucketAccelerateConfigurationResponse
+      include Smithy::Client::_Response[Types::GetBucketAccelerateConfigurationOutput]
+      def status: () -> String?
+      def request_charged: () -> String?
+    end
+    def get_bucket_accelerate_configuration: (
+      ?bucket: String,
+      ?expected_bucket_owner: String,
+      ?request_payer: String
+    ) -> _GetBucketAccelerateConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetBucketAccelerateConfigurationResponse
+
+    interface _GetBucketAclResponse
+      include Smithy::Client::_Response[Types::GetBucketAclOutput]
+      def owner: () -> Types::Owner?
+      def grants: () -> Array[Types::Grant]?
+    end
+    def get_bucket_acl: (
+      ?bucket: String,
+      ?expected_bucket_owner: String
+    ) -> _GetBucketAclResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetBucketAclResponse
+
+    interface _GetBucketAnalyticsConfigurationResponse
+      include Smithy::Client::_Response[Types::GetBucketAnalyticsConfigurationOutput]
+      def analytics_configuration: () -> Types::AnalyticsConfiguration?
+    end
+    def get_bucket_analytics_configuration: (
+      ?bucket: String,
+      ?id: String,
+      ?expected_bucket_owner: String
+    ) -> _GetBucketAnalyticsConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetBucketAnalyticsConfigurationResponse
+
+    interface _GetBucketCorsResponse
+      include Smithy::Client::_Response[Types::GetBucketCorsOutput]
+      def cors_rules: () -> Array[Types::CORSRule]?
+    end
+    def get_bucket_cors: (
+      ?bucket: String,
+      ?expected_bucket_owner: String
+    ) -> _GetBucketCorsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetBucketCorsResponse
+
+    interface _GetBucketEncryptionResponse
+      include Smithy::Client::_Response[Types::GetBucketEncryptionOutput]
+      def server_side_encryption_configuration: () -> Types::ServerSideEncryptionConfiguration?
+    end
+    def get_bucket_encryption: (
+      ?bucket: String,
+      ?expected_bucket_owner: String
+    ) -> _GetBucketEncryptionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetBucketEncryptionResponse
+
+    interface _GetBucketIntelligentTieringConfigurationResponse
+      include Smithy::Client::_Response[Types::GetBucketIntelligentTieringConfigurationOutput]
+      def intelligent_tiering_configuration: () -> Types::IntelligentTieringConfiguration?
+    end
+    def get_bucket_intelligent_tiering_configuration: (
+      ?bucket: String,
+      ?id: String,
+      ?expected_bucket_owner: String
+    ) -> _GetBucketIntelligentTieringConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetBucketIntelligentTieringConfigurationResponse
+
+    interface _GetBucketInventoryConfigurationResponse
+      include Smithy::Client::_Response[Types::GetBucketInventoryConfigurationOutput]
+      def inventory_configuration: () -> Types::InventoryConfiguration?
+    end
+    def get_bucket_inventory_configuration: (
+      ?bucket: String,
+      ?id: String,
+      ?expected_bucket_owner: String
+    ) -> _GetBucketInventoryConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetBucketInventoryConfigurationResponse
+
+    interface _GetBucketLifecycleConfigurationResponse
+      include Smithy::Client::_Response[Types::GetBucketLifecycleConfigurationOutput]
+      def rules: () -> Array[Types::LifecycleRule]?
+      def transition_default_minimum_object_size: () -> String?
+    end
+    def get_bucket_lifecycle_configuration: (
+      ?bucket: String,
+      ?expected_bucket_owner: String
+    ) -> _GetBucketLifecycleConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetBucketLifecycleConfigurationResponse
+
+    interface _GetBucketLocationResponse
+      include Smithy::Client::_Response[Types::GetBucketLocationOutput]
+      def location_constraint: () -> String?
+    end
+    def get_bucket_location: (
+      ?bucket: String,
+      ?expected_bucket_owner: String
+    ) -> _GetBucketLocationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetBucketLocationResponse
+
+    interface _GetBucketLoggingResponse
+      include Smithy::Client::_Response[Types::GetBucketLoggingOutput]
+      def logging_enabled: () -> Types::LoggingEnabled?
+    end
+    def get_bucket_logging: (
+      ?bucket: String,
+      ?expected_bucket_owner: String
+    ) -> _GetBucketLoggingResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetBucketLoggingResponse
+
+    interface _GetBucketMetadataConfigurationResponse
+      include Smithy::Client::_Response[Types::GetBucketMetadataConfigurationOutput]
+      def get_bucket_metadata_configuration_result: () -> Types::GetBucketMetadataConfigurationResult?
+    end
+    def get_bucket_metadata_configuration: (
+      ?bucket: String,
+      ?expected_bucket_owner: String
+    ) -> _GetBucketMetadataConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetBucketMetadataConfigurationResponse
+
+    interface _GetBucketMetadataTableConfigurationResponse
+      include Smithy::Client::_Response[Types::GetBucketMetadataTableConfigurationOutput]
+      def get_bucket_metadata_table_configuration_result: () -> Types::GetBucketMetadataTableConfigurationResult?
+    end
+    def get_bucket_metadata_table_configuration: (
+      ?bucket: String,
+      ?expected_bucket_owner: String
+    ) -> _GetBucketMetadataTableConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetBucketMetadataTableConfigurationResponse
+
+    interface _GetBucketMetricsConfigurationResponse
+      include Smithy::Client::_Response[Types::GetBucketMetricsConfigurationOutput]
+      def metrics_configuration: () -> Types::MetricsConfiguration?
+    end
+    def get_bucket_metrics_configuration: (
+      ?bucket: String,
+      ?id: String,
+      ?expected_bucket_owner: String
+    ) -> _GetBucketMetricsConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetBucketMetricsConfigurationResponse
+
+    interface _GetBucketNotificationConfigurationResponse
+      include Smithy::Client::_Response[Types::GetBucketNotificationConfigurationOutput]
+      def topic_configurations: () -> Array[Types::TopicConfiguration]?
+      def queue_configurations: () -> Array[Types::QueueConfiguration]?
+      def lambda_function_configurations: () -> Array[Types::LambdaFunctionConfiguration]?
+      def event_bridge_configuration: () -> Types::EventBridgeConfiguration?
+    end
+    def get_bucket_notification_configuration: (
+      ?bucket: String,
+      ?expected_bucket_owner: String
+    ) -> _GetBucketNotificationConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetBucketNotificationConfigurationResponse
+
+    interface _GetBucketOwnershipControlsResponse
+      include Smithy::Client::_Response[Types::GetBucketOwnershipControlsOutput]
+      def ownership_controls: () -> Types::OwnershipControls?
+    end
+    def get_bucket_ownership_controls: (
+      ?bucket: String,
+      ?expected_bucket_owner: String
+    ) -> _GetBucketOwnershipControlsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetBucketOwnershipControlsResponse
+
+    interface _GetBucketPolicyResponse
+      include Smithy::Client::_Response[Types::GetBucketPolicyOutput]
+      def policy: () -> String?
+    end
+    def get_bucket_policy: (
+      ?bucket: String,
+      ?expected_bucket_owner: String
+    ) -> _GetBucketPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetBucketPolicyResponse
+
+    interface _GetBucketPolicyStatusResponse
+      include Smithy::Client::_Response[Types::GetBucketPolicyStatusOutput]
+      def policy_status: () -> Types::PolicyStatus?
+    end
+    def get_bucket_policy_status: (
+      ?bucket: String,
+      ?expected_bucket_owner: String
+    ) -> _GetBucketPolicyStatusResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetBucketPolicyStatusResponse
+
+    interface _GetBucketReplicationResponse
+      include Smithy::Client::_Response[Types::GetBucketReplicationOutput]
+      def replication_configuration: () -> Types::ReplicationConfiguration?
+    end
+    def get_bucket_replication: (
+      ?bucket: String,
+      ?expected_bucket_owner: String
+    ) -> _GetBucketReplicationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetBucketReplicationResponse
+
+    interface _GetBucketRequestPaymentResponse
+      include Smithy::Client::_Response[Types::GetBucketRequestPaymentOutput]
+      def payer: () -> String?
+    end
+    def get_bucket_request_payment: (
+      ?bucket: String,
+      ?expected_bucket_owner: String
+    ) -> _GetBucketRequestPaymentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetBucketRequestPaymentResponse
+
+    interface _GetBucketTaggingResponse
+      include Smithy::Client::_Response[Types::GetBucketTaggingOutput]
+      def tag_set: () -> Array[Types::Tag]?
+    end
+    def get_bucket_tagging: (
+      ?bucket: String,
+      ?expected_bucket_owner: String
+    ) -> _GetBucketTaggingResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetBucketTaggingResponse
+
+    interface _GetBucketVersioningResponse
+      include Smithy::Client::_Response[Types::GetBucketVersioningOutput]
+      def status: () -> String?
+      def mfa_delete: () -> String?
+    end
+    def get_bucket_versioning: (
+      ?bucket: String,
+      ?expected_bucket_owner: String
+    ) -> _GetBucketVersioningResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetBucketVersioningResponse
+
+    interface _GetBucketWebsiteResponse
+      include Smithy::Client::_Response[Types::GetBucketWebsiteOutput]
+      def redirect_all_requests_to: () -> Types::RedirectAllRequestsTo?
+      def index_document: () -> Types::IndexDocument?
+      def error_document: () -> Types::ErrorDocument?
+      def routing_rules: () -> Array[Types::RoutingRule]?
+    end
+    def get_bucket_website: (
+      ?bucket: String,
+      ?expected_bucket_owner: String
+    ) -> _GetBucketWebsiteResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetBucketWebsiteResponse
+
+    interface _GetObjectResponse
+      include Smithy::Client::_Response[Types::GetObjectOutput]
+      def body: () -> String?
+      def delete_marker: () -> bool?
+      def accept_ranges: () -> String?
+      def expiration: () -> String?
+      def restore: () -> String?
+      def last_modified: () -> Time?
+      def content_length: () -> Integer?
+      def e_tag: () -> String?
+      def checksum_crc32: () -> String?
+      def checksum_crc32_c: () -> String?
+      def checksum_crc64_nvme: () -> String?
+      def checksum_sha1: () -> String?
+      def checksum_sha256: () -> String?
+      def checksum_type: () -> String?
+      def missing_meta: () -> Integer?
+      def version_id: () -> String?
+      def cache_control: () -> String?
+      def content_disposition: () -> String?
+      def content_encoding: () -> String?
+      def content_language: () -> String?
+      def content_range: () -> String?
+      def content_type: () -> String?
+      def expires: () -> String?
+      def website_redirect_location: () -> String?
+      def server_side_encryption: () -> String?
+      def metadata: () -> Hash[String, String]?
+      def sse_customer_algorithm: () -> String?
+      def sse_customer_key_md5: () -> String?
+      def ssekms_key_id: () -> String?
+      def bucket_key_enabled: () -> bool?
+      def storage_class: () -> String?
+      def request_charged: () -> String?
+      def replication_status: () -> String?
+      def parts_count: () -> Integer?
+      def tag_count: () -> Integer?
+      def object_lock_mode: () -> String?
+      def object_lock_retain_until_date: () -> Time?
+      def object_lock_legal_hold_status: () -> String?
+    end
+    def get_object: (
+      ?bucket: String,
+      ?if_match: String,
+      ?if_modified_since: Time,
+      ?if_none_match: String,
+      ?if_unmodified_since: Time,
+      ?key: String,
+      ?range: String,
+      ?response_cache_control: String,
+      ?response_content_disposition: String,
+      ?response_content_encoding: String,
+      ?response_content_language: String,
+      ?response_content_type: String,
+      ?response_expires: Time,
+      ?version_id: String,
+      ?sse_customer_algorithm: String,
+      ?sse_customer_key: String,
+      ?sse_customer_key_md5: String,
+      ?request_payer: String,
+      ?part_number: Integer,
+      ?expected_bucket_owner: String,
+      ?checksum_mode: String
+    ) -> _GetObjectResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetObjectResponse
+
+    interface _GetObjectAclResponse
+      include Smithy::Client::_Response[Types::GetObjectAclOutput]
+      def owner: () -> Types::Owner?
+      def grants: () -> Array[Types::Grant]?
+      def request_charged: () -> String?
+    end
+    def get_object_acl: (
+      ?bucket: String,
+      ?key: String,
+      ?version_id: String,
+      ?request_payer: String,
+      ?expected_bucket_owner: String
+    ) -> _GetObjectAclResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetObjectAclResponse
+
+    interface _GetObjectAttributesResponse
+      include Smithy::Client::_Response[Types::GetObjectAttributesOutput]
+      def delete_marker: () -> bool?
+      def last_modified: () -> Time?
+      def version_id: () -> String?
+      def request_charged: () -> String?
+      def e_tag: () -> String?
+      def checksum: () -> Types::Checksum?
+      def object_parts: () -> Types::GetObjectAttributesParts?
+      def storage_class: () -> String?
+      def object_size: () -> Integer?
+    end
+    def get_object_attributes: (
+      ?bucket: String,
+      ?key: String,
+      ?version_id: String,
+      ?max_parts: Integer,
+      ?part_number_marker: String,
+      ?sse_customer_algorithm: String,
+      ?sse_customer_key: String,
+      ?sse_customer_key_md5: String,
+      ?request_payer: String,
+      ?expected_bucket_owner: String,
+      ?object_attributes: Array[String]
+    ) -> _GetObjectAttributesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetObjectAttributesResponse
+
+    interface _GetObjectLegalHoldResponse
+      include Smithy::Client::_Response[Types::GetObjectLegalHoldOutput]
+      def legal_hold: () -> Types::ObjectLockLegalHold?
+    end
+    def get_object_legal_hold: (
+      ?bucket: String,
+      ?key: String,
+      ?version_id: String,
+      ?request_payer: String,
+      ?expected_bucket_owner: String
+    ) -> _GetObjectLegalHoldResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetObjectLegalHoldResponse
+
+    interface _GetObjectLockConfigurationResponse
+      include Smithy::Client::_Response[Types::GetObjectLockConfigurationOutput]
+      def object_lock_configuration: () -> Types::ObjectLockConfiguration?
+    end
+    def get_object_lock_configuration: (
+      ?bucket: String,
+      ?expected_bucket_owner: String
+    ) -> _GetObjectLockConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetObjectLockConfigurationResponse
+
+    interface _GetObjectRetentionResponse
+      include Smithy::Client::_Response[Types::GetObjectRetentionOutput]
+      def retention: () -> Types::ObjectLockRetention?
+    end
+    def get_object_retention: (
+      ?bucket: String,
+      ?key: String,
+      ?version_id: String,
+      ?request_payer: String,
+      ?expected_bucket_owner: String
+    ) -> _GetObjectRetentionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetObjectRetentionResponse
+
+    interface _GetObjectTaggingResponse
+      include Smithy::Client::_Response[Types::GetObjectTaggingOutput]
+      def version_id: () -> String?
+      def tag_set: () -> Array[Types::Tag]?
+    end
+    def get_object_tagging: (
+      ?bucket: String,
+      ?key: String,
+      ?version_id: String,
+      ?expected_bucket_owner: String,
+      ?request_payer: String
+    ) -> _GetObjectTaggingResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetObjectTaggingResponse
+
+    interface _GetObjectTorrentResponse
+      include Smithy::Client::_Response[Types::GetObjectTorrentOutput]
+      def body: () -> String?
+      def request_charged: () -> String?
+    end
+    def get_object_torrent: (
+      ?bucket: String,
+      ?key: String,
+      ?request_payer: String,
+      ?expected_bucket_owner: String
+    ) -> _GetObjectTorrentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetObjectTorrentResponse
+
+    interface _GetPublicAccessBlockResponse
+      include Smithy::Client::_Response[Types::GetPublicAccessBlockOutput]
+      def public_access_block_configuration: () -> Types::PublicAccessBlockConfiguration?
+    end
+    def get_public_access_block: (
+      ?bucket: String,
+      ?expected_bucket_owner: String
+    ) -> _GetPublicAccessBlockResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetPublicAccessBlockResponse
+
+    interface _HeadBucketResponse
+      include Smithy::Client::_Response[Types::HeadBucketOutput]
+      def bucket_arn: () -> String?
+      def bucket_location_type: () -> String?
+      def bucket_location_name: () -> String?
+      def bucket_region: () -> String?
+      def access_point_alias: () -> bool?
+    end
+    def head_bucket: (
+      ?bucket: String,
+      ?expected_bucket_owner: String
+    ) -> _HeadBucketResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _HeadBucketResponse
+
+    interface _HeadObjectResponse
+      include Smithy::Client::_Response[Types::HeadObjectOutput]
+      def delete_marker: () -> bool?
+      def accept_ranges: () -> String?
+      def expiration: () -> String?
+      def restore: () -> String?
+      def archive_status: () -> String?
+      def last_modified: () -> Time?
+      def content_length: () -> Integer?
+      def checksum_crc32: () -> String?
+      def checksum_crc32_c: () -> String?
+      def checksum_crc64_nvme: () -> String?
+      def checksum_sha1: () -> String?
+      def checksum_sha256: () -> String?
+      def checksum_type: () -> String?
+      def e_tag: () -> String?
+      def missing_meta: () -> Integer?
+      def version_id: () -> String?
+      def cache_control: () -> String?
+      def content_disposition: () -> String?
+      def content_encoding: () -> String?
+      def content_language: () -> String?
+      def content_type: () -> String?
+      def content_range: () -> String?
+      def expires: () -> String?
+      def website_redirect_location: () -> String?
+      def server_side_encryption: () -> String?
+      def metadata: () -> Hash[String, String]?
+      def sse_customer_algorithm: () -> String?
+      def sse_customer_key_md5: () -> String?
+      def ssekms_key_id: () -> String?
+      def bucket_key_enabled: () -> bool?
+      def storage_class: () -> String?
+      def request_charged: () -> String?
+      def replication_status: () -> String?
+      def parts_count: () -> Integer?
+      def tag_count: () -> Integer?
+      def object_lock_mode: () -> String?
+      def object_lock_retain_until_date: () -> Time?
+      def object_lock_legal_hold_status: () -> String?
+    end
+    def head_object: (
+      ?bucket: String,
+      ?if_match: String,
+      ?if_modified_since: Time,
+      ?if_none_match: String,
+      ?if_unmodified_since: Time,
+      ?key: String,
+      ?range: String,
+      ?response_cache_control: String,
+      ?response_content_disposition: String,
+      ?response_content_encoding: String,
+      ?response_content_language: String,
+      ?response_content_type: String,
+      ?response_expires: Time,
+      ?version_id: String,
+      ?sse_customer_algorithm: String,
+      ?sse_customer_key: String,
+      ?sse_customer_key_md5: String,
+      ?request_payer: String,
+      ?part_number: Integer,
+      ?expected_bucket_owner: String,
+      ?checksum_mode: String
+    ) -> _HeadObjectResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _HeadObjectResponse
+
+    interface _ListBucketAnalyticsConfigurationsResponse
+      include Smithy::Client::_Response[Types::ListBucketAnalyticsConfigurationsOutput]
+      def is_truncated: () -> bool?
+      def continuation_token: () -> String?
+      def next_continuation_token: () -> String?
+      def analytics_configuration_list: () -> Array[Types::AnalyticsConfiguration]?
+    end
+    def list_bucket_analytics_configurations: (
+      ?bucket: String,
+      ?continuation_token: String,
+      ?expected_bucket_owner: String
+    ) -> _ListBucketAnalyticsConfigurationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListBucketAnalyticsConfigurationsResponse
+
+    interface _ListBucketIntelligentTieringConfigurationsResponse
+      include Smithy::Client::_Response[Types::ListBucketIntelligentTieringConfigurationsOutput]
+      def is_truncated: () -> bool?
+      def continuation_token: () -> String?
+      def next_continuation_token: () -> String?
+      def intelligent_tiering_configuration_list: () -> Array[Types::IntelligentTieringConfiguration]?
+    end
+    def list_bucket_intelligent_tiering_configurations: (
+      ?bucket: String,
+      ?continuation_token: String,
+      ?expected_bucket_owner: String
+    ) -> _ListBucketIntelligentTieringConfigurationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListBucketIntelligentTieringConfigurationsResponse
+
+    interface _ListBucketInventoryConfigurationsResponse
+      include Smithy::Client::_Response[Types::ListBucketInventoryConfigurationsOutput]
+      def continuation_token: () -> String?
+      def inventory_configuration_list: () -> Array[Types::InventoryConfiguration]?
+      def is_truncated: () -> bool?
+      def next_continuation_token: () -> String?
+    end
+    def list_bucket_inventory_configurations: (
+      ?bucket: String,
+      ?continuation_token: String,
+      ?expected_bucket_owner: String
+    ) -> _ListBucketInventoryConfigurationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListBucketInventoryConfigurationsResponse
+
+    interface _ListBucketMetricsConfigurationsResponse
+      include Smithy::Client::_Response[Types::ListBucketMetricsConfigurationsOutput]
+      def is_truncated: () -> bool?
+      def continuation_token: () -> String?
+      def next_continuation_token: () -> String?
+      def metrics_configuration_list: () -> Array[Types::MetricsConfiguration]?
+    end
+    def list_bucket_metrics_configurations: (
+      ?bucket: String,
+      ?continuation_token: String,
+      ?expected_bucket_owner: String
+    ) -> _ListBucketMetricsConfigurationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListBucketMetricsConfigurationsResponse
+
+    interface _ListBucketsResponse
+      include Smithy::Client::_Response[Types::ListBucketsOutput]
+      def buckets: () -> Array[Types::Bucket]?
+      def owner: () -> Types::Owner?
+      def continuation_token: () -> String?
+      def prefix: () -> String?
+    end
+    def list_buckets: (
+      ?max_buckets: Integer,
+      ?continuation_token: String,
+      ?prefix: String,
+      ?bucket_region: String
+    ) -> _ListBucketsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListBucketsResponse
+
+    interface _ListDirectoryBucketsResponse
+      include Smithy::Client::_Response[Types::ListDirectoryBucketsOutput]
+      def buckets: () -> Array[Types::Bucket]?
+      def continuation_token: () -> String?
+    end
+    def list_directory_buckets: (
+      ?continuation_token: String,
+      ?max_directory_buckets: Integer
+    ) -> _ListDirectoryBucketsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDirectoryBucketsResponse
+
+    interface _ListMultipartUploadsResponse
+      include Smithy::Client::_Response[Types::ListMultipartUploadsOutput]
+      def bucket: () -> String?
+      def key_marker: () -> String?
+      def upload_id_marker: () -> String?
+      def next_key_marker: () -> String?
+      def prefix: () -> String?
+      def delimiter: () -> String?
+      def next_upload_id_marker: () -> String?
+      def max_uploads: () -> Integer?
+      def is_truncated: () -> bool?
+      def uploads: () -> Array[Types::MultipartUpload]?
+      def common_prefixes: () -> Array[Types::CommonPrefix]?
+      def encoding_type: () -> String?
+      def request_charged: () -> String?
+    end
+    def list_multipart_uploads: (
+      ?bucket: String,
+      ?delimiter: String,
+      ?encoding_type: String,
+      ?key_marker: String,
+      ?max_uploads: Integer,
+      ?prefix: String,
+      ?upload_id_marker: String,
+      ?expected_bucket_owner: String,
+      ?request_payer: String
+    ) -> _ListMultipartUploadsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListMultipartUploadsResponse
+
+    interface _ListObjectVersionsResponse
+      include Smithy::Client::_Response[Types::ListObjectVersionsOutput]
+      def is_truncated: () -> bool?
+      def key_marker: () -> String?
+      def version_id_marker: () -> String?
+      def next_key_marker: () -> String?
+      def next_version_id_marker: () -> String?
+      def versions: () -> Array[Types::ObjectVersion]?
+      def delete_markers: () -> Array[Types::DeleteMarkerEntry]?
+      def name: () -> String?
+      def prefix: () -> String?
+      def delimiter: () -> String?
+      def max_keys: () -> Integer?
+      def common_prefixes: () -> Array[Types::CommonPrefix]?
+      def encoding_type: () -> String?
+      def request_charged: () -> String?
+    end
+    def list_object_versions: (
+      ?bucket: String,
+      ?delimiter: String,
+      ?encoding_type: String,
+      ?key_marker: String,
+      ?max_keys: Integer,
+      ?prefix: String,
+      ?version_id_marker: String,
+      ?expected_bucket_owner: String,
+      ?request_payer: String,
+      ?optional_object_attributes: Array[String]
+    ) -> _ListObjectVersionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListObjectVersionsResponse
+
+    interface _ListObjectsResponse
+      include Smithy::Client::_Response[Types::ListObjectsOutput]
+      def is_truncated: () -> bool?
+      def marker: () -> String?
+      def next_marker: () -> String?
+      def contents: () -> Array[Types::Object]?
+      def name: () -> String?
+      def prefix: () -> String?
+      def delimiter: () -> String?
+      def max_keys: () -> Integer?
+      def common_prefixes: () -> Array[Types::CommonPrefix]?
+      def encoding_type: () -> String?
+      def request_charged: () -> String?
+    end
+    def list_objects: (
+      ?bucket: String,
+      ?delimiter: String,
+      ?encoding_type: String,
+      ?marker: String,
+      ?max_keys: Integer,
+      ?prefix: String,
+      ?request_payer: String,
+      ?expected_bucket_owner: String,
+      ?optional_object_attributes: Array[String]
+    ) -> _ListObjectsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListObjectsResponse
+
+    interface _ListObjectsV2Response
+      include Smithy::Client::_Response[Types::ListObjectsV2Output]
+      def is_truncated: () -> bool?
+      def contents: () -> Array[Types::Object]?
+      def name: () -> String?
+      def prefix: () -> String?
+      def delimiter: () -> String?
+      def max_keys: () -> Integer?
+      def common_prefixes: () -> Array[Types::CommonPrefix]?
+      def encoding_type: () -> String?
+      def key_count: () -> Integer?
+      def continuation_token: () -> String?
+      def next_continuation_token: () -> String?
+      def start_after: () -> String?
+      def request_charged: () -> String?
+    end
+    def list_objects_v2: (
+      ?bucket: String,
+      ?delimiter: String,
+      ?encoding_type: String,
+      ?max_keys: Integer,
+      ?prefix: String,
+      ?continuation_token: String,
+      ?fetch_owner: bool,
+      ?start_after: String,
+      ?request_payer: String,
+      ?expected_bucket_owner: String,
+      ?optional_object_attributes: Array[String]
+    ) -> _ListObjectsV2Response | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListObjectsV2Response
+
+    interface _ListPartsResponse
+      include Smithy::Client::_Response[Types::ListPartsOutput]
+      def abort_date: () -> Time?
+      def abort_rule_id: () -> String?
+      def bucket: () -> String?
+      def key: () -> String?
+      def upload_id: () -> String?
+      def part_number_marker: () -> String?
+      def next_part_number_marker: () -> String?
+      def max_parts: () -> Integer?
+      def is_truncated: () -> bool?
+      def parts: () -> Array[Types::Part]?
+      def initiator: () -> Types::Initiator?
+      def owner: () -> Types::Owner?
+      def storage_class: () -> String?
+      def request_charged: () -> String?
+      def checksum_algorithm: () -> String?
+      def checksum_type: () -> String?
+    end
+    def list_parts: (
+      ?bucket: String,
+      ?key: String,
+      ?max_parts: Integer,
+      ?part_number_marker: String,
+      ?upload_id: String,
+      ?request_payer: String,
+      ?expected_bucket_owner: String,
+      ?sse_customer_algorithm: String,
+      ?sse_customer_key: String,
+      ?sse_customer_key_md5: String
+    ) -> _ListPartsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListPartsResponse
+
+    interface _PutBucketAccelerateConfigurationResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def put_bucket_accelerate_configuration: (
+      ?bucket: String,
+      ?accelerate_configuration: {
+        status: String
+      },
+      ?expected_bucket_owner: String,
+      ?checksum_algorithm: String
+    ) -> _PutBucketAccelerateConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutBucketAccelerateConfigurationResponse
+
+    interface _PutBucketAclResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def put_bucket_acl: (
+      ?acl: String,
+      ?access_control_policy: {
+        grants: Array[
+          {
+            grantee: {
+              display_name: String,
+              email_address: String,
+              id: String,
+              uri: String,
+              type: String
+            },
+            permission: String
+          }
+        ],
+        owner: {
+          display_name: untyped,
+          id: untyped
+        }
+      },
+      ?bucket: String,
+      ?content_md5: String,
+      ?checksum_algorithm: String,
+      ?grant_full_control: String,
+      ?grant_read: String,
+      ?grant_read_acp: String,
+      ?grant_write: String,
+      ?grant_write_acp: String,
+      ?expected_bucket_owner: String
+    ) -> _PutBucketAclResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutBucketAclResponse
+
+    interface _PutBucketAnalyticsConfigurationResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def put_bucket_analytics_configuration: (
+      ?bucket: String,
+      ?id: String,
+      ?analytics_configuration: {
+        id: String,
+        filter: {
+          prefix: String,
+          tag: {
+            key: String,
+            value: String
+          },
+          and: {
+            prefix: untyped,
+            tags: Array[
+              {
+                key: untyped,
+                value: untyped
+              }
+            ]
+          }
+        },
+        storage_class_analysis: {
+          data_export: {
+            output_schema_version: String,
+            destination: {
+              s3_bucket_destination: {
+                format: String,
+                bucket_account_id: String,
+                bucket: String,
+                prefix: untyped
+              }
+            }
+          }
+        }
+      },
+      ?expected_bucket_owner: String
+    ) -> _PutBucketAnalyticsConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutBucketAnalyticsConfigurationResponse
+
+    interface _PutBucketCorsResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def put_bucket_cors: (
+      ?bucket: String,
+      ?cors_configuration: {
+        cors_rules: Array[
+          {
+            id: String,
+            allowed_headers: Array[String],
+            allowed_methods: Array[String],
+            allowed_origins: Array[String],
+            expose_headers: Array[String],
+            max_age_seconds: Integer
+          }
+        ]
+      },
+      ?content_md5: String,
+      ?checksum_algorithm: String,
+      ?expected_bucket_owner: String
+    ) -> _PutBucketCorsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutBucketCorsResponse
+
+    interface _PutBucketEncryptionResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def put_bucket_encryption: (
+      ?bucket: String,
+      ?content_md5: String,
+      ?checksum_algorithm: String,
+      ?server_side_encryption_configuration: {
+        rules: Array[
+          {
+            apply_server_side_encryption_by_default: {
+              sse_algorithm: String,
+              kms_master_key_id: String
+            },
+            bucket_key_enabled: bool
+          }
+        ]
+      },
+      ?expected_bucket_owner: String
+    ) -> _PutBucketEncryptionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutBucketEncryptionResponse
+
+    interface _PutBucketIntelligentTieringConfigurationResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def put_bucket_intelligent_tiering_configuration: (
+      ?bucket: String,
+      ?id: String,
+      ?expected_bucket_owner: String,
+      ?intelligent_tiering_configuration: {
+        id: String,
+        filter: {
+          prefix: String,
+          tag: {
+            key: String,
+            value: String
+          },
+          and: {
+            prefix: untyped,
+            tags: Array[
+              {
+                key: untyped,
+                value: untyped
+              }
+            ]
+          }
+        },
+        status: String,
+        tierings: Array[
+          {
+            days: Integer,
+            access_tier: String
+          }
+        ]
+      }
+    ) -> _PutBucketIntelligentTieringConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutBucketIntelligentTieringConfigurationResponse
+
+    interface _PutBucketInventoryConfigurationResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def put_bucket_inventory_configuration: (
+      ?bucket: String,
+      ?id: String,
+      ?inventory_configuration: {
+        destination: {
+          s3_bucket_destination: {
+            account_id: String,
+            bucket: String,
+            format: String,
+            prefix: String,
+            encryption: {
+              sses3: {
+              },
+              ssekms: {
+                key_id: String
+              }
+            }
+          }
+        },
+        is_enabled: bool,
+        filter: {
+          prefix: untyped
+        },
+        id: String,
+        included_object_versions: String,
+        optional_fields: Array[String],
+        schedule: {
+          frequency: String
+        }
+      },
+      ?expected_bucket_owner: String
+    ) -> _PutBucketInventoryConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutBucketInventoryConfigurationResponse
+
+    interface _PutBucketLifecycleConfigurationResponse
+      include Smithy::Client::_Response[Types::PutBucketLifecycleConfigurationOutput]
+      def transition_default_minimum_object_size: () -> String?
+    end
+    def put_bucket_lifecycle_configuration: (
+      ?bucket: String,
+      ?checksum_algorithm: String,
+      ?lifecycle_configuration: {
+        rules: Array[
+          {
+            expiration: {
+              date: Time,
+              days: Integer,
+              expired_object_delete_marker: bool
+            },
+            id: String,
+            prefix: String,
+            filter: {
+              prefix: untyped,
+              tag: {
+                key: String,
+                value: String
+              },
+              object_size_greater_than: Integer,
+              object_size_less_than: Integer,
+              and: {
+                prefix: untyped,
+                tags: Array[
+                  {
+                    key: untyped,
+                    value: untyped
+                  }
+                ],
+                object_size_greater_than: untyped,
+                object_size_less_than: untyped
+              }
+            },
+            status: String,
+            transitions: Array[
+              {
+                date: untyped,
+                days: untyped,
+                storage_class: String
+              }
+            ],
+            noncurrent_version_transitions: Array[
+              {
+                noncurrent_days: untyped,
+                storage_class: untyped,
+                newer_noncurrent_versions: Integer
+              }
+            ],
+            noncurrent_version_expiration: {
+              noncurrent_days: untyped,
+              newer_noncurrent_versions: untyped
+            },
+            abort_incomplete_multipart_upload: {
+              days_after_initiation: Integer
+            }
+          }
+        ]
+      },
+      ?expected_bucket_owner: String,
+      ?transition_default_minimum_object_size: String
+    ) -> _PutBucketLifecycleConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutBucketLifecycleConfigurationResponse
+
+    interface _PutBucketLoggingResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def put_bucket_logging: (
+      ?bucket: String,
+      ?bucket_logging_status: {
+        logging_enabled: {
+          target_bucket: String,
+          target_grants: Array[
+            {
+              grantee: {
+                display_name: String,
+                email_address: String,
+                id: String,
+                uri: String,
+                type: String
+              },
+              permission: String
+            }
+          ],
+          target_prefix: String,
+          target_object_key_format: {
+            simple_prefix: {
+            },
+            partitioned_prefix: {
+              partition_date_source: String
+            }
+          }
+        }
+      },
+      ?content_md5: String,
+      ?checksum_algorithm: String,
+      ?expected_bucket_owner: String
+    ) -> _PutBucketLoggingResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutBucketLoggingResponse
+
+    interface _PutBucketMetricsConfigurationResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def put_bucket_metrics_configuration: (
+      ?bucket: String,
+      ?id: String,
+      ?metrics_configuration: {
+        id: String,
+        filter: {
+          prefix: String,
+          tag: {
+            key: String,
+            value: String
+          },
+          access_point_arn: String,
+          and: {
+            prefix: untyped,
+            tags: Array[
+              {
+                key: untyped,
+                value: untyped
+              }
+            ],
+            access_point_arn: untyped
+          }
+        }
+      },
+      ?expected_bucket_owner: String
+    ) -> _PutBucketMetricsConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutBucketMetricsConfigurationResponse
+
+    interface _PutBucketNotificationConfigurationResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def put_bucket_notification_configuration: (
+      ?bucket: String,
+      ?notification_configuration: {
+        topic_configurations: Array[
+          {
+            id: String,
+            topic_arn: String,
+            events: Array[String],
+            filter: {
+              key: {
+                filter_rules: Array[
+                  {
+                    name: String,
+                    value: String
+                  }
+                ]
+              }
+            }
+          }
+        ],
+        queue_configurations: Array[
+          {
+            id: untyped,
+            queue_arn: String,
+            events: untyped,
+            filter: untyped
+          }
+        ],
+        lambda_function_configurations: Array[
+          {
+            id: untyped,
+            lambda_function_arn: String,
+            events: untyped,
+            filter: untyped
+          }
+        ],
+        event_bridge_configuration: {
+        }
+      },
+      ?expected_bucket_owner: String,
+      ?skip_destination_validation: bool
+    ) -> _PutBucketNotificationConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutBucketNotificationConfigurationResponse
+
+    interface _PutBucketOwnershipControlsResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def put_bucket_ownership_controls: (
+      ?bucket: String,
+      ?content_md5: String,
+      ?expected_bucket_owner: String,
+      ?ownership_controls: {
+        rules: Array[
+          {
+            object_ownership: String
+          }
+        ]
+      },
+      ?checksum_algorithm: String
+    ) -> _PutBucketOwnershipControlsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutBucketOwnershipControlsResponse
+
+    interface _PutBucketPolicyResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def put_bucket_policy: (
+      ?bucket: String,
+      ?content_md5: String,
+      ?checksum_algorithm: String,
+      ?confirm_remove_self_bucket_access: bool,
+      ?policy: String,
+      ?expected_bucket_owner: String
+    ) -> _PutBucketPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutBucketPolicyResponse
+
+    interface _PutBucketReplicationResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def put_bucket_replication: (
+      ?bucket: String,
+      ?content_md5: String,
+      ?checksum_algorithm: String,
+      ?replication_configuration: {
+        role: String,
+        rules: Array[
+          {
+            id: String,
+            priority: Integer,
+            prefix: String,
+            filter: {
+              prefix: untyped,
+              tag: {
+                key: String,
+                value: String
+              },
+              and: {
+                prefix: untyped,
+                tags: Array[
+                  {
+                    key: untyped,
+                    value: untyped
+                  }
+                ]
+              }
+            },
+            status: String,
+            source_selection_criteria: {
+              sse_kms_encrypted_objects: {
+                status: String
+              },
+              replica_modifications: {
+                status: String
+              }
+            },
+            existing_object_replication: {
+              status: String
+            },
+            destination: {
+              bucket: String,
+              account: String,
+              storage_class: String,
+              access_control_translation: {
+                owner: String
+              },
+              encryption_configuration: {
+                replica_kms_key_id: String
+              },
+              replication_time: {
+                status: String,
+                time: {
+                  minutes: Integer
+                }
+              },
+              metrics: {
+                status: String,
+                event_threshold: untyped
+              }
+            },
+            delete_marker_replication: {
+              status: String
+            }
+          }
+        ]
+      },
+      ?token: String,
+      ?expected_bucket_owner: String
+    ) -> _PutBucketReplicationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutBucketReplicationResponse
+
+    interface _PutBucketRequestPaymentResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def put_bucket_request_payment: (
+      ?bucket: String,
+      ?content_md5: String,
+      ?checksum_algorithm: String,
+      ?request_payment_configuration: {
+        payer: String
+      },
+      ?expected_bucket_owner: String
+    ) -> _PutBucketRequestPaymentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutBucketRequestPaymentResponse
+
+    interface _PutBucketTaggingResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def put_bucket_tagging: (
+      ?bucket: String,
+      ?content_md5: String,
+      ?checksum_algorithm: String,
+      ?tagging: {
+        tag_set: Array[
+          {
+            key: String,
+            value: String
+          }
+        ]
+      },
+      ?expected_bucket_owner: String
+    ) -> _PutBucketTaggingResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutBucketTaggingResponse
+
+    interface _PutBucketVersioningResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def put_bucket_versioning: (
+      ?bucket: String,
+      ?content_md5: String,
+      ?checksum_algorithm: String,
+      ?mfa: String,
+      ?versioning_configuration: {
+        mfa_delete: String,
+        status: String
+      },
+      ?expected_bucket_owner: String
+    ) -> _PutBucketVersioningResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutBucketVersioningResponse
+
+    interface _PutBucketWebsiteResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def put_bucket_website: (
+      ?bucket: String,
+      ?content_md5: String,
+      ?checksum_algorithm: String,
+      ?website_configuration: {
+        error_document: {
+          key: String
+        },
+        index_document: {
+          suffix: String
+        },
+        redirect_all_requests_to: {
+          host_name: String,
+          protocol: String
+        },
+        routing_rules: Array[
+          {
+            condition: {
+              http_error_code_returned_equals: String,
+              key_prefix_equals: String
+            },
+            redirect: {
+              host_name: untyped,
+              http_redirect_code: String,
+              protocol: untyped,
+              replace_key_prefix_with: String,
+              replace_key_with: String
+            }
+          }
+        ]
+      },
+      ?expected_bucket_owner: String
+    ) -> _PutBucketWebsiteResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutBucketWebsiteResponse
+
+    interface _PutObjectResponse
+      include Smithy::Client::_Response[Types::PutObjectOutput]
+      def expiration: () -> String?
+      def e_tag: () -> String?
+      def checksum_crc32: () -> String?
+      def checksum_crc32_c: () -> String?
+      def checksum_crc64_nvme: () -> String?
+      def checksum_sha1: () -> String?
+      def checksum_sha256: () -> String?
+      def checksum_type: () -> String?
+      def server_side_encryption: () -> String?
+      def version_id: () -> String?
+      def sse_customer_algorithm: () -> String?
+      def sse_customer_key_md5: () -> String?
+      def ssekms_key_id: () -> String?
+      def ssekms_encryption_context: () -> String?
+      def bucket_key_enabled: () -> bool?
+      def size: () -> Integer?
+      def request_charged: () -> String?
+    end
+    def put_object: (
+      ?acl: String,
+      ?body: String,
+      ?bucket: String,
+      ?cache_control: String,
+      ?content_disposition: String,
+      ?content_encoding: String,
+      ?content_language: String,
+      ?content_length: Integer,
+      ?content_md5: String,
+      ?content_type: String,
+      ?checksum_algorithm: String,
+      ?checksum_crc32: String,
+      ?checksum_crc32_c: String,
+      ?checksum_crc64_nvme: String,
+      ?checksum_sha1: String,
+      ?checksum_sha256: String,
+      ?expires: String,
+      ?if_match: String,
+      ?if_none_match: String,
+      ?grant_full_control: String,
+      ?grant_read: String,
+      ?grant_read_acp: String,
+      ?grant_write_acp: String,
+      ?key: String,
+      ?write_offset_bytes: Integer,
+      ?metadata: Hash[String, String],
+      ?server_side_encryption: String,
+      ?storage_class: String,
+      ?website_redirect_location: String,
+      ?sse_customer_algorithm: String,
+      ?sse_customer_key: String,
+      ?sse_customer_key_md5: String,
+      ?ssekms_key_id: String,
+      ?ssekms_encryption_context: String,
+      ?bucket_key_enabled: bool,
+      ?request_payer: String,
+      ?tagging: String,
+      ?object_lock_mode: String,
+      ?object_lock_retain_until_date: Time,
+      ?object_lock_legal_hold_status: String,
+      ?expected_bucket_owner: String
+    ) -> _PutObjectResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutObjectResponse
+
+    interface _PutObjectAclResponse
+      include Smithy::Client::_Response[Types::PutObjectAclOutput]
+      def request_charged: () -> String?
+    end
+    def put_object_acl: (
+      ?acl: String,
+      ?access_control_policy: {
+        grants: Array[
+          {
+            grantee: {
+              display_name: String,
+              email_address: String,
+              id: String,
+              uri: String,
+              type: String
+            },
+            permission: String
+          }
+        ],
+        owner: {
+          display_name: untyped,
+          id: untyped
+        }
+      },
+      ?bucket: String,
+      ?content_md5: String,
+      ?checksum_algorithm: String,
+      ?grant_full_control: String,
+      ?grant_read: String,
+      ?grant_read_acp: String,
+      ?grant_write: String,
+      ?grant_write_acp: String,
+      ?key: String,
+      ?request_payer: String,
+      ?version_id: String,
+      ?expected_bucket_owner: String
+    ) -> _PutObjectAclResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutObjectAclResponse
+
+    interface _PutObjectLegalHoldResponse
+      include Smithy::Client::_Response[Types::PutObjectLegalHoldOutput]
+      def request_charged: () -> String?
+    end
+    def put_object_legal_hold: (
+      ?bucket: String,
+      ?key: String,
+      ?legal_hold: {
+        status: String
+      },
+      ?request_payer: String,
+      ?version_id: String,
+      ?content_md5: String,
+      ?checksum_algorithm: String,
+      ?expected_bucket_owner: String
+    ) -> _PutObjectLegalHoldResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutObjectLegalHoldResponse
+
+    interface _PutObjectLockConfigurationResponse
+      include Smithy::Client::_Response[Types::PutObjectLockConfigurationOutput]
+      def request_charged: () -> String?
+    end
+    def put_object_lock_configuration: (
+      ?bucket: String,
+      ?object_lock_configuration: {
+        object_lock_enabled: String,
+        rule: {
+          default_retention: {
+            mode: String,
+            days: Integer,
+            years: Integer
+          }
+        }
+      },
+      ?request_payer: String,
+      ?token: String,
+      ?content_md5: String,
+      ?checksum_algorithm: String,
+      ?expected_bucket_owner: String
+    ) -> _PutObjectLockConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutObjectLockConfigurationResponse
+
+    interface _PutObjectRetentionResponse
+      include Smithy::Client::_Response[Types::PutObjectRetentionOutput]
+      def request_charged: () -> String?
+    end
+    def put_object_retention: (
+      ?bucket: String,
+      ?key: String,
+      ?retention: {
+        mode: String,
+        retain_until_date: Time
+      },
+      ?request_payer: String,
+      ?version_id: String,
+      ?bypass_governance_retention: bool,
+      ?content_md5: String,
+      ?checksum_algorithm: String,
+      ?expected_bucket_owner: String
+    ) -> _PutObjectRetentionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutObjectRetentionResponse
+
+    interface _PutObjectTaggingResponse
+      include Smithy::Client::_Response[Types::PutObjectTaggingOutput]
+      def version_id: () -> String?
+    end
+    def put_object_tagging: (
+      ?bucket: String,
+      ?key: String,
+      ?version_id: String,
+      ?content_md5: String,
+      ?checksum_algorithm: String,
+      ?tagging: {
+        tag_set: Array[
+          {
+            key: String,
+            value: String
+          }
+        ]
+      },
+      ?expected_bucket_owner: String,
+      ?request_payer: String
+    ) -> _PutObjectTaggingResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutObjectTaggingResponse
+
+    interface _PutPublicAccessBlockResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def put_public_access_block: (
+      ?bucket: String,
+      ?content_md5: String,
+      ?checksum_algorithm: String,
+      ?public_access_block_configuration: {
+        block_public_acls: bool,
+        ignore_public_acls: untyped,
+        block_public_policy: untyped,
+        restrict_public_buckets: untyped
+      },
+      ?expected_bucket_owner: String
+    ) -> _PutPublicAccessBlockResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutPublicAccessBlockResponse
+
+    interface _RenameObjectResponse
+      include Smithy::Client::_Response[Types::RenameObjectOutput]
+    end
+    def rename_object: (
+      ?bucket: String,
+      ?key: String,
+      ?rename_source: String,
+      ?destination_if_match: String,
+      ?destination_if_none_match: String,
+      ?destination_if_modified_since: Time,
+      ?destination_if_unmodified_since: Time,
+      ?source_if_match: String,
+      ?source_if_none_match: String,
+      ?source_if_modified_since: Time,
+      ?source_if_unmodified_since: Time,
+      ?client_token: String
+    ) -> _RenameObjectResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RenameObjectResponse
+
+    interface _RestoreObjectResponse
+      include Smithy::Client::_Response[Types::RestoreObjectOutput]
+      def request_charged: () -> String?
+      def restore_output_path: () -> String?
+    end
+    def restore_object: (
+      ?bucket: String,
+      ?key: String,
+      ?version_id: String,
+      ?restore_request: {
+        days: Integer,
+        glacier_job_parameters: {
+          tier: String
+        },
+        type: String,
+        tier: untyped,
+        description: String,
+        select_parameters: {
+          input_serialization: {
+            csv: {
+              file_header_info: String,
+              comments: String,
+              quote_escape_character: String,
+              record_delimiter: String,
+              field_delimiter: String,
+              quote_character: String,
+              allow_quoted_record_delimiter: bool
+            },
+            compression_type: String,
+            json: {
+              type: String
+            },
+            parquet: {
+            }
+          },
+          expression_type: String,
+          expression: String,
+          output_serialization: {
+            csv: {
+              quote_fields: String,
+              quote_escape_character: untyped,
+              record_delimiter: untyped,
+              field_delimiter: untyped,
+              quote_character: untyped
+            },
+            json: {
+              record_delimiter: untyped
+            }
+          }
+        },
+        output_location: {
+          s3: {
+            bucket_name: String,
+            prefix: String,
+            encryption: {
+              encryption_type: String,
+              kms_key_id: String,
+              kms_context: String
+            },
+            canned_acl: String,
+            access_control_list: Array[
+              {
+                grantee: {
+                  display_name: String,
+                  email_address: String,
+                  id: String,
+                  uri: String,
+                  type: String
+                },
+                permission: String
+              }
+            ],
+            tagging: {
+              tag_set: Array[
+                {
+                  key: String,
+                  value: String
+                }
+              ]
+            },
+            user_metadata: Array[
+              {
+                name: String,
+                value: String
+              }
+            ],
+            storage_class: String
+          }
+        }
+      },
+      ?request_payer: String,
+      ?checksum_algorithm: String,
+      ?expected_bucket_owner: String
+    ) -> _RestoreObjectResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RestoreObjectResponse
+
+    interface _SelectObjectContentResponse
+      include Smithy::Client::_Response[Types::SelectObjectContentOutput]
+      def payload: () -> Types::SelectObjectContentEventStream?
+    end
+    def select_object_content: (
+      ?bucket: String,
+      ?key: String,
+      ?sse_customer_algorithm: String,
+      ?sse_customer_key: String,
+      ?sse_customer_key_md5: String,
+      ?expression: String,
+      ?expression_type: String,
+      ?request_progress: {
+        enabled: bool
+      },
+      ?input_serialization: {
+        csv: {
+          file_header_info: String,
+          comments: String,
+          quote_escape_character: String,
+          record_delimiter: String,
+          field_delimiter: String,
+          quote_character: String,
+          allow_quoted_record_delimiter: bool
+        },
+        compression_type: String,
+        json: {
+          type: String
+        },
+        parquet: {
+        }
+      },
+      ?output_serialization: {
+        csv: {
+          quote_fields: String,
+          quote_escape_character: String,
+          record_delimiter: String,
+          field_delimiter: String,
+          quote_character: String
+        },
+        json: {
+          record_delimiter: untyped
+        }
+      },
+      ?scan_range: {
+        start: Integer,
+        end: Integer
+      },
+      ?expected_bucket_owner: String
+    ) -> _SelectObjectContentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SelectObjectContentResponse
+
+    interface _UpdateBucketMetadataInventoryTableConfigurationResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def update_bucket_metadata_inventory_table_configuration: (
+      ?bucket: String,
+      ?content_md5: String,
+      ?checksum_algorithm: String,
+      ?inventory_table_configuration: {
+        configuration_state: String,
+        encryption_configuration: {
+          sse_algorithm: String,
+          kms_key_arn: String
+        }
+      },
+      ?expected_bucket_owner: String
+    ) -> _UpdateBucketMetadataInventoryTableConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateBucketMetadataInventoryTableConfigurationResponse
+
+    interface _UpdateBucketMetadataJournalTableConfigurationResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def update_bucket_metadata_journal_table_configuration: (
+      ?bucket: String,
+      ?content_md5: String,
+      ?checksum_algorithm: String,
+      ?journal_table_configuration: {
+        record_expiration: {
+          expiration: String,
+          days: Integer
+        }
+      },
+      ?expected_bucket_owner: String
+    ) -> _UpdateBucketMetadataJournalTableConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateBucketMetadataJournalTableConfigurationResponse
+
+    interface _UploadPartResponse
+      include Smithy::Client::_Response[Types::UploadPartOutput]
+      def server_side_encryption: () -> String?
+      def e_tag: () -> String?
+      def checksum_crc32: () -> String?
+      def checksum_crc32_c: () -> String?
+      def checksum_crc64_nvme: () -> String?
+      def checksum_sha1: () -> String?
+      def checksum_sha256: () -> String?
+      def sse_customer_algorithm: () -> String?
+      def sse_customer_key_md5: () -> String?
+      def ssekms_key_id: () -> String?
+      def bucket_key_enabled: () -> bool?
+      def request_charged: () -> String?
+    end
+    def upload_part: (
+      ?body: String,
+      ?bucket: String,
+      ?content_length: Integer,
+      ?content_md5: String,
+      ?checksum_algorithm: String,
+      ?checksum_crc32: String,
+      ?checksum_crc32_c: String,
+      ?checksum_crc64_nvme: String,
+      ?checksum_sha1: String,
+      ?checksum_sha256: String,
+      ?key: String,
+      ?part_number: Integer,
+      ?upload_id: String,
+      ?sse_customer_algorithm: String,
+      ?sse_customer_key: String,
+      ?sse_customer_key_md5: String,
+      ?request_payer: String,
+      ?expected_bucket_owner: String
+    ) -> _UploadPartResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UploadPartResponse
+
+    interface _UploadPartCopyResponse
+      include Smithy::Client::_Response[Types::UploadPartCopyOutput]
+      def copy_source_version_id: () -> String?
+      def copy_part_result: () -> Types::CopyPartResult?
+      def server_side_encryption: () -> String?
+      def sse_customer_algorithm: () -> String?
+      def sse_customer_key_md5: () -> String?
+      def ssekms_key_id: () -> String?
+      def bucket_key_enabled: () -> bool?
+      def request_charged: () -> String?
+    end
+    def upload_part_copy: (
+      ?bucket: String,
+      ?copy_source: String,
+      ?copy_source_if_match: String,
+      ?copy_source_if_modified_since: Time,
+      ?copy_source_if_none_match: String,
+      ?copy_source_if_unmodified_since: Time,
+      ?copy_source_range: String,
+      ?key: String,
+      ?part_number: Integer,
+      ?upload_id: String,
+      ?sse_customer_algorithm: String,
+      ?sse_customer_key: String,
+      ?sse_customer_key_md5: String,
+      ?copy_source_sse_customer_algorithm: String,
+      ?copy_source_sse_customer_key: String,
+      ?copy_source_sse_customer_key_md5: String,
+      ?request_payer: String,
+      ?expected_bucket_owner: String,
+      ?expected_source_bucket_owner: String
+    ) -> _UploadPartCopyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UploadPartCopyResponse
+
+    interface _WriteGetObjectResponseResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def write_get_object_response: (
+      ?request_route: String,
+      ?request_token: String,
+      ?body: String,
+      ?status_code: Integer,
+      ?error_code: String,
+      ?error_message: String,
+      ?accept_ranges: String,
+      ?cache_control: String,
+      ?content_disposition: String,
+      ?content_encoding: String,
+      ?content_language: String,
+      ?content_length: Integer,
+      ?content_range: String,
+      ?content_type: String,
+      ?checksum_crc32: String,
+      ?checksum_crc32_c: String,
+      ?checksum_crc64_nvme: String,
+      ?checksum_sha1: String,
+      ?checksum_sha256: String,
+      ?delete_marker: bool,
+      ?e_tag: String,
+      ?expires: String,
+      ?expiration: String,
+      ?last_modified: Time,
+      ?missing_meta: Integer,
+      ?metadata: Hash[String, String],
+      ?object_lock_mode: String,
+      ?object_lock_legal_hold_status: String,
+      ?object_lock_retain_until_date: Time,
+      ?parts_count: Integer,
+      ?replication_status: String,
+      ?request_charged: String,
+      ?restore: String,
+      ?server_side_encryption: String,
+      ?sse_customer_algorithm: String,
+      ?ssekms_key_id: String,
+      ?sse_customer_key_md5: String,
+      ?storage_class: String,
+      ?tag_count: Integer,
+      ?version_id: String,
+      ?bucket_key_enabled: bool
+    ) -> _WriteGetObjectResponseResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _WriteGetObjectResponseResponse
+  end
+end

@@ -38,7 +38,8 @@ module BuildTools
       def endpoint_function_bindings
         {
           'aws.partition' => 'Aws::Core::EndpointRules.partition',
-          'aws.parseArn' => 'Aws::Core::EndpointRules.parse_arn'
+          'aws.parseArn' => 'Aws::Core::EndpointRules.parse_arn',
+          'aws.isVirtualHostableS3Bucket' => 'Aws::Core::EndpointRules.is_virtual_hostable_s3_bucket?'
         }
       end
 
