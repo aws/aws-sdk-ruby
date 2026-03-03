@@ -176,8 +176,7 @@ module Aws
           error = validate_key(key)
           return DownloadEntry.new(path: '', params: params, error: error) if error
 
-          updated_key = build_key(key)
-          full_path = normalize_path(File.join(@destination_dir, updated_key))
+          full_path = normalize_path(File.join(@destination_dir, key))
           DownloadEntry.new(path: full_path, params: params, error: error)
         end
 
@@ -189,13 +188,6 @@ module Aws
 
         def directory_marker?(obj)
           obj.key.end_with?('/') && obj.size.zero?
-        end
-
-        def build_key(key)
-          return key unless @s3_prefix
-
-          prefix = @s3_prefix.end_with?('/') ? @s3_prefix : "#{@s3_prefix}/"
-          key.delete_prefix(prefix)
         end
 
         def normalize_path(path)

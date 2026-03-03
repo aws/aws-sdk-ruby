@@ -80,7 +80,7 @@ module Aws
         end
 
         context 's3 prefix' do
-          it 'removes prefixes to all keys when set' do
+          it 'preserves full object keys in local paths' do
             client.stub_responses(
               :list_objects_v2,
               {
@@ -94,8 +94,8 @@ module Aws
             result = downloader.download(temp_dir, bucket: 'test-bucket', s3_prefix: 'prefix')
 
             expect(result[:completed_downloads]).to eq(2)
-            expect(File.exist?(File.join(temp_dir, 'file1.txt'))).to be true
-            expect(File.exist?(File.join(temp_dir, 'subdir', 'file2.txt'))).to be true
+            expect(File.exist?(File.join(temp_dir, 'prefix', 'file1.txt'))).to be true
+            expect(File.exist?(File.join(temp_dir, 'prefix', 'subdir', 'file2.txt'))).to be true
           end
         end
 

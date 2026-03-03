@@ -124,10 +124,8 @@ module Aws
       # @param [Hash] options
       #
       # @option options [String] :s3_prefix (nil)
-      #   Limit the download to objects that begin with the specific prefix. The prefix is stripped from
-      #   object key when downloading.
-      #   For example, with prefix `photos/2024/`, an object `photos/2024/vacation/beach.jpg`
-      #   is downloaded to `<destination>/vacation/beach.jpg`.
+      #   Limit the download to objects that begin with the specific prefix.
+      #   The full object key is preserved in the local file path.
       #
       # @option options [Boolean] :ignore_failure (false)
       #   How to handle individual file download failures:
