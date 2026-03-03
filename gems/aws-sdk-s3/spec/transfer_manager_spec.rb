@@ -4,7 +4,7 @@ require_relative 'transfer_manager_spec_helper'
 
 module Aws
   module S3
-    describe TransferManager, :jruby_flaky  do
+    describe TransferManager, :jruby_flaky do
       let(:client) { S3::Client.new(stub_responses: true) }
       let(:subject) { TransferManager.new(client: client) }
       let(:one_mb_size) { 1024 * 1024 }

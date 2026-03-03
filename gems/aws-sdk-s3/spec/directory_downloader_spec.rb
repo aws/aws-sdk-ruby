@@ -126,7 +126,7 @@ module Aws
 
         context 'filter callbacks' do
           it 'excludes objects' do
-            filter = ->(key) { key.end_with?('.txt') }
+            filter = ->(obj) { obj.key.end_with?('.txt') }
             result = downloader.download(temp_dir, bucket: 'test-bucket', filter_callback: filter)
 
             expect(result[:completed_downloads]).to eq(2)
