@@ -135,7 +135,7 @@ module Aws
       #   * `true` - Continue downloading remaining objects, report failures in result.
       #
       # @option options [Proc] :filter_callback (nil)
-      #   A Proc to filter which objects to download. Called with `(key)` for each object.
+      #   A Proc to filter which objects to download. Called with `(object)` for each object.
       #   Return `true` to download the object, `false` to skip it.
       #
       # @option options [Proc] :request_callback (nil)
