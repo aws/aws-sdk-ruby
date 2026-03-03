@@ -7,7 +7,9 @@ module Aws
     #
     # * upload a file with multipart upload
     # * upload a stream with multipart upload
-    # * download a S3 object with multipart download
+    # * upload all files in a directory to an S3 bucket recursively or non-recursively
+    # * download an S3 object with multipart download
+    # * download all objects in an S3 bucket with same prefix to a local directory
     # * track transfer progress by using progress listener
     #
     # ## Executor Management
@@ -49,19 +51,21 @@ module Aws
     #     executor.shutdown # You must shutdown custom executors
     #
     class TransferManager
-
       # @param [Hash] options
       # @option options [S3::Client] :client (S3::Client.new)
       #   The S3 client to use for {TransferManager} operations. If not provided, a new default client
       #   will be created automatically.
-      # @option options [Object] :executor
+      # @option options [Object] :executor (nil)
       #   The executor to use for multipart operations. Must implement the same interface as {DefaultExecutor}.
       #   If not provided, a new {DefaultExecutor} will be created automatically for each operation and
       #   shutdown after completion. When provided a custom executor, it will be reused across operations, and
       #   you are responsible for shutting it down when finished.
+      # @option options [Logger] :logger (nil)
+      #   The Logger instance for logging transfer operations. If not set, logging is disabled.
       def initialize(options = {})
         @client = options[:client] || Client.new
         @executor = options[:executor]
+        @logger = options[:logger]
       end
 
       # @return [S3::Client]
@@ -69,6 +73,93 @@ module Aws
 
       # @return [Object]
       attr_reader :executor
+
+      # @return [Logger]
+      attr_reader :logger
+
+      # Downloads objects in a S3 bucket to a local directory.
+      #
+      # The downloaded directory structure will match the provided S3 virtual bucket. For example,
+      # assume that you have the following keys in your bucket:
+      #
+      # * sample.jpg
+      # * photos/2022/January/sample.jpg
+      # * photos/2022/February/sample1.jpg
+      # * photos/2022/February/sample2.jpg
+      # * photos/2022/February/sample3.jpg
+      #
+      # Given a request to download bucket to a destination with path of `/test`, the downloaded
+      # directory would look like this:
+      #
+      # ```
+      # |- test
+      #   |- sample.jpg
+      #   |- photos
+      #      |- 2022
+      #          |- January
+      #             |- sample.jpg
+      #          |- February
+      #             |- sample1.jpg
+      #             |- sample2.jpg
+      #             |- sample3.jpg
+      # ```
+      #
+      # Directory markers (zero-byte objects ending with `/`) are skipped during download.
+      # Existing files with same name as downloaded objects will be overwritten.
+      #
+      # Object keys containing path traversal sequences (`..` or `.`) will raise an error.
+      #
+      # @example Downloading buckets to a local directory
+      #     tm = TransferManager.new
+      #     tm.download_directory('/local/path', bucket: 'my-bucket')
+      #     # => {completed_downloads: 7, failed_downloads: 0, errors: 0}
+      #
+      # @param [String] destination
+      #  The location directory path to download objects to. Created if it doesn't exist.
+      #  If files with the same names already exist in the destination, they will be overwritten.
+      #
+      # @param [String] bucket
+      #   The name of the bucket to download from.
+      #
+      # @param [Hash] options
+      #
+      # @option options [String] :s3_prefix (nil)
+      #   Limit the download to objects that begin with the specific prefix. The prefix is stripped from
+      #   object key when downloading.
+      #   For example, with prefix `photos/2024/`, an object `photos/2024/vacation/beach.jpg`
+      #   is downloaded to `<destination>/vacation/beach.jpg`.
+      #
+      # @option options [Boolean] :ignore_failure (false)
+      #   How to handle individual file download failures:
+      #   * `false` (default) - Cancel all ongoing requests, terminate the ongoing downloads and raise an exception
+      #   * `true` - Continue downloading remaining objects, report failures in result.
+      #
+      # @option options [Proc] :filter_callback (nil)
+      #   A Proc to filter which objects to download. Called with `(key)` for each object.
+      #   Return `true` to download the object, `false` to skip it.
+      #
+      # @option options [Proc] :request_callback (nil)
+      #   A Proc to modify download parameters for each object. Called with `(key, params)`.
+      #   Must return the modified parameters.
+      #
+      # @option options [Integer] :thread_count (10)
+      #   The number of threads to use for multipart downloads of individual large files.
+      #   Only used when no custom executor is provided to the {TransferManager}.
+      #
+      # @raise [DirectoryDownloadError] Raised when download fails with `ignore_failure: false` (default)
+      #
+      # @return [Hash] Returns a hash with download statistics:
+      #
+      #   * `:completed_downloads` - Number of objects successfully downloaded
+      #   * `:failed_downloads` - Number of objects that failed to download
+      #   * `:errors` - Array of errors for failed downloads (only present when failures occur)
+      def download_directory(destination, bucket:, **options)
+        executor = @executor || DefaultExecutor.new(max_threads: options.delete(:thread_count))
+        downloader = DirectoryDownloader.new(client: @client, executor: executor, logger: @logger)
+        result = downloader.download(destination, bucket: bucket, **options)
+        executor.shutdown unless @executor
+        result
+      end
 
       # Downloads a file in S3 to a path on disk.
       #
@@ -120,8 +211,9 @@ module Aws
       #
       # @option options [Integer] :chunk_size required in `"get_range"` mode.
       #
-      # @option options [Integer] :thread_count (10) Customize threads used in the multipart download.
-      #   Only used when no custom executor is provided (creates {DefaultExecutor} with given thread count).
+      # @option options [Integer] :thread_count (10)
+      #   The number of threads to use for multipart downloads.
+      #   Only used when no custom executor is provided to the {TransferManager}.
       #
       # @option options [String] :checksum_mode ("ENABLED")
       #   This option is deprecated. Use `:response_checksum_validation` on your S3 client instead.
@@ -151,6 +243,120 @@ module Aws
         downloader.download(destination, download_opts)
         executor.shutdown unless @executor
         true
+      end
+
+      # Uploads all files under the given directory to the provided S3 bucket.
+      # The key name transformation depends on the optional prefix.
+      #
+      # By default, all subdirectories will be uploaded non-recursively and symbolic links are not
+      # followed automatically. Assume you have a local directory `/test` with the following structure:
+      #
+      # ```
+      # |- test
+      #   |- sample.jpg
+      #   |- photos
+      #      |- 2022
+      #          |- January
+      #             |- sample.jpg
+      #          |- February
+      #             |- sample1.jpg
+      #             |- sample2.jpg
+      #             |- sample3.jpg
+      # ```
+      #
+      # Give a request to upload directory `/test` to an S3 bucket on default setting, the target bucket will have the
+      # following S3 objects:
+      #
+      # * sample.jpg
+      #
+      # If `:recursive` set to `true`, the target bucket will have the following S3 buckets:
+      #
+      # * sample.jpg
+      # * photos/2022/January/sample.jpg
+      # * photos/2022/February/sample1.jpg
+      # * photos/2022/February/sample2.jpg
+      # * photos/2022/February/sample3.jpg
+      #
+      # Only regular files are uploaded; special files (sockets, pipes, devices) are skipped.
+      # Symlink cycles are detected and skipped when following symlinks.
+      # Empty directories are not represented in S3. Existing S3 objects with the same key are
+      # overwritten.
+      #
+      # @example Uploading a directory
+      #     tm = TransferManager.new
+      #     tm.upload_directory('/path/to/directory', bucket: 'bucket')
+      #     # => {completed_uploads: 7, failed_uploads: 0}
+      #
+      # @example Using filter callback to upload only text files
+      #     tm = TransferManager.new
+      #     filter = proc do |file_path, file_name|
+      #       File.extname(file_name) == '.txt'  # Only upload .txt files
+      #     end
+      #     tm.upload_directory('/path/to/directory', bucket: 'bucket', filter_callback: filter)
+      #
+      # @param [String, Pathname, File, Tempfile] source
+      #  The source directory to upload.
+      #
+      # @param [String] bucket
+      #   The name of the bucket to upload objects to.
+      #
+      # @param [Hash] options
+      #
+      # @option options [String] :s3_prefix (nil)
+      #   The S3 key prefix to use for each object. If not provided, files will be uploaded to the root of the bucket.
+      #
+      # @option options [Boolean] :recursive (false)
+      #   Whether to upload directories recursively:
+      #
+      #   * `false` (default) - only files in the top-level directory are uploaded, subdirectories are ignored.
+      #   * `true` - all files and subdirectories are uploaded recursively.
+      #
+      # @option options [Boolean] :follow_symlinks (false)
+      #   Whether to follow symbolic links when traversing the file tree:
+      #
+      #   * `false` (default) - symbolic links are ignored and not uploaded.
+      #   * `true` - symbolic links are followed and their target files/directories are uploaded. Symlink cycles
+      #     are detected and skipped.
+      #
+      # @option options [Boolean] :ignore_failure (false)
+      #   How to handle individual file upload failures:
+      #
+      #   * `false` (default) - Cancel all ongoing requests, terminate the directory upload, and raise an exception
+      #   * `true` - Ignore the failure and continue the transfer for other files
+      #
+      # @option options [Proc] :filter_callback (nil)
+      #   A Proc to filter which files to upload. Called with `(file_path, file_name)` for each file.
+      #   Return `true` to upload the file, `false` to skip it.
+      #
+      # @option options [Proc] :request_callback (nil)
+      #   A Proc to modify upload parameters for each file. Called with `(file_path, params)`.
+      #   Must return the modified parameters.
+      #
+      # @option options [Integer] :http_chunk_size (16384) Size in bytes for each chunk when streaming request bodies
+      #   over HTTP. Controls the buffer size used when sending data to S3. Larger values may improve throughput by
+      #   reducing the number of network writes, but use more memory. Custom values must be at least 16KB.
+      #   Only Ruby MRI is supported.
+      #
+      # @option options [Integer] :thread_count (10)
+      #   The number of threads to use for multipart uploads of individual large files.
+      #   Only used when no custom executor is provided to the {TransferManager}.
+      #
+      # @raise [DirectoryUploadError] Raised when:
+      #
+      #   * Upload failure with `ignore_failure: false` (default)
+      #   * Directory traversal failure (permission denied, broken symlink, etc.)
+      #
+      # @return [Hash] Returns a hash with upload statistics:
+      #
+      #   * `:completed_uploads` - Number of files successfully uploaded
+      #   * `:failed_uploads` - Number of files that failed to upload
+      #   * `:errors` - Array of error objects for failed uploads (only present when failures occur)
+      def upload_directory(source, bucket:, **options)
+        executor = @executor || DefaultExecutor.new(max_threads: options.delete(:thread_count))
+        uploader = DirectoryUploader.new(client: @client, executor: executor, logger: @logger)
+        result = uploader.upload(source, bucket, **options.merge(http_chunk_size: resolve_http_chunk_size(options)))
+        executor.shutdown unless @executor
+        result
       end
 
       # Uploads a file from disk to S3.
@@ -202,8 +408,9 @@ module Aws
       #   Files larger han or equal to `:multipart_threshold` are uploaded using the S3 multipart upload APIs.
       #   Default threshold is `100MB`.
       #
-      # @option options [Integer] :thread_count (10) Customize threads used in the multipart upload.
-      #   Only used when no custom executor is provided (creates {DefaultExecutor} with the given thread count).
+      # @option options [Integer] :thread_count (10)
+      #   The number of threads to use for multipart uploads.
+      #   Only used when no custom executor is provided to the {TransferManager}.
       #
       # @option option [Integer] :http_chunk_size (16384) Size in bytes for each chunk when streaming request bodies
       #   over HTTP. Controls the buffer size used when sending data to S3. Larger values may improve throughput by
@@ -226,17 +433,7 @@ module Aws
       # @see Client#upload_part
       def upload_file(source, bucket:, key:, **options)
         upload_opts = options.merge(bucket: bucket, key: key)
-        http_chunk_size =
-          if defined?(JRUBY_VERSION)
-            nil
-          else
-            chunk = upload_opts.delete(:http_chunk_size)
-            if chunk && chunk < Aws::Plugins::ChecksumAlgorithm::DEFAULT_TRAILER_CHUNK_SIZE
-              raise ArgumentError, ':http_chunk_size must be at least 16384 bytes (16KB)'
-            end
-
-            chunk
-          end
+        http_chunk_size = resolve_http_chunk_size(upload_opts)
 
         executor = @executor || DefaultExecutor.new(max_threads: upload_opts.delete(:thread_count))
         uploader = FileUploader.new(
@@ -315,6 +512,19 @@ module Aws
         uploader.upload(upload_opts, &block)
         executor.shutdown unless @executor
         true
+      end
+
+      private
+
+      def resolve_http_chunk_size(opts)
+        return if defined?(JRUBY_VERSION)
+
+        chunk = opts.delete(:http_chunk_size)
+        if chunk && chunk < Aws::Plugins::ChecksumAlgorithm::DEFAULT_TRAILER_CHUNK_SIZE
+          raise ArgumentError, ':http_chunk_size must be at least 16384 bytes (16KB)'
+        end
+
+        chunk
       end
     end
   end

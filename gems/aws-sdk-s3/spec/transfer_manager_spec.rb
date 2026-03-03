@@ -1,12 +1,10 @@
 # frozen_string_literal: true
 
-require_relative 'spec_helper'
-require 'socket'
-require 'tempfile'
+require_relative 'transfer_manager_spec_helper'
 
 module Aws
   module S3
-    describe TransferManager do
+    describe TransferManager, :jruby_flaky  do
       let(:client) { S3::Client.new(stub_responses: true) }
       let(:subject) { TransferManager.new(client: client) }
       let(:one_mb_size) { 1024 * 1024 }
@@ -22,7 +20,40 @@ module Aws
         end
       end
 
-      describe '#download_file', :jruby_flaky do
+      describe '#download_directory' do
+        let(:temp_dir) { Dir.mktmpdir }
+
+        before do
+          client.stub_responses(
+            :list_objects_v2,
+            {
+              contents: [{ key: 'file1.txt', size: 100 }, { key: 'file2.txt', size: 100 }],
+              is_truncated: false
+            }
+          )
+          client.stub_responses(:get_object, { body: 'content' })
+        end
+
+        after do
+          FileUtils.rm_rf(temp_dir)
+        end
+
+        it 'returns results when download succeeds' do
+          result = subject.download_directory(temp_dir, bucket: 'bucket')
+          expect(result[:completed_downloads]).to eq(2)
+          expect(result[:failed_downloads]).to eq(0)
+        end
+
+        it 'raises when download errors' do
+          client.stub_responses(:get_object, 'AccessDenied')
+
+          expect do
+            subject.download_directory(temp_dir, bucket: 'bucket', ignore_failure: false)
+          end.to raise_error(DirectoryDownloadError)
+        end
+      end
+
+      describe '#download_file' do
         let(:path) { Tempfile.new('destination').path }
 
         before do
@@ -48,6 +79,31 @@ module Aws
 
           subject.download_file(path, bucket: 'bucket', key: 'key', progress_callback: callback)
           expect(n_calls).to eq(1)
+        end
+      end
+
+      describe '#upload_directory' do
+        let(:temp_dir) { Dir.mktmpdir }
+
+        before do
+          TransferManagerSpecHelper.create_test_directory_structure(temp_dir)
+        end
+
+        after do
+          FileUtils.rm_rf(temp_dir)
+        end
+
+        it 'returns upload results when upload succeeds' do
+          result = subject.upload_directory(temp_dir, bucket: 'bucket')
+          expect(result[:completed_uploads]).to eq(5)
+          expect(result[:failed_uploads]).to eq(0)
+        end
+
+        it 'raises when upload errors' do
+          client.stub_responses(:put_object, 'AccessDenied')
+          expect do
+            subject.upload_directory(temp_dir, bucket: 'bucket', ignore_failure: false)
+          end.to raise_error(DirectoryUploadError)
         end
       end
 
@@ -105,43 +161,10 @@ module Aws
             end
           end
 
-          def start_mirror_server(chunk_size)
-            server = TCPServer.new('127.0.0.1', 0)
-            port = server.addr[1]
-            chunks = []
-
-            server_thread = Thread.new do
-              Timeout.timeout(10) do
-                client = server.accept
-                headers = ''
-                while (line = client.gets)
-                  headers += line
-                  break if line.strip.empty?
-                end
-
-                if headers.include?('Expect: 100-continue')
-                  client.write("HTTP/1.1 100 Continue\r\n\r\n")
-
-                  loop do
-                    sleep(0.01) # needs wait between reads
-                    data = client.read_nonblock(chunk_size, exception: false)
-                    break if data == :wait_readable || data.nil?
-
-                    chunks << data.size
-                  end
-                end
-                client.write("HTTP/1.1 200 OK\r\nContent-Length: 0\r\n\r\n")
-              ensure
-                client.close
-              end
-            end
-            [server, server_thread, port]
-          end
-
           it 'uses the given chunk size when uploading' do
             WebMock.disable!
             chunk_size = 32_768
-            server, server_thread, port = start_mirror_server(chunk_size)
+            server, server_thread, port = TransferManagerSpecHelper.start_mirror_server(chunk_size)
             client = Aws::S3::Client.new(
               endpoint: "http://127.0.0.1:#{port}",
               region: 'us-east-1',
@@ -155,8 +178,8 @@ module Aws
               .to receive(:custom_stream).and_call_original
             allow_any_instance_of(Aws::Plugins::ChecksumAlgorithm::AwsChunkedTrailerDigestIO)
               .to receive(:read).and_wrap_original do |method, size|
-              read_sizes << size
-              method.call(size)
+                read_sizes << size
+                method.call(size)
             end
 
             tm.upload_file(test_file, bucket: 'test-bucket', key: 'test-key', http_chunk_size: chunk_size)
@@ -170,7 +193,7 @@ module Aws
           it 'uses default chunk size' do
             WebMock.disable!
             chunk_size = 16_384
-            server, server_thread, port = start_mirror_server(chunk_size)
+            server, server_thread, port = TransferManagerSpecHelper.start_mirror_server(chunk_size)
             client = Aws::S3::Client.new(
               endpoint: "http://127.0.0.1:#{port}",
               region: 'us-east-1',
@@ -182,8 +205,8 @@ module Aws
 
             allow_any_instance_of(Aws::Plugins::ChecksumAlgorithm::AwsChunkedTrailerDigestIO)
               .to receive(:read).and_wrap_original do |method, size|
-              read_sizes << size
-              method.call(size)
+                read_sizes << size
+                method.call(size)
             end
             tm.upload_file(test_file, bucket: 'test-bucket', key: 'test-key')
             server_thread.join
@@ -201,7 +224,7 @@ module Aws
         end
       end
 
-      describe '#upload_stream', :jruby_flaky do
+      describe '#upload_stream' do
         let(:seventeen_mb) { one_mb_content * 17 }
 
         it 'returns true when succeeds' do

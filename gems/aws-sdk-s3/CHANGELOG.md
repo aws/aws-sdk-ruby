@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Added `#upload_directory` and `#download_directory` to `Aws::S3::TransferManager` for bulk directory transfers.
+
 1.213.0 (2026-01-28)
 ------------------
 
