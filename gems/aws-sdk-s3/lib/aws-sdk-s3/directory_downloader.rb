@@ -181,10 +181,10 @@ module Aws
           DownloadEntry.new(path: full_path, params: params, error: error)
         end
 
-        def include_object?(key)
+        def include_object?(obj)
           return true unless @filter_callback
 
-          @filter_callback.call(key)
+          @filter_callback.call(obj)
         end
 
         def directory_marker?(obj)
@@ -208,7 +208,7 @@ module Aws
           resp = @client.list_objects_v2(bucket: @bucket, prefix: @s3_prefix, continuation_token: continuation_token)
           resp.contents&.each do |o|
             next if directory_marker?(o)
-            next unless include_object?(o.key)
+            next unless include_object?(o)
 
             @object_queue << build_object_entry(o.key)
           end
