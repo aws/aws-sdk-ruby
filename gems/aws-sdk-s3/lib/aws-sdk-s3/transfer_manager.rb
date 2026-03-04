@@ -124,8 +124,10 @@ module Aws
       # @param [Hash] options
       #
       # @option options [String] :s3_prefix (nil)
-      #   Limit the download to objects that begin with the specific prefix.
-      #   The full object key is preserved in the local file path.
+      #   Limit the download to objects that begin with the specified prefix. The prefix is
+      #   passed directly to the S3 ListObjectsV2 API for filtering. To match only objects
+      #   within a specific "folder", include a trailing `/` (e.g., `"photos/"` instead of
+      #   `"photos"`). The full object key is preserved in the local file path.
       #
       # @option options [Boolean] :ignore_failure (false)
       #   How to handle individual file download failures:
@@ -143,6 +145,11 @@ module Aws
       # @option options [Integer] :thread_count (10)
       #   The number of threads to use for multipart downloads of individual large files.
       #   Only used when no custom executor is provided to the {TransferManager}.
+      #
+      # @note On case-insensitive filesystems (e.g., Windows, macOS default), S3 object keys that
+      #   differ only by case (e.g., "File.txt" and "file.txt") may overwrite each other when
+      #   downloaded. This condition is not automatically detected. Use the `:filter_callback`
+      #   option to handle such conflicts if needed.
       #
       # @raise [DirectoryDownloadError] Raised when download fails with `ignore_failure: false` (default)
       #
