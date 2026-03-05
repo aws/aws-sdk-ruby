@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Fix `LoadError` when requiring `aws-sdk-s3` due to missing `directory_progress` file. 
+
 1.214.0 (2026-03-04)
 ------------------
 
