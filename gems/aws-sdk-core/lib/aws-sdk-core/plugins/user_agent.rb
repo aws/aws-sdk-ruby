@@ -57,7 +57,9 @@ module Aws
           "SSO_LOGIN_AUTH" : "2",
           "BEARER_SERVICE_ENV_VARS": "3",
           "CREDENTIALS_PROFILE_LOGIN": "AC",
-          "CREDENTIALS_LOGIN": "AD"
+          "CREDENTIALS_LOGIN": "AD",
+          "S3_TRANSFER_UPLOAD_DIRECTORY": "9",
+          "S3_TRANSFER_DOWNLOAD_DIRECTORY": "+"
         }
       METRICS
 

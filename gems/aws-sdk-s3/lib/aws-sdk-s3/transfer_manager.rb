@@ -159,11 +159,13 @@ module Aws
       #   * `:failed_downloads` - Number of objects that failed to download
       #   * `:errors` - Array of errors for failed downloads (only present when failures occur)
       def download_directory(destination, bucket:, **options)
-        executor = @executor || DefaultExecutor.new(max_threads: options.delete(:thread_count))
-        downloader = DirectoryDownloader.new(client: @client, executor: executor, logger: @logger)
-        result = downloader.download(destination, bucket: bucket, **options)
-        executor.shutdown unless @executor
-        result
+        Aws::Plugins::UserAgent.metric('S3_TRANSFER', 'S3_TRANSFER_DOWNLOAD_DIRECTORY') do
+          executor = @executor || DefaultExecutor.new(max_threads: options.delete(:thread_count))
+          downloader = DirectoryDownloader.new(client: @client, executor: executor, logger: @logger)
+          result = downloader.download(destination, bucket: bucket, **options)
+          executor.shutdown unless @executor
+          result
+        end
       end
 
       # Downloads a file in S3 to a path on disk.
@@ -357,11 +359,13 @@ module Aws
       #   * `:failed_uploads` - Number of files that failed to upload
       #   * `:errors` - Array of error objects for failed uploads (only present when failures occur)
       def upload_directory(source, bucket:, **options)
-        executor = @executor || DefaultExecutor.new(max_threads: options.delete(:thread_count))
-        uploader = DirectoryUploader.new(client: @client, executor: executor, logger: @logger)
-        result = uploader.upload(source, bucket, **options.merge(http_chunk_size: resolve_http_chunk_size(options)))
-        executor.shutdown unless @executor
-        result
+        Aws::Plugins::UserAgent.metric('S3_TRANSFER', 'S3_TRANSFER_UPLOAD_DIRECTORY') do
+          executor = @executor || DefaultExecutor.new(max_threads: options.delete(:thread_count))
+          uploader = DirectoryUploader.new(client: @client, executor: executor, logger: @logger)
+          result = uploader.upload(source, bucket, **options.merge(http_chunk_size: resolve_http_chunk_size(options)))
+          executor.shutdown unless @executor
+          result
+        end
       end
 
       # Uploads a file from disk to S3.
