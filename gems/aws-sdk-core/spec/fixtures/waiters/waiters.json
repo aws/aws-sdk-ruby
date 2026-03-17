@@ -383,6 +383,30 @@
           "argument": "BooleanList"
         }
       ]
+    },
+    "ErrorMatcherWithBooleanTrue": {
+      "delay": 0,
+      "operation": "WaiterOperation",
+      "maxAttempts": 25,
+      "acceptors": [
+        {
+          "matcher": "error",
+          "expected": true,
+          "state": "success"
+        }
+      ]
+    },
+    "ErrorMatcherWithBooleanFalse": {
+      "delay": 0,
+      "operation": "WaiterOperation",
+      "maxAttempts": 25,
+      "acceptors": [
+        {
+          "matcher": "error",
+          "expected": false,
+          "state": "success"
+        }
+      ]
     }
   }
 }
