@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Fix `require_https_for_sse_cpk` option being ignored; the HTTPS enforcement for SSE-CPK operations now correctly respects the configured value, allowing it to be disabled for local development.
+
 1.217.0 (2026-03-18)
 ------------------
 
