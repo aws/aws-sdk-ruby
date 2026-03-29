@@ -41,8 +41,10 @@ This should only be disabled for local testing.
           end
 
           def require_https(context)
-            if context.config.require_https_for_sse_cpk &&
-                !(URI::HTTPS === context.config.endpoint)
+            # Skip the check if the user opted out of HTTPS enforcement
+            return unless context.config.require_https_for_sse_cpk
+
+            unless URI::HTTPS === context.config.endpoint
               msg = <<-MSG.strip.gsub("\n", ' ')
                 Attempting to send customer-provided-keys for S3
                 server-side-encryption over HTTP; Please configure a HTTPS
