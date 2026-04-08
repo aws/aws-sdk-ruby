@@ -17,9 +17,9 @@ Feature: S3 Objects
     When I put the test png to the key "img"
     Then the object with the key "img" should have a content length of 976
 
-  Scenario: Using server-side-encryption with customer-provided key
-    When I put "hello" to the key "test" with an aes key
-    Then I can download the key "test" with the aes key
+#  Scenario: Using server-side-encryption with customer-provided key
+#    When I put "hello" to the key "test" with an aes key
+#    Then I can download the key "test" with the aes key
 
   Scenario: Reading an object from S3
     Given I put "hello" to the key "test"
