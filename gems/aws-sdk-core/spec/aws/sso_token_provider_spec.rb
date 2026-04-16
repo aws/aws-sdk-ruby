@@ -56,6 +56,7 @@ module Aws
         expect(arg1).to eq(path)
         expect(Json.load(arg2)).to eq(expected_token)
       end
+      expect(File).to receive(:chmod).with(0o600, path)
     end
 
     describe '#initialize' do
