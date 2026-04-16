@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Explicitly set 0600 permissions on SSO/login cache files.
+
 3.244.0 (2026-03-18)
 ------------------
 

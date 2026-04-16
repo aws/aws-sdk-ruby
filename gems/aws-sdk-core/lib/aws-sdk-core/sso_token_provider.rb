@@ -108,6 +108,7 @@ module Aws
       cached_token = token_json.dup
       cached_token['expiresAt'] = cached_token['expiresAt'].iso8601
       File.write(sso_cache_file, Json.dump(cached_token))
+      File.chmod(0o600, sso_cache_file)
     end
 
     def sso_cache_file

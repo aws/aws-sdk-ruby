@@ -221,6 +221,7 @@ module Aws
         temp_file.write(Json.dump(cached_token))
         temp_file.close
         FileUtils.mv(temp_file.path, login_cache_file)
+        File.chmod(0o600, login_cache_file)
       ensure
         temp_file.unlink if File.exist?(temp_file.path) # Ensure temp file is cleaned up
       end
