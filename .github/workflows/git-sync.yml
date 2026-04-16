@@ -1,0 +1,24 @@
+name: git-sync
+
+on:
+  push:
+    branches: [ version-3 ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  git-sync:
+    if: github.repository == 'aws/aws-sdk-ruby'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: git-sync
+        uses: wei/git-sync@v3
+        with:
+          source_repo: 'aws/aws-sdk-ruby'
+          source_branch: 'version-3'
+          destination_repo: ${{ secrets.GIT_SYNC_DESTINATION_REPO }}
+          destination_branch: 'version-3'
+          destination_ssh_private_key: ${{ secrets.GIT_SYNC_PRIVATE_DEPLOY_KEY }}
