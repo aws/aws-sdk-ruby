@@ -1,0 +1,271 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module Interconnect
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Interconnect/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?account_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?auth_scheme_preference: Array[String],
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_checksum_calculation: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?response_checksum_validation: String,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?sigv4a_signing_region_set: Array[String],
+                      ?simple_json: bool,
+                      ?stub_responses: untyped,
+                      ?telemetry_provider: Aws::Telemetry::TelemetryProviderBase,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _AcceptConnectionProposalResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AcceptConnectionProposalResponse]
+        def connection: () -> Types::Connection
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Interconnect/Client.html#accept_connection_proposal-instance_method
+      def accept_connection_proposal: (
+                                        attach_point: {
+                                          direct_connect_gateway: ::String?,
+                                          arn: ::String?
+                                        },
+                                        activation_key: ::String,
+                                        ?description: ::String,
+                                        ?tags: Hash[::String, ::String],
+                                        ?client_token: ::String
+                                      ) -> _AcceptConnectionProposalResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AcceptConnectionProposalResponseSuccess
+
+      interface _CreateConnectionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateConnectionResponse]
+        def connection: () -> Types::Connection
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Interconnect/Client.html#create_connection-instance_method
+      def create_connection: (
+                               ?description: ::String,
+                               bandwidth: ::String,
+                               attach_point: {
+                                 direct_connect_gateway: ::String?,
+                                 arn: ::String?
+                               },
+                               environment_id: ::String,
+                               ?remote_account: {
+                                 identifier: ::String?
+                               },
+                               ?tags: Hash[::String, ::String],
+                               ?client_token: ::String
+                             ) -> _CreateConnectionResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateConnectionResponseSuccess
+
+      interface _DeleteConnectionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteConnectionResponse]
+        def connection: () -> Types::Connection
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Interconnect/Client.html#delete_connection-instance_method
+      def delete_connection: (
+                               identifier: ::String,
+                               ?client_token: ::String
+                             ) -> _DeleteConnectionResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteConnectionResponseSuccess
+
+      interface _DescribeConnectionProposalResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeConnectionProposalResponse]
+        def bandwidth: () -> ::String
+        def environment_id: () -> ::String
+        def provider: () -> Types::Provider
+        def location: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Interconnect/Client.html#describe_connection_proposal-instance_method
+      def describe_connection_proposal: (
+                                          activation_key: ::String
+                                        ) -> _DescribeConnectionProposalResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeConnectionProposalResponseSuccess
+
+      interface _GetConnectionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetConnectionResponse]
+        def connection: () -> Types::Connection
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Interconnect/Client.html#get_connection-instance_method
+      def get_connection: (
+                            identifier: ::String
+                          ) -> _GetConnectionResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetConnectionResponseSuccess
+
+      interface _GetEnvironmentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetEnvironmentResponse]
+        def environment: () -> Types::Environment
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Interconnect/Client.html#get_environment-instance_method
+      def get_environment: (
+                             id: ::String
+                           ) -> _GetEnvironmentResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetEnvironmentResponseSuccess
+
+      interface _ListAttachPointsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAttachPointsResponse]
+        def attach_points: () -> ::Array[Types::AttachPointDescriptor]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Interconnect/Client.html#list_attach_points-instance_method
+      def list_attach_points: (
+                                environment_id: ::String,
+                                ?max_results: ::Integer,
+                                ?next_token: ::String
+                              ) -> _ListAttachPointsResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAttachPointsResponseSuccess
+
+      interface _ListConnectionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListConnectionsResponse]
+        def connections: () -> ::Array[Types::ConnectionSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Interconnect/Client.html#list_connections-instance_method
+      def list_connections: (
+                              ?max_results: ::Integer,
+                              ?next_token: ::String,
+                              ?state: ("available" | "requested" | "pending" | "down" | "deleting" | "deleted" | "failed" | "updating"),
+                              ?environment_id: ::String,
+                              ?provider: {
+                                cloud_service_provider: ::String?,
+                                last_mile_provider: ::String?
+                              },
+                              ?attach_point: {
+                                direct_connect_gateway: ::String?,
+                                arn: ::String?
+                              }
+                            ) -> _ListConnectionsResponseSuccess
+                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListConnectionsResponseSuccess
+
+      interface _ListEnvironmentsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListEnvironmentsResponse]
+        def environments: () -> ::Array[Types::Environment]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Interconnect/Client.html#list_environments-instance_method
+      def list_environments: (
+                               ?max_results: ::Integer,
+                               ?next_token: ::String,
+                               ?provider: {
+                                 cloud_service_provider: ::String?,
+                                 last_mile_provider: ::String?
+                               },
+                               ?location: ::String
+                             ) -> _ListEnvironmentsResponseSuccess
+                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListEnvironmentsResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Interconnect/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Interconnect/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          arn: ::String,
+                          tags: Hash[::String, ::String]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Interconnect/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateConnectionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateConnectionResponse]
+        def connection: () -> Types::Connection
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Interconnect/Client.html#update_connection-instance_method
+      def update_connection: (
+                               identifier: ::String,
+                               ?description: ::String,
+                               ?bandwidth: ::String,
+                               ?client_token: ::String
+                             ) -> _UpdateConnectionResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateConnectionResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Interconnect/Client.html#wait_until-instance_method
+      def wait_until: (:connection_available waiter_name, 
+                    identifier: ::String
+                  ) -> Client::_GetConnectionResponseSuccess
+                    | (:connection_available waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetConnectionResponseSuccess
+                    | (:connection_deleted waiter_name, 
+                    identifier: ::String
+                  ) -> Client::_GetConnectionResponseSuccess
+                    | (:connection_deleted waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetConnectionResponseSuccess
+    end
+  end
+end
+

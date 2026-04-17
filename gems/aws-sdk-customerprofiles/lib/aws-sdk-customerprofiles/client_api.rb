@@ -61,7 +61,9 @@ module Aws::CustomerProfiles
     CalculatedAttributeValueList = Shapes::ListShape.new(name: 'CalculatedAttributeValueList')
     CalculatedAttributesForProfileList = Shapes::ListShape.new(name: 'CalculatedAttributesForProfileList')
     CalculatedCustomAttributes = Shapes::MapShape.new(name: 'CalculatedCustomAttributes')
+    CandidateIdList = Shapes::ListShape.new(name: 'CandidateIdList')
     CatalogItem = Shapes::StructureShape.new(name: 'CatalogItem')
+    ColumnNamesList = Shapes::ListShape.new(name: 'ColumnNamesList')
     ComparisonOperator = Shapes::StringShape.new(name: 'ComparisonOperator')
     ConditionOverrides = Shapes::StructureShape.new(name: 'ConditionOverrides')
     Conditions = Shapes::StructureShape.new(name: 'Conditions')
@@ -88,8 +90,12 @@ module Aws::CustomerProfiles
     CreateIntegrationWorkflowResponse = Shapes::StructureShape.new(name: 'CreateIntegrationWorkflowResponse')
     CreateProfileRequest = Shapes::StructureShape.new(name: 'CreateProfileRequest')
     CreateProfileResponse = Shapes::StructureShape.new(name: 'CreateProfileResponse')
+    CreateRecommenderFilterRequest = Shapes::StructureShape.new(name: 'CreateRecommenderFilterRequest')
+    CreateRecommenderFilterResponse = Shapes::StructureShape.new(name: 'CreateRecommenderFilterResponse')
     CreateRecommenderRequest = Shapes::StructureShape.new(name: 'CreateRecommenderRequest')
     CreateRecommenderResponse = Shapes::StructureShape.new(name: 'CreateRecommenderResponse')
+    CreateRecommenderSchemaRequest = Shapes::StructureShape.new(name: 'CreateRecommenderSchemaRequest')
+    CreateRecommenderSchemaResponse = Shapes::StructureShape.new(name: 'CreateRecommenderSchemaResponse')
     CreateSegmentDefinitionRequest = Shapes::StructureShape.new(name: 'CreateSegmentDefinitionRequest')
     CreateSegmentDefinitionResponse = Shapes::StructureShape.new(name: 'CreateSegmentDefinitionResponse')
     CreateSegmentEstimateRequest = Shapes::StructureShape.new(name: 'CreateSegmentEstimateRequest')
@@ -130,8 +136,12 @@ module Aws::CustomerProfiles
     DeleteProfileObjectTypeResponse = Shapes::StructureShape.new(name: 'DeleteProfileObjectTypeResponse')
     DeleteProfileRequest = Shapes::StructureShape.new(name: 'DeleteProfileRequest')
     DeleteProfileResponse = Shapes::StructureShape.new(name: 'DeleteProfileResponse')
+    DeleteRecommenderFilterRequest = Shapes::StructureShape.new(name: 'DeleteRecommenderFilterRequest')
+    DeleteRecommenderFilterResponse = Shapes::StructureShape.new(name: 'DeleteRecommenderFilterResponse')
     DeleteRecommenderRequest = Shapes::StructureShape.new(name: 'DeleteRecommenderRequest')
     DeleteRecommenderResponse = Shapes::StructureShape.new(name: 'DeleteRecommenderResponse')
+    DeleteRecommenderSchemaRequest = Shapes::StructureShape.new(name: 'DeleteRecommenderSchemaRequest')
+    DeleteRecommenderSchemaResponse = Shapes::StructureShape.new(name: 'DeleteRecommenderSchemaResponse')
     DeleteSegmentDefinitionRequest = Shapes::StructureShape.new(name: 'DeleteSegmentDefinitionRequest')
     DeleteSegmentDefinitionResponse = Shapes::StructureShape.new(name: 'DeleteSegmentDefinitionResponse')
     DeleteWorkflowRequest = Shapes::StructureShape.new(name: 'DeleteWorkflowRequest')
@@ -160,6 +170,7 @@ module Aws::CustomerProfiles
     EstimateStatus = Shapes::StringShape.new(name: 'EstimateStatus')
     EventParameters = Shapes::StructureShape.new(name: 'EventParameters')
     EventParametersEventTypeString = Shapes::StringShape.new(name: 'EventParametersEventTypeString')
+    EventParametersEventWeightDouble = Shapes::FloatShape.new(name: 'EventParametersEventWeightDouble')
     EventParametersList = Shapes::ListShape.new(name: 'EventParametersList')
     EventStreamDestinationDetails = Shapes::StructureShape.new(name: 'EventStreamDestinationDetails')
     EventStreamDestinationStatus = Shapes::StringShape.new(name: 'EventStreamDestinationStatus')
@@ -232,9 +243,13 @@ module Aws::CustomerProfiles
     GetProfileObjectTypeTemplateResponse = Shapes::StructureShape.new(name: 'GetProfileObjectTypeTemplateResponse')
     GetProfileRecommendationsRequest = Shapes::StructureShape.new(name: 'GetProfileRecommendationsRequest')
     GetProfileRecommendationsResponse = Shapes::StructureShape.new(name: 'GetProfileRecommendationsResponse')
+    GetRecommenderFilterRequest = Shapes::StructureShape.new(name: 'GetRecommenderFilterRequest')
+    GetRecommenderFilterResponse = Shapes::StructureShape.new(name: 'GetRecommenderFilterResponse')
     GetRecommenderRequest = Shapes::StructureShape.new(name: 'GetRecommenderRequest')
     GetRecommenderRequestTrainingMetricsCountInteger = Shapes::IntegerShape.new(name: 'GetRecommenderRequestTrainingMetricsCountInteger')
     GetRecommenderResponse = Shapes::StructureShape.new(name: 'GetRecommenderResponse')
+    GetRecommenderSchemaRequest = Shapes::StructureShape.new(name: 'GetRecommenderSchemaRequest')
+    GetRecommenderSchemaResponse = Shapes::StructureShape.new(name: 'GetRecommenderSchemaResponse')
     GetSegmentDefinitionRequest = Shapes::StructureShape.new(name: 'GetSegmentDefinitionRequest')
     GetSegmentDefinitionResponse = Shapes::StructureShape.new(name: 'GetSegmentDefinitionResponse')
     GetSegmentEstimateRequest = Shapes::StructureShape.new(name: 'GetSegmentEstimateRequest')
@@ -262,7 +277,10 @@ module Aws::CustomerProfiles
     IdentityResolutionJobsList = Shapes::ListShape.new(name: 'IdentityResolutionJobsList')
     Include = Shapes::StringShape.new(name: 'Include')
     IncludeOptions = Shapes::StringShape.new(name: 'IncludeOptions')
+    IncludedColumns = Shapes::MapShape.new(name: 'IncludedColumns')
     IncrementalPullConfig = Shapes::StructureShape.new(name: 'IncrementalPullConfig')
+    InferenceConfig = Shapes::StructureShape.new(name: 'InferenceConfig')
+    InferenceConfigMinProvisionedTPSInteger = Shapes::IntegerShape.new(name: 'InferenceConfigMinProvisionedTPSInteger')
     IntegrationConfig = Shapes::StructureShape.new(name: 'IntegrationConfig')
     IntegrationList = Shapes::ListShape.new(name: 'IntegrationList')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
@@ -318,9 +336,13 @@ module Aws::CustomerProfiles
     ListProfileObjectsItem = Shapes::StructureShape.new(name: 'ListProfileObjectsItem')
     ListProfileObjectsRequest = Shapes::StructureShape.new(name: 'ListProfileObjectsRequest')
     ListProfileObjectsResponse = Shapes::StructureShape.new(name: 'ListProfileObjectsResponse')
+    ListRecommenderFiltersRequest = Shapes::StructureShape.new(name: 'ListRecommenderFiltersRequest')
+    ListRecommenderFiltersResponse = Shapes::StructureShape.new(name: 'ListRecommenderFiltersResponse')
     ListRecommenderRecipesRequest = Shapes::StructureShape.new(name: 'ListRecommenderRecipesRequest')
     ListRecommenderRecipesRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListRecommenderRecipesRequestMaxResultsInteger')
     ListRecommenderRecipesResponse = Shapes::StructureShape.new(name: 'ListRecommenderRecipesResponse')
+    ListRecommenderSchemasRequest = Shapes::StructureShape.new(name: 'ListRecommenderSchemasRequest')
+    ListRecommenderSchemasResponse = Shapes::StructureShape.new(name: 'ListRecommenderSchemasResponse')
     ListRecommendersRequest = Shapes::StructureShape.new(name: 'ListRecommendersRequest')
     ListRecommendersRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListRecommendersRequestMaxResultsInteger')
     ListRecommendersResponse = Shapes::StructureShape.new(name: 'ListRecommendersResponse')
@@ -350,10 +372,12 @@ module Aws::CustomerProfiles
     MatchingRules = Shapes::ListShape.new(name: 'MatchingRules')
     MaxAllowedRuleLevelForMatching = Shapes::IntegerShape.new(name: 'MaxAllowedRuleLevelForMatching')
     MaxAllowedRuleLevelForMerging = Shapes::IntegerShape.new(name: 'MaxAllowedRuleLevelForMerging')
-    MaxSize10 = Shapes::IntegerShape.new(name: 'MaxSize10')
     MaxSize500 = Shapes::IntegerShape.new(name: 'MaxSize500')
     MergeProfilesRequest = Shapes::StructureShape.new(name: 'MergeProfilesRequest')
     MergeProfilesResponse = Shapes::StructureShape.new(name: 'MergeProfilesResponse')
+    MetadataColumnName = Shapes::StringShape.new(name: 'MetadataColumnName')
+    MetadataColumnsList = Shapes::ListShape.new(name: 'MetadataColumnsList')
+    MetadataConfig = Shapes::StructureShape.new(name: 'MetadataConfig')
     Metrics = Shapes::MapShape.new(name: 'Metrics')
     Object = Shapes::StringShape.new(name: 'Object')
     ObjectAttribute = Shapes::StructureShape.new(name: 'ObjectAttribute')
@@ -368,6 +392,7 @@ module Aws::CustomerProfiles
     Operator = Shapes::StringShape.new(name: 'Operator')
     OperatorPropertiesKeys = Shapes::StringShape.new(name: 'OperatorPropertiesKeys')
     PartyType = Shapes::StringShape.new(name: 'PartyType')
+    PercentPromotedItems = Shapes::IntegerShape.new(name: 'PercentPromotedItems')
     Period = Shapes::StructureShape.new(name: 'Period')
     PeriodUnit = Shapes::StringShape.new(name: 'PeriodUnit')
     Periods = Shapes::ListShape.new(name: 'Periods')
@@ -415,9 +440,27 @@ module Aws::CustomerProfiles
     RecommenderConfig = Shapes::StructureShape.new(name: 'RecommenderConfig')
     RecommenderConfigTrainingFrequencyInteger = Shapes::IntegerShape.new(name: 'RecommenderConfigTrainingFrequencyInteger')
     RecommenderContext = Shapes::MapShape.new(name: 'RecommenderContext')
+    RecommenderFilter = Shapes::StructureShape.new(name: 'RecommenderFilter')
+    RecommenderFilterAttributeName = Shapes::StringShape.new(name: 'RecommenderFilterAttributeName')
+    RecommenderFilterAttributeValue = Shapes::StringShape.new(name: 'RecommenderFilterAttributeValue')
+    RecommenderFilterExpression = Shapes::StringShape.new(name: 'RecommenderFilterExpression')
+    RecommenderFilterName = Shapes::StringShape.new(name: 'RecommenderFilterName')
+    RecommenderFilterStatus = Shapes::StringShape.new(name: 'RecommenderFilterStatus')
+    RecommenderFilterSummary = Shapes::StructureShape.new(name: 'RecommenderFilterSummary')
+    RecommenderFilterSummaryList = Shapes::ListShape.new(name: 'RecommenderFilterSummaryList')
+    RecommenderFilterValues = Shapes::MapShape.new(name: 'RecommenderFilterValues')
+    RecommenderFilters = Shapes::ListShape.new(name: 'RecommenderFilters')
+    RecommenderPromotionalFilter = Shapes::StructureShape.new(name: 'RecommenderPromotionalFilter')
+    RecommenderPromotionalFilters = Shapes::ListShape.new(name: 'RecommenderPromotionalFilters')
     RecommenderRecipe = Shapes::StructureShape.new(name: 'RecommenderRecipe')
     RecommenderRecipeName = Shapes::StringShape.new(name: 'RecommenderRecipeName')
     RecommenderRecipesList = Shapes::ListShape.new(name: 'RecommenderRecipesList')
+    RecommenderSchemaField = Shapes::StructureShape.new(name: 'RecommenderSchemaField')
+    RecommenderSchemaFieldList = Shapes::ListShape.new(name: 'RecommenderSchemaFieldList')
+    RecommenderSchemaFields = Shapes::MapShape.new(name: 'RecommenderSchemaFields')
+    RecommenderSchemaStatus = Shapes::StringShape.new(name: 'RecommenderSchemaStatus')
+    RecommenderSchemaSummary = Shapes::StructureShape.new(name: 'RecommenderSchemaSummary')
+    RecommenderSchemaSummaryList = Shapes::ListShape.new(name: 'RecommenderSchemaSummaryList')
     RecommenderStatus = Shapes::StringShape.new(name: 'RecommenderStatus')
     RecommenderSummary = Shapes::StructureShape.new(name: 'RecommenderSummary')
     RecommenderSummaryList = Shapes::ListShape.new(name: 'RecommenderSummaryList')
@@ -448,9 +491,15 @@ module Aws::CustomerProfiles
     SegmentGroupList = Shapes::ListShape.new(name: 'SegmentGroupList')
     SegmentGroupStructure = Shapes::StructureShape.new(name: 'SegmentGroupStructure')
     SegmentSnapshotStatus = Shapes::StringShape.new(name: 'SegmentSnapshotStatus')
+    SegmentSort = Shapes::StructureShape.new(name: 'SegmentSort')
+    SegmentSortDataType = Shapes::StringShape.new(name: 'SegmentSortDataType')
+    SegmentSortOrder = Shapes::StringShape.new(name: 'SegmentSortOrder')
     SegmentType = Shapes::StringShape.new(name: 'SegmentType')
     ServiceNowConnectorOperator = Shapes::StringShape.new(name: 'ServiceNowConnectorOperator')
     ServiceNowSourceProperties = Shapes::StructureShape.new(name: 'ServiceNowSourceProperties')
+    SortAttribute = Shapes::StructureShape.new(name: 'SortAttribute')
+    SortAttributeList = Shapes::ListShape.new(name: 'SortAttributeList')
+    SortAttributeType = Shapes::StringShape.new(name: 'SortAttributeType')
     SourceConnectorProperties = Shapes::StructureShape.new(name: 'SourceConnectorProperties')
     SourceConnectorType = Shapes::StringShape.new(name: 'SourceConnectorType')
     SourceFields = Shapes::ListShape.new(name: 'SourceFields')
@@ -543,6 +592,7 @@ module Aws::CustomerProfiles
     maxSize100 = Shapes::IntegerShape.new(name: 'maxSize100')
     maxSize1000 = Shapes::IntegerShape.new(name: 'maxSize1000')
     maxSize24 = Shapes::IntegerShape.new(name: 'maxSize24')
+    maxSize500 = Shapes::IntegerShape.new(name: 'maxSize500')
     message = Shapes::StringShape.new(name: 'message')
     minSize0 = Shapes::IntegerShape.new(name: 'minSize0')
     minSize1 = Shapes::IntegerShape.new(name: 'minSize1')
@@ -745,6 +795,8 @@ module Aws::CustomerProfiles
     CalculatedCustomAttributes.key = Shapes::ShapeRef.new(shape: typeName)
     CalculatedCustomAttributes.value = Shapes::ShapeRef.new(shape: CalculatedAttributeDimension)
 
+    CandidateIdList.member = Shapes::ShapeRef.new(shape: string1To255)
+
     CatalogItem.add_member(:id, Shapes::ShapeRef.new(shape: sensitiveString1To255, location_name: "Id"))
     CatalogItem.add_member(:name, Shapes::ShapeRef.new(shape: sensitiveString1To255, location_name: "Name"))
     CatalogItem.add_member(:code, Shapes::ShapeRef.new(shape: sensitiveString1To255, location_name: "Code"))
@@ -759,6 +811,8 @@ module Aws::CustomerProfiles
     CatalogItem.add_member(:price, Shapes::ShapeRef.new(shape: sensitiveString1To255, location_name: "Price"))
     CatalogItem.add_member(:attributes, Shapes::ShapeRef.new(shape: Attributes, location_name: "Attributes"))
     CatalogItem.struct_class = Types::CatalogItem
+
+    ColumnNamesList.member = Shapes::ShapeRef.new(shape: text)
 
     ConditionOverrides.add_member(:range, Shapes::ShapeRef.new(shape: RangeOverride, location_name: "Range"))
     ConditionOverrides.struct_class = Types::ConditionOverrides
@@ -933,11 +987,24 @@ module Aws::CustomerProfiles
     CreateProfileResponse.add_member(:profile_id, Shapes::ShapeRef.new(shape: uuid, required: true, location_name: "ProfileId"))
     CreateProfileResponse.struct_class = Types::CreateProfileResponse
 
+    CreateRecommenderFilterRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: name, required: true, location: "uri", location_name: "DomainName"))
+    CreateRecommenderFilterRequest.add_member(:recommender_filter_name, Shapes::ShapeRef.new(shape: RecommenderFilterName, required: true, location: "uri", location_name: "RecommenderFilterName"))
+    CreateRecommenderFilterRequest.add_member(:recommender_filter_expression, Shapes::ShapeRef.new(shape: RecommenderFilterExpression, required: true, location_name: "RecommenderFilterExpression"))
+    CreateRecommenderFilterRequest.add_member(:recommender_schema_name, Shapes::ShapeRef.new(shape: name, location_name: "RecommenderSchemaName"))
+    CreateRecommenderFilterRequest.add_member(:description, Shapes::ShapeRef.new(shape: sensitiveText, location_name: "Description"))
+    CreateRecommenderFilterRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    CreateRecommenderFilterRequest.struct_class = Types::CreateRecommenderFilterRequest
+
+    CreateRecommenderFilterResponse.add_member(:recommender_filter_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "RecommenderFilterArn"))
+    CreateRecommenderFilterResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    CreateRecommenderFilterResponse.struct_class = Types::CreateRecommenderFilterResponse
+
     CreateRecommenderRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: name, required: true, location: "uri", location_name: "DomainName"))
     CreateRecommenderRequest.add_member(:recommender_name, Shapes::ShapeRef.new(shape: name, required: true, location: "uri", location_name: "RecommenderName"))
     CreateRecommenderRequest.add_member(:recommender_recipe_name, Shapes::ShapeRef.new(shape: RecommenderRecipeName, required: true, location_name: "RecommenderRecipeName"))
     CreateRecommenderRequest.add_member(:recommender_config, Shapes::ShapeRef.new(shape: RecommenderConfig, location_name: "RecommenderConfig"))
     CreateRecommenderRequest.add_member(:description, Shapes::ShapeRef.new(shape: sensitiveText, location_name: "Description"))
+    CreateRecommenderRequest.add_member(:recommender_schema_name, Shapes::ShapeRef.new(shape: name, location_name: "RecommenderSchemaName"))
     CreateRecommenderRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     CreateRecommenderRequest.struct_class = Types::CreateRecommenderRequest
 
@@ -945,12 +1012,27 @@ module Aws::CustomerProfiles
     CreateRecommenderResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     CreateRecommenderResponse.struct_class = Types::CreateRecommenderResponse
 
+    CreateRecommenderSchemaRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: name, required: true, location: "uri", location_name: "DomainName"))
+    CreateRecommenderSchemaRequest.add_member(:recommender_schema_name, Shapes::ShapeRef.new(shape: name, required: true, location: "uri", location_name: "RecommenderSchemaName"))
+    CreateRecommenderSchemaRequest.add_member(:fields, Shapes::ShapeRef.new(shape: RecommenderSchemaFields, required: true, location_name: "Fields"))
+    CreateRecommenderSchemaRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    CreateRecommenderSchemaRequest.struct_class = Types::CreateRecommenderSchemaRequest
+
+    CreateRecommenderSchemaResponse.add_member(:recommender_schema_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "RecommenderSchemaArn"))
+    CreateRecommenderSchemaResponse.add_member(:recommender_schema_name, Shapes::ShapeRef.new(shape: name, required: true, location_name: "RecommenderSchemaName"))
+    CreateRecommenderSchemaResponse.add_member(:fields, Shapes::ShapeRef.new(shape: RecommenderSchemaFields, required: true, location_name: "Fields"))
+    CreateRecommenderSchemaResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: timestamp, required: true, location_name: "CreatedAt"))
+    CreateRecommenderSchemaResponse.add_member(:status, Shapes::ShapeRef.new(shape: RecommenderSchemaStatus, required: true, location_name: "Status"))
+    CreateRecommenderSchemaResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    CreateRecommenderSchemaResponse.struct_class = Types::CreateRecommenderSchemaResponse
+
     CreateSegmentDefinitionRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: name, required: true, location: "uri", location_name: "DomainName"))
     CreateSegmentDefinitionRequest.add_member(:segment_definition_name, Shapes::ShapeRef.new(shape: name, required: true, location: "uri", location_name: "SegmentDefinitionName"))
     CreateSegmentDefinitionRequest.add_member(:display_name, Shapes::ShapeRef.new(shape: string1To255, required: true, location_name: "DisplayName"))
     CreateSegmentDefinitionRequest.add_member(:description, Shapes::ShapeRef.new(shape: sensitiveString1To4000, location_name: "Description"))
     CreateSegmentDefinitionRequest.add_member(:segment_groups, Shapes::ShapeRef.new(shape: SegmentGroup, location_name: "SegmentGroups"))
     CreateSegmentDefinitionRequest.add_member(:segment_sql_query, Shapes::ShapeRef.new(shape: sensitiveString1To50000, location_name: "SegmentSqlQuery"))
+    CreateSegmentDefinitionRequest.add_member(:segment_sort, Shapes::ShapeRef.new(shape: SegmentSort, location_name: "SegmentSort"))
     CreateSegmentDefinitionRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     CreateSegmentDefinitionRequest.struct_class = Types::CreateSegmentDefinitionRequest
 
@@ -993,7 +1075,7 @@ module Aws::CustomerProfiles
     CreateUploadJobResponse.add_member(:job_id, Shapes::ShapeRef.new(shape: uuid, required: true, location_name: "JobId"))
     CreateUploadJobResponse.struct_class = Types::CreateUploadJobResponse
 
-    CustomAttributes.key = Shapes::ShapeRef.new(shape: typeName)
+    CustomAttributes.key = Shapes::ShapeRef.new(shape: string1To255)
     CustomAttributes.value = Shapes::ShapeRef.new(shape: AttributeDimension)
 
     DataStoreRequest.add_member(:enabled, Shapes::ShapeRef.new(shape: optionalBoolean, location_name: "Enabled"))
@@ -1086,11 +1168,24 @@ module Aws::CustomerProfiles
     DeleteProfileResponse.add_member(:message, Shapes::ShapeRef.new(shape: message, location_name: "Message"))
     DeleteProfileResponse.struct_class = Types::DeleteProfileResponse
 
+    DeleteRecommenderFilterRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: name, required: true, location: "uri", location_name: "DomainName"))
+    DeleteRecommenderFilterRequest.add_member(:recommender_filter_name, Shapes::ShapeRef.new(shape: RecommenderFilterName, required: true, location: "uri", location_name: "RecommenderFilterName"))
+    DeleteRecommenderFilterRequest.struct_class = Types::DeleteRecommenderFilterRequest
+
+    DeleteRecommenderFilterResponse.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Message"))
+    DeleteRecommenderFilterResponse.struct_class = Types::DeleteRecommenderFilterResponse
+
     DeleteRecommenderRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: name, required: true, location: "uri", location_name: "DomainName"))
     DeleteRecommenderRequest.add_member(:recommender_name, Shapes::ShapeRef.new(shape: name, required: true, location: "uri", location_name: "RecommenderName"))
     DeleteRecommenderRequest.struct_class = Types::DeleteRecommenderRequest
 
     DeleteRecommenderResponse.struct_class = Types::DeleteRecommenderResponse
+
+    DeleteRecommenderSchemaRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: name, required: true, location: "uri", location_name: "DomainName"))
+    DeleteRecommenderSchemaRequest.add_member(:recommender_schema_name, Shapes::ShapeRef.new(shape: name, required: true, location: "uri", location_name: "RecommenderSchemaName"))
+    DeleteRecommenderSchemaRequest.struct_class = Types::DeleteRecommenderSchemaRequest
+
+    DeleteRecommenderSchemaResponse.struct_class = Types::DeleteRecommenderSchemaResponse
 
     DeleteSegmentDefinitionRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: name, required: true, location: "uri", location_name: "DomainName"))
     DeleteSegmentDefinitionRequest.add_member(:segment_definition_name, Shapes::ShapeRef.new(shape: name, required: true, location: "uri", location_name: "SegmentDefinitionName"))
@@ -1170,6 +1265,7 @@ module Aws::CustomerProfiles
 
     EventParameters.add_member(:event_type, Shapes::ShapeRef.new(shape: EventParametersEventTypeString, required: true, location_name: "EventType"))
     EventParameters.add_member(:event_value_threshold, Shapes::ShapeRef.new(shape: Double, location_name: "EventValueThreshold"))
+    EventParameters.add_member(:event_weight, Shapes::ShapeRef.new(shape: EventParametersEventWeightDouble, location_name: "EventWeight"))
     EventParameters.struct_class = Types::EventParameters
 
     EventParametersList.member = Shapes::ShapeRef.new(shape: EventParameters)
@@ -1509,6 +1605,7 @@ module Aws::CustomerProfiles
     GetProfileObjectTypeResponse.add_member(:source_last_updated_timestamp_format, Shapes::ShapeRef.new(shape: string1To255, location_name: "SourceLastUpdatedTimestampFormat"))
     GetProfileObjectTypeResponse.add_member(:max_available_profile_object_count, Shapes::ShapeRef.new(shape: minSize0, location_name: "MaxAvailableProfileObjectCount"))
     GetProfileObjectTypeResponse.add_member(:max_profile_object_count, Shapes::ShapeRef.new(shape: minSize1, location_name: "MaxProfileObjectCount"))
+    GetProfileObjectTypeResponse.add_member(:source_priority, Shapes::ShapeRef.new(shape: minSize1, location_name: "SourcePriority"))
     GetProfileObjectTypeResponse.add_member(:fields, Shapes::ShapeRef.new(shape: FieldMap, location_name: "Fields"))
     GetProfileObjectTypeResponse.add_member(:keys, Shapes::ShapeRef.new(shape: KeyMap, location_name: "Keys"))
     GetProfileObjectTypeResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: timestamp, location_name: "CreatedAt"))
@@ -1532,11 +1629,29 @@ module Aws::CustomerProfiles
     GetProfileRecommendationsRequest.add_member(:profile_id, Shapes::ShapeRef.new(shape: uuid, required: true, location: "uri", location_name: "ProfileId"))
     GetProfileRecommendationsRequest.add_member(:recommender_name, Shapes::ShapeRef.new(shape: name, required: true, location_name: "RecommenderName"))
     GetProfileRecommendationsRequest.add_member(:context, Shapes::ShapeRef.new(shape: RecommenderContext, location_name: "Context"))
-    GetProfileRecommendationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxSize10, location_name: "MaxResults"))
+    GetProfileRecommendationsRequest.add_member(:recommender_filters, Shapes::ShapeRef.new(shape: RecommenderFilters, location_name: "RecommenderFilters"))
+    GetProfileRecommendationsRequest.add_member(:recommender_promotional_filters, Shapes::ShapeRef.new(shape: RecommenderPromotionalFilters, location_name: "RecommenderPromotionalFilters"))
+    GetProfileRecommendationsRequest.add_member(:candidate_ids, Shapes::ShapeRef.new(shape: CandidateIdList, location_name: "CandidateIds"))
+    GetProfileRecommendationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: maxSize500, location_name: "MaxResults"))
+    GetProfileRecommendationsRequest.add_member(:metadata_config, Shapes::ShapeRef.new(shape: MetadataConfig, location_name: "MetadataConfig"))
     GetProfileRecommendationsRequest.struct_class = Types::GetProfileRecommendationsRequest
 
     GetProfileRecommendationsResponse.add_member(:recommendations, Shapes::ShapeRef.new(shape: Recommendations, location_name: "Recommendations"))
     GetProfileRecommendationsResponse.struct_class = Types::GetProfileRecommendationsResponse
+
+    GetRecommenderFilterRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: name, required: true, location: "uri", location_name: "DomainName"))
+    GetRecommenderFilterRequest.add_member(:recommender_filter_name, Shapes::ShapeRef.new(shape: RecommenderFilterName, required: true, location: "uri", location_name: "RecommenderFilterName"))
+    GetRecommenderFilterRequest.struct_class = Types::GetRecommenderFilterRequest
+
+    GetRecommenderFilterResponse.add_member(:recommender_filter_name, Shapes::ShapeRef.new(shape: RecommenderFilterName, required: true, location_name: "RecommenderFilterName"))
+    GetRecommenderFilterResponse.add_member(:recommender_filter_expression, Shapes::ShapeRef.new(shape: RecommenderFilterExpression, required: true, location_name: "RecommenderFilterExpression"))
+    GetRecommenderFilterResponse.add_member(:recommender_schema_name, Shapes::ShapeRef.new(shape: name, location_name: "RecommenderSchemaName"))
+    GetRecommenderFilterResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: timestamp, required: true, location_name: "CreatedAt"))
+    GetRecommenderFilterResponse.add_member(:status, Shapes::ShapeRef.new(shape: RecommenderFilterStatus, required: true, location_name: "Status"))
+    GetRecommenderFilterResponse.add_member(:description, Shapes::ShapeRef.new(shape: sensitiveText, location_name: "Description"))
+    GetRecommenderFilterResponse.add_member(:failure_reason, Shapes::ShapeRef.new(shape: String, location_name: "FailureReason"))
+    GetRecommenderFilterResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, required: true, location_name: "Tags"))
+    GetRecommenderFilterResponse.struct_class = Types::GetRecommenderFilterResponse
 
     GetRecommenderRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: name, required: true, location: "uri", location_name: "DomainName"))
     GetRecommenderRequest.add_member(:recommender_name, Shapes::ShapeRef.new(shape: name, required: true, location: "uri", location_name: "RecommenderName"))
@@ -1545,6 +1660,7 @@ module Aws::CustomerProfiles
 
     GetRecommenderResponse.add_member(:recommender_name, Shapes::ShapeRef.new(shape: name, required: true, location_name: "RecommenderName"))
     GetRecommenderResponse.add_member(:recommender_recipe_name, Shapes::ShapeRef.new(shape: RecommenderRecipeName, required: true, location_name: "RecommenderRecipeName"))
+    GetRecommenderResponse.add_member(:recommender_schema_name, Shapes::ShapeRef.new(shape: name, location_name: "RecommenderSchemaName"))
     GetRecommenderResponse.add_member(:recommender_config, Shapes::ShapeRef.new(shape: RecommenderConfig, location_name: "RecommenderConfig"))
     GetRecommenderResponse.add_member(:description, Shapes::ShapeRef.new(shape: sensitiveText, location_name: "Description"))
     GetRecommenderResponse.add_member(:status, Shapes::ShapeRef.new(shape: RecommenderStatus, location_name: "Status"))
@@ -1556,6 +1672,16 @@ module Aws::CustomerProfiles
     GetRecommenderResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     GetRecommenderResponse.struct_class = Types::GetRecommenderResponse
 
+    GetRecommenderSchemaRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: name, required: true, location: "uri", location_name: "DomainName"))
+    GetRecommenderSchemaRequest.add_member(:recommender_schema_name, Shapes::ShapeRef.new(shape: name, required: true, location: "uri", location_name: "RecommenderSchemaName"))
+    GetRecommenderSchemaRequest.struct_class = Types::GetRecommenderSchemaRequest
+
+    GetRecommenderSchemaResponse.add_member(:recommender_schema_name, Shapes::ShapeRef.new(shape: name, required: true, location_name: "RecommenderSchemaName"))
+    GetRecommenderSchemaResponse.add_member(:fields, Shapes::ShapeRef.new(shape: RecommenderSchemaFields, required: true, location_name: "Fields"))
+    GetRecommenderSchemaResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: timestamp, required: true, location_name: "CreatedAt"))
+    GetRecommenderSchemaResponse.add_member(:status, Shapes::ShapeRef.new(shape: RecommenderSchemaStatus, required: true, location_name: "Status"))
+    GetRecommenderSchemaResponse.struct_class = Types::GetRecommenderSchemaResponse
+
     GetSegmentDefinitionRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: name, required: true, location: "uri", location_name: "DomainName"))
     GetSegmentDefinitionRequest.add_member(:segment_definition_name, Shapes::ShapeRef.new(shape: name, required: true, location: "uri", location_name: "SegmentDefinitionName"))
     GetSegmentDefinitionRequest.struct_class = Types::GetSegmentDefinitionRequest
@@ -1564,6 +1690,7 @@ module Aws::CustomerProfiles
     GetSegmentDefinitionResponse.add_member(:display_name, Shapes::ShapeRef.new(shape: string1To255, location_name: "DisplayName"))
     GetSegmentDefinitionResponse.add_member(:description, Shapes::ShapeRef.new(shape: sensitiveString1To4000, location_name: "Description"))
     GetSegmentDefinitionResponse.add_member(:segment_groups, Shapes::ShapeRef.new(shape: SegmentGroup, location_name: "SegmentGroups"))
+    GetSegmentDefinitionResponse.add_member(:segment_sort, Shapes::ShapeRef.new(shape: SegmentSort, location_name: "SegmentSort"))
     GetSegmentDefinitionResponse.add_member(:segment_definition_arn, Shapes::ShapeRef.new(shape: SegmentDefinitionArn, required: true, location_name: "SegmentDefinitionArn"))
     GetSegmentDefinitionResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: timestamp, location_name: "CreatedAt"))
     GetSegmentDefinitionResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
@@ -1695,8 +1822,14 @@ module Aws::CustomerProfiles
 
     IdentityResolutionJobsList.member = Shapes::ShapeRef.new(shape: IdentityResolutionJob)
 
+    IncludedColumns.key = Shapes::ShapeRef.new(shape: String)
+    IncludedColumns.value = Shapes::ShapeRef.new(shape: ColumnNamesList)
+
     IncrementalPullConfig.add_member(:datetime_type_field_name, Shapes::ShapeRef.new(shape: DatetimeTypeFieldName, location_name: "DatetimeTypeFieldName"))
     IncrementalPullConfig.struct_class = Types::IncrementalPullConfig
+
+    InferenceConfig.add_member(:min_provisioned_tps, Shapes::ShapeRef.new(shape: InferenceConfigMinProvisionedTPSInteger, location_name: "MinProvisionedTPS"))
+    InferenceConfig.struct_class = Types::InferenceConfig
 
     IntegrationConfig.add_member(:appflow_integration, Shapes::ShapeRef.new(shape: AppflowIntegration, location_name: "AppflowIntegration"))
     IntegrationConfig.struct_class = Types::IntegrationConfig
@@ -1911,6 +2044,7 @@ module Aws::CustomerProfiles
     ListProfileObjectTypeItem.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: timestamp, location_name: "LastUpdatedAt"))
     ListProfileObjectTypeItem.add_member(:max_profile_object_count, Shapes::ShapeRef.new(shape: minSize1, location_name: "MaxProfileObjectCount"))
     ListProfileObjectTypeItem.add_member(:max_available_profile_object_count, Shapes::ShapeRef.new(shape: minSize0, location_name: "MaxAvailableProfileObjectCount"))
+    ListProfileObjectTypeItem.add_member(:source_priority, Shapes::ShapeRef.new(shape: minSize1, location_name: "SourcePriority"))
     ListProfileObjectTypeItem.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     ListProfileObjectTypeItem.struct_class = Types::ListProfileObjectTypeItem
 
@@ -1953,6 +2087,15 @@ module Aws::CustomerProfiles
     ListProfileObjectsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: token, location_name: "NextToken"))
     ListProfileObjectsResponse.struct_class = Types::ListProfileObjectsResponse
 
+    ListRecommenderFiltersRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: name, required: true, location: "uri", location_name: "DomainName"))
+    ListRecommenderFiltersRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: maxSize100, location: "querystring", location_name: "max-results"))
+    ListRecommenderFiltersRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: token, location: "querystring", location_name: "next-token"))
+    ListRecommenderFiltersRequest.struct_class = Types::ListRecommenderFiltersRequest
+
+    ListRecommenderFiltersResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: token, location_name: "NextToken"))
+    ListRecommenderFiltersResponse.add_member(:recommender_filters, Shapes::ShapeRef.new(shape: RecommenderFilterSummaryList, location_name: "RecommenderFilters"))
+    ListRecommenderFiltersResponse.struct_class = Types::ListRecommenderFiltersResponse
+
     ListRecommenderRecipesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListRecommenderRecipesRequestMaxResultsInteger, location: "querystring", location_name: "max-results"))
     ListRecommenderRecipesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: token, location: "querystring", location_name: "next-token"))
     ListRecommenderRecipesRequest.struct_class = Types::ListRecommenderRecipesRequest
@@ -1960,6 +2103,15 @@ module Aws::CustomerProfiles
     ListRecommenderRecipesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: token, location_name: "NextToken"))
     ListRecommenderRecipesResponse.add_member(:recommender_recipes, Shapes::ShapeRef.new(shape: RecommenderRecipesList, location_name: "RecommenderRecipes"))
     ListRecommenderRecipesResponse.struct_class = Types::ListRecommenderRecipesResponse
+
+    ListRecommenderSchemasRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: name, required: true, location: "uri", location_name: "DomainName"))
+    ListRecommenderSchemasRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: maxSize100, location: "querystring", location_name: "max-results"))
+    ListRecommenderSchemasRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: token, location: "querystring", location_name: "next-token"))
+    ListRecommenderSchemasRequest.struct_class = Types::ListRecommenderSchemasRequest
+
+    ListRecommenderSchemasResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: token, location_name: "NextToken"))
+    ListRecommenderSchemasResponse.add_member(:recommender_schemas, Shapes::ShapeRef.new(shape: RecommenderSchemaSummaryList, location_name: "RecommenderSchemas"))
+    ListRecommenderSchemasResponse.struct_class = Types::ListRecommenderSchemasResponse
 
     ListRecommendersRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: name, required: true, location: "uri", location_name: "DomainName"))
     ListRecommendersRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListRecommendersRequestMaxResultsInteger, location: "querystring", location_name: "max-results"))
@@ -2067,6 +2219,11 @@ module Aws::CustomerProfiles
 
     MergeProfilesResponse.add_member(:message, Shapes::ShapeRef.new(shape: message, location_name: "Message"))
     MergeProfilesResponse.struct_class = Types::MergeProfilesResponse
+
+    MetadataColumnsList.member = Shapes::ShapeRef.new(shape: MetadataColumnName)
+
+    MetadataConfig.add_member(:metadata_columns, Shapes::ShapeRef.new(shape: MetadataColumnsList, location_name: "MetadataColumns"))
+    MetadataConfig.struct_class = Types::MetadataConfig
 
     Metrics.key = Shapes::ShapeRef.new(shape: TrainingMetricName)
     Metrics.value = Shapes::ShapeRef.new(shape: Double)
@@ -2280,6 +2437,7 @@ module Aws::CustomerProfiles
     PutProfileObjectTypeRequest.add_member(:allow_profile_creation, Shapes::ShapeRef.new(shape: boolean, location_name: "AllowProfileCreation"))
     PutProfileObjectTypeRequest.add_member(:source_last_updated_timestamp_format, Shapes::ShapeRef.new(shape: string1To255, location_name: "SourceLastUpdatedTimestampFormat"))
     PutProfileObjectTypeRequest.add_member(:max_profile_object_count, Shapes::ShapeRef.new(shape: minSize1, location_name: "MaxProfileObjectCount"))
+    PutProfileObjectTypeRequest.add_member(:source_priority, Shapes::ShapeRef.new(shape: minSize1, location_name: "SourcePriority"))
     PutProfileObjectTypeRequest.add_member(:fields, Shapes::ShapeRef.new(shape: FieldMap, location_name: "Fields"))
     PutProfileObjectTypeRequest.add_member(:keys, Shapes::ShapeRef.new(shape: KeyMap, location_name: "Keys"))
     PutProfileObjectTypeRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
@@ -2294,6 +2452,7 @@ module Aws::CustomerProfiles
     PutProfileObjectTypeResponse.add_member(:source_last_updated_timestamp_format, Shapes::ShapeRef.new(shape: string1To255, location_name: "SourceLastUpdatedTimestampFormat"))
     PutProfileObjectTypeResponse.add_member(:max_profile_object_count, Shapes::ShapeRef.new(shape: minSize1, location_name: "MaxProfileObjectCount"))
     PutProfileObjectTypeResponse.add_member(:max_available_profile_object_count, Shapes::ShapeRef.new(shape: minSize0, location_name: "MaxAvailableProfileObjectCount"))
+    PutProfileObjectTypeResponse.add_member(:source_priority, Shapes::ShapeRef.new(shape: minSize1, location_name: "SourcePriority"))
     PutProfileObjectTypeResponse.add_member(:fields, Shapes::ShapeRef.new(shape: FieldMap, location_name: "Fields"))
     PutProfileObjectTypeResponse.add_member(:keys, Shapes::ShapeRef.new(shape: KeyMap, location_name: "Keys"))
     PutProfileObjectTypeResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: timestamp, location_name: "CreatedAt"))
@@ -2323,12 +2482,43 @@ module Aws::CustomerProfiles
 
     Recommendations.member = Shapes::ShapeRef.new(shape: Recommendation)
 
-    RecommenderConfig.add_member(:events_config, Shapes::ShapeRef.new(shape: EventsConfig, required: true, location_name: "EventsConfig"))
+    RecommenderConfig.add_member(:events_config, Shapes::ShapeRef.new(shape: EventsConfig, location_name: "EventsConfig"))
     RecommenderConfig.add_member(:training_frequency, Shapes::ShapeRef.new(shape: RecommenderConfigTrainingFrequencyInteger, location_name: "TrainingFrequency"))
+    RecommenderConfig.add_member(:inference_config, Shapes::ShapeRef.new(shape: InferenceConfig, location_name: "InferenceConfig"))
+    RecommenderConfig.add_member(:included_columns, Shapes::ShapeRef.new(shape: IncludedColumns, location_name: "IncludedColumns"))
     RecommenderConfig.struct_class = Types::RecommenderConfig
 
     RecommenderContext.key = Shapes::ShapeRef.new(shape: ContextKey)
     RecommenderContext.value = Shapes::ShapeRef.new(shape: string1To255)
+
+    RecommenderFilter.add_member(:name, Shapes::ShapeRef.new(shape: name, location_name: "Name"))
+    RecommenderFilter.add_member(:values, Shapes::ShapeRef.new(shape: RecommenderFilterValues, location_name: "Values"))
+    RecommenderFilter.struct_class = Types::RecommenderFilter
+
+    RecommenderFilterSummary.add_member(:recommender_filter_name, Shapes::ShapeRef.new(shape: RecommenderFilterName, location_name: "RecommenderFilterName"))
+    RecommenderFilterSummary.add_member(:recommender_schema_name, Shapes::ShapeRef.new(shape: name, location_name: "RecommenderSchemaName"))
+    RecommenderFilterSummary.add_member(:recommender_filter_expression, Shapes::ShapeRef.new(shape: RecommenderFilterExpression, location_name: "RecommenderFilterExpression"))
+    RecommenderFilterSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: timestamp, location_name: "CreatedAt"))
+    RecommenderFilterSummary.add_member(:description, Shapes::ShapeRef.new(shape: sensitiveText, location_name: "Description"))
+    RecommenderFilterSummary.add_member(:status, Shapes::ShapeRef.new(shape: RecommenderFilterStatus, location_name: "Status"))
+    RecommenderFilterSummary.add_member(:failure_reason, Shapes::ShapeRef.new(shape: String, location_name: "FailureReason"))
+    RecommenderFilterSummary.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    RecommenderFilterSummary.struct_class = Types::RecommenderFilterSummary
+
+    RecommenderFilterSummaryList.member = Shapes::ShapeRef.new(shape: RecommenderFilterSummary)
+
+    RecommenderFilterValues.key = Shapes::ShapeRef.new(shape: RecommenderFilterAttributeName)
+    RecommenderFilterValues.value = Shapes::ShapeRef.new(shape: RecommenderFilterAttributeValue)
+
+    RecommenderFilters.member = Shapes::ShapeRef.new(shape: RecommenderFilter)
+
+    RecommenderPromotionalFilter.add_member(:name, Shapes::ShapeRef.new(shape: name, location_name: "Name"))
+    RecommenderPromotionalFilter.add_member(:values, Shapes::ShapeRef.new(shape: RecommenderFilterValues, location_name: "Values"))
+    RecommenderPromotionalFilter.add_member(:promotion_name, Shapes::ShapeRef.new(shape: name, location_name: "PromotionName"))
+    RecommenderPromotionalFilter.add_member(:percent_promoted_items, Shapes::ShapeRef.new(shape: PercentPromotedItems, location_name: "PercentPromotedItems"))
+    RecommenderPromotionalFilter.struct_class = Types::RecommenderPromotionalFilter
+
+    RecommenderPromotionalFilters.member = Shapes::ShapeRef.new(shape: RecommenderPromotionalFilter)
 
     RecommenderRecipe.add_member(:name, Shapes::ShapeRef.new(shape: RecommenderRecipeName, location_name: "name"))
     RecommenderRecipe.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
@@ -2336,8 +2526,27 @@ module Aws::CustomerProfiles
 
     RecommenderRecipesList.member = Shapes::ShapeRef.new(shape: RecommenderRecipe)
 
+    RecommenderSchemaField.add_member(:target_field_name, Shapes::ShapeRef.new(shape: text, required: true, location_name: "TargetFieldName"))
+    RecommenderSchemaField.add_member(:content_type, Shapes::ShapeRef.new(shape: ContentType, location_name: "ContentType"))
+    RecommenderSchemaField.add_member(:feature_type, Shapes::ShapeRef.new(shape: FeatureType, location_name: "FeatureType"))
+    RecommenderSchemaField.struct_class = Types::RecommenderSchemaField
+
+    RecommenderSchemaFieldList.member = Shapes::ShapeRef.new(shape: RecommenderSchemaField)
+
+    RecommenderSchemaFields.key = Shapes::ShapeRef.new(shape: String)
+    RecommenderSchemaFields.value = Shapes::ShapeRef.new(shape: RecommenderSchemaFieldList)
+
+    RecommenderSchemaSummary.add_member(:recommender_schema_name, Shapes::ShapeRef.new(shape: name, required: true, location_name: "RecommenderSchemaName"))
+    RecommenderSchemaSummary.add_member(:fields, Shapes::ShapeRef.new(shape: RecommenderSchemaFields, required: true, location_name: "Fields"))
+    RecommenderSchemaSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: timestamp, required: true, location_name: "CreatedAt"))
+    RecommenderSchemaSummary.add_member(:status, Shapes::ShapeRef.new(shape: RecommenderSchemaStatus, required: true, location_name: "Status"))
+    RecommenderSchemaSummary.struct_class = Types::RecommenderSchemaSummary
+
+    RecommenderSchemaSummaryList.member = Shapes::ShapeRef.new(shape: RecommenderSchemaSummary)
+
     RecommenderSummary.add_member(:recommender_name, Shapes::ShapeRef.new(shape: name, location_name: "RecommenderName"))
     RecommenderSummary.add_member(:recipe_name, Shapes::ShapeRef.new(shape: RecommenderRecipeName, location_name: "RecipeName"))
+    RecommenderSummary.add_member(:recommender_schema_name, Shapes::ShapeRef.new(shape: name, location_name: "RecommenderSchemaName"))
     RecommenderSummary.add_member(:recommender_config, Shapes::ShapeRef.new(shape: RecommenderConfig, location_name: "RecommenderConfig"))
     RecommenderSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: timestamp, location_name: "CreatedAt"))
     RecommenderSummary.add_member(:description, Shapes::ShapeRef.new(shape: sensitiveText, location_name: "Description"))
@@ -2444,8 +2653,19 @@ module Aws::CustomerProfiles
     SegmentGroupStructure.add_member(:include, Shapes::ShapeRef.new(shape: IncludeOptions, location_name: "Include"))
     SegmentGroupStructure.struct_class = Types::SegmentGroupStructure
 
+    SegmentSort.add_member(:attributes, Shapes::ShapeRef.new(shape: SortAttributeList, required: true, location_name: "Attributes"))
+    SegmentSort.struct_class = Types::SegmentSort
+
     ServiceNowSourceProperties.add_member(:object, Shapes::ShapeRef.new(shape: Object, required: true, location_name: "Object"))
     ServiceNowSourceProperties.struct_class = Types::ServiceNowSourceProperties
+
+    SortAttribute.add_member(:name, Shapes::ShapeRef.new(shape: fieldName, required: true, location_name: "Name"))
+    SortAttribute.add_member(:data_type, Shapes::ShapeRef.new(shape: SegmentSortDataType, location_name: "DataType"))
+    SortAttribute.add_member(:order, Shapes::ShapeRef.new(shape: SegmentSortOrder, required: true, location_name: "Order"))
+    SortAttribute.add_member(:type, Shapes::ShapeRef.new(shape: SortAttributeType, location_name: "Type"))
+    SortAttribute.struct_class = Types::SortAttribute
+
+    SortAttributeList.member = Shapes::ShapeRef.new(shape: SortAttribute)
 
     SourceConnectorProperties.add_member(:marketo, Shapes::ShapeRef.new(shape: MarketoSourceProperties, location_name: "Marketo"))
     SourceConnectorProperties.add_member(:s3, Shapes::ShapeRef.new(shape: S3SourceProperties, location_name: "S3"))
@@ -2887,6 +3107,32 @@ module Aws::CustomerProfiles
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
+      api.add_operation(:create_recommender_filter, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateRecommenderFilter"
+        o.http_method = "POST"
+        o.http_request_uri = "/domains/{DomainName}/recommender-filters/{RecommenderFilterName}"
+        o.input = Shapes::ShapeRef.new(shape: CreateRecommenderFilterRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateRecommenderFilterResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:create_recommender_schema, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateRecommenderSchema"
+        o.http_method = "POST"
+        o.http_request_uri = "/domains/{DomainName}/recommender-schemas/{RecommenderSchemaName}"
+        o.input = Shapes::ShapeRef.new(shape: CreateRecommenderSchemaRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateRecommenderSchemaResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
       api.add_operation(:create_segment_definition, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateSegmentDefinition"
         o.http_method = "POST"
@@ -3088,6 +3334,32 @@ module Aws::CustomerProfiles
         o.http_request_uri = "/domains/{DomainName}/recommenders/{RecommenderName}"
         o.input = Shapes::ShapeRef.new(shape: DeleteRecommenderRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteRecommenderResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:delete_recommender_filter, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteRecommenderFilter"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/domains/{DomainName}/recommender-filters/{RecommenderFilterName}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteRecommenderFilterRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteRecommenderFilterResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:delete_recommender_schema, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteRecommenderSchema"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/domains/{DomainName}/recommender-schemas/{RecommenderSchemaName}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteRecommenderSchemaRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteRecommenderSchemaResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
@@ -3348,6 +3620,32 @@ module Aws::CustomerProfiles
         o.http_request_uri = "/domains/{DomainName}/recommenders/{RecommenderName}"
         o.input = Shapes::ShapeRef.new(shape: GetRecommenderRequest)
         o.output = Shapes::ShapeRef.new(shape: GetRecommenderResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:get_recommender_filter, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetRecommenderFilter"
+        o.http_method = "GET"
+        o.http_request_uri = "/domains/{DomainName}/recommender-filters/{RecommenderFilterName}"
+        o.input = Shapes::ShapeRef.new(shape: GetRecommenderFilterRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetRecommenderFilterResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:get_recommender_schema, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetRecommenderSchema"
+        o.http_method = "GET"
+        o.http_request_uri = "/domains/{DomainName}/recommender-schemas/{RecommenderSchemaName}"
+        o.input = Shapes::ShapeRef.new(shape: GetRecommenderSchemaRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetRecommenderSchemaResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
@@ -3729,12 +4027,50 @@ module Aws::CustomerProfiles
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
+      api.add_operation(:list_recommender_filters, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListRecommenderFilters"
+        o.http_method = "GET"
+        o.http_request_uri = "/domains/{DomainName}/recommender-filters"
+        o.input = Shapes::ShapeRef.new(shape: ListRecommenderFiltersRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListRecommenderFiltersResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_recommender_recipes, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListRecommenderRecipes"
         o.http_method = "GET"
         o.http_request_uri = "/recommender-recipes"
         o.input = Shapes::ShapeRef.new(shape: ListRecommenderRecipesRequest)
         o.output = Shapes::ShapeRef.new(shape: ListRecommenderRecipesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_recommender_schemas, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListRecommenderSchemas"
+        o.http_method = "GET"
+        o.http_request_uri = "/domains/{DomainName}/recommender-schemas"
+        o.input = Shapes::ShapeRef.new(shape: ListRecommenderSchemasRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListRecommenderSchemasResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)

@@ -23,6 +23,31 @@ module Aws::TimestreamInfluxDB
       include Aws::Structure
     end
 
+    # Configuration for node modes in the DbCluster.
+    #
+    # @!attribute [rw] ingest_query_instances
+    #   The number of instances in the DbCluster which can both ingest and
+    #   query.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] query_only_instances
+    #   The number of instances in the DbCluster which can only query.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] dedicated_compactor
+    #   Indicates if the compactor instance is a standalone instance or not.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-influxdb-2023-01-27/ClusterConfiguration AWS API Documentation
+    #
+    class ClusterConfiguration < Struct.new(
+      :ingest_query_instances,
+      :query_only_instances,
+      :dedicated_compactor)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The request conflicts with an existing resource in Timestream for
     # InfluxDB.
     #
@@ -164,6 +189,11 @@ module Aws::TimestreamInfluxDB
     #   bucket.
     #   @return [Types::LogDeliveryConfiguration]
     #
+    # @!attribute [rw] maintenance_schedule
+    #   Specifies the maintenance schedule for the DB cluster, including the
+    #   preferred maintenance window and timezone.
+    #   @return [Types::MaintenanceSchedule]
+    #
     # @!attribute [rw] tags
     #   A list of key-value pairs to associate with the DB instance.
     #   @return [Hash<String,String>]
@@ -188,6 +218,7 @@ module Aws::TimestreamInfluxDB
       :deployment_type,
       :failover_mode,
       :log_delivery_configuration,
+      :maintenance_schedule,
       :tags)
       SENSITIVE = [:username, :password]
       include Aws::Structure
@@ -302,6 +333,11 @@ module Aws::TimestreamInfluxDB
     #   bucket.
     #   @return [Types::LogDeliveryConfiguration]
     #
+    # @!attribute [rw] maintenance_schedule
+    #   Specifies the maintenance schedule for the DB instance, including
+    #   the preferred maintenance window and timezone.
+    #   @return [Types::MaintenanceSchedule]
+    #
     # @!attribute [rw] tags
     #   A list of key-value pairs to associate with the DB instance.
     #   @return [Hash<String,String>]
@@ -340,6 +376,7 @@ module Aws::TimestreamInfluxDB
       :db_parameter_group_identifier,
       :deployment_type,
       :log_delivery_configuration,
+      :maintenance_schedule,
       :tags,
       :port,
       :network_type)
@@ -449,6 +486,20 @@ module Aws::TimestreamInfluxDB
     #   Specifies the DbInstance's roles in the cluster.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] maintenance_schedule
+    #   The maintenance schedule for the DB instance.
+    #   @return [Types::MaintenanceSchedule]
+    #
+    # @!attribute [rw] last_maintenance_time
+    #   The timestamp of the last completed maintenance operation on the DB
+    #   instance.
+    #   @return [Time]
+    #
+    # @!attribute [rw] next_maintenance_time
+    #   The timestamp of the next scheduled maintenance operation on the DB
+    #   instance.
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-influxdb-2023-01-27/CreateDbInstanceOutput AWS API Documentation
     #
     class CreateDbInstanceOutput < Struct.new(
@@ -473,7 +524,10 @@ module Aws::TimestreamInfluxDB
       :influx_auth_parameters_secret_arn,
       :db_cluster_id,
       :instance_mode,
-      :instance_modes)
+      :instance_modes,
+      :maintenance_schedule,
+      :last_maintenance_time,
+      :next_maintenance_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -935,6 +989,20 @@ module Aws::TimestreamInfluxDB
     #   Specifies the DbInstance's roles in the cluster.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] maintenance_schedule
+    #   The maintenance schedule for the DB instance.
+    #   @return [Types::MaintenanceSchedule]
+    #
+    # @!attribute [rw] last_maintenance_time
+    #   The timestamp of the last completed maintenance operation on the DB
+    #   instance.
+    #   @return [Time]
+    #
+    # @!attribute [rw] next_maintenance_time
+    #   The timestamp of the next scheduled maintenance operation on the DB
+    #   instance.
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-influxdb-2023-01-27/DeleteDbInstanceOutput AWS API Documentation
     #
     class DeleteDbInstanceOutput < Struct.new(
@@ -959,7 +1027,10 @@ module Aws::TimestreamInfluxDB
       :influx_auth_parameters_secret_arn,
       :db_cluster_id,
       :instance_mode,
-      :instance_modes)
+      :instance_modes,
+      :maintenance_schedule,
+      :last_maintenance_time,
+      :next_maintenance_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1067,6 +1138,20 @@ module Aws::TimestreamInfluxDB
     #   S3 bucket.
     #   @return [Types::LogDeliveryConfiguration]
     #
+    # @!attribute [rw] maintenance_schedule
+    #   The maintenance schedule for the DB cluster.
+    #   @return [Types::MaintenanceSchedule]
+    #
+    # @!attribute [rw] last_maintenance_time
+    #   The timestamp of the last completed maintenance operation on the DB
+    #   cluster.
+    #   @return [Time]
+    #
+    # @!attribute [rw] next_maintenance_time
+    #   The timestamp of the next scheduled maintenance operation on the DB
+    #   cluster.
+    #   @return [Time]
+    #
     # @!attribute [rw] influx_auth_parameters_secret_arn
     #   The Amazon Resource Name (ARN) of the Secrets Manager secret
     #   containing the initial InfluxDB authorization parameters. The secret
@@ -1085,6 +1170,10 @@ module Aws::TimestreamInfluxDB
     # @!attribute [rw] failover_mode
     #   The configured failover mode for the DB cluster.
     #   @return [String]
+    #
+    # @!attribute [rw] cluster_configuration
+    #   Configuration for node modes in the DbCluster.
+    #   @return [Types::ClusterConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-influxdb-2023-01-27/GetDbClusterOutput AWS API Documentation
     #
@@ -1105,10 +1194,14 @@ module Aws::TimestreamInfluxDB
       :publicly_accessible,
       :db_parameter_group_identifier,
       :log_delivery_configuration,
+      :maintenance_schedule,
+      :last_maintenance_time,
+      :next_maintenance_time,
       :influx_auth_parameters_secret_arn,
       :vpc_subnet_ids,
       :vpc_security_group_ids,
-      :failover_mode)
+      :failover_mode,
+      :cluster_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1226,6 +1319,20 @@ module Aws::TimestreamInfluxDB
     #   Specifies the DbInstance's roles in the cluster.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] maintenance_schedule
+    #   The maintenance schedule for the DB instance.
+    #   @return [Types::MaintenanceSchedule]
+    #
+    # @!attribute [rw] last_maintenance_time
+    #   The timestamp of the last completed maintenance operation on the DB
+    #   instance.
+    #   @return [Time]
+    #
+    # @!attribute [rw] next_maintenance_time
+    #   The timestamp of the next scheduled maintenance operation on the DB
+    #   instance.
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-influxdb-2023-01-27/GetDbInstanceOutput AWS API Documentation
     #
     class GetDbInstanceOutput < Struct.new(
@@ -1250,7 +1357,10 @@ module Aws::TimestreamInfluxDB
       :influx_auth_parameters_secret_arn,
       :db_cluster_id,
       :instance_mode,
-      :instance_modes)
+      :instance_modes,
+      :maintenance_schedule,
+      :last_maintenance_time,
+      :next_maintenance_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2526,6 +2636,31 @@ module Aws::TimestreamInfluxDB
       include Aws::Structure
     end
 
+    # Specifies the maintenance schedule for a DB instance or cluster,
+    # defining when maintenance operations such as patching can be
+    # performed.
+    #
+    # @!attribute [rw] timezone
+    #   The IANA timezone identifier for the maintenance window. Format:
+    #   Region/City or UTC. For example, America/New\_York or UTC.
+    #   @return [String]
+    #
+    # @!attribute [rw] preferred_maintenance_window
+    #   The preferred maintenance window in the format ddd:HH:MM-ddd:HH:MM
+    #   (UTC). Day must be one of: Mon, Tue, Wed, Thu, Fri, Sat, Sun. For
+    #   example, Sun:02:00-Sun:06:00. Provide an empty string to let the
+    #   system choose a window.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-influxdb-2023-01-27/MaintenanceSchedule AWS API Documentation
+    #
+    class MaintenanceSchedule < Struct.new(
+      :timezone,
+      :preferred_maintenance_window)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The parameters that comprise the parameter group.
     #
     # @note Parameters is a union - when making an API calls you must set exactly one of the members.
@@ -2736,6 +2871,20 @@ module Aws::TimestreamInfluxDB
     #   Specifies the DbInstance's roles in the cluster.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] maintenance_schedule
+    #   The maintenance schedule for the DB instance.
+    #   @return [Types::MaintenanceSchedule]
+    #
+    # @!attribute [rw] last_maintenance_time
+    #   The timestamp of the last completed maintenance operation on the DB
+    #   instance.
+    #   @return [Time]
+    #
+    # @!attribute [rw] next_maintenance_time
+    #   The timestamp of the next scheduled maintenance operation on the DB
+    #   instance.
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-influxdb-2023-01-27/RebootDbInstanceOutput AWS API Documentation
     #
     class RebootDbInstanceOutput < Struct.new(
@@ -2760,7 +2909,10 @@ module Aws::TimestreamInfluxDB
       :influx_auth_parameters_secret_arn,
       :db_cluster_id,
       :instance_mode,
-      :instance_modes)
+      :instance_modes,
+      :maintenance_schedule,
+      :last_maintenance_time,
+      :next_maintenance_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2898,6 +3050,11 @@ module Aws::TimestreamInfluxDB
     #   Update the DB cluster's failover behavior.
     #   @return [String]
     #
+    # @!attribute [rw] maintenance_schedule
+    #   Specifies the maintenance schedule for the DB cluster, including the
+    #   preferred maintenance window and timezone.
+    #   @return [Types::MaintenanceSchedule]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-influxdb-2023-01-27/UpdateDbClusterInput AWS API Documentation
     #
     class UpdateDbClusterInput < Struct.new(
@@ -2906,7 +3063,8 @@ module Aws::TimestreamInfluxDB
       :db_parameter_group_identifier,
       :port,
       :db_instance_type,
-      :failover_mode)
+      :failover_mode,
+      :maintenance_schedule)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2971,6 +3129,11 @@ module Aws::TimestreamInfluxDB
     #   gibibytes).
     #   @return [Integer]
     #
+    # @!attribute [rw] maintenance_schedule
+    #   Specifies the maintenance schedule for the DB instance, including
+    #   the preferred maintenance window and timezone.
+    #   @return [Types::MaintenanceSchedule]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-influxdb-2023-01-27/UpdateDbInstanceInput AWS API Documentation
     #
     class UpdateDbInstanceInput < Struct.new(
@@ -2981,7 +3144,8 @@ module Aws::TimestreamInfluxDB
       :db_instance_type,
       :deployment_type,
       :db_storage_type,
-      :allocated_storage)
+      :allocated_storage,
+      :maintenance_schedule)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3087,6 +3251,20 @@ module Aws::TimestreamInfluxDB
     #   Specifies the DbInstance's roles in the cluster.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] maintenance_schedule
+    #   The maintenance schedule for the DB instance.
+    #   @return [Types::MaintenanceSchedule]
+    #
+    # @!attribute [rw] last_maintenance_time
+    #   The timestamp of the last completed maintenance operation on the DB
+    #   instance.
+    #   @return [Time]
+    #
+    # @!attribute [rw] next_maintenance_time
+    #   The timestamp of the next scheduled maintenance operation on the DB
+    #   instance.
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-influxdb-2023-01-27/UpdateDbInstanceOutput AWS API Documentation
     #
     class UpdateDbInstanceOutput < Struct.new(
@@ -3111,7 +3289,10 @@ module Aws::TimestreamInfluxDB
       :influx_auth_parameters_secret_arn,
       :db_cluster_id,
       :instance_mode,
-      :instance_modes)
+      :instance_modes,
+      :maintenance_schedule,
+      :last_maintenance_time,
+      :next_maintenance_time)
       SENSITIVE = []
       include Aws::Structure
     end

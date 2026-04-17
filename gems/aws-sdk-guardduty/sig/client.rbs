@@ -138,7 +138,7 @@ module Aws
                              ?tags: Hash[::String, ::String],
                              ?features: Array[
                                {
-                                 name: ("S3_DATA_EVENTS" | "EKS_AUDIT_LOGS" | "EBS_MALWARE_PROTECTION" | "RDS_LOGIN_EVENTS" | "EKS_RUNTIME_MONITORING" | "LAMBDA_NETWORK_LOGS" | "RUNTIME_MONITORING")?,
+                                 name: ("S3_DATA_EVENTS" | "EKS_AUDIT_LOGS" | "EBS_MALWARE_PROTECTION" | "RDS_LOGIN_EVENTS" | "LAMBDA_NETWORK_LOGS" | "EKS_RUNTIME_MONITORING" | "RUNTIME_MONITORING")?,
                                  status: ("ENABLED" | "DISABLED")?,
                                  additional_configuration: Array[
                                    {
@@ -554,7 +554,7 @@ module Aws
                                      ?filter_criteria: {
                                        filter_criterion: Array[
                                          {
-                                           criterion_key: ("ACCOUNT_ID" | "CLUSTER_NAME" | "RESOURCE_TYPE" | "COVERAGE_STATUS" | "ADDON_VERSION" | "MANAGEMENT_TYPE" | "EKS_CLUSTER_NAME" | "ECS_CLUSTER_NAME" | "AGENT_VERSION" | "INSTANCE_ID" | "CLUSTER_ARN")?,
+                                           criterion_key: ("ACCOUNT_ID" | "RESOURCE_TYPE" | "COVERAGE_STATUS" | "ADDON_VERSION" | "CLUSTER_NAME" | "ECS_CLUSTER_NAME" | "MANAGEMENT_TYPE" | "EKS_CLUSTER_NAME" | "AGENT_VERSION" | "INSTANCE_ID" | "CLUSTER_ARN")?,
                                            filter_condition: {
                                              equals: Array[::String]?,
                                              not_equals: Array[::String]?
@@ -847,7 +847,7 @@ module Aws
                                     account_ids: Array[::String]?,
                                     data_sources: Array[("FLOW_LOGS" | "CLOUD_TRAIL" | "DNS_LOGS" | "S3_LOGS" | "KUBERNETES_AUDIT_LOGS" | "EC2_MALWARE_SCAN")]?,
                                     resources: Array[::String]?,
-                                    features: Array[("FLOW_LOGS" | "CLOUD_TRAIL" | "DNS_LOGS" | "S3_DATA_EVENTS" | "EKS_AUDIT_LOGS" | "EBS_MALWARE_PROTECTION" | "RDS_LOGIN_EVENTS" | "LAMBDA_NETWORK_LOGS" | "EKS_RUNTIME_MONITORING" | "FARGATE_RUNTIME_MONITORING" | "EC2_RUNTIME_MONITORING" | "RDS_DBI_PROTECTION_PROVISIONED" | "RDS_DBI_PROTECTION_SERVERLESS")]?
+                                    features: Array[("FLOW_LOGS" | "CLOUD_TRAIL" | "DNS_LOGS" | "S3_DATA_EVENTS" | "EKS_AUDIT_LOGS" | "EBS_MALWARE_PROTECTION" | "RDS_LOGIN_EVENTS" | "LAMBDA_NETWORK_LOGS" | "EKS_RUNTIME_MONITORING" | "EC2_RUNTIME_MONITORING" | "FARGATE_RUNTIME_MONITORING" | "RDS_DBI_PROTECTION_PROVISIONED" | "RDS_DBI_PROTECTION_SERVERLESS")]?
                                   },
                                   ?unit: ::String,
                                   ?max_results: ::Integer,
@@ -881,7 +881,7 @@ module Aws
                            ?filter_criteria: {
                              filter_criterion: Array[
                                {
-                                 criterion_key: ("ACCOUNT_ID" | "CLUSTER_NAME" | "RESOURCE_TYPE" | "COVERAGE_STATUS" | "ADDON_VERSION" | "MANAGEMENT_TYPE" | "EKS_CLUSTER_NAME" | "ECS_CLUSTER_NAME" | "AGENT_VERSION" | "INSTANCE_ID" | "CLUSTER_ARN")?,
+                                 criterion_key: ("ACCOUNT_ID" | "RESOURCE_TYPE" | "COVERAGE_STATUS" | "ADDON_VERSION" | "CLUSTER_NAME" | "ECS_CLUSTER_NAME" | "MANAGEMENT_TYPE" | "EKS_CLUSTER_NAME" | "AGENT_VERSION" | "INSTANCE_ID" | "CLUSTER_ARN")?,
                                  filter_condition: {
                                    equals: Array[::String]?,
                                    not_equals: Array[::String]?
@@ -890,7 +890,7 @@ module Aws
                              ]?
                            },
                            ?sort_criteria: {
-                             attribute_name: ("ACCOUNT_ID" | "CLUSTER_NAME" | "COVERAGE_STATUS" | "ISSUE" | "ADDON_VERSION" | "UPDATED_AT" | "EKS_CLUSTER_NAME" | "ECS_CLUSTER_NAME" | "INSTANCE_ID")?,
+                             attribute_name: ("ACCOUNT_ID" | "COVERAGE_STATUS" | "ISSUE" | "ADDON_VERSION" | "UPDATED_AT" | "CLUSTER_NAME" | "EKS_CLUSTER_NAME" | "ECS_CLUSTER_NAME" | "INSTANCE_ID")?,
                              order_by: ("ASC" | "DESC")?
                            }
                          ) -> _ListCoverageResponseSuccess
@@ -1218,7 +1218,7 @@ module Aws
                              },
                              ?features: Array[
                                {
-                                 name: ("S3_DATA_EVENTS" | "EKS_AUDIT_LOGS" | "EBS_MALWARE_PROTECTION" | "RDS_LOGIN_EVENTS" | "EKS_RUNTIME_MONITORING" | "LAMBDA_NETWORK_LOGS" | "RUNTIME_MONITORING")?,
+                                 name: ("S3_DATA_EVENTS" | "EKS_AUDIT_LOGS" | "EBS_MALWARE_PROTECTION" | "RDS_LOGIN_EVENTS" | "LAMBDA_NETWORK_LOGS" | "EKS_RUNTIME_MONITORING" | "RUNTIME_MONITORING")?,
                                  status: ("ENABLED" | "DISABLED")?,
                                  additional_configuration: Array[
                                    {
@@ -1359,7 +1359,7 @@ module Aws
                                      },
                                      ?features: Array[
                                        {
-                                         name: ("S3_DATA_EVENTS" | "EKS_AUDIT_LOGS" | "EBS_MALWARE_PROTECTION" | "RDS_LOGIN_EVENTS" | "EKS_RUNTIME_MONITORING" | "LAMBDA_NETWORK_LOGS" | "RUNTIME_MONITORING")?,
+                                         name: ("S3_DATA_EVENTS" | "EKS_AUDIT_LOGS" | "EBS_MALWARE_PROTECTION" | "RDS_LOGIN_EVENTS" | "LAMBDA_NETWORK_LOGS" | "EKS_RUNTIME_MONITORING" | "RUNTIME_MONITORING")?,
                                          status: ("ENABLED" | "DISABLED")?,
                                          additional_configuration: Array[
                                            {
@@ -1398,7 +1398,7 @@ module Aws
                                                },
                                                ?features: Array[
                                                  {
-                                                   name: ("S3_DATA_EVENTS" | "EKS_AUDIT_LOGS" | "EBS_MALWARE_PROTECTION" | "RDS_LOGIN_EVENTS" | "EKS_RUNTIME_MONITORING" | "LAMBDA_NETWORK_LOGS" | "RUNTIME_MONITORING")?,
+                                                   name: ("S3_DATA_EVENTS" | "EKS_AUDIT_LOGS" | "EBS_MALWARE_PROTECTION" | "RDS_LOGIN_EVENTS" | "LAMBDA_NETWORK_LOGS" | "EKS_RUNTIME_MONITORING" | "RUNTIME_MONITORING")?,
                                                    auto_enable: ("NEW" | "NONE" | "ALL")?,
                                                    additional_configuration: Array[
                                                      {

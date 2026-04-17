@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.85.0 (2026-03-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.84.0 (2026-02-26)
+------------------
+
+* Feature - Added License Arn as a new optional filter for GetEntitlements and LicenseArn field in each entitlement in the response.
+
 1.83.0 (2026-01-16)
 ------------------
 

@@ -23,6 +23,19 @@ module Aws::MedicalImaging
       include Aws::Structure
     end
 
+    # The request is invalid or malformed.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medical-imaging-2023-07-19/BadRequestException AWS API Documentation
+    #
+    class BadRequestException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Updating or deleting a resource can cause an inconsistent state.
     #
     # @!attribute [rw] message
@@ -843,7 +856,8 @@ module Aws::MedicalImaging
     #    * If the stored transfer syntax is `1.2.840.10008.1.2.4.203`, the
     #     returned contentType is `image/jphc`.
     #
-    #   ^
+    #   * If the stored transfer syntax is `1.2.840.10008.1.2.4.112` the
+    #     returned `contentType` is `image/jxl`.
     #
     #    </note>
     #   @return [String]
@@ -1354,6 +1368,19 @@ module Aws::MedicalImaging
       class Unknown < MetadataUpdates; end
     end
 
+    # The request content type or accept header is not supported.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medical-imaging-2023-07-19/NotAcceptableException AWS API Documentation
+    #
+    class NotAcceptableException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Specifies the overrides used in image set modification calls to
     # `CopyImageSet` and `UpdateImageSetMetadata`.
     #
@@ -1733,6 +1760,11 @@ module Aws::MedicalImaging
     #     Instance
     #   @return [Boolean]
     #
+    # @!attribute [rw] include_study_image_sets
+    #   Flag to apply the metadata updates to all image sets in the same
+    #   Study as the requested image set ID.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] update_image_set_metadata_updates
     #   Update image set metadata updates.
     #   @return [Types::MetadataUpdates]
@@ -1744,6 +1776,7 @@ module Aws::MedicalImaging
       :image_set_id,
       :latest_version_id,
       :force,
+      :include_study_image_sets,
       :update_image_set_metadata_updates)
       SENSITIVE = []
       include Aws::Structure

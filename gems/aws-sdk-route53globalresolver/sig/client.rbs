@@ -114,7 +114,7 @@ module Aws
                                             client_token: ::String,
                                             confidence_threshold: ("LOW" | "MEDIUM" | "HIGH")?,
                                             description: ::String?,
-                                            dns_advanced_protection: ("DGA" | "DNS_TUNNELING")?,
+                                            dns_advanced_protection: ("DGA" | "DNS_TUNNELING" | "DICTIONARY_DGA")?,
                                             firewall_domain_list_id: ::String?,
                                             name: ::String,
                                             priority: ::Integer?,
@@ -156,7 +156,7 @@ module Aws
                                             block_response: ("NODATA" | "NXDOMAIN" | "OVERRIDE")?,
                                             confidence_threshold: ("LOW" | "MEDIUM" | "HIGH")?,
                                             description: ::String?,
-                                            dns_advanced_protection: ("DGA" | "DNS_TUNNELING")?,
+                                            dns_advanced_protection: ("DGA" | "DNS_TUNNELING" | "DICTIONARY_DGA")?,
                                             firewall_rule_id: ::String,
                                             name: ::String?,
                                             priority: ::Integer?
@@ -272,7 +272,7 @@ module Aws
         def confidence_threshold: () -> ("LOW" | "MEDIUM" | "HIGH")
         def created_at: () -> ::Time
         def description: () -> ::String
-        def dns_advanced_protection: () -> ("DGA" | "DNS_TUNNELING")
+        def dns_advanced_protection: () -> ("DGA" | "DNS_TUNNELING" | "DICTIONARY_DGA")
         def firewall_domain_list_id: () -> ::String
         def id: () -> ::String
         def name: () -> ::String
@@ -292,7 +292,7 @@ module Aws
                                   ?client_token: ::String,
                                   ?confidence_threshold: ("LOW" | "MEDIUM" | "HIGH"),
                                   ?description: ::String,
-                                  ?dns_advanced_protection: ("DGA" | "DNS_TUNNELING"),
+                                  ?dns_advanced_protection: ("DGA" | "DNS_TUNNELING" | "DICTIONARY_DGA"),
                                   ?firewall_domain_list_id: ::String,
                                   name: ::String,
                                   ?priority: ::Integer,
@@ -309,7 +309,9 @@ module Aws
         def created_at: () -> ::Time
         def description: () -> ::String
         def dns_name: () -> ::String
+        def ip_address_type: () -> ("IPV4" | "DUAL_STACK")
         def ipv4_addresses: () -> ::Array[::String]
+        def ipv6_addresses: () -> ::Array[::String]
         def name: () -> ::String
         def observability_region: () -> ::String
         def regions: () -> ::Array[::String]
@@ -320,6 +322,7 @@ module Aws
       def create_global_resolver: (
                                     ?client_token: ::String,
                                     ?description: ::String,
+                                    ?ip_address_type: ("IPV4" | "DUAL_STACK"),
                                     name: ::String,
                                     ?observability_region: ::String,
                                     regions: Array[::String],
@@ -402,7 +405,7 @@ module Aws
         def confidence_threshold: () -> ("LOW" | "MEDIUM" | "HIGH")
         def created_at: () -> ::Time
         def description: () -> ::String
-        def dns_advanced_protection: () -> ("DGA" | "DNS_TUNNELING")
+        def dns_advanced_protection: () -> ("DGA" | "DNS_TUNNELING" | "DICTIONARY_DGA")
         def firewall_domain_list_id: () -> ::String
         def id: () -> ::String
         def name: () -> ::String
@@ -432,6 +435,8 @@ module Aws
         def updated_at: () -> ::Time
         def status: () -> ("CREATING" | "OPERATIONAL" | "UPDATING" | "DELETING")
         def ipv4_addresses: () -> ::Array[::String]
+        def ipv6_addresses: () -> ::Array[::String]
+        def ip_address_type: () -> ("IPV4" | "DUAL_STACK")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53GlobalResolver/Client.html#delete_global_resolver-instance_method
       def delete_global_resolver: (
@@ -589,7 +594,7 @@ module Aws
         def confidence_threshold: () -> ("LOW" | "MEDIUM" | "HIGH")
         def created_at: () -> ::Time
         def description: () -> ::String
-        def dns_advanced_protection: () -> ("DGA" | "DNS_TUNNELING")
+        def dns_advanced_protection: () -> ("DGA" | "DNS_TUNNELING" | "DICTIONARY_DGA")
         def firewall_domain_list_id: () -> ::String
         def id: () -> ::String
         def name: () -> ::String
@@ -619,6 +624,8 @@ module Aws
         def updated_at: () -> ::Time
         def status: () -> ("CREATING" | "OPERATIONAL" | "UPDATING" | "DELETING")
         def ipv4_addresses: () -> ::Array[::String]
+        def ipv6_addresses: () -> ::Array[::String]
+        def ip_address_type: () -> ("IPV4" | "DUAL_STACK")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53GlobalResolver/Client.html#get_global_resolver-instance_method
       def get_global_resolver: (
@@ -903,7 +910,7 @@ module Aws
         def confidence_threshold: () -> ("LOW" | "MEDIUM" | "HIGH")
         def created_at: () -> ::Time
         def description: () -> ::String
-        def dns_advanced_protection: () -> ("DGA" | "DNS_TUNNELING")
+        def dns_advanced_protection: () -> ("DGA" | "DNS_TUNNELING" | "DICTIONARY_DGA")
         def firewall_domain_list_id: () -> ::String
         def id: () -> ::String
         def name: () -> ::String
@@ -923,7 +930,7 @@ module Aws
                                   client_token: ::String,
                                   ?confidence_threshold: ("LOW" | "MEDIUM" | "HIGH"),
                                   ?description: ::String,
-                                  ?dns_advanced_protection: ("DGA" | "DNS_TUNNELING"),
+                                  ?dns_advanced_protection: ("DGA" | "DNS_TUNNELING" | "DICTIONARY_DGA"),
                                   firewall_rule_id: ::String,
                                   ?name: ::String,
                                   ?priority: ::Integer
@@ -944,13 +951,16 @@ module Aws
         def updated_at: () -> ::Time
         def status: () -> ("CREATING" | "OPERATIONAL" | "UPDATING" | "DELETING")
         def ipv4_addresses: () -> ::Array[::String]
+        def ipv6_addresses: () -> ::Array[::String]
+        def ip_address_type: () -> ("IPV4" | "DUAL_STACK")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53GlobalResolver/Client.html#update_global_resolver-instance_method
       def update_global_resolver: (
                                     global_resolver_id: ::String,
                                     ?name: ::String,
                                     ?observability_region: ::String,
-                                    ?description: ::String
+                                    ?description: ::String,
+                                    ?ip_address_type: ("IPV4" | "DUAL_STACK")
                                   ) -> _UpdateGlobalResolverResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateGlobalResolverResponseSuccess
 

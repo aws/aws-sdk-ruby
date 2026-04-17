@@ -1,0 +1,37 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module SimpleDBv2
+    module Errors
+      class ServiceError < ::Aws::Errors::ServiceError
+      end
+
+      class ConflictException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidNextTokenException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidParameterCombinationException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidParameterValueException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class NoSuchDomainException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class NoSuchExportException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class NumberExportsLimitExceeded < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+    end
+  end
+end

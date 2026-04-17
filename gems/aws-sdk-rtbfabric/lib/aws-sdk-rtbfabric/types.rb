@@ -26,13 +26,18 @@ module Aws::RTBFabric
     #   Settings for the application logs.
     #   @return [Types::LinkLogSettings]
     #
+    # @!attribute [rw] timeout_in_millis
+    #   The timeout value in milliseconds.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rtbfabric-2023-05-15/AcceptLinkRequest AWS API Documentation
     #
     class AcceptLinkRequest < Struct.new(
       :gateway_id,
       :link_id,
       :attributes,
-      :log_settings)
+      :log_settings,
+      :timeout_in_millis)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -73,6 +78,14 @@ module Aws::RTBFabric
     #   Attributes of the link.
     #   @return [Types::LinkAttributes]
     #
+    # @!attribute [rw] log_settings
+    #   Describes the settings for a link log.
+    #   @return [Types::LinkLogSettings]
+    #
+    # @!attribute [rw] connectivity_type
+    #   The connectivity type of the link.
+    #   @return [String]
+    #
     # @!attribute [rw] link_id
     #   The unique identifier of the link.
     #   @return [String]
@@ -89,6 +102,8 @@ module Aws::RTBFabric
       :flow_modules,
       :pending_flow_modules,
       :attributes,
+      :log_settings,
+      :connectivity_type,
       :link_id)
       SENSITIVE = []
       include Aws::Structure
@@ -147,11 +162,17 @@ module Aws::RTBFabric
     #   The role ARN of the auto scaling group.
     #   @return [String]
     #
+    # @!attribute [rw] health_check_config
+    #   The health check configuration for the Auto Scaling group managed
+    #   endpoint.
+    #   @return [Types::HealthCheckConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rtbfabric-2023-05-15/AutoScalingGroupsConfiguration AWS API Documentation
     #
     class AutoScalingGroupsConfiguration < Struct.new(
       :auto_scaling_group_names,
-      :role_arn)
+      :role_arn,
+      :health_check_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -186,7 +207,7 @@ module Aws::RTBFabric
     #   @return [Types::LinkAttributes]
     #
     # @!attribute [rw] log_settings
-    #   Describes the settings for a link log.
+    #   Settings for the application logs.
     #   @return [Types::LinkLogSettings]
     #
     # @!attribute [rw] tags
@@ -258,6 +279,10 @@ module Aws::RTBFabric
     #   Settings for the application logs.
     #   @return [Types::LinkLogSettings]
     #
+    # @!attribute [rw] timeout_in_millis
+    #   The timeout value in milliseconds.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rtbfabric-2023-05-15/CreateLinkRequest AWS API Documentation
     #
     class CreateLinkRequest < Struct.new(
@@ -266,7 +291,8 @@ module Aws::RTBFabric
       :attributes,
       :http_responder_allowed,
       :tags,
-      :log_settings)
+      :log_settings,
+      :timeout_in_millis)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -307,6 +333,14 @@ module Aws::RTBFabric
     #   Attributes of the link.
     #   @return [Types::LinkAttributes]
     #
+    # @!attribute [rw] log_settings
+    #   Describes the settings for a link log.
+    #   @return [Types::LinkLogSettings]
+    #
+    # @!attribute [rw] connectivity_type
+    #   The connectivity type of the link.
+    #   @return [String]
+    #
     # @!attribute [rw] link_id
     #   The unique identifier of the link.
     #   @return [String]
@@ -327,6 +361,8 @@ module Aws::RTBFabric
       :flow_modules,
       :pending_flow_modules,
       :attributes,
+      :log_settings,
+      :connectivity_type,
       :link_id,
       :customer_provided_id)
       SENSITIVE = []
@@ -345,7 +381,7 @@ module Aws::RTBFabric
     #   @return [String]
     #
     # @!attribute [rw] attributes
-    #   Describes the attributes of a link.
+    #   Attributes of the link.
     #   @return [Types::LinkAttributes]
     #
     # @!attribute [rw] public_endpoint
@@ -353,7 +389,7 @@ module Aws::RTBFabric
     #   @return [String]
     #
     # @!attribute [rw] log_settings
-    #   Describes the settings for a link log.
+    #   Settings for the application logs.
     #   @return [Types::LinkLogSettings]
     #
     # @!attribute [rw] tags
@@ -483,6 +519,11 @@ module Aws::RTBFabric
     #   The networking protocol to use.
     #   @return [String]
     #
+    # @!attribute [rw] listener_config
+    #   Listener configuration for the protocols (HTTP, HTTPS, or both)
+    #   accepted by the gateway.
+    #   @return [Types::ListenerConfig]
+    #
     # @!attribute [rw] trust_store_configuration
     #   The configuration of the trust store.
     #   @return [Types::TrustStoreConfiguration]
@@ -507,6 +548,10 @@ module Aws::RTBFabric
     #   resource.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] gateway_type
+    #   The type of gateway. Valid values are `EXTERNAL` or `INTERNAL`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rtbfabric-2023-05-15/CreateResponderGatewayRequest AWS API Documentation
     #
     class CreateResponderGatewayRequest < Struct.new(
@@ -516,11 +561,13 @@ module Aws::RTBFabric
       :domain_name,
       :port,
       :protocol,
+      :listener_config,
       :trust_store_configuration,
       :managed_endpoint_configuration,
       :client_token,
       :description,
-      :tags)
+      :tags,
+      :gateway_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -533,11 +580,21 @@ module Aws::RTBFabric
     #   The status of the request.
     #   @return [String]
     #
+    # @!attribute [rw] listener_config
+    #   The listener configuration for the responder gateway.
+    #   @return [Types::ListenerConfig]
+    #
+    # @!attribute [rw] external_inbound_endpoint
+    #   The external inbound endpoint for the responder gateway.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rtbfabric-2023-05-15/CreateResponderGatewayResponse AWS API Documentation
     #
     class CreateResponderGatewayResponse < Struct.new(
       :gateway_id,
-      :status)
+      :status,
+      :listener_config,
+      :external_inbound_endpoint)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -834,8 +891,12 @@ module Aws::RTBFabric
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] log_settings
-    #   Describes the settings for a link log.
+    #   Settings for the application logs.
     #   @return [Types::LinkLogSettings]
+    #
+    # @!attribute [rw] connectivity_type
+    #   The connectivity type of the link.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rtbfabric-2023-05-15/GetInboundExternalLinkResponse AWS API Documentation
     #
@@ -850,7 +911,8 @@ module Aws::RTBFabric
       :created_at,
       :updated_at,
       :tags,
-      :log_settings)
+      :log_settings,
+      :connectivity_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -908,6 +970,14 @@ module Aws::RTBFabric
     #   Attributes of the link.
     #   @return [Types::LinkAttributes]
     #
+    # @!attribute [rw] log_settings
+    #   Settings for the application logs.
+    #   @return [Types::LinkLogSettings]
+    #
+    # @!attribute [rw] connectivity_type
+    #   The connectivity type of the link.
+    #   @return [String]
+    #
     # @!attribute [rw] link_id
     #   The unique identifier of the link.
     #   @return [String]
@@ -917,9 +987,13 @@ module Aws::RTBFabric
     #   specified resource.
     #   @return [Hash<String,String>]
     #
-    # @!attribute [rw] log_settings
-    #   Settings for the application logs.
-    #   @return [Types::LinkLogSettings]
+    # @!attribute [rw] http_responder_allowed
+    #   Boolean to specify if an HTTP responder is allowed.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] timeout_in_millis
+    #   The timeout value in milliseconds.
+    #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rtbfabric-2023-05-15/GetLinkResponse AWS API Documentation
     #
@@ -933,9 +1007,12 @@ module Aws::RTBFabric
       :flow_modules,
       :pending_flow_modules,
       :attributes,
+      :log_settings,
+      :connectivity_type,
       :link_id,
       :tags,
-      :log_settings)
+      :http_responder_allowed,
+      :timeout_in_millis)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -973,6 +1050,18 @@ module Aws::RTBFabric
     #   The public endpoint for the link.
     #   @return [String]
     #
+    # @!attribute [rw] flow_modules
+    #   The configuration of flow modules.
+    #   @return [Array<Types::ModuleConfiguration>]
+    #
+    # @!attribute [rw] pending_flow_modules
+    #   The configuration of pending flow modules.
+    #   @return [Array<Types::ModuleConfiguration>]
+    #
+    # @!attribute [rw] attributes
+    #   Describes the attributes of a link.
+    #   @return [Types::LinkAttributes]
+    #
     # @!attribute [rw] created_at
     #   The timestamp of when the outbound external link was created.
     #   @return [Time]
@@ -987,8 +1076,12 @@ module Aws::RTBFabric
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] log_settings
-    #   Describes the settings for a link log.
+    #   Settings for the application logs.
     #   @return [Types::LinkLogSettings]
+    #
+    # @!attribute [rw] connectivity_type
+    #   The connectivity type of the link.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rtbfabric-2023-05-15/GetOutboundExternalLinkResponse AWS API Documentation
     #
@@ -997,10 +1090,14 @@ module Aws::RTBFabric
       :link_id,
       :status,
       :public_endpoint,
+      :flow_modules,
+      :pending_flow_modules,
+      :attributes,
       :created_at,
       :updated_at,
       :tags,
-      :log_settings)
+      :log_settings,
+      :connectivity_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1137,6 +1234,10 @@ module Aws::RTBFabric
     #   The networking protocol.
     #   @return [String]
     #
+    # @!attribute [rw] listener_config
+    #   The listener configuration for the responder gateway.
+    #   @return [Types::ListenerConfig]
+    #
     # @!attribute [rw] trust_store_configuration
     #   The configuration of the trust store.
     #   @return [Types::TrustStoreConfiguration]
@@ -1166,6 +1267,14 @@ module Aws::RTBFabric
     #   The count of inbound links for the responder gateway.
     #   @return [Integer]
     #
+    # @!attribute [rw] gateway_type
+    #   The type of gateway. Valid values are `EXTERNAL` or `INTERNAL`.
+    #   @return [String]
+    #
+    # @!attribute [rw] external_inbound_endpoint
+    #   The external inbound endpoint for the responder gateway.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rtbfabric-2023-05-15/GetResponderGatewayResponse AWS API Documentation
     #
     class GetResponderGatewayResponse < Struct.new(
@@ -1179,13 +1288,16 @@ module Aws::RTBFabric
       :domain_name,
       :port,
       :protocol,
+      :listener_config,
       :trust_store_configuration,
       :managed_endpoint_configuration,
       :gateway_id,
       :tags,
       :active_links_count,
       :total_links_count,
-      :inbound_links_count)
+      :inbound_links_count,
+      :gateway_type,
+      :external_inbound_endpoint)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1205,6 +1317,65 @@ module Aws::RTBFabric
     class HeaderTagAction < Struct.new(
       :name,
       :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The health check configuration for a managed endpoint. Defines how the
+    # service probes instances in the Auto Scaling group to determine their
+    # health status.
+    #
+    # @!attribute [rw] port
+    #   The port to use for health check probes. Valid range is 80 to 65535.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] path
+    #   The destination path for the health check request. Must start with
+    #   `/`.
+    #   @return [String]
+    #
+    # @!attribute [rw] protocol
+    #   The protocol to use for health check probes.
+    #   @return [String]
+    #
+    # @!attribute [rw] timeout_ms
+    #   The timeout for each health check probe, in milliseconds. Valid
+    #   range is 100 to 5000.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] interval_seconds
+    #   The interval between health check probes, in seconds. Valid range is
+    #   5 to 60.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] status_code_matcher
+    #   The expected HTTP status code or status code pattern from healthy
+    #   instances. Supports a single code (for example, `200`), a range (for
+    #   example, `200-299`), or a comma-separated list (for example,
+    #   `200,204`).
+    #   @return [String]
+    #
+    # @!attribute [rw] healthy_threshold_count
+    #   The number of consecutive successful health checks required before
+    #   an instance is considered healthy. Valid range is 2 to 10.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] unhealthy_threshold_count
+    #   The number of consecutive failed health checks required before an
+    #   instance is considered unhealthy. Valid range is 2 to 10.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rtbfabric-2023-05-15/HealthCheckConfig AWS API Documentation
+    #
+    class HealthCheckConfig < Struct.new(
+      :port,
+      :path,
+      :protocol,
+      :timeout_ms,
+      :interval_seconds,
+      :status_code_matcher,
+      :healthy_threshold_count,
+      :unhealthy_threshold_count)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1380,6 +1551,14 @@ module Aws::RTBFabric
     #   Describes attributes of a link.
     #   @return [Types::LinkAttributes]
     #
+    # @!attribute [rw] log_settings
+    #   Describes the settings for a link log.
+    #   @return [Types::LinkLogSettings]
+    #
+    # @!attribute [rw] connectivity_type
+    #   The connectivity type of the link.
+    #   @return [String]
+    #
     # @!attribute [rw] link_id
     #   The unique identifier of the link.
     #   @return [String]
@@ -1388,6 +1567,10 @@ module Aws::RTBFabric
     #   A map of the key-value pairs of the tag or tags to assign to the
     #   resource.
     #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] public_endpoint
+    #   The public endpoint of the outbound link.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rtbfabric-2023-05-15/ListLinksResponseStructure AWS API Documentation
     #
@@ -1401,8 +1584,11 @@ module Aws::RTBFabric
       :flow_modules,
       :pending_flow_modules,
       :attributes,
+      :log_settings,
+      :connectivity_type,
       :link_id,
-      :tags)
+      :tags,
+      :public_endpoint)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1525,6 +1711,21 @@ module Aws::RTBFabric
     #
     class ListTagsForResourceResponse < Struct.new(
       :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Listener configuration for the protocols (HTTP, HTTPS, or both)
+    # accepted by the gateway.
+    #
+    # @!attribute [rw] protocols
+    #   The protocol for connections from clients to the gateway
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rtbfabric-2023-05-15/ListenerConfig AWS API Documentation
+    #
+    class ListenerConfig < Struct.new(
+      :protocols)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1757,6 +1958,14 @@ module Aws::RTBFabric
     #   Attributes of the link.
     #   @return [Types::LinkAttributes]
     #
+    # @!attribute [rw] log_settings
+    #   Describes the settings for a link log.
+    #   @return [Types::LinkLogSettings]
+    #
+    # @!attribute [rw] connectivity_type
+    #   The connectivity type of the link.
+    #   @return [String]
+    #
     # @!attribute [rw] link_id
     #   The unique identifier of the link.
     #   @return [String]
@@ -1773,6 +1982,8 @@ module Aws::RTBFabric
       :flow_modules,
       :pending_flow_modules,
       :attributes,
+      :log_settings,
+      :connectivity_type,
       :link_id)
       SENSITIVE = []
       include Aws::Structure
@@ -1971,12 +2182,17 @@ module Aws::RTBFabric
     #   Settings for the application logs.
     #   @return [Types::LinkLogSettings]
     #
+    # @!attribute [rw] timeout_in_millis
+    #   The timeout value in milliseconds.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rtbfabric-2023-05-15/UpdateLinkRequest AWS API Documentation
     #
     class UpdateLinkRequest < Struct.new(
       :gateway_id,
       :link_id,
-      :log_settings)
+      :log_settings,
+      :timeout_in_millis)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2052,6 +2268,10 @@ module Aws::RTBFabric
     #   The networking protocol to use.
     #   @return [String]
     #
+    # @!attribute [rw] listener_config
+    #   The listener configuration for the responder gateway.
+    #   @return [Types::ListenerConfig]
+    #
     # @!attribute [rw] trust_store_configuration
     #   The configuration of the trust store.
     #   @return [Types::TrustStoreConfiguration]
@@ -2081,6 +2301,7 @@ module Aws::RTBFabric
       :domain_name,
       :port,
       :protocol,
+      :listener_config,
       :trust_store_configuration,
       :managed_endpoint_configuration,
       :client_token,

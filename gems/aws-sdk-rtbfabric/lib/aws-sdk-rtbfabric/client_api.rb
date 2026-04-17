@@ -21,10 +21,12 @@ module Aws::RTBFabric
     AutoScalingGroupName = Shapes::StringShape.new(name: 'AutoScalingGroupName')
     AutoScalingGroupNameList = Shapes::ListShape.new(name: 'AutoScalingGroupNameList')
     AutoScalingGroupsConfiguration = Shapes::StructureShape.new(name: 'AutoScalingGroupsConfiguration')
+    AutoScalingGroupsConfigurationRoleArnString = Shapes::StringShape.new(name: 'AutoScalingGroupsConfigurationRoleArnString')
     Base64EncodedCertificateChain = Shapes::StringShape.new(name: 'Base64EncodedCertificateChain')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     CertificateAuthorityCertificates = Shapes::ListShape.new(name: 'CertificateAuthorityCertificates')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
+    ConnectivityType = Shapes::StringShape.new(name: 'ConnectivityType')
     CreateInboundExternalLinkRequest = Shapes::StructureShape.new(name: 'CreateInboundExternalLinkRequest')
     CreateInboundExternalLinkResponse = Shapes::StructureShape.new(name: 'CreateInboundExternalLinkResponse')
     CreateLinkRequest = Shapes::StructureShape.new(name: 'CreateLinkRequest')
@@ -56,6 +58,7 @@ module Aws::RTBFabric
     DeleteResponderGatewayResponse = Shapes::StructureShape.new(name: 'DeleteResponderGatewayResponse')
     DomainName = Shapes::StringShape.new(name: 'DomainName')
     EksEndpointsConfiguration = Shapes::StructureShape.new(name: 'EksEndpointsConfiguration')
+    EksEndpointsConfigurationRoleArnString = Shapes::StringShape.new(name: 'EksEndpointsConfigurationRoleArnString')
     Filter = Shapes::StructureShape.new(name: 'Filter')
     FilterConfiguration = Shapes::ListShape.new(name: 'FilterConfiguration')
     FilterCriteria = Shapes::ListShape.new(name: 'FilterCriteria')
@@ -67,6 +70,7 @@ module Aws::RTBFabric
     FlowModuleNameList = Shapes::ListShape.new(name: 'FlowModuleNameList')
     GatewayId = Shapes::StringShape.new(name: 'GatewayId')
     GatewayIdList = Shapes::ListShape.new(name: 'GatewayIdList')
+    GatewayType = Shapes::StringShape.new(name: 'GatewayType')
     GetInboundExternalLinkRequest = Shapes::StructureShape.new(name: 'GetInboundExternalLinkRequest')
     GetInboundExternalLinkResponse = Shapes::StructureShape.new(name: 'GetInboundExternalLinkResponse')
     GetLinkRequest = Shapes::StructureShape.new(name: 'GetLinkRequest')
@@ -85,6 +89,13 @@ module Aws::RTBFabric
     GetResponderGatewayResponseSecurityGroupIdsList = Shapes::ListShape.new(name: 'GetResponderGatewayResponseSecurityGroupIdsList')
     GetResponderGatewayResponseSubnetIdsList = Shapes::ListShape.new(name: 'GetResponderGatewayResponseSubnetIdsList')
     HeaderTagAction = Shapes::StructureShape.new(name: 'HeaderTagAction')
+    HealthCheckConfig = Shapes::StructureShape.new(name: 'HealthCheckConfig')
+    HealthCheckConfigHealthyThresholdCountInteger = Shapes::IntegerShape.new(name: 'HealthCheckConfigHealthyThresholdCountInteger')
+    HealthCheckConfigIntervalSecondsInteger = Shapes::IntegerShape.new(name: 'HealthCheckConfigIntervalSecondsInteger')
+    HealthCheckConfigPathString = Shapes::StringShape.new(name: 'HealthCheckConfigPathString')
+    HealthCheckConfigPortInteger = Shapes::IntegerShape.new(name: 'HealthCheckConfigPortInteger')
+    HealthCheckConfigTimeoutMsInteger = Shapes::IntegerShape.new(name: 'HealthCheckConfigTimeoutMsInteger')
+    HealthCheckConfigUnhealthyThresholdCountInteger = Shapes::IntegerShape.new(name: 'HealthCheckConfigUnhealthyThresholdCountInteger')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
     KubernetesClusterName = Shapes::StringShape.new(name: 'KubernetesClusterName')
@@ -100,6 +111,7 @@ module Aws::RTBFabric
     LinkList = Shapes::ListShape.new(name: 'LinkList')
     LinkLogSettings = Shapes::StructureShape.new(name: 'LinkLogSettings')
     LinkStatus = Shapes::StringShape.new(name: 'LinkStatus')
+    LinkTimeoutInMillis = Shapes::IntegerShape.new(name: 'LinkTimeoutInMillis')
     ListLinksRequest = Shapes::StructureShape.new(name: 'ListLinksRequest')
     ListLinksResponse = Shapes::StructureShape.new(name: 'ListLinksResponse')
     ListLinksResponseStructure = Shapes::StructureShape.new(name: 'ListLinksResponseStructure')
@@ -111,6 +123,7 @@ module Aws::RTBFabric
     ListResponderGatewaysResponse = Shapes::StructureShape.new(name: 'ListResponderGatewaysResponse')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
+    ListenerConfig = Shapes::StructureShape.new(name: 'ListenerConfig')
     ManagedEndpointConfiguration = Shapes::UnionShape.new(name: 'ManagedEndpointConfiguration')
     ModuleConfiguration = Shapes::StructureShape.new(name: 'ModuleConfiguration')
     ModuleConfigurationList = Shapes::ListShape.new(name: 'ModuleConfigurationList')
@@ -124,6 +137,7 @@ module Aws::RTBFabric
     OpenRtbAttributeModuleParameters = Shapes::StructureShape.new(name: 'OpenRtbAttributeModuleParameters')
     OpenRtbAttributeModuleParametersHoldbackPercentageFloat = Shapes::FloatShape.new(name: 'OpenRtbAttributeModuleParametersHoldbackPercentageFloat')
     Protocol = Shapes::StringShape.new(name: 'Protocol')
+    ProtocolList = Shapes::ListShape.new(name: 'ProtocolList')
     RateLimiterModuleParameters = Shapes::StructureShape.new(name: 'RateLimiterModuleParameters')
     RejectLinkRequest = Shapes::StructureShape.new(name: 'RejectLinkRequest')
     RejectLinkResponse = Shapes::StructureShape.new(name: 'RejectLinkResponse')
@@ -140,6 +154,7 @@ module Aws::RTBFabric
     RtbTaggableResourceArn = Shapes::StringShape.new(name: 'RtbTaggableResourceArn')
     SecurityGroupId = Shapes::StringShape.new(name: 'SecurityGroupId')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
+    StatusCodeMatcher = Shapes::StringShape.new(name: 'StatusCodeMatcher')
     String = Shapes::StringShape.new(name: 'String')
     SubnetId = Shapes::StringShape.new(name: 'SubnetId')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
@@ -174,6 +189,7 @@ module Aws::RTBFabric
     AcceptLinkRequest.add_member(:link_id, Shapes::ShapeRef.new(shape: LinkId, required: true, location: "uri", location_name: "linkId"))
     AcceptLinkRequest.add_member(:attributes, Shapes::ShapeRef.new(shape: LinkAttributes, location_name: "attributes"))
     AcceptLinkRequest.add_member(:log_settings, Shapes::ShapeRef.new(shape: LinkLogSettings, required: true, location_name: "logSettings"))
+    AcceptLinkRequest.add_member(:timeout_in_millis, Shapes::ShapeRef.new(shape: LinkTimeoutInMillis, location_name: "timeoutInMillis"))
     AcceptLinkRequest.struct_class = Types::AcceptLinkRequest
 
     AcceptLinkResponse.add_member(:gateway_id, Shapes::ShapeRef.new(shape: GatewayId, required: true, location_name: "gatewayId"))
@@ -185,6 +201,8 @@ module Aws::RTBFabric
     AcceptLinkResponse.add_member(:flow_modules, Shapes::ShapeRef.new(shape: ModuleConfigurationList, location_name: "flowModules"))
     AcceptLinkResponse.add_member(:pending_flow_modules, Shapes::ShapeRef.new(shape: ModuleConfigurationList, location_name: "pendingFlowModules"))
     AcceptLinkResponse.add_member(:attributes, Shapes::ShapeRef.new(shape: LinkAttributes, location_name: "attributes"))
+    AcceptLinkResponse.add_member(:log_settings, Shapes::ShapeRef.new(shape: LinkLogSettings, location_name: "logSettings"))
+    AcceptLinkResponse.add_member(:connectivity_type, Shapes::ShapeRef.new(shape: ConnectivityType, location_name: "connectivityType"))
     AcceptLinkResponse.add_member(:link_id, Shapes::ShapeRef.new(shape: LinkId, required: true, location_name: "linkId"))
     AcceptLinkResponse.struct_class = Types::AcceptLinkResponse
 
@@ -202,7 +220,8 @@ module Aws::RTBFabric
     AutoScalingGroupNameList.member = Shapes::ShapeRef.new(shape: AutoScalingGroupName)
 
     AutoScalingGroupsConfiguration.add_member(:auto_scaling_group_names, Shapes::ShapeRef.new(shape: AutoScalingGroupNameList, required: true, location_name: "autoScalingGroupNames"))
-    AutoScalingGroupsConfiguration.add_member(:role_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "roleArn"))
+    AutoScalingGroupsConfiguration.add_member(:role_arn, Shapes::ShapeRef.new(shape: AutoScalingGroupsConfigurationRoleArnString, required: true, location_name: "roleArn"))
+    AutoScalingGroupsConfiguration.add_member(:health_check_config, Shapes::ShapeRef.new(shape: HealthCheckConfig, location_name: "healthCheckConfig"))
     AutoScalingGroupsConfiguration.struct_class = Types::AutoScalingGroupsConfiguration
 
     CertificateAuthorityCertificates.member = Shapes::ShapeRef.new(shape: Base64EncodedCertificateChain)
@@ -229,6 +248,7 @@ module Aws::RTBFabric
     CreateLinkRequest.add_member(:http_responder_allowed, Shapes::ShapeRef.new(shape: Boolean, location_name: "httpResponderAllowed"))
     CreateLinkRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
     CreateLinkRequest.add_member(:log_settings, Shapes::ShapeRef.new(shape: LinkLogSettings, required: true, location_name: "logSettings"))
+    CreateLinkRequest.add_member(:timeout_in_millis, Shapes::ShapeRef.new(shape: LinkTimeoutInMillis, location_name: "timeoutInMillis"))
     CreateLinkRequest.struct_class = Types::CreateLinkRequest
 
     CreateLinkResponse.add_member(:gateway_id, Shapes::ShapeRef.new(shape: GatewayId, required: true, location_name: "gatewayId"))
@@ -240,6 +260,8 @@ module Aws::RTBFabric
     CreateLinkResponse.add_member(:flow_modules, Shapes::ShapeRef.new(shape: ModuleConfigurationList, location_name: "flowModules"))
     CreateLinkResponse.add_member(:pending_flow_modules, Shapes::ShapeRef.new(shape: ModuleConfigurationList, location_name: "pendingFlowModules"))
     CreateLinkResponse.add_member(:attributes, Shapes::ShapeRef.new(shape: LinkAttributes, location_name: "attributes"))
+    CreateLinkResponse.add_member(:log_settings, Shapes::ShapeRef.new(shape: LinkLogSettings, location_name: "logSettings"))
+    CreateLinkResponse.add_member(:connectivity_type, Shapes::ShapeRef.new(shape: ConnectivityType, location_name: "connectivityType"))
     CreateLinkResponse.add_member(:link_id, Shapes::ShapeRef.new(shape: LinkId, required: true, location_name: "linkId"))
     CreateLinkResponse.add_member(:customer_provided_id, Shapes::ShapeRef.new(shape: CreateLinkResponseCustomerProvidedIdString, location_name: "customerProvidedId"))
     CreateLinkResponse.struct_class = Types::CreateLinkResponse
@@ -280,11 +302,13 @@ module Aws::RTBFabric
     CreateResponderGatewayRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, location_name: "domainName"))
     CreateResponderGatewayRequest.add_member(:port, Shapes::ShapeRef.new(shape: CreateResponderGatewayRequestPortInteger, required: true, location_name: "port"))
     CreateResponderGatewayRequest.add_member(:protocol, Shapes::ShapeRef.new(shape: Protocol, required: true, location_name: "protocol"))
+    CreateResponderGatewayRequest.add_member(:listener_config, Shapes::ShapeRef.new(shape: ListenerConfig, location_name: "listenerConfig"))
     CreateResponderGatewayRequest.add_member(:trust_store_configuration, Shapes::ShapeRef.new(shape: TrustStoreConfiguration, location_name: "trustStoreConfiguration"))
     CreateResponderGatewayRequest.add_member(:managed_endpoint_configuration, Shapes::ShapeRef.new(shape: ManagedEndpointConfiguration, location_name: "managedEndpointConfiguration"))
     CreateResponderGatewayRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, required: true, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateResponderGatewayRequest.add_member(:description, Shapes::ShapeRef.new(shape: CreateResponderGatewayRequestDescriptionString, location_name: "description"))
     CreateResponderGatewayRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
+    CreateResponderGatewayRequest.add_member(:gateway_type, Shapes::ShapeRef.new(shape: GatewayType, location_name: "gatewayType"))
     CreateResponderGatewayRequest.struct_class = Types::CreateResponderGatewayRequest
 
     CreateResponderGatewayRequestSecurityGroupIdsList.member = Shapes::ShapeRef.new(shape: SecurityGroupId)
@@ -293,6 +317,8 @@ module Aws::RTBFabric
 
     CreateResponderGatewayResponse.add_member(:gateway_id, Shapes::ShapeRef.new(shape: GatewayId, required: true, location_name: "gatewayId"))
     CreateResponderGatewayResponse.add_member(:status, Shapes::ShapeRef.new(shape: ResponderGatewayStatus, required: true, location_name: "status"))
+    CreateResponderGatewayResponse.add_member(:listener_config, Shapes::ShapeRef.new(shape: ListenerConfig, location_name: "listenerConfig"))
+    CreateResponderGatewayResponse.add_member(:external_inbound_endpoint, Shapes::ShapeRef.new(shape: DomainName, location_name: "externalInboundEndpoint"))
     CreateResponderGatewayResponse.struct_class = Types::CreateResponderGatewayResponse
 
     DeleteInboundExternalLinkRequest.add_member(:gateway_id, Shapes::ShapeRef.new(shape: GatewayId, required: true, location: "uri", location_name: "gatewayId"))
@@ -338,7 +364,7 @@ module Aws::RTBFabric
     EksEndpointsConfiguration.add_member(:cluster_api_server_endpoint_uri, Shapes::ShapeRef.new(shape: URI, required: true, location_name: "clusterApiServerEndpointUri"))
     EksEndpointsConfiguration.add_member(:cluster_api_server_ca_certificate_chain, Shapes::ShapeRef.new(shape: Base64EncodedCertificateChain, required: true, location_name: "clusterApiServerCaCertificateChain"))
     EksEndpointsConfiguration.add_member(:cluster_name, Shapes::ShapeRef.new(shape: KubernetesClusterName, required: true, location_name: "clusterName"))
-    EksEndpointsConfiguration.add_member(:role_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "roleArn"))
+    EksEndpointsConfiguration.add_member(:role_arn, Shapes::ShapeRef.new(shape: EksEndpointsConfigurationRoleArnString, required: true, location_name: "roleArn"))
     EksEndpointsConfiguration.struct_class = Types::EksEndpointsConfiguration
 
     Filter.add_member(:criteria, Shapes::ShapeRef.new(shape: FilterCriteria, required: true, location_name: "criteria"))
@@ -373,6 +399,7 @@ module Aws::RTBFabric
     GetInboundExternalLinkResponse.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "updatedAt"))
     GetInboundExternalLinkResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
     GetInboundExternalLinkResponse.add_member(:log_settings, Shapes::ShapeRef.new(shape: LinkLogSettings, location_name: "logSettings"))
+    GetInboundExternalLinkResponse.add_member(:connectivity_type, Shapes::ShapeRef.new(shape: ConnectivityType, location_name: "connectivityType"))
     GetInboundExternalLinkResponse.struct_class = Types::GetInboundExternalLinkResponse
 
     GetLinkRequest.add_member(:gateway_id, Shapes::ShapeRef.new(shape: GatewayId, required: true, location: "uri", location_name: "gatewayId"))
@@ -388,9 +415,12 @@ module Aws::RTBFabric
     GetLinkResponse.add_member(:flow_modules, Shapes::ShapeRef.new(shape: ModuleConfigurationList, location_name: "flowModules"))
     GetLinkResponse.add_member(:pending_flow_modules, Shapes::ShapeRef.new(shape: ModuleConfigurationList, location_name: "pendingFlowModules"))
     GetLinkResponse.add_member(:attributes, Shapes::ShapeRef.new(shape: LinkAttributes, location_name: "attributes"))
+    GetLinkResponse.add_member(:log_settings, Shapes::ShapeRef.new(shape: LinkLogSettings, location_name: "logSettings"))
+    GetLinkResponse.add_member(:connectivity_type, Shapes::ShapeRef.new(shape: ConnectivityType, location_name: "connectivityType"))
     GetLinkResponse.add_member(:link_id, Shapes::ShapeRef.new(shape: LinkId, required: true, location_name: "linkId"))
     GetLinkResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
-    GetLinkResponse.add_member(:log_settings, Shapes::ShapeRef.new(shape: LinkLogSettings, location_name: "logSettings"))
+    GetLinkResponse.add_member(:http_responder_allowed, Shapes::ShapeRef.new(shape: Boolean, location_name: "httpResponderAllowed"))
+    GetLinkResponse.add_member(:timeout_in_millis, Shapes::ShapeRef.new(shape: LinkTimeoutInMillis, location_name: "timeoutInMillis"))
     GetLinkResponse.struct_class = Types::GetLinkResponse
 
     GetOutboundExternalLinkRequest.add_member(:gateway_id, Shapes::ShapeRef.new(shape: GatewayId, required: true, location: "uri", location_name: "gatewayId"))
@@ -401,10 +431,14 @@ module Aws::RTBFabric
     GetOutboundExternalLinkResponse.add_member(:link_id, Shapes::ShapeRef.new(shape: LinkId, required: true, location_name: "linkId"))
     GetOutboundExternalLinkResponse.add_member(:status, Shapes::ShapeRef.new(shape: LinkStatus, required: true, location_name: "status"))
     GetOutboundExternalLinkResponse.add_member(:public_endpoint, Shapes::ShapeRef.new(shape: URL, required: true, location_name: "publicEndpoint"))
+    GetOutboundExternalLinkResponse.add_member(:flow_modules, Shapes::ShapeRef.new(shape: ModuleConfigurationList, location_name: "flowModules"))
+    GetOutboundExternalLinkResponse.add_member(:pending_flow_modules, Shapes::ShapeRef.new(shape: ModuleConfigurationList, location_name: "pendingFlowModules"))
+    GetOutboundExternalLinkResponse.add_member(:attributes, Shapes::ShapeRef.new(shape: LinkAttributes, location_name: "attributes"))
     GetOutboundExternalLinkResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdAt"))
     GetOutboundExternalLinkResponse.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "updatedAt"))
     GetOutboundExternalLinkResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
     GetOutboundExternalLinkResponse.add_member(:log_settings, Shapes::ShapeRef.new(shape: LinkLogSettings, location_name: "logSettings"))
+    GetOutboundExternalLinkResponse.add_member(:connectivity_type, Shapes::ShapeRef.new(shape: ConnectivityType, location_name: "connectivityType"))
     GetOutboundExternalLinkResponse.struct_class = Types::GetOutboundExternalLinkResponse
 
     GetRequesterGatewayRequest.add_member(:gateway_id, Shapes::ShapeRef.new(shape: GatewayId, required: true, location: "uri", location_name: "gatewayId"))
@@ -441,6 +475,7 @@ module Aws::RTBFabric
     GetResponderGatewayResponse.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, location_name: "domainName"))
     GetResponderGatewayResponse.add_member(:port, Shapes::ShapeRef.new(shape: GetResponderGatewayResponsePortInteger, required: true, location_name: "port"))
     GetResponderGatewayResponse.add_member(:protocol, Shapes::ShapeRef.new(shape: Protocol, required: true, location_name: "protocol"))
+    GetResponderGatewayResponse.add_member(:listener_config, Shapes::ShapeRef.new(shape: ListenerConfig, location_name: "listenerConfig"))
     GetResponderGatewayResponse.add_member(:trust_store_configuration, Shapes::ShapeRef.new(shape: TrustStoreConfiguration, location_name: "trustStoreConfiguration"))
     GetResponderGatewayResponse.add_member(:managed_endpoint_configuration, Shapes::ShapeRef.new(shape: ManagedEndpointConfiguration, location_name: "managedEndpointConfiguration"))
     GetResponderGatewayResponse.add_member(:gateway_id, Shapes::ShapeRef.new(shape: GatewayId, required: true, location_name: "gatewayId"))
@@ -448,6 +483,8 @@ module Aws::RTBFabric
     GetResponderGatewayResponse.add_member(:active_links_count, Shapes::ShapeRef.new(shape: Integer, location_name: "activeLinksCount"))
     GetResponderGatewayResponse.add_member(:total_links_count, Shapes::ShapeRef.new(shape: Integer, location_name: "totalLinksCount"))
     GetResponderGatewayResponse.add_member(:inbound_links_count, Shapes::ShapeRef.new(shape: Integer, location_name: "inboundLinksCount"))
+    GetResponderGatewayResponse.add_member(:gateway_type, Shapes::ShapeRef.new(shape: GatewayType, location_name: "gatewayType"))
+    GetResponderGatewayResponse.add_member(:external_inbound_endpoint, Shapes::ShapeRef.new(shape: DomainName, location_name: "externalInboundEndpoint"))
     GetResponderGatewayResponse.struct_class = Types::GetResponderGatewayResponse
 
     GetResponderGatewayResponseSecurityGroupIdsList.member = Shapes::ShapeRef.new(shape: SecurityGroupId)
@@ -457,6 +494,16 @@ module Aws::RTBFabric
     HeaderTagAction.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "name"))
     HeaderTagAction.add_member(:value, Shapes::ShapeRef.new(shape: String, required: true, location_name: "value"))
     HeaderTagAction.struct_class = Types::HeaderTagAction
+
+    HealthCheckConfig.add_member(:port, Shapes::ShapeRef.new(shape: HealthCheckConfigPortInteger, required: true, location_name: "port"))
+    HealthCheckConfig.add_member(:path, Shapes::ShapeRef.new(shape: HealthCheckConfigPathString, required: true, location_name: "path"))
+    HealthCheckConfig.add_member(:protocol, Shapes::ShapeRef.new(shape: Protocol, location_name: "protocol"))
+    HealthCheckConfig.add_member(:timeout_ms, Shapes::ShapeRef.new(shape: HealthCheckConfigTimeoutMsInteger, location_name: "timeoutMs"))
+    HealthCheckConfig.add_member(:interval_seconds, Shapes::ShapeRef.new(shape: HealthCheckConfigIntervalSecondsInteger, location_name: "intervalSeconds"))
+    HealthCheckConfig.add_member(:status_code_matcher, Shapes::ShapeRef.new(shape: StatusCodeMatcher, location_name: "statusCodeMatcher"))
+    HealthCheckConfig.add_member(:healthy_threshold_count, Shapes::ShapeRef.new(shape: HealthCheckConfigHealthyThresholdCountInteger, location_name: "healthyThresholdCount"))
+    HealthCheckConfig.add_member(:unhealthy_threshold_count, Shapes::ShapeRef.new(shape: HealthCheckConfigUnhealthyThresholdCountInteger, location_name: "unhealthyThresholdCount"))
+    HealthCheckConfig.struct_class = Types::HealthCheckConfig
 
     InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     InternalServerException.struct_class = Types::InternalServerException
@@ -495,8 +542,11 @@ module Aws::RTBFabric
     ListLinksResponseStructure.add_member(:flow_modules, Shapes::ShapeRef.new(shape: ModuleConfigurationList, location_name: "flowModules"))
     ListLinksResponseStructure.add_member(:pending_flow_modules, Shapes::ShapeRef.new(shape: ModuleConfigurationList, location_name: "pendingFlowModules"))
     ListLinksResponseStructure.add_member(:attributes, Shapes::ShapeRef.new(shape: LinkAttributes, location_name: "attributes"))
+    ListLinksResponseStructure.add_member(:log_settings, Shapes::ShapeRef.new(shape: LinkLogSettings, location_name: "logSettings"))
+    ListLinksResponseStructure.add_member(:connectivity_type, Shapes::ShapeRef.new(shape: ConnectivityType, location_name: "connectivityType"))
     ListLinksResponseStructure.add_member(:link_id, Shapes::ShapeRef.new(shape: LinkId, required: true, location_name: "linkId"))
     ListLinksResponseStructure.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
+    ListLinksResponseStructure.add_member(:public_endpoint, Shapes::ShapeRef.new(shape: URL, location_name: "publicEndpoint"))
     ListLinksResponseStructure.struct_class = Types::ListLinksResponseStructure
 
     ListRequesterGatewaysRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListRequesterGatewaysRequestMaxResultsInteger, location: "querystring", location_name: "maxResults"))
@@ -520,6 +570,9 @@ module Aws::RTBFabric
 
     ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
     ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
+
+    ListenerConfig.add_member(:protocols, Shapes::ShapeRef.new(shape: ProtocolList, required: true, location_name: "protocols"))
+    ListenerConfig.struct_class = Types::ListenerConfig
 
     ManagedEndpointConfiguration.add_member(:auto_scaling_groups, Shapes::ShapeRef.new(shape: AutoScalingGroupsConfiguration, location_name: "autoScalingGroups"))
     ManagedEndpointConfiguration.add_member(:eks_endpoints, Shapes::ShapeRef.new(shape: EksEndpointsConfiguration, location_name: "eksEndpoints"))
@@ -561,6 +614,8 @@ module Aws::RTBFabric
     OpenRtbAttributeModuleParameters.add_member(:holdback_percentage, Shapes::ShapeRef.new(shape: OpenRtbAttributeModuleParametersHoldbackPercentageFloat, required: true, location_name: "holdbackPercentage"))
     OpenRtbAttributeModuleParameters.struct_class = Types::OpenRtbAttributeModuleParameters
 
+    ProtocolList.member = Shapes::ShapeRef.new(shape: Protocol)
+
     RateLimiterModuleParameters.add_member(:tps, Shapes::ShapeRef.new(shape: Float, location_name: "tps"))
     RateLimiterModuleParameters.struct_class = Types::RateLimiterModuleParameters
 
@@ -577,6 +632,8 @@ module Aws::RTBFabric
     RejectLinkResponse.add_member(:flow_modules, Shapes::ShapeRef.new(shape: ModuleConfigurationList, location_name: "flowModules"))
     RejectLinkResponse.add_member(:pending_flow_modules, Shapes::ShapeRef.new(shape: ModuleConfigurationList, location_name: "pendingFlowModules"))
     RejectLinkResponse.add_member(:attributes, Shapes::ShapeRef.new(shape: LinkAttributes, location_name: "attributes"))
+    RejectLinkResponse.add_member(:log_settings, Shapes::ShapeRef.new(shape: LinkLogSettings, location_name: "logSettings"))
+    RejectLinkResponse.add_member(:connectivity_type, Shapes::ShapeRef.new(shape: ConnectivityType, location_name: "connectivityType"))
     RejectLinkResponse.add_member(:link_id, Shapes::ShapeRef.new(shape: LinkId, required: true, location_name: "linkId"))
     RejectLinkResponse.struct_class = Types::RejectLinkResponse
 
@@ -633,6 +690,7 @@ module Aws::RTBFabric
     UpdateLinkRequest.add_member(:gateway_id, Shapes::ShapeRef.new(shape: GatewayId, required: true, location: "uri", location_name: "gatewayId"))
     UpdateLinkRequest.add_member(:link_id, Shapes::ShapeRef.new(shape: LinkId, required: true, location: "uri", location_name: "linkId"))
     UpdateLinkRequest.add_member(:log_settings, Shapes::ShapeRef.new(shape: LinkLogSettings, location_name: "logSettings"))
+    UpdateLinkRequest.add_member(:timeout_in_millis, Shapes::ShapeRef.new(shape: LinkTimeoutInMillis, location_name: "timeoutInMillis"))
     UpdateLinkRequest.struct_class = Types::UpdateLinkRequest
 
     UpdateLinkResponse.add_member(:link_id, Shapes::ShapeRef.new(shape: LinkId, required: true, location_name: "linkId"))
@@ -651,6 +709,7 @@ module Aws::RTBFabric
     UpdateResponderGatewayRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, location_name: "domainName"))
     UpdateResponderGatewayRequest.add_member(:port, Shapes::ShapeRef.new(shape: UpdateResponderGatewayRequestPortInteger, required: true, location_name: "port"))
     UpdateResponderGatewayRequest.add_member(:protocol, Shapes::ShapeRef.new(shape: Protocol, required: true, location_name: "protocol"))
+    UpdateResponderGatewayRequest.add_member(:listener_config, Shapes::ShapeRef.new(shape: ListenerConfig, location_name: "listenerConfig"))
     UpdateResponderGatewayRequest.add_member(:trust_store_configuration, Shapes::ShapeRef.new(shape: TrustStoreConfiguration, location_name: "trustStoreConfiguration"))
     UpdateResponderGatewayRequest.add_member(:managed_endpoint_configuration, Shapes::ShapeRef.new(shape: ManagedEndpointConfiguration, location_name: "managedEndpointConfiguration"))
     UpdateResponderGatewayRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, required: true, location_name: "clientToken", metadata: {"idempotencyToken" => true}))

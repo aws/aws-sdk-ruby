@@ -1586,6 +1586,7 @@ module Aws::Macie2
     S3ClassificationScopeUpdate.struct_class = Types::S3ClassificationScopeUpdate
 
     S3Destination.add_member(:bucket_name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "bucketName"))
+    S3Destination.add_member(:expected_bucket_owner, Shapes::ShapeRef.new(shape: __string, location_name: "expectedBucketOwner"))
     S3Destination.add_member(:key_prefix, Shapes::ShapeRef.new(shape: __string, location_name: "keyPrefix"))
     S3Destination.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "kmsKeyArn"))
     S3Destination.struct_class = Types::S3Destination

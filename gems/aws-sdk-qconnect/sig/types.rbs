@@ -2730,6 +2730,7 @@ module Aws::QConnect
       attr_accessor client_token: ::String
       attr_accessor orchestrator_use_case: ::String
       attr_accessor metadata: ::Hash[::String, ::String]
+      attr_accessor origin_request_id: ::String
       SENSITIVE: []
     end
 
@@ -2811,6 +2812,7 @@ module Aws::QConnect
       attr_accessor end_timestamp: ::Time
       attr_accessor status: ("OK" | "ERROR" | "TIMEOUT")
       attr_accessor request_id: ::String
+      attr_accessor origin_request_id: ::String
       attr_accessor attributes: Types::SpanAttributes
       SENSITIVE: []
     end

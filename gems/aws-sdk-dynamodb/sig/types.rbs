@@ -1285,6 +1285,7 @@ module Aws::DynamoDB
     class ReplicaDescription
       attr_accessor region_name: ::String
       attr_accessor replica_status: ("CREATING" | "CREATION_FAILED" | "UPDATING" | "DELETING" | "ACTIVE" | "REGION_DISABLED" | "INACCESSIBLE_ENCRYPTION_CREDENTIALS" | "ARCHIVING" | "ARCHIVED" | "REPLICATION_NOT_AUTHORIZED")
+      attr_accessor replica_arn: ::String
       attr_accessor replica_status_description: ::String
       attr_accessor replica_status_percent_progress: ::String
       attr_accessor kms_master_key_id: ::String
@@ -1848,6 +1849,7 @@ module Aws::DynamoDB
       attr_accessor global_table_witness_updates: ::Array[Types::GlobalTableWitnessGroupUpdate]
       attr_accessor on_demand_throughput: Types::OnDemandThroughput
       attr_accessor warm_throughput: Types::WarmThroughput
+      attr_accessor global_table_settings_replication_mode: ("ENABLED" | "DISABLED" | "ENABLED_WITH_OVERRIDES")
       SENSITIVE: []
     end
 

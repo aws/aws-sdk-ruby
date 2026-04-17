@@ -8,6 +8,30 @@
 Feature: Smoke tests for GeoRoutes
 
   @georoutes @smoke
+  Scenario: CalculateIsolinesSuccess
+    Given I create a 'Aws::GeoRoutes' client with config:
+      """
+{"region":"us-west-2","use_fips_endpoint":false,"use_dualstack_endpoint":false}
+      """
+    When I call the operation 'calculate_isolines' with params:
+      """
+{"thresholds":{"time":[60]},"origin":[-123.116796,49.281476]}
+      """
+    Then I expect an error was not raised
+
+  @georoutes @smoke
+  Scenario: CalculateRoutesSuccess
+    Given I create a 'Aws::GeoRoutes' client with config:
+      """
+{"region":"us-west-2","use_fips_endpoint":false,"use_dualstack_endpoint":false}
+      """
+    When I call the operation 'calculate_routes' with params:
+      """
+{"origin":[-123.253374,49.351673],"destination":[-123.930756,49.1314]}
+      """
+    Then I expect an error was not raised
+
+  @georoutes @smoke
   Scenario: CalculateRouteMatrixSuccess
     Given I create a 'Aws::GeoRoutes' client with config:
       """
@@ -32,18 +56,6 @@ Feature: Smoke tests for GeoRoutes
     Then I expect an error was not raised
 
   @georoutes @smoke
-  Scenario: CalculateRoutesSuccess
-    Given I create a 'Aws::GeoRoutes' client with config:
-      """
-{"region":"us-west-2","use_fips_endpoint":false,"use_dualstack_endpoint":false}
-      """
-    When I call the operation 'calculate_routes' with params:
-      """
-{"origin":[-123.253374,49.351673],"destination":[-123.930756,49.1314]}
-      """
-    Then I expect an error was not raised
-
-  @georoutes @smoke
   Scenario: OptimizeWaypointsSuccess
     Given I create a 'Aws::GeoRoutes' client with config:
       """
@@ -52,17 +64,5 @@ Feature: Smoke tests for GeoRoutes
     When I call the operation 'optimize_waypoints' with params:
       """
 {"origin":[-123.253374,49.351673],"destination":[-123.930756,49.1314]}
-      """
-    Then I expect an error was not raised
-
-  @georoutes @smoke
-  Scenario: CalculateIsolinesSuccess
-    Given I create a 'Aws::GeoRoutes' client with config:
-      """
-{"region":"us-west-2","use_fips_endpoint":false,"use_dualstack_endpoint":false}
-      """
-    When I call the operation 'calculate_isolines' with params:
-      """
-{"thresholds":{"time":[60]},"origin":[-123.116796,49.281476]}
       """
     Then I expect an error was not raised

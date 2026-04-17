@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.92.0 (2026-03-25)
+------------------
+
+* Feature - Added DISABLE IN PROGRESS and DISABLE FAILED Portal statuses.
+
+1.91.0 (2026-03-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.90.0 (2026-01-16)
 ------------------
 

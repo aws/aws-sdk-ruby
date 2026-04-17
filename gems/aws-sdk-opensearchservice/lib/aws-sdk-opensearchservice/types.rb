@@ -10,6 +10,15 @@
 module Aws::OpenSearchService
   module Types
 
+    # Configuration settings for AI-powered capabilities of an OpenSearch UI
+    # application.
+    #
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/AIConfig AWS API Documentation
+    #
+    class AIConfig < Aws::EmptyStructure; end
+
     # Container for parameters required to enable all machine learning
     # features.
     #
@@ -235,9 +244,17 @@ module Aws::OpenSearchService
     #   @return [String]
     #
     # @!attribute [rw] open_search_arns
-    #   A list of Amazon Resource Names (ARNs) for the OpenSearch
+    #   An optional list of Amazon Resource Names (ARNs) for the OpenSearch
     #   collections that are associated with the direct query data source.
+    #   This field is required for CloudWatchLogs and SecurityLake
+    #   datasource types.
     #   @return [Array<String>]
+    #
+    # @!attribute [rw] data_source_access_policy
+    #   An optional IAM access policy document that defines the permissions
+    #   for accessing the data source. The policy document must be in valid
+    #   JSON format and follow IAM policy syntax.
+    #   @return [String]
     #
     # @!attribute [rw] tag_list
     #   A list of tags attached to a domain.
@@ -250,6 +267,7 @@ module Aws::OpenSearchService
       :data_source_type,
       :description,
       :open_search_arns,
+      :data_source_access_policy,
       :tag_list)
       SENSITIVE = []
       include Aws::Structure
@@ -1146,6 +1164,91 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
+    # The base configuration for registering a capability. Contains
+    # capability-specific configuration such as AI settings.
+    #
+    # @note CapabilityBaseRequestConfig is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @!attribute [rw] ai_config
+    #   Configuration settings for AI-powered capabilities.
+    #   @return [Types::AIConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/CapabilityBaseRequestConfig AWS API Documentation
+    #
+    class CapabilityBaseRequestConfig < Struct.new(
+      :ai_config,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class AiConfig < CapabilityBaseRequestConfig; end
+      class Unknown < CapabilityBaseRequestConfig; end
+    end
+
+    # The base configuration returned for a registered capability.
+    #
+    # @note CapabilityBaseResponseConfig is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of CapabilityBaseResponseConfig corresponding to the set member.
+    #
+    # @!attribute [rw] ai_config
+    #   Configuration settings for AI-powered capabilities.
+    #   @return [Types::AIConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/CapabilityBaseResponseConfig AWS API Documentation
+    #
+    class CapabilityBaseResponseConfig < Struct.new(
+      :ai_config,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class AiConfig < CapabilityBaseResponseConfig; end
+      class Unknown < CapabilityBaseResponseConfig; end
+    end
+
+    # The extended configuration returned for a registered capability,
+    # including additional details beyond the base configuration.
+    #
+    # @note CapabilityExtendedResponseConfig is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of CapabilityExtendedResponseConfig corresponding to the set member.
+    #
+    # @!attribute [rw] ai_config
+    #   Configuration settings for AI-powered capabilities.
+    #   @return [Types::AIConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/CapabilityExtendedResponseConfig AWS API Documentation
+    #
+    class CapabilityExtendedResponseConfig < Struct.new(
+      :ai_config,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class AiConfig < CapabilityExtendedResponseConfig; end
+      class Unknown < CapabilityExtendedResponseConfig; end
+    end
+
+    # Information about a capability failure.
+    #
+    # @!attribute [rw] reason
+    #   The reason for the capability failure. Possible values:
+    #   `KMS_KEY_INSUFFICIENT_PERMISSION`.
+    #   @return [String]
+    #
+    # @!attribute [rw] details
+    #   Additional details about the capability failure.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/CapabilityFailure AWS API Documentation
+    #
+    class CapabilityFailure < Struct.new(
+      :reason,
+      :details)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Container for information about a configuration change happening on a
     # domain.
     #
@@ -1809,6 +1912,10 @@ module Aws::OpenSearchService
     #   Options for all machine learning features for the specified domain.
     #   @return [Types::AIMLOptionsInput]
     #
+    # @!attribute [rw] deployment_strategy_options
+    #   Specifies the deployment strategy options for the domain.
+    #   @return [Types::DeploymentStrategyOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/CreateDomainRequest AWS API Documentation
     #
     class CreateDomainRequest < Struct.new(
@@ -1832,7 +1939,8 @@ module Aws::OpenSearchService
       :auto_tune_options,
       :off_peak_window_options,
       :software_update_options,
-      :aiml_options)
+      :aiml_options,
+      :deployment_strategy_options)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2108,11 +2216,17 @@ module Aws::OpenSearchService
     #   Detailed description of a data source.
     #   @return [String]
     #
+    # @!attribute [rw] iam_role_for_data_source_arn
+    #   The ARN of the IAM role to be used for cross account/region data
+    #   source association.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/DataSource AWS API Documentation
     #
     class DataSource < Struct.new(
       :data_source_arn,
-      :data_source_description)
+      :data_source_description,
+      :iam_role_for_data_source_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2413,6 +2527,76 @@ module Aws::OpenSearchService
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/DependencyFailureException AWS API Documentation
     #
     class DependencyFailureException < Aws::EmptyStructure; end
+
+    # Specifies the deployment strategy options for the domain.
+    #
+    # @!attribute [rw] deployment_strategy
+    #   Specifies the deployment strategy for the domain. Valid values are
+    #   `Default` and `CapacityOptimized`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/DeploymentStrategyOptions AWS API Documentation
+    #
+    class DeploymentStrategyOptions < Struct.new(
+      :deployment_strategy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The status of deployment strategy options for the domain.
+    #
+    # @!attribute [rw] options
+    #   Deployment strategy options for the domain.
+    #   @return [Types::DeploymentStrategyOptions]
+    #
+    # @!attribute [rw] status
+    #   The current status of the deployment strategy options for the
+    #   domain.
+    #   @return [Types::OptionStatus]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/DeploymentStrategyOptionsStatus AWS API Documentation
+    #
+    class DeploymentStrategyOptionsStatus < Struct.new(
+      :options,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Container for the parameters to the `DeregisterCapability` operation.
+    #
+    # @!attribute [rw] application_id
+    #   The unique identifier of the OpenSearch UI application to deregister
+    #   the capability from.
+    #   @return [String]
+    #
+    # @!attribute [rw] capability_name
+    #   The name of the capability to deregister.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/DeregisterCapabilityRequest AWS API Documentation
+    #
+    class DeregisterCapabilityRequest < Struct.new(
+      :application_id,
+      :capability_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The result of a `DeregisterCapability` request.
+    #
+    # @!attribute [rw] status
+    #   The status of the deregistration operation. Returns `deleting` when
+    #   the capability is being removed.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/DeregisterCapabilityResponse AWS API Documentation
+    #
+    class DeregisterCapabilityResponse < Struct.new(
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # Container for the parameters to the `DescribeDomainAutoTunes`
     # operation.
@@ -2841,6 +3025,50 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
+    # Container for the parameters to the `DescribeInsightDetails`
+    # operation.
+    #
+    # @!attribute [rw] entity
+    #   The entity for which to retrieve insight details. Specifies the type
+    #   and value of the entity, such as a domain name or Amazon Web
+    #   Services account ID.
+    #   @return [Types::InsightEntity]
+    #
+    # @!attribute [rw] insight_id
+    #   The unique identifier of the insight to describe.
+    #   @return [String]
+    #
+    # @!attribute [rw] show_html_content
+    #   Specifies whether to show response with HTML content in response or
+    #   not.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/DescribeInsightDetailsRequest AWS API Documentation
+    #
+    class DescribeInsightDetailsRequest < Struct.new(
+      :entity,
+      :insight_id,
+      :show_html_content)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The result of a `DescribeInsightDetails` request. Contains the
+    # detailed fields associated with the specified insight.
+    #
+    # @!attribute [rw] fields
+    #   The list of fields that contain detailed information about the
+    #   insight.
+    #   @return [Array<Types::InsightField>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/DescribeInsightDetailsResponse AWS API Documentation
+    #
+    class DescribeInsightDetailsResponse < Struct.new(
+      :fields)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Container for the parameters to the `DescribeInstanceTypeLimits`
     # operation.
     #
@@ -3207,11 +3435,16 @@ module Aws::OpenSearchService
     #   Specifies Security Lake as a type of data source for direct queries.
     #   @return [Types::SecurityLakeDirectQueryDataSource]
     #
+    # @!attribute [rw] prometheus
+    #   Specifies Prometheus as a type of data source for direct queries.
+    #   @return [Types::PrometheusDirectQueryDataSource]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/DirectQueryDataSourceType AWS API Documentation
     #
     class DirectQueryDataSourceType < Struct.new(
       :cloud_watch_log,
       :security_lake,
+      :prometheus,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
@@ -3219,6 +3452,7 @@ module Aws::OpenSearchService
 
       class CloudWatchLog < DirectQueryDataSourceType; end
       class SecurityLake < DirectQueryDataSourceType; end
+      class Prometheus < DirectQueryDataSourceType; end
       class Unknown < DirectQueryDataSourceType; end
     end
 
@@ -3399,6 +3633,10 @@ module Aws::OpenSearchService
     #   features.
     #   @return [Types::AIMLOptionsStatus]
     #
+    # @!attribute [rw] deployment_strategy_options
+    #   Specifies `DeploymentStrategyOptions` for the domain.
+    #   @return [Types::DeploymentStrategyOptionsStatus]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/DomainConfig AWS API Documentation
     #
     class DomainConfig < Struct.new(
@@ -3422,7 +3660,8 @@ module Aws::OpenSearchService
       :off_peak_window_options,
       :software_update_options,
       :modifying_properties,
-      :aiml_options)
+      :aiml_options,
+      :deployment_strategy_options)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3447,6 +3686,9 @@ module Aws::OpenSearchService
     #   * **Policy-Min-TLS-1-2-PFS-2023-10:** TLS security policy that
     #     supports TLS version 1.2 to TLS version 1.3 with perfect forward
     #     secrecy cipher suites
+    #
+    #   * **Policy-Min-TLS-1-2-RFC9151-FIPS-2024-08:** TLS security policy
+    #     that supports TLS version 1.3 with FIPS
     #   @return [String]
     #
     # @!attribute [rw] custom_endpoint_enabled
@@ -3875,6 +4117,10 @@ module Aws::OpenSearchService
     #   features.
     #   @return [Types::AIMLOptionsOutput]
     #
+    # @!attribute [rw] deployment_strategy_options
+    #   The current status of the domain's deployment strategy options.
+    #   @return [Types::DeploymentStrategyOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/DomainStatus AWS API Documentation
     #
     class DomainStatus < Struct.new(
@@ -3911,7 +4157,8 @@ module Aws::OpenSearchService
       :software_update_options,
       :domain_processing_status,
       :modifying_properties,
-      :aiml_options)
+      :aiml_options,
+      :deployment_strategy_options)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4248,6 +4495,64 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
+    # Container for the parameters to the `GetCapability` operation.
+    #
+    # @!attribute [rw] application_id
+    #   The unique identifier of the OpenSearch UI application.
+    #   @return [String]
+    #
+    # @!attribute [rw] capability_name
+    #   The name of the capability to retrieve information about.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/GetCapabilityRequest AWS API Documentation
+    #
+    class GetCapabilityRequest < Struct.new(
+      :application_id,
+      :capability_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The result of a `GetCapability` request. Contains details about the
+    # capability.
+    #
+    # @!attribute [rw] capability_name
+    #   The name of the capability.
+    #   @return [String]
+    #
+    # @!attribute [rw] application_id
+    #   The unique identifier of the OpenSearch UI application.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the capability. Possible values: `creating`,
+    #   `create_failed`, `active`, `updating`, `update_failed`, `deleting`,
+    #   `delete_failed`.
+    #   @return [String]
+    #
+    # @!attribute [rw] capability_config
+    #   The configuration settings for the capability, including
+    #   capability-specific settings such as AI configuration.
+    #   @return [Types::CapabilityExtendedResponseConfig]
+    #
+    # @!attribute [rw] failures
+    #   A list of failures associated with the capability, if any. Each
+    #   failure includes a reason and details about what went wrong.
+    #   @return [Array<Types::CapabilityFailure>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/GetCapabilityResponse AWS API Documentation
+    #
+    class GetCapabilityResponse < Struct.new(
+      :capability_name,
+      :application_id,
+      :status,
+      :capability_config,
+      :failures)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Container for the request parameters to `GetCompatibleVersions`
     # operation.
     #
@@ -4385,6 +4690,13 @@ module Aws::OpenSearchService
     #   collections that are associated with the direct query data source.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] data_source_access_policy
+    #   The IAM access policy document that defines the permissions for
+    #   accessing the direct query data source. Returns the current policy
+    #   configuration in JSON format, or null if no custom policy is
+    #   configured.
+    #   @return [String]
+    #
     # @!attribute [rw] data_source_arn
     #   The unique, system-generated identifier that represents the data
     #   source.
@@ -4397,6 +4709,7 @@ module Aws::OpenSearchService
       :data_source_type,
       :description,
       :open_search_arns,
+      :data_source_access_policy,
       :data_source_arn)
       SENSITIVE = []
       include Aws::Structure
@@ -4975,6 +5288,128 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
+    # Represents an insight returned by the `ListInsights` operation. An
+    # insight is a notification about a domain event or recommendation that
+    # helps you optimize your Amazon OpenSearch Service domain.
+    #
+    # @!attribute [rw] insight_id
+    #   The unique identifier of the insight.
+    #   @return [String]
+    #
+    # @!attribute [rw] display_name
+    #   The display name of the insight.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of the insight. Possible values are `EVENT` and
+    #   `RECOMMENDATION`.
+    #   @return [String]
+    #
+    # @!attribute [rw] priority
+    #   The priority level of the insight. Possible values are `CRITICAL`,
+    #   `HIGH`, `MEDIUM`, and `LOW`.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the insight. Possible values are `ACTIVE`,
+    #   `RESOLVED`, and `DISMISSED`.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The timestamp when the insight was created, in epoch milliseconds.
+    #   @return [Time]
+    #
+    # @!attribute [rw] update_time
+    #   The timestamp when the insight was last updated, in epoch
+    #   milliseconds.
+    #   @return [Time]
+    #
+    # @!attribute [rw] is_experimental
+    #   Indicates whether the insight is experimental.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/Insight AWS API Documentation
+    #
+    class Insight < Struct.new(
+      :insight_id,
+      :display_name,
+      :type,
+      :priority,
+      :status,
+      :creation_time,
+      :update_time,
+      :is_experimental)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the entity for which to retrieve insights. An entity can be
+    # an Amazon OpenSearch Service domain or an Amazon Web Services account.
+    #
+    # @!attribute [rw] type
+    #   The type of the entity. Possible values are `Account` and
+    #   `DomainName`.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value of the entity. For `DomainName`, this is the domain name.
+    #   For `Account`, this is the Amazon Web Services account ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/InsightEntity AWS API Documentation
+    #
+    class InsightEntity < Struct.new(
+      :type,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents a field in the detailed view of an insight, returned by the
+    # `DescribeInsightDetails` operation.
+    #
+    # @!attribute [rw] name
+    #   The name of the insight field.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of the insight field. Possible values are `text` and
+    #   `metric`.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value of the insight field.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/InsightField AWS API Documentation
+    #
+    class InsightField < Struct.new(
+      :name,
+      :type,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the time range for filtering insights.
+    #
+    # @!attribute [rw] from
+    #   The start of the time range, in epoch milliseconds.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] to
+    #   The end of the time range, in epoch milliseconds.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/InsightTimeRange AWS API Documentation
+    #
+    class InsightTimeRange < Struct.new(
+      :from,
+      :to)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Limits on the number of instances that can be created in OpenSearch
     # Service for a given instance type.
     #
@@ -5451,6 +5886,71 @@ module Aws::OpenSearchService
     #
     class ListDomainsForPackageResponse < Struct.new(
       :domain_package_details_list,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Container for the parameters to the `ListInsights` operation.
+    #
+    # @!attribute [rw] entity
+    #   The entity for which to list insights. Specifies the type and value
+    #   of the entity, such as a domain name or Amazon Web Services account
+    #   ID.
+    #   @return [Types::InsightEntity]
+    #
+    # @!attribute [rw] time_range
+    #   The time range for filtering insights, specified as epoch
+    #   millisecond timestamps.
+    #   @return [Types::InsightTimeRange]
+    #
+    # @!attribute [rw] sort_order
+    #   The sort order for the results. Possible values are `ASC`
+    #   (ascending) and `DESC` (descending).
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   An optional parameter that specifies the maximum number of results
+    #   to return. You can use `NextToken` to get the next page of results.
+    #   Valid values are 1 to 500.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   If your initial `ListInsights` operation returns a `NextToken`,
+    #   include the returned `NextToken` in subsequent `ListInsights`
+    #   operations to retrieve the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/ListInsightsRequest AWS API Documentation
+    #
+    class ListInsightsRequest < Struct.new(
+      :entity,
+      :time_range,
+      :sort_order,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The result of a `ListInsights` request. Contains the list of insights
+    # and a pagination token for retrieving the next page of results.
+    #
+    # @!attribute [rw] insights
+    #   The list of insights returned for the specified entity.
+    #   @return [Array<Types::Insight>]
+    #
+    # @!attribute [rw] next_token
+    #   When `NextToken` is returned, there are more results available. The
+    #   value of `NextToken` is a unique pagination token for each page.
+    #   Send the request again using the returned token to retrieve the next
+    #   page.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/ListInsightsResponse AWS API Documentation
+    #
+    class ListInsightsResponse < Struct.new(
+      :insights,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -6559,6 +7059,28 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
+    # Configuration details for a Prometheus data source that can be used
+    # for direct queries.
+    #
+    # @!attribute [rw] role_arn
+    #   The unique identifier of the IAM role that grants OpenSearch Service
+    #   permission to access the specified data source.
+    #   @return [String]
+    #
+    # @!attribute [rw] workspace_arn
+    #   The unique identifier of the Amazon Managed Prometheus Workspace
+    #   that is associated with the specified data source.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/PrometheusDirectQueryDataSource AWS API Documentation
+    #
+    class PrometheusDirectQueryDataSource < Struct.new(
+      :role_arn,
+      :workspace_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Container for request parameters to the
     # `PurchaseReservedInstanceOffering` operation.
     #
@@ -6662,6 +7184,68 @@ module Aws::OpenSearchService
     class RecurringCharge < Struct.new(
       :recurring_charge_amount,
       :recurring_charge_frequency)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Container for the parameters to the `RegisterCapability` operation.
+    #
+    # @!attribute [rw] application_id
+    #   The unique identifier of the OpenSearch UI application to register
+    #   the capability for.
+    #   @return [String]
+    #
+    # @!attribute [rw] capability_name
+    #   The name of the capability to register. Must be between 3 and 30
+    #   characters and contain only alphanumeric characters and hyphens.
+    #   This identifies the type of capability being enabled for the
+    #   application. For registering AI Assistant capability, use
+    #   `ai-capability`
+    #   @return [String]
+    #
+    # @!attribute [rw] capability_config
+    #   The configuration settings for the capability being registered. This
+    #   includes capability-specific settings such as AI configuration.
+    #   @return [Types::CapabilityBaseRequestConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/RegisterCapabilityRequest AWS API Documentation
+    #
+    class RegisterCapabilityRequest < Struct.new(
+      :application_id,
+      :capability_name,
+      :capability_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The result of a `RegisterCapability` request. Contains details about
+    # the registered capability.
+    #
+    # @!attribute [rw] capability_name
+    #   The name of the registered capability.
+    #   @return [String]
+    #
+    # @!attribute [rw] application_id
+    #   The unique identifier of the OpenSearch UI application.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the capability. Possible values: `creating`,
+    #   `create_failed`, `active`, `updating`, `update_failed`, `deleting`,
+    #   `delete_failed`.
+    #   @return [String]
+    #
+    # @!attribute [rw] capability_config
+    #   The configuration settings for the registered capability.
+    #   @return [Types::CapabilityBaseResponseConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/RegisterCapabilityResponse AWS API Documentation
+    #
+    class RegisterCapabilityResponse < Struct.new(
+      :capability_name,
+      :application_id,
+      :status,
+      :capability_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7161,6 +7745,13 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
+    # An exception for when a request would cause a service quota to be
+    # exceeded.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/ServiceQuotaExceededException AWS API Documentation
+    #
+    class ServiceQuotaExceededException < Aws::EmptyStructure; end
+
     # The current status of the service software for an Amazon OpenSearch
     # Service domain. For more information, see [Service software updates in
     # Amazon OpenSearch Service][1].
@@ -7645,9 +8236,19 @@ module Aws::OpenSearchService
     #   @return [String]
     #
     # @!attribute [rw] open_search_arns
-    #   A list of Amazon Resource Names (ARNs) for the OpenSearch
+    #   An optional list of Amazon Resource Names (ARNs) for the OpenSearch
     #   collections that are associated with the direct query data source.
+    #   This field is required for CloudWatchLogs and SecurityLake
+    #   datasource types.
     #   @return [Array<String>]
+    #
+    # @!attribute [rw] data_source_access_policy
+    #   An optional IAM access policy document that defines the updated
+    #   permissions for accessing the direct query data source. The policy
+    #   document must be in valid JSON format and follow IAM policy syntax.
+    #   If not specified, the existing access policy if present remains
+    #   unchanged.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/UpdateDirectQueryDataSourceRequest AWS API Documentation
     #
@@ -7655,7 +8256,8 @@ module Aws::OpenSearchService
       :data_source_name,
       :data_source_type,
       :description,
-      :open_search_arns)
+      :open_search_arns,
+      :data_source_access_policy)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7812,6 +8414,10 @@ module Aws::OpenSearchService
     #   Options for all machine learning features for the specified domain.
     #   @return [Types::AIMLOptionsInput]
     #
+    # @!attribute [rw] deployment_strategy_options
+    #   Specifies the deployment strategy options for the domain.
+    #   @return [Types::DeploymentStrategyOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/UpdateDomainConfigRequest AWS API Documentation
     #
     class UpdateDomainConfigRequest < Struct.new(
@@ -7835,7 +8441,8 @@ module Aws::OpenSearchService
       :dry_run_mode,
       :off_peak_window_options,
       :software_update_options,
-      :aiml_options)
+      :aiml_options,
+      :deployment_strategy_options)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.62.0 (2026-04-16)
+------------------
+
+* Feature - Updating regex for identification of AWS Regions.
+
+1.61.0 (2026-04-08)
+------------------
+
+* Feature - This changes adds support for modifying the replication configuration to support data replication using IPv6.
+
+1.60.0 (2026-03-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.59.0 (2026-01-16)
 ------------------
 

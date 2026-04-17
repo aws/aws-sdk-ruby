@@ -57,7 +57,7 @@ module Aws::PcaConnectorScep
       attr_accessor mobile_device_management: Types::MobileDeviceManagement
       attr_accessor open_id_configuration: Types::OpenIdConfiguration
       attr_accessor status: ("CREATING" | "ACTIVE" | "DELETING" | "FAILED")
-      attr_accessor status_reason: ("INTERNAL_FAILURE" | "PRIVATECA_ACCESS_DENIED" | "PRIVATECA_INVALID_STATE" | "PRIVATECA_RESOURCE_NOT_FOUND")
+      attr_accessor status_reason: ("INTERNAL_FAILURE" | "PRIVATECA_ACCESS_DENIED" | "PRIVATECA_INVALID_STATE" | "PRIVATECA_RESOURCE_NOT_FOUND" | "VPC_ENDPOINT_RESOURCE_NOT_FOUND" | "VPC_ENDPOINT_DNS_ENTRIES_NOT_FOUND")
       attr_accessor endpoint: ::String
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
@@ -71,7 +71,7 @@ module Aws::PcaConnectorScep
       attr_accessor mobile_device_management: Types::MobileDeviceManagement
       attr_accessor open_id_configuration: Types::OpenIdConfiguration
       attr_accessor status: ("CREATING" | "ACTIVE" | "DELETING" | "FAILED")
-      attr_accessor status_reason: ("INTERNAL_FAILURE" | "PRIVATECA_ACCESS_DENIED" | "PRIVATECA_INVALID_STATE" | "PRIVATECA_RESOURCE_NOT_FOUND")
+      attr_accessor status_reason: ("INTERNAL_FAILURE" | "PRIVATECA_ACCESS_DENIED" | "PRIVATECA_INVALID_STATE" | "PRIVATECA_RESOURCE_NOT_FOUND" | "VPC_ENDPOINT_RESOURCE_NOT_FOUND" | "VPC_ENDPOINT_DNS_ENTRIES_NOT_FOUND")
       attr_accessor endpoint: ::String
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
@@ -93,6 +93,7 @@ module Aws::PcaConnectorScep
     class CreateConnectorRequest
       attr_accessor certificate_authority_arn: ::String
       attr_accessor mobile_device_management: Types::MobileDeviceManagement
+      attr_accessor vpc_endpoint_id: ::String
       attr_accessor client_token: ::String
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []

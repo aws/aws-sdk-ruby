@@ -222,7 +222,10 @@ module Aws::EMR
     ListStudiosOutput = Shapes::StructureShape.new(name: 'ListStudiosOutput')
     ListSupportedInstanceTypesInput = Shapes::StructureShape.new(name: 'ListSupportedInstanceTypesInput')
     ListSupportedInstanceTypesOutput = Shapes::StructureShape.new(name: 'ListSupportedInstanceTypesOutput')
+    LogType = Shapes::StringShape.new(name: 'LogType')
+    LogTypeMap = Shapes::MapShape.new(name: 'LogTypeMap')
     LogTypesMap = Shapes::MapShape.new(name: 'LogTypesMap')
+    LogUploadPolicyValue = Shapes::StringShape.new(name: 'LogUploadPolicyValue')
     Long = Shapes::IntegerShape.new(name: 'Long')
     ManagedScalingPolicy = Shapes::StructureShape.new(name: 'ManagedScalingPolicy')
     Marker = Shapes::StringShape.new(name: 'Marker')
@@ -289,6 +292,7 @@ module Aws::EMR
     ResourceId = Shapes::StringShape.new(name: 'ResourceId')
     RunJobFlowInput = Shapes::StructureShape.new(name: 'RunJobFlowInput')
     RunJobFlowOutput = Shapes::StructureShape.new(name: 'RunJobFlowOutput')
+    S3LoggingConfiguration = Shapes::StructureShape.new(name: 'S3LoggingConfiguration')
     S3MonitoringConfiguration = Shapes::StructureShape.new(name: 'S3MonitoringConfiguration')
     ScaleDownBehavior = Shapes::StringShape.new(name: 'ScaleDownBehavior')
     ScalingAction = Shapes::StructureShape.new(name: 'ScalingAction')
@@ -1226,6 +1230,9 @@ module Aws::EMR
     ListSupportedInstanceTypesOutput.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
     ListSupportedInstanceTypesOutput.struct_class = Types::ListSupportedInstanceTypesOutput
 
+    LogTypeMap.key = Shapes::ShapeRef.new(shape: LogType)
+    LogTypeMap.value = Shapes::ShapeRef.new(shape: LogUploadPolicyValue)
+
     LogTypesMap.key = Shapes::ShapeRef.new(shape: XmlString)
     LogTypesMap.value = Shapes::ShapeRef.new(shape: XmlStringList)
 
@@ -1258,6 +1265,7 @@ module Aws::EMR
     ModifyInstanceGroupsInput.struct_class = Types::ModifyInstanceGroupsInput
 
     MonitoringConfiguration.add_member(:cloud_watch_log_configuration, Shapes::ShapeRef.new(shape: CloudWatchLogConfiguration, location_name: "CloudWatchLogConfiguration"))
+    MonitoringConfiguration.add_member(:s3_logging_configuration, Shapes::ShapeRef.new(shape: S3LoggingConfiguration, location_name: "S3LoggingConfiguration"))
     MonitoringConfiguration.struct_class = Types::MonitoringConfiguration
 
     NewSupportedProductsList.member = Shapes::ShapeRef.new(shape: SupportedProductConfig)
@@ -1418,6 +1426,7 @@ module Aws::EMR
     RunJobFlowInput.add_member(:release_label, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, location_name: "ReleaseLabel"))
     RunJobFlowInput.add_member(:instances, Shapes::ShapeRef.new(shape: JobFlowInstancesConfig, required: true, location_name: "Instances"))
     RunJobFlowInput.add_member(:steps, Shapes::ShapeRef.new(shape: StepConfigList, location_name: "Steps"))
+    RunJobFlowInput.add_member(:step_execution_role_arn, Shapes::ShapeRef.new(shape: ArnType, location_name: "StepExecutionRoleArn"))
     RunJobFlowInput.add_member(:bootstrap_actions, Shapes::ShapeRef.new(shape: BootstrapActionConfigList, location_name: "BootstrapActions"))
     RunJobFlowInput.add_member(:supported_products, Shapes::ShapeRef.new(shape: SupportedProductsList, location_name: "SupportedProducts"))
     RunJobFlowInput.add_member(:new_supported_products, Shapes::ShapeRef.new(shape: NewSupportedProductsList, location_name: "NewSupportedProducts"))
@@ -1448,6 +1457,9 @@ module Aws::EMR
     RunJobFlowOutput.add_member(:job_flow_id, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, location_name: "JobFlowId"))
     RunJobFlowOutput.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: ArnType, location_name: "ClusterArn"))
     RunJobFlowOutput.struct_class = Types::RunJobFlowOutput
+
+    S3LoggingConfiguration.add_member(:log_type_upload_policy, Shapes::ShapeRef.new(shape: LogTypeMap, location_name: "LogTypeUploadPolicy"))
+    S3LoggingConfiguration.struct_class = Types::S3LoggingConfiguration
 
     S3MonitoringConfiguration.add_member(:log_uri, Shapes::ShapeRef.new(shape: XmlString, location_name: "LogUri"))
     S3MonitoringConfiguration.add_member(:encryption_key_arn, Shapes::ShapeRef.new(shape: XmlString, location_name: "EncryptionKeyArn"))

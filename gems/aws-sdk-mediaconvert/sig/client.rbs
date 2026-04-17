@@ -285,6 +285,13 @@ module Aws
                                 },
                               ]?,
                               input_scan_type: ("AUTO" | "PSF")?,
+                              multi_view_settings: Array[
+                                {
+                                  input: {
+                                    file_input: ::String?
+                                  }?
+                                },
+                              ]?,
                               position: {
                                 height: ::Integer?,
                                 width: ::Integer?,
@@ -533,6 +540,7 @@ module Aws
                                     }?
                                   }?,
                                   encryption: {
+                                    clear_lead: ("ENABLED" | "DISABLED")?,
                                     constant_initialization_vector: ::String?,
                                     encryption_method: ("SAMPLE_AES" | "AES_CTR")?,
                                     initialization_vector_in_manifest: ("INCLUDE" | "EXCLUDE")?,
@@ -558,7 +566,7 @@ module Aws
                                   fragment_length: ::Integer?,
                                   image_based_trick_play: ("NONE" | "THUMBNAIL" | "THUMBNAIL_AND_FULLFRAME" | "ADVANCED")?,
                                   image_based_trick_play_settings: {
-                                    interval_cadence: ("FOLLOW_IFRAME" | "FOLLOW_CUSTOM")?,
+                                    interval_cadence: ("FOLLOW_IFRAME" | "FOLLOW_CUSTOM" | "FOLLOW_SEGMENTATION")?,
                                     thumbnail_height: ::Integer?,
                                     thumbnail_interval: ::Float?,
                                     thumbnail_width: ::Integer?,
@@ -624,7 +632,7 @@ module Aws
                                   hbbtv_compliance: ("HBBTV_1_5" | "NONE")?,
                                   image_based_trick_play: ("NONE" | "THUMBNAIL" | "THUMBNAIL_AND_FULLFRAME" | "ADVANCED")?,
                                   image_based_trick_play_settings: {
-                                    interval_cadence: ("FOLLOW_IFRAME" | "FOLLOW_CUSTOM")?,
+                                    interval_cadence: ("FOLLOW_IFRAME" | "FOLLOW_CUSTOM" | "FOLLOW_SEGMENTATION")?,
                                     thumbnail_height: ::Integer?,
                                     thumbnail_interval: ::Float?,
                                     thumbnail_width: ::Integer?,
@@ -720,7 +728,7 @@ module Aws
                                   }?,
                                   image_based_trick_play: ("NONE" | "THUMBNAIL" | "THUMBNAIL_AND_FULLFRAME" | "ADVANCED")?,
                                   image_based_trick_play_settings: {
-                                    interval_cadence: ("FOLLOW_IFRAME" | "FOLLOW_CUSTOM")?,
+                                    interval_cadence: ("FOLLOW_IFRAME" | "FOLLOW_CUSTOM" | "FOLLOW_SEGMENTATION")?,
                                     thumbnail_height: ::Integer?,
                                     thumbnail_interval: ::Float?,
                                     thumbnail_width: ::Integer?,
@@ -836,12 +844,27 @@ module Aws
                                           metadata_control: ("FOLLOW_INPUT" | "USE_CONFIGURED")?,
                                           sample_rate: ::Integer?
                                         }?,
+                                        ac_4_settings: {
+                                          bitrate: ::Integer?,
+                                          bitstream_mode: ("COMPLETE_MAIN" | "EMERGENCY")?,
+                                          coding_mode: ("CODING_MODE_2_0" | "CODING_MODE_3_2_LFE" | "CODING_MODE_5_1_4")?,
+                                          dynamic_range_compression_flat_panel_tv: ("NONE" | "FILM_STANDARD" | "FILM_LIGHT" | "MUSIC_STANDARD" | "MUSIC_LIGHT" | "SPEECH")?,
+                                          dynamic_range_compression_home_theater: ("NONE" | "FILM_STANDARD" | "FILM_LIGHT" | "MUSIC_STANDARD" | "MUSIC_LIGHT" | "SPEECH")?,
+                                          dynamic_range_compression_portable_headphones: ("NONE" | "FILM_STANDARD" | "FILM_LIGHT" | "MUSIC_STANDARD" | "MUSIC_LIGHT" | "SPEECH")?,
+                                          dynamic_range_compression_portable_speakers: ("NONE" | "FILM_STANDARD" | "FILM_LIGHT" | "MUSIC_STANDARD" | "MUSIC_LIGHT" | "SPEECH")?,
+                                          lo_ro_center_mix_level: ::Float?,
+                                          lo_ro_surround_mix_level: ::Float?,
+                                          lt_rt_center_mix_level: ::Float?,
+                                          lt_rt_surround_mix_level: ::Float?,
+                                          sample_rate: ::Integer?,
+                                          stereo_downmix: ("NOT_INDICATED" | "LO_RO" | "LT_RT" | "DPL2")?
+                                        }?,
                                         aiff_settings: {
                                           bit_depth: ::Integer?,
                                           channels: ::Integer?,
                                           sample_rate: ::Integer?
                                         }?,
-                                        codec: ("AAC" | "MP2" | "MP3" | "WAV" | "AIFF" | "AC3" | "EAC3" | "EAC3_ATMOS" | "VORBIS" | "OPUS" | "PASSTHROUGH" | "FLAC")?,
+                                        codec: ("AAC" | "MP2" | "MP3" | "WAV" | "AIFF" | "AC3" | "AC4" | "EAC3" | "EAC3_ATMOS" | "VORBIS" | "OPUS" | "PASSTHROUGH" | "FLAC")?,
                                         eac_3_atmos_settings: {
                                           bitrate: ::Integer?,
                                           bitstream_mode: ("COMPLETE_MAIN")?,
@@ -1538,7 +1561,7 @@ module Aws
                                       y: ::Integer?
                                     }?,
                                     respond_to_afd: ("NONE" | "RESPOND" | "PASSTHROUGH")?,
-                                    scaling_behavior: ("DEFAULT" | "STRETCH_TO_OUTPUT" | "FIT" | "FIT_NO_UPSCALE" | "FILL")?,
+                                    scaling_behavior: ("DEFAULT" | "STRETCH_TO_OUTPUT" | "FIT" | "FIT_NO_UPSCALE" | "FILL" | "SMART_CROP")?,
                                     sharpness: ::Integer?,
                                     timecode_insertion: ("DISABLED" | "PIC_TIMING_SEI")?,
                                     timecode_track: ("DISABLED" | "ENABLED")?,
@@ -1851,6 +1874,13 @@ module Aws
                                          },
                                        ]?,
                                        input_scan_type: ("AUTO" | "PSF")?,
+                                       multi_view_settings: Array[
+                                         {
+                                           input: {
+                                             file_input: ::String?
+                                           }?
+                                         },
+                                       ]?,
                                        position: {
                                          height: ::Integer?,
                                          width: ::Integer?,
@@ -2082,6 +2112,7 @@ module Aws
                                              }?
                                            }?,
                                            encryption: {
+                                             clear_lead: ("ENABLED" | "DISABLED")?,
                                              constant_initialization_vector: ::String?,
                                              encryption_method: ("SAMPLE_AES" | "AES_CTR")?,
                                              initialization_vector_in_manifest: ("INCLUDE" | "EXCLUDE")?,
@@ -2107,7 +2138,7 @@ module Aws
                                            fragment_length: ::Integer?,
                                            image_based_trick_play: ("NONE" | "THUMBNAIL" | "THUMBNAIL_AND_FULLFRAME" | "ADVANCED")?,
                                            image_based_trick_play_settings: {
-                                             interval_cadence: ("FOLLOW_IFRAME" | "FOLLOW_CUSTOM")?,
+                                             interval_cadence: ("FOLLOW_IFRAME" | "FOLLOW_CUSTOM" | "FOLLOW_SEGMENTATION")?,
                                              thumbnail_height: ::Integer?,
                                              thumbnail_interval: ::Float?,
                                              thumbnail_width: ::Integer?,
@@ -2173,7 +2204,7 @@ module Aws
                                            hbbtv_compliance: ("HBBTV_1_5" | "NONE")?,
                                            image_based_trick_play: ("NONE" | "THUMBNAIL" | "THUMBNAIL_AND_FULLFRAME" | "ADVANCED")?,
                                            image_based_trick_play_settings: {
-                                             interval_cadence: ("FOLLOW_IFRAME" | "FOLLOW_CUSTOM")?,
+                                             interval_cadence: ("FOLLOW_IFRAME" | "FOLLOW_CUSTOM" | "FOLLOW_SEGMENTATION")?,
                                              thumbnail_height: ::Integer?,
                                              thumbnail_interval: ::Float?,
                                              thumbnail_width: ::Integer?,
@@ -2269,7 +2300,7 @@ module Aws
                                            }?,
                                            image_based_trick_play: ("NONE" | "THUMBNAIL" | "THUMBNAIL_AND_FULLFRAME" | "ADVANCED")?,
                                            image_based_trick_play_settings: {
-                                             interval_cadence: ("FOLLOW_IFRAME" | "FOLLOW_CUSTOM")?,
+                                             interval_cadence: ("FOLLOW_IFRAME" | "FOLLOW_CUSTOM" | "FOLLOW_SEGMENTATION")?,
                                              thumbnail_height: ::Integer?,
                                              thumbnail_interval: ::Float?,
                                              thumbnail_width: ::Integer?,
@@ -2385,12 +2416,27 @@ module Aws
                                                    metadata_control: ("FOLLOW_INPUT" | "USE_CONFIGURED")?,
                                                    sample_rate: ::Integer?
                                                  }?,
+                                                 ac_4_settings: {
+                                                   bitrate: ::Integer?,
+                                                   bitstream_mode: ("COMPLETE_MAIN" | "EMERGENCY")?,
+                                                   coding_mode: ("CODING_MODE_2_0" | "CODING_MODE_3_2_LFE" | "CODING_MODE_5_1_4")?,
+                                                   dynamic_range_compression_flat_panel_tv: ("NONE" | "FILM_STANDARD" | "FILM_LIGHT" | "MUSIC_STANDARD" | "MUSIC_LIGHT" | "SPEECH")?,
+                                                   dynamic_range_compression_home_theater: ("NONE" | "FILM_STANDARD" | "FILM_LIGHT" | "MUSIC_STANDARD" | "MUSIC_LIGHT" | "SPEECH")?,
+                                                   dynamic_range_compression_portable_headphones: ("NONE" | "FILM_STANDARD" | "FILM_LIGHT" | "MUSIC_STANDARD" | "MUSIC_LIGHT" | "SPEECH")?,
+                                                   dynamic_range_compression_portable_speakers: ("NONE" | "FILM_STANDARD" | "FILM_LIGHT" | "MUSIC_STANDARD" | "MUSIC_LIGHT" | "SPEECH")?,
+                                                   lo_ro_center_mix_level: ::Float?,
+                                                   lo_ro_surround_mix_level: ::Float?,
+                                                   lt_rt_center_mix_level: ::Float?,
+                                                   lt_rt_surround_mix_level: ::Float?,
+                                                   sample_rate: ::Integer?,
+                                                   stereo_downmix: ("NOT_INDICATED" | "LO_RO" | "LT_RT" | "DPL2")?
+                                                 }?,
                                                  aiff_settings: {
                                                    bit_depth: ::Integer?,
                                                    channels: ::Integer?,
                                                    sample_rate: ::Integer?
                                                  }?,
-                                                 codec: ("AAC" | "MP2" | "MP3" | "WAV" | "AIFF" | "AC3" | "EAC3" | "EAC3_ATMOS" | "VORBIS" | "OPUS" | "PASSTHROUGH" | "FLAC")?,
+                                                 codec: ("AAC" | "MP2" | "MP3" | "WAV" | "AIFF" | "AC3" | "AC4" | "EAC3" | "EAC3_ATMOS" | "VORBIS" | "OPUS" | "PASSTHROUGH" | "FLAC")?,
                                                  eac_3_atmos_settings: {
                                                    bitrate: ::Integer?,
                                                    bitstream_mode: ("COMPLETE_MAIN")?,
@@ -3087,7 +3133,7 @@ module Aws
                                                y: ::Integer?
                                              }?,
                                              respond_to_afd: ("NONE" | "RESPOND" | "PASSTHROUGH")?,
-                                             scaling_behavior: ("DEFAULT" | "STRETCH_TO_OUTPUT" | "FIT" | "FIT_NO_UPSCALE" | "FILL")?,
+                                             scaling_behavior: ("DEFAULT" | "STRETCH_TO_OUTPUT" | "FIT" | "FIT_NO_UPSCALE" | "FILL" | "SMART_CROP")?,
                                              sharpness: ::Integer?,
                                              timecode_insertion: ("DISABLED" | "PIC_TIMING_SEI")?,
                                              timecode_track: ("DISABLED" | "ENABLED")?,
@@ -3276,12 +3322,27 @@ module Aws
                                      metadata_control: ("FOLLOW_INPUT" | "USE_CONFIGURED")?,
                                      sample_rate: ::Integer?
                                    }?,
+                                   ac_4_settings: {
+                                     bitrate: ::Integer?,
+                                     bitstream_mode: ("COMPLETE_MAIN" | "EMERGENCY")?,
+                                     coding_mode: ("CODING_MODE_2_0" | "CODING_MODE_3_2_LFE" | "CODING_MODE_5_1_4")?,
+                                     dynamic_range_compression_flat_panel_tv: ("NONE" | "FILM_STANDARD" | "FILM_LIGHT" | "MUSIC_STANDARD" | "MUSIC_LIGHT" | "SPEECH")?,
+                                     dynamic_range_compression_home_theater: ("NONE" | "FILM_STANDARD" | "FILM_LIGHT" | "MUSIC_STANDARD" | "MUSIC_LIGHT" | "SPEECH")?,
+                                     dynamic_range_compression_portable_headphones: ("NONE" | "FILM_STANDARD" | "FILM_LIGHT" | "MUSIC_STANDARD" | "MUSIC_LIGHT" | "SPEECH")?,
+                                     dynamic_range_compression_portable_speakers: ("NONE" | "FILM_STANDARD" | "FILM_LIGHT" | "MUSIC_STANDARD" | "MUSIC_LIGHT" | "SPEECH")?,
+                                     lo_ro_center_mix_level: ::Float?,
+                                     lo_ro_surround_mix_level: ::Float?,
+                                     lt_rt_center_mix_level: ::Float?,
+                                     lt_rt_surround_mix_level: ::Float?,
+                                     sample_rate: ::Integer?,
+                                     stereo_downmix: ("NOT_INDICATED" | "LO_RO" | "LT_RT" | "DPL2")?
+                                   }?,
                                    aiff_settings: {
                                      bit_depth: ::Integer?,
                                      channels: ::Integer?,
                                      sample_rate: ::Integer?
                                    }?,
-                                   codec: ("AAC" | "MP2" | "MP3" | "WAV" | "AIFF" | "AC3" | "EAC3" | "EAC3_ATMOS" | "VORBIS" | "OPUS" | "PASSTHROUGH" | "FLAC")?,
+                                   codec: ("AAC" | "MP2" | "MP3" | "WAV" | "AIFF" | "AC3" | "AC4" | "EAC3" | "EAC3_ATMOS" | "VORBIS" | "OPUS" | "PASSTHROUGH" | "FLAC")?,
                                    eac_3_atmos_settings: {
                                      bitrate: ::Integer?,
                                      bitstream_mode: ("COMPLETE_MAIN")?,
@@ -3963,7 +4024,7 @@ module Aws
                                  y: ::Integer?
                                }?,
                                respond_to_afd: ("NONE" | "RESPOND" | "PASSTHROUGH")?,
-                               scaling_behavior: ("DEFAULT" | "STRETCH_TO_OUTPUT" | "FIT" | "FIT_NO_UPSCALE" | "FILL")?,
+                               scaling_behavior: ("DEFAULT" | "STRETCH_TO_OUTPUT" | "FIT" | "FIT_NO_UPSCALE" | "FILL" | "SMART_CROP")?,
                                sharpness: ::Integer?,
                                timecode_insertion: ("DISABLED" | "PIC_TIMING_SEI")?,
                                timecode_track: ("DISABLED" | "ENABLED")?,
@@ -4083,6 +4144,7 @@ module Aws
       def create_queue: (
                           ?concurrent_jobs: ::Integer,
                           ?description: ::String,
+                          ?maximum_concurrent_feeds: ::Integer,
                           name: ::String,
                           ?pricing_plan: ("ON_DEMAND" | "RESERVED"),
                           ?reservation_plan_settings: {
@@ -4568,6 +4630,13 @@ module Aws
                                          },
                                        ]?,
                                        input_scan_type: ("AUTO" | "PSF")?,
+                                       multi_view_settings: Array[
+                                         {
+                                           input: {
+                                             file_input: ::String?
+                                           }?
+                                         },
+                                       ]?,
                                        position: {
                                          height: ::Integer?,
                                          width: ::Integer?,
@@ -4799,6 +4868,7 @@ module Aws
                                              }?
                                            }?,
                                            encryption: {
+                                             clear_lead: ("ENABLED" | "DISABLED")?,
                                              constant_initialization_vector: ::String?,
                                              encryption_method: ("SAMPLE_AES" | "AES_CTR")?,
                                              initialization_vector_in_manifest: ("INCLUDE" | "EXCLUDE")?,
@@ -4824,7 +4894,7 @@ module Aws
                                            fragment_length: ::Integer?,
                                            image_based_trick_play: ("NONE" | "THUMBNAIL" | "THUMBNAIL_AND_FULLFRAME" | "ADVANCED")?,
                                            image_based_trick_play_settings: {
-                                             interval_cadence: ("FOLLOW_IFRAME" | "FOLLOW_CUSTOM")?,
+                                             interval_cadence: ("FOLLOW_IFRAME" | "FOLLOW_CUSTOM" | "FOLLOW_SEGMENTATION")?,
                                              thumbnail_height: ::Integer?,
                                              thumbnail_interval: ::Float?,
                                              thumbnail_width: ::Integer?,
@@ -4890,7 +4960,7 @@ module Aws
                                            hbbtv_compliance: ("HBBTV_1_5" | "NONE")?,
                                            image_based_trick_play: ("NONE" | "THUMBNAIL" | "THUMBNAIL_AND_FULLFRAME" | "ADVANCED")?,
                                            image_based_trick_play_settings: {
-                                             interval_cadence: ("FOLLOW_IFRAME" | "FOLLOW_CUSTOM")?,
+                                             interval_cadence: ("FOLLOW_IFRAME" | "FOLLOW_CUSTOM" | "FOLLOW_SEGMENTATION")?,
                                              thumbnail_height: ::Integer?,
                                              thumbnail_interval: ::Float?,
                                              thumbnail_width: ::Integer?,
@@ -4986,7 +5056,7 @@ module Aws
                                            }?,
                                            image_based_trick_play: ("NONE" | "THUMBNAIL" | "THUMBNAIL_AND_FULLFRAME" | "ADVANCED")?,
                                            image_based_trick_play_settings: {
-                                             interval_cadence: ("FOLLOW_IFRAME" | "FOLLOW_CUSTOM")?,
+                                             interval_cadence: ("FOLLOW_IFRAME" | "FOLLOW_CUSTOM" | "FOLLOW_SEGMENTATION")?,
                                              thumbnail_height: ::Integer?,
                                              thumbnail_interval: ::Float?,
                                              thumbnail_width: ::Integer?,
@@ -5102,12 +5172,27 @@ module Aws
                                                    metadata_control: ("FOLLOW_INPUT" | "USE_CONFIGURED")?,
                                                    sample_rate: ::Integer?
                                                  }?,
+                                                 ac_4_settings: {
+                                                   bitrate: ::Integer?,
+                                                   bitstream_mode: ("COMPLETE_MAIN" | "EMERGENCY")?,
+                                                   coding_mode: ("CODING_MODE_2_0" | "CODING_MODE_3_2_LFE" | "CODING_MODE_5_1_4")?,
+                                                   dynamic_range_compression_flat_panel_tv: ("NONE" | "FILM_STANDARD" | "FILM_LIGHT" | "MUSIC_STANDARD" | "MUSIC_LIGHT" | "SPEECH")?,
+                                                   dynamic_range_compression_home_theater: ("NONE" | "FILM_STANDARD" | "FILM_LIGHT" | "MUSIC_STANDARD" | "MUSIC_LIGHT" | "SPEECH")?,
+                                                   dynamic_range_compression_portable_headphones: ("NONE" | "FILM_STANDARD" | "FILM_LIGHT" | "MUSIC_STANDARD" | "MUSIC_LIGHT" | "SPEECH")?,
+                                                   dynamic_range_compression_portable_speakers: ("NONE" | "FILM_STANDARD" | "FILM_LIGHT" | "MUSIC_STANDARD" | "MUSIC_LIGHT" | "SPEECH")?,
+                                                   lo_ro_center_mix_level: ::Float?,
+                                                   lo_ro_surround_mix_level: ::Float?,
+                                                   lt_rt_center_mix_level: ::Float?,
+                                                   lt_rt_surround_mix_level: ::Float?,
+                                                   sample_rate: ::Integer?,
+                                                   stereo_downmix: ("NOT_INDICATED" | "LO_RO" | "LT_RT" | "DPL2")?
+                                                 }?,
                                                  aiff_settings: {
                                                    bit_depth: ::Integer?,
                                                    channels: ::Integer?,
                                                    sample_rate: ::Integer?
                                                  }?,
-                                                 codec: ("AAC" | "MP2" | "MP3" | "WAV" | "AIFF" | "AC3" | "EAC3" | "EAC3_ATMOS" | "VORBIS" | "OPUS" | "PASSTHROUGH" | "FLAC")?,
+                                                 codec: ("AAC" | "MP2" | "MP3" | "WAV" | "AIFF" | "AC3" | "AC4" | "EAC3" | "EAC3_ATMOS" | "VORBIS" | "OPUS" | "PASSTHROUGH" | "FLAC")?,
                                                  eac_3_atmos_settings: {
                                                    bitrate: ::Integer?,
                                                    bitstream_mode: ("COMPLETE_MAIN")?,
@@ -5804,7 +5889,7 @@ module Aws
                                                y: ::Integer?
                                              }?,
                                              respond_to_afd: ("NONE" | "RESPOND" | "PASSTHROUGH")?,
-                                             scaling_behavior: ("DEFAULT" | "STRETCH_TO_OUTPUT" | "FIT" | "FIT_NO_UPSCALE" | "FILL")?,
+                                             scaling_behavior: ("DEFAULT" | "STRETCH_TO_OUTPUT" | "FIT" | "FIT_NO_UPSCALE" | "FILL" | "SMART_CROP")?,
                                              sharpness: ::Integer?,
                                              timecode_insertion: ("DISABLED" | "PIC_TIMING_SEI")?,
                                              timecode_track: ("DISABLED" | "ENABLED")?,
@@ -5992,12 +6077,27 @@ module Aws
                                      metadata_control: ("FOLLOW_INPUT" | "USE_CONFIGURED")?,
                                      sample_rate: ::Integer?
                                    }?,
+                                   ac_4_settings: {
+                                     bitrate: ::Integer?,
+                                     bitstream_mode: ("COMPLETE_MAIN" | "EMERGENCY")?,
+                                     coding_mode: ("CODING_MODE_2_0" | "CODING_MODE_3_2_LFE" | "CODING_MODE_5_1_4")?,
+                                     dynamic_range_compression_flat_panel_tv: ("NONE" | "FILM_STANDARD" | "FILM_LIGHT" | "MUSIC_STANDARD" | "MUSIC_LIGHT" | "SPEECH")?,
+                                     dynamic_range_compression_home_theater: ("NONE" | "FILM_STANDARD" | "FILM_LIGHT" | "MUSIC_STANDARD" | "MUSIC_LIGHT" | "SPEECH")?,
+                                     dynamic_range_compression_portable_headphones: ("NONE" | "FILM_STANDARD" | "FILM_LIGHT" | "MUSIC_STANDARD" | "MUSIC_LIGHT" | "SPEECH")?,
+                                     dynamic_range_compression_portable_speakers: ("NONE" | "FILM_STANDARD" | "FILM_LIGHT" | "MUSIC_STANDARD" | "MUSIC_LIGHT" | "SPEECH")?,
+                                     lo_ro_center_mix_level: ::Float?,
+                                     lo_ro_surround_mix_level: ::Float?,
+                                     lt_rt_center_mix_level: ::Float?,
+                                     lt_rt_surround_mix_level: ::Float?,
+                                     sample_rate: ::Integer?,
+                                     stereo_downmix: ("NOT_INDICATED" | "LO_RO" | "LT_RT" | "DPL2")?
+                                   }?,
                                    aiff_settings: {
                                      bit_depth: ::Integer?,
                                      channels: ::Integer?,
                                      sample_rate: ::Integer?
                                    }?,
-                                   codec: ("AAC" | "MP2" | "MP3" | "WAV" | "AIFF" | "AC3" | "EAC3" | "EAC3_ATMOS" | "VORBIS" | "OPUS" | "PASSTHROUGH" | "FLAC")?,
+                                   codec: ("AAC" | "MP2" | "MP3" | "WAV" | "AIFF" | "AC3" | "AC4" | "EAC3" | "EAC3_ATMOS" | "VORBIS" | "OPUS" | "PASSTHROUGH" | "FLAC")?,
                                    eac_3_atmos_settings: {
                                      bitrate: ::Integer?,
                                      bitstream_mode: ("COMPLETE_MAIN")?,
@@ -6679,7 +6779,7 @@ module Aws
                                  y: ::Integer?
                                }?,
                                respond_to_afd: ("NONE" | "RESPOND" | "PASSTHROUGH")?,
-                               scaling_behavior: ("DEFAULT" | "STRETCH_TO_OUTPUT" | "FIT" | "FIT_NO_UPSCALE" | "FILL")?,
+                               scaling_behavior: ("DEFAULT" | "STRETCH_TO_OUTPUT" | "FIT" | "FIT_NO_UPSCALE" | "FILL" | "SMART_CROP")?,
                                sharpness: ::Integer?,
                                timecode_insertion: ("DISABLED" | "PIC_TIMING_SEI")?,
                                timecode_track: ("DISABLED" | "ENABLED")?,
@@ -6798,6 +6898,7 @@ module Aws
       def update_queue: (
                           ?concurrent_jobs: ::Integer,
                           ?description: ::String,
+                          ?maximum_concurrent_feeds: ::Integer,
                           name: ::String,
                           ?reservation_plan_settings: {
                             commitment: ("ONE_YEAR"),

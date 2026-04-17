@@ -794,9 +794,19 @@ module Aws::LakeFormation
     #
     # @!attribute [rw] parameters
     #   A key-value map that provides an additional configuration on your
-    #   data lake. CROSS\_ACCOUNT\_VERSION is the key you can configure in
-    #   the Parameters field. Accepted values for the CrossAccountVersion
-    #   key are 1, 2, 3, 4 and 5.
+    #   data lake. The following key-value pairs are supported:
+    #
+    #   * `CROSS_ACCOUNT_VERSION` - Accepted values are 1, 2, 3, 4, and 5.
+    #
+    #   * `SET_SOURCE_IDENTITY` - Accepted values are `TRUE` and `FALSE`.
+    #     When set to `TRUE`, Lake Formation includes the IAM role
+    #     identifier that was used to query in the S3 data event CloudTrail
+    #     logs for `s3:GetObject` calls. For more information, see [Tracking
+    #     query engine IAM roles in S3 data events][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lake-formation/latest/dg/cloudtrail-logging.html#source-identity-cloudtrail
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] trusted_resource_owners

@@ -769,6 +769,10 @@ module Aws::MailManager
     #   you to create an IPv4-only, Dual-Stack, or PrivateLink type of ingress
     #   point. If not specified, the default network type is IPv4-only.
     #
+    # @option params [String] :tls_policy
+    #   The Transport Layer Security (TLS) policy for the ingress point. The
+    #   FIPS value is only valid in US and Canada regions.
+    #
     # @option params [Array<Types::Tag>] :tags
     #   The tags used to organize, track, or control access for the resource.
     #   For example, \{ "tags": \{"key1":"value1", "key2":"value2"}
@@ -850,12 +854,19 @@ module Aws::MailManager
     #   resp = client.create_ingress_point({
     #     client_token: "IdempotencyToken",
     #     ingress_point_name: "IngressPointName", # required
-    #     type: "OPEN", # required, accepts OPEN, AUTH
+    #     type: "OPEN", # required, accepts OPEN, AUTH, MTLS
     #     rule_set_id: "RuleSetId", # required
     #     traffic_policy_id: "TrafficPolicyId", # required
     #     ingress_point_configuration: {
     #       smtp_password: "SmtpPassword",
     #       secret_arn: "SecretArn",
+    #       tls_auth_configuration: {
+    #         trust_store: {
+    #           ca_content: "CAContent", # required
+    #           crl_content: "CrlContent",
+    #           kms_key_arn: "KmsKeyArn",
+    #         },
+    #       },
     #     },
     #     network_configuration: {
     #       public_network_configuration: {
@@ -865,6 +876,7 @@ module Aws::MailManager
     #         vpc_endpoint_id: "VpcEndpointId", # required
     #       },
     #     },
+    #     tls_policy: "REQUIRED", # accepts REQUIRED, OPTIONAL, FIPS
     #     tags: [
     #       {
     #         key: "TagKey", # required
@@ -1007,6 +1019,7 @@ module Aws::MailManager
     #                   analyzer: "AnalyzerArn", # required
     #                   result_field: "ResultField", # required
     #                 },
+    #                 client_certificate_attribute: "CN", # accepts CN, SAN_RFC822_NAME, SAN_DNS_NAME, SAN_DIRECTORY_NAME, SAN_UNIFORM_RESOURCE_IDENTIFIER, SAN_IP_ADDRESS, SAN_REGISTERED_ID, SERIAL_NUMBER
     #               },
     #               operator: "EQUALS", # required, accepts EQUALS, NOT_EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS
     #               values: ["RuleStringValue"], # required
@@ -1066,6 +1079,7 @@ module Aws::MailManager
     #                   analyzer: "AnalyzerArn", # required
     #                   result_field: "ResultField", # required
     #                 },
+    #                 client_certificate_attribute: "CN", # accepts CN, SAN_RFC822_NAME, SAN_DNS_NAME, SAN_DIRECTORY_NAME, SAN_UNIFORM_RESOURCE_IDENTIFIER, SAN_IP_ADDRESS, SAN_REGISTERED_ID, SERIAL_NUMBER
     #               },
     #               operator: "EQUALS", # required, accepts EQUALS, NOT_EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS
     #               values: ["RuleStringValue"], # required
@@ -1149,6 +1163,22 @@ module Aws::MailManager
     #               role_arn: "IamRoleArn", # required
     #               encoding: "UTF-8", # accepts UTF-8, BASE64
     #               payload_type: "HEADERS", # accepts HEADERS, CONTENT
+    #             },
+    #             bounce: {
+    #               action_failure_policy: "CONTINUE", # accepts CONTINUE, DROP
+    #               role_arn: "IamRoleArn", # required
+    #               sender: "EmailAddress", # required
+    #               status_code: "StatusCode", # required
+    #               smtp_reply_code: "SmtpReplyCode", # required
+    #               diagnostic_message: "DiagnosticMessage", # required
+    #               message: "BounceMessage",
+    #             },
+    #             invoke_lambda: {
+    #               action_failure_policy: "CONTINUE", # accepts CONTINUE, DROP
+    #               function_arn: "LambdaFunctionArn", # required
+    #               invocation_type: "EVENT", # required, accepts EVENT, REQUEST_RESPONSE
+    #               role_arn: "IamRoleArn", # required
+    #               retry_time_minutes: 1,
     #             },
     #           },
     #         ],
@@ -1993,6 +2023,10 @@ module Aws::MailManager
     # @option params [required, String] :ingress_point_id
     #   The identifier of an ingress endpoint.
     #
+    # @option params [String] :include_trust_store_contents
+    #   Whether to include the trust store contents in the response. Use
+    #   INCLUDE to retrieve trust store certificate and CRL contents.
+    #
     # @return [Types::GetIngressPointResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetIngressPointResponse#ingress_point_id #ingress_point_id} => String
@@ -2005,6 +2039,7 @@ module Aws::MailManager
     #   * {Types::GetIngressPointResponse#traffic_policy_id #traffic_policy_id} => String
     #   * {Types::GetIngressPointResponse#ingress_point_auth_configuration #ingress_point_auth_configuration} => Types::IngressPointAuthConfiguration
     #   * {Types::GetIngressPointResponse#network_configuration #network_configuration} => Types::NetworkConfiguration
+    #   * {Types::GetIngressPointResponse#tls_policy #tls_policy} => String
     #   * {Types::GetIngressPointResponse#created_timestamp #created_timestamp} => Time
     #   * {Types::GetIngressPointResponse#last_updated_timestamp #last_updated_timestamp} => Time
     #
@@ -2048,6 +2083,7 @@ module Aws::MailManager
     #
     #   resp = client.get_ingress_point({
     #     ingress_point_id: "IngressPointId", # required
+    #     include_trust_store_contents: "EXCLUDE", # accepts EXCLUDE, INCLUDE
     #   })
     #
     # @example Response structure
@@ -2055,8 +2091,8 @@ module Aws::MailManager
     #   resp.ingress_point_id #=> String
     #   resp.ingress_point_name #=> String
     #   resp.ingress_point_arn #=> String
-    #   resp.status #=> String, one of "PROVISIONING", "DEPROVISIONING", "UPDATING", "ACTIVE", "CLOSED", "FAILED"
-    #   resp.type #=> String, one of "OPEN", "AUTH"
+    #   resp.status #=> String, one of "PROVISIONING", "DEPROVISIONING", "UPDATING", "ACTIVE", "CLOSED", "FAILED", "ASSOCIATED_VPC_ENDPOINT_DOES_NOT_EXIST"
+    #   resp.type #=> String, one of "OPEN", "AUTH", "MTLS"
     #   resp.a_record #=> String
     #   resp.rule_set_id #=> String
     #   resp.traffic_policy_id #=> String
@@ -2064,8 +2100,12 @@ module Aws::MailManager
     #   resp.ingress_point_auth_configuration.ingress_point_password_configuration.previous_smtp_password_version #=> String
     #   resp.ingress_point_auth_configuration.ingress_point_password_configuration.previous_smtp_password_expiry_timestamp #=> Time
     #   resp.ingress_point_auth_configuration.secret_arn #=> String
+    #   resp.ingress_point_auth_configuration.tls_auth_configuration.trust_store.ca_content #=> String
+    #   resp.ingress_point_auth_configuration.tls_auth_configuration.trust_store.crl_content #=> String
+    #   resp.ingress_point_auth_configuration.tls_auth_configuration.trust_store.kms_key_arn #=> String
     #   resp.network_configuration.public_network_configuration.ip_type #=> String, one of "IPV4", "DUAL_STACK"
     #   resp.network_configuration.private_network_configuration.vpc_endpoint_id #=> String
+    #   resp.tls_policy #=> String, one of "REQUIRED", "OPTIONAL", "FIPS"
     #   resp.created_timestamp #=> Time
     #   resp.last_updated_timestamp #=> Time
     #
@@ -2196,6 +2236,7 @@ module Aws::MailManager
     #   resp.rules[0].conditions[0].string_expression.evaluate.mime_header_attribute #=> String
     #   resp.rules[0].conditions[0].string_expression.evaluate.analysis.analyzer #=> String
     #   resp.rules[0].conditions[0].string_expression.evaluate.analysis.result_field #=> String
+    #   resp.rules[0].conditions[0].string_expression.evaluate.client_certificate_attribute #=> String, one of "CN", "SAN_RFC822_NAME", "SAN_DNS_NAME", "SAN_DIRECTORY_NAME", "SAN_UNIFORM_RESOURCE_IDENTIFIER", "SAN_IP_ADDRESS", "SAN_REGISTERED_ID", "SERIAL_NUMBER"
     #   resp.rules[0].conditions[0].string_expression.operator #=> String, one of "EQUALS", "NOT_EQUALS", "STARTS_WITH", "ENDS_WITH", "CONTAINS"
     #   resp.rules[0].conditions[0].string_expression.values #=> Array
     #   resp.rules[0].conditions[0].string_expression.values[0] #=> String
@@ -2227,6 +2268,7 @@ module Aws::MailManager
     #   resp.rules[0].unless[0].string_expression.evaluate.mime_header_attribute #=> String
     #   resp.rules[0].unless[0].string_expression.evaluate.analysis.analyzer #=> String
     #   resp.rules[0].unless[0].string_expression.evaluate.analysis.result_field #=> String
+    #   resp.rules[0].unless[0].string_expression.evaluate.client_certificate_attribute #=> String, one of "CN", "SAN_RFC822_NAME", "SAN_DNS_NAME", "SAN_DIRECTORY_NAME", "SAN_UNIFORM_RESOURCE_IDENTIFIER", "SAN_IP_ADDRESS", "SAN_REGISTERED_ID", "SERIAL_NUMBER"
     #   resp.rules[0].unless[0].string_expression.operator #=> String, one of "EQUALS", "NOT_EQUALS", "STARTS_WITH", "ENDS_WITH", "CONTAINS"
     #   resp.rules[0].unless[0].string_expression.values #=> Array
     #   resp.rules[0].unless[0].string_expression.values[0] #=> String
@@ -2275,6 +2317,18 @@ module Aws::MailManager
     #   resp.rules[0].actions[0].publish_to_sns.role_arn #=> String
     #   resp.rules[0].actions[0].publish_to_sns.encoding #=> String, one of "UTF-8", "BASE64"
     #   resp.rules[0].actions[0].publish_to_sns.payload_type #=> String, one of "HEADERS", "CONTENT"
+    #   resp.rules[0].actions[0].bounce.action_failure_policy #=> String, one of "CONTINUE", "DROP"
+    #   resp.rules[0].actions[0].bounce.role_arn #=> String
+    #   resp.rules[0].actions[0].bounce.sender #=> String
+    #   resp.rules[0].actions[0].bounce.status_code #=> String
+    #   resp.rules[0].actions[0].bounce.smtp_reply_code #=> String
+    #   resp.rules[0].actions[0].bounce.diagnostic_message #=> String
+    #   resp.rules[0].actions[0].bounce.message #=> String
+    #   resp.rules[0].actions[0].invoke_lambda.action_failure_policy #=> String, one of "CONTINUE", "DROP"
+    #   resp.rules[0].actions[0].invoke_lambda.function_arn #=> String
+    #   resp.rules[0].actions[0].invoke_lambda.invocation_type #=> String, one of "EVENT", "REQUEST_RESPONSE"
+    #   resp.rules[0].actions[0].invoke_lambda.role_arn #=> String
+    #   resp.rules[0].actions[0].invoke_lambda.retry_time_minutes #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mailmanager-2023-10-17/GetRuleSet AWS API Documentation
     #
@@ -2800,8 +2854,8 @@ module Aws::MailManager
     #   resp.ingress_points #=> Array
     #   resp.ingress_points[0].ingress_point_name #=> String
     #   resp.ingress_points[0].ingress_point_id #=> String
-    #   resp.ingress_points[0].status #=> String, one of "PROVISIONING", "DEPROVISIONING", "UPDATING", "ACTIVE", "CLOSED", "FAILED"
-    #   resp.ingress_points[0].type #=> String, one of "OPEN", "AUTH"
+    #   resp.ingress_points[0].status #=> String, one of "PROVISIONING", "DEPROVISIONING", "UPDATING", "ACTIVE", "CLOSED", "FAILED", "ASSOCIATED_VPC_ENDPOINT_DOES_NOT_EXIST"
+    #   resp.ingress_points[0].type #=> String, one of "OPEN", "AUTH", "MTLS"
     #   resp.ingress_points[0].a_record #=> String
     #   resp.next_token #=> String
     #
@@ -3471,6 +3525,11 @@ module Aws::MailManager
     #   If you choose an Authenticated ingress endpoint, you must configure
     #   either an SMTP password or a secret ARN.
     #
+    # @option params [String] :tls_policy
+    #   The Transport Layer Security (TLS) policy for the ingress point. Valid
+    #   values are REQUIRED, OPTIONAL. Only ingress endpoints using REQUIRED
+    #   or OPTIONAL as TlsPolicy can be updated.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     #
@@ -3534,7 +3593,15 @@ module Aws::MailManager
     #     ingress_point_configuration: {
     #       smtp_password: "SmtpPassword",
     #       secret_arn: "SecretArn",
+    #       tls_auth_configuration: {
+    #         trust_store: {
+    #           ca_content: "CAContent", # required
+    #           crl_content: "CrlContent",
+    #           kms_key_arn: "KmsKeyArn",
+    #         },
+    #       },
     #     },
+    #     tls_policy: "REQUIRED", # accepts REQUIRED, OPTIONAL, FIPS
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mailmanager-2023-10-17/UpdateIngressPoint AWS API Documentation
@@ -3635,6 +3702,7 @@ module Aws::MailManager
     #                   analyzer: "AnalyzerArn", # required
     #                   result_field: "ResultField", # required
     #                 },
+    #                 client_certificate_attribute: "CN", # accepts CN, SAN_RFC822_NAME, SAN_DNS_NAME, SAN_DIRECTORY_NAME, SAN_UNIFORM_RESOURCE_IDENTIFIER, SAN_IP_ADDRESS, SAN_REGISTERED_ID, SERIAL_NUMBER
     #               },
     #               operator: "EQUALS", # required, accepts EQUALS, NOT_EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS
     #               values: ["RuleStringValue"], # required
@@ -3694,6 +3762,7 @@ module Aws::MailManager
     #                   analyzer: "AnalyzerArn", # required
     #                   result_field: "ResultField", # required
     #                 },
+    #                 client_certificate_attribute: "CN", # accepts CN, SAN_RFC822_NAME, SAN_DNS_NAME, SAN_DIRECTORY_NAME, SAN_UNIFORM_RESOURCE_IDENTIFIER, SAN_IP_ADDRESS, SAN_REGISTERED_ID, SERIAL_NUMBER
     #               },
     #               operator: "EQUALS", # required, accepts EQUALS, NOT_EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS
     #               values: ["RuleStringValue"], # required
@@ -3777,6 +3846,22 @@ module Aws::MailManager
     #               role_arn: "IamRoleArn", # required
     #               encoding: "UTF-8", # accepts UTF-8, BASE64
     #               payload_type: "HEADERS", # accepts HEADERS, CONTENT
+    #             },
+    #             bounce: {
+    #               action_failure_policy: "CONTINUE", # accepts CONTINUE, DROP
+    #               role_arn: "IamRoleArn", # required
+    #               sender: "EmailAddress", # required
+    #               status_code: "StatusCode", # required
+    #               smtp_reply_code: "SmtpReplyCode", # required
+    #               diagnostic_message: "DiagnosticMessage", # required
+    #               message: "BounceMessage",
+    #             },
+    #             invoke_lambda: {
+    #               action_failure_policy: "CONTINUE", # accepts CONTINUE, DROP
+    #               function_arn: "LambdaFunctionArn", # required
+    #               invocation_type: "EVENT", # required, accepts EVENT, REQUEST_RESPONSE
+    #               role_arn: "IamRoleArn", # required
+    #               retry_time_minutes: 1,
     #             },
     #           },
     #         ],
@@ -3957,7 +4042,7 @@ module Aws::MailManager
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-mailmanager'
-      context[:gem_version] = '1.39.0'
+      context[:gem_version] = '1.41.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

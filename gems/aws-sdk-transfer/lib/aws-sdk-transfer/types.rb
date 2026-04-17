@@ -730,6 +730,13 @@ module Aws::Transfer
     #   VPC\_LATTICE for private connectivity.
     #   @return [Types::ConnectorEgressConfig]
     #
+    # @!attribute [rw] ip_address_type
+    #   Specifies the IP address type for the connector's network
+    #   connections. When set to `IPV4`, the connector uses IPv4 addresses
+    #   only. When set to `DUALSTACK`, the connector supports both IPv4 and
+    #   IPv6 addresses, with IPv6 preferred when available.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/CreateConnectorRequest AWS API Documentation
     #
     class CreateConnectorRequest < Struct.new(
@@ -740,7 +747,8 @@ module Aws::Transfer
       :tags,
       :sftp_config,
       :security_policy_name,
-      :egress_config)
+      :egress_config,
+      :ip_address_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2756,6 +2764,13 @@ module Aws::Transfer
     #   indicates a failure requiring attention.
     #   @return [String]
     #
+    # @!attribute [rw] ip_address_type
+    #   IP address type for the connector's network connections. When set
+    #   to `IPV4`, the connector uses IPv4 addresses only. When set to
+    #   `DUALSTACK`, the connector supports both IPv4 and IPv6 addresses,
+    #   with IPv6 preferred when available.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/DescribedConnector AWS API Documentation
     #
     class DescribedConnector < Struct.new(
@@ -2772,7 +2787,8 @@ module Aws::Transfer
       :egress_config,
       :egress_type,
       :error_message,
-      :status)
+      :status,
+      :ip_address_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7138,6 +7154,13 @@ module Aws::Transfer
     #   Changes to VPC configuration may require connector restart.
     #   @return [Types::UpdateConnectorEgressConfig]
     #
+    # @!attribute [rw] ip_address_type
+    #   Specifies the IP address type for the connector's network
+    #   connections. When set to `IPV4`, the connector uses IPv4 addresses
+    #   only. When set to `DUALSTACK`, the connector supports both IPv4 and
+    #   IPv6 addresses, with IPv6 preferred when available.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/UpdateConnectorRequest AWS API Documentation
     #
     class UpdateConnectorRequest < Struct.new(
@@ -7148,7 +7171,8 @@ module Aws::Transfer
       :logging_role,
       :sftp_config,
       :security_policy_name,
-      :egress_config)
+      :egress_config,
+      :ip_address_type)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -535,6 +535,63 @@ module Aws::BedrockDataAutomation
       include Aws::Structure
     end
 
+    # Create DataAutomationLibrary Request
+    #
+    # @!attribute [rw] library_name
+    #   Name of the DataAutomationLibrary
+    #   @return [String]
+    #
+    # @!attribute [rw] library_description
+    #   Description of the DataAutomationLibrary
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   Client specified token used for idempotency checks
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] encryption_configuration
+    #   KMS Encryption Configuration
+    #   @return [Types::EncryptionConfiguration]
+    #
+    # @!attribute [rw] tags
+    #   List of tags
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-data-automation-2023-07-26/CreateDataAutomationLibraryRequest AWS API Documentation
+    #
+    class CreateDataAutomationLibraryRequest < Struct.new(
+      :library_name,
+      :library_description,
+      :client_token,
+      :encryption_configuration,
+      :tags)
+      SENSITIVE = [:library_name, :library_description]
+      include Aws::Structure
+    end
+
+    # Create DataAutomationLibrary Response
+    #
+    # @!attribute [rw] library_arn
+    #   ARN generated at the server side when a DataAutomationLibrary is
+    #   created
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   Status of DataAutomationLibrary
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-data-automation-2023-07-26/CreateDataAutomationLibraryResponse AWS API Documentation
+    #
+    class CreateDataAutomationLibraryResponse < Struct.new(
+      :library_arn,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Create DataAutomationProject Request
     #
     # @!attribute [rw] project_name
@@ -565,6 +622,10 @@ module Aws::BedrockDataAutomation
     #   Override configuration
     #   @return [Types::OverrideConfiguration]
     #
+    # @!attribute [rw] data_automation_library_configuration
+    #   DataAutomation Library configuration
+    #   @return [Types::DataAutomationLibraryConfiguration]
+    #
     # @!attribute [rw] client_token
     #   Client specified token used for idempotency checks
     #
@@ -590,6 +651,7 @@ module Aws::BedrockDataAutomation
       :standard_output_configuration,
       :custom_output_configuration,
       :override_configuration,
+      :data_automation_library_configuration,
       :client_token,
       :encryption_configuration,
       :tags)
@@ -635,6 +697,239 @@ module Aws::BedrockDataAutomation
       include Aws::Structure
     end
 
+    # Contains the information of a DataAutomationLibrary.
+    #
+    # @!attribute [rw] library_arn
+    #   ARN generated at the server side when a DataAutomationLibrary is
+    #   created
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   Time Stamp
+    #   @return [Time]
+    #
+    # @!attribute [rw] library_name
+    #   Name of the DataAutomationLibrary
+    #   @return [String]
+    #
+    # @!attribute [rw] library_description
+    #   Description of the DataAutomationLibrary
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   Status of DataAutomationLibrary
+    #   @return [String]
+    #
+    # @!attribute [rw] entity_types
+    #   List of info for each entity type in the DataAutomationLibrary
+    #   @return [Array<Types::EntityTypeInfo>]
+    #
+    # @!attribute [rw] kms_key_id
+    #   KMS Key Identifier
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_encryption_context
+    #   KMS Encryption Context
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-data-automation-2023-07-26/DataAutomationLibrary AWS API Documentation
+    #
+    class DataAutomationLibrary < Struct.new(
+      :library_arn,
+      :creation_time,
+      :library_name,
+      :library_description,
+      :status,
+      :entity_types,
+      :kms_key_id,
+      :kms_encryption_context)
+      SENSITIVE = [:library_name, :library_description]
+      include Aws::Structure
+    end
+
+    # DataAutomation Library configuration
+    #
+    # @!attribute [rw] libraries
+    #   List of DataAutomationLibrary Items
+    #   @return [Array<Types::DataAutomationLibraryItem>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-data-automation-2023-07-26/DataAutomationLibraryConfiguration AWS API Documentation
+    #
+    class DataAutomationLibraryConfiguration < Struct.new(
+      :libraries)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Summarized information about an entity
+    #
+    # @note DataAutomationLibraryEntitySummary is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of DataAutomationLibraryEntitySummary corresponding to the set member.
+    #
+    # @!attribute [rw] vocabulary
+    #   Summary of a Vocabulary entity
+    #   @return [Types::VocabularyEntitySummary]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-data-automation-2023-07-26/DataAutomationLibraryEntitySummary AWS API Documentation
+    #
+    class DataAutomationLibraryEntitySummary < Struct.new(
+      :vocabulary,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Vocabulary < DataAutomationLibraryEntitySummary; end
+      class Unknown < DataAutomationLibraryEntitySummary; end
+    end
+
+    # Data Automation Library Filter
+    #
+    # @!attribute [rw] library_arn
+    #   ARN generated at the server side when a DataAutomationLibrary is
+    #   created
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-data-automation-2023-07-26/DataAutomationLibraryFilter AWS API Documentation
+    #
+    class DataAutomationLibraryFilter < Struct.new(
+      :library_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the information of a DataAutomationLibraryIngestionJob
+    #
+    # @!attribute [rw] job_arn
+    #   ARN of the DataAutomationLibraryIngestionJob
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   Timestamp when the DataAutomationLibraryIngestionJob was created
+    #   @return [Time]
+    #
+    # @!attribute [rw] entity_type
+    #   The entity type associated with DataAutomationLibraryIngestionJob
+    #   @return [String]
+    #
+    # @!attribute [rw] operation_type
+    #   The operation associated with DataAutomationLibraryIngestionJob
+    #   @return [String]
+    #
+    # @!attribute [rw] job_status
+    #   The status of the DataAutomationLibraryIngestionJob
+    #   @return [String]
+    #
+    # @!attribute [rw] output_configuration
+    #   Output configuration of DataAutomationLibraryIngestionJob
+    #   @return [Types::OutputConfiguration]
+    #
+    # @!attribute [rw] completion_time
+    #   Timestamp when the DataAutomationLibraryIngestionJob was completed
+    #   @return [Time]
+    #
+    # @!attribute [rw] error_message
+    #   Error message
+    #   @return [String]
+    #
+    # @!attribute [rw] error_type
+    #   Error type
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-data-automation-2023-07-26/DataAutomationLibraryIngestionJob AWS API Documentation
+    #
+    class DataAutomationLibraryIngestionJob < Struct.new(
+      :job_arn,
+      :creation_time,
+      :entity_type,
+      :operation_type,
+      :job_status,
+      :output_configuration,
+      :completion_time,
+      :error_message,
+      :error_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Summary of a DataAutomationLibraryIngestionJob
+    #
+    # @!attribute [rw] job_arn
+    #   ARN of the DataAutomationLibraryIngestionJob
+    #   @return [String]
+    #
+    # @!attribute [rw] job_status
+    #   Status of DataAutomationLibraryIngestionJob
+    #   @return [String]
+    #
+    # @!attribute [rw] entity_type
+    #   Entity types supported in DataAutomationLibraries
+    #   @return [String]
+    #
+    # @!attribute [rw] operation_type
+    #   DataAutomationLibraryIngestionJob operation type
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   Time Stamp
+    #   @return [Time]
+    #
+    # @!attribute [rw] completion_time
+    #   Time Stamp
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-data-automation-2023-07-26/DataAutomationLibraryIngestionJobSummary AWS API Documentation
+    #
+    class DataAutomationLibraryIngestionJobSummary < Struct.new(
+      :job_arn,
+      :job_status,
+      :entity_type,
+      :operation_type,
+      :creation_time,
+      :completion_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # DataAutomationLibrary Item
+    #
+    # @!attribute [rw] library_arn
+    #   ARN generated at the server side when a DataAutomationLibrary is
+    #   created
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-data-automation-2023-07-26/DataAutomationLibraryItem AWS API Documentation
+    #
+    class DataAutomationLibraryItem < Struct.new(
+      :library_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Summary of a DataAutomationLibrary
+    #
+    # @!attribute [rw] library_arn
+    #   ARN generated at the server side when a DataAutomationLibrary is
+    #   created
+    #   @return [String]
+    #
+    # @!attribute [rw] library_name
+    #   Name of the DataAutomationLibrary
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   Time Stamp
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-data-automation-2023-07-26/DataAutomationLibrarySummary AWS API Documentation
+    #
+    class DataAutomationLibrarySummary < Struct.new(
+      :library_arn,
+      :library_name,
+      :creation_time)
+      SENSITIVE = [:library_name]
+      include Aws::Structure
+    end
+
     # Contains the information of a DataAutomationProject.
     #
     # @!attribute [rw] project_arn
@@ -677,6 +972,10 @@ module Aws::BedrockDataAutomation
     #   Override configuration
     #   @return [Types::OverrideConfiguration]
     #
+    # @!attribute [rw] data_automation_library_configuration
+    #   DataAutomation Library configuration
+    #   @return [Types::DataAutomationLibraryConfiguration]
+    #
     # @!attribute [rw] status
     #   Status of Data Automation Project
     #   @return [String]
@@ -702,6 +1001,7 @@ module Aws::BedrockDataAutomation
       :standard_output_configuration,
       :custom_output_configuration,
       :override_configuration,
+      :data_automation_library_configuration,
       :status,
       :kms_key_id,
       :kms_encryption_context)
@@ -787,6 +1087,41 @@ module Aws::BedrockDataAutomation
     #
     class DeleteBlueprintResponse < Aws::EmptyStructure; end
 
+    # Delete DataAutomationLibrary Request
+    #
+    # @!attribute [rw] library_arn
+    #   ARN generated at the server side when a DataAutomationLibrary is
+    #   created
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-data-automation-2023-07-26/DeleteDataAutomationLibraryRequest AWS API Documentation
+    #
+    class DeleteDataAutomationLibraryRequest < Struct.new(
+      :library_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Delete DataAutomationLibrary Response
+    #
+    # @!attribute [rw] library_arn
+    #   ARN generated at the server side when a DataAutomationLibrary is
+    #   created
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   Status of DataAutomationLibrary
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-data-automation-2023-07-26/DeleteDataAutomationLibraryResponse AWS API Documentation
+    #
+    class DeleteDataAutomationLibraryResponse < Struct.new(
+      :library_arn,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Delete DataAutomationProject Request
     #
     # @!attribute [rw] project_arn
@@ -817,6 +1152,20 @@ module Aws::BedrockDataAutomation
     class DeleteDataAutomationProjectResponse < Struct.new(
       :project_arn,
       :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Input for entities needed to be deleted
+    #
+    # @!attribute [rw] entity_ids
+    #   List of EntityId
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-data-automation-2023-07-26/DeleteEntitiesInfo AWS API Documentation
+    #
+    class DeleteEntitiesInfo < Struct.new(
+      :entity_ids)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -996,6 +1345,60 @@ module Aws::BedrockDataAutomation
       include Aws::Structure
     end
 
+    # Detailed information about an entity
+    #
+    # @note EntityDetails is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of EntityDetails corresponding to the set member.
+    #
+    # @!attribute [rw] vocabulary
+    #   Vocabulary entity with detailed information
+    #   @return [Types::VocabularyEntity]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-data-automation-2023-07-26/EntityDetails AWS API Documentation
+    #
+    class EntityDetails < Struct.new(
+      :vocabulary,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Vocabulary < EntityDetails; end
+      class Unknown < EntityDetails; end
+    end
+
+    # Information about an entity type in the DataAutomationLibrary
+    #
+    # @!attribute [rw] entity_type
+    #   Entity types supported in DataAutomationLibraries
+    #   @return [String]
+    #
+    # @!attribute [rw] entity_metadata
+    #   JSON string representing relevant metadata for the entity type
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-data-automation-2023-07-26/EntityTypeInfo AWS API Documentation
+    #
+    class EntityTypeInfo < Struct.new(
+      :entity_type,
+      :entity_metadata)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Event bridge configuration.
+    #
+    # @!attribute [rw] event_bridge_enabled
+    #   Event bridge flag.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-data-automation-2023-07-26/EventBridgeConfiguration AWS API Documentation
+    #
+    class EventBridgeConfiguration < Struct.new(
+      :event_bridge_enabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Structure for request of GetBlueprintOptimizationStatus API.
     #
     # @!attribute [rw] invocation_arn
@@ -1073,6 +1476,108 @@ module Aws::BedrockDataAutomation
     #
     class GetBlueprintResponse < Struct.new(
       :blueprint)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Get DataAutomationLibraryEntity Request
+    #
+    # @!attribute [rw] library_arn
+    #   ARN generated at the server side when a DataAutomationLibrary is
+    #   created
+    #   @return [String]
+    #
+    # @!attribute [rw] entity_type
+    #   The entity type for which the entity is requested
+    #   @return [String]
+    #
+    # @!attribute [rw] entity_id
+    #   Unique identifier for the entity
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-data-automation-2023-07-26/GetDataAutomationLibraryEntityRequest AWS API Documentation
+    #
+    class GetDataAutomationLibraryEntityRequest < Struct.new(
+      :library_arn,
+      :entity_type,
+      :entity_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Get DataAutomationLibraryEntity Response
+    #
+    # @!attribute [rw] entity
+    #   Detailed information about the entity
+    #   @return [Types::EntityDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-data-automation-2023-07-26/GetDataAutomationLibraryEntityResponse AWS API Documentation
+    #
+    class GetDataAutomationLibraryEntityResponse < Struct.new(
+      :entity)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Get DataAutomationLibraryIngestionJob Request
+    #
+    # @!attribute [rw] library_arn
+    #   ARN generated at the server side when a DataAutomationLibrary is
+    #   created
+    #   @return [String]
+    #
+    # @!attribute [rw] job_arn
+    #   ARN of the DataAutomationLibraryIngestionJob
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-data-automation-2023-07-26/GetDataAutomationLibraryIngestionJobRequest AWS API Documentation
+    #
+    class GetDataAutomationLibraryIngestionJobRequest < Struct.new(
+      :library_arn,
+      :job_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Get DataAutomationLibraryIngestionJob Response
+    #
+    # @!attribute [rw] job
+    #   Contains the information of a library ingestion job
+    #   @return [Types::DataAutomationLibraryIngestionJob]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-data-automation-2023-07-26/GetDataAutomationLibraryIngestionJobResponse AWS API Documentation
+    #
+    class GetDataAutomationLibraryIngestionJobResponse < Struct.new(
+      :job)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Get DataAutomationLibrary Request
+    #
+    # @!attribute [rw] library_arn
+    #   ARN generated at the server side when a DataAutomationLibrary is
+    #   created
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-data-automation-2023-07-26/GetDataAutomationLibraryRequest AWS API Documentation
+    #
+    class GetDataAutomationLibraryRequest < Struct.new(
+      :library_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Get DataAutomationLibrary Response
+    #
+    # @!attribute [rw] library
+    #   Contains the information of a DataAutomationLibrary.
+    #   @return [Types::DataAutomationLibrary]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-data-automation-2023-07-26/GetDataAutomationLibraryResponse AWS API Documentation
+    #
+    class GetDataAutomationLibraryResponse < Struct.new(
+      :library)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1220,6 +1725,53 @@ module Aws::BedrockDataAutomation
       include Aws::Structure
     end
 
+    # Input payload structure definition
+    #
+    # @note InlinePayload is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @!attribute [rw] upsert_entities_info
+    #   List of UpsertEntityInfo for upserting data in a
+    #   DataAutomationLibraryIngestionJob
+    #   @return [Array<Types::UpsertEntityInfo>]
+    #
+    # @!attribute [rw] delete_entities_info
+    #   Input for entities needed to be deleted
+    #   @return [Types::DeleteEntitiesInfo]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-data-automation-2023-07-26/InlinePayload AWS API Documentation
+    #
+    class InlinePayload < Struct.new(
+      :upsert_entities_info,
+      :delete_entities_info,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class UpsertEntitiesInfo < InlinePayload; end
+      class DeleteEntitiesInfo < InlinePayload; end
+      class Unknown < InlinePayload; end
+    end
+
+    # Input configuration for DataAutomationLibraryIngestionJob
+    #
+    # @!attribute [rw] s3_object
+    #   S3 object
+    #   @return [Types::S3Object]
+    #
+    # @!attribute [rw] inline_payload
+    #   Input Payload
+    #   @return [Types::InlinePayload]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-data-automation-2023-07-26/InputConfiguration AWS API Documentation
+    #
+    class InputConfiguration < Struct.new(
+      :s3_object,
+      :inline_payload)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # This exception is thrown if there was an unexpected error during
     # processing of request
     #
@@ -1288,6 +1840,74 @@ module Aws::BedrockDataAutomation
       include Aws::Structure
     end
 
+    # Invoke DataAutomationLibraryIngestionJob Request
+    #
+    # @!attribute [rw] library_arn
+    #   ARN generated at the server side when a DataAutomationLibrary is
+    #   created
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   Idempotency token
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] input_configuration
+    #   Input configuration of DataAutomationLibraryIngestionJob request
+    #   @return [Types::InputConfiguration]
+    #
+    # @!attribute [rw] entity_type
+    #   The entity type for which DataAutomationLibraryIngestionJob is being
+    #   run
+    #   @return [String]
+    #
+    # @!attribute [rw] operation_type
+    #   The operation to be performed by DataAutomationLibraryIngestionJob
+    #   @return [String]
+    #
+    # @!attribute [rw] output_configuration
+    #   Output configuration of DataAutomationLibraryIngestionJob
+    #   @return [Types::OutputConfiguration]
+    #
+    # @!attribute [rw] notification_configuration
+    #   Notification configuration.
+    #   @return [Types::NotificationConfiguration]
+    #
+    # @!attribute [rw] tags
+    #   List of tags
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-data-automation-2023-07-26/InvokeDataAutomationLibraryIngestionJobRequest AWS API Documentation
+    #
+    class InvokeDataAutomationLibraryIngestionJobRequest < Struct.new(
+      :library_arn,
+      :client_token,
+      :input_configuration,
+      :entity_type,
+      :operation_type,
+      :output_configuration,
+      :notification_configuration,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Invoke DataAutomationLibraryIngestionJob Response
+    #
+    # @!attribute [rw] job_arn
+    #   ARN of the DataAutomationLibraryIngestionJob
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-data-automation-2023-07-26/InvokeDataAutomationLibraryIngestionJobResponse AWS API Documentation
+    #
+    class InvokeDataAutomationLibraryIngestionJobResponse < Struct.new(
+      :job_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # List Blueprint Request
     #
     # @!attribute [rw] blueprint_arn
@@ -1346,6 +1966,142 @@ module Aws::BedrockDataAutomation
       include Aws::Structure
     end
 
+    # List DataAutomationLibraries Request
+    #
+    # @!attribute [rw] max_results
+    #   Max Results
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   Pagination token
+    #   @return [String]
+    #
+    # @!attribute [rw] project_filter
+    #   Data Automation Project Filter
+    #   @return [Types::DataAutomationProjectFilter]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-data-automation-2023-07-26/ListDataAutomationLibrariesRequest AWS API Documentation
+    #
+    class ListDataAutomationLibrariesRequest < Struct.new(
+      :max_results,
+      :next_token,
+      :project_filter)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # List DataAutomationLibraries Response
+    #
+    # @!attribute [rw] libraries
+    #   List of DataAutomationLibrarySummary objects
+    #   @return [Array<Types::DataAutomationLibrarySummary>]
+    #
+    # @!attribute [rw] next_token
+    #   Pagination token
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-data-automation-2023-07-26/ListDataAutomationLibrariesResponse AWS API Documentation
+    #
+    class ListDataAutomationLibrariesResponse < Struct.new(
+      :libraries,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # List DataAutomationLibraryEntities Request
+    #
+    # @!attribute [rw] library_arn
+    #   ARN generated at the server side when a DataAutomationLibrary is
+    #   created
+    #   @return [String]
+    #
+    # @!attribute [rw] entity_type
+    #   The entity type for which the entity list is requested
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   Max Results
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   Pagination token for retrieving the next set of results
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-data-automation-2023-07-26/ListDataAutomationLibraryEntitiesRequest AWS API Documentation
+    #
+    class ListDataAutomationLibraryEntitiesRequest < Struct.new(
+      :library_arn,
+      :entity_type,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # List DataAutomationLibraryEntities Response
+    #
+    # @!attribute [rw] entities
+    #   List of entities
+    #   @return [Array<Types::DataAutomationLibraryEntitySummary>]
+    #
+    # @!attribute [rw] next_token
+    #   Pagination token for retrieving the next set of results
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-data-automation-2023-07-26/ListDataAutomationLibraryEntitiesResponse AWS API Documentation
+    #
+    class ListDataAutomationLibraryEntitiesResponse < Struct.new(
+      :entities,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # List DataAutomationLibraryIngestionJobs Request
+    #
+    # @!attribute [rw] library_arn
+    #   ARN generated at the server side when a DataAutomationLibrary is
+    #   created
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   Max Results
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   Pagination token for retrieving the next set of results
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-data-automation-2023-07-26/ListDataAutomationLibraryIngestionJobsRequest AWS API Documentation
+    #
+    class ListDataAutomationLibraryIngestionJobsRequest < Struct.new(
+      :library_arn,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # List DataAutomationLibraryIngestionJobs Response
+    #
+    # @!attribute [rw] jobs
+    #   List of data automation library ingestion jobs
+    #   @return [Array<Types::DataAutomationLibraryIngestionJobSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   Pagination token for retrieving the next set of results
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-data-automation-2023-07-26/ListDataAutomationLibraryIngestionJobsResponse AWS API Documentation
+    #
+    class ListDataAutomationLibraryIngestionJobsResponse < Struct.new(
+      :jobs,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # List DataAutomationProject Request
     #
     # @!attribute [rw] max_results
@@ -1368,6 +2124,10 @@ module Aws::BedrockDataAutomation
     #   Resource Owner
     #   @return [String]
     #
+    # @!attribute [rw] library_filter
+    #   Data Automation Library Filter
+    #   @return [Types::DataAutomationLibraryFilter]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-data-automation-2023-07-26/ListDataAutomationProjectsRequest AWS API Documentation
     #
     class ListDataAutomationProjectsRequest < Struct.new(
@@ -1375,7 +2135,8 @@ module Aws::BedrockDataAutomation
       :next_token,
       :project_stage_filter,
       :blueprint_filter,
-      :resource_owner)
+      :resource_owner,
+      :library_filter)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1466,6 +2227,34 @@ module Aws::BedrockDataAutomation
       include Aws::Structure
     end
 
+    # Notification configuration.
+    #
+    # @!attribute [rw] event_bridge_configuration
+    #   Event bridge configuration.
+    #   @return [Types::EventBridgeConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-data-automation-2023-07-26/NotificationConfiguration AWS API Documentation
+    #
+    class NotificationConfiguration < Struct.new(
+      :event_bridge_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Output configuration for DataAutomationLibraryIngestionJob
+    #
+    # @!attribute [rw] s3_uri
+    #   S3 Uri
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-data-automation-2023-07-26/OutputConfiguration AWS API Documentation
+    #
+    class OutputConfiguration < Struct.new(
+      :s3_uri)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Override configuration
     #
     # @!attribute [rw] document
@@ -1516,6 +2305,25 @@ module Aws::BedrockDataAutomation
       :pii_entity_types,
       :redaction_mask_mode)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Phrase structure for vocabulary
+    #
+    # @!attribute [rw] text
+    #   Text content of the phrase
+    #   @return [String]
+    #
+    # @!attribute [rw] display_as_text
+    #   Text to configure how phrase is displayed in Transcript
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-data-automation-2023-07-26/Phrase AWS API Documentation
+    #
+    class Phrase < Struct.new(
+      :text,
+      :display_as_text)
+      SENSITIVE = [:text, :display_as_text]
       include Aws::Structure
     end
 
@@ -1787,6 +2595,54 @@ module Aws::BedrockDataAutomation
       include Aws::Structure
     end
 
+    # Update DataAutomationLibrary Request
+    #
+    # @!attribute [rw] library_arn
+    #   ARN generated at the server side when a DataAutomationLibrary is
+    #   created
+    #   @return [String]
+    #
+    # @!attribute [rw] library_description
+    #   Description of the DataAutomationLibrary
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   Client specified token used for idempotency checks
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-data-automation-2023-07-26/UpdateDataAutomationLibraryRequest AWS API Documentation
+    #
+    class UpdateDataAutomationLibraryRequest < Struct.new(
+      :library_arn,
+      :library_description,
+      :client_token)
+      SENSITIVE = [:library_description]
+      include Aws::Structure
+    end
+
+    # Update DataAutomationLibrary Response
+    #
+    # @!attribute [rw] library_arn
+    #   ARN generated at the server side when a DataAutomationLibrary is
+    #   created
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   Status of DataAutomationLibrary
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-data-automation-2023-07-26/UpdateDataAutomationLibraryResponse AWS API Documentation
+    #
+    class UpdateDataAutomationLibraryResponse < Struct.new(
+      :library_arn,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Update DataAutomationProject Request
     #
     # @!attribute [rw] project_arn
@@ -1814,6 +2670,10 @@ module Aws::BedrockDataAutomation
     #   Override configuration
     #   @return [Types::OverrideConfiguration]
     #
+    # @!attribute [rw] data_automation_library_configuration
+    #   DataAutomation Library configuration
+    #   @return [Types::DataAutomationLibraryConfiguration]
+    #
     # @!attribute [rw] encryption_configuration
     #   KMS Encryption Configuration
     #   @return [Types::EncryptionConfiguration]
@@ -1827,6 +2687,7 @@ module Aws::BedrockDataAutomation
       :standard_output_configuration,
       :custom_output_configuration,
       :override_configuration,
+      :data_automation_library_configuration,
       :encryption_configuration)
       SENSITIVE = [:project_description]
       include Aws::Structure
@@ -1854,6 +2715,28 @@ module Aws::BedrockDataAutomation
       :status)
       SENSITIVE = []
       include Aws::Structure
+    end
+
+    # Input configuration for upserting data in a
+    # DataAutomationLibraryIngestionJob
+    #
+    # @note UpsertEntityInfo is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @!attribute [rw] vocabulary
+    #   Vocabulary entity info with detailed information
+    #   @return [Types::VocabularyEntityInfo]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-data-automation-2023-07-26/UpsertEntityInfo AWS API Documentation
+    #
+    class UpsertEntityInfo < Struct.new(
+      :vocabulary,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Vocabulary < UpsertEntityInfo; end
+      class Unknown < UpsertEntityInfo; end
     end
 
     # This exception is thrown when the request's input validation fails
@@ -2001,6 +2884,103 @@ module Aws::BedrockDataAutomation
       :extraction,
       :generative_field)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Vocabulary entity with detailed information
+    #
+    # @!attribute [rw] entity_id
+    #   Unique identifier for the entity
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   Description of the entity
+    #   @return [String]
+    #
+    # @!attribute [rw] language
+    #   Supported input languages
+    #   @return [String]
+    #
+    # @!attribute [rw] phrases
+    #   List of phrases
+    #   @return [Array<Types::Phrase>]
+    #
+    # @!attribute [rw] last_modified_time
+    #   Time Stamp
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-data-automation-2023-07-26/VocabularyEntity AWS API Documentation
+    #
+    class VocabularyEntity < Struct.new(
+      :entity_id,
+      :description,
+      :language,
+      :phrases,
+      :last_modified_time)
+      SENSITIVE = [:description]
+      include Aws::Structure
+    end
+
+    # Vocabulary entity info with detailed information
+    #
+    # @!attribute [rw] entity_id
+    #   Unique identifier for the entity
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   Description of the entity
+    #   @return [String]
+    #
+    # @!attribute [rw] language
+    #   Supported input languages
+    #   @return [String]
+    #
+    # @!attribute [rw] phrases
+    #   List of phrases
+    #   @return [Array<Types::Phrase>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-data-automation-2023-07-26/VocabularyEntityInfo AWS API Documentation
+    #
+    class VocabularyEntityInfo < Struct.new(
+      :entity_id,
+      :description,
+      :language,
+      :phrases)
+      SENSITIVE = [:description]
+      include Aws::Structure
+    end
+
+    # Summary of a Vocabulary entity
+    #
+    # @!attribute [rw] entity_id
+    #   Unique identifier for the entity
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   Description of the entity
+    #   @return [String]
+    #
+    # @!attribute [rw] language
+    #   Supported input languages
+    #   @return [String]
+    #
+    # @!attribute [rw] num_of_phrases
+    #   num of phrases in the entity
+    #   @return [Integer]
+    #
+    # @!attribute [rw] last_modified_time
+    #   Time Stamp
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-data-automation-2023-07-26/VocabularyEntitySummary AWS API Documentation
+    #
+    class VocabularyEntitySummary < Struct.new(
+      :entity_id,
+      :description,
+      :language,
+      :num_of_phrases,
+      :last_modified_time)
+      SENSITIVE = [:description]
       include Aws::Structure
     end
 

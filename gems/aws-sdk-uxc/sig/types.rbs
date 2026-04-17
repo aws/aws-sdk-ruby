@@ -1,0 +1,74 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::Uxc
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class GetAccountCustomizationsInput < Aws::EmptyStructure
+    end
+
+    class GetAccountCustomizationsOutput
+      attr_accessor account_color: ("none" | "pink" | "purple" | "darkBlue" | "lightBlue" | "teal" | "green" | "yellow" | "orange" | "red")
+      attr_accessor visible_services: ::Array[::String]
+      attr_accessor visible_regions: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListServicesInput
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListServicesOutput
+      attr_accessor next_token: ::String
+      attr_accessor services: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateAccountCustomizationsInput
+      attr_accessor account_color: ("none" | "pink" | "purple" | "darkBlue" | "lightBlue" | "teal" | "green" | "yellow" | "orange" | "red")
+      attr_accessor visible_services: ::Array[::String]
+      attr_accessor visible_regions: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UpdateAccountCustomizationsOutput
+      attr_accessor account_color: ("none" | "pink" | "purple" | "darkBlue" | "lightBlue" | "teal" | "green" | "yellow" | "orange" | "red")
+      attr_accessor visible_services: ::Array[::String]
+      attr_accessor visible_regions: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      attr_accessor field_list: ::Array[Types::ValidationExceptionField]
+      SENSITIVE: []
+    end
+
+    class ValidationExceptionField
+      attr_accessor path: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+  end
+end

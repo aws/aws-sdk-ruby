@@ -518,6 +518,19 @@ module Aws::MPA
     #   by the identity source.
     #   @return [String]
     #
+    # @!attribute [rw] last_activity
+    #   Last Activity performed by the approver.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_activity_time
+    #   Timestamp when the approver last responded to an operation or
+    #   invitation request.
+    #   @return [Time]
+    #
+    # @!attribute [rw] pending_baseline_session_arn
+    #   Amazon Resource Name (ARN) for the pending baseline session.
+    #   @return [String]
+    #
     # @!attribute [rw] mfa_methods
     #   Multi-factor authentication configuration for the approver
     #   @return [Array<Types::MfaMethod>]
@@ -530,6 +543,9 @@ module Aws::MPA
       :primary_identity_id,
       :primary_identity_source_arn,
       :primary_identity_status,
+      :last_activity,
+      :last_activity_time,
+      :pending_baseline_session_arn,
       :mfa_methods)
       SENSITIVE = []
       include Aws::Structure
@@ -1963,6 +1979,35 @@ module Aws::MPA
     class StartActiveApprovalTeamDeletionResponse < Struct.new(
       :deletion_completion_time,
       :deletion_start_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   Amazon Resource Name (ARN) for the approval team.
+    #   @return [String]
+    #
+    # @!attribute [rw] approver_ids
+    #   Array of approver IDs.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mpa-2022-07-26/StartApprovalTeamBaselineRequest AWS API Documentation
+    #
+    class StartApprovalTeamBaselineRequest < Struct.new(
+      :arn,
+      :approver_ids)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] baseline_session_arn
+    #   Amazon Resource Name (ARN) for the session.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mpa-2022-07-26/StartApprovalTeamBaselineResponse AWS API Documentation
+    #
+    class StartApprovalTeamBaselineResponse < Struct.new(
+      :baseline_session_arn)
       SENSITIVE = []
       include Aws::Structure
     end

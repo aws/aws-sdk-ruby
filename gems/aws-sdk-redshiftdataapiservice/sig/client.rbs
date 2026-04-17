@@ -100,6 +100,12 @@ module Aws
                                      ?database: ::String,
                                      ?with_event: bool,
                                      ?statement_name: ::String,
+                                     ?parameters: Array[
+                                       {
+                                         name: ::String,
+                                         value: ::String
+                                       },
+                                     ],
                                      ?workgroup_name: ::String,
                                      ?client_token: ::String,
                                      ?result_format: ("JSON" | "CSV"),

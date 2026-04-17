@@ -1166,6 +1166,9 @@ module Aws::Imagebuilder
     # @option params [Hash<String,String>] :tags
     #   The tags of the image pipeline.
     #
+    # @option params [Hash<String,String>] :image_tags
+    #   The tags to be applied to the images produced by this pipeline.
+    #
     # @option params [required, String] :client_token
     #   Unique, case-sensitive identifier you provide to ensure idempotency of
     #   the request. For more information, see [Ensuring idempotency][1] in
@@ -1221,6 +1224,9 @@ module Aws::Imagebuilder
     #     },
     #     status: "DISABLED", # accepts DISABLED, ENABLED
     #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #     image_tags: {
     #       "TagKey" => "TagValue",
     #     },
     #     client_token: "ClientToken", # required
@@ -2713,6 +2719,8 @@ module Aws::Imagebuilder
     #   resp.image_pipeline.image_scanning_configuration.ecr_configuration.repository_name #=> String
     #   resp.image_pipeline.image_scanning_configuration.ecr_configuration.container_tags #=> Array
     #   resp.image_pipeline.image_scanning_configuration.ecr_configuration.container_tags[0] #=> String
+    #   resp.image_pipeline.image_tags #=> Hash
+    #   resp.image_pipeline.image_tags["TagKey"] #=> String
     #   resp.image_pipeline.execution_role #=> String
     #   resp.image_pipeline.workflows #=> Array
     #   resp.image_pipeline.workflows[0].workflow_arn #=> String
@@ -3769,7 +3777,7 @@ module Aws::Imagebuilder
     #       },
     #     ],
     #     max_results: 1,
-    #     next_token: "NonEmptyString",
+    #     next_token: "PaginationToken",
     #   })
     #
     # @example Response structure
@@ -4156,6 +4164,8 @@ module Aws::Imagebuilder
     #   resp.image_pipeline_list[0].image_scanning_configuration.ecr_configuration.repository_name #=> String
     #   resp.image_pipeline_list[0].image_scanning_configuration.ecr_configuration.container_tags #=> Array
     #   resp.image_pipeline_list[0].image_scanning_configuration.ecr_configuration.container_tags[0] #=> String
+    #   resp.image_pipeline_list[0].image_tags #=> Hash
+    #   resp.image_pipeline_list[0].image_tags["TagKey"] #=> String
     #   resp.image_pipeline_list[0].execution_role #=> String
     #   resp.image_pipeline_list[0].workflows #=> Array
     #   resp.image_pipeline_list[0].workflows[0].workflow_arn #=> String
@@ -5753,6 +5763,9 @@ module Aws::Imagebuilder
     #   The name or Amazon Resource Name (ARN) for the IAM role you create
     #   that grants Image Builder access to perform workflow actions.
     #
+    # @option params [Hash<String,String>] :image_tags
+    #   The tags to be applied to the images produced by this pipeline.
+    #
     # @return [Types::UpdateImagePipelineResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateImagePipelineResponse#request_id #request_id} => String
@@ -5808,6 +5821,9 @@ module Aws::Imagebuilder
     #       pipeline_log_group_name: "LogGroupName",
     #     },
     #     execution_role: "RoleNameOrArn",
+    #     image_tags: {
+    #       "TagKey" => "TagValue",
+    #     },
     #   })
     #
     # @example Response structure
@@ -6096,7 +6112,7 @@ module Aws::Imagebuilder
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-imagebuilder'
-      context[:gem_version] = '1.98.0'
+      context[:gem_version] = '1.101.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

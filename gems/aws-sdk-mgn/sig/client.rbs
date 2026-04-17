@@ -286,6 +286,51 @@ module Aws
                                                 ) -> _CreateLaunchConfigurationTemplateResponseSuccess
                                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateLaunchConfigurationTemplateResponseSuccess
 
+      interface _CreateNetworkMigrationDefinitionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::NetworkMigrationDefinition]
+        def arn: () -> ::String
+        def network_migration_definition_id: () -> ::String
+        def name: () -> ::String
+        def description: () -> ::String
+        def source_configurations: () -> ::Array[Types::SourceConfiguration]
+        def target_s3_configuration: () -> Types::TargetS3Configuration
+        def target_network: () -> Types::TargetNetwork
+        def target_deployment: () -> ("SINGLE_ACCOUNT" | "MULTI_ACCOUNT")
+        def created_at: () -> ::Time
+        def updated_at: () -> ::Time
+        def tags: () -> ::Hash[::String, ::String]
+        def scope_tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Mgn/Client.html#create_network_migration_definition-instance_method
+      def create_network_migration_definition: (
+                                                 name: ::String,
+                                                 ?description: ::String,
+                                                 ?source_configurations: Array[
+                                                   {
+                                                     source_environment: ("NSX" | "VSPHERE" | "FORTIGATE_FIREWALL" | "PALO_ALTO_FIREWALL" | "CISCO_ACI" | "LOGICAL_MODEL" | "MODELIZE_IT"),
+                                                     source_s3_configuration: {
+                                                       s3_bucket: ::String,
+                                                       s3_bucket_owner: ::String,
+                                                       s3_key: ::String
+                                                     }
+                                                   },
+                                                 ],
+                                                 target_s3_configuration: {
+                                                   s3_bucket: ::String,
+                                                   s3_bucket_owner: ::String
+                                                 },
+                                                 target_network: {
+                                                   topology: ("ISOLATED_VPC" | "HUB_AND_SPOKE"),
+                                                   inbound_cidr: ::String?,
+                                                   outbound_cidr: ::String?,
+                                                   inspection_cidr: ::String?
+                                                 },
+                                                 ?target_deployment: ("SINGLE_ACCOUNT" | "MULTI_ACCOUNT"),
+                                                 ?tags: Hash[::String, ::String],
+                                                 ?scope_tags: Hash[::String, ::String]
+                                               ) -> _CreateNetworkMigrationDefinitionResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateNetworkMigrationDefinitionResponseSuccess
+
       interface _CreateReplicationConfigurationTemplateResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ReplicationConfigurationTemplate]
         def replication_configuration_template_id: () -> ::String
@@ -305,6 +350,7 @@ module Aws
         def use_fips_endpoint: () -> bool
         def tags: () -> ::Hash[::String, ::String]
         def internet_protocol: () -> ("IPV4" | "IPV6")
+        def store_snapshot_on_local_zone: () -> bool
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Mgn/Client.html#create_replication_configuration_template-instance_method
       def create_replication_configuration_template: (
@@ -322,7 +368,8 @@ module Aws
                                                        staging_area_tags: Hash[::String, ::String],
                                                        ?use_fips_endpoint: bool,
                                                        ?tags: Hash[::String, ::String],
-                                                       ?internet_protocol: ("IPV4" | "IPV6")
+                                                       ?internet_protocol: ("IPV4" | "IPV6"),
+                                                       ?store_snapshot_on_local_zone: bool
                                                      ) -> _CreateReplicationConfigurationTemplateResponseSuccess
                                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateReplicationConfigurationTemplateResponseSuccess
 
@@ -381,6 +428,15 @@ module Aws
                                                   launch_configuration_template_id: ::String
                                                 ) -> _DeleteLaunchConfigurationTemplateResponseSuccess
                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteLaunchConfigurationTemplateResponseSuccess
+
+      interface _DeleteNetworkMigrationDefinitionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteNetworkMigrationDefinitionResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Mgn/Client.html#delete_network_migration_definition-instance_method
+      def delete_network_migration_definition: (
+                                                 network_migration_definition_id: ::String
+                                               ) -> _DeleteNetworkMigrationDefinitionResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteNetworkMigrationDefinitionResponseSuccess
 
       interface _DeleteReplicationConfigurationTemplateResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteReplicationConfigurationTemplateResponse]
@@ -599,6 +655,40 @@ module Aws
                                     ) -> _GetLaunchConfigurationResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetLaunchConfigurationResponseSuccess
 
+      interface _GetNetworkMigrationDefinitionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::NetworkMigrationDefinition]
+        def arn: () -> ::String
+        def network_migration_definition_id: () -> ::String
+        def name: () -> ::String
+        def description: () -> ::String
+        def source_configurations: () -> ::Array[Types::SourceConfiguration]
+        def target_s3_configuration: () -> Types::TargetS3Configuration
+        def target_network: () -> Types::TargetNetwork
+        def target_deployment: () -> ("SINGLE_ACCOUNT" | "MULTI_ACCOUNT")
+        def created_at: () -> ::Time
+        def updated_at: () -> ::Time
+        def tags: () -> ::Hash[::String, ::String]
+        def scope_tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Mgn/Client.html#get_network_migration_definition-instance_method
+      def get_network_migration_definition: (
+                                              network_migration_definition_id: ::String
+                                            ) -> _GetNetworkMigrationDefinitionResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetNetworkMigrationDefinitionResponseSuccess
+
+      interface _GetNetworkMigrationMapperSegmentConstructResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetNetworkMigrationMapperSegmentConstructResponse]
+        def construct: () -> Types::NetworkMigrationMapperSegmentConstruct
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Mgn/Client.html#get_network_migration_mapper_segment_construct-instance_method
+      def get_network_migration_mapper_segment_construct: (
+                                                            network_migration_definition_id: ::String,
+                                                            network_migration_execution_id: ::String,
+                                                            segment_id: ::String,
+                                                            construct_id: ::String
+                                                          ) -> _GetNetworkMigrationMapperSegmentConstructResponseSuccess
+                                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetNetworkMigrationMapperSegmentConstructResponseSuccess
+
       interface _GetReplicationConfigurationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ReplicationConfiguration]
         def source_server_id: () -> ::String
@@ -618,6 +708,7 @@ module Aws
         def staging_area_tags: () -> ::Hash[::String, ::String]
         def use_fips_endpoint: () -> bool
         def internet_protocol: () -> ("IPV4" | "IPV6")
+        def store_snapshot_on_local_zone: () -> bool
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Mgn/Client.html#get_replication_configuration-instance_method
       def get_replication_configuration: (
@@ -708,6 +799,21 @@ module Aws
                               ) -> _ListImportErrorsResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListImportErrorsResponseSuccess
 
+      interface _ListImportFileEnrichmentsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListImportFileEnrichmentsResponse]
+        def items: () -> ::Array[Types::ImportFileEnrichment]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Mgn/Client.html#list_import_file_enrichments-instance_method
+      def list_import_file_enrichments: (
+                                          ?filters: {
+                                            job_i_ds: Array[::String]?
+                                          },
+                                          ?max_results: ::Integer,
+                                          ?next_token: ::String
+                                        ) -> _ListImportFileEnrichmentsResponseSuccess
+                                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListImportFileEnrichmentsResponseSuccess
+
       interface _ListImportsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListImportsResponse]
         def items: () -> ::Array[Types::ImportTask]
@@ -734,6 +840,207 @@ module Aws
                                    ?next_token: ::String
                                  ) -> _ListManagedAccountsResponseSuccess
                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListManagedAccountsResponseSuccess
+
+      interface _ListNetworkMigrationAnalysesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListNetworkMigrationAnalysesResponse]
+        def items: () -> ::Array[Types::NetworkMigrationAnalysisJobDetails]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Mgn/Client.html#list_network_migration_analyses-instance_method
+      def list_network_migration_analyses: (
+                                             network_migration_execution_id: ::String,
+                                             network_migration_definition_id: ::String,
+                                             ?filters: {
+                                               job_i_ds: Array[::String]?
+                                             },
+                                             ?max_results: ::Integer,
+                                             ?next_token: ::String
+                                           ) -> _ListNetworkMigrationAnalysesResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListNetworkMigrationAnalysesResponseSuccess
+
+      interface _ListNetworkMigrationAnalysisResultsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListNetworkMigrationAnalysisResultsResponse]
+        def items: () -> ::Array[Types::NetworkMigrationAnalysisResult]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Mgn/Client.html#list_network_migration_analysis_results-instance_method
+      def list_network_migration_analysis_results: (
+                                                     network_migration_execution_id: ::String,
+                                                     network_migration_definition_id: ::String,
+                                                     ?filters: {
+                                                       vpc_i_ds: Array[::String]?
+                                                     },
+                                                     ?max_results: ::Integer,
+                                                     ?next_token: ::String
+                                                   ) -> _ListNetworkMigrationAnalysisResultsResponseSuccess
+                                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListNetworkMigrationAnalysisResultsResponseSuccess
+
+      interface _ListNetworkMigrationCodeGenerationSegmentsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListNetworkMigrationCodeGenerationSegmentsResponse]
+        def items: () -> ::Array[Types::NetworkMigrationCodeGenerationSegment]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Mgn/Client.html#list_network_migration_code_generation_segments-instance_method
+      def list_network_migration_code_generation_segments: (
+                                                             network_migration_execution_id: ::String,
+                                                             network_migration_definition_id: ::String,
+                                                             ?filters: {
+                                                               segment_i_ds: Array[::String]?
+                                                             },
+                                                             ?max_results: ::Integer,
+                                                             ?next_token: ::String
+                                                           ) -> _ListNetworkMigrationCodeGenerationSegmentsResponseSuccess
+                                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListNetworkMigrationCodeGenerationSegmentsResponseSuccess
+
+      interface _ListNetworkMigrationCodeGenerationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListNetworkMigrationCodeGenerationsResponse]
+        def items: () -> ::Array[Types::NetworkMigrationCodeGenerationJobDetails]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Mgn/Client.html#list_network_migration_code_generations-instance_method
+      def list_network_migration_code_generations: (
+                                                     network_migration_execution_id: ::String,
+                                                     network_migration_definition_id: ::String,
+                                                     ?filters: {
+                                                       job_i_ds: Array[::String]?
+                                                     },
+                                                     ?max_results: ::Integer,
+                                                     ?next_token: ::String
+                                                   ) -> _ListNetworkMigrationCodeGenerationsResponseSuccess
+                                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListNetworkMigrationCodeGenerationsResponseSuccess
+
+      interface _ListNetworkMigrationDefinitionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListNetworkMigrationDefinitionsResponse]
+        def items: () -> ::Array[Types::NetworkMigrationDefinitionSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Mgn/Client.html#list_network_migration_definitions-instance_method
+      def list_network_migration_definitions: (
+                                                ?filters: {
+                                                  network_migration_definition_i_ds: Array[::String]?
+                                                },
+                                                ?next_token: ::String,
+                                                ?max_results: ::Integer
+                                              ) -> _ListNetworkMigrationDefinitionsResponseSuccess
+                                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListNetworkMigrationDefinitionsResponseSuccess
+
+      interface _ListNetworkMigrationDeployedStacksResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListNetworkMigrationDeployedStacksResponse]
+        def items: () -> ::Array[Types::NetworkMigrationDeployedStackDetails]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Mgn/Client.html#list_network_migration_deployed_stacks-instance_method
+      def list_network_migration_deployed_stacks: (
+                                                    network_migration_execution_id: ::String,
+                                                    network_migration_definition_id: ::String,
+                                                    ?max_results: ::Integer,
+                                                    ?next_token: ::String
+                                                  ) -> _ListNetworkMigrationDeployedStacksResponseSuccess
+                                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListNetworkMigrationDeployedStacksResponseSuccess
+
+      interface _ListNetworkMigrationDeploymentsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListNetworkMigrationDeployerJobResponse]
+        def items: () -> ::Array[Types::NetworkMigrationDeployerJobDetails]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Mgn/Client.html#list_network_migration_deployments-instance_method
+      def list_network_migration_deployments: (
+                                                network_migration_execution_id: ::String,
+                                                network_migration_definition_id: ::String,
+                                                ?filters: {
+                                                  job_i_ds: Array[::String]?
+                                                },
+                                                ?max_results: ::Integer,
+                                                ?next_token: ::String
+                                              ) -> _ListNetworkMigrationDeploymentsResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListNetworkMigrationDeploymentsResponseSuccess
+
+      interface _ListNetworkMigrationExecutionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListNetworkMigrationExecutionsResponse]
+        def items: () -> ::Array[Types::NetworkMigrationExecution]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Mgn/Client.html#list_network_migration_executions-instance_method
+      def list_network_migration_executions: (
+                                               network_migration_definition_id: ::String,
+                                               ?filters: {
+                                                 network_migration_execution_i_ds: Array[::String]?,
+                                                 network_migration_execution_statuses: Array[("PENDING" | "STARTED" | "SUCCEEDED" | "FAILED")]?
+                                               },
+                                               ?next_token: ::String,
+                                               ?max_results: ::Integer
+                                             ) -> _ListNetworkMigrationExecutionsResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListNetworkMigrationExecutionsResponseSuccess
+
+      interface _ListNetworkMigrationMapperSegmentConstructsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListNetworkMigrationMapperSegmentConstructsResponse]
+        def items: () -> ::Array[Types::NetworkMigrationMapperSegmentConstruct]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Mgn/Client.html#list_network_migration_mapper_segment_constructs-instance_method
+      def list_network_migration_mapper_segment_constructs: (
+                                                              network_migration_execution_id: ::String,
+                                                              network_migration_definition_id: ::String,
+                                                              segment_id: ::String,
+                                                              ?filters: {
+                                                                construct_i_ds: Array[::String]?,
+                                                                construct_types: Array[::String]?
+                                                              },
+                                                              ?max_results: ::Integer,
+                                                              ?next_token: ::String
+                                                            ) -> _ListNetworkMigrationMapperSegmentConstructsResponseSuccess
+                                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListNetworkMigrationMapperSegmentConstructsResponseSuccess
+
+      interface _ListNetworkMigrationMapperSegmentsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListNetworkMigrationMapperSegmentsResponse]
+        def items: () -> ::Array[Types::NetworkMigrationMapperSegment]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Mgn/Client.html#list_network_migration_mapper_segments-instance_method
+      def list_network_migration_mapper_segments: (
+                                                    network_migration_execution_id: ::String,
+                                                    network_migration_definition_id: ::String,
+                                                    ?filters: {
+                                                      segment_i_ds: Array[::String]?
+                                                    },
+                                                    ?max_results: ::Integer,
+                                                    ?next_token: ::String
+                                                  ) -> _ListNetworkMigrationMapperSegmentsResponseSuccess
+                                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListNetworkMigrationMapperSegmentsResponseSuccess
+
+      interface _ListNetworkMigrationMappingUpdatesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListNetworkMigrationMappingUpdatesResponse]
+        def items: () -> ::Array[Types::NetworkMigrationMappingUpdateJobDetails]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Mgn/Client.html#list_network_migration_mapping_updates-instance_method
+      def list_network_migration_mapping_updates: (
+                                                    network_migration_execution_id: ::String,
+                                                    network_migration_definition_id: ::String,
+                                                    ?filters: {
+                                                      job_i_ds: Array[::String]?
+                                                    },
+                                                    ?max_results: ::Integer,
+                                                    ?next_token: ::String
+                                                  ) -> _ListNetworkMigrationMappingUpdatesResponseSuccess
+                                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListNetworkMigrationMappingUpdatesResponseSuccess
+
+      interface _ListNetworkMigrationMappingsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListNetworkMigrationMappingsResponse]
+        def items: () -> ::Array[Types::NetworkMigrationMappingJobDetails]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Mgn/Client.html#list_network_migration_mappings-instance_method
+      def list_network_migration_mappings: (
+                                             network_migration_execution_id: ::String,
+                                             network_migration_definition_id: ::String,
+                                             ?filters: {
+                                               job_i_ds: Array[::String]?
+                                             },
+                                             ?max_results: ::Integer,
+                                             ?next_token: ::String
+                                           ) -> _ListNetworkMigrationMappingsResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListNetworkMigrationMappingsResponseSuccess
 
       interface _ListSourceServerActionsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListSourceServerActionsResponse]
@@ -1036,6 +1343,103 @@ module Aws
                         ) -> _StartImportResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartImportResponseSuccess
 
+      interface _StartImportFileEnrichmentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartImportFileEnrichmentResponse]
+        def job_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Mgn/Client.html#start_import_file_enrichment-instance_method
+      def start_import_file_enrichment: (
+                                          ?client_token: ::String,
+                                          s3_bucket_source: {
+                                            s3_bucket: ::String,
+                                            s3_bucket_owner: ::String,
+                                            s3_key: ::String
+                                          },
+                                          s3_bucket_target: {
+                                            s3_bucket: ::String,
+                                            s3_bucket_owner: ::String,
+                                            s3_key: ::String
+                                          },
+                                          ?ip_assignment_strategy: ("STATIC" | "DYNAMIC")
+                                        ) -> _StartImportFileEnrichmentResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartImportFileEnrichmentResponseSuccess
+
+      interface _StartNetworkMigrationAnalysisResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartNetworkMigrationAnalysisResponse]
+        def job_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Mgn/Client.html#start_network_migration_analysis-instance_method
+      def start_network_migration_analysis: (
+                                              network_migration_execution_id: ::String,
+                                              network_migration_definition_id: ::String
+                                            ) -> _StartNetworkMigrationAnalysisResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartNetworkMigrationAnalysisResponseSuccess
+
+      interface _StartNetworkMigrationCodeGenerationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartNetworkMigrationCodeGenerationResponse]
+        def job_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Mgn/Client.html#start_network_migration_code_generation-instance_method
+      def start_network_migration_code_generation: (
+                                                     network_migration_execution_id: ::String,
+                                                     network_migration_definition_id: ::String,
+                                                     ?code_generation_output_format_types: Array[("CDK_L1" | "CDK_L2" | "TERRAFORM" | "LZA")]
+                                                   ) -> _StartNetworkMigrationCodeGenerationResponseSuccess
+                                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartNetworkMigrationCodeGenerationResponseSuccess
+
+      interface _StartNetworkMigrationDeploymentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartNetworkMigrationDeployerJobResponse]
+        def job_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Mgn/Client.html#start_network_migration_deployment-instance_method
+      def start_network_migration_deployment: (
+                                                network_migration_execution_id: ::String,
+                                                network_migration_definition_id: ::String
+                                              ) -> _StartNetworkMigrationDeploymentResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartNetworkMigrationDeploymentResponseSuccess
+
+      interface _StartNetworkMigrationMappingResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartNetworkMigrationMappingResponse]
+        def job_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Mgn/Client.html#start_network_migration_mapping-instance_method
+      def start_network_migration_mapping: (
+                                             network_migration_execution_id: ::String,
+                                             network_migration_definition_id: ::String,
+                                             ?security_group_mapping_strategy: ("MAP" | "SKIP")
+                                           ) -> _StartNetworkMigrationMappingResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartNetworkMigrationMappingResponseSuccess
+
+      interface _StartNetworkMigrationMappingUpdateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartNetworkMigrationMappingUpdateResponse]
+        def job_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Mgn/Client.html#start_network_migration_mapping_update-instance_method
+      def start_network_migration_mapping_update: (
+                                                    network_migration_execution_id: ::String,
+                                                    network_migration_definition_id: ::String,
+                                                    ?constructs: Array[
+                                                      {
+                                                        segment_id: ::String,
+                                                        construct_id: ::String,
+                                                        construct_type: ::String,
+                                                        operation: {
+                                                          update: {
+                                                            properties: Hash[::String, ::String]?
+                                                          }?
+                                                        }?
+                                                      },
+                                                    ],
+                                                    ?segments: Array[
+                                                      {
+                                                        segment_id: ::String,
+                                                        target_account: ::String?,
+                                                        scope_tags: Hash[::String, ::String]?
+                                                      },
+                                                    ]
+                                                  ) -> _StartNetworkMigrationMappingUpdateResponseSuccess
+                                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartNetworkMigrationMappingUpdateResponseSuccess
+
       interface _StartReplicationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::SourceServer]
         def source_server_id: () -> ::String
@@ -1336,6 +1740,78 @@ module Aws
                                                 ) -> _UpdateLaunchConfigurationTemplateResponseSuccess
                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateLaunchConfigurationTemplateResponseSuccess
 
+      interface _UpdateNetworkMigrationDefinitionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::NetworkMigrationDefinition]
+        def arn: () -> ::String
+        def network_migration_definition_id: () -> ::String
+        def name: () -> ::String
+        def description: () -> ::String
+        def source_configurations: () -> ::Array[Types::SourceConfiguration]
+        def target_s3_configuration: () -> Types::TargetS3Configuration
+        def target_network: () -> Types::TargetNetwork
+        def target_deployment: () -> ("SINGLE_ACCOUNT" | "MULTI_ACCOUNT")
+        def created_at: () -> ::Time
+        def updated_at: () -> ::Time
+        def tags: () -> ::Hash[::String, ::String]
+        def scope_tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Mgn/Client.html#update_network_migration_definition-instance_method
+      def update_network_migration_definition: (
+                                                 network_migration_definition_id: ::String,
+                                                 ?name: ::String,
+                                                 ?description: ::String,
+                                                 ?source_configurations: Array[
+                                                   {
+                                                     source_environment: ("NSX" | "VSPHERE" | "FORTIGATE_FIREWALL" | "PALO_ALTO_FIREWALL" | "CISCO_ACI" | "LOGICAL_MODEL" | "MODELIZE_IT"),
+                                                     source_s3_configuration: {
+                                                       s3_bucket: ::String,
+                                                       s3_bucket_owner: ::String,
+                                                       s3_key: ::String
+                                                     }
+                                                   },
+                                                 ],
+                                                 ?target_s3_configuration: {
+                                                   s3_bucket: ::String?,
+                                                   s3_bucket_owner: ::String?
+                                                 },
+                                                 ?target_network: {
+                                                   topology: ("ISOLATED_VPC" | "HUB_AND_SPOKE")?,
+                                                   inbound_cidr: ::String?,
+                                                   outbound_cidr: ::String?,
+                                                   inspection_cidr: ::String?
+                                                 },
+                                                 ?target_deployment: ("SINGLE_ACCOUNT" | "MULTI_ACCOUNT"),
+                                                 ?scope_tags: Hash[::String, ::String]
+                                               ) -> _UpdateNetworkMigrationDefinitionResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateNetworkMigrationDefinitionResponseSuccess
+
+      interface _UpdateNetworkMigrationMapperSegmentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::NetworkMigrationMapperSegment]
+        def job_id: () -> ::String
+        def network_migration_execution_id: () -> ::String
+        def network_migration_definition_id: () -> ::String
+        def segment_id: () -> ::String
+        def segment_type: () -> ("WORKLOAD" | "APPLIANCE")
+        def name: () -> ::String
+        def description: () -> ::String
+        def logical_id: () -> ::String
+        def checksum: () -> Types::Checksum
+        def output_s3_configuration: () -> Types::S3Configuration
+        def created_at: () -> ::Time
+        def updated_at: () -> ::Time
+        def scope_tags: () -> ::Hash[::String, ::String]
+        def target_account: () -> ::String
+        def referenced_segments: () -> ::Array[::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Mgn/Client.html#update_network_migration_mapper_segment-instance_method
+      def update_network_migration_mapper_segment: (
+                                                     network_migration_definition_id: ::String,
+                                                     network_migration_execution_id: ::String,
+                                                     segment_id: ::String,
+                                                     ?scope_tags: Hash[::String, ::String]
+                                                   ) -> _UpdateNetworkMigrationMapperSegmentResponseSuccess
+                                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateNetworkMigrationMapperSegmentResponseSuccess
+
       interface _UpdateReplicationConfigurationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ReplicationConfiguration]
         def source_server_id: () -> ::String
@@ -1355,6 +1831,7 @@ module Aws
         def staging_area_tags: () -> ::Hash[::String, ::String]
         def use_fips_endpoint: () -> bool
         def internet_protocol: () -> ("IPV4" | "IPV6")
+        def store_snapshot_on_local_zone: () -> bool
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Mgn/Client.html#update_replication_configuration-instance_method
       def update_replication_configuration: (
@@ -1383,7 +1860,8 @@ module Aws
                                               ?staging_area_tags: Hash[::String, ::String],
                                               ?use_fips_endpoint: bool,
                                               ?account_id: ::String,
-                                              ?internet_protocol: ("IPV4" | "IPV6")
+                                              ?internet_protocol: ("IPV4" | "IPV6"),
+                                              ?store_snapshot_on_local_zone: bool
                                             ) -> _UpdateReplicationConfigurationResponseSuccess
                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateReplicationConfigurationResponseSuccess
 
@@ -1406,6 +1884,7 @@ module Aws
         def use_fips_endpoint: () -> bool
         def tags: () -> ::Hash[::String, ::String]
         def internet_protocol: () -> ("IPV4" | "IPV6")
+        def store_snapshot_on_local_zone: () -> bool
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Mgn/Client.html#update_replication_configuration_template-instance_method
       def update_replication_configuration_template: (
@@ -1424,7 +1903,8 @@ module Aws
                                                        ?create_public_ip: bool,
                                                        ?staging_area_tags: Hash[::String, ::String],
                                                        ?use_fips_endpoint: bool,
-                                                       ?internet_protocol: ("IPV4" | "IPV6")
+                                                       ?internet_protocol: ("IPV4" | "IPV6"),
+                                                       ?store_snapshot_on_local_zone: bool
                                                      ) -> _UpdateReplicationConfigurationTemplateResponseSuccess
                                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateReplicationConfigurationTemplateResponseSuccess
 

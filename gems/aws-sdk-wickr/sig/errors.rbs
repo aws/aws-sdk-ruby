@@ -31,6 +31,7 @@ module Aws
       end
       class ValidationError < ::Aws::Errors::ServiceError
         def reasons: () -> ::String
+        def message: () -> ::String
       end
     end
   end

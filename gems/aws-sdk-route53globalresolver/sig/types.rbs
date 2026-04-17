@@ -73,7 +73,7 @@ module Aws::Route53GlobalResolver
       attr_accessor client_token: ::String
       attr_accessor confidence_threshold: ("LOW" | "MEDIUM" | "HIGH")
       attr_accessor description: ::String
-      attr_accessor dns_advanced_protection: ("DGA" | "DNS_TUNNELING")
+      attr_accessor dns_advanced_protection: ("DGA" | "DNS_TUNNELING" | "DICTIONARY_DGA")
       attr_accessor firewall_domain_list_id: ::String
       attr_accessor name: ::String
       attr_accessor priority: ::Integer
@@ -105,7 +105,7 @@ module Aws::Route53GlobalResolver
       attr_accessor confidence_threshold: ("LOW" | "MEDIUM" | "HIGH")
       attr_accessor created_at: ::Time
       attr_accessor description: ::String
-      attr_accessor dns_advanced_protection: ("DGA" | "DNS_TUNNELING")
+      attr_accessor dns_advanced_protection: ("DGA" | "DNS_TUNNELING" | "DICTIONARY_DGA")
       attr_accessor firewall_domain_list_id: ::String
       attr_accessor id: ::String
       attr_accessor managed_domain_list_name: ::String
@@ -162,7 +162,7 @@ module Aws::Route53GlobalResolver
       attr_accessor block_response: ("NODATA" | "NXDOMAIN" | "OVERRIDE")
       attr_accessor confidence_threshold: ("LOW" | "MEDIUM" | "HIGH")
       attr_accessor description: ::String
-      attr_accessor dns_advanced_protection: ("DGA" | "DNS_TUNNELING")
+      attr_accessor dns_advanced_protection: ("DGA" | "DNS_TUNNELING" | "DICTIONARY_DGA")
       attr_accessor firewall_rule_id: ::String
       attr_accessor name: ::String
       attr_accessor priority: ::Integer
@@ -192,7 +192,7 @@ module Aws::Route53GlobalResolver
       attr_accessor confidence_threshold: ("LOW" | "MEDIUM" | "HIGH")
       attr_accessor created_at: ::Time
       attr_accessor description: ::String
-      attr_accessor dns_advanced_protection: ("DGA" | "DNS_TUNNELING")
+      attr_accessor dns_advanced_protection: ("DGA" | "DNS_TUNNELING" | "DICTIONARY_DGA")
       attr_accessor firewall_domain_list_id: ::String
       attr_accessor id: ::String
       attr_accessor name: ::String
@@ -317,7 +317,7 @@ module Aws::Route53GlobalResolver
       attr_accessor client_token: ::String
       attr_accessor confidence_threshold: ("LOW" | "MEDIUM" | "HIGH")
       attr_accessor description: ::String
-      attr_accessor dns_advanced_protection: ("DGA" | "DNS_TUNNELING")
+      attr_accessor dns_advanced_protection: ("DGA" | "DNS_TUNNELING" | "DICTIONARY_DGA")
       attr_accessor firewall_domain_list_id: ::String
       attr_accessor name: ::String
       attr_accessor priority: ::Integer
@@ -335,7 +335,7 @@ module Aws::Route53GlobalResolver
       attr_accessor confidence_threshold: ("LOW" | "MEDIUM" | "HIGH")
       attr_accessor created_at: ::Time
       attr_accessor description: ::String
-      attr_accessor dns_advanced_protection: ("DGA" | "DNS_TUNNELING")
+      attr_accessor dns_advanced_protection: ("DGA" | "DNS_TUNNELING" | "DICTIONARY_DGA")
       attr_accessor firewall_domain_list_id: ::String
       attr_accessor id: ::String
       attr_accessor name: ::String
@@ -350,6 +350,7 @@ module Aws::Route53GlobalResolver
     class CreateGlobalResolverInput
       attr_accessor client_token: ::String
       attr_accessor description: ::String
+      attr_accessor ip_address_type: ("IPV4" | "DUAL_STACK")
       attr_accessor name: ::String
       attr_accessor observability_region: ::String
       attr_accessor regions: ::Array[::String]
@@ -364,7 +365,9 @@ module Aws::Route53GlobalResolver
       attr_accessor created_at: ::Time
       attr_accessor description: ::String
       attr_accessor dns_name: ::String
+      attr_accessor ip_address_type: ("IPV4" | "DUAL_STACK")
       attr_accessor ipv4_addresses: ::Array[::String]
+      attr_accessor ipv6_addresses: ::Array[::String]
       attr_accessor name: ::String
       attr_accessor observability_region: ::String
       attr_accessor regions: ::Array[::String]
@@ -468,7 +471,7 @@ module Aws::Route53GlobalResolver
       attr_accessor confidence_threshold: ("LOW" | "MEDIUM" | "HIGH")
       attr_accessor created_at: ::Time
       attr_accessor description: ::String
-      attr_accessor dns_advanced_protection: ("DGA" | "DNS_TUNNELING")
+      attr_accessor dns_advanced_protection: ("DGA" | "DNS_TUNNELING" | "DICTIONARY_DGA")
       attr_accessor firewall_domain_list_id: ::String
       attr_accessor id: ::String
       attr_accessor name: ::String
@@ -498,6 +501,8 @@ module Aws::Route53GlobalResolver
       attr_accessor updated_at: ::Time
       attr_accessor status: ("CREATING" | "OPERATIONAL" | "UPDATING" | "DELETING")
       attr_accessor ipv4_addresses: ::Array[::String]
+      attr_accessor ipv6_addresses: ::Array[::String]
+      attr_accessor ip_address_type: ("IPV4" | "DUAL_STACK")
       SENSITIVE: []
     end
 
@@ -582,7 +587,7 @@ module Aws::Route53GlobalResolver
       attr_accessor confidence_threshold: ("LOW" | "MEDIUM" | "HIGH")
       attr_accessor created_at: ::Time
       attr_accessor description: ::String
-      attr_accessor dns_advanced_protection: ("DGA" | "DNS_TUNNELING")
+      attr_accessor dns_advanced_protection: ("DGA" | "DNS_TUNNELING" | "DICTIONARY_DGA")
       attr_accessor firewall_domain_list_id: ::String
       attr_accessor id: ::String
       attr_accessor name: ::String
@@ -688,7 +693,7 @@ module Aws::Route53GlobalResolver
       attr_accessor confidence_threshold: ("LOW" | "MEDIUM" | "HIGH")
       attr_accessor created_at: ::Time
       attr_accessor description: ::String
-      attr_accessor dns_advanced_protection: ("DGA" | "DNS_TUNNELING")
+      attr_accessor dns_advanced_protection: ("DGA" | "DNS_TUNNELING" | "DICTIONARY_DGA")
       attr_accessor firewall_domain_list_id: ::String
       attr_accessor id: ::String
       attr_accessor name: ::String
@@ -718,6 +723,8 @@ module Aws::Route53GlobalResolver
       attr_accessor updated_at: ::Time
       attr_accessor status: ("CREATING" | "OPERATIONAL" | "UPDATING" | "DELETING")
       attr_accessor ipv4_addresses: ::Array[::String]
+      attr_accessor ipv6_addresses: ::Array[::String]
+      attr_accessor ip_address_type: ("IPV4" | "DUAL_STACK")
       SENSITIVE: []
     end
 
@@ -764,6 +771,8 @@ module Aws::Route53GlobalResolver
       attr_accessor updated_at: ::Time
       attr_accessor status: ("CREATING" | "OPERATIONAL" | "UPDATING" | "DELETING")
       attr_accessor ipv4_addresses: ::Array[::String]
+      attr_accessor ipv6_addresses: ::Array[::String]
+      attr_accessor ip_address_type: ("IPV4" | "DUAL_STACK")
       SENSITIVE: []
     end
 
@@ -1061,7 +1070,7 @@ module Aws::Route53GlobalResolver
       attr_accessor client_token: ::String
       attr_accessor confidence_threshold: ("LOW" | "MEDIUM" | "HIGH")
       attr_accessor description: ::String
-      attr_accessor dns_advanced_protection: ("DGA" | "DNS_TUNNELING")
+      attr_accessor dns_advanced_protection: ("DGA" | "DNS_TUNNELING" | "DICTIONARY_DGA")
       attr_accessor firewall_rule_id: ::String
       attr_accessor name: ::String
       attr_accessor priority: ::Integer
@@ -1077,7 +1086,7 @@ module Aws::Route53GlobalResolver
       attr_accessor confidence_threshold: ("LOW" | "MEDIUM" | "HIGH")
       attr_accessor created_at: ::Time
       attr_accessor description: ::String
-      attr_accessor dns_advanced_protection: ("DGA" | "DNS_TUNNELING")
+      attr_accessor dns_advanced_protection: ("DGA" | "DNS_TUNNELING" | "DICTIONARY_DGA")
       attr_accessor firewall_domain_list_id: ::String
       attr_accessor id: ::String
       attr_accessor name: ::String
@@ -1094,6 +1103,7 @@ module Aws::Route53GlobalResolver
       attr_accessor name: ::String
       attr_accessor observability_region: ::String
       attr_accessor description: ::String
+      attr_accessor ip_address_type: ("IPV4" | "DUAL_STACK")
       SENSITIVE: []
     end
 
@@ -1110,6 +1120,8 @@ module Aws::Route53GlobalResolver
       attr_accessor updated_at: ::Time
       attr_accessor status: ("CREATING" | "OPERATIONAL" | "UPDATING" | "DELETING")
       attr_accessor ipv4_addresses: ::Array[::String]
+      attr_accessor ipv6_addresses: ::Array[::String]
+      attr_accessor ip_address_type: ("IPV4" | "DUAL_STACK")
       SENSITIVE: []
     end
 

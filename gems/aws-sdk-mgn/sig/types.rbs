@@ -86,6 +86,18 @@ module Aws::Mgn
       SENSITIVE: []
     end
 
+    class Checksum
+      attr_accessor encryption_algorithm: ("SHA256")
+      attr_accessor hash: ::String
+      SENSITIVE: []
+    end
+
+    class CodeGenerationOutputFormatStatusDetails
+      attr_accessor status: ("SUCCEEDED" | "FAILED")
+      attr_accessor status_detail_list: ::String
+      SENSITIVE: []
+    end
+
     class ConflictException
       attr_accessor message: ::String
       attr_accessor code: ::String
@@ -149,6 +161,18 @@ module Aws::Mgn
       SENSITIVE: [:tags]
     end
 
+    class CreateNetworkMigrationDefinitionRequest
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor source_configurations: ::Array[Types::SourceConfiguration]
+      attr_accessor target_s3_configuration: Types::TargetS3Configuration
+      attr_accessor target_network: Types::TargetNetwork
+      attr_accessor target_deployment: ("SINGLE_ACCOUNT" | "MULTI_ACCOUNT")
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor scope_tags: ::Hash[::String, ::String]
+      SENSITIVE: [:tags, :scope_tags]
+    end
+
     class CreateReplicationConfigurationTemplateRequest
       attr_accessor staging_area_subnet_id: ::String
       attr_accessor associate_default_security_group: bool
@@ -165,6 +189,7 @@ module Aws::Mgn
       attr_accessor use_fips_endpoint: bool
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor internet_protocol: ("IPV4" | "IPV6")
+      attr_accessor store_snapshot_on_local_zone: bool
       SENSITIVE: [:staging_area_tags, :tags]
     end
 
@@ -245,6 +270,14 @@ module Aws::Mgn
     end
 
     class DeleteLaunchConfigurationTemplateResponse < Aws::EmptyStructure
+    end
+
+    class DeleteNetworkMigrationDefinitionRequest
+      attr_accessor network_migration_definition_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteNetworkMigrationDefinitionResponse < Aws::EmptyStructure
     end
 
     class DeleteReplicationConfigurationTemplateRequest
@@ -406,6 +439,20 @@ module Aws::Mgn
       SENSITIVE: []
     end
 
+    class EnrichmentSourceS3Configuration
+      attr_accessor s3_bucket: ::String
+      attr_accessor s3_bucket_owner: ::String
+      attr_accessor s3_key: ::String
+      SENSITIVE: []
+    end
+
+    class EnrichmentTargetS3Configuration
+      attr_accessor s3_bucket: ::String
+      attr_accessor s3_bucket_owner: ::String
+      attr_accessor s3_key: ::String
+      SENSITIVE: []
+    end
+
     class ErrorDetails
       attr_accessor message: ::String
       attr_accessor code: ::String
@@ -459,6 +506,24 @@ module Aws::Mgn
       SENSITIVE: []
     end
 
+    class GetNetworkMigrationDefinitionRequest
+      attr_accessor network_migration_definition_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetNetworkMigrationMapperSegmentConstructRequest
+      attr_accessor network_migration_definition_id: ::String
+      attr_accessor network_migration_execution_id: ::String
+      attr_accessor segment_id: ::String
+      attr_accessor construct_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetNetworkMigrationMapperSegmentConstructResponse
+      attr_accessor construct: Types::NetworkMigrationMapperSegmentConstruct
+      SENSITIVE: []
+    end
+
     class GetReplicationConfigurationRequest
       attr_accessor source_server_id: ::String
       attr_accessor account_id: ::String
@@ -482,6 +547,17 @@ module Aws::Mgn
       attr_accessor row_number: ::Integer
       attr_accessor raw_error: ::String
       attr_accessor account_id: ::String
+      SENSITIVE: []
+    end
+
+    class ImportFileEnrichment
+      attr_accessor job_id: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor ended_at: ::Time
+      attr_accessor status: ("PENDING" | "STARTED" | "FAILED" | "SUCCEEDED" | "SUCCEEDED_WITH_WARNINGS")
+      attr_accessor status_details: ::String
+      attr_accessor checksum: Types::Checksum
+      attr_accessor s3_bucket_target: Types::EnrichmentTargetS3Configuration
       SENSITIVE: []
     end
 
@@ -779,6 +855,24 @@ module Aws::Mgn
       SENSITIVE: []
     end
 
+    class ListImportFileEnrichmentsFilters
+      attr_accessor job_i_ds: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ListImportFileEnrichmentsRequest
+      attr_accessor filters: Types::ListImportFileEnrichmentsFilters
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListImportFileEnrichmentsResponse
+      attr_accessor items: ::Array[Types::ImportFileEnrichment]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class ListImportsRequest
       attr_accessor filters: Types::ListImportsRequestFilters
       attr_accessor max_results: ::Integer
@@ -805,6 +899,240 @@ module Aws::Mgn
 
     class ListManagedAccountsResponse
       attr_accessor items: ::Array[Types::ManagedAccount]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListNetworkMigrationAnalysesFilters
+      attr_accessor job_i_ds: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ListNetworkMigrationAnalysesRequest
+      attr_accessor network_migration_execution_id: ::String
+      attr_accessor network_migration_definition_id: ::String
+      attr_accessor filters: Types::ListNetworkMigrationAnalysesFilters
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListNetworkMigrationAnalysesResponse
+      attr_accessor items: ::Array[Types::NetworkMigrationAnalysisJobDetails]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListNetworkMigrationAnalysisResultsFilters
+      attr_accessor vpc_i_ds: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ListNetworkMigrationAnalysisResultsRequest
+      attr_accessor network_migration_execution_id: ::String
+      attr_accessor network_migration_definition_id: ::String
+      attr_accessor filters: Types::ListNetworkMigrationAnalysisResultsFilters
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListNetworkMigrationAnalysisResultsResponse
+      attr_accessor items: ::Array[Types::NetworkMigrationAnalysisResult]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListNetworkMigrationCodeGenerationSegmentsFilters
+      attr_accessor segment_i_ds: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ListNetworkMigrationCodeGenerationSegmentsRequest
+      attr_accessor network_migration_execution_id: ::String
+      attr_accessor network_migration_definition_id: ::String
+      attr_accessor filters: Types::ListNetworkMigrationCodeGenerationSegmentsFilters
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListNetworkMigrationCodeGenerationSegmentsResponse
+      attr_accessor items: ::Array[Types::NetworkMigrationCodeGenerationSegment]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListNetworkMigrationCodeGenerationsFilters
+      attr_accessor job_i_ds: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ListNetworkMigrationCodeGenerationsRequest
+      attr_accessor network_migration_execution_id: ::String
+      attr_accessor network_migration_definition_id: ::String
+      attr_accessor filters: Types::ListNetworkMigrationCodeGenerationsFilters
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListNetworkMigrationCodeGenerationsResponse
+      attr_accessor items: ::Array[Types::NetworkMigrationCodeGenerationJobDetails]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListNetworkMigrationDefinitionsRequest
+      attr_accessor filters: Types::ListNetworkMigrationDefinitionsRequestFilters
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListNetworkMigrationDefinitionsRequestFilters
+      attr_accessor network_migration_definition_i_ds: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ListNetworkMigrationDefinitionsResponse
+      attr_accessor items: ::Array[Types::NetworkMigrationDefinitionSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListNetworkMigrationDeployedStacksRequest
+      attr_accessor network_migration_execution_id: ::String
+      attr_accessor network_migration_definition_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListNetworkMigrationDeployedStacksResponse
+      attr_accessor items: ::Array[Types::NetworkMigrationDeployedStackDetails]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListNetworkMigrationDeployerJobFilters
+      attr_accessor job_i_ds: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ListNetworkMigrationDeployerJobResponse
+      attr_accessor items: ::Array[Types::NetworkMigrationDeployerJobDetails]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListNetworkMigrationDeploymentsRequest
+      attr_accessor network_migration_execution_id: ::String
+      attr_accessor network_migration_definition_id: ::String
+      attr_accessor filters: Types::ListNetworkMigrationDeployerJobFilters
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListNetworkMigrationExecutionRequestFilters
+      attr_accessor network_migration_execution_i_ds: ::Array[::String]
+      attr_accessor network_migration_execution_statuses: ::Array[("PENDING" | "STARTED" | "SUCCEEDED" | "FAILED")]
+      SENSITIVE: []
+    end
+
+    class ListNetworkMigrationExecutionsRequest
+      attr_accessor network_migration_definition_id: ::String
+      attr_accessor filters: Types::ListNetworkMigrationExecutionRequestFilters
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListNetworkMigrationExecutionsResponse
+      attr_accessor items: ::Array[Types::NetworkMigrationExecution]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListNetworkMigrationMapperSegmentConstructsFilters
+      attr_accessor construct_i_ds: ::Array[::String]
+      attr_accessor construct_types: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ListNetworkMigrationMapperSegmentConstructsRequest
+      attr_accessor network_migration_execution_id: ::String
+      attr_accessor network_migration_definition_id: ::String
+      attr_accessor segment_id: ::String
+      attr_accessor filters: Types::ListNetworkMigrationMapperSegmentConstructsFilters
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListNetworkMigrationMapperSegmentConstructsResponse
+      attr_accessor items: ::Array[Types::NetworkMigrationMapperSegmentConstruct]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListNetworkMigrationMapperSegmentsFilters
+      attr_accessor segment_i_ds: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ListNetworkMigrationMapperSegmentsRequest
+      attr_accessor network_migration_execution_id: ::String
+      attr_accessor network_migration_definition_id: ::String
+      attr_accessor filters: Types::ListNetworkMigrationMapperSegmentsFilters
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListNetworkMigrationMapperSegmentsResponse
+      attr_accessor items: ::Array[Types::NetworkMigrationMapperSegment]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListNetworkMigrationMappingUpdatesFilters
+      attr_accessor job_i_ds: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ListNetworkMigrationMappingUpdatesRequest
+      attr_accessor network_migration_execution_id: ::String
+      attr_accessor network_migration_definition_id: ::String
+      attr_accessor filters: Types::ListNetworkMigrationMappingUpdatesFilters
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListNetworkMigrationMappingUpdatesResponse
+      attr_accessor items: ::Array[Types::NetworkMigrationMappingUpdateJobDetails]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListNetworkMigrationMappingsFilters
+      attr_accessor job_i_ds: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ListNetworkMigrationMappingsRequest
+      attr_accessor network_migration_execution_id: ::String
+      attr_accessor network_migration_definition_id: ::String
+      attr_accessor filters: Types::ListNetworkMigrationMappingsFilters
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListNetworkMigrationMappingsResponse
+      attr_accessor items: ::Array[Types::NetworkMigrationMappingJobDetails]
       attr_accessor next_token: ::String
       SENSITIVE: []
     end
@@ -886,9 +1214,210 @@ module Aws::Mgn
       SENSITIVE: []
     end
 
+    class NetworkMigrationAnalysisJobDetails
+      attr_accessor job_id: ::String
+      attr_accessor network_migration_execution_id: ::String
+      attr_accessor network_migration_definition_id: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor ended_at: ::Time
+      attr_accessor status: ("PENDING" | "STARTED" | "SUCCEEDED" | "FAILED")
+      attr_accessor status_details: ::String
+      SENSITIVE: []
+    end
+
+    class NetworkMigrationAnalysisResult
+      attr_accessor job_id: ::String
+      attr_accessor network_migration_execution_id: ::String
+      attr_accessor network_migration_definition_id: ::String
+      attr_accessor analyzer_type: ("REACHABILITY_ANALYZER")
+      attr_accessor source: Types::NetworkMigrationAnalysisResultSource
+      attr_accessor target: Types::NetworkMigrationAnalysisResultTarget
+      attr_accessor status: ("PENDING" | "STARTED" | "SUCCEEDED" | "FAILED")
+      attr_accessor analysis_result: ::String
+      SENSITIVE: []
+    end
+
+    class NetworkMigrationAnalysisResultSource
+      attr_accessor vpc_id: ::String
+      attr_accessor subnet_id: ::String
+      SENSITIVE: []
+    end
+
+    class NetworkMigrationAnalysisResultTarget
+      attr_accessor vpc_id: ::String
+      attr_accessor subnet_id: ::String
+      SENSITIVE: []
+    end
+
+    class NetworkMigrationCodeGenerationArtifact
+      attr_accessor artifact_id: ::String
+      attr_accessor artifact_type: ("CDK_TYPESCRIPT" | "CLOUDFORMATION_TEMPLATE" | "CDKTF_TYPESCRIPT" | "TERRAFORM_CONFIGURATION" | "CDK_L2_TYPESCRIPT")
+      attr_accessor artifact_sub_type: ("APPLICATION" | "NESTED_STACK" | "STACK")
+      attr_accessor logical_id: ::String
+      attr_accessor output_s3_configuration: Types::S3Configuration
+      attr_accessor checksum: Types::Checksum
+      attr_accessor created_at: ::Time
+      SENSITIVE: []
+    end
+
+    class NetworkMigrationCodeGenerationJobDetails
+      attr_accessor job_id: ::String
+      attr_accessor network_migration_execution_id: ::String
+      attr_accessor network_migration_definition_id: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor ended_at: ::Time
+      attr_accessor status: ("PENDING" | "STARTED" | "SUCCEEDED" | "FAILED")
+      attr_accessor status_details: ::String
+      attr_accessor code_generation_output_format_status_details_map: ::Hash[("CDK_L1" | "CDK_L2" | "TERRAFORM" | "LZA"), Types::CodeGenerationOutputFormatStatusDetails]
+      SENSITIVE: []
+    end
+
+    class NetworkMigrationCodeGenerationSegment
+      attr_accessor job_id: ::String
+      attr_accessor network_migration_execution_id: ::String
+      attr_accessor network_migration_definition_id: ::String
+      attr_accessor segment_id: ::String
+      attr_accessor segment_type: ("WORKLOAD" | "APPLIANCE" | "NETWORK")
+      attr_accessor logical_id: ::String
+      attr_accessor mapper_segment_id: ::String
+      attr_accessor artifacts: ::Array[Types::NetworkMigrationCodeGenerationArtifact]
+      attr_accessor created_at: ::Time
+      SENSITIVE: []
+    end
+
+    class NetworkMigrationDefinition
+      attr_accessor arn: ::String
+      attr_accessor network_migration_definition_id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor source_configurations: ::Array[Types::SourceConfiguration]
+      attr_accessor target_s3_configuration: Types::TargetS3Configuration
+      attr_accessor target_network: Types::TargetNetwork
+      attr_accessor target_deployment: ("SINGLE_ACCOUNT" | "MULTI_ACCOUNT")
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor scope_tags: ::Hash[::String, ::String]
+      SENSITIVE: [:tags, :scope_tags]
+    end
+
+    class NetworkMigrationDefinitionSummary
+      attr_accessor network_migration_definition_id: ::String
+      attr_accessor name: ::String
+      attr_accessor source_environment: ("NSX" | "VSPHERE" | "FORTIGATE_FIREWALL" | "PALO_ALTO_FIREWALL" | "CISCO_ACI" | "LOGICAL_MODEL" | "MODELIZE_IT")
+      attr_accessor arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor scope_tags: ::Hash[::String, ::String]
+      SENSITIVE: [:tags, :scope_tags]
+    end
+
+    class NetworkMigrationDeployedStackDetails
+      attr_accessor status: ("CREATE_COMPLETE" | "CREATE_FAILED" | "CREATE_STARTED" | "DELETE_COMPLETE" | "DELETE_FAILED" | "DELETE_STARTED")
+      attr_accessor stack_physical_id: ::String
+      attr_accessor stack_logical_id: ::String
+      attr_accessor segment_id: ::String
+      attr_accessor target_account: ::String
+      attr_accessor failed_resources: ::Array[Types::NetworkMigrationFailedResourceDetails]
+      SENSITIVE: []
+    end
+
+    class NetworkMigrationDeployerJobDetails
+      attr_accessor job_id: ::String
+      attr_accessor network_migration_execution_id: ::String
+      attr_accessor network_migration_definition_id: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor ended_at: ::Time
+      attr_accessor status: ("PENDING" | "STARTED" | "SUCCEEDED" | "FAILED")
+      attr_accessor status_details: ::String
+      SENSITIVE: []
+    end
+
+    class NetworkMigrationExecution
+      attr_accessor network_migration_definition_id: ::String
+      attr_accessor network_migration_execution_id: ::String
+      attr_accessor status: ("PENDING" | "STARTED" | "SUCCEEDED" | "FAILED")
+      attr_accessor stage: ("MAPPING" | "CODE_GENERATION" | "DEPLOY" | "DEPLOYED_STACKS_DELETION" | "ANALYZE")
+      attr_accessor activity: ("MAPPING" | "MAPPING_UPDATE" | "CODE_GENERATION" | "DEPLOY" | "DEPLOYED_STACKS_DELETION" | "ANALYZE")
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: [:tags]
+    end
+
+    class NetworkMigrationFailedResourceDetails
+      attr_accessor logical_id: ::String
+      attr_accessor status: ("CREATE_FAILED" | "DELETE_FAILED")
+      attr_accessor status_reason: ::String
+      SENSITIVE: []
+    end
+
+    class NetworkMigrationMapperSegment
+      attr_accessor job_id: ::String
+      attr_accessor network_migration_execution_id: ::String
+      attr_accessor network_migration_definition_id: ::String
+      attr_accessor segment_id: ::String
+      attr_accessor segment_type: ("WORKLOAD" | "APPLIANCE")
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor logical_id: ::String
+      attr_accessor checksum: Types::Checksum
+      attr_accessor output_s3_configuration: Types::S3Configuration
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor scope_tags: ::Hash[::String, ::String]
+      attr_accessor target_account: ::String
+      attr_accessor referenced_segments: ::Array[::String]
+      SENSITIVE: [:scope_tags]
+    end
+
+    class NetworkMigrationMapperSegmentConstruct
+      attr_accessor construct_id: ::String
+      attr_accessor construct_type: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor logical_id: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor properties: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class NetworkMigrationMappingJobDetails
+      attr_accessor job_id: ::String
+      attr_accessor network_migration_execution_id: ::String
+      attr_accessor network_migration_definition_id: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor ended_at: ::Time
+      attr_accessor status: ("PENDING" | "STARTED" | "SUCCEEDED" | "FAILED")
+      attr_accessor status_details: ::String
+      SENSITIVE: []
+    end
+
+    class NetworkMigrationMappingUpdateJobDetails
+      attr_accessor job_id: ::String
+      attr_accessor network_migration_execution_id: ::String
+      attr_accessor network_migration_definition_id: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor ended_at: ::Time
+      attr_accessor status: ("PENDING" | "STARTED" | "SUCCEEDED" | "FAILED")
+      attr_accessor status_details: ::String
+      SENSITIVE: []
+    end
+
     class OS
       attr_accessor full_string: ::String
       SENSITIVE: []
+    end
+
+    class OperationUnion
+      attr_accessor update: Types::UpdateOperation
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Update < OperationUnion
+      end
+      class Unknown < OperationUnion
+      end
     end
 
     class ParticipatingServer
@@ -993,6 +1522,7 @@ module Aws::Mgn
       attr_accessor staging_area_tags: ::Hash[::String, ::String]
       attr_accessor use_fips_endpoint: bool
       attr_accessor internet_protocol: ("IPV4" | "IPV6")
+      attr_accessor store_snapshot_on_local_zone: bool
       SENSITIVE: [:staging_area_tags]
     end
 
@@ -1023,6 +1553,7 @@ module Aws::Mgn
       attr_accessor use_fips_endpoint: bool
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor internet_protocol: ("IPV4" | "IPV6")
+      attr_accessor store_snapshot_on_local_zone: bool
       SENSITIVE: [:staging_area_tags, :tags]
     end
 
@@ -1053,6 +1584,13 @@ module Aws::Mgn
       SENSITIVE: []
     end
 
+    class S3Configuration
+      attr_accessor s3_bucket: ::String
+      attr_accessor s3_bucket_owner: ::String
+      attr_accessor s3_key: ::String
+      SENSITIVE: []
+    end
+
     class ServiceQuotaExceededException
       attr_accessor message: ::String
       attr_accessor code: ::String
@@ -1061,6 +1599,12 @@ module Aws::Mgn
       attr_accessor service_code: ::String
       attr_accessor quota_code: ::String
       attr_accessor quota_value: ::Integer
+      SENSITIVE: []
+    end
+
+    class SourceConfiguration
+      attr_accessor source_environment: ("NSX" | "VSPHERE" | "FORTIGATE_FIREWALL" | "PALO_ALTO_FIREWALL" | "CISCO_ACI" | "LOGICAL_MODEL" | "MODELIZE_IT")
+      attr_accessor source_s3_configuration: Types::SourceS3Configuration
       SENSITIVE: []
     end
 
@@ -1073,6 +1617,13 @@ module Aws::Mgn
       attr_accessor cpus: ::Array[Types::CPU]
       attr_accessor ram_bytes: ::Integer
       attr_accessor os: Types::OS
+      SENSITIVE: []
+    end
+
+    class SourceS3Configuration
+      attr_accessor s3_bucket: ::String
+      attr_accessor s3_bucket_owner: ::String
+      attr_accessor s3_key: ::String
       SENSITIVE: []
     end
 
@@ -1173,6 +1724,19 @@ module Aws::Mgn
       SENSITIVE: []
     end
 
+    class StartImportFileEnrichmentRequest
+      attr_accessor client_token: ::String
+      attr_accessor s3_bucket_source: Types::EnrichmentSourceS3Configuration
+      attr_accessor s3_bucket_target: Types::EnrichmentTargetS3Configuration
+      attr_accessor ip_assignment_strategy: ("STATIC" | "DYNAMIC")
+      SENSITIVE: []
+    end
+
+    class StartImportFileEnrichmentResponse
+      attr_accessor job_id: ::String
+      SENSITIVE: []
+    end
+
     class StartImportRequest
       attr_accessor client_token: ::String
       attr_accessor s3_bucket_source: Types::S3BucketSource
@@ -1183,6 +1747,80 @@ module Aws::Mgn
     class StartImportResponse
       attr_accessor import_task: Types::ImportTask
       SENSITIVE: []
+    end
+
+    class StartNetworkMigrationAnalysisRequest
+      attr_accessor network_migration_execution_id: ::String
+      attr_accessor network_migration_definition_id: ::String
+      SENSITIVE: []
+    end
+
+    class StartNetworkMigrationAnalysisResponse
+      attr_accessor job_id: ::String
+      SENSITIVE: []
+    end
+
+    class StartNetworkMigrationCodeGenerationRequest
+      attr_accessor network_migration_execution_id: ::String
+      attr_accessor network_migration_definition_id: ::String
+      attr_accessor code_generation_output_format_types: ::Array[("CDK_L1" | "CDK_L2" | "TERRAFORM" | "LZA")]
+      SENSITIVE: []
+    end
+
+    class StartNetworkMigrationCodeGenerationResponse
+      attr_accessor job_id: ::String
+      SENSITIVE: []
+    end
+
+    class StartNetworkMigrationDeployerJobResponse
+      attr_accessor job_id: ::String
+      SENSITIVE: []
+    end
+
+    class StartNetworkMigrationDeploymentRequest
+      attr_accessor network_migration_execution_id: ::String
+      attr_accessor network_migration_definition_id: ::String
+      SENSITIVE: []
+    end
+
+    class StartNetworkMigrationMappingRequest
+      attr_accessor network_migration_execution_id: ::String
+      attr_accessor network_migration_definition_id: ::String
+      attr_accessor security_group_mapping_strategy: ("MAP" | "SKIP")
+      SENSITIVE: []
+    end
+
+    class StartNetworkMigrationMappingResponse
+      attr_accessor job_id: ::String
+      SENSITIVE: []
+    end
+
+    class StartNetworkMigrationMappingUpdateConstruct
+      attr_accessor segment_id: ::String
+      attr_accessor construct_id: ::String
+      attr_accessor construct_type: ::String
+      attr_accessor operation: Types::OperationUnion
+      SENSITIVE: []
+    end
+
+    class StartNetworkMigrationMappingUpdateRequest
+      attr_accessor network_migration_execution_id: ::String
+      attr_accessor network_migration_definition_id: ::String
+      attr_accessor constructs: ::Array[Types::StartNetworkMigrationMappingUpdateConstruct]
+      attr_accessor segments: ::Array[Types::StartNetworkMigrationMappingUpdateSegment]
+      SENSITIVE: []
+    end
+
+    class StartNetworkMigrationMappingUpdateResponse
+      attr_accessor job_id: ::String
+      SENSITIVE: []
+    end
+
+    class StartNetworkMigrationMappingUpdateSegment
+      attr_accessor segment_id: ::String
+      attr_accessor target_account: ::String
+      attr_accessor scope_tags: ::Hash[::String, ::String]
+      SENSITIVE: [:scope_tags]
     end
 
     class StartReplicationRequest
@@ -1213,6 +1851,34 @@ module Aws::Mgn
       attr_accessor resource_arn: ::String
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: [:tags]
+    end
+
+    class TargetNetwork
+      attr_accessor topology: ("ISOLATED_VPC" | "HUB_AND_SPOKE")
+      attr_accessor inbound_cidr: ::String
+      attr_accessor outbound_cidr: ::String
+      attr_accessor inspection_cidr: ::String
+      SENSITIVE: []
+    end
+
+    class TargetNetworkUpdate
+      attr_accessor topology: ("ISOLATED_VPC" | "HUB_AND_SPOKE")
+      attr_accessor inbound_cidr: ::String
+      attr_accessor outbound_cidr: ::String
+      attr_accessor inspection_cidr: ::String
+      SENSITIVE: []
+    end
+
+    class TargetS3Configuration
+      attr_accessor s3_bucket: ::String
+      attr_accessor s3_bucket_owner: ::String
+      SENSITIVE: []
+    end
+
+    class TargetS3ConfigurationUpdate
+      attr_accessor s3_bucket: ::String
+      attr_accessor s3_bucket_owner: ::String
+      SENSITIVE: []
     end
 
     class TemplateActionDocument
@@ -1332,6 +1998,31 @@ module Aws::Mgn
       SENSITIVE: []
     end
 
+    class UpdateNetworkMigrationDefinitionRequest
+      attr_accessor network_migration_definition_id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor source_configurations: ::Array[Types::SourceConfiguration]
+      attr_accessor target_s3_configuration: Types::TargetS3ConfigurationUpdate
+      attr_accessor target_network: Types::TargetNetworkUpdate
+      attr_accessor target_deployment: ("SINGLE_ACCOUNT" | "MULTI_ACCOUNT")
+      attr_accessor scope_tags: ::Hash[::String, ::String]
+      SENSITIVE: [:scope_tags]
+    end
+
+    class UpdateNetworkMigrationMapperSegmentRequest
+      attr_accessor network_migration_definition_id: ::String
+      attr_accessor network_migration_execution_id: ::String
+      attr_accessor segment_id: ::String
+      attr_accessor scope_tags: ::Hash[::String, ::String]
+      SENSITIVE: [:scope_tags]
+    end
+
+    class UpdateOperation
+      attr_accessor properties: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
     class UpdateReplicationConfigurationRequest
       attr_accessor source_server_id: ::String
       attr_accessor name: ::String
@@ -1351,6 +2042,7 @@ module Aws::Mgn
       attr_accessor use_fips_endpoint: bool
       attr_accessor account_id: ::String
       attr_accessor internet_protocol: ("IPV4" | "IPV6")
+      attr_accessor store_snapshot_on_local_zone: bool
       SENSITIVE: [:staging_area_tags]
     end
 
@@ -1371,6 +2063,7 @@ module Aws::Mgn
       attr_accessor staging_area_tags: ::Hash[::String, ::String]
       attr_accessor use_fips_endpoint: bool
       attr_accessor internet_protocol: ("IPV4" | "IPV6")
+      attr_accessor store_snapshot_on_local_zone: bool
       SENSITIVE: [:staging_area_tags]
     end
 

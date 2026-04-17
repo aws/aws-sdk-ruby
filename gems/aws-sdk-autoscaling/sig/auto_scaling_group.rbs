@@ -48,6 +48,9 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/AutoScalingGroup.html#availability_zones-instance_method
       def availability_zones: () -> ::Array[::String]
 
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/AutoScalingGroup.html#availability_zone_ids-instance_method
+      def availability_zone_ids: () -> ::Array[::String]
+
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/AutoScalingGroup.html#load_balancer_names-instance_method
       def load_balancer_names: () -> ::Array[::String]
 
@@ -488,6 +491,7 @@ module Aws
                     ?desired_capacity: ::Integer,
                     ?default_cooldown: ::Integer,
                     ?availability_zones: Array[::String],
+                    ?availability_zone_ids: Array[::String],
                     ?health_check_type: ::String,
                     ?health_check_grace_period: ::Integer,
                     ?placement_group: ::String,

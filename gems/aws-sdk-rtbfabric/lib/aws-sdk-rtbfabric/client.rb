@@ -494,6 +494,9 @@ module Aws::RTBFabric
     # @option params [required, Types::LinkLogSettings] :log_settings
     #   Settings for the application logs.
     #
+    # @option params [Integer] :timeout_in_millis
+    #   The timeout value in milliseconds.
+    #
     # @return [Types::AcceptLinkResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::AcceptLinkResponse#gateway_id #gateway_id} => String
@@ -505,6 +508,8 @@ module Aws::RTBFabric
     #   * {Types::AcceptLinkResponse#flow_modules #flow_modules} => Array&lt;Types::ModuleConfiguration&gt;
     #   * {Types::AcceptLinkResponse#pending_flow_modules #pending_flow_modules} => Array&lt;Types::ModuleConfiguration&gt;
     #   * {Types::AcceptLinkResponse#attributes #attributes} => Types::LinkAttributes
+    #   * {Types::AcceptLinkResponse#log_settings #log_settings} => Types::LinkLogSettings
+    #   * {Types::AcceptLinkResponse#connectivity_type #connectivity_type} => String
     #   * {Types::AcceptLinkResponse#link_id #link_id} => String
     #
     #
@@ -559,6 +564,7 @@ module Aws::RTBFabric
     #         },
     #       },
     #     },
+    #     timeout_in_millis: 1,
     #   })
     #
     # @example Response structure
@@ -614,6 +620,9 @@ module Aws::RTBFabric
     #   resp.attributes.responder_error_masking[0].logging_types[0] #=> String, one of "NONE", "METRIC", "RESPONSE"
     #   resp.attributes.responder_error_masking[0].response_logging_percentage #=> Float
     #   resp.attributes.customer_provided_id #=> String
+    #   resp.log_settings.application_logs.sampling.error_log #=> Float
+    #   resp.log_settings.application_logs.sampling.filter_log #=> Float
+    #   resp.connectivity_type #=> String, one of "DEFAULT", "PUBLIC_INGRESS", "PUBLIC_EGRESS", "EXTERNAL_INBOUND"
     #   resp.link_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rtbfabric-2023-05-15/AcceptLink AWS API Documentation
@@ -640,7 +649,7 @@ module Aws::RTBFabric
     #   Attributes of the link.
     #
     # @option params [required, Types::LinkLogSettings] :log_settings
-    #   Describes the settings for a link log.
+    #   Settings for the application logs.
     #
     # @option params [Hash<String,String>] :tags
     #   A map of the key-value pairs of the tag or tags to assign to the
@@ -748,6 +757,9 @@ module Aws::RTBFabric
     # @option params [required, Types::LinkLogSettings] :log_settings
     #   Settings for the application logs.
     #
+    # @option params [Integer] :timeout_in_millis
+    #   The timeout value in milliseconds.
+    #
     # @return [Types::CreateLinkResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateLinkResponse#gateway_id #gateway_id} => String
@@ -759,13 +771,15 @@ module Aws::RTBFabric
     #   * {Types::CreateLinkResponse#flow_modules #flow_modules} => Array&lt;Types::ModuleConfiguration&gt;
     #   * {Types::CreateLinkResponse#pending_flow_modules #pending_flow_modules} => Array&lt;Types::ModuleConfiguration&gt;
     #   * {Types::CreateLinkResponse#attributes #attributes} => Types::LinkAttributes
+    #   * {Types::CreateLinkResponse#log_settings #log_settings} => Types::LinkLogSettings
+    #   * {Types::CreateLinkResponse#connectivity_type #connectivity_type} => String
     #   * {Types::CreateLinkResponse#link_id #link_id} => String
     #   * {Types::CreateLinkResponse#customer_provided_id #customer_provided_id} => String
     #
     #
-    # @example Example: Create a new link
+    # @example Example: Create a standard link between gateways
     #
-    #   # Creates a new link between RTB applications
+    #   # Creates a new link between two RTB applications. Requires peerGatewayId to specify the target gateway.
     #
     #   resp = client.create_link({
     #     gateway_id: "rtb-gw-12345678", 
@@ -818,6 +832,7 @@ module Aws::RTBFabric
     #         },
     #       },
     #     },
+    #     timeout_in_millis: 1,
     #   })
     #
     # @example Response structure
@@ -873,6 +888,9 @@ module Aws::RTBFabric
     #   resp.attributes.responder_error_masking[0].logging_types[0] #=> String, one of "NONE", "METRIC", "RESPONSE"
     #   resp.attributes.responder_error_masking[0].response_logging_percentage #=> Float
     #   resp.attributes.customer_provided_id #=> String
+    #   resp.log_settings.application_logs.sampling.error_log #=> Float
+    #   resp.log_settings.application_logs.sampling.filter_log #=> Float
+    #   resp.connectivity_type #=> String, one of "DEFAULT", "PUBLIC_INGRESS", "PUBLIC_EGRESS", "EXTERNAL_INBOUND"
     #   resp.link_id #=> String
     #   resp.customer_provided_id #=> String
     #
@@ -897,13 +915,13 @@ module Aws::RTBFabric
     #   The unique identifier of the gateway.
     #
     # @option params [Types::LinkAttributes] :attributes
-    #   Describes the attributes of a link.
+    #   Attributes of the link.
     #
     # @option params [required, String] :public_endpoint
     #   The public endpoint of the link.
     #
     # @option params [required, Types::LinkLogSettings] :log_settings
-    #   Describes the settings for a link log.
+    #   Settings for the application logs.
     #
     # @option params [Hash<String,String>] :tags
     #   A map of the key-value pairs of the tag or tags to assign to the
@@ -1091,6 +1109,10 @@ module Aws::RTBFabric
     # @option params [required, String] :protocol
     #   The networking protocol to use.
     #
+    # @option params [Types::ListenerConfig] :listener_config
+    #   Listener configuration for the protocols (HTTP, HTTPS, or both)
+    #   accepted by the gateway.
+    #
     # @option params [Types::TrustStoreConfiguration] :trust_store_configuration
     #   The configuration of the trust store.
     #
@@ -1110,10 +1132,15 @@ module Aws::RTBFabric
     #   A map of the key-value pairs of the tag or tags to assign to the
     #   resource.
     #
+    # @option params [String] :gateway_type
+    #   The type of gateway. Valid values are `EXTERNAL` or `INTERNAL`.
+    #
     # @return [Types::CreateResponderGatewayResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateResponderGatewayResponse#gateway_id #gateway_id} => String
     #   * {Types::CreateResponderGatewayResponse#status #status} => String
+    #   * {Types::CreateResponderGatewayResponse#listener_config #listener_config} => Types::ListenerConfig
+    #   * {Types::CreateResponderGatewayResponse#external_inbound_endpoint #external_inbound_endpoint} => String
     #
     #
     # @example Example: Create a responder gateway
@@ -1150,13 +1177,26 @@ module Aws::RTBFabric
     #     domain_name: "DomainName",
     #     port: 1, # required
     #     protocol: "HTTP", # required, accepts HTTP, HTTPS
+    #     listener_config: {
+    #       protocols: ["HTTP"], # required, accepts HTTP, HTTPS
+    #     },
     #     trust_store_configuration: {
     #       certificate_authority_certificates: ["Base64EncodedCertificateChain"], # required
     #     },
     #     managed_endpoint_configuration: {
     #       auto_scaling_groups: {
     #         auto_scaling_group_names: ["AutoScalingGroupName"], # required
-    #         role_arn: "String", # required
+    #         role_arn: "AutoScalingGroupsConfigurationRoleArnString", # required
+    #         health_check_config: {
+    #           port: 1, # required
+    #           path: "HealthCheckConfigPathString", # required
+    #           protocol: "HTTP", # accepts HTTP, HTTPS
+    #           timeout_ms: 1,
+    #           interval_seconds: 1,
+    #           status_code_matcher: "StatusCodeMatcher",
+    #           healthy_threshold_count: 1,
+    #           unhealthy_threshold_count: 1,
+    #         },
     #       },
     #       eks_endpoints: {
     #         endpoints_resource_name: "KubernetesEndpointsResourceName", # required
@@ -1164,7 +1204,7 @@ module Aws::RTBFabric
     #         cluster_api_server_endpoint_uri: "URI", # required
     #         cluster_api_server_ca_certificate_chain: "Base64EncodedCertificateChain", # required
     #         cluster_name: "KubernetesClusterName", # required
-    #         role_arn: "String", # required
+    #         role_arn: "EksEndpointsConfigurationRoleArnString", # required
     #       },
     #     },
     #     client_token: "String", # required
@@ -1172,12 +1212,16 @@ module Aws::RTBFabric
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
+    #     gateway_type: "EXTERNAL", # accepts EXTERNAL, INTERNAL
     #   })
     #
     # @example Response structure
     #
     #   resp.gateway_id #=> String
     #   resp.status #=> String, one of "PENDING_CREATION", "ACTIVE", "PENDING_DELETION", "DELETED", "ERROR", "PENDING_UPDATE", "ISOLATED", "PENDING_ISOLATION", "PENDING_RESTORATION"
+    #   resp.listener_config.protocols #=> Array
+    #   resp.listener_config.protocols[0] #=> String, one of "HTTP", "HTTPS"
+    #   resp.external_inbound_endpoint #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rtbfabric-2023-05-15/CreateResponderGateway AWS API Documentation
     #
@@ -1452,6 +1496,7 @@ module Aws::RTBFabric
     #   * {Types::GetInboundExternalLinkResponse#updated_at #updated_at} => Time
     #   * {Types::GetInboundExternalLinkResponse#tags #tags} => Hash&lt;String,String&gt;
     #   * {Types::GetInboundExternalLinkResponse#log_settings #log_settings} => Types::LinkLogSettings
+    #   * {Types::GetInboundExternalLinkResponse#connectivity_type #connectivity_type} => String
     #
     #
     # @example Example: Get inbound external link details
@@ -1466,7 +1511,7 @@ module Aws::RTBFabric
     #   resp.to_h outputs the following:
     #   {
     #     created_at: Time.parse("2024-01-15T10:30:00Z"), 
-    #     domain_name: "rtb-gw-12345678.example.com", 
+    #     domain_name: "rtb-gw-12345678.123456789012.gateway.rtbfabric.us-east-1.amazonaws.com", 
     #     gateway_id: "rtb-gw-12345678", 
     #     link_id: "link-87654321", 
     #     status: "ACTIVE", 
@@ -1537,11 +1582,13 @@ module Aws::RTBFabric
     #   resp.tags["TagKey"] #=> String
     #   resp.log_settings.application_logs.sampling.error_log #=> Float
     #   resp.log_settings.application_logs.sampling.filter_log #=> Float
+    #   resp.connectivity_type #=> String, one of "DEFAULT", "PUBLIC_INGRESS", "PUBLIC_EGRESS", "EXTERNAL_INBOUND"
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
     #
     #   * inbound_external_link_active
+    #   * inbound_external_link_deleted
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rtbfabric-2023-05-15/GetInboundExternalLink AWS API Documentation
     #
@@ -1574,9 +1621,12 @@ module Aws::RTBFabric
     #   * {Types::GetLinkResponse#flow_modules #flow_modules} => Array&lt;Types::ModuleConfiguration&gt;
     #   * {Types::GetLinkResponse#pending_flow_modules #pending_flow_modules} => Array&lt;Types::ModuleConfiguration&gt;
     #   * {Types::GetLinkResponse#attributes #attributes} => Types::LinkAttributes
+    #   * {Types::GetLinkResponse#log_settings #log_settings} => Types::LinkLogSettings
+    #   * {Types::GetLinkResponse#connectivity_type #connectivity_type} => String
     #   * {Types::GetLinkResponse#link_id #link_id} => String
     #   * {Types::GetLinkResponse#tags #tags} => Hash&lt;String,String&gt;
-    #   * {Types::GetLinkResponse#log_settings #log_settings} => Types::LinkLogSettings
+    #   * {Types::GetLinkResponse#http_responder_allowed #http_responder_allowed} => Boolean
+    #   * {Types::GetLinkResponse#timeout_in_millis #timeout_in_millis} => Integer
     #
     #
     # @example Example: Get link details
@@ -1658,17 +1708,21 @@ module Aws::RTBFabric
     #   resp.attributes.responder_error_masking[0].logging_types[0] #=> String, one of "NONE", "METRIC", "RESPONSE"
     #   resp.attributes.responder_error_masking[0].response_logging_percentage #=> Float
     #   resp.attributes.customer_provided_id #=> String
+    #   resp.log_settings.application_logs.sampling.error_log #=> Float
+    #   resp.log_settings.application_logs.sampling.filter_log #=> Float
+    #   resp.connectivity_type #=> String, one of "DEFAULT", "PUBLIC_INGRESS", "PUBLIC_EGRESS", "EXTERNAL_INBOUND"
     #   resp.link_id #=> String
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
-    #   resp.log_settings.application_logs.sampling.error_log #=> Float
-    #   resp.log_settings.application_logs.sampling.filter_log #=> Float
+    #   resp.http_responder_allowed #=> Boolean
+    #   resp.timeout_in_millis #=> Integer
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
     #
     #   * link_accepted
     #   * link_active
+    #   * link_deleted
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rtbfabric-2023-05-15/GetLink AWS API Documentation
     #
@@ -1693,10 +1747,14 @@ module Aws::RTBFabric
     #   * {Types::GetOutboundExternalLinkResponse#link_id #link_id} => String
     #   * {Types::GetOutboundExternalLinkResponse#status #status} => String
     #   * {Types::GetOutboundExternalLinkResponse#public_endpoint #public_endpoint} => String
+    #   * {Types::GetOutboundExternalLinkResponse#flow_modules #flow_modules} => Array&lt;Types::ModuleConfiguration&gt;
+    #   * {Types::GetOutboundExternalLinkResponse#pending_flow_modules #pending_flow_modules} => Array&lt;Types::ModuleConfiguration&gt;
+    #   * {Types::GetOutboundExternalLinkResponse#attributes #attributes} => Types::LinkAttributes
     #   * {Types::GetOutboundExternalLinkResponse#created_at #created_at} => Time
     #   * {Types::GetOutboundExternalLinkResponse#updated_at #updated_at} => Time
     #   * {Types::GetOutboundExternalLinkResponse#tags #tags} => Hash&lt;String,String&gt;
     #   * {Types::GetOutboundExternalLinkResponse#log_settings #log_settings} => Types::LinkLogSettings
+    #   * {Types::GetOutboundExternalLinkResponse#connectivity_type #connectivity_type} => String
     #
     #
     # @example Example: Get outbound external link details
@@ -1731,17 +1789,64 @@ module Aws::RTBFabric
     #   resp.link_id #=> String
     #   resp.status #=> String, one of "PENDING_CREATION", "PENDING_REQUEST", "REQUESTED", "ACCEPTED", "ACTIVE", "REJECTED", "FAILED", "PENDING_DELETION", "DELETED", "PENDING_UPDATE", "PENDING_ISOLATION", "ISOLATED", "PENDING_RESTORATION"
     #   resp.public_endpoint #=> String
+    #   resp.flow_modules #=> Array
+    #   resp.flow_modules[0].version #=> String
+    #   resp.flow_modules[0].name #=> String
+    #   resp.flow_modules[0].depends_on #=> Array
+    #   resp.flow_modules[0].depends_on[0] #=> String
+    #   resp.flow_modules[0].module_parameters.no_bid.reason #=> String
+    #   resp.flow_modules[0].module_parameters.no_bid.reason_code #=> Integer
+    #   resp.flow_modules[0].module_parameters.no_bid.pass_through_percentage #=> Float
+    #   resp.flow_modules[0].module_parameters.open_rtb_attribute.filter_type #=> String, one of "INCLUDE", "EXCLUDE"
+    #   resp.flow_modules[0].module_parameters.open_rtb_attribute.filter_configuration #=> Array
+    #   resp.flow_modules[0].module_parameters.open_rtb_attribute.filter_configuration[0].criteria #=> Array
+    #   resp.flow_modules[0].module_parameters.open_rtb_attribute.filter_configuration[0].criteria[0].path #=> String
+    #   resp.flow_modules[0].module_parameters.open_rtb_attribute.filter_configuration[0].criteria[0].values #=> Array
+    #   resp.flow_modules[0].module_parameters.open_rtb_attribute.filter_configuration[0].criteria[0].values[0] #=> String
+    #   resp.flow_modules[0].module_parameters.open_rtb_attribute.action.no_bid.no_bid_reason_code #=> Integer
+    #   resp.flow_modules[0].module_parameters.open_rtb_attribute.action.header_tag.name #=> String
+    #   resp.flow_modules[0].module_parameters.open_rtb_attribute.action.header_tag.value #=> String
+    #   resp.flow_modules[0].module_parameters.open_rtb_attribute.holdback_percentage #=> Float
+    #   resp.flow_modules[0].module_parameters.rate_limiter.tps #=> Float
+    #   resp.pending_flow_modules #=> Array
+    #   resp.pending_flow_modules[0].version #=> String
+    #   resp.pending_flow_modules[0].name #=> String
+    #   resp.pending_flow_modules[0].depends_on #=> Array
+    #   resp.pending_flow_modules[0].depends_on[0] #=> String
+    #   resp.pending_flow_modules[0].module_parameters.no_bid.reason #=> String
+    #   resp.pending_flow_modules[0].module_parameters.no_bid.reason_code #=> Integer
+    #   resp.pending_flow_modules[0].module_parameters.no_bid.pass_through_percentage #=> Float
+    #   resp.pending_flow_modules[0].module_parameters.open_rtb_attribute.filter_type #=> String, one of "INCLUDE", "EXCLUDE"
+    #   resp.pending_flow_modules[0].module_parameters.open_rtb_attribute.filter_configuration #=> Array
+    #   resp.pending_flow_modules[0].module_parameters.open_rtb_attribute.filter_configuration[0].criteria #=> Array
+    #   resp.pending_flow_modules[0].module_parameters.open_rtb_attribute.filter_configuration[0].criteria[0].path #=> String
+    #   resp.pending_flow_modules[0].module_parameters.open_rtb_attribute.filter_configuration[0].criteria[0].values #=> Array
+    #   resp.pending_flow_modules[0].module_parameters.open_rtb_attribute.filter_configuration[0].criteria[0].values[0] #=> String
+    #   resp.pending_flow_modules[0].module_parameters.open_rtb_attribute.action.no_bid.no_bid_reason_code #=> Integer
+    #   resp.pending_flow_modules[0].module_parameters.open_rtb_attribute.action.header_tag.name #=> String
+    #   resp.pending_flow_modules[0].module_parameters.open_rtb_attribute.action.header_tag.value #=> String
+    #   resp.pending_flow_modules[0].module_parameters.open_rtb_attribute.holdback_percentage #=> Float
+    #   resp.pending_flow_modules[0].module_parameters.rate_limiter.tps #=> Float
+    #   resp.attributes.responder_error_masking #=> Array
+    #   resp.attributes.responder_error_masking[0].http_code #=> String
+    #   resp.attributes.responder_error_masking[0].action #=> String, one of "NO_BID", "PASSTHROUGH"
+    #   resp.attributes.responder_error_masking[0].logging_types #=> Array
+    #   resp.attributes.responder_error_masking[0].logging_types[0] #=> String, one of "NONE", "METRIC", "RESPONSE"
+    #   resp.attributes.responder_error_masking[0].response_logging_percentage #=> Float
+    #   resp.attributes.customer_provided_id #=> String
     #   resp.created_at #=> Time
     #   resp.updated_at #=> Time
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
     #   resp.log_settings.application_logs.sampling.error_log #=> Float
     #   resp.log_settings.application_logs.sampling.filter_log #=> Float
+    #   resp.connectivity_type #=> String, one of "DEFAULT", "PUBLIC_INGRESS", "PUBLIC_EGRESS", "EXTERNAL_INBOUND"
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
     #
     #   * outbound_external_link_active
+    #   * outbound_external_link_deleted
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rtbfabric-2023-05-15/GetOutboundExternalLink AWS API Documentation
     #
@@ -1857,6 +1962,7 @@ module Aws::RTBFabric
     #   * {Types::GetResponderGatewayResponse#domain_name #domain_name} => String
     #   * {Types::GetResponderGatewayResponse#port #port} => Integer
     #   * {Types::GetResponderGatewayResponse#protocol #protocol} => String
+    #   * {Types::GetResponderGatewayResponse#listener_config #listener_config} => Types::ListenerConfig
     #   * {Types::GetResponderGatewayResponse#trust_store_configuration #trust_store_configuration} => Types::TrustStoreConfiguration
     #   * {Types::GetResponderGatewayResponse#managed_endpoint_configuration #managed_endpoint_configuration} => Types::ManagedEndpointConfiguration
     #   * {Types::GetResponderGatewayResponse#gateway_id #gateway_id} => String
@@ -1864,6 +1970,8 @@ module Aws::RTBFabric
     #   * {Types::GetResponderGatewayResponse#active_links_count #active_links_count} => Integer
     #   * {Types::GetResponderGatewayResponse#total_links_count #total_links_count} => Integer
     #   * {Types::GetResponderGatewayResponse#inbound_links_count #inbound_links_count} => Integer
+    #   * {Types::GetResponderGatewayResponse#gateway_type #gateway_type} => String
+    #   * {Types::GetResponderGatewayResponse#external_inbound_endpoint #external_inbound_endpoint} => String
     #
     #
     # @example Example: Get responder gateway details
@@ -1916,11 +2024,21 @@ module Aws::RTBFabric
     #   resp.domain_name #=> String
     #   resp.port #=> Integer
     #   resp.protocol #=> String, one of "HTTP", "HTTPS"
+    #   resp.listener_config.protocols #=> Array
+    #   resp.listener_config.protocols[0] #=> String, one of "HTTP", "HTTPS"
     #   resp.trust_store_configuration.certificate_authority_certificates #=> Array
     #   resp.trust_store_configuration.certificate_authority_certificates[0] #=> String
     #   resp.managed_endpoint_configuration.auto_scaling_groups.auto_scaling_group_names #=> Array
     #   resp.managed_endpoint_configuration.auto_scaling_groups.auto_scaling_group_names[0] #=> String
     #   resp.managed_endpoint_configuration.auto_scaling_groups.role_arn #=> String
+    #   resp.managed_endpoint_configuration.auto_scaling_groups.health_check_config.port #=> Integer
+    #   resp.managed_endpoint_configuration.auto_scaling_groups.health_check_config.path #=> String
+    #   resp.managed_endpoint_configuration.auto_scaling_groups.health_check_config.protocol #=> String, one of "HTTP", "HTTPS"
+    #   resp.managed_endpoint_configuration.auto_scaling_groups.health_check_config.timeout_ms #=> Integer
+    #   resp.managed_endpoint_configuration.auto_scaling_groups.health_check_config.interval_seconds #=> Integer
+    #   resp.managed_endpoint_configuration.auto_scaling_groups.health_check_config.status_code_matcher #=> String
+    #   resp.managed_endpoint_configuration.auto_scaling_groups.health_check_config.healthy_threshold_count #=> Integer
+    #   resp.managed_endpoint_configuration.auto_scaling_groups.health_check_config.unhealthy_threshold_count #=> Integer
     #   resp.managed_endpoint_configuration.eks_endpoints.endpoints_resource_name #=> String
     #   resp.managed_endpoint_configuration.eks_endpoints.endpoints_resource_namespace #=> String
     #   resp.managed_endpoint_configuration.eks_endpoints.cluster_api_server_endpoint_uri #=> String
@@ -1933,6 +2051,8 @@ module Aws::RTBFabric
     #   resp.active_links_count #=> Integer
     #   resp.total_links_count #=> Integer
     #   resp.inbound_links_count #=> Integer
+    #   resp.gateway_type #=> String, one of "EXTERNAL", "INTERNAL"
+    #   resp.external_inbound_endpoint #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -2065,9 +2185,13 @@ module Aws::RTBFabric
     #   resp.links[0].attributes.responder_error_masking[0].logging_types[0] #=> String, one of "NONE", "METRIC", "RESPONSE"
     #   resp.links[0].attributes.responder_error_masking[0].response_logging_percentage #=> Float
     #   resp.links[0].attributes.customer_provided_id #=> String
+    #   resp.links[0].log_settings.application_logs.sampling.error_log #=> Float
+    #   resp.links[0].log_settings.application_logs.sampling.filter_log #=> Float
+    #   resp.links[0].connectivity_type #=> String, one of "DEFAULT", "PUBLIC_INGRESS", "PUBLIC_EGRESS", "EXTERNAL_INBOUND"
     #   resp.links[0].link_id #=> String
     #   resp.links[0].tags #=> Hash
     #   resp.links[0].tags["TagKey"] #=> String
+    #   resp.links[0].public_endpoint #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rtbfabric-2023-05-15/ListLinks AWS API Documentation
@@ -2310,6 +2434,8 @@ module Aws::RTBFabric
     #   * {Types::RejectLinkResponse#flow_modules #flow_modules} => Array&lt;Types::ModuleConfiguration&gt;
     #   * {Types::RejectLinkResponse#pending_flow_modules #pending_flow_modules} => Array&lt;Types::ModuleConfiguration&gt;
     #   * {Types::RejectLinkResponse#attributes #attributes} => Types::LinkAttributes
+    #   * {Types::RejectLinkResponse#log_settings #log_settings} => Types::LinkLogSettings
+    #   * {Types::RejectLinkResponse#connectivity_type #connectivity_type} => String
     #   * {Types::RejectLinkResponse#link_id #link_id} => String
     #
     #
@@ -2392,6 +2518,9 @@ module Aws::RTBFabric
     #   resp.attributes.responder_error_masking[0].logging_types[0] #=> String, one of "NONE", "METRIC", "RESPONSE"
     #   resp.attributes.responder_error_masking[0].response_logging_percentage #=> Float
     #   resp.attributes.customer_provided_id #=> String
+    #   resp.log_settings.application_logs.sampling.error_log #=> Float
+    #   resp.log_settings.application_logs.sampling.filter_log #=> Float
+    #   resp.connectivity_type #=> String, one of "DEFAULT", "PUBLIC_INGRESS", "PUBLIC_EGRESS", "EXTERNAL_INBOUND"
     #   resp.link_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rtbfabric-2023-05-15/RejectLink AWS API Documentation
@@ -2506,6 +2635,9 @@ module Aws::RTBFabric
     # @option params [Types::LinkLogSettings] :log_settings
     #   Settings for the application logs.
     #
+    # @option params [Integer] :timeout_in_millis
+    #   The timeout value in milliseconds.
+    #
     # @return [Types::UpdateLinkResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateLinkResponse#link_id #link_id} => String
@@ -2548,6 +2680,7 @@ module Aws::RTBFabric
     #         },
     #       },
     #     },
+    #     timeout_in_millis: 1,
     #   })
     #
     # @example Response structure
@@ -2752,6 +2885,9 @@ module Aws::RTBFabric
     # @option params [required, String] :protocol
     #   The networking protocol to use.
     #
+    # @option params [Types::ListenerConfig] :listener_config
+    #   The listener configuration for the responder gateway.
+    #
     # @option params [Types::TrustStoreConfiguration] :trust_store_configuration
     #   The configuration of the trust store.
     #
@@ -2800,13 +2936,26 @@ module Aws::RTBFabric
     #     domain_name: "DomainName",
     #     port: 1, # required
     #     protocol: "HTTP", # required, accepts HTTP, HTTPS
+    #     listener_config: {
+    #       protocols: ["HTTP"], # required, accepts HTTP, HTTPS
+    #     },
     #     trust_store_configuration: {
     #       certificate_authority_certificates: ["Base64EncodedCertificateChain"], # required
     #     },
     #     managed_endpoint_configuration: {
     #       auto_scaling_groups: {
     #         auto_scaling_group_names: ["AutoScalingGroupName"], # required
-    #         role_arn: "String", # required
+    #         role_arn: "AutoScalingGroupsConfigurationRoleArnString", # required
+    #         health_check_config: {
+    #           port: 1, # required
+    #           path: "HealthCheckConfigPathString", # required
+    #           protocol: "HTTP", # accepts HTTP, HTTPS
+    #           timeout_ms: 1,
+    #           interval_seconds: 1,
+    #           status_code_matcher: "StatusCodeMatcher",
+    #           healthy_threshold_count: 1,
+    #           unhealthy_threshold_count: 1,
+    #         },
     #       },
     #       eks_endpoints: {
     #         endpoints_resource_name: "KubernetesEndpointsResourceName", # required
@@ -2814,7 +2963,7 @@ module Aws::RTBFabric
     #         cluster_api_server_endpoint_uri: "URI", # required
     #         cluster_api_server_ca_certificate_chain: "Base64EncodedCertificateChain", # required
     #         cluster_name: "KubernetesClusterName", # required
-    #         role_arn: "String", # required
+    #         role_arn: "EksEndpointsConfigurationRoleArnString", # required
     #       },
     #     },
     #     client_token: "String", # required
@@ -2854,7 +3003,7 @@ module Aws::RTBFabric
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-rtbfabric'
-      context[:gem_version] = '1.7.0'
+      context[:gem_version] = '1.10.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
@@ -2920,16 +3069,19 @@ module Aws::RTBFabric
     # The following table lists the valid waiter names, the operations they call,
     # and the default `:delay` and `:max_attempts` values.
     #
-    # | waiter_name                   | params                              | :delay   | :max_attempts |
-    # | ----------------------------- | ----------------------------------- | -------- | ------------- |
-    # | inbound_external_link_active  | {Client#get_inbound_external_link}  | 30       | 5             |
-    # | link_accepted                 | {Client#get_link}                   | 30       | 5             |
-    # | link_active                   | {Client#get_link}                   | 30       | 5             |
-    # | outbound_external_link_active | {Client#get_outbound_external_link} | 30       | 5             |
-    # | requester_gateway_active      | {Client#get_requester_gateway}      | 30       | 5             |
-    # | requester_gateway_deleted     | {Client#get_requester_gateway}      | 30       | 5             |
-    # | responder_gateway_active      | {Client#get_responder_gateway}      | 30       | 5             |
-    # | responder_gateway_deleted     | {Client#get_responder_gateway}      | 30       | 5             |
+    # | waiter_name                    | params                              | :delay   | :max_attempts |
+    # | ------------------------------ | ----------------------------------- | -------- | ------------- |
+    # | inbound_external_link_active   | {Client#get_inbound_external_link}  | 30       | 5             |
+    # | inbound_external_link_deleted  | {Client#get_inbound_external_link}  | 30       | 5             |
+    # | link_accepted                  | {Client#get_link}                   | 30       | 5             |
+    # | link_active                    | {Client#get_link}                   | 30       | 5             |
+    # | link_deleted                   | {Client#get_link}                   | 30       | 5             |
+    # | outbound_external_link_active  | {Client#get_outbound_external_link} | 30       | 5             |
+    # | outbound_external_link_deleted | {Client#get_outbound_external_link} | 30       | 5             |
+    # | requester_gateway_active       | {Client#get_requester_gateway}      | 30       | 5             |
+    # | requester_gateway_deleted      | {Client#get_requester_gateway}      | 30       | 5             |
+    # | responder_gateway_active       | {Client#get_responder_gateway}      | 30       | 5             |
+    # | responder_gateway_deleted      | {Client#get_responder_gateway}      | 30       | 5             |
     #
     # @raise [Errors::FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition
@@ -2981,9 +3133,12 @@ module Aws::RTBFabric
     def waiters
       {
         inbound_external_link_active: Waiters::InboundExternalLinkActive,
+        inbound_external_link_deleted: Waiters::InboundExternalLinkDeleted,
         link_accepted: Waiters::LinkAccepted,
         link_active: Waiters::LinkActive,
+        link_deleted: Waiters::LinkDeleted,
         outbound_external_link_active: Waiters::OutboundExternalLinkActive,
+        outbound_external_link_deleted: Waiters::OutboundExternalLinkDeleted,
         requester_gateway_active: Waiters::RequesterGatewayActive,
         requester_gateway_deleted: Waiters::RequesterGatewayDeleted,
         responder_gateway_active: Waiters::ResponderGatewayActive,

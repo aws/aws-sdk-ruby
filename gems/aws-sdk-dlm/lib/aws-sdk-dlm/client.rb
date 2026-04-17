@@ -654,7 +654,8 @@ module Aws::DLM
     #             count: 1,
     #             interval: 1,
     #             interval_unit: "DAYS", # accepts DAYS, WEEKS, MONTHS, YEARS
-    #             availability_zones: ["AvailabilityZone"], # required
+    #             availability_zones: ["AvailabilityZone"],
+    #             availability_zone_ids: ["AvailabilityZoneId"],
     #           },
     #           cross_region_copy_rules: [
     #             {
@@ -962,6 +963,8 @@ module Aws::DLM
     #   resp.policy.policy_details.schedules[0].fast_restore_rule.interval_unit #=> String, one of "DAYS", "WEEKS", "MONTHS", "YEARS"
     #   resp.policy.policy_details.schedules[0].fast_restore_rule.availability_zones #=> Array
     #   resp.policy.policy_details.schedules[0].fast_restore_rule.availability_zones[0] #=> String
+    #   resp.policy.policy_details.schedules[0].fast_restore_rule.availability_zone_ids #=> Array
+    #   resp.policy.policy_details.schedules[0].fast_restore_rule.availability_zone_ids[0] #=> String
     #   resp.policy.policy_details.schedules[0].cross_region_copy_rules #=> Array
     #   resp.policy.policy_details.schedules[0].cross_region_copy_rules[0].target_region #=> String
     #   resp.policy.policy_details.schedules[0].cross_region_copy_rules[0].target #=> String
@@ -1250,7 +1253,8 @@ module Aws::DLM
     #             count: 1,
     #             interval: 1,
     #             interval_unit: "DAYS", # accepts DAYS, WEEKS, MONTHS, YEARS
-    #             availability_zones: ["AvailabilityZone"], # required
+    #             availability_zones: ["AvailabilityZone"],
+    #             availability_zone_ids: ["AvailabilityZoneId"],
     #           },
     #           cross_region_copy_rules: [
     #             {
@@ -1398,7 +1402,7 @@ module Aws::DLM
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-dlm'
-      context[:gem_version] = '1.99.0'
+      context[:gem_version] = '1.101.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

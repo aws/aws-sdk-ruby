@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.75.0 (2026-04-02)
+------------------
+
+* Feature - Relax ToolUseId pattern to allow dots and colons
+
+1.74.0 (2026-03-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.73.0 (2026-02-04)
 ------------------
 

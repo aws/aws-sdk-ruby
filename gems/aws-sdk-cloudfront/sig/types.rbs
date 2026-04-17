@@ -3867,6 +3867,7 @@ module Aws::CloudFront
     class UpdateAnycastIpListRequest
       attr_accessor id: ::String
       attr_accessor ip_address_type: ("ipv4" | "ipv6" | "dualstack")
+      attr_accessor ipam_cidr_configs: ::Array[Types::IpamCidrConfig]
       attr_accessor if_match: ::String
       SENSITIVE: []
     end

@@ -329,10 +329,10 @@ module Aws::CloudWatch
     #     ],
     #     period: 1,
     #     unit: "Seconds", # accepts Seconds, Microseconds, Milliseconds, Bytes, Kilobytes, Megabytes, Gigabytes, Terabytes, Bits, Kilobits, Megabits, Gigabits, Terabits, Percent, Count, Bytes/Second, Kilobytes/Second, Megabytes/Second, Gigabytes/Second, Terabytes/Second, Bits/Second, Kilobits/Second, Megabits/Second, Gigabits/Second, Terabits/Second, Count/Second, None
-    #     evaluation_periods: 1, # required
+    #     evaluation_periods: 1,
     #     datapoints_to_alarm: 1,
     #     threshold: 1.0,
-    #     comparison_operator: "GreaterThanOrEqualToThreshold", # required, accepts GreaterThanOrEqualToThreshold, GreaterThanThreshold, LessThanThreshold, LessThanOrEqualToThreshold, LessThanLowerOrGreaterThanUpperThreshold, LessThanLowerThreshold, GreaterThanUpperThreshold
+    #     comparison_operator: "GreaterThanOrEqualToThreshold", # accepts GreaterThanOrEqualToThreshold, GreaterThanThreshold, LessThanThreshold, LessThanOrEqualToThreshold, LessThanLowerOrGreaterThanUpperThreshold, LessThanLowerThreshold, GreaterThanUpperThreshold
     #     treat_missing_data: "TreatMissingData",
     #     evaluate_low_sample_count_percentile: "EvaluateLowSampleCountPercentile",
     #     metrics: [
@@ -367,6 +367,14 @@ module Aws::CloudWatch
     #       },
     #     ],
     #     threshold_metric_id: "MetricId",
+    #     evaluation_criteria: {
+    #       prom_ql_criteria: {
+    #         query: "Query", # required
+    #         pending_period: 1,
+    #         recovery_period: 1,
+    #       },
+    #     },
+    #     evaluation_interval: 1,
     #   })
     # @param [Hash] options ({})
     # @option options [required, String] :alarm_name
@@ -643,7 +651,7 @@ module Aws::CloudWatch
     #   We recommend omitting `Unit` so that you don't inadvertently specify
     #   an incorrect unit that is not published for this metric. Doing so
     #   causes the alarm to be stuck in the `INSUFFICIENT DATA` state.
-    # @option options [required, Integer] :evaluation_periods
+    # @option options [Integer] :evaluation_periods
     #   The number of periods over which data is compared to the specified
     #   threshold. If you are setting an alarm that requires that a number of
     #   consecutive data points be breaching to trigger the alarm, this value
@@ -663,7 +671,7 @@ module Aws::CloudWatch
     #
     #   This parameter is required for alarms based on static thresholds, but
     #   should not be used for alarms based on anomaly detection models.
-    # @option options [required, String] :comparison_operator
+    # @option options [String] :comparison_operator
     #   The arithmetic operation to use when comparing the specified statistic
     #   and threshold. The specified statistic value is used as the first
     #   operand.
@@ -683,6 +691,10 @@ module Aws::CloudWatch
     #   `ignore` missing data even if you choose a different option for
     #   `TreatMissingData`. When an `AWS/DynamoDB` metric has missing data,
     #   alarms that evaluate that metric remain in their current state.
+    #
+    #    </note>
+    #
+    #   <note markdown="1"> This parameter is not applicable to PromQL alarms.
     #
     #    </note>
     #
@@ -706,8 +718,8 @@ module Aws::CloudWatch
     # @option options [Array<Types::MetricDataQuery>] :metrics
     #   An array of `MetricDataQuery` structures that enable you to create an
     #   alarm based on the result of a metric math expression. For each
-    #   `PutMetricAlarm` operation, you must specify either `MetricName` or a
-    #   `Metrics` array.
+    #   `PutMetricAlarm` operation, you must specify either `MetricName`, a
+    #   `Metrics` array, or an `EvaluationCriteria`.
     #
     #   Each item in the `Metrics` array either retrieves a metric or performs
     #   a math expression.
@@ -757,6 +769,28 @@ module Aws::CloudWatch
     #
     #   If your alarm uses this parameter, it cannot have Auto Scaling
     #   actions.
+    # @option options [Types::EvaluationCriteria] :evaluation_criteria
+    #   The evaluation criteria for the alarm. For each `PutMetricAlarm`
+    #   operation, you must specify either `MetricName`, a `Metrics` array, or
+    #   an `EvaluationCriteria`.
+    #
+    #   If you use the `EvaluationCriteria` parameter, you cannot include the
+    #   `Namespace`, `MetricName`, `Dimensions`, `Period`, `Unit`,
+    #   `Statistic`, `ExtendedStatistic`, `Metrics`, `Threshold`,
+    #   `ComparisonOperator`, `ThresholdMetricId`, `EvaluationPeriods`, or
+    #   `DatapointsToAlarm` parameters of `PutMetricAlarm` in the same
+    #   operation. Instead, all evaluation parameters are defined within this
+    #   structure.
+    #
+    #   For an example of how to use this parameter, see the **PromQL alarm**
+    #   example on this page.
+    # @option options [Integer] :evaluation_interval
+    #   The frequency, in seconds, at which the alarm is evaluated. Valid
+    #   values are 10, 20, 30, and any multiple of 60.
+    #
+    #   This parameter is required for alarms that use `EvaluationCriteria`,
+    #   and cannot be specified for alarms configured with `MetricName` or
+    #   `Metrics`.
     # @return [Alarm]
     def put_alarm(options = {})
       options = options.merge(

@@ -1569,6 +1569,8 @@ module Aws::DatabaseMigrationService
       attr_accessor database_name: ::String
       attr_accessor ssl_mode: ("none" | "require" | "verify-ca" | "verify-full")
       attr_accessor certificate_arn: ::String
+      attr_accessor encryption_algorithm: ::Integer
+      attr_accessor security_mechanism: ::Integer
       attr_accessor s3_path: ::String
       attr_accessor s3_access_role_arn: ::String
       SENSITIVE: []

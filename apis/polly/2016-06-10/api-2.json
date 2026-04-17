@@ -4,6 +4,7 @@
     "apiVersion":"2016-06-10",
     "endpointPrefix":"polly",
     "protocol":"rest-json",
+    "protocolSettings":{"h2":"eventstream"},
     "protocols":["rest-json"],
     "serviceFullName":"Amazon Polly",
     "serviceId":"Polly",
@@ -116,6 +117,21 @@
         {"shape":"ServiceFailureException"}
       ]
     },
+    "StartSpeechSynthesisStream":{
+      "name":"StartSpeechSynthesisStream",
+      "http":{
+        "method":"POST",
+        "requestUri":"/v1/synthesisStream"
+      },
+      "input":{"shape":"StartSpeechSynthesisStreamInput"},
+      "output":{"shape":"StartSpeechSynthesisStreamOutput"},
+      "errors":[
+        {"shape":"ValidationException"},
+        {"shape":"ServiceQuotaExceededException"},
+        {"shape":"ServiceFailureException"},
+        {"shape":"ThrottlingException"}
+      ]
+    },
     "StartSpeechSynthesisTask":{
       "name":"StartSpeechSynthesisTask",
       "http":{
@@ -164,11 +180,30 @@
   },
   "shapes":{
     "Alphabet":{"type":"string"},
+    "AudioChunk":{"type":"blob"},
+    "AudioEvent":{
+      "type":"structure",
+      "members":{
+        "AudioChunk":{
+          "shape":"AudioChunk",
+          "eventpayload":true
+        }
+      },
+      "event":true
+    },
     "AudioStream":{
       "type":"blob",
       "streaming":true
     },
+    "AvailabilityErrorMessage":{"type":"string"},
+    "CloseStreamEvent":{
+      "type":"structure",
+      "members":{},
+      "event":true
+    },
     "ContentType":{"type":"string"},
+    "CoralAvailabilityThrottledResource":{"type":"string"},
+    "CoralAvailabilityThrottlingReason":{"type":"string"},
     "DateTime":{"type":"timestamp"},
     "DeleteLexiconInput":{
       "type":"structure",
@@ -239,6 +274,13 @@
       "exception":true
     },
     "ErrorMessage":{"type":"string"},
+    "FlushStreamConfiguration":{
+      "type":"structure",
+      "members":{
+        "Force":{"shape":"Force"}
+      }
+    },
+    "Force":{"type":"boolean"},
     "Gender":{
       "type":"string",
       "enum":[
@@ -552,7 +594,9 @@
         "mp3",
         "ogg_opus",
         "ogg_vorbis",
-        "pcm"
+        "pcm",
+        "mulaw",
+        "alaw"
       ]
     },
     "OutputS3BucketName":{
@@ -583,8 +627,19 @@
       "type":"structure",
       "members":{}
     },
+    "QuotaCode":{
+      "type":"string",
+      "enum":[
+        "input-stream-inbound-event-timeout",
+        "input-stream-timeout"
+      ]
+    },
     "RequestCharacters":{"type":"integer"},
     "SampleRate":{"type":"string"},
+    "ServiceCode":{
+      "type":"string",
+      "enum":["polly"]
+    },
     "ServiceFailureException":{
       "type":"structure",
       "members":{
@@ -593,6 +648,21 @@
       "error":{"httpStatusCode":500},
       "exception":true,
       "fault":true
+    },
+    "ServiceQuotaExceededException":{
+      "type":"structure",
+      "required":[
+        "message",
+        "quotaCode",
+        "serviceCode"
+      ],
+      "members":{
+        "message":{"shape":"ErrorMessage"},
+        "quotaCode":{"shape":"QuotaCode"},
+        "serviceCode":{"shape":"ServiceCode"}
+      },
+      "error":{"httpStatusCode":402},
+      "exception":true
     },
     "Size":{"type":"integer"},
     "SnsTopicArn":{
@@ -620,6 +690,75 @@
       },
       "error":{"httpStatusCode":400},
       "exception":true
+    },
+    "StartSpeechSynthesisStreamActionStream":{
+      "type":"structure",
+      "members":{
+        "TextEvent":{"shape":"TextEvent"},
+        "CloseStreamEvent":{"shape":"CloseStreamEvent"}
+      },
+      "eventstream":true
+    },
+    "StartSpeechSynthesisStreamEventStream":{
+      "type":"structure",
+      "members":{
+        "AudioEvent":{"shape":"AudioEvent"},
+        "StreamClosedEvent":{"shape":"StreamClosedEvent"},
+        "ValidationException":{"shape":"ValidationException"},
+        "ServiceQuotaExceededException":{"shape":"ServiceQuotaExceededException"},
+        "ServiceFailureException":{"shape":"ServiceFailureException"},
+        "ThrottlingException":{"shape":"ThrottlingException"}
+      },
+      "eventstream":true
+    },
+    "StartSpeechSynthesisStreamInput":{
+      "type":"structure",
+      "required":[
+        "Engine",
+        "OutputFormat",
+        "VoiceId"
+      ],
+      "members":{
+        "Engine":{
+          "shape":"Engine",
+          "location":"header",
+          "locationName":"x-amzn-Engine"
+        },
+        "LanguageCode":{
+          "shape":"LanguageCode",
+          "location":"header",
+          "locationName":"x-amzn-LanguageCode"
+        },
+        "LexiconNames":{
+          "shape":"LexiconNameList",
+          "location":"header",
+          "locationName":"x-amzn-LexiconNames"
+        },
+        "OutputFormat":{
+          "shape":"OutputFormat",
+          "location":"header",
+          "locationName":"x-amzn-OutputFormat"
+        },
+        "SampleRate":{
+          "shape":"SampleRate",
+          "location":"header",
+          "locationName":"x-amzn-SampleRate"
+        },
+        "VoiceId":{
+          "shape":"VoiceId",
+          "location":"header",
+          "locationName":"x-amzn-VoiceId"
+        },
+        "ActionStream":{"shape":"StartSpeechSynthesisStreamActionStream"}
+      },
+      "payload":"ActionStream"
+    },
+    "StartSpeechSynthesisStreamOutput":{
+      "type":"structure",
+      "members":{
+        "EventStream":{"shape":"StartSpeechSynthesisStreamEventStream"}
+      },
+      "payload":"EventStream"
     },
     "StartSpeechSynthesisTaskInput":{
       "type":"structure",
@@ -649,6 +788,13 @@
       "members":{
         "SynthesisTask":{"shape":"SynthesisTask"}
       }
+    },
+    "StreamClosedEvent":{
+      "type":"structure",
+      "members":{
+        "RequestCharacters":{"shape":"RequestCharacters"}
+      },
+      "event":true
     },
     "SynthesisTask":{
       "type":"structure",
@@ -733,6 +879,16 @@
     },
     "TaskStatusReason":{"type":"string"},
     "Text":{"type":"string"},
+    "TextEvent":{
+      "type":"structure",
+      "required":["Text"],
+      "members":{
+        "Text":{"shape":"Text"},
+        "TextType":{"shape":"TextType"},
+        "FlushStreamConfiguration":{"shape":"FlushStreamConfiguration"}
+      },
+      "event":true
+    },
     "TextLengthExceededException":{
       "type":"structure",
       "members":{
@@ -747,6 +903,27 @@
         "ssml",
         "text"
       ]
+    },
+    "ThrottlingException":{
+      "type":"structure",
+      "members":{
+        "message":{"shape":"AvailabilityErrorMessage"},
+        "throttlingReasons":{"shape":"ThrottlingReasonList"}
+      },
+      "error":{"httpStatusCode":400},
+      "exception":true,
+      "synthetic":true
+    },
+    "ThrottlingReason":{
+      "type":"structure",
+      "members":{
+        "reason":{"shape":"CoralAvailabilityThrottlingReason"},
+        "resource":{"shape":"CoralAvailabilityThrottledResource"}
+      }
+    },
+    "ThrottlingReasonList":{
+      "type":"list",
+      "member":{"shape":"ThrottlingReason"}
     },
     "UnsupportedPlsAlphabetException":{
       "type":"structure",
@@ -763,6 +940,46 @@
       },
       "error":{"httpStatusCode":400},
       "exception":true
+    },
+    "ValidationException":{
+      "type":"structure",
+      "required":[
+        "message",
+        "reason"
+      ],
+      "members":{
+        "message":{"shape":"ErrorMessage"},
+        "reason":{"shape":"ValidationExceptionReason"},
+        "fields":{"shape":"ValidationExceptionFieldList"}
+      },
+      "error":{"httpStatusCode":400},
+      "exception":true
+    },
+    "ValidationExceptionField":{
+      "type":"structure",
+      "required":[
+        "name",
+        "message"
+      ],
+      "members":{
+        "name":{"shape":"ValidationExceptionFieldName"},
+        "message":{"shape":"ValidationExceptionFieldMessage"}
+      }
+    },
+    "ValidationExceptionFieldList":{
+      "type":"list",
+      "member":{"shape":"ValidationExceptionField"}
+    },
+    "ValidationExceptionFieldMessage":{"type":"string"},
+    "ValidationExceptionFieldName":{"type":"string"},
+    "ValidationExceptionReason":{
+      "type":"string",
+      "enum":[
+        "unsupportedOperation",
+        "fieldValidationFailed",
+        "other",
+        "invalidInboundEvent"
+      ]
     },
     "Voice":{
       "type":"structure",
@@ -878,7 +1095,13 @@
         "Jitka",
         "Sabrina",
         "Jasmine",
-        "Jihye"
+        "Jihye",
+        "Ambre",
+        "Beatrice",
+        "Florian",
+        "Lennart",
+        "Lorenzo",
+        "Tiffany"
       ]
     },
     "VoiceList":{

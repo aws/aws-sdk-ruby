@@ -1,78 +1,10 @@
 {
   "version" : 2,
   "testCases" : [ {
-    "id" : "GetGlobalResolverFailure",
-    "operationName" : "GetGlobalResolver",
+    "id" : "GetFirewallRuleFailure",
+    "operationName" : "GetFirewallRule",
     "input" : {
-      "globalResolverId" : "gr-doesnotexist1111"
-    },
-    "expectation" : {
-      "failure" : {
-        "errorId" : "ResourceNotFoundException"
-      }
-    },
-    "config" : {
-      "region" : "us-east-2",
-      "useFips" : false,
-      "useDualstack" : true,
-      "useAccountIdRouting" : true
-    }
-  }, {
-    "id" : "GetHostedZoneAssociationFailure",
-    "operationName" : "GetHostedZoneAssociation",
-    "input" : {
-      "hostedZoneAssociationId" : "phza-doesnotexist1111"
-    },
-    "expectation" : {
-      "failure" : {
-        "errorId" : "ResourceNotFoundException"
-      }
-    },
-    "config" : {
-      "region" : "us-east-2",
-      "useFips" : false,
-      "useDualstack" : true,
-      "useAccountIdRouting" : true
-    }
-  }, {
-    "id" : "GetAccessTokenFailure",
-    "operationName" : "GetAccessToken",
-    "input" : {
-      "accessTokenId" : "at-doesnotexist1111"
-    },
-    "expectation" : {
-      "failure" : {
-        "errorId" : "ResourceNotFoundException"
-      }
-    },
-    "config" : {
-      "region" : "us-east-2",
-      "useFips" : false,
-      "useDualstack" : true,
-      "useAccountIdRouting" : true
-    }
-  }, {
-    "id" : "GetManagedFirewallDomainListFailure",
-    "operationName" : "GetManagedFirewallDomainList",
-    "input" : {
-      "managedFirewallDomainListId" : "aws-managed-fdl-99919"
-    },
-    "expectation" : {
-      "failure" : {
-        "errorId" : "ResourceNotFoundException"
-      }
-    },
-    "config" : {
-      "region" : "us-east-2",
-      "useFips" : false,
-      "useDualstack" : true,
-      "useAccountIdRouting" : true
-    }
-  }, {
-    "id" : "GetFirewallDomainListFailure",
-    "operationName" : "GetFirewallDomainList",
-    "input" : {
-      "firewallDomainListId" : "fdl-doesnotexist1111"
+      "firewallRuleId" : "fr-doesnotexist1111"
     },
     "expectation" : {
       "failure" : {
@@ -103,10 +35,27 @@
       "useAccountIdRouting" : true
     }
   }, {
-    "id" : "GetFirewallRuleFailure",
-    "operationName" : "GetFirewallRule",
+    "id" : "GetFirewallDomainListFailure",
+    "operationName" : "GetFirewallDomainList",
     "input" : {
-      "firewallRuleId" : "fr-doesnotexist1111"
+      "firewallDomainListId" : "fdl-doesnotexist1111"
+    },
+    "expectation" : {
+      "failure" : {
+        "errorId" : "ResourceNotFoundException"
+      }
+    },
+    "config" : {
+      "region" : "us-east-2",
+      "useFips" : false,
+      "useDualstack" : true,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "GetAccessTokenFailure",
+    "operationName" : "GetAccessToken",
+    "input" : {
+      "accessTokenId" : "at-doesnotexist1111"
     },
     "expectation" : {
       "failure" : {
@@ -124,6 +73,57 @@
     "operationName" : "GetAccessSource",
     "input" : {
       "accessSourceId" : "as-doesnotexist1111"
+    },
+    "expectation" : {
+      "failure" : {
+        "errorId" : "ResourceNotFoundException"
+      }
+    },
+    "config" : {
+      "region" : "us-east-2",
+      "useFips" : false,
+      "useDualstack" : true,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "GetHostedZoneAssociationFailure",
+    "operationName" : "GetHostedZoneAssociation",
+    "input" : {
+      "hostedZoneAssociationId" : "phza-doesnotexist1111"
+    },
+    "expectation" : {
+      "failure" : {
+        "errorId" : "ResourceNotFoundException"
+      }
+    },
+    "config" : {
+      "region" : "us-east-2",
+      "useFips" : false,
+      "useDualstack" : true,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "GetManagedFirewallDomainListFailure",
+    "operationName" : "GetManagedFirewallDomainList",
+    "input" : {
+      "managedFirewallDomainListId" : "aws-managed-fdl-99919"
+    },
+    "expectation" : {
+      "failure" : {
+        "errorId" : "ResourceNotFoundException"
+      }
+    },
+    "config" : {
+      "region" : "us-east-2",
+      "useFips" : false,
+      "useDualstack" : true,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "GetGlobalResolverFailure",
+    "operationName" : "GetGlobalResolver",
+    "input" : {
+      "globalResolverId" : "gr-doesnotexist1111"
     },
     "expectation" : {
       "failure" : {

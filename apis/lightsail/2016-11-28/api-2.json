@@ -3109,7 +3109,8 @@
         "unit":{"shape":"MetricUnit"},
         "contactProtocols":{"shape":"ContactProtocolsList"},
         "notificationTriggers":{"shape":"NotificationTriggerList"},
-        "notificationEnabled":{"shape":"boolean"}
+        "notificationEnabled":{"shape":"boolean"},
+        "tags":{"shape":"TagList"}
       }
     },
     "AlarmState":{
@@ -3664,7 +3665,8 @@
         "createdAt":{"shape":"IsoDate"},
         "location":{"shape":"ResourceLocation"},
         "resourceType":{"shape":"ResourceType"},
-        "supportCode":{"shape":"string"}
+        "supportCode":{"shape":"string"},
+        "tags":{"shape":"TagList"}
       }
     },
     "ContactMethodStatus":{
@@ -4066,7 +4068,8 @@
       ],
       "members":{
         "protocol":{"shape":"ContactProtocol"},
-        "contactEndpoint":{"shape":"StringMax256"}
+        "contactEndpoint":{"shape":"StringMax256"},
+        "tags":{"shape":"TagList"}
       }
     },
     "CreateContactMethodResult":{
@@ -7305,7 +7308,8 @@
         "treatMissingData":{"shape":"TreatMissingData"},
         "contactProtocols":{"shape":"ContactProtocolsList"},
         "notificationTriggers":{"shape":"NotificationTriggerList"},
-        "notificationEnabled":{"shape":"boolean"}
+        "notificationEnabled":{"shape":"boolean"},
+        "tags":{"shape":"TagList"}
       }
     },
     "PutAlarmResult":{
@@ -7414,14 +7418,15 @@
         "eu-west-2",
         "eu-west-3",
         "eu-central-1",
+        "eu-north-1",
         "ca-central-1",
         "ap-south-1",
         "ap-southeast-1",
         "ap-southeast-2",
         "ap-northeast-1",
         "ap-northeast-2",
-        "eu-north-1",
-        "ap-southeast-3"
+        "ap-southeast-3",
+        "ap-southeast-5"
       ]
     },
     "RegionSetupInProgressException":{

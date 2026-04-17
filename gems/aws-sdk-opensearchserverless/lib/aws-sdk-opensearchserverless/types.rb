@@ -683,7 +683,9 @@ module Aws::OpenSearchServerless
     end
 
     # When creating a resource, thrown when a resource with the same name
-    # already exists or is being created.
+    # already exists or is being created. When deleting a resource, thrown
+    # when the resource is not in the ACTIVE, FAILED, or UPDATE\_FAILED
+    # state.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -2978,6 +2980,11 @@ module Aws::OpenSearchServerless
     #   The description of the collection.
     #   @return [String]
     #
+    # @!attribute [rw] vector_options
+    #   Configuration options for vector search capabilities in the
+    #   collection.
+    #   @return [Types::VectorOptions]
+    #
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) of the collection.
     #   @return [String]
@@ -2998,6 +3005,7 @@ module Aws::OpenSearchServerless
       :status,
       :type,
       :description,
+      :vector_options,
       :arn,
       :created_date,
       :last_modified_date)
@@ -3102,6 +3110,11 @@ module Aws::OpenSearchServerless
     #   A description of the collection.
     #   @return [String]
     #
+    # @!attribute [rw] vector_options
+    #   Configuration options for vector search capabilities in the
+    #   collection.
+    #   @return [Types::VectorOptions]
+    #
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier to ensure idempotency of the
     #   request.
@@ -3115,6 +3128,7 @@ module Aws::OpenSearchServerless
     class UpdateCollectionRequest < Struct.new(
       :id,
       :description,
+      :vector_options,
       :client_token)
       SENSITIVE = []
       include Aws::Structure

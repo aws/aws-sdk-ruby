@@ -39,6 +39,14 @@ module Aws
         def message: () -> ::String
         def code: () -> ::String
       end
+      class OrganizationNotFoundException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+        def code: () -> ::String
+      end
+      class OrganizationalUnitNotFoundException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+        def code: () -> ::String
+      end
       class ResourceConflictException < ::Aws::Errors::ServiceError
         def message: () -> ::String
         def code: () -> ::String

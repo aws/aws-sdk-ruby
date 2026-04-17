@@ -139,7 +139,8 @@ module Aws
                                              count: ::Integer?,
                                              interval: ::Integer?,
                                              interval_unit: ("DAYS" | "WEEKS" | "MONTHS" | "YEARS")?,
-                                             availability_zones: Array[::String]
+                                             availability_zones: Array[::String]?,
+                                             availability_zone_ids: Array[::String]?
                                            }?,
                                            cross_region_copy_rules: Array[
                                              {
@@ -388,7 +389,8 @@ module Aws
                                              count: ::Integer?,
                                              interval: ::Integer?,
                                              interval_unit: ("DAYS" | "WEEKS" | "MONTHS" | "YEARS")?,
-                                             availability_zones: Array[::String]
+                                             availability_zones: Array[::String]?,
+                                             availability_zone_ids: Array[::String]?
                                            }?,
                                            cross_region_copy_rules: Array[
                                              {

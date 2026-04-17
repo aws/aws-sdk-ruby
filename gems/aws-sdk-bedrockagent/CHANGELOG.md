@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.74.0 (2026-04-03)
+------------------
+
+* Feature - Added strict parameter to ToolSpecification to allow users to enforce strict JSON schema adherence for tool input schemas.
+
+1.73.0 (2026-03-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.72.0 (2026-01-16)
 ------------------
 

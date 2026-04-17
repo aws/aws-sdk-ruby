@@ -151,7 +151,14 @@ module Aws::ARCRegionswitch
     PlanName = Shapes::StringShape.new(name: 'PlanName')
     PlanRecoveryTimeObjectiveMinutesInteger = Shapes::IntegerShape.new(name: 'PlanRecoveryTimeObjectiveMinutesInteger')
     PlanWarnings = Shapes::ListShape.new(name: 'PlanWarnings')
+    RdsCreateCrossRegionReplicaConfiguration = Shapes::StructureShape.new(name: 'RdsCreateCrossRegionReplicaConfiguration')
+    RdsCreateCrossRegionReplicaConfigurationTimeoutMinutesInteger = Shapes::IntegerShape.new(name: 'RdsCreateCrossRegionReplicaConfigurationTimeoutMinutesInteger')
+    RdsDbInstanceArn = Shapes::StringShape.new(name: 'RdsDbInstanceArn')
+    RdsDbInstanceArnMap = Shapes::MapShape.new(name: 'RdsDbInstanceArnMap')
+    RdsPromoteReadReplicaConfiguration = Shapes::StructureShape.new(name: 'RdsPromoteReadReplicaConfiguration')
+    RdsPromoteReadReplicaConfigurationTimeoutMinutesInteger = Shapes::IntegerShape.new(name: 'RdsPromoteReadReplicaConfigurationTimeoutMinutesInteger')
     RecoveryApproach = Shapes::StringShape.new(name: 'RecoveryApproach')
+    RecoveryExecutionId = Shapes::StringShape.new(name: 'RecoveryExecutionId')
     Region = Shapes::StringShape.new(name: 'Region')
     RegionAndRoutingControls = Shapes::MapShape.new(name: 'RegionAndRoutingControls')
     RegionList = Shapes::ListShape.new(name: 'RegionList')
@@ -232,6 +239,7 @@ module Aws::ARCRegionswitch
     AbbreviatedExecution.add_member(:execution_state, Shapes::ShapeRef.new(shape: ExecutionState, required: true, location_name: "executionState"))
     AbbreviatedExecution.add_member(:execution_action, Shapes::ShapeRef.new(shape: ExecutionAction, required: true, location_name: "executionAction"))
     AbbreviatedExecution.add_member(:execution_region, Shapes::ShapeRef.new(shape: String, required: true, location_name: "executionRegion"))
+    AbbreviatedExecution.add_member(:recovery_execution_id, Shapes::ShapeRef.new(shape: String, location_name: "recoveryExecutionId"))
     AbbreviatedExecution.add_member(:actual_recovery_time, Shapes::ShapeRef.new(shape: Duration, location_name: "actualRecoveryTime"))
     AbbreviatedExecution.struct_class = Types::AbbreviatedExecution
 
@@ -397,6 +405,8 @@ module Aws::ARCRegionswitch
     ExecutionBlockConfiguration.add_member(:eks_resource_scaling_config, Shapes::ShapeRef.new(shape: EksResourceScalingConfiguration, location_name: "eksResourceScalingConfig"))
     ExecutionBlockConfiguration.add_member(:route53_health_check_config, Shapes::ShapeRef.new(shape: Route53HealthCheckConfiguration, location_name: "route53HealthCheckConfig"))
     ExecutionBlockConfiguration.add_member(:document_db_config, Shapes::ShapeRef.new(shape: DocumentDbConfiguration, location_name: "documentDbConfig"))
+    ExecutionBlockConfiguration.add_member(:rds_promote_read_replica_config, Shapes::ShapeRef.new(shape: RdsPromoteReadReplicaConfiguration, location_name: "rdsPromoteReadReplicaConfig"))
+    ExecutionBlockConfiguration.add_member(:rds_create_cross_region_read_replica_config, Shapes::ShapeRef.new(shape: RdsCreateCrossRegionReplicaConfiguration, location_name: "rdsCreateCrossRegionReadReplicaConfig"))
     ExecutionBlockConfiguration.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     ExecutionBlockConfiguration.add_member_subclass(:custom_action_lambda_config, Types::ExecutionBlockConfiguration::CustomActionLambdaConfig)
     ExecutionBlockConfiguration.add_member_subclass(:ec2_asg_capacity_increase_config, Types::ExecutionBlockConfiguration::Ec2AsgCapacityIncreaseConfig)
@@ -409,6 +419,8 @@ module Aws::ARCRegionswitch
     ExecutionBlockConfiguration.add_member_subclass(:eks_resource_scaling_config, Types::ExecutionBlockConfiguration::EksResourceScalingConfig)
     ExecutionBlockConfiguration.add_member_subclass(:route53_health_check_config, Types::ExecutionBlockConfiguration::Route53HealthCheckConfig)
     ExecutionBlockConfiguration.add_member_subclass(:document_db_config, Types::ExecutionBlockConfiguration::DocumentDbConfig)
+    ExecutionBlockConfiguration.add_member_subclass(:rds_promote_read_replica_config, Types::ExecutionBlockConfiguration::RdsPromoteReadReplicaConfig)
+    ExecutionBlockConfiguration.add_member_subclass(:rds_create_cross_region_read_replica_config, Types::ExecutionBlockConfiguration::RdsCreateCrossRegionReadReplicaConfig)
     ExecutionBlockConfiguration.add_member_subclass(:unknown, Types::ExecutionBlockConfiguration::Unknown)
     ExecutionBlockConfiguration.struct_class = Types::ExecutionBlockConfiguration
 
@@ -466,6 +478,7 @@ module Aws::ARCRegionswitch
     GetPlanExecutionResponse.add_member(:execution_state, Shapes::ShapeRef.new(shape: ExecutionState, required: true, location_name: "executionState"))
     GetPlanExecutionResponse.add_member(:execution_action, Shapes::ShapeRef.new(shape: ExecutionAction, required: true, location_name: "executionAction"))
     GetPlanExecutionResponse.add_member(:execution_region, Shapes::ShapeRef.new(shape: String, required: true, location_name: "executionRegion"))
+    GetPlanExecutionResponse.add_member(:recovery_execution_id, Shapes::ShapeRef.new(shape: String, location_name: "recoveryExecutionId"))
     GetPlanExecutionResponse.add_member(:step_states, Shapes::ShapeRef.new(shape: StepStates, location_name: "stepStates"))
     GetPlanExecutionResponse.add_member(:plan, Shapes::ShapeRef.new(shape: Plan, location_name: "plan"))
     GetPlanExecutionResponse.add_member(:actual_recovery_time, Shapes::ShapeRef.new(shape: Duration, location_name: "actualRecoveryTime"))
@@ -623,6 +636,21 @@ module Aws::ARCRegionswitch
 
     PlanWarnings.member = Shapes::ShapeRef.new(shape: ResourceWarning)
 
+    RdsCreateCrossRegionReplicaConfiguration.add_member(:timeout_minutes, Shapes::ShapeRef.new(shape: RdsCreateCrossRegionReplicaConfigurationTimeoutMinutesInteger, location_name: "timeoutMinutes"))
+    RdsCreateCrossRegionReplicaConfiguration.add_member(:cross_account_role, Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "crossAccountRole"))
+    RdsCreateCrossRegionReplicaConfiguration.add_member(:external_id, Shapes::ShapeRef.new(shape: String, location_name: "externalId"))
+    RdsCreateCrossRegionReplicaConfiguration.add_member(:db_instance_arn_map, Shapes::ShapeRef.new(shape: RdsDbInstanceArnMap, required: true, location_name: "dbInstanceArnMap"))
+    RdsCreateCrossRegionReplicaConfiguration.struct_class = Types::RdsCreateCrossRegionReplicaConfiguration
+
+    RdsDbInstanceArnMap.key = Shapes::ShapeRef.new(shape: Region)
+    RdsDbInstanceArnMap.value = Shapes::ShapeRef.new(shape: RdsDbInstanceArn)
+
+    RdsPromoteReadReplicaConfiguration.add_member(:timeout_minutes, Shapes::ShapeRef.new(shape: RdsPromoteReadReplicaConfigurationTimeoutMinutesInteger, location_name: "timeoutMinutes"))
+    RdsPromoteReadReplicaConfiguration.add_member(:cross_account_role, Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "crossAccountRole"))
+    RdsPromoteReadReplicaConfiguration.add_member(:external_id, Shapes::ShapeRef.new(shape: String, location_name: "externalId"))
+    RdsPromoteReadReplicaConfiguration.add_member(:db_instance_arn_map, Shapes::ShapeRef.new(shape: RdsDbInstanceArnMap, required: true, location_name: "dbInstanceArnMap"))
+    RdsPromoteReadReplicaConfiguration.struct_class = Types::RdsPromoteReadReplicaConfiguration
+
     RegionAndRoutingControls.key = Shapes::ShapeRef.new(shape: String)
     RegionAndRoutingControls.value = Shapes::ShapeRef.new(shape: ArcRoutingControlStates)
 
@@ -713,6 +741,7 @@ module Aws::ARCRegionswitch
     StartPlanExecutionRequest.add_member(:mode, Shapes::ShapeRef.new(shape: ExecutionMode, location_name: "mode"))
     StartPlanExecutionRequest.add_member(:comment, Shapes::ShapeRef.new(shape: ExecutionComment, location_name: "comment"))
     StartPlanExecutionRequest.add_member(:latest_version, Shapes::ShapeRef.new(shape: String, location_name: "latestVersion"))
+    StartPlanExecutionRequest.add_member(:recovery_execution_id, Shapes::ShapeRef.new(shape: RecoveryExecutionId, location_name: "recoveryExecutionId"))
     StartPlanExecutionRequest.struct_class = Types::StartPlanExecutionRequest
 
     StartPlanExecutionResponse.add_member(:execution_id, Shapes::ShapeRef.new(shape: ExecutionId, location_name: "executionId"))

@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.127.0 (2026-03-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.126.0 (2026-02-25)
+------------------
+
+* Feature - AWS WAF now supports GetTopPathStatisticsByTraffic that provides aggregated statistics on the top URI paths accessed by bot traffic. Use this operation to see which paths receive the most bot traffic, identify the specific bots accessing them, and filter by category, organization, or bot name.
+
 1.125.0 (2026-01-16)
 ------------------
 

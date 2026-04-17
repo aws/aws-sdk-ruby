@@ -658,6 +658,58 @@ module Aws::Outposts
       req.send_request(options)
     end
 
+    # Creates a renewal contract for the specified Outpost.
+    #
+    # @option params [required, String] :payment_option
+    #   The payment option.
+    #
+    # @option params [required, String] :payment_term
+    #   The payment term.
+    #
+    # @option params [required, String] :outpost_identifier
+    #   The ID or ARN of the Outpost.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::CreateRenewalOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateRenewalOutput#payment_option #payment_option} => String
+    #   * {Types::CreateRenewalOutput#payment_term #payment_term} => String
+    #   * {Types::CreateRenewalOutput#outpost_id #outpost_id} => String
+    #   * {Types::CreateRenewalOutput#upfront_price #upfront_price} => Float
+    #   * {Types::CreateRenewalOutput#monthly_recurring_price #monthly_recurring_price} => Float
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_renewal({
+    #     payment_option: "ALL_UPFRONT", # required, accepts ALL_UPFRONT, NO_UPFRONT, PARTIAL_UPFRONT
+    #     payment_term: "THREE_YEARS", # required, accepts THREE_YEARS, ONE_YEAR, FIVE_YEARS
+    #     outpost_identifier: "OutpostIdentifier", # required
+    #     client_token: "AutoFillIdempotencyToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.payment_option #=> String, one of "ALL_UPFRONT", "NO_UPFRONT", "PARTIAL_UPFRONT"
+    #   resp.payment_term #=> String, one of "THREE_YEARS", "ONE_YEAR", "FIVE_YEARS"
+    #   resp.outpost_id #=> String
+    #   resp.upfront_price #=> Float
+    #   resp.monthly_recurring_price #=> Float
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/CreateRenewal AWS API Documentation
+    #
+    # @overload create_renewal(params = {})
+    # @param [Hash] params ({})
+    def create_renewal(params = {}, options = {})
+      req = build_request(:create_renewal, params)
+      req.send_request(options)
+    end
+
     # Creates a site for an Outpost.
     #
     # @option params [required, String] :name
@@ -1081,6 +1133,8 @@ module Aws::Outposts
     #   * {Types::GetOutpostBillingInformationOutput#next_token #next_token} => String
     #   * {Types::GetOutpostBillingInformationOutput#subscriptions #subscriptions} => Array&lt;Types::Subscription&gt;
     #   * {Types::GetOutpostBillingInformationOutput#contract_end_date #contract_end_date} => String
+    #   * {Types::GetOutpostBillingInformationOutput#payment_term #payment_term} => String
+    #   * {Types::GetOutpostBillingInformationOutput#payment_option #payment_option} => String
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
@@ -1098,7 +1152,7 @@ module Aws::Outposts
     #   resp.subscriptions #=> Array
     #   resp.subscriptions[0].subscription_id #=> String
     #   resp.subscriptions[0].subscription_type #=> String, one of "ORIGINAL", "RENEWAL", "CAPACITY_INCREASE"
-    #   resp.subscriptions[0].subscription_status #=> String, one of "ACTIVE", "INACTIVE", "CANCELLED"
+    #   resp.subscriptions[0].subscription_status #=> String, one of "ACTIVE", "PENDING", "INACTIVE", "CANCELLED"
     #   resp.subscriptions[0].order_ids #=> Array
     #   resp.subscriptions[0].order_ids[0] #=> String
     #   resp.subscriptions[0].begin_date #=> Time
@@ -1106,6 +1160,8 @@ module Aws::Outposts
     #   resp.subscriptions[0].monthly_recurring_price #=> Float
     #   resp.subscriptions[0].upfront_price #=> Float
     #   resp.contract_end_date #=> String
+    #   resp.payment_term #=> String, one of "THREE_YEARS", "ONE_YEAR", "FIVE_YEARS"
+    #   resp.payment_option #=> String, one of "ALL_UPFRONT", "NO_UPFRONT", "PARTIAL_UPFRONT"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/GetOutpostBillingInformation AWS API Documentation
     #
@@ -1213,6 +1269,41 @@ module Aws::Outposts
     # @param [Hash] params ({})
     def get_outpost_supported_instance_types(params = {}, options = {})
       req = build_request(:get_outpost_supported_instance_types, params)
+      req.send_request(options)
+    end
+
+    # Gets all available renewal pricing options for the specified Outpost.
+    #
+    # @option params [required, String] :outpost_identifier
+    #   The ID or ARN of the Outpost.
+    #
+    # @return [Types::GetRenewalPricingOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetRenewalPricingOutput#pricing_result #pricing_result} => String
+    #   * {Types::GetRenewalPricingOutput#pricing_options #pricing_options} => Array&lt;Types::PricingOption&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_renewal_pricing({
+    #     outpost_identifier: "OutpostIdentifier", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.pricing_result #=> String, one of "PRICED", "UNABLE_TO_PRICE"
+    #   resp.pricing_options #=> Array
+    #   resp.pricing_options[0].pricing_type #=> String, one of "SUBSCRIPTION"
+    #   resp.pricing_options[0].subscription_pricing_details.payment_option #=> String, one of "ALL_UPFRONT", "NO_UPFRONT", "PARTIAL_UPFRONT"
+    #   resp.pricing_options[0].subscription_pricing_details.payment_term #=> String, one of "THREE_YEARS", "ONE_YEAR", "FIVE_YEARS"
+    #   resp.pricing_options[0].subscription_pricing_details.upfront_price #=> Float
+    #   resp.pricing_options[0].subscription_pricing_details.monthly_recurring_price #=> Float
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/GetRenewalPricing AWS API Documentation
+    #
+    # @overload get_renewal_pricing(params = {})
+    # @param [Hash] params ({})
+    def get_renewal_pricing(params = {}, options = {})
+      req = build_request(:get_renewal_pricing, params)
       req.send_request(options)
     end
 
@@ -1395,6 +1486,20 @@ module Aws::Outposts
     # @option params [Array<String>] :status_filter
     #   Filters the results by state.
     #
+    # @option params [Array<String>] :asset_type_filter
+    #   Filters the results by asset type.
+    #
+    #   * COMPUTE - Server asset used for customer compute
+    #
+    #   * STORAGE - Server asset used by storage services
+    #
+    #   * POWERSHELF - Powershelf assets
+    #
+    #   * SWITCH - Switch assets
+    #
+    #   * NETWORKING - Asset managed by Amazon Web Services for networking
+    #     purposes
+    #
     # @return [Types::ListAssetsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListAssetsOutput#assets #assets} => Array&lt;Types::AssetInfo&gt;
@@ -1409,7 +1514,8 @@ module Aws::Outposts
     #     host_id_filter: ["HostId"],
     #     max_results: 1,
     #     next_token: "Token",
-    #     status_filter: ["ACTIVE"], # accepts ACTIVE, RETIRING, ISOLATED
+    #     status_filter: ["ACTIVE"], # accepts ACTIVE, RETIRING, ISOLATED, INSTALLING
+    #     asset_type_filter: ["COMPUTE"], # accepts COMPUTE, STORAGE, POWERSHELF, SWITCH, NETWORKING
     #   })
     #
     # @example Response structure
@@ -1417,9 +1523,9 @@ module Aws::Outposts
     #   resp.assets #=> Array
     #   resp.assets[0].asset_id #=> String
     #   resp.assets[0].rack_id #=> String
-    #   resp.assets[0].asset_type #=> String, one of "COMPUTE"
+    #   resp.assets[0].asset_type #=> String, one of "COMPUTE", "STORAGE", "POWERSHELF", "SWITCH", "NETWORKING"
     #   resp.assets[0].compute_attributes.host_id #=> String
-    #   resp.assets[0].compute_attributes.state #=> String, one of "ACTIVE", "ISOLATED", "RETIRING"
+    #   resp.assets[0].compute_attributes.state #=> String, one of "ACTIVE", "ISOLATED", "RETIRING", "INSTALLING"
     #   resp.assets[0].compute_attributes.instance_families #=> Array
     #   resp.assets[0].compute_attributes.instance_families[0] #=> String
     #   resp.assets[0].compute_attributes.instance_type_capacities #=> Array
@@ -2445,7 +2551,7 @@ module Aws::Outposts
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-outposts'
-      context[:gem_version] = '1.96.0'
+      context[:gem_version] = '1.99.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

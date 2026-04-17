@@ -238,6 +238,8 @@ module Aws::QuickSight
     AuthorizedTargetsByService = Shapes::StructureShape.new(name: 'AuthorizedTargetsByService')
     AuthorizedTargetsByServices = Shapes::ListShape.new(name: 'AuthorizedTargetsByServices')
     AuthorizedTargetsList = Shapes::ListShape.new(name: 'AuthorizedTargetsList')
+    AutomateId = Shapes::StringShape.new(name: 'AutomateId')
+    AutomationJobStatus = Shapes::StringShape.new(name: 'AutomationJobStatus')
     AwsAccountId = Shapes::StringShape.new(name: 'AwsAccountId')
     AwsAndAccountId = Shapes::StringShape.new(name: 'AwsAndAccountId')
     AwsIotAnalyticsParameters = Shapes::StructureShape.new(name: 'AwsIotAnalyticsParameters')
@@ -803,6 +805,8 @@ module Aws::QuickSight
     DescribeAssetBundleExportJobResponse = Shapes::StructureShape.new(name: 'DescribeAssetBundleExportJobResponse')
     DescribeAssetBundleImportJobRequest = Shapes::StructureShape.new(name: 'DescribeAssetBundleImportJobRequest')
     DescribeAssetBundleImportJobResponse = Shapes::StructureShape.new(name: 'DescribeAssetBundleImportJobResponse')
+    DescribeAutomationJobRequest = Shapes::StructureShape.new(name: 'DescribeAutomationJobRequest')
+    DescribeAutomationJobResponse = Shapes::StructureShape.new(name: 'DescribeAutomationJobResponse')
     DescribeBrandAssignmentRequest = Shapes::StructureShape.new(name: 'DescribeBrandAssignmentRequest')
     DescribeBrandAssignmentResponse = Shapes::StructureShape.new(name: 'DescribeBrandAssignmentResponse')
     DescribeBrandPublishedVersionRequest = Shapes::StructureShape.new(name: 'DescribeBrandPublishedVersionRequest')
@@ -1497,8 +1501,12 @@ module Aws::QuickSight
     NumericalAggregationFunction = Shapes::StructureShape.new(name: 'NumericalAggregationFunction')
     NumericalDimensionField = Shapes::StructureShape.new(name: 'NumericalDimensionField')
     NumericalMeasureField = Shapes::StructureShape.new(name: 'NumericalMeasureField')
+    OAuthClientCredentials = Shapes::StructureShape.new(name: 'OAuthClientCredentials')
+    OAuthClientId = Shapes::StringShape.new(name: 'OAuthClientId')
+    OAuthClientSecret = Shapes::StringShape.new(name: 'OAuthClientSecret')
     OAuthParameters = Shapes::StructureShape.new(name: 'OAuthParameters')
     OAuthScope = Shapes::StringShape.new(name: 'OAuthScope')
+    OAuthUsername = Shapes::StringShape.new(name: 'OAuthUsername')
     OnClause = Shapes::StringShape.new(name: 'OnClause')
     Opacity = Shapes::FloatShape.new(name: 'Opacity')
     OperandList = Shapes::ListShape.new(name: 'OperandList')
@@ -1848,6 +1856,7 @@ module Aws::QuickSight
     SensitiveDouble = Shapes::FloatShape.new(name: 'SensitiveDouble')
     SensitiveDoubleList = Shapes::ListShape.new(name: 'SensitiveDoubleList')
     SensitiveDoubleObject = Shapes::FloatShape.new(name: 'SensitiveDoubleObject')
+    SensitiveIOPayload = Shapes::StringShape.new(name: 'SensitiveIOPayload')
     SensitiveLong = Shapes::IntegerShape.new(name: 'SensitiveLong')
     SensitiveLongList = Shapes::ListShape.new(name: 'SensitiveLongList')
     SensitiveLongObject = Shapes::IntegerShape.new(name: 'SensitiveLongObject')
@@ -1914,6 +1923,7 @@ module Aws::QuickSight
     SheetTextBoxContent = Shapes::StringShape.new(name: 'SheetTextBoxContent')
     SheetTextBoxList = Shapes::ListShape.new(name: 'SheetTextBoxList')
     SheetTitle = Shapes::StringShape.new(name: 'SheetTitle')
+    SheetTooltip = Shapes::StructureShape.new(name: 'SheetTooltip')
     SheetVisualScopingConfiguration = Shapes::StructureShape.new(name: 'SheetVisualScopingConfiguration')
     SheetVisualScopingConfigurations = Shapes::ListShape.new(name: 'SheetVisualScopingConfigurations')
     ShortFormatText = Shapes::StructureShape.new(name: 'ShortFormatText')
@@ -1970,6 +1980,9 @@ module Aws::QuickSight
     SourceTableMap = Shapes::MapShape.new(name: 'SourceTableMap')
     Spacing = Shapes::StructureShape.new(name: 'Spacing')
     SparkParameters = Shapes::StructureShape.new(name: 'SparkParameters')
+    SparklineAxisBehavior = Shapes::StringShape.new(name: 'SparklineAxisBehavior')
+    SparklineVisualType = Shapes::StringShape.new(name: 'SparklineVisualType')
+    SparklinesOptions = Shapes::StructureShape.new(name: 'SparklinesOptions')
     SpatialStaticFile = Shapes::StructureShape.new(name: 'SpatialStaticFile')
     SpecialValue = Shapes::StringShape.new(name: 'SpecialValue')
     SqlEndpointPath = Shapes::StringShape.new(name: 'SqlEndpointPath')
@@ -1982,6 +1995,8 @@ module Aws::QuickSight
     StartAssetBundleExportJobResponse = Shapes::StructureShape.new(name: 'StartAssetBundleExportJobResponse')
     StartAssetBundleImportJobRequest = Shapes::StructureShape.new(name: 'StartAssetBundleImportJobRequest')
     StartAssetBundleImportJobResponse = Shapes::StructureShape.new(name: 'StartAssetBundleImportJobResponse')
+    StartAutomationJobRequest = Shapes::StructureShape.new(name: 'StartAutomationJobRequest')
+    StartAutomationJobResponse = Shapes::StructureShape.new(name: 'StartAutomationJobResponse')
     StartDashboardSnapshotJobRequest = Shapes::StructureShape.new(name: 'StartDashboardSnapshotJobRequest')
     StartDashboardSnapshotJobResponse = Shapes::StructureShape.new(name: 'StartDashboardSnapshotJobResponse')
     StartDashboardSnapshotJobScheduleRequest = Shapes::StructureShape.new(name: 'StartDashboardSnapshotJobScheduleRequest')
@@ -2130,6 +2145,11 @@ module Aws::QuickSight
     TooltipItem = Shapes::StructureShape.new(name: 'TooltipItem')
     TooltipItemList = Shapes::ListShape.new(name: 'TooltipItemList')
     TooltipOptions = Shapes::StructureShape.new(name: 'TooltipOptions')
+    TooltipSheetDefinition = Shapes::StructureShape.new(name: 'TooltipSheetDefinition')
+    TooltipSheetDefinitionList = Shapes::ListShape.new(name: 'TooltipSheetDefinitionList')
+    TooltipSheetImageList = Shapes::ListShape.new(name: 'TooltipSheetImageList')
+    TooltipSheetTextBoxList = Shapes::ListShape.new(name: 'TooltipSheetTextBoxList')
+    TooltipSheetVisualList = Shapes::ListShape.new(name: 'TooltipSheetVisualList')
     TooltipTarget = Shapes::StringShape.new(name: 'TooltipTarget')
     TooltipTitleType = Shapes::StringShape.new(name: 'TooltipTitleType')
     TopBottomComputationType = Shapes::StringShape.new(name: 'TopBottomComputationType')
@@ -2598,6 +2618,7 @@ module Aws::QuickSight
 
     AnalysisDefinition.add_member(:data_set_identifier_declarations, Shapes::ShapeRef.new(shape: DataSetIdentifierDeclarationList, required: true, location_name: "DataSetIdentifierDeclarations"))
     AnalysisDefinition.add_member(:sheets, Shapes::ShapeRef.new(shape: SheetDefinitionList, location_name: "Sheets"))
+    AnalysisDefinition.add_member(:tooltip_sheets, Shapes::ShapeRef.new(shape: TooltipSheetDefinitionList, location_name: "TooltipSheets"))
     AnalysisDefinition.add_member(:calculated_fields, Shapes::ShapeRef.new(shape: CalculatedFields, location_name: "CalculatedFields"))
     AnalysisDefinition.add_member(:parameter_declarations, Shapes::ShapeRef.new(shape: ParameterDeclarationList, location_name: "ParameterDeclarations"))
     AnalysisDefinition.add_member(:filter_groups, Shapes::ShapeRef.new(shape: FilterGroupList, location_name: "FilterGroups"))
@@ -3474,6 +3495,7 @@ module Aws::QuickSight
     Capabilities.add_member(:publish_without_approval, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "PublishWithoutApproval"))
     Capabilities.add_member(:use_bedrock_models, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "UseBedrockModels"))
     Capabilities.add_member(:perform_flow_ui_task, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "PerformFlowUiTask"))
+    Capabilities.add_member(:approve_flow_share_requests, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "ApproveFlowShareRequests"))
     Capabilities.add_member(:use_agent_web_search, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "UseAgentWebSearch"))
     Capabilities.add_member(:knowledge_base, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "KnowledgeBase"))
     Capabilities.add_member(:action, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "Action"))
@@ -3649,11 +3671,20 @@ module Aws::QuickSight
     Capabilities.add_member(:create_and_update_new_relic_action, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "CreateAndUpdateNewRelicAction"))
     Capabilities.add_member(:share_new_relic_action, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "ShareNewRelicAction"))
     Capabilities.add_member(:use_new_relic_action, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "UseNewRelicAction"))
+    Capabilities.add_member(:topic, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "Topic"))
+    Capabilities.add_member(:edit_visual_with_q, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "EditVisualWithQ"))
+    Capabilities.add_member(:build_calculated_field_with_q, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "BuildCalculatedFieldWithQ"))
+    Capabilities.add_member(:create_dashboard_executive_summary_with_q, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "CreateDashboardExecutiveSummaryWithQ"))
     Capabilities.add_member(:space, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "Space"))
+    Capabilities.add_member(:create_spaces, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "CreateSpaces"))
+    Capabilities.add_member(:share_spaces, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "ShareSpaces"))
     Capabilities.add_member(:chat_agent, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "ChatAgent"))
     Capabilities.add_member(:create_chat_agents, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "CreateChatAgents"))
+    Capabilities.add_member(:share_chat_agents, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "ShareChatAgents"))
     Capabilities.add_member(:research, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "Research"))
     Capabilities.add_member(:self_upgrade_user_role, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "SelfUpgradeUserRole"))
+    Capabilities.add_member(:extension, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "Extension"))
+    Capabilities.add_member(:manage_shared_folders, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "ManageSharedFolders"))
     Capabilities.struct_class = Types::Capabilities
 
     CascadingControlConfiguration.add_member(:source_controls, Shapes::ShapeRef.new(shape: CascadingControlSourceList, location_name: "SourceControls"))
@@ -4602,6 +4633,7 @@ module Aws::QuickSight
 
     DashboardVersionDefinition.add_member(:data_set_identifier_declarations, Shapes::ShapeRef.new(shape: DataSetIdentifierDeclarationList, required: true, location_name: "DataSetIdentifierDeclarations"))
     DashboardVersionDefinition.add_member(:sheets, Shapes::ShapeRef.new(shape: SheetDefinitionList, location_name: "Sheets"))
+    DashboardVersionDefinition.add_member(:tooltip_sheets, Shapes::ShapeRef.new(shape: TooltipSheetDefinitionList, location_name: "TooltipSheets"))
     DashboardVersionDefinition.add_member(:calculated_fields, Shapes::ShapeRef.new(shape: CalculatedFields, location_name: "CalculatedFields"))
     DashboardVersionDefinition.add_member(:parameter_declarations, Shapes::ShapeRef.new(shape: ParameterDeclarationList, location_name: "ParameterDeclarations"))
     DashboardVersionDefinition.add_member(:filter_groups, Shapes::ShapeRef.new(shape: FilterGroupList, location_name: "FilterGroups"))
@@ -4913,6 +4945,7 @@ module Aws::QuickSight
     DataSourceCredentials.add_member(:secret_arn, Shapes::ShapeRef.new(shape: SecretArn, location_name: "SecretArn"))
     DataSourceCredentials.add_member(:key_pair_credentials, Shapes::ShapeRef.new(shape: KeyPairCredentials, location_name: "KeyPairCredentials"))
     DataSourceCredentials.add_member(:web_proxy_credentials, Shapes::ShapeRef.new(shape: WebProxyCredentials, location_name: "WebProxyCredentials"))
+    DataSourceCredentials.add_member(:o_auth_client_credentials, Shapes::ShapeRef.new(shape: OAuthClientCredentials, location_name: "OAuthClientCredentials"))
     DataSourceCredentials.struct_class = Types::DataSourceCredentials
 
     DataSourceErrorInfo.add_member(:type, Shapes::ShapeRef.new(shape: DataSourceErrorInfoType, location_name: "Type"))
@@ -5649,6 +5682,24 @@ module Aws::QuickSight
     DescribeAssetBundleImportJobResponse.add_member(:override_validation_strategy, Shapes::ShapeRef.new(shape: AssetBundleImportJobOverrideValidationStrategy, location_name: "OverrideValidationStrategy"))
     DescribeAssetBundleImportJobResponse.add_member(:warnings, Shapes::ShapeRef.new(shape: AssetBundleImportJobWarningList, location_name: "Warnings"))
     DescribeAssetBundleImportJobResponse.struct_class = Types::DescribeAssetBundleImportJobResponse
+
+    DescribeAutomationJobRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
+    DescribeAutomationJobRequest.add_member(:automation_group_id, Shapes::ShapeRef.new(shape: AutomateId, required: true, location: "uri", location_name: "AutomationGroupId"))
+    DescribeAutomationJobRequest.add_member(:automation_id, Shapes::ShapeRef.new(shape: AutomateId, required: true, location: "uri", location_name: "AutomationId"))
+    DescribeAutomationJobRequest.add_member(:include_input_payload, Shapes::ShapeRef.new(shape: Boolean, location: "querystring", location_name: "includeInputPayload"))
+    DescribeAutomationJobRequest.add_member(:include_output_payload, Shapes::ShapeRef.new(shape: Boolean, location: "querystring", location_name: "includeOutputPayload"))
+    DescribeAutomationJobRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: AutomateId, required: true, location: "uri", location_name: "JobId"))
+    DescribeAutomationJobRequest.struct_class = Types::DescribeAutomationJobRequest
+
+    DescribeAutomationJobResponse.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "Arn"))
+    DescribeAutomationJobResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedAt"))
+    DescribeAutomationJobResponse.add_member(:started_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "StartedAt"))
+    DescribeAutomationJobResponse.add_member(:ended_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "EndedAt"))
+    DescribeAutomationJobResponse.add_member(:job_status, Shapes::ShapeRef.new(shape: AutomationJobStatus, required: true, location_name: "JobStatus"))
+    DescribeAutomationJobResponse.add_member(:input_payload, Shapes::ShapeRef.new(shape: SensitiveIOPayload, location_name: "InputPayload"))
+    DescribeAutomationJobResponse.add_member(:output_payload, Shapes::ShapeRef.new(shape: SensitiveIOPayload, location_name: "OutputPayload"))
+    DescribeAutomationJobResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
+    DescribeAutomationJobResponse.struct_class = Types::DescribeAutomationJobResponse
 
     DescribeBrandAssignmentRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
     DescribeBrandAssignmentRequest.struct_class = Types::DescribeBrandAssignmentRequest
@@ -8351,6 +8402,11 @@ module Aws::QuickSight
     NumericalMeasureField.add_member(:format_configuration, Shapes::ShapeRef.new(shape: NumberFormatConfiguration, location_name: "FormatConfiguration"))
     NumericalMeasureField.struct_class = Types::NumericalMeasureField
 
+    OAuthClientCredentials.add_member(:client_id, Shapes::ShapeRef.new(shape: OAuthClientId, location_name: "ClientId"))
+    OAuthClientCredentials.add_member(:client_secret, Shapes::ShapeRef.new(shape: OAuthClientSecret, location_name: "ClientSecret"))
+    OAuthClientCredentials.add_member(:username, Shapes::ShapeRef.new(shape: OAuthUsername, location_name: "Username"))
+    OAuthClientCredentials.struct_class = Types::OAuthClientCredentials
+
     OAuthParameters.add_member(:token_provider_url, Shapes::ShapeRef.new(shape: TokenProviderUrl, required: true, location_name: "TokenProviderUrl"))
     OAuthParameters.add_member(:o_auth_scope, Shapes::ShapeRef.new(shape: OAuthScope, location_name: "OAuthScope"))
     OAuthParameters.add_member(:identity_provider_vpc_connection_properties, Shapes::ShapeRef.new(shape: VpcConnectionProperties, location_name: "IdentityProviderVpcConnectionProperties"))
@@ -8626,6 +8682,7 @@ module Aws::QuickSight
     PivotTableConfiguration.add_member(:total_options, Shapes::ShapeRef.new(shape: PivotTableTotalOptions, location_name: "TotalOptions"))
     PivotTableConfiguration.add_member(:field_options, Shapes::ShapeRef.new(shape: PivotTableFieldOptions, location_name: "FieldOptions"))
     PivotTableConfiguration.add_member(:paginated_report_options, Shapes::ShapeRef.new(shape: PivotTablePaginatedReportOptions, location_name: "PaginatedReportOptions"))
+    PivotTableConfiguration.add_member(:tooltip, Shapes::ShapeRef.new(shape: TooltipOptions, location_name: "Tooltip"))
     PivotTableConfiguration.add_member(:dashboard_customization_visual_options, Shapes::ShapeRef.new(shape: DashboardCustomizationVisualOptions, location_name: "DashboardCustomizationVisualOptions"))
     PivotTableConfiguration.add_member(:interactions, Shapes::ShapeRef.new(shape: VisualInteractionOptions, location_name: "Interactions"))
     PivotTableConfiguration.struct_class = Types::PivotTableConfiguration
@@ -9710,6 +9767,9 @@ module Aws::QuickSight
 
     SheetTextBoxList.member = Shapes::ShapeRef.new(shape: SheetTextBox)
 
+    SheetTooltip.add_member(:sheet_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, location_name: "SheetId"))
+    SheetTooltip.struct_class = Types::SheetTooltip
+
     SheetVisualScopingConfiguration.add_member(:sheet_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, required: true, location_name: "SheetId"))
     SheetVisualScopingConfiguration.add_member(:scope, Shapes::ShapeRef.new(shape: FilterVisualScope, required: true, location_name: "Scope"))
     SheetVisualScopingConfiguration.add_member(:visual_ids, Shapes::ShapeRef.new(shape: FilteredVisualsList, location_name: "VisualIds"))
@@ -9857,6 +9917,17 @@ module Aws::QuickSight
     SparkParameters.add_member(:port, Shapes::ShapeRef.new(shape: Port, required: true, location_name: "Port"))
     SparkParameters.struct_class = Types::SparkParameters
 
+    SparklinesOptions.add_member(:field_id, Shapes::ShapeRef.new(shape: FieldId, required: true, location_name: "FieldId"))
+    SparklinesOptions.add_member(:x_axis_field, Shapes::ShapeRef.new(shape: DimensionField, required: true, location_name: "XAxisField"))
+    SparklinesOptions.add_member(:y_axis_behavior, Shapes::ShapeRef.new(shape: SparklineAxisBehavior, location_name: "YAxisBehavior"))
+    SparklinesOptions.add_member(:visual_type, Shapes::ShapeRef.new(shape: SparklineVisualType, location_name: "VisualType"))
+    SparklinesOptions.add_member(:line_color, Shapes::ShapeRef.new(shape: HexColor, location_name: "LineColor"))
+    SparklinesOptions.add_member(:line_interpolation, Shapes::ShapeRef.new(shape: LineInterpolation, location_name: "LineInterpolation"))
+    SparklinesOptions.add_member(:all_points_marker, Shapes::ShapeRef.new(shape: LineChartMarkerStyleSettings, location_name: "AllPointsMarker"))
+    SparklinesOptions.add_member(:max_value_marker, Shapes::ShapeRef.new(shape: LineChartMarkerStyleSettings, location_name: "MaxValueMarker"))
+    SparklinesOptions.add_member(:min_value_marker, Shapes::ShapeRef.new(shape: LineChartMarkerStyleSettings, location_name: "MinValueMarker"))
+    SparklinesOptions.struct_class = Types::SparklinesOptions
+
     SpatialStaticFile.add_member(:static_file_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, required: true, location_name: "StaticFileId"))
     SpatialStaticFile.add_member(:source, Shapes::ShapeRef.new(shape: StaticFileSource, location_name: "Source"))
     SpatialStaticFile.struct_class = Types::SpatialStaticFile
@@ -9912,6 +9983,18 @@ module Aws::QuickSight
     StartAssetBundleImportJobResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "RequestId"))
     StartAssetBundleImportJobResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
     StartAssetBundleImportJobResponse.struct_class = Types::StartAssetBundleImportJobResponse
+
+    StartAutomationJobRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
+    StartAutomationJobRequest.add_member(:automation_group_id, Shapes::ShapeRef.new(shape: AutomateId, required: true, location: "uri", location_name: "AutomationGroupId"))
+    StartAutomationJobRequest.add_member(:automation_id, Shapes::ShapeRef.new(shape: AutomateId, required: true, location: "uri", location_name: "AutomationId"))
+    StartAutomationJobRequest.add_member(:input_payload, Shapes::ShapeRef.new(shape: SensitiveIOPayload, location_name: "InputPayload"))
+    StartAutomationJobRequest.struct_class = Types::StartAutomationJobRequest
+
+    StartAutomationJobResponse.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "Arn"))
+    StartAutomationJobResponse.add_member(:job_id, Shapes::ShapeRef.new(shape: AutomateId, required: true, location_name: "JobId"))
+    StartAutomationJobResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
+    StartAutomationJobResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
+    StartAutomationJobResponse.struct_class = Types::StartAutomationJobResponse
 
     StartDashboardSnapshotJobRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
     StartDashboardSnapshotJobRequest.add_member(:dashboard_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, required: true, location: "uri", location_name: "DashboardId"))
@@ -10063,6 +10146,7 @@ module Aws::QuickSight
     TableConfiguration.add_member(:field_options, Shapes::ShapeRef.new(shape: TableFieldOptions, location_name: "FieldOptions"))
     TableConfiguration.add_member(:paginated_report_options, Shapes::ShapeRef.new(shape: TablePaginatedReportOptions, location_name: "PaginatedReportOptions"))
     TableConfiguration.add_member(:table_inline_visualizations, Shapes::ShapeRef.new(shape: TableInlineVisualizationList, location_name: "TableInlineVisualizations"))
+    TableConfiguration.add_member(:tooltip, Shapes::ShapeRef.new(shape: TooltipOptions, location_name: "Tooltip"))
     TableConfiguration.add_member(:dashboard_customization_visual_options, Shapes::ShapeRef.new(shape: DashboardCustomizationVisualOptions, location_name: "DashboardCustomizationVisualOptions"))
     TableConfiguration.add_member(:interactions, Shapes::ShapeRef.new(shape: VisualInteractionOptions, location_name: "Interactions"))
     TableConfiguration.struct_class = Types::TableConfiguration
@@ -10111,6 +10195,7 @@ module Aws::QuickSight
     TableFieldWells.struct_class = Types::TableFieldWells
 
     TableInlineVisualization.add_member(:data_bars, Shapes::ShapeRef.new(shape: DataBarsOptions, location_name: "DataBars"))
+    TableInlineVisualization.add_member(:sparklines, Shapes::ShapeRef.new(shape: SparklinesOptions, location_name: "Sparklines"))
     TableInlineVisualization.struct_class = Types::TableInlineVisualization
 
     TableInlineVisualizationList.member = Shapes::ShapeRef.new(shape: TableInlineVisualization)
@@ -10247,6 +10332,7 @@ module Aws::QuickSight
 
     TemplateVersionDefinition.add_member(:data_set_configurations, Shapes::ShapeRef.new(shape: DataSetConfigurationList, required: true, location_name: "DataSetConfigurations"))
     TemplateVersionDefinition.add_member(:sheets, Shapes::ShapeRef.new(shape: SheetDefinitionList, location_name: "Sheets"))
+    TemplateVersionDefinition.add_member(:tooltip_sheets, Shapes::ShapeRef.new(shape: TooltipSheetDefinitionList, location_name: "TooltipSheets"))
     TemplateVersionDefinition.add_member(:calculated_fields, Shapes::ShapeRef.new(shape: CalculatedFields, location_name: "CalculatedFields"))
     TemplateVersionDefinition.add_member(:parameter_declarations, Shapes::ShapeRef.new(shape: ParameterDeclarationList, location_name: "ParameterDeclarations"))
     TemplateVersionDefinition.add_member(:filter_groups, Shapes::ShapeRef.new(shape: FilterGroupList, location_name: "FilterGroups"))
@@ -10423,7 +10509,24 @@ module Aws::QuickSight
     TooltipOptions.add_member(:tooltip_visibility, Shapes::ShapeRef.new(shape: Visibility, location_name: "TooltipVisibility"))
     TooltipOptions.add_member(:selected_tooltip_type, Shapes::ShapeRef.new(shape: SelectedTooltipType, location_name: "SelectedTooltipType"))
     TooltipOptions.add_member(:field_based_tooltip, Shapes::ShapeRef.new(shape: FieldBasedTooltip, location_name: "FieldBasedTooltip"))
+    TooltipOptions.add_member(:sheet_tooltip, Shapes::ShapeRef.new(shape: SheetTooltip, location_name: "SheetTooltip"))
     TooltipOptions.struct_class = Types::TooltipOptions
+
+    TooltipSheetDefinition.add_member(:sheet_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, required: true, location_name: "SheetId"))
+    TooltipSheetDefinition.add_member(:name, Shapes::ShapeRef.new(shape: SheetName, location_name: "Name"))
+    TooltipSheetDefinition.add_member(:visuals, Shapes::ShapeRef.new(shape: TooltipSheetVisualList, location_name: "Visuals"))
+    TooltipSheetDefinition.add_member(:text_boxes, Shapes::ShapeRef.new(shape: TooltipSheetTextBoxList, location_name: "TextBoxes"))
+    TooltipSheetDefinition.add_member(:images, Shapes::ShapeRef.new(shape: TooltipSheetImageList, location_name: "Images"))
+    TooltipSheetDefinition.add_member(:layouts, Shapes::ShapeRef.new(shape: LayoutList, location_name: "Layouts"))
+    TooltipSheetDefinition.struct_class = Types::TooltipSheetDefinition
+
+    TooltipSheetDefinitionList.member = Shapes::ShapeRef.new(shape: TooltipSheetDefinition)
+
+    TooltipSheetImageList.member = Shapes::ShapeRef.new(shape: SheetImage)
+
+    TooltipSheetTextBoxList.member = Shapes::ShapeRef.new(shape: SheetTextBox)
+
+    TooltipSheetVisualList.member = Shapes::ShapeRef.new(shape: Visual)
 
     TopBottomFilter.add_member(:filter_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, required: true, location_name: "FilterId"))
     TopBottomFilter.add_member(:column, Shapes::ShapeRef.new(shape: ColumnIdentifier, required: true, location_name: "Column"))
@@ -12888,6 +12991,19 @@ module Aws::QuickSight
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
+      api.add_operation(:describe_automation_job, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeAutomationJob"
+        o.http_method = "GET"
+        o.http_request_uri = "/accounts/{AwsAccountId}/automation-groups/{AutomationGroupId}/automations/{AutomationId}/jobs/{JobId}"
+        o.input = Shapes::ShapeRef.new(shape: DescribeAutomationJobRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeAutomationJobResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
       api.add_operation(:describe_brand, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeBrand"
         o.http_method = "GET"
@@ -14621,6 +14737,20 @@ module Aws::QuickSight
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:start_automation_job, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartAutomationJob"
+        o.http_method = "POST"
+        o.http_request_uri = "/accounts/{AwsAccountId}/automation-groups/{AutomationGroupId}/automations/{AutomationId}/jobs"
+        o.input = Shapes::ShapeRef.new(shape: StartAutomationJobRequest)
+        o.output = Shapes::ShapeRef.new(shape: StartAutomationJobResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
       api.add_operation(:start_dashboard_snapshot_job, Seahorse::Model::Operation.new.tap do |o|

@@ -2701,6 +2701,14 @@ module Aws
       def update_anycast_ip_list: (
                                     id: ::String,
                                     ?ip_address_type: ("ipv4" | "ipv6" | "dualstack"),
+                                    ?ipam_cidr_configs: Array[
+                                      {
+                                        cidr: ::String,
+                                        ipam_pool_arn: ::String,
+                                        anycast_ip: ::String?,
+                                        status: ("provisioned" | "failed-provision" | "provisioning" | "deprovisioned" | "failed-deprovision" | "deprovisioning" | "advertised" | "failed-advertise" | "advertising" | "withdrawn" | "failed-withdraw" | "withdrawing")?
+                                      },
+                                    ],
                                     if_match: ::String
                                   ) -> _UpdateAnycastIpListResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAnycastIpListResponseSuccess

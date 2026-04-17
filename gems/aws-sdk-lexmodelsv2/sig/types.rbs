@@ -411,6 +411,21 @@ module Aws::LexModelsV2
       SENSITIVE: []
     end
 
+    class BotAnalyzerHistorySummary
+      attr_accessor bot_analyzer_status: ("Processing" | "Available" | "Failed" | "Stopping" | "Stopped")
+      attr_accessor creation_date_time: ::Time
+      attr_accessor bot_analyzer_request_id: ::String
+      SENSITIVE: []
+    end
+
+    class BotAnalyzerRecommendation
+      attr_accessor issue_location: Types::IssueLocation
+      attr_accessor priority: ("High" | "Medium" | "Low")
+      attr_accessor issue_description: ::String
+      attr_accessor proposed_fix: ::String
+      SENSITIVE: []
+    end
+
     class BotExportSpecification
       attr_accessor bot_id: ::String
       attr_accessor bot_version: ::String
@@ -1105,6 +1120,15 @@ module Aws::LexModelsV2
       SENSITIVE: []
     end
 
+    class DeleteBotAnalyzerRecommendationRequest
+      attr_accessor bot_id: ::String
+      attr_accessor bot_analyzer_request_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteBotAnalyzerRecommendationResponse < Aws::EmptyStructure
+    end
+
     class DeleteBotLocaleRequest
       attr_accessor bot_id: ::String
       attr_accessor bot_version: ::String
@@ -1282,6 +1306,25 @@ module Aws::LexModelsV2
       attr_accessor creation_date_time: ::Time
       attr_accessor last_updated_date_time: ::Time
       attr_accessor parent_bot_networks: ::Array[Types::ParentBotNetwork]
+      SENSITIVE: []
+    end
+
+    class DescribeBotAnalyzerRecommendationRequest
+      attr_accessor bot_id: ::String
+      attr_accessor bot_analyzer_request_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeBotAnalyzerRecommendationResponse
+      attr_accessor bot_id: ::String
+      attr_accessor bot_version: ::String
+      attr_accessor locale_id: ::String
+      attr_accessor bot_analyzer_status: ("Processing" | "Available" | "Failed" | "Stopping" | "Stopped")
+      attr_accessor creation_date_time: ::Time
+      attr_accessor bot_analyzer_recommendation_list: ::Array[Types::BotAnalyzerRecommendation]
+      attr_accessor next_token: ::String
       SENSITIVE: []
     end
 
@@ -2015,6 +2058,13 @@ module Aws::LexModelsV2
       SENSITIVE: []
     end
 
+    class IssueLocation
+      attr_accessor bot_locale: ::String
+      attr_accessor intent_id: ::String
+      attr_accessor slot_id: ::String
+      SENSITIVE: []
+    end
+
     class KendraConfiguration
       attr_accessor kendra_index: ::String
       attr_accessor query_filter_string_enabled: bool
@@ -2088,6 +2138,24 @@ module Aws::LexModelsV2
       attr_accessor bot_alias_summaries: ::Array[Types::BotAliasSummary]
       attr_accessor next_token: ::String
       attr_accessor bot_id: ::String
+      SENSITIVE: []
+    end
+
+    class ListBotAnalyzerHistoryRequest
+      attr_accessor bot_id: ::String
+      attr_accessor locale_id: ::String
+      attr_accessor bot_version: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListBotAnalyzerHistoryResponse
+      attr_accessor bot_id: ::String
+      attr_accessor locale_id: ::String
+      attr_accessor bot_version: ::String
+      attr_accessor bot_analyzer_history_list: ::Array[Types::BotAnalyzerHistorySummary]
+      attr_accessor next_token: ::String
       SENSITIVE: []
     end
 
@@ -3037,6 +3105,24 @@ module Aws::LexModelsV2
       SENSITIVE: []
     end
 
+    class StartBotAnalyzerRequest
+      attr_accessor bot_id: ::String
+      attr_accessor analysis_scope: ("BotLocale")
+      attr_accessor locale_id: ::String
+      attr_accessor bot_version: ::String
+      SENSITIVE: []
+    end
+
+    class StartBotAnalyzerResponse
+      attr_accessor bot_id: ::String
+      attr_accessor bot_version: ::String
+      attr_accessor locale_id: ::String
+      attr_accessor bot_analyzer_status: ("Processing" | "Available" | "Failed" | "Stopping" | "Stopped")
+      attr_accessor bot_analyzer_request_id: ::String
+      attr_accessor creation_date_time: ::Time
+      SENSITIVE: []
+    end
+
     class StartBotRecommendationRequest
       attr_accessor bot_id: ::String
       attr_accessor bot_version: ::String
@@ -3140,6 +3226,21 @@ module Aws::LexModelsV2
       attr_accessor frequency_in_seconds: ::Integer
       attr_accessor timeout_in_seconds: ::Integer
       attr_accessor allow_interrupt: bool
+      SENSITIVE: []
+    end
+
+    class StopBotAnalyzerRequest
+      attr_accessor bot_id: ::String
+      attr_accessor bot_analyzer_request_id: ::String
+      SENSITIVE: []
+    end
+
+    class StopBotAnalyzerResponse
+      attr_accessor bot_id: ::String
+      attr_accessor bot_version: ::String
+      attr_accessor locale_id: ::String
+      attr_accessor bot_analyzer_status: ("Processing" | "Available" | "Failed" | "Stopping" | "Stopped")
+      attr_accessor bot_analyzer_request_id: ::String
       SENSITIVE: []
     end
 

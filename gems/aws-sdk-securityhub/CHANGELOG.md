@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.154.0 (2026-04-13)
+------------------
+
+* Feature - Provide organizational unit scoping capability for GetFindingsV2, GetFindingStatisticsV2, GetResourcesV2, GetResourcesStatisticsV2 APIs.
+
+1.153.0 (2026-03-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.152.0 (2026-02-26)
+------------------
+
+* Feature - Security Hub added EXTENDED PLAN integration type to DescribeProductsV2 and added metadata.product.vendor name GroupBy support to GetFindingStatisticsV2
+
 1.151.0 (2026-01-16)
 ------------------
 

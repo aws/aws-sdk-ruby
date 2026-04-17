@@ -104,6 +104,39 @@ module Aws::PCS
       include Aws::Structure
     end
 
+    # Additional settings that directly map to Cgroup settings.
+    #
+    # PCS supports a subset of Cgroup settings. For more information, see
+    # [Configuring custom Cgroup settings in PCS][1] in the *PCS User
+    # Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/pcs/latest/userguide/cgroup-custom-settings.html
+    #
+    # @!attribute [rw] parameter_name
+    #   PCS supports custom Cgroup settings for clusters. For more
+    #   information, see [Configuring custom Cgroup settings in PCS][1] in
+    #   the *PCS User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/pcs/latest/userguide/cgroup-custom-settings.html
+    #   @return [String]
+    #
+    # @!attribute [rw] parameter_value
+    #   The values for the configured Cgroup settings.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pcs-2023-02-10/CgroupCustomSetting AWS API Documentation
+    #
+    class CgroupCustomSetting < Struct.new(
+      :parameter_name,
+      :parameter_value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The cluster resource and configuration.
     #
     # @!attribute [rw] name
@@ -211,6 +244,16 @@ module Aws::PCS
     #   settings.
     #   @return [Array<Types::SlurmCustomSetting>]
     #
+    # @!attribute [rw] slurmdbd_custom_settings
+    #   Additional SlurmDBD-specific configuration that directly maps to
+    #   SlurmDBD settings.
+    #   @return [Array<Types::SlurmdbdCustomSetting>]
+    #
+    # @!attribute [rw] cgroup_custom_settings
+    #   Additional Cgroup-specific configuration that directly maps to
+    #   Cgroup settings.
+    #   @return [Array<Types::CgroupCustomSetting>]
+    #
     # @!attribute [rw] auth_key
     #   The shared Slurm key for authentication, also known as the **cluster
     #   secret**.
@@ -234,6 +277,8 @@ module Aws::PCS
     class ClusterSlurmConfiguration < Struct.new(
       :scale_down_idle_time_in_seconds,
       :slurm_custom_settings,
+      :slurmdbd_custom_settings,
+      :cgroup_custom_settings,
       :auth_key,
       :jwt_auth,
       :accounting,
@@ -255,6 +300,16 @@ module Aws::PCS
     #   settings.
     #   @return [Array<Types::SlurmCustomSetting>]
     #
+    # @!attribute [rw] slurmdbd_custom_settings
+    #   Additional SlurmDBD-specific configuration that directly maps to
+    #   SlurmDBD settings.
+    #   @return [Array<Types::SlurmdbdCustomSetting>]
+    #
+    # @!attribute [rw] cgroup_custom_settings
+    #   Additional Cgroup-specific configuration that directly maps to
+    #   Cgroup settings.
+    #   @return [Array<Types::CgroupCustomSetting>]
+    #
     # @!attribute [rw] accounting
     #   The accounting configuration includes configurable settings for
     #   Slurm accounting.
@@ -269,6 +324,8 @@ module Aws::PCS
     class ClusterSlurmConfigurationRequest < Struct.new(
       :scale_down_idle_time_in_seconds,
       :slurm_custom_settings,
+      :slurmdbd_custom_settings,
+      :cgroup_custom_settings,
       :accounting,
       :slurm_rest)
       SENSITIVE = []
@@ -1764,7 +1821,7 @@ module Aws::PCS
     #   manage cluster scaling and job scheduling. For more information, see
     #   [Slurm versions in PCS][1] in the *PCS User Guide*.
     #
-    #   Valid Values: `23.11 | 24.05 | 24.11`
+    #   Valid Values: `23.11 | 24.05 | 24.11 | 25.05`
     #
     #
     #
@@ -1792,7 +1849,7 @@ module Aws::PCS
     #   manage cluster scaling and job scheduling. For more information, see
     #   [Slurm versions in PCS][1] in the *PCS User Guide*.
     #
-    #   Valid Values: `23.11 | 24.05 | 24.11`
+    #   Valid Values: `24.11 | 25.05`
     #
     #
     #
@@ -1944,6 +2001,39 @@ module Aws::PCS
     #
     class SlurmRestRequest < Struct.new(
       :mode)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Additional settings that directly map to SlurmDBD settings.
+    #
+    # PCS supports a subset of SlurmDBD settings. For more information, see
+    # [Configuring custom SlurmDBD settings in PCS][1] in the *PCS User
+    # Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/pcs/latest/userguide/slurmdbd-custom-settings.html
+    #
+    # @!attribute [rw] parameter_name
+    #   PCS supports custom SlurmDBD settings for clusters. For more
+    #   information, see [Configuring custom SlurmDBD settings in PCS][1] in
+    #   the *PCS User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/pcs/latest/userguide/slurmdbd-custom-settings.html
+    #   @return [String]
+    #
+    # @!attribute [rw] parameter_value
+    #   The values for the configured SlurmDBD settings.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pcs-2023-02-10/SlurmdbdCustomSetting AWS API Documentation
+    #
+    class SlurmdbdCustomSetting < Struct.new(
+      :parameter_name,
+      :parameter_value)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2126,6 +2216,16 @@ module Aws::PCS
     #   settings.
     #   @return [Array<Types::SlurmCustomSetting>]
     #
+    # @!attribute [rw] slurmdbd_custom_settings
+    #   Additional SlurmDBD-specific configuration that directly maps to
+    #   SlurmDBD settings.
+    #   @return [Array<Types::SlurmdbdCustomSetting>]
+    #
+    # @!attribute [rw] cgroup_custom_settings
+    #   Additional Cgroup-specific configuration that directly maps to
+    #   Cgroup settings.
+    #   @return [Array<Types::CgroupCustomSetting>]
+    #
     # @!attribute [rw] accounting
     #   The accounting configuration includes configurable settings for
     #   Slurm accounting.
@@ -2140,6 +2240,8 @@ module Aws::PCS
     class UpdateClusterSlurmConfigurationRequest < Struct.new(
       :scale_down_idle_time_in_seconds,
       :slurm_custom_settings,
+      :slurmdbd_custom_settings,
+      :cgroup_custom_settings,
       :accounting,
       :slurm_rest)
       SENSITIVE = []

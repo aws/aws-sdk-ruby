@@ -559,6 +559,10 @@ module Aws::RedshiftDataAPIService
     #   The name of the SQL statements. You can name the SQL statements when
     #   you create them to identify the query.
     #
+    # @option params [Array<Types::SqlParameter>] :parameters
+    #   The parameters for the SQL statements. The parameters are shared
+    #   across all SQL statements in the batch.
+    #
     # @option params [String] :workgroup_name
     #   The serverless workgroup name or Amazon Resource Name (ARN). This
     #   parameter is required when connecting to a serverless workgroup and
@@ -605,6 +609,12 @@ module Aws::RedshiftDataAPIService
     #     database: "String",
     #     with_event: false,
     #     statement_name: "StatementNameString",
+    #     parameters: [
+    #       {
+    #         name: "ParameterName", # required
+    #         value: "ParameterValue", # required
+    #       },
+    #     ],
     #     workgroup_name: "WorkgroupNameString",
     #     client_token: "ClientToken",
     #     result_format: "JSON", # accepts JSON, CSV
@@ -1757,7 +1767,7 @@ module Aws::RedshiftDataAPIService
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-redshiftdataapiservice'
-      context[:gem_version] = '1.69.0'
+      context[:gem_version] = '1.71.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

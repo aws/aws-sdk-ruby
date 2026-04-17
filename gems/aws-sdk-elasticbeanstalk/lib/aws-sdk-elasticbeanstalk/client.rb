@@ -3465,6 +3465,11 @@ module Aws::ElasticBeanstalk
     # log files for every Amazon EC2 instance into a `.zip` file. Legacy and
     # .NET containers do not support bundle logs.
     #
+    # Setting the `InfoType` to `analyze` collects recent events, instance
+    # health, and logs from your environment and sends them to Amazon
+    # Bedrock in your account to generate diagnostic insights and
+    # recommended next steps.
+    #
     # Use RetrieveEnvironmentInfo to obtain the set of logs.
     #
     # Related Topics
@@ -3513,7 +3518,7 @@ module Aws::ElasticBeanstalk
     #   resp = client.request_environment_info({
     #     environment_id: "EnvironmentId",
     #     environment_name: "EnvironmentName",
-    #     info_type: "tail", # required, accepts tail, bundle
+    #     info_type: "tail", # required, accepts tail, bundle, analyze
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/RequestEnvironmentInfo AWS API Documentation
@@ -3632,13 +3637,13 @@ module Aws::ElasticBeanstalk
     #   resp = client.retrieve_environment_info({
     #     environment_id: "EnvironmentId",
     #     environment_name: "EnvironmentName",
-    #     info_type: "tail", # required, accepts tail, bundle
+    #     info_type: "tail", # required, accepts tail, bundle, analyze
     #   })
     #
     # @example Response structure
     #
     #   resp.environment_info #=> Array
-    #   resp.environment_info[0].info_type #=> String, one of "tail", "bundle"
+    #   resp.environment_info[0].info_type #=> String, one of "tail", "bundle", "analyze"
     #   resp.environment_info[0].ec2_instance_id #=> String
     #   resp.environment_info[0].sample_timestamp #=> Time
     #   resp.environment_info[0].message #=> String
@@ -4652,7 +4657,7 @@ module Aws::ElasticBeanstalk
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-elasticbeanstalk'
-      context[:gem_version] = '1.99.0'
+      context[:gem_version] = '1.101.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -245,6 +245,143 @@ module Aws::MediaConvert
       include Aws::Structure
     end
 
+    # Required when you set Codec to the value AC4.
+    #
+    # @!attribute [rw] bitrate
+    #   Specify the average bitrate in bits per second. Leave blank to use
+    #   the default bitrate for the coding mode you select according to ETSI
+    #   TS 103 190. Valid bitrates for coding mode 2.0 (stereo): 48000,
+    #   64000, 96000, 128000, 144000, 192000, 256000, 288000, 320000,
+    #   384000, 448000, 512000, or 768000. Valid bitrates for coding mode
+    #   5.1 (3/2 with LFE): 96000, 128000, 144000, 192000, 256000, 288000,
+    #   320000, 384000, 448000, 512000, or 768000. Valid bitrates for coding
+    #   mode 5.1.4 (immersive): 192000, 256000, 288000, 320000, 384000,
+    #   448000, 512000, or 768000.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] bitstream_mode
+    #   Specify the bitstream mode for the AC-4 stream that the encoder
+    #   emits. For more information about the AC-4 bitstream mode, see ETSI
+    #   TS 103 190. Maps to dlb\_paec\_ac4\_bed\_classifier in the encoder
+    #   implementation. - COMPLETE\_MAIN: Complete Main (standard mix) -
+    #   EMERGENCY: Stereo Emergency content
+    #   @return [String]
+    #
+    # @!attribute [rw] coding_mode
+    #   Dolby AC-4 coding mode. Determines number of channels. Maps to
+    #   dlb\_paec\_ac4\_bed\_channel\_config in the encoder implementation.
+    #   - CODING\_MODE\_2\_0: 2.0 (stereo) - maps to
+    #   DLB\_PAEC\_AC4\_BED\_CHANNEL\_CONFIG\_20 - CODING\_MODE\_3\_2\_LFE:
+    #   5.1 surround - maps to DLB\_PAEC\_AC4\_BED\_CHANNEL\_CONFIG\_51 -
+    #   CODING\_MODE\_5\_1\_4: 5.1.4 immersive - maps to
+    #   DLB\_PAEC\_AC4\_BED\_CHANNEL\_CONFIG\_514
+    #   @return [String]
+    #
+    # @!attribute [rw] dynamic_range_compression_flat_panel_tv
+    #   Choose the Dolby AC-4 dynamic range control (DRC) profile that
+    #   MediaConvert uses when encoding the metadata in the Dolby AC-4
+    #   stream for the specified decoder mode. For information about the
+    #   Dolby AC-4 DRC profiles, see the Dolby AC-4 specification.
+    #   @return [String]
+    #
+    # @!attribute [rw] dynamic_range_compression_home_theater
+    #   Choose the Dolby AC-4 dynamic range control (DRC) profile that
+    #   MediaConvert uses when encoding the metadata in the Dolby AC-4
+    #   stream for the specified decoder mode. For information about the
+    #   Dolby AC-4 DRC profiles, see the Dolby AC-4 specification.
+    #   @return [String]
+    #
+    # @!attribute [rw] dynamic_range_compression_portable_headphones
+    #   Choose the Dolby AC-4 dynamic range control (DRC) profile that
+    #   MediaConvert uses when encoding the metadata in the Dolby AC-4
+    #   stream for the specified decoder mode. For information about the
+    #   Dolby AC-4 DRC profiles, see the Dolby AC-4 specification.
+    #   @return [String]
+    #
+    # @!attribute [rw] dynamic_range_compression_portable_speakers
+    #   Choose the Dolby AC-4 dynamic range control (DRC) profile that
+    #   MediaConvert uses when encoding the metadata in the Dolby AC-4
+    #   stream for the specified decoder mode. For information about the
+    #   Dolby AC-4 DRC profiles, see the Dolby AC-4 specification.
+    #   @return [String]
+    #
+    # @!attribute [rw] lo_ro_center_mix_level
+    #   Specify a value for the following Dolby AC-4 setting: Left
+    #   only/Right only center mix. MediaConvert uses this value for
+    #   downmixing. How the service uses this value depends on the value
+    #   that you choose for Stereo downmix. Valid values: 3.0, 1.5, 0.0,
+    #   -1.5, -3.0, -4.5, -6.0, and -infinity. The value -infinity mutes the
+    #   channel. This setting applies only if you keep the default value of
+    #   3/2 - L, R, C, Ls, Rs for the setting Coding mode. If you choose a
+    #   different value for Coding mode, the service ignores Left only/Right
+    #   only center.
+    #   @return [Float]
+    #
+    # @!attribute [rw] lo_ro_surround_mix_level
+    #   Specify a value for the following Dolby AC-4 setting: Left
+    #   only/Right only surround mix. MediaConvert uses this value for
+    #   downmixing. How the service uses this value depends on the value
+    #   that you choose for Stereo downmix. Valid values: -1.5, -3.0, -4.5,
+    #   -6.0, and -infinity. The value -infinity mutes the channel. This
+    #   setting applies only if you keep the default value of 3/2 - L, R, C,
+    #   Ls, Rs for the setting Coding mode. If you choose a different value
+    #   for Coding mode, the service ignores Left only/Right only surround.
+    #   @return [Float]
+    #
+    # @!attribute [rw] lt_rt_center_mix_level
+    #   Specify a value for the following Dolby AC-4 setting: Left
+    #   total/Right total center mix. MediaConvert uses this value for
+    #   downmixing. How the service uses this value depends on the value
+    #   that you choose for Stereo downmix. Valid values: 3.0, 1.5, 0.0,
+    #   -1.5, -3.0, -4.5, -6.0, and -infinity. The value -infinity mutes the
+    #   channel. This setting applies only if you keep the default value of
+    #   3/2 - L, R, C, Ls, Rs for the setting Coding mode. If you choose a
+    #   different value for Coding mode, the service ignores Left
+    #   total/Right total center.
+    #   @return [Float]
+    #
+    # @!attribute [rw] lt_rt_surround_mix_level
+    #   Specify a value for the following Dolby AC-4 setting: Left
+    #   total/Right total surround mix. MediaConvert uses this value for
+    #   downmixing. How the service uses this value depends on the value
+    #   that you choose for Stereo downmix. Valid values: -1.5, -3.0, -4.5,
+    #   -6.0, and -infinity. The value -infinity mutes the channel. This
+    #   setting applies only if you keep the default value of 3/2 - L, R, C,
+    #   Ls, Rs for the setting Coding mode. If you choose a different value
+    #   for Coding mode, the service ignores Left total/Right total
+    #   surround.
+    #   @return [Float]
+    #
+    # @!attribute [rw] sample_rate
+    #   This value is always 48000. It represents the sample rate in Hz.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] stereo_downmix
+    #   Choose the preferred stereo downmix method. This setting tells the
+    #   decoder how to downmix multi-channel audio to stereo during
+    #   playback.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/Ac4Settings AWS API Documentation
+    #
+    class Ac4Settings < Struct.new(
+      :bitrate,
+      :bitstream_mode,
+      :coding_mode,
+      :dynamic_range_compression_flat_panel_tv,
+      :dynamic_range_compression_home_theater,
+      :dynamic_range_compression_portable_headphones,
+      :dynamic_range_compression_portable_speakers,
+      :lo_ro_center_mix_level,
+      :lo_ro_surround_mix_level,
+      :lt_rt_center_mix_level,
+      :lt_rt_surround_mix_level,
+      :sample_rate,
+      :stereo_downmix)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Accelerated transcoding can significantly speed up jobs with long,
     # visually complex content.
     #
@@ -457,6 +594,10 @@ module Aws::MediaConvert
     #   Required when you set Codec to the value AC3.
     #   @return [Types::Ac3Settings]
     #
+    # @!attribute [rw] ac_4_settings
+    #   Required when you set Codec to the value AC4.
+    #   @return [Types::Ac4Settings]
+    #
     # @!attribute [rw] aiff_settings
     #   Required when you set Codec to the value AIFF.
     #   @return [Types::AiffSettings]
@@ -516,6 +657,7 @@ module Aws::MediaConvert
     class AudioCodecSettings < Struct.new(
       :aac_settings,
       :ac_3_settings,
+      :ac_4_settings,
       :aiff_settings,
       :codec,
       :eac_3_atmos_settings,
@@ -2340,6 +2482,24 @@ module Aws::MediaConvert
 
     # Settings for CMAF encryption
     #
+    # @!attribute [rw] clear_lead
+    #   Enable Clear Lead DRM to reduce video startup latency by leaving the
+    #   first segment unencrypted while DRM license retrieval occurs in
+    #   parallel. This optimization allows immediate playback startup while
+    #   maintaining content protection for the remainder of the stream. When
+    #   enabled, the first output segment remains fully unencrypted, and
+    #   encryption begins at the start of the second segment. The HLS
+    #   manifest will omit #EXT-X-KEY tags during the clear segment and
+    #   insert the first #EXT-X-KEY immediately before the first encrypted
+    #   fragment. This feature is supported exclusively for CMAF HLS (fMP4)
+    #   outputs and is compatible with all existing key provider
+    #   integrations (SPEKE v1, SPEKE v2, and Static Key encryption).
+    #   Supported codecs: H.264, H.265, and AV1 video codecs, and AAC audio
+    #   codec. Choose Enabled to activate Clear Lead DRM optimization.
+    #   Choose Disabled to use standard encryption where all segments are
+    #   encrypted from the beginning.
+    #   @return [String]
+    #
     # @!attribute [rw] constant_initialization_vector
     #   This is a 128-bit, 16-byte hex value represented by a 32-character
     #   text string. If this parameter is not set then the Initialization
@@ -2378,6 +2538,7 @@ module Aws::MediaConvert
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/CmafEncryptionSettings AWS API Documentation
     #
     class CmafEncryptionSettings < Struct.new(
+      :clear_lead,
       :constant_initialization_vector,
       :encryption_method,
       :initialization_vector_in_manifest,
@@ -2686,7 +2847,10 @@ module Aws::MediaConvert
     #   to FOLLOW\_IFRAME, MediaConvert generates thumbnails for each IDR
     #   frame in the output (matching the GOP cadence). If set to
     #   FOLLOW\_CUSTOM, MediaConvert generates thumbnails according to the
-    #   interval you specify in thumbnailInterval.
+    #   interval you specify in thumbnailInterval. If set to
+    #   FOLLOW\_SEGMENTATION, MediaConvert generates thumbnail playlist
+    #   entries that align exactly with video segment boundaries.
+    #   FOLLOW\_SEGMENTATION requires 1x1 tiling.
     #   @return [String]
     #
     # @!attribute [rw] thumbnail_height
@@ -3236,9 +3400,15 @@ module Aws::MediaConvert
     #
     # @!attribute [rw] format
     #   The format of your media file. For example: MP4, QuickTime (MOV),
-    #   Matroska (MKV), WebM, MXF or Wave. Note that this will be blank if
-    #   your media file has a format that the MediaConvert Probe operation
-    #   does not recognize.
+    #   Matroska (MKV), WebM, MXF, Wave, AVI, or MPEG-TS. Note that this
+    #   will be blank if your media file has a format that the MediaConvert
+    #   Probe operation does not recognize.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_timecode
+    #   The start timecode of the media file, in HH:MM:SS:FF format (or
+    #   HH:MM:SS;FF for drop frame timecode). Note that this field is null
+    #   when the container does not include an embedded start timecode.
     #   @return [String]
     #
     # @!attribute [rw] tracks
@@ -3250,6 +3420,7 @@ module Aws::MediaConvert
     class Container < Struct.new(
       :duration,
       :format,
+      :start_timecode,
       :tracks)
       SENSITIVE = []
       include Aws::Structure
@@ -3631,6 +3802,11 @@ module Aws::MediaConvert
     #   Optional. A description of the queue that you are creating.
     #   @return [String]
     #
+    # @!attribute [rw] maximum_concurrent_feeds
+    #   Specify the maximum number of Elemental Inference feeds MediaConvert
+    #   can process concurrently.
+    #   @return [Integer]
+    #
     # @!attribute [rw] name
     #   The name of the queue that you are creating.
     #   @return [String]
@@ -3664,6 +3840,7 @@ module Aws::MediaConvert
     class CreateQueueRequest < Struct.new(
       :concurrent_jobs,
       :description,
+      :maximum_concurrent_feeds,
       :name,
       :pricing_plan,
       :reservation_plan_settings,
@@ -4030,7 +4207,10 @@ module Aws::MediaConvert
     #   to FOLLOW\_IFRAME, MediaConvert generates thumbnails for each IDR
     #   frame in the output (matching the GOP cadence). If set to
     #   FOLLOW\_CUSTOM, MediaConvert generates thumbnails according to the
-    #   interval you specify in thumbnailInterval.
+    #   interval you specify in thumbnailInterval. If set to
+    #   FOLLOW\_SEGMENTATION, MediaConvert generates thumbnail playlist
+    #   entries that align exactly with video segment boundaries.
+    #   FOLLOW\_SEGMENTATION requires 1x1 tiling.
     #   @return [String]
     #
     # @!attribute [rw] thumbnail_height
@@ -5225,6 +5405,44 @@ module Aws::MediaConvert
       :stereo_downmix,
       :surround_ex_mode,
       :surround_mode)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The Elemental Inference configuration used in this job.
+    #
+    # @!attribute [rw] features
+    #   A list of Elemental Inference features used in this job.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] feeds
+    #   A list of Elemental Inference feeds used by this job.
+    #   @return [Array<Types::ElementalInferenceFeed>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/ElementalInferenceConfiguration AWS API Documentation
+    #
+    class ElementalInferenceConfiguration < Struct.new(
+      :features,
+      :feeds)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Elemental Inference Feed.
+    #
+    # @!attribute [rw] arn
+    #   Feed ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] feed_management_state
+    #   Elemental Inference Feed management state.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/ElementalInferenceFeed AWS API Documentation
+    #
+    class ElementalInferenceFeed < Struct.new(
+      :arn,
+      :feed_management_state)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7765,7 +7983,10 @@ module Aws::MediaConvert
     #   to FOLLOW\_IFRAME, MediaConvert generates thumbnails for each IDR
     #   frame in the output (matching the GOP cadence). If set to
     #   FOLLOW\_CUSTOM, MediaConvert generates thumbnails according to the
-    #   interval you specify in thumbnailInterval.
+    #   interval you specify in thumbnailInterval. If set to
+    #   FOLLOW\_SEGMENTATION, MediaConvert generates thumbnail playlist
+    #   entries that align exactly with video segment boundaries.
+    #   FOLLOW\_SEGMENTATION requires 1x1 tiling.
     #   @return [String]
     #
     # @!attribute [rw] thumbnail_height
@@ -8224,6 +8445,16 @@ module Aws::MediaConvert
     #   interlaced. Doing so creates horizontal interlacing artifacts.
     #   @return [String]
     #
+    # @!attribute [rw] multi_view_settings
+    #   Specify the enhancement layer input video file path for Multi View
+    #   outputs. The base layer input is treated as the left eye and this
+    #   Multi View input is treated as the right eye. Only one Multi View
+    #   input is currently supported. MediaConvert encodes both views into a
+    #   single MV-HEVC output codec. When you add MultiViewSettings to your
+    #   job, you can only produce Multi View outputs. Adding any other codec
+    #   output to the same job is not supported.
+    #   @return [Array<Types::MultiViewSettings>]
+    #
     # @!attribute [rw] position
     #   Use Selection placement to define the video area in your output
     #   frame. The area outside of the rectangle that you specify here is
@@ -8334,6 +8565,7 @@ module Aws::MediaConvert
       :image_inserter,
       :input_clippings,
       :input_scan_type,
+      :multi_view_settings,
       :position,
       :program_number,
       :psi_control,
@@ -8636,6 +8868,16 @@ module Aws::MediaConvert
     #   interlaced. Doing so creates horizontal interlacing artifacts.
     #   @return [String]
     #
+    # @!attribute [rw] multi_view_settings
+    #   Specify the enhancement layer input video file path for Multi View
+    #   outputs. The base layer input is treated as the left eye and this
+    #   Multi View input is treated as the right eye. Only one Multi View
+    #   input is currently supported. MediaConvert encodes both views into a
+    #   single MV-HEVC output codec. When you add MultiViewSettings to your
+    #   job, you can only produce Multi View outputs. Adding any other codec
+    #   output to the same job is not supported.
+    #   @return [Array<Types::MultiViewSettings>]
+    #
     # @!attribute [rw] position
     #   Use Selection placement to define the video area in your output
     #   frame. The area outside of the rectangle that you specify here is
@@ -8710,6 +8952,7 @@ module Aws::MediaConvert
       :image_inserter,
       :input_clippings,
       :input_scan_type,
+      :multi_view_settings,
       :position,
       :program_number,
       :psi_control,
@@ -8955,6 +9198,10 @@ module Aws::MediaConvert
     #   A job's phase can be PROBING, TRANSCODING OR UPLOADING
     #   @return [String]
     #
+    # @!attribute [rw] elemental_inference_configuration
+    #   The Elemental Inference configuration used in this job.
+    #   @return [Types::ElementalInferenceConfiguration]
+    #
     # @!attribute [rw] error_code
     #   Error code for the job
     #   @return [Integer]
@@ -9103,6 +9350,7 @@ module Aws::MediaConvert
       :client_request_token,
       :created_at,
       :current_phase,
+      :elemental_inference_configuration,
       :error_code,
       :error_message,
       :hop_destinations,
@@ -11660,6 +11908,43 @@ module Aws::MediaConvert
       include Aws::Structure
     end
 
+    # Input settings for MultiView Settings. You can include exactly one
+    # input as enhancement layer.
+    #
+    # @!attribute [rw] file_input
+    #   Specify the input file S3, HTTP, or HTTPS URL for your right eye
+    #   view video.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/MultiViewInput AWS API Documentation
+    #
+    class MultiViewInput < Struct.new(
+      :file_input)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specify the enhancement layer input video file path for Multi View
+    # outputs. The base layer input is treated as the left eye and this
+    # Multi View input is treated as the right eye. Only one Multi View
+    # input is currently supported. MediaConvert encodes both views into a
+    # single MV-HEVC output codec. When you add MultiViewSettings to your
+    # job, you can only produce Multi View outputs. Adding any other codec
+    # output to the same job is not supported.
+    #
+    # @!attribute [rw] input
+    #   Input settings for MultiView Settings. You can include exactly one
+    #   input as enhancement layer.
+    #   @return [Types::MultiViewInput]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/MultiViewSettings AWS API Documentation
+    #
+    class MultiViewSettings < Struct.new(
+      :input)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # These settings relate to your MXF output container.
     #
     # @!attribute [rw] afd_signaling
@@ -12545,8 +12830,7 @@ module Aws::MediaConvert
       include Aws::Structure
     end
 
-    # The request to probe one or more media files and retrieve metadata
-    # about them.
+    # A request to probe a media file and retrieve its metadata.
     #
     # @!attribute [rw] input_files
     #   Specify a media file to probe.
@@ -12857,6 +13141,11 @@ module Aws::MediaConvert
     #   the queue.
     #   @return [Time]
     #
+    # @!attribute [rw] maximum_concurrent_feeds
+    #   Specify the maximum number of Elemental Inference feeds MediaConvert
+    #   can process concurrently.
+    #   @return [Integer]
+    #
     # @!attribute [rw] name
     #   A name that you create for each queue. Each name must be unique
     #   within your account.
@@ -12910,6 +13199,7 @@ module Aws::MediaConvert
       :created_at,
       :description,
       :last_updated,
+      :maximum_concurrent_feeds,
       :name,
       :pricing_plan,
       :progressing_jobs_count,
@@ -14245,6 +14535,11 @@ module Aws::MediaConvert
     #   The new description for the queue, if you are changing it.
     #   @return [String]
     #
+    # @!attribute [rw] maximum_concurrent_feeds
+    #   Specify the maximum number of Elemental Inference feeds MediaConvert
+    #   can process concurrently.
+    #   @return [Integer]
+    #
     # @!attribute [rw] name
     #   The name of the queue that you are modifying.
     #   @return [String]
@@ -14270,6 +14565,7 @@ module Aws::MediaConvert
     class UpdateQueueRequest < Struct.new(
       :concurrent_jobs,
       :description,
+      :maximum_concurrent_feeds,
       :name,
       :reservation_plan_settings,
       :status)
@@ -14618,6 +14914,10 @@ module Aws::MediaConvert
     #   Specify the video Scaling behavior when your output has a different
     #   resolution than your input. For more information, see
     #   https://docs.aws.amazon.com/mediaconvert/latest/ug/video-scaling.html
+    #   Select Smart Cropping using Elemental Inference as your scaling
+    #   behavior to have Elemental Inference automatically crop your video.
+    #   Smart Crop requires a vertical output aspect ratio (1:1 is the
+    #   widest aspect ratio supported).
     #   @return [String]
     #
     # @!attribute [rw] sharpness

@@ -647,7 +647,7 @@ module Aws
       def request_environment_info: (
                                       ?environment_id: ::String,
                                       ?environment_name: ::String,
-                                      info_type: ("tail" | "bundle")
+                                      info_type: ("tail" | "bundle" | "analyze")
                                     ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 
@@ -666,7 +666,7 @@ module Aws
       def retrieve_environment_info: (
                                        ?environment_id: ::String,
                                        ?environment_name: ::String,
-                                       info_type: ("tail" | "bundle")
+                                       info_type: ("tail" | "bundle" | "analyze")
                                      ) -> _RetrieveEnvironmentInfoResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RetrieveEnvironmentInfoResponseSuccess
 

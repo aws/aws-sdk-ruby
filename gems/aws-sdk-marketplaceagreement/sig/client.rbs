@@ -79,6 +79,65 @@ module Aws
                   | (?Hash[Symbol, untyped]) -> instance
 
 
+      interface _BatchCreateBillingAdjustmentRequestResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchCreateBillingAdjustmentRequestOutput]
+        def items: () -> ::Array[Types::BatchCreateBillingAdjustmentItem]
+        def errors: () -> ::Array[Types::BatchCreateBillingAdjustmentError]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MarketplaceAgreement/Client.html#batch_create_billing_adjustment_request-instance_method
+      def batch_create_billing_adjustment_request: (
+                                                     billing_adjustment_request_entries: Array[
+                                                       {
+                                                         agreement_id: ::String,
+                                                         original_invoice_id: ::String,
+                                                         adjustment_amount: ::String,
+                                                         currency_code: ::String,
+                                                         adjustment_reason_code: ("INCORRECT_TERMS_ACCEPTED" | "INCORRECT_METERING" | "TEST_ENVIRONMENT_CHARGES" | "ALTERNATIVE_PROCUREMENT_CHANNEL" | "UNINTENDED_RENEWAL" | "BUYER_DISSATISFACTION" | "OTHER"),
+                                                         description: ::String?,
+                                                         client_token: ::String
+                                                       },
+                                                     ]
+                                                   ) -> _BatchCreateBillingAdjustmentRequestResponseSuccess
+                                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchCreateBillingAdjustmentRequestResponseSuccess
+
+      interface _CancelAgreementCancellationRequestResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CancelAgreementCancellationRequestOutput]
+        def agreement_cancellation_request_id: () -> ::String
+        def agreement_id: () -> ::String
+        def reason_code: () -> ("INCORRECT_TERMS_ACCEPTED" | "REPLACING_AGREEMENT" | "TEST_AGREEMENT" | "ALTERNATIVE_PROCUREMENT_CHANNEL" | "PRODUCT_DISCONTINUED" | "UNINTENDED_RENEWAL" | "BUYER_DISSATISFACTION" | "OTHER")
+        def description: () -> ::String
+        def status: () -> ("PENDING_APPROVAL" | "APPROVED" | "REJECTED" | "CANCELLED" | "VALIDATION_FAILED")
+        def status_message: () -> ::String
+        def created_at: () -> ::Time
+        def updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MarketplaceAgreement/Client.html#cancel_agreement_cancellation_request-instance_method
+      def cancel_agreement_cancellation_request: (
+                                                   agreement_id: ::String,
+                                                   agreement_cancellation_request_id: ::String,
+                                                   cancellation_reason: ::String
+                                                 ) -> _CancelAgreementCancellationRequestResponseSuccess
+                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CancelAgreementCancellationRequestResponseSuccess
+
+      interface _CancelAgreementPaymentRequestResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CancelAgreementPaymentRequestOutput]
+        def payment_request_id: () -> ::String
+        def agreement_id: () -> ::String
+        def status: () -> ("VALIDATING" | "VALIDATION_FAILED" | "PENDING_APPROVAL" | "APPROVED" | "REJECTED" | "CANCELLED")
+        def name: () -> ::String
+        def description: () -> ::String
+        def charge_amount: () -> ::String
+        def currency_code: () -> ::String
+        def created_at: () -> ::Time
+        def updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MarketplaceAgreement/Client.html#cancel_agreement_payment_request-instance_method
+      def cancel_agreement_payment_request: (
+                                              payment_request_id: ::String,
+                                              agreement_id: ::String
+                                            ) -> _CancelAgreementPaymentRequestResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CancelAgreementPaymentRequestResponseSuccess
+
       interface _DescribeAgreementResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeAgreementOutput]
         def agreement_id: () -> ::String
@@ -98,6 +157,45 @@ module Aws
                               ) -> _DescribeAgreementResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeAgreementResponseSuccess
 
+      interface _GetAgreementCancellationRequestResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAgreementCancellationRequestOutput]
+        def agreement_cancellation_request_id: () -> ::String
+        def agreement_id: () -> ::String
+        def reason_code: () -> ("INCORRECT_TERMS_ACCEPTED" | "REPLACING_AGREEMENT" | "TEST_AGREEMENT" | "ALTERNATIVE_PROCUREMENT_CHANNEL" | "PRODUCT_DISCONTINUED" | "UNINTENDED_RENEWAL" | "BUYER_DISSATISFACTION" | "OTHER")
+        def description: () -> ::String
+        def status: () -> ("PENDING_APPROVAL" | "APPROVED" | "REJECTED" | "CANCELLED" | "VALIDATION_FAILED")
+        def status_message: () -> ::String
+        def created_at: () -> ::Time
+        def updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MarketplaceAgreement/Client.html#get_agreement_cancellation_request-instance_method
+      def get_agreement_cancellation_request: (
+                                                agreement_cancellation_request_id: ::String,
+                                                agreement_id: ::String
+                                              ) -> _GetAgreementCancellationRequestResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAgreementCancellationRequestResponseSuccess
+
+      interface _GetAgreementPaymentRequestResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAgreementPaymentRequestOutput]
+        def payment_request_id: () -> ::String
+        def agreement_id: () -> ::String
+        def status: () -> ("VALIDATING" | "VALIDATION_FAILED" | "PENDING_APPROVAL" | "APPROVED" | "REJECTED" | "CANCELLED")
+        def status_message: () -> ::String
+        def name: () -> ::String
+        def description: () -> ::String
+        def charge_id: () -> ::String
+        def charge_amount: () -> ::String
+        def currency_code: () -> ::String
+        def created_at: () -> ::Time
+        def updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MarketplaceAgreement/Client.html#get_agreement_payment_request-instance_method
+      def get_agreement_payment_request: (
+                                           payment_request_id: ::String,
+                                           agreement_id: ::String
+                                         ) -> _GetAgreementPaymentRequestResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAgreementPaymentRequestResponseSuccess
+
       interface _GetAgreementTermsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetAgreementTermsOutput]
         def accepted_terms: () -> ::Array[Types::AcceptedTerm]
@@ -110,6 +208,101 @@ module Aws
                                  ?next_token: ::String
                                ) -> _GetAgreementTermsResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAgreementTermsResponseSuccess
+
+      interface _GetBillingAdjustmentRequestResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetBillingAdjustmentRequestOutput]
+        def billing_adjustment_request_id: () -> ::String
+        def agreement_id: () -> ::String
+        def adjustment_reason_code: () -> ("INCORRECT_TERMS_ACCEPTED" | "INCORRECT_METERING" | "TEST_ENVIRONMENT_CHARGES" | "ALTERNATIVE_PROCUREMENT_CHANNEL" | "UNINTENDED_RENEWAL" | "BUYER_DISSATISFACTION" | "OTHER")
+        def description: () -> ::String
+        def original_invoice_id: () -> ::String
+        def adjustment_amount: () -> ::String
+        def currency_code: () -> ::String
+        def status: () -> ("PENDING" | "VALIDATION_FAILED" | "COMPLETED")
+        def status_message: () -> ::String
+        def created_at: () -> ::Time
+        def updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MarketplaceAgreement/Client.html#get_billing_adjustment_request-instance_method
+      def get_billing_adjustment_request: (
+                                            agreement_id: ::String,
+                                            billing_adjustment_request_id: ::String
+                                          ) -> _GetBillingAdjustmentRequestResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetBillingAdjustmentRequestResponseSuccess
+
+      interface _ListAgreementCancellationRequestsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAgreementCancellationRequestsOutput]
+        def next_token: () -> ::String
+        def items: () -> ::Array[Types::AgreementCancellationRequestSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MarketplaceAgreement/Client.html#list_agreement_cancellation_requests-instance_method
+      def list_agreement_cancellation_requests: (
+                                                  party_type: ::String,
+                                                  ?agreement_id: ::String,
+                                                  ?status: ("PENDING_APPROVAL" | "APPROVED" | "REJECTED" | "CANCELLED" | "VALIDATION_FAILED"),
+                                                  ?agreement_type: ::String,
+                                                  ?catalog: ::String,
+                                                  ?max_results: ::Integer,
+                                                  ?next_token: ::String
+                                                ) -> _ListAgreementCancellationRequestsResponseSuccess
+                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAgreementCancellationRequestsResponseSuccess
+
+      interface _ListAgreementInvoiceLineItemsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAgreementInvoiceLineItemsOutput]
+        def agreement_invoice_line_item_group_summaries: () -> ::Array[Types::AgreementInvoiceLineItemGroupSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MarketplaceAgreement/Client.html#list_agreement_invoice_line_items-instance_method
+      def list_agreement_invoice_line_items: (
+                                               agreement_id: ::String,
+                                               group_by: ("INVOICE_ID"),
+                                               ?invoice_id: ::String,
+                                               ?invoice_type: ("INVOICE" | "CREDIT_MEMO"),
+                                               ?invoice_billing_period: {
+                                                 month: ::Integer,
+                                                 year: ::Integer
+                                               },
+                                               ?before_issued_time: ::Time,
+                                               ?after_issued_time: ::Time,
+                                               ?max_results: ::Integer,
+                                               ?next_token: ::String
+                                             ) -> _ListAgreementInvoiceLineItemsResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAgreementInvoiceLineItemsResponseSuccess
+
+      interface _ListAgreementPaymentRequestsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAgreementPaymentRequestsOutput]
+        def next_token: () -> ::String
+        def items: () -> ::Array[Types::PaymentRequestSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MarketplaceAgreement/Client.html#list_agreement_payment_requests-instance_method
+      def list_agreement_payment_requests: (
+                                             party_type: ::String,
+                                             ?agreement_type: ::String,
+                                             ?catalog: ::String,
+                                             ?agreement_id: ::String,
+                                             ?status: ("VALIDATING" | "VALIDATION_FAILED" | "PENDING_APPROVAL" | "APPROVED" | "REJECTED" | "CANCELLED"),
+                                             ?max_results: ::Integer,
+                                             ?next_token: ::String
+                                           ) -> _ListAgreementPaymentRequestsResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAgreementPaymentRequestsResponseSuccess
+
+      interface _ListBillingAdjustmentRequestsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListBillingAdjustmentRequestsOutput]
+        def next_token: () -> ::String
+        def items: () -> ::Array[Types::BillingAdjustmentSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MarketplaceAgreement/Client.html#list_billing_adjustment_requests-instance_method
+      def list_billing_adjustment_requests: (
+                                              ?agreement_id: ::String,
+                                              ?status: ("PENDING" | "VALIDATION_FAILED" | "COMPLETED"),
+                                              ?created_after: ::Time,
+                                              ?created_before: ::Time,
+                                              ?max_results: ::Integer,
+                                              ?catalog: ::String,
+                                              ?agreement_type: ::String,
+                                              ?next_token: ::String
+                                            ) -> _ListBillingAdjustmentRequestsResponseSuccess
+                                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListBillingAdjustmentRequestsResponseSuccess
 
       interface _SearchAgreementsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::SearchAgreementsOutput]
@@ -133,6 +326,47 @@ module Aws
                                ?next_token: ::String
                              ) -> _SearchAgreementsResponseSuccess
                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SearchAgreementsResponseSuccess
+
+      interface _SendAgreementCancellationRequestResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SendAgreementCancellationRequestOutput]
+        def agreement_id: () -> ::String
+        def agreement_cancellation_request_id: () -> ::String
+        def status: () -> ("PENDING_APPROVAL" | "APPROVED" | "REJECTED" | "CANCELLED" | "VALIDATION_FAILED")
+        def reason_code: () -> ("INCORRECT_TERMS_ACCEPTED" | "REPLACING_AGREEMENT" | "TEST_AGREEMENT" | "ALTERNATIVE_PROCUREMENT_CHANNEL" | "PRODUCT_DISCONTINUED" | "UNINTENDED_RENEWAL" | "BUYER_DISSATISFACTION" | "OTHER")
+        def description: () -> ::String
+        def created_at: () -> ::Time
+        def updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MarketplaceAgreement/Client.html#send_agreement_cancellation_request-instance_method
+      def send_agreement_cancellation_request: (
+                                                 agreement_id: ::String,
+                                                 reason_code: ("INCORRECT_TERMS_ACCEPTED" | "REPLACING_AGREEMENT" | "TEST_AGREEMENT" | "ALTERNATIVE_PROCUREMENT_CHANNEL" | "PRODUCT_DISCONTINUED" | "UNINTENDED_RENEWAL" | "BUYER_DISSATISFACTION" | "OTHER"),
+                                                 ?client_token: ::String,
+                                                 ?description: ::String
+                                               ) -> _SendAgreementCancellationRequestResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SendAgreementCancellationRequestResponseSuccess
+
+      interface _SendAgreementPaymentRequestResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SendAgreementPaymentRequestOutput]
+        def payment_request_id: () -> ::String
+        def agreement_id: () -> ::String
+        def status: () -> ("VALIDATING" | "VALIDATION_FAILED" | "PENDING_APPROVAL" | "APPROVED" | "REJECTED" | "CANCELLED")
+        def name: () -> ::String
+        def description: () -> ::String
+        def charge_amount: () -> ::String
+        def currency_code: () -> ::String
+        def created_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MarketplaceAgreement/Client.html#send_agreement_payment_request-instance_method
+      def send_agreement_payment_request: (
+                                            ?client_token: ::String,
+                                            agreement_id: ::String,
+                                            term_id: ::String,
+                                            name: ::String,
+                                            charge_amount: ::String,
+                                            ?description: ::String
+                                          ) -> _SendAgreementPaymentRequestResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SendAgreementPaymentRequestResponseSuccess
     end
   end
 end

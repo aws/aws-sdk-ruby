@@ -1059,10 +1059,8 @@ module Aws::MediaConnect
     #   resp.router_inputs[0].arn #=> String
     #   resp.router_inputs[0].id #=> String
     #   resp.router_inputs[0].state #=> String, one of "CREATING", "STANDBY", "STARTING", "ACTIVE", "STOPPING", "DELETING", "UPDATING", "ERROR", "RECOVERING", "MIGRATING"
-    #   resp.router_inputs[0].input_type #=> String, one of "STANDARD", "FAILOVER", "MERGE", "MEDIACONNECT_FLOW"
+    #   resp.router_inputs[0].input_type #=> String, one of "STANDARD", "FAILOVER", "MERGE", "MEDIACONNECT_FLOW", "MEDIALIVE_CHANNEL"
     #   resp.router_inputs[0].configuration.standard.network_interface_arn #=> String
-    #   resp.router_inputs[0].configuration.standard.protocol_configuration.rtp.port #=> Integer
-    #   resp.router_inputs[0].configuration.standard.protocol_configuration.rtp.forward_error_correction #=> String, one of "ENABLED", "DISABLED"
     #   resp.router_inputs[0].configuration.standard.protocol_configuration.rist.port #=> Integer
     #   resp.router_inputs[0].configuration.standard.protocol_configuration.rist.recovery_latency_milliseconds #=> Integer
     #   resp.router_inputs[0].configuration.standard.protocol_configuration.srt_listener.port #=> Integer
@@ -1075,11 +1073,17 @@ module Aws::MediaConnect
     #   resp.router_inputs[0].configuration.standard.protocol_configuration.srt_caller.stream_id #=> String
     #   resp.router_inputs[0].configuration.standard.protocol_configuration.srt_caller.decryption_configuration.encryption_key.secret_arn #=> String
     #   resp.router_inputs[0].configuration.standard.protocol_configuration.srt_caller.decryption_configuration.encryption_key.role_arn #=> String
+    #   resp.router_inputs[0].configuration.standard.protocol_configuration.rtp.port #=> Integer
+    #   resp.router_inputs[0].configuration.standard.protocol_configuration.rtp.forward_error_correction #=> String, one of "ENABLED", "DISABLED"
     #   resp.router_inputs[0].configuration.standard.protocol #=> String, one of "RTP", "RIST", "SRT_CALLER", "SRT_LISTENER"
+    #   resp.router_inputs[0].configuration.media_live_channel.media_live_channel_arn #=> String
+    #   resp.router_inputs[0].configuration.media_live_channel.media_live_pipeline_id #=> String, one of "PIPELINE_0", "PIPELINE_1"
+    #   resp.router_inputs[0].configuration.media_live_channel.media_live_channel_output_name #=> String
+    #   resp.router_inputs[0].configuration.media_live_channel.source_transit_decryption.encryption_key_type #=> String, one of "SECRETS_MANAGER", "AUTOMATIC"
+    #   resp.router_inputs[0].configuration.media_live_channel.source_transit_decryption.encryption_key_configuration.secrets_manager.secret_arn #=> String
+    #   resp.router_inputs[0].configuration.media_live_channel.source_transit_decryption.encryption_key_configuration.secrets_manager.role_arn #=> String
     #   resp.router_inputs[0].configuration.failover.network_interface_arn #=> String
     #   resp.router_inputs[0].configuration.failover.protocol_configurations #=> Array
-    #   resp.router_inputs[0].configuration.failover.protocol_configurations[0].rtp.port #=> Integer
-    #   resp.router_inputs[0].configuration.failover.protocol_configurations[0].rtp.forward_error_correction #=> String, one of "ENABLED", "DISABLED"
     #   resp.router_inputs[0].configuration.failover.protocol_configurations[0].rist.port #=> Integer
     #   resp.router_inputs[0].configuration.failover.protocol_configurations[0].rist.recovery_latency_milliseconds #=> Integer
     #   resp.router_inputs[0].configuration.failover.protocol_configurations[0].srt_listener.port #=> Integer
@@ -1092,8 +1096,15 @@ module Aws::MediaConnect
     #   resp.router_inputs[0].configuration.failover.protocol_configurations[0].srt_caller.stream_id #=> String
     #   resp.router_inputs[0].configuration.failover.protocol_configurations[0].srt_caller.decryption_configuration.encryption_key.secret_arn #=> String
     #   resp.router_inputs[0].configuration.failover.protocol_configurations[0].srt_caller.decryption_configuration.encryption_key.role_arn #=> String
+    #   resp.router_inputs[0].configuration.failover.protocol_configurations[0].rtp.port #=> Integer
+    #   resp.router_inputs[0].configuration.failover.protocol_configurations[0].rtp.forward_error_correction #=> String, one of "ENABLED", "DISABLED"
     #   resp.router_inputs[0].configuration.failover.source_priority_mode #=> String, one of "NO_PRIORITY", "PRIMARY_SECONDARY"
     #   resp.router_inputs[0].configuration.failover.primary_source_index #=> Integer
+    #   resp.router_inputs[0].configuration.media_connect_flow.flow_arn #=> String
+    #   resp.router_inputs[0].configuration.media_connect_flow.flow_output_arn #=> String
+    #   resp.router_inputs[0].configuration.media_connect_flow.source_transit_decryption.encryption_key_type #=> String, one of "SECRETS_MANAGER", "AUTOMATIC"
+    #   resp.router_inputs[0].configuration.media_connect_flow.source_transit_decryption.encryption_key_configuration.secrets_manager.secret_arn #=> String
+    #   resp.router_inputs[0].configuration.media_connect_flow.source_transit_decryption.encryption_key_configuration.secrets_manager.role_arn #=> String
     #   resp.router_inputs[0].configuration.merge.network_interface_arn #=> String
     #   resp.router_inputs[0].configuration.merge.protocol_configurations #=> Array
     #   resp.router_inputs[0].configuration.merge.protocol_configurations[0].rtp.port #=> Integer
@@ -1101,11 +1112,6 @@ module Aws::MediaConnect
     #   resp.router_inputs[0].configuration.merge.protocol_configurations[0].rist.port #=> Integer
     #   resp.router_inputs[0].configuration.merge.protocol_configurations[0].rist.recovery_latency_milliseconds #=> Integer
     #   resp.router_inputs[0].configuration.merge.merge_recovery_window_milliseconds #=> Integer
-    #   resp.router_inputs[0].configuration.media_connect_flow.flow_arn #=> String
-    #   resp.router_inputs[0].configuration.media_connect_flow.flow_output_arn #=> String
-    #   resp.router_inputs[0].configuration.media_connect_flow.source_transit_decryption.encryption_key_type #=> String, one of "SECRETS_MANAGER", "AUTOMATIC"
-    #   resp.router_inputs[0].configuration.media_connect_flow.source_transit_decryption.encryption_key_configuration.secrets_manager.secret_arn #=> String
-    #   resp.router_inputs[0].configuration.media_connect_flow.source_transit_decryption.encryption_key_configuration.secrets_manager.role_arn #=> String
     #   resp.router_inputs[0].routed_outputs #=> Integer
     #   resp.router_inputs[0].maximum_routed_outputs #=> Integer
     #   resp.router_inputs[0].region_name #=> String
@@ -1233,9 +1239,6 @@ module Aws::MediaConnect
     #   resp.router_outputs[0].state #=> String, one of "CREATING", "STANDBY", "STARTING", "ACTIVE", "STOPPING", "DELETING", "UPDATING", "ERROR", "RECOVERING", "MIGRATING"
     #   resp.router_outputs[0].output_type #=> String, one of "STANDARD", "MEDIACONNECT_FLOW", "MEDIALIVE_INPUT"
     #   resp.router_outputs[0].configuration.standard.network_interface_arn #=> String
-    #   resp.router_outputs[0].configuration.standard.protocol_configuration.rtp.destination_address #=> String
-    #   resp.router_outputs[0].configuration.standard.protocol_configuration.rtp.destination_port #=> Integer
-    #   resp.router_outputs[0].configuration.standard.protocol_configuration.rtp.forward_error_correction #=> String, one of "ENABLED", "DISABLED"
     #   resp.router_outputs[0].configuration.standard.protocol_configuration.rist.destination_address #=> String
     #   resp.router_outputs[0].configuration.standard.protocol_configuration.rist.destination_port #=> Integer
     #   resp.router_outputs[0].configuration.standard.protocol_configuration.srt_listener.port #=> Integer
@@ -1248,6 +1251,9 @@ module Aws::MediaConnect
     #   resp.router_outputs[0].configuration.standard.protocol_configuration.srt_caller.stream_id #=> String
     #   resp.router_outputs[0].configuration.standard.protocol_configuration.srt_caller.encryption_configuration.encryption_key.secret_arn #=> String
     #   resp.router_outputs[0].configuration.standard.protocol_configuration.srt_caller.encryption_configuration.encryption_key.role_arn #=> String
+    #   resp.router_outputs[0].configuration.standard.protocol_configuration.rtp.destination_address #=> String
+    #   resp.router_outputs[0].configuration.standard.protocol_configuration.rtp.destination_port #=> Integer
+    #   resp.router_outputs[0].configuration.standard.protocol_configuration.rtp.forward_error_correction #=> String, one of "ENABLED", "DISABLED"
     #   resp.router_outputs[0].configuration.standard.protocol #=> String, one of "RTP", "RIST", "SRT_CALLER", "SRT_LISTENER"
     #   resp.router_outputs[0].configuration.media_connect_flow.flow_arn #=> String
     #   resp.router_outputs[0].configuration.media_connect_flow.flow_source_arn #=> String
@@ -2181,10 +2187,6 @@ module Aws::MediaConnect
     #       standard: {
     #         network_interface_arn: "RouterNetworkInterfaceArn", # required
     #         protocol_configuration: { # required
-    #           rtp: {
-    #             port: 1, # required
-    #             forward_error_correction: "ENABLED", # accepts ENABLED, DISABLED
-    #           },
     #           rist: {
     #             port: 1, # required
     #             recovery_latency_milliseconds: 1, # required
@@ -2211,17 +2213,33 @@ module Aws::MediaConnect
     #               },
     #             },
     #           },
+    #           rtp: {
+    #             port: 1, # required
+    #             forward_error_correction: "ENABLED", # accepts ENABLED, DISABLED
+    #           },
     #         },
     #         protocol: "RTP", # accepts RTP, RIST, SRT_CALLER, SRT_LISTENER
+    #       },
+    #       media_live_channel: {
+    #         media_live_channel_arn: "MediaLiveChannelArn",
+    #         media_live_pipeline_id: "PIPELINE_0", # accepts PIPELINE_0, PIPELINE_1
+    #         media_live_channel_output_name: "String",
+    #         source_transit_decryption: { # required
+    #           encryption_key_type: "SECRETS_MANAGER", # accepts SECRETS_MANAGER, AUTOMATIC
+    #           encryption_key_configuration: { # required
+    #             secrets_manager: {
+    #               secret_arn: "SecretArn", # required
+    #               role_arn: "RoleArn", # required
+    #             },
+    #             automatic: {
+    #             },
+    #           },
+    #         },
     #       },
     #       failover: {
     #         network_interface_arn: "RouterNetworkInterfaceArn", # required
     #         protocol_configurations: [ # required
     #           {
-    #             rtp: {
-    #               port: 1, # required
-    #               forward_error_correction: "ENABLED", # accepts ENABLED, DISABLED
-    #             },
     #             rist: {
     #               port: 1, # required
     #               recovery_latency_milliseconds: 1, # required
@@ -2248,10 +2266,29 @@ module Aws::MediaConnect
     #                 },
     #               },
     #             },
+    #             rtp: {
+    #               port: 1, # required
+    #               forward_error_correction: "ENABLED", # accepts ENABLED, DISABLED
+    #             },
     #           },
     #         ],
     #         source_priority_mode: "NO_PRIORITY", # required, accepts NO_PRIORITY, PRIMARY_SECONDARY
     #         primary_source_index: 1,
+    #       },
+    #       media_connect_flow: {
+    #         flow_arn: "FlowArn",
+    #         flow_output_arn: "FlowOutputArn",
+    #         source_transit_decryption: { # required
+    #           encryption_key_type: "SECRETS_MANAGER", # accepts SECRETS_MANAGER, AUTOMATIC
+    #           encryption_key_configuration: { # required
+    #             secrets_manager: {
+    #               secret_arn: "SecretArn", # required
+    #               role_arn: "RoleArn", # required
+    #             },
+    #             automatic: {
+    #             },
+    #           },
+    #         },
     #       },
     #       merge: {
     #         network_interface_arn: "RouterNetworkInterfaceArn", # required
@@ -2268,21 +2305,6 @@ module Aws::MediaConnect
     #           },
     #         ],
     #         merge_recovery_window_milliseconds: 1, # required
-    #       },
-    #       media_connect_flow: {
-    #         flow_arn: "FlowArn",
-    #         flow_output_arn: "FlowOutputArn",
-    #         source_transit_decryption: { # required
-    #           encryption_key_type: "SECRETS_MANAGER", # accepts SECRETS_MANAGER, AUTOMATIC
-    #           encryption_key_configuration: { # required
-    #             secrets_manager: {
-    #               secret_arn: "SecretArn", # required
-    #               role_arn: "RoleArn", # required
-    #             },
-    #             automatic: {
-    #             },
-    #           },
-    #         },
     #       },
     #     },
     #     maximum_bitrate: 1, # required
@@ -2321,10 +2343,8 @@ module Aws::MediaConnect
     #   resp.router_input.arn #=> String
     #   resp.router_input.id #=> String
     #   resp.router_input.state #=> String, one of "CREATING", "STANDBY", "STARTING", "ACTIVE", "STOPPING", "DELETING", "UPDATING", "ERROR", "RECOVERING", "MIGRATING"
-    #   resp.router_input.input_type #=> String, one of "STANDARD", "FAILOVER", "MERGE", "MEDIACONNECT_FLOW"
+    #   resp.router_input.input_type #=> String, one of "STANDARD", "FAILOVER", "MERGE", "MEDIACONNECT_FLOW", "MEDIALIVE_CHANNEL"
     #   resp.router_input.configuration.standard.network_interface_arn #=> String
-    #   resp.router_input.configuration.standard.protocol_configuration.rtp.port #=> Integer
-    #   resp.router_input.configuration.standard.protocol_configuration.rtp.forward_error_correction #=> String, one of "ENABLED", "DISABLED"
     #   resp.router_input.configuration.standard.protocol_configuration.rist.port #=> Integer
     #   resp.router_input.configuration.standard.protocol_configuration.rist.recovery_latency_milliseconds #=> Integer
     #   resp.router_input.configuration.standard.protocol_configuration.srt_listener.port #=> Integer
@@ -2337,11 +2357,17 @@ module Aws::MediaConnect
     #   resp.router_input.configuration.standard.protocol_configuration.srt_caller.stream_id #=> String
     #   resp.router_input.configuration.standard.protocol_configuration.srt_caller.decryption_configuration.encryption_key.secret_arn #=> String
     #   resp.router_input.configuration.standard.protocol_configuration.srt_caller.decryption_configuration.encryption_key.role_arn #=> String
+    #   resp.router_input.configuration.standard.protocol_configuration.rtp.port #=> Integer
+    #   resp.router_input.configuration.standard.protocol_configuration.rtp.forward_error_correction #=> String, one of "ENABLED", "DISABLED"
     #   resp.router_input.configuration.standard.protocol #=> String, one of "RTP", "RIST", "SRT_CALLER", "SRT_LISTENER"
+    #   resp.router_input.configuration.media_live_channel.media_live_channel_arn #=> String
+    #   resp.router_input.configuration.media_live_channel.media_live_pipeline_id #=> String, one of "PIPELINE_0", "PIPELINE_1"
+    #   resp.router_input.configuration.media_live_channel.media_live_channel_output_name #=> String
+    #   resp.router_input.configuration.media_live_channel.source_transit_decryption.encryption_key_type #=> String, one of "SECRETS_MANAGER", "AUTOMATIC"
+    #   resp.router_input.configuration.media_live_channel.source_transit_decryption.encryption_key_configuration.secrets_manager.secret_arn #=> String
+    #   resp.router_input.configuration.media_live_channel.source_transit_decryption.encryption_key_configuration.secrets_manager.role_arn #=> String
     #   resp.router_input.configuration.failover.network_interface_arn #=> String
     #   resp.router_input.configuration.failover.protocol_configurations #=> Array
-    #   resp.router_input.configuration.failover.protocol_configurations[0].rtp.port #=> Integer
-    #   resp.router_input.configuration.failover.protocol_configurations[0].rtp.forward_error_correction #=> String, one of "ENABLED", "DISABLED"
     #   resp.router_input.configuration.failover.protocol_configurations[0].rist.port #=> Integer
     #   resp.router_input.configuration.failover.protocol_configurations[0].rist.recovery_latency_milliseconds #=> Integer
     #   resp.router_input.configuration.failover.protocol_configurations[0].srt_listener.port #=> Integer
@@ -2354,8 +2380,15 @@ module Aws::MediaConnect
     #   resp.router_input.configuration.failover.protocol_configurations[0].srt_caller.stream_id #=> String
     #   resp.router_input.configuration.failover.protocol_configurations[0].srt_caller.decryption_configuration.encryption_key.secret_arn #=> String
     #   resp.router_input.configuration.failover.protocol_configurations[0].srt_caller.decryption_configuration.encryption_key.role_arn #=> String
+    #   resp.router_input.configuration.failover.protocol_configurations[0].rtp.port #=> Integer
+    #   resp.router_input.configuration.failover.protocol_configurations[0].rtp.forward_error_correction #=> String, one of "ENABLED", "DISABLED"
     #   resp.router_input.configuration.failover.source_priority_mode #=> String, one of "NO_PRIORITY", "PRIMARY_SECONDARY"
     #   resp.router_input.configuration.failover.primary_source_index #=> Integer
+    #   resp.router_input.configuration.media_connect_flow.flow_arn #=> String
+    #   resp.router_input.configuration.media_connect_flow.flow_output_arn #=> String
+    #   resp.router_input.configuration.media_connect_flow.source_transit_decryption.encryption_key_type #=> String, one of "SECRETS_MANAGER", "AUTOMATIC"
+    #   resp.router_input.configuration.media_connect_flow.source_transit_decryption.encryption_key_configuration.secrets_manager.secret_arn #=> String
+    #   resp.router_input.configuration.media_connect_flow.source_transit_decryption.encryption_key_configuration.secrets_manager.role_arn #=> String
     #   resp.router_input.configuration.merge.network_interface_arn #=> String
     #   resp.router_input.configuration.merge.protocol_configurations #=> Array
     #   resp.router_input.configuration.merge.protocol_configurations[0].rtp.port #=> Integer
@@ -2363,11 +2396,6 @@ module Aws::MediaConnect
     #   resp.router_input.configuration.merge.protocol_configurations[0].rist.port #=> Integer
     #   resp.router_input.configuration.merge.protocol_configurations[0].rist.recovery_latency_milliseconds #=> Integer
     #   resp.router_input.configuration.merge.merge_recovery_window_milliseconds #=> Integer
-    #   resp.router_input.configuration.media_connect_flow.flow_arn #=> String
-    #   resp.router_input.configuration.media_connect_flow.flow_output_arn #=> String
-    #   resp.router_input.configuration.media_connect_flow.source_transit_decryption.encryption_key_type #=> String, one of "SECRETS_MANAGER", "AUTOMATIC"
-    #   resp.router_input.configuration.media_connect_flow.source_transit_decryption.encryption_key_configuration.secrets_manager.secret_arn #=> String
-    #   resp.router_input.configuration.media_connect_flow.source_transit_decryption.encryption_key_configuration.secrets_manager.role_arn #=> String
     #   resp.router_input.routed_outputs #=> Integer
     #   resp.router_input.maximum_routed_outputs #=> Integer
     #   resp.router_input.region_name #=> String
@@ -2544,11 +2572,6 @@ module Aws::MediaConnect
     #       standard: {
     #         network_interface_arn: "RouterNetworkInterfaceArn", # required
     #         protocol_configuration: { # required
-    #           rtp: {
-    #             destination_address: "String", # required
-    #             destination_port: 1, # required
-    #             forward_error_correction: "ENABLED", # accepts ENABLED, DISABLED
-    #           },
     #           rist: {
     #             destination_address: "String", # required
     #             destination_port: 1, # required
@@ -2574,6 +2597,11 @@ module Aws::MediaConnect
     #                 role_arn: "RoleArn", # required
     #               },
     #             },
+    #           },
+    #           rtp: {
+    #             destination_address: "String", # required
+    #             destination_port: 1, # required
+    #             forward_error_correction: "ENABLED", # accepts ENABLED, DISABLED
     #           },
     #         },
     #         protocol: "RTP", # accepts RTP, RIST, SRT_CALLER, SRT_LISTENER
@@ -2636,9 +2664,6 @@ module Aws::MediaConnect
     #   resp.router_output.state #=> String, one of "CREATING", "STANDBY", "STARTING", "ACTIVE", "STOPPING", "DELETING", "UPDATING", "ERROR", "RECOVERING", "MIGRATING"
     #   resp.router_output.output_type #=> String, one of "STANDARD", "MEDIACONNECT_FLOW", "MEDIALIVE_INPUT"
     #   resp.router_output.configuration.standard.network_interface_arn #=> String
-    #   resp.router_output.configuration.standard.protocol_configuration.rtp.destination_address #=> String
-    #   resp.router_output.configuration.standard.protocol_configuration.rtp.destination_port #=> Integer
-    #   resp.router_output.configuration.standard.protocol_configuration.rtp.forward_error_correction #=> String, one of "ENABLED", "DISABLED"
     #   resp.router_output.configuration.standard.protocol_configuration.rist.destination_address #=> String
     #   resp.router_output.configuration.standard.protocol_configuration.rist.destination_port #=> Integer
     #   resp.router_output.configuration.standard.protocol_configuration.srt_listener.port #=> Integer
@@ -2651,6 +2676,9 @@ module Aws::MediaConnect
     #   resp.router_output.configuration.standard.protocol_configuration.srt_caller.stream_id #=> String
     #   resp.router_output.configuration.standard.protocol_configuration.srt_caller.encryption_configuration.encryption_key.secret_arn #=> String
     #   resp.router_output.configuration.standard.protocol_configuration.srt_caller.encryption_configuration.encryption_key.role_arn #=> String
+    #   resp.router_output.configuration.standard.protocol_configuration.rtp.destination_address #=> String
+    #   resp.router_output.configuration.standard.protocol_configuration.rtp.destination_port #=> Integer
+    #   resp.router_output.configuration.standard.protocol_configuration.rtp.forward_error_correction #=> String, one of "ENABLED", "DISABLED"
     #   resp.router_output.configuration.standard.protocol #=> String, one of "RTP", "RIST", "SRT_CALLER", "SRT_LISTENER"
     #   resp.router_output.configuration.media_connect_flow.flow_arn #=> String
     #   resp.router_output.configuration.media_connect_flow.flow_source_arn #=> String
@@ -3555,10 +3583,8 @@ module Aws::MediaConnect
     #   resp.router_input.arn #=> String
     #   resp.router_input.id #=> String
     #   resp.router_input.state #=> String, one of "CREATING", "STANDBY", "STARTING", "ACTIVE", "STOPPING", "DELETING", "UPDATING", "ERROR", "RECOVERING", "MIGRATING"
-    #   resp.router_input.input_type #=> String, one of "STANDARD", "FAILOVER", "MERGE", "MEDIACONNECT_FLOW"
+    #   resp.router_input.input_type #=> String, one of "STANDARD", "FAILOVER", "MERGE", "MEDIACONNECT_FLOW", "MEDIALIVE_CHANNEL"
     #   resp.router_input.configuration.standard.network_interface_arn #=> String
-    #   resp.router_input.configuration.standard.protocol_configuration.rtp.port #=> Integer
-    #   resp.router_input.configuration.standard.protocol_configuration.rtp.forward_error_correction #=> String, one of "ENABLED", "DISABLED"
     #   resp.router_input.configuration.standard.protocol_configuration.rist.port #=> Integer
     #   resp.router_input.configuration.standard.protocol_configuration.rist.recovery_latency_milliseconds #=> Integer
     #   resp.router_input.configuration.standard.protocol_configuration.srt_listener.port #=> Integer
@@ -3571,11 +3597,17 @@ module Aws::MediaConnect
     #   resp.router_input.configuration.standard.protocol_configuration.srt_caller.stream_id #=> String
     #   resp.router_input.configuration.standard.protocol_configuration.srt_caller.decryption_configuration.encryption_key.secret_arn #=> String
     #   resp.router_input.configuration.standard.protocol_configuration.srt_caller.decryption_configuration.encryption_key.role_arn #=> String
+    #   resp.router_input.configuration.standard.protocol_configuration.rtp.port #=> Integer
+    #   resp.router_input.configuration.standard.protocol_configuration.rtp.forward_error_correction #=> String, one of "ENABLED", "DISABLED"
     #   resp.router_input.configuration.standard.protocol #=> String, one of "RTP", "RIST", "SRT_CALLER", "SRT_LISTENER"
+    #   resp.router_input.configuration.media_live_channel.media_live_channel_arn #=> String
+    #   resp.router_input.configuration.media_live_channel.media_live_pipeline_id #=> String, one of "PIPELINE_0", "PIPELINE_1"
+    #   resp.router_input.configuration.media_live_channel.media_live_channel_output_name #=> String
+    #   resp.router_input.configuration.media_live_channel.source_transit_decryption.encryption_key_type #=> String, one of "SECRETS_MANAGER", "AUTOMATIC"
+    #   resp.router_input.configuration.media_live_channel.source_transit_decryption.encryption_key_configuration.secrets_manager.secret_arn #=> String
+    #   resp.router_input.configuration.media_live_channel.source_transit_decryption.encryption_key_configuration.secrets_manager.role_arn #=> String
     #   resp.router_input.configuration.failover.network_interface_arn #=> String
     #   resp.router_input.configuration.failover.protocol_configurations #=> Array
-    #   resp.router_input.configuration.failover.protocol_configurations[0].rtp.port #=> Integer
-    #   resp.router_input.configuration.failover.protocol_configurations[0].rtp.forward_error_correction #=> String, one of "ENABLED", "DISABLED"
     #   resp.router_input.configuration.failover.protocol_configurations[0].rist.port #=> Integer
     #   resp.router_input.configuration.failover.protocol_configurations[0].rist.recovery_latency_milliseconds #=> Integer
     #   resp.router_input.configuration.failover.protocol_configurations[0].srt_listener.port #=> Integer
@@ -3588,8 +3620,15 @@ module Aws::MediaConnect
     #   resp.router_input.configuration.failover.protocol_configurations[0].srt_caller.stream_id #=> String
     #   resp.router_input.configuration.failover.protocol_configurations[0].srt_caller.decryption_configuration.encryption_key.secret_arn #=> String
     #   resp.router_input.configuration.failover.protocol_configurations[0].srt_caller.decryption_configuration.encryption_key.role_arn #=> String
+    #   resp.router_input.configuration.failover.protocol_configurations[0].rtp.port #=> Integer
+    #   resp.router_input.configuration.failover.protocol_configurations[0].rtp.forward_error_correction #=> String, one of "ENABLED", "DISABLED"
     #   resp.router_input.configuration.failover.source_priority_mode #=> String, one of "NO_PRIORITY", "PRIMARY_SECONDARY"
     #   resp.router_input.configuration.failover.primary_source_index #=> Integer
+    #   resp.router_input.configuration.media_connect_flow.flow_arn #=> String
+    #   resp.router_input.configuration.media_connect_flow.flow_output_arn #=> String
+    #   resp.router_input.configuration.media_connect_flow.source_transit_decryption.encryption_key_type #=> String, one of "SECRETS_MANAGER", "AUTOMATIC"
+    #   resp.router_input.configuration.media_connect_flow.source_transit_decryption.encryption_key_configuration.secrets_manager.secret_arn #=> String
+    #   resp.router_input.configuration.media_connect_flow.source_transit_decryption.encryption_key_configuration.secrets_manager.role_arn #=> String
     #   resp.router_input.configuration.merge.network_interface_arn #=> String
     #   resp.router_input.configuration.merge.protocol_configurations #=> Array
     #   resp.router_input.configuration.merge.protocol_configurations[0].rtp.port #=> Integer
@@ -3597,11 +3636,6 @@ module Aws::MediaConnect
     #   resp.router_input.configuration.merge.protocol_configurations[0].rist.port #=> Integer
     #   resp.router_input.configuration.merge.protocol_configurations[0].rist.recovery_latency_milliseconds #=> Integer
     #   resp.router_input.configuration.merge.merge_recovery_window_milliseconds #=> Integer
-    #   resp.router_input.configuration.media_connect_flow.flow_arn #=> String
-    #   resp.router_input.configuration.media_connect_flow.flow_output_arn #=> String
-    #   resp.router_input.configuration.media_connect_flow.source_transit_decryption.encryption_key_type #=> String, one of "SECRETS_MANAGER", "AUTOMATIC"
-    #   resp.router_input.configuration.media_connect_flow.source_transit_decryption.encryption_key_configuration.secrets_manager.secret_arn #=> String
-    #   resp.router_input.configuration.media_connect_flow.source_transit_decryption.encryption_key_configuration.secrets_manager.role_arn #=> String
     #   resp.router_input.routed_outputs #=> Integer
     #   resp.router_input.maximum_routed_outputs #=> Integer
     #   resp.router_input.region_name #=> String
@@ -3815,9 +3849,6 @@ module Aws::MediaConnect
     #   resp.router_output.state #=> String, one of "CREATING", "STANDBY", "STARTING", "ACTIVE", "STOPPING", "DELETING", "UPDATING", "ERROR", "RECOVERING", "MIGRATING"
     #   resp.router_output.output_type #=> String, one of "STANDARD", "MEDIACONNECT_FLOW", "MEDIALIVE_INPUT"
     #   resp.router_output.configuration.standard.network_interface_arn #=> String
-    #   resp.router_output.configuration.standard.protocol_configuration.rtp.destination_address #=> String
-    #   resp.router_output.configuration.standard.protocol_configuration.rtp.destination_port #=> Integer
-    #   resp.router_output.configuration.standard.protocol_configuration.rtp.forward_error_correction #=> String, one of "ENABLED", "DISABLED"
     #   resp.router_output.configuration.standard.protocol_configuration.rist.destination_address #=> String
     #   resp.router_output.configuration.standard.protocol_configuration.rist.destination_port #=> Integer
     #   resp.router_output.configuration.standard.protocol_configuration.srt_listener.port #=> Integer
@@ -3830,6 +3861,9 @@ module Aws::MediaConnect
     #   resp.router_output.configuration.standard.protocol_configuration.srt_caller.stream_id #=> String
     #   resp.router_output.configuration.standard.protocol_configuration.srt_caller.encryption_configuration.encryption_key.secret_arn #=> String
     #   resp.router_output.configuration.standard.protocol_configuration.srt_caller.encryption_configuration.encryption_key.role_arn #=> String
+    #   resp.router_output.configuration.standard.protocol_configuration.rtp.destination_address #=> String
+    #   resp.router_output.configuration.standard.protocol_configuration.rtp.destination_port #=> Integer
+    #   resp.router_output.configuration.standard.protocol_configuration.rtp.forward_error_correction #=> String, one of "ENABLED", "DISABLED"
     #   resp.router_output.configuration.standard.protocol #=> String, one of "RTP", "RIST", "SRT_CALLER", "SRT_LISTENER"
     #   resp.router_output.configuration.media_connect_flow.flow_arn #=> String
     #   resp.router_output.configuration.media_connect_flow.flow_source_arn #=> String
@@ -4410,11 +4444,11 @@ module Aws::MediaConnect
     #     next_token: "String",
     #     filters: [
     #       {
-    #         region_names: ["String"],
-    #         input_types: ["STANDARD"], # accepts STANDARD, FAILOVER, MERGE, MEDIACONNECT_FLOW
     #         name_contains: ["String"],
+    #         region_names: ["String"],
     #         network_interface_arns: ["RouterNetworkInterfaceArn"],
     #         routing_scopes: ["REGIONAL"], # accepts REGIONAL, GLOBAL
+    #         input_types: ["STANDARD"], # accepts STANDARD, FAILOVER, MERGE, MEDIACONNECT_FLOW, MEDIALIVE_CHANNEL
     #       },
     #     ],
     #   })
@@ -4425,7 +4459,7 @@ module Aws::MediaConnect
     #   resp.router_inputs[0].name #=> String
     #   resp.router_inputs[0].arn #=> String
     #   resp.router_inputs[0].id #=> String
-    #   resp.router_inputs[0].input_type #=> String, one of "STANDARD", "FAILOVER", "MERGE", "MEDIACONNECT_FLOW"
+    #   resp.router_inputs[0].input_type #=> String, one of "STANDARD", "FAILOVER", "MERGE", "MEDIACONNECT_FLOW", "MEDIALIVE_CHANNEL"
     #   resp.router_inputs[0].state #=> String, one of "CREATING", "STANDBY", "STARTING", "ACTIVE", "STOPPING", "DELETING", "UPDATING", "ERROR", "RECOVERING", "MIGRATING"
     #   resp.router_inputs[0].routed_outputs #=> Integer
     #   resp.router_inputs[0].region_name #=> String
@@ -4536,11 +4570,11 @@ module Aws::MediaConnect
     #     filters: [
     #       {
     #         region_names: ["String"],
-    #         output_types: ["STANDARD"], # accepts STANDARD, MEDIACONNECT_FLOW, MEDIALIVE_INPUT
-    #         name_contains: ["String"],
     #         network_interface_arns: ["RouterNetworkInterfaceArn"],
-    #         routed_input_arns: ["RouterInputArn"],
     #         routing_scopes: ["REGIONAL"], # accepts REGIONAL, GLOBAL
+    #         output_types: ["STANDARD"], # accepts STANDARD, MEDIACONNECT_FLOW, MEDIALIVE_INPUT
+    #         routed_input_arns: ["RouterInputArn"],
+    #         name_contains: ["String"],
     #       },
     #     ],
     #   })
@@ -6741,10 +6775,6 @@ module Aws::MediaConnect
     #       standard: {
     #         network_interface_arn: "RouterNetworkInterfaceArn", # required
     #         protocol_configuration: { # required
-    #           rtp: {
-    #             port: 1, # required
-    #             forward_error_correction: "ENABLED", # accepts ENABLED, DISABLED
-    #           },
     #           rist: {
     #             port: 1, # required
     #             recovery_latency_milliseconds: 1, # required
@@ -6771,17 +6801,33 @@ module Aws::MediaConnect
     #               },
     #             },
     #           },
+    #           rtp: {
+    #             port: 1, # required
+    #             forward_error_correction: "ENABLED", # accepts ENABLED, DISABLED
+    #           },
     #         },
     #         protocol: "RTP", # accepts RTP, RIST, SRT_CALLER, SRT_LISTENER
+    #       },
+    #       media_live_channel: {
+    #         media_live_channel_arn: "MediaLiveChannelArn",
+    #         media_live_pipeline_id: "PIPELINE_0", # accepts PIPELINE_0, PIPELINE_1
+    #         media_live_channel_output_name: "String",
+    #         source_transit_decryption: { # required
+    #           encryption_key_type: "SECRETS_MANAGER", # accepts SECRETS_MANAGER, AUTOMATIC
+    #           encryption_key_configuration: { # required
+    #             secrets_manager: {
+    #               secret_arn: "SecretArn", # required
+    #               role_arn: "RoleArn", # required
+    #             },
+    #             automatic: {
+    #             },
+    #           },
+    #         },
     #       },
     #       failover: {
     #         network_interface_arn: "RouterNetworkInterfaceArn", # required
     #         protocol_configurations: [ # required
     #           {
-    #             rtp: {
-    #               port: 1, # required
-    #               forward_error_correction: "ENABLED", # accepts ENABLED, DISABLED
-    #             },
     #             rist: {
     #               port: 1, # required
     #               recovery_latency_milliseconds: 1, # required
@@ -6808,10 +6854,29 @@ module Aws::MediaConnect
     #                 },
     #               },
     #             },
+    #             rtp: {
+    #               port: 1, # required
+    #               forward_error_correction: "ENABLED", # accepts ENABLED, DISABLED
+    #             },
     #           },
     #         ],
     #         source_priority_mode: "NO_PRIORITY", # required, accepts NO_PRIORITY, PRIMARY_SECONDARY
     #         primary_source_index: 1,
+    #       },
+    #       media_connect_flow: {
+    #         flow_arn: "FlowArn",
+    #         flow_output_arn: "FlowOutputArn",
+    #         source_transit_decryption: { # required
+    #           encryption_key_type: "SECRETS_MANAGER", # accepts SECRETS_MANAGER, AUTOMATIC
+    #           encryption_key_configuration: { # required
+    #             secrets_manager: {
+    #               secret_arn: "SecretArn", # required
+    #               role_arn: "RoleArn", # required
+    #             },
+    #             automatic: {
+    #             },
+    #           },
+    #         },
     #       },
     #       merge: {
     #         network_interface_arn: "RouterNetworkInterfaceArn", # required
@@ -6828,21 +6893,6 @@ module Aws::MediaConnect
     #           },
     #         ],
     #         merge_recovery_window_milliseconds: 1, # required
-    #       },
-    #       media_connect_flow: {
-    #         flow_arn: "FlowArn",
-    #         flow_output_arn: "FlowOutputArn",
-    #         source_transit_decryption: { # required
-    #           encryption_key_type: "SECRETS_MANAGER", # accepts SECRETS_MANAGER, AUTOMATIC
-    #           encryption_key_configuration: { # required
-    #             secrets_manager: {
-    #               secret_arn: "SecretArn", # required
-    #               role_arn: "RoleArn", # required
-    #             },
-    #             automatic: {
-    #             },
-    #           },
-    #         },
     #       },
     #     },
     #     maximum_bitrate: 1,
@@ -6875,10 +6925,8 @@ module Aws::MediaConnect
     #   resp.router_input.arn #=> String
     #   resp.router_input.id #=> String
     #   resp.router_input.state #=> String, one of "CREATING", "STANDBY", "STARTING", "ACTIVE", "STOPPING", "DELETING", "UPDATING", "ERROR", "RECOVERING", "MIGRATING"
-    #   resp.router_input.input_type #=> String, one of "STANDARD", "FAILOVER", "MERGE", "MEDIACONNECT_FLOW"
+    #   resp.router_input.input_type #=> String, one of "STANDARD", "FAILOVER", "MERGE", "MEDIACONNECT_FLOW", "MEDIALIVE_CHANNEL"
     #   resp.router_input.configuration.standard.network_interface_arn #=> String
-    #   resp.router_input.configuration.standard.protocol_configuration.rtp.port #=> Integer
-    #   resp.router_input.configuration.standard.protocol_configuration.rtp.forward_error_correction #=> String, one of "ENABLED", "DISABLED"
     #   resp.router_input.configuration.standard.protocol_configuration.rist.port #=> Integer
     #   resp.router_input.configuration.standard.protocol_configuration.rist.recovery_latency_milliseconds #=> Integer
     #   resp.router_input.configuration.standard.protocol_configuration.srt_listener.port #=> Integer
@@ -6891,11 +6939,17 @@ module Aws::MediaConnect
     #   resp.router_input.configuration.standard.protocol_configuration.srt_caller.stream_id #=> String
     #   resp.router_input.configuration.standard.protocol_configuration.srt_caller.decryption_configuration.encryption_key.secret_arn #=> String
     #   resp.router_input.configuration.standard.protocol_configuration.srt_caller.decryption_configuration.encryption_key.role_arn #=> String
+    #   resp.router_input.configuration.standard.protocol_configuration.rtp.port #=> Integer
+    #   resp.router_input.configuration.standard.protocol_configuration.rtp.forward_error_correction #=> String, one of "ENABLED", "DISABLED"
     #   resp.router_input.configuration.standard.protocol #=> String, one of "RTP", "RIST", "SRT_CALLER", "SRT_LISTENER"
+    #   resp.router_input.configuration.media_live_channel.media_live_channel_arn #=> String
+    #   resp.router_input.configuration.media_live_channel.media_live_pipeline_id #=> String, one of "PIPELINE_0", "PIPELINE_1"
+    #   resp.router_input.configuration.media_live_channel.media_live_channel_output_name #=> String
+    #   resp.router_input.configuration.media_live_channel.source_transit_decryption.encryption_key_type #=> String, one of "SECRETS_MANAGER", "AUTOMATIC"
+    #   resp.router_input.configuration.media_live_channel.source_transit_decryption.encryption_key_configuration.secrets_manager.secret_arn #=> String
+    #   resp.router_input.configuration.media_live_channel.source_transit_decryption.encryption_key_configuration.secrets_manager.role_arn #=> String
     #   resp.router_input.configuration.failover.network_interface_arn #=> String
     #   resp.router_input.configuration.failover.protocol_configurations #=> Array
-    #   resp.router_input.configuration.failover.protocol_configurations[0].rtp.port #=> Integer
-    #   resp.router_input.configuration.failover.protocol_configurations[0].rtp.forward_error_correction #=> String, one of "ENABLED", "DISABLED"
     #   resp.router_input.configuration.failover.protocol_configurations[0].rist.port #=> Integer
     #   resp.router_input.configuration.failover.protocol_configurations[0].rist.recovery_latency_milliseconds #=> Integer
     #   resp.router_input.configuration.failover.protocol_configurations[0].srt_listener.port #=> Integer
@@ -6908,8 +6962,15 @@ module Aws::MediaConnect
     #   resp.router_input.configuration.failover.protocol_configurations[0].srt_caller.stream_id #=> String
     #   resp.router_input.configuration.failover.protocol_configurations[0].srt_caller.decryption_configuration.encryption_key.secret_arn #=> String
     #   resp.router_input.configuration.failover.protocol_configurations[0].srt_caller.decryption_configuration.encryption_key.role_arn #=> String
+    #   resp.router_input.configuration.failover.protocol_configurations[0].rtp.port #=> Integer
+    #   resp.router_input.configuration.failover.protocol_configurations[0].rtp.forward_error_correction #=> String, one of "ENABLED", "DISABLED"
     #   resp.router_input.configuration.failover.source_priority_mode #=> String, one of "NO_PRIORITY", "PRIMARY_SECONDARY"
     #   resp.router_input.configuration.failover.primary_source_index #=> Integer
+    #   resp.router_input.configuration.media_connect_flow.flow_arn #=> String
+    #   resp.router_input.configuration.media_connect_flow.flow_output_arn #=> String
+    #   resp.router_input.configuration.media_connect_flow.source_transit_decryption.encryption_key_type #=> String, one of "SECRETS_MANAGER", "AUTOMATIC"
+    #   resp.router_input.configuration.media_connect_flow.source_transit_decryption.encryption_key_configuration.secrets_manager.secret_arn #=> String
+    #   resp.router_input.configuration.media_connect_flow.source_transit_decryption.encryption_key_configuration.secrets_manager.role_arn #=> String
     #   resp.router_input.configuration.merge.network_interface_arn #=> String
     #   resp.router_input.configuration.merge.protocol_configurations #=> Array
     #   resp.router_input.configuration.merge.protocol_configurations[0].rtp.port #=> Integer
@@ -6917,11 +6978,6 @@ module Aws::MediaConnect
     #   resp.router_input.configuration.merge.protocol_configurations[0].rist.port #=> Integer
     #   resp.router_input.configuration.merge.protocol_configurations[0].rist.recovery_latency_milliseconds #=> Integer
     #   resp.router_input.configuration.merge.merge_recovery_window_milliseconds #=> Integer
-    #   resp.router_input.configuration.media_connect_flow.flow_arn #=> String
-    #   resp.router_input.configuration.media_connect_flow.flow_output_arn #=> String
-    #   resp.router_input.configuration.media_connect_flow.source_transit_decryption.encryption_key_type #=> String, one of "SECRETS_MANAGER", "AUTOMATIC"
-    #   resp.router_input.configuration.media_connect_flow.source_transit_decryption.encryption_key_configuration.secrets_manager.secret_arn #=> String
-    #   resp.router_input.configuration.media_connect_flow.source_transit_decryption.encryption_key_configuration.secrets_manager.role_arn #=> String
     #   resp.router_input.routed_outputs #=> Integer
     #   resp.router_input.maximum_routed_outputs #=> Integer
     #   resp.router_input.region_name #=> String
@@ -7075,11 +7131,6 @@ module Aws::MediaConnect
     #       standard: {
     #         network_interface_arn: "RouterNetworkInterfaceArn", # required
     #         protocol_configuration: { # required
-    #           rtp: {
-    #             destination_address: "String", # required
-    #             destination_port: 1, # required
-    #             forward_error_correction: "ENABLED", # accepts ENABLED, DISABLED
-    #           },
     #           rist: {
     #             destination_address: "String", # required
     #             destination_port: 1, # required
@@ -7105,6 +7156,11 @@ module Aws::MediaConnect
     #                 role_arn: "RoleArn", # required
     #               },
     #             },
+    #           },
+    #           rtp: {
+    #             destination_address: "String", # required
+    #             destination_port: 1, # required
+    #             forward_error_correction: "ENABLED", # accepts ENABLED, DISABLED
     #           },
     #         },
     #         protocol: "RTP", # accepts RTP, RIST, SRT_CALLER, SRT_LISTENER
@@ -7161,9 +7217,6 @@ module Aws::MediaConnect
     #   resp.router_output.state #=> String, one of "CREATING", "STANDBY", "STARTING", "ACTIVE", "STOPPING", "DELETING", "UPDATING", "ERROR", "RECOVERING", "MIGRATING"
     #   resp.router_output.output_type #=> String, one of "STANDARD", "MEDIACONNECT_FLOW", "MEDIALIVE_INPUT"
     #   resp.router_output.configuration.standard.network_interface_arn #=> String
-    #   resp.router_output.configuration.standard.protocol_configuration.rtp.destination_address #=> String
-    #   resp.router_output.configuration.standard.protocol_configuration.rtp.destination_port #=> Integer
-    #   resp.router_output.configuration.standard.protocol_configuration.rtp.forward_error_correction #=> String, one of "ENABLED", "DISABLED"
     #   resp.router_output.configuration.standard.protocol_configuration.rist.destination_address #=> String
     #   resp.router_output.configuration.standard.protocol_configuration.rist.destination_port #=> Integer
     #   resp.router_output.configuration.standard.protocol_configuration.srt_listener.port #=> Integer
@@ -7176,6 +7229,9 @@ module Aws::MediaConnect
     #   resp.router_output.configuration.standard.protocol_configuration.srt_caller.stream_id #=> String
     #   resp.router_output.configuration.standard.protocol_configuration.srt_caller.encryption_configuration.encryption_key.secret_arn #=> String
     #   resp.router_output.configuration.standard.protocol_configuration.srt_caller.encryption_configuration.encryption_key.role_arn #=> String
+    #   resp.router_output.configuration.standard.protocol_configuration.rtp.destination_address #=> String
+    #   resp.router_output.configuration.standard.protocol_configuration.rtp.destination_port #=> Integer
+    #   resp.router_output.configuration.standard.protocol_configuration.rtp.forward_error_correction #=> String, one of "ENABLED", "DISABLED"
     #   resp.router_output.configuration.standard.protocol #=> String, one of "RTP", "RIST", "SRT_CALLER", "SRT_LISTENER"
     #   resp.router_output.configuration.media_connect_flow.flow_arn #=> String
     #   resp.router_output.configuration.media_connect_flow.flow_source_arn #=> String
@@ -7238,7 +7294,7 @@ module Aws::MediaConnect
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-mediaconnect'
-      context[:gem_version] = '1.96.0'
+      context[:gem_version] = '1.98.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

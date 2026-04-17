@@ -413,6 +413,19 @@ module Aws::Wickr
       SENSITIVE: []
     end
 
+    class GetOpentdfConfigRequest
+      attr_accessor network_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetOpentdfConfigResponse
+      attr_accessor client_id: ::String
+      attr_accessor domain: ::String
+      attr_accessor client_secret: ::String
+      attr_accessor provider: ::String
+      SENSITIVE: [:client_secret]
+    end
+
     class GetSecurityGroupRequest
       attr_accessor network_id: ::String
       attr_accessor group_id: ::String
@@ -629,6 +642,7 @@ module Aws::Wickr
       attr_accessor enable_client_metrics: bool
       attr_accessor read_receipt_config: Types::ReadReceiptConfig
       attr_accessor data_retention: bool
+      attr_accessor enable_trusted_data_format: bool
       SENSITIVE: []
     end
 
@@ -740,6 +754,24 @@ module Aws::Wickr
       attr_accessor token_endpoint_auth_methods_supported: ::Array[::String]
       attr_accessor microsoft_multi_refresh_token: bool
       SENSITIVE: []
+    end
+
+    class RegisterOpentdfConfigRequest
+      attr_accessor network_id: ::String
+      attr_accessor client_id: ::String
+      attr_accessor client_secret: ::String
+      attr_accessor domain: ::String
+      attr_accessor provider: ::String
+      attr_accessor dry_run: bool
+      SENSITIVE: [:client_secret]
+    end
+
+    class RegisterOpentdfConfigResponse
+      attr_accessor client_id: ::String
+      attr_accessor domain: ::String
+      attr_accessor client_secret: ::String
+      attr_accessor provider: ::String
+      SENSITIVE: [:client_secret]
     end
 
     class ResourceNotFoundError
@@ -962,6 +994,7 @@ module Aws::Wickr
 
     class ValidationError
       attr_accessor reasons: ::Array[Types::ErrorDetail]
+      attr_accessor message: ::String
       SENSITIVE: []
     end
 

@@ -69,6 +69,7 @@ module Aws::ECR
   # * {UnableToDecryptSecretValueException}
   # * {UnableToGetUpstreamImageException}
   # * {UnableToGetUpstreamLayerException}
+  # * {UnableToListUpstreamImageReferrersException}
   # * {UnsupportedImageTypeException}
   # * {UnsupportedUpstreamRegistryException}
   # * {UploadNotFoundException}
@@ -725,6 +726,21 @@ module Aws::ECR
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::ECR::Types::UnableToGetUpstreamLayerException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class UnableToListUpstreamImageReferrersException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::ECR::Types::UnableToListUpstreamImageReferrersException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

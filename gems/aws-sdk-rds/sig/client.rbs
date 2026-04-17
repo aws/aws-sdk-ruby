@@ -469,6 +469,7 @@ module Aws
                                  },
                                ],
                                ?master_user_authentication_type: ("password" | "iam-db-auth"),
+                               ?with_express_configuration: bool,
                                ?source_region: ::String
                              ) -> _CreateDBClusterResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDBClusterResponseSuccess
@@ -2129,6 +2130,28 @@ module Aws
                                                     ) -> _DescribeReservedDBInstancesOfferingsResponseSuccess
                                                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeReservedDBInstancesOfferingsResponseSuccess
 
+      interface _DescribeServerlessV2PlatformVersionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ServerlessV2PlatformVersionsMessage]
+        def marker: () -> ::String
+        def serverless_v2_platform_versions: () -> ::Array[Types::ServerlessV2PlatformVersionInfo]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/Client.html#describe_serverless_v2_platform_versions-instance_method
+      def describe_serverless_v2_platform_versions: (
+                                                      ?serverless_v2_platform_version: ::String,
+                                                      ?engine: ::String,
+                                                      ?filters: Array[
+                                                        {
+                                                          name: ::String,
+                                                          values: Array[::String]
+                                                        },
+                                                      ],
+                                                      ?default_only: bool,
+                                                      ?include_all: bool,
+                                                      ?max_records: ::Integer,
+                                                      ?marker: ::String
+                                                    ) -> _DescribeServerlessV2PlatformVersionsResponseSuccess
+                                                  | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeServerlessV2PlatformVersionsResponseSuccess
+
       interface _DescribeSourceRegionsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::SourceRegionMessage]
         def marker: () -> ::String
@@ -3183,7 +3206,9 @@ module Aws
                                                     },
                                                   ]?
                                                 },
-                                              ]
+                                              ],
+                                              ?enable_vpc_networking: bool,
+                                              ?enable_internet_access_gateway: bool
                                             ) -> _RestoreDBClusterFromSnapshotResponseSuccess
                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RestoreDBClusterFromSnapshotResponseSuccess
 
@@ -3260,7 +3285,9 @@ module Aws
                                                        },
                                                      ]?
                                                    },
-                                                 ]
+                                                 ],
+                                                 ?enable_vpc_networking: bool,
+                                                 ?enable_internet_access_gateway: bool
                                                ) -> _RestoreDBClusterToPointInTimeResponseSuccess
                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RestoreDBClusterToPointInTimeResponseSuccess
 

@@ -1421,6 +1421,8 @@ module Aws::PartnerCentralAccount
     #   resp.verification_response_details.business_verification_response.business_verification_details.registration_id #=> String
     #   resp.verification_response_details.business_verification_response.business_verification_details.country_code #=> String
     #   resp.verification_response_details.business_verification_response.business_verification_details.jurisdiction_of_incorporation #=> String
+    #   resp.verification_response_details.business_verification_response.completion_url #=> String
+    #   resp.verification_response_details.business_verification_response.completion_url_expires_at #=> Time
     #   resp.verification_response_details.registrant_verification_response.completion_url #=> String
     #   resp.verification_response_details.registrant_verification_response.completion_url_expires_at #=> Time
     #   resp.started_at #=> Time
@@ -1991,6 +1993,8 @@ module Aws::PartnerCentralAccount
     #   resp.verification_response_details.business_verification_response.business_verification_details.registration_id #=> String
     #   resp.verification_response_details.business_verification_response.business_verification_details.country_code #=> String
     #   resp.verification_response_details.business_verification_response.business_verification_details.jurisdiction_of_incorporation #=> String
+    #   resp.verification_response_details.business_verification_response.completion_url #=> String
+    #   resp.verification_response_details.business_verification_response.completion_url_expires_at #=> Time
     #   resp.verification_response_details.registrant_verification_response.completion_url #=> String
     #   resp.verification_response_details.registrant_verification_response.completion_url_expires_at #=> Time
     #   resp.started_at #=> Time
@@ -2136,7 +2140,7 @@ module Aws::PartnerCentralAccount
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-partnercentralaccount'
-      context[:gem_version] = '1.4.0'
+      context[:gem_version] = '1.6.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

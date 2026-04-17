@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.35.0 (2026-03-31)
+------------------
+
+* Feature - This release adds 8 new APIs for AWS Marketplace sellers. 4 APIs for Cancellations (Send, List, Get, Cancel action on AgreementCancellationRequest), 3 APIs for Billing Adjustments (BatchCreate, List, Get action on BillingAdjustmentRequest), and 1 API to List Invoices (ListAgreementInvoiceLineItems)
+
+1.34.0 (2026-03-25)
+------------------
+
+* Feature - The Variable Payments APIs enable AWS Marketplace Sellers to perform manage their payment requests (send, get, list, cancel).
+
+1.33.0 (2026-03-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.32.0 (2026-01-16)
 ------------------
 

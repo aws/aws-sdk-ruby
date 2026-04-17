@@ -9,8 +9,8 @@ module Aws::Drs
   module Types
 
     class AccessDeniedException
-      attr_accessor code: ::String
       attr_accessor message: ::String
+      attr_accessor code: ::String
       SENSITIVE: []
     end
 
@@ -20,8 +20,8 @@ module Aws::Drs
     end
 
     class AssociateSourceNetworkStackRequest
-      attr_accessor cfn_stack_name: ::String
       attr_accessor source_network_id: ::String
+      attr_accessor cfn_stack_name: ::String
       SENSITIVE: [:cfn_stack_name]
     end
 
@@ -37,20 +37,20 @@ module Aws::Drs
     end
 
     class ConflictException
-      attr_accessor code: ::String
       attr_accessor message: ::String
+      attr_accessor code: ::String
       attr_accessor resource_id: ::String
       attr_accessor resource_type: ::String
       SENSITIVE: []
     end
 
     class ConversionProperties
-      attr_accessor data_timestamp: ::String
-      attr_accessor force_uefi: bool
-      attr_accessor root_volume_name: ::String
       attr_accessor volume_to_conversion_map: ::Hash[::String, ::Hash[::String, ::String]]
-      attr_accessor volume_to_product_codes: ::Hash[::String, ::Array[Types::ProductCode]]
+      attr_accessor root_volume_name: ::String
+      attr_accessor force_uefi: bool
+      attr_accessor data_timestamp: ::String
       attr_accessor volume_to_volume_size: ::Hash[::String, ::Integer]
+      attr_accessor volume_to_product_codes: ::Hash[::String, ::Array[Types::ProductCode]]
       SENSITIVE: []
     end
 
@@ -66,15 +66,15 @@ module Aws::Drs
     end
 
     class CreateLaunchConfigurationTemplateRequest
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor launch_disposition: ("STOPPED" | "STARTED")
+      attr_accessor target_instance_type_right_sizing_method: ("NONE" | "BASIC" | "IN_AWS")
       attr_accessor copy_private_ip: bool
       attr_accessor copy_tags: bool
-      attr_accessor export_bucket_arn: ::String
-      attr_accessor launch_disposition: ("STOPPED" | "STARTED")
-      attr_accessor launch_into_source_instance: bool
       attr_accessor licensing: Types::Licensing
+      attr_accessor export_bucket_arn: ::String
       attr_accessor post_launch_enabled: bool
-      attr_accessor tags: ::Hash[::String, ::String]
-      attr_accessor target_instance_type_right_sizing_method: ("NONE" | "BASIC" | "IN_AWS")
+      attr_accessor launch_into_source_instance: bool
       SENSITIVE: [:tags]
     end
 
@@ -84,29 +84,30 @@ module Aws::Drs
     end
 
     class CreateReplicationConfigurationTemplateRequest
+      attr_accessor staging_area_subnet_id: ::String
       attr_accessor associate_default_security_group: bool
-      attr_accessor auto_replicate_new_disks: bool
-      attr_accessor bandwidth_throttling: ::Integer
-      attr_accessor create_public_ip: bool
-      attr_accessor data_plane_routing: ("PRIVATE_IP" | "PUBLIC_IP")
+      attr_accessor replication_servers_security_groups_i_ds: ::Array[::String]
+      attr_accessor replication_server_instance_type: ::String
+      attr_accessor use_dedicated_replication_server: bool
       attr_accessor default_large_staging_disk_type: ("GP2" | "GP3" | "ST1" | "AUTO")
       attr_accessor ebs_encryption: ("DEFAULT" | "CUSTOM" | "NONE")
       attr_accessor ebs_encryption_key_arn: ::String
-      attr_accessor pit_policy: ::Array[Types::PITPolicyRule]
-      attr_accessor replication_server_instance_type: ::String
-      attr_accessor replication_servers_security_groups_i_ds: ::Array[::String]
-      attr_accessor staging_area_subnet_id: ::String
+      attr_accessor bandwidth_throttling: ::Integer
+      attr_accessor data_plane_routing: ("PRIVATE_IP" | "PUBLIC_IP")
+      attr_accessor create_public_ip: bool
       attr_accessor staging_area_tags: ::Hash[::String, ::String]
+      attr_accessor pit_policy: ::Array[Types::PITPolicyRule]
       attr_accessor tags: ::Hash[::String, ::String]
-      attr_accessor use_dedicated_replication_server: bool
+      attr_accessor auto_replicate_new_disks: bool
+      attr_accessor internet_protocol: ("IPV4" | "IPV6")
       SENSITIVE: [:staging_area_tags, :tags]
     end
 
     class CreateSourceNetworkRequest
+      attr_accessor vpc_id: ::String
       attr_accessor origin_account_id: ::String
       attr_accessor origin_region: ::String
       attr_accessor tags: ::Hash[::String, ::String]
-      attr_accessor vpc_id: ::String
       SENSITIVE: [:tags]
     end
 
@@ -122,30 +123,30 @@ module Aws::Drs
     end
 
     class DataReplicationInfo
-      attr_accessor data_replication_error: Types::DataReplicationError
-      attr_accessor data_replication_initiation: Types::DataReplicationInitiation
-      attr_accessor data_replication_state: ("STOPPED" | "INITIATING" | "INITIAL_SYNC" | "BACKLOG" | "CREATING_SNAPSHOT" | "CONTINUOUS" | "PAUSED" | "RESCAN" | "STALLED" | "DISCONNECTED")
-      attr_accessor eta_date_time: ::String
       attr_accessor lag_duration: ::String
+      attr_accessor eta_date_time: ::String
       attr_accessor replicated_disks: ::Array[Types::DataReplicationInfoReplicatedDisk]
+      attr_accessor data_replication_state: ("STOPPED" | "INITIATING" | "INITIAL_SYNC" | "BACKLOG" | "CREATING_SNAPSHOT" | "CONTINUOUS" | "PAUSED" | "RESCAN" | "STALLED" | "DISCONNECTED")
+      attr_accessor data_replication_initiation: Types::DataReplicationInitiation
+      attr_accessor data_replication_error: Types::DataReplicationError
       attr_accessor staging_availability_zone: ::String
       attr_accessor staging_outpost_arn: ::String
       SENSITIVE: []
     end
 
     class DataReplicationInfoReplicatedDisk
-      attr_accessor backlogged_storage_bytes: ::Integer
       attr_accessor device_name: ::String
+      attr_accessor total_storage_bytes: ::Integer
       attr_accessor replicated_storage_bytes: ::Integer
       attr_accessor rescanned_storage_bytes: ::Integer
-      attr_accessor total_storage_bytes: ::Integer
+      attr_accessor backlogged_storage_bytes: ::Integer
       attr_accessor volume_status: ("REGULAR" | "CONTAINS_MARKETPLACE_PRODUCT_CODES" | "MISSING_VOLUME_ATTRIBUTES" | "MISSING_VOLUME_ATTRIBUTES_AND_PRECHECK_UNAVAILABLE" | "PENDING")
       SENSITIVE: []
     end
 
     class DataReplicationInitiation
-      attr_accessor next_attempt_date_time: ::String
       attr_accessor start_date_time: ::String
+      attr_accessor next_attempt_date_time: ::String
       attr_accessor steps: ::Array[Types::DataReplicationInitiationStep]
       SENSITIVE: []
     end
@@ -165,8 +166,8 @@ module Aws::Drs
     end
 
     class DeleteLaunchActionRequest
-      attr_accessor action_id: ::String
       attr_accessor resource_id: ::String
+      attr_accessor action_id: ::String
       SENSITIVE: []
     end
 
@@ -231,8 +232,8 @@ module Aws::Drs
     end
 
     class DescribeJobsRequestFilters
-      attr_accessor from_date: ::String
       attr_accessor job_i_ds: ::Array[::String]
+      attr_accessor from_date: ::String
       attr_accessor to_date: ::String
       SENSITIVE: []
     end
@@ -270,17 +271,17 @@ module Aws::Drs
     end
 
     class DescribeRecoveryInstancesResponse
-      attr_accessor items: ::Array[Types::RecoveryInstance]
       attr_accessor next_token: ::String
+      attr_accessor items: ::Array[Types::RecoveryInstance]
       SENSITIVE: []
     end
 
     class DescribeRecoverySnapshotsRequest
+      attr_accessor source_server_id: ::String
       attr_accessor filters: Types::DescribeRecoverySnapshotsRequestFilters
+      attr_accessor order: ("ASC" | "DESC")
       attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
-      attr_accessor order: ("ASC" | "DESC")
-      attr_accessor source_server_id: ::String
       SENSITIVE: []
     end
 
@@ -297,9 +298,9 @@ module Aws::Drs
     end
 
     class DescribeReplicationConfigurationTemplatesRequest
+      attr_accessor replication_configuration_template_i_ds: ::Array[::String]
       attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
-      attr_accessor replication_configuration_template_i_ds: ::Array[::String]
       SENSITIVE: []
     end
 
@@ -317,9 +318,9 @@ module Aws::Drs
     end
 
     class DescribeSourceNetworksRequestFilters
+      attr_accessor source_network_i_ds: ::Array[::String]
       attr_accessor origin_account_id: ::String
       attr_accessor origin_region: ::String
-      attr_accessor source_network_i_ds: ::Array[::String]
       SENSITIVE: []
     end
 
@@ -337,8 +338,8 @@ module Aws::Drs
     end
 
     class DescribeSourceServersRequestFilters
-      attr_accessor hardware_id: ::String
       attr_accessor source_server_i_ds: ::Array[::String]
+      attr_accessor hardware_id: ::String
       attr_accessor staging_account_i_ds: ::Array[::String]
       SENSITIVE: []
     end
@@ -360,8 +361,8 @@ module Aws::Drs
     end
 
     class Disk
-      attr_accessor bytes: ::Integer
       attr_accessor device_name: ::String
+      attr_accessor bytes: ::Integer
       SENSITIVE: []
     end
 
@@ -392,10 +393,11 @@ module Aws::Drs
     end
 
     class GetFailbackReplicationConfigurationResponse
-      attr_accessor bandwidth_throttling: ::Integer
-      attr_accessor name: ::String
       attr_accessor recovery_instance_id: ::String
+      attr_accessor name: ::String
+      attr_accessor bandwidth_throttling: ::Integer
       attr_accessor use_private_ip: bool
+      attr_accessor internet_protocol: ("IPV4" | "IPV6")
       SENSITIVE: []
     end
 
@@ -410,10 +412,10 @@ module Aws::Drs
     end
 
     class IdentificationHints
-      attr_accessor aws_instance_id: ::String
       attr_accessor fqdn: ::String
       attr_accessor hostname: ::String
       attr_accessor vm_ware_uuid: ::String
+      attr_accessor aws_instance_id: ::String
       SENSITIVE: []
     end
 
@@ -430,62 +432,64 @@ module Aws::Drs
     end
 
     class Job
+      attr_accessor job_id: ::String
       attr_accessor arn: ::String
+      attr_accessor type: ("LAUNCH" | "TERMINATE" | "CREATE_CONVERTED_SNAPSHOT")
+      attr_accessor initiated_by: ("START_RECOVERY" | "START_DRILL" | "FAILBACK" | "DIAGNOSTIC" | "TERMINATE_RECOVERY_INSTANCES" | "TARGET_ACCOUNT" | "CREATE_NETWORK_RECOVERY" | "UPDATE_NETWORK_RECOVERY" | "ASSOCIATE_NETWORK_RECOVERY")
       attr_accessor creation_date_time: ::String
       attr_accessor end_date_time: ::String
-      attr_accessor initiated_by: ("START_RECOVERY" | "START_DRILL" | "FAILBACK" | "DIAGNOSTIC" | "TERMINATE_RECOVERY_INSTANCES" | "TARGET_ACCOUNT" | "CREATE_NETWORK_RECOVERY" | "UPDATE_NETWORK_RECOVERY" | "ASSOCIATE_NETWORK_RECOVERY")
-      attr_accessor job_id: ::String
-      attr_accessor participating_resources: ::Array[Types::ParticipatingResource]
-      attr_accessor participating_servers: ::Array[Types::ParticipatingServer]
       attr_accessor status: ("PENDING" | "STARTED" | "COMPLETED")
+      attr_accessor participating_servers: ::Array[Types::ParticipatingServer]
       attr_accessor tags: ::Hash[::String, ::String]
-      attr_accessor type: ("LAUNCH" | "TERMINATE" | "CREATE_CONVERTED_SNAPSHOT")
+      attr_accessor participating_resources: ::Array[Types::ParticipatingResource]
       SENSITIVE: [:tags]
     end
 
     class JobLog
+      attr_accessor log_date_time: ::String
       attr_accessor event: ("JOB_START" | "SERVER_SKIPPED" | "CLEANUP_START" | "CLEANUP_END" | "CLEANUP_FAIL" | "SNAPSHOT_START" | "SNAPSHOT_END" | "SNAPSHOT_FAIL" | "USING_PREVIOUS_SNAPSHOT" | "USING_PREVIOUS_SNAPSHOT_FAILED" | "CONVERSION_START" | "CONVERSION_END" | "CONVERSION_FAIL" | "LAUNCH_START" | "LAUNCH_FAILED" | "JOB_CANCEL" | "JOB_END" | "DEPLOY_NETWORK_CONFIGURATION_START" | "DEPLOY_NETWORK_CONFIGURATION_END" | "DEPLOY_NETWORK_CONFIGURATION_FAILED" | "UPDATE_NETWORK_CONFIGURATION_START" | "UPDATE_NETWORK_CONFIGURATION_END" | "UPDATE_NETWORK_CONFIGURATION_FAILED" | "UPDATE_LAUNCH_TEMPLATE_START" | "UPDATE_LAUNCH_TEMPLATE_END" | "UPDATE_LAUNCH_TEMPLATE_FAILED" | "NETWORK_RECOVERY_FAIL")
       attr_accessor event_data: Types::JobLogEventData
-      attr_accessor log_date_time: ::String
       SENSITIVE: []
     end
 
     class JobLogEventData
-      attr_accessor conversion_properties: Types::ConversionProperties
-      attr_accessor conversion_server_id: ::String
-      attr_accessor event_resource_data: Types::EventResourceData
-      attr_accessor raw_error: ::String
       attr_accessor source_server_id: ::String
+      attr_accessor conversion_server_id: ::String
       attr_accessor target_instance_id: ::String
+      attr_accessor raw_error: ::String
+      attr_accessor conversion_properties: Types::ConversionProperties
+      attr_accessor event_resource_data: Types::EventResourceData
+      attr_accessor attempt_count: ::Integer
+      attr_accessor max_attempts_count: ::Integer
       SENSITIVE: []
     end
 
     class LaunchAction
-      attr_accessor action_code: ::String
       attr_accessor action_id: ::String
-      attr_accessor action_version: ::String
-      attr_accessor active: bool
-      attr_accessor category: ("MONITORING" | "VALIDATION" | "CONFIGURATION" | "SECURITY" | "OTHER")
-      attr_accessor description: ::String
-      attr_accessor name: ::String
-      attr_accessor optional: bool
-      attr_accessor order: ::Integer
-      attr_accessor parameters: ::Hash[::String, Types::LaunchActionParameter]
+      attr_accessor action_code: ::String
       attr_accessor type: ("SSM_AUTOMATION" | "SSM_COMMAND")
+      attr_accessor name: ::String
+      attr_accessor active: bool
+      attr_accessor order: ::Integer
+      attr_accessor action_version: ::String
+      attr_accessor optional: bool
+      attr_accessor parameters: ::Hash[::String, Types::LaunchActionParameter]
+      attr_accessor description: ::String
+      attr_accessor category: ("MONITORING" | "VALIDATION" | "CONFIGURATION" | "SECURITY" | "OTHER")
       SENSITIVE: []
     end
 
     class LaunchActionParameter
-      attr_accessor type: ("SSM_STORE" | "DYNAMIC")
       attr_accessor value: ::String
+      attr_accessor type: ("SSM_STORE" | "DYNAMIC")
       SENSITIVE: []
     end
 
     class LaunchActionRun
       attr_accessor action: Types::LaunchAction
-      attr_accessor failure_reason: ::String
       attr_accessor run_id: ::String
       attr_accessor status: ("IN_PROGRESS" | "SUCCEEDED" | "FAILED")
+      attr_accessor failure_reason: ::String
       SENSITIVE: []
     end
 
@@ -495,37 +499,37 @@ module Aws::Drs
     end
 
     class LaunchActionsStatus
-      attr_accessor runs: ::Array[Types::LaunchActionRun]
       attr_accessor ssm_agent_discovery_datetime: ::String
+      attr_accessor runs: ::Array[Types::LaunchActionRun]
       SENSITIVE: []
     end
 
     class LaunchConfiguration
-      attr_accessor copy_private_ip: bool
-      attr_accessor copy_tags: bool
+      attr_accessor source_server_id: ::String
+      attr_accessor name: ::String
       attr_accessor ec2_launch_template_id: ::String
       attr_accessor launch_disposition: ("STOPPED" | "STARTED")
-      attr_accessor launch_into_instance_properties: Types::LaunchIntoInstanceProperties
-      attr_accessor licensing: Types::Licensing
-      attr_accessor name: ::String
-      attr_accessor post_launch_enabled: bool
-      attr_accessor source_server_id: ::String
       attr_accessor target_instance_type_right_sizing_method: ("NONE" | "BASIC" | "IN_AWS")
+      attr_accessor copy_private_ip: bool
+      attr_accessor copy_tags: bool
+      attr_accessor licensing: Types::Licensing
+      attr_accessor post_launch_enabled: bool
+      attr_accessor launch_into_instance_properties: Types::LaunchIntoInstanceProperties
       SENSITIVE: []
     end
 
     class LaunchConfigurationTemplate
+      attr_accessor launch_configuration_template_id: ::String
       attr_accessor arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor launch_disposition: ("STOPPED" | "STARTED")
+      attr_accessor target_instance_type_right_sizing_method: ("NONE" | "BASIC" | "IN_AWS")
       attr_accessor copy_private_ip: bool
       attr_accessor copy_tags: bool
-      attr_accessor export_bucket_arn: ::String
-      attr_accessor launch_configuration_template_id: ::String
-      attr_accessor launch_disposition: ("STOPPED" | "STARTED")
-      attr_accessor launch_into_source_instance: bool
       attr_accessor licensing: Types::Licensing
+      attr_accessor export_bucket_arn: ::String
       attr_accessor post_launch_enabled: bool
-      attr_accessor tags: ::Hash[::String, ::String]
-      attr_accessor target_instance_type_right_sizing_method: ("NONE" | "BASIC" | "IN_AWS")
+      attr_accessor launch_into_source_instance: bool
       SENSITIVE: [:tags]
     end
 
@@ -541,10 +545,10 @@ module Aws::Drs
 
     class LifeCycle
       attr_accessor added_to_service_date_time: ::String
-      attr_accessor elapsed_replication_duration: ::String
       attr_accessor first_byte_date_time: ::String
-      attr_accessor last_launch: Types::LifeCycleLastLaunch
+      attr_accessor elapsed_replication_duration: ::String
       attr_accessor last_seen_by_service_date_time: ::String
+      attr_accessor last_launch: Types::LifeCycleLastLaunch
       SENSITIVE: []
     end
 
@@ -562,9 +566,9 @@ module Aws::Drs
     end
 
     class ListExtensibleSourceServersRequest
+      attr_accessor staging_account_id: ::String
       attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
-      attr_accessor staging_account_id: ::String
       SENSITIVE: []
     end
 
@@ -575,10 +579,10 @@ module Aws::Drs
     end
 
     class ListLaunchActionsRequest
+      attr_accessor resource_id: ::String
       attr_accessor filters: Types::LaunchActionsRequestFilters
       attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
-      attr_accessor resource_id: ::String
       SENSITIVE: []
     end
 
@@ -611,9 +615,9 @@ module Aws::Drs
     end
 
     class NetworkInterface
+      attr_accessor mac_address: ::String
       attr_accessor ips: ::Array[::String]
       attr_accessor is_primary: bool
-      attr_accessor mac_address: ::String
       SENSITIVE: []
     end
 
@@ -623,17 +627,17 @@ module Aws::Drs
     end
 
     class PITPolicyRule
-      attr_accessor enabled: bool
-      attr_accessor interval: ::Integer
-      attr_accessor retention_duration: ::Integer
       attr_accessor rule_id: ::Integer
       attr_accessor units: ("MINUTE" | "HOUR" | "DAY")
+      attr_accessor interval: ::Integer
+      attr_accessor retention_duration: ::Integer
+      attr_accessor enabled: bool
       SENSITIVE: []
     end
 
     class ParticipatingResource
-      attr_accessor launch_status: ("PENDING" | "IN_PROGRESS" | "LAUNCHED" | "FAILED" | "TERMINATED")
       attr_accessor participating_resource_id: Types::ParticipatingResourceID
+      attr_accessor launch_status: ("PENDING" | "IN_PROGRESS" | "LAUNCHED" | "FAILED" | "TERMINATED")
       SENSITIVE: []
     end
 
@@ -649,10 +653,10 @@ module Aws::Drs
     end
 
     class ParticipatingServer
-      attr_accessor launch_actions_status: Types::LaunchActionsStatus
-      attr_accessor launch_status: ("PENDING" | "IN_PROGRESS" | "LAUNCHED" | "FAILED" | "TERMINATED")
-      attr_accessor recovery_instance_id: ::String
       attr_accessor source_server_id: ::String
+      attr_accessor recovery_instance_id: ::String
+      attr_accessor launch_status: ("PENDING" | "IN_PROGRESS" | "LAUNCHED" | "FAILED" | "TERMINATED")
+      attr_accessor launch_actions_status: Types::LaunchActionsStatus
       SENSITIVE: []
     end
 
@@ -663,53 +667,53 @@ module Aws::Drs
     end
 
     class PutLaunchActionRequest
-      attr_accessor action_code: ::String
-      attr_accessor action_id: ::String
-      attr_accessor action_version: ::String
-      attr_accessor active: bool
-      attr_accessor category: ("MONITORING" | "VALIDATION" | "CONFIGURATION" | "SECURITY" | "OTHER")
-      attr_accessor description: ::String
-      attr_accessor name: ::String
-      attr_accessor optional: bool
-      attr_accessor order: ::Integer
-      attr_accessor parameters: ::Hash[::String, Types::LaunchActionParameter]
       attr_accessor resource_id: ::String
+      attr_accessor action_code: ::String
+      attr_accessor order: ::Integer
+      attr_accessor action_id: ::String
+      attr_accessor optional: bool
+      attr_accessor active: bool
+      attr_accessor name: ::String
+      attr_accessor action_version: ::String
+      attr_accessor category: ("MONITORING" | "VALIDATION" | "CONFIGURATION" | "SECURITY" | "OTHER")
+      attr_accessor parameters: ::Hash[::String, Types::LaunchActionParameter]
+      attr_accessor description: ::String
       SENSITIVE: []
     end
 
     class PutLaunchActionResponse
-      attr_accessor action_code: ::String
-      attr_accessor action_id: ::String
-      attr_accessor action_version: ::String
-      attr_accessor active: bool
-      attr_accessor category: ("MONITORING" | "VALIDATION" | "CONFIGURATION" | "SECURITY" | "OTHER")
-      attr_accessor description: ::String
-      attr_accessor name: ::String
-      attr_accessor optional: bool
-      attr_accessor order: ::Integer
-      attr_accessor parameters: ::Hash[::String, Types::LaunchActionParameter]
       attr_accessor resource_id: ::String
+      attr_accessor action_id: ::String
+      attr_accessor action_code: ::String
       attr_accessor type: ("SSM_AUTOMATION" | "SSM_COMMAND")
+      attr_accessor name: ::String
+      attr_accessor active: bool
+      attr_accessor order: ::Integer
+      attr_accessor action_version: ::String
+      attr_accessor optional: bool
+      attr_accessor parameters: ::Hash[::String, Types::LaunchActionParameter]
+      attr_accessor description: ::String
+      attr_accessor category: ("MONITORING" | "VALIDATION" | "CONFIGURATION" | "SECURITY" | "OTHER")
       SENSITIVE: []
     end
 
     class RecoveryInstance
-      attr_accessor agent_version: ::String
-      attr_accessor arn: ::String
-      attr_accessor data_replication_info: Types::RecoveryInstanceDataReplicationInfo
       attr_accessor ec2_instance_id: ::String
       attr_accessor ec2_instance_state: ("PENDING" | "RUNNING" | "STOPPING" | "STOPPED" | "SHUTTING-DOWN" | "TERMINATED" | "NOT_FOUND")
-      attr_accessor failback: Types::RecoveryInstanceFailback
-      attr_accessor is_drill: bool
       attr_accessor job_id: ::String
-      attr_accessor origin_availability_zone: ::String
-      attr_accessor origin_environment: ("ON_PREMISES" | "AWS")
-      attr_accessor point_in_time_snapshot_date_time: ::String
       attr_accessor recovery_instance_id: ::String
-      attr_accessor recovery_instance_properties: Types::RecoveryInstanceProperties
-      attr_accessor source_outpost_arn: ::String
       attr_accessor source_server_id: ::String
+      attr_accessor arn: ::String
       attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor failback: Types::RecoveryInstanceFailback
+      attr_accessor data_replication_info: Types::RecoveryInstanceDataReplicationInfo
+      attr_accessor recovery_instance_properties: Types::RecoveryInstanceProperties
+      attr_accessor point_in_time_snapshot_date_time: ::String
+      attr_accessor is_drill: bool
+      attr_accessor origin_environment: ("ON_PREMISES" | "AWS")
+      attr_accessor origin_availability_zone: ::String
+      attr_accessor agent_version: ::String
+      attr_accessor source_outpost_arn: ::String
       SENSITIVE: [:tags]
     end
 
@@ -720,23 +724,23 @@ module Aws::Drs
     end
 
     class RecoveryInstanceDataReplicationInfo
-      attr_accessor data_replication_error: Types::RecoveryInstanceDataReplicationError
-      attr_accessor data_replication_initiation: Types::RecoveryInstanceDataReplicationInitiation
-      attr_accessor data_replication_state: ("STOPPED" | "INITIATING" | "INITIAL_SYNC" | "BACKLOG" | "CREATING_SNAPSHOT" | "CONTINUOUS" | "PAUSED" | "RESCAN" | "STALLED" | "DISCONNECTED" | "REPLICATION_STATE_NOT_AVAILABLE" | "NOT_STARTED")
-      attr_accessor eta_date_time: ::String
       attr_accessor lag_duration: ::String
+      attr_accessor eta_date_time: ::String
       attr_accessor replicated_disks: ::Array[Types::RecoveryInstanceDataReplicationInfoReplicatedDisk]
+      attr_accessor data_replication_state: ("STOPPED" | "INITIATING" | "INITIAL_SYNC" | "BACKLOG" | "CREATING_SNAPSHOT" | "CONTINUOUS" | "PAUSED" | "RESCAN" | "STALLED" | "DISCONNECTED" | "REPLICATION_STATE_NOT_AVAILABLE" | "NOT_STARTED")
+      attr_accessor data_replication_initiation: Types::RecoveryInstanceDataReplicationInitiation
+      attr_accessor data_replication_error: Types::RecoveryInstanceDataReplicationError
       attr_accessor staging_availability_zone: ::String
       attr_accessor staging_outpost_arn: ::String
       SENSITIVE: []
     end
 
     class RecoveryInstanceDataReplicationInfoReplicatedDisk
-      attr_accessor backlogged_storage_bytes: ::Integer
       attr_accessor device_name: ::String
+      attr_accessor total_storage_bytes: ::Integer
       attr_accessor replicated_storage_bytes: ::Integer
       attr_accessor rescanned_storage_bytes: ::Integer
-      attr_accessor total_storage_bytes: ::Integer
+      attr_accessor backlogged_storage_bytes: ::Integer
       SENSITIVE: []
     end
 
@@ -753,34 +757,34 @@ module Aws::Drs
     end
 
     class RecoveryInstanceDisk
+      attr_accessor internal_device_name: ::String
       attr_accessor bytes: ::Integer
       attr_accessor ebs_volume_id: ::String
-      attr_accessor internal_device_name: ::String
       SENSITIVE: []
     end
 
     class RecoveryInstanceFailback
-      attr_accessor agent_last_seen_by_service_date_time: ::String
-      attr_accessor elapsed_replication_duration: ::String
       attr_accessor failback_client_id: ::String
-      attr_accessor failback_client_last_seen_by_service_date_time: ::String
-      attr_accessor failback_initiation_time: ::String
       attr_accessor failback_job_id: ::String
-      attr_accessor failback_launch_type: ("RECOVERY" | "DRILL")
+      attr_accessor failback_initiation_time: ::String
+      attr_accessor state: ("FAILBACK_NOT_STARTED" | "FAILBACK_IN_PROGRESS" | "FAILBACK_READY_FOR_LAUNCH" | "FAILBACK_COMPLETED" | "FAILBACK_ERROR" | "FAILBACK_NOT_READY_FOR_LAUNCH" | "FAILBACK_LAUNCH_STATE_NOT_AVAILABLE")
+      attr_accessor agent_last_seen_by_service_date_time: ::String
+      attr_accessor failback_client_last_seen_by_service_date_time: ::String
       attr_accessor failback_to_original_server: bool
       attr_accessor first_byte_date_time: ::String
-      attr_accessor state: ("FAILBACK_NOT_STARTED" | "FAILBACK_IN_PROGRESS" | "FAILBACK_READY_FOR_LAUNCH" | "FAILBACK_COMPLETED" | "FAILBACK_ERROR" | "FAILBACK_NOT_READY_FOR_LAUNCH" | "FAILBACK_LAUNCH_STATE_NOT_AVAILABLE")
+      attr_accessor elapsed_replication_duration: ::String
+      attr_accessor failback_launch_type: ("RECOVERY" | "DRILL")
       SENSITIVE: []
     end
 
     class RecoveryInstanceProperties
-      attr_accessor cpus: ::Array[Types::CPU]
-      attr_accessor disks: ::Array[Types::RecoveryInstanceDisk]
-      attr_accessor identification_hints: Types::IdentificationHints
       attr_accessor last_updated_date_time: ::String
+      attr_accessor identification_hints: Types::IdentificationHints
       attr_accessor network_interfaces: ::Array[Types::NetworkInterface]
-      attr_accessor os: Types::OS
+      attr_accessor disks: ::Array[Types::RecoveryInstanceDisk]
+      attr_accessor cpus: ::Array[Types::CPU]
       attr_accessor ram_bytes: ::Integer
+      attr_accessor os: Types::OS
       SENSITIVE: []
     end
 
@@ -792,69 +796,71 @@ module Aws::Drs
     end
 
     class RecoverySnapshot
-      attr_accessor ebs_snapshots: ::Array[::String]
-      attr_accessor expected_timestamp: ::String
       attr_accessor snapshot_id: ::String
       attr_accessor source_server_id: ::String
+      attr_accessor expected_timestamp: ::String
       attr_accessor timestamp: ::String
+      attr_accessor ebs_snapshots: ::Array[::String]
       SENSITIVE: []
     end
 
     class ReplicationConfiguration
+      attr_accessor source_server_id: ::String
+      attr_accessor name: ::String
+      attr_accessor staging_area_subnet_id: ::String
       attr_accessor associate_default_security_group: bool
-      attr_accessor auto_replicate_new_disks: bool
-      attr_accessor bandwidth_throttling: ::Integer
-      attr_accessor create_public_ip: bool
-      attr_accessor data_plane_routing: ("PRIVATE_IP" | "PUBLIC_IP")
+      attr_accessor replication_servers_security_groups_i_ds: ::Array[::String]
+      attr_accessor replication_server_instance_type: ::String
+      attr_accessor use_dedicated_replication_server: bool
       attr_accessor default_large_staging_disk_type: ("GP2" | "GP3" | "ST1" | "AUTO")
+      attr_accessor replicated_disks: ::Array[Types::ReplicationConfigurationReplicatedDisk]
       attr_accessor ebs_encryption: ("DEFAULT" | "CUSTOM" | "NONE")
       attr_accessor ebs_encryption_key_arn: ::String
-      attr_accessor name: ::String
-      attr_accessor pit_policy: ::Array[Types::PITPolicyRule]
-      attr_accessor replicated_disks: ::Array[Types::ReplicationConfigurationReplicatedDisk]
-      attr_accessor replication_server_instance_type: ::String
-      attr_accessor replication_servers_security_groups_i_ds: ::Array[::String]
-      attr_accessor source_server_id: ::String
-      attr_accessor staging_area_subnet_id: ::String
+      attr_accessor bandwidth_throttling: ::Integer
+      attr_accessor data_plane_routing: ("PRIVATE_IP" | "PUBLIC_IP")
+      attr_accessor create_public_ip: bool
       attr_accessor staging_area_tags: ::Hash[::String, ::String]
-      attr_accessor use_dedicated_replication_server: bool
+      attr_accessor pit_policy: ::Array[Types::PITPolicyRule]
+      attr_accessor auto_replicate_new_disks: bool
+      attr_accessor internet_protocol: ("IPV4" | "IPV6")
       SENSITIVE: [:staging_area_tags]
     end
 
     class ReplicationConfigurationReplicatedDisk
       attr_accessor device_name: ::String
-      attr_accessor iops: ::Integer
       attr_accessor is_boot_disk: bool
-      attr_accessor optimized_staging_disk_type: ("AUTO" | "GP2" | "GP3" | "IO1" | "SC1" | "ST1" | "STANDARD")
       attr_accessor staging_disk_type: ("AUTO" | "GP2" | "GP3" | "IO1" | "SC1" | "ST1" | "STANDARD")
+      attr_accessor iops: ::Integer
       attr_accessor throughput: ::Integer
+      attr_accessor optimized_staging_disk_type: ("AUTO" | "GP2" | "GP3" | "IO1" | "SC1" | "ST1" | "STANDARD")
       SENSITIVE: []
     end
 
     class ReplicationConfigurationTemplate
+      attr_accessor replication_configuration_template_id: ::String
       attr_accessor arn: ::String
+      attr_accessor staging_area_subnet_id: ::String
       attr_accessor associate_default_security_group: bool
-      attr_accessor auto_replicate_new_disks: bool
-      attr_accessor bandwidth_throttling: ::Integer
-      attr_accessor create_public_ip: bool
-      attr_accessor data_plane_routing: ("PRIVATE_IP" | "PUBLIC_IP")
+      attr_accessor replication_servers_security_groups_i_ds: ::Array[::String]
+      attr_accessor replication_server_instance_type: ::String
+      attr_accessor use_dedicated_replication_server: bool
       attr_accessor default_large_staging_disk_type: ("GP2" | "GP3" | "ST1" | "AUTO")
       attr_accessor ebs_encryption: ("DEFAULT" | "CUSTOM" | "NONE")
       attr_accessor ebs_encryption_key_arn: ::String
-      attr_accessor pit_policy: ::Array[Types::PITPolicyRule]
-      attr_accessor replication_configuration_template_id: ::String
-      attr_accessor replication_server_instance_type: ::String
-      attr_accessor replication_servers_security_groups_i_ds: ::Array[::String]
-      attr_accessor staging_area_subnet_id: ::String
+      attr_accessor bandwidth_throttling: ::Integer
+      attr_accessor data_plane_routing: ("PRIVATE_IP" | "PUBLIC_IP")
+      attr_accessor create_public_ip: bool
       attr_accessor staging_area_tags: ::Hash[::String, ::String]
       attr_accessor tags: ::Hash[::String, ::String]
-      attr_accessor use_dedicated_replication_server: bool
+      attr_accessor pit_policy: ::Array[Types::PITPolicyRule]
+      attr_accessor auto_replicate_new_disks: bool
+      attr_accessor internet_protocol: ("IPV4" | "IPV6")
       SENSITIVE: [:staging_area_tags, :tags]
     end
 
     class ResourceNotFoundException
-      attr_accessor code: ::String
       attr_accessor message: ::String
+      attr_accessor code: ::String
       attr_accessor resource_id: ::String
       attr_accessor resource_type: ::String
       SENSITIVE: []
@@ -876,88 +882,88 @@ module Aws::Drs
     end
 
     class ServiceQuotaExceededException
-      attr_accessor code: ::String
       attr_accessor message: ::String
-      attr_accessor quota_code: ::String
+      attr_accessor code: ::String
       attr_accessor resource_id: ::String
       attr_accessor resource_type: ::String
       attr_accessor service_code: ::String
+      attr_accessor quota_code: ::String
       SENSITIVE: []
     end
 
     class SourceCloudProperties
       attr_accessor origin_account_id: ::String
-      attr_accessor origin_availability_zone: ::String
       attr_accessor origin_region: ::String
+      attr_accessor origin_availability_zone: ::String
       attr_accessor source_outpost_arn: ::String
       SENSITIVE: []
     end
 
     class SourceNetwork
+      attr_accessor source_network_id: ::String
+      attr_accessor source_vpc_id: ::String
       attr_accessor arn: ::String
-      attr_accessor cfn_stack_name: ::String
-      attr_accessor last_recovery: Types::RecoveryLifeCycle
-      attr_accessor launched_vpc_id: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor replication_status: ("STOPPED" | "IN_PROGRESS" | "PROTECTED" | "ERROR")
       attr_accessor replication_status_details: ::String
-      attr_accessor source_account_id: ::String
-      attr_accessor source_network_id: ::String
+      attr_accessor cfn_stack_name: ::String
       attr_accessor source_region: ::String
-      attr_accessor source_vpc_id: ::String
-      attr_accessor tags: ::Hash[::String, ::String]
-      SENSITIVE: [:cfn_stack_name, :replication_status_details, :tags]
+      attr_accessor source_account_id: ::String
+      attr_accessor last_recovery: Types::RecoveryLifeCycle
+      attr_accessor launched_vpc_id: ::String
+      SENSITIVE: [:tags, :replication_status_details, :cfn_stack_name]
     end
 
     class SourceNetworkData
       attr_accessor source_network_id: ::String
       attr_accessor source_vpc: ::String
-      attr_accessor stack_name: ::String
       attr_accessor target_vpc: ::String
+      attr_accessor stack_name: ::String
       SENSITIVE: []
     end
 
     class SourceProperties
-      attr_accessor cpus: ::Array[Types::CPU]
-      attr_accessor disks: ::Array[Types::Disk]
-      attr_accessor identification_hints: Types::IdentificationHints
       attr_accessor last_updated_date_time: ::String
-      attr_accessor network_interfaces: ::Array[Types::NetworkInterface]
-      attr_accessor os: Types::OS
-      attr_accessor ram_bytes: ::Integer
       attr_accessor recommended_instance_type: ::String
+      attr_accessor identification_hints: Types::IdentificationHints
+      attr_accessor network_interfaces: ::Array[Types::NetworkInterface]
+      attr_accessor disks: ::Array[Types::Disk]
+      attr_accessor cpus: ::Array[Types::CPU]
+      attr_accessor ram_bytes: ::Integer
+      attr_accessor os: Types::OS
       attr_accessor supports_nitro_instances: bool
       SENSITIVE: []
     end
 
     class SourceServer
-      attr_accessor agent_version: ::String
+      attr_accessor source_server_id: ::String
       attr_accessor arn: ::String
-      attr_accessor data_replication_info: Types::DataReplicationInfo
-      attr_accessor last_launch_result: ("NOT_STARTED" | "PENDING" | "SUCCEEDED" | "FAILED")
-      attr_accessor life_cycle: Types::LifeCycle
+      attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor recovery_instance_id: ::String
+      attr_accessor last_launch_result: ("NOT_STARTED" | "PENDING" | "SUCCEEDED" | "FAILED")
+      attr_accessor data_replication_info: Types::DataReplicationInfo
+      attr_accessor life_cycle: Types::LifeCycle
+      attr_accessor source_properties: Types::SourceProperties
+      attr_accessor staging_area: Types::StagingArea
+      attr_accessor source_cloud_properties: Types::SourceCloudProperties
       attr_accessor replication_direction: ("FAILOVER" | "FAILBACK")
       attr_accessor reversed_direction_source_server_arn: ::String
-      attr_accessor source_cloud_properties: Types::SourceCloudProperties
       attr_accessor source_network_id: ::String
-      attr_accessor source_properties: Types::SourceProperties
-      attr_accessor source_server_id: ::String
-      attr_accessor staging_area: Types::StagingArea
-      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor agent_version: ::String
       SENSITIVE: [:tags]
     end
 
     class StagingArea
-      attr_accessor error_message: ::String
+      attr_accessor status: ("EXTENDED" | "EXTENSION_ERROR" | "NOT_EXTENDED")
       attr_accessor staging_account_id: ::String
       attr_accessor staging_source_server_arn: ::String
-      attr_accessor status: ("EXTENDED" | "EXTENSION_ERROR" | "NOT_EXTENDED")
+      attr_accessor error_message: ::String
       SENSITIVE: []
     end
 
     class StagingSourceServer
-      attr_accessor arn: ::String
       attr_accessor hostname: ::String
+      attr_accessor arn: ::String
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: [:tags]
     end
@@ -974,15 +980,15 @@ module Aws::Drs
     end
 
     class StartRecoveryRequest
-      attr_accessor is_drill: bool
       attr_accessor source_servers: ::Array[Types::StartRecoveryRequestSourceServer]
+      attr_accessor is_drill: bool
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: [:tags]
     end
 
     class StartRecoveryRequestSourceServer
-      attr_accessor recovery_snapshot_id: ::String
       attr_accessor source_server_id: ::String
+      attr_accessor recovery_snapshot_id: ::String
       SENSITIVE: []
     end
 
@@ -1002,15 +1008,15 @@ module Aws::Drs
     end
 
     class StartSourceNetworkRecoveryRequest
-      attr_accessor deploy_as_new: bool
       attr_accessor source_networks: ::Array[Types::StartSourceNetworkRecoveryRequestNetworkEntry]
+      attr_accessor deploy_as_new: bool
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: [:tags]
     end
 
     class StartSourceNetworkRecoveryRequestNetworkEntry
-      attr_accessor cfn_stack_name: ::String
       attr_accessor source_network_id: ::String
+      attr_accessor cfn_stack_name: ::String
       SENSITIVE: [:cfn_stack_name]
     end
 
@@ -1072,15 +1078,15 @@ module Aws::Drs
 
     class ThrottlingException
       attr_accessor message: ::String
+      attr_accessor service_code: ::String
       attr_accessor quota_code: ::String
       attr_accessor retry_after_seconds: ::String
-      attr_accessor service_code: ::String
       SENSITIVE: []
     end
 
     class UninitializedAccountException
-      attr_accessor code: ::String
       attr_accessor message: ::String
+      attr_accessor code: ::String
       SENSITIVE: []
     end
 
@@ -1091,36 +1097,37 @@ module Aws::Drs
     end
 
     class UpdateFailbackReplicationConfigurationRequest
-      attr_accessor bandwidth_throttling: ::Integer
-      attr_accessor name: ::String
       attr_accessor recovery_instance_id: ::String
+      attr_accessor name: ::String
+      attr_accessor bandwidth_throttling: ::Integer
       attr_accessor use_private_ip: bool
+      attr_accessor internet_protocol: ("IPV4" | "IPV6")
       SENSITIVE: []
     end
 
     class UpdateLaunchConfigurationRequest
+      attr_accessor source_server_id: ::String
+      attr_accessor name: ::String
+      attr_accessor launch_disposition: ("STOPPED" | "STARTED")
+      attr_accessor target_instance_type_right_sizing_method: ("NONE" | "BASIC" | "IN_AWS")
       attr_accessor copy_private_ip: bool
       attr_accessor copy_tags: bool
-      attr_accessor launch_disposition: ("STOPPED" | "STARTED")
-      attr_accessor launch_into_instance_properties: Types::LaunchIntoInstanceProperties
       attr_accessor licensing: Types::Licensing
-      attr_accessor name: ::String
       attr_accessor post_launch_enabled: bool
-      attr_accessor source_server_id: ::String
-      attr_accessor target_instance_type_right_sizing_method: ("NONE" | "BASIC" | "IN_AWS")
+      attr_accessor launch_into_instance_properties: Types::LaunchIntoInstanceProperties
       SENSITIVE: []
     end
 
     class UpdateLaunchConfigurationTemplateRequest
-      attr_accessor copy_private_ip: bool
-      attr_accessor copy_tags: bool
-      attr_accessor export_bucket_arn: ::String
       attr_accessor launch_configuration_template_id: ::String
       attr_accessor launch_disposition: ("STOPPED" | "STARTED")
-      attr_accessor launch_into_source_instance: bool
-      attr_accessor licensing: Types::Licensing
-      attr_accessor post_launch_enabled: bool
       attr_accessor target_instance_type_right_sizing_method: ("NONE" | "BASIC" | "IN_AWS")
+      attr_accessor copy_private_ip: bool
+      attr_accessor copy_tags: bool
+      attr_accessor licensing: Types::Licensing
+      attr_accessor export_bucket_arn: ::String
+      attr_accessor post_launch_enabled: bool
+      attr_accessor launch_into_source_instance: bool
       SENSITIVE: []
     end
 
@@ -1130,57 +1137,59 @@ module Aws::Drs
     end
 
     class UpdateReplicationConfigurationRequest
+      attr_accessor source_server_id: ::String
+      attr_accessor name: ::String
+      attr_accessor staging_area_subnet_id: ::String
       attr_accessor associate_default_security_group: bool
-      attr_accessor auto_replicate_new_disks: bool
-      attr_accessor bandwidth_throttling: ::Integer
-      attr_accessor create_public_ip: bool
-      attr_accessor data_plane_routing: ("PRIVATE_IP" | "PUBLIC_IP")
+      attr_accessor replication_servers_security_groups_i_ds: ::Array[::String]
+      attr_accessor replication_server_instance_type: ::String
+      attr_accessor use_dedicated_replication_server: bool
       attr_accessor default_large_staging_disk_type: ("GP2" | "GP3" | "ST1" | "AUTO")
+      attr_accessor replicated_disks: ::Array[Types::ReplicationConfigurationReplicatedDisk]
       attr_accessor ebs_encryption: ("DEFAULT" | "CUSTOM" | "NONE")
       attr_accessor ebs_encryption_key_arn: ::String
-      attr_accessor name: ::String
-      attr_accessor pit_policy: ::Array[Types::PITPolicyRule]
-      attr_accessor replicated_disks: ::Array[Types::ReplicationConfigurationReplicatedDisk]
-      attr_accessor replication_server_instance_type: ::String
-      attr_accessor replication_servers_security_groups_i_ds: ::Array[::String]
-      attr_accessor source_server_id: ::String
-      attr_accessor staging_area_subnet_id: ::String
+      attr_accessor bandwidth_throttling: ::Integer
+      attr_accessor data_plane_routing: ("PRIVATE_IP" | "PUBLIC_IP")
+      attr_accessor create_public_ip: bool
       attr_accessor staging_area_tags: ::Hash[::String, ::String]
-      attr_accessor use_dedicated_replication_server: bool
+      attr_accessor pit_policy: ::Array[Types::PITPolicyRule]
+      attr_accessor auto_replicate_new_disks: bool
+      attr_accessor internet_protocol: ("IPV4" | "IPV6")
       SENSITIVE: [:staging_area_tags]
     end
 
     class UpdateReplicationConfigurationTemplateRequest
+      attr_accessor replication_configuration_template_id: ::String
       attr_accessor arn: ::String
+      attr_accessor staging_area_subnet_id: ::String
       attr_accessor associate_default_security_group: bool
-      attr_accessor auto_replicate_new_disks: bool
-      attr_accessor bandwidth_throttling: ::Integer
-      attr_accessor create_public_ip: bool
-      attr_accessor data_plane_routing: ("PRIVATE_IP" | "PUBLIC_IP")
+      attr_accessor replication_servers_security_groups_i_ds: ::Array[::String]
+      attr_accessor replication_server_instance_type: ::String
+      attr_accessor use_dedicated_replication_server: bool
       attr_accessor default_large_staging_disk_type: ("GP2" | "GP3" | "ST1" | "AUTO")
       attr_accessor ebs_encryption: ("DEFAULT" | "CUSTOM" | "NONE")
       attr_accessor ebs_encryption_key_arn: ::String
-      attr_accessor pit_policy: ::Array[Types::PITPolicyRule]
-      attr_accessor replication_configuration_template_id: ::String
-      attr_accessor replication_server_instance_type: ::String
-      attr_accessor replication_servers_security_groups_i_ds: ::Array[::String]
-      attr_accessor staging_area_subnet_id: ::String
+      attr_accessor bandwidth_throttling: ::Integer
+      attr_accessor data_plane_routing: ("PRIVATE_IP" | "PUBLIC_IP")
+      attr_accessor create_public_ip: bool
       attr_accessor staging_area_tags: ::Hash[::String, ::String]
-      attr_accessor use_dedicated_replication_server: bool
+      attr_accessor pit_policy: ::Array[Types::PITPolicyRule]
+      attr_accessor auto_replicate_new_disks: bool
+      attr_accessor internet_protocol: ("IPV4" | "IPV6")
       SENSITIVE: [:staging_area_tags]
     end
 
     class ValidationException
-      attr_accessor code: ::String
-      attr_accessor field_list: ::Array[Types::ValidationExceptionField]
       attr_accessor message: ::String
+      attr_accessor code: ::String
       attr_accessor reason: ("unknownOperation" | "cannotParse" | "fieldValidationFailed" | "other")
+      attr_accessor field_list: ::Array[Types::ValidationExceptionField]
       SENSITIVE: []
     end
 
     class ValidationExceptionField
-      attr_accessor message: ::String
       attr_accessor name: ::String
+      attr_accessor message: ::String
       SENSITIVE: []
     end
   end

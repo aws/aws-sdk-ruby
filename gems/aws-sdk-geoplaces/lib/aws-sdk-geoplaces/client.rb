@@ -581,8 +581,9 @@ module Aws::GeoPlaces
     #   * `VNM`: Vietnam's view on the Paracel Islands and Spratly Islands
     #
     # @option params [String] :intended_use
-    #   Indicates if the results will be stored. Defaults to `SingleUse`, if
-    #   left empty.
+    #   Indicates if the query results will be persisted in customer
+    #   infrastructure. Defaults to `SingleUse` (not stored). Currently,
+    #   `Autocomplete` does not support storage of results.
     #
     # @option params [String] :key
     #   Optional: The API key to be used for authorization. Either an API key
@@ -798,20 +799,24 @@ module Aws::GeoPlaces
     #   the specified country.
     #
     # @option params [String] :intended_use
-    #   Indicates if the results will be stored. Defaults to `SingleUse`, if
-    #   left empty.
+    #   Indicates if the query results will be persisted in customer
+    #   infrastructure. Defaults to `SingleUse` (not stored). Not supported in
+    #   `ap-southeast-1` and `ap-southeast-5` regions for [GrabMaps][1]
+    #   customers.
     #
-    #   <note markdown="1"> Storing the response of an Geocode query is required to comply with
-    #   service terms, but charged at a higher cost per request. Please review
-    #   the [user agreement][1] and [service pricing structure][2] to
-    #   determine the correct setting for your use case.
+    #   <note markdown="1"> When storing `Geocode` responses, you *must* set this field to
+    #   `Storage` to comply with the terms of service. These requests will be
+    #   charged at a higher rate. Please review the [user agreement][2] and
+    #   [service pricing structure][3] to determine the correct setting for
+    #   your use case.
     #
     #    </note>
     #
     #
     #
-    #   [1]: https://aws.amazon.com/location/sla/
-    #   [2]: https://aws.amazon.com/location/pricing/
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
+    #   [2]: https://aws.amazon.com/location/sla/
+    #   [3]: https://aws.amazon.com/location/pricing/
     #
     # @option params [String] :key
     #   Optional: The API key to be used for authorization. Either an API key
@@ -1150,38 +1155,57 @@ module Aws::GeoPlaces
     #
     # @option params [Array<String>] :additional_features
     #   A list of optional additional parameters such as time zone that can be
-    #   requested for each result.
+    #   requested for each result. For [GrabMaps][1] customers,
+    #   `ap-southeast-1` and `ap-southeast-5` regions support only the
+    #   `TimeZone` value.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
     #
     # @option params [String] :language
     #   A list of [BCP 47][1] compliant language codes for the results to be
     #   rendered in. If there is no data for the result in the requested
     #   language, data will be returned in the default language for the entry.
+    #   For [GrabMaps][2] customers, `ap-southeast-1` and `ap-southeast-5`
+    #   regions support only the following codes: `en, id, km, lo, ms, my, pt,
+    #   th, tl, vi, zh`
     #
     #
     #
     #   [1]: https://en.wikipedia.org/wiki/IETF_language_tag
+    #   [2]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
     #
     # @option params [String] :political_view
     #   The alpha-2 or alpha-3 character code for the political view of a
     #   country. The political view applies to the results of the request to
     #   represent unresolved territorial claims through the point of view of
-    #   the specified country.
+    #   the specified country. Not supported in `ap-southeast-1` and
+    #   `ap-southeast-5` regions for [GrabMaps][1] customers.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
     #
     # @option params [String] :intended_use
-    #   Indicates if the results will be stored. Defaults to `SingleUse`, if
-    #   left empty.
+    #   Indicates if the query results will be persisted in customer
+    #   infrastructure. Defaults to `SingleUse` (not stored). Not supported in
+    #   `ap-southeast-1` and `ap-southeast-5` regions for [GrabMaps][1]
+    #   customers.
     #
-    #   <note markdown="1"> Storing the response of an GetPlace query is required to comply with
-    #   service terms, but charged at a higher cost per request. Please review
-    #   the [user agreement][1] and [service pricing structure][2] to
-    #   determine the correct setting for your use case.
+    #   <note markdown="1"> When storing `GetPlace` responses, you *must* set this field to
+    #   `Storage` to comply with the terms of service. These requests will be
+    #   charged at a higher rate. Please review the [user agreement][2] and
+    #   [service pricing structure][3] to determine the correct setting for
+    #   your use case.
     #
     #    </note>
     #
     #
     #
-    #   [1]: https://aws.amazon.com/location/sla/
-    #   [2]: https://aws.amazon.com/location/pricing/
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
+    #   [2]: https://aws.amazon.com/location/sla/
+    #   [3]: https://aws.amazon.com/location/pricing/
     #
     # @option params [String] :key
     #   Optional: The API key to be used for authorization. Either an API key
@@ -1493,7 +1517,13 @@ module Aws::GeoPlaces
     #
     # @option params [Integer] :query_radius
     #   The maximum distance in meters from the QueryPosition from which a
-    #   result will be returned.
+    #   result will be returned. For [GrabMaps][1] customers, `ap-southeast-1`
+    #   and `ap-southeast-5` regions support only up to a maximum value of
+    #   100,000.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
     #
     # @option params [Integer] :max_results
     #   An optional limit for the number of results returned in a single call.
@@ -1506,31 +1536,47 @@ module Aws::GeoPlaces
     #
     # @option params [Array<String>] :additional_features
     #   A list of optional additional parameters, such as time zone that can
-    #   be requested for each result.
+    #   be requested for each result. For [GrabMaps][1] customers,
+    #   `ap-southeast-1` and `ap-southeast-5` regions support only the
+    #   `TimeZone` value.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
     #
     # @option params [String] :language
     #   A list of [BCP 47][1] compliant language codes for the results to be
     #   rendered in. If there is no data for the result in the requested
     #   language, data will be returned in the default language for the entry.
+    #   For [GrabMaps][2] customers, `ap-southeast-1` and `ap-southeast-5`
+    #   regions support only the following codes: `en, id, km, lo, ms, my, pt,
+    #   th, tl, vi, zh`
     #
     #
     #
     #   [1]: https://en.wikipedia.org/wiki/IETF_language_tag
+    #   [2]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
     #
     # @option params [String] :political_view
     #   The alpha-2 or alpha-3 character code for the political view of a
     #   country. The political view applies to the results of the request to
     #   represent unresolved territorial claims through the point of view of
-    #   the specified country.
+    #   the specified country. Not supported in `ap-southeast-1` and
+    #   `ap-southeast-5` regions for [GrabMaps][1] customers.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
     #
     # @option params [String] :intended_use
-    #   Indicates if the results will be stored. Defaults to `SingleUse`, if
-    #   left empty.
+    #   Indicates if the query results will be persisted in customer
+    #   infrastructure. Defaults to `SingleUse` (not stored).
     #
-    #   <note markdown="1"> Storing the response of an ReverseGeocode query is required to comply
-    #   with service terms, but charged at a higher cost per request. Please
-    #   review the [user agreement][1] and [service pricing structure][2] to
-    #   determine the correct setting for your use case.
+    #   <note markdown="1"> When storing `ReverseGeocode` responses, you *must* set this field to
+    #   `Storage` to comply with the terms of service. These requests will be
+    #   charged at a higher rate. Please review the [user agreement][1] and
+    #   [service pricing structure][2] to determine the correct setting for
+    #   your use case.
     #
     #    </note>
     #
@@ -1748,20 +1794,24 @@ module Aws::GeoPlaces
     #   the specified country.
     #
     # @option params [String] :intended_use
-    #   Indicates if the results will be stored. Defaults to `SingleUse`, if
-    #   left empty.
+    #   Indicates if the query results will be persisted in customer
+    #   infrastructure. Defaults to `SingleUse` (not stored). Not supported in
+    #   `ap-southeast-1` and `ap-southeast-5` regions for [GrabMaps][1]
+    #   customers.
     #
-    #   <note markdown="1"> Storing the response of an SearchNearby query is required to comply
-    #   with service terms, but charged at a higher cost per request. Please
-    #   review the [user agreement][1] and [service pricing structure][2] to
-    #   determine the correct setting for your use case.
+    #   <note markdown="1"> When storing `SearchNearby` responses, you *must* set this field to
+    #   `Storage` to comply with the terms of service. These requests will be
+    #   charged at a higher rate. Please review the [user agreement][2] and
+    #   [service pricing structure][3] to determine the correct setting for
+    #   your use case.
     #
     #    </note>
     #
     #
     #
-    #   [1]: https://aws.amazon.com/location/sla/
-    #   [2]: https://aws.amazon.com/location/pricing/
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
+    #   [2]: https://aws.amazon.com/location/sla/
+    #   [3]: https://aws.amazon.com/location/pricing/
     #
     # @option params [String] :next_token
     #   If `nextToken` is returned, there are more results available. The
@@ -1990,12 +2040,18 @@ module Aws::GeoPlaces
     # @option params [String] :query_id
     #   The query Id returned by the suggest API. If passed in the request,
     #   the SearchText API will preform a SearchText query with the improved
-    #   query terms for the original query made to the suggest API.
+    #   query terms for the original query made to the suggest API. Not
+    #   available in `ap-southeast-1` and `ap-southeast-5` regions for
+    #   [GrabMaps][1] customers.
     #
     #   <note markdown="1"> Exactly one of the following fields must be set: `QueryText` or
     #   `QueryId`.
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
     #
     # @option params [Integer] :max_results
     #   An optional limit for the number of results returned in a single call.
@@ -2019,31 +2075,47 @@ module Aws::GeoPlaces
     #
     # @option params [Array<String>] :additional_features
     #   A list of optional additional parameters, such as time zone, that can
-    #   be requested for each result.
+    #   be requested for each result. For [GrabMaps][1] customers,
+    #   `ap-southeast-1` and `ap-southeast-5` regions support only the
+    #   `TimeZone` value.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
     #
     # @option params [String] :language
     #   A list of [BCP 47][1] compliant language codes for the results to be
     #   rendered in. If there is no data for the result in the requested
     #   language, data will be returned in the default language for the entry.
+    #   For [GrabMaps][2] customers, `ap-southeast-1` and `ap-southeast-5`
+    #   regions support only the following codes: `en, id, km, lo, ms, my, pt,
+    #   th, tl, vi, zh`
     #
     #
     #
     #   [1]: https://en.wikipedia.org/wiki/IETF_language_tag
+    #   [2]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
     #
     # @option params [String] :political_view
     #   The alpha-2 or alpha-3 character code for the political view of a
     #   country. The political view applies to the results of the request to
     #   represent unresolved territorial claims through the point of view of
-    #   the specified country.
+    #   the specified country. Not available in `ap-southeast-1` and
+    #   `ap-southeast-5` regions for [GrabMaps][1] customers.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
     #
     # @option params [String] :intended_use
-    #   Indicates if the results will be stored. Defaults to `SingleUse`, if
-    #   left empty.
+    #   Indicates if the query results will be persisted in customer
+    #   infrastructure. Defaults to `SingleUse` (not stored).
     #
-    #   <note markdown="1"> Storing the response of an SearchText query is required to comply with
-    #   service terms, but charged at a higher cost per request. Please review
-    #   the [user agreement][1] and [service pricing structure][2] to
-    #   determine the correct setting for your use case.
+    #   <note markdown="1"> When storing `SearchText` responses, you *must* set this field to
+    #   `Storage` to comply with the terms of service. These requests will be
+    #   charged at a higher rate. Please review the [user agreement][1] and
+    #   [service pricing structure][2] to determine the correct setting for
+    #   your use case.
     #
     #    </note>
     #
@@ -2289,7 +2361,12 @@ module Aws::GeoPlaces
     #
     # @option params [Integer] :max_query_refinements
     #   Maximum number of query terms to be returned for use with a search
-    #   text query.
+    #   text query. Not supported in `ap-southeast-1` and `ap-southeast-5`
+    #   regions for [GrabMaps][1] customers.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
     #
     # @option params [Array<Float>] :bias_position
     #   The position, in longitude and latitude, that the results should be
@@ -2308,26 +2385,42 @@ module Aws::GeoPlaces
     #
     # @option params [Array<String>] :additional_features
     #   A list of optional additional parameters, such as time zone, that can
-    #   be requested for each result.
+    #   be requested for each result. For [GrabMaps][1] customers,
+    #   `ap-southeast-1` and `ap-southeast-5` regions support only the `Core`
+    #   and `TimeZone` values.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
     #
     # @option params [String] :language
     #   A list of [BCP 47][1] compliant language codes for the results to be
     #   rendered in. If there is no data for the result in the requested
     #   language, data will be returned in the default language for the entry.
+    #   For [GrabMaps][2] customers, `ap-southeast-1` and `ap-southeast-5`
+    #   regions support only the following codes: `en, id, km, lo, ms, my, pt,
+    #   th, tl, vi, zh`
     #
     #
     #
     #   [1]: https://en.wikipedia.org/wiki/IETF_language_tag
+    #   [2]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
     #
     # @option params [String] :political_view
     #   The alpha-2 or alpha-3 character code for the political view of a
     #   country. The political view applies to the results of the request to
     #   represent unresolved territorial claims through the point of view of
-    #   the specified country.
+    #   the specified country. Not supported in `ap-southeast-1` and
+    #   `ap-southeast-5` regions for [GrabMaps][1] customers.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
     #
     # @option params [String] :intended_use
-    #   Indicates if the results will be stored. Defaults to `SingleUse`, if
-    #   left empty.
+    #   Indicates if the query results will be persisted in customer
+    #   infrastructure. Defaults to `SingleUse` (not stored). Currently,
+    #   `Suggest` does not support storage of results.
     #
     # @option params [String] :key
     #   Optional: The API key to be used for authorization. Either an API key
@@ -2514,7 +2607,7 @@ module Aws::GeoPlaces
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-geoplaces'
-      context[:gem_version] = '1.20.0'
+      context[:gem_version] = '1.22.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

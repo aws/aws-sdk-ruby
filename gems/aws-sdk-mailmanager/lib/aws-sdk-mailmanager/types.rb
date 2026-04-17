@@ -399,6 +399,57 @@ module Aws::MailManager
       class Unknown < ArchiveStringToEvaluate; end
     end
 
+    # The action to send a bounce response for the email. When executed,
+    # this action generates a non-delivery report (bounce) back to the
+    # sender.
+    #
+    # @!attribute [rw] action_failure_policy
+    #   A policy that states what to do in the case of failure. The action
+    #   will fail if there are configuration errors. For example, the caller
+    #   does not have the permissions to call the SendBounce API.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role to use to send the
+    #   bounce message.
+    #   @return [String]
+    #
+    # @!attribute [rw] sender
+    #   The sender email address of the bounce message.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_code
+    #   The enhanced status code for the bounce, in the format of x.y.z
+    #   (e.g. 5.1.1).
+    #   @return [String]
+    #
+    # @!attribute [rw] smtp_reply_code
+    #   The SMTP reply code for the bounce, as defined by RFC 5321.
+    #   @return [String]
+    #
+    # @!attribute [rw] diagnostic_message
+    #   The diagnostic message included in the Diagnostic-Code header of the
+    #   bounce.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   The human-readable text to include in the bounce message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mailmanager-2023-10-17/BounceAction AWS API Documentation
+    #
+    class BounceAction < Struct.new(
+      :action_failure_policy,
+      :role_arn,
+      :sender,
+      :status_code,
+      :smtp_reply_code,
+      :diagnostic_message,
+      :message)
+      SENSITIVE = [:sender, :diagnostic_message, :message]
+      include Aws::Structure
+    end
+
     # The request configuration has conflicts. For details, see the
     # accompanying error message.
     #
@@ -678,6 +729,11 @@ module Aws::MailManager
     #   IPv4-only.
     #   @return [Types::NetworkConfiguration]
     #
+    # @!attribute [rw] tls_policy
+    #   The Transport Layer Security (TLS) policy for the ingress point. The
+    #   FIPS value is only valid in US and Canada regions.
+    #   @return [String]
+    #
     # @!attribute [rw] tags
     #   The tags used to organize, track, or control access for the
     #   resource. For example, \{ "tags": \{"key1":"value1",
@@ -694,6 +750,7 @@ module Aws::MailManager
       :traffic_policy_id,
       :ingress_point_configuration,
       :network_configuration,
+      :tls_policy,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -1688,10 +1745,16 @@ module Aws::MailManager
     #   The identifier of an ingress endpoint.
     #   @return [String]
     #
+    # @!attribute [rw] include_trust_store_contents
+    #   Whether to include the trust store contents in the response. Use
+    #   INCLUDE to retrieve trust store certificate and CRL contents.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mailmanager-2023-10-17/GetIngressPointRequest AWS API Documentation
     #
     class GetIngressPointRequest < Struct.new(
-      :ingress_point_id)
+      :ingress_point_id,
+      :include_trust_store_contents)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1740,6 +1803,11 @@ module Aws::MailManager
     #   The network configuration for the ingress point.
     #   @return [Types::NetworkConfiguration]
     #
+    # @!attribute [rw] tls_policy
+    #   The selected Transport Layer Security (TLS) policy of the ingress
+    #   point.
+    #   @return [String]
+    #
     # @!attribute [rw] created_timestamp
     #   The timestamp of when the ingress endpoint was created.
     #   @return [Time]
@@ -1761,6 +1829,7 @@ module Aws::MailManager
       :traffic_policy_id,
       :ingress_point_auth_configuration,
       :network_configuration,
+      :tls_policy,
       :created_timestamp,
       :last_updated_timestamp)
       SENSITIVE = []
@@ -2300,11 +2369,17 @@ module Aws::MailManager
     #   the ingress endpoint resource.
     #   @return [String]
     #
+    # @!attribute [rw] tls_auth_configuration
+    #   The mutual TLS authentication configuration for the ingress endpoint
+    #   resource.
+    #   @return [Types::TlsAuthConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mailmanager-2023-10-17/IngressPointAuthConfiguration AWS API Documentation
     #
     class IngressPointAuthConfiguration < Struct.new(
       :ingress_point_password_configuration,
-      :secret_arn)
+      :secret_arn,
+      :tls_auth_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2321,11 +2396,17 @@ module Aws::MailManager
     #   The SecretsManager::Secret ARN of the ingress endpoint resource.
     #   @return [String]
     #
+    # @!attribute [rw] tls_auth_configuration
+    #   The mutual TLS authentication configuration of the ingress endpoint
+    #   resource.
+    #   @return [Types::TlsAuthConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mailmanager-2023-10-17/IngressPointConfiguration AWS API Documentation
     #
     class IngressPointConfiguration < Struct.new(
       :smtp_password,
       :secret_arn,
+      :tls_auth_configuration,
       :unknown)
       SENSITIVE = [:smtp_password]
       include Aws::Structure
@@ -2333,6 +2414,7 @@ module Aws::MailManager
 
       class SmtpPassword < IngressPointConfiguration; end
       class SecretArn < IngressPointConfiguration; end
+      class TlsAuthConfiguration < IngressPointConfiguration; end
       class Unknown < IngressPointConfiguration; end
     end
 
@@ -2467,6 +2549,48 @@ module Aws::MailManager
 
       class Attribute < IngressTlsProtocolToEvaluate; end
       class Unknown < IngressTlsProtocolToEvaluate; end
+    end
+
+    # The action to invoke an Amazon Web Services Lambda function for
+    # processing the email.
+    #
+    # @!attribute [rw] action_failure_policy
+    #   A policy that states what to do in the case of failure. The action
+    #   will fail if there are configuration errors. For example, the Amazon
+    #   Web Services Lambda function no longer exists.
+    #   @return [String]
+    #
+    # @!attribute [rw] function_arn
+    #   The Amazon Resource Name (ARN) of the Lambda function to invoke.
+    #   @return [String]
+    #
+    # @!attribute [rw] invocation_type
+    #   The invocation type of the Lambda function. Use EVENT for
+    #   asynchronous invocation or REQUEST\_RESPONSE for synchronous
+    #   invocation.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role to use to invoke the
+    #   Lambda function.
+    #   @return [String]
+    #
+    # @!attribute [rw] retry_time_minutes
+    #   The maximum time in minutes that the email processing can be retried
+    #   if the Lambda invocation fails. The maximum value is 2160 minutes
+    #   (36 hours).
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mailmanager-2023-10-17/InvokeLambdaAction AWS API Documentation
+    #
+    class InvokeLambdaAction < Struct.new(
+      :action_failure_policy,
+      :function_arn,
+      :invocation_type,
+      :role_arn,
+      :retry_time_minutes)
+      SENSITIVE = []
+      include Aws::Structure
     end
 
     # @!attribute [rw] next_token
@@ -3597,6 +3721,15 @@ module Aws::MailManager
     #   This action publishes the email content to an Amazon SNS topic.
     #   @return [Types::SnsAction]
     #
+    # @!attribute [rw] bounce
+    #   This action sends a bounce response for the email.
+    #   @return [Types::BounceAction]
+    #
+    # @!attribute [rw] invoke_lambda
+    #   This action invokes an Amazon Web Services Lambda function to
+    #   process the email.
+    #   @return [Types::InvokeLambdaAction]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mailmanager-2023-10-17/RuleAction AWS API Documentation
     #
     class RuleAction < Struct.new(
@@ -3610,6 +3743,8 @@ module Aws::MailManager
       :deliver_to_mailbox,
       :deliver_to_q_business,
       :publish_to_sns,
+      :bounce,
+      :invoke_lambda,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
@@ -3625,6 +3760,8 @@ module Aws::MailManager
       class DeliverToMailbox < RuleAction; end
       class DeliverToQBusiness < RuleAction; end
       class PublishToSns < RuleAction; end
+      class Bounce < RuleAction; end
+      class InvokeLambda < RuleAction; end
       class Unknown < RuleAction; end
     end
 
@@ -3943,7 +4080,7 @@ module Aws::MailManager
       :evaluate,
       :operator,
       :values)
-      SENSITIVE = []
+      SENSITIVE = [:values]
       include Aws::Structure
     end
 
@@ -3967,12 +4104,18 @@ module Aws::MailManager
     #   condition expression.
     #   @return [Types::Analysis]
     #
+    # @!attribute [rw] client_certificate_attribute
+    #   The client certificate attribute to evaluate in a string condition
+    #   expression.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mailmanager-2023-10-17/RuleStringToEvaluate AWS API Documentation
     #
     class RuleStringToEvaluate < Struct.new(
       :attribute,
       :mime_header_attribute,
       :analysis,
+      :client_certificate_attribute,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
@@ -3981,6 +4124,7 @@ module Aws::MailManager
       class Attribute < RuleStringToEvaluate; end
       class MimeHeaderAttribute < RuleStringToEvaluate; end
       class Analysis < RuleStringToEvaluate; end
+      class ClientCertificateAttribute < RuleStringToEvaluate; end
       class Unknown < RuleStringToEvaluate; end
     end
 
@@ -4490,6 +4634,20 @@ module Aws::MailManager
       include Aws::Structure
     end
 
+    # The mutual TLS authentication configuration for an ingress endpoint.
+    #
+    # @!attribute [rw] trust_store
+    #   The trust store configuration for mutual TLS authentication.
+    #   @return [Types::TrustStore]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mailmanager-2023-10-17/TlsAuthConfiguration AWS API Documentation
+    #
+    class TlsAuthConfiguration < Struct.new(
+      :trust_store)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The structure of a traffic policy resource which is a container for
     # policy statements.
     #
@@ -4514,6 +4672,36 @@ module Aws::MailManager
       :traffic_policy_id,
       :default_action)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The trust store used for mutual TLS authentication. It contains the
+    # certificate authority (CA) certificates and optional certificate
+    # revocation list (CRL).
+    #
+    # @!attribute [rw] ca_content
+    #   The PEM-encoded certificate authority (CA) certificates bundle for
+    #   the trust store.
+    #   @return [String]
+    #
+    # @!attribute [rw] crl_content
+    #   The PEM-encoded certificate revocation lists (CRLs) for the trust
+    #   store. There can be one CRL per certificate authority (CA) in the
+    #   trust store.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_key_arn
+    #   The Amazon Resource Name (ARN) of the KMS key used to encrypt the
+    #   trust store contents.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mailmanager-2023-10-17/TrustStore AWS API Documentation
+    #
+    class TrustStore < Struct.new(
+      :ca_content,
+      :crl_content,
+      :kms_key_arn)
+      SENSITIVE = [:ca_content, :crl_content]
       include Aws::Structure
     end
 
@@ -4600,6 +4788,12 @@ module Aws::MailManager
     #   either an SMTP password or a secret ARN.
     #   @return [Types::IngressPointConfiguration]
     #
+    # @!attribute [rw] tls_policy
+    #   The Transport Layer Security (TLS) policy for the ingress point.
+    #   Valid values are REQUIRED, OPTIONAL. Only ingress endpoints using
+    #   REQUIRED or OPTIONAL as TlsPolicy can be updated.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mailmanager-2023-10-17/UpdateIngressPointRequest AWS API Documentation
     #
     class UpdateIngressPointRequest < Struct.new(
@@ -4608,7 +4802,8 @@ module Aws::MailManager
       :status_to_update,
       :rule_set_id,
       :traffic_policy_id,
-      :ingress_point_configuration)
+      :ingress_point_configuration,
+      :tls_policy)
       SENSITIVE = []
       include Aws::Structure
     end

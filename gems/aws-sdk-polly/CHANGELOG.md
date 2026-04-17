@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.123.0 (2026-03-25)
+------------------
+
+* Feature - Add support for Mu-law and A-law codecs for output format
+
+1.122.0 (2026-03-19)
+------------------
+
+* Feature - Added bi-directional streaming functionality through a new API, StartSpeechSynthesisStream. This API allows streaming input text through inbound events and receiving audio as part of an output stream simultaneously.
+
+1.121.0 (2026-03-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.120.0 (2026-03-11)
+------------------
+
+* Feature - Added support for the new voices - Ambre (fr-FR), Beatrice (it-IT), Florian (fr-FR), Lennart (de-DE), Lorenzo (it-IT) and Tiffany (en-US). They are available as a Generative voices only.
+
 1.119.0 (2026-01-16)
 ------------------
 

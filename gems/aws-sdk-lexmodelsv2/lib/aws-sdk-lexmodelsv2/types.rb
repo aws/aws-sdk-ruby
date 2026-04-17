@@ -2097,6 +2097,66 @@ module Aws::LexModelsV2
       include Aws::Structure
     end
 
+    # Contains summary information about a historical bot analysis
+    # execution.
+    #
+    # @!attribute [rw] bot_analyzer_status
+    #   The status of the historical analysis execution.
+    #
+    #   Valid Values: `Processing | Available | Failed | Stopping | Stopped`
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_date_time
+    #   The date and time when the analysis was initiated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] bot_analyzer_request_id
+    #   The unique identifier for the analysis request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/BotAnalyzerHistorySummary AWS API Documentation
+    #
+    class BotAnalyzerHistorySummary < Struct.new(
+      :bot_analyzer_status,
+      :creation_date_time,
+      :bot_analyzer_request_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains a recommendation for bot optimization identified by the Bot
+    # Analyzer.
+    #
+    # @!attribute [rw] issue_location
+    #   The location information for the identified issue within the bot
+    #   configuration.
+    #   @return [Types::IssueLocation]
+    #
+    # @!attribute [rw] priority
+    #   The priority level of the recommendation.
+    #
+    #   Valid Values: `High | Medium | Low`
+    #   @return [String]
+    #
+    # @!attribute [rw] issue_description
+    #   A detailed description of the identified configuration issue.
+    #   @return [String]
+    #
+    # @!attribute [rw] proposed_fix
+    #   The recommended solution to address the identified issue.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/BotAnalyzerRecommendation AWS API Documentation
+    #
+    class BotAnalyzerRecommendation < Struct.new(
+      :issue_location,
+      :priority,
+      :issue_description,
+      :proposed_fix)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Provides the identity of a the bot that was exported.
     #
     # @!attribute [rw] bot_id
@@ -5151,6 +5211,28 @@ module Aws::LexModelsV2
     end
 
     # @!attribute [rw] bot_id
+    #   The unique identifier of the bot.
+    #   @return [String]
+    #
+    # @!attribute [rw] bot_analyzer_request_id
+    #   The unique identifier of the analysis request whose recommendations
+    #   should be deleted.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/DeleteBotAnalyzerRecommendationRequest AWS API Documentation
+    #
+    class DeleteBotAnalyzerRecommendationRequest < Struct.new(
+      :bot_id,
+      :bot_analyzer_request_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/DeleteBotAnalyzerRecommendationResponse AWS API Documentation
+    #
+    class DeleteBotAnalyzerRecommendationResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] bot_id
     #   The unique identifier of the bot that contains the locale.
     #   @return [String]
     #
@@ -5807,6 +5889,83 @@ module Aws::LexModelsV2
       :creation_date_time,
       :last_updated_date_time,
       :parent_bot_networks)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] bot_id
+    #   The unique identifier of the bot.
+    #   @return [String]
+    #
+    # @!attribute [rw] bot_analyzer_request_id
+    #   The unique identifier of the analysis request.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   If the response from a previous request was truncated, the
+    #   `nextToken` value is used to retrieve the next page of
+    #   recommendations.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of recommendations to return in the response. The
+    #   default is 5.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/DescribeBotAnalyzerRecommendationRequest AWS API Documentation
+    #
+    class DescribeBotAnalyzerRecommendationRequest < Struct.new(
+      :bot_id,
+      :bot_analyzer_request_id,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] bot_id
+    #   The unique identifier of the bot.
+    #   @return [String]
+    #
+    # @!attribute [rw] bot_version
+    #   The version of the bot that was analyzed.
+    #   @return [String]
+    #
+    # @!attribute [rw] locale_id
+    #   The locale identifier of the bot locale that was analyzed.
+    #   @return [String]
+    #
+    # @!attribute [rw] bot_analyzer_status
+    #   The current status of the analysis.
+    #
+    #   Valid Values: `Processing | Available | Failed | Stopping | Stopped`
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_date_time
+    #   The date and time when the analysis was initiated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] bot_analyzer_recommendation_list
+    #   A list of recommendations for optimizing your bot configuration.
+    #   Each recommendation includes the issue location, priority,
+    #   description, and proposed fix.
+    #   @return [Array<Types::BotAnalyzerRecommendation>]
+    #
+    # @!attribute [rw] next_token
+    #   If the response is truncated, this token can be used in a subsequent
+    #   request to retrieve the next page of recommendations.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/DescribeBotAnalyzerRecommendationResponse AWS API Documentation
+    #
+    class DescribeBotAnalyzerRecommendationResponse < Struct.new(
+      :bot_id,
+      :bot_version,
+      :locale_id,
+      :bot_analyzer_status,
+      :creation_date_time,
+      :bot_analyzer_recommendation_list,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8741,6 +8900,31 @@ module Aws::LexModelsV2
       include Aws::Structure
     end
 
+    # Specifies the location of an identified issue within the bot
+    # configuration.
+    #
+    # @!attribute [rw] bot_locale
+    #   The locale identifier where the issue was found.
+    #   @return [String]
+    #
+    # @!attribute [rw] intent_id
+    #   The intent identifier where the issue was found, if applicable.
+    #   @return [String]
+    #
+    # @!attribute [rw] slot_id
+    #   The slot identifier where the issue was found, if applicable.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/IssueLocation AWS API Documentation
+    #
+    class IssueLocation < Struct.new(
+      :bot_locale,
+      :intent_id,
+      :slot_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Provides configuration information for the `AMAZON.KendraSearchIntent`
     # intent. When you use this intent, Amazon Lex searches the specified
     # Amazon Kendra index and returns documents from the index that match
@@ -9084,6 +9268,77 @@ module Aws::LexModelsV2
       :bot_alias_summaries,
       :next_token,
       :bot_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] bot_id
+    #   The unique identifier of the bot.
+    #   @return [String]
+    #
+    # @!attribute [rw] locale_id
+    #   The locale identifier to filter the history. If not specified,
+    #   returns history for all locales.
+    #   @return [String]
+    #
+    # @!attribute [rw] bot_version
+    #   The bot version to filter the history. If not specified, defaults to
+    #   `DRAFT`.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   If the response from a previous request was truncated, the
+    #   `nextToken` value is used to retrieve the next page of history
+    #   entries.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of history entries to return in the response. The
+    #   default is 10.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/ListBotAnalyzerHistoryRequest AWS API Documentation
+    #
+    class ListBotAnalyzerHistoryRequest < Struct.new(
+      :bot_id,
+      :locale_id,
+      :bot_version,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] bot_id
+    #   The unique identifier of the bot.
+    #   @return [String]
+    #
+    # @!attribute [rw] locale_id
+    #   The locale identifier used to filter the history.
+    #   @return [String]
+    #
+    # @!attribute [rw] bot_version
+    #   The bot version used to filter the history.
+    #   @return [String]
+    #
+    # @!attribute [rw] bot_analyzer_history_list
+    #   A list of historical analysis executions, ordered by creation date
+    #   with the most recent first.
+    #   @return [Array<Types::BotAnalyzerHistorySummary>]
+    #
+    # @!attribute [rw] next_token
+    #   If the response is truncated, this token can be used in a subsequent
+    #   request to retrieve the next page of history entries.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/ListBotAnalyzerHistoryResponse AWS API Documentation
+    #
+    class ListBotAnalyzerHistoryResponse < Struct.new(
+      :bot_id,
+      :locale_id,
+      :bot_version,
+      :bot_analyzer_history_list,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13202,6 +13457,79 @@ module Aws::LexModelsV2
     end
 
     # @!attribute [rw] bot_id
+    #   The unique identifier of the bot to analyze.
+    #   @return [String]
+    #
+    # @!attribute [rw] analysis_scope
+    #   The scope of analysis to perform. Currently only `BotLocale` scope
+    #   is supported.
+    #
+    #   Valid Values: `BotLocale`
+    #   @return [String]
+    #
+    # @!attribute [rw] locale_id
+    #   The locale identifier for the bot locale to analyze. Required when
+    #   `analysisScope` is `BotLocale`.
+    #   @return [String]
+    #
+    # @!attribute [rw] bot_version
+    #   The version of the bot to analyze. Defaults to `DRAFT` if not
+    #   specified.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/StartBotAnalyzerRequest AWS API Documentation
+    #
+    class StartBotAnalyzerRequest < Struct.new(
+      :bot_id,
+      :analysis_scope,
+      :locale_id,
+      :bot_version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] bot_id
+    #   The unique identifier of the bot being analyzed.
+    #   @return [String]
+    #
+    # @!attribute [rw] bot_version
+    #   The version of the bot being analyzed.
+    #   @return [String]
+    #
+    # @!attribute [rw] locale_id
+    #   The locale identifier of the bot locale being analyzed.
+    #   @return [String]
+    #
+    # @!attribute [rw] bot_analyzer_status
+    #   The current status of the analysis. The initial status is
+    #   `Processing`.
+    #
+    #   Valid Values: `Processing | Available | Failed | Stopping | Stopped`
+    #   @return [String]
+    #
+    # @!attribute [rw] bot_analyzer_request_id
+    #   A unique identifier for this analysis request. Use this identifier
+    #   to check the status and retrieve results.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_date_time
+    #   The date and time when the analysis was initiated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/StartBotAnalyzerResponse AWS API Documentation
+    #
+    class StartBotAnalyzerResponse < Struct.new(
+      :bot_id,
+      :bot_version,
+      :locale_id,
+      :bot_analyzer_status,
+      :bot_analyzer_request_id,
+      :creation_date_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] bot_id
     #   The unique identifier of the bot containing the bot recommendation.
     #   @return [String]
     #
@@ -13645,6 +13973,58 @@ module Aws::LexModelsV2
       :frequency_in_seconds,
       :timeout_in_seconds,
       :allow_interrupt)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] bot_id
+    #   The unique identifier of the bot.
+    #   @return [String]
+    #
+    # @!attribute [rw] bot_analyzer_request_id
+    #   The unique identifier of the analysis request to stop.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/StopBotAnalyzerRequest AWS API Documentation
+    #
+    class StopBotAnalyzerRequest < Struct.new(
+      :bot_id,
+      :bot_analyzer_request_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] bot_id
+    #   The unique identifier of the bot.
+    #   @return [String]
+    #
+    # @!attribute [rw] bot_version
+    #   The version of the bot.
+    #   @return [String]
+    #
+    # @!attribute [rw] locale_id
+    #   The locale identifier of the bot locale.
+    #   @return [String]
+    #
+    # @!attribute [rw] bot_analyzer_status
+    #   The updated status of the analysis. The status will be `Stopping`
+    #   and will eventually transition to `Stopped`.
+    #
+    #   Valid Values: `Processing | Available | Failed | Stopping | Stopped`
+    #   @return [String]
+    #
+    # @!attribute [rw] bot_analyzer_request_id
+    #   The unique identifier of the analysis request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/StopBotAnalyzerResponse AWS API Documentation
+    #
+    class StopBotAnalyzerResponse < Struct.new(
+      :bot_id,
+      :bot_version,
+      :locale_id,
+      :bot_analyzer_status,
+      :bot_analyzer_request_id)
       SENSITIVE = []
       include Aws::Structure
     end

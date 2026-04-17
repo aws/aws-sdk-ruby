@@ -228,7 +228,29 @@ module Aws
                       ?evaluation_target: {
                         span_ids: Array[::String]?,
                         trace_ids: Array[::String]?
-                      }
+                      },
+                      ?evaluation_reference_inputs: Array[
+                        {
+                          context: {
+                            span_context: {
+                              session_id: ::String,
+                              trace_id: ::String?,
+                              span_id: ::String?
+                            }?
+                          },
+                          expected_response: {
+                            text: ::String?
+                          }?,
+                          assertions: Array[
+                            {
+                              text: ::String?
+                            },
+                          ]?,
+                          expected_trajectory: {
+                            tool_names: Array[::String]?
+                          }?
+                        },
+                      ]
                     ) -> _EvaluateResponseSuccess
                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _EvaluateResponseSuccess
 
@@ -254,11 +276,13 @@ module Aws
         def created_at: () -> ::Time
         def view_port: () -> Types::ViewPort
         def extensions: () -> ::Array[Types::BrowserExtension]
+        def enterprise_policies: () -> ::Array[Types::BrowserEnterprisePolicy]
         def profile_configuration: () -> Types::BrowserProfileConfiguration
         def session_timeout_seconds: () -> ::Integer
         def status: () -> ("READY" | "TERMINATED")
         def streams: () -> Types::BrowserSessionStream
         def proxy_configuration: () -> Types::ProxyConfiguration
+        def certificates: () -> ::Array[Types::Certificate]
         def session_replay_artifact: () -> ::String
         def last_updated_at: () -> ::Time
       end
@@ -277,6 +301,7 @@ module Aws
         def created_at: () -> ::Time
         def session_timeout_seconds: () -> ::Integer
         def status: () -> ("READY" | "TERMINATED")
+        def certificates: () -> ::Array[Types::Certificate]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCore/Client.html#get_code_interpreter_session-instance_method
       def get_code_interpreter_session: (
@@ -405,6 +430,86 @@ module Aws
                                 ) ?{ (*untyped) -> void } -> _InvokeAgentRuntimeResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) ?{ (*untyped) -> void } -> _InvokeAgentRuntimeResponseSuccess
 
+      interface _InvokeAgentRuntimeCommandResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::InvokeAgentRuntimeCommandResponse]
+        def runtime_session_id: () -> ::String
+        def trace_id: () -> ::String
+        def trace_parent: () -> ::String
+        def trace_state: () -> ::String
+        def baggage: () -> ::String
+        def content_type: () -> ::String
+        def status_code: () -> ::Integer
+        def stream: () -> Types::InvokeAgentRuntimeCommandStreamOutput
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCore/Client.html#invoke_agent_runtime_command-instance_method
+      def invoke_agent_runtime_command: (
+                                          ?content_type: ::String,
+                                          ?accept: ::String,
+                                          ?runtime_session_id: ::String,
+                                          ?trace_id: ::String,
+                                          ?trace_parent: ::String,
+                                          ?trace_state: ::String,
+                                          ?baggage: ::String,
+                                          agent_runtime_arn: ::String,
+                                          ?qualifier: ::String,
+                                          ?account_id: ::String,
+                                          body: {
+                                            command: ::String,
+                                            timeout: ::Integer?
+                                          }
+                                        ) ?{ (*untyped) -> void } -> _InvokeAgentRuntimeCommandResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) ?{ (*untyped) -> void } -> _InvokeAgentRuntimeCommandResponseSuccess
+
+      interface _InvokeBrowserResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::InvokeBrowserResponse]
+        def result: () -> Types::BrowserActionResult
+        def session_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCore/Client.html#invoke_browser-instance_method
+      def invoke_browser: (
+                            browser_identifier: ::String,
+                            session_id: ::String,
+                            action: {
+                              mouse_click: {
+                                x: ::Integer,
+                                y: ::Integer,
+                                button: ("LEFT" | "RIGHT" | "MIDDLE")?,
+                                click_count: ::Integer?
+                              }?,
+                              mouse_move: {
+                                x: ::Integer,
+                                y: ::Integer
+                              }?,
+                              mouse_drag: {
+                                end_x: ::Integer,
+                                end_y: ::Integer,
+                                start_x: ::Integer,
+                                start_y: ::Integer,
+                                button: ("LEFT" | "RIGHT" | "MIDDLE")?
+                              }?,
+                              mouse_scroll: {
+                                x: ::Integer,
+                                y: ::Integer,
+                                delta_x: ::Integer?,
+                                delta_y: ::Integer?
+                              }?,
+                              key_type: {
+                                text: ::String
+                              }?,
+                              key_press: {
+                                key: ::String,
+                                presses: ::Integer?
+                              }?,
+                              key_shortcut: {
+                                keys: Array[::String]
+                              }?,
+                              screenshot: {
+                                format: ("PNG")?
+                              }?
+                            }
+                          ) -> _InvokeBrowserResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _InvokeBrowserResponseSuccess
+
       interface _InvokeCodeInterpreterResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::InvokeCodeInterpreterResponse]
         def session_id: () -> ::String
@@ -432,7 +537,8 @@ module Aws
                                          },
                                        ]?,
                                        directory_path: ::String?,
-                                       task_id: ::String?
+                                       task_id: ::String?,
+                                       runtime: ("nodejs" | "deno" | "python")?
                                      }
                                    ) ?{ (*untyped) -> void } -> _InvokeCodeInterpreterResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) ?{ (*untyped) -> void } -> _InvokeCodeInterpreterResponseSuccess
@@ -540,7 +646,8 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCore/Client.html#list_memory_records-instance_method
       def list_memory_records: (
                                  memory_id: ::String,
-                                 namespace: ::String,
+                                 ?namespace: ::String,
+                                 ?namespace_path: ::String,
                                  ?memory_strategy_id: ::String,
                                  ?max_results: ::Integer,
                                  ?next_token: ::String
@@ -557,7 +664,10 @@ module Aws
                            memory_id: ::String,
                            actor_id: ::String,
                            ?max_results: ::Integer,
-                           ?next_token: ::String
+                           ?next_token: ::String,
+                           ?filter: {
+                             event_filter: ("HAS_EVENTS")?
+                           }
                          ) -> _ListSessionsResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSessionsResponseSuccess
 
@@ -569,7 +679,8 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCore/Client.html#retrieve_memory_records-instance_method
       def retrieve_memory_records: (
                                      memory_id: ::String,
-                                     namespace: ::String,
+                                     ?namespace: ::String,
+                                     ?namespace_path: ::String,
                                      search_criteria: {
                                        search_query: ::String,
                                        memory_strategy_id: ::String?,
@@ -610,6 +721,20 @@ module Aws
                                           ?client_token: ::String
                                         ) -> _SaveBrowserSessionProfileResponseSuccess
                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SaveBrowserSessionProfileResponseSuccess
+
+      interface _SearchRegistryRecordsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SearchRegistryRecordsResponse]
+        def registry_records: () -> ::Array[Types::RegistryRecordSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCore/Client.html#search_registry_records-instance_method
+      def search_registry_records: (
+                                     search_query: ::String,
+                                     registry_ids: Array[::String],
+                                     ?max_results: ::Integer,
+                                     ?filters: {
+                                     }
+                                   ) -> _SearchRegistryRecordsResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SearchRegistryRecordsResponseSuccess
 
       interface _StartBrowserSessionResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::StartBrowserSessionResponse]
@@ -662,6 +787,27 @@ module Aws
                                        domain_patterns: Array[::String]?
                                      }?
                                    },
+                                   ?enterprise_policies: Array[
+                                     {
+                                       location: {
+                                         s3: {
+                                           bucket: ::String,
+                                           prefix: ::String,
+                                           version_id: ::String?
+                                         }?
+                                       },
+                                       type: ("MANAGED" | "RECOMMENDED")?
+                                     },
+                                   ],
+                                   ?certificates: Array[
+                                     {
+                                       location: {
+                                         secrets_manager: {
+                                           secret_arn: ::String
+                                         }?
+                                       }
+                                     },
+                                   ],
                                    ?client_token: ::String
                                  ) -> _StartBrowserSessionResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartBrowserSessionResponseSuccess
@@ -679,6 +825,15 @@ module Aws
                                             code_interpreter_identifier: ::String,
                                             ?name: ::String,
                                             ?session_timeout_seconds: ::Integer,
+                                            ?certificates: Array[
+                                              {
+                                                location: {
+                                                  secrets_manager: {
+                                                    secret_arn: ::String
+                                                  }?
+                                                }
+                                              },
+                                            ],
                                             ?client_token: ::String
                                           ) -> _StartCodeInterpreterSessionResponseSuccess
                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartCodeInterpreterSessionResponseSuccess

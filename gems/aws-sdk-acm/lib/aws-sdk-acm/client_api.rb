@@ -15,6 +15,8 @@ module Aws::ACM
     include Seahorse::Model
 
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
+    AcmCertificateMetadata = Shapes::StructureShape.new(name: 'AcmCertificateMetadata')
+    AcmCertificateMetadataFilter = Shapes::UnionShape.new(name: 'AcmCertificateMetadataFilter')
     AddTagsToCertificateRequest = Shapes::StructureShape.new(name: 'AddTagsToCertificateRequest')
     Arn = Shapes::StringShape.new(name: 'Arn')
     AvailabilityErrorMessage = Shapes::StringShape.new(name: 'AvailabilityErrorMessage')
@@ -24,18 +26,33 @@ module Aws::ACM
     CertificateChainBlob = Shapes::BlobShape.new(name: 'CertificateChainBlob')
     CertificateDetail = Shapes::StructureShape.new(name: 'CertificateDetail')
     CertificateExport = Shapes::StringShape.new(name: 'CertificateExport')
+    CertificateFilter = Shapes::UnionShape.new(name: 'CertificateFilter')
+    CertificateFilterStatement = Shapes::UnionShape.new(name: 'CertificateFilterStatement')
+    CertificateFilterStatementList = Shapes::ListShape.new(name: 'CertificateFilterStatementList')
     CertificateManagedBy = Shapes::StringShape.new(name: 'CertificateManagedBy')
+    CertificateMetadata = Shapes::UnionShape.new(name: 'CertificateMetadata')
     CertificateOptions = Shapes::StructureShape.new(name: 'CertificateOptions')
+    CertificateSearchResult = Shapes::StructureShape.new(name: 'CertificateSearchResult')
+    CertificateSearchResultList = Shapes::ListShape.new(name: 'CertificateSearchResultList')
     CertificateStatus = Shapes::StringShape.new(name: 'CertificateStatus')
     CertificateStatuses = Shapes::ListShape.new(name: 'CertificateStatuses')
     CertificateSummary = Shapes::StructureShape.new(name: 'CertificateSummary')
     CertificateSummaryList = Shapes::ListShape.new(name: 'CertificateSummaryList')
     CertificateTransparencyLoggingPreference = Shapes::StringShape.new(name: 'CertificateTransparencyLoggingPreference')
     CertificateType = Shapes::StringShape.new(name: 'CertificateType')
+    CommonNameFilter = Shapes::StructureShape.new(name: 'CommonNameFilter')
+    ComparisonOperator = Shapes::StringShape.new(name: 'ComparisonOperator')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
+    CoralAvailabilityThrottledResource = Shapes::StringShape.new(name: 'CoralAvailabilityThrottledResource')
+    CoralAvailabilityThrottlingReason = Shapes::StringShape.new(name: 'CoralAvailabilityThrottlingReason')
+    CustomAttribute = Shapes::StructureShape.new(name: 'CustomAttribute')
+    CustomAttributeList = Shapes::ListShape.new(name: 'CustomAttributeList')
     DeleteCertificateRequest = Shapes::StructureShape.new(name: 'DeleteCertificateRequest')
     DescribeCertificateRequest = Shapes::StructureShape.new(name: 'DescribeCertificateRequest')
     DescribeCertificateResponse = Shapes::StructureShape.new(name: 'DescribeCertificateResponse')
+    DistinguishedName = Shapes::StructureShape.new(name: 'DistinguishedName')
+    DnsNameFilter = Shapes::StructureShape.new(name: 'DnsNameFilter')
+    DomainComponentList = Shapes::ListShape.new(name: 'DomainComponentList')
     DomainList = Shapes::ListShape.new(name: 'DomainList')
     DomainNameString = Shapes::StringShape.new(name: 'DomainNameString')
     DomainStatus = Shapes::StringShape.new(name: 'DomainStatus')
@@ -52,7 +69,10 @@ module Aws::ACM
     ExtendedKeyUsageName = Shapes::StringShape.new(name: 'ExtendedKeyUsageName')
     ExtendedKeyUsageNames = Shapes::ListShape.new(name: 'ExtendedKeyUsageNames')
     FailureReason = Shapes::StringShape.new(name: 'FailureReason')
+    FilterString = Shapes::StringShape.new(name: 'FilterString')
     Filters = Shapes::StructureShape.new(name: 'Filters')
+    GeneralName = Shapes::UnionShape.new(name: 'GeneralName')
+    GeneralNameList = Shapes::ListShape.new(name: 'GeneralNameList')
     GetAccountConfigurationResponse = Shapes::StructureShape.new(name: 'GetAccountConfigurationResponse')
     GetCertificateRequest = Shapes::StructureShape.new(name: 'GetCertificateRequest')
     GetCertificateResponse = Shapes::StructureShape.new(name: 'GetCertificateResponse')
@@ -82,6 +102,7 @@ module Aws::ACM
     MaxItems = Shapes::IntegerShape.new(name: 'MaxItems')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     NullableBoolean = Shapes::BooleanShape.new(name: 'NullableBoolean')
+    OtherName = Shapes::StructureShape.new(name: 'OtherName')
     PassphraseBlob = Shapes::BlobShape.new(name: 'PassphraseBlob')
     PcaArn = Shapes::StringShape.new(name: 'PcaArn')
     PositiveInteger = Shapes::IntegerShape.new(name: 'PositiveInteger')
@@ -104,10 +125,18 @@ module Aws::ACM
     RevocationReason = Shapes::StringShape.new(name: 'RevocationReason')
     RevokeCertificateRequest = Shapes::StructureShape.new(name: 'RevokeCertificateRequest')
     RevokeCertificateResponse = Shapes::StructureShape.new(name: 'RevokeCertificateResponse')
+    SearchCertificatesRequest = Shapes::StructureShape.new(name: 'SearchCertificatesRequest')
+    SearchCertificatesResponse = Shapes::StructureShape.new(name: 'SearchCertificatesResponse')
+    SearchCertificatesSortBy = Shapes::StringShape.new(name: 'SearchCertificatesSortBy')
+    SearchCertificatesSortOrder = Shapes::StringShape.new(name: 'SearchCertificatesSortOrder')
+    SearchMaxResults = Shapes::IntegerShape.new(name: 'SearchMaxResults')
+    SerialNumber = Shapes::StringShape.new(name: 'SerialNumber')
     ServiceErrorMessage = Shapes::StringShape.new(name: 'ServiceErrorMessage')
     SortBy = Shapes::StringShape.new(name: 'SortBy')
     SortOrder = Shapes::StringShape.new(name: 'SortOrder')
     String = Shapes::StringShape.new(name: 'String')
+    SubjectAlternativeNameFilter = Shapes::UnionShape.new(name: 'SubjectAlternativeNameFilter')
+    SubjectFilter = Shapes::UnionShape.new(name: 'SubjectFilter')
     TStamp = Shapes::TimestampShape.new(name: 'TStamp')
     Tag = Shapes::StructureShape.new(name: 'Tag')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
@@ -115,15 +144,55 @@ module Aws::ACM
     TagPolicyException = Shapes::StructureShape.new(name: 'TagPolicyException')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
+    ThrottlingReason = Shapes::StructureShape.new(name: 'ThrottlingReason')
+    ThrottlingReasonList = Shapes::ListShape.new(name: 'ThrottlingReasonList')
+    TimestampRange = Shapes::StructureShape.new(name: 'TimestampRange')
     TooManyTagsException = Shapes::StructureShape.new(name: 'TooManyTagsException')
     UpdateCertificateOptionsRequest = Shapes::StructureShape.new(name: 'UpdateCertificateOptionsRequest')
     ValidationEmailList = Shapes::ListShape.new(name: 'ValidationEmailList')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
     ValidationExceptionMessage = Shapes::StringShape.new(name: 'ValidationExceptionMessage')
     ValidationMethod = Shapes::StringShape.new(name: 'ValidationMethod')
+    X509AttributeFilter = Shapes::UnionShape.new(name: 'X509AttributeFilter')
+    X509Attributes = Shapes::StructureShape.new(name: 'X509Attributes')
 
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: ServiceErrorMessage, location_name: "Message"))
     AccessDeniedException.struct_class = Types::AccessDeniedException
+
+    AcmCertificateMetadata.add_member(:created_at, Shapes::ShapeRef.new(shape: TStamp, location_name: "CreatedAt"))
+    AcmCertificateMetadata.add_member(:exported, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "Exported"))
+    AcmCertificateMetadata.add_member(:imported_at, Shapes::ShapeRef.new(shape: TStamp, location_name: "ImportedAt"))
+    AcmCertificateMetadata.add_member(:in_use, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "InUse"))
+    AcmCertificateMetadata.add_member(:issued_at, Shapes::ShapeRef.new(shape: TStamp, location_name: "IssuedAt"))
+    AcmCertificateMetadata.add_member(:renewal_eligibility, Shapes::ShapeRef.new(shape: RenewalEligibility, location_name: "RenewalEligibility"))
+    AcmCertificateMetadata.add_member(:revoked_at, Shapes::ShapeRef.new(shape: TStamp, location_name: "RevokedAt"))
+    AcmCertificateMetadata.add_member(:status, Shapes::ShapeRef.new(shape: CertificateStatus, location_name: "Status"))
+    AcmCertificateMetadata.add_member(:renewal_status, Shapes::ShapeRef.new(shape: RenewalStatus, location_name: "RenewalStatus"))
+    AcmCertificateMetadata.add_member(:type, Shapes::ShapeRef.new(shape: CertificateType, location_name: "Type"))
+    AcmCertificateMetadata.add_member(:export_option, Shapes::ShapeRef.new(shape: CertificateExport, location_name: "ExportOption"))
+    AcmCertificateMetadata.add_member(:managed_by, Shapes::ShapeRef.new(shape: CertificateManagedBy, location_name: "ManagedBy"))
+    AcmCertificateMetadata.add_member(:validation_method, Shapes::ShapeRef.new(shape: ValidationMethod, location_name: "ValidationMethod"))
+    AcmCertificateMetadata.struct_class = Types::AcmCertificateMetadata
+
+    AcmCertificateMetadataFilter.add_member(:status, Shapes::ShapeRef.new(shape: CertificateStatus, location_name: "Status"))
+    AcmCertificateMetadataFilter.add_member(:renewal_status, Shapes::ShapeRef.new(shape: RenewalStatus, location_name: "RenewalStatus"))
+    AcmCertificateMetadataFilter.add_member(:type, Shapes::ShapeRef.new(shape: CertificateType, location_name: "Type"))
+    AcmCertificateMetadataFilter.add_member(:in_use, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "InUse"))
+    AcmCertificateMetadataFilter.add_member(:exported, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "Exported"))
+    AcmCertificateMetadataFilter.add_member(:export_option, Shapes::ShapeRef.new(shape: CertificateExport, location_name: "ExportOption"))
+    AcmCertificateMetadataFilter.add_member(:managed_by, Shapes::ShapeRef.new(shape: CertificateManagedBy, location_name: "ManagedBy"))
+    AcmCertificateMetadataFilter.add_member(:validation_method, Shapes::ShapeRef.new(shape: ValidationMethod, location_name: "ValidationMethod"))
+    AcmCertificateMetadataFilter.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    AcmCertificateMetadataFilter.add_member_subclass(:status, Types::AcmCertificateMetadataFilter::Status)
+    AcmCertificateMetadataFilter.add_member_subclass(:renewal_status, Types::AcmCertificateMetadataFilter::RenewalStatus)
+    AcmCertificateMetadataFilter.add_member_subclass(:type, Types::AcmCertificateMetadataFilter::Type)
+    AcmCertificateMetadataFilter.add_member_subclass(:in_use, Types::AcmCertificateMetadataFilter::InUse)
+    AcmCertificateMetadataFilter.add_member_subclass(:exported, Types::AcmCertificateMetadataFilter::Exported)
+    AcmCertificateMetadataFilter.add_member_subclass(:export_option, Types::AcmCertificateMetadataFilter::ExportOption)
+    AcmCertificateMetadataFilter.add_member_subclass(:managed_by, Types::AcmCertificateMetadataFilter::ManagedBy)
+    AcmCertificateMetadataFilter.add_member_subclass(:validation_method, Types::AcmCertificateMetadataFilter::ValidationMethod)
+    AcmCertificateMetadataFilter.add_member_subclass(:unknown, Types::AcmCertificateMetadataFilter::Unknown)
+    AcmCertificateMetadataFilter.struct_class = Types::AcmCertificateMetadataFilter
 
     AddTagsToCertificateRequest.add_member(:certificate_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "CertificateArn"))
     AddTagsToCertificateRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, required: true, location_name: "Tags"))
@@ -158,9 +227,46 @@ module Aws::ACM
     CertificateDetail.add_member(:options, Shapes::ShapeRef.new(shape: CertificateOptions, location_name: "Options"))
     CertificateDetail.struct_class = Types::CertificateDetail
 
+    CertificateFilter.add_member(:certificate_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "CertificateArn"))
+    CertificateFilter.add_member(:x509_attribute_filter, Shapes::ShapeRef.new(shape: X509AttributeFilter, location_name: "X509AttributeFilter"))
+    CertificateFilter.add_member(:acm_certificate_metadata_filter, Shapes::ShapeRef.new(shape: AcmCertificateMetadataFilter, location_name: "AcmCertificateMetadataFilter"))
+    CertificateFilter.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    CertificateFilter.add_member_subclass(:certificate_arn, Types::CertificateFilter::CertificateArn)
+    CertificateFilter.add_member_subclass(:x509_attribute_filter, Types::CertificateFilter::X509AttributeFilter)
+    CertificateFilter.add_member_subclass(:acm_certificate_metadata_filter, Types::CertificateFilter::AcmCertificateMetadataFilter)
+    CertificateFilter.add_member_subclass(:unknown, Types::CertificateFilter::Unknown)
+    CertificateFilter.struct_class = Types::CertificateFilter
+
+    CertificateFilterStatement.add_member(:and, Shapes::ShapeRef.new(shape: CertificateFilterStatementList, location_name: "And"))
+    CertificateFilterStatement.add_member(:or, Shapes::ShapeRef.new(shape: CertificateFilterStatementList, location_name: "Or"))
+    CertificateFilterStatement.add_member(:not, Shapes::ShapeRef.new(shape: CertificateFilterStatement, location_name: "Not"))
+    CertificateFilterStatement.add_member(:filter, Shapes::ShapeRef.new(shape: CertificateFilter, location_name: "Filter"))
+    CertificateFilterStatement.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    CertificateFilterStatement.add_member_subclass(:and, Types::CertificateFilterStatement::And)
+    CertificateFilterStatement.add_member_subclass(:or, Types::CertificateFilterStatement::Or)
+    CertificateFilterStatement.add_member_subclass(:not, Types::CertificateFilterStatement::Not)
+    CertificateFilterStatement.add_member_subclass(:filter, Types::CertificateFilterStatement::Filter)
+    CertificateFilterStatement.add_member_subclass(:unknown, Types::CertificateFilterStatement::Unknown)
+    CertificateFilterStatement.struct_class = Types::CertificateFilterStatement
+
+    CertificateFilterStatementList.member = Shapes::ShapeRef.new(shape: CertificateFilterStatement)
+
+    CertificateMetadata.add_member(:acm_certificate_metadata, Shapes::ShapeRef.new(shape: AcmCertificateMetadata, location_name: "AcmCertificateMetadata"))
+    CertificateMetadata.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    CertificateMetadata.add_member_subclass(:acm_certificate_metadata, Types::CertificateMetadata::AcmCertificateMetadata)
+    CertificateMetadata.add_member_subclass(:unknown, Types::CertificateMetadata::Unknown)
+    CertificateMetadata.struct_class = Types::CertificateMetadata
+
     CertificateOptions.add_member(:certificate_transparency_logging_preference, Shapes::ShapeRef.new(shape: CertificateTransparencyLoggingPreference, location_name: "CertificateTransparencyLoggingPreference"))
     CertificateOptions.add_member(:export, Shapes::ShapeRef.new(shape: CertificateExport, location_name: "Export"))
     CertificateOptions.struct_class = Types::CertificateOptions
+
+    CertificateSearchResult.add_member(:certificate_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "CertificateArn"))
+    CertificateSearchResult.add_member(:x509_attributes, Shapes::ShapeRef.new(shape: X509Attributes, location_name: "X509Attributes"))
+    CertificateSearchResult.add_member(:certificate_metadata, Shapes::ShapeRef.new(shape: CertificateMetadata, location_name: "CertificateMetadata"))
+    CertificateSearchResult.struct_class = Types::CertificateSearchResult
+
+    CertificateSearchResultList.member = Shapes::ShapeRef.new(shape: CertificateSearchResult)
 
     CertificateStatuses.member = Shapes::ShapeRef.new(shape: CertificateStatus)
 
@@ -188,8 +294,18 @@ module Aws::ACM
 
     CertificateSummaryList.member = Shapes::ShapeRef.new(shape: CertificateSummary)
 
+    CommonNameFilter.add_member(:value, Shapes::ShapeRef.new(shape: FilterString, required: true, location_name: "Value"))
+    CommonNameFilter.add_member(:comparison_operator, Shapes::ShapeRef.new(shape: ComparisonOperator, required: true, location_name: "ComparisonOperator"))
+    CommonNameFilter.struct_class = Types::CommonNameFilter
+
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     ConflictException.struct_class = Types::ConflictException
+
+    CustomAttribute.add_member(:object_identifier, Shapes::ShapeRef.new(shape: String, location_name: "ObjectIdentifier"))
+    CustomAttribute.add_member(:value, Shapes::ShapeRef.new(shape: String, location_name: "Value"))
+    CustomAttribute.struct_class = Types::CustomAttribute
+
+    CustomAttributeList.member = Shapes::ShapeRef.new(shape: CustomAttribute)
 
     DeleteCertificateRequest.add_member(:certificate_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "CertificateArn"))
     DeleteCertificateRequest.struct_class = Types::DeleteCertificateRequest
@@ -199,6 +315,30 @@ module Aws::ACM
 
     DescribeCertificateResponse.add_member(:certificate, Shapes::ShapeRef.new(shape: CertificateDetail, location_name: "Certificate"))
     DescribeCertificateResponse.struct_class = Types::DescribeCertificateResponse
+
+    DistinguishedName.add_member(:common_name, Shapes::ShapeRef.new(shape: String, location_name: "CommonName"))
+    DistinguishedName.add_member(:domain_components, Shapes::ShapeRef.new(shape: DomainComponentList, location_name: "DomainComponents"))
+    DistinguishedName.add_member(:country, Shapes::ShapeRef.new(shape: String, location_name: "Country"))
+    DistinguishedName.add_member(:custom_attributes, Shapes::ShapeRef.new(shape: CustomAttributeList, location_name: "CustomAttributes"))
+    DistinguishedName.add_member(:distinguished_name_qualifier, Shapes::ShapeRef.new(shape: String, location_name: "DistinguishedNameQualifier"))
+    DistinguishedName.add_member(:generation_qualifier, Shapes::ShapeRef.new(shape: String, location_name: "GenerationQualifier"))
+    DistinguishedName.add_member(:given_name, Shapes::ShapeRef.new(shape: String, location_name: "GivenName"))
+    DistinguishedName.add_member(:initials, Shapes::ShapeRef.new(shape: String, location_name: "Initials"))
+    DistinguishedName.add_member(:locality, Shapes::ShapeRef.new(shape: String, location_name: "Locality"))
+    DistinguishedName.add_member(:organization, Shapes::ShapeRef.new(shape: String, location_name: "Organization"))
+    DistinguishedName.add_member(:organizational_unit, Shapes::ShapeRef.new(shape: String, location_name: "OrganizationalUnit"))
+    DistinguishedName.add_member(:pseudonym, Shapes::ShapeRef.new(shape: String, location_name: "Pseudonym"))
+    DistinguishedName.add_member(:serial_number, Shapes::ShapeRef.new(shape: String, location_name: "SerialNumber"))
+    DistinguishedName.add_member(:state, Shapes::ShapeRef.new(shape: String, location_name: "State"))
+    DistinguishedName.add_member(:surname, Shapes::ShapeRef.new(shape: String, location_name: "Surname"))
+    DistinguishedName.add_member(:title, Shapes::ShapeRef.new(shape: String, location_name: "Title"))
+    DistinguishedName.struct_class = Types::DistinguishedName
+
+    DnsNameFilter.add_member(:value, Shapes::ShapeRef.new(shape: FilterString, required: true, location_name: "Value"))
+    DnsNameFilter.add_member(:comparison_operator, Shapes::ShapeRef.new(shape: ComparisonOperator, required: true, location_name: "ComparisonOperator"))
+    DnsNameFilter.struct_class = Types::DnsNameFilter
+
+    DomainComponentList.member = Shapes::ShapeRef.new(shape: String)
 
     DomainList.member = Shapes::ShapeRef.new(shape: DomainNameString)
 
@@ -247,6 +387,26 @@ module Aws::ACM
     Filters.add_member(:export_option, Shapes::ShapeRef.new(shape: CertificateExport, location_name: "exportOption"))
     Filters.add_member(:managed_by, Shapes::ShapeRef.new(shape: CertificateManagedBy, location_name: "managedBy"))
     Filters.struct_class = Types::Filters
+
+    GeneralName.add_member(:directory_name, Shapes::ShapeRef.new(shape: DistinguishedName, location_name: "DirectoryName"))
+    GeneralName.add_member(:dns_name, Shapes::ShapeRef.new(shape: String, location_name: "DnsName"))
+    GeneralName.add_member(:ip_address, Shapes::ShapeRef.new(shape: String, location_name: "IpAddress"))
+    GeneralName.add_member(:other_name, Shapes::ShapeRef.new(shape: OtherName, location_name: "OtherName"))
+    GeneralName.add_member(:registered_id, Shapes::ShapeRef.new(shape: String, location_name: "RegisteredId"))
+    GeneralName.add_member(:rfc_822_name, Shapes::ShapeRef.new(shape: String, location_name: "Rfc822Name"))
+    GeneralName.add_member(:uniform_resource_identifier, Shapes::ShapeRef.new(shape: String, location_name: "UniformResourceIdentifier"))
+    GeneralName.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    GeneralName.add_member_subclass(:directory_name, Types::GeneralName::DirectoryName)
+    GeneralName.add_member_subclass(:dns_name, Types::GeneralName::DnsName)
+    GeneralName.add_member_subclass(:ip_address, Types::GeneralName::IpAddress)
+    GeneralName.add_member_subclass(:other_name, Types::GeneralName::OtherName)
+    GeneralName.add_member_subclass(:registered_id, Types::GeneralName::RegisteredId)
+    GeneralName.add_member_subclass(:rfc_822_name, Types::GeneralName::Rfc822Name)
+    GeneralName.add_member_subclass(:uniform_resource_identifier, Types::GeneralName::UniformResourceIdentifier)
+    GeneralName.add_member_subclass(:unknown, Types::GeneralName::Unknown)
+    GeneralName.struct_class = Types::GeneralName
+
+    GeneralNameList.member = Shapes::ShapeRef.new(shape: GeneralName)
 
     GetAccountConfigurationResponse.add_member(:expiry_events, Shapes::ShapeRef.new(shape: ExpiryEventsConfiguration, location_name: "ExpiryEvents"))
     GetAccountConfigurationResponse.struct_class = Types::GetAccountConfigurationResponse
@@ -324,6 +484,10 @@ module Aws::ACM
     ListTagsForCertificateResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     ListTagsForCertificateResponse.struct_class = Types::ListTagsForCertificateResponse
 
+    OtherName.add_member(:object_identifier, Shapes::ShapeRef.new(shape: String, location_name: "ObjectIdentifier"))
+    OtherName.add_member(:value, Shapes::ShapeRef.new(shape: String, location_name: "Value"))
+    OtherName.struct_class = Types::OtherName
+
     PutAccountConfigurationRequest.add_member(:expiry_events, Shapes::ShapeRef.new(shape: ExpiryEventsConfiguration, location_name: "ExpiryEvents"))
     PutAccountConfigurationRequest.add_member(:idempotency_token, Shapes::ShapeRef.new(shape: IdempotencyToken, required: true, location_name: "IdempotencyToken"))
     PutAccountConfigurationRequest.struct_class = Types::PutAccountConfigurationRequest
@@ -382,6 +546,29 @@ module Aws::ACM
     RevokeCertificateResponse.add_member(:certificate_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "CertificateArn"))
     RevokeCertificateResponse.struct_class = Types::RevokeCertificateResponse
 
+    SearchCertificatesRequest.add_member(:filter_statement, Shapes::ShapeRef.new(shape: CertificateFilterStatement, location_name: "FilterStatement"))
+    SearchCertificatesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: SearchMaxResults, location_name: "MaxResults"))
+    SearchCertificatesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    SearchCertificatesRequest.add_member(:sort_by, Shapes::ShapeRef.new(shape: SearchCertificatesSortBy, location_name: "SortBy"))
+    SearchCertificatesRequest.add_member(:sort_order, Shapes::ShapeRef.new(shape: SearchCertificatesSortOrder, location_name: "SortOrder"))
+    SearchCertificatesRequest.struct_class = Types::SearchCertificatesRequest
+
+    SearchCertificatesResponse.add_member(:results, Shapes::ShapeRef.new(shape: CertificateSearchResultList, location_name: "Results"))
+    SearchCertificatesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    SearchCertificatesResponse.struct_class = Types::SearchCertificatesResponse
+
+    SubjectAlternativeNameFilter.add_member(:dns_name, Shapes::ShapeRef.new(shape: DnsNameFilter, location_name: "DnsName"))
+    SubjectAlternativeNameFilter.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    SubjectAlternativeNameFilter.add_member_subclass(:dns_name, Types::SubjectAlternativeNameFilter::DnsName)
+    SubjectAlternativeNameFilter.add_member_subclass(:unknown, Types::SubjectAlternativeNameFilter::Unknown)
+    SubjectAlternativeNameFilter.struct_class = Types::SubjectAlternativeNameFilter
+
+    SubjectFilter.add_member(:common_name, Shapes::ShapeRef.new(shape: CommonNameFilter, location_name: "CommonName"))
+    SubjectFilter.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    SubjectFilter.add_member_subclass(:common_name, Types::SubjectFilter::CommonName)
+    SubjectFilter.add_member_subclass(:unknown, Types::SubjectFilter::Unknown)
+    SubjectFilter.struct_class = Types::SubjectFilter
+
     Tag.add_member(:key, Shapes::ShapeRef.new(shape: TagKey, required: true, location_name: "Key"))
     Tag.add_member(:value, Shapes::ShapeRef.new(shape: TagValue, location_name: "Value"))
     Tag.struct_class = Types::Tag
@@ -392,7 +579,18 @@ module Aws::ACM
     TagPolicyException.struct_class = Types::TagPolicyException
 
     ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: AvailabilityErrorMessage, location_name: "message"))
+    ThrottlingException.add_member(:throttling_reasons, Shapes::ShapeRef.new(shape: ThrottlingReasonList, location_name: "throttlingReasons"))
     ThrottlingException.struct_class = Types::ThrottlingException
+
+    ThrottlingReason.add_member(:reason, Shapes::ShapeRef.new(shape: CoralAvailabilityThrottlingReason, location_name: "reason"))
+    ThrottlingReason.add_member(:resource, Shapes::ShapeRef.new(shape: CoralAvailabilityThrottledResource, location_name: "resource"))
+    ThrottlingReason.struct_class = Types::ThrottlingReason
+
+    ThrottlingReasonList.member = Shapes::ShapeRef.new(shape: ThrottlingReason)
+
+    TimestampRange.add_member(:start, Shapes::ShapeRef.new(shape: TStamp, location_name: "Start"))
+    TimestampRange.add_member(:end, Shapes::ShapeRef.new(shape: TStamp, location_name: "End"))
+    TimestampRange.struct_class = Types::TimestampRange
 
     TooManyTagsException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     TooManyTagsException.struct_class = Types::TooManyTagsException
@@ -405,6 +603,37 @@ module Aws::ACM
 
     ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: ValidationExceptionMessage, location_name: "message"))
     ValidationException.struct_class = Types::ValidationException
+
+    X509AttributeFilter.add_member(:subject, Shapes::ShapeRef.new(shape: SubjectFilter, location_name: "Subject"))
+    X509AttributeFilter.add_member(:subject_alternative_name, Shapes::ShapeRef.new(shape: SubjectAlternativeNameFilter, location_name: "SubjectAlternativeName"))
+    X509AttributeFilter.add_member(:extended_key_usage, Shapes::ShapeRef.new(shape: ExtendedKeyUsageName, location_name: "ExtendedKeyUsage"))
+    X509AttributeFilter.add_member(:key_usage, Shapes::ShapeRef.new(shape: KeyUsageName, location_name: "KeyUsage"))
+    X509AttributeFilter.add_member(:key_algorithm, Shapes::ShapeRef.new(shape: KeyAlgorithm, location_name: "KeyAlgorithm"))
+    X509AttributeFilter.add_member(:serial_number, Shapes::ShapeRef.new(shape: SerialNumber, location_name: "SerialNumber"))
+    X509AttributeFilter.add_member(:not_after, Shapes::ShapeRef.new(shape: TimestampRange, location_name: "NotAfter"))
+    X509AttributeFilter.add_member(:not_before, Shapes::ShapeRef.new(shape: TimestampRange, location_name: "NotBefore"))
+    X509AttributeFilter.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    X509AttributeFilter.add_member_subclass(:subject, Types::X509AttributeFilter::Subject)
+    X509AttributeFilter.add_member_subclass(:subject_alternative_name, Types::X509AttributeFilter::SubjectAlternativeName)
+    X509AttributeFilter.add_member_subclass(:extended_key_usage, Types::X509AttributeFilter::ExtendedKeyUsage)
+    X509AttributeFilter.add_member_subclass(:key_usage, Types::X509AttributeFilter::KeyUsage)
+    X509AttributeFilter.add_member_subclass(:key_algorithm, Types::X509AttributeFilter::KeyAlgorithm)
+    X509AttributeFilter.add_member_subclass(:serial_number, Types::X509AttributeFilter::SerialNumber)
+    X509AttributeFilter.add_member_subclass(:not_after, Types::X509AttributeFilter::NotAfter)
+    X509AttributeFilter.add_member_subclass(:not_before, Types::X509AttributeFilter::NotBefore)
+    X509AttributeFilter.add_member_subclass(:unknown, Types::X509AttributeFilter::Unknown)
+    X509AttributeFilter.struct_class = Types::X509AttributeFilter
+
+    X509Attributes.add_member(:issuer, Shapes::ShapeRef.new(shape: DistinguishedName, location_name: "Issuer"))
+    X509Attributes.add_member(:subject, Shapes::ShapeRef.new(shape: DistinguishedName, location_name: "Subject"))
+    X509Attributes.add_member(:subject_alternative_names, Shapes::ShapeRef.new(shape: GeneralNameList, location_name: "SubjectAlternativeNames"))
+    X509Attributes.add_member(:extended_key_usages, Shapes::ShapeRef.new(shape: ExtendedKeyUsageNames, location_name: "ExtendedKeyUsages"))
+    X509Attributes.add_member(:key_algorithm, Shapes::ShapeRef.new(shape: KeyAlgorithm, location_name: "KeyAlgorithm"))
+    X509Attributes.add_member(:key_usages, Shapes::ShapeRef.new(shape: KeyUsageNames, location_name: "KeyUsages"))
+    X509Attributes.add_member(:serial_number, Shapes::ShapeRef.new(shape: SerialNumber, location_name: "SerialNumber"))
+    X509Attributes.add_member(:not_after, Shapes::ShapeRef.new(shape: TStamp, location_name: "NotAfter"))
+    X509Attributes.add_member(:not_before, Shapes::ShapeRef.new(shape: TStamp, location_name: "NotBefore"))
+    X509Attributes.struct_class = Types::X509Attributes
 
 
     # @api private
@@ -474,6 +703,7 @@ module Aws::ACM
         o.input = Shapes::ShapeRef.new(shape: ExportCertificateRequest)
         o.output = Shapes::ShapeRef.new(shape: ExportCertificateResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArnException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: RequestInProgressException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
@@ -510,6 +740,7 @@ module Aws::ACM
         o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArnException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidTagException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
@@ -616,6 +847,23 @@ module Aws::ACM
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:search_certificates, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "SearchCertificates"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: SearchCertificatesRequest)
+        o.output = Shapes::ShapeRef.new(shape: SearchCertificatesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:update_certificate_options, Seahorse::Model::Operation.new.tap do |o|

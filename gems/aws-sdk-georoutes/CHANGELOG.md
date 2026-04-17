@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.20.0 (2026-04-01)
+------------------
+
+* Feature - This release makes RoutingBoundary optional in CalculateRouteMatrix, set StopDuration with a maximum value of 49999 for CalculateRoutes, set TrailerCount with a maximum value of 4, and introduces region restrictions for Grab Maps users.
+
+1.19.0 (2026-03-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.18.0 (2026-01-16)
 ------------------
 

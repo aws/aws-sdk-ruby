@@ -942,6 +942,20 @@
         {"shape":"ConcurrentModificationException"}
       ]
     },
+    "DrainSessionInstance":{
+      "name":"DrainSessionInstance",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DrainSessionInstanceRequest"},
+      "output":{"shape":"DrainSessionInstanceResult"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ConcurrentModificationException"},
+        {"shape":"OperationNotPermittedException"}
+      ]
+    },
     "EnableUser":{
       "name":"EnableUser",
       "http":{
@@ -1431,7 +1445,8 @@
         "CreatedTime":{"shape":"Timestamp"},
         "AppBlockBuilderErrors":{"shape":"ResourceErrors"},
         "StateChangeReason":{"shape":"AppBlockBuilderStateChangeReason"},
-        "AccessEndpoints":{"shape":"AccessEndpointList"}
+        "AccessEndpoints":{"shape":"AccessEndpointList"},
+        "DisableIMDSV1":{"shape":"BooleanObject"}
       }
     },
     "AppBlockBuilderAppBlockAssociation":{
@@ -1784,7 +1799,10 @@
         "DesiredUserSessions":{"shape":"Integer"},
         "AvailableUserSessions":{"shape":"Integer"},
         "ActiveUserSessions":{"shape":"Integer"},
-        "ActualUserSessions":{"shape":"Integer"}
+        "ActualUserSessions":{"shape":"Integer"},
+        "Draining":{"shape":"Integer"},
+        "DrainModeActiveUserSessions":{"shape":"Integer"},
+        "DrainModeUnusedUserSessions":{"shape":"Integer"}
       }
     },
     "ConcurrentModificationException":{
@@ -1793,6 +1811,12 @@
         "Message":{"shape":"ErrorMessage"}
       },
       "exception":true
+    },
+    "ContentRedirection":{
+      "type":"structure",
+      "members":{
+        "HostToClient":{"shape":"UrlRedirectionConfig"}
+      }
     },
     "CopyImageRequest":{
       "type":"structure",
@@ -1832,7 +1856,8 @@
         "VpcConfig":{"shape":"VpcConfig"},
         "EnableDefaultInternetAccess":{"shape":"BooleanObject"},
         "IamRoleArn":{"shape":"Arn"},
-        "AccessEndpoints":{"shape":"AccessEndpointList"}
+        "AccessEndpoints":{"shape":"AccessEndpointList"},
+        "DisableIMDSV1":{"shape":"BooleanObject"}
       }
     },
     "CreateAppBlockBuilderResult":{
@@ -2000,7 +2025,8 @@
         "UsbDeviceFilterStrings":{"shape":"UsbDeviceFilterStrings"},
         "SessionScriptS3Location":{"shape":"S3Location"},
         "MaxSessionsPerInstance":{"shape":"Integer"},
-        "RootVolumeConfig":{"shape":"VolumeConfig"}
+        "RootVolumeConfig":{"shape":"VolumeConfig"},
+        "DisableIMDSV1":{"shape":"BooleanObject"}
       }
     },
     "CreateFleetResult":{
@@ -2031,7 +2057,8 @@
         "AccessEndpoints":{"shape":"AccessEndpointList"},
         "RootVolumeConfig":{"shape":"VolumeConfig"},
         "SoftwaresToInstall":{"shape":"StringList"},
-        "SoftwaresToUninstall":{"shape":"StringList"}
+        "SoftwaresToUninstall":{"shape":"StringList"},
+        "DisableIMDSV1":{"shape":"BooleanObject"}
       }
     },
     "CreateImageBuilderResult":{
@@ -2096,7 +2123,8 @@
         "Tags":{"shape":"Tags"},
         "AccessEndpoints":{"shape":"AccessEndpointList"},
         "EmbedHostDomains":{"shape":"EmbedHostDomains"},
-        "StreamingExperienceSettings":{"shape":"StreamingExperienceSettings"}
+        "StreamingExperienceSettings":{"shape":"StreamingExperienceSettings"},
+        "ContentRedirection":{"shape":"ContentRedirection"}
       }
     },
     "CreateStackResult":{
@@ -2805,6 +2833,17 @@
       "member":{"shape":"Domain"},
       "max":50
     },
+    "DrainSessionInstanceRequest":{
+      "type":"structure",
+      "required":["SessionId"],
+      "members":{
+        "SessionId":{"shape":"String"}
+      }
+    },
+    "DrainSessionInstanceResult":{
+      "type":"structure",
+      "members":{}
+    },
     "DryRunOperationException":{
       "type":"structure",
       "members":{
@@ -3034,7 +3073,8 @@
         "UsbDeviceFilterStrings":{"shape":"UsbDeviceFilterStrings"},
         "SessionScriptS3Location":{"shape":"S3Location"},
         "MaxSessionsPerInstance":{"shape":"Integer"},
-        "RootVolumeConfig":{"shape":"VolumeConfig"}
+        "RootVolumeConfig":{"shape":"VolumeConfig"},
+        "DisableIMDSV1":{"shape":"BooleanObject"}
       }
     },
     "FleetAttribute":{
@@ -3186,7 +3226,8 @@
         "AppstreamAgentVersion":{"shape":"AppstreamAgentVersion"},
         "AccessEndpoints":{"shape":"AccessEndpointList"},
         "RootVolumeConfig":{"shape":"VolumeConfig"},
-        "LatestAppstreamAgentVersion":{"shape":"LatestAppstreamAgentVersion"}
+        "LatestAppstreamAgentVersion":{"shape":"LatestAppstreamAgentVersion"},
+        "DisableIMDSV1":{"shape":"BooleanObject"}
       }
     },
     "ImageBuilderList":{
@@ -3297,6 +3338,14 @@
         "Message":{"shape":"ErrorMessage"}
       },
       "exception":true
+    },
+    "InstanceDrainStatus":{
+      "type":"string",
+      "enum":[
+        "ACTIVE",
+        "DRAINING",
+        "NOT_APPLICABLE"
+      ]
     },
     "InstanceType":{
       "type":"string",
@@ -3659,7 +3708,8 @@
         "MaxExpirationTime":{"shape":"Timestamp"},
         "AuthenticationType":{"shape":"AuthenticationType"},
         "NetworkAccessConfiguration":{"shape":"NetworkAccessConfiguration"},
-        "InstanceId":{"shape":"String"}
+        "InstanceId":{"shape":"String"},
+        "InstanceDrainStatus":{"shape":"InstanceDrainStatus"}
       }
     },
     "SessionConnectionState":{
@@ -3741,7 +3791,8 @@
         "ApplicationSettings":{"shape":"ApplicationSettingsResponse"},
         "AccessEndpoints":{"shape":"AccessEndpointList"},
         "EmbedHostDomains":{"shape":"EmbedHostDomains"},
-        "StreamingExperienceSettings":{"shape":"StreamingExperienceSettings"}
+        "StreamingExperienceSettings":{"shape":"StreamingExperienceSettings"},
+        "ContentRedirection":{"shape":"ContentRedirection"}
       }
     },
     "StackAttribute":{
@@ -3758,7 +3809,8 @@
         "EMBED_HOST_DOMAINS",
         "IAM_ROLE_ARN",
         "ACCESS_ENDPOINTS",
-        "STREAMING_EXPERIENCE_SETTINGS"
+        "STREAMING_EXPERIENCE_SETTINGS",
+        "CONTENT_REDIRECTION"
       ]
     },
     "StackAttributes":{
@@ -4065,7 +4117,8 @@
         "EnableDefaultInternetAccess":{"shape":"BooleanObject"},
         "IamRoleArn":{"shape":"Arn"},
         "AccessEndpoints":{"shape":"AccessEndpointList"},
-        "AttributesToDelete":{"shape":"AppBlockBuilderAttributes"}
+        "AttributesToDelete":{"shape":"AppBlockBuilderAttributes"},
+        "DisableIMDSV1":{"shape":"BooleanObject"}
       }
     },
     "UpdateAppBlockBuilderResult":{
@@ -4159,7 +4212,8 @@
         "UsbDeviceFilterStrings":{"shape":"UsbDeviceFilterStrings"},
         "SessionScriptS3Location":{"shape":"S3Location"},
         "MaxSessionsPerInstance":{"shape":"Integer"},
-        "RootVolumeConfig":{"shape":"VolumeConfig"}
+        "RootVolumeConfig":{"shape":"VolumeConfig"},
+        "DisableIMDSV1":{"shape":"BooleanObject"}
       }
     },
     "UpdateFleetResult":{
@@ -4204,7 +4258,8 @@
         "ApplicationSettings":{"shape":"ApplicationSettings"},
         "AccessEndpoints":{"shape":"AccessEndpointList"},
         "EmbedHostDomains":{"shape":"EmbedHostDomains"},
-        "StreamingExperienceSettings":{"shape":"StreamingExperienceSettings"}
+        "StreamingExperienceSettings":{"shape":"StreamingExperienceSettings"},
+        "ContentRedirection":{"shape":"ContentRedirection"}
       }
     },
     "UpdateStackResult":{
@@ -4231,6 +4286,27 @@
       "type":"structure",
       "members":{
         "Theme":{"shape":"Theme"}
+      }
+    },
+    "UrlPattern":{
+      "type":"string",
+      "max":2048,
+      "min":1,
+      "pattern":"^(\\*|https?://[^\\s,;]+)$"
+    },
+    "UrlPatternList":{
+      "type":"list",
+      "member":{"shape":"UrlPattern"},
+      "max":100,
+      "min":0
+    },
+    "UrlRedirectionConfig":{
+      "type":"structure",
+      "required":["Enabled"],
+      "members":{
+        "Enabled":{"shape":"BooleanObject"},
+        "AllowedUrls":{"shape":"UrlPatternList"},
+        "DeniedUrls":{"shape":"UrlPatternList"}
       }
     },
     "UsageReportExecutionErrorCode":{

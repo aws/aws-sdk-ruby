@@ -30,7 +30,11 @@ module Aws::ConnectCases
     #   @return [String]
     #
     # @!attribute [rw] type
-    #   The Type of an audit history event.
+    #   The type of audit history event.
+    #
+    #   Valid Values: `Case.Created` \| `Case.Updated` \|
+    #   `RelatedItem.Created` \| `RelatedItem.Updated` \|
+    #   `RelatedItem.Deleted`
     #   @return [String]
     #
     # @!attribute [rw] related_item_type
@@ -306,11 +310,23 @@ module Aws::ConnectCases
     #   Tests that operandOne is not equal to operandTwo.
     #   @return [Types::BooleanOperands]
     #
+    # @!attribute [rw] and_all
+    #   Combines multiple conditions with AND operator. All conditions must
+    #   be true for the compound condition to be true.
+    #   @return [Types::CompoundCondition]
+    #
+    # @!attribute [rw] or_all
+    #   Combines multiple conditions with OR operator. At least one
+    #   condition must be true for the compound condition to be true.
+    #   @return [Types::CompoundCondition]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connectcases-2022-10-03/BooleanCondition AWS API Documentation
     #
     class BooleanCondition < Struct.new(
       :equal_to,
       :not_equal_to,
+      :and_all,
+      :or_all,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
@@ -318,6 +334,8 @@ module Aws::ConnectCases
 
       class EqualTo < BooleanCondition; end
       class NotEqualTo < BooleanCondition; end
+      class AndAll < BooleanCondition; end
+      class OrAll < BooleanCondition; end
       class Unknown < BooleanCondition; end
     end
 
@@ -585,6 +603,47 @@ module Aws::ConnectCases
     # @see http://docs.aws.amazon.com/goto/WebAPI/connectcases-2022-10-03/CommentFilter AWS API Documentation
     #
     class CommentFilter < Aws::EmptyStructure; end
+
+    # Represents the updated content of a `Comment` related item.
+    #
+    # @!attribute [rw] body
+    #   Updated text in the body of a `Comment` on a case.
+    #   @return [String]
+    #
+    # @!attribute [rw] content_type
+    #   Type of the text in the box of a `Comment` on a case.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connectcases-2022-10-03/CommentUpdateContent AWS API Documentation
+    #
+    class CommentUpdateContent < Struct.new(
+      :body,
+      :content_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A compound condition that combines multiple boolean conditions using
+    # logical operators. In the Amazon Connect admin website, case rules are
+    # known as *case field conditions*. For more information about case
+    # field conditions, see [Add case field conditions to a case
+    # template][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/case-field-conditions.html
+    #
+    # @!attribute [rw] conditions
+    #   The list of conditions to combine using the logical operator.
+    #   @return [Array<Types::BooleanCondition>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connectcases-2022-10-03/CompoundCondition AWS API Documentation
+    #
+    class CompoundCondition < Struct.new(
+      :conditions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # The requested operation would cause a conflict with the current state
     # of a service resource associated with the request. Resolve the
@@ -1141,6 +1200,23 @@ module Aws::ConnectCases
       include Aws::Structure
     end
 
+    # Represents the updated content of a `Custom` related item.
+    #
+    # @!attribute [rw] fields
+    #   List of updated field values for the `Custom` related item. All
+    #   existing and new fields, and their associated values should be
+    #   included. Fields not included as part of this request will be
+    #   removed.
+    #   @return [Array<Types::FieldValue>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connectcases-2022-10-03/CustomUpdateContent AWS API Documentation
+    #
+    class CustomUpdateContent < Struct.new(
+      :fields)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] domain_id
     #   A unique identifier of the Cases domain.
     #   @return [String]
@@ -1663,8 +1739,9 @@ module Aws::ConnectCases
 
     # Object to store union of Field values.
     #
-    # <note markdown="1"> The `Summary` system field accepts 3000 characters while all other
-    # fields accept 500 characters.
+    # <note markdown="1"> The `Summary` system field accepts up to 3000 characters, while all
+    # other fields accept up to 4100 characters. If you use multi-byte
+    # characters, the effective character limit may be lower.
     #
     #  </note>
     #
@@ -2958,6 +3035,34 @@ module Aws::ConnectCases
       class Unknown < RelatedItemTypeFilter; end
     end
 
+    # Represents the content of a related item to be updated. This is a
+    # union type that can contain either comment content or custom content.
+    #
+    # @note RelatedItemUpdateContent is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @!attribute [rw] comment
+    #   Represents the updated content of a `Comment` related item.
+    #   @return [Types::CommentUpdateContent]
+    #
+    # @!attribute [rw] custom
+    #   Represents the updated content of a `Custom` related item.
+    #   @return [Types::CustomUpdateContent]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connectcases-2022-10-03/RelatedItemUpdateContent AWS API Documentation
+    #
+    class RelatedItemUpdateContent < Struct.new(
+      :comment,
+      :custom,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Comment < RelatedItemUpdateContent; end
+      class Custom < RelatedItemUpdateContent; end
+      class Unknown < RelatedItemUpdateContent; end
+    end
+
     # Required rule type, used to indicate whether a field is required. In
     # the Amazon Connect admin website, case rules are known as *case field
     # conditions*. For more information about case field conditions, see
@@ -3867,6 +3972,86 @@ module Aws::ConnectCases
     # @see http://docs.aws.amazon.com/goto/WebAPI/connectcases-2022-10-03/UpdateLayoutResponse AWS API Documentation
     #
     class UpdateLayoutResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] domain_id
+    #   The unique identifier of the Cases domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] case_id
+    #   A unique identifier of the case.
+    #   @return [String]
+    #
+    # @!attribute [rw] related_item_id
+    #   Unique identifier of a related item.
+    #   @return [String]
+    #
+    # @!attribute [rw] content
+    #   The content of a related item to be updated.
+    #   @return [Types::RelatedItemUpdateContent]
+    #
+    # @!attribute [rw] performed_by
+    #   Represents the user who performed the update of the related item.
+    #   @return [Types::UserUnion]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connectcases-2022-10-03/UpdateRelatedItemRequest AWS API Documentation
+    #
+    class UpdateRelatedItemRequest < Struct.new(
+      :domain_id,
+      :case_id,
+      :related_item_id,
+      :content,
+      :performed_by)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] related_item_id
+    #   The unique identifier of the updated related item.
+    #   @return [String]
+    #
+    # @!attribute [rw] related_item_arn
+    #   The Amazon Resource Name (ARN) of the updated related item.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   Type of the updated related item.
+    #   @return [String]
+    #
+    # @!attribute [rw] content
+    #   Represents the content of the updated related item.
+    #   @return [Types::RelatedItemContent]
+    #
+    # @!attribute [rw] association_time
+    #   Time at which the related item was associated with the case.
+    #   @return [Time]
+    #
+    # @!attribute [rw] tags
+    #   A map of of key-value pairs that represent tags on a resource. Tags
+    #   are used to organize, track, or control access for this resource.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] last_updated_user
+    #   Represents the last user that updated the related item.
+    #   @return [Types::UserUnion]
+    #
+    # @!attribute [rw] created_by
+    #   Represents the creator of the related item.
+    #   @return [Types::UserUnion]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connectcases-2022-10-03/UpdateRelatedItemResponse AWS API Documentation
+    #
+    class UpdateRelatedItemResponse < Struct.new(
+      :related_item_id,
+      :related_item_arn,
+      :type,
+      :content,
+      :association_time,
+      :tags,
+      :last_updated_user,
+      :created_by)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @!attribute [rw] domain_id
     #   The unique identifier of the Cases domain.

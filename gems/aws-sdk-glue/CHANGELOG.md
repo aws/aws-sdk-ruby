@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.253.0 (2026-04-13)
+------------------
+
+* Feature - AWS Glue now defaults to Glue version 5.1 for newly created jobs if the Glue version is not specified in the request, and UpdateJob now preserves the existing Glue version of a job when the Glue version is not specified in the update request.
+
+1.252.0 (2026-03-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.251.0 (2026-03-17)
+------------------
+
+* Feature - Provide approval to overwrite existing Lake Formation permissions on all child resources with the default permissions specified in 'CreateTableDefaultPermissions' and 'CreateDatabaseDefaultPermissions' when updating catalog. Allowed values are ["Accept","Deny"] .
+
+1.250.0 (2026-03-13)
+------------------
+
+* Feature - Add QuerySessionContext to BatchGetPartitionRequest
+
 1.249.0 (2026-02-05)
 ------------------
 

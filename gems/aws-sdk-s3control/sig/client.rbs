@@ -984,7 +984,8 @@ module Aws
                              permission: ("READ" | "WRITE" | "READWRITE"),
                              ?duration_seconds: ::Integer,
                              ?privilege: ("Minimal" | "Default"),
-                             ?target_type: ("Object")
+                             ?target_type: ("Object"),
+                             ?audit_context: ::String
                            ) -> _GetDataAccessResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDataAccessResponseSuccess
 

@@ -23,6 +23,7 @@ module Aws::DataExchange
     ApiDescription = Shapes::StringShape.new(name: 'ApiDescription')
     ApiGatewayApiAsset = Shapes::StructureShape.new(name: 'ApiGatewayApiAsset')
     Arn = Shapes::StringShape.new(name: 'Arn')
+    AssetConfiguration = Shapes::StructureShape.new(name: 'AssetConfiguration')
     AssetDestinationEntry = Shapes::StructureShape.new(name: 'AssetDestinationEntry')
     AssetDetails = Shapes::StructureShape.new(name: 'AssetDetails')
     AssetEntry = Shapes::StructureShape.new(name: 'AssetEntry')
@@ -153,6 +154,7 @@ module Aws::DataExchange
     ListOfS3DataAccesses = Shapes::ListShape.new(name: 'ListOfS3DataAccesses')
     ListOfSchemaChangeDetails = Shapes::ListShape.new(name: 'ListOfSchemaChangeDetails')
     ListOfTableTagPolicyLFPermissions = Shapes::ListShape.new(name: 'ListOfTableTagPolicyLFPermissions')
+    ListOfTag = Shapes::ListShape.new(name: 'ListOfTag')
     ListOf__string = Shapes::ListShape.new(name: 'ListOf__string')
     ListReceivedDataGrantsRequest = Shapes::StructureShape.new(name: 'ListReceivedDataGrantsRequest')
     ListReceivedDataGrantsResponse = Shapes::StructureShape.new(name: 'ListReceivedDataGrantsResponse')
@@ -206,6 +208,7 @@ module Aws::DataExchange
     TableLFTagPolicy = Shapes::StructureShape.new(name: 'TableLFTagPolicy')
     TableLFTagPolicyAndPermissions = Shapes::StructureShape.new(name: 'TableLFTagPolicyAndPermissions')
     TableTagPolicyLFPermission = Shapes::StringShape.new(name: 'TableTagPolicyLFPermission')
+    Tag = Shapes::StructureShape.new(name: 'Tag')
     TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp', timestampFormat: "iso8601")
@@ -265,6 +268,9 @@ module Aws::DataExchange
     ApiGatewayApiAsset.add_member(:protocol_type, Shapes::ShapeRef.new(shape: ProtocolType, location_name: "ProtocolType"))
     ApiGatewayApiAsset.add_member(:stage, Shapes::ShapeRef.new(shape: __string, location_name: "Stage"))
     ApiGatewayApiAsset.struct_class = Types::ApiGatewayApiAsset
+
+    AssetConfiguration.add_member(:tags, Shapes::ShapeRef.new(shape: ListOfTag, location_name: "Tags"))
+    AssetConfiguration.struct_class = Types::AssetConfiguration
 
     AssetDestinationEntry.add_member(:asset_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "AssetId"))
     AssetDestinationEntry.add_member(:bucket, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "Bucket"))
@@ -369,11 +375,13 @@ module Aws::DataExchange
     CreateEventActionResponse.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "UpdatedAt"))
     CreateEventActionResponse.struct_class = Types::CreateEventActionResponse
 
+    CreateJobRequest.add_member(:asset_configuration, Shapes::ShapeRef.new(shape: AssetConfiguration, location_name: "AssetConfiguration"))
     CreateJobRequest.add_member(:details, Shapes::ShapeRef.new(shape: RequestDetails, required: true, location_name: "Details"))
     CreateJobRequest.add_member(:type, Shapes::ShapeRef.new(shape: Type, required: true, location_name: "Type"))
     CreateJobRequest.struct_class = Types::CreateJobRequest
 
     CreateJobResponse.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
+    CreateJobResponse.add_member(:asset_configuration, Shapes::ShapeRef.new(shape: AssetConfiguration, location_name: "AssetConfiguration"))
     CreateJobResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedAt"))
     CreateJobResponse.add_member(:details, Shapes::ShapeRef.new(shape: ResponseDetails, location_name: "Details"))
     CreateJobResponse.add_member(:errors, Shapes::ShapeRef.new(shape: ListOfJobError, location_name: "Errors"))
@@ -537,6 +545,7 @@ module Aws::DataExchange
     GetAssetResponse.add_member(:name, Shapes::ShapeRef.new(shape: AssetName, location_name: "Name"))
     GetAssetResponse.add_member(:revision_id, Shapes::ShapeRef.new(shape: Id, location_name: "RevisionId"))
     GetAssetResponse.add_member(:source_id, Shapes::ShapeRef.new(shape: Id, location_name: "SourceId"))
+    GetAssetResponse.add_member(:tags, Shapes::ShapeRef.new(shape: MapOf__string, location_name: "Tags"))
     GetAssetResponse.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "UpdatedAt"))
     GetAssetResponse.struct_class = Types::GetAssetResponse
 
@@ -592,6 +601,7 @@ module Aws::DataExchange
     GetJobRequest.struct_class = Types::GetJobRequest
 
     GetJobResponse.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
+    GetJobResponse.add_member(:asset_configuration, Shapes::ShapeRef.new(shape: AssetConfiguration, location_name: "AssetConfiguration"))
     GetJobResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedAt"))
     GetJobResponse.add_member(:details, Shapes::ShapeRef.new(shape: ResponseDetails, location_name: "Details"))
     GetJobResponse.add_member(:errors, Shapes::ShapeRef.new(shape: ListOfJobError, location_name: "Errors"))
@@ -718,6 +728,7 @@ module Aws::DataExchange
     InternalServerException.struct_class = Types::InternalServerException
 
     JobEntry.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "Arn"))
+    JobEntry.add_member(:asset_configuration, Shapes::ShapeRef.new(shape: AssetConfiguration, location_name: "AssetConfiguration"))
     JobEntry.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreatedAt"))
     JobEntry.add_member(:details, Shapes::ShapeRef.new(shape: ResponseDetails, required: true, location_name: "Details"))
     JobEntry.add_member(:errors, Shapes::ShapeRef.new(shape: ListOfJobError, location_name: "Errors"))
@@ -853,6 +864,8 @@ module Aws::DataExchange
     ListOfSchemaChangeDetails.member = Shapes::ShapeRef.new(shape: SchemaChangeDetails)
 
     ListOfTableTagPolicyLFPermissions.member = Shapes::ShapeRef.new(shape: TableTagPolicyLFPermission)
+
+    ListOfTag.member = Shapes::ShapeRef.new(shape: Tag)
 
     ListOf__string.member = Shapes::ShapeRef.new(shape: __string)
 
@@ -1065,6 +1078,10 @@ module Aws::DataExchange
     TableLFTagPolicyAndPermissions.add_member(:expression, Shapes::ShapeRef.new(shape: ListOfLFTags, required: true, location_name: "Expression"))
     TableLFTagPolicyAndPermissions.add_member(:permissions, Shapes::ShapeRef.new(shape: ListOfTableTagPolicyLFPermissions, required: true, location_name: "Permissions"))
     TableLFTagPolicyAndPermissions.struct_class = Types::TableLFTagPolicyAndPermissions
+
+    Tag.add_member(:key, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "Key"))
+    Tag.add_member(:value, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "Value"))
+    Tag.struct_class = Types::Tag
 
     TagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "ResourceArn"))
     TagResourceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: MapOf__string, required: true, location_name: "tags"))

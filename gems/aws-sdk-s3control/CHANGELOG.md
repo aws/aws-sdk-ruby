@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.128.0 (2026-03-31)
+------------------
+
+* Feature - Adding an optional auditContext parameter to S3 Access Grants credential vending API GetDataAccess to enable job-level audit correlation in S3 CloudTrail logs
+
+1.127.0 (2026-03-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.126.0 (2026-01-28)
 ------------------
 

@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.71.0 (2026-04-09)
+------------------
+
+* Feature - The BatchExecuteStatement API now supports named SQL parameters, enabling secure batch queries with parameterized values. This enhancement helps prevent SQL injection vulnerabilities and improves query reusability.
+
+1.70.0 (2026-03-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.69.0 (2026-01-16)
 ------------------
 

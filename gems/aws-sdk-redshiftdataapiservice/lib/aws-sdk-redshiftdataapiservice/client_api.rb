@@ -109,6 +109,7 @@ module Aws::RedshiftDataAPIService
     BatchExecuteStatementInput.add_member(:database, Shapes::ShapeRef.new(shape: String, location_name: "Database"))
     BatchExecuteStatementInput.add_member(:with_event, Shapes::ShapeRef.new(shape: Boolean, location_name: "WithEvent"))
     BatchExecuteStatementInput.add_member(:statement_name, Shapes::ShapeRef.new(shape: StatementNameString, location_name: "StatementName"))
+    BatchExecuteStatementInput.add_member(:parameters, Shapes::ShapeRef.new(shape: SqlParametersList, location_name: "Parameters"))
     BatchExecuteStatementInput.add_member(:workgroup_name, Shapes::ShapeRef.new(shape: WorkgroupNameString, location_name: "WorkgroupName"))
     BatchExecuteStatementInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     BatchExecuteStatementInput.add_member(:result_format, Shapes::ShapeRef.new(shape: ResultFormatString, location_name: "ResultFormat"))

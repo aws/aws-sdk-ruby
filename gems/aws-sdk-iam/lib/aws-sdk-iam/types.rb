@@ -1758,8 +1758,9 @@ module Aws::IAM
     #
     # @!attribute [rw] credential_age_days
     #   The number of days until the service specific credential expires.
-    #   This field is only valid for Bedrock API keys and must be a positive
-    #   integer. When not specified, the credential will not expire.
+    #   This field is only valid for Bedrock and CloudWatch Logs API keys
+    #   and must be a positive integer. When not specified, the credential
+    #   will not expire.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateServiceSpecificCredentialRequest AWS API Documentation
@@ -2129,8 +2130,11 @@ module Aws::IAM
     #   If the `PermissionPolicy` includes role creation permissions, this
     #   element will include the list of permissions boundary policies
     #   associated with the role creation. See [Permissions boundaries for
-    #   IAM entities](IAM/latest/UserGuide/access_policies_boundaries.html)
-    #   for more details about IAM permission boundaries.
+    #   IAM entities][1] for more details about IAM permission boundaries.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] owner_id
@@ -2152,17 +2156,23 @@ module Aws::IAM
     # @!attribute [rw] state
     #   The state of this delegation request.
     #
-    #   See the [Understanding the Request
-    #   Lifecycle](IAM/latest/UserGuide/temporary-delegation-building-integration.html#temporary-delegation-request-lifecycle)
-    #   for an explanation of how these states are transitioned.
+    #   See the [Understanding the Request Lifecycle][1] for an explanation
+    #   of how these states are transitioned.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/temporary-delegation-building-integration.html#temporary-delegation-request-lifecycle
     #   @return [String]
     #
     # @!attribute [rw] expiration_time
     #   The expiry time of this delegation request
     #
-    #   See the [Understanding the Request
-    #   Lifecycle](IAM/latest/UserGuide/temporary-delegation-building-integration.html#temporary-delegation-request-lifecycle)
-    #   for details on the life time of a delegation request at each state.
+    #   See the [Understanding the Request Lifecycle][1] for details on the
+    #   life time of a delegation request at each state.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/temporary-delegation-building-integration.html#temporary-delegation-request-lifecycle
     #   @return [Time]
     #
     # @!attribute [rw] requestor_id
@@ -10773,8 +10783,8 @@ module Aws::IAM
     #
     # @!attribute [rw] expiration_date
     #   The date and time when the service specific credential expires. This
-    #   field is only present for Bedrock API keys that were created with an
-    #   expiration period.
+    #   field is only present for Bedrock API keys and CloudWatch Logs API
+    #   keys that were created with an expiration period.
     #   @return [Time]
     #
     # @!attribute [rw] service_name
@@ -10795,15 +10805,16 @@ module Aws::IAM
     #   @return [String]
     #
     # @!attribute [rw] service_credential_alias
-    #   For Bedrock API keys, this is the public portion of the credential
-    #   that includes the IAM user name and a suffix containing version and
-    #   creation information.
+    #   For Bedrock API keys and CloudWatch Logs API keys, this is the
+    #   public portion of the credential that includes the IAM user name and
+    #   a suffix containing version and creation information.
     #   @return [String]
     #
     # @!attribute [rw] service_credential_secret
-    #   For Bedrock API keys, this is the secret portion of the credential
-    #   that should be used to authenticate API calls. This value is
-    #   returned only when the credential is created.
+    #   For Bedrock API keys and CloudWatch Logs API keys, this is the
+    #   secret portion of the credential that should be used to authenticate
+    #   API calls. This value is returned only when the credential is
+    #   created.
     #   @return [String]
     #
     # @!attribute [rw] service_specific_credential_id
@@ -10854,9 +10865,9 @@ module Aws::IAM
     #   @return [String]
     #
     # @!attribute [rw] service_credential_alias
-    #   For Bedrock API keys, this is the public portion of the credential
-    #   that includes the IAM user name and a suffix containing version and
-    #   creation information.
+    #   For Bedrock API keys and CloudWatch Logs API keys, this is the
+    #   public portion of the credential that includes the IAM user name and
+    #   a suffix containing version and creation information.
     #   @return [String]
     #
     # @!attribute [rw] create_date
@@ -10870,8 +10881,8 @@ module Aws::IAM
     #
     # @!attribute [rw] expiration_date
     #   The date and time when the service specific credential expires. This
-    #   field is only present for Bedrock API keys that were created with an
-    #   expiration period.
+    #   field is only present for Bedrock API keys and CloudWatch Logs API
+    #   keys that were created with an expiration period.
     #   @return [Time]
     #
     # @!attribute [rw] service_specific_credential_id

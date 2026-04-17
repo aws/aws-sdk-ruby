@@ -878,12 +878,13 @@ module Aws::Organizations
     #   Support to reopen the account. After 90 days, you can't reopen an
     #   account. You might still receive a [bill after account closure][3].
     #
-    # * You can close only 10% of member accounts, between 10 and 1000,
-    #   within a rolling 30 day period. This quota is not bound by a
-    #   calendar month, but starts when you close an account. After you
-    #   reach this limit, you can't close additional accounts. For more
-    #   information, see [Closing a member account in your organization][4]
-    #   and [Quotas for Organizations][5] in the *Organizations User Guide*.
+    # * Within a rolling 30 day period you can close the higher of either
+    #   250 or 20% of the member accounts in your organization, up to a
+    #   maximum of 1,000. This quota is not bound by a calendar month, but
+    #   starts when you close an account. After you reach this limit, you
+    #   can't close additional accounts. For more information, see [Closing
+    #   a member account in your organization][4] and [Quotas for
+    #   Organizations][5] in the *Organizations User Guide*.
     #
     # * To reinstate a closed account, contact Amazon Web Services Support
     #   within the 90-day grace period while the account is in SUSPENDED
@@ -1680,6 +1681,7 @@ module Aws::Organizations
     #   resp.organizational_unit.id #=> String
     #   resp.organizational_unit.arn #=> String
     #   resp.organizational_unit.name #=> String
+    #   resp.organizational_unit.path #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/CreateOrganizationalUnit AWS API Documentation
     #
@@ -2202,6 +2204,8 @@ module Aws::Organizations
     #   resp.account.name #=> String
     #   resp.account.status #=> String, one of "ACTIVE", "SUSPENDED", "PENDING_CLOSURE"
     #   resp.account.state #=> String, one of "PENDING_ACTIVATION", "ACTIVE", "SUSPENDED", "PENDING_CLOSURE", "CLOSED"
+    #   resp.account.paths #=> Array
+    #   resp.account.paths[0] #=> String
     #   resp.account.joined_method #=> String, one of "INVITED", "CREATED"
     #   resp.account.joined_timestamp #=> Time
     #
@@ -2592,6 +2596,7 @@ module Aws::Organizations
     #   resp.organizational_unit.id #=> String
     #   resp.organizational_unit.arn #=> String
     #   resp.organizational_unit.name #=> String
+    #   resp.organizational_unit.path #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DescribeOrganizationalUnit AWS API Documentation
     #
@@ -3948,6 +3953,8 @@ module Aws::Organizations
     #   resp.accounts[0].name #=> String
     #   resp.accounts[0].status #=> String, one of "ACTIVE", "SUSPENDED", "PENDING_CLOSURE"
     #   resp.accounts[0].state #=> String, one of "PENDING_ACTIVATION", "ACTIVE", "SUSPENDED", "PENDING_CLOSURE", "CLOSED"
+    #   resp.accounts[0].paths #=> Array
+    #   resp.accounts[0].paths[0] #=> String
     #   resp.accounts[0].joined_method #=> String, one of "INVITED", "CREATED"
     #   resp.accounts[0].joined_timestamp #=> Time
     #   resp.next_token #=> String
@@ -4053,6 +4060,8 @@ module Aws::Organizations
     #   resp.accounts[0].name #=> String
     #   resp.accounts[0].status #=> String, one of "ACTIVE", "SUSPENDED", "PENDING_CLOSURE"
     #   resp.accounts[0].state #=> String, one of "PENDING_ACTIVATION", "ACTIVE", "SUSPENDED", "PENDING_CLOSURE", "CLOSED"
+    #   resp.accounts[0].paths #=> Array
+    #   resp.accounts[0].paths[0] #=> String
     #   resp.accounts[0].joined_method #=> String, one of "INVITED", "CREATED"
     #   resp.accounts[0].joined_timestamp #=> Time
     #   resp.next_token #=> String
@@ -4192,6 +4201,8 @@ module Aws::Organizations
     #   resp.accounts[0].name #=> String
     #   resp.accounts[0].status #=> String, one of "ACTIVE", "SUSPENDED", "PENDING_CLOSURE"
     #   resp.accounts[0].state #=> String, one of "PENDING_ACTIVATION", "ACTIVE", "SUSPENDED", "PENDING_CLOSURE", "CLOSED"
+    #   resp.accounts[0].paths #=> Array
+    #   resp.accounts[0].paths[0] #=> String
     #   resp.accounts[0].joined_method #=> String, one of "INVITED", "CREATED"
     #   resp.accounts[0].joined_timestamp #=> Time
     #   resp.policy_type #=> String, one of "TAG_POLICY", "BACKUP_POLICY", "AISERVICES_OPT_OUT_POLICY", "CHATBOT_POLICY", "DECLARATIVE_POLICY_EC2", "SECURITYHUB_POLICY", "INSPECTOR_POLICY", "UPGRADE_ROLLOUT_POLICY", "BEDROCK_POLICY", "S3_POLICY", "NETWORK_SECURITY_DIRECTOR_POLICY"
@@ -5198,6 +5209,7 @@ module Aws::Organizations
     #   resp.organizational_units[0].id #=> String
     #   resp.organizational_units[0].arn #=> String
     #   resp.organizational_units[0].name #=> String
+    #   resp.organizational_units[0].path #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListOrganizationalUnitsForParent AWS API Documentation
@@ -6497,6 +6509,7 @@ module Aws::Organizations
     #   resp.organizational_unit.id #=> String
     #   resp.organizational_unit.arn #=> String
     #   resp.organizational_unit.name #=> String
+    #   resp.organizational_unit.path #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/UpdateOrganizationalUnit AWS API Documentation
     #
@@ -6731,7 +6744,7 @@ module Aws::Organizations
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-organizations'
-      context[:gem_version] = '1.135.0'
+      context[:gem_version] = '1.138.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

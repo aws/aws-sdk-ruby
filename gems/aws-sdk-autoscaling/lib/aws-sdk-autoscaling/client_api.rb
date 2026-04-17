@@ -63,6 +63,7 @@ module Aws::AutoScaling
     AutoScalingInstancesType = Shapes::StructureShape.new(name: 'AutoScalingInstancesType')
     AutoScalingNotificationTypes = Shapes::ListShape.new(name: 'AutoScalingNotificationTypes')
     AvailabilityZoneDistribution = Shapes::StructureShape.new(name: 'AvailabilityZoneDistribution')
+    AvailabilityZoneIds = Shapes::ListShape.new(name: 'AvailabilityZoneIds')
     AvailabilityZoneIdsLimit1 = Shapes::ListShape.new(name: 'AvailabilityZoneIdsLimit1')
     AvailabilityZoneImpairmentPolicy = Shapes::StructureShape.new(name: 'AvailabilityZoneImpairmentPolicy')
     AvailabilityZones = Shapes::ListShape.new(name: 'AvailabilityZones')
@@ -532,6 +533,7 @@ module Aws::AutoScaling
     AutoScalingGroup.add_member(:predicted_capacity, Shapes::ShapeRef.new(shape: AutoScalingGroupPredictedCapacity, location_name: "PredictedCapacity"))
     AutoScalingGroup.add_member(:default_cooldown, Shapes::ShapeRef.new(shape: Cooldown, required: true, location_name: "DefaultCooldown"))
     AutoScalingGroup.add_member(:availability_zones, Shapes::ShapeRef.new(shape: AvailabilityZones, required: true, location_name: "AvailabilityZones"))
+    AutoScalingGroup.add_member(:availability_zone_ids, Shapes::ShapeRef.new(shape: AvailabilityZoneIds, location_name: "AvailabilityZoneIds"))
     AutoScalingGroup.add_member(:load_balancer_names, Shapes::ShapeRef.new(shape: LoadBalancerNames, location_name: "LoadBalancerNames"))
     AutoScalingGroup.add_member(:target_group_arns, Shapes::ShapeRef.new(shape: TargetGroupARNs, location_name: "TargetGroupARNs"))
     AutoScalingGroup.add_member(:health_check_type, Shapes::ShapeRef.new(shape: XmlStringMaxLen32, required: true, location_name: "HealthCheckType"))
@@ -582,6 +584,7 @@ module Aws::AutoScaling
     AutoScalingInstanceDetails.add_member(:instance_type, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, location_name: "InstanceType"))
     AutoScalingInstanceDetails.add_member(:auto_scaling_group_name, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, required: true, location_name: "AutoScalingGroupName"))
     AutoScalingInstanceDetails.add_member(:availability_zone, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, required: true, location_name: "AvailabilityZone"))
+    AutoScalingInstanceDetails.add_member(:availability_zone_id, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, location_name: "AvailabilityZoneId"))
     AutoScalingInstanceDetails.add_member(:lifecycle_state, Shapes::ShapeRef.new(shape: XmlStringMaxLen32, required: true, location_name: "LifecycleState"))
     AutoScalingInstanceDetails.add_member(:health_status, Shapes::ShapeRef.new(shape: XmlStringMaxLen32, required: true, location_name: "HealthStatus"))
     AutoScalingInstanceDetails.add_member(:launch_configuration_name, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, location_name: "LaunchConfigurationName"))
@@ -601,6 +604,8 @@ module Aws::AutoScaling
 
     AvailabilityZoneDistribution.add_member(:capacity_distribution_strategy, Shapes::ShapeRef.new(shape: CapacityDistributionStrategy, location_name: "CapacityDistributionStrategy"))
     AvailabilityZoneDistribution.struct_class = Types::AvailabilityZoneDistribution
+
+    AvailabilityZoneIds.member = Shapes::ShapeRef.new(shape: XmlStringMaxLen255)
 
     AvailabilityZoneIdsLimit1.member = Shapes::ShapeRef.new(shape: XmlStringMaxLen255)
 
@@ -692,6 +697,7 @@ module Aws::AutoScaling
     CreateAutoScalingGroupType.add_member(:desired_capacity, Shapes::ShapeRef.new(shape: AutoScalingGroupDesiredCapacity, location_name: "DesiredCapacity"))
     CreateAutoScalingGroupType.add_member(:default_cooldown, Shapes::ShapeRef.new(shape: Cooldown, location_name: "DefaultCooldown"))
     CreateAutoScalingGroupType.add_member(:availability_zones, Shapes::ShapeRef.new(shape: AvailabilityZones, location_name: "AvailabilityZones"))
+    CreateAutoScalingGroupType.add_member(:availability_zone_ids, Shapes::ShapeRef.new(shape: AvailabilityZoneIds, location_name: "AvailabilityZoneIds"))
     CreateAutoScalingGroupType.add_member(:load_balancer_names, Shapes::ShapeRef.new(shape: LoadBalancerNames, location_name: "LoadBalancerNames"))
     CreateAutoScalingGroupType.add_member(:target_group_arns, Shapes::ShapeRef.new(shape: TargetGroupARNs, location_name: "TargetGroupARNs"))
     CreateAutoScalingGroupType.add_member(:health_check_type, Shapes::ShapeRef.new(shape: XmlStringMaxLen32, location_name: "HealthCheckType"))
@@ -1009,6 +1015,7 @@ module Aws::AutoScaling
     Instance.add_member(:instance_id, Shapes::ShapeRef.new(shape: XmlStringMaxLen19, required: true, location_name: "InstanceId"))
     Instance.add_member(:instance_type, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, location_name: "InstanceType"))
     Instance.add_member(:availability_zone, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, required: true, location_name: "AvailabilityZone"))
+    Instance.add_member(:availability_zone_id, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, location_name: "AvailabilityZoneId"))
     Instance.add_member(:lifecycle_state, Shapes::ShapeRef.new(shape: LifecycleState, required: true, location_name: "LifecycleState"))
     Instance.add_member(:health_status, Shapes::ShapeRef.new(shape: XmlStringMaxLen32, required: true, location_name: "HealthStatus"))
     Instance.add_member(:launch_configuration_name, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, location_name: "LaunchConfigurationName"))
@@ -1681,6 +1688,7 @@ module Aws::AutoScaling
     UpdateAutoScalingGroupType.add_member(:desired_capacity, Shapes::ShapeRef.new(shape: AutoScalingGroupDesiredCapacity, location_name: "DesiredCapacity"))
     UpdateAutoScalingGroupType.add_member(:default_cooldown, Shapes::ShapeRef.new(shape: Cooldown, location_name: "DefaultCooldown"))
     UpdateAutoScalingGroupType.add_member(:availability_zones, Shapes::ShapeRef.new(shape: AvailabilityZones, location_name: "AvailabilityZones"))
+    UpdateAutoScalingGroupType.add_member(:availability_zone_ids, Shapes::ShapeRef.new(shape: AvailabilityZoneIds, location_name: "AvailabilityZoneIds"))
     UpdateAutoScalingGroupType.add_member(:health_check_type, Shapes::ShapeRef.new(shape: XmlStringMaxLen32, location_name: "HealthCheckType"))
     UpdateAutoScalingGroupType.add_member(:health_check_grace_period, Shapes::ShapeRef.new(shape: HealthCheckGracePeriod, location_name: "HealthCheckGracePeriod"))
     UpdateAutoScalingGroupType.add_member(:placement_group, Shapes::ShapeRef.new(shape: UpdatePlacementGroupParam, location_name: "PlacementGroup"))

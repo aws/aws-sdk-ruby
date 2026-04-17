@@ -668,11 +668,19 @@ module Aws::ObservabilityAdmin
     #   the backup destination.
     #   @return [Types::LogsBackupConfiguration]
     #
+    # @!attribute [rw] log_group_name_configuration
+    #   Configuration that specifies a naming pattern for destination log
+    #   groups created during centralization. The pattern supports static
+    #   text and dynamic variables that are replaced with source attributes
+    #   when log groups are created.
+    #   @return [Types::LogGroupNameConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/DestinationLogsConfiguration AWS API Documentation
     #
     class DestinationLogsConfiguration < Struct.new(
       :logs_encryption_configuration,
-      :backup_configuration)
+      :backup_configuration,
+      :log_group_name_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -930,11 +938,29 @@ module Aws::ObservabilityAdmin
     #   `FAILED_STOP`.
     #   @return [String]
     #
+    # @!attribute [rw] home_region
+    #   The Amazon Web Services Region that is designated as the home region
+    #   for multi-region telemetry evaluation for the organization. The home
+    #   region is the single management point for all multi-region
+    #   operations on this organization. This field is only present when
+    #   multi-region telemetry evaluation is active.
+    #   @return [String]
+    #
+    # @!attribute [rw] region_statuses
+    #   A list of per-region telemetry evaluation statuses for the
+    #   organization. Each entry indicates the evaluation status for a
+    #   specific spoke region included in the multi-region configuration.
+    #   This field is only present when multi-region telemetry evaluation is
+    #   active.
+    #   @return [Array<Types::RegionStatus>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/GetTelemetryEvaluationStatusForOrganizationOutput AWS API Documentation
     #
     class GetTelemetryEvaluationStatusForOrganizationOutput < Struct.new(
       :status,
-      :failure_reason)
+      :failure_reason,
+      :home_region,
+      :region_statuses)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -948,11 +974,28 @@ module Aws::ObservabilityAdmin
     #   populated if `Status` is `FAILED_START` or `FAILED_STOP`.
     #   @return [String]
     #
+    # @!attribute [rw] home_region
+    #   The Amazon Web Services Region that is designated as the home region
+    #   for multi-region telemetry evaluation. The home region is the single
+    #   management point for all multi-region operations on this account.
+    #   This field is only present when multi-region telemetry evaluation is
+    #   active.
+    #   @return [String]
+    #
+    # @!attribute [rw] region_statuses
+    #   A list of per-region telemetry evaluation statuses. Each entry
+    #   indicates the evaluation status for a specific spoke region included
+    #   in the multi-region configuration. This field is only present when
+    #   multi-region telemetry evaluation is active.
+    #   @return [Array<Types::RegionStatus>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/GetTelemetryEvaluationStatusOutput AWS API Documentation
     #
     class GetTelemetryEvaluationStatusOutput < Struct.new(
       :status,
-      :failure_reason)
+      :failure_reason,
+      :home_region,
+      :region_statuses)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1015,6 +1058,28 @@ module Aws::ObservabilityAdmin
     #   The configuration details of the organization telemetry rule.
     #   @return [Types::TelemetryRule]
     #
+    # @!attribute [rw] home_region
+    #   The Amazon Web Services Region where the organization telemetry rule
+    #   was originally created. For replicated rules in spoke regions, this
+    #   indicates the region that manages the rule. For rules created
+    #   without multi-region scope, this field is not present.
+    #   @return [String]
+    #
+    # @!attribute [rw] is_replicated
+    #   Indicates whether this organization telemetry rule is a replica that
+    #   was created in this region through multi-region fan-out from the
+    #   home region. Replicated rules cannot be directly updated or deleted
+    #   in the spoke region. To modify a replicated rule, make changes in
+    #   the home region.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] region_statuses
+    #   A list of per-region replication statuses for the organization
+    #   telemetry rule. Each entry indicates the replication status of the
+    #   rule in a specific spoke region. This field is only present for
+    #   rules created with multi-region scope.
+    #   @return [Array<Types::RegionStatus>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/GetTelemetryRuleForOrganizationOutput AWS API Documentation
     #
     class GetTelemetryRuleForOrganizationOutput < Struct.new(
@@ -1022,7 +1087,10 @@ module Aws::ObservabilityAdmin
       :rule_arn,
       :created_time_stamp,
       :last_update_time_stamp,
-      :telemetry_rule)
+      :telemetry_rule,
+      :home_region,
+      :is_replicated,
+      :region_statuses)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1059,6 +1127,28 @@ module Aws::ObservabilityAdmin
     #   The configuration details of the telemetry rule.
     #   @return [Types::TelemetryRule]
     #
+    # @!attribute [rw] home_region
+    #   The Amazon Web Services Region where the telemetry rule was
+    #   originally created. For replicated rules in spoke regions, this
+    #   indicates the region that manages the rule. For rules created
+    #   without multi-region scope, this field is not present.
+    #   @return [String]
+    #
+    # @!attribute [rw] is_replicated
+    #   Indicates whether this telemetry rule is a replica that was created
+    #   in this region through multi-region fan-out from the home region.
+    #   Replicated rules cannot be directly updated or deleted in the spoke
+    #   region. To modify a replicated rule, make changes in the home
+    #   region.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] region_statuses
+    #   A list of per-region replication statuses for the telemetry rule.
+    #   Each entry indicates the replication status of the rule in a
+    #   specific spoke region. This field is only present for rules created
+    #   with multi-region scope.
+    #   @return [Array<Types::RegionStatus>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/GetTelemetryRuleOutput AWS API Documentation
     #
     class GetTelemetryRuleOutput < Struct.new(
@@ -1066,7 +1156,10 @@ module Aws::ObservabilityAdmin
       :rule_arn,
       :created_time_stamp,
       :last_update_time_stamp,
-      :telemetry_rule)
+      :telemetry_rule,
+      :home_region,
+      :is_replicated,
+      :region_statuses)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1546,6 +1639,49 @@ module Aws::ObservabilityAdmin
       include Aws::Structure
     end
 
+    # Configuration that specifies a naming pattern for destination log
+    # groups created during centralization. The pattern supports static text
+    # and dynamic variables that are replaced with source attributes when
+    # log groups are created.
+    #
+    # @!attribute [rw] log_group_name_pattern
+    #   The pattern used to generate destination log group names during
+    #   centralization. The pattern can contain static text and dynamic
+    #   variables that are replaced with source attributes. If a variable
+    #   cannot be resolved, it inherits the value from its parent variable
+    #   in the hierarchy. The pattern must be between 1 and 512 characters.
+    #
+    #   Supported variables:
+    #
+    #   * **$\{source.logGroup}** — The original log group name from the
+    #     source account.
+    #
+    #   * **$\{source.accountId}** — The Amazon Web Services account ID
+    #     where the log originated.
+    #
+    #   * **$\{source.region}** — The Amazon Web Services Region where the
+    #     log originated.
+    #
+    #   * **$\{source.org.id}** — The Amazon Web Services Organization ID of
+    #     the source account.
+    #
+    #   * **$\{source.org.ouId}** — The organizational unit ID of the source
+    #     account.
+    #
+    #   * **$\{source.org.rootId}** — The organization Root ID.
+    #
+    #   * **$\{source.org.path}** — The organizational path from account to
+    #     root.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/LogGroupNameConfiguration AWS API Documentation
+    #
+    class LogGroupNameConfiguration < Struct.new(
+      :log_group_name_pattern)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Configuration that determines which WAF log records to keep or drop
     # based on specified conditions.
     #
@@ -1685,6 +1821,45 @@ module Aws::ObservabilityAdmin
       include Aws::Structure
     end
 
+    # Represents the status of a multi-region operation in a specific Amazon
+    # Web Services Region. This structure is used to report per-region
+    # progress for both telemetry evaluation and telemetry rule replication.
+    #
+    # @!attribute [rw] region
+    #   The Amazon Web Services Region code (for example, `eu-west-1` or
+    #   `us-west-2`) that this status applies to.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the operation in this region. For telemetry
+    #   evaluation, valid values include `STARTING`, `RUNNING`, and
+    #   `FAILED_START`. For telemetry rules, valid values include `PENDING`,
+    #   `ACTIVE`, and `FAILED`.
+    #   @return [String]
+    #
+    # @!attribute [rw] failure_reason
+    #   The reason for a failure status in this region. This field is only
+    #   populated when `Status` indicates a failure.
+    #   @return [String]
+    #
+    # @!attribute [rw] rule_arn
+    #   The Amazon Resource Name (ARN) of the telemetry rule in this spoke
+    #   region. This field is only present for telemetry rule region
+    #   statuses and is populated when the rule has been successfully
+    #   created in the spoke region (status is `ACTIVE`).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/RegionStatus AWS API Documentation
+    #
+    class RegionStatus < Struct.new(
+      :region,
+      :status,
+      :failure_reason,
+      :rule_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The specified resource (such as a telemetry rule) could not be found.
     #
     # @!attribute [rw] message
@@ -1788,6 +1963,15 @@ module Aws::ObservabilityAdmin
     #   filters.
     #   @return [String]
     #
+    # @!attribute [rw] data_source_selection_criteria
+    #   The selection criteria that specifies which data sources to
+    #   centralize. The selection criteria uses the same filter expression
+    #   format as `LogGroupSelectionCriteria`, but operates on
+    #   `DataSourceName` and `DataSourceType` operands. When both
+    #   `LogGroupSelectionCriteria` and `DataSourceSelectionCriteria` are
+    #   specified, a log event must match both criteria to be centralized.
+    #   @return [String]
+    #
     # @!attribute [rw] encrypted_log_group_strategy
     #   A strategy determining whether to centralize source log groups that
     #   are encrypted with customer managed KMS keys (CMK). ALLOW will
@@ -1799,6 +1983,7 @@ module Aws::ObservabilityAdmin
     #
     class SourceLogsConfiguration < Struct.new(
       :log_group_selection_criteria,
+      :data_source_selection_criteria,
       :encrypted_log_group_strategy)
       SENSITIVE = []
       include Aws::Structure
@@ -1819,6 +2004,64 @@ module Aws::ObservabilityAdmin
     class StartTelemetryEnrichmentOutput < Struct.new(
       :status,
       :aws_resource_explorer_managed_view_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] regions
+    #   An optional list of Amazon Web Services Regions to include in
+    #   multi-region telemetry evaluation for the organization. The current
+    #   region is always implicitly included and must not be specified in
+    #   this list. When provided, telemetry evaluation starts in the current
+    #   region and propagates to all specified regions for the organization.
+    #   Mutually exclusive with `AllRegions`. If neither `Regions` nor
+    #   `AllRegions` is provided, the operation applies only to the current
+    #   region.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] all_regions
+    #   If set to `true`, telemetry evaluation for the organization starts
+    #   in all Amazon Web Services Regions where Amazon CloudWatch
+    #   Observability Admin is available in the current partition. The
+    #   current region becomes the home region for managing multi-region
+    #   evaluation for the organization. When new regions become available,
+    #   evaluation automatically expands to include them. Mutually exclusive
+    #   with `Regions`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/StartTelemetryEvaluationForOrganizationInput AWS API Documentation
+    #
+    class StartTelemetryEvaluationForOrganizationInput < Struct.new(
+      :regions,
+      :all_regions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] regions
+    #   An optional list of Amazon Web Services Regions to include in
+    #   multi-region telemetry evaluation. The current region is always
+    #   implicitly included and must not be specified in this list. When
+    #   provided, telemetry evaluation starts in the current region and
+    #   propagates to all specified regions. Mutually exclusive with
+    #   `AllRegions`. If neither `Regions` nor `AllRegions` is provided, the
+    #   operation applies only to the current region.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] all_regions
+    #   If set to `true`, telemetry evaluation starts in all Amazon Web
+    #   Services Regions where Amazon CloudWatch Observability Admin is
+    #   available in the current partition. The current region becomes the
+    #   home region for managing multi-region evaluation. When new regions
+    #   become available, evaluation automatically expands to include them.
+    #   Mutually exclusive with `Regions`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/StartTelemetryEvaluationInput AWS API Documentation
+    #
+    class StartTelemetryEvaluationInput < Struct.new(
+      :regions,
+      :all_regions)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1889,6 +2132,11 @@ module Aws::ObservabilityAdmin
     #   the resource. For example, `1728679196318`.
     #   @return [Integer]
     #
+    # @!attribute [rw] telemetry_source_type
+    #   Specifies the type of telemetry source for a resource, such as EKS
+    #   cluster logs.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/TelemetryConfiguration AWS API Documentation
     #
     class TelemetryConfiguration < Struct.new(
@@ -1897,7 +2145,8 @@ module Aws::ObservabilityAdmin
       :resource_type,
       :resource_identifier,
       :resource_tags,
-      :last_update_time_stamp)
+      :last_update_time_stamp,
+      :telemetry_source_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2011,8 +2260,39 @@ module Aws::ObservabilityAdmin
       include Aws::Structure
     end
 
-    # Defines the configuration for a telemetry pipeline, including how data
-    # flows from sources through processors to destinations.
+    # Defines the configuration for a pipeline, including how data flows
+    # from sources through processors to destinations. The configuration is
+    # specified in YAML format and must include a valid pipeline definition
+    # with required source and sink components. This pipeline enables
+    # end-to-end telemetry data collection, transformation, and delivery
+    # while supporting optional processing steps and extensions for enhanced
+    # functionality.
+    #
+    # The primary pipeline configuration section are:
+    #
+    # * **Source:** Defines where log data originates from (S3 buckets,
+    #   CloudWatch Logs, third-party APIs). Each pipeline must have exactly
+    #   one source.
+    #
+    # * **Processors (optional):** Transform, parse, and enrich log data as
+    #   it flows through the pipeline. Processors are applied sequentially
+    #   in the order they are defined.
+    #
+    # * **Sink:** Defines the destination where processed log data is sent.
+    #   Each pipeline must have exactly one sink.
+    #
+    # * **Extensions (optional):** Provide additional functionality such as
+    #   Amazon Web Services Secrets Manager integration for credential
+    #   management.
+    #
+    # For more details on each configuration section see [CloudWatch
+    # pipelines User Guide][1]. Additional comprehensive configuration
+    # examples can be found in the [CreateTelemetryPipeline API docs][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch-pipelines.html
+    # [2]: https://docs.aws.amazon.com/cloudwatch/latest/observabilityadmin/API_CreateTelemetryPipeline.html#API_CreateTelemetryPipeline_Examples
     #
     # @!attribute [rw] body
     #   The pipeline configuration body that defines the data processing
@@ -2122,6 +2402,21 @@ module Aws::ObservabilityAdmin
     #   resource tags.
     #   @return [String]
     #
+    # @!attribute [rw] regions
+    #   An optional list of Amazon Web Services Regions where this telemetry
+    #   rule should be replicated. When specified, the rule is created in
+    #   the home region and automatically replicated to all listed regions.
+    #   Mutually exclusive with `AllRegions`.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] all_regions
+    #   If set to `true`, the telemetry rule is replicated to all Amazon Web
+    #   Services Regions where Amazon CloudWatch Observability Admin is
+    #   available in the current partition. When new regions become
+    #   available, the rule automatically replicates to them. Mutually
+    #   exclusive with `Regions`.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/TelemetryRule AWS API Documentation
     #
     class TelemetryRule < Struct.new(
@@ -2130,7 +2425,9 @@ module Aws::ObservabilityAdmin
       :telemetry_source_types,
       :destination_configuration,
       :scope,
-      :selection_criteria)
+      :selection_criteria,
+      :regions,
+      :all_regions)
       SENSITIVE = []
       include Aws::Structure
     end

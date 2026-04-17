@@ -228,6 +228,11 @@ module Aws::AppStream
     #   specified endpoints.
     #   @return [Array<Types::AccessEndpoint>]
     #
+    # @!attribute [rw] disable_imdsv1
+    #   Indicates whether Instance Metadata Service Version 1 (IMDSv1) is
+    #   disabled for the app block builder.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/AppBlockBuilder AWS API Documentation
     #
     class AppBlockBuilder < Struct.new(
@@ -244,7 +249,8 @@ module Aws::AppStream
       :created_time,
       :app_block_builder_errors,
       :state_change_reason,
-      :access_endpoints)
+      :access_endpoints,
+      :disable_imdsv1)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -845,6 +851,22 @@ module Aws::AppStream
     #   This only applies to multi-session fleets.
     #   @return [Integer]
     #
+    # @!attribute [rw] draining
+    #   The number of instances in drain mode. This only applies to
+    #   multi-session fleets.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] drain_mode_active_user_sessions
+    #   The number of active user sessions on instances in drain mode. This
+    #   only applies to multi-session fleets.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] drain_mode_unused_user_sessions
+    #   The number of unused session slots on instances in drain mode that
+    #   cannot be used for user session provisioning. This only applies to
+    #   multi-session fleets.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/ComputeCapacityStatus AWS API Documentation
     #
     class ComputeCapacityStatus < Struct.new(
@@ -855,7 +877,10 @@ module Aws::AppStream
       :desired_user_sessions,
       :available_user_sessions,
       :active_user_sessions,
-      :actual_user_sessions)
+      :actual_user_sessions,
+      :draining,
+      :drain_mode_active_user_sessions,
+      :drain_mode_unused_user_sessions)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -870,6 +895,23 @@ module Aws::AppStream
     #
     class ConcurrentModificationException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration for bidirectional URL redirection between the streaming
+    # session and the local client. Use HostToClient to redirect URLs from
+    # the remote desktop to the local browser.
+    #
+    # @!attribute [rw] host_to_client
+    #   Configuration for redirecting URLs from the remote desktop to the
+    #   local client browser.
+    #   @return [Types::UrlRedirectionConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/ContentRedirection AWS API Documentation
+    #
+    class ContentRedirection < Struct.new(
+      :host_to_client)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1007,6 +1049,11 @@ module Aws::AppStream
     #   specified endpoints.
     #   @return [Array<Types::AccessEndpoint>]
     #
+    # @!attribute [rw] disable_imdsv1
+    #   Set to true to disable Instance Metadata Service Version 1 (IMDSv1)
+    #   and enforce IMDSv2. Set to false to enable both IMDSv1 and IMDSv2.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateAppBlockBuilderRequest AWS API Documentation
     #
     class CreateAppBlockBuilderRequest < Struct.new(
@@ -1019,7 +1066,8 @@ module Aws::AppStream
       :vpc_config,
       :enable_default_internet_access,
       :iam_role_arn,
-      :access_endpoints)
+      :access_endpoints,
+      :disable_imdsv1)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1664,6 +1712,17 @@ module Aws::AppStream
     #   application requirements.
     #   @return [Types::VolumeConfig]
     #
+    # @!attribute [rw] disable_imdsv1
+    #   Set to true to disable Instance Metadata Service Version 1 (IMDSv1)
+    #   and enforce IMDSv2. Set to false to enable both IMDSv1 and IMDSv2.
+    #
+    #   <note markdown="1"> Before disabling IMDSv1, ensure your WorkSpaces Applications images
+    #   are running the agent version or managed image update released on or
+    #   after January 16, 2024 to support IMDSv2 enforcement.
+    #
+    #    </note>
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateFleetRequest AWS API Documentation
     #
     class CreateFleetRequest < Struct.new(
@@ -1689,7 +1748,8 @@ module Aws::AppStream
       :usb_device_filter_strings,
       :session_script_s3_location,
       :max_sessions_per_instance,
-      :root_volume_config)
+      :root_volume_config,
+      :disable_imdsv1)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2004,6 +2064,17 @@ module Aws::AppStream
     #   * Microsoft\_Project\_2024\_Standard\_64Bit
     #   @return [Array<String>]
     #
+    # @!attribute [rw] disable_imdsv1
+    #   Set to true to disable Instance Metadata Service Version 1 (IMDSv1)
+    #   and enforce IMDSv2. Set to false to enable both IMDSv1 and IMDSv2.
+    #
+    #   <note markdown="1"> Before disabling IMDSv1, ensure your WorkSpaces Applications images
+    #   are running the agent version or managed image update released on or
+    #   after January 16, 2024 to support IMDSv2 enforcement.
+    #
+    #    </note>
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateImageBuilderRequest AWS API Documentation
     #
     class CreateImageBuilderRequest < Struct.new(
@@ -2022,7 +2093,8 @@ module Aws::AppStream
       :access_endpoints,
       :root_volume_config,
       :softwares_to_install,
-      :softwares_to_uninstall)
+      :softwares_to_uninstall,
+      :disable_imdsv1)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2242,6 +2314,12 @@ module Aws::AppStream
     #   client.
     #   @return [Types::StreamingExperienceSettings]
     #
+    # @!attribute [rw] content_redirection
+    #   Configuration for bidirectional URL redirection between the
+    #   streaming session and the local client. Use HostToClient to redirect
+    #   URLs from the remote desktop to the local browser.
+    #   @return [Types::ContentRedirection]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateStackRequest AWS API Documentation
     #
     class CreateStackRequest < Struct.new(
@@ -2256,7 +2334,8 @@ module Aws::AppStream
       :tags,
       :access_endpoints,
       :embed_host_domains,
-      :streaming_experience_settings)
+      :streaming_experience_settings,
+      :content_redirection)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3894,6 +3973,22 @@ module Aws::AppStream
       include Aws::Structure
     end
 
+    # @!attribute [rw] session_id
+    #   The identifier of the streaming session.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DrainSessionInstanceRequest AWS API Documentation
+    #
+    class DrainSessionInstanceRequest < Struct.new(
+      :session_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DrainSessionInstanceResult AWS API Documentation
+    #
+    class DrainSessionInstanceResult < Aws::EmptyStructure; end
+
     # The exception that is thrown when a dry run operation is requested.
     # This indicates that the validation checks have been performed
     # successfully, but no actual resources were created or modified.
@@ -4465,6 +4560,11 @@ module Aws::AppStream
     #   including the storage size in GB.
     #   @return [Types::VolumeConfig]
     #
+    # @!attribute [rw] disable_imdsv1
+    #   Indicates whether Instance Metadata Service Version 1 (IMDSv1) is
+    #   disabled for the fleet.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/Fleet AWS API Documentation
     #
     class Fleet < Struct.new(
@@ -4493,7 +4593,8 @@ module Aws::AppStream
       :usb_device_filter_strings,
       :session_script_s3_location,
       :max_sessions_per_instance,
-      :root_volume_config)
+      :root_volume_config,
+      :disable_imdsv1)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4893,6 +4994,11 @@ module Aws::AppStream
     #   Applications agent version or not.
     #   @return [String]
     #
+    # @!attribute [rw] disable_imdsv1
+    #   Indicates whether Instance Metadata Service Version 1 (IMDSv1) is
+    #   disabled for the image builder.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/ImageBuilder AWS API Documentation
     #
     class ImageBuilder < Struct.new(
@@ -4915,7 +5021,8 @@ module Aws::AppStream
       :appstream_agent_version,
       :access_endpoints,
       :root_volume_config,
-      :latest_appstream_agent_version)
+      :latest_appstream_agent_version,
+      :disable_imdsv1)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5557,6 +5664,11 @@ module Aws::AppStream
     #   The identifier for the instance hosting the session.
     #   @return [String]
     #
+    # @!attribute [rw] instance_drain_status
+    #   The drain status of the instance hosting the streaming session. This
+    #   only applies to multi-session fleets.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/Session AWS API Documentation
     #
     class Session < Struct.new(
@@ -5570,7 +5682,8 @@ module Aws::AppStream
       :max_expiration_time,
       :authentication_type,
       :network_access_configuration,
-      :instance_id)
+      :instance_id,
+      :instance_drain_status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5739,6 +5852,12 @@ module Aws::AppStream
     #   client.
     #   @return [Types::StreamingExperienceSettings]
     #
+    # @!attribute [rw] content_redirection
+    #   Configuration for bidirectional URL redirection between the
+    #   streaming session and the local client. Use HostToClient to redirect
+    #   URLs from the remote desktop to the local browser.
+    #   @return [Types::ContentRedirection]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/Stack AWS API Documentation
     #
     class Stack < Struct.new(
@@ -5755,7 +5874,8 @@ module Aws::AppStream
       :application_settings,
       :access_endpoints,
       :embed_host_domains,
-      :streaming_experience_settings)
+      :streaming_experience_settings,
+      :content_redirection)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6180,6 +6300,11 @@ module Aws::AppStream
     #   The attributes to delete from the app block builder.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] disable_imdsv1
+    #   Set to true to disable Instance Metadata Service Version 1 (IMDSv1)
+    #   and enforce IMDSv2. Set to false to enable both IMDSv1 and IMDSv2.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/UpdateAppBlockBuilderRequest AWS API Documentation
     #
     class UpdateAppBlockBuilderRequest < Struct.new(
@@ -6192,7 +6317,8 @@ module Aws::AppStream
       :enable_default_internet_access,
       :iam_role_arn,
       :access_endpoints,
-      :attributes_to_delete)
+      :attributes_to_delete,
+      :disable_imdsv1)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6642,6 +6768,17 @@ module Aws::AppStream
     #   size.
     #   @return [Types::VolumeConfig]
     #
+    # @!attribute [rw] disable_imdsv1
+    #   Set to true to disable Instance Metadata Service Version 1 (IMDSv1)
+    #   and enforce IMDSv2. Set to false to enable both IMDSv1 and IMDSv2.
+    #
+    #   <note markdown="1"> Before disabling IMDSv1, ensure your WorkSpaces Applications images
+    #   are running the agent version or managed image update released on or
+    #   after January 16, 2024 to support IMDSv2 enforcement.
+    #
+    #    </note>
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/UpdateFleetRequest AWS API Documentation
     #
     class UpdateFleetRequest < Struct.new(
@@ -6667,7 +6804,8 @@ module Aws::AppStream
       :usb_device_filter_strings,
       :session_script_s3_location,
       :max_sessions_per_instance,
-      :root_volume_config)
+      :root_volume_config,
+      :disable_imdsv1)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6776,6 +6914,12 @@ module Aws::AppStream
     #   client.
     #   @return [Types::StreamingExperienceSettings]
     #
+    # @!attribute [rw] content_redirection
+    #   Configuration for bidirectional URL redirection between the
+    #   streaming session and the local client. Use HostToClient to redirect
+    #   URLs from the remote desktop to the local browser.
+    #   @return [Types::ContentRedirection]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/UpdateStackRequest AWS API Documentation
     #
     class UpdateStackRequest < Struct.new(
@@ -6791,7 +6935,8 @@ module Aws::AppStream
       :application_settings,
       :access_endpoints,
       :embed_host_domains,
-      :streaming_experience_settings)
+      :streaming_experience_settings,
+      :content_redirection)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6874,6 +7019,36 @@ module Aws::AppStream
     #
     class UpdateThemeForStackResult < Struct.new(
       :theme)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration for URL redirection in a specific direction
+    # (host-to-client or client-to-host). When enabled, URLs matching the
+    # allowed or denied patterns are redirected accordingly. The denied list
+    # takes precedence over the allowed list.
+    #
+    # @!attribute [rw] enabled
+    #   Whether URL redirection is enabled for this direction.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] allowed_urls
+    #   List of URL patterns that are allowed to be redirected. URLs
+    #   matching these patterns will be redirected unless they also match a
+    #   pattern in the denied list.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] denied_urls
+    #   List of URL patterns that are denied from redirection. This list
+    #   takes precedence over the allowed list.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/UrlRedirectionConfig AWS API Documentation
+    #
+    class UrlRedirectionConfig < Struct.new(
+      :enabled,
+      :allowed_urls,
+      :denied_urls)
       SENSITIVE = []
       include Aws::Structure
     end

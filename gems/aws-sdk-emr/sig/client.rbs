@@ -1176,6 +1176,7 @@ module Aws
                               }?
                             },
                           ],
+                          ?step_execution_role_arn: ::String,
                           ?bootstrap_actions: Array[
                             {
                               name: ::String,
@@ -1261,6 +1262,9 @@ module Aws
                               log_stream_name_prefix: ::String?,
                               encryption_key_arn: ::String?,
                               log_types: Hash[::String, Array[::String]]?
+                            }?,
+                            s3_logging_configuration: {
+                              log_type_upload_policy: Hash[("system-logs" | "application-logs" | "persistent-ui-logs"), ("emr-managed" | "on-customer-s3only" | "disabled")]?
                             }?
                           }
                         ) -> _RunJobFlowResponseSuccess

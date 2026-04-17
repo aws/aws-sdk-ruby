@@ -1722,6 +1722,8 @@ module Aws::DatabaseMigrationService
     IbmDb2LuwDataProviderSettings.add_member(:database_name, Shapes::ShapeRef.new(shape: String, location_name: "DatabaseName"))
     IbmDb2LuwDataProviderSettings.add_member(:ssl_mode, Shapes::ShapeRef.new(shape: DmsSslModeValue, location_name: "SslMode"))
     IbmDb2LuwDataProviderSettings.add_member(:certificate_arn, Shapes::ShapeRef.new(shape: String, location_name: "CertificateArn"))
+    IbmDb2LuwDataProviderSettings.add_member(:encryption_algorithm, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "EncryptionAlgorithm"))
+    IbmDb2LuwDataProviderSettings.add_member(:security_mechanism, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "SecurityMechanism"))
     IbmDb2LuwDataProviderSettings.add_member(:s3_path, Shapes::ShapeRef.new(shape: String, location_name: "S3Path"))
     IbmDb2LuwDataProviderSettings.add_member(:s3_access_role_arn, Shapes::ShapeRef.new(shape: String, location_name: "S3AccessRoleArn"))
     IbmDb2LuwDataProviderSettings.struct_class = Types::IbmDb2LuwDataProviderSettings

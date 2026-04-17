@@ -86,6 +86,7 @@ module Aws::KeyspacesStreams
       attr_accessor date_t: ::String
       attr_accessor decimal_t: ::String
       attr_accessor double_t: ::String
+      attr_accessor duration_t: ::String
       attr_accessor float_t: ::String
       attr_accessor inet_t: ::String
       attr_accessor int_t: ::String
@@ -121,6 +122,8 @@ module Aws::KeyspacesStreams
       class DecimalT < KeyspacesCellValue
       end
       class DoubleT < KeyspacesCellValue
+      end
+      class DurationT < KeyspacesCellValue
       end
       class FloatT < KeyspacesCellValue
       end

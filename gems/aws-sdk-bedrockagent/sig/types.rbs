@@ -2652,6 +2652,7 @@ module Aws::BedrockAgent
       attr_accessor name: ::String
       attr_accessor description: ::String
       attr_accessor input_schema: Types::ToolInputSchema
+      attr_accessor strict: bool
       SENSITIVE: []
     end
 

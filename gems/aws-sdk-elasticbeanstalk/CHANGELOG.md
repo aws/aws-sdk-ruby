@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.101.0 (2026-03-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.100.0 (2026-03-04)
+------------------
+
+* Feature - As part of this release, Beanstalk introduce a new info type - analyze for request environment info and retrieve environment info operations. When customers request an Al analysis, Elastic Beanstalk runs a script on an instance in their environment and returns an analysis of events, health and logs.
+
 1.99.0 (2026-01-16)
 ------------------
 

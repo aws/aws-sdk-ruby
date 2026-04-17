@@ -339,6 +339,7 @@ module Aws
                                    },
                                    ?status: ("DISABLED" | "ENABLED"),
                                    ?tags: Hash[::String, ::String],
+                                   ?image_tags: Hash[::String, ::String],
                                    client_token: ::String,
                                    ?image_scanning_configuration: {
                                      image_scanning_enabled: bool?,
@@ -1594,7 +1595,8 @@ module Aws
                                      image_log_group_name: ::String?,
                                      pipeline_log_group_name: ::String?
                                    },
-                                   ?execution_role: ::String
+                                   ?execution_role: ::String,
+                                   ?image_tags: Hash[::String, ::String]
                                  ) -> _UpdateImagePipelineResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateImagePipelineResponseSuccess
 

@@ -232,7 +232,8 @@ module Aws
                                       name: ::String
                                     },
                                   ]
-                                }
+                                },
+                                ?association_dispatch_assume_role: ::String
                               ) -> _CreateAssociationResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAssociationResponseSuccess
 
@@ -312,7 +313,8 @@ module Aws
                                             ]
                                           }?
                                         },
-                                      ]
+                                      ],
+                                      ?association_dispatch_assume_role: ::String
                                     ) -> _CreateAssociationBatchResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAssociationBatchResponseSuccess
 
@@ -2861,7 +2863,8 @@ module Aws
                                       name: ::String
                                     },
                                   ]
-                                }
+                                },
+                                ?association_dispatch_assume_role: ::String
                               ) -> _UpdateAssociationResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAssociationResponseSuccess
 

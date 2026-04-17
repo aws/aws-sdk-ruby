@@ -1843,6 +1843,24 @@ module Aws::Lambda
       SENSITIVE: [:message]
     end
 
+    class S3FilesMountConnectivityException
+      attr_accessor type: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class S3FilesMountFailureException
+      attr_accessor type: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class S3FilesMountTimeoutException
+      attr_accessor type: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
     class ScalingConfig
       attr_accessor maximum_concurrency: ::Integer
       SENSITIVE: []

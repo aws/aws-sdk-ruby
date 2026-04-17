@@ -89,6 +89,7 @@ module Aws
                               ?description: ::String,
                               widgets: Array[
                                 {
+                                  id: ::String?,
                                   title: ::String,
                                   description: ::String?,
                                   width: ::Integer?,
@@ -330,6 +331,48 @@ module Aws
                             ) -> _CreateDashboardResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDashboardResponseSuccess
 
+      interface _CreateScheduledReportResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateScheduledReportResponse]
+        def arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BCMDashboards/Client.html#create_scheduled_report-instance_method
+      def create_scheduled_report: (
+                                     scheduled_report: {
+                                       name: ::String,
+                                       dashboard_arn: ::String,
+                                       scheduled_report_execution_role_arn: ::String,
+                                       schedule_config: {
+                                         schedule_expression: ::String?,
+                                         schedule_expression_time_zone: ::String?,
+                                         schedule_period: {
+                                           start_time: ::Time?,
+                                           end_time: ::Time?
+                                         }?,
+                                         state: ("ENABLED" | "DISABLED")?
+                                       },
+                                       description: ::String?,
+                                       widget_ids: Array[::String]?,
+                                       widget_date_range_override: {
+                                         start_time: {
+                                           type: ("ABSOLUTE" | "RELATIVE"),
+                                           value: ::String
+                                         },
+                                         end_time: {
+                                           type: ("ABSOLUTE" | "RELATIVE"),
+                                           value: ::String
+                                         }
+                                       }?
+                                     },
+                                     ?resource_tags: Array[
+                                       {
+                                         key: ::String,
+                                         value: ::String
+                                       },
+                                     ],
+                                     ?client_token: ::String
+                                   ) -> _CreateScheduledReportResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateScheduledReportResponseSuccess
+
       interface _DeleteDashboardResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteDashboardResponse]
         def arn: () -> ::String
@@ -339,6 +382,29 @@ module Aws
                               arn: ::String
                             ) -> _DeleteDashboardResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteDashboardResponseSuccess
+
+      interface _DeleteScheduledReportResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteScheduledReportResponse]
+        def arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BCMDashboards/Client.html#delete_scheduled_report-instance_method
+      def delete_scheduled_report: (
+                                     arn: ::String
+                                   ) -> _DeleteScheduledReportResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteScheduledReportResponseSuccess
+
+      interface _ExecuteScheduledReportResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ExecuteScheduledReportResponse]
+        def health_status: () -> Types::HealthStatus
+        def execution_triggered: () -> bool
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BCMDashboards/Client.html#execute_scheduled_report-instance_method
+      def execute_scheduled_report: (
+                                      arn: ::String,
+                                      ?client_token: ::String,
+                                      ?dry_run: bool
+                                    ) -> _ExecuteScheduledReportResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ExecuteScheduledReportResponseSuccess
 
       interface _GetDashboardResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetDashboardResponse]
@@ -367,6 +433,16 @@ module Aws
                                ) -> _GetResourcePolicyResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetResourcePolicyResponseSuccess
 
+      interface _GetScheduledReportResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetScheduledReportResponse]
+        def scheduled_report: () -> Types::ScheduledReport
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BCMDashboards/Client.html#get_scheduled_report-instance_method
+      def get_scheduled_report: (
+                                  arn: ::String
+                                ) -> _GetScheduledReportResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetScheduledReportResponseSuccess
+
       interface _ListDashboardsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListDashboardsResponse]
         def dashboards: () -> ::Array[Types::DashboardReference]
@@ -378,6 +454,18 @@ module Aws
                              ?next_token: ::String
                            ) -> _ListDashboardsResponseSuccess
                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDashboardsResponseSuccess
+
+      interface _ListScheduledReportsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListScheduledReportsResponse]
+        def scheduled_reports: () -> ::Array[Types::ScheduledReportSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BCMDashboards/Client.html#list_scheduled_reports-instance_method
+      def list_scheduled_reports: (
+                                    ?next_token: ::String,
+                                    ?max_results: ::Integer
+                                  ) -> _ListScheduledReportsResponseSuccess
+                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListScheduledReportsResponseSuccess
 
       interface _ListTagsForResourceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
@@ -421,10 +509,11 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BCMDashboards/Client.html#update_dashboard-instance_method
       def update_dashboard: (
                               arn: ::String,
-                              ?name: ::String,
+                              name: ::String,
                               ?description: ::String,
                               ?widgets: Array[
                                 {
+                                  id: ::String?,
                                   title: ::String,
                                   description: ::String?,
                                   width: ::Integer?,
@@ -659,6 +748,42 @@ module Aws
                               ]
                             ) -> _UpdateDashboardResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDashboardResponseSuccess
+
+      interface _UpdateScheduledReportResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateScheduledReportResponse]
+        def arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BCMDashboards/Client.html#update_scheduled_report-instance_method
+      def update_scheduled_report: (
+                                     arn: ::String,
+                                     ?name: ::String,
+                                     ?description: ::String,
+                                     ?dashboard_arn: ::String,
+                                     ?scheduled_report_execution_role_arn: ::String,
+                                     ?schedule_config: {
+                                       schedule_expression: ::String?,
+                                       schedule_expression_time_zone: ::String?,
+                                       schedule_period: {
+                                         start_time: ::Time?,
+                                         end_time: ::Time?
+                                       }?,
+                                       state: ("ENABLED" | "DISABLED")?
+                                     },
+                                     ?widget_ids: Array[::String],
+                                     ?widget_date_range_override: {
+                                       start_time: {
+                                         type: ("ABSOLUTE" | "RELATIVE"),
+                                         value: ::String
+                                       },
+                                       end_time: {
+                                         type: ("ABSOLUTE" | "RELATIVE"),
+                                         value: ::String
+                                       }
+                                     },
+                                     ?clear_widget_ids: bool,
+                                     ?clear_widget_date_range_override: bool
+                                   ) -> _UpdateScheduledReportResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateScheduledReportResponseSuccess
     end
   end
 end

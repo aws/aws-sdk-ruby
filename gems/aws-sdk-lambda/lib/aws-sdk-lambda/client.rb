@@ -1919,7 +1919,8 @@ module Aws::Lambda
     #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
     #
     # @option params [Array<Types::FileSystemConfig>] :file_system_configs
-    #   Connection settings for an Amazon EFS file system.
+    #   Connection settings for an Amazon EFS file system or an Amazon S3
+    #   Files file system.
     #
     # @option params [Types::ImageConfig] :image_config
     #   Container image [configuration values][1] that override the values in
@@ -5549,7 +5550,7 @@ module Aws::Lambda
     #   the $LATEST version.
     #
     # @option params [String] :durable_execution_name
-    #   Filter executions by name. Only executions with names that contain
+    #   Filter executions by name. Only executions with names that matches
     #   this string are returned.
     #
     # @option params [Array<String>] :statuses
@@ -9226,7 +9227,8 @@ module Aws::Lambda
     #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
     #
     # @option params [Array<Types::FileSystemConfig>] :file_system_configs
-    #   Connection settings for an Amazon EFS file system.
+    #   Connection settings for an Amazon EFS file system or an Amazon S3
+    #   Files file system.
     #
     # @option params [Types::ImageConfig] :image_config
     #   [Container image configuration values][1] that override the values in
@@ -9746,7 +9748,7 @@ module Aws::Lambda
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-lambda'
-      context[:gem_version] = '1.175.0'
+      context[:gem_version] = '1.177.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

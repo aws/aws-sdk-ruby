@@ -8,18 +8,6 @@
 Feature: Smoke tests for PartnerCentralAccount
 
   @partnercentralaccount @smoke
-  Scenario: TagResourceFailsWithInvalidArn
-    Given I create a 'Aws::PartnerCentralAccount' client with config:
-      """
-{"region":"us-east-1","use_fips_endpoint":false,"use_dualstack_endpoint":false}
-      """
-    When I call the operation 'tag_resource' with params:
-      """
-{"resource_arn":"arn:aws:partnercentral:us-east-1:123456789012:catalog/AWS/partner-0123456789abc","tags":[{"key":"SmokeTestKey","value":"SmokeTestValue"}]}
-      """
-    Then I expect an error was raised
-
-  @partnercentralaccount @smoke
   Scenario: UntagResourceFailsWithInvalidArn
     Given I create a 'Aws::PartnerCentralAccount' client with config:
       """
@@ -28,6 +16,18 @@ Feature: Smoke tests for PartnerCentralAccount
     When I call the operation 'untag_resource' with params:
       """
 {"resource_arn":"arn:aws:partnercentral:us-east-1:123456789012:catalog/AWS/partner-0123456789abc","tag_keys":["SmokeTestKey"]}
+      """
+    Then I expect an error was raised
+
+  @partnercentralaccount @smoke
+  Scenario: TagResourceFailsWithInvalidArn
+    Given I create a 'Aws::PartnerCentralAccount' client with config:
+      """
+{"region":"us-east-1","use_fips_endpoint":false,"use_dualstack_endpoint":false}
+      """
+    When I call the operation 'tag_resource' with params:
+      """
+{"resource_arn":"arn:aws:partnercentral:us-east-1:123456789012:catalog/AWS/partner-0123456789abc","tags":[{"key":"SmokeTestKey","value":"SmokeTestValue"}]}
       """
     Then I expect an error was raised
 

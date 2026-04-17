@@ -766,7 +766,7 @@ module Aws
                                 ?next_token: ::String,
                                 ?sort: {
                                   sort_order: ("ASCENDING" | "DESCENDING"),
-                                  sort_by: ("LastModifiedDate" | "Identifier" | "CustomerCompanyName" | "CreatedDate")
+                                  sort_by: ("LastModifiedDate" | "Identifier" | "CustomerCompanyName" | "CreatedDate" | "TargetCloseDate")
                                 },
                                 ?last_modified_date: {
                                   after_last_modified_date: ::Time?,
@@ -779,6 +779,10 @@ module Aws
                                 ?created_date: {
                                   after_created_date: ::Time?,
                                   before_created_date: ::Time?
+                                },
+                                ?target_close_date: {
+                                  after_target_close_date: ::String?,
+                                  before_target_close_date: ::String?
                                 }
                               ) -> _ListOpportunitiesResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListOpportunitiesResponseSuccess

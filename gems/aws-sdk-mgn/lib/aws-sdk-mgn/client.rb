@@ -1070,6 +1070,173 @@ module Aws::Mgn
       req.send_request(options)
     end
 
+    # Creates a new network migration definition that specifies the source
+    # and target network configuration for a migration.
+    #
+    # @option params [required, String] :name
+    #   The name of the network migration definition.
+    #
+    # @option params [String] :description
+    #   A description of the network migration definition.
+    #
+    # @option params [Array<Types::SourceConfiguration>] :source_configurations
+    #   A list of source configurations for the network migration.
+    #
+    # @option params [required, Types::TargetS3Configuration] :target_s3_configuration
+    #   The S3 configuration for storing the target network artifacts.
+    #
+    # @option params [required, Types::TargetNetwork] :target_network
+    #   The target network configuration including topology and CIDR ranges.
+    #
+    # @option params [String] :target_deployment
+    #   The target deployment configuration for the migrated network.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   Tags to assign to the network migration definition.
+    #
+    # @option params [Hash<String,String>] :scope_tags
+    #   Scope tags for the network migration definition to control access and
+    #   organization.
+    #
+    # @return [Types::NetworkMigrationDefinition] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::NetworkMigrationDefinition#arn #arn} => String
+    #   * {Types::NetworkMigrationDefinition#network_migration_definition_id #network_migration_definition_id} => String
+    #   * {Types::NetworkMigrationDefinition#name #name} => String
+    #   * {Types::NetworkMigrationDefinition#description #description} => String
+    #   * {Types::NetworkMigrationDefinition#source_configurations #source_configurations} => Array&lt;Types::SourceConfiguration&gt;
+    #   * {Types::NetworkMigrationDefinition#target_s3_configuration #target_s3_configuration} => Types::TargetS3Configuration
+    #   * {Types::NetworkMigrationDefinition#target_network #target_network} => Types::TargetNetwork
+    #   * {Types::NetworkMigrationDefinition#target_deployment #target_deployment} => String
+    #   * {Types::NetworkMigrationDefinition#created_at #created_at} => Time
+    #   * {Types::NetworkMigrationDefinition#updated_at #updated_at} => Time
+    #   * {Types::NetworkMigrationDefinition#tags #tags} => Hash&lt;String,String&gt;
+    #   * {Types::NetworkMigrationDefinition#scope_tags #scope_tags} => Hash&lt;String,String&gt;
+    #
+    #
+    # @example Example: Sample CreateNetworkMigrationDefinition call
+    #
+    #   resp = client.create_network_migration_definition({
+    #     name: "network1", 
+    #     description: "network 1 description", 
+    #     source_configurations: [
+    #       {
+    #         source_environment: "NSX", 
+    #         source_s3_configuration: {
+    #           s3_bucket: "source_bucket", 
+    #           s3_bucket_owner: "012345678901", 
+    #           s3_key: "source_key", 
+    #         }, 
+    #       }, 
+    #     ], 
+    #     target_deployment: "SINGLE_ACCOUNT", 
+    #     target_network: {
+    #       inbound_cidr: "192.168.1.0/24", 
+    #       topology: "ISOLATED_VPC", 
+    #     }, 
+    #     target_s3_configuration: {
+    #       s3_bucket: "target_bucket", 
+    #       s3_bucket_owner: "012345678901", 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     name: "network1", 
+    #     created_at: Time.parse(1735334198), 
+    #     description: "network 1 description", 
+    #     network_migration_definition_id: "nmd-01234567891234567", 
+    #     source_configurations: [
+    #       {
+    #         source_environment: "NSX", 
+    #         source_s3_configuration: {
+    #           s3_bucket: "source_bucket", 
+    #           s3_bucket_owner: "012345678901", 
+    #           s3_key: "source_key", 
+    #         }, 
+    #       }, 
+    #     ], 
+    #     tags: {
+    #     }, 
+    #     target_network: {
+    #       inbound_cidr: "192.168.1.0/24", 
+    #       topology: "ISOLATED_VPC", 
+    #     }, 
+    #     target_s3_configuration: {
+    #       s3_bucket: "target_bucket", 
+    #       s3_bucket_owner: "012345678901", 
+    #     }, 
+    #     updated_at: Time.parse(1735334198), 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_network_migration_definition({
+    #     name: "NetworkMigrationDefinitionName", # required
+    #     description: "NetworkMigrationDefinitionDescription",
+    #     source_configurations: [
+    #       {
+    #         source_environment: "NSX", # required, accepts NSX, VSPHERE, FORTIGATE_FIREWALL, PALO_ALTO_FIREWALL, CISCO_ACI, LOGICAL_MODEL, MODELIZE_IT
+    #         source_s3_configuration: { # required
+    #           s3_bucket: "S3BucketName", # required
+    #           s3_bucket_owner: "AccountID", # required
+    #           s3_key: "S3KeyName", # required
+    #         },
+    #       },
+    #     ],
+    #     target_s3_configuration: { # required
+    #       s3_bucket: "S3BucketName", # required
+    #       s3_bucket_owner: "AccountID", # required
+    #     },
+    #     target_network: { # required
+    #       topology: "ISOLATED_VPC", # required, accepts ISOLATED_VPC, HUB_AND_SPOKE
+    #       inbound_cidr: "Cidr",
+    #       outbound_cidr: "Cidr",
+    #       inspection_cidr: "Cidr",
+    #     },
+    #     target_deployment: "SINGLE_ACCOUNT", # accepts SINGLE_ACCOUNT, MULTI_ACCOUNT
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #     scope_tags: {
+    #       "ScopeTagKey" => "ScopeTagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.network_migration_definition_id #=> String
+    #   resp.name #=> String
+    #   resp.description #=> String
+    #   resp.source_configurations #=> Array
+    #   resp.source_configurations[0].source_environment #=> String, one of "NSX", "VSPHERE", "FORTIGATE_FIREWALL", "PALO_ALTO_FIREWALL", "CISCO_ACI", "LOGICAL_MODEL", "MODELIZE_IT"
+    #   resp.source_configurations[0].source_s3_configuration.s3_bucket #=> String
+    #   resp.source_configurations[0].source_s3_configuration.s3_bucket_owner #=> String
+    #   resp.source_configurations[0].source_s3_configuration.s3_key #=> String
+    #   resp.target_s3_configuration.s3_bucket #=> String
+    #   resp.target_s3_configuration.s3_bucket_owner #=> String
+    #   resp.target_network.topology #=> String, one of "ISOLATED_VPC", "HUB_AND_SPOKE"
+    #   resp.target_network.inbound_cidr #=> String
+    #   resp.target_network.outbound_cidr #=> String
+    #   resp.target_network.inspection_cidr #=> String
+    #   resp.target_deployment #=> String, one of "SINGLE_ACCOUNT", "MULTI_ACCOUNT"
+    #   resp.created_at #=> Time
+    #   resp.updated_at #=> Time
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #   resp.scope_tags #=> Hash
+    #   resp.scope_tags["ScopeTagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/CreateNetworkMigrationDefinition AWS API Documentation
+    #
+    # @overload create_network_migration_definition(params = {})
+    # @param [Hash] params ({})
+    def create_network_migration_definition(params = {}, options = {})
+      req = build_request(:create_network_migration_definition, params)
+      req.send_request(options)
+    end
+
     # Creates a new ReplicationConfigurationTemplate.
     #
     # @option params [required, String] :staging_area_subnet_id
@@ -1131,6 +1298,10 @@ module Aws::Mgn
     # @option params [String] :internet_protocol
     #   Request to configure the internet protocol to IPv4 or IPv6.
     #
+    # @option params [Boolean] :store_snapshot_on_local_zone
+    #   Request to store snapshot on local zone during Replication Settings
+    #   template creation.
+    #
     # @return [Types::ReplicationConfigurationTemplate] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ReplicationConfigurationTemplate#replication_configuration_template_id #replication_configuration_template_id} => String
@@ -1150,6 +1321,7 @@ module Aws::Mgn
     #   * {Types::ReplicationConfigurationTemplate#use_fips_endpoint #use_fips_endpoint} => Boolean
     #   * {Types::ReplicationConfigurationTemplate#tags #tags} => Hash&lt;String,String&gt;
     #   * {Types::ReplicationConfigurationTemplate#internet_protocol #internet_protocol} => String
+    #   * {Types::ReplicationConfigurationTemplate#store_snapshot_on_local_zone #store_snapshot_on_local_zone} => Boolean
     #
     # @example Request syntax with placeholder values
     #
@@ -1173,6 +1345,7 @@ module Aws::Mgn
     #       "TagKey" => "TagValue",
     #     },
     #     internet_protocol: "IPV4", # accepts IPV4, IPV6
+    #     store_snapshot_on_local_zone: false,
     #   })
     #
     # @example Response structure
@@ -1197,6 +1370,7 @@ module Aws::Mgn
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
     #   resp.internet_protocol #=> String, one of "IPV4", "IPV6"
+    #   resp.store_snapshot_on_local_zone #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/CreateReplicationConfigurationTemplate AWS API Documentation
     #
@@ -1363,6 +1537,40 @@ module Aws::Mgn
     # @param [Hash] params ({})
     def delete_launch_configuration_template(params = {}, options = {})
       req = build_request(:delete_launch_configuration_template, params)
+      req.send_request(options)
+    end
+
+    # Deletes a network migration definition. This operation removes the
+    # migration definition and all associated metadata.
+    #
+    # @option params [required, String] :network_migration_definition_id
+    #   The unique identifier of the network migration definition to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: Sample DeleteNetworkMigrationDefinition call
+    #
+    #   resp = client.delete_network_migration_definition({
+    #     network_migration_definition_id: "nmd-01234567891234567", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_network_migration_definition({
+    #     network_migration_definition_id: "NetworkMigrationDefinitionID", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/DeleteNetworkMigrationDefinition AWS API Documentation
+    #
+    # @overload delete_network_migration_definition(params = {})
+    # @param [Hash] params ({})
+    def delete_network_migration_definition(params = {}, options = {})
+      req = build_request(:delete_network_migration_definition, params)
       req.send_request(options)
     end
 
@@ -1731,6 +1939,7 @@ module Aws::Mgn
     #   resp.items[0].tags #=> Hash
     #   resp.items[0].tags["TagKey"] #=> String
     #   resp.items[0].internet_protocol #=> String, one of "IPV4", "IPV6"
+    #   resp.items[0].store_snapshot_on_local_zone #=> Boolean
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/DescribeReplicationConfigurationTemplates AWS API Documentation
@@ -2278,6 +2487,180 @@ module Aws::Mgn
       req.send_request(options)
     end
 
+    # Retrieves the details of a network migration definition including
+    # source and target configurations.
+    #
+    # @option params [required, String] :network_migration_definition_id
+    #   The unique identifier of the network migration definition to retrieve.
+    #
+    # @return [Types::NetworkMigrationDefinition] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::NetworkMigrationDefinition#arn #arn} => String
+    #   * {Types::NetworkMigrationDefinition#network_migration_definition_id #network_migration_definition_id} => String
+    #   * {Types::NetworkMigrationDefinition#name #name} => String
+    #   * {Types::NetworkMigrationDefinition#description #description} => String
+    #   * {Types::NetworkMigrationDefinition#source_configurations #source_configurations} => Array&lt;Types::SourceConfiguration&gt;
+    #   * {Types::NetworkMigrationDefinition#target_s3_configuration #target_s3_configuration} => Types::TargetS3Configuration
+    #   * {Types::NetworkMigrationDefinition#target_network #target_network} => Types::TargetNetwork
+    #   * {Types::NetworkMigrationDefinition#target_deployment #target_deployment} => String
+    #   * {Types::NetworkMigrationDefinition#created_at #created_at} => Time
+    #   * {Types::NetworkMigrationDefinition#updated_at #updated_at} => Time
+    #   * {Types::NetworkMigrationDefinition#tags #tags} => Hash&lt;String,String&gt;
+    #   * {Types::NetworkMigrationDefinition#scope_tags #scope_tags} => Hash&lt;String,String&gt;
+    #
+    #
+    # @example Example: Sample GetNetworkMigrationDefinition call
+    #
+    #   resp = client.get_network_migration_definition({
+    #     network_migration_definition_id: "nmd-01234567891234567", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     name: "network1", 
+    #     created_at: Time.parse(1735334198), 
+    #     description: "network 1 description", 
+    #     network_migration_definition_id: "nmd-01234567891234567", 
+    #     source_configurations: [
+    #       {
+    #         source_environment: "NSX", 
+    #         source_s3_configuration: {
+    #           s3_bucket: "source_bucket", 
+    #           s3_bucket_owner: "012345678901", 
+    #           s3_key: "source_key", 
+    #         }, 
+    #       }, 
+    #     ], 
+    #     tags: {
+    #     }, 
+    #     target_network: {
+    #       inbound_cidr: "192.168.1.0/24", 
+    #       topology: "ISOLATED_VPC", 
+    #     }, 
+    #     target_s3_configuration: {
+    #       s3_bucket: "target_bucket", 
+    #       s3_bucket_owner: "012345678901", 
+    #     }, 
+    #     updated_at: Time.parse(1735334198), 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_network_migration_definition({
+    #     network_migration_definition_id: "NetworkMigrationDefinitionID", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.network_migration_definition_id #=> String
+    #   resp.name #=> String
+    #   resp.description #=> String
+    #   resp.source_configurations #=> Array
+    #   resp.source_configurations[0].source_environment #=> String, one of "NSX", "VSPHERE", "FORTIGATE_FIREWALL", "PALO_ALTO_FIREWALL", "CISCO_ACI", "LOGICAL_MODEL", "MODELIZE_IT"
+    #   resp.source_configurations[0].source_s3_configuration.s3_bucket #=> String
+    #   resp.source_configurations[0].source_s3_configuration.s3_bucket_owner #=> String
+    #   resp.source_configurations[0].source_s3_configuration.s3_key #=> String
+    #   resp.target_s3_configuration.s3_bucket #=> String
+    #   resp.target_s3_configuration.s3_bucket_owner #=> String
+    #   resp.target_network.topology #=> String, one of "ISOLATED_VPC", "HUB_AND_SPOKE"
+    #   resp.target_network.inbound_cidr #=> String
+    #   resp.target_network.outbound_cidr #=> String
+    #   resp.target_network.inspection_cidr #=> String
+    #   resp.target_deployment #=> String, one of "SINGLE_ACCOUNT", "MULTI_ACCOUNT"
+    #   resp.created_at #=> Time
+    #   resp.updated_at #=> Time
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #   resp.scope_tags #=> Hash
+    #   resp.scope_tags["ScopeTagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/GetNetworkMigrationDefinition AWS API Documentation
+    #
+    # @overload get_network_migration_definition(params = {})
+    # @param [Hash] params ({})
+    def get_network_migration_definition(params = {}, options = {})
+      req = build_request(:get_network_migration_definition, params)
+      req.send_request(options)
+    end
+
+    # Retrieves detailed information about a specific construct within a
+    # mapper segment, including its properties and configuration data.
+    #
+    # @option params [required, String] :network_migration_definition_id
+    #   The unique identifier of the network migration definition.
+    #
+    # @option params [required, String] :network_migration_execution_id
+    #   The unique identifier of the network migration execution.
+    #
+    # @option params [required, String] :segment_id
+    #   The unique identifier of the mapper segment.
+    #
+    # @option params [required, String] :construct_id
+    #   The unique identifier of the construct within the segment.
+    #
+    # @return [Types::GetNetworkMigrationMapperSegmentConstructResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetNetworkMigrationMapperSegmentConstructResponse#construct #construct} => Types::NetworkMigrationMapperSegmentConstruct
+    #
+    #
+    # @example Example: Sample GetNetworkMigrationMapperSegmentConstruct call
+    #
+    #   resp = client.get_network_migration_mapper_segment_construct({
+    #     construct_id: "abc45678-abcd-abcd-efab-012345678abc", 
+    #     network_migration_definition_id: "nmd-01234567891234567", 
+    #     network_migration_execution_id: "01234567-abcd-abcd-abcd-0123456789ab", 
+    #     segment_id: "12345678-abcd-abcd-efab-0123456789ab", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     construct: {
+    #       name: "SegmentConstructName", 
+    #       construct_id: "abc45678-abcd-abcd-efab-012345678abc", 
+    #       construct_type: "AWS::EC2::VPC", 
+    #       created_at: Time.parse(1735334198), 
+    #       description: "Segment construct description", 
+    #       logical_id: "logical-id1", 
+    #       properties: {
+    #         "CidrBlock" => "192.168.101.0/24", 
+    #         "MapPublicIpOnLaunch" => "False", 
+    #         "Tags" => "[{'Key': 'Name', 'Value': '/infra/tier-1s/cgw/segments/Lab1-veeam-test-192.168.101.0/24'}]", 
+    #       }, 
+    #       updated_at: Time.parse(1735334198), 
+    #     }, 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_network_migration_mapper_segment_construct({
+    #     network_migration_definition_id: "NetworkMigrationDefinitionID", # required
+    #     network_migration_execution_id: "NetworkMigrationExecutionID", # required
+    #     segment_id: "SegmentID", # required
+    #     construct_id: "ConstructID", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.construct.construct_id #=> String
+    #   resp.construct.construct_type #=> String
+    #   resp.construct.name #=> String
+    #   resp.construct.description #=> String
+    #   resp.construct.logical_id #=> String
+    #   resp.construct.created_at #=> Time
+    #   resp.construct.updated_at #=> Time
+    #   resp.construct.properties #=> Hash
+    #   resp.construct.properties["ConstructPropertyKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/GetNetworkMigrationMapperSegmentConstruct AWS API Documentation
+    #
+    # @overload get_network_migration_mapper_segment_construct(params = {})
+    # @param [Hash] params ({})
+    def get_network_migration_mapper_segment_construct(params = {}, options = {})
+      req = build_request(:get_network_migration_mapper_segment_construct, params)
+      req.send_request(options)
+    end
+
     # Lists all ReplicationConfigurations, filtered by Source Server ID.
     #
     # @option params [required, String] :source_server_id
@@ -2305,6 +2688,7 @@ module Aws::Mgn
     #   * {Types::ReplicationConfiguration#staging_area_tags #staging_area_tags} => Hash&lt;String,String&gt;
     #   * {Types::ReplicationConfiguration#use_fips_endpoint #use_fips_endpoint} => Boolean
     #   * {Types::ReplicationConfiguration#internet_protocol #internet_protocol} => String
+    #   * {Types::ReplicationConfiguration#store_snapshot_on_local_zone #store_snapshot_on_local_zone} => Boolean
     #
     # @example Request syntax with placeholder values
     #
@@ -2339,6 +2723,7 @@ module Aws::Mgn
     #   resp.staging_area_tags["TagKey"] #=> String
     #   resp.use_fips_endpoint #=> Boolean
     #   resp.internet_protocol #=> String, one of "IPV4", "IPV6"
+    #   resp.store_snapshot_on_local_zone #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/GetReplicationConfiguration AWS API Documentation
     #
@@ -2623,6 +3008,89 @@ module Aws::Mgn
       req.send_request(options)
     end
 
+    # Lists import file enrichment jobs with optional filtering by job IDs.
+    #
+    # @option params [Types::ListImportFileEnrichmentsFilters] :filters
+    #   Filters to apply when listing import file enrichment jobs.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in a single call.
+    #
+    # @option params [String] :next_token
+    #   The token for the next page of results.
+    #
+    # @return [Types::ListImportFileEnrichmentsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListImportFileEnrichmentsResponse#items #items} => Array&lt;Types::ImportFileEnrichment&gt;
+    #   * {Types::ListImportFileEnrichmentsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: Sample ListImportFileEnrichments call
+    #
+    #   resp = client.list_import_file_enrichments({
+    #     filters: {
+    #       job_i_ds: [
+    #         "01234567-abcd-abcd-efab-0123456789ab", 
+    #       ], 
+    #     }, 
+    #     max_results: 10, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     items: [
+    #       {
+    #         created_at: Time.parse(1735334198), 
+    #         ended_at: Time.parse(1735334258), 
+    #         job_id: "01234567-abcd-abcd-efab-0123456789ab", 
+    #         s3_bucket_target: {
+    #           s3_bucket: "my-target-bucket", 
+    #           s3_bucket_owner: "123456789012", 
+    #           s3_key: "enriched/output.csv", 
+    #         }, 
+    #         status: "SUCCEEDED", 
+    #         status_details: "Import file enrichment completed successfully", 
+    #       }, 
+    #     ], 
+    #     next_token: "NextTokenId", 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_import_file_enrichments({
+    #     filters: {
+    #       job_i_ds: ["ImportFileEnrichmentJobID"],
+    #     },
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.items #=> Array
+    #   resp.items[0].job_id #=> String
+    #   resp.items[0].created_at #=> Time
+    #   resp.items[0].ended_at #=> Time
+    #   resp.items[0].status #=> String, one of "PENDING", "STARTED", "FAILED", "SUCCEEDED", "SUCCEEDED_WITH_WARNINGS"
+    #   resp.items[0].status_details #=> String
+    #   resp.items[0].checksum.encryption_algorithm #=> String, one of "SHA256"
+    #   resp.items[0].checksum.hash #=> String
+    #   resp.items[0].s3_bucket_target.s3_bucket #=> String
+    #   resp.items[0].s3_bucket_target.s3_bucket_owner #=> String
+    #   resp.items[0].s3_bucket_target.s3_key #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/ListImportFileEnrichments AWS API Documentation
+    #
+    # @overload list_import_file_enrichments(params = {})
+    # @param [Hash] params ({})
+    def list_import_file_enrichments(params = {}, options = {})
+      req = build_request(:list_import_file_enrichments, params)
+      req.send_request(options)
+    end
+
     # List imports.
     #
     # @option params [Types::ListImportsRequestFilters] :filters
@@ -2716,6 +3184,1087 @@ module Aws::Mgn
     # @param [Hash] params ({})
     def list_managed_accounts(params = {}, options = {})
       req = build_request(:list_managed_accounts, params)
+      req.send_request(options)
+    end
+
+    # Lists network migration analysis jobs for a specified execution.
+    # Returns information about analysis job status and results.
+    #
+    # @option params [required, String] :network_migration_execution_id
+    #   The unique identifier of the network migration execution to list
+    #   analyses for.
+    #
+    # @option params [required, String] :network_migration_definition_id
+    #   The unique identifier of the network migration definition.
+    #
+    # @option params [Types::ListNetworkMigrationAnalysesFilters] :filters
+    #   Filters to apply when listing analysis jobs.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in a single call.
+    #
+    # @option params [String] :next_token
+    #   The token for the next page of results.
+    #
+    # @return [Types::ListNetworkMigrationAnalysesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListNetworkMigrationAnalysesResponse#items #items} => Array&lt;Types::NetworkMigrationAnalysisJobDetails&gt;
+    #   * {Types::ListNetworkMigrationAnalysesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: Sample ListNetworkMigrationAnalyses call
+    #
+    #   resp = client.list_network_migration_analyses({
+    #     network_migration_definition_id: "nmd-01234567891234567", 
+    #     network_migration_execution_id: "01234567-abcd-abcd-abcd-0123456789ab", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     items: [
+    #       {
+    #         created_at: Time.parse(1735334198), 
+    #         ended_at: Time.parse(1735334258), 
+    #         job_id: "01234567-abcd-abcd-efab-0123456789ab", 
+    #         network_migration_definition_id: "nmd-01234567891234567", 
+    #         network_migration_execution_id: "01234567-abcd-abcd-abcd-0123456789ab", 
+    #         status: "SUCCEEDED", 
+    #         status_details: "Job status details", 
+    #       }, 
+    #     ], 
+    #     next_token: "NextTokenId", 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_network_migration_analyses({
+    #     network_migration_execution_id: "NetworkMigrationExecutionID", # required
+    #     network_migration_definition_id: "NetworkMigrationDefinitionID", # required
+    #     filters: {
+    #       job_i_ds: ["NetworkMigrationJobID"],
+    #     },
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.items #=> Array
+    #   resp.items[0].job_id #=> String
+    #   resp.items[0].network_migration_execution_id #=> String
+    #   resp.items[0].network_migration_definition_id #=> String
+    #   resp.items[0].created_at #=> Time
+    #   resp.items[0].ended_at #=> Time
+    #   resp.items[0].status #=> String, one of "PENDING", "STARTED", "SUCCEEDED", "FAILED"
+    #   resp.items[0].status_details #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/ListNetworkMigrationAnalyses AWS API Documentation
+    #
+    # @overload list_network_migration_analyses(params = {})
+    # @param [Hash] params ({})
+    def list_network_migration_analyses(params = {}, options = {})
+      req = build_request(:list_network_migration_analyses, params)
+      req.send_request(options)
+    end
+
+    # Lists the results of network migration analyses, showing connectivity
+    # and compatibility findings for migrated resources.
+    #
+    # @option params [required, String] :network_migration_execution_id
+    #   The unique identifier of the network migration execution.
+    #
+    # @option params [required, String] :network_migration_definition_id
+    #   The unique identifier of the network migration definition.
+    #
+    # @option params [Types::ListNetworkMigrationAnalysisResultsFilters] :filters
+    #   Filters to apply when listing analysis results, such as VPC IDs.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in a single call.
+    #
+    # @option params [String] :next_token
+    #   The token for the next page of results.
+    #
+    # @return [Types::ListNetworkMigrationAnalysisResultsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListNetworkMigrationAnalysisResultsResponse#items #items} => Array&lt;Types::NetworkMigrationAnalysisResult&gt;
+    #   * {Types::ListNetworkMigrationAnalysisResultsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: Sample ListNetworkMigrationAnalysisResults call
+    #
+    #   resp = client.list_network_migration_analysis_results({
+    #     network_migration_definition_id: "nmd-01234567891234567", 
+    #     network_migration_execution_id: "01234567-abcd-abcd-abcd-0123456789ab", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     items: [
+    #       {
+    #         analysis_result: "analysis result", 
+    #         analyzer_type: "REACHABILITY_ANALYZER", 
+    #         job_id: "01234567-abcd-abcd-efab-0123456789ab", 
+    #         network_migration_definition_id: "nmd-01234567891234567", 
+    #         network_migration_execution_id: "01234567-abcd-abcd-abcd-0123456789ab", 
+    #         source: {
+    #           subnet_id: "subnet-12345678", 
+    #           vpc_id: "vpc-12345678", 
+    #         }, 
+    #         status: "SUCCEEDED", 
+    #         target: {
+    #           subnet_id: "subnet-01234567", 
+    #           vpc_id: "vpc-01234567", 
+    #         }, 
+    #       }, 
+    #     ], 
+    #     next_token: "NextTokenId", 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_network_migration_analysis_results({
+    #     network_migration_execution_id: "NetworkMigrationExecutionID", # required
+    #     network_migration_definition_id: "NetworkMigrationDefinitionID", # required
+    #     filters: {
+    #       vpc_i_ds: ["VpcID"],
+    #     },
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.items #=> Array
+    #   resp.items[0].job_id #=> String
+    #   resp.items[0].network_migration_execution_id #=> String
+    #   resp.items[0].network_migration_definition_id #=> String
+    #   resp.items[0].analyzer_type #=> String, one of "REACHABILITY_ANALYZER"
+    #   resp.items[0].source.vpc_id #=> String
+    #   resp.items[0].source.subnet_id #=> String
+    #   resp.items[0].target.vpc_id #=> String
+    #   resp.items[0].target.subnet_id #=> String
+    #   resp.items[0].status #=> String, one of "PENDING", "STARTED", "SUCCEEDED", "FAILED"
+    #   resp.items[0].analysis_result #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/ListNetworkMigrationAnalysisResults AWS API Documentation
+    #
+    # @overload list_network_migration_analysis_results(params = {})
+    # @param [Hash] params ({})
+    def list_network_migration_analysis_results(params = {}, options = {})
+      req = build_request(:list_network_migration_analysis_results, params)
+      req.send_request(options)
+    end
+
+    # Lists code generation segments, which represent individual
+    # infrastructure components generated as code templates.
+    #
+    # @option params [required, String] :network_migration_execution_id
+    #   The unique identifier of the network migration execution.
+    #
+    # @option params [required, String] :network_migration_definition_id
+    #   The unique identifier of the network migration definition.
+    #
+    # @option params [Types::ListNetworkMigrationCodeGenerationSegmentsFilters] :filters
+    #   Filters to apply when listing code generation segments.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in a single call.
+    #
+    # @option params [String] :next_token
+    #   The token for the next page of results.
+    #
+    # @return [Types::ListNetworkMigrationCodeGenerationSegmentsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListNetworkMigrationCodeGenerationSegmentsResponse#items #items} => Array&lt;Types::NetworkMigrationCodeGenerationSegment&gt;
+    #   * {Types::ListNetworkMigrationCodeGenerationSegmentsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: Sample ListNetworkMigrationCodeGenerationSegments call
+    #
+    #   resp = client.list_network_migration_code_generation_segments({
+    #     network_migration_definition_id: "nmd-01234567891234567", 
+    #     network_migration_execution_id: "01234567-abcd-abcd-abcd-0123456789ab", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     items: [
+    #       {
+    #         artifacts: [
+    #           {
+    #             artifact_id: "a2345678-abcd-abcd-efab-0123456789ab", 
+    #             artifact_sub_type: "STACK", 
+    #             artifact_type: "CDK_TYPESCRIPT", 
+    #             checksum: {
+    #               encryption_algorithm: "SHA256", 
+    #               hash: "0123456789aAbBcCdDeEfF0123456789", 
+    #             }, 
+    #             created_at: Time.parse(1735334198), 
+    #             logical_id: "logical-id2", 
+    #             output_s3_configuration: {
+    #               s3_bucket: "s3_bucket", 
+    #               s3_bucket_owner: "012345678901", 
+    #               s3_key: "S3KeyName", 
+    #             }, 
+    #           }, 
+    #         ], 
+    #         created_at: Time.parse(1735334198), 
+    #         job_id: "01234567-abcd-abcd-efab-0123456789ab", 
+    #         logical_id: "logical-id1", 
+    #         mapper_segment_id: "12345678-abcd-abcd-efab-0123456789ab", 
+    #         network_migration_definition_id: "nmd-01234567891234567", 
+    #         network_migration_execution_id: "01234567-abcd-abcd-abcd-0123456789ab", 
+    #         segment_id: "12345678-abcd-abcd-efab-0123456789ab", 
+    #         segment_type: "WORKLOAD", 
+    #       }, 
+    #     ], 
+    #     next_token: "NextTokenId", 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_network_migration_code_generation_segments({
+    #     network_migration_execution_id: "NetworkMigrationExecutionID", # required
+    #     network_migration_definition_id: "NetworkMigrationDefinitionID", # required
+    #     filters: {
+    #       segment_i_ds: ["SegmentID"],
+    #     },
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.items #=> Array
+    #   resp.items[0].job_id #=> String
+    #   resp.items[0].network_migration_execution_id #=> String
+    #   resp.items[0].network_migration_definition_id #=> String
+    #   resp.items[0].segment_id #=> String
+    #   resp.items[0].segment_type #=> String, one of "WORKLOAD", "APPLIANCE", "NETWORK"
+    #   resp.items[0].logical_id #=> String
+    #   resp.items[0].mapper_segment_id #=> String
+    #   resp.items[0].artifacts #=> Array
+    #   resp.items[0].artifacts[0].artifact_id #=> String
+    #   resp.items[0].artifacts[0].artifact_type #=> String, one of "CDK_TYPESCRIPT", "CLOUDFORMATION_TEMPLATE", "CDKTF_TYPESCRIPT", "TERRAFORM_CONFIGURATION", "CDK_L2_TYPESCRIPT"
+    #   resp.items[0].artifacts[0].artifact_sub_type #=> String, one of "APPLICATION", "NESTED_STACK", "STACK"
+    #   resp.items[0].artifacts[0].logical_id #=> String
+    #   resp.items[0].artifacts[0].output_s3_configuration.s3_bucket #=> String
+    #   resp.items[0].artifacts[0].output_s3_configuration.s3_bucket_owner #=> String
+    #   resp.items[0].artifacts[0].output_s3_configuration.s3_key #=> String
+    #   resp.items[0].artifacts[0].checksum.encryption_algorithm #=> String, one of "SHA256"
+    #   resp.items[0].artifacts[0].checksum.hash #=> String
+    #   resp.items[0].artifacts[0].created_at #=> Time
+    #   resp.items[0].created_at #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/ListNetworkMigrationCodeGenerationSegments AWS API Documentation
+    #
+    # @overload list_network_migration_code_generation_segments(params = {})
+    # @param [Hash] params ({})
+    def list_network_migration_code_generation_segments(params = {}, options = {})
+      req = build_request(:list_network_migration_code_generation_segments, params)
+      req.send_request(options)
+    end
+
+    # Lists network migration code generation jobs, which convert network
+    # mappings into infrastructure-as-code templates.
+    #
+    # @option params [required, String] :network_migration_execution_id
+    #   The unique identifier of the network migration execution.
+    #
+    # @option params [required, String] :network_migration_definition_id
+    #   The unique identifier of the network migration definition.
+    #
+    # @option params [Types::ListNetworkMigrationCodeGenerationsFilters] :filters
+    #   Filters to apply when listing code generation jobs.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in a single call.
+    #
+    # @option params [String] :next_token
+    #   The token for the next page of results.
+    #
+    # @return [Types::ListNetworkMigrationCodeGenerationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListNetworkMigrationCodeGenerationsResponse#items #items} => Array&lt;Types::NetworkMigrationCodeGenerationJobDetails&gt;
+    #   * {Types::ListNetworkMigrationCodeGenerationsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: Sample ListNetworkMigrationCodeGenerations call
+    #
+    #   resp = client.list_network_migration_code_generations({
+    #     network_migration_definition_id: "nmd-01234567891234567", 
+    #     network_migration_execution_id: "01234567-abcd-abcd-abcd-0123456789ab", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     items: [
+    #       {
+    #         created_at: Time.parse(1735334198), 
+    #         ended_at: Time.parse(1735334258), 
+    #         job_id: "01234567-abcd-abcd-efab-0123456789ab", 
+    #         network_migration_definition_id: "nmd-01234567891234567", 
+    #         network_migration_execution_id: "01234567-abcd-abcd-abcd-0123456789ab", 
+    #         status: "SUCCEEDED", 
+    #         status_details: "Job status details", 
+    #       }, 
+    #     ], 
+    #     next_token: "NextTokenId", 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_network_migration_code_generations({
+    #     network_migration_execution_id: "NetworkMigrationExecutionID", # required
+    #     network_migration_definition_id: "NetworkMigrationDefinitionID", # required
+    #     filters: {
+    #       job_i_ds: ["NetworkMigrationJobID"],
+    #     },
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.items #=> Array
+    #   resp.items[0].job_id #=> String
+    #   resp.items[0].network_migration_execution_id #=> String
+    #   resp.items[0].network_migration_definition_id #=> String
+    #   resp.items[0].created_at #=> Time
+    #   resp.items[0].ended_at #=> Time
+    #   resp.items[0].status #=> String, one of "PENDING", "STARTED", "SUCCEEDED", "FAILED"
+    #   resp.items[0].status_details #=> String
+    #   resp.items[0].code_generation_output_format_status_details_map #=> Hash
+    #   resp.items[0].code_generation_output_format_status_details_map["CodeGenerationOutputFormatType"].status #=> String, one of "SUCCEEDED", "FAILED"
+    #   resp.items[0].code_generation_output_format_status_details_map["CodeGenerationOutputFormatType"].status_detail_list #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/ListNetworkMigrationCodeGenerations AWS API Documentation
+    #
+    # @overload list_network_migration_code_generations(params = {})
+    # @param [Hash] params ({})
+    def list_network_migration_code_generations(params = {}, options = {})
+      req = build_request(:list_network_migration_code_generations, params)
+      req.send_request(options)
+    end
+
+    # Lists all network migration definitions in the account, with optional
+    # filtering.
+    #
+    # @option params [Types::ListNetworkMigrationDefinitionsRequestFilters] :filters
+    #   Filters to apply when listing network migration definitions.
+    #
+    # @option params [String] :next_token
+    #   The token for the next page of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in a single call.
+    #
+    # @return [Types::ListNetworkMigrationDefinitionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListNetworkMigrationDefinitionsResponse#items #items} => Array&lt;Types::NetworkMigrationDefinitionSummary&gt;
+    #   * {Types::ListNetworkMigrationDefinitionsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: Sample ListNetworkMigrationDefinitions call
+    #
+    #   resp = client.list_network_migration_definitions({
+    #     filters: {
+    #       network_migration_definition_i_ds: [
+    #         "nmd-01234567891234567", 
+    #       ], 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     items: [
+    #       {
+    #         name: "network1", 
+    #         network_migration_definition_id: "nmd-01234567891234567", 
+    #         source_environment: "NSX", 
+    #       }, 
+    #     ], 
+    #     next_token: "NextTokenId", 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_network_migration_definitions({
+    #     filters: {
+    #       network_migration_definition_i_ds: ["NetworkMigrationDefinitionID"],
+    #     },
+    #     next_token: "PaginationToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.items #=> Array
+    #   resp.items[0].network_migration_definition_id #=> String
+    #   resp.items[0].name #=> String
+    #   resp.items[0].source_environment #=> String, one of "NSX", "VSPHERE", "FORTIGATE_FIREWALL", "PALO_ALTO_FIREWALL", "CISCO_ACI", "LOGICAL_MODEL", "MODELIZE_IT"
+    #   resp.items[0].arn #=> String
+    #   resp.items[0].tags #=> Hash
+    #   resp.items[0].tags["TagKey"] #=> String
+    #   resp.items[0].scope_tags #=> Hash
+    #   resp.items[0].scope_tags["ScopeTagKey"] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/ListNetworkMigrationDefinitions AWS API Documentation
+    #
+    # @overload list_network_migration_definitions(params = {})
+    # @param [Hash] params ({})
+    def list_network_migration_definitions(params = {}, options = {})
+      req = build_request(:list_network_migration_definitions, params)
+      req.send_request(options)
+    end
+
+    # Lists CloudFormation stacks that have been deployed as part of the
+    # network migration.
+    #
+    # @option params [required, String] :network_migration_execution_id
+    #   The unique identifier of the network migration execution.
+    #
+    # @option params [required, String] :network_migration_definition_id
+    #   The unique identifier of the network migration definition.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in a single call.
+    #
+    # @option params [String] :next_token
+    #   The token for the next page of results.
+    #
+    # @return [Types::ListNetworkMigrationDeployedStacksResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListNetworkMigrationDeployedStacksResponse#items #items} => Array&lt;Types::NetworkMigrationDeployedStackDetails&gt;
+    #   * {Types::ListNetworkMigrationDeployedStacksResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: Sample ListNetworkMigrationDeployedStacks call
+    #
+    #   resp = client.list_network_migration_deployed_stacks({
+    #     network_migration_definition_id: "nmd-01234567891234567", 
+    #     network_migration_execution_id: "01234567-abcd-abcd-abcd-0123456789ab", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     items: [
+    #       {
+    #         failed_resources: [
+    #         ], 
+    #         segment_id: "12345678-abcd-abcd-efab-0123456789ab", 
+    #         stack_logical_id: "logical-id1", 
+    #         stack_physical_id: "arn:aws:cloudformation:us-east-1:012345678901:stack/ExampleStack/b2345678-abcd-abcd-efab-0123456789ab", 
+    #         status: "CREATE_STARTED", 
+    #         target_account: "234567890123", 
+    #       }, 
+    #     ], 
+    #     next_token: "NextTokenId", 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_network_migration_deployed_stacks({
+    #     network_migration_execution_id: "NetworkMigrationExecutionID", # required
+    #     network_migration_definition_id: "NetworkMigrationDefinitionID", # required
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.items #=> Array
+    #   resp.items[0].status #=> String, one of "CREATE_COMPLETE", "CREATE_FAILED", "CREATE_STARTED", "DELETE_COMPLETE", "DELETE_FAILED", "DELETE_STARTED"
+    #   resp.items[0].stack_physical_id #=> String
+    #   resp.items[0].stack_logical_id #=> String
+    #   resp.items[0].segment_id #=> String
+    #   resp.items[0].target_account #=> String
+    #   resp.items[0].failed_resources #=> Array
+    #   resp.items[0].failed_resources[0].logical_id #=> String
+    #   resp.items[0].failed_resources[0].status #=> String, one of "CREATE_FAILED", "DELETE_FAILED"
+    #   resp.items[0].failed_resources[0].status_reason #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/ListNetworkMigrationDeployedStacks AWS API Documentation
+    #
+    # @overload list_network_migration_deployed_stacks(params = {})
+    # @param [Hash] params ({})
+    def list_network_migration_deployed_stacks(params = {}, options = {})
+      req = build_request(:list_network_migration_deployed_stacks, params)
+      req.send_request(options)
+    end
+
+    # Lists network migration deployment jobs and their current status.
+    #
+    # @option params [required, String] :network_migration_execution_id
+    #   The unique identifier of the network migration execution.
+    #
+    # @option params [required, String] :network_migration_definition_id
+    #   The unique identifier of the network migration definition.
+    #
+    # @option params [Types::ListNetworkMigrationDeployerJobFilters] :filters
+    #   Filters to apply when listing deployment jobs.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in a single call.
+    #
+    # @option params [String] :next_token
+    #   The token for the next page of results.
+    #
+    # @return [Types::ListNetworkMigrationDeployerJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListNetworkMigrationDeployerJobResponse#items #items} => Array&lt;Types::NetworkMigrationDeployerJobDetails&gt;
+    #   * {Types::ListNetworkMigrationDeployerJobResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: Sample ListNetworkMigrationDeployments call
+    #
+    #   resp = client.list_network_migration_deployments({
+    #     network_migration_definition_id: "nmd-01234567891234567", 
+    #     network_migration_execution_id: "01234567-abcd-abcd-abcd-0123456789ab", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     items: [
+    #       {
+    #         created_at: Time.parse(1735334198), 
+    #         ended_at: Time.parse(1735334258), 
+    #         job_id: "01234567-abcd-abcd-efab-0123456789ab", 
+    #         network_migration_definition_id: "nmd-01234567891234567", 
+    #         network_migration_execution_id: "01234567-abcd-abcd-abcd-0123456789ab", 
+    #         status: "SUCCEEDED", 
+    #         status_details: "Job status details", 
+    #       }, 
+    #     ], 
+    #     next_token: "NextTokenId", 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_network_migration_deployments({
+    #     network_migration_execution_id: "NetworkMigrationExecutionID", # required
+    #     network_migration_definition_id: "NetworkMigrationDefinitionID", # required
+    #     filters: {
+    #       job_i_ds: ["NetworkMigrationJobID"],
+    #     },
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.items #=> Array
+    #   resp.items[0].job_id #=> String
+    #   resp.items[0].network_migration_execution_id #=> String
+    #   resp.items[0].network_migration_definition_id #=> String
+    #   resp.items[0].created_at #=> Time
+    #   resp.items[0].ended_at #=> Time
+    #   resp.items[0].status #=> String, one of "PENDING", "STARTED", "SUCCEEDED", "FAILED"
+    #   resp.items[0].status_details #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/ListNetworkMigrationDeployments AWS API Documentation
+    #
+    # @overload list_network_migration_deployments(params = {})
+    # @param [Hash] params ({})
+    def list_network_migration_deployments(params = {}, options = {})
+      req = build_request(:list_network_migration_deployments, params)
+      req.send_request(options)
+    end
+
+    # Lists network migration execution instances for a given definition,
+    # showing the status and progress of each execution.
+    #
+    # @option params [required, String] :network_migration_definition_id
+    #   The unique identifier of the network migration definition to list
+    #   executions for.
+    #
+    # @option params [Types::ListNetworkMigrationExecutionRequestFilters] :filters
+    #   Filters to apply when listing executions, such as status or execution
+    #   ID.
+    #
+    # @option params [String] :next_token
+    #   The token for the next page of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in a single call.
+    #
+    # @return [Types::ListNetworkMigrationExecutionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListNetworkMigrationExecutionsResponse#items #items} => Array&lt;Types::NetworkMigrationExecution&gt;
+    #   * {Types::ListNetworkMigrationExecutionsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: Sample ListNetworkMigrationExecutions call
+    #
+    #   resp = client.list_network_migration_executions({
+    #     network_migration_definition_id: "nmd-01234567891234567", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     items: [
+    #       {
+    #         activity: "CODE_GENERATION", 
+    #         created_at: Time.parse(1735334198), 
+    #         network_migration_definition_id: "nmd-01234567891234567", 
+    #         network_migration_execution_id: "01234567-abcd-abcd-abcd-0123456789ab", 
+    #         stage: "CODE_GENERATION", 
+    #         status: "SUCCEEDED", 
+    #         tags: {
+    #         }, 
+    #         updated_at: Time.parse(1735334198), 
+    #       }, 
+    #     ], 
+    #     next_token: "NextTokenId", 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_network_migration_executions({
+    #     network_migration_definition_id: "NetworkMigrationDefinitionID", # required
+    #     filters: {
+    #       network_migration_execution_i_ds: ["NetworkMigrationExecutionID"],
+    #       network_migration_execution_statuses: ["PENDING"], # accepts PENDING, STARTED, SUCCEEDED, FAILED
+    #     },
+    #     next_token: "PaginationToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.items #=> Array
+    #   resp.items[0].network_migration_definition_id #=> String
+    #   resp.items[0].network_migration_execution_id #=> String
+    #   resp.items[0].status #=> String, one of "PENDING", "STARTED", "SUCCEEDED", "FAILED"
+    #   resp.items[0].stage #=> String, one of "MAPPING", "CODE_GENERATION", "DEPLOY", "DEPLOYED_STACKS_DELETION", "ANALYZE"
+    #   resp.items[0].activity #=> String, one of "MAPPING", "MAPPING_UPDATE", "CODE_GENERATION", "DEPLOY", "DEPLOYED_STACKS_DELETION", "ANALYZE"
+    #   resp.items[0].created_at #=> Time
+    #   resp.items[0].updated_at #=> Time
+    #   resp.items[0].tags #=> Hash
+    #   resp.items[0].tags["TagKey"] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/ListNetworkMigrationExecutions AWS API Documentation
+    #
+    # @overload list_network_migration_executions(params = {})
+    # @param [Hash] params ({})
+    def list_network_migration_executions(params = {}, options = {})
+      req = build_request(:list_network_migration_executions, params)
+      req.send_request(options)
+    end
+
+    # Lists constructs within a mapper segment, representing individual
+    # infrastructure components like VPCs, subnets, or security groups.
+    #
+    # @option params [required, String] :network_migration_execution_id
+    #   The unique identifier of the network migration execution.
+    #
+    # @option params [required, String] :network_migration_definition_id
+    #   The unique identifier of the network migration definition.
+    #
+    # @option params [required, String] :segment_id
+    #   The unique identifier of the segment to list constructs for.
+    #
+    # @option params [Types::ListNetworkMigrationMapperSegmentConstructsFilters] :filters
+    #   Filters to apply when listing constructs, such as construct type or
+    #   ID.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in a single call.
+    #
+    # @option params [String] :next_token
+    #   The token for the next page of results.
+    #
+    # @return [Types::ListNetworkMigrationMapperSegmentConstructsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListNetworkMigrationMapperSegmentConstructsResponse#items #items} => Array&lt;Types::NetworkMigrationMapperSegmentConstruct&gt;
+    #   * {Types::ListNetworkMigrationMapperSegmentConstructsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: Sample ListNetworkMigrationMapperSegmentConstructs call with properties enabled
+    #
+    #   resp = client.list_network_migration_mapper_segment_constructs({
+    #     network_migration_definition_id: "nmd-01234567891234567", 
+    #     network_migration_execution_id: "01234567-abcd-abcd-abcd-0123456789ab", 
+    #     segment_id: "12345678-abcd-abcd-efab-0123456789ab", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     items: [
+    #       {
+    #         name: "SegmentConstructName", 
+    #         construct_id: "abc45678-abcd-abcd-efab-012345678abc", 
+    #         construct_type: "AWS::EC2::VPC", 
+    #         created_at: Time.parse(1735334198), 
+    #         description: "Segment construct description", 
+    #         logical_id: "logical-id1", 
+    #         properties: {
+    #           "CidrBlock" => "192.168.101.0/24", 
+    #           "MapPublicIpOnLaunch" => "False", 
+    #           "Tags" => "[{'Key': 'Name', 'Value': '/infra/tier-1s/cgw/segments/Lab1-veeam-test-192.168.101.0/24'}]", 
+    #         }, 
+    #         updated_at: Time.parse(1735334198), 
+    #       }, 
+    #     ], 
+    #     next_token: "NextTokenId", 
+    #   }
+    #
+    # @example Example: Sample ListNetworkMigrationMapperSegmentConstructs call with properties disabled (default)
+    #
+    #   resp = client.list_network_migration_mapper_segment_constructs({
+    #     network_migration_definition_id: "nmd-01234567891234567", 
+    #     network_migration_execution_id: "01234567-abcd-abcd-abcd-0123456789ab", 
+    #     segment_id: "12345678-abcd-abcd-efab-0123456789ab", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     items: [
+    #       {
+    #         name: "SegmentConstructName", 
+    #         construct_id: "abc45678-abcd-abcd-efab-012345678abc", 
+    #         construct_type: "AWS::EC2::VPC", 
+    #         created_at: Time.parse(1735334198), 
+    #         description: "Segment construct description", 
+    #         logical_id: "logical-id1", 
+    #         updated_at: Time.parse(1735334198), 
+    #       }, 
+    #     ], 
+    #     next_token: "NextTokenId", 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_network_migration_mapper_segment_constructs({
+    #     network_migration_execution_id: "NetworkMigrationExecutionID", # required
+    #     network_migration_definition_id: "NetworkMigrationDefinitionID", # required
+    #     segment_id: "SegmentID", # required
+    #     filters: {
+    #       construct_i_ds: ["ConstructID"],
+    #       construct_types: ["NetworkMigrationMapperSegmentConstructType"],
+    #     },
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.items #=> Array
+    #   resp.items[0].construct_id #=> String
+    #   resp.items[0].construct_type #=> String
+    #   resp.items[0].name #=> String
+    #   resp.items[0].description #=> String
+    #   resp.items[0].logical_id #=> String
+    #   resp.items[0].created_at #=> Time
+    #   resp.items[0].updated_at #=> Time
+    #   resp.items[0].properties #=> Hash
+    #   resp.items[0].properties["ConstructPropertyKey"] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/ListNetworkMigrationMapperSegmentConstructs AWS API Documentation
+    #
+    # @overload list_network_migration_mapper_segment_constructs(params = {})
+    # @param [Hash] params ({})
+    def list_network_migration_mapper_segment_constructs(params = {}, options = {})
+      req = build_request(:list_network_migration_mapper_segment_constructs, params)
+      req.send_request(options)
+    end
+
+    # Lists mapper segments, which represent logical groupings of network
+    # resources to be migrated together.
+    #
+    # @option params [required, String] :network_migration_execution_id
+    #   The unique identifier of the network migration execution.
+    #
+    # @option params [required, String] :network_migration_definition_id
+    #   The unique identifier of the network migration definition.
+    #
+    # @option params [Types::ListNetworkMigrationMapperSegmentsFilters] :filters
+    #   Filters to apply when listing segments.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in a single call.
+    #
+    # @option params [String] :next_token
+    #   The token for the next page of results.
+    #
+    # @return [Types::ListNetworkMigrationMapperSegmentsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListNetworkMigrationMapperSegmentsResponse#items #items} => Array&lt;Types::NetworkMigrationMapperSegment&gt;
+    #   * {Types::ListNetworkMigrationMapperSegmentsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: Sample ListNetworkMigrationMapperSegments call
+    #
+    #   resp = client.list_network_migration_mapper_segments({
+    #     network_migration_definition_id: "nmd-01234567891234567", 
+    #     network_migration_execution_id: "01234567-abcd-abcd-abcd-0123456789ab", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     items: [
+    #       {
+    #         name: "SegmentName", 
+    #         checksum: {
+    #           encryption_algorithm: "SHA256", 
+    #           hash: "0123456789aAbBcCdDeEfF0123456789", 
+    #         }, 
+    #         created_at: Time.parse(1735334198), 
+    #         description: "Segment description", 
+    #         job_id: "01234567-abcd-abcd-efab-0123456789ab", 
+    #         logical_id: "logical-id1", 
+    #         network_migration_definition_id: "nmd-01234567891234567", 
+    #         network_migration_execution_id: "01234567-abcd-abcd-abcd-0123456789ab", 
+    #         output_s3_configuration: {
+    #           s3_bucket: "s3_bucket", 
+    #           s3_bucket_owner: "012345678901", 
+    #           s3_key: "S3KeyName", 
+    #         }, 
+    #         segment_id: "12345678-abcd-abcd-efab-0123456789ab", 
+    #         segment_type: "WORKLOAD", 
+    #         updated_at: Time.parse(1735334198), 
+    #       }, 
+    #     ], 
+    #     next_token: "NextTokenId", 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_network_migration_mapper_segments({
+    #     network_migration_execution_id: "NetworkMigrationExecutionID", # required
+    #     network_migration_definition_id: "NetworkMigrationDefinitionID", # required
+    #     filters: {
+    #       segment_i_ds: ["SegmentID"],
+    #     },
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.items #=> Array
+    #   resp.items[0].job_id #=> String
+    #   resp.items[0].network_migration_execution_id #=> String
+    #   resp.items[0].network_migration_definition_id #=> String
+    #   resp.items[0].segment_id #=> String
+    #   resp.items[0].segment_type #=> String, one of "WORKLOAD", "APPLIANCE"
+    #   resp.items[0].name #=> String
+    #   resp.items[0].description #=> String
+    #   resp.items[0].logical_id #=> String
+    #   resp.items[0].checksum.encryption_algorithm #=> String, one of "SHA256"
+    #   resp.items[0].checksum.hash #=> String
+    #   resp.items[0].output_s3_configuration.s3_bucket #=> String
+    #   resp.items[0].output_s3_configuration.s3_bucket_owner #=> String
+    #   resp.items[0].output_s3_configuration.s3_key #=> String
+    #   resp.items[0].created_at #=> Time
+    #   resp.items[0].updated_at #=> Time
+    #   resp.items[0].scope_tags #=> Hash
+    #   resp.items[0].scope_tags["ScopeTagKey"] #=> String
+    #   resp.items[0].target_account #=> String
+    #   resp.items[0].referenced_segments #=> Array
+    #   resp.items[0].referenced_segments[0] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/ListNetworkMigrationMapperSegments AWS API Documentation
+    #
+    # @overload list_network_migration_mapper_segments(params = {})
+    # @param [Hash] params ({})
+    def list_network_migration_mapper_segments(params = {}, options = {})
+      req = build_request(:list_network_migration_mapper_segments, params)
+      req.send_request(options)
+    end
+
+    # Lists mapping update jobs, which apply customer modifications to the
+    # generated network mappings.
+    #
+    # @option params [required, String] :network_migration_execution_id
+    #   The unique identifier of the network migration execution.
+    #
+    # @option params [required, String] :network_migration_definition_id
+    #   The unique identifier of the network migration definition.
+    #
+    # @option params [Types::ListNetworkMigrationMappingUpdatesFilters] :filters
+    #   Filters to apply when listing mapping update jobs.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in a single call.
+    #
+    # @option params [String] :next_token
+    #   The token for the next page of results.
+    #
+    # @return [Types::ListNetworkMigrationMappingUpdatesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListNetworkMigrationMappingUpdatesResponse#items #items} => Array&lt;Types::NetworkMigrationMappingUpdateJobDetails&gt;
+    #   * {Types::ListNetworkMigrationMappingUpdatesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: Sample ListNetworkMigrationMappingUpdates call
+    #
+    #   resp = client.list_network_migration_mapping_updates({
+    #     network_migration_definition_id: "nmd-01234567891234567", 
+    #     network_migration_execution_id: "01234567-abcd-abcd-abcd-0123456789ab", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     items: [
+    #       {
+    #         created_at: Time.parse(1735334198), 
+    #         ended_at: Time.parse(1735334258), 
+    #         job_id: "01234567-abcd-abcd-efab-0123456789ab", 
+    #         network_migration_definition_id: "nmd-01234567891234567", 
+    #         network_migration_execution_id: "01234567-abcd-abcd-abcd-0123456789ab", 
+    #         status: "SUCCEEDED", 
+    #         status_details: "Job status details", 
+    #       }, 
+    #     ], 
+    #     next_token: "NextTokenId", 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_network_migration_mapping_updates({
+    #     network_migration_execution_id: "NetworkMigrationExecutionID", # required
+    #     network_migration_definition_id: "NetworkMigrationDefinitionID", # required
+    #     filters: {
+    #       job_i_ds: ["NetworkMigrationJobID"],
+    #     },
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.items #=> Array
+    #   resp.items[0].job_id #=> String
+    #   resp.items[0].network_migration_execution_id #=> String
+    #   resp.items[0].network_migration_definition_id #=> String
+    #   resp.items[0].created_at #=> Time
+    #   resp.items[0].ended_at #=> Time
+    #   resp.items[0].status #=> String, one of "PENDING", "STARTED", "SUCCEEDED", "FAILED"
+    #   resp.items[0].status_details #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/ListNetworkMigrationMappingUpdates AWS API Documentation
+    #
+    # @overload list_network_migration_mapping_updates(params = {})
+    # @param [Hash] params ({})
+    def list_network_migration_mapping_updates(params = {}, options = {})
+      req = build_request(:list_network_migration_mapping_updates, params)
+      req.send_request(options)
+    end
+
+    # Lists network migration mapping jobs, which analyze and create
+    # relationships between source and target network resources.
+    #
+    # @option params [required, String] :network_migration_execution_id
+    #   The unique identifier of the network migration execution.
+    #
+    # @option params [required, String] :network_migration_definition_id
+    #   The unique identifier of the network migration definition.
+    #
+    # @option params [Types::ListNetworkMigrationMappingsFilters] :filters
+    #   Filters to apply when listing mapping jobs.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in a single call.
+    #
+    # @option params [String] :next_token
+    #   The token for the next page of results.
+    #
+    # @return [Types::ListNetworkMigrationMappingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListNetworkMigrationMappingsResponse#items #items} => Array&lt;Types::NetworkMigrationMappingJobDetails&gt;
+    #   * {Types::ListNetworkMigrationMappingsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: Sample ListNetworkMigrationMappings call
+    #
+    #   resp = client.list_network_migration_mappings({
+    #     network_migration_definition_id: "nmd-01234567891234567", 
+    #     network_migration_execution_id: "01234567-abcd-abcd-abcd-0123456789ab", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     items: [
+    #       {
+    #         created_at: Time.parse(1735334198), 
+    #         ended_at: Time.parse(1735334258), 
+    #         job_id: "01234567-abcd-abcd-efab-0123456789ab", 
+    #         network_migration_definition_id: "nmd-01234567891234567", 
+    #         network_migration_execution_id: "01234567-abcd-abcd-abcd-0123456789ab", 
+    #         status: "SUCCEEDED", 
+    #         status_details: "Job status details", 
+    #       }, 
+    #     ], 
+    #     next_token: "NextTokenId", 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_network_migration_mappings({
+    #     network_migration_execution_id: "NetworkMigrationExecutionID", # required
+    #     network_migration_definition_id: "NetworkMigrationDefinitionID", # required
+    #     filters: {
+    #       job_i_ds: ["NetworkMigrationJobID"],
+    #     },
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.items #=> Array
+    #   resp.items[0].job_id #=> String
+    #   resp.items[0].network_migration_execution_id #=> String
+    #   resp.items[0].network_migration_definition_id #=> String
+    #   resp.items[0].created_at #=> Time
+    #   resp.items[0].ended_at #=> Time
+    #   resp.items[0].status #=> String, one of "PENDING", "STARTED", "SUCCEEDED", "FAILED"
+    #   resp.items[0].status_details #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/ListNetworkMigrationMappings AWS API Documentation
+    #
+    # @overload list_network_migration_mappings(params = {})
+    # @param [Hash] params ({})
+    def list_network_migration_mappings(params = {}, options = {})
+      req = build_request(:list_network_migration_mappings, params)
       req.send_request(options)
     end
 
@@ -3867,6 +5416,377 @@ module Aws::Mgn
       req.send_request(options)
     end
 
+    # Starts an import file enrichment job to process and enrich network
+    # migration import files with additional metadata and IP assignment
+    # strategies.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, Types::EnrichmentSourceS3Configuration] :s3_bucket_source
+    #   The S3 configuration specifying the source location of the import file
+    #   to be enriched.
+    #
+    # @option params [required, Types::EnrichmentTargetS3Configuration] :s3_bucket_target
+    #   The S3 configuration specifying the target location where the enriched
+    #   import file will be stored.
+    #
+    # @option params [String] :ip_assignment_strategy
+    #   The IP assignment strategy to use when enriching the import file. Can
+    #   be STATIC or DYNAMIC.
+    #
+    # @return [Types::StartImportFileEnrichmentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartImportFileEnrichmentResponse#job_id #job_id} => String
+    #
+    #
+    # @example Example: Sample StartImportFileEnrichment call
+    #
+    #   resp = client.start_import_file_enrichment({
+    #     ip_assignment_strategy: "STATIC", 
+    #     s3_bucket_source: {
+    #       s3_bucket: "my-source-bucket", 
+    #       s3_bucket_owner: "123456789012", 
+    #       s3_key: "imports/source-file.csv", 
+    #     }, 
+    #     s3_bucket_target: {
+    #       s3_bucket: "my-target-bucket", 
+    #       s3_bucket_owner: "123456789012", 
+    #       s3_key: "enriched/output.csv", 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     job_id: "01234567-abcd-abcd-efab-0123456789ab", 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_import_file_enrichment({
+    #     client_token: "ClientIdempotencyToken",
+    #     s3_bucket_source: { # required
+    #       s3_bucket: "S3BucketName", # required
+    #       s3_bucket_owner: "AccountID", # required
+    #       s3_key: "S3KeyName", # required
+    #     },
+    #     s3_bucket_target: { # required
+    #       s3_bucket: "S3BucketName", # required
+    #       s3_bucket_owner: "AccountID", # required
+    #       s3_key: "S3KeyName", # required
+    #     },
+    #     ip_assignment_strategy: "STATIC", # accepts STATIC, DYNAMIC
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.job_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/StartImportFileEnrichment AWS API Documentation
+    #
+    # @overload start_import_file_enrichment(params = {})
+    # @param [Hash] params ({})
+    def start_import_file_enrichment(params = {}, options = {})
+      req = build_request(:start_import_file_enrichment, params)
+      req.send_request(options)
+    end
+
+    # Starts a network migration analysis job to evaluate connectivity and
+    # compatibility of the migration mappings.
+    #
+    # @option params [required, String] :network_migration_execution_id
+    #   The unique identifier of the network migration execution to analyze.
+    #
+    # @option params [required, String] :network_migration_definition_id
+    #   The unique identifier of the network migration definition.
+    #
+    # @return [Types::StartNetworkMigrationAnalysisResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartNetworkMigrationAnalysisResponse#job_id #job_id} => String
+    #
+    #
+    # @example Example: Sample StartNetworkMigrationAnalysis call
+    #
+    #   resp = client.start_network_migration_analysis({
+    #     network_migration_definition_id: "nmd-01234567891234567", 
+    #     network_migration_execution_id: "01234567-abcd-abcd-abcd-0123456789ab", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     job_id: "01234567-abcd-abcd-efab-0123456789ab", 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_network_migration_analysis({
+    #     network_migration_execution_id: "NetworkMigrationExecutionID", # required
+    #     network_migration_definition_id: "NetworkMigrationDefinitionID", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.job_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/StartNetworkMigrationAnalysis AWS API Documentation
+    #
+    # @overload start_network_migration_analysis(params = {})
+    # @param [Hash] params ({})
+    def start_network_migration_analysis(params = {}, options = {})
+      req = build_request(:start_network_migration_analysis, params)
+      req.send_request(options)
+    end
+
+    # Starts a code generation job to convert network migration mappings
+    # into infrastructure-as-code templates.
+    #
+    # @option params [required, String] :network_migration_execution_id
+    #   The unique identifier of the network migration execution.
+    #
+    # @option params [required, String] :network_migration_definition_id
+    #   The unique identifier of the network migration definition.
+    #
+    # @option params [Array<String>] :code_generation_output_format_types
+    #   The output format types for code generation, such as CloudFormation or
+    #   Terraform.
+    #
+    # @return [Types::StartNetworkMigrationCodeGenerationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartNetworkMigrationCodeGenerationResponse#job_id #job_id} => String
+    #
+    #
+    # @example Example: Sample StartNetworkMigrationCodeGeneration call
+    #
+    #   resp = client.start_network_migration_code_generation({
+    #     network_migration_definition_id: "nmd-01234567891234567", 
+    #     network_migration_execution_id: "01234567-abcd-abcd-abcd-0123456789ab", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     job_id: "01234567-abcd-abcd-efab-0123456789ab", 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_network_migration_code_generation({
+    #     network_migration_execution_id: "NetworkMigrationExecutionID", # required
+    #     network_migration_definition_id: "NetworkMigrationDefinitionID", # required
+    #     code_generation_output_format_types: ["CDK_L1"], # accepts CDK_L1, CDK_L2, TERRAFORM, LZA
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.job_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/StartNetworkMigrationCodeGeneration AWS API Documentation
+    #
+    # @overload start_network_migration_code_generation(params = {})
+    # @param [Hash] params ({})
+    def start_network_migration_code_generation(params = {}, options = {})
+      req = build_request(:start_network_migration_code_generation, params)
+      req.send_request(options)
+    end
+
+    # Starts a deployment job to create the target network infrastructure
+    # based on the generated code templates.
+    #
+    # @option params [required, String] :network_migration_execution_id
+    #   The unique identifier of the network migration execution.
+    #
+    # @option params [required, String] :network_migration_definition_id
+    #   The unique identifier of the network migration definition.
+    #
+    # @return [Types::StartNetworkMigrationDeployerJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartNetworkMigrationDeployerJobResponse#job_id #job_id} => String
+    #
+    #
+    # @example Example: Sample StartNetworkMigrationDeployment call
+    #
+    #   resp = client.start_network_migration_deployment({
+    #     network_migration_definition_id: "nmd-01234567891234567", 
+    #     network_migration_execution_id: "01234567-abcd-abcd-abcd-0123456789ab", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     job_id: "01234567-abcd-abcd-efab-0123456789ab", 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_network_migration_deployment({
+    #     network_migration_execution_id: "NetworkMigrationExecutionID", # required
+    #     network_migration_definition_id: "NetworkMigrationDefinitionID", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.job_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/StartNetworkMigrationDeployment AWS API Documentation
+    #
+    # @overload start_network_migration_deployment(params = {})
+    # @param [Hash] params ({})
+    def start_network_migration_deployment(params = {}, options = {})
+      req = build_request(:start_network_migration_deployment, params)
+      req.send_request(options)
+    end
+
+    # Starts the network migration mapping process for a given network
+    # migration execution.
+    #
+    # @option params [required, String] :network_migration_execution_id
+    #   The unique identifier of the network migration execution.
+    #
+    # @option params [required, String] :network_migration_definition_id
+    #   The unique identifier of the network migration definition.
+    #
+    # @option params [String] :security_group_mapping_strategy
+    #   The security group mapping strategy to use.
+    #
+    # @return [Types::StartNetworkMigrationMappingResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartNetworkMigrationMappingResponse#job_id #job_id} => String
+    #
+    #
+    # @example Example: Sample StartNetworkMigrationMapping call
+    #
+    #   resp = client.start_network_migration_mapping({
+    #     network_migration_definition_id: "nmd-01234567891234567", 
+    #     network_migration_execution_id: "01234567-abcd-abcd-abcd-0123456789ab", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     job_id: "01234567-abcd-abcd-efab-0123456789ab", 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_network_migration_mapping({
+    #     network_migration_execution_id: "NetworkMigrationExecutionID", # required
+    #     network_migration_definition_id: "NetworkMigrationDefinitionID", # required
+    #     security_group_mapping_strategy: "MAP", # accepts MAP, SKIP
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.job_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/StartNetworkMigrationMapping AWS API Documentation
+    #
+    # @overload start_network_migration_mapping(params = {})
+    # @param [Hash] params ({})
+    def start_network_migration_mapping(params = {}, options = {})
+      req = build_request(:start_network_migration_mapping, params)
+      req.send_request(options)
+    end
+
+    # Starts a job to apply customer modifications to network migration
+    # mappings, such as changing properties.
+    #
+    # @option params [required, String] :network_migration_execution_id
+    #   The unique identifier of the network migration execution.
+    #
+    # @option params [required, String] :network_migration_definition_id
+    #   The unique identifier of the network migration definition.
+    #
+    # @option params [Array<Types::StartNetworkMigrationMappingUpdateConstruct>] :constructs
+    #   A list of construct updates to apply.
+    #
+    # @option params [Array<Types::StartNetworkMigrationMappingUpdateSegment>] :segments
+    #   A list of segment updates to apply.
+    #
+    # @return [Types::StartNetworkMigrationMappingUpdateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartNetworkMigrationMappingUpdateResponse#job_id #job_id} => String
+    #
+    #
+    # @example Example: Sample StartNetworkMigrationMappingUpdate call
+    #
+    #   resp = client.start_network_migration_mapping_update({
+    #     constructs: [
+    #       {
+    #         construct_id: "abc45678-abcd-abcd-efab-012345678abc", 
+    #         construct_type: "AWS::EC2::VPC", 
+    #         operation: {
+    #           update: {
+    #             properties: {
+    #               "CidrBlock" => "10.31.0.0/22", 
+    #             }, 
+    #           }, 
+    #         }, 
+    #         segment_id: "12345678-abcd-abcd-efab-0123456789ab", 
+    #       }, 
+    #     ], 
+    #     network_migration_definition_id: "nmd-01234567891234567", 
+    #     network_migration_execution_id: "01234567-abcd-abcd-abcd-0123456789ab", 
+    #     segments: [
+    #       {
+    #         scope_tags: {
+    #           "key1" => "val1", 
+    #           "key2" => "val2", 
+    #         }, 
+    #         segment_id: "12345678-abcd-abcd-efab-0123456789ab", 
+    #         target_account: "234567890123", 
+    #       }, 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     job_id: "01234567-abcd-abcd-efab-0123456789ab", 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_network_migration_mapping_update({
+    #     network_migration_execution_id: "NetworkMigrationExecutionID", # required
+    #     network_migration_definition_id: "NetworkMigrationDefinitionID", # required
+    #     constructs: [
+    #       {
+    #         segment_id: "SegmentID", # required
+    #         construct_id: "ConstructID", # required
+    #         construct_type: "NetworkMigrationMapperSegmentConstructType", # required
+    #         operation: {
+    #           update: {
+    #             properties: {
+    #               "ConstructPropertyKey" => "MarshalledResourceDefinition",
+    #             },
+    #           },
+    #         },
+    #       },
+    #     ],
+    #     segments: [
+    #       {
+    #         segment_id: "SegmentID", # required
+    #         target_account: "AccountID",
+    #         scope_tags: {
+    #           "ScopeTagKey" => "ScopeTagValue",
+    #         },
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.job_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/StartNetworkMigrationMappingUpdate AWS API Documentation
+    #
+    # @overload start_network_migration_mapping_update(params = {})
+    # @param [Hash] params ({})
+    def start_network_migration_mapping_update(params = {}, options = {})
+      req = build_request(:start_network_migration_mapping_update, params)
+      req.send_request(options)
+    end
+
     # Start replication for source server irrespective of its replication
     # type.
     #
@@ -4826,6 +6746,278 @@ module Aws::Mgn
       req.send_request(options)
     end
 
+    # Updates an existing network migration definition with new source or
+    # target configurations.
+    #
+    # @option params [required, String] :network_migration_definition_id
+    #   The unique identifier of the network migration definition to update.
+    #
+    # @option params [String] :name
+    #   The updated name of the network migration definition.
+    #
+    # @option params [String] :description
+    #   The updated description of the network migration definition.
+    #
+    # @option params [Array<Types::SourceConfiguration>] :source_configurations
+    #   The updated list of source configurations.
+    #
+    # @option params [Types::TargetS3ConfigurationUpdate] :target_s3_configuration
+    #   The updated S3 configuration for storing the target network artifacts.
+    #
+    # @option params [Types::TargetNetworkUpdate] :target_network
+    #   The updated target network configuration.
+    #
+    # @option params [String] :target_deployment
+    #   The updated target deployment configuration.
+    #
+    # @option params [Hash<String,String>] :scope_tags
+    #   The updated scope tags for the network migration definition.
+    #
+    # @return [Types::NetworkMigrationDefinition] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::NetworkMigrationDefinition#arn #arn} => String
+    #   * {Types::NetworkMigrationDefinition#network_migration_definition_id #network_migration_definition_id} => String
+    #   * {Types::NetworkMigrationDefinition#name #name} => String
+    #   * {Types::NetworkMigrationDefinition#description #description} => String
+    #   * {Types::NetworkMigrationDefinition#source_configurations #source_configurations} => Array&lt;Types::SourceConfiguration&gt;
+    #   * {Types::NetworkMigrationDefinition#target_s3_configuration #target_s3_configuration} => Types::TargetS3Configuration
+    #   * {Types::NetworkMigrationDefinition#target_network #target_network} => Types::TargetNetwork
+    #   * {Types::NetworkMigrationDefinition#target_deployment #target_deployment} => String
+    #   * {Types::NetworkMigrationDefinition#created_at #created_at} => Time
+    #   * {Types::NetworkMigrationDefinition#updated_at #updated_at} => Time
+    #   * {Types::NetworkMigrationDefinition#tags #tags} => Hash&lt;String,String&gt;
+    #   * {Types::NetworkMigrationDefinition#scope_tags #scope_tags} => Hash&lt;String,String&gt;
+    #
+    #
+    # @example Example: Sample UpdateNetworkMigrationDefinition call
+    #
+    #   resp = client.update_network_migration_definition({
+    #     name: "network1", 
+    #     description: "network 1 description", 
+    #     network_migration_definition_id: "nmd-01234567891234567", 
+    #     source_configurations: [
+    #       {
+    #         source_environment: "NSX", 
+    #         source_s3_configuration: {
+    #           s3_bucket: "source_bucket", 
+    #           s3_bucket_owner: "012345678901", 
+    #           s3_key: "source_key", 
+    #         }, 
+    #       }, 
+    #     ], 
+    #     target_network: {
+    #       inbound_cidr: "192.168.1.0/24", 
+    #       topology: "ISOLATED_VPC", 
+    #     }, 
+    #     target_s3_configuration: {
+    #       s3_bucket: "target_bucket", 
+    #       s3_bucket_owner: "012345678901", 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     name: "network1", 
+    #     created_at: Time.parse(1735334198), 
+    #     description: "network 1 description", 
+    #     network_migration_definition_id: "nmd-01234567891234567", 
+    #     source_configurations: [
+    #       {
+    #         source_environment: "NSX", 
+    #         source_s3_configuration: {
+    #           s3_bucket: "source_bucket", 
+    #           s3_bucket_owner: "012345678901", 
+    #           s3_key: "source_key", 
+    #         }, 
+    #       }, 
+    #     ], 
+    #     tags: {
+    #     }, 
+    #     target_network: {
+    #       inbound_cidr: "192.168.1.0/24", 
+    #       topology: "ISOLATED_VPC", 
+    #     }, 
+    #     target_s3_configuration: {
+    #       s3_bucket: "target_bucket", 
+    #       s3_bucket_owner: "012345678901", 
+    #     }, 
+    #     updated_at: Time.parse(1735680998), 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_network_migration_definition({
+    #     network_migration_definition_id: "NetworkMigrationDefinitionID", # required
+    #     name: "NetworkMigrationDefinitionName",
+    #     description: "NetworkMigrationDefinitionDescription",
+    #     source_configurations: [
+    #       {
+    #         source_environment: "NSX", # required, accepts NSX, VSPHERE, FORTIGATE_FIREWALL, PALO_ALTO_FIREWALL, CISCO_ACI, LOGICAL_MODEL, MODELIZE_IT
+    #         source_s3_configuration: { # required
+    #           s3_bucket: "S3BucketName", # required
+    #           s3_bucket_owner: "AccountID", # required
+    #           s3_key: "S3KeyName", # required
+    #         },
+    #       },
+    #     ],
+    #     target_s3_configuration: {
+    #       s3_bucket: "S3BucketName",
+    #       s3_bucket_owner: "AccountID",
+    #     },
+    #     target_network: {
+    #       topology: "ISOLATED_VPC", # accepts ISOLATED_VPC, HUB_AND_SPOKE
+    #       inbound_cidr: "Cidr",
+    #       outbound_cidr: "Cidr",
+    #       inspection_cidr: "Cidr",
+    #     },
+    #     target_deployment: "SINGLE_ACCOUNT", # accepts SINGLE_ACCOUNT, MULTI_ACCOUNT
+    #     scope_tags: {
+    #       "ScopeTagKey" => "ScopeTagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.network_migration_definition_id #=> String
+    #   resp.name #=> String
+    #   resp.description #=> String
+    #   resp.source_configurations #=> Array
+    #   resp.source_configurations[0].source_environment #=> String, one of "NSX", "VSPHERE", "FORTIGATE_FIREWALL", "PALO_ALTO_FIREWALL", "CISCO_ACI", "LOGICAL_MODEL", "MODELIZE_IT"
+    #   resp.source_configurations[0].source_s3_configuration.s3_bucket #=> String
+    #   resp.source_configurations[0].source_s3_configuration.s3_bucket_owner #=> String
+    #   resp.source_configurations[0].source_s3_configuration.s3_key #=> String
+    #   resp.target_s3_configuration.s3_bucket #=> String
+    #   resp.target_s3_configuration.s3_bucket_owner #=> String
+    #   resp.target_network.topology #=> String, one of "ISOLATED_VPC", "HUB_AND_SPOKE"
+    #   resp.target_network.inbound_cidr #=> String
+    #   resp.target_network.outbound_cidr #=> String
+    #   resp.target_network.inspection_cidr #=> String
+    #   resp.target_deployment #=> String, one of "SINGLE_ACCOUNT", "MULTI_ACCOUNT"
+    #   resp.created_at #=> Time
+    #   resp.updated_at #=> Time
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #   resp.scope_tags #=> Hash
+    #   resp.scope_tags["ScopeTagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/UpdateNetworkMigrationDefinition AWS API Documentation
+    #
+    # @overload update_network_migration_definition(params = {})
+    # @param [Hash] params ({})
+    def update_network_migration_definition(params = {}, options = {})
+      req = build_request(:update_network_migration_definition, params)
+      req.send_request(options)
+    end
+
+    # Updates a mapper segment's configuration, such as changing its scope
+    # tags.
+    #
+    # @option params [required, String] :network_migration_definition_id
+    #   The unique identifier of the network migration definition.
+    #
+    # @option params [required, String] :network_migration_execution_id
+    #   The unique identifier of the network migration execution.
+    #
+    # @option params [required, String] :segment_id
+    #   The unique identifier of the segment to update.
+    #
+    # @option params [Hash<String,String>] :scope_tags
+    #   The updated scope tags for the segment.
+    #
+    # @return [Types::NetworkMigrationMapperSegment] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::NetworkMigrationMapperSegment#job_id #job_id} => String
+    #   * {Types::NetworkMigrationMapperSegment#network_migration_execution_id #network_migration_execution_id} => String
+    #   * {Types::NetworkMigrationMapperSegment#network_migration_definition_id #network_migration_definition_id} => String
+    #   * {Types::NetworkMigrationMapperSegment#segment_id #segment_id} => String
+    #   * {Types::NetworkMigrationMapperSegment#segment_type #segment_type} => String
+    #   * {Types::NetworkMigrationMapperSegment#name #name} => String
+    #   * {Types::NetworkMigrationMapperSegment#description #description} => String
+    #   * {Types::NetworkMigrationMapperSegment#logical_id #logical_id} => String
+    #   * {Types::NetworkMigrationMapperSegment#checksum #checksum} => Types::Checksum
+    #   * {Types::NetworkMigrationMapperSegment#output_s3_configuration #output_s3_configuration} => Types::S3Configuration
+    #   * {Types::NetworkMigrationMapperSegment#created_at #created_at} => Time
+    #   * {Types::NetworkMigrationMapperSegment#updated_at #updated_at} => Time
+    #   * {Types::NetworkMigrationMapperSegment#scope_tags #scope_tags} => Hash&lt;String,String&gt;
+    #   * {Types::NetworkMigrationMapperSegment#target_account #target_account} => String
+    #   * {Types::NetworkMigrationMapperSegment#referenced_segments #referenced_segments} => Array&lt;String&gt;
+    #
+    #
+    # @example Example: Sample UpdateNetworkMigrationMapperSegment call
+    #
+    #   resp = client.update_network_migration_mapper_segment({
+    #     network_migration_definition_id: "nmd-01234567891234567", 
+    #     network_migration_execution_id: "01234567-abcd-abcd-abcd-0123456789ab", 
+    #     segment_id: "12345678-abcd-abcd-efab-0123456789ab", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     name: "SegmentName", 
+    #     checksum: {
+    #       encryption_algorithm: "SHA256", 
+    #       hash: "0123456789aAbBcCdDeEfF0123456789", 
+    #     }, 
+    #     created_at: Time.parse(1735334198), 
+    #     description: "Segment description", 
+    #     job_id: "01234567-abcd-abcd-efab-0123456789ab", 
+    #     logical_id: "logical-id1", 
+    #     network_migration_definition_id: "nmd-01234567891234567", 
+    #     network_migration_execution_id: "01234567-abcd-abcd-abcd-0123456789ab", 
+    #     output_s3_configuration: {
+    #       s3_bucket: "s3_bucket", 
+    #       s3_bucket_owner: "012345678901", 
+    #       s3_key: "S3KeyName", 
+    #     }, 
+    #     segment_id: "12345678-abcd-abcd-efab-0123456789ab", 
+    #     segment_type: "WORKLOAD", 
+    #     updated_at: Time.parse(1735334198), 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_network_migration_mapper_segment({
+    #     network_migration_definition_id: "NetworkMigrationDefinitionID", # required
+    #     network_migration_execution_id: "NetworkMigrationExecutionID", # required
+    #     segment_id: "SegmentID", # required
+    #     scope_tags: {
+    #       "ScopeTagKey" => "ScopeTagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.job_id #=> String
+    #   resp.network_migration_execution_id #=> String
+    #   resp.network_migration_definition_id #=> String
+    #   resp.segment_id #=> String
+    #   resp.segment_type #=> String, one of "WORKLOAD", "APPLIANCE"
+    #   resp.name #=> String
+    #   resp.description #=> String
+    #   resp.logical_id #=> String
+    #   resp.checksum.encryption_algorithm #=> String, one of "SHA256"
+    #   resp.checksum.hash #=> String
+    #   resp.output_s3_configuration.s3_bucket #=> String
+    #   resp.output_s3_configuration.s3_bucket_owner #=> String
+    #   resp.output_s3_configuration.s3_key #=> String
+    #   resp.created_at #=> Time
+    #   resp.updated_at #=> Time
+    #   resp.scope_tags #=> Hash
+    #   resp.scope_tags["ScopeTagKey"] #=> String
+    #   resp.target_account #=> String
+    #   resp.referenced_segments #=> Array
+    #   resp.referenced_segments[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/UpdateNetworkMigrationMapperSegment AWS API Documentation
+    #
+    # @overload update_network_migration_mapper_segment(params = {})
+    # @param [Hash] params ({})
+    def update_network_migration_mapper_segment(params = {}, options = {})
+      req = build_request(:update_network_migration_mapper_segment, params)
+      req.send_request(options)
+    end
+
     # Allows you to update multiple ReplicationConfigurations by Source
     # Server ID.
     #
@@ -4888,6 +7080,9 @@ module Aws::Mgn
     # @option params [String] :internet_protocol
     #   Update replication configuration internet protocol.
     #
+    # @option params [Boolean] :store_snapshot_on_local_zone
+    #   Update replication configuration store snapshot on local zone.
+    #
     # @return [Types::ReplicationConfiguration] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ReplicationConfiguration#source_server_id #source_server_id} => String
@@ -4907,6 +7102,7 @@ module Aws::Mgn
     #   * {Types::ReplicationConfiguration#staging_area_tags #staging_area_tags} => Hash&lt;String,String&gt;
     #   * {Types::ReplicationConfiguration#use_fips_endpoint #use_fips_endpoint} => Boolean
     #   * {Types::ReplicationConfiguration#internet_protocol #internet_protocol} => String
+    #   * {Types::ReplicationConfiguration#store_snapshot_on_local_zone #store_snapshot_on_local_zone} => Boolean
     #
     # @example Request syntax with placeholder values
     #
@@ -4939,6 +7135,7 @@ module Aws::Mgn
     #     use_fips_endpoint: false,
     #     account_id: "AccountID",
     #     internet_protocol: "IPV4", # accepts IPV4, IPV6
+    #     store_snapshot_on_local_zone: false,
     #   })
     #
     # @example Response structure
@@ -4967,6 +7164,7 @@ module Aws::Mgn
     #   resp.staging_area_tags["TagKey"] #=> String
     #   resp.use_fips_endpoint #=> Boolean
     #   resp.internet_protocol #=> String, one of "IPV4", "IPV6"
+    #   resp.store_snapshot_on_local_zone #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/UpdateReplicationConfiguration AWS API Documentation
     #
@@ -5035,6 +7233,10 @@ module Aws::Mgn
     # @option params [String] :internet_protocol
     #   Update replication configuration template internet protocol request.
     #
+    # @option params [Boolean] :store_snapshot_on_local_zone
+    #   Update replication configuration template store snapshot on local zone
+    #   request.
+    #
     # @return [Types::ReplicationConfigurationTemplate] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ReplicationConfigurationTemplate#replication_configuration_template_id #replication_configuration_template_id} => String
@@ -5054,6 +7256,7 @@ module Aws::Mgn
     #   * {Types::ReplicationConfigurationTemplate#use_fips_endpoint #use_fips_endpoint} => Boolean
     #   * {Types::ReplicationConfigurationTemplate#tags #tags} => Hash&lt;String,String&gt;
     #   * {Types::ReplicationConfigurationTemplate#internet_protocol #internet_protocol} => String
+    #   * {Types::ReplicationConfigurationTemplate#store_snapshot_on_local_zone #store_snapshot_on_local_zone} => Boolean
     #
     # @example Request syntax with placeholder values
     #
@@ -5076,6 +7279,7 @@ module Aws::Mgn
     #     },
     #     use_fips_endpoint: false,
     #     internet_protocol: "IPV4", # accepts IPV4, IPV6
+    #     store_snapshot_on_local_zone: false,
     #   })
     #
     # @example Response structure
@@ -5100,6 +7304,7 @@ module Aws::Mgn
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
     #   resp.internet_protocol #=> String, one of "IPV4", "IPV6"
+    #   resp.store_snapshot_on_local_zone #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/UpdateReplicationConfigurationTemplate AWS API Documentation
     #
@@ -5423,7 +7628,7 @@ module Aws::Mgn
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-mgn'
-      context[:gem_version] = '1.61.0'
+      context[:gem_version] = '1.64.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

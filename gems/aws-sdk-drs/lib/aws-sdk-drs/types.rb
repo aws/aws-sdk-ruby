@@ -12,17 +12,17 @@ module Aws::Drs
 
     # You do not have sufficient access to perform this action.
     #
-    # @!attribute [rw] code
+    # @!attribute [rw] message
     #   @return [String]
     #
-    # @!attribute [rw] message
+    # @!attribute [rw] code
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/AccessDeniedException AWS API Documentation
     #
     class AccessDeniedException < Struct.new(
-      :code,
-      :message)
+      :message,
+      :code)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -41,19 +41,19 @@ module Aws::Drs
       include Aws::Structure
     end
 
-    # @!attribute [rw] cfn_stack_name
-    #   CloudFormation template to associate with a Source Network.
-    #   @return [String]
-    #
     # @!attribute [rw] source_network_id
     #   The Source Network ID to associate with CloudFormation template.
+    #   @return [String]
+    #
+    # @!attribute [rw] cfn_stack_name
+    #   CloudFormation template to associate with a Source Network.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/AssociateSourceNetworkStackRequest AWS API Documentation
     #
     class AssociateSourceNetworkStackRequest < Struct.new(
-      :cfn_stack_name,
-      :source_network_id)
+      :source_network_id,
+      :cfn_stack_name)
       SENSITIVE = [:cfn_stack_name]
       include Aws::Structure
     end
@@ -92,10 +92,10 @@ module Aws::Drs
     # The request could not be completed due to a conflict with the current
     # state of the target resource.
     #
-    # @!attribute [rw] code
+    # @!attribute [rw] message
     #   @return [String]
     #
-    # @!attribute [rw] message
+    # @!attribute [rw] code
     #   @return [String]
     #
     # @!attribute [rw] resource_id
@@ -109,8 +109,8 @@ module Aws::Drs
     # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/ConflictException AWS API Documentation
     #
     class ConflictException < Struct.new(
-      :code,
       :message,
+      :code,
       :resource_id,
       :resource_type)
       SENSITIVE = []
@@ -119,41 +119,41 @@ module Aws::Drs
 
     # Properties of a conversion job
     #
-    # @!attribute [rw] data_timestamp
-    #   The timestamp of when the snapshot being converted was taken
+    # @!attribute [rw] volume_to_conversion_map
+    #   A mapping between the volumes being converted and the converted
+    #   snapshot ids
+    #   @return [Hash<String,Hash<String,String>>]
+    #
+    # @!attribute [rw] root_volume_name
+    #   The root volume name of a conversion job
     #   @return [String]
     #
     # @!attribute [rw] force_uefi
     #   Whether the volume being converted uses UEFI or not
     #   @return [Boolean]
     #
-    # @!attribute [rw] root_volume_name
-    #   The root volume name of a conversion job
+    # @!attribute [rw] data_timestamp
+    #   The timestamp of when the snapshot being converted was taken
     #   @return [String]
     #
-    # @!attribute [rw] volume_to_conversion_map
-    #   A mapping between the volumes being converted and the converted
-    #   snapshot ids
-    #   @return [Hash<String,Hash<String,String>>]
+    # @!attribute [rw] volume_to_volume_size
+    #   A mapping between the volumes and their sizes
+    #   @return [Hash<String,Integer>]
     #
     # @!attribute [rw] volume_to_product_codes
     #   A mapping between the volumes being converted and the product codes
     #   associated with them
     #   @return [Hash<String,Array<Types::ProductCode>>]
     #
-    # @!attribute [rw] volume_to_volume_size
-    #   A mapping between the volumes and their sizes
-    #   @return [Hash<String,Integer>]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/ConversionProperties AWS API Documentation
     #
     class ConversionProperties < Struct.new(
-      :data_timestamp,
-      :force_uefi,
-      :root_volume_name,
       :volume_to_conversion_map,
-      :volume_to_product_codes,
-      :volume_to_volume_size)
+      :root_volume_name,
+      :force_uefi,
+      :data_timestamp,
+      :volume_to_volume_size,
+      :volume_to_product_codes)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -188,6 +188,19 @@ module Aws::Drs
       include Aws::Structure
     end
 
+    # @!attribute [rw] tags
+    #   Request to associate tags during creation of a Launch Configuration
+    #   Template.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] launch_disposition
+    #   Launch disposition.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_instance_type_right_sizing_method
+    #   Target instance type right-sizing method.
+    #   @return [String]
+    #
     # @!attribute [rw] copy_private_ip
     #   Copy private IP.
     #   @return [Boolean]
@@ -196,13 +209,17 @@ module Aws::Drs
     #   Copy tags.
     #   @return [Boolean]
     #
+    # @!attribute [rw] licensing
+    #   Licensing.
+    #   @return [Types::Licensing]
+    #
     # @!attribute [rw] export_bucket_arn
     #   S3 bucket ARN to export Source Network templates.
     #   @return [String]
     #
-    # @!attribute [rw] launch_disposition
-    #   Launch disposition.
-    #   @return [String]
+    # @!attribute [rw] post_launch_enabled
+    #   Whether we want to activate post-launch actions.
+    #   @return [Boolean]
     #
     # @!attribute [rw] launch_into_source_instance
     #   DRS will set the 'launch into instance ID' of any source server
@@ -210,35 +227,18 @@ module Aws::Drs
     #   or availability zone, using the instance ID of the source instance.
     #   @return [Boolean]
     #
-    # @!attribute [rw] licensing
-    #   Licensing.
-    #   @return [Types::Licensing]
-    #
-    # @!attribute [rw] post_launch_enabled
-    #   Whether we want to activate post-launch actions.
-    #   @return [Boolean]
-    #
-    # @!attribute [rw] tags
-    #   Request to associate tags during creation of a Launch Configuration
-    #   Template.
-    #   @return [Hash<String,String>]
-    #
-    # @!attribute [rw] target_instance_type_right_sizing_method
-    #   Target instance type right-sizing method.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/CreateLaunchConfigurationTemplateRequest AWS API Documentation
     #
     class CreateLaunchConfigurationTemplateRequest < Struct.new(
+      :tags,
+      :launch_disposition,
+      :target_instance_type_right_sizing_method,
       :copy_private_ip,
       :copy_tags,
-      :export_bucket_arn,
-      :launch_disposition,
-      :launch_into_source_instance,
       :licensing,
+      :export_bucket_arn,
       :post_launch_enabled,
-      :tags,
-      :target_instance_type_right_sizing_method)
+      :launch_into_source_instance)
       SENSITIVE = [:tags]
       include Aws::Structure
     end
@@ -255,28 +255,27 @@ module Aws::Drs
       include Aws::Structure
     end
 
+    # @!attribute [rw] staging_area_subnet_id
+    #   The subnet to be used by the replication staging area.
+    #   @return [String]
+    #
     # @!attribute [rw] associate_default_security_group
     #   Whether to associate the default Elastic Disaster Recovery Security
     #   group with the Replication Configuration Template.
     #   @return [Boolean]
     #
-    # @!attribute [rw] auto_replicate_new_disks
-    #   Whether to allow the AWS replication agent to automatically
-    #   replicate newly added disks.
-    #   @return [Boolean]
+    # @!attribute [rw] replication_servers_security_groups_i_ds
+    #   The security group IDs that will be used by the replication server.
+    #   @return [Array<String>]
     #
-    # @!attribute [rw] bandwidth_throttling
-    #   Configure bandwidth throttling for the outbound data transfer rate
-    #   of the Source Server in Mbps.
-    #   @return [Integer]
-    #
-    # @!attribute [rw] create_public_ip
-    #   Whether to create a Public IP for the Recovery Instance by default.
-    #   @return [Boolean]
-    #
-    # @!attribute [rw] data_plane_routing
-    #   The data plane routing mechanism that will be used for replication.
+    # @!attribute [rw] replication_server_instance_type
+    #   The instance type to be used for the replication server.
     #   @return [String]
+    #
+    # @!attribute [rw] use_dedicated_replication_server
+    #   Whether to use a dedicated Replication Server in the replication
+    #   staging area.
+    #   @return [Boolean]
     #
     # @!attribute [rw] default_large_staging_disk_type
     #   The Staging Disk EBS volume type to be used during replication.
@@ -290,22 +289,18 @@ module Aws::Drs
     #   The ARN of the EBS encryption key to be used during replication.
     #   @return [String]
     #
-    # @!attribute [rw] pit_policy
-    #   The Point in time (PIT) policy to manage snapshots taken during
-    #   replication.
-    #   @return [Array<Types::PITPolicyRule>]
+    # @!attribute [rw] bandwidth_throttling
+    #   Configure bandwidth throttling for the outbound data transfer rate
+    #   of the Source Server in Mbps.
+    #   @return [Integer]
     #
-    # @!attribute [rw] replication_server_instance_type
-    #   The instance type to be used for the replication server.
+    # @!attribute [rw] data_plane_routing
+    #   The data plane routing mechanism that will be used for replication.
     #   @return [String]
     #
-    # @!attribute [rw] replication_servers_security_groups_i_ds
-    #   The security group IDs that will be used by the replication server.
-    #   @return [Array<String>]
-    #
-    # @!attribute [rw] staging_area_subnet_id
-    #   The subnet to be used by the replication staging area.
-    #   @return [String]
+    # @!attribute [rw] create_public_ip
+    #   Whether to create a Public IP for the Recovery Instance by default.
+    #   @return [Boolean]
     #
     # @!attribute [rw] staging_area_tags
     #   A set of tags to be associated with all resources created in the
@@ -313,38 +308,53 @@ module Aws::Drs
     #   snapshots, etc.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] pit_policy
+    #   The Point in time (PIT) policy to manage snapshots taken during
+    #   replication.
+    #   @return [Array<Types::PITPolicyRule>]
+    #
     # @!attribute [rw] tags
     #   A set of tags to be associated with the Replication Configuration
     #   Template resource.
     #   @return [Hash<String,String>]
     #
-    # @!attribute [rw] use_dedicated_replication_server
-    #   Whether to use a dedicated Replication Server in the replication
-    #   staging area.
+    # @!attribute [rw] auto_replicate_new_disks
+    #   Whether to allow the AWS replication agent to automatically
+    #   replicate newly added disks.
     #   @return [Boolean]
+    #
+    # @!attribute [rw] internet_protocol
+    #   Which version of the Internet Protocol to use for replication of
+    #   data. (IPv4 or IPv6)
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/CreateReplicationConfigurationTemplateRequest AWS API Documentation
     #
     class CreateReplicationConfigurationTemplateRequest < Struct.new(
+      :staging_area_subnet_id,
       :associate_default_security_group,
-      :auto_replicate_new_disks,
-      :bandwidth_throttling,
-      :create_public_ip,
-      :data_plane_routing,
+      :replication_servers_security_groups_i_ds,
+      :replication_server_instance_type,
+      :use_dedicated_replication_server,
       :default_large_staging_disk_type,
       :ebs_encryption,
       :ebs_encryption_key_arn,
-      :pit_policy,
-      :replication_server_instance_type,
-      :replication_servers_security_groups_i_ds,
-      :staging_area_subnet_id,
+      :bandwidth_throttling,
+      :data_plane_routing,
+      :create_public_ip,
       :staging_area_tags,
+      :pit_policy,
       :tags,
-      :use_dedicated_replication_server)
+      :auto_replicate_new_disks,
+      :internet_protocol)
       SENSITIVE = [:staging_area_tags, :tags]
       include Aws::Structure
     end
 
+    # @!attribute [rw] vpc_id
+    #   Which VPC ID to protect.
+    #   @return [String]
+    #
     # @!attribute [rw] origin_account_id
     #   Account containing the VPC to protect.
     #   @return [String]
@@ -357,17 +367,13 @@ module Aws::Drs
     #   A set of tags to be associated with the Source Network resource.
     #   @return [Hash<String,String>]
     #
-    # @!attribute [rw] vpc_id
-    #   Which VPC ID to protect.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/CreateSourceNetworkRequest AWS API Documentation
     #
     class CreateSourceNetworkRequest < Struct.new(
+      :vpc_id,
       :origin_account_id,
       :origin_region,
-      :tags,
-      :vpc_id)
+      :tags)
       SENSITIVE = [:tags]
       include Aws::Structure
     end
@@ -405,29 +411,29 @@ module Aws::Drs
 
     # Information about Data Replication
     #
-    # @!attribute [rw] data_replication_error
-    #   Error in data replication.
-    #   @return [Types::DataReplicationError]
-    #
-    # @!attribute [rw] data_replication_initiation
-    #   Information about whether the data replication has been initiated.
-    #   @return [Types::DataReplicationInitiation]
-    #
-    # @!attribute [rw] data_replication_state
-    #   The state of the data replication.
+    # @!attribute [rw] lag_duration
+    #   Data replication lag duration.
     #   @return [String]
     #
     # @!attribute [rw] eta_date_time
     #   An estimate of when the data replication will be completed.
     #   @return [String]
     #
-    # @!attribute [rw] lag_duration
-    #   Data replication lag duration.
-    #   @return [String]
-    #
     # @!attribute [rw] replicated_disks
     #   The disks that should be replicated.
     #   @return [Array<Types::DataReplicationInfoReplicatedDisk>]
+    #
+    # @!attribute [rw] data_replication_state
+    #   The state of the data replication.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_replication_initiation
+    #   Information about whether the data replication has been initiated.
+    #   @return [Types::DataReplicationInitiation]
+    #
+    # @!attribute [rw] data_replication_error
+    #   Error in data replication.
+    #   @return [Types::DataReplicationError]
     #
     # @!attribute [rw] staging_availability_zone
     #   AWS Availability zone into which data is being replicated.
@@ -440,12 +446,12 @@ module Aws::Drs
     # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/DataReplicationInfo AWS API Documentation
     #
     class DataReplicationInfo < Struct.new(
-      :data_replication_error,
-      :data_replication_initiation,
-      :data_replication_state,
-      :eta_date_time,
       :lag_duration,
+      :eta_date_time,
       :replicated_disks,
+      :data_replication_state,
+      :data_replication_initiation,
+      :data_replication_error,
       :staging_availability_zone,
       :staging_outpost_arn)
       SENSITIVE = []
@@ -454,13 +460,13 @@ module Aws::Drs
 
     # A disk that should be replicated.
     #
-    # @!attribute [rw] backlogged_storage_bytes
-    #   The size of the replication backlog in bytes.
-    #   @return [Integer]
-    #
     # @!attribute [rw] device_name
     #   The name of the device.
     #   @return [String]
+    #
+    # @!attribute [rw] total_storage_bytes
+    #   The total amount of data to be replicated in bytes.
+    #   @return [Integer]
     #
     # @!attribute [rw] replicated_storage_bytes
     #   The amount of data replicated so far in bytes.
@@ -470,8 +476,8 @@ module Aws::Drs
     #   The amount of data to be rescanned in bytes.
     #   @return [Integer]
     #
-    # @!attribute [rw] total_storage_bytes
-    #   The total amount of data to be replicated in bytes.
+    # @!attribute [rw] backlogged_storage_bytes
+    #   The size of the replication backlog in bytes.
     #   @return [Integer]
     #
     # @!attribute [rw] volume_status
@@ -481,11 +487,11 @@ module Aws::Drs
     # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/DataReplicationInfoReplicatedDisk AWS API Documentation
     #
     class DataReplicationInfoReplicatedDisk < Struct.new(
-      :backlogged_storage_bytes,
       :device_name,
+      :total_storage_bytes,
       :replicated_storage_bytes,
       :rescanned_storage_bytes,
-      :total_storage_bytes,
+      :backlogged_storage_bytes,
       :volume_status)
       SENSITIVE = []
       include Aws::Structure
@@ -493,13 +499,13 @@ module Aws::Drs
 
     # Data replication initiation.
     #
-    # @!attribute [rw] next_attempt_date_time
-    #   The date and time of the next attempt to initiate data replication.
-    #   @return [String]
-    #
     # @!attribute [rw] start_date_time
     #   The date and time of the current attempt to initiate data
     #   replication.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_attempt_date_time
+    #   The date and time of the next attempt to initiate data replication.
     #   @return [String]
     #
     # @!attribute [rw] steps
@@ -509,8 +515,8 @@ module Aws::Drs
     # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/DataReplicationInitiation AWS API Documentation
     #
     class DataReplicationInitiation < Struct.new(
-      :next_attempt_date_time,
       :start_date_time,
+      :next_attempt_date_time,
       :steps)
       SENSITIVE = []
       include Aws::Structure
@@ -551,19 +557,19 @@ module Aws::Drs
     #
     class DeleteJobResponse < Aws::EmptyStructure; end
 
-    # @!attribute [rw] action_id
-    #   Launch action Id.
-    #   @return [String]
-    #
     # @!attribute [rw] resource_id
     #   Launch configuration template Id or Source Server Id
+    #   @return [String]
+    #
+    # @!attribute [rw] action_id
+    #   Launch action Id.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/DeleteLaunchActionRequest AWS API Documentation
     #
     class DeleteLaunchActionRequest < Struct.new(
-      :action_id,
-      :resource_id)
+      :resource_id,
+      :action_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -711,14 +717,14 @@ module Aws::Drs
 
     # A set of filters by which to return Jobs.
     #
-    # @!attribute [rw] from_date
-    #   The start date in a date range query.
-    #   @return [String]
-    #
     # @!attribute [rw] job_i_ds
     #   An array of Job IDs that should be returned. An empty array means
     #   all jobs.
     #   @return [Array<String>]
+    #
+    # @!attribute [rw] from_date
+    #   The start date in a date range query.
+    #   @return [String]
     #
     # @!attribute [rw] to_date
     #   The end date in a date range query.
@@ -727,8 +733,8 @@ module Aws::Drs
     # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/DescribeJobsRequestFilters AWS API Documentation
     #
     class DescribeJobsRequestFilters < Struct.new(
-      :from_date,
       :job_i_ds,
+      :from_date,
       :to_date)
       SENSITIVE = []
       include Aws::Structure
@@ -835,26 +841,34 @@ module Aws::Drs
       include Aws::Structure
     end
 
-    # @!attribute [rw] items
-    #   An array of Recovery Instances.
-    #   @return [Array<Types::RecoveryInstance>]
-    #
     # @!attribute [rw] next_token
     #   The token of the next Recovery Instance to retrieve.
     #   @return [String]
     #
+    # @!attribute [rw] items
+    #   An array of Recovery Instances.
+    #   @return [Array<Types::RecoveryInstance>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/DescribeRecoveryInstancesResponse AWS API Documentation
     #
     class DescribeRecoveryInstancesResponse < Struct.new(
-      :items,
-      :next_token)
+      :next_token,
+      :items)
       SENSITIVE = []
       include Aws::Structure
     end
 
+    # @!attribute [rw] source_server_id
+    #   Filter Recovery Snapshots by Source Server ID.
+    #   @return [String]
+    #
     # @!attribute [rw] filters
     #   A set of filters by which to return Recovery Snapshots.
     #   @return [Types::DescribeRecoverySnapshotsRequestFilters]
+    #
+    # @!attribute [rw] order
+    #   The sorted ordering by which to return Recovery Snapshots.
+    #   @return [String]
     #
     # @!attribute [rw] max_results
     #   Maximum number of Recovery Snapshots to retrieve.
@@ -864,22 +878,14 @@ module Aws::Drs
     #   The token of the next Recovery Snapshot to retrieve.
     #   @return [String]
     #
-    # @!attribute [rw] order
-    #   The sorted ordering by which to return Recovery Snapshots.
-    #   @return [String]
-    #
-    # @!attribute [rw] source_server_id
-    #   Filter Recovery Snapshots by Source Server ID.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/DescribeRecoverySnapshotsRequest AWS API Documentation
     #
     class DescribeRecoverySnapshotsRequest < Struct.new(
+      :source_server_id,
       :filters,
-      :max_results,
-      :next_token,
       :order,
-      :source_server_id)
+      :max_results,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -920,6 +926,11 @@ module Aws::Drs
       include Aws::Structure
     end
 
+    # @!attribute [rw] replication_configuration_template_i_ds
+    #   The IDs of the Replication Configuration Templates to retrieve. An
+    #   empty list means all Replication Configuration Templates.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] max_results
     #   Maximum number of Replication Configuration Templates to retrieve.
     #   @return [Integer]
@@ -929,17 +940,12 @@ module Aws::Drs
     #   retrieve.
     #   @return [String]
     #
-    # @!attribute [rw] replication_configuration_template_i_ds
-    #   The IDs of the Replication Configuration Templates to retrieve. An
-    #   empty list means all Replication Configuration Templates.
-    #   @return [Array<String>]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/DescribeReplicationConfigurationTemplatesRequest AWS API Documentation
     #
     class DescribeReplicationConfigurationTemplatesRequest < Struct.new(
+      :replication_configuration_template_i_ds,
       :max_results,
-      :next_token,
-      :replication_configuration_template_i_ds)
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -986,6 +992,11 @@ module Aws::Drs
 
     # A set of filters by which to return Source Networks.
     #
+    # @!attribute [rw] source_network_i_ds
+    #   An array of Source Network IDs that should be returned. An empty
+    #   array means all Source Networks.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] origin_account_id
     #   Filter Source Networks by account ID containing the protected VPCs.
     #   @return [String]
@@ -994,17 +1005,12 @@ module Aws::Drs
     #   Filter Source Networks by the region containing the protected VPCs.
     #   @return [String]
     #
-    # @!attribute [rw] source_network_i_ds
-    #   An array of Source Network IDs that should be returned. An empty
-    #   array means all Source Networks.
-    #   @return [Array<String>]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/DescribeSourceNetworksRequestFilters AWS API Documentation
     #
     class DescribeSourceNetworksRequestFilters < Struct.new(
+      :source_network_i_ds,
       :origin_account_id,
-      :origin_region,
-      :source_network_i_ds)
+      :origin_region)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1050,15 +1056,15 @@ module Aws::Drs
 
     # A set of filters by which to return Source Servers.
     #
-    # @!attribute [rw] hardware_id
-    #   An ID that describes the hardware of the Source Server. This is
-    #   either an EC2 instance id, a VMware uuid or a mac address.
-    #   @return [String]
-    #
     # @!attribute [rw] source_server_i_ds
     #   An array of Source Servers IDs that should be returned. An empty
     #   array means all Source Servers.
     #   @return [Array<String>]
+    #
+    # @!attribute [rw] hardware_id
+    #   An ID that describes the hardware of the Source Server. This is
+    #   either an EC2 instance id, a VMware uuid or a mac address.
+    #   @return [String]
     #
     # @!attribute [rw] staging_account_i_ds
     #   An array of staging account IDs that extended source servers belong
@@ -1068,8 +1074,8 @@ module Aws::Drs
     # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/DescribeSourceServersRequestFilters AWS API Documentation
     #
     class DescribeSourceServersRequestFilters < Struct.new(
-      :hardware_id,
       :source_server_i_ds,
+      :hardware_id,
       :staging_account_i_ds)
       SENSITIVE = []
       include Aws::Structure
@@ -1118,19 +1124,19 @@ module Aws::Drs
 
     # An object representing a data storage device on a server.
     #
-    # @!attribute [rw] bytes
-    #   The amount of storage on the disk in bytes.
-    #   @return [Integer]
-    #
     # @!attribute [rw] device_name
     #   The disk or device name.
     #   @return [String]
     #
+    # @!attribute [rw] bytes
+    #   The amount of storage on the disk in bytes.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/Disk AWS API Documentation
     #
     class Disk < Struct.new(
-      :bytes,
-      :device_name)
+      :device_name,
+      :bytes)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1195,31 +1201,37 @@ module Aws::Drs
       include Aws::Structure
     end
 
-    # @!attribute [rw] bandwidth_throttling
-    #   Configure bandwidth throttling for the outbound data transfer rate
-    #   of the Recovery Instance in Mbps.
-    #   @return [Integer]
+    # @!attribute [rw] recovery_instance_id
+    #   The ID of the Recovery Instance.
+    #   @return [String]
     #
     # @!attribute [rw] name
     #   The name of the Failback Replication Configuration.
     #   @return [String]
     #
-    # @!attribute [rw] recovery_instance_id
-    #   The ID of the Recovery Instance.
-    #   @return [String]
+    # @!attribute [rw] bandwidth_throttling
+    #   Configure bandwidth throttling for the outbound data transfer rate
+    #   of the Recovery Instance in Mbps.
+    #   @return [Integer]
     #
     # @!attribute [rw] use_private_ip
     #   Whether to use Private IP for the failback replication of the
     #   Recovery Instance.
     #   @return [Boolean]
     #
+    # @!attribute [rw] internet_protocol
+    #   Which version of the Internet Protocol to use for replication of
+    #   data. (IPv4 or IPv6)
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/GetFailbackReplicationConfigurationResponse AWS API Documentation
     #
     class GetFailbackReplicationConfigurationResponse < Struct.new(
-      :bandwidth_throttling,
-      :name,
       :recovery_instance_id,
-      :use_private_ip)
+      :name,
+      :bandwidth_throttling,
+      :use_private_ip,
+      :internet_protocol)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1251,10 +1263,6 @@ module Aws::Drs
 
     # Hints used to uniquely identify a machine.
     #
-    # @!attribute [rw] aws_instance_id
-    #   AWS Instance ID identification hint.
-    #   @return [String]
-    #
     # @!attribute [rw] fqdn
     #   Fully Qualified Domain Name identification hint.
     #   @return [String]
@@ -1267,13 +1275,17 @@ module Aws::Drs
     #   vCenter VM path identification hint.
     #   @return [String]
     #
+    # @!attribute [rw] aws_instance_id
+    #   AWS Instance ID identification hint.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/IdentificationHints AWS API Documentation
     #
     class IdentificationHints < Struct.new(
-      :aws_instance_id,
       :fqdn,
       :hostname,
-      :vm_ware_uuid)
+      :vm_ware_uuid,
+      :aws_instance_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1310,8 +1322,20 @@ module Aws::Drs
 
     # A job is an asynchronous workflow.
     #
+    # @!attribute [rw] job_id
+    #   The ID of the Job.
+    #   @return [String]
+    #
     # @!attribute [rw] arn
     #   The ARN of a Job.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of the Job.
+    #   @return [String]
+    #
+    # @!attribute [rw] initiated_by
+    #   A string representing who initiated the Job.
     #   @return [String]
     #
     # @!attribute [rw] creation_date_time
@@ -1322,52 +1346,44 @@ module Aws::Drs
     #   The date and time of when the Job ended.
     #   @return [String]
     #
-    # @!attribute [rw] initiated_by
-    #   A string representing who initiated the Job.
+    # @!attribute [rw] status
+    #   The status of the Job.
     #   @return [String]
-    #
-    # @!attribute [rw] job_id
-    #   The ID of the Job.
-    #   @return [String]
-    #
-    # @!attribute [rw] participating_resources
-    #   A list of resources that the Job is acting upon.
-    #   @return [Array<Types::ParticipatingResource>]
     #
     # @!attribute [rw] participating_servers
     #   A list of servers that the Job is acting upon.
     #   @return [Array<Types::ParticipatingServer>]
     #
-    # @!attribute [rw] status
-    #   The status of the Job.
-    #   @return [String]
-    #
     # @!attribute [rw] tags
     #   A list of tags associated with the Job.
     #   @return [Hash<String,String>]
     #
-    # @!attribute [rw] type
-    #   The type of the Job.
-    #   @return [String]
+    # @!attribute [rw] participating_resources
+    #   A list of resources that the Job is acting upon.
+    #   @return [Array<Types::ParticipatingResource>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/Job AWS API Documentation
     #
     class Job < Struct.new(
+      :job_id,
       :arn,
+      :type,
+      :initiated_by,
       :creation_date_time,
       :end_date_time,
-      :initiated_by,
-      :job_id,
-      :participating_resources,
-      :participating_servers,
       :status,
+      :participating_servers,
       :tags,
-      :type)
+      :participating_resources)
       SENSITIVE = [:tags]
       include Aws::Structure
     end
 
     # A log outputted by a Job.
+    #
+    # @!attribute [rw] log_date_time
+    #   The date and time the log was taken.
+    #   @return [String]
     #
     # @!attribute [rw] event
     #   The event represents the type of a log.
@@ -1377,87 +1393,94 @@ module Aws::Drs
     #   Metadata associated with a Job log.
     #   @return [Types::JobLogEventData]
     #
-    # @!attribute [rw] log_date_time
-    #   The date and time the log was taken.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/JobLog AWS API Documentation
     #
     class JobLog < Struct.new(
+      :log_date_time,
       :event,
-      :event_data,
-      :log_date_time)
+      :event_data)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # Metadata associated with a Job log.
     #
-    # @!attribute [rw] conversion_properties
-    #   Properties of a conversion job
-    #   @return [Types::ConversionProperties]
+    # @!attribute [rw] source_server_id
+    #   The ID of a Source Server.
+    #   @return [String]
     #
     # @!attribute [rw] conversion_server_id
     #   The ID of a conversion server.
-    #   @return [String]
-    #
-    # @!attribute [rw] event_resource_data
-    #   Properties of resource related to a job event.
-    #   @return [Types::EventResourceData]
-    #
-    # @!attribute [rw] raw_error
-    #   A string representing a job error.
-    #   @return [String]
-    #
-    # @!attribute [rw] source_server_id
-    #   The ID of a Source Server.
     #   @return [String]
     #
     # @!attribute [rw] target_instance_id
     #   The ID of a Recovery Instance.
     #   @return [String]
     #
+    # @!attribute [rw] raw_error
+    #   A string representing a job error.
+    #   @return [String]
+    #
+    # @!attribute [rw] conversion_properties
+    #   Properties of a conversion job
+    #   @return [Types::ConversionProperties]
+    #
+    # @!attribute [rw] event_resource_data
+    #   Properties of resource related to a job event.
+    #   @return [Types::EventResourceData]
+    #
+    # @!attribute [rw] attempt_count
+    #   Retries for this operation.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_attempts_count
+    #   The maximum number of retries that will be attempted if this
+    #   operation failed.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/JobLogEventData AWS API Documentation
     #
     class JobLogEventData < Struct.new(
-      :conversion_properties,
-      :conversion_server_id,
-      :event_resource_data,
-      :raw_error,
       :source_server_id,
-      :target_instance_id)
+      :conversion_server_id,
+      :target_instance_id,
+      :raw_error,
+      :conversion_properties,
+      :event_resource_data,
+      :attempt_count,
+      :max_attempts_count)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # Launch action.
     #
-    # @!attribute [rw] action_code
-    #   Launch action code.
-    #   @return [String]
-    #
     # @!attribute [rw] action_id
     #   Launch action Id.
     #   @return [String]
     #
-    # @!attribute [rw] action_version
-    #   Launch action version.
+    # @!attribute [rw] action_code
+    #   Launch action code.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   Launch action type.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   Launch action name.
     #   @return [String]
     #
     # @!attribute [rw] active
     #   Whether the launch action is active.
     #   @return [Boolean]
     #
-    # @!attribute [rw] category
-    #   Launch action category.
-    #   @return [String]
+    # @!attribute [rw] order
+    #   Launch action order.
+    #   @return [Integer]
     #
-    # @!attribute [rw] description
-    #   Launch action description.
-    #   @return [String]
-    #
-    # @!attribute [rw] name
-    #   Launch action name.
+    # @!attribute [rw] action_version
+    #   Launch action version.
     #   @return [String]
     #
     # @!attribute [rw] optional
@@ -1465,51 +1488,51 @@ module Aws::Drs
     #   fails.
     #   @return [Boolean]
     #
-    # @!attribute [rw] order
-    #   Launch action order.
-    #   @return [Integer]
-    #
     # @!attribute [rw] parameters
     #   Launch action parameters.
     #   @return [Hash<String,Types::LaunchActionParameter>]
     #
-    # @!attribute [rw] type
-    #   Launch action type.
+    # @!attribute [rw] description
+    #   Launch action description.
+    #   @return [String]
+    #
+    # @!attribute [rw] category
+    #   Launch action category.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/LaunchAction AWS API Documentation
     #
     class LaunchAction < Struct.new(
-      :action_code,
       :action_id,
-      :action_version,
-      :active,
-      :category,
-      :description,
+      :action_code,
+      :type,
       :name,
-      :optional,
+      :active,
       :order,
+      :action_version,
+      :optional,
       :parameters,
-      :type)
+      :description,
+      :category)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # Launch action parameter.
     #
-    # @!attribute [rw] type
-    #   Type.
-    #   @return [String]
-    #
     # @!attribute [rw] value
     #   Value.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   Type.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/LaunchActionParameter AWS API Documentation
     #
     class LaunchActionParameter < Struct.new(
-      :type,
-      :value)
+      :value,
+      :type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1520,10 +1543,6 @@ module Aws::Drs
     #   Action.
     #   @return [Types::LaunchAction]
     #
-    # @!attribute [rw] failure_reason
-    #   Failure reason.
-    #   @return [String]
-    #
     # @!attribute [rw] run_id
     #   Run Id.
     #   @return [String]
@@ -1532,13 +1551,17 @@ module Aws::Drs
     #   Run status.
     #   @return [String]
     #
+    # @!attribute [rw] failure_reason
+    #   Failure reason.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/LaunchActionRun AWS API Documentation
     #
     class LaunchActionRun < Struct.new(
       :action,
-      :failure_reason,
       :run_id,
-      :status)
+      :status,
+      :failure_reason)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1559,33 +1582,31 @@ module Aws::Drs
 
     # Launch actions status.
     #
-    # @!attribute [rw] runs
-    #   List of post launch action status.
-    #   @return [Array<Types::LaunchActionRun>]
-    #
     # @!attribute [rw] ssm_agent_discovery_datetime
     #   Time where the AWS Systems Manager was detected as running on the
     #   launched instance.
     #   @return [String]
     #
+    # @!attribute [rw] runs
+    #   List of post launch action status.
+    #   @return [Array<Types::LaunchActionRun>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/LaunchActionsStatus AWS API Documentation
     #
     class LaunchActionsStatus < Struct.new(
-      :runs,
-      :ssm_agent_discovery_datetime)
+      :ssm_agent_discovery_datetime,
+      :runs)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # @!attribute [rw] copy_private_ip
-    #   Whether we should copy the Private IP of the Source Server to the
-    #   Recovery Instance.
-    #   @return [Boolean]
+    # @!attribute [rw] source_server_id
+    #   The ID of the Source Server for this launch configuration.
+    #   @return [String]
     #
-    # @!attribute [rw] copy_tags
-    #   Whether we want to copy the tags of the Source Server to the EC2
-    #   machine of the Recovery Instance.
-    #   @return [Boolean]
+    # @!attribute [rw] name
+    #   The name of the launch configuration.
+    #   @return [String]
     #
     # @!attribute [rw] ec2_launch_template_id
     #   The EC2 launch template ID of this launch configuration.
@@ -1596,55 +1617,73 @@ module Aws::Drs
     #   operation.
     #   @return [String]
     #
-    # @!attribute [rw] launch_into_instance_properties
-    #   Launch into existing instance properties.
-    #   @return [Types::LaunchIntoInstanceProperties]
-    #
-    # @!attribute [rw] licensing
-    #   The licensing configuration to be used for this launch
-    #   configuration.
-    #   @return [Types::Licensing]
-    #
-    # @!attribute [rw] name
-    #   The name of the launch configuration.
-    #   @return [String]
-    #
-    # @!attribute [rw] post_launch_enabled
-    #   Whether we want to activate post-launch actions for the Source
-    #   Server.
-    #   @return [Boolean]
-    #
-    # @!attribute [rw] source_server_id
-    #   The ID of the Source Server for this launch configuration.
-    #   @return [String]
-    #
     # @!attribute [rw] target_instance_type_right_sizing_method
     #   Whether Elastic Disaster Recovery should try to automatically choose
     #   the instance type that best matches the OS, CPU, and RAM of your
     #   Source Server.
     #   @return [String]
     #
+    # @!attribute [rw] copy_private_ip
+    #   Whether we should copy the Private IP of the Source Server to the
+    #   Recovery Instance.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] copy_tags
+    #   Whether we want to copy the tags of the Source Server to the EC2
+    #   machine of the Recovery Instance.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] licensing
+    #   The licensing configuration to be used for this launch
+    #   configuration.
+    #   @return [Types::Licensing]
+    #
+    # @!attribute [rw] post_launch_enabled
+    #   Whether we want to activate post-launch actions for the Source
+    #   Server.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] launch_into_instance_properties
+    #   Launch into existing instance properties.
+    #   @return [Types::LaunchIntoInstanceProperties]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/LaunchConfiguration AWS API Documentation
     #
     class LaunchConfiguration < Struct.new(
-      :copy_private_ip,
-      :copy_tags,
+      :source_server_id,
+      :name,
       :ec2_launch_template_id,
       :launch_disposition,
-      :launch_into_instance_properties,
+      :target_instance_type_right_sizing_method,
+      :copy_private_ip,
+      :copy_tags,
       :licensing,
-      :name,
       :post_launch_enabled,
-      :source_server_id,
-      :target_instance_type_right_sizing_method)
+      :launch_into_instance_properties)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # Account level Launch Configuration Template.
     #
+    # @!attribute [rw] launch_configuration_template_id
+    #   ID of the Launch Configuration Template.
+    #   @return [String]
+    #
     # @!attribute [rw] arn
     #   ARN of the Launch Configuration Template.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Tags of the Launch Configuration Template.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] launch_disposition
+    #   Launch disposition.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_instance_type_right_sizing_method
+    #   Target instance type right-sizing method.
     #   @return [String]
     #
     # @!attribute [rw] copy_private_ip
@@ -1655,17 +1694,17 @@ module Aws::Drs
     #   Copy tags.
     #   @return [Boolean]
     #
+    # @!attribute [rw] licensing
+    #   Licensing.
+    #   @return [Types::Licensing]
+    #
     # @!attribute [rw] export_bucket_arn
     #   S3 bucket ARN to export Source Network templates.
     #   @return [String]
     #
-    # @!attribute [rw] launch_configuration_template_id
-    #   ID of the Launch Configuration Template.
-    #   @return [String]
-    #
-    # @!attribute [rw] launch_disposition
-    #   Launch disposition.
-    #   @return [String]
+    # @!attribute [rw] post_launch_enabled
+    #   Post-launch actions activated.
+    #   @return [Boolean]
     #
     # @!attribute [rw] launch_into_source_instance
     #   DRS will set the 'launch into instance ID' of any source server
@@ -1673,36 +1712,20 @@ module Aws::Drs
     #   or availability zone, using the instance ID of the source instance.
     #   @return [Boolean]
     #
-    # @!attribute [rw] licensing
-    #   Licensing.
-    #   @return [Types::Licensing]
-    #
-    # @!attribute [rw] post_launch_enabled
-    #   Post-launch actions activated.
-    #   @return [Boolean]
-    #
-    # @!attribute [rw] tags
-    #   Tags of the Launch Configuration Template.
-    #   @return [Hash<String,String>]
-    #
-    # @!attribute [rw] target_instance_type_right_sizing_method
-    #   Target instance type right-sizing method.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/LaunchConfigurationTemplate AWS API Documentation
     #
     class LaunchConfigurationTemplate < Struct.new(
+      :launch_configuration_template_id,
       :arn,
+      :tags,
+      :launch_disposition,
+      :target_instance_type_right_sizing_method,
       :copy_private_ip,
       :copy_tags,
-      :export_bucket_arn,
-      :launch_configuration_template_id,
-      :launch_disposition,
-      :launch_into_source_instance,
       :licensing,
+      :export_bucket_arn,
       :post_launch_enabled,
-      :tags,
-      :target_instance_type_right_sizing_method)
+      :launch_into_source_instance)
       SENSITIVE = [:tags]
       include Aws::Structure
     end
@@ -1744,13 +1767,17 @@ module Aws::Drs
     #   service.
     #   @return [String]
     #
+    # @!attribute [rw] first_byte_date_time
+    #   The date and time of the first byte that was replicated from the
+    #   Source Server.
+    #   @return [String]
+    #
     # @!attribute [rw] elapsed_replication_duration
     #   The amount of time that the Source Server has been replicating for.
     #   @return [String]
     #
-    # @!attribute [rw] first_byte_date_time
-    #   The date and time of the first byte that was replicated from the
-    #   Source Server.
+    # @!attribute [rw] last_seen_by_service_date_time
+    #   The date and time this Source Server was last seen by the service.
     #   @return [String]
     #
     # @!attribute [rw] last_launch
@@ -1758,18 +1785,14 @@ module Aws::Drs
     #   Source Server.
     #   @return [Types::LifeCycleLastLaunch]
     #
-    # @!attribute [rw] last_seen_by_service_date_time
-    #   The date and time this Source Server was last seen by the service.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/LifeCycle AWS API Documentation
     #
     class LifeCycle < Struct.new(
       :added_to_service_date_time,
-      :elapsed_replication_duration,
       :first_byte_date_time,
-      :last_launch,
-      :last_seen_by_service_date_time)
+      :elapsed_replication_duration,
+      :last_seen_by_service_date_time,
+      :last_launch)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1820,6 +1843,11 @@ module Aws::Drs
       include Aws::Structure
     end
 
+    # @!attribute [rw] staging_account_id
+    #   The Id of the staging Account to retrieve extensible source servers
+    #   from.
+    #   @return [String]
+    #
     # @!attribute [rw] max_results
     #   The maximum number of extensible source servers to retrieve.
     #   @return [Integer]
@@ -1828,17 +1856,12 @@ module Aws::Drs
     #   The token of the next extensible source server to retrieve.
     #   @return [String]
     #
-    # @!attribute [rw] staging_account_id
-    #   The Id of the staging Account to retrieve extensible source servers
-    #   from.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/ListExtensibleSourceServersRequest AWS API Documentation
     #
     class ListExtensibleSourceServersRequest < Struct.new(
+      :staging_account_id,
       :max_results,
-      :next_token,
-      :staging_account_id)
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1860,6 +1883,10 @@ module Aws::Drs
       include Aws::Structure
     end
 
+    # @!attribute [rw] resource_id
+    #   Launch configuration template Id or Source Server Id
+    #   @return [String]
+    #
     # @!attribute [rw] filters
     #   Filters to apply when listing resource launch actions.
     #   @return [Types::LaunchActionsRequestFilters]
@@ -1873,17 +1900,13 @@ module Aws::Drs
     #   Next token to use when listing resource launch actions.
     #   @return [String]
     #
-    # @!attribute [rw] resource_id
-    #   Launch configuration template Id or Source Server Id
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/ListLaunchActionsRequest AWS API Documentation
     #
     class ListLaunchActionsRequest < Struct.new(
+      :resource_id,
       :filters,
       :max_results,
-      :next_token,
-      :resource_id)
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1965,6 +1988,10 @@ module Aws::Drs
 
     # Network interface.
     #
+    # @!attribute [rw] mac_address
+    #   The MAC address of the network interface.
+    #   @return [String]
+    #
     # @!attribute [rw] ips
     #   Network interface IPs.
     #   @return [Array<String>]
@@ -1973,16 +2000,12 @@ module Aws::Drs
     #   Whether this is the primary network interface.
     #   @return [Boolean]
     #
-    # @!attribute [rw] mac_address
-    #   The MAC address of the network interface.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/NetworkInterface AWS API Documentation
     #
     class NetworkInterface < Struct.new(
+      :mac_address,
       :ips,
-      :is_primary,
-      :mac_address)
+      :is_primary)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2004,9 +2027,13 @@ module Aws::Drs
     # A rule in the Point in Time (PIT) policy representing when to take
     # snapshots and how long to retain them for.
     #
-    # @!attribute [rw] enabled
-    #   Whether this rule is enabled or not.
-    #   @return [Boolean]
+    # @!attribute [rw] rule_id
+    #   The ID of the rule.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] units
+    #   The units used to measure the interval and retentionDuration.
+    #   @return [String]
     #
     # @!attribute [rw] interval
     #   How often, in the chosen units, a snapshot should be taken.
@@ -2016,41 +2043,37 @@ module Aws::Drs
     #   The duration to retain a snapshot for, in the chosen units.
     #   @return [Integer]
     #
-    # @!attribute [rw] rule_id
-    #   The ID of the rule.
-    #   @return [Integer]
-    #
-    # @!attribute [rw] units
-    #   The units used to measure the interval and retentionDuration.
-    #   @return [String]
+    # @!attribute [rw] enabled
+    #   Whether this rule is enabled or not.
+    #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/PITPolicyRule AWS API Documentation
     #
     class PITPolicyRule < Struct.new(
-      :enabled,
+      :rule_id,
+      :units,
       :interval,
       :retention_duration,
-      :rule_id,
-      :units)
+      :enabled)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # Represents a resource participating in an asynchronous Job.
     #
-    # @!attribute [rw] launch_status
-    #   The launch status of a participating resource.
-    #   @return [String]
-    #
     # @!attribute [rw] participating_resource_id
     #   The ID of a participating resource.
     #   @return [Types::ParticipatingResourceID]
     #
+    # @!attribute [rw] launch_status
+    #   The launch status of a participating resource.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/ParticipatingResource AWS API Documentation
     #
     class ParticipatingResource < Struct.new(
-      :launch_status,
-      :participating_resource_id)
+      :participating_resource_id,
+      :launch_status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2078,29 +2101,29 @@ module Aws::Drs
 
     # Represents a server participating in an asynchronous Job.
     #
-    # @!attribute [rw] launch_actions_status
-    #   The post-launch action runs of a participating server.
-    #   @return [Types::LaunchActionsStatus]
-    #
-    # @!attribute [rw] launch_status
-    #   The launch status of a participating server.
+    # @!attribute [rw] source_server_id
+    #   The Source Server ID of a participating server.
     #   @return [String]
     #
     # @!attribute [rw] recovery_instance_id
     #   The Recovery Instance ID of a participating server.
     #   @return [String]
     #
-    # @!attribute [rw] source_server_id
-    #   The Source Server ID of a participating server.
+    # @!attribute [rw] launch_status
+    #   The launch status of a participating server.
     #   @return [String]
+    #
+    # @!attribute [rw] launch_actions_status
+    #   The post-launch action runs of a participating server.
+    #   @return [Types::LaunchActionsStatus]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/ParticipatingServer AWS API Documentation
     #
     class ParticipatingServer < Struct.new(
-      :launch_actions_status,
-      :launch_status,
+      :source_server_id,
       :recovery_instance_id,
-      :source_server_id)
+      :launch_status,
+      :launch_actions_status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2124,32 +2147,20 @@ module Aws::Drs
       include Aws::Structure
     end
 
+    # @!attribute [rw] resource_id
+    #   Launch configuration template Id or Source Server Id
+    #   @return [String]
+    #
     # @!attribute [rw] action_code
     #   Launch action code.
     #   @return [String]
     #
+    # @!attribute [rw] order
+    #   Launch action order.
+    #   @return [Integer]
+    #
     # @!attribute [rw] action_id
     #   Launch action Id.
-    #   @return [String]
-    #
-    # @!attribute [rw] action_version
-    #   Launch action version.
-    #   @return [String]
-    #
-    # @!attribute [rw] active
-    #   Whether the launch action is active.
-    #   @return [Boolean]
-    #
-    # @!attribute [rw] category
-    #   Launch action category.
-    #   @return [String]
-    #
-    # @!attribute [rw] description
-    #   Launch action description.
-    #   @return [String]
-    #
-    # @!attribute [rw] name
-    #   Launch action name.
     #   @return [String]
     #
     # @!attribute [rw] optional
@@ -2157,117 +2168,117 @@ module Aws::Drs
     #   fails.
     #   @return [Boolean]
     #
-    # @!attribute [rw] order
-    #   Launch action order.
-    #   @return [Integer]
+    # @!attribute [rw] active
+    #   Whether the launch action is active.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] name
+    #   Launch action name.
+    #   @return [String]
+    #
+    # @!attribute [rw] action_version
+    #   Launch action version.
+    #   @return [String]
+    #
+    # @!attribute [rw] category
+    #   Launch action category.
+    #   @return [String]
     #
     # @!attribute [rw] parameters
     #   Launch action parameters.
     #   @return [Hash<String,Types::LaunchActionParameter>]
     #
-    # @!attribute [rw] resource_id
-    #   Launch configuration template Id or Source Server Id
+    # @!attribute [rw] description
+    #   Launch action description.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/PutLaunchActionRequest AWS API Documentation
     #
     class PutLaunchActionRequest < Struct.new(
+      :resource_id,
       :action_code,
-      :action_id,
-      :action_version,
-      :active,
-      :category,
-      :description,
-      :name,
-      :optional,
       :order,
+      :action_id,
+      :optional,
+      :active,
+      :name,
+      :action_version,
+      :category,
       :parameters,
-      :resource_id)
+      :description)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # @!attribute [rw] action_code
-    #   Launch action code.
+    # @!attribute [rw] resource_id
+    #   Launch configuration template Id or Source Server Id
     #   @return [String]
     #
     # @!attribute [rw] action_id
     #   Launch action Id.
     #   @return [String]
     #
-    # @!attribute [rw] action_version
-    #   Launch action version.
-    #   @return [String]
-    #
-    # @!attribute [rw] active
-    #   Whether the launch action is active.
-    #   @return [Boolean]
-    #
-    # @!attribute [rw] category
-    #   Launch action category.
-    #   @return [String]
-    #
-    # @!attribute [rw] description
-    #   Launch action description.
-    #   @return [String]
-    #
-    # @!attribute [rw] name
-    #   Launch action name.
-    #   @return [String]
-    #
-    # @!attribute [rw] optional
-    #   Whether the launch will not be marked as failed if this action
-    #   fails.
-    #   @return [Boolean]
-    #
-    # @!attribute [rw] order
-    #   Launch action order.
-    #   @return [Integer]
-    #
-    # @!attribute [rw] parameters
-    #   Launch action parameters.
-    #   @return [Hash<String,Types::LaunchActionParameter>]
-    #
-    # @!attribute [rw] resource_id
-    #   Launch configuration template Id or Source Server Id
+    # @!attribute [rw] action_code
+    #   Launch action code.
     #   @return [String]
     #
     # @!attribute [rw] type
     #   Launch action type.
     #   @return [String]
     #
+    # @!attribute [rw] name
+    #   Launch action name.
+    #   @return [String]
+    #
+    # @!attribute [rw] active
+    #   Whether the launch action is active.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] order
+    #   Launch action order.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] action_version
+    #   Launch action version.
+    #   @return [String]
+    #
+    # @!attribute [rw] optional
+    #   Whether the launch will not be marked as failed if this action
+    #   fails.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] parameters
+    #   Launch action parameters.
+    #   @return [Hash<String,Types::LaunchActionParameter>]
+    #
+    # @!attribute [rw] description
+    #   Launch action description.
+    #   @return [String]
+    #
+    # @!attribute [rw] category
+    #   Launch action category.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/PutLaunchActionResponse AWS API Documentation
     #
     class PutLaunchActionResponse < Struct.new(
-      :action_code,
-      :action_id,
-      :action_version,
-      :active,
-      :category,
-      :description,
-      :name,
-      :optional,
-      :order,
-      :parameters,
       :resource_id,
-      :type)
+      :action_id,
+      :action_code,
+      :type,
+      :name,
+      :active,
+      :order,
+      :action_version,
+      :optional,
+      :parameters,
+      :description,
+      :category)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # A Recovery Instance is a replica of a Source Server running on EC2.
-    #
-    # @!attribute [rw] agent_version
-    #   The version of the DRS agent installed on the recovery instance
-    #   @return [String]
-    #
-    # @!attribute [rw] arn
-    #   The ARN of the Recovery Instance.
-    #   @return [String]
-    #
-    # @!attribute [rw] data_replication_info
-    #   The Data Replication Info of the Recovery Instance.
-    #   @return [Types::RecoveryInstanceDataReplicationInfo]
     #
     # @!attribute [rw] ec2_instance_id
     #   The EC2 instance ID of the Recovery Instance.
@@ -2277,73 +2288,85 @@ module Aws::Drs
     #   The state of the EC2 instance for this Recovery Instance.
     #   @return [String]
     #
-    # @!attribute [rw] failback
-    #   An object representing failback related information of the Recovery
-    #   Instance.
-    #   @return [Types::RecoveryInstanceFailback]
-    #
-    # @!attribute [rw] is_drill
-    #   Whether this Recovery Instance was created for a drill or for an
-    #   actual Recovery event.
-    #   @return [Boolean]
-    #
     # @!attribute [rw] job_id
     #   The ID of the Job that created the Recovery Instance.
-    #   @return [String]
-    #
-    # @!attribute [rw] origin_availability_zone
-    #   AWS availability zone associated with the recovery instance.
-    #   @return [String]
-    #
-    # @!attribute [rw] origin_environment
-    #   Environment (On Premises / AWS) of the instance that the recovery
-    #   instance originated from.
-    #   @return [String]
-    #
-    # @!attribute [rw] point_in_time_snapshot_date_time
-    #   The date and time of the Point in Time (PIT) snapshot that this
-    #   Recovery Instance was launched from.
     #   @return [String]
     #
     # @!attribute [rw] recovery_instance_id
     #   The ID of the Recovery Instance.
     #   @return [String]
     #
-    # @!attribute [rw] recovery_instance_properties
-    #   Properties of the Recovery Instance machine.
-    #   @return [Types::RecoveryInstanceProperties]
-    #
-    # @!attribute [rw] source_outpost_arn
-    #   The ARN of the source Outpost
-    #   @return [String]
-    #
     # @!attribute [rw] source_server_id
     #   The Source Server ID that this Recovery Instance is associated with.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The ARN of the Recovery Instance.
     #   @return [String]
     #
     # @!attribute [rw] tags
     #   An array of tags that are associated with the Recovery Instance.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] failback
+    #   An object representing failback related information of the Recovery
+    #   Instance.
+    #   @return [Types::RecoveryInstanceFailback]
+    #
+    # @!attribute [rw] data_replication_info
+    #   The Data Replication Info of the Recovery Instance.
+    #   @return [Types::RecoveryInstanceDataReplicationInfo]
+    #
+    # @!attribute [rw] recovery_instance_properties
+    #   Properties of the Recovery Instance machine.
+    #   @return [Types::RecoveryInstanceProperties]
+    #
+    # @!attribute [rw] point_in_time_snapshot_date_time
+    #   The date and time of the Point in Time (PIT) snapshot that this
+    #   Recovery Instance was launched from.
+    #   @return [String]
+    #
+    # @!attribute [rw] is_drill
+    #   Whether this Recovery Instance was created for a drill or for an
+    #   actual Recovery event.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] origin_environment
+    #   Environment (On Premises / AWS) of the instance that the recovery
+    #   instance originated from.
+    #   @return [String]
+    #
+    # @!attribute [rw] origin_availability_zone
+    #   AWS availability zone associated with the recovery instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] agent_version
+    #   The version of the DRS agent installed on the recovery instance
+    #   @return [String]
+    #
+    # @!attribute [rw] source_outpost_arn
+    #   The ARN of the source Outpost
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/RecoveryInstance AWS API Documentation
     #
     class RecoveryInstance < Struct.new(
-      :agent_version,
-      :arn,
-      :data_replication_info,
       :ec2_instance_id,
       :ec2_instance_state,
-      :failback,
-      :is_drill,
       :job_id,
-      :origin_availability_zone,
-      :origin_environment,
-      :point_in_time_snapshot_date_time,
       :recovery_instance_id,
-      :recovery_instance_properties,
-      :source_outpost_arn,
       :source_server_id,
-      :tags)
+      :arn,
+      :tags,
+      :failback,
+      :data_replication_info,
+      :recovery_instance_properties,
+      :point_in_time_snapshot_date_time,
+      :is_drill,
+      :origin_environment,
+      :origin_availability_zone,
+      :agent_version,
+      :source_outpost_arn)
       SENSITIVE = [:tags]
       include Aws::Structure
     end
@@ -2369,29 +2392,29 @@ module Aws::Drs
 
     # Information about Data Replication
     #
-    # @!attribute [rw] data_replication_error
-    #   Information about Data Replication
-    #   @return [Types::RecoveryInstanceDataReplicationError]
-    #
-    # @!attribute [rw] data_replication_initiation
-    #   Information about whether the data replication has been initiated.
-    #   @return [Types::RecoveryInstanceDataReplicationInitiation]
-    #
-    # @!attribute [rw] data_replication_state
-    #   The state of the data replication.
+    # @!attribute [rw] lag_duration
+    #   Data replication lag duration.
     #   @return [String]
     #
     # @!attribute [rw] eta_date_time
     #   An estimate of when the data replication will be completed.
     #   @return [String]
     #
-    # @!attribute [rw] lag_duration
-    #   Data replication lag duration.
-    #   @return [String]
-    #
     # @!attribute [rw] replicated_disks
     #   The disks that should be replicated.
     #   @return [Array<Types::RecoveryInstanceDataReplicationInfoReplicatedDisk>]
+    #
+    # @!attribute [rw] data_replication_state
+    #   The state of the data replication.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_replication_initiation
+    #   Information about whether the data replication has been initiated.
+    #   @return [Types::RecoveryInstanceDataReplicationInitiation]
+    #
+    # @!attribute [rw] data_replication_error
+    #   Information about Data Replication
+    #   @return [Types::RecoveryInstanceDataReplicationError]
     #
     # @!attribute [rw] staging_availability_zone
     #   AWS Availability zone into which data is being replicated.
@@ -2404,12 +2427,12 @@ module Aws::Drs
     # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/RecoveryInstanceDataReplicationInfo AWS API Documentation
     #
     class RecoveryInstanceDataReplicationInfo < Struct.new(
-      :data_replication_error,
-      :data_replication_initiation,
-      :data_replication_state,
-      :eta_date_time,
       :lag_duration,
+      :eta_date_time,
       :replicated_disks,
+      :data_replication_state,
+      :data_replication_initiation,
+      :data_replication_error,
       :staging_availability_zone,
       :staging_outpost_arn)
       SENSITIVE = []
@@ -2418,13 +2441,13 @@ module Aws::Drs
 
     # A disk that should be replicated.
     #
-    # @!attribute [rw] backlogged_storage_bytes
-    #   The size of the replication backlog in bytes.
-    #   @return [Integer]
-    #
     # @!attribute [rw] device_name
     #   The name of the device.
     #   @return [String]
+    #
+    # @!attribute [rw] total_storage_bytes
+    #   The total amount of data to be replicated in bytes.
+    #   @return [Integer]
     #
     # @!attribute [rw] replicated_storage_bytes
     #   The amount of data replicated so far in bytes.
@@ -2434,18 +2457,18 @@ module Aws::Drs
     #   The amount of data to be rescanned in bytes.
     #   @return [Integer]
     #
-    # @!attribute [rw] total_storage_bytes
-    #   The total amount of data to be replicated in bytes.
+    # @!attribute [rw] backlogged_storage_bytes
+    #   The size of the replication backlog in bytes.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/RecoveryInstanceDataReplicationInfoReplicatedDisk AWS API Documentation
     #
     class RecoveryInstanceDataReplicationInfoReplicatedDisk < Struct.new(
-      :backlogged_storage_bytes,
       :device_name,
+      :total_storage_bytes,
       :replicated_storage_bytes,
       :rescanned_storage_bytes,
-      :total_storage_bytes)
+      :backlogged_storage_bytes)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2492,6 +2515,11 @@ module Aws::Drs
     # An object representing a block storage device on the Recovery
     # Instance.
     #
+    # @!attribute [rw] internal_device_name
+    #   The internal device name of this disk. This is the name that is
+    #   visible on the machine itself and not from the EC2 console.
+    #   @return [String]
+    #
     # @!attribute [rw] bytes
     #   The amount of storage on the disk in bytes.
     #   @return [Integer]
@@ -2500,17 +2528,12 @@ module Aws::Drs
     #   The EBS Volume ID of this disk.
     #   @return [String]
     #
-    # @!attribute [rw] internal_device_name
-    #   The internal device name of this disk. This is the name that is
-    #   visible on the machine itself and not from the EC2 console.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/RecoveryInstanceDisk AWS API Documentation
     #
     class RecoveryInstanceDisk < Struct.new(
+      :internal_device_name,
       :bytes,
-      :ebs_volume_id,
-      :internal_device_name)
+      :ebs_volume_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2518,37 +2541,31 @@ module Aws::Drs
     # An object representing failback related information of the Recovery
     # Instance.
     #
-    # @!attribute [rw] agent_last_seen_by_service_date_time
-    #   The date and time the agent on the Recovery Instance was last seen
-    #   by the service.
-    #   @return [String]
-    #
-    # @!attribute [rw] elapsed_replication_duration
-    #   The amount of time that the Recovery Instance has been replicating
-    #   for.
-    #   @return [String]
-    #
     # @!attribute [rw] failback_client_id
     #   The ID of the failback client that this Recovery Instance is
     #   associated with.
-    #   @return [String]
-    #
-    # @!attribute [rw] failback_client_last_seen_by_service_date_time
-    #   The date and time that the failback client was last seen by the
-    #   service.
-    #   @return [String]
-    #
-    # @!attribute [rw] failback_initiation_time
-    #   The date and time that the failback initiation started.
     #   @return [String]
     #
     # @!attribute [rw] failback_job_id
     #   The Job ID of the last failback log for this Recovery Instance.
     #   @return [String]
     #
-    # @!attribute [rw] failback_launch_type
-    #   The launch type (Recovery / Drill) of the last launch for the
-    #   failback replication of this recovery instance.
+    # @!attribute [rw] failback_initiation_time
+    #   The date and time that the failback initiation started.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The state of the failback process that this Recovery Instance is in.
+    #   @return [String]
+    #
+    # @!attribute [rw] agent_last_seen_by_service_date_time
+    #   The date and time the agent on the Recovery Instance was last seen
+    #   by the service.
+    #   @return [String]
+    #
+    # @!attribute [rw] failback_client_last_seen_by_service_date_time
+    #   The date and time that the failback client was last seen by the
+    #   service.
     #   @return [String]
     #
     # @!attribute [rw] failback_to_original_server
@@ -2561,68 +2578,74 @@ module Aws::Drs
     #   Recovery Instance.
     #   @return [String]
     #
-    # @!attribute [rw] state
-    #   The state of the failback process that this Recovery Instance is in.
+    # @!attribute [rw] elapsed_replication_duration
+    #   The amount of time that the Recovery Instance has been replicating
+    #   for.
+    #   @return [String]
+    #
+    # @!attribute [rw] failback_launch_type
+    #   The launch type (Recovery / Drill) of the last launch for the
+    #   failback replication of this recovery instance.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/RecoveryInstanceFailback AWS API Documentation
     #
     class RecoveryInstanceFailback < Struct.new(
-      :agent_last_seen_by_service_date_time,
-      :elapsed_replication_duration,
       :failback_client_id,
-      :failback_client_last_seen_by_service_date_time,
-      :failback_initiation_time,
       :failback_job_id,
-      :failback_launch_type,
+      :failback_initiation_time,
+      :state,
+      :agent_last_seen_by_service_date_time,
+      :failback_client_last_seen_by_service_date_time,
       :failback_to_original_server,
       :first_byte_date_time,
-      :state)
+      :elapsed_replication_duration,
+      :failback_launch_type)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # Properties of the Recovery Instance machine.
     #
-    # @!attribute [rw] cpus
-    #   An array of CPUs.
-    #   @return [Array<Types::CPU>]
-    #
-    # @!attribute [rw] disks
-    #   An array of disks.
-    #   @return [Array<Types::RecoveryInstanceDisk>]
-    #
-    # @!attribute [rw] identification_hints
-    #   Hints used to uniquely identify a machine.
-    #   @return [Types::IdentificationHints]
-    #
     # @!attribute [rw] last_updated_date_time
     #   The date and time the Recovery Instance properties were last updated
     #   on.
     #   @return [String]
     #
+    # @!attribute [rw] identification_hints
+    #   Hints used to uniquely identify a machine.
+    #   @return [Types::IdentificationHints]
+    #
     # @!attribute [rw] network_interfaces
     #   An array of network interfaces.
     #   @return [Array<Types::NetworkInterface>]
     #
-    # @!attribute [rw] os
-    #   Operating system.
-    #   @return [Types::OS]
+    # @!attribute [rw] disks
+    #   An array of disks.
+    #   @return [Array<Types::RecoveryInstanceDisk>]
+    #
+    # @!attribute [rw] cpus
+    #   An array of CPUs.
+    #   @return [Array<Types::CPU>]
     #
     # @!attribute [rw] ram_bytes
     #   The amount of RAM in bytes.
     #   @return [Integer]
     #
+    # @!attribute [rw] os
+    #   Operating system.
+    #   @return [Types::OS]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/RecoveryInstanceProperties AWS API Documentation
     #
     class RecoveryInstanceProperties < Struct.new(
-      :cpus,
-      :disks,
-      :identification_hints,
       :last_updated_date_time,
+      :identification_hints,
       :network_interfaces,
-      :os,
-      :ram_bytes)
+      :disks,
+      :cpus,
+      :ram_bytes,
+      :os)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2653,14 +2676,6 @@ module Aws::Drs
 
     # A snapshot of a Source Server used during recovery.
     #
-    # @!attribute [rw] ebs_snapshots
-    #   A list of EBS snapshots.
-    #   @return [Array<String>]
-    #
-    # @!attribute [rw] expected_timestamp
-    #   The timestamp of when we expect the snapshot to be taken.
-    #   @return [String]
-    #
     # @!attribute [rw] snapshot_id
     #   The ID of the Recovery Snapshot.
     #   @return [String]
@@ -2669,48 +2684,68 @@ module Aws::Drs
     #   The ID of the Source Server that the snapshot was taken for.
     #   @return [String]
     #
+    # @!attribute [rw] expected_timestamp
+    #   The timestamp of when we expect the snapshot to be taken.
+    #   @return [String]
+    #
     # @!attribute [rw] timestamp
     #   The actual timestamp that the snapshot was taken.
     #   @return [String]
     #
+    # @!attribute [rw] ebs_snapshots
+    #   A list of EBS snapshots.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/RecoverySnapshot AWS API Documentation
     #
     class RecoverySnapshot < Struct.new(
-      :ebs_snapshots,
-      :expected_timestamp,
       :snapshot_id,
       :source_server_id,
-      :timestamp)
+      :expected_timestamp,
+      :timestamp,
+      :ebs_snapshots)
       SENSITIVE = []
       include Aws::Structure
     end
 
+    # @!attribute [rw] source_server_id
+    #   The ID of the Source Server for this Replication Configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the Replication Configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] staging_area_subnet_id
+    #   The subnet to be used by the replication staging area.
+    #   @return [String]
+    #
     # @!attribute [rw] associate_default_security_group
     #   Whether to associate the default Elastic Disaster Recovery Security
     #   group with the Replication Configuration.
     #   @return [Boolean]
     #
-    # @!attribute [rw] auto_replicate_new_disks
-    #   Whether to allow the AWS replication agent to automatically
-    #   replicate newly added disks.
-    #   @return [Boolean]
+    # @!attribute [rw] replication_servers_security_groups_i_ds
+    #   The security group IDs that will be used by the replication server.
+    #   @return [Array<String>]
     #
-    # @!attribute [rw] bandwidth_throttling
-    #   Configure bandwidth throttling for the outbound data transfer rate
-    #   of the Source Server in Mbps.
-    #   @return [Integer]
-    #
-    # @!attribute [rw] create_public_ip
-    #   Whether to create a Public IP for the Recovery Instance by default.
-    #   @return [Boolean]
-    #
-    # @!attribute [rw] data_plane_routing
-    #   The data plane routing mechanism that will be used for replication.
+    # @!attribute [rw] replication_server_instance_type
+    #   The instance type to be used for the replication server.
     #   @return [String]
+    #
+    # @!attribute [rw] use_dedicated_replication_server
+    #   Whether to use a dedicated Replication Server in the replication
+    #   staging area.
+    #   @return [Boolean]
     #
     # @!attribute [rw] default_large_staging_disk_type
     #   The Staging Disk EBS volume type to be used during replication.
     #   @return [String]
+    #
+    # @!attribute [rw] replicated_disks
+    #   The configuration of the disks of the Source Server to be
+    #   replicated.
+    #   @return [Array<Types::ReplicationConfigurationReplicatedDisk>]
     #
     # @!attribute [rw] ebs_encryption
     #   The type of EBS encryption to be used during replication.
@@ -2720,35 +2755,18 @@ module Aws::Drs
     #   The ARN of the EBS encryption key to be used during replication.
     #   @return [String]
     #
-    # @!attribute [rw] name
-    #   The name of the Replication Configuration.
+    # @!attribute [rw] bandwidth_throttling
+    #   Configure bandwidth throttling for the outbound data transfer rate
+    #   of the Source Server in Mbps.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] data_plane_routing
+    #   The data plane routing mechanism that will be used for replication.
     #   @return [String]
     #
-    # @!attribute [rw] pit_policy
-    #   The Point in time (PIT) policy to manage snapshots taken during
-    #   replication.
-    #   @return [Array<Types::PITPolicyRule>]
-    #
-    # @!attribute [rw] replicated_disks
-    #   The configuration of the disks of the Source Server to be
-    #   replicated.
-    #   @return [Array<Types::ReplicationConfigurationReplicatedDisk>]
-    #
-    # @!attribute [rw] replication_server_instance_type
-    #   The instance type to be used for the replication server.
-    #   @return [String]
-    #
-    # @!attribute [rw] replication_servers_security_groups_i_ds
-    #   The security group IDs that will be used by the replication server.
-    #   @return [Array<String>]
-    #
-    # @!attribute [rw] source_server_id
-    #   The ID of the Source Server for this Replication Configuration.
-    #   @return [String]
-    #
-    # @!attribute [rw] staging_area_subnet_id
-    #   The subnet to be used by the replication staging area.
-    #   @return [String]
+    # @!attribute [rw] create_public_ip
+    #   Whether to create a Public IP for the Recovery Instance by default.
+    #   @return [Boolean]
     #
     # @!attribute [rw] staging_area_tags
     #   A set of tags to be associated with all resources created in the
@@ -2756,31 +2774,42 @@ module Aws::Drs
     #   snapshots, etc.
     #   @return [Hash<String,String>]
     #
-    # @!attribute [rw] use_dedicated_replication_server
-    #   Whether to use a dedicated Replication Server in the replication
-    #   staging area.
+    # @!attribute [rw] pit_policy
+    #   The Point in time (PIT) policy to manage snapshots taken during
+    #   replication.
+    #   @return [Array<Types::PITPolicyRule>]
+    #
+    # @!attribute [rw] auto_replicate_new_disks
+    #   Whether to allow the AWS replication agent to automatically
+    #   replicate newly added disks.
     #   @return [Boolean]
+    #
+    # @!attribute [rw] internet_protocol
+    #   Which version of the Internet Protocol to use for replication of
+    #   data. (IPv4 or IPv6)
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/ReplicationConfiguration AWS API Documentation
     #
     class ReplicationConfiguration < Struct.new(
+      :source_server_id,
+      :name,
+      :staging_area_subnet_id,
       :associate_default_security_group,
-      :auto_replicate_new_disks,
-      :bandwidth_throttling,
-      :create_public_ip,
-      :data_plane_routing,
+      :replication_servers_security_groups_i_ds,
+      :replication_server_instance_type,
+      :use_dedicated_replication_server,
       :default_large_staging_disk_type,
+      :replicated_disks,
       :ebs_encryption,
       :ebs_encryption_key_arn,
-      :name,
-      :pit_policy,
-      :replicated_disks,
-      :replication_server_instance_type,
-      :replication_servers_security_groups_i_ds,
-      :source_server_id,
-      :staging_area_subnet_id,
+      :bandwidth_throttling,
+      :data_plane_routing,
+      :create_public_ip,
       :staging_area_tags,
-      :use_dedicated_replication_server)
+      :pit_policy,
+      :auto_replicate_new_disks,
+      :internet_protocol)
       SENSITIVE = [:staging_area_tags]
       include Aws::Structure
     end
@@ -2791,43 +2820,51 @@ module Aws::Drs
     #   The name of the device.
     #   @return [String]
     #
-    # @!attribute [rw] iops
-    #   The requested number of I/O operations per second (IOPS).
-    #   @return [Integer]
-    #
     # @!attribute [rw] is_boot_disk
     #   Whether to boot from this disk or not.
     #   @return [Boolean]
     #
-    # @!attribute [rw] optimized_staging_disk_type
-    #   The Staging Disk EBS volume type to be used during replication when
-    #   `stagingDiskType` is set to Auto. This is a read-only field.
-    #   @return [String]
-    #
     # @!attribute [rw] staging_disk_type
     #   The Staging Disk EBS volume type to be used during replication.
     #   @return [String]
+    #
+    # @!attribute [rw] iops
+    #   The requested number of I/O operations per second (IOPS).
+    #   @return [Integer]
     #
     # @!attribute [rw] throughput
     #   The throughput to use for the EBS volume in MiB/s. This parameter is
     #   valid only for gp3 volumes.
     #   @return [Integer]
     #
+    # @!attribute [rw] optimized_staging_disk_type
+    #   The Staging Disk EBS volume type to be used during replication when
+    #   `stagingDiskType` is set to Auto. This is a read-only field.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/ReplicationConfigurationReplicatedDisk AWS API Documentation
     #
     class ReplicationConfigurationReplicatedDisk < Struct.new(
       :device_name,
-      :iops,
       :is_boot_disk,
-      :optimized_staging_disk_type,
       :staging_disk_type,
-      :throughput)
+      :iops,
+      :throughput,
+      :optimized_staging_disk_type)
       SENSITIVE = []
       include Aws::Structure
     end
 
+    # @!attribute [rw] replication_configuration_template_id
+    #   The Replication Configuration Template ID.
+    #   @return [String]
+    #
     # @!attribute [rw] arn
     #   The Replication Configuration Template ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] staging_area_subnet_id
+    #   The subnet to be used by the replication staging area.
     #   @return [String]
     #
     # @!attribute [rw] associate_default_security_group
@@ -2835,23 +2872,18 @@ module Aws::Drs
     #   group with the Replication Configuration Template.
     #   @return [Boolean]
     #
-    # @!attribute [rw] auto_replicate_new_disks
-    #   Whether to allow the AWS replication agent to automatically
-    #   replicate newly added disks.
-    #   @return [Boolean]
+    # @!attribute [rw] replication_servers_security_groups_i_ds
+    #   The security group IDs that will be used by the replication server.
+    #   @return [Array<String>]
     #
-    # @!attribute [rw] bandwidth_throttling
-    #   Configure bandwidth throttling for the outbound data transfer rate
-    #   of the Source Server in Mbps.
-    #   @return [Integer]
-    #
-    # @!attribute [rw] create_public_ip
-    #   Whether to create a Public IP for the Recovery Instance by default.
-    #   @return [Boolean]
-    #
-    # @!attribute [rw] data_plane_routing
-    #   The data plane routing mechanism that will be used for replication.
+    # @!attribute [rw] replication_server_instance_type
+    #   The instance type to be used for the replication server.
     #   @return [String]
+    #
+    # @!attribute [rw] use_dedicated_replication_server
+    #   Whether to use a dedicated Replication Server in the replication
+    #   staging area.
+    #   @return [Boolean]
     #
     # @!attribute [rw] default_large_staging_disk_type
     #   The Staging Disk EBS volume type to be used during replication.
@@ -2865,26 +2897,18 @@ module Aws::Drs
     #   The ARN of the EBS encryption key to be used during replication.
     #   @return [String]
     #
-    # @!attribute [rw] pit_policy
-    #   The Point in time (PIT) policy to manage snapshots taken during
-    #   replication.
-    #   @return [Array<Types::PITPolicyRule>]
+    # @!attribute [rw] bandwidth_throttling
+    #   Configure bandwidth throttling for the outbound data transfer rate
+    #   of the Source Server in Mbps.
+    #   @return [Integer]
     #
-    # @!attribute [rw] replication_configuration_template_id
-    #   The Replication Configuration Template ID.
+    # @!attribute [rw] data_plane_routing
+    #   The data plane routing mechanism that will be used for replication.
     #   @return [String]
     #
-    # @!attribute [rw] replication_server_instance_type
-    #   The instance type to be used for the replication server.
-    #   @return [String]
-    #
-    # @!attribute [rw] replication_servers_security_groups_i_ds
-    #   The security group IDs that will be used by the replication server.
-    #   @return [Array<String>]
-    #
-    # @!attribute [rw] staging_area_subnet_id
-    #   The subnet to be used by the replication staging area.
-    #   @return [String]
+    # @!attribute [rw] create_public_ip
+    #   Whether to create a Public IP for the Recovery Instance by default.
+    #   @return [Boolean]
     #
     # @!attribute [rw] staging_area_tags
     #   A set of tags to be associated with all resources created in the
@@ -2897,41 +2921,52 @@ module Aws::Drs
     #   Template resource.
     #   @return [Hash<String,String>]
     #
-    # @!attribute [rw] use_dedicated_replication_server
-    #   Whether to use a dedicated Replication Server in the replication
-    #   staging area.
+    # @!attribute [rw] pit_policy
+    #   The Point in time (PIT) policy to manage snapshots taken during
+    #   replication.
+    #   @return [Array<Types::PITPolicyRule>]
+    #
+    # @!attribute [rw] auto_replicate_new_disks
+    #   Whether to allow the AWS replication agent to automatically
+    #   replicate newly added disks.
     #   @return [Boolean]
+    #
+    # @!attribute [rw] internet_protocol
+    #   Which version of the Internet Protocol to use for replication of
+    #   data. (IPv4 or IPv6)
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/ReplicationConfigurationTemplate AWS API Documentation
     #
     class ReplicationConfigurationTemplate < Struct.new(
+      :replication_configuration_template_id,
       :arn,
+      :staging_area_subnet_id,
       :associate_default_security_group,
-      :auto_replicate_new_disks,
-      :bandwidth_throttling,
-      :create_public_ip,
-      :data_plane_routing,
+      :replication_servers_security_groups_i_ds,
+      :replication_server_instance_type,
+      :use_dedicated_replication_server,
       :default_large_staging_disk_type,
       :ebs_encryption,
       :ebs_encryption_key_arn,
-      :pit_policy,
-      :replication_configuration_template_id,
-      :replication_server_instance_type,
-      :replication_servers_security_groups_i_ds,
-      :staging_area_subnet_id,
+      :bandwidth_throttling,
+      :data_plane_routing,
+      :create_public_ip,
       :staging_area_tags,
       :tags,
-      :use_dedicated_replication_server)
+      :pit_policy,
+      :auto_replicate_new_disks,
+      :internet_protocol)
       SENSITIVE = [:staging_area_tags, :tags]
       include Aws::Structure
     end
 
     # The resource for this operation was not found.
     #
-    # @!attribute [rw] code
+    # @!attribute [rw] message
     #   @return [String]
     #
-    # @!attribute [rw] message
+    # @!attribute [rw] code
     #   @return [String]
     #
     # @!attribute [rw] resource_id
@@ -2945,8 +2980,8 @@ module Aws::Drs
     # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/ResourceNotFoundException AWS API Documentation
     #
     class ResourceNotFoundException < Struct.new(
-      :code,
       :message,
+      :code,
       :resource_id,
       :resource_type)
       SENSITIVE = []
@@ -2994,14 +3029,10 @@ module Aws::Drs
     # The request could not be completed because its exceeded the service
     # quota.
     #
-    # @!attribute [rw] code
-    #   @return [String]
-    #
     # @!attribute [rw] message
     #   @return [String]
     #
-    # @!attribute [rw] quota_code
-    #   Quota code.
+    # @!attribute [rw] code
     #   @return [String]
     #
     # @!attribute [rw] resource_id
@@ -3016,15 +3047,19 @@ module Aws::Drs
     #   Service code.
     #   @return [String]
     #
+    # @!attribute [rw] quota_code
+    #   Quota code.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/ServiceQuotaExceededException AWS API Documentation
     #
     class ServiceQuotaExceededException < Struct.new(
-      :code,
       :message,
-      :quota_code,
+      :code,
       :resource_id,
       :resource_type,
-      :service_code)
+      :service_code,
+      :quota_code)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3036,12 +3071,12 @@ module Aws::Drs
     #   AWS Account ID for an EC2-originated Source Server.
     #   @return [String]
     #
-    # @!attribute [rw] origin_availability_zone
-    #   AWS Availability Zone for an EC2-originated Source Server.
-    #   @return [String]
-    #
     # @!attribute [rw] origin_region
     #   AWS Region for an EC2-originated Source Server.
+    #   @return [String]
+    #
+    # @!attribute [rw] origin_availability_zone
+    #   AWS Availability Zone for an EC2-originated Source Server.
     #   @return [String]
     #
     # @!attribute [rw] source_outpost_arn
@@ -3052,8 +3087,8 @@ module Aws::Drs
     #
     class SourceCloudProperties < Struct.new(
       :origin_account_id,
-      :origin_availability_zone,
       :origin_region,
+      :origin_availability_zone,
       :source_outpost_arn)
       SENSITIVE = []
       include Aws::Structure
@@ -3061,23 +3096,21 @@ module Aws::Drs
 
     # The ARN of the Source Network.
     #
+    # @!attribute [rw] source_network_id
+    #   Source Network ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_vpc_id
+    #   VPC ID protected by the Source Network.
+    #   @return [String]
+    #
     # @!attribute [rw] arn
     #   The ARN of the Source Network.
     #   @return [String]
     #
-    # @!attribute [rw] cfn_stack_name
-    #   CloudFormation stack name that was deployed for recovering the
-    #   Source Network.
-    #   @return [String]
-    #
-    # @!attribute [rw] last_recovery
-    #   An object containing information regarding the last recovery of the
-    #   Source Network.
-    #   @return [Types::RecoveryLifeCycle]
-    #
-    # @!attribute [rw] launched_vpc_id
-    #   ID of the recovered VPC following Source Network recovery.
-    #   @return [String]
+    # @!attribute [rw] tags
+    #   A list of tags associated with the Source Network.
+    #   @return [Hash<String,String>]
     #
     # @!attribute [rw] replication_status
     #   Status of Source Network Replication. Possible values: (a) STOPPED -
@@ -3091,41 +3124,43 @@ module Aws::Drs
     #   Error details in case Source Network replication status is ERROR.
     #   @return [String]
     #
-    # @!attribute [rw] source_account_id
-    #   Account ID containing the VPC protected by the Source Network.
-    #   @return [String]
-    #
-    # @!attribute [rw] source_network_id
-    #   Source Network ID.
+    # @!attribute [rw] cfn_stack_name
+    #   CloudFormation stack name that was deployed for recovering the
+    #   Source Network.
     #   @return [String]
     #
     # @!attribute [rw] source_region
     #   Region containing the VPC protected by the Source Network.
     #   @return [String]
     #
-    # @!attribute [rw] source_vpc_id
-    #   VPC ID protected by the Source Network.
+    # @!attribute [rw] source_account_id
+    #   Account ID containing the VPC protected by the Source Network.
     #   @return [String]
     #
-    # @!attribute [rw] tags
-    #   A list of tags associated with the Source Network.
-    #   @return [Hash<String,String>]
+    # @!attribute [rw] last_recovery
+    #   An object containing information regarding the last recovery of the
+    #   Source Network.
+    #   @return [Types::RecoveryLifeCycle]
+    #
+    # @!attribute [rw] launched_vpc_id
+    #   ID of the recovered VPC following Source Network recovery.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/SourceNetwork AWS API Documentation
     #
     class SourceNetwork < Struct.new(
+      :source_network_id,
+      :source_vpc_id,
       :arn,
-      :cfn_stack_name,
-      :last_recovery,
-      :launched_vpc_id,
+      :tags,
       :replication_status,
       :replication_status_details,
-      :source_account_id,
-      :source_network_id,
+      :cfn_stack_name,
       :source_region,
-      :source_vpc_id,
-      :tags)
-      SENSITIVE = [:cfn_stack_name, :replication_status_details, :tags]
+      :source_account_id,
+      :last_recovery,
+      :launched_vpc_id)
+      SENSITIVE = [:tags, :replication_status_details, :cfn_stack_name]
       include Aws::Structure
     end
 
@@ -3139,13 +3174,13 @@ module Aws::Drs
     #   VPC ID protected by the Source Network.
     #   @return [String]
     #
+    # @!attribute [rw] target_vpc
+    #   ID of the recovered VPC following Source Network recovery.
+    #   @return [String]
+    #
     # @!attribute [rw] stack_name
     #   CloudFormation stack name that was deployed for recovering the
     #   Source Network.
-    #   @return [String]
-    #
-    # @!attribute [rw] target_vpc
-    #   ID of the recovered VPC following Source Network recovery.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/SourceNetworkData AWS API Documentation
@@ -3153,46 +3188,46 @@ module Aws::Drs
     class SourceNetworkData < Struct.new(
       :source_network_id,
       :source_vpc,
-      :stack_name,
-      :target_vpc)
+      :target_vpc,
+      :stack_name)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # Properties of the Source Server machine.
     #
-    # @!attribute [rw] cpus
-    #   An array of CPUs.
-    #   @return [Array<Types::CPU>]
-    #
-    # @!attribute [rw] disks
-    #   An array of disks.
-    #   @return [Array<Types::Disk>]
-    #
-    # @!attribute [rw] identification_hints
-    #   Hints used to uniquely identify a machine.
-    #   @return [Types::IdentificationHints]
-    #
     # @!attribute [rw] last_updated_date_time
     #   The date and time the Source Properties were last updated on.
     #   @return [String]
-    #
-    # @!attribute [rw] network_interfaces
-    #   An array of network interfaces.
-    #   @return [Array<Types::NetworkInterface>]
-    #
-    # @!attribute [rw] os
-    #   Operating system.
-    #   @return [Types::OS]
-    #
-    # @!attribute [rw] ram_bytes
-    #   The amount of RAM in bytes.
-    #   @return [Integer]
     #
     # @!attribute [rw] recommended_instance_type
     #   The recommended EC2 instance type that will be used when recovering
     #   the Source Server.
     #   @return [String]
+    #
+    # @!attribute [rw] identification_hints
+    #   Hints used to uniquely identify a machine.
+    #   @return [Types::IdentificationHints]
+    #
+    # @!attribute [rw] network_interfaces
+    #   An array of network interfaces.
+    #   @return [Array<Types::NetworkInterface>]
+    #
+    # @!attribute [rw] disks
+    #   An array of disks.
+    #   @return [Array<Types::Disk>]
+    #
+    # @!attribute [rw] cpus
+    #   An array of CPUs.
+    #   @return [Array<Types::CPU>]
+    #
+    # @!attribute [rw] ram_bytes
+    #   The amount of RAM in bytes.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] os
+    #   Operating system.
+    #   @return [Types::OS]
     #
     # @!attribute [rw] supports_nitro_instances
     #   Are EC2 nitro instance types supported when recovering the Source
@@ -3202,42 +3237,58 @@ module Aws::Drs
     # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/SourceProperties AWS API Documentation
     #
     class SourceProperties < Struct.new(
-      :cpus,
-      :disks,
-      :identification_hints,
       :last_updated_date_time,
-      :network_interfaces,
-      :os,
-      :ram_bytes,
       :recommended_instance_type,
+      :identification_hints,
+      :network_interfaces,
+      :disks,
+      :cpus,
+      :ram_bytes,
+      :os,
       :supports_nitro_instances)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # @!attribute [rw] agent_version
-    #   The version of the DRS agent installed on the source server
+    # @!attribute [rw] source_server_id
+    #   The ID of the Source Server.
     #   @return [String]
     #
     # @!attribute [rw] arn
     #   The ARN of the Source Server.
     #   @return [String]
     #
-    # @!attribute [rw] data_replication_info
-    #   The Data Replication Info of the Source Server.
-    #   @return [Types::DataReplicationInfo]
+    # @!attribute [rw] tags
+    #   The tags associated with the Source Server.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] recovery_instance_id
+    #   The ID of the Recovery Instance associated with this Source Server.
+    #   @return [String]
     #
     # @!attribute [rw] last_launch_result
     #   The status of the last recovery launch of this Source Server.
     #   @return [String]
     #
+    # @!attribute [rw] data_replication_info
+    #   The Data Replication Info of the Source Server.
+    #   @return [Types::DataReplicationInfo]
+    #
     # @!attribute [rw] life_cycle
     #   The lifecycle information of this Source Server.
     #   @return [Types::LifeCycle]
     #
-    # @!attribute [rw] recovery_instance_id
-    #   The ID of the Recovery Instance associated with this Source Server.
-    #   @return [String]
+    # @!attribute [rw] source_properties
+    #   The source properties of the Source Server.
+    #   @return [Types::SourceProperties]
+    #
+    # @!attribute [rw] staging_area
+    #   The staging area of the source server.
+    #   @return [Types::StagingArea]
+    #
+    # @!attribute [rw] source_cloud_properties
+    #   Source cloud properties of the Source Server.
+    #   @return [Types::SourceCloudProperties]
     #
     # @!attribute [rw] replication_direction
     #   Replication direction of the Source Server.
@@ -3249,69 +3300,37 @@ module Aws::Drs
     #   on the opposite replication direction.
     #   @return [String]
     #
-    # @!attribute [rw] source_cloud_properties
-    #   Source cloud properties of the Source Server.
-    #   @return [Types::SourceCloudProperties]
-    #
     # @!attribute [rw] source_network_id
     #   ID of the Source Network which is protecting this Source Server's
     #   network.
     #   @return [String]
     #
-    # @!attribute [rw] source_properties
-    #   The source properties of the Source Server.
-    #   @return [Types::SourceProperties]
-    #
-    # @!attribute [rw] source_server_id
-    #   The ID of the Source Server.
+    # @!attribute [rw] agent_version
+    #   The version of the DRS agent installed on the source server
     #   @return [String]
-    #
-    # @!attribute [rw] staging_area
-    #   The staging area of the source server.
-    #   @return [Types::StagingArea]
-    #
-    # @!attribute [rw] tags
-    #   The tags associated with the Source Server.
-    #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/SourceServer AWS API Documentation
     #
     class SourceServer < Struct.new(
-      :agent_version,
+      :source_server_id,
       :arn,
-      :data_replication_info,
-      :last_launch_result,
-      :life_cycle,
+      :tags,
       :recovery_instance_id,
+      :last_launch_result,
+      :data_replication_info,
+      :life_cycle,
+      :source_properties,
+      :staging_area,
+      :source_cloud_properties,
       :replication_direction,
       :reversed_direction_source_server_arn,
-      :source_cloud_properties,
       :source_network_id,
-      :source_properties,
-      :source_server_id,
-      :staging_area,
-      :tags)
+      :agent_version)
       SENSITIVE = [:tags]
       include Aws::Structure
     end
 
     # Staging information related to source server.
-    #
-    # @!attribute [rw] error_message
-    #   Shows an error message that occurred when DRS tried to access the
-    #   staging source server. In this case StagingArea$status will have
-    #   value EXTENSION\_ERROR
-    #   @return [String]
-    #
-    # @!attribute [rw] staging_account_id
-    #   Account ID of the account to which source server belongs. If this
-    #   source server is extended - shows Account ID of staging source
-    #   server.
-    #   @return [String]
-    #
-    # @!attribute [rw] staging_source_server_arn
-    #   Arn of the staging source server if this source server is extended
-    #   @return [String]
     #
     # @!attribute [rw] status
     #   Status of Source server extension. Possible values: (a)
@@ -3324,13 +3343,29 @@ module Aws::Drs
     #   field will contain an error message that explains what happened.
     #   @return [String]
     #
+    # @!attribute [rw] staging_account_id
+    #   Account ID of the account to which source server belongs. If this
+    #   source server is extended - shows Account ID of staging source
+    #   server.
+    #   @return [String]
+    #
+    # @!attribute [rw] staging_source_server_arn
+    #   Arn of the staging source server if this source server is extended
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   Shows an error message that occurred when DRS tried to access the
+    #   staging source server. In this case StagingArea$status will have
+    #   value EXTENSION\_ERROR
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/StagingArea AWS API Documentation
     #
     class StagingArea < Struct.new(
-      :error_message,
+      :status,
       :staging_account_id,
       :staging_source_server_arn,
-      :status)
+      :error_message)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3338,12 +3373,12 @@ module Aws::Drs
     # Source server in staging account that extended source server connected
     # to.
     #
-    # @!attribute [rw] arn
-    #   The ARN of the source server.
-    #   @return [String]
-    #
     # @!attribute [rw] hostname
     #   Hostname of staging source server.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The ARN of the source server.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -3353,8 +3388,8 @@ module Aws::Drs
     # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/StagingSourceServer AWS API Documentation
     #
     class StagingSourceServer < Struct.new(
-      :arn,
       :hostname,
+      :arn,
       :tags)
       SENSITIVE = [:tags]
       include Aws::Structure
@@ -3390,13 +3425,13 @@ module Aws::Drs
       include Aws::Structure
     end
 
-    # @!attribute [rw] is_drill
-    #   Whether this Source Server Recovery operation is a drill or not.
-    #   @return [Boolean]
-    #
     # @!attribute [rw] source_servers
     #   The Source Servers that we want to start a Recovery Job for.
     #   @return [Array<Types::StartRecoveryRequestSourceServer>]
+    #
+    # @!attribute [rw] is_drill
+    #   Whether this Source Server Recovery operation is a drill or not.
+    #   @return [Boolean]
     #
     # @!attribute [rw] tags
     #   The tags to be associated with the Recovery Job.
@@ -3405,8 +3440,8 @@ module Aws::Drs
     # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/StartRecoveryRequest AWS API Documentation
     #
     class StartRecoveryRequest < Struct.new(
-      :is_drill,
       :source_servers,
+      :is_drill,
       :tags)
       SENSITIVE = [:tags]
       include Aws::Structure
@@ -3414,21 +3449,21 @@ module Aws::Drs
 
     # An object representing the Source Server to recover.
     #
+    # @!attribute [rw] source_server_id
+    #   The ID of the Source Server you want to recover.
+    #   @return [String]
+    #
     # @!attribute [rw] recovery_snapshot_id
     #   The ID of a Recovery Snapshot we want to recover from. Omit this
     #   field to launch from the latest data by taking an on-demand
     #   snapshot.
     #   @return [String]
     #
-    # @!attribute [rw] source_server_id
-    #   The ID of the Source Server you want to recover.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/StartRecoveryRequestSourceServer AWS API Documentation
     #
     class StartRecoveryRequestSourceServer < Struct.new(
-      :recovery_snapshot_id,
-      :source_server_id)
+      :source_server_id,
+      :recovery_snapshot_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3469,14 +3504,14 @@ module Aws::Drs
       include Aws::Structure
     end
 
+    # @!attribute [rw] source_networks
+    #   The Source Networks that we want to start a Recovery Job for.
+    #   @return [Array<Types::StartSourceNetworkRecoveryRequestNetworkEntry>]
+    #
     # @!attribute [rw] deploy_as_new
     #   Don't update existing CloudFormation Stack, recover the network
     #   using a new stack.
     #   @return [Boolean]
-    #
-    # @!attribute [rw] source_networks
-    #   The Source Networks that we want to start a Recovery Job for.
-    #   @return [Array<Types::StartSourceNetworkRecoveryRequestNetworkEntry>]
     #
     # @!attribute [rw] tags
     #   The tags to be associated with the Source Network recovery Job.
@@ -3485,8 +3520,8 @@ module Aws::Drs
     # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/StartSourceNetworkRecoveryRequest AWS API Documentation
     #
     class StartSourceNetworkRecoveryRequest < Struct.new(
-      :deploy_as_new,
       :source_networks,
+      :deploy_as_new,
       :tags)
       SENSITIVE = [:tags]
       include Aws::Structure
@@ -3494,19 +3529,19 @@ module Aws::Drs
 
     # An object representing the Source Network to recover.
     #
-    # @!attribute [rw] cfn_stack_name
-    #   CloudFormation stack name to be used for recovering the network.
-    #   @return [String]
-    #
     # @!attribute [rw] source_network_id
     #   The ID of the Source Network you want to recover.
+    #   @return [String]
+    #
+    # @!attribute [rw] cfn_stack_name
+    #   CloudFormation stack name to be used for recovering the network.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/StartSourceNetworkRecoveryRequestNetworkEntry AWS API Documentation
     #
     class StartSourceNetworkRecoveryRequestNetworkEntry < Struct.new(
-      :cfn_stack_name,
-      :source_network_id)
+      :source_network_id,
+      :cfn_stack_name)
       SENSITIVE = [:cfn_stack_name]
       include Aws::Structure
     end
@@ -3653,6 +3688,10 @@ module Aws::Drs
     # @!attribute [rw] message
     #   @return [String]
     #
+    # @!attribute [rw] service_code
+    #   Service code.
+    #   @return [String]
+    #
     # @!attribute [rw] quota_code
     #   Quota code.
     #   @return [String]
@@ -3662,34 +3701,30 @@ module Aws::Drs
     #   retry.
     #   @return [String]
     #
-    # @!attribute [rw] service_code
-    #   Service code.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/ThrottlingException AWS API Documentation
     #
     class ThrottlingException < Struct.new(
       :message,
+      :service_code,
       :quota_code,
-      :retry_after_seconds,
-      :service_code)
+      :retry_after_seconds)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # The account performing the request has not been initialized.
     #
-    # @!attribute [rw] code
+    # @!attribute [rw] message
     #   @return [String]
     #
-    # @!attribute [rw] message
+    # @!attribute [rw] code
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/UninitializedAccountException AWS API Documentation
     #
     class UninitializedAccountException < Struct.new(
-      :code,
-      :message)
+      :message,
+      :code)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3711,35 +3746,61 @@ module Aws::Drs
       include Aws::Structure
     end
 
-    # @!attribute [rw] bandwidth_throttling
-    #   Configure bandwidth throttling for the outbound data transfer rate
-    #   of the Recovery Instance in Mbps.
-    #   @return [Integer]
+    # @!attribute [rw] recovery_instance_id
+    #   The ID of the Recovery Instance.
+    #   @return [String]
     #
     # @!attribute [rw] name
     #   The name of the Failback Replication Configuration.
     #   @return [String]
     #
-    # @!attribute [rw] recovery_instance_id
-    #   The ID of the Recovery Instance.
-    #   @return [String]
+    # @!attribute [rw] bandwidth_throttling
+    #   Configure bandwidth throttling for the outbound data transfer rate
+    #   of the Recovery Instance in Mbps.
+    #   @return [Integer]
     #
     # @!attribute [rw] use_private_ip
     #   Whether to use Private IP for the failback replication of the
     #   Recovery Instance.
     #   @return [Boolean]
     #
+    # @!attribute [rw] internet_protocol
+    #   Which version of the Internet Protocol to use for replication of
+    #   data. (IPv4 or IPv6)
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/UpdateFailbackReplicationConfigurationRequest AWS API Documentation
     #
     class UpdateFailbackReplicationConfigurationRequest < Struct.new(
-      :bandwidth_throttling,
-      :name,
       :recovery_instance_id,
-      :use_private_ip)
+      :name,
+      :bandwidth_throttling,
+      :use_private_ip,
+      :internet_protocol)
       SENSITIVE = []
       include Aws::Structure
     end
 
+    # @!attribute [rw] source_server_id
+    #   The ID of the Source Server that we want to retrieve a Launch
+    #   Configuration for.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the launch configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] launch_disposition
+    #   The state of the Recovery Instance in EC2 after the recovery
+    #   operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_instance_type_right_sizing_method
+    #   Whether Elastic Disaster Recovery should try to automatically choose
+    #   the instance type that best matches the OS, CPU, and RAM of your
+    #   Source Server.
+    #   @return [String]
+    #
     # @!attribute [rw] copy_private_ip
     #   Whether we should copy the Private IP of the Source Server to the
     #   Recovery Instance.
@@ -3750,67 +3811,35 @@ module Aws::Drs
     #   machine of the Recovery Instance.
     #   @return [Boolean]
     #
-    # @!attribute [rw] launch_disposition
-    #   The state of the Recovery Instance in EC2 after the recovery
-    #   operation.
-    #   @return [String]
-    #
-    # @!attribute [rw] launch_into_instance_properties
-    #   Launch into existing instance properties.
-    #   @return [Types::LaunchIntoInstanceProperties]
-    #
     # @!attribute [rw] licensing
     #   The licensing configuration to be used for this launch
     #   configuration.
     #   @return [Types::Licensing]
     #
-    # @!attribute [rw] name
-    #   The name of the launch configuration.
-    #   @return [String]
-    #
     # @!attribute [rw] post_launch_enabled
     #   Whether we want to enable post-launch actions for the Source Server.
     #   @return [Boolean]
     #
-    # @!attribute [rw] source_server_id
-    #   The ID of the Source Server that we want to retrieve a Launch
-    #   Configuration for.
-    #   @return [String]
-    #
-    # @!attribute [rw] target_instance_type_right_sizing_method
-    #   Whether Elastic Disaster Recovery should try to automatically choose
-    #   the instance type that best matches the OS, CPU, and RAM of your
-    #   Source Server.
-    #   @return [String]
+    # @!attribute [rw] launch_into_instance_properties
+    #   Launch into existing instance properties.
+    #   @return [Types::LaunchIntoInstanceProperties]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/UpdateLaunchConfigurationRequest AWS API Documentation
     #
     class UpdateLaunchConfigurationRequest < Struct.new(
+      :source_server_id,
+      :name,
+      :launch_disposition,
+      :target_instance_type_right_sizing_method,
       :copy_private_ip,
       :copy_tags,
-      :launch_disposition,
-      :launch_into_instance_properties,
       :licensing,
-      :name,
       :post_launch_enabled,
-      :source_server_id,
-      :target_instance_type_right_sizing_method)
+      :launch_into_instance_properties)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # @!attribute [rw] copy_private_ip
-    #   Copy private IP.
-    #   @return [Boolean]
-    #
-    # @!attribute [rw] copy_tags
-    #   Copy tags.
-    #   @return [Boolean]
-    #
-    # @!attribute [rw] export_bucket_arn
-    #   S3 bucket ARN to export Source Network templates.
-    #   @return [String]
-    #
     # @!attribute [rw] launch_configuration_template_id
     #   Launch Configuration Template ID.
     #   @return [String]
@@ -3819,36 +3848,48 @@ module Aws::Drs
     #   Launch disposition.
     #   @return [String]
     #
-    # @!attribute [rw] launch_into_source_instance
-    #   DRS will set the 'launch into instance ID' of any source server
-    #   when performing a drill, recovery or failback to the previous region
-    #   or availability zone, using the instance ID of the source instance.
+    # @!attribute [rw] target_instance_type_right_sizing_method
+    #   Target instance type right-sizing method.
+    #   @return [String]
+    #
+    # @!attribute [rw] copy_private_ip
+    #   Copy private IP.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] copy_tags
+    #   Copy tags.
     #   @return [Boolean]
     #
     # @!attribute [rw] licensing
     #   Licensing.
     #   @return [Types::Licensing]
     #
+    # @!attribute [rw] export_bucket_arn
+    #   S3 bucket ARN to export Source Network templates.
+    #   @return [String]
+    #
     # @!attribute [rw] post_launch_enabled
     #   Whether we want to activate post-launch actions.
     #   @return [Boolean]
     #
-    # @!attribute [rw] target_instance_type_right_sizing_method
-    #   Target instance type right-sizing method.
-    #   @return [String]
+    # @!attribute [rw] launch_into_source_instance
+    #   DRS will set the 'launch into instance ID' of any source server
+    #   when performing a drill, recovery or failback to the previous region
+    #   or availability zone, using the instance ID of the source instance.
+    #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/UpdateLaunchConfigurationTemplateRequest AWS API Documentation
     #
     class UpdateLaunchConfigurationTemplateRequest < Struct.new(
-      :copy_private_ip,
-      :copy_tags,
-      :export_bucket_arn,
       :launch_configuration_template_id,
       :launch_disposition,
-      :launch_into_source_instance,
+      :target_instance_type_right_sizing_method,
+      :copy_private_ip,
+      :copy_tags,
       :licensing,
+      :export_bucket_arn,
       :post_launch_enabled,
-      :target_instance_type_right_sizing_method)
+      :launch_into_source_instance)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3865,32 +3906,44 @@ module Aws::Drs
       include Aws::Structure
     end
 
+    # @!attribute [rw] source_server_id
+    #   The ID of the Source Server for this Replication Configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the Replication Configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] staging_area_subnet_id
+    #   The subnet to be used by the replication staging area.
+    #   @return [String]
+    #
     # @!attribute [rw] associate_default_security_group
     #   Whether to associate the default Elastic Disaster Recovery Security
     #   group with the Replication Configuration.
     #   @return [Boolean]
     #
-    # @!attribute [rw] auto_replicate_new_disks
-    #   Whether to allow the AWS replication agent to automatically
-    #   replicate newly added disks.
-    #   @return [Boolean]
+    # @!attribute [rw] replication_servers_security_groups_i_ds
+    #   The security group IDs that will be used by the replication server.
+    #   @return [Array<String>]
     #
-    # @!attribute [rw] bandwidth_throttling
-    #   Configure bandwidth throttling for the outbound data transfer rate
-    #   of the Source Server in Mbps.
-    #   @return [Integer]
-    #
-    # @!attribute [rw] create_public_ip
-    #   Whether to create a Public IP for the Recovery Instance by default.
-    #   @return [Boolean]
-    #
-    # @!attribute [rw] data_plane_routing
-    #   The data plane routing mechanism that will be used for replication.
+    # @!attribute [rw] replication_server_instance_type
+    #   The instance type to be used for the replication server.
     #   @return [String]
+    #
+    # @!attribute [rw] use_dedicated_replication_server
+    #   Whether to use a dedicated Replication Server in the replication
+    #   staging area.
+    #   @return [Boolean]
     #
     # @!attribute [rw] default_large_staging_disk_type
     #   The Staging Disk EBS volume type to be used during replication.
     #   @return [String]
+    #
+    # @!attribute [rw] replicated_disks
+    #   The configuration of the disks of the Source Server to be
+    #   replicated.
+    #   @return [Array<Types::ReplicationConfigurationReplicatedDisk>]
     #
     # @!attribute [rw] ebs_encryption
     #   The type of EBS encryption to be used during replication.
@@ -3900,35 +3953,18 @@ module Aws::Drs
     #   The ARN of the EBS encryption key to be used during replication.
     #   @return [String]
     #
-    # @!attribute [rw] name
-    #   The name of the Replication Configuration.
+    # @!attribute [rw] bandwidth_throttling
+    #   Configure bandwidth throttling for the outbound data transfer rate
+    #   of the Source Server in Mbps.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] data_plane_routing
+    #   The data plane routing mechanism that will be used for replication.
     #   @return [String]
     #
-    # @!attribute [rw] pit_policy
-    #   The Point in time (PIT) policy to manage snapshots taken during
-    #   replication.
-    #   @return [Array<Types::PITPolicyRule>]
-    #
-    # @!attribute [rw] replicated_disks
-    #   The configuration of the disks of the Source Server to be
-    #   replicated.
-    #   @return [Array<Types::ReplicationConfigurationReplicatedDisk>]
-    #
-    # @!attribute [rw] replication_server_instance_type
-    #   The instance type to be used for the replication server.
-    #   @return [String]
-    #
-    # @!attribute [rw] replication_servers_security_groups_i_ds
-    #   The security group IDs that will be used by the replication server.
-    #   @return [Array<String>]
-    #
-    # @!attribute [rw] source_server_id
-    #   The ID of the Source Server for this Replication Configuration.
-    #   @return [String]
-    #
-    # @!attribute [rw] staging_area_subnet_id
-    #   The subnet to be used by the replication staging area.
-    #   @return [String]
+    # @!attribute [rw] create_public_ip
+    #   Whether to create a Public IP for the Recovery Instance by default.
+    #   @return [Boolean]
     #
     # @!attribute [rw] staging_area_tags
     #   A set of tags to be associated with all resources created in the
@@ -3936,37 +3972,56 @@ module Aws::Drs
     #   snapshots, etc.
     #   @return [Hash<String,String>]
     #
-    # @!attribute [rw] use_dedicated_replication_server
-    #   Whether to use a dedicated Replication Server in the replication
-    #   staging area.
+    # @!attribute [rw] pit_policy
+    #   The Point in time (PIT) policy to manage snapshots taken during
+    #   replication.
+    #   @return [Array<Types::PITPolicyRule>]
+    #
+    # @!attribute [rw] auto_replicate_new_disks
+    #   Whether to allow the AWS replication agent to automatically
+    #   replicate newly added disks.
     #   @return [Boolean]
+    #
+    # @!attribute [rw] internet_protocol
+    #   Which version of the Internet Protocol to use for replication of
+    #   data. (IPv4 or IPv6)
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/UpdateReplicationConfigurationRequest AWS API Documentation
     #
     class UpdateReplicationConfigurationRequest < Struct.new(
+      :source_server_id,
+      :name,
+      :staging_area_subnet_id,
       :associate_default_security_group,
-      :auto_replicate_new_disks,
-      :bandwidth_throttling,
-      :create_public_ip,
-      :data_plane_routing,
+      :replication_servers_security_groups_i_ds,
+      :replication_server_instance_type,
+      :use_dedicated_replication_server,
       :default_large_staging_disk_type,
+      :replicated_disks,
       :ebs_encryption,
       :ebs_encryption_key_arn,
-      :name,
-      :pit_policy,
-      :replicated_disks,
-      :replication_server_instance_type,
-      :replication_servers_security_groups_i_ds,
-      :source_server_id,
-      :staging_area_subnet_id,
+      :bandwidth_throttling,
+      :data_plane_routing,
+      :create_public_ip,
       :staging_area_tags,
-      :use_dedicated_replication_server)
+      :pit_policy,
+      :auto_replicate_new_disks,
+      :internet_protocol)
       SENSITIVE = [:staging_area_tags]
       include Aws::Structure
     end
 
+    # @!attribute [rw] replication_configuration_template_id
+    #   The Replication Configuration Template ID.
+    #   @return [String]
+    #
     # @!attribute [rw] arn
     #   The Replication Configuration Template ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] staging_area_subnet_id
+    #   The subnet to be used by the replication staging area.
     #   @return [String]
     #
     # @!attribute [rw] associate_default_security_group
@@ -3974,23 +4029,18 @@ module Aws::Drs
     #   group with the Replication Configuration Template.
     #   @return [Boolean]
     #
-    # @!attribute [rw] auto_replicate_new_disks
-    #   Whether to allow the AWS replication agent to automatically
-    #   replicate newly added disks.
-    #   @return [Boolean]
+    # @!attribute [rw] replication_servers_security_groups_i_ds
+    #   The security group IDs that will be used by the replication server.
+    #   @return [Array<String>]
     #
-    # @!attribute [rw] bandwidth_throttling
-    #   Configure bandwidth throttling for the outbound data transfer rate
-    #   of the Source Server in Mbps.
-    #   @return [Integer]
-    #
-    # @!attribute [rw] create_public_ip
-    #   Whether to create a Public IP for the Recovery Instance by default.
-    #   @return [Boolean]
-    #
-    # @!attribute [rw] data_plane_routing
-    #   The data plane routing mechanism that will be used for replication.
+    # @!attribute [rw] replication_server_instance_type
+    #   The instance type to be used for the replication server.
     #   @return [String]
+    #
+    # @!attribute [rw] use_dedicated_replication_server
+    #   Whether to use a dedicated Replication Server in the replication
+    #   staging area.
+    #   @return [Boolean]
     #
     # @!attribute [rw] default_large_staging_disk_type
     #   The Staging Disk EBS volume type to be used during replication.
@@ -4004,26 +4054,18 @@ module Aws::Drs
     #   The ARN of the EBS encryption key to be used during replication.
     #   @return [String]
     #
-    # @!attribute [rw] pit_policy
-    #   The Point in time (PIT) policy to manage snapshots taken during
-    #   replication.
-    #   @return [Array<Types::PITPolicyRule>]
+    # @!attribute [rw] bandwidth_throttling
+    #   Configure bandwidth throttling for the outbound data transfer rate
+    #   of the Source Server in Mbps.
+    #   @return [Integer]
     #
-    # @!attribute [rw] replication_configuration_template_id
-    #   The Replication Configuration Template ID.
+    # @!attribute [rw] data_plane_routing
+    #   The data plane routing mechanism that will be used for replication.
     #   @return [String]
     #
-    # @!attribute [rw] replication_server_instance_type
-    #   The instance type to be used for the replication server.
-    #   @return [String]
-    #
-    # @!attribute [rw] replication_servers_security_groups_i_ds
-    #   The security group IDs that will be used by the replication server.
-    #   @return [Array<String>]
-    #
-    # @!attribute [rw] staging_area_subnet_id
-    #   The subnet to be used by the replication staging area.
-    #   @return [String]
+    # @!attribute [rw] create_public_ip
+    #   Whether to create a Public IP for the Recovery Instance by default.
+    #   @return [Boolean]
     #
     # @!attribute [rw] staging_area_tags
     #   A set of tags to be associated with all resources created in the
@@ -4031,30 +4073,41 @@ module Aws::Drs
     #   snapshots, etc.
     #   @return [Hash<String,String>]
     #
-    # @!attribute [rw] use_dedicated_replication_server
-    #   Whether to use a dedicated Replication Server in the replication
-    #   staging area.
+    # @!attribute [rw] pit_policy
+    #   The Point in time (PIT) policy to manage snapshots taken during
+    #   replication.
+    #   @return [Array<Types::PITPolicyRule>]
+    #
+    # @!attribute [rw] auto_replicate_new_disks
+    #   Whether to allow the AWS replication agent to automatically
+    #   replicate newly added disks.
     #   @return [Boolean]
+    #
+    # @!attribute [rw] internet_protocol
+    #   Which version of the Internet Protocol to use for replication of
+    #   data. (IPv4 or IPv6)
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/UpdateReplicationConfigurationTemplateRequest AWS API Documentation
     #
     class UpdateReplicationConfigurationTemplateRequest < Struct.new(
+      :replication_configuration_template_id,
       :arn,
+      :staging_area_subnet_id,
       :associate_default_security_group,
-      :auto_replicate_new_disks,
-      :bandwidth_throttling,
-      :create_public_ip,
-      :data_plane_routing,
+      :replication_servers_security_groups_i_ds,
+      :replication_server_instance_type,
+      :use_dedicated_replication_server,
       :default_large_staging_disk_type,
       :ebs_encryption,
       :ebs_encryption_key_arn,
-      :pit_policy,
-      :replication_configuration_template_id,
-      :replication_server_instance_type,
-      :replication_servers_security_groups_i_ds,
-      :staging_area_subnet_id,
+      :bandwidth_throttling,
+      :data_plane_routing,
+      :create_public_ip,
       :staging_area_tags,
-      :use_dedicated_replication_server)
+      :pit_policy,
+      :auto_replicate_new_disks,
+      :internet_protocol)
       SENSITIVE = [:staging_area_tags]
       include Aws::Structure
     end
@@ -4062,46 +4115,46 @@ module Aws::Drs
     # The input fails to satisfy the constraints specified by the AWS
     # service.
     #
-    # @!attribute [rw] code
+    # @!attribute [rw] message
     #   @return [String]
     #
-    # @!attribute [rw] field_list
-    #   A list of fields that failed validation.
-    #   @return [Array<Types::ValidationExceptionField>]
-    #
-    # @!attribute [rw] message
+    # @!attribute [rw] code
     #   @return [String]
     #
     # @!attribute [rw] reason
     #   Validation exception reason.
     #   @return [String]
     #
+    # @!attribute [rw] field_list
+    #   A list of fields that failed validation.
+    #   @return [Array<Types::ValidationExceptionField>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/ValidationException AWS API Documentation
     #
     class ValidationException < Struct.new(
-      :code,
-      :field_list,
       :message,
-      :reason)
+      :code,
+      :reason,
+      :field_list)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # Validate exception field.
     #
-    # @!attribute [rw] message
-    #   Validate exception field message.
-    #   @return [String]
-    #
     # @!attribute [rw] name
     #   Validate exception field name.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   Validate exception field message.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/ValidationExceptionField AWS API Documentation
     #
     class ValidationExceptionField < Struct.new(
-      :message,
-      :name)
+      :name,
+      :message)
       SENSITIVE = []
       include Aws::Structure
     end

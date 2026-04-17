@@ -77,6 +77,7 @@ module Aws::AppStream
     ComputeCapacity = Shapes::StructureShape.new(name: 'ComputeCapacity')
     ComputeCapacityStatus = Shapes::StructureShape.new(name: 'ComputeCapacityStatus')
     ConcurrentModificationException = Shapes::StructureShape.new(name: 'ConcurrentModificationException')
+    ContentRedirection = Shapes::StructureShape.new(name: 'ContentRedirection')
     CopyImageRequest = Shapes::StructureShape.new(name: 'CopyImageRequest')
     CopyImageResponse = Shapes::StructureShape.new(name: 'CopyImageResponse')
     CreateAppBlockBuilderRequest = Shapes::StructureShape.new(name: 'CreateAppBlockBuilderRequest')
@@ -199,6 +200,8 @@ module Aws::AppStream
     Domain = Shapes::StringShape.new(name: 'Domain')
     DomainJoinInfo = Shapes::StructureShape.new(name: 'DomainJoinInfo')
     DomainList = Shapes::ListShape.new(name: 'DomainList')
+    DrainSessionInstanceRequest = Shapes::StructureShape.new(name: 'DrainSessionInstanceRequest')
+    DrainSessionInstanceResult = Shapes::StructureShape.new(name: 'DrainSessionInstanceResult')
     DryRunOperationException = Shapes::StructureShape.new(name: 'DryRunOperationException')
     DynamicAppProvidersEnabled = Shapes::StringShape.new(name: 'DynamicAppProvidersEnabled')
     EmbedHostDomain = Shapes::StringShape.new(name: 'EmbedHostDomain')
@@ -255,6 +258,7 @@ module Aws::AppStream
     ImageStateChangeReasonCode = Shapes::StringShape.new(name: 'ImageStateChangeReasonCode')
     ImageType = Shapes::StringShape.new(name: 'ImageType')
     IncompatibleImageException = Shapes::StructureShape.new(name: 'IncompatibleImageException')
+    InstanceDrainStatus = Shapes::StringShape.new(name: 'InstanceDrainStatus')
     InstanceType = Shapes::StringShape.new(name: 'InstanceType')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     InvalidAccountStatusException = Shapes::StructureShape.new(name: 'InvalidAccountStatusException')
@@ -383,6 +387,9 @@ module Aws::AppStream
     UpdateStackResult = Shapes::StructureShape.new(name: 'UpdateStackResult')
     UpdateThemeForStackRequest = Shapes::StructureShape.new(name: 'UpdateThemeForStackRequest')
     UpdateThemeForStackResult = Shapes::StructureShape.new(name: 'UpdateThemeForStackResult')
+    UrlPattern = Shapes::StringShape.new(name: 'UrlPattern')
+    UrlPatternList = Shapes::ListShape.new(name: 'UrlPatternList')
+    UrlRedirectionConfig = Shapes::StructureShape.new(name: 'UrlRedirectionConfig')
     UsageReportExecutionErrorCode = Shapes::StringShape.new(name: 'UsageReportExecutionErrorCode')
     UsageReportSchedule = Shapes::StringShape.new(name: 'UsageReportSchedule')
     UsageReportSubscription = Shapes::StructureShape.new(name: 'UsageReportSubscription')
@@ -449,6 +456,7 @@ module Aws::AppStream
     AppBlockBuilder.add_member(:app_block_builder_errors, Shapes::ShapeRef.new(shape: ResourceErrors, location_name: "AppBlockBuilderErrors"))
     AppBlockBuilder.add_member(:state_change_reason, Shapes::ShapeRef.new(shape: AppBlockBuilderStateChangeReason, location_name: "StateChangeReason"))
     AppBlockBuilder.add_member(:access_endpoints, Shapes::ShapeRef.new(shape: AccessEndpointList, location_name: "AccessEndpoints"))
+    AppBlockBuilder.add_member(:disable_imdsv1, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "DisableIMDSV1"))
     AppBlockBuilder.struct_class = Types::AppBlockBuilder
 
     AppBlockBuilderAppBlockAssociation.add_member(:app_block_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "AppBlockArn"))
@@ -579,10 +587,16 @@ module Aws::AppStream
     ComputeCapacityStatus.add_member(:available_user_sessions, Shapes::ShapeRef.new(shape: Integer, location_name: "AvailableUserSessions"))
     ComputeCapacityStatus.add_member(:active_user_sessions, Shapes::ShapeRef.new(shape: Integer, location_name: "ActiveUserSessions"))
     ComputeCapacityStatus.add_member(:actual_user_sessions, Shapes::ShapeRef.new(shape: Integer, location_name: "ActualUserSessions"))
+    ComputeCapacityStatus.add_member(:draining, Shapes::ShapeRef.new(shape: Integer, location_name: "Draining"))
+    ComputeCapacityStatus.add_member(:drain_mode_active_user_sessions, Shapes::ShapeRef.new(shape: Integer, location_name: "DrainModeActiveUserSessions"))
+    ComputeCapacityStatus.add_member(:drain_mode_unused_user_sessions, Shapes::ShapeRef.new(shape: Integer, location_name: "DrainModeUnusedUserSessions"))
     ComputeCapacityStatus.struct_class = Types::ComputeCapacityStatus
 
     ConcurrentModificationException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     ConcurrentModificationException.struct_class = Types::ConcurrentModificationException
+
+    ContentRedirection.add_member(:host_to_client, Shapes::ShapeRef.new(shape: UrlRedirectionConfig, location_name: "HostToClient"))
+    ContentRedirection.struct_class = Types::ContentRedirection
 
     CopyImageRequest.add_member(:source_image_name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "SourceImageName"))
     CopyImageRequest.add_member(:destination_image_name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "DestinationImageName"))
@@ -603,6 +617,7 @@ module Aws::AppStream
     CreateAppBlockBuilderRequest.add_member(:enable_default_internet_access, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "EnableDefaultInternetAccess"))
     CreateAppBlockBuilderRequest.add_member(:iam_role_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "IamRoleArn"))
     CreateAppBlockBuilderRequest.add_member(:access_endpoints, Shapes::ShapeRef.new(shape: AccessEndpointList, location_name: "AccessEndpoints"))
+    CreateAppBlockBuilderRequest.add_member(:disable_imdsv1, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "DisableIMDSV1"))
     CreateAppBlockBuilderRequest.struct_class = Types::CreateAppBlockBuilderRequest
 
     CreateAppBlockBuilderResult.add_member(:app_block_builder, Shapes::ShapeRef.new(shape: AppBlockBuilder, location_name: "AppBlockBuilder"))
@@ -697,6 +712,7 @@ module Aws::AppStream
     CreateFleetRequest.add_member(:session_script_s3_location, Shapes::ShapeRef.new(shape: S3Location, location_name: "SessionScriptS3Location"))
     CreateFleetRequest.add_member(:max_sessions_per_instance, Shapes::ShapeRef.new(shape: Integer, location_name: "MaxSessionsPerInstance"))
     CreateFleetRequest.add_member(:root_volume_config, Shapes::ShapeRef.new(shape: VolumeConfig, location_name: "RootVolumeConfig"))
+    CreateFleetRequest.add_member(:disable_imdsv1, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "DisableIMDSV1"))
     CreateFleetRequest.struct_class = Types::CreateFleetRequest
 
     CreateFleetResult.add_member(:fleet, Shapes::ShapeRef.new(shape: Fleet, location_name: "Fleet"))
@@ -718,6 +734,7 @@ module Aws::AppStream
     CreateImageBuilderRequest.add_member(:root_volume_config, Shapes::ShapeRef.new(shape: VolumeConfig, location_name: "RootVolumeConfig"))
     CreateImageBuilderRequest.add_member(:softwares_to_install, Shapes::ShapeRef.new(shape: StringList, location_name: "SoftwaresToInstall"))
     CreateImageBuilderRequest.add_member(:softwares_to_uninstall, Shapes::ShapeRef.new(shape: StringList, location_name: "SoftwaresToUninstall"))
+    CreateImageBuilderRequest.add_member(:disable_imdsv1, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "DisableIMDSV1"))
     CreateImageBuilderRequest.struct_class = Types::CreateImageBuilderRequest
 
     CreateImageBuilderResult.add_member(:image_builder, Shapes::ShapeRef.new(shape: ImageBuilder, location_name: "ImageBuilder"))
@@ -758,6 +775,7 @@ module Aws::AppStream
     CreateStackRequest.add_member(:access_endpoints, Shapes::ShapeRef.new(shape: AccessEndpointList, location_name: "AccessEndpoints"))
     CreateStackRequest.add_member(:embed_host_domains, Shapes::ShapeRef.new(shape: EmbedHostDomains, location_name: "EmbedHostDomains"))
     CreateStackRequest.add_member(:streaming_experience_settings, Shapes::ShapeRef.new(shape: StreamingExperienceSettings, location_name: "StreamingExperienceSettings"))
+    CreateStackRequest.add_member(:content_redirection, Shapes::ShapeRef.new(shape: ContentRedirection, location_name: "ContentRedirection"))
     CreateStackRequest.struct_class = Types::CreateStackRequest
 
     CreateStackResult.add_member(:stack, Shapes::ShapeRef.new(shape: Stack, location_name: "Stack"))
@@ -1115,6 +1133,11 @@ module Aws::AppStream
 
     DomainList.member = Shapes::ShapeRef.new(shape: Domain)
 
+    DrainSessionInstanceRequest.add_member(:session_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "SessionId"))
+    DrainSessionInstanceRequest.struct_class = Types::DrainSessionInstanceRequest
+
+    DrainSessionInstanceResult.struct_class = Types::DrainSessionInstanceResult
+
     DryRunOperationException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     DryRunOperationException.struct_class = Types::DryRunOperationException
 
@@ -1212,6 +1235,7 @@ module Aws::AppStream
     Fleet.add_member(:session_script_s3_location, Shapes::ShapeRef.new(shape: S3Location, location_name: "SessionScriptS3Location"))
     Fleet.add_member(:max_sessions_per_instance, Shapes::ShapeRef.new(shape: Integer, location_name: "MaxSessionsPerInstance"))
     Fleet.add_member(:root_volume_config, Shapes::ShapeRef.new(shape: VolumeConfig, location_name: "RootVolumeConfig"))
+    Fleet.add_member(:disable_imdsv1, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "DisableIMDSV1"))
     Fleet.struct_class = Types::Fleet
 
     FleetAttributes.member = Shapes::ShapeRef.new(shape: FleetAttribute)
@@ -1275,6 +1299,7 @@ module Aws::AppStream
     ImageBuilder.add_member(:access_endpoints, Shapes::ShapeRef.new(shape: AccessEndpointList, location_name: "AccessEndpoints"))
     ImageBuilder.add_member(:root_volume_config, Shapes::ShapeRef.new(shape: VolumeConfig, location_name: "RootVolumeConfig"))
     ImageBuilder.add_member(:latest_appstream_agent_version, Shapes::ShapeRef.new(shape: LatestAppstreamAgentVersion, location_name: "LatestAppstreamAgentVersion"))
+    ImageBuilder.add_member(:disable_imdsv1, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "DisableIMDSV1"))
     ImageBuilder.struct_class = Types::ImageBuilder
 
     ImageBuilderList.member = Shapes::ShapeRef.new(shape: ImageBuilder)
@@ -1422,6 +1447,7 @@ module Aws::AppStream
     Session.add_member(:authentication_type, Shapes::ShapeRef.new(shape: AuthenticationType, location_name: "AuthenticationType"))
     Session.add_member(:network_access_configuration, Shapes::ShapeRef.new(shape: NetworkAccessConfiguration, location_name: "NetworkAccessConfiguration"))
     Session.add_member(:instance_id, Shapes::ShapeRef.new(shape: String, location_name: "InstanceId"))
+    Session.add_member(:instance_drain_status, Shapes::ShapeRef.new(shape: InstanceDrainStatus, location_name: "InstanceDrainStatus"))
     Session.struct_class = Types::Session
 
     SessionList.member = Shapes::ShapeRef.new(shape: Session)
@@ -1453,6 +1479,7 @@ module Aws::AppStream
     Stack.add_member(:access_endpoints, Shapes::ShapeRef.new(shape: AccessEndpointList, location_name: "AccessEndpoints"))
     Stack.add_member(:embed_host_domains, Shapes::ShapeRef.new(shape: EmbedHostDomains, location_name: "EmbedHostDomains"))
     Stack.add_member(:streaming_experience_settings, Shapes::ShapeRef.new(shape: StreamingExperienceSettings, location_name: "StreamingExperienceSettings"))
+    Stack.add_member(:content_redirection, Shapes::ShapeRef.new(shape: ContentRedirection, location_name: "ContentRedirection"))
     Stack.struct_class = Types::Stack
 
     StackAttributes.member = Shapes::ShapeRef.new(shape: StackAttribute)
@@ -1566,6 +1593,7 @@ module Aws::AppStream
     UpdateAppBlockBuilderRequest.add_member(:iam_role_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "IamRoleArn"))
     UpdateAppBlockBuilderRequest.add_member(:access_endpoints, Shapes::ShapeRef.new(shape: AccessEndpointList, location_name: "AccessEndpoints"))
     UpdateAppBlockBuilderRequest.add_member(:attributes_to_delete, Shapes::ShapeRef.new(shape: AppBlockBuilderAttributes, location_name: "AttributesToDelete"))
+    UpdateAppBlockBuilderRequest.add_member(:disable_imdsv1, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "DisableIMDSV1"))
     UpdateAppBlockBuilderRequest.struct_class = Types::UpdateAppBlockBuilderRequest
 
     UpdateAppBlockBuilderResult.add_member(:app_block_builder, Shapes::ShapeRef.new(shape: AppBlockBuilder, location_name: "AppBlockBuilder"))
@@ -1627,6 +1655,7 @@ module Aws::AppStream
     UpdateFleetRequest.add_member(:session_script_s3_location, Shapes::ShapeRef.new(shape: S3Location, location_name: "SessionScriptS3Location"))
     UpdateFleetRequest.add_member(:max_sessions_per_instance, Shapes::ShapeRef.new(shape: Integer, location_name: "MaxSessionsPerInstance"))
     UpdateFleetRequest.add_member(:root_volume_config, Shapes::ShapeRef.new(shape: VolumeConfig, location_name: "RootVolumeConfig"))
+    UpdateFleetRequest.add_member(:disable_imdsv1, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "DisableIMDSV1"))
     UpdateFleetRequest.struct_class = Types::UpdateFleetRequest
 
     UpdateFleetResult.add_member(:fleet, Shapes::ShapeRef.new(shape: Fleet, location_name: "Fleet"))
@@ -1652,6 +1681,7 @@ module Aws::AppStream
     UpdateStackRequest.add_member(:access_endpoints, Shapes::ShapeRef.new(shape: AccessEndpointList, location_name: "AccessEndpoints"))
     UpdateStackRequest.add_member(:embed_host_domains, Shapes::ShapeRef.new(shape: EmbedHostDomains, location_name: "EmbedHostDomains"))
     UpdateStackRequest.add_member(:streaming_experience_settings, Shapes::ShapeRef.new(shape: StreamingExperienceSettings, location_name: "StreamingExperienceSettings"))
+    UpdateStackRequest.add_member(:content_redirection, Shapes::ShapeRef.new(shape: ContentRedirection, location_name: "ContentRedirection"))
     UpdateStackRequest.struct_class = Types::UpdateStackRequest
 
     UpdateStackResult.add_member(:stack, Shapes::ShapeRef.new(shape: Stack, location_name: "Stack"))
@@ -1669,6 +1699,13 @@ module Aws::AppStream
 
     UpdateThemeForStackResult.add_member(:theme, Shapes::ShapeRef.new(shape: Theme, location_name: "Theme"))
     UpdateThemeForStackResult.struct_class = Types::UpdateThemeForStackResult
+
+    UrlPatternList.member = Shapes::ShapeRef.new(shape: UrlPattern)
+
+    UrlRedirectionConfig.add_member(:enabled, Shapes::ShapeRef.new(shape: BooleanObject, required: true, location_name: "Enabled"))
+    UrlRedirectionConfig.add_member(:allowed_urls, Shapes::ShapeRef.new(shape: UrlPatternList, location_name: "AllowedUrls"))
+    UrlRedirectionConfig.add_member(:denied_urls, Shapes::ShapeRef.new(shape: UrlPatternList, location_name: "DeniedUrls"))
+    UrlRedirectionConfig.struct_class = Types::UrlRedirectionConfig
 
     UsageReportSubscription.add_member(:s3_bucket_name, Shapes::ShapeRef.new(shape: String, location_name: "S3BucketName"))
     UsageReportSubscription.add_member(:schedule, Shapes::ShapeRef.new(shape: UsageReportSchedule, location_name: "Schedule"))
@@ -2502,6 +2539,17 @@ module Aws::AppStream
         o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+      end)
+
+      api.add_operation(:drain_session_instance, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DrainSessionInstance"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DrainSessionInstanceRequest)
+        o.output = Shapes::ShapeRef.new(shape: DrainSessionInstanceResult)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedException)
       end)
 
       api.add_operation(:enable_user, Seahorse::Model::Operation.new.tap do |o|

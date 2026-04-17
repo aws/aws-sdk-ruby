@@ -563,6 +563,18 @@ module Aws::PCS
     #           parameter_value: "String", # required
     #         },
     #       ],
+    #       slurmdbd_custom_settings: [
+    #         {
+    #           parameter_name: "String", # required
+    #           parameter_value: "String", # required
+    #         },
+    #       ],
+    #       cgroup_custom_settings: [
+    #         {
+    #           parameter_name: "String", # required
+    #           parameter_value: "String", # required
+    #         },
+    #       ],
     #       accounting: {
     #         default_purge_time_in_days: 1,
     #         mode: "STANDARD", # required, accepts STANDARD, NONE
@@ -592,6 +604,12 @@ module Aws::PCS
     #   resp.cluster.slurm_configuration.slurm_custom_settings #=> Array
     #   resp.cluster.slurm_configuration.slurm_custom_settings[0].parameter_name #=> String
     #   resp.cluster.slurm_configuration.slurm_custom_settings[0].parameter_value #=> String
+    #   resp.cluster.slurm_configuration.slurmdbd_custom_settings #=> Array
+    #   resp.cluster.slurm_configuration.slurmdbd_custom_settings[0].parameter_name #=> String
+    #   resp.cluster.slurm_configuration.slurmdbd_custom_settings[0].parameter_value #=> String
+    #   resp.cluster.slurm_configuration.cgroup_custom_settings #=> Array
+    #   resp.cluster.slurm_configuration.cgroup_custom_settings[0].parameter_name #=> String
+    #   resp.cluster.slurm_configuration.cgroup_custom_settings[0].parameter_value #=> String
     #   resp.cluster.slurm_configuration.auth_key.secret_arn #=> String
     #   resp.cluster.slurm_configuration.auth_key.secret_version #=> String
     #   resp.cluster.slurm_configuration.jwt_auth.jwt_key.secret_arn #=> String
@@ -1032,6 +1050,12 @@ module Aws::PCS
     #   resp.cluster.slurm_configuration.slurm_custom_settings #=> Array
     #   resp.cluster.slurm_configuration.slurm_custom_settings[0].parameter_name #=> String
     #   resp.cluster.slurm_configuration.slurm_custom_settings[0].parameter_value #=> String
+    #   resp.cluster.slurm_configuration.slurmdbd_custom_settings #=> Array
+    #   resp.cluster.slurm_configuration.slurmdbd_custom_settings[0].parameter_name #=> String
+    #   resp.cluster.slurm_configuration.slurmdbd_custom_settings[0].parameter_value #=> String
+    #   resp.cluster.slurm_configuration.cgroup_custom_settings #=> Array
+    #   resp.cluster.slurm_configuration.cgroup_custom_settings[0].parameter_name #=> String
+    #   resp.cluster.slurm_configuration.cgroup_custom_settings[0].parameter_value #=> String
     #   resp.cluster.slurm_configuration.auth_key.secret_arn #=> String
     #   resp.cluster.slurm_configuration.auth_key.secret_version #=> String
     #   resp.cluster.slurm_configuration.jwt_auth.jwt_key.secret_arn #=> String
@@ -1508,6 +1532,18 @@ module Aws::PCS
     #           parameter_value: "String", # required
     #         },
     #       ],
+    #       slurmdbd_custom_settings: [
+    #         {
+    #           parameter_name: "String", # required
+    #           parameter_value: "String", # required
+    #         },
+    #       ],
+    #       cgroup_custom_settings: [
+    #         {
+    #           parameter_name: "String", # required
+    #           parameter_value: "String", # required
+    #         },
+    #       ],
     #       accounting: {
     #         default_purge_time_in_days: 1,
     #         mode: "STANDARD", # accepts STANDARD, NONE
@@ -1533,6 +1569,12 @@ module Aws::PCS
     #   resp.cluster.slurm_configuration.slurm_custom_settings #=> Array
     #   resp.cluster.slurm_configuration.slurm_custom_settings[0].parameter_name #=> String
     #   resp.cluster.slurm_configuration.slurm_custom_settings[0].parameter_value #=> String
+    #   resp.cluster.slurm_configuration.slurmdbd_custom_settings #=> Array
+    #   resp.cluster.slurm_configuration.slurmdbd_custom_settings[0].parameter_name #=> String
+    #   resp.cluster.slurm_configuration.slurmdbd_custom_settings[0].parameter_value #=> String
+    #   resp.cluster.slurm_configuration.cgroup_custom_settings #=> Array
+    #   resp.cluster.slurm_configuration.cgroup_custom_settings[0].parameter_name #=> String
+    #   resp.cluster.slurm_configuration.cgroup_custom_settings[0].parameter_value #=> String
     #   resp.cluster.slurm_configuration.auth_key.secret_arn #=> String
     #   resp.cluster.slurm_configuration.auth_key.secret_version #=> String
     #   resp.cluster.slurm_configuration.jwt_auth.jwt_key.secret_arn #=> String
@@ -1806,7 +1848,7 @@ module Aws::PCS
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-pcs'
-      context[:gem_version] = '1.41.0'
+      context[:gem_version] = '1.43.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

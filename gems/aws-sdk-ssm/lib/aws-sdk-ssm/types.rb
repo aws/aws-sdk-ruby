@@ -582,6 +582,17 @@ module Aws::SSM
     #   The CloudWatch alarm that was invoked during the association.
     #   @return [Array<Types::AlarmStateInformation>]
     #
+    # @!attribute [rw] association_dispatch_assume_role
+    #   A role used by association to take actions on your behalf. State
+    #   Manager will assume this role and call required APIs when
+    #   dispatching configurations to nodes. If not specified, [
+    #   service-linked role for Systems Manager][1] will be used by default.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/using-service-linked-roles.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/AssociationDescription AWS API Documentation
     #
     class AssociationDescription < Struct.new(
@@ -613,7 +624,8 @@ module Aws::SSM
       :duration,
       :target_maps,
       :alarm_configuration,
-      :triggered_alarms)
+      :triggered_alarms,
+      :association_dispatch_assume_role)
       SENSITIVE = [:parameters]
       include Aws::Structure
     end
@@ -1033,6 +1045,17 @@ module Aws::SSM
     #   Targets and TargetMaps can't be specified together.
     #   @return [Array<Hash<String,Array<String>>>]
     #
+    # @!attribute [rw] association_dispatch_assume_role
+    #   A role used by association to take actions on your behalf. State
+    #   Manager will assume this role and call required APIs when
+    #   dispatching configurations to nodes. If not specified, [
+    #   service-linked role for Systems Manager][1] will be used by default.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/using-service-linked-roles.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/AssociationVersionInfo AWS API Documentation
     #
     class AssociationVersionInfo < Struct.new(
@@ -1055,7 +1078,8 @@ module Aws::SSM
       :target_locations,
       :schedule_offset,
       :duration,
-      :target_maps)
+      :target_maps,
+      :association_dispatch_assume_role)
       SENSITIVE = [:parameters]
       include Aws::Structure
     end
@@ -2952,10 +2976,32 @@ module Aws::SSM
     #   One or more associations.
     #   @return [Array<Types::CreateAssociationBatchRequestEntry>]
     #
+    # @!attribute [rw] association_dispatch_assume_role
+    #   A role used by association to take actions on your behalf. State
+    #   Manager will assume this role and call required APIs when
+    #   dispatching configurations to nodes. If not specified, [
+    #   service-linked role for Systems Manager][1] will be used by default.
+    #
+    #   <note markdown="1"> It is recommended that you define a custom IAM role so that you have
+    #   full control of the permissions that State Manager has when taking
+    #   actions on your behalf.
+    #
+    #    Service-linked role support in State Manager is being phased out.
+    #   Associations relying on service-linked role may require updates in
+    #   the future to continue functioning properly.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/using-service-linked-roles.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CreateAssociationBatchRequest AWS API Documentation
     #
     class CreateAssociationBatchRequest < Struct.new(
-      :entries)
+      :entries,
+      :association_dispatch_assume_role)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3446,6 +3492,27 @@ module Aws::SSM
     #   automation or command.
     #   @return [Types::AlarmConfiguration]
     #
+    # @!attribute [rw] association_dispatch_assume_role
+    #   A role used by association to take actions on your behalf. State
+    #   Manager will assume this role and call required APIs when
+    #   dispatching configurations to nodes. If not specified, [
+    #   service-linked role for Systems Manager][1] will be used by default.
+    #
+    #   <note markdown="1"> It is recommended that you define a custom IAM role so that you have
+    #   full control of the permissions that State Manager has when taking
+    #   actions on your behalf.
+    #
+    #    Service-linked role support in State Manager is being phased out.
+    #   Associations relying on service-linked role may require updates in
+    #   the future to continue functioning properly.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/using-service-linked-roles.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CreateAssociationRequest AWS API Documentation
     #
     class CreateAssociationRequest < Struct.new(
@@ -3469,7 +3536,8 @@ module Aws::SSM
       :duration,
       :target_maps,
       :tags,
-      :alarm_configuration)
+      :alarm_configuration,
+      :association_dispatch_assume_role)
       SENSITIVE = [:parameters]
       include Aws::Structure
     end
@@ -3804,12 +3872,10 @@ module Aws::SSM
     #     This type of OpsItem is used by Change Manager for reviewing and
     #     approving or rejecting change requests.
     #
-    #     Amazon Web Services Systems Manager Change Manager will no longer
-    #     be open to new customers starting November 7, 2025. If you would
-    #     like to use Change Manager, sign up prior to that date. Existing
-    #     customers can continue to use the service as normal. For more
-    #     information, see [Amazon Web Services Systems Manager Change
-    #     Manager availability change][1].
+    #     Amazon Web Services Systems Manager Change Manager is no longer
+    #     open to new customers. Existing customers can continue to use the
+    #     service as normal. For more information, see [Amazon Web Services
+    #     Systems Manager Change Manager availability change][1].
     #
     #
     #
@@ -19739,6 +19805,27 @@ module Aws::SSM
     #   automation or command.
     #   @return [Types::AlarmConfiguration]
     #
+    # @!attribute [rw] association_dispatch_assume_role
+    #   A role used by association to take actions on your behalf. State
+    #   Manager will assume this role and call required APIs when
+    #   dispatching configurations to nodes. If not specified, [
+    #   service-linked role for Systems Manager][1] will be used by default.
+    #
+    #   <note markdown="1"> It is recommended that you define a custom IAM role so that you have
+    #   full control of the permissions that State Manager has when taking
+    #   actions on your behalf.
+    #
+    #    Service-linked role support in State Manager is being phased out.
+    #   Associations relying on service-linked role may require updates in
+    #   the future to continue functioning properly.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/using-service-linked-roles.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateAssociationRequest AWS API Documentation
     #
     class UpdateAssociationRequest < Struct.new(
@@ -19762,7 +19849,8 @@ module Aws::SSM
       :schedule_offset,
       :duration,
       :target_maps,
-      :alarm_configuration)
+      :alarm_configuration,
+      :association_dispatch_assume_role)
       SENSITIVE = [:parameters]
       include Aws::Structure
     end

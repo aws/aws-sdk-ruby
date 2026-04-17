@@ -302,7 +302,7 @@ module Aws
                             },
                             ?deletion_protection: bool,
                             ?control_plane_scaling_config: {
-                              tier: ("standard" | "tier-xl" | "tier-2xl" | "tier-4xl")?
+                              tier: ("standard" | "tier-xl" | "tier-2xl" | "tier-4xl" | "tier-8xl")?
                             }
                           ) -> _CreateClusterResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateClusterResponseSuccess
@@ -406,7 +406,14 @@ module Aws
                               },
                               ?capacity_type: ("ON_DEMAND" | "SPOT" | "CAPACITY_BLOCK"),
                               ?version: ::String,
-                              ?release_version: ::String
+                              ?release_version: ::String,
+                              ?warm_pool_config: {
+                                enabled: bool?,
+                                min_size: ::Integer?,
+                                max_group_prepared_capacity: ::Integer?,
+                                pool_state: ("STOPPED" | "RUNNING" | "HIBERNATED")?,
+                                reuse_on_scale_in: bool?
+                              }
                             ) -> _CreateNodegroupResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateNodegroupResponseSuccess
 
@@ -1120,7 +1127,7 @@ module Aws
                                    },
                                    ?deletion_protection: bool,
                                    ?control_plane_scaling_config: {
-                                     tier: ("standard" | "tier-xl" | "tier-2xl" | "tier-4xl")?
+                                     tier: ("standard" | "tier-xl" | "tier-2xl" | "tier-4xl" | "tier-8xl")?
                                    }
                                  ) -> _UpdateClusterConfigResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateClusterConfigResponseSuccess
@@ -1202,6 +1209,13 @@ module Aws
                                            repair_action: ("Replace" | "Reboot" | "NoAction")?
                                          },
                                        ]?
+                                     },
+                                     ?warm_pool_config: {
+                                       enabled: bool?,
+                                       min_size: ::Integer?,
+                                       max_group_prepared_capacity: ::Integer?,
+                                       pool_state: ("STOPPED" | "RUNNING" | "HIBERNATED")?,
+                                       reuse_on_scale_in: bool?
                                      },
                                      ?client_request_token: ::String
                                    ) -> _UpdateNodegroupConfigResponseSuccess

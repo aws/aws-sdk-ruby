@@ -175,11 +175,24 @@ module Aws::SageMaker
     #   cannot exceed 50.
     #   @return [Integer]
     #
+    # @!attribute [rw] availability_zones
+    #   The availability zones in which to add nodes. Use this to target
+    #   node placement in specific availability zones within a flexible
+    #   instance group.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] instance_types
+    #   The instance types to use when adding nodes. Use this to target
+    #   specific instance types within a flexible instance group.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AddClusterNodeSpecification AWS API Documentation
     #
     class AddClusterNodeSpecification < Struct.new(
       :instance_group_name,
-      :increment_target_count_by)
+      :increment_target_count_by,
+      :availability_zones,
+      :instance_types)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3191,6 +3204,15 @@ module Aws::SageMaker
     #   instance group.
     #   @return [Integer]
     #
+    # @!attribute [rw] availability_zones
+    #   The availability zones associated with the failed node addition
+    #   request.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] instance_types
+    #   The instance types associated with the failed node addition request.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] message
     #   A descriptive message providing additional details about the error.
     #   @return [String]
@@ -3201,6 +3223,8 @@ module Aws::SageMaker
       :instance_group_name,
       :error_code,
       :failed_count,
+      :availability_zones,
+      :instance_types,
       :message)
       SENSITIVE = []
       include Aws::Structure
@@ -5519,6 +5543,19 @@ module Aws::SageMaker
     #   cluster.
     #   @return [String]
     #
+    # @!attribute [rw] instance_requirements
+    #   The instance requirements for the instance group, including the
+    #   current and desired instance types. This field is present for
+    #   flexible instance groups that support multiple instance types.
+    #   @return [Types::ClusterInstanceRequirementDetails]
+    #
+    # @!attribute [rw] instance_type_details
+    #   Details about the instance types in the instance group, including
+    #   the count and configuration of each instance type. This field is
+    #   present for flexible instance groups that support multiple instance
+    #   types.
+    #   @return [Array<Types::ClusterInstanceTypeDetail>]
+    #
     # @!attribute [rw] life_cycle_config
     #   Details of LifeCycle configuration for the instance group.
     #   @return [Types::ClusterLifeCycleConfig]
@@ -5669,6 +5706,8 @@ module Aws::SageMaker
       :min_count,
       :instance_group_name,
       :instance_type,
+      :instance_requirements,
+      :instance_type_details,
       :life_cycle_config,
       :execution_role,
       :threads_per_core,
@@ -5716,6 +5755,13 @@ module Aws::SageMaker
     # @!attribute [rw] instance_type
     #   Specifies the instance type of the instance group.
     #   @return [String]
+    #
+    # @!attribute [rw] instance_requirements
+    #   The instance requirements for the instance group, including the
+    #   instance types to use. Use this to create a flexible instance group
+    #   that supports multiple instance types. The `InstanceType` and
+    #   `InstanceRequirements` properties are mutually exclusive.
+    #   @return [Types::ClusterInstanceRequirements]
     #
     # @!attribute [rw] life_cycle_config
     #   Specifies the LifeCycle configuration for the instance group.
@@ -5858,6 +5904,7 @@ module Aws::SageMaker
       :min_instance_count,
       :instance_group_name,
       :instance_type,
+      :instance_requirements,
       :life_cycle_config,
       :execution_role,
       :threads_per_core,
@@ -5893,6 +5940,47 @@ module Aws::SageMaker
     class ClusterInstancePlacement < Struct.new(
       :availability_zone,
       :availability_zone_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The instance requirement details for a flexible instance group,
+    # including the current and desired instance types.
+    #
+    # @!attribute [rw] current_instance_types
+    #   The instance types currently in use by the instance group.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] desired_instance_types
+    #   The desired instance types for the instance group, as specified in
+    #   the most recent update request.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ClusterInstanceRequirementDetails AWS API Documentation
+    #
+    class ClusterInstanceRequirementDetails < Struct.new(
+      :current_instance_types,
+      :desired_instance_types)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The instance requirements for a flexible instance group. Use this to
+    # specify multiple instance types that the instance group can use. The
+    # order of instance types in the list determines the priority for
+    # instance provisioning.
+    #
+    # @!attribute [rw] instance_types
+    #   The list of instance types that the instance group can use. The
+    #   order of instance types determines the priority—HyperPod attempts to
+    #   provision instances using the first instance type in the list and
+    #   falls back to subsequent types if capacity is unavailable.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ClusterInstanceRequirements AWS API Documentation
+    #
+    class ClusterInstanceRequirements < Struct.new(
+      :instance_types)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5963,6 +6051,32 @@ module Aws::SageMaker
       class FsxLustreConfig < ClusterInstanceStorageConfig; end
       class FsxOpenZfsConfig < ClusterInstanceStorageConfig; end
       class Unknown < ClusterInstanceStorageConfig; end
+    end
+
+    # Details about a specific instance type within a flexible instance
+    # group, including the count and configuration.
+    #
+    # @!attribute [rw] instance_type
+    #   The instance type.
+    #   @return [String]
+    #
+    # @!attribute [rw] current_count
+    #   The number of instances of this type currently running in the
+    #   instance group.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] threads_per_core
+    #   The number of threads per CPU core for this instance type.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ClusterInstanceTypeDetail AWS API Documentation
+    #
+    class ClusterInstanceTypeDetail < Struct.new(
+      :instance_type,
+      :current_count,
+      :threads_per_core)
+      SENSITIVE = []
+      include Aws::Structure
     end
 
     # Kubernetes configuration that specifies labels and taints to be
@@ -10700,6 +10814,18 @@ module Aws::SageMaker
     #   tracking server.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] s3_bucket_owner_account_id
+    #   Expected Amazon Web Services account ID that owns the Amazon S3
+    #   bucket for artifact storage. Defaults to caller's account ID if not
+    #   provided.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_bucket_owner_verification
+    #   Enable Amazon S3 Ownership checks when interacting with Amazon S3
+    #   buckets from a SageMaker Managed MLflow Tracking Server. Defaults to
+    #   `True` if not provided.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateMlflowTrackingServerRequest AWS API Documentation
     #
     class CreateMlflowTrackingServerRequest < Struct.new(
@@ -10710,7 +10836,9 @@ module Aws::SageMaker
       :role_arn,
       :automatic_model_registration,
       :weekly_maintenance_window_start,
-      :tags)
+      :tags,
+      :s3_bucket_owner_account_id,
+      :s3_bucket_owner_verification)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -19343,6 +19471,16 @@ module Aws::SageMaker
     #   resource.
     #   @return [Types::UserContext]
     #
+    # @!attribute [rw] s3_bucket_owner_account_id
+    #   Expected Amazon Web Services account ID that owns the Amazon S3
+    #   bucket for artifact storage.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_bucket_owner_verification
+    #   Whether Amazon S3 Bucket Ownership checks are enabled whenever the
+    #   tracking server interacts with Amazon Amazon S3.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeMlflowTrackingServerResponse AWS API Documentation
     #
     class DescribeMlflowTrackingServerResponse < Struct.new(
@@ -19361,7 +19499,9 @@ module Aws::SageMaker
       :creation_time,
       :created_by,
       :last_modified_time,
-      :last_modified_by)
+      :last_modified_by,
+      :s3_bucket_owner_account_id,
+      :s3_bucket_owner_verification)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -21932,6 +22072,46 @@ module Aws::SageMaker
       :mlflow_details,
       :progress_info,
       :output_model_package_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] training_plan_arn
+    #   The Amazon Resource Name (ARN); of the training plan to retrieve
+    #   extension history for.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   A token to continue pagination if more results are available.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of extensions to return in the response.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeTrainingPlanExtensionHistoryRequest AWS API Documentation
+    #
+    class DescribeTrainingPlanExtensionHistoryRequest < Struct.new(
+      :training_plan_arn,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] training_plan_extensions
+    #   A list of extensions for the specified training plan.
+    #   @return [Array<Types::TrainingPlanExtension>]
+    #
+    # @!attribute [rw] next_token
+    #   A token to continue pagination if more results are available.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeTrainingPlanExtensionHistoryResponse AWS API Documentation
+    #
+    class DescribeTrainingPlanExtensionHistoryResponse < Struct.new(
+      :training_plan_extensions,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -24737,6 +24917,33 @@ module Aws::SageMaker
     #
     class ExplainerConfig < Struct.new(
       :clarify_explainer_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] training_plan_extension_offering_id
+    #   The unique identifier of the extension offering to purchase. You can
+    #   retrieve this ID from the `TrainingPlanExtensionOfferings` in the
+    #   response of the `SearchTrainingPlanOfferings` API.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ExtendTrainingPlanRequest AWS API Documentation
+    #
+    class ExtendTrainingPlanRequest < Struct.new(
+      :training_plan_extension_offering_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] training_plan_extensions
+    #   The list of extensions for the training plan, including the newly
+    #   created extension.
+    #   @return [Array<Types::TrainingPlanExtension>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ExtendTrainingPlanResponse AWS API Documentation
+    #
+    class ExtendTrainingPlanResponse < Struct.new(
+      :training_plan_extensions)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -28706,6 +28913,40 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # Configuration for balancing inference component copies across
+    # Availability Zones.
+    #
+    # @!attribute [rw] enforcement_mode
+    #   Determines how strictly the Availability Zone balance constraint is
+    #   enforced.
+    #
+    #   PERMISSIVE
+    #
+    #   : The endpoint attempts to balance copies across Availability Zones
+    #     but proceeds with scheduling even if balance can't be achieved
+    #     due to available capacity or instance distribution across
+    #     Availability Zones.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_imbalance
+    #   The maximum allowed difference in the number of inference component
+    #   copies between any two Availability Zones. This parameter applies
+    #   only when the endpoint has instances across two or more Availability
+    #   Zones. A copy placement is allowed if it reduces imbalance or the
+    #   resulting imbalance is within this value.
+    #
+    #   Default value: `0`.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/InferenceComponentAvailabilityZoneBalance AWS API Documentation
+    #
+    class InferenceComponentAvailabilityZoneBalance < Struct.new(
+      :enforcement_mode,
+      :max_imbalance)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Specifies the type and size of the endpoint capacity to activate for a
     # rolling deployment or a rollback strategy. You can specify your
     # batches as either of the following:
@@ -29003,6 +29244,40 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # The scheduling configuration that determines how inference component
+    # copies are placed across available instances when copies are added or
+    # removed.
+    #
+    # @!attribute [rw] placement_strategy
+    #   The strategy for placing inference component copies across available
+    #   instances. If you also set `AvailabilityZoneBalance`, this strategy
+    #   applies to placement within each Availability Zone.
+    #
+    #   SPREAD
+    #
+    #   : Distributes copies evenly across available instances for better
+    #     resilience.
+    #
+    #   BINPACK
+    #
+    #   : Packs copies onto fewer instances to optimize resource
+    #     utilization.
+    #   @return [String]
+    #
+    # @!attribute [rw] availability_zone_balance
+    #   Configuration for balancing inference component copies across
+    #   Availability Zones.
+    #   @return [Types::InferenceComponentAvailabilityZoneBalance]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/InferenceComponentSchedulingConfig AWS API Documentation
+    #
+    class InferenceComponentSchedulingConfig < Struct.new(
+      :placement_strategy,
+      :availability_zone_balance)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Details about the resources to deploy with this inference component,
     # including the model, container, and compute resources.
     #
@@ -29056,6 +29331,12 @@ module Aws::SageMaker
     #   Settings that affect how the inference component caches data.
     #   @return [Types::InferenceComponentDataCacheConfig]
     #
+    # @!attribute [rw] scheduling_config
+    #   The scheduling configuration that determines how inference component
+    #   copies are placed across available instances when copies are added
+    #   or removed.
+    #   @return [Types::InferenceComponentSchedulingConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/InferenceComponentSpecification AWS API Documentation
     #
     class InferenceComponentSpecification < Struct.new(
@@ -29064,7 +29345,8 @@ module Aws::SageMaker
       :startup_parameters,
       :compute_resource_requirements,
       :base_inference_component_name,
-      :data_cache_config)
+      :data_cache_config,
+      :scheduling_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -29100,6 +29382,12 @@ module Aws::SageMaker
     #   Settings that affect how the inference component caches data.
     #   @return [Types::InferenceComponentDataCacheConfigSummary]
     #
+    # @!attribute [rw] scheduling_config
+    #   The scheduling configuration that determines how inference component
+    #   copies are placed across available instances when copies are added
+    #   or removed.
+    #   @return [Types::InferenceComponentSchedulingConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/InferenceComponentSpecificationSummary AWS API Documentation
     #
     class InferenceComponentSpecificationSummary < Struct.new(
@@ -29108,7 +29396,8 @@ module Aws::SageMaker
       :startup_parameters,
       :compute_resource_requirements,
       :base_inference_component_name,
-      :data_cache_config)
+      :data_cache_config,
+      :scheduling_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -29823,6 +30112,41 @@ module Aws::SageMaker
       :instance_type,
       :instance_count,
       :instance_group_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration of deep health checks for an instance group.
+    #
+    # <note markdown="1"> Overlapping deep health check configurations will be merged into a
+    # single operation.
+    #
+    #  </note>
+    #
+    # @!attribute [rw] instance_group_name
+    #   The name of the instance group.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_ids
+    #   A list of Amazon Elastic Compute Cloud (EC2) instance IDs on which
+    #   to perform deep health checks.
+    #
+    #   <note markdown="1"> Leave this field blank to perform deep health checks on the entire
+    #   instance group.
+    #
+    #    </note>
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] deep_health_checks
+    #   A list of deep health checks to be performed.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/InstanceGroupHealthCheckConfiguration AWS API Documentation
+    #
+    class InstanceGroupHealthCheckConfiguration < Struct.new(
+      :instance_group_name,
+      :instance_ids,
+      :deep_health_checks)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -40612,12 +40936,22 @@ module Aws::SageMaker
     #   `DeepHealthCheckInProgress`, and `NotFound`.
     #   @return [String]
     #
+    # @!attribute [rw] availability_zones
+    #   The availability zones associated with the successfully added node.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] instance_types
+    #   The instance types associated with the successfully added node.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/NodeAdditionResult AWS API Documentation
     #
     class NodeAdditionResult < Struct.new(
       :node_logical_id,
       :instance_group_name,
-      :status)
+      :status,
+      :availability_zones,
+      :instance_types)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -43579,6 +43913,15 @@ module Aws::SageMaker
     #
     #     * NVIDIA Container Toolkit with disabled CUDA-compat mounting
     #
+    #   al2023-ami-sagemaker-inference-gpu-4-1
+    #   : * Accelerator: GPU
+    #
+    #     * NVIDIA driver version: 580
+    #
+    #     * CUDA version: 13.0
+    #
+    #     * NVIDIA Container Toolkit with disabled CUDA-compat mounting
+    #
     #   al2-ami-sagemaker-inference-neuron-2
     #   : * Accelerator: Inferentia2 and Trainium
     #
@@ -43772,12 +44115,60 @@ module Aws::SageMaker
     #   it scales up to accommodate an increase in traffic.
     #   @return [Integer]
     #
+    # @!attribute [rw] scale_in_policy
+    #   Configures the scale-in behavior for managed instance scaling.
+    #   @return [Types::ProductionVariantManagedInstanceScalingScaleInPolicy]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ProductionVariantManagedInstanceScaling AWS API Documentation
     #
     class ProductionVariantManagedInstanceScaling < Struct.new(
       :status,
       :min_instance_count,
-      :max_instance_count)
+      :max_instance_count,
+      :scale_in_policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configures the scale-in behavior for managed instance scaling.
+    #
+    # @!attribute [rw] strategy
+    #   The strategy for scaling in instances.
+    #
+    #   IDLE\_RELEASE
+    #
+    #   : Releases instances that have no hosted inference component copies.
+    #
+    #   CONSOLIDATION
+    #
+    #   : Consolidates inference component copies onto fewer instances to
+    #     release more instances. Consolidation honors the scheduling
+    #     configuration of each inference component. For example, if an
+    #     inference component specifies Availability Zone balance,
+    #     consolidation only proceeds when the resulting distribution does
+    #     not increase the imbalance.
+    #   @return [String]
+    #
+    # @!attribute [rw] maximum_step_size
+    #   The maximum number of instances that the endpoint can terminate at a
+    #   time during a consolidation scale-in operation.
+    #
+    #   Default value: `1`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] cooldown_in_minutes
+    #   The cooldown period, in minutes, after the last endpoint operation
+    #   before the endpoint evaluates consolidation scale-in opportunities.
+    #
+    #   Default value: `20`.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ProductionVariantManagedInstanceScalingScaleInPolicy AWS API Documentation
+    #
+    class ProductionVariantManagedInstanceScalingScaleInPolicy < Struct.new(
+      :strategy,
+      :maximum_step_size,
+      :cooldown_in_minutes)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -45777,6 +46168,14 @@ module Aws::SageMaker
     #   The end time of the reserved capacity offering.
     #   @return [Time]
     #
+    # @!attribute [rw] extension_start_time
+    #   The start time of the extension for the reserved capacity offering.
+    #   @return [Time]
+    #
+    # @!attribute [rw] extension_end_time
+    #   The end time of the extension for the reserved capacity offering.
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ReservedCapacityOffering AWS API Documentation
     #
     class ReservedCapacityOffering < Struct.new(
@@ -45789,7 +46188,9 @@ module Aws::SageMaker
       :duration_hours,
       :duration_minutes,
       :start_time,
-      :end_time)
+      :end_time,
+      :extension_start_time,
+      :extension_end_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -47304,6 +47705,13 @@ module Aws::SageMaker
     #     deployment.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] training_plan_arn
+    #   The Amazon Resource Name (ARN); of an existing training plan to
+    #   search for extension offerings. When specified, the API returns
+    #   extension offerings that can be used to extend the specified
+    #   training plan.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/SearchTrainingPlanOfferingsRequest AWS API Documentation
     #
     class SearchTrainingPlanOfferingsRequest < Struct.new(
@@ -47314,7 +47722,8 @@ module Aws::SageMaker
       :start_time_after,
       :end_time_before,
       :duration_hours,
-      :target_resources)
+      :target_resources,
+      :training_plan_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -47323,10 +47732,17 @@ module Aws::SageMaker
     #   A list of training plan offerings that match the search criteria.
     #   @return [Array<Types::TrainingPlanOffering>]
     #
+    # @!attribute [rw] training_plan_extension_offerings
+    #   A list of extension offerings available for the specified training
+    #   plan. These offerings can be used with the ` ExtendTrainingPlan `
+    #   API to extend an existing training plan.
+    #   @return [Array<Types::TrainingPlanExtensionOffering>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/SearchTrainingPlanOfferingsResponse AWS API Documentation
     #
     class SearchTrainingPlanOfferingsResponse < Struct.new(
-      :training_plan_offerings)
+      :training_plan_offerings,
+      :training_plan_extension_offerings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -48306,6 +48722,38 @@ module Aws::SageMaker
       :duration_in_seconds,
       :number_of_steps,
       :users_per_step)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] cluster_name
+    #   The string name or the Amazon Resource Name (ARN) of the SageMaker
+    #   HyperPod cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] deep_health_check_configurations
+    #   A list of configurations containing instance group names, EC2
+    #   instance IDs, and deep health checks to perform.
+    #   @return [Array<Types::InstanceGroupHealthCheckConfiguration>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/StartClusterHealthCheckRequest AWS API Documentation
+    #
+    class StartClusterHealthCheckRequest < Struct.new(
+      :cluster_name,
+      :deep_health_check_configurations)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] cluster_arn
+    #   The Amazon Resource Name (ARN) of the SageMaker HyperPod cluster on
+    #   which the deep health checks were initiated.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/StartClusterHealthCheckResponse AWS API Documentation
+    #
+    class StartClusterHealthCheckResponse < Struct.new(
+      :cluster_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -50576,6 +51024,119 @@ module Aws::SageMaker
       :secondary_status,
       :warm_pool_status,
       :training_plan_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details about an extension to a training plan, including the offering
+    # ID, dates, status, and cost information.
+    #
+    # @!attribute [rw] training_plan_extension_offering_id
+    #   The unique identifier of the extension offering that was used to
+    #   create this extension.
+    #   @return [String]
+    #
+    # @!attribute [rw] extended_at
+    #   The timestamp when the extension was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] start_date
+    #   The start date of the extension period.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_date
+    #   The end date of the extension period.
+    #   @return [Time]
+    #
+    # @!attribute [rw] status
+    #   The current status of the extension (e.g., Pending, Active,
+    #   Scheduled, Failed, Expired).
+    #   @return [String]
+    #
+    # @!attribute [rw] payment_status
+    #   The payment processing status of the extension.
+    #   @return [String]
+    #
+    # @!attribute [rw] availability_zone
+    #   The Availability Zone of the extension.
+    #   @return [String]
+    #
+    # @!attribute [rw] availability_zone_id
+    #   The Availability Zone ID of the extension.
+    #   @return [String]
+    #
+    # @!attribute [rw] duration_hours
+    #   The duration of the extension in hours.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] upfront_fee
+    #   The upfront fee for the extension.
+    #   @return [String]
+    #
+    # @!attribute [rw] currency_code
+    #   The currency code for the upfront fee (e.g., USD).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/TrainingPlanExtension AWS API Documentation
+    #
+    class TrainingPlanExtension < Struct.new(
+      :training_plan_extension_offering_id,
+      :extended_at,
+      :start_date,
+      :end_date,
+      :status,
+      :payment_status,
+      :availability_zone,
+      :availability_zone_id,
+      :duration_hours,
+      :upfront_fee,
+      :currency_code)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details about an available extension offering for a training plan. Use
+    # the offering ID with the ` ExtendTrainingPlan ` API to extend a
+    # training plan.
+    #
+    # @!attribute [rw] training_plan_extension_offering_id
+    #   The unique identifier for this extension offering.
+    #   @return [String]
+    #
+    # @!attribute [rw] availability_zone
+    #   The Availability Zone for this extension offering.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_date
+    #   The start date of this extension offering.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_date
+    #   The end date of this extension offering.
+    #   @return [Time]
+    #
+    # @!attribute [rw] duration_hours
+    #   The duration of this extension offering in hours.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] upfront_fee
+    #   The upfront fee for this extension offering.
+    #   @return [String]
+    #
+    # @!attribute [rw] currency_code
+    #   The currency code for the upfront fee (e.g., USD).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/TrainingPlanExtensionOffering AWS API Documentation
+    #
+    class TrainingPlanExtensionOffering < Struct.new(
+      :training_plan_extension_offering_id,
+      :availability_zone,
+      :start_date,
+      :end_date,
+      :duration_hours,
+      :upfront_fee,
+      :currency_code)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -53933,6 +54494,16 @@ module Aws::SageMaker
     #   Time (UTC) 24-hour standard time. For example: TUE:03:30.
     #   @return [String]
     #
+    # @!attribute [rw] s3_bucket_owner_account_id
+    #   The new expected Amazon Web Services account ID that owns the Amazon
+    #   S3 bucket for artifact storage.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_bucket_owner_verification
+    #   Whether to enable or disable Amazon S3 Bucket Owenrship Verifaction
+    #   whenever the MLflow Tracking Server interacts with Amazon Amazon S3.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateMlflowTrackingServerRequest AWS API Documentation
     #
     class UpdateMlflowTrackingServerRequest < Struct.new(
@@ -53940,7 +54511,9 @@ module Aws::SageMaker
       :artifact_store_uri,
       :tracking_server_size,
       :automatic_model_registration,
-      :weekly_maintenance_window_start)
+      :weekly_maintenance_window_start,
+      :s3_bucket_owner_account_id,
+      :s3_bucket_owner_verification)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -1091,6 +1091,8 @@ module Aws::DatabaseMigrationService
     #         database_name: "String",
     #         ssl_mode: "none", # accepts none, require, verify-ca, verify-full
     #         certificate_arn: "String",
+    #         encryption_algorithm: 1,
+    #         security_mechanism: 1,
     #         s3_path: "String",
     #         s3_access_role_arn: "String",
     #       },
@@ -1190,6 +1192,8 @@ module Aws::DatabaseMigrationService
     #   resp.data_provider.settings.ibm_db_2_luw_settings.database_name #=> String
     #   resp.data_provider.settings.ibm_db_2_luw_settings.ssl_mode #=> String, one of "none", "require", "verify-ca", "verify-full"
     #   resp.data_provider.settings.ibm_db_2_luw_settings.certificate_arn #=> String
+    #   resp.data_provider.settings.ibm_db_2_luw_settings.encryption_algorithm #=> Integer
+    #   resp.data_provider.settings.ibm_db_2_luw_settings.security_mechanism #=> Integer
     #   resp.data_provider.settings.ibm_db_2_luw_settings.s3_path #=> String
     #   resp.data_provider.settings.ibm_db_2_luw_settings.s3_access_role_arn #=> String
     #   resp.data_provider.settings.ibm_db_2z_os_settings.server_name #=> String
@@ -3807,6 +3811,8 @@ module Aws::DatabaseMigrationService
     #   resp.data_provider.settings.ibm_db_2_luw_settings.database_name #=> String
     #   resp.data_provider.settings.ibm_db_2_luw_settings.ssl_mode #=> String, one of "none", "require", "verify-ca", "verify-full"
     #   resp.data_provider.settings.ibm_db_2_luw_settings.certificate_arn #=> String
+    #   resp.data_provider.settings.ibm_db_2_luw_settings.encryption_algorithm #=> Integer
+    #   resp.data_provider.settings.ibm_db_2_luw_settings.security_mechanism #=> Integer
     #   resp.data_provider.settings.ibm_db_2_luw_settings.s3_path #=> String
     #   resp.data_provider.settings.ibm_db_2_luw_settings.s3_access_role_arn #=> String
     #   resp.data_provider.settings.ibm_db_2z_os_settings.server_name #=> String
@@ -5493,6 +5499,8 @@ module Aws::DatabaseMigrationService
     #   resp.data_providers[0].settings.ibm_db_2_luw_settings.database_name #=> String
     #   resp.data_providers[0].settings.ibm_db_2_luw_settings.ssl_mode #=> String, one of "none", "require", "verify-ca", "verify-full"
     #   resp.data_providers[0].settings.ibm_db_2_luw_settings.certificate_arn #=> String
+    #   resp.data_providers[0].settings.ibm_db_2_luw_settings.encryption_algorithm #=> Integer
+    #   resp.data_providers[0].settings.ibm_db_2_luw_settings.security_mechanism #=> Integer
     #   resp.data_providers[0].settings.ibm_db_2_luw_settings.s3_path #=> String
     #   resp.data_providers[0].settings.ibm_db_2_luw_settings.s3_access_role_arn #=> String
     #   resp.data_providers[0].settings.ibm_db_2z_os_settings.server_name #=> String
@@ -9849,6 +9857,8 @@ module Aws::DatabaseMigrationService
     #         database_name: "String",
     #         ssl_mode: "none", # accepts none, require, verify-ca, verify-full
     #         certificate_arn: "String",
+    #         encryption_algorithm: 1,
+    #         security_mechanism: 1,
     #         s3_path: "String",
     #         s3_access_role_arn: "String",
     #       },
@@ -9941,6 +9951,8 @@ module Aws::DatabaseMigrationService
     #   resp.data_provider.settings.ibm_db_2_luw_settings.database_name #=> String
     #   resp.data_provider.settings.ibm_db_2_luw_settings.ssl_mode #=> String, one of "none", "require", "verify-ca", "verify-full"
     #   resp.data_provider.settings.ibm_db_2_luw_settings.certificate_arn #=> String
+    #   resp.data_provider.settings.ibm_db_2_luw_settings.encryption_algorithm #=> Integer
+    #   resp.data_provider.settings.ibm_db_2_luw_settings.security_mechanism #=> Integer
     #   resp.data_provider.settings.ibm_db_2_luw_settings.s3_path #=> String
     #   resp.data_provider.settings.ibm_db_2_luw_settings.s3_access_role_arn #=> String
     #   resp.data_provider.settings.ibm_db_2z_os_settings.server_name #=> String
@@ -13674,7 +13686,7 @@ module Aws::DatabaseMigrationService
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-databasemigrationservice'
-      context[:gem_version] = '1.139.0'
+      context[:gem_version] = '1.142.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

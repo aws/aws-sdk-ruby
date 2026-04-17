@@ -97,6 +97,7 @@ module Aws::TrustedAdvisor
     RecommendationUpdateReason = Shapes::StringShape.new(name: 'RecommendationUpdateReason')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     ResourceStatus = Shapes::StringShape.new(name: 'ResourceStatus')
+    StatusReason = Shapes::StringShape.new(name: 'StatusReason')
     String = Shapes::StringShape.new(name: 'String')
     StringMap = Shapes::MapShape.new(name: 'StringMap')
     SyntheticTimestamp_date_time = Shapes::TimestampShape.new(name: 'SyntheticTimestamp_date_time', timestampFormat: "iso8601")
@@ -115,12 +116,12 @@ module Aws::TrustedAdvisor
 
     AccountRecommendationLifecycleSummary.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "accountId"))
     AccountRecommendationLifecycleSummary.add_member(:account_recommendation_arn, Shapes::ShapeRef.new(shape: AccountRecommendationArn, location_name: "accountRecommendationArn"))
-    AccountRecommendationLifecycleSummary.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "lastUpdatedAt"))
     AccountRecommendationLifecycleSummary.add_member(:lifecycle_stage, Shapes::ShapeRef.new(shape: RecommendationLifecycleStage, location_name: "lifecycleStage"))
-    AccountRecommendationLifecycleSummary.add_member(:update_reason, Shapes::ShapeRef.new(shape: RecommendationUpdateReason, location_name: "updateReason"))
-    AccountRecommendationLifecycleSummary.add_member(:update_reason_code, Shapes::ShapeRef.new(shape: UpdateRecommendationLifecycleStageReasonCode, location_name: "updateReasonCode"))
     AccountRecommendationLifecycleSummary.add_member(:updated_on_behalf_of, Shapes::ShapeRef.new(shape: String, location_name: "updatedOnBehalfOf"))
     AccountRecommendationLifecycleSummary.add_member(:updated_on_behalf_of_job_title, Shapes::ShapeRef.new(shape: String, location_name: "updatedOnBehalfOfJobTitle"))
+    AccountRecommendationLifecycleSummary.add_member(:update_reason, Shapes::ShapeRef.new(shape: RecommendationUpdateReason, location_name: "updateReason"))
+    AccountRecommendationLifecycleSummary.add_member(:update_reason_code, Shapes::ShapeRef.new(shape: UpdateRecommendationLifecycleStageReasonCode, location_name: "updateReasonCode"))
+    AccountRecommendationLifecycleSummary.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "lastUpdatedAt"))
     AccountRecommendationLifecycleSummary.struct_class = Types::AccountRecommendationLifecycleSummary
 
     AccountRecommendationLifecycleSummaryList.member = Shapes::ShapeRef.new(shape: AccountRecommendationLifecycleSummary)
@@ -131,14 +132,14 @@ module Aws::TrustedAdvisor
     BatchUpdateRecommendationResourceExclusionResponse.add_member(:batch_update_recommendation_resource_exclusion_errors, Shapes::ShapeRef.new(shape: UpdateRecommendationResourceExclusionErrorList, required: true, location_name: "batchUpdateRecommendationResourceExclusionErrors"))
     BatchUpdateRecommendationResourceExclusionResponse.struct_class = Types::BatchUpdateRecommendationResourceExclusionResponse
 
-    CheckSummary.add_member(:arn, Shapes::ShapeRef.new(shape: CheckArn, required: true, location_name: "arn"))
-    CheckSummary.add_member(:aws_services, Shapes::ShapeRef.new(shape: RecommendationAwsServiceList, required: true, location_name: "awsServices"))
-    CheckSummary.add_member(:description, Shapes::ShapeRef.new(shape: String, required: true, location_name: "description"))
     CheckSummary.add_member(:id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "id"))
-    CheckSummary.add_member(:metadata, Shapes::ShapeRef.new(shape: StringMap, required: true, location_name: "metadata"))
+    CheckSummary.add_member(:arn, Shapes::ShapeRef.new(shape: CheckArn, required: true, location_name: "arn"))
     CheckSummary.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "name"))
+    CheckSummary.add_member(:description, Shapes::ShapeRef.new(shape: String, required: true, location_name: "description"))
     CheckSummary.add_member(:pillars, Shapes::ShapeRef.new(shape: RecommendationPillarList, required: true, location_name: "pillars"))
+    CheckSummary.add_member(:aws_services, Shapes::ShapeRef.new(shape: RecommendationAwsServiceList, required: true, location_name: "awsServices"))
     CheckSummary.add_member(:source, Shapes::ShapeRef.new(shape: RecommendationSource, required: true, location_name: "source"))
+    CheckSummary.add_member(:metadata, Shapes::ShapeRef.new(shape: StringMap, required: true, location_name: "metadata"))
     CheckSummary.struct_class = Types::CheckSummary
 
     CheckSummaryList.member = Shapes::ShapeRef.new(shape: CheckSummary)
@@ -153,6 +154,7 @@ module Aws::TrustedAdvisor
     GetOrganizationRecommendationResponse.struct_class = Types::GetOrganizationRecommendationResponse
 
     GetRecommendationRequest.add_member(:recommendation_identifier, Shapes::ShapeRef.new(shape: AccountRecommendationIdentifier, required: true, location: "uri", location_name: "recommendationIdentifier"))
+    GetRecommendationRequest.add_member(:language, Shapes::ShapeRef.new(shape: RecommendationLanguage, location: "querystring", location_name: "language"))
     GetRecommendationRequest.struct_class = Types::GetRecommendationRequest
 
     GetRecommendationResponse.add_member(:recommendation, Shapes::ShapeRef.new(shape: Recommendation, location_name: "recommendation"))
@@ -161,161 +163,164 @@ module Aws::TrustedAdvisor
     InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     InternalServerException.struct_class = Types::InternalServerException
 
-    ListChecksRequest.add_member(:aws_service, Shapes::ShapeRef.new(shape: RecommendationAwsService, location: "querystring", location_name: "awsService"))
-    ListChecksRequest.add_member(:language, Shapes::ShapeRef.new(shape: RecommendationLanguage, location: "querystring", location_name: "language"))
-    ListChecksRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListChecksRequestMaxResultsInteger, location: "querystring", location_name: "maxResults"))
     ListChecksRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: ListChecksRequestNextTokenString, location: "querystring", location_name: "nextToken"))
+    ListChecksRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListChecksRequestMaxResultsInteger, location: "querystring", location_name: "maxResults"))
     ListChecksRequest.add_member(:pillar, Shapes::ShapeRef.new(shape: RecommendationPillar, location: "querystring", location_name: "pillar"))
+    ListChecksRequest.add_member(:aws_service, Shapes::ShapeRef.new(shape: RecommendationAwsService, location: "querystring", location_name: "awsService"))
     ListChecksRequest.add_member(:source, Shapes::ShapeRef.new(shape: RecommendationSource, location: "querystring", location_name: "source"))
+    ListChecksRequest.add_member(:language, Shapes::ShapeRef.new(shape: RecommendationLanguage, location: "querystring", location_name: "language"))
     ListChecksRequest.struct_class = Types::ListChecksRequest
 
-    ListChecksResponse.add_member(:check_summaries, Shapes::ShapeRef.new(shape: CheckSummaryList, required: true, location_name: "checkSummaries"))
     ListChecksResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: ListChecksResponseNextTokenString, location_name: "nextToken"))
+    ListChecksResponse.add_member(:check_summaries, Shapes::ShapeRef.new(shape: CheckSummaryList, required: true, location_name: "checkSummaries"))
     ListChecksResponse.struct_class = Types::ListChecksResponse
 
-    ListOrganizationRecommendationAccountsRequest.add_member(:affected_account_id, Shapes::ShapeRef.new(shape: AccountId, location: "querystring", location_name: "affectedAccountId"))
-    ListOrganizationRecommendationAccountsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListOrganizationRecommendationAccountsRequestMaxResultsInteger, location: "querystring", location_name: "maxResults"))
     ListOrganizationRecommendationAccountsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: ListOrganizationRecommendationAccountsRequestNextTokenString, location: "querystring", location_name: "nextToken"))
+    ListOrganizationRecommendationAccountsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListOrganizationRecommendationAccountsRequestMaxResultsInteger, location: "querystring", location_name: "maxResults"))
     ListOrganizationRecommendationAccountsRequest.add_member(:organization_recommendation_identifier, Shapes::ShapeRef.new(shape: OrganizationRecommendationIdentifier, required: true, location: "uri", location_name: "organizationRecommendationIdentifier"))
+    ListOrganizationRecommendationAccountsRequest.add_member(:affected_account_id, Shapes::ShapeRef.new(shape: AccountId, location: "querystring", location_name: "affectedAccountId"))
     ListOrganizationRecommendationAccountsRequest.struct_class = Types::ListOrganizationRecommendationAccountsRequest
 
-    ListOrganizationRecommendationAccountsResponse.add_member(:account_recommendation_lifecycle_summaries, Shapes::ShapeRef.new(shape: AccountRecommendationLifecycleSummaryList, required: true, location_name: "accountRecommendationLifecycleSummaries"))
     ListOrganizationRecommendationAccountsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: ListOrganizationRecommendationAccountsResponseNextTokenString, location_name: "nextToken"))
+    ListOrganizationRecommendationAccountsResponse.add_member(:account_recommendation_lifecycle_summaries, Shapes::ShapeRef.new(shape: AccountRecommendationLifecycleSummaryList, required: true, location_name: "accountRecommendationLifecycleSummaries"))
     ListOrganizationRecommendationAccountsResponse.struct_class = Types::ListOrganizationRecommendationAccountsResponse
 
-    ListOrganizationRecommendationResourcesRequest.add_member(:affected_account_id, Shapes::ShapeRef.new(shape: AccountId, location: "querystring", location_name: "affectedAccountId"))
-    ListOrganizationRecommendationResourcesRequest.add_member(:exclusion_status, Shapes::ShapeRef.new(shape: ExclusionStatus, location: "querystring", location_name: "exclusionStatus"))
-    ListOrganizationRecommendationResourcesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListOrganizationRecommendationResourcesRequestMaxResultsInteger, location: "querystring", location_name: "maxResults"))
     ListOrganizationRecommendationResourcesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: ListOrganizationRecommendationResourcesRequestNextTokenString, location: "querystring", location_name: "nextToken"))
-    ListOrganizationRecommendationResourcesRequest.add_member(:organization_recommendation_identifier, Shapes::ShapeRef.new(shape: OrganizationRecommendationIdentifier, required: true, location: "uri", location_name: "organizationRecommendationIdentifier"))
-    ListOrganizationRecommendationResourcesRequest.add_member(:region_code, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "regionCode"))
+    ListOrganizationRecommendationResourcesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListOrganizationRecommendationResourcesRequestMaxResultsInteger, location: "querystring", location_name: "maxResults"))
     ListOrganizationRecommendationResourcesRequest.add_member(:status, Shapes::ShapeRef.new(shape: ResourceStatus, location: "querystring", location_name: "status"))
+    ListOrganizationRecommendationResourcesRequest.add_member(:exclusion_status, Shapes::ShapeRef.new(shape: ExclusionStatus, location: "querystring", location_name: "exclusionStatus"))
+    ListOrganizationRecommendationResourcesRequest.add_member(:region_code, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "regionCode"))
+    ListOrganizationRecommendationResourcesRequest.add_member(:organization_recommendation_identifier, Shapes::ShapeRef.new(shape: OrganizationRecommendationIdentifier, required: true, location: "uri", location_name: "organizationRecommendationIdentifier"))
+    ListOrganizationRecommendationResourcesRequest.add_member(:affected_account_id, Shapes::ShapeRef.new(shape: AccountId, location: "querystring", location_name: "affectedAccountId"))
     ListOrganizationRecommendationResourcesRequest.struct_class = Types::ListOrganizationRecommendationResourcesRequest
 
     ListOrganizationRecommendationResourcesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: ListOrganizationRecommendationResourcesResponseNextTokenString, location_name: "nextToken"))
     ListOrganizationRecommendationResourcesResponse.add_member(:organization_recommendation_resource_summaries, Shapes::ShapeRef.new(shape: OrganizationRecommendationResourceSummaryList, required: true, location_name: "organizationRecommendationResourceSummaries"))
     ListOrganizationRecommendationResourcesResponse.struct_class = Types::ListOrganizationRecommendationResourcesResponse
 
-    ListOrganizationRecommendationsRequest.add_member(:after_last_updated_at, Shapes::ShapeRef.new(shape: Timestamp, location: "querystring", location_name: "afterLastUpdatedAt"))
-    ListOrganizationRecommendationsRequest.add_member(:aws_service, Shapes::ShapeRef.new(shape: RecommendationAwsService, location: "querystring", location_name: "awsService"))
-    ListOrganizationRecommendationsRequest.add_member(:before_last_updated_at, Shapes::ShapeRef.new(shape: Timestamp, location: "querystring", location_name: "beforeLastUpdatedAt"))
-    ListOrganizationRecommendationsRequest.add_member(:check_identifier, Shapes::ShapeRef.new(shape: CheckIdentifier, location: "querystring", location_name: "checkIdentifier"))
-    ListOrganizationRecommendationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListOrganizationRecommendationsRequestMaxResultsInteger, location: "querystring", location_name: "maxResults"))
     ListOrganizationRecommendationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: ListOrganizationRecommendationsRequestNextTokenString, location: "querystring", location_name: "nextToken"))
-    ListOrganizationRecommendationsRequest.add_member(:pillar, Shapes::ShapeRef.new(shape: RecommendationPillar, location: "querystring", location_name: "pillar"))
-    ListOrganizationRecommendationsRequest.add_member(:source, Shapes::ShapeRef.new(shape: RecommendationSource, location: "querystring", location_name: "source"))
-    ListOrganizationRecommendationsRequest.add_member(:status, Shapes::ShapeRef.new(shape: RecommendationStatus, location: "querystring", location_name: "status"))
+    ListOrganizationRecommendationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListOrganizationRecommendationsRequestMaxResultsInteger, location: "querystring", location_name: "maxResults"))
     ListOrganizationRecommendationsRequest.add_member(:type, Shapes::ShapeRef.new(shape: RecommendationType, location: "querystring", location_name: "type"))
+    ListOrganizationRecommendationsRequest.add_member(:status, Shapes::ShapeRef.new(shape: RecommendationStatus, location: "querystring", location_name: "status"))
+    ListOrganizationRecommendationsRequest.add_member(:pillar, Shapes::ShapeRef.new(shape: RecommendationPillar, location: "querystring", location_name: "pillar"))
+    ListOrganizationRecommendationsRequest.add_member(:aws_service, Shapes::ShapeRef.new(shape: RecommendationAwsService, location: "querystring", location_name: "awsService"))
+    ListOrganizationRecommendationsRequest.add_member(:source, Shapes::ShapeRef.new(shape: RecommendationSource, location: "querystring", location_name: "source"))
+    ListOrganizationRecommendationsRequest.add_member(:check_identifier, Shapes::ShapeRef.new(shape: CheckIdentifier, location: "querystring", location_name: "checkIdentifier"))
+    ListOrganizationRecommendationsRequest.add_member(:after_last_updated_at, Shapes::ShapeRef.new(shape: Timestamp, location: "querystring", location_name: "afterLastUpdatedAt"))
+    ListOrganizationRecommendationsRequest.add_member(:before_last_updated_at, Shapes::ShapeRef.new(shape: Timestamp, location: "querystring", location_name: "beforeLastUpdatedAt"))
     ListOrganizationRecommendationsRequest.struct_class = Types::ListOrganizationRecommendationsRequest
 
     ListOrganizationRecommendationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: ListOrganizationRecommendationsResponseNextTokenString, location_name: "nextToken"))
     ListOrganizationRecommendationsResponse.add_member(:organization_recommendation_summaries, Shapes::ShapeRef.new(shape: OrganizationRecommendationSummaryList, required: true, location_name: "organizationRecommendationSummaries"))
     ListOrganizationRecommendationsResponse.struct_class = Types::ListOrganizationRecommendationsResponse
 
-    ListRecommendationResourcesRequest.add_member(:exclusion_status, Shapes::ShapeRef.new(shape: ExclusionStatus, location: "querystring", location_name: "exclusionStatus"))
-    ListRecommendationResourcesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListRecommendationResourcesRequestMaxResultsInteger, location: "querystring", location_name: "maxResults"))
     ListRecommendationResourcesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: ListRecommendationResourcesRequestNextTokenString, location: "querystring", location_name: "nextToken"))
-    ListRecommendationResourcesRequest.add_member(:recommendation_identifier, Shapes::ShapeRef.new(shape: AccountRecommendationIdentifier, required: true, location: "uri", location_name: "recommendationIdentifier"))
-    ListRecommendationResourcesRequest.add_member(:region_code, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "regionCode"))
+    ListRecommendationResourcesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListRecommendationResourcesRequestMaxResultsInteger, location: "querystring", location_name: "maxResults"))
     ListRecommendationResourcesRequest.add_member(:status, Shapes::ShapeRef.new(shape: ResourceStatus, location: "querystring", location_name: "status"))
+    ListRecommendationResourcesRequest.add_member(:exclusion_status, Shapes::ShapeRef.new(shape: ExclusionStatus, location: "querystring", location_name: "exclusionStatus"))
+    ListRecommendationResourcesRequest.add_member(:region_code, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "regionCode"))
+    ListRecommendationResourcesRequest.add_member(:recommendation_identifier, Shapes::ShapeRef.new(shape: AccountRecommendationIdentifier, required: true, location: "uri", location_name: "recommendationIdentifier"))
+    ListRecommendationResourcesRequest.add_member(:language, Shapes::ShapeRef.new(shape: RecommendationLanguage, location: "querystring", location_name: "language"))
     ListRecommendationResourcesRequest.struct_class = Types::ListRecommendationResourcesRequest
 
     ListRecommendationResourcesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: ListRecommendationResourcesResponseNextTokenString, location_name: "nextToken"))
     ListRecommendationResourcesResponse.add_member(:recommendation_resource_summaries, Shapes::ShapeRef.new(shape: RecommendationResourceSummaryList, required: true, location_name: "recommendationResourceSummaries"))
     ListRecommendationResourcesResponse.struct_class = Types::ListRecommendationResourcesResponse
 
-    ListRecommendationsRequest.add_member(:after_last_updated_at, Shapes::ShapeRef.new(shape: Timestamp, location: "querystring", location_name: "afterLastUpdatedAt"))
-    ListRecommendationsRequest.add_member(:aws_service, Shapes::ShapeRef.new(shape: RecommendationAwsService, location: "querystring", location_name: "awsService"))
-    ListRecommendationsRequest.add_member(:before_last_updated_at, Shapes::ShapeRef.new(shape: Timestamp, location: "querystring", location_name: "beforeLastUpdatedAt"))
-    ListRecommendationsRequest.add_member(:check_identifier, Shapes::ShapeRef.new(shape: CheckIdentifier, location: "querystring", location_name: "checkIdentifier"))
-    ListRecommendationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListRecommendationsRequestMaxResultsInteger, location: "querystring", location_name: "maxResults"))
     ListRecommendationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: ListRecommendationsRequestNextTokenString, location: "querystring", location_name: "nextToken"))
-    ListRecommendationsRequest.add_member(:pillar, Shapes::ShapeRef.new(shape: RecommendationPillar, location: "querystring", location_name: "pillar"))
-    ListRecommendationsRequest.add_member(:source, Shapes::ShapeRef.new(shape: RecommendationSource, location: "querystring", location_name: "source"))
-    ListRecommendationsRequest.add_member(:status, Shapes::ShapeRef.new(shape: RecommendationStatus, location: "querystring", location_name: "status"))
+    ListRecommendationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListRecommendationsRequestMaxResultsInteger, location: "querystring", location_name: "maxResults"))
     ListRecommendationsRequest.add_member(:type, Shapes::ShapeRef.new(shape: RecommendationType, location: "querystring", location_name: "type"))
+    ListRecommendationsRequest.add_member(:status, Shapes::ShapeRef.new(shape: RecommendationStatus, location: "querystring", location_name: "status"))
+    ListRecommendationsRequest.add_member(:pillar, Shapes::ShapeRef.new(shape: RecommendationPillar, location: "querystring", location_name: "pillar"))
+    ListRecommendationsRequest.add_member(:aws_service, Shapes::ShapeRef.new(shape: RecommendationAwsService, location: "querystring", location_name: "awsService"))
+    ListRecommendationsRequest.add_member(:source, Shapes::ShapeRef.new(shape: RecommendationSource, location: "querystring", location_name: "source"))
+    ListRecommendationsRequest.add_member(:check_identifier, Shapes::ShapeRef.new(shape: CheckIdentifier, location: "querystring", location_name: "checkIdentifier"))
+    ListRecommendationsRequest.add_member(:after_last_updated_at, Shapes::ShapeRef.new(shape: Timestamp, location: "querystring", location_name: "afterLastUpdatedAt"))
+    ListRecommendationsRequest.add_member(:before_last_updated_at, Shapes::ShapeRef.new(shape: Timestamp, location: "querystring", location_name: "beforeLastUpdatedAt"))
+    ListRecommendationsRequest.add_member(:language, Shapes::ShapeRef.new(shape: RecommendationLanguage, location: "querystring", location_name: "language"))
     ListRecommendationsRequest.struct_class = Types::ListRecommendationsRequest
 
     ListRecommendationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: ListRecommendationsResponseNextTokenString, location_name: "nextToken"))
     ListRecommendationsResponse.add_member(:recommendation_summaries, Shapes::ShapeRef.new(shape: RecommendationSummaryList, required: true, location_name: "recommendationSummaries"))
     ListRecommendationsResponse.struct_class = Types::ListRecommendationsResponse
 
-    OrganizationRecommendation.add_member(:arn, Shapes::ShapeRef.new(shape: OrganizationRecommendationArn, required: true, location_name: "arn"))
-    OrganizationRecommendation.add_member(:aws_services, Shapes::ShapeRef.new(shape: RecommendationAwsServiceList, location_name: "awsServices"))
-    OrganizationRecommendation.add_member(:check_arn, Shapes::ShapeRef.new(shape: String, location_name: "checkArn"))
-    OrganizationRecommendation.add_member(:created_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "createdAt"))
-    OrganizationRecommendation.add_member(:created_by, Shapes::ShapeRef.new(shape: String, location_name: "createdBy"))
-    OrganizationRecommendation.add_member(:description, Shapes::ShapeRef.new(shape: String, required: true, location_name: "description"))
     OrganizationRecommendation.add_member(:id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "id"))
-    OrganizationRecommendation.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "lastUpdatedAt"))
-    OrganizationRecommendation.add_member(:lifecycle_stage, Shapes::ShapeRef.new(shape: RecommendationLifecycleStage, location_name: "lifecycleStage"))
-    OrganizationRecommendation.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "name"))
-    OrganizationRecommendation.add_member(:pillar_specific_aggregates, Shapes::ShapeRef.new(shape: RecommendationPillarSpecificAggregates, location_name: "pillarSpecificAggregates"))
-    OrganizationRecommendation.add_member(:pillars, Shapes::ShapeRef.new(shape: RecommendationPillarList, required: true, location_name: "pillars"))
-    OrganizationRecommendation.add_member(:resolved_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "resolvedAt"))
-    OrganizationRecommendation.add_member(:resources_aggregates, Shapes::ShapeRef.new(shape: RecommendationResourcesAggregates, required: true, location_name: "resourcesAggregates"))
-    OrganizationRecommendation.add_member(:source, Shapes::ShapeRef.new(shape: RecommendationSource, required: true, location_name: "source"))
-    OrganizationRecommendation.add_member(:status, Shapes::ShapeRef.new(shape: RecommendationStatus, required: true, location_name: "status"))
     OrganizationRecommendation.add_member(:type, Shapes::ShapeRef.new(shape: RecommendationType, required: true, location_name: "type"))
-    OrganizationRecommendation.add_member(:update_reason, Shapes::ShapeRef.new(shape: RecommendationUpdateReason, location_name: "updateReason"))
-    OrganizationRecommendation.add_member(:update_reason_code, Shapes::ShapeRef.new(shape: UpdateRecommendationLifecycleStageReasonCode, location_name: "updateReasonCode"))
+    OrganizationRecommendation.add_member(:check_arn, Shapes::ShapeRef.new(shape: String, location_name: "checkArn"))
+    OrganizationRecommendation.add_member(:status, Shapes::ShapeRef.new(shape: RecommendationStatus, required: true, location_name: "status"))
+    OrganizationRecommendation.add_member(:lifecycle_stage, Shapes::ShapeRef.new(shape: RecommendationLifecycleStage, location_name: "lifecycleStage"))
+    OrganizationRecommendation.add_member(:pillars, Shapes::ShapeRef.new(shape: RecommendationPillarList, required: true, location_name: "pillars"))
+    OrganizationRecommendation.add_member(:source, Shapes::ShapeRef.new(shape: RecommendationSource, required: true, location_name: "source"))
+    OrganizationRecommendation.add_member(:aws_services, Shapes::ShapeRef.new(shape: RecommendationAwsServiceList, location_name: "awsServices"))
+    OrganizationRecommendation.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "name"))
+    OrganizationRecommendation.add_member(:resources_aggregates, Shapes::ShapeRef.new(shape: RecommendationResourcesAggregates, required: true, location_name: "resourcesAggregates"))
+    OrganizationRecommendation.add_member(:pillar_specific_aggregates, Shapes::ShapeRef.new(shape: RecommendationPillarSpecificAggregates, location_name: "pillarSpecificAggregates"))
+    OrganizationRecommendation.add_member(:created_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "createdAt"))
+    OrganizationRecommendation.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "lastUpdatedAt"))
+    OrganizationRecommendation.add_member(:arn, Shapes::ShapeRef.new(shape: OrganizationRecommendationArn, required: true, location_name: "arn"))
+    OrganizationRecommendation.add_member(:description, Shapes::ShapeRef.new(shape: String, required: true, location_name: "description"))
+    OrganizationRecommendation.add_member(:created_by, Shapes::ShapeRef.new(shape: String, location_name: "createdBy"))
     OrganizationRecommendation.add_member(:updated_on_behalf_of, Shapes::ShapeRef.new(shape: String, location_name: "updatedOnBehalfOf"))
     OrganizationRecommendation.add_member(:updated_on_behalf_of_job_title, Shapes::ShapeRef.new(shape: String, location_name: "updatedOnBehalfOfJobTitle"))
+    OrganizationRecommendation.add_member(:update_reason, Shapes::ShapeRef.new(shape: RecommendationUpdateReason, location_name: "updateReason"))
+    OrganizationRecommendation.add_member(:update_reason_code, Shapes::ShapeRef.new(shape: UpdateRecommendationLifecycleStageReasonCode, location_name: "updateReasonCode"))
+    OrganizationRecommendation.add_member(:resolved_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "resolvedAt"))
     OrganizationRecommendation.struct_class = Types::OrganizationRecommendation
 
-    OrganizationRecommendationResourceSummary.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "accountId"))
+    OrganizationRecommendationResourceSummary.add_member(:id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "id"))
     OrganizationRecommendationResourceSummary.add_member(:arn, Shapes::ShapeRef.new(shape: RecommendationResourceArn, required: true, location_name: "arn"))
     OrganizationRecommendationResourceSummary.add_member(:aws_resource_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "awsResourceId"))
-    OrganizationRecommendationResourceSummary.add_member(:exclusion_status, Shapes::ShapeRef.new(shape: ExclusionStatus, location_name: "exclusionStatus"))
-    OrganizationRecommendationResourceSummary.add_member(:id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "id"))
-    OrganizationRecommendationResourceSummary.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "lastUpdatedAt"))
-    OrganizationRecommendationResourceSummary.add_member(:metadata, Shapes::ShapeRef.new(shape: StringMap, required: true, location_name: "metadata"))
-    OrganizationRecommendationResourceSummary.add_member(:recommendation_arn, Shapes::ShapeRef.new(shape: OrganizationRecommendationArn, required: true, location_name: "recommendationArn"))
     OrganizationRecommendationResourceSummary.add_member(:region_code, Shapes::ShapeRef.new(shape: RecommendationRegionCode, required: true, location_name: "regionCode"))
     OrganizationRecommendationResourceSummary.add_member(:status, Shapes::ShapeRef.new(shape: ResourceStatus, required: true, location_name: "status"))
+    OrganizationRecommendationResourceSummary.add_member(:metadata, Shapes::ShapeRef.new(shape: StringMap, required: true, location_name: "metadata"))
+    OrganizationRecommendationResourceSummary.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "lastUpdatedAt"))
+    OrganizationRecommendationResourceSummary.add_member(:exclusion_status, Shapes::ShapeRef.new(shape: ExclusionStatus, location_name: "exclusionStatus"))
+    OrganizationRecommendationResourceSummary.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "accountId"))
+    OrganizationRecommendationResourceSummary.add_member(:recommendation_arn, Shapes::ShapeRef.new(shape: OrganizationRecommendationArn, required: true, location_name: "recommendationArn"))
     OrganizationRecommendationResourceSummary.struct_class = Types::OrganizationRecommendationResourceSummary
 
     OrganizationRecommendationResourceSummaryList.member = Shapes::ShapeRef.new(shape: OrganizationRecommendationResourceSummary)
 
-    OrganizationRecommendationSummary.add_member(:arn, Shapes::ShapeRef.new(shape: OrganizationRecommendationArn, required: true, location_name: "arn"))
-    OrganizationRecommendationSummary.add_member(:aws_services, Shapes::ShapeRef.new(shape: RecommendationAwsServiceList, location_name: "awsServices"))
-    OrganizationRecommendationSummary.add_member(:check_arn, Shapes::ShapeRef.new(shape: String, location_name: "checkArn"))
-    OrganizationRecommendationSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "createdAt"))
     OrganizationRecommendationSummary.add_member(:id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "id"))
-    OrganizationRecommendationSummary.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "lastUpdatedAt"))
-    OrganizationRecommendationSummary.add_member(:lifecycle_stage, Shapes::ShapeRef.new(shape: RecommendationLifecycleStage, location_name: "lifecycleStage"))
-    OrganizationRecommendationSummary.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "name"))
-    OrganizationRecommendationSummary.add_member(:pillar_specific_aggregates, Shapes::ShapeRef.new(shape: RecommendationPillarSpecificAggregates, location_name: "pillarSpecificAggregates"))
-    OrganizationRecommendationSummary.add_member(:pillars, Shapes::ShapeRef.new(shape: RecommendationPillarList, required: true, location_name: "pillars"))
-    OrganizationRecommendationSummary.add_member(:resources_aggregates, Shapes::ShapeRef.new(shape: RecommendationResourcesAggregates, required: true, location_name: "resourcesAggregates"))
-    OrganizationRecommendationSummary.add_member(:source, Shapes::ShapeRef.new(shape: RecommendationSource, required: true, location_name: "source"))
-    OrganizationRecommendationSummary.add_member(:status, Shapes::ShapeRef.new(shape: RecommendationStatus, required: true, location_name: "status"))
     OrganizationRecommendationSummary.add_member(:type, Shapes::ShapeRef.new(shape: RecommendationType, required: true, location_name: "type"))
+    OrganizationRecommendationSummary.add_member(:check_arn, Shapes::ShapeRef.new(shape: String, location_name: "checkArn"))
+    OrganizationRecommendationSummary.add_member(:status, Shapes::ShapeRef.new(shape: RecommendationStatus, required: true, location_name: "status"))
+    OrganizationRecommendationSummary.add_member(:lifecycle_stage, Shapes::ShapeRef.new(shape: RecommendationLifecycleStage, location_name: "lifecycleStage"))
+    OrganizationRecommendationSummary.add_member(:pillars, Shapes::ShapeRef.new(shape: RecommendationPillarList, required: true, location_name: "pillars"))
+    OrganizationRecommendationSummary.add_member(:source, Shapes::ShapeRef.new(shape: RecommendationSource, required: true, location_name: "source"))
+    OrganizationRecommendationSummary.add_member(:aws_services, Shapes::ShapeRef.new(shape: RecommendationAwsServiceList, location_name: "awsServices"))
+    OrganizationRecommendationSummary.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "name"))
+    OrganizationRecommendationSummary.add_member(:resources_aggregates, Shapes::ShapeRef.new(shape: RecommendationResourcesAggregates, required: true, location_name: "resourcesAggregates"))
+    OrganizationRecommendationSummary.add_member(:pillar_specific_aggregates, Shapes::ShapeRef.new(shape: RecommendationPillarSpecificAggregates, location_name: "pillarSpecificAggregates"))
+    OrganizationRecommendationSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "createdAt"))
+    OrganizationRecommendationSummary.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "lastUpdatedAt"))
+    OrganizationRecommendationSummary.add_member(:arn, Shapes::ShapeRef.new(shape: OrganizationRecommendationArn, required: true, location_name: "arn"))
     OrganizationRecommendationSummary.struct_class = Types::OrganizationRecommendationSummary
 
     OrganizationRecommendationSummaryList.member = Shapes::ShapeRef.new(shape: OrganizationRecommendationSummary)
 
-    Recommendation.add_member(:arn, Shapes::ShapeRef.new(shape: AccountRecommendationArn, required: true, location_name: "arn"))
-    Recommendation.add_member(:aws_services, Shapes::ShapeRef.new(shape: RecommendationAwsServiceList, location_name: "awsServices"))
-    Recommendation.add_member(:check_arn, Shapes::ShapeRef.new(shape: String, location_name: "checkArn"))
-    Recommendation.add_member(:created_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "createdAt"))
-    Recommendation.add_member(:created_by, Shapes::ShapeRef.new(shape: String, location_name: "createdBy"))
-    Recommendation.add_member(:description, Shapes::ShapeRef.new(shape: String, required: true, location_name: "description"))
     Recommendation.add_member(:id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "id"))
-    Recommendation.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "lastUpdatedAt"))
-    Recommendation.add_member(:lifecycle_stage, Shapes::ShapeRef.new(shape: RecommendationLifecycleStage, location_name: "lifecycleStage"))
-    Recommendation.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "name"))
-    Recommendation.add_member(:pillar_specific_aggregates, Shapes::ShapeRef.new(shape: RecommendationPillarSpecificAggregates, location_name: "pillarSpecificAggregates"))
-    Recommendation.add_member(:pillars, Shapes::ShapeRef.new(shape: RecommendationPillarList, required: true, location_name: "pillars"))
-    Recommendation.add_member(:resolved_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "resolvedAt"))
-    Recommendation.add_member(:resources_aggregates, Shapes::ShapeRef.new(shape: RecommendationResourcesAggregates, required: true, location_name: "resourcesAggregates"))
-    Recommendation.add_member(:source, Shapes::ShapeRef.new(shape: RecommendationSource, required: true, location_name: "source"))
-    Recommendation.add_member(:status, Shapes::ShapeRef.new(shape: RecommendationStatus, required: true, location_name: "status"))
     Recommendation.add_member(:type, Shapes::ShapeRef.new(shape: RecommendationType, required: true, location_name: "type"))
-    Recommendation.add_member(:update_reason, Shapes::ShapeRef.new(shape: RecommendationUpdateReason, location_name: "updateReason"))
-    Recommendation.add_member(:update_reason_code, Shapes::ShapeRef.new(shape: UpdateRecommendationLifecycleStageReasonCode, location_name: "updateReasonCode"))
+    Recommendation.add_member(:check_arn, Shapes::ShapeRef.new(shape: String, location_name: "checkArn"))
+    Recommendation.add_member(:status, Shapes::ShapeRef.new(shape: RecommendationStatus, required: true, location_name: "status"))
+    Recommendation.add_member(:lifecycle_stage, Shapes::ShapeRef.new(shape: RecommendationLifecycleStage, location_name: "lifecycleStage"))
+    Recommendation.add_member(:pillars, Shapes::ShapeRef.new(shape: RecommendationPillarList, required: true, location_name: "pillars"))
+    Recommendation.add_member(:source, Shapes::ShapeRef.new(shape: RecommendationSource, required: true, location_name: "source"))
+    Recommendation.add_member(:aws_services, Shapes::ShapeRef.new(shape: RecommendationAwsServiceList, location_name: "awsServices"))
+    Recommendation.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "name"))
+    Recommendation.add_member(:resources_aggregates, Shapes::ShapeRef.new(shape: RecommendationResourcesAggregates, required: true, location_name: "resourcesAggregates"))
+    Recommendation.add_member(:pillar_specific_aggregates, Shapes::ShapeRef.new(shape: RecommendationPillarSpecificAggregates, location_name: "pillarSpecificAggregates"))
+    Recommendation.add_member(:created_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "createdAt"))
+    Recommendation.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "lastUpdatedAt"))
+    Recommendation.add_member(:arn, Shapes::ShapeRef.new(shape: AccountRecommendationArn, required: true, location_name: "arn"))
+    Recommendation.add_member(:status_reason, Shapes::ShapeRef.new(shape: StatusReason, location_name: "statusReason"))
+    Recommendation.add_member(:description, Shapes::ShapeRef.new(shape: String, required: true, location_name: "description"))
+    Recommendation.add_member(:created_by, Shapes::ShapeRef.new(shape: String, location_name: "createdBy"))
     Recommendation.add_member(:updated_on_behalf_of, Shapes::ShapeRef.new(shape: String, location_name: "updatedOnBehalfOf"))
     Recommendation.add_member(:updated_on_behalf_of_job_title, Shapes::ShapeRef.new(shape: String, location_name: "updatedOnBehalfOfJobTitle"))
+    Recommendation.add_member(:update_reason, Shapes::ShapeRef.new(shape: RecommendationUpdateReason, location_name: "updateReason"))
+    Recommendation.add_member(:update_reason_code, Shapes::ShapeRef.new(shape: UpdateRecommendationLifecycleStageReasonCode, location_name: "updateReasonCode"))
+    Recommendation.add_member(:resolved_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "resolvedAt"))
     Recommendation.struct_class = Types::Recommendation
 
     RecommendationAwsServiceList.member = Shapes::ShapeRef.new(shape: RecommendationAwsService)
@@ -335,38 +340,40 @@ module Aws::TrustedAdvisor
 
     RecommendationResourceExclusionList.member = Shapes::ShapeRef.new(shape: RecommendationResourceExclusion)
 
+    RecommendationResourceSummary.add_member(:id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "id"))
     RecommendationResourceSummary.add_member(:arn, Shapes::ShapeRef.new(shape: RecommendationResourceArn, required: true, location_name: "arn"))
     RecommendationResourceSummary.add_member(:aws_resource_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "awsResourceId"))
-    RecommendationResourceSummary.add_member(:exclusion_status, Shapes::ShapeRef.new(shape: ExclusionStatus, location_name: "exclusionStatus"))
-    RecommendationResourceSummary.add_member(:id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "id"))
-    RecommendationResourceSummary.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "lastUpdatedAt"))
-    RecommendationResourceSummary.add_member(:metadata, Shapes::ShapeRef.new(shape: StringMap, required: true, location_name: "metadata"))
-    RecommendationResourceSummary.add_member(:recommendation_arn, Shapes::ShapeRef.new(shape: AccountRecommendationArn, required: true, location_name: "recommendationArn"))
     RecommendationResourceSummary.add_member(:region_code, Shapes::ShapeRef.new(shape: RecommendationRegionCode, required: true, location_name: "regionCode"))
     RecommendationResourceSummary.add_member(:status, Shapes::ShapeRef.new(shape: ResourceStatus, required: true, location_name: "status"))
+    RecommendationResourceSummary.add_member(:metadata, Shapes::ShapeRef.new(shape: StringMap, required: true, location_name: "metadata"))
+    RecommendationResourceSummary.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "lastUpdatedAt"))
+    RecommendationResourceSummary.add_member(:exclusion_status, Shapes::ShapeRef.new(shape: ExclusionStatus, location_name: "exclusionStatus"))
+    RecommendationResourceSummary.add_member(:recommendation_arn, Shapes::ShapeRef.new(shape: AccountRecommendationArn, required: true, location_name: "recommendationArn"))
     RecommendationResourceSummary.struct_class = Types::RecommendationResourceSummary
 
     RecommendationResourceSummaryList.member = Shapes::ShapeRef.new(shape: RecommendationResourceSummary)
 
-    RecommendationResourcesAggregates.add_member(:error_count, Shapes::ShapeRef.new(shape: Long, required: true, location_name: "errorCount"))
     RecommendationResourcesAggregates.add_member(:ok_count, Shapes::ShapeRef.new(shape: Long, required: true, location_name: "okCount"))
     RecommendationResourcesAggregates.add_member(:warning_count, Shapes::ShapeRef.new(shape: Long, required: true, location_name: "warningCount"))
+    RecommendationResourcesAggregates.add_member(:error_count, Shapes::ShapeRef.new(shape: Long, required: true, location_name: "errorCount"))
+    RecommendationResourcesAggregates.add_member(:excluded_count, Shapes::ShapeRef.new(shape: Long, location_name: "excludedCount"))
     RecommendationResourcesAggregates.struct_class = Types::RecommendationResourcesAggregates
 
-    RecommendationSummary.add_member(:arn, Shapes::ShapeRef.new(shape: AccountRecommendationArn, required: true, location_name: "arn"))
-    RecommendationSummary.add_member(:aws_services, Shapes::ShapeRef.new(shape: RecommendationAwsServiceList, location_name: "awsServices"))
-    RecommendationSummary.add_member(:check_arn, Shapes::ShapeRef.new(shape: String, location_name: "checkArn"))
-    RecommendationSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "createdAt"))
     RecommendationSummary.add_member(:id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "id"))
-    RecommendationSummary.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "lastUpdatedAt"))
-    RecommendationSummary.add_member(:lifecycle_stage, Shapes::ShapeRef.new(shape: RecommendationLifecycleStage, location_name: "lifecycleStage"))
-    RecommendationSummary.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "name"))
-    RecommendationSummary.add_member(:pillar_specific_aggregates, Shapes::ShapeRef.new(shape: RecommendationPillarSpecificAggregates, location_name: "pillarSpecificAggregates"))
-    RecommendationSummary.add_member(:pillars, Shapes::ShapeRef.new(shape: RecommendationPillarList, required: true, location_name: "pillars"))
-    RecommendationSummary.add_member(:resources_aggregates, Shapes::ShapeRef.new(shape: RecommendationResourcesAggregates, required: true, location_name: "resourcesAggregates"))
-    RecommendationSummary.add_member(:source, Shapes::ShapeRef.new(shape: RecommendationSource, required: true, location_name: "source"))
-    RecommendationSummary.add_member(:status, Shapes::ShapeRef.new(shape: RecommendationStatus, required: true, location_name: "status"))
     RecommendationSummary.add_member(:type, Shapes::ShapeRef.new(shape: RecommendationType, required: true, location_name: "type"))
+    RecommendationSummary.add_member(:check_arn, Shapes::ShapeRef.new(shape: String, location_name: "checkArn"))
+    RecommendationSummary.add_member(:status, Shapes::ShapeRef.new(shape: RecommendationStatus, required: true, location_name: "status"))
+    RecommendationSummary.add_member(:lifecycle_stage, Shapes::ShapeRef.new(shape: RecommendationLifecycleStage, location_name: "lifecycleStage"))
+    RecommendationSummary.add_member(:pillars, Shapes::ShapeRef.new(shape: RecommendationPillarList, required: true, location_name: "pillars"))
+    RecommendationSummary.add_member(:source, Shapes::ShapeRef.new(shape: RecommendationSource, required: true, location_name: "source"))
+    RecommendationSummary.add_member(:aws_services, Shapes::ShapeRef.new(shape: RecommendationAwsServiceList, location_name: "awsServices"))
+    RecommendationSummary.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "name"))
+    RecommendationSummary.add_member(:resources_aggregates, Shapes::ShapeRef.new(shape: RecommendationResourcesAggregates, required: true, location_name: "resourcesAggregates"))
+    RecommendationSummary.add_member(:pillar_specific_aggregates, Shapes::ShapeRef.new(shape: RecommendationPillarSpecificAggregates, location_name: "pillarSpecificAggregates"))
+    RecommendationSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "createdAt"))
+    RecommendationSummary.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "lastUpdatedAt"))
+    RecommendationSummary.add_member(:arn, Shapes::ShapeRef.new(shape: AccountRecommendationArn, required: true, location_name: "arn"))
+    RecommendationSummary.add_member(:status_reason, Shapes::ShapeRef.new(shape: StatusReason, location_name: "statusReason"))
     RecommendationSummary.struct_class = Types::RecommendationSummary
 
     RecommendationSummaryList.member = Shapes::ShapeRef.new(shape: RecommendationSummary)
@@ -381,15 +388,15 @@ module Aws::TrustedAdvisor
     ThrottlingException.struct_class = Types::ThrottlingException
 
     UpdateOrganizationRecommendationLifecycleRequest.add_member(:lifecycle_stage, Shapes::ShapeRef.new(shape: UpdateRecommendationLifecycleStage, required: true, location_name: "lifecycleStage"))
-    UpdateOrganizationRecommendationLifecycleRequest.add_member(:organization_recommendation_identifier, Shapes::ShapeRef.new(shape: OrganizationRecommendationIdentifier, required: true, location: "uri", location_name: "organizationRecommendationIdentifier"))
     UpdateOrganizationRecommendationLifecycleRequest.add_member(:update_reason, Shapes::ShapeRef.new(shape: RecommendationUpdateReason, location_name: "updateReason"))
     UpdateOrganizationRecommendationLifecycleRequest.add_member(:update_reason_code, Shapes::ShapeRef.new(shape: UpdateRecommendationLifecycleStageReasonCode, location_name: "updateReasonCode"))
+    UpdateOrganizationRecommendationLifecycleRequest.add_member(:organization_recommendation_identifier, Shapes::ShapeRef.new(shape: OrganizationRecommendationIdentifier, required: true, location: "uri", location_name: "organizationRecommendationIdentifier"))
     UpdateOrganizationRecommendationLifecycleRequest.struct_class = Types::UpdateOrganizationRecommendationLifecycleRequest
 
     UpdateRecommendationLifecycleRequest.add_member(:lifecycle_stage, Shapes::ShapeRef.new(shape: UpdateRecommendationLifecycleStage, required: true, location_name: "lifecycleStage"))
-    UpdateRecommendationLifecycleRequest.add_member(:recommendation_identifier, Shapes::ShapeRef.new(shape: AccountRecommendationIdentifier, required: true, location: "uri", location_name: "recommendationIdentifier"))
     UpdateRecommendationLifecycleRequest.add_member(:update_reason, Shapes::ShapeRef.new(shape: RecommendationUpdateReason, location_name: "updateReason"))
     UpdateRecommendationLifecycleRequest.add_member(:update_reason_code, Shapes::ShapeRef.new(shape: UpdateRecommendationLifecycleStageReasonCode, location_name: "updateReasonCode"))
+    UpdateRecommendationLifecycleRequest.add_member(:recommendation_identifier, Shapes::ShapeRef.new(shape: AccountRecommendationIdentifier, required: true, location: "uri", location_name: "recommendationIdentifier"))
     UpdateRecommendationLifecycleRequest.struct_class = Types::UpdateRecommendationLifecycleRequest
 
     UpdateRecommendationResourceExclusionError.add_member(:arn, Shapes::ShapeRef.new(shape: RecommendationResourceArn, location_name: "arn"))
@@ -410,9 +417,10 @@ module Aws::TrustedAdvisor
 
       api.metadata = {
         "apiVersion" => "2022-09-15",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "trustedadvisor",
-        "jsonVersion" => "1.1",
         "protocol" => "rest-json",
+        "protocols" => ["rest-json"],
         "serviceFullName" => "TrustedAdvisor Public API",
         "serviceId" => "TrustedAdvisor",
         "signatureVersion" => "v4",
@@ -442,8 +450,8 @@ module Aws::TrustedAdvisor
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:get_recommendation, Seahorse::Model::Operation.new.tap do |o|
@@ -455,8 +463,8 @@ module Aws::TrustedAdvisor
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:list_checks, Seahorse::Model::Operation.new.tap do |o|
@@ -486,8 +494,8 @@ module Aws::TrustedAdvisor
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -505,8 +513,8 @@ module Aws::TrustedAdvisor
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -542,8 +550,8 @@ module Aws::TrustedAdvisor
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -580,8 +588,8 @@ module Aws::TrustedAdvisor
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:update_recommendation_lifecycle, Seahorse::Model::Operation.new.tap do |o|
@@ -594,8 +602,8 @@ module Aws::TrustedAdvisor
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
     end
 

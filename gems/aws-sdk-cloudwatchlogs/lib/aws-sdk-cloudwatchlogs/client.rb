@@ -973,9 +973,11 @@ module Aws::CloudWatchLogs
     #
     #   * logs:PutResourcePolicy
     #
-    #   * (If source has an associated AWS KMS Key) kms:Decrypt
+    #   * (If source has an associated Amazon Web Services KMS Key)
+    #     kms:Decrypt
     #
-    #   * (If source has an associated AWS KMS Key) kms:GenerateDataKey
+    #   * (If source has an associated Amazon Web Services KMS Key)
+    #     kms:GenerateDataKey
     #   Example IAM policy for provided import role:
     #
     #   `[ { "Effect": "Allow", "Action": "iam:PassRole", "Resource":
@@ -1344,6 +1346,70 @@ module Aws::CloudWatchLogs
       req.send_request(options)
     end
 
+    # Creates a lookup table by uploading CSV data. You can use lookup
+    # tables to enrich log data in CloudWatch Logs Insights queries with
+    # reference data such as user details, application names, or error
+    # descriptions.
+    #
+    # The table name must be unique within your account and Region. The CSV
+    # content must include a header row with column names, use UTF-8
+    # encoding, and not exceed 10 MB.
+    #
+    # @option params [required, String] :lookup_table_name
+    #   The name of the lookup table. The name must be unique within your
+    #   account and Region. The name can contain only alphanumeric characters
+    #   and underscores, and can be up to 256 characters long.
+    #
+    # @option params [String] :description
+    #   A description of the lookup table. The description can be up to 1024
+    #   characters long.
+    #
+    # @option params [required, String] :table_body
+    #   The CSV content of the lookup table. The first row must be a header
+    #   row with column names. The content must use UTF-8 encoding and not
+    #   exceed 10 MB.
+    #
+    # @option params [String] :kms_key_id
+    #   The ARN of the KMS key to use to encrypt the lookup table data. If you
+    #   don't specify a key, the data is encrypted with an Amazon Web
+    #   Services-owned key.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   A list of key-value pairs to associate with the lookup table. You can
+    #   associate as many as 50 tags with a lookup table. Tags can help you
+    #   organize and categorize your resources.
+    #
+    # @return [Types::CreateLookupTableResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateLookupTableResponse#lookup_table_arn #lookup_table_arn} => String
+    #   * {Types::CreateLookupTableResponse#created_at #created_at} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_lookup_table({
+    #     lookup_table_name: "LookupTableName", # required
+    #     description: "LookupTableDescription",
+    #     table_body: "TableBody", # required
+    #     kms_key_id: "KmsKeyId",
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.lookup_table_arn #=> String
+    #   resp.created_at #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/CreateLookupTable AWS API Documentation
+    #
+    # @overload create_lookup_table(params = {})
+    # @param [Hash] params ({})
+    def create_lookup_table(params = {}, options = {})
+      req = build_request(:create_lookup_table, params)
+      req.send_request(options)
+    end
+
     # Creates a scheduled query that runs CloudWatch Logs Insights queries
     # at regular intervals. Scheduled queries enable proactive monitoring by
     # automatically executing queries to detect patterns and anomalies in
@@ -1362,7 +1428,7 @@ module Aws::CloudWatchLogs
     #
     # @option params [required, String] :query_language
     #   The query language to use for the scheduled query. Valid values are
-    #   `LogsQL`, `PPL`, and `SQL`.
+    #   `CWLI`, `PPL`, and `SQL`.
     #
     # @option params [required, String] :query_string
     #   The query string to execute. This is the same query syntax used in
@@ -1432,6 +1498,8 @@ module Aws::CloudWatchLogs
     #       s3_configuration: { # required
     #         destination_identifier: "S3Uri", # required
     #         role_arn: "RoleArn", # required
+    #         owner_account_id: "AccountId",
+    #         kms_key_id: "KmsKeyId",
     #       },
     #     },
     #     schedule_start_time: 1,
@@ -1857,6 +1925,32 @@ module Aws::CloudWatchLogs
     # @param [Hash] params ({})
     def delete_log_stream(params = {}, options = {})
       req = build_request(:delete_log_stream, params)
+      req.send_request(options)
+    end
+
+    # Deletes a lookup table permanently. This operation cannot be undone.
+    #
+    # Queries that reference a deleted table will return an error. Before
+    # deleting a lookup table, review any saved queries or dashboards that
+    # may reference it.
+    #
+    # @option params [required, String] :lookup_table_arn
+    #   The ARN of the lookup table to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_lookup_table({
+    #     lookup_table_arn: "Arn", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DeleteLookupTable AWS API Documentation
+    #
+    # @overload delete_lookup_table(params = {})
+    # @param [Hash] params ({})
+    def delete_lookup_table(params = {}, options = {})
+      req = build_request(:delete_lookup_table, params)
       req.send_request(options)
     end
 
@@ -2865,6 +2959,7 @@ module Aws::CloudWatchLogs
     #   resp.log_groups[0].log_group_class #=> String, one of "STANDARD", "INFREQUENT_ACCESS", "DELIVERY"
     #   resp.log_groups[0].log_group_arn #=> String
     #   resp.log_groups[0].deletion_protection_enabled #=> Boolean
+    #   resp.log_groups[0].bearer_token_authentication_enabled #=> Boolean
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DescribeLogGroups AWS API Documentation
@@ -2985,6 +3080,59 @@ module Aws::CloudWatchLogs
     # @param [Hash] params ({})
     def describe_log_streams(params = {}, options = {})
       req = build_request(:describe_log_streams, params)
+      req.send_request(options)
+    end
+
+    # Retrieves metadata about lookup tables in your account. You can
+    # optionally filter the results by table name prefix. Results are sorted
+    # by table name in ascending order.
+    #
+    # @option params [String] :lookup_table_name_prefix
+    #   A prefix to filter lookup tables by name. Only tables whose names
+    #   start with this prefix are returned. If you don't specify a prefix,
+    #   all tables in the account and Region are returned.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of lookup tables to return in the response. The
+    #   default value is 50 and the maximum value is 100.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of items to return. (You received this
+    #   token from a previous call.)
+    #
+    # @return [Types::DescribeLookupTablesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeLookupTablesResponse#lookup_tables #lookup_tables} => Array&lt;Types::LookupTable&gt;
+    #   * {Types::DescribeLookupTablesResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_lookup_tables({
+    #     lookup_table_name_prefix: "LookupTableName",
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.lookup_tables #=> Array
+    #   resp.lookup_tables[0].lookup_table_arn #=> String
+    #   resp.lookup_tables[0].lookup_table_name #=> String
+    #   resp.lookup_tables[0].description #=> String
+    #   resp.lookup_tables[0].table_fields #=> Array
+    #   resp.lookup_tables[0].table_fields[0] #=> String
+    #   resp.lookup_tables[0].records_count #=> Integer
+    #   resp.lookup_tables[0].size_bytes #=> Integer
+    #   resp.lookup_tables[0].last_updated_time #=> Integer
+    #   resp.lookup_tables[0].kms_key_id #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DescribeLookupTables AWS API Documentation
+    #
+    # @overload describe_lookup_tables(params = {})
+    # @param [Hash] params ({})
+    def describe_lookup_tables(params = {}, options = {})
+      req = build_request(:describe_lookup_tables, params)
       req.send_request(options)
     end
 
@@ -3119,6 +3267,9 @@ module Aws::CloudWatchLogs
     #   resp.queries[0].status #=> String, one of "Scheduled", "Running", "Complete", "Failed", "Cancelled", "Timeout", "Unknown"
     #   resp.queries[0].create_time #=> Integer
     #   resp.queries[0].log_group_name #=> String
+    #   resp.queries[0].query_duration #=> Integer
+    #   resp.queries[0].bytes_scanned #=> Float
+    #   resp.queries[0].user_identity #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DescribeQueries AWS API Documentation
@@ -3184,6 +3335,10 @@ module Aws::CloudWatchLogs
     #   resp.query_definitions[0].last_modified #=> Integer
     #   resp.query_definitions[0].log_group_names #=> Array
     #   resp.query_definitions[0].log_group_names[0] #=> String
+    #   resp.query_definitions[0].parameters #=> Array
+    #   resp.query_definitions[0].parameters[0].name #=> String
+    #   resp.query_definitions[0].parameters[0].default_value #=> String
+    #   resp.query_definitions[0].parameters[0].description #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DescribeQueryDefinitions AWS API Documentation
@@ -4197,6 +4352,20 @@ module Aws::CloudWatchLogs
     # `@ptr.$['AAA']['BBB']['CCC']['DDD']`, `@ptr.$['AAA']`, or any other
     # path matching your log structure.
     #
+    # <note markdown="1"> The `GetLogObject` API routes requests using SDK host prefix
+    # injection. SDK versions released before April 1, 2026 route to
+    # `streaming-logs.Region.amazonaws.com`, which does not support VPC
+    # endpoints. SDK versions released on or after April 1, 2026 route to
+    # `stream-logs.Region.amazonaws.com`, which supports VPC endpoints. To
+    # set up a VPC endpoint for this API, see [Creating a VPC endpoint for
+    # CloudWatch Logs ][1].
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/cloudwatch-logs-and-interface-VPC.html#create-VPC-endpoint-for-CloudWatchLogs
+    #
     # @option params [Boolean] :unmask
     #   A boolean flag that indicates whether to unmask sensitive log data.
     #   When set to true, any masked or redacted data in the log object will
@@ -4402,6 +4571,46 @@ module Aws::CloudWatchLogs
       req.send_request(options)
     end
 
+    # Retrieves the full content of a lookup table, including the CSV data.
+    #
+    # @option params [required, String] :lookup_table_arn
+    #   The ARN of the lookup table to retrieve.
+    #
+    # @return [Types::GetLookupTableResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetLookupTableResponse#lookup_table_arn #lookup_table_arn} => String
+    #   * {Types::GetLookupTableResponse#lookup_table_name #lookup_table_name} => String
+    #   * {Types::GetLookupTableResponse#description #description} => String
+    #   * {Types::GetLookupTableResponse#table_body #table_body} => String
+    #   * {Types::GetLookupTableResponse#size_bytes #size_bytes} => Integer
+    #   * {Types::GetLookupTableResponse#last_updated_time #last_updated_time} => Integer
+    #   * {Types::GetLookupTableResponse#kms_key_id #kms_key_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_lookup_table({
+    #     lookup_table_arn: "Arn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.lookup_table_arn #=> String
+    #   resp.lookup_table_name #=> String
+    #   resp.description #=> String
+    #   resp.table_body #=> String
+    #   resp.size_bytes #=> Integer
+    #   resp.last_updated_time #=> Integer
+    #   resp.kms_key_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/GetLookupTable AWS API Documentation
+    #
+    # @overload get_lookup_table(params = {})
+    # @param [Hash] params ({})
+    def get_lookup_table(params = {}, options = {})
+      req = build_request(:get_lookup_table, params)
+      req.send_request(options)
+    end
+
     # Returns the results from the specified query.
     #
     # Only the fields requested in the query are returned, along with a
@@ -4524,6 +4733,8 @@ module Aws::CloudWatchLogs
     #   resp.start_time_offset #=> Integer
     #   resp.destination_configuration.s3_configuration.destination_identifier #=> String
     #   resp.destination_configuration.s3_configuration.role_arn #=> String
+    #   resp.destination_configuration.s3_configuration.owner_account_id #=> String
+    #   resp.destination_configuration.s3_configuration.kms_key_id #=> String
     #   resp.state #=> String, one of "ENABLED", "DISABLED"
     #   resp.last_triggered_time #=> Integer
     #   resp.last_execution_status #=> String, one of "Running", "InvalidQuery", "Complete", "Failed", "Timeout"
@@ -4661,6 +4872,7 @@ module Aws::CloudWatchLogs
     #   resp.transformer_config[0].csv.columns #=> Array
     #   resp.transformer_config[0].csv.columns[0] #=> String
     #   resp.transformer_config[0].csv.source #=> String
+    #   resp.transformer_config[0].csv.destination #=> String
     #   resp.transformer_config[0].date_time_converter.source #=> String
     #   resp.transformer_config[0].date_time_converter.target #=> String
     #   resp.transformer_config[0].date_time_converter.target_format #=> String
@@ -5252,6 +5464,8 @@ module Aws::CloudWatchLogs
     #   resp.scheduled_queries[0].timezone #=> String
     #   resp.scheduled_queries[0].destination_configuration.s3_configuration.destination_identifier #=> String
     #   resp.scheduled_queries[0].destination_configuration.s3_configuration.role_arn #=> String
+    #   resp.scheduled_queries[0].destination_configuration.s3_configuration.owner_account_id #=> String
+    #   resp.scheduled_queries[0].destination_configuration.s3_configuration.kms_key_id #=> String
     #   resp.scheduled_queries[0].creation_time #=> Integer
     #   resp.scheduled_queries[0].last_updated_time #=> Integer
     #
@@ -5699,12 +5913,12 @@ module Aws::CloudWatchLogs
     # in the EMF format are still ingested, but no CloudWatch Metrics are
     # created from them.
     #
-    # Creating a policy disables metrics for AWS features that use EMF to
-    # create metrics, such as CloudWatch Container Insights and CloudWatch
-    # Application Signals. To prevent turning off those features by
-    # accident, we recommend that you exclude the underlying log-groups
-    # through a selection-criteria such as `LogGroupNamePrefix NOT IN
-    # ["/aws/containerinsights", "/aws/ecs/containerinsights",
+    # Creating a policy disables metrics for Amazon Web Services features
+    # that use EMF to create metrics, such as CloudWatch Container Insights
+    # and CloudWatch Application Signals. To prevent turning off those
+    # features by accident, we recommend that you exclude the underlying
+    # log-groups through a selection-criteria such as `LogGroupNamePrefix
+    # NOT IN ["/aws/containerinsights", "/aws/ecs/containerinsights",
     # "/aws/application-signals/data"]`.
     #
     # Each account can have either one account-level metric extraction
@@ -5954,6 +6168,53 @@ module Aws::CloudWatchLogs
     # @param [Hash] params ({})
     def put_account_policy(params = {}, options = {})
       req = build_request(:put_account_policy, params)
+      req.send_request(options)
+    end
+
+    # Enables or disables bearer token authentication for the specified log
+    # group. When enabled on a log group, bearer token authentication is
+    # enabled on operations until it is explicitly disabled.
+    #
+    # For information about the parameters that are common to all actions,
+    # see [Common Parameters][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/CommonParameters.html
+    #
+    # @option params [required, String] :log_group_identifier
+    #   The name or ARN of the log group.
+    #
+    #   Type: String
+    #
+    #   Length Constraints: Minimum length of 1. Maximum length of 512.
+    #
+    #   Pattern: `[\.\-_/#A-Za-z0-9]+`
+    #
+    #   Required: Yes
+    #
+    # @option params [required, Boolean] :bearer_token_authentication_enabled
+    #   Whether to enable bearer token authentication.
+    #
+    #   Type: Boolean
+    #
+    #   Required: Yes
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_bearer_token_authentication({
+    #     log_group_identifier: "LogGroupIdentifier", # required
+    #     bearer_token_authentication_enabled: false, # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/PutBearerTokenAuthentication AWS API Documentation
+    #
+    # @overload put_bearer_token_authentication(params = {})
+    # @param [Hash] params ({})
+    def put_bearer_token_authentication(params = {}, options = {})
+      req = build_request(:put_bearer_token_authentication, params)
       req.send_request(options)
     end
 
@@ -6319,6 +6580,10 @@ module Aws::CloudWatchLogs
     #   sending logs. For example,
     #   `arn:aws:workmail:us-east-1:123456789012:organization/m-1234EXAMPLEabcd1234abcd1234abcd1234`
     #
+    #   For the `SECURITY_FINDING_LOGS` logType, use a wildcard ARN for the
+    #   hub resource. For example,
+    #   `arn:aws:securityhub:us-east-1:111122223333:hub/*`
+    #
     # @option params [required, String] :log_type
     #   Defines the type of log that the source is sending.
     #
@@ -6337,10 +6602,15 @@ module Aws::CloudWatchLogs
     #   * For Amazon Bedrock AgentCore Identity, the valid values are
     #     `APPLICATION_LOGS` and `TRACES`.
     #
+    #   * For Amazon Bedrock AgentCore Memory, the valid values are
+    #     `APPLICATION_LOGS` and `TRACES`.
+    #
     #   * For Amazon Bedrock AgentCore Gateway, the valid values are
     #     `APPLICATION_LOGS` and `TRACES`.
     #
     #   * For CloudFront, the valid value is `ACCESS_LOGS`.
+    #
+    #   * For DevOps Agent, the valid value is `APPLICATION_LOGS`.
     #
     #   * For Amazon CodeWhisperer, the valid value is `EVENT_LOGS`.
     #
@@ -6350,6 +6620,10 @@ module Aws::CloudWatchLogs
     #   * For Elemental MediaTailor, the valid values are
     #     `AD_DECISION_SERVER_LOGS`, `MANIFEST_SERVICE_LOGS`, and
     #     `TRANSCODE_LOGS`.
+    #
+    #   * For Amazon EKS Auto Mode, the valid values are
+    #     `AUTO_MODE_BLOCK_STORAGE_LOGS`, `AUTO_MODE_COMPUTE_LOGS`,
+    #     `AUTO_MODE_IPAM_LOGS`, and `AUTO_MODE_LOAD_BALANCING_LOGS`.
     #
     #   * For Entity Resolution, the valid value is `WORKFLOW_LOGS`.
     #
@@ -6363,13 +6637,15 @@ module Aws::CloudWatchLogs
     #   * For PCS, the valid values are `PCS_SCHEDULER_LOGS` and
     #     `PCS_JOBCOMP_LOGS`.
     #
-    #   * For Quick Suite, the valid values are `CHAT_LOGS` and
-    #     `FEEDBACK_LOGS`.
+    #   * For Quick, the valid values are `CHAT_LOGS` and `FEEDBACK_LOGS`.
     #
     #   * For Amazon Web Services RTB Fabric, the valid values is
     #     `APPLICATION_LOGS`.
     #
     #   * For Amazon Q, the valid values are `EVENT_LOGS` and `SYNC_JOB_LOGS`.
+    #
+    #   * For Amazon Web Services Security Hub CSPM, the valid value is
+    #     `SECURITY_FINDING_LOGS`.
     #
     #   * For Amazon SES mail manager, the valid values are `APPLICATION_LOGS`
     #     and `TRAFFIC_POLICY_DEBUG_LOGS`.
@@ -7106,6 +7382,14 @@ module Aws::CloudWatchLogs
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
+    # @option params [Array<Types::QueryParameter>] :parameters
+    #   Use this parameter to include specific query parameters as part of
+    #   your query definition. Query parameters are supported only for Logs
+    #   Insights QL queries. Query parameters allow you to use placeholder
+    #   variables in your query string that are substituted with values at
+    #   execution time. Use the `{{parameterName}}` syntax in your query
+    #   string to reference a parameter.
+    #
     # @return [Types::PutQueryDefinitionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::PutQueryDefinitionResponse#query_definition_id #query_definition_id} => String
@@ -7119,6 +7403,13 @@ module Aws::CloudWatchLogs
     #     log_group_names: ["LogGroupName"],
     #     query_string: "QueryDefinitionString", # required
     #     client_token: "ClientToken",
+    #     parameters: [
+    #       {
+    #         name: "QueryParameterName", # required
+    #         default_value: "QueryParameterDefaultValue",
+    #         description: "QueryParameterDescription",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -7527,6 +7818,7 @@ module Aws::CloudWatchLogs
     #           delimiter: "Delimiter",
     #           columns: ["Column"],
     #           source: "Source",
+    #           destination: "DestinationField",
     #         },
     #         date_time_converter: {
     #           source: "Source", # required
@@ -7687,9 +7979,13 @@ module Aws::CloudWatchLogs
     # * A [SessionTimeoutException][5] object is returned when the session
     #   times out, after it has been kept open for three hours.
     #
-    # <note markdown="1"> The `StartLiveTail` API routes requests to
-    # `streaming-logs.Region.amazonaws.com` using SDK host prefix injection.
-    # VPC endpoint support is not available for this API.
+    # <note markdown="1"> The `StartLiveTail` API routes requests using SDK host prefix
+    # injection. SDK versions released before April 1, 2026 route to
+    # `streaming-logs.Region.amazonaws.com`, which does not support VPC
+    # endpoints. SDK versions released on or after April 1, 2026 route to
+    # `stream-logs.Region.amazonaws.com`, which supports VPC endpoints. To
+    # set up a VPC endpoint for this API, see [Creating a VPC endpoint for
+    # CloudWatch Logs ][6].
     #
     #  </note>
     #
@@ -7699,7 +7995,7 @@ module Aws::CloudWatchLogs
     # the server breaks.
     #
     # For examples of using an SDK to start a Live Tail session, see [ Start
-    # a Live Tail session using an Amazon Web Services SDK][6].
+    # a Live Tail session using an Amazon Web Services SDK][7].
     #
     #
     #
@@ -7708,7 +8004,8 @@ module Aws::CloudWatchLogs
     # [3]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_LiveTailSessionUpdate.html
     # [4]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_StartLiveTailResponseStream.html#CWL-Type-StartLiveTailResponseStream-SessionStreamingException
     # [5]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_StartLiveTailResponseStream.html#CWL-Type-StartLiveTailResponseStream-SessionTimeoutException
-    # [6]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/example_cloudwatch-logs_StartLiveTail_section.html
+    # [6]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/cloudwatch-logs-and-interface-VPC.html#create-VPC-endpoint-for-CloudWatchLogs
+    # [7]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/example_cloudwatch-logs_StartLiveTail_section.html
     #
     # @option params [required, Array<String>] :log_group_identifiers
     #   An array where each item in the array is a log group to include in the
@@ -7998,7 +8295,7 @@ module Aws::CloudWatchLogs
     # observability][5]. For a cross-account `StartQuery` operation, the
     # query definition must be defined in the monitoring account.
     #
-    # You can have up to 30 concurrent CloudWatch Logs insights queries,
+    # You can have up to 100 concurrent CloudWatch Logs insights queries,
     # including queries that have been added to dashboards.
     #
     #
@@ -8346,6 +8643,7 @@ module Aws::CloudWatchLogs
     #           delimiter: "Delimiter",
     #           columns: ["Column"],
     #           source: "Source",
+    #           destination: "DestinationField",
     #         },
     #         date_time_converter: {
     #           source: "Source", # required
@@ -8738,6 +9036,58 @@ module Aws::CloudWatchLogs
       req.send_request(options)
     end
 
+    # Updates an existing lookup table by replacing all of its CSV content.
+    # After the update completes, queries that use this table will use the
+    # new data.
+    #
+    # This is a full replacement operation. All existing content is replaced
+    # with the new CSV data.
+    #
+    # @option params [required, String] :lookup_table_arn
+    #   The ARN of the lookup table to update.
+    #
+    # @option params [String] :description
+    #   An updated description of the lookup table.
+    #
+    # @option params [required, String] :table_body
+    #   The new CSV content to replace the existing data. The first row must
+    #   be a header row with column names. The content must use UTF-8 encoding
+    #   and not exceed 10 MB.
+    #
+    # @option params [String] :kms_key_id
+    #   The ARN of the KMS key to use to encrypt the lookup table data. You
+    #   can use this parameter to add, update, or remove the KMS key. To
+    #   remove the KMS key and use an Amazon Web Services-owned key instead,
+    #   specify an empty string.
+    #
+    # @return [Types::UpdateLookupTableResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateLookupTableResponse#lookup_table_arn #lookup_table_arn} => String
+    #   * {Types::UpdateLookupTableResponse#last_updated_time #last_updated_time} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_lookup_table({
+    #     lookup_table_arn: "Arn", # required
+    #     description: "LookupTableDescription",
+    #     table_body: "TableBody", # required
+    #     kms_key_id: "KmsKeyId",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.lookup_table_arn #=> String
+    #   resp.last_updated_time #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/UpdateLookupTable AWS API Documentation
+    #
+    # @overload update_lookup_table(params = {})
+    # @param [Hash] params ({})
+    def update_lookup_table(params = {}, options = {})
+      req = build_request(:update_lookup_table, params)
+      req.send_request(options)
+    end
+
     # Updates an existing scheduled query with new configuration. This
     # operation uses PUT semantics, allowing modification of query
     # parameters, schedule, and destinations.
@@ -8820,6 +9170,8 @@ module Aws::CloudWatchLogs
     #       s3_configuration: { # required
     #         destination_identifier: "S3Uri", # required
     #         role_arn: "RoleArn", # required
+    #         owner_account_id: "AccountId",
+    #         kms_key_id: "KmsKeyId",
     #       },
     #     },
     #     schedule_start_time: 1,
@@ -8842,6 +9194,8 @@ module Aws::CloudWatchLogs
     #   resp.start_time_offset #=> Integer
     #   resp.destination_configuration.s3_configuration.destination_identifier #=> String
     #   resp.destination_configuration.s3_configuration.role_arn #=> String
+    #   resp.destination_configuration.s3_configuration.owner_account_id #=> String
+    #   resp.destination_configuration.s3_configuration.kms_key_id #=> String
     #   resp.state #=> String, one of "ENABLED", "DISABLED"
     #   resp.last_triggered_time #=> Integer
     #   resp.last_execution_status #=> String, one of "Running", "InvalidQuery", "Complete", "Failed", "Timeout"
@@ -8878,7 +9232,7 @@ module Aws::CloudWatchLogs
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-cloudwatchlogs'
-      context[:gem_version] = '1.138.0'
+      context[:gem_version] = '1.145.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

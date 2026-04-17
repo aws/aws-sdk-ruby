@@ -60,6 +60,9 @@ module Aws::MailManager
     ArchivedMessageId = Shapes::StringShape.new(name: 'ArchivedMessageId')
     ArchivesList = Shapes::ListShape.new(name: 'ArchivesList')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
+    BounceAction = Shapes::StructureShape.new(name: 'BounceAction')
+    BounceMessage = Shapes::StringShape.new(name: 'BounceMessage')
+    CAContent = Shapes::StringShape.new(name: 'CAContent')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     CreateAddonInstanceRequest = Shapes::StructureShape.new(name: 'CreateAddonInstanceRequest')
     CreateAddonInstanceResponse = Shapes::StructureShape.new(name: 'CreateAddonInstanceResponse')
@@ -79,6 +82,7 @@ module Aws::MailManager
     CreateRuleSetResponse = Shapes::StructureShape.new(name: 'CreateRuleSetResponse')
     CreateTrafficPolicyRequest = Shapes::StructureShape.new(name: 'CreateTrafficPolicyRequest')
     CreateTrafficPolicyResponse = Shapes::StructureShape.new(name: 'CreateTrafficPolicyResponse')
+    CrlContent = Shapes::StringShape.new(name: 'CrlContent')
     DeleteAddonInstanceRequest = Shapes::StructureShape.new(name: 'DeleteAddonInstanceRequest')
     DeleteAddonInstanceResponse = Shapes::StructureShape.new(name: 'DeleteAddonInstanceResponse')
     DeleteAddonSubscriptionRequest = Shapes::StructureShape.new(name: 'DeleteAddonSubscriptionRequest')
@@ -99,6 +103,7 @@ module Aws::MailManager
     DeliverToQBusinessAction = Shapes::StructureShape.new(name: 'DeliverToQBusinessAction')
     DeregisterMemberFromAddressListRequest = Shapes::StructureShape.new(name: 'DeregisterMemberFromAddressListRequest')
     DeregisterMemberFromAddressListResponse = Shapes::StructureShape.new(name: 'DeregisterMemberFromAddressListResponse')
+    DiagnosticMessage = Shapes::StringShape.new(name: 'DiagnosticMessage')
     Double = Shapes::FloatShape.new(name: 'Double')
     DropAction = Shapes::StructureShape.new(name: 'DropAction')
     EmailAddress = Shapes::StringShape.new(name: 'EmailAddress')
@@ -188,6 +193,7 @@ module Aws::MailManager
     IngressTlsProtocolOperator = Shapes::StringShape.new(name: 'IngressTlsProtocolOperator')
     IngressTlsProtocolToEvaluate = Shapes::UnionShape.new(name: 'IngressTlsProtocolToEvaluate')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
+    InvokeLambdaAction = Shapes::StructureShape.new(name: 'InvokeLambdaAction')
     IpType = Shapes::StringShape.new(name: 'IpType')
     Ipv4Cidr = Shapes::StringShape.new(name: 'Ipv4Cidr')
     Ipv4Cidrs = Shapes::ListShape.new(name: 'Ipv4Cidrs')
@@ -198,6 +204,9 @@ module Aws::MailManager
     JobName = Shapes::StringShape.new(name: 'JobName')
     KmsKeyArn = Shapes::StringShape.new(name: 'KmsKeyArn')
     KmsKeyId = Shapes::StringShape.new(name: 'KmsKeyId')
+    LambdaFunctionArn = Shapes::StringShape.new(name: 'LambdaFunctionArn')
+    LambdaInvocationType = Shapes::StringShape.new(name: 'LambdaInvocationType')
+    LambdaRetryTimeMinutes = Shapes::IntegerShape.new(name: 'LambdaRetryTimeMinutes')
     ListAddonInstancesRequest = Shapes::StructureShape.new(name: 'ListAddonInstancesRequest')
     ListAddonInstancesResponse = Shapes::StructureShape.new(name: 'ListAddonInstancesResponse')
     ListAddonSubscriptionsRequest = Shapes::StructureShape.new(name: 'ListAddonSubscriptionsRequest')
@@ -270,6 +279,7 @@ module Aws::MailManager
     RuleBooleanExpression = Shapes::StructureShape.new(name: 'RuleBooleanExpression')
     RuleBooleanOperator = Shapes::StringShape.new(name: 'RuleBooleanOperator')
     RuleBooleanToEvaluate = Shapes::UnionShape.new(name: 'RuleBooleanToEvaluate')
+    RuleClientCertificateAttribute = Shapes::StringShape.new(name: 'RuleClientCertificateAttribute')
     RuleCondition = Shapes::UnionShape.new(name: 'RuleCondition')
     RuleConditions = Shapes::ListShape.new(name: 'RuleConditions')
     RuleDmarcExpression = Shapes::StructureShape.new(name: 'RuleDmarcExpression')
@@ -325,6 +335,7 @@ module Aws::MailManager
     SenderIpAddress = Shapes::StringShape.new(name: 'SenderIpAddress')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     SmtpPassword = Shapes::StringShape.new(name: 'SmtpPassword')
+    SmtpReplyCode = Shapes::StringShape.new(name: 'SmtpReplyCode')
     SnsAction = Shapes::StructureShape.new(name: 'SnsAction')
     SnsNotificationEncoding = Shapes::StringShape.new(name: 'SnsNotificationEncoding')
     SnsNotificationPayloadType = Shapes::StringShape.new(name: 'SnsNotificationPayloadType')
@@ -335,6 +346,7 @@ module Aws::MailManager
     StartArchiveExportResponse = Shapes::StructureShape.new(name: 'StartArchiveExportResponse')
     StartArchiveSearchRequest = Shapes::StructureShape.new(name: 'StartArchiveSearchRequest')
     StartArchiveSearchResponse = Shapes::StructureShape.new(name: 'StartArchiveSearchResponse')
+    StatusCode = Shapes::StringShape.new(name: 'StatusCode')
     StopAddressListImportJobRequest = Shapes::StructureShape.new(name: 'StopAddressListImportJobRequest')
     StopAddressListImportJobResponse = Shapes::StructureShape.new(name: 'StopAddressListImportJobResponse')
     StopArchiveExportRequest = Shapes::StructureShape.new(name: 'StopArchiveExportRequest')
@@ -355,11 +367,15 @@ module Aws::MailManager
     TaggableResourceArn = Shapes::StringShape.new(name: 'TaggableResourceArn')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
+    TlsAuthConfiguration = Shapes::StructureShape.new(name: 'TlsAuthConfiguration')
+    TlsPolicy = Shapes::StringShape.new(name: 'TlsPolicy')
     TrafficPolicy = Shapes::StructureShape.new(name: 'TrafficPolicy')
     TrafficPolicyArn = Shapes::StringShape.new(name: 'TrafficPolicyArn')
     TrafficPolicyId = Shapes::StringShape.new(name: 'TrafficPolicyId')
     TrafficPolicyList = Shapes::ListShape.new(name: 'TrafficPolicyList')
     TrafficPolicyName = Shapes::StringShape.new(name: 'TrafficPolicyName')
+    TrustStore = Shapes::StructureShape.new(name: 'TrustStore')
+    TrustStoreResponseOption = Shapes::StringShape.new(name: 'TrustStoreResponseOption')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     UpdateArchiveRequest = Shapes::StructureShape.new(name: 'UpdateArchiveRequest')
@@ -468,6 +484,15 @@ module Aws::MailManager
 
     ArchivesList.member = Shapes::ShapeRef.new(shape: Archive)
 
+    BounceAction.add_member(:action_failure_policy, Shapes::ShapeRef.new(shape: ActionFailurePolicy, location_name: "ActionFailurePolicy"))
+    BounceAction.add_member(:role_arn, Shapes::ShapeRef.new(shape: IamRoleArn, required: true, location_name: "RoleArn"))
+    BounceAction.add_member(:sender, Shapes::ShapeRef.new(shape: EmailAddress, required: true, location_name: "Sender"))
+    BounceAction.add_member(:status_code, Shapes::ShapeRef.new(shape: StatusCode, required: true, location_name: "StatusCode"))
+    BounceAction.add_member(:smtp_reply_code, Shapes::ShapeRef.new(shape: SmtpReplyCode, required: true, location_name: "SmtpReplyCode"))
+    BounceAction.add_member(:diagnostic_message, Shapes::ShapeRef.new(shape: DiagnosticMessage, required: true, location_name: "DiagnosticMessage"))
+    BounceAction.add_member(:message, Shapes::ShapeRef.new(shape: BounceMessage, location_name: "Message"))
+    BounceAction.struct_class = Types::BounceAction
+
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     ConflictException.struct_class = Types::ConflictException
 
@@ -522,6 +547,7 @@ module Aws::MailManager
     CreateIngressPointRequest.add_member(:traffic_policy_id, Shapes::ShapeRef.new(shape: TrafficPolicyId, required: true, location_name: "TrafficPolicyId"))
     CreateIngressPointRequest.add_member(:ingress_point_configuration, Shapes::ShapeRef.new(shape: IngressPointConfiguration, location_name: "IngressPointConfiguration"))
     CreateIngressPointRequest.add_member(:network_configuration, Shapes::ShapeRef.new(shape: NetworkConfiguration, location_name: "NetworkConfiguration"))
+    CreateIngressPointRequest.add_member(:tls_policy, Shapes::ShapeRef.new(shape: TlsPolicy, location_name: "TlsPolicy"))
     CreateIngressPointRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateIngressPointRequest.struct_class = Types::CreateIngressPointRequest
 
@@ -744,6 +770,7 @@ module Aws::MailManager
     GetArchiveSearchResultsResponse.struct_class = Types::GetArchiveSearchResultsResponse
 
     GetIngressPointRequest.add_member(:ingress_point_id, Shapes::ShapeRef.new(shape: IngressPointId, required: true, location_name: "IngressPointId"))
+    GetIngressPointRequest.add_member(:include_trust_store_contents, Shapes::ShapeRef.new(shape: TrustStoreResponseOption, location_name: "IncludeTrustStoreContents"))
     GetIngressPointRequest.struct_class = Types::GetIngressPointRequest
 
     GetIngressPointResponse.add_member(:ingress_point_id, Shapes::ShapeRef.new(shape: IngressPointId, required: true, location_name: "IngressPointId"))
@@ -756,6 +783,7 @@ module Aws::MailManager
     GetIngressPointResponse.add_member(:traffic_policy_id, Shapes::ShapeRef.new(shape: TrafficPolicyId, location_name: "TrafficPolicyId"))
     GetIngressPointResponse.add_member(:ingress_point_auth_configuration, Shapes::ShapeRef.new(shape: IngressPointAuthConfiguration, location_name: "IngressPointAuthConfiguration"))
     GetIngressPointResponse.add_member(:network_configuration, Shapes::ShapeRef.new(shape: NetworkConfiguration, location_name: "NetworkConfiguration"))
+    GetIngressPointResponse.add_member(:tls_policy, Shapes::ShapeRef.new(shape: TlsPolicy, location_name: "TlsPolicy"))
     GetIngressPointResponse.add_member(:created_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedTimestamp"))
     GetIngressPointResponse.add_member(:last_updated_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastUpdatedTimestamp"))
     GetIngressPointResponse.struct_class = Types::GetIngressPointResponse
@@ -877,13 +905,16 @@ module Aws::MailManager
 
     IngressPointAuthConfiguration.add_member(:ingress_point_password_configuration, Shapes::ShapeRef.new(shape: IngressPointPasswordConfiguration, location_name: "IngressPointPasswordConfiguration"))
     IngressPointAuthConfiguration.add_member(:secret_arn, Shapes::ShapeRef.new(shape: SecretArn, location_name: "SecretArn"))
+    IngressPointAuthConfiguration.add_member(:tls_auth_configuration, Shapes::ShapeRef.new(shape: TlsAuthConfiguration, location_name: "TlsAuthConfiguration"))
     IngressPointAuthConfiguration.struct_class = Types::IngressPointAuthConfiguration
 
     IngressPointConfiguration.add_member(:smtp_password, Shapes::ShapeRef.new(shape: SmtpPassword, location_name: "SmtpPassword"))
     IngressPointConfiguration.add_member(:secret_arn, Shapes::ShapeRef.new(shape: SecretArn, location_name: "SecretArn"))
+    IngressPointConfiguration.add_member(:tls_auth_configuration, Shapes::ShapeRef.new(shape: TlsAuthConfiguration, location_name: "TlsAuthConfiguration"))
     IngressPointConfiguration.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     IngressPointConfiguration.add_member_subclass(:smtp_password, Types::IngressPointConfiguration::SmtpPassword)
     IngressPointConfiguration.add_member_subclass(:secret_arn, Types::IngressPointConfiguration::SecretArn)
+    IngressPointConfiguration.add_member_subclass(:tls_auth_configuration, Types::IngressPointConfiguration::TlsAuthConfiguration)
     IngressPointConfiguration.add_member_subclass(:unknown, Types::IngressPointConfiguration::Unknown)
     IngressPointConfiguration.struct_class = Types::IngressPointConfiguration
 
@@ -917,6 +948,13 @@ module Aws::MailManager
     IngressTlsProtocolToEvaluate.add_member_subclass(:attribute, Types::IngressTlsProtocolToEvaluate::Attribute)
     IngressTlsProtocolToEvaluate.add_member_subclass(:unknown, Types::IngressTlsProtocolToEvaluate::Unknown)
     IngressTlsProtocolToEvaluate.struct_class = Types::IngressTlsProtocolToEvaluate
+
+    InvokeLambdaAction.add_member(:action_failure_policy, Shapes::ShapeRef.new(shape: ActionFailurePolicy, location_name: "ActionFailurePolicy"))
+    InvokeLambdaAction.add_member(:function_arn, Shapes::ShapeRef.new(shape: LambdaFunctionArn, required: true, location_name: "FunctionArn"))
+    InvokeLambdaAction.add_member(:invocation_type, Shapes::ShapeRef.new(shape: LambdaInvocationType, required: true, location_name: "InvocationType"))
+    InvokeLambdaAction.add_member(:role_arn, Shapes::ShapeRef.new(shape: IamRoleArn, required: true, location_name: "RoleArn"))
+    InvokeLambdaAction.add_member(:retry_time_minutes, Shapes::ShapeRef.new(shape: LambdaRetryTimeMinutes, location_name: "RetryTimeMinutes"))
+    InvokeLambdaAction.struct_class = Types::InvokeLambdaAction
 
     Ipv4Cidrs.member = Shapes::ShapeRef.new(shape: Ipv4Cidr)
 
@@ -1160,6 +1198,8 @@ module Aws::MailManager
     RuleAction.add_member(:deliver_to_mailbox, Shapes::ShapeRef.new(shape: DeliverToMailboxAction, location_name: "DeliverToMailbox"))
     RuleAction.add_member(:deliver_to_q_business, Shapes::ShapeRef.new(shape: DeliverToQBusinessAction, location_name: "DeliverToQBusiness"))
     RuleAction.add_member(:publish_to_sns, Shapes::ShapeRef.new(shape: SnsAction, location_name: "PublishToSns"))
+    RuleAction.add_member(:bounce, Shapes::ShapeRef.new(shape: BounceAction, location_name: "Bounce"))
+    RuleAction.add_member(:invoke_lambda, Shapes::ShapeRef.new(shape: InvokeLambdaAction, location_name: "InvokeLambda"))
     RuleAction.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     RuleAction.add_member_subclass(:drop, Types::RuleAction::Drop)
     RuleAction.add_member_subclass(:relay, Types::RuleAction::Relay)
@@ -1171,6 +1211,8 @@ module Aws::MailManager
     RuleAction.add_member_subclass(:deliver_to_mailbox, Types::RuleAction::DeliverToMailbox)
     RuleAction.add_member_subclass(:deliver_to_q_business, Types::RuleAction::DeliverToQBusiness)
     RuleAction.add_member_subclass(:publish_to_sns, Types::RuleAction::PublishToSns)
+    RuleAction.add_member_subclass(:bounce, Types::RuleAction::Bounce)
+    RuleAction.add_member_subclass(:invoke_lambda, Types::RuleAction::InvokeLambda)
     RuleAction.add_member_subclass(:unknown, Types::RuleAction::Unknown)
     RuleAction.struct_class = Types::RuleAction
 
@@ -1261,10 +1303,12 @@ module Aws::MailManager
     RuleStringToEvaluate.add_member(:attribute, Shapes::ShapeRef.new(shape: RuleStringEmailAttribute, location_name: "Attribute"))
     RuleStringToEvaluate.add_member(:mime_header_attribute, Shapes::ShapeRef.new(shape: MimeHeaderAttribute, location_name: "MimeHeaderAttribute"))
     RuleStringToEvaluate.add_member(:analysis, Shapes::ShapeRef.new(shape: Analysis, location_name: "Analysis"))
+    RuleStringToEvaluate.add_member(:client_certificate_attribute, Shapes::ShapeRef.new(shape: RuleClientCertificateAttribute, location_name: "ClientCertificateAttribute"))
     RuleStringToEvaluate.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     RuleStringToEvaluate.add_member_subclass(:attribute, Types::RuleStringToEvaluate::Attribute)
     RuleStringToEvaluate.add_member_subclass(:mime_header_attribute, Types::RuleStringToEvaluate::MimeHeaderAttribute)
     RuleStringToEvaluate.add_member_subclass(:analysis, Types::RuleStringToEvaluate::Analysis)
+    RuleStringToEvaluate.add_member_subclass(:client_certificate_attribute, Types::RuleStringToEvaluate::ClientCertificateAttribute)
     RuleStringToEvaluate.add_member_subclass(:unknown, Types::RuleStringToEvaluate::Unknown)
     RuleStringToEvaluate.struct_class = Types::RuleStringToEvaluate
 
@@ -1390,12 +1434,20 @@ module Aws::MailManager
     ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     ThrottlingException.struct_class = Types::ThrottlingException
 
+    TlsAuthConfiguration.add_member(:trust_store, Shapes::ShapeRef.new(shape: TrustStore, location_name: "TrustStore"))
+    TlsAuthConfiguration.struct_class = Types::TlsAuthConfiguration
+
     TrafficPolicy.add_member(:traffic_policy_name, Shapes::ShapeRef.new(shape: TrafficPolicyName, required: true, location_name: "TrafficPolicyName"))
     TrafficPolicy.add_member(:traffic_policy_id, Shapes::ShapeRef.new(shape: TrafficPolicyId, required: true, location_name: "TrafficPolicyId"))
     TrafficPolicy.add_member(:default_action, Shapes::ShapeRef.new(shape: AcceptAction, required: true, location_name: "DefaultAction"))
     TrafficPolicy.struct_class = Types::TrafficPolicy
 
     TrafficPolicyList.member = Shapes::ShapeRef.new(shape: TrafficPolicy)
+
+    TrustStore.add_member(:ca_content, Shapes::ShapeRef.new(shape: CAContent, required: true, location_name: "CAContent"))
+    TrustStore.add_member(:crl_content, Shapes::ShapeRef.new(shape: CrlContent, location_name: "CrlContent"))
+    TrustStore.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "KmsKeyArn"))
+    TrustStore.struct_class = Types::TrustStore
 
     UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: TaggableResourceArn, required: true, location_name: "ResourceArn"))
     UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location_name: "TagKeys"))
@@ -1416,6 +1468,7 @@ module Aws::MailManager
     UpdateIngressPointRequest.add_member(:rule_set_id, Shapes::ShapeRef.new(shape: RuleSetId, location_name: "RuleSetId"))
     UpdateIngressPointRequest.add_member(:traffic_policy_id, Shapes::ShapeRef.new(shape: TrafficPolicyId, location_name: "TrafficPolicyId"))
     UpdateIngressPointRequest.add_member(:ingress_point_configuration, Shapes::ShapeRef.new(shape: IngressPointConfiguration, location_name: "IngressPointConfiguration"))
+    UpdateIngressPointRequest.add_member(:tls_policy, Shapes::ShapeRef.new(shape: TlsPolicy, location_name: "TlsPolicy"))
     UpdateIngressPointRequest.struct_class = Types::UpdateIngressPointRequest
 
     UpdateIngressPointResponse.struct_class = Types::UpdateIngressPointResponse
@@ -1490,6 +1543,7 @@ module Aws::MailManager
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:create_address_list, Seahorse::Model::Operation.new.tap do |o|
@@ -1600,6 +1654,7 @@ module Aws::MailManager
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DeleteAddressListRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteAddressListResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
@@ -1668,6 +1723,7 @@ module Aws::MailManager
         o.output = Shapes::ShapeRef.new(shape: DeregisterMemberFromAddressListResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
@@ -2051,6 +2107,7 @@ module Aws::MailManager
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)

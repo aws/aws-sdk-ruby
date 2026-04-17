@@ -1164,6 +1164,7 @@ module Aws::Glue
     OrphanFileDeletionMetrics = Shapes::StructureShape.new(name: 'OrphanFileDeletionMetrics')
     OtherMetadataValueList = Shapes::ListShape.new(name: 'OtherMetadataValueList')
     OtherMetadataValueListItem = Shapes::StructureShape.new(name: 'OtherMetadataValueListItem')
+    OverwriteChildResourcePermissionsWithDefaultEnum = Shapes::StringShape.new(name: 'OverwriteChildResourcePermissionsWithDefaultEnum')
     PIIDetection = Shapes::StructureShape.new(name: 'PIIDetection')
     PageSize = Shapes::IntegerShape.new(name: 'PageSize')
     PaginationConfiguration = Shapes::StructureShape.new(name: 'PaginationConfiguration')
@@ -1966,6 +1967,8 @@ module Aws::Glue
     BatchGetPartitionRequest.add_member(:database_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "DatabaseName"))
     BatchGetPartitionRequest.add_member(:table_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "TableName"))
     BatchGetPartitionRequest.add_member(:partitions_to_get, Shapes::ShapeRef.new(shape: BatchGetPartitionValueList, required: true, location_name: "PartitionsToGet"))
+    BatchGetPartitionRequest.add_member(:audit_context, Shapes::ShapeRef.new(shape: AuditContext, location_name: "AuditContext"))
+    BatchGetPartitionRequest.add_member(:query_session_context, Shapes::ShapeRef.new(shape: QuerySessionContext, location_name: "QuerySessionContext"))
     BatchGetPartitionRequest.struct_class = Types::BatchGetPartitionRequest
 
     BatchGetPartitionResponse.add_member(:partitions, Shapes::ShapeRef.new(shape: PartitionList, location_name: "Partitions"))
@@ -2204,6 +2207,7 @@ module Aws::Glue
     CatalogInput.add_member(:create_table_default_permissions, Shapes::ShapeRef.new(shape: PrincipalPermissionsList, location_name: "CreateTableDefaultPermissions"))
     CatalogInput.add_member(:create_database_default_permissions, Shapes::ShapeRef.new(shape: PrincipalPermissionsList, location_name: "CreateDatabaseDefaultPermissions"))
     CatalogInput.add_member(:allow_full_table_external_data_access, Shapes::ShapeRef.new(shape: AllowFullTableExternalDataAccessEnum, location_name: "AllowFullTableExternalDataAccess"))
+    CatalogInput.add_member(:overwrite_child_resource_permissions_with_default, Shapes::ShapeRef.new(shape: OverwriteChildResourcePermissionsWithDefaultEnum, location_name: "OverwriteChildResourcePermissionsWithDefault"))
     CatalogInput.struct_class = Types::CatalogInput
 
     CatalogKafkaSource.add_member(:name, Shapes::ShapeRef.new(shape: NodeName, required: true, location_name: "Name"))

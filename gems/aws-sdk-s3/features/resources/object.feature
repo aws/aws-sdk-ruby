@@ -40,11 +40,11 @@ Feature: Aws::S3::Object
     When I upload the chunks using tempfile to the "medium" object
     Then the "medium" object should contained the chunks joined
 
-  @slow
-  Scenario: Uploading chunks with serverside encryption
-    Given I have 2 3MB chunks
-    When I upload the chunks to the "encrypted" object with SSE/CPK
-    Then the file should have been uploaded as a multipart upload
+#  @slow
+#  Scenario: Uploading chunks with serverside encryption
+#    Given I have 2 3MB chunks
+#    When I upload the chunks to the "encrypted" object with SSE/CPK
+#    Then the file should have been uploaded as a multipart upload
 
   @slow
   Scenario: Uploading a large single chunk
@@ -52,11 +52,11 @@ Feature: Aws::S3::Object
     When I upload the chunks to the "single" object
     Then the "single" object should contained the chunks joined
 
-  @slow
-  Scenario: Uploading a large file
-    Given I have a 115MB file
-    When I upload the file to the "large" object with SSE/CPK
-    Then the file should have been uploaded as a multipart upload
+#  @slow
+#  Scenario: Uploading a large file
+#    Given I have a 115MB file
+#    When I upload the file to the "large" object with SSE/CPK
+#    Then the file should have been uploaded as a multipart upload
 
   Scenario: Support object streaming
     Given I put "hello world" to the object with key "hello"

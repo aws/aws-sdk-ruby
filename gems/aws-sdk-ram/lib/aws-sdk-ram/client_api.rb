@@ -127,6 +127,7 @@ module Aws::RAM
     ResourceShareAssociationList = Shapes::ListShape.new(name: 'ResourceShareAssociationList')
     ResourceShareAssociationStatus = Shapes::StringShape.new(name: 'ResourceShareAssociationStatus')
     ResourceShareAssociationType = Shapes::StringShape.new(name: 'ResourceShareAssociationType')
+    ResourceShareConfiguration = Shapes::StructureShape.new(name: 'ResourceShareConfiguration')
     ResourceShareFeatureSet = Shapes::StringShape.new(name: 'ResourceShareFeatureSet')
     ResourceShareInvitation = Shapes::StructureShape.new(name: 'ResourceShareInvitation')
     ResourceShareInvitationAlreadyAcceptedException = Shapes::StructureShape.new(name: 'ResourceShareInvitationAlreadyAcceptedException')
@@ -252,6 +253,7 @@ module Aws::RAM
     CreateResourceShareRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken"))
     CreateResourceShareRequest.add_member(:permission_arns, Shapes::ShapeRef.new(shape: PermissionArnList, location_name: "permissionArns"))
     CreateResourceShareRequest.add_member(:sources, Shapes::ShapeRef.new(shape: SourceArnOrAccountList, location_name: "sources"))
+    CreateResourceShareRequest.add_member(:resource_share_configuration, Shapes::ShapeRef.new(shape: ResourceShareConfiguration, location_name: "resourceShareConfiguration"))
     CreateResourceShareRequest.struct_class = Types::CreateResourceShareRequest
 
     CreateResourceShareResponse.add_member(:resource_share, Shapes::ShapeRef.new(shape: ResourceShare, location_name: "resourceShare"))
@@ -611,6 +613,7 @@ module Aws::RAM
     ResourceShare.add_member(:creation_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "creationTime"))
     ResourceShare.add_member(:last_updated_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "lastUpdatedTime"))
     ResourceShare.add_member(:feature_set, Shapes::ShapeRef.new(shape: ResourceShareFeatureSet, location_name: "featureSet"))
+    ResourceShare.add_member(:resource_share_configuration, Shapes::ShapeRef.new(shape: ResourceShareConfiguration, location_name: "resourceShareConfiguration"))
     ResourceShare.struct_class = Types::ResourceShare
 
     ResourceShareArnList.member = Shapes::ShapeRef.new(shape: String)
@@ -627,6 +630,9 @@ module Aws::RAM
     ResourceShareAssociation.struct_class = Types::ResourceShareAssociation
 
     ResourceShareAssociationList.member = Shapes::ShapeRef.new(shape: ResourceShareAssociation)
+
+    ResourceShareConfiguration.add_member(:retain_sharing_on_account_leave_organization, Shapes::ShapeRef.new(shape: Boolean, location_name: "retainSharingOnAccountLeaveOrganization"))
+    ResourceShareConfiguration.struct_class = Types::ResourceShareConfiguration
 
     ResourceShareInvitation.add_member(:resource_share_invitation_arn, Shapes::ShapeRef.new(shape: String, location_name: "resourceShareInvitationArn"))
     ResourceShareInvitation.add_member(:resource_share_name, Shapes::ShapeRef.new(shape: String, location_name: "resourceShareName"))

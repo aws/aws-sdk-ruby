@@ -774,6 +774,10 @@ module Aws::DataExchange
 
     # This operation creates a job.
     #
+    # @option params [Types::AssetConfiguration] :asset_configuration
+    #   The configuration for the asset, including tags to be applied to
+    #   assets created by the job.
+    #
     # @option params [required, Types::RequestDetails] :details
     #   The details for the CreateJob request.
     #
@@ -783,6 +787,7 @@ module Aws::DataExchange
     # @return [Types::CreateJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateJobResponse#arn #arn} => String
+    #   * {Types::CreateJobResponse#asset_configuration #asset_configuration} => Types::AssetConfiguration
     #   * {Types::CreateJobResponse#created_at #created_at} => Time
     #   * {Types::CreateJobResponse#details #details} => Types::ResponseDetails
     #   * {Types::CreateJobResponse#errors #errors} => Array&lt;Types::JobError&gt;
@@ -794,6 +799,14 @@ module Aws::DataExchange
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_job({
+    #     asset_configuration: {
+    #       tags: [
+    #         {
+    #           key: "__string", # required
+    #           value: "__string", # required
+    #         },
+    #       ],
+    #     },
     #     details: { # required
     #       export_asset_to_signed_url: {
     #         asset_id: "Id", # required
@@ -910,6 +923,9 @@ module Aws::DataExchange
     # @example Response structure
     #
     #   resp.arn #=> String
+    #   resp.asset_configuration.tags #=> Array
+    #   resp.asset_configuration.tags[0].key #=> String
+    #   resp.asset_configuration.tags[0].value #=> String
     #   resp.created_at #=> Time
     #   resp.details.export_asset_to_signed_url.asset_id #=> String
     #   resp.details.export_asset_to_signed_url.data_set_id #=> String
@@ -1217,6 +1233,7 @@ module Aws::DataExchange
     #   * {Types::GetAssetResponse#name #name} => String
     #   * {Types::GetAssetResponse#revision_id #revision_id} => String
     #   * {Types::GetAssetResponse#source_id #source_id} => String
+    #   * {Types::GetAssetResponse#tags #tags} => Hash&lt;String,String&gt;
     #   * {Types::GetAssetResponse#updated_at #updated_at} => Time
     #
     # @example Request syntax with placeholder values
@@ -1271,6 +1288,8 @@ module Aws::DataExchange
     #   resp.name #=> String
     #   resp.revision_id #=> String
     #   resp.source_id #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["__string"] #=> String
     #   resp.updated_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/GetAsset AWS API Documentation
@@ -1441,6 +1460,7 @@ module Aws::DataExchange
     # @return [Types::GetJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetJobResponse#arn #arn} => String
+    #   * {Types::GetJobResponse#asset_configuration #asset_configuration} => Types::AssetConfiguration
     #   * {Types::GetJobResponse#created_at #created_at} => Time
     #   * {Types::GetJobResponse#details #details} => Types::ResponseDetails
     #   * {Types::GetJobResponse#errors #errors} => Array&lt;Types::JobError&gt;
@@ -1458,6 +1478,9 @@ module Aws::DataExchange
     # @example Response structure
     #
     #   resp.arn #=> String
+    #   resp.asset_configuration.tags #=> Array
+    #   resp.asset_configuration.tags[0].key #=> String
+    #   resp.asset_configuration.tags[0].value #=> String
     #   resp.created_at #=> Time
     #   resp.details.export_asset_to_signed_url.asset_id #=> String
     #   resp.details.export_asset_to_signed_url.data_set_id #=> String
@@ -1906,6 +1929,9 @@ module Aws::DataExchange
     #
     #   resp.jobs #=> Array
     #   resp.jobs[0].arn #=> String
+    #   resp.jobs[0].asset_configuration.tags #=> Array
+    #   resp.jobs[0].asset_configuration.tags[0].key #=> String
+    #   resp.jobs[0].asset_configuration.tags[0].value #=> String
     #   resp.jobs[0].created_at #=> Time
     #   resp.jobs[0].details.export_asset_to_signed_url.asset_id #=> String
     #   resp.jobs[0].details.export_asset_to_signed_url.data_set_id #=> String
@@ -2760,7 +2786,7 @@ module Aws::DataExchange
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-dataexchange'
-      context[:gem_version] = '1.80.0'
+      context[:gem_version] = '1.82.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

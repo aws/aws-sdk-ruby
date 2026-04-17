@@ -104,6 +104,17 @@ module Aws::SageMakerRuntime
     #   The Amazon S3 URI where the inference request payload is stored.
     #   @return [String]
     #
+    # @!attribute [rw] s3_output_path_extension
+    #   The path extension that is appended to the Amazon S3 output path
+    #   where the inference response payload is stored.
+    #   @return [String]
+    #
+    # @!attribute [rw] filename
+    #   The filename for the inference response payload stored in Amazon S3.
+    #   If not specified, Amazon SageMaker AI generates a filename based on
+    #   the inference ID.
+    #   @return [String]
+    #
     # @!attribute [rw] request_ttl_seconds
     #   Maximum age in seconds a request can be in the queue before it is
     #   marked as expired. The default is 6 hours, or 21,600 seconds.
@@ -123,6 +134,8 @@ module Aws::SageMakerRuntime
       :custom_attributes,
       :inference_id,
       :input_location,
+      :s3_output_path_extension,
+      :filename,
       :request_ttl_seconds,
       :invocation_timeout_seconds)
       SENSITIVE = [:custom_attributes]

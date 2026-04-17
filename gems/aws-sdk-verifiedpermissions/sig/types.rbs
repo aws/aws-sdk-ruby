@@ -58,7 +58,7 @@ module Aws::VerifiedPermissions
     end
 
     class BatchGetPolicyErrorItem
-      attr_accessor code: ("POLICY_STORE_NOT_FOUND" | "POLICY_NOT_FOUND")
+      attr_accessor code: ("POLICY_STORE_NOT_FOUND" | "POLICY_NOT_FOUND" | "POLICY_STORE_ALIAS_NOT_FOUND")
       attr_accessor policy_store_id: ::String
       attr_accessor policy_id: ::String
       attr_accessor message: ::String
@@ -89,6 +89,7 @@ module Aws::VerifiedPermissions
       attr_accessor definition: Types::PolicyDefinitionDetail
       attr_accessor created_date: ::Time
       attr_accessor last_updated_date: ::Time
+      attr_accessor name: ::String
       SENSITIVE: []
     end
 
@@ -308,6 +309,7 @@ module Aws::VerifiedPermissions
       attr_accessor client_token: ::String
       attr_accessor policy_store_id: ::String
       attr_accessor definition: Types::PolicyDefinition
+      attr_accessor name: ::String
       SENSITIVE: []
     end
 
@@ -321,6 +323,20 @@ module Aws::VerifiedPermissions
       attr_accessor created_date: ::Time
       attr_accessor last_updated_date: ::Time
       attr_accessor effect: ("Permit" | "Forbid")
+      SENSITIVE: []
+    end
+
+    class CreatePolicyStoreAliasInput
+      attr_accessor alias_name: ::String
+      attr_accessor policy_store_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreatePolicyStoreAliasOutput
+      attr_accessor alias_name: ::String
+      attr_accessor policy_store_id: ::String
+      attr_accessor alias_arn: ::String
+      attr_accessor created_at: ::Time
       SENSITIVE: []
     end
 
@@ -347,6 +363,7 @@ module Aws::VerifiedPermissions
       attr_accessor policy_store_id: ::String
       attr_accessor description: ::String
       attr_accessor statement: ::String
+      attr_accessor name: ::String
       SENSITIVE: [:description, :statement]
     end
 
@@ -374,6 +391,14 @@ module Aws::VerifiedPermissions
     end
 
     class DeletePolicyOutput < Aws::EmptyStructure
+    end
+
+    class DeletePolicyStoreAliasInput
+      attr_accessor alias_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeletePolicyStoreAliasOutput < Aws::EmptyStructure
     end
 
     class DeletePolicyStoreInput
@@ -507,6 +532,21 @@ module Aws::VerifiedPermissions
       attr_accessor created_date: ::Time
       attr_accessor last_updated_date: ::Time
       attr_accessor effect: ("Permit" | "Forbid")
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class GetPolicyStoreAliasInput
+      attr_accessor alias_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetPolicyStoreAliasOutput
+      attr_accessor alias_name: ::String
+      attr_accessor policy_store_id: ::String
+      attr_accessor alias_arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor state: ("Active" | "PendingDeletion")
       SENSITIVE: []
     end
 
@@ -543,6 +583,7 @@ module Aws::VerifiedPermissions
       attr_accessor statement: ::String
       attr_accessor created_date: ::Time
       attr_accessor last_updated_date: ::Time
+      attr_accessor name: ::String
       SENSITIVE: [:description, :statement]
     end
 
@@ -675,6 +716,19 @@ module Aws::VerifiedPermissions
     class ListPoliciesOutput
       attr_accessor next_token: ::String
       attr_accessor policies: ::Array[Types::PolicyItem]
+      SENSITIVE: []
+    end
+
+    class ListPolicyStoreAliasesInput
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor filter: Types::PolicyStoreAliasFilter
+      SENSITIVE: []
+    end
+
+    class ListPolicyStoreAliasesOutput
+      attr_accessor next_token: ::String
+      attr_accessor policy_store_aliases: ::Array[Types::PolicyStoreAliasItem]
       SENSITIVE: []
     end
 
@@ -894,6 +948,21 @@ module Aws::VerifiedPermissions
       attr_accessor created_date: ::Time
       attr_accessor last_updated_date: ::Time
       attr_accessor effect: ("Permit" | "Forbid")
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class PolicyStoreAliasFilter
+      attr_accessor policy_store_id: ::String
+      SENSITIVE: []
+    end
+
+    class PolicyStoreAliasItem
+      attr_accessor alias_name: ::String
+      attr_accessor policy_store_id: ::String
+      attr_accessor alias_arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor state: ("Active" | "PendingDeletion")
       SENSITIVE: []
     end
 
@@ -912,6 +981,7 @@ module Aws::VerifiedPermissions
       attr_accessor description: ::String
       attr_accessor created_date: ::Time
       attr_accessor last_updated_date: ::Time
+      attr_accessor name: ::String
       SENSITIVE: [:description]
     end
 
@@ -931,14 +1001,14 @@ module Aws::VerifiedPermissions
 
     class ResourceConflict
       attr_accessor resource_id: ::String
-      attr_accessor resource_type: ("IDENTITY_SOURCE" | "POLICY_STORE" | "POLICY" | "POLICY_TEMPLATE" | "SCHEMA")
+      attr_accessor resource_type: ("IDENTITY_SOURCE" | "POLICY_STORE" | "POLICY" | "POLICY_TEMPLATE" | "SCHEMA" | "POLICY_STORE_ALIAS")
       SENSITIVE: []
     end
 
     class ResourceNotFoundException
       attr_accessor message: ::String
       attr_accessor resource_id: ::String
-      attr_accessor resource_type: ("IDENTITY_SOURCE" | "POLICY_STORE" | "POLICY" | "POLICY_TEMPLATE" | "SCHEMA")
+      attr_accessor resource_type: ("IDENTITY_SOURCE" | "POLICY_STORE" | "POLICY" | "POLICY_TEMPLATE" | "SCHEMA" | "POLICY_STORE_ALIAS")
       SENSITIVE: []
     end
 
@@ -956,7 +1026,7 @@ module Aws::VerifiedPermissions
     class ServiceQuotaExceededException
       attr_accessor message: ::String
       attr_accessor resource_id: ::String
-      attr_accessor resource_type: ("IDENTITY_SOURCE" | "POLICY_STORE" | "POLICY" | "POLICY_TEMPLATE" | "SCHEMA")
+      attr_accessor resource_type: ("IDENTITY_SOURCE" | "POLICY_STORE" | "POLICY" | "POLICY_TEMPLATE" | "SCHEMA" | "POLICY_STORE_ALIAS")
       attr_accessor service_code: ::String
       attr_accessor quota_code: ::String
       SENSITIVE: []
@@ -1131,6 +1201,7 @@ module Aws::VerifiedPermissions
       attr_accessor policy_store_id: ::String
       attr_accessor policy_id: ::String
       attr_accessor definition: Types::UpdatePolicyDefinition
+      attr_accessor name: ::String
       SENSITIVE: []
     end
 
@@ -1168,6 +1239,7 @@ module Aws::VerifiedPermissions
       attr_accessor policy_template_id: ::String
       attr_accessor description: ::String
       attr_accessor statement: ::String
+      attr_accessor name: ::String
       SENSITIVE: [:description, :statement]
     end
 

@@ -8,6 +8,9 @@
 module Aws::OpenSearchService
   module Types
 
+    class AIConfig < Aws::EmptyStructure
+    end
+
     class AIMLOptionsInput
       attr_accessor natural_language_query_generation_options: Types::NaturalLanguageQueryGenerationOptionsInput
       attr_accessor s3_vectors_engine: Types::S3VectorsEngine
@@ -72,6 +75,7 @@ module Aws::OpenSearchService
       attr_accessor data_source_type: Types::DirectQueryDataSourceType
       attr_accessor description: ::String
       attr_accessor open_search_arns: ::Array[::String]
+      attr_accessor data_source_access_policy: ::String
       attr_accessor tag_list: ::Array[Types::Tag]
       SENSITIVE: []
     end
@@ -287,6 +291,45 @@ module Aws::OpenSearchService
       SENSITIVE: []
     end
 
+    class CapabilityBaseRequestConfig
+      attr_accessor ai_config: Types::AIConfig
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class AiConfig < CapabilityBaseRequestConfig
+      end
+      class Unknown < CapabilityBaseRequestConfig
+      end
+    end
+
+    class CapabilityBaseResponseConfig
+      attr_accessor ai_config: Types::AIConfig
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class AiConfig < CapabilityBaseResponseConfig
+      end
+      class Unknown < CapabilityBaseResponseConfig
+      end
+    end
+
+    class CapabilityExtendedResponseConfig
+      attr_accessor ai_config: Types::AIConfig
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class AiConfig < CapabilityExtendedResponseConfig
+      end
+      class Unknown < CapabilityExtendedResponseConfig
+      end
+    end
+
+    class CapabilityFailure
+      attr_accessor reason: ("KMS_KEY_INSUFFICIENT_PERMISSION")
+      attr_accessor details: ::String
+      SENSITIVE: []
+    end
+
     class ChangeProgressDetails
       attr_accessor change_id: ::String
       attr_accessor message: ::String
@@ -427,6 +470,7 @@ module Aws::OpenSearchService
       attr_accessor off_peak_window_options: Types::OffPeakWindowOptions
       attr_accessor software_update_options: Types::SoftwareUpdateOptions
       attr_accessor aiml_options: Types::AIMLOptionsInput
+      attr_accessor deployment_strategy_options: Types::DeploymentStrategyOptions
       SENSITIVE: []
     end
 
@@ -504,6 +548,7 @@ module Aws::OpenSearchService
     class DataSource
       attr_accessor data_source_arn: ::String
       attr_accessor data_source_description: ::String
+      attr_accessor iam_role_for_data_source_arn: ::String
       SENSITIVE: []
     end
 
@@ -612,6 +657,28 @@ module Aws::OpenSearchService
     end
 
     class DependencyFailureException < Aws::EmptyStructure
+    end
+
+    class DeploymentStrategyOptions
+      attr_accessor deployment_strategy: ("Default" | "CapacityOptimized")
+      SENSITIVE: []
+    end
+
+    class DeploymentStrategyOptionsStatus
+      attr_accessor options: Types::DeploymentStrategyOptions
+      attr_accessor status: Types::OptionStatus
+      SENSITIVE: []
+    end
+
+    class DeregisterCapabilityRequest
+      attr_accessor application_id: ::String
+      attr_accessor capability_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeregisterCapabilityResponse
+      attr_accessor status: ("creating" | "create_failed" | "active" | "updating" | "update_failed" | "deleting" | "delete_failed")
+      SENSITIVE: []
     end
 
     class DescribeDomainAutoTunesRequest
@@ -727,6 +794,18 @@ module Aws::OpenSearchService
       SENSITIVE: []
     end
 
+    class DescribeInsightDetailsRequest
+      attr_accessor entity: Types::InsightEntity
+      attr_accessor insight_id: ::String
+      attr_accessor show_html_content: bool
+      SENSITIVE: []
+    end
+
+    class DescribeInsightDetailsResponse
+      attr_accessor fields: ::Array[Types::InsightField]
+      SENSITIVE: []
+    end
+
     class DescribeInstanceTypeLimitsRequest
       attr_accessor domain_name: ::String
       attr_accessor instance_type: ("m3.medium.search" | "m3.large.search" | "m3.xlarge.search" | "m3.2xlarge.search" | "m4.large.search" | "m4.xlarge.search" | "m4.2xlarge.search" | "m4.4xlarge.search" | "m4.10xlarge.search" | "m5.large.search" | "m5.xlarge.search" | "m5.2xlarge.search" | "m5.4xlarge.search" | "m5.12xlarge.search" | "m5.24xlarge.search" | "r5.large.search" | "r5.xlarge.search" | "r5.2xlarge.search" | "r5.4xlarge.search" | "r5.12xlarge.search" | "r5.24xlarge.search" | "c5.large.search" | "c5.xlarge.search" | "c5.2xlarge.search" | "c5.4xlarge.search" | "c5.9xlarge.search" | "c5.18xlarge.search" | "t3.nano.search" | "t3.micro.search" | "t3.small.search" | "t3.medium.search" | "t3.large.search" | "t3.xlarge.search" | "t3.2xlarge.search" | "or1.medium.search" | "or1.large.search" | "or1.xlarge.search" | "or1.2xlarge.search" | "or1.4xlarge.search" | "or1.8xlarge.search" | "or1.12xlarge.search" | "or1.16xlarge.search" | "ultrawarm1.medium.search" | "ultrawarm1.large.search" | "ultrawarm1.xlarge.search" | "t2.micro.search" | "t2.small.search" | "t2.medium.search" | "r3.large.search" | "r3.xlarge.search" | "r3.2xlarge.search" | "r3.4xlarge.search" | "r3.8xlarge.search" | "i2.xlarge.search" | "i2.2xlarge.search" | "d2.xlarge.search" | "d2.2xlarge.search" | "d2.4xlarge.search" | "d2.8xlarge.search" | "c4.large.search" | "c4.xlarge.search" | "c4.2xlarge.search" | "c4.4xlarge.search" | "c4.8xlarge.search" | "r4.large.search" | "r4.xlarge.search" | "r4.2xlarge.search" | "r4.4xlarge.search" | "r4.8xlarge.search" | "r4.16xlarge.search" | "i3.large.search" | "i3.xlarge.search" | "i3.2xlarge.search" | "i3.4xlarge.search" | "i3.8xlarge.search" | "i3.16xlarge.search" | "r6g.large.search" | "r6g.xlarge.search" | "r6g.2xlarge.search" | "r6g.4xlarge.search" | "r6g.8xlarge.search" | "r6g.12xlarge.search" | "m6g.large.search" | "m6g.xlarge.search" | "m6g.2xlarge.search" | "m6g.4xlarge.search" | "m6g.8xlarge.search" | "m6g.12xlarge.search" | "c6g.large.search" | "c6g.xlarge.search" | "c6g.2xlarge.search" | "c6g.4xlarge.search" | "c6g.8xlarge.search" | "c6g.12xlarge.search" | "r6gd.large.search" | "r6gd.xlarge.search" | "r6gd.2xlarge.search" | "r6gd.4xlarge.search" | "r6gd.8xlarge.search" | "r6gd.12xlarge.search" | "r6gd.16xlarge.search" | "t4g.small.search" | "t4g.medium.search")
@@ -821,12 +900,15 @@ module Aws::OpenSearchService
     class DirectQueryDataSourceType
       attr_accessor cloud_watch_log: Types::CloudWatchDirectQueryDataSource
       attr_accessor security_lake: Types::SecurityLakeDirectQueryDataSource
+      attr_accessor prometheus: Types::PrometheusDirectQueryDataSource
       attr_accessor unknown: untyped
       SENSITIVE: []
 
       class CloudWatchLog < DirectQueryDataSourceType
       end
       class SecurityLake < DirectQueryDataSourceType
+      end
+      class Prometheus < DirectQueryDataSourceType
       end
       class Unknown < DirectQueryDataSourceType
       end
@@ -879,12 +961,13 @@ module Aws::OpenSearchService
       attr_accessor software_update_options: Types::SoftwareUpdateOptionsStatus
       attr_accessor modifying_properties: ::Array[Types::ModifyingProperties]
       attr_accessor aiml_options: Types::AIMLOptionsStatus
+      attr_accessor deployment_strategy_options: Types::DeploymentStrategyOptionsStatus
       SENSITIVE: []
     end
 
     class DomainEndpointOptions
       attr_accessor enforce_https: bool
-      attr_accessor tls_security_policy: ("Policy-Min-TLS-1-0-2019-07" | "Policy-Min-TLS-1-2-2019-07" | "Policy-Min-TLS-1-2-PFS-2023-10")
+      attr_accessor tls_security_policy: ("Policy-Min-TLS-1-0-2019-07" | "Policy-Min-TLS-1-2-2019-07" | "Policy-Min-TLS-1-2-PFS-2023-10" | "Policy-Min-TLS-1-2-RFC9151-FIPS-2024-08")
       attr_accessor custom_endpoint_enabled: bool
       attr_accessor custom_endpoint: ::String
       attr_accessor custom_endpoint_certificate_arn: ::String
@@ -982,6 +1065,7 @@ module Aws::OpenSearchService
       attr_accessor domain_processing_status: ("Creating" | "Active" | "Modifying" | "UpgradingEngineVersion" | "UpdatingServiceSoftware" | "Isolated" | "Deleting")
       attr_accessor modifying_properties: ::Array[Types::ModifyingProperties]
       attr_accessor aiml_options: Types::AIMLOptionsOutput
+      attr_accessor deployment_strategy_options: Types::DeploymentStrategyOptions
       SENSITIVE: []
     end
 
@@ -1070,6 +1154,21 @@ module Aws::OpenSearchService
       SENSITIVE: []
     end
 
+    class GetCapabilityRequest
+      attr_accessor application_id: ::String
+      attr_accessor capability_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetCapabilityResponse
+      attr_accessor capability_name: ::String
+      attr_accessor application_id: ::String
+      attr_accessor status: ("creating" | "create_failed" | "active" | "updating" | "update_failed" | "deleting" | "delete_failed")
+      attr_accessor capability_config: Types::CapabilityExtendedResponseConfig
+      attr_accessor failures: ::Array[Types::CapabilityFailure]
+      SENSITIVE: []
+    end
+
     class GetCompatibleVersionsRequest
       attr_accessor domain_name: ::String
       SENSITIVE: []
@@ -1112,6 +1211,7 @@ module Aws::OpenSearchService
       attr_accessor data_source_type: Types::DirectQueryDataSourceType
       attr_accessor description: ::String
       attr_accessor open_search_arns: ::Array[::String]
+      attr_accessor data_source_access_policy: ::String
       attr_accessor data_source_arn: ::String
       SENSITIVE: []
     end
@@ -1256,6 +1356,37 @@ module Aws::OpenSearchService
       SENSITIVE: []
     end
 
+    class Insight
+      attr_accessor insight_id: ::String
+      attr_accessor display_name: ::String
+      attr_accessor type: ("EVENT" | "RECOMMENDATION")
+      attr_accessor priority: ("CRITICAL" | "HIGH" | "MEDIUM" | "LOW")
+      attr_accessor status: ("ACTIVE" | "RESOLVED" | "DISMISSED")
+      attr_accessor creation_time: ::Time
+      attr_accessor update_time: ::Time
+      attr_accessor is_experimental: bool
+      SENSITIVE: []
+    end
+
+    class InsightEntity
+      attr_accessor type: ("Account" | "DomainName")
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class InsightField
+      attr_accessor name: ::String
+      attr_accessor type: ("text" | "metric")
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class InsightTimeRange
+      attr_accessor from: ::Integer
+      attr_accessor to: ::Integer
+      SENSITIVE: []
+    end
+
     class InstanceCountLimits
       attr_accessor minimum_instance_count: ::Integer
       attr_accessor maximum_instance_count: ::Integer
@@ -1388,6 +1519,21 @@ module Aws::OpenSearchService
 
     class ListDomainsForPackageResponse
       attr_accessor domain_package_details_list: ::Array[Types::DomainPackageDetails]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListInsightsRequest
+      attr_accessor entity: Types::InsightEntity
+      attr_accessor time_range: Types::InsightTimeRange
+      attr_accessor sort_order: ("ASC" | "DESC")
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListInsightsResponse
+      attr_accessor insights: ::Array[Types::Insight]
       attr_accessor next_token: ::String
       SENSITIVE: []
     end
@@ -1671,6 +1817,12 @@ module Aws::OpenSearchService
       SENSITIVE: []
     end
 
+    class PrometheusDirectQueryDataSource
+      attr_accessor role_arn: ::String
+      attr_accessor workspace_arn: ::String
+      SENSITIVE: []
+    end
+
     class PurchaseReservedInstanceOfferingRequest
       attr_accessor reserved_instance_offering_id: ::String
       attr_accessor reservation_name: ::String
@@ -1698,6 +1850,21 @@ module Aws::OpenSearchService
     class RecurringCharge
       attr_accessor recurring_charge_amount: ::Float
       attr_accessor recurring_charge_frequency: ::String
+      SENSITIVE: []
+    end
+
+    class RegisterCapabilityRequest
+      attr_accessor application_id: ::String
+      attr_accessor capability_name: ::String
+      attr_accessor capability_config: Types::CapabilityBaseRequestConfig
+      SENSITIVE: []
+    end
+
+    class RegisterCapabilityResponse
+      attr_accessor capability_name: ::String
+      attr_accessor application_id: ::String
+      attr_accessor status: ("creating" | "create_failed" | "active" | "updating" | "update_failed" | "deleting" | "delete_failed")
+      attr_accessor capability_config: Types::CapabilityBaseResponseConfig
       SENSITIVE: []
     end
 
@@ -1830,6 +1997,9 @@ module Aws::OpenSearchService
       SENSITIVE: []
     end
 
+    class ServiceQuotaExceededException < Aws::EmptyStructure
+    end
+
     class ServiceSoftwareOptions
       attr_accessor current_version: ::String
       attr_accessor new_version: ::String
@@ -1953,6 +2123,7 @@ module Aws::OpenSearchService
       attr_accessor data_source_type: Types::DirectQueryDataSourceType
       attr_accessor description: ::String
       attr_accessor open_search_arns: ::Array[::String]
+      attr_accessor data_source_access_policy: ::String
       SENSITIVE: []
     end
 
@@ -1983,6 +2154,7 @@ module Aws::OpenSearchService
       attr_accessor off_peak_window_options: Types::OffPeakWindowOptions
       attr_accessor software_update_options: Types::SoftwareUpdateOptions
       attr_accessor aiml_options: Types::AIMLOptionsInput
+      attr_accessor deployment_strategy_options: Types::DeploymentStrategyOptions
       SENSITIVE: []
     end
 

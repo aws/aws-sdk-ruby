@@ -156,6 +156,18 @@ module Aws
         def type: () -> ::String
         def message: () -> ::String
       end
+      class S3FilesMountConnectivityException < ::Aws::Errors::ServiceError
+        def type: () -> ::String
+        def message: () -> ::String
+      end
+      class S3FilesMountFailureException < ::Aws::Errors::ServiceError
+        def type: () -> ::String
+        def message: () -> ::String
+      end
+      class S3FilesMountTimeoutException < ::Aws::Errors::ServiceError
+        def type: () -> ::String
+        def message: () -> ::String
+      end
       class SerializedRequestEntityTooLargeException < ::Aws::Errors::ServiceError
         def type: () -> ::String
         def message: () -> ::String

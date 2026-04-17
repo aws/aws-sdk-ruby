@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.125.0 (2026-04-08)
+------------------
+
+* Feature - Add UnableToListUpstreamImageReferrersException in ListImageReferrers
+
+1.124.0 (2026-03-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.123.0 (2026-03-12)
+------------------
+
+* Feature - Add Chainguard to PTC upstreamRegistry enum
+
+1.122.0 (2026-02-25)
+------------------
+
+* Feature - Update repository name regex to comply with OCI Distribution Specification
+
+1.121.0 (2026-02-19)
+------------------
+
+* Feature - Adds multiple artifact types filter support in ListImageReferrers API.
+
 1.120.0 (2026-02-16)
 ------------------
 

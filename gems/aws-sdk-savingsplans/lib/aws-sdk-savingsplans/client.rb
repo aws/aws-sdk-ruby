@@ -599,9 +599,9 @@ module Aws::SavingsPlans
     #   resp.search_results #=> Array
     #   resp.search_results[0].rate #=> String
     #   resp.search_results[0].currency #=> String, one of "CNY", "USD", "EUR"
-    #   resp.search_results[0].unit #=> String, one of "Hrs", "Lambda-GB-Second", "Request", "ACU-Hr", "ReadRequestUnits", "WriteRequestUnits", "ReadCapacityUnit-Hrs", "WriteCapacityUnit-Hrs", "ReplicatedWriteRequestUnits", "ReplicatedWriteCapacityUnit-Hrs", "GB-Hours", "DPU", "ElastiCacheProcessingUnit", "DCU-Hr", "NCU-hr"
-    #   resp.search_results[0].product_type #=> String, one of "EC2", "Fargate", "Lambda", "SageMaker", "RDS", "DSQL", "DynamoDB", "ElastiCache", "DocDB", "Neptune", "Timestream", "Keyspaces", "DMS"
-    #   resp.search_results[0].service_code #=> String, one of "AmazonEC2", "AmazonECS", "AmazonEKS", "AWSLambda", "AmazonSageMaker", "AmazonRDS", "AuroraDSQL", "AmazonDynamoDB", "AmazonElastiCache", "AmazonDocDB", "AmazonNeptune", "AmazonTimestream", "AmazonMCS", "AWSDatabaseMigrationSvc"
+    #   resp.search_results[0].unit #=> String, one of "Hrs", "Lambda-GB-Second", "Request", "ACU-Hr", "ReadRequestUnits", "WriteRequestUnits", "ReadCapacityUnit-Hrs", "WriteCapacityUnit-Hrs", "ReplicatedWriteRequestUnits", "ReplicatedWriteCapacityUnit-Hrs", "GB-Hours", "DPU", "ElastiCacheProcessingUnit", "DCU-Hr", "NCU-hr", "OCU-hours", "Jobs"
+    #   resp.search_results[0].product_type #=> String, one of "EC2", "Fargate", "Lambda", "SageMaker", "RDS", "DSQL", "DynamoDB", "ElastiCache", "DocDB", "Neptune", "Timestream", "Keyspaces", "DMS", "OpenSearch"
+    #   resp.search_results[0].service_code #=> String, one of "AmazonEC2", "AmazonECS", "AmazonEKS", "AWSLambda", "AmazonSageMaker", "AmazonRDS", "AuroraDSQL", "AmazonDynamoDB", "AmazonElastiCache", "AmazonDocDB", "AmazonNeptune", "AmazonTimestream", "AmazonMCS", "AWSDatabaseMigrationSvc", "AmazonES"
     #   resp.search_results[0].usage_type #=> String
     #   resp.search_results[0].operation #=> String
     #   resp.search_results[0].properties #=> Array
@@ -676,7 +676,7 @@ module Aws::SavingsPlans
     #   resp.savings_plans[0].savings_plan_type #=> String, one of "Compute", "EC2Instance", "SageMaker", "Database"
     #   resp.savings_plans[0].payment_option #=> String, one of "All Upfront", "Partial Upfront", "No Upfront"
     #   resp.savings_plans[0].product_types #=> Array
-    #   resp.savings_plans[0].product_types[0] #=> String, one of "EC2", "Fargate", "Lambda", "SageMaker", "RDS", "DSQL", "DynamoDB", "ElastiCache", "DocDB", "Neptune", "Timestream", "Keyspaces", "DMS"
+    #   resp.savings_plans[0].product_types[0] #=> String, one of "EC2", "Fargate", "Lambda", "SageMaker", "RDS", "DSQL", "DynamoDB", "ElastiCache", "DocDB", "Neptune", "Timestream", "Keyspaces", "DMS", "OpenSearch"
     #   resp.savings_plans[0].currency #=> String, one of "CNY", "USD", "EUR"
     #   resp.savings_plans[0].commitment #=> String
     #   resp.savings_plans[0].upfront_payment_amount #=> String
@@ -743,8 +743,8 @@ module Aws::SavingsPlans
     #     savings_plan_offering_ids: ["UUID"],
     #     savings_plan_payment_options: ["All Upfront"], # accepts All Upfront, Partial Upfront, No Upfront
     #     savings_plan_types: ["Compute"], # accepts Compute, EC2Instance, SageMaker, Database
-    #     products: ["EC2"], # accepts EC2, Fargate, Lambda, SageMaker, RDS, DSQL, DynamoDB, ElastiCache, DocDB, Neptune, Timestream, Keyspaces, DMS
-    #     service_codes: ["AmazonEC2"], # accepts AmazonEC2, AmazonECS, AmazonEKS, AWSLambda, AmazonSageMaker, AmazonRDS, AuroraDSQL, AmazonDynamoDB, AmazonElastiCache, AmazonDocDB, AmazonNeptune, AmazonTimestream, AmazonMCS, AWSDatabaseMigrationSvc
+    #     products: ["EC2"], # accepts EC2, Fargate, Lambda, SageMaker, RDS, DSQL, DynamoDB, ElastiCache, DocDB, Neptune, Timestream, Keyspaces, DMS, OpenSearch
+    #     service_codes: ["AmazonEC2"], # accepts AmazonEC2, AmazonECS, AmazonEKS, AWSLambda, AmazonSageMaker, AmazonRDS, AuroraDSQL, AmazonDynamoDB, AmazonElastiCache, AmazonDocDB, AmazonNeptune, AmazonTimestream, AmazonMCS, AWSDatabaseMigrationSvc, AmazonES
     #     usage_types: ["SavingsPlanRateUsageType"],
     #     operations: ["SavingsPlanRateOperation"],
     #     filters: [
@@ -767,9 +767,9 @@ module Aws::SavingsPlans
     #   resp.search_results[0].savings_plan_offering.currency #=> String, one of "CNY", "USD", "EUR"
     #   resp.search_results[0].savings_plan_offering.plan_description #=> String
     #   resp.search_results[0].rate #=> String
-    #   resp.search_results[0].unit #=> String, one of "Hrs", "Lambda-GB-Second", "Request", "ACU-Hr", "ReadRequestUnits", "WriteRequestUnits", "ReadCapacityUnit-Hrs", "WriteCapacityUnit-Hrs", "ReplicatedWriteRequestUnits", "ReplicatedWriteCapacityUnit-Hrs", "GB-Hours", "DPU", "ElastiCacheProcessingUnit", "DCU-Hr", "NCU-hr"
-    #   resp.search_results[0].product_type #=> String, one of "EC2", "Fargate", "Lambda", "SageMaker", "RDS", "DSQL", "DynamoDB", "ElastiCache", "DocDB", "Neptune", "Timestream", "Keyspaces", "DMS"
-    #   resp.search_results[0].service_code #=> String, one of "AmazonEC2", "AmazonECS", "AmazonEKS", "AWSLambda", "AmazonSageMaker", "AmazonRDS", "AuroraDSQL", "AmazonDynamoDB", "AmazonElastiCache", "AmazonDocDB", "AmazonNeptune", "AmazonTimestream", "AmazonMCS", "AWSDatabaseMigrationSvc"
+    #   resp.search_results[0].unit #=> String, one of "Hrs", "Lambda-GB-Second", "Request", "ACU-Hr", "ReadRequestUnits", "WriteRequestUnits", "ReadCapacityUnit-Hrs", "WriteCapacityUnit-Hrs", "ReplicatedWriteRequestUnits", "ReplicatedWriteCapacityUnit-Hrs", "GB-Hours", "DPU", "ElastiCacheProcessingUnit", "DCU-Hr", "NCU-hr", "OCU-hours", "Jobs"
+    #   resp.search_results[0].product_type #=> String, one of "EC2", "Fargate", "Lambda", "SageMaker", "RDS", "DSQL", "DynamoDB", "ElastiCache", "DocDB", "Neptune", "Timestream", "Keyspaces", "DMS", "OpenSearch"
+    #   resp.search_results[0].service_code #=> String, one of "AmazonEC2", "AmazonECS", "AmazonEKS", "AWSLambda", "AmazonSageMaker", "AmazonRDS", "AuroraDSQL", "AmazonDynamoDB", "AmazonElastiCache", "AmazonDocDB", "AmazonNeptune", "AmazonTimestream", "AmazonMCS", "AWSDatabaseMigrationSvc", "AmazonES"
     #   resp.search_results[0].usage_type #=> String
     #   resp.search_results[0].operation #=> String
     #   resp.search_results[0].properties #=> Array
@@ -840,7 +840,7 @@ module Aws::SavingsPlans
     #   resp = client.describe_savings_plans_offerings({
     #     offering_ids: ["UUID"],
     #     payment_options: ["All Upfront"], # accepts All Upfront, Partial Upfront, No Upfront
-    #     product_type: "EC2", # accepts EC2, Fargate, Lambda, SageMaker, RDS, DSQL, DynamoDB, ElastiCache, DocDB, Neptune, Timestream, Keyspaces, DMS
+    #     product_type: "EC2", # accepts EC2, Fargate, Lambda, SageMaker, RDS, DSQL, DynamoDB, ElastiCache, DocDB, Neptune, Timestream, Keyspaces, DMS, OpenSearch
     #     plan_types: ["Compute"], # accepts Compute, EC2Instance, SageMaker, Database
     #     durations: [1],
     #     currencies: ["CNY"], # accepts CNY, USD, EUR
@@ -863,7 +863,7 @@ module Aws::SavingsPlans
     #   resp.search_results #=> Array
     #   resp.search_results[0].offering_id #=> String
     #   resp.search_results[0].product_types #=> Array
-    #   resp.search_results[0].product_types[0] #=> String, one of "EC2", "Fargate", "Lambda", "SageMaker", "RDS", "DSQL", "DynamoDB", "ElastiCache", "DocDB", "Neptune", "Timestream", "Keyspaces", "DMS"
+    #   resp.search_results[0].product_types[0] #=> String, one of "EC2", "Fargate", "Lambda", "SageMaker", "RDS", "DSQL", "DynamoDB", "ElastiCache", "DocDB", "Neptune", "Timestream", "Keyspaces", "DMS", "OpenSearch"
     #   resp.search_results[0].plan_type #=> String, one of "Compute", "EC2Instance", "SageMaker", "Database"
     #   resp.search_results[0].description #=> String
     #   resp.search_results[0].payment_option #=> String, one of "All Upfront", "Partial Upfront", "No Upfront"
@@ -1024,7 +1024,7 @@ module Aws::SavingsPlans
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-savingsplans'
-      context[:gem_version] = '1.73.0'
+      context[:gem_version] = '1.75.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -958,7 +958,7 @@ module Aws::GeoPlaces
       api.add_operation(:autocomplete, Seahorse::Model::Operation.new.tap do |o|
         o.name = "Autocomplete"
         o.http_method = "POST"
-        o.http_request_uri = "/autocomplete"
+        o.http_request_uri = "/v2/autocomplete"
         o.input = Shapes::ShapeRef.new(shape: AutocompleteRequest)
         o.output = Shapes::ShapeRef.new(shape: AutocompleteResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
@@ -970,7 +970,7 @@ module Aws::GeoPlaces
       api.add_operation(:geocode, Seahorse::Model::Operation.new.tap do |o|
         o.name = "Geocode"
         o.http_method = "POST"
-        o.http_request_uri = "/geocode"
+        o.http_request_uri = "/v2/geocode"
         o.input = Shapes::ShapeRef.new(shape: GeocodeRequest)
         o.output = Shapes::ShapeRef.new(shape: GeocodeResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
@@ -982,7 +982,7 @@ module Aws::GeoPlaces
       api.add_operation(:get_place, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetPlace"
         o.http_method = "GET"
-        o.http_request_uri = "/place/{PlaceId}"
+        o.http_request_uri = "/v2/place/{PlaceId}"
         o.input = Shapes::ShapeRef.new(shape: GetPlaceRequest)
         o.output = Shapes::ShapeRef.new(shape: GetPlaceResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
@@ -994,7 +994,7 @@ module Aws::GeoPlaces
       api.add_operation(:reverse_geocode, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ReverseGeocode"
         o.http_method = "POST"
-        o.http_request_uri = "/reverse-geocode"
+        o.http_request_uri = "/v2/reverse-geocode"
         o.input = Shapes::ShapeRef.new(shape: ReverseGeocodeRequest)
         o.output = Shapes::ShapeRef.new(shape: ReverseGeocodeResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
@@ -1006,7 +1006,7 @@ module Aws::GeoPlaces
       api.add_operation(:search_nearby, Seahorse::Model::Operation.new.tap do |o|
         o.name = "SearchNearby"
         o.http_method = "POST"
-        o.http_request_uri = "/search-nearby"
+        o.http_request_uri = "/v2/search-nearby"
         o.input = Shapes::ShapeRef.new(shape: SearchNearbyRequest)
         o.output = Shapes::ShapeRef.new(shape: SearchNearbyResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
@@ -1018,7 +1018,7 @@ module Aws::GeoPlaces
       api.add_operation(:search_text, Seahorse::Model::Operation.new.tap do |o|
         o.name = "SearchText"
         o.http_method = "POST"
-        o.http_request_uri = "/search-text"
+        o.http_request_uri = "/v2/search-text"
         o.input = Shapes::ShapeRef.new(shape: SearchTextRequest)
         o.output = Shapes::ShapeRef.new(shape: SearchTextResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
@@ -1030,7 +1030,7 @@ module Aws::GeoPlaces
       api.add_operation(:suggest, Seahorse::Model::Operation.new.tap do |o|
         o.name = "Suggest"
         o.http_method = "POST"
-        o.http_request_uri = "/suggest"
+        o.http_request_uri = "/v2/suggest"
         o.input = Shapes::ShapeRef.new(shape: SuggestRequest)
         o.output = Shapes::ShapeRef.new(shape: SuggestResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)

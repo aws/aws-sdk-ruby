@@ -103,10 +103,11 @@ module Aws
                                        ]?
                                      },
                                    ]?,
-                                   customer_aws_account_id: ::String?
+                                   customer_aws_account_id: ::String?,
+                                   license_arn: ::String?
                                  },
                                ],
-                               product_code: ::String
+                               ?product_code: ::String
                              ) -> _BatchMeterUsageResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchMeterUsageResponseSuccess
 
@@ -154,6 +155,7 @@ module Aws
         def customer_identifier: () -> ::String
         def product_code: () -> ::String
         def customer_aws_account_id: () -> ::String
+        def license_arn: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MarketplaceMetering/Client.html#resolve_customer-instance_method
       def resolve_customer: (

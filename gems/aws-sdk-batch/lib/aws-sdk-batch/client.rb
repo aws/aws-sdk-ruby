@@ -844,9 +844,13 @@ module Aws::Batch
     #         {
     #           image_type: "ImageType", # required
     #           image_id_override: "ImageIdOverride",
+    #           batch_image_status: "String",
     #           image_kubernetes_version: "KubernetesVersion",
     #         },
     #       ],
+    #       scaling_policy: {
+    #         min_scale_down_delay_minutes: 1,
+    #       },
     #     },
     #     service_role: "String",
     #     tags: {
@@ -1148,6 +1152,90 @@ module Aws::Batch
       req.send_request(options)
     end
 
+    # Creates an Batch quota share. Each quota share operates as a virtual
+    # queue with a configured compute capacity, resource sharing strategy,
+    # and borrow limits.
+    #
+    # @option params [required, String] :quota_share_name
+    #   The name of the quota share. It can be up to 128 characters long. It
+    #   can contain uppercase and lowercase letters, numbers, hyphens (-), and
+    #   underscores (\_).
+    #
+    # @option params [required, String] :job_queue
+    #   The Batch job queue associated with the quota share. This can be the
+    #   job queue name or ARN. A job queue must be in the `VALID` state before
+    #   you can associate it with a quota share.
+    #
+    # @option params [required, Array<Types::QuotaShareCapacityLimit>] :capacity_limits
+    #   A list that specifies the quantity and type of compute capacity
+    #   allocated to the quota share.
+    #
+    # @option params [required, Types::QuotaShareResourceSharingConfiguration] :resource_sharing_configuration
+    #   Specifies whether a quota share reserves, lends, or both lends and
+    #   borrows idle compute capacity.
+    #
+    # @option params [required, Types::QuotaSharePreemptionConfiguration] :preemption_configuration
+    #   Specifies the preemption behavior for jobs in a quota share.
+    #
+    # @option params [String] :state
+    #   The state of the quota share. If the quota share is `ENABLED`, it is
+    #   able to accept jobs. If the quota share is `DISABLED`, new jobs won't
+    #   be accepted but jobs already submitted can finish. The default state
+    #   is `ENABLED`.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   The tags that you apply to the quota share to help you categorize and
+    #   organize your resources. Each tag consists of a key and an optional
+    #   value. For more information, see [Tagging your Batch resources][1] in
+    #   *Batch User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/batch/latest/userguide/using-tags.html
+    #
+    # @return [Types::CreateQuotaShareResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateQuotaShareResponse#quota_share_name #quota_share_name} => String
+    #   * {Types::CreateQuotaShareResponse#quota_share_arn #quota_share_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_quota_share({
+    #     quota_share_name: "String", # required
+    #     job_queue: "String", # required
+    #     capacity_limits: [ # required
+    #       {
+    #         max_capacity: 1, # required
+    #         capacity_unit: "String", # required
+    #       },
+    #     ],
+    #     resource_sharing_configuration: { # required
+    #       strategy: "RESERVE", # required, accepts RESERVE, LEND, LEND_AND_BORROW
+    #       borrow_limit: 1,
+    #     },
+    #     preemption_configuration: { # required
+    #       in_share_preemption: "ENABLED", # required, accepts ENABLED, DISABLED
+    #     },
+    #     state: "ENABLED", # accepts ENABLED, DISABLED
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.quota_share_name #=> String
+    #   resp.quota_share_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/CreateQuotaShare AWS API Documentation
+    #
+    # @overload create_quota_share(params = {})
+    # @param [Hash] params ({})
+    def create_quota_share(params = {}, options = {})
+      req = build_request(:create_quota_share, params)
+      req.send_request(options)
+    end
+
     # Creates an Batch scheduling policy.
     #
     # @option params [required, String] :name
@@ -1155,8 +1243,15 @@ module Aws::Batch
     #   letters long. It can contain uppercase and lowercase letters, numbers,
     #   hyphens (-), and underscores (\_).
     #
+    # @option params [Types::QuotaSharePolicy] :quota_share_policy
+    #   The quota share scheduling policy details. Only one of fairsharePolicy
+    #   or quotaSharePolicy can be set. Once set, this policy type cannot be
+    #   removed or changed to a fairSharePolicy.
+    #
     # @option params [Types::FairsharePolicy] :fairshare_policy
-    #   The fair-share scheduling policy details.
+    #   The fair-share scheduling policy details. Only one of fairsharePolicy
+    #   or quotaSharePolicy can be set. Once set, this policy type cannot be
+    #   removed or changed to a quotaSharePolicy.
     #
     # @option params [Hash<String,String>] :tags
     #   The tags that you apply to the scheduling policy to help you
@@ -1182,6 +1277,9 @@ module Aws::Batch
     #
     #   resp = client.create_scheduling_policy({
     #     name: "String", # required
+    #     quota_share_policy: {
+    #       idle_resource_assignment_strategy: "FIFO", # required, accepts FIFO
+    #     },
     #     fairshare_policy: {
     #       share_decay_seconds: 1,
     #       compute_reservation: 1,
@@ -1360,8 +1458,7 @@ module Aws::Batch
 
     # Deletes the specified job queue. You must first disable submissions
     # for a queue with the UpdateJobQueue operation. All jobs in the queue
-    # are eventually terminated when you delete a job queue. The jobs are
-    # terminated at a rate of about 16 jobs each second.
+    # are eventually terminated when you delete a job queue.
     #
     # It's not necessary to disassociate compute environments from a queue
     # before submitting a `DeleteJobQueue` request.
@@ -1397,6 +1494,31 @@ module Aws::Batch
     # @param [Hash] params ({})
     def delete_job_queue(params = {}, options = {})
       req = build_request(:delete_job_queue, params)
+      req.send_request(options)
+    end
+
+    # Deletes the specified quota share. You must first disable submissions
+    # for the share by updating the state to `DISABLED` using the
+    # UpdateQuotaShare operation. All jobs in the share are eventually
+    # terminated when you delete a quota share.
+    #
+    # @option params [required, String] :quota_share_arn
+    #   The Amazon Resource Name (ARN) of the quota share.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_quota_share({
+    #     quota_share_arn: "String", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/DeleteQuotaShare AWS API Documentation
+    #
+    # @overload delete_quota_share(params = {})
+    # @param [Hash] params ({})
+    def delete_quota_share(params = {}, options = {})
+      req = build_request(:delete_quota_share, params)
       req.send_request(options)
     end
 
@@ -1630,7 +1752,9 @@ module Aws::Batch
     #   resp.compute_environments[0].compute_resources.ec2_configuration #=> Array
     #   resp.compute_environments[0].compute_resources.ec2_configuration[0].image_type #=> String
     #   resp.compute_environments[0].compute_resources.ec2_configuration[0].image_id_override #=> String
+    #   resp.compute_environments[0].compute_resources.ec2_configuration[0].batch_image_status #=> String
     #   resp.compute_environments[0].compute_resources.ec2_configuration[0].image_kubernetes_version #=> String
+    #   resp.compute_environments[0].compute_resources.scaling_policy.min_scale_down_delay_minutes #=> Integer
     #   resp.compute_environments[0].service_role #=> String
     #   resp.compute_environments[0].update_policy.terminate_jobs_on_update #=> Boolean
     #   resp.compute_environments[0].update_policy.job_execution_timeout_minutes #=> Integer
@@ -3008,6 +3132,54 @@ module Aws::Batch
       req.send_request(options)
     end
 
+    # Returns a description of the specified quota share.
+    #
+    # @option params [required, String] :quota_share_arn
+    #   The Amazon Resource Name (ARN) of the quota share.
+    #
+    # @return [Types::DescribeQuotaShareResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeQuotaShareResponse#quota_share_name #quota_share_name} => String
+    #   * {Types::DescribeQuotaShareResponse#quota_share_arn #quota_share_arn} => String
+    #   * {Types::DescribeQuotaShareResponse#job_queue_arn #job_queue_arn} => String
+    #   * {Types::DescribeQuotaShareResponse#capacity_limits #capacity_limits} => Array&lt;Types::QuotaShareCapacityLimit&gt;
+    #   * {Types::DescribeQuotaShareResponse#resource_sharing_configuration #resource_sharing_configuration} => Types::QuotaShareResourceSharingConfiguration
+    #   * {Types::DescribeQuotaShareResponse#preemption_configuration #preemption_configuration} => Types::QuotaSharePreemptionConfiguration
+    #   * {Types::DescribeQuotaShareResponse#state #state} => String
+    #   * {Types::DescribeQuotaShareResponse#status #status} => String
+    #   * {Types::DescribeQuotaShareResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_quota_share({
+    #     quota_share_arn: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.quota_share_name #=> String
+    #   resp.quota_share_arn #=> String
+    #   resp.job_queue_arn #=> String
+    #   resp.capacity_limits #=> Array
+    #   resp.capacity_limits[0].max_capacity #=> Integer
+    #   resp.capacity_limits[0].capacity_unit #=> String
+    #   resp.resource_sharing_configuration.strategy #=> String, one of "RESERVE", "LEND", "LEND_AND_BORROW"
+    #   resp.resource_sharing_configuration.borrow_limit #=> Integer
+    #   resp.preemption_configuration.in_share_preemption #=> String, one of "ENABLED", "DISABLED"
+    #   resp.state #=> String, one of "ENABLED", "DISABLED"
+    #   resp.status #=> String, one of "CREATING", "VALID", "INVALID", "UPDATING", "DELETING"
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/DescribeQuotaShare AWS API Documentation
+    #
+    # @overload describe_quota_share(params = {})
+    # @param [Hash] params ({})
+    def describe_quota_share(params = {}, options = {})
+      req = build_request(:describe_quota_share, params)
+      req.send_request(options)
+    end
+
     # Describes one or more of your scheduling policies.
     #
     # @option params [required, Array<String>] :arns
@@ -3029,6 +3201,7 @@ module Aws::Batch
     #   resp.scheduling_policies #=> Array
     #   resp.scheduling_policies[0].name #=> String
     #   resp.scheduling_policies[0].arn #=> String
+    #   resp.scheduling_policies[0].quota_share_policy.idle_resource_assignment_strategy #=> String, one of "FIFO"
     #   resp.scheduling_policies[0].fairshare_policy.share_decay_seconds #=> Integer
     #   resp.scheduling_policies[0].fairshare_policy.compute_reservation #=> Integer
     #   resp.scheduling_policies[0].fairshare_policy.share_distribution #=> Array
@@ -3135,6 +3308,9 @@ module Aws::Batch
     #   * {Types::DescribeServiceJobResponse#service_request_payload #service_request_payload} => String
     #   * {Types::DescribeServiceJobResponse#service_job_type #service_job_type} => String
     #   * {Types::DescribeServiceJobResponse#share_identifier #share_identifier} => String
+    #   * {Types::DescribeServiceJobResponse#quota_share_name #quota_share_name} => String
+    #   * {Types::DescribeServiceJobResponse#preemption_configuration #preemption_configuration} => Types::ServiceJobPreemptionConfiguration
+    #   * {Types::DescribeServiceJobResponse#preemption_summary #preemption_summary} => Types::ServiceJobPreemptionSummary
     #   * {Types::DescribeServiceJobResponse#started_at #started_at} => Integer
     #   * {Types::DescribeServiceJobResponse#status #status} => String
     #   * {Types::DescribeServiceJobResponse#status_reason #status_reason} => String
@@ -3176,6 +3352,15 @@ module Aws::Batch
     #   resp.service_request_payload #=> String
     #   resp.service_job_type #=> String, one of "SAGEMAKER_TRAINING"
     #   resp.share_identifier #=> String
+    #   resp.quota_share_name #=> String
+    #   resp.preemption_configuration.preemption_retries_before_termination #=> Integer
+    #   resp.preemption_summary.preempted_attempt_count #=> Integer
+    #   resp.preemption_summary.recent_preempted_attempts #=> Array
+    #   resp.preemption_summary.recent_preempted_attempts[0].service_resource_id.name #=> String, one of "TrainingJobArn"
+    #   resp.preemption_summary.recent_preempted_attempts[0].service_resource_id.value #=> String
+    #   resp.preemption_summary.recent_preempted_attempts[0].started_at #=> Integer
+    #   resp.preemption_summary.recent_preempted_attempts[0].stopped_at #=> Integer
+    #   resp.preemption_summary.recent_preempted_attempts[0].status_reason #=> String
     #   resp.started_at #=> Integer
     #   resp.status #=> String, one of "SUBMITTED", "PENDING", "RUNNABLE", "SCHEDULED", "STARTING", "RUNNING", "SUCCEEDED", "FAILED"
     #   resp.status_reason #=> String
@@ -3193,9 +3378,14 @@ module Aws::Batch
       req.send_request(options)
     end
 
-    # Provides a list of the first 100 `RUNNABLE` jobs associated to a
-    # single job queue and includes capacity utilization, including total
-    # usage and breakdown by share for fairshare scheduling job queues.
+    # Provides a snapshot of job queue state, including ordering of
+    # `RUNNABLE` jobs, as well as capacity utilization for already
+    # dispatched jobs. The first 100 `RUNNABLE` jobs in the job queue are
+    # listed in order of dispatch. For job queues with an attached
+    # quota-share policy, the first `RUNNABLE` job in each quota share is
+    # also listed. Capacity utilization for the job queue is provided, as
+    # well as break downs by share for job queues with attached fair-share
+    # or quota-share scheduling policies.
     #
     # @option params [required, String] :job_queue
     #   The job queue’s name or full queue Amazon Resource Name (ARN).
@@ -3203,6 +3393,7 @@ module Aws::Batch
     # @return [Types::GetJobQueueSnapshotResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetJobQueueSnapshotResponse#front_of_queue #front_of_queue} => Types::FrontOfQueueDetail
+    #   * {Types::GetJobQueueSnapshotResponse#front_of_quota_shares #front_of_quota_shares} => Types::FrontOfQuotaSharesDetail
     #   * {Types::GetJobQueueSnapshotResponse#queue_utilization #queue_utilization} => Types::QueueSnapshotUtilizationDetail
     #
     # @example Request syntax with placeholder values
@@ -3217,6 +3408,11 @@ module Aws::Batch
     #   resp.front_of_queue.jobs[0].job_arn #=> String
     #   resp.front_of_queue.jobs[0].earliest_time_at_position #=> Integer
     #   resp.front_of_queue.last_updated_at #=> Integer
+    #   resp.front_of_quota_shares.quota_shares #=> Hash
+    #   resp.front_of_quota_shares.quota_shares["String"] #=> Array
+    #   resp.front_of_quota_shares.quota_shares["String"][0].job_arn #=> String
+    #   resp.front_of_quota_shares.quota_shares["String"][0].earliest_time_at_position #=> Integer
+    #   resp.front_of_quota_shares.last_updated_at #=> Integer
     #   resp.queue_utilization.total_capacity_usage #=> Array
     #   resp.queue_utilization.total_capacity_usage[0].capacity_unit #=> String
     #   resp.queue_utilization.total_capacity_usage[0].quantity #=> Float
@@ -3226,6 +3422,11 @@ module Aws::Batch
     #   resp.queue_utilization.fairshare_utilization.top_capacity_utilization[0].capacity_usage #=> Array
     #   resp.queue_utilization.fairshare_utilization.top_capacity_utilization[0].capacity_usage[0].capacity_unit #=> String
     #   resp.queue_utilization.fairshare_utilization.top_capacity_utilization[0].capacity_usage[0].quantity #=> Float
+    #   resp.queue_utilization.quota_share_utilization.top_capacity_utilization #=> Array
+    #   resp.queue_utilization.quota_share_utilization.top_capacity_utilization[0].quota_share_name #=> String
+    #   resp.queue_utilization.quota_share_utilization.top_capacity_utilization[0].capacity_usage #=> Array
+    #   resp.queue_utilization.quota_share_utilization.top_capacity_utilization[0].capacity_usage[0].capacity_unit #=> String
+    #   resp.queue_utilization.quota_share_utilization.top_capacity_utilization[0].capacity_usage[0].quantity #=> Float
     #   resp.queue_utilization.last_updated_at #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/GetJobQueueSnapshot AWS API Documentation
@@ -3706,6 +3907,74 @@ module Aws::Batch
       req.send_request(options)
     end
 
+    # Returns a list of Batch quota shares associated with a job queue.
+    #
+    # @option params [required, String] :job_queue
+    #   The name or full Amazon Resource Name (ARN) of the job queue used to
+    #   list quota shares.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results returned by `ListQuotaShares` in
+    #   paginated output. When this parameter is used, `ListQuotaShares` only
+    #   returns `maxResults` results in a single page and a `nextToken`
+    #   response element. You can see the remaining results of the initial
+    #   request by sending another `ListQuotaShares` request with the returned
+    #   `nextToken` value. This value can be between 1 and 100. If this
+    #   parameter isn't used, `ListQuotaShares` returns up to 100 results and
+    #   a `nextToken` value if applicable.
+    #
+    # @option params [String] :next_token
+    #   The `nextToken` value that's returned from a previous paginated
+    #   `ListQuotaShares` request where `maxResults` was used and the results
+    #   exceeded the value of that parameter. Pagination continues from the
+    #   end of the previous results that returned the `nextToken` value. This
+    #   value is `null` when there are no more results to return.
+    #
+    #   <note markdown="1"> Treat this token as an opaque identifier that's only used to retrieve
+    #   the next items in a list and not for other programmatic purposes.
+    #
+    #    </note>
+    #
+    # @return [Types::ListQuotaSharesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListQuotaSharesResponse#quota_shares #quota_shares} => Array&lt;Types::QuotaShareDetail&gt;
+    #   * {Types::ListQuotaSharesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_quota_shares({
+    #     job_queue: "String", # required
+    #     max_results: 1,
+    #     next_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.quota_shares #=> Array
+    #   resp.quota_shares[0].quota_share_name #=> String
+    #   resp.quota_shares[0].quota_share_arn #=> String
+    #   resp.quota_shares[0].job_queue_arn #=> String
+    #   resp.quota_shares[0].capacity_limits #=> Array
+    #   resp.quota_shares[0].capacity_limits[0].max_capacity #=> Integer
+    #   resp.quota_shares[0].capacity_limits[0].capacity_unit #=> String
+    #   resp.quota_shares[0].resource_sharing_configuration.strategy #=> String, one of "RESERVE", "LEND", "LEND_AND_BORROW"
+    #   resp.quota_shares[0].resource_sharing_configuration.borrow_limit #=> Integer
+    #   resp.quota_shares[0].preemption_configuration.in_share_preemption #=> String, one of "ENABLED", "DISABLED"
+    #   resp.quota_shares[0].state #=> String, one of "ENABLED", "DISABLED"
+    #   resp.quota_shares[0].status #=> String, one of "CREATING", "VALID", "INVALID", "UPDATING", "DELETING"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/ListQuotaShares AWS API Documentation
+    #
+    # @overload list_quota_shares(params = {})
+    # @param [Hash] params ({})
+    def list_quota_shares(params = {}, options = {})
+      req = build_request(:list_quota_shares, params)
+      req.send_request(options)
+    end
+
     # Returns a list of Batch scheduling policies.
     #
     # @option params [Integer] :max_results
@@ -3768,12 +4037,13 @@ module Aws::Batch
     # @option params [String] :job_status
     #   The job status used to filter service jobs in the specified queue. If
     #   the `filters` parameter is specified, the `jobStatus` parameter is
-    #   ignored and jobs with any status are returned. The exception is the
-    #   `SHARE_IDENTIFIER` filter and `jobStatus` can be used together. If you
-    #   don't specify a status, only `RUNNING` jobs are returned.
+    #   ignored and jobs with any status are returned. The exceptions are the
+    #   `SHARE_IDENTIFIER` filter and `QUOTA_SHARE_NAME` filter, which can be
+    #   used with `jobStatus`. If you don't specify a status, only `RUNNING`
+    #   jobs are returned.
     #
-    #   <note markdown="1"> The `SHARE_IDENTIFIER` filter and the `jobStatus` field can be used
-    #   together to filter results.
+    #   <note markdown="1"> The `SHARE_IDENTIFIER` filter or `QUOTA_SHARE_NAME` filter can be used
+    #   with the `jobStatus` field to filter results.
     #
     #    </note>
     #
@@ -3802,12 +4072,12 @@ module Aws::Batch
     # @option params [Array<Types::KeyValuesPair>] :filters
     #   The filter to apply to the query. Only one filter can be used at a
     #   time. When the filter is used, `jobStatus` is ignored with the
-    #   exception that `SHARE_IDENTIFIER` and `jobStatus` can be used
-    #   together. The results are sorted by the `createdAt` field, with the
-    #   most recent jobs being first.
+    #   exception that `SHARE_IDENTIFIER` or `QUOTA_SHARE_NAME` and
+    #   `jobStatus` can be used together. The results are sorted by the
+    #   `createdAt` field, with the most recent jobs being first.
     #
-    #   <note markdown="1"> The `SHARE_IDENTIFIER` filter and the `jobStatus` field can be used
-    #   together to filter results.
+    #   <note markdown="1"> The `SHARE_IDENTIFIER` or `QUOTA_SHARE_NAME` filter and the
+    #   `jobStatus` field can be used together to filter results.
     #
     #    </note>
     #
@@ -3839,6 +4109,10 @@ module Aws::Batch
     #
     #   : The value for the filter is the fairshare scheduling share
     #     identifier.
+    #
+    #   QUOTA\_SHARE\_NAME
+    #
+    #   : The value for the filter is the quota management share name.
     #
     # @return [Types::ListServiceJobsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3877,6 +4151,7 @@ module Aws::Batch
     #   resp.job_summary_list[0].scheduled_at #=> Integer
     #   resp.job_summary_list[0].service_job_type #=> String, one of "SAGEMAKER_TRAINING"
     #   resp.job_summary_list[0].share_identifier #=> String
+    #   resp.job_summary_list[0].quota_share_name #=> String
     #   resp.job_summary_list[0].status #=> String, one of "SUBMITTED", "PENDING", "RUNNABLE", "SCHEDULED", "STARTING", "RUNNING", "SUCCEEDED", "FAILED"
     #   resp.job_summary_list[0].status_reason #=> String
     #   resp.job_summary_list[0].started_at #=> Integer
@@ -5444,6 +5719,15 @@ module Aws::Batch
     #   policy. If the job queue has a fair-share scheduling policy, then this
     #   parameter must be specified.
     #
+    # @option params [String] :quota_share_name
+    #   The quota share for the service job. Don't specify this parameter if
+    #   the job queue doesn't have a quota share scheduling policy. If the
+    #   job queue has a quota share scheduling policy, then this parameter
+    #   must be specified.
+    #
+    # @option params [Types::ServiceJobPreemptionConfiguration] :preemption_configuration
+    #   Specifies the service job behavior when preempted.
+    #
     # @option params [Types::ServiceJobTimeout] :timeout_config
     #   The timeout configuration for the service job. If none is specified,
     #   Batch defers to the default timeout of the underlying service handling
@@ -5492,6 +5776,10 @@ module Aws::Batch
     #     service_request_payload: "String", # required
     #     service_job_type: "SAGEMAKER_TRAINING", # required, accepts SAGEMAKER_TRAINING
     #     share_identifier: "String",
+    #     quota_share_name: "String",
+    #     preemption_configuration: {
+    #       preemption_retries_before_termination: 1,
+    #     },
     #     timeout_config: {
     #       attempt_duration_seconds: 1,
     #     },
@@ -5859,12 +6147,16 @@ module Aws::Batch
     #         {
     #           image_type: "ImageType", # required
     #           image_id_override: "ImageIdOverride",
+    #           batch_image_status: "String",
     #           image_kubernetes_version: "KubernetesVersion",
     #         },
     #       ],
     #       update_to_latest_image_version: false,
     #       type: "EC2", # accepts EC2, SPOT, FARGATE, FARGATE_SPOT
     #       image_id: "String",
+    #       scaling_policy: {
+    #         min_scale_down_delay_minutes: 1,
+    #       },
     #     },
     #     service_role: "String",
     #     update_policy: {
@@ -6096,13 +6388,78 @@ module Aws::Batch
       req.send_request(options)
     end
 
+    # Updates a quota share.
+    #
+    # @option params [required, String] :quota_share_arn
+    #   The Amazon Resource Name (ARN) of the quota share to update.
+    #
+    # @option params [Array<Types::QuotaShareCapacityLimit>] :capacity_limits
+    #   A list that specifies the quantity and type of compute capacity
+    #   allocated to the quota share.
+    #
+    # @option params [Types::QuotaShareResourceSharingConfiguration] :resource_sharing_configuration
+    #   Specifies whether a quota share reserves, lends, or both lends and
+    #   borrows idle compute capacity.
+    #
+    # @option params [Types::QuotaSharePreemptionConfiguration] :preemption_configuration
+    #   Specifies the preemption behavior for jobs in a quota share.
+    #
+    # @option params [String] :state
+    #   The state of the quota share. If the quota share is `ENABLED`, it is
+    #   able to accept jobs. If the quota share is `DISABLED`, new jobs won't
+    #   be accepted but jobs already submitted can finish.
+    #
+    # @return [Types::UpdateQuotaShareResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateQuotaShareResponse#quota_share_name #quota_share_name} => String
+    #   * {Types::UpdateQuotaShareResponse#quota_share_arn #quota_share_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_quota_share({
+    #     quota_share_arn: "String", # required
+    #     capacity_limits: [
+    #       {
+    #         max_capacity: 1, # required
+    #         capacity_unit: "String", # required
+    #       },
+    #     ],
+    #     resource_sharing_configuration: {
+    #       strategy: "RESERVE", # required, accepts RESERVE, LEND, LEND_AND_BORROW
+    #       borrow_limit: 1,
+    #     },
+    #     preemption_configuration: {
+    #       in_share_preemption: "ENABLED", # required, accepts ENABLED, DISABLED
+    #     },
+    #     state: "ENABLED", # accepts ENABLED, DISABLED
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.quota_share_name #=> String
+    #   resp.quota_share_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/UpdateQuotaShare AWS API Documentation
+    #
+    # @overload update_quota_share(params = {})
+    # @param [Hash] params ({})
+    def update_quota_share(params = {}, options = {})
+      req = build_request(:update_quota_share, params)
+      req.send_request(options)
+    end
+
     # Updates a scheduling policy.
     #
     # @option params [required, String] :arn
     #   The Amazon Resource Name (ARN) of the scheduling policy to update.
     #
+    # @option params [Types::QuotaSharePolicy] :quota_share_policy
+    #   The quota share scheduling policy details. Once set during creation, a
+    #   quotaSharePolicy cannot be removed or changed to a fairsharePolicy.
+    #
     # @option params [Types::FairsharePolicy] :fairshare_policy
-    #   The fair-share policy scheduling details.
+    #   The fair-share policy scheduling details. Once set during creation, a
+    #   fairsharePolicy cannot be removed or changed to a quotaSharePolicy.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -6110,6 +6467,9 @@ module Aws::Batch
     #
     #   resp = client.update_scheduling_policy({
     #     arn: "String", # required
+    #     quota_share_policy: {
+    #       idle_resource_assignment_strategy: "FIFO", # required, accepts FIFO
+    #     },
     #     fairshare_policy: {
     #       share_decay_seconds: 1,
     #       compute_reservation: 1,
@@ -6178,6 +6538,48 @@ module Aws::Batch
       req.send_request(options)
     end
 
+    # Updates the priority of a specified service job in an Batch job queue.
+    #
+    # @option params [required, String] :job_id
+    #   The Batch job ID of the job to update.
+    #
+    # @option params [required, Integer] :scheduling_priority
+    #   The scheduling priority for the job. This only affects jobs in job
+    #   queues with a quota-share or fair-share scheduling policy. Jobs with a
+    #   higher scheduling priority are scheduled before jobs with a lower
+    #   scheduling priority within a share.
+    #
+    #   The minimum supported value is 0 and the maximum supported value is
+    #   9999.
+    #
+    # @return [Types::UpdateServiceJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateServiceJobResponse#job_arn #job_arn} => String
+    #   * {Types::UpdateServiceJobResponse#job_name #job_name} => String
+    #   * {Types::UpdateServiceJobResponse#job_id #job_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_service_job({
+    #     job_id: "String", # required
+    #     scheduling_priority: 1, # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.job_arn #=> String
+    #   resp.job_name #=> String
+    #   resp.job_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/UpdateServiceJob AWS API Documentation
+    #
+    # @overload update_service_job(params = {})
+    # @param [Hash] params ({})
+    def update_service_job(params = {}, options = {})
+      req = build_request(:update_service_job, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -6196,7 +6598,7 @@ module Aws::Batch
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-batch'
-      context[:gem_version] = '1.134.0'
+      context[:gem_version] = '1.140.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

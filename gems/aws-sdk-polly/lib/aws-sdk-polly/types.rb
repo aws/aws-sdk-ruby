@@ -10,6 +10,35 @@
 module Aws::Polly
   module Types
 
+    # Contains a chunk of synthesized audio data.
+    #
+    # @!attribute [rw] audio_chunk
+    #   A chunk of synthesized audio data encoded in the format specified by
+    #   the `OutputFormat` parameter.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/AudioEvent AWS API Documentation
+    #
+    class AudioEvent < Struct.new(
+      :audio_chunk,
+      :event_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Indicates the end of the input stream. After sending this event, the
+    # input stream will be closed and all audio will be returned.
+    #
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/CloseStreamEvent AWS API Documentation
+    #
+    class CloseStreamEvent < Struct.new(
+      :event_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] name
     #   The name of the lexicon to delete. Must be an existing lexicon in
     #   the region.
@@ -96,6 +125,22 @@ module Aws::Polly
     #
     class EngineNotSupportedException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration that controls when synthesized audio data is sent on the
+    # output stream.
+    #
+    # @!attribute [rw] force
+    #   Specifies whether to force the synthesis engine to immediately write
+    #   buffered audio data to the output stream.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/FlushStreamConfiguration AWS API Documentation
+    #
+    class FlushStreamConfiguration < Struct.new(
+      :force)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -557,7 +602,32 @@ module Aws::Polly
     # @see http://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/ServiceFailureException AWS API Documentation
     #
     class ServiceFailureException < Struct.new(
-      :message)
+      :message,
+      :event_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The request would cause a service quota to be exceeded.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] quota_code
+    #   The quota code identifying the specific quota.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_code
+    #   The service code identifying the originating service.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/ServiceQuotaExceededException AWS API Documentation
+    #
+    class ServiceQuotaExceededException < Struct.new(
+      :message,
+      :quota_code,
+      :service_code,
+      :event_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -571,6 +641,77 @@ module Aws::Polly
     #
     class SsmlMarksNotSupportedForTextTypeException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] engine
+    #   Specifies the engine for Amazon Polly to use when processing input
+    #   text for speech synthesis. Currently, only the `generative` engine
+    #   is supported. If you specify a voice that the selected engine
+    #   doesn't support, Amazon Polly returns an error.
+    #   @return [String]
+    #
+    # @!attribute [rw] language_code
+    #   An optional parameter that sets the language code for the speech
+    #   synthesis request. Specify this parameter only when using a
+    #   bilingual voice. If a bilingual voice is used and no language code
+    #   is specified, Amazon Polly uses the default language of the
+    #   bilingual voice.
+    #   @return [String]
+    #
+    # @!attribute [rw] lexicon_names
+    #   The names of one or more pronunciation lexicons for the service to
+    #   apply during synthesis. Amazon Polly applies lexicons only when the
+    #   lexicon language matches the voice language.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] output_format
+    #   The audio format for the synthesized speech. Currently, Amazon Polly
+    #   does not support JSON speech marks.
+    #   @return [String]
+    #
+    # @!attribute [rw] sample_rate
+    #   The audio frequency, specified in Hz.
+    #   @return [String]
+    #
+    # @!attribute [rw] voice_id
+    #   The voice to use in synthesis. To get a list of available voice IDs,
+    #   use the [DescribeVoices][1] operation.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/polly/latest/API/API_DescribeVoices.html
+    #   @return [String]
+    #
+    # @!attribute [rw] action_stream
+    #   The input event stream that contains text events and stream control
+    #   events.
+    #   @return [Types::StartSpeechSynthesisStreamActionStream]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/StartSpeechSynthesisStreamInput AWS API Documentation
+    #
+    class StartSpeechSynthesisStreamInput < Struct.new(
+      :engine,
+      :language_code,
+      :lexicon_names,
+      :output_format,
+      :sample_rate,
+      :voice_id,
+      :action_stream)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] event_stream
+    #   The output event stream that contains synthesized audio events and
+    #   stream status events.
+    #   @return [Types::StartSpeechSynthesisStreamEventStream]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/StartSpeechSynthesisStreamOutput AWS API Documentation
+    #
+    class StartSpeechSynthesisStreamOutput < Struct.new(
+      :event_stream)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -607,8 +748,8 @@ module Aws::Polly
     #
     # @!attribute [rw] output_format
     #   The format in which the returned output will be encoded. For audio
-    #   stream, this will be mp3, ogg\_vorbis, or pcm. For speech marks,
-    #   this will be json.
+    #   stream, this will be mp3, ogg\_vorbis, ogg\_opus, mu-law, a-law, or
+    #   pcm. For speech marks, this will be json.
     #   @return [String]
     #
     # @!attribute [rw] output_s3_bucket_name
@@ -630,6 +771,10 @@ module Aws::Polly
     #
     #   Valid values for pcm are "8000" and "16000" The default value is
     #   "16000".
+    #
+    #   Valid value for ogg\_opus is "48000".
+    #
+    #   Valid value for mu-law and a-law is "8000".
     #   @return [String]
     #
     # @!attribute [rw] sns_topic_arn
@@ -687,6 +832,23 @@ module Aws::Polly
       include Aws::Structure
     end
 
+    # Indicates that the synthesis stream is closed and provides summary
+    # information.
+    #
+    # @!attribute [rw] request_characters
+    #   The total number of characters synthesized during the streaming
+    #   session.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/StreamClosedEvent AWS API Documentation
+    #
+    class StreamClosedEvent < Struct.new(
+      :request_characters,
+      :event_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # SynthesisTask object that provides information about a speech
     # synthesis task.
     #
@@ -735,8 +897,8 @@ module Aws::Polly
     #
     # @!attribute [rw] output_format
     #   The format in which the returned output will be encoded. For audio
-    #   stream, this will be mp3, ogg\_vorbis, or pcm. For speech marks,
-    #   this will be json.
+    #   stream, this will be mp3, ogg\_vorbis, ogg\_opus, mu-law, a-law, or
+    #   pcm. For speech marks, this will be json.
     #   @return [String]
     #
     # @!attribute [rw] sample_rate
@@ -750,6 +912,10 @@ module Aws::Polly
     #
     #   Valid values for pcm are "8000" and "16000" The default value is
     #   "16000".
+    #
+    #   Valid value for ogg\_opus is "48000".
+    #
+    #   Valid value for mu-law and a-law is "8000".
     #   @return [String]
     #
     # @!attribute [rw] speech_mark_types
@@ -862,8 +1028,8 @@ module Aws::Polly
     #
     # @!attribute [rw] output_format
     #   The format in which the returned output will be encoded. For audio
-    #   stream, this will be mp3, ogg\_vorbis, or pcm. For speech marks,
-    #   this will be json.
+    #   stream, this will be mp3, ogg\_vorbis, ogg\_opus, mu-law, a-law or
+    #   pcm. For speech marks, this will be json.
     #
     #   When pcm is used, the content returned is audio/pcm in a signed
     #   16-bit, 1 channel (mono), little-endian format.
@@ -880,6 +1046,10 @@ module Aws::Polly
     #
     #   Valid values for pcm are "8000" and "16000" The default value is
     #   "16000".
+    #
+    #   Valid value for ogg\_opus is "48000".
+    #
+    #   Valid value for mu-law and a-law is "8000".
     #   @return [String]
     #
     # @!attribute [rw] speech_mark_types
@@ -939,9 +1109,18 @@ module Aws::Polly
     #   * If you request `ogg_vorbis` as the `OutputFormat`, the
     #     `ContentType` returned is audio/ogg.
     #
+    #   * If you request `ogg_opus` as the `OutputFormat`, the `ContentType`
+    #     returned is audio/ogg.
+    #
     #   * If you request `pcm` as the `OutputFormat`, the `ContentType`
     #     returned is audio/pcm in a signed 16-bit, 1 channel (mono),
     #     little-endian format.
+    #
+    #   * If you request `mu-law` as the `OutputFormat`, the `ContentType`
+    #     returned is audio/mulaw.
+    #
+    #   * If you request `a-law` as the `OutputFormat`, the `ContentType`
+    #     returned is audio/alaw.
     #
     #   * If you request `json` as the `OutputFormat`, the `ContentType`
     #     returned is application/x-json-stream.
@@ -961,6 +1140,34 @@ module Aws::Polly
       include Aws::Structure
     end
 
+    # Contains text content to be synthesized into speech.
+    #
+    # @!attribute [rw] text
+    #   The text content to synthesize. If you specify `ssml` as the
+    #   `TextType`, follow the SSML format for the input text.
+    #   @return [String]
+    #
+    # @!attribute [rw] text_type
+    #   Specifies whether the input text is plain text or SSML. Default:
+    #   plain text.
+    #   @return [String]
+    #
+    # @!attribute [rw] flush_stream_configuration
+    #   Configuration for controlling when synthesized audio flushes to the
+    #   output stream.
+    #   @return [Types::FlushStreamConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/TextEvent AWS API Documentation
+    #
+    class TextEvent < Struct.new(
+      :text,
+      :text_type,
+      :flush_stream_configuration,
+      :event_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The value of the "Text" parameter is longer than the accepted
     # limits. For the `SynthesizeSpeech` API, the limit for input text is a
     # maximum of 6000 characters total, of which no more than 3000 can be
@@ -975,6 +1182,44 @@ module Aws::Polly
     #
     class TextLengthExceededException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The request was denied because of request throttling.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] throttling_reasons
+    #   A list of reasons explaining why the request was throttled.
+    #   @return [Array<Types::ThrottlingReason>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/ThrottlingException AWS API Documentation
+    #
+    class ThrottlingException < Struct.new(
+      :message,
+      :throttling_reasons,
+      :event_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides information about a specific throttling reason.
+    #
+    # @!attribute [rw] reason
+    #   The reason code explaining why the request was throttled.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource
+    #   The resource that caused the throttling.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/ThrottlingReason AWS API Documentation
+    #
+    class ThrottlingReason < Struct.new(
+      :reason,
+      :resource)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1006,6 +1251,49 @@ module Aws::Polly
     # @see http://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/UnsupportedPlsLanguageException AWS API Documentation
     #
     class UnsupportedPlsLanguageException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The input fails to satisfy the constraints specified by the service.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] reason
+    #   The reason the request failed validation.
+    #   @return [String]
+    #
+    # @!attribute [rw] fields
+    #   The fields that caused the validation error.
+    #   @return [Array<Types::ValidationExceptionField>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/ValidationException AWS API Documentation
+    #
+    class ValidationException < Struct.new(
+      :message,
+      :reason,
+      :fields,
+      :event_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about a field that failed validation.
+    #
+    # @!attribute [rw] name
+    #   The name of the field that failed validation.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   A message describing why the field failed validation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/ValidationExceptionField AWS API Documentation
+    #
+    class ValidationExceptionField < Struct.new(
+      :name,
       :message)
       SENSITIVE = []
       include Aws::Structure
@@ -1063,6 +1351,48 @@ module Aws::Polly
       :supported_engines)
       SENSITIVE = []
       include Aws::Structure
+    end
+
+    # Inbound event stream for sending input and control events to manage
+    # bidirectional speech synthesis.
+    #
+    # EventStream is an Enumerator of Events.
+    #  #event_types #=> Array, returns all modeled event types in the stream
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/StartSpeechSynthesisStreamActionStream AWS API Documentation
+    #
+    class StartSpeechSynthesisStreamActionStream < Enumerator
+
+      def event_types
+        [
+          :text_event,
+          :close_stream_event
+        ]
+      end
+
+    end
+
+    # Outbound event stream that contains synthesized audio data and stream
+    # status events.
+    #
+    # EventStream is an Enumerator of Events.
+    #  #event_types #=> Array, returns all modeled event types in the stream
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/StartSpeechSynthesisStreamEventStream AWS API Documentation
+    #
+    class StartSpeechSynthesisStreamEventStream < Enumerator
+
+      def event_types
+        [
+          :audio_event,
+          :stream_closed_event,
+          :validation_exception,
+          :service_quota_exceeded_exception,
+          :service_failure_exception,
+          :throttling_exception
+        ]
+      end
+
     end
 
   end

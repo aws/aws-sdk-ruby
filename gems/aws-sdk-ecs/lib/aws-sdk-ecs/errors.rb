@@ -37,6 +37,8 @@ module Aws::ECS
   # * {ClusterContainsTasksException}
   # * {ClusterNotFoundException}
   # * {ConflictException}
+  # * {DaemonNotActiveException}
+  # * {DaemonNotFoundException}
   # * {InvalidParameterException}
   # * {LimitExceededException}
   # * {MissingVersionException}
@@ -70,6 +72,11 @@ module Aws::ECS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
     end
 
     class AttributeLimitExceededException < ServiceError
@@ -80,6 +87,11 @@ module Aws::ECS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
     end
 
     class BlockedException < ServiceError
@@ -89,6 +101,11 @@ module Aws::ECS
       # @param [Aws::ECS::Types::BlockedException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
       end
     end
 
@@ -115,6 +132,11 @@ module Aws::ECS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
     end
 
     class ClusterContainsContainerInstancesException < ServiceError
@@ -124,6 +146,11 @@ module Aws::ECS
       # @param [Aws::ECS::Types::ClusterContainsContainerInstancesException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
       end
     end
 
@@ -135,6 +162,11 @@ module Aws::ECS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
     end
 
     class ClusterContainsTasksException < ServiceError
@@ -145,6 +177,11 @@ module Aws::ECS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
     end
 
     class ClusterNotFoundException < ServiceError
@@ -154,6 +191,11 @@ module Aws::ECS
       # @param [Aws::ECS::Types::ClusterNotFoundException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
       end
     end
 
@@ -170,6 +212,41 @@ module Aws::ECS
       def resource_ids
         @data[:resource_ids]
       end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class DaemonNotActiveException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::ECS::Types::DaemonNotActiveException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class DaemonNotFoundException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::ECS::Types::DaemonNotFoundException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
     end
 
     class InvalidParameterException < ServiceError
@@ -179,6 +256,11 @@ module Aws::ECS
       # @param [Aws::ECS::Types::InvalidParameterException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
       end
     end
 
@@ -190,6 +272,11 @@ module Aws::ECS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
     end
 
     class MissingVersionException < ServiceError
@@ -199,6 +286,11 @@ module Aws::ECS
       # @param [Aws::ECS::Types::MissingVersionException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
       end
     end
 
@@ -210,6 +302,11 @@ module Aws::ECS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
     end
 
     class NoUpdateAvailableException < ServiceError
@@ -219,6 +316,11 @@ module Aws::ECS
       # @param [Aws::ECS::Types::NoUpdateAvailableException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
       end
     end
 
@@ -230,6 +332,11 @@ module Aws::ECS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
     end
 
     class PlatformUnknownException < ServiceError
@@ -239,6 +346,11 @@ module Aws::ECS
       # @param [Aws::ECS::Types::PlatformUnknownException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
       end
     end
 
@@ -250,6 +362,11 @@ module Aws::ECS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
     end
 
     class ResourceNotFoundException < ServiceError
@@ -259,6 +376,11 @@ module Aws::ECS
       # @param [Aws::ECS::Types::ResourceNotFoundException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
       end
     end
 
@@ -285,6 +407,11 @@ module Aws::ECS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
     end
 
     class ServiceNotActiveException < ServiceError
@@ -294,6 +421,11 @@ module Aws::ECS
       # @param [Aws::ECS::Types::ServiceNotActiveException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
       end
     end
 
@@ -305,6 +437,11 @@ module Aws::ECS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
     end
 
     class TargetNotConnectedException < ServiceError
@@ -314,6 +451,11 @@ module Aws::ECS
       # @param [Aws::ECS::Types::TargetNotConnectedException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
       end
     end
 
@@ -325,6 +467,11 @@ module Aws::ECS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
     end
 
     class TaskSetNotFoundException < ServiceError
@@ -334,6 +481,11 @@ module Aws::ECS
       # @param [Aws::ECS::Types::TaskSetNotFoundException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
       end
     end
 
@@ -345,6 +497,11 @@ module Aws::ECS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
     end
 
     class UpdateInProgressException < ServiceError
@@ -354,6 +511,11 @@ module Aws::ECS
       # @param [Aws::ECS::Types::UpdateInProgressException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
       end
     end
 

@@ -1,0 +1,417 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::S3Files
+  module Types
+
+    class ConflictException
+      attr_accessor error_code: ::String
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ::String
+      SENSITIVE: []
+    end
+
+    class CreateAccessPointRequest
+      attr_accessor client_token: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor file_system_id: ::String
+      attr_accessor posix_user: Types::PosixUser
+      attr_accessor root_directory: Types::RootDirectory
+      SENSITIVE: []
+    end
+
+    class CreateAccessPointResponse
+      attr_accessor access_point_arn: ::String
+      attr_accessor access_point_id: ::String
+      attr_accessor client_token: ::String
+      attr_accessor file_system_id: ::String
+      attr_accessor status: ("available" | "creating" | "deleting" | "deleted" | "error" | "updating")
+      attr_accessor owner_id: ::String
+      attr_accessor posix_user: Types::PosixUser
+      attr_accessor root_directory: Types::RootDirectory
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class CreateFileSystemRequest
+      attr_accessor bucket: ::String
+      attr_accessor prefix: ::String
+      attr_accessor client_token: ::String
+      attr_accessor kms_key_id: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor accept_bucket_warning: bool
+      SENSITIVE: []
+    end
+
+    class CreateFileSystemResponse
+      attr_accessor creation_time: ::Time
+      attr_accessor file_system_arn: ::String
+      attr_accessor file_system_id: ::String
+      attr_accessor bucket: ::String
+      attr_accessor prefix: ::String
+      attr_accessor client_token: ::String
+      attr_accessor kms_key_id: ::String
+      attr_accessor status: ("available" | "creating" | "deleting" | "deleted" | "error" | "updating")
+      attr_accessor status_message: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor owner_id: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class CreateMountTargetRequest
+      attr_accessor file_system_id: ::String
+      attr_accessor subnet_id: ::String
+      attr_accessor ipv4_address: ::String
+      attr_accessor ipv6_address: ::String
+      attr_accessor ip_address_type: ("IPV4_ONLY" | "IPV6_ONLY" | "DUAL_STACK")
+      attr_accessor security_groups: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class CreateMountTargetResponse
+      attr_accessor availability_zone_id: ::String
+      attr_accessor owner_id: ::String
+      attr_accessor mount_target_id: ::String
+      attr_accessor file_system_id: ::String
+      attr_accessor subnet_id: ::String
+      attr_accessor ipv4_address: ::String
+      attr_accessor ipv6_address: ::String
+      attr_accessor network_interface_id: ::String
+      attr_accessor vpc_id: ::String
+      attr_accessor security_groups: ::Array[::String]
+      attr_accessor status: ("available" | "creating" | "deleting" | "deleted" | "error" | "updating")
+      attr_accessor status_message: ::String
+      SENSITIVE: []
+    end
+
+    class CreationPermissions
+      attr_accessor owner_uid: ::Integer
+      attr_accessor owner_gid: ::Integer
+      attr_accessor permissions: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteAccessPointRequest
+      attr_accessor access_point_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteFileSystemPolicyRequest
+      attr_accessor file_system_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteFileSystemRequest
+      attr_accessor file_system_id: ::String
+      attr_accessor force_delete: bool
+      SENSITIVE: []
+    end
+
+    class DeleteMountTargetRequest
+      attr_accessor mount_target_id: ::String
+      SENSITIVE: []
+    end
+
+    class ExpirationDataRule
+      attr_accessor days_after_last_access: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetAccessPointRequest
+      attr_accessor access_point_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetAccessPointResponse
+      attr_accessor access_point_arn: ::String
+      attr_accessor access_point_id: ::String
+      attr_accessor client_token: ::String
+      attr_accessor file_system_id: ::String
+      attr_accessor status: ("available" | "creating" | "deleting" | "deleted" | "error" | "updating")
+      attr_accessor owner_id: ::String
+      attr_accessor posix_user: Types::PosixUser
+      attr_accessor root_directory: Types::RootDirectory
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class GetFileSystemPolicyRequest
+      attr_accessor file_system_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetFileSystemPolicyResponse
+      attr_accessor file_system_id: ::String
+      attr_accessor policy: ::String
+      SENSITIVE: []
+    end
+
+    class GetFileSystemRequest
+      attr_accessor file_system_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetFileSystemResponse
+      attr_accessor creation_time: ::Time
+      attr_accessor file_system_arn: ::String
+      attr_accessor file_system_id: ::String
+      attr_accessor bucket: ::String
+      attr_accessor prefix: ::String
+      attr_accessor client_token: ::String
+      attr_accessor kms_key_id: ::String
+      attr_accessor status: ("available" | "creating" | "deleting" | "deleted" | "error" | "updating")
+      attr_accessor status_message: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor owner_id: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class GetMountTargetRequest
+      attr_accessor mount_target_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetMountTargetResponse
+      attr_accessor availability_zone_id: ::String
+      attr_accessor owner_id: ::String
+      attr_accessor mount_target_id: ::String
+      attr_accessor file_system_id: ::String
+      attr_accessor subnet_id: ::String
+      attr_accessor ipv4_address: ::String
+      attr_accessor ipv6_address: ::String
+      attr_accessor network_interface_id: ::String
+      attr_accessor vpc_id: ::String
+      attr_accessor security_groups: ::Array[::String]
+      attr_accessor status: ("available" | "creating" | "deleting" | "deleted" | "error" | "updating")
+      attr_accessor status_message: ::String
+      SENSITIVE: []
+    end
+
+    class GetSynchronizationConfigurationRequest
+      attr_accessor file_system_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetSynchronizationConfigurationResponse
+      attr_accessor latest_version_number: ::Integer
+      attr_accessor import_data_rules: ::Array[Types::ImportDataRule]
+      attr_accessor expiration_data_rules: ::Array[Types::ExpirationDataRule]
+      SENSITIVE: []
+    end
+
+    class ImportDataRule
+      attr_accessor prefix: ::String
+      attr_accessor trigger: ("ON_DIRECTORY_FIRST_ACCESS" | "ON_FILE_ACCESS")
+      attr_accessor size_less_than: ::Integer
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor error_code: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListAccessPointsDescription
+      attr_accessor access_point_arn: ::String
+      attr_accessor access_point_id: ::String
+      attr_accessor file_system_id: ::String
+      attr_accessor status: ("available" | "creating" | "deleting" | "deleted" | "error" | "updating")
+      attr_accessor owner_id: ::String
+      attr_accessor posix_user: Types::PosixUser
+      attr_accessor root_directory: Types::RootDirectory
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class ListAccessPointsRequest
+      attr_accessor file_system_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAccessPointsResponse
+      attr_accessor next_token: ::String
+      attr_accessor access_points: ::Array[Types::ListAccessPointsDescription]
+      SENSITIVE: []
+    end
+
+    class ListFileSystemsDescription
+      attr_accessor creation_time: ::Time
+      attr_accessor file_system_arn: ::String
+      attr_accessor file_system_id: ::String
+      attr_accessor name: ::String
+      attr_accessor bucket: ::String
+      attr_accessor status: ("available" | "creating" | "deleting" | "deleted" | "error" | "updating")
+      attr_accessor status_message: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor owner_id: ::String
+      SENSITIVE: []
+    end
+
+    class ListFileSystemsRequest
+      attr_accessor bucket: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListFileSystemsResponse
+      attr_accessor next_token: ::String
+      attr_accessor file_systems: ::Array[Types::ListFileSystemsDescription]
+      SENSITIVE: []
+    end
+
+    class ListMountTargetsDescription
+      attr_accessor availability_zone_id: ::String
+      attr_accessor file_system_id: ::String
+      attr_accessor ipv4_address: ::String
+      attr_accessor ipv6_address: ::String
+      attr_accessor status: ("available" | "creating" | "deleting" | "deleted" | "error" | "updating")
+      attr_accessor status_message: ::String
+      attr_accessor mount_target_id: ::String
+      attr_accessor network_interface_id: ::String
+      attr_accessor owner_id: ::String
+      attr_accessor subnet_id: ::String
+      attr_accessor vpc_id: ::String
+      SENSITIVE: []
+    end
+
+    class ListMountTargetsRequest
+      attr_accessor file_system_id: ::String
+      attr_accessor access_point_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListMountTargetsResponse
+      attr_accessor next_token: ::String
+      attr_accessor mount_targets: ::Array[Types::ListMountTargetsDescription]
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class PosixUser
+      attr_accessor uid: ::Integer
+      attr_accessor gid: ::Integer
+      attr_accessor secondary_gids: ::Array[::Integer]
+      SENSITIVE: []
+    end
+
+    class PutFileSystemPolicyRequest
+      attr_accessor file_system_id: ::String
+      attr_accessor policy: ::String
+      SENSITIVE: []
+    end
+
+    class PutFileSystemPolicyResponse < Aws::EmptyStructure
+    end
+
+    class PutSynchronizationConfigurationRequest
+      attr_accessor file_system_id: ::String
+      attr_accessor latest_version_number: ::Integer
+      attr_accessor import_data_rules: ::Array[Types::ImportDataRule]
+      attr_accessor expiration_data_rules: ::Array[Types::ExpirationDataRule]
+      SENSITIVE: []
+    end
+
+    class PutSynchronizationConfigurationResponse < Aws::EmptyStructure
+    end
+
+    class ResourceNotFoundException
+      attr_accessor error_code: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class RootDirectory
+      attr_accessor path: ::String
+      attr_accessor creation_permissions: Types::CreationPermissions
+      SENSITIVE: []
+    end
+
+    class ServiceQuotaExceededException
+      attr_accessor error_code: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Tag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_id: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class ThrottlingException
+      attr_accessor error_code: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_id: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UpdateMountTargetRequest
+      attr_accessor mount_target_id: ::String
+      attr_accessor security_groups: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UpdateMountTargetResponse
+      attr_accessor availability_zone_id: ::String
+      attr_accessor owner_id: ::String
+      attr_accessor mount_target_id: ::String
+      attr_accessor file_system_id: ::String
+      attr_accessor subnet_id: ::String
+      attr_accessor ipv4_address: ::String
+      attr_accessor ipv6_address: ::String
+      attr_accessor network_interface_id: ::String
+      attr_accessor vpc_id: ::String
+      attr_accessor security_groups: ::Array[::String]
+      attr_accessor status: ("available" | "creating" | "deleting" | "deleted" | "error" | "updating")
+      attr_accessor status_message: ::String
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor error_code: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+  end
+end

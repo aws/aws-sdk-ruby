@@ -199,8 +199,19 @@ module Aws
                                            mount_options: {
                                              version: ("AUTOMATIC" | "SMB2" | "SMB3" | "SMB1" | "SMB2_0")?
                                            }?,
-                                           password: ::String,
-                                           user: ::String
+                                           password: ::String?,
+                                           user: ::String,
+                                           managed_secret_config: {
+                                             secret_arn: ::String?
+                                           }?,
+                                           cmk_secret_config: {
+                                             secret_arn: ::String?,
+                                             kms_key_arn: ::String?
+                                           }?,
+                                           custom_secret_config: {
+                                             secret_arn: ::String?,
+                                             secret_access_role_arn: ::String?
+                                           }?
                                          }?
                                        },
                                        security_group_arns: Array[::String],
@@ -233,8 +244,19 @@ module Aws
                                               mount_options: {
                                                 version: ("AUTOMATIC" | "SMB2" | "SMB3" | "SMB1" | "SMB2_0")?
                                               }?,
-                                              password: ::String,
-                                              user: ::String
+                                              password: ::String?,
+                                              user: ::String,
+                                              managed_secret_config: {
+                                                secret_arn: ::String?
+                                              }?,
+                                              cmk_secret_config: {
+                                                secret_arn: ::String?,
+                                                kms_key_arn: ::String?
+                                              }?,
+                                              custom_secret_config: {
+                                                secret_arn: ::String?,
+                                                secret_access_role_arn: ::String?
+                                              }?
                                             }?
                                           },
                                           security_group_arns: Array[::String],
@@ -265,7 +287,15 @@ module Aws
                                          ],
                                          user: ::String,
                                          ?domain: ::String,
-                                         password: ::String
+                                         ?password: ::String,
+                                         ?cmk_secret_config: {
+                                           secret_arn: ::String?,
+                                           kms_key_arn: ::String?
+                                         },
+                                         ?custom_secret_config: {
+                                           secret_arn: ::String?,
+                                           secret_access_role_arn: ::String?
+                                         }
                                        ) -> _CreateLocationFsxWindowsResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateLocationFsxWindowsResponseSuccess
 
@@ -300,7 +330,15 @@ module Aws
                                       key: ::String,
                                       value: ::String?
                                     },
-                                  ]
+                                  ],
+                                  ?cmk_secret_config: {
+                                    secret_arn: ::String?,
+                                    kms_key_arn: ::String?
+                                  },
+                                  ?custom_secret_config: {
+                                    secret_arn: ::String?,
+                                    secret_access_role_arn: ::String?
+                                  }
                                 ) -> _CreateLocationHdfsResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateLocationHdfsResponseSuccess
 
@@ -639,6 +677,9 @@ module Aws
         def creation_time: () -> ::Time
         def user: () -> ::String
         def domain: () -> ::String
+        def managed_secret_config: () -> Types::ManagedSecretConfig
+        def cmk_secret_config: () -> Types::CmkSecretConfig
+        def custom_secret_config: () -> Types::CustomSecretConfig
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataSync/Client.html#describe_location_fsx_windows-instance_method
       def describe_location_fsx_windows: (
@@ -660,6 +701,9 @@ module Aws
         def kerberos_principal: () -> ::String
         def agent_arns: () -> ::Array[::String]
         def creation_time: () -> ::Time
+        def managed_secret_config: () -> Types::ManagedSecretConfig
+        def cmk_secret_config: () -> Types::CmkSecretConfig
+        def custom_secret_config: () -> Types::CustomSecretConfig
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataSync/Client.html#describe_location_hdfs-instance_method
       def describe_location_hdfs: (
@@ -1071,7 +1115,15 @@ module Aws
                                              version: ("AUTOMATIC" | "SMB2" | "SMB3" | "SMB1" | "SMB2_0")?
                                            }?,
                                            password: ::String?,
-                                           user: ::String?
+                                           user: ::String?,
+                                           cmk_secret_config: {
+                                             secret_arn: ::String?,
+                                             kms_key_arn: ::String?
+                                           }?,
+                                           custom_secret_config: {
+                                             secret_arn: ::String?,
+                                             secret_access_role_arn: ::String?
+                                           }?
                                          }?
                                        },
                                        ?subdirectory: ::String
@@ -1095,8 +1147,19 @@ module Aws
                                               mount_options: {
                                                 version: ("AUTOMATIC" | "SMB2" | "SMB3" | "SMB1" | "SMB2_0")?
                                               }?,
-                                              password: ::String,
-                                              user: ::String
+                                              password: ::String?,
+                                              user: ::String,
+                                              managed_secret_config: {
+                                                secret_arn: ::String?
+                                              }?,
+                                              cmk_secret_config: {
+                                                secret_arn: ::String?,
+                                                kms_key_arn: ::String?
+                                              }?,
+                                              custom_secret_config: {
+                                                secret_arn: ::String?,
+                                                secret_access_role_arn: ::String?
+                                              }?
                                             }?
                                           },
                                           ?subdirectory: ::String
@@ -1112,7 +1175,15 @@ module Aws
                                          ?subdirectory: ::String,
                                          ?domain: ::String,
                                          ?user: ::String,
-                                         ?password: ::String
+                                         ?password: ::String,
+                                         ?cmk_secret_config: {
+                                           secret_arn: ::String?,
+                                           kms_key_arn: ::String?
+                                         },
+                                         ?custom_secret_config: {
+                                           secret_arn: ::String?,
+                                           secret_access_role_arn: ::String?
+                                         }
                                        ) -> _UpdateLocationFsxWindowsResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateLocationFsxWindowsResponseSuccess
 
@@ -1141,7 +1212,15 @@ module Aws
                                   ?kerberos_principal: ::String,
                                   ?kerberos_keytab: ::String,
                                   ?kerberos_krb_5_conf: ::String,
-                                  ?agent_arns: Array[::String]
+                                  ?agent_arns: Array[::String],
+                                  ?cmk_secret_config: {
+                                    secret_arn: ::String?,
+                                    kms_key_arn: ::String?
+                                  },
+                                  ?custom_secret_config: {
+                                    secret_arn: ::String?,
+                                    secret_access_role_arn: ::String?
+                                  }
                                 ) -> _UpdateLocationHdfsResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateLocationHdfsResponseSuccess
 

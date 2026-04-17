@@ -332,6 +332,8 @@ module Aws::Glue
       attr_accessor database_name: ::String
       attr_accessor table_name: ::String
       attr_accessor partitions_to_get: ::Array[Types::PartitionValueList]
+      attr_accessor audit_context: Types::AuditContext
+      attr_accessor query_session_context: Types::QuerySessionContext
       SENSITIVE: []
     end
 
@@ -621,6 +623,7 @@ module Aws::Glue
       attr_accessor create_table_default_permissions: ::Array[Types::PrincipalPermissions]
       attr_accessor create_database_default_permissions: ::Array[Types::PrincipalPermissions]
       attr_accessor allow_full_table_external_data_access: ("True" | "False")
+      attr_accessor overwrite_child_resource_permissions_with_default: ("Accept" | "Deny")
       SENSITIVE: []
     end
 

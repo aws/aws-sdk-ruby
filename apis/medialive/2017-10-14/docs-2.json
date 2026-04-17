@@ -332,7 +332,8 @@
     "AudioDolbyEDecode": {
       "base": "Audio Dolby EDecode",
       "refs": {
-        "AudioTrackSelection$DolbyEDecode": "Configure decoding options for Dolby E streams - these should be Dolby E frames carried in PCM streams tagged with SMPTE-337"
+        "AudioTrackSelection$DolbyEDecode": "Configure decoding options for Dolby E streams - these should be Dolby E frames carried in PCM streams tagged with SMPTE-337",
+        "AudioPid$DolbyEDecode": "Configure decoding options for Dolby E streams - these should be Dolby E frames carried in PCM streams tagged with SMPTE-337.\nWhen using the 'pids' array, if this field is not specified and Dolby E content is present,\nthe decoder will extract the specified program. To maintain legacy behavior (allPrograms),\nexplicitly set programSelection to \"allChannels\"."
       }
     },
     "AudioHlsRenditionSelection": {
@@ -2396,7 +2397,8 @@
       "base": "M2ts Settings",
       "refs": {
         "ArchiveContainerSettings$M2tsSettings": null,
-        "UdpContainerSettings$M2tsSettings": null
+        "UdpContainerSettings$M2tsSettings": null,
+        "MediaConnectRouterContainerSettings$M2tsSettings": null
       }
     },
     "M2tsTimedMetadataBehavior": {
@@ -2868,7 +2870,8 @@
         "CmafIngestGroupSettings$Destination": "A HTTP destination for the tracks",
         "SrtOutputSettings$Destination": null,
         "AdditionalDestinations$Destination": "The destination location",
-        "MediaPackageAdditionalDestinations$Destination": "The destination location"
+        "MediaPackageAdditionalDestinations$Destination": "The destination location",
+        "MediaConnectRouterOutputSettings$Destination": "Destination for this MediaConnect Router Output. The referenced OutputDestination must have MediaConnect Router settings configured."
       }
     },
     "OutputLockingSettings": {
@@ -3706,7 +3709,7 @@
     "VideoDescriptionScalingBehavior": {
       "base": "Video Description Scaling Behavior",
       "refs": {
-        "VideoDescription$ScalingBehavior": "STRETCH_TO_OUTPUT configures the output position to stretch the video to the specified output resolution (height and width). This option will override any position value. DEFAULT may insert black boxes (pillar boxes or letter boxes) around the video to provide the specified output resolution."
+        "VideoDescription$ScalingBehavior": "Configures how MediaLive transforms the video picture to match the output frame.\nUse STRETCH_TO_OUTPUT to stretch the video to fill the output frame. The video might get distorted.\nUse DEFAULT to insert pillar boxes or letter boxes around the video to fill the output frame. The video won't get distorted.\nUse SMART_CROP to enable the smart crop feature that uses the Elemental Inference service to crop the frame using AI - see the MediaLive User Guide for more information."
       }
     },
     "VideoSelector": {
@@ -4828,7 +4831,8 @@
         "CreateChannel$ChannelSecurityGroups": "A list of IDs for all the Input Security Groups attached to the channel.",
         "InputSecurityGroup$Channels": "The list of channels currently using this Input Security Group as their channel security group.",
         "NodeInterfaceMapping$PhysicalInterfaceIpAddresses": "The IP addresses associated with the physical interface on the node hardware.",
-        "UpdateChannel$ChannelSecurityGroups": "A list of IDs for all the Input Security Groups attached to the channel."
+        "UpdateChannel$ChannelSecurityGroups": "A list of IDs for all the Input Security Groups attached to the channel.",
+        "MediaConnectRouterGroupSettings$AvailabilityZones": "The names of the Availability Zones in which to write output to MediaConnect Router."
       }
     },
     "__longMin0Max1099511627775": {
@@ -5304,7 +5308,12 @@
         "SrtListenerDecryption$PassphraseSecretArn": "The ARN for the secret in Secrets Manager that holds the passphrase for decryption.",
         "SrtListenerDecryptionRequest$PassphraseSecretArn": "Required. The ARN for the secret in Secrets Manager that holds the passphrase.",
         "SrtListenerSettings$StreamId": "The stream ID, if the upstream system uses this identifier.",
-        "SrtListenerSettingsRequest$StreamId": "Optional. The stream ID if the upstream system uses this identifier."
+        "SrtListenerSettingsRequest$StreamId": "Optional. The stream ID if the upstream system uses this identifier.",
+        "DescribeInferenceSettings$FeedArn": "The ARN of the feed resource that is associated with this channel. The feed is a resource in the Elemental Inference service.",
+        "InferenceSettings$FeedArn": "The ARN of the feed resource that is associated with this channel. The feed is a resource in the Elemental Inference service.",
+        "MediaConnectRouterOutputConnectionMap$Pipeline0": "The ARN of the MediaConnect Router Input connected to pipeline 0.",
+        "MediaConnectRouterOutputConnectionMap$Pipeline1": "The ARN of the MediaConnect Router Input connected to pipeline 1.",
+        "MediaConnectRouterOutputDestinationSettings$SecretArn": "ARN of the secret used to encrypt this input. Used only with the SECRETS_MANAGER encryption type."
       }
     },
     "__stringMax1000": {
@@ -7390,7 +7399,8 @@
     "Hlg2020Settings": {
       "base": "Hlg2020 Settings",
       "refs": {
-        "H265ColorSpaceSettings$Hlg2020Settings": null
+        "H265ColorSpaceSettings$Hlg2020Settings": null,
+        "Av1ColorSpaceSettings$Hlg2020Settings": null
       }
     },
     "RouterDestination": {
@@ -7427,7 +7437,8 @@
     "SpecialRouterSettings": {
       "base": "When using MediaConnect Router as the source of a MediaLive input there's a special handoff that occurs when a router output\nis created. This group of settings is set on your behalf by the MediaConnect Router service using this set of settings. This\nsetting object can only by used by that service.",
       "refs": {
-        "UpdateInput$SpecialRouterSettings": "When using MediaConnect Router as the source of a MediaLive input there's a special handoff that occurs when a router output\nis created. This group of settings is set on your behalf by the MediaConnect Router service using this set of settings. This\nsetting object can only by used by that service."
+        "UpdateInput$SpecialRouterSettings": "When using MediaConnect Router as the source of a MediaLive input there's a special handoff that occurs when a router output\nis created. This group of settings is set on your behalf by the MediaConnect Router service using this set of settings. This\nsetting object can only by used by that service.",
+        "UpdateChannel$SpecialRouterSettings": "When using MediaConnect Router as the source of a MediaLive input there's a special handoff that occurs when a router output\nis created. This group of settings is set on your behalf by the MediaConnect Router service using this set of settings. This\nsetting object can only by used by that service."
       }
     },
     "__listOfRouterDestination": {
@@ -7559,6 +7570,62 @@
       "base": "Av1 Bit Depth",
       "refs": {
         "Av1Settings$BitDepth": "Specifies the bit depth for the output encode. Choose a value. Or leave the field empty to use the default, which is 8 bit."
+      }
+    },
+    "DescribeInferenceSettings": {
+      "base": "Configures Elemental Inference features in a channel.",
+      "refs": {
+        "Channel$InferenceSettings": "Include this setting to include Elemental Inference features in this channel.",
+        "ChannelSummary$InferenceSettings": "Include this setting to include Elemental Inference features in this channel."
+      }
+    },
+    "InferenceSettings": {
+      "base": "Configures Elemental Inference features in a channel.",
+      "refs": {
+        "CreateChannel$InferenceSettings": "Include this setting to include Elemental Inference features in this channel.",
+        "UpdateChannel$InferenceSettings": "Include this setting to include Elemental Inference features in this channel."
+      }
+    },
+    "MediaConnectRouterContainerSettings": {
+      "base": "Media Connect Router Container Settings",
+      "refs": {
+        "MediaConnectRouterOutputSettings$ContainerSettings": null
+      }
+    },
+    "MediaConnectRouterGroupSettings": {
+      "base": "Media Connect Router Group Settings",
+      "refs": {
+        "OutputGroupSettings$MediaConnectRouterGroupSettings": null
+      }
+    },
+    "MediaConnectRouterOutputConnectionMap": {
+      "base": "Map of MediaLive pipeline IDs to the ARNs of the MediaConnect Router Inputs to which this Output is connected.",
+      "refs": {
+        "MediaConnectRouterOutputSettings$ConnectedRouterInputs": "Shows the MediaConnect Router Inputs that are connected to this output. This parameter is purely informative, and editing it will have no effect. To connect or disconnect MediaConnect Router Inputs, go to MediaConnect."
+      }
+    },
+    "MediaConnectRouterOutputDestinationSettings": {
+      "base": "MediaConnect Router Output Destination Settings",
+      "refs": {
+        "__listOfMediaConnectRouterOutputDestinationSettings$member": null
+      }
+    },
+    "MediaConnectRouterOutputEncryptionType": {
+      "base": "Encryption configuration for MediaConnect router. When using SECRETS_MANAGER encryption, you must provide the ARN of the secret used to encrypt data in transit. When using AUTOMATIC encryption, a service-managed secret will be used instead.",
+      "refs": {
+        "MediaConnectRouterOutputDestinationSettings$EncryptionType": "Encryption configuration for MediaConnect router. When using SECRETS_MANAGER encryption, you must provide the ARN of the secret used to encrypt data in transit. When using AUTOMATIC encryption, a service-managed secret will be used instead."
+      }
+    },
+    "MediaConnectRouterOutputSettings": {
+      "base": "Media Connect Router Output Settings",
+      "refs": {
+        "OutputSettings$MediaConnectRouterOutputSettings": null
+      }
+    },
+    "__listOfMediaConnectRouterOutputDestinationSettings": {
+      "base": null,
+      "refs": {
+        "OutputDestination$MediaConnectRouterSettings": "Destination settings for a MediaConnect Router output; one destination for each redundant encoder."
       }
     }
   },

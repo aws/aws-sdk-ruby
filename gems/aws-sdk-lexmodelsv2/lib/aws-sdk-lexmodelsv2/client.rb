@@ -2905,6 +2905,40 @@ module Aws::LexModelsV2
       req.send_request(options)
     end
 
+    # Permanently deletes the recommendations and analysis results for a
+    # specific bot analysis request. This operation is provided for GDPR
+    # compliance and cannot be undone.
+    #
+    # After deletion, the analysis results cannot be retrieved. The analysis
+    # request ID will still appear in the history list, but attempting to
+    # describe the recommendations will return a
+    # `ResourceNotFoundException`.
+    #
+    # @option params [required, String] :bot_id
+    #   The unique identifier of the bot.
+    #
+    # @option params [required, String] :bot_analyzer_request_id
+    #   The unique identifier of the analysis request whose recommendations
+    #   should be deleted.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_bot_analyzer_recommendation({
+    #     bot_id: "Id", # required
+    #     bot_analyzer_request_id: "UUID", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/DeleteBotAnalyzerRecommendation AWS API Documentation
+    #
+    # @overload delete_bot_analyzer_recommendation(params = {})
+    # @param [Hash] params ({})
+    def delete_bot_analyzer_recommendation(params = {}, options = {})
+      req = build_request(:delete_bot_analyzer_recommendation, params)
+      req.send_request(options)
+    end
+
     # Removes a locale from a bot.
     #
     # When you delete a locale, all intents, slots, and slot types defined
@@ -3597,6 +3631,74 @@ module Aws::LexModelsV2
     # @param [Hash] params ({})
     def describe_bot_alias(params = {}, options = {})
       req = build_request(:describe_bot_alias, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the analysis results and recommendations for bot
+    # optimization. The analysis must be in `Available` status before
+    # recommendations can be retrieved.
+    #
+    # Recommendations are returned with pagination support. Each
+    # recommendation includes the issue location, priority level, detailed
+    # description, and proposed fix.
+    #
+    # @option params [required, String] :bot_id
+    #   The unique identifier of the bot.
+    #
+    # @option params [required, String] :bot_analyzer_request_id
+    #   The unique identifier of the analysis request.
+    #
+    # @option params [String] :next_token
+    #   If the response from a previous request was truncated, the `nextToken`
+    #   value is used to retrieve the next page of recommendations.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of recommendations to return in the response. The
+    #   default is 5.
+    #
+    # @return [Types::DescribeBotAnalyzerRecommendationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeBotAnalyzerRecommendationResponse#bot_id #bot_id} => String
+    #   * {Types::DescribeBotAnalyzerRecommendationResponse#bot_version #bot_version} => String
+    #   * {Types::DescribeBotAnalyzerRecommendationResponse#locale_id #locale_id} => String
+    #   * {Types::DescribeBotAnalyzerRecommendationResponse#bot_analyzer_status #bot_analyzer_status} => String
+    #   * {Types::DescribeBotAnalyzerRecommendationResponse#creation_date_time #creation_date_time} => Time
+    #   * {Types::DescribeBotAnalyzerRecommendationResponse#bot_analyzer_recommendation_list #bot_analyzer_recommendation_list} => Array&lt;Types::BotAnalyzerRecommendation&gt;
+    #   * {Types::DescribeBotAnalyzerRecommendationResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_bot_analyzer_recommendation({
+    #     bot_id: "Id", # required
+    #     bot_analyzer_request_id: "UUID", # required
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.bot_id #=> String
+    #   resp.bot_version #=> String
+    #   resp.locale_id #=> String
+    #   resp.bot_analyzer_status #=> String, one of "Processing", "Available", "Failed", "Stopping", "Stopped"
+    #   resp.creation_date_time #=> Time
+    #   resp.bot_analyzer_recommendation_list #=> Array
+    #   resp.bot_analyzer_recommendation_list[0].issue_location.bot_locale #=> String
+    #   resp.bot_analyzer_recommendation_list[0].issue_location.intent_id #=> String
+    #   resp.bot_analyzer_recommendation_list[0].issue_location.slot_id #=> String
+    #   resp.bot_analyzer_recommendation_list[0].priority #=> String, one of "High", "Medium", "Low"
+    #   resp.bot_analyzer_recommendation_list[0].issue_description #=> String
+    #   resp.bot_analyzer_recommendation_list[0].proposed_fix #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/DescribeBotAnalyzerRecommendation AWS API Documentation
+    #
+    # @overload describe_bot_analyzer_recommendation(params = {})
+    # @param [Hash] params ({})
+    def describe_bot_analyzer_recommendation(params = {}, options = {})
+      req = build_request(:describe_bot_analyzer_recommendation, params)
       req.send_request(options)
     end
 
@@ -5676,6 +5778,71 @@ module Aws::LexModelsV2
     # @param [Hash] params ({})
     def list_bot_aliases(params = {}, options = {})
       req = build_request(:list_bot_aliases, params)
+      req.send_request(options)
+    end
+
+    # Retrieves a list of historical bot analysis executions for a specific
+    # bot. You can filter the results by locale and bot version.
+    #
+    # The history includes all analysis executions regardless of their
+    # status, allowing you to track past analyses and their outcomes.
+    #
+    # @option params [required, String] :bot_id
+    #   The unique identifier of the bot.
+    #
+    # @option params [String] :locale_id
+    #   The locale identifier to filter the history. If not specified, returns
+    #   history for all locales.
+    #
+    # @option params [String] :bot_version
+    #   The bot version to filter the history. If not specified, defaults to
+    #   `DRAFT`.
+    #
+    # @option params [String] :next_token
+    #   If the response from a previous request was truncated, the `nextToken`
+    #   value is used to retrieve the next page of history entries.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of history entries to return in the response. The
+    #   default is 10.
+    #
+    # @return [Types::ListBotAnalyzerHistoryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListBotAnalyzerHistoryResponse#bot_id #bot_id} => String
+    #   * {Types::ListBotAnalyzerHistoryResponse#locale_id #locale_id} => String
+    #   * {Types::ListBotAnalyzerHistoryResponse#bot_version #bot_version} => String
+    #   * {Types::ListBotAnalyzerHistoryResponse#bot_analyzer_history_list #bot_analyzer_history_list} => Array&lt;Types::BotAnalyzerHistorySummary&gt;
+    #   * {Types::ListBotAnalyzerHistoryResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_bot_analyzer_history({
+    #     bot_id: "Id", # required
+    #     locale_id: "LocaleId",
+    #     bot_version: "DraftBotVersion",
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.bot_id #=> String
+    #   resp.locale_id #=> String
+    #   resp.bot_version #=> String
+    #   resp.bot_analyzer_history_list #=> Array
+    #   resp.bot_analyzer_history_list[0].bot_analyzer_status #=> String, one of "Processing", "Available", "Failed", "Stopping", "Stopped"
+    #   resp.bot_analyzer_history_list[0].creation_date_time #=> Time
+    #   resp.bot_analyzer_history_list[0].bot_analyzer_request_id #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/ListBotAnalyzerHistory AWS API Documentation
+    #
+    # @overload list_bot_analyzer_history(params = {})
+    # @param [Hash] params ({})
+    def list_bot_analyzer_history(params = {}, options = {})
+      req = build_request(:list_bot_analyzer_history, params)
       req.send_request(options)
     end
 
@@ -8336,6 +8503,67 @@ module Aws::LexModelsV2
       req.send_request(options)
     end
 
+    # Initiates an asynchronous analysis of your bot configuration using
+    # AI-powered analysis to identify potential issues and recommend
+    # improvements based on AWS best practices.
+    #
+    # The analysis examines your bot's configuration, including intents,
+    # utterances, slots, and conversation flows, to provide actionable
+    # recommendations for optimization.
+    #
+    # @option params [required, String] :bot_id
+    #   The unique identifier of the bot to analyze.
+    #
+    # @option params [required, String] :analysis_scope
+    #   The scope of analysis to perform. Currently only `BotLocale` scope is
+    #   supported.
+    #
+    #   Valid Values: `BotLocale`
+    #
+    # @option params [String] :locale_id
+    #   The locale identifier for the bot locale to analyze. Required when
+    #   `analysisScope` is `BotLocale`.
+    #
+    # @option params [String] :bot_version
+    #   The version of the bot to analyze. Defaults to `DRAFT` if not
+    #   specified.
+    #
+    # @return [Types::StartBotAnalyzerResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartBotAnalyzerResponse#bot_id #bot_id} => String
+    #   * {Types::StartBotAnalyzerResponse#bot_version #bot_version} => String
+    #   * {Types::StartBotAnalyzerResponse#locale_id #locale_id} => String
+    #   * {Types::StartBotAnalyzerResponse#bot_analyzer_status #bot_analyzer_status} => String
+    #   * {Types::StartBotAnalyzerResponse#bot_analyzer_request_id #bot_analyzer_request_id} => String
+    #   * {Types::StartBotAnalyzerResponse#creation_date_time #creation_date_time} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_bot_analyzer({
+    #     bot_id: "Id", # required
+    #     analysis_scope: "BotLocale", # required, accepts BotLocale
+    #     locale_id: "LocaleId",
+    #     bot_version: "DraftBotVersion",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.bot_id #=> String
+    #   resp.bot_version #=> String
+    #   resp.locale_id #=> String
+    #   resp.bot_analyzer_status #=> String, one of "Processing", "Available", "Failed", "Stopping", "Stopped"
+    #   resp.bot_analyzer_request_id #=> String
+    #   resp.creation_date_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/StartBotAnalyzer AWS API Documentation
+    #
+    # @overload start_bot_analyzer(params = {})
+    # @param [Hash] params ({})
+    def start_bot_analyzer(params = {}, options = {})
+      req = build_request(:start_bot_analyzer, params)
+      req.send_request(options)
+    end
+
     # Use this to provide your transcript data, and to start the bot
     # recommendation process.
     #
@@ -8806,6 +9034,47 @@ module Aws::LexModelsV2
     # @param [Hash] params ({})
     def start_test_set_generation(params = {}, options = {})
       req = build_request(:start_test_set_generation, params)
+      req.send_request(options)
+    end
+
+    # Cancels an ongoing bot analysis execution. Once stopped, the analysis
+    # cannot be resumed and no recommendations will be generated.
+    #
+    # @option params [required, String] :bot_id
+    #   The unique identifier of the bot.
+    #
+    # @option params [required, String] :bot_analyzer_request_id
+    #   The unique identifier of the analysis request to stop.
+    #
+    # @return [Types::StopBotAnalyzerResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StopBotAnalyzerResponse#bot_id #bot_id} => String
+    #   * {Types::StopBotAnalyzerResponse#bot_version #bot_version} => String
+    #   * {Types::StopBotAnalyzerResponse#locale_id #locale_id} => String
+    #   * {Types::StopBotAnalyzerResponse#bot_analyzer_status #bot_analyzer_status} => String
+    #   * {Types::StopBotAnalyzerResponse#bot_analyzer_request_id #bot_analyzer_request_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.stop_bot_analyzer({
+    #     bot_id: "Id", # required
+    #     bot_analyzer_request_id: "UUID", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.bot_id #=> String
+    #   resp.bot_version #=> String
+    #   resp.locale_id #=> String
+    #   resp.bot_analyzer_status #=> String, one of "Processing", "Available", "Failed", "Stopping", "Stopped"
+    #   resp.bot_analyzer_request_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/StopBotAnalyzer AWS API Documentation
+    #
+    # @overload stop_bot_analyzer(params = {})
+    # @param [Hash] params ({})
+    def stop_bot_analyzer(params = {}, options = {})
+      req = build_request(:stop_bot_analyzer, params)
       req.send_request(options)
     end
 
@@ -10718,7 +10987,7 @@ module Aws::LexModelsV2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-lexmodelsv2'
-      context[:gem_version] = '1.87.0'
+      context[:gem_version] = '1.89.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

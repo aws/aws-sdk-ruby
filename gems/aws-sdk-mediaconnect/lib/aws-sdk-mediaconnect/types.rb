@@ -2444,12 +2444,6 @@ module Aws::MediaConnect
     #
     # @note FailoverRouterInputProtocolConfiguration is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of FailoverRouterInputProtocolConfiguration corresponding to the set member.
     #
-    # @!attribute [rw] rtp
-    #   The configuration settings for a Router Input using the RTP
-    #   (Real-Time Transport Protocol) protocol, including the port and
-    #   forward error correction state.
-    #   @return [Types::RtpRouterInputConfiguration]
-    #
     # @!attribute [rw] rist
     #   The configuration settings for a router input using the RIST
     #   (Reliable Internet Stream Transport) protocol, including the port
@@ -2469,22 +2463,28 @@ module Aws::MediaConnect
     #   configuration.
     #   @return [Types::SrtCallerRouterInputConfiguration]
     #
+    # @!attribute [rw] rtp
+    #   The configuration settings for a Router Input using the RTP
+    #   (Real-Time Transport Protocol) protocol, including the port and
+    #   forward error correction state.
+    #   @return [Types::RtpRouterInputConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/FailoverRouterInputProtocolConfiguration AWS API Documentation
     #
     class FailoverRouterInputProtocolConfiguration < Struct.new(
-      :rtp,
       :rist,
       :srt_listener,
       :srt_caller,
+      :rtp,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
       include Aws::Structure::Union
 
-      class Rtp < FailoverRouterInputProtocolConfiguration; end
       class Rist < FailoverRouterInputProtocolConfiguration; end
       class SrtListener < FailoverRouterInputProtocolConfiguration; end
       class SrtCaller < FailoverRouterInputProtocolConfiguration; end
+      class Rtp < FailoverRouterInputProtocolConfiguration; end
       class Unknown < FailoverRouterInputProtocolConfiguration; end
     end
 
@@ -4472,6 +4472,47 @@ module Aws::MediaConnect
     #
     class MediaConnectFlowRouterOutputStreamDetails < Aws::EmptyStructure; end
 
+    # Configuration settings for connecting a router input to a MediaLive
+    # channel output.
+    #
+    # @!attribute [rw] media_live_channel_arn
+    #   The ARN of the MediaLive channel to connect to this router input.
+    #   @return [String]
+    #
+    # @!attribute [rw] media_live_pipeline_id
+    #   The index of the MediaLive pipeline to connect to this router input.
+    #   @return [String]
+    #
+    # @!attribute [rw] media_live_channel_output_name
+    #   The name of the MediaLive channel output to connect to this router
+    #   input.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_transit_decryption
+    #   The encryption configuration that defines how content is encrypted
+    #   during transit between MediaConnect Router and MediaLive. This
+    #   configuration determines whether encryption keys are automatically
+    #   managed by the service or manually managed through Secrets Manager.
+    #   @return [Types::MediaLiveTransitEncryption]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/MediaLiveChannelRouterInputConfiguration AWS API Documentation
+    #
+    class MediaLiveChannelRouterInputConfiguration < Struct.new(
+      :media_live_channel_arn,
+      :media_live_pipeline_id,
+      :media_live_channel_output_name,
+      :source_transit_decryption)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration details for a MediaLive channel when used as a router
+    # input source.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/MediaLiveChannelRouterInputStreamDetails AWS API Documentation
+    #
+    class MediaLiveChannelRouterInputStreamDetails < Aws::EmptyStructure; end
+
     # Configuration settings for connecting a router output to a MediaLive
     # input.
     #
@@ -6105,37 +6146,44 @@ module Aws::MediaConnect
     #   and availability zone.
     #   @return [Types::StandardRouterInputConfiguration]
     #
+    # @!attribute [rw] media_live_channel
+    #   Configuration settings for connecting a router input to a MediaLive
+    #   channel output.
+    #   @return [Types::MediaLiveChannelRouterInputConfiguration]
+    #
     # @!attribute [rw] failover
     #   Configuration settings for a failover router input that allows
     #   switching between two input sources.
     #   @return [Types::FailoverRouterInputConfiguration]
-    #
-    # @!attribute [rw] merge
-    #   Configuration settings for a merge router input that combines two
-    #   input sources.
-    #   @return [Types::MergeRouterInputConfiguration]
     #
     # @!attribute [rw] media_connect_flow
     #   Configuration settings for connecting a router input to a flow
     #   output.
     #   @return [Types::MediaConnectFlowRouterInputConfiguration]
     #
+    # @!attribute [rw] merge
+    #   Configuration settings for a merge router input that combines two
+    #   input sources.
+    #   @return [Types::MergeRouterInputConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/RouterInputConfiguration AWS API Documentation
     #
     class RouterInputConfiguration < Struct.new(
       :standard,
+      :media_live_channel,
       :failover,
-      :merge,
       :media_connect_flow,
+      :merge,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
       include Aws::Structure::Union
 
       class Standard < RouterInputConfiguration; end
+      class MediaLiveChannel < RouterInputConfiguration; end
       class Failover < RouterInputConfiguration; end
-      class Merge < RouterInputConfiguration; end
       class MediaConnectFlow < RouterInputConfiguration; end
+      class Merge < RouterInputConfiguration; end
       class Unknown < RouterInputConfiguration; end
     end
 
@@ -6143,16 +6191,12 @@ module Aws::MediaConnect
     #
     # @note RouterInputFilter is a union - when making an API calls you must set exactly one of the members.
     #
-    # @!attribute [rw] region_names
-    #   The AWS Regions of the router inputs to include in the filter.
-    #   @return [Array<String>]
-    #
-    # @!attribute [rw] input_types
-    #   The types of router inputs to include in the filter.
-    #   @return [Array<String>]
-    #
     # @!attribute [rw] name_contains
     #   The names of the router inputs to include in the filter.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] region_names
+    #   The AWS Regions of the router inputs to include in the filter.
     #   @return [Array<String>]
     #
     # @!attribute [rw] network_interface_arns
@@ -6165,24 +6209,28 @@ module Aws::MediaConnect
     #   (REGIONAL or GLOBAL).
     #   @return [Array<String>]
     #
+    # @!attribute [rw] input_types
+    #   The types of router inputs to include in the filter.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/RouterInputFilter AWS API Documentation
     #
     class RouterInputFilter < Struct.new(
-      :region_names,
-      :input_types,
       :name_contains,
+      :region_names,
       :network_interface_arns,
       :routing_scopes,
+      :input_types,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
       include Aws::Structure::Union
 
-      class RegionNames < RouterInputFilter; end
-      class InputTypes < RouterInputFilter; end
       class NameContains < RouterInputFilter; end
+      class RegionNames < RouterInputFilter; end
       class NetworkInterfaceArns < RouterInputFilter; end
       class RoutingScopes < RouterInputFilter; end
+      class InputTypes < RouterInputFilter; end
       class Unknown < RouterInputFilter; end
     end
 
@@ -6234,12 +6282,6 @@ module Aws::MediaConnect
     #
     # @note RouterInputProtocolConfiguration is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of RouterInputProtocolConfiguration corresponding to the set member.
     #
-    # @!attribute [rw] rtp
-    #   The configuration settings for a Router Input using the RTP
-    #   (Real-Time Transport Protocol) protocol, including the port and
-    #   forward error correction state.
-    #   @return [Types::RtpRouterInputConfiguration]
-    #
     # @!attribute [rw] rist
     #   The configuration settings for a router input using the RIST
     #   (Reliable Internet Stream Transport) protocol, including the port
@@ -6259,22 +6301,28 @@ module Aws::MediaConnect
     #   configuration.
     #   @return [Types::SrtCallerRouterInputConfiguration]
     #
+    # @!attribute [rw] rtp
+    #   The configuration settings for a Router Input using the RTP
+    #   (Real-Time Transport Protocol) protocol, including the port and
+    #   forward error correction state.
+    #   @return [Types::RtpRouterInputConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/RouterInputProtocolConfiguration AWS API Documentation
     #
     class RouterInputProtocolConfiguration < Struct.new(
-      :rtp,
       :rist,
       :srt_listener,
       :srt_caller,
+      :rtp,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
       include Aws::Structure::Union
 
-      class Rtp < RouterInputProtocolConfiguration; end
       class Rist < RouterInputProtocolConfiguration; end
       class SrtListener < RouterInputProtocolConfiguration; end
       class SrtCaller < RouterInputProtocolConfiguration; end
+      class Rtp < RouterInputProtocolConfiguration; end
       class Unknown < RouterInputProtocolConfiguration; end
     end
 
@@ -6326,37 +6374,44 @@ module Aws::MediaConnect
     #   Configuration details for a standard router input stream type.
     #   @return [Types::StandardRouterInputStreamDetails]
     #
+    # @!attribute [rw] media_live_channel
+    #   Configuration details for a MediaLive channel when used as a router
+    #   input source.
+    #   @return [Types::MediaLiveChannelRouterInputStreamDetails]
+    #
     # @!attribute [rw] failover
     #   Configuration details for a failover router input that can
     #   automatically switch between two sources.
     #   @return [Types::FailoverRouterInputStreamDetails]
-    #
-    # @!attribute [rw] merge
-    #   Configuration details for a merge router input that combines two
-    #   input sources.
-    #   @return [Types::MergeRouterInputStreamDetails]
     #
     # @!attribute [rw] media_connect_flow
     #   Configuration details for a MediaConnect flow when used as a router
     #   input source.
     #   @return [Types::MediaConnectFlowRouterInputStreamDetails]
     #
+    # @!attribute [rw] merge
+    #   Configuration details for a merge router input that combines two
+    #   input sources.
+    #   @return [Types::MergeRouterInputStreamDetails]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/RouterInputStreamDetails AWS API Documentation
     #
     class RouterInputStreamDetails < Struct.new(
       :standard,
+      :media_live_channel,
       :failover,
-      :merge,
       :media_connect_flow,
+      :merge,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
       include Aws::Structure::Union
 
       class Standard < RouterInputStreamDetails; end
+      class MediaLiveChannel < RouterInputStreamDetails; end
       class Failover < RouterInputStreamDetails; end
-      class Merge < RouterInputStreamDetails; end
       class MediaConnectFlow < RouterInputStreamDetails; end
+      class Merge < RouterInputStreamDetails; end
       class Unknown < RouterInputStreamDetails; end
     end
 
@@ -6777,17 +6832,17 @@ module Aws::MediaConnect
     #   The AWS Regions of the router outputs to include in the filter.
     #   @return [Array<String>]
     #
-    # @!attribute [rw] output_types
-    #   The types of router outputs to include in the filter.
-    #   @return [Array<String>]
-    #
-    # @!attribute [rw] name_contains
-    #   The names of the router outputs to include in the filter.
-    #   @return [Array<String>]
-    #
     # @!attribute [rw] network_interface_arns
     #   The Amazon Resource Names (ARNs) of the network interfaces
     #   associated with the router outputs to include in the filter.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] routing_scopes
+    #   Filter criteria to list router outputs based on their routing scope.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] output_types
+    #   The types of router outputs to include in the filter.
     #   @return [Array<String>]
     #
     # @!attribute [rw] routed_input_arns
@@ -6795,30 +6850,30 @@ module Aws::MediaConnect
     #   include in the filter.
     #   @return [Array<String>]
     #
-    # @!attribute [rw] routing_scopes
-    #   Filter criteria to list router outputs based on their routing scope.
+    # @!attribute [rw] name_contains
+    #   The names of the router outputs to include in the filter.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/RouterOutputFilter AWS API Documentation
     #
     class RouterOutputFilter < Struct.new(
       :region_names,
-      :output_types,
-      :name_contains,
       :network_interface_arns,
-      :routed_input_arns,
       :routing_scopes,
+      :output_types,
+      :routed_input_arns,
+      :name_contains,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
       include Aws::Structure::Union
 
       class RegionNames < RouterOutputFilter; end
-      class OutputTypes < RouterOutputFilter; end
-      class NameContains < RouterOutputFilter; end
       class NetworkInterfaceArns < RouterOutputFilter; end
-      class RoutedInputArns < RouterOutputFilter; end
       class RoutingScopes < RouterOutputFilter; end
+      class OutputTypes < RouterOutputFilter; end
+      class RoutedInputArns < RouterOutputFilter; end
+      class NameContains < RouterOutputFilter; end
       class Unknown < RouterOutputFilter; end
     end
 
@@ -6847,12 +6902,6 @@ module Aws::MediaConnect
     #
     # @note RouterOutputProtocolConfiguration is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of RouterOutputProtocolConfiguration corresponding to the set member.
     #
-    # @!attribute [rw] rtp
-    #   The configuration settings for a router output using the RTP
-    #   (Real-Time Transport Protocol) protocol, including the destination
-    #   address and port, and forward error correction state.
-    #   @return [Types::RtpRouterOutputConfiguration]
-    #
     # @!attribute [rw] rist
     #   The configuration settings for a router output using the RIST
     #   (Reliable Internet Stream Transport) protocol, including the
@@ -6872,22 +6921,28 @@ module Aws::MediaConnect
     #   encryption key configuration.
     #   @return [Types::SrtCallerRouterOutputConfiguration]
     #
+    # @!attribute [rw] rtp
+    #   The configuration settings for a router output using the RTP
+    #   (Real-Time Transport Protocol) protocol, including the destination
+    #   address and port, and forward error correction state.
+    #   @return [Types::RtpRouterOutputConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/RouterOutputProtocolConfiguration AWS API Documentation
     #
     class RouterOutputProtocolConfiguration < Struct.new(
-      :rtp,
       :rist,
       :srt_listener,
       :srt_caller,
+      :rtp,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
       include Aws::Structure::Union
 
-      class Rtp < RouterOutputProtocolConfiguration; end
       class Rist < RouterOutputProtocolConfiguration; end
       class SrtListener < RouterOutputProtocolConfiguration; end
       class SrtCaller < RouterOutputProtocolConfiguration; end
+      class Rtp < RouterOutputProtocolConfiguration; end
       class Unknown < RouterOutputProtocolConfiguration; end
     end
 

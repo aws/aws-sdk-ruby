@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.155.0 (2026-03-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.154.0 (2026-03-11)
+------------------
+
+* Feature - Added WINDOWS SERVER 2025 OperatingSystemName.
+
 1.153.0 (2026-02-05)
 ------------------
 

@@ -213,6 +213,7 @@ module Aws::Organizations
     Parents = Shapes::ListShape.new(name: 'Parents')
     Path = Shapes::StringShape.new(name: 'Path')
     PathToError = Shapes::StringShape.new(name: 'PathToError')
+    Paths = Shapes::ListShape.new(name: 'Paths')
     Policies = Shapes::ListShape.new(name: 'Policies')
     Policy = Shapes::StructureShape.new(name: 'Policy')
     PolicyArn = Shapes::StringShape.new(name: 'PolicyArn')
@@ -311,6 +312,7 @@ module Aws::Organizations
     Account.add_member(:name, Shapes::ShapeRef.new(shape: AccountName, location_name: "Name"))
     Account.add_member(:status, Shapes::ShapeRef.new(shape: AccountStatus, location_name: "Status"))
     Account.add_member(:state, Shapes::ShapeRef.new(shape: AccountState, location_name: "State"))
+    Account.add_member(:paths, Shapes::ShapeRef.new(shape: Paths, location_name: "Paths"))
     Account.add_member(:joined_method, Shapes::ShapeRef.new(shape: AccountJoinedMethod, location_name: "JoinedMethod"))
     Account.add_member(:joined_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "JoinedTimestamp"))
     Account.struct_class = Types::Account
@@ -864,6 +866,7 @@ module Aws::Organizations
     OrganizationalUnit.add_member(:id, Shapes::ShapeRef.new(shape: OrganizationalUnitId, location_name: "Id"))
     OrganizationalUnit.add_member(:arn, Shapes::ShapeRef.new(shape: OrganizationalUnitArn, location_name: "Arn"))
     OrganizationalUnit.add_member(:name, Shapes::ShapeRef.new(shape: OrganizationalUnitName, location_name: "Name"))
+    OrganizationalUnit.add_member(:path, Shapes::ShapeRef.new(shape: Path, location_name: "Path"))
     OrganizationalUnit.struct_class = Types::OrganizationalUnit
 
     OrganizationalUnitNotEmptyException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
@@ -882,6 +885,8 @@ module Aws::Organizations
     ParentNotFoundException.struct_class = Types::ParentNotFoundException
 
     Parents.member = Shapes::ShapeRef.new(shape: Parent)
+
+    Paths.member = Shapes::ShapeRef.new(shape: Path)
 
     Policies.member = Shapes::ShapeRef.new(shape: PolicySummary)
 

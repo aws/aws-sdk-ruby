@@ -1,0 +1,1609 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::DevOpsAgent
+  module Types
+
+    class AWSConfiguration
+      attr_accessor assumable_role_arn: ::String
+      attr_accessor account_id: ::String
+      attr_accessor account_type: ("monitor")
+      SENSITIVE: []
+    end
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class AdditionalServiceDetails
+      attr_accessor github: Types::RegisteredGithubServiceDetails
+      attr_accessor slack: Types::RegisteredSlackServiceDetails
+      attr_accessor mcpserverdatadog: Types::RegisteredMCPServerDetails
+      attr_accessor mcpserver: Types::RegisteredMCPServerDetails
+      attr_accessor servicenow: Types::RegisteredServiceNowDetails
+      attr_accessor gitlab: Types::RegisteredGitLabServiceDetails
+      attr_accessor mcpserversplunk: Types::RegisteredMCPServerDetails
+      attr_accessor mcpservernewrelic: Types::RegisteredNewRelicDetails
+      attr_accessor azuredevops: Types::RegisteredAzureDevOpsServiceDetails
+      attr_accessor azureidentity: Types::RegisteredAzureIdentityDetails
+      attr_accessor mcpservergrafana: Types::RegisteredGrafanaServerDetails
+      attr_accessor pagerduty: Types::RegisteredPagerDutyDetails
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Github < AdditionalServiceDetails
+      end
+      class Slack < AdditionalServiceDetails
+      end
+      class Mcpserverdatadog < AdditionalServiceDetails
+      end
+      class Mcpserver < AdditionalServiceDetails
+      end
+      class Servicenow < AdditionalServiceDetails
+      end
+      class Gitlab < AdditionalServiceDetails
+      end
+      class Mcpserversplunk < AdditionalServiceDetails
+      end
+      class Mcpservernewrelic < AdditionalServiceDetails
+      end
+      class Azuredevops < AdditionalServiceDetails
+      end
+      class Azureidentity < AdditionalServiceDetails
+      end
+      class Mcpservergrafana < AdditionalServiceDetails
+      end
+      class Pagerduty < AdditionalServiceDetails
+      end
+      class Unknown < AdditionalServiceDetails
+      end
+    end
+
+    class AdditionalServiceRegistrationStep
+      attr_accessor oauth: Types::OAuthAdditionalStepDetails
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Oauth < AdditionalServiceRegistrationStep
+      end
+      class Unknown < AdditionalServiceRegistrationStep
+      end
+    end
+
+    class AgentSpace
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor locale: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor kms_key_arn: ::String
+      attr_accessor agent_space_id: ::String
+      SENSITIVE: [:description]
+    end
+
+    class AssistantMessageBlock
+      attr_accessor text: ::String
+      attr_accessor tool_use: untyped
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Text < AssistantMessageBlock
+      end
+      class ToolUse < AssistantMessageBlock
+      end
+      class Unknown < AssistantMessageBlock
+      end
+    end
+
+    class AssociateServiceInput
+      attr_accessor agent_space_id: ::String
+      attr_accessor service_id: ::String
+      attr_accessor configuration: Types::ServiceConfiguration
+      SENSITIVE: []
+    end
+
+    class AssociateServiceOutput
+      attr_accessor association: Types::Association
+      attr_accessor webhook: Types::GenericWebhook
+      SENSITIVE: []
+    end
+
+    class Association
+      attr_accessor agent_space_id: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor status: ("valid" | "invalid" | "pending-confirmation")
+      attr_accessor association_id: ::String
+      attr_accessor service_id: ::String
+      attr_accessor configuration: Types::ServiceConfiguration
+      SENSITIVE: []
+    end
+
+    class AzureConfiguration
+      attr_accessor subscription_id: ::String
+      SENSITIVE: []
+    end
+
+    class AzureDevOpsConfiguration
+      attr_accessor organization_name: ::String
+      attr_accessor project_id: ::String
+      attr_accessor project_name: ::String
+      SENSITIVE: []
+    end
+
+    class ChatExecution
+      attr_accessor execution_id: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor summary: ::String
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ContentSizeExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CreateAgentSpaceInput
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor locale: ::String
+      attr_accessor kms_key_arn: ::String
+      attr_accessor client_token: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: [:description]
+    end
+
+    class CreateAgentSpaceOutput
+      attr_accessor agent_space: Types::AgentSpace
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateBacklogTaskRequest
+      attr_accessor agent_space_id: ::String
+      attr_accessor reference: Types::ReferenceInput
+      attr_accessor task_type: ("INVESTIGATION" | "EVALUATION")
+      attr_accessor title: ::String
+      attr_accessor description: ::String
+      attr_accessor priority: ("CRITICAL" | "HIGH" | "MEDIUM" | "LOW" | "MINIMAL")
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateBacklogTaskResponse
+      attr_accessor task: Types::Task
+      SENSITIVE: []
+    end
+
+    class CreateChatRequest
+      attr_accessor agent_space_id: ::String
+      attr_accessor user_id: ::String
+      attr_accessor user_type: ("IAM" | "IDC" | "IDP")
+      SENSITIVE: []
+    end
+
+    class CreateChatResponse
+      attr_accessor execution_id: ::String
+      attr_accessor created_at: ::Time
+      SENSITIVE: []
+    end
+
+    class CreatePrivateConnectionInput
+      attr_accessor name: ::String
+      attr_accessor mode: Types::PrivateConnectionMode
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreatePrivateConnectionOutput
+      attr_accessor name: ::String
+      attr_accessor type: ("SELF_MANAGED" | "SERVICE_MANAGED")
+      attr_accessor resource_gateway_id: ::String
+      attr_accessor host_address: ::String
+      attr_accessor vpc_id: ::String
+      attr_accessor resource_configuration_id: ::String
+      attr_accessor status: ("ACTIVE" | "CREATE_IN_PROGRESS" | "CREATE_FAILED" | "DELETE_IN_PROGRESS" | "DELETE_FAILED")
+      attr_accessor certificate_expiry_time: ::Time
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class DatadogAuthorizationConfig
+      attr_accessor authorization_discovery: Types::MCPServerAuthorizationDiscoveryConfig
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class AuthorizationDiscovery < DatadogAuthorizationConfig
+      end
+      class Unknown < DatadogAuthorizationConfig
+      end
+    end
+
+    class DatadogServiceDetails
+      attr_accessor name: ::String
+      attr_accessor endpoint: ::String
+      attr_accessor description: ::String
+      attr_accessor authorization_config: Types::DatadogAuthorizationConfig
+      SENSITIVE: [:description]
+    end
+
+    class DeleteAgentSpaceInput
+      attr_accessor agent_space_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteAgentSpaceOutput < Aws::EmptyStructure
+    end
+
+    class DeletePrivateConnectionInput
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class DeletePrivateConnectionOutput
+      attr_accessor name: ::String
+      attr_accessor status: ("ACTIVE" | "CREATE_IN_PROGRESS" | "CREATE_FAILED" | "DELETE_IN_PROGRESS" | "DELETE_FAILED")
+      SENSITIVE: []
+    end
+
+    class DeregisterServiceInput
+      attr_accessor service_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeregisterServiceOutput < Aws::EmptyStructure
+    end
+
+    class DescribePrivateConnectionInput
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class DescribePrivateConnectionOutput
+      attr_accessor name: ::String
+      attr_accessor type: ("SELF_MANAGED" | "SERVICE_MANAGED")
+      attr_accessor resource_gateway_id: ::String
+      attr_accessor host_address: ::String
+      attr_accessor vpc_id: ::String
+      attr_accessor resource_configuration_id: ::String
+      attr_accessor status: ("ACTIVE" | "CREATE_IN_PROGRESS" | "CREATE_FAILED" | "DELETE_IN_PROGRESS" | "DELETE_FAILED")
+      attr_accessor certificate_expiry_time: ::Time
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class DisableOperatorAppInput
+      attr_accessor agent_space_id: ::String
+      attr_accessor auth_flow: ("iam" | "idc" | "idp")
+      SENSITIVE: []
+    end
+
+    class DisassociateServiceInput
+      attr_accessor agent_space_id: ::String
+      attr_accessor association_id: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociateServiceOutput < Aws::EmptyStructure
+    end
+
+    class DynatraceConfiguration
+      attr_accessor env_id: ::String
+      attr_accessor resources: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DynatraceOAuthClientCredentialsConfig
+      attr_accessor client_name: ::String
+      attr_accessor client_id: ::String
+      attr_accessor exchange_parameters: ::Hash[::String, ::String]
+      attr_accessor client_secret: ::String
+      SENSITIVE: [:client_id, :client_secret]
+    end
+
+    class DynatraceServiceAuthorizationConfig
+      attr_accessor o_auth_client_credentials: Types::DynatraceOAuthClientCredentialsConfig
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class OAuthClientCredentials < DynatraceServiceAuthorizationConfig
+      end
+      class Unknown < DynatraceServiceAuthorizationConfig
+      end
+    end
+
+    class DynatraceServiceDetails
+      attr_accessor account_urn: ::String
+      attr_accessor authorization_config: Types::DynatraceServiceAuthorizationConfig
+      SENSITIVE: [:authorization_config]
+    end
+
+    class EnableOperatorAppInput
+      attr_accessor agent_space_id: ::String
+      attr_accessor auth_flow: ("iam" | "idc" | "idp")
+      attr_accessor operator_app_role_arn: ::String
+      attr_accessor idc_instance_arn: ::String
+      attr_accessor issuer_url: ::String
+      attr_accessor idp_client_id: ::String
+      attr_accessor idp_client_secret: ::String
+      attr_accessor provider: ::String
+      SENSITIVE: [:idp_client_secret]
+    end
+
+    class EnableOperatorAppOutput
+      attr_accessor agent_space_id: ::String
+      attr_accessor iam: Types::IamAuthConfiguration
+      attr_accessor idc: Types::IdcAuthConfiguration
+      attr_accessor idp: Types::IdpAuthConfiguration
+      SENSITIVE: []
+    end
+
+    class EventChannelConfiguration < Aws::EmptyStructure
+    end
+
+    class EventChannelDetails
+      attr_accessor type: ("webhook")
+      SENSITIVE: []
+    end
+
+    class Execution
+      attr_accessor agent_space_id: ::String
+      attr_accessor execution_id: ::String
+      attr_accessor parent_execution_id: ::String
+      attr_accessor agent_sub_task: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor execution_status: ("FAILED" | "RUNNING" | "STOPPED" | "CANCELED" | "TIMED_OUT")
+      attr_accessor agent_type: ::String
+      attr_accessor uid: ::String
+      SENSITIVE: []
+    end
+
+    class GenericWebhook
+      attr_accessor webhook_url: ::String
+      attr_accessor webhook_id: ::String
+      attr_accessor webhook_type: ("hmac" | "apikey" | "gitlab" | "pagerduty")
+      attr_accessor webhook_secret: ::String
+      attr_accessor api_key: ::String
+      SENSITIVE: [:webhook_secret, :api_key]
+    end
+
+    class GetAccountUsageInput < Aws::EmptyStructure
+    end
+
+    class GetAccountUsageOutput
+      attr_accessor monthly_account_investigation_hours: Types::UsageMetric
+      attr_accessor monthly_account_evaluation_hours: Types::UsageMetric
+      attr_accessor monthly_account_system_learning_hours: Types::UsageMetric
+      attr_accessor monthly_account_on_demand_hours: Types::UsageMetric
+      attr_accessor usage_period_start_time: ::Time
+      attr_accessor usage_period_end_time: ::Time
+      SENSITIVE: []
+    end
+
+    class GetAgentSpaceInput
+      attr_accessor agent_space_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetAgentSpaceOutput
+      attr_accessor agent_space: Types::AgentSpace
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class GetAssociationInput
+      attr_accessor agent_space_id: ::String
+      attr_accessor association_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetAssociationOutput
+      attr_accessor association: Types::Association
+      SENSITIVE: []
+    end
+
+    class GetBacklogTaskRequest
+      attr_accessor agent_space_id: ::String
+      attr_accessor task_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetBacklogTaskResponse
+      attr_accessor task: Types::Task
+      SENSITIVE: []
+    end
+
+    class GetOperatorAppInput
+      attr_accessor agent_space_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetOperatorAppOutput
+      attr_accessor iam: Types::IamAuthConfiguration
+      attr_accessor idc: Types::IdcAuthConfiguration
+      attr_accessor idp: Types::IdpAuthConfiguration
+      SENSITIVE: []
+    end
+
+    class GetRecommendationRequest
+      attr_accessor agent_space_id: ::String
+      attr_accessor recommendation_id: ::String
+      attr_accessor recommendation_version: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetRecommendationResponse
+      attr_accessor recommendation: Types::Recommendation
+      SENSITIVE: []
+    end
+
+    class GetServiceInput
+      attr_accessor service_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetServiceOutput
+      attr_accessor service: Types::RegisteredService
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class GitHubConfiguration
+      attr_accessor repo_name: ::String
+      attr_accessor repo_id: ::String
+      attr_accessor owner: ::String
+      attr_accessor owner_type: ("organization" | "user")
+      attr_accessor instance_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GitLabConfiguration
+      attr_accessor project_id: ::String
+      attr_accessor project_path: ::String
+      attr_accessor instance_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GitLabDetails
+      attr_accessor target_url: ::String
+      attr_accessor token_type: ("personal" | "group")
+      attr_accessor token_value: ::String
+      attr_accessor group_id: ::String
+      SENSITIVE: [:token_value]
+    end
+
+    class Goal
+      attr_accessor agent_space_arn: ::String
+      attr_accessor goal_id: ::String
+      attr_accessor title: ::String
+      attr_accessor content: Types::GoalContent
+      attr_accessor status: ("ACTIVE" | "PAUSED" | "COMPLETE")
+      attr_accessor goal_type: ("CUSTOMER_DEFINED" | "ONCALL_REPORT")
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor last_evaluated_at: ::Time
+      attr_accessor last_task_id: ::String
+      attr_accessor last_successful_task_id: ::String
+      attr_accessor version: ::Integer
+      attr_accessor evaluation_schedule: Types::GoalSchedule
+      SENSITIVE: []
+    end
+
+    class GoalContent
+      attr_accessor description: ::String
+      attr_accessor objectives: ::String
+      SENSITIVE: []
+    end
+
+    class GoalSchedule
+      attr_accessor state: ("ENABLED" | "DISABLED")
+      attr_accessor expression: ::String
+      SENSITIVE: []
+    end
+
+    class GoalScheduleInput
+      attr_accessor state: ("ENABLED" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class GrafanaServiceDetails
+      attr_accessor name: ::String
+      attr_accessor endpoint: ::String
+      attr_accessor description: ::String
+      attr_accessor authorization_config: Types::MCPServerAuthorizationConfig
+      SENSITIVE: [:description]
+    end
+
+    class IamAuthConfiguration
+      attr_accessor operator_app_role_arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class IdcAuthConfiguration
+      attr_accessor operator_app_role_arn: ::String
+      attr_accessor idc_instance_arn: ::String
+      attr_accessor idc_application_arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class IdentityCenterServiceException
+      attr_accessor message: ::String
+      attr_accessor underlying_error_code: ::String
+      SENSITIVE: []
+    end
+
+    class IdpAuthConfiguration
+      attr_accessor issuer_url: ::String
+      attr_accessor client_id: ::String
+      attr_accessor operator_app_role_arn: ::String
+      attr_accessor provider: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidParameterException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class JournalRecord
+      attr_accessor agent_space_id: ::String
+      attr_accessor execution_id: ::String
+      attr_accessor record_id: ::String
+      attr_accessor content: untyped
+      attr_accessor created_at: ::Time
+      attr_accessor record_type: ::String
+      attr_accessor user_reference: Types::UserReference
+      SENSITIVE: []
+    end
+
+    class ListAgentSpacesInput
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAgentSpacesOutput
+      attr_accessor next_token: ::String
+      attr_accessor agent_spaces: ::Array[Types::AgentSpace]
+      SENSITIVE: []
+    end
+
+    class ListAssociationsInput
+      attr_accessor agent_space_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor filter_service_types: ::String
+      SENSITIVE: []
+    end
+
+    class ListAssociationsOutput
+      attr_accessor next_token: ::String
+      attr_accessor associations: ::Array[Types::Association]
+      SENSITIVE: []
+    end
+
+    class ListBacklogTasksRequest
+      attr_accessor agent_space_id: ::String
+      attr_accessor filter: Types::TaskFilter
+      attr_accessor limit: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor sort_field: ("CREATED_AT" | "PRIORITY")
+      attr_accessor order: ("ASC" | "DESC")
+      SENSITIVE: []
+    end
+
+    class ListBacklogTasksResponse
+      attr_accessor tasks: ::Array[Types::Task]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListChatsRequest
+      attr_accessor agent_space_id: ::String
+      attr_accessor user_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListChatsResponse
+      attr_accessor executions: ::Array[Types::ChatExecution]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListExecutionsRequest
+      attr_accessor agent_space_id: ::String
+      attr_accessor task_id: ::String
+      attr_accessor limit: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListExecutionsResponse
+      attr_accessor executions: ::Array[Types::Execution]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListGoalsRequest
+      attr_accessor agent_space_id: ::String
+      attr_accessor status: ("ACTIVE" | "PAUSED" | "COMPLETE")
+      attr_accessor goal_type: ("CUSTOMER_DEFINED" | "ONCALL_REPORT")
+      attr_accessor limit: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListGoalsResponse
+      attr_accessor goals: ::Array[Types::Goal]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListJournalRecordsRequest
+      attr_accessor agent_space_id: ::String
+      attr_accessor execution_id: ::String
+      attr_accessor limit: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor record_type: ::String
+      attr_accessor order: ("ASC" | "DESC")
+      SENSITIVE: []
+    end
+
+    class ListJournalRecordsResponse
+      attr_accessor records: ::Array[Types::JournalRecord]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListPendingMessagesRequest
+      attr_accessor agent_space_id: ::String
+      attr_accessor execution_id: ::String
+      SENSITIVE: []
+    end
+
+    class ListPendingMessagesResponse
+      attr_accessor agent_space_id: ::String
+      attr_accessor execution_id: ::String
+      attr_accessor messages: ::Array[Types::PendingMessage]
+      attr_accessor created_at: ::Time
+      SENSITIVE: []
+    end
+
+    class ListPrivateConnectionsInput < Aws::EmptyStructure
+    end
+
+    class ListPrivateConnectionsOutput
+      attr_accessor private_connections: ::Array[Types::PrivateConnectionSummary]
+      SENSITIVE: []
+    end
+
+    class ListRecommendationsRequest
+      attr_accessor agent_space_id: ::String
+      attr_accessor task_id: ::String
+      attr_accessor goal_id: ::String
+      attr_accessor status: ("PROPOSED" | "ACCEPTED" | "REJECTED" | "CLOSED" | "COMPLETED" | "UPDATE_IN_PROGRESS")
+      attr_accessor priority: ("HIGH" | "MEDIUM" | "LOW")
+      attr_accessor limit: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListRecommendationsResponse
+      attr_accessor recommendations: ::Array[Types::Recommendation]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListServicesInput
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor filter_service_type: ("github" | "slack" | "azure" | "azuredevops" | "dynatrace" | "servicenow" | "pagerduty" | "gitlab" | "eventChannel" | "mcpservernewrelic" | "mcpservergrafana" | "mcpserverdatadog" | "mcpserver" | "mcpserversplunk" | "azureidentity")
+      SENSITIVE: []
+    end
+
+    class ListServicesOutput
+      attr_accessor next_token: ::String
+      attr_accessor services: ::Array[Types::RegisteredService]
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ListWebhooksInput
+      attr_accessor agent_space_id: ::String
+      attr_accessor association_id: ::String
+      SENSITIVE: []
+    end
+
+    class ListWebhooksOutput
+      attr_accessor webhooks: ::Array[Types::Webhook]
+      SENSITIVE: []
+    end
+
+    class MCPServerAPIKeyConfig
+      attr_accessor api_key_name: ::String
+      attr_accessor api_key_value: ::String
+      attr_accessor api_key_header: ::String
+      SENSITIVE: [:api_key_value]
+    end
+
+    class MCPServerAuthorizationConfig
+      attr_accessor o_auth_client_credentials: Types::MCPServerOAuthClientCredentialsConfig
+      attr_accessor o_auth_3_lo: Types::MCPServerOAuth3LOConfig
+      attr_accessor api_key: Types::MCPServerAPIKeyConfig
+      attr_accessor bearer_token: Types::MCPServerBearerTokenConfig
+      attr_accessor authorization_discovery: Types::MCPServerAuthorizationDiscoveryConfig
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class OAuthClientCredentials < MCPServerAuthorizationConfig
+      end
+      class OAuth3Lo < MCPServerAuthorizationConfig
+      end
+      class ApiKey < MCPServerAuthorizationConfig
+      end
+      class BearerToken < MCPServerAuthorizationConfig
+      end
+      class AuthorizationDiscovery < MCPServerAuthorizationConfig
+      end
+      class Unknown < MCPServerAuthorizationConfig
+      end
+    end
+
+    class MCPServerAuthorizationDiscoveryConfig
+      attr_accessor return_to_endpoint: ::String
+      SENSITIVE: []
+    end
+
+    class MCPServerBearerTokenConfig
+      attr_accessor token_name: ::String
+      attr_accessor token_value: ::String
+      attr_accessor authorization_header: ::String
+      SENSITIVE: [:token_value]
+    end
+
+    class MCPServerConfiguration
+      attr_accessor tools: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class MCPServerDatadogConfiguration < Aws::EmptyStructure
+    end
+
+    class MCPServerDetails
+      attr_accessor name: ::String
+      attr_accessor endpoint: ::String
+      attr_accessor description: ::String
+      attr_accessor authorization_config: Types::MCPServerAuthorizationConfig
+      SENSITIVE: [:description]
+    end
+
+    class MCPServerGrafanaConfiguration
+      attr_accessor endpoint: ::String
+      attr_accessor organization_id: ::String
+      attr_accessor tools: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class MCPServerNewRelicConfiguration
+      attr_accessor account_id: ::String
+      attr_accessor endpoint: ::String
+      SENSITIVE: []
+    end
+
+    class MCPServerOAuth3LOConfig
+      attr_accessor client_name: ::String
+      attr_accessor client_id: ::String
+      attr_accessor exchange_parameters: ::Hash[::String, ::String]
+      attr_accessor return_to_endpoint: ::String
+      attr_accessor authorization_url: ::String
+      attr_accessor exchange_url: ::String
+      attr_accessor client_secret: ::String
+      attr_accessor support_code_challenge: bool
+      attr_accessor scopes: ::Array[::String]
+      SENSITIVE: [:client_id, :client_secret]
+    end
+
+    class MCPServerOAuthClientCredentialsConfig
+      attr_accessor client_name: ::String
+      attr_accessor client_id: ::String
+      attr_accessor exchange_parameters: ::Hash[::String, ::String]
+      attr_accessor client_secret: ::String
+      attr_accessor exchange_url: ::String
+      attr_accessor scopes: ::Array[::String]
+      SENSITIVE: [:client_id, :client_secret]
+    end
+
+    class MCPServerSplunkConfiguration < Aws::EmptyStructure
+    end
+
+    class Message
+      attr_accessor user_message: ::Array[Types::UserMessageBlock]
+      attr_accessor assistant_message: ::Array[Types::AssistantMessageBlock]
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class UserMessage < Message
+      end
+      class AssistantMessage < Message
+      end
+      class Unknown < Message
+      end
+    end
+
+    class NewRelicApiKeyConfig
+      attr_accessor api_key: ::String
+      attr_accessor account_id: ::String
+      attr_accessor region: ("US" | "EU")
+      attr_accessor application_ids: ::Array[::String]
+      attr_accessor entity_guids: ::Array[::String]
+      attr_accessor alert_policy_ids: ::Array[::String]
+      SENSITIVE: [:api_key]
+    end
+
+    class NewRelicServiceAuthorizationConfig
+      attr_accessor api_key: Types::NewRelicApiKeyConfig
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class ApiKey < NewRelicServiceAuthorizationConfig
+      end
+      class Unknown < NewRelicServiceAuthorizationConfig
+      end
+    end
+
+    class NewRelicServiceDetails
+      attr_accessor authorization_config: Types::NewRelicServiceAuthorizationConfig
+      SENSITIVE: []
+    end
+
+    class OAuthAdditionalStepDetails
+      attr_accessor authorization_url: ::String
+      SENSITIVE: []
+    end
+
+    class PagerDutyAuthorizationConfig
+      attr_accessor o_auth_client_credentials: Types::PagerDutyOAuthClientCredentialsConfig
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class OAuthClientCredentials < PagerDutyAuthorizationConfig
+      end
+      class Unknown < PagerDutyAuthorizationConfig
+      end
+    end
+
+    class PagerDutyConfiguration
+      attr_accessor services: ::Array[::String]
+      attr_accessor customer_email: ::String
+      SENSITIVE: [:customer_email]
+    end
+
+    class PagerDutyDetails
+      attr_accessor scopes: ::Array[::String]
+      attr_accessor authorization_config: Types::PagerDutyAuthorizationConfig
+      SENSITIVE: []
+    end
+
+    class PagerDutyOAuthClientCredentialsConfig
+      attr_accessor client_name: ::String
+      attr_accessor client_id: ::String
+      attr_accessor exchange_parameters: ::Hash[::String, ::String]
+      attr_accessor client_secret: ::String
+      SENSITIVE: [:client_id, :client_secret]
+    end
+
+    class PendingMessage
+      attr_accessor message_id: ::String
+      attr_accessor message: Types::Message
+      SENSITIVE: []
+    end
+
+    class PrivateConnectionMode
+      attr_accessor service_managed: Types::ServiceManagedInput
+      attr_accessor self_managed: Types::SelfManagedInput
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class ServiceManaged < PrivateConnectionMode
+      end
+      class SelfManaged < PrivateConnectionMode
+      end
+      class Unknown < PrivateConnectionMode
+      end
+    end
+
+    class PrivateConnectionSummary
+      attr_accessor name: ::String
+      attr_accessor type: ("SELF_MANAGED" | "SERVICE_MANAGED")
+      attr_accessor resource_gateway_id: ::String
+      attr_accessor host_address: ::String
+      attr_accessor vpc_id: ::String
+      attr_accessor resource_configuration_id: ::String
+      attr_accessor status: ("ACTIVE" | "CREATE_IN_PROGRESS" | "CREATE_FAILED" | "DELETE_IN_PROGRESS" | "DELETE_FAILED")
+      attr_accessor certificate_expiry_time: ::Time
+      SENSITIVE: []
+    end
+
+    class Recommendation
+      attr_accessor agent_space_arn: ::String
+      attr_accessor recommendation_id: ::String
+      attr_accessor task_id: ::String
+      attr_accessor goal_id: ::String
+      attr_accessor title: ::String
+      attr_accessor content: Types::RecommendationContent
+      attr_accessor status: ("PROPOSED" | "ACCEPTED" | "REJECTED" | "CLOSED" | "COMPLETED" | "UPDATE_IN_PROGRESS")
+      attr_accessor priority: ("HIGH" | "MEDIUM" | "LOW")
+      attr_accessor goal_version: ::Integer
+      attr_accessor additional_context: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor version: ::Integer
+      SENSITIVE: []
+    end
+
+    class RecommendationContent
+      attr_accessor summary: ::String
+      attr_accessor spec: ::String
+      SENSITIVE: []
+    end
+
+    class ReferenceInput
+      attr_accessor system: ::String
+      attr_accessor title: ::String
+      attr_accessor reference_id: ::String
+      attr_accessor reference_url: ::String
+      attr_accessor association_id: ::String
+      SENSITIVE: []
+    end
+
+    class ReferenceOutput
+      attr_accessor system: ::String
+      attr_accessor title: ::String
+      attr_accessor reference_id: ::String
+      attr_accessor reference_url: ::String
+      attr_accessor association_id: ::String
+      SENSITIVE: []
+    end
+
+    class RegisterServiceInput
+      attr_accessor service: ("dynatrace" | "servicenow" | "pagerduty" | "gitlab" | "eventChannel" | "mcpservernewrelic" | "mcpservergrafana" | "mcpserverdatadog" | "mcpserver" | "mcpserversplunk" | "azureidentity")
+      attr_accessor service_details: Types::ServiceDetails
+      attr_accessor kms_key_arn: ::String
+      attr_accessor private_connection_name: ::String
+      attr_accessor name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class RegisterServiceOutput
+      attr_accessor service_id: ::String
+      attr_accessor additional_step: Types::AdditionalServiceRegistrationStep
+      attr_accessor kms_key_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class RegisteredAzureDevOpsServiceDetails
+      attr_accessor organization_name: ::String
+      SENSITIVE: []
+    end
+
+    class RegisteredAzureIdentityDetails
+      attr_accessor tenant_id: ::String
+      attr_accessor client_id: ::String
+      attr_accessor web_identity_role_arn: ::String
+      attr_accessor web_identity_token_audiences: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class RegisteredGitLabServiceDetails
+      attr_accessor target_url: ::String
+      attr_accessor token_type: ("personal" | "group")
+      attr_accessor group_id: ::String
+      SENSITIVE: []
+    end
+
+    class RegisteredGithubServiceDetails
+      attr_accessor owner: ::String
+      attr_accessor owner_type: ("organization" | "user")
+      attr_accessor target_url: ::String
+      SENSITIVE: []
+    end
+
+    class RegisteredGrafanaServerDetails
+      attr_accessor endpoint: ::String
+      attr_accessor authorization_method: ("oauth-client-credentials" | "oauth-3lo" | "api-key" | "bearer-token")
+      SENSITIVE: []
+    end
+
+    class RegisteredMCPServerDetails
+      attr_accessor name: ::String
+      attr_accessor endpoint: ::String
+      attr_accessor authorization_method: ("oauth-client-credentials" | "oauth-3lo" | "api-key" | "bearer-token")
+      attr_accessor description: ::String
+      attr_accessor api_key_header: ::String
+      SENSITIVE: [:description]
+    end
+
+    class RegisteredNewRelicDetails
+      attr_accessor account_id: ::String
+      attr_accessor region: ("US" | "EU")
+      attr_accessor description: ::String
+      SENSITIVE: [:description]
+    end
+
+    class RegisteredPagerDutyDetails
+      attr_accessor scopes: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class RegisteredService
+      attr_accessor service_id: ::String
+      attr_accessor service_type: ("github" | "slack" | "azure" | "azuredevops" | "dynatrace" | "servicenow" | "pagerduty" | "gitlab" | "eventChannel" | "mcpservernewrelic" | "mcpservergrafana" | "mcpserverdatadog" | "mcpserver" | "mcpserversplunk" | "azureidentity")
+      attr_accessor name: ::String
+      attr_accessor accessible_resources: ::Array[untyped]
+      attr_accessor additional_service_details: Types::AdditionalServiceDetails
+      attr_accessor kms_key_arn: ::String
+      attr_accessor private_connection_name: ::String
+      SENSITIVE: []
+    end
+
+    class RegisteredServiceNowDetails
+      attr_accessor instance_url: ::String
+      SENSITIVE: []
+    end
+
+    class RegisteredSlackServiceDetails
+      attr_accessor team_id: ::String
+      attr_accessor team_name: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class SelfManagedInput
+      attr_accessor resource_configuration_id: ::String
+      attr_accessor certificate: ::String
+      SENSITIVE: []
+    end
+
+    class SendMessageContentBlockDelta
+      attr_accessor text_delta: Types::SendMessageTextDelta
+      attr_accessor json_delta: Types::SendMessageJsonDelta
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class TextDelta < SendMessageContentBlockDelta
+      end
+      class JsonDelta < SendMessageContentBlockDelta
+      end
+      class Unknown < SendMessageContentBlockDelta
+      end
+    end
+
+    class SendMessageContentBlockDeltaEvent
+      attr_accessor index: ::Integer
+      attr_accessor delta: Types::SendMessageContentBlockDelta
+      attr_accessor sequence_number: ::Integer
+      attr_accessor event_type: untyped
+      SENSITIVE: []
+    end
+
+    class SendMessageContentBlockStartEvent
+      attr_accessor index: ::Integer
+      attr_accessor type: ::String
+      attr_accessor id: ::String
+      attr_accessor parent_id: ::String
+      attr_accessor sequence_number: ::Integer
+      attr_accessor event_type: untyped
+      SENSITIVE: []
+    end
+
+    class SendMessageContentBlockStopEvent
+      attr_accessor index: ::Integer
+      attr_accessor type: ::String
+      attr_accessor text: ::String
+      attr_accessor last: bool
+      attr_accessor sequence_number: ::Integer
+      attr_accessor event_type: untyped
+      SENSITIVE: []
+    end
+
+    class SendMessageContext
+      attr_accessor current_page: ::String
+      attr_accessor last_message: ::String
+      attr_accessor user_action_response: ::String
+      SENSITIVE: []
+    end
+
+    class SendMessageHeartbeatEvent
+      attr_accessor event_type: untyped
+      SENSITIVE: []
+    end
+
+    class SendMessageJsonDelta
+      attr_accessor partial_json: ::String
+      SENSITIVE: []
+    end
+
+    class SendMessageRequest
+      attr_accessor agent_space_id: ::String
+      attr_accessor execution_id: ::String
+      attr_accessor content: ::String
+      attr_accessor context: Types::SendMessageContext
+      attr_accessor user_id: ::String
+      SENSITIVE: []
+    end
+
+    class SendMessageResponse
+      attr_accessor events: Types::SendMessageEvents
+      SENSITIVE: []
+    end
+
+    class SendMessageResponseCompletedEvent
+      attr_accessor response_id: ::String
+      attr_accessor usage: Types::SendMessageUsageInfo
+      attr_accessor sequence_number: ::Integer
+      attr_accessor event_type: untyped
+      SENSITIVE: []
+    end
+
+    class SendMessageResponseCreatedEvent
+      attr_accessor response_id: ::String
+      attr_accessor sequence_number: ::Integer
+      attr_accessor event_type: untyped
+      SENSITIVE: []
+    end
+
+    class SendMessageResponseFailedEvent
+      attr_accessor response_id: ::String
+      attr_accessor error_code: ::String
+      attr_accessor error_message: ::String
+      attr_accessor sequence_number: ::Integer
+      attr_accessor event_type: untyped
+      SENSITIVE: []
+    end
+
+    class SendMessageResponseInProgressEvent
+      attr_accessor response_id: ::String
+      attr_accessor sequence_number: ::Integer
+      attr_accessor event_type: untyped
+      SENSITIVE: []
+    end
+
+    class SendMessageSummaryEvent
+      attr_accessor content: ::String
+      attr_accessor sequence_number: ::Integer
+      attr_accessor event_type: untyped
+      SENSITIVE: []
+    end
+
+    class SendMessageTextDelta
+      attr_accessor text: ::String
+      SENSITIVE: []
+    end
+
+    class SendMessageUsageInfo
+      attr_accessor input_tokens: ::Integer
+      attr_accessor output_tokens: ::Integer
+      attr_accessor total_tokens: ::Integer
+      SENSITIVE: []
+    end
+
+    class ServiceConfiguration
+      attr_accessor source_aws: Types::SourceAwsConfiguration
+      attr_accessor aws: Types::AWSConfiguration
+      attr_accessor github: Types::GitHubConfiguration
+      attr_accessor slack: Types::SlackConfiguration
+      attr_accessor dynatrace: Types::DynatraceConfiguration
+      attr_accessor servicenow: Types::ServiceNowConfiguration
+      attr_accessor mcpservernewrelic: Types::MCPServerNewRelicConfiguration
+      attr_accessor mcpserverdatadog: Types::MCPServerDatadogConfiguration
+      attr_accessor mcpserver: Types::MCPServerConfiguration
+      attr_accessor gitlab: Types::GitLabConfiguration
+      attr_accessor mcpserversplunk: Types::MCPServerSplunkConfiguration
+      attr_accessor event_channel: Types::EventChannelConfiguration
+      attr_accessor azure: Types::AzureConfiguration
+      attr_accessor azuredevops: Types::AzureDevOpsConfiguration
+      attr_accessor mcpservergrafana: Types::MCPServerGrafanaConfiguration
+      attr_accessor pagerduty: Types::PagerDutyConfiguration
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class SourceAws < ServiceConfiguration
+      end
+      class Aws < ServiceConfiguration
+      end
+      class Github < ServiceConfiguration
+      end
+      class Slack < ServiceConfiguration
+      end
+      class Dynatrace < ServiceConfiguration
+      end
+      class Servicenow < ServiceConfiguration
+      end
+      class Mcpservernewrelic < ServiceConfiguration
+      end
+      class Mcpserverdatadog < ServiceConfiguration
+      end
+      class Mcpserver < ServiceConfiguration
+      end
+      class Gitlab < ServiceConfiguration
+      end
+      class Mcpserversplunk < ServiceConfiguration
+      end
+      class EventChannel < ServiceConfiguration
+      end
+      class Azure < ServiceConfiguration
+      end
+      class Azuredevops < ServiceConfiguration
+      end
+      class Mcpservergrafana < ServiceConfiguration
+      end
+      class Pagerduty < ServiceConfiguration
+      end
+      class Unknown < ServiceConfiguration
+      end
+    end
+
+    class ServiceDetails
+      attr_accessor dynatrace: Types::DynatraceServiceDetails
+      attr_accessor servicenow: Types::ServiceNowServiceDetails
+      attr_accessor mcpserverdatadog: Types::DatadogServiceDetails
+      attr_accessor mcpserver: Types::MCPServerDetails
+      attr_accessor gitlab: Types::GitLabDetails
+      attr_accessor mcpserversplunk: Types::MCPServerDetails
+      attr_accessor mcpservernewrelic: Types::NewRelicServiceDetails
+      attr_accessor event_channel: Types::EventChannelDetails
+      attr_accessor mcpservergrafana: Types::GrafanaServiceDetails
+      attr_accessor pagerduty: Types::PagerDutyDetails
+      attr_accessor azureidentity: Types::RegisteredAzureIdentityDetails
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Dynatrace < ServiceDetails
+      end
+      class Servicenow < ServiceDetails
+      end
+      class Mcpserverdatadog < ServiceDetails
+      end
+      class Mcpserver < ServiceDetails
+      end
+      class Gitlab < ServiceDetails
+      end
+      class Mcpserversplunk < ServiceDetails
+      end
+      class Mcpservernewrelic < ServiceDetails
+      end
+      class EventChannel < ServiceDetails
+      end
+      class Mcpservergrafana < ServiceDetails
+      end
+      class Pagerduty < ServiceDetails
+      end
+      class Azureidentity < ServiceDetails
+      end
+      class Unknown < ServiceDetails
+      end
+    end
+
+    class ServiceManagedInput
+      attr_accessor host_address: ::String
+      attr_accessor vpc_id: ::String
+      attr_accessor subnet_ids: ::Array[::String]
+      attr_accessor security_group_ids: ::Array[::String]
+      attr_accessor ip_address_type: ("IPV4" | "IPV6" | "DUAL_STACK")
+      attr_accessor ipv4_addresses_per_eni: ::Integer
+      attr_accessor port_ranges: ::Array[::String]
+      attr_accessor certificate: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceNowConfiguration
+      attr_accessor instance_id: ::String
+      attr_accessor auth_scopes: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ServiceNowOAuthClientCredentialsConfig
+      attr_accessor client_name: ::String
+      attr_accessor client_id: ::String
+      attr_accessor exchange_parameters: ::Hash[::String, ::String]
+      attr_accessor client_secret: ::String
+      SENSITIVE: [:client_id, :client_secret]
+    end
+
+    class ServiceNowServiceAuthorizationConfig
+      attr_accessor o_auth_client_credentials: Types::ServiceNowOAuthClientCredentialsConfig
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class OAuthClientCredentials < ServiceNowServiceAuthorizationConfig
+      end
+      class Unknown < ServiceNowServiceAuthorizationConfig
+      end
+    end
+
+    class ServiceNowServiceDetails
+      attr_accessor instance_url: ::String
+      attr_accessor authorization_config: Types::ServiceNowServiceAuthorizationConfig
+      SENSITIVE: []
+    end
+
+    class ServiceQuotaExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class SlackChannel
+      attr_accessor channel_name: ::String
+      attr_accessor channel_id: ::String
+      SENSITIVE: []
+    end
+
+    class SlackConfiguration
+      attr_accessor workspace_id: ::String
+      attr_accessor workspace_name: ::String
+      attr_accessor transmission_target: Types::SlackTransmissionTarget
+      SENSITIVE: []
+    end
+
+    class SlackTransmissionTarget
+      attr_accessor ops_oncall_target: Types::SlackChannel
+      attr_accessor ops_sre_target: Types::SlackChannel
+      SENSITIVE: []
+    end
+
+    class SourceAwsConfiguration
+      attr_accessor account_id: ::String
+      attr_accessor account_type: ("source")
+      attr_accessor assumable_role_arn: ::String
+      attr_accessor external_id: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class Task
+      attr_accessor agent_space_id: ::String
+      attr_accessor task_id: ::String
+      attr_accessor execution_id: ::String
+      attr_accessor title: ::String
+      attr_accessor description: ::String
+      attr_accessor reference: Types::ReferenceOutput
+      attr_accessor task_type: ("INVESTIGATION" | "EVALUATION")
+      attr_accessor priority: ("CRITICAL" | "HIGH" | "MEDIUM" | "LOW" | "MINIMAL")
+      attr_accessor status: ("PENDING_TRIAGE" | "LINKED" | "PENDING_START" | "IN_PROGRESS" | "PENDING_CUSTOMER_APPROVAL" | "COMPLETED" | "FAILED" | "TIMED_OUT" | "CANCELED")
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor version: ::Integer
+      attr_accessor support_metadata: untyped
+      attr_accessor metadata: untyped
+      attr_accessor primary_task_id: ::String
+      attr_accessor status_reason: ::String
+      attr_accessor has_linked_tasks: bool
+      SENSITIVE: []
+    end
+
+    class TaskFilter
+      attr_accessor created_after: ::Time
+      attr_accessor created_before: ::Time
+      attr_accessor priority: ::Array[("CRITICAL" | "HIGH" | "MEDIUM" | "LOW" | "MINIMAL")]
+      attr_accessor status: ::Array[("PENDING_TRIAGE" | "LINKED" | "PENDING_START" | "IN_PROGRESS" | "PENDING_CUSTOMER_APPROVAL" | "COMPLETED" | "FAILED" | "TIMED_OUT" | "CANCELED")]
+      attr_accessor task_type: ::Array[("INVESTIGATION" | "EVALUATION")]
+      attr_accessor primary_task_id: ::String
+      SENSITIVE: []
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateAgentSpaceInput
+      attr_accessor agent_space_id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor locale: ::String
+      SENSITIVE: [:description]
+    end
+
+    class UpdateAgentSpaceOutput
+      attr_accessor agent_space: Types::AgentSpace
+      SENSITIVE: []
+    end
+
+    class UpdateAssociationInput
+      attr_accessor agent_space_id: ::String
+      attr_accessor association_id: ::String
+      attr_accessor configuration: Types::ServiceConfiguration
+      SENSITIVE: []
+    end
+
+    class UpdateAssociationOutput
+      attr_accessor association: Types::Association
+      attr_accessor webhook: Types::GenericWebhook
+      SENSITIVE: []
+    end
+
+    class UpdateBacklogTaskRequest
+      attr_accessor agent_space_id: ::String
+      attr_accessor task_id: ::String
+      attr_accessor task_status: ("PENDING_TRIAGE" | "LINKED" | "PENDING_START" | "IN_PROGRESS" | "PENDING_CUSTOMER_APPROVAL" | "COMPLETED" | "FAILED" | "TIMED_OUT" | "CANCELED")
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateBacklogTaskResponse
+      attr_accessor task: Types::Task
+      SENSITIVE: []
+    end
+
+    class UpdateGoalRequest
+      attr_accessor agent_space_id: ::String
+      attr_accessor goal_id: ::String
+      attr_accessor evaluation_schedule: Types::GoalScheduleInput
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateGoalResponse
+      attr_accessor goal: Types::Goal
+      SENSITIVE: []
+    end
+
+    class UpdateOperatorAppIdpConfigInput
+      attr_accessor agent_space_id: ::String
+      attr_accessor idp_client_secret: ::String
+      SENSITIVE: [:idp_client_secret]
+    end
+
+    class UpdateOperatorAppIdpConfigOutput
+      attr_accessor agent_space_id: ::String
+      attr_accessor idp: Types::IdpAuthConfiguration
+      SENSITIVE: []
+    end
+
+    class UpdatePrivateConnectionCertificateInput
+      attr_accessor name: ::String
+      attr_accessor certificate: ::String
+      SENSITIVE: []
+    end
+
+    class UpdatePrivateConnectionCertificateOutput
+      attr_accessor name: ::String
+      attr_accessor type: ("SELF_MANAGED" | "SERVICE_MANAGED")
+      attr_accessor resource_gateway_id: ::String
+      attr_accessor host_address: ::String
+      attr_accessor vpc_id: ::String
+      attr_accessor resource_configuration_id: ::String
+      attr_accessor status: ("ACTIVE" | "CREATE_IN_PROGRESS" | "CREATE_FAILED" | "DELETE_IN_PROGRESS" | "DELETE_FAILED")
+      attr_accessor certificate_expiry_time: ::Time
+      SENSITIVE: []
+    end
+
+    class UpdateRecommendationRequest
+      attr_accessor agent_space_id: ::String
+      attr_accessor recommendation_id: ::String
+      attr_accessor status: ("PROPOSED" | "ACCEPTED" | "REJECTED" | "CLOSED" | "COMPLETED" | "UPDATE_IN_PROGRESS")
+      attr_accessor additional_context: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateRecommendationResponse
+      attr_accessor recommendation: Types::Recommendation
+      SENSITIVE: []
+    end
+
+    class UsageMetric
+      attr_accessor limit: ::Integer
+      attr_accessor usage: ::Float
+      SENSITIVE: []
+    end
+
+    class UserMessageBlock
+      attr_accessor text: ::String
+      attr_accessor tool_result: untyped
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Text < UserMessageBlock
+      end
+      class ToolResult < UserMessageBlock
+      end
+      class Unknown < UserMessageBlock
+      end
+    end
+
+    class UserReference
+      attr_accessor user_id: ::String
+      attr_accessor user_type: ("IAM" | "IDC" | "IDP")
+      SENSITIVE: []
+    end
+
+    class ValidateAwsAssociationsInput
+      attr_accessor agent_space_id: ::String
+      SENSITIVE: []
+    end
+
+    class ValidateAwsAssociationsOutput < Aws::EmptyStructure
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      attr_accessor field_list: ::Array[Types::ValidationExceptionField]
+      SENSITIVE: []
+    end
+
+    class ValidationExceptionField
+      attr_accessor path: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Webhook
+      attr_accessor webhook_url: ::String
+      attr_accessor webhook_type: ("hmac" | "apikey" | "gitlab" | "pagerduty")
+      attr_accessor webhook_id: ::String
+      SENSITIVE: []
+    end
+
+    class SendMessageEvents < Enumerator[untyped, untyped]
+      def event_types: () -> [:response_created, :response_in_progress, :response_completed, :response_failed, :summary, :heartbeat, :content_block_start, :content_block_delta, :content_block_stop]
+    end
+  end
+end

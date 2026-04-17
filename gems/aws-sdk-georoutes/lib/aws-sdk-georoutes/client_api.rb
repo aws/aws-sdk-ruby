@@ -412,6 +412,7 @@ module Aws::GeoRoutes
     RouteWaypoint = Shapes::StructureShape.new(name: 'RouteWaypoint')
     RouteWaypointAvoidActionsForDistanceLong = Shapes::IntegerShape.new(name: 'RouteWaypointAvoidActionsForDistanceLong')
     RouteWaypointList = Shapes::ListShape.new(name: 'RouteWaypointList')
+    RouteWaypointStopDurationLong = Shapes::IntegerShape.new(name: 'RouteWaypointStopDurationLong')
     RouteWeightConstraint = Shapes::StructureShape.new(name: 'RouteWeightConstraint')
     RouteWeightConstraintType = Shapes::StringShape.new(name: 'RouteWeightConstraintType')
     RouteZone = Shapes::StructureShape.new(name: 'RouteZone')
@@ -538,7 +539,7 @@ module Aws::GeoRoutes
     CalculateRouteMatrixRequest.add_member(:key, Shapes::ShapeRef.new(shape: ApiKey, location: "querystring", location_name: "key"))
     CalculateRouteMatrixRequest.add_member(:optimize_routing_for, Shapes::ShapeRef.new(shape: RoutingObjective, location_name: "OptimizeRoutingFor"))
     CalculateRouteMatrixRequest.add_member(:origins, Shapes::ShapeRef.new(shape: CalculateRouteMatrixRequestOriginsList, required: true, location_name: "Origins"))
-    CalculateRouteMatrixRequest.add_member(:routing_boundary, Shapes::ShapeRef.new(shape: RouteMatrixBoundary, required: true, location_name: "RoutingBoundary"))
+    CalculateRouteMatrixRequest.add_member(:routing_boundary, Shapes::ShapeRef.new(shape: RouteMatrixBoundary, location_name: "RoutingBoundary"))
     CalculateRouteMatrixRequest.add_member(:traffic, Shapes::ShapeRef.new(shape: RouteMatrixTrafficOptions, location_name: "Traffic"))
     CalculateRouteMatrixRequest.add_member(:travel_mode, Shapes::ShapeRef.new(shape: RouteMatrixTravelMode, location_name: "TravelMode"))
     CalculateRouteMatrixRequest.add_member(:travel_mode_options, Shapes::ShapeRef.new(shape: RouteMatrixTravelModeOptions, location_name: "TravelModeOptions"))
@@ -1663,7 +1664,7 @@ module Aws::GeoRoutes
     RouteWaypoint.add_member(:pass_through, Shapes::ShapeRef.new(shape: SensitiveBoolean, location_name: "PassThrough"))
     RouteWaypoint.add_member(:position, Shapes::ShapeRef.new(shape: Position, required: true, location_name: "Position"))
     RouteWaypoint.add_member(:side_of_street, Shapes::ShapeRef.new(shape: RouteSideOfStreetOptions, location_name: "SideOfStreet"))
-    RouteWaypoint.add_member(:stop_duration, Shapes::ShapeRef.new(shape: DurationSeconds, location_name: "StopDuration"))
+    RouteWaypoint.add_member(:stop_duration, Shapes::ShapeRef.new(shape: RouteWaypointStopDurationLong, location_name: "StopDuration"))
     RouteWaypoint.struct_class = Types::RouteWaypoint
 
     RouteWaypointList.member = Shapes::ShapeRef.new(shape: RouteWaypoint)

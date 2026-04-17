@@ -1260,7 +1260,8 @@ module Aws::ECR
     #
     # @!attribute [rw] image_status
     #   The image status with which to filter your DescribeImages results.
-    #   Valid values are `ACTIVE`, `ARCHIVED`, and `ACTIVATING`.
+    #   Valid values are `ACTIVE`, `ARCHIVED`, and `ACTIVATING`. If not
+    #   specified, only images with `ACTIVE` status are returned.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/DescribeImagesFilter AWS API Documentation
@@ -3212,7 +3213,7 @@ module Aws::ECR
     #   results of the initial request can be seen by sending another
     #   `ListImageReferrers` request with the returned `nextToken` value.
     #   This value can be between 1 and 50. If this parameter is not used,
-    #   then `ListImageReferrers` returns up to 50 results and a `nextToken`
+    #   then `ListImageReferrers` returns up to 20 results and a `nextToken`
     #   value, if applicable.
     #   @return [Integer]
     #
@@ -3258,7 +3259,8 @@ module Aws::ECR
     #
     # @!attribute [rw] image_status
     #   The image status with which to filter your ListImages results. Valid
-    #   values are `ACTIVE`, `ARCHIVED`, and `ACTIVATING`.
+    #   values are `ACTIVE`, `ARCHIVED`, and `ACTIVATING`. If not specified,
+    #   only images with `ACTIVE` status are returned.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/ListImagesFilter AWS API Documentation
@@ -5023,6 +5025,22 @@ module Aws::ECR
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/UnableToGetUpstreamLayerException AWS API Documentation
     #
     class UnableToGetUpstreamLayerException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The referrer or referrers were unable to be listed using the pull
+    # through cache rule. This is usually caused because of an issue with
+    # the Secrets Manager secret containing the credentials for the upstream
+    # registry.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/UnableToListUpstreamImageReferrersException AWS API Documentation
+    #
+    class UnableToListUpstreamImageReferrersException < Struct.new(
       :message)
       SENSITIVE = []
       include Aws::Structure

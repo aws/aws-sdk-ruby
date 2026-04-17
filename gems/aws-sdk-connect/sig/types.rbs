@@ -99,6 +99,7 @@ module Aws::Connect
       attr_accessor after_contact_work_end_timestamp: ::Time
       attr_accessor agent_initiated_hold_duration: ::Integer
       attr_accessor state_transitions: ::Array[Types::StateTransition]
+      attr_accessor voice_enhancement_mode: ("VOICE_ISOLATION" | "NOISE_SUPPRESSION" | "NONE")
       SENSITIVE: []
     end
 
@@ -329,6 +330,14 @@ module Aws::Connect
       SENSITIVE: []
     end
 
+    class AssociateQueueEmailAddressesRequest
+      attr_accessor instance_id: ::String
+      attr_accessor queue_id: ::String
+      attr_accessor email_addresses_config: ::Array[Types::EmailAddressConfig]
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
     class AssociateQueueQuickConnectsRequest
       attr_accessor instance_id: ::String
       attr_accessor queue_id: ::String
@@ -415,7 +424,7 @@ module Aws::Connect
       attr_accessor file_size_in_bytes: ::Integer
       attr_accessor file_status: ("APPROVED" | "REJECTED" | "PROCESSING" | "FAILED")
       attr_accessor created_by: Types::CreatedByInfo
-      attr_accessor file_use_case_type: ("EMAIL_MESSAGE" | "ATTACHMENT")
+      attr_accessor file_use_case_type: ("CONTACT_ANALYSIS" | "EMAIL_MESSAGE" | "EMAIL_MESSAGE_PLAIN_TEXT" | "EMAIL_MESSAGE_REDACTED" | "EMAIL_MESSAGE_PLAIN_TEXT_REDACTED" | "ATTACHMENT")
       attr_accessor associated_resource_arn: ::String
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
@@ -740,6 +749,11 @@ module Aws::Connect
       attr_accessor conversation_turn_count: ::Integer
       attr_accessor agent_first_response_timestamp: ::Time
       attr_accessor agent_first_response_time_in_millis: ::Integer
+      SENSITIVE: []
+    end
+
+    class ChatEntryPointParameters
+      attr_accessor flow_id: ::String
       SENSITIVE: []
     end
 
@@ -1533,6 +1547,7 @@ module Aws::Connect
       attr_accessor hours_of_operation_id: ::String
       attr_accessor max_contacts: ::Integer
       attr_accessor quick_connect_ids: ::Array[::String]
+      attr_accessor email_addresses_config: ::Array[Types::EmailAddressConfig]
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
     end
@@ -2811,6 +2826,14 @@ module Aws::Connect
       SENSITIVE: []
     end
 
+    class DisassociateQueueEmailAddressesRequest
+      attr_accessor instance_id: ::String
+      attr_accessor queue_id: ::String
+      attr_accessor email_addresses_id: ::Array[::String]
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
     class DisassociateQueueQuickConnectsRequest
       attr_accessor instance_id: ::String
       attr_accessor queue_id: ::String
@@ -2920,6 +2943,11 @@ module Aws::Connect
       SENSITIVE: []
     end
 
+    class EmailAddressConfig
+      attr_accessor email_address_id: ::String
+      SENSITIVE: []
+    end
+
     class EmailAddressInfo
       attr_accessor email_address: ::String
       attr_accessor display_name: ::String
@@ -2945,6 +2973,13 @@ module Aws::Connect
 
     class EmailAddressSearchFilter
       attr_accessor tag_filter: Types::ControlPlaneTagFilter
+      SENSITIVE: []
+    end
+
+    class EmailAddressSummary
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor is_default_outbound_email: bool
       SENSITIVE: []
     end
 
@@ -3096,7 +3131,7 @@ module Aws::Connect
     end
 
     class EvaluationContactParticipant
-      attr_accessor contact_participant_role: ("AGENT" | "SYSTEM" | "CUSTOM_BOT")
+      attr_accessor contact_participant_role: ("AGENT" | "SYSTEM" | "CUSTOM_BOT" | "CUSTOMER")
       attr_accessor contact_participant_id: ::String
       SENSITIVE: []
     end
@@ -3204,7 +3239,7 @@ module Aws::Connect
     end
 
     class EvaluationFormLanguageConfiguration
-      attr_accessor form_language: ("de-DE" | "en-US" | "es-ES" | "fr-FR" | "it-IT" | "pt-BR")
+      attr_accessor form_language: ("de-DE" | "en-US" | "es-ES" | "fr-FR" | "it-IT" | "pt-BR" | "ja-JP" | "ko-KR" | "zh-CN")
       SENSITIVE: []
     end
 
@@ -3343,8 +3378,8 @@ module Aws::Connect
       attr_accessor latest_version: ::Integer
       attr_accessor active_version: ::Integer
       attr_accessor auto_evaluation_enabled: bool
-      attr_accessor evaluation_form_language: ("de-DE" | "en-US" | "es-ES" | "fr-FR" | "it-IT" | "pt-BR")
-      attr_accessor contact_interaction_type: ("AGENT" | "AUTOMATED")
+      attr_accessor evaluation_form_language: ("de-DE" | "en-US" | "es-ES" | "fr-FR" | "it-IT" | "pt-BR" | "ja-JP" | "ko-KR" | "zh-CN")
+      attr_accessor contact_interaction_type: ("AGENT" | "AUTOMATED" | "CUSTOMER")
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
     end
@@ -3408,7 +3443,7 @@ module Aws::Connect
     end
 
     class EvaluationFormTargetConfiguration
-      attr_accessor contact_interaction_type: ("AGENT" | "AUTOMATED")
+      attr_accessor contact_interaction_type: ("AGENT" | "AUTOMATED" | "CUSTOMER")
       SENSITIVE: []
     end
 
@@ -3487,6 +3522,8 @@ module Aws::Connect
 
     class EvaluationReviewMetadata
       attr_accessor review_id: ::String
+      attr_accessor requested_time: ::Time
+      attr_accessor requested_by: ::String
       attr_accessor created_time: ::Time
       attr_accessor created_by: ::String
       attr_accessor review_request_comments: ::Array[Types::EvaluationReviewRequestComment]
@@ -3550,7 +3587,7 @@ module Aws::Connect
       attr_accessor acknowledger_comment: ::String
       attr_accessor sampling_job_id: ::String
       attr_accessor review_id: ::String
-      attr_accessor contact_participant_role: ("AGENT" | "SYSTEM" | "CUSTOM_BOT")
+      attr_accessor contact_participant_role: ("AGENT" | "SYSTEM" | "CUSTOM_BOT" | "CUSTOMER")
       attr_accessor contact_participant_id: ::String
       SENSITIVE: []
     end
@@ -3742,7 +3779,7 @@ module Aws::Connect
       attr_accessor file_name: ::String
       attr_accessor file_size_in_bytes: ::Integer
       attr_accessor associated_resource_arn: ::String
-      attr_accessor file_use_case_type: ("EMAIL_MESSAGE" | "ATTACHMENT")
+      attr_accessor file_use_case_type: ("CONTACT_ANALYSIS" | "EMAIL_MESSAGE" | "EMAIL_MESSAGE_PLAIN_TEXT" | "EMAIL_MESSAGE_REDACTED" | "EMAIL_MESSAGE_PLAIN_TEXT_REDACTED" | "ATTACHMENT")
       attr_accessor created_by: Types::CreatedByInfo
       attr_accessor download_url_metadata: Types::DownloadUrlMetadata
       attr_accessor tags: ::Hash[::String, ::String]
@@ -4581,7 +4618,7 @@ module Aws::Connect
     class ListContactReferencesRequest
       attr_accessor instance_id: ::String
       attr_accessor contact_id: ::String
-      attr_accessor reference_types: ::Array[("URL" | "ATTACHMENT" | "CONTACT_ANALYSIS" | "NUMBER" | "STRING" | "DATE" | "EMAIL" | "EMAIL_MESSAGE" | "EMAIL_MESSAGE_PLAIN_TEXT")]
+      attr_accessor reference_types: ::Array[("URL" | "ATTACHMENT" | "CONTACT_ANALYSIS" | "NUMBER" | "STRING" | "DATE" | "EMAIL" | "EMAIL_MESSAGE" | "EMAIL_MESSAGE_PLAIN_TEXT" | "EMAIL_MESSAGE_PLAIN_TEXT_REDACTED" | "EMAIL_MESSAGE_REDACTED")]
       attr_accessor next_token: ::String
       SENSITIVE: []
     end
@@ -4915,6 +4952,22 @@ module Aws::Connect
       SENSITIVE: []
     end
 
+    class ListQueueEmailAddressesRequest
+      attr_accessor instance_id: ::String
+      attr_accessor queue_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListQueueEmailAddressesResponse
+      attr_accessor next_token: ::String
+      attr_accessor email_address_metadata_list: ::Array[Types::EmailAddressSummary]
+      attr_accessor last_modified_time: ::Time
+      attr_accessor last_modified_region: ::String
+      SENSITIVE: []
+    end
+
     class ListQueueQuickConnectsRequest
       attr_accessor instance_id: ::String
       attr_accessor queue_id: ::String
@@ -5025,7 +5078,7 @@ module Aws::Connect
     class ListRulesRequest
       attr_accessor instance_id: ::String
       attr_accessor publish_status: ("DRAFT" | "PUBLISHED")
-      attr_accessor event_source_name: ("OnPostCallAnalysisAvailable" | "OnRealTimeCallAnalysisAvailable" | "OnRealTimeChatAnalysisAvailable" | "OnPostChatAnalysisAvailable" | "OnZendeskTicketCreate" | "OnZendeskTicketStatusUpdate" | "OnSalesforceCaseCreate" | "OnContactEvaluationSubmit" | "OnMetricDataUpdate" | "OnCaseCreate" | "OnCaseUpdate" | "OnSlaBreach")
+      attr_accessor event_source_name: ("OnPostCallAnalysisAvailable" | "OnRealTimeCallAnalysisAvailable" | "OnRealTimeChatAnalysisAvailable" | "OnPostChatAnalysisAvailable" | "OnEmailAnalysisAvailable" | "OnZendeskTicketCreate" | "OnZendeskTicketStatusUpdate" | "OnSalesforceCaseCreate" | "OnContactEvaluationSubmit" | "OnMetricDataUpdate" | "OnCaseCreate" | "OnCaseUpdate" | "OnSlaBreach")
       attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
       SENSITIVE: []
@@ -6220,7 +6273,7 @@ module Aws::Connect
 
     class Reference
       attr_accessor value: ::String
-      attr_accessor type: ("URL" | "ATTACHMENT" | "CONTACT_ANALYSIS" | "NUMBER" | "STRING" | "DATE" | "EMAIL" | "EMAIL_MESSAGE" | "EMAIL_MESSAGE_PLAIN_TEXT")
+      attr_accessor type: ("URL" | "ATTACHMENT" | "CONTACT_ANALYSIS" | "NUMBER" | "STRING" | "DATE" | "EMAIL" | "EMAIL_MESSAGE" | "EMAIL_MESSAGE_PLAIN_TEXT" | "EMAIL_MESSAGE_PLAIN_TEXT_REDACTED" | "EMAIL_MESSAGE_REDACTED")
       attr_accessor status: ("AVAILABLE" | "DELETED" | "APPROVED" | "REJECTED" | "PROCESSING" | "FAILED")
       attr_accessor arn: ::String
       attr_accessor status_reason: ::String
@@ -6231,7 +6284,9 @@ module Aws::Connect
       attr_accessor url: Types::UrlReference
       attr_accessor attachment: Types::AttachmentReference
       attr_accessor email_message: Types::EmailMessageReference
+      attr_accessor email_message_redacted: Types::EmailMessageReference
       attr_accessor email_message_plain_text: Types::EmailMessageReference
+      attr_accessor email_message_plain_text_redacted: Types::EmailMessageReference
       attr_accessor string: Types::StringReference
       attr_accessor number: Types::NumberReference
       attr_accessor date: Types::DateReference
@@ -6245,7 +6300,11 @@ module Aws::Connect
       end
       class EmailMessage < ReferenceSummary
       end
+      class EmailMessageRedacted < ReferenceSummary
+      end
       class EmailMessagePlainText < ReferenceSummary
+      end
+      class EmailMessagePlainTextRedacted < ReferenceSummary
       end
       class String < ReferenceSummary
       end
@@ -6486,7 +6545,7 @@ module Aws::Connect
       attr_accessor name: ::String
       attr_accessor rule_id: ::String
       attr_accessor rule_arn: ::String
-      attr_accessor event_source_name: ("OnPostCallAnalysisAvailable" | "OnRealTimeCallAnalysisAvailable" | "OnRealTimeChatAnalysisAvailable" | "OnPostChatAnalysisAvailable" | "OnZendeskTicketCreate" | "OnZendeskTicketStatusUpdate" | "OnSalesforceCaseCreate" | "OnContactEvaluationSubmit" | "OnMetricDataUpdate" | "OnCaseCreate" | "OnCaseUpdate" | "OnSlaBreach")
+      attr_accessor event_source_name: ("OnPostCallAnalysisAvailable" | "OnRealTimeCallAnalysisAvailable" | "OnRealTimeChatAnalysisAvailable" | "OnPostChatAnalysisAvailable" | "OnEmailAnalysisAvailable" | "OnZendeskTicketCreate" | "OnZendeskTicketStatusUpdate" | "OnSalesforceCaseCreate" | "OnContactEvaluationSubmit" | "OnMetricDataUpdate" | "OnCaseCreate" | "OnCaseUpdate" | "OnSlaBreach")
       attr_accessor publish_status: ("DRAFT" | "PUBLISHED")
       attr_accessor action_summaries: ::Array[Types::ActionSummary]
       attr_accessor created_time: ::Time
@@ -6495,7 +6554,7 @@ module Aws::Connect
     end
 
     class RuleTriggerEventSource
-      attr_accessor event_source_name: ("OnPostCallAnalysisAvailable" | "OnRealTimeCallAnalysisAvailable" | "OnRealTimeChatAnalysisAvailable" | "OnPostChatAnalysisAvailable" | "OnZendeskTicketCreate" | "OnZendeskTicketStatusUpdate" | "OnSalesforceCaseCreate" | "OnContactEvaluationSubmit" | "OnMetricDataUpdate" | "OnCaseCreate" | "OnCaseUpdate" | "OnSlaBreach")
+      attr_accessor event_source_name: ("OnPostCallAnalysisAvailable" | "OnRealTimeCallAnalysisAvailable" | "OnRealTimeChatAnalysisAvailable" | "OnPostChatAnalysisAvailable" | "OnEmailAnalysisAvailable" | "OnZendeskTicketCreate" | "OnZendeskTicketStatusUpdate" | "OnSalesforceCaseCreate" | "OnContactEvaluationSubmit" | "OnMetricDataUpdate" | "OnCaseCreate" | "OnCaseUpdate" | "OnSlaBreach")
       attr_accessor integration_association_id: ::String
       SENSITIVE: []
     end
@@ -7167,7 +7226,7 @@ module Aws::Connect
       attr_accessor file_name: ::String
       attr_accessor file_size_in_bytes: ::Integer
       attr_accessor url_expiry_in_seconds: ::Integer
-      attr_accessor file_use_case_type: ("EMAIL_MESSAGE" | "ATTACHMENT")
+      attr_accessor file_use_case_type: ("CONTACT_ANALYSIS" | "EMAIL_MESSAGE" | "EMAIL_MESSAGE_PLAIN_TEXT" | "EMAIL_MESSAGE_REDACTED" | "EMAIL_MESSAGE_PLAIN_TEXT_REDACTED" | "ATTACHMENT")
       attr_accessor associated_resource_arn: ::String
       attr_accessor created_by: Types::CreatedByInfo
       attr_accessor tags: ::Hash[::String, ::String]
@@ -7668,8 +7727,9 @@ module Aws::Connect
     end
 
     class TestCaseEntryPoint
-      attr_accessor type: ("VOICE_CALL")
+      attr_accessor type: ("VOICE_CALL" | "CHAT")
       attr_accessor voice_call_entry_point_parameters: Types::VoiceCallEntryPointParameters
+      attr_accessor chat_entry_point_parameters: Types::ChatEntryPointParameters
       SENSITIVE: []
     end
 

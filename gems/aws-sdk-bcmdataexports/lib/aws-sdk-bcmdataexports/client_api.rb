@@ -14,6 +14,8 @@ module Aws::BCMDataExports
 
     include Seahorse::Model
 
+    AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
+    AccountId = Shapes::StringShape.new(name: 'AccountId')
     Arn = Shapes::StringShape.new(name: 'Arn')
     Column = Shapes::StructureShape.new(name: 'Column')
     ColumnList = Shapes::ListShape.new(name: 'ColumnList')
@@ -78,6 +80,7 @@ module Aws::BCMDataExports
     TableProperty = Shapes::StringShape.new(name: 'TableProperty')
     TablePropertyDescription = Shapes::StructureShape.new(name: 'TablePropertyDescription')
     TablePropertyDescriptionList = Shapes::ListShape.new(name: 'TablePropertyDescriptionList')
+    TablePropertyGenericString = Shapes::StringShape.new(name: 'TablePropertyGenericString')
     TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
     TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
@@ -90,9 +93,12 @@ module Aws::BCMDataExports
     ValidationExceptionFieldList = Shapes::ListShape.new(name: 'ValidationExceptionFieldList')
     ValidationExceptionReason = Shapes::StringShape.new(name: 'ValidationExceptionReason')
 
-    Column.add_member(:description, Shapes::ShapeRef.new(shape: GenericString, location_name: "Description"))
+    AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: GenericString, required: true, location_name: "Message"))
+    AccessDeniedException.struct_class = Types::AccessDeniedException
+
     Column.add_member(:name, Shapes::ShapeRef.new(shape: GenericString, location_name: "Name"))
     Column.add_member(:type, Shapes::ShapeRef.new(shape: GenericString, location_name: "Type"))
+    Column.add_member(:description, Shapes::ShapeRef.new(shape: GenericString, location_name: "Description"))
     Column.struct_class = Types::Column
 
     ColumnList.member = Shapes::ShapeRef.new(shape: Column)
@@ -123,18 +129,18 @@ module Aws::BCMDataExports
 
     ExecutionReferenceList.member = Shapes::ShapeRef.new(shape: ExecutionReference)
 
-    ExecutionStatus.add_member(:completed_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "CompletedAt"))
-    ExecutionStatus.add_member(:created_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "CreatedAt"))
-    ExecutionStatus.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "LastUpdatedAt"))
     ExecutionStatus.add_member(:status_code, Shapes::ShapeRef.new(shape: ExecutionStatusCode, location_name: "StatusCode"))
     ExecutionStatus.add_member(:status_reason, Shapes::ShapeRef.new(shape: ExecutionStatusReason, location_name: "StatusReason"))
+    ExecutionStatus.add_member(:created_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "CreatedAt"))
+    ExecutionStatus.add_member(:completed_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "CompletedAt"))
+    ExecutionStatus.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "LastUpdatedAt"))
     ExecutionStatus.struct_class = Types::ExecutionStatus
 
-    Export.add_member(:data_query, Shapes::ShapeRef.new(shape: DataQuery, required: true, location_name: "DataQuery"))
-    Export.add_member(:description, Shapes::ShapeRef.new(shape: GenericString, location_name: "Description"))
-    Export.add_member(:destination_configurations, Shapes::ShapeRef.new(shape: DestinationConfigurations, required: true, location_name: "DestinationConfigurations"))
     Export.add_member(:export_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "ExportArn"))
     Export.add_member(:name, Shapes::ShapeRef.new(shape: ExportName, required: true, location_name: "Name"))
+    Export.add_member(:description, Shapes::ShapeRef.new(shape: GenericString, location_name: "Description"))
+    Export.add_member(:data_query, Shapes::ShapeRef.new(shape: DataQuery, required: true, location_name: "DataQuery"))
+    Export.add_member(:destination_configurations, Shapes::ShapeRef.new(shape: DestinationConfigurations, required: true, location_name: "DestinationConfigurations"))
     Export.add_member(:refresh_cadence, Shapes::ShapeRef.new(shape: RefreshCadence, required: true, location_name: "RefreshCadence"))
     Export.struct_class = Types::Export
 
@@ -145,22 +151,22 @@ module Aws::BCMDataExports
 
     ExportReferenceList.member = Shapes::ShapeRef.new(shape: ExportReference)
 
-    ExportStatus.add_member(:created_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "CreatedAt"))
-    ExportStatus.add_member(:last_refreshed_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "LastRefreshedAt"))
-    ExportStatus.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "LastUpdatedAt"))
     ExportStatus.add_member(:status_code, Shapes::ShapeRef.new(shape: ExportStatusCode, location_name: "StatusCode"))
     ExportStatus.add_member(:status_reason, Shapes::ShapeRef.new(shape: ExecutionStatusReason, location_name: "StatusReason"))
+    ExportStatus.add_member(:created_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "CreatedAt"))
+    ExportStatus.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "LastUpdatedAt"))
+    ExportStatus.add_member(:last_refreshed_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "LastRefreshedAt"))
     ExportStatus.struct_class = Types::ExportStatus
 
     GenericStringList.member = Shapes::ShapeRef.new(shape: GenericString)
 
-    GetExecutionRequest.add_member(:execution_id, Shapes::ShapeRef.new(shape: GenericString, required: true, location_name: "ExecutionId"))
     GetExecutionRequest.add_member(:export_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "ExportArn"))
+    GetExecutionRequest.add_member(:execution_id, Shapes::ShapeRef.new(shape: GenericString, required: true, location_name: "ExecutionId"))
     GetExecutionRequest.struct_class = Types::GetExecutionRequest
 
     GetExecutionResponse.add_member(:execution_id, Shapes::ShapeRef.new(shape: GenericString, location_name: "ExecutionId"))
-    GetExecutionResponse.add_member(:execution_status, Shapes::ShapeRef.new(shape: ExecutionStatus, location_name: "ExecutionStatus"))
     GetExecutionResponse.add_member(:export, Shapes::ShapeRef.new(shape: Export, location_name: "Export"))
+    GetExecutionResponse.add_member(:execution_status, Shapes::ShapeRef.new(shape: ExecutionStatus, location_name: "ExecutionStatus"))
     GetExecutionResponse.struct_class = Types::GetExecutionResponse
 
     GetExportRequest.add_member(:export_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "ExportArn"))
@@ -174,10 +180,10 @@ module Aws::BCMDataExports
     GetTableRequest.add_member(:table_properties, Shapes::ShapeRef.new(shape: TableProperties, location_name: "TableProperties"))
     GetTableRequest.struct_class = Types::GetTableRequest
 
-    GetTableResponse.add_member(:description, Shapes::ShapeRef.new(shape: GenericString, location_name: "Description"))
-    GetTableResponse.add_member(:schema, Shapes::ShapeRef.new(shape: ColumnList, location_name: "Schema"))
     GetTableResponse.add_member(:table_name, Shapes::ShapeRef.new(shape: TableName, location_name: "TableName"))
+    GetTableResponse.add_member(:description, Shapes::ShapeRef.new(shape: GenericString, location_name: "Description"))
     GetTableResponse.add_member(:table_properties, Shapes::ShapeRef.new(shape: TableProperties, location_name: "TableProperties"))
+    GetTableResponse.add_member(:schema, Shapes::ShapeRef.new(shape: ColumnList, location_name: "Schema"))
     GetTableResponse.struct_class = Types::GetTableResponse
 
     InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: GenericString, required: true, location_name: "Message"))
@@ -200,21 +206,21 @@ module Aws::BCMDataExports
     ListExportsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextPageToken, location_name: "NextToken"))
     ListExportsResponse.struct_class = Types::ListExportsResponse
 
-    ListTablesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
     ListTablesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextPageToken, location_name: "NextToken"))
+    ListTablesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
     ListTablesRequest.struct_class = Types::ListTablesRequest
 
-    ListTablesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextPageToken, location_name: "NextToken"))
     ListTablesResponse.add_member(:tables, Shapes::ShapeRef.new(shape: TableList, location_name: "Tables"))
+    ListTablesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextPageToken, location_name: "NextToken"))
     ListTablesResponse.struct_class = Types::ListTablesResponse
 
+    ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "ResourceArn"))
     ListTagsForResourceRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
     ListTagsForResourceRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextPageToken, location_name: "NextToken"))
-    ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "ResourceArn"))
     ListTagsForResourceRequest.struct_class = Types::ListTagsForResourceRequest
 
-    ListTagsForResourceResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextPageToken, location_name: "NextToken"))
     ListTagsForResourceResponse.add_member(:resource_tags, Shapes::ShapeRef.new(shape: ResourceTagList, location_name: "ResourceTags"))
+    ListTagsForResourceResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextPageToken, location_name: "NextToken"))
     ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
 
     RefreshCadence.add_member(:frequency, Shapes::ShapeRef.new(shape: FrequencyOption, required: true, location_name: "Frequency"))
@@ -234,26 +240,27 @@ module Aws::BCMDataExports
     ResourceTagList.member = Shapes::ShapeRef.new(shape: ResourceTag)
 
     S3Destination.add_member(:s3_bucket, Shapes::ShapeRef.new(shape: GenericString, required: true, location_name: "S3Bucket"))
-    S3Destination.add_member(:s3_output_configurations, Shapes::ShapeRef.new(shape: S3OutputConfigurations, required: true, location_name: "S3OutputConfigurations"))
+    S3Destination.add_member(:s3_bucket_owner, Shapes::ShapeRef.new(shape: AccountId, location_name: "S3BucketOwner"))
     S3Destination.add_member(:s3_prefix, Shapes::ShapeRef.new(shape: GenericString, required: true, location_name: "S3Prefix"))
     S3Destination.add_member(:s3_region, Shapes::ShapeRef.new(shape: GenericString, required: true, location_name: "S3Region"))
+    S3Destination.add_member(:s3_output_configurations, Shapes::ShapeRef.new(shape: S3OutputConfigurations, required: true, location_name: "S3OutputConfigurations"))
     S3Destination.struct_class = Types::S3Destination
 
-    S3OutputConfigurations.add_member(:compression, Shapes::ShapeRef.new(shape: CompressionOption, required: true, location_name: "Compression"))
-    S3OutputConfigurations.add_member(:format, Shapes::ShapeRef.new(shape: FormatOption, required: true, location_name: "Format"))
     S3OutputConfigurations.add_member(:output_type, Shapes::ShapeRef.new(shape: S3OutputType, required: true, location_name: "OutputType"))
+    S3OutputConfigurations.add_member(:format, Shapes::ShapeRef.new(shape: FormatOption, required: true, location_name: "Format"))
+    S3OutputConfigurations.add_member(:compression, Shapes::ShapeRef.new(shape: CompressionOption, required: true, location_name: "Compression"))
     S3OutputConfigurations.add_member(:overwrite, Shapes::ShapeRef.new(shape: OverwriteOption, required: true, location_name: "Overwrite"))
     S3OutputConfigurations.struct_class = Types::S3OutputConfigurations
 
     ServiceQuotaExceededException.add_member(:message, Shapes::ShapeRef.new(shape: GenericString, required: true, location_name: "Message"))
-    ServiceQuotaExceededException.add_member(:quota_code, Shapes::ShapeRef.new(shape: GenericString, required: true, location_name: "QuotaCode"))
     ServiceQuotaExceededException.add_member(:resource_id, Shapes::ShapeRef.new(shape: GenericString, location_name: "ResourceId"))
     ServiceQuotaExceededException.add_member(:resource_type, Shapes::ShapeRef.new(shape: GenericString, location_name: "ResourceType"))
+    ServiceQuotaExceededException.add_member(:quota_code, Shapes::ShapeRef.new(shape: GenericString, required: true, location_name: "QuotaCode"))
     ServiceQuotaExceededException.add_member(:service_code, Shapes::ShapeRef.new(shape: GenericString, required: true, location_name: "ServiceCode"))
     ServiceQuotaExceededException.struct_class = Types::ServiceQuotaExceededException
 
-    Table.add_member(:description, Shapes::ShapeRef.new(shape: GenericString, location_name: "Description"))
     Table.add_member(:table_name, Shapes::ShapeRef.new(shape: TableName, location_name: "TableName"))
+    Table.add_member(:description, Shapes::ShapeRef.new(shape: GenericString, location_name: "Description"))
     Table.add_member(:table_properties, Shapes::ShapeRef.new(shape: TablePropertyDescriptionList, location_name: "TableProperties"))
     Table.struct_class = Types::Table
 
@@ -263,12 +270,12 @@ module Aws::BCMDataExports
     TableList.member = Shapes::ShapeRef.new(shape: Table)
 
     TableProperties.key = Shapes::ShapeRef.new(shape: TableProperty)
-    TableProperties.value = Shapes::ShapeRef.new(shape: GenericString)
+    TableProperties.value = Shapes::ShapeRef.new(shape: TablePropertyGenericString)
 
-    TablePropertyDescription.add_member(:default_value, Shapes::ShapeRef.new(shape: GenericString, location_name: "DefaultValue"))
-    TablePropertyDescription.add_member(:description, Shapes::ShapeRef.new(shape: GenericString, location_name: "Description"))
     TablePropertyDescription.add_member(:name, Shapes::ShapeRef.new(shape: GenericString, location_name: "Name"))
     TablePropertyDescription.add_member(:valid_values, Shapes::ShapeRef.new(shape: GenericStringList, location_name: "ValidValues"))
+    TablePropertyDescription.add_member(:default_value, Shapes::ShapeRef.new(shape: GenericString, location_name: "DefaultValue"))
+    TablePropertyDescription.add_member(:description, Shapes::ShapeRef.new(shape: GenericString, location_name: "Description"))
     TablePropertyDescription.struct_class = Types::TablePropertyDescription
 
     TablePropertyDescriptionList.member = Shapes::ShapeRef.new(shape: TablePropertyDescription)
@@ -290,20 +297,20 @@ module Aws::BCMDataExports
 
     UntagResourceResponse.struct_class = Types::UntagResourceResponse
 
-    UpdateExportRequest.add_member(:export, Shapes::ShapeRef.new(shape: Export, required: true, location_name: "Export"))
     UpdateExportRequest.add_member(:export_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "ExportArn"))
+    UpdateExportRequest.add_member(:export, Shapes::ShapeRef.new(shape: Export, required: true, location_name: "Export"))
     UpdateExportRequest.struct_class = Types::UpdateExportRequest
 
     UpdateExportResponse.add_member(:export_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "ExportArn"))
     UpdateExportResponse.struct_class = Types::UpdateExportResponse
 
-    ValidationException.add_member(:fields, Shapes::ShapeRef.new(shape: ValidationExceptionFieldList, location_name: "Fields"))
     ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: GenericString, required: true, location_name: "Message"))
     ValidationException.add_member(:reason, Shapes::ShapeRef.new(shape: ValidationExceptionReason, location_name: "Reason"))
+    ValidationException.add_member(:fields, Shapes::ShapeRef.new(shape: ValidationExceptionFieldList, location_name: "Fields"))
     ValidationException.struct_class = Types::ValidationException
 
-    ValidationExceptionField.add_member(:message, Shapes::ShapeRef.new(shape: GenericString, required: true, location_name: "Message"))
     ValidationExceptionField.add_member(:name, Shapes::ShapeRef.new(shape: GenericString, required: true, location_name: "Name"))
+    ValidationExceptionField.add_member(:message, Shapes::ShapeRef.new(shape: GenericString, required: true, location_name: "Message"))
     ValidationExceptionField.struct_class = Types::ValidationExceptionField
 
     ValidationExceptionFieldList.member = Shapes::ShapeRef.new(shape: ValidationExceptionField)
@@ -316,9 +323,11 @@ module Aws::BCMDataExports
 
       api.metadata = {
         "apiVersion" => "2023-11-26",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "bcm-data-exports",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "protocols" => ["json"],
         "serviceFullName" => "AWS Billing and Cost Management Data Exports",
         "serviceId" => "BCM Data Exports",
         "signatureVersion" => "v4",
@@ -337,6 +346,7 @@ module Aws::BCMDataExports
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
       api.add_operation(:delete_export, Seahorse::Model::Operation.new.tap do |o|
@@ -448,6 +458,7 @@ module Aws::BCMDataExports
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
       api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
@@ -460,6 +471,7 @@ module Aws::BCMDataExports
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
       api.add_operation(:untag_resource, Seahorse::Model::Operation.new.tap do |o|
@@ -472,6 +484,7 @@ module Aws::BCMDataExports
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
       api.add_operation(:update_export, Seahorse::Model::Operation.new.tap do |o|

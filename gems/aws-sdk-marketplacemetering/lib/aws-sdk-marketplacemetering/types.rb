@@ -176,6 +176,20 @@ module Aws::MarketplaceMetering
       include Aws::Structure
     end
 
+    # Ensure the `LicenseArn` is valid, matches the customer, and usage is
+    # within the license activation period.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/meteringmarketplace-2016-01-14/InvalidLicenseException AWS API Documentation
+    #
+    class InvalidLicenseException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The product code passed does not match the product code used for
     # publishing the product.
     #
@@ -421,7 +435,8 @@ module Aws::MarketplaceMetering
     #   When a buyer visits your website during the registration process,
     #   the buyer submits a registration token through the browser. The
     #   registration token is resolved to obtain a `CustomerIdentifier`
-    #   along with the `CustomerAWSAccountId` and `ProductCode`.
+    #   along with the `CustomerAWSAccountId`, `ProductCode`, and
+    #   `LicenseArn`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/meteringmarketplace-2016-01-14/ResolveCustomerRequest AWS API Documentation
@@ -433,13 +448,12 @@ module Aws::MarketplaceMetering
     end
 
     # The result of the `ResolveCustomer` operation. Contains the
-    # `CustomerIdentifier` along with the `CustomerAWSAccountId` and
-    # `ProductCode`.
+    # `CustomerIdentifier` along with the `CustomerAWSAccountId`,
+    # `ProductCode`, and `LicenseArn`.
     #
     # @!attribute [rw] customer_identifier
     #   The `CustomerIdentifier` is used to identify an individual customer
-    #   in your application. Calls to `BatchMeterUsage` require
-    #   `CustomerIdentifiers` for each `UsageRecord`.
+    #   in your application.
     #   @return [String]
     #
     # @!attribute [rw] product_code
@@ -451,7 +465,20 @@ module Aws::MarketplaceMetering
     # @!attribute [rw] customer_aws_account_id
     #   The `CustomerAWSAccountId` provides the Amazon Web Services account
     #   ID associated with the `CustomerIdentifier` for the individual
-    #   customer.
+    #   customer. Calls to `BatchMeterUsage` require `CustomerAWSAccountId`
+    #   for each `UsageRecord`.
+    #   @return [String]
+    #
+    # @!attribute [rw] license_arn
+    #   The `LicenseArn` is a unique identifier for a specific granted
+    #   license. These are typically used for software purchased through
+    #   Amazon Web Services Marketplace. Calls to `BatchMeterUsage` require
+    #   `LicenseArn` for each `UsageRecord`.
+    #
+    #   <note markdown="1"> Once you receive the `CustomerAWSAccountId` and `LicenseArn` in the
+    #   response, store that for future purposes/API calls/integrations.
+    #
+    #    </note>
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/meteringmarketplace-2016-01-14/ResolveCustomerResult AWS API Documentation
@@ -459,7 +486,8 @@ module Aws::MarketplaceMetering
     class ResolveCustomerResult < Struct.new(
       :customer_identifier,
       :product_code,
-      :customer_aws_account_id)
+      :customer_aws_account_id,
+      :license_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -578,8 +606,32 @@ module Aws::MarketplaceMetering
     #   @return [Array<Types::UsageAllocation>]
     #
     # @!attribute [rw] customer_aws_account_id
-    #   The `CustomerAWSAccountID` parameter specifies the AWS account ID of
+    #   The `CustomerAWSAccountId` parameter specifies the AWS account ID of
     #   the buyer.
+    #
+    #   <note markdown="1"> For existing integrations, to access your `CustomerIdentifier` to
+    #   `CustomerAWSAccountId` mapping, see [Account Feeds][1].
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/marketplace/latest/userguide/data-feed-account.html
+    #   @return [String]
+    #
+    # @!attribute [rw] license_arn
+    #   The `LicenseArn` is a unique identifier for a specific granted
+    #   license. These are used for software purchased through Amazon Web
+    #   Services Marketplace.
+    #
+    #   <note markdown="1"> To access your `CustomerAWSAccountId` and `LicenseArn` mapping,
+    #   visit [Agreements Feeds][1].
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/marketplace/latest/userguide/data-feed-agreements.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/meteringmarketplace-2016-01-14/UsageRecord AWS API Documentation
@@ -590,7 +642,8 @@ module Aws::MarketplaceMetering
       :dimension,
       :quantity,
       :usage_allocations,
-      :customer_aws_account_id)
+      :customer_aws_account_id,
+      :license_arn)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.98.0 (2026-04-09)
+------------------
+
+* Feature - Adds support for MediaLive Channel-type Router Inputs.
+
+1.97.0 (2026-03-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.96.0 (2026-01-28)
 ------------------
 

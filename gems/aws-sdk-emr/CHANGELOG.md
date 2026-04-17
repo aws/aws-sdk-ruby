@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.128.0 (2026-03-26)
+------------------
+
+* Feature - Add StepExecutionRoleArn to RunJobFlow API
+
+1.127.0 (2026-03-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.126.0 (2026-03-17)
+------------------
+
+* Feature - Add S3LoggingConfiguration to Control LogUploads
+
 1.125.0 (2026-01-16)
 ------------------
 

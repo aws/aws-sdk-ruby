@@ -298,7 +298,8 @@ module Aws
                                  entity_id: ::String
                                }?
                              }?
-                           }
+                           },
+                           ?name: ::String
                          ) -> _CreatePolicyResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreatePolicyResponseSuccess
 
@@ -329,6 +330,20 @@ module Aws
                                ) -> _CreatePolicyStoreResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreatePolicyStoreResponseSuccess
 
+      interface _CreatePolicyStoreAliasResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreatePolicyStoreAliasOutput]
+        def alias_name: () -> ::String
+        def policy_store_id: () -> ::String
+        def alias_arn: () -> ::String
+        def created_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/VerifiedPermissions/Client.html#create_policy_store_alias-instance_method
+      def create_policy_store_alias: (
+                                       alias_name: ::String,
+                                       policy_store_id: ::String
+                                     ) -> _CreatePolicyStoreAliasResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreatePolicyStoreAliasResponseSuccess
+
       interface _CreatePolicyTemplateResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreatePolicyTemplateOutput]
         def policy_store_id: () -> ::String
@@ -341,7 +356,8 @@ module Aws
                                     ?client_token: ::String,
                                     policy_store_id: ::String,
                                     ?description: ::String,
-                                    statement: ::String
+                                    statement: ::String,
+                                    ?name: ::String
                                   ) -> _CreatePolicyTemplateResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreatePolicyTemplateResponseSuccess
 
@@ -373,6 +389,15 @@ module Aws
                                  policy_store_id: ::String
                                ) -> _DeletePolicyStoreResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeletePolicyStoreResponseSuccess
+
+      interface _DeletePolicyStoreAliasResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeletePolicyStoreAliasOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/VerifiedPermissions/Client.html#delete_policy_store_alias-instance_method
+      def delete_policy_store_alias: (
+                                       alias_name: ::String
+                                     ) -> _DeletePolicyStoreAliasResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeletePolicyStoreAliasResponseSuccess
 
       interface _DeletePolicyTemplateResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeletePolicyTemplateOutput]
@@ -413,6 +438,7 @@ module Aws
         def created_date: () -> ::Time
         def last_updated_date: () -> ::Time
         def effect: () -> ("Permit" | "Forbid")
+        def name: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/VerifiedPermissions/Client.html#get_policy-instance_method
       def get_policy: (
@@ -441,6 +467,20 @@ module Aws
                             ) -> _GetPolicyStoreResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetPolicyStoreResponseSuccess
 
+      interface _GetPolicyStoreAliasResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetPolicyStoreAliasOutput]
+        def alias_name: () -> ::String
+        def policy_store_id: () -> ::String
+        def alias_arn: () -> ::String
+        def created_at: () -> ::Time
+        def state: () -> ("Active" | "PendingDeletion")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/VerifiedPermissions/Client.html#get_policy_store_alias-instance_method
+      def get_policy_store_alias: (
+                                    alias_name: ::String
+                                  ) -> _GetPolicyStoreAliasResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetPolicyStoreAliasResponseSuccess
+
       interface _GetPolicyTemplateResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetPolicyTemplateOutput]
         def policy_store_id: () -> ::String
@@ -449,6 +489,7 @@ module Aws
         def statement: () -> ::String
         def created_date: () -> ::Time
         def last_updated_date: () -> ::Time
+        def name: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/VerifiedPermissions/Client.html#get_policy_template-instance_method
       def get_policy_template: (
@@ -645,6 +686,21 @@ module Aws
                          ) -> _ListPoliciesResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPoliciesResponseSuccess
 
+      interface _ListPolicyStoreAliasesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListPolicyStoreAliasesOutput]
+        def next_token: () -> ::String
+        def policy_store_aliases: () -> ::Array[Types::PolicyStoreAliasItem]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/VerifiedPermissions/Client.html#list_policy_store_aliases-instance_method
+      def list_policy_store_aliases: (
+                                       ?next_token: ::String,
+                                       ?max_results: ::Integer,
+                                       ?filter: {
+                                         policy_store_id: ::String?
+                                       }
+                                     ) -> _ListPolicyStoreAliasesResponseSuccess
+                                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPolicyStoreAliasesResponseSuccess
+
       interface _ListPolicyStoresResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListPolicyStoresOutput]
         def next_token: () -> ::String
@@ -779,7 +835,8 @@ module Aws
                                description: ::String?,
                                statement: ::String
                              }?
-                           }
+                           },
+                           ?name: ::String
                          ) -> _UpdatePolicyResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdatePolicyResponseSuccess
 
@@ -813,7 +870,8 @@ module Aws
                                     policy_store_id: ::String,
                                     policy_template_id: ::String,
                                     ?description: ::String,
-                                    statement: ::String
+                                    statement: ::String,
+                                    ?name: ::String
                                   ) -> _UpdatePolicyTemplateResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdatePolicyTemplateResponseSuccess
     end

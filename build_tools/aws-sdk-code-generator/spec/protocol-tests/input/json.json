@@ -2479,5 +2479,117 @@
                 }
             }
         ]
+    },
+    {
+        "description": "Test cases for SparseNullsOperation operation",
+        "metadata": {
+            "apiVersion": "2018-01-01",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "jsonprotocol",
+            "jsonVersion": "1.1",
+            "protocol": "json",
+            "protocols": [
+                "json"
+            ],
+            "serviceFullName": "JsonProtocol",
+            "serviceId": "Json Protocol",
+            "signatureVersion": "v4",
+            "signingName": "JsonProtocol",
+            "targetPrefix": "JsonProtocol",
+            "uid": "json-protocol-2018-01-01"
+        },
+        "shapes": {
+            "SparseNullsOperationInputOutput": {
+                "type": "structure",
+                "members": {
+                    "sparseStringList": {
+                        "shape": "SparseStringList"
+                    },
+                    "sparseStringMap": {
+                        "shape": "SparseStringMap"
+                    }
+                }
+            },
+            "SparseStringList": {
+                "type": "list",
+                "member": {
+                    "shape": "String"
+                },
+                "sparse": true
+            },
+            "SparseStringMap": {
+                "type": "map",
+                "key": {
+                    "shape": "String"
+                },
+                "value": {
+                    "shape": "String"
+                },
+                "sparse": true
+            },
+            "String": {
+                "type": "string"
+            }
+        },
+        "cases": [
+            {
+                "id": "AwsJson11SparseMapsSerializeNullValues",
+                "description": "Serializes null values in maps",
+                "given": {
+                    "name": "SparseNullsOperation",
+                    "http": {
+                        "method": "POST",
+                        "requestUri": "/"
+                    },
+                    "input": {
+                        "shape": "SparseNullsOperationInputOutput"
+                    }
+                },
+                "params": {
+                    "sparseStringMap": {
+                        "foo": null
+                    }
+                },
+                "serialized": {
+                    "method": "POST",
+                    "uri": "/",
+                    "body": "{\n    \"sparseStringMap\": {\n        \"foo\": null\n    }\n}",
+                    "headers": {
+                        "X-Amz-Target": "JsonProtocol.SparseNullsOperation",
+                        "Content-Type": "application/x-amz-json-1.1"
+                    }
+                }
+            },
+            {
+                "id": "AwsJson11SparseListsSerializeNull",
+                "description": "Serializes null values in lists",
+                "given": {
+                    "name": "SparseNullsOperation",
+                    "http": {
+                        "method": "POST",
+                        "requestUri": "/"
+                    },
+                    "input": {
+                        "shape": "SparseNullsOperationInputOutput"
+                    }
+                },
+                "params": {
+                    "sparseStringList": [
+                        null
+                    ]
+                },
+                "serialized": {
+                    "method": "POST",
+                    "uri": "/",
+                    "body": "{\n    \"sparseStringList\": [\n        null\n    ]\n}",
+                    "headers": {
+                        "X-Amz-Target": "JsonProtocol.SparseNullsOperation",
+                        "Content-Type": "application/x-amz-json-1.1"
+                    }
+                }
+            }
+        ]
     }
 ]

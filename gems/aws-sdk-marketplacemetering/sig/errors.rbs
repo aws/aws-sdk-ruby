@@ -35,6 +35,9 @@ module Aws
       class InvalidEndpointRegionException < ::Aws::Errors::ServiceError
         def message: () -> ::String
       end
+      class InvalidLicenseException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
       class InvalidProductCodeException < ::Aws::Errors::ServiceError
         def message: () -> ::String
       end

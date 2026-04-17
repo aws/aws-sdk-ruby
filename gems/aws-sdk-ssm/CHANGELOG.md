@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.212.0 (2026-03-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.211.0 (2026-02-20)
+------------------
+
+* Feature - Add support for AssociationDispatchAssumeRole in AWS SSM State Manager.
+
 1.210.0 (2026-01-16)
 ------------------
 

@@ -316,6 +316,8 @@ module Aws::EC2
     CancelledSpotInstanceRequest = Shapes::StructureShape.new(name: 'CancelledSpotInstanceRequest')
     CancelledSpotInstanceRequestList = Shapes::ListShape.new(name: 'CancelledSpotInstanceRequestList')
     CapacityAllocation = Shapes::StructureShape.new(name: 'CapacityAllocation')
+    CapacityAllocationMetadataEntry = Shapes::StructureShape.new(name: 'CapacityAllocationMetadataEntry')
+    CapacityAllocationMetadataList = Shapes::ListShape.new(name: 'CapacityAllocationMetadataList')
     CapacityAllocations = Shapes::ListShape.new(name: 'CapacityAllocations')
     CapacityBlock = Shapes::StructureShape.new(name: 'CapacityBlock')
     CapacityBlockExtension = Shapes::StructureShape.new(name: 'CapacityBlockExtension')
@@ -340,7 +342,12 @@ module Aws::EC2
     CapacityManagerDataExportResponseSet = Shapes::ListShape.new(name: 'CapacityManagerDataExportResponseSet')
     CapacityManagerDataExportStatus = Shapes::StringShape.new(name: 'CapacityManagerDataExportStatus')
     CapacityManagerDimension = Shapes::StructureShape.new(name: 'CapacityManagerDimension')
+    CapacityManagerMonitoredTagKey = Shapes::StructureShape.new(name: 'CapacityManagerMonitoredTagKey')
+    CapacityManagerMonitoredTagKeyList = Shapes::ListShape.new(name: 'CapacityManagerMonitoredTagKeyList')
+    CapacityManagerMonitoredTagKeyStatus = Shapes::StringShape.new(name: 'CapacityManagerMonitoredTagKeyStatus')
     CapacityManagerStatus = Shapes::StringShape.new(name: 'CapacityManagerStatus')
+    CapacityManagerTagDimension = Shapes::StructureShape.new(name: 'CapacityManagerTagDimension')
+    CapacityManagerTagDimensionSet = Shapes::ListShape.new(name: 'CapacityManagerTagDimensionSet')
     CapacityReservation = Shapes::StructureShape.new(name: 'CapacityReservation')
     CapacityReservationBillingRequest = Shapes::StructureShape.new(name: 'CapacityReservationBillingRequest')
     CapacityReservationBillingRequestSet = Shapes::ListShape.new(name: 'CapacityReservationBillingRequestSet')
@@ -444,6 +451,7 @@ module Aws::EC2
     Comparison = Shapes::StringShape.new(name: 'Comparison')
     ComponentAccount = Shapes::StringShape.new(name: 'ComponentAccount')
     ComponentRegion = Shapes::StringShape.new(name: 'ComponentRegion')
+    ConditionValue = Shapes::StringShape.new(name: 'ConditionValue')
     ConditionValueList = Shapes::ListShape.new(name: 'ConditionValueList')
     ConfirmProductInstanceRequest = Shapes::StructureShape.new(name: 'ConfirmProductInstanceRequest')
     ConfirmProductInstanceResult = Shapes::StructureShape.new(name: 'ConfirmProductInstanceResult')
@@ -735,13 +743,18 @@ module Aws::EC2
     DedicatedHostFlag = Shapes::BooleanShape.new(name: 'DedicatedHostFlag')
     DedicatedHostId = Shapes::StringShape.new(name: 'DedicatedHostId')
     DedicatedHostIdList = Shapes::ListShape.new(name: 'DedicatedHostIdList')
+    DefaultConnectionTrackingConfiguration = Shapes::StructureShape.new(name: 'DefaultConnectionTrackingConfiguration')
     DefaultEnaQueueCountPerInterface = Shapes::IntegerShape.new(name: 'DefaultEnaQueueCountPerInterface')
+    DefaultHttpTokensEnforcedState = Shapes::StringShape.new(name: 'DefaultHttpTokensEnforcedState')
     DefaultInstanceMetadataEndpointState = Shapes::StringShape.new(name: 'DefaultInstanceMetadataEndpointState')
     DefaultInstanceMetadataTagsState = Shapes::StringShape.new(name: 'DefaultInstanceMetadataTagsState')
     DefaultNetworkCardIndex = Shapes::IntegerShape.new(name: 'DefaultNetworkCardIndex')
     DefaultRouteTableAssociationValue = Shapes::StringShape.new(name: 'DefaultRouteTableAssociationValue')
     DefaultRouteTablePropagationValue = Shapes::StringShape.new(name: 'DefaultRouteTablePropagationValue')
     DefaultTargetCapacityType = Shapes::StringShape.new(name: 'DefaultTargetCapacityType')
+    DefaultTcpEstablishedTimeout = Shapes::IntegerShape.new(name: 'DefaultTcpEstablishedTimeout')
+    DefaultUdpStreamTimeout = Shapes::IntegerShape.new(name: 'DefaultUdpStreamTimeout')
+    DefaultUdpTimeout = Shapes::IntegerShape.new(name: 'DefaultUdpTimeout')
     DefaultingDhcpOptionsId = Shapes::StringShape.new(name: 'DefaultingDhcpOptionsId')
     DeleteCapacityManagerDataExportRequest = Shapes::StructureShape.new(name: 'DeleteCapacityManagerDataExportRequest')
     DeleteCapacityManagerDataExportResult = Shapes::StructureShape.new(name: 'DeleteCapacityManagerDataExportResult')
@@ -1729,6 +1742,7 @@ module Aws::EC2
     FleetLaunchTemplateSpecificationRequest = Shapes::StructureShape.new(name: 'FleetLaunchTemplateSpecificationRequest')
     FleetOnDemandAllocationStrategy = Shapes::StringShape.new(name: 'FleetOnDemandAllocationStrategy')
     FleetReplacementStrategy = Shapes::StringShape.new(name: 'FleetReplacementStrategy')
+    FleetReservationType = Shapes::StringShape.new(name: 'FleetReservationType')
     FleetSet = Shapes::ListShape.new(name: 'FleetSet')
     FleetSpotCapacityRebalance = Shapes::StructureShape.new(name: 'FleetSpotCapacityRebalance')
     FleetSpotCapacityRebalanceRequest = Shapes::StructureShape.new(name: 'FleetSpotCapacityRebalanceRequest')
@@ -1780,6 +1794,9 @@ module Aws::EC2
     GetCapacityManagerMetricDataResult = Shapes::StructureShape.new(name: 'GetCapacityManagerMetricDataResult')
     GetCapacityManagerMetricDimensionsRequest = Shapes::StructureShape.new(name: 'GetCapacityManagerMetricDimensionsRequest')
     GetCapacityManagerMetricDimensionsResult = Shapes::StructureShape.new(name: 'GetCapacityManagerMetricDimensionsResult')
+    GetCapacityManagerMonitoredTagKeysRequest = Shapes::StructureShape.new(name: 'GetCapacityManagerMonitoredTagKeysRequest')
+    GetCapacityManagerMonitoredTagKeysRequestMaxResults = Shapes::IntegerShape.new(name: 'GetCapacityManagerMonitoredTagKeysRequestMaxResults')
+    GetCapacityManagerMonitoredTagKeysResult = Shapes::StructureShape.new(name: 'GetCapacityManagerMonitoredTagKeysResult')
     GetCapacityReservationUsageRequest = Shapes::StructureShape.new(name: 'GetCapacityReservationUsageRequest')
     GetCapacityReservationUsageRequestMaxResults = Shapes::IntegerShape.new(name: 'GetCapacityReservationUsageRequestMaxResults')
     GetCapacityReservationUsageResult = Shapes::StructureShape.new(name: 'GetCapacityReservationUsageResult')
@@ -1950,6 +1967,7 @@ module Aws::EC2
     HostTenancy = Shapes::StringShape.new(name: 'HostTenancy')
     HostnameType = Shapes::StringShape.new(name: 'HostnameType')
     Hour = Shapes::IntegerShape.new(name: 'Hour')
+    HttpTokensEnforcedState = Shapes::StringShape.new(name: 'HttpTokensEnforcedState')
     HttpTokensState = Shapes::StringShape.new(name: 'HttpTokensState')
     HypervisorType = Shapes::StringShape.new(name: 'HypervisorType')
     IKEVersionsList = Shapes::ListShape.new(name: 'IKEVersionsList')
@@ -3154,7 +3172,11 @@ module Aws::EC2
     ReservationList = Shapes::ListShape.new(name: 'ReservationList')
     ReservationState = Shapes::StringShape.new(name: 'ReservationState')
     ReservationType = Shapes::StringShape.new(name: 'ReservationType')
+    ReservationTypeList = Shapes::ListShape.new(name: 'ReservationTypeList')
+    ReservationTypeListRequest = Shapes::ListShape.new(name: 'ReservationTypeListRequest')
     ReservationValue = Shapes::StructureShape.new(name: 'ReservationValue')
+    ReservedCapacityOptions = Shapes::StructureShape.new(name: 'ReservedCapacityOptions')
+    ReservedCapacityOptionsRequest = Shapes::StructureShape.new(name: 'ReservedCapacityOptionsRequest')
     ReservedInstanceIdSet = Shapes::ListShape.new(name: 'ReservedInstanceIdSet')
     ReservedInstanceLimitPrice = Shapes::StructureShape.new(name: 'ReservedInstanceLimitPrice')
     ReservedInstanceReservationValue = Shapes::StructureShape.new(name: 'ReservedInstanceReservationValue')
@@ -3745,6 +3767,8 @@ module Aws::EC2
     UnsuccessfulItemError = Shapes::StructureShape.new(name: 'UnsuccessfulItemError')
     UnsuccessfulItemList = Shapes::ListShape.new(name: 'UnsuccessfulItemList')
     UnsuccessfulItemSet = Shapes::ListShape.new(name: 'UnsuccessfulItemSet')
+    UpdateCapacityManagerMonitoredTagKeysRequest = Shapes::StructureShape.new(name: 'UpdateCapacityManagerMonitoredTagKeysRequest')
+    UpdateCapacityManagerMonitoredTagKeysResult = Shapes::StructureShape.new(name: 'UpdateCapacityManagerMonitoredTagKeysResult')
     UpdateCapacityManagerOrganizationsAccessRequest = Shapes::StructureShape.new(name: 'UpdateCapacityManagerOrganizationsAccessRequest')
     UpdateCapacityManagerOrganizationsAccessResult = Shapes::StructureShape.new(name: 'UpdateCapacityManagerOrganizationsAccessResult')
     UpdateInterruptibleCapacityReservationAllocationRequest = Shapes::StructureShape.new(name: 'UpdateInterruptibleCapacityReservationAllocationRequest')
@@ -4225,7 +4249,7 @@ module Aws::EC2
     AllocateHostsRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken"))
     AllocateHostsRequest.add_member(:instance_type, Shapes::ShapeRef.new(shape: String, location_name: "instanceType"))
     AllocateHostsRequest.add_member(:quantity, Shapes::ShapeRef.new(shape: Integer, location_name: "quantity"))
-    AllocateHostsRequest.add_member(:availability_zone, Shapes::ShapeRef.new(shape: String, location_name: "availabilityZone"))
+    AllocateHostsRequest.add_member(:availability_zone, Shapes::ShapeRef.new(shape: AvailabilityZoneName, location_name: "availabilityZone"))
     AllocateHostsRequest.struct_class = Types::AllocateHostsRequest
 
     AllocateHostsResult.add_member(:host_ids, Shapes::ShapeRef.new(shape: ResponseHostIdList, location_name: "hostIdSet"))
@@ -4978,7 +5002,14 @@ module Aws::EC2
 
     CapacityAllocation.add_member(:allocation_type, Shapes::ShapeRef.new(shape: AllocationType, location_name: "allocationType"))
     CapacityAllocation.add_member(:count, Shapes::ShapeRef.new(shape: Integer, location_name: "count"))
+    CapacityAllocation.add_member(:allocation_metadata, Shapes::ShapeRef.new(shape: CapacityAllocationMetadataList, location_name: "allocationMetadataList"))
     CapacityAllocation.struct_class = Types::CapacityAllocation
+
+    CapacityAllocationMetadataEntry.add_member(:key, Shapes::ShapeRef.new(shape: String, location_name: "key"))
+    CapacityAllocationMetadataEntry.add_member(:value, Shapes::ShapeRef.new(shape: String, location_name: "value"))
+    CapacityAllocationMetadataEntry.struct_class = Types::CapacityAllocationMetadataEntry
+
+    CapacityAllocationMetadataList.member = Shapes::ShapeRef.new(shape: CapacityAllocationMetadataEntry, location_name: "item")
 
     CapacityAllocations.member = Shapes::ShapeRef.new(shape: CapacityAllocation, location_name: "item")
 
@@ -5007,6 +5038,7 @@ module Aws::EC2
     CapacityBlockExtension.add_member(:capacity_block_extension_end_date, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "capacityBlockExtensionEndDate"))
     CapacityBlockExtension.add_member(:upfront_fee, Shapes::ShapeRef.new(shape: String, location_name: "upfrontFee"))
     CapacityBlockExtension.add_member(:currency_code, Shapes::ShapeRef.new(shape: String, location_name: "currencyCode"))
+    CapacityBlockExtension.add_member(:zone_type, Shapes::ShapeRef.new(shape: String, location_name: "zoneType"))
     CapacityBlockExtension.struct_class = Types::CapacityBlockExtension
 
     CapacityBlockExtensionOffering.add_member(:capacity_block_extension_offering_id, Shapes::ShapeRef.new(shape: OfferingId, location_name: "capacityBlockExtensionOfferingId"))
@@ -5021,6 +5053,7 @@ module Aws::EC2
     CapacityBlockExtensionOffering.add_member(:upfront_fee, Shapes::ShapeRef.new(shape: String, location_name: "upfrontFee"))
     CapacityBlockExtensionOffering.add_member(:currency_code, Shapes::ShapeRef.new(shape: String, location_name: "currencyCode"))
     CapacityBlockExtensionOffering.add_member(:tenancy, Shapes::ShapeRef.new(shape: CapacityReservationTenancy, location_name: "tenancy"))
+    CapacityBlockExtensionOffering.add_member(:zone_type, Shapes::ShapeRef.new(shape: String, location_name: "zoneType"))
     CapacityBlockExtensionOffering.struct_class = Types::CapacityBlockExtensionOffering
 
     CapacityBlockExtensionOfferingSet.member = Shapes::ShapeRef.new(shape: CapacityBlockExtensionOffering, location_name: "item")
@@ -5042,6 +5075,7 @@ module Aws::EC2
     CapacityBlockOffering.add_member(:ultraserver_type, Shapes::ShapeRef.new(shape: String, location_name: "ultraserverType"))
     CapacityBlockOffering.add_member(:ultraserver_count, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "ultraserverCount"))
     CapacityBlockOffering.add_member(:capacity_block_duration_minutes, Shapes::ShapeRef.new(shape: Integer, location_name: "capacityBlockDurationMinutes"))
+    CapacityBlockOffering.add_member(:zone_type, Shapes::ShapeRef.new(shape: String, location_name: "zoneType"))
     CapacityBlockOffering.struct_class = Types::CapacityBlockOffering
 
     CapacityBlockOfferingSet.member = Shapes::ShapeRef.new(shape: CapacityBlockOffering, location_name: "item")
@@ -5083,6 +5117,7 @@ module Aws::EC2
     CapacityManagerDimension.add_member(:resource_region, Shapes::ShapeRef.new(shape: String, location_name: "resourceRegion"))
     CapacityManagerDimension.add_member(:availability_zone_id, Shapes::ShapeRef.new(shape: String, location_name: "availabilityZoneId"))
     CapacityManagerDimension.add_member(:account_id, Shapes::ShapeRef.new(shape: String, location_name: "accountId"))
+    CapacityManagerDimension.add_member(:account_name, Shapes::ShapeRef.new(shape: String, location_name: "accountName"))
     CapacityManagerDimension.add_member(:instance_family, Shapes::ShapeRef.new(shape: String, location_name: "instanceFamily"))
     CapacityManagerDimension.add_member(:instance_type, Shapes::ShapeRef.new(shape: String, location_name: "instanceType"))
     CapacityManagerDimension.add_member(:instance_platform, Shapes::ShapeRef.new(shape: String, location_name: "instancePlatform"))
@@ -5097,7 +5132,23 @@ module Aws::EC2
     CapacityManagerDimension.add_member(:reservation_state, Shapes::ShapeRef.new(shape: ReservationState, location_name: "reservationState"))
     CapacityManagerDimension.add_member(:reservation_instance_match_criteria, Shapes::ShapeRef.new(shape: String, location_name: "reservationInstanceMatchCriteria"))
     CapacityManagerDimension.add_member(:reservation_unused_financial_owner, Shapes::ShapeRef.new(shape: String, location_name: "reservationUnusedFinancialOwner"))
+    CapacityManagerDimension.add_member(:tags, Shapes::ShapeRef.new(shape: CapacityManagerTagDimensionSet, location_name: "tagSet"))
     CapacityManagerDimension.struct_class = Types::CapacityManagerDimension
+
+    CapacityManagerMonitoredTagKey.add_member(:tag_key, Shapes::ShapeRef.new(shape: String, location_name: "tagKey"))
+    CapacityManagerMonitoredTagKey.add_member(:status, Shapes::ShapeRef.new(shape: CapacityManagerMonitoredTagKeyStatus, location_name: "status"))
+    CapacityManagerMonitoredTagKey.add_member(:status_message, Shapes::ShapeRef.new(shape: String, location_name: "statusMessage"))
+    CapacityManagerMonitoredTagKey.add_member(:capacity_manager_provided, Shapes::ShapeRef.new(shape: Boolean, location_name: "capacityManagerProvided"))
+    CapacityManagerMonitoredTagKey.add_member(:earliest_datapoint_timestamp, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "earliestDatapointTimestamp"))
+    CapacityManagerMonitoredTagKey.struct_class = Types::CapacityManagerMonitoredTagKey
+
+    CapacityManagerMonitoredTagKeyList.member = Shapes::ShapeRef.new(shape: CapacityManagerMonitoredTagKey, location_name: "item")
+
+    CapacityManagerTagDimension.add_member(:key, Shapes::ShapeRef.new(shape: String, location_name: "key"))
+    CapacityManagerTagDimension.add_member(:value, Shapes::ShapeRef.new(shape: String, location_name: "value"))
+    CapacityManagerTagDimension.struct_class = Types::CapacityManagerTagDimension
+
+    CapacityManagerTagDimensionSet.member = Shapes::ShapeRef.new(shape: CapacityManagerTagDimension, location_name: "item")
 
     CapacityReservation.add_member(:capacity_reservation_id, Shapes::ShapeRef.new(shape: String, location_name: "capacityReservationId"))
     CapacityReservation.add_member(:owner_id, Shapes::ShapeRef.new(shape: String, location_name: "ownerId"))
@@ -5450,7 +5501,7 @@ module Aws::EC2
 
     CoipPoolSet.member = Shapes::ShapeRef.new(shape: CoipPool, location_name: "item")
 
-    ConditionValueList.member = Shapes::ShapeRef.new(shape: String, location_name: "item")
+    ConditionValueList.member = Shapes::ShapeRef.new(shape: ConditionValue, location_name: "item")
 
     ConfirmProductInstanceRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location_name: "InstanceId"))
     ConfirmProductInstanceRequest.add_member(:product_code, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ProductCode"))
@@ -5815,6 +5866,7 @@ module Aws::EC2
     CreateFleetRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     CreateFleetRequest.add_member(:spot_options, Shapes::ShapeRef.new(shape: SpotOptionsRequest, location_name: "SpotOptions"))
     CreateFleetRequest.add_member(:on_demand_options, Shapes::ShapeRef.new(shape: OnDemandOptionsRequest, location_name: "OnDemandOptions"))
+    CreateFleetRequest.add_member(:reserved_capacity_options, Shapes::ShapeRef.new(shape: ReservedCapacityOptionsRequest, location_name: "ReservedCapacityOptions"))
     CreateFleetRequest.add_member(:excess_capacity_termination_policy, Shapes::ShapeRef.new(shape: FleetExcessCapacityTerminationPolicy, location_name: "ExcessCapacityTerminationPolicy"))
     CreateFleetRequest.add_member(:launch_template_configs, Shapes::ShapeRef.new(shape: FleetLaunchTemplateConfigListRequest, required: true, location_name: "LaunchTemplateConfigs"))
     CreateFleetRequest.add_member(:target_capacity_specification, Shapes::ShapeRef.new(shape: TargetCapacitySpecificationRequest, required: true, location_name: "TargetCapacitySpecification"))
@@ -7043,6 +7095,11 @@ module Aws::EC2
 
     DedicatedHostIdList.member = Shapes::ShapeRef.new(shape: DedicatedHostId, location_name: "item")
 
+    DefaultConnectionTrackingConfiguration.add_member(:default_tcp_established_timeout, Shapes::ShapeRef.new(shape: DefaultTcpEstablishedTimeout, location_name: "defaultTcpEstablishedTimeout"))
+    DefaultConnectionTrackingConfiguration.add_member(:default_udp_timeout, Shapes::ShapeRef.new(shape: DefaultUdpTimeout, location_name: "defaultUdpTimeout"))
+    DefaultConnectionTrackingConfiguration.add_member(:default_udp_stream_timeout, Shapes::ShapeRef.new(shape: DefaultUdpStreamTimeout, location_name: "defaultUdpStreamTimeout"))
+    DefaultConnectionTrackingConfiguration.struct_class = Types::DefaultConnectionTrackingConfiguration
+
     DeleteCapacityManagerDataExportRequest.add_member(:capacity_manager_data_export_id, Shapes::ShapeRef.new(shape: CapacityManagerDataExportId, required: true, location_name: "CapacityManagerDataExportId"))
     DeleteCapacityManagerDataExportRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     DeleteCapacityManagerDataExportRequest.struct_class = Types::DeleteCapacityManagerDataExportRequest
@@ -7905,6 +7962,7 @@ module Aws::EC2
     DescribeCapacityBlockOfferingsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: DescribeCapacityBlockOfferingsMaxResults, location_name: "MaxResults"))
     DescribeCapacityBlockOfferingsRequest.add_member(:ultraserver_type, Shapes::ShapeRef.new(shape: String, location_name: "UltraserverType"))
     DescribeCapacityBlockOfferingsRequest.add_member(:ultraserver_count, Shapes::ShapeRef.new(shape: Integer, location_name: "UltraserverCount"))
+    DescribeCapacityBlockOfferingsRequest.add_member(:all_availability_zones, Shapes::ShapeRef.new(shape: Boolean, location_name: "AllAvailabilityZones"))
     DescribeCapacityBlockOfferingsRequest.struct_class = Types::DescribeCapacityBlockOfferingsRequest
 
     DescribeCapacityBlockOfferingsResult.add_member(:capacity_block_offerings, Shapes::ShapeRef.new(shape: CapacityBlockOfferingSet, location_name: "capacityBlockOfferingSet"))
@@ -10999,6 +11057,7 @@ module Aws::EC2
     FleetData.add_member(:replace_unhealthy_instances, Shapes::ShapeRef.new(shape: Boolean, location_name: "replaceUnhealthyInstances"))
     FleetData.add_member(:spot_options, Shapes::ShapeRef.new(shape: SpotOptions, location_name: "spotOptions"))
     FleetData.add_member(:on_demand_options, Shapes::ShapeRef.new(shape: OnDemandOptions, location_name: "onDemandOptions"))
+    FleetData.add_member(:reserved_capacity_options, Shapes::ShapeRef.new(shape: ReservedCapacityOptions, location_name: "reservedCapacityOptions"))
     FleetData.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
     FleetData.add_member(:errors, Shapes::ShapeRef.new(shape: DescribeFleetsErrorSet, location_name: "errorSet"))
     FleetData.add_member(:instances, Shapes::ShapeRef.new(shape: DescribeFleetsInstancesSet, location_name: "fleetInstanceSet"))
@@ -11242,6 +11301,15 @@ module Aws::EC2
     GetCapacityManagerMetricDimensionsResult.add_member(:metric_dimension_results, Shapes::ShapeRef.new(shape: MetricDimensionResultSet, location_name: "metricDimensionResultSet"))
     GetCapacityManagerMetricDimensionsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     GetCapacityManagerMetricDimensionsResult.struct_class = Types::GetCapacityManagerMetricDimensionsResult
+
+    GetCapacityManagerMonitoredTagKeysRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: GetCapacityManagerMonitoredTagKeysRequestMaxResults, location_name: "MaxResults"))
+    GetCapacityManagerMonitoredTagKeysRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    GetCapacityManagerMonitoredTagKeysRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    GetCapacityManagerMonitoredTagKeysRequest.struct_class = Types::GetCapacityManagerMonitoredTagKeysRequest
+
+    GetCapacityManagerMonitoredTagKeysResult.add_member(:capacity_manager_tag_keys, Shapes::ShapeRef.new(shape: CapacityManagerMonitoredTagKeyList, location_name: "capacityManagerTagKeySet"))
+    GetCapacityManagerMonitoredTagKeysResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    GetCapacityManagerMonitoredTagKeysResult.struct_class = Types::GetCapacityManagerMonitoredTagKeysResult
 
     GetCapacityReservationUsageRequest.add_member(:capacity_reservation_id, Shapes::ShapeRef.new(shape: CapacityReservationId, required: true, location_name: "CapacityReservationId"))
     GetCapacityReservationUsageRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
@@ -12675,6 +12743,7 @@ module Aws::EC2
     InstanceMetadataDefaultsResponse.add_member(:instance_metadata_tags, Shapes::ShapeRef.new(shape: InstanceMetadataTagsState, location_name: "instanceMetadataTags"))
     InstanceMetadataDefaultsResponse.add_member(:managed_by, Shapes::ShapeRef.new(shape: ManagedBy, location_name: "managedBy"))
     InstanceMetadataDefaultsResponse.add_member(:managed_exception_message, Shapes::ShapeRef.new(shape: String, location_name: "managedExceptionMessage"))
+    InstanceMetadataDefaultsResponse.add_member(:http_tokens_enforced, Shapes::ShapeRef.new(shape: HttpTokensEnforcedState, location_name: "httpTokensEnforced"))
     InstanceMetadataDefaultsResponse.struct_class = Types::InstanceMetadataDefaultsResponse
 
     InstanceMetadataOptionsRequest.add_member(:http_tokens, Shapes::ShapeRef.new(shape: HttpTokensState, location_name: "HttpTokens"))
@@ -14479,6 +14548,7 @@ module Aws::EC2
     ModifyInstanceMetadataDefaultsRequest.add_member(:http_endpoint, Shapes::ShapeRef.new(shape: DefaultInstanceMetadataEndpointState, location_name: "HttpEndpoint"))
     ModifyInstanceMetadataDefaultsRequest.add_member(:instance_metadata_tags, Shapes::ShapeRef.new(shape: DefaultInstanceMetadataTagsState, location_name: "InstanceMetadataTags"))
     ModifyInstanceMetadataDefaultsRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    ModifyInstanceMetadataDefaultsRequest.add_member(:http_tokens_enforced, Shapes::ShapeRef.new(shape: DefaultHttpTokensEnforcedState, location_name: "HttpTokensEnforced"))
     ModifyInstanceMetadataDefaultsRequest.struct_class = Types::ModifyInstanceMetadataDefaultsRequest
 
     ModifyInstanceMetadataDefaultsResult.add_member(:return, Shapes::ShapeRef.new(shape: Boolean, location_name: "return"))
@@ -15340,6 +15410,7 @@ module Aws::EC2
     NetworkInfo.add_member(:ena_srd_supported, Shapes::ShapeRef.new(shape: EnaSrdSupported, location_name: "enaSrdSupported"))
     NetworkInfo.add_member(:bandwidth_weightings, Shapes::ShapeRef.new(shape: BandwidthWeightingTypeList, location_name: "bandwidthWeightings"))
     NetworkInfo.add_member(:flexible_ena_queues_support, Shapes::ShapeRef.new(shape: FlexibleEnaQueuesSupport, location_name: "flexibleEnaQueuesSupport"))
+    NetworkInfo.add_member(:connection_tracking_configuration, Shapes::ShapeRef.new(shape: DefaultConnectionTrackingConfiguration, location_name: "connectionTrackingConfiguration"))
     NetworkInfo.add_member(:secondary_network_supported, Shapes::ShapeRef.new(shape: SecondaryNetworkSupportedFlag, location_name: "secondaryNetworkSupported"))
     NetworkInfo.add_member(:maximum_secondary_network_interfaces, Shapes::ShapeRef.new(shape: MaximumSecondaryNetworkInterfaces, location_name: "maximumSecondaryNetworkInterfaces"))
     NetworkInfo.add_member(:ipv_4_addresses_per_secondary_interface, Shapes::ShapeRef.new(shape: Ipv4AddressesPerSecondaryInterface, location_name: "ipv4AddressesPerSecondaryInterface"))
@@ -16513,10 +16584,20 @@ module Aws::EC2
 
     ReservationList.member = Shapes::ShapeRef.new(shape: Reservation, location_name: "item")
 
+    ReservationTypeList.member = Shapes::ShapeRef.new(shape: FleetReservationType, location_name: "item")
+
+    ReservationTypeListRequest.member = Shapes::ShapeRef.new(shape: FleetReservationType, location_name: "ReservationType")
+
     ReservationValue.add_member(:hourly_price, Shapes::ShapeRef.new(shape: String, location_name: "hourlyPrice"))
     ReservationValue.add_member(:remaining_total_value, Shapes::ShapeRef.new(shape: String, location_name: "remainingTotalValue"))
     ReservationValue.add_member(:remaining_upfront_value, Shapes::ShapeRef.new(shape: String, location_name: "remainingUpfrontValue"))
     ReservationValue.struct_class = Types::ReservationValue
+
+    ReservedCapacityOptions.add_member(:reservation_types, Shapes::ShapeRef.new(shape: ReservationTypeList, location_name: "reservationTypeSet"))
+    ReservedCapacityOptions.struct_class = Types::ReservedCapacityOptions
+
+    ReservedCapacityOptionsRequest.add_member(:reservation_types, Shapes::ShapeRef.new(shape: ReservationTypeListRequest, location_name: "ReservationType"))
+    ReservedCapacityOptionsRequest.struct_class = Types::ReservedCapacityOptionsRequest
 
     ReservedInstanceIdSet.member = Shapes::ShapeRef.new(shape: ReservationId, location_name: "ReservedInstanceId")
 
@@ -18683,6 +18764,15 @@ module Aws::EC2
     UnsuccessfulItemList.member = Shapes::ShapeRef.new(shape: UnsuccessfulItem, location_name: "item")
 
     UnsuccessfulItemSet.member = Shapes::ShapeRef.new(shape: UnsuccessfulItem, location_name: "item")
+
+    UpdateCapacityManagerMonitoredTagKeysRequest.add_member(:activate_tag_keys, Shapes::ShapeRef.new(shape: ValueStringList, location_name: "ActivateTagKey"))
+    UpdateCapacityManagerMonitoredTagKeysRequest.add_member(:deactivate_tag_keys, Shapes::ShapeRef.new(shape: ValueStringList, location_name: "DeactivateTagKey"))
+    UpdateCapacityManagerMonitoredTagKeysRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    UpdateCapacityManagerMonitoredTagKeysRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
+    UpdateCapacityManagerMonitoredTagKeysRequest.struct_class = Types::UpdateCapacityManagerMonitoredTagKeysRequest
+
+    UpdateCapacityManagerMonitoredTagKeysResult.add_member(:capacity_manager_tag_keys, Shapes::ShapeRef.new(shape: CapacityManagerMonitoredTagKeyList, location_name: "capacityManagerTagKeySet"))
+    UpdateCapacityManagerMonitoredTagKeysResult.struct_class = Types::UpdateCapacityManagerMonitoredTagKeysResult
 
     UpdateCapacityManagerOrganizationsAccessRequest.add_member(:organizations_access, Shapes::ShapeRef.new(shape: BoxedBoolean, required: true, location_name: "OrganizationsAccess"))
     UpdateCapacityManagerOrganizationsAccessRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
@@ -24611,6 +24701,20 @@ module Aws::EC2
         )
       end)
 
+      api.add_operation(:get_capacity_manager_monitored_tag_keys, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetCapacityManagerMonitoredTagKeys"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetCapacityManagerMonitoredTagKeysRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetCapacityManagerMonitoredTagKeysResult)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:get_capacity_reservation_usage, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetCapacityReservationUsage"
         o.http_method = "POST"
@@ -26538,6 +26642,14 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: UnmonitorInstancesRequest)
         o.output = Shapes::ShapeRef.new(shape: UnmonitorInstancesResult)
+      end)
+
+      api.add_operation(:update_capacity_manager_monitored_tag_keys, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateCapacityManagerMonitoredTagKeys"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateCapacityManagerMonitoredTagKeysRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateCapacityManagerMonitoredTagKeysResult)
       end)
 
       api.add_operation(:update_capacity_manager_organizations_access, Seahorse::Model::Operation.new.tap do |o|

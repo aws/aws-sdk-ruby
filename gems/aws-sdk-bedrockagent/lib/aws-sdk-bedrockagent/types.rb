@@ -10317,12 +10317,17 @@ module Aws::BedrockAgent
     #   The input schema for the tool.
     #   @return [Types::ToolInputSchema]
     #
+    # @!attribute [rw] strict
+    #   Whether to enforce strict JSON schema adherence for the tool input
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/ToolSpecification AWS API Documentation
     #
     class ToolSpecification < Struct.new(
       :name,
       :description,
-      :input_schema)
+      :input_schema,
+      :strict)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -54,7 +54,7 @@ module Aws::ResourceGroupsTaggingAPI
   autoload :EndpointProvider, 'aws-sdk-resourcegroupstaggingapi/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-resourcegroupstaggingapi/endpoints'
 
-  GEM_VERSION = '1.92.0'
+  GEM_VERSION = '1.93.0'
 
 end
 

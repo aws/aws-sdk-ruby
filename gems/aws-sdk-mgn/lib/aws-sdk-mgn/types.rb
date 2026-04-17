@@ -255,6 +255,44 @@ module Aws::Mgn
       include Aws::Structure
     end
 
+    # A checksum structure used to verify data integrity.
+    #
+    # @!attribute [rw] encryption_algorithm
+    #   The encryption algorithm used to generate the checksum.
+    #   @return [String]
+    #
+    # @!attribute [rw] hash
+    #   The hash value of the checksum.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/Checksum AWS API Documentation
+    #
+    class Checksum < Struct.new(
+      :encryption_algorithm,
+      :hash)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Status details for a specific code generation output format.
+    #
+    # @!attribute [rw] status
+    #   The status of the code generation for this output format.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_detail_list
+    #   A list of detailed status information for the code generation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/CodeGenerationOutputFormatStatusDetails AWS API Documentation
+    #
+    class CodeGenerationOutputFormatStatusDetails < Struct.new(
+      :status,
+      :status_detail_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The request could not be completed due to a conflict with the current
     # state of the target resource.
     #
@@ -496,6 +534,54 @@ module Aws::Mgn
       include Aws::Structure
     end
 
+    # @!attribute [rw] name
+    #   The name of the network migration definition.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the network migration definition.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_configurations
+    #   A list of source configurations for the network migration.
+    #   @return [Array<Types::SourceConfiguration>]
+    #
+    # @!attribute [rw] target_s3_configuration
+    #   The S3 configuration for storing the target network artifacts.
+    #   @return [Types::TargetS3Configuration]
+    #
+    # @!attribute [rw] target_network
+    #   The target network configuration including topology and CIDR ranges.
+    #   @return [Types::TargetNetwork]
+    #
+    # @!attribute [rw] target_deployment
+    #   The target deployment configuration for the migrated network.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Tags to assign to the network migration definition.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] scope_tags
+    #   Scope tags for the network migration definition to control access
+    #   and organization.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/CreateNetworkMigrationDefinitionRequest AWS API Documentation
+    #
+    class CreateNetworkMigrationDefinitionRequest < Struct.new(
+      :name,
+      :description,
+      :source_configurations,
+      :target_s3_configuration,
+      :target_network,
+      :target_deployment,
+      :tags,
+      :scope_tags)
+      SENSITIVE = [:tags, :scope_tags]
+      include Aws::Structure
+    end
+
     # @!attribute [rw] staging_area_subnet_id
     #   Request to configure the Staging Area subnet ID during Replication
     #   Settings template creation.
@@ -570,6 +656,11 @@ module Aws::Mgn
     #   Request to configure the internet protocol to IPv4 or IPv6.
     #   @return [String]
     #
+    # @!attribute [rw] store_snapshot_on_local_zone
+    #   Request to store snapshot on local zone during Replication Settings
+    #   template creation.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/CreateReplicationConfigurationTemplateRequest AWS API Documentation
     #
     class CreateReplicationConfigurationTemplateRequest < Struct.new(
@@ -587,7 +678,8 @@ module Aws::Mgn
       :staging_area_tags,
       :use_fips_endpoint,
       :tags,
-      :internet_protocol)
+      :internet_protocol,
+      :store_snapshot_on_local_zone)
       SENSITIVE = [:staging_area_tags, :tags]
       include Aws::Structure
     end
@@ -833,6 +925,22 @@ module Aws::Mgn
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/DeleteLaunchConfigurationTemplateResponse AWS API Documentation
     #
     class DeleteLaunchConfigurationTemplateResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] network_migration_definition_id
+    #   The unique identifier of the network migration definition to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/DeleteNetworkMigrationDefinitionRequest AWS API Documentation
+    #
+    class DeleteNetworkMigrationDefinitionRequest < Struct.new(
+      :network_migration_definition_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/DeleteNetworkMigrationDefinitionResponse AWS API Documentation
+    #
+    class DeleteNetworkMigrationDefinitionResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] replication_configuration_template_id
     #   Request to delete Replication Configuration Template from service by
@@ -1303,6 +1411,55 @@ module Aws::Mgn
       include Aws::Structure
     end
 
+    # S3 configuration for the source import file to be enriched.
+    #
+    # @!attribute [rw] s3_bucket
+    #   The name of the S3 bucket containing the source import file.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_bucket_owner
+    #   The AWS account ID of the S3 bucket owner.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_key
+    #   The S3 key (path) for the source import file.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/EnrichmentSourceS3Configuration AWS API Documentation
+    #
+    class EnrichmentSourceS3Configuration < Struct.new(
+      :s3_bucket,
+      :s3_bucket_owner,
+      :s3_key)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # S3 configuration for storing the enriched import file.
+    #
+    # @!attribute [rw] s3_bucket
+    #   The name of the S3 bucket where the enriched import file will be
+    #   stored.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_bucket_owner
+    #   The AWS account ID of the target S3 bucket owner.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_key
+    #   The S3 key (path) where the enriched import file will be stored.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/EnrichmentTargetS3Configuration AWS API Documentation
+    #
+    class EnrichmentTargetS3Configuration < Struct.new(
+      :s3_bucket,
+      :s3_bucket_owner,
+      :s3_key)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Error details.
     #
     # @!attribute [rw] message
@@ -1487,6 +1644,58 @@ module Aws::Mgn
       include Aws::Structure
     end
 
+    # @!attribute [rw] network_migration_definition_id
+    #   The unique identifier of the network migration definition to
+    #   retrieve.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/GetNetworkMigrationDefinitionRequest AWS API Documentation
+    #
+    class GetNetworkMigrationDefinitionRequest < Struct.new(
+      :network_migration_definition_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] network_migration_definition_id
+    #   The unique identifier of the network migration definition.
+    #   @return [String]
+    #
+    # @!attribute [rw] network_migration_execution_id
+    #   The unique identifier of the network migration execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] segment_id
+    #   The unique identifier of the mapper segment.
+    #   @return [String]
+    #
+    # @!attribute [rw] construct_id
+    #   The unique identifier of the construct within the segment.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/GetNetworkMigrationMapperSegmentConstructRequest AWS API Documentation
+    #
+    class GetNetworkMigrationMapperSegmentConstructRequest < Struct.new(
+      :network_migration_definition_id,
+      :network_migration_execution_id,
+      :segment_id,
+      :construct_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] construct
+    #   The construct metadata including type, name, and configuration.
+    #   @return [Types::NetworkMigrationMapperSegmentConstruct]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/GetNetworkMigrationMapperSegmentConstructResponse AWS API Documentation
+    #
+    class GetNetworkMigrationMapperSegmentConstructResponse < Struct.new(
+      :construct)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] source_server_id
     #   Request to get Replication Configuration by Source Server ID.
     #   @return [String]
@@ -1578,6 +1787,50 @@ module Aws::Mgn
       :row_number,
       :raw_error,
       :account_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details about an import file enrichment job.
+    #
+    # @!attribute [rw] job_id
+    #   The unique identifier of the import file enrichment job.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp when the enrichment job was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] ended_at
+    #   The timestamp when the enrichment job completed or failed.
+    #   @return [Time]
+    #
+    # @!attribute [rw] status
+    #   The current status of the import file enrichment job.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_details
+    #   Detailed status information about the enrichment job.
+    #   @return [String]
+    #
+    # @!attribute [rw] checksum
+    #   The checksum of the enriched file for integrity verification.
+    #   @return [Types::Checksum]
+    #
+    # @!attribute [rw] s3_bucket_target
+    #   The target S3 configuration for the enriched import file.
+    #   @return [Types::EnrichmentTargetS3Configuration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/ImportFileEnrichment AWS API Documentation
+    #
+    class ImportFileEnrichment < Struct.new(
+      :job_id,
+      :created_at,
+      :ended_at,
+      :status,
+      :status_details,
+      :checksum,
+      :s3_bucket_target)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2606,6 +2859,60 @@ module Aws::Mgn
       include Aws::Structure
     end
 
+    # Filters for listing import file enrichment jobs.
+    #
+    # @!attribute [rw] job_i_ds
+    #   A list of job IDs to filter by.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/ListImportFileEnrichmentsFilters AWS API Documentation
+    #
+    class ListImportFileEnrichmentsFilters < Struct.new(
+      :job_i_ds)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] filters
+    #   Filters to apply when listing import file enrichment jobs.
+    #   @return [Types::ListImportFileEnrichmentsFilters]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in a single call.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/ListImportFileEnrichmentsRequest AWS API Documentation
+    #
+    class ListImportFileEnrichmentsRequest < Struct.new(
+      :filters,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] items
+    #   A list of import file enrichment jobs.
+    #   @return [Array<Types::ImportFileEnrichment>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. This value is
+    #   null when there are no more results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/ListImportFileEnrichmentsResponse AWS API Documentation
+    #
+    class ListImportFileEnrichmentsResponse < Struct.new(
+      :items,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # List imports request.
     #
     # @!attribute [rw] filters
@@ -2695,6 +3002,759 @@ module Aws::Mgn
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/ListManagedAccountsResponse AWS API Documentation
     #
     class ListManagedAccountsResponse < Struct.new(
+      :items,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Filters for listing network migration analysis jobs.
+    #
+    # @!attribute [rw] job_i_ds
+    #   A list of job IDs to filter by.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/ListNetworkMigrationAnalysesFilters AWS API Documentation
+    #
+    class ListNetworkMigrationAnalysesFilters < Struct.new(
+      :job_i_ds)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] network_migration_execution_id
+    #   The unique identifier of the network migration execution to list
+    #   analyses for.
+    #   @return [String]
+    #
+    # @!attribute [rw] network_migration_definition_id
+    #   The unique identifier of the network migration definition.
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   Filters to apply when listing analysis jobs.
+    #   @return [Types::ListNetworkMigrationAnalysesFilters]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in a single call.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/ListNetworkMigrationAnalysesRequest AWS API Documentation
+    #
+    class ListNetworkMigrationAnalysesRequest < Struct.new(
+      :network_migration_execution_id,
+      :network_migration_definition_id,
+      :filters,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] items
+    #   A list of network migration analysis job details.
+    #   @return [Array<Types::NetworkMigrationAnalysisJobDetails>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. This value is
+    #   null when there are no more results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/ListNetworkMigrationAnalysesResponse AWS API Documentation
+    #
+    class ListNetworkMigrationAnalysesResponse < Struct.new(
+      :items,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Filters for listing network migration analysis results.
+    #
+    # @!attribute [rw] vpc_i_ds
+    #   A list of VPC IDs to filter results by.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/ListNetworkMigrationAnalysisResultsFilters AWS API Documentation
+    #
+    class ListNetworkMigrationAnalysisResultsFilters < Struct.new(
+      :vpc_i_ds)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] network_migration_execution_id
+    #   The unique identifier of the network migration execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] network_migration_definition_id
+    #   The unique identifier of the network migration definition.
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   Filters to apply when listing analysis results, such as VPC IDs.
+    #   @return [Types::ListNetworkMigrationAnalysisResultsFilters]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in a single call.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/ListNetworkMigrationAnalysisResultsRequest AWS API Documentation
+    #
+    class ListNetworkMigrationAnalysisResultsRequest < Struct.new(
+      :network_migration_execution_id,
+      :network_migration_definition_id,
+      :filters,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] items
+    #   A list of network migration analysis results.
+    #   @return [Array<Types::NetworkMigrationAnalysisResult>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. This value is
+    #   null when there are no more results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/ListNetworkMigrationAnalysisResultsResponse AWS API Documentation
+    #
+    class ListNetworkMigrationAnalysisResultsResponse < Struct.new(
+      :items,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Filters for listing code generation segments.
+    #
+    # @!attribute [rw] segment_i_ds
+    #   A list of segment IDs to filter by.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/ListNetworkMigrationCodeGenerationSegmentsFilters AWS API Documentation
+    #
+    class ListNetworkMigrationCodeGenerationSegmentsFilters < Struct.new(
+      :segment_i_ds)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] network_migration_execution_id
+    #   The unique identifier of the network migration execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] network_migration_definition_id
+    #   The unique identifier of the network migration definition.
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   Filters to apply when listing code generation segments.
+    #   @return [Types::ListNetworkMigrationCodeGenerationSegmentsFilters]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in a single call.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/ListNetworkMigrationCodeGenerationSegmentsRequest AWS API Documentation
+    #
+    class ListNetworkMigrationCodeGenerationSegmentsRequest < Struct.new(
+      :network_migration_execution_id,
+      :network_migration_definition_id,
+      :filters,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] items
+    #   A list of network migration code generation segments.
+    #   @return [Array<Types::NetworkMigrationCodeGenerationSegment>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. This value is
+    #   null when there are no more results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/ListNetworkMigrationCodeGenerationSegmentsResponse AWS API Documentation
+    #
+    class ListNetworkMigrationCodeGenerationSegmentsResponse < Struct.new(
+      :items,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Filters for listing code generation jobs.
+    #
+    # @!attribute [rw] job_i_ds
+    #   A list of job IDs to filter by.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/ListNetworkMigrationCodeGenerationsFilters AWS API Documentation
+    #
+    class ListNetworkMigrationCodeGenerationsFilters < Struct.new(
+      :job_i_ds)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] network_migration_execution_id
+    #   The unique identifier of the network migration execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] network_migration_definition_id
+    #   The unique identifier of the network migration definition.
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   Filters to apply when listing code generation jobs.
+    #   @return [Types::ListNetworkMigrationCodeGenerationsFilters]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in a single call.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/ListNetworkMigrationCodeGenerationsRequest AWS API Documentation
+    #
+    class ListNetworkMigrationCodeGenerationsRequest < Struct.new(
+      :network_migration_execution_id,
+      :network_migration_definition_id,
+      :filters,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] items
+    #   A list of network migration code generation job details.
+    #   @return [Array<Types::NetworkMigrationCodeGenerationJobDetails>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. This value is
+    #   null when there are no more results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/ListNetworkMigrationCodeGenerationsResponse AWS API Documentation
+    #
+    class ListNetworkMigrationCodeGenerationsResponse < Struct.new(
+      :items,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] filters
+    #   Filters to apply when listing network migration definitions.
+    #   @return [Types::ListNetworkMigrationDefinitionsRequestFilters]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in a single call.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/ListNetworkMigrationDefinitionsRequest AWS API Documentation
+    #
+    class ListNetworkMigrationDefinitionsRequest < Struct.new(
+      :filters,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Filters for listing network migration definitions.
+    #
+    # @!attribute [rw] network_migration_definition_i_ds
+    #   A list of definition IDs to filter by.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/ListNetworkMigrationDefinitionsRequestFilters AWS API Documentation
+    #
+    class ListNetworkMigrationDefinitionsRequestFilters < Struct.new(
+      :network_migration_definition_i_ds)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] items
+    #   A list of network migration definition summaries.
+    #   @return [Array<Types::NetworkMigrationDefinitionSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. This value is
+    #   null when there are no more results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/ListNetworkMigrationDefinitionsResponse AWS API Documentation
+    #
+    class ListNetworkMigrationDefinitionsResponse < Struct.new(
+      :items,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] network_migration_execution_id
+    #   The unique identifier of the network migration execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] network_migration_definition_id
+    #   The unique identifier of the network migration definition.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in a single call.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/ListNetworkMigrationDeployedStacksRequest AWS API Documentation
+    #
+    class ListNetworkMigrationDeployedStacksRequest < Struct.new(
+      :network_migration_execution_id,
+      :network_migration_definition_id,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] items
+    #   A list of deployed stack details including status and resources.
+    #   @return [Array<Types::NetworkMigrationDeployedStackDetails>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. This value is
+    #   null when there are no more results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/ListNetworkMigrationDeployedStacksResponse AWS API Documentation
+    #
+    class ListNetworkMigrationDeployedStacksResponse < Struct.new(
+      :items,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Filters for listing deployer jobs.
+    #
+    # @!attribute [rw] job_i_ds
+    #   A list of job IDs to filter by.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/ListNetworkMigrationDeployerJobFilters AWS API Documentation
+    #
+    class ListNetworkMigrationDeployerJobFilters < Struct.new(
+      :job_i_ds)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] items
+    #   A list of deployer job details.
+    #   @return [Array<Types::NetworkMigrationDeployerJobDetails>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. This value is
+    #   null when there are no more results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/ListNetworkMigrationDeployerJobResponse AWS API Documentation
+    #
+    class ListNetworkMigrationDeployerJobResponse < Struct.new(
+      :items,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] network_migration_execution_id
+    #   The unique identifier of the network migration execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] network_migration_definition_id
+    #   The unique identifier of the network migration definition.
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   Filters to apply when listing deployment jobs.
+    #   @return [Types::ListNetworkMigrationDeployerJobFilters]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in a single call.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/ListNetworkMigrationDeploymentsRequest AWS API Documentation
+    #
+    class ListNetworkMigrationDeploymentsRequest < Struct.new(
+      :network_migration_execution_id,
+      :network_migration_definition_id,
+      :filters,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Filters for listing network migration executions.
+    #
+    # @!attribute [rw] network_migration_execution_i_ds
+    #   A list of execution IDs to filter by.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] network_migration_execution_statuses
+    #   A list of execution statuses to filter by.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/ListNetworkMigrationExecutionRequestFilters AWS API Documentation
+    #
+    class ListNetworkMigrationExecutionRequestFilters < Struct.new(
+      :network_migration_execution_i_ds,
+      :network_migration_execution_statuses)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] network_migration_definition_id
+    #   The unique identifier of the network migration definition to list
+    #   executions for.
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   Filters to apply when listing executions, such as status or
+    #   execution ID.
+    #   @return [Types::ListNetworkMigrationExecutionRequestFilters]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in a single call.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/ListNetworkMigrationExecutionsRequest AWS API Documentation
+    #
+    class ListNetworkMigrationExecutionsRequest < Struct.new(
+      :network_migration_definition_id,
+      :filters,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] items
+    #   A list of network migration execution details.
+    #   @return [Array<Types::NetworkMigrationExecution>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. This value is
+    #   null when there are no more results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/ListNetworkMigrationExecutionsResponse AWS API Documentation
+    #
+    class ListNetworkMigrationExecutionsResponse < Struct.new(
+      :items,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Filters for listing mapper segment constructs.
+    #
+    # @!attribute [rw] construct_i_ds
+    #   A list of construct IDs to filter by.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] construct_types
+    #   A list of construct types to filter by.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/ListNetworkMigrationMapperSegmentConstructsFilters AWS API Documentation
+    #
+    class ListNetworkMigrationMapperSegmentConstructsFilters < Struct.new(
+      :construct_i_ds,
+      :construct_types)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] network_migration_execution_id
+    #   The unique identifier of the network migration execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] network_migration_definition_id
+    #   The unique identifier of the network migration definition.
+    #   @return [String]
+    #
+    # @!attribute [rw] segment_id
+    #   The unique identifier of the segment to list constructs for.
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   Filters to apply when listing constructs, such as construct type or
+    #   ID.
+    #   @return [Types::ListNetworkMigrationMapperSegmentConstructsFilters]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in a single call.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/ListNetworkMigrationMapperSegmentConstructsRequest AWS API Documentation
+    #
+    class ListNetworkMigrationMapperSegmentConstructsRequest < Struct.new(
+      :network_migration_execution_id,
+      :network_migration_definition_id,
+      :segment_id,
+      :filters,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] items
+    #   A list of mapper segment constructs.
+    #   @return [Array<Types::NetworkMigrationMapperSegmentConstruct>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. This value is
+    #   null when there are no more results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/ListNetworkMigrationMapperSegmentConstructsResponse AWS API Documentation
+    #
+    class ListNetworkMigrationMapperSegmentConstructsResponse < Struct.new(
+      :items,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Filters for listing mapper segments.
+    #
+    # @!attribute [rw] segment_i_ds
+    #   A list of segment IDs to filter by.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/ListNetworkMigrationMapperSegmentsFilters AWS API Documentation
+    #
+    class ListNetworkMigrationMapperSegmentsFilters < Struct.new(
+      :segment_i_ds)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] network_migration_execution_id
+    #   The unique identifier of the network migration execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] network_migration_definition_id
+    #   The unique identifier of the network migration definition.
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   Filters to apply when listing segments.
+    #   @return [Types::ListNetworkMigrationMapperSegmentsFilters]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in a single call.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/ListNetworkMigrationMapperSegmentsRequest AWS API Documentation
+    #
+    class ListNetworkMigrationMapperSegmentsRequest < Struct.new(
+      :network_migration_execution_id,
+      :network_migration_definition_id,
+      :filters,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] items
+    #   A list of mapper segments.
+    #   @return [Array<Types::NetworkMigrationMapperSegment>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. This value is
+    #   null when there are no more results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/ListNetworkMigrationMapperSegmentsResponse AWS API Documentation
+    #
+    class ListNetworkMigrationMapperSegmentsResponse < Struct.new(
+      :items,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Filters for listing mapping update jobs.
+    #
+    # @!attribute [rw] job_i_ds
+    #   A list of job IDs to filter by.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/ListNetworkMigrationMappingUpdatesFilters AWS API Documentation
+    #
+    class ListNetworkMigrationMappingUpdatesFilters < Struct.new(
+      :job_i_ds)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] network_migration_execution_id
+    #   The unique identifier of the network migration execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] network_migration_definition_id
+    #   The unique identifier of the network migration definition.
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   Filters to apply when listing mapping update jobs.
+    #   @return [Types::ListNetworkMigrationMappingUpdatesFilters]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in a single call.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/ListNetworkMigrationMappingUpdatesRequest AWS API Documentation
+    #
+    class ListNetworkMigrationMappingUpdatesRequest < Struct.new(
+      :network_migration_execution_id,
+      :network_migration_definition_id,
+      :filters,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] items
+    #   A list of mapping update job details.
+    #   @return [Array<Types::NetworkMigrationMappingUpdateJobDetails>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. This value is
+    #   null when there are no more results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/ListNetworkMigrationMappingUpdatesResponse AWS API Documentation
+    #
+    class ListNetworkMigrationMappingUpdatesResponse < Struct.new(
+      :items,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Filters for listing network migration mapping jobs.
+    #
+    # @!attribute [rw] job_i_ds
+    #   A list of job IDs to filter by.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/ListNetworkMigrationMappingsFilters AWS API Documentation
+    #
+    class ListNetworkMigrationMappingsFilters < Struct.new(
+      :job_i_ds)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] network_migration_execution_id
+    #   The unique identifier of the network migration execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] network_migration_definition_id
+    #   The unique identifier of the network migration definition.
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   Filters to apply when listing mapping jobs.
+    #   @return [Types::ListNetworkMigrationMappingsFilters]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in a single call.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/ListNetworkMigrationMappingsRequest AWS API Documentation
+    #
+    class ListNetworkMigrationMappingsRequest < Struct.new(
+      :network_migration_execution_id,
+      :network_migration_definition_id,
+      :filters,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] items
+    #   A list of network migration mapping job details.
+    #   @return [Array<Types::NetworkMigrationMappingJobDetails>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. This value is
+    #   null when there are no more results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/ListNetworkMigrationMappingsResponse AWS API Documentation
+    #
+    class ListNetworkMigrationMappingsResponse < Struct.new(
       :items,
       :next_token)
       SENSITIVE = []
@@ -2945,6 +4005,777 @@ module Aws::Mgn
       include Aws::Structure
     end
 
+    # Details about a network migration analysis job.
+    #
+    # @!attribute [rw] job_id
+    #   The unique identifier of the analysis job.
+    #   @return [String]
+    #
+    # @!attribute [rw] network_migration_execution_id
+    #   The unique identifier of the network migration execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] network_migration_definition_id
+    #   The unique identifier of the network migration definition.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp when the job was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] ended_at
+    #   The timestamp when the job completed or failed.
+    #   @return [Time]
+    #
+    # @!attribute [rw] status
+    #   The current status of the analysis job.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_details
+    #   Detailed status information about the job.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/NetworkMigrationAnalysisJobDetails AWS API Documentation
+    #
+    class NetworkMigrationAnalysisJobDetails < Struct.new(
+      :job_id,
+      :network_migration_execution_id,
+      :network_migration_definition_id,
+      :created_at,
+      :ended_at,
+      :status,
+      :status_details)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The result of a network migration analysis operation.
+    #
+    # @!attribute [rw] job_id
+    #   The unique identifier of the analysis job that generated this
+    #   result.
+    #   @return [String]
+    #
+    # @!attribute [rw] network_migration_execution_id
+    #   The unique identifier of the network migration execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] network_migration_definition_id
+    #   The unique identifier of the network migration definition.
+    #   @return [String]
+    #
+    # @!attribute [rw] analyzer_type
+    #   The type of analyzer that generated this result.
+    #   @return [String]
+    #
+    # @!attribute [rw] source
+    #   The source resource that was analyzed.
+    #   @return [Types::NetworkMigrationAnalysisResultSource]
+    #
+    # @!attribute [rw] target
+    #   The target resource in the analysis.
+    #   @return [Types::NetworkMigrationAnalysisResultTarget]
+    #
+    # @!attribute [rw] status
+    #   The status of the analysis result.
+    #   @return [String]
+    #
+    # @!attribute [rw] analysis_result
+    #   The detailed analysis findings and recommendations.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/NetworkMigrationAnalysisResult AWS API Documentation
+    #
+    class NetworkMigrationAnalysisResult < Struct.new(
+      :job_id,
+      :network_migration_execution_id,
+      :network_migration_definition_id,
+      :analyzer_type,
+      :source,
+      :target,
+      :status,
+      :analysis_result)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The source resource information for an analysis result.
+    #
+    # @!attribute [rw] vpc_id
+    #   The VPC ID of the source resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] subnet_id
+    #   The subnet ID of the source resource.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/NetworkMigrationAnalysisResultSource AWS API Documentation
+    #
+    class NetworkMigrationAnalysisResultSource < Struct.new(
+      :vpc_id,
+      :subnet_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The target resource information for an analysis result.
+    #
+    # @!attribute [rw] vpc_id
+    #   The VPC ID of the target resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] subnet_id
+    #   The subnet ID of the target resource.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/NetworkMigrationAnalysisResultTarget AWS API Documentation
+    #
+    class NetworkMigrationAnalysisResultTarget < Struct.new(
+      :vpc_id,
+      :subnet_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An artifact generated during code generation, such as a CloudFormation
+    # template or Terraform file.
+    #
+    # @!attribute [rw] artifact_id
+    #   The unique identifier of the artifact.
+    #   @return [String]
+    #
+    # @!attribute [rw] artifact_type
+    #   The type of the artifact, such as CLOUDFORMATION\_TEMPLATE or
+    #   TERRAFORM\_MODULE.
+    #   @return [String]
+    #
+    # @!attribute [rw] artifact_sub_type
+    #   The sub-type of the artifact for further classification.
+    #   @return [String]
+    #
+    # @!attribute [rw] logical_id
+    #   The logical identifier for the artifact.
+    #   @return [String]
+    #
+    # @!attribute [rw] output_s3_configuration
+    #   The S3 location where the artifact is stored.
+    #   @return [Types::S3Configuration]
+    #
+    # @!attribute [rw] checksum
+    #   The checksum of the artifact for integrity verification.
+    #   @return [Types::Checksum]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp when the artifact was created.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/NetworkMigrationCodeGenerationArtifact AWS API Documentation
+    #
+    class NetworkMigrationCodeGenerationArtifact < Struct.new(
+      :artifact_id,
+      :artifact_type,
+      :artifact_sub_type,
+      :logical_id,
+      :output_s3_configuration,
+      :checksum,
+      :created_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details about a network migration code generation job.
+    #
+    # @!attribute [rw] job_id
+    #   The unique identifier of the code generation job.
+    #   @return [String]
+    #
+    # @!attribute [rw] network_migration_execution_id
+    #   The unique identifier of the network migration execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] network_migration_definition_id
+    #   The unique identifier of the network migration definition.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp when the job was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] ended_at
+    #   The timestamp when the job completed or failed.
+    #   @return [Time]
+    #
+    # @!attribute [rw] status
+    #   The current status of the code generation job.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_details
+    #   Detailed status information about the job.
+    #   @return [String]
+    #
+    # @!attribute [rw] code_generation_output_format_status_details_map
+    #   A map of output format types to their status details.
+    #   @return [Hash<String,Types::CodeGenerationOutputFormatStatusDetails>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/NetworkMigrationCodeGenerationJobDetails AWS API Documentation
+    #
+    class NetworkMigrationCodeGenerationJobDetails < Struct.new(
+      :job_id,
+      :network_migration_execution_id,
+      :network_migration_definition_id,
+      :created_at,
+      :ended_at,
+      :status,
+      :status_details,
+      :code_generation_output_format_status_details_map)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A segment of generated code representing a logical grouping of
+    # infrastructure resources.
+    #
+    # @!attribute [rw] job_id
+    #   The unique identifier of the code generation job.
+    #   @return [String]
+    #
+    # @!attribute [rw] network_migration_execution_id
+    #   The unique identifier of the network migration execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] network_migration_definition_id
+    #   The unique identifier of the network migration definition.
+    #   @return [String]
+    #
+    # @!attribute [rw] segment_id
+    #   The unique identifier of the segment.
+    #   @return [String]
+    #
+    # @!attribute [rw] segment_type
+    #   The type of the segment.
+    #   @return [String]
+    #
+    # @!attribute [rw] logical_id
+    #   The logical identifier for the segment.
+    #   @return [String]
+    #
+    # @!attribute [rw] mapper_segment_id
+    #   The ID of the mapper segment that this code generation segment was
+    #   created from.
+    #   @return [String]
+    #
+    # @!attribute [rw] artifacts
+    #   A list of artifacts generated for this segment.
+    #   @return [Array<Types::NetworkMigrationCodeGenerationArtifact>]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp when the segment was created.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/NetworkMigrationCodeGenerationSegment AWS API Documentation
+    #
+    class NetworkMigrationCodeGenerationSegment < Struct.new(
+      :job_id,
+      :network_migration_execution_id,
+      :network_migration_definition_id,
+      :segment_id,
+      :segment_type,
+      :logical_id,
+      :mapper_segment_id,
+      :artifacts,
+      :created_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the network migration definition.
+    #   @return [String]
+    #
+    # @!attribute [rw] network_migration_definition_id
+    #   The unique identifier of the network migration definition.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the network migration definition.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the network migration definition.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_configurations
+    #   A list of source configurations for the network migration.
+    #   @return [Array<Types::SourceConfiguration>]
+    #
+    # @!attribute [rw] target_s3_configuration
+    #   The S3 configuration for storing the target network artifacts.
+    #   @return [Types::TargetS3Configuration]
+    #
+    # @!attribute [rw] target_network
+    #   The target network configuration including topology and CIDR ranges.
+    #   @return [Types::TargetNetwork]
+    #
+    # @!attribute [rw] target_deployment
+    #   The target deployment configuration for the migrated network.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp when the network migration definition was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The timestamp when the network migration definition was last
+    #   updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] tags
+    #   Tags assigned to the network migration definition.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] scope_tags
+    #   Scope tags for the network migration definition.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/NetworkMigrationDefinition AWS API Documentation
+    #
+    class NetworkMigrationDefinition < Struct.new(
+      :arn,
+      :network_migration_definition_id,
+      :name,
+      :description,
+      :source_configurations,
+      :target_s3_configuration,
+      :target_network,
+      :target_deployment,
+      :created_at,
+      :updated_at,
+      :tags,
+      :scope_tags)
+      SENSITIVE = [:tags, :scope_tags]
+      include Aws::Structure
+    end
+
+    # A summary of a network migration definition.
+    #
+    # @!attribute [rw] network_migration_definition_id
+    #   The unique identifier of the network migration definition.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the network migration definition.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_environment
+    #   The source environment configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the network migration definition.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Tags assigned to the network migration definition.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] scope_tags
+    #   Scope tags for the network migration definition.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/NetworkMigrationDefinitionSummary AWS API Documentation
+    #
+    class NetworkMigrationDefinitionSummary < Struct.new(
+      :network_migration_definition_id,
+      :name,
+      :source_environment,
+      :arn,
+      :tags,
+      :scope_tags)
+      SENSITIVE = [:tags, :scope_tags]
+      include Aws::Structure
+    end
+
+    # Details about a CloudFormation stack that has been deployed as part of
+    # the network migration.
+    #
+    # @!attribute [rw] status
+    #   The current status of the deployed stack.
+    #   @return [String]
+    #
+    # @!attribute [rw] stack_physical_id
+    #   The physical ID of the CloudFormation stack.
+    #   @return [String]
+    #
+    # @!attribute [rw] stack_logical_id
+    #   The logical ID of the stack.
+    #   @return [String]
+    #
+    # @!attribute [rw] segment_id
+    #   The ID of the segment that this stack was deployed for.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_account
+    #   The target AWS account where the stack was deployed.
+    #   @return [String]
+    #
+    # @!attribute [rw] failed_resources
+    #   A list of resources that failed to deploy.
+    #   @return [Array<Types::NetworkMigrationFailedResourceDetails>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/NetworkMigrationDeployedStackDetails AWS API Documentation
+    #
+    class NetworkMigrationDeployedStackDetails < Struct.new(
+      :status,
+      :stack_physical_id,
+      :stack_logical_id,
+      :segment_id,
+      :target_account,
+      :failed_resources)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details about a network migration deployer job.
+    #
+    # @!attribute [rw] job_id
+    #   The unique identifier of the deployer job.
+    #   @return [String]
+    #
+    # @!attribute [rw] network_migration_execution_id
+    #   The unique identifier of the network migration execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] network_migration_definition_id
+    #   The unique identifier of the network migration definition.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp when the job was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] ended_at
+    #   The timestamp when the job completed or failed.
+    #   @return [Time]
+    #
+    # @!attribute [rw] status
+    #   The current status of the deployer job.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_details
+    #   Detailed status information about the job.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/NetworkMigrationDeployerJobDetails AWS API Documentation
+    #
+    class NetworkMigrationDeployerJobDetails < Struct.new(
+      :job_id,
+      :network_migration_execution_id,
+      :network_migration_definition_id,
+      :created_at,
+      :ended_at,
+      :status,
+      :status_details)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details about a network migration execution instance.
+    #
+    # @!attribute [rw] network_migration_definition_id
+    #   The unique identifier of the network migration definition used by
+    #   this execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] network_migration_execution_id
+    #   The unique identifier of the execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] stage
+    #   The current stage of the execution in the migration workflow.
+    #   @return [String]
+    #
+    # @!attribute [rw] activity
+    #   The current activity being performed in the execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp when the execution was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The timestamp when the execution was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] tags
+    #   Tags assigned to the execution.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/NetworkMigrationExecution AWS API Documentation
+    #
+    class NetworkMigrationExecution < Struct.new(
+      :network_migration_definition_id,
+      :network_migration_execution_id,
+      :status,
+      :stage,
+      :activity,
+      :created_at,
+      :updated_at,
+      :tags)
+      SENSITIVE = [:tags]
+      include Aws::Structure
+    end
+
+    # Details about a resource that failed to deploy.
+    #
+    # @!attribute [rw] logical_id
+    #   The logical ID of the failed resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the failed resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reason
+    #   The reason why the resource failed.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/NetworkMigrationFailedResourceDetails AWS API Documentation
+    #
+    class NetworkMigrationFailedResourceDetails < Struct.new(
+      :logical_id,
+      :status,
+      :status_reason)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] job_id
+    #   The unique identifier of the job that created this segment.
+    #   @return [String]
+    #
+    # @!attribute [rw] network_migration_execution_id
+    #   The unique identifier of the network migration execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] network_migration_definition_id
+    #   The unique identifier of the network migration definition.
+    #   @return [String]
+    #
+    # @!attribute [rw] segment_id
+    #   The unique identifier of the segment.
+    #   @return [String]
+    #
+    # @!attribute [rw] segment_type
+    #   The type of the segment, such as VPC, subnet, or security group.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the segment.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the segment.
+    #   @return [String]
+    #
+    # @!attribute [rw] logical_id
+    #   The logical identifier for the segment in the infrastructure code.
+    #   @return [String]
+    #
+    # @!attribute [rw] checksum
+    #   The checksum of the segment data for integrity verification.
+    #   @return [Types::Checksum]
+    #
+    # @!attribute [rw] output_s3_configuration
+    #   The S3 location where segment artifacts are stored.
+    #   @return [Types::S3Configuration]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp when the segment was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The timestamp when the segment was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] scope_tags
+    #   Scope tags for the segment.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] target_account
+    #   The target AWS account where this segment will be deployed.
+    #   @return [String]
+    #
+    # @!attribute [rw] referenced_segments
+    #   A list of other segments that this segment depends on or references.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/NetworkMigrationMapperSegment AWS API Documentation
+    #
+    class NetworkMigrationMapperSegment < Struct.new(
+      :job_id,
+      :network_migration_execution_id,
+      :network_migration_definition_id,
+      :segment_id,
+      :segment_type,
+      :name,
+      :description,
+      :logical_id,
+      :checksum,
+      :output_s3_configuration,
+      :created_at,
+      :updated_at,
+      :scope_tags,
+      :target_account,
+      :referenced_segments)
+      SENSITIVE = [:scope_tags]
+      include Aws::Structure
+    end
+
+    # Represents a construct within a mapper segment. A construct is an
+    # individual infrastructure component such as a VPC, subnet, security
+    # group, route table, or other network resource that is part of the
+    # network migration.
+    #
+    # @!attribute [rw] construct_id
+    #   The unique identifier of the construct.
+    #   @return [String]
+    #
+    # @!attribute [rw] construct_type
+    #   The type of the construct, such as VPC, subnet, security group, or
+    #   route table.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the construct.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the construct.
+    #   @return [String]
+    #
+    # @!attribute [rw] logical_id
+    #   The logical identifier for the construct in the infrastructure code.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp when the construct was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The timestamp when the construct was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] properties
+    #   The properties and configuration of the construct.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/NetworkMigrationMapperSegmentConstruct AWS API Documentation
+    #
+    class NetworkMigrationMapperSegmentConstruct < Struct.new(
+      :construct_id,
+      :construct_type,
+      :name,
+      :description,
+      :logical_id,
+      :created_at,
+      :updated_at,
+      :properties)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details about a network migration mapping job.
+    #
+    # @!attribute [rw] job_id
+    #   The unique identifier of the mapping job.
+    #   @return [String]
+    #
+    # @!attribute [rw] network_migration_execution_id
+    #   The unique identifier of the network migration execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] network_migration_definition_id
+    #   The unique identifier of the network migration definition.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp when the job was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] ended_at
+    #   The timestamp when the job completed or failed.
+    #   @return [Time]
+    #
+    # @!attribute [rw] status
+    #   The current status of the mapping job.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_details
+    #   Detailed status information about the job.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/NetworkMigrationMappingJobDetails AWS API Documentation
+    #
+    class NetworkMigrationMappingJobDetails < Struct.new(
+      :job_id,
+      :network_migration_execution_id,
+      :network_migration_definition_id,
+      :created_at,
+      :ended_at,
+      :status,
+      :status_details)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details about a network migration mapping update job.
+    #
+    # @!attribute [rw] job_id
+    #   The unique identifier of the mapping update job.
+    #   @return [String]
+    #
+    # @!attribute [rw] network_migration_execution_id
+    #   The unique identifier of the network migration execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] network_migration_definition_id
+    #   The unique identifier of the network migration definition.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp when the job was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] ended_at
+    #   The timestamp when the job completed or failed.
+    #   @return [Time]
+    #
+    # @!attribute [rw] status
+    #   The current status of the mapping update job.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_details
+    #   Detailed status information about the job.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/NetworkMigrationMappingUpdateJobDetails AWS API Documentation
+    #
+    class NetworkMigrationMappingUpdateJobDetails < Struct.new(
+      :job_id,
+      :network_migration_execution_id,
+      :network_migration_definition_id,
+      :created_at,
+      :ended_at,
+      :status,
+      :status_details)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Operating System.
     #
     # @!attribute [rw] full_string
@@ -2957,6 +4788,28 @@ module Aws::Mgn
       :full_string)
       SENSITIVE = []
       include Aws::Structure
+    end
+
+    # A union type representing the operation to perform on a construct
+    # during a mapping update.
+    #
+    # @note OperationUnion is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @!attribute [rw] update
+    #   An update operation to modify construct properties.
+    #   @return [Types::UpdateOperation]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/OperationUnion AWS API Documentation
+    #
+    class OperationUnion < Struct.new(
+      :update,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Update < OperationUnion; end
+      class Unknown < OperationUnion; end
     end
 
     # Server participating in Job.
@@ -3333,6 +5186,10 @@ module Aws::Mgn
     #   Replication Configuration internet protocol.
     #   @return [String]
     #
+    # @!attribute [rw] store_snapshot_on_local_zone
+    #   Replication Configuration store snapshot on local zone.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/ReplicationConfiguration AWS API Documentation
     #
     class ReplicationConfiguration < Struct.new(
@@ -3352,7 +5209,8 @@ module Aws::Mgn
       :create_public_ip,
       :staging_area_tags,
       :use_fips_endpoint,
-      :internet_protocol)
+      :internet_protocol,
+      :store_snapshot_on_local_zone)
       SENSITIVE = [:staging_area_tags]
       include Aws::Structure
     end
@@ -3461,6 +5319,10 @@ module Aws::Mgn
     #   Replication Configuration template internet protocol.
     #   @return [String]
     #
+    # @!attribute [rw] store_snapshot_on_local_zone
+    #   Replication Configuration template store snapshot on local zone.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/ReplicationConfigurationTemplate AWS API Documentation
     #
     class ReplicationConfigurationTemplate < Struct.new(
@@ -3480,7 +5342,8 @@ module Aws::Mgn
       :staging_area_tags,
       :use_fips_endpoint,
       :tags,
-      :internet_protocol)
+      :internet_protocol,
+      :store_snapshot_on_local_zone)
       SENSITIVE = [:staging_area_tags, :tags]
       include Aws::Structure
     end
@@ -3570,6 +5433,30 @@ module Aws::Mgn
       include Aws::Structure
     end
 
+    # Configuration for an S3 location.
+    #
+    # @!attribute [rw] s3_bucket
+    #   The name of the S3 bucket.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_bucket_owner
+    #   The AWS account ID of the S3 bucket owner.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_key
+    #   The S3 key (path) for the object.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/S3Configuration AWS API Documentation
+    #
+    class S3Configuration < Struct.new(
+      :s3_bucket,
+      :s3_bucket_owner,
+      :s3_key)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The request could not be completed because its exceeded the service
     # quota.
     #
@@ -3609,6 +5496,25 @@ module Aws::Mgn
       :service_code,
       :quota_code,
       :quota_value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration for a migration source environment.
+    #
+    # @!attribute [rw] source_environment
+    #   The source environment type.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_s3_configuration
+    #   The S3 configuration for the source data.
+    #   @return [Types::SourceS3Configuration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/SourceConfiguration AWS API Documentation
+    #
+    class SourceConfiguration < Struct.new(
+      :source_environment,
+      :source_s3_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3658,6 +5564,30 @@ module Aws::Mgn
       :cpus,
       :ram_bytes,
       :os)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # S3 configuration for source network data.
+    #
+    # @!attribute [rw] s3_bucket
+    #   The name of the S3 bucket containing source data.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_bucket_owner
+    #   The AWS account ID of the S3 bucket owner.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_key
+    #   The S3 key (path) for the source data.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/SourceS3Configuration AWS API Documentation
+    #
+    class SourceS3Configuration < Struct.new(
+      :s3_bucket,
+      :s3_bucket_owner,
+      :s3_key)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3997,6 +5927,53 @@ module Aws::Mgn
       include Aws::Structure
     end
 
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_bucket_source
+    #   The S3 configuration specifying the source location of the import
+    #   file to be enriched.
+    #   @return [Types::EnrichmentSourceS3Configuration]
+    #
+    # @!attribute [rw] s3_bucket_target
+    #   The S3 configuration specifying the target location where the
+    #   enriched import file will be stored.
+    #   @return [Types::EnrichmentTargetS3Configuration]
+    #
+    # @!attribute [rw] ip_assignment_strategy
+    #   The IP assignment strategy to use when enriching the import file.
+    #   Can be STATIC or DYNAMIC.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/StartImportFileEnrichmentRequest AWS API Documentation
+    #
+    class StartImportFileEnrichmentRequest < Struct.new(
+      :client_token,
+      :s3_bucket_source,
+      :s3_bucket_target,
+      :ip_assignment_strategy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] job_id
+    #   The unique identifier of the import file enrichment job that was
+    #   started.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/StartImportFileEnrichmentResponse AWS API Documentation
+    #
+    class StartImportFileEnrichmentResponse < Struct.new(
+      :job_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Start import request.
     #
     # @!attribute [rw] client_token
@@ -4035,6 +6012,225 @@ module Aws::Mgn
     class StartImportResponse < Struct.new(
       :import_task)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] network_migration_execution_id
+    #   The unique identifier of the network migration execution to analyze.
+    #   @return [String]
+    #
+    # @!attribute [rw] network_migration_definition_id
+    #   The unique identifier of the network migration definition.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/StartNetworkMigrationAnalysisRequest AWS API Documentation
+    #
+    class StartNetworkMigrationAnalysisRequest < Struct.new(
+      :network_migration_execution_id,
+      :network_migration_definition_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] job_id
+    #   The unique identifier of the analysis job that was started.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/StartNetworkMigrationAnalysisResponse AWS API Documentation
+    #
+    class StartNetworkMigrationAnalysisResponse < Struct.new(
+      :job_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] network_migration_execution_id
+    #   The unique identifier of the network migration execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] network_migration_definition_id
+    #   The unique identifier of the network migration definition.
+    #   @return [String]
+    #
+    # @!attribute [rw] code_generation_output_format_types
+    #   The output format types for code generation, such as CloudFormation
+    #   or Terraform.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/StartNetworkMigrationCodeGenerationRequest AWS API Documentation
+    #
+    class StartNetworkMigrationCodeGenerationRequest < Struct.new(
+      :network_migration_execution_id,
+      :network_migration_definition_id,
+      :code_generation_output_format_types)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] job_id
+    #   The unique identifier of the code generation job that was started.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/StartNetworkMigrationCodeGenerationResponse AWS API Documentation
+    #
+    class StartNetworkMigrationCodeGenerationResponse < Struct.new(
+      :job_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] job_id
+    #   The unique identifier of the deployer job that was started.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/StartNetworkMigrationDeployerJobResponse AWS API Documentation
+    #
+    class StartNetworkMigrationDeployerJobResponse < Struct.new(
+      :job_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] network_migration_execution_id
+    #   The unique identifier of the network migration execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] network_migration_definition_id
+    #   The unique identifier of the network migration definition.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/StartNetworkMigrationDeploymentRequest AWS API Documentation
+    #
+    class StartNetworkMigrationDeploymentRequest < Struct.new(
+      :network_migration_execution_id,
+      :network_migration_definition_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] network_migration_execution_id
+    #   The unique identifier of the network migration execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] network_migration_definition_id
+    #   The unique identifier of the network migration definition.
+    #   @return [String]
+    #
+    # @!attribute [rw] security_group_mapping_strategy
+    #   The security group mapping strategy to use.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/StartNetworkMigrationMappingRequest AWS API Documentation
+    #
+    class StartNetworkMigrationMappingRequest < Struct.new(
+      :network_migration_execution_id,
+      :network_migration_definition_id,
+      :security_group_mapping_strategy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] job_id
+    #   The unique identifier of the mapping job that was started.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/StartNetworkMigrationMappingResponse AWS API Documentation
+    #
+    class StartNetworkMigrationMappingResponse < Struct.new(
+      :job_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A construct update to apply during a mapping update operation.
+    #
+    # @!attribute [rw] segment_id
+    #   The ID of the segment containing the construct.
+    #   @return [String]
+    #
+    # @!attribute [rw] construct_id
+    #   The ID of the construct to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] construct_type
+    #   The type of the construct.
+    #   @return [String]
+    #
+    # @!attribute [rw] operation
+    #   The operation to perform on the construct.
+    #   @return [Types::OperationUnion]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/StartNetworkMigrationMappingUpdateConstruct AWS API Documentation
+    #
+    class StartNetworkMigrationMappingUpdateConstruct < Struct.new(
+      :segment_id,
+      :construct_id,
+      :construct_type,
+      :operation)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] network_migration_execution_id
+    #   The unique identifier of the network migration execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] network_migration_definition_id
+    #   The unique identifier of the network migration definition.
+    #   @return [String]
+    #
+    # @!attribute [rw] constructs
+    #   A list of construct updates to apply.
+    #   @return [Array<Types::StartNetworkMigrationMappingUpdateConstruct>]
+    #
+    # @!attribute [rw] segments
+    #   A list of segment updates to apply.
+    #   @return [Array<Types::StartNetworkMigrationMappingUpdateSegment>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/StartNetworkMigrationMappingUpdateRequest AWS API Documentation
+    #
+    class StartNetworkMigrationMappingUpdateRequest < Struct.new(
+      :network_migration_execution_id,
+      :network_migration_definition_id,
+      :constructs,
+      :segments)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] job_id
+    #   The unique identifier of the mapping update job that was started.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/StartNetworkMigrationMappingUpdateResponse AWS API Documentation
+    #
+    class StartNetworkMigrationMappingUpdateResponse < Struct.new(
+      :job_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A segment update to apply during a mapping update operation.
+    #
+    # @!attribute [rw] segment_id
+    #   The ID of the segment to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_account
+    #   The updated target AWS account for the segment.
+    #   @return [String]
+    #
+    # @!attribute [rw] scope_tags
+    #   The updated scope tags for the segment.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/StartNetworkMigrationMappingUpdateSegment AWS API Documentation
+    #
+    class StartNetworkMigrationMappingUpdateSegment < Struct.new(
+      :segment_id,
+      :target_account,
+      :scope_tags)
+      SENSITIVE = [:scope_tags]
       include Aws::Structure
     end
 
@@ -4120,6 +6316,102 @@ module Aws::Mgn
       :resource_arn,
       :tags)
       SENSITIVE = [:tags]
+      include Aws::Structure
+    end
+
+    # Configuration for the target network topology and addressing.
+    #
+    # @!attribute [rw] topology
+    #   The network topology type for the target environment.
+    #   @return [String]
+    #
+    # @!attribute [rw] inbound_cidr
+    #   The CIDR block for inbound traffic in the target network.
+    #   @return [String]
+    #
+    # @!attribute [rw] outbound_cidr
+    #   The CIDR block for outbound traffic in the target network.
+    #   @return [String]
+    #
+    # @!attribute [rw] inspection_cidr
+    #   The CIDR block for inspection traffic in the target network.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/TargetNetwork AWS API Documentation
+    #
+    class TargetNetwork < Struct.new(
+      :topology,
+      :inbound_cidr,
+      :outbound_cidr,
+      :inspection_cidr)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Updated configuration for the target network topology and addressing.
+    #
+    # @!attribute [rw] topology
+    #   The updated network topology type.
+    #   @return [String]
+    #
+    # @!attribute [rw] inbound_cidr
+    #   The updated CIDR block for inbound traffic.
+    #   @return [String]
+    #
+    # @!attribute [rw] outbound_cidr
+    #   The updated CIDR block for outbound traffic.
+    #   @return [String]
+    #
+    # @!attribute [rw] inspection_cidr
+    #   The updated CIDR block for inspection traffic.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/TargetNetworkUpdate AWS API Documentation
+    #
+    class TargetNetworkUpdate < Struct.new(
+      :topology,
+      :inbound_cidr,
+      :outbound_cidr,
+      :inspection_cidr)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # S3 configuration for storing target network artifacts.
+    #
+    # @!attribute [rw] s3_bucket
+    #   The name of the S3 bucket for target artifacts.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_bucket_owner
+    #   The AWS account ID of the S3 bucket owner.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/TargetS3Configuration AWS API Documentation
+    #
+    class TargetS3Configuration < Struct.new(
+      :s3_bucket,
+      :s3_bucket_owner)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Updated S3 configuration for storing target network artifacts.
+    #
+    # @!attribute [rw] s3_bucket
+    #   The updated name of the S3 bucket.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_bucket_owner
+    #   The updated AWS account ID of the S3 bucket owner.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/TargetS3ConfigurationUpdate AWS API Documentation
+    #
+    class TargetS3ConfigurationUpdate < Struct.new(
+      :s3_bucket,
+      :s3_bucket_owner)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4543,6 +6835,95 @@ module Aws::Mgn
       include Aws::Structure
     end
 
+    # @!attribute [rw] network_migration_definition_id
+    #   The unique identifier of the network migration definition to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The updated name of the network migration definition.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The updated description of the network migration definition.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_configurations
+    #   The updated list of source configurations.
+    #   @return [Array<Types::SourceConfiguration>]
+    #
+    # @!attribute [rw] target_s3_configuration
+    #   The updated S3 configuration for storing the target network
+    #   artifacts.
+    #   @return [Types::TargetS3ConfigurationUpdate]
+    #
+    # @!attribute [rw] target_network
+    #   The updated target network configuration.
+    #   @return [Types::TargetNetworkUpdate]
+    #
+    # @!attribute [rw] target_deployment
+    #   The updated target deployment configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] scope_tags
+    #   The updated scope tags for the network migration definition.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/UpdateNetworkMigrationDefinitionRequest AWS API Documentation
+    #
+    class UpdateNetworkMigrationDefinitionRequest < Struct.new(
+      :network_migration_definition_id,
+      :name,
+      :description,
+      :source_configurations,
+      :target_s3_configuration,
+      :target_network,
+      :target_deployment,
+      :scope_tags)
+      SENSITIVE = [:scope_tags]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] network_migration_definition_id
+    #   The unique identifier of the network migration definition.
+    #   @return [String]
+    #
+    # @!attribute [rw] network_migration_execution_id
+    #   The unique identifier of the network migration execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] segment_id
+    #   The unique identifier of the segment to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] scope_tags
+    #   The updated scope tags for the segment.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/UpdateNetworkMigrationMapperSegmentRequest AWS API Documentation
+    #
+    class UpdateNetworkMigrationMapperSegmentRequest < Struct.new(
+      :network_migration_definition_id,
+      :network_migration_execution_id,
+      :segment_id,
+      :scope_tags)
+      SENSITIVE = [:scope_tags]
+      include Aws::Structure
+    end
+
+    # An operation that updates the properties of a construct.
+    #
+    # @!attribute [rw] properties
+    #   The properties to update on the construct.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/UpdateOperation AWS API Documentation
+    #
+    class UpdateOperation < Struct.new(
+      :properties)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] source_server_id
     #   Update replication configuration Source Server ID request.
     #   @return [String]
@@ -4620,6 +7001,10 @@ module Aws::Mgn
     #   Update replication configuration internet protocol.
     #   @return [String]
     #
+    # @!attribute [rw] store_snapshot_on_local_zone
+    #   Update replication configuration store snapshot on local zone.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/UpdateReplicationConfigurationRequest AWS API Documentation
     #
     class UpdateReplicationConfigurationRequest < Struct.new(
@@ -4640,7 +7025,8 @@ module Aws::Mgn
       :staging_area_tags,
       :use_fips_endpoint,
       :account_id,
-      :internet_protocol)
+      :internet_protocol,
+      :store_snapshot_on_local_zone)
       SENSITIVE = [:staging_area_tags]
       include Aws::Structure
     end
@@ -4718,6 +7104,11 @@ module Aws::Mgn
     #   Update replication configuration template internet protocol request.
     #   @return [String]
     #
+    # @!attribute [rw] store_snapshot_on_local_zone
+    #   Update replication configuration template store snapshot on local
+    #   zone request.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/UpdateReplicationConfigurationTemplateRequest AWS API Documentation
     #
     class UpdateReplicationConfigurationTemplateRequest < Struct.new(
@@ -4736,7 +7127,8 @@ module Aws::Mgn
       :create_public_ip,
       :staging_area_tags,
       :use_fips_endpoint,
-      :internet_protocol)
+      :internet_protocol,
+      :store_snapshot_on_local_zone)
       SENSITIVE = [:staging_area_tags]
       include Aws::Structure
     end

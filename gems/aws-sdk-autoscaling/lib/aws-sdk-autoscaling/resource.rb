@@ -142,6 +142,7 @@ module Aws::AutoScaling
     #     desired_capacity: 1,
     #     default_cooldown: 1,
     #     availability_zones: ["XmlStringMaxLen255"],
+    #     availability_zone_ids: ["XmlStringMaxLen255"],
     #     load_balancer_names: ["XmlStringMaxLen255"],
     #     target_group_arns: ["XmlStringMaxLen511"],
     #     health_check_type: "XmlStringMaxLen32",
@@ -304,6 +305,10 @@ module Aws::AutoScaling
     #   Availability Zone when not using the `VPCZoneIdentifier` property, or
     #   for attaching a network interface when an existing network interface
     #   ID is specified in a launch template.
+    # @option options [Array<String>] :availability_zone_ids
+    #   A list of Availability Zone IDs where the Auto Scaling group can
+    #   launch instances. You cannot specify both AvailabilityZones and
+    #   AvailabilityZoneIds in the same request.
     # @option options [Array<String>] :load_balancer_names
     #   A list of Classic Load Balancers associated with this Auto Scaling
     #   group. For Application Load Balancers, Network Load Balancers, and
@@ -420,6 +425,14 @@ module Aws::AutoScaling
     #   `prevent-all-deletion`.
     #
     #   Default: `none`
+    #
+    #   For more information, see [ Configure deletion protection for your
+    #   Amazon EC2 Auto Scaling resources][1] in the *Amazon EC2 Auto Scaling
+    #   User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/resource-deletion-protection.html
     # @option options [Array<Types::Tag>] :tags
     #   One or more tags. You can tag your Auto Scaling group and propagate
     #   the tags to the Amazon EC2 instances it launches. Tags are not
@@ -868,6 +881,14 @@ module Aws::AutoScaling
     #     filter can only be used in combination with the
     #     `AutoScalingGroupName` parameter. For valid `StatusCode` values, see
     #     [Activity][1] in the *Amazon EC2 Auto Scaling API Reference*.
+    #
+    #   `StartTimeLowerBound` and `StartTimeUpperBound` accept ISO 8601
+    #   formatted timestamps. Timestamps without a timezone offset are assumed
+    #   to be UTC.
+    #
+    #   * `2000-01-18T08:15:00Z`
+    #
+    #   * `2000-01-18T16:15:00+08:00`
     #
     #
     #

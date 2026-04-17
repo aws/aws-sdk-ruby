@@ -8,6 +8,11 @@
 module Aws::BedrockAgentCore
   module Types
 
+    class A2aDescriptor
+      attr_accessor agent_card: Types::AgentCardDefinition
+      SENSITIVE: []
+    end
+
     class AccessDeniedException
       attr_accessor message: ::String
       attr_accessor event_type: untyped
@@ -16,6 +21,18 @@ module Aws::BedrockAgentCore
 
     class ActorSummary
       attr_accessor actor_id: ::String
+      SENSITIVE: []
+    end
+
+    class AgentCardDefinition
+      attr_accessor schema_version: ::String
+      attr_accessor inline_content: ::String
+      SENSITIVE: []
+    end
+
+    class AgentSkillsDescriptor
+      attr_accessor skill_md: Types::SkillMdDefinition
+      attr_accessor skill_definition: Types::SkillDefinition
       SENSITIVE: []
     end
 
@@ -84,6 +101,76 @@ module Aws::BedrockAgentCore
       SENSITIVE: []
     end
 
+    class BrowserAction
+      attr_accessor mouse_click: Types::MouseClickArguments
+      attr_accessor mouse_move: Types::MouseMoveArguments
+      attr_accessor mouse_drag: Types::MouseDragArguments
+      attr_accessor mouse_scroll: Types::MouseScrollArguments
+      attr_accessor key_type: Types::KeyTypeArguments
+      attr_accessor key_press: Types::KeyPressArguments
+      attr_accessor key_shortcut: Types::KeyShortcutArguments
+      attr_accessor screenshot: Types::ScreenshotArguments
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class MouseClick < BrowserAction
+      end
+      class MouseMove < BrowserAction
+      end
+      class MouseDrag < BrowserAction
+      end
+      class MouseScroll < BrowserAction
+      end
+      class KeyType < BrowserAction
+      end
+      class KeyPress < BrowserAction
+      end
+      class KeyShortcut < BrowserAction
+      end
+      class Screenshot < BrowserAction
+      end
+      class Unknown < BrowserAction
+      end
+    end
+
+    class BrowserActionResult
+      attr_accessor mouse_click: Types::MouseClickResult
+      attr_accessor mouse_move: Types::MouseMoveResult
+      attr_accessor mouse_drag: Types::MouseDragResult
+      attr_accessor mouse_scroll: Types::MouseScrollResult
+      attr_accessor key_type: Types::KeyTypeResult
+      attr_accessor key_press: Types::KeyPressResult
+      attr_accessor key_shortcut: Types::KeyShortcutResult
+      attr_accessor screenshot: Types::ScreenshotResult
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class MouseClick < BrowserActionResult
+      end
+      class MouseMove < BrowserActionResult
+      end
+      class MouseDrag < BrowserActionResult
+      end
+      class MouseScroll < BrowserActionResult
+      end
+      class KeyType < BrowserActionResult
+      end
+      class KeyPress < BrowserActionResult
+      end
+      class KeyShortcut < BrowserActionResult
+      end
+      class Screenshot < BrowserActionResult
+      end
+      class Unknown < BrowserActionResult
+      end
+    end
+
+    class BrowserEnterprisePolicy
+      attr_accessor location: Types::ResourceLocation
+      attr_accessor type: ("MANAGED" | "RECOMMENDED")
+      SENSITIVE: []
+    end
+
     class BrowserExtension
       attr_accessor location: Types::ResourceLocation
       SENSITIVE: []
@@ -108,6 +195,22 @@ module Aws::BedrockAgentCore
       attr_accessor created_at: ::Time
       attr_accessor last_updated_at: ::Time
       SENSITIVE: []
+    end
+
+    class Certificate
+      attr_accessor location: Types::CertificateLocation
+      SENSITIVE: []
+    end
+
+    class CertificateLocation
+      attr_accessor secrets_manager: Types::SecretsManagerLocation
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class SecretsManager < CertificateLocation
+      end
+      class Unknown < CertificateLocation
+      end
     end
 
     class CodeInterpreterResult
@@ -167,6 +270,21 @@ module Aws::BedrockAgentCore
       SENSITIVE: []
     end
 
+    class ContentDeltaEvent
+      attr_accessor stdout: ::String
+      attr_accessor stderr: ::String
+      SENSITIVE: []
+    end
+
+    class ContentStartEvent < Aws::EmptyStructure
+    end
+
+    class ContentStopEvent
+      attr_accessor exit_code: ::Integer
+      attr_accessor status: ("COMPLETED" | "TIMED_OUT")
+      SENSITIVE: []
+    end
+
     class Context
       attr_accessor span_context: Types::SpanContext
       attr_accessor unknown: untyped
@@ -201,6 +319,11 @@ module Aws::BedrockAgentCore
       SENSITIVE: []
     end
 
+    class CustomDescriptor
+      attr_accessor inline_content: ::String
+      SENSITIVE: []
+    end
+
     class DeleteEventInput
       attr_accessor memory_id: ::String
       attr_accessor session_id: ::String
@@ -225,6 +348,14 @@ module Aws::BedrockAgentCore
       SENSITIVE: []
     end
 
+    class Descriptors
+      attr_accessor mcp: Types::McpDescriptor
+      attr_accessor a2a: Types::A2aDescriptor
+      attr_accessor custom: Types::CustomDescriptor
+      attr_accessor agent_skills: Types::AgentSkillsDescriptor
+      SENSITIVE: []
+    end
+
     class DuplicateIdException
       attr_accessor message: ::String
       SENSITIVE: []
@@ -234,11 +365,28 @@ module Aws::BedrockAgentCore
       attr_accessor evaluator_id: ::String
       attr_accessor evaluation_input: Types::EvaluationInput
       attr_accessor evaluation_target: Types::EvaluationTarget
-      SENSITIVE: []
+      attr_accessor evaluation_reference_inputs: ::Array[Types::EvaluationReferenceInput]
+      SENSITIVE: [:evaluation_reference_inputs]
     end
 
     class EvaluateResponse
       attr_accessor evaluation_results: ::Array[Types::EvaluationResultContent]
+      SENSITIVE: []
+    end
+
+    class EvaluationContent
+      attr_accessor text: ::String
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Text < EvaluationContent
+      end
+      class Unknown < EvaluationContent
+      end
+    end
+
+    class EvaluationExpectedTrajectory
+      attr_accessor tool_names: ::Array[::String]
       SENSITIVE: []
     end
 
@@ -253,6 +401,14 @@ module Aws::BedrockAgentCore
       end
     end
 
+    class EvaluationReferenceInput
+      attr_accessor context: Types::Context
+      attr_accessor expected_response: Types::EvaluationContent
+      attr_accessor assertions: ::Array[Types::EvaluationContent]
+      attr_accessor expected_trajectory: Types::EvaluationExpectedTrajectory
+      SENSITIVE: []
+    end
+
     class EvaluationResultContent
       attr_accessor evaluator_arn: ::String
       attr_accessor evaluator_id: ::String
@@ -264,6 +420,7 @@ module Aws::BedrockAgentCore
       attr_accessor token_usage: Types::TokenUsage
       attr_accessor error_message: ::String
       attr_accessor error_code: ::String
+      attr_accessor ignored_reference_input_fields: ::Array[::String]
       SENSITIVE: [:explanation]
     end
 
@@ -376,11 +533,13 @@ module Aws::BedrockAgentCore
       attr_accessor created_at: ::Time
       attr_accessor view_port: Types::ViewPort
       attr_accessor extensions: ::Array[Types::BrowserExtension]
+      attr_accessor enterprise_policies: ::Array[Types::BrowserEnterprisePolicy]
       attr_accessor profile_configuration: Types::BrowserProfileConfiguration
       attr_accessor session_timeout_seconds: ::Integer
       attr_accessor status: ("READY" | "TERMINATED")
       attr_accessor streams: Types::BrowserSessionStream
       attr_accessor proxy_configuration: Types::ProxyConfiguration
+      attr_accessor certificates: ::Array[Types::Certificate]
       attr_accessor session_replay_artifact: ::String
       attr_accessor last_updated_at: ::Time
       SENSITIVE: []
@@ -399,6 +558,7 @@ module Aws::BedrockAgentCore
       attr_accessor created_at: ::Time
       attr_accessor session_timeout_seconds: ::Integer
       attr_accessor status: ("READY" | "TERMINATED")
+      attr_accessor certificates: ::Array[Types::Certificate]
       SENSITIVE: []
     end
 
@@ -508,6 +668,39 @@ module Aws::BedrockAgentCore
       SENSITIVE: []
     end
 
+    class InvokeAgentRuntimeCommandRequest
+      attr_accessor content_type: ::String
+      attr_accessor accept: ::String
+      attr_accessor runtime_session_id: ::String
+      attr_accessor trace_id: ::String
+      attr_accessor trace_parent: ::String
+      attr_accessor trace_state: ::String
+      attr_accessor baggage: ::String
+      attr_accessor agent_runtime_arn: ::String
+      attr_accessor qualifier: ::String
+      attr_accessor account_id: ::String
+      attr_accessor body: Types::InvokeAgentRuntimeCommandRequestBody
+      SENSITIVE: []
+    end
+
+    class InvokeAgentRuntimeCommandRequestBody
+      attr_accessor command: ::String
+      attr_accessor timeout: ::Integer
+      SENSITIVE: []
+    end
+
+    class InvokeAgentRuntimeCommandResponse
+      attr_accessor runtime_session_id: ::String
+      attr_accessor trace_id: ::String
+      attr_accessor trace_parent: ::String
+      attr_accessor trace_state: ::String
+      attr_accessor baggage: ::String
+      attr_accessor content_type: ::String
+      attr_accessor status_code: ::Integer
+      attr_accessor stream: Types::InvokeAgentRuntimeCommandStreamOutput
+      SENSITIVE: []
+    end
+
     class InvokeAgentRuntimeRequest
       attr_accessor content_type: ::String
       attr_accessor accept: ::String
@@ -540,6 +733,19 @@ module Aws::BedrockAgentCore
       SENSITIVE: [:response]
     end
 
+    class InvokeBrowserRequest
+      attr_accessor browser_identifier: ::String
+      attr_accessor session_id: ::String
+      attr_accessor action: Types::BrowserAction
+      SENSITIVE: []
+    end
+
+    class InvokeBrowserResponse
+      attr_accessor result: Types::BrowserActionResult
+      attr_accessor session_id: ::String
+      SENSITIVE: []
+    end
+
     class InvokeCodeInterpreterRequest
       attr_accessor code_interpreter_identifier: ::String
       attr_accessor session_id: ::String
@@ -553,6 +759,40 @@ module Aws::BedrockAgentCore
     class InvokeCodeInterpreterResponse
       attr_accessor session_id: ::String
       attr_accessor stream: Types::CodeInterpreterStreamOutput
+      SENSITIVE: []
+    end
+
+    class KeyPressArguments
+      attr_accessor key: ::String
+      attr_accessor presses: ::Integer
+      SENSITIVE: []
+    end
+
+    class KeyPressResult
+      attr_accessor status: ("SUCCESS" | "FAILED")
+      attr_accessor error: ::String
+      SENSITIVE: []
+    end
+
+    class KeyShortcutArguments
+      attr_accessor keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class KeyShortcutResult
+      attr_accessor status: ("SUCCESS" | "FAILED")
+      attr_accessor error: ::String
+      SENSITIVE: []
+    end
+
+    class KeyTypeArguments
+      attr_accessor text: ::String
+      SENSITIVE: []
+    end
+
+    class KeyTypeResult
+      attr_accessor status: ("SUCCESS" | "FAILED")
+      attr_accessor error: ::String
       SENSITIVE: []
     end
 
@@ -642,6 +882,7 @@ module Aws::BedrockAgentCore
     class ListMemoryRecordsInput
       attr_accessor memory_id: ::String
       attr_accessor namespace: ::String
+      attr_accessor namespace_path: ::String
       attr_accessor memory_strategy_id: ::String
       attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
@@ -659,6 +900,7 @@ module Aws::BedrockAgentCore
       attr_accessor actor_id: ::String
       attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
+      attr_accessor filter: Types::SessionFilter
       SENSITIVE: []
     end
 
@@ -670,6 +912,12 @@ module Aws::BedrockAgentCore
 
     class LiveViewStream
       attr_accessor stream_endpoint: ::String
+      SENSITIVE: []
+    end
+
+    class McpDescriptor
+      attr_accessor server: Types::ServerDefinition
+      attr_accessor tools: Types::ToolsDefinition
       SENSITIVE: []
     end
 
@@ -761,6 +1009,61 @@ module Aws::BedrockAgentCore
       end
     end
 
+    class MouseClickArguments
+      attr_accessor x: ::Integer
+      attr_accessor y: ::Integer
+      attr_accessor button: ("LEFT" | "RIGHT" | "MIDDLE")
+      attr_accessor click_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class MouseClickResult
+      attr_accessor status: ("SUCCESS" | "FAILED")
+      attr_accessor error: ::String
+      SENSITIVE: []
+    end
+
+    class MouseDragArguments
+      attr_accessor end_x: ::Integer
+      attr_accessor end_y: ::Integer
+      attr_accessor start_x: ::Integer
+      attr_accessor start_y: ::Integer
+      attr_accessor button: ("LEFT" | "RIGHT" | "MIDDLE")
+      SENSITIVE: []
+    end
+
+    class MouseDragResult
+      attr_accessor status: ("SUCCESS" | "FAILED")
+      attr_accessor error: ::String
+      SENSITIVE: []
+    end
+
+    class MouseMoveArguments
+      attr_accessor x: ::Integer
+      attr_accessor y: ::Integer
+      SENSITIVE: []
+    end
+
+    class MouseMoveResult
+      attr_accessor status: ("SUCCESS" | "FAILED")
+      attr_accessor error: ::String
+      SENSITIVE: []
+    end
+
+    class MouseScrollArguments
+      attr_accessor x: ::Integer
+      attr_accessor y: ::Integer
+      attr_accessor delta_x: ::Integer
+      attr_accessor delta_y: ::Integer
+      SENSITIVE: []
+    end
+
+    class MouseScrollResult
+      attr_accessor status: ("SUCCESS" | "FAILED")
+      attr_accessor error: ::String
+      SENSITIVE: []
+    end
+
     class PayloadType
       attr_accessor conversational: Types::Conversational
       attr_accessor blob: untyped
@@ -808,6 +1111,21 @@ module Aws::BedrockAgentCore
       end
     end
 
+    class RegistryRecordSummary
+      attr_accessor registry_arn: ::String
+      attr_accessor record_arn: ::String
+      attr_accessor record_id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor descriptor_type: ("MCP" | "A2A" | "CUSTOM" | "AGENT_SKILLS")
+      attr_accessor descriptors: Types::Descriptors
+      attr_accessor version: ::String
+      attr_accessor status: ("DRAFT" | "PENDING_APPROVAL" | "APPROVED" | "REJECTED" | "DEPRECATED")
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      SENSITIVE: [:description]
+    end
+
     class ResourceContent
       attr_accessor type: ("text" | "blob")
       attr_accessor uri: ::String
@@ -834,9 +1152,18 @@ module Aws::BedrockAgentCore
       SENSITIVE: []
     end
 
+    class ResponseChunk
+      attr_accessor content_start: Types::ContentStartEvent
+      attr_accessor content_delta: Types::ContentDeltaEvent
+      attr_accessor content_stop: Types::ContentStopEvent
+      attr_accessor event_type: untyped
+      SENSITIVE: []
+    end
+
     class RetrieveMemoryRecordsInput
       attr_accessor memory_id: ::String
       attr_accessor namespace: ::String
+      attr_accessor namespace_path: ::String
       attr_accessor search_criteria: Types::SearchCriteria
       attr_accessor next_token: ::String
       attr_accessor max_results: ::Integer
@@ -867,6 +1194,7 @@ module Aws::BedrockAgentCore
 
     class RuntimeClientError
       attr_accessor message: ::String
+      attr_accessor event_type: untyped
       SENSITIVE: []
     end
 
@@ -895,12 +1223,48 @@ module Aws::BedrockAgentCore
       SENSITIVE: []
     end
 
+    class ScreenshotArguments
+      attr_accessor format: ("PNG")
+      SENSITIVE: []
+    end
+
+    class ScreenshotResult
+      attr_accessor status: ("SUCCESS" | "FAILED")
+      attr_accessor error: ::String
+      attr_accessor data: ::String
+      SENSITIVE: []
+    end
+
     class SearchCriteria
       attr_accessor search_query: ::String
       attr_accessor memory_strategy_id: ::String
       attr_accessor top_k: ::Integer
       attr_accessor metadata_filters: ::Array[Types::MemoryMetadataFilterExpression]
       SENSITIVE: [:search_query]
+    end
+
+    class SearchRegistryRecordsRequest
+      attr_accessor search_query: ::String
+      attr_accessor registry_ids: ::Array[::String]
+      attr_accessor max_results: ::Integer
+      attr_accessor filters: untyped
+      SENSITIVE: []
+    end
+
+    class SearchRegistryRecordsResponse
+      attr_accessor registry_records: ::Array[Types::RegistryRecordSummary]
+      SENSITIVE: []
+    end
+
+    class SecretsManagerLocation
+      attr_accessor secret_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ServerDefinition
+      attr_accessor schema_version: ::String
+      attr_accessor inline_content: ::String
+      SENSITIVE: []
     end
 
     class ServiceException
@@ -914,10 +1278,26 @@ module Aws::BedrockAgentCore
       SENSITIVE: []
     end
 
+    class SessionFilter
+      attr_accessor event_filter: ("HAS_EVENTS")
+      SENSITIVE: []
+    end
+
     class SessionSummary
       attr_accessor session_id: ::String
       attr_accessor actor_id: ::String
       attr_accessor created_at: ::Time
+      SENSITIVE: []
+    end
+
+    class SkillDefinition
+      attr_accessor schema_version: ::String
+      attr_accessor inline_content: ::String
+      SENSITIVE: []
+    end
+
+    class SkillMdDefinition
+      attr_accessor inline_content: ::String
       SENSITIVE: []
     end
 
@@ -938,6 +1318,8 @@ module Aws::BedrockAgentCore
       attr_accessor extensions: ::Array[Types::BrowserExtension]
       attr_accessor profile_configuration: Types::BrowserProfileConfiguration
       attr_accessor proxy_configuration: Types::ProxyConfiguration
+      attr_accessor enterprise_policies: ::Array[Types::BrowserEnterprisePolicy]
+      attr_accessor certificates: ::Array[Types::Certificate]
       attr_accessor client_token: ::String
       SENSITIVE: []
     end
@@ -956,6 +1338,7 @@ module Aws::BedrockAgentCore
       attr_accessor code_interpreter_identifier: ::String
       attr_accessor name: ::String
       attr_accessor session_timeout_seconds: ::Integer
+      attr_accessor certificates: ::Array[Types::Certificate]
       attr_accessor client_token: ::String
       SENSITIVE: []
     end
@@ -1064,6 +1447,7 @@ module Aws::BedrockAgentCore
       attr_accessor content: ::Array[Types::InputContentBlock]
       attr_accessor directory_path: ::String
       attr_accessor task_id: ::String
+      attr_accessor runtime: ("nodejs" | "deno" | "python")
       SENSITIVE: []
     end
 
@@ -1074,6 +1458,12 @@ module Aws::BedrockAgentCore
       attr_accessor stderr: ::String
       attr_accessor exit_code: ::Integer
       attr_accessor execution_time: ::Float
+      SENSITIVE: []
+    end
+
+    class ToolsDefinition
+      attr_accessor protocol_version: ::String
+      attr_accessor inline_content: ::String
       SENSITIVE: []
     end
 
@@ -1134,6 +1524,10 @@ module Aws::BedrockAgentCore
 
     class CodeInterpreterStreamOutput < Enumerator[untyped, untyped]
       def event_types: () -> [:result, :access_denied_exception, :conflict_exception, :internal_server_exception, :resource_not_found_exception, :service_quota_exceeded_exception, :throttling_exception, :validation_exception]
+    end
+
+    class InvokeAgentRuntimeCommandStreamOutput < Enumerator[untyped, untyped]
+      def event_types: () -> [:chunk, :access_denied_exception, :internal_server_exception, :resource_not_found_exception, :service_quota_exceeded_exception, :throttling_exception, :validation_exception, :runtime_client_error]
     end
   end
 end

@@ -10,11 +10,6 @@
 module Aws::BCMDataExports
   # Endpoint parameters used to influence endpoints per request.
   #
-  # @!attribute region
-  #   The AWS region used to dispatch the request.
-  #
-  #   @return [string]
-  #
   # @!attribute use_fips
   #   When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.
   #
@@ -25,34 +20,39 @@ module Aws::BCMDataExports
   #
   #   @return [string]
   #
+  # @!attribute region
+  #   The AWS region used to dispatch the request.
+  #
+  #   @return [string]
+  #
   EndpointParameters = Struct.new(
-    :region,
     :use_fips,
     :endpoint,
+    :region,
   ) do
     include Aws::Structure
 
     # @api private
     class << self
       PARAM_MAP = {
-        'Region' => :region,
         'UseFIPS' => :use_fips,
         'Endpoint' => :endpoint,
+        'Region' => :region,
       }.freeze
     end
 
     def initialize(options = {})
-      self[:region] = options[:region]
       self[:use_fips] = options[:use_fips]
       self[:use_fips] = false if self[:use_fips].nil?
       self[:endpoint] = options[:endpoint]
+      self[:region] = options[:region]
     end
 
     def self.create(config, options={})
       new({
-        region: config.region,
         use_fips: config.use_fips_endpoint,
         endpoint: (config.endpoint.to_s unless config.regional_endpoint),
+        region: config.region,
       }.merge(options))
     end
   end

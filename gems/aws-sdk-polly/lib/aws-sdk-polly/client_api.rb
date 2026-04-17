@@ -15,8 +15,14 @@ module Aws::Polly
     include Seahorse::Model
 
     Alphabet = Shapes::StringShape.new(name: 'Alphabet')
+    AudioChunk = Shapes::BlobShape.new(name: 'AudioChunk')
+    AudioEvent = Shapes::StructureShape.new(name: 'AudioEvent')
     AudioStream = Shapes::BlobShape.new(name: 'AudioStream', streaming: true)
+    AvailabilityErrorMessage = Shapes::StringShape.new(name: 'AvailabilityErrorMessage')
+    CloseStreamEvent = Shapes::StructureShape.new(name: 'CloseStreamEvent')
     ContentType = Shapes::StringShape.new(name: 'ContentType')
+    CoralAvailabilityThrottledResource = Shapes::StringShape.new(name: 'CoralAvailabilityThrottledResource')
+    CoralAvailabilityThrottlingReason = Shapes::StringShape.new(name: 'CoralAvailabilityThrottlingReason')
     DateTime = Shapes::TimestampShape.new(name: 'DateTime')
     DeleteLexiconInput = Shapes::StructureShape.new(name: 'DeleteLexiconInput')
     DeleteLexiconOutput = Shapes::StructureShape.new(name: 'DeleteLexiconOutput')
@@ -26,6 +32,8 @@ module Aws::Polly
     EngineList = Shapes::ListShape.new(name: 'EngineList')
     EngineNotSupportedException = Shapes::StructureShape.new(name: 'EngineNotSupportedException')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
+    FlushStreamConfiguration = Shapes::StructureShape.new(name: 'FlushStreamConfiguration')
+    Force = Shapes::BooleanShape.new(name: 'Force')
     Gender = Shapes::StringShape.new(name: 'Gender')
     GetLexiconInput = Shapes::StructureShape.new(name: 'GetLexiconInput')
     GetLexiconOutput = Shapes::StructureShape.new(name: 'GetLexiconOutput')
@@ -71,16 +79,24 @@ module Aws::Polly
     OutputUri = Shapes::StringShape.new(name: 'OutputUri')
     PutLexiconInput = Shapes::StructureShape.new(name: 'PutLexiconInput')
     PutLexiconOutput = Shapes::StructureShape.new(name: 'PutLexiconOutput')
+    QuotaCode = Shapes::StringShape.new(name: 'QuotaCode')
     RequestCharacters = Shapes::IntegerShape.new(name: 'RequestCharacters')
     SampleRate = Shapes::StringShape.new(name: 'SampleRate')
+    ServiceCode = Shapes::StringShape.new(name: 'ServiceCode')
     ServiceFailureException = Shapes::StructureShape.new(name: 'ServiceFailureException')
+    ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     Size = Shapes::IntegerShape.new(name: 'Size')
     SnsTopicArn = Shapes::StringShape.new(name: 'SnsTopicArn')
     SpeechMarkType = Shapes::StringShape.new(name: 'SpeechMarkType')
     SpeechMarkTypeList = Shapes::ListShape.new(name: 'SpeechMarkTypeList')
     SsmlMarksNotSupportedForTextTypeException = Shapes::StructureShape.new(name: 'SsmlMarksNotSupportedForTextTypeException')
+    StartSpeechSynthesisStreamActionStream = Shapes::StructureShape.new(name: 'StartSpeechSynthesisStreamActionStream')
+    StartSpeechSynthesisStreamEventStream = Shapes::StructureShape.new(name: 'StartSpeechSynthesisStreamEventStream')
+    StartSpeechSynthesisStreamInput = Shapes::StructureShape.new(name: 'StartSpeechSynthesisStreamInput')
+    StartSpeechSynthesisStreamOutput = Shapes::StructureShape.new(name: 'StartSpeechSynthesisStreamOutput')
     StartSpeechSynthesisTaskInput = Shapes::StructureShape.new(name: 'StartSpeechSynthesisTaskInput')
     StartSpeechSynthesisTaskOutput = Shapes::StructureShape.new(name: 'StartSpeechSynthesisTaskOutput')
+    StreamClosedEvent = Shapes::StructureShape.new(name: 'StreamClosedEvent')
     SynthesisTask = Shapes::StructureShape.new(name: 'SynthesisTask')
     SynthesisTaskNotFoundException = Shapes::StructureShape.new(name: 'SynthesisTaskNotFoundException')
     SynthesisTasks = Shapes::ListShape.new(name: 'SynthesisTasks')
@@ -90,14 +106,29 @@ module Aws::Polly
     TaskStatus = Shapes::StringShape.new(name: 'TaskStatus')
     TaskStatusReason = Shapes::StringShape.new(name: 'TaskStatusReason')
     Text = Shapes::StringShape.new(name: 'Text')
+    TextEvent = Shapes::StructureShape.new(name: 'TextEvent')
     TextLengthExceededException = Shapes::StructureShape.new(name: 'TextLengthExceededException')
     TextType = Shapes::StringShape.new(name: 'TextType')
+    ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
+    ThrottlingReason = Shapes::StructureShape.new(name: 'ThrottlingReason')
+    ThrottlingReasonList = Shapes::ListShape.new(name: 'ThrottlingReasonList')
     UnsupportedPlsAlphabetException = Shapes::StructureShape.new(name: 'UnsupportedPlsAlphabetException')
     UnsupportedPlsLanguageException = Shapes::StructureShape.new(name: 'UnsupportedPlsLanguageException')
+    ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
+    ValidationExceptionField = Shapes::StructureShape.new(name: 'ValidationExceptionField')
+    ValidationExceptionFieldList = Shapes::ListShape.new(name: 'ValidationExceptionFieldList')
+    ValidationExceptionFieldMessage = Shapes::StringShape.new(name: 'ValidationExceptionFieldMessage')
+    ValidationExceptionFieldName = Shapes::StringShape.new(name: 'ValidationExceptionFieldName')
+    ValidationExceptionReason = Shapes::StringShape.new(name: 'ValidationExceptionReason')
     Voice = Shapes::StructureShape.new(name: 'Voice')
     VoiceId = Shapes::StringShape.new(name: 'VoiceId')
     VoiceList = Shapes::ListShape.new(name: 'VoiceList')
     VoiceName = Shapes::StringShape.new(name: 'VoiceName')
+
+    AudioEvent.add_member(:audio_chunk, Shapes::ShapeRef.new(shape: AudioChunk, eventpayload: true, eventpayload_type: 'blob', location_name: "AudioChunk", metadata: {"eventpayload" => true}))
+    AudioEvent.struct_class = Types::AudioEvent
+
+    CloseStreamEvent.struct_class = Types::CloseStreamEvent
 
     DeleteLexiconInput.add_member(:name, Shapes::ShapeRef.new(shape: LexiconName, required: true, location: "uri", location_name: "LexiconName"))
     DeleteLexiconInput.struct_class = Types::DeleteLexiconInput
@@ -118,6 +149,9 @@ module Aws::Polly
 
     EngineNotSupportedException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     EngineNotSupportedException.struct_class = Types::EngineNotSupportedException
+
+    FlushStreamConfiguration.add_member(:force, Shapes::ShapeRef.new(shape: Force, location_name: "Force"))
+    FlushStreamConfiguration.struct_class = Types::FlushStreamConfiguration
 
     GetLexiconInput.add_member(:name, Shapes::ShapeRef.new(shape: LexiconName, required: true, location: "uri", location_name: "LexiconName"))
     GetLexiconInput.struct_class = Types::GetLexiconInput
@@ -221,10 +255,43 @@ module Aws::Polly
     ServiceFailureException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     ServiceFailureException.struct_class = Types::ServiceFailureException
 
+    ServiceQuotaExceededException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, required: true, location_name: "message"))
+    ServiceQuotaExceededException.add_member(:quota_code, Shapes::ShapeRef.new(shape: QuotaCode, required: true, location_name: "quotaCode"))
+    ServiceQuotaExceededException.add_member(:service_code, Shapes::ShapeRef.new(shape: ServiceCode, required: true, location_name: "serviceCode"))
+    ServiceQuotaExceededException.struct_class = Types::ServiceQuotaExceededException
+
     SpeechMarkTypeList.member = Shapes::ShapeRef.new(shape: SpeechMarkType)
 
     SsmlMarksNotSupportedForTextTypeException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     SsmlMarksNotSupportedForTextTypeException.struct_class = Types::SsmlMarksNotSupportedForTextTypeException
+
+    StartSpeechSynthesisStreamActionStream.add_member(:text_event, Shapes::ShapeRef.new(shape: TextEvent, event: true, location_name: "TextEvent"))
+    StartSpeechSynthesisStreamActionStream.add_member(:close_stream_event, Shapes::ShapeRef.new(shape: CloseStreamEvent, event: true, location_name: "CloseStreamEvent"))
+    StartSpeechSynthesisStreamActionStream.struct_class = Types::StartSpeechSynthesisStreamActionStream
+
+    StartSpeechSynthesisStreamEventStream.add_member(:audio_event, Shapes::ShapeRef.new(shape: AudioEvent, event: true, location_name: "AudioEvent"))
+    StartSpeechSynthesisStreamEventStream.add_member(:stream_closed_event, Shapes::ShapeRef.new(shape: StreamClosedEvent, event: true, location_name: "StreamClosedEvent"))
+    StartSpeechSynthesisStreamEventStream.add_member(:validation_exception, Shapes::ShapeRef.new(shape: ValidationException, event: true, location_name: "ValidationException"))
+    StartSpeechSynthesisStreamEventStream.add_member(:service_quota_exceeded_exception, Shapes::ShapeRef.new(shape: ServiceQuotaExceededException, event: true, location_name: "ServiceQuotaExceededException"))
+    StartSpeechSynthesisStreamEventStream.add_member(:service_failure_exception, Shapes::ShapeRef.new(shape: ServiceFailureException, event: true, location_name: "ServiceFailureException"))
+    StartSpeechSynthesisStreamEventStream.add_member(:throttling_exception, Shapes::ShapeRef.new(shape: ThrottlingException, event: true, location_name: "ThrottlingException"))
+    StartSpeechSynthesisStreamEventStream.struct_class = Types::StartSpeechSynthesisStreamEventStream
+
+    StartSpeechSynthesisStreamInput.add_member(:engine, Shapes::ShapeRef.new(shape: Engine, required: true, location: "header", location_name: "x-amzn-Engine"))
+    StartSpeechSynthesisStreamInput.add_member(:language_code, Shapes::ShapeRef.new(shape: LanguageCode, location: "header", location_name: "x-amzn-LanguageCode"))
+    StartSpeechSynthesisStreamInput.add_member(:lexicon_names, Shapes::ShapeRef.new(shape: LexiconNameList, location: "header", location_name: "x-amzn-LexiconNames"))
+    StartSpeechSynthesisStreamInput.add_member(:output_format, Shapes::ShapeRef.new(shape: OutputFormat, required: true, location: "header", location_name: "x-amzn-OutputFormat"))
+    StartSpeechSynthesisStreamInput.add_member(:sample_rate, Shapes::ShapeRef.new(shape: SampleRate, location: "header", location_name: "x-amzn-SampleRate"))
+    StartSpeechSynthesisStreamInput.add_member(:voice_id, Shapes::ShapeRef.new(shape: VoiceId, required: true, location: "header", location_name: "x-amzn-VoiceId"))
+    StartSpeechSynthesisStreamInput.add_member(:action_stream, Shapes::ShapeRef.new(shape: StartSpeechSynthesisStreamActionStream, eventstream: true, location_name: "ActionStream"))
+    StartSpeechSynthesisStreamInput.struct_class = Types::StartSpeechSynthesisStreamInput
+    StartSpeechSynthesisStreamInput[:payload] = :action_stream
+    StartSpeechSynthesisStreamInput[:payload_member] = StartSpeechSynthesisStreamInput.member(:action_stream)
+
+    StartSpeechSynthesisStreamOutput.add_member(:event_stream, Shapes::ShapeRef.new(shape: StartSpeechSynthesisStreamEventStream, eventstream: true, location_name: "EventStream"))
+    StartSpeechSynthesisStreamOutput.struct_class = Types::StartSpeechSynthesisStreamOutput
+    StartSpeechSynthesisStreamOutput[:payload] = :event_stream
+    StartSpeechSynthesisStreamOutput[:payload_member] = StartSpeechSynthesisStreamOutput.member(:event_stream)
 
     StartSpeechSynthesisTaskInput.add_member(:engine, Shapes::ShapeRef.new(shape: Engine, location_name: "Engine"))
     StartSpeechSynthesisTaskInput.add_member(:language_code, Shapes::ShapeRef.new(shape: LanguageCode, location_name: "LanguageCode"))
@@ -242,6 +309,9 @@ module Aws::Polly
 
     StartSpeechSynthesisTaskOutput.add_member(:synthesis_task, Shapes::ShapeRef.new(shape: SynthesisTask, location_name: "SynthesisTask"))
     StartSpeechSynthesisTaskOutput.struct_class = Types::StartSpeechSynthesisTaskOutput
+
+    StreamClosedEvent.add_member(:request_characters, Shapes::ShapeRef.new(shape: RequestCharacters, location_name: "RequestCharacters"))
+    StreamClosedEvent.struct_class = Types::StreamClosedEvent
 
     SynthesisTask.add_member(:engine, Shapes::ShapeRef.new(shape: Engine, location_name: "Engine"))
     SynthesisTask.add_member(:task_id, Shapes::ShapeRef.new(shape: TaskId, location_name: "TaskId"))
@@ -283,14 +353,40 @@ module Aws::Polly
     SynthesizeSpeechOutput[:payload] = :audio_stream
     SynthesizeSpeechOutput[:payload_member] = SynthesizeSpeechOutput.member(:audio_stream)
 
+    TextEvent.add_member(:text, Shapes::ShapeRef.new(shape: Text, required: true, location_name: "Text"))
+    TextEvent.add_member(:text_type, Shapes::ShapeRef.new(shape: TextType, location_name: "TextType"))
+    TextEvent.add_member(:flush_stream_configuration, Shapes::ShapeRef.new(shape: FlushStreamConfiguration, location_name: "FlushStreamConfiguration"))
+    TextEvent.struct_class = Types::TextEvent
+
     TextLengthExceededException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     TextLengthExceededException.struct_class = Types::TextLengthExceededException
+
+    ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: AvailabilityErrorMessage, location_name: "message"))
+    ThrottlingException.add_member(:throttling_reasons, Shapes::ShapeRef.new(shape: ThrottlingReasonList, location_name: "throttlingReasons"))
+    ThrottlingException.struct_class = Types::ThrottlingException
+
+    ThrottlingReason.add_member(:reason, Shapes::ShapeRef.new(shape: CoralAvailabilityThrottlingReason, location_name: "reason"))
+    ThrottlingReason.add_member(:resource, Shapes::ShapeRef.new(shape: CoralAvailabilityThrottledResource, location_name: "resource"))
+    ThrottlingReason.struct_class = Types::ThrottlingReason
+
+    ThrottlingReasonList.member = Shapes::ShapeRef.new(shape: ThrottlingReason)
 
     UnsupportedPlsAlphabetException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     UnsupportedPlsAlphabetException.struct_class = Types::UnsupportedPlsAlphabetException
 
     UnsupportedPlsLanguageException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     UnsupportedPlsLanguageException.struct_class = Types::UnsupportedPlsLanguageException
+
+    ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, required: true, location_name: "message"))
+    ValidationException.add_member(:reason, Shapes::ShapeRef.new(shape: ValidationExceptionReason, required: true, location_name: "reason"))
+    ValidationException.add_member(:fields, Shapes::ShapeRef.new(shape: ValidationExceptionFieldList, location_name: "fields"))
+    ValidationException.struct_class = Types::ValidationException
+
+    ValidationExceptionField.add_member(:name, Shapes::ShapeRef.new(shape: ValidationExceptionFieldName, required: true, location_name: "name"))
+    ValidationExceptionField.add_member(:message, Shapes::ShapeRef.new(shape: ValidationExceptionFieldMessage, required: true, location_name: "message"))
+    ValidationExceptionField.struct_class = Types::ValidationExceptionField
+
+    ValidationExceptionFieldList.member = Shapes::ShapeRef.new(shape: ValidationExceptionField)
 
     Voice.add_member(:gender, Shapes::ShapeRef.new(shape: Gender, location_name: "Gender"))
     Voice.add_member(:id, Shapes::ShapeRef.new(shape: VoiceId, location_name: "Id"))
@@ -314,6 +410,7 @@ module Aws::Polly
         "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "polly",
         "protocol" => "rest-json",
+        "protocolSettings" => {"h2" => "eventstream"},
         "protocols" => ["rest-json"],
         "serviceFullName" => "Amazon Polly",
         "serviceId" => "Polly",
@@ -401,6 +498,19 @@ module Aws::Polly
         o.errors << Shapes::ShapeRef.new(shape: MaxLexemeLengthExceededException)
         o.errors << Shapes::ShapeRef.new(shape: MaxLexiconsNumberExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
+      api.add_operation(:start_speech_synthesis_stream, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartSpeechSynthesisStream"
+        o.http_method = "POST"
+        o.http_request_uri = "/v1/synthesisStream"
+        o.input = Shapes::ShapeRef.new(shape: StartSpeechSynthesisStreamInput)
+        o.output = Shapes::ShapeRef.new(shape: StartSpeechSynthesisStreamOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.async = true
       end)
 
       api.add_operation(:start_speech_synthesis_task, Seahorse::Model::Operation.new.tap do |o|

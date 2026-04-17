@@ -1305,20 +1305,6 @@ module Aws::PartnerCentralChannel
       include Aws::Structure
     end
 
-    # Configuration for resold business support plans.
-    #
-    # @!attribute [rw] coverage
-    #   The coverage level for resold business support.
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-channel-2024-03-18/ResoldBusiness AWS API Documentation
-    #
-    class ResoldBusiness < Struct.new(
-      :coverage)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
     # Configuration for resold enterprise support plans.
     #
     # @!attribute [rw] coverage
@@ -1336,6 +1322,30 @@ module Aws::PartnerCentralChannel
     # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-channel-2024-03-18/ResoldEnterprise AWS API Documentation
     #
     class ResoldEnterprise < Struct.new(
+      :coverage,
+      :tam_location,
+      :charge_account_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration for resold unified operations support plans.
+    #
+    # @!attribute [rw] coverage
+    #   The coverage level for resold unified operations support.
+    #   @return [String]
+    #
+    # @!attribute [rw] tam_location
+    #   The location of the Technical Account Manager (TAM).
+    #   @return [String]
+    #
+    # @!attribute [rw] charge_account_id
+    #   The AWS account ID to charge for the support plan.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-channel-2024-03-18/ResoldUnifiedOperations AWS API Documentation
+    #
+    class ResoldUnifiedOperations < Struct.new(
       :coverage,
       :tam_location,
       :charge_account_id)
@@ -1587,10 +1597,6 @@ module Aws::PartnerCentralChannel
     #
     # @note SupportPlan is a union - when making an API calls you must set exactly one of the members.
     #
-    # @!attribute [rw] resold_business
-    #   Configuration for resold business support plans.
-    #   @return [Types::ResoldBusiness]
-    #
     # @!attribute [rw] resold_enterprise
     #   Configuration for resold enterprise support plans.
     #   @return [Types::ResoldEnterprise]
@@ -1599,20 +1605,24 @@ module Aws::PartnerCentralChannel
     #   Configuration for partner-led support plans.
     #   @return [Types::PartnerLedSupport]
     #
+    # @!attribute [rw] resold_unified_operations
+    #   Configuration for resold unified operations support plans.
+    #   @return [Types::ResoldUnifiedOperations]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-channel-2024-03-18/SupportPlan AWS API Documentation
     #
     class SupportPlan < Struct.new(
-      :resold_business,
       :resold_enterprise,
       :partner_led_support,
+      :resold_unified_operations,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
       include Aws::Structure::Union
 
-      class ResoldBusiness < SupportPlan; end
       class ResoldEnterprise < SupportPlan; end
       class PartnerLedSupport < SupportPlan; end
+      class ResoldUnifiedOperations < SupportPlan; end
       class Unknown < SupportPlan; end
     end
 

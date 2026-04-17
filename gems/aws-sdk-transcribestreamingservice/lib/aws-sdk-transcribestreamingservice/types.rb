@@ -2631,7 +2631,9 @@ module Aws::TranscribeStreamingService
     #   Values must be comma-separated and can include: `ADDRESS`,
     #   `BANK_ACCOUNT_NUMBER`, `BANK_ROUTING`, `CREDIT_DEBIT_CVV`,
     #   `CREDIT_DEBIT_EXPIRY`, `CREDIT_DEBIT_NUMBER`, `EMAIL`, `NAME`,
-    #   `PHONE`, `PIN`, `SSN`, or `ALL`.
+    #   `PHONE`, `PIN`, `SSN`, `AGE`, `DATE_TIME`, `LICENSE_PLATE`,
+    #   `PASSPORT_NUMBER`, `PASSWORD`, `USERNAME`,
+    #   `VEHICLE_IDENTIFICATION_NUMBER`, or `ALL`.
     #
     #   Note that if you include `PiiEntityTypes` in your request, you must
     #   also include `ContentIdentificationType` or `ContentRedactionType`.
@@ -2777,6 +2779,16 @@ module Aws::TranscribeStreamingService
     #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/vocabulary-filtering.html
     #   @return [String]
     #
+    # @!attribute [rw] session_resume_window
+    #   Specify the time window, in minutes, during which your transcription
+    #   session can be resumed, measured from the stream start time. This
+    #   optional parameter accepts integer values from 1 to 300 (5 hours).
+    #
+    #   For example, if your stream starts at 1 PM and you specify a
+    #   `SessionResumeWindow` of 30 minutes, you can reconnect to the
+    #   session as many times as you want until 1:30 PM.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-streaming-2017-10-26/StartStreamTranscriptionRequest AWS API Documentation
     #
     class StartStreamTranscriptionRequest < Struct.new(
@@ -2802,7 +2814,8 @@ module Aws::TranscribeStreamingService
       :preferred_language,
       :identify_multiple_languages,
       :vocabulary_names,
-      :vocabulary_filter_names)
+      :vocabulary_filter_names,
+      :session_resume_window)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2914,6 +2927,11 @@ module Aws::TranscribeStreamingService
     #   specified in your request.
     #   @return [String]
     #
+    # @!attribute [rw] session_resume_window
+    #   Provides the session resume window, in minutes, that you specified
+    #   in your request.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-streaming-2017-10-26/StartStreamTranscriptionResponse AWS API Documentation
     #
     class StartStreamTranscriptionResponse < Struct.new(
@@ -2940,7 +2958,8 @@ module Aws::TranscribeStreamingService
       :preferred_language,
       :identify_multiple_languages,
       :vocabulary_names,
-      :vocabulary_filter_names)
+      :vocabulary_filter_names,
+      :session_resume_window)
       SENSITIVE = []
       include Aws::Structure
     end

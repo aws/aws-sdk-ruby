@@ -49,6 +49,7 @@ module Aws::Transfer
     ConnectorSecurityPolicyName = Shapes::StringShape.new(name: 'ConnectorSecurityPolicyName')
     ConnectorStatus = Shapes::StringShape.new(name: 'ConnectorStatus')
     ConnectorVpcLatticeEgressConfig = Shapes::StructureShape.new(name: 'ConnectorVpcLatticeEgressConfig')
+    ConnectorsIpAddressType = Shapes::StringShape.new(name: 'ConnectorsIpAddressType')
     CopyStepDetails = Shapes::StructureShape.new(name: 'CopyStepDetails')
     CreateAccessRequest = Shapes::StructureShape.new(name: 'CreateAccessRequest')
     CreateAccessResponse = Shapes::StructureShape.new(name: 'CreateAccessResponse')
@@ -508,6 +509,7 @@ module Aws::Transfer
     CreateConnectorRequest.add_member(:sftp_config, Shapes::ShapeRef.new(shape: SftpConnectorConfig, location_name: "SftpConfig"))
     CreateConnectorRequest.add_member(:security_policy_name, Shapes::ShapeRef.new(shape: ConnectorSecurityPolicyName, location_name: "SecurityPolicyName"))
     CreateConnectorRequest.add_member(:egress_config, Shapes::ShapeRef.new(shape: ConnectorEgressConfig, location_name: "EgressConfig"))
+    CreateConnectorRequest.add_member(:ip_address_type, Shapes::ShapeRef.new(shape: ConnectorsIpAddressType, location_name: "IpAddressType"))
     CreateConnectorRequest.struct_class = Types::CreateConnectorRequest
 
     CreateConnectorResponse.add_member(:connector_id, Shapes::ShapeRef.new(shape: ConnectorId, required: true, location_name: "ConnectorId"))
@@ -793,6 +795,7 @@ module Aws::Transfer
     DescribedConnector.add_member(:egress_type, Shapes::ShapeRef.new(shape: ConnectorEgressType, required: true, location_name: "EgressType"))
     DescribedConnector.add_member(:error_message, Shapes::ShapeRef.new(shape: ConnectorErrorMessage, location_name: "ErrorMessage"))
     DescribedConnector.add_member(:status, Shapes::ShapeRef.new(shape: ConnectorStatus, required: true, location_name: "Status"))
+    DescribedConnector.add_member(:ip_address_type, Shapes::ShapeRef.new(shape: ConnectorsIpAddressType, location_name: "IpAddressType"))
     DescribedConnector.struct_class = Types::DescribedConnector
 
     DescribedConnectorEgressConfig.add_member(:vpc_lattice, Shapes::ShapeRef.new(shape: DescribedConnectorVpcLatticeEgressConfig, location_name: "VpcLattice"))
@@ -1491,6 +1494,7 @@ module Aws::Transfer
     UpdateConnectorRequest.add_member(:sftp_config, Shapes::ShapeRef.new(shape: SftpConnectorConfig, location_name: "SftpConfig"))
     UpdateConnectorRequest.add_member(:security_policy_name, Shapes::ShapeRef.new(shape: ConnectorSecurityPolicyName, location_name: "SecurityPolicyName"))
     UpdateConnectorRequest.add_member(:egress_config, Shapes::ShapeRef.new(shape: UpdateConnectorEgressConfig, location_name: "EgressConfig"))
+    UpdateConnectorRequest.add_member(:ip_address_type, Shapes::ShapeRef.new(shape: ConnectorsIpAddressType, location_name: "IpAddressType"))
     UpdateConnectorRequest.struct_class = Types::UpdateConnectorRequest
 
     UpdateConnectorResponse.add_member(:connector_id, Shapes::ShapeRef.new(shape: ConnectorId, required: true, location_name: "ConnectorId"))

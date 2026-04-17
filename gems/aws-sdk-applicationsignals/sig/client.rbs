@@ -144,6 +144,10 @@ module Aws
                                                 metric_name: ::String?,
                                                 statistic: ::String?,
                                                 period_seconds: ::Integer?,
+                                                metric_source: {
+                                                  metric_source_key_attributes: Hash[::String, ::String],
+                                                  metric_source_attributes: Hash[::String, ::String]?
+                                                }?,
                                                 metric_data_queries: Array[
                                                   {
                                                     id: ::String,
@@ -262,7 +266,12 @@ module Aws
                                                 dependency_config: {
                                                   dependency_key_attributes: Hash[::String, ::String],
                                                   dependency_operation_name: ::String
-                                                }?
+                                                }?,
+                                                metric_source: {
+                                                  metric_source_key_attributes: Hash[::String, ::String],
+                                                  metric_source_attributes: Hash[::String, ::String]?
+                                                }?,
+                                                metric_name: ::String?
                                               },
                                               metric_threshold: ::Float?,
                                               comparison_operator: ("GreaterThanOrEqualTo" | "GreaterThan" | "LessThan" | "LessThanOrEqualTo")?
@@ -478,9 +487,13 @@ module Aws
                                            },
                                            ?max_results: ::Integer,
                                            ?next_token: ::String,
+                                           ?metric_source_types: Array[("ServiceOperation" | "CloudWatchMetric" | "ServiceDependency" | "AppMonitor" | "Canary" | "Service")],
                                            ?include_linked_accounts: bool,
                                            ?slo_owner_aws_account_id: ::String,
-                                           ?metric_source_types: Array[("ServiceOperation" | "CloudWatchMetric" | "ServiceDependency")]
+                                           ?metric_source: {
+                                             metric_source_key_attributes: Hash[::String, ::String],
+                                             metric_source_attributes: Hash[::String, ::String]?
+                                           }
                                          ) -> _ListServiceLevelObjectivesResponseSuccess
                                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListServiceLevelObjectivesResponseSuccess
 
@@ -618,6 +631,10 @@ module Aws
                                                 metric_name: ::String?,
                                                 statistic: ::String?,
                                                 period_seconds: ::Integer?,
+                                                metric_source: {
+                                                  metric_source_key_attributes: Hash[::String, ::String],
+                                                  metric_source_attributes: Hash[::String, ::String]?
+                                                }?,
                                                 metric_data_queries: Array[
                                                   {
                                                     id: ::String,
@@ -736,7 +753,12 @@ module Aws
                                                 dependency_config: {
                                                   dependency_key_attributes: Hash[::String, ::String],
                                                   dependency_operation_name: ::String
-                                                }?
+                                                }?,
+                                                metric_source: {
+                                                  metric_source_key_attributes: Hash[::String, ::String],
+                                                  metric_source_attributes: Hash[::String, ::String]?
+                                                }?,
+                                                metric_name: ::String?
                                               },
                                               metric_threshold: ::Float?,
                                               comparison_operator: ("GreaterThanOrEqualTo" | "GreaterThan" | "LessThan" | "LessThanOrEqualTo")?

@@ -19,6 +19,7 @@ module Aws::TimestreamInfluxDB
     Arn = Shapes::StringShape.new(name: 'Arn')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     Bucket = Shapes::StringShape.new(name: 'Bucket')
+    ClusterConfiguration = Shapes::StructureShape.new(name: 'ClusterConfiguration')
     ClusterDeploymentType = Shapes::StringShape.new(name: 'ClusterDeploymentType')
     ClusterStatus = Shapes::StringShape.new(name: 'ClusterStatus')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
@@ -64,6 +65,7 @@ module Aws::TimestreamInfluxDB
     GetDbInstanceOutput = Shapes::StructureShape.new(name: 'GetDbInstanceOutput')
     GetDbParameterGroupInput = Shapes::StructureShape.new(name: 'GetDbParameterGroupInput')
     GetDbParameterGroupOutput = Shapes::StructureShape.new(name: 'GetDbParameterGroupOutput')
+    IanaTimezone = Shapes::StringShape.new(name: 'IanaTimezone')
     InfluxDBv2Parameters = Shapes::StructureShape.new(name: 'InfluxDBv2Parameters')
     InfluxDBv2ParametersInfluxqlMaxSelectBucketsLong = Shapes::IntegerShape.new(name: 'InfluxDBv2ParametersInfluxqlMaxSelectBucketsLong')
     InfluxDBv2ParametersInfluxqlMaxSelectPointLong = Shapes::IntegerShape.new(name: 'InfluxDBv2ParametersInfluxqlMaxSelectPointLong')
@@ -144,6 +146,8 @@ module Aws::TimestreamInfluxDB
     LogDeliveryConfiguration = Shapes::StructureShape.new(name: 'LogDeliveryConfiguration')
     LogFormats = Shapes::StringShape.new(name: 'LogFormats')
     LogLevel = Shapes::StringShape.new(name: 'LogLevel')
+    MaintenanceSchedule = Shapes::StructureShape.new(name: 'MaintenanceSchedule')
+    MaintenanceWindow = Shapes::StringShape.new(name: 'MaintenanceWindow')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     NetworkType = Shapes::StringShape.new(name: 'NetworkType')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
@@ -167,6 +171,7 @@ module Aws::TimestreamInfluxDB
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     Status = Shapes::StringShape.new(name: 'Status')
     String = Shapes::StringShape.new(name: 'String')
+    SyntheticTimestamp_date_time = Shapes::TimestampShape.new(name: 'SyntheticTimestamp_date_time', timestampFormat: "iso8601")
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagKeys = Shapes::ListShape.new(name: 'TagKeys')
     TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
@@ -188,6 +193,11 @@ module Aws::TimestreamInfluxDB
 
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     AccessDeniedException.struct_class = Types::AccessDeniedException
+
+    ClusterConfiguration.add_member(:ingest_query_instances, Shapes::ShapeRef.new(shape: Integer, location_name: "ingestQueryInstances"))
+    ClusterConfiguration.add_member(:query_only_instances, Shapes::ShapeRef.new(shape: Integer, location_name: "queryOnlyInstances"))
+    ClusterConfiguration.add_member(:dedicated_compactor, Shapes::ShapeRef.new(shape: Boolean, location_name: "dedicatedCompactor"))
+    ClusterConfiguration.struct_class = Types::ClusterConfiguration
 
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     ConflictException.add_member(:resource_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "resourceId"))
@@ -211,6 +221,7 @@ module Aws::TimestreamInfluxDB
     CreateDbClusterInput.add_member(:deployment_type, Shapes::ShapeRef.new(shape: ClusterDeploymentType, location_name: "deploymentType"))
     CreateDbClusterInput.add_member(:failover_mode, Shapes::ShapeRef.new(shape: FailoverMode, location_name: "failoverMode"))
     CreateDbClusterInput.add_member(:log_delivery_configuration, Shapes::ShapeRef.new(shape: LogDeliveryConfiguration, location_name: "logDeliveryConfiguration"))
+    CreateDbClusterInput.add_member(:maintenance_schedule, Shapes::ShapeRef.new(shape: MaintenanceSchedule, location_name: "maintenanceSchedule"))
     CreateDbClusterInput.add_member(:tags, Shapes::ShapeRef.new(shape: RequestTagMap, location_name: "tags"))
     CreateDbClusterInput.struct_class = Types::CreateDbClusterInput
 
@@ -232,6 +243,7 @@ module Aws::TimestreamInfluxDB
     CreateDbInstanceInput.add_member(:db_parameter_group_identifier, Shapes::ShapeRef.new(shape: DbParameterGroupIdentifier, location_name: "dbParameterGroupIdentifier"))
     CreateDbInstanceInput.add_member(:deployment_type, Shapes::ShapeRef.new(shape: DeploymentType, location_name: "deploymentType"))
     CreateDbInstanceInput.add_member(:log_delivery_configuration, Shapes::ShapeRef.new(shape: LogDeliveryConfiguration, location_name: "logDeliveryConfiguration"))
+    CreateDbInstanceInput.add_member(:maintenance_schedule, Shapes::ShapeRef.new(shape: MaintenanceSchedule, location_name: "maintenanceSchedule"))
     CreateDbInstanceInput.add_member(:tags, Shapes::ShapeRef.new(shape: RequestTagMap, location_name: "tags"))
     CreateDbInstanceInput.add_member(:port, Shapes::ShapeRef.new(shape: Port, location_name: "port"))
     CreateDbInstanceInput.add_member(:network_type, Shapes::ShapeRef.new(shape: NetworkType, location_name: "networkType"))
@@ -259,6 +271,9 @@ module Aws::TimestreamInfluxDB
     CreateDbInstanceOutput.add_member(:db_cluster_id, Shapes::ShapeRef.new(shape: DbClusterId, location_name: "dbClusterId"))
     CreateDbInstanceOutput.add_member(:instance_mode, Shapes::ShapeRef.new(shape: InstanceMode, location_name: "instanceMode"))
     CreateDbInstanceOutput.add_member(:instance_modes, Shapes::ShapeRef.new(shape: InstanceModeList, location_name: "instanceModes"))
+    CreateDbInstanceOutput.add_member(:maintenance_schedule, Shapes::ShapeRef.new(shape: MaintenanceSchedule, location_name: "maintenanceSchedule"))
+    CreateDbInstanceOutput.add_member(:last_maintenance_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "lastMaintenanceTime"))
+    CreateDbInstanceOutput.add_member(:next_maintenance_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "nextMaintenanceTime"))
     CreateDbInstanceOutput.struct_class = Types::CreateDbInstanceOutput
 
     CreateDbParameterGroupInput.add_member(:name, Shapes::ShapeRef.new(shape: DbParameterGroupName, required: true, location_name: "name"))
@@ -362,6 +377,9 @@ module Aws::TimestreamInfluxDB
     DeleteDbInstanceOutput.add_member(:db_cluster_id, Shapes::ShapeRef.new(shape: DbClusterId, location_name: "dbClusterId"))
     DeleteDbInstanceOutput.add_member(:instance_mode, Shapes::ShapeRef.new(shape: InstanceMode, location_name: "instanceMode"))
     DeleteDbInstanceOutput.add_member(:instance_modes, Shapes::ShapeRef.new(shape: InstanceModeList, location_name: "instanceModes"))
+    DeleteDbInstanceOutput.add_member(:maintenance_schedule, Shapes::ShapeRef.new(shape: MaintenanceSchedule, location_name: "maintenanceSchedule"))
+    DeleteDbInstanceOutput.add_member(:last_maintenance_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "lastMaintenanceTime"))
+    DeleteDbInstanceOutput.add_member(:next_maintenance_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "nextMaintenanceTime"))
     DeleteDbInstanceOutput.struct_class = Types::DeleteDbInstanceOutput
 
     Duration.add_member(:duration_type, Shapes::ShapeRef.new(shape: DurationType, required: true, location_name: "durationType"))
@@ -387,10 +405,14 @@ module Aws::TimestreamInfluxDB
     GetDbClusterOutput.add_member(:publicly_accessible, Shapes::ShapeRef.new(shape: Boolean, location_name: "publiclyAccessible"))
     GetDbClusterOutput.add_member(:db_parameter_group_identifier, Shapes::ShapeRef.new(shape: DbParameterGroupIdentifier, location_name: "dbParameterGroupIdentifier"))
     GetDbClusterOutput.add_member(:log_delivery_configuration, Shapes::ShapeRef.new(shape: LogDeliveryConfiguration, location_name: "logDeliveryConfiguration"))
+    GetDbClusterOutput.add_member(:maintenance_schedule, Shapes::ShapeRef.new(shape: MaintenanceSchedule, location_name: "maintenanceSchedule"))
+    GetDbClusterOutput.add_member(:last_maintenance_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "lastMaintenanceTime"))
+    GetDbClusterOutput.add_member(:next_maintenance_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "nextMaintenanceTime"))
     GetDbClusterOutput.add_member(:influx_auth_parameters_secret_arn, Shapes::ShapeRef.new(shape: String, location_name: "influxAuthParametersSecretArn"))
     GetDbClusterOutput.add_member(:vpc_subnet_ids, Shapes::ShapeRef.new(shape: VpcSubnetIdList, location_name: "vpcSubnetIds"))
     GetDbClusterOutput.add_member(:vpc_security_group_ids, Shapes::ShapeRef.new(shape: VpcSecurityGroupIdList, location_name: "vpcSecurityGroupIds"))
     GetDbClusterOutput.add_member(:failover_mode, Shapes::ShapeRef.new(shape: FailoverMode, location_name: "failoverMode"))
+    GetDbClusterOutput.add_member(:cluster_configuration, Shapes::ShapeRef.new(shape: ClusterConfiguration, location_name: "clusterConfiguration"))
     GetDbClusterOutput.struct_class = Types::GetDbClusterOutput
 
     GetDbInstanceInput.add_member(:identifier, Shapes::ShapeRef.new(shape: DbInstanceIdentifier, required: true, location_name: "identifier"))
@@ -418,6 +440,9 @@ module Aws::TimestreamInfluxDB
     GetDbInstanceOutput.add_member(:db_cluster_id, Shapes::ShapeRef.new(shape: DbClusterId, location_name: "dbClusterId"))
     GetDbInstanceOutput.add_member(:instance_mode, Shapes::ShapeRef.new(shape: InstanceMode, location_name: "instanceMode"))
     GetDbInstanceOutput.add_member(:instance_modes, Shapes::ShapeRef.new(shape: InstanceModeList, location_name: "instanceModes"))
+    GetDbInstanceOutput.add_member(:maintenance_schedule, Shapes::ShapeRef.new(shape: MaintenanceSchedule, location_name: "maintenanceSchedule"))
+    GetDbInstanceOutput.add_member(:last_maintenance_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "lastMaintenanceTime"))
+    GetDbInstanceOutput.add_member(:next_maintenance_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "nextMaintenanceTime"))
     GetDbInstanceOutput.struct_class = Types::GetDbInstanceOutput
 
     GetDbParameterGroupInput.add_member(:identifier, Shapes::ShapeRef.new(shape: DbParameterGroupIdentifier, required: true, location_name: "identifier"))
@@ -608,6 +633,10 @@ module Aws::TimestreamInfluxDB
     LogDeliveryConfiguration.add_member(:s3_configuration, Shapes::ShapeRef.new(shape: S3Configuration, required: true, location_name: "s3Configuration"))
     LogDeliveryConfiguration.struct_class = Types::LogDeliveryConfiguration
 
+    MaintenanceSchedule.add_member(:timezone, Shapes::ShapeRef.new(shape: IanaTimezone, required: true, location_name: "timezone"))
+    MaintenanceSchedule.add_member(:preferred_maintenance_window, Shapes::ShapeRef.new(shape: MaintenanceWindow, required: true, location_name: "preferredMaintenanceWindow"))
+    MaintenanceSchedule.struct_class = Types::MaintenanceSchedule
+
     Parameters.add_member(:influx_d_bv_2, Shapes::ShapeRef.new(shape: InfluxDBv2Parameters, location_name: "InfluxDBv2"))
     Parameters.add_member(:influx_d_bv_3_core, Shapes::ShapeRef.new(shape: InfluxDBv3CoreParameters, location_name: "InfluxDBv3Core"))
     Parameters.add_member(:influx_d_bv_3_enterprise, Shapes::ShapeRef.new(shape: InfluxDBv3EnterpriseParameters, location_name: "InfluxDBv3Enterprise"))
@@ -660,6 +689,9 @@ module Aws::TimestreamInfluxDB
     RebootDbInstanceOutput.add_member(:db_cluster_id, Shapes::ShapeRef.new(shape: DbClusterId, location_name: "dbClusterId"))
     RebootDbInstanceOutput.add_member(:instance_mode, Shapes::ShapeRef.new(shape: InstanceMode, location_name: "instanceMode"))
     RebootDbInstanceOutput.add_member(:instance_modes, Shapes::ShapeRef.new(shape: InstanceModeList, location_name: "instanceModes"))
+    RebootDbInstanceOutput.add_member(:maintenance_schedule, Shapes::ShapeRef.new(shape: MaintenanceSchedule, location_name: "maintenanceSchedule"))
+    RebootDbInstanceOutput.add_member(:last_maintenance_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "lastMaintenanceTime"))
+    RebootDbInstanceOutput.add_member(:next_maintenance_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "nextMaintenanceTime"))
     RebootDbInstanceOutput.struct_class = Types::RebootDbInstanceOutput
 
     RequestTagMap.key = Shapes::ShapeRef.new(shape: TagKey)
@@ -700,6 +732,7 @@ module Aws::TimestreamInfluxDB
     UpdateDbClusterInput.add_member(:port, Shapes::ShapeRef.new(shape: Port, location_name: "port"))
     UpdateDbClusterInput.add_member(:db_instance_type, Shapes::ShapeRef.new(shape: DbInstanceType, location_name: "dbInstanceType"))
     UpdateDbClusterInput.add_member(:failover_mode, Shapes::ShapeRef.new(shape: FailoverMode, location_name: "failoverMode"))
+    UpdateDbClusterInput.add_member(:maintenance_schedule, Shapes::ShapeRef.new(shape: MaintenanceSchedule, location_name: "maintenanceSchedule"))
     UpdateDbClusterInput.struct_class = Types::UpdateDbClusterInput
 
     UpdateDbClusterOutput.add_member(:db_cluster_status, Shapes::ShapeRef.new(shape: ClusterStatus, location_name: "dbClusterStatus"))
@@ -713,6 +746,7 @@ module Aws::TimestreamInfluxDB
     UpdateDbInstanceInput.add_member(:deployment_type, Shapes::ShapeRef.new(shape: DeploymentType, location_name: "deploymentType"))
     UpdateDbInstanceInput.add_member(:db_storage_type, Shapes::ShapeRef.new(shape: DbStorageType, location_name: "dbStorageType"))
     UpdateDbInstanceInput.add_member(:allocated_storage, Shapes::ShapeRef.new(shape: AllocatedStorage, location_name: "allocatedStorage"))
+    UpdateDbInstanceInput.add_member(:maintenance_schedule, Shapes::ShapeRef.new(shape: MaintenanceSchedule, location_name: "maintenanceSchedule"))
     UpdateDbInstanceInput.struct_class = Types::UpdateDbInstanceInput
 
     UpdateDbInstanceOutput.add_member(:id, Shapes::ShapeRef.new(shape: DbInstanceId, required: true, location_name: "id"))
@@ -737,6 +771,9 @@ module Aws::TimestreamInfluxDB
     UpdateDbInstanceOutput.add_member(:db_cluster_id, Shapes::ShapeRef.new(shape: DbClusterId, location_name: "dbClusterId"))
     UpdateDbInstanceOutput.add_member(:instance_mode, Shapes::ShapeRef.new(shape: InstanceMode, location_name: "instanceMode"))
     UpdateDbInstanceOutput.add_member(:instance_modes, Shapes::ShapeRef.new(shape: InstanceModeList, location_name: "instanceModes"))
+    UpdateDbInstanceOutput.add_member(:maintenance_schedule, Shapes::ShapeRef.new(shape: MaintenanceSchedule, location_name: "maintenanceSchedule"))
+    UpdateDbInstanceOutput.add_member(:last_maintenance_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "lastMaintenanceTime"))
+    UpdateDbInstanceOutput.add_member(:next_maintenance_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "nextMaintenanceTime"))
     UpdateDbInstanceOutput.struct_class = Types::UpdateDbInstanceOutput
 
     ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))

@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.135.0 (2026-04-06)
+------------------
+
+* Feature - AWS Transfer Family Connectors now support IPv6 connectivity, enabling outbound connections to remote SFTP or AS2 servers using IPv4-only or dual-stack (IPv4 and IPv6) configurations based on network requirements.
+
+1.134.0 (2026-03-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.133.0 (2026-02-09)
 ------------------
 

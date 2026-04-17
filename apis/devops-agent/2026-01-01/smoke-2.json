@@ -1,0 +1,30 @@
+{
+  "version" : 2,
+  "testCases" : [ {
+    "id" : "GetAccountUsageSuccess",
+    "operationName" : "GetAccountUsage",
+    "input" : { },
+    "expectation" : {
+      "success" : { }
+    },
+    "config" : {
+      "region" : "ap-southeast-2",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "ListAgentSpacesSuccess",
+    "operationName" : "ListAgentSpaces",
+    "input" : { },
+    "expectation" : {
+      "success" : { }
+    },
+    "config" : {
+      "region" : "ap-southeast-2",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  } ]
+}

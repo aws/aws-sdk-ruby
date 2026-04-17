@@ -97,8 +97,8 @@ module Aws
 
       def matches_error?(acceptor, response)
         case acceptor['expected']
-        when 'false' then response.error.nil?
-        when 'true' then !response.error.nil?
+        when 'false', false then response.error.nil?
+        when 'true', true then !response.error.nil?
         else
           response.error.is_a?(Aws::Errors::ServiceError) &&
             response.error.code == acceptor['expected'].delete('.')

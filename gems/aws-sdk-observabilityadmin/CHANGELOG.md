@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.25.0 (2026-04-10)
+------------------
+
+* Feature - CloudWatch Observability Admin adds support for multi-region telemetry evaluation and telemetry enablement rules.
+
+1.24.0 (2026-03-31)
+------------------
+
+* Feature - This release adds the Bedrock and Security Hub resource types for Omnia Enablement launch for March 31.
+
+1.23.0 (2026-03-19)
+------------------
+
+* Feature - Adding a new field in the CreateCentralizationRuleForOrganization, UpdateCentralizationRuleForOrganization API and updating the GetCentralizationRuleForOrganization API response to include the new field
+
+1.22.0 (2026-03-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.21.0 (2026-02-24)
+------------------
+
+* Feature - Adding a new field in the CreateCentralizationRuleForOrganization, UpdateCentralizationRuleForOrganization API and updating the GetCentralizationRuleForOrganization API response to include the new field
+
 1.20.0 (2026-01-16)
 ------------------
 

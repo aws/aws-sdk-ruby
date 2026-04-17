@@ -216,7 +216,9 @@ module Aws
                            },
                          ]?
                        },
-                     ]
+                     ],
+                     ?enable_vpc_networking: bool,
+                     ?enable_internet_access_gateway: bool
                    ) -> DBCluster
                  | (?Hash[Symbol, untyped]) -> DBCluster
 

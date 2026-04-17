@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.34.0 (2026-03-26)
+------------------
+
+* Feature - With this release we are providing an option to accounts to have their export delivered to an S3 bucket that is not owned by the account.
+
+1.33.0 (2026-03-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.32.0 (2026-03-06)
+------------------
+
+* Feature - Fixed wrong endpoint resolutions in few regions. Added AWS CFN resource schema for BCM Data Exports. Added max value validation for pagination parameter. Fixed ARN format validation for BCM Data Exports resources. Updated size constraints for table properties. Added AccessDeniedException error.
+
 1.31.0 (2026-01-16)
 ------------------
 

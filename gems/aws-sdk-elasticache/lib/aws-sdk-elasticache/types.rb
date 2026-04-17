@@ -1502,7 +1502,8 @@ module Aws::ElastiCache
     #
     # @!attribute [rw] target_serverless_cache_snapshot_name
     #   The identifier for the snapshot to be created. Available for Valkey,
-    #   Redis OSS and Serverless Memcached only.
+    #   Redis OSS and Serverless Memcached only. This value is stored as a
+    #   lowercase string.
     #   @return [String]
     #
     # @!attribute [rw] kms_key_id
@@ -1549,7 +1550,8 @@ module Aws::ElastiCache
     # @!attribute [rw] target_snapshot_name
     #   A name for the snapshot copy. ElastiCache does not permit
     #   overwriting a snapshot, therefore this name must be unique within
-    #   its context - ElastiCache or an Amazon S3 bucket if exporting.
+    #   its context - ElastiCache or an Amazon S3 bucket if exporting. This
+    #   value is stored as a lowercase string.
     #   @return [String]
     #
     # @!attribute [rw] target_bucket
@@ -2076,7 +2078,8 @@ module Aws::ElastiCache
     # Represents the input of a `CreateCacheParameterGroup` operation.
     #
     # @!attribute [rw] cache_parameter_group_name
-    #   A user-specified name for the cache parameter group.
+    #   A user-specified name for the cache parameter group. This value is
+    #   stored as a lowercase string.
     #   @return [String]
     #
     # @!attribute [rw] cache_parameter_group_family
@@ -2248,7 +2251,8 @@ module Aws::ElastiCache
     #
     # @!attribute [rw] primary_replication_group_id
     #   The name of the primary cluster that accepts writes and will
-    #   replicate updates to the secondary cluster.
+    #   replicate updates to the secondary cluster. This value is stored as
+    #   a lowercase string.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CreateGlobalReplicationGroupMessage AWS API Documentation
@@ -2733,8 +2737,8 @@ module Aws::ElastiCache
     #   when you create the replication group.
     #
     #   **Required:** Only available when creating a replication group in an
-    #   Amazon VPC using Valkey 7.2 and later, Redis OSS version `3.2.6`, or
-    #   Redis OSS `4.x` and later.
+    #   Amazon VPC using Valkey `7.2` and later, Redis OSS version `3.2.6`,
+    #   or Redis OSS `4.x` and later.
     #
     #   Default: `true` when using Valkey, `false` when using Redis OSS
     #   @return [Boolean]
@@ -2940,10 +2944,9 @@ module Aws::ElastiCache
     #   @return [Array<String>]
     #
     # @!attribute [rw] snapshot_retention_limit
-    #   The number of snapshots that will be retained for the serverless
-    #   cache that is being created. As new snapshots beyond this limit are
-    #   added, the oldest snapshots will be deleted on a rolling basis.
-    #   Available for Valkey, Redis OSS and Serverless Memcached only.
+    #   The number of days for which ElastiCache retains automatic snapshots
+    #   before deleting them. Available for Valkey, Redis OSS and Serverless
+    #   Memcached only. The maximum value allowed is 35 days.
     #   @return [Integer]
     #
     # @!attribute [rw] daily_snapshot_time
@@ -2951,6 +2954,13 @@ module Aws::ElastiCache
     #   serverless cache. By default this number is populated with 0, i.e.
     #   no snapshots will be created on an automatic daily basis. Available
     #   for Valkey, Redis OSS and Serverless Memcached only.
+    #   @return [String]
+    #
+    # @!attribute [rw] network_type
+    #   The IP protocol version used by the serverless cache. Must be either
+    #   `ipv4` \| `ipv6` \| `dual_stack`. `ipv6` is only supported with
+    #   ipv6-only subnets. If not specified, defaults to `ipv4`, unless all
+    #   provided subnets are IPv6-only, in which case it defaults to `ipv6`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CreateServerlessCacheRequest AWS API Documentation
@@ -2968,7 +2978,8 @@ module Aws::ElastiCache
       :user_group_id,
       :subnet_ids,
       :snapshot_retention_limit,
-      :daily_snapshot_time)
+      :daily_snapshot_time,
+      :network_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2988,7 +2999,8 @@ module Aws::ElastiCache
     # @!attribute [rw] serverless_cache_snapshot_name
     #   The name for the snapshot being created. Must be unique for the
     #   customer account. Available for Valkey, Redis OSS and Serverless
-    #   Memcached only. Must be between 1 and 255 characters.
+    #   Memcached only. Must be between 1 and 255 characters. This value is
+    #   stored as a lowercase string.
     #   @return [String]
     #
     # @!attribute [rw] serverless_cache_name
@@ -3046,7 +3058,8 @@ module Aws::ElastiCache
     #   @return [String]
     #
     # @!attribute [rw] snapshot_name
-    #   A name for the snapshot being created.
+    #   A name for the snapshot being created. This value is stored as a
+    #   lowercase string.
     #   @return [String]
     #
     # @!attribute [rw] kms_key_id
@@ -3085,7 +3098,8 @@ module Aws::ElastiCache
     end
 
     # @!attribute [rw] user_group_id
-    #   The ID of the user group.
+    #   The ID of the user group. This value is stored as a lowercase
+    #   string.
     #   @return [String]
     #
     # @!attribute [rw] engine
@@ -3115,7 +3129,7 @@ module Aws::ElastiCache
     end
 
     # @!attribute [rw] user_id
-    #   The ID of the user.
+    #   The ID of the user. This value is stored as a lowercase string.
     #   @return [String]
     #
     # @!attribute [rw] user_name
@@ -6249,7 +6263,7 @@ module Aws::ElastiCache
     #
     # @!attribute [rw] engine
     #   Modifies the engine listed in a global replication group message.
-    #   The options are redis, memcached or valkey.
+    #   The options are valkey, memcached or redis.
     #   @return [String]
     #
     # @!attribute [rw] engine_version
@@ -6435,7 +6449,7 @@ module Aws::ElastiCache
     #
     # @!attribute [rw] engine
     #   Modifies the engine listed in a replication group message. The
-    #   options are redis, memcached or valkey.
+    #   options are valkey, memcached or redis.
     #   @return [String]
     #
     # @!attribute [rw] engine_version
@@ -6768,7 +6782,7 @@ module Aws::ElastiCache
     #
     # @!attribute [rw] engine
     #   Modifies the engine listed in a serverless cache request. The
-    #   options are redis, memcached or valkey.
+    #   options are valkey, memcached or redis.
     #   @return [String]
     #
     # @!attribute [rw] major_engine_version
@@ -7832,8 +7846,8 @@ module Aws::ElastiCache
     #   @return [String]
     #
     # @!attribute [rw] engine
-    #   The engine used in a replication group. The options are redis,
-    #   memcached or valkey.
+    #   The engine used in a replication group. The options are valkey,
+    #   memcached or redis.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ReplicationGroup AWS API Documentation
@@ -8629,9 +8643,9 @@ module Aws::ElastiCache
     #   @return [Array<String>]
     #
     # @!attribute [rw] snapshot_retention_limit
-    #   The current setting for the number of serverless cache snapshots the
-    #   system will retain. Available for Valkey, Redis OSS and Serverless
-    #   Memcached only.
+    #   The number of days for which ElastiCache retains automatic snapshots
+    #   before deleting them. Available for Valkey, Redis OSS and Serverless
+    #   Memcached only. The maximum value allowed is 35 days.
     #   @return [Integer]
     #
     # @!attribute [rw] daily_snapshot_time
@@ -8639,6 +8653,14 @@ module Aws::ElastiCache
     #   NULL, i.e. snapshots will not be created at a specific time on a
     #   daily basis. Available for Valkey, Redis OSS and Serverless
     #   Memcached only.
+    #   @return [String]
+    #
+    # @!attribute [rw] network_type
+    #   The type of IP address protocol used by the serverless cache. Must
+    #   be either `ipv4` \| `ipv6` \| `dual_stack`. `ipv6` is only supported
+    #   with IPv6-only subnets. If not specified, defaults to `ipv4`, unless
+    #   all provided subnets are IPv6-only, in which case it defaults to
+    #   `ipv6`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ServerlessCache AWS API Documentation
@@ -8660,7 +8682,8 @@ module Aws::ElastiCache
       :user_group_id,
       :subnet_ids,
       :snapshot_retention_limit,
-      :daily_snapshot_time)
+      :daily_snapshot_time,
+      :network_type)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.132.0 (2026-04-16)
+------------------
+
+* Feature - Add content redirection to Update Stack
+
+1.131.0 (2026-04-02)
+------------------
+
+* Feature - Amazon WorkSpaces Applications now supports drain mode for instances in multi-session fleets. This capability allows administrators to instruct individual fleet instances to stop accepting new user sessions while allowing existing sessions to continue uninterrupted.
+
+1.130.0 (2026-03-30)
+------------------
+
+* Feature - Add support for URL Redirection
+
+1.129.0 (2026-03-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.128.0 (2026-02-20)
+------------------
+
+* Feature - Adding new attribute to disable IMDS v1 APIs for fleet, Image Builder and AppBlockBuilder instances.
+
 1.127.0 (2026-01-16)
 ------------------
 

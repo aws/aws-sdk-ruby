@@ -32,6 +32,7 @@ module Aws::RedshiftDataAPIService
       attr_accessor database: ::String
       attr_accessor with_event: bool
       attr_accessor statement_name: ::String
+      attr_accessor parameters: ::Array[Types::SqlParameter]
       attr_accessor workgroup_name: ::String
       attr_accessor client_token: ::String
       attr_accessor result_format: ("JSON" | "CSV")

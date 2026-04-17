@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.22.0 (2026-04-02)
+------------------
+
+* Feature - This release updates API reference documentation for Amazon Location Service Places APIs to reflect regional restrictions for Grab Maps users in ReverseGeocode, Suggest, SearchText, and GetPlace operations
+
+1.21.0 (2026-03-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.20.0 (2026-01-16)
 ------------------
 

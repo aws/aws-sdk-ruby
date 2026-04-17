@@ -124,6 +124,15 @@ module Aws
                       ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 
+      interface _CancelRunBatchResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CancelRunBatchResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Omics/Client.html#cancel_run_batch-instance_method
+      def cancel_run_batch: (
+                              batch_id: ::String
+                            ) -> _CancelRunBatchResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CancelRunBatchResponseSuccess
+
       interface _CancelVariantImportJobResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CancelVariantImportResponse]
       end
@@ -215,6 +224,32 @@ module Aws
                                              ?tags: Hash[::String, ::String]
                                            ) -> _CreateAnnotationStoreVersionResponseSuccess
                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAnnotationStoreVersionResponseSuccess
+
+      interface _CreateConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateConfigurationResponse]
+        def arn: () -> ::String
+        def uuid: () -> ::String
+        def name: () -> ::String
+        def description: () -> ::String
+        def run_configurations: () -> Types::RunConfigurationsResponse
+        def status: () -> ("CREATING" | "ACTIVE" | "UPDATING" | "DELETING" | "DELETED" | "FAILED")
+        def creation_time: () -> ::Time
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Omics/Client.html#create_configuration-instance_method
+      def create_configuration: (
+                                  name: ::String,
+                                  ?description: ::String,
+                                  run_configurations: {
+                                    vpc_config: {
+                                      security_group_ids: Array[::String]?,
+                                      subnet_ids: Array[::String]?
+                                    }?
+                                  },
+                                  ?tags: Hash[::String, ::String],
+                                  request_id: ::String
+                                ) -> _CreateConfigurationResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateConfigurationResponseSuccess
 
       interface _CreateMultipartReadSetUploadResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateMultipartReadSetUploadResponse]
@@ -518,6 +553,18 @@ module Aws
                                             ) -> _DeleteAnnotationStoreVersionsResponseSuccess
                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteAnnotationStoreVersionsResponseSuccess
 
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Omics/Client.html#delete_batch-instance_method
+      def delete_batch: (
+                          batch_id: ::String
+                        ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Omics/Client.html#delete_configuration-instance_method
+      def delete_configuration: (
+                                  name: ::String
+                                ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
       interface _DeleteReferenceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteReferenceResponse]
       end
@@ -542,6 +589,15 @@ module Aws
                         id: ::String
                       ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _DeleteRunBatchResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteRunBatchResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Omics/Client.html#delete_run_batch-instance_method
+      def delete_run_batch: (
+                              batch_id: ::String
+                            ) -> _DeleteRunBatchResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteRunBatchResponseSuccess
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Omics/Client.html#delete_run_cache-instance_method
       def delete_run_cache: (
@@ -675,6 +731,47 @@ module Aws
                                           version_name: ::String
                                         ) -> _GetAnnotationStoreVersionResponseSuccess
                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAnnotationStoreVersionResponseSuccess
+
+      interface _GetBatchResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetBatchResponse]
+        def id: () -> ::String
+        def arn: () -> ::String
+        def uuid: () -> ::String
+        def name: () -> ::String
+        def status: () -> ("PENDING" | "SUBMITTING" | "INPROGRESS" | "STOPPING" | "CANCELLED" | "FAILED" | "PROCESSED" | "RUNS_DELETING" | "RUNS_DELETED")
+        def tags: () -> ::Hash[::String, ::String]
+        def total_runs: () -> ::Integer
+        def default_run_setting: () -> Types::DefaultRunSetting
+        def submission_summary: () -> Types::SubmissionSummary
+        def run_summary: () -> Types::RunSummary
+        def creation_time: () -> ::Time
+        def submitted_time: () -> ::Time
+        def processed_time: () -> ::Time
+        def failed_time: () -> ::Time
+        def failure_reason: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Omics/Client.html#get_batch-instance_method
+      def get_batch: (
+                       batch_id: ::String
+                     ) -> _GetBatchResponseSuccess
+                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetBatchResponseSuccess
+
+      interface _GetConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetConfigurationResponse]
+        def arn: () -> ::String
+        def uuid: () -> ::String
+        def name: () -> ::String
+        def description: () -> ::String
+        def run_configurations: () -> Types::RunConfigurationsResponse
+        def status: () -> ("CREATING" | "ACTIVE" | "UPDATING" | "DELETING" | "DELETED" | "FAILED")
+        def creation_time: () -> ::Time
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Omics/Client.html#get_configuration-instance_method
+      def get_configuration: (
+                               name: ::String
+                             ) -> _GetConfigurationResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetConfigurationResponseSuccess
 
       interface _GetReadSetResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetReadSetResponse]
@@ -852,6 +949,7 @@ module Aws
         def role_arn: () -> ::String
         def name: () -> ::String
         def run_group_id: () -> ::String
+        def batch_id: () -> ::String
         def priority: () -> ::Integer
         def definition: () -> ::String
         def digest: () -> ::String
@@ -876,6 +974,9 @@ module Aws
         def workflow_owner_id: () -> ::String
         def workflow_version_name: () -> ::String
         def workflow_uuid: () -> ::String
+        def networking_mode: () -> ("RESTRICTED" | "VPC")
+        def configuration: () -> Types::ConfigurationDetails
+        def vpc_config: () -> Types::VpcConfigResponse
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Omics/Client.html#get_run-instance_method
       def get_run: (
@@ -1155,6 +1256,33 @@ module Aws
                                   ) -> _ListAnnotationStoresResponseSuccess
                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAnnotationStoresResponseSuccess
 
+      interface _ListBatchResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListBatchResponse]
+        def items: () -> ::Array[Types::BatchListItem]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Omics/Client.html#list_batch-instance_method
+      def list_batch: (
+                        ?max_items: ::Integer,
+                        ?starting_token: ::String,
+                        ?status: ("PENDING" | "SUBMITTING" | "INPROGRESS" | "STOPPING" | "CANCELLED" | "FAILED" | "PROCESSED" | "RUNS_DELETING" | "RUNS_DELETED"),
+                        ?name: ::String,
+                        ?run_group_id: ::String
+                      ) -> _ListBatchResponseSuccess
+                    | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListBatchResponseSuccess
+
+      interface _ListConfigurationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListConfigurationsResponse]
+        def items: () -> ::Array[Types::ConfigurationListItem]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Omics/Client.html#list_configurations-instance_method
+      def list_configurations: (
+                                 ?max_results: ::Integer,
+                                 ?starting_token: ::String
+                               ) -> _ListConfigurationsResponseSuccess
+                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListConfigurationsResponseSuccess
+
       interface _ListMultipartReadSetUploadsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListMultipartReadSetUploadsResponse]
         def next_token: () -> ::String
@@ -1367,11 +1495,28 @@ module Aws
       def list_runs: (
                        ?name: ::String,
                        ?run_group_id: ::String,
+                       ?batch_id: ::String,
                        ?starting_token: ::String,
                        ?max_results: ::Integer,
                        ?status: ("PENDING" | "STARTING" | "RUNNING" | "STOPPING" | "COMPLETED" | "DELETED" | "CANCELLED" | "FAILED")
                      ) -> _ListRunsResponseSuccess
                    | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRunsResponseSuccess
+
+      interface _ListRunsInBatchResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListRunsInBatchResponse]
+        def runs: () -> ::Array[Types::RunBatchListItem]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Omics/Client.html#list_runs_in_batch-instance_method
+      def list_runs_in_batch: (
+                                batch_id: ::String,
+                                ?max_items: ::Integer,
+                                ?starting_token: ::String,
+                                ?submission_status: ("SUCCESS" | "FAILED" | "CANCEL_SUCCESS" | "CANCEL_FAILED" | "DELETE_SUCCESS" | "DELETE_FAILED"),
+                                ?run_setting_id: ::String,
+                                ?run_id: ::String
+                              ) -> _ListRunsInBatchResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRunsInBatchResponseSuccess
 
       interface _ListSequenceStoresResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListSequenceStoresResponse]
@@ -1639,6 +1784,8 @@ module Aws
         def tags: () -> ::Hash[::String, ::String]
         def uuid: () -> ::String
         def run_output_uri: () -> ::String
+        def configuration: () -> Types::ConfigurationDetails
+        def networking_mode: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Omics/Client.html#start_run-instance_method
       def start_run: (
@@ -1661,9 +1808,63 @@ module Aws
                        ?retention_mode: ("RETAIN" | "REMOVE"),
                        ?storage_type: ("STATIC" | "DYNAMIC"),
                        ?workflow_owner_id: ::String,
-                       ?workflow_version_name: ::String
+                       ?workflow_version_name: ::String,
+                       ?networking_mode: ("RESTRICTED" | "VPC"),
+                       ?configuration_name: ::String
                      ) -> _StartRunResponseSuccess
                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartRunResponseSuccess
+
+      interface _StartRunBatchResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartRunBatchResponse]
+        def id: () -> ::String
+        def arn: () -> ::String
+        def status: () -> ("PENDING" | "SUBMITTING" | "INPROGRESS" | "STOPPING" | "CANCELLED" | "FAILED" | "PROCESSED" | "RUNS_DELETING" | "RUNS_DELETED")
+        def uuid: () -> ::String
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Omics/Client.html#start_run_batch-instance_method
+      def start_run_batch: (
+                             ?batch_name: ::String,
+                             request_id: ::String,
+                             ?tags: Hash[::String, ::String],
+                             default_run_setting: {
+                               workflow_id: ::String,
+                               workflow_type: ("PRIVATE" | "READY2RUN")?,
+                               role_arn: ::String,
+                               name: ::String?,
+                               cache_id: ::String?,
+                               cache_behavior: ("CACHE_ON_FAILURE" | "CACHE_ALWAYS")?,
+                               run_group_id: ::String?,
+                               priority: ::Integer?,
+                               parameters: {
+                               }?,
+                               storage_capacity: ::Integer?,
+                               output_uri: ::String?,
+                               log_level: ("OFF" | "FATAL" | "ERROR" | "ALL")?,
+                               run_tags: Hash[::String, ::String]?,
+                               retention_mode: ("RETAIN" | "REMOVE")?,
+                               storage_type: ("STATIC" | "DYNAMIC")?,
+                               workflow_owner_id: ::String?,
+                               output_bucket_owner_id: ::String?,
+                               workflow_version_name: ::String?
+                             },
+                             batch_run_settings: {
+                               inline_settings: Array[
+                                 {
+                                   run_setting_id: ::String,
+                                   name: ::String?,
+                                   output_uri: ::String?,
+                                   priority: ::Integer?,
+                                   parameters: {
+                                   }?,
+                                   output_bucket_owner_id: ::String?,
+                                   run_tags: Hash[::String, ::String]?
+                                 },
+                               ]?,
+                               s3_uri_settings: ::String?
+                             }
+                           ) -> _StartRunBatchResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartRunBatchResponseSuccess
 
       interface _StartVariantImportJobResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::StartVariantImportResponse]

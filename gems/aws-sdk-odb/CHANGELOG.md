@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.17.0 (2026-03-31)
+------------------
+
+* Feature - Adds support for EC2 Placement Group integration with ODB Network. The GetOdbNetwork and ListOdbNetworks API responses now include the ec2PlacementGroupIds field.
+
+1.16.0 (2026-03-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.15.0 (2026-02-27)
+------------------
+
+* Feature - ODB Networking Route Management is a feature improvement which allows for implicit creation and deletion of EC2 Routes in the Peer Network Route Table designated by the customer via new optional input. This feature release is combined with Multiple App-VPC functionality for ODB Network Peering(s).
+
 1.14.0 (2026-01-20)
 ------------------
 

@@ -1,0 +1,95 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module ConnectHealth
+    class AsyncClient < ::Seahorse::Client::AsyncBase
+      include ::Aws::AsyncClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectHealth/AsyncClient.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?account_id: String,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?auth_scheme_preference: Array[String],
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?event_stream_handler: Proc,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?input_event_stream_handler: Proc,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?output_event_stream_handler: Proc,
+                      ?profile: String,
+                      ?request_checksum_calculation: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?response_checksum_validation: String,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?sigv4a_signing_region_set: Array[String],
+                      ?stub_responses: untyped,
+                      ?telemetry_provider: Aws::Telemetry::TelemetryProviderBase,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?connection_read_timeout: (Float | Integer),
+                      ?connection_timeout: (Float | Integer),
+                      ?enable_alpn: bool,
+                      ?max_concurrent_streams: (Float | Integer),
+                      ?read_chunk_size: (Float | Integer),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _StartMedicalScribeListeningSessionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartMedicalScribeListeningSessionOutput]
+        def session_id: () -> ::String
+        def domain_id: () -> ::String
+        def subscription_id: () -> ::String
+        def request_id: () -> ::String
+        def language_code: () -> ("en-US")
+        def media_sample_rate_hertz: () -> ::Integer
+        def media_encoding: () -> ("pcm" | "flac")
+        def response_stream: () -> Types::MedicalScribeOutputStream
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectHealth/AsyncClient.html#start_medical_scribe_listening_session-instance_method
+      def start_medical_scribe_listening_session: (
+                                                    session_id: ::String,
+                                                    domain_id: ::String,
+                                                    subscription_id: ::String,
+                                                    language_code: ("en-US"),
+                                                    media_sample_rate_hertz: ::Integer,
+                                                    media_encoding: ("pcm" | "flac"),
+                                                    input_event_stream_handler: untyped,
+                                                    output_event_stream_handler: untyped
+                                                  ) ?{ (*untyped) -> void } -> _StartMedicalScribeListeningSessionResponseSuccess
+                                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) ?{ (*untyped) -> void } -> _StartMedicalScribeListeningSessionResponseSuccess
+    end
+  end
+end

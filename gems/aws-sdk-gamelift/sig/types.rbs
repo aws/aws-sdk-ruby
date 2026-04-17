@@ -157,12 +157,14 @@ module Aws::GameLift
       attr_accessor deployment_details: Types::DeploymentDetails
       attr_accessor log_configuration: Types::LogConfiguration
       attr_accessor location_attributes: ::Array[Types::ContainerFleetLocationAttributes]
+      attr_accessor player_gateway_mode: ("DISABLED" | "ENABLED" | "REQUIRED")
       SENSITIVE: []
     end
 
     class ContainerFleetLocationAttributes
       attr_accessor location: ::String
       attr_accessor status: ("PENDING" | "CREATING" | "CREATED" | "ACTIVATING" | "ACTIVE" | "UPDATING" | "DELETING")
+      attr_accessor player_gateway_status: ("DISABLED" | "ENABLED")
       SENSITIVE: []
     end
 
@@ -263,6 +265,7 @@ module Aws::GameLift
       attr_accessor game_session_creation_limit_policy: Types::GameSessionCreationLimitPolicy
       attr_accessor log_configuration: Types::LogConfiguration
       attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor player_gateway_mode: ("DISABLED" | "ENABLED" | "REQUIRED")
       SENSITIVE: []
     end
 
@@ -313,6 +316,8 @@ module Aws::GameLift
       attr_accessor compute_type: ("EC2" | "ANYWHERE")
       attr_accessor anywhere_configuration: Types::AnywhereConfiguration
       attr_accessor instance_role_credentials_provider: ("SHARED_CREDENTIAL_FILE")
+      attr_accessor player_gateway_mode: ("DISABLED" | "ENABLED" | "REQUIRED")
+      attr_accessor player_gateway_configuration: Types::PlayerGatewayConfiguration
       SENSITIVE: []
     end
 
@@ -1107,6 +1112,8 @@ module Aws::GameLift
       attr_accessor compute_type: ("EC2" | "ANYWHERE")
       attr_accessor anywhere_configuration: Types::AnywhereConfiguration
       attr_accessor instance_role_credentials_provider: ("SHARED_CREDENTIAL_FILE")
+      attr_accessor player_gateway_mode: ("DISABLED" | "ENABLED" | "REQUIRED")
+      attr_accessor player_gateway_configuration: Types::PlayerGatewayConfiguration
       SENSITIVE: []
     end
 
@@ -1252,6 +1259,8 @@ module Aws::GameLift
       attr_accessor game_session_data: ::String
       attr_accessor matchmaker_data: ::String
       attr_accessor location: ::String
+      attr_accessor compute_name: ::String
+      attr_accessor player_gateway_status: ("DISABLED" | "ENABLED")
       SENSITIVE: [:ip_address, :port]
     end
 
@@ -1261,6 +1270,7 @@ module Aws::GameLift
       attr_accessor dns_name: ::String
       attr_accessor port: ::Integer
       attr_accessor matched_player_sessions: ::Array[Types::MatchedPlayerSession]
+      attr_accessor player_gateway_status: ("DISABLED" | "ENABLED")
       SENSITIVE: [:ip_address]
     end
 
@@ -1301,6 +1311,7 @@ module Aws::GameLift
       attr_accessor game_session_data: ::String
       attr_accessor matchmaker_data: ::String
       attr_accessor priority_configuration_override: Types::PriorityConfigurationOverride
+      attr_accessor player_gateway_status: ("DISABLED" | "ENABLED")
       SENSITIVE: [:ip_address, :port]
     end
 
@@ -1373,6 +1384,18 @@ module Aws::GameLift
 
     class GetInstanceAccessOutput
       attr_accessor instance_access: Types::InstanceAccess
+      SENSITIVE: []
+    end
+
+    class GetPlayerConnectionDetailsInput
+      attr_accessor game_session_id: ::String
+      attr_accessor player_ids: ::Array[::String]
+      SENSITIVE: [:player_ids]
+    end
+
+    class GetPlayerConnectionDetailsOutput
+      attr_accessor game_session_id: ::String
+      attr_accessor player_connection_details: ::Array[Types::PlayerConnectionDetail]
       SENSITIVE: []
     end
 
@@ -1648,6 +1671,7 @@ module Aws::GameLift
     class LocationState
       attr_accessor location: ::String
       attr_accessor status: ("NEW" | "DOWNLOADING" | "VALIDATING" | "BUILDING" | "ACTIVATING" | "ACTIVE" | "DELETING" | "ERROR" | "TERMINATED" | "NOT_FOUND")
+      attr_accessor player_gateway_status: ("DISABLED" | "ENABLED")
       SENSITIVE: []
     end
 
@@ -1751,6 +1775,25 @@ module Aws::GameLift
       attr_accessor team: ::String
       attr_accessor latency_in_ms: ::Hash[::String, ::Integer]
       SENSITIVE: [:player_id]
+    end
+
+    class PlayerConnectionDetail
+      attr_accessor player_id: ::String
+      attr_accessor endpoints: ::Array[Types::PlayerConnectionEndpoint]
+      attr_accessor player_gateway_token: ::String
+      attr_accessor expiration: ::Time
+      SENSITIVE: [:player_id]
+    end
+
+    class PlayerConnectionEndpoint
+      attr_accessor ip_address: ::String
+      attr_accessor port: ::Integer
+      SENSITIVE: [:ip_address, :port]
+    end
+
+    class PlayerGatewayConfiguration
+      attr_accessor game_server_ip_protocol_supported: ("IPv4" | "DUAL_STACK")
+      SENSITIVE: []
     end
 
     class PlayerLatency

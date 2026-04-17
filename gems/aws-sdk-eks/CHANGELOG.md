@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.163.0 (2026-04-07)
+------------------
+
+* Feature - EKS MNG WarmPool feature to support ASG WarmPool feature.
+
+1.162.0 (2026-03-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.161.0 (2026-03-11)
+------------------
+
+* Feature - Adds support for a new tier in controlPlaneScalingConfig on EKS Clusters.
+
 1.160.0 (2026-02-11)
 ------------------
 

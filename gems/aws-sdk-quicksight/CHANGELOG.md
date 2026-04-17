@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.177.0 (2026-03-31)
+------------------
+
+* Feature - Adds StartAutomationJob and DescribeAutomationJob APIs for automation jobs. Adds three custom permission capabilities that allow admins to control whether users can manage Spaces and chat agents. Adds an OAuthClientCredentials structure to provide OAuth 2.0 client credentials inline to data sources.
+
+1.176.0 (2026-03-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.175.0 (2026-03-13)
+------------------
+
+* Feature - The change adds a new capability named ManageSharedFolders in Custom Permissions
+
+1.174.0 (2026-03-04)
+------------------
+
+* Feature - Added several new values for Capabilities, increased visual limit per sheet from previous limit to 75, renamed Quick Suite to Quick in several places.
+
+1.173.0 (2026-02-23)
+------------------
+
+* Feature - Adds support for SEMISTRUCT to InputColumn Type
+
 1.172.0 (2026-01-30)
 ------------------
 

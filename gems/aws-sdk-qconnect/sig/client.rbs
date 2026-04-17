@@ -2003,7 +2003,8 @@ module Aws
                           },
                           ?client_token: ::String,
                           ?orchestrator_use_case: ::String,
-                          ?metadata: Hash[::String, ::String]
+                          ?metadata: Hash[::String, ::String],
+                          ?origin_request_id: ::String
                         ) -> _SendMessageResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SendMessageResponseSuccess
 

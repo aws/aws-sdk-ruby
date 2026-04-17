@@ -38,6 +38,7 @@ module Aws::OpenSearchService
   # * {LimitExceededException}
   # * {ResourceAlreadyExistsException}
   # * {ResourceNotFoundException}
+  # * {ServiceQuotaExceededException}
   # * {SlotNotAvailableException}
   # * {ThrottlingException}
   # * {ValidationException}
@@ -158,6 +159,16 @@ module Aws::OpenSearchService
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::OpenSearchService::Types::ResourceNotFoundException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class ServiceQuotaExceededException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::OpenSearchService::Types::ServiceQuotaExceededException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

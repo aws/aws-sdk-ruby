@@ -547,16 +547,34 @@ module Aws::ACM
     end
 
     # Deletes a certificate and its associated private key. If this action
-    # succeeds, the certificate no longer appears in the list that can be
-    # displayed by calling the ListCertificates action or be retrieved by
-    # calling the GetCertificate action. The certificate will not be
-    # available for use by Amazon Web Services services integrated with ACM.
+    # succeeds, the certificate is not available for use by Amazon Web
+    # Services services integrated with ACM. Deleting a certificate is
+    # eventually consistent. The may be a short delay before the certificate
+    # no longer appears in the list that can be displayed by calling the
+    # ListCertificates action or be retrieved by calling the GetCertificate
+    # action.
     #
     # <note markdown="1"> You cannot delete an ACM certificate that is being used by another
     # Amazon Web Services service. To delete a certificate that is in use,
-    # the certificate association must first be removed.
+    # you must first remove the certificate association using the console or
+    # the CLI for the associated service.
+    #
+    #  Deleting a certificate issued by a private certificate authority (CA)
+    # has no effect on the CA. You will continue to be charged for the CA
+    # until it is deleted. For more information, see [ Deleting Your Private
+    # CA][1] in the *Private Certificate Authority User Guide*.
     #
     #  </note>
+    #
+    # Deleting a certificate issued by a private certificate authority (CA)
+    # has no effect on the CA. You will continue to be charged for the CA
+    # until it is deleted. For more information, see [Deleting your private
+    # CA][1] in the *Amazon Web Services Private Certificate Authority User
+    # Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/privateca/latest/userguide/PCADeleteCA.html
     #
     # @option params [required, String] :certificate_arn
     #   String that contains the ARN of the ACM certificate to be deleted.
@@ -693,7 +711,7 @@ module Aws::ACM
     end
 
     # Exports a private certificate issued by a private certificate
-    # authority (CA) or public certificate for use anywhere. The exported
+    # authority (CA) or a public certificate for use anywhere. The exported
     # file contains the certificate, the certificate chain, and the
     # encrypted private key associated with the public key that is embedded
     # in the certificate. For security, you must assign a passphrase for the
@@ -702,6 +720,11 @@ module Aws::ACM
     # For information about exporting and formatting a certificate using the
     # ACM console or CLI, see [Export a private certificate][1] and [Export
     # a public certificate][2].
+    #
+    # <note markdown="1"> ACM public certificates created prior to June 17, 2025 cannot be
+    # exported.
+    #
+    #  </note>
     #
     #
     #
@@ -1173,13 +1196,12 @@ module Aws::ACM
     # Renews an [eligible ACM certificate][1]. In order to renew your Amazon
     # Web Services Private CA certificates with ACM, you must first [grant
     # the ACM service principal permission to do so][2]. For more
-    # information, see [Testing Managed Renewal][3] in the ACM User Guide.
+    # information, see [Testing Managed Renewal][1] in the ACM User Guide.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/acm/latest/userguide/managed-renewal.html
-    # [2]: https://docs.aws.amazon.com/privateca/latest/userguide/PcaPermissions.html
-    # [3]: https://docs.aws.amazon.com/acm/latest/userguide/manual-renewal.html
+    # [2]: https://docs.aws.amazon.com/privateca/latest/userguide/assign-permissions.html#PcaPermissions
     #
     # @option params [required, String] :certificate_arn
     #   String that contains the ARN of the ACM certificate to be renewed.
@@ -1382,7 +1404,7 @@ module Aws::ACM
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/acm/latest/userguide/acm-certificate.html#algorithms
+    #   [1]: https://docs.aws.amazon.com/acm/latest/userguide/acm-certificate-characteristics.html#algorithms-term
     #
     # @option params [String] :managed_by
     #   Identifies the Amazon Web Services service that manages the
@@ -1469,9 +1491,8 @@ module Aws::ACM
     #   the `Domain` value or a superdomain of the `Domain` value. For
     #   example, if you requested a certificate for
     #   `site.subdomain.example.com` and specify a **ValidationDomain** of
-    #   `subdomain.example.com`, ACM sends email to the domain registrant,
-    #   technical contact, and administrative contact in WHOIS and the
-    #   following five addresses:
+    #   `subdomain.example.com`, ACM sends email to the the following five
+    #   addresses:
     #
     #   * admin@subdomain.example.com
     #
@@ -1505,6 +1526,9 @@ module Aws::ACM
     # Revokes a public ACM certificate. You can only revoke certificates
     # that have been previously exported.
     #
+    # Once a certificate is revoked, you cannot reuse the certificate.
+    # Revoking a certificate is permanent.
+    #
     # @option params [required, String] :certificate_arn
     #   The Amazon Resource Name (ARN) of the public or private certificate
     #   that will be revoked. The ARN must have the following form:
@@ -1535,6 +1559,209 @@ module Aws::ACM
     # @param [Hash] params ({})
     def revoke_certificate(params = {}, options = {})
       req = build_request(:revoke_certificate, params)
+      req.send_request(options)
+    end
+
+    # Retrieves a list of certificates matching search criteria. You can
+    # filter certificates by X.509 attributes and ACM specific properties
+    # like certificate status, type and renewal eligibility. This operation
+    # provides more flexible filtering than ListCertificates by supporting
+    # complex filter statements.
+    #
+    # @option params [Types::CertificateFilterStatement] :filter_statement
+    #   A filter statement that defines the search criteria. You can combine
+    #   multiple filters using AND, OR, and NOT logical operators to create
+    #   complex queries.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in the response. Default is
+    #   100.
+    #
+    # @option params [String] :next_token
+    #   Use this parameter only when paginating results and only in a
+    #   subsequent request after you receive a response with truncated
+    #   results. Set it to the value of `NextToken` from the response you just
+    #   received.
+    #
+    # @option params [String] :sort_by
+    #   Specifies the field to sort results by. Valid values are CREATED\_AT,
+    #   NOT\_AFTER, STATUS, RENEWAL\_STATUS, EXPORTED, IN\_USE, NOT\_BEFORE,
+    #   KEY\_ALGORITHM, TYPE, CERTIFICATE\_ARN, COMMON\_NAME, REVOKED\_AT,
+    #   RENEWAL\_ELIGIBILITY, ISSUED\_AT, MANAGED\_BY, EXPORT\_OPTION,
+    #   VALIDATION\_METHOD, and IMPORTED\_AT.
+    #
+    # @option params [String] :sort_order
+    #   Specifies the order of sorted results. Valid values are ASCENDING or
+    #   DESCENDING.
+    #
+    # @return [Types::SearchCertificatesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::SearchCertificatesResponse#results #results} => Array&lt;Types::CertificateSearchResult&gt;
+    #   * {Types::SearchCertificatesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.search_certificates({
+    #     filter_statement: {
+    #       and: [
+    #         {
+    #           # recursive CertificateFilterStatement
+    #         },
+    #       ],
+    #       or: [
+    #         {
+    #           # recursive CertificateFilterStatement
+    #         },
+    #       ],
+    #       not: {
+    #         # recursive CertificateFilterStatement
+    #       },
+    #       filter: {
+    #         certificate_arn: "Arn",
+    #         x509_attribute_filter: {
+    #           subject: {
+    #             common_name: {
+    #               value: "FilterString", # required
+    #               comparison_operator: "CONTAINS", # required, accepts CONTAINS, EQUALS
+    #             },
+    #           },
+    #           subject_alternative_name: {
+    #             dns_name: {
+    #               value: "FilterString", # required
+    #               comparison_operator: "CONTAINS", # required, accepts CONTAINS, EQUALS
+    #             },
+    #           },
+    #           extended_key_usage: "TLS_WEB_SERVER_AUTHENTICATION", # accepts TLS_WEB_SERVER_AUTHENTICATION, TLS_WEB_CLIENT_AUTHENTICATION, CODE_SIGNING, EMAIL_PROTECTION, TIME_STAMPING, OCSP_SIGNING, IPSEC_END_SYSTEM, IPSEC_TUNNEL, IPSEC_USER, ANY, NONE, CUSTOM
+    #           key_usage: "DIGITAL_SIGNATURE", # accepts DIGITAL_SIGNATURE, NON_REPUDIATION, KEY_ENCIPHERMENT, DATA_ENCIPHERMENT, KEY_AGREEMENT, CERTIFICATE_SIGNING, CRL_SIGNING, ENCIPHER_ONLY, DECIPHER_ONLY, ANY, CUSTOM
+    #           key_algorithm: "RSA_1024", # accepts RSA_1024, RSA_2048, RSA_3072, RSA_4096, EC_prime256v1, EC_secp384r1, EC_secp521r1
+    #           serial_number: "SerialNumber",
+    #           not_after: {
+    #             start: Time.now,
+    #             end: Time.now,
+    #           },
+    #           not_before: {
+    #             start: Time.now,
+    #             end: Time.now,
+    #           },
+    #         },
+    #         acm_certificate_metadata_filter: {
+    #           status: "PENDING_VALIDATION", # accepts PENDING_VALIDATION, ISSUED, INACTIVE, EXPIRED, VALIDATION_TIMED_OUT, REVOKED, FAILED
+    #           renewal_status: "PENDING_AUTO_RENEWAL", # accepts PENDING_AUTO_RENEWAL, PENDING_VALIDATION, SUCCESS, FAILED
+    #           type: "IMPORTED", # accepts IMPORTED, AMAZON_ISSUED, PRIVATE
+    #           in_use: false,
+    #           exported: false,
+    #           export_option: "ENABLED", # accepts ENABLED, DISABLED
+    #           managed_by: "CLOUDFRONT", # accepts CLOUDFRONT
+    #           validation_method: "EMAIL", # accepts EMAIL, DNS, HTTP
+    #         },
+    #       },
+    #     },
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #     sort_by: "CREATED_AT", # accepts CREATED_AT, NOT_AFTER, STATUS, RENEWAL_STATUS, EXPORTED, IN_USE, NOT_BEFORE, KEY_ALGORITHM, TYPE, CERTIFICATE_ARN, COMMON_NAME, REVOKED_AT, RENEWAL_ELIGIBILITY, ISSUED_AT, MANAGED_BY, EXPORT_OPTION, VALIDATION_METHOD, IMPORTED_AT
+    #     sort_order: "ASCENDING", # accepts ASCENDING, DESCENDING
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.results #=> Array
+    #   resp.results[0].certificate_arn #=> String
+    #   resp.results[0].x509_attributes.issuer.common_name #=> String
+    #   resp.results[0].x509_attributes.issuer.domain_components #=> Array
+    #   resp.results[0].x509_attributes.issuer.domain_components[0] #=> String
+    #   resp.results[0].x509_attributes.issuer.country #=> String
+    #   resp.results[0].x509_attributes.issuer.custom_attributes #=> Array
+    #   resp.results[0].x509_attributes.issuer.custom_attributes[0].object_identifier #=> String
+    #   resp.results[0].x509_attributes.issuer.custom_attributes[0].value #=> String
+    #   resp.results[0].x509_attributes.issuer.distinguished_name_qualifier #=> String
+    #   resp.results[0].x509_attributes.issuer.generation_qualifier #=> String
+    #   resp.results[0].x509_attributes.issuer.given_name #=> String
+    #   resp.results[0].x509_attributes.issuer.initials #=> String
+    #   resp.results[0].x509_attributes.issuer.locality #=> String
+    #   resp.results[0].x509_attributes.issuer.organization #=> String
+    #   resp.results[0].x509_attributes.issuer.organizational_unit #=> String
+    #   resp.results[0].x509_attributes.issuer.pseudonym #=> String
+    #   resp.results[0].x509_attributes.issuer.serial_number #=> String
+    #   resp.results[0].x509_attributes.issuer.state #=> String
+    #   resp.results[0].x509_attributes.issuer.surname #=> String
+    #   resp.results[0].x509_attributes.issuer.title #=> String
+    #   resp.results[0].x509_attributes.subject.common_name #=> String
+    #   resp.results[0].x509_attributes.subject.domain_components #=> Array
+    #   resp.results[0].x509_attributes.subject.domain_components[0] #=> String
+    #   resp.results[0].x509_attributes.subject.country #=> String
+    #   resp.results[0].x509_attributes.subject.custom_attributes #=> Array
+    #   resp.results[0].x509_attributes.subject.custom_attributes[0].object_identifier #=> String
+    #   resp.results[0].x509_attributes.subject.custom_attributes[0].value #=> String
+    #   resp.results[0].x509_attributes.subject.distinguished_name_qualifier #=> String
+    #   resp.results[0].x509_attributes.subject.generation_qualifier #=> String
+    #   resp.results[0].x509_attributes.subject.given_name #=> String
+    #   resp.results[0].x509_attributes.subject.initials #=> String
+    #   resp.results[0].x509_attributes.subject.locality #=> String
+    #   resp.results[0].x509_attributes.subject.organization #=> String
+    #   resp.results[0].x509_attributes.subject.organizational_unit #=> String
+    #   resp.results[0].x509_attributes.subject.pseudonym #=> String
+    #   resp.results[0].x509_attributes.subject.serial_number #=> String
+    #   resp.results[0].x509_attributes.subject.state #=> String
+    #   resp.results[0].x509_attributes.subject.surname #=> String
+    #   resp.results[0].x509_attributes.subject.title #=> String
+    #   resp.results[0].x509_attributes.subject_alternative_names #=> Array
+    #   resp.results[0].x509_attributes.subject_alternative_names[0].directory_name.common_name #=> String
+    #   resp.results[0].x509_attributes.subject_alternative_names[0].directory_name.domain_components #=> Array
+    #   resp.results[0].x509_attributes.subject_alternative_names[0].directory_name.domain_components[0] #=> String
+    #   resp.results[0].x509_attributes.subject_alternative_names[0].directory_name.country #=> String
+    #   resp.results[0].x509_attributes.subject_alternative_names[0].directory_name.custom_attributes #=> Array
+    #   resp.results[0].x509_attributes.subject_alternative_names[0].directory_name.custom_attributes[0].object_identifier #=> String
+    #   resp.results[0].x509_attributes.subject_alternative_names[0].directory_name.custom_attributes[0].value #=> String
+    #   resp.results[0].x509_attributes.subject_alternative_names[0].directory_name.distinguished_name_qualifier #=> String
+    #   resp.results[0].x509_attributes.subject_alternative_names[0].directory_name.generation_qualifier #=> String
+    #   resp.results[0].x509_attributes.subject_alternative_names[0].directory_name.given_name #=> String
+    #   resp.results[0].x509_attributes.subject_alternative_names[0].directory_name.initials #=> String
+    #   resp.results[0].x509_attributes.subject_alternative_names[0].directory_name.locality #=> String
+    #   resp.results[0].x509_attributes.subject_alternative_names[0].directory_name.organization #=> String
+    #   resp.results[0].x509_attributes.subject_alternative_names[0].directory_name.organizational_unit #=> String
+    #   resp.results[0].x509_attributes.subject_alternative_names[0].directory_name.pseudonym #=> String
+    #   resp.results[0].x509_attributes.subject_alternative_names[0].directory_name.serial_number #=> String
+    #   resp.results[0].x509_attributes.subject_alternative_names[0].directory_name.state #=> String
+    #   resp.results[0].x509_attributes.subject_alternative_names[0].directory_name.surname #=> String
+    #   resp.results[0].x509_attributes.subject_alternative_names[0].directory_name.title #=> String
+    #   resp.results[0].x509_attributes.subject_alternative_names[0].dns_name #=> String
+    #   resp.results[0].x509_attributes.subject_alternative_names[0].ip_address #=> String
+    #   resp.results[0].x509_attributes.subject_alternative_names[0].other_name.object_identifier #=> String
+    #   resp.results[0].x509_attributes.subject_alternative_names[0].other_name.value #=> String
+    #   resp.results[0].x509_attributes.subject_alternative_names[0].registered_id #=> String
+    #   resp.results[0].x509_attributes.subject_alternative_names[0].rfc_822_name #=> String
+    #   resp.results[0].x509_attributes.subject_alternative_names[0].uniform_resource_identifier #=> String
+    #   resp.results[0].x509_attributes.extended_key_usages #=> Array
+    #   resp.results[0].x509_attributes.extended_key_usages[0] #=> String, one of "TLS_WEB_SERVER_AUTHENTICATION", "TLS_WEB_CLIENT_AUTHENTICATION", "CODE_SIGNING", "EMAIL_PROTECTION", "TIME_STAMPING", "OCSP_SIGNING", "IPSEC_END_SYSTEM", "IPSEC_TUNNEL", "IPSEC_USER", "ANY", "NONE", "CUSTOM"
+    #   resp.results[0].x509_attributes.key_algorithm #=> String, one of "RSA_1024", "RSA_2048", "RSA_3072", "RSA_4096", "EC_prime256v1", "EC_secp384r1", "EC_secp521r1"
+    #   resp.results[0].x509_attributes.key_usages #=> Array
+    #   resp.results[0].x509_attributes.key_usages[0] #=> String, one of "DIGITAL_SIGNATURE", "NON_REPUDIATION", "KEY_ENCIPHERMENT", "DATA_ENCIPHERMENT", "KEY_AGREEMENT", "CERTIFICATE_SIGNING", "CRL_SIGNING", "ENCIPHER_ONLY", "DECIPHER_ONLY", "ANY", "CUSTOM"
+    #   resp.results[0].x509_attributes.serial_number #=> String
+    #   resp.results[0].x509_attributes.not_after #=> Time
+    #   resp.results[0].x509_attributes.not_before #=> Time
+    #   resp.results[0].certificate_metadata.acm_certificate_metadata.created_at #=> Time
+    #   resp.results[0].certificate_metadata.acm_certificate_metadata.exported #=> Boolean
+    #   resp.results[0].certificate_metadata.acm_certificate_metadata.imported_at #=> Time
+    #   resp.results[0].certificate_metadata.acm_certificate_metadata.in_use #=> Boolean
+    #   resp.results[0].certificate_metadata.acm_certificate_metadata.issued_at #=> Time
+    #   resp.results[0].certificate_metadata.acm_certificate_metadata.renewal_eligibility #=> String, one of "ELIGIBLE", "INELIGIBLE"
+    #   resp.results[0].certificate_metadata.acm_certificate_metadata.revoked_at #=> Time
+    #   resp.results[0].certificate_metadata.acm_certificate_metadata.status #=> String, one of "PENDING_VALIDATION", "ISSUED", "INACTIVE", "EXPIRED", "VALIDATION_TIMED_OUT", "REVOKED", "FAILED"
+    #   resp.results[0].certificate_metadata.acm_certificate_metadata.renewal_status #=> String, one of "PENDING_AUTO_RENEWAL", "PENDING_VALIDATION", "SUCCESS", "FAILED"
+    #   resp.results[0].certificate_metadata.acm_certificate_metadata.type #=> String, one of "IMPORTED", "AMAZON_ISSUED", "PRIVATE"
+    #   resp.results[0].certificate_metadata.acm_certificate_metadata.export_option #=> String, one of "ENABLED", "DISABLED"
+    #   resp.results[0].certificate_metadata.acm_certificate_metadata.managed_by #=> String, one of "CLOUDFRONT"
+    #   resp.results[0].certificate_metadata.acm_certificate_metadata.validation_method #=> String, one of "EMAIL", "DNS", "HTTP"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/SearchCertificates AWS API Documentation
+    #
+    # @overload search_certificates(params = {})
+    # @param [Hash] params ({})
+    def search_certificates(params = {}, options = {})
+      req = build_request(:search_certificates, params)
       req.send_request(options)
     end
 
@@ -1602,7 +1829,7 @@ module Aws::ACM
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-acm'
-      context[:gem_version] = '1.100.0'
+      context[:gem_version] = '1.102.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

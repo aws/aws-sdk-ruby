@@ -415,7 +415,8 @@ module Aws
                                      ?user_group_id: ::String,
                                      ?subnet_ids: Array[::String],
                                      ?snapshot_retention_limit: ::Integer,
-                                     ?daily_snapshot_time: ::String
+                                     ?daily_snapshot_time: ::String,
+                                     ?network_type: ("ipv4" | "ipv6" | "dual_stack")
                                    ) -> _CreateServerlessCacheResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateServerlessCacheResponseSuccess
 

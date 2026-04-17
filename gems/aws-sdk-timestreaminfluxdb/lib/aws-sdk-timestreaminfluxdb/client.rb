@@ -581,6 +581,10 @@ module Aws::TimestreamInfluxDB
     #   Configuration for sending InfluxDB engine logs to a specified S3
     #   bucket.
     #
+    # @option params [Types::MaintenanceSchedule] :maintenance_schedule
+    #   Specifies the maintenance schedule for the DB cluster, including the
+    #   preferred maintenance window and timezone.
+    #
     # @option params [Hash<String,String>] :tags
     #   A list of key-value pairs to associate with the DB instance.
     #
@@ -613,6 +617,10 @@ module Aws::TimestreamInfluxDB
     #         bucket_name: "S3ConfigurationBucketNameString", # required
     #         enabled: false, # required
     #       },
+    #     },
+    #     maintenance_schedule: {
+    #       timezone: "IanaTimezone", # required
+    #       preferred_maintenance_window: "MaintenanceWindow", # required
     #     },
     #     tags: {
     #       "TagKey" => "TagValue",
@@ -711,6 +719,10 @@ module Aws::TimestreamInfluxDB
     #   Configuration for sending InfluxDB engine logs to a specified S3
     #   bucket.
     #
+    # @option params [Types::MaintenanceSchedule] :maintenance_schedule
+    #   Specifies the maintenance schedule for the DB instance, including the
+    #   preferred maintenance window and timezone.
+    #
     # @option params [Hash<String,String>] :tags
     #   A list of key-value pairs to associate with the DB instance.
     #
@@ -753,6 +765,9 @@ module Aws::TimestreamInfluxDB
     #   * {Types::CreateDbInstanceOutput#db_cluster_id #db_cluster_id} => String
     #   * {Types::CreateDbInstanceOutput#instance_mode #instance_mode} => String
     #   * {Types::CreateDbInstanceOutput#instance_modes #instance_modes} => Array&lt;String&gt;
+    #   * {Types::CreateDbInstanceOutput#maintenance_schedule #maintenance_schedule} => Types::MaintenanceSchedule
+    #   * {Types::CreateDbInstanceOutput#last_maintenance_time #last_maintenance_time} => Time
+    #   * {Types::CreateDbInstanceOutput#next_maintenance_time #next_maintenance_time} => Time
     #
     # @example Request syntax with placeholder values
     #
@@ -775,6 +790,10 @@ module Aws::TimestreamInfluxDB
     #         bucket_name: "S3ConfigurationBucketNameString", # required
     #         enabled: false, # required
     #       },
+    #     },
+    #     maintenance_schedule: {
+    #       timezone: "IanaTimezone", # required
+    #       preferred_maintenance_window: "MaintenanceWindow", # required
     #     },
     #     tags: {
     #       "TagKey" => "TagValue",
@@ -811,6 +830,10 @@ module Aws::TimestreamInfluxDB
     #   resp.instance_mode #=> String, one of "PRIMARY", "STANDBY", "REPLICA", "INGEST", "QUERY", "COMPACT", "PROCESS"
     #   resp.instance_modes #=> Array
     #   resp.instance_modes[0] #=> String, one of "PRIMARY", "STANDBY", "REPLICA", "INGEST", "QUERY", "COMPACT", "PROCESS"
+    #   resp.maintenance_schedule.timezone #=> String
+    #   resp.maintenance_schedule.preferred_maintenance_window #=> String
+    #   resp.last_maintenance_time #=> Time
+    #   resp.next_maintenance_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-influxdb-2023-01-27/CreateDbInstance AWS API Documentation
     #
@@ -1350,6 +1373,9 @@ module Aws::TimestreamInfluxDB
     #   * {Types::DeleteDbInstanceOutput#db_cluster_id #db_cluster_id} => String
     #   * {Types::DeleteDbInstanceOutput#instance_mode #instance_mode} => String
     #   * {Types::DeleteDbInstanceOutput#instance_modes #instance_modes} => Array&lt;String&gt;
+    #   * {Types::DeleteDbInstanceOutput#maintenance_schedule #maintenance_schedule} => Types::MaintenanceSchedule
+    #   * {Types::DeleteDbInstanceOutput#last_maintenance_time #last_maintenance_time} => Time
+    #   * {Types::DeleteDbInstanceOutput#next_maintenance_time #next_maintenance_time} => Time
     #
     # @example Request syntax with placeholder values
     #
@@ -1385,6 +1411,10 @@ module Aws::TimestreamInfluxDB
     #   resp.instance_mode #=> String, one of "PRIMARY", "STANDBY", "REPLICA", "INGEST", "QUERY", "COMPACT", "PROCESS"
     #   resp.instance_modes #=> Array
     #   resp.instance_modes[0] #=> String, one of "PRIMARY", "STANDBY", "REPLICA", "INGEST", "QUERY", "COMPACT", "PROCESS"
+    #   resp.maintenance_schedule.timezone #=> String
+    #   resp.maintenance_schedule.preferred_maintenance_window #=> String
+    #   resp.last_maintenance_time #=> Time
+    #   resp.next_maintenance_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-influxdb-2023-01-27/DeleteDbInstance AWS API Documentation
     #
@@ -1418,10 +1448,14 @@ module Aws::TimestreamInfluxDB
     #   * {Types::GetDbClusterOutput#publicly_accessible #publicly_accessible} => Boolean
     #   * {Types::GetDbClusterOutput#db_parameter_group_identifier #db_parameter_group_identifier} => String
     #   * {Types::GetDbClusterOutput#log_delivery_configuration #log_delivery_configuration} => Types::LogDeliveryConfiguration
+    #   * {Types::GetDbClusterOutput#maintenance_schedule #maintenance_schedule} => Types::MaintenanceSchedule
+    #   * {Types::GetDbClusterOutput#last_maintenance_time #last_maintenance_time} => Time
+    #   * {Types::GetDbClusterOutput#next_maintenance_time #next_maintenance_time} => Time
     #   * {Types::GetDbClusterOutput#influx_auth_parameters_secret_arn #influx_auth_parameters_secret_arn} => String
     #   * {Types::GetDbClusterOutput#vpc_subnet_ids #vpc_subnet_ids} => Array&lt;String&gt;
     #   * {Types::GetDbClusterOutput#vpc_security_group_ids #vpc_security_group_ids} => Array&lt;String&gt;
     #   * {Types::GetDbClusterOutput#failover_mode #failover_mode} => String
+    #   * {Types::GetDbClusterOutput#cluster_configuration #cluster_configuration} => Types::ClusterConfiguration
     #
     # @example Request syntax with placeholder values
     #
@@ -1448,12 +1482,19 @@ module Aws::TimestreamInfluxDB
     #   resp.db_parameter_group_identifier #=> String
     #   resp.log_delivery_configuration.s3_configuration.bucket_name #=> String
     #   resp.log_delivery_configuration.s3_configuration.enabled #=> Boolean
+    #   resp.maintenance_schedule.timezone #=> String
+    #   resp.maintenance_schedule.preferred_maintenance_window #=> String
+    #   resp.last_maintenance_time #=> Time
+    #   resp.next_maintenance_time #=> Time
     #   resp.influx_auth_parameters_secret_arn #=> String
     #   resp.vpc_subnet_ids #=> Array
     #   resp.vpc_subnet_ids[0] #=> String
     #   resp.vpc_security_group_ids #=> Array
     #   resp.vpc_security_group_ids[0] #=> String
     #   resp.failover_mode #=> String, one of "AUTOMATIC", "NO_FAILOVER"
+    #   resp.cluster_configuration.ingest_query_instances #=> Integer
+    #   resp.cluster_configuration.query_only_instances #=> Integer
+    #   resp.cluster_configuration.dedicated_compactor #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-influxdb-2023-01-27/GetDbCluster AWS API Documentation
     #
@@ -1493,6 +1534,9 @@ module Aws::TimestreamInfluxDB
     #   * {Types::GetDbInstanceOutput#db_cluster_id #db_cluster_id} => String
     #   * {Types::GetDbInstanceOutput#instance_mode #instance_mode} => String
     #   * {Types::GetDbInstanceOutput#instance_modes #instance_modes} => Array&lt;String&gt;
+    #   * {Types::GetDbInstanceOutput#maintenance_schedule #maintenance_schedule} => Types::MaintenanceSchedule
+    #   * {Types::GetDbInstanceOutput#last_maintenance_time #last_maintenance_time} => Time
+    #   * {Types::GetDbInstanceOutput#next_maintenance_time #next_maintenance_time} => Time
     #
     # @example Request syntax with placeholder values
     #
@@ -1528,6 +1572,10 @@ module Aws::TimestreamInfluxDB
     #   resp.instance_mode #=> String, one of "PRIMARY", "STANDBY", "REPLICA", "INGEST", "QUERY", "COMPACT", "PROCESS"
     #   resp.instance_modes #=> Array
     #   resp.instance_modes[0] #=> String, one of "PRIMARY", "STANDBY", "REPLICA", "INGEST", "QUERY", "COMPACT", "PROCESS"
+    #   resp.maintenance_schedule.timezone #=> String
+    #   resp.maintenance_schedule.preferred_maintenance_window #=> String
+    #   resp.last_maintenance_time #=> Time
+    #   resp.next_maintenance_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-influxdb-2023-01-27/GetDbInstance AWS API Documentation
     #
@@ -2036,6 +2084,9 @@ module Aws::TimestreamInfluxDB
     #   * {Types::RebootDbInstanceOutput#db_cluster_id #db_cluster_id} => String
     #   * {Types::RebootDbInstanceOutput#instance_mode #instance_mode} => String
     #   * {Types::RebootDbInstanceOutput#instance_modes #instance_modes} => Array&lt;String&gt;
+    #   * {Types::RebootDbInstanceOutput#maintenance_schedule #maintenance_schedule} => Types::MaintenanceSchedule
+    #   * {Types::RebootDbInstanceOutput#last_maintenance_time #last_maintenance_time} => Time
+    #   * {Types::RebootDbInstanceOutput#next_maintenance_time #next_maintenance_time} => Time
     #
     # @example Request syntax with placeholder values
     #
@@ -2071,6 +2122,10 @@ module Aws::TimestreamInfluxDB
     #   resp.instance_mode #=> String, one of "PRIMARY", "STANDBY", "REPLICA", "INGEST", "QUERY", "COMPACT", "PROCESS"
     #   resp.instance_modes #=> Array
     #   resp.instance_modes[0] #=> String, one of "PRIMARY", "STANDBY", "REPLICA", "INGEST", "QUERY", "COMPACT", "PROCESS"
+    #   resp.maintenance_schedule.timezone #=> String
+    #   resp.maintenance_schedule.preferred_maintenance_window #=> String
+    #   resp.last_maintenance_time #=> Time
+    #   resp.next_maintenance_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-influxdb-2023-01-27/RebootDbInstance AWS API Documentation
     #
@@ -2156,6 +2211,10 @@ module Aws::TimestreamInfluxDB
     # @option params [String] :failover_mode
     #   Update the DB cluster's failover behavior.
     #
+    # @option params [Types::MaintenanceSchedule] :maintenance_schedule
+    #   Specifies the maintenance schedule for the DB cluster, including the
+    #   preferred maintenance window and timezone.
+    #
     # @return [Types::UpdateDbClusterOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateDbClusterOutput#db_cluster_status #db_cluster_status} => String
@@ -2174,6 +2233,10 @@ module Aws::TimestreamInfluxDB
     #     port: 1,
     #     db_instance_type: "db.influx.medium", # accepts db.influx.medium, db.influx.large, db.influx.xlarge, db.influx.2xlarge, db.influx.4xlarge, db.influx.8xlarge, db.influx.12xlarge, db.influx.16xlarge, db.influx.24xlarge
     #     failover_mode: "AUTOMATIC", # accepts AUTOMATIC, NO_FAILOVER
+    #     maintenance_schedule: {
+    #       timezone: "IanaTimezone", # required
+    #       preferred_maintenance_window: "MaintenanceWindow", # required
+    #     },
     #   })
     #
     # @example Response structure
@@ -2230,6 +2293,10 @@ module Aws::TimestreamInfluxDB
     #   The amount of storage to allocate for your DB storage type (in
     #   gibibytes).
     #
+    # @option params [Types::MaintenanceSchedule] :maintenance_schedule
+    #   Specifies the maintenance schedule for the DB instance, including the
+    #   preferred maintenance window and timezone.
+    #
     # @return [Types::UpdateDbInstanceOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateDbInstanceOutput#id #id} => String
@@ -2254,6 +2321,9 @@ module Aws::TimestreamInfluxDB
     #   * {Types::UpdateDbInstanceOutput#db_cluster_id #db_cluster_id} => String
     #   * {Types::UpdateDbInstanceOutput#instance_mode #instance_mode} => String
     #   * {Types::UpdateDbInstanceOutput#instance_modes #instance_modes} => Array&lt;String&gt;
+    #   * {Types::UpdateDbInstanceOutput#maintenance_schedule #maintenance_schedule} => Types::MaintenanceSchedule
+    #   * {Types::UpdateDbInstanceOutput#last_maintenance_time #last_maintenance_time} => Time
+    #   * {Types::UpdateDbInstanceOutput#next_maintenance_time #next_maintenance_time} => Time
     #
     # @example Request syntax with placeholder values
     #
@@ -2271,6 +2341,10 @@ module Aws::TimestreamInfluxDB
     #     deployment_type: "SINGLE_AZ", # accepts SINGLE_AZ, WITH_MULTIAZ_STANDBY
     #     db_storage_type: "InfluxIOIncludedT1", # accepts InfluxIOIncludedT1, InfluxIOIncludedT2, InfluxIOIncludedT3
     #     allocated_storage: 1,
+    #     maintenance_schedule: {
+    #       timezone: "IanaTimezone", # required
+    #       preferred_maintenance_window: "MaintenanceWindow", # required
+    #     },
     #   })
     #
     # @example Response structure
@@ -2301,6 +2375,10 @@ module Aws::TimestreamInfluxDB
     #   resp.instance_mode #=> String, one of "PRIMARY", "STANDBY", "REPLICA", "INGEST", "QUERY", "COMPACT", "PROCESS"
     #   resp.instance_modes #=> Array
     #   resp.instance_modes[0] #=> String, one of "PRIMARY", "STANDBY", "REPLICA", "INGEST", "QUERY", "COMPACT", "PROCESS"
+    #   resp.maintenance_schedule.timezone #=> String
+    #   resp.maintenance_schedule.preferred_maintenance_window #=> String
+    #   resp.last_maintenance_time #=> Time
+    #   resp.next_maintenance_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-influxdb-2023-01-27/UpdateDbInstance AWS API Documentation
     #
@@ -2329,7 +2407,7 @@ module Aws::TimestreamInfluxDB
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-timestreaminfluxdb'
-      context[:gem_version] = '1.38.0'
+      context[:gem_version] = '1.40.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

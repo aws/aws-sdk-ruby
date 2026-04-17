@@ -67,14 +67,255 @@ module Aws::ECS
   # The following table lists the valid waiter names, the operations they call,
   # and the default `:delay` and `:max_attempts` values.
   #
-  # | waiter_name       | params                     | :delay   | :max_attempts |
-  # | ----------------- | -------------------------- | -------- | ------------- |
-  # | services_inactive | {Client#describe_services} | 15       | 40            |
-  # | services_stable   | {Client#describe_services} | 15       | 40            |
-  # | tasks_running     | {Client#describe_tasks}    | 6        | 100           |
-  # | tasks_stopped     | {Client#describe_tasks}    | 6        | 100           |
+  # | waiter_name                    | params                                   | :delay   | :max_attempts |
+  # | ------------------------------ | ---------------------------------------- | -------- | ------------- |
+  # | daemon_active                  | {Client#describe_daemon}                 | 15       | 8             |
+  # | daemon_deployment_stopped      | {Client#describe_daemon_deployments}     | 15       | 8             |
+  # | daemon_deployment_successful   | {Client#describe_daemon_deployments}     | 15       | 8             |
+  # | daemon_task_definition_active  | {Client#describe_daemon_task_definition} | 15       | 8             |
+  # | daemon_task_definition_deleted | {Client#describe_daemon_task_definition} | 15       | 8             |
+  # | services_inactive              | {Client#describe_services}               | 15       | 40            |
+  # | services_stable                | {Client#describe_services}               | 15       | 40            |
+  # | tasks_running                  | {Client#describe_tasks}                  | 6        | 100           |
+  # | tasks_stopped                  | {Client#describe_tasks}                  | 6        | 100           |
   #
   module Waiters
+
+    class DaemonActive
+
+      # @param [Hash] options
+      # @option options [required, Client] :client
+      # @option options [Integer] :max_attempts (8)
+      # @option options [Integer] :delay (15)
+      # @option options [Proc] :before_attempt
+      # @option options [Proc] :before_wait
+      def initialize(options)
+        @client = options.fetch(:client)
+        @waiter = Aws::Waiters::Waiter.new({
+          max_attempts: 8,
+          delay: 15,
+          poller: Aws::Waiters::Poller.new(
+            operation_name: :describe_daemon,
+            acceptors: [
+              {
+                "matcher" => "path",
+                "argument" => "daemon.status",
+                "state" => "success",
+                "expected" => "ACTIVE"
+              },
+              {
+                "matcher" => "path",
+                "argument" => "daemon.status",
+                "state" => "failure",
+                "expected" => "DELETE_IN_PROGRESS"
+              }
+            ]
+          )
+        }.merge(options))
+      end
+
+      # @option (see Client#describe_daemon)
+      # @return (see Client#describe_daemon)
+      def wait(params = {})
+        @waiter.wait(client: @client, params: params)
+      end
+
+      # @api private
+      attr_reader :waiter
+
+    end
+
+    class DaemonDeploymentStopped
+
+      # @param [Hash] options
+      # @option options [required, Client] :client
+      # @option options [Integer] :max_attempts (8)
+      # @option options [Integer] :delay (15)
+      # @option options [Proc] :before_attempt
+      # @option options [Proc] :before_wait
+      def initialize(options)
+        @client = options.fetch(:client)
+        @waiter = Aws::Waiters::Waiter.new({
+          max_attempts: 8,
+          delay: 15,
+          poller: Aws::Waiters::Poller.new(
+            operation_name: :describe_daemon_deployments,
+            acceptors: [
+              {
+                "matcher" => "pathAll",
+                "argument" => "daemon_deployments[].status",
+                "state" => "success",
+                "expected" => "STOPPED"
+              },
+              {
+                "matcher" => "pathAny",
+                "argument" => "failures[].reason",
+                "state" => "failure",
+                "expected" => "MISSING"
+              }
+            ]
+          )
+        }.merge(options))
+      end
+
+      # @option (see Client#describe_daemon_deployments)
+      # @return (see Client#describe_daemon_deployments)
+      def wait(params = {})
+        @waiter.wait(client: @client, params: params)
+      end
+
+      # @api private
+      attr_reader :waiter
+
+    end
+
+    class DaemonDeploymentSuccessful
+
+      # @param [Hash] options
+      # @option options [required, Client] :client
+      # @option options [Integer] :max_attempts (8)
+      # @option options [Integer] :delay (15)
+      # @option options [Proc] :before_attempt
+      # @option options [Proc] :before_wait
+      def initialize(options)
+        @client = options.fetch(:client)
+        @waiter = Aws::Waiters::Waiter.new({
+          max_attempts: 8,
+          delay: 15,
+          poller: Aws::Waiters::Poller.new(
+            operation_name: :describe_daemon_deployments,
+            acceptors: [
+              {
+                "matcher" => "pathAll",
+                "argument" => "daemon_deployments[].status",
+                "state" => "success",
+                "expected" => "SUCCESSFUL"
+              },
+              {
+                "matcher" => "pathAny",
+                "argument" => "daemon_deployments[].status",
+                "state" => "failure",
+                "expected" => "STOPPED"
+              },
+              {
+                "matcher" => "pathAny",
+                "argument" => "daemon_deployments[].status",
+                "state" => "failure",
+                "expected" => "ROLLBACK_FAILED"
+              },
+              {
+                "matcher" => "pathAny",
+                "argument" => "daemon_deployments[].status",
+                "state" => "failure",
+                "expected" => "ROLLBACK_SUCCESSFUL"
+              },
+              {
+                "matcher" => "pathAny",
+                "argument" => "failures[].reason",
+                "state" => "failure",
+                "expected" => "MISSING"
+              }
+            ]
+          )
+        }.merge(options))
+      end
+
+      # @option (see Client#describe_daemon_deployments)
+      # @return (see Client#describe_daemon_deployments)
+      def wait(params = {})
+        @waiter.wait(client: @client, params: params)
+      end
+
+      # @api private
+      attr_reader :waiter
+
+    end
+
+    class DaemonTaskDefinitionActive
+
+      # @param [Hash] options
+      # @option options [required, Client] :client
+      # @option options [Integer] :max_attempts (8)
+      # @option options [Integer] :delay (15)
+      # @option options [Proc] :before_attempt
+      # @option options [Proc] :before_wait
+      def initialize(options)
+        @client = options.fetch(:client)
+        @waiter = Aws::Waiters::Waiter.new({
+          max_attempts: 8,
+          delay: 15,
+          poller: Aws::Waiters::Poller.new(
+            operation_name: :describe_daemon_task_definition,
+            acceptors: [
+              {
+                "matcher" => "path",
+                "argument" => "daemon_task_definition.status",
+                "state" => "success",
+                "expected" => "ACTIVE"
+              },
+              {
+                "matcher" => "path",
+                "argument" => "daemon_task_definition.status",
+                "state" => "failure",
+                "expected" => "DELETE_IN_PROGRESS"
+              },
+              {
+                "matcher" => "path",
+                "argument" => "daemon_task_definition.status",
+                "state" => "failure",
+                "expected" => "DELETED"
+              }
+            ]
+          )
+        }.merge(options))
+      end
+
+      # @option (see Client#describe_daemon_task_definition)
+      # @return (see Client#describe_daemon_task_definition)
+      def wait(params = {})
+        @waiter.wait(client: @client, params: params)
+      end
+
+      # @api private
+      attr_reader :waiter
+
+    end
+
+    class DaemonTaskDefinitionDeleted
+
+      # @param [Hash] options
+      # @option options [required, Client] :client
+      # @option options [Integer] :max_attempts (8)
+      # @option options [Integer] :delay (15)
+      # @option options [Proc] :before_attempt
+      # @option options [Proc] :before_wait
+      def initialize(options)
+        @client = options.fetch(:client)
+        @waiter = Aws::Waiters::Waiter.new({
+          max_attempts: 8,
+          delay: 15,
+          poller: Aws::Waiters::Poller.new(
+            operation_name: :describe_daemon_task_definition,
+            acceptors: [{
+              "matcher" => "path",
+              "argument" => "daemon_task_definition.status",
+              "state" => "success",
+              "expected" => "DELETED"
+            }]
+          )
+        }.merge(options))
+      end
+
+      # @option (see Client#describe_daemon_task_definition)
+      # @return (see Client#describe_daemon_task_definition)
+      def wait(params = {})
+        @waiter.wait(client: @client, params: params)
+      end
+
+      # @api private
+      attr_reader :waiter
+
+    end
 
     class ServicesInactive
 
@@ -93,16 +334,16 @@ module Aws::ECS
             operation_name: :describe_services,
             acceptors: [
               {
-                "expected" => "MISSING",
                 "matcher" => "pathAny",
+                "argument" => "failures[].reason",
                 "state" => "failure",
-                "argument" => "failures[].reason"
+                "expected" => "MISSING"
               },
               {
-                "expected" => "INACTIVE",
                 "matcher" => "pathAny",
+                "argument" => "services[].status",
                 "state" => "success",
-                "argument" => "services[].status"
+                "expected" => "INACTIVE"
               }
             ]
           )
@@ -137,28 +378,28 @@ module Aws::ECS
             operation_name: :describe_services,
             acceptors: [
               {
-                "expected" => "MISSING",
                 "matcher" => "pathAny",
+                "argument" => "failures[].reason",
                 "state" => "failure",
-                "argument" => "failures[].reason"
+                "expected" => "MISSING"
               },
               {
-                "expected" => "DRAINING",
                 "matcher" => "pathAny",
+                "argument" => "services[].status",
                 "state" => "failure",
-                "argument" => "services[].status"
+                "expected" => "DRAINING"
               },
               {
-                "expected" => "INACTIVE",
                 "matcher" => "pathAny",
+                "argument" => "services[].status",
                 "state" => "failure",
-                "argument" => "services[].status"
+                "expected" => "INACTIVE"
               },
               {
-                "expected" => true,
                 "matcher" => "path",
+                "argument" => "length(services[?!(length(deployments) == `1` && running_count == desired_count)]) == `0`",
                 "state" => "success",
-                "argument" => "length(services[?!(length(deployments) == `1` && running_count == desired_count)]) == `0`"
+                "expected" => true
               }
             ]
           )
@@ -193,22 +434,22 @@ module Aws::ECS
             operation_name: :describe_tasks,
             acceptors: [
               {
-                "expected" => "STOPPED",
                 "matcher" => "pathAny",
+                "argument" => "tasks[].last_status",
                 "state" => "failure",
-                "argument" => "tasks[].last_status"
+                "expected" => "STOPPED"
               },
               {
-                "expected" => "MISSING",
                 "matcher" => "pathAny",
+                "argument" => "failures[].reason",
                 "state" => "failure",
-                "argument" => "failures[].reason"
+                "expected" => "MISSING"
               },
               {
-                "expected" => "RUNNING",
                 "matcher" => "pathAll",
+                "argument" => "tasks[].last_status",
                 "state" => "success",
-                "argument" => "tasks[].last_status"
+                "expected" => "RUNNING"
               }
             ]
           )
@@ -242,10 +483,10 @@ module Aws::ECS
           poller: Aws::Waiters::Poller.new(
             operation_name: :describe_tasks,
             acceptors: [{
-              "expected" => "STOPPED",
               "matcher" => "pathAll",
+              "argument" => "tasks[].last_status",
               "state" => "success",
-              "argument" => "tasks[].last_status"
+              "expected" => "STOPPED"
             }]
           )
         }.merge(options))

@@ -37,6 +37,8 @@ module Aws::Outposts
     AssetLocation = Shapes::StructureShape.new(name: 'AssetLocation')
     AssetState = Shapes::StringShape.new(name: 'AssetState')
     AssetType = Shapes::StringShape.new(name: 'AssetType')
+    AssetTypeList = Shapes::ListShape.new(name: 'AssetTypeList')
+    AutoFillIdempotencyToken = Shapes::StringShape.new(name: 'AutoFillIdempotencyToken')
     AvailabilityZone = Shapes::StringShape.new(name: 'AvailabilityZone')
     AvailabilityZoneId = Shapes::StringShape.new(name: 'AvailabilityZoneId')
     AvailabilityZoneIdList = Shapes::ListShape.new(name: 'AvailabilityZoneIdList')
@@ -81,6 +83,8 @@ module Aws::Outposts
     CreateOrderOutput = Shapes::StructureShape.new(name: 'CreateOrderOutput')
     CreateOutpostInput = Shapes::StructureShape.new(name: 'CreateOutpostInput')
     CreateOutpostOutput = Shapes::StructureShape.new(name: 'CreateOutpostOutput')
+    CreateRenewalInput = Shapes::StructureShape.new(name: 'CreateRenewalInput')
+    CreateRenewalOutput = Shapes::StructureShape.new(name: 'CreateRenewalOutput')
     CreateSiteInput = Shapes::StructureShape.new(name: 'CreateSiteInput')
     CreateSiteOutput = Shapes::StructureShape.new(name: 'CreateSiteOutput')
     DecommissionRequestStatus = Shapes::StringShape.new(name: 'DecommissionRequestStatus')
@@ -113,6 +117,8 @@ module Aws::Outposts
     GetOutpostOutput = Shapes::StructureShape.new(name: 'GetOutpostOutput')
     GetOutpostSupportedInstanceTypesInput = Shapes::StructureShape.new(name: 'GetOutpostSupportedInstanceTypesInput')
     GetOutpostSupportedInstanceTypesOutput = Shapes::StructureShape.new(name: 'GetOutpostSupportedInstanceTypesOutput')
+    GetRenewalPricingInput = Shapes::StructureShape.new(name: 'GetRenewalPricingInput')
+    GetRenewalPricingOutput = Shapes::StructureShape.new(name: 'GetRenewalPricingOutput')
     GetSiteAddressInput = Shapes::StructureShape.new(name: 'GetSiteAddressInput')
     GetSiteAddressOutput = Shapes::StructureShape.new(name: 'GetSiteAddressOutput')
     GetSiteInput = Shapes::StructureShape.new(name: 'GetSiteInput')
@@ -171,6 +177,7 @@ module Aws::Outposts
     NetworkInterfaceDeviceIndex = Shapes::IntegerShape.new(name: 'NetworkInterfaceDeviceIndex')
     NotFoundException = Shapes::StructureShape.new(name: 'NotFoundException')
     NullableDouble = Shapes::FloatShape.new(name: 'NullableDouble')
+    NullableFloat = Shapes::FloatShape.new(name: 'NullableFloat')
     OpticalStandard = Shapes::StringShape.new(name: 'OpticalStandard')
     Order = Shapes::StructureShape.new(name: 'Order')
     OrderId = Shapes::StringShape.new(name: 'OrderId')
@@ -196,7 +203,11 @@ module Aws::Outposts
     PowerDrawKva = Shapes::StringShape.new(name: 'PowerDrawKva')
     PowerFeedDrop = Shapes::StringShape.new(name: 'PowerFeedDrop')
     PowerPhase = Shapes::StringShape.new(name: 'PowerPhase')
+    PricingOption = Shapes::StructureShape.new(name: 'PricingOption')
+    PricingOptionList = Shapes::ListShape.new(name: 'PricingOptionList')
+    PricingResult = Shapes::StringShape.new(name: 'PricingResult')
     Quantity = Shapes::StringShape.new(name: 'Quantity')
+    QuotePricingType = Shapes::StringShape.new(name: 'QuotePricingType')
     RackElevation = Shapes::FloatShape.new(name: 'RackElevation')
     RackId = Shapes::StringShape.new(name: 'RackId')
     RackPhysicalProperties = Shapes::StructureShape.new(name: 'RackPhysicalProperties')
@@ -225,6 +236,7 @@ module Aws::Outposts
     String = Shapes::StringShape.new(name: 'String')
     Subscription = Shapes::StructureShape.new(name: 'Subscription')
     SubscriptionList = Shapes::ListShape.new(name: 'SubscriptionList')
+    SubscriptionPricingDetails = Shapes::StructureShape.new(name: 'SubscriptionPricingDetails')
     SubscriptionStatus = Shapes::StringShape.new(name: 'SubscriptionStatus')
     SubscriptionType = Shapes::StringShape.new(name: 'SubscriptionType')
     SupportedHardwareType = Shapes::StringShape.new(name: 'SupportedHardwareType')
@@ -309,6 +321,8 @@ module Aws::Outposts
 
     AssetLocation.add_member(:rack_elevation, Shapes::ShapeRef.new(shape: RackElevation, location_name: "RackElevation"))
     AssetLocation.struct_class = Types::AssetLocation
+
+    AssetTypeList.member = Shapes::ShapeRef.new(shape: AssetType)
 
     AvailabilityZoneIdList.member = Shapes::ShapeRef.new(shape: AvailabilityZoneId)
 
@@ -412,6 +426,19 @@ module Aws::Outposts
     CreateOutpostOutput.add_member(:outpost, Shapes::ShapeRef.new(shape: Outpost, location_name: "Outpost"))
     CreateOutpostOutput.struct_class = Types::CreateOutpostOutput
 
+    CreateRenewalInput.add_member(:payment_option, Shapes::ShapeRef.new(shape: PaymentOption, required: true, location_name: "PaymentOption"))
+    CreateRenewalInput.add_member(:payment_term, Shapes::ShapeRef.new(shape: PaymentTerm, required: true, location_name: "PaymentTerm"))
+    CreateRenewalInput.add_member(:outpost_identifier, Shapes::ShapeRef.new(shape: OutpostIdentifier, required: true, location_name: "OutpostIdentifier"))
+    CreateRenewalInput.add_member(:client_token, Shapes::ShapeRef.new(shape: AutoFillIdempotencyToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
+    CreateRenewalInput.struct_class = Types::CreateRenewalInput
+
+    CreateRenewalOutput.add_member(:payment_option, Shapes::ShapeRef.new(shape: PaymentOption, location_name: "PaymentOption"))
+    CreateRenewalOutput.add_member(:payment_term, Shapes::ShapeRef.new(shape: PaymentTerm, location_name: "PaymentTerm"))
+    CreateRenewalOutput.add_member(:outpost_id, Shapes::ShapeRef.new(shape: OutpostIdOnly, location_name: "OutpostId"))
+    CreateRenewalOutput.add_member(:upfront_price, Shapes::ShapeRef.new(shape: NullableFloat, location_name: "UpfrontPrice"))
+    CreateRenewalOutput.add_member(:monthly_recurring_price, Shapes::ShapeRef.new(shape: NullableFloat, location_name: "MonthlyRecurringPrice"))
+    CreateRenewalOutput.struct_class = Types::CreateRenewalOutput
+
     CreateSiteInput.add_member(:name, Shapes::ShapeRef.new(shape: SiteName, required: true, location_name: "Name"))
     CreateSiteInput.add_member(:description, Shapes::ShapeRef.new(shape: SiteDescription, location_name: "Description"))
     CreateSiteInput.add_member(:notes, Shapes::ShapeRef.new(shape: SiteNotes, location_name: "Notes"))
@@ -489,6 +516,8 @@ module Aws::Outposts
     GetOutpostBillingInformationOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
     GetOutpostBillingInformationOutput.add_member(:subscriptions, Shapes::ShapeRef.new(shape: SubscriptionList, location_name: "Subscriptions"))
     GetOutpostBillingInformationOutput.add_member(:contract_end_date, Shapes::ShapeRef.new(shape: String, location_name: "ContractEndDate"))
+    GetOutpostBillingInformationOutput.add_member(:payment_term, Shapes::ShapeRef.new(shape: PaymentTerm, location_name: "PaymentTerm"))
+    GetOutpostBillingInformationOutput.add_member(:payment_option, Shapes::ShapeRef.new(shape: PaymentOption, location_name: "PaymentOption"))
     GetOutpostBillingInformationOutput.struct_class = Types::GetOutpostBillingInformationOutput
 
     GetOutpostInput.add_member(:outpost_id, Shapes::ShapeRef.new(shape: OutpostId, required: true, location: "uri", location_name: "OutpostId"))
@@ -518,6 +547,13 @@ module Aws::Outposts
     GetOutpostSupportedInstanceTypesOutput.add_member(:instance_types, Shapes::ShapeRef.new(shape: InstanceTypeListDefinition, location_name: "InstanceTypes"))
     GetOutpostSupportedInstanceTypesOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
     GetOutpostSupportedInstanceTypesOutput.struct_class = Types::GetOutpostSupportedInstanceTypesOutput
+
+    GetRenewalPricingInput.add_member(:outpost_identifier, Shapes::ShapeRef.new(shape: OutpostIdentifier, required: true, location: "uri", location_name: "OutpostIdentifier"))
+    GetRenewalPricingInput.struct_class = Types::GetRenewalPricingInput
+
+    GetRenewalPricingOutput.add_member(:pricing_result, Shapes::ShapeRef.new(shape: PricingResult, location_name: "PricingResult"))
+    GetRenewalPricingOutput.add_member(:pricing_options, Shapes::ShapeRef.new(shape: PricingOptionList, location_name: "PricingOptions"))
+    GetRenewalPricingOutput.struct_class = Types::GetRenewalPricingOutput
 
     GetSiteAddressInput.add_member(:site_id, Shapes::ShapeRef.new(shape: SiteId, required: true, location: "uri", location_name: "SiteId"))
     GetSiteAddressInput.add_member(:address_type, Shapes::ShapeRef.new(shape: AddressType, required: true, location: "querystring", location_name: "AddressType"))
@@ -605,6 +641,7 @@ module Aws::Outposts
     ListAssetsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults1000, location: "querystring", location_name: "MaxResults"))
     ListAssetsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location: "querystring", location_name: "NextToken"))
     ListAssetsInput.add_member(:status_filter, Shapes::ShapeRef.new(shape: StatusList, location: "querystring", location_name: "StatusFilter"))
+    ListAssetsInput.add_member(:asset_type_filter, Shapes::ShapeRef.new(shape: AssetTypeList, location: "querystring", location_name: "AssetTypeFilter"))
     ListAssetsInput.struct_class = Types::ListAssetsInput
 
     ListAssetsOutput.add_member(:assets, Shapes::ShapeRef.new(shape: AssetListDefinition, location_name: "Assets"))
@@ -724,6 +761,12 @@ module Aws::Outposts
 
     OutpostInstanceTypeList.member = Shapes::ShapeRef.new(shape: OutpostInstanceType)
 
+    PricingOption.add_member(:pricing_type, Shapes::ShapeRef.new(shape: QuotePricingType, location_name: "PricingType"))
+    PricingOption.add_member(:subscription_pricing_details, Shapes::ShapeRef.new(shape: SubscriptionPricingDetails, location_name: "SubscriptionPricingDetails"))
+    PricingOption.struct_class = Types::PricingOption
+
+    PricingOptionList.member = Shapes::ShapeRef.new(shape: PricingOption)
+
     RackPhysicalProperties.add_member(:power_draw_kva, Shapes::ShapeRef.new(shape: PowerDrawKva, location_name: "PowerDrawKva"))
     RackPhysicalProperties.add_member(:power_phase, Shapes::ShapeRef.new(shape: PowerPhase, location_name: "PowerPhase"))
     RackPhysicalProperties.add_member(:power_connector, Shapes::ShapeRef.new(shape: PowerConnector, location_name: "PowerConnector"))
@@ -814,6 +857,12 @@ module Aws::Outposts
     Subscription.struct_class = Types::Subscription
 
     SubscriptionList.member = Shapes::ShapeRef.new(shape: Subscription)
+
+    SubscriptionPricingDetails.add_member(:payment_option, Shapes::ShapeRef.new(shape: PaymentOption, location_name: "PaymentOption"))
+    SubscriptionPricingDetails.add_member(:payment_term, Shapes::ShapeRef.new(shape: PaymentTerm, location_name: "PaymentTerm"))
+    SubscriptionPricingDetails.add_member(:upfront_price, Shapes::ShapeRef.new(shape: NullableFloat, location_name: "UpfrontPrice"))
+    SubscriptionPricingDetails.add_member(:monthly_recurring_price, Shapes::ShapeRef.new(shape: NullableFloat, location_name: "MonthlyRecurringPrice"))
+    SubscriptionPricingDetails.struct_class = Types::SubscriptionPricingDetails
 
     SupportedStorageList.member = Shapes::ShapeRef.new(shape: SupportedStorageEnum)
 
@@ -958,6 +1007,18 @@ module Aws::Outposts
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+      end)
+
+      api.add_operation(:create_renewal, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateRenewal"
+        o.http_method = "POST"
+        o.http_request_uri = "/renewals"
+        o.input = Shapes::ShapeRef.new(shape: CreateRenewalInput)
+        o.output = Shapes::ShapeRef.new(shape: CreateRenewalOutput)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
       api.add_operation(:create_site, Seahorse::Model::Operation.new.tap do |o|
@@ -1109,6 +1170,18 @@ module Aws::Outposts
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:get_renewal_pricing, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetRenewalPricing"
+        o.http_method = "GET"
+        o.http_request_uri = "/outpost/{OutpostIdentifier}/renewal-pricing"
+        o.input = Shapes::ShapeRef.new(shape: GetRenewalPricingInput)
+        o.output = Shapes::ShapeRef.new(shape: GetRenewalPricingOutput)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
       api.add_operation(:get_site, Seahorse::Model::Operation.new.tap do |o|

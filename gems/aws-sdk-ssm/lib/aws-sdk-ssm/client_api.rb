@@ -56,6 +56,7 @@ module Aws::SSM
     AssociationComplianceSeverity = Shapes::StringShape.new(name: 'AssociationComplianceSeverity')
     AssociationDescription = Shapes::StructureShape.new(name: 'AssociationDescription')
     AssociationDescriptionList = Shapes::ListShape.new(name: 'AssociationDescriptionList')
+    AssociationDispatchAssumeRoleArn = Shapes::StringShape.new(name: 'AssociationDispatchAssumeRoleArn')
     AssociationDoesNotExist = Shapes::StructureShape.new(name: 'AssociationDoesNotExist')
     AssociationExecution = Shapes::StructureShape.new(name: 'AssociationExecution')
     AssociationExecutionDoesNotExist = Shapes::StructureShape.new(name: 'AssociationExecutionDoesNotExist')
@@ -1413,6 +1414,7 @@ module Aws::SSM
     AssociationDescription.add_member(:target_maps, Shapes::ShapeRef.new(shape: TargetMaps, location_name: "TargetMaps", metadata: {"box" => true}))
     AssociationDescription.add_member(:alarm_configuration, Shapes::ShapeRef.new(shape: AlarmConfiguration, location_name: "AlarmConfiguration"))
     AssociationDescription.add_member(:triggered_alarms, Shapes::ShapeRef.new(shape: AlarmStateInformationList, location_name: "TriggeredAlarms"))
+    AssociationDescription.add_member(:association_dispatch_assume_role, Shapes::ShapeRef.new(shape: AssociationDispatchAssumeRoleArn, location_name: "AssociationDispatchAssumeRole", metadata: {"box" => true}))
     AssociationDescription.struct_class = Types::AssociationDescription
 
     AssociationDescriptionList.member = Shapes::ShapeRef.new(shape: AssociationDescription)
@@ -1509,6 +1511,7 @@ module Aws::SSM
     AssociationVersionInfo.add_member(:schedule_offset, Shapes::ShapeRef.new(shape: ScheduleOffset, location_name: "ScheduleOffset", metadata: {"box" => true}))
     AssociationVersionInfo.add_member(:duration, Shapes::ShapeRef.new(shape: Duration, location_name: "Duration", metadata: {"box" => true}))
     AssociationVersionInfo.add_member(:target_maps, Shapes::ShapeRef.new(shape: TargetMaps, location_name: "TargetMaps", metadata: {"box" => true}))
+    AssociationVersionInfo.add_member(:association_dispatch_assume_role, Shapes::ShapeRef.new(shape: AssociationDispatchAssumeRoleArn, location_name: "AssociationDispatchAssumeRole", metadata: {"box" => true}))
     AssociationVersionInfo.struct_class = Types::AssociationVersionInfo
 
     AssociationVersionLimitExceeded.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
@@ -1833,6 +1836,7 @@ module Aws::SSM
     CreateActivationResult.struct_class = Types::CreateActivationResult
 
     CreateAssociationBatchRequest.add_member(:entries, Shapes::ShapeRef.new(shape: CreateAssociationBatchRequestEntries, required: true, location_name: "Entries"))
+    CreateAssociationBatchRequest.add_member(:association_dispatch_assume_role, Shapes::ShapeRef.new(shape: AssociationDispatchAssumeRoleArn, location_name: "AssociationDispatchAssumeRole", metadata: {"box" => true}))
     CreateAssociationBatchRequest.struct_class = Types::CreateAssociationBatchRequest
 
     CreateAssociationBatchRequestEntries.member = Shapes::ShapeRef.new(shape: CreateAssociationBatchRequestEntry)
@@ -1884,6 +1888,7 @@ module Aws::SSM
     CreateAssociationRequest.add_member(:target_maps, Shapes::ShapeRef.new(shape: TargetMaps, location_name: "TargetMaps", metadata: {"box" => true}))
     CreateAssociationRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags", metadata: {"box" => true}))
     CreateAssociationRequest.add_member(:alarm_configuration, Shapes::ShapeRef.new(shape: AlarmConfiguration, location_name: "AlarmConfiguration"))
+    CreateAssociationRequest.add_member(:association_dispatch_assume_role, Shapes::ShapeRef.new(shape: AssociationDispatchAssumeRoleArn, location_name: "AssociationDispatchAssumeRole", metadata: {"box" => true}))
     CreateAssociationRequest.struct_class = Types::CreateAssociationRequest
 
     CreateAssociationResult.add_member(:association_description, Shapes::ShapeRef.new(shape: AssociationDescription, location_name: "AssociationDescription"))
@@ -4884,6 +4889,7 @@ module Aws::SSM
     UpdateAssociationRequest.add_member(:duration, Shapes::ShapeRef.new(shape: Duration, location_name: "Duration", metadata: {"box" => true}))
     UpdateAssociationRequest.add_member(:target_maps, Shapes::ShapeRef.new(shape: TargetMaps, location_name: "TargetMaps", metadata: {"box" => true}))
     UpdateAssociationRequest.add_member(:alarm_configuration, Shapes::ShapeRef.new(shape: AlarmConfiguration, location_name: "AlarmConfiguration"))
+    UpdateAssociationRequest.add_member(:association_dispatch_assume_role, Shapes::ShapeRef.new(shape: AssociationDispatchAssumeRoleArn, location_name: "AssociationDispatchAssumeRole", metadata: {"box" => true}))
     UpdateAssociationRequest.struct_class = Types::UpdateAssociationRequest
 
     UpdateAssociationResult.add_member(:association_description, Shapes::ShapeRef.new(shape: AssociationDescription, location_name: "AssociationDescription"))

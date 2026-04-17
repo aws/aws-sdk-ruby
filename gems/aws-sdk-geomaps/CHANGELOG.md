@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.24.0 (2026-04-06)
+------------------
+
+* Feature - This release updates API reference documentation for Amazon Location Service Maps APIs to reflect regional restrictions for Grab Maps users
+
+1.23.0 (2026-03-31)
+------------------
+
+* Feature - This release expands map customization options with adjustable contour line density, dark mode support for Hybrid and Satellite views, enhanced traffic information across multiple map styles, and transit and truck travel modes for Monochrome and Hybrid map styles.
+
+1.22.0 (2026-03-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.21.0 (2026-02-03)
 ------------------
 

@@ -746,6 +746,10 @@ module Aws::RAM
     #   service principals can access resources from.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] resource_share_configuration
+    #   Specifies the configuration of this resource share.
+    #   @return [Types::ResourceShareConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/CreateResourceShareRequest AWS API Documentation
     #
     class CreateResourceShareRequest < Struct.new(
@@ -756,7 +760,8 @@ module Aws::RAM
       :allow_external_principals,
       :client_token,
       :permission_arns,
-      :sources)
+      :sources,
+      :resource_share_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3186,6 +3191,10 @@ module Aws::RAM
     #     in progress. This value changes to `STANDARD` when complete.
     #   @return [String]
     #
+    # @!attribute [rw] resource_share_configuration
+    #   The configuration of the resource share
+    #   @return [Types::ResourceShareConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/ResourceShare AWS API Documentation
     #
     class ResourceShare < Struct.new(
@@ -3198,7 +3207,8 @@ module Aws::RAM
       :tags,
       :creation_time,
       :last_updated_time,
-      :feature_set)
+      :feature_set,
+      :resource_share_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3280,6 +3290,21 @@ module Aws::RAM
       :creation_time,
       :last_updated_time,
       :external)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration of the resource share
+    #
+    # @!attribute [rw] retain_sharing_on_account_leave_organization
+    #   Specifies whether the consumer account retains access to the
+    #   resource share after leaving the organization.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/ResourceShareConfiguration AWS API Documentation
+    #
+    class ResourceShareConfiguration < Struct.new(
+      :retain_sharing_on_account_leave_organization)
       SENSITIVE = []
       include Aws::Structure
     end

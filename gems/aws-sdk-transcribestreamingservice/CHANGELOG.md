@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.99.0 (2026-03-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.98.0 (2026-02-27)
+------------------
+
+* Feature - AWS Transcribe Streaming now supports specifying a resumption window for the stream through the SessionResumeWindow parameter, allowing customers to reconnect to their streams for a longer duration beyond stream start time.
+
 1.97.0 (2026-01-16)
 ------------------
 

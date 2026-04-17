@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.41.0 (2026-03-27)
+------------------
+
+* Feature - Minor formatting changes to remove unnecessary symbols.
+
+1.40.0 (2026-03-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.39.0 (2026-02-09)
 ------------------
 

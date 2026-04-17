@@ -2475,8 +2475,9 @@ module Aws::IAM
     # You can have a maximum of two sets of service-specific credentials for
     # each supported service per user.
     #
-    # You can create service-specific credentials for Amazon Bedrock,
-    # CodeCommit and Amazon Keyspaces (for Apache Cassandra).
+    # You can create service-specific credentials for Amazon Bedrock, Amazon
+    # CloudWatch Logs, CodeCommit and Amazon Keyspaces (for Apache
+    # Cassandra).
     #
     # You can reset the password to a new service-generated value by calling
     # [ResetServiceSpecificCredential][1].
@@ -2512,8 +2513,9 @@ module Aws::IAM
     #
     # @option params [Integer] :credential_age_days
     #   The number of days until the service specific credential expires. This
-    #   field is only valid for Bedrock API keys and must be a positive
-    #   integer. When not specified, the credential will not expire.
+    #   field is only valid for Bedrock and CloudWatch Logs API keys and must
+    #   be a positive integer. When not specified, the credential will not
+    #   expire.
     #
     # @return [Types::CreateServiceSpecificCredentialResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -14691,7 +14693,7 @@ module Aws::IAM
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-iam'
-      context[:gem_version] = '1.140.0'
+      context[:gem_version] = '1.142.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

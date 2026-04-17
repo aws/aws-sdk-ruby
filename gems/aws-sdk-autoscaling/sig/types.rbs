@@ -119,6 +119,7 @@ module Aws::AutoScaling
       attr_accessor predicted_capacity: ::Integer
       attr_accessor default_cooldown: ::Integer
       attr_accessor availability_zones: ::Array[::String]
+      attr_accessor availability_zone_ids: ::Array[::String]
       attr_accessor load_balancer_names: ::Array[::String]
       attr_accessor target_group_arns: ::Array[::String]
       attr_accessor health_check_type: ::String
@@ -171,6 +172,7 @@ module Aws::AutoScaling
       attr_accessor instance_type: ::String
       attr_accessor auto_scaling_group_name: ::String
       attr_accessor availability_zone: ::String
+      attr_accessor availability_zone_id: ::String
       attr_accessor lifecycle_state: ::String
       attr_accessor health_status: ::String
       attr_accessor launch_configuration_name: ::String
@@ -296,6 +298,7 @@ module Aws::AutoScaling
       attr_accessor desired_capacity: ::Integer
       attr_accessor default_cooldown: ::Integer
       attr_accessor availability_zones: ::Array[::String]
+      attr_accessor availability_zone_ids: ::Array[::String]
       attr_accessor load_balancer_names: ::Array[::String]
       attr_accessor target_group_arns: ::Array[::String]
       attr_accessor health_check_type: ::String
@@ -722,7 +725,8 @@ module Aws::AutoScaling
       attr_accessor instance_id: ::String
       attr_accessor instance_type: ::String
       attr_accessor availability_zone: ::String
-      attr_accessor lifecycle_state: ("Pending" | "Pending:Wait" | "Pending:Proceed" | "Quarantined" | "InService" | "Terminating" | "Terminating:Wait" | "Terminating:Proceed" | "Terminated" | "Detaching" | "Detached" | "EnteringStandby" | "Standby" | "Warmed:Pending" | "Warmed:Pending:Wait" | "Warmed:Pending:Proceed" | "Warmed:Terminating" | "Warmed:Terminating:Wait" | "Warmed:Terminating:Proceed" | "Warmed:Terminated" | "Warmed:Stopped" | "Warmed:Running" | "Warmed:Hibernated")
+      attr_accessor availability_zone_id: ::String
+      attr_accessor lifecycle_state: ("Pending" | "Pending:Wait" | "Pending:Proceed" | "Quarantined" | "InService" | "Terminating" | "Terminating:Wait" | "Terminating:Proceed" | "Terminating:Retained" | "Terminated" | "Detaching" | "Detached" | "EnteringStandby" | "Standby" | "ReplacingRootVolume" | "ReplacingRootVolume:Wait" | "ReplacingRootVolume:Proceed" | "RootVolumeReplaced" | "Warmed:Pending" | "Warmed:Pending:Wait" | "Warmed:Pending:Proceed" | "Warmed:Pending:Retained" | "Warmed:Terminating" | "Warmed:Terminating:Wait" | "Warmed:Terminating:Proceed" | "Warmed:Terminating:Retained" | "Warmed:Terminated" | "Warmed:Stopped" | "Warmed:Running" | "Warmed:Hibernated")
       attr_accessor health_status: ::String
       attr_accessor launch_configuration_name: ::String
       attr_accessor launch_template: Types::LaunchTemplateSpecification
@@ -1494,6 +1498,7 @@ module Aws::AutoScaling
       attr_accessor desired_capacity: ::Integer
       attr_accessor default_cooldown: ::Integer
       attr_accessor availability_zones: ::Array[::String]
+      attr_accessor availability_zone_ids: ::Array[::String]
       attr_accessor health_check_type: ::String
       attr_accessor health_check_grace_period: ::Integer
       attr_accessor placement_group: ::String

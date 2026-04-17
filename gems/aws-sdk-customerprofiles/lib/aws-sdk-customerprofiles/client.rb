@@ -1684,6 +1684,10 @@ module Aws::CustomerProfiles
     # @option params [String] :description
     #   The description of the domain object type.
     #
+    # @option params [String] :recommender_schema_name
+    #   The name of the recommender schema to use for this recommender. If not
+    #   specified, the default schema is used.
+    #
     # @option params [Hash<String,String>] :tags
     #   The tags used to organize, track, or control access for this resource.
     #
@@ -1697,19 +1701,27 @@ module Aws::CustomerProfiles
     #   resp = client.create_recommender({
     #     domain_name: "name", # required
     #     recommender_name: "name", # required
-    #     recommender_recipe_name: "recommended-for-you", # required, accepts recommended-for-you, similar-items, frequently-paired-items, popular-items, trending-now
+    #     recommender_recipe_name: "recommended-for-you", # required, accepts recommended-for-you, similar-items, frequently-paired-items, popular-items, trending-now, personalized-ranking
     #     recommender_config: {
-    #       events_config: { # required
+    #       events_config: {
     #         event_parameters_list: [ # required
     #           {
     #             event_type: "EventParametersEventTypeString", # required
     #             event_value_threshold: 1.0,
+    #             event_weight: 1.0,
     #           },
     #         ],
     #       },
     #       training_frequency: 1,
+    #       inference_config: {
+    #         min_provisioned_tps: 1,
+    #       },
+    #       included_columns: {
+    #         "String" => ["text"],
+    #       },
     #     },
     #     description: "sensitiveText",
+    #     recommender_schema_name: "name",
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
@@ -1727,6 +1739,133 @@ module Aws::CustomerProfiles
     # @param [Hash] params ({})
     def create_recommender(params = {}, options = {})
       req = build_request(:create_recommender, params)
+      req.send_request(options)
+    end
+
+    # Creates a recommender filter. A recommender filter specifies which
+    # items to include or exclude from recommendations.
+    #
+    # @option params [required, String] :domain_name
+    #   The unique name of the domain.
+    #
+    # @option params [required, String] :recommender_filter_name
+    #   The name of the recommender filter. The name must be unique within the
+    #   domain.
+    #
+    # @option params [required, String] :recommender_filter_expression
+    #   The filter expression that defines which items to include or exclude
+    #   from recommendations.
+    #
+    # @option params [String] :recommender_schema_name
+    #   The name of the recommender schema to use for this recommender filter.
+    #   If not specified, the default schema is used.
+    #
+    # @option params [String] :description
+    #   A description of the recommender filter.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   The tags used to organize, track, or control access for this resource.
+    #
+    # @return [Types::CreateRecommenderFilterResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateRecommenderFilterResponse#recommender_filter_arn #recommender_filter_arn} => String
+    #   * {Types::CreateRecommenderFilterResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_recommender_filter({
+    #     domain_name: "name", # required
+    #     recommender_filter_name: "RecommenderFilterName", # required
+    #     recommender_filter_expression: "RecommenderFilterExpression", # required
+    #     recommender_schema_name: "name",
+    #     description: "sensitiveText",
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.recommender_filter_arn #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/CreateRecommenderFilter AWS API Documentation
+    #
+    # @overload create_recommender_filter(params = {})
+    # @param [Hash] params ({})
+    def create_recommender_filter(params = {}, options = {})
+      req = build_request(:create_recommender_filter, params)
+      req.send_request(options)
+    end
+
+    # Creates a recommender schema. A recommender schema defines the set of
+    # data columns available for training recommenders and filters under a
+    # domain.
+    #
+    # @option params [required, String] :domain_name
+    #   The unique name of the domain.
+    #
+    # @option params [required, String] :recommender_schema_name
+    #   The name of the recommender schema. The name must be unique within the
+    #   domain.
+    #
+    # @option params [required, Hash<String,Array>] :fields
+    #   A map of dataset type to column definitions that specifies which data
+    #   columns to include in the schema. Currently only the `_webAnalytics`
+    #   key is supported.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   The tags used to organize, track, or control access for this resource.
+    #
+    # @return [Types::CreateRecommenderSchemaResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateRecommenderSchemaResponse#recommender_schema_arn #recommender_schema_arn} => String
+    #   * {Types::CreateRecommenderSchemaResponse#recommender_schema_name #recommender_schema_name} => String
+    #   * {Types::CreateRecommenderSchemaResponse#fields #fields} => Hash&lt;String,Array&lt;Types::RecommenderSchemaField&gt;&gt;
+    #   * {Types::CreateRecommenderSchemaResponse#created_at #created_at} => Time
+    #   * {Types::CreateRecommenderSchemaResponse#status #status} => String
+    #   * {Types::CreateRecommenderSchemaResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_recommender_schema({
+    #     domain_name: "name", # required
+    #     recommender_schema_name: "name", # required
+    #     fields: { # required
+    #       "String" => [
+    #         {
+    #           target_field_name: "text", # required
+    #           content_type: "STRING", # accepts STRING, NUMBER
+    #           feature_type: "TEXTUAL", # accepts TEXTUAL, CATEGORICAL
+    #         },
+    #       ],
+    #     },
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.recommender_schema_arn #=> String
+    #   resp.recommender_schema_name #=> String
+    #   resp.fields #=> Hash
+    #   resp.fields["String"] #=> Array
+    #   resp.fields["String"][0].target_field_name #=> String
+    #   resp.fields["String"][0].content_type #=> String, one of "STRING", "NUMBER"
+    #   resp.fields["String"][0].feature_type #=> String, one of "TEXTUAL", "CATEGORICAL"
+    #   resp.created_at #=> Time
+    #   resp.status #=> String, one of "ACTIVE", "DELETING"
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/CreateRecommenderSchema AWS API Documentation
+    #
+    # @overload create_recommender_schema(params = {})
+    # @param [Hash] params ({})
+    def create_recommender_schema(params = {}, options = {})
+      req = build_request(:create_recommender_schema, params)
       req.send_request(options)
     end
 
@@ -1750,6 +1889,9 @@ module Aws::CustomerProfiles
     #
     # @option params [String] :segment_sql_query
     #   The segment SQL query.
+    #
+    # @option params [Types::SegmentSort] :segment_sort
+    #   The segment sort.
     #
     # @option params [Hash<String,String>] :tags
     #   The tags used to organize, track, or control access for this resource.
@@ -1945,7 +2087,7 @@ module Aws::CustomerProfiles
     #                   },
     #                 },
     #                 attributes: {
-    #                   "typeName" => {
+    #                   "string1To255" => {
     #                     dimension_type: "INCLUSIVE", # required, accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEGINS_WITH, ENDS_WITH, BEFORE, AFTER, BETWEEN, NOT_BETWEEN, ON, GREATER_THAN, LESS_THAN, GREATER_THAN_OR_EQUAL, LESS_THAN_OR_EQUAL, EQUAL
     #                     values: ["string1To255"], # required
     #                   },
@@ -1982,6 +2124,16 @@ module Aws::CustomerProfiles
     #       include: "ALL", # accepts ALL, ANY, NONE
     #     },
     #     segment_sql_query: "sensitiveString1To50000",
+    #     segment_sort: {
+    #       attributes: [ # required
+    #         {
+    #           name: "fieldName", # required
+    #           data_type: "STRING", # accepts STRING, NUMBER, DATE
+    #           order: "ASC", # required, accepts ASC, DESC
+    #           type: "PROFILE", # accepts PROFILE, CALCULATED
+    #         },
+    #       ],
+    #     },
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
@@ -2202,7 +2354,7 @@ module Aws::CustomerProfiles
     #                   },
     #                 },
     #                 attributes: {
-    #                   "typeName" => {
+    #                   "string1To255" => {
     #                     dimension_type: "INCLUSIVE", # required, accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEGINS_WITH, ENDS_WITH, BEFORE, AFTER, BETWEEN, NOT_BETWEEN, ON, GREATER_THAN, LESS_THAN, GREATER_THAN_OR_EQUAL, LESS_THAN_OR_EQUAL, EQUAL
     #                     values: ["string1To255"], # required
     #                   },
@@ -2754,6 +2906,64 @@ module Aws::CustomerProfiles
       req.send_request(options)
     end
 
+    # Deletes a recommender filter from a domain.
+    #
+    # @option params [required, String] :domain_name
+    #   The unique name of the domain.
+    #
+    # @option params [required, String] :recommender_filter_name
+    #   The name of the recommender filter to delete.
+    #
+    # @return [Types::DeleteRecommenderFilterResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteRecommenderFilterResponse#message #message} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_recommender_filter({
+    #     domain_name: "name", # required
+    #     recommender_filter_name: "RecommenderFilterName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/DeleteRecommenderFilter AWS API Documentation
+    #
+    # @overload delete_recommender_filter(params = {})
+    # @param [Hash] params ({})
+    def delete_recommender_filter(params = {}, options = {})
+      req = build_request(:delete_recommender_filter, params)
+      req.send_request(options)
+    end
+
+    # Deletes a recommender schema from a domain.
+    #
+    # @option params [required, String] :domain_name
+    #   The unique name of the domain.
+    #
+    # @option params [required, String] :recommender_schema_name
+    #   The name of the recommender schema to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_recommender_schema({
+    #     domain_name: "name", # required
+    #     recommender_schema_name: "name", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/DeleteRecommenderSchema AWS API Documentation
+    #
+    # @overload delete_recommender_schema(params = {})
+    # @param [Hash] params ({})
+    def delete_recommender_schema(params = {}, options = {})
+      req = build_request(:delete_recommender_schema, params)
+      req.send_request(options)
+    end
+
     # Deletes a segment definition from the domain.
     #
     # @option params [required, String] :domain_name
@@ -2844,7 +3054,7 @@ module Aws::CustomerProfiles
     #   resp.detected_profile_object_types[0].keys #=> Hash
     #   resp.detected_profile_object_types[0].keys["name"] #=> Array
     #   resp.detected_profile_object_types[0].keys["name"][0].standard_identifiers #=> Array
-    #   resp.detected_profile_object_types[0].keys["name"][0].standard_identifiers[0] #=> String, one of "PROFILE", "ASSET", "CASE", "ORDER", "COMMUNICATION_RECORD", "AIR_PREFERENCE", "HOTEL_PREFERENCE", "AIR_BOOKING", "AIR_SEGMENT", "HOTEL_RESERVATION", "HOTEL_STAY_REVENUE", "LOYALTY", "LOYALTY_TRANSACTION", "LOYALTY_PROMOTION", "UNIQUE", "SECONDARY", "LOOKUP_ONLY", "NEW_ONLY"
+    #   resp.detected_profile_object_types[0].keys["name"][0].standard_identifiers[0] #=> String, one of "PROFILE", "ASSET", "CASE", "DEVICE", "WEB_ANALYTICS", "ORDER", "COMMUNICATION_RECORD", "AIR_PREFERENCE", "HOTEL_PREFERENCE", "AIR_BOOKING", "AIR_SEGMENT", "HOTEL_RESERVATION", "HOTEL_STAY_REVENUE", "LOYALTY", "LOYALTY_TRANSACTION", "LOYALTY_PROMOTION", "UNIQUE", "SECONDARY", "LOOKUP_ONLY", "NEW_ONLY"
     #   resp.detected_profile_object_types[0].keys["name"][0].field_names #=> Array
     #   resp.detected_profile_object_types[0].keys["name"][0].field_names[0] #=> String
     #
@@ -3696,6 +3906,7 @@ module Aws::CustomerProfiles
     #   * {Types::GetProfileObjectTypeResponse#source_last_updated_timestamp_format #source_last_updated_timestamp_format} => String
     #   * {Types::GetProfileObjectTypeResponse#max_available_profile_object_count #max_available_profile_object_count} => Integer
     #   * {Types::GetProfileObjectTypeResponse#max_profile_object_count #max_profile_object_count} => Integer
+    #   * {Types::GetProfileObjectTypeResponse#source_priority #source_priority} => Integer
     #   * {Types::GetProfileObjectTypeResponse#fields #fields} => Hash&lt;String,Types::ObjectTypeField&gt;
     #   * {Types::GetProfileObjectTypeResponse#keys #keys} => Hash&lt;String,Array&lt;Types::ObjectTypeKey&gt;&gt;
     #   * {Types::GetProfileObjectTypeResponse#created_at #created_at} => Time
@@ -3720,6 +3931,7 @@ module Aws::CustomerProfiles
     #   resp.source_last_updated_timestamp_format #=> String
     #   resp.max_available_profile_object_count #=> Integer
     #   resp.max_profile_object_count #=> Integer
+    #   resp.source_priority #=> Integer
     #   resp.fields #=> Hash
     #   resp.fields["fieldName"].source #=> String
     #   resp.fields["fieldName"].target #=> String
@@ -3727,7 +3939,7 @@ module Aws::CustomerProfiles
     #   resp.keys #=> Hash
     #   resp.keys["name"] #=> Array
     #   resp.keys["name"][0].standard_identifiers #=> Array
-    #   resp.keys["name"][0].standard_identifiers[0] #=> String, one of "PROFILE", "ASSET", "CASE", "ORDER", "COMMUNICATION_RECORD", "AIR_PREFERENCE", "HOTEL_PREFERENCE", "AIR_BOOKING", "AIR_SEGMENT", "HOTEL_RESERVATION", "HOTEL_STAY_REVENUE", "LOYALTY", "LOYALTY_TRANSACTION", "LOYALTY_PROMOTION", "UNIQUE", "SECONDARY", "LOOKUP_ONLY", "NEW_ONLY"
+    #   resp.keys["name"][0].standard_identifiers[0] #=> String, one of "PROFILE", "ASSET", "CASE", "DEVICE", "WEB_ANALYTICS", "ORDER", "COMMUNICATION_RECORD", "AIR_PREFERENCE", "HOTEL_PREFERENCE", "AIR_BOOKING", "AIR_SEGMENT", "HOTEL_RESERVATION", "HOTEL_STAY_REVENUE", "LOYALTY", "LOYALTY_TRANSACTION", "LOYALTY_PROMOTION", "UNIQUE", "SECONDARY", "LOOKUP_ONLY", "NEW_ONLY"
     #   resp.keys["name"][0].field_names #=> Array
     #   resp.keys["name"][0].field_names[0] #=> String
     #   resp.created_at #=> Time
@@ -3785,7 +3997,7 @@ module Aws::CustomerProfiles
     #   resp.keys #=> Hash
     #   resp.keys["name"] #=> Array
     #   resp.keys["name"][0].standard_identifiers #=> Array
-    #   resp.keys["name"][0].standard_identifiers[0] #=> String, one of "PROFILE", "ASSET", "CASE", "ORDER", "COMMUNICATION_RECORD", "AIR_PREFERENCE", "HOTEL_PREFERENCE", "AIR_BOOKING", "AIR_SEGMENT", "HOTEL_RESERVATION", "HOTEL_STAY_REVENUE", "LOYALTY", "LOYALTY_TRANSACTION", "LOYALTY_PROMOTION", "UNIQUE", "SECONDARY", "LOOKUP_ONLY", "NEW_ONLY"
+    #   resp.keys["name"][0].standard_identifiers[0] #=> String, one of "PROFILE", "ASSET", "CASE", "DEVICE", "WEB_ANALYTICS", "ORDER", "COMMUNICATION_RECORD", "AIR_PREFERENCE", "HOTEL_PREFERENCE", "AIR_BOOKING", "AIR_SEGMENT", "HOTEL_RESERVATION", "HOTEL_STAY_REVENUE", "LOYALTY", "LOYALTY_TRANSACTION", "LOYALTY_PROMOTION", "UNIQUE", "SECONDARY", "LOOKUP_ONLY", "NEW_ONLY"
     #   resp.keys["name"][0].field_names #=> Array
     #   resp.keys["name"][0].field_names[0] #=> String
     #
@@ -3815,9 +4027,30 @@ module Aws::CustomerProfiles
     #   The contextual metadata used to provide dynamic runtime information to
     #   tailor recommendations.
     #
+    # @option params [Array<Types::RecommenderFilter>] :recommender_filters
+    #   A list of filters to apply to the returned recommendations. Filters
+    #   define criteria for including or excluding items from the
+    #   recommendation results.
+    #
+    # @option params [Array<Types::RecommenderPromotionalFilter>] :recommender_promotional_filters
+    #   A list of promotional filters to apply to the recommendations.
+    #   Promotional filters allow you to promote specific items within a
+    #   configurable subset of recommendation results.
+    #
+    # @option params [Array<String>] :candidate_ids
+    #   A list of item IDs to rank for the user. Use this when you want to
+    #   re-rank a specific set of items rather than getting recommendations
+    #   from the full item catalog. Required for personalized-ranking use
+    #   cases.
+    #
     # @option params [Integer] :max_results
     #   The maximum number of recommendations to return. The default value is
     #   10.
+    #
+    # @option params [Types::MetadataConfig] :metadata_config
+    #   Configuration for including item metadata in the recommendation
+    #   response. Use this to specify which metadata columns to return
+    #   alongside recommended items.
     #
     # @return [Types::GetProfileRecommendationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3832,7 +4065,29 @@ module Aws::CustomerProfiles
     #     context: {
     #       "ContextKey" => "string1To255",
     #     },
+    #     recommender_filters: [
+    #       {
+    #         name: "name",
+    #         values: {
+    #           "RecommenderFilterAttributeName" => "RecommenderFilterAttributeValue",
+    #         },
+    #       },
+    #     ],
+    #     recommender_promotional_filters: [
+    #       {
+    #         name: "name",
+    #         values: {
+    #           "RecommenderFilterAttributeName" => "RecommenderFilterAttributeValue",
+    #         },
+    #         promotion_name: "name",
+    #         percent_promoted_items: 1,
+    #       },
+    #     ],
+    #     candidate_ids: ["string1To255"],
     #     max_results: 1,
+    #     metadata_config: {
+    #       metadata_columns: ["MetadataColumnName"],
+    #     },
     #   })
     #
     # @example Response structure
@@ -3878,6 +4133,7 @@ module Aws::CustomerProfiles
     #
     #   * {Types::GetRecommenderResponse#recommender_name #recommender_name} => String
     #   * {Types::GetRecommenderResponse#recommender_recipe_name #recommender_recipe_name} => String
+    #   * {Types::GetRecommenderResponse#recommender_schema_name #recommender_schema_name} => String
     #   * {Types::GetRecommenderResponse#recommender_config #recommender_config} => Types::RecommenderConfig
     #   * {Types::GetRecommenderResponse#description #description} => String
     #   * {Types::GetRecommenderResponse#status #status} => String
@@ -3899,11 +4155,17 @@ module Aws::CustomerProfiles
     # @example Response structure
     #
     #   resp.recommender_name #=> String
-    #   resp.recommender_recipe_name #=> String, one of "recommended-for-you", "similar-items", "frequently-paired-items", "popular-items", "trending-now"
+    #   resp.recommender_recipe_name #=> String, one of "recommended-for-you", "similar-items", "frequently-paired-items", "popular-items", "trending-now", "personalized-ranking"
+    #   resp.recommender_schema_name #=> String
     #   resp.recommender_config.events_config.event_parameters_list #=> Array
     #   resp.recommender_config.events_config.event_parameters_list[0].event_type #=> String
     #   resp.recommender_config.events_config.event_parameters_list[0].event_value_threshold #=> Float
+    #   resp.recommender_config.events_config.event_parameters_list[0].event_weight #=> Float
     #   resp.recommender_config.training_frequency #=> Integer
+    #   resp.recommender_config.inference_config.min_provisioned_tps #=> Integer
+    #   resp.recommender_config.included_columns #=> Hash
+    #   resp.recommender_config.included_columns["String"] #=> Array
+    #   resp.recommender_config.included_columns["String"][0] #=> String
     #   resp.description #=> String
     #   resp.status #=> String, one of "PENDING", "IN_PROGRESS", "ACTIVE", "FAILED", "STOPPING", "INACTIVE", "STARTING", "DELETING"
     #   resp.last_updated_at #=> Time
@@ -3912,7 +4174,12 @@ module Aws::CustomerProfiles
     #   resp.latest_recommender_update.recommender_config.events_config.event_parameters_list #=> Array
     #   resp.latest_recommender_update.recommender_config.events_config.event_parameters_list[0].event_type #=> String
     #   resp.latest_recommender_update.recommender_config.events_config.event_parameters_list[0].event_value_threshold #=> Float
+    #   resp.latest_recommender_update.recommender_config.events_config.event_parameters_list[0].event_weight #=> Float
     #   resp.latest_recommender_update.recommender_config.training_frequency #=> Integer
+    #   resp.latest_recommender_update.recommender_config.inference_config.min_provisioned_tps #=> Integer
+    #   resp.latest_recommender_update.recommender_config.included_columns #=> Hash
+    #   resp.latest_recommender_update.recommender_config.included_columns["String"] #=> Array
+    #   resp.latest_recommender_update.recommender_config.included_columns["String"][0] #=> String
     #   resp.latest_recommender_update.status #=> String, one of "PENDING", "IN_PROGRESS", "ACTIVE", "FAILED", "STOPPING", "INACTIVE", "STARTING", "DELETING"
     #   resp.latest_recommender_update.created_at #=> Time
     #   resp.latest_recommender_update.last_updated_at #=> Time
@@ -3933,6 +4200,95 @@ module Aws::CustomerProfiles
       req.send_request(options)
     end
 
+    # Retrieves information about a specific recommender filter in a domain.
+    #
+    # @option params [required, String] :domain_name
+    #   The unique name of the domain.
+    #
+    # @option params [required, String] :recommender_filter_name
+    #   The name of the recommender filter to retrieve.
+    #
+    # @return [Types::GetRecommenderFilterResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetRecommenderFilterResponse#recommender_filter_name #recommender_filter_name} => String
+    #   * {Types::GetRecommenderFilterResponse#recommender_filter_expression #recommender_filter_expression} => String
+    #   * {Types::GetRecommenderFilterResponse#recommender_schema_name #recommender_schema_name} => String
+    #   * {Types::GetRecommenderFilterResponse#created_at #created_at} => Time
+    #   * {Types::GetRecommenderFilterResponse#status #status} => String
+    #   * {Types::GetRecommenderFilterResponse#description #description} => String
+    #   * {Types::GetRecommenderFilterResponse#failure_reason #failure_reason} => String
+    #   * {Types::GetRecommenderFilterResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_recommender_filter({
+    #     domain_name: "name", # required
+    #     recommender_filter_name: "RecommenderFilterName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.recommender_filter_name #=> String
+    #   resp.recommender_filter_expression #=> String
+    #   resp.recommender_schema_name #=> String
+    #   resp.created_at #=> Time
+    #   resp.status #=> String, one of "ACTIVE", "PENDING", "IN_PROGRESS", "FAILED", "DELETING"
+    #   resp.description #=> String
+    #   resp.failure_reason #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/GetRecommenderFilter AWS API Documentation
+    #
+    # @overload get_recommender_filter(params = {})
+    # @param [Hash] params ({})
+    def get_recommender_filter(params = {}, options = {})
+      req = build_request(:get_recommender_filter, params)
+      req.send_request(options)
+    end
+
+    # Retrieves information about a specific recommender schema in a domain.
+    #
+    # @option params [required, String] :domain_name
+    #   The unique name of the domain.
+    #
+    # @option params [required, String] :recommender_schema_name
+    #   The name of the recommender schema to retrieve.
+    #
+    # @return [Types::GetRecommenderSchemaResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetRecommenderSchemaResponse#recommender_schema_name #recommender_schema_name} => String
+    #   * {Types::GetRecommenderSchemaResponse#fields #fields} => Hash&lt;String,Array&lt;Types::RecommenderSchemaField&gt;&gt;
+    #   * {Types::GetRecommenderSchemaResponse#created_at #created_at} => Time
+    #   * {Types::GetRecommenderSchemaResponse#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_recommender_schema({
+    #     domain_name: "name", # required
+    #     recommender_schema_name: "name", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.recommender_schema_name #=> String
+    #   resp.fields #=> Hash
+    #   resp.fields["String"] #=> Array
+    #   resp.fields["String"][0].target_field_name #=> String
+    #   resp.fields["String"][0].content_type #=> String, one of "STRING", "NUMBER"
+    #   resp.fields["String"][0].feature_type #=> String, one of "TEXTUAL", "CATEGORICAL"
+    #   resp.created_at #=> Time
+    #   resp.status #=> String, one of "ACTIVE", "DELETING"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/GetRecommenderSchema AWS API Documentation
+    #
+    # @overload get_recommender_schema(params = {})
+    # @param [Hash] params ({})
+    def get_recommender_schema(params = {}, options = {})
+      req = build_request(:get_recommender_schema, params)
+      req.send_request(options)
+    end
+
     # Gets a segment definition from the domain.
     #
     # @option params [required, String] :domain_name
@@ -3947,6 +4303,7 @@ module Aws::CustomerProfiles
     #   * {Types::GetSegmentDefinitionResponse#display_name #display_name} => String
     #   * {Types::GetSegmentDefinitionResponse#description #description} => String
     #   * {Types::GetSegmentDefinitionResponse#segment_groups #segment_groups} => Types::SegmentGroup
+    #   * {Types::GetSegmentDefinitionResponse#segment_sort #segment_sort} => Types::SegmentSort
     #   * {Types::GetSegmentDefinitionResponse#segment_definition_arn #segment_definition_arn} => String
     #   * {Types::GetSegmentDefinitionResponse#created_at #created_at} => Time
     #   * {Types::GetSegmentDefinitionResponse#tags #tags} => Hash&lt;String,String&gt;
@@ -4088,9 +4445,9 @@ module Aws::CustomerProfiles
     #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.billing_address.state.values #=> Array
     #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.billing_address.state.values[0] #=> String
     #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.attributes #=> Hash
-    #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.attributes["typeName"].dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEGINS_WITH", "ENDS_WITH", "BEFORE", "AFTER", "BETWEEN", "NOT_BETWEEN", "ON", "GREATER_THAN", "LESS_THAN", "GREATER_THAN_OR_EQUAL", "LESS_THAN_OR_EQUAL", "EQUAL"
-    #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.attributes["typeName"].values #=> Array
-    #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.attributes["typeName"].values[0] #=> String
+    #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.attributes["string1To255"].dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEGINS_WITH", "ENDS_WITH", "BEFORE", "AFTER", "BETWEEN", "NOT_BETWEEN", "ON", "GREATER_THAN", "LESS_THAN", "GREATER_THAN_OR_EQUAL", "LESS_THAN_OR_EQUAL", "EQUAL"
+    #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.attributes["string1To255"].values #=> Array
+    #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.attributes["string1To255"].values[0] #=> String
     #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.profile_type.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
     #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.profile_type.values #=> Array
     #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.profile_type.values[0] #=> String, one of "ACCOUNT_PROFILE", "PROFILE"
@@ -4106,6 +4463,11 @@ module Aws::CustomerProfiles
     #   resp.segment_groups.groups[0].source_type #=> String, one of "ALL", "ANY", "NONE"
     #   resp.segment_groups.groups[0].type #=> String, one of "ALL", "ANY", "NONE"
     #   resp.segment_groups.include #=> String, one of "ALL", "ANY", "NONE"
+    #   resp.segment_sort.attributes #=> Array
+    #   resp.segment_sort.attributes[0].name #=> String
+    #   resp.segment_sort.attributes[0].data_type #=> String, one of "STRING", "NUMBER", "DATE"
+    #   resp.segment_sort.attributes[0].order #=> String, one of "ASC", "DESC"
+    #   resp.segment_sort.attributes[0].type #=> String, one of "PROFILE", "CALCULATED"
     #   resp.segment_definition_arn #=> String
     #   resp.created_at #=> Time
     #   resp.tags #=> Hash
@@ -5381,6 +5743,7 @@ module Aws::CustomerProfiles
     #   resp.items[0].last_updated_at #=> Time
     #   resp.items[0].max_profile_object_count #=> Integer
     #   resp.items[0].max_available_profile_object_count #=> Integer
+    #   resp.items[0].source_priority #=> Integer
     #   resp.items[0].tags #=> Hash
     #   resp.items[0].tags["TagKey"] #=> String
     #   resp.next_token #=> String
@@ -5452,6 +5815,57 @@ module Aws::CustomerProfiles
       req.send_request(options)
     end
 
+    # Returns a list of recommender filters in the specified domain.
+    #
+    # @option params [required, String] :domain_name
+    #   The unique name of the domain.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of recommender filters to return in the response.
+    #   The default value is 100.
+    #
+    # @option params [String] :next_token
+    #   A token received from a previous ListRecommenderFilters call to
+    #   retrieve the next page of results.
+    #
+    # @return [Types::ListRecommenderFiltersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListRecommenderFiltersResponse#next_token #next_token} => String
+    #   * {Types::ListRecommenderFiltersResponse#recommender_filters #recommender_filters} => Array&lt;Types::RecommenderFilterSummary&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_recommender_filters({
+    #     domain_name: "name", # required
+    #     max_results: 1,
+    #     next_token: "token",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.recommender_filters #=> Array
+    #   resp.recommender_filters[0].recommender_filter_name #=> String
+    #   resp.recommender_filters[0].recommender_schema_name #=> String
+    #   resp.recommender_filters[0].recommender_filter_expression #=> String
+    #   resp.recommender_filters[0].created_at #=> Time
+    #   resp.recommender_filters[0].description #=> String
+    #   resp.recommender_filters[0].status #=> String, one of "ACTIVE", "PENDING", "IN_PROGRESS", "FAILED", "DELETING"
+    #   resp.recommender_filters[0].failure_reason #=> String
+    #   resp.recommender_filters[0].tags #=> Hash
+    #   resp.recommender_filters[0].tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/ListRecommenderFilters AWS API Documentation
+    #
+    # @overload list_recommender_filters(params = {})
+    # @param [Hash] params ({})
+    def list_recommender_filters(params = {}, options = {})
+      req = build_request(:list_recommender_filters, params)
+      req.send_request(options)
+    end
+
     # Returns a list of available recommender recipes that can be used to
     # create recommenders.
     #
@@ -5481,7 +5895,7 @@ module Aws::CustomerProfiles
     #
     #   resp.next_token #=> String
     #   resp.recommender_recipes #=> Array
-    #   resp.recommender_recipes[0].name #=> String, one of "recommended-for-you", "similar-items", "frequently-paired-items", "popular-items", "trending-now"
+    #   resp.recommender_recipes[0].name #=> String, one of "recommended-for-you", "similar-items", "frequently-paired-items", "popular-items", "trending-now", "personalized-ranking"
     #   resp.recommender_recipes[0].description #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/ListRecommenderRecipes AWS API Documentation
@@ -5490,6 +5904,56 @@ module Aws::CustomerProfiles
     # @param [Hash] params ({})
     def list_recommender_recipes(params = {}, options = {})
       req = build_request(:list_recommender_recipes, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of recommender schemas in the specified domain.
+    #
+    # @option params [required, String] :domain_name
+    #   The unique name of the domain.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of recommender schemas to return in the response.
+    #   The default value is 100.
+    #
+    # @option params [String] :next_token
+    #   A token received from a previous ListRecommenderSchemas call to
+    #   retrieve the next page of results.
+    #
+    # @return [Types::ListRecommenderSchemasResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListRecommenderSchemasResponse#next_token #next_token} => String
+    #   * {Types::ListRecommenderSchemasResponse#recommender_schemas #recommender_schemas} => Array&lt;Types::RecommenderSchemaSummary&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_recommender_schemas({
+    #     domain_name: "name", # required
+    #     max_results: 1,
+    #     next_token: "token",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.recommender_schemas #=> Array
+    #   resp.recommender_schemas[0].recommender_schema_name #=> String
+    #   resp.recommender_schemas[0].fields #=> Hash
+    #   resp.recommender_schemas[0].fields["String"] #=> Array
+    #   resp.recommender_schemas[0].fields["String"][0].target_field_name #=> String
+    #   resp.recommender_schemas[0].fields["String"][0].content_type #=> String, one of "STRING", "NUMBER"
+    #   resp.recommender_schemas[0].fields["String"][0].feature_type #=> String, one of "TEXTUAL", "CATEGORICAL"
+    #   resp.recommender_schemas[0].created_at #=> Time
+    #   resp.recommender_schemas[0].status #=> String, one of "ACTIVE", "DELETING"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/ListRecommenderSchemas AWS API Documentation
+    #
+    # @overload list_recommender_schemas(params = {})
+    # @param [Hash] params ({})
+    def list_recommender_schemas(params = {}, options = {})
+      req = build_request(:list_recommender_schemas, params)
       req.send_request(options)
     end
 
@@ -5526,11 +5990,17 @@ module Aws::CustomerProfiles
     #   resp.next_token #=> String
     #   resp.recommenders #=> Array
     #   resp.recommenders[0].recommender_name #=> String
-    #   resp.recommenders[0].recipe_name #=> String, one of "recommended-for-you", "similar-items", "frequently-paired-items", "popular-items", "trending-now"
+    #   resp.recommenders[0].recipe_name #=> String, one of "recommended-for-you", "similar-items", "frequently-paired-items", "popular-items", "trending-now", "personalized-ranking"
+    #   resp.recommenders[0].recommender_schema_name #=> String
     #   resp.recommenders[0].recommender_config.events_config.event_parameters_list #=> Array
     #   resp.recommenders[0].recommender_config.events_config.event_parameters_list[0].event_type #=> String
     #   resp.recommenders[0].recommender_config.events_config.event_parameters_list[0].event_value_threshold #=> Float
+    #   resp.recommenders[0].recommender_config.events_config.event_parameters_list[0].event_weight #=> Float
     #   resp.recommenders[0].recommender_config.training_frequency #=> Integer
+    #   resp.recommenders[0].recommender_config.inference_config.min_provisioned_tps #=> Integer
+    #   resp.recommenders[0].recommender_config.included_columns #=> Hash
+    #   resp.recommenders[0].recommender_config.included_columns["String"] #=> Array
+    #   resp.recommenders[0].recommender_config.included_columns["String"][0] #=> String
     #   resp.recommenders[0].created_at #=> Time
     #   resp.recommenders[0].description #=> String
     #   resp.recommenders[0].status #=> String, one of "PENDING", "IN_PROGRESS", "ACTIVE", "FAILED", "STOPPING", "INACTIVE", "STARTING", "DELETING"
@@ -5541,7 +6011,12 @@ module Aws::CustomerProfiles
     #   resp.recommenders[0].latest_recommender_update.recommender_config.events_config.event_parameters_list #=> Array
     #   resp.recommenders[0].latest_recommender_update.recommender_config.events_config.event_parameters_list[0].event_type #=> String
     #   resp.recommenders[0].latest_recommender_update.recommender_config.events_config.event_parameters_list[0].event_value_threshold #=> Float
+    #   resp.recommenders[0].latest_recommender_update.recommender_config.events_config.event_parameters_list[0].event_weight #=> Float
     #   resp.recommenders[0].latest_recommender_update.recommender_config.training_frequency #=> Integer
+    #   resp.recommenders[0].latest_recommender_update.recommender_config.inference_config.min_provisioned_tps #=> Integer
+    #   resp.recommenders[0].latest_recommender_update.recommender_config.included_columns #=> Hash
+    #   resp.recommenders[0].latest_recommender_update.recommender_config.included_columns["String"] #=> Array
+    #   resp.recommenders[0].latest_recommender_update.recommender_config.included_columns["String"][0] #=> String
     #   resp.recommenders[0].latest_recommender_update.status #=> String, one of "PENDING", "IN_PROGRESS", "ACTIVE", "FAILED", "STOPPING", "INACTIVE", "STARTING", "DELETING"
     #   resp.recommenders[0].latest_recommender_update.created_at #=> Time
     #   resp.recommenders[0].latest_recommender_update.last_updated_at #=> Time
@@ -6241,6 +6716,12 @@ module Aws::CustomerProfiles
     # @option params [Integer] :max_profile_object_count
     #   The amount of profile object max count assigned to the object type
     #
+    # @option params [Integer] :source_priority
+    #   An integer that determines the priority of this object type when data
+    #   from multiple sources is ingested. Lower values take priority. Object
+    #   types without a specified source priority default to the lowest
+    #   priority.
+    #
     # @option params [Hash<String,Types::ObjectTypeField>] :fields
     #   A map of the name and ObjectType field.
     #
@@ -6261,6 +6742,7 @@ module Aws::CustomerProfiles
     #   * {Types::PutProfileObjectTypeResponse#source_last_updated_timestamp_format #source_last_updated_timestamp_format} => String
     #   * {Types::PutProfileObjectTypeResponse#max_profile_object_count #max_profile_object_count} => Integer
     #   * {Types::PutProfileObjectTypeResponse#max_available_profile_object_count #max_available_profile_object_count} => Integer
+    #   * {Types::PutProfileObjectTypeResponse#source_priority #source_priority} => Integer
     #   * {Types::PutProfileObjectTypeResponse#fields #fields} => Hash&lt;String,Types::ObjectTypeField&gt;
     #   * {Types::PutProfileObjectTypeResponse#keys #keys} => Hash&lt;String,Array&lt;Types::ObjectTypeKey&gt;&gt;
     #   * {Types::PutProfileObjectTypeResponse#created_at #created_at} => Time
@@ -6279,6 +6761,7 @@ module Aws::CustomerProfiles
     #     allow_profile_creation: false,
     #     source_last_updated_timestamp_format: "string1To255",
     #     max_profile_object_count: 1,
+    #     source_priority: 1,
     #     fields: {
     #       "fieldName" => {
     #         source: "text",
@@ -6289,7 +6772,7 @@ module Aws::CustomerProfiles
     #     keys: {
     #       "name" => [
     #         {
-    #           standard_identifiers: ["PROFILE"], # accepts PROFILE, ASSET, CASE, ORDER, COMMUNICATION_RECORD, AIR_PREFERENCE, HOTEL_PREFERENCE, AIR_BOOKING, AIR_SEGMENT, HOTEL_RESERVATION, HOTEL_STAY_REVENUE, LOYALTY, LOYALTY_TRANSACTION, LOYALTY_PROMOTION, UNIQUE, SECONDARY, LOOKUP_ONLY, NEW_ONLY
+    #           standard_identifiers: ["PROFILE"], # accepts PROFILE, ASSET, CASE, DEVICE, WEB_ANALYTICS, ORDER, COMMUNICATION_RECORD, AIR_PREFERENCE, HOTEL_PREFERENCE, AIR_BOOKING, AIR_SEGMENT, HOTEL_RESERVATION, HOTEL_STAY_REVENUE, LOYALTY, LOYALTY_TRANSACTION, LOYALTY_PROMOTION, UNIQUE, SECONDARY, LOOKUP_ONLY, NEW_ONLY
     #           field_names: ["name"],
     #         },
     #       ],
@@ -6310,6 +6793,7 @@ module Aws::CustomerProfiles
     #   resp.source_last_updated_timestamp_format #=> String
     #   resp.max_profile_object_count #=> Integer
     #   resp.max_available_profile_object_count #=> Integer
+    #   resp.source_priority #=> Integer
     #   resp.fields #=> Hash
     #   resp.fields["fieldName"].source #=> String
     #   resp.fields["fieldName"].target #=> String
@@ -6317,7 +6801,7 @@ module Aws::CustomerProfiles
     #   resp.keys #=> Hash
     #   resp.keys["name"] #=> Array
     #   resp.keys["name"][0].standard_identifiers #=> Array
-    #   resp.keys["name"][0].standard_identifiers[0] #=> String, one of "PROFILE", "ASSET", "CASE", "ORDER", "COMMUNICATION_RECORD", "AIR_PREFERENCE", "HOTEL_PREFERENCE", "AIR_BOOKING", "AIR_SEGMENT", "HOTEL_RESERVATION", "HOTEL_STAY_REVENUE", "LOYALTY", "LOYALTY_TRANSACTION", "LOYALTY_PROMOTION", "UNIQUE", "SECONDARY", "LOOKUP_ONLY", "NEW_ONLY"
+    #   resp.keys["name"][0].standard_identifiers[0] #=> String, one of "PROFILE", "ASSET", "CASE", "DEVICE", "WEB_ANALYTICS", "ORDER", "COMMUNICATION_RECORD", "AIR_PREFERENCE", "HOTEL_PREFERENCE", "AIR_BOOKING", "AIR_SEGMENT", "HOTEL_RESERVATION", "HOTEL_STAY_REVENUE", "LOYALTY", "LOYALTY_TRANSACTION", "LOYALTY_PROMOTION", "UNIQUE", "SECONDARY", "LOOKUP_ONLY", "NEW_ONLY"
     #   resp.keys["name"][0].field_names #=> Array
     #   resp.keys["name"][0].field_names[0] #=> String
     #   resp.created_at #=> Time
@@ -7409,15 +7893,22 @@ module Aws::CustomerProfiles
     #     recommender_name: "name", # required
     #     description: "sensitiveText",
     #     recommender_config: {
-    #       events_config: { # required
+    #       events_config: {
     #         event_parameters_list: [ # required
     #           {
     #             event_type: "EventParametersEventTypeString", # required
     #             event_value_threshold: 1.0,
+    #             event_weight: 1.0,
     #           },
     #         ],
     #       },
     #       training_frequency: 1,
+    #       inference_config: {
+    #         min_provisioned_tps: 1,
+    #       },
+    #       included_columns: {
+    #         "String" => ["text"],
+    #       },
     #     },
     #   })
     #
@@ -7452,7 +7943,7 @@ module Aws::CustomerProfiles
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-customerprofiles'
-      context[:gem_version] = '1.79.0'
+      context[:gem_version] = '1.84.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

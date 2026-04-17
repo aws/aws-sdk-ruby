@@ -54,7 +54,7 @@ module Aws::CloudFrontKeyValueStore
   autoload :EndpointProvider, 'aws-sdk-cloudfrontkeyvaluestore/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-cloudfrontkeyvaluestore/endpoints'
 
-  GEM_VERSION = '1.33.0'
+  GEM_VERSION = '1.34.0'
 
 end
 

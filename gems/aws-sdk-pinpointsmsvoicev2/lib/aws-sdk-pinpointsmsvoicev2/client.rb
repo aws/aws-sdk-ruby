@@ -514,9 +514,11 @@ module Aws::PinpointSMSVoiceV2
     #   If you are using a shared End User Messaging SMS resource then you
     #   must use the full Amazon Resource Name(ARN).
     #
-    # @option params [required, String] :iso_country_code
+    # @option params [String] :iso_country_code
     #   The new two-character code, in ISO 3166-1 alpha-2 format, for the
-    #   country or region of the origination identity.
+    #   country or region of the origination identity. This field is optional
+    #   and is not required for origination identity types that are not
+    #   country-specific, such as RCS agents.
     #
     # @option params [String] :client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
@@ -540,7 +542,7 @@ module Aws::PinpointSMSVoiceV2
     #   resp = client.associate_origination_identity({
     #     pool_id: "PoolIdOrArn", # required
     #     origination_identity: "PhoneOrSenderIdOrArn", # required
-    #     iso_country_code: "IsoCountryCode", # required
+    #     iso_country_code: "IsoCountryCode",
     #     client_token: "ClientToken",
     #   })
     #
@@ -841,6 +843,169 @@ module Aws::PinpointSMSVoiceV2
       req.send_request(options)
     end
 
+    # Creates a new notify configuration for managed messaging. A notify
+    # configuration defines the settings for sending templated messages,
+    # including the display name, use case, enabled channels, and enabled
+    # countries.
+    #
+    # @option params [required, String] :display_name
+    #   The display name to associate with the notify configuration.
+    #
+    # @option params [required, String] :use_case
+    #   The use case for the notify configuration.
+    #
+    # @option params [String] :default_template_id
+    #   The default template identifier to associate with the notify
+    #   configuration. If specified, this template is used when sending
+    #   messages without an explicit template identifier.
+    #
+    # @option params [String] :pool_id
+    #   The identifier of the pool to associate with the notify configuration.
+    #
+    # @option params [Array<String>] :enabled_countries
+    #   An array of two-character ISO country codes, in ISO 3166-1 alpha-2
+    #   format, that are enabled for the notify configuration.
+    #
+    # @option params [required, Array<String>] :enabled_channels
+    #   An array of channels to enable for the notify configuration. Supported
+    #   values include `SMS` and `VOICE`.
+    #
+    # @option params [Boolean] :deletion_protection_enabled
+    #   By default this is set to false. When set to true the notify
+    #   configuration can't be deleted. You can change this value using the
+    #   UpdateNotifyConfiguration action.
+    #
+    # @option params [String] :client_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. If you don't specify a client token, a
+    #   randomly generated token is used for the request to ensure
+    #   idempotency.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   An array of tags (key and value pairs) associated with the notify
+    #   configuration.
+    #
+    # @return [Types::CreateNotifyConfigurationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateNotifyConfigurationResult#notify_configuration_arn #notify_configuration_arn} => String
+    #   * {Types::CreateNotifyConfigurationResult#notify_configuration_id #notify_configuration_id} => String
+    #   * {Types::CreateNotifyConfigurationResult#display_name #display_name} => String
+    #   * {Types::CreateNotifyConfigurationResult#use_case #use_case} => String
+    #   * {Types::CreateNotifyConfigurationResult#default_template_id #default_template_id} => String
+    #   * {Types::CreateNotifyConfigurationResult#pool_id #pool_id} => String
+    #   * {Types::CreateNotifyConfigurationResult#enabled_countries #enabled_countries} => Array&lt;String&gt;
+    #   * {Types::CreateNotifyConfigurationResult#enabled_channels #enabled_channels} => Array&lt;String&gt;
+    #   * {Types::CreateNotifyConfigurationResult#tier #tier} => String
+    #   * {Types::CreateNotifyConfigurationResult#tier_upgrade_status #tier_upgrade_status} => String
+    #   * {Types::CreateNotifyConfigurationResult#status #status} => String
+    #   * {Types::CreateNotifyConfigurationResult#rejection_reason #rejection_reason} => String
+    #   * {Types::CreateNotifyConfigurationResult#deletion_protection_enabled #deletion_protection_enabled} => Boolean
+    #   * {Types::CreateNotifyConfigurationResult#tags #tags} => Array&lt;Types::Tag&gt;
+    #   * {Types::CreateNotifyConfigurationResult#created_timestamp #created_timestamp} => Time
+    #
+    #
+    # @example Example: CreateNotifyConfiguration
+    #
+    #   # Create a notify configuration for OTP code verification over SMS.
+    #
+    #   resp = client.create_notify_configuration({
+    #     deletion_protection_enabled: false, 
+    #     display_name: "MyOTPConfig", 
+    #     enabled_channels: [
+    #       "SMS", 
+    #     ], 
+    #     enabled_countries: [
+    #       "US", 
+    #       "CA", 
+    #     ], 
+    #     tags: [
+    #       {
+    #         key: "Environment", 
+    #         value: "Production", 
+    #       }, 
+    #     ], 
+    #     use_case: "CODE_VERIFICATION", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     created_timestamp: Time.parse(1704067200), 
+    #     deletion_protection_enabled: false, 
+    #     display_name: "MyOTPConfig", 
+    #     enabled_channels: [
+    #       "SMS", 
+    #     ], 
+    #     enabled_countries: [
+    #       "US", 
+    #       "CA", 
+    #     ], 
+    #     notify_configuration_arn: "arn:aws:sms-voice:us-east-1:111122223333:notify-configuration/nc-1234567890abcdef0", 
+    #     notify_configuration_id: "nc-1234567890abcdef0", 
+    #     status: "ACTIVE", 
+    #     tags: [
+    #       {
+    #         key: "Environment", 
+    #         value: "Production", 
+    #       }, 
+    #     ], 
+    #     tier: "BASIC", 
+    #     tier_upgrade_status: "BASIC", 
+    #     use_case: "CODE_VERIFICATION", 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_notify_configuration({
+    #     display_name: "NotifyConfigurationDisplayName", # required
+    #     use_case: "CODE_VERIFICATION", # required, accepts CODE_VERIFICATION
+    #     default_template_id: "NotifyTemplateId",
+    #     pool_id: "PoolIdOrArn",
+    #     enabled_countries: ["IsoCountryCode"],
+    #     enabled_channels: ["SMS"], # required, accepts SMS, VOICE, MMS, RCS
+    #     deletion_protection_enabled: false,
+    #     client_token: "ClientToken",
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.notify_configuration_arn #=> String
+    #   resp.notify_configuration_id #=> String
+    #   resp.display_name #=> String
+    #   resp.use_case #=> String, one of "CODE_VERIFICATION"
+    #   resp.default_template_id #=> String
+    #   resp.pool_id #=> String
+    #   resp.enabled_countries #=> Array
+    #   resp.enabled_countries[0] #=> String
+    #   resp.enabled_channels #=> Array
+    #   resp.enabled_channels[0] #=> String, one of "SMS", "VOICE", "MMS", "RCS"
+    #   resp.tier #=> String, one of "BASIC", "ADVANCED"
+    #   resp.tier_upgrade_status #=> String, one of "BASIC", "PENDING_UPGRADE", "ADVANCED", "REJECTED"
+    #   resp.status #=> String, one of "PENDING", "ACTIVE", "REJECTED", "REQUIRES_VERIFICATION"
+    #   resp.rejection_reason #=> String
+    #   resp.deletion_protection_enabled #=> Boolean
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
+    #   resp.created_timestamp #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/CreateNotifyConfiguration AWS API Documentation
+    #
+    # @overload create_notify_configuration(params = {})
+    # @param [Hash] params ({})
+    def create_notify_configuration(params = {}, options = {})
+      req = build_request(:create_notify_configuration, params)
+      req.send_request(options)
+    end
+
     # Creates a new opt-out list.
     #
     # If the opt-out list name already exists, an error is returned.
@@ -944,9 +1109,11 @@ module Aws::PinpointSMSVoiceV2
     #   [2]: https://docs.aws.amazon.com/pinpoint/latest/apireference_smsvoicev2/API_DescribeSenderIds.html
     #   [3]: https://docs.aws.amazon.com/pinpoint/latest/apireference_smsvoicev2/API_AssociateOriginationIdentity.html
     #
-    # @option params [required, String] :iso_country_code
+    # @option params [String] :iso_country_code
     #   The new two-character code, in ISO 3166-1 alpha-2 format, for the
-    #   country or region of the new pool.
+    #   country or region of the new pool. This field is optional and is not
+    #   required for origination identity types that are not country-specific,
+    #   such as RCS agents.
     #
     # @option params [required, String] :message_type
     #   The type of message. Valid values are TRANSACTIONAL for messages that
@@ -994,7 +1161,7 @@ module Aws::PinpointSMSVoiceV2
     #
     #   resp = client.create_pool({
     #     origination_identity: "PhoneOrSenderIdOrArn", # required
-    #     iso_country_code: "IsoCountryCode", # required
+    #     iso_country_code: "IsoCountryCode",
     #     message_type: "TRANSACTIONAL", # required, accepts TRANSACTIONAL, PROMOTIONAL
     #     deletion_protection_enabled: false,
     #     tags: [
@@ -1095,6 +1262,83 @@ module Aws::PinpointSMSVoiceV2
     # @param [Hash] params ({})
     def create_protect_configuration(params = {}, options = {})
       req = build_request(:create_protect_configuration, params)
+      req.send_request(options)
+    end
+
+    # Creates a new RCS agent for sending rich messages through the RCS
+    # channel. The RCS agent serves as an origination identity for sending
+    # RCS messages to your recipients.
+    #
+    # @option params [Boolean] :deletion_protection_enabled
+    #   By default this is set to false. When set to true the RCS agent can't
+    #   be deleted. You can change this value using the UpdateRcsAgent action.
+    #
+    # @option params [String] :opt_out_list_name
+    #   The OptOutList to associate with the RCS agent. Valid values are
+    #   either OptOutListName or OptOutListArn.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   An array of tags (key and value pairs) associated with the RCS agent.
+    #
+    # @option params [String] :client_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. If you don't specify a client token, a
+    #   randomly generated token is used for the request to ensure
+    #   idempotency.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::CreateRcsAgentResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateRcsAgentResult#rcs_agent_arn #rcs_agent_arn} => String
+    #   * {Types::CreateRcsAgentResult#rcs_agent_id #rcs_agent_id} => String
+    #   * {Types::CreateRcsAgentResult#status #status} => String
+    #   * {Types::CreateRcsAgentResult#deletion_protection_enabled #deletion_protection_enabled} => Boolean
+    #   * {Types::CreateRcsAgentResult#opt_out_list_name #opt_out_list_name} => String
+    #   * {Types::CreateRcsAgentResult#created_timestamp #created_timestamp} => Time
+    #   * {Types::CreateRcsAgentResult#self_managed_opt_outs_enabled #self_managed_opt_outs_enabled} => Boolean
+    #   * {Types::CreateRcsAgentResult#two_way_channel_arn #two_way_channel_arn} => String
+    #   * {Types::CreateRcsAgentResult#two_way_channel_role #two_way_channel_role} => String
+    #   * {Types::CreateRcsAgentResult#two_way_enabled #two_way_enabled} => Boolean
+    #   * {Types::CreateRcsAgentResult#tags #tags} => Array&lt;Types::Tag&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_rcs_agent({
+    #     deletion_protection_enabled: false,
+    #     opt_out_list_name: "OptOutListNameOrArn",
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.rcs_agent_arn #=> String
+    #   resp.rcs_agent_id #=> String
+    #   resp.status #=> String, one of "CREATED", "PENDING", "TESTING", "PARTIAL", "ACTIVE", "DELETED"
+    #   resp.deletion_protection_enabled #=> Boolean
+    #   resp.opt_out_list_name #=> String
+    #   resp.created_timestamp #=> Time
+    #   resp.self_managed_opt_outs_enabled #=> Boolean
+    #   resp.two_way_channel_arn #=> String
+    #   resp.two_way_channel_role #=> String
+    #   resp.two_way_enabled #=> Boolean
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/CreateRcsAgent AWS API Documentation
+    #
+    # @overload create_rcs_agent(params = {})
+    # @param [Hash] params ({})
+    def create_rcs_agent(params = {}, options = {})
+      req = build_request(:create_rcs_agent, params)
       req.send_request(options)
     end
 
@@ -1310,7 +1554,7 @@ module Aws::PinpointSMSVoiceV2
     #   resp.registration_arn #=> String
     #   resp.registration_id #=> String
     #   resp.version_number #=> Integer
-    #   resp.registration_version_status #=> String, one of "DRAFT", "SUBMITTED", "AWS_REVIEWING", "REVIEWING", "REQUIRES_AUTHENTICATION", "APPROVED", "DISCARDED", "DENIED", "REVOKED", "ARCHIVED"
+    #   resp.registration_version_status #=> String, one of "DRAFT", "SUBMITTED", "AWS_REVIEWING", "REVIEWING", "REQUIRES_AUTHENTICATION", "APPROVED", "DISCARDED", "DENIED", "REVOKED", "ARCHIVED", "REQUIRES_OFFLINE_REVIEW"
     #   resp.registration_version_status_history.draft_timestamp #=> Time
     #   resp.registration_version_status_history.submitted_timestamp #=> Time
     #   resp.registration_version_status_history.aws_reviewing_timestamp #=> Time
@@ -1338,6 +1582,10 @@ module Aws::PinpointSMSVoiceV2
     # @option params [required, String] :destination_phone_number
     #   The verified destination phone number, in E.164 format.
     #
+    # @option params [String] :rcs_agent_id
+    #   The unique identifier of the RCS agent to associate with the verified
+    #   destination number. You can use either the RcsAgentId or RcsAgentArn.
+    #
     # @option params [Array<Types::Tag>] :tags
     #   An array of tags (key and value pairs) to associate with the
     #   destination number.
@@ -1357,6 +1605,7 @@ module Aws::PinpointSMSVoiceV2
     #   * {Types::CreateVerifiedDestinationNumberResult#verified_destination_number_id #verified_destination_number_id} => String
     #   * {Types::CreateVerifiedDestinationNumberResult#destination_phone_number #destination_phone_number} => String
     #   * {Types::CreateVerifiedDestinationNumberResult#status #status} => String
+    #   * {Types::CreateVerifiedDestinationNumberResult#rcs_agent_id #rcs_agent_id} => String
     #   * {Types::CreateVerifiedDestinationNumberResult#tags #tags} => Array&lt;Types::Tag&gt;
     #   * {Types::CreateVerifiedDestinationNumberResult#created_timestamp #created_timestamp} => Time
     #
@@ -1364,6 +1613,7 @@ module Aws::PinpointSMSVoiceV2
     #
     #   resp = client.create_verified_destination_number({
     #     destination_phone_number: "PhoneNumber", # required
+    #     rcs_agent_id: "RcsAgentIdOrArn",
     #     tags: [
     #       {
     #         key: "TagKey", # required
@@ -1378,7 +1628,8 @@ module Aws::PinpointSMSVoiceV2
     #   resp.verified_destination_number_arn #=> String
     #   resp.verified_destination_number_id #=> String
     #   resp.destination_phone_number #=> String
-    #   resp.status #=> String, one of "PENDING", "VERIFIED"
+    #   resp.status #=> String, one of "PENDING", "VERIFIED", "UNSUPPORTED"
+    #   resp.rcs_agent_id #=> String
     #   resp.tags #=> Array
     #   resp.tags[0].key #=> String
     #   resp.tags[0].value #=> String
@@ -1687,6 +1938,135 @@ module Aws::PinpointSMSVoiceV2
       req.send_request(options)
     end
 
+    # Deletes an existing notify configuration.
+    #
+    # If deletion protection is enabled, an error is returned.
+    #
+    # @option params [required, String] :notify_configuration_id
+    #   The identifier of the notify configuration to delete. The
+    #   NotifyConfigurationId can be found using the
+    #   DescribeNotifyConfigurations operation.
+    #
+    # @return [Types::DeleteNotifyConfigurationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteNotifyConfigurationResult#notify_configuration_arn #notify_configuration_arn} => String
+    #   * {Types::DeleteNotifyConfigurationResult#notify_configuration_id #notify_configuration_id} => String
+    #   * {Types::DeleteNotifyConfigurationResult#display_name #display_name} => String
+    #   * {Types::DeleteNotifyConfigurationResult#use_case #use_case} => String
+    #   * {Types::DeleteNotifyConfigurationResult#default_template_id #default_template_id} => String
+    #   * {Types::DeleteNotifyConfigurationResult#pool_id #pool_id} => String
+    #   * {Types::DeleteNotifyConfigurationResult#enabled_countries #enabled_countries} => Array&lt;String&gt;
+    #   * {Types::DeleteNotifyConfigurationResult#enabled_channels #enabled_channels} => Array&lt;String&gt;
+    #   * {Types::DeleteNotifyConfigurationResult#tier #tier} => String
+    #   * {Types::DeleteNotifyConfigurationResult#tier_upgrade_status #tier_upgrade_status} => String
+    #   * {Types::DeleteNotifyConfigurationResult#status #status} => String
+    #   * {Types::DeleteNotifyConfigurationResult#rejection_reason #rejection_reason} => String
+    #   * {Types::DeleteNotifyConfigurationResult#deletion_protection_enabled #deletion_protection_enabled} => Boolean
+    #   * {Types::DeleteNotifyConfigurationResult#created_timestamp #created_timestamp} => Time
+    #
+    #
+    # @example Example: DeleteNotifyConfiguration
+    #
+    #   # Delete an existing notify configuration.
+    #
+    #   resp = client.delete_notify_configuration({
+    #     notify_configuration_id: "nc-1234567890abcdef0", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     created_timestamp: Time.parse(1704067200), 
+    #     deletion_protection_enabled: false, 
+    #     display_name: "MyOTPConfig", 
+    #     enabled_channels: [
+    #       "SMS", 
+    #     ], 
+    #     enabled_countries: [
+    #       "US", 
+    #       "CA", 
+    #     ], 
+    #     notify_configuration_arn: "arn:aws:sms-voice:us-east-1:111122223333:notify-configuration/nc-1234567890abcdef0", 
+    #     notify_configuration_id: "nc-1234567890abcdef0", 
+    #     status: "ACTIVE", 
+    #     tier: "BASIC", 
+    #     tier_upgrade_status: "BASIC", 
+    #     use_case: "CODE_VERIFICATION", 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_notify_configuration({
+    #     notify_configuration_id: "NotifyConfigurationIdOrArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.notify_configuration_arn #=> String
+    #   resp.notify_configuration_id #=> String
+    #   resp.display_name #=> String
+    #   resp.use_case #=> String, one of "CODE_VERIFICATION"
+    #   resp.default_template_id #=> String
+    #   resp.pool_id #=> String
+    #   resp.enabled_countries #=> Array
+    #   resp.enabled_countries[0] #=> String
+    #   resp.enabled_channels #=> Array
+    #   resp.enabled_channels[0] #=> String, one of "SMS", "VOICE", "MMS", "RCS"
+    #   resp.tier #=> String, one of "BASIC", "ADVANCED"
+    #   resp.tier_upgrade_status #=> String, one of "BASIC", "PENDING_UPGRADE", "ADVANCED", "REJECTED"
+    #   resp.status #=> String, one of "PENDING", "ACTIVE", "REJECTED", "REQUIRES_VERIFICATION"
+    #   resp.rejection_reason #=> String
+    #   resp.deletion_protection_enabled #=> Boolean
+    #   resp.created_timestamp #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/DeleteNotifyConfiguration AWS API Documentation
+    #
+    # @overload delete_notify_configuration(params = {})
+    # @param [Hash] params ({})
+    def delete_notify_configuration(params = {}, options = {})
+      req = build_request(:delete_notify_configuration, params)
+      req.send_request(options)
+    end
+
+    # Deletes an account-level monthly spending limit override for sending
+    # notify messages. Deleting a spend limit override will set the
+    # `EnforcedLimit` to equal the `MaxLimit`, which is controlled by Amazon
+    # Web Services. For more information on spend limits (quotas) see
+    # [Quotas ][1] in the *End User Messaging SMS User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/sms-voice/latest/userguide/quotas.html
+    #
+    # @return [Types::DeleteNotifyMessageSpendLimitOverrideResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteNotifyMessageSpendLimitOverrideResult#monthly_limit #monthly_limit} => Integer
+    #
+    #
+    # @example Example: DeleteNotifyMessageSpendLimitOverride
+    #
+    #   # Delete the monthly spend limit override for notify messages, reverting to the default limit.
+    #
+    #   resp = client.delete_notify_message_spend_limit_override({
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     monthly_limit: 1000, 
+    #   }
+    #
+    # @example Response structure
+    #
+    #   resp.monthly_limit #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/DeleteNotifyMessageSpendLimitOverride AWS API Documentation
+    #
+    # @overload delete_notify_message_spend_limit_override(params = {})
+    # @param [Hash] params ({})
+    def delete_notify_message_spend_limit_override(params = {}, options = {})
+      req = build_request(:delete_notify_message_spend_limit_override, params)
+      req.send_request(options)
+    end
+
     # Deletes an existing opt-out list. All opted out phone numbers in the
     # opt-out list are deleted.
     #
@@ -1917,6 +2297,54 @@ module Aws::PinpointSMSVoiceV2
     # @param [Hash] params ({})
     def delete_protect_configuration_rule_set_number_override(params = {}, options = {})
       req = build_request(:delete_protect_configuration_rule_set_number_override, params)
+      req.send_request(options)
+    end
+
+    # Deletes an existing RCS agent. If deletion protection is enabled, an
+    # error is returned.
+    #
+    # @option params [required, String] :rcs_agent_id
+    #   The unique identifier of the RCS agent to delete. You can use either
+    #   the RcsAgentId or RcsAgentArn.
+    #
+    # @return [Types::DeleteRcsAgentResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteRcsAgentResult#rcs_agent_arn #rcs_agent_arn} => String
+    #   * {Types::DeleteRcsAgentResult#rcs_agent_id #rcs_agent_id} => String
+    #   * {Types::DeleteRcsAgentResult#status #status} => String
+    #   * {Types::DeleteRcsAgentResult#created_timestamp #created_timestamp} => Time
+    #   * {Types::DeleteRcsAgentResult#deletion_protection_enabled #deletion_protection_enabled} => Boolean
+    #   * {Types::DeleteRcsAgentResult#opt_out_list_name #opt_out_list_name} => String
+    #   * {Types::DeleteRcsAgentResult#self_managed_opt_outs_enabled #self_managed_opt_outs_enabled} => Boolean
+    #   * {Types::DeleteRcsAgentResult#two_way_channel_arn #two_way_channel_arn} => String
+    #   * {Types::DeleteRcsAgentResult#two_way_channel_role #two_way_channel_role} => String
+    #   * {Types::DeleteRcsAgentResult#two_way_enabled #two_way_enabled} => Boolean
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_rcs_agent({
+    #     rcs_agent_id: "RcsAgentIdOrArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.rcs_agent_arn #=> String
+    #   resp.rcs_agent_id #=> String
+    #   resp.status #=> String, one of "CREATED", "PENDING", "TESTING", "PARTIAL", "ACTIVE", "DELETED"
+    #   resp.created_timestamp #=> Time
+    #   resp.deletion_protection_enabled #=> Boolean
+    #   resp.opt_out_list_name #=> String
+    #   resp.self_managed_opt_outs_enabled #=> Boolean
+    #   resp.two_way_channel_arn #=> String
+    #   resp.two_way_channel_role #=> String
+    #   resp.two_way_enabled #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/DeleteRcsAgent AWS API Documentation
+    #
+    # @overload delete_rcs_agent(params = {})
+    # @param [Hash] params ({})
+    def delete_rcs_agent(params = {}, options = {})
+      req = build_request(:delete_rcs_agent, params)
       req.send_request(options)
     end
 
@@ -2426,6 +2854,280 @@ module Aws::PinpointSMSVoiceV2
       req.send_request(options)
     end
 
+    # Describes the specified notify configurations or all notify
+    # configurations in your account.
+    #
+    # If you specify notify configuration IDs, the output includes
+    # information for only the specified notify configurations. If you
+    # specify filters, the output includes information for only those notify
+    # configurations that meet the filter criteria. If you don't specify
+    # notify configuration IDs or filters, the output includes information
+    # for all notify configurations.
+    #
+    # If you specify a notify configuration ID that isn't valid, an error
+    # is returned.
+    #
+    # @option params [Array<String>] :notify_configuration_ids
+    #   An array of notify configuration IDs to describe.
+    #
+    # @option params [Array<Types::NotifyConfigurationFilter>] :filters
+    #   An array of NotifyConfigurationFilter objects to filter the results
+    #   on.
+    #
+    # @option params [String] :next_token
+    #   The token to be used for the next set of paginated results. You don't
+    #   need to supply a value for this field in the initial request.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per each request.
+    #
+    # @return [Types::DescribeNotifyConfigurationsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeNotifyConfigurationsResult#notify_configurations #notify_configurations} => Array&lt;Types::NotifyConfigurationInformation&gt;
+    #   * {Types::DescribeNotifyConfigurationsResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: DescribeNotifyConfigurations
+    #
+    #   # Describe notify configurations filtered by status.
+    #
+    #   resp = client.describe_notify_configurations({
+    #     filters: [
+    #       {
+    #         name: "status", 
+    #         values: [
+    #           "ACTIVE", 
+    #         ], 
+    #       }, 
+    #     ], 
+    #     max_results: 10, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     notify_configurations: [
+    #       {
+    #         created_timestamp: Time.parse(1704067200), 
+    #         deletion_protection_enabled: false, 
+    #         display_name: "MyOTPConfig", 
+    #         enabled_channels: [
+    #           "SMS", 
+    #         ], 
+    #         enabled_countries: [
+    #           "US", 
+    #           "CA", 
+    #         ], 
+    #         notify_configuration_arn: "arn:aws:sms-voice:us-east-1:111122223333:notify-configuration/nc-1234567890abcdef0", 
+    #         notify_configuration_id: "nc-1234567890abcdef0", 
+    #         status: "ACTIVE", 
+    #         tier: "BASIC", 
+    #         tier_upgrade_status: "BASIC", 
+    #         use_case: "CODE_VERIFICATION", 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_notify_configurations({
+    #     notify_configuration_ids: ["NotifyConfigurationIdOrArn"],
+    #     filters: [
+    #       {
+    #         name: "display-name", # required, accepts display-name, enabled-countries, enabled-channels, default-template, default-pool, use-case, status, deletion-protection-enabled, tier-upgrade-status
+    #         values: ["FilterValue"], # required
+    #       },
+    #     ],
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.notify_configurations #=> Array
+    #   resp.notify_configurations[0].notify_configuration_arn #=> String
+    #   resp.notify_configurations[0].notify_configuration_id #=> String
+    #   resp.notify_configurations[0].display_name #=> String
+    #   resp.notify_configurations[0].use_case #=> String, one of "CODE_VERIFICATION"
+    #   resp.notify_configurations[0].default_template_id #=> String
+    #   resp.notify_configurations[0].pool_id #=> String
+    #   resp.notify_configurations[0].enabled_countries #=> Array
+    #   resp.notify_configurations[0].enabled_countries[0] #=> String
+    #   resp.notify_configurations[0].enabled_channels #=> Array
+    #   resp.notify_configurations[0].enabled_channels[0] #=> String, one of "SMS", "VOICE", "MMS", "RCS"
+    #   resp.notify_configurations[0].tier #=> String, one of "BASIC", "ADVANCED"
+    #   resp.notify_configurations[0].tier_upgrade_status #=> String, one of "BASIC", "PENDING_UPGRADE", "ADVANCED", "REJECTED"
+    #   resp.notify_configurations[0].status #=> String, one of "PENDING", "ACTIVE", "REJECTED", "REQUIRES_VERIFICATION"
+    #   resp.notify_configurations[0].rejection_reason #=> String
+    #   resp.notify_configurations[0].deletion_protection_enabled #=> Boolean
+    #   resp.notify_configurations[0].created_timestamp #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/DescribeNotifyConfigurations AWS API Documentation
+    #
+    # @overload describe_notify_configurations(params = {})
+    # @param [Hash] params ({})
+    def describe_notify_configurations(params = {}, options = {})
+      req = build_request(:describe_notify_configurations, params)
+      req.send_request(options)
+    end
+
+    # Describes the specified notify templates or all notify templates in
+    # your account.
+    #
+    # If you specify template IDs, the output includes information for only
+    # the specified notify templates. If you specify filters, the output
+    # includes information for only those notify templates that meet the
+    # filter criteria. If you don't specify template IDs or filters, the
+    # output includes information for all notify templates.
+    #
+    # If you specify a template ID that isn't valid, an error is returned.
+    #
+    # @option params [Array<String>] :template_ids
+    #   An array of template IDs to describe.
+    #
+    # @option params [Array<Types::NotifyTemplateFilter>] :filters
+    #   An array of NotifyTemplateFilter objects to filter the results on.
+    #
+    # @option params [String] :next_token
+    #   The token to be used for the next set of paginated results. You don't
+    #   need to supply a value for this field in the initial request.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per each request.
+    #
+    # @return [Types::DescribeNotifyTemplatesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeNotifyTemplatesResult#notify_templates #notify_templates} => Array&lt;Types::NotifyTemplateInformation&gt;
+    #   * {Types::DescribeNotifyTemplatesResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: DescribeNotifyTemplates
+    #
+    #   # Describe available notify templates for OTP verification over SMS.
+    #
+    #   resp = client.describe_notify_templates({
+    #     filters: [
+    #       {
+    #         name: "template-type", 
+    #         values: [
+    #           "OTP_VERIFICATION", 
+    #         ], 
+    #       }, 
+    #       {
+    #         name: "channels", 
+    #         values: [
+    #           "SMS", 
+    #         ], 
+    #       }, 
+    #     ], 
+    #     max_results: 10, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     notify_templates: [
+    #       {
+    #         channels: [
+    #           "SMS", 
+    #         ], 
+    #         content: "Your verification code is {{code}}. It expires in {{expiry}} minutes.", 
+    #         created_timestamp: Time.parse(1704067200), 
+    #         language_code: "en", 
+    #         status: "ACTIVE", 
+    #         supported_countries: [
+    #           "US", 
+    #           "CA", 
+    #           "GB", 
+    #         ], 
+    #         template_id: "nt-1234567890abcdef0", 
+    #         template_type: "OTP_VERIFICATION", 
+    #         tier_access: [
+    #           "BASIC", 
+    #           "ADVANCED", 
+    #         ], 
+    #         variables: {
+    #           "code" => {
+    #             description: "The verification code", 
+    #             max_length: 10, 
+    #             required: true, 
+    #             sample: "123456", 
+    #             source: "CUSTOMER", 
+    #             type: "STRING", 
+    #           }, 
+    #           "expiry" => {
+    #             default_value: "10", 
+    #             description: "Expiry time in minutes", 
+    #             max_value: 60, 
+    #             min_value: 1, 
+    #             required: false, 
+    #             sample: "10", 
+    #             source: "CUSTOMER", 
+    #             type: "INTEGER", 
+    #           }, 
+    #         }, 
+    #         version: 1, 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_notify_templates({
+    #     template_ids: ["NotifyTemplateId"],
+    #     filters: [
+    #       {
+    #         name: "template-type", # required, accepts template-type, channels, tier-access, supported-countries, language-code, supported-voice-ids
+    #         values: ["FilterValue"], # required
+    #       },
+    #     ],
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.notify_templates #=> Array
+    #   resp.notify_templates[0].template_id #=> String
+    #   resp.notify_templates[0].version #=> Integer
+    #   resp.notify_templates[0].template_type #=> String, one of "OTP_VERIFICATION"
+    #   resp.notify_templates[0].channels #=> Array
+    #   resp.notify_templates[0].channels[0] #=> String, one of "SMS", "VOICE", "MMS", "RCS"
+    #   resp.notify_templates[0].tier_access #=> Array
+    #   resp.notify_templates[0].tier_access[0] #=> String, one of "BASIC", "ADVANCED"
+    #   resp.notify_templates[0].status #=> String, one of "ACTIVE", "INACTIVE"
+    #   resp.notify_templates[0].supported_countries #=> Array
+    #   resp.notify_templates[0].supported_countries[0] #=> String
+    #   resp.notify_templates[0].language_code #=> String
+    #   resp.notify_templates[0].content #=> String
+    #   resp.notify_templates[0].variables #=> Hash
+    #   resp.notify_templates[0].variables["String"].type #=> String, one of "STRING", "INTEGER", "BOOLEAN"
+    #   resp.notify_templates[0].variables["String"].required #=> Boolean
+    #   resp.notify_templates[0].variables["String"].description #=> String
+    #   resp.notify_templates[0].variables["String"].max_length #=> Integer
+    #   resp.notify_templates[0].variables["String"].min_value #=> Integer
+    #   resp.notify_templates[0].variables["String"].max_value #=> Integer
+    #   resp.notify_templates[0].variables["String"].default_value #=> String
+    #   resp.notify_templates[0].variables["String"].pattern #=> String
+    #   resp.notify_templates[0].variables["String"].sample #=> String
+    #   resp.notify_templates[0].variables["String"].source #=> String, one of "CUSTOMER", "SYSTEM"
+    #   resp.notify_templates[0].supported_voice_ids #=> Array
+    #   resp.notify_templates[0].supported_voice_ids[0] #=> String, one of "AMY", "ASTRID", "BIANCA", "BRIAN", "CAMILA", "CARLA", "CARMEN", "CELINE", "CHANTAL", "CONCHITA", "CRISTIANO", "DORA", "EMMA", "ENRIQUE", "EWA", "FILIZ", "GERAINT", "GIORGIO", "GWYNETH", "HANS", "INES", "IVY", "JACEK", "JAN", "JOANNA", "JOEY", "JUSTIN", "KARL", "KENDRA", "KIMBERLY", "LEA", "LIV", "LOTTE", "LUCIA", "LUPE", "MADS", "MAJA", "MARLENE", "MATHIEU", "MATTHEW", "MAXIM", "MIA", "MIGUEL", "MIZUKI", "NAJA", "NICOLE", "PENELOPE", "RAVEENA", "RICARDO", "RUBEN", "RUSSELL", "SALLI", "SEOYEON", "TAKUMI", "TATYANA", "VICKI", "VITORIA", "ZEINA", "ZHIYU"
+    #   resp.notify_templates[0].created_timestamp #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/DescribeNotifyTemplates AWS API Documentation
+    #
+    # @overload describe_notify_templates(params = {})
+    # @param [Hash] params ({})
+    def describe_notify_templates(params = {}, options = {})
+      req = build_request(:describe_notify_templates, params)
+      req.send_request(options)
+    end
+
     # Describes the specified opt-out list or all opt-out lists in your
     # account.
     #
@@ -2639,7 +3341,7 @@ module Aws::PinpointSMSVoiceV2
     #   resp.phone_numbers[0].iso_country_code #=> String
     #   resp.phone_numbers[0].message_type #=> String, one of "TRANSACTIONAL", "PROMOTIONAL"
     #   resp.phone_numbers[0].number_capabilities #=> Array
-    #   resp.phone_numbers[0].number_capabilities[0] #=> String, one of "SMS", "VOICE", "MMS"
+    #   resp.phone_numbers[0].number_capabilities[0] #=> String, one of "SMS", "VOICE", "MMS", "RCS"
     #   resp.phone_numbers[0].number_type #=> String, one of "SHORT_CODE", "LONG_CODE", "TOLL_FREE", "TEN_DLC", "SIMULATOR"
     #   resp.phone_numbers[0].monthly_leasing_price #=> String
     #   resp.phone_numbers[0].two_way_enabled #=> Boolean
@@ -2804,6 +3506,152 @@ module Aws::PinpointSMSVoiceV2
       req.send_request(options)
     end
 
+    # Retrieves the per-country launch status of an RCS agent, including
+    # carrier-level details for each country.
+    #
+    # @option params [required, String] :rcs_agent_id
+    #   The unique identifier of the RCS agent. You can use either the
+    #   RcsAgentId or RcsAgentArn.
+    #
+    # @option params [Array<String>] :iso_country_codes
+    #   An array of two-character ISO country codes, in ISO 3166-1 alpha-2
+    #   format, to filter the results.
+    #
+    # @option params [Array<Types::CountryLaunchStatusFilter>] :filters
+    #   An array of CountryLaunchStatusFilter objects to filter the results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per each request.
+    #
+    # @option params [String] :next_token
+    #   The token to be used for the next set of paginated results. You don't
+    #   need to supply a value for this field in the initial request.
+    #
+    # @return [Types::DescribeRcsAgentCountryLaunchStatusResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeRcsAgentCountryLaunchStatusResult#rcs_agent_id #rcs_agent_id} => String
+    #   * {Types::DescribeRcsAgentCountryLaunchStatusResult#rcs_agent_arn #rcs_agent_arn} => String
+    #   * {Types::DescribeRcsAgentCountryLaunchStatusResult#country_launch_status #country_launch_status} => Array&lt;Types::CountryLaunchStatusInformation&gt;
+    #   * {Types::DescribeRcsAgentCountryLaunchStatusResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_rcs_agent_country_launch_status({
+    #     rcs_agent_id: "RcsAgentIdOrArn", # required
+    #     iso_country_codes: ["IsoCountryCode"],
+    #     filters: [
+    #       {
+    #         name: "country-launch-status", # required, accepts country-launch-status
+    #         values: ["FilterValue"], # required
+    #       },
+    #     ],
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.rcs_agent_id #=> String
+    #   resp.rcs_agent_arn #=> String
+    #   resp.country_launch_status #=> Array
+    #   resp.country_launch_status[0].iso_country_code #=> String
+    #   resp.country_launch_status[0].status #=> String, one of "CREATED", "PENDING", "PARTIAL", "ACTIVE", "REJECTED"
+    #   resp.country_launch_status[0].rcs_platform_id #=> String
+    #   resp.country_launch_status[0].registration_id #=> String
+    #   resp.country_launch_status[0].carrier_status #=> Array
+    #   resp.country_launch_status[0].carrier_status[0].carrier_name #=> String
+    #   resp.country_launch_status[0].carrier_status[0].status #=> String, one of "PENDING", "ACTIVE", "REJECTED"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/DescribeRcsAgentCountryLaunchStatus AWS API Documentation
+    #
+    # @overload describe_rcs_agent_country_launch_status(params = {})
+    # @param [Hash] params ({})
+    def describe_rcs_agent_country_launch_status(params = {}, options = {})
+      req = build_request(:describe_rcs_agent_country_launch_status, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the specified RCS agents or all RCS agents associated with
+    # your Amazon Web Services account.
+    #
+    # If you specify RCS agent IDs, the output includes information for only
+    # the specified RCS agents. If you specify filters, the output includes
+    # information for only those RCS agents that meet the filter criteria.
+    # If you don't specify RCS agent IDs or filters, the output includes
+    # information for all RCS agents.
+    #
+    # @option params [Array<String>] :rcs_agent_ids
+    #   An array of unique identifiers for the RCS agents. This is an array of
+    #   strings that can be either the RcsAgentId or RcsAgentArn.
+    #
+    # @option params [String] :owner
+    #   Use `SELF` to filter the list of RCS agents to ones your account owns
+    #   or use `SHARED` to filter on RCS agents shared with your account. The
+    #   `Owner` and `RcsAgentIds` parameters can't be used at the same time.
+    #
+    # @option params [Array<Types::RcsAgentFilter>] :filters
+    #   An array of RcsAgentFilter objects to filter the results.
+    #
+    # @option params [String] :next_token
+    #   The token to be used for the next set of paginated results. You don't
+    #   need to supply a value for this field in the initial request.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per each request.
+    #
+    # @return [Types::DescribeRcsAgentsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeRcsAgentsResult#rcs_agents #rcs_agents} => Array&lt;Types::RcsAgentInformation&gt;
+    #   * {Types::DescribeRcsAgentsResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_rcs_agents({
+    #     rcs_agent_ids: ["RcsAgentIdOrArn"],
+    #     owner: "SELF", # accepts SELF, SHARED
+    #     filters: [
+    #       {
+    #         name: "status", # required, accepts status, two-way-enabled, self-managed-opt-outs-enabled, opt-out-list-name, deletion-protection-enabled, two-way-channel-arn
+    #         values: ["FilterValue"], # required
+    #       },
+    #     ],
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.rcs_agents #=> Array
+    #   resp.rcs_agents[0].rcs_agent_arn #=> String
+    #   resp.rcs_agents[0].rcs_agent_id #=> String
+    #   resp.rcs_agents[0].status #=> String, one of "CREATED", "PENDING", "TESTING", "PARTIAL", "ACTIVE", "DELETED"
+    #   resp.rcs_agents[0].created_timestamp #=> Time
+    #   resp.rcs_agents[0].deletion_protection_enabled #=> Boolean
+    #   resp.rcs_agents[0].opt_out_list_name #=> String
+    #   resp.rcs_agents[0].self_managed_opt_outs_enabled #=> Boolean
+    #   resp.rcs_agents[0].two_way_channel_arn #=> String
+    #   resp.rcs_agents[0].two_way_channel_role #=> String
+    #   resp.rcs_agents[0].two_way_enabled #=> Boolean
+    #   resp.rcs_agents[0].pool_id #=> String
+    #   resp.rcs_agents[0].testing_agent.status #=> String, one of "CREATED", "PENDING", "ACTIVE"
+    #   resp.rcs_agents[0].testing_agent.testing_agent_id #=> String
+    #   resp.rcs_agents[0].testing_agent.registration_id #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/DescribeRcsAgents AWS API Documentation
+    #
+    # @overload describe_rcs_agents(params = {})
+    # @param [Hash] params ({})
+    def describe_rcs_agents(params = {}, options = {})
+      req = build_request(:describe_rcs_agents, params)
+      req.send_request(options)
+    end
+
     # Retrieves the specified registration attachments or all registration
     # attachments associated with your Amazon Web Services account.
     #
@@ -2851,6 +3699,7 @@ module Aws::PinpointSMSVoiceV2
     #   resp.registration_attachments[0].attachment_status #=> String, one of "UPLOAD_IN_PROGRESS", "UPLOAD_COMPLETE", "UPLOAD_FAILED", "DELETED"
     #   resp.registration_attachments[0].attachment_upload_error_reason #=> String, one of "INTERNAL_ERROR"
     #   resp.registration_attachments[0].created_timestamp #=> Time
+    #   resp.registration_attachments[0].attachment_url #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/DescribeRegistrationAttachments AWS API Documentation
@@ -3172,7 +4021,7 @@ module Aws::PinpointSMSVoiceV2
     #   resp.registration_id #=> String
     #   resp.registration_versions #=> Array
     #   resp.registration_versions[0].version_number #=> Integer
-    #   resp.registration_versions[0].registration_version_status #=> String, one of "DRAFT", "SUBMITTED", "AWS_REVIEWING", "REVIEWING", "REQUIRES_AUTHENTICATION", "APPROVED", "DISCARDED", "DENIED", "REVOKED", "ARCHIVED"
+    #   resp.registration_versions[0].registration_version_status #=> String, one of "DRAFT", "SUBMITTED", "AWS_REVIEWING", "REVIEWING", "REQUIRES_AUTHENTICATION", "APPROVED", "DISCARDED", "DENIED", "REVOKED", "ARCHIVED", "REQUIRES_OFFLINE_REVIEW"
     #   resp.registration_versions[0].registration_version_status_history.draft_timestamp #=> Time
     #   resp.registration_versions[0].registration_version_status_history.submitted_timestamp #=> Time
     #   resp.registration_versions[0].registration_version_status_history.aws_reviewing_timestamp #=> Time
@@ -3380,7 +4229,7 @@ module Aws::PinpointSMSVoiceV2
     # @example Response structure
     #
     #   resp.spend_limits #=> Array
-    #   resp.spend_limits[0].name #=> String, one of "TEXT_MESSAGE_MONTHLY_SPEND_LIMIT", "VOICE_MESSAGE_MONTHLY_SPEND_LIMIT", "MEDIA_MESSAGE_MONTHLY_SPEND_LIMIT"
+    #   resp.spend_limits[0].name #=> String, one of "TEXT_MESSAGE_MONTHLY_SPEND_LIMIT", "VOICE_MESSAGE_MONTHLY_SPEND_LIMIT", "MEDIA_MESSAGE_MONTHLY_SPEND_LIMIT", "NOTIFY_MESSAGE_MONTHLY_SPEND_LIMIT"
     #   resp.spend_limits[0].enforced_limit #=> Integer
     #   resp.spend_limits[0].max_limit #=> Integer
     #   resp.spend_limits[0].overridden #=> Boolean
@@ -3428,7 +4277,7 @@ module Aws::PinpointSMSVoiceV2
     #     destination_phone_numbers: ["PhoneNumber"],
     #     filters: [
     #       {
-    #         name: "status", # required, accepts status
+    #         name: "status", # required, accepts status, rcs-agent-id
     #         values: ["FilterValue"], # required
     #       },
     #     ],
@@ -3442,7 +4291,8 @@ module Aws::PinpointSMSVoiceV2
     #   resp.verified_destination_numbers[0].verified_destination_number_arn #=> String
     #   resp.verified_destination_numbers[0].verified_destination_number_id #=> String
     #   resp.verified_destination_numbers[0].destination_phone_number #=> String
-    #   resp.verified_destination_numbers[0].status #=> String, one of "PENDING", "VERIFIED"
+    #   resp.verified_destination_numbers[0].status #=> String, one of "PENDING", "VERIFIED", "UNSUPPORTED"
+    #   resp.verified_destination_numbers[0].rcs_agent_id #=> String
     #   resp.verified_destination_numbers[0].created_timestamp #=> Time
     #   resp.next_token #=> String
     #
@@ -3477,9 +4327,10 @@ module Aws::PinpointSMSVoiceV2
     #   If you are using a shared End User Messaging SMS resource then you
     #   must use the full Amazon Resource Name(ARN).
     #
-    # @option params [required, String] :iso_country_code
+    # @option params [String] :iso_country_code
     #   The two-character code, in ISO 3166-1 alpha-2 format, for the country
-    #   or region.
+    #   or region. This field is optional and is not required for origination
+    #   identity types that are not country-specific, such as RCS agents.
     #
     # @option params [String] :client_token
     #   Unique, case-sensitive identifier you provide to ensure the
@@ -3503,7 +4354,7 @@ module Aws::PinpointSMSVoiceV2
     #   resp = client.disassociate_origination_identity({
     #     pool_id: "PoolIdOrArn", # required
     #     origination_identity: "PhoneOrSenderIdOrArn", # required
-    #     iso_country_code: "IsoCountryCode", # required
+    #     iso_country_code: "IsoCountryCode",
     #     client_token: "ClientToken",
     #   })
     #
@@ -3586,7 +4437,7 @@ module Aws::PinpointSMSVoiceV2
     #   resp.registration_arn #=> String
     #   resp.registration_id #=> String
     #   resp.version_number #=> Integer
-    #   resp.registration_version_status #=> String, one of "DRAFT", "SUBMITTED", "AWS_REVIEWING", "REVIEWING", "REQUIRES_AUTHENTICATION", "APPROVED", "DISCARDED", "DENIED", "REVOKED", "ARCHIVED"
+    #   resp.registration_version_status #=> String, one of "DRAFT", "SUBMITTED", "AWS_REVIEWING", "REVIEWING", "REQUIRES_AUTHENTICATION", "APPROVED", "DISCARDED", "DENIED", "REVOKED", "ARCHIVED", "REQUIRES_OFFLINE_REVIEW"
     #   resp.registration_version_status_history.draft_timestamp #=> Time
     #   resp.registration_version_status_history.submitted_timestamp #=> Time
     #   resp.registration_version_status_history.aws_reviewing_timestamp #=> Time
@@ -3628,14 +4479,14 @@ module Aws::PinpointSMSVoiceV2
     #
     #   resp = client.get_protect_configuration_country_rule_set({
     #     protect_configuration_id: "ProtectConfigurationIdOrArn", # required
-    #     number_capability: "SMS", # required, accepts SMS, VOICE, MMS
+    #     number_capability: "SMS", # required, accepts SMS, VOICE, MMS, RCS
     #   })
     #
     # @example Response structure
     #
     #   resp.protect_configuration_arn #=> String
     #   resp.protect_configuration_id #=> String
-    #   resp.number_capability #=> String, one of "SMS", "VOICE", "MMS"
+    #   resp.number_capability #=> String, one of "SMS", "VOICE", "MMS", "RCS"
     #   resp.country_rule_set #=> Hash
     #   resp.country_rule_set["IsoCountryCode"].protect_status #=> String, one of "ALLOW", "BLOCK", "MONITOR", "FILTER"
     #
@@ -3680,6 +4531,113 @@ module Aws::PinpointSMSVoiceV2
     # @param [Hash] params ({})
     def get_resource_policy(params = {}, options = {})
       req = build_request(:get_resource_policy, params)
+      req.send_request(options)
+    end
+
+    # Lists countries that support notify messaging. You can optionally
+    # filter by channel, use case, or tier.
+    #
+    # @option params [Array<String>] :channels
+    #   An array of channels to filter the results by.
+    #
+    # @option params [Array<String>] :use_cases
+    #   An array of use cases to filter the results by.
+    #
+    # @option params [String] :tier
+    #   The tier to filter the results by.
+    #
+    # @option params [String] :next_token
+    #   The token to be used for the next set of paginated results. You don't
+    #   need to supply a value for this field in the initial request.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per each request.
+    #
+    # @return [Types::ListNotifyCountriesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListNotifyCountriesResult#notify_countries #notify_countries} => Array&lt;Types::NotifyCountryInformation&gt;
+    #   * {Types::ListNotifyCountriesResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: ListNotifyCountries
+    #
+    #   # List countries that support notify messaging over SMS.
+    #
+    #   resp = client.list_notify_countries({
+    #     channels: [
+    #       "SMS", 
+    #     ], 
+    #     max_results: 10, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     notify_countries: [
+    #       {
+    #         country_name: "United States", 
+    #         customer_owned_identity_required: false, 
+    #         iso_country_code: "US", 
+    #         supported_channels: [
+    #           "SMS", 
+    #           "VOICE", 
+    #         ], 
+    #         supported_tiers: [
+    #           "BASIC", 
+    #           "ADVANCED", 
+    #         ], 
+    #         supported_use_cases: [
+    #           "CODE_VERIFICATION", 
+    #         ], 
+    #       }, 
+    #       {
+    #         country_name: "Canada", 
+    #         customer_owned_identity_required: false, 
+    #         iso_country_code: "CA", 
+    #         supported_channels: [
+    #           "SMS", 
+    #         ], 
+    #         supported_tiers: [
+    #           "BASIC", 
+    #         ], 
+    #         supported_use_cases: [
+    #           "CODE_VERIFICATION", 
+    #         ], 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_notify_countries({
+    #     channels: ["SMS"], # accepts SMS, VOICE, MMS, RCS
+    #     use_cases: ["CODE_VERIFICATION"], # accepts CODE_VERIFICATION
+    #     tier: "BASIC", # accepts BASIC, ADVANCED
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.notify_countries #=> Array
+    #   resp.notify_countries[0].iso_country_code #=> String
+    #   resp.notify_countries[0].country_name #=> String
+    #   resp.notify_countries[0].supported_channels #=> Array
+    #   resp.notify_countries[0].supported_channels[0] #=> String, one of "SMS", "VOICE", "MMS", "RCS"
+    #   resp.notify_countries[0].supported_use_cases #=> Array
+    #   resp.notify_countries[0].supported_use_cases[0] #=> String, one of "CODE_VERIFICATION"
+    #   resp.notify_countries[0].supported_tiers #=> Array
+    #   resp.notify_countries[0].supported_tiers[0] #=> String, one of "BASIC", "ADVANCED"
+    #   resp.notify_countries[0].customer_owned_identity_required #=> Boolean
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/ListNotifyCountries AWS API Documentation
+    #
+    # @overload list_notify_countries(params = {})
+    # @param [Hash] params ({})
+    def list_notify_countries(params = {}, options = {})
+      req = build_request(:list_notify_countries, params)
       req.send_request(options)
     end
 
@@ -3738,7 +4696,7 @@ module Aws::PinpointSMSVoiceV2
     #   resp.origination_identities[0].origination_identity #=> String
     #   resp.origination_identities[0].iso_country_code #=> String
     #   resp.origination_identities[0].number_capabilities #=> Array
-    #   resp.origination_identities[0].number_capabilities[0] #=> String, one of "SMS", "VOICE", "MMS"
+    #   resp.origination_identities[0].number_capabilities[0] #=> String, one of "SMS", "VOICE", "MMS", "RCS"
     #   resp.origination_identities[0].phone_number #=> String
     #   resp.next_token #=> String
     #
@@ -4282,7 +5240,7 @@ module Aws::PinpointSMSVoiceV2
     #   resp.iso_country_code #=> String
     #   resp.message_type #=> String, one of "TRANSACTIONAL", "PROMOTIONAL"
     #   resp.number_capabilities #=> Array
-    #   resp.number_capabilities[0] #=> String, one of "SMS", "VOICE", "MMS"
+    #   resp.number_capabilities[0] #=> String, one of "SMS", "VOICE", "MMS", "RCS"
     #   resp.number_type #=> String, one of "SHORT_CODE", "LONG_CODE", "TOLL_FREE", "TEN_DLC", "SIMULATOR"
     #   resp.monthly_leasing_price #=> String
     #   resp.two_way_enabled #=> Boolean
@@ -4442,7 +5400,7 @@ module Aws::PinpointSMSVoiceV2
     #   resp = client.request_phone_number({
     #     iso_country_code: "IsoCountryCode", # required
     #     message_type: "TRANSACTIONAL", # required, accepts TRANSACTIONAL, PROMOTIONAL
-    #     number_capabilities: ["SMS"], # required, accepts SMS, VOICE, MMS
+    #     number_capabilities: ["SMS"], # required, accepts SMS, VOICE, MMS, RCS
     #     number_type: "LONG_CODE", # required, accepts LONG_CODE, TOLL_FREE, TEN_DLC, SIMULATOR
     #     opt_out_list_name: "OptOutListNameOrArn",
     #     pool_id: "PoolIdOrArn",
@@ -4467,7 +5425,7 @@ module Aws::PinpointSMSVoiceV2
     #   resp.iso_country_code #=> String
     #   resp.message_type #=> String, one of "TRANSACTIONAL", "PROMOTIONAL"
     #   resp.number_capabilities #=> Array
-    #   resp.number_capabilities[0] #=> String, one of "SMS", "VOICE", "MMS"
+    #   resp.number_capabilities[0] #=> String, one of "SMS", "VOICE", "MMS", "RCS"
     #   resp.number_type #=> String, one of "LONG_CODE", "TOLL_FREE", "TEN_DLC", "SIMULATOR"
     #   resp.monthly_leasing_price #=> String
     #   resp.two_way_enabled #=> Boolean
@@ -4744,6 +5702,213 @@ module Aws::PinpointSMSVoiceV2
     # @param [Hash] params ({})
     def send_media_message(params = {}, options = {})
       req = build_request(:send_media_message, params)
+      req.send_request(options)
+    end
+
+    # Sends a templated text message through a notify configuration to a
+    # recipient's phone number.
+    #
+    # @option params [required, String] :notify_configuration_id
+    #   The unique identifier of the notify configuration to use for sending
+    #   the message. This can be either the NotifyConfigurationId or
+    #   NotifyConfigurationArn.
+    #
+    # @option params [required, String] :destination_phone_number
+    #   The destination phone number in E.164 format.
+    #
+    # @option params [String] :template_id
+    #   The unique identifier of the template to use for the message.
+    #
+    # @option params [required, Hash<String,String>] :template_variables
+    #   A map of template variable names and their values. All variable values
+    #   are passed as strings regardless of the declared variable type. For
+    #   example, pass `INTEGER` values as `"42"` and `BOOLEAN` values as
+    #   `"true"` or `"false"`.
+    #
+    # @option params [Integer] :time_to_live
+    #   How long the text message is valid for, in seconds. By default this is
+    #   72 hours.
+    #
+    # @option params [Hash<String,String>] :context
+    #   You can specify custom data in this field. If you do, that data is
+    #   logged to the event destination.
+    #
+    # @option params [String] :configuration_set_name
+    #   The name of the configuration set to use. This can be either the
+    #   ConfigurationSetName or ConfigurationSetArn.
+    #
+    # @option params [Boolean] :dry_run
+    #   When set to true, the message is checked and validated, but isn't
+    #   sent to the end recipient.
+    #
+    # @option params [Boolean] :message_feedback_enabled
+    #   Set to true to enable message feedback for the message. When a user
+    #   receives the message you need to update the message status using
+    #   PutMessageFeedback.
+    #
+    # @return [Types::SendNotifyTextMessageResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::SendNotifyTextMessageResult#message_id #message_id} => String
+    #   * {Types::SendNotifyTextMessageResult#template_id #template_id} => String
+    #   * {Types::SendNotifyTextMessageResult#resolved_message_body #resolved_message_body} => String
+    #
+    #
+    # @example Example: SendNotifyTextMessage
+    #
+    #   # Send an OTP verification code via SMS using a notify configuration.
+    #
+    #   resp = client.send_notify_text_message({
+    #     destination_phone_number: "+12065550100", 
+    #     notify_configuration_id: "nc-1234567890abcdef0", 
+    #     template_variables: {
+    #       "code" => "123456", 
+    #       "expiry" => "10", 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     message_id: "msg-1234567890abcdef0", 
+    #     resolved_message_body: "Your verification code is 123456. It expires in 10 minutes.", 
+    #     template_id: "nt-1234567890abcdef0", 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.send_notify_text_message({
+    #     notify_configuration_id: "NotifyConfigurationIdOrArn", # required
+    #     destination_phone_number: "PhoneNumber", # required
+    #     template_id: "NotifyTemplateId",
+    #     template_variables: { # required
+    #       "TemplateVariableName" => "TemplateVariableValue",
+    #     },
+    #     time_to_live: 1,
+    #     context: {
+    #       "ContextKey" => "ContextValue",
+    #     },
+    #     configuration_set_name: "ConfigurationSetNameOrArn",
+    #     dry_run: false,
+    #     message_feedback_enabled: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.message_id #=> String
+    #   resp.template_id #=> String
+    #   resp.resolved_message_body #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/SendNotifyTextMessage AWS API Documentation
+    #
+    # @overload send_notify_text_message(params = {})
+    # @param [Hash] params ({})
+    def send_notify_text_message(params = {}, options = {})
+      req = build_request(:send_notify_text_message, params)
+      req.send_request(options)
+    end
+
+    # Sends a templated voice message through a notify configuration to a
+    # recipient's phone number.
+    #
+    # @option params [required, String] :notify_configuration_id
+    #   The unique identifier of the notify configuration to use for sending
+    #   the message. This can be either the NotifyConfigurationId or
+    #   NotifyConfigurationArn.
+    #
+    # @option params [required, String] :destination_phone_number
+    #   The destination phone number in E.164 format.
+    #
+    # @option params [String] :template_id
+    #   The unique identifier of the template to use for the message.
+    #
+    # @option params [required, Hash<String,String>] :template_variables
+    #   A map of template variable names and their values. All variable values
+    #   are passed as strings regardless of the declared variable type. For
+    #   example, pass `INTEGER` values as `"42"` and `BOOLEAN` values as
+    #   `"true"` or `"false"`.
+    #
+    # @option params [String] :voice_id
+    #   The voice ID to use for the voice message.
+    #
+    # @option params [Integer] :time_to_live
+    #   How long the voice message is valid for, in seconds. By default this
+    #   is 72 hours.
+    #
+    # @option params [Hash<String,String>] :context
+    #   You can specify custom data in this field. If you do, that data is
+    #   logged to the event destination.
+    #
+    # @option params [String] :configuration_set_name
+    #   The name of the configuration set to use. This can be either the
+    #   ConfigurationSetName or ConfigurationSetArn.
+    #
+    # @option params [Boolean] :dry_run
+    #   When set to true, the message is checked and validated, but isn't
+    #   sent to the end recipient.
+    #
+    # @option params [Boolean] :message_feedback_enabled
+    #   Set to true to enable message feedback for the message. When a user
+    #   receives the message you need to update the message status using
+    #   PutMessageFeedback.
+    #
+    # @return [Types::SendNotifyVoiceMessageResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::SendNotifyVoiceMessageResult#message_id #message_id} => String
+    #   * {Types::SendNotifyVoiceMessageResult#template_id #template_id} => String
+    #   * {Types::SendNotifyVoiceMessageResult#resolved_message_body #resolved_message_body} => String
+    #
+    #
+    # @example Example: SendNotifyVoiceMessage
+    #
+    #   # Send an OTP verification code via voice call using a notify configuration.
+    #
+    #   resp = client.send_notify_voice_message({
+    #     destination_phone_number: "+12065550100", 
+    #     notify_configuration_id: "nc-1234567890abcdef0", 
+    #     template_variables: {
+    #       "code" => "123456", 
+    #       "expiry" => "10", 
+    #     }, 
+    #     voice_id: "JOANNA", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     message_id: "msg-0987654321fedcba0", 
+    #     resolved_message_body: "Your verification code is 123456. It expires in 10 minutes.", 
+    #     template_id: "nt-1234567890abcdef0", 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.send_notify_voice_message({
+    #     notify_configuration_id: "NotifyConfigurationIdOrArn", # required
+    #     destination_phone_number: "PhoneNumber", # required
+    #     template_id: "NotifyTemplateId",
+    #     template_variables: { # required
+    #       "TemplateVariableName" => "TemplateVariableValue",
+    #     },
+    #     voice_id: "AMY", # accepts AMY, ASTRID, BIANCA, BRIAN, CAMILA, CARLA, CARMEN, CELINE, CHANTAL, CONCHITA, CRISTIANO, DORA, EMMA, ENRIQUE, EWA, FILIZ, GERAINT, GIORGIO, GWYNETH, HANS, INES, IVY, JACEK, JAN, JOANNA, JOEY, JUSTIN, KARL, KENDRA, KIMBERLY, LEA, LIV, LOTTE, LUCIA, LUPE, MADS, MAJA, MARLENE, MATHIEU, MATTHEW, MAXIM, MIA, MIGUEL, MIZUKI, NAJA, NICOLE, PENELOPE, RAVEENA, RICARDO, RUBEN, RUSSELL, SALLI, SEOYEON, TAKUMI, TATYANA, VICKI, VITORIA, ZEINA, ZHIYU
+    #     time_to_live: 1,
+    #     context: {
+    #       "ContextKey" => "ContextValue",
+    #     },
+    #     configuration_set_name: "ConfigurationSetNameOrArn",
+    #     dry_run: false,
+    #     message_feedback_enabled: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.message_id #=> String
+    #   resp.template_id #=> String
+    #   resp.resolved_message_body #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/SendNotifyVoiceMessage AWS API Documentation
+    #
+    # @overload send_notify_voice_message(params = {})
+    # @param [Hash] params ({})
+    def send_notify_voice_message(params = {}, options = {})
+      req = build_request(:send_notify_voice_message, params)
       req.send_request(options)
     end
 
@@ -5186,6 +6351,50 @@ module Aws::PinpointSMSVoiceV2
       req.send_request(options)
     end
 
+    # Sets an account level monthly spend limit override for sending notify
+    # messages. The requested spend limit must be less than or equal to the
+    # `MaxLimit`, which is set by Amazon Web Services.
+    #
+    # @option params [required, Integer] :monthly_limit
+    #   The new monthly limit to enforce on notify messages.
+    #
+    # @return [Types::SetNotifyMessageSpendLimitOverrideResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::SetNotifyMessageSpendLimitOverrideResult#monthly_limit #monthly_limit} => Integer
+    #
+    #
+    # @example Example: SetNotifyMessageSpendLimitOverride
+    #
+    #   # Set a monthly spend limit override for notify messages.
+    #
+    #   resp = client.set_notify_message_spend_limit_override({
+    #     monthly_limit: 1000, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     monthly_limit: 1000, 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.set_notify_message_spend_limit_override({
+    #     monthly_limit: 1, # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.monthly_limit #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/SetNotifyMessageSpendLimitOverride AWS API Documentation
+    #
+    # @overload set_notify_message_spend_limit_override(params = {})
+    # @param [Hash] params ({})
+    def set_notify_message_spend_limit_override(params = {}, options = {})
+      req = build_request(:set_notify_message_spend_limit_override, params)
+      req.send_request(options)
+    end
+
     # Sets an account level monthly spend limit override for sending text
     # messages. The requested spend limit must be less than or equal to the
     # `MaxLimit`, which is set by Amazon Web Services.
@@ -5277,7 +6486,7 @@ module Aws::PinpointSMSVoiceV2
     #   resp.registration_arn #=> String
     #   resp.registration_id #=> String
     #   resp.version_number #=> Integer
-    #   resp.registration_version_status #=> String, one of "DRAFT", "SUBMITTED", "AWS_REVIEWING", "REVIEWING", "REQUIRES_AUTHENTICATION", "APPROVED", "DISCARDED", "DENIED", "REVOKED", "ARCHIVED"
+    #   resp.registration_version_status #=> String, one of "DRAFT", "SUBMITTED", "AWS_REVIEWING", "REVIEWING", "REQUIRES_AUTHENTICATION", "APPROVED", "DISCARDED", "DENIED", "REVOKED", "ARCHIVED", "REQUIRES_OFFLINE_REVIEW"
     #   resp.registration_version_status_history.draft_timestamp #=> Time
     #   resp.registration_version_status_history.submitted_timestamp #=> Time
     #   resp.registration_version_status_history.aws_reviewing_timestamp #=> Time
@@ -5459,6 +6668,131 @@ module Aws::PinpointSMSVoiceV2
       req.send_request(options)
     end
 
+    # Updates an existing notify configuration. You can update the default
+    # template, pool association, enabled channels, enabled countries, and
+    # deletion protection settings.
+    #
+    # @option params [required, String] :notify_configuration_id
+    #   The identifier of the notify configuration to update. The
+    #   NotifyConfigurationId can be found using the
+    #   DescribeNotifyConfigurations operation.
+    #
+    # @option params [String] :default_template_id
+    #   The template ID to set as the default, or the special value
+    #   UNSET\_DEFAULT\_TEMPLATE to clear the current default template.
+    #
+    # @option params [String] :pool_id
+    #   The pool ID or ARN to associate, or the special value
+    #   UNSET\_DEFAULT\_POOL\_FOR\_NOTIFY to clear the current default pool.
+    #
+    # @option params [Array<String>] :enabled_countries
+    #   An array of two-character ISO country codes, in ISO 3166-1 alpha-2
+    #   format, that are enabled for the notify configuration.
+    #
+    # @option params [Array<String>] :enabled_channels
+    #   An array of channels to enable for the notify configuration. Supported
+    #   values include `SMS` and `VOICE`.
+    #
+    # @option params [Boolean] :deletion_protection_enabled
+    #   When set to true the notify configuration can't be deleted.
+    #
+    # @return [Types::UpdateNotifyConfigurationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateNotifyConfigurationResult#notify_configuration_arn #notify_configuration_arn} => String
+    #   * {Types::UpdateNotifyConfigurationResult#notify_configuration_id #notify_configuration_id} => String
+    #   * {Types::UpdateNotifyConfigurationResult#display_name #display_name} => String
+    #   * {Types::UpdateNotifyConfigurationResult#use_case #use_case} => String
+    #   * {Types::UpdateNotifyConfigurationResult#default_template_id #default_template_id} => String
+    #   * {Types::UpdateNotifyConfigurationResult#pool_id #pool_id} => String
+    #   * {Types::UpdateNotifyConfigurationResult#enabled_countries #enabled_countries} => Array&lt;String&gt;
+    #   * {Types::UpdateNotifyConfigurationResult#enabled_channels #enabled_channels} => Array&lt;String&gt;
+    #   * {Types::UpdateNotifyConfigurationResult#tier #tier} => String
+    #   * {Types::UpdateNotifyConfigurationResult#tier_upgrade_status #tier_upgrade_status} => String
+    #   * {Types::UpdateNotifyConfigurationResult#status #status} => String
+    #   * {Types::UpdateNotifyConfigurationResult#rejection_reason #rejection_reason} => String
+    #   * {Types::UpdateNotifyConfigurationResult#deletion_protection_enabled #deletion_protection_enabled} => Boolean
+    #   * {Types::UpdateNotifyConfigurationResult#created_timestamp #created_timestamp} => Time
+    #
+    #
+    # @example Example: UpdateNotifyConfiguration
+    #
+    #   # Update a notify configuration to add voice channel and additional countries.
+    #
+    #   resp = client.update_notify_configuration({
+    #     deletion_protection_enabled: true, 
+    #     enabled_channels: [
+    #       "SMS", 
+    #       "VOICE", 
+    #     ], 
+    #     enabled_countries: [
+    #       "US", 
+    #       "CA", 
+    #       "GB", 
+    #     ], 
+    #     notify_configuration_id: "nc-1234567890abcdef0", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     created_timestamp: Time.parse(1704067200), 
+    #     deletion_protection_enabled: true, 
+    #     display_name: "MyOTPConfig", 
+    #     enabled_channels: [
+    #       "SMS", 
+    #       "VOICE", 
+    #     ], 
+    #     enabled_countries: [
+    #       "US", 
+    #       "CA", 
+    #       "GB", 
+    #     ], 
+    #     notify_configuration_arn: "arn:aws:sms-voice:us-east-1:111122223333:notify-configuration/nc-1234567890abcdef0", 
+    #     notify_configuration_id: "nc-1234567890abcdef0", 
+    #     status: "ACTIVE", 
+    #     tier: "BASIC", 
+    #     tier_upgrade_status: "BASIC", 
+    #     use_case: "CODE_VERIFICATION", 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_notify_configuration({
+    #     notify_configuration_id: "NotifyConfigurationIdOrArn", # required
+    #     default_template_id: "NotifyTemplateId",
+    #     pool_id: "NotifyPoolIdOrUnset",
+    #     enabled_countries: ["IsoCountryCode"],
+    #     enabled_channels: ["SMS"], # accepts SMS, VOICE, MMS, RCS
+    #     deletion_protection_enabled: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.notify_configuration_arn #=> String
+    #   resp.notify_configuration_id #=> String
+    #   resp.display_name #=> String
+    #   resp.use_case #=> String, one of "CODE_VERIFICATION"
+    #   resp.default_template_id #=> String
+    #   resp.pool_id #=> String
+    #   resp.enabled_countries #=> Array
+    #   resp.enabled_countries[0] #=> String
+    #   resp.enabled_channels #=> Array
+    #   resp.enabled_channels[0] #=> String, one of "SMS", "VOICE", "MMS", "RCS"
+    #   resp.tier #=> String, one of "BASIC", "ADVANCED"
+    #   resp.tier_upgrade_status #=> String, one of "BASIC", "PENDING_UPGRADE", "ADVANCED", "REJECTED"
+    #   resp.status #=> String, one of "PENDING", "ACTIVE", "REJECTED", "REQUIRES_VERIFICATION"
+    #   resp.rejection_reason #=> String
+    #   resp.deletion_protection_enabled #=> Boolean
+    #   resp.created_timestamp #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/UpdateNotifyConfiguration AWS API Documentation
+    #
+    # @overload update_notify_configuration(params = {})
+    # @param [Hash] params ({})
+    def update_notify_configuration(params = {}, options = {})
+      req = build_request(:update_notify_configuration, params)
+      req.send_request(options)
+    end
+
     # Updates the configuration of an existing origination phone number. You
     # can update the opt-out list, enable or disable two-way messaging,
     # change the TwoWayChannelArn, enable or disable self-managed opt-outs,
@@ -5549,7 +6883,7 @@ module Aws::PinpointSMSVoiceV2
     #   resp.iso_country_code #=> String
     #   resp.message_type #=> String, one of "TRANSACTIONAL", "PROMOTIONAL"
     #   resp.number_capabilities #=> Array
-    #   resp.number_capabilities[0] #=> String, one of "SMS", "VOICE", "MMS"
+    #   resp.number_capabilities[0] #=> String, one of "SMS", "VOICE", "MMS", "RCS"
     #   resp.number_type #=> String, one of "SHORT_CODE", "LONG_CODE", "TOLL_FREE", "TEN_DLC", "SIMULATOR"
     #   resp.monthly_leasing_price #=> String
     #   resp.two_way_enabled #=> Boolean
@@ -5747,7 +7081,7 @@ module Aws::PinpointSMSVoiceV2
     #
     #   resp = client.update_protect_configuration_country_rule_set({
     #     protect_configuration_id: "ProtectConfigurationIdOrArn", # required
-    #     number_capability: "SMS", # required, accepts SMS, VOICE, MMS
+    #     number_capability: "SMS", # required, accepts SMS, VOICE, MMS, RCS
     #     country_rule_set_updates: { # required
     #       "IsoCountryCode" => {
     #         protect_status: "ALLOW", # required, accepts ALLOW, BLOCK, MONITOR, FILTER
@@ -5759,7 +7093,7 @@ module Aws::PinpointSMSVoiceV2
     #
     #   resp.protect_configuration_arn #=> String
     #   resp.protect_configuration_id #=> String
-    #   resp.number_capability #=> String, one of "SMS", "VOICE", "MMS"
+    #   resp.number_capability #=> String, one of "SMS", "VOICE", "MMS", "RCS"
     #   resp.country_rule_set #=> Hash
     #   resp.country_rule_set["IsoCountryCode"].protect_status #=> String, one of "ALLOW", "BLOCK", "MONITOR", "FILTER"
     #
@@ -5769,6 +7103,85 @@ module Aws::PinpointSMSVoiceV2
     # @param [Hash] params ({})
     def update_protect_configuration_country_rule_set(params = {}, options = {})
       req = build_request(:update_protect_configuration_country_rule_set, params)
+      req.send_request(options)
+    end
+
+    # Updates the configuration of an existing RCS agent. You can update the
+    # opt-out list, deletion protection, two-way messaging settings, and
+    # self-managed opt-outs configuration.
+    #
+    # @option params [required, String] :rcs_agent_id
+    #   The unique identifier of the RCS agent to update. You can use either
+    #   the RcsAgentId or RcsAgentArn.
+    #
+    # @option params [Boolean] :deletion_protection_enabled
+    #   By default this is set to false. When set to true the RCS agent can't
+    #   be deleted.
+    #
+    # @option params [String] :opt_out_list_name
+    #   The OptOutList to associate with the RCS agent. Valid values are
+    #   either OptOutListName or OptOutListArn.
+    #
+    # @option params [Boolean] :self_managed_opt_outs_enabled
+    #   By default this is set to false. When set to true you're responsible
+    #   for responding to HELP and STOP requests. You're also responsible for
+    #   tracking and honoring opt-out requests.
+    #
+    # @option params [String] :two_way_channel_arn
+    #   The Amazon Resource Name (ARN) of the two way channel.
+    #
+    # @option params [String] :two_way_channel_role
+    #   An optional IAM Role Arn for a service to assume, to be able to post
+    #   inbound SMS messages.
+    #
+    # @option params [Boolean] :two_way_enabled
+    #   By default this is set to false. When set to true you can receive
+    #   incoming text messages from your end recipients.
+    #
+    # @return [Types::UpdateRcsAgentResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateRcsAgentResult#rcs_agent_arn #rcs_agent_arn} => String
+    #   * {Types::UpdateRcsAgentResult#rcs_agent_id #rcs_agent_id} => String
+    #   * {Types::UpdateRcsAgentResult#status #status} => String
+    #   * {Types::UpdateRcsAgentResult#created_timestamp #created_timestamp} => Time
+    #   * {Types::UpdateRcsAgentResult#deletion_protection_enabled #deletion_protection_enabled} => Boolean
+    #   * {Types::UpdateRcsAgentResult#opt_out_list_name #opt_out_list_name} => String
+    #   * {Types::UpdateRcsAgentResult#self_managed_opt_outs_enabled #self_managed_opt_outs_enabled} => Boolean
+    #   * {Types::UpdateRcsAgentResult#two_way_channel_arn #two_way_channel_arn} => String
+    #   * {Types::UpdateRcsAgentResult#two_way_channel_role #two_way_channel_role} => String
+    #   * {Types::UpdateRcsAgentResult#two_way_enabled #two_way_enabled} => Boolean
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_rcs_agent({
+    #     rcs_agent_id: "RcsAgentIdOrArn", # required
+    #     deletion_protection_enabled: false,
+    #     opt_out_list_name: "OptOutListNameOrArn",
+    #     self_managed_opt_outs_enabled: false,
+    #     two_way_channel_arn: "TwoWayChannelArn",
+    #     two_way_channel_role: "IamRoleArn",
+    #     two_way_enabled: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.rcs_agent_arn #=> String
+    #   resp.rcs_agent_id #=> String
+    #   resp.status #=> String, one of "CREATED", "PENDING", "TESTING", "PARTIAL", "ACTIVE", "DELETED"
+    #   resp.created_timestamp #=> Time
+    #   resp.deletion_protection_enabled #=> Boolean
+    #   resp.opt_out_list_name #=> String
+    #   resp.self_managed_opt_outs_enabled #=> Boolean
+    #   resp.two_way_channel_arn #=> String
+    #   resp.two_way_channel_role #=> String
+    #   resp.two_way_enabled #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/UpdateRcsAgent AWS API Documentation
+    #
+    # @overload update_rcs_agent(params = {})
+    # @param [Hash] params ({})
+    def update_rcs_agent(params = {}, options = {})
+      req = build_request(:update_rcs_agent, params)
       req.send_request(options)
     end
 
@@ -5856,7 +7269,7 @@ module Aws::PinpointSMSVoiceV2
     #   resp.verified_destination_number_arn #=> String
     #   resp.verified_destination_number_id #=> String
     #   resp.destination_phone_number #=> String
-    #   resp.status #=> String, one of "PENDING", "VERIFIED"
+    #   resp.status #=> String, one of "PENDING", "VERIFIED", "UNSUPPORTED"
     #   resp.created_timestamp #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/VerifyDestinationNumber AWS API Documentation
@@ -5886,7 +7299,7 @@ module Aws::PinpointSMSVoiceV2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-pinpointsmsvoicev2'
-      context[:gem_version] = '1.52.0'
+      context[:gem_version] = '1.54.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

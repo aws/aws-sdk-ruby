@@ -914,6 +914,7 @@ module Aws::OpenSearchServerless
     UpdateCollectionDetail.add_member(:status, Shapes::ShapeRef.new(shape: CollectionStatus, location_name: "status"))
     UpdateCollectionDetail.add_member(:type, Shapes::ShapeRef.new(shape: CollectionType, location_name: "type"))
     UpdateCollectionDetail.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
+    UpdateCollectionDetail.add_member(:vector_options, Shapes::ShapeRef.new(shape: VectorOptions, location_name: "vectorOptions"))
     UpdateCollectionDetail.add_member(:arn, Shapes::ShapeRef.new(shape: String, location_name: "arn"))
     UpdateCollectionDetail.add_member(:created_date, Shapes::ShapeRef.new(shape: Long, location_name: "createdDate"))
     UpdateCollectionDetail.add_member(:last_modified_date, Shapes::ShapeRef.new(shape: Long, location_name: "lastModifiedDate"))
@@ -939,6 +940,7 @@ module Aws::OpenSearchServerless
 
     UpdateCollectionRequest.add_member(:id, Shapes::ShapeRef.new(shape: CollectionId, required: true, location_name: "id"))
     UpdateCollectionRequest.add_member(:description, Shapes::ShapeRef.new(shape: UpdateCollectionRequestDescriptionString, location_name: "description"))
+    UpdateCollectionRequest.add_member(:vector_options, Shapes::ShapeRef.new(shape: VectorOptions, location_name: "vectorOptions"))
     UpdateCollectionRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     UpdateCollectionRequest.struct_class = Types::UpdateCollectionRequest
 

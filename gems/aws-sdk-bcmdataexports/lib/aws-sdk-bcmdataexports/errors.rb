@@ -27,6 +27,7 @@ module Aws::BCMDataExports
   # See {Seahorse::Client::RequestContext} for more information.
   #
   # ## Error Classes
+  # * {AccessDeniedException}
   # * {InternalServerException}
   # * {ResourceNotFoundException}
   # * {ServiceQuotaExceededException}
@@ -38,6 +39,21 @@ module Aws::BCMDataExports
   module Errors
 
     extend Aws::Errors::DynamicErrors
+
+    class AccessDeniedException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::BCMDataExports::Types::AccessDeniedException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
 
     class InternalServerException < ServiceError
 
@@ -94,11 +110,6 @@ module Aws::BCMDataExports
       end
 
       # @return [String]
-      def quota_code
-        @data[:quota_code]
-      end
-
-      # @return [String]
       def resource_id
         @data[:resource_id]
       end
@@ -106,6 +117,11 @@ module Aws::BCMDataExports
       # @return [String]
       def resource_type
         @data[:resource_type]
+      end
+
+      # @return [String]
+      def quota_code
+        @data[:quota_code]
       end
 
       # @return [String]
@@ -149,11 +165,6 @@ module Aws::BCMDataExports
       end
 
       # @return [String]
-      def fields
-        @data[:fields]
-      end
-
-      # @return [String]
       def message
         @message || @data[:message]
       end
@@ -161,6 +172,11 @@ module Aws::BCMDataExports
       # @return [String]
       def reason
         @data[:reason]
+      end
+
+      # @return [String]
+      def fields
+        @data[:fields]
       end
     end
 

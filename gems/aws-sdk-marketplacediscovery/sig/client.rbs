@@ -1,0 +1,259 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module MarketplaceDiscovery
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MarketplaceDiscovery/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?account_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?auth_scheme_preference: Array[String],
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_checksum_calculation: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?response_checksum_validation: String,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?sigv4a_signing_region_set: Array[String],
+                      ?stub_responses: untyped,
+                      ?telemetry_provider: Aws::Telemetry::TelemetryProviderBase,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _GetListingResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetListingOutput]
+        def associated_entities: () -> ::Array[Types::ListingAssociatedEntity]
+        def badges: () -> ::Array[Types::ListingBadge]
+        def catalog: () -> ::String
+        def categories: () -> ::Array[Types::Category]
+        def fulfillment_option_summaries: () -> ::Array[Types::FulfillmentOptionSummary]
+        def highlights: () -> ::Array[::String]
+        def integration_guide: () -> ::String
+        def listing_id: () -> ::String
+        def listing_name: () -> ::String
+        def logo_thumbnail_url: () -> ::String
+        def long_description: () -> ::String
+        def pricing_models: () -> ::Array[Types::PricingModel]
+        def pricing_units: () -> ::Array[Types::PricingUnit]
+        def promotional_media: () -> ::Array[Types::PromotionalMedia]
+        def publisher: () -> Types::SellerInformation
+        def resources: () -> ::Array[Types::Resource]
+        def review_summary: () -> Types::ReviewSummary
+        def seller_engagements: () -> ::Array[Types::SellerEngagement]
+        def short_description: () -> ::String
+        def use_cases: () -> ::Array[Types::UseCaseEntry]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MarketplaceDiscovery/Client.html#get_listing-instance_method
+      def get_listing: (
+                         listing_id: ::String
+                       ) -> _GetListingResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetListingResponseSuccess
+
+      interface _GetOfferResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetOfferOutput]
+        def offer_id: () -> ::String
+        def catalog: () -> ::String
+        def offer_name: () -> ::String
+        def agreement_proposal_id: () -> ::String
+        def expiration_time: () -> ::Time
+        def available_from_time: () -> ::Time
+        def seller_of_record: () -> Types::SellerInformation
+        def replacement_agreement_id: () -> ::String
+        def pricing_model: () -> Types::PricingModel
+        def badges: () -> ::Array[Types::PurchaseOptionBadge]
+        def associated_entities: () -> ::Array[Types::OfferAssociatedEntity]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MarketplaceDiscovery/Client.html#get_offer-instance_method
+      def get_offer: (
+                       offer_id: ::String
+                     ) -> _GetOfferResponseSuccess
+                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetOfferResponseSuccess
+
+      interface _GetOfferSetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetOfferSetOutput]
+        def offer_set_id: () -> ::String
+        def catalog: () -> ::String
+        def offer_set_name: () -> ::String
+        def available_from_time: () -> ::Time
+        def expiration_time: () -> ::Time
+        def buyer_notes: () -> ::String
+        def seller_of_record: () -> Types::SellerInformation
+        def badges: () -> ::Array[Types::PurchaseOptionBadge]
+        def associated_entities: () -> ::Array[Types::OfferSetAssociatedEntity]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MarketplaceDiscovery/Client.html#get_offer_set-instance_method
+      def get_offer_set: (
+                           offer_set_id: ::String
+                         ) -> _GetOfferSetResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetOfferSetResponseSuccess
+
+      interface _GetOfferTermsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetOfferTermsOutput]
+        def offer_terms: () -> ::Array[Types::OfferTerm]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MarketplaceDiscovery/Client.html#get_offer_terms-instance_method
+      def get_offer_terms: (
+                             offer_id: ::String,
+                             ?max_results: ::Integer,
+                             ?next_token: ::String
+                           ) -> _GetOfferTermsResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetOfferTermsResponseSuccess
+
+      interface _GetProductResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetProductOutput]
+        def product_id: () -> ::String
+        def catalog: () -> ::String
+        def product_name: () -> ::String
+        def deployed_on_aws: () -> ("DEPLOYED" | "NOT_DEPLOYED" | "NOT_APPLICABLE")
+        def short_description: () -> ::String
+        def long_description: () -> ::String
+        def manufacturer: () -> Types::SellerInformation
+        def logo_thumbnail_url: () -> ::String
+        def fulfillment_option_summaries: () -> ::Array[Types::FulfillmentOptionSummary]
+        def categories: () -> ::Array[Types::Category]
+        def highlights: () -> ::Array[::String]
+        def promotional_media: () -> ::Array[Types::PromotionalMedia]
+        def resources: () -> ::Array[Types::Resource]
+        def seller_engagements: () -> ::Array[Types::SellerEngagement]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MarketplaceDiscovery/Client.html#get_product-instance_method
+      def get_product: (
+                         product_id: ::String
+                       ) -> _GetProductResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetProductResponseSuccess
+
+      interface _ListFulfillmentOptionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListFulfillmentOptionsOutput]
+        def fulfillment_options: () -> ::Array[Types::FulfillmentOption]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MarketplaceDiscovery/Client.html#list_fulfillment_options-instance_method
+      def list_fulfillment_options: (
+                                      product_id: ::String,
+                                      ?max_results: ::Integer,
+                                      ?next_token: ::String
+                                    ) -> _ListFulfillmentOptionsResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListFulfillmentOptionsResponseSuccess
+
+      interface _ListPurchaseOptionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListPurchaseOptionsOutput]
+        def purchase_options: () -> ::Array[Types::PurchaseOptionSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MarketplaceDiscovery/Client.html#list_purchase_options-instance_method
+      def list_purchase_options: (
+                                   ?filters: Array[
+                                     {
+                                       filter_type: ("PRODUCT_ID" | "SELLER_OF_RECORD_PROFILE_ID" | "PURCHASE_OPTION_TYPE" | "VISIBILITY_SCOPE" | "AVAILABILITY_STATUS"),
+                                       filter_values: Array[::String]
+                                     },
+                                   ],
+                                   ?max_results: ::Integer,
+                                   ?next_token: ::String
+                                 ) -> _ListPurchaseOptionsResponseSuccess
+                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPurchaseOptionsResponseSuccess
+
+      interface _SearchFacetsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SearchFacetsOutput]
+        def total_results: () -> ::Integer
+        def listing_facets: () -> ::Hash[("AVERAGE_CUSTOMER_RATING" | "CATEGORY" | "PUBLISHER" | "FULFILLMENT_OPTION_TYPE" | "PRICING_MODEL" | "PRICING_UNIT" | "DEPLOYED_ON_AWS" | "NUMBER_OF_PRODUCTS"), ::Array[Types::ListingFacet]]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MarketplaceDiscovery/Client.html#search_facets-instance_method
+      def search_facets: (
+                           ?search_text: ::String,
+                           ?filters: Array[
+                             {
+                               filter_type: ("MIN_AVERAGE_CUSTOMER_RATING" | "MAX_AVERAGE_CUSTOMER_RATING" | "CATEGORY" | "PUBLISHER" | "FULFILLMENT_OPTION_TYPE" | "PRICING_MODEL" | "PRICING_UNIT" | "DEPLOYED_ON_AWS" | "NUMBER_OF_PRODUCTS"),
+                               filter_values: Array[::String]
+                             },
+                           ],
+                           ?facet_types: Array[("AVERAGE_CUSTOMER_RATING" | "CATEGORY" | "PUBLISHER" | "FULFILLMENT_OPTION_TYPE" | "PRICING_MODEL" | "PRICING_UNIT" | "DEPLOYED_ON_AWS" | "NUMBER_OF_PRODUCTS")],
+                           ?next_token: ::String
+                         ) -> _SearchFacetsResponseSuccess
+                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SearchFacetsResponseSuccess
+
+      interface _SearchListingsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SearchListingsOutput]
+        def total_results: () -> ::Integer
+        def listing_summaries: () -> ::Array[Types::ListingSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MarketplaceDiscovery/Client.html#search_listings-instance_method
+      def search_listings: (
+                             ?search_text: ::String,
+                             ?filters: Array[
+                               {
+                                 filter_type: ("MIN_AVERAGE_CUSTOMER_RATING" | "MAX_AVERAGE_CUSTOMER_RATING" | "CATEGORY" | "PUBLISHER" | "FULFILLMENT_OPTION_TYPE" | "PRICING_MODEL" | "PRICING_UNIT" | "DEPLOYED_ON_AWS" | "NUMBER_OF_PRODUCTS"),
+                                 filter_values: Array[::String]
+                               },
+                             ],
+                             ?max_results: ::Integer,
+                             ?sort_by: ("RELEVANCE" | "AVERAGE_CUSTOMER_RATING"),
+                             ?sort_order: ("DESCENDING" | "ASCENDING"),
+                             ?next_token: ::String
+                           ) -> _SearchListingsResponseSuccess
+                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SearchListingsResponseSuccess
+    end
+  end
+end
+

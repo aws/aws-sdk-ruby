@@ -501,7 +501,7 @@ module Aws::ApiGatewayV2
       attr_accessor portal_arn: ::String
       attr_accessor portal_content: Types::PortalContent
       attr_accessor portal_id: ::String
-      attr_accessor publish_status: ("PUBLISHED" | "PUBLISH_IN_PROGRESS" | "PUBLISH_FAILED" | "DISABLED")
+      attr_accessor publish_status: ("PUBLISHED" | "PUBLISH_IN_PROGRESS" | "PUBLISH_FAILED" | "DISABLE_IN_PROGRESS" | "DISABLE_FAILED" | "DISABLED")
       attr_accessor rum_app_monitor_name: ::String
       attr_accessor status_exception: Types::StatusException
       attr_accessor tags: ::Hash[::String, ::String]
@@ -518,7 +518,7 @@ module Aws::ApiGatewayV2
       attr_accessor portal_arn: ::String
       attr_accessor portal_content: Types::PortalContent
       attr_accessor portal_id: ::String
-      attr_accessor publish_status: ("PUBLISHED" | "PUBLISH_IN_PROGRESS" | "PUBLISH_FAILED" | "DISABLED")
+      attr_accessor publish_status: ("PUBLISHED" | "PUBLISH_IN_PROGRESS" | "PUBLISH_FAILED" | "DISABLE_IN_PROGRESS" | "DISABLE_FAILED" | "DISABLED")
       attr_accessor rum_app_monitor_name: ::String
       attr_accessor status_exception: Types::StatusException
       attr_accessor tags: ::Hash[::String, ::String]
@@ -1354,7 +1354,7 @@ module Aws::ApiGatewayV2
       attr_accessor portal_content: Types::PortalContent
       attr_accessor portal_id: ::String
       attr_accessor preview: Types::Preview
-      attr_accessor publish_status: ("PUBLISHED" | "PUBLISH_IN_PROGRESS" | "PUBLISH_FAILED" | "DISABLED")
+      attr_accessor publish_status: ("PUBLISHED" | "PUBLISH_IN_PROGRESS" | "PUBLISH_FAILED" | "DISABLE_IN_PROGRESS" | "DISABLE_FAILED" | "DISABLED")
       attr_accessor rum_app_monitor_name: ::String
       attr_accessor status_exception: Types::StatusException
       attr_accessor tags: ::Hash[::String, ::String]
@@ -1372,7 +1372,7 @@ module Aws::ApiGatewayV2
       attr_accessor portal_content: Types::PortalContent
       attr_accessor portal_id: ::String
       attr_accessor preview: Types::Preview
-      attr_accessor publish_status: ("PUBLISHED" | "PUBLISH_IN_PROGRESS" | "PUBLISH_FAILED" | "DISABLED")
+      attr_accessor publish_status: ("PUBLISHED" | "PUBLISH_IN_PROGRESS" | "PUBLISH_FAILED" | "DISABLE_IN_PROGRESS" | "DISABLE_FAILED" | "DISABLED")
       attr_accessor rum_app_monitor_name: ::String
       attr_accessor status_exception: Types::StatusException
       attr_accessor tags: ::Hash[::String, ::String]
@@ -1867,7 +1867,7 @@ module Aws::ApiGatewayV2
       attr_accessor portal_content: Types::PortalContent
       attr_accessor portal_id: ::String
       attr_accessor preview: Types::Preview
-      attr_accessor publish_status: ("PUBLISHED" | "PUBLISH_IN_PROGRESS" | "PUBLISH_FAILED" | "DISABLED")
+      attr_accessor publish_status: ("PUBLISHED" | "PUBLISH_IN_PROGRESS" | "PUBLISH_FAILED" | "DISABLE_IN_PROGRESS" | "DISABLE_FAILED" | "DISABLED")
       attr_accessor rum_app_monitor_name: ::String
       attr_accessor status_exception: Types::StatusException
       attr_accessor tags: ::Hash[::String, ::String]
@@ -2548,7 +2548,7 @@ module Aws::ApiGatewayV2
       attr_accessor portal_content: Types::PortalContent
       attr_accessor portal_id: ::String
       attr_accessor preview: Types::Preview
-      attr_accessor publish_status: ("PUBLISHED" | "PUBLISH_IN_PROGRESS" | "PUBLISH_FAILED" | "DISABLED")
+      attr_accessor publish_status: ("PUBLISHED" | "PUBLISH_IN_PROGRESS" | "PUBLISH_FAILED" | "DISABLE_IN_PROGRESS" | "DISABLE_FAILED" | "DISABLED")
       attr_accessor rum_app_monitor_name: ::String
       attr_accessor status_exception: Types::StatusException
       attr_accessor tags: ::Hash[::String, ::String]
@@ -2566,7 +2566,7 @@ module Aws::ApiGatewayV2
       attr_accessor portal_content: Types::PortalContent
       attr_accessor portal_id: ::String
       attr_accessor preview: Types::Preview
-      attr_accessor publish_status: ("PUBLISHED" | "PUBLISH_IN_PROGRESS" | "PUBLISH_FAILED" | "DISABLED")
+      attr_accessor publish_status: ("PUBLISHED" | "PUBLISH_IN_PROGRESS" | "PUBLISH_FAILED" | "DISABLE_IN_PROGRESS" | "DISABLE_FAILED" | "DISABLED")
       attr_accessor rum_app_monitor_name: ::String
       attr_accessor status_exception: Types::StatusException
       attr_accessor tags: ::Hash[::String, ::String]

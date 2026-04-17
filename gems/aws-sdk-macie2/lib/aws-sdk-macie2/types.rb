@@ -1078,6 +1078,10 @@ module Aws::Macie2
     # @!attribute [rw] s3_destination
     #   Specifies an S3 bucket to store data classification results in, and
     #   the encryption settings to use when storing results in that bucket.
+    #   The bucket must be an existing general purpose bucket. It can be a
+    #   bucket in your own account or a bucket that another account owns. If
+    #   another account owns the bucket, you must specify both the unique
+    #   identifier for the account and the name of the bucket.
     #   @return [Types::S3Destination]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/ClassificationExportConfiguration AWS API Documentation
@@ -5453,8 +5457,15 @@ module Aws::Macie2
 
     # Specifies an S3 bucket to store data classification results in, and
     # the encryption settings to use when storing results in that bucket.
+    # The bucket must be an existing general purpose bucket. It can be a
+    # bucket in your own account or a bucket that another account owns. If
+    # another account owns the bucket, you must specify both the unique
+    # identifier for the account and the name of the bucket.
     #
     # @!attribute [rw] bucket_name
+    #   @return [String]
+    #
+    # @!attribute [rw] expected_bucket_owner
     #   @return [String]
     #
     # @!attribute [rw] key_prefix
@@ -5467,6 +5478,7 @@ module Aws::Macie2
     #
     class S3Destination < Struct.new(
       :bucket_name,
+      :expected_bucket_owner,
       :key_prefix,
       :kms_key_arn)
       SENSITIVE = []

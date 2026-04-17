@@ -465,6 +465,7 @@ module Aws::TranscribeStreamingService
       attr_accessor identify_multiple_languages: bool
       attr_accessor vocabulary_names: ::String
       attr_accessor vocabulary_filter_names: ::String
+      attr_accessor session_resume_window: ::Integer
       SENSITIVE: []
     end
 
@@ -493,6 +494,7 @@ module Aws::TranscribeStreamingService
       attr_accessor identify_multiple_languages: bool
       attr_accessor vocabulary_names: ::String
       attr_accessor vocabulary_filter_names: ::String
+      attr_accessor session_resume_window: ::Integer
       SENSITIVE: []
     end
 

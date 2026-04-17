@@ -1511,6 +1511,7 @@
         "peerNetworkId":{"shape":"ResourceIdOrArn"},
         "displayName":{"shape":"ResourceDisplayName"},
         "peerNetworkCidrsToBeAdded":{"shape":"PeeredCidrList"},
+        "peerNetworkRouteTableIds":{"shape":"PeerNetworkRouteTableIdList"},
         "clientToken":{
           "shape":"CreateOdbPeeringConnectionInputClientTokenString",
           "idempotencyToken":true
@@ -2622,7 +2623,8 @@
         "ociDnsForwardingConfigs":{"shape":"OciDnsForwardingConfigList"},
         "createdAt":{"shape":"SyntheticTimestamp_date_time"},
         "percentProgress":{"shape":"Float"},
-        "managedServices":{"shape":"ManagedServices"}
+        "managedServices":{"shape":"ManagedServices"},
+        "ec2PlacementGroupIds":{"shape":"ResourceIdList"}
       }
     },
     "OdbNetworkAvailabilityZoneIdString":{
@@ -2693,7 +2695,8 @@
         "ociDnsForwardingConfigs":{"shape":"OciDnsForwardingConfigList"},
         "createdAt":{"shape":"SyntheticTimestamp_date_time"},
         "percentProgress":{"shape":"Float"},
-        "managedServices":{"shape":"ManagedServices"}
+        "managedServices":{"shape":"ManagedServices"},
+        "ec2PlacementGroupIds":{"shape":"ResourceIdList"}
       }
     },
     "OdbNetworkSummaryAvailabilityZoneIdString":{
@@ -2781,6 +2784,16 @@
         "NONROLLING"
       ]
     },
+    "PeerNetworkRouteTableId":{
+      "type":"string",
+      "pattern":"rtb-[a-z0-9]{8,17}"
+    },
+    "PeerNetworkRouteTableIdList":{
+      "type":"list",
+      "member":{"shape":"PeerNetworkRouteTableId"},
+      "max":1,
+      "min":1
+    },
     "PeeredCidr":{
       "type":"string",
       "max":18,
@@ -2847,6 +2860,10 @@
       "max":64,
       "min":6,
       "pattern":"[a-zA-Z0-9_~.-]+"
+    },
+    "ResourceIdList":{
+      "type":"list",
+      "member":{"shape":"ResourceId"}
     },
     "ResourceIdOrArn":{
       "type":"string",

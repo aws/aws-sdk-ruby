@@ -200,6 +200,12 @@ module Aws
                                           }?
                                         },
                                         result: bool
+                                      }?,
+                                      and_all: {
+                                        conditions: untyped
+                                      }?,
+                                      or_all: {
+                                        conditions: untyped
                                       }?
                                     },
                                   ]
@@ -243,6 +249,12 @@ module Aws
                                           }?
                                         },
                                         result: bool
+                                      }?,
+                                      and_all: {
+                                        conditions: untyped
+                                      }?,
+                                      or_all: {
+                                        conditions: untyped
                                       }?
                                     },
                                   ]
@@ -1143,6 +1155,12 @@ module Aws
                                           }?
                                         },
                                         result: bool
+                                      }?,
+                                      and_all: {
+                                        conditions: untyped
+                                      }?,
+                                      or_all: {
+                                        conditions: untyped
                                       }?
                                     },
                                   ]
@@ -1186,6 +1204,12 @@ module Aws
                                           }?
                                         },
                                         result: bool
+                                      }?,
+                                      and_all: {
+                                        conditions: untyped
+                                      }?,
+                                      or_all: {
+                                        conditions: untyped
                                       }?
                                     },
                                   ]
@@ -1253,6 +1277,50 @@ module Aws
                            }
                          ) -> _UpdateLayoutResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateLayoutResponseSuccess
+
+      interface _UpdateRelatedItemResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateRelatedItemResponse]
+        def related_item_id: () -> ::String
+        def related_item_arn: () -> ::String
+        def type: () -> ("Contact" | "Comment" | "File" | "Sla" | "ConnectCase" | "Custom")
+        def content: () -> Types::RelatedItemContent
+        def association_time: () -> ::Time
+        def tags: () -> ::Hash[::String, ::String]
+        def last_updated_user: () -> Types::UserUnion
+        def created_by: () -> Types::UserUnion
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectCases/Client.html#update_related_item-instance_method
+      def update_related_item: (
+                                 domain_id: ::String,
+                                 case_id: ::String,
+                                 related_item_id: ::String,
+                                 content: {
+                                   comment: {
+                                     body: ::String,
+                                     content_type: ("Text/Plain")
+                                   }?,
+                                   custom: {
+                                     fields: Array[
+                                       {
+                                         id: ::String,
+                                         value: {
+                                           string_value: ::String?,
+                                           double_value: ::Float?,
+                                           boolean_value: bool?,
+                                           empty_value: {
+                                           }?,
+                                           user_arn_value: ::String?
+                                         }
+                                       },
+                                     ]
+                                   }?
+                                 },
+                                 ?performed_by: {
+                                   user_arn: ::String?,
+                                   custom_entity: ::String?
+                                 }
+                               ) -> _UpdateRelatedItemResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateRelatedItemResponseSuccess
 
       interface _UpdateTemplateResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateTemplateResponse]

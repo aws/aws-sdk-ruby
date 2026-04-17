@@ -777,10 +777,6 @@ module Aws
                                    standard: {
                                      network_interface_arn: ::String,
                                      protocol_configuration: {
-                                       rtp: {
-                                         port: ::Integer,
-                                         forward_error_correction: ("ENABLED" | "DISABLED")?
-                                       }?,
                                        rist: {
                                          port: ::Integer,
                                          recovery_latency_milliseconds: ::Integer
@@ -806,18 +802,34 @@ module Aws
                                              role_arn: ::String
                                            }
                                          }?
+                                       }?,
+                                       rtp: {
+                                         port: ::Integer,
+                                         forward_error_correction: ("ENABLED" | "DISABLED")?
                                        }?
                                      },
                                      protocol: ("RTP" | "RIST" | "SRT_CALLER" | "SRT_LISTENER")?
+                                   }?,
+                                   media_live_channel: {
+                                     media_live_channel_arn: ::String?,
+                                     media_live_pipeline_id: ("PIPELINE_0" | "PIPELINE_1")?,
+                                     media_live_channel_output_name: ::String?,
+                                     source_transit_decryption: {
+                                       encryption_key_type: ("SECRETS_MANAGER" | "AUTOMATIC")?,
+                                       encryption_key_configuration: {
+                                         secrets_manager: {
+                                           secret_arn: ::String,
+                                           role_arn: ::String
+                                         }?,
+                                         automatic: {
+                                         }?
+                                       }
+                                     }
                                    }?,
                                    failover: {
                                      network_interface_arn: ::String,
                                      protocol_configurations: Array[
                                        {
-                                         rtp: {
-                                           port: ::Integer,
-                                           forward_error_correction: ("ENABLED" | "DISABLED")?
-                                         }?,
                                          rist: {
                                            port: ::Integer,
                                            recovery_latency_milliseconds: ::Integer
@@ -843,11 +855,30 @@ module Aws
                                                role_arn: ::String
                                              }
                                            }?
+                                         }?,
+                                         rtp: {
+                                           port: ::Integer,
+                                           forward_error_correction: ("ENABLED" | "DISABLED")?
                                          }?
                                        },
                                      ],
                                      source_priority_mode: ("NO_PRIORITY" | "PRIMARY_SECONDARY"),
                                      primary_source_index: ::Integer?
+                                   }?,
+                                   media_connect_flow: {
+                                     flow_arn: ::String?,
+                                     flow_output_arn: ::String?,
+                                     source_transit_decryption: {
+                                       encryption_key_type: ("SECRETS_MANAGER" | "AUTOMATIC")?,
+                                       encryption_key_configuration: {
+                                         secrets_manager: {
+                                           secret_arn: ::String,
+                                           role_arn: ::String
+                                         }?,
+                                         automatic: {
+                                         }?
+                                       }
+                                     }
                                    }?,
                                    merge: {
                                      network_interface_arn: ::String,
@@ -864,21 +895,6 @@ module Aws
                                        },
                                      ],
                                      merge_recovery_window_milliseconds: ::Integer
-                                   }?,
-                                   media_connect_flow: {
-                                     flow_arn: ::String?,
-                                     flow_output_arn: ::String?,
-                                     source_transit_decryption: {
-                                       encryption_key_type: ("SECRETS_MANAGER" | "AUTOMATIC")?,
-                                       encryption_key_configuration: {
-                                         secrets_manager: {
-                                           secret_arn: ::String,
-                                           role_arn: ::String
-                                         }?,
-                                         automatic: {
-                                         }?
-                                       }
-                                     }
                                    }?
                                  },
                                  maximum_bitrate: ::Integer,
@@ -947,11 +963,6 @@ module Aws
                                     standard: {
                                       network_interface_arn: ::String,
                                       protocol_configuration: {
-                                        rtp: {
-                                          destination_address: ::String,
-                                          destination_port: ::Integer,
-                                          forward_error_correction: ("ENABLED" | "DISABLED")?
-                                        }?,
                                         rist: {
                                           destination_address: ::String,
                                           destination_port: ::Integer
@@ -977,6 +988,11 @@ module Aws
                                               role_arn: ::String
                                             }
                                           }?
+                                        }?,
+                                        rtp: {
+                                          destination_address: ::String,
+                                          destination_port: ::Integer,
+                                          forward_error_correction: ("ENABLED" | "DISABLED")?
                                         }?
                                       },
                                       protocol: ("RTP" | "RIST" | "SRT_CALLER" | "SRT_LISTENER")?
@@ -1377,11 +1393,11 @@ module Aws
                                 ?next_token: ::String,
                                 ?filters: Array[
                                   {
-                                    region_names: Array[::String]?,
-                                    input_types: Array[("STANDARD" | "FAILOVER" | "MERGE" | "MEDIACONNECT_FLOW")]?,
                                     name_contains: Array[::String]?,
+                                    region_names: Array[::String]?,
                                     network_interface_arns: Array[::String]?,
-                                    routing_scopes: Array[("REGIONAL" | "GLOBAL")]?
+                                    routing_scopes: Array[("REGIONAL" | "GLOBAL")]?,
+                                    input_types: Array[("STANDARD" | "FAILOVER" | "MERGE" | "MEDIACONNECT_FLOW" | "MEDIALIVE_CHANNEL")]?
                                   },
                                 ]
                               ) -> _ListRouterInputsResponseSuccess
@@ -1418,11 +1434,11 @@ module Aws
                                  ?filters: Array[
                                    {
                                      region_names: Array[::String]?,
-                                     output_types: Array[("STANDARD" | "MEDIACONNECT_FLOW" | "MEDIALIVE_INPUT")]?,
-                                     name_contains: Array[::String]?,
                                      network_interface_arns: Array[::String]?,
+                                     routing_scopes: Array[("REGIONAL" | "GLOBAL")]?,
+                                     output_types: Array[("STANDARD" | "MEDIACONNECT_FLOW" | "MEDIALIVE_INPUT")]?,
                                      routed_input_arns: Array[::String]?,
-                                     routing_scopes: Array[("REGIONAL" | "GLOBAL")]?
+                                     name_contains: Array[::String]?
                                    },
                                  ]
                                ) -> _ListRouterOutputsResponseSuccess
@@ -2055,10 +2071,6 @@ module Aws
                                    standard: {
                                      network_interface_arn: ::String,
                                      protocol_configuration: {
-                                       rtp: {
-                                         port: ::Integer,
-                                         forward_error_correction: ("ENABLED" | "DISABLED")?
-                                       }?,
                                        rist: {
                                          port: ::Integer,
                                          recovery_latency_milliseconds: ::Integer
@@ -2084,18 +2096,34 @@ module Aws
                                              role_arn: ::String
                                            }
                                          }?
+                                       }?,
+                                       rtp: {
+                                         port: ::Integer,
+                                         forward_error_correction: ("ENABLED" | "DISABLED")?
                                        }?
                                      },
                                      protocol: ("RTP" | "RIST" | "SRT_CALLER" | "SRT_LISTENER")?
+                                   }?,
+                                   media_live_channel: {
+                                     media_live_channel_arn: ::String?,
+                                     media_live_pipeline_id: ("PIPELINE_0" | "PIPELINE_1")?,
+                                     media_live_channel_output_name: ::String?,
+                                     source_transit_decryption: {
+                                       encryption_key_type: ("SECRETS_MANAGER" | "AUTOMATIC")?,
+                                       encryption_key_configuration: {
+                                         secrets_manager: {
+                                           secret_arn: ::String,
+                                           role_arn: ::String
+                                         }?,
+                                         automatic: {
+                                         }?
+                                       }
+                                     }
                                    }?,
                                    failover: {
                                      network_interface_arn: ::String,
                                      protocol_configurations: Array[
                                        {
-                                         rtp: {
-                                           port: ::Integer,
-                                           forward_error_correction: ("ENABLED" | "DISABLED")?
-                                         }?,
                                          rist: {
                                            port: ::Integer,
                                            recovery_latency_milliseconds: ::Integer
@@ -2121,11 +2149,30 @@ module Aws
                                                role_arn: ::String
                                              }
                                            }?
+                                         }?,
+                                         rtp: {
+                                           port: ::Integer,
+                                           forward_error_correction: ("ENABLED" | "DISABLED")?
                                          }?
                                        },
                                      ],
                                      source_priority_mode: ("NO_PRIORITY" | "PRIMARY_SECONDARY"),
                                      primary_source_index: ::Integer?
+                                   }?,
+                                   media_connect_flow: {
+                                     flow_arn: ::String?,
+                                     flow_output_arn: ::String?,
+                                     source_transit_decryption: {
+                                       encryption_key_type: ("SECRETS_MANAGER" | "AUTOMATIC")?,
+                                       encryption_key_configuration: {
+                                         secrets_manager: {
+                                           secret_arn: ::String,
+                                           role_arn: ::String
+                                         }?,
+                                         automatic: {
+                                         }?
+                                       }
+                                     }
                                    }?,
                                    merge: {
                                      network_interface_arn: ::String,
@@ -2142,21 +2189,6 @@ module Aws
                                        },
                                      ],
                                      merge_recovery_window_milliseconds: ::Integer
-                                   }?,
-                                   media_connect_flow: {
-                                     flow_arn: ::String?,
-                                     flow_output_arn: ::String?,
-                                     source_transit_decryption: {
-                                       encryption_key_type: ("SECRETS_MANAGER" | "AUTOMATIC")?,
-                                       encryption_key_configuration: {
-                                         secrets_manager: {
-                                           secret_arn: ::String,
-                                           role_arn: ::String
-                                         }?,
-                                         automatic: {
-                                         }?
-                                       }
-                                     }
                                    }?
                                  },
                                  ?maximum_bitrate: ::Integer,
@@ -2220,11 +2252,6 @@ module Aws
                                     standard: {
                                       network_interface_arn: ::String,
                                       protocol_configuration: {
-                                        rtp: {
-                                          destination_address: ::String,
-                                          destination_port: ::Integer,
-                                          forward_error_correction: ("ENABLED" | "DISABLED")?
-                                        }?,
                                         rist: {
                                           destination_address: ::String,
                                           destination_port: ::Integer
@@ -2250,6 +2277,11 @@ module Aws
                                               role_arn: ::String
                                             }
                                           }?
+                                        }?,
+                                        rtp: {
+                                          destination_address: ::String,
+                                          destination_port: ::Integer,
+                                          forward_error_correction: ("ENABLED" | "DISABLED")?
                                         }?
                                       },
                                       protocol: ("RTP" | "RIST" | "SRT_CALLER" | "SRT_LISTENER")?

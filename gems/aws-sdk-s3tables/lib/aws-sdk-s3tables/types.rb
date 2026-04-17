@@ -1207,8 +1207,19 @@ module Aws::S3Tables
     # Contains details about the metadata for an Iceberg table.
     #
     # @!attribute [rw] schema
-    #   The schema for an Iceberg table.
+    #   The schema for an Iceberg table. Use this property to define table
+    #   schemas with primitive types only. For schemas that include nested
+    #   or complex types such as `struct`, `list`, or `map`, use `schemaV2`
+    #   instead.
     #   @return [Types::IcebergSchema]
+    #
+    # @!attribute [rw] schema_v2
+    #   The schema for an Iceberg table using the V2 format. Use this
+    #   property to define table schemas that include nested or complex data
+    #   types such as `struct`, `list`, or `map`, in addition to primitive
+    #   types. For schemas with only primitive types, you can use either
+    #   `schema` or `schemaV2`.
+    #   @return [Types::IcebergSchemaV2]
     #
     # @!attribute [rw] partition_spec
     #   The partition specification for the Iceberg table. Partitioning
@@ -1232,6 +1243,7 @@ module Aws::S3Tables
     #
     class IcebergMetadata < Struct.new(
       :schema,
+      :schema_v2,
       :partition_spec,
       :write_order,
       :properties)
@@ -1314,6 +1326,46 @@ module Aws::S3Tables
     #
     class IcebergSchema < Struct.new(
       :fields)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains details about the schema for an Iceberg table using the V2
+    # format. This schema format supports nested and complex data types such
+    # as `struct`, `list`, and `map`, in addition to primitive types.
+    #
+    # @!attribute [rw] type
+    #   The type of the top-level schema, which is always a `struct` type as
+    #   defined in the [Apache Iceberg specification][1]. This value must be
+    #   `struct`.
+    #
+    #
+    #
+    #   [1]: https://iceberg.apache.org/spec/#schemas-and-data-types
+    #   @return [String]
+    #
+    # @!attribute [rw] fields
+    #   The schema fields for the table. Each field defines a column in the
+    #   table, including its name, type, and whether it is required.
+    #   @return [Array<Types::SchemaV2Field>]
+    #
+    # @!attribute [rw] schema_id
+    #   An optional unique identifier for the schema. Schema IDs are used by
+    #   Apache Iceberg to track schema evolution.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] identifier_field_ids
+    #   A list of field IDs that are used as the identifier fields for the
+    #   table. Identifier fields uniquely identify a row in the table.
+    #   @return [Array<Integer>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3tables-2018-05-10/IcebergSchemaV2 AWS API Documentation
+    #
+    class IcebergSchemaV2 < Struct.new(
+      :type,
+      :fields,
+      :schema_id,
+      :identifier_field_ids)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2122,6 +2174,55 @@ module Aws::S3Tables
       :name,
       :type,
       :required)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains details about a schema field in the V2 format. This field
+    # format supports nested and complex data types such as `struct`,
+    # `list`, and `map`, in addition to primitive types.
+    #
+    # @!attribute [rw] id
+    #   The unique identifier for the schema field. Field IDs are used by
+    #   Apache Iceberg to track schema evolution and maintain compatibility
+    #   across schema changes.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] name
+    #   The name of the field.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The data type of the field. This can be a primitive type string such
+    #   as `boolean`, `int`, `long`, `float`, `double`, `string`, `binary`,
+    #   `date`, `timestamp`, or `timestamptz`, or a complex type represented
+    #   as a JSON object for nested types such as `struct`, `list`, or
+    #   `map`. For more information, see the [Apache Iceberg schemas and
+    #   data types documentation][1].
+    #
+    #
+    #
+    #   [1]: https://iceberg.apache.org/spec/#schemas-and-data-types
+    #   @return [Hash,Array,String,Numeric,Boolean]
+    #
+    # @!attribute [rw] required
+    #   A Boolean value that specifies whether values are required for each
+    #   row in this field. If this is `true`, the field does not allow null
+    #   values.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] doc
+    #   An optional description of the field.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3tables-2018-05-10/SchemaV2Field AWS API Documentation
+    #
+    class SchemaV2Field < Struct.new(
+      :id,
+      :name,
+      :type,
+      :required,
+      :doc)
       SENSITIVE = []
       include Aws::Structure
     end

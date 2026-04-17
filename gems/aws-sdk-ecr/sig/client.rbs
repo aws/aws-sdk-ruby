@@ -162,7 +162,7 @@ module Aws
         def upstream_registry_url: () -> ::String
         def created_at: () -> ::Time
         def registry_id: () -> ::String
-        def upstream_registry: () -> ("ecr" | "ecr-public" | "quay" | "k8s" | "docker-hub" | "github-container-registry" | "azure-container-registry" | "gitlab-container-registry")
+        def upstream_registry: () -> ("ecr" | "ecr-public" | "quay" | "k8s" | "docker-hub" | "github-container-registry" | "azure-container-registry" | "gitlab-container-registry" | "chainguard")
         def credential_arn: () -> ::String
         def custom_role_arn: () -> ::String
         def upstream_repository_prefix: () -> ::String
@@ -172,7 +172,7 @@ module Aws
                                             ecr_repository_prefix: ::String,
                                             upstream_registry_url: ::String,
                                             ?registry_id: ::String,
-                                            ?upstream_registry: ("ecr" | "ecr-public" | "quay" | "k8s" | "docker-hub" | "github-container-registry" | "azure-container-registry" | "gitlab-container-registry"),
+                                            ?upstream_registry: ("ecr" | "ecr-public" | "quay" | "k8s" | "docker-hub" | "github-container-registry" | "azure-container-registry" | "gitlab-container-registry" | "chainguard"),
                                             ?credential_arn: ::String,
                                             ?custom_role_arn: ::String,
                                             ?upstream_repository_prefix: ::String

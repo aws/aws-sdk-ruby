@@ -377,6 +377,8 @@ module Aws::EKS
     VersionStatus = Shapes::StringShape.new(name: 'VersionStatus')
     VpcConfigRequest = Shapes::StructureShape.new(name: 'VpcConfigRequest')
     VpcConfigResponse = Shapes::StructureShape.new(name: 'VpcConfigResponse')
+    WarmPoolConfig = Shapes::StructureShape.new(name: 'WarmPoolConfig')
+    WarmPoolState = Shapes::StringShape.new(name: 'WarmPoolState')
     ZeroCapacity = Shapes::IntegerShape.new(name: 'ZeroCapacity')
     ZonalShiftConfigRequest = Shapes::StructureShape.new(name: 'ZonalShiftConfigRequest')
     ZonalShiftConfigResponse = Shapes::StructureShape.new(name: 'ZonalShiftConfigResponse')
@@ -841,6 +843,7 @@ module Aws::EKS
     CreateNodegroupRequest.add_member(:capacity_type, Shapes::ShapeRef.new(shape: CapacityTypes, location_name: "capacityType"))
     CreateNodegroupRequest.add_member(:version, Shapes::ShapeRef.new(shape: String, location_name: "version"))
     CreateNodegroupRequest.add_member(:release_version, Shapes::ShapeRef.new(shape: String, location_name: "releaseVersion"))
+    CreateNodegroupRequest.add_member(:warm_pool_config, Shapes::ShapeRef.new(shape: WarmPoolConfig, location_name: "warmPoolConfig"))
     CreateNodegroupRequest.struct_class = Types::CreateNodegroupRequest
 
     CreateNodegroupResponse.add_member(:nodegroup, Shapes::ShapeRef.new(shape: Nodegroup, location_name: "nodegroup"))
@@ -1435,6 +1438,7 @@ module Aws::EKS
     Nodegroup.add_member(:node_repair_config, Shapes::ShapeRef.new(shape: NodeRepairConfig, location_name: "nodeRepairConfig"))
     Nodegroup.add_member(:launch_template, Shapes::ShapeRef.new(shape: LaunchTemplateSpecification, location_name: "launchTemplate"))
     Nodegroup.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    Nodegroup.add_member(:warm_pool_config, Shapes::ShapeRef.new(shape: WarmPoolConfig, location_name: "warmPoolConfig"))
     Nodegroup.struct_class = Types::Nodegroup
 
     NodegroupHealth.add_member(:issues, Shapes::ShapeRef.new(shape: IssueList, location_name: "issues"))
@@ -1738,6 +1742,7 @@ module Aws::EKS
     UpdateNodegroupConfigRequest.add_member(:scaling_config, Shapes::ShapeRef.new(shape: NodegroupScalingConfig, location_name: "scalingConfig"))
     UpdateNodegroupConfigRequest.add_member(:update_config, Shapes::ShapeRef.new(shape: NodegroupUpdateConfig, location_name: "updateConfig"))
     UpdateNodegroupConfigRequest.add_member(:node_repair_config, Shapes::ShapeRef.new(shape: NodeRepairConfig, location_name: "nodeRepairConfig"))
+    UpdateNodegroupConfigRequest.add_member(:warm_pool_config, Shapes::ShapeRef.new(shape: WarmPoolConfig, location_name: "warmPoolConfig"))
     UpdateNodegroupConfigRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: String, location_name: "clientRequestToken", metadata: {"idempotencyToken" => true}))
     UpdateNodegroupConfigRequest.struct_class = Types::UpdateNodegroupConfigRequest
 
@@ -1803,6 +1808,13 @@ module Aws::EKS
     VpcConfigResponse.add_member(:endpoint_private_access, Shapes::ShapeRef.new(shape: Boolean, location_name: "endpointPrivateAccess"))
     VpcConfigResponse.add_member(:public_access_cidrs, Shapes::ShapeRef.new(shape: StringList, location_name: "publicAccessCidrs"))
     VpcConfigResponse.struct_class = Types::VpcConfigResponse
+
+    WarmPoolConfig.add_member(:enabled, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "enabled"))
+    WarmPoolConfig.add_member(:min_size, Shapes::ShapeRef.new(shape: ZeroCapacity, location_name: "minSize"))
+    WarmPoolConfig.add_member(:max_group_prepared_capacity, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "maxGroupPreparedCapacity"))
+    WarmPoolConfig.add_member(:pool_state, Shapes::ShapeRef.new(shape: WarmPoolState, location_name: "poolState"))
+    WarmPoolConfig.add_member(:reuse_on_scale_in, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "reuseOnScaleIn"))
+    WarmPoolConfig.struct_class = Types::WarmPoolConfig
 
     ZonalShiftConfigRequest.add_member(:enabled, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "enabled"))
     ZonalShiftConfigRequest.struct_class = Types::ZonalShiftConfigRequest

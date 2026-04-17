@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.183.0 (2026-04-08)
+------------------
+
+* Feature - MediaLive is adding support for MediaConnect Router by supporting a new output type called MEDIACONNECT ROUTER. This new output type will provide seamless encrypted transport between your MediaLive channel and MediaConnect Router.
+
+1.182.0 (2026-04-03)
+------------------
+
+* Feature - AWS Elemental MediaLive released a new features that allows customers to use HLG 2020 as a color space for AV1 video codec.
+
+1.181.0 (2026-03-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.180.0 (2026-03-13)
+------------------
+
+* Feature - Documents the VideoDescription.ScalingBehavior.SMART(underscore)CROP enum value.
+
+1.179.0 (2026-02-24)
+------------------
+
+* Feature - AWS Elemental MediaLive - Added support for Elemental Inference for Smart Cropping and Clipping features for MediaLive.
+
 1.178.0 (2026-02-05)
 ------------------
 

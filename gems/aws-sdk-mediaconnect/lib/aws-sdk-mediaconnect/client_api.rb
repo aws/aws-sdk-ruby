@@ -254,6 +254,10 @@ module Aws::MediaConnect
     MediaConnectFlowRouterInputStreamDetails = Shapes::StructureShape.new(name: 'MediaConnectFlowRouterInputStreamDetails')
     MediaConnectFlowRouterOutputConfiguration = Shapes::StructureShape.new(name: 'MediaConnectFlowRouterOutputConfiguration')
     MediaConnectFlowRouterOutputStreamDetails = Shapes::StructureShape.new(name: 'MediaConnectFlowRouterOutputStreamDetails')
+    MediaLiveChannelArn = Shapes::StringShape.new(name: 'MediaLiveChannelArn')
+    MediaLiveChannelPipelineId = Shapes::StringShape.new(name: 'MediaLiveChannelPipelineId')
+    MediaLiveChannelRouterInputConfiguration = Shapes::StructureShape.new(name: 'MediaLiveChannelRouterInputConfiguration')
+    MediaLiveChannelRouterInputStreamDetails = Shapes::StructureShape.new(name: 'MediaLiveChannelRouterInputStreamDetails')
     MediaLiveInputArn = Shapes::StringShape.new(name: 'MediaLiveInputArn')
     MediaLiveInputPipelineId = Shapes::StringShape.new(name: 'MediaLiveInputPipelineId')
     MediaLiveInputRouterOutputConfiguration = Shapes::StructureShape.new(name: 'MediaLiveInputRouterOutputConfiguration')
@@ -1055,15 +1059,15 @@ module Aws::MediaConnect
     FailoverRouterInputIndexedStreamDetails.add_member(:source_ip_address, Shapes::ShapeRef.new(shape: String, location_name: "sourceIpAddress"))
     FailoverRouterInputIndexedStreamDetails.struct_class = Types::FailoverRouterInputIndexedStreamDetails
 
-    FailoverRouterInputProtocolConfiguration.add_member(:rtp, Shapes::ShapeRef.new(shape: RtpRouterInputConfiguration, location_name: "rtp"))
     FailoverRouterInputProtocolConfiguration.add_member(:rist, Shapes::ShapeRef.new(shape: RistRouterInputConfiguration, location_name: "rist"))
     FailoverRouterInputProtocolConfiguration.add_member(:srt_listener, Shapes::ShapeRef.new(shape: SrtListenerRouterInputConfiguration, location_name: "srtListener"))
     FailoverRouterInputProtocolConfiguration.add_member(:srt_caller, Shapes::ShapeRef.new(shape: SrtCallerRouterInputConfiguration, location_name: "srtCaller"))
+    FailoverRouterInputProtocolConfiguration.add_member(:rtp, Shapes::ShapeRef.new(shape: RtpRouterInputConfiguration, location_name: "rtp"))
     FailoverRouterInputProtocolConfiguration.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
-    FailoverRouterInputProtocolConfiguration.add_member_subclass(:rtp, Types::FailoverRouterInputProtocolConfiguration::Rtp)
     FailoverRouterInputProtocolConfiguration.add_member_subclass(:rist, Types::FailoverRouterInputProtocolConfiguration::Rist)
     FailoverRouterInputProtocolConfiguration.add_member_subclass(:srt_listener, Types::FailoverRouterInputProtocolConfiguration::SrtListener)
     FailoverRouterInputProtocolConfiguration.add_member_subclass(:srt_caller, Types::FailoverRouterInputProtocolConfiguration::SrtCaller)
+    FailoverRouterInputProtocolConfiguration.add_member_subclass(:rtp, Types::FailoverRouterInputProtocolConfiguration::Rtp)
     FailoverRouterInputProtocolConfiguration.add_member_subclass(:unknown, Types::FailoverRouterInputProtocolConfiguration::Unknown)
     FailoverRouterInputProtocolConfiguration.struct_class = Types::FailoverRouterInputProtocolConfiguration
 
@@ -1455,6 +1459,14 @@ module Aws::MediaConnect
 
     MediaConnectFlowRouterOutputStreamDetails.struct_class = Types::MediaConnectFlowRouterOutputStreamDetails
 
+    MediaLiveChannelRouterInputConfiguration.add_member(:media_live_channel_arn, Shapes::ShapeRef.new(shape: MediaLiveChannelArn, location_name: "mediaLiveChannelArn"))
+    MediaLiveChannelRouterInputConfiguration.add_member(:media_live_pipeline_id, Shapes::ShapeRef.new(shape: MediaLiveChannelPipelineId, location_name: "mediaLivePipelineId"))
+    MediaLiveChannelRouterInputConfiguration.add_member(:media_live_channel_output_name, Shapes::ShapeRef.new(shape: String, location_name: "mediaLiveChannelOutputName"))
+    MediaLiveChannelRouterInputConfiguration.add_member(:source_transit_decryption, Shapes::ShapeRef.new(shape: MediaLiveTransitEncryption, required: true, location_name: "sourceTransitDecryption"))
+    MediaLiveChannelRouterInputConfiguration.struct_class = Types::MediaLiveChannelRouterInputConfiguration
+
+    MediaLiveChannelRouterInputStreamDetails.struct_class = Types::MediaLiveChannelRouterInputStreamDetails
+
     MediaLiveInputRouterOutputConfiguration.add_member(:media_live_input_arn, Shapes::ShapeRef.new(shape: MediaLiveInputArn, location_name: "mediaLiveInputArn"))
     MediaLiveInputRouterOutputConfiguration.add_member(:media_live_pipeline_id, Shapes::ShapeRef.new(shape: MediaLiveInputPipelineId, location_name: "mediaLivePipelineId"))
     MediaLiveInputRouterOutputConfiguration.add_member(:destination_transit_encryption, Shapes::ShapeRef.new(shape: MediaLiveTransitEncryption, required: true, location_name: "destinationTransitEncryption"))
@@ -1773,28 +1785,30 @@ module Aws::MediaConnect
     RouterInputArnList.member = Shapes::ShapeRef.new(shape: RouterInputArn)
 
     RouterInputConfiguration.add_member(:standard, Shapes::ShapeRef.new(shape: StandardRouterInputConfiguration, location_name: "standard"))
+    RouterInputConfiguration.add_member(:media_live_channel, Shapes::ShapeRef.new(shape: MediaLiveChannelRouterInputConfiguration, location_name: "mediaLiveChannel"))
     RouterInputConfiguration.add_member(:failover, Shapes::ShapeRef.new(shape: FailoverRouterInputConfiguration, location_name: "failover"))
-    RouterInputConfiguration.add_member(:merge, Shapes::ShapeRef.new(shape: MergeRouterInputConfiguration, location_name: "merge"))
     RouterInputConfiguration.add_member(:media_connect_flow, Shapes::ShapeRef.new(shape: MediaConnectFlowRouterInputConfiguration, location_name: "mediaConnectFlow"))
+    RouterInputConfiguration.add_member(:merge, Shapes::ShapeRef.new(shape: MergeRouterInputConfiguration, location_name: "merge"))
     RouterInputConfiguration.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     RouterInputConfiguration.add_member_subclass(:standard, Types::RouterInputConfiguration::Standard)
+    RouterInputConfiguration.add_member_subclass(:media_live_channel, Types::RouterInputConfiguration::MediaLiveChannel)
     RouterInputConfiguration.add_member_subclass(:failover, Types::RouterInputConfiguration::Failover)
-    RouterInputConfiguration.add_member_subclass(:merge, Types::RouterInputConfiguration::Merge)
     RouterInputConfiguration.add_member_subclass(:media_connect_flow, Types::RouterInputConfiguration::MediaConnectFlow)
+    RouterInputConfiguration.add_member_subclass(:merge, Types::RouterInputConfiguration::Merge)
     RouterInputConfiguration.add_member_subclass(:unknown, Types::RouterInputConfiguration::Unknown)
     RouterInputConfiguration.struct_class = Types::RouterInputConfiguration
 
-    RouterInputFilter.add_member(:region_names, Shapes::ShapeRef.new(shape: StringList, location_name: "regionNames"))
-    RouterInputFilter.add_member(:input_types, Shapes::ShapeRef.new(shape: RouterInputTypeList, location_name: "inputTypes"))
     RouterInputFilter.add_member(:name_contains, Shapes::ShapeRef.new(shape: StringList, location_name: "nameContains"))
+    RouterInputFilter.add_member(:region_names, Shapes::ShapeRef.new(shape: StringList, location_name: "regionNames"))
     RouterInputFilter.add_member(:network_interface_arns, Shapes::ShapeRef.new(shape: RouterNetworkInterfaceArnList, location_name: "networkInterfaceArns"))
     RouterInputFilter.add_member(:routing_scopes, Shapes::ShapeRef.new(shape: RoutingScopeList, location_name: "routingScopes"))
+    RouterInputFilter.add_member(:input_types, Shapes::ShapeRef.new(shape: RouterInputTypeList, location_name: "inputTypes"))
     RouterInputFilter.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
-    RouterInputFilter.add_member_subclass(:region_names, Types::RouterInputFilter::RegionNames)
-    RouterInputFilter.add_member_subclass(:input_types, Types::RouterInputFilter::InputTypes)
     RouterInputFilter.add_member_subclass(:name_contains, Types::RouterInputFilter::NameContains)
+    RouterInputFilter.add_member_subclass(:region_names, Types::RouterInputFilter::RegionNames)
     RouterInputFilter.add_member_subclass(:network_interface_arns, Types::RouterInputFilter::NetworkInterfaceArns)
     RouterInputFilter.add_member_subclass(:routing_scopes, Types::RouterInputFilter::RoutingScopes)
+    RouterInputFilter.add_member_subclass(:input_types, Types::RouterInputFilter::InputTypes)
     RouterInputFilter.add_member_subclass(:unknown, Types::RouterInputFilter::Unknown)
     RouterInputFilter.struct_class = Types::RouterInputFilter
 
@@ -1814,15 +1828,15 @@ module Aws::MediaConnect
     RouterInputMetadata.add_member_subclass(:unknown, Types::RouterInputMetadata::Unknown)
     RouterInputMetadata.struct_class = Types::RouterInputMetadata
 
-    RouterInputProtocolConfiguration.add_member(:rtp, Shapes::ShapeRef.new(shape: RtpRouterInputConfiguration, location_name: "rtp"))
     RouterInputProtocolConfiguration.add_member(:rist, Shapes::ShapeRef.new(shape: RistRouterInputConfiguration, location_name: "rist"))
     RouterInputProtocolConfiguration.add_member(:srt_listener, Shapes::ShapeRef.new(shape: SrtListenerRouterInputConfiguration, location_name: "srtListener"))
     RouterInputProtocolConfiguration.add_member(:srt_caller, Shapes::ShapeRef.new(shape: SrtCallerRouterInputConfiguration, location_name: "srtCaller"))
+    RouterInputProtocolConfiguration.add_member(:rtp, Shapes::ShapeRef.new(shape: RtpRouterInputConfiguration, location_name: "rtp"))
     RouterInputProtocolConfiguration.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
-    RouterInputProtocolConfiguration.add_member_subclass(:rtp, Types::RouterInputProtocolConfiguration::Rtp)
     RouterInputProtocolConfiguration.add_member_subclass(:rist, Types::RouterInputProtocolConfiguration::Rist)
     RouterInputProtocolConfiguration.add_member_subclass(:srt_listener, Types::RouterInputProtocolConfiguration::SrtListener)
     RouterInputProtocolConfiguration.add_member_subclass(:srt_caller, Types::RouterInputProtocolConfiguration::SrtCaller)
+    RouterInputProtocolConfiguration.add_member_subclass(:rtp, Types::RouterInputProtocolConfiguration::Rtp)
     RouterInputProtocolConfiguration.add_member_subclass(:unknown, Types::RouterInputProtocolConfiguration::Unknown)
     RouterInputProtocolConfiguration.struct_class = Types::RouterInputProtocolConfiguration
 
@@ -1835,14 +1849,16 @@ module Aws::MediaConnect
     RouterInputSourceMetadataDetails.struct_class = Types::RouterInputSourceMetadataDetails
 
     RouterInputStreamDetails.add_member(:standard, Shapes::ShapeRef.new(shape: StandardRouterInputStreamDetails, location_name: "standard"))
+    RouterInputStreamDetails.add_member(:media_live_channel, Shapes::ShapeRef.new(shape: MediaLiveChannelRouterInputStreamDetails, location_name: "mediaLiveChannel"))
     RouterInputStreamDetails.add_member(:failover, Shapes::ShapeRef.new(shape: FailoverRouterInputStreamDetails, location_name: "failover"))
-    RouterInputStreamDetails.add_member(:merge, Shapes::ShapeRef.new(shape: MergeRouterInputStreamDetails, location_name: "merge"))
     RouterInputStreamDetails.add_member(:media_connect_flow, Shapes::ShapeRef.new(shape: MediaConnectFlowRouterInputStreamDetails, location_name: "mediaConnectFlow"))
+    RouterInputStreamDetails.add_member(:merge, Shapes::ShapeRef.new(shape: MergeRouterInputStreamDetails, location_name: "merge"))
     RouterInputStreamDetails.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     RouterInputStreamDetails.add_member_subclass(:standard, Types::RouterInputStreamDetails::Standard)
+    RouterInputStreamDetails.add_member_subclass(:media_live_channel, Types::RouterInputStreamDetails::MediaLiveChannel)
     RouterInputStreamDetails.add_member_subclass(:failover, Types::RouterInputStreamDetails::Failover)
-    RouterInputStreamDetails.add_member_subclass(:merge, Types::RouterInputStreamDetails::Merge)
     RouterInputStreamDetails.add_member_subclass(:media_connect_flow, Types::RouterInputStreamDetails::MediaConnectFlow)
+    RouterInputStreamDetails.add_member_subclass(:merge, Types::RouterInputStreamDetails::Merge)
     RouterInputStreamDetails.add_member_subclass(:unknown, Types::RouterInputStreamDetails::Unknown)
     RouterInputStreamDetails.struct_class = Types::RouterInputStreamDetails
 
@@ -1945,18 +1961,18 @@ module Aws::MediaConnect
     RouterOutputConfiguration.struct_class = Types::RouterOutputConfiguration
 
     RouterOutputFilter.add_member(:region_names, Shapes::ShapeRef.new(shape: StringList, location_name: "regionNames"))
-    RouterOutputFilter.add_member(:output_types, Shapes::ShapeRef.new(shape: RouterOutputTypeList, location_name: "outputTypes"))
-    RouterOutputFilter.add_member(:name_contains, Shapes::ShapeRef.new(shape: StringList, location_name: "nameContains"))
     RouterOutputFilter.add_member(:network_interface_arns, Shapes::ShapeRef.new(shape: RouterNetworkInterfaceArnList, location_name: "networkInterfaceArns"))
-    RouterOutputFilter.add_member(:routed_input_arns, Shapes::ShapeRef.new(shape: RouterInputArnList, location_name: "routedInputArns"))
     RouterOutputFilter.add_member(:routing_scopes, Shapes::ShapeRef.new(shape: RoutingScopeList, location_name: "routingScopes"))
+    RouterOutputFilter.add_member(:output_types, Shapes::ShapeRef.new(shape: RouterOutputTypeList, location_name: "outputTypes"))
+    RouterOutputFilter.add_member(:routed_input_arns, Shapes::ShapeRef.new(shape: RouterInputArnList, location_name: "routedInputArns"))
+    RouterOutputFilter.add_member(:name_contains, Shapes::ShapeRef.new(shape: StringList, location_name: "nameContains"))
     RouterOutputFilter.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     RouterOutputFilter.add_member_subclass(:region_names, Types::RouterOutputFilter::RegionNames)
-    RouterOutputFilter.add_member_subclass(:output_types, Types::RouterOutputFilter::OutputTypes)
-    RouterOutputFilter.add_member_subclass(:name_contains, Types::RouterOutputFilter::NameContains)
     RouterOutputFilter.add_member_subclass(:network_interface_arns, Types::RouterOutputFilter::NetworkInterfaceArns)
-    RouterOutputFilter.add_member_subclass(:routed_input_arns, Types::RouterOutputFilter::RoutedInputArns)
     RouterOutputFilter.add_member_subclass(:routing_scopes, Types::RouterOutputFilter::RoutingScopes)
+    RouterOutputFilter.add_member_subclass(:output_types, Types::RouterOutputFilter::OutputTypes)
+    RouterOutputFilter.add_member_subclass(:routed_input_arns, Types::RouterOutputFilter::RoutedInputArns)
+    RouterOutputFilter.add_member_subclass(:name_contains, Types::RouterOutputFilter::NameContains)
     RouterOutputFilter.add_member_subclass(:unknown, Types::RouterOutputFilter::Unknown)
     RouterOutputFilter.struct_class = Types::RouterOutputFilter
 
@@ -1970,15 +1986,15 @@ module Aws::MediaConnect
 
     RouterOutputMessages.member = Shapes::ShapeRef.new(shape: RouterOutputMessage)
 
-    RouterOutputProtocolConfiguration.add_member(:rtp, Shapes::ShapeRef.new(shape: RtpRouterOutputConfiguration, location_name: "rtp"))
     RouterOutputProtocolConfiguration.add_member(:rist, Shapes::ShapeRef.new(shape: RistRouterOutputConfiguration, location_name: "rist"))
     RouterOutputProtocolConfiguration.add_member(:srt_listener, Shapes::ShapeRef.new(shape: SrtListenerRouterOutputConfiguration, location_name: "srtListener"))
     RouterOutputProtocolConfiguration.add_member(:srt_caller, Shapes::ShapeRef.new(shape: SrtCallerRouterOutputConfiguration, location_name: "srtCaller"))
+    RouterOutputProtocolConfiguration.add_member(:rtp, Shapes::ShapeRef.new(shape: RtpRouterOutputConfiguration, location_name: "rtp"))
     RouterOutputProtocolConfiguration.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
-    RouterOutputProtocolConfiguration.add_member_subclass(:rtp, Types::RouterOutputProtocolConfiguration::Rtp)
     RouterOutputProtocolConfiguration.add_member_subclass(:rist, Types::RouterOutputProtocolConfiguration::Rist)
     RouterOutputProtocolConfiguration.add_member_subclass(:srt_listener, Types::RouterOutputProtocolConfiguration::SrtListener)
     RouterOutputProtocolConfiguration.add_member_subclass(:srt_caller, Types::RouterOutputProtocolConfiguration::SrtCaller)
+    RouterOutputProtocolConfiguration.add_member_subclass(:rtp, Types::RouterOutputProtocolConfiguration::Rtp)
     RouterOutputProtocolConfiguration.add_member_subclass(:unknown, Types::RouterOutputProtocolConfiguration::Unknown)
     RouterOutputProtocolConfiguration.struct_class = Types::RouterOutputProtocolConfiguration
 

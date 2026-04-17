@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.6.0 (2026-03-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.5.0 (2026-03-03)
+------------------
+
+* Feature - Adds the Resold Unified Operations support plan and removes the Resold Business support plan in the CreateRelationship and UpdateRelationship APIs
+
 1.4.0 (2026-01-16)
 ------------------
 

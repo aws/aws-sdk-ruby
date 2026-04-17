@@ -323,11 +323,6 @@ module Aws::GuardDuty
     #   finding.
     #   @return [Types::KubernetesApiCallAction]
     #
-    # @!attribute [rw] rds_login_attempt_action
-    #   Information about `RDS_LOGIN_ATTEMPT` action described in this
-    #   finding.
-    #   @return [Types::RdsLoginAttemptAction]
-    #
     # @!attribute [rw] kubernetes_permission_checked_details
     #   Information whether the user has the permission to use a specific
     #   Kubernetes API.
@@ -342,6 +337,11 @@ module Aws::GuardDuty
     #   Information about the Kubernetes role name and role type.
     #   @return [Types::KubernetesRoleDetails]
     #
+    # @!attribute [rw] rds_login_attempt_action
+    #   Information about `RDS_LOGIN_ATTEMPT` action described in this
+    #   finding.
+    #   @return [Types::RdsLoginAttemptAction]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/Action AWS API Documentation
     #
     class Action < Struct.new(
@@ -351,10 +351,10 @@ module Aws::GuardDuty
       :network_connection_action,
       :port_probe_action,
       :kubernetes_api_call_action,
-      :rds_login_attempt_action,
       :kubernetes_permission_checked_details,
       :kubernetes_role_binding_details,
-      :kubernetes_role_details)
+      :kubernetes_role_details,
+      :rds_login_attempt_action)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1325,10 +1325,6 @@ module Aws::GuardDuty
     #   EKS cluster details involved in the coverage statistics.
     #   @return [Types::CoverageEksClusterDetails]
     #
-    # @!attribute [rw] resource_type
-    #   The type of Amazon Web Services resource.
-    #   @return [String]
-    #
     # @!attribute [rw] ecs_cluster_details
     #   Information about the Amazon ECS cluster that is assessed for
     #   runtime coverage.
@@ -1339,13 +1335,17 @@ module Aws::GuardDuty
     #   coverage.
     #   @return [Types::CoverageEc2InstanceDetails]
     #
+    # @!attribute [rw] resource_type
+    #   The type of Amazon Web Services resource.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/CoverageResourceDetails AWS API Documentation
     #
     class CoverageResourceDetails < Struct.new(
       :eks_cluster_details,
-      :resource_type,
       :ecs_cluster_details,
-      :ec2_instance_details)
+      :ec2_instance_details,
+      :resource_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5806,6 +5806,23 @@ module Aws::GuardDuty
     #   The Kubernetes API request HTTP verb.
     #   @return [String]
     #
+    # @!attribute [rw] resource
+    #   The resource component in the Kubernetes API call action.
+    #   @return [String]
+    #
+    # @!attribute [rw] subresource
+    #   The name of the sub-resource in the Kubernetes API call action.
+    #   @return [String]
+    #
+    # @!attribute [rw] namespace
+    #   The name of the namespace where the Kubernetes API call action takes
+    #   place.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_name
+    #   The name of the resource in the Kubernetes API call action.
+    #   @return [String]
+    #
     # @!attribute [rw] source_ips
     #   The IP of the Kubernetes API caller and the IPs of any proxies or
     #   load balancers between the caller and the API endpoint.
@@ -5827,37 +5844,20 @@ module Aws::GuardDuty
     #   Parameters related to the Kubernetes API call action.
     #   @return [String]
     #
-    # @!attribute [rw] resource
-    #   The resource component in the Kubernetes API call action.
-    #   @return [String]
-    #
-    # @!attribute [rw] subresource
-    #   The name of the sub-resource in the Kubernetes API call action.
-    #   @return [String]
-    #
-    # @!attribute [rw] namespace
-    #   The name of the namespace where the Kubernetes API call action takes
-    #   place.
-    #   @return [String]
-    #
-    # @!attribute [rw] resource_name
-    #   The name of the resource in the Kubernetes API call action.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/KubernetesApiCallAction AWS API Documentation
     #
     class KubernetesApiCallAction < Struct.new(
       :request_uri,
       :verb,
+      :resource,
+      :subresource,
+      :namespace,
+      :resource_name,
       :source_ips,
       :user_agent,
       :remote_ip_details,
       :status_code,
-      :parameters,
-      :resource,
-      :subresource,
-      :namespace,
-      :resource_name)
+      :parameters)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6141,6 +6141,11 @@ module Aws::GuardDuty
     #   workload.
     #   @return [Boolean]
     #
+    # @!attribute [rw] service_account_name
+    #   The service account name that is associated with a Kubernetes
+    #   workload.
+    #   @return [String]
+    #
     # @!attribute [rw] containers
     #   Containers running as part of the Kubernetes workload.
     #   @return [Array<Types::Container>]
@@ -6148,11 +6153,6 @@ module Aws::GuardDuty
     # @!attribute [rw] volumes
     #   Volumes used by the Kubernetes workload.
     #   @return [Array<Types::Volume>]
-    #
-    # @!attribute [rw] service_account_name
-    #   The service account name that is associated with a Kubernetes
-    #   workload.
-    #   @return [String]
     #
     # @!attribute [rw] host_ipc
     #   Whether the host IPC flag is enabled for the pods in the workload.
@@ -6170,9 +6170,9 @@ module Aws::GuardDuty
       :uid,
       :namespace,
       :host_network,
+      :service_account_name,
       :containers,
       :volumes,
-      :service_account_name,
       :host_ipc,
       :host_pid)
       SENSITIVE = []
@@ -9041,6 +9041,11 @@ module Aws::GuardDuty
     #   Details of a container.
     #   @return [Types::Container]
     #
+    # @!attribute [rw] lambda_details
+    #   Contains information about the Lambda function that was involved in
+    #   a finding.
+    #   @return [Types::LambdaDetails]
+    #
     # @!attribute [rw] rds_db_instance_details
     #   Contains information about the database instance to which an
     #   anomalous login attempt was made.
@@ -9055,11 +9060,6 @@ module Aws::GuardDuty
     #   Contains information about the user details through which anomalous
     #   login attempt was made.
     #   @return [Types::RdsDbUserDetails]
-    #
-    # @!attribute [rw] lambda_details
-    #   Contains information about the Lambda function that was involved in
-    #   a finding.
-    #   @return [Types::LambdaDetails]
     #
     # @!attribute [rw] ebs_snapshot_details
     #   Contains details about the EBS snapshot that was scanned.
@@ -9085,10 +9085,10 @@ module Aws::GuardDuty
       :ebs_volume_details,
       :ecs_cluster_details,
       :container_details,
+      :lambda_details,
       :rds_db_instance_details,
       :rds_limitless_db_details,
       :rds_db_user_details,
-      :lambda_details,
       :ebs_snapshot_details,
       :ec2_image_details,
       :recovery_point_details)

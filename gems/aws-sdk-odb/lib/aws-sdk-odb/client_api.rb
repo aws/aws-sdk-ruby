@@ -239,6 +239,8 @@ module Aws::Odb
     OdbPeeringConnectionList = Shapes::ListShape.new(name: 'OdbPeeringConnectionList')
     OdbPeeringConnectionSummary = Shapes::StructureShape.new(name: 'OdbPeeringConnectionSummary')
     PatchingModeType = Shapes::StringShape.new(name: 'PatchingModeType')
+    PeerNetworkRouteTableId = Shapes::StringShape.new(name: 'PeerNetworkRouteTableId')
+    PeerNetworkRouteTableIdList = Shapes::ListShape.new(name: 'PeerNetworkRouteTableIdList')
     PeeredCidr = Shapes::StringShape.new(name: 'PeeredCidr')
     PeeredCidrList = Shapes::ListShape.new(name: 'PeeredCidrList')
     PolicyDocument = Shapes::StringShape.new(name: 'PolicyDocument')
@@ -249,6 +251,7 @@ module Aws::Odb
     ResourceArn = Shapes::StringShape.new(name: 'ResourceArn')
     ResourceDisplayName = Shapes::StringShape.new(name: 'ResourceDisplayName')
     ResourceId = Shapes::StringShape.new(name: 'ResourceId')
+    ResourceIdList = Shapes::ListShape.new(name: 'ResourceIdList')
     ResourceIdOrArn = Shapes::StringShape.new(name: 'ResourceIdOrArn')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     ResourceStatus = Shapes::StringShape.new(name: 'ResourceStatus')
@@ -732,6 +735,7 @@ module Aws::Odb
     CreateOdbPeeringConnectionInput.add_member(:peer_network_id, Shapes::ShapeRef.new(shape: ResourceIdOrArn, required: true, location_name: "peerNetworkId"))
     CreateOdbPeeringConnectionInput.add_member(:display_name, Shapes::ShapeRef.new(shape: ResourceDisplayName, location_name: "displayName"))
     CreateOdbPeeringConnectionInput.add_member(:peer_network_cidrs_to_be_added, Shapes::ShapeRef.new(shape: PeeredCidrList, location_name: "peerNetworkCidrsToBeAdded"))
+    CreateOdbPeeringConnectionInput.add_member(:peer_network_route_table_ids, Shapes::ShapeRef.new(shape: PeerNetworkRouteTableIdList, location_name: "peerNetworkRouteTableIds"))
     CreateOdbPeeringConnectionInput.add_member(:client_token, Shapes::ShapeRef.new(shape: CreateOdbPeeringConnectionInputClientTokenString, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateOdbPeeringConnectionInput.add_member(:tags, Shapes::ShapeRef.new(shape: RequestTagMap, location_name: "tags"))
     CreateOdbPeeringConnectionInput.struct_class = Types::CreateOdbPeeringConnectionInput
@@ -1212,6 +1216,7 @@ module Aws::Odb
     OdbNetwork.add_member(:created_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "createdAt"))
     OdbNetwork.add_member(:percent_progress, Shapes::ShapeRef.new(shape: Float, location_name: "percentProgress"))
     OdbNetwork.add_member(:managed_services, Shapes::ShapeRef.new(shape: ManagedServices, location_name: "managedServices"))
+    OdbNetwork.add_member(:ec2_placement_group_ids, Shapes::ShapeRef.new(shape: ResourceIdList, location_name: "ec2PlacementGroupIds"))
     OdbNetwork.struct_class = Types::OdbNetwork
 
     OdbNetworkList.member = Shapes::ShapeRef.new(shape: OdbNetworkSummary)
@@ -1237,6 +1242,7 @@ module Aws::Odb
     OdbNetworkSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "createdAt"))
     OdbNetworkSummary.add_member(:percent_progress, Shapes::ShapeRef.new(shape: Float, location_name: "percentProgress"))
     OdbNetworkSummary.add_member(:managed_services, Shapes::ShapeRef.new(shape: ManagedServices, location_name: "managedServices"))
+    OdbNetworkSummary.add_member(:ec2_placement_group_ids, Shapes::ShapeRef.new(shape: ResourceIdList, location_name: "ec2PlacementGroupIds"))
     OdbNetworkSummary.struct_class = Types::OdbNetworkSummary
 
     OdbPeeringConnection.add_member(:odb_peering_connection_id, Shapes::ShapeRef.new(shape: ResourceIdOrArn, required: true, location_name: "odbPeeringConnectionId"))
@@ -1267,6 +1273,8 @@ module Aws::Odb
     OdbPeeringConnectionSummary.add_member(:percent_progress, Shapes::ShapeRef.new(shape: Float, location_name: "percentProgress"))
     OdbPeeringConnectionSummary.struct_class = Types::OdbPeeringConnectionSummary
 
+    PeerNetworkRouteTableIdList.member = Shapes::ShapeRef.new(shape: PeerNetworkRouteTableId)
+
     PeeredCidrList.member = Shapes::ShapeRef.new(shape: PeeredCidr)
 
     RebootDbNodeInput.add_member(:cloud_vm_cluster_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "cloudVmClusterId"))
@@ -1280,6 +1288,8 @@ module Aws::Odb
 
     RequestTagMap.key = Shapes::ShapeRef.new(shape: TagKey)
     RequestTagMap.value = Shapes::ShapeRef.new(shape: TagValue)
+
+    ResourceIdList.member = Shapes::ShapeRef.new(shape: ResourceId)
 
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     ResourceNotFoundException.add_member(:resource_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "resourceId"))

@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.29.0 (2026-03-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.28.0 (2026-02-19)
+------------------
+
+* Feature - AWS Private CA Connector for SCEP now supports AWS PrivateLink, allowing your clients to request certificates from within your Amazon Virtual Private Cloud (VPC) without traversing the public internet. With this launch, you can create VPC endpoints to connect to your SCEP connector privately.
+
 1.27.0 (2026-01-16)
 ------------------
 

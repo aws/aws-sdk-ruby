@@ -1054,6 +1054,17 @@ module Aws::MediaTailor
     #   configuration, regardless of `StreamId`.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   The tags to assign to the prefetch schedule. Tags are key-value
+    #   pairs that you can associate with Amazon resources to help with
+    #   organization, access control, and cost tracking. For more
+    #   information, see [Tagging AWS Elemental MediaTailor Resources][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/CreatePrefetchScheduleRequest AWS API Documentation
     #
     class CreatePrefetchScheduleRequest < Struct.new(
@@ -1063,7 +1074,8 @@ module Aws::MediaTailor
       :retrieval,
       :recurring_prefetch_configuration,
       :schedule_type,
-      :stream_id)
+      :stream_id,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1116,6 +1128,17 @@ module Aws::MediaTailor
     #   configuration, regardless of `StreamId`.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   The tags to assign to the prefetch schedule. Tags are key-value
+    #   pairs that you can associate with Amazon resources to help with
+    #   organization, access control, and cost tracking. For more
+    #   information, see [Tagging AWS Elemental MediaTailor Resources][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/CreatePrefetchScheduleResponse AWS API Documentation
     #
     class CreatePrefetchScheduleResponse < Struct.new(
@@ -1126,7 +1149,8 @@ module Aws::MediaTailor
       :retrieval,
       :recurring_prefetch_configuration,
       :schedule_type,
-      :stream_id)
+      :stream_id,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1163,6 +1187,17 @@ module Aws::MediaTailor
     #   The list of AudienceMedia defined in program.
     #   @return [Array<Types::AudienceMedia>]
     #
+    # @!attribute [rw] tags
+    #   The tags to assign to the program. Tags are key-value pairs that you
+    #   can associate with Amazon resources to help with organization,
+    #   access control, and cost tracking. For more information, see
+    #   [Tagging AWS Elemental MediaTailor Resources][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/CreateProgramRequest AWS API Documentation
     #
     class CreateProgramRequest < Struct.new(
@@ -1173,7 +1208,8 @@ module Aws::MediaTailor
       :schedule_configuration,
       :source_location_name,
       :vod_source_name,
-      :audience_media)
+      :audience_media,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1226,6 +1262,17 @@ module Aws::MediaTailor
     #   The list of AudienceMedia defined in program.
     #   @return [Array<Types::AudienceMedia>]
     #
+    # @!attribute [rw] tags
+    #   The tags to assign to the program. Tags are key-value pairs that you
+    #   can associate with Amazon resources to help with organization,
+    #   access control, and cost tracking. For more information, see
+    #   [Tagging AWS Elemental MediaTailor Resources][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/CreateProgramResponse AWS API Documentation
     #
     class CreateProgramResponse < Struct.new(
@@ -1240,7 +1287,8 @@ module Aws::MediaTailor
       :vod_source_name,
       :clip_range,
       :duration_millis,
-      :audience_media)
+      :audience_media,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1943,6 +1991,17 @@ module Aws::MediaTailor
     #   The list of AudienceMedia defined in program.
     #   @return [Array<Types::AudienceMedia>]
     #
+    # @!attribute [rw] tags
+    #   The tags assigned to the program. Tags are key-value pairs that you
+    #   can associate with Amazon resources to help with organization,
+    #   access control, and cost tracking. For more information, see
+    #   [Tagging AWS Elemental MediaTailor Resources][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/DescribeProgramResponse AWS API Documentation
     #
     class DescribeProgramResponse < Struct.new(
@@ -1957,7 +2016,8 @@ module Aws::MediaTailor
       :vod_source_name,
       :clip_range,
       :duration_millis,
-      :audience_media)
+      :audience_media,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2461,6 +2521,17 @@ module Aws::MediaTailor
     #   configuration.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   The tags assigned to the prefetch schedule. Tags are key-value pairs
+    #   that you can associate with Amazon resources to help with
+    #   organization, access control, and cost tracking. For more
+    #   information, see [Tagging AWS Elemental MediaTailor Resources][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/GetPrefetchScheduleResponse AWS API Documentation
     #
     class GetPrefetchScheduleResponse < Struct.new(
@@ -2471,7 +2542,8 @@ module Aws::MediaTailor
       :retrieval,
       :schedule_type,
       :recurring_prefetch_configuration,
-      :stream_id)
+      :stream_id,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3617,6 +3689,17 @@ module Aws::MediaTailor
     #   configuration.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   The tags assigned to the prefetch schedule. Tags are key-value pairs
+    #   that you can associate with Amazon resources to help with
+    #   organization, access control, and cost tracking. For more
+    #   information, see [Tagging AWS Elemental MediaTailor Resources][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/PrefetchSchedule AWS API Documentation
     #
     class PrefetchSchedule < Struct.new(
@@ -3627,7 +3710,8 @@ module Aws::MediaTailor
       :retrieval,
       :schedule_type,
       :recurring_prefetch_configuration,
-      :stream_id)
+      :stream_id,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5037,6 +5121,17 @@ module Aws::MediaTailor
     #   The list of AudienceMedia defined in program.
     #   @return [Array<Types::AudienceMedia>]
     #
+    # @!attribute [rw] tags
+    #   The tags assigned to the program. Tags are key-value pairs that you
+    #   can associate with Amazon resources to help with organization,
+    #   access control, and cost tracking. For more information, see
+    #   [Tagging AWS Elemental MediaTailor Resources][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/UpdateProgramResponse AWS API Documentation
     #
     class UpdateProgramResponse < Struct.new(
@@ -5051,7 +5146,8 @@ module Aws::MediaTailor
       :clip_range,
       :duration_millis,
       :scheduled_start_time,
-      :audience_media)
+      :audience_media,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end

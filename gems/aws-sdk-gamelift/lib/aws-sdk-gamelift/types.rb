@@ -879,6 +879,17 @@ module Aws::GameLift
     #   fleet instances are deployed.
     #   @return [Array<Types::ContainerFleetLocationAttributes>]
     #
+    # @!attribute [rw] player_gateway_mode
+    #   Indicates whether player gateway is enabled for this container
+    #   fleet. Player gateway provides benefits such as DDoS protection with
+    #   negligible impact to latency.
+    #
+    #   If `ENABLED` or `REQUIRED`, game clients can use player gateway to
+    #   connect with the game server. If `DISABLED`, game clients cannot use
+    #   player gateway. Instead, they have to directly connect to the game
+    #   server.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/ContainerFleet AWS API Documentation
     #
     class ContainerFleet < Struct.new(
@@ -903,7 +914,8 @@ module Aws::GameLift
       :status,
       :deployment_details,
       :log_configuration,
-      :location_attributes)
+      :location_attributes,
+      :player_gateway_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -933,11 +945,33 @@ module Aws::GameLift
     #     deployment is in progress.
     #   @return [String]
     #
+    # @!attribute [rw] player_gateway_status
+    #   The current status of player gateway in this location for this
+    #   container fleet. Note, even if a container fleet has
+    #   PlayerGatewayMode configured as `ENABLED`, player gateway might not
+    #   be available in a specific location. For more information about
+    #   locations where player gateway is supported, see [Amazon GameLift
+    #   Servers service locations][1].
+    #
+    #   Possible values include:
+    #
+    #   * `ENABLED` -- Player gateway is available for this container fleet
+    #     location.
+    #
+    #   * `DISABLED` -- Player gateway is not available for this container
+    #     fleet location.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/gameliftservers/latest/developerguide/gamelift-regions.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/ContainerFleetLocationAttributes AWS API Documentation
     #
     class ContainerFleetLocationAttributes < Struct.new(
       :location,
-      :status)
+      :status,
+      :player_gateway_status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1763,6 +1797,44 @@ module Aws::GameLift
     #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] player_gateway_mode
+    #   Configures player gateway for your fleet. Player gateway provides
+    #   benefits such as DDoS protection by rate limiting and validating
+    #   traﬃc before it reaches game servers, hiding game server IP
+    #   addresses from players, and providing updated endpoints when relay
+    #   endpoints become unhealthy.
+    #
+    #   **How it works:** When enabled, game clients connect to relay
+    #   endpoints instead of to your game servers. Player gateway validates
+    #   player gateway tokens and routes traffic to the appropriate game
+    #   server. Your game backend calls [GetPlayerConnectionDetails][1] to
+    #   retrieve relay endpoints and player gateway tokens for your game
+    #   clients. To learn more about this topic, see [DDoS protection with
+    #   Amazon GameLift Servers player gateway][2].
+    #
+    #   Possible values include:
+    #
+    #   * `DISABLED` (default) -- Game clients connect to the game server
+    #     endpoint. Use this when you do not intend to integrate your game
+    #     with player gateway.
+    #
+    #   * `ENABLED` -- Player gateway is available in fleet locations where
+    #     it is supported. Your game backend can call
+    #     [GetPlayerConnectionDetails][1] to obtain a player gateway token
+    #     and endpoints for game clients.
+    #
+    #   * `REQUIRED` -- Player gateway is available in fleet locations where
+    #     it is supported, and the fleet can only use locations that support
+    #     this feature. Attempting to add a remote location to your fleet
+    #     which does not support player gateway will result in an
+    #     `InvalidRequestException`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/gamelift/latest/apireference/API_GetPlayerConnectionDetails.html
+    #   [2]: https://docs.aws.amazon.com/gameliftservers/latest/developerguide/ddos-protection-intro.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/CreateContainerFleetInput AWS API Documentation
     #
     class CreateContainerFleetInput < Struct.new(
@@ -1780,7 +1852,8 @@ module Aws::GameLift
       :new_game_session_protection_policy,
       :game_session_creation_limit_policy,
       :log_configuration,
-      :tags)
+      :tags,
+      :player_gateway_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2171,6 +2244,50 @@ module Aws::GameLift
     #   [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-resources.html
     #   @return [String]
     #
+    # @!attribute [rw] player_gateway_mode
+    #   Configures player gateway for your fleet. Player gateway provides
+    #   benefits such as DDoS protection by rate limiting and validating
+    #   traﬃc before it reaches game servers, hiding game server IP
+    #   addresses from players, and providing updated endpoints when relay
+    #   endpoints become unhealthy. Note, player gateway is only available
+    #   for fleets using server SDK 5.x or later game server builds.
+    #
+    #   **How it works:** When enabled, game clients connect to relay
+    #   endpoints instead of to your game servers. Player gateway validates
+    #   player gateway tokens and routes traffic to the appropriate game
+    #   server. Your game backend calls [GetPlayerConnectionDetails][1] to
+    #   retrieve relay endpoints and player gateway tokens for your game
+    #   clients. To learn more about this topic, see [DDoS protection with
+    #   Amazon GameLift Servers player gateway][2].
+    #
+    #   Possible values include:
+    #
+    #   * `DISABLED` (default) -- Game clients connect to the game server
+    #     endpoint. Use this when you do not intend to integrate your game
+    #     with player gateway.
+    #
+    #   * `ENABLED` -- Player gateway is available in fleet locations where
+    #     it is supported. Your game backend can call
+    #     [GetPlayerConnectionDetails][1] to obtain a player gateway token
+    #     and endpoints for game clients.
+    #
+    #   * `REQUIRED` -- Player gateway is available in fleet locations where
+    #     it is supported, and the fleet can only use locations that support
+    #     this feature. Attempting to add a remote location to your fleet
+    #     which does not support player gateway will result in an
+    #     `InvalidRequestException`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/gamelift/latest/apireference/API_GetPlayerConnectionDetails.html
+    #   [2]: https://docs.aws.amazon.com/gameliftservers/latest/developerguide/ddos-protection-intro.html
+    #   @return [String]
+    #
+    # @!attribute [rw] player_gateway_configuration
+    #   Configuration settings for player gateway. Use this to specify
+    #   advanced options for how player gateway handles connections.
+    #   @return [Types::PlayerGatewayConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/CreateFleetInput AWS API Documentation
     #
     class CreateFleetInput < Struct.new(
@@ -2196,7 +2313,9 @@ module Aws::GameLift
       :tags,
       :compute_type,
       :anywhere_configuration,
-      :instance_role_credentials_provider)
+      :instance_role_credentials_provider,
+      :player_gateway_mode,
+      :player_gateway_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2490,10 +2609,15 @@ module Aws::GameLift
     #   For an example, see [Create a game session with custom
     #   properties][1].
     #
-    #   <note markdown="1"> Avoid using periods (".") in property keys if you plan to search
-    #   for game sessions by properties. Property keys containing periods
-    #   cannot be searched and will be filtered out from search results due
-    #   to search index limitations.
+    #   <note markdown="1"> * Avoid using periods (".") in property keys if you plan to search
+    #     for game sessions by properties. Property keys containing periods
+    #     cannot be searched and will be filtered out from search results
+    #     due to search index limitations.
+    #
+    #   * If you use SearchGameSessions API, there is a limit of 500 game
+    #     property keys across all game sessions and all fleets per region.
+    #     If the limit is exceeded, there will potentially be game session
+    #     entries missing from SearchGameSessions API results.
     #
     #    </note>
     #
@@ -2812,10 +2936,15 @@ module Aws::GameLift
     #   created for a successful match. This parameter is not used if
     #   `FlexMatchMode` is set to `STANDALONE`.
     #
-    #   <note markdown="1"> Avoid using periods (".") in property keys if you plan to search
-    #   for game sessions by properties. Property keys containing periods
-    #   cannot be searched and will be filtered out from search results due
-    #   to search index limitations.
+    #   <note markdown="1"> * Avoid using periods (".") in property keys if you plan to search
+    #     for game sessions by properties. Property keys containing periods
+    #     cannot be searched and will be filtered out from search results
+    #     due to search index limitations.
+    #
+    #   * If you use SearchGameSessions API, there is a limit of 500 game
+    #     property keys across all game sessions and all fleets per region.
+    #     If the limit is exceeded, there will potentially be game session
+    #     entries missing from SearchGameSessions API results.
     #
     #    </note>
     #   @return [Array<Types::GameProperty>]
@@ -3103,6 +3232,17 @@ module Aws::GameLift
     #   The Node.js version used for execution of your Realtime script. The
     #   valid values are `10.x | 24.x`. By default, `NodeJsVersion` is
     #   `10.x`. This value cannot be updated later.
+    #
+    #   <note markdown="1"> Node.js 10 will reach end of support on September 30, 2026. See more
+    #   details in the [Node.js 10 FAQs][1]. For migration guidance, see [
+    #   Migrating from Node.js 10 to 24][2].
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: http://aws.amazon.com/gamelift/faq/nodejs10/
+    #   [2]: https://docs.aws.amazon.com/gamelift/latest/realtimeguide/realtime-script.html#realtime-script-nodejs-migration
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/CreateScriptInput AWS API Documentation
@@ -5712,6 +5852,21 @@ module Aws::GameLift
     #   [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-resources.html
     #   @return [String]
     #
+    # @!attribute [rw] player_gateway_mode
+    #   Indicates whether player gateway is enabled for this fleet. Player
+    #   gateway provides benefits such as DDoS protection with negligible
+    #   impact to latency.
+    #
+    #   If `ENABLED` or `REQUIRED`, game clients can use player gateway to
+    #   connect with the game server. If `DISABLED`, game clients cannot use
+    #   player gateway. Instead, they have to directly connect to the game
+    #   server.
+    #   @return [String]
+    #
+    # @!attribute [rw] player_gateway_configuration
+    #   Configuration settings for player gateway on this fleet.
+    #   @return [Types::PlayerGatewayConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/FleetAttributes AWS API Documentation
     #
     class FleetAttributes < Struct.new(
@@ -5740,7 +5895,9 @@ module Aws::GameLift
       :certificate_configuration,
       :compute_type,
       :anywhere_configuration,
-      :instance_role_credentials_provider)
+      :instance_role_credentials_provider,
+      :player_gateway_mode,
+      :player_gateway_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5994,10 +6151,15 @@ module Aws::GameLift
     # @!attribute [rw] key
     #   The game property identifier.
     #
-    #   <note markdown="1"> Avoid using periods (".") in property keys if you plan to search
-    #   for game sessions by properties. Property keys containing periods
-    #   cannot be searched and will be filtered out from search results due
-    #   to search index limitations.
+    #   <note markdown="1"> * Avoid using periods (".") in property keys if you plan to search
+    #     for game sessions by properties. Property keys containing periods
+    #     cannot be searched and will be filtered out from search results
+    #     due to search index limitations.
+    #
+    #   * If you use SearchGameSessions API, there is a limit of 500 game
+    #     property keys across all game sessions and all fleets per region.
+    #     If the limit is exceeded, there will potentially be game session
+    #     entries missing from SearchGameSessions API results.
     #
     #    </note>
     #   @return [String]
@@ -6674,10 +6836,15 @@ module Aws::GameLift
     #   A set of key-value pairs that can store custom data in a game
     #   session. For example: `{"Key": "difficulty", "Value": "novice"}`.
     #
-    #   <note markdown="1"> Avoid using periods (".") in property keys if you plan to search
-    #   for game sessions by properties. Property keys containing periods
-    #   cannot be searched and will be filtered out from search results due
-    #   to search index limitations.
+    #   <note markdown="1"> * Avoid using periods (".") in property keys if you plan to search
+    #     for game sessions by properties. Property keys containing periods
+    #     cannot be searched and will be filtered out from search results
+    #     due to search index limitations.
+    #
+    #   * If you use SearchGameSessions API, there is a limit of 500 game
+    #     property keys across all game sessions and all fleets per region.
+    #     If the limit is exceeded, there will potentially be game session
+    #     entries missing from SearchGameSessions API results.
     #
     #    </note>
     #   @return [Array<Types::GameProperty>]
@@ -6756,6 +6923,34 @@ module Aws::GameLift
     #   `us-west-2`.
     #   @return [String]
     #
+    # @!attribute [rw] compute_name
+    #   A descriptive label for the compute resource. The compute resource
+    #   that is hosting the game session. For EC2 fleets, this is the EC2
+    #   instance ID. For Container fleets, each game server container group
+    #   on a fleet instance is assigned a compute name. For Anywhere fleets,
+    #   this is the custom compute name.
+    #   @return [String]
+    #
+    # @!attribute [rw] player_gateway_status
+    #   Indicates whether player gateway is available for use for this game
+    #   session. Note, even if a fleet has PlayerGatewayMode configured as
+    #   `ENABLED`, player gateway might not be available in a specific
+    #   location. For more information about locations where player gateway
+    #   is supported, see [Amazon GameLift Servers service locations][1].
+    #
+    #   Possible values include:
+    #
+    #   * `ENABLED` -- Player gateway is available for routing player
+    #     connections for this game session.
+    #
+    #   * `DISABLED` -- Player gateway is not available for this game
+    #     session.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/gameliftservers/latest/developerguide/gamelift-regions.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/GameSession AWS API Documentation
     #
     class GameSession < Struct.new(
@@ -6777,7 +6972,9 @@ module Aws::GameLift
       :creator_id,
       :game_session_data,
       :matchmaker_data,
-      :location)
+      :location,
+      :compute_name,
+      :player_gateway_status)
       SENSITIVE = [:ip_address, :port]
       include Aws::Structure
     end
@@ -6829,6 +7026,25 @@ module Aws::GameLift
     #   included in the original matchmaking request.
     #   @return [Array<Types::MatchedPlayerSession>]
     #
+    # @!attribute [rw] player_gateway_status
+    #   The current status of player gateway for the game session. Note,
+    #   even if a fleet has PlayerGatewayMode configured as `ENABLED`,
+    #   player gateway might not be available in a specific location. For
+    #   more information about locations where player gateway is supported,
+    #   see [supported locations][1].
+    #
+    #   Possible values include:
+    #
+    #   * `ENABLED` -- Player gateway is available for this game session.
+    #
+    #   * `DISABLED` -- Player gateway is not available for this game
+    #     session.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/gameliftservers/latest/developerguide/gamelift-regions.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/GameSessionConnectionInfo AWS API Documentation
     #
     class GameSessionConnectionInfo < Struct.new(
@@ -6836,7 +7052,8 @@ module Aws::GameLift
       :ip_address,
       :dns_name,
       :port,
-      :matched_player_sessions)
+      :matched_player_sessions,
+      :player_gateway_status)
       SENSITIVE = [:ip_address]
       include Aws::Structure
     end
@@ -6968,10 +7185,15 @@ module Aws::GameLift
     #   A set of key-value pairs that can store custom data in a game
     #   session. For example: `{"Key": "difficulty", "Value": "novice"}`.
     #
-    #   <note markdown="1"> Avoid using periods (".") in property keys if you plan to search
-    #   for game sessions by properties. Property keys containing periods
-    #   cannot be searched and will be filtered out from search results due
-    #   to search index limitations.
+    #   <note markdown="1"> * Avoid using periods (".") in property keys if you plan to search
+    #     for game sessions by properties. Property keys containing periods
+    #     cannot be searched and will be filtered out from search results
+    #     due to search index limitations.
+    #
+    #   * If you use SearchGameSessions API, there is a limit of 500 game
+    #     property keys across all game sessions and all fleets per region.
+    #     If the limit is exceeded, there will potentially be game session
+    #     entries missing from SearchGameSessions API results.
     #
     #    </note>
     #   @return [Array<Types::GameProperty>]
@@ -7096,6 +7318,26 @@ module Aws::GameLift
     #   in the event that it failed to place a new game session.
     #   @return [Types::PriorityConfigurationOverride]
     #
+    # @!attribute [rw] player_gateway_status
+    #   The current status of player gateway for the game session placement.
+    #   Note, even if a fleet has PlayerGatewayMode configured as `ENABLED`,
+    #   player gateway might not be available in a specific location. For
+    #   more information about locations where player gateway is supported,
+    #   see [Amazon GameLift Servers service locations][1].
+    #
+    #   Possible values include:
+    #
+    #   * `ENABLED` -- Player gateway is available for this game session
+    #     placement.
+    #
+    #   * `DISABLED` -- Player gateway is not available for this game
+    #     session placement.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/gameliftservers/latest/developerguide/gamelift-regions.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/GameSessionPlacement AWS API Documentation
     #
     class GameSessionPlacement < Struct.new(
@@ -7117,7 +7359,8 @@ module Aws::GameLift
       :placed_player_sessions,
       :game_session_data,
       :matchmaker_data,
-      :priority_configuration_override)
+      :priority_configuration_override,
+      :player_gateway_status)
       SENSITIVE = [:ip_address, :port]
       include Aws::Structure
     end
@@ -7455,6 +7698,44 @@ module Aws::GameLift
     #
     class GetInstanceAccessOutput < Struct.new(
       :instance_access)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] game_session_id
+    #   A unique identifier for the game session for which to retrieve
+    #   player connection details.
+    #   @return [String]
+    #
+    # @!attribute [rw] player_ids
+    #   List of unique identifiers for players. Connection details are
+    #   returned for each player in this list.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/GetPlayerConnectionDetailsInput AWS API Documentation
+    #
+    class GetPlayerConnectionDetailsInput < Struct.new(
+      :game_session_id,
+      :player_ids)
+      SENSITIVE = [:player_ids]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] game_session_id
+    #   A unique identifier for the game session for which the player
+    #   connection details were retrieved.
+    #   @return [String]
+    #
+    # @!attribute [rw] player_connection_details
+    #   A collection of player connection detail objects, one for each
+    #   requested player.
+    #   @return [Array<Types::PlayerConnectionDetail>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/GetPlayerConnectionDetailsOutput AWS API Documentation
+    #
+    class GetPlayerConnectionDetailsOutput < Struct.new(
+      :game_session_id,
+      :player_connection_details)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8571,7 +8852,10 @@ module Aws::GameLift
     #   @return [String]
     #
     # @!attribute [rw] ping_beacon
-    #   Information about the UDP ping beacon for this location.
+    #   Information about the UDP ping beacon for this location. Ping
+    #   beacons are fixed endpoints that you can use to measure network
+    #   latency between a player device and an Amazon GameLift Servers
+    #   hosting location.
     #   @return [Types::PingBeacon]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/LocationModel AWS API Documentation
@@ -8620,11 +8904,31 @@ module Aws::GameLift
     #   The life-cycle status of a fleet location.
     #   @return [String]
     #
+    # @!attribute [rw] player_gateway_status
+    #   The current status of player gateway in this location for this
+    #   fleet. Note, even if a fleet has PlayerGatewayMode configured as
+    #   `ENABLED`, player gateway might not be available in a specific
+    #   location. For more information about locations where player gateway
+    #   is supported, see [Amazon GameLift Servers service locations][1].
+    #
+    #   Possible values include:
+    #
+    #   * `ENABLED` -- Player gateway is available for this fleet location.
+    #
+    #   * `DISABLED` -- Player gateway is not available for this fleet
+    #     location.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/gameliftservers/latest/developerguide/gamelift-regions.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/LocationState AWS API Documentation
     #
     class LocationState < Struct.new(
       :location,
-      :status)
+      :status,
+      :player_gateway_status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8765,7 +9069,9 @@ module Aws::GameLift
     #   @return [String]
     #
     # @!attribute [rw] player_session_id
-    #   A unique identifier for a player session
+    #   A unique identifier for a player session. PlayerSessionId will only
+    #   be populated for player sessions that are in ACTIVE or RESERVED
+    #   status when the ticket is completed.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/MatchedPlayerSession AWS API Documentation
@@ -8886,10 +9192,15 @@ module Aws::GameLift
     #   created for a successful match. This parameter is not used when
     #   `FlexMatchMode` is set to `STANDALONE`.
     #
-    #   <note markdown="1"> Avoid using periods (".") in property keys if you plan to search
-    #   for game sessions by properties. Property keys containing periods
-    #   cannot be searched and will be filtered out from search results due
-    #   to search index limitations.
+    #   <note markdown="1"> * Avoid using periods (".") in property keys if you plan to search
+    #     for game sessions by properties. Property keys containing periods
+    #     cannot be searched and will be filtered out from search results
+    #     due to search index limitations.
+    #
+    #   * If you use SearchGameSessions API, there is a limit of 500 game
+    #     property keys across all game sessions and all fleets per region.
+    #     If the limit is exceeded, there will potentially be game session
+    #     entries missing from SearchGameSessions API results.
     #
     #    </note>
     #   @return [Array<Types::GameProperty>]
@@ -9222,7 +9533,9 @@ module Aws::GameLift
     # hosting location.
     #
     # @!attribute [rw] udp_endpoint
-    #   The domain name and port of the UDP ping beacon.
+    #   The domain name and port of the UDP ping beacon. Your game client
+    #   can send UDP messages to this endpoint and receive responses to
+    #   measure network latency.
     #   @return [Types::UDPEndpoint]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/PingBeacon AWS API Documentation
@@ -9304,6 +9617,110 @@ module Aws::GameLift
       :team,
       :latency_in_ms)
       SENSITIVE = [:player_id]
+      include Aws::Structure
+    end
+
+    # Connection information for a game client to connect to a game session.
+    # This object contains the IP address(es), port(s), and authentication
+    # details your game client needs to establish a connection.
+    #
+    # **With player gateway enabled:** Contains relay endpoints and a player
+    # gateway token. Your game client must prepend player gateway token to
+    # each payload for validation and connection through relay endpoints.
+    #
+    # **With player gateway disabled:** Contains game server endpoint.
+    # Player gateway token and expiration fields are empty.
+    #
+    # @!attribute [rw] player_id
+    #   A unique identifier for a player associated with this connection.
+    #   @return [String]
+    #
+    # @!attribute [rw] endpoints
+    #   List of connection endpoints for the game client. Your game client
+    #   uses these IP address(es) and port(s) to connect to the game
+    #   session.
+    #
+    #   When player gateway is enabled, these are relay endpoints with
+    #   benefits such as DDoS protection. When disabled, this is the game
+    #   server endpoint.
+    #   @return [Array<Types::PlayerConnectionEndpoint>]
+    #
+    # @!attribute [rw] player_gateway_token
+    #   Access token that your game client must prepend to all traffic sent
+    #   through player gateway. Player gateway verifies identity and
+    #   authorizes connection based on this token.
+    #
+    #   This value is empty when player gateway is disabled.
+    #   @return [String]
+    #
+    # @!attribute [rw] expiration
+    #   When player gateway is enabled, this is the timestamp indicating
+    #   when player gateway token expires. Your game backend should call
+    #   [GetPlayerConnectionDetails][1] to retrieve fresh connection
+    #   information for your game clients before this time. Format is a
+    #   number expressed in Unix time as milliseconds (for example
+    #   `"1469498468.057"`).
+    #
+    #   This value is empty when player gateway is disabled.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/gamelift/latest/apireference/API_GetPlayerConnectionDetails.html
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/PlayerConnectionDetail AWS API Documentation
+    #
+    class PlayerConnectionDetail < Struct.new(
+      :player_id,
+      :endpoints,
+      :player_gateway_token,
+      :expiration)
+      SENSITIVE = [:player_id]
+      include Aws::Structure
+    end
+
+    # Network address(es) and port(s) for connecting to a game session.
+    #
+    # @!attribute [rw] ip_address
+    #   IP address for connecting to the game session. When player gateway
+    #   is enabled, this is a player gateway IP address. When player gateway
+    #   is disabled, this is the game server IP address.
+    #   @return [String]
+    #
+    # @!attribute [rw] port
+    #   Port number for connecting to the game session. When player gateway
+    #   is enabled, this is a player gateway port. When player gateway is
+    #   disabled, this is the game server port.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/PlayerConnectionEndpoint AWS API Documentation
+    #
+    class PlayerConnectionEndpoint < Struct.new(
+      :ip_address,
+      :port)
+      SENSITIVE = [:ip_address, :port]
+      include Aws::Structure
+    end
+
+    # Configuration settings for player gateway. Use these settings to
+    # specify advanced options for how player gateway handles connections.
+    #
+    # @!attribute [rw] game_server_ip_protocol_supported
+    #   The IP protocol that your game servers support for player
+    #   connections through player gateway. If the value is set to `IPv4`,
+    #   GameLift will install and execute a lightweight IP translation
+    #   software on fleet instances to receive and transform incoming IPv6
+    #   traffic to IPv4. If the value is set to `DUAL_STACK`, the
+    #   lightweight IP translation software will not be installed on fleet
+    #   instances. `DUAL_STACK` provides slightly better performance than
+    #   `IPv4`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/PlayerGatewayConfiguration AWS API Documentation
+    #
+    class PlayerGatewayConfiguration < Struct.new(
+      :game_server_ip_protocol_supported)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10368,6 +10785,17 @@ module Aws::GameLift
     #   The Node.js version used for execution of your Realtime script. The
     #   valid values are `10.x | 24.x`. By default, `NodeJsVersion` is
     #   `10.x`. This value cannot be updated later.
+    #
+    #   <note markdown="1"> Node.js 10 will reach end of support on September 30, 2026. See more
+    #   details in the [Node.js 10 FAQs][1]. For migration guidance, see [
+    #   Migrating from Node.js 10 to 24][2].
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: http://aws.amazon.com/gamelift/faq/nodejs10/
+    #   [2]: https://docs.aws.amazon.com/gamelift/latest/realtimeguide/realtime-script.html#realtime-script-nodejs-migration
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/Script AWS API Documentation
@@ -10625,10 +11053,15 @@ module Aws::GameLift
     #   A set of key-value pairs that can store custom data in a game
     #   session. For example: `{"Key": "difficulty", "Value": "novice"}`.
     #
-    #   <note markdown="1"> Avoid using periods (".") in property keys if you plan to search
-    #   for game sessions by properties. Property keys containing periods
-    #   cannot be searched and will be filtered out from search results due
-    #   to search index limitations.
+    #   <note markdown="1"> * Avoid using periods (".") in property keys if you plan to search
+    #     for game sessions by properties. Property keys containing periods
+    #     cannot be searched and will be filtered out from search results
+    #     due to search index limitations.
+    #
+    #   * If you use SearchGameSessions API, there is a limit of 500 game
+    #     property keys across all game sessions and all fleets per region.
+    #     If the limit is exceeded, there will potentially be game session
+    #     entries missing from SearchGameSessions API results.
     #
     #    </note>
     #   @return [Array<Types::GameProperty>]
@@ -11461,7 +11894,8 @@ module Aws::GameLift
     #   @return [String]
     #
     # @!attribute [rw] port
-    #   The port number of the UDP endpoint.
+    #   The port number of the UDP endpoint. For Amazon GameLift Servers
+    #   ping beacons, this is typically port 7770.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/UDPEndpoint AWS API Documentation
@@ -12247,10 +12681,15 @@ module Aws::GameLift
     #   properties. There is no way to delete properties. For an example,
     #   see [Update the value of a game property][1].
     #
-    #   <note markdown="1"> Avoid using periods (".") in property keys if you plan to search
-    #   for game sessions by properties. Property keys containing periods
-    #   cannot be searched and will be filtered out from search results due
-    #   to search index limitations.
+    #   <note markdown="1"> * Avoid using periods (".") in property keys if you plan to search
+    #     for game sessions by properties. Property keys containing periods
+    #     cannot be searched and will be filtered out from search results
+    #     due to search index limitations.
+    #
+    #   * If you use SearchGameSessions API, there is a limit of 500 game
+    #     property keys across all game sessions and all fleets per region.
+    #     If the limit is exceeded, there will potentially be game session
+    #     entries missing from SearchGameSessions API results.
     #
     #    </note>
     #
@@ -12456,10 +12895,15 @@ module Aws::GameLift
     #   created for a successful match. This parameter is not used if
     #   `FlexMatchMode` is set to `STANDALONE`.
     #
-    #   <note markdown="1"> Avoid using periods (".") in property keys if you plan to search
-    #   for game sessions by properties. Property keys containing periods
-    #   cannot be searched and will be filtered out from search results due
-    #   to search index limitations.
+    #   <note markdown="1"> * Avoid using periods (".") in property keys if you plan to search
+    #     for game sessions by properties. Property keys containing periods
+    #     cannot be searched and will be filtered out from search results
+    #     due to search index limitations.
+    #
+    #   * If you use SearchGameSessions API, there is a limit of 500 game
+    #     property keys across all game sessions and all fleets per region.
+    #     If the limit is exceeded, there will potentially be game session
+    #     entries missing from SearchGameSessions API results.
     #
     #    </note>
     #   @return [Array<Types::GameProperty>]

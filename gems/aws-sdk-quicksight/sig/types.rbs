@@ -191,6 +191,7 @@ module Aws::QuickSight
     class AnalysisDefinition
       attr_accessor data_set_identifier_declarations: ::Array[Types::DataSetIdentifierDeclaration]
       attr_accessor sheets: ::Array[Types::SheetDefinition]
+      attr_accessor tooltip_sheets: ::Array[Types::TooltipSheetDefinition]
       attr_accessor calculated_fields: ::Array[Types::CalculatedField]
       attr_accessor parameter_declarations: ::Array[Types::ParameterDeclaration]
       attr_accessor filter_groups: ::Array[Types::FilterGroup]
@@ -1213,6 +1214,7 @@ module Aws::QuickSight
       attr_accessor publish_without_approval: ("DENY")
       attr_accessor use_bedrock_models: ("DENY")
       attr_accessor perform_flow_ui_task: ("DENY")
+      attr_accessor approve_flow_share_requests: ("DENY")
       attr_accessor use_agent_web_search: ("DENY")
       attr_accessor knowledge_base: ("DENY")
       attr_accessor action: ("DENY")
@@ -1388,11 +1390,20 @@ module Aws::QuickSight
       attr_accessor create_and_update_new_relic_action: ("DENY")
       attr_accessor share_new_relic_action: ("DENY")
       attr_accessor use_new_relic_action: ("DENY")
+      attr_accessor topic: ("DENY")
+      attr_accessor edit_visual_with_q: ("DENY")
+      attr_accessor build_calculated_field_with_q: ("DENY")
+      attr_accessor create_dashboard_executive_summary_with_q: ("DENY")
       attr_accessor space: ("DENY")
+      attr_accessor create_spaces: ("DENY")
+      attr_accessor share_spaces: ("DENY")
       attr_accessor chat_agent: ("DENY")
       attr_accessor create_chat_agents: ("DENY")
+      attr_accessor share_chat_agents: ("DENY")
       attr_accessor research: ("DENY")
       attr_accessor self_upgrade_user_role: ("DENY")
+      attr_accessor extension: ("DENY")
+      attr_accessor manage_shared_folders: ("DENY")
       SENSITIVE: []
     end
 
@@ -2570,6 +2581,7 @@ module Aws::QuickSight
     class DashboardVersionDefinition
       attr_accessor data_set_identifier_declarations: ::Array[Types::DataSetIdentifierDeclaration]
       attr_accessor sheets: ::Array[Types::SheetDefinition]
+      attr_accessor tooltip_sheets: ::Array[Types::TooltipSheetDefinition]
       attr_accessor calculated_fields: ::Array[Types::CalculatedField]
       attr_accessor parameter_declarations: ::Array[Types::ParameterDeclaration]
       attr_accessor filter_groups: ::Array[Types::FilterGroup]
@@ -2961,6 +2973,7 @@ module Aws::QuickSight
       attr_accessor secret_arn: ::String
       attr_accessor key_pair_credentials: Types::KeyPairCredentials
       attr_accessor web_proxy_credentials: Types::WebProxyCredentials
+      attr_accessor o_auth_client_credentials: Types::OAuthClientCredentials
       SENSITIVE: []
     end
 
@@ -3937,6 +3950,28 @@ module Aws::QuickSight
       attr_accessor override_validation_strategy: Types::AssetBundleImportJobOverrideValidationStrategy
       attr_accessor warnings: ::Array[Types::AssetBundleImportJobWarning]
       SENSITIVE: []
+    end
+
+    class DescribeAutomationJobRequest
+      attr_accessor aws_account_id: ::String
+      attr_accessor automation_group_id: ::String
+      attr_accessor automation_id: ::String
+      attr_accessor include_input_payload: bool
+      attr_accessor include_output_payload: bool
+      attr_accessor job_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeAutomationJobResponse
+      attr_accessor arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor started_at: ::Time
+      attr_accessor ended_at: ::Time
+      attr_accessor job_status: ("FAILED" | "RUNNING" | "SUCCEEDED" | "QUEUED" | "STOPPED")
+      attr_accessor input_payload: ::String
+      attr_accessor output_payload: ::String
+      attr_accessor request_id: ::String
+      SENSITIVE: [:input_payload, :output_payload]
     end
 
     class DescribeBrandAssignmentRequest
@@ -6097,7 +6132,7 @@ module Aws::QuickSight
     class InputColumn
       attr_accessor name: ::String
       attr_accessor id: ::String
-      attr_accessor type: ("STRING" | "INTEGER" | "DECIMAL" | "DATETIME" | "BIT" | "BOOLEAN" | "JSON")
+      attr_accessor type: ("STRING" | "INTEGER" | "DECIMAL" | "DATETIME" | "BIT" | "BOOLEAN" | "JSON" | "SEMISTRUCT")
       attr_accessor sub_type: ("FLOAT" | "FIXED")
       SENSITIVE: []
     end
@@ -7431,6 +7466,13 @@ module Aws::QuickSight
       SENSITIVE: []
     end
 
+    class OAuthClientCredentials
+      attr_accessor client_id: ::String
+      attr_accessor client_secret: ::String
+      attr_accessor username: ::String
+      SENSITIVE: [:client_id, :client_secret, :username]
+    end
+
     class OAuthParameters
       attr_accessor token_provider_url: ::String
       attr_accessor o_auth_scope: ::String
@@ -7760,6 +7802,7 @@ module Aws::QuickSight
       attr_accessor total_options: Types::PivotTableTotalOptions
       attr_accessor field_options: Types::PivotTableFieldOptions
       attr_accessor paginated_report_options: Types::PivotTablePaginatedReportOptions
+      attr_accessor tooltip: Types::TooltipOptions
       attr_accessor dashboard_customization_visual_options: Types::DashboardCustomizationVisualOptions
       attr_accessor interactions: Types::VisualInteractionOptions
       SENSITIVE: []
@@ -9144,6 +9187,11 @@ module Aws::QuickSight
       SENSITIVE: []
     end
 
+    class SheetTooltip
+      attr_accessor sheet_id: ::String
+      SENSITIVE: []
+    end
+
     class SheetVisualScopingConfiguration
       attr_accessor sheet_id: ::String
       attr_accessor scope: ("ALL_VISUALS" | "SELECTED_VISUALS")
@@ -9292,7 +9340,7 @@ module Aws::QuickSight
       attr_accessor host: ::String
       attr_accessor database: ::String
       attr_accessor warehouse: ::String
-      attr_accessor authentication_type: ("PASSWORD" | "TOKEN" | "X509")
+      attr_accessor authentication_type: ("PASSWORD" | "KEYPAIR" | "TOKEN" | "X509")
       attr_accessor database_access_control_role: ::String
       attr_accessor o_auth_parameters: Types::OAuthParameters
       SENSITIVE: []
@@ -9315,6 +9363,19 @@ module Aws::QuickSight
     class SparkParameters
       attr_accessor host: ::String
       attr_accessor port: ::Integer
+      SENSITIVE: []
+    end
+
+    class SparklinesOptions
+      attr_accessor field_id: ::String
+      attr_accessor x_axis_field: Types::DimensionField
+      attr_accessor y_axis_behavior: ("SHARED" | "INDEPENDENT")
+      attr_accessor visual_type: ("LINE" | "AREA_LINE")
+      attr_accessor line_color: ::String
+      attr_accessor line_interpolation: ("LINEAR" | "SMOOTH" | "STEPPED")
+      attr_accessor all_points_marker: Types::LineChartMarkerStyleSettings
+      attr_accessor max_value_marker: Types::LineChartMarkerStyleSettings
+      attr_accessor min_value_marker: Types::LineChartMarkerStyleSettings
       SENSITIVE: []
     end
 
@@ -9342,7 +9403,7 @@ module Aws::QuickSight
       attr_accessor catalog: ::String
       attr_accessor product_type: ("GALAXY" | "ENTERPRISE")
       attr_accessor database_access_control_role: ::String
-      attr_accessor authentication_type: ("PASSWORD" | "TOKEN" | "X509")
+      attr_accessor authentication_type: ("PASSWORD" | "KEYPAIR" | "TOKEN" | "X509")
       attr_accessor o_auth_parameters: Types::OAuthParameters
       SENSITIVE: []
     end
@@ -9387,6 +9448,22 @@ module Aws::QuickSight
       attr_accessor asset_bundle_import_job_id: ::String
       attr_accessor request_id: ::String
       attr_accessor status: ::Integer
+      SENSITIVE: []
+    end
+
+    class StartAutomationJobRequest
+      attr_accessor aws_account_id: ::String
+      attr_accessor automation_group_id: ::String
+      attr_accessor automation_id: ::String
+      attr_accessor input_payload: ::String
+      SENSITIVE: [:input_payload]
+    end
+
+    class StartAutomationJobResponse
+      attr_accessor arn: ::String
+      attr_accessor job_id: ::String
+      attr_accessor status: ::Integer
+      attr_accessor request_id: ::String
       SENSITIVE: []
     end
 
@@ -9573,6 +9650,7 @@ module Aws::QuickSight
       attr_accessor field_options: Types::TableFieldOptions
       attr_accessor paginated_report_options: Types::TablePaginatedReportOptions
       attr_accessor table_inline_visualizations: ::Array[Types::TableInlineVisualization]
+      attr_accessor tooltip: Types::TooltipOptions
       attr_accessor dashboard_customization_visual_options: Types::DashboardCustomizationVisualOptions
       attr_accessor interactions: Types::VisualInteractionOptions
       SENSITIVE: []
@@ -9637,6 +9715,7 @@ module Aws::QuickSight
 
     class TableInlineVisualization
       attr_accessor data_bars: Types::DataBarsOptions
+      attr_accessor sparklines: Types::SparklinesOptions
       SENSITIVE: []
     end
 
@@ -9799,6 +9878,7 @@ module Aws::QuickSight
     class TemplateVersionDefinition
       attr_accessor data_set_configurations: ::Array[Types::DataSetConfiguration]
       attr_accessor sheets: ::Array[Types::SheetDefinition]
+      attr_accessor tooltip_sheets: ::Array[Types::TooltipSheetDefinition]
       attr_accessor calculated_fields: ::Array[Types::CalculatedField]
       attr_accessor parameter_declarations: ::Array[Types::ParameterDeclaration]
       attr_accessor filter_groups: ::Array[Types::FilterGroup]
@@ -10015,8 +10095,19 @@ module Aws::QuickSight
 
     class TooltipOptions
       attr_accessor tooltip_visibility: ("HIDDEN" | "VISIBLE")
-      attr_accessor selected_tooltip_type: ("BASIC" | "DETAILED")
+      attr_accessor selected_tooltip_type: ("BASIC" | "DETAILED" | "SHEET")
       attr_accessor field_based_tooltip: Types::FieldBasedTooltip
+      attr_accessor sheet_tooltip: Types::SheetTooltip
+      SENSITIVE: []
+    end
+
+    class TooltipSheetDefinition
+      attr_accessor sheet_id: ::String
+      attr_accessor name: ::String
+      attr_accessor visuals: ::Array[Types::Visual]
+      attr_accessor text_boxes: ::Array[Types::SheetTextBox]
+      attr_accessor images: ::Array[Types::SheetImage]
+      attr_accessor layouts: ::Array[Types::Layout]
       SENSITIVE: []
     end
 

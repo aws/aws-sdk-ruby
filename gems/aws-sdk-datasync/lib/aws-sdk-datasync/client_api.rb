@@ -395,7 +395,9 @@ module Aws::DataSync
     CreateLocationFsxWindowsRequest.add_member(:tags, Shapes::ShapeRef.new(shape: InputTagList, location_name: "Tags"))
     CreateLocationFsxWindowsRequest.add_member(:user, Shapes::ShapeRef.new(shape: SmbUser, required: true, location_name: "User"))
     CreateLocationFsxWindowsRequest.add_member(:domain, Shapes::ShapeRef.new(shape: SmbDomain, location_name: "Domain"))
-    CreateLocationFsxWindowsRequest.add_member(:password, Shapes::ShapeRef.new(shape: SmbPassword, required: true, location_name: "Password"))
+    CreateLocationFsxWindowsRequest.add_member(:password, Shapes::ShapeRef.new(shape: SmbPassword, location_name: "Password"))
+    CreateLocationFsxWindowsRequest.add_member(:cmk_secret_config, Shapes::ShapeRef.new(shape: CmkSecretConfig, location_name: "CmkSecretConfig"))
+    CreateLocationFsxWindowsRequest.add_member(:custom_secret_config, Shapes::ShapeRef.new(shape: CustomSecretConfig, location_name: "CustomSecretConfig"))
     CreateLocationFsxWindowsRequest.struct_class = Types::CreateLocationFsxWindowsRequest
 
     CreateLocationFsxWindowsResponse.add_member(:location_arn, Shapes::ShapeRef.new(shape: LocationArn, location_name: "LocationArn"))
@@ -414,6 +416,8 @@ module Aws::DataSync
     CreateLocationHdfsRequest.add_member(:kerberos_krb_5_conf, Shapes::ShapeRef.new(shape: KerberosKrb5ConfFile, location_name: "KerberosKrb5Conf"))
     CreateLocationHdfsRequest.add_member(:agent_arns, Shapes::ShapeRef.new(shape: AgentArnList, required: true, location_name: "AgentArns"))
     CreateLocationHdfsRequest.add_member(:tags, Shapes::ShapeRef.new(shape: InputTagList, location_name: "Tags"))
+    CreateLocationHdfsRequest.add_member(:cmk_secret_config, Shapes::ShapeRef.new(shape: CmkSecretConfig, location_name: "CmkSecretConfig"))
+    CreateLocationHdfsRequest.add_member(:custom_secret_config, Shapes::ShapeRef.new(shape: CustomSecretConfig, location_name: "CustomSecretConfig"))
     CreateLocationHdfsRequest.struct_class = Types::CreateLocationHdfsRequest
 
     CreateLocationHdfsResponse.add_member(:location_arn, Shapes::ShapeRef.new(shape: LocationArn, location_name: "LocationArn"))
@@ -593,6 +597,9 @@ module Aws::DataSync
     DescribeLocationFsxWindowsResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: Time, location_name: "CreationTime"))
     DescribeLocationFsxWindowsResponse.add_member(:user, Shapes::ShapeRef.new(shape: SmbUser, location_name: "User"))
     DescribeLocationFsxWindowsResponse.add_member(:domain, Shapes::ShapeRef.new(shape: SmbDomain, location_name: "Domain"))
+    DescribeLocationFsxWindowsResponse.add_member(:managed_secret_config, Shapes::ShapeRef.new(shape: ManagedSecretConfig, location_name: "ManagedSecretConfig"))
+    DescribeLocationFsxWindowsResponse.add_member(:cmk_secret_config, Shapes::ShapeRef.new(shape: CmkSecretConfig, location_name: "CmkSecretConfig"))
+    DescribeLocationFsxWindowsResponse.add_member(:custom_secret_config, Shapes::ShapeRef.new(shape: CustomSecretConfig, location_name: "CustomSecretConfig"))
     DescribeLocationFsxWindowsResponse.struct_class = Types::DescribeLocationFsxWindowsResponse
 
     DescribeLocationHdfsRequest.add_member(:location_arn, Shapes::ShapeRef.new(shape: LocationArn, required: true, location_name: "LocationArn"))
@@ -610,6 +617,9 @@ module Aws::DataSync
     DescribeLocationHdfsResponse.add_member(:kerberos_principal, Shapes::ShapeRef.new(shape: KerberosPrincipal, location_name: "KerberosPrincipal"))
     DescribeLocationHdfsResponse.add_member(:agent_arns, Shapes::ShapeRef.new(shape: AgentArnList, location_name: "AgentArns"))
     DescribeLocationHdfsResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: Time, location_name: "CreationTime"))
+    DescribeLocationHdfsResponse.add_member(:managed_secret_config, Shapes::ShapeRef.new(shape: ManagedSecretConfig, location_name: "ManagedSecretConfig"))
+    DescribeLocationHdfsResponse.add_member(:cmk_secret_config, Shapes::ShapeRef.new(shape: CmkSecretConfig, location_name: "CmkSecretConfig"))
+    DescribeLocationHdfsResponse.add_member(:custom_secret_config, Shapes::ShapeRef.new(shape: CustomSecretConfig, location_name: "CustomSecretConfig"))
     DescribeLocationHdfsResponse.struct_class = Types::DescribeLocationHdfsResponse
 
     DescribeLocationNfsRequest.add_member(:location_arn, Shapes::ShapeRef.new(shape: LocationArn, required: true, location_name: "LocationArn"))
@@ -759,8 +769,11 @@ module Aws::DataSync
 
     FsxProtocolSmb.add_member(:domain, Shapes::ShapeRef.new(shape: SmbDomain, location_name: "Domain"))
     FsxProtocolSmb.add_member(:mount_options, Shapes::ShapeRef.new(shape: SmbMountOptions, location_name: "MountOptions"))
-    FsxProtocolSmb.add_member(:password, Shapes::ShapeRef.new(shape: SmbPassword, required: true, location_name: "Password"))
+    FsxProtocolSmb.add_member(:password, Shapes::ShapeRef.new(shape: SmbPassword, location_name: "Password"))
     FsxProtocolSmb.add_member(:user, Shapes::ShapeRef.new(shape: SmbUser, required: true, location_name: "User"))
+    FsxProtocolSmb.add_member(:managed_secret_config, Shapes::ShapeRef.new(shape: ManagedSecretConfig, location_name: "ManagedSecretConfig"))
+    FsxProtocolSmb.add_member(:cmk_secret_config, Shapes::ShapeRef.new(shape: CmkSecretConfig, location_name: "CmkSecretConfig"))
+    FsxProtocolSmb.add_member(:custom_secret_config, Shapes::ShapeRef.new(shape: CustomSecretConfig, location_name: "CustomSecretConfig"))
     FsxProtocolSmb.struct_class = Types::FsxProtocolSmb
 
     FsxUpdateProtocol.add_member(:nfs, Shapes::ShapeRef.new(shape: FsxProtocolNfs, location_name: "NFS"))
@@ -771,6 +784,8 @@ module Aws::DataSync
     FsxUpdateProtocolSmb.add_member(:mount_options, Shapes::ShapeRef.new(shape: SmbMountOptions, location_name: "MountOptions"))
     FsxUpdateProtocolSmb.add_member(:password, Shapes::ShapeRef.new(shape: SmbPassword, location_name: "Password"))
     FsxUpdateProtocolSmb.add_member(:user, Shapes::ShapeRef.new(shape: SmbUser, location_name: "User"))
+    FsxUpdateProtocolSmb.add_member(:cmk_secret_config, Shapes::ShapeRef.new(shape: CmkSecretConfig, location_name: "CmkSecretConfig"))
+    FsxUpdateProtocolSmb.add_member(:custom_secret_config, Shapes::ShapeRef.new(shape: CustomSecretConfig, location_name: "CustomSecretConfig"))
     FsxUpdateProtocolSmb.struct_class = Types::FsxUpdateProtocolSmb
 
     HdfsNameNode.add_member(:hostname, Shapes::ShapeRef.new(shape: HdfsServerHostname, required: true, location_name: "Hostname"))
@@ -1089,6 +1104,8 @@ module Aws::DataSync
     UpdateLocationFsxWindowsRequest.add_member(:domain, Shapes::ShapeRef.new(shape: UpdateSmbDomain, location_name: "Domain"))
     UpdateLocationFsxWindowsRequest.add_member(:user, Shapes::ShapeRef.new(shape: SmbUser, location_name: "User"))
     UpdateLocationFsxWindowsRequest.add_member(:password, Shapes::ShapeRef.new(shape: SmbPassword, location_name: "Password"))
+    UpdateLocationFsxWindowsRequest.add_member(:cmk_secret_config, Shapes::ShapeRef.new(shape: CmkSecretConfig, location_name: "CmkSecretConfig"))
+    UpdateLocationFsxWindowsRequest.add_member(:custom_secret_config, Shapes::ShapeRef.new(shape: CustomSecretConfig, location_name: "CustomSecretConfig"))
     UpdateLocationFsxWindowsRequest.struct_class = Types::UpdateLocationFsxWindowsRequest
 
     UpdateLocationFsxWindowsResponse.struct_class = Types::UpdateLocationFsxWindowsResponse
@@ -1106,6 +1123,8 @@ module Aws::DataSync
     UpdateLocationHdfsRequest.add_member(:kerberos_keytab, Shapes::ShapeRef.new(shape: KerberosKeytabFile, location_name: "KerberosKeytab"))
     UpdateLocationHdfsRequest.add_member(:kerberos_krb_5_conf, Shapes::ShapeRef.new(shape: KerberosKrb5ConfFile, location_name: "KerberosKrb5Conf"))
     UpdateLocationHdfsRequest.add_member(:agent_arns, Shapes::ShapeRef.new(shape: AgentArnList, location_name: "AgentArns"))
+    UpdateLocationHdfsRequest.add_member(:cmk_secret_config, Shapes::ShapeRef.new(shape: CmkSecretConfig, location_name: "CmkSecretConfig"))
+    UpdateLocationHdfsRequest.add_member(:custom_secret_config, Shapes::ShapeRef.new(shape: CustomSecretConfig, location_name: "CustomSecretConfig"))
     UpdateLocationHdfsRequest.struct_class = Types::UpdateLocationHdfsRequest
 
     UpdateLocationHdfsResponse.struct_class = Types::UpdateLocationHdfsResponse

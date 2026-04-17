@@ -234,7 +234,7 @@ module Aws
         def description: () -> ::String
         def metadata: () -> ::Hash[::String, ::String]
         def status: () -> ("PENDING" | "CANCELLED" | "APPROVED" | "FAILED" | "CREATING")
-        def status_code: () -> ("REJECTED" | "EXPIRED" | "CONFIGURATION_CHANGED")
+        def status_code: () -> ("REJECTED" | "EXPIRED" | "CONFIGURATION_CHANGED" | "ALL_APPROVERS_IN_SESSION")
         def status_message: () -> ::String
         def execution_status: () -> ("EXECUTED" | "FAILED" | "PENDING")
         def action_name: () -> ::String
@@ -356,6 +356,17 @@ module Aws
                                                  arn: ::String
                                                ) -> _StartActiveApprovalTeamDeletionResponseSuccess
                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartActiveApprovalTeamDeletionResponseSuccess
+
+      interface _StartApprovalTeamBaselineResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartApprovalTeamBaselineResponse]
+        def baseline_session_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MPA/Client.html#start_approval_team_baseline-instance_method
+      def start_approval_team_baseline: (
+                                          arn: ::String,
+                                          ?approver_ids: Array[::String]
+                                        ) -> _StartApprovalTeamBaselineResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartApprovalTeamBaselineResponseSuccess
 
       interface _TagResourceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]

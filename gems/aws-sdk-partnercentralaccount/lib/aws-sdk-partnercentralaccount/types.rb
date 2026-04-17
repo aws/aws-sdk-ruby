@@ -219,10 +219,23 @@ module Aws::PartnerCentralAccount
     #   verification process.
     #   @return [Types::BusinessVerificationDetails]
     #
+    # @!attribute [rw] completion_url
+    #   A secure URL where the registrant can complete additional
+    #   verification steps, such as document upload or identity confirmation
+    #   through a third-party verification service.
+    #   @return [String]
+    #
+    # @!attribute [rw] completion_url_expires_at
+    #   The timestamp when the completion URL expires and is no longer valid
+    #   for accessing the verification workflow.
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-account-2025-04-04/BusinessVerificationResponse AWS API Documentation
     #
     class BusinessVerificationResponse < Struct.new(
-      :business_verification_details)
+      :business_verification_details,
+      :completion_url,
+      :completion_url_expires_at)
       SENSITIVE = []
       include Aws::Structure
     end

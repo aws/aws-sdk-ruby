@@ -1,0 +1,320 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module ConnectHealth
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectHealth/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?account_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?auth_scheme_preference: Array[String],
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?event_stream_handler: Proc,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?input_event_stream_handler: Proc,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?output_event_stream_handler: Proc,
+                      ?profile: String,
+                      ?request_checksum_calculation: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?response_checksum_validation: String,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?sigv4a_signing_region_set: Array[String],
+                      ?stub_responses: untyped,
+                      ?telemetry_provider: Aws::Telemetry::TelemetryProviderBase,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _ActivateSubscriptionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ActivateSubscriptionOutput]
+        def subscription: () -> Types::SubscriptionDescription
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectHealth/Client.html#activate_subscription-instance_method
+      def activate_subscription: (
+                                   domain_id: ::String,
+                                   subscription_id: ::String
+                                 ) -> _ActivateSubscriptionResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ActivateSubscriptionResponseSuccess
+
+      interface _CreateDomainResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateDomainOutput]
+        def domain_id: () -> ::String
+        def arn: () -> ::String
+        def name: () -> ::String
+        def kms_key_arn: () -> ::String
+        def encryption_context: () -> Types::EncryptionContext
+        def status: () -> ("ACTIVE" | "DELETING" | "DELETED")
+        def web_app_url: () -> ::String
+        def web_app_configuration: () -> Types::WebAppConfiguration
+        def created_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectHealth/Client.html#create_domain-instance_method
+      def create_domain: (
+                           name: ::String,
+                           ?kms_key_arn: ::String,
+                           ?web_app_setup_configuration: {
+                             ehr_role: ::String,
+                             idc_instance_id: ::String,
+                             idc_region: ::String
+                           },
+                           ?tags: Hash[::String, ::String]
+                         ) -> _CreateDomainResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDomainResponseSuccess
+
+      interface _CreateSubscriptionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateSubscriptionOutput]
+        def domain_id: () -> ::String
+        def subscription_id: () -> ::String
+        def arn: () -> ::String
+        def status: () -> ("ACTIVE" | "INACTIVE" | "DELETED")
+        def created_at: () -> ::Time
+        def last_updated_at: () -> ::Time
+        def activated_at: () -> ::Time
+        def deactivated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectHealth/Client.html#create_subscription-instance_method
+      def create_subscription: (
+                                 domain_id: ::String
+                               ) -> _CreateSubscriptionResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateSubscriptionResponseSuccess
+
+      interface _DeactivateSubscriptionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeactivateSubscriptionOutput]
+        def subscription: () -> Types::SubscriptionDescription
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectHealth/Client.html#deactivate_subscription-instance_method
+      def deactivate_subscription: (
+                                     domain_id: ::String,
+                                     subscription_id: ::String
+                                   ) -> _DeactivateSubscriptionResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeactivateSubscriptionResponseSuccess
+
+      interface _DeleteDomainResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteDomainOutput]
+        def domain_id: () -> ::String
+        def arn: () -> ::String
+        def status: () -> ("ACTIVE" | "DELETING" | "DELETED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectHealth/Client.html#delete_domain-instance_method
+      def delete_domain: (
+                           domain_id: ::String
+                         ) -> _DeleteDomainResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteDomainResponseSuccess
+
+      interface _GetDomainResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDomainOutput]
+        def domain_id: () -> ::String
+        def arn: () -> ::String
+        def name: () -> ::String
+        def kms_key_arn: () -> ::String
+        def encryption_context: () -> Types::EncryptionContext
+        def status: () -> ("ACTIVE" | "DELETING" | "DELETED")
+        def web_app_url: () -> ::String
+        def web_app_configuration: () -> Types::WebAppConfiguration
+        def created_at: () -> ::Time
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectHealth/Client.html#get_domain-instance_method
+      def get_domain: (
+                        domain_id: ::String
+                      ) -> _GetDomainResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDomainResponseSuccess
+
+      interface _GetMedicalScribeListeningSessionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetMedicalScribeListeningSessionOutput]
+        def medical_scribe_listening_session_details: () -> Types::MedicalScribeListeningSessionDetails
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectHealth/Client.html#get_medical_scribe_listening_session-instance_method
+      def get_medical_scribe_listening_session: (
+                                                  session_id: ::String,
+                                                  domain_id: ::String,
+                                                  subscription_id: ::String
+                                                ) -> _GetMedicalScribeListeningSessionResponseSuccess
+                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetMedicalScribeListeningSessionResponseSuccess
+
+      interface _GetPatientInsightsJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetPatientInsightsJobResponse]
+        def job_id: () -> ::String
+        def job_arn: () -> ::String
+        def job_status: () -> ("SUBMITTED" | "IN_PROGRESS" | "FAILED" | "SUCCEEDED")
+        def creation_time: () -> ::Time
+        def updated_time: () -> ::Time
+        def insights_output: () -> Types::InsightsOutput
+        def status_details: () -> ::String
+        def patient_context: () -> Types::PatientInsightsPatientContext
+        def insights_context: () -> Types::InsightsContext
+        def encounter_context: () -> Types::PatientInsightsEncounterContext
+        def user_context: () -> Types::UserContext
+        def input_data_config: () -> Types::InputDataConfig
+        def output_data_config: () -> Types::OutputDataConfig
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectHealth/Client.html#get_patient_insights_job-instance_method
+      def get_patient_insights_job: (
+                                      domain_id: ::String,
+                                      job_id: ::String
+                                    ) -> _GetPatientInsightsJobResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetPatientInsightsJobResponseSuccess
+
+      interface _GetSubscriptionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetSubscriptionOutput]
+        def subscription: () -> Types::SubscriptionDescription
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectHealth/Client.html#get_subscription-instance_method
+      def get_subscription: (
+                              domain_id: ::String,
+                              subscription_id: ::String
+                            ) -> _GetSubscriptionResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSubscriptionResponseSuccess
+
+      interface _ListDomainsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDomainsOutput]
+        def domains: () -> ::Array[Types::DomainSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectHealth/Client.html#list_domains-instance_method
+      def list_domains: (
+                          ?status: ("ACTIVE" | "DELETING" | "DELETED"),
+                          ?max_results: ::Integer,
+                          ?next_token: ::String
+                        ) -> _ListDomainsResponseSuccess
+                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDomainsResponseSuccess
+
+      interface _ListSubscriptionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListSubscriptionsOutput]
+        def subscriptions: () -> ::Array[Types::SubscriptionDescription]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectHealth/Client.html#list_subscriptions-instance_method
+      def list_subscriptions: (
+                                domain_id: ::String,
+                                ?max_results: ::Integer,
+                                ?next_token: ::String
+                              ) -> _ListSubscriptionsResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSubscriptionsResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceOutput]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectHealth/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _StartPatientInsightsJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartPatientInsightsJobResponse]
+        def job_arn: () -> ::String
+        def job_id: () -> ::String
+        def creation_time: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectHealth/Client.html#start_patient_insights_job-instance_method
+      def start_patient_insights_job: (
+                                        domain_id: ::String,
+                                        patient_context: {
+                                          patient_id: ::String,
+                                          date_of_birth: ::String?,
+                                          pronouns: ("HE_HIM" | "SHE_HER" | "THEY_THEM")?
+                                        },
+                                        insights_context: {
+                                          insights_type: ("PRE_VISIT")
+                                        },
+                                        encounter_context: {
+                                          encounter_reason: ::String
+                                        },
+                                        user_context: {
+                                          role: ("CLINICIAN"),
+                                          user_id: ::String,
+                                          specialty: ("PRIMARY_CARE")?
+                                        },
+                                        input_data_config: {
+                                          fhir_server: {
+                                            fhir_endpoint: ::String,
+                                            oauth_token: ::String?
+                                          }?,
+                                          s3_sources: Array[
+                                            {
+                                              uri: ::String
+                                            },
+                                          ]?
+                                        },
+                                        output_data_config: {
+                                          s3_output_path: ::String
+                                        },
+                                        ?client_token: ::String
+                                      ) -> _StartPatientInsightsJobResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartPatientInsightsJobResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectHealth/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Hash[::String, ::String]
+                        ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectHealth/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+    end
+  end
+end
+

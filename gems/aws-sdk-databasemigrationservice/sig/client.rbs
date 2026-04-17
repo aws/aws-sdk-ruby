@@ -280,6 +280,8 @@ module Aws
                                       database_name: ::String?,
                                       ssl_mode: ("none" | "require" | "verify-ca" | "verify-full")?,
                                       certificate_arn: ::String?,
+                                      encryption_algorithm: ::Integer?,
+                                      security_mechanism: ::Integer?,
                                       s3_path: ::String?,
                                       s3_access_role_arn: ::String?
                                     }?,
@@ -2034,6 +2036,8 @@ module Aws
                                       database_name: ::String?,
                                       ssl_mode: ("none" | "require" | "verify-ca" | "verify-full")?,
                                       certificate_arn: ::String?,
+                                      encryption_algorithm: ::Integer?,
+                                      security_mechanism: ::Integer?,
                                       s3_path: ::String?,
                                       s3_access_role_arn: ::String?
                                     }?,

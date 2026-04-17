@@ -19,6 +19,8 @@ module Aws::VerifiedPermissions
     ActionIdentifier = Shapes::StructureShape.new(name: 'ActionIdentifier')
     ActionIdentifierList = Shapes::ListShape.new(name: 'ActionIdentifierList')
     ActionType = Shapes::StringShape.new(name: 'ActionType')
+    Alias = Shapes::StringShape.new(name: 'Alias')
+    AliasState = Shapes::StringShape.new(name: 'AliasState')
     AmazonResourceName = Shapes::StringShape.new(name: 'AmazonResourceName')
     AttributeValue = Shapes::UnionShape.new(name: 'AttributeValue')
     Audience = Shapes::StringShape.new(name: 'Audience')
@@ -70,6 +72,8 @@ module Aws::VerifiedPermissions
     CreateIdentitySourceOutput = Shapes::StructureShape.new(name: 'CreateIdentitySourceOutput')
     CreatePolicyInput = Shapes::StructureShape.new(name: 'CreatePolicyInput')
     CreatePolicyOutput = Shapes::StructureShape.new(name: 'CreatePolicyOutput')
+    CreatePolicyStoreAliasInput = Shapes::StructureShape.new(name: 'CreatePolicyStoreAliasInput')
+    CreatePolicyStoreAliasOutput = Shapes::StructureShape.new(name: 'CreatePolicyStoreAliasOutput')
     CreatePolicyStoreInput = Shapes::StructureShape.new(name: 'CreatePolicyStoreInput')
     CreatePolicyStoreOutput = Shapes::StructureShape.new(name: 'CreatePolicyStoreOutput')
     CreatePolicyTemplateInput = Shapes::StructureShape.new(name: 'CreatePolicyTemplateInput')
@@ -81,6 +85,8 @@ module Aws::VerifiedPermissions
     DeleteIdentitySourceOutput = Shapes::StructureShape.new(name: 'DeleteIdentitySourceOutput')
     DeletePolicyInput = Shapes::StructureShape.new(name: 'DeletePolicyInput')
     DeletePolicyOutput = Shapes::StructureShape.new(name: 'DeletePolicyOutput')
+    DeletePolicyStoreAliasInput = Shapes::StructureShape.new(name: 'DeletePolicyStoreAliasInput')
+    DeletePolicyStoreAliasOutput = Shapes::StructureShape.new(name: 'DeletePolicyStoreAliasOutput')
     DeletePolicyStoreInput = Shapes::StructureShape.new(name: 'DeletePolicyStoreInput')
     DeletePolicyStoreOutput = Shapes::StructureShape.new(name: 'DeletePolicyStoreOutput')
     DeletePolicyTemplateInput = Shapes::StructureShape.new(name: 'DeletePolicyTemplateInput')
@@ -111,6 +117,8 @@ module Aws::VerifiedPermissions
     GetIdentitySourceOutput = Shapes::StructureShape.new(name: 'GetIdentitySourceOutput')
     GetPolicyInput = Shapes::StructureShape.new(name: 'GetPolicyInput')
     GetPolicyOutput = Shapes::StructureShape.new(name: 'GetPolicyOutput')
+    GetPolicyStoreAliasInput = Shapes::StructureShape.new(name: 'GetPolicyStoreAliasInput')
+    GetPolicyStoreAliasOutput = Shapes::StructureShape.new(name: 'GetPolicyStoreAliasOutput')
     GetPolicyStoreInput = Shapes::StructureShape.new(name: 'GetPolicyStoreInput')
     GetPolicyStoreOutput = Shapes::StructureShape.new(name: 'GetPolicyStoreOutput')
     GetPolicyTemplateInput = Shapes::StructureShape.new(name: 'GetPolicyTemplateInput')
@@ -142,6 +150,8 @@ module Aws::VerifiedPermissions
     ListIdentitySourcesOutput = Shapes::StructureShape.new(name: 'ListIdentitySourcesOutput')
     ListPoliciesInput = Shapes::StructureShape.new(name: 'ListPoliciesInput')
     ListPoliciesOutput = Shapes::StructureShape.new(name: 'ListPoliciesOutput')
+    ListPolicyStoreAliasesInput = Shapes::StructureShape.new(name: 'ListPolicyStoreAliasesInput')
+    ListPolicyStoreAliasesOutput = Shapes::StructureShape.new(name: 'ListPolicyStoreAliasesOutput')
     ListPolicyStoresInput = Shapes::StructureShape.new(name: 'ListPolicyStoresInput')
     ListPolicyStoresOutput = Shapes::StructureShape.new(name: 'ListPolicyStoresOutput')
     ListPolicyTemplatesInput = Shapes::StructureShape.new(name: 'ListPolicyTemplatesInput')
@@ -178,7 +188,11 @@ module Aws::VerifiedPermissions
     PolicyId = Shapes::StringShape.new(name: 'PolicyId')
     PolicyItem = Shapes::StructureShape.new(name: 'PolicyItem')
     PolicyList = Shapes::ListShape.new(name: 'PolicyList')
+    PolicyName = Shapes::StringShape.new(name: 'PolicyName')
     PolicyStatement = Shapes::StringShape.new(name: 'PolicyStatement')
+    PolicyStoreAliasFilter = Shapes::StructureShape.new(name: 'PolicyStoreAliasFilter')
+    PolicyStoreAliasItem = Shapes::StructureShape.new(name: 'PolicyStoreAliasItem')
+    PolicyStoreAliasList = Shapes::ListShape.new(name: 'PolicyStoreAliasList')
     PolicyStoreDescription = Shapes::StringShape.new(name: 'PolicyStoreDescription')
     PolicyStoreId = Shapes::StringShape.new(name: 'PolicyStoreId')
     PolicyStoreItem = Shapes::StructureShape.new(name: 'PolicyStoreItem')
@@ -186,6 +200,7 @@ module Aws::VerifiedPermissions
     PolicyTemplateDescription = Shapes::StringShape.new(name: 'PolicyTemplateDescription')
     PolicyTemplateId = Shapes::StringShape.new(name: 'PolicyTemplateId')
     PolicyTemplateItem = Shapes::StructureShape.new(name: 'PolicyTemplateItem')
+    PolicyTemplateName = Shapes::StringShape.new(name: 'PolicyTemplateName')
     PolicyTemplatesList = Shapes::ListShape.new(name: 'PolicyTemplatesList')
     PolicyType = Shapes::StringShape.new(name: 'PolicyType')
     PrincipalEntityType = Shapes::StringShape.new(name: 'PrincipalEntityType')
@@ -310,6 +325,7 @@ module Aws::VerifiedPermissions
     BatchGetPolicyOutputItem.add_member(:definition, Shapes::ShapeRef.new(shape: PolicyDefinitionDetail, required: true, location_name: "definition"))
     BatchGetPolicyOutputItem.add_member(:created_date, Shapes::ShapeRef.new(shape: TimestampFormat, required: true, location_name: "createdDate"))
     BatchGetPolicyOutputItem.add_member(:last_updated_date, Shapes::ShapeRef.new(shape: TimestampFormat, required: true, location_name: "lastUpdatedDate"))
+    BatchGetPolicyOutputItem.add_member(:name, Shapes::ShapeRef.new(shape: PolicyName, location_name: "name"))
     BatchGetPolicyOutputItem.struct_class = Types::BatchGetPolicyOutputItem
 
     BatchGetPolicyOutputList.member = Shapes::ShapeRef.new(shape: BatchGetPolicyOutputItem)
@@ -475,6 +491,7 @@ module Aws::VerifiedPermissions
     CreatePolicyInput.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreatePolicyInput.add_member(:policy_store_id, Shapes::ShapeRef.new(shape: PolicyStoreId, required: true, location_name: "policyStoreId"))
     CreatePolicyInput.add_member(:definition, Shapes::ShapeRef.new(shape: PolicyDefinition, required: true, location_name: "definition"))
+    CreatePolicyInput.add_member(:name, Shapes::ShapeRef.new(shape: PolicyName, location_name: "name"))
     CreatePolicyInput.struct_class = Types::CreatePolicyInput
 
     CreatePolicyOutput.add_member(:policy_store_id, Shapes::ShapeRef.new(shape: PolicyStoreId, required: true, location_name: "policyStoreId"))
@@ -487,6 +504,16 @@ module Aws::VerifiedPermissions
     CreatePolicyOutput.add_member(:last_updated_date, Shapes::ShapeRef.new(shape: TimestampFormat, required: true, location_name: "lastUpdatedDate"))
     CreatePolicyOutput.add_member(:effect, Shapes::ShapeRef.new(shape: PolicyEffect, location_name: "effect"))
     CreatePolicyOutput.struct_class = Types::CreatePolicyOutput
+
+    CreatePolicyStoreAliasInput.add_member(:alias_name, Shapes::ShapeRef.new(shape: Alias, required: true, location_name: "aliasName"))
+    CreatePolicyStoreAliasInput.add_member(:policy_store_id, Shapes::ShapeRef.new(shape: PolicyStoreId, required: true, location_name: "policyStoreId"))
+    CreatePolicyStoreAliasInput.struct_class = Types::CreatePolicyStoreAliasInput
+
+    CreatePolicyStoreAliasOutput.add_member(:alias_name, Shapes::ShapeRef.new(shape: Alias, required: true, location_name: "aliasName"))
+    CreatePolicyStoreAliasOutput.add_member(:policy_store_id, Shapes::ShapeRef.new(shape: PolicyStoreId, required: true, location_name: "policyStoreId"))
+    CreatePolicyStoreAliasOutput.add_member(:alias_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "aliasArn"))
+    CreatePolicyStoreAliasOutput.add_member(:created_at, Shapes::ShapeRef.new(shape: TimestampFormat, required: true, location_name: "createdAt"))
+    CreatePolicyStoreAliasOutput.struct_class = Types::CreatePolicyStoreAliasOutput
 
     CreatePolicyStoreInput.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreatePolicyStoreInput.add_member(:validation_settings, Shapes::ShapeRef.new(shape: ValidationSettings, required: true, location_name: "validationSettings"))
@@ -506,6 +533,7 @@ module Aws::VerifiedPermissions
     CreatePolicyTemplateInput.add_member(:policy_store_id, Shapes::ShapeRef.new(shape: PolicyStoreId, required: true, location_name: "policyStoreId"))
     CreatePolicyTemplateInput.add_member(:description, Shapes::ShapeRef.new(shape: PolicyTemplateDescription, location_name: "description"))
     CreatePolicyTemplateInput.add_member(:statement, Shapes::ShapeRef.new(shape: PolicyStatement, required: true, location_name: "statement"))
+    CreatePolicyTemplateInput.add_member(:name, Shapes::ShapeRef.new(shape: PolicyTemplateName, location_name: "name"))
     CreatePolicyTemplateInput.struct_class = Types::CreatePolicyTemplateInput
 
     CreatePolicyTemplateOutput.add_member(:policy_store_id, Shapes::ShapeRef.new(shape: PolicyStoreId, required: true, location_name: "policyStoreId"))
@@ -525,6 +553,11 @@ module Aws::VerifiedPermissions
     DeletePolicyInput.struct_class = Types::DeletePolicyInput
 
     DeletePolicyOutput.struct_class = Types::DeletePolicyOutput
+
+    DeletePolicyStoreAliasInput.add_member(:alias_name, Shapes::ShapeRef.new(shape: Alias, required: true, location_name: "aliasName"))
+    DeletePolicyStoreAliasInput.struct_class = Types::DeletePolicyStoreAliasInput
+
+    DeletePolicyStoreAliasOutput.struct_class = Types::DeletePolicyStoreAliasOutput
 
     DeletePolicyStoreInput.add_member(:policy_store_id, Shapes::ShapeRef.new(shape: PolicyStoreId, required: true, location_name: "policyStoreId"))
     DeletePolicyStoreInput.struct_class = Types::DeletePolicyStoreInput
@@ -627,7 +660,18 @@ module Aws::VerifiedPermissions
     GetPolicyOutput.add_member(:created_date, Shapes::ShapeRef.new(shape: TimestampFormat, required: true, location_name: "createdDate"))
     GetPolicyOutput.add_member(:last_updated_date, Shapes::ShapeRef.new(shape: TimestampFormat, required: true, location_name: "lastUpdatedDate"))
     GetPolicyOutput.add_member(:effect, Shapes::ShapeRef.new(shape: PolicyEffect, location_name: "effect"))
+    GetPolicyOutput.add_member(:name, Shapes::ShapeRef.new(shape: PolicyName, location_name: "name"))
     GetPolicyOutput.struct_class = Types::GetPolicyOutput
+
+    GetPolicyStoreAliasInput.add_member(:alias_name, Shapes::ShapeRef.new(shape: Alias, required: true, location_name: "aliasName"))
+    GetPolicyStoreAliasInput.struct_class = Types::GetPolicyStoreAliasInput
+
+    GetPolicyStoreAliasOutput.add_member(:alias_name, Shapes::ShapeRef.new(shape: Alias, required: true, location_name: "aliasName"))
+    GetPolicyStoreAliasOutput.add_member(:policy_store_id, Shapes::ShapeRef.new(shape: PolicyStoreId, required: true, location_name: "policyStoreId"))
+    GetPolicyStoreAliasOutput.add_member(:alias_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "aliasArn"))
+    GetPolicyStoreAliasOutput.add_member(:created_at, Shapes::ShapeRef.new(shape: TimestampFormat, required: true, location_name: "createdAt"))
+    GetPolicyStoreAliasOutput.add_member(:state, Shapes::ShapeRef.new(shape: AliasState, required: true, location_name: "state"))
+    GetPolicyStoreAliasOutput.struct_class = Types::GetPolicyStoreAliasOutput
 
     GetPolicyStoreInput.add_member(:policy_store_id, Shapes::ShapeRef.new(shape: PolicyStoreId, required: true, location_name: "policyStoreId"))
     GetPolicyStoreInput.add_member(:tags, Shapes::ShapeRef.new(shape: Boolean, location_name: "tags"))
@@ -655,6 +699,7 @@ module Aws::VerifiedPermissions
     GetPolicyTemplateOutput.add_member(:statement, Shapes::ShapeRef.new(shape: PolicyStatement, required: true, location_name: "statement"))
     GetPolicyTemplateOutput.add_member(:created_date, Shapes::ShapeRef.new(shape: TimestampFormat, required: true, location_name: "createdDate"))
     GetPolicyTemplateOutput.add_member(:last_updated_date, Shapes::ShapeRef.new(shape: TimestampFormat, required: true, location_name: "lastUpdatedDate"))
+    GetPolicyTemplateOutput.add_member(:name, Shapes::ShapeRef.new(shape: PolicyTemplateName, location_name: "name"))
     GetPolicyTemplateOutput.struct_class = Types::GetPolicyTemplateOutput
 
     GetSchemaInput.add_member(:policy_store_id, Shapes::ShapeRef.new(shape: PolicyStoreId, required: true, location_name: "policyStoreId"))
@@ -756,6 +801,15 @@ module Aws::VerifiedPermissions
     ListPoliciesOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListPoliciesOutput.add_member(:policies, Shapes::ShapeRef.new(shape: PolicyList, required: true, location_name: "policies"))
     ListPoliciesOutput.struct_class = Types::ListPoliciesOutput
+
+    ListPolicyStoreAliasesInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListPolicyStoreAliasesInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
+    ListPolicyStoreAliasesInput.add_member(:filter, Shapes::ShapeRef.new(shape: PolicyStoreAliasFilter, location_name: "filter"))
+    ListPolicyStoreAliasesInput.struct_class = Types::ListPolicyStoreAliasesInput
+
+    ListPolicyStoreAliasesOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListPolicyStoreAliasesOutput.add_member(:policy_store_aliases, Shapes::ShapeRef.new(shape: PolicyStoreAliasList, required: true, location_name: "policyStoreAliases"))
+    ListPolicyStoreAliasesOutput.struct_class = Types::ListPolicyStoreAliasesOutput
 
     ListPolicyStoresInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListPolicyStoresInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
@@ -902,9 +956,22 @@ module Aws::VerifiedPermissions
     PolicyItem.add_member(:created_date, Shapes::ShapeRef.new(shape: TimestampFormat, required: true, location_name: "createdDate"))
     PolicyItem.add_member(:last_updated_date, Shapes::ShapeRef.new(shape: TimestampFormat, required: true, location_name: "lastUpdatedDate"))
     PolicyItem.add_member(:effect, Shapes::ShapeRef.new(shape: PolicyEffect, location_name: "effect"))
+    PolicyItem.add_member(:name, Shapes::ShapeRef.new(shape: PolicyName, location_name: "name"))
     PolicyItem.struct_class = Types::PolicyItem
 
     PolicyList.member = Shapes::ShapeRef.new(shape: PolicyItem)
+
+    PolicyStoreAliasFilter.add_member(:policy_store_id, Shapes::ShapeRef.new(shape: PolicyStoreId, location_name: "policyStoreId"))
+    PolicyStoreAliasFilter.struct_class = Types::PolicyStoreAliasFilter
+
+    PolicyStoreAliasItem.add_member(:alias_name, Shapes::ShapeRef.new(shape: Alias, required: true, location_name: "aliasName"))
+    PolicyStoreAliasItem.add_member(:policy_store_id, Shapes::ShapeRef.new(shape: PolicyStoreId, required: true, location_name: "policyStoreId"))
+    PolicyStoreAliasItem.add_member(:alias_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "aliasArn"))
+    PolicyStoreAliasItem.add_member(:created_at, Shapes::ShapeRef.new(shape: TimestampFormat, required: true, location_name: "createdAt"))
+    PolicyStoreAliasItem.add_member(:state, Shapes::ShapeRef.new(shape: AliasState, required: true, location_name: "state"))
+    PolicyStoreAliasItem.struct_class = Types::PolicyStoreAliasItem
+
+    PolicyStoreAliasList.member = Shapes::ShapeRef.new(shape: PolicyStoreAliasItem)
 
     PolicyStoreItem.add_member(:policy_store_id, Shapes::ShapeRef.new(shape: PolicyStoreId, required: true, location_name: "policyStoreId"))
     PolicyStoreItem.add_member(:arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "arn"))
@@ -920,6 +987,7 @@ module Aws::VerifiedPermissions
     PolicyTemplateItem.add_member(:description, Shapes::ShapeRef.new(shape: PolicyTemplateDescription, location_name: "description"))
     PolicyTemplateItem.add_member(:created_date, Shapes::ShapeRef.new(shape: TimestampFormat, required: true, location_name: "createdDate"))
     PolicyTemplateItem.add_member(:last_updated_date, Shapes::ShapeRef.new(shape: TimestampFormat, required: true, location_name: "lastUpdatedDate"))
+    PolicyTemplateItem.add_member(:name, Shapes::ShapeRef.new(shape: PolicyTemplateName, location_name: "name"))
     PolicyTemplateItem.struct_class = Types::PolicyTemplateItem
 
     PolicyTemplatesList.member = Shapes::ShapeRef.new(shape: PolicyTemplateItem)
@@ -1080,6 +1148,7 @@ module Aws::VerifiedPermissions
     UpdatePolicyInput.add_member(:policy_store_id, Shapes::ShapeRef.new(shape: PolicyStoreId, required: true, location_name: "policyStoreId"))
     UpdatePolicyInput.add_member(:policy_id, Shapes::ShapeRef.new(shape: PolicyId, required: true, location_name: "policyId"))
     UpdatePolicyInput.add_member(:definition, Shapes::ShapeRef.new(shape: UpdatePolicyDefinition, location_name: "definition"))
+    UpdatePolicyInput.add_member(:name, Shapes::ShapeRef.new(shape: PolicyName, location_name: "name"))
     UpdatePolicyInput.struct_class = Types::UpdatePolicyInput
 
     UpdatePolicyOutput.add_member(:policy_store_id, Shapes::ShapeRef.new(shape: PolicyStoreId, required: true, location_name: "policyStoreId"))
@@ -1109,6 +1178,7 @@ module Aws::VerifiedPermissions
     UpdatePolicyTemplateInput.add_member(:policy_template_id, Shapes::ShapeRef.new(shape: PolicyTemplateId, required: true, location_name: "policyTemplateId"))
     UpdatePolicyTemplateInput.add_member(:description, Shapes::ShapeRef.new(shape: PolicyTemplateDescription, location_name: "description"))
     UpdatePolicyTemplateInput.add_member(:statement, Shapes::ShapeRef.new(shape: PolicyStatement, required: true, location_name: "statement"))
+    UpdatePolicyTemplateInput.add_member(:name, Shapes::ShapeRef.new(shape: PolicyTemplateName, location_name: "name"))
     UpdatePolicyTemplateInput.struct_class = Types::UpdatePolicyTemplateInput
 
     UpdatePolicyTemplateOutput.add_member(:policy_store_id, Shapes::ShapeRef.new(shape: PolicyStoreId, required: true, location_name: "policyStoreId"))
@@ -1237,6 +1307,21 @@ module Aws::VerifiedPermissions
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
+      api.add_operation(:create_policy_store_alias, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreatePolicyStoreAlias"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreatePolicyStoreAliasInput)
+        o.output = Shapes::ShapeRef.new(shape: CreatePolicyStoreAliasOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
       api.add_operation(:create_policy_template, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreatePolicyTemplate"
         o.http_method = "POST"
@@ -1293,6 +1378,19 @@ module Aws::VerifiedPermissions
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
+      api.add_operation(:delete_policy_store_alias, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeletePolicyStoreAlias"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeletePolicyStoreAliasInput)
+        o.output = Shapes::ShapeRef.new(shape: DeletePolicyStoreAliasOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidStateException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
       api.add_operation(:delete_policy_template, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeletePolicyTemplate"
         o.http_method = "POST"
@@ -1339,6 +1437,19 @@ module Aws::VerifiedPermissions
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: GetPolicyStoreInput)
         o.output = Shapes::ShapeRef.new(shape: GetPolicyStoreOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:get_policy_store_alias, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetPolicyStoreAlias"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetPolicyStoreAliasInput)
+        o.output = Shapes::ShapeRef.new(shape: GetPolicyStoreAliasOutput)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -1426,6 +1537,24 @@ module Aws::VerifiedPermissions
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_policy_store_aliases, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListPolicyStoreAliases"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListPolicyStoreAliasesInput)
+        o.output = Shapes::ShapeRef.new(shape: ListPolicyStoreAliasesOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o[:pager] = Aws::Pager.new(

@@ -34,7 +34,7 @@ module Aws::MarketplaceEntitlementService
     #   @return [String]
     #
     # @!attribute [rw] customer_aws_account_id
-    #   The `CustomerAWSAccountID` parameter specifies the AWS account ID of
+    #   The `CustomerAWSAccountId` parameter specifies the AWS account ID of
     #   the buyer.
     #   @return [String]
     #
@@ -52,6 +52,12 @@ module Aws::MarketplaceEntitlementService
     #   expiration date.
     #   @return [Time]
     #
+    # @!attribute [rw] license_arn
+    #   The `LicenseArn` is a unique identifier for a specific granted
+    #   license. These are used for software purchased through AWS
+    #   Marketplace.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/entitlement.marketplace-2017-01-11/Entitlement AWS API Documentation
     #
     class Entitlement < Struct.new(
@@ -60,7 +66,8 @@ module Aws::MarketplaceEntitlementService
       :customer_identifier,
       :customer_aws_account_id,
       :value,
-      :expiration_date)
+      :expiration_date,
+      :license_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -116,8 +123,21 @@ module Aws::MarketplaceEntitlementService
     #   lists of values. Filtered requests are *unioned* for each value in
     #   the value list, and then *intersected* for each filter key.
     #
-    #   `CustomerIdentifier` and `CustomerAWSAccountID` are mutually
-    #   exclusive. You can't specify both in the same request.
+    #   `CustomerIdentifier` and `CustomerAWSAccountId` are mutually
+    #   exclusive parameters. You must use one or the other, but not both in
+    #   the same request.
+    #
+    #   <note markdown="1"> If you're migrating an existing integration, use [Account Feeds][1]
+    #   to map `CustomerIdentifier` to `CustomerAWSAccountId`, and
+    #   [Agreements Feeds][2] to map `CustomerAWSAccountId` and
+    #   `LicenseArn`.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/marketplace/latest/userguide/data-feed-account.html
+    #   [2]: https://docs.aws.amazon.com/marketplace/latest/userguide/data-feed-agreements.html
     #   @return [Hash<String,Array<String>>]
     #
     # @!attribute [rw] next_token

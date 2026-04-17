@@ -108,6 +108,10 @@ module Aws
                                    enabled: bool
                                  }
                                },
+                               ?maintenance_schedule: {
+                                 timezone: ::String,
+                                 preferred_maintenance_window: ::String
+                               },
                                ?tags: Hash[::String, ::String]
                              ) -> _CreateDbClusterResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDbClusterResponseSuccess
@@ -136,6 +140,9 @@ module Aws
         def db_cluster_id: () -> ::String
         def instance_mode: () -> ("PRIMARY" | "STANDBY" | "REPLICA" | "INGEST" | "QUERY" | "COMPACT" | "PROCESS")
         def instance_modes: () -> ::Array[("PRIMARY" | "STANDBY" | "REPLICA" | "INGEST" | "QUERY" | "COMPACT" | "PROCESS")]
+        def maintenance_schedule: () -> Types::MaintenanceSchedule
+        def last_maintenance_time: () -> ::Time
+        def next_maintenance_time: () -> ::Time
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/TimestreamInfluxDB/Client.html#create_db_instance-instance_method
       def create_db_instance: (
@@ -157,6 +164,10 @@ module Aws
                                     bucket_name: ::String,
                                     enabled: bool
                                   }
+                                },
+                                ?maintenance_schedule: {
+                                  timezone: ::String,
+                                  preferred_maintenance_window: ::String
                                 },
                                 ?tags: Hash[::String, ::String],
                                 ?port: ::Integer,
@@ -470,6 +481,9 @@ module Aws
         def db_cluster_id: () -> ::String
         def instance_mode: () -> ("PRIMARY" | "STANDBY" | "REPLICA" | "INGEST" | "QUERY" | "COMPACT" | "PROCESS")
         def instance_modes: () -> ::Array[("PRIMARY" | "STANDBY" | "REPLICA" | "INGEST" | "QUERY" | "COMPACT" | "PROCESS")]
+        def maintenance_schedule: () -> Types::MaintenanceSchedule
+        def last_maintenance_time: () -> ::Time
+        def next_maintenance_time: () -> ::Time
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/TimestreamInfluxDB/Client.html#delete_db_instance-instance_method
       def delete_db_instance: (
@@ -495,10 +509,14 @@ module Aws
         def publicly_accessible: () -> bool
         def db_parameter_group_identifier: () -> ::String
         def log_delivery_configuration: () -> Types::LogDeliveryConfiguration
+        def maintenance_schedule: () -> Types::MaintenanceSchedule
+        def last_maintenance_time: () -> ::Time
+        def next_maintenance_time: () -> ::Time
         def influx_auth_parameters_secret_arn: () -> ::String
         def vpc_subnet_ids: () -> ::Array[::String]
         def vpc_security_group_ids: () -> ::Array[::String]
         def failover_mode: () -> ("AUTOMATIC" | "NO_FAILOVER")
+        def cluster_configuration: () -> Types::ClusterConfiguration
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/TimestreamInfluxDB/Client.html#get_db_cluster-instance_method
       def get_db_cluster: (
@@ -530,6 +548,9 @@ module Aws
         def db_cluster_id: () -> ::String
         def instance_mode: () -> ("PRIMARY" | "STANDBY" | "REPLICA" | "INGEST" | "QUERY" | "COMPACT" | "PROCESS")
         def instance_modes: () -> ::Array[("PRIMARY" | "STANDBY" | "REPLICA" | "INGEST" | "QUERY" | "COMPACT" | "PROCESS")]
+        def maintenance_schedule: () -> Types::MaintenanceSchedule
+        def last_maintenance_time: () -> ::Time
+        def next_maintenance_time: () -> ::Time
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/TimestreamInfluxDB/Client.html#get_db_instance-instance_method
       def get_db_instance: (
@@ -645,6 +666,9 @@ module Aws
         def db_cluster_id: () -> ::String
         def instance_mode: () -> ("PRIMARY" | "STANDBY" | "REPLICA" | "INGEST" | "QUERY" | "COMPACT" | "PROCESS")
         def instance_modes: () -> ::Array[("PRIMARY" | "STANDBY" | "REPLICA" | "INGEST" | "QUERY" | "COMPACT" | "PROCESS")]
+        def maintenance_schedule: () -> Types::MaintenanceSchedule
+        def last_maintenance_time: () -> ::Time
+        def next_maintenance_time: () -> ::Time
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/TimestreamInfluxDB/Client.html#reboot_db_instance-instance_method
       def reboot_db_instance: (
@@ -682,7 +706,11 @@ module Aws
                                ?db_parameter_group_identifier: ::String,
                                ?port: ::Integer,
                                ?db_instance_type: ("db.influx.medium" | "db.influx.large" | "db.influx.xlarge" | "db.influx.2xlarge" | "db.influx.4xlarge" | "db.influx.8xlarge" | "db.influx.12xlarge" | "db.influx.16xlarge" | "db.influx.24xlarge"),
-                               ?failover_mode: ("AUTOMATIC" | "NO_FAILOVER")
+                               ?failover_mode: ("AUTOMATIC" | "NO_FAILOVER"),
+                               ?maintenance_schedule: {
+                                 timezone: ::String,
+                                 preferred_maintenance_window: ::String
+                               }
                              ) -> _UpdateDbClusterResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDbClusterResponseSuccess
 
@@ -710,6 +738,9 @@ module Aws
         def db_cluster_id: () -> ::String
         def instance_mode: () -> ("PRIMARY" | "STANDBY" | "REPLICA" | "INGEST" | "QUERY" | "COMPACT" | "PROCESS")
         def instance_modes: () -> ::Array[("PRIMARY" | "STANDBY" | "REPLICA" | "INGEST" | "QUERY" | "COMPACT" | "PROCESS")]
+        def maintenance_schedule: () -> Types::MaintenanceSchedule
+        def last_maintenance_time: () -> ::Time
+        def next_maintenance_time: () -> ::Time
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/TimestreamInfluxDB/Client.html#update_db_instance-instance_method
       def update_db_instance: (
@@ -725,7 +756,11 @@ module Aws
                                 ?db_instance_type: ("db.influx.medium" | "db.influx.large" | "db.influx.xlarge" | "db.influx.2xlarge" | "db.influx.4xlarge" | "db.influx.8xlarge" | "db.influx.12xlarge" | "db.influx.16xlarge" | "db.influx.24xlarge"),
                                 ?deployment_type: ("SINGLE_AZ" | "WITH_MULTIAZ_STANDBY"),
                                 ?db_storage_type: ("InfluxIOIncludedT1" | "InfluxIOIncludedT2" | "InfluxIOIncludedT3"),
-                                ?allocated_storage: ::Integer
+                                ?allocated_storage: ::Integer,
+                                ?maintenance_schedule: {
+                                  timezone: ::String,
+                                  preferred_maintenance_window: ::String
+                                }
                               ) -> _UpdateDbInstanceResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDbInstanceResponseSuccess
     end

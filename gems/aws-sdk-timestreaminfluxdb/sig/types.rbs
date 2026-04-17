@@ -13,6 +13,13 @@ module Aws::TimestreamInfluxDB
       SENSITIVE: []
     end
 
+    class ClusterConfiguration
+      attr_accessor ingest_query_instances: ::Integer
+      attr_accessor query_only_instances: ::Integer
+      attr_accessor dedicated_compactor: bool
+      SENSITIVE: []
+    end
+
     class ConflictException
       attr_accessor message: ::String
       attr_accessor resource_id: ::String
@@ -38,6 +45,7 @@ module Aws::TimestreamInfluxDB
       attr_accessor deployment_type: ("MULTI_NODE_READ_REPLICAS")
       attr_accessor failover_mode: ("AUTOMATIC" | "NO_FAILOVER")
       attr_accessor log_delivery_configuration: Types::LogDeliveryConfiguration
+      attr_accessor maintenance_schedule: Types::MaintenanceSchedule
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: [:username, :password]
     end
@@ -63,6 +71,7 @@ module Aws::TimestreamInfluxDB
       attr_accessor db_parameter_group_identifier: ::String
       attr_accessor deployment_type: ("SINGLE_AZ" | "WITH_MULTIAZ_STANDBY")
       attr_accessor log_delivery_configuration: Types::LogDeliveryConfiguration
+      attr_accessor maintenance_schedule: Types::MaintenanceSchedule
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor port: ::Integer
       attr_accessor network_type: ("IPV4" | "DUAL")
@@ -92,6 +101,9 @@ module Aws::TimestreamInfluxDB
       attr_accessor db_cluster_id: ::String
       attr_accessor instance_mode: ("PRIMARY" | "STANDBY" | "REPLICA" | "INGEST" | "QUERY" | "COMPACT" | "PROCESS")
       attr_accessor instance_modes: ::Array[("PRIMARY" | "STANDBY" | "REPLICA" | "INGEST" | "QUERY" | "COMPACT" | "PROCESS")]
+      attr_accessor maintenance_schedule: Types::MaintenanceSchedule
+      attr_accessor last_maintenance_time: ::Time
+      attr_accessor next_maintenance_time: ::Time
       SENSITIVE: []
     end
 
@@ -207,6 +219,9 @@ module Aws::TimestreamInfluxDB
       attr_accessor db_cluster_id: ::String
       attr_accessor instance_mode: ("PRIMARY" | "STANDBY" | "REPLICA" | "INGEST" | "QUERY" | "COMPACT" | "PROCESS")
       attr_accessor instance_modes: ::Array[("PRIMARY" | "STANDBY" | "REPLICA" | "INGEST" | "QUERY" | "COMPACT" | "PROCESS")]
+      attr_accessor maintenance_schedule: Types::MaintenanceSchedule
+      attr_accessor last_maintenance_time: ::Time
+      attr_accessor next_maintenance_time: ::Time
       SENSITIVE: []
     end
 
@@ -238,10 +253,14 @@ module Aws::TimestreamInfluxDB
       attr_accessor publicly_accessible: bool
       attr_accessor db_parameter_group_identifier: ::String
       attr_accessor log_delivery_configuration: Types::LogDeliveryConfiguration
+      attr_accessor maintenance_schedule: Types::MaintenanceSchedule
+      attr_accessor last_maintenance_time: ::Time
+      attr_accessor next_maintenance_time: ::Time
       attr_accessor influx_auth_parameters_secret_arn: ::String
       attr_accessor vpc_subnet_ids: ::Array[::String]
       attr_accessor vpc_security_group_ids: ::Array[::String]
       attr_accessor failover_mode: ("AUTOMATIC" | "NO_FAILOVER")
+      attr_accessor cluster_configuration: Types::ClusterConfiguration
       SENSITIVE: []
     end
 
@@ -273,6 +292,9 @@ module Aws::TimestreamInfluxDB
       attr_accessor db_cluster_id: ::String
       attr_accessor instance_mode: ("PRIMARY" | "STANDBY" | "REPLICA" | "INGEST" | "QUERY" | "COMPACT" | "PROCESS")
       attr_accessor instance_modes: ::Array[("PRIMARY" | "STANDBY" | "REPLICA" | "INGEST" | "QUERY" | "COMPACT" | "PROCESS")]
+      attr_accessor maintenance_schedule: Types::MaintenanceSchedule
+      attr_accessor last_maintenance_time: ::Time
+      attr_accessor next_maintenance_time: ::Time
       SENSITIVE: []
     end
 
@@ -496,6 +518,12 @@ module Aws::TimestreamInfluxDB
       SENSITIVE: []
     end
 
+    class MaintenanceSchedule
+      attr_accessor timezone: ::String
+      attr_accessor preferred_maintenance_window: ::String
+      SENSITIVE: []
+    end
+
     class Parameters
       attr_accessor influx_d_bv_2: Types::InfluxDBv2Parameters
       attr_accessor influx_d_bv_3_core: Types::InfluxDBv3CoreParameters
@@ -566,6 +594,9 @@ module Aws::TimestreamInfluxDB
       attr_accessor db_cluster_id: ::String
       attr_accessor instance_mode: ("PRIMARY" | "STANDBY" | "REPLICA" | "INGEST" | "QUERY" | "COMPACT" | "PROCESS")
       attr_accessor instance_modes: ::Array[("PRIMARY" | "STANDBY" | "REPLICA" | "INGEST" | "QUERY" | "COMPACT" | "PROCESS")]
+      attr_accessor maintenance_schedule: Types::MaintenanceSchedule
+      attr_accessor last_maintenance_time: ::Time
+      attr_accessor next_maintenance_time: ::Time
       SENSITIVE: []
     end
 
@@ -612,6 +643,7 @@ module Aws::TimestreamInfluxDB
       attr_accessor port: ::Integer
       attr_accessor db_instance_type: ("db.influx.medium" | "db.influx.large" | "db.influx.xlarge" | "db.influx.2xlarge" | "db.influx.4xlarge" | "db.influx.8xlarge" | "db.influx.12xlarge" | "db.influx.16xlarge" | "db.influx.24xlarge")
       attr_accessor failover_mode: ("AUTOMATIC" | "NO_FAILOVER")
+      attr_accessor maintenance_schedule: Types::MaintenanceSchedule
       SENSITIVE: []
     end
 
@@ -629,6 +661,7 @@ module Aws::TimestreamInfluxDB
       attr_accessor deployment_type: ("SINGLE_AZ" | "WITH_MULTIAZ_STANDBY")
       attr_accessor db_storage_type: ("InfluxIOIncludedT1" | "InfluxIOIncludedT2" | "InfluxIOIncludedT3")
       attr_accessor allocated_storage: ::Integer
+      attr_accessor maintenance_schedule: Types::MaintenanceSchedule
       SENSITIVE: []
     end
 
@@ -655,6 +688,9 @@ module Aws::TimestreamInfluxDB
       attr_accessor db_cluster_id: ::String
       attr_accessor instance_mode: ("PRIMARY" | "STANDBY" | "REPLICA" | "INGEST" | "QUERY" | "COMPACT" | "PROCESS")
       attr_accessor instance_modes: ::Array[("PRIMARY" | "STANDBY" | "REPLICA" | "INGEST" | "QUERY" | "COMPACT" | "PROCESS")]
+      attr_accessor maintenance_schedule: Types::MaintenanceSchedule
+      attr_accessor last_maintenance_time: ::Time
+      attr_accessor next_maintenance_time: ::Time
       SENSITIVE: []
     end
 

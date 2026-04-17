@@ -136,6 +136,17 @@ module Aws::MailManager
       end
     end
 
+    class BounceAction
+      attr_accessor action_failure_policy: ("CONTINUE" | "DROP")
+      attr_accessor role_arn: ::String
+      attr_accessor sender: ::String
+      attr_accessor status_code: ::String
+      attr_accessor smtp_reply_code: ::String
+      attr_accessor diagnostic_message: ::String
+      attr_accessor message: ::String
+      SENSITIVE: [:sender, :diagnostic_message, :message]
+    end
+
     class ConflictException
       attr_accessor message: ::String
       SENSITIVE: []
@@ -208,11 +219,12 @@ module Aws::MailManager
     class CreateIngressPointRequest
       attr_accessor client_token: ::String
       attr_accessor ingress_point_name: ::String
-      attr_accessor type: ("OPEN" | "AUTH")
+      attr_accessor type: ("OPEN" | "AUTH" | "MTLS")
       attr_accessor rule_set_id: ::String
       attr_accessor traffic_policy_id: ::String
       attr_accessor ingress_point_configuration: Types::IngressPointConfiguration
       attr_accessor network_configuration: Types::NetworkConfiguration
+      attr_accessor tls_policy: ("REQUIRED" | "OPTIONAL" | "FIPS")
       attr_accessor tags: ::Array[Types::Tag]
       SENSITIVE: []
     end
@@ -530,6 +542,7 @@ module Aws::MailManager
 
     class GetIngressPointRequest
       attr_accessor ingress_point_id: ::String
+      attr_accessor include_trust_store_contents: ("EXCLUDE" | "INCLUDE")
       SENSITIVE: []
     end
 
@@ -537,13 +550,14 @@ module Aws::MailManager
       attr_accessor ingress_point_id: ::String
       attr_accessor ingress_point_name: ::String
       attr_accessor ingress_point_arn: ::String
-      attr_accessor status: ("PROVISIONING" | "DEPROVISIONING" | "UPDATING" | "ACTIVE" | "CLOSED" | "FAILED")
-      attr_accessor type: ("OPEN" | "AUTH")
+      attr_accessor status: ("PROVISIONING" | "DEPROVISIONING" | "UPDATING" | "ACTIVE" | "CLOSED" | "FAILED" | "ASSOCIATED_VPC_ENDPOINT_DOES_NOT_EXIST")
+      attr_accessor type: ("OPEN" | "AUTH" | "MTLS")
       attr_accessor a_record: ::String
       attr_accessor rule_set_id: ::String
       attr_accessor traffic_policy_id: ::String
       attr_accessor ingress_point_auth_configuration: Types::IngressPointAuthConfiguration
       attr_accessor network_configuration: Types::NetworkConfiguration
+      attr_accessor tls_policy: ("REQUIRED" | "OPTIONAL" | "FIPS")
       attr_accessor created_timestamp: ::Time
       attr_accessor last_updated_timestamp: ::Time
       SENSITIVE: []
@@ -702,8 +716,8 @@ module Aws::MailManager
     class IngressPoint
       attr_accessor ingress_point_name: ::String
       attr_accessor ingress_point_id: ::String
-      attr_accessor status: ("PROVISIONING" | "DEPROVISIONING" | "UPDATING" | "ACTIVE" | "CLOSED" | "FAILED")
-      attr_accessor type: ("OPEN" | "AUTH")
+      attr_accessor status: ("PROVISIONING" | "DEPROVISIONING" | "UPDATING" | "ACTIVE" | "CLOSED" | "FAILED" | "ASSOCIATED_VPC_ENDPOINT_DOES_NOT_EXIST")
+      attr_accessor type: ("OPEN" | "AUTH" | "MTLS")
       attr_accessor a_record: ::String
       SENSITIVE: []
     end
@@ -711,18 +725,22 @@ module Aws::MailManager
     class IngressPointAuthConfiguration
       attr_accessor ingress_point_password_configuration: Types::IngressPointPasswordConfiguration
       attr_accessor secret_arn: ::String
+      attr_accessor tls_auth_configuration: Types::TlsAuthConfiguration
       SENSITIVE: []
     end
 
     class IngressPointConfiguration
       attr_accessor smtp_password: ::String
       attr_accessor secret_arn: ::String
+      attr_accessor tls_auth_configuration: Types::TlsAuthConfiguration
       attr_accessor unknown: untyped
       SENSITIVE: [:smtp_password]
 
       class SmtpPassword < IngressPointConfiguration
       end
       class SecretArn < IngressPointConfiguration
+      end
+      class TlsAuthConfiguration < IngressPointConfiguration
       end
       class Unknown < IngressPointConfiguration
       end
@@ -772,6 +790,15 @@ module Aws::MailManager
       end
       class Unknown < IngressTlsProtocolToEvaluate
       end
+    end
+
+    class InvokeLambdaAction
+      attr_accessor action_failure_policy: ("CONTINUE" | "DROP")
+      attr_accessor function_arn: ::String
+      attr_accessor invocation_type: ("EVENT" | "REQUEST_RESPONSE")
+      attr_accessor role_arn: ::String
+      attr_accessor retry_time_minutes: ::Integer
+      SENSITIVE: []
     end
 
     class ListAddonInstancesRequest
@@ -1102,6 +1129,8 @@ module Aws::MailManager
       attr_accessor deliver_to_mailbox: Types::DeliverToMailboxAction
       attr_accessor deliver_to_q_business: Types::DeliverToQBusinessAction
       attr_accessor publish_to_sns: Types::SnsAction
+      attr_accessor bounce: Types::BounceAction
+      attr_accessor invoke_lambda: Types::InvokeLambdaAction
       attr_accessor unknown: untyped
       SENSITIVE: []
 
@@ -1124,6 +1153,10 @@ module Aws::MailManager
       class DeliverToQBusiness < RuleAction
       end
       class PublishToSns < RuleAction
+      end
+      class Bounce < RuleAction
+      end
+      class InvokeLambda < RuleAction
       end
       class Unknown < RuleAction
       end
@@ -1244,6 +1277,7 @@ module Aws::MailManager
       attr_accessor attribute: ("MAIL_FROM" | "HELO" | "RECIPIENT" | "SENDER" | "FROM" | "SUBJECT" | "TO" | "CC")
       attr_accessor mime_header_attribute: ::String
       attr_accessor analysis: Types::Analysis
+      attr_accessor client_certificate_attribute: ("CN" | "SAN_RFC822_NAME" | "SAN_DNS_NAME" | "SAN_DIRECTORY_NAME" | "SAN_UNIFORM_RESOURCE_IDENTIFIER" | "SAN_IP_ADDRESS" | "SAN_REGISTERED_ID" | "SERIAL_NUMBER")
       attr_accessor unknown: untyped
       SENSITIVE: []
 
@@ -1252,6 +1286,8 @@ module Aws::MailManager
       class MimeHeaderAttribute < RuleStringToEvaluate
       end
       class Analysis < RuleStringToEvaluate
+      end
+      class ClientCertificateAttribute < RuleStringToEvaluate
       end
       class Unknown < RuleStringToEvaluate
       end
@@ -1414,11 +1450,23 @@ module Aws::MailManager
       SENSITIVE: []
     end
 
+    class TlsAuthConfiguration
+      attr_accessor trust_store: Types::TrustStore
+      SENSITIVE: []
+    end
+
     class TrafficPolicy
       attr_accessor traffic_policy_name: ::String
       attr_accessor traffic_policy_id: ::String
       attr_accessor default_action: ("ALLOW" | "DENY")
       SENSITIVE: []
+    end
+
+    class TrustStore
+      attr_accessor ca_content: ::String
+      attr_accessor crl_content: ::String
+      attr_accessor kms_key_arn: ::String
+      SENSITIVE: [:ca_content, :crl_content]
     end
 
     class UntagResourceRequest
@@ -1447,6 +1495,7 @@ module Aws::MailManager
       attr_accessor rule_set_id: ::String
       attr_accessor traffic_policy_id: ::String
       attr_accessor ingress_point_configuration: Types::IngressPointConfiguration
+      attr_accessor tls_policy: ("REQUIRED" | "OPTIONAL" | "FIPS")
       SENSITIVE: []
     end
 

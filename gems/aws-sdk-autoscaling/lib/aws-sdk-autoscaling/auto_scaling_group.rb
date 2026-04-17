@@ -98,6 +98,13 @@ module Aws::AutoScaling
       data[:availability_zones]
     end
 
+    # The Availability Zone IDs where the Auto Scaling group can launch
+    # instances.
+    # @return [Array<String>]
+    def availability_zone_ids
+      data[:availability_zone_ids]
+    end
+
     # One or more load balancers associated with the group.
     # @return [Array<String>]
     def load_balancer_names
@@ -1312,6 +1319,7 @@ module Aws::AutoScaling
     #     desired_capacity: 1,
     #     default_cooldown: 1,
     #     availability_zones: ["XmlStringMaxLen255"],
+    #     availability_zone_ids: ["XmlStringMaxLen255"],
     #     health_check_type: "XmlStringMaxLen32",
     #     health_check_grace_period: 1,
     #     placement_group: "UpdatePlacementGroupParam",
@@ -1399,6 +1407,10 @@ module Aws::AutoScaling
     #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-scaling-cooldowns.html
     # @option options [Array<String>] :availability_zones
     #   One or more Availability Zones for the group.
+    # @option options [Array<String>] :availability_zone_ids
+    #   A list of Availability Zone IDs for the Auto Scaling group. You cannot
+    #   specify both AvailabilityZones and AvailabilityZoneIds in the same
+    #   request.
     # @option options [String] :health_check_type
     #   A comma-separated value string of one or more health check types.
     #
@@ -1594,6 +1606,14 @@ module Aws::AutoScaling
     #   `prevent-all-deletion`.
     #
     #   Default: `none`
+    #
+    #   For more information, see [ Configure deletion protection for your
+    #   Amazon EC2 Auto Scaling resources][1] in the *Amazon EC2 Auto Scaling
+    #   User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/resource-deletion-protection.html
     # @return [AutoScalingGroup]
     def update(options = {})
       options = options.merge(auto_scaling_group_name: @name)
@@ -1653,6 +1673,14 @@ module Aws::AutoScaling
     #     filter can only be used in combination with the
     #     `AutoScalingGroupName` parameter. For valid `StatusCode` values, see
     #     [Activity][1] in the *Amazon EC2 Auto Scaling API Reference*.
+    #
+    #   `StartTimeLowerBound` and `StartTimeUpperBound` accept ISO 8601
+    #   formatted timestamps. Timestamps without a timezone offset are assumed
+    #   to be UTC.
+    #
+    #   * `2000-01-18T08:15:00Z`
+    #
+    #   * `2000-01-18T16:15:00+08:00`
     #
     #
     #

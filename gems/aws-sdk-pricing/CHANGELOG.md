@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.91.0 (2026-04-02)
+------------------
+
+* Feature - This release increases the MaxResults parameter of the GetAttributeValues API from 100 to 10000.
+
+1.90.0 (2026-03-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.89.0 (2026-01-16)
 ------------------
 

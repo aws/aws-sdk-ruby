@@ -1,0 +1,34 @@
+{
+  "version" : 2,
+  "testCases" : [ {
+    "id" : "GetFileSystemFailure",
+    "operationName" : "GetFileSystem",
+    "input" : {
+      "fileSystemId" : "fs-00000000000000000"
+    },
+    "expectation" : {
+      "failure" : {
+        "errorId" : "ResourceNotFoundException"
+      }
+    },
+    "config" : {
+      "region" : "us-east-1",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "ListFileSystemsSuccess",
+    "operationName" : "ListFileSystems",
+    "input" : { },
+    "expectation" : {
+      "success" : { }
+    },
+    "config" : {
+      "region" : "us-east-1",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  } ]
+}

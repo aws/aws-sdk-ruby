@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.60.0 (2026-03-24)
+------------------
+
+* Feature - Reduces the minimum allowed value for startOverWindowSeconds from 60 to 0, allowing customers to effectively disable the start-over window.
+
+1.59.0 (2026-03-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.58.0 (2026-01-16)
 ------------------
 

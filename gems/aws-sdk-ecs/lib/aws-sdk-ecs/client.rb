@@ -611,8 +611,12 @@ module Aws::ECS
     #         storage_configuration: {
     #           storage_size_gi_b: 1,
     #         },
+    #         local_storage_configuration: {
+    #           use_local_storage: false,
+    #         },
     #         monitoring: "BASIC", # accepts BASIC, DETAILED
-    #         capacity_option_type: "ON_DEMAND", # accepts ON_DEMAND, SPOT
+    #         capacity_option_type: "ON_DEMAND", # accepts ON_DEMAND, SPOT, RESERVED
+    #         instance_metadata_tags_propagation: false,
     #         instance_requirements: {
     #           v_cpu_count: { # required
     #             min: 1, # required
@@ -667,6 +671,10 @@ module Aws::ECS
     #           max_spot_price_as_percentage_of_optimal_on_demand_price: 1,
     #         },
     #         fips_enabled: false,
+    #         capacity_reservations: {
+    #           reservation_group_arn: "String",
+    #           reservation_preference: "RESERVATIONS_ONLY", # accepts RESERVATIONS_ONLY, RESERVATIONS_FIRST, RESERVATIONS_EXCLUDED
+    #         },
     #       },
     #       propagate_tags: "CAPACITY_PROVIDER", # accepts CAPACITY_PROVIDER, NONE
     #       infrastructure_optimization: {
@@ -702,8 +710,10 @@ module Aws::ECS
     #   resp.capacity_provider.managed_instances_provider.instance_launch_template.network_configuration.security_groups #=> Array
     #   resp.capacity_provider.managed_instances_provider.instance_launch_template.network_configuration.security_groups[0] #=> String
     #   resp.capacity_provider.managed_instances_provider.instance_launch_template.storage_configuration.storage_size_gi_b #=> Integer
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.local_storage_configuration.use_local_storage #=> Boolean
     #   resp.capacity_provider.managed_instances_provider.instance_launch_template.monitoring #=> String, one of "BASIC", "DETAILED"
-    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.capacity_option_type #=> String, one of "ON_DEMAND", "SPOT"
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.capacity_option_type #=> String, one of "ON_DEMAND", "SPOT", "RESERVED"
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_metadata_tags_propagation #=> Boolean
     #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.v_cpu_count.min #=> Integer
     #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.v_cpu_count.max #=> Integer
     #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.memory_mi_b.min #=> Integer
@@ -746,6 +756,8 @@ module Aws::ECS
     #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.allowed_instance_types[0] #=> String
     #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.max_spot_price_as_percentage_of_optimal_on_demand_price #=> Integer
     #   resp.capacity_provider.managed_instances_provider.instance_launch_template.fips_enabled #=> Boolean
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.capacity_reservations.reservation_group_arn #=> String
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.capacity_reservations.reservation_preference #=> String, one of "RESERVATIONS_ONLY", "RESERVATIONS_FIRST", "RESERVATIONS_EXCLUDED"
     #   resp.capacity_provider.managed_instances_provider.propagate_tags #=> String, one of "CAPACITY_PROVIDER", "NONE"
     #   resp.capacity_provider.managed_instances_provider.infrastructure_optimization.scale_in_after #=> Integer
     #   resp.capacity_provider.update_status #=> String, one of "CREATE_IN_PROGRESS", "CREATE_COMPLETE", "CREATE_FAILED", "DELETE_IN_PROGRESS", "DELETE_COMPLETE", "DELETE_FAILED", "UPDATE_IN_PROGRESS", "UPDATE_COMPLETE", "UPDATE_FAILED"
@@ -1022,6 +1034,183 @@ module Aws::ECS
     # @param [Hash] params ({})
     def create_cluster(params = {}, options = {})
       req = build_request(:create_cluster, params)
+      req.send_request(options)
+    end
+
+    # Creates a new daemon in the specified cluster and capacity providers.
+    # A daemon deploys cross-cutting software agents such as security
+    # monitoring, telemetry, and logging independently across your Amazon
+    # ECS infrastructure.
+    #
+    # Amazon ECS deploys exactly one daemon task on each container instance
+    # of the specified capacity providers. When a container instance
+    # registers with the cluster, Amazon ECS automatically starts daemon
+    # tasks. Amazon ECS starts a daemon task before scheduling other tasks.
+    #
+    # Daemons are essential for instance health - if a daemon task stops,
+    # Amazon ECS automatically drains and replaces that container instance.
+    #
+    # <note markdown="1"> ECS Managed Daemons is only supported for Amazon ECS Managed Instances
+    # Capacity Providers.
+    #
+    #  </note>
+    #
+    # @option params [required, String] :daemon_name
+    #   The name of the daemon. Up to 255 letters (uppercase and lowercase),
+    #   numbers, underscores, and hyphens are allowed.
+    #
+    # @option params [String] :cluster_arn
+    #   The Amazon Resource Name (ARN) of the cluster to create the daemon in.
+    #
+    # @option params [required, String] :daemon_task_definition_arn
+    #   The Amazon Resource Name (ARN) of the daemon task definition to use
+    #   for the daemon.
+    #
+    # @option params [required, Array<String>] :capacity_provider_arns
+    #   The Amazon Resource Names (ARNs) of the capacity providers to
+    #   associate with the daemon. The daemon deploys tasks on container
+    #   instances managed by these capacity providers.
+    #
+    # @option params [Types::DaemonDeploymentConfiguration] :deployment_configuration
+    #   Optional deployment parameters that control how the daemon rolls out
+    #   updates, including the drain percentage, alarm-based rollback, and
+    #   bake time.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   The metadata that you apply to the daemon to help you categorize and
+    #   organize them. Each tag consists of a key and an optional value. You
+    #   define both of them.
+    #
+    #   The following basic restrictions apply to tags:
+    #
+    #   * Maximum number of tags per resource - 50
+    #
+    #   * For each resource, each tag key must be unique, and each tag key can
+    #     have only one value.
+    #
+    #   * Maximum key length - 128 Unicode characters in UTF-8
+    #
+    #   * Maximum value length - 256 Unicode characters in UTF-8
+    #
+    #   * If your tagging schema is used across multiple services and
+    #     resources, remember that other services may have restrictions on
+    #     allowed characters. Generally allowed characters are: letters,
+    #     numbers, and spaces representable in UTF-8, and the following
+    #     characters: + - = . \_ : / @.
+    #
+    #   * Tag keys and values are case-sensitive.
+    #
+    #   * Do not use `aws:`, `AWS:`, or any upper or lowercase combination of
+    #     such as a prefix for either keys or values as it is reserved for
+    #     Amazon Web Services use. You cannot edit or delete tag keys or
+    #     values with this prefix. Tags with this prefix do not count against
+    #     your tags per resource limit.
+    #
+    # @option params [String] :propagate_tags
+    #   Specifies whether to propagate the tags from the daemon to the daemon
+    #   tasks. If you don't specify a value, the tags aren't propagated. You
+    #   can only propagate tags to daemon tasks during task creation. To add
+    #   tags to a task after task creation, use the [TagResource][1] API
+    #   action.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_TagResource.html
+    #
+    # @option params [Boolean] :enable_ecs_managed_tags
+    #   Specifies whether to turn on Amazon ECS managed tags for the tasks in
+    #   the daemon. For more information, see [Tagging your Amazon ECS
+    #   resources][1] in the *Amazon Elastic Container Service Developer
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-using-tags.html
+    #
+    # @option params [Boolean] :enable_execute_command
+    #   Determines whether the execute command functionality is turned on for
+    #   the daemon. If `true`, the execute command functionality is turned on
+    #   for all tasks in the daemon.
+    #
+    # @option params [String] :client_token
+    #   An identifier that you provide to ensure the idempotency of the
+    #   request. It must be unique and is case sensitive. Up to 36 ASCII
+    #   characters in the range of 33-126 (inclusive) are allowed.
+    #
+    # @return [Types::CreateDaemonResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateDaemonResponse#daemon_arn #daemon_arn} => String
+    #   * {Types::CreateDaemonResponse#status #status} => String
+    #   * {Types::CreateDaemonResponse#created_at #created_at} => Time
+    #   * {Types::CreateDaemonResponse#deployment_arn #deployment_arn} => String
+    #
+    #
+    # @example Example: To create a daemon
+    #
+    #   # This example creates a daemon named my-monitoring-daemon in the specified cluster that uses the monitoring-agent daemon
+    #   # task definition and deploys to the specified capacity provider.
+    #
+    #   resp = client.create_daemon({
+    #     capacity_provider_arns: [
+    #       "arn:aws:ecs:us-east-1:123456789012:capacity-provider/my-capacity-provider", 
+    #     ], 
+    #     cluster_arn: "arn:aws:ecs:us-east-1:123456789012:cluster/my-cluster", 
+    #     daemon_name: "my-monitoring-daemon", 
+    #     daemon_task_definition_arn: "arn:aws:ecs:us-east-1:123456789012:daemon-task-definition/monitoring-agent:1", 
+    #     deployment_configuration: {
+    #       bake_time_in_minutes: 5, 
+    #       drain_percent: 10.0, 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     created_at: Time.parse("2025-03-15T12:00:00.000Z"), 
+    #     daemon_arn: "arn:aws:ecs:us-east-1:123456789012:daemon/my-cluster/my-monitoring-daemon", 
+    #     deployment_arn: "arn:aws:ecs:us-east-1:123456789012:daemon-deployment/my-cluster/my-monitoring-daemon/aB1cD2eF3gH4iJ5k", 
+    #     status: "ACTIVE", 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_daemon({
+    #     daemon_name: "String", # required
+    #     cluster_arn: "String",
+    #     daemon_task_definition_arn: "String", # required
+    #     capacity_provider_arns: ["String"], # required
+    #     deployment_configuration: {
+    #       drain_percent: 1.0,
+    #       alarms: {
+    #         alarm_names: ["String"],
+    #         enable: false,
+    #       },
+    #       bake_time_in_minutes: 1,
+    #     },
+    #     tags: [
+    #       {
+    #         key: "TagKey",
+    #         value: "TagValue",
+    #       },
+    #     ],
+    #     propagate_tags: "DAEMON", # accepts DAEMON, NONE
+    #     enable_ecs_managed_tags: false,
+    #     enable_execute_command: false,
+    #     client_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.daemon_arn #=> String
+    #   resp.status #=> String, one of "ACTIVE", "DELETE_IN_PROGRESS"
+    #   resp.created_at #=> Time
+    #   resp.deployment_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/CreateDaemon AWS API Documentation
+    #
+    # @overload create_daemon(params = {})
+    # @param [Hash] params ({})
+    def create_daemon(params = {}, options = {})
+      req = build_request(:create_daemon, params)
       req.send_request(options)
     end
 
@@ -2981,8 +3170,10 @@ module Aws::ECS
     #   resp.capacity_provider.managed_instances_provider.instance_launch_template.network_configuration.security_groups #=> Array
     #   resp.capacity_provider.managed_instances_provider.instance_launch_template.network_configuration.security_groups[0] #=> String
     #   resp.capacity_provider.managed_instances_provider.instance_launch_template.storage_configuration.storage_size_gi_b #=> Integer
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.local_storage_configuration.use_local_storage #=> Boolean
     #   resp.capacity_provider.managed_instances_provider.instance_launch_template.monitoring #=> String, one of "BASIC", "DETAILED"
-    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.capacity_option_type #=> String, one of "ON_DEMAND", "SPOT"
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.capacity_option_type #=> String, one of "ON_DEMAND", "SPOT", "RESERVED"
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_metadata_tags_propagation #=> Boolean
     #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.v_cpu_count.min #=> Integer
     #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.v_cpu_count.max #=> Integer
     #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.memory_mi_b.min #=> Integer
@@ -3025,6 +3216,8 @@ module Aws::ECS
     #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.allowed_instance_types[0] #=> String
     #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.max_spot_price_as_percentage_of_optimal_on_demand_price #=> Integer
     #   resp.capacity_provider.managed_instances_provider.instance_launch_template.fips_enabled #=> Boolean
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.capacity_reservations.reservation_group_arn #=> String
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.capacity_reservations.reservation_preference #=> String, one of "RESERVATIONS_ONLY", "RESERVATIONS_FIRST", "RESERVATIONS_EXCLUDED"
     #   resp.capacity_provider.managed_instances_provider.propagate_tags #=> String, one of "CAPACITY_PROVIDER", "NONE"
     #   resp.capacity_provider.managed_instances_provider.infrastructure_optimization.scale_in_after #=> Integer
     #   resp.capacity_provider.update_status #=> String, one of "CREATE_IN_PROGRESS", "CREATE_COMPLETE", "CREATE_FAILED", "DELETE_IN_PROGRESS", "DELETE_COMPLETE", "DELETE_FAILED", "UPDATE_IN_PROGRESS", "UPDATE_COMPLETE", "UPDATE_FAILED"
@@ -3144,6 +3337,118 @@ module Aws::ECS
     # @param [Hash] params ({})
     def delete_cluster(params = {}, options = {})
       req = build_request(:delete_cluster, params)
+      req.send_request(options)
+    end
+
+    # Deletes the specified daemon. The daemon must be in an `ACTIVE` state
+    # to be deleted. Deleting a daemon stops all running daemon tasks on the
+    # associated container instances. Amazon ECS drains existing container
+    # instances and provisions new instances without the deleted daemon.
+    # Amazon ECS automatically launches replacement tasks for your Amazon
+    # ECS services.
+    #
+    # <note markdown="1"> ECS Managed Daemons is only supported for Amazon ECS Managed Instances
+    # Capacity Providers.
+    #
+    #  </note>
+    #
+    # @option params [required, String] :daemon_arn
+    #   The Amazon Resource Name (ARN) of the daemon to delete.
+    #
+    # @return [Types::DeleteDaemonResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteDaemonResponse#daemon_arn #daemon_arn} => String
+    #   * {Types::DeleteDaemonResponse#status #status} => String
+    #   * {Types::DeleteDaemonResponse#created_at #created_at} => Time
+    #   * {Types::DeleteDaemonResponse#updated_at #updated_at} => Time
+    #   * {Types::DeleteDaemonResponse#deployment_arn #deployment_arn} => String
+    #
+    #
+    # @example Example: To delete a daemon
+    #
+    #   # This example deletes the my-monitoring-daemon daemon.
+    #
+    #   resp = client.delete_daemon({
+    #     daemon_arn: "arn:aws:ecs:us-east-1:123456789012:daemon/my-cluster/my-monitoring-daemon", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     created_at: Time.parse("2025-03-15T12:00:00.000Z"), 
+    #     daemon_arn: "arn:aws:ecs:us-east-1:123456789012:daemon/my-cluster/my-monitoring-daemon", 
+    #     deployment_arn: "arn:aws:ecs:us-east-1:123456789012:daemon-deployment/my-cluster/my-monitoring-daemon/mN3oP4qR5sT6uV7w", 
+    #     status: "DELETE_IN_PROGRESS", 
+    #     updated_at: Time.parse("2025-03-25T09:00:00.000Z"), 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_daemon({
+    #     daemon_arn: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.daemon_arn #=> String
+    #   resp.status #=> String, one of "ACTIVE", "DELETE_IN_PROGRESS"
+    #   resp.created_at #=> Time
+    #   resp.updated_at #=> Time
+    #   resp.deployment_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeleteDaemon AWS API Documentation
+    #
+    # @overload delete_daemon(params = {})
+    # @param [Hash] params ({})
+    def delete_daemon(params = {}, options = {})
+      req = build_request(:delete_daemon, params)
+      req.send_request(options)
+    end
+
+    # Deletes the specified daemon task definition. After a daemon task
+    # definition is deleted, no new daemons can be created using this
+    # definition. Existing daemons that reference the deleted daemon task
+    # definition continue to run.
+    #
+    # A daemon task definition must be in an `ACTIVE` state to be deleted.
+    #
+    # @option params [required, String] :daemon_task_definition
+    #   The `family` and `revision` (`family:revision`) or full Amazon
+    #   Resource Name (ARN) of the daemon task definition to delete.
+    #
+    # @return [Types::DeleteDaemonTaskDefinitionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteDaemonTaskDefinitionResponse#daemon_task_definition_arn #daemon_task_definition_arn} => String
+    #
+    #
+    # @example Example: To delete a daemon task definition
+    #
+    #   # This example deletes the first revision of the monitoring-agent daemon task definition.
+    #
+    #   resp = client.delete_daemon_task_definition({
+    #     daemon_task_definition: "monitoring-agent:1", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     daemon_task_definition_arn: "arn:aws:ecs:us-east-1:123456789012:daemon-task-definition/monitoring-agent:1", 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_daemon_task_definition({
+    #     daemon_task_definition: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.daemon_task_definition_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeleteDaemonTaskDefinition AWS API Documentation
+    #
+    # @overload delete_daemon_task_definition(params = {})
+    # @param [Hash] params ({})
+    def delete_daemon_task_definition(params = {}, options = {})
+      req = build_request(:delete_daemon_task_definition, params)
       req.send_request(options)
     end
 
@@ -3753,6 +4058,10 @@ module Aws::ECS
     #   resp.task_definitions[0].volumes[0].efs_volume_configuration.transit_encryption_port #=> Integer
     #   resp.task_definitions[0].volumes[0].efs_volume_configuration.authorization_config.access_point_id #=> String
     #   resp.task_definitions[0].volumes[0].efs_volume_configuration.authorization_config.iam #=> String, one of "ENABLED", "DISABLED"
+    #   resp.task_definitions[0].volumes[0].s3files_volume_configuration.file_system_arn #=> String
+    #   resp.task_definitions[0].volumes[0].s3files_volume_configuration.root_directory #=> String
+    #   resp.task_definitions[0].volumes[0].s3files_volume_configuration.transit_encryption_port #=> Integer
+    #   resp.task_definitions[0].volumes[0].s3files_volume_configuration.access_point_arn #=> String
     #   resp.task_definitions[0].volumes[0].fsx_windows_file_server_volume_configuration.file_system_id #=> String
     #   resp.task_definitions[0].volumes[0].fsx_windows_file_server_volume_configuration.root_directory #=> String
     #   resp.task_definitions[0].volumes[0].fsx_windows_file_server_volume_configuration.authorization_config.credentials_parameter #=> String
@@ -3787,6 +4096,7 @@ module Aws::ECS
     #   resp.task_definitions[0].proxy_configuration.properties[0].value #=> String
     #   resp.task_definitions[0].registered_at #=> Time
     #   resp.task_definitions[0].deregistered_at #=> Time
+    #   resp.task_definitions[0].delete_requested_at #=> Time
     #   resp.task_definitions[0].registered_by #=> String
     #   resp.task_definitions[0].ephemeral_storage.size_in_gi_b #=> Integer
     #   resp.task_definitions[0].enable_fault_injection #=> Boolean
@@ -4076,7 +4386,7 @@ module Aws::ECS
     #   resp.container_instance.tags[0].value #=> String
     #   resp.container_instance.health_status.overall_status #=> String, one of "OK", "IMPAIRED", "INSUFFICIENT_DATA", "INITIALIZING"
     #   resp.container_instance.health_status.details #=> Array
-    #   resp.container_instance.health_status.details[0].type #=> String, one of "CONTAINER_RUNTIME"
+    #   resp.container_instance.health_status.details[0].type #=> String, one of "CONTAINER_RUNTIME", "ACCELERATED_COMPUTE", "DAEMON"
     #   resp.container_instance.health_status.details[0].status #=> String, one of "OK", "IMPAIRED", "INSUFFICIENT_DATA", "INITIALIZING"
     #   resp.container_instance.health_status.details[0].last_updated #=> Time
     #   resp.container_instance.health_status.details[0].last_status_change #=> Time
@@ -4305,6 +4615,10 @@ module Aws::ECS
     #   resp.task_definition.volumes[0].efs_volume_configuration.transit_encryption_port #=> Integer
     #   resp.task_definition.volumes[0].efs_volume_configuration.authorization_config.access_point_id #=> String
     #   resp.task_definition.volumes[0].efs_volume_configuration.authorization_config.iam #=> String, one of "ENABLED", "DISABLED"
+    #   resp.task_definition.volumes[0].s3files_volume_configuration.file_system_arn #=> String
+    #   resp.task_definition.volumes[0].s3files_volume_configuration.root_directory #=> String
+    #   resp.task_definition.volumes[0].s3files_volume_configuration.transit_encryption_port #=> Integer
+    #   resp.task_definition.volumes[0].s3files_volume_configuration.access_point_arn #=> String
     #   resp.task_definition.volumes[0].fsx_windows_file_server_volume_configuration.file_system_id #=> String
     #   resp.task_definition.volumes[0].fsx_windows_file_server_volume_configuration.root_directory #=> String
     #   resp.task_definition.volumes[0].fsx_windows_file_server_volume_configuration.authorization_config.credentials_parameter #=> String
@@ -4339,6 +4653,7 @@ module Aws::ECS
     #   resp.task_definition.proxy_configuration.properties[0].value #=> String
     #   resp.task_definition.registered_at #=> Time
     #   resp.task_definition.deregistered_at #=> Time
+    #   resp.task_definition.delete_requested_at #=> Time
     #   resp.task_definition.registered_by #=> String
     #   resp.task_definition.ephemeral_storage.size_in_gi_b #=> Integer
     #   resp.task_definition.enable_fault_injection #=> Boolean
@@ -4517,8 +4832,10 @@ module Aws::ECS
     #   resp.capacity_providers[0].managed_instances_provider.instance_launch_template.network_configuration.security_groups #=> Array
     #   resp.capacity_providers[0].managed_instances_provider.instance_launch_template.network_configuration.security_groups[0] #=> String
     #   resp.capacity_providers[0].managed_instances_provider.instance_launch_template.storage_configuration.storage_size_gi_b #=> Integer
+    #   resp.capacity_providers[0].managed_instances_provider.instance_launch_template.local_storage_configuration.use_local_storage #=> Boolean
     #   resp.capacity_providers[0].managed_instances_provider.instance_launch_template.monitoring #=> String, one of "BASIC", "DETAILED"
-    #   resp.capacity_providers[0].managed_instances_provider.instance_launch_template.capacity_option_type #=> String, one of "ON_DEMAND", "SPOT"
+    #   resp.capacity_providers[0].managed_instances_provider.instance_launch_template.capacity_option_type #=> String, one of "ON_DEMAND", "SPOT", "RESERVED"
+    #   resp.capacity_providers[0].managed_instances_provider.instance_launch_template.instance_metadata_tags_propagation #=> Boolean
     #   resp.capacity_providers[0].managed_instances_provider.instance_launch_template.instance_requirements.v_cpu_count.min #=> Integer
     #   resp.capacity_providers[0].managed_instances_provider.instance_launch_template.instance_requirements.v_cpu_count.max #=> Integer
     #   resp.capacity_providers[0].managed_instances_provider.instance_launch_template.instance_requirements.memory_mi_b.min #=> Integer
@@ -4561,6 +4878,8 @@ module Aws::ECS
     #   resp.capacity_providers[0].managed_instances_provider.instance_launch_template.instance_requirements.allowed_instance_types[0] #=> String
     #   resp.capacity_providers[0].managed_instances_provider.instance_launch_template.instance_requirements.max_spot_price_as_percentage_of_optimal_on_demand_price #=> Integer
     #   resp.capacity_providers[0].managed_instances_provider.instance_launch_template.fips_enabled #=> Boolean
+    #   resp.capacity_providers[0].managed_instances_provider.instance_launch_template.capacity_reservations.reservation_group_arn #=> String
+    #   resp.capacity_providers[0].managed_instances_provider.instance_launch_template.capacity_reservations.reservation_preference #=> String, one of "RESERVATIONS_ONLY", "RESERVATIONS_FIRST", "RESERVATIONS_EXCLUDED"
     #   resp.capacity_providers[0].managed_instances_provider.propagate_tags #=> String, one of "CAPACITY_PROVIDER", "NONE"
     #   resp.capacity_providers[0].managed_instances_provider.infrastructure_optimization.scale_in_after #=> Integer
     #   resp.capacity_providers[0].update_status #=> String, one of "CREATE_IN_PROGRESS", "CREATE_COMPLETE", "CREATE_FAILED", "DELETE_IN_PROGRESS", "DELETE_COMPLETE", "DELETE_FAILED", "UPDATE_IN_PROGRESS", "UPDATE_COMPLETE", "UPDATE_FAILED"
@@ -4883,7 +5202,7 @@ module Aws::ECS
     #   resp.container_instances[0].tags[0].value #=> String
     #   resp.container_instances[0].health_status.overall_status #=> String, one of "OK", "IMPAIRED", "INSUFFICIENT_DATA", "INITIALIZING"
     #   resp.container_instances[0].health_status.details #=> Array
-    #   resp.container_instances[0].health_status.details[0].type #=> String, one of "CONTAINER_RUNTIME"
+    #   resp.container_instances[0].health_status.details[0].type #=> String, one of "CONTAINER_RUNTIME", "ACCELERATED_COMPUTE", "DAEMON"
     #   resp.container_instances[0].health_status.details[0].status #=> String, one of "OK", "IMPAIRED", "INSUFFICIENT_DATA", "INITIALIZING"
     #   resp.container_instances[0].health_status.details[0].last_updated #=> Time
     #   resp.container_instances[0].health_status.details[0].last_status_change #=> Time
@@ -4898,6 +5217,502 @@ module Aws::ECS
     # @param [Hash] params ({})
     def describe_container_instances(params = {}, options = {})
       req = build_request(:describe_container_instances, params)
+      req.send_request(options)
+    end
+
+    # Describes the specified daemon.
+    #
+    # @option params [required, String] :daemon_arn
+    #   The Amazon Resource Name (ARN) of the daemon to describe.
+    #
+    # @return [Types::DescribeDaemonResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeDaemonResponse#daemon #daemon} => Types::DaemonDetail
+    #
+    #
+    # @example Example: To describe a daemon
+    #
+    #   # This example describes the my-monitoring-daemon daemon.
+    #
+    #   resp = client.describe_daemon({
+    #     daemon_arn: "arn:aws:ecs:us-east-1:123456789012:daemon/my-cluster/my-monitoring-daemon", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     daemon: {
+    #       cluster_arn: "arn:aws:ecs:us-east-1:123456789012:cluster/my-cluster", 
+    #       created_at: Time.parse("2025-03-15T12:00:00.000Z"), 
+    #       current_revisions: [
+    #         {
+    #           arn: "arn:aws:ecs:us-east-1:123456789012:daemon-revision/my-cluster/my-monitoring-daemon/4980306466373577095", 
+    #           capacity_providers: [
+    #             {
+    #               arn: "arn:aws:ecs:us-east-1:123456789012:capacity-provider/my-capacity-provider", 
+    #               running_count: 3, 
+    #             }, 
+    #           ], 
+    #           total_running_count: 3, 
+    #         }, 
+    #       ], 
+    #       daemon_arn: "arn:aws:ecs:us-east-1:123456789012:daemon/my-cluster/my-monitoring-daemon", 
+    #       deployment_arn: "arn:aws:ecs:us-east-1:123456789012:daemon-deployment/my-cluster/my-monitoring-daemon/aB1cD2eF3gH4iJ5k", 
+    #       status: "ACTIVE", 
+    #       updated_at: Time.parse("2025-03-20T15:30:00.000Z"), 
+    #     }, 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_daemon({
+    #     daemon_arn: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.daemon.daemon_arn #=> String
+    #   resp.daemon.cluster_arn #=> String
+    #   resp.daemon.status #=> String, one of "ACTIVE", "DELETE_IN_PROGRESS"
+    #   resp.daemon.current_revisions #=> Array
+    #   resp.daemon.current_revisions[0].arn #=> String
+    #   resp.daemon.current_revisions[0].capacity_providers #=> Array
+    #   resp.daemon.current_revisions[0].capacity_providers[0].arn #=> String
+    #   resp.daemon.current_revisions[0].capacity_providers[0].running_count #=> Integer
+    #   resp.daemon.current_revisions[0].total_running_count #=> Integer
+    #   resp.daemon.deployment_arn #=> String
+    #   resp.daemon.created_at #=> Time
+    #   resp.daemon.updated_at #=> Time
+    #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
+    #
+    #   * daemon_active
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DescribeDaemon AWS API Documentation
+    #
+    # @overload describe_daemon(params = {})
+    # @param [Hash] params ({})
+    def describe_daemon(params = {}, options = {})
+      req = build_request(:describe_daemon, params)
+      req.send_request(options)
+    end
+
+    # Describes one or more of your daemon deployments.
+    #
+    # A daemon deployment orchestrates the progressive rollout of daemon
+    # task updates across container instances managed by the daemon's
+    # capacity providers. Each deployment includes circuit breaker and
+    # alarm-based rollback capabilities.
+    #
+    # @option params [required, Array<String>] :daemon_deployment_arns
+    #   The ARN of the daemon deployments to describe. You can specify up to
+    #   20 ARNs.
+    #
+    # @return [Types::DescribeDaemonDeploymentsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeDaemonDeploymentsResponse#failures #failures} => Array&lt;Types::Failure&gt;
+    #   * {Types::DescribeDaemonDeploymentsResponse#daemon_deployments #daemon_deployments} => Array&lt;Types::DaemonDeployment&gt;
+    #
+    #
+    # @example Example: To describe daemon deployments
+    #
+    #   # This example describes a daemon deployment for the my-monitoring-daemon daemon.
+    #
+    #   resp = client.describe_daemon_deployments({
+    #     daemon_deployment_arns: [
+    #       "arn:aws:ecs:us-east-1:123456789012:daemon-deployment/my-cluster/my-monitoring-daemon/aB1cD2eF3gH4iJ5k", 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     daemon_deployments: [
+    #       {
+    #         alarms: {
+    #           alarm_names: [
+    #           ], 
+    #           status: "DISABLED", 
+    #           triggered_alarm_names: [
+    #           ], 
+    #         }, 
+    #         circuit_breaker: {
+    #           failure_count: 0, 
+    #           status: "MONITORING_COMPLETE", 
+    #           threshold: 10, 
+    #         }, 
+    #         cluster_arn: "arn:aws:ecs:us-east-1:123456789012:cluster/my-cluster", 
+    #         created_at: Time.parse("2025-03-15T12:00:00.000Z"), 
+    #         daemon_deployment_arn: "arn:aws:ecs:us-east-1:123456789012:daemon-deployment/my-cluster/my-monitoring-daemon/aB1cD2eF3gH4iJ5k", 
+    #         deployment_configuration: {
+    #           alarms: {
+    #             alarm_names: [
+    #             ], 
+    #             enable: false, 
+    #           }, 
+    #           bake_time_in_minutes: 5, 
+    #           drain_percent: 10.0, 
+    #         }, 
+    #         finished_at: Time.parse("2025-03-15T12:15:00.000Z"), 
+    #         source_daemon_revisions: [
+    #         ], 
+    #         started_at: Time.parse("2025-03-15T12:00:05.000Z"), 
+    #         status: "SUCCESSFUL", 
+    #         status_reason: "Deployment completed successfully.", 
+    #         target_daemon_revision: {
+    #           arn: "arn:aws:ecs:us-east-1:123456789012:daemon-revision/my-cluster/my-monitoring-daemon/4980306466373577095", 
+    #           capacity_providers: [
+    #             {
+    #               arn: "arn:aws:ecs:us-east-1:123456789012:capacity-provider/my-capacity-provider", 
+    #               draining_instance_count: 0, 
+    #               running_instance_count: 3, 
+    #             }, 
+    #           ], 
+    #           total_draining_instance_count: 0, 
+    #           total_running_instance_count: 3, 
+    #         }, 
+    #       }, 
+    #     ], 
+    #     failures: [
+    #     ], 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_daemon_deployments({
+    #     daemon_deployment_arns: ["String"], # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.failures #=> Array
+    #   resp.failures[0].arn #=> String
+    #   resp.failures[0].reason #=> String
+    #   resp.failures[0].detail #=> String
+    #   resp.daemon_deployments #=> Array
+    #   resp.daemon_deployments[0].daemon_deployment_arn #=> String
+    #   resp.daemon_deployments[0].cluster_arn #=> String
+    #   resp.daemon_deployments[0].status #=> String, one of "PENDING", "SUCCESSFUL", "STOPPED", "STOP_REQUESTED", "IN_PROGRESS", "ROLLBACK_IN_PROGRESS", "ROLLBACK_SUCCESSFUL", "ROLLBACK_FAILED"
+    #   resp.daemon_deployments[0].status_reason #=> String
+    #   resp.daemon_deployments[0].target_daemon_revision.arn #=> String
+    #   resp.daemon_deployments[0].target_daemon_revision.capacity_providers #=> Array
+    #   resp.daemon_deployments[0].target_daemon_revision.capacity_providers[0].arn #=> String
+    #   resp.daemon_deployments[0].target_daemon_revision.capacity_providers[0].running_instance_count #=> Integer
+    #   resp.daemon_deployments[0].target_daemon_revision.capacity_providers[0].draining_instance_count #=> Integer
+    #   resp.daemon_deployments[0].target_daemon_revision.total_running_instance_count #=> Integer
+    #   resp.daemon_deployments[0].target_daemon_revision.total_draining_instance_count #=> Integer
+    #   resp.daemon_deployments[0].source_daemon_revisions #=> Array
+    #   resp.daemon_deployments[0].source_daemon_revisions[0].arn #=> String
+    #   resp.daemon_deployments[0].source_daemon_revisions[0].capacity_providers #=> Array
+    #   resp.daemon_deployments[0].source_daemon_revisions[0].capacity_providers[0].arn #=> String
+    #   resp.daemon_deployments[0].source_daemon_revisions[0].capacity_providers[0].running_instance_count #=> Integer
+    #   resp.daemon_deployments[0].source_daemon_revisions[0].capacity_providers[0].draining_instance_count #=> Integer
+    #   resp.daemon_deployments[0].source_daemon_revisions[0].total_running_instance_count #=> Integer
+    #   resp.daemon_deployments[0].source_daemon_revisions[0].total_draining_instance_count #=> Integer
+    #   resp.daemon_deployments[0].circuit_breaker.failure_count #=> Integer
+    #   resp.daemon_deployments[0].circuit_breaker.status #=> String, one of "TRIGGERED", "MONITORING", "MONITORING_COMPLETE", "DISABLED"
+    #   resp.daemon_deployments[0].circuit_breaker.threshold #=> Integer
+    #   resp.daemon_deployments[0].alarms.status #=> String, one of "TRIGGERED", "MONITORING", "MONITORING_COMPLETE", "DISABLED"
+    #   resp.daemon_deployments[0].alarms.alarm_names #=> Array
+    #   resp.daemon_deployments[0].alarms.alarm_names[0] #=> String
+    #   resp.daemon_deployments[0].alarms.triggered_alarm_names #=> Array
+    #   resp.daemon_deployments[0].alarms.triggered_alarm_names[0] #=> String
+    #   resp.daemon_deployments[0].rollback.reason #=> String
+    #   resp.daemon_deployments[0].rollback.started_at #=> Time
+    #   resp.daemon_deployments[0].rollback.rollback_target_daemon_revision_arn #=> String
+    #   resp.daemon_deployments[0].rollback.rollback_capacity_providers #=> Array
+    #   resp.daemon_deployments[0].rollback.rollback_capacity_providers[0] #=> String
+    #   resp.daemon_deployments[0].deployment_configuration.drain_percent #=> Float
+    #   resp.daemon_deployments[0].deployment_configuration.alarms.alarm_names #=> Array
+    #   resp.daemon_deployments[0].deployment_configuration.alarms.alarm_names[0] #=> String
+    #   resp.daemon_deployments[0].deployment_configuration.alarms.enable #=> Boolean
+    #   resp.daemon_deployments[0].deployment_configuration.bake_time_in_minutes #=> Integer
+    #   resp.daemon_deployments[0].created_at #=> Time
+    #   resp.daemon_deployments[0].started_at #=> Time
+    #   resp.daemon_deployments[0].stopped_at #=> Time
+    #   resp.daemon_deployments[0].finished_at #=> Time
+    #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
+    #
+    #   * daemon_deployment_stopped
+    #   * daemon_deployment_successful
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DescribeDaemonDeployments AWS API Documentation
+    #
+    # @overload describe_daemon_deployments(params = {})
+    # @param [Hash] params ({})
+    def describe_daemon_deployments(params = {}, options = {})
+      req = build_request(:describe_daemon_deployments, params)
+      req.send_request(options)
+    end
+
+    # Describes one or more of your daemon revisions.
+    #
+    # A daemon revision is a snapshot of a daemon's configuration at the
+    # time a deployment was initiated. It captures the daemon task
+    # definition, container images, tag propagation, and execute command
+    # settings. Daemon revisions are immutable.
+    #
+    # @option params [required, Array<String>] :daemon_revision_arns
+    #   The ARN of the daemon revisions to describe. You can specify up to 20
+    #   ARNs.
+    #
+    # @return [Types::DescribeDaemonRevisionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeDaemonRevisionsResponse#daemon_revisions #daemon_revisions} => Array&lt;Types::DaemonRevision&gt;
+    #   * {Types::DescribeDaemonRevisionsResponse#failures #failures} => Array&lt;Types::Failure&gt;
+    #
+    #
+    # @example Example: To describe daemon revisions
+    #
+    #   # This example describes a daemon revision for the my-monitoring-daemon daemon.
+    #
+    #   resp = client.describe_daemon_revisions({
+    #     daemon_revision_arns: [
+    #       "arn:aws:ecs:us-east-1:123456789012:daemon-revision/my-cluster/my-monitoring-daemon/4980306466373577095", 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     daemon_revisions: [
+    #       {
+    #         cluster_arn: "arn:aws:ecs:us-east-1:123456789012:cluster/my-cluster", 
+    #         container_images: [
+    #           {
+    #             container_name: "cloudwatch-agent", 
+    #             image: "public.ecr.aws/cloudwatch-agent/cloudwatch-agent:latest", 
+    #             image_digest: "sha256:a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2", 
+    #           }, 
+    #         ], 
+    #         created_at: Time.parse("2025-03-15T12:00:00.000Z"), 
+    #         daemon_arn: "arn:aws:ecs:us-east-1:123456789012:daemon/my-cluster/my-monitoring-daemon", 
+    #         daemon_revision_arn: "arn:aws:ecs:us-east-1:123456789012:daemon-revision/my-cluster/my-monitoring-daemon/4980306466373577095", 
+    #         daemon_task_definition_arn: "arn:aws:ecs:us-east-1:123456789012:daemon-task-definition/monitoring-agent:1", 
+    #         enable_ecs_managed_tags: false, 
+    #         enable_execute_command: false, 
+    #         propagate_tags: "NONE", 
+    #       }, 
+    #     ], 
+    #     failures: [
+    #     ], 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_daemon_revisions({
+    #     daemon_revision_arns: ["String"], # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.daemon_revisions #=> Array
+    #   resp.daemon_revisions[0].daemon_revision_arn #=> String
+    #   resp.daemon_revisions[0].cluster_arn #=> String
+    #   resp.daemon_revisions[0].daemon_arn #=> String
+    #   resp.daemon_revisions[0].daemon_task_definition_arn #=> String
+    #   resp.daemon_revisions[0].created_at #=> Time
+    #   resp.daemon_revisions[0].container_images #=> Array
+    #   resp.daemon_revisions[0].container_images[0].container_name #=> String
+    #   resp.daemon_revisions[0].container_images[0].image_digest #=> String
+    #   resp.daemon_revisions[0].container_images[0].image #=> String
+    #   resp.daemon_revisions[0].propagate_tags #=> String, one of "DAEMON", "NONE"
+    #   resp.daemon_revisions[0].enable_ecs_managed_tags #=> Boolean
+    #   resp.daemon_revisions[0].enable_execute_command #=> Boolean
+    #   resp.failures #=> Array
+    #   resp.failures[0].arn #=> String
+    #   resp.failures[0].reason #=> String
+    #   resp.failures[0].detail #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DescribeDaemonRevisions AWS API Documentation
+    #
+    # @overload describe_daemon_revisions(params = {})
+    # @param [Hash] params ({})
+    def describe_daemon_revisions(params = {}, options = {})
+      req = build_request(:describe_daemon_revisions, params)
+      req.send_request(options)
+    end
+
+    # Describes a daemon task definition. You can specify a `family` and
+    # `revision` to find information about a specific daemon task
+    # definition, or you can simply specify the family to find the latest
+    # `ACTIVE` revision in that family.
+    #
+    # @option params [required, String] :daemon_task_definition
+    #   The `family` for the latest `ACTIVE` revision, `family` and `revision`
+    #   (`family:revision`) for a specific revision in the family, or full
+    #   Amazon Resource Name (ARN) of the daemon task definition to describe.
+    #
+    # @return [Types::DescribeDaemonTaskDefinitionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeDaemonTaskDefinitionResponse#daemon_task_definition #daemon_task_definition} => Types::DaemonTaskDefinition
+    #
+    #
+    # @example Example: To describe a daemon task definition
+    #
+    #   # This example describes the first revision of the monitoring-agent daemon task definition.
+    #
+    #   resp = client.describe_daemon_task_definition({
+    #     daemon_task_definition: "monitoring-agent:1", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     daemon_task_definition: {
+    #       container_definitions: [
+    #         {
+    #           name: "cloudwatch-agent", 
+    #           cpu: 128, 
+    #           environment: [
+    #             {
+    #               name: "USE_DEFAULT_CONFIG", 
+    #               value: "true", 
+    #             }, 
+    #           ], 
+    #           essential: true, 
+    #           image: "public.ecr.aws/cloudwatch-agent/cloudwatch-agent:latest", 
+    #           log_configuration: {
+    #             log_driver: "awslogs", 
+    #             options: {
+    #               "awslogs-group" => "/ecs/daemon/monitoring-agent", 
+    #               "awslogs-region" => "us-east-1", 
+    #               "awslogs-stream-prefix" => "ecs", 
+    #             }, 
+    #           }, 
+    #           memory: 256, 
+    #           mount_points: [
+    #           ], 
+    #           secrets: [
+    #           ], 
+    #         }, 
+    #       ], 
+    #       cpu: "128", 
+    #       daemon_task_definition_arn: "arn:aws:ecs:us-east-1:123456789012:daemon-task-definition/monitoring-agent:1", 
+    #       execution_role_arn: "arn:aws:iam::123456789012:role/ecsTaskExecutionRole", 
+    #       family: "monitoring-agent", 
+    #       memory: "256", 
+    #       registered_at: Time.parse("2025-03-15T10:30:00.000Z"), 
+    #       registered_by: "arn:aws:iam::123456789012:user/admin", 
+    #       revision: 1, 
+    #       status: "ACTIVE", 
+    #       task_role_arn: "arn:aws:iam::123456789012:role/ecsDaemonTaskRole", 
+    #       volumes: [
+    #       ], 
+    #     }, 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_daemon_task_definition({
+    #     daemon_task_definition: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.daemon_task_definition.daemon_task_definition_arn #=> String
+    #   resp.daemon_task_definition.family #=> String
+    #   resp.daemon_task_definition.revision #=> Integer
+    #   resp.daemon_task_definition.task_role_arn #=> String
+    #   resp.daemon_task_definition.execution_role_arn #=> String
+    #   resp.daemon_task_definition.container_definitions #=> Array
+    #   resp.daemon_task_definition.container_definitions[0].name #=> String
+    #   resp.daemon_task_definition.container_definitions[0].image #=> String
+    #   resp.daemon_task_definition.container_definitions[0].memory #=> Integer
+    #   resp.daemon_task_definition.container_definitions[0].memory_reservation #=> Integer
+    #   resp.daemon_task_definition.container_definitions[0].repository_credentials.credentials_parameter #=> String
+    #   resp.daemon_task_definition.container_definitions[0].health_check.command #=> Array
+    #   resp.daemon_task_definition.container_definitions[0].health_check.command[0] #=> String
+    #   resp.daemon_task_definition.container_definitions[0].health_check.interval #=> Integer
+    #   resp.daemon_task_definition.container_definitions[0].health_check.timeout #=> Integer
+    #   resp.daemon_task_definition.container_definitions[0].health_check.retries #=> Integer
+    #   resp.daemon_task_definition.container_definitions[0].health_check.start_period #=> Integer
+    #   resp.daemon_task_definition.container_definitions[0].cpu #=> Integer
+    #   resp.daemon_task_definition.container_definitions[0].essential #=> Boolean
+    #   resp.daemon_task_definition.container_definitions[0].entry_point #=> Array
+    #   resp.daemon_task_definition.container_definitions[0].entry_point[0] #=> String
+    #   resp.daemon_task_definition.container_definitions[0].command #=> Array
+    #   resp.daemon_task_definition.container_definitions[0].command[0] #=> String
+    #   resp.daemon_task_definition.container_definitions[0].working_directory #=> String
+    #   resp.daemon_task_definition.container_definitions[0].environment_files #=> Array
+    #   resp.daemon_task_definition.container_definitions[0].environment_files[0].value #=> String
+    #   resp.daemon_task_definition.container_definitions[0].environment_files[0].type #=> String, one of "s3"
+    #   resp.daemon_task_definition.container_definitions[0].environment #=> Array
+    #   resp.daemon_task_definition.container_definitions[0].environment[0].name #=> String
+    #   resp.daemon_task_definition.container_definitions[0].environment[0].value #=> String
+    #   resp.daemon_task_definition.container_definitions[0].secrets #=> Array
+    #   resp.daemon_task_definition.container_definitions[0].secrets[0].name #=> String
+    #   resp.daemon_task_definition.container_definitions[0].secrets[0].value_from #=> String
+    #   resp.daemon_task_definition.container_definitions[0].readonly_root_filesystem #=> Boolean
+    #   resp.daemon_task_definition.container_definitions[0].mount_points #=> Array
+    #   resp.daemon_task_definition.container_definitions[0].mount_points[0].source_volume #=> String
+    #   resp.daemon_task_definition.container_definitions[0].mount_points[0].container_path #=> String
+    #   resp.daemon_task_definition.container_definitions[0].mount_points[0].read_only #=> Boolean
+    #   resp.daemon_task_definition.container_definitions[0].log_configuration.log_driver #=> String, one of "json-file", "syslog", "journald", "gelf", "fluentd", "awslogs", "splunk", "awsfirelens"
+    #   resp.daemon_task_definition.container_definitions[0].log_configuration.options #=> Hash
+    #   resp.daemon_task_definition.container_definitions[0].log_configuration.options["String"] #=> String
+    #   resp.daemon_task_definition.container_definitions[0].log_configuration.secret_options #=> Array
+    #   resp.daemon_task_definition.container_definitions[0].log_configuration.secret_options[0].name #=> String
+    #   resp.daemon_task_definition.container_definitions[0].log_configuration.secret_options[0].value_from #=> String
+    #   resp.daemon_task_definition.container_definitions[0].firelens_configuration.type #=> String, one of "fluentd", "fluentbit"
+    #   resp.daemon_task_definition.container_definitions[0].firelens_configuration.options #=> Hash
+    #   resp.daemon_task_definition.container_definitions[0].firelens_configuration.options["String"] #=> String
+    #   resp.daemon_task_definition.container_definitions[0].privileged #=> Boolean
+    #   resp.daemon_task_definition.container_definitions[0].user #=> String
+    #   resp.daemon_task_definition.container_definitions[0].ulimits #=> Array
+    #   resp.daemon_task_definition.container_definitions[0].ulimits[0].name #=> String, one of "core", "cpu", "data", "fsize", "locks", "memlock", "msgqueue", "nice", "nofile", "nproc", "rss", "rtprio", "rttime", "sigpending", "stack"
+    #   resp.daemon_task_definition.container_definitions[0].ulimits[0].soft_limit #=> Integer
+    #   resp.daemon_task_definition.container_definitions[0].ulimits[0].hard_limit #=> Integer
+    #   resp.daemon_task_definition.container_definitions[0].linux_parameters.capabilities.add #=> Array
+    #   resp.daemon_task_definition.container_definitions[0].linux_parameters.capabilities.add[0] #=> String
+    #   resp.daemon_task_definition.container_definitions[0].linux_parameters.capabilities.drop #=> Array
+    #   resp.daemon_task_definition.container_definitions[0].linux_parameters.capabilities.drop[0] #=> String
+    #   resp.daemon_task_definition.container_definitions[0].linux_parameters.devices #=> Array
+    #   resp.daemon_task_definition.container_definitions[0].linux_parameters.devices[0].host_path #=> String
+    #   resp.daemon_task_definition.container_definitions[0].linux_parameters.devices[0].container_path #=> String
+    #   resp.daemon_task_definition.container_definitions[0].linux_parameters.devices[0].permissions #=> Array
+    #   resp.daemon_task_definition.container_definitions[0].linux_parameters.devices[0].permissions[0] #=> String, one of "read", "write", "mknod"
+    #   resp.daemon_task_definition.container_definitions[0].linux_parameters.init_process_enabled #=> Boolean
+    #   resp.daemon_task_definition.container_definitions[0].linux_parameters.tmpfs #=> Array
+    #   resp.daemon_task_definition.container_definitions[0].linux_parameters.tmpfs[0].container_path #=> String
+    #   resp.daemon_task_definition.container_definitions[0].linux_parameters.tmpfs[0].size #=> Integer
+    #   resp.daemon_task_definition.container_definitions[0].linux_parameters.tmpfs[0].mount_options #=> Array
+    #   resp.daemon_task_definition.container_definitions[0].linux_parameters.tmpfs[0].mount_options[0] #=> String
+    #   resp.daemon_task_definition.container_definitions[0].depends_on #=> Array
+    #   resp.daemon_task_definition.container_definitions[0].depends_on[0].container_name #=> String
+    #   resp.daemon_task_definition.container_definitions[0].depends_on[0].condition #=> String, one of "START", "COMPLETE", "SUCCESS", "HEALTHY"
+    #   resp.daemon_task_definition.container_definitions[0].start_timeout #=> Integer
+    #   resp.daemon_task_definition.container_definitions[0].stop_timeout #=> Integer
+    #   resp.daemon_task_definition.container_definitions[0].system_controls #=> Array
+    #   resp.daemon_task_definition.container_definitions[0].system_controls[0].namespace #=> String
+    #   resp.daemon_task_definition.container_definitions[0].system_controls[0].value #=> String
+    #   resp.daemon_task_definition.container_definitions[0].interactive #=> Boolean
+    #   resp.daemon_task_definition.container_definitions[0].pseudo_terminal #=> Boolean
+    #   resp.daemon_task_definition.container_definitions[0].restart_policy.enabled #=> Boolean
+    #   resp.daemon_task_definition.container_definitions[0].restart_policy.ignored_exit_codes #=> Array
+    #   resp.daemon_task_definition.container_definitions[0].restart_policy.ignored_exit_codes[0] #=> Integer
+    #   resp.daemon_task_definition.container_definitions[0].restart_policy.restart_attempt_period #=> Integer
+    #   resp.daemon_task_definition.volumes #=> Array
+    #   resp.daemon_task_definition.volumes[0].name #=> String
+    #   resp.daemon_task_definition.volumes[0].host.source_path #=> String
+    #   resp.daemon_task_definition.cpu #=> String
+    #   resp.daemon_task_definition.memory #=> String
+    #   resp.daemon_task_definition.status #=> String, one of "ACTIVE", "DELETE_IN_PROGRESS", "DELETED"
+    #   resp.daemon_task_definition.registered_at #=> Time
+    #   resp.daemon_task_definition.delete_requested_at #=> Time
+    #   resp.daemon_task_definition.registered_by #=> String
+    #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
+    #
+    #   * daemon_task_definition_active
+    #   * daemon_task_definition_deleted
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DescribeDaemonTaskDefinition AWS API Documentation
+    #
+    # @overload describe_daemon_task_definition(params = {})
+    # @param [Hash] params ({})
+    def describe_daemon_task_definition(params = {}, options = {})
+      req = build_request(:describe_daemon_task_definition, params)
       req.send_request(options)
     end
 
@@ -5044,7 +5859,7 @@ module Aws::ECS
     #           requested_task_count: 0, 
     #           running_task_count: 0, 
     #         }, 
-    #         updated_at: Time.parse("2024-09-10T16:49:35.572000+00:00"), 
+    #         updated_at: Time.parse("2024-09-10T16:49:35.57Z"), 
     #       }, 
     #     ], 
     #   }
@@ -5175,7 +5990,7 @@ module Aws::ECS
     #     service_revisions: [
     #       {
     #         cluster_arn: "arn:aws:ecs:us-west-2:123456789012:cluster/example", 
-    #         created_at: Time.parse("2024-09-10T16:49:26.388000+00:00"), 
+    #         created_at: Time.parse("2024-09-10T16:49:26.39Z"), 
     #         launch_type: "FARGATE", 
     #         network_configuration: {
     #           awsvpc_configuration: {
@@ -5437,7 +6252,7 @@ module Aws::ECS
     #           {
     #             created_at: Time.parse("2016-08-29T16:25:58.520Z"), 
     #             id: "38c285e5-d335-4b68-8b15-e46dedc8e88d", 
-    #             message: "(service ecs-simple-service) was unable to place a task because no container instance met all of its requirements. The closest matching (container-instance 3f4de1c5-ffdd-4954-af7e-75b4be0c8841) is already using a port required by your task. For more information, see the Troubleshooting section of the Amazon ECS Developer Guide.", # In this example, there is a service event that shows unavailable cluster resources.
+    #             message: "(service ecs-simple-service) was unable to place a task because no container instance met all of its requirements. The closest matching (container-instance 3f4de1c5-ffdd-4954-af7e-75b4be0c8841) is already using a port required by your task. For more information, see the Troubleshooting section of the Amazon ECS Developer Guide.", 
     #           }, 
     #         ], 
     #         load_balancers: [
@@ -5918,6 +6733,10 @@ module Aws::ECS
     #   resp.task_definition.volumes[0].efs_volume_configuration.transit_encryption_port #=> Integer
     #   resp.task_definition.volumes[0].efs_volume_configuration.authorization_config.access_point_id #=> String
     #   resp.task_definition.volumes[0].efs_volume_configuration.authorization_config.iam #=> String, one of "ENABLED", "DISABLED"
+    #   resp.task_definition.volumes[0].s3files_volume_configuration.file_system_arn #=> String
+    #   resp.task_definition.volumes[0].s3files_volume_configuration.root_directory #=> String
+    #   resp.task_definition.volumes[0].s3files_volume_configuration.transit_encryption_port #=> Integer
+    #   resp.task_definition.volumes[0].s3files_volume_configuration.access_point_arn #=> String
     #   resp.task_definition.volumes[0].fsx_windows_file_server_volume_configuration.file_system_id #=> String
     #   resp.task_definition.volumes[0].fsx_windows_file_server_volume_configuration.root_directory #=> String
     #   resp.task_definition.volumes[0].fsx_windows_file_server_volume_configuration.authorization_config.credentials_parameter #=> String
@@ -5952,6 +6771,7 @@ module Aws::ECS
     #   resp.task_definition.proxy_configuration.properties[0].value #=> String
     #   resp.task_definition.registered_at #=> Time
     #   resp.task_definition.deregistered_at #=> Time
+    #   resp.task_definition.delete_requested_at #=> Time
     #   resp.task_definition.registered_by #=> String
     #   resp.task_definition.ephemeral_storage.size_in_gi_b #=> Integer
     #   resp.task_definition.enable_fault_injection #=> Boolean
@@ -6340,12 +7160,13 @@ module Aws::ECS
       req.send_request(options)
     end
 
-    # <note markdown="1"> This action is only used by the Amazon ECS agent, and it is not
+    # <note markdown="1"> This action is only used by the Amazon ECS agent,
+    # and it is not
     # intended for use outside of the agent.
     #
     #  </note>
     #
-    # Returns an endpoint for the Amazon ECS agent to poll for updates.
+    #  Returns an endpoint for the Amazon ECS agent to poll for updates.
     #
     # @option params [String] :container_instance
     #   The container instance ID or full ARN of the container instance. For
@@ -6983,6 +7804,327 @@ module Aws::ECS
     # @param [Hash] params ({})
     def list_container_instances(params = {}, options = {})
       req = build_request(:list_container_instances, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of daemon deployments for a specified daemon. You can
+    # filter the results by status or creation time.
+    #
+    # @option params [required, String] :daemon_arn
+    #   The Amazon Resource Name (ARN) of the daemon to list deployments for.
+    #
+    # @option params [Array<String>] :status
+    #   An optional filter to narrow the `ListDaemonDeployments` results by
+    #   deployment status. If you don't specify a status, all deployments are
+    #   returned.
+    #
+    # @option params [Types::CreatedAt] :created_at
+    #   An optional filter to narrow the `ListDaemonDeployments` results by
+    #   creation time. If you don't specify a time range, all deployments are
+    #   returned.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of daemon deployment results that
+    #   `ListDaemonDeployments` returned in paginated output. When this
+    #   parameter is used, `ListDaemonDeployments` only returns `maxResults`
+    #   results in a single page along with a `nextToken` response element.
+    #   The remaining results of the initial request can be seen by sending
+    #   another `ListDaemonDeployments` request with the returned `nextToken`
+    #   value. This value can be between 1 and 100. If this parameter isn't
+    #   used, then `ListDaemonDeployments` returns up to 20 results and a
+    #   `nextToken` value if applicable.
+    #
+    # @option params [String] :next_token
+    #   The `nextToken` value returned from a `ListDaemonDeployments` request
+    #   indicating that more results are available to fulfill the request and
+    #   further calls will be needed. If `maxResults` was provided, it's
+    #   possible for the number of results to be fewer than `maxResults`.
+    #
+    #   <note markdown="1"> This token should be treated as an opaque identifier that is only used
+    #   to retrieve the next items in a list and not for other programmatic
+    #   purposes.
+    #
+    #    </note>
+    #
+    # @return [Types::ListDaemonDeploymentsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListDaemonDeploymentsResponse#next_token #next_token} => String
+    #   * {Types::ListDaemonDeploymentsResponse#daemon_deployments #daemon_deployments} => Array&lt;Types::DaemonDeploymentSummary&gt;
+    #
+    #
+    # @example Example: To list daemon deployments
+    #
+    #   # This example lists all successful daemon deployments for the my-monitoring-daemon daemon.
+    #
+    #   resp = client.list_daemon_deployments({
+    #     daemon_arn: "arn:aws:ecs:us-east-1:123456789012:daemon/my-cluster/my-monitoring-daemon", 
+    #     status: [
+    #       "SUCCESSFUL", 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     daemon_deployments: [
+    #       {
+    #         cluster_arn: "arn:aws:ecs:us-east-1:123456789012:cluster/my-cluster", 
+    #         created_at: Time.parse("2025-03-15T12:00:00.000Z"), 
+    #         daemon_arn: "arn:aws:ecs:us-east-1:123456789012:daemon/my-cluster/my-monitoring-daemon", 
+    #         daemon_deployment_arn: "arn:aws:ecs:us-east-1:123456789012:daemon-deployment/my-cluster/my-monitoring-daemon/aB1cD2eF3gH4iJ5k", 
+    #         finished_at: Time.parse("2025-03-15T12:15:00.000Z"), 
+    #         started_at: Time.parse("2025-03-15T12:00:05.000Z"), 
+    #         status: "SUCCESSFUL", 
+    #         status_reason: "Deployment completed successfully.", 
+    #         target_daemon_revision_arn: "arn:aws:ecs:us-east-1:123456789012:daemon-revision/my-cluster/my-monitoring-daemon/4980306466373577095", 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_daemon_deployments({
+    #     daemon_arn: "String", # required
+    #     status: ["PENDING"], # accepts PENDING, SUCCESSFUL, STOPPED, STOP_REQUESTED, IN_PROGRESS, ROLLBACK_IN_PROGRESS, ROLLBACK_SUCCESSFUL, ROLLBACK_FAILED
+    #     created_at: {
+    #       before: Time.now,
+    #       after: Time.now,
+    #     },
+    #     max_results: 1,
+    #     next_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.daemon_deployments #=> Array
+    #   resp.daemon_deployments[0].daemon_deployment_arn #=> String
+    #   resp.daemon_deployments[0].daemon_arn #=> String
+    #   resp.daemon_deployments[0].cluster_arn #=> String
+    #   resp.daemon_deployments[0].status #=> String, one of "PENDING", "SUCCESSFUL", "STOPPED", "STOP_REQUESTED", "IN_PROGRESS", "ROLLBACK_IN_PROGRESS", "ROLLBACK_SUCCESSFUL", "ROLLBACK_FAILED"
+    #   resp.daemon_deployments[0].status_reason #=> String
+    #   resp.daemon_deployments[0].target_daemon_revision_arn #=> String
+    #   resp.daemon_deployments[0].created_at #=> Time
+    #   resp.daemon_deployments[0].started_at #=> Time
+    #   resp.daemon_deployments[0].stopped_at #=> Time
+    #   resp.daemon_deployments[0].finished_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ListDaemonDeployments AWS API Documentation
+    #
+    # @overload list_daemon_deployments(params = {})
+    # @param [Hash] params ({})
+    def list_daemon_deployments(params = {}, options = {})
+      req = build_request(:list_daemon_deployments, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of daemon task definitions that are registered to your
+    # account. You can filter the results by family name, status, or both to
+    # find daemon task definitions that match your criteria.
+    #
+    # @option params [String] :family_prefix
+    #   The full family name to filter the `ListDaemonTaskDefinitions` results
+    #   with. Specifying a `familyPrefix` limits the listed daemon task
+    #   definitions to daemon task definition families that start with the
+    #   `familyPrefix` string.
+    #
+    # @option params [String] :family
+    #   The exact name of the daemon task definition family to filter results
+    #   with.
+    #
+    # @option params [String] :revision
+    #   The revision filter to apply. Specify `LAST_REGISTERED` to return only
+    #   the last registered revision for each daemon task definition family.
+    #
+    # @option params [String] :status
+    #   The daemon task definition status to filter the
+    #   `ListDaemonTaskDefinitions` results with. By default, only `ACTIVE`
+    #   daemon task definitions are listed. If you set this parameter to
+    #   `DELETE_IN_PROGRESS`, only daemon task definitions that are in the
+    #   process of being deleted are listed. If you set this parameter to
+    #   `ALL`, all daemon task definitions are listed regardless of status.
+    #
+    # @option params [String] :sort
+    #   The order to sort the results. Valid values are `ASC` and `DESC`. By
+    #   default (`ASC`), daemon task definitions are listed in ascending order
+    #   by family name and revision number.
+    #
+    # @option params [String] :next_token
+    #   The `nextToken` value returned from a `ListDaemonTaskDefinitions`
+    #   request indicating that more results are available to fulfill the
+    #   request and further calls will be needed. If `maxResults` was
+    #   provided, it's possible for the number of results to be fewer than
+    #   `maxResults`.
+    #
+    #   <note markdown="1"> This token should be treated as an opaque identifier that is only used
+    #   to retrieve the next items in a list and not for other programmatic
+    #   purposes.
+    #
+    #    </note>
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of daemon task definition results that
+    #   `ListDaemonTaskDefinitions` returned in paginated output. When this
+    #   parameter is used, `ListDaemonTaskDefinitions` only returns
+    #   `maxResults` results in a single page along with a `nextToken`
+    #   response element. The remaining results of the initial request can be
+    #   seen by sending another `ListDaemonTaskDefinitions` request with the
+    #   returned `nextToken` value. This value can be between 1 and 100. If
+    #   this parameter isn't used, then `ListDaemonTaskDefinitions` returns
+    #   up to 100 results and a `nextToken` value if applicable.
+    #
+    # @return [Types::ListDaemonTaskDefinitionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListDaemonTaskDefinitionsResponse#daemon_task_definitions #daemon_task_definitions} => Array&lt;Types::DaemonTaskDefinitionSummary&gt;
+    #   * {Types::ListDaemonTaskDefinitionsResponse#next_token #next_token} => String
+    #
+    #
+    # @example Example: To list daemon task definitions
+    #
+    #   # This example lists all daemon task definitions in your account that start with the monitoring prefix.
+    #
+    #   resp = client.list_daemon_task_definitions({
+    #     family_prefix: "monitoring", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     daemon_task_definitions: [
+    #       {
+    #         arn: "arn:aws:ecs:us-east-1:123456789012:daemon-task-definition/monitoring-agent:2", 
+    #         registered_at: Time.parse("2025-03-20T14:00:00.000Z"), 
+    #         registered_by: "arn:aws:iam::123456789012:user/admin", 
+    #         status: "ACTIVE", 
+    #       }, 
+    #       {
+    #         arn: "arn:aws:ecs:us-east-1:123456789012:daemon-task-definition/monitoring-agent:1", 
+    #         registered_at: Time.parse("2025-03-15T10:30:00.000Z"), 
+    #         registered_by: "arn:aws:iam::123456789012:user/admin", 
+    #         status: "ACTIVE", 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_daemon_task_definitions({
+    #     family_prefix: "String",
+    #     family: "String",
+    #     revision: "LAST_REGISTERED", # accepts LAST_REGISTERED
+    #     status: "ACTIVE", # accepts ACTIVE, DELETE_IN_PROGRESS, ALL
+    #     sort: "ASC", # accepts ASC, DESC
+    #     next_token: "String",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.daemon_task_definitions #=> Array
+    #   resp.daemon_task_definitions[0].arn #=> String
+    #   resp.daemon_task_definitions[0].registered_at #=> Time
+    #   resp.daemon_task_definitions[0].registered_by #=> String
+    #   resp.daemon_task_definitions[0].delete_requested_at #=> Time
+    #   resp.daemon_task_definitions[0].status #=> String, one of "ACTIVE", "DELETE_IN_PROGRESS", "DELETED"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ListDaemonTaskDefinitions AWS API Documentation
+    #
+    # @overload list_daemon_task_definitions(params = {})
+    # @param [Hash] params ({})
+    def list_daemon_task_definitions(params = {}, options = {})
+      req = build_request(:list_daemon_task_definitions, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of daemons. You can filter the results by cluster or
+    # capacity provider.
+    #
+    # @option params [String] :cluster_arn
+    #   The Amazon Resource Name (ARN) of the cluster to filter daemons by. If
+    #   not specified, daemons from all clusters are returned.
+    #
+    # @option params [Array<String>] :capacity_provider_arns
+    #   The Amazon Resource Names (ARNs) of the capacity providers to filter
+    #   daemons by. Only daemons associated with the specified capacity
+    #   providers are returned.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of daemon results that `ListDaemons` returned in
+    #   paginated output. When this parameter is used, `ListDaemons` only
+    #   returns `maxResults` results in a single page along with a `nextToken`
+    #   response element. The remaining results of the initial request can be
+    #   seen by sending another `ListDaemons` request with the returned
+    #   `nextToken` value. This value can be between 1 and 100. If this
+    #   parameter isn't used, then `ListDaemons` returns up to 100 results
+    #   and a `nextToken` value if applicable.
+    #
+    # @option params [String] :next_token
+    #   The `nextToken` value returned from a `ListDaemons` request indicating
+    #   that more results are available to fulfill the request and further
+    #   calls will be needed. If `maxResults` was provided, it's possible for
+    #   the number of results to be fewer than `maxResults`.
+    #
+    #   <note markdown="1"> This token should be treated as an opaque identifier that is only used
+    #   to retrieve the next items in a list and not for other programmatic
+    #   purposes.
+    #
+    #    </note>
+    #
+    # @return [Types::ListDaemonsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListDaemonsResponse#daemon_summaries_list #daemon_summaries_list} => Array&lt;Types::DaemonSummary&gt;
+    #   * {Types::ListDaemonsResponse#next_token #next_token} => String
+    #
+    #
+    # @example Example: To list daemons in a cluster
+    #
+    #   # This example lists all daemons in the specified cluster.
+    #
+    #   resp = client.list_daemons({
+    #     cluster_arn: "arn:aws:ecs:us-east-1:123456789012:cluster/my-cluster", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     daemon_summaries_list: [
+    #       {
+    #         created_at: Time.parse("2025-03-15T12:00:00.000Z"), 
+    #         daemon_arn: "arn:aws:ecs:us-east-1:123456789012:daemon/my-cluster/my-monitoring-daemon", 
+    #         status: "ACTIVE", 
+    #         updated_at: Time.parse("2025-03-20T15:30:00.000Z"), 
+    #       }, 
+    #       {
+    #         created_at: Time.parse("2025-03-16T09:00:00.000Z"), 
+    #         daemon_arn: "arn:aws:ecs:us-east-1:123456789012:daemon/my-cluster/my-logging-daemon", 
+    #         status: "ACTIVE", 
+    #         updated_at: Time.parse("2025-03-16T09:00:00.000Z"), 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_daemons({
+    #     cluster_arn: "String",
+    #     capacity_provider_arns: ["String"],
+    #     max_results: 1,
+    #     next_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.daemon_summaries_list #=> Array
+    #   resp.daemon_summaries_list[0].daemon_arn #=> String
+    #   resp.daemon_summaries_list[0].status #=> String, one of "ACTIVE", "DELETE_IN_PROGRESS"
+    #   resp.daemon_summaries_list[0].created_at #=> Time
+    #   resp.daemon_summaries_list[0].updated_at #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ListDaemons AWS API Documentation
+    #
+    # @overload list_daemons(params = {})
+    # @param [Hash] params ({})
+    def list_daemons(params = {}, options = {})
+      req = build_request(:list_daemons, params)
       req.send_request(options)
     end
 
@@ -7631,6 +8773,11 @@ module Aws::ECS
     # @option params [String] :launch_type
     #   The launch type to use when filtering the `ListTasks` results.
     #
+    # @option params [String] :daemon_name
+    #   The name of the daemon to use when filtering the `ListTasks` results.
+    #   Specifying a `daemonName` limits the results to tasks that belong to
+    #   that daemon.
+    #
     # @return [Types::ListTasksResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListTasksResponse#task_arns #task_arns} => Array&lt;String&gt;
@@ -7684,6 +8831,7 @@ module Aws::ECS
     #     service_name: "String",
     #     desired_status: "RUNNING", # accepts RUNNING, PENDING, STOPPED
     #     launch_type: "EC2", # accepts EC2, FARGATE, EXTERNAL, MANAGED_INSTANCES
+    #     daemon_name: "String",
     #   })
     #
     # @example Response structure
@@ -8642,12 +9790,13 @@ module Aws::ECS
       req.send_request(options)
     end
 
-    # <note markdown="1"> This action is only used by the Amazon ECS agent, and it is not
+    # <note markdown="1"> This action is only used by the Amazon ECS agent,
+    # and it is not
     # intended for use outside of the agent.
     #
     #  </note>
     #
-    # Registers an EC2 instance into the specified cluster. This instance
+    #  Registers an EC2 instance into the specified cluster. This instance
     # becomes available to place containers on.
     #
     # @option params [String] :cluster
@@ -8812,7 +9961,7 @@ module Aws::ECS
     #   resp.container_instance.tags[0].value #=> String
     #   resp.container_instance.health_status.overall_status #=> String, one of "OK", "IMPAIRED", "INSUFFICIENT_DATA", "INITIALIZING"
     #   resp.container_instance.health_status.details #=> Array
-    #   resp.container_instance.health_status.details[0].type #=> String, one of "CONTAINER_RUNTIME"
+    #   resp.container_instance.health_status.details[0].type #=> String, one of "CONTAINER_RUNTIME", "ACCELERATED_COMPUTE", "DAEMON"
     #   resp.container_instance.health_status.details[0].status #=> String, one of "OK", "IMPAIRED", "INSUFFICIENT_DATA", "INITIALIZING"
     #   resp.container_instance.health_status.details[0].last_updated #=> Time
     #   resp.container_instance.health_status.details[0].last_status_change #=> Time
@@ -8823,6 +9972,291 @@ module Aws::ECS
     # @param [Hash] params ({})
     def register_container_instance(params = {}, options = {})
       req = build_request(:register_container_instance, params)
+      req.send_request(options)
+    end
+
+    # Registers a new daemon task definition from the supplied `family` and
+    # `containerDefinitions`. Optionally, you can add data volumes to your
+    # containers with the `volumes` parameter. For more information, see
+    # [Daemon task definitions][1] in the *Amazon Elastic Container Service
+    # Developer Guide*.
+    #
+    # A daemon task definition is a template that describes the containers
+    # that form a daemon. Daemons deploy cross-cutting software agents such
+    # as security monitoring, telemetry, and logging across your Amazon ECS
+    # infrastructure.
+    #
+    # Each time you call `RegisterDaemonTaskDefinition`, a new revision of
+    # the daemon task definition is created. You can't modify a revision
+    # after you register it.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/daemon-task-definitions.html
+    #
+    # @option params [required, String] :family
+    #   You must specify a `family` for a daemon task definition. This family
+    #   is used as a name for your daemon task definition. Up to 255 letters
+    #   (uppercase and lowercase), numbers, underscores, and hyphens are
+    #   allowed.
+    #
+    # @option params [String] :task_role_arn
+    #   The short name or full Amazon Resource Name (ARN) of the IAM role that
+    #   containers in this daemon task can assume. All containers in this
+    #   daemon task are granted the permissions that are specified in this
+    #   role.
+    #
+    # @option params [String] :execution_role_arn
+    #   The Amazon Resource Name (ARN) of the task execution role that grants
+    #   the Amazon ECS container agent permission to make Amazon Web Services
+    #   API calls on your behalf. The task execution role is required for
+    #   daemon tasks that pull container images from Amazon ECR or send
+    #   container logs to CloudWatch.
+    #
+    # @option params [required, Array<Types::DaemonContainerDefinition>] :container_definitions
+    #   A list of container definitions in JSON format that describe the
+    #   containers that make up your daemon task.
+    #
+    # @option params [String] :cpu
+    #   The number of CPU units used by the daemon task. It can be expressed
+    #   as an integer using CPU units (for example, `1024`).
+    #
+    # @option params [String] :memory
+    #   The amount of memory (in MiB) used by the daemon task. It can be
+    #   expressed as an integer using MiB (for example, `1024`).
+    #
+    # @option params [Array<Types::DaemonVolume>] :volumes
+    #   A list of volume definitions in JSON format that containers in your
+    #   daemon task can use.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   The metadata that you apply to the daemon task definition to help you
+    #   categorize and organize them. Each tag consists of a key and an
+    #   optional value. You define both of them.
+    #
+    #   The following basic restrictions apply to tags:
+    #
+    #   * Maximum number of tags per resource - 50
+    #
+    #   * For each resource, each tag key must be unique, and each tag key can
+    #     have only one value.
+    #
+    #   * Maximum key length - 128 Unicode characters in UTF-8
+    #
+    #   * Maximum value length - 256 Unicode characters in UTF-8
+    #
+    #   * If your tagging schema is used across multiple services and
+    #     resources, remember that other services may have restrictions on
+    #     allowed characters. Generally allowed characters are: letters,
+    #     numbers, and spaces representable in UTF-8, and the following
+    #     characters: + - = . \_ : / @.
+    #
+    #   * Tag keys and values are case-sensitive.
+    #
+    #   * Do not use `aws:`, `AWS:`, or any upper or lowercase combination of
+    #     such as a prefix for either keys or values as it is reserved for
+    #     Amazon Web Services use. You cannot edit or delete tag keys or
+    #     values with this prefix. Tags with this prefix do not count against
+    #     your tags per resource limit.
+    #
+    # @return [Types::RegisterDaemonTaskDefinitionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::RegisterDaemonTaskDefinitionResponse#daemon_task_definition_arn #daemon_task_definition_arn} => String
+    #
+    #
+    # @example Example: To register a daemon task definition
+    #
+    #   # This example registers a daemon task definition in the monitoring-agent family with a single container that runs a
+    #   # CloudWatch agent.
+    #
+    #   resp = client.register_daemon_task_definition({
+    #     container_definitions: [
+    #       {
+    #         name: "cloudwatch-agent", 
+    #         cpu: 128, 
+    #         environment: [
+    #           {
+    #             name: "USE_DEFAULT_CONFIG", 
+    #             value: "true", 
+    #           }, 
+    #         ], 
+    #         essential: true, 
+    #         image: "public.ecr.aws/cloudwatch-agent/cloudwatch-agent:latest", 
+    #         log_configuration: {
+    #           log_driver: "awslogs", 
+    #           options: {
+    #             "awslogs-group" => "/ecs/daemon/monitoring-agent", 
+    #             "awslogs-region" => "us-east-1", 
+    #             "awslogs-stream-prefix" => "ecs", 
+    #           }, 
+    #         }, 
+    #         memory: 256, 
+    #       }, 
+    #     ], 
+    #     cpu: "128", 
+    #     execution_role_arn: "arn:aws:iam::123456789012:role/ecsTaskExecutionRole", 
+    #     family: "monitoring-agent", 
+    #     memory: "256", 
+    #     task_role_arn: "arn:aws:iam::123456789012:role/ecsDaemonTaskRole", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     daemon_task_definition_arn: "arn:aws:ecs:us-east-1:123456789012:daemon-task-definition/monitoring-agent:1", 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.register_daemon_task_definition({
+    #     family: "String", # required
+    #     task_role_arn: "String",
+    #     execution_role_arn: "String",
+    #     container_definitions: [ # required
+    #       {
+    #         name: "String",
+    #         image: "String", # required
+    #         memory: 1,
+    #         memory_reservation: 1,
+    #         repository_credentials: {
+    #           credentials_parameter: "String", # required
+    #         },
+    #         health_check: {
+    #           command: ["String"], # required
+    #           interval: 1,
+    #           timeout: 1,
+    #           retries: 1,
+    #           start_period: 1,
+    #         },
+    #         cpu: 1,
+    #         essential: false,
+    #         entry_point: ["String"],
+    #         command: ["String"],
+    #         working_directory: "String",
+    #         environment_files: [
+    #           {
+    #             value: "String", # required
+    #             type: "s3", # required, accepts s3
+    #           },
+    #         ],
+    #         environment: [
+    #           {
+    #             name: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #         secrets: [
+    #           {
+    #             name: "String", # required
+    #             value_from: "String", # required
+    #           },
+    #         ],
+    #         readonly_root_filesystem: false,
+    #         mount_points: [
+    #           {
+    #             source_volume: "String",
+    #             container_path: "String",
+    #             read_only: false,
+    #           },
+    #         ],
+    #         log_configuration: {
+    #           log_driver: "json-file", # required, accepts json-file, syslog, journald, gelf, fluentd, awslogs, splunk, awsfirelens
+    #           options: {
+    #             "String" => "String",
+    #           },
+    #           secret_options: [
+    #             {
+    #               name: "String", # required
+    #               value_from: "String", # required
+    #             },
+    #           ],
+    #         },
+    #         firelens_configuration: {
+    #           type: "fluentd", # required, accepts fluentd, fluentbit
+    #           options: {
+    #             "String" => "String",
+    #           },
+    #         },
+    #         privileged: false,
+    #         user: "String",
+    #         ulimits: [
+    #           {
+    #             name: "core", # required, accepts core, cpu, data, fsize, locks, memlock, msgqueue, nice, nofile, nproc, rss, rtprio, rttime, sigpending, stack
+    #             soft_limit: 1, # required
+    #             hard_limit: 1, # required
+    #           },
+    #         ],
+    #         linux_parameters: {
+    #           capabilities: {
+    #             add: ["String"],
+    #             drop: ["String"],
+    #           },
+    #           devices: [
+    #             {
+    #               host_path: "String", # required
+    #               container_path: "String",
+    #               permissions: ["read"], # accepts read, write, mknod
+    #             },
+    #           ],
+    #           init_process_enabled: false,
+    #           tmpfs: [
+    #             {
+    #               container_path: "String", # required
+    #               size: 1, # required
+    #               mount_options: ["String"],
+    #             },
+    #           ],
+    #         },
+    #         depends_on: [
+    #           {
+    #             container_name: "String", # required
+    #             condition: "START", # required, accepts START, COMPLETE, SUCCESS, HEALTHY
+    #           },
+    #         ],
+    #         start_timeout: 1,
+    #         stop_timeout: 1,
+    #         system_controls: [
+    #           {
+    #             namespace: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #         interactive: false,
+    #         pseudo_terminal: false,
+    #         restart_policy: {
+    #           enabled: false, # required
+    #           ignored_exit_codes: [1],
+    #           restart_attempt_period: 1,
+    #         },
+    #       },
+    #     ],
+    #     cpu: "String",
+    #     memory: "String",
+    #     volumes: [
+    #       {
+    #         name: "String",
+    #         host: {
+    #           source_path: "String",
+    #         },
+    #       },
+    #     ],
+    #     tags: [
+    #       {
+    #         key: "TagKey",
+    #         value: "TagValue",
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.daemon_task_definition_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/RegisterDaemonTaskDefinition AWS API Documentation
+    #
+    # @overload register_daemon_task_definition(params = {})
+    # @param [Hash] params ({})
+    def register_daemon_task_definition(params = {}, options = {})
+      req = build_request(:register_daemon_task_definition, params)
       req.send_request(options)
     end
 
@@ -9416,6 +10850,12 @@ module Aws::ECS
     #             iam: "ENABLED", # accepts ENABLED, DISABLED
     #           },
     #         },
+    #         s3files_volume_configuration: {
+    #           file_system_arn: "String", # required
+    #           root_directory: "String",
+    #           transit_encryption_port: 1,
+    #           access_point_arn: "String",
+    #         },
     #         fsx_windows_file_server_volume_configuration: {
     #           file_system_id: "String", # required
     #           root_directory: "String", # required
@@ -9605,6 +11045,10 @@ module Aws::ECS
     #   resp.task_definition.volumes[0].efs_volume_configuration.transit_encryption_port #=> Integer
     #   resp.task_definition.volumes[0].efs_volume_configuration.authorization_config.access_point_id #=> String
     #   resp.task_definition.volumes[0].efs_volume_configuration.authorization_config.iam #=> String, one of "ENABLED", "DISABLED"
+    #   resp.task_definition.volumes[0].s3files_volume_configuration.file_system_arn #=> String
+    #   resp.task_definition.volumes[0].s3files_volume_configuration.root_directory #=> String
+    #   resp.task_definition.volumes[0].s3files_volume_configuration.transit_encryption_port #=> Integer
+    #   resp.task_definition.volumes[0].s3files_volume_configuration.access_point_arn #=> String
     #   resp.task_definition.volumes[0].fsx_windows_file_server_volume_configuration.file_system_id #=> String
     #   resp.task_definition.volumes[0].fsx_windows_file_server_volume_configuration.root_directory #=> String
     #   resp.task_definition.volumes[0].fsx_windows_file_server_volume_configuration.authorization_config.credentials_parameter #=> String
@@ -9639,6 +11083,7 @@ module Aws::ECS
     #   resp.task_definition.proxy_configuration.properties[0].value #=> String
     #   resp.task_definition.registered_at #=> Time
     #   resp.task_definition.deregistered_at #=> Time
+    #   resp.task_definition.delete_requested_at #=> Time
     #   resp.task_definition.registered_by #=> String
     #   resp.task_definition.ephemeral_storage.size_in_gi_b #=> Integer
     #   resp.task_definition.enable_fault_injection #=> Boolean
@@ -11005,12 +12450,13 @@ module Aws::ECS
       req.send_request(options)
     end
 
-    # <note markdown="1"> This action is only used by the Amazon ECS agent, and it is not
+    # <note markdown="1"> This action is only used by the Amazon ECS agent,
+    # and it is not
     # intended for use outside of the agent.
     #
     #  </note>
     #
-    # Sent to acknowledge that an attachment changed states.
+    #  Sent to acknowledge that an attachment changed states.
     #
     # @option params [String] :cluster
     #   The short name or full ARN of the cluster that hosts the container
@@ -11048,12 +12494,13 @@ module Aws::ECS
       req.send_request(options)
     end
 
-    # <note markdown="1"> This action is only used by the Amazon ECS agent, and it is not
+    # <note markdown="1"> This action is only used by the Amazon ECS agent,
+    # and it is not
     # intended for use outside of the agent.
     #
     #  </note>
     #
-    # Sent to acknowledge that a container changed states.
+    #  Sent to acknowledge that a container changed states.
     #
     # @option params [String] :cluster
     #   The short name or full ARN of the cluster that hosts the container.
@@ -11119,12 +12566,13 @@ module Aws::ECS
       req.send_request(options)
     end
 
-    # <note markdown="1"> This action is only used by the Amazon ECS agent, and it is not
+    # <note markdown="1"> This action is only used by the Amazon ECS agent,
+    # and it is not
     # intended for use outside of the agent.
     #
     #  </note>
     #
-    # Sent to acknowledge that a task changed states.
+    #  Sent to acknowledge that a task changed states.
     #
     # @option params [String] :cluster
     #   The short name or full Amazon Resource Name (ARN) of the cluster that
@@ -11458,6 +12906,10 @@ module Aws::ECS
     #         storage_configuration: {
     #           storage_size_gi_b: 1,
     #         },
+    #         instance_metadata_tags_propagation: false,
+    #         local_storage_configuration: {
+    #           use_local_storage: false,
+    #         },
     #         monitoring: "BASIC", # accepts BASIC, DETAILED
     #         instance_requirements: {
     #           v_cpu_count: { # required
@@ -11512,6 +12964,10 @@ module Aws::ECS
     #           allowed_instance_types: ["AllowedInstanceType"],
     #           max_spot_price_as_percentage_of_optimal_on_demand_price: 1,
     #         },
+    #         capacity_reservations: {
+    #           reservation_group_arn: "String",
+    #           reservation_preference: "RESERVATIONS_ONLY", # accepts RESERVATIONS_ONLY, RESERVATIONS_FIRST, RESERVATIONS_EXCLUDED
+    #         },
     #       },
     #       propagate_tags: "CAPACITY_PROVIDER", # accepts CAPACITY_PROVIDER, NONE
     #       infrastructure_optimization: {
@@ -11541,8 +12997,10 @@ module Aws::ECS
     #   resp.capacity_provider.managed_instances_provider.instance_launch_template.network_configuration.security_groups #=> Array
     #   resp.capacity_provider.managed_instances_provider.instance_launch_template.network_configuration.security_groups[0] #=> String
     #   resp.capacity_provider.managed_instances_provider.instance_launch_template.storage_configuration.storage_size_gi_b #=> Integer
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.local_storage_configuration.use_local_storage #=> Boolean
     #   resp.capacity_provider.managed_instances_provider.instance_launch_template.monitoring #=> String, one of "BASIC", "DETAILED"
-    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.capacity_option_type #=> String, one of "ON_DEMAND", "SPOT"
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.capacity_option_type #=> String, one of "ON_DEMAND", "SPOT", "RESERVED"
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_metadata_tags_propagation #=> Boolean
     #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.v_cpu_count.min #=> Integer
     #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.v_cpu_count.max #=> Integer
     #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.memory_mi_b.min #=> Integer
@@ -11585,6 +13043,8 @@ module Aws::ECS
     #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.allowed_instance_types[0] #=> String
     #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.max_spot_price_as_percentage_of_optimal_on_demand_price #=> Integer
     #   resp.capacity_provider.managed_instances_provider.instance_launch_template.fips_enabled #=> Boolean
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.capacity_reservations.reservation_group_arn #=> String
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.capacity_reservations.reservation_preference #=> String, one of "RESERVATIONS_ONLY", "RESERVATIONS_FIRST", "RESERVATIONS_EXCLUDED"
     #   resp.capacity_provider.managed_instances_provider.propagate_tags #=> String, one of "CAPACITY_PROVIDER", "NONE"
     #   resp.capacity_provider.managed_instances_provider.infrastructure_optimization.scale_in_after #=> Integer
     #   resp.capacity_provider.update_status #=> String, one of "CREATE_IN_PROGRESS", "CREATE_COMPLETE", "CREATE_FAILED", "DELETE_IN_PROGRESS", "DELETE_COMPLETE", "DELETE_FAILED", "UPDATE_IN_PROGRESS", "UPDATE_COMPLETE", "UPDATE_FAILED"
@@ -12172,7 +13632,7 @@ module Aws::ECS
     #   resp.container_instance.tags[0].value #=> String
     #   resp.container_instance.health_status.overall_status #=> String, one of "OK", "IMPAIRED", "INSUFFICIENT_DATA", "INITIALIZING"
     #   resp.container_instance.health_status.details #=> Array
-    #   resp.container_instance.health_status.details[0].type #=> String, one of "CONTAINER_RUNTIME"
+    #   resp.container_instance.health_status.details[0].type #=> String, one of "CONTAINER_RUNTIME", "ACCELERATED_COMPUTE", "DAEMON"
     #   resp.container_instance.health_status.details[0].status #=> String, one of "OK", "IMPAIRED", "INSUFFICIENT_DATA", "INITIALIZING"
     #   resp.container_instance.health_status.details[0].last_updated #=> Time
     #   resp.container_instance.health_status.details[0].last_status_change #=> Time
@@ -12499,7 +13959,7 @@ module Aws::ECS
     #   resp.container_instances[0].tags[0].value #=> String
     #   resp.container_instances[0].health_status.overall_status #=> String, one of "OK", "IMPAIRED", "INSUFFICIENT_DATA", "INITIALIZING"
     #   resp.container_instances[0].health_status.details #=> Array
-    #   resp.container_instances[0].health_status.details[0].type #=> String, one of "CONTAINER_RUNTIME"
+    #   resp.container_instances[0].health_status.details[0].type #=> String, one of "CONTAINER_RUNTIME", "ACCELERATED_COMPUTE", "DAEMON"
     #   resp.container_instances[0].health_status.details[0].status #=> String, one of "OK", "IMPAIRED", "INSUFFICIENT_DATA", "INITIALIZING"
     #   resp.container_instances[0].health_status.details[0].last_updated #=> Time
     #   resp.container_instances[0].health_status.details[0].last_status_change #=> Time
@@ -12514,6 +13974,135 @@ module Aws::ECS
     # @param [Hash] params ({})
     def update_container_instances_state(params = {}, options = {})
       req = build_request(:update_container_instances_state, params)
+      req.send_request(options)
+    end
+
+    # Updates the specified daemon. When you update a daemon, a new
+    # deployment is triggered that progressively rolls out the changes to
+    # the container instances associated with the daemon's capacity
+    # providers. For more information, see [Daemon deployments][1] in the
+    # *Amazon Elastic Container Service Developer Guide*.
+    #
+    # Amazon ECS drains existing container instances and provisions new
+    # instances with the updated daemon. Amazon ECS automatically launches
+    # replacement tasks for your services.
+    #
+    # Updating a daemon triggers a rolling deployment that drains and
+    # replaces container instances. Plan updates during maintenance windows
+    # to minimize impact on running services.
+    #
+    # <note markdown="1"> ECS Managed Daemons is only supported for Amazon ECS Managed Instances
+    # Capacity Providers.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/daemon-deployments.html
+    #
+    # @option params [required, String] :daemon_arn
+    #   The Amazon Resource Name (ARN) of the daemon to update.
+    #
+    # @option params [required, String] :daemon_task_definition_arn
+    #   The Amazon Resource Name (ARN) of the daemon task definition to use
+    #   for the updated daemon.
+    #
+    # @option params [required, Array<String>] :capacity_provider_arns
+    #   The Amazon Resource Names (ARNs) of the capacity providers to
+    #   associate with the daemon.
+    #
+    # @option params [Types::DaemonDeploymentConfiguration] :deployment_configuration
+    #   Optional deployment parameters that control how the daemon rolls out
+    #   updates, including the drain percentage, alarm-based rollback, and
+    #   bake time.
+    #
+    # @option params [String] :propagate_tags
+    #   Specifies whether to propagate the tags from the daemon to the daemon
+    #   tasks. If you don't specify a value, the tags aren't propagated. You
+    #   can only propagate tags to daemon tasks during task creation.
+    #
+    # @option params [Boolean] :enable_ecs_managed_tags
+    #   Specifies whether to turn on Amazon ECS managed tags for the tasks in
+    #   the daemon. For more information, see [Tagging your Amazon ECS
+    #   resources][1] in the *Amazon Elastic Container Service Developer
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-using-tags.html
+    #
+    # @option params [Boolean] :enable_execute_command
+    #   If `true`, the execute command functionality is turned on for all
+    #   tasks in the daemon. If `false`, the execute command functionality is
+    #   turned off.
+    #
+    # @return [Types::UpdateDaemonResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateDaemonResponse#daemon_arn #daemon_arn} => String
+    #   * {Types::UpdateDaemonResponse#status #status} => String
+    #   * {Types::UpdateDaemonResponse#created_at #created_at} => Time
+    #   * {Types::UpdateDaemonResponse#updated_at #updated_at} => Time
+    #   * {Types::UpdateDaemonResponse#deployment_arn #deployment_arn} => String
+    #
+    #
+    # @example Example: To update a daemon
+    #
+    #   # This example updates the my-monitoring-daemon daemon to use a new daemon task definition revision.
+    #
+    #   resp = client.update_daemon({
+    #     capacity_provider_arns: [
+    #       "arn:aws:ecs:us-east-1:123456789012:capacity-provider/my-capacity-provider", 
+    #     ], 
+    #     daemon_arn: "arn:aws:ecs:us-east-1:123456789012:daemon/my-cluster/my-monitoring-daemon", 
+    #     daemon_task_definition_arn: "arn:aws:ecs:us-east-1:123456789012:daemon-task-definition/monitoring-agent:2", 
+    #     deployment_configuration: {
+    #       bake_time_in_minutes: 5, 
+    #       drain_percent: 10.0, 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     created_at: Time.parse("2025-03-15T12:00:00.000Z"), 
+    #     daemon_arn: "arn:aws:ecs:us-east-1:123456789012:daemon/my-cluster/my-monitoring-daemon", 
+    #     deployment_arn: "arn:aws:ecs:us-east-1:123456789012:daemon-deployment/my-cluster/my-monitoring-daemon/xY9zA8bC7dE6fG5h", 
+    #     status: "ACTIVE", 
+    #     updated_at: Time.parse("2025-03-20T15:30:00.000Z"), 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_daemon({
+    #     daemon_arn: "String", # required
+    #     daemon_task_definition_arn: "String", # required
+    #     capacity_provider_arns: ["String"], # required
+    #     deployment_configuration: {
+    #       drain_percent: 1.0,
+    #       alarms: {
+    #         alarm_names: ["String"],
+    #         enable: false,
+    #       },
+    #       bake_time_in_minutes: 1,
+    #     },
+    #     propagate_tags: "DAEMON", # accepts DAEMON, NONE
+    #     enable_ecs_managed_tags: false,
+    #     enable_execute_command: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.daemon_arn #=> String
+    #   resp.status #=> String, one of "ACTIVE", "DELETE_IN_PROGRESS"
+    #   resp.created_at #=> Time
+    #   resp.updated_at #=> Time
+    #   resp.deployment_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/UpdateDaemon AWS API Documentation
+    #
+    # @overload update_daemon(params = {})
+    # @param [Hash] params ({})
+    def update_daemon(params = {}, options = {})
+      req = build_request(:update_daemon, params)
       req.send_request(options)
     end
 
@@ -13002,42 +14591,44 @@ module Aws::ECS
     #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-using-tags.html
     #
     # @option params [Array<Types::LoadBalancer>] :load_balancers
-    #   <note markdown="1"> You must have a service-linked role when you update this property
+    #   <note markdown="1"> You must have a service-linked role when you
+    #   update this property
     #
     #    </note>
     #
-    #   A list of Elastic Load Balancing load balancer objects. It contains
+    #    A list of Elastic Load Balancing load balancer objects. It contains
     #   the load balancer name, the container name, and the container port to
     #   access from the load balancer. The container name is as it appears in
     #   a container definition.
     #
-    #   When you add, update, or remove a load balancer configuration, Amazon
+    #    When you add, update, or remove a load balancer configuration, Amazon
     #   ECS starts new tasks with the updated Elastic Load Balancing
     #   configuration, and then stops the old tasks when the new tasks are
     #   running.
     #
-    #   For services that use rolling updates, you can add, update, or remove
+    #    For services that use rolling updates, you can add, update, or remove
     #   Elastic Load Balancing target groups. You can update from a single
     #   target group to multiple target groups and from multiple target groups
     #   to a single target group.
     #
-    #   For services that use blue/green deployments, you can update Elastic
+    #    For services that use blue/green deployments, you can update Elastic
     #   Load Balancing target groups by using ` CreateDeployment ` through
     #   CodeDeploy. Note that multiple target groups are not supported for
     #   blue/green deployments. For more information see [Register multiple
     #   target groups with a service][1] in the *Amazon Elastic Container
     #   Service Developer Guide*.
     #
-    #   For services that use the external deployment controller, you can add,
+    #    For services that use the external deployment controller, you can
+    #   add,
     #   update, or remove load balancers by using [CreateTaskSet][2]. Note
     #   that multiple target groups are not supported for external
     #   deployments. For more information see [Register multiple target groups
     #   with a service][1] in the *Amazon Elastic Container Service Developer
     #   Guide*.
     #
-    #   You can remove existing `loadBalancers` by passing an empty list.
+    #    You can remove existing `loadBalancers` by passing an empty list.
     #
-    #   This parameter triggers a new service deployment.
+    #    This parameter triggers a new service deployment.
     #
     #
     #
@@ -13056,24 +14647,25 @@ module Aws::ECS
     #   This parameter doesn't trigger a new service deployment.
     #
     # @option params [Array<Types::ServiceRegistry>] :service_registries
-    #   <note markdown="1"> You must have a service-linked role when you update this property.
+    #   <note markdown="1"> You must have a service-linked role when you
+    #   update this property.
     #
     #    For more information about the role see the `CreateService` request
     #   parameter [ `role` ][1].
     #
     #    </note>
     #
-    #   The details for the service discovery registries to assign to this
+    #    The details for the service discovery registries to assign to this
     #   service. For more information, see [Service Discovery][2].
     #
-    #   When you add, update, or remove the service registries configuration,
+    #    When you add, update, or remove the service registries configuration,
     #   Amazon ECS starts new tasks with the updated service registries
     #   configuration, and then stops the old tasks when the new tasks are
     #   running.
     #
-    #   You can remove existing `serviceRegistries` by passing an empty list.
+    #    You can remove existing `serviceRegistries` by passing an empty list.
     #
-    #   This parameter triggers a new service deployment.
+    #    This parameter triggers a new service deployment.
     #
     #
     #
@@ -14038,7 +15630,7 @@ module Aws::ECS
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-ecs'
-      context[:gem_version] = '1.220.0'
+      context[:gem_version] = '1.228.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
@@ -14104,12 +15696,17 @@ module Aws::ECS
     # The following table lists the valid waiter names, the operations they call,
     # and the default `:delay` and `:max_attempts` values.
     #
-    # | waiter_name       | params                     | :delay   | :max_attempts |
-    # | ----------------- | -------------------------- | -------- | ------------- |
-    # | services_inactive | {Client#describe_services} | 15       | 40            |
-    # | services_stable   | {Client#describe_services} | 15       | 40            |
-    # | tasks_running     | {Client#describe_tasks}    | 6        | 100           |
-    # | tasks_stopped     | {Client#describe_tasks}    | 6        | 100           |
+    # | waiter_name                    | params                                   | :delay   | :max_attempts |
+    # | ------------------------------ | ---------------------------------------- | -------- | ------------- |
+    # | daemon_active                  | {Client#describe_daemon}                 | 15       | 8             |
+    # | daemon_deployment_stopped      | {Client#describe_daemon_deployments}     | 15       | 8             |
+    # | daemon_deployment_successful   | {Client#describe_daemon_deployments}     | 15       | 8             |
+    # | daemon_task_definition_active  | {Client#describe_daemon_task_definition} | 15       | 8             |
+    # | daemon_task_definition_deleted | {Client#describe_daemon_task_definition} | 15       | 8             |
+    # | services_inactive              | {Client#describe_services}               | 15       | 40            |
+    # | services_stable                | {Client#describe_services}               | 15       | 40            |
+    # | tasks_running                  | {Client#describe_tasks}                  | 6        | 100           |
+    # | tasks_stopped                  | {Client#describe_tasks}                  | 6        | 100           |
     #
     # @raise [Errors::FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition
@@ -14160,6 +15757,11 @@ module Aws::ECS
 
     def waiters
       {
+        daemon_active: Waiters::DaemonActive,
+        daemon_deployment_stopped: Waiters::DaemonDeploymentStopped,
+        daemon_deployment_successful: Waiters::DaemonDeploymentSuccessful,
+        daemon_task_definition_active: Waiters::DaemonTaskDefinitionActive,
+        daemon_task_definition_deleted: Waiters::DaemonTaskDefinitionDeleted,
         services_inactive: Waiters::ServicesInactive,
         services_stable: Waiters::ServicesStable,
         tasks_running: Waiters::TasksRunning,

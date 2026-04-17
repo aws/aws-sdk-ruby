@@ -20,6 +20,17 @@ module Aws
                 | (Hash[Symbol, untyped]) -> Client::_GetInboundExternalLinkResponseSuccess
       end
 
+      class InboundExternalLinkDeleted
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    gateway_id: ::String,
+                    link_id: ::String
+                  ) -> Client::_GetInboundExternalLinkResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_GetInboundExternalLinkResponseSuccess
+      end
+
       class LinkAccepted
         def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
                       | (?Hash[Symbol, untyped]) -> void
@@ -42,7 +53,29 @@ module Aws
                 | (Hash[Symbol, untyped]) -> Client::_GetLinkResponseSuccess
       end
 
+      class LinkDeleted
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    gateway_id: ::String,
+                    link_id: ::String
+                  ) -> Client::_GetLinkResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_GetLinkResponseSuccess
+      end
+
       class OutboundExternalLinkActive
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    gateway_id: ::String,
+                    link_id: ::String
+                  ) -> Client::_GetOutboundExternalLinkResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_GetOutboundExternalLinkResponseSuccess
+      end
+
+      class OutboundExternalLinkDeleted
         def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
                       | (?Hash[Symbol, untyped]) -> void
 

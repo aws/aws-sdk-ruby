@@ -1,6 +1,51 @@
 Unreleased Changes
 ------------------
 
+1.252.0 (2026-04-16)
+------------------
+
+* Feature - This release updates the Amazon Connect Rules CRUD APIs to support a new EventSourceName - OnEmailAnalysisAvailable. Use this event source to trigger rules when conversational analytics results are available for email contacts.
+
+1.251.0 (2026-04-10)
+------------------
+
+* Feature - Conversational Analytics for Email
+
+1.250.0 (2026-04-07)
+------------------
+
+* Feature - The voice enhancement mode used by the agent can now be viewed on the contact record via the DescribeContact api.
+
+1.249.0 (2026-04-02)
+------------------
+
+* Feature - Include CUSTOMER to evaluation target and participant role. Support Korean, Japanese and Simplified Chinese in evaluation forms.
+
+1.248.0 (2026-03-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.247.0 (2026-03-13)
+------------------
+
+* Feature - Deprecating PredefinedNotificationID field
+
+1.246.0 (2026-03-06)
+------------------
+
+* Feature - Amazon Connect now supports the ability to programmatically configure and run automated tests for contact center experiences for Chat. Integrate testing into CICD pipelines, run multiple tests at scale, and retrieve results via API to automate validation of chat interactions and workflows.
+
+1.245.0 (2026-03-04)
+------------------
+
+* Feature - Added support for configuring additional email addresses on queues in Amazon Connect. Agents can now select an outbound email address and associate additional email addresses for replying to or initiating emails.
+
+1.244.0 (2026-02-27)
+------------------
+
+* Feature - Deprecate EvaluationReviewMetadata's CreatedBy and CreatedTime, add EvaluationReviewMetadata's RequestedBy and RequestedTime
+
 1.243.0 (2026-02-18)
 ------------------
 

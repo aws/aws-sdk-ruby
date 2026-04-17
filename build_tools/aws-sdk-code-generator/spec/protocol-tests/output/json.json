@@ -505,7 +505,7 @@
                 "response": {
                     "status_code": 500,
                     "headers": {
-                        "X-Amzn-Errortype": "aws.protocoltests.restjson#FooError:http://internal.amazon.com/coral/com.amazon.coral.validate/"
+                        "X-Amzn-Errortype": "aws.protocoltests.json#FooError:http://internal.amazon.com/coral/com.amazon.coral.validate/"
                     }
                 }
             },
@@ -560,7 +560,7 @@
                     "headers": {
                         "Content-Type": "application/x-amz-json-1.1"
                     },
-                    "body": "{\n    \"code\": \"aws.protocoltests.restjson#FooError\"\n}"
+                    "body": "{\n    \"code\": \"aws.protocoltests.json#FooError\"\n}"
                 }
             },
             {
@@ -587,7 +587,7 @@
                     "headers": {
                         "Content-Type": "application/x-amz-json-1.1"
                     },
-                    "body": "{\n    \"code\": \"aws.protocoltests.restjson#FooError:http://internal.amazon.com/coral/com.amazon.coral.validate/\"\n}"
+                    "body": "{\n    \"code\": \"aws.protocoltests.json#FooError:http://internal.amazon.com/coral/com.amazon.coral.validate/\"\n}"
                 }
             },
             {
@@ -641,7 +641,7 @@
                     "headers": {
                         "Content-Type": "application/x-amz-json-1.1"
                     },
-                    "body": "{\n    \"__type\": \"aws.protocoltests.restjson#FooError\"\n}"
+                    "body": "{\n    \"__type\": \"aws.protocoltests.json#FooError\"\n}"
                 }
             },
             {
@@ -668,7 +668,7 @@
                     "headers": {
                         "Content-Type": "application/x-amz-json-1.1"
                     },
-                    "body": "{\n    \"__type\": \"aws.protocoltests.restjson#FooError:http://internal.amazon.com/coral/com.amazon.coral.validate/\"\n}"
+                    "body": "{\n    \"__type\": \"aws.protocoltests.json#FooError:http://internal.amazon.com/coral/com.amazon.coral.validate/\"\n}"
                 }
             },
             {
@@ -695,7 +695,7 @@
                     "headers": {
                         "Content-Type": "application/x-amz-json-1.1"
                     },
-                    "body": "{\n    \"__type\": \"aws.protocoltests.restjson#FooError\",\n    \"ErrorDetails\": [\n      {\n          \"__type\": \"com.amazon.internal#ErrorDetails\",\n          \"reason\": \"Some reason\"\n      }\n    ]\n}"
+                    "body": "{\n    \"__type\": \"aws.protocoltests.json#FooError\",\n    \"ErrorDetails\": [\n      {\n          \"__type\": \"com.amazon.internal#ErrorDetails\",\n          \"reason\": \"Some reason\"\n      }\n    ]\n}"
                 }
             }
         ]
@@ -2463,6 +2463,114 @@
                         "Content-Type": "application/x-amz-json-1.1"
                     },
                     "body": "{\n    \"floatValue\": \"-Infinity\",\n    \"doubleValue\": \"-Infinity\"\n}"
+                }
+            }
+        ]
+    },
+    {
+        "description": "Test cases for SparseNullsOperation operation",
+        "metadata": {
+            "apiVersion": "2018-01-01",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "jsonprotocol",
+            "jsonVersion": "1.1",
+            "protocol": "json",
+            "protocols": [
+                "json"
+            ],
+            "serviceFullName": "JsonProtocol",
+            "serviceId": "Json Protocol",
+            "signatureVersion": "v4",
+            "signingName": "JsonProtocol",
+            "targetPrefix": "JsonProtocol",
+            "uid": "json-protocol-2018-01-01"
+        },
+        "shapes": {
+            "SparseNullsOperationInputOutput": {
+                "type": "structure",
+                "members": {
+                    "sparseStringList": {
+                        "shape": "SparseStringList"
+                    },
+                    "sparseStringMap": {
+                        "shape": "SparseStringMap"
+                    }
+                }
+            },
+            "SparseStringList": {
+                "type": "list",
+                "member": {
+                    "shape": "String"
+                },
+                "sparse": true
+            },
+            "SparseStringMap": {
+                "type": "map",
+                "key": {
+                    "shape": "String"
+                },
+                "value": {
+                    "shape": "String"
+                },
+                "sparse": true
+            },
+            "String": {
+                "type": "string"
+            }
+        },
+        "cases": [
+            {
+                "id": "AwsJson11SparseMapsDeserializeNullValues",
+                "description": "Deserializes null values in maps",
+                "given": {
+                    "name": "SparseNullsOperation",
+                    "http": {
+                        "method": "POST",
+                        "requestUri": "/"
+                    },
+                    "output": {
+                        "shape": "SparseNullsOperationInputOutput"
+                    }
+                },
+                "result": {
+                    "sparseStringMap": {
+                        "foo": null
+                    }
+                },
+                "response": {
+                    "status_code": 200,
+                    "headers": {
+                        "Content-Type": "application/x-amz-json-1.1"
+                    },
+                    "body": "{\n    \"sparseStringMap\": {\n        \"foo\": null\n    }\n}"
+                }
+            },
+            {
+                "id": "AwsJson11SparseListsDeserializeNull",
+                "description": "Deserializes null values in lists",
+                "given": {
+                    "name": "SparseNullsOperation",
+                    "http": {
+                        "method": "POST",
+                        "requestUri": "/"
+                    },
+                    "output": {
+                        "shape": "SparseNullsOperationInputOutput"
+                    }
+                },
+                "result": {
+                    "sparseStringList": [
+                        null
+                    ]
+                },
+                "response": {
+                    "status_code": 200,
+                    "headers": {
+                        "Content-Type": "application/x-amz-json-1.1"
+                    },
+                    "body": "{\n    \"sparseStringList\": [\n        null\n    ]\n}"
                 }
             }
         ]

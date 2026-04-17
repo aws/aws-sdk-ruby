@@ -238,7 +238,8 @@ module Aws
                                           endpoint_type: ("STREAMING"),
                                           vpce_id: ::String?
                                         },
-                                      ]
+                                      ],
+                                      ?disable_imdsv1: bool
                                     ) -> _CreateAppBlockBuilderResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAppBlockBuilderResponseSuccess
 
@@ -371,7 +372,8 @@ module Aws
                           ?max_sessions_per_instance: ::Integer,
                           ?root_volume_config: {
                             volume_size_in_gb: ::Integer?
-                          }
+                          },
+                          ?disable_imdsv1: bool
                         ) -> _CreateFleetResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateFleetResponseSuccess
 
@@ -409,7 +411,8 @@ module Aws
                                     volume_size_in_gb: ::Integer?
                                   },
                                   ?softwares_to_install: Array[::String],
-                                  ?softwares_to_uninstall: Array[::String]
+                                  ?softwares_to_uninstall: Array[::String],
+                                  ?disable_imdsv1: bool
                                 ) -> _CreateImageBuilderResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateImageBuilderResponseSuccess
 
@@ -496,6 +499,13 @@ module Aws
                           ?embed_host_domains: Array[::String],
                           ?streaming_experience_settings: {
                             preferred_protocol: ("TCP" | "UDP")?
+                          },
+                          ?content_redirection: {
+                            host_to_client: {
+                              enabled: bool,
+                              allowed_urls: Array[::String]?,
+                              denied_urls: Array[::String]?
+                            }?
                           }
                         ) -> _CreateStackResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateStackResponseSuccess
@@ -1018,6 +1028,15 @@ module Aws
                                                     ) -> _DisassociateSoftwareFromImageBuilderResponseSuccess
                                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateSoftwareFromImageBuilderResponseSuccess
 
+      interface _DrainSessionInstanceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DrainSessionInstanceResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppStream/Client.html#drain_session_instance-instance_method
+      def drain_session_instance: (
+                                    session_id: ::String
+                                  ) -> _DrainSessionInstanceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DrainSessionInstanceResponseSuccess
+
       interface _EnableUserResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::EnableUserResult]
       end
@@ -1225,7 +1244,8 @@ module Aws
                                           vpce_id: ::String?
                                         },
                                       ],
-                                      ?attributes_to_delete: Array[("IAM_ROLE_ARN" | "ACCESS_ENDPOINTS" | "VPC_CONFIGURATION_SECURITY_GROUP_IDS")]
+                                      ?attributes_to_delete: Array[("IAM_ROLE_ARN" | "ACCESS_ENDPOINTS" | "VPC_CONFIGURATION_SECURITY_GROUP_IDS")],
+                                      ?disable_imdsv1: bool
                                     ) -> _UpdateAppBlockBuilderResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAppBlockBuilderResponseSuccess
 
@@ -1330,7 +1350,8 @@ module Aws
                           ?max_sessions_per_instance: ::Integer,
                           ?root_volume_config: {
                             volume_size_in_gb: ::Integer?
-                          }
+                          },
+                          ?disable_imdsv1: bool
                         ) -> _UpdateFleetResponseSuccess
                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateFleetResponseSuccess
 
@@ -1368,7 +1389,7 @@ module Aws
                           ?delete_storage_connectors: bool,
                           ?redirect_url: ::String,
                           ?feedback_url: ::String,
-                          ?attributes_to_delete: Array[("STORAGE_CONNECTORS" | "STORAGE_CONNECTOR_HOMEFOLDERS" | "STORAGE_CONNECTOR_GOOGLE_DRIVE" | "STORAGE_CONNECTOR_ONE_DRIVE" | "REDIRECT_URL" | "FEEDBACK_URL" | "THEME_NAME" | "USER_SETTINGS" | "EMBED_HOST_DOMAINS" | "IAM_ROLE_ARN" | "ACCESS_ENDPOINTS" | "STREAMING_EXPERIENCE_SETTINGS")],
+                          ?attributes_to_delete: Array[("STORAGE_CONNECTORS" | "STORAGE_CONNECTOR_HOMEFOLDERS" | "STORAGE_CONNECTOR_GOOGLE_DRIVE" | "STORAGE_CONNECTOR_ONE_DRIVE" | "REDIRECT_URL" | "FEEDBACK_URL" | "THEME_NAME" | "USER_SETTINGS" | "EMBED_HOST_DOMAINS" | "IAM_ROLE_ARN" | "ACCESS_ENDPOINTS" | "STREAMING_EXPERIENCE_SETTINGS" | "CONTENT_REDIRECTION")],
                           ?user_settings: Array[
                             {
                               action: ("CLIPBOARD_COPY_FROM_LOCAL_DEVICE" | "CLIPBOARD_COPY_TO_LOCAL_DEVICE" | "FILE_UPLOAD" | "FILE_DOWNLOAD" | "PRINTING_TO_LOCAL_DEVICE" | "DOMAIN_PASSWORD_SIGNIN" | "DOMAIN_SMART_CARD_SIGNIN" | "AUTO_TIME_ZONE_REDIRECTION"),
@@ -1389,6 +1410,13 @@ module Aws
                           ?embed_host_domains: Array[::String],
                           ?streaming_experience_settings: {
                             preferred_protocol: ("TCP" | "UDP")?
+                          },
+                          ?content_redirection: {
+                            host_to_client: {
+                              enabled: bool,
+                              allowed_urls: Array[::String]?,
+                              denied_urls: Array[::String]?
+                            }?
                           }
                         ) -> _UpdateStackResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateStackResponseSuccess

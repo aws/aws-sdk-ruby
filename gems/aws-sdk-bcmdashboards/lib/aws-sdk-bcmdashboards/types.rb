@@ -24,6 +24,21 @@ module Aws::BCMDashboards
       include Aws::Structure
     end
 
+    # The request could not be completed due to a conflict with the current
+    # state of the resource. For example, attempting to create a resource
+    # that already exists or is being created.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bcm-dashboards-2025-08-18/ConflictException AWS API Documentation
+    #
+    class ConflictException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Defines the parameters for retrieving Amazon Web Services cost and
     # usage data. Includes specifications for metrics, time periods,
     # granularity, grouping dimensions, and filtering conditions.
@@ -138,6 +153,47 @@ module Aws::BCMDashboards
       include Aws::Structure
     end
 
+    # @!attribute [rw] scheduled_report
+    #   The configuration for the scheduled report, including the dashboard
+    #   to report on, the schedule, and the execution role that the service
+    #   will use to generate the dashboard snapshot.
+    #   @return [Types::ScheduledReportInput]
+    #
+    # @!attribute [rw] resource_tags
+    #   The tags to apply to the scheduled report resource for organization
+    #   and management.
+    #   @return [Array<Types::ResourceTag>]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bcm-dashboards-2025-08-18/CreateScheduledReportRequest AWS API Documentation
+    #
+    class CreateScheduledReportRequest < Struct.new(
+      :scheduled_report,
+      :resource_tags,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   The ARN of the newly created scheduled report.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bcm-dashboards-2025-08-18/CreateScheduledReportResponse AWS API Documentation
+    #
+    class CreateScheduledReportResponse < Struct.new(
+      :arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains basic information about a dashboard, including its ARN, name,
     # type, and timestamps.
     #
@@ -244,6 +300,30 @@ module Aws::BCMDashboards
       include Aws::Structure
     end
 
+    # @!attribute [rw] arn
+    #   The ARN of the scheduled report to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bcm-dashboards-2025-08-18/DeleteScheduledReportRequest AWS API Documentation
+    #
+    class DeleteScheduledReportRequest < Struct.new(
+      :arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   The ARN of the scheduled report that was deleted.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bcm-dashboards-2025-08-18/DeleteScheduledReportResponse AWS API Documentation
+    #
+    class DeleteScheduledReportResponse < Struct.new(
+      :arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Specifies the values and match options for dimension-based filtering
     # in cost and usage queries.
     #
@@ -301,6 +381,51 @@ module Aws::BCMDashboards
       class Graph < DisplayConfig; end
       class Table < DisplayConfig; end
       class Unknown < DisplayConfig; end
+    end
+
+    # @!attribute [rw] arn
+    #   The ARN of the scheduled report to execute.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   When set to `true`, validates the scheduled report configuration
+    #   without triggering an actual execution.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bcm-dashboards-2025-08-18/ExecuteScheduledReportRequest AWS API Documentation
+    #
+    class ExecuteScheduledReportRequest < Struct.new(
+      :arn,
+      :client_token,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] health_status
+    #   The health status of the scheduled report after the execution
+    #   request.
+    #   @return [Types::HealthStatus]
+    #
+    # @!attribute [rw] execution_triggered
+    #   Indicates whether the execution was successfully triggered.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bcm-dashboards-2025-08-18/ExecuteScheduledReportResponse AWS API Documentation
+    #
+    class ExecuteScheduledReportResponse < Struct.new(
+      :health_status,
+      :execution_triggered)
+      SENSITIVE = []
+      include Aws::Structure
     end
 
     # Defines complex filtering conditions using logical operators (`AND`,
@@ -430,6 +555,30 @@ module Aws::BCMDashboards
       include Aws::Structure
     end
 
+    # @!attribute [rw] arn
+    #   The ARN of the scheduled report to retrieve.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bcm-dashboards-2025-08-18/GetScheduledReportRequest AWS API Documentation
+    #
+    class GetScheduledReportRequest < Struct.new(
+      :arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] scheduled_report
+    #   The scheduled report configuration and metadata.
+    #   @return [Types::ScheduledReport]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bcm-dashboards-2025-08-18/GetScheduledReportResponse AWS API Documentation
+    #
+    class GetScheduledReportResponse < Struct.new(
+      :scheduled_report)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Defines the visual representation settings for widget data, including
     # the visualization type, styling options, and display preferences for
     # different metric types.
@@ -461,6 +610,37 @@ module Aws::BCMDashboards
     class GroupDefinition < Struct.new(
       :key,
       :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the health status information for a scheduled report,
+    # including the status code and any reasons for an unhealthy state.
+    #
+    # @!attribute [rw] status_code
+    #   The health status code. `HEALTHY` indicates the scheduled report is
+    #   configured properly and has all required permissions to execute.
+    #   `UNHEALTHY` indicates the scheduled report is unable to deliver the
+    #   notification to the default Amazon EventBridge EventBus in your
+    #   account and your action is needed. The reason for the unhealthy
+    #   state is captured in the health status reasons.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_refreshed_at
+    #   The timestamp when the health status was last refreshed.
+    #   @return [Time]
+    #
+    # @!attribute [rw] status_reasons
+    #   The list of reasons for the current health status. Only present when
+    #   the status is `UNHEALTHY`.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bcm-dashboards-2025-08-18/HealthStatus AWS API Documentation
+    #
+    class HealthStatus < Struct.new(
+      :status_code,
+      :last_refreshed_at,
+      :status_reasons)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -512,6 +692,44 @@ module Aws::BCMDashboards
     #
     class ListDashboardsResponse < Struct.new(
       :dashboards,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   The token for the next page of results. Use the value returned in
+    #   the previous response.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in a single call. Valid
+    #   range is 1 to 100. The default value is 50.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bcm-dashboards-2025-08-18/ListScheduledReportsRequest AWS API Documentation
+    #
+    class ListScheduledReportsRequest < Struct.new(
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] scheduled_reports
+    #   An array of scheduled report summaries, containing basic information
+    #   about each scheduled report.
+    #   @return [Array<Types::ScheduledReportSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. Not returned
+    #   if there are no more results to retrieve.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bcm-dashboards-2025-08-18/ListScheduledReportsResponse AWS API Documentation
+    #
+    class ListScheduledReportsResponse < Struct.new(
+      :scheduled_reports,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -759,8 +977,8 @@ module Aws::BCMDashboards
     #   @return [Types::DateTimeRange]
     #
     # @!attribute [rw] granularity
-    #   The time granularity of the retrieved data: HOURLY, DAILY, or
-    #   MONTHLY.
+    #   The time granularity of the retrieved data: `HOURLY`, `DAILY`, or
+    #   `MONTHLY`.
     #   @return [String]
     #
     # @!attribute [rw] filter
@@ -778,9 +996,241 @@ module Aws::BCMDashboards
       include Aws::Structure
     end
 
-    # The request would exceed service quotas. For example, attempting to
-    # create more than 20 widgets in a dashboard or exceeding the maximum
-    # number of dashboards per account.
+    # Defines the schedule for a scheduled report, including the cron
+    # expression, time zone, active period, and the schedule state.
+    #
+    # @!attribute [rw] schedule_expression
+    #   The schedule expression that specifies when to trigger the scheduled
+    #   report run. This value must be a cron expression consisting of six
+    #   fields separated by white spaces: `cron(minutes hours day_of_month
+    #   month day_of_week year)`.
+    #   @return [String]
+    #
+    # @!attribute [rw] schedule_expression_time_zone
+    #   The time zone for the schedule expression, for example, `UTC`.
+    #   @return [String]
+    #
+    # @!attribute [rw] schedule_period
+    #   The time period during which the schedule is active.
+    #   @return [Types::SchedulePeriod]
+    #
+    # @!attribute [rw] state
+    #   The state of the schedule. `ENABLED` means the scheduled report runs
+    #   according to its schedule expression. `DISABLED` means the scheduled
+    #   report is paused and will not run until re-enabled.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bcm-dashboards-2025-08-18/ScheduleConfig AWS API Documentation
+    #
+    class ScheduleConfig < Struct.new(
+      :schedule_expression,
+      :schedule_expression_time_zone,
+      :schedule_period,
+      :state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Defines the active time period for execution of the scheduled report.
+    #
+    # @!attribute [rw] start_time
+    #   The start time of the schedule period. If not specified, defaults to
+    #   the time of the create or update request. The start time cannot be
+    #   more than 5 minutes before the time of the request.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   The end time of the schedule period. If not specified, defaults to 3
+    #   years from the time of the create or update request. The maximum
+    #   allowed value is 3 years from the current time. Setting an end time
+    #   beyond this limit returns a `ValidationException`.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bcm-dashboards-2025-08-18/SchedulePeriod AWS API Documentation
+    #
+    class SchedulePeriod < Struct.new(
+      :start_time,
+      :end_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the full configuration and metadata of a scheduled report.
+    #
+    # @!attribute [rw] arn
+    #   The ARN of the scheduled report.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the scheduled report.
+    #   @return [String]
+    #
+    # @!attribute [rw] dashboard_arn
+    #   The ARN of the dashboard associated with the scheduled report.
+    #   @return [String]
+    #
+    # @!attribute [rw] scheduled_report_execution_role_arn
+    #   The ARN of the IAM role that the scheduled report uses to execute.
+    #   Amazon Web Services Billing and Cost Management Dashboards will
+    #   assume this IAM role while executing the scheduled report.
+    #   @return [String]
+    #
+    # @!attribute [rw] schedule_config
+    #   The schedule configuration that defines when and how often the
+    #   report is generated.
+    #   @return [Types::ScheduleConfig]
+    #
+    # @!attribute [rw] description
+    #   A description of the scheduled report's purpose or contents.
+    #   @return [String]
+    #
+    # @!attribute [rw] widget_ids
+    #   The list of widget identifiers included in the scheduled report.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] widget_date_range_override
+    #   The date range override applied to widgets in the scheduled report.
+    #   @return [Types::DateTimeRange]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp when the scheduled report was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The timestamp when the scheduled report was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_execution_at
+    #   The timestamp of the most recent execution of the scheduled report.
+    #   @return [Time]
+    #
+    # @!attribute [rw] health_status
+    #   The health status of the scheduled report at last refresh time.
+    #   @return [Types::HealthStatus]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bcm-dashboards-2025-08-18/ScheduledReport AWS API Documentation
+    #
+    class ScheduledReport < Struct.new(
+      :arn,
+      :name,
+      :dashboard_arn,
+      :scheduled_report_execution_role_arn,
+      :schedule_config,
+      :description,
+      :widget_ids,
+      :widget_date_range_override,
+      :created_at,
+      :updated_at,
+      :last_execution_at,
+      :health_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Defines the configuration for creating a new scheduled report,
+    # including the dashboard, schedule, execution role, and optional widget
+    # settings.
+    #
+    # @!attribute [rw] name
+    #   The name of the scheduled report.
+    #   @return [String]
+    #
+    # @!attribute [rw] dashboard_arn
+    #   The ARN of the dashboard to generate the scheduled report from.
+    #   @return [String]
+    #
+    # @!attribute [rw] scheduled_report_execution_role_arn
+    #   The ARN of the IAM role that the scheduled report uses to execute.
+    #   Amazon Web Services Billing and Cost Management Dashboards will
+    #   assume this IAM role while executing the scheduled report.
+    #   @return [String]
+    #
+    # @!attribute [rw] schedule_config
+    #   The schedule configuration that defines when and how often the
+    #   report is generated. If the schedule state is not specified, it
+    #   defaults to `ENABLED`.
+    #   @return [Types::ScheduleConfig]
+    #
+    # @!attribute [rw] description
+    #   A description of the scheduled report's purpose or contents.
+    #   @return [String]
+    #
+    # @!attribute [rw] widget_ids
+    #   The list of widget identifiers to include in the scheduled report.
+    #   If not specified, all widgets in the dashboard are included.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] widget_date_range_override
+    #   The date range override to apply to widgets in the scheduled report.
+    #   @return [Types::DateTimeRange]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bcm-dashboards-2025-08-18/ScheduledReportInput AWS API Documentation
+    #
+    class ScheduledReportInput < Struct.new(
+      :name,
+      :dashboard_arn,
+      :scheduled_report_execution_role_arn,
+      :schedule_config,
+      :description,
+      :widget_ids,
+      :widget_date_range_override)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains summary information for a scheduled report.
+    #
+    # @!attribute [rw] arn
+    #   The ARN of the scheduled report.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the scheduled report.
+    #   @return [String]
+    #
+    # @!attribute [rw] dashboard_arn
+    #   The ARN of the dashboard associated with the scheduled report.
+    #   @return [String]
+    #
+    # @!attribute [rw] schedule_expression
+    #   The schedule expression that defines when the report runs.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The state of the schedule: `ENABLED` or `DISABLED`.
+    #   @return [String]
+    #
+    # @!attribute [rw] health_status
+    #   The health status of the scheduled report as of its last refresh
+    #   time.
+    #   @return [Types::HealthStatus]
+    #
+    # @!attribute [rw] schedule_expression_time_zone
+    #   The time zone for the schedule expression, for example, `UTC`.
+    #   @return [String]
+    #
+    # @!attribute [rw] widget_ids
+    #   The list of widget identifiers included in the scheduled report.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bcm-dashboards-2025-08-18/ScheduledReportSummary AWS API Documentation
+    #
+    class ScheduledReportSummary < Struct.new(
+      :arn,
+      :name,
+      :dashboard_arn,
+      :schedule_expression,
+      :state,
+      :health_status,
+      :schedule_expression_time_zone,
+      :widget_ids)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The request would exceed a service quota. Review the service quotas
+    # for Amazon Web Services Billing and Cost Management Dashboards and
+    # retry your request.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -888,13 +1338,11 @@ module Aws::BCMDashboards
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The new name for the dashboard. If not specified, the existing name
-    #   is retained.
+    #   The new name for the dashboard.
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   The new description for the dashboard. If not specified, the
-    #   existing description is retained.
+    #   The new description for the dashboard.
     #   @return [String]
     #
     # @!attribute [rw] widgets
@@ -925,6 +1373,78 @@ module Aws::BCMDashboards
       include Aws::Structure
     end
 
+    # @!attribute [rw] arn
+    #   The ARN of the scheduled report to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The new name for the scheduled report.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The new description for the scheduled report.
+    #   @return [String]
+    #
+    # @!attribute [rw] dashboard_arn
+    #   The ARN of the dashboard to associate with the scheduled report.
+    #   @return [String]
+    #
+    # @!attribute [rw] scheduled_report_execution_role_arn
+    #   The ARN of the IAM role that the scheduled report uses to execute.
+    #   Amazon Web Services Billing and Cost Management Dashboards will
+    #   assume this IAM role while executing the scheduled report.
+    #   @return [String]
+    #
+    # @!attribute [rw] schedule_config
+    #   The updated schedule configuration for the report.
+    #   @return [Types::ScheduleConfig]
+    #
+    # @!attribute [rw] widget_ids
+    #   The list of widget identifiers to include in the scheduled report.
+    #   If not specified, all widgets in the dashboard are included.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] widget_date_range_override
+    #   The date range override to apply to widgets in the scheduled report.
+    #   @return [Types::DateTimeRange]
+    #
+    # @!attribute [rw] clear_widget_ids
+    #   Set to true to clear existing widgetIds.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] clear_widget_date_range_override
+    #   Set to true to clear existing widgetDateRangeOverride.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bcm-dashboards-2025-08-18/UpdateScheduledReportRequest AWS API Documentation
+    #
+    class UpdateScheduledReportRequest < Struct.new(
+      :arn,
+      :name,
+      :description,
+      :dashboard_arn,
+      :scheduled_report_execution_role_arn,
+      :schedule_config,
+      :widget_ids,
+      :widget_date_range_override,
+      :clear_widget_ids,
+      :clear_widget_date_range_override)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   The ARN of the updated scheduled report.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bcm-dashboards-2025-08-18/UpdateScheduledReportResponse AWS API Documentation
+    #
+    class UpdateScheduledReportResponse < Struct.new(
+      :arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The input parameters do not satisfy the requirements. Check the error
     # message for specific validation details.
     #
@@ -943,6 +1463,10 @@ module Aws::BCMDashboards
     # displays specific cost and usage metrics. Each widget can show data as
     # charts or tables and includes settings for data querying, filtering,
     # and visual presentation.
+    #
+    # @!attribute [rw] id
+    #   The unique identifier for the widget.
+    #   @return [String]
     #
     # @!attribute [rw] title
     #   The title of the widget.
@@ -975,6 +1499,7 @@ module Aws::BCMDashboards
     # @see http://docs.aws.amazon.com/goto/WebAPI/bcm-dashboards-2025-08-18/Widget AWS API Documentation
     #
     class Widget < Struct.new(
+      :id,
       :title,
       :description,
       :width,

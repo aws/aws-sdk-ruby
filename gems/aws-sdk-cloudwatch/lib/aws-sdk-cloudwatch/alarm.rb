@@ -189,6 +189,10 @@ module Aws::CloudWatch
     # If this parameter is omitted, the default behavior of `missing` is
     # used.
     #
+    # <note markdown="1"> This parameter is not applicable to PromQL alarms.
+    #
+    #  </note>
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html#alarms-and-missing-data
@@ -250,6 +254,18 @@ module Aws::CloudWatch
     # @return [Time]
     def state_transitioned_timestamp
       data[:state_transitioned_timestamp]
+    end
+
+    # The evaluation criteria for the alarm.
+    # @return [Types::EvaluationCriteria]
+    def evaluation_criteria
+      data[:evaluation_criteria]
+    end
+
+    # The frequency, in seconds, at which the alarm is evaluated.
+    # @return [Integer]
+    def evaluation_interval
+      data[:evaluation_interval]
     end
 
     # @!endgroup

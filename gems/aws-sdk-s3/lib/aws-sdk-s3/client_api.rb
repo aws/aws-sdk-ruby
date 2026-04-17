@@ -61,6 +61,7 @@ module Aws::S3
     BucketLoggingStatus = Shapes::StructureShape.new(name: 'BucketLoggingStatus')
     BucketLogsPermission = Shapes::StringShape.new(name: 'BucketLogsPermission')
     BucketName = Shapes::StringShape.new(name: 'BucketName')
+    BucketNamespace = Shapes::StringShape.new(name: 'BucketNamespace')
     BucketRegion = Shapes::StringShape.new(name: 'BucketRegion')
     BucketType = Shapes::StringShape.new(name: 'BucketType')
     BucketVersioningStatus = Shapes::StringShape.new(name: 'BucketVersioningStatus')
@@ -1013,6 +1014,7 @@ module Aws::S3
     CreateBucketRequest.add_member(:grant_write_acp, Shapes::ShapeRef.new(shape: GrantWriteACP, location: "header", location_name: "x-amz-grant-write-acp"))
     CreateBucketRequest.add_member(:object_lock_enabled_for_bucket, Shapes::ShapeRef.new(shape: ObjectLockEnabledForBucket, location: "header", location_name: "x-amz-bucket-object-lock-enabled"))
     CreateBucketRequest.add_member(:object_ownership, Shapes::ShapeRef.new(shape: ObjectOwnership, location: "header", location_name: "x-amz-object-ownership"))
+    CreateBucketRequest.add_member(:bucket_namespace, Shapes::ShapeRef.new(shape: BucketNamespace, location: "header", location_name: "x-amz-bucket-namespace"))
     CreateBucketRequest.struct_class = Types::CreateBucketRequest
     CreateBucketRequest[:payload] = :create_bucket_configuration
     CreateBucketRequest[:payload_member] = CreateBucketRequest.member(:create_bucket_configuration)

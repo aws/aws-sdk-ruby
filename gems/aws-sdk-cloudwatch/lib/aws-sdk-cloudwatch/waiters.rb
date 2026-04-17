@@ -67,10 +67,11 @@ module Aws::CloudWatch
   # The following table lists the valid waiter names, the operations they call,
   # and the default `:delay` and `:max_attempts` values.
   #
-  # | waiter_name            | params                   | :delay   | :max_attempts |
-  # | ---------------------- | ------------------------ | -------- | ------------- |
-  # | alarm_exists           | {Client#describe_alarms} | 5        | 40            |
-  # | composite_alarm_exists | {Client#describe_alarms} | 5        | 40            |
+  # | waiter_name            | params                       | :delay   | :max_attempts |
+  # | ---------------------- | ---------------------------- | -------- | ------------- |
+  # | alarm_exists           | {Client#describe_alarms}     | 5        | 40            |
+  # | alarm_mute_rule_exists | {Client#get_alarm_mute_rule} | 5        | 40            |
+  # | composite_alarm_exists | {Client#describe_alarms}     | 5        | 40            |
   #
   module Waiters
 
@@ -101,6 +102,48 @@ module Aws::CloudWatch
 
       # @option (see Client#describe_alarms)
       # @return (see Client#describe_alarms)
+      def wait(params = {})
+        @waiter.wait(client: @client, params: params)
+      end
+
+      # @api private
+      attr_reader :waiter
+
+    end
+
+    class AlarmMuteRuleExists
+
+      # @param [Hash] options
+      # @option options [required, Client] :client
+      # @option options [Integer] :max_attempts (40)
+      # @option options [Integer] :delay (5)
+      # @option options [Proc] :before_attempt
+      # @option options [Proc] :before_wait
+      def initialize(options)
+        @client = options.fetch(:client)
+        @waiter = Aws::Waiters::Waiter.new({
+          max_attempts: 40,
+          delay: 5,
+          poller: Aws::Waiters::Poller.new(
+            operation_name: :get_alarm_mute_rule,
+            acceptors: [
+              {
+                "matcher" => "status",
+                "expected" => 200,
+                "state" => "success"
+              },
+              {
+                "matcher" => "status",
+                "expected" => 404,
+                "state" => "retry"
+              }
+            ]
+          )
+        }.merge(options))
+      end
+
+      # @option (see Client#get_alarm_mute_rule)
+      # @return (see Client#get_alarm_mute_rule)
       def wait(params = {})
         @waiter.wait(client: @client, params: params)
       end

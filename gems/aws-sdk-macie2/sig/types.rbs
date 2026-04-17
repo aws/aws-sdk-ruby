@@ -1547,6 +1547,7 @@ module Aws::Macie2
 
     class S3Destination
       attr_accessor bucket_name: ::String
+      attr_accessor expected_bucket_owner: ::String
       attr_accessor key_prefix: ::String
       attr_accessor kms_key_arn: ::String
       SENSITIVE: []

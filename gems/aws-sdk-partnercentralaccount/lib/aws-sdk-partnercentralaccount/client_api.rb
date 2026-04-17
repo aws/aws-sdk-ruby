@@ -99,8 +99,10 @@ module Aws::PartnerCentralAccount
     JurisdictionCode = Shapes::StringShape.new(name: 'JurisdictionCode')
     LegalName = Shapes::StringShape.new(name: 'LegalName')
     ListConnectionInvitationsRequest = Shapes::StructureShape.new(name: 'ListConnectionInvitationsRequest')
+    ListConnectionInvitationsRequestOtherParticipantIdentifiersList = Shapes::ListShape.new(name: 'ListConnectionInvitationsRequestOtherParticipantIdentifiersList')
     ListConnectionInvitationsResponse = Shapes::StructureShape.new(name: 'ListConnectionInvitationsResponse')
     ListConnectionsRequest = Shapes::StructureShape.new(name: 'ListConnectionsRequest')
+    ListConnectionsRequestOtherParticipantIdentifiersList = Shapes::ListShape.new(name: 'ListConnectionsRequestOtherParticipantIdentifiersList')
     ListConnectionsResponse = Shapes::StructureShape.new(name: 'ListConnectionsResponse')
     ListPartnersRequest = Shapes::StructureShape.new(name: 'ListPartnersRequest')
     ListPartnersResponse = Shapes::StructureShape.new(name: 'ListPartnersResponse')
@@ -227,6 +229,8 @@ module Aws::PartnerCentralAccount
     BusinessVerificationDetails.struct_class = Types::BusinessVerificationDetails
 
     BusinessVerificationResponse.add_member(:business_verification_details, Shapes::ShapeRef.new(shape: BusinessVerificationDetails, required: true, location_name: "BusinessVerificationDetails"))
+    BusinessVerificationResponse.add_member(:completion_url, Shapes::ShapeRef.new(shape: CompletionUrl, location_name: "CompletionUrl"))
+    BusinessVerificationResponse.add_member(:completion_url_expires_at, Shapes::ShapeRef.new(shape: DateTime, location_name: "CompletionUrlExpiresAt"))
     BusinessVerificationResponse.struct_class = Types::BusinessVerificationResponse
 
     CancelConnectionInvitationRequest.add_member(:catalog, Shapes::ShapeRef.new(shape: Catalog, required: true, location_name: "Catalog"))
@@ -514,10 +518,12 @@ module Aws::PartnerCentralAccount
     ListConnectionInvitationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListConnectionInvitationsRequest.add_member(:connection_type, Shapes::ShapeRef.new(shape: ConnectionType, location_name: "ConnectionType"))
     ListConnectionInvitationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
-    ListConnectionInvitationsRequest.add_member(:other_participant_identifiers, Shapes::ShapeRef.new(shape: ParticipantIdentifierList, location_name: "OtherParticipantIdentifiers"))
+    ListConnectionInvitationsRequest.add_member(:other_participant_identifiers, Shapes::ShapeRef.new(shape: ListConnectionInvitationsRequestOtherParticipantIdentifiersList, location_name: "OtherParticipantIdentifiers"))
     ListConnectionInvitationsRequest.add_member(:participant_type, Shapes::ShapeRef.new(shape: ParticipantType, location_name: "ParticipantType"))
     ListConnectionInvitationsRequest.add_member(:status, Shapes::ShapeRef.new(shape: InvitationStatus, location_name: "Status"))
     ListConnectionInvitationsRequest.struct_class = Types::ListConnectionInvitationsRequest
+
+    ListConnectionInvitationsRequestOtherParticipantIdentifiersList.member = Shapes::ShapeRef.new(shape: ParticipantIdentifier)
 
     ListConnectionInvitationsResponse.add_member(:connection_invitation_summaries, Shapes::ShapeRef.new(shape: ConnectionInvitationSummaryList, required: true, location_name: "ConnectionInvitationSummaries"))
     ListConnectionInvitationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
@@ -527,8 +533,10 @@ module Aws::PartnerCentralAccount
     ListConnectionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListConnectionsRequest.add_member(:connection_type, Shapes::ShapeRef.new(shape: ConnectionTypeFilter, location_name: "ConnectionType"))
     ListConnectionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
-    ListConnectionsRequest.add_member(:other_participant_identifiers, Shapes::ShapeRef.new(shape: ParticipantIdentifierList, location_name: "OtherParticipantIdentifiers"))
+    ListConnectionsRequest.add_member(:other_participant_identifiers, Shapes::ShapeRef.new(shape: ListConnectionsRequestOtherParticipantIdentifiersList, location_name: "OtherParticipantIdentifiers"))
     ListConnectionsRequest.struct_class = Types::ListConnectionsRequest
+
+    ListConnectionsRequestOtherParticipantIdentifiersList.member = Shapes::ShapeRef.new(shape: ParticipantIdentifier)
 
     ListConnectionsResponse.add_member(:connection_summaries, Shapes::ShapeRef.new(shape: ConnectionSummaryList, required: true, location_name: "ConnectionSummaries"))
     ListConnectionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
@@ -814,6 +822,7 @@ module Aws::PartnerCentralAccount
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
       end)
 
       api.add_operation(:associate_aws_training_certification_email_domain, Seahorse::Model::Operation.new.tap do |o|
@@ -884,6 +893,7 @@ module Aws::PartnerCentralAccount
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
       end)
 
       api.add_operation(:create_partner, Seahorse::Model::Operation.new.tap do |o|

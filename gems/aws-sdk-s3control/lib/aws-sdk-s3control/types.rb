@@ -3310,6 +3310,12 @@ module Aws::S3Control
     #   a bucket and a prefix.
     #   @return [String]
     #
+    # @!attribute [rw] audit_context
+    #   The context to identify the job or query associated with the
+    #   credential request. This information will be displayed in CloudTrail
+    #   log in your account.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/GetDataAccessRequest AWS API Documentation
     #
     class GetDataAccessRequest < Struct.new(
@@ -3318,7 +3324,8 @@ module Aws::S3Control
       :permission,
       :duration_seconds,
       :privilege,
-      :target_type)
+      :target_type,
+      :audit_context)
       SENSITIVE = []
       include Aws::Structure
     end

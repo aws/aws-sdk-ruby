@@ -1,0 +1,846 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::MarketplaceDiscovery
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class AmazonMachineImageFulfillmentOption
+      attr_accessor fulfillment_option_id: ::String
+      attr_accessor fulfillment_option_name: ::String
+      attr_accessor fulfillment_option_version: ::String
+      attr_accessor fulfillment_option_type: ("AMAZON_MACHINE_IMAGE" | "API" | "CLOUDFORMATION_TEMPLATE" | "CONTAINER" | "HELM" | "EKS_ADD_ON" | "EC2_IMAGE_BUILDER_COMPONENT" | "DATA_EXCHANGE" | "PROFESSIONAL_SERVICES" | "SAAS" | "SAGEMAKER_ALGORITHM" | "SAGEMAKER_MODEL")
+      attr_accessor fulfillment_option_display_name: ::String
+      attr_accessor operating_systems: ::Array[Types::AmazonMachineImageOperatingSystem]
+      attr_accessor recommendation: Types::AmazonMachineImageRecommendation
+      attr_accessor release_notes: ::String
+      attr_accessor usage_instructions: ::String
+      SENSITIVE: []
+    end
+
+    class AmazonMachineImageOperatingSystem
+      attr_accessor operating_system_family_name: ::String
+      attr_accessor operating_system_name: ::String
+      attr_accessor operating_system_version: ::String
+      SENSITIVE: []
+    end
+
+    class AmazonMachineImageRecommendation
+      attr_accessor instance_type: ::String
+      SENSITIVE: []
+    end
+
+    class ApiFulfillmentOption
+      attr_accessor fulfillment_option_id: ::String
+      attr_accessor fulfillment_option_type: ("AMAZON_MACHINE_IMAGE" | "API" | "CLOUDFORMATION_TEMPLATE" | "CONTAINER" | "HELM" | "EKS_ADD_ON" | "EC2_IMAGE_BUILDER_COMPONENT" | "DATA_EXCHANGE" | "PROFESSIONAL_SERVICES" | "SAAS" | "SAGEMAKER_ALGORITHM" | "SAGEMAKER_MODEL")
+      attr_accessor fulfillment_option_display_name: ::String
+      attr_accessor usage_instructions: ::String
+      attr_accessor aws_supported_services: ::Array[Types::AwsSupportedService]
+      SENSITIVE: []
+    end
+
+    class AwsSupportedService
+      attr_accessor supported_service_type: ::String
+      attr_accessor display_name: ::String
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class ByolPricingTerm
+      attr_accessor id: ::String
+      attr_accessor type: ("ByolPricingTerm" | "ConfigurableUpfrontPricingTerm" | "FixedUpfrontPricingTerm" | "UsageBasedPricingTerm" | "FreeTrialPricingTerm" | "LegalTerm" | "PaymentScheduleTerm" | "RecurringPaymentTerm" | "RenewalTerm" | "SupportTerm" | "ValidityTerm" | "VariablePaymentTerm")
+      SENSITIVE: []
+    end
+
+    class Category
+      attr_accessor category_id: ::String
+      attr_accessor display_name: ::String
+      SENSITIVE: []
+    end
+
+    class CloudFormationFulfillmentOption
+      attr_accessor fulfillment_option_id: ::String
+      attr_accessor fulfillment_option_name: ::String
+      attr_accessor fulfillment_option_type: ("AMAZON_MACHINE_IMAGE" | "API" | "CLOUDFORMATION_TEMPLATE" | "CONTAINER" | "HELM" | "EKS_ADD_ON" | "EC2_IMAGE_BUILDER_COMPONENT" | "DATA_EXCHANGE" | "PROFESSIONAL_SERVICES" | "SAAS" | "SAGEMAKER_ALGORITHM" | "SAGEMAKER_MODEL")
+      attr_accessor fulfillment_option_display_name: ::String
+      attr_accessor fulfillment_option_version: ::String
+      attr_accessor release_notes: ::String
+      attr_accessor usage_instructions: ::String
+      SENSITIVE: []
+    end
+
+    class ConfigurableUpfrontPricingTerm
+      attr_accessor id: ::String
+      attr_accessor type: ("ByolPricingTerm" | "ConfigurableUpfrontPricingTerm" | "FixedUpfrontPricingTerm" | "UsageBasedPricingTerm" | "FreeTrialPricingTerm" | "LegalTerm" | "PaymentScheduleTerm" | "RecurringPaymentTerm" | "RenewalTerm" | "SupportTerm" | "ValidityTerm" | "VariablePaymentTerm")
+      attr_accessor currency_code: ::String
+      attr_accessor rate_cards: ::Array[Types::ConfigurableUpfrontRateCardItem]
+      SENSITIVE: []
+    end
+
+    class ConfigurableUpfrontRateCardItem
+      attr_accessor selector: Types::Selector
+      attr_accessor constraints: Types::Constraints
+      attr_accessor rate_card: ::Array[Types::RateCardItem]
+      SENSITIVE: []
+    end
+
+    class Constraints
+      attr_accessor multiple_dimension_selection: ("Allowed" | "Disallowed")
+      attr_accessor quantity_configuration: ("Allowed" | "Disallowed")
+      SENSITIVE: []
+    end
+
+    class ContainerFulfillmentOption
+      attr_accessor fulfillment_option_id: ::String
+      attr_accessor fulfillment_option_name: ::String
+      attr_accessor fulfillment_option_type: ("AMAZON_MACHINE_IMAGE" | "API" | "CLOUDFORMATION_TEMPLATE" | "CONTAINER" | "HELM" | "EKS_ADD_ON" | "EC2_IMAGE_BUILDER_COMPONENT" | "DATA_EXCHANGE" | "PROFESSIONAL_SERVICES" | "SAAS" | "SAGEMAKER_ALGORITHM" | "SAGEMAKER_MODEL")
+      attr_accessor fulfillment_option_display_name: ::String
+      attr_accessor fulfillment_option_version: ::String
+      attr_accessor operating_systems: ::Array[Types::ContainerOperatingSystem]
+      attr_accessor aws_supported_services: ::Array[Types::AwsSupportedService]
+      attr_accessor release_notes: ::String
+      attr_accessor usage_instructions: ::String
+      SENSITIVE: []
+    end
+
+    class ContainerOperatingSystem
+      attr_accessor operating_system_family_name: ::String
+      attr_accessor operating_system_name: ::String
+      SENSITIVE: []
+    end
+
+    class DataArtifact
+      attr_accessor description: ::String
+      attr_accessor resource_arn: ::String
+      attr_accessor resource_type: ::String
+      attr_accessor data_classification: ::String
+      SENSITIVE: []
+    end
+
+    class DataExchangeFulfillmentOption
+      attr_accessor fulfillment_option_id: ::String
+      attr_accessor fulfillment_option_type: ("AMAZON_MACHINE_IMAGE" | "API" | "CLOUDFORMATION_TEMPLATE" | "CONTAINER" | "HELM" | "EKS_ADD_ON" | "EC2_IMAGE_BUILDER_COMPONENT" | "DATA_EXCHANGE" | "PROFESSIONAL_SERVICES" | "SAAS" | "SAGEMAKER_ALGORITHM" | "SAGEMAKER_MODEL")
+      attr_accessor fulfillment_option_display_name: ::String
+      attr_accessor data_artifacts: ::Array[Types::DataArtifact]
+      SENSITIVE: []
+    end
+
+    class DimensionLabel
+      attr_accessor label_type: ("Region" | "SagemakerOption")
+      attr_accessor label_value: ::String
+      attr_accessor display_name: ::String
+      SENSITIVE: []
+    end
+
+    class DocumentItem
+      attr_accessor type: ("CustomEula" | "CustomDsa" | "EnterpriseEula" | "StandardEula" | "StandardDsa")
+      attr_accessor url: ::String
+      attr_accessor version: ::String
+      SENSITIVE: []
+    end
+
+    class Ec2ImageBuilderComponentFulfillmentOption
+      attr_accessor fulfillment_option_id: ::String
+      attr_accessor fulfillment_option_name: ::String
+      attr_accessor fulfillment_option_type: ("AMAZON_MACHINE_IMAGE" | "API" | "CLOUDFORMATION_TEMPLATE" | "CONTAINER" | "HELM" | "EKS_ADD_ON" | "EC2_IMAGE_BUILDER_COMPONENT" | "DATA_EXCHANGE" | "PROFESSIONAL_SERVICES" | "SAAS" | "SAGEMAKER_ALGORITHM" | "SAGEMAKER_MODEL")
+      attr_accessor fulfillment_option_display_name: ::String
+      attr_accessor fulfillment_option_version: ::String
+      attr_accessor operating_systems: ::Array[Types::ContainerOperatingSystem]
+      attr_accessor aws_supported_services: ::Array[Types::AwsSupportedService]
+      attr_accessor release_notes: ::String
+      attr_accessor usage_instructions: ::String
+      SENSITIVE: []
+    end
+
+    class EksAddOnFulfillmentOption
+      attr_accessor fulfillment_option_id: ::String
+      attr_accessor fulfillment_option_name: ::String
+      attr_accessor fulfillment_option_type: ("AMAZON_MACHINE_IMAGE" | "API" | "CLOUDFORMATION_TEMPLATE" | "CONTAINER" | "HELM" | "EKS_ADD_ON" | "EC2_IMAGE_BUILDER_COMPONENT" | "DATA_EXCHANGE" | "PROFESSIONAL_SERVICES" | "SAAS" | "SAGEMAKER_ALGORITHM" | "SAGEMAKER_MODEL")
+      attr_accessor fulfillment_option_display_name: ::String
+      attr_accessor fulfillment_option_version: ::String
+      attr_accessor operating_systems: ::Array[Types::EksAddOnOperatingSystem]
+      attr_accessor release_notes: ::String
+      attr_accessor usage_instructions: ::String
+      attr_accessor aws_supported_services: ::Array[Types::AwsSupportedService]
+      SENSITIVE: []
+    end
+
+    class EksAddOnOperatingSystem
+      attr_accessor operating_system_family_name: ::String
+      attr_accessor operating_system_name: ::String
+      SENSITIVE: []
+    end
+
+    class FixedUpfrontPricingTerm
+      attr_accessor id: ::String
+      attr_accessor type: ("ByolPricingTerm" | "ConfigurableUpfrontPricingTerm" | "FixedUpfrontPricingTerm" | "UsageBasedPricingTerm" | "FreeTrialPricingTerm" | "LegalTerm" | "PaymentScheduleTerm" | "RecurringPaymentTerm" | "RenewalTerm" | "SupportTerm" | "ValidityTerm" | "VariablePaymentTerm")
+      attr_accessor currency_code: ::String
+      attr_accessor duration: ::String
+      attr_accessor price: ::String
+      attr_accessor grants: ::Array[Types::GrantItem]
+      SENSITIVE: []
+    end
+
+    class FreeTrialPricingTerm
+      attr_accessor id: ::String
+      attr_accessor type: ("ByolPricingTerm" | "ConfigurableUpfrontPricingTerm" | "FixedUpfrontPricingTerm" | "UsageBasedPricingTerm" | "FreeTrialPricingTerm" | "LegalTerm" | "PaymentScheduleTerm" | "RecurringPaymentTerm" | "RenewalTerm" | "SupportTerm" | "ValidityTerm" | "VariablePaymentTerm")
+      attr_accessor duration: ::String
+      attr_accessor grants: ::Array[Types::GrantItem]
+      SENSITIVE: []
+    end
+
+    class FulfillmentOption
+      attr_accessor amazon_machine_image_fulfillment_option: Types::AmazonMachineImageFulfillmentOption
+      attr_accessor api_fulfillment_option: Types::ApiFulfillmentOption
+      attr_accessor cloud_formation_fulfillment_option: Types::CloudFormationFulfillmentOption
+      attr_accessor container_fulfillment_option: Types::ContainerFulfillmentOption
+      attr_accessor helm_fulfillment_option: Types::HelmFulfillmentOption
+      attr_accessor eks_add_on_fulfillment_option: Types::EksAddOnFulfillmentOption
+      attr_accessor ec2_image_builder_component_fulfillment_option: Types::Ec2ImageBuilderComponentFulfillmentOption
+      attr_accessor data_exchange_fulfillment_option: Types::DataExchangeFulfillmentOption
+      attr_accessor professional_services_fulfillment_option: Types::ProfessionalServicesFulfillmentOption
+      attr_accessor saas_fulfillment_option: Types::SaasFulfillmentOption
+      attr_accessor sage_maker_algorithm_fulfillment_option: Types::SageMakerAlgorithmFulfillmentOption
+      attr_accessor sage_maker_model_fulfillment_option: Types::SageMakerModelFulfillmentOption
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class AmazonMachineImageFulfillmentOption < FulfillmentOption
+      end
+      class ApiFulfillmentOption < FulfillmentOption
+      end
+      class CloudFormationFulfillmentOption < FulfillmentOption
+      end
+      class ContainerFulfillmentOption < FulfillmentOption
+      end
+      class HelmFulfillmentOption < FulfillmentOption
+      end
+      class EksAddOnFulfillmentOption < FulfillmentOption
+      end
+      class Ec2ImageBuilderComponentFulfillmentOption < FulfillmentOption
+      end
+      class DataExchangeFulfillmentOption < FulfillmentOption
+      end
+      class ProfessionalServicesFulfillmentOption < FulfillmentOption
+      end
+      class SaasFulfillmentOption < FulfillmentOption
+      end
+      class SageMakerAlgorithmFulfillmentOption < FulfillmentOption
+      end
+      class SageMakerModelFulfillmentOption < FulfillmentOption
+      end
+      class Unknown < FulfillmentOption
+      end
+    end
+
+    class FulfillmentOptionSummary
+      attr_accessor fulfillment_option_type: ("AMAZON_MACHINE_IMAGE" | "API" | "CLOUDFORMATION_TEMPLATE" | "CONTAINER" | "HELM" | "EKS_ADD_ON" | "EC2_IMAGE_BUILDER_COMPONENT" | "DATA_EXCHANGE" | "PROFESSIONAL_SERVICES" | "SAAS" | "SAGEMAKER_ALGORITHM" | "SAGEMAKER_MODEL")
+      attr_accessor display_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetListingInput
+      attr_accessor listing_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetListingOutput
+      attr_accessor associated_entities: ::Array[Types::ListingAssociatedEntity]
+      attr_accessor badges: ::Array[Types::ListingBadge]
+      attr_accessor catalog: ::String
+      attr_accessor categories: ::Array[Types::Category]
+      attr_accessor fulfillment_option_summaries: ::Array[Types::FulfillmentOptionSummary]
+      attr_accessor highlights: ::Array[::String]
+      attr_accessor integration_guide: ::String
+      attr_accessor listing_id: ::String
+      attr_accessor listing_name: ::String
+      attr_accessor logo_thumbnail_url: ::String
+      attr_accessor long_description: ::String
+      attr_accessor pricing_models: ::Array[Types::PricingModel]
+      attr_accessor pricing_units: ::Array[Types::PricingUnit]
+      attr_accessor promotional_media: ::Array[Types::PromotionalMedia]
+      attr_accessor publisher: Types::SellerInformation
+      attr_accessor resources: ::Array[Types::Resource]
+      attr_accessor review_summary: Types::ReviewSummary
+      attr_accessor seller_engagements: ::Array[Types::SellerEngagement]
+      attr_accessor short_description: ::String
+      attr_accessor use_cases: ::Array[Types::UseCaseEntry]
+      SENSITIVE: []
+    end
+
+    class GetOfferInput
+      attr_accessor offer_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetOfferOutput
+      attr_accessor offer_id: ::String
+      attr_accessor catalog: ::String
+      attr_accessor offer_name: ::String
+      attr_accessor agreement_proposal_id: ::String
+      attr_accessor expiration_time: ::Time
+      attr_accessor available_from_time: ::Time
+      attr_accessor seller_of_record: Types::SellerInformation
+      attr_accessor replacement_agreement_id: ::String
+      attr_accessor pricing_model: Types::PricingModel
+      attr_accessor badges: ::Array[Types::PurchaseOptionBadge]
+      attr_accessor associated_entities: ::Array[Types::OfferAssociatedEntity]
+      SENSITIVE: []
+    end
+
+    class GetOfferSetInput
+      attr_accessor offer_set_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetOfferSetOutput
+      attr_accessor offer_set_id: ::String
+      attr_accessor catalog: ::String
+      attr_accessor offer_set_name: ::String
+      attr_accessor available_from_time: ::Time
+      attr_accessor expiration_time: ::Time
+      attr_accessor buyer_notes: ::String
+      attr_accessor seller_of_record: Types::SellerInformation
+      attr_accessor badges: ::Array[Types::PurchaseOptionBadge]
+      attr_accessor associated_entities: ::Array[Types::OfferSetAssociatedEntity]
+      SENSITIVE: []
+    end
+
+    class GetOfferTermsInput
+      attr_accessor offer_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetOfferTermsOutput
+      attr_accessor offer_terms: ::Array[Types::OfferTerm]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetProductInput
+      attr_accessor product_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetProductOutput
+      attr_accessor product_id: ::String
+      attr_accessor catalog: ::String
+      attr_accessor product_name: ::String
+      attr_accessor deployed_on_aws: ("DEPLOYED" | "NOT_DEPLOYED" | "NOT_APPLICABLE")
+      attr_accessor short_description: ::String
+      attr_accessor long_description: ::String
+      attr_accessor manufacturer: Types::SellerInformation
+      attr_accessor logo_thumbnail_url: ::String
+      attr_accessor fulfillment_option_summaries: ::Array[Types::FulfillmentOptionSummary]
+      attr_accessor categories: ::Array[Types::Category]
+      attr_accessor highlights: ::Array[::String]
+      attr_accessor promotional_media: ::Array[Types::PromotionalMedia]
+      attr_accessor resources: ::Array[Types::Resource]
+      attr_accessor seller_engagements: ::Array[Types::SellerEngagement]
+      SENSITIVE: []
+    end
+
+    class GrantItem
+      attr_accessor dimension_key: ::String
+      attr_accessor display_name: ::String
+      attr_accessor description: ::String
+      attr_accessor dimension_labels: ::Array[Types::DimensionLabel]
+      attr_accessor unit: ::String
+      attr_accessor max_quantity: ::Integer
+      SENSITIVE: []
+    end
+
+    class HelmFulfillmentOption
+      attr_accessor fulfillment_option_id: ::String
+      attr_accessor fulfillment_option_name: ::String
+      attr_accessor fulfillment_option_type: ("AMAZON_MACHINE_IMAGE" | "API" | "CLOUDFORMATION_TEMPLATE" | "CONTAINER" | "HELM" | "EKS_ADD_ON" | "EC2_IMAGE_BUILDER_COMPONENT" | "DATA_EXCHANGE" | "PROFESSIONAL_SERVICES" | "SAAS" | "SAGEMAKER_ALGORITHM" | "SAGEMAKER_MODEL")
+      attr_accessor fulfillment_option_display_name: ::String
+      attr_accessor fulfillment_option_version: ::String
+      attr_accessor operating_systems: ::Array[Types::HelmOperatingSystem]
+      attr_accessor release_notes: ::String
+      attr_accessor aws_supported_services: ::Array[Types::AwsSupportedService]
+      attr_accessor usage_instructions: ::String
+      SENSITIVE: []
+    end
+
+    class HelmOperatingSystem
+      attr_accessor operating_system_family_name: ::String
+      attr_accessor operating_system_name: ::String
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class LegalTerm
+      attr_accessor id: ::String
+      attr_accessor type: ("ByolPricingTerm" | "ConfigurableUpfrontPricingTerm" | "FixedUpfrontPricingTerm" | "UsageBasedPricingTerm" | "FreeTrialPricingTerm" | "LegalTerm" | "PaymentScheduleTerm" | "RecurringPaymentTerm" | "RenewalTerm" | "SupportTerm" | "ValidityTerm" | "VariablePaymentTerm")
+      attr_accessor documents: ::Array[Types::DocumentItem]
+      SENSITIVE: []
+    end
+
+    class ListFulfillmentOptionsInput
+      attr_accessor product_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListFulfillmentOptionsOutput
+      attr_accessor fulfillment_options: ::Array[Types::FulfillmentOption]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListPurchaseOptionsInput
+      attr_accessor filters: ::Array[Types::PurchaseOptionFilter]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListPurchaseOptionsOutput
+      attr_accessor purchase_options: ::Array[Types::PurchaseOptionSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListingAssociatedEntity
+      attr_accessor product: Types::ProductInformation
+      attr_accessor offer: Types::OfferInformation
+      SENSITIVE: []
+    end
+
+    class ListingBadge
+      attr_accessor display_name: ::String
+      attr_accessor badge_type: ("AWS_FREE_TIER" | "FREE_TRIAL" | "DEPLOYED_ON_AWS" | "QUICK_LAUNCH" | "MULTI_PRODUCT")
+      SENSITIVE: []
+    end
+
+    class ListingFacet
+      attr_accessor value: ::String
+      attr_accessor display_name: ::String
+      attr_accessor parent: ::String
+      attr_accessor count: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListingSummary
+      attr_accessor listing_id: ::String
+      attr_accessor listing_name: ::String
+      attr_accessor publisher: Types::SellerInformation
+      attr_accessor catalog: ::String
+      attr_accessor short_description: ::String
+      attr_accessor logo_thumbnail_url: ::String
+      attr_accessor categories: ::Array[Types::Category]
+      attr_accessor fulfillment_option_summaries: ::Array[Types::FulfillmentOptionSummary]
+      attr_accessor badges: ::Array[Types::ListingBadge]
+      attr_accessor review_summary: Types::ReviewSummary
+      attr_accessor pricing_models: ::Array[Types::PricingModel]
+      attr_accessor pricing_units: ::Array[Types::PricingUnit]
+      attr_accessor associated_entities: ::Array[Types::ListingSummaryAssociatedEntity]
+      SENSITIVE: []
+    end
+
+    class ListingSummaryAssociatedEntity
+      attr_accessor product: Types::ProductInformation
+      SENSITIVE: []
+    end
+
+    class OfferAssociatedEntity
+      attr_accessor product: Types::ProductInformation
+      attr_accessor offer_set: Types::OfferSetInformation
+      SENSITIVE: []
+    end
+
+    class OfferInformation
+      attr_accessor offer_id: ::String
+      attr_accessor offer_name: ::String
+      attr_accessor seller_of_record: Types::SellerInformation
+      SENSITIVE: []
+    end
+
+    class OfferSetAssociatedEntity
+      attr_accessor product: Types::ProductInformation
+      attr_accessor offer: Types::OfferInformation
+      SENSITIVE: []
+    end
+
+    class OfferSetInformation
+      attr_accessor offer_set_id: ::String
+      attr_accessor seller_of_record: Types::SellerInformation
+      SENSITIVE: []
+    end
+
+    class OfferTerm
+      attr_accessor byol_pricing_term: Types::ByolPricingTerm
+      attr_accessor configurable_upfront_pricing_term: Types::ConfigurableUpfrontPricingTerm
+      attr_accessor fixed_upfront_pricing_term: Types::FixedUpfrontPricingTerm
+      attr_accessor free_trial_pricing_term: Types::FreeTrialPricingTerm
+      attr_accessor legal_term: Types::LegalTerm
+      attr_accessor payment_schedule_term: Types::PaymentScheduleTerm
+      attr_accessor recurring_payment_term: Types::RecurringPaymentTerm
+      attr_accessor renewal_term: Types::RenewalTerm
+      attr_accessor support_term: Types::SupportTerm
+      attr_accessor usage_based_pricing_term: Types::UsageBasedPricingTerm
+      attr_accessor validity_term: Types::ValidityTerm
+      attr_accessor variable_payment_term: Types::VariablePaymentTerm
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class ByolPricingTerm < OfferTerm
+      end
+      class ConfigurableUpfrontPricingTerm < OfferTerm
+      end
+      class FixedUpfrontPricingTerm < OfferTerm
+      end
+      class FreeTrialPricingTerm < OfferTerm
+      end
+      class LegalTerm < OfferTerm
+      end
+      class PaymentScheduleTerm < OfferTerm
+      end
+      class RecurringPaymentTerm < OfferTerm
+      end
+      class RenewalTerm < OfferTerm
+      end
+      class SupportTerm < OfferTerm
+      end
+      class UsageBasedPricingTerm < OfferTerm
+      end
+      class ValidityTerm < OfferTerm
+      end
+      class VariablePaymentTerm < OfferTerm
+      end
+      class Unknown < OfferTerm
+      end
+    end
+
+    class PaymentScheduleTerm
+      attr_accessor id: ::String
+      attr_accessor type: ("ByolPricingTerm" | "ConfigurableUpfrontPricingTerm" | "FixedUpfrontPricingTerm" | "UsageBasedPricingTerm" | "FreeTrialPricingTerm" | "LegalTerm" | "PaymentScheduleTerm" | "RecurringPaymentTerm" | "RenewalTerm" | "SupportTerm" | "ValidityTerm" | "VariablePaymentTerm")
+      attr_accessor currency_code: ::String
+      attr_accessor schedule: ::Array[Types::ScheduleItem]
+      SENSITIVE: []
+    end
+
+    class PricingModel
+      attr_accessor pricing_model_type: ("USAGE" | "CONTRACT" | "BYOL" | "FREE")
+      attr_accessor display_name: ::String
+      SENSITIVE: []
+    end
+
+    class PricingUnit
+      attr_accessor pricing_unit_type: ("USERS" | "HOSTS" | "BANDWIDTH" | "DATA" | "TIERS" | "REQUESTS" | "UNITS")
+      attr_accessor display_name: ::String
+      SENSITIVE: []
+    end
+
+    class ProductInformation
+      attr_accessor product_id: ::String
+      attr_accessor product_name: ::String
+      attr_accessor manufacturer: Types::SellerInformation
+      SENSITIVE: []
+    end
+
+    class ProfessionalServicesFulfillmentOption
+      attr_accessor fulfillment_option_id: ::String
+      attr_accessor fulfillment_option_type: ("AMAZON_MACHINE_IMAGE" | "API" | "CLOUDFORMATION_TEMPLATE" | "CONTAINER" | "HELM" | "EKS_ADD_ON" | "EC2_IMAGE_BUILDER_COMPONENT" | "DATA_EXCHANGE" | "PROFESSIONAL_SERVICES" | "SAAS" | "SAGEMAKER_ALGORITHM" | "SAGEMAKER_MODEL")
+      attr_accessor fulfillment_option_display_name: ::String
+      SENSITIVE: []
+    end
+
+    class PromotionalEmbeddedImage
+      attr_accessor title: ::String
+      attr_accessor url: ::String
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class PromotionalEmbeddedVideo
+      attr_accessor title: ::String
+      attr_accessor url: ::String
+      attr_accessor preview: ::String
+      attr_accessor thumbnail: ::String
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class PromotionalMedia
+      attr_accessor embedded_image: Types::PromotionalEmbeddedImage
+      attr_accessor embedded_video: Types::PromotionalEmbeddedVideo
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class EmbeddedImage < PromotionalMedia
+      end
+      class EmbeddedVideo < PromotionalMedia
+      end
+      class Unknown < PromotionalMedia
+      end
+    end
+
+    class PurchaseOptionAssociatedEntity
+      attr_accessor product: Types::ProductInformation
+      attr_accessor offer: Types::OfferInformation
+      attr_accessor offer_set: Types::OfferSetInformation
+      SENSITIVE: []
+    end
+
+    class PurchaseOptionBadge
+      attr_accessor display_name: ::String
+      attr_accessor badge_type: ("PRIVATE_PRICING" | "FUTURE_DATED" | "REPLACEMENT_OFFER")
+      SENSITIVE: []
+    end
+
+    class PurchaseOptionFilter
+      attr_accessor filter_type: ("PRODUCT_ID" | "SELLER_OF_RECORD_PROFILE_ID" | "PURCHASE_OPTION_TYPE" | "VISIBILITY_SCOPE" | "AVAILABILITY_STATUS")
+      attr_accessor filter_values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class PurchaseOptionSummary
+      attr_accessor purchase_option_id: ::String
+      attr_accessor catalog: ::String
+      attr_accessor purchase_option_type: ("OFFER" | "OFFERSET")
+      attr_accessor purchase_option_name: ::String
+      attr_accessor available_from_time: ::Time
+      attr_accessor expiration_time: ::Time
+      attr_accessor seller_of_record: Types::SellerInformation
+      attr_accessor badges: ::Array[Types::PurchaseOptionBadge]
+      attr_accessor associated_entities: ::Array[Types::PurchaseOptionAssociatedEntity]
+      SENSITIVE: []
+    end
+
+    class RateCardItem
+      attr_accessor dimension_key: ::String
+      attr_accessor display_name: ::String
+      attr_accessor description: ::String
+      attr_accessor dimension_labels: ::Array[Types::DimensionLabel]
+      attr_accessor unit: ::String
+      attr_accessor price: ::String
+      SENSITIVE: []
+    end
+
+    class RecurringPaymentTerm
+      attr_accessor id: ::String
+      attr_accessor type: ("ByolPricingTerm" | "ConfigurableUpfrontPricingTerm" | "FixedUpfrontPricingTerm" | "UsageBasedPricingTerm" | "FreeTrialPricingTerm" | "LegalTerm" | "PaymentScheduleTerm" | "RecurringPaymentTerm" | "RenewalTerm" | "SupportTerm" | "ValidityTerm" | "VariablePaymentTerm")
+      attr_accessor currency_code: ::String
+      attr_accessor billing_period: ("Monthly")
+      attr_accessor price: ::String
+      SENSITIVE: []
+    end
+
+    class RenewalTerm
+      attr_accessor id: ::String
+      attr_accessor type: ("ByolPricingTerm" | "ConfigurableUpfrontPricingTerm" | "FixedUpfrontPricingTerm" | "UsageBasedPricingTerm" | "FreeTrialPricingTerm" | "LegalTerm" | "PaymentScheduleTerm" | "RecurringPaymentTerm" | "RenewalTerm" | "SupportTerm" | "ValidityTerm" | "VariablePaymentTerm")
+      SENSITIVE: []
+    end
+
+    class Resource
+      attr_accessor resource_type: ("MANUFACTURER_SUPPORT" | "MANUFACTURER_INSTRUCTIONS")
+      attr_accessor content_type: ("EMAIL" | "PHONE_NUMBER" | "LINK" | "OTHER")
+      attr_accessor value: ::String
+      attr_accessor display_name: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ReviewSourceSummary
+      attr_accessor source_name: ::String
+      attr_accessor source_id: ("AWS_MARKETPLACE")
+      attr_accessor source_url: ::String
+      attr_accessor average_rating: ::String
+      attr_accessor total_reviews: ::Integer
+      SENSITIVE: []
+    end
+
+    class ReviewSummary
+      attr_accessor review_source_summaries: ::Array[Types::ReviewSourceSummary]
+      SENSITIVE: []
+    end
+
+    class SaasFulfillmentOption
+      attr_accessor fulfillment_option_id: ::String
+      attr_accessor fulfillment_option_type: ("AMAZON_MACHINE_IMAGE" | "API" | "CLOUDFORMATION_TEMPLATE" | "CONTAINER" | "HELM" | "EKS_ADD_ON" | "EC2_IMAGE_BUILDER_COMPONENT" | "DATA_EXCHANGE" | "PROFESSIONAL_SERVICES" | "SAAS" | "SAGEMAKER_ALGORITHM" | "SAGEMAKER_MODEL")
+      attr_accessor fulfillment_option_display_name: ::String
+      attr_accessor fulfillment_url: ::String
+      attr_accessor usage_instructions: ::String
+      SENSITIVE: []
+    end
+
+    class SageMakerAlgorithmFulfillmentOption
+      attr_accessor fulfillment_option_id: ::String
+      attr_accessor fulfillment_option_type: ("AMAZON_MACHINE_IMAGE" | "API" | "CLOUDFORMATION_TEMPLATE" | "CONTAINER" | "HELM" | "EKS_ADD_ON" | "EC2_IMAGE_BUILDER_COMPONENT" | "DATA_EXCHANGE" | "PROFESSIONAL_SERVICES" | "SAAS" | "SAGEMAKER_ALGORITHM" | "SAGEMAKER_MODEL")
+      attr_accessor fulfillment_option_display_name: ::String
+      attr_accessor fulfillment_option_version: ::String
+      attr_accessor release_notes: ::String
+      attr_accessor usage_instructions: ::String
+      attr_accessor recommendation: Types::SageMakerAlgorithmRecommendation
+      SENSITIVE: []
+    end
+
+    class SageMakerAlgorithmRecommendation
+      attr_accessor recommended_batch_transform_instance_type: ::String
+      attr_accessor recommended_realtime_inference_instance_type: ::String
+      attr_accessor recommended_training_instance_type: ::String
+      SENSITIVE: []
+    end
+
+    class SageMakerModelFulfillmentOption
+      attr_accessor fulfillment_option_id: ::String
+      attr_accessor fulfillment_option_type: ("AMAZON_MACHINE_IMAGE" | "API" | "CLOUDFORMATION_TEMPLATE" | "CONTAINER" | "HELM" | "EKS_ADD_ON" | "EC2_IMAGE_BUILDER_COMPONENT" | "DATA_EXCHANGE" | "PROFESSIONAL_SERVICES" | "SAAS" | "SAGEMAKER_ALGORITHM" | "SAGEMAKER_MODEL")
+      attr_accessor fulfillment_option_display_name: ::String
+      attr_accessor fulfillment_option_version: ::String
+      attr_accessor release_notes: ::String
+      attr_accessor usage_instructions: ::String
+      attr_accessor recommendation: Types::SageMakerModelRecommendation
+      SENSITIVE: []
+    end
+
+    class SageMakerModelRecommendation
+      attr_accessor recommended_batch_transform_instance_type: ::String
+      attr_accessor recommended_realtime_inference_instance_type: ::String
+      SENSITIVE: []
+    end
+
+    class ScheduleItem
+      attr_accessor charge_date: ::Time
+      attr_accessor charge_amount: ::String
+      SENSITIVE: []
+    end
+
+    class SearchFacetsInput
+      attr_accessor search_text: ::String
+      attr_accessor filters: ::Array[Types::SearchFilter]
+      attr_accessor facet_types: ::Array[("AVERAGE_CUSTOMER_RATING" | "CATEGORY" | "PUBLISHER" | "FULFILLMENT_OPTION_TYPE" | "PRICING_MODEL" | "PRICING_UNIT" | "DEPLOYED_ON_AWS" | "NUMBER_OF_PRODUCTS")]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class SearchFacetsOutput
+      attr_accessor total_results: ::Integer
+      attr_accessor listing_facets: ::Hash[("AVERAGE_CUSTOMER_RATING" | "CATEGORY" | "PUBLISHER" | "FULFILLMENT_OPTION_TYPE" | "PRICING_MODEL" | "PRICING_UNIT" | "DEPLOYED_ON_AWS" | "NUMBER_OF_PRODUCTS"), ::Array[Types::ListingFacet]]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class SearchFilter
+      attr_accessor filter_type: ("MIN_AVERAGE_CUSTOMER_RATING" | "MAX_AVERAGE_CUSTOMER_RATING" | "CATEGORY" | "PUBLISHER" | "FULFILLMENT_OPTION_TYPE" | "PRICING_MODEL" | "PRICING_UNIT" | "DEPLOYED_ON_AWS" | "NUMBER_OF_PRODUCTS")
+      attr_accessor filter_values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class SearchListingsInput
+      attr_accessor search_text: ::String
+      attr_accessor filters: ::Array[Types::SearchFilter]
+      attr_accessor max_results: ::Integer
+      attr_accessor sort_by: ("RELEVANCE" | "AVERAGE_CUSTOMER_RATING")
+      attr_accessor sort_order: ("DESCENDING" | "ASCENDING")
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class SearchListingsOutput
+      attr_accessor total_results: ::Integer
+      attr_accessor listing_summaries: ::Array[Types::ListingSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class Selector
+      attr_accessor type: ("Duration")
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class SellerEngagement
+      attr_accessor engagement_type: ("REQUEST_FOR_PRIVATE_OFFER" | "REQUEST_FOR_DEMO")
+      attr_accessor content_type: ("LINK")
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class SellerInformation
+      attr_accessor seller_profile_id: ::String
+      attr_accessor display_name: ::String
+      SENSITIVE: []
+    end
+
+    class SupportTerm
+      attr_accessor id: ::String
+      attr_accessor type: ("ByolPricingTerm" | "ConfigurableUpfrontPricingTerm" | "FixedUpfrontPricingTerm" | "UsageBasedPricingTerm" | "FreeTrialPricingTerm" | "LegalTerm" | "PaymentScheduleTerm" | "RecurringPaymentTerm" | "RenewalTerm" | "SupportTerm" | "ValidityTerm" | "VariablePaymentTerm")
+      attr_accessor refund_policy: ::String
+      SENSITIVE: []
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UsageBasedPricingTerm
+      attr_accessor id: ::String
+      attr_accessor type: ("ByolPricingTerm" | "ConfigurableUpfrontPricingTerm" | "FixedUpfrontPricingTerm" | "UsageBasedPricingTerm" | "FreeTrialPricingTerm" | "LegalTerm" | "PaymentScheduleTerm" | "RecurringPaymentTerm" | "RenewalTerm" | "SupportTerm" | "ValidityTerm" | "VariablePaymentTerm")
+      attr_accessor currency_code: ::String
+      attr_accessor rate_cards: ::Array[Types::UsageBasedRateCardItem]
+      SENSITIVE: []
+    end
+
+    class UsageBasedRateCardItem
+      attr_accessor rate_card: ::Array[Types::RateCardItem]
+      SENSITIVE: []
+    end
+
+    class UseCase
+      attr_accessor description: ::String
+      attr_accessor display_name: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class UseCaseEntry
+      attr_accessor use_case: Types::UseCase
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      attr_accessor reason: ("INVALID_PAGINATION_TOKEN" | "MALFORMED_REQUEST_PARAMETERS" | "PAGINATION_LIMIT_EXCEEDED")
+      SENSITIVE: []
+    end
+
+    class ValidityTerm
+      attr_accessor id: ::String
+      attr_accessor type: ("ByolPricingTerm" | "ConfigurableUpfrontPricingTerm" | "FixedUpfrontPricingTerm" | "UsageBasedPricingTerm" | "FreeTrialPricingTerm" | "LegalTerm" | "PaymentScheduleTerm" | "RecurringPaymentTerm" | "RenewalTerm" | "SupportTerm" | "ValidityTerm" | "VariablePaymentTerm")
+      attr_accessor agreement_duration: ::String
+      attr_accessor agreement_end_date: ::Time
+      attr_accessor agreement_start_date: ::Time
+      SENSITIVE: []
+    end
+
+    class VariablePaymentTerm
+      attr_accessor id: ::String
+      attr_accessor type: ("ByolPricingTerm" | "ConfigurableUpfrontPricingTerm" | "FixedUpfrontPricingTerm" | "UsageBasedPricingTerm" | "FreeTrialPricingTerm" | "LegalTerm" | "PaymentScheduleTerm" | "RecurringPaymentTerm" | "RenewalTerm" | "SupportTerm" | "ValidityTerm" | "VariablePaymentTerm")
+      attr_accessor currency_code: ::String
+      attr_accessor max_total_charge_amount: ::String
+      SENSITIVE: []
+    end
+  end
+end

@@ -947,38 +947,6 @@
                     },
                     "body": "oWtkZW5zZVNldE1hcKJheIBheYJhYWFi"
                 }
-            },
-            {
-                "id": "RpcV2CborDeserializesDenseSetMapAndSkipsNull",
-                "description": "Clients SHOULD tolerate seeing a null value in a dense map, and they SHOULD\ndrop the null key-value pair.",
-                "given": {
-                    "name": "RpcV2CborDenseMaps",
-                    "http": {
-                        "method": "POST",
-                        "requestUri": "/"
-                    },
-                    "output": {
-                        "shape": "RpcV2CborDenseMapsInputOutput"
-                    },
-                    "documentation": "<p>The example tests basic map serialization.</p>"
-                },
-                "result": {
-                    "denseSetMap": {
-                        "x": [],
-                        "y": [
-                            "a",
-                            "b"
-                        ]
-                    }
-                },
-                "response": {
-                    "status_code": 200,
-                    "headers": {
-                        "smithy-protocol": "rpc-v2-cbor",
-                        "Content-Type": "application/cbor"
-                    },
-                    "body": "oWtkZW5zZVNldE1hcKNheIBheYJhYWFiYXr2"
-                }
             }
         ]
     },
@@ -1312,6 +1280,286 @@
         ]
     },
     {
+        "description": "Test cases for RpcV2CborSparseMaps operation",
+        "metadata": {
+            "apiVersion": "2020-07-14",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "rpcv2protocol",
+            "protocol": "smithy-rpc-v2-cbor",
+            "protocols": [
+                "smithy-rpc-v2-cbor"
+            ],
+            "serviceFullName": "RpcV2Protocol",
+            "serviceId": "RpcV2Protocol",
+            "signatureVersion": "v4",
+            "signingName": "RpcV2Protocol",
+            "targetPrefix": "RpcV2Protocol",
+            "uid": "rpcv2protocol-2020-07-14"
+        },
+        "shapes": {
+            "Boolean": {
+                "type": "boolean",
+                "box": true
+            },
+            "GreetingStruct": {
+                "type": "structure",
+                "members": {
+                    "hi": {
+                        "shape": "String"
+                    }
+                }
+            },
+            "Integer": {
+                "type": "integer",
+                "box": true
+            },
+            "RpcV2CborSparseMapsInputOutput": {
+                "type": "structure",
+                "members": {
+                    "sparseStructMap": {
+                        "shape": "SparseStructMap"
+                    },
+                    "sparseNumberMap": {
+                        "shape": "SparseNumberMap"
+                    },
+                    "sparseBooleanMap": {
+                        "shape": "SparseBooleanMap"
+                    },
+                    "sparseStringMap": {
+                        "shape": "SparseStringMap"
+                    },
+                    "sparseSetMap": {
+                        "shape": "SparseSetMap"
+                    }
+                }
+            },
+            "SparseBooleanMap": {
+                "type": "map",
+                "key": {
+                    "shape": "String"
+                },
+                "value": {
+                    "shape": "Boolean"
+                },
+                "sparse": true
+            },
+            "SparseNumberMap": {
+                "type": "map",
+                "key": {
+                    "shape": "String"
+                },
+                "value": {
+                    "shape": "Integer"
+                },
+                "sparse": true
+            },
+            "SparseSetMap": {
+                "type": "map",
+                "key": {
+                    "shape": "String"
+                },
+                "value": {
+                    "shape": "StringSet"
+                },
+                "sparse": true
+            },
+            "SparseStringMap": {
+                "type": "map",
+                "key": {
+                    "shape": "String"
+                },
+                "value": {
+                    "shape": "String"
+                },
+                "sparse": true
+            },
+            "SparseStructMap": {
+                "type": "map",
+                "key": {
+                    "shape": "String"
+                },
+                "value": {
+                    "shape": "GreetingStruct"
+                },
+                "sparse": true
+            },
+            "String": {
+                "type": "string"
+            },
+            "StringSet": {
+                "type": "list",
+                "member": {
+                    "shape": "String"
+                }
+            }
+        },
+        "cases": [
+            {
+                "id": "RpcV2CborSparseJsonMaps",
+                "description": "Deserializes sparse maps",
+                "given": {
+                    "name": "RpcV2CborSparseMaps",
+                    "http": {
+                        "method": "POST",
+                        "requestUri": "/"
+                    },
+                    "output": {
+                        "shape": "RpcV2CborSparseMapsInputOutput"
+                    }
+                },
+                "result": {
+                    "sparseStructMap": {
+                        "foo": {
+                            "hi": "there"
+                        },
+                        "baz": {
+                            "hi": "bye"
+                        }
+                    }
+                },
+                "response": {
+                    "status_code": 200,
+                    "headers": {
+                        "smithy-protocol": "rpc-v2-cbor",
+                        "Content-Type": "application/cbor"
+                    },
+                    "body": "v29zcGFyc2VTdHJ1Y3RNYXC/Y2Zvb79iaGlldGhlcmX/Y2Jher9iaGljYnll////"
+                }
+            },
+            {
+                "id": "RpcV2CborDeserializesNullMapValues",
+                "description": "Deserializes null map values",
+                "given": {
+                    "name": "RpcV2CborSparseMaps",
+                    "http": {
+                        "method": "POST",
+                        "requestUri": "/"
+                    },
+                    "output": {
+                        "shape": "RpcV2CborSparseMapsInputOutput"
+                    }
+                },
+                "result": {
+                    "sparseBooleanMap": {
+                        "x": null
+                    },
+                    "sparseNumberMap": {
+                        "x": null
+                    },
+                    "sparseStringMap": {
+                        "x": null
+                    },
+                    "sparseStructMap": {
+                        "x": null
+                    }
+                },
+                "response": {
+                    "status_code": 200,
+                    "headers": {
+                        "smithy-protocol": "rpc-v2-cbor",
+                        "Content-Type": "application/cbor"
+                    },
+                    "body": "v3BzcGFyc2VCb29sZWFuTWFwv2F49v9vc3BhcnNlTnVtYmVyTWFwv2F49v9vc3BhcnNlU3RyaW5nTWFwv2F49v9vc3BhcnNlU3RydWN0TWFwv2F49v//"
+                }
+            },
+            {
+                "id": "RpcV2CborDeserializesSparseSetMap",
+                "description": "A response that contains a sparse map of sets",
+                "given": {
+                    "name": "RpcV2CborSparseMaps",
+                    "http": {
+                        "method": "POST",
+                        "requestUri": "/"
+                    },
+                    "output": {
+                        "shape": "RpcV2CborSparseMapsInputOutput"
+                    }
+                },
+                "result": {
+                    "sparseSetMap": {
+                        "x": [],
+                        "y": [
+                            "a",
+                            "b"
+                        ]
+                    }
+                },
+                "response": {
+                    "status_code": 200,
+                    "headers": {
+                        "smithy-protocol": "rpc-v2-cbor",
+                        "Content-Type": "application/cbor"
+                    },
+                    "body": "v2xzcGFyc2VTZXRNYXC/YXmfYWFhYv9heJ////8="
+                }
+            },
+            {
+                "id": "RpcV2CborDeserializesSparseSetMapAndRetainsNull",
+                "description": "A response that contains a sparse map of sets with a null",
+                "given": {
+                    "name": "RpcV2CborSparseMaps",
+                    "http": {
+                        "method": "POST",
+                        "requestUri": "/"
+                    },
+                    "output": {
+                        "shape": "RpcV2CborSparseMapsInputOutput"
+                    }
+                },
+                "result": {
+                    "sparseSetMap": {
+                        "x": [],
+                        "y": [
+                            "a",
+                            "b"
+                        ],
+                        "z": null
+                    }
+                },
+                "response": {
+                    "status_code": 200,
+                    "headers": {
+                        "smithy-protocol": "rpc-v2-cbor",
+                        "Content-Type": "application/cbor"
+                    },
+                    "body": "v2xzcGFyc2VTZXRNYXC/YXif/2F5n2FhYWL/YXr2//8="
+                }
+            },
+            {
+                "id": "RpcV2CborDeserializesZeroValuesInSparseMaps",
+                "description": "Ensure that 0 and false are sent over the wire in all maps and lists",
+                "given": {
+                    "name": "RpcV2CborSparseMaps",
+                    "http": {
+                        "method": "POST",
+                        "requestUri": "/"
+                    },
+                    "output": {
+                        "shape": "RpcV2CborSparseMapsInputOutput"
+                    }
+                },
+                "result": {
+                    "sparseNumberMap": {
+                        "x": 0
+                    },
+                    "sparseBooleanMap": {
+                        "x": false
+                    }
+                },
+                "response": {
+                    "status_code": 200,
+                    "headers": {
+                        "smithy-protocol": "rpc-v2-cbor",
+                        "Content-Type": "application/cbor"
+                    },
+                    "body": "v29zcGFyc2VOdW1iZXJNYXC/YXgA/3BzcGFyc2VCb29sZWFuTWFwv2F49P//"
+                }
+            }
+        ]
+    },
+    {
         "description": "Test cases for SimpleScalarProperties operation",
         "metadata": {
             "apiVersion": "2020-07-14",
@@ -1622,6 +1870,115 @@
                         "Content-Type": "application/cbor"
                     },
                     "body": "v2lieXRlVmFsdWUFa2RvdWJsZVZhbHVl+z/+OVgQYk3TcWZhbHNlQm9vbGVhblZhbHVl9GpmbG9hdFZhbHVl+kD0AABrZXh0cmFPYmplY3S/c2luZGVmaW5pdGVMZW5ndGhNYXC/a3dpdGhBbkFycmF5nwECA///cWRlZmluaXRlTGVuZ3RoTWFwo3J3aXRoQURlZmluaXRlQXJyYXmDAQIDeB1hbmRTb21lSW5kZWZpbml0ZUxlbmd0aFN0cmluZ3gfdGhhdCBoYXMsIGJlZW4gY2h1bmtlZCBvbiBjb21tYWxub3JtYWxTdHJpbmdjZm9vanNob3J0VmFsdWUZJw9uc29tZU90aGVyRmllbGR2dGhpcyBzaG91bGQgYmUgc2tpcHBlZP9saW50ZWdlclZhbHVlGQEAaWxvbmdWYWx1ZRkmkWpzaG9ydFZhbHVlGSaqa3N0cmluZ1ZhbHVlZnNpbXBsZXB0cnVlQm9vbGVhblZhbHVl9WlibG9iVmFsdWVDZm9v/w=="
+                }
+            }
+        ]
+    },
+    {
+        "description": "Test cases for SparseNullsOperation operation",
+        "metadata": {
+            "apiVersion": "2020-07-14",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "rpcv2protocol",
+            "protocol": "smithy-rpc-v2-cbor",
+            "protocols": [
+                "smithy-rpc-v2-cbor"
+            ],
+            "serviceFullName": "RpcV2Protocol",
+            "serviceId": "RpcV2Protocol",
+            "signatureVersion": "v4",
+            "signingName": "RpcV2Protocol",
+            "targetPrefix": "RpcV2Protocol",
+            "uid": "rpcv2protocol-2020-07-14"
+        },
+        "shapes": {
+            "SparseNullsOperationInputOutput": {
+                "type": "structure",
+                "members": {
+                    "sparseStringList": {
+                        "shape": "SparseStringList"
+                    },
+                    "sparseStringMap": {
+                        "shape": "SparseStringMap"
+                    }
+                }
+            },
+            "SparseStringList": {
+                "type": "list",
+                "member": {
+                    "shape": "String"
+                },
+                "sparse": true
+            },
+            "SparseStringMap": {
+                "type": "map",
+                "key": {
+                    "shape": "String"
+                },
+                "value": {
+                    "shape": "String"
+                },
+                "sparse": true
+            },
+            "String": {
+                "type": "string"
+            }
+        },
+        "cases": [
+            {
+                "id": "RpcV2CborSparseMapsDeserializeNullValues",
+                "description": "Deserializes null values in maps",
+                "given": {
+                    "name": "SparseNullsOperation",
+                    "http": {
+                        "method": "POST",
+                        "requestUri": "/"
+                    },
+                    "output": {
+                        "shape": "SparseNullsOperationInputOutput"
+                    }
+                },
+                "result": {
+                    "sparseStringMap": {
+                        "foo": null
+                    }
+                },
+                "response": {
+                    "status_code": 200,
+                    "headers": {
+                        "smithy-protocol": "rpc-v2-cbor",
+                        "Content-Type": "application/cbor"
+                    },
+                    "body": "v29zcGFyc2VTdHJpbmdNYXC/Y2Zvb/b//w=="
+                }
+            },
+            {
+                "id": "RpcV2CborSparseListsDeserializeNull",
+                "description": "Deserializes null values in lists",
+                "given": {
+                    "name": "SparseNullsOperation",
+                    "http": {
+                        "method": "POST",
+                        "requestUri": "/"
+                    },
+                    "output": {
+                        "shape": "SparseNullsOperationInputOutput"
+                    }
+                },
+                "result": {
+                    "sparseStringList": [
+                        null
+                    ]
+                },
+                "response": {
+                    "status_code": 200,
+                    "headers": {
+                        "smithy-protocol": "rpc-v2-cbor",
+                        "Content-Type": "application/cbor"
+                    },
+                    "body": "v3BzcGFyc2VTdHJpbmdMaXN0n/b//w=="
                 }
             }
         ]

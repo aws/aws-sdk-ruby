@@ -143,6 +143,7 @@ module Aws::ApplicationSignals
     MetricName = Shapes::StringShape.new(name: 'MetricName')
     MetricReference = Shapes::StructureShape.new(name: 'MetricReference')
     MetricReferences = Shapes::ListShape.new(name: 'MetricReferences')
+    MetricSource = Shapes::StructureShape.new(name: 'MetricSource')
     MetricSourceType = Shapes::StringShape.new(name: 'MetricSourceType')
     MetricSourceTypes = Shapes::ListShape.new(name: 'MetricSourceTypes')
     MetricStat = Shapes::StructureShape.new(name: 'MetricStat')
@@ -520,9 +521,10 @@ module Aws::ApplicationSignals
     ListServiceLevelObjectivesInput.add_member(:dependency_config, Shapes::ShapeRef.new(shape: DependencyConfig, location_name: "DependencyConfig"))
     ListServiceLevelObjectivesInput.add_member(:max_results, Shapes::ShapeRef.new(shape: ListServiceLevelObjectivesMaxResults, location: "querystring", location_name: "MaxResults"))
     ListServiceLevelObjectivesInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "NextToken"))
+    ListServiceLevelObjectivesInput.add_member(:metric_source_types, Shapes::ShapeRef.new(shape: MetricSourceTypes, location_name: "MetricSourceTypes"))
     ListServiceLevelObjectivesInput.add_member(:include_linked_accounts, Shapes::ShapeRef.new(shape: Boolean, location: "querystring", location_name: "IncludeLinkedAccounts"))
     ListServiceLevelObjectivesInput.add_member(:slo_owner_aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, location: "querystring", location_name: "SloOwnerAwsAccountId"))
-    ListServiceLevelObjectivesInput.add_member(:metric_source_types, Shapes::ShapeRef.new(shape: MetricSourceTypes, location_name: "MetricSourceTypes"))
+    ListServiceLevelObjectivesInput.add_member(:metric_source, Shapes::ShapeRef.new(shape: MetricSource, location_name: "MetricSource"))
     ListServiceLevelObjectivesInput.struct_class = Types::ListServiceLevelObjectivesInput
 
     ListServiceLevelObjectivesOutput.add_member(:slo_summaries, Shapes::ShapeRef.new(shape: ServiceLevelObjectiveSummaries, location_name: "SloSummaries"))
@@ -609,6 +611,10 @@ module Aws::ApplicationSignals
 
     MetricReferences.member = Shapes::ShapeRef.new(shape: MetricReference)
 
+    MetricSource.add_member(:metric_source_key_attributes, Shapes::ShapeRef.new(shape: Attributes, required: true, location_name: "MetricSourceKeyAttributes"))
+    MetricSource.add_member(:metric_source_attributes, Shapes::ShapeRef.new(shape: Attributes, location_name: "MetricSourceAttributes"))
+    MetricSource.struct_class = Types::MetricSource
+
     MetricSourceTypes.member = Shapes::ShapeRef.new(shape: MetricSourceType)
 
     MetricStat.add_member(:metric, Shapes::ShapeRef.new(shape: Metric, required: true, location_name: "Metric"))
@@ -661,6 +667,7 @@ module Aws::ApplicationSignals
     RequestBasedServiceLevelIndicatorMetric.add_member(:total_request_count_metric, Shapes::ShapeRef.new(shape: MetricDataQueries, required: true, location_name: "TotalRequestCountMetric"))
     RequestBasedServiceLevelIndicatorMetric.add_member(:monitored_request_count_metric, Shapes::ShapeRef.new(shape: MonitoredRequestCountMetricDataQueries, required: true, location_name: "MonitoredRequestCountMetric"))
     RequestBasedServiceLevelIndicatorMetric.add_member(:dependency_config, Shapes::ShapeRef.new(shape: DependencyConfig, location_name: "DependencyConfig"))
+    RequestBasedServiceLevelIndicatorMetric.add_member(:metric_source, Shapes::ShapeRef.new(shape: MetricSource, location_name: "MetricSource"))
     RequestBasedServiceLevelIndicatorMetric.struct_class = Types::RequestBasedServiceLevelIndicatorMetric
 
     RequestBasedServiceLevelIndicatorMetricConfig.add_member(:key_attributes, Shapes::ShapeRef.new(shape: Attributes, location_name: "KeyAttributes"))
@@ -669,6 +676,8 @@ module Aws::ApplicationSignals
     RequestBasedServiceLevelIndicatorMetricConfig.add_member(:total_request_count_metric, Shapes::ShapeRef.new(shape: MetricDataQueries, location_name: "TotalRequestCountMetric"))
     RequestBasedServiceLevelIndicatorMetricConfig.add_member(:monitored_request_count_metric, Shapes::ShapeRef.new(shape: MonitoredRequestCountMetricDataQueries, location_name: "MonitoredRequestCountMetric"))
     RequestBasedServiceLevelIndicatorMetricConfig.add_member(:dependency_config, Shapes::ShapeRef.new(shape: DependencyConfig, location_name: "DependencyConfig"))
+    RequestBasedServiceLevelIndicatorMetricConfig.add_member(:metric_source, Shapes::ShapeRef.new(shape: MetricSource, location_name: "MetricSource"))
+    RequestBasedServiceLevelIndicatorMetricConfig.add_member(:metric_name, Shapes::ShapeRef.new(shape: MetricName, location_name: "MetricName"))
     RequestBasedServiceLevelIndicatorMetricConfig.struct_class = Types::RequestBasedServiceLevelIndicatorMetricConfig
 
     ResourceNotFoundException.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, required: true, location_name: "ResourceType"))
@@ -732,6 +741,7 @@ module Aws::ApplicationSignals
     ServiceLevelIndicatorMetric.add_member(:metric_type, Shapes::ShapeRef.new(shape: ServiceLevelIndicatorMetricType, location_name: "MetricType"))
     ServiceLevelIndicatorMetric.add_member(:metric_data_queries, Shapes::ShapeRef.new(shape: MetricDataQueries, required: true, location_name: "MetricDataQueries"))
     ServiceLevelIndicatorMetric.add_member(:dependency_config, Shapes::ShapeRef.new(shape: DependencyConfig, location_name: "DependencyConfig"))
+    ServiceLevelIndicatorMetric.add_member(:metric_source, Shapes::ShapeRef.new(shape: MetricSource, location_name: "MetricSource"))
     ServiceLevelIndicatorMetric.struct_class = Types::ServiceLevelIndicatorMetric
 
     ServiceLevelIndicatorMetricConfig.add_member(:key_attributes, Shapes::ShapeRef.new(shape: Attributes, location_name: "KeyAttributes"))
@@ -740,6 +750,7 @@ module Aws::ApplicationSignals
     ServiceLevelIndicatorMetricConfig.add_member(:metric_name, Shapes::ShapeRef.new(shape: MetricName, location_name: "MetricName"))
     ServiceLevelIndicatorMetricConfig.add_member(:statistic, Shapes::ShapeRef.new(shape: ServiceLevelIndicatorStatistic, location_name: "Statistic"))
     ServiceLevelIndicatorMetricConfig.add_member(:period_seconds, Shapes::ShapeRef.new(shape: SLIPeriodSeconds, location_name: "PeriodSeconds"))
+    ServiceLevelIndicatorMetricConfig.add_member(:metric_source, Shapes::ShapeRef.new(shape: MetricSource, location_name: "MetricSource"))
     ServiceLevelIndicatorMetricConfig.add_member(:metric_data_queries, Shapes::ShapeRef.new(shape: MetricDataQueries, location_name: "MetricDataQueries"))
     ServiceLevelIndicatorMetricConfig.add_member(:dependency_config, Shapes::ShapeRef.new(shape: DependencyConfig, location_name: "DependencyConfig"))
     ServiceLevelIndicatorMetricConfig.struct_class = Types::ServiceLevelIndicatorMetricConfig
@@ -797,6 +808,7 @@ module Aws::ApplicationSignals
     ServiceLevelObjectiveSummary.add_member(:created_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedTime"))
     ServiceLevelObjectiveSummary.add_member(:evaluation_type, Shapes::ShapeRef.new(shape: EvaluationType, location_name: "EvaluationType"))
     ServiceLevelObjectiveSummary.add_member(:metric_source_type, Shapes::ShapeRef.new(shape: MetricSourceType, location_name: "MetricSourceType"))
+    ServiceLevelObjectiveSummary.add_member(:metric_source, Shapes::ShapeRef.new(shape: MetricSource, location_name: "MetricSource"))
     ServiceLevelObjectiveSummary.struct_class = Types::ServiceLevelObjectiveSummary
 
     ServiceOperation.add_member(:name, Shapes::ShapeRef.new(shape: OperationName, required: true, location_name: "Name"))

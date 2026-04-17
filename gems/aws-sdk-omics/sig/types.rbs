@@ -122,12 +122,44 @@ module Aws::Omics
       SENSITIVE: []
     end
 
+    class BatchListItem
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor status: ("PENDING" | "SUBMITTING" | "INPROGRESS" | "STOPPING" | "CANCELLED" | "FAILED" | "PROCESSED" | "RUNS_DELETING" | "RUNS_DELETED")
+      attr_accessor created_at: ::Time
+      attr_accessor total_runs: ::Integer
+      attr_accessor workflow_id: ::String
+      SENSITIVE: []
+    end
+
+    class BatchRunSettings
+      attr_accessor inline_settings: ::Array[Types::InlineSetting]
+      attr_accessor s3_uri_settings: ::String
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class InlineSettings < BatchRunSettings
+      end
+      class S3UriSettings < BatchRunSettings
+      end
+      class Unknown < BatchRunSettings
+      end
+    end
+
     class CancelAnnotationImportRequest
       attr_accessor job_id: ::String
       SENSITIVE: []
     end
 
     class CancelAnnotationImportResponse < Aws::EmptyStructure
+    end
+
+    class CancelRunBatchRequest
+      attr_accessor batch_id: ::String
+      SENSITIVE: []
+    end
+
+    class CancelRunBatchResponse < Aws::EmptyStructure
     end
 
     class CancelRunRequest
@@ -159,6 +191,22 @@ module Aws::Omics
       attr_accessor part_number: ::Integer
       attr_accessor part_source: ("SOURCE1" | "SOURCE2")
       attr_accessor checksum: ::String
+      SENSITIVE: []
+    end
+
+    class ConfigurationDetails
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      attr_accessor uuid: ::String
+      SENSITIVE: []
+    end
+
+    class ConfigurationListItem
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor status: ("CREATING" | "ACTIVE" | "UPDATING" | "DELETING" | "DELETED" | "FAILED")
+      attr_accessor creation_time: ::Time
       SENSITIVE: []
     end
 
@@ -214,6 +262,27 @@ module Aws::Omics
       attr_accessor name: ::String
       attr_accessor status: ("CREATING" | "UPDATING" | "DELETING" | "ACTIVE" | "FAILED")
       attr_accessor creation_time: ::Time
+      SENSITIVE: []
+    end
+
+    class CreateConfigurationRequest
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor run_configurations: Types::RunConfigurations
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor request_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateConfigurationResponse
+      attr_accessor arn: ::String
+      attr_accessor uuid: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor run_configurations: Types::RunConfigurationsResponse
+      attr_accessor status: ("CREATING" | "ACTIVE" | "UPDATING" | "DELETING" | "DELETED" | "FAILED")
+      attr_accessor creation_time: ::Time
+      attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
     end
 
@@ -431,6 +500,28 @@ module Aws::Omics
       SENSITIVE: []
     end
 
+    class DefaultRunSetting
+      attr_accessor workflow_id: ::String
+      attr_accessor workflow_type: ("PRIVATE" | "READY2RUN")
+      attr_accessor role_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor cache_id: ::String
+      attr_accessor cache_behavior: ("CACHE_ON_FAILURE" | "CACHE_ALWAYS")
+      attr_accessor run_group_id: ::String
+      attr_accessor priority: ::Integer
+      attr_accessor parameters: untyped
+      attr_accessor storage_capacity: ::Integer
+      attr_accessor output_uri: ::String
+      attr_accessor log_level: ("OFF" | "FATAL" | "ERROR" | "ALL")
+      attr_accessor run_tags: ::Hash[::String, ::String]
+      attr_accessor retention_mode: ("RETAIN" | "REMOVE")
+      attr_accessor storage_type: ("STATIC" | "DYNAMIC")
+      attr_accessor workflow_owner_id: ::String
+      attr_accessor output_bucket_owner_id: ::String
+      attr_accessor workflow_version_name: ::String
+      SENSITIVE: []
+    end
+
     class DefinitionRepository
       attr_accessor connection_arn: ::String
       attr_accessor full_repository_id: ::String
@@ -471,6 +562,16 @@ module Aws::Omics
       SENSITIVE: []
     end
 
+    class DeleteBatchRequest
+      attr_accessor batch_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteConfigurationRequest
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
     class DeleteReferenceRequest
       attr_accessor id: ::String
       attr_accessor reference_store_id: ::String
@@ -486,6 +587,14 @@ module Aws::Omics
     end
 
     class DeleteReferenceStoreResponse < Aws::EmptyStructure
+    end
+
+    class DeleteRunBatchRequest
+      attr_accessor batch_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteRunBatchResponse < Aws::EmptyStructure
     end
 
     class DeleteRunCacheRequest
@@ -682,6 +791,47 @@ module Aws::Omics
       attr_accessor version_options: Types::VersionOptions
       attr_accessor status_message: ::String
       attr_accessor version_size_bytes: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetBatchRequest
+      attr_accessor batch_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetBatchResponse
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor uuid: ::String
+      attr_accessor name: ::String
+      attr_accessor status: ("PENDING" | "SUBMITTING" | "INPROGRESS" | "STOPPING" | "CANCELLED" | "FAILED" | "PROCESSED" | "RUNS_DELETING" | "RUNS_DELETED")
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor total_runs: ::Integer
+      attr_accessor default_run_setting: Types::DefaultRunSetting
+      attr_accessor submission_summary: Types::SubmissionSummary
+      attr_accessor run_summary: Types::RunSummary
+      attr_accessor creation_time: ::Time
+      attr_accessor submitted_time: ::Time
+      attr_accessor processed_time: ::Time
+      attr_accessor failed_time: ::Time
+      attr_accessor failure_reason: ::String
+      SENSITIVE: []
+    end
+
+    class GetConfigurationRequest
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class GetConfigurationResponse
+      attr_accessor arn: ::String
+      attr_accessor uuid: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor run_configurations: Types::RunConfigurationsResponse
+      attr_accessor status: ("CREATING" | "ACTIVE" | "UPDATING" | "DELETING" | "DELETED" | "FAILED")
+      attr_accessor creation_time: ::Time
+      attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
     end
 
@@ -903,6 +1053,7 @@ module Aws::Omics
       attr_accessor role_arn: ::String
       attr_accessor name: ::String
       attr_accessor run_group_id: ::String
+      attr_accessor batch_id: ::String
       attr_accessor priority: ::Integer
       attr_accessor definition: ::String
       attr_accessor digest: ::String
@@ -927,6 +1078,9 @@ module Aws::Omics
       attr_accessor workflow_owner_id: ::String
       attr_accessor workflow_version_name: ::String
       attr_accessor workflow_uuid: ::String
+      attr_accessor networking_mode: ("RESTRICTED" | "VPC")
+      attr_accessor configuration: Types::ConfigurationDetails
+      attr_accessor vpc_config: Types::VpcConfigResponse
       SENSITIVE: []
     end
 
@@ -1189,6 +1343,17 @@ module Aws::Omics
       SENSITIVE: []
     end
 
+    class InlineSetting
+      attr_accessor run_setting_id: ::String
+      attr_accessor name: ::String
+      attr_accessor output_uri: ::String
+      attr_accessor priority: ::Integer
+      attr_accessor parameters: untyped
+      attr_accessor output_bucket_owner_id: ::String
+      attr_accessor run_tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
     class InternalServerException
       attr_accessor message: ::String
       SENSITIVE: []
@@ -1248,6 +1413,33 @@ module Aws::Omics
 
     class ListAnnotationStoresResponse
       attr_accessor annotation_stores: ::Array[Types::AnnotationStoreItem]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListBatchRequest
+      attr_accessor max_items: ::Integer
+      attr_accessor starting_token: ::String
+      attr_accessor status: ("PENDING" | "SUBMITTING" | "INPROGRESS" | "STOPPING" | "CANCELLED" | "FAILED" | "PROCESSED" | "RUNS_DELETING" | "RUNS_DELETED")
+      attr_accessor name: ::String
+      attr_accessor run_group_id: ::String
+      SENSITIVE: []
+    end
+
+    class ListBatchResponse
+      attr_accessor items: ::Array[Types::BatchListItem]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListConfigurationsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor starting_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListConfigurationsResponse
+      attr_accessor items: ::Array[Types::ConfigurationListItem]
       attr_accessor next_token: ::String
       SENSITIVE: []
     end
@@ -1417,9 +1609,26 @@ module Aws::Omics
       SENSITIVE: []
     end
 
+    class ListRunsInBatchRequest
+      attr_accessor batch_id: ::String
+      attr_accessor max_items: ::Integer
+      attr_accessor starting_token: ::String
+      attr_accessor submission_status: ("SUCCESS" | "FAILED" | "CANCEL_SUCCESS" | "CANCEL_FAILED" | "DELETE_SUCCESS" | "DELETE_FAILED")
+      attr_accessor run_setting_id: ::String
+      attr_accessor run_id: ::String
+      SENSITIVE: []
+    end
+
+    class ListRunsInBatchResponse
+      attr_accessor runs: ::Array[Types::RunBatchListItem]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class ListRunsRequest
       attr_accessor name: ::String
       attr_accessor run_group_id: ::String
+      attr_accessor batch_id: ::String
       attr_accessor starting_token: ::String
       attr_accessor max_results: ::Integer
       attr_accessor status: ("PENDING" | "STARTING" | "RUNNING" | "STOPPING" | "COMPLETED" | "DELETED" | "CANCELLED" | "FAILED")
@@ -1728,6 +1937,17 @@ module Aws::Omics
       SENSITIVE: []
     end
 
+    class RunBatchListItem
+      attr_accessor run_setting_id: ::String
+      attr_accessor run_id: ::String
+      attr_accessor run_internal_uuid: ::String
+      attr_accessor run_arn: ::String
+      attr_accessor submission_status: ("SUCCESS" | "FAILED" | "CANCEL_SUCCESS" | "CANCEL_FAILED" | "DELETE_SUCCESS" | "DELETE_FAILED")
+      attr_accessor submission_failure_reason: ::String
+      attr_accessor submission_failure_message: ::String
+      SENSITIVE: []
+    end
+
     class RunCacheListItem
       attr_accessor arn: ::String
       attr_accessor cache_behavior: ("CACHE_ON_FAILURE" | "CACHE_ALWAYS")
@@ -1736,6 +1956,16 @@ module Aws::Omics
       attr_accessor id: ::String
       attr_accessor name: ::String
       attr_accessor status: ("ACTIVE" | "DELETED" | "FAILED")
+      SENSITIVE: []
+    end
+
+    class RunConfigurations
+      attr_accessor vpc_config: Types::VpcConfig
+      SENSITIVE: []
+    end
+
+    class RunConfigurationsResponse
+      attr_accessor vpc_config: Types::VpcConfigResponse
       SENSITIVE: []
     end
 
@@ -1756,6 +1986,7 @@ module Aws::Omics
       attr_accessor id: ::String
       attr_accessor status: ("PENDING" | "STARTING" | "RUNNING" | "STOPPING" | "COMPLETED" | "DELETED" | "CANCELLED" | "FAILED")
       attr_accessor workflow_id: ::String
+      attr_accessor batch_id: ::String
       attr_accessor name: ::String
       attr_accessor priority: ::Integer
       attr_accessor storage_capacity: ::Integer
@@ -1770,6 +2001,18 @@ module Aws::Omics
     class RunLogLocation
       attr_accessor engine_log_stream: ::String
       attr_accessor run_log_stream: ::String
+      SENSITIVE: []
+    end
+
+    class RunSummary
+      attr_accessor pending_run_count: ::Integer
+      attr_accessor starting_run_count: ::Integer
+      attr_accessor running_run_count: ::Integer
+      attr_accessor stopping_run_count: ::Integer
+      attr_accessor completed_run_count: ::Integer
+      attr_accessor deleted_run_count: ::Integer
+      attr_accessor failed_run_count: ::Integer
+      attr_accessor cancelled_run_count: ::Integer
       SENSITIVE: []
     end
 
@@ -1964,6 +2207,24 @@ module Aws::Omics
       SENSITIVE: []
     end
 
+    class StartRunBatchRequest
+      attr_accessor batch_name: ::String
+      attr_accessor request_id: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor default_run_setting: Types::DefaultRunSetting
+      attr_accessor batch_run_settings: Types::BatchRunSettings
+      SENSITIVE: []
+    end
+
+    class StartRunBatchResponse
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor status: ("PENDING" | "SUBMITTING" | "INPROGRESS" | "STOPPING" | "CANCELLED" | "FAILED" | "PROCESSED" | "RUNS_DELETING" | "RUNS_DELETED")
+      attr_accessor uuid: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
     class StartRunRequest
       attr_accessor workflow_id: ::String
       attr_accessor workflow_type: ("PRIVATE" | "READY2RUN")
@@ -1984,6 +2245,8 @@ module Aws::Omics
       attr_accessor storage_type: ("STATIC" | "DYNAMIC")
       attr_accessor workflow_owner_id: ::String
       attr_accessor workflow_version_name: ::String
+      attr_accessor networking_mode: ("RESTRICTED" | "VPC")
+      attr_accessor configuration_name: ::String
       SENSITIVE: []
     end
 
@@ -1994,6 +2257,8 @@ module Aws::Omics
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor uuid: ::String
       attr_accessor run_output_uri: ::String
+      attr_accessor configuration: Types::ConfigurationDetails
+      attr_accessor networking_mode: ::String
       SENSITIVE: []
     end
 
@@ -2020,6 +2285,17 @@ module Aws::Omics
       end
       class Unknown < StoreOptions
       end
+    end
+
+    class SubmissionSummary
+      attr_accessor successful_start_submission_count: ::Integer
+      attr_accessor failed_start_submission_count: ::Integer
+      attr_accessor pending_start_submission_count: ::Integer
+      attr_accessor successful_cancel_submission_count: ::Integer
+      attr_accessor failed_cancel_submission_count: ::Integer
+      attr_accessor successful_delete_submission_count: ::Integer
+      attr_accessor failed_delete_submission_count: ::Integer
+      SENSITIVE: []
     end
 
     class TagResourceRequest
@@ -2281,6 +2557,19 @@ module Aws::Omics
       end
       class Unknown < VersionOptions
       end
+    end
+
+    class VpcConfig
+      attr_accessor security_group_ids: ::Array[::String]
+      attr_accessor subnet_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class VpcConfigResponse
+      attr_accessor security_group_ids: ::Array[::String]
+      attr_accessor subnet_ids: ::Array[::String]
+      attr_accessor vpc_id: ::String
+      SENSITIVE: []
     end
 
     class WorkflowListItem

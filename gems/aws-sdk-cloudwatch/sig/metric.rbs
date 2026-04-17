@@ -72,10 +72,10 @@ module Aws
                        ],
                        ?period: ::Integer,
                        ?unit: ("Seconds" | "Microseconds" | "Milliseconds" | "Bytes" | "Kilobytes" | "Megabytes" | "Gigabytes" | "Terabytes" | "Bits" | "Kilobits" | "Megabits" | "Gigabits" | "Terabits" | "Percent" | "Count" | "Bytes/Second" | "Kilobytes/Second" | "Megabytes/Second" | "Gigabytes/Second" | "Terabytes/Second" | "Bits/Second" | "Kilobits/Second" | "Megabits/Second" | "Gigabits/Second" | "Terabits/Second" | "Count/Second" | "None"),
-                       evaluation_periods: ::Integer,
+                       ?evaluation_periods: ::Integer,
                        ?datapoints_to_alarm: ::Integer,
                        ?threshold: ::Float,
-                       comparison_operator: ("GreaterThanOrEqualToThreshold" | "GreaterThanThreshold" | "LessThanThreshold" | "LessThanOrEqualToThreshold" | "LessThanLowerOrGreaterThanUpperThreshold" | "LessThanLowerThreshold" | "GreaterThanUpperThreshold"),
+                       ?comparison_operator: ("GreaterThanOrEqualToThreshold" | "GreaterThanThreshold" | "LessThanThreshold" | "LessThanOrEqualToThreshold" | "LessThanLowerOrGreaterThanUpperThreshold" | "LessThanLowerThreshold" | "GreaterThanUpperThreshold"),
                        ?treat_missing_data: ::String,
                        ?evaluate_low_sample_count_percentile: ::String,
                        ?metrics: Array[
@@ -109,7 +109,15 @@ module Aws
                            value: ::String
                          },
                        ],
-                       ?threshold_metric_id: ::String
+                       ?threshold_metric_id: ::String,
+                       ?evaluation_criteria: {
+                         prom_ql_criteria: {
+                           query: ::String,
+                           pending_period: ::Integer?,
+                           recovery_period: ::Integer?
+                         }?
+                       },
+                       ?evaluation_interval: ::Integer
                      ) -> Alarm
                    | (?Hash[Symbol, untyped]) -> Alarm
 

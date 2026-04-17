@@ -67,6 +67,8 @@ module Aws::PartnerCentralAccount
 
     class BusinessVerificationResponse
       attr_accessor business_verification_details: Types::BusinessVerificationDetails
+      attr_accessor completion_url: ::String
+      attr_accessor completion_url_expires_at: ::Time
       SENSITIVE: []
     end
 
@@ -615,7 +617,7 @@ module Aws::PartnerCentralAccount
 
     class ServiceQuotaExceededException
       attr_accessor message: ::String
-      attr_accessor reason: ("LIMIT_EXCEEDED_NUMBER_OF_EMAIL" | "LIMIT_EXCEEDED_NUMBER_OF_DOMAIN")
+      attr_accessor reason: ("LIMIT_EXCEEDED_NUMBER_OF_EMAIL" | "LIMIT_EXCEEDED_NUMBER_OF_DOMAIN" | "LIMIT_EXCEEDED_NUMBER_OF_CONNECTION_INVITATION_PER_DAY" | "LIMIT_EXCEEDED_NUMBER_OF_ACTIVE_CONNECTION" | "LIMIT_EXCEEDED_NUMBER_OF_OPEN_CONNECTION_INVITATION")
       SENSITIVE: []
     end
 

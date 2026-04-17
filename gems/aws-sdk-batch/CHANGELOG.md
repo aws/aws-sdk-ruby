@@ -1,6 +1,36 @@
 Unreleased Changes
 ------------------
 
+1.140.0 (2026-03-25)
+------------------
+
+* Feature - Documentation-only update for AWS Batch.
+
+1.139.0 (2026-03-23)
+------------------
+
+* Feature - AWS Batch AMI Visibility feature support. Adds read-only batchImageStatus to Ec2Configuration to provide visibility on the status of Batch-vended AMIs used by Compute Environments.
+
+1.138.0 (2026-03-19)
+------------------
+
+* Feature - AWS Batch now supports quota management, enabling administrators to allocate shared compute resources across teams and projects through quota shares with capacity limits, resource-sharing strategies, and priority-based preemption - currently available for SageMaker Training job queues.
+
+1.137.0 (2026-03-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.136.0 (2026-02-27)
+------------------
+
+* Feature - This feature allows customers to specify the minimum time (in minutes) that AWS Batch keeps instances running in a compute environment after all jobs on the instance complete
+
+1.135.0 (2026-02-25)
+------------------
+
+* Feature - AWS Batch documentation update for service job capacity units.
+
 1.134.0 (2026-02-11)
 ------------------
 

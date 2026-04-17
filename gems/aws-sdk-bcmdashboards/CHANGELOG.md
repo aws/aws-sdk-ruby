@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.10.0 (2026-04-09)
+------------------
+
+* Feature - Scheduled email reports of Billing and Cost Management Dashboards
+
+1.9.0 (2026-03-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.8.0 (2026-02-19)
+------------------
+
+* Feature - The Billing and Cost Management GetDashboard API now returns identifier for each widget, enabling users to uniquely identify widgets within their dashboards.
+
 1.7.0 (2026-01-16)
 ------------------
 

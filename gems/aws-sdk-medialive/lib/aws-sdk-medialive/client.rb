@@ -1075,6 +1075,9 @@ module Aws::MediaLive
     #
     # @option params [Array<String>] :channel_security_groups
     #
+    # @option params [Types::InferenceSettings] :inference_settings
+    #   Configures Elemental Inference features in a channel.
+    #
     # @return [Types::CreateChannelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateChannelResponse#channel #channel} => Types::Channel
@@ -1107,6 +1110,9 @@ module Aws::MediaLive
     #   resp.channel.destinations[0].srt_settings[0].listener_port #=> Integer
     #   resp.channel.destinations[0].logical_interface_names #=> Array
     #   resp.channel.destinations[0].logical_interface_names[0] #=> String
+    #   resp.channel.destinations[0].media_connect_router_settings #=> Array
+    #   resp.channel.destinations[0].media_connect_router_settings[0].encryption_type #=> String, one of "AUTOMATIC", "SECRETS_MANAGER"
+    #   resp.channel.destinations[0].media_connect_router_settings[0].secret_arn #=> String
     #   resp.channel.egress_endpoints #=> Array
     #   resp.channel.egress_endpoints[0].source_ip #=> String
     #   resp.channel.encoder_settings.audio_descriptions #=> Array
@@ -1438,6 +1444,8 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.cmaf_ingest_group_settings.additional_destinations #=> Array
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.cmaf_ingest_group_settings.additional_destinations[0].destination.destination_ref_id #=> String
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.srt_group_settings.input_loss_action #=> String, one of "DROP_PROGRAM", "DROP_TS", "EMIT_PROGRAM"
+    #   resp.channel.encoder_settings.output_groups[0].output_group_settings.media_connect_router_group_settings.availability_zones #=> Array
+    #   resp.channel.encoder_settings.output_groups[0].output_group_settings.media_connect_router_group_settings.availability_zones[0] #=> String
     #   resp.channel.encoder_settings.output_groups[0].outputs #=> Array
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].audio_description_names #=> Array
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].audio_description_names[0] #=> String
@@ -1673,6 +1681,62 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.srt_output_settings.destination.destination_ref_id #=> String
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.srt_output_settings.encryption_type #=> String, one of "AES128", "AES192", "AES256"
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.srt_output_settings.latency #=> Integer
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.connected_router_inputs.pipeline_0 #=> String
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.connected_router_inputs.pipeline_1 #=> String
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.absent_input_audio_behavior #=> String, one of "DROP", "ENCODE_SILENCE"
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.arib #=> String, one of "DISABLED", "ENABLED"
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.arib_captions_pid #=> String
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.arib_captions_pid_control #=> String, one of "AUTO", "USE_CONFIGURED"
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.audio_buffer_model #=> String, one of "ATSC", "DVB"
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.audio_frames_per_pes #=> Integer
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.audio_pids #=> String
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.audio_stream_type #=> String, one of "ATSC", "DVB"
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.bitrate #=> Integer
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.buffer_model #=> String, one of "MULTIPLEX", "NONE"
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.cc_descriptor #=> String, one of "DISABLED", "ENABLED"
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.dvb_nit_settings.network_id #=> Integer
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.dvb_nit_settings.network_name #=> String
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.dvb_nit_settings.rep_interval #=> Integer
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.dvb_sdt_settings.output_sdt #=> String, one of "SDT_FOLLOW", "SDT_FOLLOW_IF_PRESENT", "SDT_MANUAL", "SDT_NONE"
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.dvb_sdt_settings.rep_interval #=> Integer
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.dvb_sdt_settings.service_name #=> String
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.dvb_sdt_settings.service_provider_name #=> String
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.dvb_sub_pids #=> String
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.dvb_tdt_settings.rep_interval #=> Integer
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.dvb_teletext_pid #=> String
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.ebif #=> String, one of "NONE", "PASSTHROUGH"
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.ebp_audio_interval #=> String, one of "VIDEO_AND_FIXED_INTERVALS", "VIDEO_INTERVAL"
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.ebp_lookahead_ms #=> Integer
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.ebp_placement #=> String, one of "VIDEO_AND_AUDIO_PIDS", "VIDEO_PID"
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.ecm_pid #=> String
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.es_rate_in_pes #=> String, one of "EXCLUDE", "INCLUDE"
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.etv_platform_pid #=> String
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.etv_signal_pid #=> String
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.fragment_time #=> Float
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.klv #=> String, one of "NONE", "PASSTHROUGH"
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.klv_data_pids #=> String
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.nielsen_id_3_behavior #=> String, one of "NO_PASSTHROUGH", "PASSTHROUGH"
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.null_packet_bitrate #=> Float
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.pat_interval #=> Integer
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.pcr_control #=> String, one of "CONFIGURED_PCR_PERIOD", "PCR_EVERY_PES_PACKET"
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.pcr_period #=> Integer
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.pcr_pid #=> String
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.pmt_interval #=> Integer
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.pmt_pid #=> String
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.program_num #=> Integer
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.rate_mode #=> String, one of "CBR", "VBR"
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.scte_27_pids #=> String
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.scte_35_control #=> String, one of "NONE", "PASSTHROUGH"
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.scte_35_pid #=> String
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.scte_35_preroll_pullup_milliseconds #=> Float
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.segmentation_markers #=> String, one of "EBP", "EBP_LEGACY", "NONE", "PSI_SEGSTART", "RAI_ADAPT", "RAI_SEGSTART"
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.segmentation_style #=> String, one of "MAINTAIN_CADENCE", "RESET_CADENCE"
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.segmentation_time #=> Float
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.timed_metadata_behavior #=> String, one of "NO_PASSTHROUGH", "PASSTHROUGH"
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.timed_metadata_pid #=> String
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.transport_stream_id #=> Integer
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.video_pid #=> String
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.destination.destination_ref_id #=> String
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].video_description_name #=> String
     #   resp.channel.encoder_settings.timecode_config.source #=> String, one of "EMBEDDED", "SYSTEMCLOCK", "ZEROBASED"
     #   resp.channel.encoder_settings.timecode_config.sync_threshold #=> Integer
@@ -1828,7 +1892,7 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.video_descriptions[0].height #=> Integer
     #   resp.channel.encoder_settings.video_descriptions[0].name #=> String
     #   resp.channel.encoder_settings.video_descriptions[0].respond_to_afd #=> String, one of "NONE", "PASSTHROUGH", "RESPOND"
-    #   resp.channel.encoder_settings.video_descriptions[0].scaling_behavior #=> String, one of "DEFAULT", "STRETCH_TO_OUTPUT"
+    #   resp.channel.encoder_settings.video_descriptions[0].scaling_behavior #=> String, one of "DEFAULT", "STRETCH_TO_OUTPUT", "SMART_CROP"
     #   resp.channel.encoder_settings.video_descriptions[0].sharpness #=> Integer
     #   resp.channel.encoder_settings.video_descriptions[0].width #=> Integer
     #   resp.channel.encoder_settings.thumbnail_configuration.state #=> String, one of "AUTO", "DISABLED"
@@ -1941,6 +2005,7 @@ module Aws::MediaLive
     #   resp.channel.linked_channel_settings.primary_channel_settings.linked_channel_type #=> String, one of "FOLLOWING_CHANNEL", "PRIMARY_CHANNEL"
     #   resp.channel.channel_security_groups #=> Array
     #   resp.channel.channel_security_groups[0] #=> String
+    #   resp.channel.inference_settings.feed_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CreateChannel AWS API Documentation
     #
@@ -2553,6 +2618,7 @@ module Aws::MediaLive
     #   * {Types::DeleteChannelResponse#channel_engine_version #channel_engine_version} => Types::ChannelEngineVersionResponse
     #   * {Types::DeleteChannelResponse#linked_channel_settings #linked_channel_settings} => Types::DescribeLinkedChannelSettings
     #   * {Types::DeleteChannelResponse#channel_security_groups #channel_security_groups} => Array&lt;String&gt;
+    #   * {Types::DeleteChannelResponse#inference_settings #inference_settings} => Types::DescribeInferenceSettings
     #
     # @example Request syntax with placeholder values
     #
@@ -2588,6 +2654,9 @@ module Aws::MediaLive
     #   resp.destinations[0].srt_settings[0].listener_port #=> Integer
     #   resp.destinations[0].logical_interface_names #=> Array
     #   resp.destinations[0].logical_interface_names[0] #=> String
+    #   resp.destinations[0].media_connect_router_settings #=> Array
+    #   resp.destinations[0].media_connect_router_settings[0].encryption_type #=> String, one of "AUTOMATIC", "SECRETS_MANAGER"
+    #   resp.destinations[0].media_connect_router_settings[0].secret_arn #=> String
     #   resp.egress_endpoints #=> Array
     #   resp.egress_endpoints[0].source_ip #=> String
     #   resp.encoder_settings.audio_descriptions #=> Array
@@ -2919,6 +2988,8 @@ module Aws::MediaLive
     #   resp.encoder_settings.output_groups[0].output_group_settings.cmaf_ingest_group_settings.additional_destinations #=> Array
     #   resp.encoder_settings.output_groups[0].output_group_settings.cmaf_ingest_group_settings.additional_destinations[0].destination.destination_ref_id #=> String
     #   resp.encoder_settings.output_groups[0].output_group_settings.srt_group_settings.input_loss_action #=> String, one of "DROP_PROGRAM", "DROP_TS", "EMIT_PROGRAM"
+    #   resp.encoder_settings.output_groups[0].output_group_settings.media_connect_router_group_settings.availability_zones #=> Array
+    #   resp.encoder_settings.output_groups[0].output_group_settings.media_connect_router_group_settings.availability_zones[0] #=> String
     #   resp.encoder_settings.output_groups[0].outputs #=> Array
     #   resp.encoder_settings.output_groups[0].outputs[0].audio_description_names #=> Array
     #   resp.encoder_settings.output_groups[0].outputs[0].audio_description_names[0] #=> String
@@ -3154,6 +3225,62 @@ module Aws::MediaLive
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.srt_output_settings.destination.destination_ref_id #=> String
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.srt_output_settings.encryption_type #=> String, one of "AES128", "AES192", "AES256"
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.srt_output_settings.latency #=> Integer
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.connected_router_inputs.pipeline_0 #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.connected_router_inputs.pipeline_1 #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.absent_input_audio_behavior #=> String, one of "DROP", "ENCODE_SILENCE"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.arib #=> String, one of "DISABLED", "ENABLED"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.arib_captions_pid #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.arib_captions_pid_control #=> String, one of "AUTO", "USE_CONFIGURED"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.audio_buffer_model #=> String, one of "ATSC", "DVB"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.audio_frames_per_pes #=> Integer
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.audio_pids #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.audio_stream_type #=> String, one of "ATSC", "DVB"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.bitrate #=> Integer
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.buffer_model #=> String, one of "MULTIPLEX", "NONE"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.cc_descriptor #=> String, one of "DISABLED", "ENABLED"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.dvb_nit_settings.network_id #=> Integer
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.dvb_nit_settings.network_name #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.dvb_nit_settings.rep_interval #=> Integer
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.dvb_sdt_settings.output_sdt #=> String, one of "SDT_FOLLOW", "SDT_FOLLOW_IF_PRESENT", "SDT_MANUAL", "SDT_NONE"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.dvb_sdt_settings.rep_interval #=> Integer
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.dvb_sdt_settings.service_name #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.dvb_sdt_settings.service_provider_name #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.dvb_sub_pids #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.dvb_tdt_settings.rep_interval #=> Integer
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.dvb_teletext_pid #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.ebif #=> String, one of "NONE", "PASSTHROUGH"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.ebp_audio_interval #=> String, one of "VIDEO_AND_FIXED_INTERVALS", "VIDEO_INTERVAL"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.ebp_lookahead_ms #=> Integer
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.ebp_placement #=> String, one of "VIDEO_AND_AUDIO_PIDS", "VIDEO_PID"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.ecm_pid #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.es_rate_in_pes #=> String, one of "EXCLUDE", "INCLUDE"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.etv_platform_pid #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.etv_signal_pid #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.fragment_time #=> Float
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.klv #=> String, one of "NONE", "PASSTHROUGH"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.klv_data_pids #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.nielsen_id_3_behavior #=> String, one of "NO_PASSTHROUGH", "PASSTHROUGH"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.null_packet_bitrate #=> Float
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.pat_interval #=> Integer
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.pcr_control #=> String, one of "CONFIGURED_PCR_PERIOD", "PCR_EVERY_PES_PACKET"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.pcr_period #=> Integer
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.pcr_pid #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.pmt_interval #=> Integer
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.pmt_pid #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.program_num #=> Integer
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.rate_mode #=> String, one of "CBR", "VBR"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.scte_27_pids #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.scte_35_control #=> String, one of "NONE", "PASSTHROUGH"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.scte_35_pid #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.scte_35_preroll_pullup_milliseconds #=> Float
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.segmentation_markers #=> String, one of "EBP", "EBP_LEGACY", "NONE", "PSI_SEGSTART", "RAI_ADAPT", "RAI_SEGSTART"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.segmentation_style #=> String, one of "MAINTAIN_CADENCE", "RESET_CADENCE"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.segmentation_time #=> Float
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.timed_metadata_behavior #=> String, one of "NO_PASSTHROUGH", "PASSTHROUGH"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.timed_metadata_pid #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.transport_stream_id #=> Integer
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.video_pid #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.destination.destination_ref_id #=> String
     #   resp.encoder_settings.output_groups[0].outputs[0].video_description_name #=> String
     #   resp.encoder_settings.timecode_config.source #=> String, one of "EMBEDDED", "SYSTEMCLOCK", "ZEROBASED"
     #   resp.encoder_settings.timecode_config.sync_threshold #=> Integer
@@ -3309,7 +3436,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.video_descriptions[0].height #=> Integer
     #   resp.encoder_settings.video_descriptions[0].name #=> String
     #   resp.encoder_settings.video_descriptions[0].respond_to_afd #=> String, one of "NONE", "PASSTHROUGH", "RESPOND"
-    #   resp.encoder_settings.video_descriptions[0].scaling_behavior #=> String, one of "DEFAULT", "STRETCH_TO_OUTPUT"
+    #   resp.encoder_settings.video_descriptions[0].scaling_behavior #=> String, one of "DEFAULT", "STRETCH_TO_OUTPUT", "SMART_CROP"
     #   resp.encoder_settings.video_descriptions[0].sharpness #=> Integer
     #   resp.encoder_settings.video_descriptions[0].width #=> Integer
     #   resp.encoder_settings.thumbnail_configuration.state #=> String, one of "AUTO", "DISABLED"
@@ -3422,6 +3549,7 @@ module Aws::MediaLive
     #   resp.linked_channel_settings.primary_channel_settings.linked_channel_type #=> String, one of "FOLLOWING_CHANNEL", "PRIMARY_CHANNEL"
     #   resp.channel_security_groups #=> Array
     #   resp.channel_security_groups[0] #=> String
+    #   resp.inference_settings.feed_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DeleteChannel AWS API Documentation
     #
@@ -3757,6 +3885,7 @@ module Aws::MediaLive
     #   * {Types::DescribeChannelResponse#channel_engine_version #channel_engine_version} => Types::ChannelEngineVersionResponse
     #   * {Types::DescribeChannelResponse#linked_channel_settings #linked_channel_settings} => Types::DescribeLinkedChannelSettings
     #   * {Types::DescribeChannelResponse#channel_security_groups #channel_security_groups} => Array&lt;String&gt;
+    #   * {Types::DescribeChannelResponse#inference_settings #inference_settings} => Types::DescribeInferenceSettings
     #
     # @example Request syntax with placeholder values
     #
@@ -3792,6 +3921,9 @@ module Aws::MediaLive
     #   resp.destinations[0].srt_settings[0].listener_port #=> Integer
     #   resp.destinations[0].logical_interface_names #=> Array
     #   resp.destinations[0].logical_interface_names[0] #=> String
+    #   resp.destinations[0].media_connect_router_settings #=> Array
+    #   resp.destinations[0].media_connect_router_settings[0].encryption_type #=> String, one of "AUTOMATIC", "SECRETS_MANAGER"
+    #   resp.destinations[0].media_connect_router_settings[0].secret_arn #=> String
     #   resp.egress_endpoints #=> Array
     #   resp.egress_endpoints[0].source_ip #=> String
     #   resp.encoder_settings.audio_descriptions #=> Array
@@ -4123,6 +4255,8 @@ module Aws::MediaLive
     #   resp.encoder_settings.output_groups[0].output_group_settings.cmaf_ingest_group_settings.additional_destinations #=> Array
     #   resp.encoder_settings.output_groups[0].output_group_settings.cmaf_ingest_group_settings.additional_destinations[0].destination.destination_ref_id #=> String
     #   resp.encoder_settings.output_groups[0].output_group_settings.srt_group_settings.input_loss_action #=> String, one of "DROP_PROGRAM", "DROP_TS", "EMIT_PROGRAM"
+    #   resp.encoder_settings.output_groups[0].output_group_settings.media_connect_router_group_settings.availability_zones #=> Array
+    #   resp.encoder_settings.output_groups[0].output_group_settings.media_connect_router_group_settings.availability_zones[0] #=> String
     #   resp.encoder_settings.output_groups[0].outputs #=> Array
     #   resp.encoder_settings.output_groups[0].outputs[0].audio_description_names #=> Array
     #   resp.encoder_settings.output_groups[0].outputs[0].audio_description_names[0] #=> String
@@ -4358,6 +4492,62 @@ module Aws::MediaLive
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.srt_output_settings.destination.destination_ref_id #=> String
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.srt_output_settings.encryption_type #=> String, one of "AES128", "AES192", "AES256"
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.srt_output_settings.latency #=> Integer
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.connected_router_inputs.pipeline_0 #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.connected_router_inputs.pipeline_1 #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.absent_input_audio_behavior #=> String, one of "DROP", "ENCODE_SILENCE"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.arib #=> String, one of "DISABLED", "ENABLED"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.arib_captions_pid #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.arib_captions_pid_control #=> String, one of "AUTO", "USE_CONFIGURED"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.audio_buffer_model #=> String, one of "ATSC", "DVB"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.audio_frames_per_pes #=> Integer
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.audio_pids #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.audio_stream_type #=> String, one of "ATSC", "DVB"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.bitrate #=> Integer
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.buffer_model #=> String, one of "MULTIPLEX", "NONE"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.cc_descriptor #=> String, one of "DISABLED", "ENABLED"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.dvb_nit_settings.network_id #=> Integer
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.dvb_nit_settings.network_name #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.dvb_nit_settings.rep_interval #=> Integer
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.dvb_sdt_settings.output_sdt #=> String, one of "SDT_FOLLOW", "SDT_FOLLOW_IF_PRESENT", "SDT_MANUAL", "SDT_NONE"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.dvb_sdt_settings.rep_interval #=> Integer
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.dvb_sdt_settings.service_name #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.dvb_sdt_settings.service_provider_name #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.dvb_sub_pids #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.dvb_tdt_settings.rep_interval #=> Integer
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.dvb_teletext_pid #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.ebif #=> String, one of "NONE", "PASSTHROUGH"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.ebp_audio_interval #=> String, one of "VIDEO_AND_FIXED_INTERVALS", "VIDEO_INTERVAL"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.ebp_lookahead_ms #=> Integer
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.ebp_placement #=> String, one of "VIDEO_AND_AUDIO_PIDS", "VIDEO_PID"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.ecm_pid #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.es_rate_in_pes #=> String, one of "EXCLUDE", "INCLUDE"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.etv_platform_pid #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.etv_signal_pid #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.fragment_time #=> Float
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.klv #=> String, one of "NONE", "PASSTHROUGH"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.klv_data_pids #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.nielsen_id_3_behavior #=> String, one of "NO_PASSTHROUGH", "PASSTHROUGH"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.null_packet_bitrate #=> Float
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.pat_interval #=> Integer
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.pcr_control #=> String, one of "CONFIGURED_PCR_PERIOD", "PCR_EVERY_PES_PACKET"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.pcr_period #=> Integer
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.pcr_pid #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.pmt_interval #=> Integer
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.pmt_pid #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.program_num #=> Integer
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.rate_mode #=> String, one of "CBR", "VBR"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.scte_27_pids #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.scte_35_control #=> String, one of "NONE", "PASSTHROUGH"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.scte_35_pid #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.scte_35_preroll_pullup_milliseconds #=> Float
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.segmentation_markers #=> String, one of "EBP", "EBP_LEGACY", "NONE", "PSI_SEGSTART", "RAI_ADAPT", "RAI_SEGSTART"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.segmentation_style #=> String, one of "MAINTAIN_CADENCE", "RESET_CADENCE"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.segmentation_time #=> Float
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.timed_metadata_behavior #=> String, one of "NO_PASSTHROUGH", "PASSTHROUGH"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.timed_metadata_pid #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.transport_stream_id #=> Integer
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.video_pid #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.destination.destination_ref_id #=> String
     #   resp.encoder_settings.output_groups[0].outputs[0].video_description_name #=> String
     #   resp.encoder_settings.timecode_config.source #=> String, one of "EMBEDDED", "SYSTEMCLOCK", "ZEROBASED"
     #   resp.encoder_settings.timecode_config.sync_threshold #=> Integer
@@ -4513,7 +4703,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.video_descriptions[0].height #=> Integer
     #   resp.encoder_settings.video_descriptions[0].name #=> String
     #   resp.encoder_settings.video_descriptions[0].respond_to_afd #=> String, one of "NONE", "PASSTHROUGH", "RESPOND"
-    #   resp.encoder_settings.video_descriptions[0].scaling_behavior #=> String, one of "DEFAULT", "STRETCH_TO_OUTPUT"
+    #   resp.encoder_settings.video_descriptions[0].scaling_behavior #=> String, one of "DEFAULT", "STRETCH_TO_OUTPUT", "SMART_CROP"
     #   resp.encoder_settings.video_descriptions[0].sharpness #=> Integer
     #   resp.encoder_settings.video_descriptions[0].width #=> Integer
     #   resp.encoder_settings.thumbnail_configuration.state #=> String, one of "AUTO", "DISABLED"
@@ -4626,6 +4816,7 @@ module Aws::MediaLive
     #   resp.linked_channel_settings.primary_channel_settings.linked_channel_type #=> String, one of "FOLLOWING_CHANNEL", "PRIMARY_CHANNEL"
     #   resp.channel_security_groups #=> Array
     #   resp.channel_security_groups[0] #=> String
+    #   resp.inference_settings.feed_arn #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -5394,6 +5585,9 @@ module Aws::MediaLive
     #   resp.channels[0].destinations[0].srt_settings[0].listener_port #=> Integer
     #   resp.channels[0].destinations[0].logical_interface_names #=> Array
     #   resp.channels[0].destinations[0].logical_interface_names[0] #=> String
+    #   resp.channels[0].destinations[0].media_connect_router_settings #=> Array
+    #   resp.channels[0].destinations[0].media_connect_router_settings[0].encryption_type #=> String, one of "AUTOMATIC", "SECRETS_MANAGER"
+    #   resp.channels[0].destinations[0].media_connect_router_settings[0].secret_arn #=> String
     #   resp.channels[0].egress_endpoints #=> Array
     #   resp.channels[0].egress_endpoints[0].source_ip #=> String
     #   resp.channels[0].id #=> String
@@ -5496,6 +5690,7 @@ module Aws::MediaLive
     #   resp.channels[0].linked_channel_settings.primary_channel_settings.linked_channel_type #=> String, one of "FOLLOWING_CHANNEL", "PRIMARY_CHANNEL"
     #   resp.channels[0].channel_security_groups #=> Array
     #   resp.channels[0].channel_security_groups[0] #=> String
+    #   resp.channels[0].inference_settings.feed_arn #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ListChannels AWS API Documentation
@@ -6213,6 +6408,7 @@ module Aws::MediaLive
     #   * {Types::StartChannelResponse#channel_engine_version #channel_engine_version} => Types::ChannelEngineVersionResponse
     #   * {Types::StartChannelResponse#linked_channel_settings #linked_channel_settings} => Types::DescribeLinkedChannelSettings
     #   * {Types::StartChannelResponse#channel_security_groups #channel_security_groups} => Array&lt;String&gt;
+    #   * {Types::StartChannelResponse#inference_settings #inference_settings} => Types::DescribeInferenceSettings
     #
     # @example Request syntax with placeholder values
     #
@@ -6248,6 +6444,9 @@ module Aws::MediaLive
     #   resp.destinations[0].srt_settings[0].listener_port #=> Integer
     #   resp.destinations[0].logical_interface_names #=> Array
     #   resp.destinations[0].logical_interface_names[0] #=> String
+    #   resp.destinations[0].media_connect_router_settings #=> Array
+    #   resp.destinations[0].media_connect_router_settings[0].encryption_type #=> String, one of "AUTOMATIC", "SECRETS_MANAGER"
+    #   resp.destinations[0].media_connect_router_settings[0].secret_arn #=> String
     #   resp.egress_endpoints #=> Array
     #   resp.egress_endpoints[0].source_ip #=> String
     #   resp.encoder_settings.audio_descriptions #=> Array
@@ -6579,6 +6778,8 @@ module Aws::MediaLive
     #   resp.encoder_settings.output_groups[0].output_group_settings.cmaf_ingest_group_settings.additional_destinations #=> Array
     #   resp.encoder_settings.output_groups[0].output_group_settings.cmaf_ingest_group_settings.additional_destinations[0].destination.destination_ref_id #=> String
     #   resp.encoder_settings.output_groups[0].output_group_settings.srt_group_settings.input_loss_action #=> String, one of "DROP_PROGRAM", "DROP_TS", "EMIT_PROGRAM"
+    #   resp.encoder_settings.output_groups[0].output_group_settings.media_connect_router_group_settings.availability_zones #=> Array
+    #   resp.encoder_settings.output_groups[0].output_group_settings.media_connect_router_group_settings.availability_zones[0] #=> String
     #   resp.encoder_settings.output_groups[0].outputs #=> Array
     #   resp.encoder_settings.output_groups[0].outputs[0].audio_description_names #=> Array
     #   resp.encoder_settings.output_groups[0].outputs[0].audio_description_names[0] #=> String
@@ -6814,6 +7015,62 @@ module Aws::MediaLive
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.srt_output_settings.destination.destination_ref_id #=> String
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.srt_output_settings.encryption_type #=> String, one of "AES128", "AES192", "AES256"
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.srt_output_settings.latency #=> Integer
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.connected_router_inputs.pipeline_0 #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.connected_router_inputs.pipeline_1 #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.absent_input_audio_behavior #=> String, one of "DROP", "ENCODE_SILENCE"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.arib #=> String, one of "DISABLED", "ENABLED"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.arib_captions_pid #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.arib_captions_pid_control #=> String, one of "AUTO", "USE_CONFIGURED"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.audio_buffer_model #=> String, one of "ATSC", "DVB"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.audio_frames_per_pes #=> Integer
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.audio_pids #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.audio_stream_type #=> String, one of "ATSC", "DVB"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.bitrate #=> Integer
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.buffer_model #=> String, one of "MULTIPLEX", "NONE"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.cc_descriptor #=> String, one of "DISABLED", "ENABLED"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.dvb_nit_settings.network_id #=> Integer
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.dvb_nit_settings.network_name #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.dvb_nit_settings.rep_interval #=> Integer
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.dvb_sdt_settings.output_sdt #=> String, one of "SDT_FOLLOW", "SDT_FOLLOW_IF_PRESENT", "SDT_MANUAL", "SDT_NONE"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.dvb_sdt_settings.rep_interval #=> Integer
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.dvb_sdt_settings.service_name #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.dvb_sdt_settings.service_provider_name #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.dvb_sub_pids #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.dvb_tdt_settings.rep_interval #=> Integer
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.dvb_teletext_pid #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.ebif #=> String, one of "NONE", "PASSTHROUGH"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.ebp_audio_interval #=> String, one of "VIDEO_AND_FIXED_INTERVALS", "VIDEO_INTERVAL"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.ebp_lookahead_ms #=> Integer
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.ebp_placement #=> String, one of "VIDEO_AND_AUDIO_PIDS", "VIDEO_PID"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.ecm_pid #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.es_rate_in_pes #=> String, one of "EXCLUDE", "INCLUDE"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.etv_platform_pid #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.etv_signal_pid #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.fragment_time #=> Float
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.klv #=> String, one of "NONE", "PASSTHROUGH"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.klv_data_pids #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.nielsen_id_3_behavior #=> String, one of "NO_PASSTHROUGH", "PASSTHROUGH"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.null_packet_bitrate #=> Float
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.pat_interval #=> Integer
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.pcr_control #=> String, one of "CONFIGURED_PCR_PERIOD", "PCR_EVERY_PES_PACKET"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.pcr_period #=> Integer
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.pcr_pid #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.pmt_interval #=> Integer
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.pmt_pid #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.program_num #=> Integer
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.rate_mode #=> String, one of "CBR", "VBR"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.scte_27_pids #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.scte_35_control #=> String, one of "NONE", "PASSTHROUGH"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.scte_35_pid #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.scte_35_preroll_pullup_milliseconds #=> Float
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.segmentation_markers #=> String, one of "EBP", "EBP_LEGACY", "NONE", "PSI_SEGSTART", "RAI_ADAPT", "RAI_SEGSTART"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.segmentation_style #=> String, one of "MAINTAIN_CADENCE", "RESET_CADENCE"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.segmentation_time #=> Float
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.timed_metadata_behavior #=> String, one of "NO_PASSTHROUGH", "PASSTHROUGH"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.timed_metadata_pid #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.transport_stream_id #=> Integer
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.video_pid #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.destination.destination_ref_id #=> String
     #   resp.encoder_settings.output_groups[0].outputs[0].video_description_name #=> String
     #   resp.encoder_settings.timecode_config.source #=> String, one of "EMBEDDED", "SYSTEMCLOCK", "ZEROBASED"
     #   resp.encoder_settings.timecode_config.sync_threshold #=> Integer
@@ -6969,7 +7226,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.video_descriptions[0].height #=> Integer
     #   resp.encoder_settings.video_descriptions[0].name #=> String
     #   resp.encoder_settings.video_descriptions[0].respond_to_afd #=> String, one of "NONE", "PASSTHROUGH", "RESPOND"
-    #   resp.encoder_settings.video_descriptions[0].scaling_behavior #=> String, one of "DEFAULT", "STRETCH_TO_OUTPUT"
+    #   resp.encoder_settings.video_descriptions[0].scaling_behavior #=> String, one of "DEFAULT", "STRETCH_TO_OUTPUT", "SMART_CROP"
     #   resp.encoder_settings.video_descriptions[0].sharpness #=> Integer
     #   resp.encoder_settings.video_descriptions[0].width #=> Integer
     #   resp.encoder_settings.thumbnail_configuration.state #=> String, one of "AUTO", "DISABLED"
@@ -7082,6 +7339,7 @@ module Aws::MediaLive
     #   resp.linked_channel_settings.primary_channel_settings.linked_channel_type #=> String, one of "FOLLOWING_CHANNEL", "PRIMARY_CHANNEL"
     #   resp.channel_security_groups #=> Array
     #   resp.channel_security_groups[0] #=> String
+    #   resp.inference_settings.feed_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/StartChannel AWS API Documentation
     #
@@ -7224,6 +7482,7 @@ module Aws::MediaLive
     #   * {Types::StopChannelResponse#channel_engine_version #channel_engine_version} => Types::ChannelEngineVersionResponse
     #   * {Types::StopChannelResponse#linked_channel_settings #linked_channel_settings} => Types::DescribeLinkedChannelSettings
     #   * {Types::StopChannelResponse#channel_security_groups #channel_security_groups} => Array&lt;String&gt;
+    #   * {Types::StopChannelResponse#inference_settings #inference_settings} => Types::DescribeInferenceSettings
     #
     # @example Request syntax with placeholder values
     #
@@ -7259,6 +7518,9 @@ module Aws::MediaLive
     #   resp.destinations[0].srt_settings[0].listener_port #=> Integer
     #   resp.destinations[0].logical_interface_names #=> Array
     #   resp.destinations[0].logical_interface_names[0] #=> String
+    #   resp.destinations[0].media_connect_router_settings #=> Array
+    #   resp.destinations[0].media_connect_router_settings[0].encryption_type #=> String, one of "AUTOMATIC", "SECRETS_MANAGER"
+    #   resp.destinations[0].media_connect_router_settings[0].secret_arn #=> String
     #   resp.egress_endpoints #=> Array
     #   resp.egress_endpoints[0].source_ip #=> String
     #   resp.encoder_settings.audio_descriptions #=> Array
@@ -7590,6 +7852,8 @@ module Aws::MediaLive
     #   resp.encoder_settings.output_groups[0].output_group_settings.cmaf_ingest_group_settings.additional_destinations #=> Array
     #   resp.encoder_settings.output_groups[0].output_group_settings.cmaf_ingest_group_settings.additional_destinations[0].destination.destination_ref_id #=> String
     #   resp.encoder_settings.output_groups[0].output_group_settings.srt_group_settings.input_loss_action #=> String, one of "DROP_PROGRAM", "DROP_TS", "EMIT_PROGRAM"
+    #   resp.encoder_settings.output_groups[0].output_group_settings.media_connect_router_group_settings.availability_zones #=> Array
+    #   resp.encoder_settings.output_groups[0].output_group_settings.media_connect_router_group_settings.availability_zones[0] #=> String
     #   resp.encoder_settings.output_groups[0].outputs #=> Array
     #   resp.encoder_settings.output_groups[0].outputs[0].audio_description_names #=> Array
     #   resp.encoder_settings.output_groups[0].outputs[0].audio_description_names[0] #=> String
@@ -7825,6 +8089,62 @@ module Aws::MediaLive
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.srt_output_settings.destination.destination_ref_id #=> String
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.srt_output_settings.encryption_type #=> String, one of "AES128", "AES192", "AES256"
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.srt_output_settings.latency #=> Integer
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.connected_router_inputs.pipeline_0 #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.connected_router_inputs.pipeline_1 #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.absent_input_audio_behavior #=> String, one of "DROP", "ENCODE_SILENCE"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.arib #=> String, one of "DISABLED", "ENABLED"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.arib_captions_pid #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.arib_captions_pid_control #=> String, one of "AUTO", "USE_CONFIGURED"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.audio_buffer_model #=> String, one of "ATSC", "DVB"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.audio_frames_per_pes #=> Integer
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.audio_pids #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.audio_stream_type #=> String, one of "ATSC", "DVB"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.bitrate #=> Integer
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.buffer_model #=> String, one of "MULTIPLEX", "NONE"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.cc_descriptor #=> String, one of "DISABLED", "ENABLED"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.dvb_nit_settings.network_id #=> Integer
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.dvb_nit_settings.network_name #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.dvb_nit_settings.rep_interval #=> Integer
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.dvb_sdt_settings.output_sdt #=> String, one of "SDT_FOLLOW", "SDT_FOLLOW_IF_PRESENT", "SDT_MANUAL", "SDT_NONE"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.dvb_sdt_settings.rep_interval #=> Integer
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.dvb_sdt_settings.service_name #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.dvb_sdt_settings.service_provider_name #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.dvb_sub_pids #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.dvb_tdt_settings.rep_interval #=> Integer
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.dvb_teletext_pid #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.ebif #=> String, one of "NONE", "PASSTHROUGH"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.ebp_audio_interval #=> String, one of "VIDEO_AND_FIXED_INTERVALS", "VIDEO_INTERVAL"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.ebp_lookahead_ms #=> Integer
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.ebp_placement #=> String, one of "VIDEO_AND_AUDIO_PIDS", "VIDEO_PID"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.ecm_pid #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.es_rate_in_pes #=> String, one of "EXCLUDE", "INCLUDE"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.etv_platform_pid #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.etv_signal_pid #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.fragment_time #=> Float
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.klv #=> String, one of "NONE", "PASSTHROUGH"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.klv_data_pids #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.nielsen_id_3_behavior #=> String, one of "NO_PASSTHROUGH", "PASSTHROUGH"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.null_packet_bitrate #=> Float
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.pat_interval #=> Integer
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.pcr_control #=> String, one of "CONFIGURED_PCR_PERIOD", "PCR_EVERY_PES_PACKET"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.pcr_period #=> Integer
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.pcr_pid #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.pmt_interval #=> Integer
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.pmt_pid #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.program_num #=> Integer
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.rate_mode #=> String, one of "CBR", "VBR"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.scte_27_pids #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.scte_35_control #=> String, one of "NONE", "PASSTHROUGH"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.scte_35_pid #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.scte_35_preroll_pullup_milliseconds #=> Float
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.segmentation_markers #=> String, one of "EBP", "EBP_LEGACY", "NONE", "PSI_SEGSTART", "RAI_ADAPT", "RAI_SEGSTART"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.segmentation_style #=> String, one of "MAINTAIN_CADENCE", "RESET_CADENCE"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.segmentation_time #=> Float
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.timed_metadata_behavior #=> String, one of "NO_PASSTHROUGH", "PASSTHROUGH"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.timed_metadata_pid #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.transport_stream_id #=> Integer
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.video_pid #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.destination.destination_ref_id #=> String
     #   resp.encoder_settings.output_groups[0].outputs[0].video_description_name #=> String
     #   resp.encoder_settings.timecode_config.source #=> String, one of "EMBEDDED", "SYSTEMCLOCK", "ZEROBASED"
     #   resp.encoder_settings.timecode_config.sync_threshold #=> Integer
@@ -7980,7 +8300,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.video_descriptions[0].height #=> Integer
     #   resp.encoder_settings.video_descriptions[0].name #=> String
     #   resp.encoder_settings.video_descriptions[0].respond_to_afd #=> String, one of "NONE", "PASSTHROUGH", "RESPOND"
-    #   resp.encoder_settings.video_descriptions[0].scaling_behavior #=> String, one of "DEFAULT", "STRETCH_TO_OUTPUT"
+    #   resp.encoder_settings.video_descriptions[0].scaling_behavior #=> String, one of "DEFAULT", "STRETCH_TO_OUTPUT", "SMART_CROP"
     #   resp.encoder_settings.video_descriptions[0].sharpness #=> Integer
     #   resp.encoder_settings.video_descriptions[0].width #=> Integer
     #   resp.encoder_settings.thumbnail_configuration.state #=> String, one of "AUTO", "DISABLED"
@@ -8093,6 +8413,7 @@ module Aws::MediaLive
     #   resp.linked_channel_settings.primary_channel_settings.linked_channel_type #=> String, one of "FOLLOWING_CHANNEL", "PRIMARY_CHANNEL"
     #   resp.channel_security_groups #=> Array
     #   resp.channel_security_groups[0] #=> String
+    #   resp.inference_settings.feed_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/StopChannel AWS API Documentation
     #
@@ -8274,6 +8595,16 @@ module Aws::MediaLive
     #
     # @option params [Array<String>] :channel_security_groups
     #
+    # @option params [Types::InferenceSettings] :inference_settings
+    #   Configures Elemental Inference features in a channel.
+    #
+    # @option params [Types::SpecialRouterSettings] :special_router_settings
+    #   When using MediaConnect Router as the source of a MediaLive input
+    #   there's a special handoff that occurs when a router output is
+    #   created. This group of settings is set on your behalf by the
+    #   MediaConnect Router service using this set of settings. This setting
+    #   object can only by used by that service.
+    #
     # @return [Types::UpdateChannelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateChannelResponse#channel #channel} => Types::Channel
@@ -8306,6 +8637,9 @@ module Aws::MediaLive
     #   resp.channel.destinations[0].srt_settings[0].listener_port #=> Integer
     #   resp.channel.destinations[0].logical_interface_names #=> Array
     #   resp.channel.destinations[0].logical_interface_names[0] #=> String
+    #   resp.channel.destinations[0].media_connect_router_settings #=> Array
+    #   resp.channel.destinations[0].media_connect_router_settings[0].encryption_type #=> String, one of "AUTOMATIC", "SECRETS_MANAGER"
+    #   resp.channel.destinations[0].media_connect_router_settings[0].secret_arn #=> String
     #   resp.channel.egress_endpoints #=> Array
     #   resp.channel.egress_endpoints[0].source_ip #=> String
     #   resp.channel.encoder_settings.audio_descriptions #=> Array
@@ -8637,6 +8971,8 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.cmaf_ingest_group_settings.additional_destinations #=> Array
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.cmaf_ingest_group_settings.additional_destinations[0].destination.destination_ref_id #=> String
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.srt_group_settings.input_loss_action #=> String, one of "DROP_PROGRAM", "DROP_TS", "EMIT_PROGRAM"
+    #   resp.channel.encoder_settings.output_groups[0].output_group_settings.media_connect_router_group_settings.availability_zones #=> Array
+    #   resp.channel.encoder_settings.output_groups[0].output_group_settings.media_connect_router_group_settings.availability_zones[0] #=> String
     #   resp.channel.encoder_settings.output_groups[0].outputs #=> Array
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].audio_description_names #=> Array
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].audio_description_names[0] #=> String
@@ -8872,6 +9208,62 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.srt_output_settings.destination.destination_ref_id #=> String
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.srt_output_settings.encryption_type #=> String, one of "AES128", "AES192", "AES256"
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.srt_output_settings.latency #=> Integer
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.connected_router_inputs.pipeline_0 #=> String
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.connected_router_inputs.pipeline_1 #=> String
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.absent_input_audio_behavior #=> String, one of "DROP", "ENCODE_SILENCE"
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.arib #=> String, one of "DISABLED", "ENABLED"
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.arib_captions_pid #=> String
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.arib_captions_pid_control #=> String, one of "AUTO", "USE_CONFIGURED"
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.audio_buffer_model #=> String, one of "ATSC", "DVB"
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.audio_frames_per_pes #=> Integer
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.audio_pids #=> String
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.audio_stream_type #=> String, one of "ATSC", "DVB"
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.bitrate #=> Integer
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.buffer_model #=> String, one of "MULTIPLEX", "NONE"
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.cc_descriptor #=> String, one of "DISABLED", "ENABLED"
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.dvb_nit_settings.network_id #=> Integer
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.dvb_nit_settings.network_name #=> String
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.dvb_nit_settings.rep_interval #=> Integer
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.dvb_sdt_settings.output_sdt #=> String, one of "SDT_FOLLOW", "SDT_FOLLOW_IF_PRESENT", "SDT_MANUAL", "SDT_NONE"
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.dvb_sdt_settings.rep_interval #=> Integer
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.dvb_sdt_settings.service_name #=> String
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.dvb_sdt_settings.service_provider_name #=> String
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.dvb_sub_pids #=> String
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.dvb_tdt_settings.rep_interval #=> Integer
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.dvb_teletext_pid #=> String
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.ebif #=> String, one of "NONE", "PASSTHROUGH"
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.ebp_audio_interval #=> String, one of "VIDEO_AND_FIXED_INTERVALS", "VIDEO_INTERVAL"
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.ebp_lookahead_ms #=> Integer
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.ebp_placement #=> String, one of "VIDEO_AND_AUDIO_PIDS", "VIDEO_PID"
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.ecm_pid #=> String
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.es_rate_in_pes #=> String, one of "EXCLUDE", "INCLUDE"
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.etv_platform_pid #=> String
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.etv_signal_pid #=> String
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.fragment_time #=> Float
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.klv #=> String, one of "NONE", "PASSTHROUGH"
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.klv_data_pids #=> String
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.nielsen_id_3_behavior #=> String, one of "NO_PASSTHROUGH", "PASSTHROUGH"
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.null_packet_bitrate #=> Float
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.pat_interval #=> Integer
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.pcr_control #=> String, one of "CONFIGURED_PCR_PERIOD", "PCR_EVERY_PES_PACKET"
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.pcr_period #=> Integer
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.pcr_pid #=> String
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.pmt_interval #=> Integer
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.pmt_pid #=> String
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.program_num #=> Integer
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.rate_mode #=> String, one of "CBR", "VBR"
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.scte_27_pids #=> String
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.scte_35_control #=> String, one of "NONE", "PASSTHROUGH"
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.scte_35_pid #=> String
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.scte_35_preroll_pullup_milliseconds #=> Float
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.segmentation_markers #=> String, one of "EBP", "EBP_LEGACY", "NONE", "PSI_SEGSTART", "RAI_ADAPT", "RAI_SEGSTART"
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.segmentation_style #=> String, one of "MAINTAIN_CADENCE", "RESET_CADENCE"
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.segmentation_time #=> Float
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.timed_metadata_behavior #=> String, one of "NO_PASSTHROUGH", "PASSTHROUGH"
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.timed_metadata_pid #=> String
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.transport_stream_id #=> Integer
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.video_pid #=> String
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.destination.destination_ref_id #=> String
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].video_description_name #=> String
     #   resp.channel.encoder_settings.timecode_config.source #=> String, one of "EMBEDDED", "SYSTEMCLOCK", "ZEROBASED"
     #   resp.channel.encoder_settings.timecode_config.sync_threshold #=> Integer
@@ -9027,7 +9419,7 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.video_descriptions[0].height #=> Integer
     #   resp.channel.encoder_settings.video_descriptions[0].name #=> String
     #   resp.channel.encoder_settings.video_descriptions[0].respond_to_afd #=> String, one of "NONE", "PASSTHROUGH", "RESPOND"
-    #   resp.channel.encoder_settings.video_descriptions[0].scaling_behavior #=> String, one of "DEFAULT", "STRETCH_TO_OUTPUT"
+    #   resp.channel.encoder_settings.video_descriptions[0].scaling_behavior #=> String, one of "DEFAULT", "STRETCH_TO_OUTPUT", "SMART_CROP"
     #   resp.channel.encoder_settings.video_descriptions[0].sharpness #=> Integer
     #   resp.channel.encoder_settings.video_descriptions[0].width #=> Integer
     #   resp.channel.encoder_settings.thumbnail_configuration.state #=> String, one of "AUTO", "DISABLED"
@@ -9140,6 +9532,7 @@ module Aws::MediaLive
     #   resp.channel.linked_channel_settings.primary_channel_settings.linked_channel_type #=> String, one of "FOLLOWING_CHANNEL", "PRIMARY_CHANNEL"
     #   resp.channel.channel_security_groups #=> Array
     #   resp.channel.channel_security_groups[0] #=> String
+    #   resp.channel.inference_settings.feed_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateChannel AWS API Documentation
     #
@@ -9203,6 +9596,12 @@ module Aws::MediaLive
     #           },
     #         ],
     #         logical_interface_names: ["__string"],
+    #         media_connect_router_settings: [
+    #           {
+    #             encryption_type: "AUTOMATIC", # accepts AUTOMATIC, SECRETS_MANAGER
+    #             secret_arn: "__string",
+    #           },
+    #         ],
     #       },
     #     ],
     #   })
@@ -9235,6 +9634,9 @@ module Aws::MediaLive
     #   resp.channel.destinations[0].srt_settings[0].listener_port #=> Integer
     #   resp.channel.destinations[0].logical_interface_names #=> Array
     #   resp.channel.destinations[0].logical_interface_names[0] #=> String
+    #   resp.channel.destinations[0].media_connect_router_settings #=> Array
+    #   resp.channel.destinations[0].media_connect_router_settings[0].encryption_type #=> String, one of "AUTOMATIC", "SECRETS_MANAGER"
+    #   resp.channel.destinations[0].media_connect_router_settings[0].secret_arn #=> String
     #   resp.channel.egress_endpoints #=> Array
     #   resp.channel.egress_endpoints[0].source_ip #=> String
     #   resp.channel.encoder_settings.audio_descriptions #=> Array
@@ -9566,6 +9968,8 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.cmaf_ingest_group_settings.additional_destinations #=> Array
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.cmaf_ingest_group_settings.additional_destinations[0].destination.destination_ref_id #=> String
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.srt_group_settings.input_loss_action #=> String, one of "DROP_PROGRAM", "DROP_TS", "EMIT_PROGRAM"
+    #   resp.channel.encoder_settings.output_groups[0].output_group_settings.media_connect_router_group_settings.availability_zones #=> Array
+    #   resp.channel.encoder_settings.output_groups[0].output_group_settings.media_connect_router_group_settings.availability_zones[0] #=> String
     #   resp.channel.encoder_settings.output_groups[0].outputs #=> Array
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].audio_description_names #=> Array
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].audio_description_names[0] #=> String
@@ -9801,6 +10205,62 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.srt_output_settings.destination.destination_ref_id #=> String
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.srt_output_settings.encryption_type #=> String, one of "AES128", "AES192", "AES256"
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.srt_output_settings.latency #=> Integer
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.connected_router_inputs.pipeline_0 #=> String
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.connected_router_inputs.pipeline_1 #=> String
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.absent_input_audio_behavior #=> String, one of "DROP", "ENCODE_SILENCE"
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.arib #=> String, one of "DISABLED", "ENABLED"
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.arib_captions_pid #=> String
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.arib_captions_pid_control #=> String, one of "AUTO", "USE_CONFIGURED"
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.audio_buffer_model #=> String, one of "ATSC", "DVB"
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.audio_frames_per_pes #=> Integer
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.audio_pids #=> String
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.audio_stream_type #=> String, one of "ATSC", "DVB"
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.bitrate #=> Integer
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.buffer_model #=> String, one of "MULTIPLEX", "NONE"
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.cc_descriptor #=> String, one of "DISABLED", "ENABLED"
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.dvb_nit_settings.network_id #=> Integer
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.dvb_nit_settings.network_name #=> String
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.dvb_nit_settings.rep_interval #=> Integer
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.dvb_sdt_settings.output_sdt #=> String, one of "SDT_FOLLOW", "SDT_FOLLOW_IF_PRESENT", "SDT_MANUAL", "SDT_NONE"
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.dvb_sdt_settings.rep_interval #=> Integer
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.dvb_sdt_settings.service_name #=> String
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.dvb_sdt_settings.service_provider_name #=> String
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.dvb_sub_pids #=> String
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.dvb_tdt_settings.rep_interval #=> Integer
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.dvb_teletext_pid #=> String
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.ebif #=> String, one of "NONE", "PASSTHROUGH"
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.ebp_audio_interval #=> String, one of "VIDEO_AND_FIXED_INTERVALS", "VIDEO_INTERVAL"
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.ebp_lookahead_ms #=> Integer
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.ebp_placement #=> String, one of "VIDEO_AND_AUDIO_PIDS", "VIDEO_PID"
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.ecm_pid #=> String
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.es_rate_in_pes #=> String, one of "EXCLUDE", "INCLUDE"
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.etv_platform_pid #=> String
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.etv_signal_pid #=> String
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.fragment_time #=> Float
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.klv #=> String, one of "NONE", "PASSTHROUGH"
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.klv_data_pids #=> String
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.nielsen_id_3_behavior #=> String, one of "NO_PASSTHROUGH", "PASSTHROUGH"
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.null_packet_bitrate #=> Float
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.pat_interval #=> Integer
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.pcr_control #=> String, one of "CONFIGURED_PCR_PERIOD", "PCR_EVERY_PES_PACKET"
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.pcr_period #=> Integer
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.pcr_pid #=> String
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.pmt_interval #=> Integer
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.pmt_pid #=> String
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.program_num #=> Integer
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.rate_mode #=> String, one of "CBR", "VBR"
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.scte_27_pids #=> String
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.scte_35_control #=> String, one of "NONE", "PASSTHROUGH"
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.scte_35_pid #=> String
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.scte_35_preroll_pullup_milliseconds #=> Float
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.segmentation_markers #=> String, one of "EBP", "EBP_LEGACY", "NONE", "PSI_SEGSTART", "RAI_ADAPT", "RAI_SEGSTART"
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.segmentation_style #=> String, one of "MAINTAIN_CADENCE", "RESET_CADENCE"
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.segmentation_time #=> Float
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.timed_metadata_behavior #=> String, one of "NO_PASSTHROUGH", "PASSTHROUGH"
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.timed_metadata_pid #=> String
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.transport_stream_id #=> Integer
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.video_pid #=> String
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.destination.destination_ref_id #=> String
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].video_description_name #=> String
     #   resp.channel.encoder_settings.timecode_config.source #=> String, one of "EMBEDDED", "SYSTEMCLOCK", "ZEROBASED"
     #   resp.channel.encoder_settings.timecode_config.sync_threshold #=> Integer
@@ -9956,7 +10416,7 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.video_descriptions[0].height #=> Integer
     #   resp.channel.encoder_settings.video_descriptions[0].name #=> String
     #   resp.channel.encoder_settings.video_descriptions[0].respond_to_afd #=> String, one of "NONE", "PASSTHROUGH", "RESPOND"
-    #   resp.channel.encoder_settings.video_descriptions[0].scaling_behavior #=> String, one of "DEFAULT", "STRETCH_TO_OUTPUT"
+    #   resp.channel.encoder_settings.video_descriptions[0].scaling_behavior #=> String, one of "DEFAULT", "STRETCH_TO_OUTPUT", "SMART_CROP"
     #   resp.channel.encoder_settings.video_descriptions[0].sharpness #=> Integer
     #   resp.channel.encoder_settings.video_descriptions[0].width #=> Integer
     #   resp.channel.encoder_settings.thumbnail_configuration.state #=> String, one of "AUTO", "DISABLED"
@@ -10069,6 +10529,7 @@ module Aws::MediaLive
     #   resp.channel.linked_channel_settings.primary_channel_settings.linked_channel_type #=> String, one of "FOLLOWING_CHANNEL", "PRIMARY_CHANNEL"
     #   resp.channel.channel_security_groups #=> Array
     #   resp.channel.channel_security_groups[0] #=> String
+    #   resp.channel.inference_settings.feed_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateChannelClass AWS API Documentation
     #
@@ -10742,6 +11203,7 @@ module Aws::MediaLive
     #   * {Types::RestartChannelPipelinesResponse#channel_engine_version #channel_engine_version} => Types::ChannelEngineVersionResponse
     #   * {Types::RestartChannelPipelinesResponse#linked_channel_settings #linked_channel_settings} => Types::DescribeLinkedChannelSettings
     #   * {Types::RestartChannelPipelinesResponse#channel_security_groups #channel_security_groups} => Array&lt;String&gt;
+    #   * {Types::RestartChannelPipelinesResponse#inference_settings #inference_settings} => Types::DescribeInferenceSettings
     #
     # @example Request syntax with placeholder values
     #
@@ -10778,6 +11240,9 @@ module Aws::MediaLive
     #   resp.destinations[0].srt_settings[0].listener_port #=> Integer
     #   resp.destinations[0].logical_interface_names #=> Array
     #   resp.destinations[0].logical_interface_names[0] #=> String
+    #   resp.destinations[0].media_connect_router_settings #=> Array
+    #   resp.destinations[0].media_connect_router_settings[0].encryption_type #=> String, one of "AUTOMATIC", "SECRETS_MANAGER"
+    #   resp.destinations[0].media_connect_router_settings[0].secret_arn #=> String
     #   resp.egress_endpoints #=> Array
     #   resp.egress_endpoints[0].source_ip #=> String
     #   resp.encoder_settings.audio_descriptions #=> Array
@@ -11109,6 +11574,8 @@ module Aws::MediaLive
     #   resp.encoder_settings.output_groups[0].output_group_settings.cmaf_ingest_group_settings.additional_destinations #=> Array
     #   resp.encoder_settings.output_groups[0].output_group_settings.cmaf_ingest_group_settings.additional_destinations[0].destination.destination_ref_id #=> String
     #   resp.encoder_settings.output_groups[0].output_group_settings.srt_group_settings.input_loss_action #=> String, one of "DROP_PROGRAM", "DROP_TS", "EMIT_PROGRAM"
+    #   resp.encoder_settings.output_groups[0].output_group_settings.media_connect_router_group_settings.availability_zones #=> Array
+    #   resp.encoder_settings.output_groups[0].output_group_settings.media_connect_router_group_settings.availability_zones[0] #=> String
     #   resp.encoder_settings.output_groups[0].outputs #=> Array
     #   resp.encoder_settings.output_groups[0].outputs[0].audio_description_names #=> Array
     #   resp.encoder_settings.output_groups[0].outputs[0].audio_description_names[0] #=> String
@@ -11344,6 +11811,62 @@ module Aws::MediaLive
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.srt_output_settings.destination.destination_ref_id #=> String
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.srt_output_settings.encryption_type #=> String, one of "AES128", "AES192", "AES256"
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.srt_output_settings.latency #=> Integer
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.connected_router_inputs.pipeline_0 #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.connected_router_inputs.pipeline_1 #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.absent_input_audio_behavior #=> String, one of "DROP", "ENCODE_SILENCE"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.arib #=> String, one of "DISABLED", "ENABLED"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.arib_captions_pid #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.arib_captions_pid_control #=> String, one of "AUTO", "USE_CONFIGURED"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.audio_buffer_model #=> String, one of "ATSC", "DVB"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.audio_frames_per_pes #=> Integer
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.audio_pids #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.audio_stream_type #=> String, one of "ATSC", "DVB"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.bitrate #=> Integer
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.buffer_model #=> String, one of "MULTIPLEX", "NONE"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.cc_descriptor #=> String, one of "DISABLED", "ENABLED"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.dvb_nit_settings.network_id #=> Integer
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.dvb_nit_settings.network_name #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.dvb_nit_settings.rep_interval #=> Integer
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.dvb_sdt_settings.output_sdt #=> String, one of "SDT_FOLLOW", "SDT_FOLLOW_IF_PRESENT", "SDT_MANUAL", "SDT_NONE"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.dvb_sdt_settings.rep_interval #=> Integer
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.dvb_sdt_settings.service_name #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.dvb_sdt_settings.service_provider_name #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.dvb_sub_pids #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.dvb_tdt_settings.rep_interval #=> Integer
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.dvb_teletext_pid #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.ebif #=> String, one of "NONE", "PASSTHROUGH"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.ebp_audio_interval #=> String, one of "VIDEO_AND_FIXED_INTERVALS", "VIDEO_INTERVAL"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.ebp_lookahead_ms #=> Integer
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.ebp_placement #=> String, one of "VIDEO_AND_AUDIO_PIDS", "VIDEO_PID"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.ecm_pid #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.es_rate_in_pes #=> String, one of "EXCLUDE", "INCLUDE"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.etv_platform_pid #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.etv_signal_pid #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.fragment_time #=> Float
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.klv #=> String, one of "NONE", "PASSTHROUGH"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.klv_data_pids #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.nielsen_id_3_behavior #=> String, one of "NO_PASSTHROUGH", "PASSTHROUGH"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.null_packet_bitrate #=> Float
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.pat_interval #=> Integer
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.pcr_control #=> String, one of "CONFIGURED_PCR_PERIOD", "PCR_EVERY_PES_PACKET"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.pcr_period #=> Integer
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.pcr_pid #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.pmt_interval #=> Integer
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.pmt_pid #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.program_num #=> Integer
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.rate_mode #=> String, one of "CBR", "VBR"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.scte_27_pids #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.scte_35_control #=> String, one of "NONE", "PASSTHROUGH"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.scte_35_pid #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.scte_35_preroll_pullup_milliseconds #=> Float
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.segmentation_markers #=> String, one of "EBP", "EBP_LEGACY", "NONE", "PSI_SEGSTART", "RAI_ADAPT", "RAI_SEGSTART"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.segmentation_style #=> String, one of "MAINTAIN_CADENCE", "RESET_CADENCE"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.segmentation_time #=> Float
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.timed_metadata_behavior #=> String, one of "NO_PASSTHROUGH", "PASSTHROUGH"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.timed_metadata_pid #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.transport_stream_id #=> Integer
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.container_settings.m2ts_settings.video_pid #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.media_connect_router_output_settings.destination.destination_ref_id #=> String
     #   resp.encoder_settings.output_groups[0].outputs[0].video_description_name #=> String
     #   resp.encoder_settings.timecode_config.source #=> String, one of "EMBEDDED", "SYSTEMCLOCK", "ZEROBASED"
     #   resp.encoder_settings.timecode_config.sync_threshold #=> Integer
@@ -11499,7 +12022,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.video_descriptions[0].height #=> Integer
     #   resp.encoder_settings.video_descriptions[0].name #=> String
     #   resp.encoder_settings.video_descriptions[0].respond_to_afd #=> String, one of "NONE", "PASSTHROUGH", "RESPOND"
-    #   resp.encoder_settings.video_descriptions[0].scaling_behavior #=> String, one of "DEFAULT", "STRETCH_TO_OUTPUT"
+    #   resp.encoder_settings.video_descriptions[0].scaling_behavior #=> String, one of "DEFAULT", "STRETCH_TO_OUTPUT", "SMART_CROP"
     #   resp.encoder_settings.video_descriptions[0].sharpness #=> Integer
     #   resp.encoder_settings.video_descriptions[0].width #=> Integer
     #   resp.encoder_settings.thumbnail_configuration.state #=> String, one of "AUTO", "DISABLED"
@@ -11613,6 +12136,7 @@ module Aws::MediaLive
     #   resp.linked_channel_settings.primary_channel_settings.linked_channel_type #=> String, one of "FOLLOWING_CHANNEL", "PRIMARY_CHANNEL"
     #   resp.channel_security_groups #=> Array
     #   resp.channel_security_groups[0] #=> String
+    #   resp.inference_settings.feed_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/RestartChannelPipelines AWS API Documentation
     #
@@ -14953,7 +15477,7 @@ module Aws::MediaLive
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-medialive'
-      context[:gem_version] = '1.178.0'
+      context[:gem_version] = '1.183.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -818,7 +818,10 @@
         "requestUri":"/{Bucket}?metrics"
       },
       "input":{"shape":"ListBucketMetricsConfigurationsRequest"},
-      "output":{"shape":"ListBucketMetricsConfigurationsOutput"}
+      "output":{"shape":"ListBucketMetricsConfigurationsOutput"},
+      "staticContextParams":{
+        "UseS3ExpressControlEndpoint":{"value":true}
+      }
     },
     "ListBuckets":{
       "name":"ListBuckets",
@@ -1692,6 +1695,7 @@
       "enum":[
         "af-south-1",
         "ap-east-1",
+        "ap-east-2",
         "ap-northeast-1",
         "ap-northeast-2",
         "ap-northeast-3",
@@ -1702,7 +1706,10 @@
         "ap-southeast-3",
         "ap-southeast-4",
         "ap-southeast-5",
+        "ap-southeast-6",
+        "ap-southeast-7",
         "ca-central-1",
+        "ca-west-1",
         "cn-north-1",
         "cn-northwest-1",
         "EU",
@@ -1717,6 +1724,7 @@
         "il-central-1",
         "me-central-1",
         "me-south-1",
+        "mx-central-1",
         "sa-east-1",
         "us-east-2",
         "us-gov-east-1",
@@ -1741,6 +1749,13 @@
       ]
     },
     "BucketName":{"type":"string"},
+    "BucketNamespace":{
+      "type":"string",
+      "enum":[
+        "account-regional",
+        "global"
+      ]
+    },
     "BucketRegion":{"type":"string"},
     "BucketType":{
       "type":"string",
@@ -2596,6 +2611,11 @@
           "shape":"ObjectOwnership",
           "location":"header",
           "locationName":"x-amz-object-ownership"
+        },
+        "BucketNamespace":{
+          "shape":"BucketNamespace",
+          "location":"header",
+          "locationName":"x-amz-bucket-namespace"
         }
       },
       "payload":"CreateBucketConfiguration"

@@ -680,13 +680,18 @@ module Aws::DLM
     #   The Availability Zones in which to enable fast snapshot restore.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] availability_zone_ids
+    #   The Availability Zone Ids in which to enable fast snapshot restore.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dlm-2018-01-12/FastRestoreRule AWS API Documentation
     #
     class FastRestoreRule < Struct.new(
       :count,
       :interval,
       :interval_unit,
-      :availability_zones)
+      :availability_zones,
+      :availability_zone_ids)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -410,12 +410,14 @@ module Aws::PartnerCentralChannel
       SENSITIVE: []
     end
 
-    class ResoldBusiness
+    class ResoldEnterprise
       attr_accessor coverage: ("ENTIRE_ORGANIZATION" | "MANAGEMENT_ACCOUNT_ONLY")
+      attr_accessor tam_location: ::String
+      attr_accessor charge_account_id: ::String
       SENSITIVE: []
     end
 
-    class ResoldEnterprise
+    class ResoldUnifiedOperations
       attr_accessor coverage: ("ENTIRE_ORGANIZATION" | "MANAGEMENT_ACCOUNT_ONLY")
       attr_accessor tam_location: ::String
       attr_accessor charge_account_id: ::String
@@ -493,17 +495,17 @@ module Aws::PartnerCentralChannel
     end
 
     class SupportPlan
-      attr_accessor resold_business: Types::ResoldBusiness
       attr_accessor resold_enterprise: Types::ResoldEnterprise
       attr_accessor partner_led_support: Types::PartnerLedSupport
+      attr_accessor resold_unified_operations: Types::ResoldUnifiedOperations
       attr_accessor unknown: untyped
       SENSITIVE: []
 
-      class ResoldBusiness < SupportPlan
-      end
       class ResoldEnterprise < SupportPlan
       end
       class PartnerLedSupport < SupportPlan
+      end
+      class ResoldUnifiedOperations < SupportPlan
       end
       class Unknown < SupportPlan
       end

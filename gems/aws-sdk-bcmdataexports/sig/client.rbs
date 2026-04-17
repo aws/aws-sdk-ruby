@@ -86,26 +86,27 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BCMDataExports/Client.html#create_export-instance_method
       def create_export: (
                            export: {
+                             export_arn: ::String?,
+                             name: ::String,
+                             description: ::String?,
                              data_query: {
                                query_statement: ::String,
                                table_configurations: Hash[::String, Hash[::String, ::String]]?
                              },
-                             description: ::String?,
                              destination_configurations: {
                                s3_destination: {
                                  s3_bucket: ::String,
-                                 s3_output_configurations: {
-                                   compression: ("GZIP" | "PARQUET"),
-                                   format: ("TEXT_OR_CSV" | "PARQUET"),
-                                   output_type: ("CUSTOM"),
-                                   overwrite: ("CREATE_NEW_REPORT" | "OVERWRITE_REPORT")
-                                 },
+                                 s3_bucket_owner: ::String?,
                                  s3_prefix: ::String,
-                                 s3_region: ::String
+                                 s3_region: ::String,
+                                 s3_output_configurations: {
+                                   output_type: ("CUSTOM"),
+                                   format: ("TEXT_OR_CSV" | "PARQUET"),
+                                   compression: ("GZIP" | "PARQUET"),
+                                   overwrite: ("CREATE_NEW_REPORT" | "OVERWRITE_REPORT")
+                                 }
                                }
                              },
-                             export_arn: ::String?,
-                             name: ::String,
                              refresh_cadence: {
                                frequency: ("SYNCHRONOUS")
                              }
@@ -132,13 +133,13 @@ module Aws
       interface _GetExecutionResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetExecutionResponse]
         def execution_id: () -> ::String
-        def execution_status: () -> Types::ExecutionStatus
         def export: () -> Types::Export
+        def execution_status: () -> Types::ExecutionStatus
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BCMDataExports/Client.html#get_execution-instance_method
       def get_execution: (
-                           execution_id: ::String,
-                           export_arn: ::String
+                           export_arn: ::String,
+                           execution_id: ::String
                          ) -> _GetExecutionResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetExecutionResponseSuccess
 
@@ -155,10 +156,10 @@ module Aws
 
       interface _GetTableResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetTableResponse]
-        def description: () -> ::String
-        def schema: () -> ::Array[Types::Column]
         def table_name: () -> ::String
+        def description: () -> ::String
         def table_properties: () -> ::Hash[::String, ::String]
+        def schema: () -> ::Array[Types::Column]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BCMDataExports/Client.html#get_table-instance_method
       def get_table: (
@@ -194,26 +195,26 @@ module Aws
 
       interface _ListTablesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListTablesResponse]
-        def next_token: () -> ::String
         def tables: () -> ::Array[Types::Table]
+        def next_token: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BCMDataExports/Client.html#list_tables-instance_method
       def list_tables: (
-                         ?max_results: ::Integer,
-                         ?next_token: ::String
+                         ?next_token: ::String,
+                         ?max_results: ::Integer
                        ) -> _ListTablesResponseSuccess
                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTablesResponseSuccess
 
       interface _ListTagsForResourceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
-        def next_token: () -> ::String
         def resource_tags: () -> ::Array[Types::ResourceTag]
+        def next_token: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BCMDataExports/Client.html#list_tags_for_resource-instance_method
       def list_tags_for_resource: (
+                                    resource_arn: ::String,
                                     ?max_results: ::Integer,
-                                    ?next_token: ::String,
-                                    resource_arn: ::String
+                                    ?next_token: ::String
                                   ) -> _ListTagsForResourceResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
 
@@ -248,32 +249,33 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BCMDataExports/Client.html#update_export-instance_method
       def update_export: (
+                           export_arn: ::String,
                            export: {
+                             export_arn: ::String?,
+                             name: ::String,
+                             description: ::String?,
                              data_query: {
                                query_statement: ::String,
                                table_configurations: Hash[::String, Hash[::String, ::String]]?
                              },
-                             description: ::String?,
                              destination_configurations: {
                                s3_destination: {
                                  s3_bucket: ::String,
-                                 s3_output_configurations: {
-                                   compression: ("GZIP" | "PARQUET"),
-                                   format: ("TEXT_OR_CSV" | "PARQUET"),
-                                   output_type: ("CUSTOM"),
-                                   overwrite: ("CREATE_NEW_REPORT" | "OVERWRITE_REPORT")
-                                 },
+                                 s3_bucket_owner: ::String?,
                                  s3_prefix: ::String,
-                                 s3_region: ::String
+                                 s3_region: ::String,
+                                 s3_output_configurations: {
+                                   output_type: ("CUSTOM"),
+                                   format: ("TEXT_OR_CSV" | "PARQUET"),
+                                   compression: ("GZIP" | "PARQUET"),
+                                   overwrite: ("CREATE_NEW_REPORT" | "OVERWRITE_REPORT")
+                                 }
                                }
                              },
-                             export_arn: ::String?,
-                             name: ::String,
                              refresh_cadence: {
                                frequency: ("SYNCHRONOUS")
                              }
-                           },
-                           export_arn: ::String
+                           }
                          ) -> _UpdateExportResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateExportResponseSuccess
     end

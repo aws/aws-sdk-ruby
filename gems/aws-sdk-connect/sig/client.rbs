@@ -254,6 +254,19 @@ module Aws
                                                ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#associate_queue_email_addresses-instance_method
+      def associate_queue_email_addresses: (
+                                             instance_id: ::String,
+                                             queue_id: ::String,
+                                             email_addresses_config: Array[
+                                               {
+                                                 email_address_id: ::String
+                                               },
+                                             ],
+                                             ?client_token: ::String
+                                           ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#associate_queue_quick_connects-instance_method
       def associate_queue_quick_connects: (
                                             instance_id: ::String,
@@ -616,7 +629,7 @@ module Aws
                             ?attributes: Hash[::String, ::String],
                             ?references: Hash[::String, {
                                 value: ::String?,
-                                type: ("URL" | "ATTACHMENT" | "CONTACT_ANALYSIS" | "NUMBER" | "STRING" | "DATE" | "EMAIL" | "EMAIL_MESSAGE" | "EMAIL_MESSAGE_PLAIN_TEXT"),
+                                type: ("URL" | "ATTACHMENT" | "CONTACT_ANALYSIS" | "NUMBER" | "STRING" | "DATE" | "EMAIL" | "EMAIL_MESSAGE" | "EMAIL_MESSAGE_PLAIN_TEXT" | "EMAIL_MESSAGE_PLAIN_TEXT_REDACTED" | "EMAIL_MESSAGE_REDACTED"),
                                 status: ("AVAILABLE" | "DELETED" | "APPROVED" | "REJECTED" | "PROCESSING" | "FAILED")?,
                                 arn: ::String?,
                                 status_reason: ::String?
@@ -955,10 +968,10 @@ module Aws
                                       eligibility_days: ::Integer?
                                     },
                                     ?target_configuration: {
-                                      contact_interaction_type: ("AGENT" | "AUTOMATED")
+                                      contact_interaction_type: ("AGENT" | "AUTOMATED" | "CUSTOMER")
                                     },
                                     ?language_configuration: {
-                                      form_language: ("de-DE" | "en-US" | "es-ES" | "fr-FR" | "it-IT" | "pt-BR")?
+                                      form_language: ("de-DE" | "en-US" | "es-ES" | "fr-FR" | "it-IT" | "pt-BR" | "ja-JP" | "ko-KR" | "zh-CN")?
                                     }
                                   ) -> _CreateEvaluationFormResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateEvaluationFormResponseSuccess
@@ -1190,6 +1203,11 @@ module Aws
                           hours_of_operation_id: ::String,
                           ?max_contacts: ::Integer,
                           ?quick_connect_ids: Array[::String],
+                          ?email_addresses_config: Array[
+                            {
+                              email_address_id: ::String
+                            },
+                          ],
                           ?tags: Hash[::String, ::String]
                         ) -> _CreateQueueResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateQueueResponseSuccess
@@ -1278,7 +1296,7 @@ module Aws
                          instance_id: ::String,
                          name: ::String,
                          trigger_event_source: {
-                           event_source_name: ("OnPostCallAnalysisAvailable" | "OnRealTimeCallAnalysisAvailable" | "OnRealTimeChatAnalysisAvailable" | "OnPostChatAnalysisAvailable" | "OnZendeskTicketCreate" | "OnZendeskTicketStatusUpdate" | "OnSalesforceCaseCreate" | "OnContactEvaluationSubmit" | "OnMetricDataUpdate" | "OnCaseCreate" | "OnCaseUpdate" | "OnSlaBreach"),
+                           event_source_name: ("OnPostCallAnalysisAvailable" | "OnRealTimeCallAnalysisAvailable" | "OnRealTimeChatAnalysisAvailable" | "OnPostChatAnalysisAvailable" | "OnEmailAnalysisAvailable" | "OnZendeskTicketCreate" | "OnZendeskTicketStatusUpdate" | "OnSalesforceCaseCreate" | "OnContactEvaluationSubmit" | "OnMetricDataUpdate" | "OnCaseCreate" | "OnCaseUpdate" | "OnSlaBreach"),
                            integration_association_id: ::String?
                          },
                          function: ::String,
@@ -1291,7 +1309,7 @@ module Aws
                                contact_flow_id: ::String,
                                references: Hash[::String, {
                                    value: ::String?,
-                                   type: ("URL" | "ATTACHMENT" | "CONTACT_ANALYSIS" | "NUMBER" | "STRING" | "DATE" | "EMAIL" | "EMAIL_MESSAGE" | "EMAIL_MESSAGE_PLAIN_TEXT"),
+                                   type: ("URL" | "ATTACHMENT" | "CONTACT_ANALYSIS" | "NUMBER" | "STRING" | "DATE" | "EMAIL" | "EMAIL_MESSAGE" | "EMAIL_MESSAGE_PLAIN_TEXT" | "EMAIL_MESSAGE_PLAIN_TEXT_REDACTED" | "EMAIL_MESSAGE_REDACTED"),
                                    status: ("AVAILABLE" | "DELETED" | "APPROVED" | "REJECTED" | "PROCESSING" | "FAILED")?,
                                    arn: ::String?,
                                    status_reason: ::String?
@@ -1492,10 +1510,13 @@ module Aws
                               ?description: ::String,
                               content: ::String,
                               ?entry_point: {
-                                type: ("VOICE_CALL")?,
+                                type: ("VOICE_CALL" | "CHAT")?,
                                 voice_call_entry_point_parameters: {
                                   source_phone_number: ::String?,
                                   destination_phone_number: ::String?,
+                                  flow_id: ::String?
+                                }?,
+                                chat_entry_point_parameters: {
                                   flow_id: ::String?
                                 }?
                               },
@@ -2592,6 +2613,15 @@ module Aws
                                                   ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#disassociate_queue_email_addresses-instance_method
+      def disassociate_queue_email_addresses: (
+                                                instance_id: ::String,
+                                                queue_id: ::String,
+                                                email_addresses_id: Array[::String],
+                                                ?client_token: ::String
+                                              ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#disassociate_queue_quick_connects-instance_method
       def disassociate_queue_quick_connects: (
                                                instance_id: ::String,
@@ -2723,7 +2753,7 @@ module Aws
         def file_name: () -> ::String
         def file_size_in_bytes: () -> ::Integer
         def associated_resource_arn: () -> ::String
-        def file_use_case_type: () -> ("EMAIL_MESSAGE" | "ATTACHMENT")
+        def file_use_case_type: () -> ("CONTACT_ANALYSIS" | "EMAIL_MESSAGE" | "EMAIL_MESSAGE_PLAIN_TEXT" | "EMAIL_MESSAGE_REDACTED" | "EMAIL_MESSAGE_PLAIN_TEXT_REDACTED" | "ATTACHMENT")
         def created_by: () -> Types::CreatedByInfo
         def download_url_metadata: () -> Types::DownloadUrlMetadata
         def tags: () -> ::Hash[::String, ::String]
@@ -3250,7 +3280,7 @@ module Aws
       def list_contact_references: (
                                      instance_id: ::String,
                                      contact_id: ::String,
-                                     reference_types: Array[("URL" | "ATTACHMENT" | "CONTACT_ANALYSIS" | "NUMBER" | "STRING" | "DATE" | "EMAIL" | "EMAIL_MESSAGE" | "EMAIL_MESSAGE_PLAIN_TEXT")],
+                                     reference_types: Array[("URL" | "ATTACHMENT" | "CONTACT_ANALYSIS" | "NUMBER" | "STRING" | "DATE" | "EMAIL" | "EMAIL_MESSAGE" | "EMAIL_MESSAGE_PLAIN_TEXT" | "EMAIL_MESSAGE_PLAIN_TEXT_REDACTED" | "EMAIL_MESSAGE_REDACTED")],
                                      ?next_token: ::String
                                    ) -> _ListContactReferencesResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListContactReferencesResponseSuccess
@@ -3575,6 +3605,22 @@ module Aws
                         ) -> _ListPromptsResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPromptsResponseSuccess
 
+      interface _ListQueueEmailAddressesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListQueueEmailAddressesResponse]
+        def next_token: () -> ::String
+        def email_address_metadata_list: () -> ::Array[Types::EmailAddressSummary]
+        def last_modified_time: () -> ::Time
+        def last_modified_region: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#list_queue_email_addresses-instance_method
+      def list_queue_email_addresses: (
+                                        instance_id: ::String,
+                                        queue_id: ::String,
+                                        ?next_token: ::String,
+                                        ?max_results: ::Integer
+                                      ) -> _ListQueueEmailAddressesResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListQueueEmailAddressesResponseSuccess
+
       interface _ListQueueQuickConnectsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListQueueQuickConnectsResponse]
         def next_token: () -> ::String
@@ -3691,7 +3737,7 @@ module Aws
       def list_rules: (
                         instance_id: ::String,
                         ?publish_status: ("DRAFT" | "PUBLISHED"),
-                        ?event_source_name: ("OnPostCallAnalysisAvailable" | "OnRealTimeCallAnalysisAvailable" | "OnRealTimeChatAnalysisAvailable" | "OnPostChatAnalysisAvailable" | "OnZendeskTicketCreate" | "OnZendeskTicketStatusUpdate" | "OnSalesforceCaseCreate" | "OnContactEvaluationSubmit" | "OnMetricDataUpdate" | "OnCaseCreate" | "OnCaseUpdate" | "OnSlaBreach"),
+                        ?event_source_name: ("OnPostCallAnalysisAvailable" | "OnRealTimeCallAnalysisAvailable" | "OnRealTimeChatAnalysisAvailable" | "OnPostChatAnalysisAvailable" | "OnEmailAnalysisAvailable" | "OnZendeskTicketCreate" | "OnZendeskTicketStatusUpdate" | "OnSalesforceCaseCreate" | "OnContactEvaluationSubmit" | "OnMetricDataUpdate" | "OnCaseCreate" | "OnCaseUpdate" | "OnSlaBreach"),
                         ?max_results: ::Integer,
                         ?next_token: ::String
                       ) -> _ListRulesResponseSuccess
@@ -5584,7 +5630,7 @@ module Aws
                                         file_name: ::String,
                                         file_size_in_bytes: ::Integer,
                                         ?url_expiry_in_seconds: ::Integer,
-                                        file_use_case_type: ("EMAIL_MESSAGE" | "ATTACHMENT"),
+                                        file_use_case_type: ("CONTACT_ANALYSIS" | "EMAIL_MESSAGE" | "EMAIL_MESSAGE_PLAIN_TEXT" | "EMAIL_MESSAGE_REDACTED" | "EMAIL_MESSAGE_PLAIN_TEXT_REDACTED" | "ATTACHMENT"),
                                         associated_resource_arn: ::String,
                                         ?created_by: {
                                           connect_user_arn: ::String?,
@@ -5713,7 +5759,7 @@ module Aws
                                  ?description: ::String,
                                  ?references: Hash[::String, {
                                      value: ::String?,
-                                     type: ("URL" | "ATTACHMENT" | "CONTACT_ANALYSIS" | "NUMBER" | "STRING" | "DATE" | "EMAIL" | "EMAIL_MESSAGE" | "EMAIL_MESSAGE_PLAIN_TEXT"),
+                                     type: ("URL" | "ATTACHMENT" | "CONTACT_ANALYSIS" | "NUMBER" | "STRING" | "DATE" | "EMAIL" | "EMAIL_MESSAGE" | "EMAIL_MESSAGE_PLAIN_TEXT" | "EMAIL_MESSAGE_PLAIN_TEXT_REDACTED" | "EMAIL_MESSAGE_REDACTED"),
                                      status: ("AVAILABLE" | "DELETED" | "APPROVED" | "REJECTED" | "PROCESSING" | "FAILED")?,
                                      arn: ::String?,
                                      status_reason: ::String?
@@ -5866,7 +5912,7 @@ module Aws
                                           ?description: ::String,
                                           ?references: Hash[::String, {
                                               value: ::String?,
-                                              type: ("URL" | "ATTACHMENT" | "CONTACT_ANALYSIS" | "NUMBER" | "STRING" | "DATE" | "EMAIL" | "EMAIL_MESSAGE" | "EMAIL_MESSAGE_PLAIN_TEXT"),
+                                              type: ("URL" | "ATTACHMENT" | "CONTACT_ANALYSIS" | "NUMBER" | "STRING" | "DATE" | "EMAIL" | "EMAIL_MESSAGE" | "EMAIL_MESSAGE_PLAIN_TEXT" | "EMAIL_MESSAGE_PLAIN_TEXT_REDACTED" | "EMAIL_MESSAGE_REDACTED"),
                                               status: ("AVAILABLE" | "DELETED" | "APPROVED" | "REJECTED" | "PROCESSING" | "FAILED")?,
                                               arn: ::String?,
                                               status_reason: ::String?
@@ -5926,7 +5972,7 @@ module Aws
                                 name: ::String,
                                 ?references: Hash[::String, {
                                     value: ::String?,
-                                    type: ("URL" | "ATTACHMENT" | "CONTACT_ANALYSIS" | "NUMBER" | "STRING" | "DATE" | "EMAIL" | "EMAIL_MESSAGE" | "EMAIL_MESSAGE_PLAIN_TEXT"),
+                                    type: ("URL" | "ATTACHMENT" | "CONTACT_ANALYSIS" | "NUMBER" | "STRING" | "DATE" | "EMAIL" | "EMAIL_MESSAGE" | "EMAIL_MESSAGE_PLAIN_TEXT" | "EMAIL_MESSAGE_PLAIN_TEXT_REDACTED" | "EMAIL_MESSAGE_REDACTED"),
                                     status: ("AVAILABLE" | "DELETED" | "APPROVED" | "REJECTED" | "PROCESSING" | "FAILED")?,
                                     arn: ::String?,
                                     status_reason: ::String?
@@ -5998,7 +6044,7 @@ module Aws
                                    ?related_contact_id: ::String,
                                    ?references: Hash[::String, {
                                        value: ::String?,
-                                       type: ("URL" | "ATTACHMENT" | "CONTACT_ANALYSIS" | "NUMBER" | "STRING" | "DATE" | "EMAIL" | "EMAIL_MESSAGE" | "EMAIL_MESSAGE_PLAIN_TEXT"),
+                                       type: ("URL" | "ATTACHMENT" | "CONTACT_ANALYSIS" | "NUMBER" | "STRING" | "DATE" | "EMAIL" | "EMAIL_MESSAGE" | "EMAIL_MESSAGE_PLAIN_TEXT" | "EMAIL_MESSAGE_PLAIN_TEXT_REDACTED" | "EMAIL_MESSAGE_REDACTED"),
                                        status: ("AVAILABLE" | "DELETED" | "APPROVED" | "REJECTED" | "PROCESSING" | "FAILED")?,
                                        arn: ::String?,
                                        status_reason: ::String?
@@ -6193,7 +6239,7 @@ module Aws
                             ?description: ::String,
                             ?references: Hash[::String, {
                                 value: ::String?,
-                                type: ("URL" | "ATTACHMENT" | "CONTACT_ANALYSIS" | "NUMBER" | "STRING" | "DATE" | "EMAIL" | "EMAIL_MESSAGE" | "EMAIL_MESSAGE_PLAIN_TEXT"),
+                                type: ("URL" | "ATTACHMENT" | "CONTACT_ANALYSIS" | "NUMBER" | "STRING" | "DATE" | "EMAIL" | "EMAIL_MESSAGE" | "EMAIL_MESSAGE_PLAIN_TEXT" | "EMAIL_MESSAGE_PLAIN_TEXT_REDACTED" | "EMAIL_MESSAGE_REDACTED"),
                                 status: ("AVAILABLE" | "DELETED" | "APPROVED" | "REJECTED" | "PROCESSING" | "FAILED")?,
                                 arn: ::String?,
                                 status_reason: ::String?
@@ -6663,10 +6709,10 @@ module Aws
                                     ?as_draft: bool,
                                     ?client_token: ::String,
                                     ?target_configuration: {
-                                      contact_interaction_type: ("AGENT" | "AUTOMATED")
+                                      contact_interaction_type: ("AGENT" | "AUTOMATED" | "CUSTOMER")
                                     },
                                     ?language_configuration: {
-                                      form_language: ("de-DE" | "en-US" | "es-ES" | "fr-FR" | "it-IT" | "pt-BR")?
+                                      form_language: ("de-DE" | "en-US" | "es-ES" | "fr-FR" | "it-IT" | "pt-BR" | "ja-JP" | "ko-KR" | "zh-CN")?
                                     }
                                   ) -> _UpdateEvaluationFormResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateEvaluationFormResponseSuccess
@@ -7033,7 +7079,7 @@ module Aws
                                contact_flow_id: ::String,
                                references: Hash[::String, {
                                    value: ::String?,
-                                   type: ("URL" | "ATTACHMENT" | "CONTACT_ANALYSIS" | "NUMBER" | "STRING" | "DATE" | "EMAIL" | "EMAIL_MESSAGE" | "EMAIL_MESSAGE_PLAIN_TEXT"),
+                                   type: ("URL" | "ATTACHMENT" | "CONTACT_ANALYSIS" | "NUMBER" | "STRING" | "DATE" | "EMAIL" | "EMAIL_MESSAGE" | "EMAIL_MESSAGE_PLAIN_TEXT" | "EMAIL_MESSAGE_PLAIN_TEXT_REDACTED" | "EMAIL_MESSAGE_REDACTED"),
                                    status: ("AVAILABLE" | "DELETED" | "APPROVED" | "REJECTED" | "PROCESSING" | "FAILED")?,
                                    arn: ::String?,
                                    status_reason: ::String?
@@ -7235,10 +7281,13 @@ module Aws
                               test_case_id: ::String,
                               ?content: ::String,
                               ?entry_point: {
-                                type: ("VOICE_CALL")?,
+                                type: ("VOICE_CALL" | "CHAT")?,
                                 voice_call_entry_point_parameters: {
                                   source_phone_number: ::String?,
                                   destination_phone_number: ::String?,
+                                  flow_id: ::String?
+                                }?,
+                                chat_entry_point_parameters: {
                                   flow_id: ::String?
                                 }?
                               },

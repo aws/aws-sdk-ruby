@@ -110,8 +110,12 @@ module Aws
                                           storage_configuration: {
                                             storage_size_gi_b: ::Integer?
                                           }?,
+                                          local_storage_configuration: {
+                                            use_local_storage: bool?
+                                          }?,
                                           monitoring: ("BASIC" | "DETAILED")?,
-                                          capacity_option_type: ("ON_DEMAND" | "SPOT")?,
+                                          capacity_option_type: ("ON_DEMAND" | "SPOT" | "RESERVED")?,
+                                          instance_metadata_tags_propagation: bool?,
                                           instance_requirements: {
                                             v_cpu_count: {
                                               min: ::Integer,
@@ -165,7 +169,11 @@ module Aws
                                             allowed_instance_types: Array[::String]?,
                                             max_spot_price_as_percentage_of_optimal_on_demand_price: ::Integer?
                                           }?,
-                                          fips_enabled: bool?
+                                          fips_enabled: bool?,
+                                          capacity_reservations: {
+                                            reservation_group_arn: ::String?,
+                                            reservation_preference: ("RESERVATIONS_ONLY" | "RESERVATIONS_FIRST" | "RESERVATIONS_EXCLUDED")?
+                                          }?
                                         },
                                         propagate_tags: ("CAPACITY_PROVIDER" | "NONE")?,
                                         infrastructure_optimization: {
@@ -230,6 +238,40 @@ module Aws
                             }
                           ) -> _CreateClusterResponseSuccess
                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateClusterResponseSuccess
+
+      interface _CreateDaemonResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateDaemonResponse]
+        def daemon_arn: () -> ::String
+        def status: () -> ("ACTIVE" | "DELETE_IN_PROGRESS")
+        def created_at: () -> ::Time
+        def deployment_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ECS/Client.html#create_daemon-instance_method
+      def create_daemon: (
+                           daemon_name: ::String,
+                           ?cluster_arn: ::String,
+                           daemon_task_definition_arn: ::String,
+                           capacity_provider_arns: Array[::String],
+                           ?deployment_configuration: {
+                             drain_percent: ::Float?,
+                             alarms: {
+                               alarm_names: Array[::String]?,
+                               enable: bool?
+                             }?,
+                             bake_time_in_minutes: ::Integer?
+                           },
+                           ?tags: Array[
+                             {
+                               key: ::String?,
+                               value: ::String?
+                             },
+                           ],
+                           ?propagate_tags: ("DAEMON" | "NONE"),
+                           ?enable_ecs_managed_tags: bool,
+                           ?enable_execute_command: bool,
+                           ?client_token: ::String
+                         ) -> _CreateDaemonResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDaemonResponseSuccess
 
       interface _CreateExpressGatewayServiceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateExpressGatewayServiceResponse]
@@ -598,6 +640,30 @@ module Aws
                           ) -> _DeleteClusterResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteClusterResponseSuccess
 
+      interface _DeleteDaemonResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteDaemonResponse]
+        def daemon_arn: () -> ::String
+        def status: () -> ("ACTIVE" | "DELETE_IN_PROGRESS")
+        def created_at: () -> ::Time
+        def updated_at: () -> ::Time
+        def deployment_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ECS/Client.html#delete_daemon-instance_method
+      def delete_daemon: (
+                           daemon_arn: ::String
+                         ) -> _DeleteDaemonResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteDaemonResponseSuccess
+
+      interface _DeleteDaemonTaskDefinitionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteDaemonTaskDefinitionResponse]
+        def daemon_task_definition_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ECS/Client.html#delete_daemon_task_definition-instance_method
+      def delete_daemon_task_definition: (
+                                           daemon_task_definition: ::String
+                                         ) -> _DeleteDaemonTaskDefinitionResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteDaemonTaskDefinitionResponseSuccess
+
       interface _DeleteExpressGatewayServiceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteExpressGatewayServiceResponse]
         def service: () -> Types::ECSExpressGatewayService
@@ -706,6 +772,48 @@ module Aws
                                           ?include: Array[("TAGS" | "CONTAINER_INSTANCE_HEALTH")]
                                         ) -> _DescribeContainerInstancesResponseSuccess
                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeContainerInstancesResponseSuccess
+
+      interface _DescribeDaemonResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeDaemonResponse]
+        def daemon: () -> Types::DaemonDetail
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ECS/Client.html#describe_daemon-instance_method
+      def describe_daemon: (
+                             daemon_arn: ::String
+                           ) -> _DescribeDaemonResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeDaemonResponseSuccess
+
+      interface _DescribeDaemonDeploymentsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeDaemonDeploymentsResponse]
+        def failures: () -> ::Array[Types::Failure]
+        def daemon_deployments: () -> ::Array[Types::DaemonDeployment]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ECS/Client.html#describe_daemon_deployments-instance_method
+      def describe_daemon_deployments: (
+                                         daemon_deployment_arns: Array[::String]
+                                       ) -> _DescribeDaemonDeploymentsResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeDaemonDeploymentsResponseSuccess
+
+      interface _DescribeDaemonRevisionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeDaemonRevisionsResponse]
+        def daemon_revisions: () -> ::Array[Types::DaemonRevision]
+        def failures: () -> ::Array[Types::Failure]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ECS/Client.html#describe_daemon_revisions-instance_method
+      def describe_daemon_revisions: (
+                                       daemon_revision_arns: Array[::String]
+                                     ) -> _DescribeDaemonRevisionsResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeDaemonRevisionsResponseSuccess
+
+      interface _DescribeDaemonTaskDefinitionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeDaemonTaskDefinitionResponse]
+        def daemon_task_definition: () -> Types::DaemonTaskDefinition
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ECS/Client.html#describe_daemon_task_definition-instance_method
+      def describe_daemon_task_definition: (
+                                             daemon_task_definition: ::String
+                                           ) -> _DescribeDaemonTaskDefinitionResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeDaemonTaskDefinitionResponseSuccess
 
       interface _DescribeExpressGatewayServiceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeExpressGatewayServiceResponse]
@@ -895,6 +1003,55 @@ module Aws
                                     ) -> _ListContainerInstancesResponseSuccess
                                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListContainerInstancesResponseSuccess
 
+      interface _ListDaemonDeploymentsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDaemonDeploymentsResponse]
+        def next_token: () -> ::String
+        def daemon_deployments: () -> ::Array[Types::DaemonDeploymentSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ECS/Client.html#list_daemon_deployments-instance_method
+      def list_daemon_deployments: (
+                                     daemon_arn: ::String,
+                                     ?status: Array[("PENDING" | "SUCCESSFUL" | "STOPPED" | "STOP_REQUESTED" | "IN_PROGRESS" | "ROLLBACK_IN_PROGRESS" | "ROLLBACK_SUCCESSFUL" | "ROLLBACK_FAILED")],
+                                     ?created_at: {
+                                       before: ::Time?,
+                                       after: ::Time?
+                                     },
+                                     ?max_results: ::Integer,
+                                     ?next_token: ::String
+                                   ) -> _ListDaemonDeploymentsResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDaemonDeploymentsResponseSuccess
+
+      interface _ListDaemonTaskDefinitionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDaemonTaskDefinitionsResponse]
+        def daemon_task_definitions: () -> ::Array[Types::DaemonTaskDefinitionSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ECS/Client.html#list_daemon_task_definitions-instance_method
+      def list_daemon_task_definitions: (
+                                          ?family_prefix: ::String,
+                                          ?family: ::String,
+                                          ?revision: ("LAST_REGISTERED"),
+                                          ?status: ("ACTIVE" | "DELETE_IN_PROGRESS" | "ALL"),
+                                          ?sort: ("ASC" | "DESC"),
+                                          ?next_token: ::String,
+                                          ?max_results: ::Integer
+                                        ) -> _ListDaemonTaskDefinitionsResponseSuccess
+                                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDaemonTaskDefinitionsResponseSuccess
+
+      interface _ListDaemonsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDaemonsResponse]
+        def daemon_summaries_list: () -> ::Array[Types::DaemonSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ECS/Client.html#list_daemons-instance_method
+      def list_daemons: (
+                          ?cluster_arn: ::String,
+                          ?capacity_provider_arns: Array[::String],
+                          ?max_results: ::Integer,
+                          ?next_token: ::String
+                        ) -> _ListDaemonsResponseSuccess
+                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDaemonsResponseSuccess
+
       interface _ListServiceDeploymentsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListServiceDeploymentsResponse]
         def service_deployments: () -> ::Array[Types::ServiceDeploymentBrief]
@@ -997,7 +1154,8 @@ module Aws
                         ?started_by: ::String,
                         ?service_name: ::String,
                         ?desired_status: ("RUNNING" | "PENDING" | "STOPPED"),
-                        ?launch_type: ("EC2" | "FARGATE" | "EXTERNAL" | "MANAGED_INSTANCES")
+                        ?launch_type: ("EC2" | "FARGATE" | "EXTERNAL" | "MANAGED_INSTANCES"),
+                        ?daemon_name: ::String
                       ) -> _ListTasksResponseSuccess
                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTasksResponseSuccess
 
@@ -1107,6 +1265,148 @@ module Aws
                                          ]
                                        ) -> _RegisterContainerInstanceResponseSuccess
                                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RegisterContainerInstanceResponseSuccess
+
+      interface _RegisterDaemonTaskDefinitionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RegisterDaemonTaskDefinitionResponse]
+        def daemon_task_definition_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ECS/Client.html#register_daemon_task_definition-instance_method
+      def register_daemon_task_definition: (
+                                             family: ::String,
+                                             ?task_role_arn: ::String,
+                                             ?execution_role_arn: ::String,
+                                             container_definitions: Array[
+                                               {
+                                                 name: ::String?,
+                                                 image: ::String,
+                                                 memory: ::Integer?,
+                                                 memory_reservation: ::Integer?,
+                                                 repository_credentials: {
+                                                   credentials_parameter: ::String
+                                                 }?,
+                                                 health_check: {
+                                                   command: Array[::String],
+                                                   interval: ::Integer?,
+                                                   timeout: ::Integer?,
+                                                   retries: ::Integer?,
+                                                   start_period: ::Integer?
+                                                 }?,
+                                                 cpu: ::Integer?,
+                                                 essential: bool?,
+                                                 entry_point: Array[::String]?,
+                                                 command: Array[::String]?,
+                                                 working_directory: ::String?,
+                                                 environment_files: Array[
+                                                   {
+                                                     value: ::String,
+                                                     type: ("s3")
+                                                   },
+                                                 ]?,
+                                                 environment: Array[
+                                                   {
+                                                     name: ::String?,
+                                                     value: ::String?
+                                                   },
+                                                 ]?,
+                                                 secrets: Array[
+                                                   {
+                                                     name: ::String,
+                                                     value_from: ::String
+                                                   },
+                                                 ]?,
+                                                 readonly_root_filesystem: bool?,
+                                                 mount_points: Array[
+                                                   {
+                                                     source_volume: ::String?,
+                                                     container_path: ::String?,
+                                                     read_only: bool?
+                                                   },
+                                                 ]?,
+                                                 log_configuration: {
+                                                   log_driver: ("json-file" | "syslog" | "journald" | "gelf" | "fluentd" | "awslogs" | "splunk" | "awsfirelens"),
+                                                   options: Hash[::String, ::String]?,
+                                                   secret_options: Array[
+                                                     {
+                                                       name: ::String,
+                                                       value_from: ::String
+                                                     },
+                                                   ]?
+                                                 }?,
+                                                 firelens_configuration: {
+                                                   type: ("fluentd" | "fluentbit"),
+                                                   options: Hash[::String, ::String]?
+                                                 }?,
+                                                 privileged: bool?,
+                                                 user: ::String?,
+                                                 ulimits: Array[
+                                                   {
+                                                     name: ("core" | "cpu" | "data" | "fsize" | "locks" | "memlock" | "msgqueue" | "nice" | "nofile" | "nproc" | "rss" | "rtprio" | "rttime" | "sigpending" | "stack"),
+                                                     soft_limit: ::Integer,
+                                                     hard_limit: ::Integer
+                                                   },
+                                                 ]?,
+                                                 linux_parameters: {
+                                                   capabilities: {
+                                                     add: Array[::String]?,
+                                                     drop: Array[::String]?
+                                                   }?,
+                                                   devices: Array[
+                                                     {
+                                                       host_path: ::String,
+                                                       container_path: ::String?,
+                                                       permissions: Array[("read" | "write" | "mknod")]?
+                                                     },
+                                                   ]?,
+                                                   init_process_enabled: bool?,
+                                                   tmpfs: Array[
+                                                     {
+                                                       container_path: ::String,
+                                                       size: ::Integer,
+                                                       mount_options: Array[::String]?
+                                                     },
+                                                   ]?
+                                                 }?,
+                                                 depends_on: Array[
+                                                   {
+                                                     container_name: ::String,
+                                                     condition: ("START" | "COMPLETE" | "SUCCESS" | "HEALTHY")
+                                                   },
+                                                 ]?,
+                                                 start_timeout: ::Integer?,
+                                                 stop_timeout: ::Integer?,
+                                                 system_controls: Array[
+                                                   {
+                                                     namespace: ::String?,
+                                                     value: ::String?
+                                                   },
+                                                 ]?,
+                                                 interactive: bool?,
+                                                 pseudo_terminal: bool?,
+                                                 restart_policy: {
+                                                   enabled: bool,
+                                                   ignored_exit_codes: Array[::Integer]?,
+                                                   restart_attempt_period: ::Integer?
+                                                 }?
+                                               },
+                                             ],
+                                             ?cpu: ::String,
+                                             ?memory: ::String,
+                                             ?volumes: Array[
+                                               {
+                                                 name: ::String?,
+                                                 host: {
+                                                   source_path: ::String?
+                                                 }?
+                                               },
+                                             ],
+                                             ?tags: Array[
+                                               {
+                                                 key: ::String?,
+                                                 value: ::String?
+                                               },
+                                             ]
+                                           ) -> _RegisterDaemonTaskDefinitionResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RegisterDaemonTaskDefinitionResponseSuccess
 
       interface _RegisterTaskDefinitionResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::RegisterTaskDefinitionResponse]
@@ -1295,6 +1595,12 @@ module Aws
                                               access_point_id: ::String?,
                                               iam: ("ENABLED" | "DISABLED")?
                                             }?
+                                          }?,
+                                          s3files_volume_configuration: {
+                                            file_system_arn: ::String,
+                                            root_directory: ::String?,
+                                            transit_encryption_port: ::Integer?,
+                                            access_point_arn: ::String?
                                           }?,
                                           fsx_windows_file_server_volume_configuration: {
                                             file_system_id: ::String,
@@ -1755,6 +2061,10 @@ module Aws
                                           storage_configuration: {
                                             storage_size_gi_b: ::Integer?
                                           }?,
+                                          instance_metadata_tags_propagation: bool?,
+                                          local_storage_configuration: {
+                                            use_local_storage: bool?
+                                          }?,
                                           monitoring: ("BASIC" | "DETAILED")?,
                                           instance_requirements: {
                                             v_cpu_count: {
@@ -1808,6 +2118,10 @@ module Aws
                                             }?,
                                             allowed_instance_types: Array[::String]?,
                                             max_spot_price_as_percentage_of_optimal_on_demand_price: ::Integer?
+                                          }?,
+                                          capacity_reservations: {
+                                            reservation_group_arn: ::String?,
+                                            reservation_preference: ("RESERVATIONS_ONLY" | "RESERVATIONS_FIRST" | "RESERVATIONS_EXCLUDED")?
                                           }?
                                         },
                                         propagate_tags: ("CAPACITY_PROVIDER" | "NONE")?,
@@ -1893,6 +2207,33 @@ module Aws
                                               status: ("ACTIVE" | "DRAINING" | "REGISTERING" | "DEREGISTERING" | "REGISTRATION_FAILED")
                                             ) -> _UpdateContainerInstancesStateResponseSuccess
                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateContainerInstancesStateResponseSuccess
+
+      interface _UpdateDaemonResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateDaemonResponse]
+        def daemon_arn: () -> ::String
+        def status: () -> ("ACTIVE" | "DELETE_IN_PROGRESS")
+        def created_at: () -> ::Time
+        def updated_at: () -> ::Time
+        def deployment_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ECS/Client.html#update_daemon-instance_method
+      def update_daemon: (
+                           daemon_arn: ::String,
+                           daemon_task_definition_arn: ::String,
+                           capacity_provider_arns: Array[::String],
+                           ?deployment_configuration: {
+                             drain_percent: ::Float?,
+                             alarms: {
+                               alarm_names: Array[::String]?,
+                               enable: bool?
+                             }?,
+                             bake_time_in_minutes: ::Integer?
+                           },
+                           ?propagate_tags: ("DAEMON" | "NONE"),
+                           ?enable_ecs_managed_tags: bool,
+                           ?enable_execute_command: bool
+                         ) -> _UpdateDaemonResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDaemonResponseSuccess
 
       interface _UpdateExpressGatewayServiceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateExpressGatewayServiceResponse]
@@ -2175,7 +2516,27 @@ module Aws
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateTaskSetResponseSuccess
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ECS/Client.html#wait_until-instance_method
-      def wait_until: (:services_inactive waiter_name, 
+      def wait_until: (:daemon_active waiter_name, 
+                    daemon_arn: ::String
+                  ) -> Client::_DescribeDaemonResponseSuccess
+                    | (:daemon_active waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeDaemonResponseSuccess
+                    | (:daemon_deployment_stopped waiter_name, 
+                    daemon_deployment_arns: Array[::String]
+                  ) -> Client::_DescribeDaemonDeploymentsResponseSuccess
+                    | (:daemon_deployment_stopped waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeDaemonDeploymentsResponseSuccess
+                    | (:daemon_deployment_successful waiter_name, 
+                    daemon_deployment_arns: Array[::String]
+                  ) -> Client::_DescribeDaemonDeploymentsResponseSuccess
+                    | (:daemon_deployment_successful waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeDaemonDeploymentsResponseSuccess
+                    | (:daemon_task_definition_active waiter_name, 
+                    daemon_task_definition: ::String
+                  ) -> Client::_DescribeDaemonTaskDefinitionResponseSuccess
+                    | (:daemon_task_definition_active waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeDaemonTaskDefinitionResponseSuccess
+                    | (:daemon_task_definition_deleted waiter_name, 
+                    daemon_task_definition: ::String
+                  ) -> Client::_DescribeDaemonTaskDefinitionResponseSuccess
+                    | (:daemon_task_definition_deleted waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeDaemonTaskDefinitionResponseSuccess
+                    | (:services_inactive waiter_name, 
                     ?cluster: ::String,
                     services: Array[::String],
                     ?include: Array[("TAGS")]

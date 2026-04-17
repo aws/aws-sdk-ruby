@@ -626,7 +626,7 @@ module Aws::S3Tables
     #     format: "ICEBERG", # required, accepts ICEBERG
     #     metadata: {
     #       iceberg: {
-    #         schema: { # required
+    #         schema: {
     #           fields: [ # required
     #             {
     #               id: 1,
@@ -635,6 +635,21 @@ module Aws::S3Tables
     #               required: false,
     #             },
     #           ],
+    #         },
+    #         schema_v2: {
+    #           type: "struct", # required, accepts struct
+    #           fields: [ # required
+    #             {
+    #               id: 1, # required
+    #               name: "String", # required
+    #               type: { # required
+    #               },
+    #               required: false, # required
+    #               doc: "String",
+    #             },
+    #           ],
+    #           schema_id: 1,
+    #           identifier_field_ids: [1],
     #         },
     #         partition_spec: {
     #           fields: [ # required
@@ -2961,7 +2976,7 @@ module Aws::S3Tables
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-s3tables'
-      context[:gem_version] = '1.26.0'
+      context[:gem_version] = '1.28.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

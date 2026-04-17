@@ -110,6 +110,7 @@ module Aws::RAM
       attr_accessor client_token: ::String
       attr_accessor permission_arns: ::Array[::String]
       attr_accessor sources: ::Array[::String]
+      attr_accessor resource_share_configuration: Types::ResourceShareConfiguration
       SENSITIVE: []
     end
 
@@ -594,6 +595,7 @@ module Aws::RAM
       attr_accessor creation_time: ::Time
       attr_accessor last_updated_time: ::Time
       attr_accessor feature_set: ("CREATED_FROM_POLICY" | "PROMOTING_TO_STANDARD" | "STANDARD")
+      attr_accessor resource_share_configuration: Types::ResourceShareConfiguration
       SENSITIVE: []
     end
 
@@ -607,6 +609,11 @@ module Aws::RAM
       attr_accessor creation_time: ::Time
       attr_accessor last_updated_time: ::Time
       attr_accessor external: bool
+      SENSITIVE: []
+    end
+
+    class ResourceShareConfiguration
+      attr_accessor retain_sharing_on_account_leave_organization: bool
       SENSITIVE: []
     end
 

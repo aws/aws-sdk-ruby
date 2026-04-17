@@ -897,6 +897,12 @@ module Aws::Transfer
     #   to VPC, enables routing through customer VPCs using VPC\_LATTICE for
     #   private connectivity.
     #
+    # @option params [String] :ip_address_type
+    #   Specifies the IP address type for the connector's network
+    #   connections. When set to `IPV4`, the connector uses IPv4 addresses
+    #   only. When set to `DUALSTACK`, the connector supports both IPv4 and
+    #   IPv6 addresses, with IPv6 preferred when available.
+    #
     # @return [Types::CreateConnectorResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateConnectorResponse#connector_id #connector_id} => String
@@ -941,6 +947,7 @@ module Aws::Transfer
     #         port_number: 1,
     #       },
     #     },
+    #     ip_address_type: "IPV4", # accepts IPV4, DUALSTACK
     #   })
     #
     # @example Response structure
@@ -2444,6 +2451,7 @@ module Aws::Transfer
     #   resp.connector.egress_type #=> String, one of "SERVICE_MANAGED", "VPC_LATTICE"
     #   resp.connector.error_message #=> String
     #   resp.connector.status #=> String, one of "ACTIVE", "ERRORED", "PENDING"
+    #   resp.connector.ip_address_type #=> String, one of "IPV4", "DUALSTACK"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/DescribeConnector AWS API Documentation
     #
@@ -4932,6 +4940,12 @@ module Aws::Transfer
     #   modify how traffic is routed from the connector to the SFTP server.
     #   Changes to VPC configuration may require connector restart.
     #
+    # @option params [String] :ip_address_type
+    #   Specifies the IP address type for the connector's network
+    #   connections. When set to `IPV4`, the connector uses IPv4 addresses
+    #   only. When set to `DUALSTACK`, the connector supports both IPv4 and
+    #   IPv6 addresses, with IPv6 preferred when available.
+    #
     # @return [Types::UpdateConnectorResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateConnectorResponse#connector_id #connector_id} => String
@@ -4971,6 +4985,7 @@ module Aws::Transfer
     #         port_number: 1,
     #       },
     #     },
+    #     ip_address_type: "IPV4", # accepts IPV4, DUALSTACK
     #   })
     #
     # @example Response structure
@@ -5754,7 +5769,7 @@ module Aws::Transfer
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-transfer'
-      context[:gem_version] = '1.133.0'
+      context[:gem_version] = '1.135.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

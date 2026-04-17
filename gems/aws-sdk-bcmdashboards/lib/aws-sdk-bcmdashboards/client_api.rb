@@ -15,10 +15,15 @@ module Aws::BCMDashboards
     include Seahorse::Model
 
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
+    Boolean = Shapes::BooleanShape.new(name: 'Boolean')
+    ClientToken = Shapes::StringShape.new(name: 'ClientToken')
+    ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     CostAndUsageQuery = Shapes::StructureShape.new(name: 'CostAndUsageQuery')
     CostCategoryValues = Shapes::StructureShape.new(name: 'CostCategoryValues')
     CreateDashboardRequest = Shapes::StructureShape.new(name: 'CreateDashboardRequest')
     CreateDashboardResponse = Shapes::StructureShape.new(name: 'CreateDashboardResponse')
+    CreateScheduledReportRequest = Shapes::StructureShape.new(name: 'CreateScheduledReportRequest')
+    CreateScheduledReportResponse = Shapes::StructureShape.new(name: 'CreateScheduledReportResponse')
     DashboardArn = Shapes::StringShape.new(name: 'DashboardArn')
     DashboardName = Shapes::StringShape.new(name: 'DashboardName')
     DashboardReference = Shapes::StructureShape.new(name: 'DashboardReference')
@@ -29,10 +34,14 @@ module Aws::BCMDashboards
     DateTimeValue = Shapes::StructureShape.new(name: 'DateTimeValue')
     DeleteDashboardRequest = Shapes::StructureShape.new(name: 'DeleteDashboardRequest')
     DeleteDashboardResponse = Shapes::StructureShape.new(name: 'DeleteDashboardResponse')
+    DeleteScheduledReportRequest = Shapes::StructureShape.new(name: 'DeleteScheduledReportRequest')
+    DeleteScheduledReportResponse = Shapes::StructureShape.new(name: 'DeleteScheduledReportResponse')
     Description = Shapes::StringShape.new(name: 'Description')
     Dimension = Shapes::StringShape.new(name: 'Dimension')
     DimensionValues = Shapes::StructureShape.new(name: 'DimensionValues')
     DisplayConfig = Shapes::UnionShape.new(name: 'DisplayConfig')
+    ExecuteScheduledReportRequest = Shapes::StructureShape.new(name: 'ExecuteScheduledReportRequest')
+    ExecuteScheduledReportResponse = Shapes::StructureShape.new(name: 'ExecuteScheduledReportResponse')
     Expression = Shapes::StructureShape.new(name: 'Expression')
     Expressions = Shapes::ListShape.new(name: 'Expressions')
     GenericString = Shapes::StringShape.new(name: 'GenericString')
@@ -41,6 +50,8 @@ module Aws::BCMDashboards
     GetDashboardResponse = Shapes::StructureShape.new(name: 'GetDashboardResponse')
     GetResourcePolicyRequest = Shapes::StructureShape.new(name: 'GetResourcePolicyRequest')
     GetResourcePolicyResponse = Shapes::StructureShape.new(name: 'GetResourcePolicyResponse')
+    GetScheduledReportRequest = Shapes::StructureShape.new(name: 'GetScheduledReportRequest')
+    GetScheduledReportResponse = Shapes::StructureShape.new(name: 'GetScheduledReportResponse')
     Granularity = Shapes::StringShape.new(name: 'Granularity')
     GraphDisplayConfig = Shapes::StructureShape.new(name: 'GraphDisplayConfig')
     GraphDisplayConfigMap = Shapes::MapShape.new(name: 'GraphDisplayConfigMap')
@@ -48,10 +59,14 @@ module Aws::BCMDashboards
     GroupDefinitionKeyString = Shapes::StringShape.new(name: 'GroupDefinitionKeyString')
     GroupDefinitionType = Shapes::StringShape.new(name: 'GroupDefinitionType')
     GroupDefinitions = Shapes::ListShape.new(name: 'GroupDefinitions')
+    HealthStatus = Shapes::StructureShape.new(name: 'HealthStatus')
+    HealthStatusCode = Shapes::StringShape.new(name: 'HealthStatusCode')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
     ListDashboardsRequest = Shapes::StructureShape.new(name: 'ListDashboardsRequest')
     ListDashboardsResponse = Shapes::StructureShape.new(name: 'ListDashboardsResponse')
+    ListScheduledReportsRequest = Shapes::StructureShape.new(name: 'ListScheduledReportsRequest')
+    ListScheduledReportsResponse = Shapes::StructureShape.new(name: 'ListScheduledReportsResponse')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     MatchOption = Shapes::StringShape.new(name: 'MatchOption')
@@ -63,6 +78,7 @@ module Aws::BCMDashboards
     QueryParameters = Shapes::UnionShape.new(name: 'QueryParameters')
     ReservationCoverageQuery = Shapes::StructureShape.new(name: 'ReservationCoverageQuery')
     ReservationUtilizationQuery = Shapes::StructureShape.new(name: 'ReservationUtilizationQuery')
+    ResourceArn = Shapes::StringShape.new(name: 'ResourceArn')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     ResourceTag = Shapes::StructureShape.new(name: 'ResourceTag')
     ResourceTagKey = Shapes::StringShape.new(name: 'ResourceTagKey')
@@ -71,7 +87,19 @@ module Aws::BCMDashboards
     ResourceTagValue = Shapes::StringShape.new(name: 'ResourceTagValue')
     SavingsPlansCoverageQuery = Shapes::StructureShape.new(name: 'SavingsPlansCoverageQuery')
     SavingsPlansUtilizationQuery = Shapes::StructureShape.new(name: 'SavingsPlansUtilizationQuery')
+    ScheduleConfig = Shapes::StructureShape.new(name: 'ScheduleConfig')
+    SchedulePeriod = Shapes::StructureShape.new(name: 'SchedulePeriod')
+    ScheduleState = Shapes::StringShape.new(name: 'ScheduleState')
+    ScheduledReport = Shapes::StructureShape.new(name: 'ScheduledReport')
+    ScheduledReportArn = Shapes::StringShape.new(name: 'ScheduledReportArn')
+    ScheduledReportInput = Shapes::StructureShape.new(name: 'ScheduledReportInput')
+    ScheduledReportName = Shapes::StringShape.new(name: 'ScheduledReportName')
+    ScheduledReportSummary = Shapes::StructureShape.new(name: 'ScheduledReportSummary')
+    ScheduledReportSummaryList = Shapes::ListShape.new(name: 'ScheduledReportSummaryList')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
+    ServiceRoleArn = Shapes::StringShape.new(name: 'ServiceRoleArn')
+    StatusReason = Shapes::StringShape.new(name: 'StatusReason')
+    StatusReasonList = Shapes::ListShape.new(name: 'StatusReasonList')
     String = Shapes::StringShape.new(name: 'String')
     StringList = Shapes::ListShape.new(name: 'StringList')
     TableDisplayConfigStruct = Shapes::StructureShape.new(name: 'TableDisplayConfigStruct')
@@ -83,18 +111,25 @@ module Aws::BCMDashboards
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     UpdateDashboardRequest = Shapes::StructureShape.new(name: 'UpdateDashboardRequest')
     UpdateDashboardResponse = Shapes::StructureShape.new(name: 'UpdateDashboardResponse')
+    UpdateScheduledReportRequest = Shapes::StructureShape.new(name: 'UpdateScheduledReportRequest')
+    UpdateScheduledReportResponse = Shapes::StructureShape.new(name: 'UpdateScheduledReportResponse')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
     VisualType = Shapes::StringShape.new(name: 'VisualType')
     Widget = Shapes::StructureShape.new(name: 'Widget')
     WidgetConfig = Shapes::StructureShape.new(name: 'WidgetConfig')
     WidgetConfigList = Shapes::ListShape.new(name: 'WidgetConfigList')
     WidgetHeight = Shapes::IntegerShape.new(name: 'WidgetHeight')
+    WidgetId = Shapes::StringShape.new(name: 'WidgetId')
+    WidgetIdList = Shapes::ListShape.new(name: 'WidgetIdList')
     WidgetList = Shapes::ListShape.new(name: 'WidgetList')
     WidgetTitle = Shapes::StringShape.new(name: 'WidgetTitle')
     WidgetWidth = Shapes::IntegerShape.new(name: 'WidgetWidth')
 
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: GenericString, required: true, location_name: "message"))
     AccessDeniedException.struct_class = Types::AccessDeniedException
+
+    ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: GenericString, required: true, location_name: "message"))
+    ConflictException.struct_class = Types::ConflictException
 
     CostAndUsageQuery.add_member(:metrics, Shapes::ShapeRef.new(shape: MetricNames, required: true, location_name: "metrics"))
     CostAndUsageQuery.add_member(:time_range, Shapes::ShapeRef.new(shape: DateTimeRange, required: true, location_name: "timeRange"))
@@ -116,6 +151,14 @@ module Aws::BCMDashboards
 
     CreateDashboardResponse.add_member(:arn, Shapes::ShapeRef.new(shape: DashboardArn, required: true, location_name: "arn"))
     CreateDashboardResponse.struct_class = Types::CreateDashboardResponse
+
+    CreateScheduledReportRequest.add_member(:scheduled_report, Shapes::ShapeRef.new(shape: ScheduledReportInput, required: true, location_name: "scheduledReport"))
+    CreateScheduledReportRequest.add_member(:resource_tags, Shapes::ShapeRef.new(shape: ResourceTagList, location_name: "resourceTags"))
+    CreateScheduledReportRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
+    CreateScheduledReportRequest.struct_class = Types::CreateScheduledReportRequest
+
+    CreateScheduledReportResponse.add_member(:arn, Shapes::ShapeRef.new(shape: ScheduledReportArn, required: true, location_name: "arn"))
+    CreateScheduledReportResponse.struct_class = Types::CreateScheduledReportResponse
 
     DashboardReference.add_member(:arn, Shapes::ShapeRef.new(shape: DashboardArn, required: true, location_name: "arn"))
     DashboardReference.add_member(:name, Shapes::ShapeRef.new(shape: DashboardName, required: true, location_name: "name"))
@@ -141,6 +184,12 @@ module Aws::BCMDashboards
     DeleteDashboardResponse.add_member(:arn, Shapes::ShapeRef.new(shape: DashboardArn, required: true, location_name: "arn"))
     DeleteDashboardResponse.struct_class = Types::DeleteDashboardResponse
 
+    DeleteScheduledReportRequest.add_member(:arn, Shapes::ShapeRef.new(shape: ScheduledReportArn, required: true, location_name: "arn"))
+    DeleteScheduledReportRequest.struct_class = Types::DeleteScheduledReportRequest
+
+    DeleteScheduledReportResponse.add_member(:arn, Shapes::ShapeRef.new(shape: ScheduledReportArn, required: true, location_name: "arn"))
+    DeleteScheduledReportResponse.struct_class = Types::DeleteScheduledReportResponse
+
     DimensionValues.add_member(:key, Shapes::ShapeRef.new(shape: Dimension, required: true, location_name: "key"))
     DimensionValues.add_member(:values, Shapes::ShapeRef.new(shape: StringList, required: true, location_name: "values"))
     DimensionValues.add_member(:match_options, Shapes::ShapeRef.new(shape: MatchOptions, location_name: "matchOptions"))
@@ -153,6 +202,15 @@ module Aws::BCMDashboards
     DisplayConfig.add_member_subclass(:table, Types::DisplayConfig::Table)
     DisplayConfig.add_member_subclass(:unknown, Types::DisplayConfig::Unknown)
     DisplayConfig.struct_class = Types::DisplayConfig
+
+    ExecuteScheduledReportRequest.add_member(:arn, Shapes::ShapeRef.new(shape: ScheduledReportArn, required: true, location_name: "arn"))
+    ExecuteScheduledReportRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
+    ExecuteScheduledReportRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
+    ExecuteScheduledReportRequest.struct_class = Types::ExecuteScheduledReportRequest
+
+    ExecuteScheduledReportResponse.add_member(:health_status, Shapes::ShapeRef.new(shape: HealthStatus, location_name: "healthStatus"))
+    ExecuteScheduledReportResponse.add_member(:execution_triggered, Shapes::ShapeRef.new(shape: Boolean, location_name: "executionTriggered"))
+    ExecuteScheduledReportResponse.struct_class = Types::ExecuteScheduledReportResponse
 
     Expression.add_member(:or, Shapes::ShapeRef.new(shape: Expressions, location_name: "or"))
     Expression.add_member(:and, Shapes::ShapeRef.new(shape: Expressions, location_name: "and"))
@@ -183,6 +241,12 @@ module Aws::BCMDashboards
     GetResourcePolicyResponse.add_member(:policy_document, Shapes::ShapeRef.new(shape: GenericString, required: true, location_name: "policyDocument"))
     GetResourcePolicyResponse.struct_class = Types::GetResourcePolicyResponse
 
+    GetScheduledReportRequest.add_member(:arn, Shapes::ShapeRef.new(shape: ScheduledReportArn, required: true, location_name: "arn"))
+    GetScheduledReportRequest.struct_class = Types::GetScheduledReportRequest
+
+    GetScheduledReportResponse.add_member(:scheduled_report, Shapes::ShapeRef.new(shape: ScheduledReport, required: true, location_name: "scheduledReport"))
+    GetScheduledReportResponse.struct_class = Types::GetScheduledReportResponse
+
     GraphDisplayConfig.add_member(:visual_type, Shapes::ShapeRef.new(shape: VisualType, required: true, location_name: "visualType"))
     GraphDisplayConfig.struct_class = Types::GraphDisplayConfig
 
@@ -195,6 +259,11 @@ module Aws::BCMDashboards
 
     GroupDefinitions.member = Shapes::ShapeRef.new(shape: GroupDefinition)
 
+    HealthStatus.add_member(:status_code, Shapes::ShapeRef.new(shape: HealthStatusCode, required: true, location_name: "statusCode"))
+    HealthStatus.add_member(:last_refreshed_at, Shapes::ShapeRef.new(shape: GenericTimeStamp, location_name: "lastRefreshedAt"))
+    HealthStatus.add_member(:status_reasons, Shapes::ShapeRef.new(shape: StatusReasonList, location_name: "statusReasons"))
+    HealthStatus.struct_class = Types::HealthStatus
+
     InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: GenericString, required: true, location_name: "message"))
     InternalServerException.struct_class = Types::InternalServerException
 
@@ -206,7 +275,15 @@ module Aws::BCMDashboards
     ListDashboardsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextPageToken, location_name: "nextToken"))
     ListDashboardsResponse.struct_class = Types::ListDashboardsResponse
 
-    ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: DashboardArn, required: true, location_name: "resourceArn"))
+    ListScheduledReportsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextPageToken, location_name: "nextToken"))
+    ListScheduledReportsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
+    ListScheduledReportsRequest.struct_class = Types::ListScheduledReportsRequest
+
+    ListScheduledReportsResponse.add_member(:scheduled_reports, Shapes::ShapeRef.new(shape: ScheduledReportSummaryList, required: true, location_name: "scheduledReports"))
+    ListScheduledReportsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextPageToken, location_name: "nextToken"))
+    ListScheduledReportsResponse.struct_class = Types::ListScheduledReportsResponse
+
+    ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "resourceArn"))
     ListTagsForResourceRequest.struct_class = Types::ListTagsForResourceRequest
 
     ListTagsForResourceResponse.add_member(:resource_tags, Shapes::ShapeRef.new(shape: ResourceTagList, location_name: "resourceTags"))
@@ -266,14 +343,61 @@ module Aws::BCMDashboards
     SavingsPlansUtilizationQuery.add_member(:filter, Shapes::ShapeRef.new(shape: Expression, location_name: "filter"))
     SavingsPlansUtilizationQuery.struct_class = Types::SavingsPlansUtilizationQuery
 
+    ScheduleConfig.add_member(:schedule_expression, Shapes::ShapeRef.new(shape: GenericString, location_name: "scheduleExpression"))
+    ScheduleConfig.add_member(:schedule_expression_time_zone, Shapes::ShapeRef.new(shape: GenericString, location_name: "scheduleExpressionTimeZone"))
+    ScheduleConfig.add_member(:schedule_period, Shapes::ShapeRef.new(shape: SchedulePeriod, location_name: "schedulePeriod"))
+    ScheduleConfig.add_member(:state, Shapes::ShapeRef.new(shape: ScheduleState, location_name: "state"))
+    ScheduleConfig.struct_class = Types::ScheduleConfig
+
+    SchedulePeriod.add_member(:start_time, Shapes::ShapeRef.new(shape: GenericTimeStamp, location_name: "startTime"))
+    SchedulePeriod.add_member(:end_time, Shapes::ShapeRef.new(shape: GenericTimeStamp, location_name: "endTime"))
+    SchedulePeriod.struct_class = Types::SchedulePeriod
+
+    ScheduledReport.add_member(:arn, Shapes::ShapeRef.new(shape: ScheduledReportArn, location_name: "arn"))
+    ScheduledReport.add_member(:name, Shapes::ShapeRef.new(shape: ScheduledReportName, required: true, location_name: "name"))
+    ScheduledReport.add_member(:dashboard_arn, Shapes::ShapeRef.new(shape: DashboardArn, required: true, location_name: "dashboardArn"))
+    ScheduledReport.add_member(:scheduled_report_execution_role_arn, Shapes::ShapeRef.new(shape: ServiceRoleArn, required: true, location_name: "scheduledReportExecutionRoleArn"))
+    ScheduledReport.add_member(:schedule_config, Shapes::ShapeRef.new(shape: ScheduleConfig, required: true, location_name: "scheduleConfig"))
+    ScheduledReport.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    ScheduledReport.add_member(:widget_ids, Shapes::ShapeRef.new(shape: WidgetIdList, location_name: "widgetIds"))
+    ScheduledReport.add_member(:widget_date_range_override, Shapes::ShapeRef.new(shape: DateTimeRange, location_name: "widgetDateRangeOverride"))
+    ScheduledReport.add_member(:created_at, Shapes::ShapeRef.new(shape: GenericTimeStamp, location_name: "createdAt"))
+    ScheduledReport.add_member(:updated_at, Shapes::ShapeRef.new(shape: GenericTimeStamp, location_name: "updatedAt"))
+    ScheduledReport.add_member(:last_execution_at, Shapes::ShapeRef.new(shape: GenericTimeStamp, location_name: "lastExecutionAt"))
+    ScheduledReport.add_member(:health_status, Shapes::ShapeRef.new(shape: HealthStatus, location_name: "healthStatus"))
+    ScheduledReport.struct_class = Types::ScheduledReport
+
+    ScheduledReportInput.add_member(:name, Shapes::ShapeRef.new(shape: ScheduledReportName, required: true, location_name: "name"))
+    ScheduledReportInput.add_member(:dashboard_arn, Shapes::ShapeRef.new(shape: DashboardArn, required: true, location_name: "dashboardArn"))
+    ScheduledReportInput.add_member(:scheduled_report_execution_role_arn, Shapes::ShapeRef.new(shape: ServiceRoleArn, required: true, location_name: "scheduledReportExecutionRoleArn"))
+    ScheduledReportInput.add_member(:schedule_config, Shapes::ShapeRef.new(shape: ScheduleConfig, required: true, location_name: "scheduleConfig"))
+    ScheduledReportInput.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    ScheduledReportInput.add_member(:widget_ids, Shapes::ShapeRef.new(shape: WidgetIdList, location_name: "widgetIds"))
+    ScheduledReportInput.add_member(:widget_date_range_override, Shapes::ShapeRef.new(shape: DateTimeRange, location_name: "widgetDateRangeOverride"))
+    ScheduledReportInput.struct_class = Types::ScheduledReportInput
+
+    ScheduledReportSummary.add_member(:arn, Shapes::ShapeRef.new(shape: ScheduledReportArn, required: true, location_name: "arn"))
+    ScheduledReportSummary.add_member(:name, Shapes::ShapeRef.new(shape: ScheduledReportName, required: true, location_name: "name"))
+    ScheduledReportSummary.add_member(:dashboard_arn, Shapes::ShapeRef.new(shape: DashboardArn, required: true, location_name: "dashboardArn"))
+    ScheduledReportSummary.add_member(:schedule_expression, Shapes::ShapeRef.new(shape: GenericString, required: true, location_name: "scheduleExpression"))
+    ScheduledReportSummary.add_member(:state, Shapes::ShapeRef.new(shape: ScheduleState, required: true, location_name: "state"))
+    ScheduledReportSummary.add_member(:health_status, Shapes::ShapeRef.new(shape: HealthStatus, required: true, location_name: "healthStatus"))
+    ScheduledReportSummary.add_member(:schedule_expression_time_zone, Shapes::ShapeRef.new(shape: GenericString, location_name: "scheduleExpressionTimeZone"))
+    ScheduledReportSummary.add_member(:widget_ids, Shapes::ShapeRef.new(shape: WidgetIdList, location_name: "widgetIds"))
+    ScheduledReportSummary.struct_class = Types::ScheduledReportSummary
+
+    ScheduledReportSummaryList.member = Shapes::ShapeRef.new(shape: ScheduledReportSummary)
+
     ServiceQuotaExceededException.add_member(:message, Shapes::ShapeRef.new(shape: GenericString, required: true, location_name: "message"))
     ServiceQuotaExceededException.struct_class = Types::ServiceQuotaExceededException
+
+    StatusReasonList.member = Shapes::ShapeRef.new(shape: StatusReason)
 
     StringList.member = Shapes::ShapeRef.new(shape: String)
 
     TableDisplayConfigStruct.struct_class = Types::TableDisplayConfigStruct
 
-    TagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: DashboardArn, required: true, location_name: "resourceArn"))
+    TagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "resourceArn"))
     TagResourceRequest.add_member(:resource_tags, Shapes::ShapeRef.new(shape: ResourceTagList, required: true, location_name: "resourceTags"))
     TagResourceRequest.struct_class = Types::TagResourceRequest
 
@@ -287,14 +411,14 @@ module Aws::BCMDashboards
     ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: GenericString, required: true, location_name: "message"))
     ThrottlingException.struct_class = Types::ThrottlingException
 
-    UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: DashboardArn, required: true, location_name: "resourceArn"))
+    UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "resourceArn"))
     UntagResourceRequest.add_member(:resource_tag_keys, Shapes::ShapeRef.new(shape: ResourceTagKeyList, required: true, location_name: "resourceTagKeys"))
     UntagResourceRequest.struct_class = Types::UntagResourceRequest
 
     UntagResourceResponse.struct_class = Types::UntagResourceResponse
 
     UpdateDashboardRequest.add_member(:arn, Shapes::ShapeRef.new(shape: DashboardArn, required: true, location_name: "arn"))
-    UpdateDashboardRequest.add_member(:name, Shapes::ShapeRef.new(shape: DashboardName, location_name: "name"))
+    UpdateDashboardRequest.add_member(:name, Shapes::ShapeRef.new(shape: DashboardName, required: true, location_name: "name"))
     UpdateDashboardRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     UpdateDashboardRequest.add_member(:widgets, Shapes::ShapeRef.new(shape: WidgetList, location_name: "widgets"))
     UpdateDashboardRequest.struct_class = Types::UpdateDashboardRequest
@@ -302,9 +426,25 @@ module Aws::BCMDashboards
     UpdateDashboardResponse.add_member(:arn, Shapes::ShapeRef.new(shape: DashboardArn, required: true, location_name: "arn"))
     UpdateDashboardResponse.struct_class = Types::UpdateDashboardResponse
 
+    UpdateScheduledReportRequest.add_member(:arn, Shapes::ShapeRef.new(shape: ScheduledReportArn, required: true, location_name: "arn"))
+    UpdateScheduledReportRequest.add_member(:name, Shapes::ShapeRef.new(shape: ScheduledReportName, location_name: "name"))
+    UpdateScheduledReportRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    UpdateScheduledReportRequest.add_member(:dashboard_arn, Shapes::ShapeRef.new(shape: DashboardArn, location_name: "dashboardArn"))
+    UpdateScheduledReportRequest.add_member(:scheduled_report_execution_role_arn, Shapes::ShapeRef.new(shape: ServiceRoleArn, location_name: "scheduledReportExecutionRoleArn"))
+    UpdateScheduledReportRequest.add_member(:schedule_config, Shapes::ShapeRef.new(shape: ScheduleConfig, location_name: "scheduleConfig"))
+    UpdateScheduledReportRequest.add_member(:widget_ids, Shapes::ShapeRef.new(shape: WidgetIdList, location_name: "widgetIds"))
+    UpdateScheduledReportRequest.add_member(:widget_date_range_override, Shapes::ShapeRef.new(shape: DateTimeRange, location_name: "widgetDateRangeOverride"))
+    UpdateScheduledReportRequest.add_member(:clear_widget_ids, Shapes::ShapeRef.new(shape: Boolean, location_name: "clearWidgetIds"))
+    UpdateScheduledReportRequest.add_member(:clear_widget_date_range_override, Shapes::ShapeRef.new(shape: Boolean, location_name: "clearWidgetDateRangeOverride"))
+    UpdateScheduledReportRequest.struct_class = Types::UpdateScheduledReportRequest
+
+    UpdateScheduledReportResponse.add_member(:arn, Shapes::ShapeRef.new(shape: ScheduledReportArn, required: true, location_name: "arn"))
+    UpdateScheduledReportResponse.struct_class = Types::UpdateScheduledReportResponse
+
     ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: GenericString, required: true, location_name: "message"))
     ValidationException.struct_class = Types::ValidationException
 
+    Widget.add_member(:id, Shapes::ShapeRef.new(shape: WidgetId, location_name: "id"))
     Widget.add_member(:title, Shapes::ShapeRef.new(shape: WidgetTitle, required: true, location_name: "title"))
     Widget.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     Widget.add_member(:width, Shapes::ShapeRef.new(shape: WidgetWidth, location_name: "width"))
@@ -318,6 +458,8 @@ module Aws::BCMDashboards
     WidgetConfig.struct_class = Types::WidgetConfig
 
     WidgetConfigList.member = Shapes::ShapeRef.new(shape: WidgetConfig)
+
+    WidgetIdList.member = Shapes::ShapeRef.new(shape: String)
 
     WidgetList.member = Shapes::ShapeRef.new(shape: Widget)
 
@@ -355,6 +497,20 @@ module Aws::BCMDashboards
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
       end)
 
+      api.add_operation(:create_scheduled_report, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateScheduledReport"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateScheduledReportRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateScheduledReportResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+      end)
+
       api.add_operation(:delete_dashboard, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteDashboard"
         o.http_method = "POST"
@@ -365,6 +521,33 @@ module Aws::BCMDashboards
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
+      api.add_operation(:delete_scheduled_report, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteScheduledReport"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteScheduledReportRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteScheduledReportResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:execute_scheduled_report, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ExecuteScheduledReport"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ExecuteScheduledReportRequest)
+        o.output = Shapes::ShapeRef.new(shape: ExecuteScheduledReportResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:get_dashboard, Seahorse::Model::Operation.new.tap do |o|
@@ -393,12 +576,43 @@ module Aws::BCMDashboards
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
+      api.add_operation(:get_scheduled_report, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetScheduledReport"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetScheduledReportRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetScheduledReportResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
       api.add_operation(:list_dashboards, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListDashboards"
         o.http_method = "POST"
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ListDashboardsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListDashboardsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_scheduled_reports, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListScheduledReports"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListScheduledReportsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListScheduledReportsResponse)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
@@ -454,6 +668,20 @@ module Aws::BCMDashboards
         o.input = Shapes::ShapeRef.new(shape: UpdateDashboardRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateDashboardResponse)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:update_scheduled_report, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateScheduledReport"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateScheduledReportRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateScheduledReportResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)

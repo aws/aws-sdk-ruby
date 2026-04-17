@@ -25,6 +25,12 @@ module Aws::PCS
       SENSITIVE: []
     end
 
+    class CgroupCustomSetting
+      attr_accessor parameter_name: ::String
+      attr_accessor parameter_value: ::String
+      SENSITIVE: []
+    end
+
     class Cluster
       attr_accessor name: ::String
       attr_accessor id: ::String
@@ -44,6 +50,8 @@ module Aws::PCS
     class ClusterSlurmConfiguration
       attr_accessor scale_down_idle_time_in_seconds: ::Integer
       attr_accessor slurm_custom_settings: ::Array[Types::SlurmCustomSetting]
+      attr_accessor slurmdbd_custom_settings: ::Array[Types::SlurmdbdCustomSetting]
+      attr_accessor cgroup_custom_settings: ::Array[Types::CgroupCustomSetting]
       attr_accessor auth_key: Types::SlurmAuthKey
       attr_accessor jwt_auth: Types::JwtAuth
       attr_accessor accounting: Types::Accounting
@@ -54,6 +62,8 @@ module Aws::PCS
     class ClusterSlurmConfigurationRequest
       attr_accessor scale_down_idle_time_in_seconds: ::Integer
       attr_accessor slurm_custom_settings: ::Array[Types::SlurmCustomSetting]
+      attr_accessor slurmdbd_custom_settings: ::Array[Types::SlurmdbdCustomSetting]
+      attr_accessor cgroup_custom_settings: ::Array[Types::CgroupCustomSetting]
       attr_accessor accounting: Types::AccountingRequest
       attr_accessor slurm_rest: Types::SlurmRestRequest
       SENSITIVE: []
@@ -451,6 +461,12 @@ module Aws::PCS
       SENSITIVE: []
     end
 
+    class SlurmdbdCustomSetting
+      attr_accessor parameter_name: ::String
+      attr_accessor parameter_value: ::String
+      SENSITIVE: []
+    end
+
     class SpotOptions
       attr_accessor allocation_strategy: ("lowest-price" | "capacity-optimized" | "price-capacity-optimized")
       SENSITIVE: []
@@ -501,6 +517,8 @@ module Aws::PCS
     class UpdateClusterSlurmConfigurationRequest
       attr_accessor scale_down_idle_time_in_seconds: ::Integer
       attr_accessor slurm_custom_settings: ::Array[Types::SlurmCustomSetting]
+      attr_accessor slurmdbd_custom_settings: ::Array[Types::SlurmdbdCustomSetting]
+      attr_accessor cgroup_custom_settings: ::Array[Types::CgroupCustomSetting]
       attr_accessor accounting: Types::UpdateAccountingRequest
       attr_accessor slurm_rest: Types::UpdateSlurmRestRequest
       SENSITIVE: []

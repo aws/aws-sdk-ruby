@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.142.0 (2026-03-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.141.0 (2026-03-09)
+------------------
+
+* Feature - Added support for CloudWatch Logs long-term API keys, currently available in Preview
+
 1.140.0 (2026-01-16)
 ------------------
 

@@ -134,6 +134,8 @@ module Aws::DataSync
       attr_accessor user: ::String
       attr_accessor domain: ::String
       attr_accessor password: ::String
+      attr_accessor cmk_secret_config: Types::CmkSecretConfig
+      attr_accessor custom_secret_config: Types::CustomSecretConfig
       SENSITIVE: [:password]
     end
 
@@ -156,6 +158,8 @@ module Aws::DataSync
       attr_accessor kerberos_krb_5_conf: ::String
       attr_accessor agent_arns: ::Array[::String]
       attr_accessor tags: ::Array[Types::TagListEntry]
+      attr_accessor cmk_secret_config: Types::CmkSecretConfig
+      attr_accessor custom_secret_config: Types::CustomSecretConfig
       SENSITIVE: []
     end
 
@@ -396,6 +400,9 @@ module Aws::DataSync
       attr_accessor creation_time: ::Time
       attr_accessor user: ::String
       attr_accessor domain: ::String
+      attr_accessor managed_secret_config: Types::ManagedSecretConfig
+      attr_accessor cmk_secret_config: Types::CmkSecretConfig
+      attr_accessor custom_secret_config: Types::CustomSecretConfig
       SENSITIVE: []
     end
 
@@ -417,6 +424,9 @@ module Aws::DataSync
       attr_accessor kerberos_principal: ::String
       attr_accessor agent_arns: ::Array[::String]
       attr_accessor creation_time: ::Time
+      attr_accessor managed_secret_config: Types::ManagedSecretConfig
+      attr_accessor cmk_secret_config: Types::CmkSecretConfig
+      attr_accessor custom_secret_config: Types::CustomSecretConfig
       SENSITIVE: []
     end
 
@@ -592,6 +602,9 @@ module Aws::DataSync
       attr_accessor mount_options: Types::SmbMountOptions
       attr_accessor password: ::String
       attr_accessor user: ::String
+      attr_accessor managed_secret_config: Types::ManagedSecretConfig
+      attr_accessor cmk_secret_config: Types::CmkSecretConfig
+      attr_accessor custom_secret_config: Types::CustomSecretConfig
       SENSITIVE: [:password]
     end
 
@@ -606,6 +619,8 @@ module Aws::DataSync
       attr_accessor mount_options: Types::SmbMountOptions
       attr_accessor password: ::String
       attr_accessor user: ::String
+      attr_accessor cmk_secret_config: Types::CmkSecretConfig
+      attr_accessor custom_secret_config: Types::CustomSecretConfig
       SENSITIVE: [:password]
     end
 
@@ -1018,6 +1033,8 @@ module Aws::DataSync
       attr_accessor domain: ::String
       attr_accessor user: ::String
       attr_accessor password: ::String
+      attr_accessor cmk_secret_config: Types::CmkSecretConfig
+      attr_accessor custom_secret_config: Types::CustomSecretConfig
       SENSITIVE: [:password]
     end
 
@@ -1038,6 +1055,8 @@ module Aws::DataSync
       attr_accessor kerberos_keytab: ::String
       attr_accessor kerberos_krb_5_conf: ::String
       attr_accessor agent_arns: ::Array[::String]
+      attr_accessor cmk_secret_config: Types::CmkSecretConfig
+      attr_accessor custom_secret_config: Types::CustomSecretConfig
       SENSITIVE: []
     end
 

@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.75.0 (2026-03-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.74.0 (2026-03-05)
+------------------
+
+* Feature - Added support for OpenSearch and Neptune Analytics to Database Savings Plans.
+
 1.73.0 (2026-01-16)
 ------------------
 

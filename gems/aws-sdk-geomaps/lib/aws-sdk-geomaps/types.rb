@@ -249,9 +249,7 @@ module Aws::GeoMaps
     #   @return [String]
     #
     # @!attribute [rw] color_scheme
-    #   Sets color tone for map such as dark and light for specific map
-    #   styles. It applies to only vector map styles such as Standard and
-    #   Monochrome.
+    #   Sets the color tone for the map sprites, such as dark and light.
     #
     #   Example: `Light`
     #
@@ -349,8 +347,7 @@ module Aws::GeoMaps
     #   @return [String]
     #
     # @!attribute [rw] color_scheme
-    #   Sets color tone for map, such as dark and light for specific map
-    #   styles. It only applies to vector map styles, such as Standard.
+    #   Sets the color tone for the map, such as dark and light.
     #
     #   Example: `Light`
     #
@@ -713,13 +710,17 @@ module Aws::GeoMaps
     end
 
     # @!attribute [rw] style
-    #   Style specifies the desired map style.
+    #   Style specifies the desired map style. For [GrabMaps][1] customers,
+    #   `ap-southeast-1` and `ap-southeast-5` regions support only the
+    #   `Standard` and `Monochrome` values.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
     #   @return [String]
     #
     # @!attribute [rw] color_scheme
-    #   Sets color tone for map such as dark and light for specific map
-    #   styles. It applies to only vector map styles such as Standard and
-    #   Monochrome.
+    #   Sets the color tone for the map, such as dark and light.
     #
     #   Example: `Light`
     #
@@ -732,7 +733,8 @@ module Aws::GeoMaps
     #
     # @!attribute [rw] political_view
     #   Specifies the political view using ISO 3166-2 or ISO 3166-3 country
-    #   code format.
+    #   code format. Not supported in `ap-southeast-1` and `ap-southeast-5`
+    #   regions for [GrabMaps][1] customers.
     #
     #   The following political views are currently supported:
     #
@@ -766,10 +768,16 @@ module Aws::GeoMaps
     #   * `URY`: Uruguay's view on Rincon de Artigas
     #
     #   * `VNM`: Vietnam's view on the Paracel Islands and Spratly Islands
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
     #   @return [String]
     #
     # @!attribute [rw] terrain
-    #   Adjusts how physical terrain details are rendered on the map.
+    #   Adjusts how physical terrain details are rendered on the map. Not
+    #   supported in `ap-southeast-1` and `ap-southeast-5` regions for
+    #   [GrabMaps][1] customers.
     #
     #   The following terrain styles are currently supported:
     #
@@ -781,31 +789,50 @@ module Aws::GeoMaps
     #
     #   `Hillshade` is valid only for the `Standard` and `Monochrome` map
     #   styles.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
     #   @return [String]
     #
     # @!attribute [rw] contour_density
     #   Displays the shape and steepness of terrain features using elevation
     #   lines. The density value controls how densely the available contour
-    #   line information is rendered on the map.
+    #   line information is rendered on the map. Not supported in
+    #   `ap-southeast-1` and `ap-southeast-5` regions for [GrabMaps][1]
+    #   customers.
     #
-    #   This parameter is valid only for the `Standard`, `Monochrome`, and
-    #   `Hybrid` map styles.
+    #   This parameter is valid for all map styles except `Satellite`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
     #   @return [String]
     #
     # @!attribute [rw] traffic
     #   Displays real-time traffic information overlay on map, such as
-    #   incident events and flow events.
+    #   incident events and flow events. Not supported in `ap-southeast-1`
+    #   and `ap-southeast-5` regions for [GrabMaps][1] customers.
     #
-    #   This parameter is valid only for the `Standard` map style.
+    #   This parameter is valid for all map styles except `Satellite`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
     #   @return [String]
     #
     # @!attribute [rw] travel_modes
     #   Renders additional map information relevant to selected travel
     #   modes. Information for multiple travel modes can be displayed
     #   simultaneously, although this increases the overall information
-    #   density rendered on the map.
+    #   density rendered on the map. Not supported in `ap-southeast-1` and
+    #   `ap-southeast-5` regions for [GrabMaps][1] customers.
     #
-    #   This parameter is valid only for the `Standard` map style.
+    #   This parameter is valid for all map styles except `Satellite`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] buildings
@@ -874,14 +901,25 @@ module Aws::GeoMaps
 
     # @!attribute [rw] additional_features
     #   A list of optional additional parameters such as map styles that can
-    #   be requested for each result.
+    #   be requested for each result. Not supported in `ap-southeast-1` and
+    #   `ap-southeast-5` regions for [GrabMaps][1] customers.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] tileset
-    #   Specifies the desired tile set.
+    #   Specifies the desired tile set. For [GrabMaps][1] customers,
+    #   `ap-southeast-1` and `ap-southeast-5` regions support only the
+    #   `vector.basemap` value.
     #
     #   Valid Values: `raster.satellite | vector.basemap | vector.traffic |
     #   raster.dem`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
     #   @return [String]
     #
     # @!attribute [rw] z
@@ -889,7 +927,7 @@ module Aws::GeoMaps
     #   @return [String]
     #
     # @!attribute [rw] x
-    #   The X axis value for the map tile. Must be between 0 and 19.
+    #   The X axis value for the map tile.
     #   @return [String]
     #
     # @!attribute [rw] y

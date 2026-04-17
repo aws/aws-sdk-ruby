@@ -273,6 +273,7 @@ module Aws
                                            peer_network_id: ::String,
                                            ?display_name: ::String,
                                            ?peer_network_cidrs_to_be_added: Array[::String],
+                                           ?peer_network_route_table_ids: Array[::String],
                                            ?client_token: ::String,
                                            ?tags: Hash[::String, ::String]
                                          ) -> _CreateOdbPeeringConnectionResponseSuccess

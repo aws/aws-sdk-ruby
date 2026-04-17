@@ -102,6 +102,12 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatch/Alarm.html#state_transitioned_timestamp-instance_method
       def state_transitioned_timestamp: () -> ::Time
 
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatch/Alarm.html#evaluation_criteria-instance_method
+      def evaluation_criteria: () -> Types::EvaluationCriteria
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatch/Alarm.html#evaluation_interval-instance_method
+      def evaluation_interval: () -> ::Integer
+
       def client: () -> Client
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatch/Alarm.html#load-instance_method

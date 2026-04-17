@@ -15884,6 +15884,12 @@ module Aws::CloudFront
     #   * `dualstack` - Allocate a list of both IPv4 and IPv6 addresses
     #   @return [String]
     #
+    # @!attribute [rw] ipam_cidr_configs
+    #   A list of IPAM CIDR configurations that specify the IP address
+    #   ranges and IPAM pool settings for updating the Anycast static IP
+    #   list.
+    #   @return [Array<Types::IpamCidrConfig>]
+    #
     # @!attribute [rw] if_match
     #   The current version (ETag value) of the Anycast static IP list that
     #   you are updating.
@@ -15894,6 +15900,7 @@ module Aws::CloudFront
     class UpdateAnycastIpListRequest < Struct.new(
       :id,
       :ip_address_type,
+      :ipam_cidr_configs,
       :if_match)
       SENSITIVE = []
       include Aws::Structure

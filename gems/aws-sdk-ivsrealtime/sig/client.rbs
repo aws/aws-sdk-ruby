@@ -107,6 +107,7 @@ module Aws
                                          ?attributes: Hash[::String, ::String],
                                          ingest_protocol: ("RTMP" | "RTMPS"),
                                          ?insecure_ingest: bool,
+                                         ?redundant_ingest: bool,
                                          ?tags: Hash[::String, ::String]
                                        ) -> _CreateIngestConfigurationResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateIngestConfigurationResponseSuccess
@@ -605,7 +606,8 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IVSRealTime/Client.html#update_ingest_configuration-instance_method
       def update_ingest_configuration: (
                                          arn: ::String,
-                                         ?stage_arn: ::String
+                                         ?stage_arn: ::String,
+                                         ?redundant_ingest: bool
                                        ) -> _UpdateIngestConfigurationResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateIngestConfigurationResponseSuccess
 

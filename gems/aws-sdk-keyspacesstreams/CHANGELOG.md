@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.14.0 (2026-03-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.13.0 (2026-02-27)
+------------------
+
+* Feature - Added support for Change Data Capture (CDC) streams with Duration DataType.
+
 1.12.0 (2026-01-16)
 ------------------
 

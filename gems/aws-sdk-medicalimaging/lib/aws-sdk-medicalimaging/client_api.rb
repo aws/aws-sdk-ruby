@@ -17,6 +17,7 @@ module Aws::MedicalImaging
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
     Arn = Shapes::StringShape.new(name: 'Arn')
     AwsAccountId = Shapes::StringShape.new(name: 'AwsAccountId')
+    BadRequestException = Shapes::StructureShape.new(name: 'BadRequestException')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     ClientToken = Shapes::StringShape.new(name: 'ClientToken')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
@@ -108,6 +109,7 @@ module Aws::MedicalImaging
     MetadataCopies = Shapes::StructureShape.new(name: 'MetadataCopies')
     MetadataUpdates = Shapes::UnionShape.new(name: 'MetadataUpdates')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
+    NotAcceptableException = Shapes::StructureShape.new(name: 'NotAcceptableException')
     Operator = Shapes::StringShape.new(name: 'Operator')
     Overrides = Shapes::StructureShape.new(name: 'Overrides')
     PayloadBlob = Shapes::BlobShape.new(name: 'PayloadBlob', streaming: true)
@@ -145,6 +147,9 @@ module Aws::MedicalImaging
 
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     AccessDeniedException.struct_class = Types::AccessDeniedException
+
+    BadRequestException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
+    BadRequestException.struct_class = Types::BadRequestException
 
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     ConflictException.struct_class = Types::ConflictException
@@ -430,6 +435,9 @@ module Aws::MedicalImaging
     MetadataUpdates.add_member_subclass(:unknown, Types::MetadataUpdates::Unknown)
     MetadataUpdates.struct_class = Types::MetadataUpdates
 
+    NotAcceptableException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
+    NotAcceptableException.struct_class = Types::NotAcceptableException
+
     Overrides.add_member(:forced, Shapes::ShapeRef.new(shape: Boolean, location_name: "forced"))
     Overrides.struct_class = Types::Overrides
 
@@ -529,6 +537,7 @@ module Aws::MedicalImaging
     UpdateImageSetMetadataRequest.add_member(:image_set_id, Shapes::ShapeRef.new(shape: ImageSetId, required: true, location: "uri", location_name: "imageSetId"))
     UpdateImageSetMetadataRequest.add_member(:latest_version_id, Shapes::ShapeRef.new(shape: ImageSetExternalVersionId, required: true, location: "querystring", location_name: "latestVersion"))
     UpdateImageSetMetadataRequest.add_member(:force, Shapes::ShapeRef.new(shape: Boolean, location: "querystring", location_name: "force"))
+    UpdateImageSetMetadataRequest.add_member(:include_study_image_sets, Shapes::ShapeRef.new(shape: Boolean, location: "querystring", location_name: "includeStudyImageSets"))
     UpdateImageSetMetadataRequest.add_member(:update_image_set_metadata_updates, Shapes::ShapeRef.new(shape: MetadataUpdates, required: true, location_name: "updateImageSetMetadataUpdates"))
     UpdateImageSetMetadataRequest.struct_class = Types::UpdateImageSetMetadataRequest
     UpdateImageSetMetadataRequest[:payload] = :update_image_set_metadata_updates
@@ -672,6 +681,8 @@ module Aws::MedicalImaging
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: NotAcceptableException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
       end)
 
       api.add_operation(:get_image_set, Seahorse::Model::Operation.new.tap do |o|

@@ -1,0 +1,1036 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module DevOpsAgent
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DevOpsAgent/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?account_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?auth_scheme_preference: Array[String],
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?event_stream_handler: Proc,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?input_event_stream_handler: Proc,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?output_event_stream_handler: Proc,
+                      ?profile: String,
+                      ?request_checksum_calculation: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?response_checksum_validation: String,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?sigv4a_signing_region_set: Array[String],
+                      ?stub_responses: untyped,
+                      ?telemetry_provider: Aws::Telemetry::TelemetryProviderBase,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _AssociateServiceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AssociateServiceOutput]
+        def association: () -> Types::Association
+        def webhook: () -> Types::GenericWebhook
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DevOpsAgent/Client.html#associate_service-instance_method
+      def associate_service: (
+                               agent_space_id: ::String,
+                               service_id: ::String,
+                               configuration: {
+                                 source_aws: {
+                                   account_id: ::String,
+                                   account_type: ("source"),
+                                   assumable_role_arn: ::String,
+                                   external_id: ::String?
+                                 }?,
+                                 aws: {
+                                   assumable_role_arn: ::String,
+                                   account_id: ::String,
+                                   account_type: ("monitor")
+                                 }?,
+                                 github: {
+                                   repo_name: ::String,
+                                   repo_id: ::String,
+                                   owner: ::String,
+                                   owner_type: ("organization" | "user"),
+                                   instance_identifier: ::String?
+                                 }?,
+                                 slack: {
+                                   workspace_id: ::String,
+                                   workspace_name: ::String,
+                                   transmission_target: {
+                                     ops_oncall_target: {
+                                       channel_name: ::String?,
+                                       channel_id: ::String
+                                     },
+                                     ops_sre_target: {
+                                       channel_name: ::String?,
+                                       channel_id: ::String
+                                     }?
+                                   }
+                                 }?,
+                                 dynatrace: {
+                                   env_id: ::String,
+                                   resources: Array[::String]?
+                                 }?,
+                                 servicenow: {
+                                   instance_id: ::String?,
+                                   auth_scopes: Array[::String]?
+                                 }?,
+                                 mcpservernewrelic: {
+                                   account_id: ::String,
+                                   endpoint: ::String
+                                 }?,
+                                 mcpserverdatadog: {
+                                 }?,
+                                 mcpserver: {
+                                   tools: Array[::String]
+                                 }?,
+                                 gitlab: {
+                                   project_id: ::String,
+                                   project_path: ::String,
+                                   instance_identifier: ::String?
+                                 }?,
+                                 mcpserversplunk: {
+                                 }?,
+                                 event_channel: {
+                                 }?,
+                                 azure: {
+                                   subscription_id: ::String
+                                 }?,
+                                 azuredevops: {
+                                   organization_name: ::String,
+                                   project_id: ::String,
+                                   project_name: ::String
+                                 }?,
+                                 mcpservergrafana: {
+                                   endpoint: ::String,
+                                   organization_id: ::String?,
+                                   tools: Array[::String]?
+                                 }?,
+                                 pagerduty: {
+                                   services: Array[::String],
+                                   customer_email: ::String
+                                 }?
+                               }
+                             ) -> _AssociateServiceResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateServiceResponseSuccess
+
+      interface _CreateAgentSpaceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateAgentSpaceOutput]
+        def agent_space: () -> Types::AgentSpace
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DevOpsAgent/Client.html#create_agent_space-instance_method
+      def create_agent_space: (
+                                name: ::String,
+                                ?description: ::String,
+                                ?locale: ::String,
+                                ?kms_key_arn: ::String,
+                                ?client_token: ::String,
+                                ?tags: Hash[::String, ::String]
+                              ) -> _CreateAgentSpaceResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAgentSpaceResponseSuccess
+
+      interface _CreateBacklogTaskResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateBacklogTaskResponse]
+        def task: () -> Types::Task
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DevOpsAgent/Client.html#create_backlog_task-instance_method
+      def create_backlog_task: (
+                                 agent_space_id: ::String,
+                                 ?reference: {
+                                   system: ::String,
+                                   title: ::String?,
+                                   reference_id: ::String,
+                                   reference_url: ::String,
+                                   association_id: ::String
+                                 },
+                                 task_type: ("INVESTIGATION" | "EVALUATION"),
+                                 title: ::String,
+                                 ?description: ::String,
+                                 priority: ("CRITICAL" | "HIGH" | "MEDIUM" | "LOW" | "MINIMAL"),
+                                 ?client_token: ::String
+                               ) -> _CreateBacklogTaskResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateBacklogTaskResponseSuccess
+
+      interface _CreateChatResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateChatResponse]
+        def execution_id: () -> ::String
+        def created_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DevOpsAgent/Client.html#create_chat-instance_method
+      def create_chat: (
+                         agent_space_id: ::String,
+                         ?user_id: ::String,
+                         ?user_type: ("IAM" | "IDC" | "IDP")
+                       ) -> _CreateChatResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateChatResponseSuccess
+
+      interface _CreatePrivateConnectionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreatePrivateConnectionOutput]
+        def name: () -> ::String
+        def type: () -> ("SELF_MANAGED" | "SERVICE_MANAGED")
+        def resource_gateway_id: () -> ::String
+        def host_address: () -> ::String
+        def vpc_id: () -> ::String
+        def resource_configuration_id: () -> ::String
+        def status: () -> ("ACTIVE" | "CREATE_IN_PROGRESS" | "CREATE_FAILED" | "DELETE_IN_PROGRESS" | "DELETE_FAILED")
+        def certificate_expiry_time: () -> ::Time
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DevOpsAgent/Client.html#create_private_connection-instance_method
+      def create_private_connection: (
+                                       name: ::String,
+                                       mode: {
+                                         service_managed: {
+                                           host_address: ::String,
+                                           vpc_id: ::String,
+                                           subnet_ids: Array[::String],
+                                           security_group_ids: Array[::String]?,
+                                           ip_address_type: ("IPV4" | "IPV6" | "DUAL_STACK")?,
+                                           ipv4_addresses_per_eni: ::Integer?,
+                                           port_ranges: Array[::String]?,
+                                           certificate: ::String?
+                                         }?,
+                                         self_managed: {
+                                           resource_configuration_id: ::String,
+                                           certificate: ::String?
+                                         }?
+                                       },
+                                       ?tags: Hash[::String, ::String]
+                                     ) -> _CreatePrivateConnectionResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreatePrivateConnectionResponseSuccess
+
+      interface _DeleteAgentSpaceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteAgentSpaceOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DevOpsAgent/Client.html#delete_agent_space-instance_method
+      def delete_agent_space: (
+                                agent_space_id: ::String
+                              ) -> _DeleteAgentSpaceResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteAgentSpaceResponseSuccess
+
+      interface _DeletePrivateConnectionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeletePrivateConnectionOutput]
+        def name: () -> ::String
+        def status: () -> ("ACTIVE" | "CREATE_IN_PROGRESS" | "CREATE_FAILED" | "DELETE_IN_PROGRESS" | "DELETE_FAILED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DevOpsAgent/Client.html#delete_private_connection-instance_method
+      def delete_private_connection: (
+                                       name: ::String
+                                     ) -> _DeletePrivateConnectionResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeletePrivateConnectionResponseSuccess
+
+      interface _DeregisterServiceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeregisterServiceOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DevOpsAgent/Client.html#deregister_service-instance_method
+      def deregister_service: (
+                                service_id: ::String
+                              ) -> _DeregisterServiceResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeregisterServiceResponseSuccess
+
+      interface _DescribePrivateConnectionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribePrivateConnectionOutput]
+        def name: () -> ::String
+        def type: () -> ("SELF_MANAGED" | "SERVICE_MANAGED")
+        def resource_gateway_id: () -> ::String
+        def host_address: () -> ::String
+        def vpc_id: () -> ::String
+        def resource_configuration_id: () -> ::String
+        def status: () -> ("ACTIVE" | "CREATE_IN_PROGRESS" | "CREATE_FAILED" | "DELETE_IN_PROGRESS" | "DELETE_FAILED")
+        def certificate_expiry_time: () -> ::Time
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DevOpsAgent/Client.html#describe_private_connection-instance_method
+      def describe_private_connection: (
+                                         name: ::String
+                                       ) -> _DescribePrivateConnectionResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribePrivateConnectionResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DevOpsAgent/Client.html#disable_operator_app-instance_method
+      def disable_operator_app: (
+                                  agent_space_id: ::String,
+                                  ?auth_flow: ("iam" | "idc" | "idp")
+                                ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _DisassociateServiceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisassociateServiceOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DevOpsAgent/Client.html#disassociate_service-instance_method
+      def disassociate_service: (
+                                  agent_space_id: ::String,
+                                  association_id: ::String
+                                ) -> _DisassociateServiceResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateServiceResponseSuccess
+
+      interface _EnableOperatorAppResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::EnableOperatorAppOutput]
+        def agent_space_id: () -> ::String
+        def iam: () -> Types::IamAuthConfiguration
+        def idc: () -> Types::IdcAuthConfiguration
+        def idp: () -> Types::IdpAuthConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DevOpsAgent/Client.html#enable_operator_app-instance_method
+      def enable_operator_app: (
+                                 agent_space_id: ::String,
+                                 auth_flow: ("iam" | "idc" | "idp"),
+                                 operator_app_role_arn: ::String,
+                                 ?idc_instance_arn: ::String,
+                                 ?issuer_url: ::String,
+                                 ?idp_client_id: ::String,
+                                 ?idp_client_secret: ::String,
+                                 ?provider: ::String
+                               ) -> _EnableOperatorAppResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _EnableOperatorAppResponseSuccess
+
+      interface _GetAccountUsageResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAccountUsageOutput]
+        def monthly_account_investigation_hours: () -> Types::UsageMetric
+        def monthly_account_evaluation_hours: () -> Types::UsageMetric
+        def monthly_account_system_learning_hours: () -> Types::UsageMetric
+        def monthly_account_on_demand_hours: () -> Types::UsageMetric
+        def usage_period_start_time: () -> ::Time
+        def usage_period_end_time: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DevOpsAgent/Client.html#get_account_usage-instance_method
+      def get_account_usage: (
+                             ) -> _GetAccountUsageResponseSuccess
+                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAccountUsageResponseSuccess
+
+      interface _GetAgentSpaceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAgentSpaceOutput]
+        def agent_space: () -> Types::AgentSpace
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DevOpsAgent/Client.html#get_agent_space-instance_method
+      def get_agent_space: (
+                             agent_space_id: ::String
+                           ) -> _GetAgentSpaceResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAgentSpaceResponseSuccess
+
+      interface _GetAssociationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAssociationOutput]
+        def association: () -> Types::Association
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DevOpsAgent/Client.html#get_association-instance_method
+      def get_association: (
+                             agent_space_id: ::String,
+                             association_id: ::String
+                           ) -> _GetAssociationResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAssociationResponseSuccess
+
+      interface _GetBacklogTaskResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetBacklogTaskResponse]
+        def task: () -> Types::Task
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DevOpsAgent/Client.html#get_backlog_task-instance_method
+      def get_backlog_task: (
+                              agent_space_id: ::String,
+                              task_id: ::String
+                            ) -> _GetBacklogTaskResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetBacklogTaskResponseSuccess
+
+      interface _GetOperatorAppResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetOperatorAppOutput]
+        def iam: () -> Types::IamAuthConfiguration
+        def idc: () -> Types::IdcAuthConfiguration
+        def idp: () -> Types::IdpAuthConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DevOpsAgent/Client.html#get_operator_app-instance_method
+      def get_operator_app: (
+                              agent_space_id: ::String
+                            ) -> _GetOperatorAppResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetOperatorAppResponseSuccess
+
+      interface _GetRecommendationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetRecommendationResponse]
+        def recommendation: () -> Types::Recommendation
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DevOpsAgent/Client.html#get_recommendation-instance_method
+      def get_recommendation: (
+                                agent_space_id: ::String,
+                                recommendation_id: ::String,
+                                ?recommendation_version: ::Integer
+                              ) -> _GetRecommendationResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetRecommendationResponseSuccess
+
+      interface _GetServiceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetServiceOutput]
+        def service: () -> Types::RegisteredService
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DevOpsAgent/Client.html#get_service-instance_method
+      def get_service: (
+                         service_id: ::String
+                       ) -> _GetServiceResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetServiceResponseSuccess
+
+      interface _ListAgentSpacesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAgentSpacesOutput]
+        def next_token: () -> ::String
+        def agent_spaces: () -> ::Array[Types::AgentSpace]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DevOpsAgent/Client.html#list_agent_spaces-instance_method
+      def list_agent_spaces: (
+                               ?max_results: ::Integer,
+                               ?next_token: ::String
+                             ) -> _ListAgentSpacesResponseSuccess
+                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAgentSpacesResponseSuccess
+
+      interface _ListAssociationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAssociationsOutput]
+        def next_token: () -> ::String
+        def associations: () -> ::Array[Types::Association]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DevOpsAgent/Client.html#list_associations-instance_method
+      def list_associations: (
+                               agent_space_id: ::String,
+                               ?max_results: ::Integer,
+                               ?next_token: ::String,
+                               ?filter_service_types: ::String
+                             ) -> _ListAssociationsResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAssociationsResponseSuccess
+
+      interface _ListBacklogTasksResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListBacklogTasksResponse]
+        def tasks: () -> ::Array[Types::Task]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DevOpsAgent/Client.html#list_backlog_tasks-instance_method
+      def list_backlog_tasks: (
+                                agent_space_id: ::String,
+                                ?filter: {
+                                  created_after: ::Time?,
+                                  created_before: ::Time?,
+                                  priority: Array[("CRITICAL" | "HIGH" | "MEDIUM" | "LOW" | "MINIMAL")]?,
+                                  status: Array[("PENDING_TRIAGE" | "LINKED" | "PENDING_START" | "IN_PROGRESS" | "PENDING_CUSTOMER_APPROVAL" | "COMPLETED" | "FAILED" | "TIMED_OUT" | "CANCELED")]?,
+                                  task_type: Array[("INVESTIGATION" | "EVALUATION")]?,
+                                  primary_task_id: ::String?
+                                },
+                                ?limit: ::Integer,
+                                ?next_token: ::String,
+                                ?sort_field: ("CREATED_AT" | "PRIORITY"),
+                                ?order: ("ASC" | "DESC")
+                              ) -> _ListBacklogTasksResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListBacklogTasksResponseSuccess
+
+      interface _ListChatsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListChatsResponse]
+        def executions: () -> ::Array[Types::ChatExecution]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DevOpsAgent/Client.html#list_chats-instance_method
+      def list_chats: (
+                        agent_space_id: ::String,
+                        ?user_id: ::String,
+                        ?max_results: ::Integer,
+                        ?next_token: ::String
+                      ) -> _ListChatsResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListChatsResponseSuccess
+
+      interface _ListExecutionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListExecutionsResponse]
+        def executions: () -> ::Array[Types::Execution]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DevOpsAgent/Client.html#list_executions-instance_method
+      def list_executions: (
+                             agent_space_id: ::String,
+                             task_id: ::String,
+                             ?limit: ::Integer,
+                             ?next_token: ::String
+                           ) -> _ListExecutionsResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListExecutionsResponseSuccess
+
+      interface _ListGoalsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListGoalsResponse]
+        def goals: () -> ::Array[Types::Goal]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DevOpsAgent/Client.html#list_goals-instance_method
+      def list_goals: (
+                        agent_space_id: ::String,
+                        ?status: ("ACTIVE" | "PAUSED" | "COMPLETE"),
+                        ?goal_type: ("CUSTOMER_DEFINED" | "ONCALL_REPORT"),
+                        ?limit: ::Integer,
+                        ?next_token: ::String
+                      ) -> _ListGoalsResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListGoalsResponseSuccess
+
+      interface _ListJournalRecordsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListJournalRecordsResponse]
+        def records: () -> ::Array[Types::JournalRecord]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DevOpsAgent/Client.html#list_journal_records-instance_method
+      def list_journal_records: (
+                                  agent_space_id: ::String,
+                                  execution_id: ::String,
+                                  ?limit: ::Integer,
+                                  ?next_token: ::String,
+                                  ?record_type: ::String,
+                                  ?order: ("ASC" | "DESC")
+                                ) -> _ListJournalRecordsResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListJournalRecordsResponseSuccess
+
+      interface _ListPendingMessagesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListPendingMessagesResponse]
+        def agent_space_id: () -> ::String
+        def execution_id: () -> ::String
+        def messages: () -> ::Array[Types::PendingMessage]
+        def created_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DevOpsAgent/Client.html#list_pending_messages-instance_method
+      def list_pending_messages: (
+                                   agent_space_id: ::String,
+                                   execution_id: ::String
+                                 ) -> _ListPendingMessagesResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPendingMessagesResponseSuccess
+
+      interface _ListPrivateConnectionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListPrivateConnectionsOutput]
+        def private_connections: () -> ::Array[Types::PrivateConnectionSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DevOpsAgent/Client.html#list_private_connections-instance_method
+      def list_private_connections: (
+                                    ) -> _ListPrivateConnectionsResponseSuccess
+                                  | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPrivateConnectionsResponseSuccess
+
+      interface _ListRecommendationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListRecommendationsResponse]
+        def recommendations: () -> ::Array[Types::Recommendation]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DevOpsAgent/Client.html#list_recommendations-instance_method
+      def list_recommendations: (
+                                  agent_space_id: ::String,
+                                  ?task_id: ::String,
+                                  ?goal_id: ::String,
+                                  ?status: ("PROPOSED" | "ACCEPTED" | "REJECTED" | "CLOSED" | "COMPLETED" | "UPDATE_IN_PROGRESS"),
+                                  ?priority: ("HIGH" | "MEDIUM" | "LOW"),
+                                  ?limit: ::Integer,
+                                  ?next_token: ::String
+                                ) -> _ListRecommendationsResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRecommendationsResponseSuccess
+
+      interface _ListServicesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListServicesOutput]
+        def next_token: () -> ::String
+        def services: () -> ::Array[Types::RegisteredService]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DevOpsAgent/Client.html#list_services-instance_method
+      def list_services: (
+                           ?max_results: ::Integer,
+                           ?next_token: ::String,
+                           ?filter_service_type: ("github" | "slack" | "azure" | "azuredevops" | "dynatrace" | "servicenow" | "pagerduty" | "gitlab" | "eventChannel" | "mcpservernewrelic" | "mcpservergrafana" | "mcpserverdatadog" | "mcpserver" | "mcpserversplunk" | "azureidentity")
+                         ) -> _ListServicesResponseSuccess
+                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListServicesResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DevOpsAgent/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _ListWebhooksResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListWebhooksOutput]
+        def webhooks: () -> ::Array[Types::Webhook]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DevOpsAgent/Client.html#list_webhooks-instance_method
+      def list_webhooks: (
+                           agent_space_id: ::String,
+                           association_id: ::String
+                         ) -> _ListWebhooksResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListWebhooksResponseSuccess
+
+      interface _RegisterServiceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RegisterServiceOutput]
+        def service_id: () -> ::String
+        def additional_step: () -> Types::AdditionalServiceRegistrationStep
+        def kms_key_arn: () -> ::String
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DevOpsAgent/Client.html#register_service-instance_method
+      def register_service: (
+                              service: ("dynatrace" | "servicenow" | "pagerduty" | "gitlab" | "eventChannel" | "mcpservernewrelic" | "mcpservergrafana" | "mcpserverdatadog" | "mcpserver" | "mcpserversplunk" | "azureidentity"),
+                              service_details: {
+                                dynatrace: {
+                                  account_urn: ::String,
+                                  authorization_config: {
+                                    o_auth_client_credentials: {
+                                      client_name: ::String?,
+                                      client_id: ::String,
+                                      exchange_parameters: Hash[::String, ::String]?,
+                                      client_secret: ::String
+                                    }?
+                                  }?
+                                }?,
+                                servicenow: {
+                                  instance_url: ::String,
+                                  authorization_config: {
+                                    o_auth_client_credentials: {
+                                      client_name: ::String?,
+                                      client_id: ::String,
+                                      exchange_parameters: Hash[::String, ::String]?,
+                                      client_secret: ::String
+                                    }?
+                                  }?
+                                }?,
+                                mcpserverdatadog: {
+                                  name: ::String,
+                                  endpoint: ::String,
+                                  description: ::String?,
+                                  authorization_config: {
+                                    authorization_discovery: {
+                                      return_to_endpoint: ::String
+                                    }?
+                                  }
+                                }?,
+                                mcpserver: {
+                                  name: ::String,
+                                  endpoint: ::String,
+                                  description: ::String?,
+                                  authorization_config: {
+                                    o_auth_client_credentials: {
+                                      client_name: ::String?,
+                                      client_id: ::String,
+                                      exchange_parameters: Hash[::String, ::String]?,
+                                      client_secret: ::String,
+                                      exchange_url: ::String,
+                                      scopes: Array[::String]?
+                                    }?,
+                                    o_auth_3_lo: {
+                                      client_name: ::String?,
+                                      client_id: ::String,
+                                      exchange_parameters: Hash[::String, ::String]?,
+                                      return_to_endpoint: ::String,
+                                      authorization_url: ::String,
+                                      exchange_url: ::String,
+                                      client_secret: ::String?,
+                                      support_code_challenge: bool?,
+                                      scopes: Array[::String]?
+                                    }?,
+                                    api_key: {
+                                      api_key_name: ::String,
+                                      api_key_value: ::String,
+                                      api_key_header: ::String
+                                    }?,
+                                    bearer_token: {
+                                      token_name: ::String,
+                                      token_value: ::String,
+                                      authorization_header: ::String?
+                                    }?,
+                                    authorization_discovery: {
+                                      return_to_endpoint: ::String
+                                    }?
+                                  }
+                                }?,
+                                gitlab: {
+                                  target_url: ::String,
+                                  token_type: ("personal" | "group"),
+                                  token_value: ::String,
+                                  group_id: ::String?
+                                }?,
+                                mcpserversplunk: {
+                                  name: ::String,
+                                  endpoint: ::String,
+                                  description: ::String?,
+                                  authorization_config: {
+                                    o_auth_client_credentials: {
+                                      client_name: ::String?,
+                                      client_id: ::String,
+                                      exchange_parameters: Hash[::String, ::String]?,
+                                      client_secret: ::String,
+                                      exchange_url: ::String,
+                                      scopes: Array[::String]?
+                                    }?,
+                                    o_auth_3_lo: {
+                                      client_name: ::String?,
+                                      client_id: ::String,
+                                      exchange_parameters: Hash[::String, ::String]?,
+                                      return_to_endpoint: ::String,
+                                      authorization_url: ::String,
+                                      exchange_url: ::String,
+                                      client_secret: ::String?,
+                                      support_code_challenge: bool?,
+                                      scopes: Array[::String]?
+                                    }?,
+                                    api_key: {
+                                      api_key_name: ::String,
+                                      api_key_value: ::String,
+                                      api_key_header: ::String
+                                    }?,
+                                    bearer_token: {
+                                      token_name: ::String,
+                                      token_value: ::String,
+                                      authorization_header: ::String?
+                                    }?,
+                                    authorization_discovery: {
+                                      return_to_endpoint: ::String
+                                    }?
+                                  }
+                                }?,
+                                mcpservernewrelic: {
+                                  authorization_config: {
+                                    api_key: {
+                                      api_key: ::String,
+                                      account_id: ::String,
+                                      region: ("US" | "EU"),
+                                      application_ids: Array[::String]?,
+                                      entity_guids: Array[::String]?,
+                                      alert_policy_ids: Array[::String]?
+                                    }?
+                                  }
+                                }?,
+                                event_channel: {
+                                  type: ("webhook")?
+                                }?,
+                                mcpservergrafana: {
+                                  name: ::String,
+                                  endpoint: ::String,
+                                  description: ::String?,
+                                  authorization_config: {
+                                    o_auth_client_credentials: {
+                                      client_name: ::String?,
+                                      client_id: ::String,
+                                      exchange_parameters: Hash[::String, ::String]?,
+                                      client_secret: ::String,
+                                      exchange_url: ::String,
+                                      scopes: Array[::String]?
+                                    }?,
+                                    o_auth_3_lo: {
+                                      client_name: ::String?,
+                                      client_id: ::String,
+                                      exchange_parameters: Hash[::String, ::String]?,
+                                      return_to_endpoint: ::String,
+                                      authorization_url: ::String,
+                                      exchange_url: ::String,
+                                      client_secret: ::String?,
+                                      support_code_challenge: bool?,
+                                      scopes: Array[::String]?
+                                    }?,
+                                    api_key: {
+                                      api_key_name: ::String,
+                                      api_key_value: ::String,
+                                      api_key_header: ::String
+                                    }?,
+                                    bearer_token: {
+                                      token_name: ::String,
+                                      token_value: ::String,
+                                      authorization_header: ::String?
+                                    }?,
+                                    authorization_discovery: {
+                                      return_to_endpoint: ::String
+                                    }?
+                                  }
+                                }?,
+                                pagerduty: {
+                                  scopes: Array[::String],
+                                  authorization_config: {
+                                    o_auth_client_credentials: {
+                                      client_name: ::String?,
+                                      client_id: ::String,
+                                      exchange_parameters: Hash[::String, ::String]?,
+                                      client_secret: ::String
+                                    }?
+                                  }
+                                }?,
+                                azureidentity: {
+                                  tenant_id: ::String,
+                                  client_id: ::String,
+                                  web_identity_role_arn: ::String,
+                                  web_identity_token_audiences: Array[::String]
+                                }?
+                              },
+                              ?kms_key_arn: ::String,
+                              ?private_connection_name: ::String,
+                              ?name: ::String,
+                              ?tags: Hash[::String, ::String]
+                            ) -> _RegisterServiceResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RegisterServiceResponseSuccess
+
+      interface _SendMessageResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SendMessageResponse]
+        def events: () -> Types::SendMessageEvents
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DevOpsAgent/Client.html#send_message-instance_method
+      def send_message: (
+                          agent_space_id: ::String,
+                          execution_id: ::String,
+                          content: ::String,
+                          ?context: {
+                            current_page: ::String?,
+                            last_message: ::String?,
+                            user_action_response: ::String?
+                          },
+                          ?user_id: ::String
+                        ) ?{ (*untyped) -> void } -> _SendMessageResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) ?{ (*untyped) -> void } -> _SendMessageResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DevOpsAgent/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Hash[::String, ::String]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DevOpsAgent/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateAgentSpaceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateAgentSpaceOutput]
+        def agent_space: () -> Types::AgentSpace
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DevOpsAgent/Client.html#update_agent_space-instance_method
+      def update_agent_space: (
+                                agent_space_id: ::String,
+                                ?name: ::String,
+                                ?description: ::String,
+                                ?locale: ::String
+                              ) -> _UpdateAgentSpaceResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAgentSpaceResponseSuccess
+
+      interface _UpdateAssociationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateAssociationOutput]
+        def association: () -> Types::Association
+        def webhook: () -> Types::GenericWebhook
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DevOpsAgent/Client.html#update_association-instance_method
+      def update_association: (
+                                agent_space_id: ::String,
+                                association_id: ::String,
+                                configuration: {
+                                  source_aws: {
+                                    account_id: ::String,
+                                    account_type: ("source"),
+                                    assumable_role_arn: ::String,
+                                    external_id: ::String?
+                                  }?,
+                                  aws: {
+                                    assumable_role_arn: ::String,
+                                    account_id: ::String,
+                                    account_type: ("monitor")
+                                  }?,
+                                  github: {
+                                    repo_name: ::String,
+                                    repo_id: ::String,
+                                    owner: ::String,
+                                    owner_type: ("organization" | "user"),
+                                    instance_identifier: ::String?
+                                  }?,
+                                  slack: {
+                                    workspace_id: ::String,
+                                    workspace_name: ::String,
+                                    transmission_target: {
+                                      ops_oncall_target: {
+                                        channel_name: ::String?,
+                                        channel_id: ::String
+                                      },
+                                      ops_sre_target: {
+                                        channel_name: ::String?,
+                                        channel_id: ::String
+                                      }?
+                                    }
+                                  }?,
+                                  dynatrace: {
+                                    env_id: ::String,
+                                    resources: Array[::String]?
+                                  }?,
+                                  servicenow: {
+                                    instance_id: ::String?,
+                                    auth_scopes: Array[::String]?
+                                  }?,
+                                  mcpservernewrelic: {
+                                    account_id: ::String,
+                                    endpoint: ::String
+                                  }?,
+                                  mcpserverdatadog: {
+                                  }?,
+                                  mcpserver: {
+                                    tools: Array[::String]
+                                  }?,
+                                  gitlab: {
+                                    project_id: ::String,
+                                    project_path: ::String,
+                                    instance_identifier: ::String?
+                                  }?,
+                                  mcpserversplunk: {
+                                  }?,
+                                  event_channel: {
+                                  }?,
+                                  azure: {
+                                    subscription_id: ::String
+                                  }?,
+                                  azuredevops: {
+                                    organization_name: ::String,
+                                    project_id: ::String,
+                                    project_name: ::String
+                                  }?,
+                                  mcpservergrafana: {
+                                    endpoint: ::String,
+                                    organization_id: ::String?,
+                                    tools: Array[::String]?
+                                  }?,
+                                  pagerduty: {
+                                    services: Array[::String],
+                                    customer_email: ::String
+                                  }?
+                                }
+                              ) -> _UpdateAssociationResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAssociationResponseSuccess
+
+      interface _UpdateBacklogTaskResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateBacklogTaskResponse]
+        def task: () -> Types::Task
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DevOpsAgent/Client.html#update_backlog_task-instance_method
+      def update_backlog_task: (
+                                 agent_space_id: ::String,
+                                 task_id: ::String,
+                                 ?task_status: ("PENDING_TRIAGE" | "LINKED" | "PENDING_START" | "IN_PROGRESS" | "PENDING_CUSTOMER_APPROVAL" | "COMPLETED" | "FAILED" | "TIMED_OUT" | "CANCELED"),
+                                 ?client_token: ::String
+                               ) -> _UpdateBacklogTaskResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateBacklogTaskResponseSuccess
+
+      interface _UpdateGoalResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateGoalResponse]
+        def goal: () -> Types::Goal
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DevOpsAgent/Client.html#update_goal-instance_method
+      def update_goal: (
+                         agent_space_id: ::String,
+                         goal_id: ::String,
+                         ?evaluation_schedule: {
+                           state: ("ENABLED" | "DISABLED")
+                         },
+                         ?client_token: ::String
+                       ) -> _UpdateGoalResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateGoalResponseSuccess
+
+      interface _UpdateOperatorAppIdpConfigResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateOperatorAppIdpConfigOutput]
+        def agent_space_id: () -> ::String
+        def idp: () -> Types::IdpAuthConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DevOpsAgent/Client.html#update_operator_app_idp_config-instance_method
+      def update_operator_app_idp_config: (
+                                            agent_space_id: ::String,
+                                            ?idp_client_secret: ::String
+                                          ) -> _UpdateOperatorAppIdpConfigResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateOperatorAppIdpConfigResponseSuccess
+
+      interface _UpdatePrivateConnectionCertificateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdatePrivateConnectionCertificateOutput]
+        def name: () -> ::String
+        def type: () -> ("SELF_MANAGED" | "SERVICE_MANAGED")
+        def resource_gateway_id: () -> ::String
+        def host_address: () -> ::String
+        def vpc_id: () -> ::String
+        def resource_configuration_id: () -> ::String
+        def status: () -> ("ACTIVE" | "CREATE_IN_PROGRESS" | "CREATE_FAILED" | "DELETE_IN_PROGRESS" | "DELETE_FAILED")
+        def certificate_expiry_time: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DevOpsAgent/Client.html#update_private_connection_certificate-instance_method
+      def update_private_connection_certificate: (
+                                                   name: ::String,
+                                                   certificate: ::String
+                                                 ) -> _UpdatePrivateConnectionCertificateResponseSuccess
+                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdatePrivateConnectionCertificateResponseSuccess
+
+      interface _UpdateRecommendationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateRecommendationResponse]
+        def recommendation: () -> Types::Recommendation
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DevOpsAgent/Client.html#update_recommendation-instance_method
+      def update_recommendation: (
+                                   agent_space_id: ::String,
+                                   recommendation_id: ::String,
+                                   ?status: ("PROPOSED" | "ACCEPTED" | "REJECTED" | "CLOSED" | "COMPLETED" | "UPDATE_IN_PROGRESS"),
+                                   ?additional_context: ::String,
+                                   ?client_token: ::String
+                                 ) -> _UpdateRecommendationResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateRecommendationResponseSuccess
+
+      interface _ValidateAwsAssociationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ValidateAwsAssociationsOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DevOpsAgent/Client.html#validate_aws_associations-instance_method
+      def validate_aws_associations: (
+                                       agent_space_id: ::String
+                                     ) -> _ValidateAwsAssociationsResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ValidateAwsAssociationsResponseSuccess
+    end
+  end
+end
+

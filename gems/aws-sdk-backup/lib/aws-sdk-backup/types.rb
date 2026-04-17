@@ -38,8 +38,8 @@ module Aws::Backup
     #   Set to `"WindowsVSS":"disabled"` to create a regular backup. The
     #   `WindowsVSS` option is not enabled by default.
     #
-    #   For S3 backups, set to `"S3BackupACLs":"disabled"` to exclude ACLs
-    #   from the backup, or `"S3BackupObjectTags":"disabled"` to exclude
+    #   For S3 backups, set to `"BackupACLs":"disabled"` to exclude ACLs
+    #   from the backup, or `"BackupObjectTags":"disabled"` to exclude
     #   object tags from the backup. By default, both ACLs and object tags
     #   are included in S3 backups.
     #
@@ -280,6 +280,9 @@ module Aws::Backup
     #
     #   * For Amazon EFS, this value refers to the delta bytes transferred
     #     during a backup.
+    #
+    #   * For Amazon EKS, this value refers to the size of your nested EKS
+    #     recovery point.
     #
     #   * Amazon FSx does not populate this value from the operation
     #     `GetBackupJobStatus` for FSx file systems.
@@ -994,6 +997,13 @@ module Aws::Backup
     #
     #   If you specify multiple ARNs, the resources much match any of the
     #   ARNs (OR logic).
+    #
+    #   <note markdown="1"> When using wildcards in ARN patterns for backup selections, the
+    #   asterisk (*) must appear at the end of the ARN string (prefix
+    #   pattern). For example, `arn:aws:s3:::my-bucket-*` is valid, but
+    #   `arn:aws:s3:::*-logs` is not supported.
+    #
+    #    </note>
     #   @return [Array<String>]
     #
     # @!attribute [rw] list_of_tags
@@ -3016,6 +3026,9 @@ module Aws::Backup
     #   * For Amazon EFS, this value refers to the delta bytes transferred
     #     during a backup.
     #
+    #   * For Amazon EKS, this value refers to the size of your nested EKS
+    #     recovery point.
+    #
     #   * Amazon FSx does not populate this value from the operation
     #     `GetBackupJobStatus` for FSx file systems.
     #
@@ -3447,14 +3460,25 @@ module Aws::Backup
     #   The status of the flags `isCrossAccountBackupEnabled`,
     #   `isMpaEnabled` ('Mpa' refers to multi-party approval), and
     #   `isDelegatedAdministratorEnabled`.
+    #
+    #   * `isCrossAccountBackupEnabled`: Allow accounts in your organization
+    #     to copy backups to other accounts.
+    #
+    #   * `isMpaEnabled`: Add cross-account access to your organization with
+    #     the option to assign a Multi-party approval team to a logically
+    #     air-gapped vault.
+    #
+    #   * `isDelegatedAdministratorEnabled`: Allow Backup to automatically
+    #     synchronize delegated administrator permissions with
+    #     Organizations.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] last_update_time
-    #   The date and time that the flag `isCrossAccountBackupEnabled` was
-    #   last updated. This update is in Unix format and Coordinated
-    #   Universal Time (UTC). The value of `LastUpdateTime` is accurate to
-    #   milliseconds. For example, the value 1516925490.087 represents
-    #   Friday, January 26, 2018 12:11:30.087 AM.
+    #   The date and time that the supported flags were last updated. This
+    #   update is in Unix format and Coordinated Universal Time (UTC). The
+    #   value of `LastUpdateTime` is accurate to milliseconds. For example,
+    #   the value 1516925490.087 represents Friday, January 26, 2018
+    #   12:11:30.087 AM.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/DescribeGlobalSettingsOutput AWS API Documentation
@@ -5075,6 +5099,8 @@ module Aws::Backup
     #
     #   * `EFS` for Amazon Elastic File System
     #
+    #   * `EKS` for Amazon Elastic Kubernetes Service
+    #
     #   * `FSx` for Amazon FSx
     #
     #   * `Neptune` for Amazon Neptune
@@ -5747,6 +5773,8 @@ module Aws::Backup
     #
     #   * `EFS` for Amazon Elastic File System
     #
+    #   * `EKS` for Amazon Elastic Kubernetes Service
+    #
     #   * `FSx` for Amazon FSx
     #
     #   * `Neptune` for Amazon Neptune
@@ -6253,6 +6281,8 @@ module Aws::Backup
     #
     #   * `EFS` for Amazon Elastic File System
     #
+    #   * `EKS` for Amazon Elastic Kubernetes Service
+    #
     #   * `FSx` for Amazon FSx
     #
     #   * `Neptune` for Amazon Neptune
@@ -6672,6 +6702,8 @@ module Aws::Backup
     #   * `EC2` for Amazon Elastic Compute Cloud
     #
     #   * `EFS` for Amazon Elastic File System
+    #
+    #   * `EKS` for Amazon Elastic Kubernetes Service
     #
     #   * `FSx` for Amazon FSx
     #
@@ -7225,6 +7257,8 @@ module Aws::Backup
     #   * `EC2` for Amazon Elastic Compute Cloud
     #
     #   * `EFS` for Amazon Elastic File System
+    #
+    #   * `EKS` for Amazon Elastic Kubernetes Service
     #
     #   * `FSx` for Amazon FSx
     #
@@ -7902,6 +7936,9 @@ module Aws::Backup
     #   Backup enforces a 72-hour cooling-off period before Vault Lock takes
     #   effect and becomes immutable. Therefore, you must set
     #   `ChangeableForDays` to 3 or greater.
+    #
+    #   The maximum value you can specify is 36,500 days (approximately 100
+    #   years).
     #
     #   Before the lock date, you can delete Vault Lock from the vault using
     #   `DeleteBackupVaultLockConfiguration` or change the Vault Lock
@@ -10429,21 +10466,23 @@ module Aws::Backup
     #
     #   * [Metadata for Amazon EFS][7]
     #
-    #   * [Metadata for Amazon FSx][8]
+    #   * [Metadata for Amazon EKS][8]
     #
-    #   * [Metadata for Amazon Neptune][9]
+    #   * [Metadata for Amazon FSx][9]
     #
-    #   * [Metadata for Amazon RDS][10]
+    #   * [Metadata for Amazon Neptune][10]
     #
-    #   * [Metadata for Amazon Redshift][11]
+    #   * [Metadata for Amazon RDS][11]
     #
-    #   * [Metadata for Storage Gateway][12]
+    #   * [Metadata for Amazon Redshift][12]
     #
-    #   * [Metadata for Amazon S3][13]
+    #   * [Metadata for Storage Gateway][13]
     #
-    #   * [Metadata for Amazon Timestream][14]
+    #   * [Metadata for Amazon S3][14]
     #
-    #   * [Metadata for virtual machines][15]
+    #   * [Metadata for Amazon Timestream][15]
+    #
+    #   * [Metadata for virtual machines][16]
     #
     #
     #
@@ -10454,14 +10493,15 @@ module Aws::Backup
     #   [5]: https://docs.aws.amazon.com/aws-backup/latest/devguide/restoring-ebs.html#ebs-restore-cli
     #   [6]: https://docs.aws.amazon.com/aws-backup/latest/devguide/restoring-ec2.html#restoring-ec2-cli
     #   [7]: https://docs.aws.amazon.com/aws-backup/latest/devguide/restoring-efs.html#efs-restore-cli
-    #   [8]: https://docs.aws.amazon.com/aws-backup/latest/devguide/restoring-fsx.html#fsx-restore-cli
-    #   [9]: https://docs.aws.amazon.com/aws-backup/latest/devguide/restoring-nep.html#nep-restore-cli
-    #   [10]: https://docs.aws.amazon.com/aws-backup/latest/devguide/restoring-rds.html#rds-restore-cli
-    #   [11]: https://docs.aws.amazon.com/aws-backup/latest/devguide/redshift-restores.html#redshift-restore-api
-    #   [12]: https://docs.aws.amazon.com/aws-backup/latest/devguide/restoring-storage-gateway.html#restoring-sgw-cli
-    #   [13]: https://docs.aws.amazon.com/aws-backup/latest/devguide/restoring-s3.html#s3-restore-cli
-    #   [14]: https://docs.aws.amazon.com/aws-backup/latest/devguide/timestream-restore.html#timestream-restore-api
-    #   [15]: https://docs.aws.amazon.com/aws-backup/latest/devguide/restoring-vm.html#vm-restore-cli
+    #   [8]: https://docs.aws.amazon.com/aws-backup/latest/devguide/restoring-eks.html#eks-restore-backup-section
+    #   [9]: https://docs.aws.amazon.com/aws-backup/latest/devguide/restoring-fsx.html#fsx-restore-cli
+    #   [10]: https://docs.aws.amazon.com/aws-backup/latest/devguide/restoring-nep.html#nep-restore-cli
+    #   [11]: https://docs.aws.amazon.com/aws-backup/latest/devguide/restoring-rds.html#rds-restore-cli
+    #   [12]: https://docs.aws.amazon.com/aws-backup/latest/devguide/redshift-restores.html#redshift-restore-api
+    #   [13]: https://docs.aws.amazon.com/aws-backup/latest/devguide/restoring-storage-gateway.html#restoring-sgw-cli
+    #   [14]: https://docs.aws.amazon.com/aws-backup/latest/devguide/restoring-s3.html#s3-restore-cli
+    #   [15]: https://docs.aws.amazon.com/aws-backup/latest/devguide/timestream-restore.html#timestream-restore-api
+    #   [16]: https://docs.aws.amazon.com/aws-backup/latest/devguide/restoring-vm.html#vm-restore-cli
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] iam_role_arn
@@ -10497,6 +10537,8 @@ module Aws::Backup
     #   * `EC2` - Amazon Elastic Compute Cloud
     #
     #   * `EFS` - Amazon Elastic File System
+    #
+    #   * `EKS` - Amazon Elastic Kubernetes Service
     #
     #   * `FSx` - Amazon FSx
     #
@@ -10978,18 +11020,18 @@ module Aws::Backup
     # @!attribute [rw] global_settings
     #   Inputs can include:
     #
-    #   A value for `isCrossAccountBackupEnabled` and a Region. Example:
-    #   `update-global-settings --global-settings
-    #   isCrossAccountBackupEnabled=false --region us-west-2`.
+    #   A value for `isCrossAccountBackupEnabled`. Values can be true or
+    #   false. Example: `update-global-settings --global-settings
+    #   isCrossAccountBackupEnabled=false`.
     #
-    #   A value for Multi-party approval, styled as "Mpa": `isMpaEnabled`.
-    #   Values can be true or false. Example: `update-global-settings
-    #   --global-settings isMpaEnabled=false --region us-west-2`.
+    #   A value for Multi-party approval, styled as `isMpaEnabled`. Values
+    #   can be true or false. Example: `update-global-settings
+    #   --global-settings isMpaEnabled=false`.
     #
-    #   A value for Backup Service-Linked Role creation, styled
-    #   as`isDelegatedAdministratorEnabled`. Values can be true or false.
+    #   A value for Backup Service-Linked Role creation, styled as
+    #   `isDelegatedAdministratorEnabled`. Values can be true or false.
     #   Example: `update-global-settings --global-settings
-    #   isDelegatedAdministratorEnabled=false --region us-west-2`.
+    #   isDelegatedAdministratorEnabled=false`.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/UpdateGlobalSettingsInput AWS API Documentation

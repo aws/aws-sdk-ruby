@@ -1368,7 +1368,7 @@ module Aws::ApiGatewayV2
     #   resp.portal_content.theme.custom_colors.text_color #=> String
     #   resp.portal_content.theme.logo_last_uploaded #=> Time
     #   resp.portal_id #=> String
-    #   resp.publish_status #=> String, one of "PUBLISHED", "PUBLISH_IN_PROGRESS", "PUBLISH_FAILED", "DISABLED"
+    #   resp.publish_status #=> String, one of "PUBLISHED", "PUBLISH_IN_PROGRESS", "PUBLISH_FAILED", "DISABLE_IN_PROGRESS", "DISABLE_FAILED", "DISABLED"
     #   resp.rum_app_monitor_name #=> String
     #   resp.status_exception.exception #=> String
     #   resp.status_exception.message #=> String
@@ -3420,7 +3420,7 @@ module Aws::ApiGatewayV2
     #   resp.preview.preview_url #=> String
     #   resp.preview.status_exception.exception #=> String
     #   resp.preview.status_exception.message #=> String
-    #   resp.publish_status #=> String, one of "PUBLISHED", "PUBLISH_IN_PROGRESS", "PUBLISH_FAILED", "DISABLED"
+    #   resp.publish_status #=> String, one of "PUBLISHED", "PUBLISH_IN_PROGRESS", "PUBLISH_FAILED", "DISABLE_IN_PROGRESS", "DISABLE_FAILED", "DISABLED"
     #   resp.rum_app_monitor_name #=> String
     #   resp.status_exception.exception #=> String
     #   resp.status_exception.message #=> String
@@ -4241,7 +4241,7 @@ module Aws::ApiGatewayV2
     #   resp.items[0].preview.preview_url #=> String
     #   resp.items[0].preview.status_exception.exception #=> String
     #   resp.items[0].preview.status_exception.message #=> String
-    #   resp.items[0].publish_status #=> String, one of "PUBLISHED", "PUBLISH_IN_PROGRESS", "PUBLISH_FAILED", "DISABLED"
+    #   resp.items[0].publish_status #=> String, one of "PUBLISHED", "PUBLISH_IN_PROGRESS", "PUBLISH_FAILED", "DISABLE_IN_PROGRESS", "DISABLE_FAILED", "DISABLED"
     #   resp.items[0].rum_app_monitor_name #=> String
     #   resp.items[0].status_exception.exception #=> String
     #   resp.items[0].status_exception.message #=> String
@@ -5564,7 +5564,7 @@ module Aws::ApiGatewayV2
     #   resp.preview.preview_url #=> String
     #   resp.preview.status_exception.exception #=> String
     #   resp.preview.status_exception.message #=> String
-    #   resp.publish_status #=> String, one of "PUBLISHED", "PUBLISH_IN_PROGRESS", "PUBLISH_FAILED", "DISABLED"
+    #   resp.publish_status #=> String, one of "PUBLISHED", "PUBLISH_IN_PROGRESS", "PUBLISH_FAILED", "DISABLE_IN_PROGRESS", "DISABLE_FAILED", "DISABLED"
     #   resp.rum_app_monitor_name #=> String
     #   resp.status_exception.exception #=> String
     #   resp.status_exception.message #=> String
@@ -6137,7 +6137,7 @@ module Aws::ApiGatewayV2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-apigatewayv2'
-      context[:gem_version] = '1.90.0'
+      context[:gem_version] = '1.92.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.138.0 (2026-04-03)
+------------------
+
+* Feature - Updates close Account quota for member accounts in an Organization.
+
+1.137.0 (2026-03-31)
+------------------
+
+* Feature - Added Path field to Account and OrganizationalUnit objects in AWS Organizations API responses.
+
+1.136.0 (2026-03-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.135.0 (2026-02-03)
 ------------------
 

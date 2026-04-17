@@ -49,12 +49,13 @@ module Aws::GeoPlaces
   end
   autoload :Client, 'aws-sdk-geoplaces/client'
   autoload :Errors, 'aws-sdk-geoplaces/errors'
+  autoload :Waiters, 'aws-sdk-geoplaces/waiters'
   autoload :Resource, 'aws-sdk-geoplaces/resource'
   autoload :EndpointParameters, 'aws-sdk-geoplaces/endpoint_parameters'
   autoload :EndpointProvider, 'aws-sdk-geoplaces/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-geoplaces/endpoints'
 
-  GEM_VERSION = '1.20.0'
+  GEM_VERSION = '1.22.0'
 
 end
 

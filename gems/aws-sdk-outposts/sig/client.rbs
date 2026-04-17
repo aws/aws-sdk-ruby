@@ -131,6 +131,23 @@ module Aws
                           ) -> _CreateOutpostResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateOutpostResponseSuccess
 
+      interface _CreateRenewalResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateRenewalOutput]
+        def payment_option: () -> ("ALL_UPFRONT" | "NO_UPFRONT" | "PARTIAL_UPFRONT")
+        def payment_term: () -> ("THREE_YEARS" | "ONE_YEAR" | "FIVE_YEARS")
+        def outpost_id: () -> ::String
+        def upfront_price: () -> ::Float
+        def monthly_recurring_price: () -> ::Float
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Outposts/Client.html#create_renewal-instance_method
+      def create_renewal: (
+                            payment_option: ("ALL_UPFRONT" | "NO_UPFRONT" | "PARTIAL_UPFRONT"),
+                            payment_term: ("THREE_YEARS" | "ONE_YEAR" | "FIVE_YEARS"),
+                            outpost_identifier: ::String,
+                            ?client_token: ::String
+                          ) -> _CreateRenewalResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateRenewalResponseSuccess
+
       interface _CreateSiteResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateSiteOutput]
         def site: () -> Types::Site
@@ -268,6 +285,8 @@ module Aws
         def next_token: () -> ::String
         def subscriptions: () -> ::Array[Types::Subscription]
         def contract_end_date: () -> ::String
+        def payment_term: () -> ("THREE_YEARS" | "ONE_YEAR" | "FIVE_YEARS")
+        def payment_option: () -> ("ALL_UPFRONT" | "NO_UPFRONT" | "PARTIAL_UPFRONT")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Outposts/Client.html#get_outpost_billing_information-instance_method
       def get_outpost_billing_information: (
@@ -306,6 +325,17 @@ module Aws
                                                   ?next_token: ::String
                                                 ) -> _GetOutpostSupportedInstanceTypesResponseSuccess
                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetOutpostSupportedInstanceTypesResponseSuccess
+
+      interface _GetRenewalPricingResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetRenewalPricingOutput]
+        def pricing_result: () -> ("PRICED" | "UNABLE_TO_PRICE")
+        def pricing_options: () -> ::Array[Types::PricingOption]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Outposts/Client.html#get_renewal_pricing-instance_method
+      def get_renewal_pricing: (
+                                 outpost_identifier: ::String
+                               ) -> _GetRenewalPricingResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetRenewalPricingResponseSuccess
 
       interface _GetSiteResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetSiteOutput]
@@ -358,7 +388,8 @@ module Aws
                          ?host_id_filter: Array[::String],
                          ?max_results: ::Integer,
                          ?next_token: ::String,
-                         ?status_filter: Array[("ACTIVE" | "RETIRING" | "ISOLATED")]
+                         ?status_filter: Array[("ACTIVE" | "RETIRING" | "ISOLATED" | "INSTALLING")],
+                         ?asset_type_filter: Array[("COMPUTE" | "STORAGE" | "POWERSHELF" | "SWITCH" | "NETWORKING")]
                        ) -> _ListAssetsResponseSuccess
                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAssetsResponseSuccess
 

@@ -15,7 +15,7 @@ module Aws::ConnectCases
 
     class AuditEvent
       attr_accessor event_id: ::String
-      attr_accessor type: ("Case.Created" | "Case.Updated" | "RelatedItem.Created")
+      attr_accessor type: ("Case.Created" | "Case.Updated" | "RelatedItem.Created" | "RelatedItem.Deleted" | "RelatedItem.Updated")
       attr_accessor related_item_type: ("Contact" | "Comment" | "File" | "Sla" | "ConnectCase" | "Custom")
       attr_accessor performed_time: ::Time
       attr_accessor fields: ::Array[Types::AuditEventField]
@@ -105,12 +105,18 @@ module Aws::ConnectCases
     class BooleanCondition
       attr_accessor equal_to: Types::BooleanOperands
       attr_accessor not_equal_to: Types::BooleanOperands
+      attr_accessor and_all: Types::CompoundCondition
+      attr_accessor or_all: Types::CompoundCondition
       attr_accessor unknown: untyped
       SENSITIVE: []
 
       class EqualTo < BooleanCondition
       end
       class NotEqualTo < BooleanCondition
+      end
+      class AndAll < BooleanCondition
+      end
+      class OrAll < BooleanCondition
       end
       class Unknown < BooleanCondition
       end
@@ -202,6 +208,17 @@ module Aws::ConnectCases
     end
 
     class CommentFilter < Aws::EmptyStructure
+    end
+
+    class CommentUpdateContent
+      attr_accessor body: ::String
+      attr_accessor content_type: ("Text/Plain")
+      SENSITIVE: []
+    end
+
+    class CompoundCondition
+      attr_accessor conditions: ::Array[Types::BooleanCondition]
+      SENSITIVE: []
     end
 
     class ConflictException
@@ -376,6 +393,11 @@ module Aws::ConnectCases
     end
 
     class CustomInputContent
+      attr_accessor fields: ::Array[Types::FieldValue]
+      SENSITIVE: []
+    end
+
+    class CustomUpdateContent
       attr_accessor fields: ::Array[Types::FieldValue]
       SENSITIVE: []
     end
@@ -995,6 +1017,20 @@ module Aws::ConnectCases
       end
     end
 
+    class RelatedItemUpdateContent
+      attr_accessor comment: Types::CommentUpdateContent
+      attr_accessor custom: Types::CustomUpdateContent
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Comment < RelatedItemUpdateContent
+      end
+      class Custom < RelatedItemUpdateContent
+      end
+      class Unknown < RelatedItemUpdateContent
+      end
+    end
+
     class RequiredCaseRule
       attr_accessor default_value: bool
       attr_accessor conditions: ::Array[Types::BooleanCondition]
@@ -1264,6 +1300,27 @@ module Aws::ConnectCases
     end
 
     class UpdateLayoutResponse < Aws::EmptyStructure
+    end
+
+    class UpdateRelatedItemRequest
+      attr_accessor domain_id: ::String
+      attr_accessor case_id: ::String
+      attr_accessor related_item_id: ::String
+      attr_accessor content: Types::RelatedItemUpdateContent
+      attr_accessor performed_by: Types::UserUnion
+      SENSITIVE: []
+    end
+
+    class UpdateRelatedItemResponse
+      attr_accessor related_item_id: ::String
+      attr_accessor related_item_arn: ::String
+      attr_accessor type: ("Contact" | "Comment" | "File" | "Sla" | "ConnectCase" | "Custom")
+      attr_accessor content: Types::RelatedItemContent
+      attr_accessor association_time: ::Time
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor last_updated_user: Types::UserUnion
+      attr_accessor created_by: Types::UserUnion
+      SENSITIVE: []
     end
 
     class UpdateTemplateRequest

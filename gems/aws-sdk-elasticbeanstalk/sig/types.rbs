@@ -517,7 +517,7 @@ module Aws::ElasticBeanstalk
     end
 
     class EnvironmentInfoDescription
-      attr_accessor info_type: ("tail" | "bundle")
+      attr_accessor info_type: ("tail" | "bundle" | "analyze")
       attr_accessor ec2_instance_id: ::String
       attr_accessor sample_timestamp: ::Time
       attr_accessor message: ::String
@@ -819,7 +819,7 @@ module Aws::ElasticBeanstalk
     class RequestEnvironmentInfoMessage
       attr_accessor environment_id: ::String
       attr_accessor environment_name: ::String
-      attr_accessor info_type: ("tail" | "bundle")
+      attr_accessor info_type: ("tail" | "bundle" | "analyze")
       SENSITIVE: []
     end
 
@@ -858,7 +858,7 @@ module Aws::ElasticBeanstalk
     class RetrieveEnvironmentInfoMessage
       attr_accessor environment_id: ::String
       attr_accessor environment_name: ::String
-      attr_accessor info_type: ("tail" | "bundle")
+      attr_accessor info_type: ("tail" | "bundle" | "analyze")
       SENSITIVE: []
     end
 

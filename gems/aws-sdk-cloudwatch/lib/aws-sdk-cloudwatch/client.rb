@@ -483,6 +483,40 @@ module Aws::CloudWatch
 
     # @!group API Operations
 
+    # Deletes a specific alarm mute rule.
+    #
+    # When you delete a mute rule, any alarms that are currently being muted
+    # by that rule are immediately unmuted. If those alarms are in an ALARM
+    # state, their configured actions will trigger.
+    #
+    # This operation is idempotent. If you delete a mute rule that does not
+    # exist, the operation succeeds without returning an error.
+    #
+    # **Permissions**
+    #
+    # To delete a mute rule, you need the `cloudwatch:DeleteAlarmMuteRule`
+    # permission on the alarm mute rule resource.
+    #
+    # @option params [required, String] :alarm_mute_rule_name
+    #   The name of the alarm mute rule to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_alarm_mute_rule({
+    #     alarm_mute_rule_name: "Name", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/DeleteAlarmMuteRule AWS API Documentation
+    #
+    # @overload delete_alarm_mute_rule(params = {})
+    # @param [Hash] params ({})
+    def delete_alarm_mute_rule(params = {}, options = {})
+      req = build_request(:delete_alarm_mute_rule, params)
+      req.send_request(options)
+    end
+
     # Deletes the specified alarms. You can delete up to 100 alarms in one
     # operation. However, this total can include no more than one composite
     # alarm. For example, you could delete 99 metric alarms and one
@@ -1071,6 +1105,10 @@ module Aws::CloudWatch
     #   resp.metric_alarms[0].threshold_metric_id #=> String
     #   resp.metric_alarms[0].evaluation_state #=> String, one of "PARTIAL_DATA", "EVALUATION_FAILURE", "EVALUATION_ERROR"
     #   resp.metric_alarms[0].state_transitioned_timestamp #=> Time
+    #   resp.metric_alarms[0].evaluation_criteria.prom_ql_criteria.query #=> String
+    #   resp.metric_alarms[0].evaluation_criteria.prom_ql_criteria.pending_period #=> Integer
+    #   resp.metric_alarms[0].evaluation_criteria.prom_ql_criteria.recovery_period #=> Integer
+    #   resp.metric_alarms[0].evaluation_interval #=> Integer
     #   resp.next_token #=> String
     #
     #
@@ -1193,6 +1231,10 @@ module Aws::CloudWatch
     #   resp.metric_alarms[0].threshold_metric_id #=> String
     #   resp.metric_alarms[0].evaluation_state #=> String, one of "PARTIAL_DATA", "EVALUATION_FAILURE", "EVALUATION_ERROR"
     #   resp.metric_alarms[0].state_transitioned_timestamp #=> Time
+    #   resp.metric_alarms[0].evaluation_criteria.prom_ql_criteria.query #=> String
+    #   resp.metric_alarms[0].evaluation_criteria.prom_ql_criteria.pending_period #=> Integer
+    #   resp.metric_alarms[0].evaluation_criteria.prom_ql_criteria.recovery_period #=> Integer
+    #   resp.metric_alarms[0].evaluation_interval #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/DescribeAlarmsForMetric AWS API Documentation
     #
@@ -1484,6 +1526,79 @@ module Aws::CloudWatch
     # @param [Hash] params ({})
     def enable_insight_rules(params = {}, options = {})
       req = build_request(:enable_insight_rules, params)
+      req.send_request(options)
+    end
+
+    # Retrieves details for a specific alarm mute rule.
+    #
+    # This operation returns complete information about the mute rule,
+    # including its configuration, status, targeted alarms, and metadata.
+    #
+    # The returned status indicates the current state of the mute rule:
+    #
+    # * **SCHEDULED**: The mute rule is configured and will become active in
+    #   the future
+    #
+    # * **ACTIVE**: The mute rule is currently muting alarm actions
+    #
+    # * **EXPIRED**: The mute rule has passed its expiration date and will
+    #   no longer become active
+    #
+    # **Permissions**
+    #
+    # To retrieve details for a mute rule, you need the
+    # `cloudwatch:GetAlarmMuteRule` permission on the alarm mute rule
+    # resource.
+    #
+    # @option params [required, String] :alarm_mute_rule_name
+    #   The name of the alarm mute rule to retrieve.
+    #
+    # @return [Types::GetAlarmMuteRuleOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetAlarmMuteRuleOutput#name #name} => String
+    #   * {Types::GetAlarmMuteRuleOutput#alarm_mute_rule_arn #alarm_mute_rule_arn} => String
+    #   * {Types::GetAlarmMuteRuleOutput#description #description} => String
+    #   * {Types::GetAlarmMuteRuleOutput#rule #rule} => Types::Rule
+    #   * {Types::GetAlarmMuteRuleOutput#mute_targets #mute_targets} => Types::MuteTargets
+    #   * {Types::GetAlarmMuteRuleOutput#start_date #start_date} => Time
+    #   * {Types::GetAlarmMuteRuleOutput#expire_date #expire_date} => Time
+    #   * {Types::GetAlarmMuteRuleOutput#status #status} => String
+    #   * {Types::GetAlarmMuteRuleOutput#last_updated_timestamp #last_updated_timestamp} => Time
+    #   * {Types::GetAlarmMuteRuleOutput#mute_type #mute_type} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_alarm_mute_rule({
+    #     alarm_mute_rule_name: "Name", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.name #=> String
+    #   resp.alarm_mute_rule_arn #=> String
+    #   resp.description #=> String
+    #   resp.rule.schedule.expression #=> String
+    #   resp.rule.schedule.duration #=> String
+    #   resp.rule.schedule.timezone #=> String
+    #   resp.mute_targets.alarm_names #=> Array
+    #   resp.mute_targets.alarm_names[0] #=> String
+    #   resp.start_date #=> Time
+    #   resp.expire_date #=> Time
+    #   resp.status #=> String, one of "SCHEDULED", "ACTIVE", "EXPIRED"
+    #   resp.last_updated_timestamp #=> Time
+    #   resp.mute_type #=> String
+    #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
+    #
+    #   * alarm_mute_rule_exists
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/GetAlarmMuteRule AWS API Documentation
+    #
+    # @overload get_alarm_mute_rule(params = {})
+    # @param [Hash] params ({})
+    def get_alarm_mute_rule(params = {}, options = {})
+      req = build_request(:get_alarm_mute_rule, params)
       req.send_request(options)
     end
 
@@ -2258,6 +2373,99 @@ module Aws::CloudWatch
       req.send_request(options)
     end
 
+    # Returns the current status of vended metric enrichment for the
+    # account, including whether CloudWatch vended metrics are enriched with
+    # resource ARN and resource tag labels and queryable using PromQL. For
+    # the list of supported resources, see [Supported AWS infrastructure
+    # metrics][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/UsingResourceTagsForTelemetry.html
+    #
+    # @return [Types::GetOTelEnrichmentOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetOTelEnrichmentOutput#status #status} => String
+    #
+    # @example Response structure
+    #
+    #   resp.status #=> String, one of "Running", "Stopped"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/GetOTelEnrichment AWS API Documentation
+    #
+    # @overload get_o_tel_enrichment(params = {})
+    # @param [Hash] params ({})
+    def get_o_tel_enrichment(params = {}, options = {})
+      req = build_request(:get_o_tel_enrichment, params)
+      req.send_request(options)
+    end
+
+    # Lists alarm mute rules in your Amazon Web Services account and region.
+    #
+    # You can filter the results by alarm name to find all mute rules
+    # targeting a specific alarm, or by status to find rules that are
+    # scheduled, active, or expired.
+    #
+    # This operation supports pagination for accounts with many mute rules.
+    # Use the `MaxRecords` and `NextToken` parameters to retrieve results in
+    # multiple calls.
+    #
+    # **Permissions**
+    #
+    # To list mute rules, you need the `cloudwatch:ListAlarmMuteRules`
+    # permission.
+    #
+    # @option params [String] :alarm_name
+    #   Filter results to show only mute rules that target the specified alarm
+    #   name.
+    #
+    # @option params [Array<String>] :statuses
+    #   Filter results to show only mute rules with the specified statuses.
+    #   Valid values are `SCHEDULED`, `ACTIVE`, or `EXPIRED`.
+    #
+    # @option params [Integer] :max_records
+    #   The maximum number of mute rules to return in one call. The default is
+    #   50.
+    #
+    # @option params [String] :next_token
+    #   The token returned from a previous call to indicate where to continue
+    #   retrieving results.
+    #
+    # @return [Types::ListAlarmMuteRulesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListAlarmMuteRulesOutput#alarm_mute_rule_summaries #alarm_mute_rule_summaries} => Array&lt;Types::AlarmMuteRuleSummary&gt;
+    #   * {Types::ListAlarmMuteRulesOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_alarm_mute_rules({
+    #     alarm_name: "Name",
+    #     statuses: ["SCHEDULED"], # accepts SCHEDULED, ACTIVE, EXPIRED
+    #     max_records: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.alarm_mute_rule_summaries #=> Array
+    #   resp.alarm_mute_rule_summaries[0].alarm_mute_rule_arn #=> String
+    #   resp.alarm_mute_rule_summaries[0].expire_date #=> Time
+    #   resp.alarm_mute_rule_summaries[0].status #=> String, one of "SCHEDULED", "ACTIVE", "EXPIRED"
+    #   resp.alarm_mute_rule_summaries[0].mute_type #=> String
+    #   resp.alarm_mute_rule_summaries[0].last_updated_timestamp #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/ListAlarmMuteRules AWS API Documentation
+    #
+    # @overload list_alarm_mute_rules(params = {})
+    # @param [Hash] params ({})
+    def list_alarm_mute_rules(params = {}, options = {})
+      req = build_request(:list_alarm_mute_rules, params)
+      req.send_request(options)
+    end
+
     # Returns a list of the dashboards for your account. If you include
     # `DashboardNamePrefix`, only those dashboards with names starting with
     # the prefix are listed. Otherwise, all dashboards in your account are
@@ -2555,6 +2763,112 @@ module Aws::CloudWatch
     # @param [Hash] params ({})
     def list_tags_for_resource(params = {}, options = {})
       req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
+    # Creates or updates an alarm mute rule.
+    #
+    # Alarm mute rules automatically mute alarm actions during predefined
+    # time windows. When a mute rule is active, targeted alarms continue to
+    # evaluate metrics and transition between states, but their configured
+    # actions (such as Amazon SNS notifications or Auto Scaling actions) are
+    # muted.
+    #
+    # You can create mute rules with recurring schedules using `cron`
+    # expressions or one-time mute windows using `at` expressions. Each mute
+    # rule can target up to 100 specific alarms by name.
+    #
+    # If you specify a rule name that already exists, this operation updates
+    # the existing rule with the new configuration.
+    #
+    # **Permissions**
+    #
+    # To create or update a mute rule, you must have the
+    # `cloudwatch:PutAlarmMuteRule` permission on two types of resources:
+    # the alarm mute rule resource itself, and each alarm that the rule
+    # targets.
+    #
+    # For example, If you want to allow a user to create mute rules that
+    # target only specific alarms named "WebServerCPUAlarm" and
+    # "DatabaseConnectionAlarm", you would create an IAM policy with one
+    # statement granting `cloudwatch:PutAlarmMuteRule` on the alarm mute
+    # rule resource
+    # (`arn:aws:cloudwatch:[REGION]:123456789012:alarm-mute-rule:*`), and
+    # another statement granting `cloudwatch:PutAlarmMuteRule` on the
+    # targeted alarm resources
+    # (`arn:aws:cloudwatch:[REGION]:123456789012:alarm:WebServerCPUAlarm`
+    # and
+    # `arn:aws:cloudwatch:[REGION]:123456789012:alarm:DatabaseConnectionAlarm`).
+    #
+    # You can also use IAM policy conditions to allow targeting alarms based
+    # on resource tags. For example, you can restrict users to create/update
+    # mute rules to only target alarms that have a specific tag key-value
+    # pair, such as `Team=TeamA`.
+    #
+    # @option params [required, String] :name
+    #   The name of the alarm mute rule. This name must be unique within your
+    #   Amazon Web Services account and region.
+    #
+    # @option params [String] :description
+    #   A description of the alarm mute rule that helps you identify its
+    #   purpose.
+    #
+    # @option params [required, Types::Rule] :rule
+    #   The configuration that defines when and how long alarms should be
+    #   muted.
+    #
+    # @option params [Types::MuteTargets] :mute_targets
+    #   Specifies which alarms this rule applies to.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   A list of key-value pairs to associate with the alarm mute rule. You
+    #   can use tags to categorize and manage your mute rules.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :start_date
+    #   The date and time after which the mute rule takes effect, specified as
+    #   a timestamp in ISO 8601 format (for example, `2026-04-15T08:00:00Z`).
+    #   If not specified, the mute rule takes effect immediately upon creation
+    #   and the mutes are applied as per the schedule expression.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :expire_date
+    #   The date and time when the mute rule expires and is no longer
+    #   evaluated, specified as a timestamp in ISO 8601 format (for example,
+    #   `2026-12-31T23:59:59Z`). After this time, the rule status becomes
+    #   EXPIRED and will no longer mute the targeted alarms.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_alarm_mute_rule({
+    #     name: "Name", # required
+    #     description: "AlarmDescription",
+    #     rule: { # required
+    #       schedule: { # required
+    #         expression: "Expression", # required
+    #         duration: "Duration", # required
+    #         timezone: "Timezone",
+    #       },
+    #     },
+    #     mute_targets: {
+    #       alarm_names: ["Name"], # required
+    #     },
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #     start_date: Time.now,
+    #     expire_date: Time.now,
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/PutAlarmMuteRule AWS API Documentation
+    #
+    # @overload put_alarm_mute_rule(params = {})
+    # @param [Hash] params ({})
+    def put_alarm_mute_rule(params = {}, options = {})
+      req = build_request(:put_alarm_mute_rule, params)
       req.send_request(options)
     end
 
@@ -3213,18 +3527,19 @@ module Aws::CloudWatch
     end
 
     # Creates or updates an alarm and associates it with the specified
-    # metric, metric math expression, anomaly detection model, or Metrics
-    # Insights query. For more information about using a Metrics Insights
-    # query for an alarm, see [Create alarms on Metrics Insights
-    # queries][1].
+    # metric, metric math expression, anomaly detection model, Metrics
+    # Insights query, or PromQL query. For more information about using a
+    # Metrics Insights query for an alarm, see [Create alarms on Metrics
+    # Insights queries][1].
     #
     # Alarms based on anomaly detection models cannot have Auto Scaling
     # actions.
     #
     # When this operation creates an alarm, the alarm state is immediately
-    # set to `INSUFFICIENT_DATA`. The alarm is then evaluated and its state
-    # is set appropriately. Any actions associated with the new state are
-    # then executed.
+    # set to `INSUFFICIENT_DATA`. For PromQL alarms, the alarm state is
+    # instead immediately set to `OK`. The alarm is then evaluated and its
+    # state is set appropriately. Any actions associated with the new state
+    # are then executed.
     #
     # When you update an existing alarm, its state is left unchanged, but
     # the update completely overwrites the previous configuration of the
@@ -3465,8 +3780,8 @@ module Aws::CloudWatch
     #
     # @option params [String] :metric_name
     #   The name for the metric associated with the alarm. For each
-    #   `PutMetricAlarm` operation, you must specify either `MetricName` or a
-    #   `Metrics` array.
+    #   `PutMetricAlarm` operation, you must specify either `MetricName`, a
+    #   `Metrics` array, or an `EvaluationCriteria`.
     #
     #   If you are creating an alarm based on a math expression, you cannot
     #   specify this parameter, or any of the `Namespace`, `Dimensions`,
@@ -3575,7 +3890,7 @@ module Aws::CloudWatch
     #   an incorrect unit that is not published for this metric. Doing so
     #   causes the alarm to be stuck in the `INSUFFICIENT DATA` state.
     #
-    # @option params [required, Integer] :evaluation_periods
+    # @option params [Integer] :evaluation_periods
     #   The number of periods over which data is compared to the specified
     #   threshold. If you are setting an alarm that requires that a number of
     #   consecutive data points be breaching to trigger the alarm, this value
@@ -3598,7 +3913,7 @@ module Aws::CloudWatch
     #   This parameter is required for alarms based on static thresholds, but
     #   should not be used for alarms based on anomaly detection models.
     #
-    # @option params [required, String] :comparison_operator
+    # @option params [String] :comparison_operator
     #   The arithmetic operation to use when comparing the specified statistic
     #   and threshold. The specified statistic value is used as the first
     #   operand.
@@ -3619,6 +3934,10 @@ module Aws::CloudWatch
     #   `ignore` missing data even if you choose a different option for
     #   `TreatMissingData`. When an `AWS/DynamoDB` metric has missing data,
     #   alarms that evaluate that metric remain in their current state.
+    #
+    #    </note>
+    #
+    #   <note markdown="1"> This parameter is not applicable to PromQL alarms.
     #
     #    </note>
     #
@@ -3644,8 +3963,8 @@ module Aws::CloudWatch
     # @option params [Array<Types::MetricDataQuery>] :metrics
     #   An array of `MetricDataQuery` structures that enable you to create an
     #   alarm based on the result of a metric math expression. For each
-    #   `PutMetricAlarm` operation, you must specify either `MetricName` or a
-    #   `Metrics` array.
+    #   `PutMetricAlarm` operation, you must specify either `MetricName`, a
+    #   `Metrics` array, or an `EvaluationCriteria`.
     #
     #   Each item in the `Metrics` array either retrieves a metric or performs
     #   a math expression.
@@ -3698,6 +4017,30 @@ module Aws::CloudWatch
     #   If your alarm uses this parameter, it cannot have Auto Scaling
     #   actions.
     #
+    # @option params [Types::EvaluationCriteria] :evaluation_criteria
+    #   The evaluation criteria for the alarm. For each `PutMetricAlarm`
+    #   operation, you must specify either `MetricName`, a `Metrics` array, or
+    #   an `EvaluationCriteria`.
+    #
+    #   If you use the `EvaluationCriteria` parameter, you cannot include the
+    #   `Namespace`, `MetricName`, `Dimensions`, `Period`, `Unit`,
+    #   `Statistic`, `ExtendedStatistic`, `Metrics`, `Threshold`,
+    #   `ComparisonOperator`, `ThresholdMetricId`, `EvaluationPeriods`, or
+    #   `DatapointsToAlarm` parameters of `PutMetricAlarm` in the same
+    #   operation. Instead, all evaluation parameters are defined within this
+    #   structure.
+    #
+    #   For an example of how to use this parameter, see the **PromQL alarm**
+    #   example on this page.
+    #
+    # @option params [Integer] :evaluation_interval
+    #   The frequency, in seconds, at which the alarm is evaluated. Valid
+    #   values are 10, 20, 30, and any multiple of 60.
+    #
+    #   This parameter is required for alarms that use `EvaluationCriteria`,
+    #   and cannot be specified for alarms configured with `MetricName` or
+    #   `Metrics`.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -3721,10 +4064,10 @@ module Aws::CloudWatch
     #     ],
     #     period: 1,
     #     unit: "Seconds", # accepts Seconds, Microseconds, Milliseconds, Bytes, Kilobytes, Megabytes, Gigabytes, Terabytes, Bits, Kilobits, Megabits, Gigabits, Terabits, Percent, Count, Bytes/Second, Kilobytes/Second, Megabytes/Second, Gigabytes/Second, Terabytes/Second, Bits/Second, Kilobits/Second, Megabits/Second, Gigabits/Second, Terabits/Second, Count/Second, None
-    #     evaluation_periods: 1, # required
+    #     evaluation_periods: 1,
     #     datapoints_to_alarm: 1,
     #     threshold: 1.0,
-    #     comparison_operator: "GreaterThanOrEqualToThreshold", # required, accepts GreaterThanOrEqualToThreshold, GreaterThanThreshold, LessThanThreshold, LessThanOrEqualToThreshold, LessThanLowerOrGreaterThanUpperThreshold, LessThanLowerThreshold, GreaterThanUpperThreshold
+    #     comparison_operator: "GreaterThanOrEqualToThreshold", # accepts GreaterThanOrEqualToThreshold, GreaterThanThreshold, LessThanThreshold, LessThanOrEqualToThreshold, LessThanLowerOrGreaterThanUpperThreshold, LessThanLowerThreshold, GreaterThanUpperThreshold
     #     treat_missing_data: "TreatMissingData",
     #     evaluate_low_sample_count_percentile: "EvaluateLowSampleCountPercentile",
     #     metrics: [
@@ -3759,6 +4102,14 @@ module Aws::CloudWatch
     #       },
     #     ],
     #     threshold_metric_id: "MetricId",
+    #     evaluation_criteria: {
+    #       prom_ql_criteria: {
+    #         query: "Query", # required
+    #         pending_period: 1,
+    #         recovery_period: 1,
+    #       },
+    #     },
+    #     evaluation_interval: 1,
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/PutMetricAlarm AWS API Documentation
@@ -4258,6 +4609,33 @@ module Aws::CloudWatch
       req.send_request(options)
     end
 
+    # Enables enrichment and PromQL access for CloudWatch vended metrics for
+    # [supported AWS resources][1] in the account. Once enabled, metrics
+    # that contain a resource identifier dimension (for example, EC2
+    # `CPUUtilization` with an `InstanceId` dimension) are enriched with
+    # resource ARN and resource tag labels and become queryable using
+    # PromQL.
+    #
+    # Before calling this operation, you must enable resource tags on
+    # telemetry for your account. For more information, see [Enable resource
+    # tags on telemetry][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/UsingResourceTagsForTelemetry.html
+    # [2]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/EnableResourceTagsOnTelemetry.html
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/StartOTelEnrichment AWS API Documentation
+    #
+    # @overload start_o_tel_enrichment(params = {})
+    # @param [Hash] params ({})
+    def start_o_tel_enrichment(params = {}, options = {})
+      req = build_request(:start_o_tel_enrichment, params)
+      req.send_request(options)
+    end
+
     # Stops the streaming of metrics for one or more of your metric streams.
     #
     # @option params [required, Array<String>] :names
@@ -4281,6 +4659,26 @@ module Aws::CloudWatch
     # @param [Hash] params ({})
     def stop_metric_streams(params = {}, options = {})
       req = build_request(:stop_metric_streams, params)
+      req.send_request(options)
+    end
+
+    # Disables enrichment and PromQL access for CloudWatch vended metrics
+    # for [supported AWS resources][1] in the account. After disabling,
+    # these metrics are no longer enriched with resource ARN and resource
+    # tag labels, and cannot be queried using PromQL.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/UsingResourceTagsForTelemetry.html
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/StopOTelEnrichment AWS API Documentation
+    #
+    # @overload stop_o_tel_enrichment(params = {})
+    # @param [Hash] params ({})
+    def stop_o_tel_enrichment(params = {}, options = {})
+      req = build_request(:stop_o_tel_enrichment, params)
       req.send_request(options)
     end
 
@@ -4402,7 +4800,7 @@ module Aws::CloudWatch
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-cloudwatch'
-      context[:gem_version] = '1.130.0'
+      context[:gem_version] = '1.134.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
@@ -4468,10 +4866,11 @@ module Aws::CloudWatch
     # The following table lists the valid waiter names, the operations they call,
     # and the default `:delay` and `:max_attempts` values.
     #
-    # | waiter_name            | params                   | :delay   | :max_attempts |
-    # | ---------------------- | ------------------------ | -------- | ------------- |
-    # | alarm_exists           | {Client#describe_alarms} | 5        | 40            |
-    # | composite_alarm_exists | {Client#describe_alarms} | 5        | 40            |
+    # | waiter_name            | params                       | :delay   | :max_attempts |
+    # | ---------------------- | ---------------------------- | -------- | ------------- |
+    # | alarm_exists           | {Client#describe_alarms}     | 5        | 40            |
+    # | alarm_mute_rule_exists | {Client#get_alarm_mute_rule} | 5        | 40            |
+    # | composite_alarm_exists | {Client#describe_alarms}     | 5        | 40            |
     #
     # @raise [Errors::FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition
@@ -4523,6 +4922,7 @@ module Aws::CloudWatch
     def waiters
       {
         alarm_exists: Waiters::AlarmExists,
+        alarm_mute_rule_exists: Waiters::AlarmMuteRuleExists,
         composite_alarm_exists: Waiters::CompositeAlarmExists
       }
     end

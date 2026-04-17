@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.101.0 (2026-04-10)
+------------------
+
+* Feature - Image pipelines can now automatically apply tags to images they create. Set the imageTags property when creating or updating your pipelines to get started.
+
+1.100.0 (2026-04-03)
+------------------
+
+* Feature - Updated pagination token validation for ListContainerRecipes API to support maximum size of 65K characters
+
+1.99.0 (2026-03-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.98.0 (2026-02-09)
 ------------------
 

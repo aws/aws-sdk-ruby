@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.183.0 (2026-04-16)
+------------------
+
+* Feature - Adds support for Elemental Inference powered smart crop feature, enabling video verticalization
+
+1.182.0 (2026-04-10)
+------------------
+
+* Feature - Adds support for MV-HEVC video output and clear lead for AV1 DRM output.
+
+1.181.0 (2026-03-18)
+------------------
+
+* Feature - This update adds additional bitrate options for Dolby AC-4 audio outputs.
+
+1.180.0 (2026-03-13)
+------------------
+
+* Feature - This update adds support for Dolby AC-4 audio output, frame rate conversion between non-Dolby Vision inputs to Dolby Vision outputs, and clear lead CMAF HLS output.
+
 1.179.0 (2026-01-28)
 ------------------
 

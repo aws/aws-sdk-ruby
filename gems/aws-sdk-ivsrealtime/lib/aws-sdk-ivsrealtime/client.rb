@@ -569,6 +569,10 @@ module Aws::IVSRealTime
     #   Whether the stage allows insecure RTMP ingest. This must be set to
     #   `true`, if `ingestProtocol` is set to `RTMP`. Default: `false`.
     #
+    # @option params [Boolean] :redundant_ingest
+    #   Indicates whether redundant ingest is enabled for the ingest
+    #   configuration. Default: `false`.
+    #
     # @option params [Hash<String,String>] :tags
     #   Tags attached to the resource. Array of maps, each of the form
     #   `string:string (key:value)`. See [Best practices and strategies][1] in
@@ -596,6 +600,7 @@ module Aws::IVSRealTime
     #     },
     #     ingest_protocol: "RTMP", # required, accepts RTMP, RTMPS
     #     insecure_ingest: false,
+    #     redundant_ingest: false,
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
@@ -611,6 +616,10 @@ module Aws::IVSRealTime
     #   resp.ingest_configuration.participant_id #=> String
     #   resp.ingest_configuration.state #=> String, one of "ACTIVE", "INACTIVE"
     #   resp.ingest_configuration.user_id #=> String
+    #   resp.ingest_configuration.redundant_ingest #=> Boolean
+    #   resp.ingest_configuration.redundant_ingest_credentials #=> Array
+    #   resp.ingest_configuration.redundant_ingest_credentials[0].participant_id #=> String
+    #   resp.ingest_configuration.redundant_ingest_credentials[0].stream_key #=> String
     #   resp.ingest_configuration.attributes #=> Hash
     #   resp.ingest_configuration.attributes["String"] #=> String
     #   resp.ingest_configuration.tags #=> Hash
@@ -1150,6 +1159,10 @@ module Aws::IVSRealTime
     #   resp.ingest_configuration.participant_id #=> String
     #   resp.ingest_configuration.state #=> String, one of "ACTIVE", "INACTIVE"
     #   resp.ingest_configuration.user_id #=> String
+    #   resp.ingest_configuration.redundant_ingest #=> Boolean
+    #   resp.ingest_configuration.redundant_ingest_credentials #=> Array
+    #   resp.ingest_configuration.redundant_ingest_credentials[0].participant_id #=> String
+    #   resp.ingest_configuration.redundant_ingest_credentials[0].stream_key #=> String
     #   resp.ingest_configuration.attributes #=> Hash
     #   resp.ingest_configuration.attributes["String"] #=> String
     #   resp.ingest_configuration.tags #=> Hash
@@ -1211,6 +1224,8 @@ module Aws::IVSRealTime
     #   resp.participant.replication_state #=> String, one of "ACTIVE", "STOPPED"
     #   resp.participant.source_stage_arn #=> String
     #   resp.participant.source_session_id #=> String
+    #   resp.participant.redundant_ingest #=> Boolean
+    #   resp.participant.ingest_configuration_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/GetParticipant AWS API Documentation
     #
@@ -1563,6 +1578,7 @@ module Aws::IVSRealTime
     #   resp.ingest_configurations[0].participant_id #=> String
     #   resp.ingest_configurations[0].state #=> String, one of "ACTIVE", "INACTIVE"
     #   resp.ingest_configurations[0].user_id #=> String
+    #   resp.ingest_configurations[0].redundant_ingest #=> Boolean
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/ListIngestConfigurations AWS API Documentation
@@ -1775,6 +1791,8 @@ module Aws::IVSRealTime
     #   resp.participants[0].replication_state #=> String, one of "ACTIVE", "STOPPED"
     #   resp.participants[0].source_stage_arn #=> String
     #   resp.participants[0].source_session_id #=> String
+    #   resp.participants[0].redundant_ingest #=> Boolean
+    #   resp.participants[0].ingest_configuration_arn #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/ListParticipants AWS API Documentation
@@ -2386,6 +2404,10 @@ module Aws::IVSRealTime
     # @option params [String] :stage_arn
     #   Stage ARN that needs to be updated.
     #
+    # @option params [Boolean] :redundant_ingest
+    #   Indicates whether redundant ingest is enabled for the ingest
+    #   configuration. Default: `false`.
+    #
     # @return [Types::UpdateIngestConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateIngestConfigurationResponse#ingest_configuration #ingest_configuration} => Types::IngestConfiguration
@@ -2395,6 +2417,7 @@ module Aws::IVSRealTime
     #   resp = client.update_ingest_configuration({
     #     arn: "IngestConfigurationArn", # required
     #     stage_arn: "IngestConfigurationStageArn",
+    #     redundant_ingest: false,
     #   })
     #
     # @example Response structure
@@ -2407,6 +2430,10 @@ module Aws::IVSRealTime
     #   resp.ingest_configuration.participant_id #=> String
     #   resp.ingest_configuration.state #=> String, one of "ACTIVE", "INACTIVE"
     #   resp.ingest_configuration.user_id #=> String
+    #   resp.ingest_configuration.redundant_ingest #=> Boolean
+    #   resp.ingest_configuration.redundant_ingest_credentials #=> Array
+    #   resp.ingest_configuration.redundant_ingest_credentials[0].participant_id #=> String
+    #   resp.ingest_configuration.redundant_ingest_credentials[0].stream_key #=> String
     #   resp.ingest_configuration.attributes #=> Hash
     #   resp.ingest_configuration.attributes["String"] #=> String
     #   resp.ingest_configuration.tags #=> Hash
@@ -2508,7 +2535,7 @@ module Aws::IVSRealTime
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-ivsrealtime'
-      context[:gem_version] = '1.58.0'
+      context[:gem_version] = '1.61.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

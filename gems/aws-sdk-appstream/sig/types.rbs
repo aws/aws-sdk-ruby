@@ -55,6 +55,7 @@ module Aws::AppStream
       attr_accessor app_block_builder_errors: ::Array[Types::ResourceError]
       attr_accessor state_change_reason: Types::AppBlockBuilderStateChangeReason
       attr_accessor access_endpoints: ::Array[Types::AccessEndpoint]
+      attr_accessor disable_imdsv1: bool
       SENSITIVE: []
     end
 
@@ -210,11 +211,19 @@ module Aws::AppStream
       attr_accessor available_user_sessions: ::Integer
       attr_accessor active_user_sessions: ::Integer
       attr_accessor actual_user_sessions: ::Integer
+      attr_accessor draining: ::Integer
+      attr_accessor drain_mode_active_user_sessions: ::Integer
+      attr_accessor drain_mode_unused_user_sessions: ::Integer
       SENSITIVE: []
     end
 
     class ConcurrentModificationException
       attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ContentRedirection
+      attr_accessor host_to_client: Types::UrlRedirectionConfig
       SENSITIVE: []
     end
 
@@ -242,6 +251,7 @@ module Aws::AppStream
       attr_accessor enable_default_internet_access: bool
       attr_accessor iam_role_arn: ::String
       attr_accessor access_endpoints: ::Array[Types::AccessEndpoint]
+      attr_accessor disable_imdsv1: bool
       SENSITIVE: []
     end
 
@@ -364,6 +374,7 @@ module Aws::AppStream
       attr_accessor session_script_s3_location: Types::S3Location
       attr_accessor max_sessions_per_instance: ::Integer
       attr_accessor root_volume_config: Types::VolumeConfig
+      attr_accessor disable_imdsv1: bool
       SENSITIVE: []
     end
 
@@ -389,6 +400,7 @@ module Aws::AppStream
       attr_accessor root_volume_config: Types::VolumeConfig
       attr_accessor softwares_to_install: ::Array[::String]
       attr_accessor softwares_to_uninstall: ::Array[::String]
+      attr_accessor disable_imdsv1: bool
       SENSITIVE: []
     end
 
@@ -441,6 +453,7 @@ module Aws::AppStream
       attr_accessor access_endpoints: ::Array[Types::AccessEndpoint]
       attr_accessor embed_host_domains: ::Array[::String]
       attr_accessor streaming_experience_settings: Types::StreamingExperienceSettings
+      attr_accessor content_redirection: Types::ContentRedirection
       SENSITIVE: []
     end
 
@@ -951,6 +964,14 @@ module Aws::AppStream
       SENSITIVE: []
     end
 
+    class DrainSessionInstanceRequest
+      attr_accessor session_id: ::String
+      SENSITIVE: []
+    end
+
+    class DrainSessionInstanceResult < Aws::EmptyStructure
+    end
+
     class DryRunOperationException
       attr_accessor message: ::String
       SENSITIVE: []
@@ -1057,6 +1078,7 @@ module Aws::AppStream
       attr_accessor session_script_s3_location: Types::S3Location
       attr_accessor max_sessions_per_instance: ::Integer
       attr_accessor root_volume_config: Types::VolumeConfig
+      attr_accessor disable_imdsv1: bool
       SENSITIVE: []
     end
 
@@ -1124,6 +1146,7 @@ module Aws::AppStream
       attr_accessor access_endpoints: ::Array[Types::AccessEndpoint]
       attr_accessor root_volume_config: Types::VolumeConfig
       attr_accessor latest_appstream_agent_version: ("TRUE" | "FALSE")
+      attr_accessor disable_imdsv1: bool
       SENSITIVE: []
     end
 
@@ -1318,6 +1341,7 @@ module Aws::AppStream
       attr_accessor authentication_type: ("API" | "SAML" | "USERPOOL" | "AWS_AD")
       attr_accessor network_access_configuration: Types::NetworkAccessConfiguration
       attr_accessor instance_id: ::String
+      attr_accessor instance_drain_status: ("ACTIVE" | "DRAINING" | "NOT_APPLICABLE")
       SENSITIVE: []
     end
 
@@ -1349,6 +1373,7 @@ module Aws::AppStream
       attr_accessor access_endpoints: ::Array[Types::AccessEndpoint]
       attr_accessor embed_host_domains: ::Array[::String]
       attr_accessor streaming_experience_settings: Types::StreamingExperienceSettings
+      attr_accessor content_redirection: Types::ContentRedirection
       SENSITIVE: []
     end
 
@@ -1484,6 +1509,7 @@ module Aws::AppStream
       attr_accessor iam_role_arn: ::String
       attr_accessor access_endpoints: ::Array[Types::AccessEndpoint]
       attr_accessor attributes_to_delete: ::Array[("IAM_ROLE_ARN" | "ACCESS_ENDPOINTS" | "VPC_CONFIGURATION_SECURITY_GROUP_IDS")]
+      attr_accessor disable_imdsv1: bool
       SENSITIVE: []
     end
 
@@ -1561,6 +1587,7 @@ module Aws::AppStream
       attr_accessor session_script_s3_location: Types::S3Location
       attr_accessor max_sessions_per_instance: ::Integer
       attr_accessor root_volume_config: Types::VolumeConfig
+      attr_accessor disable_imdsv1: bool
       SENSITIVE: []
     end
 
@@ -1587,12 +1614,13 @@ module Aws::AppStream
       attr_accessor delete_storage_connectors: bool
       attr_accessor redirect_url: ::String
       attr_accessor feedback_url: ::String
-      attr_accessor attributes_to_delete: ::Array[("STORAGE_CONNECTORS" | "STORAGE_CONNECTOR_HOMEFOLDERS" | "STORAGE_CONNECTOR_GOOGLE_DRIVE" | "STORAGE_CONNECTOR_ONE_DRIVE" | "REDIRECT_URL" | "FEEDBACK_URL" | "THEME_NAME" | "USER_SETTINGS" | "EMBED_HOST_DOMAINS" | "IAM_ROLE_ARN" | "ACCESS_ENDPOINTS" | "STREAMING_EXPERIENCE_SETTINGS")]
+      attr_accessor attributes_to_delete: ::Array[("STORAGE_CONNECTORS" | "STORAGE_CONNECTOR_HOMEFOLDERS" | "STORAGE_CONNECTOR_GOOGLE_DRIVE" | "STORAGE_CONNECTOR_ONE_DRIVE" | "REDIRECT_URL" | "FEEDBACK_URL" | "THEME_NAME" | "USER_SETTINGS" | "EMBED_HOST_DOMAINS" | "IAM_ROLE_ARN" | "ACCESS_ENDPOINTS" | "STREAMING_EXPERIENCE_SETTINGS" | "CONTENT_REDIRECTION")]
       attr_accessor user_settings: ::Array[Types::UserSetting]
       attr_accessor application_settings: Types::ApplicationSettings
       attr_accessor access_endpoints: ::Array[Types::AccessEndpoint]
       attr_accessor embed_host_domains: ::Array[::String]
       attr_accessor streaming_experience_settings: Types::StreamingExperienceSettings
+      attr_accessor content_redirection: Types::ContentRedirection
       SENSITIVE: []
     end
 
@@ -1615,6 +1643,13 @@ module Aws::AppStream
 
     class UpdateThemeForStackResult
       attr_accessor theme: Types::Theme
+      SENSITIVE: []
+    end
+
+    class UrlRedirectionConfig
+      attr_accessor enabled: bool
+      attr_accessor allowed_urls: ::Array[::String]
+      attr_accessor denied_urls: ::Array[::String]
       SENSITIVE: []
     end
 

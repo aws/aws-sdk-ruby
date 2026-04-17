@@ -325,7 +325,7 @@ module Aws
         def portal_arn: () -> ::String
         def portal_content: () -> Types::PortalContent
         def portal_id: () -> ::String
-        def publish_status: () -> ("PUBLISHED" | "PUBLISH_IN_PROGRESS" | "PUBLISH_FAILED" | "DISABLED")
+        def publish_status: () -> ("PUBLISHED" | "PUBLISH_IN_PROGRESS" | "PUBLISH_FAILED" | "DISABLE_IN_PROGRESS" | "DISABLE_FAILED" | "DISABLED")
         def rum_app_monitor_name: () -> ::String
         def status_exception: () -> Types::StatusException
         def tags: () -> ::Hash[::String, ::String]
@@ -1070,7 +1070,7 @@ module Aws
         def portal_content: () -> Types::PortalContent
         def portal_id: () -> ::String
         def preview: () -> Types::Preview
-        def publish_status: () -> ("PUBLISHED" | "PUBLISH_IN_PROGRESS" | "PUBLISH_FAILED" | "DISABLED")
+        def publish_status: () -> ("PUBLISHED" | "PUBLISH_IN_PROGRESS" | "PUBLISH_FAILED" | "DISABLE_IN_PROGRESS" | "DISABLE_FAILED" | "DISABLED")
         def rum_app_monitor_name: () -> ::String
         def status_exception: () -> Types::StatusException
         def tags: () -> ::Hash[::String, ::String]
@@ -1766,7 +1766,7 @@ module Aws
         def portal_content: () -> Types::PortalContent
         def portal_id: () -> ::String
         def preview: () -> Types::Preview
-        def publish_status: () -> ("PUBLISHED" | "PUBLISH_IN_PROGRESS" | "PUBLISH_FAILED" | "DISABLED")
+        def publish_status: () -> ("PUBLISHED" | "PUBLISH_IN_PROGRESS" | "PUBLISH_FAILED" | "DISABLE_IN_PROGRESS" | "DISABLE_FAILED" | "DISABLED")
         def rum_app_monitor_name: () -> ::String
         def status_exception: () -> Types::StatusException
         def tags: () -> ::Hash[::String, ::String]

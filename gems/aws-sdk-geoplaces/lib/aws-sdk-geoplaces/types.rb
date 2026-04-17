@@ -105,21 +105,37 @@ module Aws::GeoPlaces
     #   @return [String]
     #
     # @!attribute [rw] block
-    #   Name of the block.
+    #   Name of the block. Not available in `ap-southeast-1` and
+    #   `ap-southeast-5` regions for [GrabMaps][1] customers.
     #
     #   Example: `Sunny Mansion 203 block: 2 Chome`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
     #   @return [String]
     #
     # @!attribute [rw] sub_block
-    #   Name of sub-block.
+    #   Name of sub-block. Not available in `ap-southeast-1` and
+    #   `ap-southeast-5` regions for [GrabMaps][1] customers.
     #
     #   Example: `Sunny Mansion 203 sub-block: 4`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
     #   @return [String]
     #
     # @!attribute [rw] intersection
-    #   Name of the streets in the intersection.
+    #   Name of the streets in the intersection. Not available in
+    #   `ap-southeast-1` and `ap-southeast-5` regions for [GrabMaps][1]
+    #   customers.
     #
     #   Example: `["Friedrichstraße","Unter den Linden"]`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] street
@@ -127,9 +143,14 @@ module Aws::GeoPlaces
     #   @return [String]
     #
     # @!attribute [rw] street_components
-    #   Components of the street.
+    #   Components of the street. Not available in `ap-southeast-1` and
+    #   `ap-southeast-5` regions for [GrabMaps][1] customers.
     #
-    #   Example: Younge from the "Younge street".
+    #   Example: Yonge from "Yonge street".
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
     #   @return [Array<Types::StreetComponents>]
     #
     # @!attribute [rw] address_number
@@ -137,13 +158,20 @@ module Aws::GeoPlaces
     #   @return [String]
     #
     # @!attribute [rw] building
-    #   The name of the building at the address.
+    #   The name of the building at the address. Not available in
+    #   `ap-southeast-1` and `ap-southeast-5` regions for [GrabMaps][1]
+    #   customers.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
     #   @return [String]
     #
     # @!attribute [rw] secondary_address_components
     #   Components that correspond to secondary identifiers on an Address.
     #   Secondary address components include information such as Suite or
-    #   Unit Number, Building, or Floor.
+    #   Unit Number, Building, or Floor. Not available in `ap-southeast-1`
+    #   and `ap-southeast-5` regions for [GrabMaps][1] customers.
     #
     #   <note markdown="1"> Coverage for `Address.SecondaryAddressComponents` is available in
     #   the following countries:
@@ -151,6 +179,10 @@ module Aws::GeoPlaces
     #    AUS, CAN, NZL, USA, PRI
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
     #   @return [Array<Types::SecondaryAddressComponent>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/geo-places-2020-11-19/Address AWS API Documentation
@@ -589,8 +621,9 @@ module Aws::GeoPlaces
     #   @return [String]
     #
     # @!attribute [rw] intended_use
-    #   Indicates if the results will be stored. Defaults to `SingleUse`, if
-    #   left empty.
+    #   Indicates if the query results will be persisted in customer
+    #   infrastructure. Defaults to `SingleUse` (not stored). Currently,
+    #   `Autocomplete` does not support storage of results.
     #   @return [String]
     #
     # @!attribute [rw] key
@@ -884,7 +917,13 @@ module Aws::GeoPlaces
     #   @return [Array<Float>]
     #
     # @!attribute [rw] radius
-    #   The radius, in meters, of the `FilterCircle`.
+    #   The radius, in meters, of the `FilterCircle`. For [GrabMaps][1]
+    #   customers,`ap-southeast-1` and `ap-southeast-5` regions support only
+    #   up to a maximum value of 300,000.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/geo-places-2020-11-19/FilterCircle AWS API Documentation
@@ -1169,20 +1208,24 @@ module Aws::GeoPlaces
     #   @return [String]
     #
     # @!attribute [rw] intended_use
-    #   Indicates if the results will be stored. Defaults to `SingleUse`, if
-    #   left empty.
+    #   Indicates if the query results will be persisted in customer
+    #   infrastructure. Defaults to `SingleUse` (not stored). Not supported
+    #   in `ap-southeast-1` and `ap-southeast-5` regions for [GrabMaps][1]
+    #   customers.
     #
-    #   <note markdown="1"> Storing the response of an Geocode query is required to comply with
-    #   service terms, but charged at a higher cost per request. Please
-    #   review the [user agreement][1] and [service pricing structure][2] to
-    #   determine the correct setting for your use case.
+    #   <note markdown="1"> When storing `Geocode` responses, you *must* set this field to
+    #   `Storage` to comply with the terms of service. These requests will
+    #   be charged at a higher rate. Please review the [user agreement][2]
+    #   and [service pricing structure][3] to determine the correct setting
+    #   for your use case.
     #
     #    </note>
     #
     #
     #
-    #   [1]: https://aws.amazon.com/location/sla/
-    #   [2]: https://aws.amazon.com/location/pricing/
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
+    #   [2]: https://aws.amazon.com/location/sla/
+    #   [3]: https://aws.amazon.com/location/pricing/
     #   @return [String]
     #
     # @!attribute [rw] key
@@ -1360,42 +1403,60 @@ module Aws::GeoPlaces
     #
     # @!attribute [rw] additional_features
     #   A list of optional additional parameters such as time zone that can
-    #   be requested for each result.
+    #   be requested for each result. For [GrabMaps][1] customers,
+    #   `ap-southeast-1` and `ap-southeast-5` regions support only the
+    #   `TimeZone` value.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] language
     #   A list of [BCP 47][1] compliant language codes for the results to be
     #   rendered in. If there is no data for the result in the requested
     #   language, data will be returned in the default language for the
-    #   entry.
+    #   entry. For [GrabMaps][2] customers, `ap-southeast-1` and
+    #   `ap-southeast-5` regions support only the following codes: `en, id,
+    #   km, lo, ms, my, pt, th, tl, vi, zh`
     #
     #
     #
     #   [1]: https://en.wikipedia.org/wiki/IETF_language_tag
+    #   [2]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
     #   @return [String]
     #
     # @!attribute [rw] political_view
     #   The alpha-2 or alpha-3 character code for the political view of a
     #   country. The political view applies to the results of the request to
     #   represent unresolved territorial claims through the point of view of
-    #   the specified country.
+    #   the specified country. Not supported in `ap-southeast-1` and
+    #   `ap-southeast-5` regions for [GrabMaps][1] customers.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
     #   @return [String]
     #
     # @!attribute [rw] intended_use
-    #   Indicates if the results will be stored. Defaults to `SingleUse`, if
-    #   left empty.
+    #   Indicates if the query results will be persisted in customer
+    #   infrastructure. Defaults to `SingleUse` (not stored). Not supported
+    #   in `ap-southeast-1` and `ap-southeast-5` regions for [GrabMaps][1]
+    #   customers.
     #
-    #   <note markdown="1"> Storing the response of an GetPlace query is required to comply with
-    #   service terms, but charged at a higher cost per request. Please
-    #   review the [user agreement][1] and [service pricing structure][2] to
-    #   determine the correct setting for your use case.
+    #   <note markdown="1"> When storing `GetPlace` responses, you *must* set this field to
+    #   `Storage` to comply with the terms of service. These requests will
+    #   be charged at a higher rate. Please review the [user agreement][2]
+    #   and [service pricing structure][3] to determine the correct setting
+    #   for your use case.
     #
     #    </note>
     #
     #
     #
-    #   [1]: https://aws.amazon.com/location/sla/
-    #   [2]: https://aws.amazon.com/location/pricing/
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
+    #   [2]: https://aws.amazon.com/location/sla/
+    #   [3]: https://aws.amazon.com/location/pricing/
     #   @return [String]
     #
     # @!attribute [rw] key
@@ -1445,11 +1506,23 @@ module Aws::GeoPlaces
     #   @return [Types::Address]
     #
     # @!attribute [rw] address_number_corrected
-    #   Boolean indicating if the address provided has been corrected.
+    #   Boolean indicating if the address provided has been corrected. Not
+    #   available in `ap-southeast-1` and `ap-southeast-5` regions for
+    #   [GrabMaps][1] customers.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
     #   @return [Boolean]
     #
     # @!attribute [rw] postal_code_details
-    #   Contains details about the postal code of the place/result.
+    #   Contains details about the postal code of the place/result. Not
+    #   available in `ap-southeast-1` and `ap-southeast-5` regions for
+    #   [GrabMaps][1] customers.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
     #   @return [Array<Types::PostalCodeDetails>]
     #
     # @!attribute [rw] position
@@ -1470,7 +1543,13 @@ module Aws::GeoPlaces
     #   @return [Array<Types::Category>]
     #
     # @!attribute [rw] food_types
-    #   List of food types offered by this result.
+    #   List of food types offered by this result. Not available in
+    #   `ap-southeast-1` and `ap-southeast-5` regions for [GrabMaps][1]
+    #   customers.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
     #   @return [Array<Types::FoodType>]
     #
     # @!attribute [rw] business_chains
@@ -1478,22 +1557,44 @@ module Aws::GeoPlaces
     #   @return [Array<Types::BusinessChain>]
     #
     # @!attribute [rw] contacts
-    #   List of potential contact methods for the result/place.
+    #   List of potential contact methods for the result/place. Not
+    #   available in `ap-southeast-1` and `ap-southeast-5` regions for
+    #   [GrabMaps][1] customers.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
     #   @return [Types::Contacts]
     #
     # @!attribute [rw] opening_hours
-    #   List of opening hours objects.
+    #   List of opening hours objects. Not available in `ap-southeast-1` and
+    #   `ap-southeast-5` regions for [GrabMaps][1] customers.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
     #   @return [Array<Types::OpeningHours>]
     #
     # @!attribute [rw] access_points
     #   Position of the access point in World Geodetic System (WGS 84)
-    #   format: \[longitude, latitude\].
+    #   format: \[longitude, latitude\]. Not available in `ap-southeast-1`
+    #   and `ap-southeast-5` regions for [GrabMaps][1] customers.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
     #   @return [Array<Types::AccessPoint>]
     #
     # @!attribute [rw] access_restrictions
     #   Indicates known access restrictions on a vehicle access point. The
     #   index correlates to an access point and indicates if access through
-    #   this point has some form of restriction.
+    #   this point has some form of restriction. Not available in
+    #   `ap-southeast-1` and `ap-southeast-5` regions for [GrabMaps][1]
+    #   customers.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
     #   @return [Array<Types::AccessRestriction>]
     #
     # @!attribute [rw] time_zone
@@ -1504,27 +1605,49 @@ module Aws::GeoPlaces
     #   The alpha-2 or alpha-3 character code for the political view of a
     #   country. The political view applies to the results of the request to
     #   represent unresolved territorial claims through the point of view of
-    #   the specified country.
+    #   the specified country. Not available in `ap-southeast-1` and
+    #   `ap-southeast-5` regions for [GrabMaps][1] customers.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
     #   @return [String]
     #
     # @!attribute [rw] phonemes
     #   How the various components of the result's address are pronounced
-    #   in various languages.
+    #   in various languages. Not available in `ap-southeast-1` and
+    #   `ap-southeast-5` regions for [GrabMaps][1] customers.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
     #   @return [Types::PhonemeDetails]
     #
     # @!attribute [rw] main_address
     #   The main address corresponding to a place of type Secondary Address.
+    #   Not available in `ap-southeast-1` and `ap-southeast-5` regions for
+    #   [GrabMaps][1] customers.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
     #   @return [Types::RelatedPlace]
     #
     # @!attribute [rw] secondary_addresses
     #   All secondary addresses that are associated with a main address. A
     #   secondary address is one that includes secondary designators, such
-    #   as a Suite or Unit Number, Building, or Floor information.
+    #   as a Suite or Unit Number, Building, or Floor information. Not
+    #   available in `ap-southeast-1` and `ap-southeast-5` regions for
+    #   [GrabMaps][1] customers.
     #
     #   <note markdown="1"> Coverage for this functionality is available in the following
     #   countries: AUS, CAN, NZL, USA, PRI.
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
     #   @return [Array<Types::RelatedPlace>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/geo-places-2020-11-19/GetPlaceResponse AWS API Documentation
@@ -1924,8 +2047,14 @@ module Aws::GeoPlaces
     #
     # @!attribute [rw] code
     #   Abbreviated code for a the state, province or region of the country.
+    #   Not available in `ap-southeast-1` and `ap-southeast-5` regions for
+    #   [GrabMaps][1] customers.
     #
     #   Example: `BC`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -2010,7 +2139,13 @@ module Aws::GeoPlaces
     # The included place types.
     #
     # @!attribute [rw] include_place_types
-    #   The included place types.
+    #   The included place types. For [GrabMaps][1] customers,
+    #   `ap-southeast-1` and `ap-southeast-5` regions support only `Street`
+    #   and `PointAddress` values.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/geo-places-2020-11-19/ReverseGeocodeFilter AWS API Documentation
@@ -2030,7 +2165,13 @@ module Aws::GeoPlaces
     #
     # @!attribute [rw] query_radius
     #   The maximum distance in meters from the QueryPosition from which a
-    #   result will be returned.
+    #   result will be returned. For [GrabMaps][1] customers,
+    #   `ap-southeast-1` and `ap-southeast-5` regions support only up to a
+    #   maximum value of 100,000.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
     #   @return [Integer]
     #
     # @!attribute [rw] max_results
@@ -2047,35 +2188,50 @@ module Aws::GeoPlaces
     #
     # @!attribute [rw] additional_features
     #   A list of optional additional parameters, such as time zone that can
-    #   be requested for each result.
+    #   be requested for each result. For [GrabMaps][1] customers,
+    #   `ap-southeast-1` and `ap-southeast-5` regions support only the
+    #   `TimeZone` value.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] language
     #   A list of [BCP 47][1] compliant language codes for the results to be
     #   rendered in. If there is no data for the result in the requested
     #   language, data will be returned in the default language for the
-    #   entry.
+    #   entry. For [GrabMaps][2] customers, `ap-southeast-1` and
+    #   `ap-southeast-5` regions support only the following codes: `en, id,
+    #   km, lo, ms, my, pt, th, tl, vi, zh`
     #
     #
     #
     #   [1]: https://en.wikipedia.org/wiki/IETF_language_tag
+    #   [2]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
     #   @return [String]
     #
     # @!attribute [rw] political_view
     #   The alpha-2 or alpha-3 character code for the political view of a
     #   country. The political view applies to the results of the request to
     #   represent unresolved territorial claims through the point of view of
-    #   the specified country.
+    #   the specified country. Not supported in `ap-southeast-1` and
+    #   `ap-southeast-5` regions for [GrabMaps][1] customers.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
     #   @return [String]
     #
     # @!attribute [rw] intended_use
-    #   Indicates if the results will be stored. Defaults to `SingleUse`, if
-    #   left empty.
+    #   Indicates if the query results will be persisted in customer
+    #   infrastructure. Defaults to `SingleUse` (not stored).
     #
-    #   <note markdown="1"> Storing the response of an ReverseGeocode query is required to
-    #   comply with service terms, but charged at a higher cost per request.
-    #   Please review the [user agreement][1] and [service pricing
-    #   structure][2] to determine the correct setting for your use case.
+    #   <note markdown="1"> When storing `ReverseGeocode` responses, you *must* set this field
+    #   to `Storage` to comply with the terms of service. These requests
+    #   will be charged at a higher rate. Please review the [user
+    #   agreement][1] and [service pricing structure][2] to determine the
+    #   correct setting for your use case.
     #
     #    </note>
     #
@@ -2159,11 +2315,23 @@ module Aws::GeoPlaces
     #   @return [Types::Address]
     #
     # @!attribute [rw] address_number_corrected
-    #   Boolean indicating if the address provided has been corrected.
+    #   Boolean indicating if the address provided has been corrected. Not
+    #   available in `ap-southeast-1` and `ap-southeast-5` regions for
+    #   [GrabMaps][1] customers.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
     #   @return [Boolean]
     #
     # @!attribute [rw] postal_code_details
-    #   Contains details about the postal code of the place/result.
+    #   Contains details about the postal code of the place/result. Not
+    #   available in `ap-southeast-1` and `ap-southeast-5` regions for
+    #   [GrabMaps][1] customers.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
     #   @return [Array<Types::PostalCodeDetails>]
     #
     # @!attribute [rw] position
@@ -2188,12 +2356,23 @@ module Aws::GeoPlaces
     #   @return [Array<Types::Category>]
     #
     # @!attribute [rw] food_types
-    #   List of food types offered by this result.
+    #   List of food types offered by this result. Not available in
+    #   `ap-southeast-1` and `ap-southeast-5` regions for [GrabMaps][1]
+    #   customers.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
     #   @return [Array<Types::FoodType>]
     #
     # @!attribute [rw] access_points
     #   Position of the access point in World Geodetic System (WGS 84)
-    #   format: \[longitude, latitude\].
+    #   format: \[longitude, latitude\]. Not available in `ap-southeast-1`
+    #   and `ap-southeast-5` regions for [GrabMaps][1] customers.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
     #   @return [Array<Types::AccessPoint>]
     #
     # @!attribute [rw] time_zone
@@ -2204,11 +2383,22 @@ module Aws::GeoPlaces
     #   The alpha-2 or alpha-3 character code for the political view of a
     #   country. The political view applies to the results of the request to
     #   represent unresolved territorial claims through the point of view of
-    #   the specified country.
+    #   the specified country. Not available in `ap-southeast-1` and
+    #   `ap-southeast-5` regions for [GrabMaps][1] customers.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
     #   @return [String]
     #
     # @!attribute [rw] intersections
-    #   All Intersections that are near the provided address.
+    #   All Intersections that are near the provided address. Not available
+    #   in `ap-southeast-1` and `ap-southeast-5` regions for [GrabMaps][1]
+    #   customers.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
     #   @return [Array<Types::Intersection>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/geo-places-2020-11-19/ReverseGeocodeResultItem AWS API Documentation
@@ -2341,20 +2531,24 @@ module Aws::GeoPlaces
     #   @return [String]
     #
     # @!attribute [rw] intended_use
-    #   Indicates if the results will be stored. Defaults to `SingleUse`, if
-    #   left empty.
+    #   Indicates if the query results will be persisted in customer
+    #   infrastructure. Defaults to `SingleUse` (not stored). Not supported
+    #   in `ap-southeast-1` and `ap-southeast-5` regions for [GrabMaps][1]
+    #   customers.
     #
-    #   <note markdown="1"> Storing the response of an SearchNearby query is required to comply
-    #   with service terms, but charged at a higher cost per request. Please
-    #   review the [user agreement][1] and [service pricing structure][2] to
-    #   determine the correct setting for your use case.
+    #   <note markdown="1"> When storing `SearchNearby` responses, you *must* set this field to
+    #   `Storage` to comply with the terms of service. These requests will
+    #   be charged at a higher rate. Please review the [user agreement][2]
+    #   and [service pricing structure][3] to determine the correct setting
+    #   for your use case.
     #
     #    </note>
     #
     #
     #
-    #   [1]: https://aws.amazon.com/location/sla/
-    #   [2]: https://aws.amazon.com/location/pricing/
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
+    #   [2]: https://aws.amazon.com/location/sla/
+    #   [3]: https://aws.amazon.com/location/pricing/
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -2570,12 +2764,18 @@ module Aws::GeoPlaces
     # @!attribute [rw] query_id
     #   The query Id returned by the suggest API. If passed in the request,
     #   the SearchText API will preform a SearchText query with the improved
-    #   query terms for the original query made to the suggest API.
+    #   query terms for the original query made to the suggest API. Not
+    #   available in `ap-southeast-1` and `ap-southeast-5` regions for
+    #   [GrabMaps][1] customers.
     #
     #   <note markdown="1"> Exactly one of the following fields must be set: `QueryText` or
     #   `QueryId`.
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -2604,35 +2804,50 @@ module Aws::GeoPlaces
     #
     # @!attribute [rw] additional_features
     #   A list of optional additional parameters, such as time zone, that
-    #   can be requested for each result.
+    #   can be requested for each result. For [GrabMaps][1] customers,
+    #   `ap-southeast-1` and `ap-southeast-5` regions support only the
+    #   `TimeZone` value.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] language
     #   A list of [BCP 47][1] compliant language codes for the results to be
     #   rendered in. If there is no data for the result in the requested
     #   language, data will be returned in the default language for the
-    #   entry.
+    #   entry. For [GrabMaps][2] customers, `ap-southeast-1` and
+    #   `ap-southeast-5` regions support only the following codes: `en, id,
+    #   km, lo, ms, my, pt, th, tl, vi, zh`
     #
     #
     #
     #   [1]: https://en.wikipedia.org/wiki/IETF_language_tag
+    #   [2]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
     #   @return [String]
     #
     # @!attribute [rw] political_view
     #   The alpha-2 or alpha-3 character code for the political view of a
     #   country. The political view applies to the results of the request to
     #   represent unresolved territorial claims through the point of view of
-    #   the specified country.
+    #   the specified country. Not available in `ap-southeast-1` and
+    #   `ap-southeast-5` regions for [GrabMaps][1] customers.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
     #   @return [String]
     #
     # @!attribute [rw] intended_use
-    #   Indicates if the results will be stored. Defaults to `SingleUse`, if
-    #   left empty.
+    #   Indicates if the query results will be persisted in customer
+    #   infrastructure. Defaults to `SingleUse` (not stored).
     #
-    #   <note markdown="1"> Storing the response of an SearchText query is required to comply
-    #   with service terms, but charged at a higher cost per request. Please
-    #   review the [user agreement][1] and [service pricing structure][2] to
-    #   determine the correct setting for your use case.
+    #   <note markdown="1"> When storing `SearchText` responses, you *must* set this field to
+    #   `Storage` to comply with the terms of service. These requests will
+    #   be charged at a higher rate. Please review the [user agreement][1]
+    #   and [service pricing structure][2] to determine the correct setting
+    #   for your use case.
     #
     #    </note>
     #
@@ -2917,7 +3132,13 @@ module Aws::GeoPlaces
     # The sub-region.
     #
     # @!attribute [rw] code
-    #   Abbreviated code for the county or sub-region.
+    #   Abbreviated code for the county or sub-region. Not available in
+    #   `ap-southeast-1` and `ap-southeast-5` regions for [GrabMaps][1]
+    #   customers.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -3064,22 +3285,45 @@ module Aws::GeoPlaces
     #   @return [Array<Types::Category>]
     #
     # @!attribute [rw] food_types
-    #   List of food types offered by this result.
+    #   List of food types offered by this result. Not available in
+    #   `ap-southeast-1` and `ap-southeast-5` regions for [GrabMaps][1]
+    #   customers.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
     #   @return [Array<Types::FoodType>]
     #
     # @!attribute [rw] business_chains
-    #   The Business Chains associated with the place.
+    #   The Business Chains associated with the place. Not available in
+    #   `ap-southeast-1` and `ap-southeast-5` regions for [GrabMaps][1]
+    #   customers.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
     #   @return [Array<Types::BusinessChain>]
     #
     # @!attribute [rw] access_points
     #   Position of the access point in World Geodetic System (WGS 84)
-    #   format: \[longitude, latitude\].
+    #   format: \[longitude, latitude\]. Not available in `ap-southeast-1`
+    #   and `ap-southeast-5` regions for [GrabMaps][1] customers.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
     #   @return [Array<Types::AccessPoint>]
     #
     # @!attribute [rw] access_restrictions
     #   Indicates known access restrictions on a vehicle access point. The
     #   index correlates to an access point and indicates if access through
-    #   this point has some form of restriction.
+    #   this point has some form of restriction. Not available in
+    #   `ap-southeast-1` and `ap-southeast-5` regions for [GrabMaps][1]
+    #   customers.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
     #   @return [Array<Types::AccessRestriction>]
     #
     # @!attribute [rw] time_zone
@@ -3090,12 +3334,22 @@ module Aws::GeoPlaces
     #   The alpha-2 or alpha-3 character code for the political view of a
     #   country. The political view applies to the results of the request to
     #   represent unresolved territorial claims through the point of view of
-    #   the specified country.
+    #   the specified country. Not available in `ap-southeast-1` and
+    #   `ap-southeast-5` regions for [GrabMaps][1] customers.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
     #   @return [String]
     #
     # @!attribute [rw] phonemes
     #   How the various components of the result's address are pronounced
-    #   in various languages.
+    #   in various languages. Not available in `ap-southeast-1` and
+    #   `ap-southeast-5` regions for [GrabMaps][1] customers.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
     #   @return [Types::PhonemeDetails]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/geo-places-2020-11-19/SuggestPlaceResult AWS API Documentation
@@ -3126,7 +3380,8 @@ module Aws::GeoPlaces
     #   SearchText API. The QueryId retains context from the original
     #   Suggest request such as filters, political view and language. See
     #   the SearchText API documentation for more details [SearchText API
-    #   docs][1].
+    #   docs][1]. Not supported in `ap-southeast-1` and `ap-southeast-5`
+    #   regions for [GrabMaps][2] customers.
     #
     #   <note markdown="1"> The fields `QueryText`, and `QueryID` are mutually exclusive.
     #
@@ -3135,12 +3390,19 @@ module Aws::GeoPlaces
     #
     #
     #   [1]: https://docs.aws.amazon.com/location/latest/APIReference/API_geoplaces_SearchText.html
+    #   [2]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
     #   @return [String]
     #
     # @!attribute [rw] query_type
     #   The query type. Category queries will search for places which have
     #   an entry matching the given category, for example "doctor office".
     #   BusinessChain queries will search for instances of a given business.
+    #   Not supported in `ap-southeast-1` and `ap-southeast-5` regions for
+    #   [GrabMaps][1] customers.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/geo-places-2020-11-19/SuggestQueryResult AWS API Documentation
@@ -3171,7 +3433,12 @@ module Aws::GeoPlaces
     #
     # @!attribute [rw] max_query_refinements
     #   Maximum number of query terms to be returned for use with a search
-    #   text query.
+    #   text query. Not supported in `ap-southeast-1` and `ap-southeast-5`
+    #   regions for [GrabMaps][1] customers.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
     #   @return [Integer]
     #
     # @!attribute [rw] bias_position
@@ -3193,30 +3460,45 @@ module Aws::GeoPlaces
     #
     # @!attribute [rw] additional_features
     #   A list of optional additional parameters, such as time zone, that
-    #   can be requested for each result.
+    #   can be requested for each result. For [GrabMaps][1] customers,
+    #   `ap-southeast-1` and `ap-southeast-5` regions support only the
+    #   `Core` and `TimeZone` values.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] language
     #   A list of [BCP 47][1] compliant language codes for the results to be
     #   rendered in. If there is no data for the result in the requested
     #   language, data will be returned in the default language for the
-    #   entry.
+    #   entry. For [GrabMaps][2] customers, `ap-southeast-1` and
+    #   `ap-southeast-5` regions support only the following codes: `en, id,
+    #   km, lo, ms, my, pt, th, tl, vi, zh`
     #
     #
     #
     #   [1]: https://en.wikipedia.org/wiki/IETF_language_tag
+    #   [2]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
     #   @return [String]
     #
     # @!attribute [rw] political_view
     #   The alpha-2 or alpha-3 character code for the political view of a
     #   country. The political view applies to the results of the request to
     #   represent unresolved territorial claims through the point of view of
-    #   the specified country.
+    #   the specified country. Not supported in `ap-southeast-1` and
+    #   `ap-southeast-5` regions for [GrabMaps][1] customers.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
     #   @return [String]
     #
     # @!attribute [rw] intended_use
-    #   Indicates if the results will be stored. Defaults to `SingleUse`, if
-    #   left empty.
+    #   Indicates if the query results will be persisted in customer
+    #   infrastructure. Defaults to `SingleUse` (not stored). Currently,
+    #   `Suggest` does not support storage of results.
     #   @return [String]
     #
     # @!attribute [rw] key
@@ -3258,7 +3540,12 @@ module Aws::GeoPlaces
     #
     # @!attribute [rw] query_refinements
     #   Maximum number of query terms to be returned for use with a search
-    #   text query.
+    #   text query. Not available in `ap-southeast-1` and `ap-southeast-5`
+    #   regions for [GrabMaps][1] customers.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
     #   @return [Array<Types::QueryRefinement>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/geo-places-2020-11-19/SuggestResponse AWS API Documentation

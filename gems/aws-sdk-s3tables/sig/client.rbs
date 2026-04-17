@@ -112,7 +112,22 @@ module Aws
                                     required: bool?
                                   },
                                 ]
-                              },
+                              }?,
+                              schema_v2: {
+                                type: ("struct"),
+                                fields: Array[
+                                  {
+                                    id: ::Integer,
+                                    name: ::String,
+                                    type: {
+                                    },
+                                    required: bool,
+                                    doc: ::String?
+                                  },
+                                ],
+                                schema_id: ::Integer?,
+                                identifier_field_ids: Array[::Integer]?
+                              }?,
                               partition_spec: {
                                 fields: Array[
                                   {

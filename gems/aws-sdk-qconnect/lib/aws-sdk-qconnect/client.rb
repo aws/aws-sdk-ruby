@@ -6169,6 +6169,7 @@ module Aws::QConnect
     #   resp.spans[0].end_timestamp #=> Time
     #   resp.spans[0].status #=> String, one of "OK", "ERROR", "TIMEOUT"
     #   resp.spans[0].request_id #=> String
+    #   resp.spans[0].origin_request_id #=> String
     #   resp.spans[0].attributes.operation_name #=> String
     #   resp.spans[0].attributes.provider_name #=> String
     #   resp.spans[0].attributes.error_type #=> String
@@ -7298,6 +7299,10 @@ module Aws::QConnect
     # @option params [Hash<String,String>] :metadata
     #   Additional metadata for the message.
     #
+    # @option params [String] :origin_request_id
+    #   Request identifier from the origin system, used for end-to-end tracing
+    #   across spans.
+    #
     # @return [Types::SendMessageResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::SendMessageResponse#request_message_id #request_message_id} => String
@@ -7361,6 +7366,7 @@ module Aws::QConnect
     #     metadata: {
     #       "NonEmptyString" => "NonEmptyString",
     #     },
+    #     origin_request_id: "SendMessageRequestOriginRequestIdString",
     #   })
     #
     # @example Response structure
@@ -9453,7 +9459,7 @@ module Aws::QConnect
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-qconnect'
-      context[:gem_version] = '1.50.0'
+      context[:gem_version] = '1.52.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

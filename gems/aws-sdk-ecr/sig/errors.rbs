@@ -142,6 +142,9 @@ module Aws
       class UnableToGetUpstreamLayerException < ::Aws::Errors::ServiceError
         def message: () -> ::String
       end
+      class UnableToListUpstreamImageReferrersException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
       class UnsupportedImageTypeException < ::Aws::Errors::ServiceError
         def message: () -> ::String
       end

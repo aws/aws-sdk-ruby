@@ -180,7 +180,8 @@ module Aws
                                   resource_configuration_arn: ::String,
                                   port_number: ::Integer?
                                 }?
-                              }
+                              },
+                              ?ip_address_type: ("IPV4" | "DUALSTACK")
                             ) -> _CreateConnectorResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateConnectorResponseSuccess
 
@@ -1149,7 +1150,8 @@ module Aws
                                   resource_configuration_arn: ::String?,
                                   port_number: ::Integer?
                                 }?
-                              }
+                              },
+                              ?ip_address_type: ("IPV4" | "DUALSTACK")
                             ) -> _UpdateConnectorResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateConnectorResponseSuccess
 

@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.86.0 (2026-03-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.85.0 (2026-02-27)
+------------------
+
+* Feature - Resource owners can now specify ResourceShareConfiguration request parameter for CreateResourceShare API including RetainSharingOnAccountLeaveOrganization boolean parameter
+
 1.84.0 (2026-02-05)
 ------------------
 

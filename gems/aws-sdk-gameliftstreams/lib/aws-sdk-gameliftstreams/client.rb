@@ -522,6 +522,10 @@ module Aws::GameLiftStreams
     #         on_demand_capacity: 1,
     #         target_idle_capacity: 1,
     #         maximum_capacity: 1,
+    #         vpc_transit_configuration: {
+    #           vpc_id: "VpcId", # required
+    #           ipv_4_cidr_blocks: ["Ipv4CidrBlock"], # required
+    #         },
     #       },
     #     ],
     #   })
@@ -539,6 +543,12 @@ module Aws::GameLiftStreams
     #   resp.locations[0].requested_capacity #=> Integer
     #   resp.locations[0].allocated_capacity #=> Integer
     #   resp.locations[0].idle_capacity #=> Integer
+    #   resp.locations[0].internal_vpc_ipv_4_cidr_block #=> String
+    #   resp.locations[0].vpc_transit_configuration.vpc_id #=> String
+    #   resp.locations[0].vpc_transit_configuration.ipv_4_cidr_blocks #=> Array
+    #   resp.locations[0].vpc_transit_configuration.ipv_4_cidr_blocks[0] #=> String
+    #   resp.locations[0].vpc_transit_configuration.transit_gateway_id #=> String
+    #   resp.locations[0].vpc_transit_configuration.transit_gateway_resource_share_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gameliftstreams-2018-05-10/AddStreamGroupLocations AWS API Documentation
     #
@@ -790,7 +800,7 @@ module Aws::GameLiftStreams
     #   resp.application_source_uri #=> String
     #   resp.id #=> String
     #   resp.status #=> String, one of "INITIALIZED", "PROCESSING", "READY", "DELETING", "ERROR"
-    #   resp.status_reason #=> String, one of "internalError", "accessDenied"
+    #   resp.status_reason #=> String, one of "internalError", "accessDenied", "sourceModified"
     #   resp.replication_statuses #=> Array
     #   resp.replication_statuses[0].location #=> String
     #   resp.replication_statuses[0].status #=> String, one of "REPLICATING", "COMPLETED"
@@ -1104,7 +1114,7 @@ module Aws::GameLiftStreams
     #
     #   resp = client.create_stream_group({
     #     description: "Description", # required
-    #     stream_class: "gen4n_high", # required, accepts gen4n_high, gen4n_ultra, gen4n_win2022, gen5n_high, gen5n_ultra, gen5n_win2022, gen6n_small, gen6n_medium, gen6n_high, gen6n_ultra, gen6n_ultra_win2022, gen6n_pro, gen6n_pro_win2022
+    #     stream_class: "gen4n_high", # required, accepts gen4n_high, gen4n_ultra, gen4n_win2022, gen5n_high, gen5n_ultra, gen5n_win2022, gen6n_small, gen6n_medium, gen6n_high, gen6n_ultra, gen6n_ultra_win2022, gen6n_pro, gen6n_pro_win2022, gen6n_small_win2022, gen6n_medium_win2022, gen6e_pro, gen6e_pro_win2022
     #     default_application_identifier: "Identifier",
     #     location_configurations: [
     #       {
@@ -1113,6 +1123,10 @@ module Aws::GameLiftStreams
     #         on_demand_capacity: 1,
     #         target_idle_capacity: 1,
     #         maximum_capacity: 1,
+    #         vpc_transit_configuration: {
+    #           vpc_id: "VpcId", # required
+    #           ipv_4_cidr_blocks: ["Ipv4CidrBlock"], # required
+    #         },
     #       },
     #     ],
     #     tags: {
@@ -1137,7 +1151,13 @@ module Aws::GameLiftStreams
     #   resp.location_states[0].requested_capacity #=> Integer
     #   resp.location_states[0].allocated_capacity #=> Integer
     #   resp.location_states[0].idle_capacity #=> Integer
-    #   resp.stream_class #=> String, one of "gen4n_high", "gen4n_ultra", "gen4n_win2022", "gen5n_high", "gen5n_ultra", "gen5n_win2022", "gen6n_small", "gen6n_medium", "gen6n_high", "gen6n_ultra", "gen6n_ultra_win2022", "gen6n_pro", "gen6n_pro_win2022"
+    #   resp.location_states[0].internal_vpc_ipv_4_cidr_block #=> String
+    #   resp.location_states[0].vpc_transit_configuration.vpc_id #=> String
+    #   resp.location_states[0].vpc_transit_configuration.ipv_4_cidr_blocks #=> Array
+    #   resp.location_states[0].vpc_transit_configuration.ipv_4_cidr_blocks[0] #=> String
+    #   resp.location_states[0].vpc_transit_configuration.transit_gateway_id #=> String
+    #   resp.location_states[0].vpc_transit_configuration.transit_gateway_resource_share_arn #=> String
+    #   resp.stream_class #=> String, one of "gen4n_high", "gen4n_ultra", "gen4n_win2022", "gen5n_high", "gen5n_ultra", "gen5n_win2022", "gen6n_small", "gen6n_medium", "gen6n_high", "gen6n_ultra", "gen6n_ultra_win2022", "gen6n_pro", "gen6n_pro_win2022", "gen6n_small_win2022", "gen6n_medium_win2022", "gen6e_pro", "gen6e_pro_win2022"
     #   resp.id #=> String
     #   resp.status #=> String, one of "ACTIVATING", "UPDATING_LOCATIONS", "ACTIVE", "ACTIVE_WITH_ERRORS", "ERROR", "DELETING", "EXPIRED"
     #   resp.status_reason #=> String, one of "internalError", "noAvailableInstances"
@@ -1586,7 +1606,7 @@ module Aws::GameLiftStreams
     #   resp.application_source_uri #=> String
     #   resp.id #=> String
     #   resp.status #=> String, one of "INITIALIZED", "PROCESSING", "READY", "DELETING", "ERROR"
-    #   resp.status_reason #=> String, one of "internalError", "accessDenied"
+    #   resp.status_reason #=> String, one of "internalError", "accessDenied", "sourceModified"
     #   resp.replication_statuses #=> Array
     #   resp.replication_statuses[0].location #=> String
     #   resp.replication_statuses[0].status #=> String, one of "REPLICATING", "COMPLETED"
@@ -1662,7 +1682,13 @@ module Aws::GameLiftStreams
     #   resp.location_states[0].requested_capacity #=> Integer
     #   resp.location_states[0].allocated_capacity #=> Integer
     #   resp.location_states[0].idle_capacity #=> Integer
-    #   resp.stream_class #=> String, one of "gen4n_high", "gen4n_ultra", "gen4n_win2022", "gen5n_high", "gen5n_ultra", "gen5n_win2022", "gen6n_small", "gen6n_medium", "gen6n_high", "gen6n_ultra", "gen6n_ultra_win2022", "gen6n_pro", "gen6n_pro_win2022"
+    #   resp.location_states[0].internal_vpc_ipv_4_cidr_block #=> String
+    #   resp.location_states[0].vpc_transit_configuration.vpc_id #=> String
+    #   resp.location_states[0].vpc_transit_configuration.ipv_4_cidr_blocks #=> Array
+    #   resp.location_states[0].vpc_transit_configuration.ipv_4_cidr_blocks[0] #=> String
+    #   resp.location_states[0].vpc_transit_configuration.transit_gateway_id #=> String
+    #   resp.location_states[0].vpc_transit_configuration.transit_gateway_resource_share_arn #=> String
+    #   resp.stream_class #=> String, one of "gen4n_high", "gen4n_ultra", "gen4n_win2022", "gen5n_high", "gen5n_ultra", "gen5n_win2022", "gen6n_small", "gen6n_medium", "gen6n_high", "gen6n_ultra", "gen6n_ultra_win2022", "gen6n_pro", "gen6n_pro_win2022", "gen6n_small_win2022", "gen6n_medium_win2022", "gen6e_pro", "gen6e_pro_win2022"
     #   resp.id #=> String
     #   resp.status #=> String, one of "ACTIVATING", "UPDATING_LOCATIONS", "ACTIVE", "ACTIVE_WITH_ERRORS", "ERROR", "DELETING", "EXPIRED"
     #   resp.status_reason #=> String, one of "internalError", "noAvailableInstances"
@@ -1875,7 +1901,7 @@ module Aws::GameLiftStreams
     #   resp.items[0].description #=> String
     #   resp.items[0].default_application.id #=> String
     #   resp.items[0].default_application.arn #=> String
-    #   resp.items[0].stream_class #=> String, one of "gen4n_high", "gen4n_ultra", "gen4n_win2022", "gen5n_high", "gen5n_ultra", "gen5n_win2022", "gen6n_small", "gen6n_medium", "gen6n_high", "gen6n_ultra", "gen6n_ultra_win2022", "gen6n_pro", "gen6n_pro_win2022"
+    #   resp.items[0].stream_class #=> String, one of "gen4n_high", "gen4n_ultra", "gen4n_win2022", "gen5n_high", "gen5n_ultra", "gen5n_win2022", "gen6n_small", "gen6n_medium", "gen6n_high", "gen6n_ultra", "gen6n_ultra_win2022", "gen6n_pro", "gen6n_pro_win2022", "gen6n_small_win2022", "gen6n_medium_win2022", "gen6e_pro", "gen6e_pro_win2022"
     #   resp.items[0].status #=> String, one of "ACTIVATING", "UPDATING_LOCATIONS", "ACTIVE", "ACTIVE_WITH_ERRORS", "ERROR", "DELETING", "EXPIRED"
     #   resp.items[0].created_at #=> Time
     #   resp.items[0].last_updated_at #=> Time
@@ -2690,7 +2716,7 @@ module Aws::GameLiftStreams
     #   resp.application_source_uri #=> String
     #   resp.id #=> String
     #   resp.status #=> String, one of "INITIALIZED", "PROCESSING", "READY", "DELETING", "ERROR"
-    #   resp.status_reason #=> String, one of "internalError", "accessDenied"
+    #   resp.status_reason #=> String, one of "internalError", "accessDenied", "sourceModified"
     #   resp.replication_statuses #=> Array
     #   resp.replication_statuses[0].location #=> String
     #   resp.replication_statuses[0].status #=> String, one of "REPLICATING", "COMPLETED"
@@ -2811,6 +2837,10 @@ module Aws::GameLiftStreams
     #         on_demand_capacity: 1,
     #         target_idle_capacity: 1,
     #         maximum_capacity: 1,
+    #         vpc_transit_configuration: {
+    #           vpc_id: "VpcId", # required
+    #           ipv_4_cidr_blocks: ["Ipv4CidrBlock"], # required
+    #         },
     #       },
     #     ],
     #     description: "Description",
@@ -2833,7 +2863,13 @@ module Aws::GameLiftStreams
     #   resp.location_states[0].requested_capacity #=> Integer
     #   resp.location_states[0].allocated_capacity #=> Integer
     #   resp.location_states[0].idle_capacity #=> Integer
-    #   resp.stream_class #=> String, one of "gen4n_high", "gen4n_ultra", "gen4n_win2022", "gen5n_high", "gen5n_ultra", "gen5n_win2022", "gen6n_small", "gen6n_medium", "gen6n_high", "gen6n_ultra", "gen6n_ultra_win2022", "gen6n_pro", "gen6n_pro_win2022"
+    #   resp.location_states[0].internal_vpc_ipv_4_cidr_block #=> String
+    #   resp.location_states[0].vpc_transit_configuration.vpc_id #=> String
+    #   resp.location_states[0].vpc_transit_configuration.ipv_4_cidr_blocks #=> Array
+    #   resp.location_states[0].vpc_transit_configuration.ipv_4_cidr_blocks[0] #=> String
+    #   resp.location_states[0].vpc_transit_configuration.transit_gateway_id #=> String
+    #   resp.location_states[0].vpc_transit_configuration.transit_gateway_resource_share_arn #=> String
+    #   resp.stream_class #=> String, one of "gen4n_high", "gen4n_ultra", "gen4n_win2022", "gen5n_high", "gen5n_ultra", "gen5n_win2022", "gen6n_small", "gen6n_medium", "gen6n_high", "gen6n_ultra", "gen6n_ultra_win2022", "gen6n_pro", "gen6n_pro_win2022", "gen6n_small_win2022", "gen6n_medium_win2022", "gen6e_pro", "gen6e_pro_win2022"
     #   resp.id #=> String
     #   resp.status #=> String, one of "ACTIVATING", "UPDATING_LOCATIONS", "ACTIVE", "ACTIVE_WITH_ERRORS", "ERROR", "DELETING", "EXPIRED"
     #   resp.status_reason #=> String, one of "internalError", "noAvailableInstances"
@@ -2870,7 +2906,7 @@ module Aws::GameLiftStreams
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-gameliftstreams'
-      context[:gem_version] = '1.21.0'
+      context[:gem_version] = '1.24.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

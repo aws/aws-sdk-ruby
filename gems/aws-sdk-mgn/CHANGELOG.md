@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.64.0 (2026-03-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.63.0 (2026-03-13)
+------------------
+
+* Feature - Network Migration APIs are now publicly available for direct programmatic access. Customers can now call Network Migration APIs directly without going through AWS Transform (ATX), enabling automation, integration with existing tools, and self-service migration workflows.
+
+1.62.0 (2026-03-09)
+------------------
+
+* Feature - Adds support for new storeSnapshotOnLocalZone field in ReplicationConfiguration and updateReplicationConfiguration
+
 1.61.0 (2026-01-16)
 ------------------
 

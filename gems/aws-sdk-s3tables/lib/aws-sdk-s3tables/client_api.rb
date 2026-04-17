@@ -35,6 +35,7 @@ module Aws::S3Tables
     DeleteTablePolicyRequest = Shapes::StructureShape.new(name: 'DeleteTablePolicyRequest')
     DeleteTableReplicationRequest = Shapes::StructureShape.new(name: 'DeleteTableReplicationRequest')
     DeleteTableRequest = Shapes::StructureShape.new(name: 'DeleteTableRequest')
+    Document = Shapes::DocumentShape.new(name: 'Document', document: true)
     EncryptionConfiguration = Shapes::StructureShape.new(name: 'EncryptionConfiguration')
     EncryptionConfigurationKmsKeyArnString = Shapes::StringShape.new(name: 'EncryptionConfigurationKmsKeyArnString')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
@@ -86,6 +87,7 @@ module Aws::S3Tables
     IcebergPartitionFieldList = Shapes::ListShape.new(name: 'IcebergPartitionFieldList')
     IcebergPartitionSpec = Shapes::StructureShape.new(name: 'IcebergPartitionSpec')
     IcebergSchema = Shapes::StructureShape.new(name: 'IcebergSchema')
+    IcebergSchemaV2 = Shapes::StructureShape.new(name: 'IcebergSchemaV2')
     IcebergSnapshotManagementSettings = Shapes::StructureShape.new(name: 'IcebergSnapshotManagementSettings')
     IcebergSortDirection = Shapes::StringShape.new(name: 'IcebergSortDirection')
     IcebergSortField = Shapes::StructureShape.new(name: 'IcebergSortField')
@@ -93,6 +95,7 @@ module Aws::S3Tables
     IcebergSortOrder = Shapes::StructureShape.new(name: 'IcebergSortOrder')
     IcebergUnreferencedFileRemovalSettings = Shapes::StructureShape.new(name: 'IcebergUnreferencedFileRemovalSettings')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
+    IntegerList = Shapes::ListShape.new(name: 'IntegerList')
     InternalServerErrorException = Shapes::StructureShape.new(name: 'InternalServerErrorException')
     JobStatus = Shapes::StringShape.new(name: 'JobStatus')
     LastSuccessfulReplicatedUpdate = Shapes::StructureShape.new(name: 'LastSuccessfulReplicatedUpdate')
@@ -148,6 +151,9 @@ module Aws::S3Tables
     SSEAlgorithm = Shapes::StringShape.new(name: 'SSEAlgorithm')
     SchemaField = Shapes::StructureShape.new(name: 'SchemaField')
     SchemaFieldList = Shapes::ListShape.new(name: 'SchemaFieldList')
+    SchemaV2Field = Shapes::StructureShape.new(name: 'SchemaV2Field')
+    SchemaV2FieldList = Shapes::ListShape.new(name: 'SchemaV2FieldList')
+    SchemaV2FieldType = Shapes::StringShape.new(name: 'SchemaV2FieldType')
     StorageClass = Shapes::StringShape.new(name: 'StorageClass')
     StorageClassConfiguration = Shapes::StructureShape.new(name: 'StorageClassConfiguration')
     String = Shapes::StringShape.new(name: 'String')
@@ -457,7 +463,8 @@ module Aws::S3Tables
     IcebergCompactionSettings.add_member(:strategy, Shapes::ShapeRef.new(shape: IcebergCompactionStrategy, location_name: "strategy"))
     IcebergCompactionSettings.struct_class = Types::IcebergCompactionSettings
 
-    IcebergMetadata.add_member(:schema, Shapes::ShapeRef.new(shape: IcebergSchema, required: true, location_name: "schema"))
+    IcebergMetadata.add_member(:schema, Shapes::ShapeRef.new(shape: IcebergSchema, location_name: "schema"))
+    IcebergMetadata.add_member(:schema_v2, Shapes::ShapeRef.new(shape: IcebergSchemaV2, location_name: "schemaV2"))
     IcebergMetadata.add_member(:partition_spec, Shapes::ShapeRef.new(shape: IcebergPartitionSpec, location_name: "partitionSpec"))
     IcebergMetadata.add_member(:write_order, Shapes::ShapeRef.new(shape: IcebergSortOrder, location_name: "writeOrder"))
     IcebergMetadata.add_member(:properties, Shapes::ShapeRef.new(shape: TableProperties, location_name: "properties"))
@@ -478,6 +485,12 @@ module Aws::S3Tables
     IcebergSchema.add_member(:fields, Shapes::ShapeRef.new(shape: SchemaFieldList, required: true, location_name: "fields"))
     IcebergSchema.struct_class = Types::IcebergSchema
 
+    IcebergSchemaV2.add_member(:type, Shapes::ShapeRef.new(shape: SchemaV2FieldType, required: true, location_name: "type"))
+    IcebergSchemaV2.add_member(:fields, Shapes::ShapeRef.new(shape: SchemaV2FieldList, required: true, location_name: "fields"))
+    IcebergSchemaV2.add_member(:schema_id, Shapes::ShapeRef.new(shape: Integer, location_name: "schema-id"))
+    IcebergSchemaV2.add_member(:identifier_field_ids, Shapes::ShapeRef.new(shape: IntegerList, location_name: "identifier-field-ids"))
+    IcebergSchemaV2.struct_class = Types::IcebergSchemaV2
+
     IcebergSnapshotManagementSettings.add_member(:min_snapshots_to_keep, Shapes::ShapeRef.new(shape: PositiveInteger, location_name: "minSnapshotsToKeep"))
     IcebergSnapshotManagementSettings.add_member(:max_snapshot_age_hours, Shapes::ShapeRef.new(shape: PositiveInteger, location_name: "maxSnapshotAgeHours"))
     IcebergSnapshotManagementSettings.struct_class = Types::IcebergSnapshotManagementSettings
@@ -497,6 +510,8 @@ module Aws::S3Tables
     IcebergUnreferencedFileRemovalSettings.add_member(:unreferenced_days, Shapes::ShapeRef.new(shape: PositiveInteger, location_name: "unreferencedDays"))
     IcebergUnreferencedFileRemovalSettings.add_member(:non_current_days, Shapes::ShapeRef.new(shape: PositiveInteger, location_name: "nonCurrentDays"))
     IcebergUnreferencedFileRemovalSettings.struct_class = Types::IcebergUnreferencedFileRemovalSettings
+
+    IntegerList.member = Shapes::ShapeRef.new(shape: Integer)
 
     InternalServerErrorException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     InternalServerErrorException.struct_class = Types::InternalServerErrorException
@@ -650,6 +665,15 @@ module Aws::S3Tables
     SchemaField.struct_class = Types::SchemaField
 
     SchemaFieldList.member = Shapes::ShapeRef.new(shape: SchemaField)
+
+    SchemaV2Field.add_member(:id, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "id"))
+    SchemaV2Field.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "name"))
+    SchemaV2Field.add_member(:type, Shapes::ShapeRef.new(shape: Document, required: true, location_name: "type"))
+    SchemaV2Field.add_member(:required, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "required"))
+    SchemaV2Field.add_member(:doc, Shapes::ShapeRef.new(shape: String, location_name: "doc"))
+    SchemaV2Field.struct_class = Types::SchemaV2Field
+
+    SchemaV2FieldList.member = Shapes::ShapeRef.new(shape: SchemaV2Field)
 
     StorageClassConfiguration.add_member(:storage_class, Shapes::ShapeRef.new(shape: StorageClass, required: true, location_name: "storageClass"))
     StorageClassConfiguration.struct_class = Types::StorageClassConfiguration

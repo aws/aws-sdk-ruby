@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.69.0 (2026-04-07)
+------------------
+
+* Feature - Added support for t3, g6, and g6e instance types for Hybrid Jobs.
+
+1.68.0 (2026-03-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.67.0 (2026-01-16)
 ------------------
 

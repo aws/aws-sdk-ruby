@@ -1005,6 +1005,10 @@ module Aws::AppStream
     #   Administrators can connect to the app block builder only through the
     #   specified endpoints.
     #
+    # @option params [Boolean] :disable_imdsv1
+    #   Set to true to disable Instance Metadata Service Version 1 (IMDSv1)
+    #   and enforce IMDSv2. Set to false to enable both IMDSv1 and IMDSv2.
+    #
     # @return [Types::CreateAppBlockBuilderResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateAppBlockBuilderResult#app_block_builder #app_block_builder} => Types::AppBlockBuilder
@@ -1032,6 +1036,7 @@ module Aws::AppStream
     #         vpce_id: "String",
     #       },
     #     ],
+    #     disable_imdsv1: false,
     #   })
     #
     # @example Response structure
@@ -1059,6 +1064,7 @@ module Aws::AppStream
     #   resp.app_block_builder.access_endpoints #=> Array
     #   resp.app_block_builder.access_endpoints[0].endpoint_type #=> String, one of "STREAMING"
     #   resp.app_block_builder.access_endpoints[0].vpce_id #=> String
+    #   resp.app_block_builder.disable_imdsv1 #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateAppBlockBuilder AWS API Documentation
     #
@@ -1685,6 +1691,16 @@ module Aws::AppStream
     #   customize storage capacity from 200 GB up to 500 GB based on your
     #   application requirements.
     #
+    # @option params [Boolean] :disable_imdsv1
+    #   Set to true to disable Instance Metadata Service Version 1 (IMDSv1)
+    #   and enforce IMDSv2. Set to false to enable both IMDSv1 and IMDSv2.
+    #
+    #   <note markdown="1"> Before disabling IMDSv1, ensure your WorkSpaces Applications images
+    #   are running the agent version or managed image update released on or
+    #   after January 16, 2024 to support IMDSv2 enforcement.
+    #
+    #    </note>
+    #
     # @return [Types::CreateFleetResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateFleetResult#fleet #fleet} => Types::Fleet
@@ -1731,6 +1747,7 @@ module Aws::AppStream
     #     root_volume_config: {
     #       volume_size_in_gb: 1,
     #     },
+    #     disable_imdsv1: false,
     #   })
     #
     # @example Response structure
@@ -1751,6 +1768,9 @@ module Aws::AppStream
     #   resp.fleet.compute_capacity_status.available_user_sessions #=> Integer
     #   resp.fleet.compute_capacity_status.active_user_sessions #=> Integer
     #   resp.fleet.compute_capacity_status.actual_user_sessions #=> Integer
+    #   resp.fleet.compute_capacity_status.draining #=> Integer
+    #   resp.fleet.compute_capacity_status.drain_mode_active_user_sessions #=> Integer
+    #   resp.fleet.compute_capacity_status.drain_mode_unused_user_sessions #=> Integer
     #   resp.fleet.max_user_duration_in_seconds #=> Integer
     #   resp.fleet.disconnect_timeout_in_seconds #=> Integer
     #   resp.fleet.state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED"
@@ -1776,6 +1796,7 @@ module Aws::AppStream
     #   resp.fleet.session_script_s3_location.s3_key #=> String
     #   resp.fleet.max_sessions_per_instance #=> Integer
     #   resp.fleet.root_volume_config.volume_size_in_gb #=> Integer
+    #   resp.fleet.disable_imdsv1 #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateFleet AWS API Documentation
     #
@@ -2074,6 +2095,16 @@ module Aws::AppStream
     #
     #   * Microsoft\_Project\_2024\_Standard\_64Bit
     #
+    # @option params [Boolean] :disable_imdsv1
+    #   Set to true to disable Instance Metadata Service Version 1 (IMDSv1)
+    #   and enforce IMDSv2. Set to false to enable both IMDSv1 and IMDSv2.
+    #
+    #   <note markdown="1"> Before disabling IMDSv1, ensure your WorkSpaces Applications images
+    #   are running the agent version or managed image update released on or
+    #   after January 16, 2024 to support IMDSv2 enforcement.
+    #
+    #    </note>
+    #
     # @return [Types::CreateImageBuilderResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateImageBuilderResult#image_builder #image_builder} => Types::ImageBuilder
@@ -2112,6 +2143,7 @@ module Aws::AppStream
     #     },
     #     softwares_to_install: ["String"],
     #     softwares_to_uninstall: ["String"],
+    #     disable_imdsv1: false,
     #   })
     #
     # @example Response structure
@@ -2149,6 +2181,7 @@ module Aws::AppStream
     #   resp.image_builder.access_endpoints[0].vpce_id #=> String
     #   resp.image_builder.root_volume_config.volume_size_in_gb #=> Integer
     #   resp.image_builder.latest_appstream_agent_version #=> String, one of "TRUE", "FALSE"
+    #   resp.image_builder.disable_imdsv1 #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateImageBuilder AWS API Documentation
     #
@@ -2411,6 +2444,11 @@ module Aws::AppStream
     #   The streaming protocol you want your stack to prefer. This can be UDP
     #   or TCP. Currently, UDP is only supported in the Windows native client.
     #
+    # @option params [Types::ContentRedirection] :content_redirection
+    #   Configuration for bidirectional URL redirection between the streaming
+    #   session and the local client. Use HostToClient to redirect URLs from
+    #   the remote desktop to the local browser.
+    #
     # @return [Types::CreateStackResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateStackResult#stack #stack} => Types::Stack
@@ -2455,6 +2493,13 @@ module Aws::AppStream
     #     streaming_experience_settings: {
     #       preferred_protocol: "TCP", # accepts TCP, UDP
     #     },
+    #     content_redirection: {
+    #       host_to_client: {
+    #         enabled: false, # required
+    #         allowed_urls: ["UrlPattern"],
+    #         denied_urls: ["UrlPattern"],
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
@@ -2489,6 +2534,11 @@ module Aws::AppStream
     #   resp.stack.embed_host_domains #=> Array
     #   resp.stack.embed_host_domains[0] #=> String
     #   resp.stack.streaming_experience_settings.preferred_protocol #=> String, one of "TCP", "UDP"
+    #   resp.stack.content_redirection.host_to_client.enabled #=> Boolean
+    #   resp.stack.content_redirection.host_to_client.allowed_urls #=> Array
+    #   resp.stack.content_redirection.host_to_client.allowed_urls[0] #=> String
+    #   resp.stack.content_redirection.host_to_client.denied_urls #=> Array
+    #   resp.stack.content_redirection.host_to_client.denied_urls[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateStack AWS API Documentation
     #
@@ -3115,6 +3165,7 @@ module Aws::AppStream
     #   resp.image_builder.access_endpoints[0].vpce_id #=> String
     #   resp.image_builder.root_volume_config.volume_size_in_gb #=> Integer
     #   resp.image_builder.latest_appstream_agent_version #=> String, one of "TRUE", "FALSE"
+    #   resp.image_builder.disable_imdsv1 #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DeleteImageBuilder AWS API Documentation
     #
@@ -3346,6 +3397,7 @@ module Aws::AppStream
     #   resp.app_block_builders[0].access_endpoints #=> Array
     #   resp.app_block_builders[0].access_endpoints[0].endpoint_type #=> String, one of "STREAMING"
     #   resp.app_block_builders[0].access_endpoints[0].vpce_id #=> String
+    #   resp.app_block_builders[0].disable_imdsv1 #=> Boolean
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeAppBlockBuilders AWS API Documentation
@@ -3719,6 +3771,9 @@ module Aws::AppStream
     #   resp.fleets[0].compute_capacity_status.available_user_sessions #=> Integer
     #   resp.fleets[0].compute_capacity_status.active_user_sessions #=> Integer
     #   resp.fleets[0].compute_capacity_status.actual_user_sessions #=> Integer
+    #   resp.fleets[0].compute_capacity_status.draining #=> Integer
+    #   resp.fleets[0].compute_capacity_status.drain_mode_active_user_sessions #=> Integer
+    #   resp.fleets[0].compute_capacity_status.drain_mode_unused_user_sessions #=> Integer
     #   resp.fleets[0].max_user_duration_in_seconds #=> Integer
     #   resp.fleets[0].disconnect_timeout_in_seconds #=> Integer
     #   resp.fleets[0].state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED"
@@ -3744,6 +3799,7 @@ module Aws::AppStream
     #   resp.fleets[0].session_script_s3_location.s3_key #=> String
     #   resp.fleets[0].max_sessions_per_instance #=> Integer
     #   resp.fleets[0].root_volume_config.volume_size_in_gb #=> Integer
+    #   resp.fleets[0].disable_imdsv1 #=> Boolean
     #   resp.next_token #=> String
     #
     #
@@ -3824,6 +3880,7 @@ module Aws::AppStream
     #   resp.image_builders[0].access_endpoints[0].vpce_id #=> String
     #   resp.image_builders[0].root_volume_config.volume_size_in_gb #=> Integer
     #   resp.image_builders[0].latest_appstream_agent_version #=> String, one of "TRUE", "FALSE"
+    #   resp.image_builders[0].disable_imdsv1 #=> Boolean
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeImageBuilders AWS API Documentation
@@ -4053,6 +4110,7 @@ module Aws::AppStream
     #   resp.sessions[0].network_access_configuration.eni_ipv_6_addresses[0] #=> String
     #   resp.sessions[0].network_access_configuration.eni_id #=> String
     #   resp.sessions[0].instance_id #=> String
+    #   resp.sessions[0].instance_drain_status #=> String, one of "ACTIVE", "DRAINING", "NOT_APPLICABLE"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeSessions AWS API Documentation
@@ -4168,6 +4226,11 @@ module Aws::AppStream
     #   resp.stacks[0].embed_host_domains #=> Array
     #   resp.stacks[0].embed_host_domains[0] #=> String
     #   resp.stacks[0].streaming_experience_settings.preferred_protocol #=> String, one of "TCP", "UDP"
+    #   resp.stacks[0].content_redirection.host_to_client.enabled #=> Boolean
+    #   resp.stacks[0].content_redirection.host_to_client.allowed_urls #=> Array
+    #   resp.stacks[0].content_redirection.host_to_client.allowed_urls[0] #=> String
+    #   resp.stacks[0].content_redirection.host_to_client.denied_urls #=> Array
+    #   resp.stacks[0].content_redirection.host_to_client.denied_urls[0] #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeStacks AWS API Documentation
@@ -4590,6 +4653,31 @@ module Aws::AppStream
       req.send_request(options)
     end
 
+    # Drains the instance hosting the specified streaming session. The
+    # instance stops accepting new sessions while existing sessions continue
+    # uninterrupted. Once all sessions end, the instance is reclaimed and
+    # replaced. This only applies to multi-session fleets.
+    #
+    # @option params [required, String] :session_id
+    #   The identifier of the streaming session.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.drain_session_instance({
+    #     session_id: "String", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DrainSessionInstance AWS API Documentation
+    #
+    # @overload drain_session_instance(params = {})
+    # @param [Hash] params ({})
+    def drain_session_instance(params = {}, options = {})
+      req = build_request(:drain_session_instance, params)
+      req.send_request(options)
+    end
+
     # Enables a user in the user pool. After being enabled, users can sign
     # in to WorkSpaces Applications and open applications from the stacks to
     # which they are assigned.
@@ -4951,6 +5039,7 @@ module Aws::AppStream
     #   resp.app_block_builder.access_endpoints #=> Array
     #   resp.app_block_builder.access_endpoints[0].endpoint_type #=> String, one of "STREAMING"
     #   resp.app_block_builder.access_endpoints[0].vpce_id #=> String
+    #   resp.app_block_builder.disable_imdsv1 #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/StartAppBlockBuilder AWS API Documentation
     #
@@ -5039,6 +5128,7 @@ module Aws::AppStream
     #   resp.image_builder.access_endpoints[0].vpce_id #=> String
     #   resp.image_builder.root_volume_config.volume_size_in_gb #=> Integer
     #   resp.image_builder.latest_appstream_agent_version #=> String, one of "TRUE", "FALSE"
+    #   resp.image_builder.disable_imdsv1 #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/StartImageBuilder AWS API Documentation
     #
@@ -5120,6 +5210,7 @@ module Aws::AppStream
     #   resp.app_block_builder.access_endpoints #=> Array
     #   resp.app_block_builder.access_endpoints[0].endpoint_type #=> String, one of "STREAMING"
     #   resp.app_block_builder.access_endpoints[0].vpce_id #=> String
+    #   resp.app_block_builder.disable_imdsv1 #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/StopAppBlockBuilder AWS API Documentation
     #
@@ -5202,6 +5293,7 @@ module Aws::AppStream
     #   resp.image_builder.access_endpoints[0].vpce_id #=> String
     #   resp.image_builder.root_volume_config.volume_size_in_gb #=> Integer
     #   resp.image_builder.latest_appstream_agent_version #=> String, one of "TRUE", "FALSE"
+    #   resp.image_builder.disable_imdsv1 #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/StopImageBuilder AWS API Documentation
     #
@@ -5371,6 +5463,10 @@ module Aws::AppStream
     # @option params [Array<String>] :attributes_to_delete
     #   The attributes to delete from the app block builder.
     #
+    # @option params [Boolean] :disable_imdsv1
+    #   Set to true to disable Instance Metadata Service Version 1 (IMDSv1)
+    #   and enforce IMDSv2. Set to false to enable both IMDSv1 and IMDSv2.
+    #
     # @return [Types::UpdateAppBlockBuilderResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateAppBlockBuilderResult#app_block_builder #app_block_builder} => Types::AppBlockBuilder
@@ -5396,6 +5492,7 @@ module Aws::AppStream
     #       },
     #     ],
     #     attributes_to_delete: ["IAM_ROLE_ARN"], # accepts IAM_ROLE_ARN, ACCESS_ENDPOINTS, VPC_CONFIGURATION_SECURITY_GROUP_IDS
+    #     disable_imdsv1: false,
     #   })
     #
     # @example Response structure
@@ -5423,6 +5520,7 @@ module Aws::AppStream
     #   resp.app_block_builder.access_endpoints #=> Array
     #   resp.app_block_builder.access_endpoints[0].endpoint_type #=> String, one of "STREAMING"
     #   resp.app_block_builder.access_endpoints[0].vpce_id #=> String
+    #   resp.app_block_builder.disable_imdsv1 #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/UpdateAppBlockBuilder AWS API Documentation
     #
@@ -5909,6 +6007,16 @@ module Aws::AppStream
     #   The updated configuration for the root volume of fleet instances. Note
     #   that volume size cannot be decreased below the image volume size.
     #
+    # @option params [Boolean] :disable_imdsv1
+    #   Set to true to disable Instance Metadata Service Version 1 (IMDSv1)
+    #   and enforce IMDSv2. Set to false to enable both IMDSv1 and IMDSv2.
+    #
+    #   <note markdown="1"> Before disabling IMDSv1, ensure your WorkSpaces Applications images
+    #   are running the agent version or managed image update released on or
+    #   after January 16, 2024 to support IMDSv2 enforcement.
+    #
+    #    </note>
+    #
     # @return [Types::UpdateFleetResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateFleetResult#fleet #fleet} => Types::Fleet
@@ -5953,6 +6061,7 @@ module Aws::AppStream
     #     root_volume_config: {
     #       volume_size_in_gb: 1,
     #     },
+    #     disable_imdsv1: false,
     #   })
     #
     # @example Response structure
@@ -5973,6 +6082,9 @@ module Aws::AppStream
     #   resp.fleet.compute_capacity_status.available_user_sessions #=> Integer
     #   resp.fleet.compute_capacity_status.active_user_sessions #=> Integer
     #   resp.fleet.compute_capacity_status.actual_user_sessions #=> Integer
+    #   resp.fleet.compute_capacity_status.draining #=> Integer
+    #   resp.fleet.compute_capacity_status.drain_mode_active_user_sessions #=> Integer
+    #   resp.fleet.compute_capacity_status.drain_mode_unused_user_sessions #=> Integer
     #   resp.fleet.max_user_duration_in_seconds #=> Integer
     #   resp.fleet.disconnect_timeout_in_seconds #=> Integer
     #   resp.fleet.state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED"
@@ -5998,6 +6110,7 @@ module Aws::AppStream
     #   resp.fleet.session_script_s3_location.s3_key #=> String
     #   resp.fleet.max_sessions_per_instance #=> Integer
     #   resp.fleet.root_volume_config.volume_size_in_gb #=> Integer
+    #   resp.fleet.disable_imdsv1 #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/UpdateFleet AWS API Documentation
     #
@@ -6095,6 +6208,11 @@ module Aws::AppStream
     #   The streaming protocol you want your stack to prefer. This can be UDP
     #   or TCP. Currently, UDP is only supported in the Windows native client.
     #
+    # @option params [Types::ContentRedirection] :content_redirection
+    #   Configuration for bidirectional URL redirection between the streaming
+    #   session and the local client. Use HostToClient to redirect URLs from
+    #   the remote desktop to the local browser.
+    #
     # @return [Types::UpdateStackResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateStackResult#stack #stack} => Types::Stack
@@ -6116,7 +6234,7 @@ module Aws::AppStream
     #     delete_storage_connectors: false,
     #     redirect_url: "RedirectURL",
     #     feedback_url: "FeedbackURL",
-    #     attributes_to_delete: ["STORAGE_CONNECTORS"], # accepts STORAGE_CONNECTORS, STORAGE_CONNECTOR_HOMEFOLDERS, STORAGE_CONNECTOR_GOOGLE_DRIVE, STORAGE_CONNECTOR_ONE_DRIVE, REDIRECT_URL, FEEDBACK_URL, THEME_NAME, USER_SETTINGS, EMBED_HOST_DOMAINS, IAM_ROLE_ARN, ACCESS_ENDPOINTS, STREAMING_EXPERIENCE_SETTINGS
+    #     attributes_to_delete: ["STORAGE_CONNECTORS"], # accepts STORAGE_CONNECTORS, STORAGE_CONNECTOR_HOMEFOLDERS, STORAGE_CONNECTOR_GOOGLE_DRIVE, STORAGE_CONNECTOR_ONE_DRIVE, REDIRECT_URL, FEEDBACK_URL, THEME_NAME, USER_SETTINGS, EMBED_HOST_DOMAINS, IAM_ROLE_ARN, ACCESS_ENDPOINTS, STREAMING_EXPERIENCE_SETTINGS, CONTENT_REDIRECTION
     #     user_settings: [
     #       {
     #         action: "CLIPBOARD_COPY_FROM_LOCAL_DEVICE", # required, accepts CLIPBOARD_COPY_FROM_LOCAL_DEVICE, CLIPBOARD_COPY_TO_LOCAL_DEVICE, FILE_UPLOAD, FILE_DOWNLOAD, PRINTING_TO_LOCAL_DEVICE, DOMAIN_PASSWORD_SIGNIN, DOMAIN_SMART_CARD_SIGNIN, AUTO_TIME_ZONE_REDIRECTION
@@ -6137,6 +6255,13 @@ module Aws::AppStream
     #     embed_host_domains: ["EmbedHostDomain"],
     #     streaming_experience_settings: {
     #       preferred_protocol: "TCP", # accepts TCP, UDP
+    #     },
+    #     content_redirection: {
+    #       host_to_client: {
+    #         enabled: false, # required
+    #         allowed_urls: ["UrlPattern"],
+    #         denied_urls: ["UrlPattern"],
+    #       },
     #     },
     #   })
     #
@@ -6172,6 +6297,11 @@ module Aws::AppStream
     #   resp.stack.embed_host_domains #=> Array
     #   resp.stack.embed_host_domains[0] #=> String
     #   resp.stack.streaming_experience_settings.preferred_protocol #=> String, one of "TCP", "UDP"
+    #   resp.stack.content_redirection.host_to_client.enabled #=> Boolean
+    #   resp.stack.content_redirection.host_to_client.allowed_urls #=> Array
+    #   resp.stack.content_redirection.host_to_client.allowed_urls[0] #=> String
+    #   resp.stack.content_redirection.host_to_client.denied_urls #=> Array
+    #   resp.stack.content_redirection.host_to_client.denied_urls[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/UpdateStack AWS API Documentation
     #
@@ -6287,7 +6417,7 @@ module Aws::AppStream
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-appstream'
-      context[:gem_version] = '1.127.0'
+      context[:gem_version] = '1.132.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

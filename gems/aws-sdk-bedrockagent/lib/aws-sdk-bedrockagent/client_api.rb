@@ -2700,6 +2700,7 @@ module Aws::BedrockAgent
     ToolSpecification.add_member(:name, Shapes::ShapeRef.new(shape: ToolName, required: true, location_name: "name"))
     ToolSpecification.add_member(:description, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "description"))
     ToolSpecification.add_member(:input_schema, Shapes::ShapeRef.new(shape: ToolInputSchema, required: true, location_name: "inputSchema"))
+    ToolSpecification.add_member(:strict, Shapes::ShapeRef.new(shape: Boolean, location_name: "strict"))
     ToolSpecification.struct_class = Types::ToolSpecification
 
     Transformation.add_member(:transformation_function, Shapes::ShapeRef.new(shape: TransformationFunction, required: true, location_name: "transformationFunction"))

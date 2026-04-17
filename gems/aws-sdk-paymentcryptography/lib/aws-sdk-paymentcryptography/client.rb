@@ -1708,6 +1708,10 @@ module Aws::PaymentCryptography
     # export token expires in 30 days. You can use the same export token to
     # export multiple keys from your service account.
     #
+    # To return a previously generated export token and signing key
+    # certificate instead of generating new ones, set
+    # `ReuseLastGeneratedToken` to `true`.
+    #
     # **Cross-account use:** This operation can't be used across different
     # Amazon Web Services accounts.
     #
@@ -1733,6 +1737,16 @@ module Aws::PaymentCryptography
     #   certificate signs the wrapped key under export within the TR-34 key
     #   block. `RSA_2048` is the only signing key algorithm allowed.
     #
+    # @option params [Boolean] :reuse_last_generated_token
+    #   Specifies whether to reuse the existing export token and signing key
+    #   certificate. If set to `true` and a valid export token exists for the
+    #   same key material type and signing key algorithm with at least 7 days
+    #   of remaining validity, the existing token and signing key certificate
+    #   are returned. Otherwise, a new export token and signing key
+    #   certificate are generated. The default value is `false`, which
+    #   generates a new export token and signing key certificate on every
+    #   call.
+    #
     # @return [Types::GetParametersForExportOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetParametersForExportOutput#signing_key_certificate #signing_key_certificate} => String
@@ -1746,6 +1760,7 @@ module Aws::PaymentCryptography
     #   resp = client.get_parameters_for_export({
     #     key_material_type: "TR34_KEY_BLOCK", # required, accepts TR34_KEY_BLOCK, TR31_KEY_BLOCK, ROOT_PUBLIC_KEY_CERTIFICATE, TRUSTED_PUBLIC_KEY_CERTIFICATE, KEY_CRYPTOGRAM
     #     signing_key_algorithm: "TDES_2KEY", # required, accepts TDES_2KEY, TDES_3KEY, AES_128, AES_192, AES_256, HMAC_SHA256, HMAC_SHA384, HMAC_SHA512, HMAC_SHA224, RSA_2048, RSA_3072, RSA_4096, ECC_NIST_P256, ECC_NIST_P384, ECC_NIST_P521
+    #     reuse_last_generated_token: false,
     #   })
     #
     # @example Response structure
@@ -1775,6 +1790,10 @@ module Aws::PaymentCryptography
     # before calling [ImportKey][1]. The import token expires in 30 days.
     # You can use the same import token to import multiple keys into your
     # service account.
+    #
+    # To return a previously generated import token and wrapping key
+    # certificate instead of generating new ones, set
+    # `ReuseLastGeneratedToken` to `true`.
     #
     # **Cross-account use:** This operation can't be used across different
     # Amazon Web Services accounts.
@@ -1807,6 +1826,16 @@ module Aws::PaymentCryptography
     #   `RSA_4096` are the allowed algorithms for RSA WrappedKeyCryptogram
     #   import.
     #
+    # @option params [Boolean] :reuse_last_generated_token
+    #   Specifies whether to reuse the existing import token and wrapping key
+    #   certificate. If set to `true` and a valid import token exists for the
+    #   same key material type and wrapping key algorithm with at least 7 days
+    #   of remaining validity, the existing token and wrapping key certificate
+    #   are returned. Otherwise, a new import token and wrapping key
+    #   certificate are generated. The default value is `false`, which
+    #   generates a new import token and wrapping key certificate on every
+    #   call.
+    #
     # @return [Types::GetParametersForImportOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetParametersForImportOutput#wrapping_key_certificate #wrapping_key_certificate} => String
@@ -1820,6 +1849,7 @@ module Aws::PaymentCryptography
     #   resp = client.get_parameters_for_import({
     #     key_material_type: "TR34_KEY_BLOCK", # required, accepts TR34_KEY_BLOCK, TR31_KEY_BLOCK, ROOT_PUBLIC_KEY_CERTIFICATE, TRUSTED_PUBLIC_KEY_CERTIFICATE, KEY_CRYPTOGRAM
     #     wrapping_key_algorithm: "TDES_2KEY", # required, accepts TDES_2KEY, TDES_3KEY, AES_128, AES_192, AES_256, HMAC_SHA256, HMAC_SHA384, HMAC_SHA512, HMAC_SHA224, RSA_2048, RSA_3072, RSA_4096, ECC_NIST_P256, ECC_NIST_P384, ECC_NIST_P521
+    #     reuse_last_generated_token: false,
     #   })
     #
     # @example Response structure
@@ -3092,7 +3122,7 @@ module Aws::PaymentCryptography
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-paymentcryptography'
-      context[:gem_version] = '1.51.0'
+      context[:gem_version] = '1.53.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

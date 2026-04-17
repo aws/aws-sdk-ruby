@@ -410,7 +410,7 @@ module Aws::EKS
     end
 
     class ControlPlaneScalingConfig
-      attr_accessor tier: ("standard" | "tier-xl" | "tier-2xl" | "tier-4xl")
+      attr_accessor tier: ("standard" | "tier-xl" | "tier-2xl" | "tier-4xl" | "tier-8xl")
       SENSITIVE: []
     end
 
@@ -552,6 +552,7 @@ module Aws::EKS
       attr_accessor capacity_type: ("ON_DEMAND" | "SPOT" | "CAPACITY_BLOCK")
       attr_accessor version: ::String
       attr_accessor release_version: ::String
+      attr_accessor warm_pool_config: Types::WarmPoolConfig
       SENSITIVE: []
     end
 
@@ -1339,6 +1340,7 @@ module Aws::EKS
       attr_accessor node_repair_config: Types::NodeRepairConfig
       attr_accessor launch_template: Types::LaunchTemplateSpecification
       attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor warm_pool_config: Types::WarmPoolConfig
       SENSITIVE: []
     end
 
@@ -1737,6 +1739,7 @@ module Aws::EKS
       attr_accessor scaling_config: Types::NodegroupScalingConfig
       attr_accessor update_config: Types::NodegroupUpdateConfig
       attr_accessor node_repair_config: Types::NodeRepairConfig
+      attr_accessor warm_pool_config: Types::WarmPoolConfig
       attr_accessor client_request_token: ::String
       SENSITIVE: []
     end
@@ -1763,7 +1766,7 @@ module Aws::EKS
     end
 
     class UpdateParam
-      attr_accessor type: ("Version" | "PlatformVersion" | "EndpointPrivateAccess" | "EndpointPublicAccess" | "ClusterLogging" | "DesiredSize" | "LabelsToAdd" | "LabelsToRemove" | "TaintsToAdd" | "TaintsToRemove" | "MaxSize" | "MinSize" | "ReleaseVersion" | "PublicAccessCidrs" | "LaunchTemplateName" | "LaunchTemplateVersion" | "IdentityProviderConfig" | "EncryptionConfig" | "AddonVersion" | "ServiceAccountRoleArn" | "ResolveConflicts" | "MaxUnavailable" | "MaxUnavailablePercentage" | "NodeRepairEnabled" | "UpdateStrategy" | "ConfigurationValues" | "SecurityGroups" | "Subnets" | "AuthenticationMode" | "PodIdentityAssociations" | "UpgradePolicy" | "ZonalShiftConfig" | "ComputeConfig" | "StorageConfig" | "KubernetesNetworkConfig" | "RemoteNetworkConfig" | "DeletionProtection" | "NodeRepairConfig" | "UpdatedTier" | "PreviousTier")
+      attr_accessor type: ("Version" | "PlatformVersion" | "EndpointPrivateAccess" | "EndpointPublicAccess" | "ClusterLogging" | "DesiredSize" | "LabelsToAdd" | "LabelsToRemove" | "TaintsToAdd" | "TaintsToRemove" | "MaxSize" | "MinSize" | "ReleaseVersion" | "PublicAccessCidrs" | "LaunchTemplateName" | "LaunchTemplateVersion" | "IdentityProviderConfig" | "EncryptionConfig" | "AddonVersion" | "ServiceAccountRoleArn" | "ResolveConflicts" | "MaxUnavailable" | "MaxUnavailablePercentage" | "NodeRepairEnabled" | "UpdateStrategy" | "ConfigurationValues" | "SecurityGroups" | "Subnets" | "AuthenticationMode" | "PodIdentityAssociations" | "UpgradePolicy" | "ZonalShiftConfig" | "ComputeConfig" | "StorageConfig" | "KubernetesNetworkConfig" | "RemoteNetworkConfig" | "DeletionProtection" | "NodeRepairConfig" | "UpdatedTier" | "PreviousTier" | "WarmPoolEnabled" | "WarmPoolMaxGroupPreparedCapacity" | "WarmPoolMinSize" | "WarmPoolState" | "WarmPoolReuseOnScaleIn")
       attr_accessor value: ::String
       SENSITIVE: []
     end
@@ -1823,6 +1826,15 @@ module Aws::EKS
       attr_accessor endpoint_public_access: bool
       attr_accessor endpoint_private_access: bool
       attr_accessor public_access_cidrs: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class WarmPoolConfig
+      attr_accessor enabled: bool
+      attr_accessor min_size: ::Integer
+      attr_accessor max_group_prepared_capacity: ::Integer
+      attr_accessor pool_state: ("STOPPED" | "RUNNING" | "HIBERNATED")
+      attr_accessor reuse_on_scale_in: bool
       SENSITIVE: []
     end
 

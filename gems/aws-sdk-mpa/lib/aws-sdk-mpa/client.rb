@@ -791,6 +791,9 @@ module Aws::MPA
     #   resp.approvers[0].primary_identity_id #=> String
     #   resp.approvers[0].primary_identity_source_arn #=> String
     #   resp.approvers[0].primary_identity_status #=> String, one of "PENDING", "ACCEPTED", "REJECTED", "INVALID"
+    #   resp.approvers[0].last_activity #=> String, one of "VOTED", "BASELINED", "RESPONDED_TO_INVITATION"
+    #   resp.approvers[0].last_activity_time #=> Time
+    #   resp.approvers[0].pending_baseline_session_arn #=> String
     #   resp.approvers[0].mfa_methods #=> Array
     #   resp.approvers[0].mfa_methods[0].type #=> String, one of "EMAIL_OTP"
     #   resp.approvers[0].mfa_methods[0].sync_status #=> String, one of "IN_SYNC", "OUT_OF_SYNC"
@@ -818,6 +821,9 @@ module Aws::MPA
     #   resp.pending_update.approvers[0].primary_identity_id #=> String
     #   resp.pending_update.approvers[0].primary_identity_source_arn #=> String
     #   resp.pending_update.approvers[0].primary_identity_status #=> String, one of "PENDING", "ACCEPTED", "REJECTED", "INVALID"
+    #   resp.pending_update.approvers[0].last_activity #=> String, one of "VOTED", "BASELINED", "RESPONDED_TO_INVITATION"
+    #   resp.pending_update.approvers[0].last_activity_time #=> Time
+    #   resp.pending_update.approvers[0].pending_baseline_session_arn #=> String
     #   resp.pending_update.approvers[0].mfa_methods #=> Array
     #   resp.pending_update.approvers[0].mfa_methods[0].type #=> String, one of "EMAIL_OTP"
     #   resp.pending_update.approvers[0].mfa_methods[0].sync_status #=> String, one of "IN_SYNC", "OUT_OF_SYNC"
@@ -1019,7 +1025,7 @@ module Aws::MPA
     #   resp.metadata #=> Hash
     #   resp.metadata["SessionKey"] #=> String
     #   resp.status #=> String, one of "PENDING", "CANCELLED", "APPROVED", "FAILED", "CREATING"
-    #   resp.status_code #=> String, one of "REJECTED", "EXPIRED", "CONFIGURATION_CHANGED"
+    #   resp.status_code #=> String, one of "REJECTED", "EXPIRED", "CONFIGURATION_CHANGED", "ALL_APPROVERS_IN_SESSION"
     #   resp.status_message #=> String
     #   resp.execution_status #=> String, one of "EXECUTED", "FAILED", "PENDING"
     #   resp.action_name #=> String
@@ -1366,7 +1372,7 @@ module Aws::MPA
     #   resp.sessions[0].requester_region #=> String
     #   resp.sessions[0].requester_account_id #=> String
     #   resp.sessions[0].status #=> String, one of "PENDING", "CANCELLED", "APPROVED", "FAILED", "CREATING"
-    #   resp.sessions[0].status_code #=> String, one of "REJECTED", "EXPIRED", "CONFIGURATION_CHANGED"
+    #   resp.sessions[0].status_code #=> String, one of "REJECTED", "EXPIRED", "CONFIGURATION_CHANGED", "ALL_APPROVERS_IN_SESSION"
     #   resp.sessions[0].status_message #=> String
     #   resp.sessions[0].action_completion_strategy #=> String, one of "AUTO_COMPLETION_UPON_APPROVAL"
     #   resp.sessions[0].additional_security_requirements #=> Array
@@ -1448,6 +1454,39 @@ module Aws::MPA
     # @param [Hash] params ({})
     def start_active_approval_team_deletion(params = {}, options = {})
       req = build_request(:start_active_approval_team_deletion, params)
+      req.send_request(options)
+    end
+
+    # Starts a baseline session for specified approvers on an `ACTIVE`
+    # approval team.
+    #
+    # @option params [required, String] :arn
+    #   Amazon Resource Name (ARN) for the approval team.
+    #
+    # @option params [Array<String>] :approver_ids
+    #   Array of approver IDs.
+    #
+    # @return [Types::StartApprovalTeamBaselineResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartApprovalTeamBaselineResponse#baseline_session_arn #baseline_session_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_approval_team_baseline({
+    #     arn: "ApprovalTeamArn", # required
+    #     approver_ids: ["ParticipantId"],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.baseline_session_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mpa-2022-07-26/StartApprovalTeamBaseline AWS API Documentation
+    #
+    # @overload start_approval_team_baseline(params = {})
+    # @param [Hash] params ({})
+    def start_approval_team_baseline(params = {}, options = {})
+      req = build_request(:start_approval_team_baseline, params)
       req.send_request(options)
     end
 
@@ -1589,7 +1628,7 @@ module Aws::MPA
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-mpa'
-      context[:gem_version] = '1.12.0'
+      context[:gem_version] = '1.14.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

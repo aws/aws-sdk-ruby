@@ -517,6 +517,11 @@ module Aws::BedrockAgentCoreControl
     # @option params [Hash<String,String>] :environment_variables
     #   Environment variables to set in the AgentCore Runtime environment.
     #
+    # @option params [Array<Types::FilesystemConfiguration>] :filesystem_configurations
+    #   The filesystem configurations to mount into the AgentCore Runtime. Use
+    #   filesystem configurations to provide persistent storage to your
+    #   AgentCore Runtime sessions.
+    #
     # @option params [Hash<String,String>] :tags
     #   A map of tag keys and values to assign to the agent runtime. Tags
     #   enable you to categorize your resources in different ways, for
@@ -547,7 +552,7 @@ module Aws::BedrockAgentCoreControl
     #             version_id: "S3LocationVersionIdString",
     #           },
     #         },
-    #         runtime: "PYTHON_3_10", # required, accepts PYTHON_3_10, PYTHON_3_11, PYTHON_3_12, PYTHON_3_13
+    #         runtime: "PYTHON_3_10", # required, accepts PYTHON_3_10, PYTHON_3_11, PYTHON_3_12, PYTHON_3_13, PYTHON_3_14
     #         entry_point: ["entryPoint"], # required
     #       },
     #     },
@@ -586,7 +591,7 @@ module Aws::BedrockAgentCoreControl
     #       request_header_allowlist: ["HeaderName"],
     #     },
     #     protocol_configuration: {
-    #       server_protocol: "MCP", # required, accepts MCP, HTTP, A2A
+    #       server_protocol: "MCP", # required, accepts MCP, HTTP, A2A, AGUI
     #     },
     #     lifecycle_configuration: {
     #       idle_runtime_session_timeout: 1,
@@ -595,6 +600,13 @@ module Aws::BedrockAgentCoreControl
     #     environment_variables: {
     #       "EnvironmentVariableKey" => "EnvironmentVariableValue",
     #     },
+    #     filesystem_configurations: [
+    #       {
+    #         session_storage: {
+    #           mount_path: "MountPath", # required
+    #         },
+    #       },
+    #     ],
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
@@ -758,6 +770,12 @@ module Aws::BedrockAgentCoreControl
     #   identification using HTTP message signatures for web bot
     #   authentication.
     #
+    # @option params [Array<Types::BrowserEnterprisePolicy>] :enterprise_policies
+    #   A list of enterprise policy files for the browser.
+    #
+    # @option params [Array<Types::Certificate>] :certificates
+    #   A list of certificates to install in the browser.
+    #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier to ensure that the operation
     #   completes no more than one time. If this token matches a previous
@@ -803,6 +821,27 @@ module Aws::BedrockAgentCoreControl
     #     browser_signing: {
     #       enabled: false, # required
     #     },
+    #     enterprise_policies: [
+    #       {
+    #         location: { # required
+    #           s3: {
+    #             bucket: "S3LocationBucketString", # required
+    #             prefix: "S3LocationPrefixString", # required
+    #             version_id: "S3LocationVersionIdString",
+    #           },
+    #         },
+    #         type: "MANAGED", # accepts MANAGED, RECOMMENDED
+    #       },
+    #     ],
+    #     certificates: [
+    #       {
+    #         location: { # required
+    #           secrets_manager: {
+    #             secret_arn: "ToolSecretArn", # required
+    #           },
+    #         },
+    #       },
+    #     ],
     #     client_token: "ClientToken",
     #     tags: {
     #       "TagKey" => "TagValue",
@@ -904,6 +943,9 @@ module Aws::BedrockAgentCoreControl
     #   The network configuration for the code interpreter. This configuration
     #   specifies the network mode for the code interpreter.
     #
+    # @option params [Array<Types::Certificate>] :certificates
+    #   A list of certificates to install in the code interpreter.
+    #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier to ensure that the operation
     #   completes no more than one time. If this token matches a previous
@@ -938,6 +980,15 @@ module Aws::BedrockAgentCoreControl
     #         subnets: ["SubnetId"], # required
     #       },
     #     },
+    #     certificates: [
+    #       {
+    #         location: { # required
+    #           secrets_manager: {
+    #             secret_arn: "ToolSecretArn", # required
+    #           },
+    #         },
+    #       },
+    #     ],
     #     client_token: "ClientToken",
     #     tags: {
     #       "TagKey" => "TagValue",
@@ -961,9 +1012,10 @@ module Aws::BedrockAgentCoreControl
     end
 
     # Creates a custom evaluator for agent quality assessment. Custom
-    # evaluators use LLM-as-a-Judge configurations with user-defined
-    # prompts, rating scales, and model settings to evaluate agent
-    # performance at tool call, trace, or session levels.
+    # evaluators can use either LLM-as-a-Judge configurations with
+    # user-defined prompts, rating scales, and model settings, or code-based
+    # configurations with customer-managed Lambda functions to evaluate
+    # agent performance at tool call, trace, or session levels.
     #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier to ensure that the API request
@@ -987,8 +1039,9 @@ module Aws::BedrockAgentCoreControl
     #   evaluation criteria.
     #
     # @option params [required, Types::EvaluatorConfig] :evaluator_config
-    #   The configuration for the evaluator, including LLM-as-a-Judge settings
-    #   with instructions, rating scale, and model configuration.
+    #   The configuration for the evaluator. Specify either LLM-as-a-Judge
+    #   settings with instructions, rating scale, and model configuration, or
+    #   code-based settings with a customer-managed Lambda function.
     #
     # @option params [required, String] :level
     #   The evaluation level that determines the scope of evaluation. Valid
@@ -1044,6 +1097,12 @@ module Aws::BedrockAgentCoreControl
     #             additional_model_request_fields: {
     #             },
     #           },
+    #         },
+    #       },
+    #       code_based: {
+    #         lambda_config: {
+    #           lambda_arn: "LambdaArn", # required
+    #           lambda_timeout_in_seconds: 1,
     #         },
     #       },
     #     },
@@ -1325,6 +1384,10 @@ module Aws::BedrockAgentCoreControl
     #   Optional configuration for HTTP header and query parameter propagation
     #   to and from the gateway target.
     #
+    # @option params [Types::PrivateEndpoint] :private_endpoint
+    #   The private endpoint configuration for the gateway target. Use this to
+    #   connect the gateway to private resources in your VPC.
+    #
     # @return [Types::CreateGatewayTargetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateGatewayTargetResponse#gateway_arn #gateway_arn} => String
@@ -1339,6 +1402,9 @@ module Aws::BedrockAgentCoreControl
     #   * {Types::CreateGatewayTargetResponse#credential_provider_configurations #credential_provider_configurations} => Array&lt;Types::CredentialProviderConfiguration&gt;
     #   * {Types::CreateGatewayTargetResponse#last_synchronized_at #last_synchronized_at} => Time
     #   * {Types::CreateGatewayTargetResponse#metadata_configuration #metadata_configuration} => Types::MetadataConfiguration
+    #   * {Types::CreateGatewayTargetResponse#private_endpoint #private_endpoint} => Types::PrivateEndpoint
+    #   * {Types::CreateGatewayTargetResponse#private_endpoint_managed_resources #private_endpoint_managed_resources} => Array&lt;Types::ManagedResourceDetails&gt;
+    #   * {Types::CreateGatewayTargetResponse#authorization_data #authorization_data} => Types::AuthorizationData
     #
     # @example Request syntax with placeholder values
     #
@@ -1406,6 +1472,13 @@ module Aws::BedrockAgentCoreControl
     #         },
     #         mcp_server: {
     #           endpoint: "McpServerTargetConfigurationEndpointString", # required
+    #           mcp_tool_schema: {
+    #             s3: {
+    #               uri: "S3BucketUri",
+    #               bucket_owner_account_id: "AwsAccountId",
+    #             },
+    #             inline_payload: "InlinePayload",
+    #           },
     #         },
     #         api_gateway: {
     #           rest_api_id: "String", # required
@@ -1448,6 +1521,10 @@ module Aws::BedrockAgentCoreControl
     #             credential_prefix: "ApiKeyCredentialPrefix",
     #             credential_location: "HEADER", # accepts HEADER, QUERY_PARAMETER
     #           },
+    #           iam_credential_provider: {
+    #             service: "IamCredentialProviderServiceString", # required
+    #             region: "IamCredentialProviderRegionString",
+    #           },
     #         },
     #       },
     #     ],
@@ -1455,6 +1532,21 @@ module Aws::BedrockAgentCoreControl
     #       allowed_request_headers: ["HttpHeaderName"],
     #       allowed_query_parameters: ["HttpQueryParameterName"],
     #       allowed_response_headers: ["HttpHeaderName"],
+    #     },
+    #     private_endpoint: {
+    #       self_managed_lattice_resource: {
+    #         resource_configuration_identifier: "ResourceConfigurationIdentifier",
+    #       },
+    #       managed_lattice_resource: {
+    #         vpc_identifier: "VpcIdentifier", # required
+    #         subnet_ids: ["SubnetId"], # required
+    #         endpoint_ip_address_type: "IPV4", # required, accepts IPV4, IPV6
+    #         security_group_ids: ["SecurityGroupIdentifier"],
+    #         tags: {
+    #           "TagKey" => "TagValue",
+    #         },
+    #         routing_domain: "RoutingDomain",
+    #       },
     #     },
     #   })
     #
@@ -1464,7 +1556,7 @@ module Aws::BedrockAgentCoreControl
     #   resp.target_id #=> String
     #   resp.created_at #=> Time
     #   resp.updated_at #=> Time
-    #   resp.status #=> String, one of "CREATING", "UPDATING", "UPDATE_UNSUCCESSFUL", "DELETING", "READY", "FAILED", "SYNCHRONIZING", "SYNCHRONIZE_UNSUCCESSFUL"
+    #   resp.status #=> String, one of "CREATING", "UPDATING", "UPDATE_UNSUCCESSFUL", "DELETING", "READY", "FAILED", "SYNCHRONIZING", "SYNCHRONIZE_UNSUCCESSFUL", "CREATE_PENDING_AUTH", "UPDATE_PENDING_AUTH", "SYNCHRONIZE_PENDING_AUTH"
     #   resp.status_reasons #=> Array
     #   resp.status_reasons[0] #=> String
     #   resp.name #=> String
@@ -1496,6 +1588,9 @@ module Aws::BedrockAgentCoreControl
     #   resp.target_configuration.mcp.lambda.tool_schema.inline_payload[0].output_schema.items #=> Types::SchemaDefinition
     #   resp.target_configuration.mcp.lambda.tool_schema.inline_payload[0].output_schema.description #=> String
     #   resp.target_configuration.mcp.mcp_server.endpoint #=> String
+    #   resp.target_configuration.mcp.mcp_server.mcp_tool_schema.s3.uri #=> String
+    #   resp.target_configuration.mcp.mcp_server.mcp_tool_schema.s3.bucket_owner_account_id #=> String
+    #   resp.target_configuration.mcp.mcp_server.mcp_tool_schema.inline_payload #=> String
     #   resp.target_configuration.mcp.api_gateway.rest_api_id #=> String
     #   resp.target_configuration.mcp.api_gateway.stage #=> String
     #   resp.target_configuration.mcp.api_gateway.api_gateway_tool_configuration.tool_overrides #=> Array
@@ -1520,6 +1615,8 @@ module Aws::BedrockAgentCoreControl
     #   resp.credential_provider_configurations[0].credential_provider.api_key_credential_provider.credential_parameter_name #=> String
     #   resp.credential_provider_configurations[0].credential_provider.api_key_credential_provider.credential_prefix #=> String
     #   resp.credential_provider_configurations[0].credential_provider.api_key_credential_provider.credential_location #=> String, one of "HEADER", "QUERY_PARAMETER"
+    #   resp.credential_provider_configurations[0].credential_provider.iam_credential_provider.service #=> String
+    #   resp.credential_provider_configurations[0].credential_provider.iam_credential_provider.region #=> String
     #   resp.last_synchronized_at #=> Time
     #   resp.metadata_configuration.allowed_request_headers #=> Array
     #   resp.metadata_configuration.allowed_request_headers[0] #=> String
@@ -1527,6 +1624,22 @@ module Aws::BedrockAgentCoreControl
     #   resp.metadata_configuration.allowed_query_parameters[0] #=> String
     #   resp.metadata_configuration.allowed_response_headers #=> Array
     #   resp.metadata_configuration.allowed_response_headers[0] #=> String
+    #   resp.private_endpoint.self_managed_lattice_resource.resource_configuration_identifier #=> String
+    #   resp.private_endpoint.managed_lattice_resource.vpc_identifier #=> String
+    #   resp.private_endpoint.managed_lattice_resource.subnet_ids #=> Array
+    #   resp.private_endpoint.managed_lattice_resource.subnet_ids[0] #=> String
+    #   resp.private_endpoint.managed_lattice_resource.endpoint_ip_address_type #=> String, one of "IPV4", "IPV6"
+    #   resp.private_endpoint.managed_lattice_resource.security_group_ids #=> Array
+    #   resp.private_endpoint.managed_lattice_resource.security_group_ids[0] #=> String
+    #   resp.private_endpoint.managed_lattice_resource.tags #=> Hash
+    #   resp.private_endpoint.managed_lattice_resource.tags["TagKey"] #=> String
+    #   resp.private_endpoint.managed_lattice_resource.routing_domain #=> String
+    #   resp.private_endpoint_managed_resources #=> Array
+    #   resp.private_endpoint_managed_resources[0].domain #=> String
+    #   resp.private_endpoint_managed_resources[0].resource_gateway_arn #=> String
+    #   resp.private_endpoint_managed_resources[0].resource_association_arn #=> String
+    #   resp.authorization_data.oauth2.authorization_url #=> String
+    #   resp.authorization_data.oauth2.user_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/CreateGatewayTarget AWS API Documentation
     #
@@ -1570,6 +1683,9 @@ module Aws::BedrockAgentCoreControl
     #   The memory strategies to use for this memory. Strategies define how
     #   information is extracted, processed, and consolidated.
     #
+    # @option params [Types::StreamDeliveryResources] :stream_delivery_resources
+    #   Configuration for streaming memory record data to external resources.
+    #
     # @option params [Hash<String,String>] :tags
     #   A map of tag keys and values to assign to an AgentCore Memory. Tags
     #   enable you to categorize your resources in different ways, for
@@ -1594,21 +1710,25 @@ module Aws::BedrockAgentCoreControl
     #           name: "Name", # required
     #           description: "Description",
     #           namespaces: ["Namespace"],
+    #           namespace_templates: ["Namespace"],
     #         },
     #         summary_memory_strategy: {
     #           name: "Name", # required
     #           description: "Description",
     #           namespaces: ["Namespace"],
+    #           namespace_templates: ["Namespace"],
     #         },
     #         user_preference_memory_strategy: {
     #           name: "Name", # required
     #           description: "Description",
     #           namespaces: ["Namespace"],
+    #           namespace_templates: ["Namespace"],
     #         },
     #         custom_memory_strategy: {
     #           name: "Name", # required
     #           description: "Description",
     #           namespaces: ["Namespace"],
+    #           namespace_templates: ["Namespace"],
     #           configuration: {
     #             semantic_override: {
     #               extraction: {
@@ -1649,6 +1769,7 @@ module Aws::BedrockAgentCoreControl
     #                 append_to_prompt: "Prompt", # required
     #                 model_id: "String", # required
     #                 namespaces: ["Namespace"],
+    #                 namespace_templates: ["Namespace"],
     #               },
     #             },
     #             self_managed_configuration: {
@@ -1677,12 +1798,29 @@ module Aws::BedrockAgentCoreControl
     #           name: "Name", # required
     #           description: "Description",
     #           namespaces: ["Namespace"],
+    #           namespace_templates: ["Namespace"],
     #           reflection_configuration: {
-    #             namespaces: ["Namespace"], # required
+    #             namespaces: ["Namespace"],
+    #             namespace_templates: ["Namespace"],
     #           },
     #         },
     #       },
     #     ],
+    #     stream_delivery_resources: {
+    #       resources: [ # required
+    #         {
+    #           kinesis: {
+    #             data_stream_arn: "Arn", # required
+    #             content_configurations: [ # required
+    #               {
+    #                 type: "MEMORY_RECORDS", # required, accepts MEMORY_RECORDS
+    #                 level: "METADATA_ONLY", # accepts METADATA_ONLY, FULL_CONTENT
+    #               },
+    #             ],
+    #           },
+    #         },
+    #       ],
+    #     },
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
@@ -1724,8 +1862,12 @@ module Aws::BedrockAgentCoreControl
     #   resp.memory.strategies[0].configuration.reflection.custom_reflection_configuration.episodic_reflection_override.model_id #=> String
     #   resp.memory.strategies[0].configuration.reflection.custom_reflection_configuration.episodic_reflection_override.namespaces #=> Array
     #   resp.memory.strategies[0].configuration.reflection.custom_reflection_configuration.episodic_reflection_override.namespaces[0] #=> String
+    #   resp.memory.strategies[0].configuration.reflection.custom_reflection_configuration.episodic_reflection_override.namespace_templates #=> Array
+    #   resp.memory.strategies[0].configuration.reflection.custom_reflection_configuration.episodic_reflection_override.namespace_templates[0] #=> String
     #   resp.memory.strategies[0].configuration.reflection.episodic_reflection_configuration.namespaces #=> Array
     #   resp.memory.strategies[0].configuration.reflection.episodic_reflection_configuration.namespaces[0] #=> String
+    #   resp.memory.strategies[0].configuration.reflection.episodic_reflection_configuration.namespace_templates #=> Array
+    #   resp.memory.strategies[0].configuration.reflection.episodic_reflection_configuration.namespace_templates[0] #=> String
     #   resp.memory.strategies[0].configuration.self_managed_configuration.trigger_conditions #=> Array
     #   resp.memory.strategies[0].configuration.self_managed_configuration.trigger_conditions[0].message_based_trigger.message_count #=> Integer
     #   resp.memory.strategies[0].configuration.self_managed_configuration.trigger_conditions[0].token_based_trigger.token_count #=> Integer
@@ -1736,9 +1878,16 @@ module Aws::BedrockAgentCoreControl
     #   resp.memory.strategies[0].type #=> String, one of "SEMANTIC", "SUMMARIZATION", "USER_PREFERENCE", "CUSTOM", "EPISODIC"
     #   resp.memory.strategies[0].namespaces #=> Array
     #   resp.memory.strategies[0].namespaces[0] #=> String
+    #   resp.memory.strategies[0].namespace_templates #=> Array
+    #   resp.memory.strategies[0].namespace_templates[0] #=> String
     #   resp.memory.strategies[0].created_at #=> Time
     #   resp.memory.strategies[0].updated_at #=> Time
     #   resp.memory.strategies[0].status #=> String, one of "CREATING", "ACTIVE", "DELETING", "FAILED"
+    #   resp.memory.stream_delivery_resources.resources #=> Array
+    #   resp.memory.stream_delivery_resources.resources[0].kinesis.data_stream_arn #=> String
+    #   resp.memory.stream_delivery_resources.resources[0].kinesis.content_configurations #=> Array
+    #   resp.memory.stream_delivery_resources.resources[0].kinesis.content_configurations[0].type #=> String, one of "MEMORY_RECORDS"
+    #   resp.memory.stream_delivery_resources.resources[0].kinesis.content_configurations[0].level #=> String, one of "METADATA_ONLY", "FULL_CONTENT"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/CreateMemory AWS API Documentation
     #
@@ -2146,6 +2295,10 @@ module Aws::BedrockAgentCoreControl
     #       cedar: {
     #         statement: "Statement", # required
     #       },
+    #       policy_generation: {
+    #         policy_generation_id: "ResourceId", # required
+    #         policy_generation_asset_id: "ResourceId", # required
+    #       },
     #     },
     #     description: "Description",
     #     validation_mode: "FAIL_ON_ANY_FINDINGS", # accepts FAIL_ON_ANY_FINDINGS, IGNORE_ALL_FINDINGS
@@ -2159,6 +2312,8 @@ module Aws::BedrockAgentCoreControl
     #   resp.name #=> String
     #   resp.policy_engine_id #=> String
     #   resp.definition.cedar.statement #=> String
+    #   resp.definition.policy_generation.policy_generation_id #=> String
+    #   resp.definition.policy_generation.policy_generation_asset_id #=> String
     #   resp.description #=> String
     #   resp.created_at #=> Time
     #   resp.updated_at #=> Time
@@ -2212,6 +2367,15 @@ module Aws::BedrockAgentCoreControl
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
+    # @option params [String] :encryption_key_arn
+    #   The Amazon Resource Name (ARN) of the KMS key used to encrypt the
+    #   policy engine data.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   A map of tag keys and values to assign to an AgentCore Policy. Tags
+    #   enable you to categorize your resources in different ways, for
+    #   example, by purpose, owner, or environment.
+    #
     # @return [Types::CreatePolicyEngineResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreatePolicyEngineResponse#policy_engine_id #policy_engine_id} => String
@@ -2222,6 +2386,7 @@ module Aws::BedrockAgentCoreControl
     #   * {Types::CreatePolicyEngineResponse#policy_engine_arn #policy_engine_arn} => String
     #   * {Types::CreatePolicyEngineResponse#status #status} => String
     #   * {Types::CreatePolicyEngineResponse#status_reasons #status_reasons} => Array&lt;String&gt;
+    #   * {Types::CreatePolicyEngineResponse#encryption_key_arn #encryption_key_arn} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -2229,6 +2394,10 @@ module Aws::BedrockAgentCoreControl
     #     name: "PolicyEngineName", # required
     #     description: "Description",
     #     client_token: "ClientToken",
+    #     encryption_key_arn: "KmsKeyArn",
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
     #   })
     #
     # @example Response structure
@@ -2242,6 +2411,7 @@ module Aws::BedrockAgentCoreControl
     #   resp.status #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETING", "CREATE_FAILED", "UPDATE_FAILED", "DELETE_FAILED"
     #   resp.status_reasons #=> Array
     #   resp.status_reasons[0] #=> String
+    #   resp.encryption_key_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/CreatePolicyEngine AWS API Documentation
     #
@@ -2249,6 +2419,255 @@ module Aws::BedrockAgentCoreControl
     # @param [Hash] params ({})
     def create_policy_engine(params = {}, options = {})
       req = build_request(:create_policy_engine, params)
+      req.send_request(options)
+    end
+
+    # Creates a new registry in your Amazon Web Services account. A registry
+    # serves as a centralized catalog for organizing and managing registry
+    # records, including MCP servers, A2A agents, agent skills, and custom
+    # resource types.
+    #
+    # If you specify `CUSTOM_JWT` as the `authorizerType`, you must provide
+    # an `authorizerConfiguration`.
+    #
+    # @option params [required, String] :name
+    #   The name of the registry. The name must be unique within your account
+    #   and can contain alphanumeric characters and underscores.
+    #
+    # @option params [String] :description
+    #   A description of the registry.
+    #
+    # @option params [String] :authorizer_type
+    #   The type of authorizer to use for the registry. This controls the
+    #   authorization method for the Search and Invoke APIs used by consumers,
+    #   and does not affect the standard CRUDL APIs for registry and registry
+    #   record management used by administrators.
+    #
+    #   * `CUSTOM_JWT` - Authorize with a bearer token.
+    #
+    #   * `AWS_IAM` - Authorize with your Amazon Web Services IAM credentials.
+    #
+    # @option params [Types::AuthorizerConfiguration] :authorizer_configuration
+    #   The authorizer configuration for the registry. Required if
+    #   `authorizerType` is `CUSTOM_JWT`. For details, see the
+    #   `AuthorizerConfiguration` data type.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier to ensure that the API request
+    #   completes no more than one time. If you don't specify this field, a
+    #   value is randomly generated for you. If this token matches a previous
+    #   request, the service ignores the request, but doesn't return an
+    #   error. For more information, see [Ensuring idempotency][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #
+    # @option params [Types::ApprovalConfiguration] :approval_configuration
+    #   The approval configuration for registry records. Controls whether
+    #   records require explicit approval before becoming active. See the
+    #   `ApprovalConfiguration` data type for supported configuration options.
+    #
+    # @return [Types::CreateRegistryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateRegistryResponse#registry_arn #registry_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_registry({
+    #     name: "RegistryName", # required
+    #     description: "Description",
+    #     authorizer_type: "CUSTOM_JWT", # accepts CUSTOM_JWT, AWS_IAM
+    #     authorizer_configuration: {
+    #       custom_jwt_authorizer: {
+    #         discovery_url: "DiscoveryUrl", # required
+    #         allowed_audience: ["AllowedAudience"],
+    #         allowed_clients: ["AllowedClient"],
+    #         allowed_scopes: ["AllowedScopeType"],
+    #         custom_claims: [
+    #           {
+    #             inbound_token_claim_name: "InboundTokenClaimNameType", # required
+    #             inbound_token_claim_value_type: "STRING", # required, accepts STRING, STRING_ARRAY
+    #             authorizing_claim_match_value: { # required
+    #               claim_match_value: { # required
+    #                 match_value_string: "MatchValueString",
+    #                 match_value_string_list: ["MatchValueString"],
+    #               },
+    #               claim_match_operator: "EQUALS", # required, accepts EQUALS, CONTAINS, CONTAINS_ANY
+    #             },
+    #           },
+    #         ],
+    #       },
+    #     },
+    #     client_token: "ClientToken",
+    #     approval_configuration: {
+    #       auto_approval: false,
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.registry_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/CreateRegistry AWS API Documentation
+    #
+    # @overload create_registry(params = {})
+    # @param [Hash] params ({})
+    def create_registry(params = {}, options = {})
+      req = build_request(:create_registry, params)
+      req.send_request(options)
+    end
+
+    # Creates a new registry record within the specified registry. A
+    # registry record represents an individual AI resource's metadata in
+    # the registry. This could be an MCP server (and associated tools), A2A
+    # agent, agent skill, or a custom resource with a custom schema.
+    #
+    # The record is processed asynchronously and returns HTTP 202 Accepted.
+    #
+    # @option params [required, String] :registry_id
+    #   The identifier of the registry where the record will be created. You
+    #   can specify either the Amazon Resource Name (ARN) or the ID of the
+    #   registry.
+    #
+    # @option params [required, String] :name
+    #   The name of the registry record.
+    #
+    # @option params [String] :description
+    #   A description of the registry record.
+    #
+    # @option params [required, String] :descriptor_type
+    #   The descriptor type of the registry record.
+    #
+    #   * `MCP` - Model Context Protocol descriptor for MCP-compatible servers
+    #     and tools.
+    #
+    #   * `A2A` - Agent-to-Agent protocol descriptor.
+    #
+    #   * `CUSTOM` - Custom descriptor type for resources such as APIs, Lambda
+    #     functions, or servers not conforming to a standard protocol.
+    #
+    #   * `AGENT_SKILLS` - Agent skills descriptor for defining agent skill
+    #     definitions.
+    #
+    # @option params [Types::Descriptors] :descriptors
+    #   The descriptor-type-specific configuration containing the resource
+    #   schema and metadata. The structure of this field depends on the
+    #   `descriptorType` you specify.
+    #
+    # @option params [String] :record_version
+    #   The version of the registry record. Use this to track different
+    #   versions of the record's content.
+    #
+    # @option params [String] :synchronization_type
+    #   The type of synchronization to use for keeping the record metadata up
+    #   to date from an external source. Possible values include `FROM_URL`
+    #   and `NONE`.
+    #
+    # @option params [Types::SynchronizationConfiguration] :synchronization_configuration
+    #   The configuration for synchronizing registry record metadata from an
+    #   external source, such as a URL-based MCP server.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier to ensure that the API request
+    #   completes no more than one time. If you don't specify this field, a
+    #   value is randomly generated for you. If this token matches a previous
+    #   request, the service ignores the request, but doesn't return an
+    #   error. For more information, see [Ensuring idempotency][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #
+    # @return [Types::CreateRegistryRecordResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateRegistryRecordResponse#record_arn #record_arn} => String
+    #   * {Types::CreateRegistryRecordResponse#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_registry_record({
+    #     registry_id: "RegistryIdentifier", # required
+    #     name: "RegistryRecordName", # required
+    #     description: "Description",
+    #     descriptor_type: "MCP", # required, accepts MCP, A2A, CUSTOM, AGENT_SKILLS
+    #     descriptors: {
+    #       mcp: {
+    #         server: {
+    #           schema_version: "SchemaVersion",
+    #           inline_content: "InlineContent",
+    #         },
+    #         tools: {
+    #           protocol_version: "SchemaVersion",
+    #           inline_content: "InlineContent",
+    #         },
+    #       },
+    #       a2a: {
+    #         agent_card: {
+    #           schema_version: "SchemaVersion",
+    #           inline_content: "InlineContent",
+    #         },
+    #       },
+    #       custom: {
+    #         inline_content: "InlineContent",
+    #       },
+    #       agent_skills: {
+    #         skill_md: {
+    #           inline_content: "InlineContent",
+    #         },
+    #         skill_definition: {
+    #           schema_version: "SchemaVersion",
+    #           inline_content: "InlineContent",
+    #         },
+    #       },
+    #     },
+    #     record_version: "RegistryRecordVersion",
+    #     synchronization_type: "URL", # accepts URL
+    #     synchronization_configuration: {
+    #       from_url: {
+    #         url: "McpServerUrl", # required
+    #         credential_provider_configurations: [
+    #           {
+    #             credential_provider_type: "OAUTH", # required, accepts OAUTH, IAM
+    #             credential_provider: { # required
+    #               oauth_credential_provider: {
+    #                 provider_arn: "CredentialProviderArn", # required
+    #                 grant_type: "CLIENT_CREDENTIALS", # accepts CLIENT_CREDENTIALS
+    #                 scopes: ["String"],
+    #                 custom_parameters: {
+    #                   "String" => "String",
+    #                 },
+    #               },
+    #               iam_credential_provider: {
+    #                 role_arn: "IamRoleArn",
+    #                 service: "IamSigningServiceName",
+    #                 region: "IamSigningRegion",
+    #               },
+    #             },
+    #           },
+    #         ],
+    #       },
+    #     },
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.record_arn #=> String
+    #   resp.status #=> String, one of "DRAFT", "PENDING_APPROVAL", "APPROVED", "REJECTED", "DEPRECATED", "CREATING", "UPDATING", "CREATE_FAILED", "UPDATE_FAILED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/CreateRegistryRecord AWS API Documentation
+    #
+    # @overload create_registry_record(params = {})
+    # @param [Hash] params ({})
+    def create_registry_record(params = {}, options = {})
+      req = build_request(:create_registry_record, params)
       req.send_request(options)
     end
 
@@ -2598,6 +3017,11 @@ module Aws::BedrockAgentCoreControl
 
     # Deletes a gateway target.
     #
+    # You cannot delete a target that is in a pending authorization state
+    # (`CREATE_PENDING_AUTH`, `UPDATE_PENDING_AUTH`, or
+    # `SYNCHRONIZE_PENDING_AUTH`). Wait for the authorization to complete or
+    # fail before deleting the target.
+    #
     # @option params [required, String] :gateway_identifier
     #   The unique identifier of the gateway associated with the target.
     #
@@ -2622,7 +3046,7 @@ module Aws::BedrockAgentCoreControl
     #
     #   resp.gateway_arn #=> String
     #   resp.target_id #=> String
-    #   resp.status #=> String, one of "CREATING", "UPDATING", "UPDATE_UNSUCCESSFUL", "DELETING", "READY", "FAILED", "SYNCHRONIZING", "SYNCHRONIZE_UNSUCCESSFUL"
+    #   resp.status #=> String, one of "CREATING", "UPDATING", "UPDATE_UNSUCCESSFUL", "DELETING", "READY", "FAILED", "SYNCHRONIZING", "SYNCHRONIZE_UNSUCCESSFUL", "CREATE_PENDING_AUTH", "UPDATE_PENDING_AUTH", "SYNCHRONIZE_PENDING_AUTH"
     #   resp.status_reasons #=> Array
     #   resp.status_reasons[0] #=> String
     #
@@ -2771,6 +3195,8 @@ module Aws::BedrockAgentCoreControl
     #   resp.name #=> String
     #   resp.policy_engine_id #=> String
     #   resp.definition.cedar.statement #=> String
+    #   resp.definition.policy_generation.policy_generation_id #=> String
+    #   resp.definition.policy_generation.policy_generation_asset_id #=> String
     #   resp.description #=> String
     #   resp.created_at #=> Time
     #   resp.updated_at #=> Time
@@ -2809,6 +3235,7 @@ module Aws::BedrockAgentCoreControl
     #   * {Types::DeletePolicyEngineResponse#policy_engine_arn #policy_engine_arn} => String
     #   * {Types::DeletePolicyEngineResponse#status #status} => String
     #   * {Types::DeletePolicyEngineResponse#status_reasons #status_reasons} => Array&lt;String&gt;
+    #   * {Types::DeletePolicyEngineResponse#encryption_key_arn #encryption_key_arn} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -2827,6 +3254,7 @@ module Aws::BedrockAgentCoreControl
     #   resp.status #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETING", "CREATE_FAILED", "UPDATE_FAILED", "DELETE_FAILED"
     #   resp.status_reasons #=> Array
     #   resp.status_reasons[0] #=> String
+    #   resp.encryption_key_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/DeletePolicyEngine AWS API Documentation
     #
@@ -2834,6 +3262,66 @@ module Aws::BedrockAgentCoreControl
     # @param [Hash] params ({})
     def delete_policy_engine(params = {}, options = {})
       req = build_request(:delete_policy_engine, params)
+      req.send_request(options)
+    end
+
+    # Deletes a registry. The registry must contain zero records before it
+    # can be deleted. This operation initiates the deletion process
+    # asynchronously.
+    #
+    # @option params [required, String] :registry_id
+    #   The identifier of the registry to delete. You can specify either the
+    #   Amazon Resource Name (ARN) or the ID of the registry.
+    #
+    # @return [Types::DeleteRegistryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteRegistryResponse#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_registry({
+    #     registry_id: "RegistryIdentifier", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.status #=> String, one of "CREATING", "READY", "UPDATING", "CREATE_FAILED", "UPDATE_FAILED", "DELETING", "DELETE_FAILED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/DeleteRegistry AWS API Documentation
+    #
+    # @overload delete_registry(params = {})
+    # @param [Hash] params ({})
+    def delete_registry(params = {}, options = {})
+      req = build_request(:delete_registry, params)
+      req.send_request(options)
+    end
+
+    # Deletes a registry record. The record's status transitions to
+    # `DELETING` and the record is removed asynchronously.
+    #
+    # @option params [required, String] :registry_id
+    #   The identifier of the registry containing the record. You can specify
+    #   either the Amazon Resource Name (ARN) or the ID of the registry.
+    #
+    # @option params [required, String] :record_id
+    #   The identifier of the registry record to delete. You can specify
+    #   either the Amazon Resource Name (ARN) or the ID of the record.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_registry_record({
+    #     registry_id: "RegistryIdentifier", # required
+    #     record_id: "RecordIdentifier", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/DeleteRegistryRecord AWS API Documentation
+    #
+    # @overload delete_registry_record(params = {})
+    # @param [Hash] params ({})
+    def delete_registry_record(params = {}, options = {})
+      req = build_request(:delete_registry_record, params)
       req.send_request(options)
     end
 
@@ -2915,6 +3403,8 @@ module Aws::BedrockAgentCoreControl
     #   * {Types::GetAgentRuntimeResponse#environment_variables #environment_variables} => Hash&lt;String,String&gt;
     #   * {Types::GetAgentRuntimeResponse#authorizer_configuration #authorizer_configuration} => Types::AuthorizerConfiguration
     #   * {Types::GetAgentRuntimeResponse#request_header_configuration #request_header_configuration} => Types::RequestHeaderConfiguration
+    #   * {Types::GetAgentRuntimeResponse#metadata_configuration #metadata_configuration} => Types::RuntimeMetadataConfiguration
+    #   * {Types::GetAgentRuntimeResponse#filesystem_configurations #filesystem_configurations} => Array&lt;Types::FilesystemConfiguration&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -2947,10 +3437,10 @@ module Aws::BedrockAgentCoreControl
     #   resp.agent_runtime_artifact.code_configuration.code.s3.bucket #=> String
     #   resp.agent_runtime_artifact.code_configuration.code.s3.prefix #=> String
     #   resp.agent_runtime_artifact.code_configuration.code.s3.version_id #=> String
-    #   resp.agent_runtime_artifact.code_configuration.runtime #=> String, one of "PYTHON_3_10", "PYTHON_3_11", "PYTHON_3_12", "PYTHON_3_13"
+    #   resp.agent_runtime_artifact.code_configuration.runtime #=> String, one of "PYTHON_3_10", "PYTHON_3_11", "PYTHON_3_12", "PYTHON_3_13", "PYTHON_3_14"
     #   resp.agent_runtime_artifact.code_configuration.entry_point #=> Array
     #   resp.agent_runtime_artifact.code_configuration.entry_point[0] #=> String
-    #   resp.protocol_configuration.server_protocol #=> String, one of "MCP", "HTTP", "A2A"
+    #   resp.protocol_configuration.server_protocol #=> String, one of "MCP", "HTTP", "A2A", "AGUI"
     #   resp.environment_variables #=> Hash
     #   resp.environment_variables["EnvironmentVariableKey"] #=> String
     #   resp.authorizer_configuration.custom_jwt_authorizer.discovery_url #=> String
@@ -2969,6 +3459,9 @@ module Aws::BedrockAgentCoreControl
     #   resp.authorizer_configuration.custom_jwt_authorizer.custom_claims[0].authorizing_claim_match_value.claim_match_operator #=> String, one of "EQUALS", "CONTAINS", "CONTAINS_ANY"
     #   resp.request_header_configuration.request_header_allowlist #=> Array
     #   resp.request_header_configuration.request_header_allowlist[0] #=> String
+    #   resp.metadata_configuration.require_mmdsv2 #=> Boolean
+    #   resp.filesystem_configurations #=> Array
+    #   resp.filesystem_configurations[0].session_storage.mount_path #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/GetAgentRuntime AWS API Documentation
     #
@@ -3083,6 +3576,8 @@ module Aws::BedrockAgentCoreControl
     #   * {Types::GetBrowserResponse#network_configuration #network_configuration} => Types::BrowserNetworkConfiguration
     #   * {Types::GetBrowserResponse#recording #recording} => Types::RecordingConfig
     #   * {Types::GetBrowserResponse#browser_signing #browser_signing} => Types::BrowserSigningConfigOutput
+    #   * {Types::GetBrowserResponse#enterprise_policies #enterprise_policies} => Array&lt;Types::BrowserEnterprisePolicy&gt;
+    #   * {Types::GetBrowserResponse#certificates #certificates} => Array&lt;Types::Certificate&gt;
     #   * {Types::GetBrowserResponse#status #status} => String
     #   * {Types::GetBrowserResponse#failure_reason #failure_reason} => String
     #   * {Types::GetBrowserResponse#created_at #created_at} => Time
@@ -3111,6 +3606,13 @@ module Aws::BedrockAgentCoreControl
     #   resp.recording.s3_location.prefix #=> String
     #   resp.recording.s3_location.version_id #=> String
     #   resp.browser_signing.enabled #=> Boolean
+    #   resp.enterprise_policies #=> Array
+    #   resp.enterprise_policies[0].location.s3.bucket #=> String
+    #   resp.enterprise_policies[0].location.s3.prefix #=> String
+    #   resp.enterprise_policies[0].location.s3.version_id #=> String
+    #   resp.enterprise_policies[0].type #=> String, one of "MANAGED", "RECOMMENDED"
+    #   resp.certificates #=> Array
+    #   resp.certificates[0].location.secrets_manager.secret_arn #=> String
     #   resp.status #=> String, one of "CREATING", "CREATE_FAILED", "READY", "DELETING", "DELETE_FAILED", "DELETED"
     #   resp.failure_reason #=> String
     #   resp.created_at #=> Time
@@ -3185,6 +3687,7 @@ module Aws::BedrockAgentCoreControl
     #   * {Types::GetCodeInterpreterResponse#execution_role_arn #execution_role_arn} => String
     #   * {Types::GetCodeInterpreterResponse#network_configuration #network_configuration} => Types::CodeInterpreterNetworkConfiguration
     #   * {Types::GetCodeInterpreterResponse#status #status} => String
+    #   * {Types::GetCodeInterpreterResponse#certificates #certificates} => Array&lt;Types::Certificate&gt;
     #   * {Types::GetCodeInterpreterResponse#failure_reason #failure_reason} => String
     #   * {Types::GetCodeInterpreterResponse#created_at #created_at} => Time
     #   * {Types::GetCodeInterpreterResponse#last_updated_at #last_updated_at} => Time
@@ -3208,6 +3711,8 @@ module Aws::BedrockAgentCoreControl
     #   resp.network_configuration.vpc_config.subnets #=> Array
     #   resp.network_configuration.vpc_config.subnets[0] #=> String
     #   resp.status #=> String, one of "CREATING", "CREATE_FAILED", "READY", "DELETING", "DELETE_FAILED", "DELETED"
+    #   resp.certificates #=> Array
+    #   resp.certificates[0].location.secrets_manager.secret_arn #=> String
     #   resp.failure_reason #=> String
     #   resp.created_at #=> Time
     #   resp.last_updated_at #=> Time
@@ -3268,6 +3773,8 @@ module Aws::BedrockAgentCoreControl
     #   resp.evaluator_config.llm_as_a_judge.model_config.bedrock_evaluator_model_config.inference_config.top_p #=> Float
     #   resp.evaluator_config.llm_as_a_judge.model_config.bedrock_evaluator_model_config.inference_config.stop_sequences #=> Array
     #   resp.evaluator_config.llm_as_a_judge.model_config.bedrock_evaluator_model_config.inference_config.stop_sequences[0] #=> String
+    #   resp.evaluator_config.code_based.lambda_config.lambda_arn #=> String
+    #   resp.evaluator_config.code_based.lambda_config.lambda_timeout_in_seconds #=> Integer
     #   resp.level #=> String, one of "TOOL_CALL", "TRACE", "SESSION"
     #   resp.status #=> String, one of "ACTIVE", "CREATING", "CREATE_FAILED", "UPDATING", "UPDATE_FAILED", "DELETING"
     #   resp.created_at #=> Time
@@ -3391,6 +3898,9 @@ module Aws::BedrockAgentCoreControl
     #   * {Types::GetGatewayTargetResponse#credential_provider_configurations #credential_provider_configurations} => Array&lt;Types::CredentialProviderConfiguration&gt;
     #   * {Types::GetGatewayTargetResponse#last_synchronized_at #last_synchronized_at} => Time
     #   * {Types::GetGatewayTargetResponse#metadata_configuration #metadata_configuration} => Types::MetadataConfiguration
+    #   * {Types::GetGatewayTargetResponse#private_endpoint #private_endpoint} => Types::PrivateEndpoint
+    #   * {Types::GetGatewayTargetResponse#private_endpoint_managed_resources #private_endpoint_managed_resources} => Array&lt;Types::ManagedResourceDetails&gt;
+    #   * {Types::GetGatewayTargetResponse#authorization_data #authorization_data} => Types::AuthorizationData
     #
     # @example Request syntax with placeholder values
     #
@@ -3405,7 +3915,7 @@ module Aws::BedrockAgentCoreControl
     #   resp.target_id #=> String
     #   resp.created_at #=> Time
     #   resp.updated_at #=> Time
-    #   resp.status #=> String, one of "CREATING", "UPDATING", "UPDATE_UNSUCCESSFUL", "DELETING", "READY", "FAILED", "SYNCHRONIZING", "SYNCHRONIZE_UNSUCCESSFUL"
+    #   resp.status #=> String, one of "CREATING", "UPDATING", "UPDATE_UNSUCCESSFUL", "DELETING", "READY", "FAILED", "SYNCHRONIZING", "SYNCHRONIZE_UNSUCCESSFUL", "CREATE_PENDING_AUTH", "UPDATE_PENDING_AUTH", "SYNCHRONIZE_PENDING_AUTH"
     #   resp.status_reasons #=> Array
     #   resp.status_reasons[0] #=> String
     #   resp.name #=> String
@@ -3437,6 +3947,9 @@ module Aws::BedrockAgentCoreControl
     #   resp.target_configuration.mcp.lambda.tool_schema.inline_payload[0].output_schema.items #=> Types::SchemaDefinition
     #   resp.target_configuration.mcp.lambda.tool_schema.inline_payload[0].output_schema.description #=> String
     #   resp.target_configuration.mcp.mcp_server.endpoint #=> String
+    #   resp.target_configuration.mcp.mcp_server.mcp_tool_schema.s3.uri #=> String
+    #   resp.target_configuration.mcp.mcp_server.mcp_tool_schema.s3.bucket_owner_account_id #=> String
+    #   resp.target_configuration.mcp.mcp_server.mcp_tool_schema.inline_payload #=> String
     #   resp.target_configuration.mcp.api_gateway.rest_api_id #=> String
     #   resp.target_configuration.mcp.api_gateway.stage #=> String
     #   resp.target_configuration.mcp.api_gateway.api_gateway_tool_configuration.tool_overrides #=> Array
@@ -3461,6 +3974,8 @@ module Aws::BedrockAgentCoreControl
     #   resp.credential_provider_configurations[0].credential_provider.api_key_credential_provider.credential_parameter_name #=> String
     #   resp.credential_provider_configurations[0].credential_provider.api_key_credential_provider.credential_prefix #=> String
     #   resp.credential_provider_configurations[0].credential_provider.api_key_credential_provider.credential_location #=> String, one of "HEADER", "QUERY_PARAMETER"
+    #   resp.credential_provider_configurations[0].credential_provider.iam_credential_provider.service #=> String
+    #   resp.credential_provider_configurations[0].credential_provider.iam_credential_provider.region #=> String
     #   resp.last_synchronized_at #=> Time
     #   resp.metadata_configuration.allowed_request_headers #=> Array
     #   resp.metadata_configuration.allowed_request_headers[0] #=> String
@@ -3468,6 +3983,22 @@ module Aws::BedrockAgentCoreControl
     #   resp.metadata_configuration.allowed_query_parameters[0] #=> String
     #   resp.metadata_configuration.allowed_response_headers #=> Array
     #   resp.metadata_configuration.allowed_response_headers[0] #=> String
+    #   resp.private_endpoint.self_managed_lattice_resource.resource_configuration_identifier #=> String
+    #   resp.private_endpoint.managed_lattice_resource.vpc_identifier #=> String
+    #   resp.private_endpoint.managed_lattice_resource.subnet_ids #=> Array
+    #   resp.private_endpoint.managed_lattice_resource.subnet_ids[0] #=> String
+    #   resp.private_endpoint.managed_lattice_resource.endpoint_ip_address_type #=> String, one of "IPV4", "IPV6"
+    #   resp.private_endpoint.managed_lattice_resource.security_group_ids #=> Array
+    #   resp.private_endpoint.managed_lattice_resource.security_group_ids[0] #=> String
+    #   resp.private_endpoint.managed_lattice_resource.tags #=> Hash
+    #   resp.private_endpoint.managed_lattice_resource.tags["TagKey"] #=> String
+    #   resp.private_endpoint.managed_lattice_resource.routing_domain #=> String
+    #   resp.private_endpoint_managed_resources #=> Array
+    #   resp.private_endpoint_managed_resources[0].domain #=> String
+    #   resp.private_endpoint_managed_resources[0].resource_gateway_arn #=> String
+    #   resp.private_endpoint_managed_resources[0].resource_association_arn #=> String
+    #   resp.authorization_data.oauth2.authorization_url #=> String
+    #   resp.authorization_data.oauth2.user_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/GetGatewayTarget AWS API Documentation
     #
@@ -3533,8 +4064,12 @@ module Aws::BedrockAgentCoreControl
     #   resp.memory.strategies[0].configuration.reflection.custom_reflection_configuration.episodic_reflection_override.model_id #=> String
     #   resp.memory.strategies[0].configuration.reflection.custom_reflection_configuration.episodic_reflection_override.namespaces #=> Array
     #   resp.memory.strategies[0].configuration.reflection.custom_reflection_configuration.episodic_reflection_override.namespaces[0] #=> String
+    #   resp.memory.strategies[0].configuration.reflection.custom_reflection_configuration.episodic_reflection_override.namespace_templates #=> Array
+    #   resp.memory.strategies[0].configuration.reflection.custom_reflection_configuration.episodic_reflection_override.namespace_templates[0] #=> String
     #   resp.memory.strategies[0].configuration.reflection.episodic_reflection_configuration.namespaces #=> Array
     #   resp.memory.strategies[0].configuration.reflection.episodic_reflection_configuration.namespaces[0] #=> String
+    #   resp.memory.strategies[0].configuration.reflection.episodic_reflection_configuration.namespace_templates #=> Array
+    #   resp.memory.strategies[0].configuration.reflection.episodic_reflection_configuration.namespace_templates[0] #=> String
     #   resp.memory.strategies[0].configuration.self_managed_configuration.trigger_conditions #=> Array
     #   resp.memory.strategies[0].configuration.self_managed_configuration.trigger_conditions[0].message_based_trigger.message_count #=> Integer
     #   resp.memory.strategies[0].configuration.self_managed_configuration.trigger_conditions[0].token_based_trigger.token_count #=> Integer
@@ -3545,9 +4080,16 @@ module Aws::BedrockAgentCoreControl
     #   resp.memory.strategies[0].type #=> String, one of "SEMANTIC", "SUMMARIZATION", "USER_PREFERENCE", "CUSTOM", "EPISODIC"
     #   resp.memory.strategies[0].namespaces #=> Array
     #   resp.memory.strategies[0].namespaces[0] #=> String
+    #   resp.memory.strategies[0].namespace_templates #=> Array
+    #   resp.memory.strategies[0].namespace_templates[0] #=> String
     #   resp.memory.strategies[0].created_at #=> Time
     #   resp.memory.strategies[0].updated_at #=> Time
     #   resp.memory.strategies[0].status #=> String, one of "CREATING", "ACTIVE", "DELETING", "FAILED"
+    #   resp.memory.stream_delivery_resources.resources #=> Array
+    #   resp.memory.stream_delivery_resources.resources[0].kinesis.data_stream_arn #=> String
+    #   resp.memory.stream_delivery_resources.resources[0].kinesis.content_configurations #=> Array
+    #   resp.memory.stream_delivery_resources.resources[0].kinesis.content_configurations[0].type #=> String, one of "MEMORY_RECORDS"
+    #   resp.memory.stream_delivery_resources.resources[0].kinesis.content_configurations[0].level #=> String, one of "METADATA_ONLY", "FULL_CONTENT"
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -3792,6 +4334,8 @@ module Aws::BedrockAgentCoreControl
     #   resp.name #=> String
     #   resp.policy_engine_id #=> String
     #   resp.definition.cedar.statement #=> String
+    #   resp.definition.policy_generation.policy_generation_id #=> String
+    #   resp.definition.policy_generation.policy_generation_asset_id #=> String
     #   resp.description #=> String
     #   resp.created_at #=> Time
     #   resp.updated_at #=> Time
@@ -3834,6 +4378,7 @@ module Aws::BedrockAgentCoreControl
     #   * {Types::GetPolicyEngineResponse#policy_engine_arn #policy_engine_arn} => String
     #   * {Types::GetPolicyEngineResponse#status #status} => String
     #   * {Types::GetPolicyEngineResponse#status_reasons #status_reasons} => Array&lt;String&gt;
+    #   * {Types::GetPolicyEngineResponse#encryption_key_arn #encryption_key_arn} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -3852,6 +4397,7 @@ module Aws::BedrockAgentCoreControl
     #   resp.status #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETING", "CREATE_FAILED", "UPDATE_FAILED", "DELETE_FAILED"
     #   resp.status_reasons #=> Array
     #   resp.status_reasons[0] #=> String
+    #   resp.encryption_key_arn #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -3932,6 +4478,148 @@ module Aws::BedrockAgentCoreControl
     # @param [Hash] params ({})
     def get_policy_generation(params = {}, options = {})
       req = build_request(:get_policy_generation, params)
+      req.send_request(options)
+    end
+
+    # Retrieves information about a specific registry.
+    #
+    # @option params [required, String] :registry_id
+    #   The identifier of the registry to retrieve. You can specify either the
+    #   Amazon Resource Name (ARN) or the ID of the registry.
+    #
+    # @return [Types::GetRegistryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetRegistryResponse#name #name} => String
+    #   * {Types::GetRegistryResponse#description #description} => String
+    #   * {Types::GetRegistryResponse#registry_id #registry_id} => String
+    #   * {Types::GetRegistryResponse#registry_arn #registry_arn} => String
+    #   * {Types::GetRegistryResponse#authorizer_type #authorizer_type} => String
+    #   * {Types::GetRegistryResponse#authorizer_configuration #authorizer_configuration} => Types::AuthorizerConfiguration
+    #   * {Types::GetRegistryResponse#approval_configuration #approval_configuration} => Types::ApprovalConfiguration
+    #   * {Types::GetRegistryResponse#status #status} => String
+    #   * {Types::GetRegistryResponse#status_reason #status_reason} => String
+    #   * {Types::GetRegistryResponse#created_at #created_at} => Time
+    #   * {Types::GetRegistryResponse#updated_at #updated_at} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_registry({
+    #     registry_id: "RegistryIdentifier", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.name #=> String
+    #   resp.description #=> String
+    #   resp.registry_id #=> String
+    #   resp.registry_arn #=> String
+    #   resp.authorizer_type #=> String, one of "CUSTOM_JWT", "AWS_IAM"
+    #   resp.authorizer_configuration.custom_jwt_authorizer.discovery_url #=> String
+    #   resp.authorizer_configuration.custom_jwt_authorizer.allowed_audience #=> Array
+    #   resp.authorizer_configuration.custom_jwt_authorizer.allowed_audience[0] #=> String
+    #   resp.authorizer_configuration.custom_jwt_authorizer.allowed_clients #=> Array
+    #   resp.authorizer_configuration.custom_jwt_authorizer.allowed_clients[0] #=> String
+    #   resp.authorizer_configuration.custom_jwt_authorizer.allowed_scopes #=> Array
+    #   resp.authorizer_configuration.custom_jwt_authorizer.allowed_scopes[0] #=> String
+    #   resp.authorizer_configuration.custom_jwt_authorizer.custom_claims #=> Array
+    #   resp.authorizer_configuration.custom_jwt_authorizer.custom_claims[0].inbound_token_claim_name #=> String
+    #   resp.authorizer_configuration.custom_jwt_authorizer.custom_claims[0].inbound_token_claim_value_type #=> String, one of "STRING", "STRING_ARRAY"
+    #   resp.authorizer_configuration.custom_jwt_authorizer.custom_claims[0].authorizing_claim_match_value.claim_match_value.match_value_string #=> String
+    #   resp.authorizer_configuration.custom_jwt_authorizer.custom_claims[0].authorizing_claim_match_value.claim_match_value.match_value_string_list #=> Array
+    #   resp.authorizer_configuration.custom_jwt_authorizer.custom_claims[0].authorizing_claim_match_value.claim_match_value.match_value_string_list[0] #=> String
+    #   resp.authorizer_configuration.custom_jwt_authorizer.custom_claims[0].authorizing_claim_match_value.claim_match_operator #=> String, one of "EQUALS", "CONTAINS", "CONTAINS_ANY"
+    #   resp.approval_configuration.auto_approval #=> Boolean
+    #   resp.status #=> String, one of "CREATING", "READY", "UPDATING", "CREATE_FAILED", "UPDATE_FAILED", "DELETING", "DELETE_FAILED"
+    #   resp.status_reason #=> String
+    #   resp.created_at #=> Time
+    #   resp.updated_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/GetRegistry AWS API Documentation
+    #
+    # @overload get_registry(params = {})
+    # @param [Hash] params ({})
+    def get_registry(params = {}, options = {})
+      req = build_request(:get_registry, params)
+      req.send_request(options)
+    end
+
+    # Retrieves information about a specific registry record.
+    #
+    # @option params [required, String] :registry_id
+    #   The identifier of the registry containing the record. You can specify
+    #   either the Amazon Resource Name (ARN) or the ID of the registry.
+    #
+    # @option params [required, String] :record_id
+    #   The identifier of the registry record to retrieve. You can specify
+    #   either the Amazon Resource Name (ARN) or the ID of the record.
+    #
+    # @return [Types::GetRegistryRecordResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetRegistryRecordResponse#registry_arn #registry_arn} => String
+    #   * {Types::GetRegistryRecordResponse#record_arn #record_arn} => String
+    #   * {Types::GetRegistryRecordResponse#record_id #record_id} => String
+    #   * {Types::GetRegistryRecordResponse#name #name} => String
+    #   * {Types::GetRegistryRecordResponse#description #description} => String
+    #   * {Types::GetRegistryRecordResponse#descriptor_type #descriptor_type} => String
+    #   * {Types::GetRegistryRecordResponse#descriptors #descriptors} => Types::Descriptors
+    #   * {Types::GetRegistryRecordResponse#record_version #record_version} => String
+    #   * {Types::GetRegistryRecordResponse#status #status} => String
+    #   * {Types::GetRegistryRecordResponse#created_at #created_at} => Time
+    #   * {Types::GetRegistryRecordResponse#updated_at #updated_at} => Time
+    #   * {Types::GetRegistryRecordResponse#status_reason #status_reason} => String
+    #   * {Types::GetRegistryRecordResponse#synchronization_type #synchronization_type} => String
+    #   * {Types::GetRegistryRecordResponse#synchronization_configuration #synchronization_configuration} => Types::SynchronizationConfiguration
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_registry_record({
+    #     registry_id: "RegistryIdentifier", # required
+    #     record_id: "RecordIdentifier", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.registry_arn #=> String
+    #   resp.record_arn #=> String
+    #   resp.record_id #=> String
+    #   resp.name #=> String
+    #   resp.description #=> String
+    #   resp.descriptor_type #=> String, one of "MCP", "A2A", "CUSTOM", "AGENT_SKILLS"
+    #   resp.descriptors.mcp.server.schema_version #=> String
+    #   resp.descriptors.mcp.server.inline_content #=> String
+    #   resp.descriptors.mcp.tools.protocol_version #=> String
+    #   resp.descriptors.mcp.tools.inline_content #=> String
+    #   resp.descriptors.a2a.agent_card.schema_version #=> String
+    #   resp.descriptors.a2a.agent_card.inline_content #=> String
+    #   resp.descriptors.custom.inline_content #=> String
+    #   resp.descriptors.agent_skills.skill_md.inline_content #=> String
+    #   resp.descriptors.agent_skills.skill_definition.schema_version #=> String
+    #   resp.descriptors.agent_skills.skill_definition.inline_content #=> String
+    #   resp.record_version #=> String
+    #   resp.status #=> String, one of "DRAFT", "PENDING_APPROVAL", "APPROVED", "REJECTED", "DEPRECATED", "CREATING", "UPDATING", "CREATE_FAILED", "UPDATE_FAILED"
+    #   resp.created_at #=> Time
+    #   resp.updated_at #=> Time
+    #   resp.status_reason #=> String
+    #   resp.synchronization_type #=> String, one of "URL"
+    #   resp.synchronization_configuration.from_url.url #=> String
+    #   resp.synchronization_configuration.from_url.credential_provider_configurations #=> Array
+    #   resp.synchronization_configuration.from_url.credential_provider_configurations[0].credential_provider_type #=> String, one of "OAUTH", "IAM"
+    #   resp.synchronization_configuration.from_url.credential_provider_configurations[0].credential_provider.oauth_credential_provider.provider_arn #=> String
+    #   resp.synchronization_configuration.from_url.credential_provider_configurations[0].credential_provider.oauth_credential_provider.grant_type #=> String, one of "CLIENT_CREDENTIALS"
+    #   resp.synchronization_configuration.from_url.credential_provider_configurations[0].credential_provider.oauth_credential_provider.scopes #=> Array
+    #   resp.synchronization_configuration.from_url.credential_provider_configurations[0].credential_provider.oauth_credential_provider.scopes[0] #=> String
+    #   resp.synchronization_configuration.from_url.credential_provider_configurations[0].credential_provider.oauth_credential_provider.custom_parameters #=> Hash
+    #   resp.synchronization_configuration.from_url.credential_provider_configurations[0].credential_provider.oauth_credential_provider.custom_parameters["String"] #=> String
+    #   resp.synchronization_configuration.from_url.credential_provider_configurations[0].credential_provider.iam_credential_provider.role_arn #=> String
+    #   resp.synchronization_configuration.from_url.credential_provider_configurations[0].credential_provider.iam_credential_provider.service #=> String
+    #   resp.synchronization_configuration.from_url.credential_provider_configurations[0].credential_provider.iam_credential_provider.region #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/GetRegistryRecord AWS API Documentation
+    #
+    # @overload get_registry_record(params = {})
+    # @param [Hash] params ({})
+    def get_registry_record(params = {}, options = {})
+      req = build_request(:get_registry_record, params)
       req.send_request(options)
     end
 
@@ -4227,6 +4915,9 @@ module Aws::BedrockAgentCoreControl
     # @option params [String] :next_token
     #   A token to retrieve the next page of results.
     #
+    # @option params [String] :name
+    #   The name of the browser profile to filter results by.
+    #
     # @return [Types::ListBrowserProfilesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListBrowserProfilesResponse#profile_summaries #profile_summaries} => Array&lt;Types::BrowserProfileSummary&gt;
@@ -4239,6 +4930,7 @@ module Aws::BedrockAgentCoreControl
     #   resp = client.list_browser_profiles({
     #     max_results: 1,
     #     next_token: "NextToken",
+    #     name: "BrowserProfileName",
     #   })
     #
     # @example Response structure
@@ -4394,7 +5086,7 @@ module Aws::BedrockAgentCoreControl
     #   resp.evaluators[0].evaluator_id #=> String
     #   resp.evaluators[0].evaluator_name #=> String
     #   resp.evaluators[0].description #=> String
-    #   resp.evaluators[0].evaluator_type #=> String, one of "Builtin", "Custom"
+    #   resp.evaluators[0].evaluator_type #=> String, one of "Builtin", "Custom", "CustomCode"
     #   resp.evaluators[0].level #=> String, one of "TOOL_CALL", "TRACE", "SESSION"
     #   resp.evaluators[0].status #=> String, one of "ACTIVE", "CREATING", "CREATE_FAILED", "UPDATING", "UPDATE_FAILED", "DELETING"
     #   resp.evaluators[0].created_at #=> Time
@@ -4448,7 +5140,7 @@ module Aws::BedrockAgentCoreControl
     #   resp.items #=> Array
     #   resp.items[0].target_id #=> String
     #   resp.items[0].name #=> String
-    #   resp.items[0].status #=> String, one of "CREATING", "UPDATING", "UPDATE_UNSUCCESSFUL", "DELETING", "READY", "FAILED", "SYNCHRONIZING", "SYNCHRONIZE_UNSUCCESSFUL"
+    #   resp.items[0].status #=> String, one of "CREATING", "UPDATING", "UPDATE_UNSUCCESSFUL", "DELETING", "READY", "FAILED", "SYNCHRONIZING", "SYNCHRONIZE_UNSUCCESSFUL", "CREATE_PENDING_AUTH", "UPDATE_PENDING_AUTH", "SYNCHRONIZE_PENDING_AUTH"
     #   resp.items[0].description #=> String
     #   resp.items[0].created_at #=> Time
     #   resp.items[0].updated_at #=> Time
@@ -4698,6 +5390,8 @@ module Aws::BedrockAgentCoreControl
     #   resp.policies[0].name #=> String
     #   resp.policies[0].policy_engine_id #=> String
     #   resp.policies[0].definition.cedar.statement #=> String
+    #   resp.policies[0].definition.policy_generation.policy_generation_id #=> String
+    #   resp.policies[0].definition.policy_generation.policy_generation_asset_id #=> String
     #   resp.policies[0].description #=> String
     #   resp.policies[0].created_at #=> Time
     #   resp.policies[0].updated_at #=> Time
@@ -4761,6 +5455,7 @@ module Aws::BedrockAgentCoreControl
     #   resp.policy_engines[0].status #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETING", "CREATE_FAILED", "UPDATE_FAILED", "DELETE_FAILED"
     #   resp.policy_engines[0].status_reasons #=> Array
     #   resp.policy_engines[0].status_reasons[0] #=> String
+    #   resp.policy_engines[0].encryption_key_arn #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/ListPolicyEngines AWS API Documentation
@@ -4831,6 +5526,8 @@ module Aws::BedrockAgentCoreControl
     #   resp.policy_generation_assets #=> Array
     #   resp.policy_generation_assets[0].policy_generation_asset_id #=> String
     #   resp.policy_generation_assets[0].definition.cedar.statement #=> String
+    #   resp.policy_generation_assets[0].definition.policy_generation.policy_generation_id #=> String
+    #   resp.policy_generation_assets[0].definition.policy_generation.policy_generation_asset_id #=> String
     #   resp.policy_generation_assets[0].raw_text_fragment #=> String
     #   resp.policy_generation_assets[0].findings #=> Array
     #   resp.policy_generation_assets[0].findings[0].type #=> String, one of "VALID", "INVALID", "NOT_TRANSLATABLE", "ALLOW_ALL", "ALLOW_NONE", "DENY_ALL", "DENY_NONE"
@@ -4899,6 +5596,140 @@ module Aws::BedrockAgentCoreControl
     # @param [Hash] params ({})
     def list_policy_generations(params = {}, options = {})
       req = build_request(:list_policy_generations, params)
+      req.send_request(options)
+    end
+
+    # Lists all registries in the account. You can optionally filter results
+    # by status using the `status` parameter.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in the response. If the total
+    #   number of results is greater than this value, use the token returned
+    #   in the response in the `nextToken` field when making another request
+    #   to return the next batch of results.
+    #
+    # @option params [String] :next_token
+    #   If the total number of results is greater than the `maxResults` value
+    #   provided in the request, enter the token returned in the `nextToken`
+    #   field in the response in this field to return the next batch of
+    #   results.
+    #
+    # @option params [String] :status
+    #   Filter registries by their current status. Possible values include
+    #   `CREATING`, `READY`, `UPDATING`, `CREATE_FAILED`, `UPDATE_FAILED`,
+    #   `DELETING`, and `DELETE_FAILED`.
+    #
+    # @return [Types::ListRegistriesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListRegistriesResponse#registries #registries} => Array&lt;Types::RegistrySummary&gt;
+    #   * {Types::ListRegistriesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_registries({
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #     status: "CREATING", # accepts CREATING, READY, UPDATING, CREATE_FAILED, UPDATE_FAILED, DELETING, DELETE_FAILED
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.registries #=> Array
+    #   resp.registries[0].name #=> String
+    #   resp.registries[0].description #=> String
+    #   resp.registries[0].registry_id #=> String
+    #   resp.registries[0].registry_arn #=> String
+    #   resp.registries[0].authorizer_type #=> String, one of "CUSTOM_JWT", "AWS_IAM"
+    #   resp.registries[0].status #=> String, one of "CREATING", "READY", "UPDATING", "CREATE_FAILED", "UPDATE_FAILED", "DELETING", "DELETE_FAILED"
+    #   resp.registries[0].status_reason #=> String
+    #   resp.registries[0].created_at #=> Time
+    #   resp.registries[0].updated_at #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/ListRegistries AWS API Documentation
+    #
+    # @overload list_registries(params = {})
+    # @param [Hash] params ({})
+    def list_registries(params = {}, options = {})
+      req = build_request(:list_registries, params)
+      req.send_request(options)
+    end
+
+    # Lists registry records within a registry. You can optionally filter
+    # results using the `name`, `status`, and `descriptorType` parameters.
+    # When multiple filters are specified, they are combined using AND
+    # logic.
+    #
+    # @option params [required, String] :registry_id
+    #   The identifier of the registry to list records from. You can specify
+    #   either the Amazon Resource Name (ARN) or the ID of the registry.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in the response. If the total
+    #   number of results is greater than this value, use the token returned
+    #   in the response in the `nextToken` field when making another request
+    #   to return the next batch of results.
+    #
+    # @option params [String] :next_token
+    #   If the total number of results is greater than the `maxResults` value
+    #   provided in the request, enter the token returned in the `nextToken`
+    #   field in the response in this field to return the next batch of
+    #   results.
+    #
+    # @option params [String] :name
+    #   Filter registry records by name.
+    #
+    # @option params [String] :status
+    #   Filter registry records by their current status. Possible values
+    #   include `CREATING`, `DRAFT`, `APPROVED`, `PENDING_APPROVAL`,
+    #   `REJECTED`, `DEPRECATED`, `UPDATING`, `CREATE_FAILED`, and
+    #   `UPDATE_FAILED`.
+    #
+    # @option params [String] :descriptor_type
+    #   Filter registry records by their descriptor type. Possible values are
+    #   `MCP`, `A2A`, `CUSTOM`, and `AGENT_SKILLS`.
+    #
+    # @return [Types::ListRegistryRecordsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListRegistryRecordsResponse#registry_records #registry_records} => Array&lt;Types::RegistryRecordSummary&gt;
+    #   * {Types::ListRegistryRecordsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_registry_records({
+    #     registry_id: "RegistryIdentifier", # required
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #     name: "RegistryRecordName",
+    #     status: "DRAFT", # accepts DRAFT, PENDING_APPROVAL, APPROVED, REJECTED, DEPRECATED, CREATING, UPDATING, CREATE_FAILED, UPDATE_FAILED
+    #     descriptor_type: "MCP", # accepts MCP, A2A, CUSTOM, AGENT_SKILLS
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.registry_records #=> Array
+    #   resp.registry_records[0].registry_arn #=> String
+    #   resp.registry_records[0].record_arn #=> String
+    #   resp.registry_records[0].record_id #=> String
+    #   resp.registry_records[0].name #=> String
+    #   resp.registry_records[0].description #=> String
+    #   resp.registry_records[0].descriptor_type #=> String, one of "MCP", "A2A", "CUSTOM", "AGENT_SKILLS"
+    #   resp.registry_records[0].record_version #=> String
+    #   resp.registry_records[0].status #=> String, one of "DRAFT", "PENDING_APPROVAL", "APPROVED", "REJECTED", "DEPRECATED", "CREATING", "UPDATING", "CREATE_FAILED", "UPDATE_FAILED"
+    #   resp.registry_records[0].created_at #=> Time
+    #   resp.registry_records[0].updated_at #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/ListRegistryRecords AWS API Documentation
+    #
+    # @overload list_registry_records(params = {})
+    # @param [Hash] params ({})
+    def list_registry_records(params = {}, options = {})
+      req = build_request(:list_registry_records, params)
       req.send_request(options)
     end
 
@@ -5151,7 +5982,61 @@ module Aws::BedrockAgentCoreControl
       req.send_request(options)
     end
 
-    # The gateway targets.
+    # Submits a registry record for approval. This transitions the record
+    # from `DRAFT` status to `PENDING_APPROVAL` status. If the registry has
+    # auto-approval enabled, the record is automatically approved.
+    #
+    # @option params [required, String] :registry_id
+    #   The identifier of the registry containing the record. You can specify
+    #   either the Amazon Resource Name (ARN) or the ID of the registry.
+    #
+    # @option params [required, String] :record_id
+    #   The identifier of the registry record to submit for approval. You can
+    #   specify either the Amazon Resource Name (ARN) or the ID of the record.
+    #
+    # @return [Types::SubmitRegistryRecordForApprovalResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::SubmitRegistryRecordForApprovalResponse#registry_arn #registry_arn} => String
+    #   * {Types::SubmitRegistryRecordForApprovalResponse#record_arn #record_arn} => String
+    #   * {Types::SubmitRegistryRecordForApprovalResponse#record_id #record_id} => String
+    #   * {Types::SubmitRegistryRecordForApprovalResponse#status #status} => String
+    #   * {Types::SubmitRegistryRecordForApprovalResponse#updated_at #updated_at} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.submit_registry_record_for_approval({
+    #     registry_id: "RegistryIdentifier", # required
+    #     record_id: "RecordIdentifier", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.registry_arn #=> String
+    #   resp.record_arn #=> String
+    #   resp.record_id #=> String
+    #   resp.status #=> String, one of "DRAFT", "PENDING_APPROVAL", "APPROVED", "REJECTED", "DEPRECATED", "CREATING", "UPDATING", "CREATE_FAILED", "UPDATE_FAILED"
+    #   resp.updated_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/SubmitRegistryRecordForApproval AWS API Documentation
+    #
+    # @overload submit_registry_record_for_approval(params = {})
+    # @param [Hash] params ({})
+    def submit_registry_record_for_approval(params = {}, options = {})
+      req = build_request(:submit_registry_record_for_approval, params)
+      req.send_request(options)
+    end
+
+    # Synchronizes the gateway targets by fetching the latest tool
+    # definitions from the target endpoints.
+    #
+    # You cannot synchronize a target that is in a pending authorization
+    # state (`CREATE_PENDING_AUTH`, `UPDATE_PENDING_AUTH`, or
+    # `SYNCHRONIZE_PENDING_AUTH`). Wait for the authorization to complete or
+    # fail before synchronizing.
+    #
+    # You cannot synchronize a target that has a static tool schema
+    # (`mcpToolSchema`) configured. Remove the static schema through an
+    # `UpdateGatewayTarget` call to enable dynamic tool synchronization.
     #
     # @option params [required, String] :gateway_identifier
     #   The gateway Identifier.
@@ -5177,7 +6062,7 @@ module Aws::BedrockAgentCoreControl
     #   resp.targets[0].target_id #=> String
     #   resp.targets[0].created_at #=> Time
     #   resp.targets[0].updated_at #=> Time
-    #   resp.targets[0].status #=> String, one of "CREATING", "UPDATING", "UPDATE_UNSUCCESSFUL", "DELETING", "READY", "FAILED", "SYNCHRONIZING", "SYNCHRONIZE_UNSUCCESSFUL"
+    #   resp.targets[0].status #=> String, one of "CREATING", "UPDATING", "UPDATE_UNSUCCESSFUL", "DELETING", "READY", "FAILED", "SYNCHRONIZING", "SYNCHRONIZE_UNSUCCESSFUL", "CREATE_PENDING_AUTH", "UPDATE_PENDING_AUTH", "SYNCHRONIZE_PENDING_AUTH"
     #   resp.targets[0].status_reasons #=> Array
     #   resp.targets[0].status_reasons[0] #=> String
     #   resp.targets[0].name #=> String
@@ -5209,6 +6094,9 @@ module Aws::BedrockAgentCoreControl
     #   resp.targets[0].target_configuration.mcp.lambda.tool_schema.inline_payload[0].output_schema.items #=> Types::SchemaDefinition
     #   resp.targets[0].target_configuration.mcp.lambda.tool_schema.inline_payload[0].output_schema.description #=> String
     #   resp.targets[0].target_configuration.mcp.mcp_server.endpoint #=> String
+    #   resp.targets[0].target_configuration.mcp.mcp_server.mcp_tool_schema.s3.uri #=> String
+    #   resp.targets[0].target_configuration.mcp.mcp_server.mcp_tool_schema.s3.bucket_owner_account_id #=> String
+    #   resp.targets[0].target_configuration.mcp.mcp_server.mcp_tool_schema.inline_payload #=> String
     #   resp.targets[0].target_configuration.mcp.api_gateway.rest_api_id #=> String
     #   resp.targets[0].target_configuration.mcp.api_gateway.stage #=> String
     #   resp.targets[0].target_configuration.mcp.api_gateway.api_gateway_tool_configuration.tool_overrides #=> Array
@@ -5233,6 +6121,8 @@ module Aws::BedrockAgentCoreControl
     #   resp.targets[0].credential_provider_configurations[0].credential_provider.api_key_credential_provider.credential_parameter_name #=> String
     #   resp.targets[0].credential_provider_configurations[0].credential_provider.api_key_credential_provider.credential_prefix #=> String
     #   resp.targets[0].credential_provider_configurations[0].credential_provider.api_key_credential_provider.credential_location #=> String, one of "HEADER", "QUERY_PARAMETER"
+    #   resp.targets[0].credential_provider_configurations[0].credential_provider.iam_credential_provider.service #=> String
+    #   resp.targets[0].credential_provider_configurations[0].credential_provider.iam_credential_provider.region #=> String
     #   resp.targets[0].last_synchronized_at #=> Time
     #   resp.targets[0].metadata_configuration.allowed_request_headers #=> Array
     #   resp.targets[0].metadata_configuration.allowed_request_headers[0] #=> String
@@ -5240,6 +6130,22 @@ module Aws::BedrockAgentCoreControl
     #   resp.targets[0].metadata_configuration.allowed_query_parameters[0] #=> String
     #   resp.targets[0].metadata_configuration.allowed_response_headers #=> Array
     #   resp.targets[0].metadata_configuration.allowed_response_headers[0] #=> String
+    #   resp.targets[0].private_endpoint.self_managed_lattice_resource.resource_configuration_identifier #=> String
+    #   resp.targets[0].private_endpoint.managed_lattice_resource.vpc_identifier #=> String
+    #   resp.targets[0].private_endpoint.managed_lattice_resource.subnet_ids #=> Array
+    #   resp.targets[0].private_endpoint.managed_lattice_resource.subnet_ids[0] #=> String
+    #   resp.targets[0].private_endpoint.managed_lattice_resource.endpoint_ip_address_type #=> String, one of "IPV4", "IPV6"
+    #   resp.targets[0].private_endpoint.managed_lattice_resource.security_group_ids #=> Array
+    #   resp.targets[0].private_endpoint.managed_lattice_resource.security_group_ids[0] #=> String
+    #   resp.targets[0].private_endpoint.managed_lattice_resource.tags #=> Hash
+    #   resp.targets[0].private_endpoint.managed_lattice_resource.tags["TagKey"] #=> String
+    #   resp.targets[0].private_endpoint.managed_lattice_resource.routing_domain #=> String
+    #   resp.targets[0].private_endpoint_managed_resources #=> Array
+    #   resp.targets[0].private_endpoint_managed_resources[0].domain #=> String
+    #   resp.targets[0].private_endpoint_managed_resources[0].resource_gateway_arn #=> String
+    #   resp.targets[0].private_endpoint_managed_resources[0].resource_association_arn #=> String
+    #   resp.targets[0].authorization_data.oauth2.authorization_url #=> String
+    #   resp.targets[0].authorization_data.oauth2.user_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/SynchronizeGatewayTargets AWS API Documentation
     #
@@ -5349,9 +6255,17 @@ module Aws::BedrockAgentCoreControl
     # @option params [Types::LifecycleConfiguration] :lifecycle_configuration
     #   The updated life cycle configuration for the AgentCore Runtime.
     #
+    # @option params [Types::RuntimeMetadataConfiguration] :metadata_configuration
+    #   The updated configuration for microVM Metadata Service (MMDS) settings
+    #   for the AgentCore Runtime.
+    #
     # @option params [Hash<String,String>] :environment_variables
     #   Updated environment variables to set in the AgentCore Runtime
     #   environment.
+    #
+    # @option params [Array<Types::FilesystemConfiguration>] :filesystem_configurations
+    #   The updated filesystem configurations to mount into the AgentCore
+    #   Runtime.
     #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier to ensure idempotency of the
@@ -5386,7 +6300,7 @@ module Aws::BedrockAgentCoreControl
     #             version_id: "S3LocationVersionIdString",
     #           },
     #         },
-    #         runtime: "PYTHON_3_10", # required, accepts PYTHON_3_10, PYTHON_3_11, PYTHON_3_12, PYTHON_3_13
+    #         runtime: "PYTHON_3_10", # required, accepts PYTHON_3_10, PYTHON_3_11, PYTHON_3_12, PYTHON_3_13, PYTHON_3_14
     #         entry_point: ["entryPoint"], # required
     #       },
     #     },
@@ -5424,15 +6338,25 @@ module Aws::BedrockAgentCoreControl
     #       request_header_allowlist: ["HeaderName"],
     #     },
     #     protocol_configuration: {
-    #       server_protocol: "MCP", # required, accepts MCP, HTTP, A2A
+    #       server_protocol: "MCP", # required, accepts MCP, HTTP, A2A, AGUI
     #     },
     #     lifecycle_configuration: {
     #       idle_runtime_session_timeout: 1,
     #       max_lifetime: 1,
     #     },
+    #     metadata_configuration: {
+    #       require_mmdsv2: false, # required
+    #     },
     #     environment_variables: {
     #       "EnvironmentVariableKey" => "EnvironmentVariableValue",
     #     },
+    #     filesystem_configurations: [
+    #       {
+    #         session_storage: {
+    #           mount_path: "MountPath", # required
+    #         },
+    #       },
+    #     ],
     #     client_token: "ClientToken",
     #   })
     #
@@ -5582,8 +6506,10 @@ module Aws::BedrockAgentCoreControl
     #   The updated description of the evaluator.
     #
     # @option params [Types::EvaluatorConfig] :evaluator_config
-    #   The updated configuration for the evaluator, including LLM-as-a-Judge
-    #   settings with instructions, rating scale, and model configuration.
+    #   The updated configuration for the evaluator. Specify either
+    #   LLM-as-a-Judge settings with instructions, rating scale, and model
+    #   configuration, or code-based settings with a customer-managed Lambda
+    #   function.
     #
     # @option params [String] :level
     #   The updated evaluation level (`TOOL_CALL`, `TRACE`, or `SESSION`) that
@@ -5632,6 +6558,12 @@ module Aws::BedrockAgentCoreControl
     #             additional_model_request_fields: {
     #             },
     #           },
+    #         },
+    #       },
+    #       code_based: {
+    #         lambda_config: {
+    #           lambda_arn: "LambdaArn", # required
+    #           lambda_timeout_in_seconds: 1,
     #         },
     #       },
     #     },
@@ -5840,6 +6772,11 @@ module Aws::BedrockAgentCoreControl
 
     # Updates an existing gateway target.
     #
+    # You cannot update a target that is in a pending authorization state
+    # (`CREATE_PENDING_AUTH`, `UPDATE_PENDING_AUTH`, or
+    # `SYNCHRONIZE_PENDING_AUTH`). Wait for the authorization to complete or
+    # fail before updating the target.
+    #
     # @option params [required, String] :gateway_identifier
     #   The unique identifier of the gateway associated with the target.
     #
@@ -5863,6 +6800,10 @@ module Aws::BedrockAgentCoreControl
     #   Configuration for HTTP header and query parameter propagation to the
     #   gateway target.
     #
+    # @option params [Types::PrivateEndpoint] :private_endpoint
+    #   The private endpoint configuration for the gateway target. Use this to
+    #   connect the gateway to private resources in your VPC.
+    #
     # @return [Types::UpdateGatewayTargetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateGatewayTargetResponse#gateway_arn #gateway_arn} => String
@@ -5877,6 +6818,9 @@ module Aws::BedrockAgentCoreControl
     #   * {Types::UpdateGatewayTargetResponse#credential_provider_configurations #credential_provider_configurations} => Array&lt;Types::CredentialProviderConfiguration&gt;
     #   * {Types::UpdateGatewayTargetResponse#last_synchronized_at #last_synchronized_at} => Time
     #   * {Types::UpdateGatewayTargetResponse#metadata_configuration #metadata_configuration} => Types::MetadataConfiguration
+    #   * {Types::UpdateGatewayTargetResponse#private_endpoint #private_endpoint} => Types::PrivateEndpoint
+    #   * {Types::UpdateGatewayTargetResponse#private_endpoint_managed_resources #private_endpoint_managed_resources} => Array&lt;Types::ManagedResourceDetails&gt;
+    #   * {Types::UpdateGatewayTargetResponse#authorization_data #authorization_data} => Types::AuthorizationData
     #
     # @example Request syntax with placeholder values
     #
@@ -5944,6 +6888,13 @@ module Aws::BedrockAgentCoreControl
     #         },
     #         mcp_server: {
     #           endpoint: "McpServerTargetConfigurationEndpointString", # required
+    #           mcp_tool_schema: {
+    #             s3: {
+    #               uri: "S3BucketUri",
+    #               bucket_owner_account_id: "AwsAccountId",
+    #             },
+    #             inline_payload: "InlinePayload",
+    #           },
     #         },
     #         api_gateway: {
     #           rest_api_id: "String", # required
@@ -5986,6 +6937,10 @@ module Aws::BedrockAgentCoreControl
     #             credential_prefix: "ApiKeyCredentialPrefix",
     #             credential_location: "HEADER", # accepts HEADER, QUERY_PARAMETER
     #           },
+    #           iam_credential_provider: {
+    #             service: "IamCredentialProviderServiceString", # required
+    #             region: "IamCredentialProviderRegionString",
+    #           },
     #         },
     #       },
     #     ],
@@ -5993,6 +6948,21 @@ module Aws::BedrockAgentCoreControl
     #       allowed_request_headers: ["HttpHeaderName"],
     #       allowed_query_parameters: ["HttpQueryParameterName"],
     #       allowed_response_headers: ["HttpHeaderName"],
+    #     },
+    #     private_endpoint: {
+    #       self_managed_lattice_resource: {
+    #         resource_configuration_identifier: "ResourceConfigurationIdentifier",
+    #       },
+    #       managed_lattice_resource: {
+    #         vpc_identifier: "VpcIdentifier", # required
+    #         subnet_ids: ["SubnetId"], # required
+    #         endpoint_ip_address_type: "IPV4", # required, accepts IPV4, IPV6
+    #         security_group_ids: ["SecurityGroupIdentifier"],
+    #         tags: {
+    #           "TagKey" => "TagValue",
+    #         },
+    #         routing_domain: "RoutingDomain",
+    #       },
     #     },
     #   })
     #
@@ -6002,7 +6972,7 @@ module Aws::BedrockAgentCoreControl
     #   resp.target_id #=> String
     #   resp.created_at #=> Time
     #   resp.updated_at #=> Time
-    #   resp.status #=> String, one of "CREATING", "UPDATING", "UPDATE_UNSUCCESSFUL", "DELETING", "READY", "FAILED", "SYNCHRONIZING", "SYNCHRONIZE_UNSUCCESSFUL"
+    #   resp.status #=> String, one of "CREATING", "UPDATING", "UPDATE_UNSUCCESSFUL", "DELETING", "READY", "FAILED", "SYNCHRONIZING", "SYNCHRONIZE_UNSUCCESSFUL", "CREATE_PENDING_AUTH", "UPDATE_PENDING_AUTH", "SYNCHRONIZE_PENDING_AUTH"
     #   resp.status_reasons #=> Array
     #   resp.status_reasons[0] #=> String
     #   resp.name #=> String
@@ -6034,6 +7004,9 @@ module Aws::BedrockAgentCoreControl
     #   resp.target_configuration.mcp.lambda.tool_schema.inline_payload[0].output_schema.items #=> Types::SchemaDefinition
     #   resp.target_configuration.mcp.lambda.tool_schema.inline_payload[0].output_schema.description #=> String
     #   resp.target_configuration.mcp.mcp_server.endpoint #=> String
+    #   resp.target_configuration.mcp.mcp_server.mcp_tool_schema.s3.uri #=> String
+    #   resp.target_configuration.mcp.mcp_server.mcp_tool_schema.s3.bucket_owner_account_id #=> String
+    #   resp.target_configuration.mcp.mcp_server.mcp_tool_schema.inline_payload #=> String
     #   resp.target_configuration.mcp.api_gateway.rest_api_id #=> String
     #   resp.target_configuration.mcp.api_gateway.stage #=> String
     #   resp.target_configuration.mcp.api_gateway.api_gateway_tool_configuration.tool_overrides #=> Array
@@ -6058,6 +7031,8 @@ module Aws::BedrockAgentCoreControl
     #   resp.credential_provider_configurations[0].credential_provider.api_key_credential_provider.credential_parameter_name #=> String
     #   resp.credential_provider_configurations[0].credential_provider.api_key_credential_provider.credential_prefix #=> String
     #   resp.credential_provider_configurations[0].credential_provider.api_key_credential_provider.credential_location #=> String, one of "HEADER", "QUERY_PARAMETER"
+    #   resp.credential_provider_configurations[0].credential_provider.iam_credential_provider.service #=> String
+    #   resp.credential_provider_configurations[0].credential_provider.iam_credential_provider.region #=> String
     #   resp.last_synchronized_at #=> Time
     #   resp.metadata_configuration.allowed_request_headers #=> Array
     #   resp.metadata_configuration.allowed_request_headers[0] #=> String
@@ -6065,6 +7040,22 @@ module Aws::BedrockAgentCoreControl
     #   resp.metadata_configuration.allowed_query_parameters[0] #=> String
     #   resp.metadata_configuration.allowed_response_headers #=> Array
     #   resp.metadata_configuration.allowed_response_headers[0] #=> String
+    #   resp.private_endpoint.self_managed_lattice_resource.resource_configuration_identifier #=> String
+    #   resp.private_endpoint.managed_lattice_resource.vpc_identifier #=> String
+    #   resp.private_endpoint.managed_lattice_resource.subnet_ids #=> Array
+    #   resp.private_endpoint.managed_lattice_resource.subnet_ids[0] #=> String
+    #   resp.private_endpoint.managed_lattice_resource.endpoint_ip_address_type #=> String, one of "IPV4", "IPV6"
+    #   resp.private_endpoint.managed_lattice_resource.security_group_ids #=> Array
+    #   resp.private_endpoint.managed_lattice_resource.security_group_ids[0] #=> String
+    #   resp.private_endpoint.managed_lattice_resource.tags #=> Hash
+    #   resp.private_endpoint.managed_lattice_resource.tags["TagKey"] #=> String
+    #   resp.private_endpoint.managed_lattice_resource.routing_domain #=> String
+    #   resp.private_endpoint_managed_resources #=> Array
+    #   resp.private_endpoint_managed_resources[0].domain #=> String
+    #   resp.private_endpoint_managed_resources[0].resource_gateway_arn #=> String
+    #   resp.private_endpoint_managed_resources[0].resource_association_arn #=> String
+    #   resp.authorization_data.oauth2.authorization_url #=> String
+    #   resp.authorization_data.oauth2.user_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/UpdateGatewayTarget AWS API Documentation
     #
@@ -6102,6 +7093,9 @@ module Aws::BedrockAgentCoreControl
     # @option params [Types::ModifyMemoryStrategies] :memory_strategies
     #   The memory strategies to add, modify, or delete.
     #
+    # @option params [Types::StreamDeliveryResources] :stream_delivery_resources
+    #   Configuration for streaming memory record data to external resources.
+    #
     # @return [Types::UpdateMemoryOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateMemoryOutput#memory #memory} => Types::Memory
@@ -6121,21 +7115,25 @@ module Aws::BedrockAgentCoreControl
     #             name: "Name", # required
     #             description: "Description",
     #             namespaces: ["Namespace"],
+    #             namespace_templates: ["Namespace"],
     #           },
     #           summary_memory_strategy: {
     #             name: "Name", # required
     #             description: "Description",
     #             namespaces: ["Namespace"],
+    #             namespace_templates: ["Namespace"],
     #           },
     #           user_preference_memory_strategy: {
     #             name: "Name", # required
     #             description: "Description",
     #             namespaces: ["Namespace"],
+    #             namespace_templates: ["Namespace"],
     #           },
     #           custom_memory_strategy: {
     #             name: "Name", # required
     #             description: "Description",
     #             namespaces: ["Namespace"],
+    #             namespace_templates: ["Namespace"],
     #             configuration: {
     #               semantic_override: {
     #                 extraction: {
@@ -6176,6 +7174,7 @@ module Aws::BedrockAgentCoreControl
     #                   append_to_prompt: "Prompt", # required
     #                   model_id: "String", # required
     #                   namespaces: ["Namespace"],
+    #                   namespace_templates: ["Namespace"],
     #                 },
     #               },
     #               self_managed_configuration: {
@@ -6204,8 +7203,10 @@ module Aws::BedrockAgentCoreControl
     #             name: "Name", # required
     #             description: "Description",
     #             namespaces: ["Namespace"],
+    #             namespace_templates: ["Namespace"],
     #             reflection_configuration: {
-    #               namespaces: ["Namespace"], # required
+    #               namespaces: ["Namespace"],
+    #               namespace_templates: ["Namespace"],
     #             },
     #           },
     #         },
@@ -6215,6 +7216,7 @@ module Aws::BedrockAgentCoreControl
     #           memory_strategy_id: "String", # required
     #           description: "Description",
     #           namespaces: ["Namespace"],
+    #           namespace_templates: ["Namespace"],
     #           configuration: {
     #             extraction: {
     #               custom_extraction_configuration: {
@@ -6254,13 +7256,15 @@ module Aws::BedrockAgentCoreControl
     #             },
     #             reflection: {
     #               episodic_reflection_configuration: {
-    #                 namespaces: ["Namespace"], # required
+    #                 namespaces: ["Namespace"],
+    #                 namespace_templates: ["Namespace"],
     #               },
     #               custom_reflection_configuration: {
     #                 episodic_reflection_override: {
     #                   append_to_prompt: "Prompt", # required
     #                   model_id: "String", # required
     #                   namespaces: ["Namespace"],
+    #                   namespace_templates: ["Namespace"],
     #                 },
     #               },
     #             },
@@ -6290,6 +7294,21 @@ module Aws::BedrockAgentCoreControl
     #       delete_memory_strategies: [
     #         {
     #           memory_strategy_id: "String", # required
+    #         },
+    #       ],
+    #     },
+    #     stream_delivery_resources: {
+    #       resources: [ # required
+    #         {
+    #           kinesis: {
+    #             data_stream_arn: "Arn", # required
+    #             content_configurations: [ # required
+    #               {
+    #                 type: "MEMORY_RECORDS", # required, accepts MEMORY_RECORDS
+    #                 level: "METADATA_ONLY", # accepts METADATA_ONLY, FULL_CONTENT
+    #               },
+    #             ],
+    #           },
     #         },
     #       ],
     #     },
@@ -6331,8 +7350,12 @@ module Aws::BedrockAgentCoreControl
     #   resp.memory.strategies[0].configuration.reflection.custom_reflection_configuration.episodic_reflection_override.model_id #=> String
     #   resp.memory.strategies[0].configuration.reflection.custom_reflection_configuration.episodic_reflection_override.namespaces #=> Array
     #   resp.memory.strategies[0].configuration.reflection.custom_reflection_configuration.episodic_reflection_override.namespaces[0] #=> String
+    #   resp.memory.strategies[0].configuration.reflection.custom_reflection_configuration.episodic_reflection_override.namespace_templates #=> Array
+    #   resp.memory.strategies[0].configuration.reflection.custom_reflection_configuration.episodic_reflection_override.namespace_templates[0] #=> String
     #   resp.memory.strategies[0].configuration.reflection.episodic_reflection_configuration.namespaces #=> Array
     #   resp.memory.strategies[0].configuration.reflection.episodic_reflection_configuration.namespaces[0] #=> String
+    #   resp.memory.strategies[0].configuration.reflection.episodic_reflection_configuration.namespace_templates #=> Array
+    #   resp.memory.strategies[0].configuration.reflection.episodic_reflection_configuration.namespace_templates[0] #=> String
     #   resp.memory.strategies[0].configuration.self_managed_configuration.trigger_conditions #=> Array
     #   resp.memory.strategies[0].configuration.self_managed_configuration.trigger_conditions[0].message_based_trigger.message_count #=> Integer
     #   resp.memory.strategies[0].configuration.self_managed_configuration.trigger_conditions[0].token_based_trigger.token_count #=> Integer
@@ -6343,9 +7366,16 @@ module Aws::BedrockAgentCoreControl
     #   resp.memory.strategies[0].type #=> String, one of "SEMANTIC", "SUMMARIZATION", "USER_PREFERENCE", "CUSTOM", "EPISODIC"
     #   resp.memory.strategies[0].namespaces #=> Array
     #   resp.memory.strategies[0].namespaces[0] #=> String
+    #   resp.memory.strategies[0].namespace_templates #=> Array
+    #   resp.memory.strategies[0].namespace_templates[0] #=> String
     #   resp.memory.strategies[0].created_at #=> Time
     #   resp.memory.strategies[0].updated_at #=> Time
     #   resp.memory.strategies[0].status #=> String, one of "CREATING", "ACTIVE", "DELETING", "FAILED"
+    #   resp.memory.stream_delivery_resources.resources #=> Array
+    #   resp.memory.stream_delivery_resources.resources[0].kinesis.data_stream_arn #=> String
+    #   resp.memory.stream_delivery_resources.resources[0].kinesis.content_configurations #=> Array
+    #   resp.memory.stream_delivery_resources.resources[0].kinesis.content_configurations[0].type #=> String, one of "MEMORY_RECORDS"
+    #   resp.memory.stream_delivery_resources.resources[0].kinesis.content_configurations[0].level #=> String, one of "METADATA_ONLY", "FULL_CONTENT"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/UpdateMemory AWS API Documentation
     #
@@ -6664,12 +7694,12 @@ module Aws::BedrockAgentCoreControl
     #   The unique identifier of the policy to be updated. This must be a
     #   valid policy ID that exists within the specified policy engine.
     #
-    # @option params [String] :description
+    # @option params [Types::UpdatedDescription] :description
     #   The new human-readable description for the policy. This optional field
     #   allows updating the policy's documentation while keeping the same
     #   policy logic.
     #
-    # @option params [required, Types::PolicyDefinition] :definition
+    # @option params [Types::PolicyDefinition] :definition
     #   The new Cedar policy statement that defines the access control rules.
     #   This replaces the existing policy definition with new logic while
     #   maintaining the policy's identity.
@@ -6702,10 +7732,16 @@ module Aws::BedrockAgentCoreControl
     #   resp = client.update_policy({
     #     policy_engine_id: "ResourceId", # required
     #     policy_id: "ResourceId", # required
-    #     description: "Description",
-    #     definition: { # required
+    #     description: {
+    #       optional_value: "Description",
+    #     },
+    #     definition: {
     #       cedar: {
     #         statement: "Statement", # required
+    #       },
+    #       policy_generation: {
+    #         policy_generation_id: "ResourceId", # required
+    #         policy_generation_asset_id: "ResourceId", # required
     #       },
     #     },
     #     validation_mode: "FAIL_ON_ANY_FINDINGS", # accepts FAIL_ON_ANY_FINDINGS, IGNORE_ALL_FINDINGS
@@ -6717,6 +7753,8 @@ module Aws::BedrockAgentCoreControl
     #   resp.name #=> String
     #   resp.policy_engine_id #=> String
     #   resp.definition.cedar.statement #=> String
+    #   resp.definition.policy_generation.policy_generation_id #=> String
+    #   resp.definition.policy_generation.policy_generation_asset_id #=> String
     #   resp.description #=> String
     #   resp.created_at #=> Time
     #   resp.updated_at #=> Time
@@ -6743,7 +7781,7 @@ module Aws::BedrockAgentCoreControl
     # @option params [required, String] :policy_engine_id
     #   The unique identifier of the policy engine to be updated.
     #
-    # @option params [String] :description
+    # @option params [Types::UpdatedDescription] :description
     #   The new description for the policy engine.
     #
     # @return [Types::UpdatePolicyEngineResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -6756,12 +7794,15 @@ module Aws::BedrockAgentCoreControl
     #   * {Types::UpdatePolicyEngineResponse#policy_engine_arn #policy_engine_arn} => String
     #   * {Types::UpdatePolicyEngineResponse#status #status} => String
     #   * {Types::UpdatePolicyEngineResponse#status_reasons #status_reasons} => Array&lt;String&gt;
+    #   * {Types::UpdatePolicyEngineResponse#encryption_key_arn #encryption_key_arn} => String
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_policy_engine({
     #     policy_engine_id: "ResourceId", # required
-    #     description: "Description",
+    #     description: {
+    #       optional_value: "Description",
+    #     },
     #   })
     #
     # @example Response structure
@@ -6775,6 +7816,7 @@ module Aws::BedrockAgentCoreControl
     #   resp.status #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETING", "CREATE_FAILED", "UPDATE_FAILED", "DELETE_FAILED"
     #   resp.status_reasons #=> Array
     #   resp.status_reasons[0] #=> String
+    #   resp.encryption_key_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/UpdatePolicyEngine AWS API Documentation
     #
@@ -6782,6 +7824,376 @@ module Aws::BedrockAgentCoreControl
     # @param [Hash] params ({})
     def update_policy_engine(params = {}, options = {})
       req = build_request(:update_policy_engine, params)
+      req.send_request(options)
+    end
+
+    # Updates an existing registry. This operation uses PATCH semantics, so
+    # you only need to specify the fields you want to change.
+    #
+    # @option params [required, String] :registry_id
+    #   The identifier of the registry to update. You can specify either the
+    #   Amazon Resource Name (ARN) or the ID of the registry.
+    #
+    # @option params [String] :name
+    #   The updated name of the registry.
+    #
+    # @option params [Types::UpdatedDescription] :description
+    #   The updated description of the registry. To clear the description,
+    #   include the `UpdatedDescription` wrapper with `optionalValue` not
+    #   specified.
+    #
+    # @option params [Types::UpdatedAuthorizerConfiguration] :authorizer_configuration
+    #   The updated authorizer configuration for the registry. Changing the
+    #   authorizer configuration can break existing consumers of the registry
+    #   who are using the authorization type prior to the update.
+    #
+    # @option params [Types::UpdatedApprovalConfiguration] :approval_configuration
+    #   The updated approval configuration for registry records. The updated
+    #   configuration only affects new records that move to `PENDING_APPROVAL`
+    #   status after the change. Existing records already in
+    #   `PENDING_APPROVAL` status are not affected.
+    #
+    # @return [Types::UpdateRegistryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateRegistryResponse#name #name} => String
+    #   * {Types::UpdateRegistryResponse#description #description} => String
+    #   * {Types::UpdateRegistryResponse#registry_id #registry_id} => String
+    #   * {Types::UpdateRegistryResponse#registry_arn #registry_arn} => String
+    #   * {Types::UpdateRegistryResponse#authorizer_type #authorizer_type} => String
+    #   * {Types::UpdateRegistryResponse#authorizer_configuration #authorizer_configuration} => Types::AuthorizerConfiguration
+    #   * {Types::UpdateRegistryResponse#approval_configuration #approval_configuration} => Types::ApprovalConfiguration
+    #   * {Types::UpdateRegistryResponse#status #status} => String
+    #   * {Types::UpdateRegistryResponse#status_reason #status_reason} => String
+    #   * {Types::UpdateRegistryResponse#created_at #created_at} => Time
+    #   * {Types::UpdateRegistryResponse#updated_at #updated_at} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_registry({
+    #     registry_id: "RegistryIdentifier", # required
+    #     name: "RegistryName",
+    #     description: {
+    #       optional_value: "Description",
+    #     },
+    #     authorizer_configuration: {
+    #       optional_value: {
+    #         custom_jwt_authorizer: {
+    #           discovery_url: "DiscoveryUrl", # required
+    #           allowed_audience: ["AllowedAudience"],
+    #           allowed_clients: ["AllowedClient"],
+    #           allowed_scopes: ["AllowedScopeType"],
+    #           custom_claims: [
+    #             {
+    #               inbound_token_claim_name: "InboundTokenClaimNameType", # required
+    #               inbound_token_claim_value_type: "STRING", # required, accepts STRING, STRING_ARRAY
+    #               authorizing_claim_match_value: { # required
+    #                 claim_match_value: { # required
+    #                   match_value_string: "MatchValueString",
+    #                   match_value_string_list: ["MatchValueString"],
+    #                 },
+    #                 claim_match_operator: "EQUALS", # required, accepts EQUALS, CONTAINS, CONTAINS_ANY
+    #               },
+    #             },
+    #           ],
+    #         },
+    #       },
+    #     },
+    #     approval_configuration: {
+    #       optional_value: {
+    #         auto_approval: false,
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.name #=> String
+    #   resp.description #=> String
+    #   resp.registry_id #=> String
+    #   resp.registry_arn #=> String
+    #   resp.authorizer_type #=> String, one of "CUSTOM_JWT", "AWS_IAM"
+    #   resp.authorizer_configuration.custom_jwt_authorizer.discovery_url #=> String
+    #   resp.authorizer_configuration.custom_jwt_authorizer.allowed_audience #=> Array
+    #   resp.authorizer_configuration.custom_jwt_authorizer.allowed_audience[0] #=> String
+    #   resp.authorizer_configuration.custom_jwt_authorizer.allowed_clients #=> Array
+    #   resp.authorizer_configuration.custom_jwt_authorizer.allowed_clients[0] #=> String
+    #   resp.authorizer_configuration.custom_jwt_authorizer.allowed_scopes #=> Array
+    #   resp.authorizer_configuration.custom_jwt_authorizer.allowed_scopes[0] #=> String
+    #   resp.authorizer_configuration.custom_jwt_authorizer.custom_claims #=> Array
+    #   resp.authorizer_configuration.custom_jwt_authorizer.custom_claims[0].inbound_token_claim_name #=> String
+    #   resp.authorizer_configuration.custom_jwt_authorizer.custom_claims[0].inbound_token_claim_value_type #=> String, one of "STRING", "STRING_ARRAY"
+    #   resp.authorizer_configuration.custom_jwt_authorizer.custom_claims[0].authorizing_claim_match_value.claim_match_value.match_value_string #=> String
+    #   resp.authorizer_configuration.custom_jwt_authorizer.custom_claims[0].authorizing_claim_match_value.claim_match_value.match_value_string_list #=> Array
+    #   resp.authorizer_configuration.custom_jwt_authorizer.custom_claims[0].authorizing_claim_match_value.claim_match_value.match_value_string_list[0] #=> String
+    #   resp.authorizer_configuration.custom_jwt_authorizer.custom_claims[0].authorizing_claim_match_value.claim_match_operator #=> String, one of "EQUALS", "CONTAINS", "CONTAINS_ANY"
+    #   resp.approval_configuration.auto_approval #=> Boolean
+    #   resp.status #=> String, one of "CREATING", "READY", "UPDATING", "CREATE_FAILED", "UPDATE_FAILED", "DELETING", "DELETE_FAILED"
+    #   resp.status_reason #=> String
+    #   resp.created_at #=> Time
+    #   resp.updated_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/UpdateRegistry AWS API Documentation
+    #
+    # @overload update_registry(params = {})
+    # @param [Hash] params ({})
+    def update_registry(params = {}, options = {})
+      req = build_request(:update_registry, params)
+      req.send_request(options)
+    end
+
+    # Updates an existing registry record. This operation uses PATCH
+    # semantics, so you only need to specify the fields you want to change.
+    # The update is processed asynchronously and returns HTTP 202 Accepted.
+    #
+    # @option params [required, String] :registry_id
+    #   The identifier of the registry containing the record. You can specify
+    #   either the Amazon Resource Name (ARN) or the ID of the registry.
+    #
+    # @option params [required, String] :record_id
+    #   The identifier of the registry record to update. You can specify
+    #   either the Amazon Resource Name (ARN) or the ID of the record.
+    #
+    # @option params [String] :name
+    #   The updated name for the registry record.
+    #
+    # @option params [Types::UpdatedDescription] :description
+    #   The updated description for the registry record. To clear the
+    #   description, include the `UpdatedDescription` wrapper with
+    #   `optionalValue` not specified.
+    #
+    # @option params [String] :descriptor_type
+    #   The updated descriptor type for the registry record. Changing the
+    #   descriptor type may require updating the `descriptors` field to match
+    #   the new type's schema requirements.
+    #
+    # @option params [Types::UpdatedDescriptors] :descriptors
+    #   The updated descriptor-type-specific configuration containing the
+    #   resource schema and metadata. Uses PATCH semantics where individual
+    #   descriptor fields can be updated independently.
+    #
+    # @option params [String] :record_version
+    #   The version of the registry record for optimistic locking. If
+    #   provided, it must match the current version of the record. The service
+    #   automatically increments the version after a successful update.
+    #
+    # @option params [Types::UpdatedSynchronizationType] :synchronization_type
+    #   The updated synchronization type for the registry record.
+    #
+    # @option params [Types::UpdatedSynchronizationConfiguration] :synchronization_configuration
+    #   The updated synchronization configuration for the registry record.
+    #
+    # @option params [Boolean] :trigger_synchronization
+    #   Whether to trigger synchronization using the stored or provided
+    #   configuration. When set to `true`, the service will synchronize the
+    #   record metadata from the configured external source.
+    #
+    # @return [Types::UpdateRegistryRecordResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateRegistryRecordResponse#registry_arn #registry_arn} => String
+    #   * {Types::UpdateRegistryRecordResponse#record_arn #record_arn} => String
+    #   * {Types::UpdateRegistryRecordResponse#record_id #record_id} => String
+    #   * {Types::UpdateRegistryRecordResponse#name #name} => String
+    #   * {Types::UpdateRegistryRecordResponse#description #description} => String
+    #   * {Types::UpdateRegistryRecordResponse#descriptor_type #descriptor_type} => String
+    #   * {Types::UpdateRegistryRecordResponse#descriptors #descriptors} => Types::Descriptors
+    #   * {Types::UpdateRegistryRecordResponse#record_version #record_version} => String
+    #   * {Types::UpdateRegistryRecordResponse#status #status} => String
+    #   * {Types::UpdateRegistryRecordResponse#created_at #created_at} => Time
+    #   * {Types::UpdateRegistryRecordResponse#updated_at #updated_at} => Time
+    #   * {Types::UpdateRegistryRecordResponse#status_reason #status_reason} => String
+    #   * {Types::UpdateRegistryRecordResponse#synchronization_type #synchronization_type} => String
+    #   * {Types::UpdateRegistryRecordResponse#synchronization_configuration #synchronization_configuration} => Types::SynchronizationConfiguration
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_registry_record({
+    #     registry_id: "RegistryIdentifier", # required
+    #     record_id: "RecordIdentifier", # required
+    #     name: "RegistryRecordName",
+    #     description: {
+    #       optional_value: "Description",
+    #     },
+    #     descriptor_type: "MCP", # accepts MCP, A2A, CUSTOM, AGENT_SKILLS
+    #     descriptors: {
+    #       optional_value: {
+    #         mcp: {
+    #           optional_value: {
+    #             server: {
+    #               optional_value: {
+    #                 schema_version: "SchemaVersion",
+    #                 inline_content: "InlineContent",
+    #               },
+    #             },
+    #             tools: {
+    #               optional_value: {
+    #                 protocol_version: "SchemaVersion",
+    #                 inline_content: "InlineContent",
+    #               },
+    #             },
+    #           },
+    #         },
+    #         a2a: {
+    #           optional_value: {
+    #             agent_card: {
+    #               schema_version: "SchemaVersion",
+    #               inline_content: "InlineContent",
+    #             },
+    #           },
+    #         },
+    #         custom: {
+    #           optional_value: {
+    #             inline_content: "InlineContent",
+    #           },
+    #         },
+    #         agent_skills: {
+    #           optional_value: {
+    #             skill_md: {
+    #               optional_value: {
+    #                 inline_content: "InlineContent",
+    #               },
+    #             },
+    #             skill_definition: {
+    #               optional_value: {
+    #                 schema_version: "SchemaVersion",
+    #                 inline_content: "InlineContent",
+    #               },
+    #             },
+    #           },
+    #         },
+    #       },
+    #     },
+    #     record_version: "RegistryRecordVersion",
+    #     synchronization_type: {
+    #       optional_value: "URL", # accepts URL
+    #     },
+    #     synchronization_configuration: {
+    #       optional_value: {
+    #         from_url: {
+    #           url: "McpServerUrl", # required
+    #           credential_provider_configurations: [
+    #             {
+    #               credential_provider_type: "OAUTH", # required, accepts OAUTH, IAM
+    #               credential_provider: { # required
+    #                 oauth_credential_provider: {
+    #                   provider_arn: "CredentialProviderArn", # required
+    #                   grant_type: "CLIENT_CREDENTIALS", # accepts CLIENT_CREDENTIALS
+    #                   scopes: ["String"],
+    #                   custom_parameters: {
+    #                     "String" => "String",
+    #                   },
+    #                 },
+    #                 iam_credential_provider: {
+    #                   role_arn: "IamRoleArn",
+    #                   service: "IamSigningServiceName",
+    #                   region: "IamSigningRegion",
+    #                 },
+    #               },
+    #             },
+    #           ],
+    #         },
+    #       },
+    #     },
+    #     trigger_synchronization: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.registry_arn #=> String
+    #   resp.record_arn #=> String
+    #   resp.record_id #=> String
+    #   resp.name #=> String
+    #   resp.description #=> String
+    #   resp.descriptor_type #=> String, one of "MCP", "A2A", "CUSTOM", "AGENT_SKILLS"
+    #   resp.descriptors.mcp.server.schema_version #=> String
+    #   resp.descriptors.mcp.server.inline_content #=> String
+    #   resp.descriptors.mcp.tools.protocol_version #=> String
+    #   resp.descriptors.mcp.tools.inline_content #=> String
+    #   resp.descriptors.a2a.agent_card.schema_version #=> String
+    #   resp.descriptors.a2a.agent_card.inline_content #=> String
+    #   resp.descriptors.custom.inline_content #=> String
+    #   resp.descriptors.agent_skills.skill_md.inline_content #=> String
+    #   resp.descriptors.agent_skills.skill_definition.schema_version #=> String
+    #   resp.descriptors.agent_skills.skill_definition.inline_content #=> String
+    #   resp.record_version #=> String
+    #   resp.status #=> String, one of "DRAFT", "PENDING_APPROVAL", "APPROVED", "REJECTED", "DEPRECATED", "CREATING", "UPDATING", "CREATE_FAILED", "UPDATE_FAILED"
+    #   resp.created_at #=> Time
+    #   resp.updated_at #=> Time
+    #   resp.status_reason #=> String
+    #   resp.synchronization_type #=> String, one of "URL"
+    #   resp.synchronization_configuration.from_url.url #=> String
+    #   resp.synchronization_configuration.from_url.credential_provider_configurations #=> Array
+    #   resp.synchronization_configuration.from_url.credential_provider_configurations[0].credential_provider_type #=> String, one of "OAUTH", "IAM"
+    #   resp.synchronization_configuration.from_url.credential_provider_configurations[0].credential_provider.oauth_credential_provider.provider_arn #=> String
+    #   resp.synchronization_configuration.from_url.credential_provider_configurations[0].credential_provider.oauth_credential_provider.grant_type #=> String, one of "CLIENT_CREDENTIALS"
+    #   resp.synchronization_configuration.from_url.credential_provider_configurations[0].credential_provider.oauth_credential_provider.scopes #=> Array
+    #   resp.synchronization_configuration.from_url.credential_provider_configurations[0].credential_provider.oauth_credential_provider.scopes[0] #=> String
+    #   resp.synchronization_configuration.from_url.credential_provider_configurations[0].credential_provider.oauth_credential_provider.custom_parameters #=> Hash
+    #   resp.synchronization_configuration.from_url.credential_provider_configurations[0].credential_provider.oauth_credential_provider.custom_parameters["String"] #=> String
+    #   resp.synchronization_configuration.from_url.credential_provider_configurations[0].credential_provider.iam_credential_provider.role_arn #=> String
+    #   resp.synchronization_configuration.from_url.credential_provider_configurations[0].credential_provider.iam_credential_provider.service #=> String
+    #   resp.synchronization_configuration.from_url.credential_provider_configurations[0].credential_provider.iam_credential_provider.region #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/UpdateRegistryRecord AWS API Documentation
+    #
+    # @overload update_registry_record(params = {})
+    # @param [Hash] params ({})
+    def update_registry_record(params = {}, options = {})
+      req = build_request(:update_registry_record, params)
+      req.send_request(options)
+    end
+
+    # Updates the status of a registry record. Use this operation to
+    # approve, reject, or deprecate a registry record.
+    #
+    # @option params [required, String] :registry_id
+    #   The identifier of the registry containing the record. You can specify
+    #   either the Amazon Resource Name (ARN) or the ID of the registry.
+    #
+    # @option params [required, String] :record_id
+    #   The identifier of the registry record to update the status for. You
+    #   can specify either the Amazon Resource Name (ARN) or the ID of the
+    #   record.
+    #
+    # @option params [required, String] :status
+    #   The target status for the registry record.
+    #
+    # @option params [required, String] :status_reason
+    #   The reason for the status change, such as why the record was approved
+    #   or rejected.
+    #
+    # @return [Types::UpdateRegistryRecordStatusResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateRegistryRecordStatusResponse#registry_arn #registry_arn} => String
+    #   * {Types::UpdateRegistryRecordStatusResponse#record_arn #record_arn} => String
+    #   * {Types::UpdateRegistryRecordStatusResponse#record_id #record_id} => String
+    #   * {Types::UpdateRegistryRecordStatusResponse#status #status} => String
+    #   * {Types::UpdateRegistryRecordStatusResponse#status_reason #status_reason} => String
+    #   * {Types::UpdateRegistryRecordStatusResponse#updated_at #updated_at} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_registry_record_status({
+    #     registry_id: "RegistryIdentifier", # required
+    #     record_id: "RecordIdentifier", # required
+    #     status: "DRAFT", # required, accepts DRAFT, PENDING_APPROVAL, APPROVED, REJECTED, DEPRECATED, CREATING, UPDATING, CREATE_FAILED, UPDATE_FAILED
+    #     status_reason: "UpdateRegistryRecordStatusRequestStatusReasonString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.registry_arn #=> String
+    #   resp.record_arn #=> String
+    #   resp.record_id #=> String
+    #   resp.status #=> String, one of "DRAFT", "PENDING_APPROVAL", "APPROVED", "REJECTED", "DEPRECATED", "CREATING", "UPDATING", "CREATE_FAILED", "UPDATE_FAILED"
+    #   resp.status_reason #=> String
+    #   resp.updated_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/UpdateRegistryRecordStatus AWS API Documentation
+    #
+    # @overload update_registry_record_status(params = {})
+    # @param [Hash] params ({})
+    def update_registry_record_status(params = {}, options = {})
+      req = build_request(:update_registry_record_status, params)
       req.send_request(options)
     end
 
@@ -6845,7 +8257,7 @@ module Aws::BedrockAgentCoreControl
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrockagentcorecontrol'
-      context[:gem_version] = '1.24.0'
+      context[:gem_version] = '1.37.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
@@ -6914,11 +8326,11 @@ module Aws::BedrockAgentCoreControl
     # | waiter_name                 | params                         | :delay   | :max_attempts |
     # | --------------------------- | ------------------------------ | -------- | ------------- |
     # | memory_created              | {Client#get_memory}            | 2        | 60            |
-    # | policy_active               | {Client#get_policy}            | 2        | 60            |
+    # | policy_active               | {Client#get_policy}            | 5        | 24            |
     # | policy_deleted              | {Client#get_policy}            | 2        | 60            |
-    # | policy_engine_active        | {Client#get_policy_engine}     | 2        | 60            |
+    # | policy_engine_active        | {Client#get_policy_engine}     | 5        | 24            |
     # | policy_engine_deleted       | {Client#get_policy_engine}     | 2        | 60            |
-    # | policy_generation_completed | {Client#get_policy_generation} | 2        | 60            |
+    # | policy_generation_completed | {Client#get_policy_generation} | 5        | 24            |
     #
     # @raise [Errors::FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition

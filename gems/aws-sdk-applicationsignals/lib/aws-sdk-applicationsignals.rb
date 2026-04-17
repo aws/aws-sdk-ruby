@@ -49,12 +49,13 @@ module Aws::ApplicationSignals
   end
   autoload :Client, 'aws-sdk-applicationsignals/client'
   autoload :Errors, 'aws-sdk-applicationsignals/errors'
+  autoload :Waiters, 'aws-sdk-applicationsignals/waiters'
   autoload :Resource, 'aws-sdk-applicationsignals/resource'
   autoload :EndpointParameters, 'aws-sdk-applicationsignals/endpoint_parameters'
   autoload :EndpointProvider, 'aws-sdk-applicationsignals/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-applicationsignals/endpoints'
 
-  GEM_VERSION = '1.36.0'
+  GEM_VERSION = '1.38.0'
 
 end
 

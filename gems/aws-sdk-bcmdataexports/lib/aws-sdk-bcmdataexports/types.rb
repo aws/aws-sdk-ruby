@@ -10,12 +10,21 @@
 module Aws::BCMDataExports
   module Types
 
+    # You don't have sufficient access to perform this action.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bcm-data-exports-2023-11-26/AccessDeniedException AWS API Documentation
+    #
+    class AccessDeniedException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Includes basic information for a data column such as its description,
     # name, and type.
-    #
-    # @!attribute [rw] description
-    #   The description for a column.
-    #   @return [String]
     #
     # @!attribute [rw] name
     #   The column name.
@@ -25,12 +34,16 @@ module Aws::BCMDataExports
     #   The kind of data a column stores.
     #   @return [String]
     #
+    # @!attribute [rw] description
+    #   The description for a column.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bcm-data-exports-2023-11-26/Column AWS API Documentation
     #
     class Column < Struct.new(
-      :description,
       :name,
-      :type)
+      :type,
+      :description)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -146,18 +159,6 @@ module Aws::BCMDataExports
 
     # The status of the execution.
     #
-    # @!attribute [rw] completed_at
-    #   The time when the execution was completed.
-    #   @return [Time]
-    #
-    # @!attribute [rw] created_at
-    #   The time when the execution was created.
-    #   @return [Time]
-    #
-    # @!attribute [rw] last_updated_at
-    #   The time when the execution was last updated.
-    #   @return [Time]
-    #
     # @!attribute [rw] status_code
     #   The code for the status of the execution.
     #   @return [String]
@@ -166,31 +167,31 @@ module Aws::BCMDataExports
     #   The reason for the failed status.
     #   @return [String]
     #
+    # @!attribute [rw] created_at
+    #   The time when the execution was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] completed_at
+    #   The time when the execution was completed.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_at
+    #   The time when the execution was last updated.
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bcm-data-exports-2023-11-26/ExecutionStatus AWS API Documentation
     #
     class ExecutionStatus < Struct.new(
-      :completed_at,
-      :created_at,
-      :last_updated_at,
       :status_code,
-      :status_reason)
+      :status_reason,
+      :created_at,
+      :completed_at,
+      :last_updated_at)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # The details that are available for an export.
-    #
-    # @!attribute [rw] data_query
-    #   The data query for this specific data export.
-    #   @return [Types::DataQuery]
-    #
-    # @!attribute [rw] description
-    #   The description for this specific data export.
-    #   @return [String]
-    #
-    # @!attribute [rw] destination_configurations
-    #   The destination configuration for this specific data export.
-    #   @return [Types::DestinationConfigurations]
     #
     # @!attribute [rw] export_arn
     #   The Amazon Resource Name (ARN) for this export.
@@ -200,6 +201,18 @@ module Aws::BCMDataExports
     #   The name of this specific data export.
     #   @return [String]
     #
+    # @!attribute [rw] description
+    #   The description for this specific data export.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_query
+    #   The data query for this specific data export.
+    #   @return [Types::DataQuery]
+    #
+    # @!attribute [rw] destination_configurations
+    #   The destination configuration for this specific data export.
+    #   @return [Types::DestinationConfigurations]
+    #
     # @!attribute [rw] refresh_cadence
     #   The cadence for Amazon Web Services to update the export in your S3
     #   bucket.
@@ -208,11 +221,11 @@ module Aws::BCMDataExports
     # @see http://docs.aws.amazon.com/goto/WebAPI/bcm-data-exports-2023-11-26/Export AWS API Documentation
     #
     class Export < Struct.new(
-      :data_query,
-      :description,
-      :destination_configurations,
       :export_arn,
       :name,
+      :description,
+      :data_query,
+      :destination_configurations,
       :refresh_cadence)
       SENSITIVE = []
       include Aws::Structure
@@ -244,18 +257,6 @@ module Aws::BCMDataExports
 
     # The status of the data export.
     #
-    # @!attribute [rw] created_at
-    #   The timestamp of when the export was created.
-    #   @return [Time]
-    #
-    # @!attribute [rw] last_refreshed_at
-    #   The timestamp of when the export was last generated.
-    #   @return [Time]
-    #
-    # @!attribute [rw] last_updated_at
-    #   The timestamp of when the export was updated.
-    #   @return [Time]
-    #
     # @!attribute [rw] status_code
     #   The status code for the request.
     #   @return [String]
@@ -264,32 +265,44 @@ module Aws::BCMDataExports
     #   The description for the status code.
     #   @return [String]
     #
+    # @!attribute [rw] created_at
+    #   The timestamp of when the export was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_at
+    #   The timestamp of when the export was updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_refreshed_at
+    #   The timestamp of when the export was last generated.
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bcm-data-exports-2023-11-26/ExportStatus AWS API Documentation
     #
     class ExportStatus < Struct.new(
-      :created_at,
-      :last_refreshed_at,
-      :last_updated_at,
       :status_code,
-      :status_reason)
+      :status_reason,
+      :created_at,
+      :last_updated_at,
+      :last_refreshed_at)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # @!attribute [rw] execution_id
-    #   The ID for this specific execution.
-    #   @return [String]
-    #
     # @!attribute [rw] export_arn
     #   The Amazon Resource Name (ARN) of the Export object that generated
     #   this specific execution.
     #   @return [String]
     #
+    # @!attribute [rw] execution_id
+    #   The ID for this specific execution.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bcm-data-exports-2023-11-26/GetExecutionRequest AWS API Documentation
     #
     class GetExecutionRequest < Struct.new(
-      :execution_id,
-      :export_arn)
+      :export_arn,
+      :execution_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -297,10 +310,6 @@ module Aws::BCMDataExports
     # @!attribute [rw] execution_id
     #   The ID for this specific execution.
     #   @return [String]
-    #
-    # @!attribute [rw] execution_status
-    #   The status of this specific execution.
-    #   @return [Types::ExecutionStatus]
     #
     # @!attribute [rw] export
     #   The export data for this specific execution. This export data is a
@@ -309,12 +318,16 @@ module Aws::BCMDataExports
     #   since the execution was generated.
     #   @return [Types::Export]
     #
+    # @!attribute [rw] execution_status
+    #   The status of this specific execution.
+    #   @return [Types::ExecutionStatus]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bcm-data-exports-2023-11-26/GetExecutionResponse AWS API Documentation
     #
     class GetExecutionResponse < Struct.new(
       :execution_id,
-      :execution_status,
-      :export)
+      :export,
+      :execution_status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -369,16 +382,12 @@ module Aws::BCMDataExports
       include Aws::Structure
     end
 
-    # @!attribute [rw] description
-    #   The table description.
-    #   @return [String]
-    #
-    # @!attribute [rw] schema
-    #   The schema of the table.
-    #   @return [Array<Types::Column>]
-    #
     # @!attribute [rw] table_name
     #   The name of the table.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The table description.
     #   @return [String]
     #
     # @!attribute [rw] table_properties
@@ -389,13 +398,17 @@ module Aws::BCMDataExports
     #   assumes if not specified.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] schema
+    #   The schema of the table.
+    #   @return [Array<Types::Column>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bcm-data-exports-2023-11-26/GetTableResponse AWS API Documentation
     #
     class GetTableResponse < Struct.new(
-      :description,
-      :schema,
       :table_name,
-      :table_properties)
+      :description,
+      :table_properties,
+      :schema)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -487,6 +500,44 @@ module Aws::BCMDataExports
       include Aws::Structure
     end
 
+    # @!attribute [rw] next_token
+    #   The token to retrieve the next set of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of objects that are returned for the request.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bcm-data-exports-2023-11-26/ListTablesRequest AWS API Documentation
+    #
+    class ListTablesRequest < Struct.new(
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tables
+    #   The list of tables.
+    #   @return [Array<Types::Table>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to retrieve the next set of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bcm-data-exports-2023-11-26/ListTablesResponse AWS API Documentation
+    #
+    class ListTablesResponse < Struct.new(
+      :tables,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resource_arn
+    #   The unique identifier for the resource.
+    #   @return [String]
+    #
     # @!attribute [rw] max_results
     #   The maximum number of objects that are returned for the request.
     #   @return [Integer]
@@ -495,69 +546,31 @@ module Aws::BCMDataExports
     #   The token to retrieve the next set of results.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/bcm-data-exports-2023-11-26/ListTablesRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bcm-data-exports-2023-11-26/ListTagsForResourceRequest AWS API Documentation
     #
-    class ListTablesRequest < Struct.new(
+    class ListTagsForResourceRequest < Struct.new(
+      :resource_arn,
       :max_results,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # @!attribute [rw] next_token
-    #   The token to retrieve the next set of results.
-    #   @return [String]
-    #
-    # @!attribute [rw] tables
-    #   The list of tables.
-    #   @return [Array<Types::Table>]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/bcm-data-exports-2023-11-26/ListTablesResponse AWS API Documentation
-    #
-    class ListTablesResponse < Struct.new(
-      :next_token,
-      :tables)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @!attribute [rw] max_results
-    #   The maximum number of objects that are returned for the request.
-    #   @return [Integer]
-    #
-    # @!attribute [rw] next_token
-    #   The token to retrieve the next set of results.
-    #   @return [String]
-    #
-    # @!attribute [rw] resource_arn
-    #   The unique identifier for the resource.
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/bcm-data-exports-2023-11-26/ListTagsForResourceRequest AWS API Documentation
-    #
-    class ListTagsForResourceRequest < Struct.new(
-      :max_results,
-      :next_token,
-      :resource_arn)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @!attribute [rw] next_token
-    #   The token to retrieve the next set of results.
-    #   @return [String]
-    #
     # @!attribute [rw] resource_tags
     #   An optional list of tags to associate with the specified export.
     #   Each tag consists of a key and a value, and each key must be unique
     #   for the resource.
     #   @return [Array<Types::ResourceTag>]
     #
+    # @!attribute [rw] next_token
+    #   The token to retrieve the next set of results.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bcm-data-exports-2023-11-26/ListTagsForResourceResponse AWS API Documentation
     #
     class ListTagsForResourceResponse < Struct.new(
-      :next_token,
-      :resource_tags)
+      :resource_tags,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -629,9 +642,10 @@ module Aws::BCMDataExports
     #   export file.
     #   @return [String]
     #
-    # @!attribute [rw] s3_output_configurations
-    #   The output configuration for the data export.
-    #   @return [Types::S3OutputConfigurations]
+    # @!attribute [rw] s3_bucket_owner
+    #   The AWS Account ID that owns the S3 bucket used as the destination
+    #   for the data export.
+    #   @return [String]
     #
     # @!attribute [rw] s3_prefix
     #   The S3 path prefix you want prepended to the name of your data
@@ -642,13 +656,18 @@ module Aws::BCMDataExports
     #   The S3 bucket Region.
     #   @return [String]
     #
+    # @!attribute [rw] s3_output_configurations
+    #   The output configuration for the data export.
+    #   @return [Types::S3OutputConfigurations]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bcm-data-exports-2023-11-26/S3Destination AWS API Documentation
     #
     class S3Destination < Struct.new(
       :s3_bucket,
-      :s3_output_configurations,
+      :s3_bucket_owner,
       :s3_prefix,
-      :s3_region)
+      :s3_region,
+      :s3_output_configurations)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -656,16 +675,16 @@ module Aws::BCMDataExports
     # The compression type, file format, and overwrite preference for the
     # data export.
     #
-    # @!attribute [rw] compression
-    #   The compression type for the data export.
+    # @!attribute [rw] output_type
+    #   The output type for the data export.
     #   @return [String]
     #
     # @!attribute [rw] format
     #   The file format for the data export.
     #   @return [String]
     #
-    # @!attribute [rw] output_type
-    #   The output type for the data export.
+    # @!attribute [rw] compression
+    #   The compression type for the data export.
     #   @return [String]
     #
     # @!attribute [rw] overwrite
@@ -679,9 +698,9 @@ module Aws::BCMDataExports
     # @see http://docs.aws.amazon.com/goto/WebAPI/bcm-data-exports-2023-11-26/S3OutputConfigurations AWS API Documentation
     #
     class S3OutputConfigurations < Struct.new(
-      :compression,
-      :format,
       :output_type,
+      :format,
+      :compression,
       :overwrite)
       SENSITIVE = []
       include Aws::Structure
@@ -693,16 +712,16 @@ module Aws::BCMDataExports
     # @!attribute [rw] message
     #   @return [String]
     #
-    # @!attribute [rw] quota_code
-    #   The quota code that was exceeded.
-    #   @return [String]
-    #
     # @!attribute [rw] resource_id
     #   The identifier of the resource that exceeded quota.
     #   @return [String]
     #
     # @!attribute [rw] resource_type
     #   The type of the resource that exceeded quota.
+    #   @return [String]
+    #
+    # @!attribute [rw] quota_code
+    #   The quota code that was exceeded.
     #   @return [String]
     #
     # @!attribute [rw] service_code
@@ -714,9 +733,9 @@ module Aws::BCMDataExports
     #
     class ServiceQuotaExceededException < Struct.new(
       :message,
-      :quota_code,
       :resource_id,
       :resource_type,
+      :quota_code,
       :service_code)
       SENSITIVE = []
       include Aws::Structure
@@ -724,12 +743,12 @@ module Aws::BCMDataExports
 
     # The details for the data export table.
     #
-    # @!attribute [rw] description
-    #   The description for the table.
-    #   @return [String]
-    #
     # @!attribute [rw] table_name
     #   The name of the table.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description for the table.
     #   @return [String]
     #
     # @!attribute [rw] table_properties
@@ -739,22 +758,14 @@ module Aws::BCMDataExports
     # @see http://docs.aws.amazon.com/goto/WebAPI/bcm-data-exports-2023-11-26/Table AWS API Documentation
     #
     class Table < Struct.new(
-      :description,
       :table_name,
+      :description,
       :table_properties)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # The properties for the data export table.
-    #
-    # @!attribute [rw] default_value
-    #   The default value for the table.
-    #   @return [String]
-    #
-    # @!attribute [rw] description
-    #   The description for the table.
-    #   @return [String]
     #
     # @!attribute [rw] name
     #   The name of the table.
@@ -764,13 +775,21 @@ module Aws::BCMDataExports
     #   The valid values for the table.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] default_value
+    #   The default value for the table.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description for the table.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bcm-data-exports-2023-11-26/TablePropertyDescription AWS API Documentation
     #
     class TablePropertyDescription < Struct.new(
-      :default_value,
-      :description,
       :name,
-      :valid_values)
+      :valid_values,
+      :default_value,
+      :description)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -842,19 +861,19 @@ module Aws::BCMDataExports
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
 
-    # @!attribute [rw] export
-    #   The name and query details for the export.
-    #   @return [Types::Export]
-    #
     # @!attribute [rw] export_arn
     #   The Amazon Resource Name (ARN) for this export.
     #   @return [String]
     #
+    # @!attribute [rw] export
+    #   The name and query details for the export.
+    #   @return [Types::Export]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bcm-data-exports-2023-11-26/UpdateExportRequest AWS API Documentation
     #
     class UpdateExportRequest < Struct.new(
-      :export,
-      :export_arn)
+      :export_arn,
+      :export)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -874,10 +893,6 @@ module Aws::BCMDataExports
     # The input fails to satisfy the constraints specified by an Amazon Web
     # Services service.
     #
-    # @!attribute [rw] fields
-    #   The list of fields that are invalid.
-    #   @return [Array<Types::ValidationExceptionField>]
-    #
     # @!attribute [rw] message
     #   @return [String]
     #
@@ -885,12 +900,16 @@ module Aws::BCMDataExports
     #   The reason for the validation exception.
     #   @return [String]
     #
+    # @!attribute [rw] fields
+    #   The list of fields that are invalid.
+    #   @return [Array<Types::ValidationExceptionField>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bcm-data-exports-2023-11-26/ValidationException AWS API Documentation
     #
     class ValidationException < Struct.new(
-      :fields,
       :message,
-      :reason)
+      :reason,
+      :fields)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -898,19 +917,19 @@ module Aws::BCMDataExports
     # The input failed to meet the constraints specified by the Amazon Web
     # Services service in a specified field.
     #
-    # @!attribute [rw] message
-    #   A message with the reason for the validation exception error.
-    #   @return [String]
-    #
     # @!attribute [rw] name
     #   The field name where the invalid entry was detected.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   A message with the reason for the validation exception error.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bcm-data-exports-2023-11-26/ValidationExceptionField AWS API Documentation
     #
     class ValidationExceptionField < Struct.new(
-      :message,
-      :name)
+      :name,
+      :message)
       SENSITIVE = []
       include Aws::Structure
     end

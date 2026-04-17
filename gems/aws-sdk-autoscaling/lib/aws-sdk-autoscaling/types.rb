@@ -395,6 +395,11 @@ module Aws::AutoScaling
     #   One or more Availability Zones for the Auto Scaling group.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] availability_zone_ids
+    #   The Availability Zone IDs where the Auto Scaling group can launch
+    #   instances.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] load_balancer_names
     #   One or more load balancers associated with the group.
     #   @return [Array<String>]
@@ -550,6 +555,7 @@ module Aws::AutoScaling
       :predicted_capacity,
       :default_cooldown,
       :availability_zones,
+      :availability_zone_ids,
       :load_balancer_names,
       :target_group_arns,
       :health_check_type,
@@ -662,6 +668,10 @@ module Aws::AutoScaling
     #   The Availability Zone for the instance.
     #   @return [String]
     #
+    # @!attribute [rw] availability_zone_id
+    #   The Availability Zone ID where the instance is located.
+    #   @return [String]
+    #
     # @!attribute [rw] lifecycle_state
     #   The lifecycle state for the instance. The `Quarantined` state is not
     #   used. For more information, see [Amazon EC2 Auto Scaling instance
@@ -671,11 +681,14 @@ module Aws::AutoScaling
     #   `Quarantined` \| `InService` \| `Terminating` \| `Terminating:Wait`
     #   \| `Terminating:Proceed` \| `Terminating:Retained` \| `Terminated`
     #   \| `Detaching` \| `Detached` \| `EnteringStandby` \| `Standby` \|
+    #   `ReplacingRootVolume` \| `ReplacingRootVolume:Wait` \|
+    #   `ReplacingRootVolume:Proceed` \| `RootVolumeReplaced` \|
     #   `Warmed:Pending` \| `Warmed:Pending:Wait` \|
     #   `Warmed:Pending:Proceed` \| `Warmed:Pending:Retained` \|
     #   `Warmed:Terminating` \| `Warmed:Terminating:Wait` \|
     #   `Warmed:Terminating:Proceed` \| `Warmed:Terminating:Retained` \|
-    #   `Warmed:Terminated` \| `Warmed:Stopped` \| `Warmed:Running`
+    #   `Warmed:Terminated` \| `Warmed:Stopped` \| `Warmed:Running` \|
+    #   `Warmed:Hibernated`
     #
     #
     #
@@ -739,6 +752,7 @@ module Aws::AutoScaling
       :instance_type,
       :auto_scaling_group_name,
       :availability_zone,
+      :availability_zone_id,
       :lifecycle_state,
       :health_status,
       :launch_configuration_name,
@@ -1279,6 +1293,12 @@ module Aws::AutoScaling
     #   network interface ID is specified in a launch template.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] availability_zone_ids
+    #   A list of Availability Zone IDs where the Auto Scaling group can
+    #   launch instances. You cannot specify both AvailabilityZones and
+    #   AvailabilityZoneIds in the same request.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] load_balancer_names
     #   A list of Classic Load Balancers associated with this Auto Scaling
     #   group. For Application Load Balancers, Network Load Balancers, and
@@ -1416,6 +1436,14 @@ module Aws::AutoScaling
     #   `prevent-all-deletion`.
     #
     #   Default: `none`
+    #
+    #   For more information, see [ Configure deletion protection for your
+    #   Amazon EC2 Auto Scaling resources][1] in the *Amazon EC2 Auto
+    #   Scaling User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/resource-deletion-protection.html
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -1584,6 +1612,7 @@ module Aws::AutoScaling
       :desired_capacity,
       :default_cooldown,
       :availability_zones,
+      :availability_zone_ids,
       :load_balancer_names,
       :target_group_arns,
       :health_check_type,
@@ -2540,6 +2569,14 @@ module Aws::AutoScaling
     #     `AutoScalingGroupName` parameter. For valid `StatusCode` values,
     #     see [Activity][1] in the *Amazon EC2 Auto Scaling API Reference*.
     #
+    #   `StartTimeLowerBound` and `StartTimeUpperBound` accept ISO 8601
+    #   formatted timestamps. Timestamps without a timezone offset are
+    #   assumed to be UTC.
+    #
+    #   * `2000-01-18T08:15:00Z`
+    #
+    #   * `2000-01-18T16:15:00+08:00`
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_Activity.html
@@ -3446,6 +3483,14 @@ module Aws::AutoScaling
     #     `AutoScalingGroupName` parameter. For valid `StatusCode` values,
     #     see [Activity][1] in the *Amazon EC2 Auto Scaling API Reference*.
     #
+    #   `StartTimeLowerBound` and `StartTimeUpperBound` accept ISO 8601
+    #   formatted timestamps. Timestamps without a timezone offset are
+    #   assumed to be UTC.
+    #
+    #   * `2000-01-18T08:15:00Z`
+    #
+    #   * `2000-01-18T16:15:00+08:00`
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_Activity.html
@@ -3565,6 +3610,10 @@ module Aws::AutoScaling
     #   The Availability Zone in which the instance is running.
     #   @return [String]
     #
+    # @!attribute [rw] availability_zone_id
+    #   The Availability Zone ID where the instance was launched.
+    #   @return [String]
+    #
     # @!attribute [rw] lifecycle_state
     #   A description of the current lifecycle state. The `Quarantined`
     #   state is not used. For more information, see [Amazon EC2 Auto
@@ -3630,6 +3679,7 @@ module Aws::AutoScaling
       :instance_id,
       :instance_type,
       :availability_zone,
+      :availability_zone_id,
       :lifecycle_state,
       :health_status,
       :launch_configuration_name,
@@ -8508,6 +8558,12 @@ module Aws::AutoScaling
     #   One or more Availability Zones for the group.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] availability_zone_ids
+    #   A list of Availability Zone IDs for the Auto Scaling group. You
+    #   cannot specify both AvailabilityZones and AvailabilityZoneIds in the
+    #   same request.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] health_check_type
     #   A comma-separated value string of one or more health check types.
     #
@@ -8741,6 +8797,14 @@ module Aws::AutoScaling
     #   `prevent-all-deletion`.
     #
     #   Default: `none`
+    #
+    #   For more information, see [ Configure deletion protection for your
+    #   Amazon EC2 Auto Scaling resources][1] in the *Amazon EC2 Auto
+    #   Scaling User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/resource-deletion-protection.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/UpdateAutoScalingGroupType AWS API Documentation
@@ -8755,6 +8819,7 @@ module Aws::AutoScaling
       :desired_capacity,
       :default_cooldown,
       :availability_zones,
+      :availability_zone_ids,
       :health_check_type,
       :health_check_grace_period,
       :placement_group,

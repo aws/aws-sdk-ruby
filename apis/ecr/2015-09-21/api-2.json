@@ -554,7 +554,8 @@
         {"shape":"ServerException"},
         {"shape":"InvalidParameterException"},
         {"shape":"RepositoryNotFoundException"},
-        {"shape":"ValidationException"}
+        {"shape":"ValidationException"},
+        {"shape":"UnableToListUpstreamImageReferrersException"}
       ]
     },
     "ListImages":{
@@ -958,7 +959,7 @@
     "ArtifactTypeList":{
       "type":"list",
       "member":{"shape":"ArtifactType"},
-      "max":1,
+      "max":5,
       "min":0
     },
     "Attribute":{
@@ -2447,7 +2448,7 @@
       "type":"string",
       "max":256,
       "min":1,
-      "pattern":"^((?:[a-z0-9]+(?:[._-][a-z0-9]+)*/)*[a-z0-9]+(?:[._-][a-z0-9]+)*/?|ROOT)$"
+      "pattern":"^([a-z0-9]+((\\.|_|__|-+)[a-z0-9]+)*(\\/[a-z0-9]+((\\.|_|__|-+)[a-z0-9]+)*)*\\/?|ROOT)$"
     },
     "PrefixList":{
       "type":"list",
@@ -2495,7 +2496,7 @@
       "type":"string",
       "max":30,
       "min":2,
-      "pattern":"^((?:[a-z0-9]+(?:[._-][a-z0-9]+)*/)*[a-z0-9]+(?:[._-][a-z0-9]+)*/?|ROOT)$"
+      "pattern":"^([a-z0-9]+((\\.|_|__|-+)[a-z0-9]+)*(\\/[a-z0-9]+((\\.|_|__|-+)[a-z0-9]+)*)*\\/?|ROOT)$"
     },
     "PullThroughCacheRuleRepositoryPrefixList":{
       "type":"list",
@@ -2893,7 +2894,7 @@
       "type":"string",
       "max":256,
       "min":2,
-      "pattern":"(?:[a-z0-9]+(?:[._-][a-z0-9]+)*/)*[a-z0-9]+(?:[._-][a-z0-9]+)*"
+      "pattern":"[a-z0-9]+((\\.|_|__|-+)[a-z0-9]+)*(\\/[a-z0-9]+((\\.|_|__|-+)[a-z0-9]+)*)*"
     },
     "RepositoryNameList":{
       "type":"list",
@@ -3342,6 +3343,13 @@
       },
       "exception":true
     },
+    "UnableToListUpstreamImageReferrersException":{
+      "type":"structure",
+      "members":{
+        "message":{"shape":"ExceptionMessage"}
+      },
+      "exception":true
+    },
     "UnsupportedImageTypeException":{
       "type":"structure",
       "members":{
@@ -3487,7 +3495,8 @@
         "docker-hub",
         "github-container-registry",
         "azure-container-registry",
-        "gitlab-container-registry"
+        "gitlab-container-registry",
+        "chainguard"
       ]
     },
     "Url":{"type":"string"},

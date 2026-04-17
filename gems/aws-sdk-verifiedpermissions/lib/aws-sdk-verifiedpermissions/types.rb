@@ -261,6 +261,13 @@ module Aws::VerifiedPermissions
     #
     # @!attribute [rw] policy_id
     #   The identifier of the policy you want information about.
+    #
+    #   You can use the policy name in place of the policy ID. When using a
+    #   name, prefix it with `name/`. For example:
+    #
+    #   * ID: `SPEXAMPLEabcdefg111111`
+    #
+    #   * Name: `name/example-policy`
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/BatchGetPolicyInputItem AWS API Documentation
@@ -324,6 +331,11 @@ module Aws::VerifiedPermissions
     #   The date and time the policy was most recently updated.
     #   @return [Time]
     #
+    # @!attribute [rw] name
+    #   The name of the policy, if one was assigned when the policy was
+    #   created or last updated.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/BatchGetPolicyOutputItem AWS API Documentation
     #
     class BatchGetPolicyOutputItem < Struct.new(
@@ -332,7 +344,8 @@ module Aws::VerifiedPermissions
       :policy_type,
       :definition,
       :created_date,
-      :last_updated_date)
+      :last_updated_date,
+      :name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -340,6 +353,19 @@ module Aws::VerifiedPermissions
     # @!attribute [rw] policy_store_id
     #   Specifies the ID of the policy store. Policies in this policy store
     #   will be used to make the authorization decisions for the input.
+    #
+    #   To specify a policy store, use its ID or alias name. When using an
+    #   alias name, prefix it with `policy-store-alias/`. For example:
+    #
+    #   * ID: `PSEXAMPLEabcdefg111111`
+    #
+    #   * Alias name: `policy-store-alias/example-policy-store`
+    #
+    #   To view aliases, use [ListPolicyStoreAliases][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListPolicyStoreAliases.html
     #   @return [String]
     #
     # @!attribute [rw] entities
@@ -461,6 +487,19 @@ module Aws::VerifiedPermissions
     # @!attribute [rw] policy_store_id
     #   Specifies the ID of the policy store. Policies in this policy store
     #   will be used to make an authorization decision for the input.
+    #
+    #   To specify a policy store, use its ID or alias name. When using an
+    #   alias name, prefix it with `policy-store-alias/`. For example:
+    #
+    #   * ID: `PSEXAMPLEabcdefg111111`
+    #
+    #   * Alias name: `policy-store-alias/example-policy-store`
+    #
+    #   To view aliases, use [ListPolicyStoreAliases][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListPolicyStoreAliases.html
     #   @return [String]
     #
     # @!attribute [rw] identity_token
@@ -1159,7 +1198,7 @@ module Aws::VerifiedPermissions
     end
 
     # The request failed because another request to modify a resource
-    # occurred at the same.
+    # occurred at the same time.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -1268,6 +1307,19 @@ module Aws::VerifiedPermissions
     #   identity source. Only policies and requests made using this policy
     #   store can reference identities from the identity provider configured
     #   in the new identity source.
+    #
+    #   To specify a policy store, use its ID or alias name. When using an
+    #   alias name, prefix it with `policy-store-alias/`. For example:
+    #
+    #   * ID: `PSEXAMPLEabcdefg111111`
+    #
+    #   * Alias name: `policy-store-alias/example-policy-store`
+    #
+    #   To view aliases, use [ListPolicyStoreAliases][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListPolicyStoreAliases.html
     #   @return [String]
     #
     # @!attribute [rw] configuration
@@ -1349,6 +1401,19 @@ module Aws::VerifiedPermissions
     # @!attribute [rw] policy_store_id
     #   Specifies the `PolicyStoreId` of the policy store you want to store
     #   the policy in.
+    #
+    #   To specify a policy store, use its ID or alias name. When using an
+    #   alias name, prefix it with `policy-store-alias/`. For example:
+    #
+    #   * ID: `PSEXAMPLEabcdefg111111`
+    #
+    #   * Alias name: `policy-store-alias/example-policy-store`
+    #
+    #   To view aliases, use [ListPolicyStoreAliases][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListPolicyStoreAliases.html
     #   @return [String]
     #
     # @!attribute [rw] definition
@@ -1358,12 +1423,23 @@ module Aws::VerifiedPermissions
     #   language.
     #   @return [Types::PolicyDefinition]
     #
+    # @!attribute [rw] name
+    #   Specifies a name for the policy that is unique among all policies
+    #   within the policy store. You can use the name in place of the policy
+    #   ID in API operations that reference the policy. The name must be
+    #   prefixed with `name/`.
+    #
+    #   If you specify a name that is already associated with another policy
+    #   in the policy store, you receive a `ConflictException` error.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/CreatePolicyInput AWS API Documentation
     #
     class CreatePolicyInput < Struct.new(
       :client_token,
       :policy_store_id,
-      :definition)
+      :definition,
+      :name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1424,6 +1500,61 @@ module Aws::VerifiedPermissions
       :created_date,
       :last_updated_date,
       :effect)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] alias_name
+    #   Specifies the name of the policy store alias to create. The name
+    #   must be unique within your Amazon Web Services account and Amazon
+    #   Web Services Region.
+    #
+    #   <note markdown="1"> The alias name must always be prefixed with `policy-store-alias/`.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @!attribute [rw] policy_store_id
+    #   Specifies the ID of the policy store to associate with the alias.
+    #
+    #   <note markdown="1"> The associated policy store must be specified using its ID. The
+    #   alias name cannot be used.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/CreatePolicyStoreAliasInput AWS API Documentation
+    #
+    class CreatePolicyStoreAliasInput < Struct.new(
+      :alias_name,
+      :policy_store_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] alias_name
+    #   The name of the policy store alias.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy_store_id
+    #   The ID of the policy store associated with the alias.
+    #   @return [String]
+    #
+    # @!attribute [rw] alias_arn
+    #   The Amazon Resource Name (ARN) of the policy store alias.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The date and time the policy store alias was created.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/CreatePolicyStoreAliasOutput AWS API Documentation
+    #
+    class CreatePolicyStoreAliasOutput < Struct.new(
+      :alias_name,
+      :policy_store_id,
+      :alias_arn,
+      :created_at)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1568,6 +1699,19 @@ module Aws::VerifiedPermissions
     #
     # @!attribute [rw] policy_store_id
     #   The ID of the policy store in which to create the policy template.
+    #
+    #   To specify a policy store, use its ID or alias name. When using an
+    #   alias name, prefix it with `policy-store-alias/`. For example:
+    #
+    #   * ID: `PSEXAMPLEabcdefg111111`
+    #
+    #   * Alias name: `policy-store-alias/example-policy-store`
+    #
+    #   To view aliases, use [ListPolicyStoreAliases][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListPolicyStoreAliases.html
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -1579,13 +1723,25 @@ module Aws::VerifiedPermissions
     #   template, written in the Cedar policy language.
     #   @return [String]
     #
+    # @!attribute [rw] name
+    #   Specifies a name for the policy template that is unique among all
+    #   policy templates within the policy store. You can use the name in
+    #   place of the policy template ID in API operations that reference the
+    #   policy template. The name must be prefixed with `name/`.
+    #
+    #   If you specify a name that is already associated with another policy
+    #   template in the policy store, you receive a `ConflictException`
+    #   error.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/CreatePolicyTemplateInput AWS API Documentation
     #
     class CreatePolicyTemplateInput < Struct.new(
       :client_token,
       :policy_store_id,
       :description,
-      :statement)
+      :statement,
+      :name)
       SENSITIVE = [:description, :statement]
       include Aws::Structure
     end
@@ -1620,6 +1776,19 @@ module Aws::VerifiedPermissions
     # @!attribute [rw] policy_store_id
     #   Specifies the ID of the policy store that contains the identity
     #   source that you want to delete.
+    #
+    #   To specify a policy store, use its ID or alias name. When using an
+    #   alias name, prefix it with `policy-store-alias/`. For example:
+    #
+    #   * ID: `PSEXAMPLEabcdefg111111`
+    #
+    #   * Alias name: `policy-store-alias/example-policy-store`
+    #
+    #   To view aliases, use [ListPolicyStoreAliases][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListPolicyStoreAliases.html
     #   @return [String]
     #
     # @!attribute [rw] identity_source_id
@@ -1642,10 +1811,30 @@ module Aws::VerifiedPermissions
     # @!attribute [rw] policy_store_id
     #   Specifies the ID of the policy store that contains the policy that
     #   you want to delete.
+    #
+    #   To specify a policy store, use its ID or alias name. When using an
+    #   alias name, prefix it with `policy-store-alias/`. For example:
+    #
+    #   * ID: `PSEXAMPLEabcdefg111111`
+    #
+    #   * Alias name: `policy-store-alias/example-policy-store`
+    #
+    #   To view aliases, use [ListPolicyStoreAliases][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListPolicyStoreAliases.html
     #   @return [String]
     #
     # @!attribute [rw] policy_id
     #   Specifies the ID of the policy that you want to delete.
+    #
+    #   You can use the policy name in place of the policy ID. When using a
+    #   name, prefix it with `name/`. For example:
+    #
+    #   * ID: `SPEXAMPLEabcdefg111111`
+    #
+    #   * Name: `name/example-policy`
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/DeletePolicyInput AWS API Documentation
@@ -1661,8 +1850,34 @@ module Aws::VerifiedPermissions
     #
     class DeletePolicyOutput < Aws::EmptyStructure; end
 
+    # @!attribute [rw] alias_name
+    #   Specifies the name of the policy store alias that you want to
+    #   delete.
+    #
+    #   <note markdown="1"> The alias name must always be prefixed with `policy-store-alias/`.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/DeletePolicyStoreAliasInput AWS API Documentation
+    #
+    class DeletePolicyStoreAliasInput < Struct.new(
+      :alias_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/DeletePolicyStoreAliasOutput AWS API Documentation
+    #
+    class DeletePolicyStoreAliasOutput < Aws::EmptyStructure; end
+
     # @!attribute [rw] policy_store_id
     #   Specifies the ID of the policy store that you want to delete.
+    #
+    #   <note markdown="1"> To specify a policy store, the alias name cannot be used. Only the
+    #   ID can be used.
+    #
+    #    </note>
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/DeletePolicyStoreInput AWS API Documentation
@@ -1680,10 +1895,30 @@ module Aws::VerifiedPermissions
     # @!attribute [rw] policy_store_id
     #   Specifies the ID of the policy store that contains the policy
     #   template that you want to delete.
+    #
+    #   To specify a policy store, use its ID or alias name. When using an
+    #   alias name, prefix it with `policy-store-alias/`. For example:
+    #
+    #   * ID: `PSEXAMPLEabcdefg111111`
+    #
+    #   * Alias name: `policy-store-alias/example-policy-store`
+    #
+    #   To view aliases, use [ListPolicyStoreAliases][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListPolicyStoreAliases.html
     #   @return [String]
     #
     # @!attribute [rw] policy_template_id
     #   Specifies the ID of the policy template that you want to delete.
+    #
+    #   You can use the policy template name in place of the policy template
+    #   ID. When using a name, prefix it with `name/`. For example:
+    #
+    #   * ID: `PTEXAMPLEabcdefg111111`
+    #
+    #   * Name: `name/example-policy-template`
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/DeletePolicyTemplateInput AWS API Documentation
@@ -2004,6 +2239,19 @@ module Aws::VerifiedPermissions
     # @!attribute [rw] policy_store_id
     #   Specifies the ID of the policy store that contains the identity
     #   source you want information about.
+    #
+    #   To specify a policy store, use its ID or alias name. When using an
+    #   alias name, prefix it with `policy-store-alias/`. For example:
+    #
+    #   * ID: `PSEXAMPLEabcdefg111111`
+    #
+    #   * Alias name: `policy-store-alias/example-policy-store`
+    #
+    #   To view aliases, use [ListPolicyStoreAliases][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListPolicyStoreAliases.html
     #   @return [String]
     #
     # @!attribute [rw] identity_source_id
@@ -2066,10 +2314,30 @@ module Aws::VerifiedPermissions
     # @!attribute [rw] policy_store_id
     #   Specifies the ID of the policy store that contains the policy that
     #   you want information about.
+    #
+    #   To specify a policy store, use its ID or alias name. When using an
+    #   alias name, prefix it with `policy-store-alias/`. For example:
+    #
+    #   * ID: `PSEXAMPLEabcdefg111111`
+    #
+    #   * Alias name: `policy-store-alias/example-policy-store`
+    #
+    #   To view aliases, use [ListPolicyStoreAliases][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListPolicyStoreAliases.html
     #   @return [String]
     #
     # @!attribute [rw] policy_id
     #   Specifies the ID of the policy you want information about.
+    #
+    #   You can use the policy name in place of the policy ID. When using a
+    #   name, prefix it with `name/`. For example:
+    #
+    #   * ID: `SPEXAMPLEabcdefg111111`
+    #
+    #   * Name: `name/example-policy`
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/GetPolicyInput AWS API Documentation
@@ -2130,6 +2398,11 @@ module Aws::VerifiedPermissions
     #   request. For example, `"effect": "Permit"`.
     #   @return [String]
     #
+    # @!attribute [rw] name
+    #   The name of the policy, if one was assigned when the policy was
+    #   created or last updated.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/GetPolicyOutput AWS API Documentation
     #
     class GetPolicyOutput < Struct.new(
@@ -2142,14 +2415,80 @@ module Aws::VerifiedPermissions
       :definition,
       :created_date,
       :last_updated_date,
-      :effect)
+      :effect,
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] alias_name
+    #   Specifies the name of the policy store alias that you want
+    #   information about.
+    #
+    #   <note markdown="1"> The alias name must always be prefixed with `policy-store-alias/`.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/GetPolicyStoreAliasInput AWS API Documentation
+    #
+    class GetPolicyStoreAliasInput < Struct.new(
+      :alias_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] alias_name
+    #   The name of the policy store alias.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy_store_id
+    #   The ID of the policy store associated with the alias.
+    #   @return [String]
+    #
+    # @!attribute [rw] alias_arn
+    #   The Amazon Resource Name (ARN) of the policy store alias.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The date and time the policy store alias was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] state
+    #   The state of the policy store alias. Policy Store Aliases in the
+    #   Active state can be used normally. When a policy store alias is
+    #   deleted, it enters the PendingDeletion state. Policy Store Aliases
+    #   in the PendingDeletion cannot be used, and creating a policy store
+    #   alias with the same alias name will fail.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/GetPolicyStoreAliasOutput AWS API Documentation
+    #
+    class GetPolicyStoreAliasOutput < Struct.new(
+      :alias_name,
+      :policy_store_id,
+      :alias_arn,
+      :created_at,
+      :state)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # @!attribute [rw] policy_store_id
-    #   Specifies the ID of the policy store that you want information
-    #   about.
+    #   Specifies the policy store that you want information about.
+    #
+    #   To specify a policy store, use its ID or alias name. When using an
+    #   alias name, prefix it with `policy-store-alias/`. For example:
+    #
+    #   * ID: `PSEXAMPLEabcdefg111111`
+    #
+    #   * Alias name: `policy-store-alias/example-policy-store`
+    #
+    #   To view aliases, use [ListPolicyStoreAliases][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListPolicyStoreAliases.html
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -2244,11 +2583,31 @@ module Aws::VerifiedPermissions
     # @!attribute [rw] policy_store_id
     #   Specifies the ID of the policy store that contains the policy
     #   template that you want information about.
+    #
+    #   To specify a policy store, use its ID or alias name. When using an
+    #   alias name, prefix it with `policy-store-alias/`. For example:
+    #
+    #   * ID: `PSEXAMPLEabcdefg111111`
+    #
+    #   * Alias name: `policy-store-alias/example-policy-store`
+    #
+    #   To view aliases, use [ListPolicyStoreAliases][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListPolicyStoreAliases.html
     #   @return [String]
     #
     # @!attribute [rw] policy_template_id
     #   Specifies the ID of the policy template that you want information
     #   about.
+    #
+    #   You can use the policy template name in place of the policy template
+    #   ID. When using a name, prefix it with `name/`. For example:
+    #
+    #   * ID: `PTEXAMPLEabcdefg111111`
+    #
+    #   * Name: `name/example-policy-template`
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/GetPolicyTemplateInput AWS API Documentation
@@ -2286,6 +2645,11 @@ module Aws::VerifiedPermissions
     #   updated.
     #   @return [Time]
     #
+    # @!attribute [rw] name
+    #   The name of the policy template, if one was assigned when the policy
+    #   template was created or last updated.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/GetPolicyTemplateOutput AWS API Documentation
     #
     class GetPolicyTemplateOutput < Struct.new(
@@ -2294,13 +2658,27 @@ module Aws::VerifiedPermissions
       :description,
       :statement,
       :created_date,
-      :last_updated_date)
+      :last_updated_date,
+      :name)
       SENSITIVE = [:description, :statement]
       include Aws::Structure
     end
 
     # @!attribute [rw] policy_store_id
     #   Specifies the ID of the policy store that contains the schema.
+    #
+    #   To specify a policy store, use its ID or alias name. When using an
+    #   alias name, prefix it with `policy-store-alias/`. For example:
+    #
+    #   * ID: `PSEXAMPLEabcdefg111111`
+    #
+    #   * Alias name: `policy-store-alias/example-policy-store`
+    #
+    #   To view aliases, use [ListPolicyStoreAliases][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListPolicyStoreAliases.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/GetSchemaInput AWS API Documentation
@@ -2553,6 +2931,19 @@ module Aws::VerifiedPermissions
     # @!attribute [rw] policy_store_id
     #   Specifies the ID of the policy store. Policies in this policy store
     #   will be used to make an authorization decision for the input.
+    #
+    #   To specify a policy store, use its ID or alias name. When using an
+    #   alias name, prefix it with `policy-store-alias/`. For example:
+    #
+    #   * ID: `PSEXAMPLEabcdefg111111`
+    #
+    #   * Alias name: `policy-store-alias/example-policy-store`
+    #
+    #   To view aliases, use [ListPolicyStoreAliases][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListPolicyStoreAliases.html
     #   @return [String]
     #
     # @!attribute [rw] principal
@@ -2636,6 +3027,19 @@ module Aws::VerifiedPermissions
     # @!attribute [rw] policy_store_id
     #   Specifies the ID of the policy store. Policies in this policy store
     #   will be used to make an authorization decision for the input.
+    #
+    #   To specify a policy store, use its ID or alias name. When using an
+    #   alias name, prefix it with `policy-store-alias/`. For example:
+    #
+    #   * ID: `PSEXAMPLEabcdefg111111`
+    #
+    #   * Alias name: `policy-store-alias/example-policy-store`
+    #
+    #   To view aliases, use [ListPolicyStoreAliases][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListPolicyStoreAliases.html
     #   @return [String]
     #
     # @!attribute [rw] identity_token
@@ -2823,6 +3227,19 @@ module Aws::VerifiedPermissions
     # @!attribute [rw] policy_store_id
     #   Specifies the ID of the policy store that contains the identity
     #   sources that you want to list.
+    #
+    #   To specify a policy store, use its ID or alias name. When using an
+    #   alias name, prefix it with `policy-store-alias/`. For example:
+    #
+    #   * ID: `PSEXAMPLEabcdefg111111`
+    #
+    #   * Alias name: `policy-store-alias/example-policy-store`
+    #
+    #   To view aliases, use [ListPolicyStoreAliases][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListPolicyStoreAliases.html
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -2889,6 +3306,19 @@ module Aws::VerifiedPermissions
 
     # @!attribute [rw] policy_store_id
     #   Specifies the ID of the policy store you want to list policies from.
+    #
+    #   To specify a policy store, use its ID or alias name. When using an
+    #   alias name, prefix it with `policy-store-alias/`. For example:
+    #
+    #   * ID: `PSEXAMPLEabcdefg111111`
+    #
+    #   * Alias name: `policy-store-alias/example-policy-store`
+    #
+    #   To view aliases, use [ListPolicyStoreAliases][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListPolicyStoreAliases.html
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -2973,6 +3403,68 @@ module Aws::VerifiedPermissions
     #   `NextToken` after every operation to ensure that you receive all of
     #   the results.
     #
+    #   If you do not specify this parameter, the operation defaults to 5
+    #   policy store aliases per response. You can specify a maximum of 50
+    #   policy store aliases per response.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] filter
+    #   Specifies a filter to narrow the results. You can filter by
+    #   `policyStoreId` to list only the policy store aliases associated
+    #   with a specific policy store.
+    #   @return [Types::PolicyStoreAliasFilter]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/ListPolicyStoreAliasesInput AWS API Documentation
+    #
+    class ListPolicyStoreAliasesInput < Struct.new(
+      :next_token,
+      :max_results,
+      :filter)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   If present, this value indicates that more output is available than
+    #   is included in the current response. Use this value in the
+    #   `NextToken` request parameter in a subsequent call to the operation
+    #   to get the next part of the output. You should repeat this until the
+    #   `NextToken` response element comes back as `null`. This indicates
+    #   that this is the last page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy_store_aliases
+    #   The list of policy store aliases in the account.
+    #   @return [Array<Types::PolicyStoreAliasItem>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/ListPolicyStoreAliasesOutput AWS API Documentation
+    #
+    class ListPolicyStoreAliasesOutput < Struct.new(
+      :next_token,
+      :policy_store_aliases)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   Specifies that you want to receive the next page of results. Valid
+    #   only if you received a `NextToken` response in the previous request.
+    #   If you did, it indicates that more output is available. Set this
+    #   parameter to the value provided by the previous call's `NextToken`
+    #   response to request the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   Specifies the total number of results that you want included in each
+    #   response. If additional items exist beyond the number you specify,
+    #   the `NextToken` response element is returned with a value (not
+    #   null). Include the specified value as the `NextToken` request
+    #   parameter in the next call to the operation to get the next set of
+    #   results. Note that the service might return fewer results than the
+    #   maximum even when there are more results available. You should check
+    #   `NextToken` after every operation to ensure that you receive all of
+    #   the results.
+    #
     #   If you do not specify this parameter, the operation defaults to 10
     #   policy stores per response. You can specify a maximum of 50 policy
     #   stores per response.
@@ -3012,6 +3504,19 @@ module Aws::VerifiedPermissions
     # @!attribute [rw] policy_store_id
     #   Specifies the ID of the policy store that contains the policy
     #   templates you want to list.
+    #
+    #   To specify a policy store, use its ID or alias name. When using an
+    #   alias name, prefix it with `policy-store-alias/`. For example:
+    #
+    #   * ID: `PSEXAMPLEabcdefg111111`
+    #
+    #   * Alias name: `policy-store-alias/example-policy-store`
+    #
+    #   To view aliases, use [ListPolicyStoreAliases][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListPolicyStoreAliases.html
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -3890,6 +4395,11 @@ module Aws::VerifiedPermissions
     #   request. For example, `"effect": "Permit"`.
     #   @return [String]
     #
+    # @!attribute [rw] name
+    #   The name of the policy, if one was assigned when the policy was
+    #   created or last updated.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/PolicyItem AWS API Documentation
     #
     class PolicyItem < Struct.new(
@@ -3902,7 +4412,68 @@ module Aws::VerifiedPermissions
       :definition,
       :created_date,
       :last_updated_date,
-      :effect)
+      :effect,
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains filters for the `ListPolicyStoreAliases` operation.
+    #
+    # @!attribute [rw] policy_store_id
+    #   The ID of the policy store to filter by. Only policy store aliases
+    #   associated with this policy store are returned.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/PolicyStoreAliasFilter AWS API Documentation
+    #
+    class PolicyStoreAliasFilter < Struct.new(
+      :policy_store_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about a policy store alias.
+    #
+    # This data type is used as a response parameter for the
+    # [ListPolicyStoreAliases][1] operation.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListPolicyStoreAliases.html
+    #
+    # @!attribute [rw] alias_name
+    #   The name of the policy store alias.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy_store_id
+    #   The ID of the policy store associated with the alias.
+    #   @return [String]
+    #
+    # @!attribute [rw] alias_arn
+    #   The Amazon Resource Name (ARN) of the policy store alias.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The date and time the policy store alias was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] state
+    #   The state of the policy store alias. Policy Store Aliases in the
+    #   Active state can be used normally. When a policy store alias is
+    #   deleted, it enters the PendingDeletion state. Policy Store Aliases
+    #   in the PendingDeletion state cannot be used, and creating a policy
+    #   store alias with the same alias name will fail.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/PolicyStoreAliasItem AWS API Documentation
+    #
+    class PolicyStoreAliasItem < Struct.new(
+      :alias_name,
+      :policy_store_id,
+      :alias_arn,
+      :created_at,
+      :state)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3980,6 +4551,11 @@ module Aws::VerifiedPermissions
     #   updated.
     #   @return [Time]
     #
+    # @!attribute [rw] name
+    #   The name of the policy template, if one was assigned when the policy
+    #   template was created or last updated.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/PolicyTemplateItem AWS API Documentation
     #
     class PolicyTemplateItem < Struct.new(
@@ -3987,13 +4563,27 @@ module Aws::VerifiedPermissions
       :policy_template_id,
       :description,
       :created_date,
-      :last_updated_date)
+      :last_updated_date,
+      :name)
       SENSITIVE = [:description]
       include Aws::Structure
     end
 
     # @!attribute [rw] policy_store_id
     #   Specifies the ID of the policy store in which to place the schema.
+    #
+    #   To specify a policy store, use its ID or alias name. When using an
+    #   alias name, prefix it with `policy-store-alias/`. For example:
+    #
+    #   * ID: `PSEXAMPLEabcdefg111111`
+    #
+    #   * Alias name: `policy-store-alias/example-policy-store`
+    #
+    #   To view aliases, use [ListPolicyStoreAliases][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListPolicyStoreAliases.html
     #   @return [String]
     #
     # @!attribute [rw] definition
@@ -4497,6 +5087,19 @@ module Aws::VerifiedPermissions
     # @!attribute [rw] policy_store_id
     #   Specifies the ID of the policy store that contains the identity
     #   source that you want to update.
+    #
+    #   To specify a policy store, use its ID or alias name. When using an
+    #   alias name, prefix it with `policy-store-alias/`. For example:
+    #
+    #   * ID: `PSEXAMPLEabcdefg111111`
+    #
+    #   * Alias name: `policy-store-alias/example-policy-store`
+    #
+    #   To view aliases, use [ListPolicyStoreAliases][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListPolicyStoreAliases.html
     #   @return [String]
     #
     # @!attribute [rw] identity_source_id
@@ -4777,11 +5380,31 @@ module Aws::VerifiedPermissions
     # @!attribute [rw] policy_store_id
     #   Specifies the ID of the policy store that contains the policy that
     #   you want to update.
+    #
+    #   To specify a policy store, use its ID or alias name. When using an
+    #   alias name, prefix it with `policy-store-alias/`. For example:
+    #
+    #   * ID: `PSEXAMPLEabcdefg111111`
+    #
+    #   * Alias name: `policy-store-alias/example-policy-store`
+    #
+    #   To view aliases, use [ListPolicyStoreAliases][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListPolicyStoreAliases.html
     #   @return [String]
     #
     # @!attribute [rw] policy_id
     #   Specifies the ID of the policy that you want to update. To find this
     #   value, you can use [ListPolicies][1].
+    #
+    #   You can use the policy name in place of the policy ID. When using a
+    #   name, prefix it with `name/`. For example:
+    #
+    #   * ID: `SPEXAMPLEabcdefg111111`
+    #
+    #   * Name: `name/example-policy`
     #
     #
     #
@@ -4792,6 +5415,9 @@ module Aws::VerifiedPermissions
     #   Specifies the updated policy content that you want to replace on the
     #   specified policy. The content must be valid Cedar policy language
     #   text.
+    #
+    #   If you don't specify this parameter, the existing policy definition
+    #   remains unchanged.
     #
     #   You can change only the following elements from the policy
     #   definition:
@@ -4811,12 +5437,29 @@ module Aws::VerifiedPermissions
     #   * The `resource` referenced by the policy.
     #   @return [Types::UpdatePolicyDefinition]
     #
+    # @!attribute [rw] name
+    #   Specifies a name for the policy that is unique among all policies
+    #   within the policy store. You can use the name in place of the policy
+    #   ID in API operations that reference the policy. The name must be
+    #   prefixed with `name/`.
+    #
+    #   <note markdown="1"> If you don't include the name in an update request, the existing
+    #   name is unchanged. To remove a name, set it to an empty string
+    #   (`""`).
+    #
+    #    </note>
+    #
+    #   If you specify a name that is already associated with another policy
+    #   in the policy store, you receive a `ConflictException` error.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/UpdatePolicyInput AWS API Documentation
     #
     class UpdatePolicyInput < Struct.new(
       :policy_store_id,
       :policy_id,
-      :definition)
+      :definition,
+      :name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4884,6 +5527,19 @@ module Aws::VerifiedPermissions
 
     # @!attribute [rw] policy_store_id
     #   Specifies the ID of the policy store that you want to update
+    #
+    #   To specify a policy store, use its ID or alias name. When using an
+    #   alias name, prefix it with `policy-store-alias/`. For example:
+    #
+    #   * ID: `PSEXAMPLEabcdefg111111`
+    #
+    #   * Alias name: `policy-store-alias/example-policy-store`
+    #
+    #   To view aliases, use [ListPolicyStoreAliases][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListPolicyStoreAliases.html
     #   @return [String]
     #
     # @!attribute [rw] validation_settings
@@ -4949,10 +5605,30 @@ module Aws::VerifiedPermissions
     # @!attribute [rw] policy_store_id
     #   Specifies the ID of the policy store that contains the policy
     #   template that you want to update.
+    #
+    #   To specify a policy store, use its ID or alias name. When using an
+    #   alias name, prefix it with `policy-store-alias/`. For example:
+    #
+    #   * ID: `PSEXAMPLEabcdefg111111`
+    #
+    #   * Alias name: `policy-store-alias/example-policy-store`
+    #
+    #   To view aliases, use [ListPolicyStoreAliases][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListPolicyStoreAliases.html
     #   @return [String]
     #
     # @!attribute [rw] policy_template_id
     #   Specifies the ID of the policy template that you want to update.
+    #
+    #   You can use the policy template name in place of the policy template
+    #   ID. When using a name, prefix it with `name/`. For example:
+    #
+    #   * ID: `PTEXAMPLEabcdefg111111`
+    #
+    #   * Name: `name/example-policy-template`
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -4978,13 +5654,31 @@ module Aws::VerifiedPermissions
     #   * The `resource` referenced by the policy template.
     #   @return [String]
     #
+    # @!attribute [rw] name
+    #   Specifies a name for the policy template that is unique among all
+    #   policy templates within the policy store. You can use the name in
+    #   place of the policy template ID in API operations that reference the
+    #   policy template. The name must be prefixed with `name/`.
+    #
+    #   <note markdown="1"> If you don't include the name in an update request, the existing
+    #   name is unchanged. To remove a name, set it to an empty string
+    #   (`""`).
+    #
+    #    </note>
+    #
+    #   If you specify a name that is already associated with another policy
+    #   template in the policy store, you receive a `ConflictException`
+    #   error.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/UpdatePolicyTemplateInput AWS API Documentation
     #
     class UpdatePolicyTemplateInput < Struct.new(
       :policy_store_id,
       :policy_template_id,
       :description,
-      :statement)
+      :statement,
+      :name)
       SENSITIVE = [:description, :statement]
       include Aws::Structure
     end

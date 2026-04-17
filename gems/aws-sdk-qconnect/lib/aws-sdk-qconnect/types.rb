@@ -10344,6 +10344,11 @@ module Aws::QConnect
     #   Additional metadata for the message.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] origin_request_id
+    #   Request identifier from the origin system, used for end-to-end
+    #   tracing across spans.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/SendMessageRequest AWS API Documentation
     #
     class SendMessageRequest < Struct.new(
@@ -10356,7 +10361,8 @@ module Aws::QConnect
       :configuration,
       :client_token,
       :orchestrator_use_case,
-      :metadata)
+      :metadata,
+      :origin_request_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10645,6 +10651,10 @@ module Aws::QConnect
     #   The service request ID that initiated the operation
     #   @return [String]
     #
+    # @!attribute [rw] origin_request_id
+    #   The origin request identifier for end-to-end tracing.
+    #   @return [String]
+    #
     # @!attribute [rw] attributes
     #   Span-specific contextual attributes
     #   @return [Types::SpanAttributes]
@@ -10662,6 +10672,7 @@ module Aws::QConnect
       :end_timestamp,
       :status,
       :request_id,
+      :origin_request_id,
       :attributes)
       SENSITIVE = []
       include Aws::Structure

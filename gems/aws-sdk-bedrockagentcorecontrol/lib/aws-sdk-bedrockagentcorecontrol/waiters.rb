@@ -70,11 +70,11 @@ module Aws::BedrockAgentCoreControl
   # | waiter_name                 | params                         | :delay   | :max_attempts |
   # | --------------------------- | ------------------------------ | -------- | ------------- |
   # | memory_created              | {Client#get_memory}            | 2        | 60            |
-  # | policy_active               | {Client#get_policy}            | 2        | 60            |
+  # | policy_active               | {Client#get_policy}            | 5        | 24            |
   # | policy_deleted              | {Client#get_policy}            | 2        | 60            |
-  # | policy_engine_active        | {Client#get_policy_engine}     | 2        | 60            |
+  # | policy_engine_active        | {Client#get_policy_engine}     | 5        | 24            |
   # | policy_engine_deleted       | {Client#get_policy_engine}     | 2        | 60            |
-  # | policy_generation_completed | {Client#get_policy_generation} | 2        | 60            |
+  # | policy_generation_completed | {Client#get_policy_generation} | 5        | 24            |
   #
   module Waiters
 
@@ -133,15 +133,15 @@ module Aws::BedrockAgentCoreControl
 
       # @param [Hash] options
       # @option options [required, Client] :client
-      # @option options [Integer] :max_attempts (60)
-      # @option options [Integer] :delay (2)
+      # @option options [Integer] :max_attempts (24)
+      # @option options [Integer] :delay (5)
       # @option options [Proc] :before_attempt
       # @option options [Proc] :before_wait
       def initialize(options)
         @client = options.fetch(:client)
         @waiter = Aws::Waiters::Waiter.new({
-          max_attempts: 60,
-          delay: 2,
+          max_attempts: 24,
+          delay: 5,
           poller: Aws::Waiters::Poller.new(
             operation_name: :get_policy,
             acceptors: [
@@ -240,15 +240,15 @@ module Aws::BedrockAgentCoreControl
 
       # @param [Hash] options
       # @option options [required, Client] :client
-      # @option options [Integer] :max_attempts (60)
-      # @option options [Integer] :delay (2)
+      # @option options [Integer] :max_attempts (24)
+      # @option options [Integer] :delay (5)
       # @option options [Proc] :before_attempt
       # @option options [Proc] :before_wait
       def initialize(options)
         @client = options.fetch(:client)
         @waiter = Aws::Waiters::Waiter.new({
-          max_attempts: 60,
-          delay: 2,
+          max_attempts: 24,
+          delay: 5,
           poller: Aws::Waiters::Poller.new(
             operation_name: :get_policy_engine,
             acceptors: [
@@ -347,15 +347,15 @@ module Aws::BedrockAgentCoreControl
 
       # @param [Hash] options
       # @option options [required, Client] :client
-      # @option options [Integer] :max_attempts (60)
-      # @option options [Integer] :delay (2)
+      # @option options [Integer] :max_attempts (24)
+      # @option options [Integer] :delay (5)
       # @option options [Proc] :before_attempt
       # @option options [Proc] :before_wait
       def initialize(options)
         @client = options.fetch(:client)
         @waiter = Aws::Waiters::Waiter.new({
-          max_attempts: 60,
-          delay: 2,
+          max_attempts: 24,
+          delay: 5,
           poller: Aws::Waiters::Poller.new(
             operation_name: :get_policy_generation,
             acceptors: [

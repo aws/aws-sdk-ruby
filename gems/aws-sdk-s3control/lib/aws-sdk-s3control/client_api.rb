@@ -47,6 +47,7 @@ module Aws::S3Control
     AsyncRequestStatus = Shapes::StringShape.new(name: 'AsyncRequestStatus')
     AsyncRequestTokenARN = Shapes::StringShape.new(name: 'AsyncRequestTokenARN')
     AsyncResponseDetails = Shapes::StructureShape.new(name: 'AsyncResponseDetails')
+    AuditContext = Shapes::StringShape.new(name: 'AuditContext')
     AwsLambdaTransformation = Shapes::StructureShape.new(name: 'AwsLambdaTransformation')
     AwsLambdaTransformationPayload = Shapes::StringShape.new(name: 'AwsLambdaTransformationPayload')
     AwsOrgArn = Shapes::StringShape.new(name: 'AwsOrgArn')
@@ -1107,6 +1108,7 @@ module Aws::S3Control
     GetDataAccessRequest.add_member(:duration_seconds, Shapes::ShapeRef.new(shape: DurationSeconds, location: "querystring", location_name: "durationSeconds"))
     GetDataAccessRequest.add_member(:privilege, Shapes::ShapeRef.new(shape: Privilege, location: "querystring", location_name: "privilege"))
     GetDataAccessRequest.add_member(:target_type, Shapes::ShapeRef.new(shape: S3PrefixType, location: "querystring", location_name: "targetType"))
+    GetDataAccessRequest.add_member(:audit_context, Shapes::ShapeRef.new(shape: AuditContext, location: "querystring", location_name: "auditContext"))
     GetDataAccessRequest.struct_class = Types::GetDataAccessRequest
 
     GetDataAccessResult.add_member(:credentials, Shapes::ShapeRef.new(shape: Credentials, location_name: "Credentials"))

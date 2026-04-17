@@ -396,6 +396,7 @@ module Aws::MediaTailor
     CreatePrefetchScheduleRequest.add_member(:recurring_prefetch_configuration, Shapes::ShapeRef.new(shape: RecurringPrefetchConfiguration, location_name: "RecurringPrefetchConfiguration"))
     CreatePrefetchScheduleRequest.add_member(:schedule_type, Shapes::ShapeRef.new(shape: PrefetchScheduleType, location_name: "ScheduleType"))
     CreatePrefetchScheduleRequest.add_member(:stream_id, Shapes::ShapeRef.new(shape: __string, location_name: "StreamId"))
+    CreatePrefetchScheduleRequest.add_member(:tags, Shapes::ShapeRef.new(shape: __mapOf__string, location_name: "tags"))
     CreatePrefetchScheduleRequest.struct_class = Types::CreatePrefetchScheduleRequest
 
     CreatePrefetchScheduleResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "Arn"))
@@ -406,6 +407,7 @@ module Aws::MediaTailor
     CreatePrefetchScheduleResponse.add_member(:recurring_prefetch_configuration, Shapes::ShapeRef.new(shape: RecurringPrefetchConfiguration, location_name: "RecurringPrefetchConfiguration"))
     CreatePrefetchScheduleResponse.add_member(:schedule_type, Shapes::ShapeRef.new(shape: PrefetchScheduleType, location_name: "ScheduleType"))
     CreatePrefetchScheduleResponse.add_member(:stream_id, Shapes::ShapeRef.new(shape: __string, location_name: "StreamId"))
+    CreatePrefetchScheduleResponse.add_member(:tags, Shapes::ShapeRef.new(shape: __mapOf__string, location_name: "tags"))
     CreatePrefetchScheduleResponse.struct_class = Types::CreatePrefetchScheduleResponse
 
     CreateProgramRequest.add_member(:ad_breaks, Shapes::ShapeRef.new(shape: __listOfAdBreak, location_name: "AdBreaks"))
@@ -416,6 +418,7 @@ module Aws::MediaTailor
     CreateProgramRequest.add_member(:source_location_name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "SourceLocationName"))
     CreateProgramRequest.add_member(:vod_source_name, Shapes::ShapeRef.new(shape: __string, location_name: "VodSourceName"))
     CreateProgramRequest.add_member(:audience_media, Shapes::ShapeRef.new(shape: __listOfAudienceMedia, location_name: "AudienceMedia"))
+    CreateProgramRequest.add_member(:tags, Shapes::ShapeRef.new(shape: __mapOf__string, location_name: "tags"))
     CreateProgramRequest.struct_class = Types::CreateProgramRequest
 
     CreateProgramResponse.add_member(:ad_breaks, Shapes::ShapeRef.new(shape: __listOfAdBreak, location_name: "AdBreaks"))
@@ -430,6 +433,7 @@ module Aws::MediaTailor
     CreateProgramResponse.add_member(:clip_range, Shapes::ShapeRef.new(shape: ClipRange, location_name: "ClipRange"))
     CreateProgramResponse.add_member(:duration_millis, Shapes::ShapeRef.new(shape: __long, location_name: "DurationMillis"))
     CreateProgramResponse.add_member(:audience_media, Shapes::ShapeRef.new(shape: __listOfAudienceMedia, location_name: "AudienceMedia"))
+    CreateProgramResponse.add_member(:tags, Shapes::ShapeRef.new(shape: __mapOf__string, location_name: "tags"))
     CreateProgramResponse.struct_class = Types::CreateProgramResponse
 
     CreateSourceLocationRequest.add_member(:access_configuration, Shapes::ShapeRef.new(shape: AccessConfiguration, location_name: "AccessConfiguration"))
@@ -575,6 +579,7 @@ module Aws::MediaTailor
     DescribeProgramResponse.add_member(:clip_range, Shapes::ShapeRef.new(shape: ClipRange, location_name: "ClipRange"))
     DescribeProgramResponse.add_member(:duration_millis, Shapes::ShapeRef.new(shape: Long, location_name: "DurationMillis"))
     DescribeProgramResponse.add_member(:audience_media, Shapes::ShapeRef.new(shape: __listOfAudienceMedia, location_name: "AudienceMedia"))
+    DescribeProgramResponse.add_member(:tags, Shapes::ShapeRef.new(shape: __mapOf__string, location_name: "tags"))
     DescribeProgramResponse.struct_class = Types::DescribeProgramResponse
 
     DescribeSourceLocationRequest.add_member(:source_location_name, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "SourceLocationName"))
@@ -661,6 +666,7 @@ module Aws::MediaTailor
     GetPrefetchScheduleResponse.add_member(:schedule_type, Shapes::ShapeRef.new(shape: PrefetchScheduleType, location_name: "ScheduleType"))
     GetPrefetchScheduleResponse.add_member(:recurring_prefetch_configuration, Shapes::ShapeRef.new(shape: RecurringPrefetchConfiguration, location_name: "RecurringPrefetchConfiguration"))
     GetPrefetchScheduleResponse.add_member(:stream_id, Shapes::ShapeRef.new(shape: __string, location_name: "StreamId"))
+    GetPrefetchScheduleResponse.add_member(:tags, Shapes::ShapeRef.new(shape: __mapOf__string, location_name: "tags"))
     GetPrefetchScheduleResponse.struct_class = Types::GetPrefetchScheduleResponse
 
     HlsConfiguration.add_member(:manifest_endpoint_prefix, Shapes::ShapeRef.new(shape: __string, location_name: "ManifestEndpointPrefix"))
@@ -833,6 +839,7 @@ module Aws::MediaTailor
     PrefetchSchedule.add_member(:schedule_type, Shapes::ShapeRef.new(shape: PrefetchScheduleType, location_name: "ScheduleType"))
     PrefetchSchedule.add_member(:recurring_prefetch_configuration, Shapes::ShapeRef.new(shape: RecurringPrefetchConfiguration, location_name: "RecurringPrefetchConfiguration"))
     PrefetchSchedule.add_member(:stream_id, Shapes::ShapeRef.new(shape: __string, location_name: "StreamId"))
+    PrefetchSchedule.add_member(:tags, Shapes::ShapeRef.new(shape: __mapOf__string, location_name: "tags"))
     PrefetchSchedule.struct_class = Types::PrefetchSchedule
 
     PutChannelPolicyRequest.add_member(:channel_name, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "ChannelName"))
@@ -1078,6 +1085,7 @@ module Aws::MediaTailor
     UpdateProgramResponse.add_member(:duration_millis, Shapes::ShapeRef.new(shape: __long, location_name: "DurationMillis"))
     UpdateProgramResponse.add_member(:scheduled_start_time, Shapes::ShapeRef.new(shape: __timestampUnix, location_name: "ScheduledStartTime"))
     UpdateProgramResponse.add_member(:audience_media, Shapes::ShapeRef.new(shape: __listOfAudienceMedia, location_name: "AudienceMedia"))
+    UpdateProgramResponse.add_member(:tags, Shapes::ShapeRef.new(shape: __mapOf__string, location_name: "tags"))
     UpdateProgramResponse.struct_class = Types::UpdateProgramResponse
 
     UpdateProgramScheduleConfiguration.add_member(:transition, Shapes::ShapeRef.new(shape: UpdateProgramTransition, location_name: "Transition"))

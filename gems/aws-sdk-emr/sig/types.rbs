@@ -1121,6 +1121,7 @@ module Aws::EMR
 
     class MonitoringConfiguration
       attr_accessor cloud_watch_log_configuration: Types::CloudWatchLogConfiguration
+      attr_accessor s3_logging_configuration: Types::S3LoggingConfiguration
       SENSITIVE: []
     end
 
@@ -1326,6 +1327,7 @@ module Aws::EMR
       attr_accessor release_label: ::String
       attr_accessor instances: Types::JobFlowInstancesConfig
       attr_accessor steps: ::Array[Types::StepConfig]
+      attr_accessor step_execution_role_arn: ::String
       attr_accessor bootstrap_actions: ::Array[Types::BootstrapActionConfig]
       attr_accessor supported_products: ::Array[::String]
       attr_accessor new_supported_products: ::Array[Types::SupportedProductConfig]
@@ -1357,6 +1359,11 @@ module Aws::EMR
     class RunJobFlowOutput
       attr_accessor job_flow_id: ::String
       attr_accessor cluster_arn: ::String
+      SENSITIVE: []
+    end
+
+    class S3LoggingConfiguration
+      attr_accessor log_type_upload_policy: ::Hash[("system-logs" | "application-logs" | "persistent-ui-logs"), ("emr-managed" | "on-customer-s3only" | "disabled")]
       SENSITIVE: []
     end
 

@@ -81,8 +81,8 @@ module Aws::GeoMaps
       attr_accessor color_scheme: ("Light" | "Dark")
       attr_accessor political_view: ::String
       attr_accessor terrain: ("Hillshade" | "Terrain3D")
-      attr_accessor contour_density: ("Medium")
-      attr_accessor traffic: ("All")
+      attr_accessor contour_density: ("Low" | "Medium" | "High")
+      attr_accessor traffic: ("All" | "Congestion")
       attr_accessor travel_modes: ::Array[("Transit" | "Truck")]
       attr_accessor buildings: ("Buildings3D")
       attr_accessor key: ::String

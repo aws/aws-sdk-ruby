@@ -391,6 +391,7 @@ module Aws::ECR
     UnableToDecryptSecretValueException = Shapes::StructureShape.new(name: 'UnableToDecryptSecretValueException')
     UnableToGetUpstreamImageException = Shapes::StructureShape.new(name: 'UnableToGetUpstreamImageException')
     UnableToGetUpstreamLayerException = Shapes::StructureShape.new(name: 'UnableToGetUpstreamLayerException')
+    UnableToListUpstreamImageReferrersException = Shapes::StructureShape.new(name: 'UnableToListUpstreamImageReferrersException')
     UnsupportedImageTypeException = Shapes::StructureShape.new(name: 'UnsupportedImageTypeException')
     UnsupportedUpstreamRegistryException = Shapes::StructureShape.new(name: 'UnsupportedUpstreamRegistryException')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
@@ -1459,6 +1460,9 @@ module Aws::ECR
     UnableToGetUpstreamLayerException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
     UnableToGetUpstreamLayerException.struct_class = Types::UnableToGetUpstreamLayerException
 
+    UnableToListUpstreamImageReferrersException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    UnableToListUpstreamImageReferrersException.struct_class = Types::UnableToListUpstreamImageReferrersException
+
     UnsupportedImageTypeException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
     UnsupportedImageTypeException.struct_class = Types::UnsupportedImageTypeException
 
@@ -2052,6 +2056,7 @@ module Aws::ECR
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: RepositoryNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: UnableToListUpstreamImageReferrersException)
       end)
 
       api.add_operation(:list_images, Seahorse::Model::Operation.new.tap do |o|

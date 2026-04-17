@@ -2663,6 +2663,44 @@ module Aws::SESV2
     #
     #   * {Types::GetEmailAddressInsightsResponse#mailbox_validation #mailbox_validation} => Types::MailboxValidation
     #
+    #
+    # @example Example: Get Email Address Insights
+    #
+    #   # Performs email validation against an email address.
+    #
+    #   resp = client.get_email_address_insights({
+    #     email_address: "hello@example.com", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     mailbox_validation: {
+    #       evaluations: {
+    #         has_valid_dns_records: {
+    #           confidence_verdict: "MEDIUM", 
+    #         }, 
+    #         has_valid_syntax: {
+    #           confidence_verdict: "HIGH", 
+    #         }, 
+    #         is_disposable: {
+    #           confidence_verdict: "LOW", 
+    #         }, 
+    #         is_random_input: {
+    #           confidence_verdict: "LOW", 
+    #         }, 
+    #         is_role_address: {
+    #           confidence_verdict: "LOW", 
+    #         }, 
+    #         mailbox_exists: {
+    #           confidence_verdict: "MEDIUM", 
+    #         }, 
+    #       }, 
+    #       is_valid: {
+    #         confidence_verdict: "HIGH", 
+    #       }, 
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_email_address_insights({
@@ -6219,7 +6257,7 @@ module Aws::SESV2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-sesv2'
-      context[:gem_version] = '1.95.0'
+      context[:gem_version] = '1.97.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

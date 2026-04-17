@@ -3234,38 +3234,6 @@
                     },
                     "body": "{\n    \"denseSetMap\": {\n        \"x\": [],\n        \"y\": [\"a\", \"b\"]\n    }\n}"
                 }
-            },
-            {
-                "id": "RestJsonDeserializesDenseSetMapAndSkipsNull",
-                "description": "Clients SHOULD tolerate seeing a null value in a dense map, and they SHOULD\ndrop the null key-value pair.",
-                "given": {
-                    "name": "JsonMaps",
-                    "http": {
-                        "method": "POST",
-                        "requestUri": "/JsonMaps",
-                        "responseCode": 200
-                    },
-                    "output": {
-                        "shape": "JsonMapsInputOutput"
-                    },
-                    "documentation": "<p>The example tests basic map serialization.</p>"
-                },
-                "result": {
-                    "denseSetMap": {
-                        "x": [],
-                        "y": [
-                            "a",
-                            "b"
-                        ]
-                    }
-                },
-                "response": {
-                    "status_code": 200,
-                    "headers": {
-                        "Content-Type": "application/json"
-                    },
-                    "body": "{\n    \"denseSetMap\": {\n        \"x\": [],\n        \"y\": [\"a\", \"b\"],\n        \"z\": null\n    }\n}"
-                }
             }
         ]
     },
@@ -4582,6 +4550,378 @@
                         "Content-Type": "application/json"
                     },
                     "body": "{\n    \"floatValue\": \"-Infinity\",\n    \"DoubleDribble\": \"-Infinity\"\n}"
+                }
+            }
+        ]
+    },
+    {
+        "description": "Test cases for SparseJsonLists operation",
+        "metadata": {
+            "apiVersion": "2019-12-16",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "restjson",
+            "protocol": "rest-json",
+            "protocols": [
+                "rest-json"
+            ],
+            "serviceFullName": "RestJson",
+            "serviceId": "Rest Json Protocol",
+            "signatureVersion": "v4",
+            "signingName": "RestJson",
+            "uid": "rest-json-protocol-2019-12-16"
+        },
+        "shapes": {
+            "Integer": {
+                "type": "integer",
+                "box": true
+            },
+            "SparseJsonListsInputOutput": {
+                "type": "structure",
+                "members": {
+                    "sparseStringList": {
+                        "shape": "SparseStringList"
+                    },
+                    "sparseShortList": {
+                        "shape": "SparseShortList"
+                    }
+                }
+            },
+            "SparseShortList": {
+                "type": "list",
+                "member": {
+                    "shape": "Integer"
+                },
+                "sparse": true
+            },
+            "SparseStringList": {
+                "type": "list",
+                "member": {
+                    "shape": "String"
+                },
+                "sparse": true
+            },
+            "String": {
+                "type": "string"
+            }
+        },
+        "cases": [
+            {
+                "id": "RestJsonSparseListsSerializeNull",
+                "description": "Serializes null values in sparse lists",
+                "given": {
+                    "name": "SparseJsonLists",
+                    "http": {
+                        "method": "PUT",
+                        "requestUri": "/SparseJsonLists",
+                        "responseCode": 200
+                    },
+                    "output": {
+                        "shape": "SparseJsonListsInputOutput"
+                    },
+                    "idempotent": true
+                },
+                "result": {
+                    "sparseStringList": [
+                        null,
+                        "hi"
+                    ],
+                    "sparseShortList": [
+                        null,
+                        2
+                    ]
+                },
+                "response": {
+                    "status_code": 200,
+                    "headers": {
+                        "Content-Type": "application/json"
+                    },
+                    "body": "{\n    \"sparseStringList\": [\n        null,\n        \"hi\"\n    ],\n    \"sparseShortList\": [\n        null,\n        2\n    ]\n}"
+                }
+            }
+        ]
+    },
+    {
+        "description": "Test cases for SparseJsonMaps operation",
+        "metadata": {
+            "apiVersion": "2019-12-16",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "restjson",
+            "protocol": "rest-json",
+            "protocols": [
+                "rest-json"
+            ],
+            "serviceFullName": "RestJson",
+            "serviceId": "Rest Json Protocol",
+            "signatureVersion": "v4",
+            "signingName": "RestJson",
+            "uid": "rest-json-protocol-2019-12-16"
+        },
+        "shapes": {
+            "Boolean": {
+                "type": "boolean",
+                "box": true
+            },
+            "GreetingStruct": {
+                "type": "structure",
+                "members": {
+                    "hi": {
+                        "shape": "String"
+                    }
+                }
+            },
+            "Integer": {
+                "type": "integer",
+                "box": true
+            },
+            "SparseBooleanMap": {
+                "type": "map",
+                "key": {
+                    "shape": "String"
+                },
+                "value": {
+                    "shape": "Boolean"
+                },
+                "sparse": true
+            },
+            "SparseJsonMapsInputOutput": {
+                "type": "structure",
+                "members": {
+                    "sparseStructMap": {
+                        "shape": "SparseStructMap"
+                    },
+                    "sparseNumberMap": {
+                        "shape": "SparseNumberMap"
+                    },
+                    "sparseBooleanMap": {
+                        "shape": "SparseBooleanMap"
+                    },
+                    "sparseStringMap": {
+                        "shape": "SparseStringMap"
+                    },
+                    "sparseSetMap": {
+                        "shape": "SparseSetMap"
+                    }
+                }
+            },
+            "SparseNumberMap": {
+                "type": "map",
+                "key": {
+                    "shape": "String"
+                },
+                "value": {
+                    "shape": "Integer"
+                },
+                "sparse": true
+            },
+            "SparseSetMap": {
+                "type": "map",
+                "key": {
+                    "shape": "String"
+                },
+                "value": {
+                    "shape": "StringSet"
+                },
+                "sparse": true
+            },
+            "SparseStringMap": {
+                "type": "map",
+                "key": {
+                    "shape": "String"
+                },
+                "value": {
+                    "shape": "String"
+                },
+                "sparse": true
+            },
+            "SparseStructMap": {
+                "type": "map",
+                "key": {
+                    "shape": "String"
+                },
+                "value": {
+                    "shape": "GreetingStruct"
+                },
+                "sparse": true
+            },
+            "String": {
+                "type": "string"
+            },
+            "StringSet": {
+                "type": "list",
+                "member": {
+                    "shape": "String"
+                }
+            }
+        },
+        "cases": [
+            {
+                "id": "RestJsonSparseJsonMaps",
+                "description": "Deserializes JSON maps",
+                "given": {
+                    "name": "SparseJsonMaps",
+                    "http": {
+                        "method": "POST",
+                        "requestUri": "/SparseJsonMaps",
+                        "responseCode": 200
+                    },
+                    "output": {
+                        "shape": "SparseJsonMapsInputOutput"
+                    },
+                    "documentation": "<p>This example tests sparse map serialization.</p>"
+                },
+                "result": {
+                    "sparseStructMap": {
+                        "foo": {
+                            "hi": "there"
+                        },
+                        "baz": {
+                            "hi": "bye"
+                        }
+                    }
+                },
+                "response": {
+                    "status_code": 200,
+                    "headers": {
+                        "Content-Type": "application/json"
+                    },
+                    "body": "{\n    \"sparseStructMap\": {\n        \"foo\": {\n            \"hi\": \"there\"\n        },\n        \"baz\": {\n            \"hi\": \"bye\"\n        }\n   }\n}"
+                }
+            },
+            {
+                "id": "RestJsonDeserializesSparseNullMapValues",
+                "description": "Deserializes null JSON map values",
+                "given": {
+                    "name": "SparseJsonMaps",
+                    "http": {
+                        "method": "POST",
+                        "requestUri": "/SparseJsonMaps",
+                        "responseCode": 200
+                    },
+                    "output": {
+                        "shape": "SparseJsonMapsInputOutput"
+                    },
+                    "documentation": "<p>This example tests sparse map serialization.</p>"
+                },
+                "result": {
+                    "sparseBooleanMap": {
+                        "x": null
+                    },
+                    "sparseNumberMap": {
+                        "x": null
+                    },
+                    "sparseStringMap": {
+                        "x": null
+                    },
+                    "sparseStructMap": {
+                        "x": null
+                    }
+                },
+                "response": {
+                    "status_code": 200,
+                    "headers": {
+                        "Content-Type": "application/json"
+                    },
+                    "body": "{\n    \"sparseBooleanMap\": {\n        \"x\": null\n    },\n    \"sparseNumberMap\": {\n        \"x\": null\n    },\n    \"sparseStringMap\": {\n        \"x\": null\n    },\n    \"sparseStructMap\": {\n        \"x\": null\n    }\n}"
+                }
+            },
+            {
+                "id": "RestJsonDeserializesZeroValuesInSparseMaps",
+                "description": "Ensure that 0 and false are sent over the wire in all maps and lists",
+                "given": {
+                    "name": "SparseJsonMaps",
+                    "http": {
+                        "method": "POST",
+                        "requestUri": "/SparseJsonMaps",
+                        "responseCode": 200
+                    },
+                    "output": {
+                        "shape": "SparseJsonMapsInputOutput"
+                    },
+                    "documentation": "<p>This example tests sparse map serialization.</p>"
+                },
+                "result": {
+                    "sparseNumberMap": {
+                        "x": 0
+                    },
+                    "sparseBooleanMap": {
+                        "x": false
+                    }
+                },
+                "response": {
+                    "status_code": 200,
+                    "headers": {
+                        "Content-Type": "application/json"
+                    },
+                    "body": "{\n    \"sparseNumberMap\": {\n        \"x\": 0\n    },\n    \"sparseBooleanMap\": {\n        \"x\": false\n    }\n}"
+                }
+            },
+            {
+                "id": "RestJsonDeserializesSparseSetMap",
+                "description": "A response that contains a sparse map of sets",
+                "given": {
+                    "name": "SparseJsonMaps",
+                    "http": {
+                        "method": "POST",
+                        "requestUri": "/SparseJsonMaps",
+                        "responseCode": 200
+                    },
+                    "output": {
+                        "shape": "SparseJsonMapsInputOutput"
+                    },
+                    "documentation": "<p>This example tests sparse map serialization.</p>"
+                },
+                "result": {
+                    "sparseSetMap": {
+                        "x": [],
+                        "y": [
+                            "a",
+                            "b"
+                        ]
+                    }
+                },
+                "response": {
+                    "status_code": 200,
+                    "headers": {
+                        "Content-Type": "application/json"
+                    },
+                    "body": "{\n    \"sparseSetMap\": {\n        \"x\": [],\n        \"y\": [\"a\", \"b\"]\n    }\n}"
+                }
+            },
+            {
+                "id": "RestJsonDeserializesSparseSetMapAndRetainsNull",
+                "description": "A response that contains a sparse map of sets.",
+                "given": {
+                    "name": "SparseJsonMaps",
+                    "http": {
+                        "method": "POST",
+                        "requestUri": "/SparseJsonMaps",
+                        "responseCode": 200
+                    },
+                    "output": {
+                        "shape": "SparseJsonMapsInputOutput"
+                    },
+                    "documentation": "<p>This example tests sparse map serialization.</p>"
+                },
+                "result": {
+                    "sparseSetMap": {
+                        "x": [],
+                        "y": [
+                            "a",
+                            "b"
+                        ],
+                        "z": null
+                    }
+                },
+                "response": {
+                    "status_code": 200,
+                    "headers": {
+                        "Content-Type": "application/json"
+                    },
+                    "body": "{\n    \"sparseSetMap\": {\n        \"x\": [],\n        \"y\": [\"a\", \"b\"],\n        \"z\": null\n    }\n}"
                 }
             }
         ]

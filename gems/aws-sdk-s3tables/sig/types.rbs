@@ -382,6 +382,7 @@ module Aws::S3Tables
 
     class IcebergMetadata
       attr_accessor schema: Types::IcebergSchema
+      attr_accessor schema_v2: Types::IcebergSchemaV2
       attr_accessor partition_spec: Types::IcebergPartitionSpec
       attr_accessor write_order: Types::IcebergSortOrder
       attr_accessor properties: ::Hash[::String, ::String]
@@ -404,6 +405,14 @@ module Aws::S3Tables
 
     class IcebergSchema
       attr_accessor fields: ::Array[Types::SchemaField]
+      SENSITIVE: []
+    end
+
+    class IcebergSchemaV2
+      attr_accessor type: ("struct")
+      attr_accessor fields: ::Array[Types::SchemaV2Field]
+      attr_accessor schema_id: ::Integer
+      attr_accessor identifier_field_ids: ::Array[::Integer]
       SENSITIVE: []
     end
 
@@ -635,6 +644,15 @@ module Aws::S3Tables
       attr_accessor name: ::String
       attr_accessor type: ::String
       attr_accessor required: bool
+      SENSITIVE: []
+    end
+
+    class SchemaV2Field
+      attr_accessor id: ::Integer
+      attr_accessor name: ::String
+      attr_accessor type: untyped
+      attr_accessor required: bool
+      attr_accessor doc: ::String
       SENSITIVE: []
     end
 

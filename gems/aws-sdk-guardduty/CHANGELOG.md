@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.146.0 (2026-04-06)
+------------------
+
+* Feature - Migrated to Smithy. No functional changes
+
+1.145.0 (2026-03-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.144.0 (2026-03-05)
+------------------
+
+* Feature - Added MALICIOUS FILE to IndicatorType enum in MDC Sequence
+
 1.143.0 (2026-01-22)
 ------------------
 

@@ -936,8 +936,8 @@ module Aws::GeoRoutes
       attr_accessor roundabout_pass_step_details: Types::RouteRoundaboutPassStepDetails
       attr_accessor signpost: Types::RouteSignpost
       attr_accessor turn_step_details: Types::RouteTurnStepDetails
-      attr_accessor type: ("Arrive" | "Continue" | "Depart" | "Keep" | "RoundaboutEnter" | "RoundaboutExit" | "RoundaboutPass" | "Turn" | "Exit" | "Ramp" | "UTurn")
-      SENSITIVE: [:distance, :duration, :instruction, :type]
+      attr_accessor type: ("Arrive" | "Continue" | "Depart" | "Keep" | "RoundaboutEnter" | "RoundaboutExit" | "RoundaboutPass" | "Turn")
+      SENSITIVE: [:distance, :duration, :instruction]
     end
 
     class RouteRampStepDetails

@@ -345,7 +345,7 @@ module Aws
                                         position: Array[::Float]
                                       },
                                     ],
-                                    routing_boundary: {
+                                    ?routing_boundary: {
                                       geometry: {
                                         auto_circle: {
                                           margin: ::Integer?,

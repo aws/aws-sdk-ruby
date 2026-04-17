@@ -62,6 +62,11 @@ module Aws::ARCRegionswitch
     #   The Amazon Web Services Region for a plan execution.
     #   @return [String]
     #
+    # @!attribute [rw] recovery_execution_id
+    #   The unique identifier of the most recent recovery execution.
+    #   Required when starting a post-recovery execution.
+    #   @return [String]
+    #
     # @!attribute [rw] actual_recovery_time
     #   The actual recovery time that Region switch calculates for a plan
     #   execution. Actual recovery time includes the time for the plan to
@@ -83,6 +88,7 @@ module Aws::ARCRegionswitch
       :execution_state,
       :execution_action,
       :execution_region,
+      :recovery_execution_id,
       :actual_recovery_time)
       SENSITIVE = []
       include Aws::Structure
@@ -446,7 +452,11 @@ module Aws::ARCRegionswitch
     #   @return [Float]
     #
     # @!attribute [rw] region_to_run
-    #   The Amazon Web Services Region for the function to run in.
+    #   The Amazon Web Services Region for the function to run in. For
+    #   recovery workflows use `activatingRegion` or `deactivatingRegion`.
+    #   For post-recovery workflows, use `activeRegion` (the Region with
+    #   customer traffic) or `inactiveRegion` (the Region with no customer
+    #   traffic).
     #   @return [String]
     #
     # @!attribute [rw] ungraceful
@@ -802,6 +812,14 @@ module Aws::ARCRegionswitch
     #   switch plan.
     #   @return [Types::DocumentDbConfiguration]
     #
+    # @!attribute [rw] rds_promote_read_replica_config
+    #   An Amazon RDS promote read replica execution block.
+    #   @return [Types::RdsPromoteReadReplicaConfiguration]
+    #
+    # @!attribute [rw] rds_create_cross_region_read_replica_config
+    #   An Amazon RDS create cross-Region replica execution block.
+    #   @return [Types::RdsCreateCrossRegionReplicaConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/arc-region-switch-2022-07-26/ExecutionBlockConfiguration AWS API Documentation
     #
     class ExecutionBlockConfiguration < Struct.new(
@@ -816,6 +834,8 @@ module Aws::ARCRegionswitch
       :eks_resource_scaling_config,
       :route53_health_check_config,
       :document_db_config,
+      :rds_promote_read_replica_config,
+      :rds_create_cross_region_read_replica_config,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
@@ -832,6 +852,8 @@ module Aws::ARCRegionswitch
       class EksResourceScalingConfig < ExecutionBlockConfiguration; end
       class Route53HealthCheckConfig < ExecutionBlockConfiguration; end
       class DocumentDbConfig < ExecutionBlockConfiguration; end
+      class RdsPromoteReadReplicaConfig < ExecutionBlockConfiguration; end
+      class RdsCreateCrossRegionReadReplicaConfig < ExecutionBlockConfiguration; end
       class Unknown < ExecutionBlockConfiguration; end
     end
 
@@ -1082,6 +1104,11 @@ module Aws::ARCRegionswitch
     #   The Amazon Web Services Region for a plan execution.
     #   @return [String]
     #
+    # @!attribute [rw] recovery_execution_id
+    #   The unique identifier of the most recent recovery execution.
+    #   Required when starting a post-recovery execution.
+    #   @return [String]
+    #
     # @!attribute [rw] step_states
     #   The states of the steps in the plan execution.
     #   @return [Array<Types::StepState>]
@@ -1124,6 +1151,7 @@ module Aws::ARCRegionswitch
       :execution_state,
       :execution_action,
       :execution_region,
+      :recovery_execution_id,
       :step_states,
       :plan,
       :actual_recovery_time,
@@ -1826,6 +1854,66 @@ module Aws::ARCRegionswitch
       include Aws::Structure
     end
 
+    # Configuration for creating an Amazon RDS cross-Region read replica
+    # during post-recovery in a Region switch.
+    #
+    # @!attribute [rw] timeout_minutes
+    #   The timeout value specified for the configuration.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] cross_account_role
+    #   The cross-account role for the configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] external_id
+    #   The external ID (secret key) for the configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] db_instance_arn_map
+    #   A map of database instance ARNs for each Region in the plan.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/arc-region-switch-2022-07-26/RdsCreateCrossRegionReplicaConfiguration AWS API Documentation
+    #
+    class RdsCreateCrossRegionReplicaConfiguration < Struct.new(
+      :timeout_minutes,
+      :cross_account_role,
+      :external_id,
+      :db_instance_arn_map)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration for promoting an Amazon RDS read replica to a standalone
+    # database instance during a Region switch.
+    #
+    # @!attribute [rw] timeout_minutes
+    #   The timeout value specified for the configuration.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] cross_account_role
+    #   The cross-account role for the configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] external_id
+    #   The external ID (secret key) for the configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] db_instance_arn_map
+    #   A map of database instance ARNs for each Region in the plan.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/arc-region-switch-2022-07-26/RdsPromoteReadReplicaConfiguration AWS API Documentation
+    #
+    class RdsPromoteReadReplicaConfiguration < Struct.new(
+      :timeout_minutes,
+      :cross_account_role,
+      :external_id,
+      :db_instance_arn_map)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Configuration for nested Region switch plans. This allows one Region
     # switch plan to trigger another plan as part of its execution.
     #
@@ -2168,6 +2256,12 @@ module Aws::ARCRegionswitch
     #   plan. If set to false, you must specify a specific version.
     #   @return [String]
     #
+    # @!attribute [rw] recovery_execution_id
+    #   The execution identifier of the recovery execution that ran in the
+    #   opposite region post-recovery is ran in. Required when starting a
+    #   post-recovery execution.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/arc-region-switch-2022-07-26/StartPlanExecutionRequest AWS API Documentation
     #
     class StartPlanExecutionRequest < Struct.new(
@@ -2176,7 +2270,8 @@ module Aws::ARCRegionswitch
       :action,
       :mode,
       :comment,
-      :latest_version)
+      :latest_version,
+      :recovery_execution_id)
       SENSITIVE = []
       include Aws::Structure
     end

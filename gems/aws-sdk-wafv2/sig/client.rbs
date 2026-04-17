@@ -3184,6 +3184,31 @@ module Aws
                                 ) -> _GetSampledRequestsResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSampledRequestsResponseSuccess
 
+      interface _GetTopPathStatisticsByTrafficResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetTopPathStatisticsByTrafficResponse]
+        def path_statistics: () -> ::Array[Types::PathStatistics]
+        def total_request_count: () -> ::Integer
+        def next_marker: () -> ::String
+        def top_categories: () -> ::Array[Types::PathStatistics]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WAFV2/Client.html#get_top_path_statistics_by_traffic-instance_method
+      def get_top_path_statistics_by_traffic: (
+                                                web_acl_arn: ::String,
+                                                scope: ("CLOUDFRONT" | "REGIONAL"),
+                                                ?uri_path_prefix: ::String,
+                                                time_window: {
+                                                  start_time: ::Time,
+                                                  end_time: ::Time
+                                                },
+                                                ?bot_category: ::String,
+                                                ?bot_organization: ::String,
+                                                ?bot_name: ::String,
+                                                limit: ::Integer,
+                                                number_of_top_traffic_bots_per_path: ::Integer,
+                                                ?next_marker: ::String
+                                              ) -> _GetTopPathStatisticsByTrafficResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetTopPathStatisticsByTrafficResponseSuccess
+
       interface _GetWebACLResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetWebACLResponse]
         def web_acl: () -> Types::WebACL

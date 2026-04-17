@@ -2495,6 +2495,20 @@ module Aws::GameLiftStreams
     #   capacity that is allocated to you until it is released.
     #   @return [Integer]
     #
+    # @!attribute [rw] vpc_transit_configuration
+    #   Configuration for connecting the stream group to resources in your
+    #   Amazon VPC using AWS Transit Gateway. This setting is optional. If
+    #   specified, Amazon GameLift Streams creates a Transit Gateway to
+    #   enable private network connectivity between the service VPC and your
+    #   VPC. The VPC ID cannot be changed after the stream group is created,
+    #   but you can update the CIDR blocks by calling
+    #   [UpdateStreamGroup][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/gameliftstreams/latest/apireference/API_UpdateStreamGroup.html
+    #   @return [Types::VpcTransitConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gameliftstreams-2018-05-10/LocationConfiguration AWS API Documentation
     #
     class LocationConfiguration < Struct.new(
@@ -2502,7 +2516,8 @@ module Aws::GameLiftStreams
       :always_on_capacity,
       :on_demand_capacity,
       :target_idle_capacity,
-      :maximum_capacity)
+      :maximum_capacity,
+      :vpc_transit_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2605,6 +2620,17 @@ module Aws::GameLiftStreams
     #   immediately to new stream requests with near-instant startup time.
     #   @return [Integer]
     #
+    # @!attribute [rw] internal_vpc_ipv_4_cidr_block
+    #   The CIDR block of the service VPC for this location. Add this CIDR
+    #   block to your VPC route table to enable traffic routing through the
+    #   Transit Gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_transit_configuration
+    #   The VPC transit configuration for this location, including the
+    #   Transit Gateway details needed to complete the VPC attachment setup.
+    #   @return [Types::VpcTransitConfigurationResponse]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gameliftstreams-2018-05-10/LocationState AWS API Documentation
     #
     class LocationState < Struct.new(
@@ -2616,7 +2642,9 @@ module Aws::GameLiftStreams
       :maximum_capacity,
       :requested_capacity,
       :allocated_capacity,
-      :idle_capacity)
+      :idle_capacity,
+      :internal_vpc_ipv_4_cidr_block,
+      :vpc_transit_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4302,6 +4330,72 @@ module Aws::GameLiftStreams
     #
     class ValidationException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration for connecting a stream group location to resources in
+    # your Amazon VPC using AWS Transit Gateway. When you specify a VPC
+    # transit configuration, Amazon GameLift Streams creates a Transit
+    # Gateway and shares it with your account using AWS Resource Access
+    # Manager. After the stream group is active, you must complete the setup
+    # by accepting the resource share, creating a VPC attachment, and
+    # configuring routing.
+    #
+    # @!attribute [rw] vpc_id
+    #   The ID of the Amazon VPC that you want to connect to the stream
+    #   group. The VPC must be in the same Amazon Web Services account as
+    #   the stream group. This value cannot be changed after the stream
+    #   group is created.
+    #   @return [String]
+    #
+    # @!attribute [rw] ipv_4_cidr_blocks
+    #   A list of IPv4 CIDR blocks in your VPC that you want the stream
+    #   group to be able to access. You can specify up to 5 CIDR blocks. The
+    #   CIDR blocks must be valid subsets of the VPC's CIDR blocks and
+    #   cannot overlap with the service VPC CIDR block.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gameliftstreams-2018-05-10/VpcTransitConfiguration AWS API Documentation
+    #
+    class VpcTransitConfiguration < Struct.new(
+      :vpc_id,
+      :ipv_4_cidr_blocks)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The VPC transit configuration details for a stream group location,
+    # including the Transit Gateway information needed to complete the VPC
+    # attachment setup.
+    #
+    # @!attribute [rw] vpc_id
+    #   The ID of the Amazon VPC that is connected to the stream group.
+    #   @return [String]
+    #
+    # @!attribute [rw] ipv_4_cidr_blocks
+    #   The IPv4 CIDR blocks in your VPC that the stream group can access.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] transit_gateway_id
+    #   The ID of the Transit Gateway that Amazon GameLift Streams created
+    #   for this VPC connection. Use this ID when creating your VPC
+    #   attachment.
+    #   @return [String]
+    #
+    # @!attribute [rw] transit_gateway_resource_share_arn
+    #   The ARN of the AWS Resource Access Manager resource share for the
+    #   Transit Gateway. You must accept this resource share before you can
+    #   create a VPC attachment.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gameliftstreams-2018-05-10/VpcTransitConfigurationResponse AWS API Documentation
+    #
+    class VpcTransitConfigurationResponse < Struct.new(
+      :vpc_id,
+      :ipv_4_cidr_blocks,
+      :transit_gateway_id,
+      :transit_gateway_resource_share_arn)
       SENSITIVE = []
       include Aws::Structure
     end

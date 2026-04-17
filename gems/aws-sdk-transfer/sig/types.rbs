@@ -119,6 +119,7 @@ module Aws::Transfer
       attr_accessor sftp_config: Types::SftpConnectorConfig
       attr_accessor security_policy_name: ::String
       attr_accessor egress_config: Types::ConnectorEgressConfig
+      attr_accessor ip_address_type: ("IPV4" | "DUALSTACK")
       SENSITIVE: []
     end
 
@@ -518,6 +519,7 @@ module Aws::Transfer
       attr_accessor egress_type: ("SERVICE_MANAGED" | "VPC_LATTICE")
       attr_accessor error_message: ::String
       attr_accessor status: ("ACTIVE" | "ERRORED" | "PENDING")
+      attr_accessor ip_address_type: ("IPV4" | "DUALSTACK")
       SENSITIVE: []
     end
 
@@ -1399,6 +1401,7 @@ module Aws::Transfer
       attr_accessor sftp_config: Types::SftpConnectorConfig
       attr_accessor security_policy_name: ::String
       attr_accessor egress_config: Types::UpdateConnectorEgressConfig
+      attr_accessor ip_address_type: ("IPV4" | "DUALSTACK")
       SENSITIVE: []
     end
 

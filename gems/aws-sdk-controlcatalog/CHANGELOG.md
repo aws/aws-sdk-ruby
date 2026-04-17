@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.39.0 (2026-03-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.38.0 (2026-02-23)
+------------------
+
+* Feature - Updated ExemptedPrincipalArns parameter documentation for improved accuracy
+
 1.37.0 (2026-01-16)
 ------------------
 

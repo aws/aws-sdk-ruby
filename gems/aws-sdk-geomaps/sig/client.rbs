@@ -154,8 +154,8 @@ module Aws
                                   ?color_scheme: ("Light" | "Dark"),
                                   ?political_view: ::String,
                                   ?terrain: ("Hillshade" | "Terrain3D"),
-                                  ?contour_density: ("Medium"),
-                                  ?traffic: ("All"),
+                                  ?contour_density: ("Low" | "Medium" | "High"),
+                                  ?traffic: ("All" | "Congestion"),
                                   ?travel_modes: Array[("Transit" | "Truck")],
                                   ?buildings: ("Buildings3D"),
                                   ?key: ::String

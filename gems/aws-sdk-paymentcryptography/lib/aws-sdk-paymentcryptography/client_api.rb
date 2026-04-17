@@ -330,6 +330,7 @@ module Aws::PaymentCryptography
 
     GetParametersForExportInput.add_member(:key_material_type, Shapes::ShapeRef.new(shape: KeyMaterialType, required: true, location_name: "KeyMaterialType"))
     GetParametersForExportInput.add_member(:signing_key_algorithm, Shapes::ShapeRef.new(shape: KeyAlgorithm, required: true, location_name: "SigningKeyAlgorithm"))
+    GetParametersForExportInput.add_member(:reuse_last_generated_token, Shapes::ShapeRef.new(shape: Boolean, location_name: "ReuseLastGeneratedToken"))
     GetParametersForExportInput.struct_class = Types::GetParametersForExportInput
 
     GetParametersForExportOutput.add_member(:signing_key_certificate, Shapes::ShapeRef.new(shape: CertificateType, required: true, location_name: "SigningKeyCertificate"))
@@ -341,6 +342,7 @@ module Aws::PaymentCryptography
 
     GetParametersForImportInput.add_member(:key_material_type, Shapes::ShapeRef.new(shape: KeyMaterialType, required: true, location_name: "KeyMaterialType"))
     GetParametersForImportInput.add_member(:wrapping_key_algorithm, Shapes::ShapeRef.new(shape: KeyAlgorithm, required: true, location_name: "WrappingKeyAlgorithm"))
+    GetParametersForImportInput.add_member(:reuse_last_generated_token, Shapes::ShapeRef.new(shape: Boolean, location_name: "ReuseLastGeneratedToken"))
     GetParametersForImportInput.struct_class = Types::GetParametersForImportInput
 
     GetParametersForImportOutput.add_member(:wrapping_key_certificate, Shapes::ShapeRef.new(shape: CertificateType, required: true, location_name: "WrappingKeyCertificate"))

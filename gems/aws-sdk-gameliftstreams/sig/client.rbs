@@ -92,7 +92,11 @@ module Aws
                                             always_on_capacity: ::Integer?,
                                             on_demand_capacity: ::Integer?,
                                             target_idle_capacity: ::Integer?,
-                                            maximum_capacity: ::Integer?
+                                            maximum_capacity: ::Integer?,
+                                            vpc_transit_configuration: {
+                                              vpc_id: ::String,
+                                              ipv_4_cidr_blocks: Array[::String]
+                                            }?
                                           },
                                         ]
                                       ) -> _AddStreamGroupLocationsResponseSuccess
@@ -121,7 +125,7 @@ module Aws
         def application_source_uri: () -> ::String
         def id: () -> ::String
         def status: () -> ("INITIALIZED" | "PROCESSING" | "READY" | "DELETING" | "ERROR")
-        def status_reason: () -> ("internalError" | "accessDenied")
+        def status_reason: () -> ("internalError" | "accessDenied" | "sourceModified")
         def replication_statuses: () -> ::Array[Types::ReplicationStatus]
         def created_at: () -> ::Time
         def last_updated_at: () -> ::Time
@@ -149,7 +153,7 @@ module Aws
         def description: () -> ::String
         def default_application: () -> Types::DefaultApplication
         def location_states: () -> ::Array[Types::LocationState]
-        def stream_class: () -> ("gen4n_high" | "gen4n_ultra" | "gen4n_win2022" | "gen5n_high" | "gen5n_ultra" | "gen5n_win2022" | "gen6n_small" | "gen6n_medium" | "gen6n_high" | "gen6n_ultra" | "gen6n_ultra_win2022" | "gen6n_pro" | "gen6n_pro_win2022")
+        def stream_class: () -> ("gen4n_high" | "gen4n_ultra" | "gen4n_win2022" | "gen5n_high" | "gen5n_ultra" | "gen5n_win2022" | "gen6n_small" | "gen6n_medium" | "gen6n_high" | "gen6n_ultra" | "gen6n_ultra_win2022" | "gen6n_pro" | "gen6n_pro_win2022" | "gen6n_small_win2022" | "gen6n_medium_win2022" | "gen6e_pro" | "gen6e_pro_win2022")
         def id: () -> ::String
         def status: () -> ("ACTIVATING" | "UPDATING_LOCATIONS" | "ACTIVE" | "ACTIVE_WITH_ERRORS" | "ERROR" | "DELETING" | "EXPIRED")
         def status_reason: () -> ("internalError" | "noAvailableInstances")
@@ -161,7 +165,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLiftStreams/Client.html#create_stream_group-instance_method
       def create_stream_group: (
                                  description: ::String,
-                                 stream_class: ("gen4n_high" | "gen4n_ultra" | "gen4n_win2022" | "gen5n_high" | "gen5n_ultra" | "gen5n_win2022" | "gen6n_small" | "gen6n_medium" | "gen6n_high" | "gen6n_ultra" | "gen6n_ultra_win2022" | "gen6n_pro" | "gen6n_pro_win2022"),
+                                 stream_class: ("gen4n_high" | "gen4n_ultra" | "gen4n_win2022" | "gen5n_high" | "gen5n_ultra" | "gen5n_win2022" | "gen6n_small" | "gen6n_medium" | "gen6n_high" | "gen6n_ultra" | "gen6n_ultra_win2022" | "gen6n_pro" | "gen6n_pro_win2022" | "gen6n_small_win2022" | "gen6n_medium_win2022" | "gen6e_pro" | "gen6e_pro_win2022"),
                                  ?default_application_identifier: ::String,
                                  ?location_configurations: Array[
                                    {
@@ -169,7 +173,11 @@ module Aws
                                      always_on_capacity: ::Integer?,
                                      on_demand_capacity: ::Integer?,
                                      target_idle_capacity: ::Integer?,
-                                     maximum_capacity: ::Integer?
+                                     maximum_capacity: ::Integer?,
+                                     vpc_transit_configuration: {
+                                       vpc_id: ::String,
+                                       ipv_4_cidr_blocks: Array[::String]
+                                     }?
                                    },
                                  ],
                                  ?tags: Hash[::String, ::String],
@@ -236,7 +244,7 @@ module Aws
         def application_source_uri: () -> ::String
         def id: () -> ::String
         def status: () -> ("INITIALIZED" | "PROCESSING" | "READY" | "DELETING" | "ERROR")
-        def status_reason: () -> ("internalError" | "accessDenied")
+        def status_reason: () -> ("internalError" | "accessDenied" | "sourceModified")
         def replication_statuses: () -> ::Array[Types::ReplicationStatus]
         def created_at: () -> ::Time
         def last_updated_at: () -> ::Time
@@ -254,7 +262,7 @@ module Aws
         def description: () -> ::String
         def default_application: () -> Types::DefaultApplication
         def location_states: () -> ::Array[Types::LocationState]
-        def stream_class: () -> ("gen4n_high" | "gen4n_ultra" | "gen4n_win2022" | "gen5n_high" | "gen5n_ultra" | "gen5n_win2022" | "gen6n_small" | "gen6n_medium" | "gen6n_high" | "gen6n_ultra" | "gen6n_ultra_win2022" | "gen6n_pro" | "gen6n_pro_win2022")
+        def stream_class: () -> ("gen4n_high" | "gen4n_ultra" | "gen4n_win2022" | "gen5n_high" | "gen5n_ultra" | "gen5n_win2022" | "gen6n_small" | "gen6n_medium" | "gen6n_high" | "gen6n_ultra" | "gen6n_ultra_win2022" | "gen6n_pro" | "gen6n_pro_win2022" | "gen6n_small_win2022" | "gen6n_medium_win2022" | "gen6e_pro" | "gen6e_pro_win2022")
         def id: () -> ::String
         def status: () -> ("ACTIVATING" | "UPDATING_LOCATIONS" | "ACTIVE" | "ACTIVE_WITH_ERRORS" | "ERROR" | "DELETING" | "EXPIRED")
         def status_reason: () -> ("internalError" | "noAvailableInstances")
@@ -452,7 +460,7 @@ module Aws
         def application_source_uri: () -> ::String
         def id: () -> ::String
         def status: () -> ("INITIALIZED" | "PROCESSING" | "READY" | "DELETING" | "ERROR")
-        def status_reason: () -> ("internalError" | "accessDenied")
+        def status_reason: () -> ("internalError" | "accessDenied" | "sourceModified")
         def replication_statuses: () -> ::Array[Types::ReplicationStatus]
         def created_at: () -> ::Time
         def last_updated_at: () -> ::Time
@@ -473,7 +481,7 @@ module Aws
         def description: () -> ::String
         def default_application: () -> Types::DefaultApplication
         def location_states: () -> ::Array[Types::LocationState]
-        def stream_class: () -> ("gen4n_high" | "gen4n_ultra" | "gen4n_win2022" | "gen5n_high" | "gen5n_ultra" | "gen5n_win2022" | "gen6n_small" | "gen6n_medium" | "gen6n_high" | "gen6n_ultra" | "gen6n_ultra_win2022" | "gen6n_pro" | "gen6n_pro_win2022")
+        def stream_class: () -> ("gen4n_high" | "gen4n_ultra" | "gen4n_win2022" | "gen5n_high" | "gen5n_ultra" | "gen5n_win2022" | "gen6n_small" | "gen6n_medium" | "gen6n_high" | "gen6n_ultra" | "gen6n_ultra_win2022" | "gen6n_pro" | "gen6n_pro_win2022" | "gen6n_small_win2022" | "gen6n_medium_win2022" | "gen6e_pro" | "gen6e_pro_win2022")
         def id: () -> ::String
         def status: () -> ("ACTIVATING" | "UPDATING_LOCATIONS" | "ACTIVE" | "ACTIVE_WITH_ERRORS" | "ERROR" | "DELETING" | "EXPIRED")
         def status_reason: () -> ("internalError" | "noAvailableInstances")
@@ -491,7 +499,11 @@ module Aws
                                      always_on_capacity: ::Integer?,
                                      on_demand_capacity: ::Integer?,
                                      target_idle_capacity: ::Integer?,
-                                     maximum_capacity: ::Integer?
+                                     maximum_capacity: ::Integer?,
+                                     vpc_transit_configuration: {
+                                       vpc_id: ::String,
+                                       ipv_4_cidr_blocks: Array[::String]
+                                     }?
                                    },
                                  ],
                                  ?description: ::String,

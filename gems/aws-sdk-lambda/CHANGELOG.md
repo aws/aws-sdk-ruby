@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.177.0 (2026-04-07)
+------------------
+
+* Feature - Launching Lambda integration with S3 Files as a new file system configuration.
+
+1.176.0 (2026-03-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.175.0 (2026-01-28)
 ------------------
 

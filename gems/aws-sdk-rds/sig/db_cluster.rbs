@@ -273,6 +273,12 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBCluster.html#engine_lifecycle_support-instance_method
       def engine_lifecycle_support: () -> ::String
 
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBCluster.html#vpc_networking_enabled-instance_method
+      def vpc_networking_enabled: () -> bool
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBCluster.html#internet_access_gateway_enabled-instance_method
+      def internet_access_gateway_enabled: () -> bool
+
       def client: () -> Client
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBCluster.html#load-instance_method
@@ -375,6 +381,7 @@ module Aws
                       },
                     ],
                     ?master_user_authentication_type: ("password" | "iam-db-auth"),
+                    ?with_express_configuration: bool,
                     ?source_region: ::String
                   ) -> DBCluster
                 | (?Hash[Symbol, untyped]) -> DBCluster
@@ -538,7 +545,9 @@ module Aws
                            },
                          ]?
                        },
-                     ]
+                     ],
+                     ?enable_vpc_networking: bool,
+                     ?enable_internet_access_gateway: bool
                    ) -> DBCluster
                  | (?Hash[Symbol, untyped]) -> DBCluster
 

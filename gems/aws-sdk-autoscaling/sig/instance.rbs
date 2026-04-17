@@ -28,6 +28,9 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/Instance.html#availability_zone-instance_method
       def availability_zone: () -> ::String
 
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/Instance.html#availability_zone_id-instance_method
+      def availability_zone_id: () -> ::String
+
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/Instance.html#lifecycle_state-instance_method
       def lifecycle_state: () -> ::String
 

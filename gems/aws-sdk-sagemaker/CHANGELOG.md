@@ -1,6 +1,46 @@
 Unreleased Changes
 ------------------
 
+1.359.0 (2026-04-10)
+------------------
+
+* Feature - Support new SageMaker StartClusterHealthCheck API for on-demand DHC on Hyperpod EKS cluster. Support updated CreateCluster, UpdateCluster, DescribeCluster, BatchAddClusterNodes APIs for flexible instance group on HyperPod cluster
+
+1.358.0 (2026-04-09)
+------------------
+
+* Feature - Release support for g7e instance types for SageMaker HyperPod
+
+1.357.0 (2026-03-30)
+------------------
+
+* Feature - Added support for placement strategy and consolidation for SageMaker inference component endpoints. Customers can now configure how inference component copies are distributed across instances and availability zones (AZs), and enable automatic consolidation to optimizes resource utilization.
+
+1.356.0 (2026-03-26)
+------------------
+
+* Feature - Release support for ml.r5d.16xlarge instance types for SageMaker HyperPod
+
+1.355.0 (2026-03-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.354.0 (2026-03-11)
+------------------
+
+* Feature - SageMaker training plans allow you to extend your existing training plans to avoid workload interruptions without workload reconfiguration. When a training plan is approaching expiration, you can extend it directly through the SageMaker AI console or programmatically using the API or AWS CLI.
+
+1.353.0 (2026-03-05)
+------------------
+
+* Feature - Adds support for S3 Bucket Ownership validation for SageMaker Managed MLflow.
+
+1.352.0 (2026-03-03)
+------------------
+
+* Feature - This release adds b300 and g7e instance types for SageMaker inference endpoints.
+
 1.351.0 (2026-02-13)
 ------------------
 

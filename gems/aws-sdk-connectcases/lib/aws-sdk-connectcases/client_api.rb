@@ -68,6 +68,8 @@ module Aws::ConnectCases
     CommentBodyTextType = Shapes::StringShape.new(name: 'CommentBodyTextType')
     CommentContent = Shapes::StructureShape.new(name: 'CommentContent')
     CommentFilter = Shapes::StructureShape.new(name: 'CommentFilter')
+    CommentUpdateContent = Shapes::StructureShape.new(name: 'CommentUpdateContent')
+    CompoundCondition = Shapes::StructureShape.new(name: 'CompoundCondition')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     ConnectCaseContent = Shapes::StructureShape.new(name: 'ConnectCaseContent')
     ConnectCaseFilter = Shapes::StructureShape.new(name: 'ConnectCaseFilter')
@@ -103,6 +105,8 @@ module Aws::ConnectCases
     CustomFilter = Shapes::StructureShape.new(name: 'CustomFilter')
     CustomInputContent = Shapes::StructureShape.new(name: 'CustomInputContent')
     CustomInputContentFieldsList = Shapes::ListShape.new(name: 'CustomInputContentFieldsList')
+    CustomUpdateContent = Shapes::StructureShape.new(name: 'CustomUpdateContent')
+    CustomUpdateContentFieldsList = Shapes::ListShape.new(name: 'CustomUpdateContentFieldsList')
     DeleteCaseRequest = Shapes::StructureShape.new(name: 'DeleteCaseRequest')
     DeleteCaseResponse = Shapes::StructureShape.new(name: 'DeleteCaseResponse')
     DeleteCaseRuleRequest = Shapes::StructureShape.new(name: 'DeleteCaseRuleRequest')
@@ -231,6 +235,7 @@ module Aws::ConnectCases
     RelatedItemInputContent = Shapes::UnionShape.new(name: 'RelatedItemInputContent')
     RelatedItemType = Shapes::StringShape.new(name: 'RelatedItemType')
     RelatedItemTypeFilter = Shapes::UnionShape.new(name: 'RelatedItemTypeFilter')
+    RelatedItemUpdateContent = Shapes::UnionShape.new(name: 'RelatedItemUpdateContent')
     RequiredCaseRule = Shapes::StructureShape.new(name: 'RequiredCaseRule')
     RequiredField = Shapes::StructureShape.new(name: 'RequiredField')
     RequiredFieldList = Shapes::ListShape.new(name: 'RequiredFieldList')
@@ -311,6 +316,8 @@ module Aws::ConnectCases
     UpdateFieldResponse = Shapes::StructureShape.new(name: 'UpdateFieldResponse')
     UpdateLayoutRequest = Shapes::StructureShape.new(name: 'UpdateLayoutRequest')
     UpdateLayoutResponse = Shapes::StructureShape.new(name: 'UpdateLayoutResponse')
+    UpdateRelatedItemRequest = Shapes::StructureShape.new(name: 'UpdateRelatedItemRequest')
+    UpdateRelatedItemResponse = Shapes::StructureShape.new(name: 'UpdateRelatedItemResponse')
     UpdateTemplateRequest = Shapes::StructureShape.new(name: 'UpdateTemplateRequest')
     UpdateTemplateResponse = Shapes::StructureShape.new(name: 'UpdateTemplateResponse')
     UserArn = Shapes::StringShape.new(name: 'UserArn')
@@ -402,9 +409,13 @@ module Aws::ConnectCases
 
     BooleanCondition.add_member(:equal_to, Shapes::ShapeRef.new(shape: BooleanOperands, location_name: "equalTo"))
     BooleanCondition.add_member(:not_equal_to, Shapes::ShapeRef.new(shape: BooleanOperands, location_name: "notEqualTo"))
+    BooleanCondition.add_member(:and_all, Shapes::ShapeRef.new(shape: CompoundCondition, location_name: "andAll"))
+    BooleanCondition.add_member(:or_all, Shapes::ShapeRef.new(shape: CompoundCondition, location_name: "orAll"))
     BooleanCondition.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     BooleanCondition.add_member_subclass(:equal_to, Types::BooleanCondition::EqualTo)
     BooleanCondition.add_member_subclass(:not_equal_to, Types::BooleanCondition::NotEqualTo)
+    BooleanCondition.add_member_subclass(:and_all, Types::BooleanCondition::AndAll)
+    BooleanCondition.add_member_subclass(:or_all, Types::BooleanCondition::OrAll)
     BooleanCondition.add_member_subclass(:unknown, Types::BooleanCondition::Unknown)
     BooleanCondition.struct_class = Types::BooleanCondition
 
@@ -474,6 +485,13 @@ module Aws::ConnectCases
     CommentContent.struct_class = Types::CommentContent
 
     CommentFilter.struct_class = Types::CommentFilter
+
+    CommentUpdateContent.add_member(:body, Shapes::ShapeRef.new(shape: CommentBody, required: true, location_name: "body"))
+    CommentUpdateContent.add_member(:content_type, Shapes::ShapeRef.new(shape: CommentBodyTextType, required: true, location_name: "contentType"))
+    CommentUpdateContent.struct_class = Types::CommentUpdateContent
+
+    CompoundCondition.add_member(:conditions, Shapes::ShapeRef.new(shape: BooleanConditionList, required: true, location_name: "conditions"))
+    CompoundCondition.struct_class = Types::CompoundCondition
 
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     ConflictException.struct_class = Types::ConflictException
@@ -604,6 +622,11 @@ module Aws::ConnectCases
     CustomInputContent.struct_class = Types::CustomInputContent
 
     CustomInputContentFieldsList.member = Shapes::ShapeRef.new(shape: FieldValue)
+
+    CustomUpdateContent.add_member(:fields, Shapes::ShapeRef.new(shape: CustomUpdateContentFieldsList, required: true, location_name: "fields"))
+    CustomUpdateContent.struct_class = Types::CustomUpdateContent
+
+    CustomUpdateContentFieldsList.member = Shapes::ShapeRef.new(shape: FieldValue)
 
     DeleteCaseRequest.add_member(:domain_id, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainId"))
     DeleteCaseRequest.add_member(:case_id, Shapes::ShapeRef.new(shape: CaseId, required: true, location: "uri", location_name: "caseId"))
@@ -1051,6 +1074,14 @@ module Aws::ConnectCases
     RelatedItemTypeFilter.add_member_subclass(:unknown, Types::RelatedItemTypeFilter::Unknown)
     RelatedItemTypeFilter.struct_class = Types::RelatedItemTypeFilter
 
+    RelatedItemUpdateContent.add_member(:comment, Shapes::ShapeRef.new(shape: CommentUpdateContent, location_name: "comment"))
+    RelatedItemUpdateContent.add_member(:custom, Shapes::ShapeRef.new(shape: CustomUpdateContent, location_name: "custom"))
+    RelatedItemUpdateContent.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    RelatedItemUpdateContent.add_member_subclass(:comment, Types::RelatedItemUpdateContent::Comment)
+    RelatedItemUpdateContent.add_member_subclass(:custom, Types::RelatedItemUpdateContent::Custom)
+    RelatedItemUpdateContent.add_member_subclass(:unknown, Types::RelatedItemUpdateContent::Unknown)
+    RelatedItemUpdateContent.struct_class = Types::RelatedItemUpdateContent
+
     RequiredCaseRule.add_member(:default_value, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "defaultValue"))
     RequiredCaseRule.add_member(:conditions, Shapes::ShapeRef.new(shape: BooleanConditionList, required: true, location_name: "conditions"))
     RequiredCaseRule.struct_class = Types::RequiredCaseRule
@@ -1280,6 +1311,23 @@ module Aws::ConnectCases
     UpdateLayoutRequest.struct_class = Types::UpdateLayoutRequest
 
     UpdateLayoutResponse.struct_class = Types::UpdateLayoutResponse
+
+    UpdateRelatedItemRequest.add_member(:domain_id, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainId"))
+    UpdateRelatedItemRequest.add_member(:case_id, Shapes::ShapeRef.new(shape: CaseId, required: true, location: "uri", location_name: "caseId"))
+    UpdateRelatedItemRequest.add_member(:related_item_id, Shapes::ShapeRef.new(shape: RelatedItemId, required: true, location: "uri", location_name: "relatedItemId"))
+    UpdateRelatedItemRequest.add_member(:content, Shapes::ShapeRef.new(shape: RelatedItemUpdateContent, required: true, location_name: "content"))
+    UpdateRelatedItemRequest.add_member(:performed_by, Shapes::ShapeRef.new(shape: UserUnion, location_name: "performedBy"))
+    UpdateRelatedItemRequest.struct_class = Types::UpdateRelatedItemRequest
+
+    UpdateRelatedItemResponse.add_member(:related_item_id, Shapes::ShapeRef.new(shape: RelatedItemId, required: true, location_name: "relatedItemId"))
+    UpdateRelatedItemResponse.add_member(:related_item_arn, Shapes::ShapeRef.new(shape: RelatedItemArn, required: true, location_name: "relatedItemArn"))
+    UpdateRelatedItemResponse.add_member(:type, Shapes::ShapeRef.new(shape: RelatedItemType, required: true, location_name: "type"))
+    UpdateRelatedItemResponse.add_member(:content, Shapes::ShapeRef.new(shape: RelatedItemContent, required: true, location_name: "content"))
+    UpdateRelatedItemResponse.add_member(:association_time, Shapes::ShapeRef.new(shape: AssociationTime, required: true, location_name: "associationTime"))
+    UpdateRelatedItemResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    UpdateRelatedItemResponse.add_member(:last_updated_user, Shapes::ShapeRef.new(shape: UserUnion, location_name: "lastUpdatedUser"))
+    UpdateRelatedItemResponse.add_member(:created_by, Shapes::ShapeRef.new(shape: UserUnion, location_name: "createdBy"))
+    UpdateRelatedItemResponse.struct_class = Types::UpdateRelatedItemResponse
 
     UpdateTemplateRequest.add_member(:domain_id, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainId"))
     UpdateTemplateRequest.add_member(:template_id, Shapes::ShapeRef.new(shape: TemplateId, required: true, location: "uri", location_name: "templateId"))
@@ -1950,6 +1998,20 @@ module Aws::ConnectCases
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+      end)
+
+      api.add_operation(:update_related_item, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateRelatedItem"
+        o.http_method = "PUT"
+        o.http_request_uri = "/domains/{domainId}/cases/{caseId}/related-items/{relatedItemId}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateRelatedItemRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateRelatedItemResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
       end)
 

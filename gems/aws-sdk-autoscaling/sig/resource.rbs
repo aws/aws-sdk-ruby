@@ -186,6 +186,7 @@ module Aws
                           ?desired_capacity: ::Integer,
                           ?default_cooldown: ::Integer,
                           ?availability_zones: Array[::String],
+                          ?availability_zone_ids: Array[::String],
                           ?load_balancer_names: Array[::String],
                           ?target_group_arns: Array[::String],
                           ?health_check_type: ::String,

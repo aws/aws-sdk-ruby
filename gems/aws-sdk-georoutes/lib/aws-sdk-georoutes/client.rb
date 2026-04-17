@@ -476,14 +476,49 @@ module Aws::GeoRoutes
 
     # @!group API Operations
 
-    # Use the `CalculateIsolines` action to find service areas that can be
-    # reached in a given threshold of time, distance.
+    # Calculates areas that can be reached within specified time or distance
+    # thresholds from a given point. For example, you can use this operation
+    # to determine the area within a 30-minute drive of a store location,
+    # find neighborhoods within walking distance of a school, or identify
+    # delivery zones based on drive time.
+    #
+    # Isolines (also known as isochrones for time-based calculations) are
+    # useful for various applications including:
+    #
+    # * Service area visualization - Show customers the area you can serve
+    #   within promised delivery times
+    #
+    # * Site selection - Analyze potential business locations based on
+    #   population within travel distance
+    #
+    # * Site selection - Determine areas that can be reached within
+    #   specified response times
+    #
+    # <note markdown="1"> Route preferences such as avoiding toll roads or ferries are treated
+    # as preferences rather than absolute restrictions. If a viable route
+    # cannot be calculated while honoring all preferences, some may be
+    # ignored.
+    #
+    #  </note>
+    #
+    # For more information, see [Calculate isolines][1] in the *Amazon
+    # Location Service Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/location/latest/developerguide/calculate-isolines.html
     #
     # @option params [Types::IsolineAllowOptions] :allow
-    #   Features that are allowed while calculating an isoline.
+    #   Enables special road types or features that should be considered for
+    #   routing even if they might be restricted by default for the selected
+    #   travel mode. These include high-occupancy vehicle and toll lanes.
     #
     # @option params [String] :arrival_time
-    #   Time of arrival at the destination.
+    #   Determine areas from which `Destination` can be reached by this time,
+    #   taking into account predicted traffic conditions and working backward
+    #   to account for congestion patterns. This attribute cannot be used
+    #   together with `DepartureTime` or `DepartNow`. Specified as an ISO-8601
+    #   timestamp with timezone offset.
     #
     #   Time format: `YYYY-MM-DDThh:mm:ss.sssZ |
     #   YYYY-MM-DDThh:mm:ss.sss+hh:mm`
@@ -495,16 +530,21 @@ module Aws::GeoRoutes
     #   `2020-04-22T17:57:24+02:00`
     #
     # @option params [Types::IsolineAvoidanceOptions] :avoid
-    #   Features that are avoided while calculating a route. Avoidance is on a
-    #   best-case basis. If an avoidance can't be satisfied for a particular
-    #   case, it violates the avoidance and the returned response produces a
-    #   notice for the violation.
+    #   Specifies road types, features, or areas to avoid (if possible) when
+    #   calculating reachable areas. These are treated as preferences rather
+    #   than strict constraints—if a route cannot be calculated without using
+    #   an avoided feature, that avoidance preference may be ignored.
     #
     # @option params [Boolean] :depart_now
-    #   Uses the current time as the time of departure.
+    #   When true, uses the current time as the departure time and takes
+    #   current traffic conditions into account. This attribute cannot be used
+    #   together with `DepartureTime` or `ArrivalTime`.
     #
     # @option params [String] :departure_time
-    #   Time of departure from thr origin.
+    #   Determine areas that can be reached when departing at this time,
+    #   taking into account predicted traffic conditions. This attribute
+    #   cannot be used together with `ArrivalTime` or `DepartNow`. Specified
+    #   as an ISO-8601 timestamp with timezone offset.
     #
     #   Time format:`YYYY-MM-DDThh:mm:ss.sssZ | YYYY-MM-DDThh:mm:ss.sss+hh:mm`
     #
@@ -515,74 +555,126 @@ module Aws::GeoRoutes
     #   `2020-04-22T17:57:24+02:00`
     #
     # @option params [Array<Float>] :destination
-    #   The final position for the route. In the World Geodetic System (WGS
-    #   84) format: `[longitude, latitude]`.
+    #   An optional destination point, specified as `[longitude, latitude]`
+    #   coordinates. When provided, the service calculates areas from which
+    #   this destination can be reached within the specified thresholds. This
+    #   reverses the usual isoline calculation to show areas that could reach
+    #   your location, rather than areas you could reach from your location.
+    #   Either `Origin` or `Destination` must be provided.
     #
     # @option params [Types::IsolineDestinationOptions] :destination_options
-    #   Destination related options.
+    #   Options that control how the destination point is matched to the road
+    #   network and how routes can approach it. These options help improve
+    #   travel time accuracy by accounting for real-world access to the
+    #   destination.
     #
     # @option params [String] :isoline_geometry_format
     #   The format of the returned IsolineGeometry.
     #
-    #   Default Value:`FlexiblePolyline`
+    #   Default value:`FlexiblePolyline`
     #
     # @option params [Types::IsolineGranularityOptions] :isoline_granularity
-    #   Defines the granularity of the returned Isoline.
+    #   Controls the detail level of the generated isolines. Higher
+    #   granularity produces smoother shapes but requires more processing time
+    #   and results in larger responses.
     #
     # @option params [String] :key
-    #   Optional: The API key to be used for authorization. Either an API key
-    #   or valid SigV4 signature must be provided when making a request.
+    #   An Amazon Location Service API Key with access to this action. If
+    #   omitted, the request must be signed using Signature Version 4.
     #
     # @option params [String] :optimize_isoline_for
-    #   Specifies the optimization criteria for when calculating an isoline.
-    #   AccurateCalculation generates an isoline of higher granularity that is
-    #   more precise. FastCalculation generates an isoline faster by reducing
-    #   the granularity, and in turn the quality of the isoline.
-    #   BalancedCalculation generates an isoline by balancing between quality
-    #   and performance.
+    #   Controls the trade-off between calculation speed and isoline
+    #   precision. Choose ` FastCalculation` for quicker results with less
+    #   detail, `AccurateCalculation` for more precise results, or
+    #   `BalancedCalculation` for a middle ground.
     #
-    #   Default Value: `BalancedCalculation`
+    #   Default value: `BalancedCalculation`
     #
     # @option params [String] :optimize_routing_for
-    #   Specifies the optimization criteria for calculating a route.
+    #   Determines whether routes prioritize shortest travel time
+    #   (`FastestRoute`) or shortest physical distance (`ShortestRoute`) when
+    #   calculating reachable areas.
     #
-    #   Default Value: `FastestRoute`
+    #   Default value: `FastestRoute`
     #
     # @option params [Array<Float>] :origin
-    #   The start position for the route.
+    #   The starting point for isoline calculations, specified as `[longitude,
+    #   latitude]` coordinates. For example, this could be a store location,
+    #   service center, or any point from which you want to calculate
+    #   reachable areas. Either `Origin` or `Destination` must be provided.
     #
     # @option params [Types::IsolineOriginOptions] :origin_options
-    #   Origin related options.
+    #   Options that control how the origin point is matched to the road
+    #   network and how routes can depart from it. These options help improve
+    #   travel time accuracy by accounting for real-world access from the
+    #   origin.
     #
     # @option params [required, Types::IsolineThresholds] :thresholds
-    #   Threshold to be used for the isoline calculation. Up to 3 thresholds
-    #   per provided type can be requested.
+    #   The distance or time thresholds used to determine reachable areas. You
+    #   can specify up to five thresholds (which all must be the same type) to
+    #   calculate multiple isolines in a single request. For example, to
+    #   determine the areas that are reachable within 10 and 20 minutes of the
+    #   origin, specify time thresholds of 600 and 1200 seconds.
     #
     #   You incur a calculation charge for each threshold. Using a large
-    #   amount of thresholds in a request can lead you to incur unexpected
-    #   charges. See [ Amazon Location's pricing page][1] for more
-    #   information.
+    #   number of thresholds in a request can lead to unexpected charges. For
+    #   more information, see [Routes pricing][1] in the *Amazon Location
+    #   Service Developer Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/routes-pricing.html`
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/routes-pricing.html
     #
     # @option params [Types::IsolineTrafficOptions] :traffic
-    #   Traffic related options.
+    #   Configures how real-time and historical traffic data affects isoline
+    #   calculations. Traffic patterns can significantly impact reachable
+    #   areas, especially during peak hours.
     #
     # @option params [String] :travel_mode
-    #   Specifies the mode of transport when calculating a route. Used in
-    #   estimating the speed of travel and road compatibility.
+    #   The mode of transportation to use for calculations. This affects which
+    #   road types or features can be used, estimated speed, and the traffic
+    #   levels that are applied.
     #
-    #   <note markdown="1"> The mode `Scooter` also applies to motorcycles, set to `Scooter` when
-    #   wanted to calculate options for motorcycles.
+    #   * `Car`—Standard passenger vehicle routing using roads accessible to
+    #     cars
+    #
+    #   * `Pedestrian`—Walking routes using pedestrian paths, sidewalks, and
+    #     crossings
+    #
+    #   * `Scooter`—Light two-wheeled vehicle routing using roads and paths
+    #     accessible to scooters
+    #
+    #   * `Truck`—Commercial truck routing considering vehicle dimensions,
+    #     weight restrictions, and hazardous material regulations
+    #
+    #   <note markdown="1"> The mode `Scooter` also applies to motorcycles; set this to `Scooter`
+    #   when calculating isolines for motorcycles.
     #
     #    </note>
     #
-    #   Default Value: `Car`
+    #   Default value: `Car`
     #
     # @option params [Types::IsolineTravelModeOptions] :travel_mode_options
-    #   Travel mode related options for the provided travel mode.
+    #   Additional attributes that refine how reachable areas are calculated
+    #   based on specific vehicle characteristics. These options help produce
+    #   more accurate results by accounting for real-world constraints and
+    #   capabilities.
+    #
+    #   For example:
+    #
+    #   * For trucks (`Truck`), specify dimensions, weight limits, and
+    #     hazardous cargo restrictions to ensure isolines only include roads
+    #     that can physically and legally accommodate the vehicle
+    #
+    #   * For cars (`Car`), set maximum speed capabilities or indicate
+    #     high-occupancy vehicle eligibility to better estimate reachable
+    #     areas
+    #
+    #   * For scooters (`Scooter`), specify engine type and speed limitations
+    #     to more accurately model their travel capabilities
+    #
+    #   Without these options, calculations use default assumptions that may
+    #   not match your specific use case.
     #
     # @return [Types::CalculateIsolinesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -806,6 +898,13 @@ module Aws::GeoRoutes
     # entry in the row corresponds to the route from that entry in Origins
     # to an entry in Destinations positions.
     #
+    # For more information, see [Calculate route matrix][1] in the *Amazon
+    # Location Service Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/location/latest/developerguide/calculate-route-matrix.html
+    #
     # @option params [Types::RouteMatrixAllowOptions] :allow
     #   Features that are allowed while calculating a route.
     #
@@ -813,13 +912,19 @@ module Aws::GeoRoutes
     #   Features that are avoided while calculating a route. Avoidance is on a
     #   best-case basis. If an avoidance can't be satisfied for a particular
     #   case, it violates the avoidance and the returned response produces a
-    #   notice for the violation.
+    #   notice for the violation. For [GrabMaps][1] customers,
+    #   `ap-southeast-1` and `ap-southeast-5` regions support only
+    #   `TollRoads`, `Ferries`, and `ControlledAccessHighways`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
     #
     # @option params [Boolean] :depart_now
     #   Uses the current time as the time of departure.
     #
     # @option params [String] :departure_time
-    #   Time of departure from thr origin.
+    #   Time of departure from the origin.
     #
     #   Time format:`YYYY-MM-DDThh:mm:ss.sssZ | YYYY-MM-DDThh:mm:ss.sss+hh:mm`
     #
@@ -834,44 +939,57 @@ module Aws::GeoRoutes
     #
     #   <note markdown="1"> Route calculations are billed for each origin and destination pair. If
     #   you use a large matrix of origins and destinations, your costs will
-    #   increase accordingly. See [ Amazon Location's pricing page][1] for
-    #   more information.
+    #   increase accordingly. For more information, see [Routes pricing][1] in
+    #   the *Amazon Location Service Developer Guide*.
     #
     #    </note>
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/routes-pricing.html`
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/routes-pricing.html
     #
     # @option params [Types::RouteMatrixExclusionOptions] :exclude
-    #   Features to be strictly excluded while calculating the route.
+    #   Features to be strictly excluded while calculating the route. Not
+    #   supported in `ap-southeast-1` and `ap-southeast-5` regions for
+    #   [GrabMaps][1] customers.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
     #
     # @option params [String] :key
     #   Optional: The API key to be used for authorization. Either an API key
     #   or valid SigV4 signature must be provided when making a request.
     #
     # @option params [String] :optimize_routing_for
-    #   Specifies the optimization criteria for calculating a route.
+    #   Controls the trade-off between finding the shortest travel time
+    #   (`FastestRoute`) and the shortest distance (`ShortestRoute`) when
+    #   calculating reachable areas.
     #
-    #   Default Value: `FastestRoute`
+    #   Default value: `FastestRoute`
     #
     # @option params [required, Array<Types::RouteMatrixOrigin>] :origins
-    #   The position in longitude and latitude for the origin.
+    #   The position for the origin in World Geodetic System (WGS 84) format:
+    #   \[longitude, latitude\].
     #
     #   <note markdown="1"> Route calculations are billed for each origin and destination pair.
     #   Using a large amount of Origins in a request can lead you to incur
-    #   unexpected charges. See [ Amazon Location's pricing page][1] for more
-    #   information.
+    #   unexpected charges. For more information, see [Routes pricing][1] in
+    #   the *Amazon Location Service Developer Guide*.
     #
     #    </note>
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/routes-pricing.html`
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/routes-pricing.html
     #
-    # @option params [required, Types::RouteMatrixBoundary] :routing_boundary
+    # @option params [Types::RouteMatrixBoundary] :routing_boundary
     #   Boundary within which the matrix is to be calculated. All data,
     #   origins and destinations outside the boundary are considered invalid.
+    #   For [GrabMaps][1] customers, `ap-southeast-1` and `ap-southeast-5`
+    #   regions support only `Unbounded` set to `true`.
+    #
+    #   Default value: `Unbounded set to true`
     #
     #   <note markdown="1"> When request routing boundary was set as AutoCircle, the response
     #   routing boundary will return Circle derived from the AutoCircle
@@ -879,17 +997,38 @@ module Aws::GeoRoutes
     #
     #    </note>
     #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
+    #
     # @option params [Types::RouteMatrixTrafficOptions] :traffic
-    #   Traffic related options.
+    #   Traffic related options. Not supported in `ap-southeast-1` and
+    #   `ap-southeast-5` regions for [GrabMaps][1] customers.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
     #
     # @option params [String] :travel_mode
     #   Specifies the mode of transport when calculating a route. Used in
-    #   estimating the speed of travel and road compatibility.
+    #   estimating the speed of travel and road compatibility. For
+    #   [GrabMaps][1] customers, `ap-southeast-1` and `ap-southeast-5` regions
+    #   support only `Car`, `Pedestrian`, and `Scooter`.
     #
-    #   Default Value: `Car`
+    #   Default value: `Car`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
     #
     # @option params [Types::RouteMatrixTravelModeOptions] :travel_mode_options
-    #   Travel mode related options for the provided travel mode.
+    #   Travel mode related options for the provided travel mode. Not
+    #   supported in `ap-southeast-1` and `ap-southeast-5` regions for
+    #   [GrabMaps][1] customers.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
     #
     # @return [Types::CalculateRouteMatrixResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -979,7 +1118,7 @@ module Aws::GeoRoutes
     #         position: [1.0], # required
     #       },
     #     ],
-    #     routing_boundary: { # required
+    #     routing_boundary: {
     #       geometry: {
     #         auto_circle: {
     #           margin: 1,
@@ -1083,11 +1222,25 @@ module Aws::GeoRoutes
     # `CalculateRoutes` computes routes given the following required
     # parameters: `Origin` and `Destination`.
     #
+    # For more information, see [Calculate routes][1] in the *Amazon
+    # Location Service Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/location/latest/developerguide/calculate-routes.html
+    #
     # @option params [Types::RouteAllowOptions] :allow
-    #   Features that are allowed while calculating a route.
+    #   Features that are allowed while calculating a route. Not supported in
+    #   `ap-southeast-1` and `ap-southeast-5` regions for [GrabMaps][1]
+    #   customers.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
     #
     # @option params [String] :arrival_time
-    #   Time of arrival at the destination.
+    #   Time of arrival at the destination. Not supported in `ap-southeast-1`
+    #   and `ap-southeast-5` regions for [GrabMaps][1] customers.
     #
     #   Time format:`YYYY-MM-DDThh:mm:ss.sssZ | YYYY-MM-DDThh:mm:ss.sss+hh:mm`
     #
@@ -1097,17 +1250,27 @@ module Aws::GeoRoutes
     #
     #   `2020-04-22T17:57:24+02:00`
     #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
+    #
     # @option params [Types::RouteAvoidanceOptions] :avoid
     #   Features that are avoided while calculating a route. Avoidance is on a
     #   best-case basis. If an avoidance can't be satisfied for a particular
     #   case, it violates the avoidance and the returned response produces a
-    #   notice for the violation.
+    #   notice for the violation. For [GrabMaps][1] customers,
+    #   `ap-southeast-1` and `ap-southeast-5` regions support only
+    #   `ControlledAccessHighways`, `Ferries`, and `TollRoads`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
     #
     # @option params [Boolean] :depart_now
     #   Uses the current time as the time of departure.
     #
     # @option params [String] :departure_time
-    #   Time of departure from thr origin.
+    #   Time of departure from the origin.
     #
     #   Time format:`YYYY-MM-DDThh:mm:ss.sssZ | YYYY-MM-DDThh:mm:ss.sss+hh:mm`
     #
@@ -1122,13 +1285,29 @@ module Aws::GeoRoutes
     #   84) format: `[longitude, latitude]`.
     #
     # @option params [Types::RouteDestinationOptions] :destination_options
-    #   Destination related options.
+    #   Destination related options. Not supported in `ap-southeast-1` and
+    #   `ap-southeast-5` regions for [GrabMaps][1] customers.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
     #
     # @option params [Types::RouteDriverOptions] :driver
-    #   Driver related options.
+    #   Driver related options. Not supported in `ap-southeast-1` and
+    #   `ap-southeast-5` regions for [GrabMaps][1] customers.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
     #
     # @option params [Types::RouteExclusionOptions] :exclude
-    #   Features to be strictly excluded while calculating the route.
+    #   Features to be strictly excluded while calculating the route. Not
+    #   supported in `ap-southeast-1` and `ap-southeast-5` regions for
+    #   [GrabMaps][1] customers.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
     #
     # @option params [String] :instructions_measurement_system
     #   Measurement system to be used for instructions within steps in the
@@ -1139,16 +1318,24 @@ module Aws::GeoRoutes
     #   or valid SigV4 signature must be provided when making a request.
     #
     # @option params [Array<String>] :languages
-    #   List of languages for instructions within steps in the response.
+    #   List of languages for instructions within steps in the response. Not
+    #   supported in `ap-southeast-1` and `ap-southeast-5` regions for
+    #   [GrabMaps][1] customers.
     #
     #   <note markdown="1"> Instructions in the requested language are returned only if they are
     #   available.
     #
     #    </note>
     #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
+    #
     # @option params [Array<String>] :leg_additional_features
     #   A list of optional additional parameters such as timezone that can be
-    #   requested for each result.
+    #   requested for each result. For [GrabMaps][1] customers,
+    #   `ap-southeast-1` and `ap-southeast-5` regions support only
+    #   `PassThroughWaypoints`, `Summary`, and `TravelStepInstructions`
     #
     #   * `Elevation`: Retrieves the elevation information for each location.
     #
@@ -1174,64 +1361,123 @@ module Aws::GeoRoutes
     #
     #   * `Zones`: Specifies the time zone information for each waypoint.
     #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
+    #
     # @option params [String] :leg_geometry_format
     #   Specifies the format of the geometry returned for each leg of the
     #   route. You can choose between two different geometry encoding formats.
     #
     #   `FlexiblePolyline`: A compact and precise encoding format for the leg
     #   geometry. For more information on the format, see the GitHub
-    #   repository for [ `FlexiblePolyline` ][1].
+    #   repository for [https://github.com/aws-geospatial/polyline][1].
     #
     #   `Simple`: A less compact encoding, which is easier to decode but may
     #   be less precise and result in larger payloads.
     #
     #
     #
-    #   [1]: https://github.com/heremaps/flexible-polyline
+    #   [1]: https://github.com/aws-geospatial/polyline
     #
     # @option params [Integer] :max_alternatives
     #   Maximum number of alternative routes to be provided in the response,
-    #   if available.
+    #   if available. For [GrabMaps][1] customers, `ap-southeast-1` and
+    #   `ap-southeast-5` regions support only up to 3 alternative routes.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
     #
     # @option params [String] :optimize_routing_for
-    #   Specifies the optimization criteria for calculating a route.
+    #   Controls the trade-off between achieving the shortest travel time
+    #   (`FastestRoute`) and achieving the shortest physical distance
+    #   ((`ShortestRoute`) when calculating each route in the matrix.
     #
-    #   Default Value: `FastestRoute`
+    #   Default value: `FastestRoute`
     #
     # @option params [required, Array<Float>] :origin
-    #   The start position for the route.
+    #   The start position for the route in World Geodetic System (WGS 84)
+    #   format: \[longitude, latitude\].
     #
     # @option params [Types::RouteOriginOptions] :origin_options
-    #   Origin related options.
+    #   Specifies how the origin point should be matched to the road network
+    #   and any routing constraints that apply when the traveler is departing
+    #   the origin. Not supported in `ap-southeast-1` and `ap-southeast-5`
+    #   regions for [GrabMaps][1] customers.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
     #
     # @option params [Array<String>] :span_additional_features
-    #   A list of optional features such as SpeedLimit that can be requested
+    #   A list of optional features such as `SpeedLimit` that can be requested
     #   for a Span. A span is a section of a Leg for which the requested
-    #   features have the same values.
+    #   features have the same values. Not supported in `ap-southeast-1` and
+    #   `ap-southeast-5` regions for [GrabMaps][1] customers.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
     #
     # @option params [Types::RouteTollOptions] :tolls
-    #   Toll related options.
+    #   Toll related options. Not supported in `ap-southeast-1` and
+    #   `ap-southeast-5` regions for [GrabMaps][1] customers.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
     #
     # @option params [Types::RouteTrafficOptions] :traffic
-    #   Traffic related options.
+    #   Traffic related options. Not supported in `ap-southeast-1` and
+    #   `ap-southeast-5` regions for [GrabMaps][1] customers.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
     #
     # @option params [String] :travel_mode
     #   Specifies the mode of transport when calculating a route. Used in
-    #   estimating the speed of travel and road compatibility.
+    #   estimating the speed of travel and road compatibility. For
+    #   [GrabMaps][1] customers, `ap-southeast-1` and `ap-southeast-5` regions
+    #   support only `Car`, `Pedestrian`, and `Scooter` values.
     #
-    #   Default Value: `Car`
+    #   Default value: `Car`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
     #
     # @option params [Types::RouteTravelModeOptions] :travel_mode_options
-    #   Travel mode related options for the provided travel mode.
+    #   Travel mode related options for the provided travel mode. For
+    #   [GrabMaps][1] customers, `ap-southeast-1` and `ap-southeast-5` regions
+    #   support only `Car` and `Pedestrian` travel mode options.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
     #
     # @option params [String] :travel_step_type
-    #   Type of step returned by the response. Default provides basic steps
-    #   intended for web based applications. TurnByTurn provides detailed
+    #   Type of step returned by the response. `Default` provides basic steps
+    #   intended for web based applications. `TurnByTurn` provides detailed
     #   instructions with more granularity intended for a turn based
-    #   navigation system.
+    #   navigation system. For [GrabMaps][1] customers, `ap-southeast-1` and
+    #   `ap-southeast-5` regions `Default` does not return any steps.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
     #
     # @option params [Array<Types::RouteWaypoint>] :waypoints
-    #   List of waypoints between the Origin and Destination.
+    #   List of waypoints between the Origin and Destination. For
+    #   [GrabMaps][1] customers, `ap-southeast-1` and `ap-southeast-5` regions
+    #   max length is `100`.
+    #
+    #   Max length: `23`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
     #
     # @return [Types::CalculateRoutesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1644,7 +1890,7 @@ module Aws::GeoRoutes
     #   resp.routes[0].legs[0].pedestrian_leg_details.travel_steps[0].turn_step_details.steering_direction #=> String, one of "Left", "Right", "Straight"
     #   resp.routes[0].legs[0].pedestrian_leg_details.travel_steps[0].turn_step_details.turn_angle #=> Float
     #   resp.routes[0].legs[0].pedestrian_leg_details.travel_steps[0].turn_step_details.turn_intensity #=> String, one of "Sharp", "Slight", "Typical"
-    #   resp.routes[0].legs[0].pedestrian_leg_details.travel_steps[0].type #=> String, one of "Arrive", "Continue", "Depart", "Keep", "RoundaboutEnter", "RoundaboutExit", "RoundaboutPass", "Turn", "Exit", "Ramp", "UTurn"
+    #   resp.routes[0].legs[0].pedestrian_leg_details.travel_steps[0].type #=> String, one of "Arrive", "Continue", "Depart", "Keep", "RoundaboutEnter", "RoundaboutExit", "RoundaboutPass", "Turn"
     #   resp.routes[0].legs[0].travel_mode #=> String, one of "Car", "Ferry", "Pedestrian", "Scooter", "Truck", "CarShuttleTrain"
     #   resp.routes[0].legs[0].type #=> String, one of "Ferry", "Pedestrian", "Vehicle"
     #   resp.routes[0].legs[0].vehicle_leg_details.arrival.place.name #=> String
@@ -1930,6 +2176,13 @@ module Aws::GeoRoutes
     # travelled during the journey, based on road network restrictions and
     # the traffic pattern data.
     #
+    # For more information, see [Optimize waypoints][1] in the *Amazon
+    # Location Service Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/location/latest/developerguide/actions-optimize-waypoints.html
+    #
     # @option params [Types::WaypointOptimizationAvoidanceOptions] :avoid
     #   Features that are avoided. Avoidance is on a best-case basis. If an
     #   avoidance can't be satisfied for a particular case, this setting is
@@ -1970,10 +2223,11 @@ module Aws::GeoRoutes
     # @option params [String] :optimize_sequencing_for
     #   Specifies the optimization criteria for the calculated sequence.
     #
-    #   Default Value: `FastestRoute`.
+    #   Default value: `FastestRoute`.
     #
     # @option params [required, Array<Float>] :origin
-    #   The start position for the route.
+    #   The start position for the route in World Geodetic System (WGS 84)
+    #   format: \[longitude, latitude\].
     #
     # @option params [Types::WaypointOptimizationOriginOptions] :origin_options
     #   Origin related options.
@@ -1985,7 +2239,7 @@ module Aws::GeoRoutes
     #   Specifies the mode of transport when calculating a route. Used in
     #   estimating the speed of travel and road compatibility.
     #
-    #   Default Value: `Car`
+    #   Default value: `Car`
     #
     # @option params [Types::WaypointOptimizationTravelModeOptions] :travel_mode_options
     #   Travel mode related options for the provided travel mode.
@@ -2165,6 +2419,13 @@ module Aws::GeoRoutes
 
     # `SnapToRoads` matches GPS trace to roads most likely traveled on.
     #
+    # For more information, see [Snap to Roads][1] in the *Amazon Location
+    # Service Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/location/latest/developerguide/snap-to-roads.html
+    #
     # @option params [String] :key
     #   Optional: The API key to be used for authorization. Either an API key
     #   or valid SigV4 signature must be provided when making a request.
@@ -2172,7 +2433,7 @@ module Aws::GeoRoutes
     # @option params [String] :snapped_geometry_format
     #   Chooses what the returned SnappedGeometry format should be.
     #
-    #   Default Value: `FlexiblePolyline`
+    #   Default value: `FlexiblePolyline`
     #
     # @option params [Integer] :snap_radius
     #   The radius around the provided tracepoint that is considered for
@@ -2189,7 +2450,7 @@ module Aws::GeoRoutes
     #   Specifies the mode of transport when calculating a route. Used in
     #   estimating the speed of travel and road compatibility.
     #
-    #   Default Value: `Car`
+    #   Default value: `Car`
     #
     # @option params [Types::RoadSnapTravelModeOptions] :travel_mode_options
     #   Travel mode related options for the provided travel mode.
@@ -2279,7 +2540,7 @@ module Aws::GeoRoutes
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-georoutes'
-      context[:gem_version] = '1.18.0'
+      context[:gem_version] = '1.20.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

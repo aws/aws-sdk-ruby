@@ -56,9 +56,6 @@ module Aws
       class MaxLexiconsNumberExceededException < ::Aws::Errors::ServiceError
         def message: () -> ::String
       end
-      class ServiceFailureException < ::Aws::Errors::ServiceError
-        def message: () -> ::String
-      end
       class SsmlMarksNotSupportedForTextTypeException < ::Aws::Errors::ServiceError
         def message: () -> ::String
       end

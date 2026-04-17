@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.88.0 (2026-03-30)
+------------------
+
+* Feature - Add setSourceIdentity to DataLakeSettings Parameters
+
+1.87.0 (2026-03-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.86.0 (2026-02-09)
 ------------------
 

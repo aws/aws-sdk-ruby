@@ -1227,13 +1227,26 @@ module Aws::Glue
     #   A list of partition values identifying the partitions to retrieve.
     #   @return [Array<Types::PartitionValueList>]
     #
+    # @!attribute [rw] audit_context
+    #   A structure containing the Lake Formation audit context.
+    #   @return [Types::AuditContext]
+    #
+    # @!attribute [rw] query_session_context
+    #   A structure used as a protocol between query engines and Lake
+    #   Formation or Glue. Contains both a Lake Formation generated
+    #   authorization identifier and information from the request's
+    #   authorization context.
+    #   @return [Types::QuerySessionContext]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/BatchGetPartitionRequest AWS API Documentation
     #
     class BatchGetPartitionRequest < Struct.new(
       :catalog_id,
       :database_name,
       :table_name,
-      :partitions_to_get)
+      :partitions_to_get,
+      :audit_context,
+      :query_session_context)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2268,6 +2281,13 @@ module Aws::Glue
     #   that are registered with Lake Formation.
     #   @return [String]
     #
+    # @!attribute [rw] overwrite_child_resource_permissions_with_default
+    #   Overwrites existing Amazon Web Services Lake Formation permissions
+    #   with `CatalogInput$CreateTableDefaultPermissions` and
+    #   `CatalogInput$CreateDatabaseDefaultPermissions` for all child
+    #   resources.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CatalogInput AWS API Documentation
     #
     class CatalogInput < Struct.new(
@@ -2278,7 +2298,8 @@ module Aws::Glue
       :catalog_properties,
       :create_table_default_permissions,
       :create_database_default_permissions,
-      :allow_full_table_external_data_access)
+      :allow_full_table_external_data_access,
+      :overwrite_child_resource_permissions_with_default)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6599,7 +6620,7 @@ module Aws::Glue
     #   the developer guide.
     #
     #   Jobs that are created without specifying a Glue version default to
-    #   Glue 0.9.
+    #   Glue 5.1.
     #
     #
     #
@@ -18189,7 +18210,7 @@ module Aws::Glue
     #   the developer guide.
     #
     #   Jobs that are created without specifying a Glue version default to
-    #   Glue 0.9.
+    #   Glue 5.1.
     #
     #
     #
@@ -18657,7 +18678,7 @@ module Aws::Glue
     #   the developer guide.
     #
     #   Jobs that are created without specifying a Glue version default to
-    #   Glue 0.9.
+    #   Glue 5.1.
     #
     #
     #
@@ -18963,8 +18984,8 @@ module Aws::Glue
     #   corresponding Spark and Python versions, see [Glue version][1] in
     #   the developer guide.
     #
-    #   Jobs that are created without specifying a Glue version default to
-    #   Glue 0.9.
+    #   If not provided in the update request, the Glue version retains the
+    #   value from the existing job definition.
     #
     #
     #

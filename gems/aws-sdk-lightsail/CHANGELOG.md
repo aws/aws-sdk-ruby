@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.128.0 (2026-04-06)
+------------------
+
+* Feature - This release adds support for the Asia Pacific (Malaysia) (ap-southeast-5) Region.
+
+1.127.0 (2026-04-03)
+------------------
+
+* Feature - Add support for tagging of Alarm resource type
+
+1.126.0 (2026-03-23)
+------------------
+
+* Feature - Add support for tagging of ContactMethod resource type
+
+1.125.0 (2026-03-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.124.0 (2026-01-16)
 ------------------
 

@@ -544,6 +544,8 @@ module Aws::SecurityHub
     AwsOpenSearchServiceDomainNodeToNodeEncryptionOptionsDetails = Shapes::StructureShape.new(name: 'AwsOpenSearchServiceDomainNodeToNodeEncryptionOptionsDetails')
     AwsOpenSearchServiceDomainServiceSoftwareOptionsDetails = Shapes::StructureShape.new(name: 'AwsOpenSearchServiceDomainServiceSoftwareOptionsDetails')
     AwsOpenSearchServiceDomainVpcOptionsDetails = Shapes::StructureShape.new(name: 'AwsOpenSearchServiceDomainVpcOptionsDetails')
+    AwsOrganizationScope = Shapes::StructureShape.new(name: 'AwsOrganizationScope')
+    AwsOrganizationScopeList = Shapes::ListShape.new(name: 'AwsOrganizationScopeList')
     AwsRdsDbClusterAssociatedRole = Shapes::StructureShape.new(name: 'AwsRdsDbClusterAssociatedRole')
     AwsRdsDbClusterAssociatedRoles = Shapes::ListShape.new(name: 'AwsRdsDbClusterAssociatedRoles')
     AwsRdsDbClusterDetails = Shapes::StructureShape.new(name: 'AwsRdsDbClusterDetails')
@@ -910,6 +912,7 @@ module Aws::SecurityHub
     FindingHistoryUpdatesList = Shapes::ListShape.new(name: 'FindingHistoryUpdatesList')
     FindingProviderFields = Shapes::StructureShape.new(name: 'FindingProviderFields')
     FindingProviderSeverity = Shapes::StructureShape.new(name: 'FindingProviderSeverity')
+    FindingScopes = Shapes::StructureShape.new(name: 'FindingScopes')
     FindingsTrendsCompositeFilter = Shapes::StructureShape.new(name: 'FindingsTrendsCompositeFilter')
     FindingsTrendsCompositeFilterList = Shapes::ListShape.new(name: 'FindingsTrendsCompositeFilterList')
     FindingsTrendsFilters = Shapes::StructureShape.new(name: 'FindingsTrendsFilters')
@@ -1103,6 +1106,8 @@ module Aws::SecurityHub
     OrganizationConfiguration = Shapes::StructureShape.new(name: 'OrganizationConfiguration')
     OrganizationConfigurationConfigurationType = Shapes::StringShape.new(name: 'OrganizationConfigurationConfigurationType')
     OrganizationConfigurationStatus = Shapes::StringShape.new(name: 'OrganizationConfigurationStatus')
+    OrganizationNotFoundException = Shapes::StructureShape.new(name: 'OrganizationNotFoundException')
+    OrganizationalUnitNotFoundException = Shapes::StructureShape.new(name: 'OrganizationalUnitNotFoundException')
     Page = Shapes::StructureShape.new(name: 'Page')
     Pages = Shapes::ListShape.new(name: 'Pages')
     ParameterConfiguration = Shapes::StructureShape.new(name: 'ParameterConfiguration')
@@ -1161,6 +1166,7 @@ module Aws::SecurityHub
     ResourceList = Shapes::ListShape.new(name: 'ResourceList')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     ResourceResult = Shapes::StructureShape.new(name: 'ResourceResult')
+    ResourceScopes = Shapes::StructureShape.new(name: 'ResourceScopes')
     ResourceSeverityBreakdown = Shapes::StructureShape.new(name: 'ResourceSeverityBreakdown')
     ResourceTag = Shapes::StructureShape.new(name: 'ResourceTag')
     ResourceTagList = Shapes::ListShape.new(name: 'ResourceTagList')
@@ -4204,6 +4210,12 @@ module Aws::SecurityHub
     AwsOpenSearchServiceDomainVpcOptionsDetails.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: NonEmptyStringList, location_name: "SubnetIds"))
     AwsOpenSearchServiceDomainVpcOptionsDetails.struct_class = Types::AwsOpenSearchServiceDomainVpcOptionsDetails
 
+    AwsOrganizationScope.add_member(:organization_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "OrganizationId"))
+    AwsOrganizationScope.add_member(:organizational_unit_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "OrganizationalUnitId"))
+    AwsOrganizationScope.struct_class = Types::AwsOrganizationScope
+
+    AwsOrganizationScopeList.member = Shapes::ShapeRef.new(shape: AwsOrganizationScope)
+
     AwsRdsDbClusterAssociatedRole.add_member(:role_arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "RoleArn"))
     AwsRdsDbClusterAssociatedRole.add_member(:status, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Status"))
     AwsRdsDbClusterAssociatedRole.struct_class = Types::AwsRdsDbClusterAssociatedRole
@@ -6028,6 +6040,9 @@ module Aws::SecurityHub
     FindingProviderSeverity.add_member(:original, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Original"))
     FindingProviderSeverity.struct_class = Types::FindingProviderSeverity
 
+    FindingScopes.add_member(:aws_organizations, Shapes::ShapeRef.new(shape: AwsOrganizationScopeList, location_name: "AwsOrganizations"))
+    FindingScopes.struct_class = Types::FindingScopes
+
     FindingsTrendsCompositeFilter.add_member(:string_filters, Shapes::ShapeRef.new(shape: FindingsTrendsStringFilterList, location_name: "StringFilters"))
     FindingsTrendsCompositeFilter.add_member(:nested_composite_filters, Shapes::ShapeRef.new(shape: FindingsTrendsCompositeFilterList, location_name: "NestedCompositeFilters"))
     FindingsTrendsCompositeFilter.add_member(:operator, Shapes::ShapeRef.new(shape: AllowedOperators, location_name: "Operator"))
@@ -6175,6 +6190,7 @@ module Aws::SecurityHub
     GetFindingHistoryResponse.struct_class = Types::GetFindingHistoryResponse
 
     GetFindingStatisticsV2Request.add_member(:group_by_rules, Shapes::ShapeRef.new(shape: GroupByRules, required: true, location_name: "GroupByRules"))
+    GetFindingStatisticsV2Request.add_member(:scopes, Shapes::ShapeRef.new(shape: FindingScopes, location_name: "Scopes"))
     GetFindingStatisticsV2Request.add_member(:sort_order, Shapes::ShapeRef.new(shape: SortOrder, location_name: "SortOrder"))
     GetFindingStatisticsV2Request.add_member(:max_statistic_results, Shapes::ShapeRef.new(shape: MaxStatisticResults, location_name: "MaxStatisticResults"))
     GetFindingStatisticsV2Request.struct_class = Types::GetFindingStatisticsV2Request
@@ -6205,6 +6221,7 @@ module Aws::SecurityHub
     GetFindingsTrendsV2Response.struct_class = Types::GetFindingsTrendsV2Response
 
     GetFindingsV2Request.add_member(:filters, Shapes::ShapeRef.new(shape: OcsfFindingFilters, location_name: "Filters"))
+    GetFindingsV2Request.add_member(:scopes, Shapes::ShapeRef.new(shape: FindingScopes, location_name: "Scopes"))
     GetFindingsV2Request.add_member(:sort_criteria, Shapes::ShapeRef.new(shape: SortCriteria, location_name: "SortCriteria"))
     GetFindingsV2Request.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     GetFindingsV2Request.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
@@ -6247,6 +6264,7 @@ module Aws::SecurityHub
     GetMembersResponse.struct_class = Types::GetMembersResponse
 
     GetResourcesStatisticsV2Request.add_member(:group_by_rules, Shapes::ShapeRef.new(shape: ResourceGroupByRules, required: true, location_name: "GroupByRules"))
+    GetResourcesStatisticsV2Request.add_member(:scopes, Shapes::ShapeRef.new(shape: ResourceScopes, location_name: "Scopes"))
     GetResourcesStatisticsV2Request.add_member(:sort_order, Shapes::ShapeRef.new(shape: SortOrder, location_name: "SortOrder"))
     GetResourcesStatisticsV2Request.add_member(:max_statistic_results, Shapes::ShapeRef.new(shape: MaxStatisticResults, location_name: "MaxStatisticResults"))
     GetResourcesStatisticsV2Request.struct_class = Types::GetResourcesStatisticsV2Request
@@ -6267,6 +6285,7 @@ module Aws::SecurityHub
     GetResourcesTrendsV2Response.struct_class = Types::GetResourcesTrendsV2Response
 
     GetResourcesV2Request.add_member(:filters, Shapes::ShapeRef.new(shape: ResourcesFilters, location_name: "Filters"))
+    GetResourcesV2Request.add_member(:scopes, Shapes::ShapeRef.new(shape: ResourceScopes, location_name: "Scopes"))
     GetResourcesV2Request.add_member(:sort_criteria, Shapes::ShapeRef.new(shape: SortCriteria, location_name: "SortCriteria"))
     GetResourcesV2Request.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     GetResourcesV2Request.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
@@ -6724,6 +6743,14 @@ module Aws::SecurityHub
     OrganizationConfiguration.add_member(:status_message, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "StatusMessage"))
     OrganizationConfiguration.struct_class = Types::OrganizationConfiguration
 
+    OrganizationNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Message"))
+    OrganizationNotFoundException.add_member(:code, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Code"))
+    OrganizationNotFoundException.struct_class = Types::OrganizationNotFoundException
+
+    OrganizationalUnitNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Message"))
+    OrganizationalUnitNotFoundException.add_member(:code, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Code"))
+    OrganizationalUnitNotFoundException.struct_class = Types::OrganizationalUnitNotFoundException
+
     Page.add_member(:page_number, Shapes::ShapeRef.new(shape: Long, location_name: "PageNumber"))
     Page.add_member(:line_range, Shapes::ShapeRef.new(shape: Range, location_name: "LineRange"))
     Page.add_member(:offset_range, Shapes::ShapeRef.new(shape: Range, location_name: "OffsetRange"))
@@ -6833,6 +6860,7 @@ module Aws::SecurityHub
     ProductV2.add_member(:integration_v2_types, Shapes::ShapeRef.new(shape: IntegrationV2TypeList, location_name: "IntegrationV2Types"))
     ProductV2.add_member(:marketplace_url, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "MarketplaceUrl"))
     ProductV2.add_member(:activation_url, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ActivationUrl"))
+    ProductV2.add_member(:marketplace_product_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "MarketplaceProductId"))
     ProductV2.struct_class = Types::ProductV2
 
     ProductsList.member = Shapes::ShapeRef.new(shape: Product)
@@ -7063,6 +7091,9 @@ module Aws::SecurityHub
     ResourceResult.add_member(:resource_tags, Shapes::ShapeRef.new(shape: ResourceTagList, location_name: "ResourceTags"))
     ResourceResult.add_member(:resource_config, Shapes::ShapeRef.new(shape: ResourceConfig, required: true, location_name: "ResourceConfig"))
     ResourceResult.struct_class = Types::ResourceResult
+
+    ResourceScopes.add_member(:aws_organizations, Shapes::ShapeRef.new(shape: AwsOrganizationScopeList, location_name: "AwsOrganizations"))
+    ResourceScopes.struct_class = Types::ResourceScopes
 
     ResourceSeverityBreakdown.add_member(:other, Shapes::ShapeRef.new(shape: Integer, location_name: "Other"))
     ResourceSeverityBreakdown.add_member(:fatal, Shapes::ShapeRef.new(shape: Integer, location_name: "Fatal"))
@@ -8752,6 +8783,8 @@ module Aws::SecurityHub
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: OrganizationalUnitNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
       end)
 
       api.add_operation(:get_findings, Seahorse::Model::Operation.new.tap do |o|
@@ -8801,6 +8834,8 @@ module Aws::SecurityHub
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: OrganizationalUnitNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -8892,6 +8927,8 @@ module Aws::SecurityHub
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OrganizationalUnitNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
       end)
 
       api.add_operation(:get_resources_trends_v2, Seahorse::Model::Operation.new.tap do |o|
@@ -8924,6 +8961,8 @@ module Aws::SecurityHub
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OrganizationalUnitNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {

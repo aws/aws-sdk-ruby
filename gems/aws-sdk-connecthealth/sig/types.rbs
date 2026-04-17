@@ -1,0 +1,535 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::ConnectHealth
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ActivateSubscriptionInput
+      attr_accessor domain_id: ::String
+      attr_accessor subscription_id: ::String
+      SENSITIVE: []
+    end
+
+    class ActivateSubscriptionOutput
+      attr_accessor subscription: Types::SubscriptionDescription
+      SENSITIVE: []
+    end
+
+    class ArtifactDetails
+      attr_accessor output_location: ::String
+      attr_accessor status: ("IN_PROGRESS" | "FAILED" | "COMPLETED")
+      attr_accessor failure_reason: ::String
+      SENSITIVE: []
+    end
+
+    class ClinicalNoteGenerationResult
+      attr_accessor note_result: Types::ArtifactDetails
+      attr_accessor transcript_result: Types::ArtifactDetails
+      attr_accessor after_visit_summary_result: Types::ArtifactDetails
+      SENSITIVE: []
+    end
+
+    class ClinicalNoteGenerationSettings
+      attr_accessor note_template_settings: Types::NoteTemplateSettings
+      SENSITIVE: []
+    end
+
+    class ClinicalNoteGenerationSettingsResponse
+      attr_accessor note_template_settings: Types::NoteTemplateSettingsResponse
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CreateDomainInput
+      attr_accessor name: ::String
+      attr_accessor kms_key_arn: ::String
+      attr_accessor web_app_setup_configuration: Types::CreateWebAppConfiguration
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateDomainOutput
+      attr_accessor domain_id: ::String
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor kms_key_arn: ::String
+      attr_accessor encryption_context: Types::EncryptionContext
+      attr_accessor status: ("ACTIVE" | "DELETING" | "DELETED")
+      attr_accessor web_app_url: ::String
+      attr_accessor web_app_configuration: Types::WebAppConfiguration
+      attr_accessor created_at: ::Time
+      SENSITIVE: []
+    end
+
+    class CreateSubscriptionInput
+      attr_accessor domain_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateSubscriptionOutput
+      attr_accessor domain_id: ::String
+      attr_accessor subscription_id: ::String
+      attr_accessor arn: ::String
+      attr_accessor status: ("ACTIVE" | "INACTIVE" | "DELETED")
+      attr_accessor created_at: ::Time
+      attr_accessor last_updated_at: ::Time
+      attr_accessor activated_at: ::Time
+      attr_accessor deactivated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class CreateWebAppConfiguration
+      attr_accessor ehr_role: ::String
+      attr_accessor idc_instance_id: ::String
+      attr_accessor idc_region: ::String
+      SENSITIVE: []
+    end
+
+    class CustomTemplate
+      attr_accessor template_type: ("HISTORY_AND_PHYSICAL" | "GIRPP" | "DAP" | "SIRP" | "BIRP" | "BEHAVIORAL_SOAP")
+      attr_accessor template_instructions: ::Array[Types::TemplateSectionInstruction]
+      SENSITIVE: []
+    end
+
+    class CustomTemplateResponse
+      attr_accessor template_type: ("HISTORY_AND_PHYSICAL" | "GIRPP" | "DAP" | "SIRP" | "BIRP" | "BEHAVIORAL_SOAP")
+      SENSITIVE: []
+    end
+
+    class DeactivateSubscriptionInput
+      attr_accessor domain_id: ::String
+      attr_accessor subscription_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeactivateSubscriptionOutput
+      attr_accessor subscription: Types::SubscriptionDescription
+      SENSITIVE: []
+    end
+
+    class DeleteDomainInput
+      attr_accessor domain_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteDomainOutput
+      attr_accessor domain_id: ::String
+      attr_accessor arn: ::String
+      attr_accessor status: ("ACTIVE" | "DELETING" | "DELETED")
+      SENSITIVE: []
+    end
+
+    class DomainSummary
+      attr_accessor domain_id: ::String
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor status: ("ACTIVE" | "DELETING" | "DELETED")
+      attr_accessor created_at: ::Time
+      SENSITIVE: []
+    end
+
+    class EncounterContext
+      attr_accessor unstructured_context: ::String
+      SENSITIVE: [:unstructured_context]
+    end
+
+    class EncryptionContext
+      attr_accessor encryption_type: ("AWS_OWNED_KEY" | "CUSTOMER_MANAGED_KEY")
+      attr_accessor kms_key_arn: ::String
+      SENSITIVE: []
+    end
+
+    class FHIRServer
+      attr_accessor fhir_endpoint: ::String
+      attr_accessor oauth_token: ::String
+      SENSITIVE: [:oauth_token]
+    end
+
+    class GetDomainInput
+      attr_accessor domain_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetDomainOutput
+      attr_accessor domain_id: ::String
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor kms_key_arn: ::String
+      attr_accessor encryption_context: Types::EncryptionContext
+      attr_accessor status: ("ACTIVE" | "DELETING" | "DELETED")
+      attr_accessor web_app_url: ::String
+      attr_accessor web_app_configuration: Types::WebAppConfiguration
+      attr_accessor created_at: ::Time
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class GetMedicalScribeListeningSessionInput
+      attr_accessor session_id: ::String
+      attr_accessor domain_id: ::String
+      attr_accessor subscription_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetMedicalScribeListeningSessionOutput
+      attr_accessor medical_scribe_listening_session_details: Types::MedicalScribeListeningSessionDetails
+      SENSITIVE: []
+    end
+
+    class GetPatientInsightsJobRequest
+      attr_accessor domain_id: ::String
+      attr_accessor job_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetPatientInsightsJobResponse
+      attr_accessor job_id: ::String
+      attr_accessor job_arn: ::String
+      attr_accessor job_status: ("SUBMITTED" | "IN_PROGRESS" | "FAILED" | "SUCCEEDED")
+      attr_accessor creation_time: ::Time
+      attr_accessor updated_time: ::Time
+      attr_accessor insights_output: Types::InsightsOutput
+      attr_accessor status_details: ::String
+      attr_accessor patient_context: Types::PatientInsightsPatientContext
+      attr_accessor insights_context: Types::InsightsContext
+      attr_accessor encounter_context: Types::PatientInsightsEncounterContext
+      attr_accessor user_context: Types::UserContext
+      attr_accessor input_data_config: Types::InputDataConfig
+      attr_accessor output_data_config: Types::OutputDataConfig
+      SENSITIVE: []
+    end
+
+    class GetSubscriptionInput
+      attr_accessor domain_id: ::String
+      attr_accessor subscription_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetSubscriptionOutput
+      attr_accessor subscription: Types::SubscriptionDescription
+      SENSITIVE: []
+    end
+
+    class InputDataConfig
+      attr_accessor fhir_server: Types::FHIRServer
+      attr_accessor s3_sources: ::Array[Types::S3Source]
+      SENSITIVE: []
+    end
+
+    class InsightsContext
+      attr_accessor insights_type: ("PRE_VISIT")
+      SENSITIVE: []
+    end
+
+    class InsightsOutput
+      attr_accessor uri: ::String
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      attr_accessor event_type: untyped
+      SENSITIVE: []
+    end
+
+    class ListDomainsInput
+      attr_accessor status: ("ACTIVE" | "DELETING" | "DELETED")
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDomainsOutput
+      attr_accessor domains: ::Array[Types::DomainSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSubscriptionsInput
+      attr_accessor domain_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSubscriptionsOutput
+      attr_accessor subscriptions: ::Array[Types::SubscriptionDescription]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceInput
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceOutput
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ManagedTemplate
+      attr_accessor template_type: ("HISTORY_AND_PHYSICAL" | "GIRPP" | "DAP" | "SIRP" | "BIRP" | "BEHAVIORAL_SOAP" | "PHYSICAL_SOAP")
+      SENSITIVE: []
+    end
+
+    class ManagedTemplateResponse
+      attr_accessor template_type: ("HISTORY_AND_PHYSICAL" | "GIRPP" | "DAP" | "SIRP" | "BIRP" | "BEHAVIORAL_SOAP" | "PHYSICAL_SOAP")
+      SENSITIVE: []
+    end
+
+    class MedicalScribeAudioEvent
+      attr_accessor audio_chunk: ::String
+      attr_accessor event_type: untyped
+      SENSITIVE: []
+    end
+
+    class MedicalScribeChannelDefinition
+      attr_accessor channel_id: ::Integer
+      attr_accessor participant_role: ("PATIENT" | "CLINICIAN")
+      SENSITIVE: []
+    end
+
+    class MedicalScribeConfigurationEvent
+      attr_accessor post_stream_action_settings: Types::MedicalScribePostStreamActionSettings
+      attr_accessor channel_definitions: ::Array[Types::MedicalScribeChannelDefinition]
+      attr_accessor encounter_context: Types::EncounterContext
+      attr_accessor event_type: untyped
+      SENSITIVE: []
+    end
+
+    class MedicalScribeListeningSessionDetails
+      attr_accessor session_id: ::String
+      attr_accessor domain_id: ::String
+      attr_accessor subscription_id: ::String
+      attr_accessor language_code: ("en-US")
+      attr_accessor media_sample_rate_hertz: ::Integer
+      attr_accessor media_encoding: ("pcm" | "flac")
+      attr_accessor channel_definitions: ::Array[Types::MedicalScribeChannelDefinition]
+      attr_accessor post_stream_action_settings: Types::MedicalScribePostStreamActionSettingsResponse
+      attr_accessor post_stream_action_result: Types::MedicalScribePostStreamActionsResult
+      attr_accessor encounter_context_provided: bool
+      attr_accessor stream_status: ("IN_PROGRESS" | "PAUSED" | "FAILED" | "COMPLETED")
+      attr_accessor stream_creation_time: ::Time
+      attr_accessor stream_end_time: ::Time
+      SENSITIVE: []
+    end
+
+    class MedicalScribePostStreamActionSettings
+      attr_accessor output_s3_uri: ::String
+      attr_accessor clinical_note_generation_settings: Types::ClinicalNoteGenerationSettings
+      SENSITIVE: []
+    end
+
+    class MedicalScribePostStreamActionSettingsResponse
+      attr_accessor output_s3_uri: ::String
+      attr_accessor clinical_note_generation_settings: Types::ClinicalNoteGenerationSettingsResponse
+      SENSITIVE: []
+    end
+
+    class MedicalScribePostStreamActionsResult
+      attr_accessor clinical_note_generation_result: Types::ClinicalNoteGenerationResult
+      SENSITIVE: []
+    end
+
+    class MedicalScribeSessionControlEvent
+      attr_accessor type: ("END_OF_SESSION")
+      attr_accessor event_type: untyped
+      SENSITIVE: []
+    end
+
+    class MedicalScribeTranscriptEvent
+      attr_accessor transcript_segment: Types::MedicalScribeTranscriptSegment
+      attr_accessor event_type: untyped
+      SENSITIVE: []
+    end
+
+    class MedicalScribeTranscriptSegment
+      attr_accessor segment_id: ::String
+      attr_accessor audio_begin_offset: ::Float
+      attr_accessor audio_end_offset: ::Float
+      attr_accessor is_partial: bool
+      attr_accessor channel_id: ::String
+      attr_accessor content: ::String
+      SENSITIVE: []
+    end
+
+    class NoteTemplateSettings
+      attr_accessor managed_template: Types::ManagedTemplate
+      attr_accessor custom_template: Types::CustomTemplate
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class ManagedTemplate < NoteTemplateSettings
+      end
+      class CustomTemplate < NoteTemplateSettings
+      end
+      class Unknown < NoteTemplateSettings
+      end
+    end
+
+    class NoteTemplateSettingsResponse
+      attr_accessor managed_template: Types::ManagedTemplateResponse
+      attr_accessor custom_template: Types::CustomTemplateResponse
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class ManagedTemplate < NoteTemplateSettingsResponse
+      end
+      class CustomTemplate < NoteTemplateSettingsResponse
+      end
+      class Unknown < NoteTemplateSettingsResponse
+      end
+    end
+
+    class OutputDataConfig
+      attr_accessor s3_output_path: ::String
+      SENSITIVE: []
+    end
+
+    class PatientInsightsEncounterContext
+      attr_accessor encounter_reason: ::String
+      SENSITIVE: [:encounter_reason]
+    end
+
+    class PatientInsightsPatientContext
+      attr_accessor patient_id: ::String
+      attr_accessor date_of_birth: ::String
+      attr_accessor pronouns: ("HE_HIM" | "SHE_HER" | "THEY_THEM")
+      SENSITIVE: [:patient_id, :date_of_birth, :pronouns]
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class S3Source
+      attr_accessor uri: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceQuotaExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class StartMedicalScribeListeningSessionInput
+      attr_accessor session_id: ::String
+      attr_accessor domain_id: ::String
+      attr_accessor subscription_id: ::String
+      attr_accessor language_code: ("en-US")
+      attr_accessor media_sample_rate_hertz: ::Integer
+      attr_accessor media_encoding: ("pcm" | "flac")
+      attr_accessor input_stream: Types::MedicalScribeInputStream
+      SENSITIVE: []
+    end
+
+    class StartMedicalScribeListeningSessionOutput
+      attr_accessor session_id: ::String
+      attr_accessor domain_id: ::String
+      attr_accessor subscription_id: ::String
+      attr_accessor request_id: ::String
+      attr_accessor language_code: ("en-US")
+      attr_accessor media_sample_rate_hertz: ::Integer
+      attr_accessor media_encoding: ("pcm" | "flac")
+      attr_accessor response_stream: Types::MedicalScribeOutputStream
+      SENSITIVE: []
+    end
+
+    class StartPatientInsightsJobRequest
+      attr_accessor domain_id: ::String
+      attr_accessor patient_context: Types::PatientInsightsPatientContext
+      attr_accessor insights_context: Types::InsightsContext
+      attr_accessor encounter_context: Types::PatientInsightsEncounterContext
+      attr_accessor user_context: Types::UserContext
+      attr_accessor input_data_config: Types::InputDataConfig
+      attr_accessor output_data_config: Types::OutputDataConfig
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class StartPatientInsightsJobResponse
+      attr_accessor job_arn: ::String
+      attr_accessor job_id: ::String
+      attr_accessor creation_time: ::Time
+      SENSITIVE: []
+    end
+
+    class SubscriptionDescription
+      attr_accessor domain_id: ::String
+      attr_accessor subscription_id: ::String
+      attr_accessor arn: ::String
+      attr_accessor status: ("ACTIVE" | "INACTIVE" | "DELETED")
+      attr_accessor created_at: ::Time
+      attr_accessor last_updated_at: ::Time
+      attr_accessor activated_at: ::Time
+      attr_accessor deactivated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class TagResourceInput
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class TemplateSectionInstruction
+      attr_accessor section_header: ::String
+      attr_accessor section_instruction: ::String
+      SENSITIVE: [:section_header, :section_instruction]
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UntagResourceInput
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UserContext
+      attr_accessor role: ("CLINICIAN")
+      attr_accessor user_id: ::String
+      attr_accessor specialty: ("PRIMARY_CARE")
+      SENSITIVE: [:user_id]
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      attr_accessor event_type: untyped
+      SENSITIVE: []
+    end
+
+    class WebAppConfiguration
+      attr_accessor ehr_role: ::String
+      attr_accessor idc_application_id: ::String
+      attr_accessor idc_region: ::String
+      SENSITIVE: []
+    end
+
+    class MedicalScribeInputStream < Enumerator[untyped, untyped]
+      def event_types: () -> [:audio_event, :session_control_event, :configuration_event]
+    end
+
+    class MedicalScribeOutputStream < Enumerator[untyped, untyped]
+      def event_types: () -> [:transcript_event, :internal_failure_exception, :validation_exception]
+    end
+  end
+end

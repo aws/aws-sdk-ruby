@@ -1732,6 +1732,15 @@ module Aws::Neptune
     #   enabled.
     #   @return [Boolean]
     #
+    # @!attribute [rw] database_name
+    #   The name for the new global database (up to 64 alpha-numeric
+    #   characters.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Tags to assign to the global cluster.
+    #   @return [Array<Types::Tag>]
+    #
     # @!attribute [rw] storage_encrypted
     #   The storage encryption setting for the new global database cluster.
     #   @return [Boolean]
@@ -1744,6 +1753,8 @@ module Aws::Neptune
       :engine,
       :engine_version,
       :deletion_protection,
+      :database_name,
+      :tags,
       :storage_encrypted)
       SENSITIVE = []
       include Aws::Structure
@@ -5429,6 +5440,10 @@ module Aws::Neptune
     #   The Neptune engine version used by the global database.
     #   @return [String]
     #
+    # @!attribute [rw] database_name
+    #   The default database name within the new global database cluster.
+    #   @return [String]
+    #
     # @!attribute [rw] storage_encrypted
     #   The storage encryption setting for the global database.
     #   @return [Boolean]
@@ -5450,6 +5465,10 @@ module Aws::Neptune
     #   called on this global cluster.
     #   @return [Types::FailoverState]
     #
+    # @!attribute [rw] tag_list
+    #   A list of global cluster tags.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/GlobalCluster AWS API Documentation
     #
     class GlobalCluster < Struct.new(
@@ -5459,10 +5478,12 @@ module Aws::Neptune
       :status,
       :engine,
       :engine_version,
+      :database_name,
       :storage_encrypted,
       :deletion_protection,
       :global_cluster_members,
-      :failover_state)
+      :failover_state,
+      :tag_list)
       SENSITIVE = []
       include Aws::Structure
     end

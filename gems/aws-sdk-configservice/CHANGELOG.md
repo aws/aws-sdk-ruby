@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.148.0 (2026-03-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.147.0 (2026-03-13)
+------------------
+
+* Feature - Fix pagination support for DescribeConformancePackCompliance, and update OrganizationConfigRule InputParameters max length to match ConfigRule.
+
 1.146.0 (2026-01-21)
 ------------------
 

@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.40.0 (2026-03-26)
+------------------
+
+* Feature - Timestream for InfluxDB adds support for customer defined maintenance windows. This allows customers to define maintenance schedule during resource creation and updates
+
+1.39.0 (2026-03-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.38.0 (2026-01-16)
 ------------------
 

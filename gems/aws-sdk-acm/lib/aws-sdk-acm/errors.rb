@@ -258,6 +258,11 @@ module Aws::ACM
       def message
         @message || @data[:message]
       end
+
+      # @return [String]
+      def throttling_reasons
+        @data[:throttling_reasons]
+      end
     end
 
     class TooManyTagsException < ServiceError

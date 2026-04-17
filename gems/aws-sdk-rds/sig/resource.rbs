@@ -170,6 +170,7 @@ module Aws
                                  },
                                ],
                                ?master_user_authentication_type: ("password" | "iam-db-auth"),
+                               ?with_express_configuration: bool,
                                ?source_region: ::String
                              ) -> DBCluster
                            | (?Hash[Symbol, untyped]) -> DBCluster

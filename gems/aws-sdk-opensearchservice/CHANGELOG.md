@@ -1,6 +1,46 @@
 Unreleased Changes
 ------------------
 
+1.94.0 (2026-04-01)
+------------------
+
+* Feature - Adding Policy-Min-TLS-1-2-RFC9151-FIPS-2024-08 as TLS Policy in Supported Regions
+
+1.93.0 (2026-03-31)
+------------------
+
+* Feature - Support RegisterCapability, GetCapability, DeregisterCapability API for AI Assistant feature management for OpenSearch UI Applications
+
+1.92.0 (2026-03-30)
+------------------
+
+* Feature - Added Cluster Insights API's In OpenSearch Service SDK.
+
+1.91.0 (2026-03-20)
+------------------
+
+* Feature - Added support for Amazon Managed Service for Prometheus (AMP) as a connected data source in OpenSearch UI. Now users can analyze Prometheus metrics in OpenSearch UI without data copy.
+
+1.90.0 (2026-03-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.89.0 (2026-03-09)
+------------------
+
+* Feature - This change enables cross-account and cross-region access for DataSources. Customers can now define access policies on their datasources to allow other AWS accounts to access and query their data.
+
+1.88.0 (2026-03-04)
+------------------
+
+* Feature - Adding support for DeploymentStrategyOptions
+
+1.87.0 (2026-02-24)
+------------------
+
+* Feature - Fixed HTTP binding for DescribeDomainAutoTunes API to correctly pass request parameters as query parameters in the HTTP request.
+
 1.86.0 (2026-01-16)
 ------------------
 

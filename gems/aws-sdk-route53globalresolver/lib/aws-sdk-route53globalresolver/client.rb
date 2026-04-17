@@ -480,6 +480,12 @@ module Aws::Route53GlobalResolver
     # Resolver resource. This allows the resolver to resolve DNS queries for
     # the private hosted zone from anywhere globally.
     #
+    # Route 53 Global Resolver is a global service that supports resolvers
+    # in multiple Amazon Web Services Regions but you must specify the US
+    # East (Ohio) Region to create, update, or otherwise work with Route 53
+    # Global Resolver resources. That is, for example, specify `--region
+    # us-east-2` on Amazon Web Services CLI commands.
+    #
     # @option params [required, String] :hosted_zone_id
     #   The ID of the Route 53 private hosted zone to associate with the Route
     #   53 Global Resolver resource.
@@ -534,6 +540,12 @@ module Aws::Route53GlobalResolver
     # more efficient than creating rules individually when you need to set
     # up multiple rules at once.
     #
+    # Route 53 Global Resolver is a global service that supports resolvers
+    # in multiple Amazon Web Services Regions but you must specify the US
+    # East (Ohio) Region to create, update, or otherwise work with Route 53
+    # Global Resolver resources. That is, for example, specify `--region
+    # us-east-2` on Amazon Web Services CLI commands.
+    #
     # @option params [required, Array<Types::BatchCreateFirewallRuleInputItem>] :firewall_rules
     #   The `BatchCreateFirewallRuleInputItem` objects contain the information
     #   for each Firewall rule.
@@ -556,7 +568,7 @@ module Aws::Route53GlobalResolver
     #         client_token: "ClientToken", # required
     #         confidence_threshold: "LOW", # accepts LOW, MEDIUM, HIGH
     #         description: "ResourceDescription",
-    #         dns_advanced_protection: "DGA", # accepts DGA, DNS_TUNNELING
+    #         dns_advanced_protection: "DGA", # accepts DGA, DNS_TUNNELING, DICTIONARY_DGA
     #         firewall_domain_list_id: "ResourceId",
     #         name: "ResourceName", # required
     #         priority: 1,
@@ -578,7 +590,7 @@ module Aws::Route53GlobalResolver
     #   resp.failures[0].firewall_rule.confidence_threshold #=> String, one of "LOW", "MEDIUM", "HIGH"
     #   resp.failures[0].firewall_rule.created_at #=> Time
     #   resp.failures[0].firewall_rule.description #=> String
-    #   resp.failures[0].firewall_rule.dns_advanced_protection #=> String, one of "DGA", "DNS_TUNNELING"
+    #   resp.failures[0].firewall_rule.dns_advanced_protection #=> String, one of "DGA", "DNS_TUNNELING", "DICTIONARY_DGA"
     #   resp.failures[0].firewall_rule.firewall_domain_list_id #=> String
     #   resp.failures[0].firewall_rule.id #=> String
     #   resp.failures[0].firewall_rule.managed_domain_list_name #=> String
@@ -600,7 +612,7 @@ module Aws::Route53GlobalResolver
     #   resp.successes[0].firewall_rule.confidence_threshold #=> String, one of "LOW", "MEDIUM", "HIGH"
     #   resp.successes[0].firewall_rule.created_at #=> Time
     #   resp.successes[0].firewall_rule.description #=> String
-    #   resp.successes[0].firewall_rule.dns_advanced_protection #=> String, one of "DGA", "DNS_TUNNELING"
+    #   resp.successes[0].firewall_rule.dns_advanced_protection #=> String, one of "DGA", "DNS_TUNNELING", "DICTIONARY_DGA"
     #   resp.successes[0].firewall_rule.firewall_domain_list_id #=> String
     #   resp.successes[0].firewall_rule.id #=> String
     #   resp.successes[0].firewall_rule.managed_domain_list_name #=> String
@@ -624,6 +636,12 @@ module Aws::Route53GlobalResolver
 
     # Deletes multiple DNS firewall rules in a single operation. This is
     # more efficient than deleting rules individually.
+    #
+    # Route 53 Global Resolver is a global service that supports resolvers
+    # in multiple Amazon Web Services Regions but you must specify the US
+    # East (Ohio) Region to create, update, or otherwise work with Route 53
+    # Global Resolver resources. That is, for example, specify `--region
+    # us-east-2` on Amazon Web Services CLI commands.
     #
     # @option params [required, Array<Types::BatchDeleteFirewallRuleInputItem>] :firewall_rules
     #   An array of the DNS Firewall IDs to be deleted.
@@ -672,6 +690,12 @@ module Aws::Route53GlobalResolver
     # Updates multiple DNS firewall rules in a single operation. This is
     # more efficient than updating rules individually.
     #
+    # Route 53 Global Resolver is a global service that supports resolvers
+    # in multiple Amazon Web Services Regions but you must specify the US
+    # East (Ohio) Region to create, update, or otherwise work with Route 53
+    # Global Resolver resources. That is, for example, specify `--region
+    # us-east-2` on Amazon Web Services CLI commands.
+    #
     # @option params [required, Array<Types::BatchUpdateFirewallRuleInputItem>] :firewall_rules
     #   The DNS Firewall rule IDs to be updated.
     #
@@ -692,7 +716,7 @@ module Aws::Route53GlobalResolver
     #         block_response: "NODATA", # accepts NODATA, NXDOMAIN, OVERRIDE
     #         confidence_threshold: "LOW", # accepts LOW, MEDIUM, HIGH
     #         description: "ResourceDescription",
-    #         dns_advanced_protection: "DGA", # accepts DGA, DNS_TUNNELING
+    #         dns_advanced_protection: "DGA", # accepts DGA, DNS_TUNNELING, DICTIONARY_DGA
     #         firewall_rule_id: "ResourceId", # required
     #         name: "ResourceName",
     #         priority: 1,
@@ -712,7 +736,7 @@ module Aws::Route53GlobalResolver
     #   resp.failures[0].firewall_rule.confidence_threshold #=> String, one of "LOW", "MEDIUM", "HIGH"
     #   resp.failures[0].firewall_rule.created_at #=> Time
     #   resp.failures[0].firewall_rule.description #=> String
-    #   resp.failures[0].firewall_rule.dns_advanced_protection #=> String, one of "DGA", "DNS_TUNNELING"
+    #   resp.failures[0].firewall_rule.dns_advanced_protection #=> String, one of "DGA", "DNS_TUNNELING", "DICTIONARY_DGA"
     #   resp.failures[0].firewall_rule.firewall_domain_list_id #=> String
     #   resp.failures[0].firewall_rule.id #=> String
     #   resp.failures[0].firewall_rule.name #=> String
@@ -733,7 +757,7 @@ module Aws::Route53GlobalResolver
     #   resp.successes[0].firewall_rule.confidence_threshold #=> String, one of "LOW", "MEDIUM", "HIGH"
     #   resp.successes[0].firewall_rule.created_at #=> Time
     #   resp.successes[0].firewall_rule.description #=> String
-    #   resp.successes[0].firewall_rule.dns_advanced_protection #=> String, one of "DGA", "DNS_TUNNELING"
+    #   resp.successes[0].firewall_rule.dns_advanced_protection #=> String, one of "DGA", "DNS_TUNNELING", "DICTIONARY_DGA"
     #   resp.successes[0].firewall_rule.firewall_domain_list_id #=> String
     #   resp.successes[0].firewall_rule.id #=> String
     #   resp.successes[0].firewall_rule.name #=> String
@@ -757,6 +781,12 @@ module Aws::Route53GlobalResolver
     # Creates an access source for a DNS view. Access sources define IP
     # addresses or CIDR ranges that are allowed to send DNS queries to the
     # Route 53 Global Resolver, along with the permitted DNS protocols.
+    #
+    # Route 53 Global Resolver is a global service that supports resolvers
+    # in multiple Amazon Web Services Regions but you must specify the US
+    # East (Ohio) Region to create, update, or otherwise work with Route 53
+    # Global Resolver resources. That is, for example, specify `--region
+    # us-east-2` on Amazon Web Services CLI commands.
     #
     # @option params [required, String] :cidr
     #   The IP address or CIDR range that is allowed to send DNS queries to
@@ -868,6 +898,12 @@ module Aws::Route53GlobalResolver
     # token-based authentication for DNS-over-HTTPS (DoH) and DNS-over-TLS
     # (DoT) connections to the Route 53 Global Resolver.
     #
+    # Route 53 Global Resolver is a global service that supports resolvers
+    # in multiple Amazon Web Services Regions but you must specify the US
+    # East (Ohio) Region to create, update, or otherwise work with Route 53
+    # Global Resolver resources. That is, for example, specify `--region
+    # us-east-2` on Amazon Web Services CLI commands.
+    #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier to ensure idempotency. This means
     #   that making the same request multiple times with the same
@@ -939,6 +975,12 @@ module Aws::Route53GlobalResolver
     # models end users, user groups, networks, and devices, and serves as a
     # parent resource that holds configurations controlling access,
     # authorization, DNS firewall rules, and forwarding rules.
+    #
+    # Route 53 Global Resolver is a global service that supports resolvers
+    # in multiple Amazon Web Services Regions but you must specify the US
+    # East (Ohio) Region to create, update, or otherwise work with Route 53
+    # Global Resolver resources. That is, for example, specify `--region
+    # us-east-2` on Amazon Web Services CLI commands.
     #
     # @option params [required, String] :global_resolver_id
     #   The ID of the Route 53 Global Resolver to associate with this DNS
@@ -1032,6 +1074,12 @@ module Aws::Route53GlobalResolver
     # domain specifications that you use in DNS firewall rules to allow,
     # block, or alert on DNS queries to specific domains.
     #
+    # Route 53 Global Resolver is a global service that supports resolvers
+    # in multiple Amazon Web Services Regions but you must specify the US
+    # East (Ohio) Region to create, update, or otherwise work with Route 53
+    # Global Resolver resources. That is, for example, specify `--region
+    # us-east-2` on Amazon Web Services CLI commands.
+    #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier to ensure idempotency. This means
     #   that making the same request multiple times with the same
@@ -1102,6 +1150,12 @@ module Aws::Route53GlobalResolver
     # Creates a DNS firewall rule. Firewall rules define actions (ALLOW,
     # BLOCK, or ALERT) to take on DNS queries that match specified domain
     # lists, managed domain lists, or advanced threat protections.
+    #
+    # Route 53 Global Resolver is a global service that supports resolvers
+    # in multiple Amazon Web Services Regions but you must specify the US
+    # East (Ohio) Region to create, update, or otherwise work with Route 53
+    # Global Resolver resources. That is, for example, specify `--region
+    # us-east-2` on Amazon Web Services CLI commands.
     #
     # @option params [required, String] :action
     #   The action that DNS Firewall should take on a DNS query when it
@@ -1212,7 +1266,7 @@ module Aws::Route53GlobalResolver
     #     client_token: "ClientToken",
     #     confidence_threshold: "LOW", # accepts LOW, MEDIUM, HIGH
     #     description: "ResourceDescription",
-    #     dns_advanced_protection: "DGA", # accepts DGA, DNS_TUNNELING
+    #     dns_advanced_protection: "DGA", # accepts DGA, DNS_TUNNELING, DICTIONARY_DGA
     #     firewall_domain_list_id: "ResourceId",
     #     name: "ResourceName", # required
     #     priority: 1,
@@ -1230,7 +1284,7 @@ module Aws::Route53GlobalResolver
     #   resp.confidence_threshold #=> String, one of "LOW", "MEDIUM", "HIGH"
     #   resp.created_at #=> Time
     #   resp.description #=> String
-    #   resp.dns_advanced_protection #=> String, one of "DGA", "DNS_TUNNELING"
+    #   resp.dns_advanced_protection #=> String, one of "DGA", "DNS_TUNNELING", "DICTIONARY_DGA"
     #   resp.firewall_domain_list_id #=> String
     #   resp.id #=> String
     #   resp.name #=> String
@@ -1254,6 +1308,12 @@ module Aws::Route53GlobalResolver
     # secure DNS resolution for both public and private domains through
     # global anycast IP addresses.
     #
+    # Route 53 Global Resolver is a global service that supports resolvers
+    # in multiple Amazon Web Services Regions but you must specify the US
+    # East (Ohio) Region to create, update, or otherwise work with Route 53
+    # Global Resolver resources. That is, for example, specify `--region
+    # us-east-2` on Amazon Web Services CLI commands.
+    #
     # @option params [String] :client_token
     #   A unique string that identifies the request and ensures idempotency.
     #   If you make multiple requests with the same client token, only one
@@ -1266,18 +1326,23 @@ module Aws::Route53GlobalResolver
     #   An optional description for the Route 53 Global Resolver instance.
     #   Maximum length of 1024 characters.
     #
+    # @option params [String] :ip_address_type
+    #   The IP address type for the Route 53 Global Resolver. Valid values are
+    #   IPV4 (default) or DUAL\_STACK for both IPv4 and IPv6 support.
+    #
     # @option params [required, String] :name
     #   A descriptive name for the Route 53 Global Resolver instance. Maximum
     #   length of 64 characters.
     #
     # @option params [String] :observability_region
-    #   The AWS region where query resolution logs and metrics will be
-    #   aggregated and delivered. If not specified, logging is not enabled.
+    #   The Amazon Web Services Region where query resolution logs and metrics
+    #   will be aggregated and delivered. If not specified, logging is not
+    #   enabled.
     #
     # @option params [required, Array<String>] :regions
-    #   List of AWS regions where the Route 53 Global Resolver will operate.
-    #   The resolver will be distributed across these regions to provide
-    #   global availability and low-latency DNS resolution.
+    #   List of Amazon Web Services Regions where the Route 53 Global Resolver
+    #   will operate. The resolver will be distributed across these Regions to
+    #   provide global availability and low-latency DNS resolution.
     #
     # @option params [Hash<String,String>] :tags
     #   Tags to associate with the Route 53 Global Resolver. Tags are
@@ -1291,7 +1356,9 @@ module Aws::Route53GlobalResolver
     #   * {Types::CreateGlobalResolverOutput#created_at #created_at} => Time
     #   * {Types::CreateGlobalResolverOutput#description #description} => String
     #   * {Types::CreateGlobalResolverOutput#dns_name #dns_name} => String
+    #   * {Types::CreateGlobalResolverOutput#ip_address_type #ip_address_type} => String
     #   * {Types::CreateGlobalResolverOutput#ipv4_addresses #ipv4_addresses} => Array&lt;String&gt;
+    #   * {Types::CreateGlobalResolverOutput#ipv6_addresses #ipv6_addresses} => Array&lt;String&gt;
     #   * {Types::CreateGlobalResolverOutput#name #name} => String
     #   * {Types::CreateGlobalResolverOutput#observability_region #observability_region} => String
     #   * {Types::CreateGlobalResolverOutput#regions #regions} => Array&lt;String&gt;
@@ -1303,6 +1370,7 @@ module Aws::Route53GlobalResolver
     #   resp = client.create_global_resolver({
     #     client_token: "ClientToken",
     #     description: "ResourceDescription",
+    #     ip_address_type: "IPV4", # accepts IPV4, DUAL_STACK
     #     name: "ResourceName", # required
     #     observability_region: "Region",
     #     regions: ["Region"], # required
@@ -1319,8 +1387,11 @@ module Aws::Route53GlobalResolver
     #   resp.created_at #=> Time
     #   resp.description #=> String
     #   resp.dns_name #=> String
+    #   resp.ip_address_type #=> String, one of "IPV4", "DUAL_STACK"
     #   resp.ipv4_addresses #=> Array
     #   resp.ipv4_addresses[0] #=> String
+    #   resp.ipv6_addresses #=> Array
+    #   resp.ipv6_addresses[0] #=> String
     #   resp.name #=> String
     #   resp.observability_region #=> String
     #   resp.regions #=> Array
@@ -1338,6 +1409,12 @@ module Aws::Route53GlobalResolver
     end
 
     # Deletes an access source. This operation cannot be undone.
+    #
+    # Route 53 Global Resolver is a global service that supports resolvers
+    # in multiple Amazon Web Services Regions but you must specify the US
+    # East (Ohio) Region to create, update, or otherwise work with Route 53
+    # Global Resolver resources. That is, for example, specify `--region
+    # us-east-2` on Amazon Web Services CLI commands.
     #
     # @option params [required, String] :access_source_id
     #   The unique identifier of the access source to delete.
@@ -1385,6 +1462,12 @@ module Aws::Route53GlobalResolver
 
     # Deletes an access token. This operation cannot be undone.
     #
+    # Route 53 Global Resolver is a global service that supports resolvers
+    # in multiple Amazon Web Services Regions but you must specify the US
+    # East (Ohio) Region to create, update, or otherwise work with Route 53
+    # Global Resolver resources. That is, for example, specify `--region
+    # us-east-2` on Amazon Web Services CLI commands.
+    #
     # @option params [required, String] :access_token_id
     #   The unique identifier of the access token to delete.
     #
@@ -1416,6 +1499,12 @@ module Aws::Route53GlobalResolver
     end
 
     # Deletes a DNS view. This operation cannot be undone.
+    #
+    # Route 53 Global Resolver is a global service that supports resolvers
+    # in multiple Amazon Web Services Regions but you must specify the US
+    # East (Ohio) Region to create, update, or otherwise work with Route 53
+    # Global Resolver resources. That is, for example, specify `--region
+    # us-east-2` on Amazon Web Services CLI commands.
     #
     # @option params [required, String] :dns_view_id
     #   The unique identifier of the DNS view to delete.
@@ -1467,6 +1556,12 @@ module Aws::Route53GlobalResolver
 
     # Deletes a firewall domain list. This operation cannot be undone.
     #
+    # Route 53 Global Resolver is a global service that supports resolvers
+    # in multiple Amazon Web Services Regions but you must specify the US
+    # East (Ohio) Region to create, update, or otherwise work with Route 53
+    # Global Resolver resources. That is, for example, specify `--region
+    # us-east-2` on Amazon Web Services CLI commands.
+    #
     # @option params [required, String] :firewall_domain_list_id
     #   The unique identifier of the firewall domain list to delete.
     #
@@ -1500,6 +1595,12 @@ module Aws::Route53GlobalResolver
     end
 
     # Deletes a DNS firewall rule. This operation cannot be undone.
+    #
+    # Route 53 Global Resolver is a global service that supports resolvers
+    # in multiple Amazon Web Services Regions but you must specify the US
+    # East (Ohio) Region to create, update, or otherwise work with Route 53
+    # Global Resolver resources. That is, for example, specify `--region
+    # us-east-2` on Amazon Web Services CLI commands.
     #
     # @option params [required, String] :firewall_rule_id
     #   The unique identifier of the firewall rule to delete.
@@ -1540,7 +1641,7 @@ module Aws::Route53GlobalResolver
     #   resp.confidence_threshold #=> String, one of "LOW", "MEDIUM", "HIGH"
     #   resp.created_at #=> Time
     #   resp.description #=> String
-    #   resp.dns_advanced_protection #=> String, one of "DGA", "DNS_TUNNELING"
+    #   resp.dns_advanced_protection #=> String, one of "DGA", "DNS_TUNNELING", "DICTIONARY_DGA"
     #   resp.firewall_domain_list_id #=> String
     #   resp.id #=> String
     #   resp.name #=> String
@@ -1563,6 +1664,12 @@ module Aws::Route53GlobalResolver
     # undone. All associated DNS views, access sources, tokens, and firewall
     # rules are also deleted.
     #
+    # Route 53 Global Resolver is a global service that supports resolvers
+    # in multiple Amazon Web Services Regions but you must specify the US
+    # East (Ohio) Region to create, update, or otherwise work with Route 53
+    # Global Resolver resources. That is, for example, specify `--region
+    # us-east-2` on Amazon Web Services CLI commands.
+    #
     # @option params [required, String] :global_resolver_id
     #   The unique identifier of the Route 53 Global Resolver to delete.
     #
@@ -1580,6 +1687,8 @@ module Aws::Route53GlobalResolver
     #   * {Types::DeleteGlobalResolverOutput#updated_at #updated_at} => Time
     #   * {Types::DeleteGlobalResolverOutput#status #status} => String
     #   * {Types::DeleteGlobalResolverOutput#ipv4_addresses #ipv4_addresses} => Array&lt;String&gt;
+    #   * {Types::DeleteGlobalResolverOutput#ipv6_addresses #ipv6_addresses} => Array&lt;String&gt;
+    #   * {Types::DeleteGlobalResolverOutput#ip_address_type #ip_address_type} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1603,6 +1712,9 @@ module Aws::Route53GlobalResolver
     #   resp.status #=> String, one of "CREATING", "OPERATIONAL", "UPDATING", "DELETING"
     #   resp.ipv4_addresses #=> Array
     #   resp.ipv4_addresses[0] #=> String
+    #   resp.ipv6_addresses #=> Array
+    #   resp.ipv6_addresses[0] #=> String
+    #   resp.ip_address_type #=> String, one of "IPV4", "DUAL_STACK"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53globalresolver-2022-09-27/DeleteGlobalResolver AWS API Documentation
     #
@@ -1614,6 +1726,12 @@ module Aws::Route53GlobalResolver
     end
 
     # Disables a DNS view, preventing it from serving DNS queries.
+    #
+    # Route 53 Global Resolver is a global service that supports resolvers
+    # in multiple Amazon Web Services Regions but you must specify the US
+    # East (Ohio) Region to create, update, or otherwise work with Route 53
+    # Global Resolver resources. That is, for example, specify `--region
+    # us-east-2` on Amazon Web Services CLI commands.
     #
     # @option params [required, String] :dns_view_id
     #   The unique identifier of the DNS view to disable.
@@ -1666,6 +1784,12 @@ module Aws::Route53GlobalResolver
     # Disassociates a Route 53 private hosted zone from a Route 53 Global
     # Resolver resource.
     #
+    # Route 53 Global Resolver is a global service that supports resolvers
+    # in multiple Amazon Web Services Regions but you must specify the US
+    # East (Ohio) Region to create, update, or otherwise work with Route 53
+    # Global Resolver resources. That is, for example, specify `--region
+    # us-east-2` on Amazon Web Services CLI commands.
+    #
     # @option params [required, String] :hosted_zone_id
     #   The ID of the Route 53 private hosted zone to disassociate.
     #
@@ -1712,6 +1836,12 @@ module Aws::Route53GlobalResolver
     end
 
     # Enables a disabled DNS view, allowing it to serve DNS queries again.
+    #
+    # Route 53 Global Resolver is a global service that supports resolvers
+    # in multiple Amazon Web Services Regions but you must specify the US
+    # East (Ohio) Region to create, update, or otherwise work with Route 53
+    # Global Resolver resources. That is, for example, specify `--region
+    # us-east-2` on Amazon Web Services CLI commands.
     #
     # @option params [required, String] :dns_view_id
     #   The unique identifier of the DNS view to enable.
@@ -1763,6 +1893,12 @@ module Aws::Route53GlobalResolver
 
     # Retrieves information about an access source.
     #
+    # Route 53 Global Resolver is a global service that supports resolvers
+    # in multiple Amazon Web Services Regions but you must specify the US
+    # East (Ohio) Region to create, update, or otherwise work with Route 53
+    # Global Resolver resources. That is, for example, specify `--region
+    # us-east-2` on Amazon Web Services CLI commands.
+    #
     # @option params [required, String] :access_source_id
     #   The unique identifier of the access source to retrieve.
     #
@@ -1808,6 +1944,12 @@ module Aws::Route53GlobalResolver
     end
 
     # Retrieves information about an access token.
+    #
+    # Route 53 Global Resolver is a global service that supports resolvers
+    # in multiple Amazon Web Services Regions but you must specify the US
+    # East (Ohio) Region to create, update, or otherwise work with Route 53
+    # Global Resolver resources. That is, for example, specify `--region
+    # us-east-2` on Amazon Web Services CLI commands.
     #
     # @option params [required, String] :access_token_id
     #   ID of the token.
@@ -1856,6 +1998,12 @@ module Aws::Route53GlobalResolver
     end
 
     # Retrieves information about a DNS view.
+    #
+    # Route 53 Global Resolver is a global service that supports resolvers
+    # in multiple Amazon Web Services Regions but you must specify the US
+    # East (Ohio) Region to create, update, or otherwise work with Route 53
+    # Global Resolver resources. That is, for example, specify `--region
+    # us-east-2` on Amazon Web Services CLI commands.
     #
     # @option params [required, String] :dns_view_id
     #   The ID of the DNS view to retrieve information about.
@@ -1907,6 +2055,12 @@ module Aws::Route53GlobalResolver
 
     # Retrieves information about a firewall domain list.
     #
+    # Route 53 Global Resolver is a global service that supports resolvers
+    # in multiple Amazon Web Services Regions but you must specify the US
+    # East (Ohio) Region to create, update, or otherwise work with Route 53
+    # Global Resolver resources. That is, for example, specify `--region
+    # us-east-2` on Amazon Web Services CLI commands.
+    #
     # @option params [required, String] :firewall_domain_list_id
     #   ID of the domain list.
     #
@@ -1955,6 +2109,12 @@ module Aws::Route53GlobalResolver
 
     # Retrieves information about a DNS firewall rule.
     #
+    # Route 53 Global Resolver is a global service that supports resolvers
+    # in multiple Amazon Web Services Regions but you must specify the US
+    # East (Ohio) Region to create, update, or otherwise work with Route 53
+    # Global Resolver resources. That is, for example, specify `--region
+    # us-east-2` on Amazon Web Services CLI commands.
+    #
     # @option params [required, String] :firewall_rule_id
     #   ID of the DNS Firewall rule.
     #
@@ -1994,7 +2154,7 @@ module Aws::Route53GlobalResolver
     #   resp.confidence_threshold #=> String, one of "LOW", "MEDIUM", "HIGH"
     #   resp.created_at #=> Time
     #   resp.description #=> String
-    #   resp.dns_advanced_protection #=> String, one of "DGA", "DNS_TUNNELING"
+    #   resp.dns_advanced_protection #=> String, one of "DGA", "DNS_TUNNELING", "DICTIONARY_DGA"
     #   resp.firewall_domain_list_id #=> String
     #   resp.id #=> String
     #   resp.name #=> String
@@ -2015,6 +2175,12 @@ module Aws::Route53GlobalResolver
 
     # Retrieves information about a Route 53 Global Resolver instance.
     #
+    # Route 53 Global Resolver is a global service that supports resolvers
+    # in multiple Amazon Web Services Regions but you must specify the US
+    # East (Ohio) Region to create, update, or otherwise work with Route 53
+    # Global Resolver resources. That is, for example, specify `--region
+    # us-east-2` on Amazon Web Services CLI commands.
+    #
     # @option params [required, String] :global_resolver_id
     #   The ID of the Route 53 Global Resolver to retrieve information about.
     #
@@ -2032,6 +2198,8 @@ module Aws::Route53GlobalResolver
     #   * {Types::GetGlobalResolverOutput#updated_at #updated_at} => Time
     #   * {Types::GetGlobalResolverOutput#status #status} => String
     #   * {Types::GetGlobalResolverOutput#ipv4_addresses #ipv4_addresses} => Array&lt;String&gt;
+    #   * {Types::GetGlobalResolverOutput#ipv6_addresses #ipv6_addresses} => Array&lt;String&gt;
+    #   * {Types::GetGlobalResolverOutput#ip_address_type #ip_address_type} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -2055,6 +2223,9 @@ module Aws::Route53GlobalResolver
     #   resp.status #=> String, one of "CREATING", "OPERATIONAL", "UPDATING", "DELETING"
     #   resp.ipv4_addresses #=> Array
     #   resp.ipv4_addresses[0] #=> String
+    #   resp.ipv6_addresses #=> Array
+    #   resp.ipv6_addresses[0] #=> String
+    #   resp.ip_address_type #=> String, one of "IPV4", "DUAL_STACK"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53globalresolver-2022-09-27/GetGlobalResolver AWS API Documentation
     #
@@ -2066,6 +2237,12 @@ module Aws::Route53GlobalResolver
     end
 
     # Retrieves information about a hosted zone association.
+    #
+    # Route 53 Global Resolver is a global service that supports resolvers
+    # in multiple Amazon Web Services Regions but you must specify the US
+    # East (Ohio) Region to create, update, or otherwise work with Route 53
+    # Global Resolver resources. That is, for example, specify `--region
+    # us-east-2` on Amazon Web Services CLI commands.
     #
     # @option params [required, String] :hosted_zone_association_id
     #   ID of the private hosted zone association.
@@ -2107,9 +2284,15 @@ module Aws::Route53GlobalResolver
       req.send_request(options)
     end
 
-    # Retrieves information about an AWS-managed firewall domain list.
-    # Managed domain lists contain domains associated with malicious
-    # activity, content categories, or specific threats.
+    # Retrieves information about an Amazon Web Services-managed firewall
+    # domain list. Managed domain lists contain domains associated with
+    # malicious activity, content categories, or specific threats.
+    #
+    # Route 53 Global Resolver is a global service that supports resolvers
+    # in multiple Amazon Web Services Regions but you must specify the US
+    # East (Ohio) Region to create, update, or otherwise work with Route 53
+    # Global Resolver resources. That is, for example, specify `--region
+    # us-east-2` on Amazon Web Services CLI commands.
     #
     # @option params [required, String] :managed_firewall_domain_list_id
     #   ID of the Managed Domain List.
@@ -2145,6 +2328,12 @@ module Aws::Route53GlobalResolver
 
     # Imports a list of domains from an Amazon S3 file into a firewall
     # domain list. The file should contain one domain per line.
+    #
+    # Route 53 Global Resolver is a global service that supports resolvers
+    # in multiple Amazon Web Services Regions but you must specify the US
+    # East (Ohio) Region to create, update, or otherwise work with Route 53
+    # Global Resolver resources. That is, for example, specify `--region
+    # us-east-2` on Amazon Web Services CLI commands.
     #
     # @option params [required, String] :domain_file_url
     #   The fully qualified URL of the file in Amazon S3 that contains the
@@ -2189,6 +2378,12 @@ module Aws::Route53GlobalResolver
     end
 
     # Lists all access sources with pagination support.
+    #
+    # Route 53 Global Resolver is a global service that supports resolvers
+    # in multiple Amazon Web Services Regions but you must specify the US
+    # East (Ohio) Region to create, update, or otherwise work with Route 53
+    # Global Resolver resources. That is, for example, specify `--region
+    # us-east-2` on Amazon Web Services CLI commands.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to retrieve in a single call.
@@ -2242,6 +2437,12 @@ module Aws::Route53GlobalResolver
     end
 
     # Lists all access tokens for a DNS view with pagination support.
+    #
+    # Route 53 Global Resolver is a global service that supports resolvers
+    # in multiple Amazon Web Services Regions but you must specify the US
+    # East (Ohio) Region to create, update, or otherwise work with Route 53
+    # Global Resolver resources. That is, for example, specify `--region
+    # us-east-2` on Amazon Web Services CLI commands.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to retrieve in a single call.
@@ -2300,6 +2501,12 @@ module Aws::Route53GlobalResolver
     # Lists all DNS views for a Route 53 Global Resolver with pagination
     # support.
     #
+    # Route 53 Global Resolver is a global service that supports resolvers
+    # in multiple Amazon Web Services Regions but you must specify the US
+    # East (Ohio) Region to create, update, or otherwise work with Route 53
+    # Global Resolver resources. That is, for example, specify `--region
+    # us-east-2` on Amazon Web Services CLI commands.
+    #
     # @option params [Integer] :max_results
     #   The maximum number of results to retrieve in a single call.
     #
@@ -2354,6 +2561,12 @@ module Aws::Route53GlobalResolver
     # Lists all firewall domain lists for a Route 53 Global Resolver with
     # pagination support.
     #
+    # Route 53 Global Resolver is a global service that supports resolvers
+    # in multiple Amazon Web Services Regions but you must specify the US
+    # East (Ohio) Region to create, update, or otherwise work with Route 53
+    # Global Resolver resources. That is, for example, specify `--region
+    # us-east-2` on Amazon Web Services CLI commands.
+    #
     # @option params [Integer] :max_results
     #   The maximum number of results to retrieve in a single call.
     #
@@ -2404,6 +2617,12 @@ module Aws::Route53GlobalResolver
 
     # Lists all the domains in DNS Firewall domain list you have created.
     #
+    # Route 53 Global Resolver is a global service that supports resolvers
+    # in multiple Amazon Web Services Regions but you must specify the US
+    # East (Ohio) Region to create, update, or otherwise work with Route 53
+    # Global Resolver resources. That is, for example, specify `--region
+    # us-east-2` on Amazon Web Services CLI commands.
+    #
     # @option params [Integer] :max_results
     #   The maximum number of results to retrieve in a single call.
     #
@@ -2445,6 +2664,12 @@ module Aws::Route53GlobalResolver
     end
 
     # Lists all DNS firewall rules for a DNS view with pagination support.
+    #
+    # Route 53 Global Resolver is a global service that supports resolvers
+    # in multiple Amazon Web Services Regions but you must specify the US
+    # East (Ohio) Region to create, update, or otherwise work with Route 53
+    # Global Resolver resources. That is, for example, specify `--region
+    # us-east-2` on Amazon Web Services CLI commands.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to retrieve in a single call.
@@ -2489,7 +2714,7 @@ module Aws::Route53GlobalResolver
     #   resp.firewall_rules[0].confidence_threshold #=> String, one of "LOW", "MEDIUM", "HIGH"
     #   resp.firewall_rules[0].created_at #=> Time
     #   resp.firewall_rules[0].description #=> String
-    #   resp.firewall_rules[0].dns_advanced_protection #=> String, one of "DGA", "DNS_TUNNELING"
+    #   resp.firewall_rules[0].dns_advanced_protection #=> String, one of "DGA", "DNS_TUNNELING", "DICTIONARY_DGA"
     #   resp.firewall_rules[0].firewall_domain_list_id #=> String
     #   resp.firewall_rules[0].id #=> String
     #   resp.firewall_rules[0].name #=> String
@@ -2510,6 +2735,12 @@ module Aws::Route53GlobalResolver
 
     # Lists all Route 53 Global Resolver instances in your account with
     # pagination support.
+    #
+    # Route 53 Global Resolver is a global service that supports resolvers
+    # in multiple Amazon Web Services Regions but you must specify the US
+    # East (Ohio) Region to create, update, or otherwise work with Route 53
+    # Global Resolver resources. That is, for example, specify `--region
+    # us-east-2` on Amazon Web Services CLI commands.
     #
     # @option params [Integer] :max_results
     #   The maximum number of Route 53 Global Resolver instances to return in
@@ -2551,6 +2782,9 @@ module Aws::Route53GlobalResolver
     #   resp.global_resolvers[0].status #=> String, one of "CREATING", "OPERATIONAL", "UPDATING", "DELETING"
     #   resp.global_resolvers[0].ipv4_addresses #=> Array
     #   resp.global_resolvers[0].ipv4_addresses[0] #=> String
+    #   resp.global_resolvers[0].ipv6_addresses #=> Array
+    #   resp.global_resolvers[0].ipv6_addresses[0] #=> String
+    #   resp.global_resolvers[0].ip_address_type #=> String, one of "IPV4", "DUAL_STACK"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53globalresolver-2022-09-27/ListGlobalResolvers AWS API Documentation
     #
@@ -2563,6 +2797,12 @@ module Aws::Route53GlobalResolver
 
     # Lists all hosted zone associations for a Route 53 Global Resolver
     # resource with pagination support.
+    #
+    # Route 53 Global Resolver is a global service that supports resolvers
+    # in multiple Amazon Web Services Regions but you must specify the US
+    # East (Ohio) Region to create, update, or otherwise work with Route 53
+    # Global Resolver resources. That is, for example, specify `--region
+    # us-east-2` on Amazon Web Services CLI commands.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to retrieve in a single call.
@@ -2611,9 +2851,15 @@ module Aws::Route53GlobalResolver
       req.send_request(options)
     end
 
-    # Returns a paginated list of the AWS Managed DNS Lists and the
-    # categories for DNS Firewall. The categories are either `THREAT` or
-    # `CONTENT`.
+    # Returns a paginated list of the Amazon Web Services Managed DNS Lists
+    # and the categories for DNS Firewall. The categories are either
+    # `THREAT` or `CONTENT`.
+    #
+    # Route 53 Global Resolver is a global service that supports resolvers
+    # in multiple Amazon Web Services Regions but you must specify the US
+    # East (Ohio) Region to create, update, or otherwise work with Route 53
+    # Global Resolver resources. That is, for example, specify `--region
+    # us-east-2` on Amazon Web Services CLI commands.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to retrieve in a single call.
@@ -2660,6 +2906,12 @@ module Aws::Route53GlobalResolver
 
     # Lists the tags associated with a Route 53 Global Resolver resource.
     #
+    # Route 53 Global Resolver is a global service that supports resolvers
+    # in multiple Amazon Web Services Regions but you must specify the US
+    # East (Ohio) Region to create, update, or otherwise work with Route 53
+    # Global Resolver resources. That is, for example, specify `--region
+    # us-east-2` on Amazon Web Services CLI commands.
+    #
     # @option params [required, String] :resource_arn
     #   Amazon Resource Name (ARN) for the resource.
     #
@@ -2690,6 +2942,12 @@ module Aws::Route53GlobalResolver
     # Adds or updates tags for a Route 53 Global Resolver resource. Tags are
     # key-value pairs that help you organize and identify your resources.
     #
+    # Route 53 Global Resolver is a global service that supports resolvers
+    # in multiple Amazon Web Services Regions but you must specify the US
+    # East (Ohio) Region to create, update, or otherwise work with Route 53
+    # Global Resolver resources. That is, for example, specify `--region
+    # us-east-2` on Amazon Web Services CLI commands.
+    #
     # @option params [required, String] :resource_arn
     #   Amazon Resource Name (ARN) of the resource to be tagged.
     #
@@ -2719,6 +2977,12 @@ module Aws::Route53GlobalResolver
 
     # Removes tags from a Route 53 Global Resolver resource.
     #
+    # Route 53 Global Resolver is a global service that supports resolvers
+    # in multiple Amazon Web Services Regions but you must specify the US
+    # East (Ohio) Region to create, update, or otherwise work with Route 53
+    # Global Resolver resources. That is, for example, specify `--region
+    # us-east-2` on Amazon Web Services CLI commands.
+    #
     # @option params [required, String] :resource_arn
     #   Amazon Resource Name (ARN) of the resource.
     #
@@ -2744,6 +3008,12 @@ module Aws::Route53GlobalResolver
     end
 
     # Updates the configuration of an access source.
+    #
+    # Route 53 Global Resolver is a global service that supports resolvers
+    # in multiple Amazon Web Services Regions but you must specify the US
+    # East (Ohio) Region to create, update, or otherwise work with Route 53
+    # Global Resolver resources. That is, for example, specify `--region
+    # us-east-2` on Amazon Web Services CLI commands.
     #
     # @option params [required, String] :access_source_id
     #   The unique identifier of the access source to update.
@@ -2807,6 +3077,12 @@ module Aws::Route53GlobalResolver
 
     # Updates the configuration of an access token.
     #
+    # Route 53 Global Resolver is a global service that supports resolvers
+    # in multiple Amazon Web Services Regions but you must specify the US
+    # East (Ohio) Region to create, update, or otherwise work with Route 53
+    # Global Resolver resources. That is, for example, specify `--region
+    # us-east-2` on Amazon Web Services CLI commands.
+    #
     # @option params [required, String] :access_token_id
     #   The ID of the token.
     #
@@ -2840,6 +3116,12 @@ module Aws::Route53GlobalResolver
     end
 
     # Updates the configuration of a DNS view.
+    #
+    # Route 53 Global Resolver is a global service that supports resolvers
+    # in multiple Amazon Web Services Regions but you must specify the US
+    # East (Ohio) Region to create, update, or otherwise work with Route 53
+    # Global Resolver resources. That is, for example, specify `--region
+    # us-east-2` on Amazon Web Services CLI commands.
     #
     # @option params [required, String] :dns_view_id
     #   The unique identifier of the DNS view to update.
@@ -2911,6 +3193,12 @@ module Aws::Route53GlobalResolver
 
     # Updates a DNS Firewall domain list from an array of specified domains.
     #
+    # Route 53 Global Resolver is a global service that supports resolvers
+    # in multiple Amazon Web Services Regions but you must specify the US
+    # East (Ohio) Region to create, update, or otherwise work with Route 53
+    # Global Resolver resources. That is, for example, specify `--region
+    # us-east-2` on Amazon Web Services CLI commands.
+    #
     # @option params [required, Array<String>] :domains
     #   A list of the domains. You can add up to 1000 domains per request.
     #
@@ -2953,6 +3241,12 @@ module Aws::Route53GlobalResolver
 
     # Updates the configuration of a DNS firewall rule.
     #
+    # Route 53 Global Resolver is a global service that supports resolvers
+    # in multiple Amazon Web Services Regions but you must specify the US
+    # East (Ohio) Region to create, update, or otherwise work with Route 53
+    # Global Resolver resources. That is, for example, specify `--region
+    # us-east-2` on Amazon Web Services CLI commands.
+    #
     # @option params [String] :action
     #   The action that DNS Firewall should take on a DNS query when it
     #   matches one of the domains in the rule's domain list, or a threat in
@@ -2992,8 +3286,8 @@ module Aws::Route53GlobalResolver
     #   The description for the Firewall rule.
     #
     # @option params [String] :dns_advanced_protection
-    #   The type of the DNS Firewall Advanced rule. Valid values are DGA and
-    #   DNS\_TUNNELING.
+    #   The type of the DNS Firewall Advanced rule. Valid values are DGA,
+    #   DNS\_TUNNELING, and DICTIONARY\_DGA.
     #
     # @option params [required, String] :firewall_rule_id
     #   The ID of the DNS Firewall rule.
@@ -3037,7 +3331,7 @@ module Aws::Route53GlobalResolver
     #     client_token: "ClientToken", # required
     #     confidence_threshold: "LOW", # accepts LOW, MEDIUM, HIGH
     #     description: "ResourceDescription",
-    #     dns_advanced_protection: "DGA", # accepts DGA, DNS_TUNNELING
+    #     dns_advanced_protection: "DGA", # accepts DGA, DNS_TUNNELING, DICTIONARY_DGA
     #     firewall_rule_id: "ResourceId", # required
     #     name: "ResourceName",
     #     priority: 1,
@@ -3053,7 +3347,7 @@ module Aws::Route53GlobalResolver
     #   resp.confidence_threshold #=> String, one of "LOW", "MEDIUM", "HIGH"
     #   resp.created_at #=> Time
     #   resp.description #=> String
-    #   resp.dns_advanced_protection #=> String, one of "DGA", "DNS_TUNNELING"
+    #   resp.dns_advanced_protection #=> String, one of "DGA", "DNS_TUNNELING", "DICTIONARY_DGA"
     #   resp.firewall_domain_list_id #=> String
     #   resp.id #=> String
     #   resp.name #=> String
@@ -3073,7 +3367,13 @@ module Aws::Route53GlobalResolver
     end
 
     # Updates the configuration of a Route 53 Global Resolver instance. You
-    # can modify the name, description, and observability region.
+    # can modify the name, description, and observability Region.
+    #
+    # Route 53 Global Resolver is a global service that supports resolvers
+    # in multiple Amazon Web Services Regions but you must specify the US
+    # East (Ohio) Region to create, update, or otherwise work with Route 53
+    # Global Resolver resources. That is, for example, specify `--region
+    # us-east-2` on Amazon Web Services CLI commands.
     #
     # @option params [required, String] :global_resolver_id
     #   The ID of the Global Resolver.
@@ -3082,11 +3382,15 @@ module Aws::Route53GlobalResolver
     #   The name of the Global Resolver.
     #
     # @option params [String] :observability_region
-    #   The AWS Regions in which the users' Global Resolver query resolution
-    #   logs will be propagated.
+    #   The Amazon Web Services Regions in which the users' Global Resolver
+    #   query resolution logs will be propagated.
     #
     # @option params [String] :description
     #   The description of the Global Resolver.
+    #
+    # @option params [String] :ip_address_type
+    #   The IP address type for the Global Resolver. Valid values are IPV4 or
+    #   DUAL\_STACK for both IPv4 and IPv6 support.
     #
     # @return [Types::UpdateGlobalResolverOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3102,6 +3406,8 @@ module Aws::Route53GlobalResolver
     #   * {Types::UpdateGlobalResolverOutput#updated_at #updated_at} => Time
     #   * {Types::UpdateGlobalResolverOutput#status #status} => String
     #   * {Types::UpdateGlobalResolverOutput#ipv4_addresses #ipv4_addresses} => Array&lt;String&gt;
+    #   * {Types::UpdateGlobalResolverOutput#ipv6_addresses #ipv6_addresses} => Array&lt;String&gt;
+    #   * {Types::UpdateGlobalResolverOutput#ip_address_type #ip_address_type} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -3110,6 +3416,7 @@ module Aws::Route53GlobalResolver
     #     name: "ResourceName",
     #     observability_region: "Region",
     #     description: "ResourceDescription",
+    #     ip_address_type: "IPV4", # accepts IPV4, DUAL_STACK
     #   })
     #
     # @example Response structure
@@ -3128,6 +3435,9 @@ module Aws::Route53GlobalResolver
     #   resp.status #=> String, one of "CREATING", "OPERATIONAL", "UPDATING", "DELETING"
     #   resp.ipv4_addresses #=> Array
     #   resp.ipv4_addresses[0] #=> String
+    #   resp.ipv6_addresses #=> Array
+    #   resp.ipv6_addresses[0] #=> String
+    #   resp.ip_address_type #=> String, one of "IPV4", "DUAL_STACK"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53globalresolver-2022-09-27/UpdateGlobalResolver AWS API Documentation
     #
@@ -3139,6 +3449,12 @@ module Aws::Route53GlobalResolver
     end
 
     # Updates the configuration of a hosted zone association.
+    #
+    # Route 53 Global Resolver is a global service that supports resolvers
+    # in multiple Amazon Web Services Regions but you must specify the US
+    # East (Ohio) Region to create, update, or otherwise work with Route 53
+    # Global Resolver resources. That is, for example, specify `--region
+    # us-east-2` on Amazon Web Services CLI commands.
     #
     # @option params [required, String] :hosted_zone_association_id
     #   The ID of the private hosted zone association.
@@ -3202,7 +3518,7 @@ module Aws::Route53GlobalResolver
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-route53globalresolver'
-      context[:gem_version] = '1.3.0'
+      context[:gem_version] = '1.5.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

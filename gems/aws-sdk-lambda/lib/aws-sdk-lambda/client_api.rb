@@ -461,6 +461,9 @@ module Aws::Lambda
     RuntimeVersionConfig = Shapes::StructureShape.new(name: 'RuntimeVersionConfig')
     RuntimeVersionError = Shapes::StructureShape.new(name: 'RuntimeVersionError')
     S3Bucket = Shapes::StringShape.new(name: 'S3Bucket')
+    S3FilesMountConnectivityException = Shapes::StructureShape.new(name: 'S3FilesMountConnectivityException')
+    S3FilesMountFailureException = Shapes::StructureShape.new(name: 'S3FilesMountFailureException')
+    S3FilesMountTimeoutException = Shapes::StructureShape.new(name: 'S3FilesMountTimeoutException')
     S3Key = Shapes::StringShape.new(name: 'S3Key')
     S3ObjectVersion = Shapes::StringShape.new(name: 'S3ObjectVersion')
     ScalingConfig = Shapes::StructureShape.new(name: 'ScalingConfig')
@@ -1999,6 +2002,18 @@ module Aws::Lambda
     RuntimeVersionError.add_member(:message, Shapes::ShapeRef.new(shape: SensitiveString, location_name: "Message"))
     RuntimeVersionError.struct_class = Types::RuntimeVersionError
 
+    S3FilesMountConnectivityException.add_member(:type, Shapes::ShapeRef.new(shape: String, location_name: "Type"))
+    S3FilesMountConnectivityException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    S3FilesMountConnectivityException.struct_class = Types::S3FilesMountConnectivityException
+
+    S3FilesMountFailureException.add_member(:type, Shapes::ShapeRef.new(shape: String, location_name: "Type"))
+    S3FilesMountFailureException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    S3FilesMountFailureException.struct_class = Types::S3FilesMountFailureException
+
+    S3FilesMountTimeoutException.add_member(:type, Shapes::ShapeRef.new(shape: String, location_name: "Type"))
+    S3FilesMountTimeoutException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    S3FilesMountTimeoutException.struct_class = Types::S3FilesMountTimeoutException
+
     ScalingConfig.add_member(:maximum_concurrency, Shapes::ShapeRef.new(shape: MaximumConcurrency, location_name: "MaximumConcurrency"))
     ScalingConfig.struct_class = Types::ScalingConfig
 
@@ -2854,6 +2869,7 @@ module Aws::Lambda
         o.errors << Shapes::ShapeRef.new(shape: RequestTooLargeException)
         o.errors << Shapes::ShapeRef.new(shape: KMSDisabledException)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedMediaTypeException)
+        o.errors << Shapes::ShapeRef.new(shape: S3FilesMountConnectivityException)
         o.errors << Shapes::ShapeRef.new(shape: SerializedRequestEntityTooLargeException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRuntimeException)
         o.errors << Shapes::ShapeRef.new(shape: NoPublishedVersionException)
@@ -2870,7 +2886,9 @@ module Aws::Lambda
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: SnapStartException)
         o.errors << Shapes::ShapeRef.new(shape: RecursiveInvocationException)
+        o.errors << Shapes::ShapeRef.new(shape: S3FilesMountFailureException)
         o.errors << Shapes::ShapeRef.new(shape: EFSMountTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: S3FilesMountTimeoutException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestContentException)
         o.errors << Shapes::ShapeRef.new(shape: DurableExecutionAlreadyStartedException)
@@ -2909,6 +2927,7 @@ module Aws::Lambda
         o.errors << Shapes::ShapeRef.new(shape: RequestTooLargeException)
         o.errors << Shapes::ShapeRef.new(shape: KMSDisabledException)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedMediaTypeException)
+        o.errors << Shapes::ShapeRef.new(shape: S3FilesMountConnectivityException)
         o.errors << Shapes::ShapeRef.new(shape: SerializedRequestEntityTooLargeException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRuntimeException)
         o.errors << Shapes::ShapeRef.new(shape: NoPublishedVersionException)
@@ -2925,7 +2944,9 @@ module Aws::Lambda
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: SnapStartException)
         o.errors << Shapes::ShapeRef.new(shape: RecursiveInvocationException)
+        o.errors << Shapes::ShapeRef.new(shape: S3FilesMountFailureException)
         o.errors << Shapes::ShapeRef.new(shape: EFSMountTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: S3FilesMountTimeoutException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestContentException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidZipFileException)

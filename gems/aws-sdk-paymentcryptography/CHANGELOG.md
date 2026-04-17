@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.53.0 (2026-04-03)
+------------------
+
+* Feature - Adds optional support to retrieve previously generated import and export tokens to simplify import and export functions
+
+1.52.0 (2026-03-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.51.0 (2026-01-16)
 ------------------
 

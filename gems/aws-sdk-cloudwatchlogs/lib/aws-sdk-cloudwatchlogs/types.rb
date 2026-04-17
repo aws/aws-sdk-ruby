@@ -483,13 +483,20 @@ module Aws::CloudWatchLogs
     #   is processed.
     #   @return [String]
     #
+    # @!attribute [rw] destination
+    #   The path to the parent field to put transformed key value pairs
+    #   under. If you omit this value, the key value pairs will be placed
+    #   under the root node.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/CSV AWS API Documentation
     #
     class CSV < Struct.new(
       :quote_character,
       :delimiter,
       :columns,
-      :source)
+      :source,
+      :destination)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1119,6 +1126,65 @@ module Aws::CloudWatchLogs
       include Aws::Structure
     end
 
+    # @!attribute [rw] lookup_table_name
+    #   The name of the lookup table. The name must be unique within your
+    #   account and Region. The name can contain only alphanumeric
+    #   characters and underscores, and can be up to 256 characters long.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the lookup table. The description can be up to 1024
+    #   characters long.
+    #   @return [String]
+    #
+    # @!attribute [rw] table_body
+    #   The CSV content of the lookup table. The first row must be a header
+    #   row with column names. The content must use UTF-8 encoding and not
+    #   exceed 10 MB.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_key_id
+    #   The ARN of the KMS key to use to encrypt the lookup table data. If
+    #   you don't specify a key, the data is encrypted with an Amazon Web
+    #   Services-owned key.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A list of key-value pairs to associate with the lookup table. You
+    #   can associate as many as 50 tags with a lookup table. Tags can help
+    #   you organize and categorize your resources.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/CreateLookupTableRequest AWS API Documentation
+    #
+    class CreateLookupTableRequest < Struct.new(
+      :lookup_table_name,
+      :description,
+      :table_body,
+      :kms_key_id,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] lookup_table_arn
+    #   The ARN of the lookup table that was created.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The time when the lookup table was created, expressed as the number
+    #   of milliseconds after `Jan 1, 1970 00:00:00 UTC`.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/CreateLookupTableResponse AWS API Documentation
+    #
+    class CreateLookupTableResponse < Struct.new(
+      :lookup_table_arn,
+      :created_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] name
     #   The name of the scheduled query. The name must be unique within your
     #   account and region. Valid characters are alphanumeric characters,
@@ -1133,7 +1199,7 @@ module Aws::CloudWatchLogs
     #
     # @!attribute [rw] query_language
     #   The query language to use for the scheduled query. Valid values are
-    #   `LogsQL`, `PPL`, and `SQL`.
+    #   `CWLI`, `PPL`, and `SQL`.
     #   @return [String]
     #
     # @!attribute [rw] query_string
@@ -1565,6 +1631,18 @@ module Aws::CloudWatchLogs
     class DeleteLogStreamRequest < Struct.new(
       :log_group_name,
       :log_stream_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] lookup_table_arn
+    #   The ARN of the lookup table to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DeleteLookupTableRequest AWS API Documentation
+    #
+    class DeleteLookupTableRequest < Struct.new(
+      :lookup_table_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2678,6 +2756,50 @@ module Aws::CloudWatchLogs
     #
     class DescribeLogStreamsResponse < Struct.new(
       :log_streams,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] lookup_table_name_prefix
+    #   A prefix to filter lookup tables by name. Only tables whose names
+    #   start with this prefix are returned. If you don't specify a prefix,
+    #   all tables in the account and Region are returned.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of lookup tables to return in the response. The
+    #   default value is 50 and the maximum value is 100.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of items to return. (You received this
+    #   token from a previous call.)
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DescribeLookupTablesRequest AWS API Documentation
+    #
+    class DescribeLookupTablesRequest < Struct.new(
+      :lookup_table_name_prefix,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] lookup_tables
+    #   An array of structures, where each structure contains metadata about
+    #   one lookup table.
+    #   @return [Array<Types::LookupTable>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use when requesting the next set of items.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DescribeLookupTablesResponse AWS API Documentation
+    #
+    class DescribeLookupTablesResponse < Struct.new(
+      :lookup_tables,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -3997,6 +4119,62 @@ module Aws::CloudWatchLogs
       include Aws::Structure
     end
 
+    # @!attribute [rw] lookup_table_arn
+    #   The ARN of the lookup table to retrieve.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/GetLookupTableRequest AWS API Documentation
+    #
+    class GetLookupTableRequest < Struct.new(
+      :lookup_table_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] lookup_table_arn
+    #   The ARN of the lookup table.
+    #   @return [String]
+    #
+    # @!attribute [rw] lookup_table_name
+    #   The name of the lookup table.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the lookup table.
+    #   @return [String]
+    #
+    # @!attribute [rw] table_body
+    #   The full CSV content of the lookup table.
+    #   @return [String]
+    #
+    # @!attribute [rw] size_bytes
+    #   The size of the lookup table in bytes.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] last_updated_time
+    #   The time when the lookup table was last updated, expressed as the
+    #   number of milliseconds after `Jan 1, 1970 00:00:00 UTC`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] kms_key_id
+    #   The ARN of the KMS key used to encrypt the lookup table data, if
+    #   applicable.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/GetLookupTableResponse AWS API Documentation
+    #
+    class GetLookupTableResponse < Struct.new(
+      :lookup_table_arn,
+      :lookup_table_name,
+      :description,
+      :table_body,
+      :size_bytes,
+      :last_updated_time,
+      :kms_key_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] query_id
     #   The ID number of the query.
     #   @return [String]
@@ -4302,7 +4480,7 @@ module Aws::CloudWatchLogs
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatch-Logs-Transformation-Processors.html#CloudWatch-Logs-Transformation-Grok
+    # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatch-Logs-Transformation-Configurable.html#CloudWatch-Logs-Transformation-Grok
     #
     # @!attribute [rw] source
     #   The path to the field in the log event that you want to parse. If
@@ -4315,7 +4493,7 @@ module Aws::CloudWatchLogs
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatch-Logs-Transformation-Processors.html#Grok-Patterns
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatch-Logs-Transformation-Configurable.html#CloudWatch-Logs-Transformation-Grok
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/Grok AWS API Documentation
@@ -5572,6 +5750,12 @@ module Aws::CloudWatchLogs
     #   until it is explicitly disabled.
     #   @return [Boolean]
     #
+    # @!attribute [rw] bearer_token_authentication_enabled
+    #   Indicates whether bearer token authentication is enabled for this
+    #   log group. When enabled, bearer token authentication is allowed on
+    #   operations until it is explicitly disabled.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/LogGroup AWS API Documentation
     #
     class LogGroup < Struct.new(
@@ -5586,7 +5770,8 @@ module Aws::CloudWatchLogs
       :inherited_properties,
       :log_group_class,
       :log_group_arn,
-      :deletion_protection_enabled)
+      :deletion_protection_enabled,
+      :bearer_token_authentication_enabled)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5708,6 +5893,59 @@ module Aws::CloudWatchLogs
       :upload_sequence_token,
       :arn,
       :stored_bytes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains metadata about a lookup table returned by
+    # `DescribeLookupTables`.
+    #
+    # @!attribute [rw] lookup_table_arn
+    #   The ARN of the lookup table.
+    #   @return [String]
+    #
+    # @!attribute [rw] lookup_table_name
+    #   The name of the lookup table.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the lookup table.
+    #   @return [String]
+    #
+    # @!attribute [rw] table_fields
+    #   The column headers from the first row of the CSV file.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] records_count
+    #   The number of data rows in the lookup table, excluding the header
+    #   row.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] size_bytes
+    #   The size of the lookup table in bytes.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] last_updated_time
+    #   The time when the lookup table was last updated, expressed as the
+    #   number of milliseconds after `Jan 1, 1970 00:00:00 UTC`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] kms_key_id
+    #   The ARN of the KMS key used to encrypt the lookup table data, if
+    #   applicable.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/LookupTable AWS API Documentation
+    #
+    class LookupTable < Struct.new(
+      :lookup_table_arn,
+      :lookup_table_name,
+      :description,
+      :table_fields,
+      :records_count,
+      :size_bytes,
+      :last_updated_time,
+      :kms_key_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7258,6 +7496,35 @@ module Aws::CloudWatchLogs
     end
 
     # @!attribute [rw] log_group_identifier
+    #   The name or ARN of the log group.
+    #
+    #   Type: String
+    #
+    #   Length Constraints: Minimum length of 1. Maximum length of 512.
+    #
+    #   Pattern: `[\.\-_/#A-Za-z0-9]+`
+    #
+    #   Required: Yes
+    #   @return [String]
+    #
+    # @!attribute [rw] bearer_token_authentication_enabled
+    #   Whether to enable bearer token authentication.
+    #
+    #   Type: Boolean
+    #
+    #   Required: Yes
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/PutBearerTokenAuthenticationRequest AWS API Documentation
+    #
+    class PutBearerTokenAuthenticationRequest < Struct.new(
+      :log_group_identifier,
+      :bearer_token_authentication_enabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] log_group_identifier
     #   Specify either the log group name or log group ARN.
     #   @return [String]
     #
@@ -7451,6 +7718,10 @@ module Aws::CloudWatchLogs
     #   The ARN of the Amazon Web Services resource that is generating and
     #   sending logs. For example,
     #   `arn:aws:workmail:us-east-1:123456789012:organization/m-1234EXAMPLEabcd1234abcd1234abcd1234`
+    #
+    #   For the `SECURITY_FINDING_LOGS` logType, use a wildcard ARN for the
+    #   hub resource. For example,
+    #   `arn:aws:securityhub:us-east-1:111122223333:hub/*`
     #   @return [String]
     #
     # @!attribute [rw] log_type
@@ -7471,10 +7742,15 @@ module Aws::CloudWatchLogs
     #   * For Amazon Bedrock AgentCore Identity, the valid values are
     #     `APPLICATION_LOGS` and `TRACES`.
     #
+    #   * For Amazon Bedrock AgentCore Memory, the valid values are
+    #     `APPLICATION_LOGS` and `TRACES`.
+    #
     #   * For Amazon Bedrock AgentCore Gateway, the valid values are
     #     `APPLICATION_LOGS` and `TRACES`.
     #
     #   * For CloudFront, the valid value is `ACCESS_LOGS`.
+    #
+    #   * For DevOps Agent, the valid value is `APPLICATION_LOGS`.
     #
     #   * For Amazon CodeWhisperer, the valid value is `EVENT_LOGS`.
     #
@@ -7484,6 +7760,10 @@ module Aws::CloudWatchLogs
     #   * For Elemental MediaTailor, the valid values are
     #     `AD_DECISION_SERVER_LOGS`, `MANIFEST_SERVICE_LOGS`, and
     #     `TRANSCODE_LOGS`.
+    #
+    #   * For Amazon EKS Auto Mode, the valid values are
+    #     `AUTO_MODE_BLOCK_STORAGE_LOGS`, `AUTO_MODE_COMPUTE_LOGS`,
+    #     `AUTO_MODE_IPAM_LOGS`, and `AUTO_MODE_LOAD_BALANCING_LOGS`.
     #
     #   * For Entity Resolution, the valid value is `WORKFLOW_LOGS`.
     #
@@ -7497,14 +7777,16 @@ module Aws::CloudWatchLogs
     #   * For PCS, the valid values are `PCS_SCHEDULER_LOGS` and
     #     `PCS_JOBCOMP_LOGS`.
     #
-    #   * For Quick Suite, the valid values are `CHAT_LOGS` and
-    #     `FEEDBACK_LOGS`.
+    #   * For Quick, the valid values are `CHAT_LOGS` and `FEEDBACK_LOGS`.
     #
     #   * For Amazon Web Services RTB Fabric, the valid values is
     #     `APPLICATION_LOGS`.
     #
     #   * For Amazon Q, the valid values are `EVENT_LOGS` and
     #     `SYNC_JOB_LOGS`.
+    #
+    #   * For Amazon Web Services Security Hub CSPM, the valid value is
+    #     `SECURITY_FINDING_LOGS`.
     #
     #   * For Amazon SES mail manager, the valid values are
     #     `APPLICATION_LOGS` and `TRAFFIC_POLICY_DEBUG_LOGS`.
@@ -7967,6 +8249,15 @@ module Aws::CloudWatchLogs
     #   not need to pass this option.
     #   @return [String]
     #
+    # @!attribute [rw] parameters
+    #   Use this parameter to include specific query parameters as part of
+    #   your query definition. Query parameters are supported only for Logs
+    #   Insights QL queries. Query parameters allow you to use placeholder
+    #   variables in your query string that are substituted with values at
+    #   execution time. Use the `{{parameterName}}` syntax in your query
+    #   string to reference a parameter.
+    #   @return [Array<Types::QueryParameter>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/PutQueryDefinitionRequest AWS API Documentation
     #
     class PutQueryDefinitionRequest < Struct.new(
@@ -7975,7 +8266,8 @@ module Aws::CloudWatchLogs
       :query_definition_id,
       :log_group_names,
       :query_string,
-      :client_token)
+      :client_token,
+      :parameters)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8301,6 +8593,12 @@ module Aws::CloudWatchLogs
     #   limited to, that list appears here.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] parameters
+    #   If this query definition contains a list of query parameters that
+    #   define placeholder variables for the query string, that list appears
+    #   here.
+    #   @return [Array<Types::QueryParameter>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/QueryDefinition AWS API Documentation
     #
     class QueryDefinition < Struct.new(
@@ -8309,7 +8607,8 @@ module Aws::CloudWatchLogs
       :name,
       :query_string,
       :last_modified,
-      :log_group_names)
+      :log_group_names,
+      :parameters)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8348,6 +8647,19 @@ module Aws::CloudWatchLogs
     #   The name of the log group scanned by this query.
     #   @return [String]
     #
+    # @!attribute [rw] query_duration
+    #   The duration in milliseconds that the query took to execute.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] bytes_scanned
+    #   The total number of bytes scanned by the query. This indicates the
+    #   cost associated with the query.
+    #   @return [Float]
+    #
+    # @!attribute [rw] user_identity
+    #   The ARN of the user who ran the query.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/QueryInfo AWS API Documentation
     #
     class QueryInfo < Struct.new(
@@ -8356,7 +8668,42 @@ module Aws::CloudWatchLogs
       :query_string,
       :status,
       :create_time,
-      :log_group_name)
+      :log_group_name,
+      :query_duration,
+      :bytes_scanned,
+      :user_identity)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # This structure defines a query parameter for a saved CloudWatch Logs
+    # Insights query definition. Query parameters are supported only for
+    # Logs Insights QL queries. They are placeholder variables that you can
+    # reference in a query string using the `{{parameterName}}` syntax. Each
+    # parameter can include a default value and a description.
+    #
+    # @!attribute [rw] name
+    #   The name of the query parameter. A query parameter name must start
+    #   with a letter or underscore, and contain only letters, digits, and
+    #   underscores.
+    #   @return [String]
+    #
+    # @!attribute [rw] default_value
+    #   The default value to use for this query parameter if no value is
+    #   supplied at execution time.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the query parameter that explains its purpose or
+    #   expected values.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/QueryParameter AWS API Documentation
+    #
+    class QueryParameter < Struct.new(
+      :name,
+      :default_value,
+      :description)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8676,11 +9023,23 @@ module Aws::CloudWatchLogs
     #   results to the specified Amazon S3 destination.
     #   @return [String]
     #
+    # @!attribute [rw] owner_account_id
+    #   The Amazon Web Services accountId for the bucket owning account.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_key_id
+    #   The Amazon Resource Name (ARN) of the KMS encryption key. Must
+    #   belong to the same Amazon Web Services Region as the destination
+    #   Amazon S3 bucket.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/S3Configuration AWS API Documentation
     #
     class S3Configuration < Struct.new(
       :destination_identifier,
-      :role_arn)
+      :role_arn,
+      :owner_account_id,
+      :kms_key_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9788,6 +10147,56 @@ module Aws::CloudWatchLogs
       :filter_pattern,
       :anomaly_visibility_time,
       :enabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] lookup_table_arn
+    #   The ARN of the lookup table to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   An updated description of the lookup table.
+    #   @return [String]
+    #
+    # @!attribute [rw] table_body
+    #   The new CSV content to replace the existing data. The first row must
+    #   be a header row with column names. The content must use UTF-8
+    #   encoding and not exceed 10 MB.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_key_id
+    #   The ARN of the KMS key to use to encrypt the lookup table data. You
+    #   can use this parameter to add, update, or remove the KMS key. To
+    #   remove the KMS key and use an Amazon Web Services-owned key instead,
+    #   specify an empty string.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/UpdateLookupTableRequest AWS API Documentation
+    #
+    class UpdateLookupTableRequest < Struct.new(
+      :lookup_table_arn,
+      :description,
+      :table_body,
+      :kms_key_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] lookup_table_arn
+    #   The ARN of the lookup table that was updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_updated_time
+    #   The time when the lookup table was last updated, expressed as the
+    #   number of milliseconds after `Jan 1, 1970 00:00:00 UTC`.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/UpdateLookupTableResponse AWS API Documentation
+    #
+    class UpdateLookupTableResponse < Struct.new(
+      :lookup_table_arn,
+      :last_updated_time)
       SENSITIVE = []
       include Aws::Structure
     end

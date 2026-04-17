@@ -118,10 +118,15 @@ module Aws
                                             }?,
                                             security_lake: {
                                               role_arn: ::String
+                                            }?,
+                                            prometheus: {
+                                              role_arn: ::String,
+                                              workspace_arn: ::String
                                             }?
                                           },
                                           ?description: ::String,
-                                          open_search_arns: Array[::String],
+                                          ?open_search_arns: Array[::String],
+                                          ?data_source_access_policy: ::String,
                                           ?tag_list: Array[
                                             {
                                               key: ::String,
@@ -237,7 +242,8 @@ module Aws
                                 ?data_sources: Array[
                                   {
                                     data_source_arn: ::String?,
-                                    data_source_description: ::String?
+                                    data_source_description: ::String?,
+                                    iam_role_for_data_source_arn: ::String?
                                   },
                                 ],
                                 ?iam_identity_center_options: {
@@ -333,7 +339,7 @@ module Aws
                              }],
                            ?domain_endpoint_options: {
                              enforce_https: bool?,
-                             tls_security_policy: ("Policy-Min-TLS-1-0-2019-07" | "Policy-Min-TLS-1-2-2019-07" | "Policy-Min-TLS-1-2-PFS-2023-10")?,
+                             tls_security_policy: ("Policy-Min-TLS-1-0-2019-07" | "Policy-Min-TLS-1-2-2019-07" | "Policy-Min-TLS-1-2-PFS-2023-10" | "Policy-Min-TLS-1-2-RFC9151-FIPS-2024-08")?,
                              custom_endpoint_enabled: bool?,
                              custom_endpoint: ::String?,
                              custom_endpoint_certificate_arn: ::String?
@@ -419,6 +425,9 @@ module Aws
                              serverless_vector_acceleration: {
                                enabled: bool?
                              }?
+                           },
+                           ?deployment_strategy_options: {
+                             deployment_strategy: ("Default" | "CapacityOptimized")
                            }
                          ) -> _CreateDomainResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDomainResponseSuccess
@@ -605,6 +614,17 @@ module Aws
                                ) -> _DeleteVpcEndpointResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteVpcEndpointResponseSuccess
 
+      interface _DeregisterCapabilityResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeregisterCapabilityResponse]
+        def status: () -> ("creating" | "create_failed" | "active" | "updating" | "update_failed" | "deleting" | "delete_failed")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpenSearchService/Client.html#deregister_capability-instance_method
+      def deregister_capability: (
+                                   application_id: ::String,
+                                   capability_name: ::String
+                                 ) -> _DeregisterCapabilityResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeregisterCapabilityResponseSuccess
+
       interface _DescribeDomainResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeDomainResponse]
         def domain_status: () -> Types::DomainStatus
@@ -722,6 +742,21 @@ module Aws
                                           ?next_token: ::String
                                         ) -> _DescribeInboundConnectionsResponseSuccess
                                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeInboundConnectionsResponseSuccess
+
+      interface _DescribeInsightDetailsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeInsightDetailsResponse]
+        def fields: () -> ::Array[Types::InsightField]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpenSearchService/Client.html#describe_insight_details-instance_method
+      def describe_insight_details: (
+                                      entity: {
+                                        type: ("Account" | "DomainName"),
+                                        value: ::String?
+                                      },
+                                      insight_id: ::String,
+                                      ?show_html_content: bool
+                                    ) -> _DescribeInsightDetailsResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeInsightDetailsResponseSuccess
 
       interface _DescribeInstanceTypeLimitsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeInstanceTypeLimitsResponse]
@@ -850,6 +885,21 @@ module Aws
                            ) -> _GetApplicationResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetApplicationResponseSuccess
 
+      interface _GetCapabilityResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetCapabilityResponse]
+        def capability_name: () -> ::String
+        def application_id: () -> ::String
+        def status: () -> ("creating" | "create_failed" | "active" | "updating" | "update_failed" | "deleting" | "delete_failed")
+        def capability_config: () -> Types::CapabilityExtendedResponseConfig
+        def failures: () -> ::Array[Types::CapabilityFailure]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpenSearchService/Client.html#get_capability-instance_method
+      def get_capability: (
+                            application_id: ::String,
+                            capability_name: ::String
+                          ) -> _GetCapabilityResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCapabilityResponseSuccess
+
       interface _GetCompatibleVersionsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetCompatibleVersionsResponse]
         def compatible_versions: () -> ::Array[Types::CompatibleVersionsMap]
@@ -889,6 +939,7 @@ module Aws
         def data_source_type: () -> Types::DirectQueryDataSourceType
         def description: () -> ::String
         def open_search_arns: () -> ::Array[::String]
+        def data_source_access_policy: () -> ::String
         def data_source_arn: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpenSearchService/Client.html#get_direct_query_data_source-instance_method
@@ -1035,6 +1086,27 @@ module Aws
                                     ) -> _ListDomainsForPackageResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDomainsForPackageResponseSuccess
 
+      interface _ListInsightsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListInsightsResponse]
+        def insights: () -> ::Array[Types::Insight]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpenSearchService/Client.html#list_insights-instance_method
+      def list_insights: (
+                           entity: {
+                             type: ("Account" | "DomainName"),
+                             value: ::String?
+                           },
+                           ?time_range: {
+                             from: ::Integer,
+                             to: ::Integer
+                           },
+                           ?sort_order: ("ASC" | "DESC"),
+                           ?max_results: ::Integer,
+                           ?next_token: ::String
+                         ) -> _ListInsightsResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListInsightsResponseSuccess
+
       interface _ListInstanceTypeDetailsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListInstanceTypeDetailsResponse]
         def instance_type_details: () -> ::Array[Types::InstanceTypeDetails]
@@ -1158,6 +1230,24 @@ module Aws
                                            ) -> _PutDefaultApplicationSettingResponseSuccess
                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutDefaultApplicationSettingResponseSuccess
 
+      interface _RegisterCapabilityResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RegisterCapabilityResponse]
+        def capability_name: () -> ::String
+        def application_id: () -> ::String
+        def status: () -> ("creating" | "create_failed" | "active" | "updating" | "update_failed" | "deleting" | "delete_failed")
+        def capability_config: () -> Types::CapabilityBaseResponseConfig
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpenSearchService/Client.html#register_capability-instance_method
+      def register_capability: (
+                                 application_id: ::String,
+                                 capability_name: ::String,
+                                 capability_config: {
+                                   ai_config: {
+                                   }?
+                                 }
+                               ) -> _RegisterCapabilityResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RegisterCapabilityResponseSuccess
+
       interface _RejectInboundConnectionResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::RejectInboundConnectionResponse]
         def connection: () -> Types::InboundConnection
@@ -1227,7 +1317,8 @@ module Aws
                                 ?data_sources: Array[
                                   {
                                     data_source_arn: ::String?,
-                                    data_source_description: ::String?
+                                    data_source_description: ::String?,
+                                    iam_role_for_data_source_arn: ::String?
                                   },
                                 ],
                                 ?app_configs: Array[
@@ -1270,10 +1361,15 @@ module Aws
                                                }?,
                                                security_lake: {
                                                  role_arn: ::String
+                                               }?,
+                                               prometheus: {
+                                                 role_arn: ::String,
+                                                 workspace_arn: ::String
                                                }?
                                              },
                                              ?description: ::String,
-                                             open_search_arns: Array[::String]
+                                             ?open_search_arns: Array[::String],
+                                             ?data_source_access_policy: ::String
                                            ) -> _UpdateDirectQueryDataSourceResponseSuccess
                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDirectQueryDataSourceResponseSuccess
 
@@ -1347,7 +1443,7 @@ module Aws
                                   },
                                   ?domain_endpoint_options: {
                                     enforce_https: bool?,
-                                    tls_security_policy: ("Policy-Min-TLS-1-0-2019-07" | "Policy-Min-TLS-1-2-2019-07" | "Policy-Min-TLS-1-2-PFS-2023-10")?,
+                                    tls_security_policy: ("Policy-Min-TLS-1-0-2019-07" | "Policy-Min-TLS-1-2-2019-07" | "Policy-Min-TLS-1-2-PFS-2023-10" | "Policy-Min-TLS-1-2-RFC9151-FIPS-2024-08")?,
                                     custom_endpoint_enabled: bool?,
                                     custom_endpoint: ::String?,
                                     custom_endpoint_certificate_arn: ::String?
@@ -1433,6 +1529,9 @@ module Aws
                                     serverless_vector_acceleration: {
                                       enabled: bool?
                                     }?
+                                  },
+                                  ?deployment_strategy_options: {
+                                    deployment_strategy: ("Default" | "CapacityOptimized")
                                   }
                                 ) -> _UpdateDomainConfigResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDomainConfigResponseSuccess

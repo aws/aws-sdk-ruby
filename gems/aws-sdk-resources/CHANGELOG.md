@@ -1,6 +1,58 @@
 Unreleased Changes
 ------------------
 
+3.262.0 (2026-04-13)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-interconnect` gem.
+
+3.261.0 (2026-04-08)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-marketplacediscovery` gem.
+
+3.260.0 (2026-04-07)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-s3files` gem.
+
+3.259.0 (2026-03-31)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-sustainability` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-securityagent` gem.
+
+3.258.0 (2026-03-30)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-devopsagent` gem.
+
+3.257.0 (2026-03-25)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-uxc` gem.
+
+3.256.0 (2026-03-11)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-simpledbv2` gem.
+
+3.255.0 (2026-03-05)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-connecthealth` gem.
+
+3.254.0 (2026-02-24)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-elementalinference` gem.
+
+3.253.0 (2026-02-20)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-signerdata` gem.
+
 3.252.0 (2026-02-09)
 ------------------
 

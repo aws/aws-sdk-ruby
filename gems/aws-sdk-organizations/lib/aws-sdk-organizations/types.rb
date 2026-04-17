@@ -169,6 +169,10 @@ module Aws::Organizations
     #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_account_state.html
     #   @return [String]
     #
+    # @!attribute [rw] paths
+    #   The paths in the organization where the account exists.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] joined_method
     #   The method by which the account joined the organization.
     #   @return [String]
@@ -186,6 +190,7 @@ module Aws::Organizations
       :name,
       :status,
       :state,
+      :paths,
       :joined_method,
       :joined_timestamp)
       SENSITIVE = [:email, :name]
@@ -4585,12 +4590,17 @@ module Aws::Organizations
     #   [1]: http://wikipedia.org/wiki/regex
     #   @return [String]
     #
+    # @!attribute [rw] path
+    #   The path in the organization where this OU exists.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/OrganizationalUnit AWS API Documentation
     #
     class OrganizationalUnit < Struct.new(
       :id,
       :arn,
-      :name)
+      :name,
+      :path)
       SENSITIVE = []
       include Aws::Structure
     end

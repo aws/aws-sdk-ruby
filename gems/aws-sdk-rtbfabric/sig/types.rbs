@@ -13,6 +13,7 @@ module Aws::RTBFabric
       attr_accessor link_id: ::String
       attr_accessor attributes: Types::LinkAttributes
       attr_accessor log_settings: Types::LinkLogSettings
+      attr_accessor timeout_in_millis: ::Integer
       SENSITIVE: []
     end
 
@@ -26,6 +27,8 @@ module Aws::RTBFabric
       attr_accessor flow_modules: ::Array[Types::ModuleConfiguration]
       attr_accessor pending_flow_modules: ::Array[Types::ModuleConfiguration]
       attr_accessor attributes: Types::LinkAttributes
+      attr_accessor log_settings: Types::LinkLogSettings
+      attr_accessor connectivity_type: ("DEFAULT" | "PUBLIC_INGRESS" | "PUBLIC_EGRESS" | "EXTERNAL_INBOUND")
       attr_accessor link_id: ::String
       SENSITIVE: []
     end
@@ -52,6 +55,7 @@ module Aws::RTBFabric
     class AutoScalingGroupsConfiguration
       attr_accessor auto_scaling_group_names: ::Array[::String]
       attr_accessor role_arn: ::String
+      attr_accessor health_check_config: Types::HealthCheckConfig
       SENSITIVE: []
     end
 
@@ -84,6 +88,7 @@ module Aws::RTBFabric
       attr_accessor http_responder_allowed: bool
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor log_settings: Types::LinkLogSettings
+      attr_accessor timeout_in_millis: ::Integer
       SENSITIVE: []
     end
 
@@ -97,6 +102,8 @@ module Aws::RTBFabric
       attr_accessor flow_modules: ::Array[Types::ModuleConfiguration]
       attr_accessor pending_flow_modules: ::Array[Types::ModuleConfiguration]
       attr_accessor attributes: Types::LinkAttributes
+      attr_accessor log_settings: Types::LinkLogSettings
+      attr_accessor connectivity_type: ("DEFAULT" | "PUBLIC_INGRESS" | "PUBLIC_EGRESS" | "EXTERNAL_INBOUND")
       attr_accessor link_id: ::String
       attr_accessor customer_provided_id: ::String
       SENSITIVE: []
@@ -143,17 +150,21 @@ module Aws::RTBFabric
       attr_accessor domain_name: ::String
       attr_accessor port: ::Integer
       attr_accessor protocol: ("HTTP" | "HTTPS")
+      attr_accessor listener_config: Types::ListenerConfig
       attr_accessor trust_store_configuration: Types::TrustStoreConfiguration
       attr_accessor managed_endpoint_configuration: Types::ManagedEndpointConfiguration
       attr_accessor client_token: ::String
       attr_accessor description: ::String
       attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor gateway_type: ("EXTERNAL" | "INTERNAL")
       SENSITIVE: []
     end
 
     class CreateResponderGatewayResponse
       attr_accessor gateway_id: ::String
       attr_accessor status: ("PENDING_CREATION" | "ACTIVE" | "PENDING_DELETION" | "DELETED" | "ERROR" | "PENDING_UPDATE" | "ISOLATED" | "PENDING_ISOLATION" | "PENDING_RESTORATION")
+      attr_accessor listener_config: Types::ListenerConfig
+      attr_accessor external_inbound_endpoint: ::String
       SENSITIVE: []
     end
 
@@ -254,6 +265,7 @@ module Aws::RTBFabric
       attr_accessor updated_at: ::Time
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor log_settings: Types::LinkLogSettings
+      attr_accessor connectivity_type: ("DEFAULT" | "PUBLIC_INGRESS" | "PUBLIC_EGRESS" | "EXTERNAL_INBOUND")
       SENSITIVE: []
     end
 
@@ -273,9 +285,12 @@ module Aws::RTBFabric
       attr_accessor flow_modules: ::Array[Types::ModuleConfiguration]
       attr_accessor pending_flow_modules: ::Array[Types::ModuleConfiguration]
       attr_accessor attributes: Types::LinkAttributes
+      attr_accessor log_settings: Types::LinkLogSettings
+      attr_accessor connectivity_type: ("DEFAULT" | "PUBLIC_INGRESS" | "PUBLIC_EGRESS" | "EXTERNAL_INBOUND")
       attr_accessor link_id: ::String
       attr_accessor tags: ::Hash[::String, ::String]
-      attr_accessor log_settings: Types::LinkLogSettings
+      attr_accessor http_responder_allowed: bool
+      attr_accessor timeout_in_millis: ::Integer
       SENSITIVE: []
     end
 
@@ -290,10 +305,14 @@ module Aws::RTBFabric
       attr_accessor link_id: ::String
       attr_accessor status: ("PENDING_CREATION" | "PENDING_REQUEST" | "REQUESTED" | "ACCEPTED" | "ACTIVE" | "REJECTED" | "FAILED" | "PENDING_DELETION" | "DELETED" | "PENDING_UPDATE" | "PENDING_ISOLATION" | "ISOLATED" | "PENDING_RESTORATION")
       attr_accessor public_endpoint: ::String
+      attr_accessor flow_modules: ::Array[Types::ModuleConfiguration]
+      attr_accessor pending_flow_modules: ::Array[Types::ModuleConfiguration]
+      attr_accessor attributes: Types::LinkAttributes
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor log_settings: Types::LinkLogSettings
+      attr_accessor connectivity_type: ("DEFAULT" | "PUBLIC_INGRESS" | "PUBLIC_EGRESS" | "EXTERNAL_INBOUND")
       SENSITIVE: []
     end
 
@@ -334,6 +353,7 @@ module Aws::RTBFabric
       attr_accessor domain_name: ::String
       attr_accessor port: ::Integer
       attr_accessor protocol: ("HTTP" | "HTTPS")
+      attr_accessor listener_config: Types::ListenerConfig
       attr_accessor trust_store_configuration: Types::TrustStoreConfiguration
       attr_accessor managed_endpoint_configuration: Types::ManagedEndpointConfiguration
       attr_accessor gateway_id: ::String
@@ -341,12 +361,26 @@ module Aws::RTBFabric
       attr_accessor active_links_count: ::Integer
       attr_accessor total_links_count: ::Integer
       attr_accessor inbound_links_count: ::Integer
+      attr_accessor gateway_type: ("EXTERNAL" | "INTERNAL")
+      attr_accessor external_inbound_endpoint: ::String
       SENSITIVE: []
     end
 
     class HeaderTagAction
       attr_accessor name: ::String
       attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class HealthCheckConfig
+      attr_accessor port: ::Integer
+      attr_accessor path: ::String
+      attr_accessor protocol: ("HTTP" | "HTTPS")
+      attr_accessor timeout_ms: ::Integer
+      attr_accessor interval_seconds: ::Integer
+      attr_accessor status_code_matcher: ::String
+      attr_accessor healthy_threshold_count: ::Integer
+      attr_accessor unhealthy_threshold_count: ::Integer
       SENSITIVE: []
     end
 
@@ -400,8 +434,11 @@ module Aws::RTBFabric
       attr_accessor flow_modules: ::Array[Types::ModuleConfiguration]
       attr_accessor pending_flow_modules: ::Array[Types::ModuleConfiguration]
       attr_accessor attributes: Types::LinkAttributes
+      attr_accessor log_settings: Types::LinkLogSettings
+      attr_accessor connectivity_type: ("DEFAULT" | "PUBLIC_INGRESS" | "PUBLIC_EGRESS" | "EXTERNAL_INBOUND")
       attr_accessor link_id: ::String
       attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor public_endpoint: ::String
       SENSITIVE: []
     end
 
@@ -436,6 +473,11 @@ module Aws::RTBFabric
 
     class ListTagsForResourceResponse
       attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ListenerConfig
+      attr_accessor protocols: ::Array[("HTTP" | "HTTPS")]
       SENSITIVE: []
     end
 
@@ -519,6 +561,8 @@ module Aws::RTBFabric
       attr_accessor flow_modules: ::Array[Types::ModuleConfiguration]
       attr_accessor pending_flow_modules: ::Array[Types::ModuleConfiguration]
       attr_accessor attributes: Types::LinkAttributes
+      attr_accessor log_settings: Types::LinkLogSettings
+      attr_accessor connectivity_type: ("DEFAULT" | "PUBLIC_INGRESS" | "PUBLIC_EGRESS" | "EXTERNAL_INBOUND")
       attr_accessor link_id: ::String
       SENSITIVE: []
     end
@@ -588,6 +632,7 @@ module Aws::RTBFabric
       attr_accessor gateway_id: ::String
       attr_accessor link_id: ::String
       attr_accessor log_settings: Types::LinkLogSettings
+      attr_accessor timeout_in_millis: ::Integer
       SENSITIVE: []
     end
 
@@ -614,6 +659,7 @@ module Aws::RTBFabric
       attr_accessor domain_name: ::String
       attr_accessor port: ::Integer
       attr_accessor protocol: ("HTTP" | "HTTPS")
+      attr_accessor listener_config: Types::ListenerConfig
       attr_accessor trust_store_configuration: Types::TrustStoreConfiguration
       attr_accessor managed_endpoint_configuration: Types::ManagedEndpointConfiguration
       attr_accessor client_token: ::String

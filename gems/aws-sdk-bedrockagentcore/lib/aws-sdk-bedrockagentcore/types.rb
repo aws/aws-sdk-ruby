@@ -10,6 +10,22 @@
 module Aws::BedrockAgentCore
   module Types
 
+    # The A2A (Agent-to-Agent) descriptor configuration for a registry
+    # record.
+    #
+    # @!attribute [rw] agent_card
+    #   The agent card definition that describes the agent's capabilities
+    #   and interface.
+    #   @return [Types::AgentCardDefinition]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/A2aDescriptor AWS API Documentation
+    #
+    class A2aDescriptor < Struct.new(
+      :agent_card)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The exception that occurs when you do not have sufficient permissions
     # to perform an action. Verify that your IAM policy includes the
     # necessary permissions for the operation you are trying to perform.
@@ -37,6 +53,45 @@ module Aws::BedrockAgentCore
     #
     class ActorSummary < Struct.new(
       :actor_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The agent card definition for A2A descriptors, including the schema
+    # version and inline content that describes the agent's capabilities.
+    #
+    # @!attribute [rw] schema_version
+    #   The schema version of the agent card definition.
+    #   @return [String]
+    #
+    # @!attribute [rw] inline_content
+    #   The inline content of the agent card definition.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/AgentCardDefinition AWS API Documentation
+    #
+    class AgentCardDefinition < Struct.new(
+      :schema_version,
+      :inline_content)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The agent skills descriptor configuration for a registry record.
+    #
+    # @!attribute [rw] skill_md
+    #   The skill description in markdown format.
+    #   @return [Types::SkillMdDefinition]
+    #
+    # @!attribute [rw] skill_definition
+    #   The structured skill definition with a schema version and content.
+    #   @return [Types::SkillDefinition]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/AgentSkillsDescriptor AWS API Documentation
+    #
+    class AgentSkillsDescriptor < Struct.new(
+      :skill_md,
+      :skill_definition)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -269,6 +324,153 @@ module Aws::BedrockAgentCore
       include Aws::Structure
     end
 
+    # The browser action to perform. Exactly one member must be set per
+    # request.
+    #
+    # @note BrowserAction is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @!attribute [rw] mouse_click
+    #   Click at the specified coordinates.
+    #   @return [Types::MouseClickArguments]
+    #
+    # @!attribute [rw] mouse_move
+    #   Move the cursor to the specified coordinates.
+    #   @return [Types::MouseMoveArguments]
+    #
+    # @!attribute [rw] mouse_drag
+    #   Drag from a start position to an end position.
+    #   @return [Types::MouseDragArguments]
+    #
+    # @!attribute [rw] mouse_scroll
+    #   Scroll at the specified position.
+    #   @return [Types::MouseScrollArguments]
+    #
+    # @!attribute [rw] key_type
+    #   Type a string of text.
+    #   @return [Types::KeyTypeArguments]
+    #
+    # @!attribute [rw] key_press
+    #   Press a key one or more times.
+    #   @return [Types::KeyPressArguments]
+    #
+    # @!attribute [rw] key_shortcut
+    #   Press a key combination.
+    #   @return [Types::KeyShortcutArguments]
+    #
+    # @!attribute [rw] screenshot
+    #   Capture a full-screen screenshot.
+    #   @return [Types::ScreenshotArguments]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/BrowserAction AWS API Documentation
+    #
+    class BrowserAction < Struct.new(
+      :mouse_click,
+      :mouse_move,
+      :mouse_drag,
+      :mouse_scroll,
+      :key_type,
+      :key_press,
+      :key_shortcut,
+      :screenshot,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class MouseClick < BrowserAction; end
+      class MouseMove < BrowserAction; end
+      class MouseDrag < BrowserAction; end
+      class MouseScroll < BrowserAction; end
+      class KeyType < BrowserAction; end
+      class KeyPress < BrowserAction; end
+      class KeyShortcut < BrowserAction; end
+      class Screenshot < BrowserAction; end
+      class Unknown < BrowserAction; end
+    end
+
+    # The result of a browser action execution. Exactly one member is set,
+    # matching the action that was performed.
+    #
+    # @note BrowserActionResult is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of BrowserActionResult corresponding to the set member.
+    #
+    # @!attribute [rw] mouse_click
+    #   The result of a mouse click action.
+    #   @return [Types::MouseClickResult]
+    #
+    # @!attribute [rw] mouse_move
+    #   The result of a mouse move action.
+    #   @return [Types::MouseMoveResult]
+    #
+    # @!attribute [rw] mouse_drag
+    #   The result of a mouse drag action.
+    #   @return [Types::MouseDragResult]
+    #
+    # @!attribute [rw] mouse_scroll
+    #   The result of a mouse scroll action.
+    #   @return [Types::MouseScrollResult]
+    #
+    # @!attribute [rw] key_type
+    #   The result of a key type action.
+    #   @return [Types::KeyTypeResult]
+    #
+    # @!attribute [rw] key_press
+    #   The result of a key press action.
+    #   @return [Types::KeyPressResult]
+    #
+    # @!attribute [rw] key_shortcut
+    #   The result of a key shortcut action.
+    #   @return [Types::KeyShortcutResult]
+    #
+    # @!attribute [rw] screenshot
+    #   The result of a screenshot action.
+    #   @return [Types::ScreenshotResult]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/BrowserActionResult AWS API Documentation
+    #
+    class BrowserActionResult < Struct.new(
+      :mouse_click,
+      :mouse_move,
+      :mouse_drag,
+      :mouse_scroll,
+      :key_type,
+      :key_press,
+      :key_shortcut,
+      :screenshot,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class MouseClick < BrowserActionResult; end
+      class MouseMove < BrowserActionResult; end
+      class MouseDrag < BrowserActionResult; end
+      class MouseScroll < BrowserActionResult; end
+      class KeyType < BrowserActionResult; end
+      class KeyPress < BrowserActionResult; end
+      class KeyShortcut < BrowserActionResult; end
+      class Screenshot < BrowserActionResult; end
+      class Unknown < BrowserActionResult; end
+    end
+
+    # Browser enterprise policy configuration.
+    #
+    # @!attribute [rw] location
+    #   The location of the enterprise policy file.
+    #   @return [Types::ResourceLocation]
+    #
+    # @!attribute [rw] type
+    #   The enterprise policy type. See BrowserEnterprisePolicyType.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/BrowserEnterprisePolicy AWS API Documentation
+    #
+    class BrowserEnterprisePolicy < Struct.new(
+      :location,
+      :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Browser extension configuration.
     #
     # @!attribute [rw] location
@@ -379,6 +581,43 @@ module Aws::BedrockAgentCore
       :last_updated_at)
       SENSITIVE = []
       include Aws::Structure
+    end
+
+    # A certificate to install in the browser or code interpreter session.
+    #
+    # @!attribute [rw] location
+    #   The location of the certificate.
+    #   @return [Types::CertificateLocation]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/Certificate AWS API Documentation
+    #
+    class Certificate < Struct.new(
+      :location)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The location from which to retrieve a certificate.
+    #
+    # @note CertificateLocation is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note CertificateLocation is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of CertificateLocation corresponding to the set member.
+    #
+    # @!attribute [rw] secrets_manager
+    #   The Amazon Web Services Secrets Manager location of the certificate.
+    #   @return [Types::SecretsManagerLocation]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/CertificateLocation AWS API Documentation
+    #
+    class CertificateLocation < Struct.new(
+      :secrets_manager,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class SecretsManager < CertificateLocation; end
+      class Unknown < CertificateLocation; end
     end
 
     # The output produced by executing code in a code interpreter session in
@@ -587,9 +826,68 @@ module Aws::BedrockAgentCore
       include Aws::Structure
     end
 
+    # An event that contains incremental output from a command execution.
+    # This event streams standard output and standard error content as it
+    # becomes available during command execution.
+    #
+    # @!attribute [rw] stdout
+    #   The standard output content from the command execution. This field
+    #   contains the incremental output written to stdout by the executing
+    #   command.
+    #   @return [String]
+    #
+    # @!attribute [rw] stderr
+    #   The standard error content from the command execution. This field
+    #   contains the incremental output written to stderr by the executing
+    #   command.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/ContentDeltaEvent AWS API Documentation
+    #
+    class ContentDeltaEvent < Struct.new(
+      :stdout,
+      :stderr)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An event that signals the start of content streaming from a command
+    # execution. This event is sent when the command begins producing
+    # output.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/ContentStartEvent AWS API Documentation
+    #
+    class ContentStartEvent < Aws::EmptyStructure; end
+
+    # An event that signals the completion of a command execution. This
+    # event contains the final status and exit code of the executed command.
+    #
+    # @!attribute [rw] exit_code
+    #   The exit code returned by the executed command. An exit code of 0
+    #   indicates successful execution, -1 indicates a platform error, and
+    #   values greater than 0 indicate command-specific errors.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] status
+    #   The final status of the command execution. Valid values are
+    #   `COMPLETED` for successful completion or `TIMED_OUT` if the command
+    #   exceeded the specified timeout.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/ContentStopEvent AWS API Documentation
+    #
+    class ContentStopEvent < Struct.new(
+      :exit_code,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The contextual information associated with an evaluation, including
     # span context details that identify the specific traces and sessions
     # being evaluated within the agent's execution flow.
+    #
+    # @note Context is a union - when making an API calls you must set exactly one of the members.
     #
     # @note Context is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of Context corresponding to the set member.
     #
@@ -704,6 +1002,20 @@ module Aws::BedrockAgentCore
       include Aws::Structure
     end
 
+    # A custom descriptor configuration for a registry record.
+    #
+    # @!attribute [rw] inline_content
+    #   The inline content of the custom descriptor.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/CustomDescriptor AWS API Documentation
+    #
+    class CustomDescriptor < Struct.new(
+      :inline_content)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] memory_id
     #   The identifier of the AgentCore Memory resource from which to delete
     #   the event.
@@ -774,6 +1086,40 @@ module Aws::BedrockAgentCore
       include Aws::Structure
     end
 
+    # Contains the descriptor configuration for a registry record. Only the
+    # field that matches the record's `descriptorType` is populated.
+    #
+    # @!attribute [rw] mcp
+    #   The MCP (Model Context Protocol) descriptor configuration. Populated
+    #   when the record's `descriptorType` is `MCP`.
+    #   @return [Types::McpDescriptor]
+    #
+    # @!attribute [rw] a2a
+    #   The A2A (Agent-to-Agent) descriptor configuration. Populated when
+    #   the record's `descriptorType` is `A2A`.
+    #   @return [Types::A2aDescriptor]
+    #
+    # @!attribute [rw] custom
+    #   The custom descriptor configuration. Populated when the record's
+    #   `descriptorType` is `CUSTOM`.
+    #   @return [Types::CustomDescriptor]
+    #
+    # @!attribute [rw] agent_skills
+    #   The agent skills descriptor configuration. Populated when the
+    #   record's `descriptorType` is `AGENT_SKILLS`.
+    #   @return [Types::AgentSkillsDescriptor]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/Descriptors AWS API Documentation
+    #
+    class Descriptors < Struct.new(
+      :mcp,
+      :a2a,
+      :custom,
+      :agent_skills)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An exception thrown when attempting to create a resource with an
     # identifier that already exists.
     #
@@ -791,7 +1137,7 @@ module Aws::BedrockAgentCore
     # @!attribute [rw] evaluator_id
     #   The unique identifier of the evaluator to use for scoring. Can be a
     #   built-in evaluator (e.g., `Builtin.Helpfulness`,
-    #   `Builtin.Correctness`) or a custom evaluator ARN created through the
+    #   `Builtin.Correctness`) or a custom evaluator Id created through the
     #   control plane API.
     #   @return [String]
     #
@@ -809,13 +1155,23 @@ module Aws::BedrockAgentCore
     #   conversation sessions.
     #   @return [Types::EvaluationTarget]
     #
+    # @!attribute [rw] evaluation_reference_inputs
+    #   Ground truth data to compare against agent responses during
+    #   evaluation. Allows to provide expected responses, assertions, and
+    #   expected tool trajectories at different evaluation levels.
+    #   Session-level reference inputs apply to the entire conversation,
+    #   while trace-level reference inputs target specific request-response
+    #   interactions identified by trace ID.
+    #   @return [Array<Types::EvaluationReferenceInput>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/EvaluateRequest AWS API Documentation
     #
     class EvaluateRequest < Struct.new(
       :evaluator_id,
       :evaluation_input,
-      :evaluation_target)
-      SENSITIVE = []
+      :evaluation_target,
+      :evaluation_reference_inputs)
+      SENSITIVE = [:evaluation_reference_inputs]
       include Aws::Structure
     end
 
@@ -830,6 +1186,43 @@ module Aws::BedrockAgentCore
     #
     class EvaluateResponse < Struct.new(
       :evaluation_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A content block for ground truth data in evaluation reference inputs.
+    # Supports text content for expected responses and assertions.
+    #
+    # @note EvaluationContent is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @!attribute [rw] text
+    #   The text content of the ground truth data. Used for expected
+    #   response text and assertion statements.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/EvaluationContent AWS API Documentation
+    #
+    class EvaluationContent < Struct.new(
+      :text,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Text < EvaluationContent; end
+      class Unknown < EvaluationContent; end
+    end
+
+    # The expected tool call trajectory for trajectory-based evaluation.
+    #
+    # @!attribute [rw] tool_names
+    #   The list of tool names representing the expected tool call sequence.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/EvaluationExpectedTrajectory AWS API Documentation
+    #
+    class EvaluationExpectedTrajectory < Struct.new(
+      :tool_names)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -859,6 +1252,47 @@ module Aws::BedrockAgentCore
 
       class SessionSpans < EvaluationInput; end
       class Unknown < EvaluationInput; end
+    end
+
+    # A reference input containing ground truth data for evaluation, scoped
+    # to a specific context level (session or trace) through its span
+    # context.
+    #
+    # @!attribute [rw] context
+    #   The contextual information associated with an evaluation, including
+    #   span context details that identify the specific traces and sessions
+    #   being evaluated within the agent's execution flow.
+    #   @return [Types::Context]
+    #
+    # @!attribute [rw] expected_response
+    #   The expected response for trace-level evaluation. Built-in
+    #   evaluators that support this field compare the agent's actual
+    #   response against this value for assessment. Custom evaluators can
+    #   access it through the `{expected_response}` placeholder in their
+    #   instructions.
+    #   @return [Types::EvaluationContent]
+    #
+    # @!attribute [rw] assertions
+    #   A list of assertion statements for session-level evaluation. Each
+    #   assertion describes an expected behavior or outcome the agent should
+    #   demonstrate during the session.
+    #   @return [Array<Types::EvaluationContent>]
+    #
+    # @!attribute [rw] expected_trajectory
+    #   The expected tool call sequence for session-level trajectory
+    #   evaluation. Contains a list of tool names representing the tools the
+    #   agent is expected to invoke.
+    #   @return [Types::EvaluationExpectedTrajectory]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/EvaluationReferenceInput AWS API Documentation
+    #
+    class EvaluationReferenceInput < Struct.new(
+      :context,
+      :expected_response,
+      :assertions,
+      :expected_trajectory)
+      SENSITIVE = []
+      include Aws::Structure
     end
 
     # The comprehensive result of an evaluation containing the score,
@@ -934,6 +1368,12 @@ module Aws::BedrockAgentCore
     #   categories of evaluation errors.
     #   @return [String]
     #
+    # @!attribute [rw] ignored_reference_input_fields
+    #   The list of reference input field names that were provided but not
+    #   used by the evaluator. Helps identify which ground truth data was
+    #   not consumed during evaluation.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/EvaluationResultContent AWS API Documentation
     #
     class EvaluationResultContent < Struct.new(
@@ -946,7 +1386,8 @@ module Aws::BedrockAgentCore
       :label,
       :token_usage,
       :error_message,
-      :error_code)
+      :error_code,
+      :ignored_reference_input_fields)
       SENSITIVE = [:explanation]
       include Aws::Structure
     end
@@ -1326,6 +1767,11 @@ module Aws::BedrockAgentCore
     #   session.
     #   @return [Array<Types::BrowserExtension>]
     #
+    # @!attribute [rw] enterprise_policies
+    #   A list of files containing enterprise policies for the browser
+    #   session.
+    #   @return [Array<Types::BrowserEnterprisePolicy>]
+    #
     # @!attribute [rw] profile_configuration
     #   The browser profile configuration associated with this session.
     #   Contains the profile identifier that links to persistent browser
@@ -1354,6 +1800,10 @@ module Aws::BedrockAgentCore
     #   credentials.
     #   @return [Types::ProxyConfiguration]
     #
+    # @!attribute [rw] certificates
+    #   The list of certificates installed in the browser session.
+    #   @return [Array<Types::Certificate>]
+    #
     # @!attribute [rw] session_replay_artifact
     #   The artifact containing the session replay information.
     #   @return [String]
@@ -1371,11 +1821,13 @@ module Aws::BedrockAgentCore
       :created_at,
       :view_port,
       :extensions,
+      :enterprise_policies,
       :profile_configuration,
       :session_timeout_seconds,
       :status,
       :streams,
       :proxy_configuration,
+      :certificates,
       :session_replay_artifact,
       :last_updated_at)
       SENSITIVE = []
@@ -1425,6 +1877,10 @@ module Aws::BedrockAgentCore
     #   include ACTIVE, STOPPING, and STOPPED.
     #   @return [String]
     #
+    # @!attribute [rw] certificates
+    #   The list of certificates installed in the code interpreter session.
+    #   @return [Array<Types::Certificate>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/GetCodeInterpreterSessionResponse AWS API Documentation
     #
     class GetCodeInterpreterSessionResponse < Struct.new(
@@ -1433,7 +1889,8 @@ module Aws::BedrockAgentCore
       :name,
       :created_at,
       :session_timeout_seconds,
-      :status)
+      :status,
+      :certificates)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1776,6 +2233,168 @@ module Aws::BedrockAgentCore
       include Aws::Structure
     end
 
+    # Request for InvokeAgentRuntimeCommand operation.
+    #
+    # @!attribute [rw] content_type
+    #   The MIME type of the input data in the request payload. This tells
+    #   the agent runtime how to interpret the payload data. Common values
+    #   include application/json for JSON data.
+    #   @return [String]
+    #
+    # @!attribute [rw] accept
+    #   The desired MIME type for the response from the agent runtime
+    #   command. This tells the agent runtime what format to use for the
+    #   response data. Common values include application/json for JSON data.
+    #   @return [String]
+    #
+    # @!attribute [rw] runtime_session_id
+    #   The unique identifier of the runtime session in which to execute the
+    #   command. This session ID is used to maintain state and context
+    #   across multiple command invocations.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] trace_id
+    #   The trace identifier for request tracking.
+    #   @return [String]
+    #
+    # @!attribute [rw] trace_parent
+    #   The parent trace information for distributed tracing.
+    #   @return [String]
+    #
+    # @!attribute [rw] trace_state
+    #   The trace state information for distributed tracing.
+    #   @return [String]
+    #
+    # @!attribute [rw] baggage
+    #   Additional context information for distributed tracing.
+    #   @return [String]
+    #
+    # @!attribute [rw] agent_runtime_arn
+    #   The Amazon Resource Name (ARN) of the agent runtime on which to
+    #   execute the command. This identifies the specific agent runtime
+    #   environment where the command will run.
+    #   @return [String]
+    #
+    # @!attribute [rw] qualifier
+    #   The qualifier to use for the agent runtime. This is an endpoint name
+    #   that points to a specific version. If not specified, Amazon Bedrock
+    #   AgentCore uses the default endpoint of the agent runtime.
+    #   @return [String]
+    #
+    # @!attribute [rw] account_id
+    #   The identifier of the Amazon Web Services account for the agent
+    #   runtime resource. This parameter is required when you specify an
+    #   agent ID instead of the full ARN for `agentRuntimeArn`.
+    #   @return [String]
+    #
+    # @!attribute [rw] body
+    #   The request body containing the command to execute and optional
+    #   configuration parameters such as timeout settings.
+    #   @return [Types::InvokeAgentRuntimeCommandRequestBody]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/InvokeAgentRuntimeCommandRequest AWS API Documentation
+    #
+    class InvokeAgentRuntimeCommandRequest < Struct.new(
+      :content_type,
+      :accept,
+      :runtime_session_id,
+      :trace_id,
+      :trace_parent,
+      :trace_state,
+      :baggage,
+      :agent_runtime_arn,
+      :qualifier,
+      :account_id,
+      :body)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The request body structure for the `InvokeAgentRuntimeCommand`
+    # operation, containing the command to execute and optional
+    # configuration parameters.
+    #
+    # @!attribute [rw] command
+    #   The shell command to execute on the agent runtime. This command is
+    #   executed in the runtime environment and its output is streamed back
+    #   to the caller.
+    #   @return [String]
+    #
+    # @!attribute [rw] timeout
+    #   The maximum duration in seconds to wait for the command to complete.
+    #   If the command execution exceeds this timeout, it will be
+    #   terminated. Default is 300 seconds. Minimum is 1 second. Maximum is
+    #   3600 seconds.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/InvokeAgentRuntimeCommandRequestBody AWS API Documentation
+    #
+    class InvokeAgentRuntimeCommandRequestBody < Struct.new(
+      :command,
+      :timeout)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Response for InvokeAgentRuntimeCommand operation.
+    #
+    # @!attribute [rw] runtime_session_id
+    #   The unique identifier of the runtime session in which the command
+    #   was executed.
+    #   @return [String]
+    #
+    # @!attribute [rw] trace_id
+    #   The trace identifier for request tracking.
+    #   @return [String]
+    #
+    # @!attribute [rw] trace_parent
+    #   The parent trace information for distributed tracing.
+    #   @return [String]
+    #
+    # @!attribute [rw] trace_state
+    #   The trace state information for distributed tracing.
+    #   @return [String]
+    #
+    # @!attribute [rw] baggage
+    #   Additional context information for distributed tracing.
+    #   @return [String]
+    #
+    # @!attribute [rw] content_type
+    #   The MIME type of the response data. This indicates how to interpret
+    #   the response data. Common values include application/json for JSON
+    #   data.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_code
+    #   The HTTP status code of the response. A status code of 200 indicates
+    #   a successful operation. Other status codes indicate various error
+    #   conditions.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] stream
+    #   The streaming output from the command execution. This stream
+    #   contains events that provide real-time updates including standard
+    #   output, standard error, and completion status.
+    #   @return [Types::InvokeAgentRuntimeCommandStreamOutput]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/InvokeAgentRuntimeCommandResponse AWS API Documentation
+    #
+    class InvokeAgentRuntimeCommandResponse < Struct.new(
+      :runtime_session_id,
+      :trace_id,
+      :trace_parent,
+      :trace_state,
+      :baggage,
+      :content_type,
+      :status_code,
+      :stream)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] content_type
     #   The MIME type of the input data in the payload. This tells the agent
     #   runtime how to interpret the payload data. Common values include
@@ -1824,21 +2443,22 @@ module Aws::BedrockAgentCore
     #   @return [String]
     #
     # @!attribute [rw] agent_runtime_arn
-    #   The Amazon Web Services Resource Name (ARN) of the agent runtime to
-    #   invoke. The ARN uniquely identifies the agent runtime resource in
-    #   Amazon Bedrock AgentCore.
+    #   The identifier of the agent runtime to invoke. You can specify
+    #   either the full Amazon Web Services Resource Name (ARN) or the agent
+    #   ID. If you use the agent ID, you must also provide the `accountId`
+    #   query parameter.
     #   @return [String]
     #
     # @!attribute [rw] qualifier
-    #   The qualifier to use for the agent runtime. This can be a version
-    #   number or an endpoint name that points to a specific version. If not
-    #   specified, Amazon Bedrock AgentCore uses the default version of the
-    #   agent runtime.
+    #   The qualifier to use for the agent runtime. This is an endpoint name
+    #   that points to a specific version. If not specified, Amazon Bedrock
+    #   AgentCore uses the default endpoint of the agent runtime.
     #   @return [String]
     #
     # @!attribute [rw] account_id
     #   The identifier of the Amazon Web Services account for the agent
-    #   runtime resource.
+    #   runtime resource. This parameter is required when you specify an
+    #   agent ID instead of the full ARN for `agentRuntimeArn`.
     #   @return [String]
     #
     # @!attribute [rw] payload
@@ -1933,6 +2553,56 @@ module Aws::BedrockAgentCore
       include Aws::Structure
     end
 
+    # Request for the InvokeBrowser operation.
+    #
+    # @!attribute [rw] browser_identifier
+    #   The unique identifier of the browser associated with the session.
+    #   This must match the identifier used when creating the session with
+    #   `StartBrowserSession`.
+    #   @return [String]
+    #
+    # @!attribute [rw] session_id
+    #   The unique identifier of the browser session on which to perform the
+    #   action. This must be an active session created with
+    #   `StartBrowserSession`.
+    #   @return [String]
+    #
+    # @!attribute [rw] action
+    #   The browser action to perform. Exactly one member of the
+    #   `BrowserAction` union must be set per request.
+    #   @return [Types::BrowserAction]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/InvokeBrowserRequest AWS API Documentation
+    #
+    class InvokeBrowserRequest < Struct.new(
+      :browser_identifier,
+      :session_id,
+      :action)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Response for the InvokeBrowser operation.
+    #
+    # @!attribute [rw] result
+    #   The result of the browser action. The member set in the result
+    #   corresponds to the action that was performed.
+    #   @return [Types::BrowserActionResult]
+    #
+    # @!attribute [rw] session_id
+    #   The unique identifier of the browser session on which the action was
+    #   performed.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/InvokeBrowserResponse AWS API Documentation
+    #
+    class InvokeBrowserResponse < Struct.new(
+      :result,
+      :session_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] code_interpreter_identifier
     #   The unique identifier of the code interpreter associated with the
     #   session. This must match the identifier used when creating the
@@ -1993,6 +2663,112 @@ module Aws::BedrockAgentCore
     class InvokeCodeInterpreterResponse < Struct.new(
       :session_id,
       :stream)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Arguments for a key press action.
+    #
+    # @!attribute [rw] key
+    #   The key name to press (for example, `enter`, `tab`, `escape`).
+    #   @return [String]
+    #
+    # @!attribute [rw] presses
+    #   The number of times to press the key. Valid range: 1–100. Defaults
+    #   to 1.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/KeyPressArguments AWS API Documentation
+    #
+    class KeyPressArguments < Struct.new(
+      :key,
+      :presses)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The result of a key press action.
+    #
+    # @!attribute [rw] status
+    #   The status of the action execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] error
+    #   The error message. Present only when the action failed.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/KeyPressResult AWS API Documentation
+    #
+    class KeyPressResult < Struct.new(
+      :status,
+      :error)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Arguments for a key shortcut action.
+    #
+    # @!attribute [rw] keys
+    #   The key combination to press (for example, `["ctrl", "s"]`). Maximum
+    #   5 keys.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/KeyShortcutArguments AWS API Documentation
+    #
+    class KeyShortcutArguments < Struct.new(
+      :keys)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The result of a key shortcut action.
+    #
+    # @!attribute [rw] status
+    #   The status of the action execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] error
+    #   The error message. Present only when the action failed.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/KeyShortcutResult AWS API Documentation
+    #
+    class KeyShortcutResult < Struct.new(
+      :status,
+      :error)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Arguments for a key type action.
+    #
+    # @!attribute [rw] text
+    #   The text string to type. Maximum length: 10,000 characters.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/KeyTypeArguments AWS API Documentation
+    #
+    class KeyTypeArguments < Struct.new(
+      :text)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The result of a key type action.
+    #
+    # @!attribute [rw] status
+    #   The status of the action execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] error
+    #   The error message. Present only when the action failed.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/KeyTypeResult AWS API Documentation
+    #
+    class KeyTypeResult < Struct.new(
+      :status,
+      :error)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2297,6 +3073,11 @@ module Aws::BedrockAgentCore
     #   records in namespaces that start with the provided prefix.
     #   @return [String]
     #
+    # @!attribute [rw] namespace_path
+    #   Use namespacePath for hierarchical retrievals. Return all memory
+    #   records where namespace falls under the same parent hierarchy.
+    #   @return [String]
+    #
     # @!attribute [rw] memory_strategy_id
     #   The memory strategy identifier to filter memory records by. If
     #   specified, only memory records with this strategy ID are returned.
@@ -2318,6 +3099,7 @@ module Aws::BedrockAgentCore
     class ListMemoryRecordsInput < Struct.new(
       :memory_id,
       :namespace,
+      :namespace_path,
       :memory_strategy_id,
       :max_results,
       :next_token)
@@ -2365,13 +3147,18 @@ module Aws::BedrockAgentCore
     #   results.
     #   @return [String]
     #
+    # @!attribute [rw] filter
+    #   Filter criteria to apply when listing sessions.
+    #   @return [Types::SessionFilter]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/ListSessionsInput AWS API Documentation
     #
     class ListSessionsInput < Struct.new(
       :memory_id,
       :actor_id,
       :max_results,
-      :next_token)
+      :next_token,
+      :filter)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2410,6 +3197,26 @@ module Aws::BedrockAgentCore
     #
     class LiveViewStream < Struct.new(
       :stream_endpoint)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The MCP (Model Context Protocol) descriptor configuration for a
+    # registry record. Contains the server definition and tools definition.
+    #
+    # @!attribute [rw] server
+    #   The MCP server definition that describes the server configuration.
+    #   @return [Types::ServerDefinition]
+    #
+    # @!attribute [rw] tools
+    #   The MCP tools definition that describes the available tools.
+    #   @return [Types::ToolsDefinition]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/McpDescriptor AWS API Documentation
+    #
+    class McpDescriptor < Struct.new(
+      :server,
+      :tools)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2718,6 +3525,194 @@ module Aws::BedrockAgentCore
       class Unknown < MetadataValue; end
     end
 
+    # Arguments for a mouse click action.
+    #
+    # @!attribute [rw] x
+    #   The X coordinate on screen where the click occurs.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] y
+    #   The Y coordinate on screen where the click occurs.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] button
+    #   The mouse button to use. Defaults to `LEFT`.
+    #   @return [String]
+    #
+    # @!attribute [rw] click_count
+    #   The number of clicks to perform. Valid range: 1–10. Defaults to 1.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/MouseClickArguments AWS API Documentation
+    #
+    class MouseClickArguments < Struct.new(
+      :x,
+      :y,
+      :button,
+      :click_count)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The result of a mouse click action.
+    #
+    # @!attribute [rw] status
+    #   The status of the action execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] error
+    #   The error message. Present only when the action failed.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/MouseClickResult AWS API Documentation
+    #
+    class MouseClickResult < Struct.new(
+      :status,
+      :error)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Arguments for a mouse drag action.
+    #
+    # @!attribute [rw] end_x
+    #   The ending X coordinate for the drag.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] end_y
+    #   The ending Y coordinate for the drag.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] start_x
+    #   The starting X coordinate for the drag.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] start_y
+    #   The starting Y coordinate for the drag.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] button
+    #   The mouse button to use for the drag. Defaults to `LEFT`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/MouseDragArguments AWS API Documentation
+    #
+    class MouseDragArguments < Struct.new(
+      :end_x,
+      :end_y,
+      :start_x,
+      :start_y,
+      :button)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The result of a mouse drag action.
+    #
+    # @!attribute [rw] status
+    #   The status of the action execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] error
+    #   The error message. Present only when the action failed.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/MouseDragResult AWS API Documentation
+    #
+    class MouseDragResult < Struct.new(
+      :status,
+      :error)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Arguments for a mouse move action.
+    #
+    # @!attribute [rw] x
+    #   The target X coordinate on screen.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] y
+    #   The target Y coordinate on screen.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/MouseMoveArguments AWS API Documentation
+    #
+    class MouseMoveArguments < Struct.new(
+      :x,
+      :y)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The result of a mouse move action.
+    #
+    # @!attribute [rw] status
+    #   The status of the action execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] error
+    #   The error message. Present only when the action failed.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/MouseMoveResult AWS API Documentation
+    #
+    class MouseMoveResult < Struct.new(
+      :status,
+      :error)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Arguments for a mouse scroll action.
+    #
+    # @!attribute [rw] x
+    #   The X coordinate on screen where the scroll occurs.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] y
+    #   The Y coordinate on screen where the scroll occurs.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] delta_x
+    #   The horizontal scroll delta. Valid range: -1000 to 1000.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] delta_y
+    #   The vertical scroll delta. Valid range: -1000 to 1000. Negative
+    #   values scroll down.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/MouseScrollArguments AWS API Documentation
+    #
+    class MouseScrollArguments < Struct.new(
+      :x,
+      :y,
+      :delta_x,
+      :delta_y)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The result of a mouse scroll action.
+    #
+    # @!attribute [rw] status
+    #   The status of the action execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] error
+    #   The error message. Present only when the action failed.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/MouseScrollResult AWS API Documentation
+    #
+    class MouseScrollResult < Struct.new(
+      :status,
+      :error)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains the payload content for an event.
     #
     # @note PayloadType is a union - when making an API calls you must set exactly one of the members.
@@ -2841,6 +3836,71 @@ module Aws::BedrockAgentCore
       class Unknown < ProxyCredentials; end
     end
 
+    # Summary information about a registry record.
+    #
+    # @!attribute [rw] registry_arn
+    #   The Amazon Resource Name (ARN) of the registry that this record
+    #   belongs to.
+    #   @return [String]
+    #
+    # @!attribute [rw] record_arn
+    #   The Amazon Resource Name (ARN) of the registry record.
+    #   @return [String]
+    #
+    # @!attribute [rw] record_id
+    #   The unique identifier of the registry record.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the registry record.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the registry record.
+    #   @return [String]
+    #
+    # @!attribute [rw] descriptor_type
+    #   The type of descriptor associated with this registry record.
+    #   @return [String]
+    #
+    # @!attribute [rw] descriptors
+    #   The descriptor configurations for this registry record.
+    #   @return [Types::Descriptors]
+    #
+    # @!attribute [rw] version
+    #   The version of the registry record.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the registry record.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The date and time when the registry record was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The date and time when the registry record was last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/RegistryRecordSummary AWS API Documentation
+    #
+    class RegistryRecordSummary < Struct.new(
+      :registry_arn,
+      :record_arn,
+      :record_id,
+      :name,
+      :description,
+      :descriptor_type,
+      :descriptors,
+      :version,
+      :status,
+      :created_at,
+      :updated_at)
+      SENSITIVE = [:description]
+      include Aws::Structure
+    end
+
     # Contains information about resource content.
     #
     # @!attribute [rw] type
@@ -2915,6 +3975,37 @@ module Aws::BedrockAgentCore
       include Aws::Structure
     end
 
+    # A structure representing a response chunk that contains exactly one of
+    # the possible event types: `contentStart`, `contentDelta`, or
+    # `contentStop`.
+    #
+    # @!attribute [rw] content_start
+    #   An event indicating the start of content streaming from the command
+    #   execution. This is the first chunk received.
+    #   @return [Types::ContentStartEvent]
+    #
+    # @!attribute [rw] content_delta
+    #   An event containing incremental output (stdout or stderr) from the
+    #   command execution. These are the middle chunks.
+    #   @return [Types::ContentDeltaEvent]
+    #
+    # @!attribute [rw] content_stop
+    #   An event indicating the completion of the command execution,
+    #   including the exit code and final status. This is the last chunk
+    #   received.
+    #   @return [Types::ContentStopEvent]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/ResponseChunk AWS API Documentation
+    #
+    class ResponseChunk < Struct.new(
+      :content_start,
+      :content_delta,
+      :content_stop,
+      :event_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] memory_id
     #   The identifier of the AgentCore Memory resource from which to
     #   retrieve memory records.
@@ -2923,6 +4014,11 @@ module Aws::BedrockAgentCore
     # @!attribute [rw] namespace
     #   The namespace prefix to filter memory records by. Searches for
     #   memory records in namespaces that start with the provided prefix.
+    #   @return [String]
+    #
+    # @!attribute [rw] namespace_path
+    #   Use namespacePath for hierarchical retrievals. Return all memory
+    #   records where namespace falls under the same parent hierarchy.
     #   @return [String]
     #
     # @!attribute [rw] search_criteria
@@ -2947,6 +4043,7 @@ module Aws::BedrockAgentCore
     class RetrieveMemoryRecordsInput < Struct.new(
       :memory_id,
       :namespace,
+      :namespace_path,
       :search_criteria,
       :next_token,
       :max_results)
@@ -3022,7 +4119,8 @@ module Aws::BedrockAgentCore
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/RuntimeClientError AWS API Documentation
     #
     class RuntimeClientError < Struct.new(
-      :message)
+      :message,
+      :event_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3131,6 +4229,45 @@ module Aws::BedrockAgentCore
       include Aws::Structure
     end
 
+    # Arguments for a screenshot action.
+    #
+    # @!attribute [rw] format
+    #   The image format for the screenshot. Defaults to `PNG`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/ScreenshotArguments AWS API Documentation
+    #
+    class ScreenshotArguments < Struct.new(
+      :format)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The result of a screenshot action.
+    #
+    # @!attribute [rw] status
+    #   The status of the action execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] error
+    #   The error message. Present only when the action failed.
+    #   @return [String]
+    #
+    # @!attribute [rw] data
+    #   The base64-encoded image data. Present only when the action
+    #   succeeded.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/ScreenshotResult AWS API Documentation
+    #
+    class ScreenshotResult < Struct.new(
+      :status,
+      :error,
+      :data)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains search criteria for retrieving memory records.
     #
     # @!attribute [rw] search_query
@@ -3158,6 +4295,93 @@ module Aws::BedrockAgentCore
       :top_k,
       :metadata_filters)
       SENSITIVE = [:search_query]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] search_query
+    #   The search query to find matching registry records.
+    #   @return [String]
+    #
+    # @!attribute [rw] registry_ids
+    #   The list of registry identifiers to search within. Currently, you
+    #   can specify exactly one registry identifier. You can provide either
+    #   the full Amazon Web Services Resource Name (ARN) or the 12-character
+    #   alphanumeric registry ID.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of records to return in a single call. Valid
+    #   values are 1 through 20. The default value is 10.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] filters
+    #   A metadata filter expression to narrow search results. Uses
+    #   structured JSON operators including field-level operators (`$eq`,
+    #   `$ne`, `$in`) and logical operators (`$and`, `$or`) on filterable
+    #   fields (`name`, `descriptorType`, `version`). For example, to filter
+    #   by descriptor type: `{"descriptorType": {"$eq": "MCP"}}`. To combine
+    #   filters: `{"$and": [{"descriptorType": {"$eq": "MCP"}}, {"name":
+    #   {"$eq": "my-tool"}}]}`.
+    #   @return [Hash,Array,String,Numeric,Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/SearchRegistryRecordsRequest AWS API Documentation
+    #
+    class SearchRegistryRecordsRequest < Struct.new(
+      :search_query,
+      :registry_ids,
+      :max_results,
+      :filters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] registry_records
+    #   The list of registry records that match the search query, ordered by
+    #   relevance.
+    #   @return [Array<Types::RegistryRecordSummary>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/SearchRegistryRecordsResponse AWS API Documentation
+    #
+    class SearchRegistryRecordsResponse < Struct.new(
+      :registry_records)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The Amazon Web Services Secrets Manager location configuration.
+    #
+    # @!attribute [rw] secret_arn
+    #   The ARN of the Amazon Web Services Secrets Manager secret containing
+    #   the certificate.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/SecretsManagerLocation AWS API Documentation
+    #
+    class SecretsManagerLocation < Struct.new(
+      :secret_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The MCP server definition with a schema version and inline content.
+    # The `schemaVersion` identifies the version of the MCP server
+    # configuration schema.
+    #
+    # @!attribute [rw] schema_version
+    #   The schema version of the MCP server configuration. The schema
+    #   version identifies the format of the server definition content.
+    #   @return [String]
+    #
+    # @!attribute [rw] inline_content
+    #   The inline content of the server definition.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/ServerDefinition AWS API Documentation
+    #
+    class ServerDefinition < Struct.new(
+      :schema_version,
+      :inline_content)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3191,6 +4415,21 @@ module Aws::BedrockAgentCore
       include Aws::Structure
     end
 
+    # Contains filter criteria for listing sessions.
+    #
+    # @!attribute [rw] event_filter
+    #   The event filter condition to apply. Use this to filter sessions
+    #   based on event presence.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/SessionFilter AWS API Documentation
+    #
+    class SessionFilter < Struct.new(
+      :event_filter)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains summary information about a session in an AgentCore Memory
     # resource.
     #
@@ -3212,6 +4451,41 @@ module Aws::BedrockAgentCore
       :session_id,
       :actor_id,
       :created_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The structured skill definition with a schema version and inline
+    # content.
+    #
+    # @!attribute [rw] schema_version
+    #   The schema version of the skill definition. If you don't specify a
+    #   version, the service detects it automatically.
+    #   @return [String]
+    #
+    # @!attribute [rw] inline_content
+    #   The inline content of the skill definition.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/SkillDefinition AWS API Documentation
+    #
+    class SkillDefinition < Struct.new(
+      :schema_version,
+      :inline_content)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The skill markdown definition for agent skills descriptors.
+    #
+    # @!attribute [rw] inline_content
+    #   The inline markdown content of the skill definition.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/SkillMdDefinition AWS API Documentation
+    #
+    class SkillMdDefinition < Struct.new(
+      :inline_content)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3269,10 +4543,10 @@ module Aws::BedrockAgentCore
     #   @return [String]
     #
     # @!attribute [rw] session_timeout_seconds
-    #   The time in seconds after which the session automatically terminates
-    #   if there is no activity. The default value is 3600 seconds (1 hour).
-    #   The minimum allowed value is 60 seconds, and the maximum allowed
-    #   value is 28800 seconds (8 hours).
+    #   The duration in seconds (time-to-live) after which the session
+    #   automatically terminates, regardless of ongoing activity. Defaults
+    #   to 3600 seconds (1 hour). Recommended minimum: 60 seconds. Maximum
+    #   allowed: 28,800 seconds (8 hours).
     #   @return [Integer]
     #
     # @!attribute [rw] view_port
@@ -3303,6 +4577,14 @@ module Aws::BedrockAgentCore
     #   IAM permission for the specified secret ARNs.
     #   @return [Types::ProxyConfiguration]
     #
+    # @!attribute [rw] enterprise_policies
+    #   A list of files containing enterprise policies for the browser.
+    #   @return [Array<Types::BrowserEnterprisePolicy>]
+    #
+    # @!attribute [rw] certificates
+    #   A list of certificates to install in the browser session.
+    #   @return [Array<Types::Certificate>]
+    #
     # @!attribute [rw] client_token
     #   A unique, case-sensitive identifier to ensure that the API request
     #   completes no more than one time. If this token matches a previous
@@ -3326,6 +4608,8 @@ module Aws::BedrockAgentCore
       :extensions,
       :profile_configuration,
       :proxy_configuration,
+      :enterprise_policies,
+      :certificates,
       :client_token)
       SENSITIVE = []
       include Aws::Structure
@@ -3380,11 +4664,15 @@ module Aws::BedrockAgentCore
     #   @return [String]
     #
     # @!attribute [rw] session_timeout_seconds
-    #   The time in seconds after which the session automatically terminates
-    #   if there is no activity. The default value is 900 seconds (15
-    #   minutes). The minimum allowed value is 60 seconds, and the maximum
-    #   allowed value is 28800 seconds (8 hours).
+    #   The duration in seconds (time-to-live) after which the session
+    #   automatically terminates, regardless of ongoing activity. Defaults
+    #   to 900 seconds (15 minutes). Recommended minimum: 60 seconds.
+    #   Maximum allowed: 28,800 seconds (8 hours).
     #   @return [Integer]
+    #
+    # @!attribute [rw] certificates
+    #   A list of certificates to install in the code interpreter session.
+    #   @return [Array<Types::Certificate>]
     #
     # @!attribute [rw] client_token
     #   A unique, case-sensitive identifier to ensure that the API request
@@ -3405,6 +4693,7 @@ module Aws::BedrockAgentCore
       :code_interpreter_identifier,
       :name,
       :session_timeout_seconds,
+      :certificates,
       :client_token)
       SENSITIVE = []
       include Aws::Structure
@@ -3742,8 +5031,7 @@ module Aws::BedrockAgentCore
     #
     # @!attribute [rw] language
     #   The programming language of the code to execute. This tells the code
-    #   interpreter which language runtime to use for execution. Common
-    #   values include 'python', 'javascript', and 'r'.
+    #   interpreter which language runtime to use for execution.
     #   @return [String]
     #
     # @!attribute [rw] clear_context
@@ -3774,6 +5062,11 @@ module Aws::BedrockAgentCore
     #   The identifier of the task for the tool operation.
     #   @return [String]
     #
+    # @!attribute [rw] runtime
+    #   The runtime environment to use for code execution. If not specified,
+    #   defaults to `deno` for JavaScript and TypeScript.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/ToolArguments AWS API Documentation
     #
     class ToolArguments < Struct.new(
@@ -3785,7 +5078,8 @@ module Aws::BedrockAgentCore
       :paths,
       :content,
       :directory_path,
-      :task_id)
+      :task_id,
+      :runtime)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3825,6 +5119,30 @@ module Aws::BedrockAgentCore
       :stderr,
       :exit_code,
       :execution_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The MCP tools definition with a protocol version and inline content.
+    # The `protocolVersion` identifies the MCP protocol version that the
+    # tools conform to. This differs from `schemaVersion` in the server
+    # definition, which identifies the server configuration schema format.
+    #
+    # @!attribute [rw] protocol_version
+    #   The MCP protocol version that the tools conform to. This differs
+    #   from the `schemaVersion` field in the server definition, which
+    #   identifies the server configuration schema format.
+    #   @return [String]
+    #
+    # @!attribute [rw] inline_content
+    #   The inline content of the tools definition.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/ToolsDefinition AWS API Documentation
+    #
+    class ToolsDefinition < Struct.new(
+      :protocol_version,
+      :inline_content)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3914,7 +5232,8 @@ module Aws::BedrockAgentCore
     # @note UserIdentifier is a union - when making an API calls you must set exactly one of the members.
     #
     # @!attribute [rw] user_token
-    #   The OAuth2.0 token issued by the user’s identity provider
+    #   The OAuth2.0 token issued by the user’s identity provider that was
+    #   used to generate the workload access token
     #   @return [String]
     #
     # @!attribute [rw] user_id
@@ -4028,6 +5347,32 @@ module Aws::BedrockAgentCore
           :service_quota_exceeded_exception,
           :throttling_exception,
           :validation_exception
+        ]
+      end
+
+    end
+
+    # The streaming output union for the `InvokeAgentRuntimeCommand`
+    # operation. This union delivers typed events: `contentStart` (first),
+    # `contentDelta` (middle), and `contentStop` (last).
+    #
+    # EventStream is an Enumerator of Events.
+    #  #event_types #=> Array, returns all modeled event types in the stream
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/InvokeAgentRuntimeCommandStreamOutput AWS API Documentation
+    #
+    class InvokeAgentRuntimeCommandStreamOutput < Enumerator
+
+      def event_types
+        [
+          :chunk,
+          :access_denied_exception,
+          :internal_server_exception,
+          :resource_not_found_exception,
+          :service_quota_exceeded_exception,
+          :throttling_exception,
+          :validation_exception,
+          :runtime_client_error
         ]
       end
 

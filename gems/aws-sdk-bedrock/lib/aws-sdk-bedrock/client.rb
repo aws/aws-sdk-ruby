@@ -2548,6 +2548,9 @@ module Aws::Bedrock
     #
     #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/tagging.html
     #
+    # @option params [String] :model_invocation_type
+    #   The invocation endpoint for ModelInvocationJob
+    #
     # @return [Types::CreateModelInvocationJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateModelInvocationJobResponse#job_arn #job_arn} => String
@@ -2584,6 +2587,7 @@ module Aws::Bedrock
     #         value: "TagValue", # required
     #       },
     #     ],
+    #     model_invocation_type: "InvokeModel", # accepts InvokeModel, Converse
     #   })
     #
     # @example Response structure
@@ -3179,6 +3183,28 @@ module Aws::Bedrock
       req.send_request(options)
     end
 
+    # Deletes a previously created Bedrock resource policy.
+    #
+    # @option params [required, String] :resource_arn
+    #   The ARN of the Bedrock resource to which this resource policy applies.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_resource_policy({
+    #     resource_arn: "ResourcePolicyResourceArn", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/DeleteResourcePolicy AWS API Documentation
+    #
+    # @overload delete_resource_policy(params = {})
+    # @param [Hash] params ({})
+    def delete_resource_policy(params = {}, options = {})
+      req = build_request(:delete_resource_policy, params)
+      req.send_request(options)
+    end
+
     # Deregisters an endpoint for a model from Amazon Bedrock Marketplace.
     # This operation removes the endpoint's association with Amazon Bedrock
     # but does not delete the underlying Amazon SageMaker endpoint.
@@ -3413,7 +3439,7 @@ module Aws::Bedrock
     #   resp.policy_arn #=> String
     #   resp.build_workflow_id #=> String
     #   resp.status #=> String, one of "SCHEDULED", "CANCEL_REQUESTED", "PREPROCESSING", "BUILDING", "TESTING", "COMPLETED", "FAILED", "CANCELLED"
-    #   resp.build_workflow_type #=> String, one of "INGEST_CONTENT", "REFINE_POLICY", "IMPORT_POLICY"
+    #   resp.build_workflow_type #=> String, one of "INGEST_CONTENT", "REFINE_POLICY", "IMPORT_POLICY", "GENERATE_FIDELITY_REPORT", "GENERATE_POLICY_SCENARIOS"
     #   resp.document_name #=> String
     #   resp.document_content_type #=> String, one of "pdf", "txt"
     #   resp.document_description #=> String
@@ -3443,7 +3469,15 @@ module Aws::Bedrock
     #
     # @option params [required, String] :asset_type
     #   The type of asset to retrieve (e.g., BUILD\_LOG, QUALITY\_REPORT,
-    #   POLICY\_DEFINITION).
+    #   POLICY\_DEFINITION, GENERATED\_TEST\_CASES, POLICY\_SCENARIOS,
+    #   FIDELITY\_REPORT, ASSET\_MANIFEST, SOURCE\_DOCUMENT).
+    #
+    # @option params [String] :asset_id
+    #   The unique identifier of the specific asset to retrieve when multiple
+    #   assets of the same type exist. This is required when retrieving
+    #   SOURCE\_DOCUMENT assets, as multiple source documents may have been
+    #   used in the workflow. The asset ID can be obtained from the asset
+    #   manifest.
     #
     # @return [Types::GetAutomatedReasoningPolicyBuildWorkflowResultAssetsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3456,7 +3490,8 @@ module Aws::Bedrock
     #   resp = client.get_automated_reasoning_policy_build_workflow_result_assets({
     #     policy_arn: "AutomatedReasoningPolicyArn", # required
     #     build_workflow_id: "AutomatedReasoningPolicyBuildWorkflowId", # required
-    #     asset_type: "BUILD_LOG", # required, accepts BUILD_LOG, QUALITY_REPORT, POLICY_DEFINITION, GENERATED_TEST_CASES, POLICY_SCENARIOS
+    #     asset_type: "BUILD_LOG", # required, accepts BUILD_LOG, QUALITY_REPORT, POLICY_DEFINITION, GENERATED_TEST_CASES, POLICY_SCENARIOS, FIDELITY_REPORT, ASSET_MANIFEST, SOURCE_DOCUMENT
+    #     asset_id: "AutomatedReasoningPolicyBuildResultAssetId",
     #   })
     #
     # @example Response structure
@@ -3583,6 +3618,49 @@ module Aws::Bedrock
     #   resp.build_workflow_assets.policy_scenarios.policy_scenarios[0].expected_result #=> String, one of "VALID", "INVALID", "SATISFIABLE", "IMPOSSIBLE", "TRANSLATION_AMBIGUOUS", "TOO_COMPLEX", "NO_TRANSLATION"
     #   resp.build_workflow_assets.policy_scenarios.policy_scenarios[0].rule_ids #=> Array
     #   resp.build_workflow_assets.policy_scenarios.policy_scenarios[0].rule_ids[0] #=> String
+    #   resp.build_workflow_assets.asset_manifest.entries #=> Array
+    #   resp.build_workflow_assets.asset_manifest.entries[0].asset_type #=> String, one of "BUILD_LOG", "QUALITY_REPORT", "POLICY_DEFINITION", "GENERATED_TEST_CASES", "POLICY_SCENARIOS", "FIDELITY_REPORT", "ASSET_MANIFEST", "SOURCE_DOCUMENT"
+    #   resp.build_workflow_assets.asset_manifest.entries[0].asset_name #=> String
+    #   resp.build_workflow_assets.asset_manifest.entries[0].asset_id #=> String
+    #   resp.build_workflow_assets.document.document #=> String
+    #   resp.build_workflow_assets.document.document_content_type #=> String, one of "pdf", "txt"
+    #   resp.build_workflow_assets.document.document_name #=> String
+    #   resp.build_workflow_assets.document.document_description #=> String
+    #   resp.build_workflow_assets.document.document_hash #=> String
+    #   resp.build_workflow_assets.fidelity_report.coverage_score #=> Float
+    #   resp.build_workflow_assets.fidelity_report.accuracy_score #=> Float
+    #   resp.build_workflow_assets.fidelity_report.rule_reports #=> Hash
+    #   resp.build_workflow_assets.fidelity_report.rule_reports["AutomatedReasoningPolicyDefinitionRuleId"].rule #=> String
+    #   resp.build_workflow_assets.fidelity_report.rule_reports["AutomatedReasoningPolicyDefinitionRuleId"].grounding_statements #=> Array
+    #   resp.build_workflow_assets.fidelity_report.rule_reports["AutomatedReasoningPolicyDefinitionRuleId"].grounding_statements[0].document_id #=> String
+    #   resp.build_workflow_assets.fidelity_report.rule_reports["AutomatedReasoningPolicyDefinitionRuleId"].grounding_statements[0].statement_id #=> String
+    #   resp.build_workflow_assets.fidelity_report.rule_reports["AutomatedReasoningPolicyDefinitionRuleId"].grounding_justifications #=> Array
+    #   resp.build_workflow_assets.fidelity_report.rule_reports["AutomatedReasoningPolicyDefinitionRuleId"].grounding_justifications[0] #=> String
+    #   resp.build_workflow_assets.fidelity_report.rule_reports["AutomatedReasoningPolicyDefinitionRuleId"].accuracy_score #=> Float
+    #   resp.build_workflow_assets.fidelity_report.rule_reports["AutomatedReasoningPolicyDefinitionRuleId"].accuracy_justification #=> String
+    #   resp.build_workflow_assets.fidelity_report.variable_reports #=> Hash
+    #   resp.build_workflow_assets.fidelity_report.variable_reports["AutomatedReasoningPolicyDefinitionVariableName"].policy_variable #=> String
+    #   resp.build_workflow_assets.fidelity_report.variable_reports["AutomatedReasoningPolicyDefinitionVariableName"].grounding_statements #=> Array
+    #   resp.build_workflow_assets.fidelity_report.variable_reports["AutomatedReasoningPolicyDefinitionVariableName"].grounding_statements[0].document_id #=> String
+    #   resp.build_workflow_assets.fidelity_report.variable_reports["AutomatedReasoningPolicyDefinitionVariableName"].grounding_statements[0].statement_id #=> String
+    #   resp.build_workflow_assets.fidelity_report.variable_reports["AutomatedReasoningPolicyDefinitionVariableName"].grounding_justifications #=> Array
+    #   resp.build_workflow_assets.fidelity_report.variable_reports["AutomatedReasoningPolicyDefinitionVariableName"].grounding_justifications[0] #=> String
+    #   resp.build_workflow_assets.fidelity_report.variable_reports["AutomatedReasoningPolicyDefinitionVariableName"].accuracy_score #=> Float
+    #   resp.build_workflow_assets.fidelity_report.variable_reports["AutomatedReasoningPolicyDefinitionVariableName"].accuracy_justification #=> String
+    #   resp.build_workflow_assets.fidelity_report.document_sources #=> Array
+    #   resp.build_workflow_assets.fidelity_report.document_sources[0].document_name #=> String
+    #   resp.build_workflow_assets.fidelity_report.document_sources[0].document_hash #=> String
+    #   resp.build_workflow_assets.fidelity_report.document_sources[0].document_id #=> String
+    #   resp.build_workflow_assets.fidelity_report.document_sources[0].atomic_statements #=> Array
+    #   resp.build_workflow_assets.fidelity_report.document_sources[0].atomic_statements[0].id #=> String
+    #   resp.build_workflow_assets.fidelity_report.document_sources[0].atomic_statements[0].text #=> String
+    #   resp.build_workflow_assets.fidelity_report.document_sources[0].atomic_statements[0].location.lines #=> Array
+    #   resp.build_workflow_assets.fidelity_report.document_sources[0].atomic_statements[0].location.lines[0] #=> Integer
+    #   resp.build_workflow_assets.fidelity_report.document_sources[0].document_content #=> Array
+    #   resp.build_workflow_assets.fidelity_report.document_sources[0].document_content[0].page_number #=> Integer
+    #   resp.build_workflow_assets.fidelity_report.document_sources[0].document_content[0].content #=> Array
+    #   resp.build_workflow_assets.fidelity_report.document_sources[0].document_content[0].content[0].line.line_number #=> Integer
+    #   resp.build_workflow_assets.fidelity_report.document_sources[0].document_content[0].content[0].line.line_text #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/GetAutomatedReasoningPolicyBuildWorkflowResultAssets AWS API Documentation
     #
@@ -4207,6 +4285,10 @@ module Aws::Bedrock
     #   resp.model_details.inference_types_supported #=> Array
     #   resp.model_details.inference_types_supported[0] #=> String, one of "ON_DEMAND", "PROVISIONED"
     #   resp.model_details.model_lifecycle.status #=> String, one of "ACTIVE", "LEGACY"
+    #   resp.model_details.model_lifecycle.start_of_life_time #=> Time
+    #   resp.model_details.model_lifecycle.end_of_life_time #=> Time
+    #   resp.model_details.model_lifecycle.legacy_time #=> Time
+    #   resp.model_details.model_lifecycle.public_extended_access_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/GetFoundationModel AWS API Documentation
     #
@@ -4793,6 +4875,11 @@ module Aws::Bedrock
     #   * {Types::GetModelInvocationJobResponse#vpc_config #vpc_config} => Types::VpcConfig
     #   * {Types::GetModelInvocationJobResponse#timeout_duration_in_hours #timeout_duration_in_hours} => Integer
     #   * {Types::GetModelInvocationJobResponse#job_expiration_time #job_expiration_time} => Time
+    #   * {Types::GetModelInvocationJobResponse#model_invocation_type #model_invocation_type} => String
+    #   * {Types::GetModelInvocationJobResponse#total_record_count #total_record_count} => Integer
+    #   * {Types::GetModelInvocationJobResponse#processed_record_count #processed_record_count} => Integer
+    #   * {Types::GetModelInvocationJobResponse#success_record_count #success_record_count} => Integer
+    #   * {Types::GetModelInvocationJobResponse#error_record_count #error_record_count} => Integer
     #
     # @example Request syntax with placeholder values
     #
@@ -4824,6 +4911,11 @@ module Aws::Bedrock
     #   resp.vpc_config.security_group_ids[0] #=> String
     #   resp.timeout_duration_in_hours #=> Integer
     #   resp.job_expiration_time #=> Time
+    #   resp.model_invocation_type #=> String, one of "InvokeModel", "Converse"
+    #   resp.total_record_count #=> Integer
+    #   resp.processed_record_count #=> Integer
+    #   resp.success_record_count #=> Integer
+    #   resp.error_record_count #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/GetModelInvocationJob AWS API Documentation
     #
@@ -4968,6 +5060,34 @@ module Aws::Bedrock
       req.send_request(options)
     end
 
+    # Gets the resource policy document for a Bedrock resource
+    #
+    # @option params [required, String] :resource_arn
+    #   The ARN of the Bedrock resource to which this resource policy applies.
+    #
+    # @return [Types::GetResourcePolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetResourcePolicyResponse#resource_policy #resource_policy} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_resource_policy({
+    #     resource_arn: "ResourcePolicyResourceArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.resource_policy #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/GetResourcePolicy AWS API Documentation
+    #
+    # @overload get_resource_policy(params = {})
+    # @param [Hash] params ({})
+    def get_resource_policy(params = {}, options = {})
+      req = build_request(:get_resource_policy, params)
+      req.send_request(options)
+    end
+
     # Get usecase for model access.
     #
     # @return [Types::GetUseCaseForModelAccessResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -5075,7 +5195,7 @@ module Aws::Bedrock
     #   resp.automated_reasoning_policy_build_workflow_summaries[0].policy_arn #=> String
     #   resp.automated_reasoning_policy_build_workflow_summaries[0].build_workflow_id #=> String
     #   resp.automated_reasoning_policy_build_workflow_summaries[0].status #=> String, one of "SCHEDULED", "CANCEL_REQUESTED", "PREPROCESSING", "BUILDING", "TESTING", "COMPLETED", "FAILED", "CANCELLED"
-    #   resp.automated_reasoning_policy_build_workflow_summaries[0].build_workflow_type #=> String, one of "INGEST_CONTENT", "REFINE_POLICY", "IMPORT_POLICY"
+    #   resp.automated_reasoning_policy_build_workflow_summaries[0].build_workflow_type #=> String, one of "INGEST_CONTENT", "REFINE_POLICY", "IMPORT_POLICY", "GENERATE_FIDELITY_REPORT", "GENERATE_POLICY_SCENARIOS"
     #   resp.automated_reasoning_policy_build_workflow_summaries[0].created_at #=> Time
     #   resp.automated_reasoning_policy_build_workflow_summaries[0].updated_at #=> Time
     #   resp.next_token #=> String
@@ -5539,12 +5659,18 @@ module Aws::Bedrock
     #   resp.guardrails_config[0].guardrail_arn #=> String
     #   resp.guardrails_config[0].guardrail_id #=> String
     #   resp.guardrails_config[0].input_tags #=> String, one of "HONOR", "IGNORE"
+    #   resp.guardrails_config[0].selective_content_guarding.system #=> String, one of "SELECTIVE", "COMPREHENSIVE"
+    #   resp.guardrails_config[0].selective_content_guarding.messages #=> String, one of "SELECTIVE", "COMPREHENSIVE"
     #   resp.guardrails_config[0].guardrail_version #=> String
     #   resp.guardrails_config[0].created_at #=> Time
     #   resp.guardrails_config[0].created_by #=> String
     #   resp.guardrails_config[0].updated_at #=> Time
     #   resp.guardrails_config[0].updated_by #=> String
     #   resp.guardrails_config[0].owner #=> String, one of "ACCOUNT"
+    #   resp.guardrails_config[0].model_enforcement.included_models #=> Array
+    #   resp.guardrails_config[0].model_enforcement.included_models[0] #=> String
+    #   resp.guardrails_config[0].model_enforcement.excluded_models #=> Array
+    #   resp.guardrails_config[0].model_enforcement.excluded_models[0] #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/ListEnforcedGuardrailsConfiguration AWS API Documentation
@@ -5758,6 +5884,10 @@ module Aws::Bedrock
     #   resp.model_summaries[0].inference_types_supported #=> Array
     #   resp.model_summaries[0].inference_types_supported[0] #=> String, one of "ON_DEMAND", "PROVISIONED"
     #   resp.model_summaries[0].model_lifecycle.status #=> String, one of "ACTIVE", "LEGACY"
+    #   resp.model_summaries[0].model_lifecycle.start_of_life_time #=> Time
+    #   resp.model_summaries[0].model_lifecycle.end_of_life_time #=> Time
+    #   resp.model_summaries[0].model_lifecycle.legacy_time #=> Time
+    #   resp.model_summaries[0].model_lifecycle.public_extended_access_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/ListFoundationModels AWS API Documentation
     #
@@ -6437,6 +6567,11 @@ module Aws::Bedrock
     #   resp.invocation_job_summaries[0].vpc_config.security_group_ids[0] #=> String
     #   resp.invocation_job_summaries[0].timeout_duration_in_hours #=> Integer
     #   resp.invocation_job_summaries[0].job_expiration_time #=> Time
+    #   resp.invocation_job_summaries[0].model_invocation_type #=> String, one of "InvokeModel", "Converse"
+    #   resp.invocation_job_summaries[0].total_record_count #=> Integer
+    #   resp.invocation_job_summaries[0].processed_record_count #=> Integer
+    #   resp.invocation_job_summaries[0].success_record_count #=> Integer
+    #   resp.invocation_job_summaries[0].error_record_count #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/ListModelInvocationJobs AWS API Documentation
     #
@@ -6653,7 +6788,14 @@ module Aws::Bedrock
     #     guardrail_inference_config: { # required
     #       guardrail_identifier: "GuardrailIdentifier", # required
     #       guardrail_version: "GuardrailNumericalVersion", # required
-    #       input_tags: "HONOR", # required, accepts HONOR, IGNORE
+    #       selective_content_guarding: {
+    #         system: "SELECTIVE", # accepts SELECTIVE, COMPREHENSIVE
+    #         messages: "SELECTIVE", # accepts SELECTIVE, COMPREHENSIVE
+    #       },
+    #       model_enforcement: {
+    #         included_models: ["IncludedModelId"], # required
+    #         excluded_models: ["ExcludedModelId"], # required
+    #       },
     #     },
     #   })
     #
@@ -6709,6 +6851,38 @@ module Aws::Bedrock
     # @param [Hash] params ({})
     def put_model_invocation_logging_configuration(params = {}, options = {})
       req = build_request(:put_model_invocation_logging_configuration, params)
+      req.send_request(options)
+    end
+
+    # Adds a resource policy for a Bedrock resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The ARN of the Bedrock resource to which this resource policy applies.
+    #
+    # @option params [required, String] :resource_policy
+    #   The JSON string representing the Bedrock resource policy.
+    #
+    # @return [Types::PutResourcePolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutResourcePolicyResponse#resource_arn #resource_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_resource_policy({
+    #     resource_arn: "ResourcePolicyResourceArn", # required
+    #     resource_policy: "ResourcePolicyDocument", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.resource_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/PutResourcePolicy AWS API Documentation
+    #
+    # @overload put_resource_policy(params = {})
+    # @param [Hash] params ({})
+    def put_resource_policy(params = {}, options = {})
+      req = build_request(:put_resource_policy, params)
       req.send_request(options)
     end
 
@@ -6818,7 +6992,7 @@ module Aws::Bedrock
     #
     #   resp = client.start_automated_reasoning_policy_build_workflow({
     #     policy_arn: "AutomatedReasoningPolicyArn", # required
-    #     build_workflow_type: "INGEST_CONTENT", # required, accepts INGEST_CONTENT, REFINE_POLICY, IMPORT_POLICY
+    #     build_workflow_type: "INGEST_CONTENT", # required, accepts INGEST_CONTENT, REFINE_POLICY, IMPORT_POLICY, GENERATE_FIDELITY_REPORT, GENERATE_POLICY_SCENARIOS
     #     client_request_token: "IdempotencyToken",
     #     source_content: { # required
     #       policy_definition: {
@@ -6934,6 +7108,16 @@ module Aws::Bedrock
     #               ingest_content: {
     #                 content: "AutomatedReasoningPolicyAnnotationIngestContent", # required
     #               },
+    #             },
+    #           ],
+    #         },
+    #         generate_fidelity_report_content: {
+    #           documents: [
+    #             {
+    #               document: "data", # required
+    #               document_content_type: "pdf", # required, accepts pdf, txt
+    #               document_name: "AutomatedReasoningPolicyBuildDocumentName", # required
+    #               document_description: "AutomatedReasoningPolicyBuildDocumentDescription",
     #             },
     #           ],
     #         },
@@ -7818,7 +8002,7 @@ module Aws::Bedrock
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrock'
-      context[:gem_version] = '1.74.0'
+      context[:gem_version] = '1.81.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

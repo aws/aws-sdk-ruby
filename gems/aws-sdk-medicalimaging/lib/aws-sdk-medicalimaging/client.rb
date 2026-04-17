@@ -532,14 +532,14 @@ module Aws::MedicalImaging
     #   resp.source_image_set_properties.image_set_id #=> String
     #   resp.source_image_set_properties.latest_version_id #=> String
     #   resp.source_image_set_properties.image_set_state #=> String, one of "ACTIVE", "LOCKED", "DELETED"
-    #   resp.source_image_set_properties.image_set_workflow_status #=> String, one of "CREATED", "COPIED", "COPYING", "COPYING_WITH_READ_ONLY_ACCESS", "COPY_FAILED", "UPDATING", "UPDATED", "UPDATE_FAILED", "DELETING", "DELETED", "IMPORTING", "IMPORTED", "IMPORT_FAILED"
+    #   resp.source_image_set_properties.image_set_workflow_status #=> String, one of "CREATED", "COPIED", "COPYING", "COPYING_WITH_READ_ONLY_ACCESS", "COPY_FAILED", "UPDATING", "UPDATING_FOR_STUDY_CONSISTENCY", "UPDATED", "UPDATE_FAILED", "DELETING", "DELETED", "IMPORTING", "IMPORTED", "IMPORT_FAILED"
     #   resp.source_image_set_properties.created_at #=> Time
     #   resp.source_image_set_properties.updated_at #=> Time
     #   resp.source_image_set_properties.image_set_arn #=> String
     #   resp.destination_image_set_properties.image_set_id #=> String
     #   resp.destination_image_set_properties.latest_version_id #=> String
     #   resp.destination_image_set_properties.image_set_state #=> String, one of "ACTIVE", "LOCKED", "DELETED"
-    #   resp.destination_image_set_properties.image_set_workflow_status #=> String, one of "CREATED", "COPIED", "COPYING", "COPYING_WITH_READ_ONLY_ACCESS", "COPY_FAILED", "UPDATING", "UPDATED", "UPDATE_FAILED", "DELETING", "DELETED", "IMPORTING", "IMPORTED", "IMPORT_FAILED"
+    #   resp.destination_image_set_properties.image_set_workflow_status #=> String, one of "CREATED", "COPIED", "COPYING", "COPYING_WITH_READ_ONLY_ACCESS", "COPY_FAILED", "UPDATING", "UPDATING_FOR_STUDY_CONSISTENCY", "UPDATED", "UPDATE_FAILED", "DELETING", "DELETED", "IMPORTING", "IMPORTED", "IMPORT_FAILED"
     #   resp.destination_image_set_properties.created_at #=> Time
     #   resp.destination_image_set_properties.updated_at #=> Time
     #   resp.destination_image_set_properties.image_set_arn #=> String
@@ -671,7 +671,7 @@ module Aws::MedicalImaging
     #   resp.datastore_id #=> String
     #   resp.image_set_id #=> String
     #   resp.image_set_state #=> String, one of "ACTIVE", "LOCKED", "DELETED"
-    #   resp.image_set_workflow_status #=> String, one of "CREATED", "COPIED", "COPYING", "COPYING_WITH_READ_ONLY_ACCESS", "COPY_FAILED", "UPDATING", "UPDATED", "UPDATE_FAILED", "DELETING", "DELETED", "IMPORTING", "IMPORTED", "IMPORT_FAILED"
+    #   resp.image_set_workflow_status #=> String, one of "CREATED", "COPIED", "COPYING", "COPYING_WITH_READ_ONLY_ACCESS", "COPY_FAILED", "UPDATING", "UPDATING_FOR_STUDY_CONSISTENCY", "UPDATED", "UPDATE_FAILED", "DELETING", "DELETED", "IMPORTING", "IMPORTED", "IMPORT_FAILED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medical-imaging-2023-07-19/DeleteImageSet AWS API Documentation
     #
@@ -851,7 +851,7 @@ module Aws::MedicalImaging
     #   resp.image_set_id #=> String
     #   resp.version_id #=> String
     #   resp.image_set_state #=> String, one of "ACTIVE", "LOCKED", "DELETED"
-    #   resp.image_set_workflow_status #=> String, one of "CREATED", "COPIED", "COPYING", "COPYING_WITH_READ_ONLY_ACCESS", "COPY_FAILED", "UPDATING", "UPDATED", "UPDATE_FAILED", "DELETING", "DELETED", "IMPORTING", "IMPORTED", "IMPORT_FAILED"
+    #   resp.image_set_workflow_status #=> String, one of "CREATED", "COPIED", "COPYING", "COPYING_WITH_READ_ONLY_ACCESS", "COPY_FAILED", "UPDATING", "UPDATING_FOR_STUDY_CONSISTENCY", "UPDATED", "UPDATE_FAILED", "DELETING", "DELETED", "IMPORTING", "IMPORTED", "IMPORT_FAILED"
     #   resp.created_at #=> Time
     #   resp.updated_at #=> Time
     #   resp.deleted_at #=> Time
@@ -1048,7 +1048,7 @@ module Aws::MedicalImaging
     #   resp.image_set_properties_list[0].image_set_id #=> String
     #   resp.image_set_properties_list[0].version_id #=> String
     #   resp.image_set_properties_list[0].image_set_state #=> String, one of "ACTIVE", "LOCKED", "DELETED"
-    #   resp.image_set_properties_list[0].image_set_workflow_status #=> String, one of "CREATED", "COPIED", "COPYING", "COPYING_WITH_READ_ONLY_ACCESS", "COPY_FAILED", "UPDATING", "UPDATED", "UPDATE_FAILED", "DELETING", "DELETED", "IMPORTING", "IMPORTED", "IMPORT_FAILED"
+    #   resp.image_set_properties_list[0].image_set_workflow_status #=> String, one of "CREATED", "COPIED", "COPYING", "COPYING_WITH_READ_ONLY_ACCESS", "COPY_FAILED", "UPDATING", "UPDATING_FOR_STUDY_CONSISTENCY", "UPDATED", "UPDATE_FAILED", "DELETING", "DELETED", "IMPORTING", "IMPORTED", "IMPORT_FAILED"
     #   resp.image_set_properties_list[0].created_at #=> Time
     #   resp.image_set_properties_list[0].updated_at #=> Time
     #   resp.image_set_properties_list[0].deleted_at #=> Time
@@ -1350,6 +1350,10 @@ module Aws::MedicalImaging
     #   * Adding, removing, or updating private tags for an individual SOP
     #     Instance
     #
+    # @option params [Boolean] :include_study_image_sets
+    #   Flag to apply the metadata updates to all image sets in the same Study
+    #   as the requested image set ID.
+    #
     # @option params [required, Types::MetadataUpdates] :update_image_set_metadata_updates
     #   Update image set metadata updates.
     #
@@ -1371,6 +1375,7 @@ module Aws::MedicalImaging
     #     image_set_id: "ImageSetId", # required
     #     latest_version_id: "ImageSetExternalVersionId", # required
     #     force: false,
+    #     include_study_image_sets: false,
     #     update_image_set_metadata_updates: { # required
     #       dicom_updates: {
     #         removable_attributes: "data",
@@ -1386,7 +1391,7 @@ module Aws::MedicalImaging
     #   resp.image_set_id #=> String
     #   resp.latest_version_id #=> String
     #   resp.image_set_state #=> String, one of "ACTIVE", "LOCKED", "DELETED"
-    #   resp.image_set_workflow_status #=> String, one of "CREATED", "COPIED", "COPYING", "COPYING_WITH_READ_ONLY_ACCESS", "COPY_FAILED", "UPDATING", "UPDATED", "UPDATE_FAILED", "DELETING", "DELETED", "IMPORTING", "IMPORTED", "IMPORT_FAILED"
+    #   resp.image_set_workflow_status #=> String, one of "CREATED", "COPIED", "COPYING", "COPYING_WITH_READ_ONLY_ACCESS", "COPY_FAILED", "UPDATING", "UPDATING_FOR_STUDY_CONSISTENCY", "UPDATED", "UPDATE_FAILED", "DELETING", "DELETED", "IMPORTING", "IMPORTED", "IMPORT_FAILED"
     #   resp.created_at #=> Time
     #   resp.updated_at #=> Time
     #   resp.message #=> String
@@ -1418,7 +1423,7 @@ module Aws::MedicalImaging
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-medicalimaging'
-      context[:gem_version] = '1.42.0'
+      context[:gem_version] = '1.44.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

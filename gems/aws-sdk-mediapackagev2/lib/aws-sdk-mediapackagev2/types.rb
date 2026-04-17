@@ -3791,10 +3791,10 @@ module Aws::MediaPackageV2
     #   @return [String]
     #
     # @!attribute [rw] certificate_arn
-    #   The ARN for the certificate that you imported to AWS Certificate
-    #   Manager to add content key encryption to this endpoint. For this
-    #   feature to work, your DRM key provider must support content key
-    #   encryption.
+    #   The ARN for the certificate that you imported to Amazon Web Services
+    #   Certificate Manager to add content key encryption to this endpoint.
+    #   For this feature to work, your DRM key provider must support content
+    #   key encryption.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackagev2-2022-12-25/SpekeKeyProvider AWS API Documentation

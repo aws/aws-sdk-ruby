@@ -806,6 +806,25 @@ module Aws::RDS
       data[:engine_lifecycle_support]
     end
 
+    # Indicates whether the DB cluster uses VPC-based networking.
+    #
+    # This setting is applicable only for Aurora PostgreSQL clusters created
+    # through express configuration.
+    # @return [Boolean]
+    def vpc_networking_enabled
+      data[:vpc_networking_enabled]
+    end
+
+    # Indicates whether the DB cluster has internet-based connectivity
+    # enabled through an internet access gateway.
+    #
+    # This setting is applicable only for Aurora PostgreSQL clusters created
+    # through express configuration.
+    # @return [Boolean]
+    def internet_access_gateway_enabled
+      data[:internet_access_gateway_enabled]
+    end
+
     # @!endgroup
 
     # @return [Client]
@@ -1034,6 +1053,7 @@ module Aws::RDS
     #       },
     #     ],
     #     master_user_authentication_type: "password", # accepts password, iam-db-auth
+    #     with_express_configuration: false,
     #     source_region: "String",
     #   })
     # @param [Hash] options ({})
@@ -1908,6 +1928,13 @@ module Aws::RDS
     #
     #   This option is only valid for RDS for PostgreSQL and Aurora PostgreSQL
     #   engines.
+    # @option options [Boolean] :with_express_configuration
+    #   Specifies to create an Aurora DB Cluster with express configuration in
+    #   seconds. Express configuration provides a cluster with a writer
+    #   instance and feature specific values set to all other input parameters
+    #   of this API.
+    #
+    #   Valid for Cluster Type: Aurora DB clusters
     # @option options [String] :source_region
     #   The source region of the snapshot. This is only needed when the
     #   shapshot is encrypted and in a different region.
@@ -2878,6 +2905,8 @@ module Aws::RDS
     #         ],
     #       },
     #     ],
+    #     enable_vpc_networking: false,
+    #     enable_internet_access_gateway: false,
     #   })
     # @param [Hash] options ({})
     # @option options [required, String] :db_cluster_identifier
@@ -3376,6 +3405,28 @@ module Aws::RDS
     #   * `cluster-auto-backup` - The DB cluster's automated backup.
     #
     #   ^
+    # @option options [Boolean] :enable_vpc_networking
+    #   Specifies whether to enable VPC networking for the restored DB
+    #   cluster. Set this parameter to `false` to create a cluster without the
+    #   VPC network interface (ENI).
+    #
+    #   This parameter must be used together with
+    #   `EnableInternetAccessGateway`. When both parameters are specified, IAM
+    #   database authentication is required. You must also specify
+    #   `EnableIAMDatabaseAuthentication`.
+    #
+    #   Valid for Cluster Type: Aurora PostgreSQL clusters
+    # @option options [Boolean] :enable_internet_access_gateway
+    #   Specifies that the restored DB cluster should use internet-based
+    #   connectivity through an internet access gateway. This allows clients
+    #   to connect to the cluster over the internet without requiring a VPC.
+    #
+    #   This parameter must be used together with `EnableVPCNetworking` set to
+    #   `false`. When both parameters are specified, IAM database
+    #   authentication is required. You must also specify
+    #   `EnableIAMDatabaseAuthentication`.
+    #
+    #   Valid for Cluster Type: Aurora PostgreSQL clusters
     # @return [DBCluster]
     def restore(options = {})
       options = options.merge(source_db_cluster_identifier: @id)

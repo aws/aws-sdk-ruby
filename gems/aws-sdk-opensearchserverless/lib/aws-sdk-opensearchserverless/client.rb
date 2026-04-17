@@ -522,7 +522,7 @@ module Aws::OpenSearchServerless
     #   resp.collection_details #=> Array
     #   resp.collection_details[0].id #=> String
     #   resp.collection_details[0].name #=> String
-    #   resp.collection_details[0].status #=> String, one of "CREATING", "DELETING", "ACTIVE", "FAILED"
+    #   resp.collection_details[0].status #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE", "FAILED", "UPDATE_FAILED"
     #   resp.collection_details[0].type #=> String, one of "SEARCH", "TIMESERIES", "VECTORSEARCH"
     #   resp.collection_details[0].description #=> String
     #   resp.collection_details[0].arn #=> String
@@ -901,7 +901,7 @@ module Aws::OpenSearchServerless
     #
     #   resp.create_collection_detail.id #=> String
     #   resp.create_collection_detail.name #=> String
-    #   resp.create_collection_detail.status #=> String, one of "CREATING", "DELETING", "ACTIVE", "FAILED"
+    #   resp.create_collection_detail.status #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE", "FAILED", "UPDATE_FAILED"
     #   resp.create_collection_detail.type #=> String, one of "SEARCH", "TIMESERIES", "VECTORSEARCH"
     #   resp.create_collection_detail.description #=> String
     #   resp.create_collection_detail.arn #=> String
@@ -1413,7 +1413,7 @@ module Aws::OpenSearchServerless
     #
     #   resp.delete_collection_detail.id #=> String
     #   resp.delete_collection_detail.name #=> String
-    #   resp.delete_collection_detail.status #=> String, one of "CREATING", "DELETING", "ACTIVE", "FAILED"
+    #   resp.delete_collection_detail.status #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE", "FAILED", "UPDATE_FAILED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearchserverless-2021-11-01/DeleteCollection AWS API Documentation
     #
@@ -2024,7 +2024,7 @@ module Aws::OpenSearchServerless
     #   resp = client.list_collections({
     #     collection_filters: {
     #       name: "CollectionName",
-    #       status: "CREATING", # accepts CREATING, DELETING, ACTIVE, FAILED
+    #       status: "CREATING", # accepts CREATING, UPDATING, DELETING, ACTIVE, FAILED, UPDATE_FAILED
     #       collection_group_name: "CollectionGroupName",
     #     },
     #     next_token: "String",
@@ -2036,7 +2036,7 @@ module Aws::OpenSearchServerless
     #   resp.collection_summaries #=> Array
     #   resp.collection_summaries[0].id #=> String
     #   resp.collection_summaries[0].name #=> String
-    #   resp.collection_summaries[0].status #=> String, one of "CREATING", "DELETING", "ACTIVE", "FAILED"
+    #   resp.collection_summaries[0].status #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE", "FAILED", "UPDATE_FAILED"
     #   resp.collection_summaries[0].arn #=> String
     #   resp.collection_summaries[0].kms_key_arn #=> String
     #   resp.collection_summaries[0].collection_group_name #=> String
@@ -2512,6 +2512,10 @@ module Aws::OpenSearchServerless
     # @option params [String] :description
     #   A description of the collection.
     #
+    # @option params [Types::VectorOptions] :vector_options
+    #   Configuration options for vector search capabilities in the
+    #   collection.
+    #
     # @option params [String] :client_token
     #   Unique, case-sensitive identifier to ensure idempotency of the
     #   request.
@@ -2528,6 +2532,9 @@ module Aws::OpenSearchServerless
     #   resp = client.update_collection({
     #     id: "CollectionId", # required
     #     description: "UpdateCollectionRequestDescriptionString",
+    #     vector_options: {
+    #       serverless_vector_acceleration: "ENABLED", # required, accepts ENABLED, DISABLED, ALLOWED
+    #     },
     #     client_token: "ClientToken",
     #   })
     #
@@ -2535,9 +2542,10 @@ module Aws::OpenSearchServerless
     #
     #   resp.update_collection_detail.id #=> String
     #   resp.update_collection_detail.name #=> String
-    #   resp.update_collection_detail.status #=> String, one of "CREATING", "DELETING", "ACTIVE", "FAILED"
+    #   resp.update_collection_detail.status #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE", "FAILED", "UPDATE_FAILED"
     #   resp.update_collection_detail.type #=> String, one of "SEARCH", "TIMESERIES", "VECTORSEARCH"
     #   resp.update_collection_detail.description #=> String
+    #   resp.update_collection_detail.vector_options.serverless_vector_acceleration #=> String, one of "ENABLED", "DISABLED", "ALLOWED"
     #   resp.update_collection_detail.arn #=> String
     #   resp.update_collection_detail.created_date #=> Integer
     #   resp.update_collection_detail.last_modified_date #=> Integer
@@ -2968,7 +2976,7 @@ module Aws::OpenSearchServerless
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-opensearchserverless'
-      context[:gem_version] = '1.54.0'
+      context[:gem_version] = '1.56.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

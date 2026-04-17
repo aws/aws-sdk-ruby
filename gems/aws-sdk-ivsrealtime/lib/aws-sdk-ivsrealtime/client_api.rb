@@ -194,6 +194,9 @@ module Aws::IVSRealTime
     RecordParticipantReplicas = Shapes::BooleanShape.new(name: 'RecordParticipantReplicas')
     RecordingConfiguration = Shapes::StructureShape.new(name: 'RecordingConfiguration')
     RecordingConfigurationFormat = Shapes::StringShape.new(name: 'RecordingConfigurationFormat')
+    RedundantIngest = Shapes::BooleanShape.new(name: 'RedundantIngest')
+    RedundantIngestCredential = Shapes::StructureShape.new(name: 'RedundantIngestCredential')
+    RedundantIngestCredentials = Shapes::ListShape.new(name: 'RedundantIngestCredentials')
     Replica = Shapes::BooleanShape.new(name: 'Replica')
     ReplicationState = Shapes::StringShape.new(name: 'ReplicationState')
     ReplicationType = Shapes::StringShape.new(name: 'ReplicationType')
@@ -333,6 +336,7 @@ module Aws::IVSRealTime
     CreateIngestConfigurationRequest.add_member(:attributes, Shapes::ShapeRef.new(shape: ParticipantAttributes, location_name: "attributes"))
     CreateIngestConfigurationRequest.add_member(:ingest_protocol, Shapes::ShapeRef.new(shape: IngestProtocol, required: true, location_name: "ingestProtocol"))
     CreateIngestConfigurationRequest.add_member(:insecure_ingest, Shapes::ShapeRef.new(shape: InsecureIngest, location_name: "insecureIngest"))
+    CreateIngestConfigurationRequest.add_member(:redundant_ingest, Shapes::ShapeRef.new(shape: RedundantIngest, location_name: "redundantIngest"))
     CreateIngestConfigurationRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     CreateIngestConfigurationRequest.struct_class = Types::CreateIngestConfigurationRequest
 
@@ -538,6 +542,8 @@ module Aws::IVSRealTime
     IngestConfiguration.add_member(:participant_id, Shapes::ShapeRef.new(shape: ParticipantId, required: true, location_name: "participantId"))
     IngestConfiguration.add_member(:state, Shapes::ShapeRef.new(shape: IngestConfigurationState, required: true, location_name: "state"))
     IngestConfiguration.add_member(:user_id, Shapes::ShapeRef.new(shape: UserId, location_name: "userId"))
+    IngestConfiguration.add_member(:redundant_ingest, Shapes::ShapeRef.new(shape: RedundantIngest, location_name: "redundantIngest"))
+    IngestConfiguration.add_member(:redundant_ingest_credentials, Shapes::ShapeRef.new(shape: RedundantIngestCredentials, location_name: "redundantIngestCredentials"))
     IngestConfiguration.add_member(:attributes, Shapes::ShapeRef.new(shape: ParticipantAttributes, location_name: "attributes"))
     IngestConfiguration.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     IngestConfiguration.struct_class = Types::IngestConfiguration
@@ -551,6 +557,7 @@ module Aws::IVSRealTime
     IngestConfigurationSummary.add_member(:participant_id, Shapes::ShapeRef.new(shape: ParticipantId, required: true, location_name: "participantId"))
     IngestConfigurationSummary.add_member(:state, Shapes::ShapeRef.new(shape: IngestConfigurationState, required: true, location_name: "state"))
     IngestConfigurationSummary.add_member(:user_id, Shapes::ShapeRef.new(shape: UserId, location_name: "userId"))
+    IngestConfigurationSummary.add_member(:redundant_ingest, Shapes::ShapeRef.new(shape: RedundantIngest, location_name: "redundantIngest"))
     IngestConfigurationSummary.struct_class = Types::IngestConfigurationSummary
 
     InternalServerException.add_member(:access_control_allow_origin, Shapes::ShapeRef.new(shape: String, location: "header", location_name: "Access-Control-Allow-Origin"))
@@ -690,6 +697,8 @@ module Aws::IVSRealTime
     Participant.add_member(:replication_state, Shapes::ShapeRef.new(shape: ReplicationState, location_name: "replicationState"))
     Participant.add_member(:source_stage_arn, Shapes::ShapeRef.new(shape: StageArn, location_name: "sourceStageArn"))
     Participant.add_member(:source_session_id, Shapes::ShapeRef.new(shape: StageSessionId, location_name: "sourceSessionId"))
+    Participant.add_member(:redundant_ingest, Shapes::ShapeRef.new(shape: RedundantIngest, location_name: "redundantIngest"))
+    Participant.add_member(:ingest_configuration_arn, Shapes::ShapeRef.new(shape: IngestConfigurationArn, location_name: "ingestConfigurationArn"))
     Participant.struct_class = Types::Participant
 
     ParticipantAttributes.key = Shapes::ShapeRef.new(shape: String)
@@ -722,6 +731,8 @@ module Aws::IVSRealTime
     ParticipantSummary.add_member(:replication_state, Shapes::ShapeRef.new(shape: ReplicationState, location_name: "replicationState"))
     ParticipantSummary.add_member(:source_stage_arn, Shapes::ShapeRef.new(shape: StageArn, location_name: "sourceStageArn"))
     ParticipantSummary.add_member(:source_session_id, Shapes::ShapeRef.new(shape: StageSessionId, location_name: "sourceSessionId"))
+    ParticipantSummary.add_member(:redundant_ingest, Shapes::ShapeRef.new(shape: RedundantIngest, location_name: "redundantIngest"))
+    ParticipantSummary.add_member(:ingest_configuration_arn, Shapes::ShapeRef.new(shape: IngestConfigurationArn, location_name: "ingestConfigurationArn"))
     ParticipantSummary.struct_class = Types::ParticipantSummary
 
     ParticipantThumbnailConfiguration.add_member(:target_interval_seconds, Shapes::ShapeRef.new(shape: ThumbnailIntervalSeconds, location_name: "targetIntervalSeconds"))
@@ -794,6 +805,12 @@ module Aws::IVSRealTime
     RecordingConfiguration.add_member(:hls_configuration, Shapes::ShapeRef.new(shape: CompositionRecordingHlsConfiguration, location_name: "hlsConfiguration"))
     RecordingConfiguration.add_member(:format, Shapes::ShapeRef.new(shape: RecordingConfigurationFormat, location_name: "format"))
     RecordingConfiguration.struct_class = Types::RecordingConfiguration
+
+    RedundantIngestCredential.add_member(:participant_id, Shapes::ShapeRef.new(shape: ParticipantId, location_name: "participantId"))
+    RedundantIngestCredential.add_member(:stream_key, Shapes::ShapeRef.new(shape: StreamKey, location_name: "streamKey"))
+    RedundantIngestCredential.struct_class = Types::RedundantIngestCredential
+
+    RedundantIngestCredentials.member = Shapes::ShapeRef.new(shape: RedundantIngestCredential)
 
     ResourceNotFoundException.add_member(:access_control_allow_origin, Shapes::ShapeRef.new(shape: String, location: "header", location_name: "Access-Control-Allow-Origin"))
     ResourceNotFoundException.add_member(:access_control_expose_headers, Shapes::ShapeRef.new(shape: String, location: "header", location_name: "Access-Control-Expose-Headers"))
@@ -943,6 +960,7 @@ module Aws::IVSRealTime
 
     UpdateIngestConfigurationRequest.add_member(:arn, Shapes::ShapeRef.new(shape: IngestConfigurationArn, required: true, location_name: "arn"))
     UpdateIngestConfigurationRequest.add_member(:stage_arn, Shapes::ShapeRef.new(shape: IngestConfigurationStageArn, location_name: "stageArn"))
+    UpdateIngestConfigurationRequest.add_member(:redundant_ingest, Shapes::ShapeRef.new(shape: RedundantIngest, location_name: "redundantIngest"))
     UpdateIngestConfigurationRequest.struct_class = Types::UpdateIngestConfigurationRequest
 
     UpdateIngestConfigurationResponse.add_member(:ingest_configuration, Shapes::ShapeRef.new(shape: IngestConfiguration, location_name: "ingestConfiguration"))

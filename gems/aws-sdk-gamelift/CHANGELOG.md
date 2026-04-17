@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.124.0 (2026-04-02)
+------------------
+
+* Feature - Amazon GameLift Servers now includes a ComputeName field in game session API responses, making it easier to identify which compute is hosting a game session without cross-referencing IP addresses.
+
+1.123.0 (2026-03-30)
+------------------
+
+* Feature - Update CreateScript API documentation.
+
+1.122.0 (2026-03-24)
+------------------
+
+* Feature - Amazon GameLift Servers launches UDP ping beacons in the Beijing and Ningxia (China) Regions to help measure real-time network latency for multiplayer games. The ListLocations API is now available in these regions to provide endpoint domain and port information as part of the locations list.
+
+1.121.0 (2026-03-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.120.0 (2026-03-04)
+------------------
+
+* Feature - Amazon GameLift Servers now offers DDoS protection for Linux-based EC2 and Container Fleets on SDKv5. The player gateway proxy relay network provides traffic validation, per-player rate limiting, and game server IP address obfuscation all with negligible added latency and no additional cost.
+
 1.119.0 (2026-01-29)
 ------------------
 

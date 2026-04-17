@@ -5887,6 +5887,16 @@ module Aws
                             ) -> _DeleteBotAliasResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteBotAliasResponseSuccess
 
+      interface _DeleteBotAnalyzerRecommendationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteBotAnalyzerRecommendationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LexModelsV2/Client.html#delete_bot_analyzer_recommendation-instance_method
+      def delete_bot_analyzer_recommendation: (
+                                                bot_id: ::String,
+                                                bot_analyzer_request_id: ::String
+                                              ) -> _DeleteBotAnalyzerRecommendationResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteBotAnalyzerRecommendationResponseSuccess
+
       interface _DeleteBotLocaleResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteBotLocaleResponse]
         def bot_id: () -> ::String
@@ -6081,6 +6091,25 @@ module Aws
                                 bot_id: ::String
                               ) -> _DescribeBotAliasResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeBotAliasResponseSuccess
+
+      interface _DescribeBotAnalyzerRecommendationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeBotAnalyzerRecommendationResponse]
+        def bot_id: () -> ::String
+        def bot_version: () -> ::String
+        def locale_id: () -> ::String
+        def bot_analyzer_status: () -> ("Processing" | "Available" | "Failed" | "Stopping" | "Stopped")
+        def creation_date_time: () -> ::Time
+        def bot_analyzer_recommendation_list: () -> ::Array[Types::BotAnalyzerRecommendation]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LexModelsV2/Client.html#describe_bot_analyzer_recommendation-instance_method
+      def describe_bot_analyzer_recommendation: (
+                                                  bot_id: ::String,
+                                                  bot_analyzer_request_id: ::String,
+                                                  ?next_token: ::String,
+                                                  ?max_results: ::Integer
+                                                ) -> _DescribeBotAnalyzerRecommendationResponseSuccess
+                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeBotAnalyzerRecommendationResponseSuccess
 
       interface _DescribeBotLocaleResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeBotLocaleResponse]
@@ -6523,6 +6552,24 @@ module Aws
                               ?next_token: ::String
                             ) -> _ListBotAliasesResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListBotAliasesResponseSuccess
+
+      interface _ListBotAnalyzerHistoryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListBotAnalyzerHistoryResponse]
+        def bot_id: () -> ::String
+        def locale_id: () -> ::String
+        def bot_version: () -> ::String
+        def bot_analyzer_history_list: () -> ::Array[Types::BotAnalyzerHistorySummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LexModelsV2/Client.html#list_bot_analyzer_history-instance_method
+      def list_bot_analyzer_history: (
+                                       bot_id: ::String,
+                                       ?locale_id: ::String,
+                                       ?bot_version: ::String,
+                                       ?next_token: ::String,
+                                       ?max_results: ::Integer
+                                     ) -> _ListBotAnalyzerHistoryResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListBotAnalyzerHistoryResponseSuccess
 
       interface _ListBotLocalesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListBotLocalesResponse]
@@ -7235,6 +7282,24 @@ module Aws
                                          ) -> _SearchAssociatedTranscriptsResponseSuccess
                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SearchAssociatedTranscriptsResponseSuccess
 
+      interface _StartBotAnalyzerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartBotAnalyzerResponse]
+        def bot_id: () -> ::String
+        def bot_version: () -> ::String
+        def locale_id: () -> ::String
+        def bot_analyzer_status: () -> ("Processing" | "Available" | "Failed" | "Stopping" | "Stopped")
+        def bot_analyzer_request_id: () -> ::String
+        def creation_date_time: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LexModelsV2/Client.html#start_bot_analyzer-instance_method
+      def start_bot_analyzer: (
+                                bot_id: ::String,
+                                analysis_scope: ("BotLocale"),
+                                ?locale_id: ::String,
+                                ?bot_version: ::String
+                              ) -> _StartBotAnalyzerResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartBotAnalyzerResponseSuccess
+
       interface _StartBotRecommendationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::StartBotRecommendationResponse]
         def bot_id: () -> ::String
@@ -7435,6 +7500,21 @@ module Aws
                                        ?test_set_tags: Hash[::String, ::String]
                                      ) -> _StartTestSetGenerationResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartTestSetGenerationResponseSuccess
+
+      interface _StopBotAnalyzerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StopBotAnalyzerResponse]
+        def bot_id: () -> ::String
+        def bot_version: () -> ::String
+        def locale_id: () -> ::String
+        def bot_analyzer_status: () -> ("Processing" | "Available" | "Failed" | "Stopping" | "Stopped")
+        def bot_analyzer_request_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LexModelsV2/Client.html#stop_bot_analyzer-instance_method
+      def stop_bot_analyzer: (
+                               bot_id: ::String,
+                               bot_analyzer_request_id: ::String
+                             ) -> _StopBotAnalyzerResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopBotAnalyzerResponseSuccess
 
       interface _StopBotRecommendationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::StopBotRecommendationResponse]

@@ -28,8 +28,10 @@ module Aws::MedicalImaging
   #
   # ## Error Classes
   # * {AccessDeniedException}
+  # * {BadRequestException}
   # * {ConflictException}
   # * {InternalServerException}
+  # * {NotAcceptableException}
   # * {ResourceNotFoundException}
   # * {ServiceQuotaExceededException}
   # * {ThrottlingException}
@@ -46,6 +48,21 @@ module Aws::MedicalImaging
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::MedicalImaging::Types::AccessDeniedException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class BadRequestException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::MedicalImaging::Types::BadRequestException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
@@ -76,6 +93,21 @@ module Aws::MedicalImaging
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::MedicalImaging::Types::InternalServerException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class NotAcceptableException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::MedicalImaging::Types::NotAcceptableException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

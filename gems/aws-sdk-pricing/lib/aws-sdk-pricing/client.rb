@@ -790,13 +790,13 @@ module Aws::Pricing
     # [1]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_pricing_GetPriceListFileUrl.html
     #
     # @option params [required, String] :service_code
-    #   The service code or the Savings Plan service code for the attributes
+    #   The service code or the Savings Plans service code for the attributes
     #   that you want to retrieve. For example, to get the list of applicable
     #   Amazon EC2 price lists, use `AmazonEC2`. For a full list of service
     #   codes containing On-Demand and Reserved Instance (RI) pricing, use the
     #   [DescribeServices][1] API.
     #
-    #   To retrieve the Reserved Instance and Compute Savings Plan price
+    #   To retrieve the Reserved Instance and Compute Savings Plans price
     #   lists, use `ComputeSavingsPlans`.
     #
     #   To retrieve Machine Learning Savings Plans price lists, use
@@ -886,7 +886,7 @@ module Aws::Pricing
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-pricing'
-      context[:gem_version] = '1.89.0'
+      context[:gem_version] = '1.91.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

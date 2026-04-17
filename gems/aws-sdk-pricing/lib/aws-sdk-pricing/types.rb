@@ -150,11 +150,6 @@ module Aws::Pricing
     #   such as `AmazonEC2`. If you're filtering by attribute name, this is
     #   the attribute value that you want the returned products to match,
     #   such as a `Provisioned IOPS` volume.
-    #
-    #   For `ANY_OF` and `NONE_OF` filter types, you can provide multiple
-    #   values as a comma-separated string. For example,
-    #   `t2.micro,t2.small,t2.medium` or `Compute optimized, GPU instance,
-    #   Micro instances`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pricing-2017-10-15/Filter AWS API Documentation
@@ -359,13 +354,13 @@ module Aws::Pricing
     end
 
     # @!attribute [rw] service_code
-    #   The service code or the Savings Plan service code for the attributes
-    #   that you want to retrieve. For example, to get the list of
-    #   applicable Amazon EC2 price lists, use `AmazonEC2`. For a full list
-    #   of service codes containing On-Demand and Reserved Instance (RI)
-    #   pricing, use the [DescribeServices][1] API.
+    #   The service code or the Savings Plans service code for the
+    #   attributes that you want to retrieve. For example, to get the list
+    #   of applicable Amazon EC2 price lists, use `AmazonEC2`. For a full
+    #   list of service codes containing On-Demand and Reserved Instance
+    #   (RI) pricing, use the [DescribeServices][1] API.
     #
-    #   To retrieve the Reserved Instance and Compute Savings Plan price
+    #   To retrieve the Reserved Instance and Compute Savings Plans price
     #   lists, use `ComputeSavingsPlans`.
     #
     #   To retrieve Machine Learning Savings Plans price lists, use

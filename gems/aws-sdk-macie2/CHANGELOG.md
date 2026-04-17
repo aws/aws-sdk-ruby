@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.100.0 (2026-04-13)
+------------------
+
+* Feature - This release adds an optional expectedBucketOwner field to the Macie S3 export configuration, allowing customers to verify bucket ownership before Macie writes results to the destination bucket.
+
+1.99.0 (2026-03-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.98.0 (2026-01-16)
 ------------------
 

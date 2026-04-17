@@ -1549,6 +1549,7 @@ module Aws::DynamoDB
 
     ReplicaDescription.add_member(:region_name, Shapes::ShapeRef.new(shape: RegionName, location_name: "RegionName"))
     ReplicaDescription.add_member(:replica_status, Shapes::ShapeRef.new(shape: ReplicaStatus, location_name: "ReplicaStatus"))
+    ReplicaDescription.add_member(:replica_arn, Shapes::ShapeRef.new(shape: String, location_name: "ReplicaArn"))
     ReplicaDescription.add_member(:replica_status_description, Shapes::ShapeRef.new(shape: ReplicaStatusDescription, location_name: "ReplicaStatusDescription"))
     ReplicaDescription.add_member(:replica_status_percent_progress, Shapes::ShapeRef.new(shape: ReplicaStatusPercentProgress, location_name: "ReplicaStatusPercentProgress"))
     ReplicaDescription.add_member(:kms_master_key_id, Shapes::ShapeRef.new(shape: KMSMasterKeyId, location_name: "KMSMasterKeyId"))
@@ -2015,6 +2016,7 @@ module Aws::DynamoDB
     UpdateTableInput.add_member(:global_table_witness_updates, Shapes::ShapeRef.new(shape: GlobalTableWitnessGroupUpdateList, location_name: "GlobalTableWitnessUpdates"))
     UpdateTableInput.add_member(:on_demand_throughput, Shapes::ShapeRef.new(shape: OnDemandThroughput, location_name: "OnDemandThroughput"))
     UpdateTableInput.add_member(:warm_throughput, Shapes::ShapeRef.new(shape: WarmThroughput, location_name: "WarmThroughput"))
+    UpdateTableInput.add_member(:global_table_settings_replication_mode, Shapes::ShapeRef.new(shape: GlobalTableSettingsReplicationMode, location_name: "GlobalTableSettingsReplicationMode"))
     UpdateTableInput.struct_class = Types::UpdateTableInput
 
     UpdateTableOutput.add_member(:table_description, Shapes::ShapeRef.new(shape: TableDescription, location_name: "TableDescription"))

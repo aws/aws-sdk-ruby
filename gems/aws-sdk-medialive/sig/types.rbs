@@ -495,6 +495,7 @@ module Aws::MediaLive
       attr_accessor channel_engine_version: Types::ChannelEngineVersionResponse
       attr_accessor linked_channel_settings: Types::DescribeLinkedChannelSettings
       attr_accessor channel_security_groups: ::Array[::String]
+      attr_accessor inference_settings: Types::DescribeInferenceSettings
       SENSITIVE: []
     end
 
@@ -531,6 +532,7 @@ module Aws::MediaLive
       attr_accessor used_channel_engine_versions: ::Array[Types::ChannelEngineVersionResponse]
       attr_accessor linked_channel_settings: Types::DescribeLinkedChannelSettings
       attr_accessor channel_security_groups: ::Array[::String]
+      attr_accessor inference_settings: Types::DescribeInferenceSettings
       SENSITIVE: []
     end
 
@@ -582,6 +584,7 @@ module Aws::MediaLive
       attr_accessor dry_run: bool
       attr_accessor linked_channel_settings: Types::LinkedChannelSettings
       attr_accessor channel_security_groups: ::Array[::String]
+      attr_accessor inference_settings: Types::InferenceSettings
       SENSITIVE: []
     end
 
@@ -605,6 +608,7 @@ module Aws::MediaLive
       attr_accessor dry_run: bool
       attr_accessor linked_channel_settings: Types::LinkedChannelSettings
       attr_accessor channel_security_groups: ::Array[::String]
+      attr_accessor inference_settings: Types::InferenceSettings
       SENSITIVE: []
     end
 
@@ -796,6 +800,7 @@ module Aws::MediaLive
       attr_accessor channel_engine_version: Types::ChannelEngineVersionResponse
       attr_accessor linked_channel_settings: Types::DescribeLinkedChannelSettings
       attr_accessor channel_security_groups: ::Array[::String]
+      attr_accessor inference_settings: Types::DescribeInferenceSettings
       SENSITIVE: []
     end
 
@@ -932,6 +937,7 @@ module Aws::MediaLive
       attr_accessor channel_engine_version: Types::ChannelEngineVersionResponse
       attr_accessor linked_channel_settings: Types::DescribeLinkedChannelSettings
       attr_accessor channel_security_groups: ::Array[::String]
+      attr_accessor inference_settings: Types::DescribeInferenceSettings
       SENSITIVE: []
     end
 
@@ -2580,6 +2586,7 @@ module Aws::MediaLive
       attr_accessor settings: ::Array[Types::OutputDestinationSettings]
       attr_accessor srt_settings: ::Array[Types::SrtOutputDestinationSettings]
       attr_accessor logical_interface_names: ::Array[::String]
+      attr_accessor media_connect_router_settings: ::Array[Types::MediaConnectRouterOutputDestinationSettings]
       SENSITIVE: []
     end
 
@@ -2609,6 +2616,7 @@ module Aws::MediaLive
       attr_accessor udp_group_settings: Types::UdpGroupSettings
       attr_accessor cmaf_ingest_group_settings: Types::CmafIngestGroupSettings
       attr_accessor srt_group_settings: Types::SrtGroupSettings
+      attr_accessor media_connect_router_group_settings: Types::MediaConnectRouterGroupSettings
       SENSITIVE: []
     end
 
@@ -2635,6 +2643,7 @@ module Aws::MediaLive
       attr_accessor udp_output_settings: Types::UdpOutputSettings
       attr_accessor cmaf_ingest_output_settings: Types::CmafIngestOutputSettings
       attr_accessor srt_output_settings: Types::SrtOutputSettings
+      attr_accessor media_connect_router_output_settings: Types::MediaConnectRouterOutputSettings
       SENSITIVE: []
     end
 
@@ -2978,6 +2987,7 @@ module Aws::MediaLive
       attr_accessor channel_engine_version: Types::ChannelEngineVersionResponse
       attr_accessor linked_channel_settings: Types::DescribeLinkedChannelSettings
       attr_accessor channel_security_groups: ::Array[::String]
+      attr_accessor inference_settings: Types::DescribeInferenceSettings
       SENSITIVE: []
     end
 
@@ -3097,6 +3107,7 @@ module Aws::MediaLive
       attr_accessor channel_engine_version: Types::ChannelEngineVersionResponse
       attr_accessor linked_channel_settings: Types::DescribeLinkedChannelSettings
       attr_accessor channel_security_groups: ::Array[::String]
+      attr_accessor inference_settings: Types::DescribeInferenceSettings
       SENSITIVE: []
     end
 
@@ -3290,6 +3301,8 @@ module Aws::MediaLive
       attr_accessor anywhere_settings: Types::AnywhereSettings
       attr_accessor linked_channel_settings: Types::LinkedChannelSettings
       attr_accessor channel_security_groups: ::Array[::String]
+      attr_accessor inference_settings: Types::InferenceSettings
+      attr_accessor special_router_settings: Types::SpecialRouterSettings
       SENSITIVE: []
     end
 
@@ -3327,6 +3340,8 @@ module Aws::MediaLive
       attr_accessor anywhere_settings: Types::AnywhereSettings
       attr_accessor linked_channel_settings: Types::LinkedChannelSettings
       attr_accessor channel_security_groups: ::Array[::String]
+      attr_accessor inference_settings: Types::InferenceSettings
+      attr_accessor special_router_settings: Types::SpecialRouterSettings
       SENSITIVE: []
     end
 
@@ -3533,7 +3548,7 @@ module Aws::MediaLive
       attr_accessor height: ::Integer
       attr_accessor name: ::String
       attr_accessor respond_to_afd: ("NONE" | "PASSTHROUGH" | "RESPOND")
-      attr_accessor scaling_behavior: ("DEFAULT" | "STRETCH_TO_OUTPUT")
+      attr_accessor scaling_behavior: ("DEFAULT" | "STRETCH_TO_OUTPUT" | "SMART_CROP")
       attr_accessor sharpness: ::Integer
       attr_accessor width: ::Integer
       SENSITIVE: []
@@ -3637,6 +3652,7 @@ module Aws::MediaLive
       attr_accessor channel_engine_version: Types::ChannelEngineVersionResponse
       attr_accessor linked_channel_settings: Types::DescribeLinkedChannelSettings
       attr_accessor channel_security_groups: ::Array[::String]
+      attr_accessor inference_settings: Types::DescribeInferenceSettings
       SENSITIVE: []
     end
 
@@ -4787,6 +4803,7 @@ module Aws::MediaLive
       attr_accessor hdr_10_settings: Types::Hdr10Settings
       attr_accessor rec_601_settings: Types::Rec601Settings
       attr_accessor rec_709_settings: Types::Rec709Settings
+      attr_accessor hlg_2020_settings: Types::Hlg2020Settings
       SENSITIVE: []
     end
 
@@ -5939,6 +5956,45 @@ module Aws::MediaLive
       attr_accessor decryption: Types::SrtListenerDecryptionRequest
       attr_accessor minimum_latency: ::Integer
       attr_accessor stream_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeInferenceSettings
+      attr_accessor feed_arn: ::String
+      SENSITIVE: []
+    end
+
+    class InferenceSettings
+      attr_accessor feed_arn: ::String
+      SENSITIVE: []
+    end
+
+    class MediaConnectRouterContainerSettings
+      attr_accessor m2ts_settings: Types::M2tsSettings
+      SENSITIVE: []
+    end
+
+    class MediaConnectRouterGroupSettings
+      attr_accessor availability_zones: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class MediaConnectRouterOutputConnectionMap
+      attr_accessor pipeline_0: ::String
+      attr_accessor pipeline_1: ::String
+      SENSITIVE: []
+    end
+
+    class MediaConnectRouterOutputDestinationSettings
+      attr_accessor encryption_type: ("AUTOMATIC" | "SECRETS_MANAGER")
+      attr_accessor secret_arn: ::String
+      SENSITIVE: []
+    end
+
+    class MediaConnectRouterOutputSettings
+      attr_accessor connected_router_inputs: Types::MediaConnectRouterOutputConnectionMap
+      attr_accessor container_settings: Types::MediaConnectRouterContainerSettings
+      attr_accessor destination: Types::OutputLocationRef
       SENSITIVE: []
     end
   end

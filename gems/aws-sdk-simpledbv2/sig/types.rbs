@@ -1,0 +1,109 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::SimpleDBv2
+  module Types
+
+    class ConflictException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ExportSummary
+      attr_accessor export_arn: ::String
+      attr_accessor export_status: ("PENDING" | "IN_PROGRESS" | "SUCCEEDED" | "FAILED")
+      attr_accessor requested_at: ::Time
+      attr_accessor domain_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetExportRequest
+      attr_accessor export_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetExportResponse
+      attr_accessor export_arn: ::String
+      attr_accessor client_token: ::String
+      attr_accessor export_status: ("PENDING" | "IN_PROGRESS" | "SUCCEEDED" | "FAILED")
+      attr_accessor domain_name: ::String
+      attr_accessor requested_at: ::Time
+      attr_accessor s3_bucket: ::String
+      attr_accessor s3_key_prefix: ::String
+      attr_accessor s3_sse_algorithm: ("AES256" | "KMS")
+      attr_accessor s3_sse_kms_key_id: ::String
+      attr_accessor s3_bucket_owner: ::String
+      attr_accessor failure_code: ::String
+      attr_accessor failure_message: ::String
+      attr_accessor export_manifest: ::String
+      attr_accessor items_count: ::Integer
+      attr_accessor export_data_cutoff_time: ::Time
+      SENSITIVE: []
+    end
+
+    class InvalidNextTokenException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidParameterCombinationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidParameterValueException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListExportsRequest
+      attr_accessor domain_name: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListExportsResponse
+      attr_accessor export_summaries: ::Array[Types::ExportSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class NoSuchDomainException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class NoSuchExportException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class NumberExportsLimitExceeded
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class StartDomainExportRequest
+      attr_accessor client_token: ::String
+      attr_accessor domain_name: ::String
+      attr_accessor s3_bucket: ::String
+      attr_accessor s3_key_prefix: ::String
+      attr_accessor s3_sse_algorithm: ("AES256" | "KMS")
+      attr_accessor s3_sse_kms_key_id: ::String
+      attr_accessor s3_bucket_owner: ::String
+      SENSITIVE: []
+    end
+
+    class StartDomainExportResponse
+      attr_accessor client_token: ::String
+      attr_accessor export_arn: ::String
+      attr_accessor requested_at: ::Time
+      SENSITIVE: []
+    end
+  end
+end

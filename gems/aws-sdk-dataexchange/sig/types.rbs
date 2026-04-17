@@ -53,6 +53,11 @@ module Aws::DataExchange
       SENSITIVE: []
     end
 
+    class AssetConfiguration
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
     class AssetDestinationEntry
       attr_accessor asset_id: ::String
       attr_accessor bucket: ::String
@@ -185,6 +190,7 @@ module Aws::DataExchange
     end
 
     class CreateJobRequest
+      attr_accessor asset_configuration: Types::AssetConfiguration
       attr_accessor details: Types::RequestDetails
       attr_accessor type: ("IMPORT_ASSETS_FROM_S3" | "IMPORT_ASSET_FROM_SIGNED_URL" | "EXPORT_ASSETS_TO_S3" | "EXPORT_ASSET_TO_SIGNED_URL" | "EXPORT_REVISIONS_TO_S3" | "IMPORT_ASSETS_FROM_REDSHIFT_DATA_SHARES" | "IMPORT_ASSET_FROM_API_GATEWAY_API" | "CREATE_S3_DATA_ACCESS_FROM_S3_BUCKET" | "IMPORT_ASSETS_FROM_LAKE_FORMATION_TAG_POLICY")
       SENSITIVE: []
@@ -192,6 +198,7 @@ module Aws::DataExchange
 
     class CreateJobResponse
       attr_accessor arn: ::String
+      attr_accessor asset_configuration: Types::AssetConfiguration
       attr_accessor created_at: ::Time
       attr_accessor details: Types::ResponseDetails
       attr_accessor errors: ::Array[Types::JobError]
@@ -409,6 +416,7 @@ module Aws::DataExchange
       attr_accessor name: ::String
       attr_accessor revision_id: ::String
       attr_accessor source_id: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor updated_at: ::Time
       SENSITIVE: []
     end
@@ -480,6 +488,7 @@ module Aws::DataExchange
 
     class GetJobResponse
       attr_accessor arn: ::String
+      attr_accessor asset_configuration: Types::AssetConfiguration
       attr_accessor created_at: ::Time
       attr_accessor details: Types::ResponseDetails
       attr_accessor errors: ::Array[Types::JobError]
@@ -640,6 +649,7 @@ module Aws::DataExchange
 
     class JobEntry
       attr_accessor arn: ::String
+      attr_accessor asset_configuration: Types::AssetConfiguration
       attr_accessor created_at: ::Time
       attr_accessor details: Types::ResponseDetails
       attr_accessor errors: ::Array[Types::JobError]
@@ -1039,6 +1049,12 @@ module Aws::DataExchange
     class TableLFTagPolicyAndPermissions
       attr_accessor expression: ::Array[Types::LFTag]
       attr_accessor permissions: ::Array[("DESCRIBE" | "SELECT")]
+      SENSITIVE: []
+    end
+
+    class Tag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
       SENSITIVE: []
     end
 

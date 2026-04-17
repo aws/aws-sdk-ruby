@@ -494,6 +494,7 @@ module Aws::ElastiCache
       attr_accessor subnet_ids: ::Array[::String]
       attr_accessor snapshot_retention_limit: ::Integer
       attr_accessor daily_snapshot_time: ::String
+      attr_accessor network_type: ("ipv4" | "ipv6" | "dual_stack")
       SENSITIVE: []
     end
 
@@ -1673,6 +1674,7 @@ module Aws::ElastiCache
       attr_accessor subnet_ids: ::Array[::String]
       attr_accessor snapshot_retention_limit: ::Integer
       attr_accessor daily_snapshot_time: ::String
+      attr_accessor network_type: ("ipv4" | "ipv6" | "dual_stack")
       SENSITIVE: []
     end
 

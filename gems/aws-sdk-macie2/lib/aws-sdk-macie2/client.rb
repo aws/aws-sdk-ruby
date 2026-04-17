@@ -1818,6 +1818,7 @@ module Aws::Macie2
     # @example Response structure
     #
     #   resp.configuration.s3_destination.bucket_name #=> String
+    #   resp.configuration.s3_destination.expected_bucket_owner #=> String
     #   resp.configuration.s3_destination.key_prefix #=> String
     #   resp.configuration.s3_destination.kms_key_arn #=> String
     #
@@ -3327,6 +3328,7 @@ module Aws::Macie2
     #     configuration: { # required
     #       s3_destination: {
     #         bucket_name: "__string", # required
+    #         expected_bucket_owner: "__string",
     #         key_prefix: "__string",
     #         kms_key_arn: "__string", # required
     #       },
@@ -3336,6 +3338,7 @@ module Aws::Macie2
     # @example Response structure
     #
     #   resp.configuration.s3_destination.bucket_name #=> String
+    #   resp.configuration.s3_destination.expected_bucket_owner #=> String
     #   resp.configuration.s3_destination.key_prefix #=> String
     #   resp.configuration.s3_destination.kms_key_arn #=> String
     #
@@ -4066,7 +4069,7 @@ module Aws::Macie2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-macie2'
-      context[:gem_version] = '1.98.0'
+      context[:gem_version] = '1.100.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

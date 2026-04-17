@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.165.0 (2026-03-20)
+------------------
+
+* Feature - Adding ReplicaArn to ReplicaDescription of a global table replica
+
+1.164.0 (2026-03-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.163.0 (2026-02-23)
+------------------
+
+* Feature - This change supports the creation of multi-account global tables. It adds one new arguments to UpdateTable, GlobalTableSettingsReplicationMode.
+
 1.162.0 (2026-02-03)
 ------------------
 

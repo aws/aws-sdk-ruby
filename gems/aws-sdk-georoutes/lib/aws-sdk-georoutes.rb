@@ -49,12 +49,13 @@ module Aws::GeoRoutes
   end
   autoload :Client, 'aws-sdk-georoutes/client'
   autoload :Errors, 'aws-sdk-georoutes/errors'
+  autoload :Waiters, 'aws-sdk-georoutes/waiters'
   autoload :Resource, 'aws-sdk-georoutes/resource'
   autoload :EndpointParameters, 'aws-sdk-georoutes/endpoint_parameters'
   autoload :EndpointProvider, 'aws-sdk-georoutes/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-georoutes/endpoints'
 
-  GEM_VERSION = '1.18.0'
+  GEM_VERSION = '1.20.0'
 
 end
 

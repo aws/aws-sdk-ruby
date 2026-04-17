@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.311.0 (2026-04-16)
+------------------
+
+* Feature - Adds a new DescribeServerlessV2PlatformVersions API to describe platform version properties for Aurora Serverless v2. Also introduces a new valid maintenance action value for serverless platform version updates.
+
+1.310.0 (2026-03-24)
+------------------
+
+* Feature - Adds support in Aurora PostgreSQL serverless databases for express configuration based creation through WithExpressConfiguration in CreateDbCluster API, and for restoring clusters using RestoreDBClusterToPointInTime and RestoreDBClusterFromSnapshot APIs.
+
+1.309.0 (2026-03-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.308.0 (2026-02-17)
 ------------------
 

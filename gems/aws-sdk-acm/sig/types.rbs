@@ -13,6 +13,55 @@ module Aws::ACM
       SENSITIVE: []
     end
 
+    class AcmCertificateMetadata
+      attr_accessor created_at: ::Time
+      attr_accessor exported: bool
+      attr_accessor imported_at: ::Time
+      attr_accessor in_use: bool
+      attr_accessor issued_at: ::Time
+      attr_accessor renewal_eligibility: ("ELIGIBLE" | "INELIGIBLE")
+      attr_accessor revoked_at: ::Time
+      attr_accessor status: ("PENDING_VALIDATION" | "ISSUED" | "INACTIVE" | "EXPIRED" | "VALIDATION_TIMED_OUT" | "REVOKED" | "FAILED")
+      attr_accessor renewal_status: ("PENDING_AUTO_RENEWAL" | "PENDING_VALIDATION" | "SUCCESS" | "FAILED")
+      attr_accessor type: ("IMPORTED" | "AMAZON_ISSUED" | "PRIVATE")
+      attr_accessor export_option: ("ENABLED" | "DISABLED")
+      attr_accessor managed_by: ("CLOUDFRONT")
+      attr_accessor validation_method: ("EMAIL" | "DNS" | "HTTP")
+      SENSITIVE: []
+    end
+
+    class AcmCertificateMetadataFilter
+      attr_accessor status: ("PENDING_VALIDATION" | "ISSUED" | "INACTIVE" | "EXPIRED" | "VALIDATION_TIMED_OUT" | "REVOKED" | "FAILED")
+      attr_accessor renewal_status: ("PENDING_AUTO_RENEWAL" | "PENDING_VALIDATION" | "SUCCESS" | "FAILED")
+      attr_accessor type: ("IMPORTED" | "AMAZON_ISSUED" | "PRIVATE")
+      attr_accessor in_use: bool
+      attr_accessor exported: bool
+      attr_accessor export_option: ("ENABLED" | "DISABLED")
+      attr_accessor managed_by: ("CLOUDFRONT")
+      attr_accessor validation_method: ("EMAIL" | "DNS" | "HTTP")
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Status < AcmCertificateMetadataFilter
+      end
+      class RenewalStatus < AcmCertificateMetadataFilter
+      end
+      class Type < AcmCertificateMetadataFilter
+      end
+      class InUse < AcmCertificateMetadataFilter
+      end
+      class Exported < AcmCertificateMetadataFilter
+      end
+      class ExportOption < AcmCertificateMetadataFilter
+      end
+      class ManagedBy < AcmCertificateMetadataFilter
+      end
+      class ValidationMethod < AcmCertificateMetadataFilter
+      end
+      class Unknown < AcmCertificateMetadataFilter
+      end
+    end
+
     class AddTagsToCertificateRequest
       attr_accessor certificate_arn: ::String
       attr_accessor tags: ::Array[Types::Tag]
@@ -50,9 +99,64 @@ module Aws::ACM
       SENSITIVE: []
     end
 
+    class CertificateFilter
+      attr_accessor certificate_arn: ::String
+      attr_accessor x509_attribute_filter: Types::X509AttributeFilter
+      attr_accessor acm_certificate_metadata_filter: Types::AcmCertificateMetadataFilter
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class CertificateArn < CertificateFilter
+      end
+      class X509AttributeFilter < CertificateFilter
+      end
+      class AcmCertificateMetadataFilter < CertificateFilter
+      end
+      class Unknown < CertificateFilter
+      end
+    end
+
+    class CertificateFilterStatement
+      attr_accessor and: ::Array[Types::CertificateFilterStatement]
+      attr_accessor or: ::Array[Types::CertificateFilterStatement]
+      attr_accessor not: Types::CertificateFilterStatement
+      attr_accessor filter: Types::CertificateFilter
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class And < CertificateFilterStatement
+      end
+      class Or < CertificateFilterStatement
+      end
+      class Not < CertificateFilterStatement
+      end
+      class Filter < CertificateFilterStatement
+      end
+      class Unknown < CertificateFilterStatement
+      end
+    end
+
+    class CertificateMetadata
+      attr_accessor acm_certificate_metadata: Types::AcmCertificateMetadata
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class AcmCertificateMetadata < CertificateMetadata
+      end
+      class Unknown < CertificateMetadata
+      end
+    end
+
     class CertificateOptions
       attr_accessor certificate_transparency_logging_preference: ("ENABLED" | "DISABLED")
       attr_accessor export: ("ENABLED" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class CertificateSearchResult
+      attr_accessor certificate_arn: ::String
+      attr_accessor x509_attributes: Types::X509Attributes
+      attr_accessor certificate_metadata: Types::CertificateMetadata
       SENSITIVE: []
     end
 
@@ -80,8 +184,20 @@ module Aws::ACM
       SENSITIVE: []
     end
 
+    class CommonNameFilter
+      attr_accessor value: ::String
+      attr_accessor comparison_operator: ("CONTAINS" | "EQUALS")
+      SENSITIVE: []
+    end
+
     class ConflictException
       attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CustomAttribute
+      attr_accessor object_identifier: ::String
+      attr_accessor value: ::String
       SENSITIVE: []
     end
 
@@ -97,6 +213,32 @@ module Aws::ACM
 
     class DescribeCertificateResponse
       attr_accessor certificate: Types::CertificateDetail
+      SENSITIVE: []
+    end
+
+    class DistinguishedName
+      attr_accessor common_name: ::String
+      attr_accessor domain_components: ::Array[::String]
+      attr_accessor country: ::String
+      attr_accessor custom_attributes: ::Array[Types::CustomAttribute]
+      attr_accessor distinguished_name_qualifier: ::String
+      attr_accessor generation_qualifier: ::String
+      attr_accessor given_name: ::String
+      attr_accessor initials: ::String
+      attr_accessor locality: ::String
+      attr_accessor organization: ::String
+      attr_accessor organizational_unit: ::String
+      attr_accessor pseudonym: ::String
+      attr_accessor serial_number: ::String
+      attr_accessor state: ::String
+      attr_accessor surname: ::String
+      attr_accessor title: ::String
+      SENSITIVE: []
+    end
+
+    class DnsNameFilter
+      attr_accessor value: ::String
+      attr_accessor comparison_operator: ("CONTAINS" | "EQUALS")
       SENSITIVE: []
     end
 
@@ -148,6 +290,35 @@ module Aws::ACM
       attr_accessor export_option: ("ENABLED" | "DISABLED")
       attr_accessor managed_by: ("CLOUDFRONT")
       SENSITIVE: []
+    end
+
+    class GeneralName
+      attr_accessor directory_name: Types::DistinguishedName
+      attr_accessor dns_name: ::String
+      attr_accessor ip_address: ::String
+      attr_accessor other_name: Types::OtherName
+      attr_accessor registered_id: ::String
+      attr_accessor rfc_822_name: ::String
+      attr_accessor uniform_resource_identifier: ::String
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class DirectoryName < GeneralName
+      end
+      class DnsName < GeneralName
+      end
+      class IpAddress < GeneralName
+      end
+      class OtherName < GeneralName
+      end
+      class RegisteredId < GeneralName
+      end
+      class Rfc822Name < GeneralName
+      end
+      class UniformResourceIdentifier < GeneralName
+      end
+      class Unknown < GeneralName
+      end
     end
 
     class GetAccountConfigurationResponse
@@ -252,6 +423,12 @@ module Aws::ACM
       SENSITIVE: []
     end
 
+    class OtherName
+      attr_accessor object_identifier: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
     class PutAccountConfigurationRequest
       attr_accessor expiry_events: Types::ExpiryEventsConfiguration
       attr_accessor idempotency_token: ::String
@@ -336,6 +513,43 @@ module Aws::ACM
       SENSITIVE: []
     end
 
+    class SearchCertificatesRequest
+      attr_accessor filter_statement: Types::CertificateFilterStatement
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor sort_by: ("CREATED_AT" | "NOT_AFTER" | "STATUS" | "RENEWAL_STATUS" | "EXPORTED" | "IN_USE" | "NOT_BEFORE" | "KEY_ALGORITHM" | "TYPE" | "CERTIFICATE_ARN" | "COMMON_NAME" | "REVOKED_AT" | "RENEWAL_ELIGIBILITY" | "ISSUED_AT" | "MANAGED_BY" | "EXPORT_OPTION" | "VALIDATION_METHOD" | "IMPORTED_AT")
+      attr_accessor sort_order: ("ASCENDING" | "DESCENDING")
+      SENSITIVE: []
+    end
+
+    class SearchCertificatesResponse
+      attr_accessor results: ::Array[Types::CertificateSearchResult]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class SubjectAlternativeNameFilter
+      attr_accessor dns_name: Types::DnsNameFilter
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class DnsName < SubjectAlternativeNameFilter
+      end
+      class Unknown < SubjectAlternativeNameFilter
+      end
+    end
+
+    class SubjectFilter
+      attr_accessor common_name: Types::CommonNameFilter
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class CommonName < SubjectFilter
+      end
+      class Unknown < SubjectFilter
+      end
+    end
+
     class Tag
       attr_accessor key: ::String
       attr_accessor value: ::String
@@ -349,6 +563,19 @@ module Aws::ACM
 
     class ThrottlingException
       attr_accessor message: ::String
+      attr_accessor throttling_reasons: ::Array[Types::ThrottlingReason]
+      SENSITIVE: []
+    end
+
+    class ThrottlingReason
+      attr_accessor reason: ::String
+      attr_accessor resource: ::String
+      SENSITIVE: []
+    end
+
+    class TimestampRange
+      attr_accessor start: ::Time
+      attr_accessor end: ::Time
       SENSITIVE: []
     end
 
@@ -365,6 +592,51 @@ module Aws::ACM
 
     class ValidationException
       attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class X509AttributeFilter
+      attr_accessor subject: Types::SubjectFilter
+      attr_accessor subject_alternative_name: Types::SubjectAlternativeNameFilter
+      attr_accessor extended_key_usage: ("TLS_WEB_SERVER_AUTHENTICATION" | "TLS_WEB_CLIENT_AUTHENTICATION" | "CODE_SIGNING" | "EMAIL_PROTECTION" | "TIME_STAMPING" | "OCSP_SIGNING" | "IPSEC_END_SYSTEM" | "IPSEC_TUNNEL" | "IPSEC_USER" | "ANY" | "NONE" | "CUSTOM")
+      attr_accessor key_usage: ("DIGITAL_SIGNATURE" | "NON_REPUDIATION" | "KEY_ENCIPHERMENT" | "DATA_ENCIPHERMENT" | "KEY_AGREEMENT" | "CERTIFICATE_SIGNING" | "CRL_SIGNING" | "ENCIPHER_ONLY" | "DECIPHER_ONLY" | "ANY" | "CUSTOM")
+      attr_accessor key_algorithm: ("RSA_1024" | "RSA_2048" | "RSA_3072" | "RSA_4096" | "EC_prime256v1" | "EC_secp384r1" | "EC_secp521r1")
+      attr_accessor serial_number: ::String
+      attr_accessor not_after: Types::TimestampRange
+      attr_accessor not_before: Types::TimestampRange
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Subject < X509AttributeFilter
+      end
+      class SubjectAlternativeName < X509AttributeFilter
+      end
+      class ExtendedKeyUsage < X509AttributeFilter
+      end
+      class KeyUsage < X509AttributeFilter
+      end
+      class KeyAlgorithm < X509AttributeFilter
+      end
+      class SerialNumber < X509AttributeFilter
+      end
+      class NotAfter < X509AttributeFilter
+      end
+      class NotBefore < X509AttributeFilter
+      end
+      class Unknown < X509AttributeFilter
+      end
+    end
+
+    class X509Attributes
+      attr_accessor issuer: Types::DistinguishedName
+      attr_accessor subject: Types::DistinguishedName
+      attr_accessor subject_alternative_names: ::Array[Types::GeneralName]
+      attr_accessor extended_key_usages: ::Array[("TLS_WEB_SERVER_AUTHENTICATION" | "TLS_WEB_CLIENT_AUTHENTICATION" | "CODE_SIGNING" | "EMAIL_PROTECTION" | "TIME_STAMPING" | "OCSP_SIGNING" | "IPSEC_END_SYSTEM" | "IPSEC_TUNNEL" | "IPSEC_USER" | "ANY" | "NONE" | "CUSTOM")]
+      attr_accessor key_algorithm: ("RSA_1024" | "RSA_2048" | "RSA_3072" | "RSA_4096" | "EC_prime256v1" | "EC_secp384r1" | "EC_secp521r1")
+      attr_accessor key_usages: ::Array[("DIGITAL_SIGNATURE" | "NON_REPUDIATION" | "KEY_ENCIPHERMENT" | "DATA_ENCIPHERMENT" | "KEY_AGREEMENT" | "CERTIFICATE_SIGNING" | "CRL_SIGNING" | "ENCIPHER_ONLY" | "DECIPHER_ONLY" | "ANY" | "CUSTOM")]
+      attr_accessor serial_number: ::String
+      attr_accessor not_after: ::Time
+      attr_accessor not_before: ::Time
       SENSITIVE: []
     end
   end

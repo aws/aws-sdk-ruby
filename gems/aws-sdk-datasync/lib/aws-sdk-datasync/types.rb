@@ -305,7 +305,8 @@ module Aws::DataSync
     #   secret to store the location access credentials.
     #
     #   Make sure that DataSync has permission to access the KMS key that
-    #   you specify.
+    #   you specify. For more information, see [ Using a service-managed
+    #   secret encrypted with a custom KMS key][1].
     #
     #   <note markdown="1"> You can use either `CmkSecretConfig` (with `SasConfiguration`) or
     #   `CustomSecretConfig` (without `SasConfiguration`) to provide
@@ -313,6 +314,10 @@ module Aws::DataSync
     #   both parameters for the same request.
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/location-credentials.html#service-secret-custom-key
     #   @return [Types::CmkSecretConfig]
     #
     # @!attribute [rw] custom_secret_config
@@ -320,7 +325,8 @@ module Aws::DataSync
     #   Manager secret where the authentication token for an AzureBlob
     #   storage location is stored in plain text, in Secrets Manager. This
     #   configuration includes the secret ARN, and the ARN for an IAM role
-    #   that provides access to the secret.
+    #   that provides access to the secret. For more information, see [
+    #   Using a secret that you manage][1].
     #
     #   <note markdown="1"> You can use either `CmkSecretConfig` (with `SasConfiguration`) or
     #   `CustomSecretConfig` (without `SasConfiguration`) to provide
@@ -328,6 +334,10 @@ module Aws::DataSync
     #   both parameters for the same request.
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/location-credentials.html#custom-secret-custom-key
     #   @return [Types::CustomSecretConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/CreateLocationAzureBlobRequest AWS API Documentation
@@ -716,6 +726,53 @@ module Aws::DataSync
     #   File Server file system.
     #   @return [String]
     #
+    # @!attribute [rw] cmk_secret_config
+    #   Specifies configuration information for a DataSync-managed secret,
+    #   which includes the password that DataSync uses to access a specific
+    #   FSx Windows storage location, with a customer-managed KMS key.
+    #
+    #   When you include this parameter as part of a
+    #   `CreateLocationFsxWindows` request, you provide only the KMS key
+    #   ARN. DataSync uses this KMS key together with the `Password` you
+    #   specify for to create a DataSync-managed secret to store the
+    #   location access credentials.
+    #
+    #   Make sure that DataSync has permission to access the KMS key that
+    #   you specify. For more information, see [ Using a service-managed
+    #   secret encrypted with a custom KMS key][1].
+    #
+    #   <note markdown="1"> You can use either `CmkSecretConfig` (with `Password`) or
+    #   `CustomSecretConfig` (without `Password`) to provide credentials for
+    #   a `CreateLocationFsxWindows` request. Do not provide both parameters
+    #   for the same request.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/location-credentials.html#service-secret-custom-key
+    #   @return [Types::CmkSecretConfig]
+    #
+    # @!attribute [rw] custom_secret_config
+    #   Specifies configuration information for a customer-managed Secrets
+    #   Manager secret where the password for an FSx for Windows File Server
+    #   storage location is stored in plain text, in Secrets Manager. This
+    #   configuration includes the secret ARN, and the ARN for an IAM role
+    #   that provides access to the secret. For more information, see [
+    #   Using a secret that you manage][1].
+    #
+    #   <note markdown="1"> You can use either `CmkSecretConfig` (with `Password`) or
+    #   `CustomSecretConfig` (without `Password`) to provide credentials for
+    #   a `CreateLocationFsxWindows` request. Do not provide both parameters
+    #   for the same request.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/location-credentials.html#custom-secret-custom-key
+    #   @return [Types::CustomSecretConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/CreateLocationFsxWindowsRequest AWS API Documentation
     #
     class CreateLocationFsxWindowsRequest < Struct.new(
@@ -725,7 +782,9 @@ module Aws::DataSync
       :tags,
       :user,
       :domain,
-      :password)
+      :password,
+      :cmk_secret_config,
+      :custom_secret_config)
       SENSITIVE = [:password]
       include Aws::Structure
     end
@@ -840,6 +899,53 @@ module Aws::DataSync
     #   tags to name your resources.
     #   @return [Array<Types::TagListEntry>]
     #
+    # @!attribute [rw] cmk_secret_config
+    #   Specifies configuration information for a DataSync-managed secret,
+    #   which includes the Kerberos keytab that DataSync uses to access a
+    #   specific Hadoop Distributed File System (HDFS) storage location,
+    #   with a customer-managed KMS key.
+    #
+    #   When you include this parameter as part of a `CreateLocationHdfs`
+    #   request, you provide only the KMS key ARN. DataSync uses this KMS
+    #   key together with the `KerberosKeytab` you specify for to create a
+    #   DataSync-managed secret to store the location access credentials.
+    #
+    #   Make sure that DataSync has permission to access the KMS key that
+    #   you specify. For more information, see [ Using a service-managed
+    #   secret encrypted with a custom KMS key][1].
+    #
+    #   <note markdown="1"> You can use either `CmkSecretConfig` (with `KerberosKeytab`) or
+    #   `CustomSecretConfig` (without `KerberosKeytab`) to provide
+    #   credentials for a `CreateLocationHdfs` request. Do not provide both
+    #   parameters for the same request.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/location-credentials.html#service-secret-custom-key
+    #   @return [Types::CmkSecretConfig]
+    #
+    # @!attribute [rw] custom_secret_config
+    #   Specifies configuration information for a customer-managed Secrets
+    #   Manager secret where the Kerberos keytab for the HDFS storage
+    #   location is stored in binary, in Secrets Manager. This configuration
+    #   includes the secret ARN, and the ARN for an IAM role that provides
+    #   access to the secret. For more information, see [ Using a secret
+    #   that you manage][1].
+    #
+    #   <note markdown="1"> You can use either `CmkSecretConfig` (with `KerberosKeytab`) or
+    #   `CustomSecretConfig` (without `KerberosKeytab`) to provide
+    #   credentials for a `CreateLocationHdfs` request. Do not provide both
+    #   parameters for the same request.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/location-credentials.html#custom-secret-custom-key
+    #   @return [Types::CustomSecretConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/CreateLocationHdfsRequest AWS API Documentation
     #
     class CreateLocationHdfsRequest < Struct.new(
@@ -855,7 +961,9 @@ module Aws::DataSync
       :kerberos_keytab,
       :kerberos_krb_5_conf,
       :agent_arns,
-      :tags)
+      :tags,
+      :cmk_secret_config,
+      :custom_secret_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1046,7 +1154,8 @@ module Aws::DataSync
     #   store the location access credentials.
     #
     #   Make sure that DataSync has permission to access the KMS key that
-    #   you specify.
+    #   you specify. For more information, see [ Using a service-managed
+    #   secret encrypted with a custom KMS key][1].
     #
     #   <note markdown="1"> You can use either `CmkSecretConfig` (with `SecretKey`) or
     #   `CustomSecretConfig` (without `SecretKey`) to provide credentials
@@ -1054,6 +1163,10 @@ module Aws::DataSync
     #   parameters for the same request.
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/location-credentials.html#service-secret-custom-key
     #   @return [Types::CmkSecretConfig]
     #
     # @!attribute [rw] custom_secret_config
@@ -1061,7 +1174,8 @@ module Aws::DataSync
     #   Manager secret where the secret key for a specific object storage
     #   location is stored in plain text, in Secrets Manager. This
     #   configuration includes the secret ARN, and the ARN for an IAM role
-    #   that provides access to the secret.
+    #   that provides access to the secret. For more information, see [
+    #   Using a secret that you manage][1].
     #
     #   <note markdown="1"> You can use either `CmkSecretConfig` (with `SecretKey`) or
     #   `CustomSecretConfig` (without `SecretKey`) to provide credentials
@@ -1069,6 +1183,10 @@ module Aws::DataSync
     #   parameters for the same request.
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/location-credentials.html#custom-secret-custom-key
     #   @return [Types::CustomSecretConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/CreateLocationObjectStorageRequest AWS API Documentation
@@ -1288,7 +1406,8 @@ module Aws::DataSync
     #   to store the location access credentials.
     #
     #   Make sure that DataSync has permission to access the KMS key that
-    #   you specify.
+    #   you specify. For more information, see [ Using a service-managed
+    #   secret encrypted with a custom KMS key][1].
     #
     #   <note markdown="1"> You can use either `CmkSecretConfig` (with either `Password` or
     #   `KerberosKeytab`) or `CustomSecretConfig` (without any `Password`
@@ -1298,6 +1417,10 @@ module Aws::DataSync
     #   request.
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/location-credentials.html#service-secret-custom-key
     #   @return [Types::CmkSecretConfig]
     #
     # @!attribute [rw] custom_secret_config
@@ -1305,7 +1428,8 @@ module Aws::DataSync
     #   Manager secret where the SMB storage location credentials is stored
     #   in Secrets Manager as plain text (for `Password`) or binary (for
     #   `KerberosKeytab`). This configuration includes the secret ARN, and
-    #   the ARN for an IAM role that provides access to the secret.
+    #   the ARN for an IAM role that provides access to the secret. For more
+    #   information, see [ Using a secret that you manage][1].
     #
     #   <note markdown="1"> You can use either `CmkSecretConfig` (with `SasConfiguration`) or
     #   `CustomSecretConfig` (without `SasConfiguration`) to provide
@@ -1313,6 +1437,10 @@ module Aws::DataSync
     #   both parameters for the same request.
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/location-credentials.html#custom-secret-custom-key
     #   @return [Types::CustomSecretConfig]
     #
     # @!attribute [rw] agent_arns
@@ -1841,7 +1969,8 @@ module Aws::DataSync
     # @!attribute [rw] custom_secret_config
     #   Describes configuration information for a customer-managed secret,
     #   such as an authentication token that DataSync uses to access a
-    #   specific storage location, with a customer-managed KMS key.
+    #   specific storage location, with a customer-managed Identity and
+    #   Access Management (IAM) role that provides access to the secret.
     #   @return [Types::CustomSecretConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/DescribeLocationAzureBlobResponse AWS API Documentation
@@ -2141,6 +2270,26 @@ module Aws::DataSync
     #   Windows File Server file system belongs to.
     #   @return [String]
     #
+    # @!attribute [rw] managed_secret_config
+    #   Describes configuration information for a DataSync-managed secret,
+    #   such as a `Password` that DataSync uses to access a specific storage
+    #   location. DataSync uses the default Amazon Web Services-managed KMS
+    #   key to encrypt this secret in Secrets Manager.
+    #   @return [Types::ManagedSecretConfig]
+    #
+    # @!attribute [rw] cmk_secret_config
+    #   Describes configuration information for a DataSync-managed secret,
+    #   such as a `Password` that DataSync uses to access a specific storage
+    #   location, with a customer-managed KMS key.
+    #   @return [Types::CmkSecretConfig]
+    #
+    # @!attribute [rw] custom_secret_config
+    #   Describes configuration information for a customer-managed secret,
+    #   such as a `Password` that DataSync uses to access a specific storage
+    #   location, with a customer-managed Identity and Access Management
+    #   (IAM) role that provides access to the secret.
+    #   @return [Types::CustomSecretConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/DescribeLocationFsxWindowsResponse AWS API Documentation
     #
     class DescribeLocationFsxWindowsResponse < Struct.new(
@@ -2149,7 +2298,10 @@ module Aws::DataSync
       :security_group_arns,
       :creation_time,
       :user,
-      :domain)
+      :domain,
+      :managed_secret_config,
+      :cmk_secret_config,
+      :custom_secret_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2223,6 +2375,26 @@ module Aws::DataSync
     #   The time that the HDFS location was created.
     #   @return [Time]
     #
+    # @!attribute [rw] managed_secret_config
+    #   Describes configuration information for a DataSync-managed secret,
+    #   such as a `KerberosKeytab` that DataSync uses to access a specific
+    #   storage location. DataSync uses the default Amazon Web
+    #   Services-managed KMS key to encrypt this secret in Secrets Manager.
+    #   @return [Types::ManagedSecretConfig]
+    #
+    # @!attribute [rw] cmk_secret_config
+    #   Describes configuration information for a DataSync-managed secret,
+    #   such as a `KerberosKeytab` that DataSync uses to access a specific
+    #   storage location, with a customer-managed KMS key.
+    #   @return [Types::CmkSecretConfig]
+    #
+    # @!attribute [rw] custom_secret_config
+    #   Describes configuration information for a customer-managed secret,
+    #   such as a `KerberosKeytab` that DataSync uses to access a specific
+    #   storage location, with a customer-managed Identity and Access
+    #   Management (IAM) role that provides access to the secret.
+    #   @return [Types::CustomSecretConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/DescribeLocationHdfsResponse AWS API Documentation
     #
     class DescribeLocationHdfsResponse < Struct.new(
@@ -2237,7 +2409,10 @@ module Aws::DataSync
       :simple_user,
       :kerberos_principal,
       :agent_arns,
-      :creation_time)
+      :creation_time,
+      :managed_secret_config,
+      :cmk_secret_config,
+      :custom_secret_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2365,7 +2540,8 @@ module Aws::DataSync
     #   Describes configuration information for a customer-managed secret,
     #   such as an authentication token or set of credentials that DataSync
     #   uses to access a specific transfer location, and a customer-managed
-    #   KMS key.
+    #   Identity and Access Management (IAM) role that provides access to
+    #   the secret.
     #   @return [Types::CustomSecretConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/DescribeLocationObjectStorageResponse AWS API Documentation
@@ -2547,7 +2723,8 @@ module Aws::DataSync
     # @!attribute [rw] custom_secret_config
     #   Describes configuration information for a customer-managed secret,
     #   such as a `Password` or `KerberosKeytab` that DataSync uses to
-    #   access a specific storage location, with a customer-managed KMS key.
+    #   access a specific storage location, with a customer-managed Identity
+    #   and Access Management (IAM) role that provides access to the secret.
     #   @return [Types::CustomSecretConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/DescribeLocationSmbResponse AWS API Documentation
@@ -3458,13 +3635,77 @@ module Aws::DataSync
     #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/create-ontap-location.html#create-ontap-location-smb
     #   @return [String]
     #
+    # @!attribute [rw] managed_secret_config
+    #   Describes configuration information for a DataSync-managed secret,
+    #   such as a `Password` that DataSync uses to access a specific storage
+    #   location. DataSync uses the default Amazon Web Services-managed KMS
+    #   key to encrypt this secret in Secrets Manager.
+    #
+    #   <note markdown="1"> Do not provide this for a `CreateLocation` request.
+    #   `ManagedSecretConfig` is a ReadOnly property and is only be
+    #   populated in the `DescribeLocation` response.
+    #
+    #    </note>
+    #   @return [Types::ManagedSecretConfig]
+    #
+    # @!attribute [rw] cmk_secret_config
+    #   Specifies configuration information for a DataSync-managed secret,
+    #   which includes the password that DataSync uses to access a specific
+    #   FSx for ONTAP storage location (using SMB), with a customer-managed
+    #   KMS key.
+    #
+    #   When you include this parameter as part of a
+    #   `CreateLocationFsxOntap` request, you provide only the KMS key ARN.
+    #   DataSync uses this KMS key together with the `Password` you specify
+    #   for to create a DataSync-managed secret to store the location access
+    #   credentials.
+    #
+    #   Make sure that DataSync has permission to access the KMS key that
+    #   you specify. For more information, see [ Using a service-managed
+    #   secret encrypted with a custom KMS key][1].
+    #
+    #   <note markdown="1"> You can use either `CmkSecretConfig` (with `Password`) or
+    #   `CustomSecretConfig` (without `Password`) to provide credentials for
+    #   a `CreateLocationFsxOntap` request. Do not provide both parameters
+    #   for the same request.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/location-credentials.html#service-secret-custom-key
+    #   @return [Types::CmkSecretConfig]
+    #
+    # @!attribute [rw] custom_secret_config
+    #   Specifies configuration information for a customer-managed Secrets
+    #   Manager secret where the password for an FSx for ONTAP storage
+    #   location (using SMB) is stored in plain text, in Secrets Manager.
+    #   This configuration includes the secret ARN, and the ARN for an IAM
+    #   role that provides access to the secret. For more information, see [
+    #   Using a secret that you manage][1].
+    #
+    #   <note markdown="1"> You can use either `CmkSecretConfig` (with `Password`) or
+    #   `CustomSecretConfig` (without `Password`) to provide credentials for
+    #   a `CreateLocationFsxOntap` request. Do not provide both parameters
+    #   for the same request.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/location-credentials.html#custom-secret-custom-key
+    #   @return [Types::CustomSecretConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/FsxProtocolSmb AWS API Documentation
     #
     class FsxProtocolSmb < Struct.new(
       :domain,
       :mount_options,
       :password,
-      :user)
+      :user,
+      :managed_secret_config,
+      :cmk_secret_config,
+      :custom_secret_config)
       SENSITIVE = [:password]
       include Aws::Structure
     end
@@ -3539,13 +3780,29 @@ module Aws::DataSync
     #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/create-ontap-location.html#create-ontap-location-smb
     #   @return [String]
     #
+    # @!attribute [rw] cmk_secret_config
+    #   Specifies configuration information for a DataSync-managed secret,
+    #   such as a `Password` or set of credentials that DataSync uses to
+    #   access a specific transfer location, and a customer-managed KMS key.
+    #   @return [Types::CmkSecretConfig]
+    #
+    # @!attribute [rw] custom_secret_config
+    #   Specifies configuration information for a customer-managed secret,
+    #   such as a `Password` or set of credentials that DataSync uses to
+    #   access a specific transfer location. This configuration includes the
+    #   secret ARN, and the ARN for an IAM role that provides access to the
+    #   secret.
+    #   @return [Types::CustomSecretConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/FsxUpdateProtocolSmb AWS API Documentation
     #
     class FsxUpdateProtocolSmb < Struct.new(
       :domain,
       :mount_options,
       :password,
-      :user)
+      :user,
+      :cmk_secret_config,
+      :custom_secret_config)
       SENSITIVE = [:password]
       include Aws::Structure
     end
@@ -5672,7 +5929,8 @@ module Aws::DataSync
     #   Specifies configuration information for a customer-managed secret,
     #   such as an authentication token or set of credentials that DataSync
     #   uses to access a specific transfer location, and a customer-managed
-    #   KMS key.
+    #   Identity and Access Management (IAM) role that provides access to
+    #   the secret.
     #   @return [Types::CustomSecretConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/UpdateLocationAzureBlobRequest AWS API Documentation
@@ -5908,6 +6166,19 @@ module Aws::DataSync
     #   File Server file system.
     #   @return [String]
     #
+    # @!attribute [rw] cmk_secret_config
+    #   Specifies configuration information for a DataSync-managed secret,
+    #   such as a `Password` or set of credentials that DataSync uses to
+    #   access a specific transfer location, and a customer-managed KMS key.
+    #   @return [Types::CmkSecretConfig]
+    #
+    # @!attribute [rw] custom_secret_config
+    #   Specifies configuration information for a customer-managed secret,
+    #   such as a `Password` or set of credentials that DataSync uses to
+    #   access a specific transfer location, and a customer-managed Identity
+    #   and Access Management (IAM) role that provides access to the secret.
+    #   @return [Types::CustomSecretConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/UpdateLocationFsxWindowsRequest AWS API Documentation
     #
     class UpdateLocationFsxWindowsRequest < Struct.new(
@@ -5915,7 +6186,9 @@ module Aws::DataSync
       :subdirectory,
       :domain,
       :user,
-      :password)
+      :password,
+      :cmk_secret_config,
+      :custom_secret_config)
       SENSITIVE = [:password]
       include Aws::Structure
     end
@@ -5992,6 +6265,21 @@ module Aws::DataSync
     #   connect to your HDFS cluster.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] cmk_secret_config
+    #   Specifies configuration information for a DataSync-managed secret,
+    #   such as a `KerberosKeytab` or set of credentials that DataSync uses
+    #   to access a specific transfer location, and a customer-managed KMS
+    #   key.
+    #   @return [Types::CmkSecretConfig]
+    #
+    # @!attribute [rw] custom_secret_config
+    #   Specifies configuration information for a customer-managed secret,
+    #   such as a `KerberosKeytab` or set of credentials that DataSync uses
+    #   to access a specific transfer location, and a customer-managed
+    #   Identity and Access Management (IAM) role that provides access to
+    #   the secret.
+    #   @return [Types::CustomSecretConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/UpdateLocationHdfsRequest AWS API Documentation
     #
     class UpdateLocationHdfsRequest < Struct.new(
@@ -6007,7 +6295,9 @@ module Aws::DataSync
       :kerberos_principal,
       :kerberos_keytab,
       :kerberos_krb_5_conf,
-      :agent_arns)
+      :agent_arns,
+      :cmk_secret_config,
+      :custom_secret_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6160,7 +6450,8 @@ module Aws::DataSync
     #   Specifies configuration information for a customer-managed secret,
     #   such as an authentication token or set of credentials that DataSync
     #   uses to access a specific transfer location, and a customer-managed
-    #   KMS key.
+    #   Identity and Access Management (IAM) role that provides access to
+    #   the secret.
     #   @return [Types::CustomSecretConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/UpdateLocationObjectStorageRequest AWS API Documentation
@@ -6326,7 +6617,8 @@ module Aws::DataSync
     #   Specifies configuration information for a customer-managed secret,
     #   such as a `Password` or `KerberosKeytab` or set of credentials that
     #   DataSync uses to access a specific transfer location, and a
-    #   customer-managed KMS key.
+    #   customer-managed Identity and Access Management (IAM) role that
+    #   provides access to the secret.
     #   @return [Types::CustomSecretConfig]
     #
     # @!attribute [rw] agent_arns

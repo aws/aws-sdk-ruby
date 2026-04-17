@@ -152,6 +152,11 @@ module Aws::DataZone
       SENSITIVE: []
     end
 
+    class AdditionalAttributes
+      attr_accessor form_names: ::Array[::String]
+      SENSITIVE: []
+    end
+
     class AggregationListItem
       attr_accessor attribute: ::String
       attr_accessor display_value: ::String
@@ -566,6 +571,12 @@ module Aws::DataZone
       SENSITIVE: []
     end
 
+    class Configuration
+      attr_accessor classification: ::String
+      attr_accessor properties: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
     class ConflictException
       attr_accessor message: ::String
       SENSITIVE: []
@@ -590,6 +601,8 @@ module Aws::DataZone
       attr_accessor s3_properties: Types::S3PropertiesInput
       attr_accessor amazon_q_properties: Types::AmazonQPropertiesInput
       attr_accessor mlflow_properties: Types::MlflowPropertiesInput
+      attr_accessor workflows_mwaa_properties: Types::WorkflowsMwaaPropertiesInput
+      attr_accessor workflows_serverless_properties: Types::WorkflowsServerlessPropertiesInput
       attr_accessor unknown: untyped
       SENSITIVE: []
 
@@ -613,6 +626,10 @@ module Aws::DataZone
       end
       class MlflowProperties < ConnectionPropertiesInput
       end
+      class WorkflowsMwaaProperties < ConnectionPropertiesInput
+      end
+      class WorkflowsServerlessProperties < ConnectionPropertiesInput
+      end
       class Unknown < ConnectionPropertiesInput
       end
     end
@@ -628,6 +645,8 @@ module Aws::DataZone
       attr_accessor s3_properties: Types::S3PropertiesOutput
       attr_accessor amazon_q_properties: Types::AmazonQPropertiesOutput
       attr_accessor mlflow_properties: Types::MlflowPropertiesOutput
+      attr_accessor workflows_mwaa_properties: Types::WorkflowsMwaaPropertiesOutput
+      attr_accessor workflows_serverless_properties: Types::WorkflowsServerlessPropertiesOutput
       attr_accessor unknown: untyped
       SENSITIVE: []
 
@@ -650,6 +669,10 @@ module Aws::DataZone
       class AmazonQProperties < ConnectionPropertiesOutput
       end
       class MlflowProperties < ConnectionPropertiesOutput
+      end
+      class WorkflowsMwaaProperties < ConnectionPropertiesOutput
+      end
+      class WorkflowsServerlessProperties < ConnectionPropertiesOutput
       end
       class Unknown < ConnectionPropertiesOutput
       end
@@ -688,6 +711,7 @@ module Aws::DataZone
     end
 
     class ConnectionSummary
+      attr_accessor configurations: ::Array[Types::Configuration]
       attr_accessor connection_id: ::String
       attr_accessor domain_id: ::String
       attr_accessor domain_unit_id: ::String
@@ -859,6 +883,7 @@ module Aws::DataZone
     class CreateConnectionInput
       attr_accessor aws_location: Types::AwsLocation
       attr_accessor client_token: ::String
+      attr_accessor configurations: ::Array[Types::Configuration]
       attr_accessor description: ::String
       attr_accessor domain_identifier: ::String
       attr_accessor environment_identifier: ::String
@@ -871,6 +896,7 @@ module Aws::DataZone
 
     class CreateConnectionOutput
       attr_accessor connection_id: ::String
+      attr_accessor configurations: ::Array[Types::Configuration]
       attr_accessor description: ::String
       attr_accessor domain_id: ::String
       attr_accessor domain_unit_id: ::String
@@ -1099,7 +1125,8 @@ module Aws::DataZone
       attr_accessor environment_blueprint_identifier: ::String
       attr_accessor deployment_order: ::Integer
       attr_accessor environment_configuration_id: ::String
-      SENSITIVE: []
+      attr_accessor environment_configuration_name: ::String
+      SENSITIVE: [:environment_configuration_name]
     end
 
     class CreateEnvironmentOutput
@@ -1125,7 +1152,8 @@ module Aws::DataZone
       attr_accessor deployment_properties: Types::DeploymentProperties
       attr_accessor environment_blueprint_id: ::String
       attr_accessor environment_configuration_id: ::String
-      SENSITIVE: [:name, :description, :environment_configuration_id]
+      attr_accessor environment_configuration_name: ::String
+      SENSITIVE: [:name, :description, :environment_configuration_id, :environment_configuration_name]
     end
 
     class CreateEnvironmentProfileInput
@@ -1242,6 +1270,7 @@ module Aws::DataZone
     class CreateGroupProfileInput
       attr_accessor domain_identifier: ::String
       attr_accessor group_identifier: ::String
+      attr_accessor role_principal_arn: ::String
       attr_accessor client_token: ::String
       SENSITIVE: []
     end
@@ -1251,6 +1280,8 @@ module Aws::DataZone
       attr_accessor id: ::String
       attr_accessor status: ("ASSIGNED" | "NOT_ASSIGNED")
       attr_accessor group_name: ::String
+      attr_accessor role_principal_arn: ::String
+      attr_accessor role_principal_id: ::String
       SENSITIVE: [:group_name]
     end
 
@@ -1286,6 +1317,9 @@ module Aws::DataZone
       attr_accessor domain_unit_id: ::String
       attr_accessor project_profile_id: ::String
       attr_accessor user_parameters: ::Array[Types::EnvironmentConfigurationUserParameter]
+      attr_accessor project_category: ::String
+      attr_accessor project_execution_role: ::String
+      attr_accessor membership_assignments: ::Array[Types::ProjectMembershipAssignment]
       SENSITIVE: [:name, :description]
     end
 
@@ -1316,6 +1350,7 @@ module Aws::DataZone
       attr_accessor project_profile_id: ::String
       attr_accessor user_parameters: ::Array[Types::EnvironmentConfigurationUserParameter]
       attr_accessor environment_deployment_details: Types::EnvironmentDeploymentDetails
+      attr_accessor project_category: ::String
       SENSITIVE: [:name, :description]
     end
 
@@ -1475,7 +1510,8 @@ module Aws::DataZone
     class CreateUserProfileInput
       attr_accessor domain_identifier: ::String
       attr_accessor user_identifier: ::String
-      attr_accessor user_type: ("IAM_USER" | "IAM_ROLE" | "SSO_USER")
+      attr_accessor user_type: ("IAM_USER" | "IAM_ROLE" | "SSO_USER" | "IAM_ROLE_SESSION")
+      attr_accessor session_name: ::String
       attr_accessor client_token: ::String
       SENSITIVE: []
     end
@@ -2068,6 +2104,13 @@ module Aws::DataZone
       SENSITIVE: []
     end
 
+    class EntityPattern
+      attr_accessor entity_type: ("LINEAGE_NODE")
+      attr_accessor identifier: ::String
+      attr_accessor filters: Types::FilterClause
+      SENSITIVE: []
+    end
+
     class EnvironmentActionSummary
       attr_accessor domain_id: ::String
       attr_accessor environment_id: ::String
@@ -2194,7 +2237,8 @@ module Aws::DataZone
       attr_accessor provider: ::String
       attr_accessor status: ("ACTIVE" | "CREATING" | "UPDATING" | "DELETING" | "CREATE_FAILED" | "UPDATE_FAILED" | "DELETE_FAILED" | "VALIDATION_FAILED" | "SUSPENDED" | "DISABLED" | "EXPIRED" | "DELETED" | "INACCESSIBLE")
       attr_accessor environment_configuration_id: ::String
-      SENSITIVE: [:name, :description, :environment_configuration_id]
+      attr_accessor environment_configuration_name: ::String
+      SENSITIVE: [:name, :description, :environment_configuration_id, :environment_configuration_name]
     end
 
     class EqualToExpression
@@ -2401,6 +2445,7 @@ module Aws::DataZone
 
     class GetConnectionOutput
       attr_accessor connection_credentials: Types::ConnectionCredentials
+      attr_accessor configurations: ::Array[Types::Configuration]
       attr_accessor connection_id: ::String
       attr_accessor description: ::String
       attr_accessor domain_id: ::String
@@ -2657,7 +2702,8 @@ module Aws::DataZone
       attr_accessor deployment_properties: Types::DeploymentProperties
       attr_accessor environment_blueprint_id: ::String
       attr_accessor environment_configuration_id: ::String
-      SENSITIVE: [:name, :description, :environment_configuration_id]
+      attr_accessor environment_configuration_name: ::String
+      SENSITIVE: [:name, :description, :environment_configuration_id, :environment_configuration_name]
     end
 
     class GetEnvironmentProfileInput
@@ -2760,6 +2806,8 @@ module Aws::DataZone
       attr_accessor id: ::String
       attr_accessor status: ("ASSIGNED" | "NOT_ASSIGNED")
       attr_accessor group_name: ::String
+      attr_accessor role_principal_arn: ::String
+      attr_accessor role_principal_id: ::String
       SENSITIVE: [:group_name]
     end
 
@@ -2904,6 +2952,7 @@ module Aws::DataZone
       attr_accessor project_profile_id: ::String
       attr_accessor user_parameters: ::Array[Types::EnvironmentConfigurationUserParameter]
       attr_accessor environment_deployment_details: Types::EnvironmentDeploymentDetails
+      attr_accessor project_category: ::String
       SENSITIVE: [:name, :description]
     end
 
@@ -3071,6 +3120,7 @@ module Aws::DataZone
       attr_accessor domain_identifier: ::String
       attr_accessor user_identifier: ::String
       attr_accessor type: ("IAM" | "SSO")
+      attr_accessor session_name: ::String
       SENSITIVE: []
     end
 
@@ -3279,6 +3329,8 @@ module Aws::DataZone
       attr_accessor id: ::String
       attr_accessor status: ("ASSIGNED" | "NOT_ASSIGNED")
       attr_accessor group_name: ::String
+      attr_accessor role_principal_arn: ::String
+      attr_accessor role_principal_id: ::String
       SENSITIVE: [:group_name]
     end
 
@@ -3313,6 +3365,8 @@ module Aws::DataZone
     class IamUserProfileDetails
       attr_accessor arn: ::String
       attr_accessor principal_id: ::String
+      attr_accessor session_name: ::String
+      attr_accessor group_profile_id: ::String
       SENSITIVE: []
     end
 
@@ -3413,6 +3467,25 @@ module Aws::DataZone
       attr_accessor event_id: ::String
       attr_accessor event_status: ("REQUESTED" | "PROCESSING" | "SUCCESS" | "FAILED")
       attr_accessor error_message: ::String
+      SENSITIVE: []
+    end
+
+    class LineageNodeItem
+      attr_accessor domain_id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor created_by: ::String
+      attr_accessor updated_at: ::Time
+      attr_accessor updated_by: ::String
+      attr_accessor id: ::String
+      attr_accessor type_name: ::String
+      attr_accessor type_revision: ::String
+      attr_accessor source_identifier: ::String
+      attr_accessor event_timestamp: ::Time
+      attr_accessor forms_output: ::Array[Types::FormOutput]
+      attr_accessor upstream_lineage_node_ids: ::Array[::String]
+      attr_accessor downstream_lineage_node_ids: ::Array[::String]
       SENSITIVE: []
     end
 
@@ -3873,6 +3946,7 @@ module Aws::DataZone
       attr_accessor user_identifier: ::String
       attr_accessor group_identifier: ::String
       attr_accessor name: ::String
+      attr_accessor project_category: ::String
       attr_accessor next_token: ::String
       attr_accessor max_results: ::Integer
       SENSITIVE: [:name]
@@ -4061,6 +4135,20 @@ module Aws::DataZone
       attr_accessor id: ::String
       attr_accessor token: ::String
       SENSITIVE: []
+    end
+
+    class MatchClause
+      attr_accessor relation_pattern: Types::RelationPattern
+      attr_accessor entity_pattern: Types::EntityPattern
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class RelationPattern < MatchClause
+      end
+      class EntityPattern < MatchClause
+      end
+      class Unknown < MatchClause
+      end
     end
 
     class MatchOffset
@@ -4330,6 +4418,7 @@ module Aws::DataZone
     class PhysicalEndpoint
       attr_accessor aws_location: Types::AwsLocation
       attr_accessor glue_connection_name: ::String
+      attr_accessor glue_connection_names: ::Array[::String]
       attr_accessor glue_connection: Types::GlueConnection
       attr_accessor enable_trusted_identity_propagation: bool
       attr_accessor host: ::String
@@ -4476,6 +4565,12 @@ module Aws::DataZone
       SENSITIVE: []
     end
 
+    class ProjectMembershipAssignment
+      attr_accessor member: Types::Member
+      attr_accessor designation: ("PROJECT_OWNER" | "PROJECT_CONTRIBUTOR" | "PROJECT_CATALOG_VIEWER" | "PROJECT_CATALOG_CONSUMER" | "PROJECT_CATALOG_STEWARD")
+      SENSITIVE: []
+    end
+
     class ProjectPolicyGrantPrincipal
       attr_accessor project_designation: ("OWNER" | "CONTRIBUTOR" | "PROJECT_CATALOG_STEWARD")
       attr_accessor project_identifier: ::String
@@ -4507,6 +4602,7 @@ module Aws::DataZone
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
       attr_accessor domain_unit_id: ::String
+      attr_accessor project_category: ::String
       SENSITIVE: [:name, :description]
     end
 
@@ -4573,6 +4669,21 @@ module Aws::DataZone
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
       attr_accessor provisioning_configurations: ::Array[Types::ProvisioningConfiguration]
+      SENSITIVE: []
+    end
+
+    class QueryGraphInput
+      attr_accessor domain_identifier: ::String
+      attr_accessor match: ::Array[Types::MatchClause]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor additional_attributes: Types::AdditionalAttributes
+      SENSITIVE: []
+    end
+
+    class QueryGraphOutput
+      attr_accessor items: ::Array[Types::ResultItem]
+      attr_accessor next_token: ::String
       SENSITIVE: []
     end
 
@@ -4775,6 +4886,13 @@ module Aws::DataZone
       SENSITIVE: [:request_reason, :decision_comment]
     end
 
+    class RelationPattern
+      attr_accessor relation_type: ("LINEAGE")
+      attr_accessor relation_direction: ("IN" | "OUT")
+      attr_accessor max_path_length: ::Integer
+      SENSITIVE: []
+    end
+
     class RelationalFilterConfiguration
       attr_accessor database_name: ::String
       attr_accessor schema_name: ::String
@@ -4833,6 +4951,17 @@ module Aws::DataZone
       attr_accessor value: ::String
       attr_accessor is_value_editable: bool
       SENSITIVE: []
+    end
+
+    class ResultItem
+      attr_accessor lineage_node: Types::LineageNodeItem
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class LineageNode < ResultItem
+      end
+      class Unknown < ResultItem
+      end
     end
 
     class RevokeSubscriptionInput
@@ -4982,12 +5111,14 @@ module Aws::DataZone
     class S3PropertiesInput
       attr_accessor s3_uri: ::String
       attr_accessor s3_access_grant_location_id: ::String
+      attr_accessor register_s3_access_grant_location: bool
       SENSITIVE: []
     end
 
     class S3PropertiesOutput
       attr_accessor s3_uri: ::String
       attr_accessor s3_access_grant_location_id: ::String
+      attr_accessor register_s3_access_grant_location: bool
       attr_accessor status: ("CREATING" | "CREATE_FAILED" | "DELETING" | "DELETE_FAILED" | "READY" | "UPDATING" | "UPDATE_FAILED" | "DELETED")
       attr_accessor error_message: ::String
       SENSITIVE: []
@@ -4996,6 +5127,7 @@ module Aws::DataZone
     class S3PropertiesPatch
       attr_accessor s3_uri: ::String
       attr_accessor s3_access_grant_location_id: ::String
+      attr_accessor register_s3_access_grant_location: bool
       SENSITIVE: []
     end
 
@@ -5019,7 +5151,7 @@ module Aws::DataZone
 
     class SearchGroupProfilesInput
       attr_accessor domain_identifier: ::String
-      attr_accessor group_type: ("SSO_GROUP" | "DATAZONE_SSO_GROUP")
+      attr_accessor group_type: ("SSO_GROUP" | "DATAZONE_SSO_GROUP" | "IAM_ROLE_SESSION_GROUP")
       attr_accessor search_text: ::String
       attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
@@ -5255,6 +5387,7 @@ module Aws::DataZone
     class SparkGluePropertiesInput
       attr_accessor additional_args: Types::SparkGlueArgs
       attr_accessor glue_connection_name: ::String
+      attr_accessor glue_connection_names: ::Array[::String]
       attr_accessor glue_version: ::String
       attr_accessor idle_timeout: ::Integer
       attr_accessor java_virtual_env: ::String
@@ -5267,6 +5400,7 @@ module Aws::DataZone
     class SparkGluePropertiesOutput
       attr_accessor additional_args: Types::SparkGlueArgs
       attr_accessor glue_connection_name: ::String
+      attr_accessor glue_connection_names: ::Array[::String]
       attr_accessor glue_version: ::String
       attr_accessor idle_timeout: ::Integer
       attr_accessor java_virtual_env: ::String
@@ -5682,6 +5816,7 @@ module Aws::DataZone
     end
 
     class UpdateConnectionInput
+      attr_accessor configurations: ::Array[Types::Configuration]
       attr_accessor domain_identifier: ::String
       attr_accessor identifier: ::String
       attr_accessor description: ::String
@@ -5691,6 +5826,7 @@ module Aws::DataZone
     end
 
     class UpdateConnectionOutput
+      attr_accessor configurations: ::Array[Types::Configuration]
       attr_accessor connection_id: ::String
       attr_accessor description: ::String
       attr_accessor domain_id: ::String
@@ -5843,7 +5979,8 @@ module Aws::DataZone
       attr_accessor glossary_terms: ::Array[::String]
       attr_accessor blueprint_version: ::String
       attr_accessor user_parameters: ::Array[Types::EnvironmentParameter]
-      SENSITIVE: []
+      attr_accessor environment_configuration_name: ::String
+      SENSITIVE: [:environment_configuration_name]
     end
 
     class UpdateEnvironmentOutput
@@ -5869,7 +6006,8 @@ module Aws::DataZone
       attr_accessor deployment_properties: Types::DeploymentProperties
       attr_accessor environment_blueprint_id: ::String
       attr_accessor environment_configuration_id: ::String
-      SENSITIVE: [:name, :description, :environment_configuration_id]
+      attr_accessor environment_configuration_name: ::String
+      SENSITIVE: [:name, :description, :environment_configuration_id, :environment_configuration_name]
     end
 
     class UpdateEnvironmentProfileInput
@@ -5957,6 +6095,8 @@ module Aws::DataZone
       attr_accessor id: ::String
       attr_accessor status: ("ASSIGNED" | "NOT_ASSIGNED")
       attr_accessor group_name: ::String
+      attr_accessor role_principal_arn: ::String
+      attr_accessor role_principal_id: ::String
       SENSITIVE: [:group_name]
     end
 
@@ -5990,6 +6130,7 @@ module Aws::DataZone
       attr_accessor project_profile_id: ::String
       attr_accessor user_parameters: ::Array[Types::EnvironmentConfigurationUserParameter]
       attr_accessor environment_deployment_details: Types::EnvironmentDeploymentDetails
+      attr_accessor project_category: ::String
       SENSITIVE: [:name, :description]
     end
 
@@ -6153,6 +6294,7 @@ module Aws::DataZone
       attr_accessor user_identifier: ::String
       attr_accessor type: ("IAM" | "SSO")
       attr_accessor status: ("ASSIGNED" | "NOT_ASSIGNED" | "ACTIVATED" | "DEACTIVATED")
+      attr_accessor session_name: ::String
       SENSITIVE: []
     end
 
@@ -6221,6 +6363,22 @@ module Aws::DataZone
     class ValidationException
       attr_accessor message: ::String
       SENSITIVE: []
+    end
+
+    class WorkflowsMwaaPropertiesInput
+      attr_accessor mwaa_environment_name: ::String
+      SENSITIVE: []
+    end
+
+    class WorkflowsMwaaPropertiesOutput
+      attr_accessor mwaa_environment_name: ::String
+      SENSITIVE: []
+    end
+
+    class WorkflowsServerlessPropertiesInput < Aws::EmptyStructure
+    end
+
+    class WorkflowsServerlessPropertiesOutput < Aws::EmptyStructure
     end
   end
 end

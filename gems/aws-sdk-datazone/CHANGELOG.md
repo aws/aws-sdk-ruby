@@ -1,6 +1,36 @@
 Unreleased Changes
 ------------------
 
+1.73.0 (2026-04-16)
+------------------
+
+* Feature - Launching SMUS IAM domain SDK support
+
+1.72.0 (2026-04-07)
+------------------
+
+* Feature - Update Configurations and registerS3AccessGrantLocation as public attributes for cfn
+
+1.71.0 (2026-03-31)
+------------------
+
+* Feature - Adds environmentConfigurationName field to CreateEnvironmentInput and UpdateEnvironmentInput, so that Domain Owners can now recover orphaned environments by recreating deleted configurations with the same name, and will auto-recover orphaned environments
+
+1.70.0 (2026-03-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.69.0 (2026-03-03)
+------------------
+
+* Feature - Adding QueryGraph operation to DataZone SDK
+
+1.68.0 (2026-02-23)
+------------------
+
+* Feature - Add workflow properties support to connections APIs
+
 1.67.0 (2026-01-23)
 ------------------
 

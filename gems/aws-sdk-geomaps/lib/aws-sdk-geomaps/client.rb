@@ -708,9 +708,7 @@ module Aws::GeoMaps
     #   Style specifies the desired map style for the `Sprites` APIs.
     #
     # @option params [required, String] :color_scheme
-    #   Sets color tone for map such as dark and light for specific map
-    #   styles. It applies to only vector map styles such as Standard and
-    #   Monochrome.
+    #   Sets the color tone for the map sprites, such as dark and light.
     #
     #   Example: `Light`
     #
@@ -762,25 +760,33 @@ module Aws::GeoMaps
       req.send_request(options, &block)
     end
 
-    # `GetStaticMap` provides high-quality static map images with
+    # <note markdown="1"> This operation is not supported in
+    # `ap-southeast-1` and
+    # `ap-southeast-5` regions for [GrabMaps][1] customers.
+    #
+    #  </note>
+    #
+    #  `GetStaticMap` provides high-quality static map images with
     # customizable options. You can modify the map's appearance and overlay
     # additional information. It's an ideal solution for applications
     # requiring tailored static map snapshots.
     #
-    # For more information, see the following topics in the *Amazon Location
+    #  For more information, see the following topics in the *Amazon
+    # Location
     # Service Developer Guide*:
     #
-    # * [Static maps][1]
+    #  * [Static maps][2]
     #
-    # * [Customize static maps][2]
+    # * [Customize static maps][3]
     #
-    # * [Overlay on the static map][3]
+    # * [Overlay on the static map][4]
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/location/latest/developerguide/static-maps.html
-    # [2]: https://docs.aws.amazon.com/location/latest/developerguide/customizing-static-maps.html
-    # [3]: https://docs.aws.amazon.com/location/latest/developerguide/overlaying-static-map.html
+    # [1]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
+    # [2]: https://docs.aws.amazon.com/location/latest/developerguide/static-maps.html
+    # [3]: https://docs.aws.amazon.com/location/latest/developerguide/customizing-static-maps.html
+    # [4]: https://docs.aws.amazon.com/location/latest/developerguide/overlaying-static-map.html
     #
     # @option params [String] :bounding_box
     #   Takes in two pairs of coordinates in World Geodetic System (WGS 84)
@@ -814,8 +820,7 @@ module Aws::GeoMaps
     #   Example: 49.295,-123.108
     #
     # @option params [String] :color_scheme
-    #   Sets color tone for map, such as dark and light for specific map
-    #   styles. It only applies to vector map styles, such as Standard.
+    #   Sets the color tone for the map, such as dark and light.
     #
     #   Example: `Light`
     #
@@ -1158,12 +1163,16 @@ module Aws::GeoMaps
     # [1]: https://docs.aws.amazon.com/location/latest/developerguide/styling-dynamic-maps.html
     #
     # @option params [required, String] :style
-    #   Style specifies the desired map style.
+    #   Style specifies the desired map style. For [GrabMaps][1] customers,
+    #   `ap-southeast-1` and `ap-southeast-5` regions support only the
+    #   `Standard` and `Monochrome` values.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
     #
     # @option params [String] :color_scheme
-    #   Sets color tone for map such as dark and light for specific map
-    #   styles. It applies to only vector map styles such as Standard and
-    #   Monochrome.
+    #   Sets the color tone for the map, such as dark and light.
     #
     #   Example: `Light`
     #
@@ -1175,7 +1184,8 @@ module Aws::GeoMaps
     #
     # @option params [String] :political_view
     #   Specifies the political view using ISO 3166-2 or ISO 3166-3 country
-    #   code format.
+    #   code format. Not supported in `ap-southeast-1` and `ap-southeast-5`
+    #   regions for [GrabMaps][1] customers.
     #
     #   The following political views are currently supported:
     #
@@ -1210,8 +1220,14 @@ module Aws::GeoMaps
     #
     #   * `VNM`: Vietnam's view on the Paracel Islands and Spratly Islands
     #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
+    #
     # @option params [String] :terrain
-    #   Adjusts how physical terrain details are rendered on the map.
+    #   Adjusts how physical terrain details are rendered on the map. Not
+    #   supported in `ap-southeast-1` and `ap-southeast-5` regions for
+    #   [GrabMaps][1] customers.
     #
     #   The following terrain styles are currently supported:
     #
@@ -1224,27 +1240,46 @@ module Aws::GeoMaps
     #   `Hillshade` is valid only for the `Standard` and `Monochrome` map
     #   styles.
     #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
+    #
     # @option params [String] :contour_density
     #   Displays the shape and steepness of terrain features using elevation
     #   lines. The density value controls how densely the available contour
-    #   line information is rendered on the map.
+    #   line information is rendered on the map. Not supported in
+    #   `ap-southeast-1` and `ap-southeast-5` regions for [GrabMaps][1]
+    #   customers.
     #
-    #   This parameter is valid only for the `Standard`, `Monochrome`, and
-    #   `Hybrid` map styles.
+    #   This parameter is valid for all map styles except `Satellite`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
     #
     # @option params [String] :traffic
     #   Displays real-time traffic information overlay on map, such as
-    #   incident events and flow events.
+    #   incident events and flow events. Not supported in `ap-southeast-1` and
+    #   `ap-southeast-5` regions for [GrabMaps][1] customers.
     #
-    #   This parameter is valid only for the `Standard` map style.
+    #   This parameter is valid for all map styles except `Satellite`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
     #
     # @option params [Array<String>] :travel_modes
     #   Renders additional map information relevant to selected travel modes.
     #   Information for multiple travel modes can be displayed simultaneously,
     #   although this increases the overall information density rendered on
-    #   the map.
+    #   the map. Not supported in `ap-southeast-1` and `ap-southeast-5`
+    #   regions for [GrabMaps][1] customers.
     #
-    #   This parameter is valid only for the `Standard` map style.
+    #   This parameter is valid for all map styles except `Satellite`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
     #
     # @option params [String] :buildings
     #   Adjusts how building details are rendered on the map.
@@ -1277,8 +1312,8 @@ module Aws::GeoMaps
     #     color_scheme: "Light", # accepts Light, Dark
     #     political_view: "CountryCode",
     #     terrain: "Hillshade", # accepts Hillshade, Terrain3D
-    #     contour_density: "Medium", # accepts Medium
-    #     traffic: "All", # accepts All
+    #     contour_density: "Low", # accepts Low, Medium, High
+    #     traffic: "All", # accepts All, Congestion
     #     travel_modes: ["Transit"], # accepts Transit, Truck
     #     buildings: "Buildings3D", # accepts Buildings3D
     #     key: "ApiKey",
@@ -1301,7 +1336,7 @@ module Aws::GeoMaps
     end
 
     # `GetTile` returns a tile. Map tiles are used by clients to render a
-    # map. they're addressed using a grid arrangement with an X coordinate,
+    # map. They're addressed using a grid arrangement with an X coordinate,
     # Y coordinate, and Z (zoom) level.
     #
     # For more information, see [Tiles][1] in the *Amazon Location Service
@@ -1313,19 +1348,30 @@ module Aws::GeoMaps
     #
     # @option params [Array<String>] :additional_features
     #   A list of optional additional parameters such as map styles that can
-    #   be requested for each result.
+    #   be requested for each result. Not supported in `ap-southeast-1` and
+    #   `ap-southeast-5` regions for [GrabMaps][1] customers.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
     #
     # @option params [required, String] :tileset
-    #   Specifies the desired tile set.
+    #   Specifies the desired tile set. For [GrabMaps][1] customers,
+    #   `ap-southeast-1` and `ap-southeast-5` regions support only the
+    #   `vector.basemap` value.
     #
     #   Valid Values: `raster.satellite | vector.basemap | vector.traffic |
     #   raster.dem`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
     #
     # @option params [required, String] :z
     #   The zoom value for the map tile.
     #
     # @option params [required, String] :x
-    #   The X axis value for the map tile. Must be between 0 and 19.
+    #   The X axis value for the map tile.
     #
     # @option params [required, String] :y
     #   The Y axis value for the map tile.
@@ -1388,7 +1434,7 @@ module Aws::GeoMaps
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-geomaps'
-      context[:gem_version] = '1.21.0'
+      context[:gem_version] = '1.24.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

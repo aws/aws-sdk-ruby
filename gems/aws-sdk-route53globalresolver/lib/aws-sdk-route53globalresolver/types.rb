@@ -193,8 +193,8 @@ module Aws::Route53GlobalResolver
     #   @return [Time]
     #
     # @!attribute [rw] status
-    #   Aggregate status for all the AWS Regions in which the Route 53
-    #   Global Resolver exists.
+    #   Aggregate status for all the Amazon Web Services Regions in which
+    #   the Route 53 Global Resolver exists.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53globalresolver-2022-09-27/AssociateHostedZoneOutput AWS API Documentation
@@ -1467,20 +1467,27 @@ module Aws::Route53GlobalResolver
     #   Maximum length of 1024 characters.
     #   @return [String]
     #
+    # @!attribute [rw] ip_address_type
+    #   The IP address type for the Route 53 Global Resolver. Valid values
+    #   are IPV4 (default) or DUAL\_STACK for both IPv4 and IPv6 support.
+    #   @return [String]
+    #
     # @!attribute [rw] name
     #   A descriptive name for the Route 53 Global Resolver instance.
     #   Maximum length of 64 characters.
     #   @return [String]
     #
     # @!attribute [rw] observability_region
-    #   The AWS region where query resolution logs and metrics will be
-    #   aggregated and delivered. If not specified, logging is not enabled.
+    #   The Amazon Web Services Region where query resolution logs and
+    #   metrics will be aggregated and delivered. If not specified, logging
+    #   is not enabled.
     #   @return [String]
     #
     # @!attribute [rw] regions
-    #   List of AWS regions where the Route 53 Global Resolver will operate.
-    #   The resolver will be distributed across these regions to provide
-    #   global availability and low-latency DNS resolution.
+    #   List of Amazon Web Services Regions where the Route 53 Global
+    #   Resolver will operate. The resolver will be distributed across these
+    #   Regions to provide global availability and low-latency DNS
+    #   resolution.
     #   @return [Array<String>]
     #
     # @!attribute [rw] tags
@@ -1493,6 +1500,7 @@ module Aws::Route53GlobalResolver
     class CreateGlobalResolverInput < Struct.new(
       :client_token,
       :description,
+      :ip_address_type,
       :name,
       :observability_region,
       :regions,
@@ -1528,10 +1536,22 @@ module Aws::Route53GlobalResolver
     #   value resolves to the global anycast IP addresses for the resolver.
     #   @return [String]
     #
+    # @!attribute [rw] ip_address_type
+    #   The IP address type configured for the Route 53 Global Resolver
+    #   (IPV4 or DUAL\_STACK).
+    #   @return [String]
+    #
     # @!attribute [rw] ipv4_addresses
     #   The global anycast IPv4 addresses associated with the Route 53
     #   Global Resolver. DNS clients can send queries to these addresses
     #   from anywhere on the internet.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] ipv6_addresses
+    #   The global anycast IPv6 addresses associated with the Route 53
+    #   Global Resolver. This field is only populated when ipAddressType is
+    #   DUAL\_STACK. DNS clients can send queries to these addresses from
+    #   anywhere on the internet.
     #   @return [Array<String>]
     #
     # @!attribute [rw] name
@@ -1539,13 +1559,13 @@ module Aws::Route53GlobalResolver
     #   @return [String]
     #
     # @!attribute [rw] observability_region
-    #   The AWS Region where observability data for the Route 53 Global
-    #   Resolver is stored.
+    #   The Amazon Web Services Region where observability data for the
+    #   Route 53 Global Resolver is stored.
     #   @return [String]
     #
     # @!attribute [rw] regions
-    #   The AWS Regions where the Route 53 Global Resolver is deployed and
-    #   operational.
+    #   The Amazon Web Services Regions where the Route 53 Global Resolver
+    #   is deployed and operational.
     #   @return [Array<String>]
     #
     # @!attribute [rw] status
@@ -1568,7 +1588,9 @@ module Aws::Route53GlobalResolver
       :created_at,
       :description,
       :dns_name,
+      :ip_address_type,
       :ipv4_addresses,
+      :ipv6_addresses,
       :name,
       :observability_region,
       :regions,
@@ -2022,8 +2044,8 @@ module Aws::Route53GlobalResolver
     #   @return [String]
     #
     # @!attribute [rw] observability_region
-    #   The AWS Region where observability data for the deleted Route 53
-    #   Global Resolver was stored.
+    #   The Amazon Web Services Region where observability data for the
+    #   deleted Route 53 Global Resolver was stored.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -2035,8 +2057,8 @@ module Aws::Route53GlobalResolver
     #   @return [String]
     #
     # @!attribute [rw] regions
-    #   The AWS Regions where the deleted Route 53 Global Resolver was
-    #   deployed and operational.
+    #   The Amazon Web Services Regions where the deleted Route 53 Global
+    #   Resolver was deployed and operational.
     #   @return [Array<String>]
     #
     # @!attribute [rw] created_at
@@ -2058,6 +2080,16 @@ module Aws::Route53GlobalResolver
     #   deleted Route 53 Global Resolver.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] ipv6_addresses
+    #   The global anycast IPv6 addresses that were associated with the
+    #   deleted Route 53 Global Resolver.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] ip_address_type
+    #   The IP address type that was configured for the deleted Route 53
+    #   Global Resolver.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53globalresolver-2022-09-27/DeleteGlobalResolverOutput AWS API Documentation
     #
     class DeleteGlobalResolverOutput < Struct.new(
@@ -2072,7 +2104,9 @@ module Aws::Route53GlobalResolver
       :created_at,
       :updated_at,
       :status,
-      :ipv4_addresses)
+      :ipv4_addresses,
+      :ipv6_addresses,
+      :ip_address_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2820,8 +2854,8 @@ module Aws::Route53GlobalResolver
     #   @return [String]
     #
     # @!attribute [rw] dns_advanced_protection
-    #   The type of the DNS Firewall Advanced rule. Valid values are DGA and
-    #   DNS\_TUNNELING.
+    #   The type of the DNS Firewall Advanced rule. Valid values are DGA,
+    #   DNS\_TUNNELING, and DICTIONARY\_DGA.
     #   @return [String]
     #
     # @!attribute [rw] firewall_domain_list_id
@@ -2915,8 +2949,8 @@ module Aws::Route53GlobalResolver
     #   @return [String]
     #
     # @!attribute [rw] observability_region
-    #   The AWS Regions in which the users' Global Resolver query
-    #   resolution logs will be propagated.
+    #   The Amazon Web Services Regions in which the users' Global Resolver
+    #   query resolution logs will be propagated.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -2928,7 +2962,8 @@ module Aws::Route53GlobalResolver
     #   @return [String]
     #
     # @!attribute [rw] regions
-    #   The AWS Regions in which the Global Resolver operate.
+    #   The Amazon Web Services Regions in which the Global Resolver
+    #   operate.
     #   @return [Array<String>]
     #
     # @!attribute [rw] created_at
@@ -2948,6 +2983,16 @@ module Aws::Route53GlobalResolver
     #   instance.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] ipv6_addresses
+    #   List of anycast IPv6 addresses associated with the Global Resolver
+    #   instance. This field is only populated when ipAddressType is
+    #   DUAL\_STACK.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] ip_address_type
+    #   The IP address type configured for the Global Resolver.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53globalresolver-2022-09-27/GetGlobalResolverOutput AWS API Documentation
     #
     class GetGlobalResolverOutput < Struct.new(
@@ -2962,7 +3007,9 @@ module Aws::Route53GlobalResolver
       :created_at,
       :updated_at,
       :status,
-      :ipv4_addresses)
+      :ipv4_addresses,
+      :ipv6_addresses,
+      :ip_address_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3086,8 +3133,8 @@ module Aws::Route53GlobalResolver
     #   @return [String]
     #
     # @!attribute [rw] observability_region
-    #   The AWS Region where observability data is collected for the global
-    #   resolver.
+    #   The Amazon Web Services Region where observability data is collected
+    #   for the global resolver.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -3099,7 +3146,8 @@ module Aws::Route53GlobalResolver
     #   @return [String]
     #
     # @!attribute [rw] regions
-    #   The AWS Regions where the global resolver is deployed.
+    #   The Amazon Web Services Regions where the global resolver is
+    #   deployed.
     #   @return [Array<String>]
     #
     # @!attribute [rw] created_at
@@ -3118,6 +3166,15 @@ module Aws::Route53GlobalResolver
     #   The IPv4 addresses assigned to the global resolver.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] ipv6_addresses
+    #   The IPv6 addresses assigned to the global resolver. This field is
+    #   only populated when ipAddressType is DUAL\_STACK.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] ip_address_type
+    #   The IP address type configured for the global resolver.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53globalresolver-2022-09-27/GlobalResolversItem AWS API Documentation
     #
     class GlobalResolversItem < Struct.new(
@@ -3132,7 +3189,9 @@ module Aws::Route53GlobalResolver
       :created_at,
       :updated_at,
       :status,
-      :ipv4_addresses)
+      :ipv4_addresses,
+      :ipv6_addresses,
+      :ip_address_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3734,11 +3793,12 @@ module Aws::Route53GlobalResolver
     #   @return [String]
     #
     # @!attribute [rw] service_code
-    #   The code for the AWS service that owns the quota.
+    #   The code for the Amazon Web Services service that owns the quota.
     #   @return [String]
     #
     # @!attribute [rw] quota_code
-    #   The quota code recognized by the AWS Service Quotas service.
+    #   The quota code recognized by the Amazon Web Services Service Quotas
+    #   service.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53globalresolver-2022-09-27/ServiceQuotaExceededException AWS API Documentation
@@ -3782,11 +3842,12 @@ module Aws::Route53GlobalResolver
     #   @return [String]
     #
     # @!attribute [rw] service_code
-    #   The code for the AWS service that owns the quota.
+    #   The code for the Amazon Web Services service that owns the quota.
     #   @return [String]
     #
     # @!attribute [rw] quota_code
-    #   The quota code recognized by the AWS Service Quotas service.
+    #   The quota code recognized by the Amazon Web Services Service Quotas
+    #   service.
     #   @return [String]
     #
     # @!attribute [rw] retry_after_seconds
@@ -4150,8 +4211,8 @@ module Aws::Route53GlobalResolver
     #   @return [String]
     #
     # @!attribute [rw] dns_advanced_protection
-    #   The type of the DNS Firewall Advanced rule. Valid values are DGA and
-    #   DNS\_TUNNELING.
+    #   The type of the DNS Firewall Advanced rule. Valid values are DGA,
+    #   DNS\_TUNNELING, and DICTIONARY\_DGA.
     #   @return [String]
     #
     # @!attribute [rw] firewall_rule_id
@@ -4230,8 +4291,8 @@ module Aws::Route53GlobalResolver
     #   @return [String]
     #
     # @!attribute [rw] dns_advanced_protection
-    #   The type of the DNS Firewall Advanced rule. Valid values are DGA and
-    #   DNS\_TUNNELING.
+    #   The type of the DNS Firewall Advanced rule. Valid values are DGA,
+    #   DNS\_TUNNELING, and DICTIONARY\_DGA.
     #   @return [String]
     #
     # @!attribute [rw] firewall_domain_list_id
@@ -4301,12 +4362,17 @@ module Aws::Route53GlobalResolver
     #   @return [String]
     #
     # @!attribute [rw] observability_region
-    #   The AWS Regions in which the users' Global Resolver query
-    #   resolution logs will be propagated.
+    #   The Amazon Web Services Regions in which the users' Global Resolver
+    #   query resolution logs will be propagated.
     #   @return [String]
     #
     # @!attribute [rw] description
     #   The description of the Global Resolver.
+    #   @return [String]
+    #
+    # @!attribute [rw] ip_address_type
+    #   The IP address type for the Global Resolver. Valid values are IPV4
+    #   or DUAL\_STACK for both IPv4 and IPv6 support.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53globalresolver-2022-09-27/UpdateGlobalResolverInput AWS API Documentation
@@ -4315,7 +4381,8 @@ module Aws::Route53GlobalResolver
       :global_resolver_id,
       :name,
       :observability_region,
-      :description)
+      :description,
+      :ip_address_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4340,8 +4407,8 @@ module Aws::Route53GlobalResolver
     #   @return [String]
     #
     # @!attribute [rw] observability_region
-    #   The AWS Regions in which the users' Global Resolver query
-    #   resolution logs will be propagated.
+    #   The Amazon Web Services Regions in which the users' Global Resolver
+    #   query resolution logs will be propagated.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -4353,7 +4420,8 @@ module Aws::Route53GlobalResolver
     #   @return [String]
     #
     # @!attribute [rw] regions
-    #   The AWS Regions in which the Global Resolver will operate.
+    #   The Amazon Web Services Regions in which the Global Resolver will
+    #   operate.
     #   @return [Array<String>]
     #
     # @!attribute [rw] created_at
@@ -4373,6 +4441,16 @@ module Aws::Route53GlobalResolver
     #   instance.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] ipv6_addresses
+    #   List of anycast IPv6 addresses associated with the updated Global
+    #   Resolver instance. This field is only populated when ipAddressType
+    #   is DUAL\_STACK.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] ip_address_type
+    #   The IP address type configured for the updated Global Resolver.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53globalresolver-2022-09-27/UpdateGlobalResolverOutput AWS API Documentation
     #
     class UpdateGlobalResolverOutput < Struct.new(
@@ -4387,7 +4465,9 @@ module Aws::Route53GlobalResolver
       :created_at,
       :updated_at,
       :status,
-      :ipv4_addresses)
+      :ipv4_addresses,
+      :ipv6_addresses,
+      :ip_address_type)
       SENSITIVE = []
       include Aws::Structure
     end

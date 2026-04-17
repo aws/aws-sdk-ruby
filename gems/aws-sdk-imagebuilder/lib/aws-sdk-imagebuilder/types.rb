@@ -1392,6 +1392,10 @@ module Aws::Imagebuilder
     #   The tags of the image pipeline.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] image_tags
+    #   The tags to be applied to the images produced by this pipeline.
+    #   @return [Hash<String,String>]
+    #
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier you provide to ensure idempotency
     #   of the request. For more information, see [Ensuring idempotency][1]
@@ -1436,6 +1440,7 @@ module Aws::Imagebuilder
       :schedule,
       :status,
       :tags,
+      :image_tags,
       :client_token,
       :image_scanning_configuration,
       :workflows,
@@ -3960,6 +3965,10 @@ module Aws::Imagebuilder
     #   Contains settings for vulnerability scans.
     #   @return [Types::ImageScanningConfiguration]
     #
+    # @!attribute [rw] image_tags
+    #   The tags to be applied to the images produced by this pipeline.
+    #   @return [Hash<String,String>]
+    #
     # @!attribute [rw] execution_role
     #   The name or Amazon Resource Name (ARN) for the IAM role you create
     #   that grants Image Builder access to perform workflow actions.
@@ -4020,6 +4029,7 @@ module Aws::Imagebuilder
       :date_next_run,
       :tags,
       :image_scanning_configuration,
+      :image_tags,
       :execution_role,
       :workflows,
       :logging_configuration,
@@ -8498,6 +8508,10 @@ module Aws::Imagebuilder
     #   that grants Image Builder access to perform workflow actions.
     #   @return [String]
     #
+    # @!attribute [rw] image_tags
+    #   The tags to be applied to the images produced by this pipeline.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/UpdateImagePipelineRequest AWS API Documentation
     #
     class UpdateImagePipelineRequest < Struct.new(
@@ -8515,7 +8529,8 @@ module Aws::Imagebuilder
       :image_scanning_configuration,
       :workflows,
       :logging_configuration,
-      :execution_role)
+      :execution_role,
+      :image_tags)
       SENSITIVE = []
       include Aws::Structure
     end

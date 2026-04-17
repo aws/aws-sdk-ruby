@@ -804,6 +804,7 @@ module Aws::S3
           bucket: context.params[:bucket],
           use_dual_stack: context[:use_dualstack_endpoint],
           accelerate: context[:use_accelerate_endpoint],
+          use_s3_express_control_endpoint: true,
         )
       end
     end

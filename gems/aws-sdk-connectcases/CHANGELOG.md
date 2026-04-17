@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.66.0 (2026-04-16)
+------------------
+
+* Feature - Added error handling for service quota limits
+
+1.65.0 (2026-03-23)
+------------------
+
+* Feature - You can now use the UpdateRelatedItem API to update the content of comments and custom related items associated with a case.
+
+1.64.0 (2026-03-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.63.0 (2026-03-10)
+------------------
+
+* Feature - Added functionality for the Required and Hidden case rule types to be conditionally evaluated on up to 5 conditions.
+
+1.62.0 (2026-02-23)
+------------------
+
+* Feature - SearchCases API can now accept 25 fields in the request and response as opposed to the previous limit of 10. DeleteField's hard limit of 100 fields per domain has been lifted.
+
 1.61.0 (2026-02-04)
 ------------------
 

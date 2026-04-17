@@ -646,6 +646,65 @@ module Aws::BedrockDataAutomation
       req.send_request(options)
     end
 
+    # Creates an Amazon Bedrock Data Automation Library
+    #
+    # @option params [required, String] :library_name
+    #   Name of the DataAutomationLibrary
+    #
+    # @option params [String] :library_description
+    #   Description of the DataAutomationLibrary
+    #
+    # @option params [String] :client_token
+    #   Client specified token used for idempotency checks
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [Types::EncryptionConfiguration] :encryption_configuration
+    #   KMS Encryption Configuration
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   List of tags
+    #
+    # @return [Types::CreateDataAutomationLibraryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateDataAutomationLibraryResponse#library_arn #library_arn} => String
+    #   * {Types::CreateDataAutomationLibraryResponse#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_data_automation_library({
+    #     library_name: "DataAutomationLibraryName", # required
+    #     library_description: "DataAutomationLibraryDescription",
+    #     client_token: "ClientToken",
+    #     encryption_configuration: {
+    #       kms_key_id: "KmsKeyId", # required
+    #       kms_encryption_context: {
+    #         "EncryptionContextKey" => "EncryptionContextValue",
+    #       },
+    #     },
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.library_arn #=> String
+    #   resp.status #=> String, one of "ACTIVE", "DELETING"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-data-automation-2023-07-26/CreateDataAutomationLibrary AWS API Documentation
+    #
+    # @overload create_data_automation_library(params = {})
+    # @param [Hash] params ({})
+    def create_data_automation_library(params = {}, options = {})
+      req = build_request(:create_data_automation_library, params)
+      req.send_request(options)
+    end
+
     # Creates an Amazon Bedrock Data Automation Project
     #
     # @option params [required, String] :project_name
@@ -668,6 +727,9 @@ module Aws::BedrockDataAutomation
     #
     # @option params [Types::OverrideConfiguration] :override_configuration
     #   Override configuration
+    #
+    # @option params [Types::DataAutomationLibraryConfiguration] :data_automation_library_configuration
+    #   DataAutomation Library configuration
     #
     # @option params [String] :client_token
     #   Client specified token used for idempotency checks
@@ -846,6 +908,13 @@ module Aws::BedrockDataAutomation
     #         mov: "IMAGE", # accepts IMAGE, DOCUMENT, AUDIO, VIDEO
     #       },
     #     },
+    #     data_automation_library_configuration: {
+    #       libraries: [
+    #         {
+    #           library_arn: "DataAutomationLibraryArn", # required
+    #         },
+    #       ],
+    #     },
     #     client_token: "ClientToken",
     #     encryption_configuration: {
     #       kms_key_id: "KmsKeyId", # required
@@ -899,6 +968,37 @@ module Aws::BedrockDataAutomation
     # @param [Hash] params ({})
     def delete_blueprint(params = {}, options = {})
       req = build_request(:delete_blueprint, params)
+      req.send_request(options)
+    end
+
+    # Deletes an existing Amazon Bedrock Data Automation Library
+    #
+    # @option params [required, String] :library_arn
+    #   ARN generated at the server side when a DataAutomationLibrary is
+    #   created
+    #
+    # @return [Types::DeleteDataAutomationLibraryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteDataAutomationLibraryResponse#library_arn #library_arn} => String
+    #   * {Types::DeleteDataAutomationLibraryResponse#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_data_automation_library({
+    #     library_arn: "DataAutomationLibraryArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.library_arn #=> String
+    #   resp.status #=> String, one of "ACTIVE", "DELETING"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-data-automation-2023-07-26/DeleteDataAutomationLibrary AWS API Documentation
+    #
+    # @overload delete_data_automation_library(params = {})
+    # @param [Hash] params ({})
+    def delete_data_automation_library(params = {}, options = {})
+      req = build_request(:delete_data_automation_library, params)
       req.send_request(options)
     end
 
@@ -1020,6 +1120,129 @@ module Aws::BedrockDataAutomation
       req.send_request(options)
     end
 
+    # Gets an existing Amazon Bedrock Data Automation Library
+    #
+    # @option params [required, String] :library_arn
+    #   ARN generated at the server side when a DataAutomationLibrary is
+    #   created
+    #
+    # @return [Types::GetDataAutomationLibraryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetDataAutomationLibraryResponse#library #library} => Types::DataAutomationLibrary
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_data_automation_library({
+    #     library_arn: "DataAutomationLibraryArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.library.library_arn #=> String
+    #   resp.library.creation_time #=> Time
+    #   resp.library.library_name #=> String
+    #   resp.library.library_description #=> String
+    #   resp.library.status #=> String, one of "ACTIVE", "DELETING"
+    #   resp.library.entity_types #=> Array
+    #   resp.library.entity_types[0].entity_type #=> String, one of "VOCABULARY"
+    #   resp.library.entity_types[0].entity_metadata #=> String
+    #   resp.library.kms_key_id #=> String
+    #   resp.library.kms_encryption_context #=> Hash
+    #   resp.library.kms_encryption_context["EncryptionContextKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-data-automation-2023-07-26/GetDataAutomationLibrary AWS API Documentation
+    #
+    # @overload get_data_automation_library(params = {})
+    # @param [Hash] params ({})
+    def get_data_automation_library(params = {}, options = {})
+      req = build_request(:get_data_automation_library, params)
+      req.send_request(options)
+    end
+
+    # Gets an existing entity based on entity type from the library
+    #
+    # @option params [required, String] :library_arn
+    #   ARN generated at the server side when a DataAutomationLibrary is
+    #   created
+    #
+    # @option params [required, String] :entity_type
+    #   The entity type for which the entity is requested
+    #
+    # @option params [required, String] :entity_id
+    #   Unique identifier for the entity
+    #
+    # @return [Types::GetDataAutomationLibraryEntityResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetDataAutomationLibraryEntityResponse#entity #entity} => Types::EntityDetails
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_data_automation_library_entity({
+    #     library_arn: "DataAutomationLibraryArn", # required
+    #     entity_type: "VOCABULARY", # required, accepts VOCABULARY
+    #     entity_id: "EntityId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.entity.vocabulary.entity_id #=> String
+    #   resp.entity.vocabulary.description #=> String
+    #   resp.entity.vocabulary.language #=> String, one of "EN", "DE", "ES", "FR", "IT", "PT", "JA", "KO", "CN", "TW", "HK"
+    #   resp.entity.vocabulary.phrases #=> Array
+    #   resp.entity.vocabulary.phrases[0].text #=> String
+    #   resp.entity.vocabulary.phrases[0].display_as_text #=> String
+    #   resp.entity.vocabulary.last_modified_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-data-automation-2023-07-26/GetDataAutomationLibraryEntity AWS API Documentation
+    #
+    # @overload get_data_automation_library_entity(params = {})
+    # @param [Hash] params ({})
+    def get_data_automation_library_entity(params = {}, options = {})
+      req = build_request(:get_data_automation_library_entity, params)
+      req.send_request(options)
+    end
+
+    # API used to get status of data automation library ingestion job
+    #
+    # @option params [required, String] :library_arn
+    #   ARN generated at the server side when a DataAutomationLibrary is
+    #   created
+    #
+    # @option params [required, String] :job_arn
+    #   ARN of the DataAutomationLibraryIngestionJob
+    #
+    # @return [Types::GetDataAutomationLibraryIngestionJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetDataAutomationLibraryIngestionJobResponse#job #job} => Types::DataAutomationLibraryIngestionJob
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_data_automation_library_ingestion_job({
+    #     library_arn: "DataAutomationLibraryArn", # required
+    #     job_arn: "DataAutomationLibraryIngestionJobArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.job.job_arn #=> String
+    #   resp.job.creation_time #=> Time
+    #   resp.job.entity_type #=> String, one of "VOCABULARY"
+    #   resp.job.operation_type #=> String, one of "UPSERT", "DELETE"
+    #   resp.job.job_status #=> String, one of "IN_PROGRESS", "COMPLETED", "COMPLETED_WITH_ERRORS", "FAILED"
+    #   resp.job.output_configuration.s3_uri #=> String
+    #   resp.job.completion_time #=> Time
+    #   resp.job.error_message #=> String
+    #   resp.job.error_type #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-data-automation-2023-07-26/GetDataAutomationLibraryIngestionJob AWS API Documentation
+    #
+    # @overload get_data_automation_library_ingestion_job(params = {})
+    # @param [Hash] params ({})
+    def get_data_automation_library_ingestion_job(params = {}, options = {})
+      req = build_request(:get_data_automation_library_ingestion_job, params)
+      req.send_request(options)
+    end
+
     # Gets an existing Amazon Bedrock Data Automation Project
     #
     # @option params [required, String] :project_arn
@@ -1119,6 +1342,8 @@ module Aws::BedrockDataAutomation
     #   resp.project.override_configuration.modality_routing.png #=> String, one of "IMAGE", "DOCUMENT", "AUDIO", "VIDEO"
     #   resp.project.override_configuration.modality_routing.mp4 #=> String, one of "IMAGE", "DOCUMENT", "AUDIO", "VIDEO"
     #   resp.project.override_configuration.modality_routing.mov #=> String, one of "IMAGE", "DOCUMENT", "AUDIO", "VIDEO"
+    #   resp.project.data_automation_library_configuration.libraries #=> Array
+    #   resp.project.data_automation_library_configuration.libraries[0].library_arn #=> String
     #   resp.project.status #=> String, one of "COMPLETED", "IN_PROGRESS", "FAILED"
     #   resp.project.kms_key_id #=> String
     #   resp.project.kms_encryption_context #=> Hash
@@ -1210,6 +1435,103 @@ module Aws::BedrockDataAutomation
       req.send_request(options)
     end
 
+    # Async API: Invoke data automation library ingestion job
+    #
+    # @option params [required, String] :library_arn
+    #   ARN generated at the server side when a DataAutomationLibrary is
+    #   created
+    #
+    # @option params [String] :client_token
+    #   Idempotency token
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, Types::InputConfiguration] :input_configuration
+    #   Input configuration of DataAutomationLibraryIngestionJob request
+    #
+    # @option params [required, String] :entity_type
+    #   The entity type for which DataAutomationLibraryIngestionJob is being
+    #   run
+    #
+    # @option params [required, String] :operation_type
+    #   The operation to be performed by DataAutomationLibraryIngestionJob
+    #
+    # @option params [required, Types::OutputConfiguration] :output_configuration
+    #   Output configuration of DataAutomationLibraryIngestionJob
+    #
+    # @option params [Types::NotificationConfiguration] :notification_configuration
+    #   Notification configuration.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   List of tags
+    #
+    # @return [Types::InvokeDataAutomationLibraryIngestionJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::InvokeDataAutomationLibraryIngestionJobResponse#job_arn #job_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.invoke_data_automation_library_ingestion_job({
+    #     library_arn: "DataAutomationLibraryArn", # required
+    #     client_token: "ClientToken",
+    #     input_configuration: { # required
+    #       s3_object: {
+    #         s3_uri: "S3Uri", # required
+    #         version: "S3ObjectVersion",
+    #       },
+    #       inline_payload: {
+    #         upsert_entities_info: [
+    #           {
+    #             vocabulary: {
+    #               entity_id: "EntityId",
+    #               description: "EntityDescription",
+    #               language: "EN", # required, accepts EN, DE, ES, FR, IT, PT, JA, KO, CN, TW, HK
+    #               phrases: [ # required
+    #                 {
+    #                   text: "PhraseText", # required
+    #                   display_as_text: "PhraseDisplayAsText",
+    #                 },
+    #               ],
+    #             },
+    #           },
+    #         ],
+    #         delete_entities_info: {
+    #           entity_ids: ["EntityId"], # required
+    #         },
+    #       },
+    #     },
+    #     entity_type: "VOCABULARY", # required, accepts VOCABULARY
+    #     operation_type: "UPSERT", # required, accepts UPSERT, DELETE
+    #     output_configuration: { # required
+    #       s3_uri: "S3Uri", # required
+    #     },
+    #     notification_configuration: {
+    #       event_bridge_configuration: { # required
+    #         event_bridge_enabled: false, # required
+    #       },
+    #     },
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.job_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-data-automation-2023-07-26/InvokeDataAutomationLibraryIngestionJob AWS API Documentation
+    #
+    # @overload invoke_data_automation_library_ingestion_job(params = {})
+    # @param [Hash] params ({})
+    def invoke_data_automation_library_ingestion_job(params = {}, options = {})
+      req = build_request(:invoke_data_automation_library_ingestion_job, params)
+      req.send_request(options)
+    end
+
     # Lists all existing Amazon Bedrock Data Automation Blueprints
     #
     # @option params [String] :blueprint_arn
@@ -1271,6 +1593,149 @@ module Aws::BedrockDataAutomation
       req.send_request(options)
     end
 
+    # Lists all existing Amazon Bedrock Data Automation Libraries
+    #
+    # @option params [Integer] :max_results
+    #   Max Results
+    #
+    # @option params [String] :next_token
+    #   Pagination token
+    #
+    # @option params [Types::DataAutomationProjectFilter] :project_filter
+    #   Data Automation Project Filter
+    #
+    # @return [Types::ListDataAutomationLibrariesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListDataAutomationLibrariesResponse#libraries #libraries} => Array&lt;Types::DataAutomationLibrarySummary&gt;
+    #   * {Types::ListDataAutomationLibrariesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_data_automation_libraries({
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #     project_filter: {
+    #       project_arn: "DataAutomationProjectArn", # required
+    #       project_stage: "DEVELOPMENT", # accepts DEVELOPMENT, LIVE
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.libraries #=> Array
+    #   resp.libraries[0].library_arn #=> String
+    #   resp.libraries[0].library_name #=> String
+    #   resp.libraries[0].creation_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-data-automation-2023-07-26/ListDataAutomationLibraries AWS API Documentation
+    #
+    # @overload list_data_automation_libraries(params = {})
+    # @param [Hash] params ({})
+    def list_data_automation_libraries(params = {}, options = {})
+      req = build_request(:list_data_automation_libraries, params)
+      req.send_request(options)
+    end
+
+    # Lists all stored entities in the library
+    #
+    # @option params [required, String] :library_arn
+    #   ARN generated at the server side when a DataAutomationLibrary is
+    #   created
+    #
+    # @option params [required, String] :entity_type
+    #   The entity type for which the entity list is requested
+    #
+    # @option params [Integer] :max_results
+    #   Max Results
+    #
+    # @option params [String] :next_token
+    #   Pagination token for retrieving the next set of results
+    #
+    # @return [Types::ListDataAutomationLibraryEntitiesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListDataAutomationLibraryEntitiesResponse#entities #entities} => Array&lt;Types::DataAutomationLibraryEntitySummary&gt;
+    #   * {Types::ListDataAutomationLibraryEntitiesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_data_automation_library_entities({
+    #     library_arn: "DataAutomationLibraryArn", # required
+    #     entity_type: "VOCABULARY", # required, accepts VOCABULARY
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.entities #=> Array
+    #   resp.entities[0].vocabulary.entity_id #=> String
+    #   resp.entities[0].vocabulary.description #=> String
+    #   resp.entities[0].vocabulary.language #=> String, one of "EN", "DE", "ES", "FR", "IT", "PT", "JA", "KO", "CN", "TW", "HK"
+    #   resp.entities[0].vocabulary.num_of_phrases #=> Integer
+    #   resp.entities[0].vocabulary.last_modified_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-data-automation-2023-07-26/ListDataAutomationLibraryEntities AWS API Documentation
+    #
+    # @overload list_data_automation_library_entities(params = {})
+    # @param [Hash] params ({})
+    def list_data_automation_library_entities(params = {}, options = {})
+      req = build_request(:list_data_automation_library_entities, params)
+      req.send_request(options)
+    end
+
+    # Lists all data automation library ingestion jobs
+    #
+    # @option params [required, String] :library_arn
+    #   ARN generated at the server side when a DataAutomationLibrary is
+    #   created
+    #
+    # @option params [Integer] :max_results
+    #   Max Results
+    #
+    # @option params [String] :next_token
+    #   Pagination token for retrieving the next set of results
+    #
+    # @return [Types::ListDataAutomationLibraryIngestionJobsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListDataAutomationLibraryIngestionJobsResponse#jobs #jobs} => Array&lt;Types::DataAutomationLibraryIngestionJobSummary&gt;
+    #   * {Types::ListDataAutomationLibraryIngestionJobsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_data_automation_library_ingestion_jobs({
+    #     library_arn: "DataAutomationLibraryArn", # required
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.jobs #=> Array
+    #   resp.jobs[0].job_arn #=> String
+    #   resp.jobs[0].job_status #=> String, one of "IN_PROGRESS", "COMPLETED", "COMPLETED_WITH_ERRORS", "FAILED"
+    #   resp.jobs[0].entity_type #=> String, one of "VOCABULARY"
+    #   resp.jobs[0].operation_type #=> String, one of "UPSERT", "DELETE"
+    #   resp.jobs[0].creation_time #=> Time
+    #   resp.jobs[0].completion_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-data-automation-2023-07-26/ListDataAutomationLibraryIngestionJobs AWS API Documentation
+    #
+    # @overload list_data_automation_library_ingestion_jobs(params = {})
+    # @param [Hash] params ({})
+    def list_data_automation_library_ingestion_jobs(params = {}, options = {})
+      req = build_request(:list_data_automation_library_ingestion_jobs, params)
+      req.send_request(options)
+    end
+
     # Lists all existing Amazon Bedrock Data Automation Projects
     #
     # @option params [Integer] :max_results
@@ -1287,6 +1752,9 @@ module Aws::BedrockDataAutomation
     #
     # @option params [String] :resource_owner
     #   Resource Owner
+    #
+    # @option params [Types::DataAutomationLibraryFilter] :library_filter
+    #   Data Automation Library Filter
     #
     # @return [Types::ListDataAutomationProjectsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1307,6 +1775,9 @@ module Aws::BedrockDataAutomation
     #       blueprint_stage: "DEVELOPMENT", # accepts DEVELOPMENT, LIVE
     #     },
     #     resource_owner: "SERVICE", # accepts SERVICE, ACCOUNT
+    #     library_filter: {
+    #       library_arn: "DataAutomationLibraryArn", # required
+    #     },
     #   })
     #
     # @example Response structure
@@ -1476,6 +1947,48 @@ module Aws::BedrockDataAutomation
       req.send_request(options)
     end
 
+    # Updates an existing Amazon Bedrock Data Automation Library
+    #
+    # @option params [required, String] :library_arn
+    #   ARN generated at the server side when a DataAutomationLibrary is
+    #   created
+    #
+    # @option params [String] :library_description
+    #   Description of the DataAutomationLibrary
+    #
+    # @option params [String] :client_token
+    #   Client specified token used for idempotency checks
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::UpdateDataAutomationLibraryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateDataAutomationLibraryResponse#library_arn #library_arn} => String
+    #   * {Types::UpdateDataAutomationLibraryResponse#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_data_automation_library({
+    #     library_arn: "DataAutomationLibraryArn", # required
+    #     library_description: "DataAutomationLibraryDescription",
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.library_arn #=> String
+    #   resp.status #=> String, one of "ACTIVE", "DELETING"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-data-automation-2023-07-26/UpdateDataAutomationLibrary AWS API Documentation
+    #
+    # @overload update_data_automation_library(params = {})
+    # @param [Hash] params ({})
+    def update_data_automation_library(params = {}, options = {})
+      req = build_request(:update_data_automation_library, params)
+      req.send_request(options)
+    end
+
     # Updates an existing Amazon Bedrock Data Automation Project
     #
     # @option params [required, String] :project_arn
@@ -1496,6 +2009,9 @@ module Aws::BedrockDataAutomation
     #
     # @option params [Types::OverrideConfiguration] :override_configuration
     #   Override configuration
+    #
+    # @option params [Types::DataAutomationLibraryConfiguration] :data_automation_library_configuration
+    #   DataAutomation Library configuration
     #
     # @option params [Types::EncryptionConfiguration] :encryption_configuration
     #   KMS Encryption Configuration
@@ -1664,6 +2180,13 @@ module Aws::BedrockDataAutomation
     #         mov: "IMAGE", # accepts IMAGE, DOCUMENT, AUDIO, VIDEO
     #       },
     #     },
+    #     data_automation_library_configuration: {
+    #       libraries: [
+    #         {
+    #           library_arn: "DataAutomationLibraryArn", # required
+    #         },
+    #       ],
+    #     },
     #     encryption_configuration: {
     #       kms_key_id: "KmsKeyId", # required
     #       kms_encryption_context: {
@@ -1705,7 +2228,7 @@ module Aws::BedrockDataAutomation
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrockdataautomation'
-      context[:gem_version] = '1.26.0'
+      context[:gem_version] = '1.28.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

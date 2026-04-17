@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.122.0 (2026-04-07)
+------------------
+
+* Feature - Allow IAM role ARNs with IAM Paths for "SecretAccessRoleArn" field in "CustomSecretConfig"
+
+1.121.0 (2026-03-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.120.0 (2026-03-12)
+------------------
+
+* Feature - DataSync's 3 location types, Hadoop Distributed File System (HDFS), FSx for Windows File Server (FSx Windows), and FSx for NetApp ONTAP (FSx ONTAP) now have credentials managed via Secrets Manager, which may be encrypted with service keys or be configured to use customer-managed keys or secret.
+
 1.119.0 (2026-01-16)
 ------------------
 

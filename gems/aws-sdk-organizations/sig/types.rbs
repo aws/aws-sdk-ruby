@@ -41,6 +41,7 @@ module Aws::Organizations
       attr_accessor name: ::String
       attr_accessor status: ("ACTIVE" | "SUSPENDED" | "PENDING_CLOSURE")
       attr_accessor state: ("PENDING_ACTIVATION" | "ACTIVE" | "SUSPENDED" | "PENDING_CLOSURE" | "CLOSED")
+      attr_accessor paths: ::Array[::String]
       attr_accessor joined_method: ("INVITED" | "CREATED")
       attr_accessor joined_timestamp: ::Time
       SENSITIVE: [:email, :name]
@@ -831,6 +832,7 @@ module Aws::Organizations
       attr_accessor id: ::String
       attr_accessor arn: ::String
       attr_accessor name: ::String
+      attr_accessor path: ::String
       SENSITIVE: []
     end
 

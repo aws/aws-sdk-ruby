@@ -125,6 +125,29 @@ module Aws
                                     ) -> _CreateBlueprintVersionResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateBlueprintVersionResponseSuccess
 
+      interface _CreateDataAutomationLibraryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateDataAutomationLibraryResponse]
+        def library_arn: () -> ::String
+        def status: () -> ("ACTIVE" | "DELETING")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockDataAutomation/Client.html#create_data_automation_library-instance_method
+      def create_data_automation_library: (
+                                            library_name: ::String,
+                                            ?library_description: ::String,
+                                            ?client_token: ::String,
+                                            ?encryption_configuration: {
+                                              kms_key_id: ::String,
+                                              kms_encryption_context: Hash[::String, ::String]?
+                                            },
+                                            ?tags: Array[
+                                              {
+                                                key: ::String,
+                                                value: ::String
+                                              },
+                                            ]
+                                          ) -> _CreateDataAutomationLibraryResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDataAutomationLibraryResponseSuccess
+
       interface _CreateDataAutomationProjectResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateDataAutomationProjectResponse]
         def project_arn: () -> ::String
@@ -289,6 +312,13 @@ module Aws
                                                 mov: ("IMAGE" | "DOCUMENT" | "AUDIO" | "VIDEO")?
                                               }?
                                             },
+                                            ?data_automation_library_configuration: {
+                                              libraries: Array[
+                                                {
+                                                  library_arn: ::String
+                                                },
+                                              ]?
+                                            },
                                             ?client_token: ::String,
                                             ?encryption_configuration: {
                                               kms_key_id: ::String,
@@ -312,6 +342,17 @@ module Aws
                               ?blueprint_version: ::String
                             ) -> _DeleteBlueprintResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteBlueprintResponseSuccess
+
+      interface _DeleteDataAutomationLibraryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteDataAutomationLibraryResponse]
+        def library_arn: () -> ::String
+        def status: () -> ("ACTIVE" | "DELETING")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockDataAutomation/Client.html#delete_data_automation_library-instance_method
+      def delete_data_automation_library: (
+                                            library_arn: ::String
+                                          ) -> _DeleteDataAutomationLibraryResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteDataAutomationLibraryResponseSuccess
 
       interface _DeleteDataAutomationProjectResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteDataAutomationProjectResponse]
@@ -348,6 +389,39 @@ module Aws
                                                invocation_arn: ::String
                                              ) -> _GetBlueprintOptimizationStatusResponseSuccess
                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetBlueprintOptimizationStatusResponseSuccess
+
+      interface _GetDataAutomationLibraryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDataAutomationLibraryResponse]
+        def library: () -> Types::DataAutomationLibrary
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockDataAutomation/Client.html#get_data_automation_library-instance_method
+      def get_data_automation_library: (
+                                         library_arn: ::String
+                                       ) -> _GetDataAutomationLibraryResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDataAutomationLibraryResponseSuccess
+
+      interface _GetDataAutomationLibraryEntityResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDataAutomationLibraryEntityResponse]
+        def entity: () -> Types::EntityDetails
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockDataAutomation/Client.html#get_data_automation_library_entity-instance_method
+      def get_data_automation_library_entity: (
+                                                library_arn: ::String,
+                                                entity_type: ("VOCABULARY"),
+                                                entity_id: ::String
+                                              ) -> _GetDataAutomationLibraryEntityResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDataAutomationLibraryEntityResponseSuccess
+
+      interface _GetDataAutomationLibraryIngestionJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDataAutomationLibraryIngestionJobResponse]
+        def job: () -> Types::DataAutomationLibraryIngestionJob
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockDataAutomation/Client.html#get_data_automation_library_ingestion_job-instance_method
+      def get_data_automation_library_ingestion_job: (
+                                                       library_arn: ::String,
+                                                       job_arn: ::String
+                                                     ) -> _GetDataAutomationLibraryIngestionJobResponseSuccess
+                                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDataAutomationLibraryIngestionJobResponseSuccess
 
       interface _GetDataAutomationProjectResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetDataAutomationProjectResponse]
@@ -402,6 +476,59 @@ module Aws
                                                ) -> _InvokeBlueprintOptimizationAsyncResponseSuccess
                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _InvokeBlueprintOptimizationAsyncResponseSuccess
 
+      interface _InvokeDataAutomationLibraryIngestionJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::InvokeDataAutomationLibraryIngestionJobResponse]
+        def job_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockDataAutomation/Client.html#invoke_data_automation_library_ingestion_job-instance_method
+      def invoke_data_automation_library_ingestion_job: (
+                                                          library_arn: ::String,
+                                                          ?client_token: ::String,
+                                                          input_configuration: {
+                                                            s3_object: {
+                                                              s3_uri: ::String,
+                                                              version: ::String?
+                                                            }?,
+                                                            inline_payload: {
+                                                              upsert_entities_info: Array[
+                                                                {
+                                                                  vocabulary: {
+                                                                    entity_id: ::String?,
+                                                                    description: ::String?,
+                                                                    language: ("EN" | "DE" | "ES" | "FR" | "IT" | "PT" | "JA" | "KO" | "CN" | "TW" | "HK"),
+                                                                    phrases: Array[
+                                                                      {
+                                                                        text: ::String,
+                                                                        display_as_text: ::String?
+                                                                      },
+                                                                    ]
+                                                                  }?
+                                                                },
+                                                              ]?,
+                                                              delete_entities_info: {
+                                                                entity_ids: Array[::String]
+                                                              }?
+                                                            }?
+                                                          },
+                                                          entity_type: ("VOCABULARY"),
+                                                          operation_type: ("UPSERT" | "DELETE"),
+                                                          output_configuration: {
+                                                            s3_uri: ::String
+                                                          },
+                                                          ?notification_configuration: {
+                                                            event_bridge_configuration: {
+                                                              event_bridge_enabled: bool
+                                                            }
+                                                          },
+                                                          ?tags: Array[
+                                                            {
+                                                              key: ::String,
+                                                              value: ::String
+                                                            },
+                                                          ]
+                                                        ) -> _InvokeDataAutomationLibraryIngestionJobResponseSuccess
+                                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _InvokeDataAutomationLibraryIngestionJobResponseSuccess
+
       interface _ListBlueprintsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListBlueprintsResponse]
         def blueprints: () -> ::Array[Types::BlueprintSummary]
@@ -421,6 +548,49 @@ module Aws
                            ) -> _ListBlueprintsResponseSuccess
                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListBlueprintsResponseSuccess
 
+      interface _ListDataAutomationLibrariesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDataAutomationLibrariesResponse]
+        def libraries: () -> ::Array[Types::DataAutomationLibrarySummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockDataAutomation/Client.html#list_data_automation_libraries-instance_method
+      def list_data_automation_libraries: (
+                                            ?max_results: ::Integer,
+                                            ?next_token: ::String,
+                                            ?project_filter: {
+                                              project_arn: ::String,
+                                              project_stage: ("DEVELOPMENT" | "LIVE")?
+                                            }
+                                          ) -> _ListDataAutomationLibrariesResponseSuccess
+                                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDataAutomationLibrariesResponseSuccess
+
+      interface _ListDataAutomationLibraryEntitiesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDataAutomationLibraryEntitiesResponse]
+        def entities: () -> ::Array[Types::DataAutomationLibraryEntitySummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockDataAutomation/Client.html#list_data_automation_library_entities-instance_method
+      def list_data_automation_library_entities: (
+                                                   library_arn: ::String,
+                                                   entity_type: ("VOCABULARY"),
+                                                   ?max_results: ::Integer,
+                                                   ?next_token: ::String
+                                                 ) -> _ListDataAutomationLibraryEntitiesResponseSuccess
+                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDataAutomationLibraryEntitiesResponseSuccess
+
+      interface _ListDataAutomationLibraryIngestionJobsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDataAutomationLibraryIngestionJobsResponse]
+        def jobs: () -> ::Array[Types::DataAutomationLibraryIngestionJobSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockDataAutomation/Client.html#list_data_automation_library_ingestion_jobs-instance_method
+      def list_data_automation_library_ingestion_jobs: (
+                                                         library_arn: ::String,
+                                                         ?max_results: ::Integer,
+                                                         ?next_token: ::String
+                                                       ) -> _ListDataAutomationLibraryIngestionJobsResponseSuccess
+                                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDataAutomationLibraryIngestionJobsResponseSuccess
+
       interface _ListDataAutomationProjectsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListDataAutomationProjectsResponse]
         def projects: () -> ::Array[Types::DataAutomationProjectSummary]
@@ -436,7 +606,10 @@ module Aws
                                              blueprint_version: ::String?,
                                              blueprint_stage: ("DEVELOPMENT" | "LIVE")?
                                            },
-                                           ?resource_owner: ("SERVICE" | "ACCOUNT")
+                                           ?resource_owner: ("SERVICE" | "ACCOUNT"),
+                                           ?library_filter: {
+                                             library_arn: ::String
+                                           }
                                          ) -> _ListDataAutomationProjectsResponseSuccess
                                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDataAutomationProjectsResponseSuccess
 
@@ -490,6 +663,19 @@ module Aws
                               }
                             ) -> _UpdateBlueprintResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateBlueprintResponseSuccess
+
+      interface _UpdateDataAutomationLibraryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateDataAutomationLibraryResponse]
+        def library_arn: () -> ::String
+        def status: () -> ("ACTIVE" | "DELETING")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockDataAutomation/Client.html#update_data_automation_library-instance_method
+      def update_data_automation_library: (
+                                            library_arn: ::String,
+                                            ?library_description: ::String,
+                                            ?client_token: ::String
+                                          ) -> _UpdateDataAutomationLibraryResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDataAutomationLibraryResponseSuccess
 
       interface _UpdateDataAutomationProjectResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateDataAutomationProjectResponse]
@@ -653,6 +839,13 @@ module Aws
                                                 mp4: ("IMAGE" | "DOCUMENT" | "AUDIO" | "VIDEO")?,
                                                 mov: ("IMAGE" | "DOCUMENT" | "AUDIO" | "VIDEO")?
                                               }?
+                                            },
+                                            ?data_automation_library_configuration: {
+                                              libraries: Array[
+                                                {
+                                                  library_arn: ::String
+                                                },
+                                              ]?
                                             },
                                             ?encryption_configuration: {
                                               kms_key_id: ::String,

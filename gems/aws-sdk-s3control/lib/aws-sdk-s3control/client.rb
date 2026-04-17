@@ -4549,6 +4549,11 @@ module Aws::S3Control
     #   object. Do not pass this value if the target data is a bucket or a
     #   bucket and a prefix.
     #
+    # @option params [String] :audit_context
+    #   The context to identify the job or query associated with the
+    #   credential request. This information will be displayed in CloudTrail
+    #   log in your account.
+    #
     # @return [Types::GetDataAccessResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetDataAccessResult#credentials #credentials} => Types::Credentials
@@ -4564,6 +4569,7 @@ module Aws::S3Control
     #     duration_seconds: 1,
     #     privilege: "Minimal", # accepts Minimal, Default
     #     target_type: "Object", # accepts Object
+    #     audit_context: "AuditContext",
     #   })
     #
     # @example Response structure
@@ -8214,7 +8220,7 @@ module Aws::S3Control
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-s3control'
-      context[:gem_version] = '1.126.0'
+      context[:gem_version] = '1.128.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

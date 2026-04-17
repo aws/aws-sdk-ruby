@@ -9,6 +9,56 @@ module Aws
   module ECS
     module Waiters
 
+      class DaemonActive
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    daemon_arn: ::String
+                  ) -> Client::_DescribeDaemonResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_DescribeDaemonResponseSuccess
+      end
+
+      class DaemonDeploymentStopped
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    daemon_deployment_arns: Array[::String]
+                  ) -> Client::_DescribeDaemonDeploymentsResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_DescribeDaemonDeploymentsResponseSuccess
+      end
+
+      class DaemonDeploymentSuccessful
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    daemon_deployment_arns: Array[::String]
+                  ) -> Client::_DescribeDaemonDeploymentsResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_DescribeDaemonDeploymentsResponseSuccess
+      end
+
+      class DaemonTaskDefinitionActive
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    daemon_task_definition: ::String
+                  ) -> Client::_DescribeDaemonTaskDefinitionResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_DescribeDaemonTaskDefinitionResponseSuccess
+      end
+
+      class DaemonTaskDefinitionDeleted
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    daemon_task_definition: ::String
+                  ) -> Client::_DescribeDaemonTaskDefinitionResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_DescribeDaemonTaskDefinitionResponseSuccess
+      end
+
       class ServicesInactive
         def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
                       | (?Hash[Symbol, untyped]) -> void

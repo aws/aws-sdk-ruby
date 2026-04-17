@@ -31,7 +31,7 @@ module Aws::Outposts
     class AssetInfo
       attr_accessor asset_id: ::String
       attr_accessor rack_id: ::String
-      attr_accessor asset_type: ("COMPUTE")
+      attr_accessor asset_type: ("COMPUTE" | "STORAGE" | "POWERSHELF" | "SWITCH" | "NETWORKING")
       attr_accessor compute_attributes: Types::ComputeAttributes
       attr_accessor asset_location: Types::AssetLocation
       SENSITIVE: []
@@ -112,7 +112,7 @@ module Aws::Outposts
 
     class ComputeAttributes
       attr_accessor host_id: ::String
-      attr_accessor state: ("ACTIVE" | "ISOLATED" | "RETIRING")
+      attr_accessor state: ("ACTIVE" | "ISOLATED" | "RETIRING" | "INSTALLING")
       attr_accessor instance_families: ::Array[::String]
       attr_accessor instance_type_capacities: ::Array[Types::AssetInstanceTypeCapacity]
       attr_accessor max_vcpus: ::Integer
@@ -162,6 +162,23 @@ module Aws::Outposts
 
     class CreateOutpostOutput
       attr_accessor outpost: Types::Outpost
+      SENSITIVE: []
+    end
+
+    class CreateRenewalInput
+      attr_accessor payment_option: ("ALL_UPFRONT" | "NO_UPFRONT" | "PARTIAL_UPFRONT")
+      attr_accessor payment_term: ("THREE_YEARS" | "ONE_YEAR" | "FIVE_YEARS")
+      attr_accessor outpost_identifier: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateRenewalOutput
+      attr_accessor payment_option: ("ALL_UPFRONT" | "NO_UPFRONT" | "PARTIAL_UPFRONT")
+      attr_accessor payment_term: ("THREE_YEARS" | "ONE_YEAR" | "FIVE_YEARS")
+      attr_accessor outpost_id: ::String
+      attr_accessor upfront_price: ::Float
+      attr_accessor monthly_recurring_price: ::Float
       SENSITIVE: []
     end
 
@@ -269,6 +286,8 @@ module Aws::Outposts
       attr_accessor next_token: ::String
       attr_accessor subscriptions: ::Array[Types::Subscription]
       attr_accessor contract_end_date: ::String
+      attr_accessor payment_term: ("THREE_YEARS" | "ONE_YEAR" | "FIVE_YEARS")
+      attr_accessor payment_option: ("ALL_UPFRONT" | "NO_UPFRONT" | "PARTIAL_UPFRONT")
       SENSITIVE: []
     end
 
@@ -309,6 +328,17 @@ module Aws::Outposts
     class GetOutpostSupportedInstanceTypesOutput
       attr_accessor instance_types: ::Array[Types::InstanceTypeItem]
       attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetRenewalPricingInput
+      attr_accessor outpost_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetRenewalPricingOutput
+      attr_accessor pricing_result: ("PRICED" | "UNABLE_TO_PRICE")
+      attr_accessor pricing_options: ::Array[Types::PricingOption]
       SENSITIVE: []
     end
 
@@ -405,7 +435,8 @@ module Aws::Outposts
       attr_accessor host_id_filter: ::Array[::String]
       attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
-      attr_accessor status_filter: ::Array[("ACTIVE" | "RETIRING" | "ISOLATED")]
+      attr_accessor status_filter: ::Array[("ACTIVE" | "RETIRING" | "ISOLATED" | "INSTALLING")]
+      attr_accessor asset_type_filter: ::Array[("COMPUTE" | "STORAGE" | "POWERSHELF" | "SWITCH" | "NETWORKING")]
       SENSITIVE: []
     end
 
@@ -556,6 +587,12 @@ module Aws::Outposts
       SENSITIVE: []
     end
 
+    class PricingOption
+      attr_accessor pricing_type: ("SUBSCRIPTION")
+      attr_accessor subscription_pricing_details: Types::SubscriptionPricingDetails
+      SENSITIVE: []
+    end
+
     class RackPhysicalProperties
       attr_accessor power_draw_kva: ("POWER_5_KVA" | "POWER_10_KVA" | "POWER_15_KVA" | "POWER_30_KVA")
       attr_accessor power_phase: ("SINGLE_PHASE" | "THREE_PHASE")
@@ -652,12 +689,20 @@ module Aws::Outposts
     class Subscription
       attr_accessor subscription_id: ::String
       attr_accessor subscription_type: ("ORIGINAL" | "RENEWAL" | "CAPACITY_INCREASE")
-      attr_accessor subscription_status: ("ACTIVE" | "INACTIVE" | "CANCELLED")
+      attr_accessor subscription_status: ("ACTIVE" | "PENDING" | "INACTIVE" | "CANCELLED")
       attr_accessor order_ids: ::Array[::String]
       attr_accessor begin_date: ::Time
       attr_accessor end_date: ::Time
       attr_accessor monthly_recurring_price: ::Float
       attr_accessor upfront_price: ::Float
+      SENSITIVE: []
+    end
+
+    class SubscriptionPricingDetails
+      attr_accessor payment_option: ("ALL_UPFRONT" | "NO_UPFRONT" | "PARTIAL_UPFRONT")
+      attr_accessor payment_term: ("THREE_YEARS" | "ONE_YEAR" | "FIVE_YEARS")
+      attr_accessor upfront_price: ::Float
+      attr_accessor monthly_recurring_price: ::Float
       SENSITIVE: []
     end
 

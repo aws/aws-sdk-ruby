@@ -114,6 +114,7 @@ module Aws::Route53GlobalResolver
     GetHostedZoneAssociationOutput = Shapes::StructureShape.new(name: 'GetHostedZoneAssociationOutput')
     GetManagedFirewallDomainListInput = Shapes::StructureShape.new(name: 'GetManagedFirewallDomainListInput')
     GetManagedFirewallDomainListOutput = Shapes::StructureShape.new(name: 'GetManagedFirewallDomainListOutput')
+    GlobalResolverIpAddressType = Shapes::StringShape.new(name: 'GlobalResolverIpAddressType')
     GlobalResolvers = Shapes::ListShape.new(name: 'GlobalResolvers')
     GlobalResolversItem = Shapes::StructureShape.new(name: 'GlobalResolversItem')
     HostedZoneAssociationStatus = Shapes::StringShape.new(name: 'HostedZoneAssociationStatus')
@@ -123,6 +124,8 @@ module Aws::Route53GlobalResolver
     HostedZoneName = Shapes::StringShape.new(name: 'HostedZoneName')
     IPv4Address = Shapes::StringShape.new(name: 'IPv4Address')
     IPv4Addresses = Shapes::ListShape.new(name: 'IPv4Addresses')
+    IPv6Address = Shapes::StringShape.new(name: 'IPv6Address')
+    IPv6Addresses = Shapes::ListShape.new(name: 'IPv6Addresses')
     ISO8601TimeString = Shapes::TimestampShape.new(name: 'ISO8601TimeString', timestampFormat: "iso8601")
     ImportFirewallDomainsInput = Shapes::StructureShape.new(name: 'ImportFirewallDomainsInput')
     ImportFirewallDomainsOutput = Shapes::StructureShape.new(name: 'ImportFirewallDomainsOutput')
@@ -488,6 +491,7 @@ module Aws::Route53GlobalResolver
 
     CreateGlobalResolverInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateGlobalResolverInput.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "description"))
+    CreateGlobalResolverInput.add_member(:ip_address_type, Shapes::ShapeRef.new(shape: GlobalResolverIpAddressType, location_name: "ipAddressType"))
     CreateGlobalResolverInput.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "name"))
     CreateGlobalResolverInput.add_member(:observability_region, Shapes::ShapeRef.new(shape: Region, location_name: "observabilityRegion"))
     CreateGlobalResolverInput.add_member(:regions, Shapes::ShapeRef.new(shape: Regions, required: true, location_name: "regions"))
@@ -500,7 +504,9 @@ module Aws::Route53GlobalResolver
     CreateGlobalResolverOutput.add_member(:created_at, Shapes::ShapeRef.new(shape: ISO8601TimeString, required: true, location_name: "createdAt"))
     CreateGlobalResolverOutput.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "description"))
     CreateGlobalResolverOutput.add_member(:dns_name, Shapes::ShapeRef.new(shape: Sni, required: true, location_name: "dnsName"))
+    CreateGlobalResolverOutput.add_member(:ip_address_type, Shapes::ShapeRef.new(shape: GlobalResolverIpAddressType, location_name: "ipAddressType"))
     CreateGlobalResolverOutput.add_member(:ipv4_addresses, Shapes::ShapeRef.new(shape: IPv4Addresses, required: true, location_name: "ipv4Addresses"))
+    CreateGlobalResolverOutput.add_member(:ipv6_addresses, Shapes::ShapeRef.new(shape: IPv6Addresses, location_name: "ipv6Addresses"))
     CreateGlobalResolverOutput.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "name"))
     CreateGlobalResolverOutput.add_member(:observability_region, Shapes::ShapeRef.new(shape: Region, location_name: "observabilityRegion"))
     CreateGlobalResolverOutput.add_member(:regions, Shapes::ShapeRef.new(shape: Regions, required: true, location_name: "regions"))
@@ -610,6 +616,8 @@ module Aws::Route53GlobalResolver
     DeleteGlobalResolverOutput.add_member(:updated_at, Shapes::ShapeRef.new(shape: ISO8601TimeString, required: true, location_name: "updatedAt"))
     DeleteGlobalResolverOutput.add_member(:status, Shapes::ShapeRef.new(shape: CRResourceStatus, required: true, location_name: "status"))
     DeleteGlobalResolverOutput.add_member(:ipv4_addresses, Shapes::ShapeRef.new(shape: IPv4Addresses, required: true, location_name: "ipv4Addresses"))
+    DeleteGlobalResolverOutput.add_member(:ipv6_addresses, Shapes::ShapeRef.new(shape: IPv6Addresses, location_name: "ipv6Addresses"))
+    DeleteGlobalResolverOutput.add_member(:ip_address_type, Shapes::ShapeRef.new(shape: GlobalResolverIpAddressType, location_name: "ipAddressType"))
     DeleteGlobalResolverOutput.struct_class = Types::DeleteGlobalResolverOutput
 
     DisableDNSViewInput.add_member(:dns_view_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location: "uri", location_name: "dnsViewId"))
@@ -799,6 +807,8 @@ module Aws::Route53GlobalResolver
     GetGlobalResolverOutput.add_member(:updated_at, Shapes::ShapeRef.new(shape: ISO8601TimeString, required: true, location_name: "updatedAt"))
     GetGlobalResolverOutput.add_member(:status, Shapes::ShapeRef.new(shape: CRResourceStatus, required: true, location_name: "status"))
     GetGlobalResolverOutput.add_member(:ipv4_addresses, Shapes::ShapeRef.new(shape: IPv4Addresses, required: true, location_name: "ipv4Addresses"))
+    GetGlobalResolverOutput.add_member(:ipv6_addresses, Shapes::ShapeRef.new(shape: IPv6Addresses, location_name: "ipv6Addresses"))
+    GetGlobalResolverOutput.add_member(:ip_address_type, Shapes::ShapeRef.new(shape: GlobalResolverIpAddressType, location_name: "ipAddressType"))
     GetGlobalResolverOutput.struct_class = Types::GetGlobalResolverOutput
 
     GetHostedZoneAssociationInput.add_member(:hosted_zone_association_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location: "uri", location_name: "hostedZoneAssociationId"))
@@ -837,6 +847,8 @@ module Aws::Route53GlobalResolver
     GlobalResolversItem.add_member(:updated_at, Shapes::ShapeRef.new(shape: ISO8601TimeString, required: true, location_name: "updatedAt"))
     GlobalResolversItem.add_member(:status, Shapes::ShapeRef.new(shape: CRResourceStatus, required: true, location_name: "status"))
     GlobalResolversItem.add_member(:ipv4_addresses, Shapes::ShapeRef.new(shape: IPv4Addresses, required: true, location_name: "ipv4Addresses"))
+    GlobalResolversItem.add_member(:ipv6_addresses, Shapes::ShapeRef.new(shape: IPv6Addresses, location_name: "ipv6Addresses"))
+    GlobalResolversItem.add_member(:ip_address_type, Shapes::ShapeRef.new(shape: GlobalResolverIpAddressType, location_name: "ipAddressType"))
     GlobalResolversItem.struct_class = Types::GlobalResolversItem
 
     HostedZoneAssociationSummary.add_member(:id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "id"))
@@ -852,6 +864,8 @@ module Aws::Route53GlobalResolver
     HostedZoneAssociations.member = Shapes::ShapeRef.new(shape: HostedZoneAssociationSummary)
 
     IPv4Addresses.member = Shapes::ShapeRef.new(shape: IPv4Address)
+
+    IPv6Addresses.member = Shapes::ShapeRef.new(shape: IPv6Address)
 
     ImportFirewallDomainsInput.add_member(:domain_file_url, Shapes::ShapeRef.new(shape: String, required: true, location_name: "domainFileUrl"))
     ImportFirewallDomainsInput.add_member(:firewall_domain_list_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location: "uri", location_name: "firewallDomainListId"))
@@ -1098,6 +1112,7 @@ module Aws::Route53GlobalResolver
     UpdateGlobalResolverInput.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "name"))
     UpdateGlobalResolverInput.add_member(:observability_region, Shapes::ShapeRef.new(shape: Region, location_name: "observabilityRegion"))
     UpdateGlobalResolverInput.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "description"))
+    UpdateGlobalResolverInput.add_member(:ip_address_type, Shapes::ShapeRef.new(shape: GlobalResolverIpAddressType, location_name: "ipAddressType"))
     UpdateGlobalResolverInput.struct_class = Types::UpdateGlobalResolverInput
 
     UpdateGlobalResolverOutput.add_member(:id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "id"))
@@ -1112,6 +1127,8 @@ module Aws::Route53GlobalResolver
     UpdateGlobalResolverOutput.add_member(:updated_at, Shapes::ShapeRef.new(shape: ISO8601TimeString, required: true, location_name: "updatedAt"))
     UpdateGlobalResolverOutput.add_member(:status, Shapes::ShapeRef.new(shape: CRResourceStatus, required: true, location_name: "status"))
     UpdateGlobalResolverOutput.add_member(:ipv4_addresses, Shapes::ShapeRef.new(shape: IPv4Addresses, required: true, location_name: "ipv4Addresses"))
+    UpdateGlobalResolverOutput.add_member(:ipv6_addresses, Shapes::ShapeRef.new(shape: IPv6Addresses, location_name: "ipv6Addresses"))
+    UpdateGlobalResolverOutput.add_member(:ip_address_type, Shapes::ShapeRef.new(shape: GlobalResolverIpAddressType, location_name: "ipAddressType"))
     UpdateGlobalResolverOutput.struct_class = Types::UpdateGlobalResolverOutput
 
     UpdateHostedZoneAssociationInput.add_member(:hosted_zone_association_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location: "uri", location_name: "hostedZoneAssociationId"))
@@ -1390,6 +1407,7 @@ module Aws::Route53GlobalResolver
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -1418,6 +1436,7 @@ module Aws::Route53GlobalResolver
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -1536,6 +1555,7 @@ module Aws::Route53GlobalResolver
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -1763,6 +1783,7 @@ module Aws::Route53GlobalResolver
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -1777,6 +1798,7 @@ module Aws::Route53GlobalResolver
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -1791,6 +1813,7 @@ module Aws::Route53GlobalResolver
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -1805,6 +1828,7 @@ module Aws::Route53GlobalResolver
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -1819,6 +1843,7 @@ module Aws::Route53GlobalResolver
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -1833,6 +1858,7 @@ module Aws::Route53GlobalResolver
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)

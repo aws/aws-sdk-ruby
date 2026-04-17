@@ -526,6 +526,8 @@ module Aws::ConnectCases
     #   resp.case_rules[0].rule.required.conditions[0].not_equal_to.operand_two.boolean_value #=> Boolean
     #   resp.case_rules[0].rule.required.conditions[0].not_equal_to.operand_two.double_value #=> Float
     #   resp.case_rules[0].rule.required.conditions[0].not_equal_to.result #=> Boolean
+    #   resp.case_rules[0].rule.required.conditions[0].and_all.conditions #=> Types::BooleanConditionList
+    #   resp.case_rules[0].rule.required.conditions[0].or_all.conditions #=> Types::BooleanConditionList
     #   resp.case_rules[0].rule.field_options.parent_field_id #=> String
     #   resp.case_rules[0].rule.field_options.child_field_id #=> String
     #   resp.case_rules[0].rule.field_options.parent_child_field_options_mappings #=> Array
@@ -544,6 +546,8 @@ module Aws::ConnectCases
     #   resp.case_rules[0].rule.hidden.conditions[0].not_equal_to.operand_two.boolean_value #=> Boolean
     #   resp.case_rules[0].rule.hidden.conditions[0].not_equal_to.operand_two.double_value #=> Float
     #   resp.case_rules[0].rule.hidden.conditions[0].not_equal_to.result #=> Boolean
+    #   resp.case_rules[0].rule.hidden.conditions[0].and_all.conditions #=> Types::BooleanConditionList
+    #   resp.case_rules[0].rule.hidden.conditions[0].or_all.conditions #=> Types::BooleanConditionList
     #   resp.case_rules[0].description #=> String
     #   resp.case_rules[0].deleted #=> Boolean
     #   resp.case_rules[0].created_time #=> Time
@@ -833,6 +837,16 @@ module Aws::ConnectCases
     #               },
     #               result: false, # required
     #             },
+    #             and_all: {
+    #               conditions: { # required
+    #                 # recursive BooleanConditionList
+    #               },
+    #             },
+    #             or_all: {
+    #               conditions: { # required
+    #                 # recursive BooleanConditionList
+    #               },
+    #             },
     #           },
     #         ],
     #       },
@@ -875,6 +889,16 @@ module Aws::ConnectCases
     #                 },
     #               },
     #               result: false, # required
+    #             },
+    #             and_all: {
+    #               conditions: { # required
+    #                 # recursive BooleanConditionList
+    #               },
+    #             },
+    #             or_all: {
+    #               conditions: { # required
+    #                 # recursive BooleanConditionList
+    #               },
     #             },
     #           },
     #         ],
@@ -1432,8 +1456,7 @@ module Aws::ConnectCases
       req.send_request(options)
     end
 
-    # Deletes a field from a cases template. You can delete up to 100 fields
-    # per domain.
+    # Deletes a field from a cases template.
     #
     # After a field is deleted:
     #
@@ -1707,7 +1730,7 @@ module Aws::ConnectCases
     #   resp.next_token #=> String
     #   resp.audit_events #=> Array
     #   resp.audit_events[0].event_id #=> String
-    #   resp.audit_events[0].type #=> String, one of "Case.Created", "Case.Updated", "RelatedItem.Created"
+    #   resp.audit_events[0].type #=> String, one of "Case.Created", "Case.Updated", "RelatedItem.Created", "RelatedItem.Deleted", "RelatedItem.Updated"
     #   resp.audit_events[0].related_item_type #=> String, one of "Contact", "Comment", "File", "Sla", "ConnectCase", "Custom"
     #   resp.audit_events[0].performed_time #=> Time
     #   resp.audit_events[0].fields #=> Array
@@ -3158,6 +3181,16 @@ module Aws::ConnectCases
     #               },
     #               result: false, # required
     #             },
+    #             and_all: {
+    #               conditions: { # required
+    #                 # recursive BooleanConditionList
+    #               },
+    #             },
+    #             or_all: {
+    #               conditions: { # required
+    #                 # recursive BooleanConditionList
+    #               },
+    #             },
     #           },
     #         ],
     #       },
@@ -3200,6 +3233,16 @@ module Aws::ConnectCases
     #                 },
     #               },
     #               result: false, # required
+    #             },
+    #             and_all: {
+    #               conditions: { # required
+    #                 # recursive BooleanConditionList
+    #               },
+    #             },
+    #             or_all: {
+    #               conditions: { # required
+    #                 # recursive BooleanConditionList
+    #               },
     #             },
     #           },
     #         ],
@@ -3335,6 +3378,142 @@ module Aws::ConnectCases
       req.send_request(options)
     end
 
+    # Updates the content of a related item associated with a case. The
+    # following related item types are supported:
+    #
+    # * **Comment** - Update the text content of an existing comment
+    #
+    # * **Custom** - Update the fields of a custom related item. You can
+    #   add, modify, and remove fields from a custom related item. There's
+    #   a quota for the number of fields allowed in a Custom type related
+    #   item. See [Amazon Connect Cases quotas][1].
+    #
+    # **Important things to know**
+    #
+    # * When updating a Custom related item, all existing and new fields,
+    #   and their associated values should be included in the request.
+    #   Fields not included as part of this request will be removed.
+    #
+    # * If you provide a value for `performedBy.userArn` you must also have
+    #   [DescribeUser][2] permission on the ARN of the user that you
+    #   provide.
+    #
+    # * [System case fields][3] cannot be used in a custom related item.
+    #
+    # **Endpoints**: See [Amazon Connect endpoints and quotas][4].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html#cases-quotas
+    # [2]: https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribeUser.html
+    # [3]: https://docs.aws.amazon.com/connect/latest/adminguide/case-fields.html#system-case-fields
+    # [4]: https://docs.aws.amazon.com/general/latest/gr/connect_region.html
+    #
+    # @option params [required, String] :domain_id
+    #   The unique identifier of the Cases domain.
+    #
+    # @option params [required, String] :case_id
+    #   A unique identifier of the case.
+    #
+    # @option params [required, String] :related_item_id
+    #   Unique identifier of a related item.
+    #
+    # @option params [required, Types::RelatedItemUpdateContent] :content
+    #   The content of a related item to be updated.
+    #
+    # @option params [Types::UserUnion] :performed_by
+    #   Represents the user who performed the update of the related item.
+    #
+    # @return [Types::UpdateRelatedItemResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateRelatedItemResponse#related_item_id #related_item_id} => String
+    #   * {Types::UpdateRelatedItemResponse#related_item_arn #related_item_arn} => String
+    #   * {Types::UpdateRelatedItemResponse#type #type} => String
+    #   * {Types::UpdateRelatedItemResponse#content #content} => Types::RelatedItemContent
+    #   * {Types::UpdateRelatedItemResponse#association_time #association_time} => Time
+    #   * {Types::UpdateRelatedItemResponse#tags #tags} => Hash&lt;String,String&gt;
+    #   * {Types::UpdateRelatedItemResponse#last_updated_user #last_updated_user} => Types::UserUnion
+    #   * {Types::UpdateRelatedItemResponse#created_by #created_by} => Types::UserUnion
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_related_item({
+    #     domain_id: "DomainId", # required
+    #     case_id: "CaseId", # required
+    #     related_item_id: "RelatedItemId", # required
+    #     content: { # required
+    #       comment: {
+    #         body: "CommentBody", # required
+    #         content_type: "Text/Plain", # required, accepts Text/Plain
+    #       },
+    #       custom: {
+    #         fields: [ # required
+    #           {
+    #             id: "FieldId", # required
+    #             value: { # required
+    #               string_value: "FieldValueUnionStringValueString",
+    #               double_value: 1.0,
+    #               boolean_value: false,
+    #               empty_value: {
+    #               },
+    #               user_arn_value: "String",
+    #             },
+    #           },
+    #         ],
+    #       },
+    #     },
+    #     performed_by: {
+    #       user_arn: "UserArn",
+    #       custom_entity: "CustomEntity",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.related_item_id #=> String
+    #   resp.related_item_arn #=> String
+    #   resp.type #=> String, one of "Contact", "Comment", "File", "Sla", "ConnectCase", "Custom"
+    #   resp.content.contact.contact_arn #=> String
+    #   resp.content.contact.channel #=> String
+    #   resp.content.contact.connected_to_system_time #=> Time
+    #   resp.content.comment.body #=> String
+    #   resp.content.comment.content_type #=> String, one of "Text/Plain"
+    #   resp.content.file.file_arn #=> String
+    #   resp.content.sla.sla_configuration.name #=> String
+    #   resp.content.sla.sla_configuration.type #=> String, one of "CaseField"
+    #   resp.content.sla.sla_configuration.status #=> String, one of "Active", "Overdue", "Met", "NotMet"
+    #   resp.content.sla.sla_configuration.field_id #=> String
+    #   resp.content.sla.sla_configuration.target_field_values #=> Array
+    #   resp.content.sla.sla_configuration.target_field_values[0].string_value #=> String
+    #   resp.content.sla.sla_configuration.target_field_values[0].double_value #=> Float
+    #   resp.content.sla.sla_configuration.target_field_values[0].boolean_value #=> Boolean
+    #   resp.content.sla.sla_configuration.target_field_values[0].user_arn_value #=> String
+    #   resp.content.sla.sla_configuration.target_time #=> Time
+    #   resp.content.sla.sla_configuration.completion_time #=> Time
+    #   resp.content.connect_case.case_id #=> String
+    #   resp.content.custom.fields #=> Array
+    #   resp.content.custom.fields[0].id #=> String
+    #   resp.content.custom.fields[0].value.string_value #=> String
+    #   resp.content.custom.fields[0].value.double_value #=> Float
+    #   resp.content.custom.fields[0].value.boolean_value #=> Boolean
+    #   resp.content.custom.fields[0].value.user_arn_value #=> String
+    #   resp.association_time #=> Time
+    #   resp.tags #=> Hash
+    #   resp.tags["String"] #=> String
+    #   resp.last_updated_user.user_arn #=> String
+    #   resp.last_updated_user.custom_entity #=> String
+    #   resp.created_by.user_arn #=> String
+    #   resp.created_by.custom_entity #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connectcases-2022-10-03/UpdateRelatedItem AWS API Documentation
+    #
+    # @overload update_related_item(params = {})
+    # @param [Hash] params ({})
+    def update_related_item(params = {}, options = {})
+      req = build_request(:update_related_item, params)
+      req.send_request(options)
+    end
+
     # Updates the attributes of an existing template. The template
     # attributes that can be modified include `name`, `description`,
     # `layoutConfiguration`, `requiredFields`, and `status`. At least one of
@@ -3455,7 +3634,7 @@ module Aws::ConnectCases
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-connectcases'
-      context[:gem_version] = '1.61.0'
+      context[:gem_version] = '1.66.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

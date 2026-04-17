@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.88.0 (2026-04-07)
+------------------
+
+* Feature - Revert previous additions of API changes.
+
+1.87.0 (2026-04-06)
+------------------
+
+* Feature - Brookie helps customers preview the impact of SCPs before deployment using historical access activity. It evaluates attached policies and proposed policy updates using collected access activity through CloudTrail authorization events and reports where currently allowed access will be denied.
+
+1.86.0 (2026-03-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.85.0 (2026-01-16)
 ------------------
 

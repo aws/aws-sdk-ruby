@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.28.0 (2026-04-02)
+------------------
+
+* Feature - Data Automation Library is a BDA capability that lets you create reusable entity resources to improve extraction accuracy. Libraries support Custom Vocabulary entities that enhance speech recognition for audio and video content with domain-specific terminology shared across projects
+
+1.27.0 (2026-03-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.26.0 (2026-01-16)
 ------------------
 

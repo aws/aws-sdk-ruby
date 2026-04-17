@@ -908,9 +908,6 @@ module Aws::PartnerCentralChannel
     #       },
     #     ],
     #     requested_support_plan: {
-    #       resold_business: {
-    #         coverage: "ENTIRE_ORGANIZATION", # required, accepts ENTIRE_ORGANIZATION, MANAGEMENT_ACCOUNT_ONLY
-    #       },
     #       resold_enterprise: {
     #         coverage: "ENTIRE_ORGANIZATION", # required, accepts ENTIRE_ORGANIZATION, MANAGEMENT_ACCOUNT_ONLY
     #         tam_location: "String", # required
@@ -920,6 +917,11 @@ module Aws::PartnerCentralChannel
     #         coverage: "ENTIRE_ORGANIZATION", # required, accepts ENTIRE_ORGANIZATION, MANAGEMENT_ACCOUNT_ONLY
     #         provider: "DISTRIBUTOR", # accepts DISTRIBUTOR, DISTRIBUTION_SELLER
     #         tam_location: "String", # required
+    #       },
+    #       resold_unified_operations: {
+    #         coverage: "ENTIRE_ORGANIZATION", # required, accepts ENTIRE_ORGANIZATION, MANAGEMENT_ACCOUNT_ONLY
+    #         tam_location: "String", # required
+    #         charge_account_id: "AccountId",
     #       },
     #     },
     #   })
@@ -1946,9 +1948,6 @@ module Aws::PartnerCentralChannel
     #     revision: "Revision",
     #     display_name: "RelationshipDisplayName",
     #     requested_support_plan: {
-    #       resold_business: {
-    #         coverage: "ENTIRE_ORGANIZATION", # required, accepts ENTIRE_ORGANIZATION, MANAGEMENT_ACCOUNT_ONLY
-    #       },
     #       resold_enterprise: {
     #         coverage: "ENTIRE_ORGANIZATION", # required, accepts ENTIRE_ORGANIZATION, MANAGEMENT_ACCOUNT_ONLY
     #         tam_location: "String", # required
@@ -1958,6 +1957,11 @@ module Aws::PartnerCentralChannel
     #         coverage: "ENTIRE_ORGANIZATION", # required, accepts ENTIRE_ORGANIZATION, MANAGEMENT_ACCOUNT_ONLY
     #         provider: "DISTRIBUTOR", # accepts DISTRIBUTOR, DISTRIBUTION_SELLER
     #         tam_location: "String", # required
+    #       },
+    #       resold_unified_operations: {
+    #         coverage: "ENTIRE_ORGANIZATION", # required, accepts ENTIRE_ORGANIZATION, MANAGEMENT_ACCOUNT_ONLY
+    #         tam_location: "String", # required
+    #         charge_account_id: "AccountId",
     #       },
     #     },
     #   })
@@ -1996,7 +2000,7 @@ module Aws::PartnerCentralChannel
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-partnercentralchannel'
-      context[:gem_version] = '1.4.0'
+      context[:gem_version] = '1.6.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

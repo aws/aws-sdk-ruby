@@ -6719,6 +6719,20 @@ module Aws::DatabaseMigrationService
     #   connection.
     #   @return [String]
     #
+    # @!attribute [rw] encryption_algorithm
+    #   The encryption algorithm used for securing the connection to the IBM
+    #   DB2 LUW database server. You can provide an integer value
+    #   corresponding to a specific encryption algorithm, or leave this
+    #   parameter empty to use the default behavior.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] security_mechanism
+    #   The security mechanism used for authenticating the connection to the
+    #   IBM DB2 LUW database server. You can provide an integer value
+    #   corresponding to a specific security mechanism, or leave this
+    #   parameter empty to use the default behavior.
+    #   @return [Integer]
+    #
     # @!attribute [rw] s3_path
     #   The path for the Amazon S3 bucket that the application uses for
     #   accessing the user-defined schema.
@@ -6737,6 +6751,8 @@ module Aws::DatabaseMigrationService
       :database_name,
       :ssl_mode,
       :certificate_arn,
+      :encryption_algorithm,
+      :security_mechanism,
       :s3_path,
       :s3_access_role_arn)
       SENSITIVE = []
@@ -11223,7 +11239,7 @@ module Aws::DatabaseMigrationService
     #   @return [Integer]
     #
     # @!attribute [rw] load_timeout
-    #   The amount of time to wait (in milliseconds) before timing out of
+    #   The amount of time to wait (in seconds) before timing out of
     #   operations performed by DMS on a Redshift cluster, such as Redshift
     #   COPY, INSERT, DELETE, and UPDATE.
     #   @return [Integer]

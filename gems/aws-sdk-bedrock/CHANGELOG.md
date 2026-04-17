@@ -1,6 +1,41 @@
 Unreleased Changes
 ------------------
 
+1.81.0 (2026-04-03)
+------------------
+
+* Feature - Amazon Bedrock Guardrails enforcement configuration APIs now support selective guarding controls for system prompts as well as user and assistant messages, along with SDK support for Amazon Bedrock resource policy APIs.
+
+1.80.0 (2026-04-01)
+------------------
+
+* Feature - Adds support for Bedrock Batch Inference Job Progress Monitoring
+
+1.79.0 (2026-03-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.78.0 (2026-03-16)
+------------------
+
+* Feature - You can now generate policy scenarios on demand using the new GENERATE POLICY SCENARIOS build workflow type. Scenarios will no longer be automatically generated during INGEST CONTENT, REFINE POLICY, and IMPORT POLICY workflows, resulting in faster completion times for these operations.
+
+1.77.0 (2026-03-06)
+------------------
+
+* Feature - Amazon Bedrock Guardrails account-level enforcement APIs now support lists for model inclusion and exclusion from guardrail enforcement.
+
+1.76.0 (2026-02-27)
+------------------
+
+* Feature - Added four new model lifecycle date fields, startOfLifeTime, endOfLifeTime, legacyTime, and publicExtendedAccessTime. Adds support for using the Converse API with Bedrock Batch inference jobs.
+
+1.75.0 (2026-02-23)
+------------------
+
+* Feature - Automated Reasoning checks in Amazon Bedrock Guardrails now support fidelity report generation. The new workflow type assesses policy coverage and accuracy against customer documents. The GetAutomatedReasoningPolicyBuildWorkflowResultAssets API adds support for the three new asset types.
+
 1.74.0 (2026-01-16)
 ------------------
 

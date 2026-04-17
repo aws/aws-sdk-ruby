@@ -507,7 +507,8 @@ module Aws::ObservabilityAdmin
     #         regions: ["Region"], # required
     #         scope: "SourceFilterString",
     #         source_logs_configuration: {
-    #           log_group_selection_criteria: "LogsFilterString", # required
+    #           log_group_selection_criteria: "LogsFilterString",
+    #           data_source_selection_criteria: "DataSourceFilterString",
     #           encrypted_log_group_strategy: "ALLOW", # required, accepts ALLOW, SKIP
     #         },
     #       },
@@ -523,6 +524,9 @@ module Aws::ObservabilityAdmin
     #           backup_configuration: {
     #             region: "Region", # required
     #             kms_key_arn: "ResourceArn",
+    #           },
+    #           log_group_name_configuration: {
+    #             log_group_name_pattern: "LogGroupNamePattern", # required
     #           },
     #         },
     #       },
@@ -671,7 +675,7 @@ module Aws::ObservabilityAdmin
     #   resp = client.create_telemetry_rule({
     #     rule_name: "RuleName", # required
     #     rule: { # required
-    #       resource_type: "AWS::EC2::Instance", # accepts AWS::EC2::Instance, AWS::EC2::VPC, AWS::Lambda::Function, AWS::CloudTrail, AWS::EKS::Cluster, AWS::WAFv2::WebACL, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::Route53Resolver::ResolverEndpoint, AWS::BedrockAgentCore::Runtime, AWS::BedrockAgentCore::Browser, AWS::BedrockAgentCore::CodeInterpreter
+    #       resource_type: "AWS::EC2::Instance", # accepts AWS::EC2::Instance, AWS::EC2::VPC, AWS::Lambda::Function, AWS::CloudTrail, AWS::EKS::Cluster, AWS::WAFv2::WebACL, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::Route53Resolver::ResolverEndpoint, AWS::BedrockAgentCore::Runtime, AWS::BedrockAgentCore::Browser, AWS::BedrockAgentCore::CodeInterpreter, AWS::BedrockAgentCore::Gateway, AWS::BedrockAgentCore::Memory, AWS::SecurityHub::Hub, AWS::CloudFront::Distribution
     #       telemetry_type: "Logs", # required, accepts Logs, Metrics, Traces
     #       telemetry_source_types: ["VPC_FLOW_LOGS"], # accepts VPC_FLOW_LOGS, ROUTE53_RESOLVER_QUERY_LOGS, EKS_AUDIT_LOGS, EKS_AUTHENTICATOR_LOGS, EKS_CONTROLLER_MANAGER_LOGS, EKS_SCHEDULER_LOGS, EKS_API_LOGS
     #       destination_configuration: {
@@ -738,11 +742,13 @@ module Aws::ObservabilityAdmin
     #           log_type: "WAF_LOGS", # accepts WAF_LOGS
     #         },
     #         log_delivery_parameters: {
-    #           log_types: ["APPLICATION_LOGS"], # accepts APPLICATION_LOGS, USAGE_LOGS
+    #           log_types: ["APPLICATION_LOGS"], # accepts APPLICATION_LOGS, USAGE_LOGS, SECURITY_FINDING_LOGS, ACCESS_LOGS, CONNECTION_LOGS
     #         },
     #       },
     #       scope: "String",
     #       selection_criteria: "String",
+    #       regions: ["Region"],
+    #       all_regions: false,
     #     },
     #     tags: {
     #       "TagKey" => "TagValue",
@@ -788,7 +794,7 @@ module Aws::ObservabilityAdmin
     #   resp = client.create_telemetry_rule_for_organization({
     #     rule_name: "RuleName", # required
     #     rule: { # required
-    #       resource_type: "AWS::EC2::Instance", # accepts AWS::EC2::Instance, AWS::EC2::VPC, AWS::Lambda::Function, AWS::CloudTrail, AWS::EKS::Cluster, AWS::WAFv2::WebACL, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::Route53Resolver::ResolverEndpoint, AWS::BedrockAgentCore::Runtime, AWS::BedrockAgentCore::Browser, AWS::BedrockAgentCore::CodeInterpreter
+    #       resource_type: "AWS::EC2::Instance", # accepts AWS::EC2::Instance, AWS::EC2::VPC, AWS::Lambda::Function, AWS::CloudTrail, AWS::EKS::Cluster, AWS::WAFv2::WebACL, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::Route53Resolver::ResolverEndpoint, AWS::BedrockAgentCore::Runtime, AWS::BedrockAgentCore::Browser, AWS::BedrockAgentCore::CodeInterpreter, AWS::BedrockAgentCore::Gateway, AWS::BedrockAgentCore::Memory, AWS::SecurityHub::Hub, AWS::CloudFront::Distribution
     #       telemetry_type: "Logs", # required, accepts Logs, Metrics, Traces
     #       telemetry_source_types: ["VPC_FLOW_LOGS"], # accepts VPC_FLOW_LOGS, ROUTE53_RESOLVER_QUERY_LOGS, EKS_AUDIT_LOGS, EKS_AUTHENTICATOR_LOGS, EKS_CONTROLLER_MANAGER_LOGS, EKS_SCHEDULER_LOGS, EKS_API_LOGS
     #       destination_configuration: {
@@ -855,11 +861,13 @@ module Aws::ObservabilityAdmin
     #           log_type: "WAF_LOGS", # accepts WAF_LOGS
     #         },
     #         log_delivery_parameters: {
-    #           log_types: ["APPLICATION_LOGS"], # accepts APPLICATION_LOGS, USAGE_LOGS
+    #           log_types: ["APPLICATION_LOGS"], # accepts APPLICATION_LOGS, USAGE_LOGS, SECURITY_FINDING_LOGS, ACCESS_LOGS, CONNECTION_LOGS
     #         },
     #       },
     #       scope: "String",
     #       selection_criteria: "String",
+    #       regions: ["Region"],
+    #       all_regions: false,
     #     },
     #     tags: {
     #       "TagKey" => "TagValue",
@@ -1041,6 +1049,7 @@ module Aws::ObservabilityAdmin
     #   resp.centralization_rule.source.regions[0] #=> String
     #   resp.centralization_rule.source.scope #=> String
     #   resp.centralization_rule.source.source_logs_configuration.log_group_selection_criteria #=> String
+    #   resp.centralization_rule.source.source_logs_configuration.data_source_selection_criteria #=> String
     #   resp.centralization_rule.source.source_logs_configuration.encrypted_log_group_strategy #=> String, one of "ALLOW", "SKIP"
     #   resp.centralization_rule.destination.region #=> String
     #   resp.centralization_rule.destination.account #=> String
@@ -1049,6 +1058,7 @@ module Aws::ObservabilityAdmin
     #   resp.centralization_rule.destination.destination_logs_configuration.logs_encryption_configuration.encryption_conflict_resolution_strategy #=> String, one of "ALLOW", "SKIP"
     #   resp.centralization_rule.destination.destination_logs_configuration.backup_configuration.region #=> String
     #   resp.centralization_rule.destination.destination_logs_configuration.backup_configuration.kms_key_arn #=> String
+    #   resp.centralization_rule.destination.destination_logs_configuration.log_group_name_configuration.log_group_name_pattern #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/GetCentralizationRuleForOrganization AWS API Documentation
     #
@@ -1131,11 +1141,19 @@ module Aws::ObservabilityAdmin
     #
     #   * {Types::GetTelemetryEvaluationStatusOutput#status #status} => String
     #   * {Types::GetTelemetryEvaluationStatusOutput#failure_reason #failure_reason} => String
+    #   * {Types::GetTelemetryEvaluationStatusOutput#home_region #home_region} => String
+    #   * {Types::GetTelemetryEvaluationStatusOutput#region_statuses #region_statuses} => Array&lt;Types::RegionStatus&gt;
     #
     # @example Response structure
     #
     #   resp.status #=> String, one of "NOT_STARTED", "STARTING", "FAILED_START", "RUNNING", "STOPPING", "FAILED_STOP", "STOPPED"
     #   resp.failure_reason #=> String
+    #   resp.home_region #=> String
+    #   resp.region_statuses #=> Array
+    #   resp.region_statuses[0].region #=> String
+    #   resp.region_statuses[0].status #=> String
+    #   resp.region_statuses[0].failure_reason #=> String
+    #   resp.region_statuses[0].rule_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/GetTelemetryEvaluationStatus AWS API Documentation
     #
@@ -1155,11 +1173,19 @@ module Aws::ObservabilityAdmin
     #
     #   * {Types::GetTelemetryEvaluationStatusForOrganizationOutput#status #status} => String
     #   * {Types::GetTelemetryEvaluationStatusForOrganizationOutput#failure_reason #failure_reason} => String
+    #   * {Types::GetTelemetryEvaluationStatusForOrganizationOutput#home_region #home_region} => String
+    #   * {Types::GetTelemetryEvaluationStatusForOrganizationOutput#region_statuses #region_statuses} => Array&lt;Types::RegionStatus&gt;
     #
     # @example Response structure
     #
     #   resp.status #=> String, one of "NOT_STARTED", "STARTING", "FAILED_START", "RUNNING", "STOPPING", "FAILED_STOP", "STOPPED"
     #   resp.failure_reason #=> String
+    #   resp.home_region #=> String
+    #   resp.region_statuses #=> Array
+    #   resp.region_statuses[0].region #=> String
+    #   resp.region_statuses[0].status #=> String
+    #   resp.region_statuses[0].failure_reason #=> String
+    #   resp.region_statuses[0].rule_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/GetTelemetryEvaluationStatusForOrganization AWS API Documentation
     #
@@ -1219,6 +1245,9 @@ module Aws::ObservabilityAdmin
     #   * {Types::GetTelemetryRuleOutput#created_time_stamp #created_time_stamp} => Integer
     #   * {Types::GetTelemetryRuleOutput#last_update_time_stamp #last_update_time_stamp} => Integer
     #   * {Types::GetTelemetryRuleOutput#telemetry_rule #telemetry_rule} => Types::TelemetryRule
+    #   * {Types::GetTelemetryRuleOutput#home_region #home_region} => String
+    #   * {Types::GetTelemetryRuleOutput#is_replicated #is_replicated} => Boolean
+    #   * {Types::GetTelemetryRuleOutput#region_statuses #region_statuses} => Array&lt;Types::RegionStatus&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -1232,7 +1261,7 @@ module Aws::ObservabilityAdmin
     #   resp.rule_arn #=> String
     #   resp.created_time_stamp #=> Integer
     #   resp.last_update_time_stamp #=> Integer
-    #   resp.telemetry_rule.resource_type #=> String, one of "AWS::EC2::Instance", "AWS::EC2::VPC", "AWS::Lambda::Function", "AWS::CloudTrail", "AWS::EKS::Cluster", "AWS::WAFv2::WebACL", "AWS::ElasticLoadBalancingV2::LoadBalancer", "AWS::Route53Resolver::ResolverEndpoint", "AWS::BedrockAgentCore::Runtime", "AWS::BedrockAgentCore::Browser", "AWS::BedrockAgentCore::CodeInterpreter"
+    #   resp.telemetry_rule.resource_type #=> String, one of "AWS::EC2::Instance", "AWS::EC2::VPC", "AWS::Lambda::Function", "AWS::CloudTrail", "AWS::EKS::Cluster", "AWS::WAFv2::WebACL", "AWS::ElasticLoadBalancingV2::LoadBalancer", "AWS::Route53Resolver::ResolverEndpoint", "AWS::BedrockAgentCore::Runtime", "AWS::BedrockAgentCore::Browser", "AWS::BedrockAgentCore::CodeInterpreter", "AWS::BedrockAgentCore::Gateway", "AWS::BedrockAgentCore::Memory", "AWS::SecurityHub::Hub", "AWS::CloudFront::Distribution"
     #   resp.telemetry_rule.telemetry_type #=> String, one of "Logs", "Metrics", "Traces"
     #   resp.telemetry_rule.telemetry_source_types #=> Array
     #   resp.telemetry_rule.telemetry_source_types[0] #=> String, one of "VPC_FLOW_LOGS", "ROUTE53_RESOLVER_QUERY_LOGS", "EKS_AUDIT_LOGS", "EKS_AUTHENTICATOR_LOGS", "EKS_CONTROLLER_MANAGER_LOGS", "EKS_SCHEDULER_LOGS", "EKS_API_LOGS"
@@ -1274,9 +1303,19 @@ module Aws::ObservabilityAdmin
     #   resp.telemetry_rule.destination_configuration.waf_logging_parameters.logging_filter.default_behavior #=> String, one of "KEEP", "DROP"
     #   resp.telemetry_rule.destination_configuration.waf_logging_parameters.log_type #=> String, one of "WAF_LOGS"
     #   resp.telemetry_rule.destination_configuration.log_delivery_parameters.log_types #=> Array
-    #   resp.telemetry_rule.destination_configuration.log_delivery_parameters.log_types[0] #=> String, one of "APPLICATION_LOGS", "USAGE_LOGS"
+    #   resp.telemetry_rule.destination_configuration.log_delivery_parameters.log_types[0] #=> String, one of "APPLICATION_LOGS", "USAGE_LOGS", "SECURITY_FINDING_LOGS", "ACCESS_LOGS", "CONNECTION_LOGS"
     #   resp.telemetry_rule.scope #=> String
     #   resp.telemetry_rule.selection_criteria #=> String
+    #   resp.telemetry_rule.regions #=> Array
+    #   resp.telemetry_rule.regions[0] #=> String
+    #   resp.telemetry_rule.all_regions #=> Boolean
+    #   resp.home_region #=> String
+    #   resp.is_replicated #=> Boolean
+    #   resp.region_statuses #=> Array
+    #   resp.region_statuses[0].region #=> String
+    #   resp.region_statuses[0].status #=> String
+    #   resp.region_statuses[0].failure_reason #=> String
+    #   resp.region_statuses[0].rule_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/GetTelemetryRule AWS API Documentation
     #
@@ -1302,6 +1341,9 @@ module Aws::ObservabilityAdmin
     #   * {Types::GetTelemetryRuleForOrganizationOutput#created_time_stamp #created_time_stamp} => Integer
     #   * {Types::GetTelemetryRuleForOrganizationOutput#last_update_time_stamp #last_update_time_stamp} => Integer
     #   * {Types::GetTelemetryRuleForOrganizationOutput#telemetry_rule #telemetry_rule} => Types::TelemetryRule
+    #   * {Types::GetTelemetryRuleForOrganizationOutput#home_region #home_region} => String
+    #   * {Types::GetTelemetryRuleForOrganizationOutput#is_replicated #is_replicated} => Boolean
+    #   * {Types::GetTelemetryRuleForOrganizationOutput#region_statuses #region_statuses} => Array&lt;Types::RegionStatus&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -1315,7 +1357,7 @@ module Aws::ObservabilityAdmin
     #   resp.rule_arn #=> String
     #   resp.created_time_stamp #=> Integer
     #   resp.last_update_time_stamp #=> Integer
-    #   resp.telemetry_rule.resource_type #=> String, one of "AWS::EC2::Instance", "AWS::EC2::VPC", "AWS::Lambda::Function", "AWS::CloudTrail", "AWS::EKS::Cluster", "AWS::WAFv2::WebACL", "AWS::ElasticLoadBalancingV2::LoadBalancer", "AWS::Route53Resolver::ResolverEndpoint", "AWS::BedrockAgentCore::Runtime", "AWS::BedrockAgentCore::Browser", "AWS::BedrockAgentCore::CodeInterpreter"
+    #   resp.telemetry_rule.resource_type #=> String, one of "AWS::EC2::Instance", "AWS::EC2::VPC", "AWS::Lambda::Function", "AWS::CloudTrail", "AWS::EKS::Cluster", "AWS::WAFv2::WebACL", "AWS::ElasticLoadBalancingV2::LoadBalancer", "AWS::Route53Resolver::ResolverEndpoint", "AWS::BedrockAgentCore::Runtime", "AWS::BedrockAgentCore::Browser", "AWS::BedrockAgentCore::CodeInterpreter", "AWS::BedrockAgentCore::Gateway", "AWS::BedrockAgentCore::Memory", "AWS::SecurityHub::Hub", "AWS::CloudFront::Distribution"
     #   resp.telemetry_rule.telemetry_type #=> String, one of "Logs", "Metrics", "Traces"
     #   resp.telemetry_rule.telemetry_source_types #=> Array
     #   resp.telemetry_rule.telemetry_source_types[0] #=> String, one of "VPC_FLOW_LOGS", "ROUTE53_RESOLVER_QUERY_LOGS", "EKS_AUDIT_LOGS", "EKS_AUTHENTICATOR_LOGS", "EKS_CONTROLLER_MANAGER_LOGS", "EKS_SCHEDULER_LOGS", "EKS_API_LOGS"
@@ -1357,9 +1399,19 @@ module Aws::ObservabilityAdmin
     #   resp.telemetry_rule.destination_configuration.waf_logging_parameters.logging_filter.default_behavior #=> String, one of "KEEP", "DROP"
     #   resp.telemetry_rule.destination_configuration.waf_logging_parameters.log_type #=> String, one of "WAF_LOGS"
     #   resp.telemetry_rule.destination_configuration.log_delivery_parameters.log_types #=> Array
-    #   resp.telemetry_rule.destination_configuration.log_delivery_parameters.log_types[0] #=> String, one of "APPLICATION_LOGS", "USAGE_LOGS"
+    #   resp.telemetry_rule.destination_configuration.log_delivery_parameters.log_types[0] #=> String, one of "APPLICATION_LOGS", "USAGE_LOGS", "SECURITY_FINDING_LOGS", "ACCESS_LOGS", "CONNECTION_LOGS"
     #   resp.telemetry_rule.scope #=> String
     #   resp.telemetry_rule.selection_criteria #=> String
+    #   resp.telemetry_rule.regions #=> Array
+    #   resp.telemetry_rule.regions[0] #=> String
+    #   resp.telemetry_rule.all_regions #=> Boolean
+    #   resp.home_region #=> String
+    #   resp.is_replicated #=> Boolean
+    #   resp.region_statuses #=> Array
+    #   resp.region_statuses[0].region #=> String
+    #   resp.region_statuses[0].status #=> String
+    #   resp.region_statuses[0].failure_reason #=> String
+    #   resp.region_statuses[0].rule_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/GetTelemetryRuleForOrganization AWS API Documentation
     #
@@ -1479,7 +1531,7 @@ module Aws::ObservabilityAdmin
     #
     #   resp = client.list_resource_telemetry({
     #     resource_identifier_prefix: "ResourceIdentifierPrefix",
-    #     resource_types: ["AWS::EC2::Instance"], # accepts AWS::EC2::Instance, AWS::EC2::VPC, AWS::Lambda::Function, AWS::CloudTrail, AWS::EKS::Cluster, AWS::WAFv2::WebACL, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::Route53Resolver::ResolverEndpoint, AWS::BedrockAgentCore::Runtime, AWS::BedrockAgentCore::Browser, AWS::BedrockAgentCore::CodeInterpreter
+    #     resource_types: ["AWS::EC2::Instance"], # accepts AWS::EC2::Instance, AWS::EC2::VPC, AWS::Lambda::Function, AWS::CloudTrail, AWS::EKS::Cluster, AWS::WAFv2::WebACL, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::Route53Resolver::ResolverEndpoint, AWS::BedrockAgentCore::Runtime, AWS::BedrockAgentCore::Browser, AWS::BedrockAgentCore::CodeInterpreter, AWS::BedrockAgentCore::Gateway, AWS::BedrockAgentCore::Memory, AWS::SecurityHub::Hub, AWS::CloudFront::Distribution
     #     telemetry_configuration_state: {
     #       "Logs" => "Enabled", # accepts Enabled, Disabled, NotApplicable
     #     },
@@ -1496,11 +1548,12 @@ module Aws::ObservabilityAdmin
     #   resp.telemetry_configurations[0].account_identifier #=> String
     #   resp.telemetry_configurations[0].telemetry_configuration_state #=> Hash
     #   resp.telemetry_configurations[0].telemetry_configuration_state["TelemetryType"] #=> String, one of "Enabled", "Disabled", "NotApplicable"
-    #   resp.telemetry_configurations[0].resource_type #=> String, one of "AWS::EC2::Instance", "AWS::EC2::VPC", "AWS::Lambda::Function", "AWS::CloudTrail", "AWS::EKS::Cluster", "AWS::WAFv2::WebACL", "AWS::ElasticLoadBalancingV2::LoadBalancer", "AWS::Route53Resolver::ResolverEndpoint", "AWS::BedrockAgentCore::Runtime", "AWS::BedrockAgentCore::Browser", "AWS::BedrockAgentCore::CodeInterpreter"
+    #   resp.telemetry_configurations[0].resource_type #=> String, one of "AWS::EC2::Instance", "AWS::EC2::VPC", "AWS::Lambda::Function", "AWS::CloudTrail", "AWS::EKS::Cluster", "AWS::WAFv2::WebACL", "AWS::ElasticLoadBalancingV2::LoadBalancer", "AWS::Route53Resolver::ResolverEndpoint", "AWS::BedrockAgentCore::Runtime", "AWS::BedrockAgentCore::Browser", "AWS::BedrockAgentCore::CodeInterpreter", "AWS::BedrockAgentCore::Gateway", "AWS::BedrockAgentCore::Memory", "AWS::SecurityHub::Hub", "AWS::CloudFront::Distribution"
     #   resp.telemetry_configurations[0].resource_identifier #=> String
     #   resp.telemetry_configurations[0].resource_tags #=> Hash
     #   resp.telemetry_configurations[0].resource_tags["String"] #=> String
     #   resp.telemetry_configurations[0].last_update_time_stamp #=> Integer
+    #   resp.telemetry_configurations[0].telemetry_source_type #=> String, one of "VPC_FLOW_LOGS", "ROUTE53_RESOLVER_QUERY_LOGS", "EKS_AUDIT_LOGS", "EKS_AUTHENTICATOR_LOGS", "EKS_CONTROLLER_MANAGER_LOGS", "EKS_SCHEDULER_LOGS", "EKS_API_LOGS"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/ListResourceTelemetry AWS API Documentation
@@ -1562,7 +1615,7 @@ module Aws::ObservabilityAdmin
     #   resp = client.list_resource_telemetry_for_organization({
     #     account_identifiers: ["AccountIdentifier"],
     #     resource_identifier_prefix: "ResourceIdentifierPrefix",
-    #     resource_types: ["AWS::EC2::Instance"], # accepts AWS::EC2::Instance, AWS::EC2::VPC, AWS::Lambda::Function, AWS::CloudTrail, AWS::EKS::Cluster, AWS::WAFv2::WebACL, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::Route53Resolver::ResolverEndpoint, AWS::BedrockAgentCore::Runtime, AWS::BedrockAgentCore::Browser, AWS::BedrockAgentCore::CodeInterpreter
+    #     resource_types: ["AWS::EC2::Instance"], # accepts AWS::EC2::Instance, AWS::EC2::VPC, AWS::Lambda::Function, AWS::CloudTrail, AWS::EKS::Cluster, AWS::WAFv2::WebACL, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::Route53Resolver::ResolverEndpoint, AWS::BedrockAgentCore::Runtime, AWS::BedrockAgentCore::Browser, AWS::BedrockAgentCore::CodeInterpreter, AWS::BedrockAgentCore::Gateway, AWS::BedrockAgentCore::Memory, AWS::SecurityHub::Hub, AWS::CloudFront::Distribution
     #     telemetry_configuration_state: {
     #       "Logs" => "Enabled", # accepts Enabled, Disabled, NotApplicable
     #     },
@@ -1579,11 +1632,12 @@ module Aws::ObservabilityAdmin
     #   resp.telemetry_configurations[0].account_identifier #=> String
     #   resp.telemetry_configurations[0].telemetry_configuration_state #=> Hash
     #   resp.telemetry_configurations[0].telemetry_configuration_state["TelemetryType"] #=> String, one of "Enabled", "Disabled", "NotApplicable"
-    #   resp.telemetry_configurations[0].resource_type #=> String, one of "AWS::EC2::Instance", "AWS::EC2::VPC", "AWS::Lambda::Function", "AWS::CloudTrail", "AWS::EKS::Cluster", "AWS::WAFv2::WebACL", "AWS::ElasticLoadBalancingV2::LoadBalancer", "AWS::Route53Resolver::ResolverEndpoint", "AWS::BedrockAgentCore::Runtime", "AWS::BedrockAgentCore::Browser", "AWS::BedrockAgentCore::CodeInterpreter"
+    #   resp.telemetry_configurations[0].resource_type #=> String, one of "AWS::EC2::Instance", "AWS::EC2::VPC", "AWS::Lambda::Function", "AWS::CloudTrail", "AWS::EKS::Cluster", "AWS::WAFv2::WebACL", "AWS::ElasticLoadBalancingV2::LoadBalancer", "AWS::Route53Resolver::ResolverEndpoint", "AWS::BedrockAgentCore::Runtime", "AWS::BedrockAgentCore::Browser", "AWS::BedrockAgentCore::CodeInterpreter", "AWS::BedrockAgentCore::Gateway", "AWS::BedrockAgentCore::Memory", "AWS::SecurityHub::Hub", "AWS::CloudFront::Distribution"
     #   resp.telemetry_configurations[0].resource_identifier #=> String
     #   resp.telemetry_configurations[0].resource_tags #=> Hash
     #   resp.telemetry_configurations[0].resource_tags["String"] #=> String
     #   resp.telemetry_configurations[0].last_update_time_stamp #=> Integer
+    #   resp.telemetry_configurations[0].telemetry_source_type #=> String, one of "VPC_FLOW_LOGS", "ROUTE53_RESOLVER_QUERY_LOGS", "EKS_AUDIT_LOGS", "EKS_AUTHENTICATOR_LOGS", "EKS_CONTROLLER_MANAGER_LOGS", "EKS_SCHEDULER_LOGS", "EKS_API_LOGS"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/ListResourceTelemetryForOrganization AWS API Documentation
@@ -1761,7 +1815,7 @@ module Aws::ObservabilityAdmin
     #   resp.telemetry_rule_summaries[0].rule_arn #=> String
     #   resp.telemetry_rule_summaries[0].created_time_stamp #=> Integer
     #   resp.telemetry_rule_summaries[0].last_update_time_stamp #=> Integer
-    #   resp.telemetry_rule_summaries[0].resource_type #=> String, one of "AWS::EC2::Instance", "AWS::EC2::VPC", "AWS::Lambda::Function", "AWS::CloudTrail", "AWS::EKS::Cluster", "AWS::WAFv2::WebACL", "AWS::ElasticLoadBalancingV2::LoadBalancer", "AWS::Route53Resolver::ResolverEndpoint", "AWS::BedrockAgentCore::Runtime", "AWS::BedrockAgentCore::Browser", "AWS::BedrockAgentCore::CodeInterpreter"
+    #   resp.telemetry_rule_summaries[0].resource_type #=> String, one of "AWS::EC2::Instance", "AWS::EC2::VPC", "AWS::Lambda::Function", "AWS::CloudTrail", "AWS::EKS::Cluster", "AWS::WAFv2::WebACL", "AWS::ElasticLoadBalancingV2::LoadBalancer", "AWS::Route53Resolver::ResolverEndpoint", "AWS::BedrockAgentCore::Runtime", "AWS::BedrockAgentCore::Browser", "AWS::BedrockAgentCore::CodeInterpreter", "AWS::BedrockAgentCore::Gateway", "AWS::BedrockAgentCore::Memory", "AWS::SecurityHub::Hub", "AWS::CloudFront::Distribution"
     #   resp.telemetry_rule_summaries[0].telemetry_type #=> String, one of "Logs", "Metrics", "Traces"
     #   resp.telemetry_rule_summaries[0].telemetry_source_types #=> Array
     #   resp.telemetry_rule_summaries[0].telemetry_source_types[0] #=> String, one of "VPC_FLOW_LOGS", "ROUTE53_RESOLVER_QUERY_LOGS", "EKS_AUDIT_LOGS", "EKS_AUTHENTICATOR_LOGS", "EKS_CONTROLLER_MANAGER_LOGS", "EKS_SCHEDULER_LOGS", "EKS_API_LOGS"
@@ -1824,7 +1878,7 @@ module Aws::ObservabilityAdmin
     #   resp.telemetry_rule_summaries[0].rule_arn #=> String
     #   resp.telemetry_rule_summaries[0].created_time_stamp #=> Integer
     #   resp.telemetry_rule_summaries[0].last_update_time_stamp #=> Integer
-    #   resp.telemetry_rule_summaries[0].resource_type #=> String, one of "AWS::EC2::Instance", "AWS::EC2::VPC", "AWS::Lambda::Function", "AWS::CloudTrail", "AWS::EKS::Cluster", "AWS::WAFv2::WebACL", "AWS::ElasticLoadBalancingV2::LoadBalancer", "AWS::Route53Resolver::ResolverEndpoint", "AWS::BedrockAgentCore::Runtime", "AWS::BedrockAgentCore::Browser", "AWS::BedrockAgentCore::CodeInterpreter"
+    #   resp.telemetry_rule_summaries[0].resource_type #=> String, one of "AWS::EC2::Instance", "AWS::EC2::VPC", "AWS::Lambda::Function", "AWS::CloudTrail", "AWS::EKS::Cluster", "AWS::WAFv2::WebACL", "AWS::ElasticLoadBalancingV2::LoadBalancer", "AWS::Route53Resolver::ResolverEndpoint", "AWS::BedrockAgentCore::Runtime", "AWS::BedrockAgentCore::Browser", "AWS::BedrockAgentCore::CodeInterpreter", "AWS::BedrockAgentCore::Gateway", "AWS::BedrockAgentCore::Memory", "AWS::SecurityHub::Hub", "AWS::CloudFront::Distribution"
     #   resp.telemetry_rule_summaries[0].telemetry_type #=> String, one of "Logs", "Metrics", "Traces"
     #   resp.telemetry_rule_summaries[0].telemetry_source_types #=> Array
     #   resp.telemetry_rule_summaries[0].telemetry_source_types[0] #=> String, one of "VPC_FLOW_LOGS", "ROUTE53_RESOLVER_QUERY_LOGS", "EKS_AUDIT_LOGS", "EKS_AUTHENTICATOR_LOGS", "EKS_CONTROLLER_MANAGER_LOGS", "EKS_SCHEDULER_LOGS", "EKS_API_LOGS"
@@ -1866,7 +1920,31 @@ module Aws::ObservabilityAdmin
     # This action begins onboarding the caller Amazon Web Services account
     # to the telemetry config feature.
     #
+    # @option params [Array<String>] :regions
+    #   An optional list of Amazon Web Services Regions to include in
+    #   multi-region telemetry evaluation. The current region is always
+    #   implicitly included and must not be specified in this list. When
+    #   provided, telemetry evaluation starts in the current region and
+    #   propagates to all specified regions. Mutually exclusive with
+    #   `AllRegions`. If neither `Regions` nor `AllRegions` is provided, the
+    #   operation applies only to the current region.
+    #
+    # @option params [Boolean] :all_regions
+    #   If set to `true`, telemetry evaluation starts in all Amazon Web
+    #   Services Regions where Amazon CloudWatch Observability Admin is
+    #   available in the current partition. The current region becomes the
+    #   home region for managing multi-region evaluation. When new regions
+    #   become available, evaluation automatically expands to include them.
+    #   Mutually exclusive with `Regions`.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_telemetry_evaluation({
+    #     regions: ["Region"],
+    #     all_regions: false,
+    #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/StartTelemetryEvaluation AWS API Documentation
     #
@@ -1880,7 +1958,32 @@ module Aws::ObservabilityAdmin
     # This actions begins onboarding the organization and all member
     # accounts to the telemetry config feature.
     #
+    # @option params [Array<String>] :regions
+    #   An optional list of Amazon Web Services Regions to include in
+    #   multi-region telemetry evaluation for the organization. The current
+    #   region is always implicitly included and must not be specified in this
+    #   list. When provided, telemetry evaluation starts in the current region
+    #   and propagates to all specified regions for the organization. Mutually
+    #   exclusive with `AllRegions`. If neither `Regions` nor `AllRegions` is
+    #   provided, the operation applies only to the current region.
+    #
+    # @option params [Boolean] :all_regions
+    #   If set to `true`, telemetry evaluation for the organization starts in
+    #   all Amazon Web Services Regions where Amazon CloudWatch Observability
+    #   Admin is available in the current partition. The current region
+    #   becomes the home region for managing multi-region evaluation for the
+    #   organization. When new regions become available, evaluation
+    #   automatically expands to include them. Mutually exclusive with
+    #   `Regions`.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_telemetry_evaluation_for_organization({
+    #     regions: ["Region"],
+    #     all_regions: false,
+    #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/StartTelemetryEvaluationForOrganization AWS API Documentation
     #
@@ -2069,7 +2172,8 @@ module Aws::ObservabilityAdmin
     #         regions: ["Region"], # required
     #         scope: "SourceFilterString",
     #         source_logs_configuration: {
-    #           log_group_selection_criteria: "LogsFilterString", # required
+    #           log_group_selection_criteria: "LogsFilterString",
+    #           data_source_selection_criteria: "DataSourceFilterString",
     #           encrypted_log_group_strategy: "ALLOW", # required, accepts ALLOW, SKIP
     #         },
     #       },
@@ -2085,6 +2189,9 @@ module Aws::ObservabilityAdmin
     #           backup_configuration: {
     #             region: "Region", # required
     #             kms_key_arn: "ResourceArn",
+    #           },
+    #           log_group_name_configuration: {
+    #             log_group_name_pattern: "LogGroupNamePattern", # required
     #           },
     #         },
     #       },
@@ -2156,8 +2263,7 @@ module Aws::ObservabilityAdmin
     # Okta Sources (SSO, Auth0)
     #
     # : **Updatable:** All Amazon Web Services Secrets Manager attributes,
-    #   `domain`, `range` (SSO only), OAuth2 credentials (`client_id`,
-    #   `client_secret`)
+    #   `domain`, `range`, OAuth2 credentials (`client_id`, `client_secret`)
     #
     # Palo Alto Networks
     #
@@ -2223,7 +2329,7 @@ module Aws::ObservabilityAdmin
     #   resp = client.update_telemetry_rule({
     #     rule_identifier: "RuleIdentifier", # required
     #     rule: { # required
-    #       resource_type: "AWS::EC2::Instance", # accepts AWS::EC2::Instance, AWS::EC2::VPC, AWS::Lambda::Function, AWS::CloudTrail, AWS::EKS::Cluster, AWS::WAFv2::WebACL, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::Route53Resolver::ResolverEndpoint, AWS::BedrockAgentCore::Runtime, AWS::BedrockAgentCore::Browser, AWS::BedrockAgentCore::CodeInterpreter
+    #       resource_type: "AWS::EC2::Instance", # accepts AWS::EC2::Instance, AWS::EC2::VPC, AWS::Lambda::Function, AWS::CloudTrail, AWS::EKS::Cluster, AWS::WAFv2::WebACL, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::Route53Resolver::ResolverEndpoint, AWS::BedrockAgentCore::Runtime, AWS::BedrockAgentCore::Browser, AWS::BedrockAgentCore::CodeInterpreter, AWS::BedrockAgentCore::Gateway, AWS::BedrockAgentCore::Memory, AWS::SecurityHub::Hub, AWS::CloudFront::Distribution
     #       telemetry_type: "Logs", # required, accepts Logs, Metrics, Traces
     #       telemetry_source_types: ["VPC_FLOW_LOGS"], # accepts VPC_FLOW_LOGS, ROUTE53_RESOLVER_QUERY_LOGS, EKS_AUDIT_LOGS, EKS_AUTHENTICATOR_LOGS, EKS_CONTROLLER_MANAGER_LOGS, EKS_SCHEDULER_LOGS, EKS_API_LOGS
     #       destination_configuration: {
@@ -2290,11 +2396,13 @@ module Aws::ObservabilityAdmin
     #           log_type: "WAF_LOGS", # accepts WAF_LOGS
     #         },
     #         log_delivery_parameters: {
-    #           log_types: ["APPLICATION_LOGS"], # accepts APPLICATION_LOGS, USAGE_LOGS
+    #           log_types: ["APPLICATION_LOGS"], # accepts APPLICATION_LOGS, USAGE_LOGS, SECURITY_FINDING_LOGS, ACCESS_LOGS, CONNECTION_LOGS
     #         },
     #       },
     #       scope: "String",
     #       selection_criteria: "String",
+    #       regions: ["Region"],
+    #       all_regions: false,
     #     },
     #   })
     #
@@ -2334,7 +2442,7 @@ module Aws::ObservabilityAdmin
     #   resp = client.update_telemetry_rule_for_organization({
     #     rule_identifier: "RuleIdentifier", # required
     #     rule: { # required
-    #       resource_type: "AWS::EC2::Instance", # accepts AWS::EC2::Instance, AWS::EC2::VPC, AWS::Lambda::Function, AWS::CloudTrail, AWS::EKS::Cluster, AWS::WAFv2::WebACL, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::Route53Resolver::ResolverEndpoint, AWS::BedrockAgentCore::Runtime, AWS::BedrockAgentCore::Browser, AWS::BedrockAgentCore::CodeInterpreter
+    #       resource_type: "AWS::EC2::Instance", # accepts AWS::EC2::Instance, AWS::EC2::VPC, AWS::Lambda::Function, AWS::CloudTrail, AWS::EKS::Cluster, AWS::WAFv2::WebACL, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::Route53Resolver::ResolverEndpoint, AWS::BedrockAgentCore::Runtime, AWS::BedrockAgentCore::Browser, AWS::BedrockAgentCore::CodeInterpreter, AWS::BedrockAgentCore::Gateway, AWS::BedrockAgentCore::Memory, AWS::SecurityHub::Hub, AWS::CloudFront::Distribution
     #       telemetry_type: "Logs", # required, accepts Logs, Metrics, Traces
     #       telemetry_source_types: ["VPC_FLOW_LOGS"], # accepts VPC_FLOW_LOGS, ROUTE53_RESOLVER_QUERY_LOGS, EKS_AUDIT_LOGS, EKS_AUTHENTICATOR_LOGS, EKS_CONTROLLER_MANAGER_LOGS, EKS_SCHEDULER_LOGS, EKS_API_LOGS
     #       destination_configuration: {
@@ -2401,11 +2509,13 @@ module Aws::ObservabilityAdmin
     #           log_type: "WAF_LOGS", # accepts WAF_LOGS
     #         },
     #         log_delivery_parameters: {
-    #           log_types: ["APPLICATION_LOGS"], # accepts APPLICATION_LOGS, USAGE_LOGS
+    #           log_types: ["APPLICATION_LOGS"], # accepts APPLICATION_LOGS, USAGE_LOGS, SECURITY_FINDING_LOGS, ACCESS_LOGS, CONNECTION_LOGS
     #         },
     #       },
     #       scope: "String",
     #       selection_criteria: "String",
+    #       regions: ["Region"],
+    #       all_regions: false,
     #     },
     #   })
     #
@@ -2476,7 +2586,7 @@ module Aws::ObservabilityAdmin
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-observabilityadmin'
-      context[:gem_version] = '1.20.0'
+      context[:gem_version] = '1.25.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -89,6 +89,8 @@ module Aws
         def flow_modules: () -> ::Array[Types::ModuleConfiguration]
         def pending_flow_modules: () -> ::Array[Types::ModuleConfiguration]
         def attributes: () -> Types::LinkAttributes
+        def log_settings: () -> Types::LinkLogSettings
+        def connectivity_type: () -> ("DEFAULT" | "PUBLIC_INGRESS" | "PUBLIC_EGRESS" | "EXTERNAL_INBOUND")
         def link_id: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RTBFabric/Client.html#accept_link-instance_method
@@ -113,7 +115,8 @@ module Aws
                                filter_log: ::Float
                              }
                            }
-                         }
+                         },
+                         ?timeout_in_millis: ::Integer
                        ) -> _AcceptLinkResponseSuccess
                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AcceptLinkResponseSuccess
 
@@ -162,6 +165,8 @@ module Aws
         def flow_modules: () -> ::Array[Types::ModuleConfiguration]
         def pending_flow_modules: () -> ::Array[Types::ModuleConfiguration]
         def attributes: () -> Types::LinkAttributes
+        def log_settings: () -> Types::LinkLogSettings
+        def connectivity_type: () -> ("DEFAULT" | "PUBLIC_INGRESS" | "PUBLIC_EGRESS" | "EXTERNAL_INBOUND")
         def link_id: () -> ::String
         def customer_provided_id: () -> ::String
       end
@@ -189,7 +194,8 @@ module Aws
                                filter_log: ::Float
                              }
                            }
-                         }
+                         },
+                         ?timeout_in_millis: ::Integer
                        ) -> _CreateLinkResponseSuccess
                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateLinkResponseSuccess
 
@@ -248,6 +254,8 @@ module Aws
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateResponderGatewayResponse]
         def gateway_id: () -> ::String
         def status: () -> ("PENDING_CREATION" | "ACTIVE" | "PENDING_DELETION" | "DELETED" | "ERROR" | "PENDING_UPDATE" | "ISOLATED" | "PENDING_ISOLATION" | "PENDING_RESTORATION")
+        def listener_config: () -> Types::ListenerConfig
+        def external_inbound_endpoint: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RTBFabric/Client.html#create_responder_gateway-instance_method
       def create_responder_gateway: (
@@ -257,13 +265,26 @@ module Aws
                                       ?domain_name: ::String,
                                       port: ::Integer,
                                       protocol: ("HTTP" | "HTTPS"),
+                                      ?listener_config: {
+                                        protocols: Array[("HTTP" | "HTTPS")]
+                                      },
                                       ?trust_store_configuration: {
                                         certificate_authority_certificates: Array[::String]
                                       },
                                       ?managed_endpoint_configuration: {
                                         auto_scaling_groups: {
                                           auto_scaling_group_names: Array[::String],
-                                          role_arn: ::String
+                                          role_arn: ::String,
+                                          health_check_config: {
+                                            port: ::Integer,
+                                            path: ::String,
+                                            protocol: ("HTTP" | "HTTPS")?,
+                                            timeout_ms: ::Integer?,
+                                            interval_seconds: ::Integer?,
+                                            status_code_matcher: ::String?,
+                                            healthy_threshold_count: ::Integer?,
+                                            unhealthy_threshold_count: ::Integer?
+                                          }?
                                         }?,
                                         eks_endpoints: {
                                           endpoints_resource_name: ::String,
@@ -276,7 +297,8 @@ module Aws
                                       },
                                       client_token: ::String,
                                       ?description: ::String,
-                                      ?tags: Hash[::String, ::String]
+                                      ?tags: Hash[::String, ::String],
+                                      ?gateway_type: ("EXTERNAL" | "INTERNAL")
                                     ) -> _CreateResponderGatewayResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateResponderGatewayResponseSuccess
 
@@ -351,6 +373,7 @@ module Aws
         def updated_at: () -> ::Time
         def tags: () -> ::Hash[::String, ::String]
         def log_settings: () -> Types::LinkLogSettings
+        def connectivity_type: () -> ("DEFAULT" | "PUBLIC_INGRESS" | "PUBLIC_EGRESS" | "EXTERNAL_INBOUND")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RTBFabric/Client.html#get_inbound_external_link-instance_method
       def get_inbound_external_link: (
@@ -370,9 +393,12 @@ module Aws
         def flow_modules: () -> ::Array[Types::ModuleConfiguration]
         def pending_flow_modules: () -> ::Array[Types::ModuleConfiguration]
         def attributes: () -> Types::LinkAttributes
+        def log_settings: () -> Types::LinkLogSettings
+        def connectivity_type: () -> ("DEFAULT" | "PUBLIC_INGRESS" | "PUBLIC_EGRESS" | "EXTERNAL_INBOUND")
         def link_id: () -> ::String
         def tags: () -> ::Hash[::String, ::String]
-        def log_settings: () -> Types::LinkLogSettings
+        def http_responder_allowed: () -> bool
+        def timeout_in_millis: () -> ::Integer
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RTBFabric/Client.html#get_link-instance_method
       def get_link: (
@@ -387,10 +413,14 @@ module Aws
         def link_id: () -> ::String
         def status: () -> ("PENDING_CREATION" | "PENDING_REQUEST" | "REQUESTED" | "ACCEPTED" | "ACTIVE" | "REJECTED" | "FAILED" | "PENDING_DELETION" | "DELETED" | "PENDING_UPDATE" | "PENDING_ISOLATION" | "ISOLATED" | "PENDING_RESTORATION")
         def public_endpoint: () -> ::String
+        def flow_modules: () -> ::Array[Types::ModuleConfiguration]
+        def pending_flow_modules: () -> ::Array[Types::ModuleConfiguration]
+        def attributes: () -> Types::LinkAttributes
         def created_at: () -> ::Time
         def updated_at: () -> ::Time
         def tags: () -> ::Hash[::String, ::String]
         def log_settings: () -> Types::LinkLogSettings
+        def connectivity_type: () -> ("DEFAULT" | "PUBLIC_INGRESS" | "PUBLIC_EGRESS" | "EXTERNAL_INBOUND")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RTBFabric/Client.html#get_outbound_external_link-instance_method
       def get_outbound_external_link: (
@@ -432,6 +462,7 @@ module Aws
         def domain_name: () -> ::String
         def port: () -> ::Integer
         def protocol: () -> ("HTTP" | "HTTPS")
+        def listener_config: () -> Types::ListenerConfig
         def trust_store_configuration: () -> Types::TrustStoreConfiguration
         def managed_endpoint_configuration: () -> Types::ManagedEndpointConfiguration
         def gateway_id: () -> ::String
@@ -439,6 +470,8 @@ module Aws
         def active_links_count: () -> ::Integer
         def total_links_count: () -> ::Integer
         def inbound_links_count: () -> ::Integer
+        def gateway_type: () -> ("EXTERNAL" | "INTERNAL")
+        def external_inbound_endpoint: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RTBFabric/Client.html#get_responder_gateway-instance_method
       def get_responder_gateway: (
@@ -504,6 +537,8 @@ module Aws
         def flow_modules: () -> ::Array[Types::ModuleConfiguration]
         def pending_flow_modules: () -> ::Array[Types::ModuleConfiguration]
         def attributes: () -> Types::LinkAttributes
+        def log_settings: () -> Types::LinkLogSettings
+        def connectivity_type: () -> ("DEFAULT" | "PUBLIC_INGRESS" | "PUBLIC_EGRESS" | "EXTERNAL_INBOUND")
         def link_id: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RTBFabric/Client.html#reject_link-instance_method
@@ -549,7 +584,8 @@ module Aws
                                filter_log: ::Float
                              }
                            }
-                         }
+                         },
+                         ?timeout_in_millis: ::Integer
                        ) -> _UpdateLinkResponseSuccess
                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateLinkResponseSuccess
 
@@ -630,13 +666,26 @@ module Aws
                                       ?domain_name: ::String,
                                       port: ::Integer,
                                       protocol: ("HTTP" | "HTTPS"),
+                                      ?listener_config: {
+                                        protocols: Array[("HTTP" | "HTTPS")]
+                                      },
                                       ?trust_store_configuration: {
                                         certificate_authority_certificates: Array[::String]
                                       },
                                       ?managed_endpoint_configuration: {
                                         auto_scaling_groups: {
                                           auto_scaling_group_names: Array[::String],
-                                          role_arn: ::String
+                                          role_arn: ::String,
+                                          health_check_config: {
+                                            port: ::Integer,
+                                            path: ::String,
+                                            protocol: ("HTTP" | "HTTPS")?,
+                                            timeout_ms: ::Integer?,
+                                            interval_seconds: ::Integer?,
+                                            status_code_matcher: ::String?,
+                                            healthy_threshold_count: ::Integer?,
+                                            unhealthy_threshold_count: ::Integer?
+                                          }?
                                         }?,
                                         eks_endpoints: {
                                           endpoints_resource_name: ::String,
@@ -659,6 +708,11 @@ module Aws
                     link_id: ::String
                   ) -> Client::_GetInboundExternalLinkResponseSuccess
                     | (:inbound_external_link_active waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetInboundExternalLinkResponseSuccess
+                    | (:inbound_external_link_deleted waiter_name, 
+                    gateway_id: ::String,
+                    link_id: ::String
+                  ) -> Client::_GetInboundExternalLinkResponseSuccess
+                    | (:inbound_external_link_deleted waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetInboundExternalLinkResponseSuccess
                     | (:link_accepted waiter_name, 
                     gateway_id: ::String,
                     link_id: ::String
@@ -669,11 +723,21 @@ module Aws
                     link_id: ::String
                   ) -> Client::_GetLinkResponseSuccess
                     | (:link_active waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetLinkResponseSuccess
+                    | (:link_deleted waiter_name, 
+                    gateway_id: ::String,
+                    link_id: ::String
+                  ) -> Client::_GetLinkResponseSuccess
+                    | (:link_deleted waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetLinkResponseSuccess
                     | (:outbound_external_link_active waiter_name, 
                     gateway_id: ::String,
                     link_id: ::String
                   ) -> Client::_GetOutboundExternalLinkResponseSuccess
                     | (:outbound_external_link_active waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetOutboundExternalLinkResponseSuccess
+                    | (:outbound_external_link_deleted waiter_name, 
+                    gateway_id: ::String,
+                    link_id: ::String
+                  ) -> Client::_GetOutboundExternalLinkResponseSuccess
+                    | (:outbound_external_link_deleted waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetOutboundExternalLinkResponseSuccess
                     | (:requester_gateway_active waiter_name, 
                     gateway_id: ::String
                   ) -> Client::_GetRequesterGatewayResponseSuccess

@@ -54,7 +54,7 @@ module Aws::SnowDeviceManagement
   autoload :EndpointProvider, 'aws-sdk-snowdevicemanagement/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-snowdevicemanagement/endpoints'
 
-  GEM_VERSION = '1.49.0'
+  GEM_VERSION = '1.50.0'
 
 end
 

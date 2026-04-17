@@ -8,84 +8,36 @@
 Feature: Smoke tests for Wickr
 
   @wickr @smoke
-  Scenario: ListBlockedGuestUsersUnauthorized
+  Scenario: ListBotsUnauthorized
     Given I create a 'Aws::Wickr' client with config:
       """
 {"region":"us-east-1","use_fips_endpoint":false,"use_dualstack_endpoint":false}
       """
-    When I call the operation 'list_blocked_guest_users' with params:
+    When I call the operation 'list_bots' with params:
       """
 {"network_id":"00000000","max_results":10}
       """
     Then I expect an error was raised
 
   @wickr @smoke
-  Scenario: ListGuestUsersUnauthorized
+  Scenario: ListSecurityGroupsUnauthorized
     Given I create a 'Aws::Wickr' client with config:
       """
 {"region":"us-east-1","use_fips_endpoint":false,"use_dualstack_endpoint":false}
       """
-    When I call the operation 'list_guest_users' with params:
+    When I call the operation 'list_security_groups' with params:
       """
 {"network_id":"00000000","max_results":10}
       """
     Then I expect an error was raised
 
   @wickr @smoke
-  Scenario: GetOidcInfoUnauthorized
+  Scenario: GetOpentdfConfigUnauthorized
     Given I create a 'Aws::Wickr' client with config:
       """
 {"region":"us-east-1","use_fips_endpoint":false,"use_dualstack_endpoint":false}
       """
-    When I call the operation 'get_oidc_info' with params:
-      """
-{"network_id":"00000000"}
-      """
-    Then I expect an error was raised
-
-  @wickr @smoke
-  Scenario: GetPagedSecurityUsersUnauthorized
-    Given I create a 'Aws::Wickr' client with config:
-      """
-{"region":"us-east-1","use_fips_endpoint":false,"use_dualstack_endpoint":false}
-      """
-    When I call the operation 'list_security_group_users' with params:
-      """
-{"network_id":"00000000","group_id":"00000000","max_results":10}
-      """
-    Then I expect an error was raised
-
-  @wickr @smoke
-  Scenario: GetNetworkUnauthorized
-    Given I create a 'Aws::Wickr' client with config:
-      """
-{"region":"us-east-1","use_fips_endpoint":false,"use_dualstack_endpoint":false}
-      """
-    When I call the operation 'get_network' with params:
-      """
-{"network_id":"12345678"}
-      """
-    Then I expect an error was raised
-
-  @wickr @smoke
-  Scenario: GetGuestUserHistoryCountUnauthorized
-    Given I create a 'Aws::Wickr' client with config:
-      """
-{"region":"us-east-1","use_fips_endpoint":false,"use_dualstack_endpoint":false}
-      """
-    When I call the operation 'get_guest_user_history_count' with params:
-      """
-{"network_id":"00000000"}
-      """
-    Then I expect an error was raised
-
-  @wickr @smoke
-  Scenario: GetNetworkSettingsUnauthorized
-    Given I create a 'Aws::Wickr' client with config:
-      """
-{"region":"us-east-1","use_fips_endpoint":false,"use_dualstack_endpoint":false}
-      """
-    When I call the operation 'get_network_settings' with params:
+    When I call the operation 'get_opentdf_config' with params:
       """
 {"network_id":"00000000"}
       """
@@ -104,16 +56,40 @@ Feature: Smoke tests for Wickr
     Then I expect an error was raised
 
   @wickr @smoke
-  Scenario: ListNetworksSuccess
+  Scenario: ListGuestUsersUnauthorized
     Given I create a 'Aws::Wickr' client with config:
       """
 {"region":"us-east-1","use_fips_endpoint":false,"use_dualstack_endpoint":false}
       """
-    When I call the operation 'list_networks' with params:
+    When I call the operation 'list_guest_users' with params:
       """
-{}
+{"network_id":"00000000","max_results":10}
       """
-    Then I expect an error was not raised
+    Then I expect an error was raised
+
+  @wickr @smoke
+  Scenario: ListBlockedGuestUsersUnauthorized
+    Given I create a 'Aws::Wickr' client with config:
+      """
+{"region":"us-east-1","use_fips_endpoint":false,"use_dualstack_endpoint":false}
+      """
+    When I call the operation 'list_blocked_guest_users' with params:
+      """
+{"network_id":"00000000","max_results":10}
+      """
+    Then I expect an error was raised
+
+  @wickr @smoke
+  Scenario: GetSecurityGroupUnauthorized
+    Given I create a 'Aws::Wickr' client with config:
+      """
+{"region":"us-east-1","use_fips_endpoint":false,"use_dualstack_endpoint":false}
+      """
+    When I call the operation 'get_security_group' with params:
+      """
+{"network_id":"00000000","group_id":"00000000"}
+      """
+    Then I expect an error was raised
 
   @wickr @smoke
   Scenario: GetDataRetentionBotUnauthorized
@@ -140,37 +116,73 @@ Feature: Smoke tests for Wickr
     Then I expect an error was raised
 
   @wickr @smoke
-  Scenario: ListSecurityGroupsUnauthorized
+  Scenario: GetOidcInfoUnauthorized
     Given I create a 'Aws::Wickr' client with config:
       """
 {"region":"us-east-1","use_fips_endpoint":false,"use_dualstack_endpoint":false}
       """
-    When I call the operation 'list_security_groups' with params:
+    When I call the operation 'get_oidc_info' with params:
       """
-{"network_id":"00000000","max_results":10}
+{"network_id":"00000000"}
       """
     Then I expect an error was raised
 
   @wickr @smoke
-  Scenario: ListBotsUnauthorized
+  Scenario: GetNetworkSettingsUnauthorized
     Given I create a 'Aws::Wickr' client with config:
       """
 {"region":"us-east-1","use_fips_endpoint":false,"use_dualstack_endpoint":false}
       """
-    When I call the operation 'list_bots' with params:
+    When I call the operation 'get_network_settings' with params:
       """
-{"network_id":"00000000","max_results":10}
+{"network_id":"00000000"}
       """
     Then I expect an error was raised
 
   @wickr @smoke
-  Scenario: GetSecurityGroupUnauthorized
+  Scenario: ListNetworksSuccess
     Given I create a 'Aws::Wickr' client with config:
       """
 {"region":"us-east-1","use_fips_endpoint":false,"use_dualstack_endpoint":false}
       """
-    When I call the operation 'get_security_group' with params:
+    When I call the operation 'list_networks' with params:
       """
-{"network_id":"00000000","group_id":"00000000"}
+{}
+      """
+    Then I expect an error was not raised
+
+  @wickr @smoke
+  Scenario: GetNetworkUnauthorized
+    Given I create a 'Aws::Wickr' client with config:
+      """
+{"region":"us-east-1","use_fips_endpoint":false,"use_dualstack_endpoint":false}
+      """
+    When I call the operation 'get_network' with params:
+      """
+{"network_id":"12345678"}
+      """
+    Then I expect an error was raised
+
+  @wickr @smoke
+  Scenario: GetGuestUserHistoryCountUnauthorized
+    Given I create a 'Aws::Wickr' client with config:
+      """
+{"region":"us-east-1","use_fips_endpoint":false,"use_dualstack_endpoint":false}
+      """
+    When I call the operation 'get_guest_user_history_count' with params:
+      """
+{"network_id":"00000000"}
+      """
+    Then I expect an error was raised
+
+  @wickr @smoke
+  Scenario: GetPagedSecurityUsersUnauthorized
+    Given I create a 'Aws::Wickr' client with config:
+      """
+{"region":"us-east-1","use_fips_endpoint":false,"use_dualstack_endpoint":false}
+      """
+    When I call the operation 'list_security_group_users' with params:
+      """
+{"network_id":"00000000","group_id":"00000000","max_results":10}
       """
     Then I expect an error was raised

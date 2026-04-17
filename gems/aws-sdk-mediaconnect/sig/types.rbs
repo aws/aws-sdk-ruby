@@ -689,20 +689,20 @@ module Aws::MediaConnect
     end
 
     class FailoverRouterInputProtocolConfiguration
-      attr_accessor rtp: Types::RtpRouterInputConfiguration
       attr_accessor rist: Types::RistRouterInputConfiguration
       attr_accessor srt_listener: Types::SrtListenerRouterInputConfiguration
       attr_accessor srt_caller: Types::SrtCallerRouterInputConfiguration
+      attr_accessor rtp: Types::RtpRouterInputConfiguration
       attr_accessor unknown: untyped
       SENSITIVE: []
 
-      class Rtp < FailoverRouterInputProtocolConfiguration
-      end
       class Rist < FailoverRouterInputProtocolConfiguration
       end
       class SrtListener < FailoverRouterInputProtocolConfiguration
       end
       class SrtCaller < FailoverRouterInputProtocolConfiguration
+      end
+      class Rtp < FailoverRouterInputProtocolConfiguration
       end
       class Unknown < FailoverRouterInputProtocolConfiguration
       end
@@ -1137,7 +1137,7 @@ module Aws::MediaConnect
       attr_accessor name: ::String
       attr_accessor arn: ::String
       attr_accessor id: ::String
-      attr_accessor input_type: ("STANDARD" | "FAILOVER" | "MERGE" | "MEDIACONNECT_FLOW")
+      attr_accessor input_type: ("STANDARD" | "FAILOVER" | "MERGE" | "MEDIACONNECT_FLOW" | "MEDIALIVE_CHANNEL")
       attr_accessor state: ("CREATING" | "STANDBY" | "STARTING" | "ACTIVE" | "STOPPING" | "DELETING" | "UPDATING" | "ERROR" | "RECOVERING" | "MIGRATING")
       attr_accessor routed_outputs: ::Integer
       attr_accessor region_name: ::String
@@ -1239,6 +1239,17 @@ module Aws::MediaConnect
     end
 
     class MediaConnectFlowRouterOutputStreamDetails < Aws::EmptyStructure
+    end
+
+    class MediaLiveChannelRouterInputConfiguration
+      attr_accessor media_live_channel_arn: ::String
+      attr_accessor media_live_pipeline_id: ("PIPELINE_0" | "PIPELINE_1")
+      attr_accessor media_live_channel_output_name: ::String
+      attr_accessor source_transit_decryption: Types::MediaLiveTransitEncryption
+      SENSITIVE: []
+    end
+
+    class MediaLiveChannelRouterInputStreamDetails < Aws::EmptyStructure
     end
 
     class MediaLiveInputRouterOutputConfiguration
@@ -1650,7 +1661,7 @@ module Aws::MediaConnect
       attr_accessor arn: ::String
       attr_accessor id: ::String
       attr_accessor state: ("CREATING" | "STANDBY" | "STARTING" | "ACTIVE" | "STOPPING" | "DELETING" | "UPDATING" | "ERROR" | "RECOVERING" | "MIGRATING")
-      attr_accessor input_type: ("STANDARD" | "FAILOVER" | "MERGE" | "MEDIACONNECT_FLOW")
+      attr_accessor input_type: ("STANDARD" | "FAILOVER" | "MERGE" | "MEDIACONNECT_FLOW" | "MEDIALIVE_CHANNEL")
       attr_accessor configuration: Types::RouterInputConfiguration
       attr_accessor routed_outputs: ::Integer
       attr_accessor maximum_routed_outputs: ::Integer
@@ -1675,42 +1686,45 @@ module Aws::MediaConnect
 
     class RouterInputConfiguration
       attr_accessor standard: Types::StandardRouterInputConfiguration
+      attr_accessor media_live_channel: Types::MediaLiveChannelRouterInputConfiguration
       attr_accessor failover: Types::FailoverRouterInputConfiguration
-      attr_accessor merge: Types::MergeRouterInputConfiguration
       attr_accessor media_connect_flow: Types::MediaConnectFlowRouterInputConfiguration
+      attr_accessor merge: Types::MergeRouterInputConfiguration
       attr_accessor unknown: untyped
       SENSITIVE: []
 
       class Standard < RouterInputConfiguration
       end
+      class MediaLiveChannel < RouterInputConfiguration
+      end
       class Failover < RouterInputConfiguration
       end
-      class Merge < RouterInputConfiguration
-      end
       class MediaConnectFlow < RouterInputConfiguration
+      end
+      class Merge < RouterInputConfiguration
       end
       class Unknown < RouterInputConfiguration
       end
     end
 
     class RouterInputFilter
-      attr_accessor region_names: ::Array[::String]
-      attr_accessor input_types: ::Array[("STANDARD" | "FAILOVER" | "MERGE" | "MEDIACONNECT_FLOW")]
       attr_accessor name_contains: ::Array[::String]
+      attr_accessor region_names: ::Array[::String]
       attr_accessor network_interface_arns: ::Array[::String]
       attr_accessor routing_scopes: ::Array[("REGIONAL" | "GLOBAL")]
+      attr_accessor input_types: ::Array[("STANDARD" | "FAILOVER" | "MERGE" | "MEDIACONNECT_FLOW" | "MEDIALIVE_CHANNEL")]
       attr_accessor unknown: untyped
       SENSITIVE: []
 
-      class RegionNames < RouterInputFilter
-      end
-      class InputTypes < RouterInputFilter
-      end
       class NameContains < RouterInputFilter
+      end
+      class RegionNames < RouterInputFilter
       end
       class NetworkInterfaceArns < RouterInputFilter
       end
       class RoutingScopes < RouterInputFilter
+      end
+      class InputTypes < RouterInputFilter
       end
       class Unknown < RouterInputFilter
       end
@@ -1734,20 +1748,20 @@ module Aws::MediaConnect
     end
 
     class RouterInputProtocolConfiguration
-      attr_accessor rtp: Types::RtpRouterInputConfiguration
       attr_accessor rist: Types::RistRouterInputConfiguration
       attr_accessor srt_listener: Types::SrtListenerRouterInputConfiguration
       attr_accessor srt_caller: Types::SrtCallerRouterInputConfiguration
+      attr_accessor rtp: Types::RtpRouterInputConfiguration
       attr_accessor unknown: untyped
       SENSITIVE: []
 
-      class Rtp < RouterInputProtocolConfiguration
-      end
       class Rist < RouterInputProtocolConfiguration
       end
       class SrtListener < RouterInputProtocolConfiguration
       end
       class SrtCaller < RouterInputProtocolConfiguration
+      end
+      class Rtp < RouterInputProtocolConfiguration
       end
       class Unknown < RouterInputProtocolConfiguration
       end
@@ -1767,19 +1781,22 @@ module Aws::MediaConnect
 
     class RouterInputStreamDetails
       attr_accessor standard: Types::StandardRouterInputStreamDetails
+      attr_accessor media_live_channel: Types::MediaLiveChannelRouterInputStreamDetails
       attr_accessor failover: Types::FailoverRouterInputStreamDetails
-      attr_accessor merge: Types::MergeRouterInputStreamDetails
       attr_accessor media_connect_flow: Types::MediaConnectFlowRouterInputStreamDetails
+      attr_accessor merge: Types::MergeRouterInputStreamDetails
       attr_accessor unknown: untyped
       SENSITIVE: []
 
       class Standard < RouterInputStreamDetails
       end
+      class MediaLiveChannel < RouterInputStreamDetails
+      end
       class Failover < RouterInputStreamDetails
       end
-      class Merge < RouterInputStreamDetails
-      end
       class MediaConnectFlow < RouterInputStreamDetails
+      end
+      class Merge < RouterInputStreamDetails
       end
       class Unknown < RouterInputStreamDetails
       end
@@ -1911,25 +1928,25 @@ module Aws::MediaConnect
 
     class RouterOutputFilter
       attr_accessor region_names: ::Array[::String]
-      attr_accessor output_types: ::Array[("STANDARD" | "MEDIACONNECT_FLOW" | "MEDIALIVE_INPUT")]
-      attr_accessor name_contains: ::Array[::String]
       attr_accessor network_interface_arns: ::Array[::String]
-      attr_accessor routed_input_arns: ::Array[::String]
       attr_accessor routing_scopes: ::Array[("REGIONAL" | "GLOBAL")]
+      attr_accessor output_types: ::Array[("STANDARD" | "MEDIACONNECT_FLOW" | "MEDIALIVE_INPUT")]
+      attr_accessor routed_input_arns: ::Array[::String]
+      attr_accessor name_contains: ::Array[::String]
       attr_accessor unknown: untyped
       SENSITIVE: []
 
       class RegionNames < RouterOutputFilter
       end
-      class OutputTypes < RouterOutputFilter
-      end
-      class NameContains < RouterOutputFilter
-      end
       class NetworkInterfaceArns < RouterOutputFilter
+      end
+      class RoutingScopes < RouterOutputFilter
+      end
+      class OutputTypes < RouterOutputFilter
       end
       class RoutedInputArns < RouterOutputFilter
       end
-      class RoutingScopes < RouterOutputFilter
+      class NameContains < RouterOutputFilter
       end
       class Unknown < RouterOutputFilter
       end
@@ -1942,20 +1959,20 @@ module Aws::MediaConnect
     end
 
     class RouterOutputProtocolConfiguration
-      attr_accessor rtp: Types::RtpRouterOutputConfiguration
       attr_accessor rist: Types::RistRouterOutputConfiguration
       attr_accessor srt_listener: Types::SrtListenerRouterOutputConfiguration
       attr_accessor srt_caller: Types::SrtCallerRouterOutputConfiguration
+      attr_accessor rtp: Types::RtpRouterOutputConfiguration
       attr_accessor unknown: untyped
       SENSITIVE: []
 
-      class Rtp < RouterOutputProtocolConfiguration
-      end
       class Rist < RouterOutputProtocolConfiguration
       end
       class SrtListener < RouterOutputProtocolConfiguration
       end
       class SrtCaller < RouterOutputProtocolConfiguration
+      end
+      class Rtp < RouterOutputProtocolConfiguration
       end
       class Unknown < RouterOutputProtocolConfiguration
       end

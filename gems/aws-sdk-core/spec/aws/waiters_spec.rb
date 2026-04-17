@@ -221,8 +221,12 @@ module Aws
           context 'expected is true' do
             it 'succeeds when matched with any error' do
               client.stub_responses(:waiter_operation, RuntimeError.new)
-              expect { client.wait_until(:error_matcher_with_true) }
-                .not_to raise_error
+              expect { client.wait_until(:error_matcher_with_true) }.not_to raise_error
+            end
+
+            it 'succeeds when matched with any error' do
+              client.stub_responses(:waiter_operation, RuntimeError.new)
+              expect { client.wait_until(:error_matcher_with_boolean_true) }.not_to raise_error
             end
           end
 
@@ -233,8 +237,12 @@ module Aws
                 'ResourceNotFoundException',
                 { complex_object: { string_member: 'expected' } }
               )
-              expect { client.wait_until(:error_matcher_with_false) }
-                .not_to raise_error
+              expect { client.wait_until(:error_matcher_with_false) }.not_to raise_error
+            end
+
+            it 'succeeds when no error is received' do
+              client.stub_responses(:waiter_operation, complex_object: { string_member: 'expected' })
+              expect { client.wait_until(:error_matcher_with_boolean_false) }.not_to raise_error
             end
 
             it 'fails when matched' do

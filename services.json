@@ -335,6 +335,9 @@
   "ConnectContactLens": {
     "models": "connect-contact-lens/2020-08-21"
   },
+  "ConnectHealth": {
+    "models": "connecthealth/2025-01-29"
+  },
   "ConnectParticipant": {
     "models": "connectparticipant/2018-09-07"
   },
@@ -388,6 +391,9 @@
   },
   "Detective": {
     "models": "detective/2018-10-26"
+  },
+  "DevOpsAgent": {
+    "models": "devops-agent/2026-01-01"
   },
   "DevOpsGuru": {
     "models": "devops-guru/2020-12-01"
@@ -484,6 +490,9 @@
   },
   "ElasticsearchService": {
     "models": "es/2015-01-01"
+  },
+  "ElementalInference": {
+    "models": "elementalinference/2018-11-14"
   },
   "EntityResolution": {
     "models": "entityresolution/2018-05-10"
@@ -606,6 +615,9 @@
   },
   "InspectorScan": {
     "models": "inspector-scan/2023-08-08"
+  },
+  "Interconnect": {
+    "models": "interconnect/2022-07-26"
   },
   "InternetMonitor": {
     "models": "internetmonitor/2021-06-03"
@@ -790,6 +802,9 @@
   },
   "MarketplaceDeployment": {
     "models": "marketplace-deployment/2023-01-25"
+  },
+  "MarketplaceDiscovery": {
+    "models": "marketplace-discovery/2026-02-05"
   },
   "MarketplaceEntitlementService": {
     "models": "entitlement.marketplace/2017-01-11"
@@ -1104,6 +1119,9 @@
       "Aws::S3Control::Plugins::S3HostId"
     ]
   },
+  "S3Files": {
+    "models": "s3files/2025-05-05"
+  },
   "S3Outposts": {
     "models": "s3outposts/2017-07-25"
   },
@@ -1201,6 +1219,9 @@
   "SecretsManager": {
     "models": "secretsmanager/2017-10-17"
   },
+  "SecurityAgent": {
+    "models": "securityagent/2025-09-06"
+  },
   "SecurityHub": {
     "models": "securityhub/2018-10-26"
   },
@@ -1228,6 +1249,9 @@
   "Signer": {
     "models": "signer/2017-08-25"
   },
+  "SignerData": {
+    "models": "signer-data/2017-08-25"
+  },
   "Signin": {
     "models": "signin/2023-01-01",
     "gemName": "aws-sdk-core"
@@ -1238,6 +1262,9 @@
   "SimpleDB": {
     "models": "sdb/2009-04-15",
     "legacyEndpoints": true
+  },
+  "SimpleDBv2": {
+    "models": "simpledbv2/2025-09-26"
   },
   "SnowDeviceManagement": {
     "models": "snow-device-management/2021-08-04"
@@ -1265,6 +1292,9 @@
   },
   "SupportApp": {
     "models": "support-app/2021-08-20"
+  },
+  "Sustainability": {
+    "models": "sustainability/2018-05-10"
   },
   "Synthetics": {
     "models": "synthetics/2017-10-11"
@@ -1304,6 +1334,9 @@
   },
   "TrustedAdvisor": {
     "models": "trustedadvisor/2022-09-15"
+  },
+  "Uxc": {
+    "models": "uxc/2024-07-01"
   },
   "VPCLattice": {
     "models": "vpc-lattice/2022-11-30"

@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.89.0 (2026-03-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.88.0 (2026-03-10)
+------------------
+
+* Feature - This release introduces a new generative AI feature called Lex Bot Analyzer. This feature leverage AI to analyze the bot configuration against AWS Lex best practices to identify configuration issues and provides recommendations.
+
 1.87.0 (2026-01-16)
 ------------------
 

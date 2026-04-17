@@ -597,6 +597,7 @@ module Aws
       interface _CreateConnectionResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateConnectionOutput]
         def connection_id: () -> ::String
+        def configurations: () -> ::Array[Types::Configuration]
         def description: () -> ::String
         def domain_id: () -> ::String
         def domain_unit_id: () -> ::String
@@ -617,6 +618,12 @@ module Aws
                                  iam_connection_id: ::String?
                                },
                                ?client_token: ::String,
+                               ?configurations: Array[
+                                 {
+                                   classification: ::String?,
+                                   properties: Hash[::String, ::String]?
+                                 },
+                               ],
                                ?description: ::String,
                                domain_identifier: ::String,
                                ?environment_identifier: ::String,
@@ -717,6 +724,7 @@ module Aws
                                      connection: ::String?
                                    }?,
                                    glue_connection_name: ::String?,
+                                   glue_connection_names: Array[::String]?,
                                    glue_version: ::String?,
                                    idle_timeout: ::Integer?,
                                    java_virtual_env: ::String?,
@@ -726,7 +734,8 @@ module Aws
                                  }?,
                                  s3_properties: {
                                    s3_uri: ::String,
-                                   s3_access_grant_location_id: ::String?
+                                   s3_access_grant_location_id: ::String?,
+                                   register_s3_access_grant_location: bool?
                                  }?,
                                  amazon_q_properties: {
                                    is_enabled: bool,
@@ -735,6 +744,11 @@ module Aws
                                  }?,
                                  mlflow_properties: {
                                    tracking_server_arn: ::String?
+                                 }?,
+                                 workflows_mwaa_properties: {
+                                   mwaa_environment_name: ::String?
+                                 }?,
+                                 workflows_serverless_properties: {
                                  }?
                                },
                                ?enable_trusted_identity_propagation: bool,
@@ -957,7 +971,7 @@ module Aws
                              user_assignment: ("AUTOMATIC" | "MANUAL")?,
                              idc_instance_arn: ::String?
                            },
-                           domain_execution_role: ::String,
+                           ?domain_execution_role: ::String,
                            ?kms_key_identifier: ::String,
                            ?tags: Hash[::String, ::String],
                            ?domain_version: ("V1" | "V2"),
@@ -1012,6 +1026,7 @@ module Aws
         def deployment_properties: () -> Types::DeploymentProperties
         def environment_blueprint_id: () -> ::String
         def environment_configuration_id: () -> ::String
+        def environment_configuration_name: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#create_environment-instance_method
       def create_environment: (
@@ -1031,7 +1046,8 @@ module Aws
                                 ?environment_account_region: ::String,
                                 ?environment_blueprint_identifier: ::String,
                                 ?deployment_order: ::Integer,
-                                ?environment_configuration_id: ::String
+                                ?environment_configuration_id: ::String,
+                                ?environment_configuration_name: ::String
                               ) -> _CreateEnvironmentResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateEnvironmentResponseSuccess
 
@@ -1207,11 +1223,14 @@ module Aws
         def id: () -> ::String
         def status: () -> ("ASSIGNED" | "NOT_ASSIGNED")
         def group_name: () -> ::String
+        def role_principal_arn: () -> ::String
+        def role_principal_id: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#create_group_profile-instance_method
       def create_group_profile: (
                                   domain_identifier: ::String,
-                                  group_identifier: ::String,
+                                  ?group_identifier: ::String,
+                                  ?role_principal_arn: ::String,
                                   ?client_token: ::String
                                 ) -> _CreateGroupProfileResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateGroupProfileResponseSuccess
@@ -1250,6 +1269,7 @@ module Aws
         def project_profile_id: () -> ::String
         def user_parameters: () -> ::Array[Types::EnvironmentConfigurationUserParameter]
         def environment_deployment_details: () -> Types::EnvironmentDeploymentDetails
+        def project_category: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#create_project-instance_method
       def create_project: (
@@ -1275,6 +1295,17 @@ module Aws
                                     value: ::String?
                                   },
                                 ]?
+                              },
+                            ],
+                            ?project_category: ::String,
+                            ?project_execution_role: ::String,
+                            ?membership_assignments: Array[
+                              {
+                                member: {
+                                  user_identifier: ::String?,
+                                  group_identifier: ::String?
+                                },
+                                designation: ("PROJECT_OWNER" | "PROJECT_CONTRIBUTOR" | "PROJECT_CATALOG_VIEWER" | "PROJECT_CATALOG_CONSUMER" | "PROJECT_CATALOG_STEWARD")
                               },
                             ]
                           ) -> _CreateProjectResponseSuccess
@@ -1576,7 +1607,8 @@ module Aws
       def create_user_profile: (
                                  domain_identifier: ::String,
                                  user_identifier: ::String,
-                                 ?user_type: ("IAM_USER" | "IAM_ROLE" | "SSO_USER"),
+                                 ?user_type: ("IAM_USER" | "IAM_ROLE" | "SSO_USER" | "IAM_ROLE_SESSION"),
+                                 ?session_name: ::String,
                                  ?client_token: ::String
                                ) -> _CreateUserProfileResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateUserProfileResponseSuccess
@@ -2001,6 +2033,7 @@ module Aws
       interface _GetConnectionResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetConnectionOutput]
         def connection_credentials: () -> Types::ConnectionCredentials
+        def configurations: () -> ::Array[Types::Configuration]
         def connection_id: () -> ::String
         def description: () -> ::String
         def domain_id: () -> ::String
@@ -2187,6 +2220,7 @@ module Aws
         def deployment_properties: () -> Types::DeploymentProperties
         def environment_blueprint_id: () -> ::String
         def environment_configuration_id: () -> ::String
+        def environment_configuration_name: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#get_environment-instance_method
       def get_environment: (
@@ -2361,6 +2395,8 @@ module Aws
         def id: () -> ::String
         def status: () -> ("ASSIGNED" | "NOT_ASSIGNED")
         def group_name: () -> ::String
+        def role_principal_arn: () -> ::String
+        def role_principal_id: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#get_group_profile-instance_method
       def get_group_profile: (
@@ -2504,6 +2540,7 @@ module Aws
         def project_profile_id: () -> ::String
         def user_parameters: () -> ::Array[Types::EnvironmentConfigurationUserParameter]
         def environment_deployment_details: () -> Types::EnvironmentDeploymentDetails
+        def project_category: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#get_project-instance_method
       def get_project: (
@@ -2684,7 +2721,8 @@ module Aws
       def get_user_profile: (
                               domain_identifier: ::String,
                               user_identifier: ::String,
-                              ?type: ("IAM" | "SSO")
+                              ?type: ("IAM" | "SSO"),
+                              ?session_name: ::String
                             ) -> _GetUserProfileResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetUserProfileResponseSuccess
 
@@ -3097,6 +3135,7 @@ module Aws
                            ?user_identifier: ::String,
                            ?group_identifier: ::String,
                            ?name: ::String,
+                           ?project_category: ::String,
                            ?next_token: ::String,
                            ?max_results: ::Integer
                          ) -> _ListProjectsResponseSuccess
@@ -3322,6 +3361,49 @@ module Aws
                                                    ) -> _PutEnvironmentBlueprintConfigurationResponseSuccess
                                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutEnvironmentBlueprintConfigurationResponseSuccess
 
+      interface _QueryGraphResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::QueryGraphOutput]
+        def items: () -> ::Array[Types::ResultItem]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#query_graph-instance_method
+      def query_graph: (
+                         domain_identifier: ::String,
+                         match: Array[
+                           {
+                             relation_pattern: {
+                               relation_type: ("LINEAGE"),
+                               relation_direction: ("IN" | "OUT"),
+                               max_path_length: ::Integer?
+                             }?,
+                             entity_pattern: {
+                               entity_type: ("LINEAGE_NODE"),
+                               identifier: ::String,
+                               filters: {
+                                 filter: {
+                                   attribute: ::String,
+                                   value: ::String?,
+                                   int_value: ::Integer?,
+                                   operator: ("EQ" | "LE" | "LT" | "GE" | "GT" | "TEXT_SEARCH")?
+                                 }?,
+                                 and: Array[
+                                   untyped,
+                                 ]?,
+                                 or: Array[
+                                   untyped,
+                                 ]?
+                               }?
+                             }?
+                           },
+                         ],
+                         ?max_results: ::Integer,
+                         ?next_token: ::String,
+                         ?additional_attributes: {
+                           form_names: Array[::String]?
+                         }
+                       ) -> _QueryGraphResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _QueryGraphResponseSuccess
+
       interface _RejectPredictionsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::RejectPredictionsOutput]
         def domain_id: () -> ::String
@@ -3505,7 +3587,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#search_group_profiles-instance_method
       def search_group_profiles: (
                                    domain_identifier: ::String,
-                                   group_type: ("SSO_GROUP" | "DATAZONE_SSO_GROUP"),
+                                   group_type: ("SSO_GROUP" | "DATAZONE_SSO_GROUP" | "IAM_ROLE_SESSION_GROUP"),
                                    ?search_text: ::String,
                                    ?max_results: ::Integer,
                                    ?next_token: ::String
@@ -3810,6 +3892,7 @@ module Aws
 
       interface _UpdateConnectionResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateConnectionOutput]
+        def configurations: () -> ::Array[Types::Configuration]
         def connection_id: () -> ::String
         def description: () -> ::String
         def domain_id: () -> ::String
@@ -3824,6 +3907,12 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#update_connection-instance_method
       def update_connection: (
+                               ?configurations: Array[
+                                 {
+                                   classification: ::String?,
+                                   properties: Hash[::String, ::String]?
+                                 },
+                               ],
                                domain_identifier: ::String,
                                identifier: ::String,
                                ?description: ::String,
@@ -3887,7 +3976,8 @@ module Aws
                                  }?,
                                  s3_properties: {
                                    s3_uri: ::String,
-                                   s3_access_grant_location_id: ::String?
+                                   s3_access_grant_location_id: ::String?,
+                                   register_s3_access_grant_location: bool?
                                  }?,
                                  amazon_q_properties: {
                                    is_enabled: bool,
@@ -4075,6 +4165,7 @@ module Aws
         def deployment_properties: () -> Types::DeploymentProperties
         def environment_blueprint_id: () -> ::String
         def environment_configuration_id: () -> ::String
+        def environment_configuration_name: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#update_environment-instance_method
       def update_environment: (
@@ -4089,7 +4180,8 @@ module Aws
                                     name: ::String?,
                                     value: ::String?
                                   },
-                                ]
+                                ],
+                                ?environment_configuration_name: ::String
                               ) -> _UpdateEnvironmentResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateEnvironmentResponseSuccess
 
@@ -4241,6 +4333,8 @@ module Aws
         def id: () -> ::String
         def status: () -> ("ASSIGNED" | "NOT_ASSIGNED")
         def group_name: () -> ::String
+        def role_principal_arn: () -> ::String
+        def role_principal_id: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#update_group_profile-instance_method
       def update_group_profile: (
@@ -4267,6 +4361,7 @@ module Aws
         def project_profile_id: () -> ::String
         def user_parameters: () -> ::Array[Types::EnvironmentConfigurationUserParameter]
         def environment_deployment_details: () -> Types::EnvironmentDeploymentDetails
+        def project_category: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#update_project-instance_method
       def update_project: (
@@ -4546,7 +4641,8 @@ module Aws
                                  domain_identifier: ::String,
                                  user_identifier: ::String,
                                  ?type: ("IAM" | "SSO"),
-                                 status: ("ASSIGNED" | "NOT_ASSIGNED" | "ACTIVATED" | "DEACTIVATED")
+                                 status: ("ASSIGNED" | "NOT_ASSIGNED" | "ACTIVATED" | "DEACTIVATED"),
+                                 ?session_name: ::String
                                ) -> _UpdateUserProfileResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateUserProfileResponseSuccess
     end

@@ -770,6 +770,7 @@ module Aws::S3Control
       attr_accessor duration_seconds: ::Integer
       attr_accessor privilege: ("Minimal" | "Default")
       attr_accessor target_type: ("Object")
+      attr_accessor audit_context: ::String
       SENSITIVE: []
     end
 

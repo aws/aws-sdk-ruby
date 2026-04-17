@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.24.0 (2026-03-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.23.0 (2026-03-13)
+------------------
+
+* Feature - Feature launch that enables customers to connect streaming sessions to their own VPCs running in AWS.
+
+1.22.0 (2026-03-06)
+------------------
+
+* Feature - Added new Gen6 stream classes based on the EC2 G6f instance family. These stream classes provide cost-optimized options for streaming well-optimized or lower-fidelity games on Windows environments.
+
 1.21.0 (2026-01-16)
 ------------------
 

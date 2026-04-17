@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.63.0 (2026-03-20)
+------------------
+
+* Feature - Adds support for Policy Store Aliases, Policy Names, and Policy Template Names. These are customizable identifiers that can be used in place of Policy Store ids, Policy ids, and Policy Template ids respectively in Amazon Verified Permissions APIs.
+
+1.62.0 (2026-03-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.61.0 (2026-01-22)
 ------------------
 

@@ -1581,6 +1581,23 @@ module Aws::ApplicationSignals
     #   get the next set of service level objectives.
     #   @return [String]
     #
+    # @!attribute [rw] metric_source_types
+    #   Use this optional field to only include SLOs with the specified
+    #   metric source types in the output. Supported types are:
+    #
+    #   * Service operation
+    #
+    #   * Service dependency
+    #
+    #   * Service
+    #
+    #   * CloudWatch metric
+    #
+    #   * AppMonitor
+    #
+    #   * Canary
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] include_linked_accounts
     #   If you are using this operation in a monitoring account, specify
     #   `true` to include SLO from source accounts in the returned data.
@@ -1596,16 +1613,9 @@ module Aws::ApplicationSignals
     #   SLO's Amazon Web Services account ID.
     #   @return [String]
     #
-    # @!attribute [rw] metric_source_types
-    #   Use this optional field to only include SLOs with the specified
-    #   metric source types in the output. Supported types are:
-    #
-    #   * Service operation
-    #
-    #   * Service dependency
-    #
-    #   * CloudWatch metric
-    #   @return [Array<String>]
+    # @!attribute [rw] metric_source
+    #   Identifies the metric source to filter SLOs by.
+    #   @return [Types::MetricSource]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-signals-2024-04-15/ListServiceLevelObjectivesInput AWS API Documentation
     #
@@ -1615,9 +1625,10 @@ module Aws::ApplicationSignals
       :dependency_config,
       :max_results,
       :next_token,
+      :metric_source_types,
       :include_linked_accounts,
       :slo_owner_aws_account_id,
-      :metric_source_types)
+      :metric_source)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2200,6 +2211,26 @@ module Aws::ApplicationSignals
       include Aws::Structure
     end
 
+    # Identifies the metric source for SLOs on resources other than
+    # Application Signals services.
+    #
+    # @!attribute [rw] metric_source_key_attributes
+    #   Key attributes that identify the metric source.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] metric_source_attributes
+    #   Additional attributes for the metric source.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/application-signals-2024-04-15/MetricSource AWS API Documentation
+    #
+    class MetricSource < Struct.new(
+      :metric_source_key_attributes,
+      :metric_source_attributes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # This structure defines the metric to be used as the service level
     # indicator, along with the statistics, period, and unit.
     #
@@ -2494,6 +2525,11 @@ module Aws::ApplicationSignals
     #   `DependencyOperationName`.
     #   @return [Types::DependencyConfig]
     #
+    # @!attribute [rw] metric_source
+    #   Identifies the metric source for SLOs on resources other than
+    #   Application Signals services.
+    #   @return [Types::MetricSource]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-signals-2024-04-15/RequestBasedServiceLevelIndicatorMetric AWS API Documentation
     #
     class RequestBasedServiceLevelIndicatorMetric < Struct.new(
@@ -2502,7 +2538,8 @@ module Aws::ApplicationSignals
       :metric_type,
       :total_request_count_metric,
       :monitored_request_count_metric,
-      :dependency_config)
+      :dependency_config,
+      :metric_source)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2568,6 +2605,16 @@ module Aws::ApplicationSignals
     #   `DependencyOperationName`.
     #   @return [Types::DependencyConfig]
     #
+    # @!attribute [rw] metric_source
+    #   Identifies the metric source for SLOs on resources other than
+    #   Application Signals services.
+    #   @return [Types::MetricSource]
+    #
+    # @!attribute [rw] metric_name
+    #   The name of the metric for SLOs on resources other than Application
+    #   Signals services.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-signals-2024-04-15/RequestBasedServiceLevelIndicatorMetricConfig AWS API Documentation
     #
     class RequestBasedServiceLevelIndicatorMetricConfig < Struct.new(
@@ -2576,7 +2623,9 @@ module Aws::ApplicationSignals
       :metric_type,
       :total_request_count_metric,
       :monitored_request_count_metric,
-      :dependency_config)
+      :dependency_config,
+      :metric_source,
+      :metric_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3008,6 +3057,11 @@ module Aws::ApplicationSignals
     #   `DependencyOperationName`.
     #   @return [Types::DependencyConfig]
     #
+    # @!attribute [rw] metric_source
+    #   Identifies the metric source for SLOs on resources other than
+    #   Application Signals services.
+    #   @return [Types::MetricSource]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-signals-2024-04-15/ServiceLevelIndicatorMetric AWS API Documentation
     #
     class ServiceLevelIndicatorMetric < Struct.new(
@@ -3015,7 +3069,8 @@ module Aws::ApplicationSignals
       :operation_name,
       :metric_type,
       :metric_data_queries,
-      :dependency_config)
+      :dependency_config,
+      :metric_source)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3082,6 +3137,11 @@ module Aws::ApplicationSignals
     #   either achieved or not achieved the necessary performance.
     #   @return [Integer]
     #
+    # @!attribute [rw] metric_source
+    #   Identifies the metric source for SLOs on resources other than
+    #   Application Signals services.
+    #   @return [Types::MetricSource]
+    #
     # @!attribute [rw] metric_data_queries
     #   If this SLO monitors a CloudWatch metric or the result of a
     #   CloudWatch metric math expression, use this structure to specify
@@ -3102,6 +3162,7 @@ module Aws::ApplicationSignals
       :metric_name,
       :statistic,
       :period_seconds,
+      :metric_source,
       :metric_data_queries,
       :dependency_config)
       SENSITIVE = []
@@ -3176,7 +3237,13 @@ module Aws::ApplicationSignals
     #
     #   * Service dependency
     #
+    #   * Service
+    #
     #   * CloudWatch metric
+    #
+    #   * AppMonitor
+    #
+    #   * Canary
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-signals-2024-04-15/ServiceLevelObjective AWS API Documentation
@@ -3434,8 +3501,19 @@ module Aws::ApplicationSignals
     #
     #   * Service dependency
     #
+    #   * Service
+    #
     #   * CloudWatch metric
+    #
+    #   * AppMonitor
+    #
+    #   * Canary
     #   @return [String]
+    #
+    # @!attribute [rw] metric_source
+    #   Identifies the metric source for SLOs on resources other than
+    #   Application Signals services.
+    #   @return [Types::MetricSource]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-signals-2024-04-15/ServiceLevelObjectiveSummary AWS API Documentation
     #
@@ -3447,7 +3525,8 @@ module Aws::ApplicationSignals
       :dependency_config,
       :created_time,
       :evaluation_type,
-      :metric_source_type)
+      :metric_source_type,
+      :metric_source)
       SENSITIVE = []
       include Aws::Structure
     end

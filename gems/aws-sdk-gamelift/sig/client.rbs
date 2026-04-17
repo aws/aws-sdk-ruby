@@ -200,7 +200,8 @@ module Aws
                                         key: ::String,
                                         value: ::String
                                       },
-                                    ]
+                                    ],
+                                    ?player_gateway_mode: ("DISABLED" | "ENABLED" | "REQUIRED")
                                   ) -> _CreateContainerFleetResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateContainerFleetResponseSuccess
 
@@ -364,7 +365,11 @@ module Aws
                           ?anywhere_configuration: {
                             cost: ::String
                           },
-                          ?instance_role_credentials_provider: ("SHARED_CREDENTIAL_FILE")
+                          ?instance_role_credentials_provider: ("SHARED_CREDENTIAL_FILE"),
+                          ?player_gateway_mode: ("DISABLED" | "ENABLED" | "REQUIRED"),
+                          ?player_gateway_configuration: {
+                            game_server_ip_protocol_supported: ("IPv4" | "DUAL_STACK")?
+                          }
                         ) -> _CreateFleetResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateFleetResponseSuccess
 
@@ -1220,6 +1225,18 @@ module Aws
                                  instance_id: ::String
                                ) -> _GetInstanceAccessResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetInstanceAccessResponseSuccess
+
+      interface _GetPlayerConnectionDetailsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetPlayerConnectionDetailsOutput]
+        def game_session_id: () -> ::String
+        def player_connection_details: () -> ::Array[Types::PlayerConnectionDetail]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLift/Client.html#get_player_connection_details-instance_method
+      def get_player_connection_details: (
+                                           game_session_id: ::String,
+                                           player_ids: Array[::String]
+                                         ) -> _GetPlayerConnectionDetailsResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetPlayerConnectionDetailsResponseSuccess
 
       interface _ListAliasesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListAliasesOutput]

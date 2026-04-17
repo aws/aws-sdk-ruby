@@ -153,8 +153,8 @@ module Aws
                                                    ?savings_plan_offering_ids: Array[::String],
                                                    ?savings_plan_payment_options: Array[("All Upfront" | "Partial Upfront" | "No Upfront")],
                                                    ?savings_plan_types: Array[("Compute" | "EC2Instance" | "SageMaker" | "Database")],
-                                                   ?products: Array[("EC2" | "Fargate" | "Lambda" | "SageMaker" | "RDS" | "DSQL" | "DynamoDB" | "ElastiCache" | "DocDB" | "Neptune" | "Timestream" | "Keyspaces" | "DMS")],
-                                                   ?service_codes: Array[("AmazonEC2" | "AmazonECS" | "AmazonEKS" | "AWSLambda" | "AmazonSageMaker" | "AmazonRDS" | "AuroraDSQL" | "AmazonDynamoDB" | "AmazonElastiCache" | "AmazonDocDB" | "AmazonNeptune" | "AmazonTimestream" | "AmazonMCS" | "AWSDatabaseMigrationSvc")],
+                                                   ?products: Array[("EC2" | "Fargate" | "Lambda" | "SageMaker" | "RDS" | "DSQL" | "DynamoDB" | "ElastiCache" | "DocDB" | "Neptune" | "Timestream" | "Keyspaces" | "DMS" | "OpenSearch")],
+                                                   ?service_codes: Array[("AmazonEC2" | "AmazonECS" | "AmazonEKS" | "AWSLambda" | "AmazonSageMaker" | "AmazonRDS" | "AuroraDSQL" | "AmazonDynamoDB" | "AmazonElastiCache" | "AmazonDocDB" | "AmazonNeptune" | "AmazonTimestream" | "AmazonMCS" | "AWSDatabaseMigrationSvc" | "AmazonES")],
                                                    ?usage_types: Array[::String],
                                                    ?operations: Array[::String],
                                                    ?filters: Array[
@@ -177,7 +177,7 @@ module Aws
       def describe_savings_plans_offerings: (
                                               ?offering_ids: Array[::String],
                                               ?payment_options: Array[("All Upfront" | "Partial Upfront" | "No Upfront")],
-                                              ?product_type: ("EC2" | "Fargate" | "Lambda" | "SageMaker" | "RDS" | "DSQL" | "DynamoDB" | "ElastiCache" | "DocDB" | "Neptune" | "Timestream" | "Keyspaces" | "DMS"),
+                                              ?product_type: ("EC2" | "Fargate" | "Lambda" | "SageMaker" | "RDS" | "DSQL" | "DynamoDB" | "ElastiCache" | "DocDB" | "Neptune" | "Timestream" | "Keyspaces" | "DMS" | "OpenSearch"),
                                               ?plan_types: Array[("Compute" | "EC2Instance" | "SageMaker" | "Database")],
                                               ?durations: Array[::Integer],
                                               ?currencies: Array[("CNY" | "USD" | "EUR")],

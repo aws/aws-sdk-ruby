@@ -576,11 +576,10 @@ module Aws::Omics
     end
 
     # Amazon Web Services HealthOmics variant stores and annotation stores
-    # will no longer be open to new customers starting November 7, 2025. If
-    # you would like to use variant stores or annotation stores, sign up
-    # prior to that date. Existing customers can continue to use the service
-    # as normal. For more information, see [ Amazon Web Services HealthOmics
-    # variant store and annotation store availability change][1].
+    # are no longer open to new customers. Existing customers can continue
+    # to use the service as normal. For more information, see [ Amazon Web
+    # Services HealthOmics variant store and annotation store availability
+    # change][1].
     #
     #  Cancels an annotation import job.
     #
@@ -632,12 +631,42 @@ module Aws::Omics
       req.send_request(options)
     end
 
+    # Cancels all runs within a specified batch. This operation prevents
+    # not-yet-submitted runs from starting and submits `CancelRun` requests
+    # for runs that have already started.
+    #
+    # Cancel is only allowed on batches in `PENDING`, `SUBMITTING`, or
+    # `INPROGRESS` state. Cancel operations are non-atomic and may be
+    # partially successful. Use `GetBatch` to review
+    # `successfulCancelSubmissionCount` and `failedCancelSubmissionCount` in
+    # the `submissionSummary`. Only one cancel or delete operation per batch
+    # is allowed at a time.
+    #
+    # @option params [required, String] :batch_id
+    #   The identifier portion of the run batch ARN.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.cancel_run_batch({
+    #     batch_id: "BatchId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/CancelRunBatch AWS API Documentation
+    #
+    # @overload cancel_run_batch(params = {})
+    # @param [Hash] params ({})
+    def cancel_run_batch(params = {}, options = {})
+      req = build_request(:cancel_run_batch, params)
+      req.send_request(options)
+    end
+
     # Amazon Web Services HealthOmics variant stores and annotation stores
-    # will no longer be open to new customers starting November 7, 2025. If
-    # you would like to use variant stores or annotation stores, sign up
-    # prior to that date. Existing customers can continue to use the service
-    # as normal. For more information, see [ Amazon Web Services HealthOmics
-    # variant store and annotation store availability change][1].
+    # are no longer open to new customers. Existing customers can continue
+    # to use the service as normal. For more information, see [ Amazon Web
+    # Services HealthOmics variant store and annotation store availability
+    # change][1].
     #
     #  Cancels a variant import job.
     #
@@ -720,11 +749,10 @@ module Aws::Omics
     end
 
     # Amazon Web Services HealthOmics variant stores and annotation stores
-    # will no longer be open to new customers starting November 7, 2025. If
-    # you would like to use variant stores or annotation stores, sign up
-    # prior to that date. Existing customers can continue to use the service
-    # as normal. For more information, see [ Amazon Web Services HealthOmics
-    # variant store and annotation store availability change][1].
+    # are no longer open to new customers. Existing customers can continue
+    # to use the service as normal. For more information, see [ Amazon Web
+    # Services HealthOmics variant store and annotation store availability
+    # change][1].
     #
     #  Creates an annotation store.
     #
@@ -899,6 +927,81 @@ module Aws::Omics
     # @param [Hash] params ({})
     def create_annotation_store_version(params = {}, options = {})
       req = build_request(:create_annotation_store_version, params)
+      req.send_request(options)
+    end
+
+    # Create a new configuration.
+    #
+    # @option params [required, String] :name
+    #   User-friendly name for the configuration.
+    #
+    # @option params [String] :description
+    #   Optional description for the configuration.
+    #
+    # @option params [required, Types::RunConfigurations] :run_configurations
+    #   Required run-specific configurations.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   Optional tags for the configuration.
+    #
+    # @option params [required, String] :request_id
+    #   Optional request idempotency token. If not specified, a universally
+    #   unique identifier (UUID) will be automatically generated for the
+    #   request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::CreateConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateConfigurationResponse#arn #arn} => String
+    #   * {Types::CreateConfigurationResponse#uuid #uuid} => String
+    #   * {Types::CreateConfigurationResponse#name #name} => String
+    #   * {Types::CreateConfigurationResponse#description #description} => String
+    #   * {Types::CreateConfigurationResponse#run_configurations #run_configurations} => Types::RunConfigurationsResponse
+    #   * {Types::CreateConfigurationResponse#status #status} => String
+    #   * {Types::CreateConfigurationResponse#creation_time #creation_time} => Time
+    #   * {Types::CreateConfigurationResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_configuration({
+    #     name: "ConfigurationName", # required
+    #     description: "ConfigurationDescription",
+    #     run_configurations: { # required
+    #       vpc_config: {
+    #         security_group_ids: ["SecurityGroupId"],
+    #         subnet_ids: ["SubnetId"],
+    #       },
+    #     },
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #     request_id: "ConfigurationRequestId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.uuid #=> String
+    #   resp.name #=> String
+    #   resp.description #=> String
+    #   resp.run_configurations.vpc_config.security_group_ids #=> Array
+    #   resp.run_configurations.vpc_config.security_group_ids[0] #=> String
+    #   resp.run_configurations.vpc_config.subnet_ids #=> Array
+    #   resp.run_configurations.vpc_config.subnet_ids[0] #=> String
+    #   resp.run_configurations.vpc_config.vpc_id #=> String
+    #   resp.status #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETING", "DELETED", "FAILED"
+    #   resp.creation_time #=> Time
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/CreateConfiguration AWS API Documentation
+    #
+    # @overload create_configuration(params = {})
+    # @param [Hash] params ({})
+    def create_configuration(params = {}, options = {})
+      req = build_request(:create_configuration, params)
       req.send_request(options)
     end
 
@@ -1455,11 +1558,10 @@ module Aws::Omics
     end
 
     # Amazon Web Services HealthOmics variant stores and annotation stores
-    # will no longer be open to new customers starting November 7, 2025. If
-    # you would like to use variant stores or annotation stores, sign up
-    # prior to that date. Existing customers can continue to use the service
-    # as normal. For more information, see [ Amazon Web Services HealthOmics
-    # variant store and annotation store availability change][1].
+    # are no longer open to new customers. Existing customers can continue
+    # to use the service as normal. For more information, see [ Amazon Web
+    # Services HealthOmics variant store and annotation store availability
+    # change][1].
     #
     #  Creates a variant store.
     #
@@ -1575,10 +1677,19 @@ module Aws::Omics
     #   A description for the workflow.
     #
     # @option params [String] :engine
-    #   The workflow engine for the workflow. This is only required if you
-    #   have workflow definition files from more than one engine in your zip
-    #   file. Otherwise, the service can detect the engine automatically from
-    #   your workflow definition.
+    #   The workflow engine for the workflow. By default, Amazon Web Services
+    #   HealthOmics detects the engine automatically from your workflow
+    #   definition. Provide a value if you have workflow definition files from
+    #   more than one engine in your zip file, or to use WDL lenient.
+    #
+    #   WDL lenient is designed to handle workflows migrated from Cromwell. It
+    #   supports customer Cromwell directives and some non-conformant logic.
+    #   For details, see [Implicit type conversion in WDL lenient][1] in the
+    #   *Amazon Web Services HealthOmics User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/omics/latest/dev/workflow-wdl-type-conversion.html
     #
     # @option params [String, StringIO, File] :definition_zip
     #   A ZIP archive containing the main workflow definition file and
@@ -2031,11 +2142,10 @@ module Aws::Omics
     end
 
     # Amazon Web Services HealthOmics variant stores and annotation stores
-    # will no longer be open to new customers starting November 7, 2025. If
-    # you would like to use variant stores or annotation stores, sign up
-    # prior to that date. Existing customers can continue to use the service
-    # as normal. For more information, see [ Amazon Web Services HealthOmics
-    # variant store and annotation store availability change][1].
+    # are no longer open to new customers. Existing customers can continue
+    # to use the service as normal. For more information, see [ Amazon Web
+    # Services HealthOmics variant store and annotation store availability
+    # change][1].
     #
     #  Deletes an annotation store.
     #
@@ -2110,6 +2220,58 @@ module Aws::Omics
     # @param [Hash] params ({})
     def delete_annotation_store_versions(params = {}, options = {})
       req = build_request(:delete_annotation_store_versions, params)
+      req.send_request(options)
+    end
+
+    # Deletes a run batch resource and its associated metadata. This
+    # operation does not delete the individual workflow runs. To delete the
+    # runs, call `DeleteRunBatch` before calling `DeleteBatch`.
+    #
+    # `DeleteBatch` requires the batch to be in a terminal state:
+    # `PROCESSED`, `FAILED`, `CANCELLED`, or `RUNS_DELETED`. After
+    # `DeleteBatch` completes, the batch metadata is no longer accessible.
+    # You cannot call `GetBatch`, `ListRunsInBatch`, `DeleteRunBatch`, or
+    # `CancelRunBatch` on a deleted batch.
+    #
+    # @option params [required, String] :batch_id
+    #   The identifier portion of the run batch ARN.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_batch({
+    #     batch_id: "BatchId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/DeleteBatch AWS API Documentation
+    #
+    # @overload delete_batch(params = {})
+    # @param [Hash] params ({})
+    def delete_batch(params = {}, options = {})
+      req = build_request(:delete_batch, params)
+      req.send_request(options)
+    end
+
+    # Delete an existing configuration.
+    #
+    # @option params [required, String] :name
+    #   Configuration name to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_configuration({
+    #     name: "ConfigurationName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/DeleteConfiguration AWS API Documentation
+    #
+    # @overload delete_configuration(params = {})
+    # @param [Hash] params ({})
+    def delete_configuration(params = {}, options = {})
+      req = build_request(:delete_configuration, params)
       req.send_request(options)
     end
 
@@ -2214,6 +2376,35 @@ module Aws::Omics
     # @param [Hash] params ({})
     def delete_run(params = {}, options = {})
       req = build_request(:delete_run, params)
+      req.send_request(options)
+    end
+
+    # Deletes the individual workflow runs within a batch. This operation is
+    # separate from `DeleteBatch`, which removes the batch metadata.
+    #
+    # Delete is only allowed on batches in `PROCESSED` or `CANCELLED` state.
+    # Delete operations are non-atomic and may be partially successful. Use
+    # `GetBatch` to review `successfulDeleteSubmissionCount` and
+    # `failedDeleteSubmissionCount` in the `submissionSummary`. Only one
+    # cancel or delete operation per batch is allowed at a time.
+    #
+    # @option params [required, String] :batch_id
+    #   The identifier portion of the run batch ARN.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_run_batch({
+    #     batch_id: "BatchId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/DeleteRunBatch AWS API Documentation
+    #
+    # @overload delete_run_batch(params = {})
+    # @param [Hash] params ({})
+    def delete_run_batch(params = {}, options = {})
+      req = build_request(:delete_run_batch, params)
       req.send_request(options)
     end
 
@@ -2369,11 +2560,10 @@ module Aws::Omics
     end
 
     # Amazon Web Services HealthOmics variant stores and annotation stores
-    # will no longer be open to new customers starting November 7, 2025. If
-    # you would like to use variant stores or annotation stores, sign up
-    # prior to that date. Existing customers can continue to use the service
-    # as normal. For more information, see [ Amazon Web Services HealthOmics
-    # variant store and annotation store availability change][1].
+    # are no longer open to new customers. Existing customers can continue
+    # to use the service as normal. For more information, see [ Amazon Web
+    # Services HealthOmics variant store and annotation store availability
+    # change][1].
     #
     #  Deletes a variant store.
     #
@@ -2476,11 +2666,10 @@ module Aws::Omics
     end
 
     # Amazon Web Services HealthOmics variant stores and annotation stores
-    # will no longer be open to new customers starting November 7, 2025. If
-    # you would like to use variant stores or annotation stores, sign up
-    # prior to that date. Existing customers can continue to use the service
-    # as normal. For more information, see [ Amazon Web Services HealthOmics
-    # variant store and annotation store availability change][1].
+    # are no longer open to new customers. Existing customers can continue
+    # to use the service as normal. For more information, see [ Amazon Web
+    # Services HealthOmics variant store and annotation store availability
+    # change][1].
     #
     #  Gets information about an annotation import job.
     #
@@ -2557,11 +2746,10 @@ module Aws::Omics
     end
 
     # Amazon Web Services HealthOmics variant stores and annotation stores
-    # will no longer be open to new customers starting November 7, 2025. If
-    # you would like to use variant stores or annotation stores, sign up
-    # prior to that date. Existing customers can continue to use the service
-    # as normal. For more information, see [ Amazon Web Services HealthOmics
-    # variant store and annotation store availability change][1].
+    # are no longer open to new customers. Existing customers can continue
+    # to use the service as normal. For more information, see [ Amazon Web
+    # Services HealthOmics variant store and annotation store availability
+    # change][1].
     #
     #  Gets information about an annotation store.
     #
@@ -2703,6 +2891,141 @@ module Aws::Omics
     # @param [Hash] params ({})
     def get_annotation_store_version(params = {}, options = {})
       req = build_request(:get_annotation_store_version, params)
+      req.send_request(options)
+    end
+
+    # Retrieves details and current status for a specific run batch,
+    # including submission progress and run execution counts.
+    #
+    # @option params [required, String] :batch_id
+    #   The identifier portion of the run batch ARN.
+    #
+    # @return [Types::GetBatchResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetBatchResponse#id #id} => String
+    #   * {Types::GetBatchResponse#arn #arn} => String
+    #   * {Types::GetBatchResponse#uuid #uuid} => String
+    #   * {Types::GetBatchResponse#name #name} => String
+    #   * {Types::GetBatchResponse#status #status} => String
+    #   * {Types::GetBatchResponse#tags #tags} => Hash&lt;String,String&gt;
+    #   * {Types::GetBatchResponse#total_runs #total_runs} => Integer
+    #   * {Types::GetBatchResponse#default_run_setting #default_run_setting} => Types::DefaultRunSetting
+    #   * {Types::GetBatchResponse#submission_summary #submission_summary} => Types::SubmissionSummary
+    #   * {Types::GetBatchResponse#run_summary #run_summary} => Types::RunSummary
+    #   * {Types::GetBatchResponse#creation_time #creation_time} => Time
+    #   * {Types::GetBatchResponse#submitted_time #submitted_time} => Time
+    #   * {Types::GetBatchResponse#processed_time #processed_time} => Time
+    #   * {Types::GetBatchResponse#failed_time #failed_time} => Time
+    #   * {Types::GetBatchResponse#failure_reason #failure_reason} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_batch({
+    #     batch_id: "BatchId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.id #=> String
+    #   resp.arn #=> String
+    #   resp.uuid #=> String
+    #   resp.name #=> String
+    #   resp.status #=> String, one of "PENDING", "SUBMITTING", "INPROGRESS", "STOPPING", "CANCELLED", "FAILED", "PROCESSED", "RUNS_DELETING", "RUNS_DELETED"
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #   resp.total_runs #=> Integer
+    #   resp.default_run_setting.workflow_id #=> String
+    #   resp.default_run_setting.workflow_type #=> String, one of "PRIVATE", "READY2RUN"
+    #   resp.default_run_setting.role_arn #=> String
+    #   resp.default_run_setting.name #=> String
+    #   resp.default_run_setting.cache_id #=> String
+    #   resp.default_run_setting.cache_behavior #=> String, one of "CACHE_ON_FAILURE", "CACHE_ALWAYS"
+    #   resp.default_run_setting.run_group_id #=> String
+    #   resp.default_run_setting.priority #=> Integer
+    #   resp.default_run_setting.storage_capacity #=> Integer
+    #   resp.default_run_setting.output_uri #=> String
+    #   resp.default_run_setting.log_level #=> String, one of "OFF", "FATAL", "ERROR", "ALL"
+    #   resp.default_run_setting.run_tags #=> Hash
+    #   resp.default_run_setting.run_tags["TagKey"] #=> String
+    #   resp.default_run_setting.retention_mode #=> String, one of "RETAIN", "REMOVE"
+    #   resp.default_run_setting.storage_type #=> String, one of "STATIC", "DYNAMIC"
+    #   resp.default_run_setting.workflow_owner_id #=> String
+    #   resp.default_run_setting.output_bucket_owner_id #=> String
+    #   resp.default_run_setting.workflow_version_name #=> String
+    #   resp.submission_summary.successful_start_submission_count #=> Integer
+    #   resp.submission_summary.failed_start_submission_count #=> Integer
+    #   resp.submission_summary.pending_start_submission_count #=> Integer
+    #   resp.submission_summary.successful_cancel_submission_count #=> Integer
+    #   resp.submission_summary.failed_cancel_submission_count #=> Integer
+    #   resp.submission_summary.successful_delete_submission_count #=> Integer
+    #   resp.submission_summary.failed_delete_submission_count #=> Integer
+    #   resp.run_summary.pending_run_count #=> Integer
+    #   resp.run_summary.starting_run_count #=> Integer
+    #   resp.run_summary.running_run_count #=> Integer
+    #   resp.run_summary.stopping_run_count #=> Integer
+    #   resp.run_summary.completed_run_count #=> Integer
+    #   resp.run_summary.deleted_run_count #=> Integer
+    #   resp.run_summary.failed_run_count #=> Integer
+    #   resp.run_summary.cancelled_run_count #=> Integer
+    #   resp.creation_time #=> Time
+    #   resp.submitted_time #=> Time
+    #   resp.processed_time #=> Time
+    #   resp.failed_time #=> Time
+    #   resp.failure_reason #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/GetBatch AWS API Documentation
+    #
+    # @overload get_batch(params = {})
+    # @param [Hash] params ({})
+    def get_batch(params = {}, options = {})
+      req = build_request(:get_batch, params)
+      req.send_request(options)
+    end
+
+    # Retrieve configuration details for specified name.
+    #
+    # @option params [required, String] :name
+    #   Configuration name to retrieve.
+    #
+    # @return [Types::GetConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetConfigurationResponse#arn #arn} => String
+    #   * {Types::GetConfigurationResponse#uuid #uuid} => String
+    #   * {Types::GetConfigurationResponse#name #name} => String
+    #   * {Types::GetConfigurationResponse#description #description} => String
+    #   * {Types::GetConfigurationResponse#run_configurations #run_configurations} => Types::RunConfigurationsResponse
+    #   * {Types::GetConfigurationResponse#status #status} => String
+    #   * {Types::GetConfigurationResponse#creation_time #creation_time} => Time
+    #   * {Types::GetConfigurationResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_configuration({
+    #     name: "ConfigurationName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.uuid #=> String
+    #   resp.name #=> String
+    #   resp.description #=> String
+    #   resp.run_configurations.vpc_config.security_group_ids #=> Array
+    #   resp.run_configurations.vpc_config.security_group_ids[0] #=> String
+    #   resp.run_configurations.vpc_config.subnet_ids #=> Array
+    #   resp.run_configurations.vpc_config.subnet_ids[0] #=> String
+    #   resp.run_configurations.vpc_config.vpc_id #=> String
+    #   resp.status #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETING", "DELETED", "FAILED"
+    #   resp.creation_time #=> Time
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/GetConfiguration AWS API Documentation
+    #
+    # @overload get_configuration(params = {})
+    # @param [Hash] params ({})
+    def get_configuration(params = {}, options = {})
+      req = build_request(:get_configuration, params)
       req.send_request(options)
     end
 
@@ -3254,6 +3577,7 @@ module Aws::Omics
     #   * {Types::GetRunResponse#role_arn #role_arn} => String
     #   * {Types::GetRunResponse#name #name} => String
     #   * {Types::GetRunResponse#run_group_id #run_group_id} => String
+    #   * {Types::GetRunResponse#batch_id #batch_id} => String
     #   * {Types::GetRunResponse#priority #priority} => Integer
     #   * {Types::GetRunResponse#definition #definition} => String
     #   * {Types::GetRunResponse#digest #digest} => String
@@ -3278,6 +3602,9 @@ module Aws::Omics
     #   * {Types::GetRunResponse#workflow_owner_id #workflow_owner_id} => String
     #   * {Types::GetRunResponse#workflow_version_name #workflow_version_name} => String
     #   * {Types::GetRunResponse#workflow_uuid #workflow_uuid} => String
+    #   * {Types::GetRunResponse#networking_mode #networking_mode} => String
+    #   * {Types::GetRunResponse#configuration #configuration} => Types::ConfigurationDetails
+    #   * {Types::GetRunResponse#vpc_config #vpc_config} => Types::VpcConfigResponse
     #
     # @example Request syntax with placeholder values
     #
@@ -3300,6 +3627,7 @@ module Aws::Omics
     #   resp.role_arn #=> String
     #   resp.name #=> String
     #   resp.run_group_id #=> String
+    #   resp.batch_id #=> String
     #   resp.priority #=> Integer
     #   resp.definition #=> String
     #   resp.digest #=> String
@@ -3326,6 +3654,15 @@ module Aws::Omics
     #   resp.workflow_owner_id #=> String
     #   resp.workflow_version_name #=> String
     #   resp.workflow_uuid #=> String
+    #   resp.networking_mode #=> String, one of "RESTRICTED", "VPC"
+    #   resp.configuration.name #=> String
+    #   resp.configuration.arn #=> String
+    #   resp.configuration.uuid #=> String
+    #   resp.vpc_config.security_group_ids #=> Array
+    #   resp.vpc_config.security_group_ids[0] #=> String
+    #   resp.vpc_config.subnet_ids #=> Array
+    #   resp.vpc_config.subnet_ids[0] #=> String
+    #   resp.vpc_config.vpc_id #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -3644,11 +3981,10 @@ module Aws::Omics
     end
 
     # Amazon Web Services HealthOmics variant stores and annotation stores
-    # will no longer be open to new customers starting November 7, 2025. If
-    # you would like to use variant stores or annotation stores, sign up
-    # prior to that date. Existing customers can continue to use the service
-    # as normal. For more information, see [ Amazon Web Services HealthOmics
-    # variant store and annotation store availability change][1].
+    # are no longer open to new customers. Existing customers can continue
+    # to use the service as normal. For more information, see [ Amazon Web
+    # Services HealthOmics variant store and annotation store availability
+    # change][1].
     #
     #  Gets information about a variant import job.
     #
@@ -3712,11 +4048,10 @@ module Aws::Omics
     end
 
     # Amazon Web Services HealthOmics variant stores and annotation stores
-    # will no longer be open to new customers starting November 7, 2025. If
-    # you would like to use variant stores or annotation stores, sign up
-    # prior to that date. Existing customers can continue to use the service
-    # as normal. For more information, see [ Amazon Web Services HealthOmics
-    # variant store and annotation store availability change][1].
+    # are no longer open to new customers. Existing customers can continue
+    # to use the service as normal. For more information, see [ Amazon Web
+    # Services HealthOmics variant store and annotation store availability
+    # change][1].
     #
     #  Gets information about a variant store.
     #
@@ -4015,11 +4350,10 @@ module Aws::Omics
     end
 
     # Amazon Web Services HealthOmics variant stores and annotation stores
-    # will no longer be open to new customers starting November 7, 2025. If
-    # you would like to use variant stores or annotation stores, sign up
-    # prior to that date. Existing customers can continue to use the service
-    # as normal. For more information, see [ Amazon Web Services HealthOmics
-    # variant store and annotation store availability change][1].
+    # are no longer open to new customers. Existing customers can continue
+    # to use the service as normal. For more information, see [ Amazon Web
+    # Services HealthOmics variant store and annotation store availability
+    # change][1].
     #
     #  Retrieves a list of annotation import jobs.
     #
@@ -4144,11 +4478,10 @@ module Aws::Omics
     end
 
     # Amazon Web Services HealthOmics variant stores and annotation stores
-    # will no longer be open to new customers starting November 7, 2025. If
-    # you would like to use variant stores or annotation stores, sign up
-    # prior to that date. Existing customers can continue to use the service
-    # as normal. For more information, see [ Amazon Web Services HealthOmics
-    # variant store and annotation store availability change][1].
+    # are no longer open to new customers. Existing customers can continue
+    # to use the service as normal. For more information, see [ Amazon Web
+    # Services HealthOmics variant store and annotation store availability
+    # change][1].
     #
     #  Retrieves a list of annotation stores.
     #
@@ -4211,6 +4544,104 @@ module Aws::Omics
     # @param [Hash] params ({})
     def list_annotation_stores(params = {}, options = {})
       req = build_request(:list_annotation_stores, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of run batches in your account, with optional filtering
+    # by status, name, or run group. Results are paginated. Only one filter
+    # per call is supported.
+    #
+    # @option params [Integer] :max_items
+    #   The maximum number of batches to return. If not specified, defaults to
+    #   100.
+    #
+    # @option params [String] :starting_token
+    #   A pagination token returned from a prior `ListBatch` call.
+    #
+    # @option params [String] :status
+    #   Filter batches by status.
+    #
+    # @option params [String] :name
+    #   Filter batches by name.
+    #
+    # @option params [String] :run_group_id
+    #   Filter batches by run group ID.
+    #
+    # @return [Types::ListBatchResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListBatchResponse#items #items} => Array&lt;Types::BatchListItem&gt;
+    #   * {Types::ListBatchResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_batch({
+    #     max_items: 1,
+    #     starting_token: "ListToken",
+    #     status: "PENDING", # accepts PENDING, SUBMITTING, INPROGRESS, STOPPING, CANCELLED, FAILED, PROCESSED, RUNS_DELETING, RUNS_DELETED
+    #     name: "BatchName",
+    #     run_group_id: "RunGroupId",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.items #=> Array
+    #   resp.items[0].id #=> String
+    #   resp.items[0].name #=> String
+    #   resp.items[0].status #=> String, one of "PENDING", "SUBMITTING", "INPROGRESS", "STOPPING", "CANCELLED", "FAILED", "PROCESSED", "RUNS_DELETING", "RUNS_DELETED"
+    #   resp.items[0].created_at #=> Time
+    #   resp.items[0].total_runs #=> Integer
+    #   resp.items[0].workflow_id #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/ListBatch AWS API Documentation
+    #
+    # @overload list_batch(params = {})
+    # @param [Hash] params ({})
+    def list_batch(params = {}, options = {})
+      req = build_request(:list_batch, params)
+      req.send_request(options)
+    end
+
+    # List all configurations for the account.
+    #
+    # @option params [Integer] :max_results
+    #   Maximum number of results to return.
+    #
+    # @option params [String] :starting_token
+    #   Pagination token for retrieving next page of results.
+    #
+    # @return [Types::ListConfigurationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListConfigurationsResponse#items #items} => Array&lt;Types::ConfigurationListItem&gt;
+    #   * {Types::ListConfigurationsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_configurations({
+    #     max_results: 1,
+    #     starting_token: "ConfigurationListToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.items #=> Array
+    #   resp.items[0].arn #=> String
+    #   resp.items[0].name #=> String
+    #   resp.items[0].description #=> String
+    #   resp.items[0].status #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETING", "DELETED", "FAILED"
+    #   resp.items[0].creation_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/ListConfigurations AWS API Documentation
+    #
+    # @overload list_configurations(params = {})
+    # @param [Hash] params ({})
+    def list_configurations(params = {}, options = {})
+      req = build_request(:list_configurations, params)
       req.send_request(options)
     end
 
@@ -4937,6 +5368,9 @@ module Aws::Omics
     # @option params [String] :run_group_id
     #   Filter the list by run group ID.
     #
+    # @option params [String] :batch_id
+    #   Filter by batch ID.
+    #
     # @option params [String] :starting_token
     #   Specify the pagination token from a previous request to retrieve the
     #   next page of results.
@@ -4959,6 +5393,7 @@ module Aws::Omics
     #   resp = client.list_runs({
     #     name: "RunName",
     #     run_group_id: "RunGroupId",
+    #     batch_id: "BatchId",
     #     starting_token: "RunListToken",
     #     max_results: 1,
     #     status: "PENDING", # accepts PENDING, STARTING, RUNNING, STOPPING, COMPLETED, DELETED, CANCELLED, FAILED
@@ -4971,6 +5406,7 @@ module Aws::Omics
     #   resp.items[0].id #=> String
     #   resp.items[0].status #=> String, one of "PENDING", "STARTING", "RUNNING", "STOPPING", "COMPLETED", "DELETED", "CANCELLED", "FAILED"
     #   resp.items[0].workflow_id #=> String
+    #   resp.items[0].batch_id #=> String
     #   resp.items[0].name #=> String
     #   resp.items[0].priority #=> Integer
     #   resp.items[0].storage_capacity #=> Integer
@@ -4987,6 +5423,68 @@ module Aws::Omics
     # @param [Hash] params ({})
     def list_runs(params = {}, options = {})
       req = build_request(:list_runs, params)
+      req.send_request(options)
+    end
+
+    # Returns a paginated list of individual workflow runs within a specific
+    # batch. Use this operation to map each `runSettingId` to its
+    # HealthOmics-generated `runId`, and to check the submission status of
+    # each run. Only one filter per call is supported.
+    #
+    # @option params [required, String] :batch_id
+    #   The identifier portion of the run batch ARN.
+    #
+    # @option params [Integer] :max_items
+    #   The maximum number of runs to return.
+    #
+    # @option params [String] :starting_token
+    #   A pagination token returned from a prior `ListRunsInBatch` call.
+    #
+    # @option params [String] :submission_status
+    #   Filter runs by submission status.
+    #
+    # @option params [String] :run_setting_id
+    #   Filter runs by the customer-provided run setting ID.
+    #
+    # @option params [String] :run_id
+    #   Filter runs by the HealthOmics-generated run ID.
+    #
+    # @return [Types::ListRunsInBatchResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListRunsInBatchResponse#runs #runs} => Array&lt;Types::RunBatchListItem&gt;
+    #   * {Types::ListRunsInBatchResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_runs_in_batch({
+    #     batch_id: "BatchId", # required
+    #     max_items: 1,
+    #     starting_token: "ListToken",
+    #     submission_status: "SUCCESS", # accepts SUCCESS, FAILED, CANCEL_SUCCESS, CANCEL_FAILED, DELETE_SUCCESS, DELETE_FAILED
+    #     run_setting_id: "String",
+    #     run_id: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.runs #=> Array
+    #   resp.runs[0].run_setting_id #=> String
+    #   resp.runs[0].run_id #=> String
+    #   resp.runs[0].run_internal_uuid #=> String
+    #   resp.runs[0].run_arn #=> String
+    #   resp.runs[0].submission_status #=> String, one of "SUCCESS", "FAILED", "CANCEL_SUCCESS", "CANCEL_FAILED", "DELETE_SUCCESS", "DELETE_FAILED"
+    #   resp.runs[0].submission_failure_reason #=> String
+    #   resp.runs[0].submission_failure_message #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/ListRunsInBatch AWS API Documentation
+    #
+    # @overload list_runs_in_batch(params = {})
+    # @param [Hash] params ({})
+    def list_runs_in_batch(params = {}, options = {})
+      req = build_request(:list_runs_in_batch, params)
       req.send_request(options)
     end
 
@@ -5150,11 +5648,10 @@ module Aws::Omics
     end
 
     # Amazon Web Services HealthOmics variant stores and annotation stores
-    # will no longer be open to new customers starting November 7, 2025. If
-    # you would like to use variant stores or annotation stores, sign up
-    # prior to that date. Existing customers can continue to use the service
-    # as normal. For more information, see [ Amazon Web Services HealthOmics
-    # variant store and annotation store availability change][1].
+    # are no longer open to new customers. Existing customers can continue
+    # to use the service as normal. For more information, see [ Amazon Web
+    # Services HealthOmics variant store and annotation store availability
+    # change][1].
     #
     #  Retrieves a list of variant import jobs.
     #
@@ -5219,11 +5716,10 @@ module Aws::Omics
     end
 
     # Amazon Web Services HealthOmics variant stores and annotation stores
-    # will no longer be open to new customers starting November 7, 2025. If
-    # you would like to use variant stores or annotation stores, sign up
-    # prior to that date. Existing customers can continue to use the service
-    # as normal. For more information, see [ Amazon Web Services HealthOmics
-    # variant store and annotation store availability change][1].
+    # are no longer open to new customers. Existing customers can continue
+    # to use the service as normal. For more information, see [ Amazon Web
+    # Services HealthOmics variant store and annotation store availability
+    # change][1].
     #
     #  Retrieves a list of variant stores.
     #
@@ -5455,11 +5951,10 @@ module Aws::Omics
     end
 
     # Amazon Web Services HealthOmics variant stores and annotation stores
-    # will no longer be open to new customers starting November 7, 2025. If
-    # you would like to use variant stores or annotation stores, sign up
-    # prior to that date. Existing customers can continue to use the service
-    # as normal. For more information, see [ Amazon Web Services HealthOmics
-    # variant store and annotation store availability change][1].
+    # are no longer open to new customers. Existing customers can continue
+    # to use the service as normal. For more information, see [ Amazon Web
+    # Services HealthOmics variant store and annotation store availability
+    # change][1].
     #
     #  Starts an annotation import job.
     #
@@ -6005,6 +6500,13 @@ module Aws::Omics
     #
     #   [1]: https://docs.aws.amazon.com/omics/latest/dev/workflow-versions.html
     #
+    # @option params [String] :networking_mode
+    #   Optional configuration for run networking behavior. If not specified,
+    #   this will default to RESTRICTED.
+    #
+    # @option params [String] :configuration_name
+    #   Optional configuration name to use for the workflow run.
+    #
     # @return [Types::StartRunResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartRunResponse#arn #arn} => String
@@ -6013,6 +6515,8 @@ module Aws::Omics
     #   * {Types::StartRunResponse#tags #tags} => Hash&lt;String,String&gt;
     #   * {Types::StartRunResponse#uuid #uuid} => String
     #   * {Types::StartRunResponse#run_output_uri #run_output_uri} => String
+    #   * {Types::StartRunResponse#configuration #configuration} => Types::ConfigurationDetails
+    #   * {Types::StartRunResponse#networking_mode #networking_mode} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -6039,6 +6543,8 @@ module Aws::Omics
     #     storage_type: "STATIC", # accepts STATIC, DYNAMIC
     #     workflow_owner_id: "WorkflowOwnerId",
     #     workflow_version_name: "WorkflowVersionName",
+    #     networking_mode: "RESTRICTED", # accepts RESTRICTED, VPC
+    #     configuration_name: "ConfigurationName",
     #   })
     #
     # @example Response structure
@@ -6050,6 +6556,10 @@ module Aws::Omics
     #   resp.tags["TagKey"] #=> String
     #   resp.uuid #=> String
     #   resp.run_output_uri #=> String
+    #   resp.configuration.name #=> String
+    #   resp.configuration.arn #=> String
+    #   resp.configuration.uuid #=> String
+    #   resp.networking_mode #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/StartRun AWS API Documentation
     #
@@ -6060,12 +6570,121 @@ module Aws::Omics
       req.send_request(options)
     end
 
+    # Starts a batch of workflow runs. You can group up to 100,000 runs into
+    # a single batch that share a common configuration defined in
+    # `defaultRunSetting`. Per-run overrides can be provided either inline
+    # via `inlineSettings` (up to 100 runs) or via a JSON file stored in
+    # Amazon S3 via `s3UriSettings` (up to 100,000 runs).
+    #
+    # `StartRunBatch` validates common fields synchronously and returns
+    # immediately with a batch ID and status `PENDING`. Runs are submitted
+    # gradually and asynchronously at a rate governed by your `StartRun`
+    # throughput quota.
+    #
+    # @option params [String] :batch_name
+    #   An optional user-friendly name for the run batch.
+    #
+    # @option params [required, String] :request_id
+    #   A client token used to deduplicate retry requests and prevent
+    #   duplicate batches from being created.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [Hash<String,String>] :tags
+    #   AWS tags to associate with the batch resource. These tags are not
+    #   inherited by individual runs. To tag individual runs, use
+    #   `defaultRunSetting.runTags`.
+    #
+    # @option params [required, Types::DefaultRunSetting] :default_run_setting
+    #   Shared configuration applied to all runs in the batch. See
+    #   `DefaultRunSetting`.
+    #
+    # @option params [required, Types::BatchRunSettings] :batch_run_settings
+    #   The individual run configurations. Specify exactly one of
+    #   `inlineSettings` or `s3UriSettings`. See `BatchRunSettings`.
+    #
+    # @return [Types::StartRunBatchResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartRunBatchResponse#id #id} => String
+    #   * {Types::StartRunBatchResponse#arn #arn} => String
+    #   * {Types::StartRunBatchResponse#status #status} => String
+    #   * {Types::StartRunBatchResponse#uuid #uuid} => String
+    #   * {Types::StartRunBatchResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_run_batch({
+    #     batch_name: "BatchName",
+    #     request_id: "BatchRequestId", # required
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #     default_run_setting: { # required
+    #       workflow_id: "WorkflowId", # required
+    #       workflow_type: "PRIVATE", # accepts PRIVATE, READY2RUN
+    #       role_arn: "RunRoleArn", # required
+    #       name: "RunName",
+    #       cache_id: "NumericIdInArn",
+    #       cache_behavior: "CACHE_ON_FAILURE", # accepts CACHE_ON_FAILURE, CACHE_ALWAYS
+    #       run_group_id: "RunGroupId",
+    #       priority: 1,
+    #       parameters: {
+    #       },
+    #       storage_capacity: 1,
+    #       output_uri: "RunOutputUri",
+    #       log_level: "OFF", # accepts OFF, FATAL, ERROR, ALL
+    #       run_tags: {
+    #         "TagKey" => "TagValue",
+    #       },
+    #       retention_mode: "RETAIN", # accepts RETAIN, REMOVE
+    #       storage_type: "STATIC", # accepts STATIC, DYNAMIC
+    #       workflow_owner_id: "WorkflowOwnerId",
+    #       output_bucket_owner_id: "AwsAccountId",
+    #       workflow_version_name: "WorkflowVersionName",
+    #     },
+    #     batch_run_settings: { # required
+    #       inline_settings: [
+    #         {
+    #           run_setting_id: "RunSettingId", # required
+    #           name: "RunName",
+    #           output_uri: "RunOutputUri",
+    #           priority: 1,
+    #           parameters: {
+    #           },
+    #           output_bucket_owner_id: "AwsAccountId",
+    #           run_tags: {
+    #             "TagKey" => "TagValue",
+    #           },
+    #         },
+    #       ],
+    #       s3_uri_settings: "S3UriSettings",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.id #=> String
+    #   resp.arn #=> String
+    #   resp.status #=> String, one of "PENDING", "SUBMITTING", "INPROGRESS", "STOPPING", "CANCELLED", "FAILED", "PROCESSED", "RUNS_DELETING", "RUNS_DELETED"
+    #   resp.uuid #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/StartRunBatch AWS API Documentation
+    #
+    # @overload start_run_batch(params = {})
+    # @param [Hash] params ({})
+    def start_run_batch(params = {}, options = {})
+      req = build_request(:start_run_batch, params)
+      req.send_request(options)
+    end
+
     # Amazon Web Services HealthOmics variant stores and annotation stores
-    # will no longer be open to new customers starting November 7, 2025. If
-    # you would like to use variant stores or annotation stores, sign up
-    # prior to that date. Existing customers can continue to use the service
-    # as normal. For more information, see [ Amazon Web Services HealthOmics
-    # variant store and annotation store availability change][1].
+    # are no longer open to new customers. Existing customers can continue
+    # to use the service as normal. For more information, see [ Amazon Web
+    # Services HealthOmics variant store and annotation store availability
+    # change][1].
     #
     #  Starts a variant import job.
     #
@@ -6176,11 +6795,10 @@ module Aws::Omics
     end
 
     # Amazon Web Services HealthOmics variant stores and annotation stores
-    # will no longer be open to new customers starting November 7, 2025. If
-    # you would like to use variant stores or annotation stores, sign up
-    # prior to that date. Existing customers can continue to use the service
-    # as normal. For more information, see [ Amazon Web Services HealthOmics
-    # variant store and annotation store availability change][1].
+    # are no longer open to new customers. Existing customers can continue
+    # to use the service as normal. For more information, see [ Amazon Web
+    # Services HealthOmics variant store and annotation store availability
+    # change][1].
     #
     #  Updates an annotation store.
     #
@@ -6483,11 +7101,10 @@ module Aws::Omics
     end
 
     # Amazon Web Services HealthOmics variant stores and annotation stores
-    # will no longer be open to new customers starting November 7, 2025. If
-    # you would like to use variant stores or annotation stores, sign up
-    # prior to that date. Existing customers can continue to use the service
-    # as normal. For more information, see [ Amazon Web Services HealthOmics
-    # variant store and annotation store availability change][1].
+    # are no longer open to new customers. Existing customers can continue
+    # to use the service as normal. For more information, see [ Amazon Web
+    # Services HealthOmics variant store and annotation store availability
+    # change][1].
     #
     #  Updates a variant store.
     #
@@ -6747,7 +7364,7 @@ module Aws::Omics
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-omics'
-      context[:gem_version] = '1.62.0'
+      context[:gem_version] = '1.65.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.28.0 (2026-03-31)
+------------------
+
+* Feature - S3 Tables now supports nested types when creating tables. Users can define complex column schemas using struct, list, and map types. These types can be composed together to model complex, hierarchical data structures within table schemas.
+
+1.27.0 (2026-03-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.26.0 (2026-02-11)
 ------------------
 

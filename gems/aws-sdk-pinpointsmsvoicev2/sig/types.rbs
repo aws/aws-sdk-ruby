@@ -75,6 +75,12 @@ module Aws::PinpointSMSVoiceV2
       SENSITIVE: []
     end
 
+    class CarrierStatusInformation
+      attr_accessor carrier_name: ::String
+      attr_accessor status: ("PENDING" | "ACTIVE" | "REJECTED")
+      SENSITIVE: []
+    end
+
     class CloudWatchLogsDestination
       attr_accessor iam_role_arn: ::String
       attr_accessor log_group_arn: ::String
@@ -101,9 +107,24 @@ module Aws::PinpointSMSVoiceV2
 
     class ConflictException
       attr_accessor message: ::String
-      attr_accessor reason: ("CREATE_REGISTRATION_VERSION_NOT_ALLOWED" | "DELETION_PROTECTION_ENABLED" | "DESTINATION_PHONE_NUMBER_NOT_VERIFIED" | "DESTINATION_PHONE_NUMBER_OPTED_OUT" | "DISASSOCIATE_REGISTRATION_NOT_ALLOWED" | "DISCARD_REGISTRATION_VERSION_NOT_ALLOWED" | "EDIT_REGISTRATION_FIELD_VALUES_NOT_ALLOWED" | "EVENT_DESTINATION_MISMATCH" | "KEYWORD_MISMATCH" | "LAST_PHONE_NUMBER" | "NUMBER_CAPABILITIES_MISMATCH" | "MESSAGE_TYPE_MISMATCH" | "NO_ORIGINATION_IDENTITIES_FOUND" | "OPT_OUT_LIST_MISMATCH" | "PHONE_NUMBER_ASSOCIATED_TO_POOL" | "PHONE_NUMBER_ASSOCIATED_TO_REGISTRATION" | "PHONE_NUMBER_NOT_ASSOCIATED_TO_POOL" | "PHONE_NUMBER_NOT_IN_REGISTRATION_REGION" | "REGISTRATION_ALREADY_SUBMITTED" | "REGISTRATION_NOT_COMPLETE" | "SENDER_ID_ASSOCIATED_TO_POOL" | "RESOURCE_ALREADY_EXISTS" | "RESOURCE_DELETION_NOT_ALLOWED" | "RESOURCE_MODIFICATION_NOT_ALLOWED" | "RESOURCE_NOT_ACTIVE" | "RESOURCE_NOT_EMPTY" | "SELF_MANAGED_OPT_OUTS_MISMATCH" | "SUBMIT_REGISTRATION_VERSION_NOT_ALLOWED" | "TWO_WAY_CONFIG_MISMATCH" | "VERIFICATION_CODE_EXPIRED" | "VERIFICATION_ALREADY_COMPLETE" | "PROTECT_CONFIGURATION_IS_ACCOUNT_DEFAULT" | "PROTECT_CONFIGURATION_ASSOCIATED_WITH_CONFIGURATION_SET" | "PROTECT_CONFIGURATION_NOT_ASSOCIATED_WITH_CONFIGURATION_SET" | "DESTINATION_COUNTRY_BLOCKED_BY_PROTECT_CONFIGURATION" | "DESTINATION_PHONE_NUMBER_BLOCKED_BY_PROTECT_NUMBER_OVERRIDE")
-      attr_accessor resource_type: ("account" | "phone-number" | "sender-id" | "pool" | "configuration-set" | "opt-out-list" | "event-destination" | "keyword" | "opted-out-number" | "registration" | "registration-attachment" | "verified-destination-number" | "protect-configuration" | "message-template" | "policy" | "message")
+      attr_accessor reason: ("CREATE_REGISTRATION_VERSION_NOT_ALLOWED" | "DELETION_PROTECTION_ENABLED" | "DESTINATION_PHONE_NUMBER_NOT_VERIFIED" | "DESTINATION_PHONE_NUMBER_OPTED_OUT" | "DISASSOCIATE_REGISTRATION_NOT_ALLOWED" | "DISCARD_REGISTRATION_VERSION_NOT_ALLOWED" | "EDIT_REGISTRATION_FIELD_VALUES_NOT_ALLOWED" | "EVENT_DESTINATION_MISMATCH" | "KEYWORD_MISMATCH" | "LAST_PHONE_NUMBER" | "NUMBER_CAPABILITIES_MISMATCH" | "MESSAGE_TYPE_MISMATCH" | "NO_ORIGINATION_IDENTITIES_FOUND" | "OPT_OUT_LIST_MISMATCH" | "PHONE_NUMBER_ASSOCIATED_TO_POOL" | "PHONE_NUMBER_ASSOCIATED_TO_REGISTRATION" | "PHONE_NUMBER_NOT_ASSOCIATED_TO_POOL" | "PHONE_NUMBER_NOT_IN_REGISTRATION_REGION" | "REGISTRATION_ALREADY_SUBMITTED" | "REGISTRATION_NOT_COMPLETE" | "RESOURCE_ALREADY_ASSOCIATED" | "SENDER_ID_ASSOCIATED_TO_POOL" | "RCS_AGENT_ASSOCIATED_TO_POOL" | "POOL_ASSOCIATED_TO_NOTIFY_CONFIGURATION" | "RESOURCE_ALREADY_EXISTS" | "RESOURCE_DELETION_NOT_ALLOWED" | "RESOURCE_MODIFICATION_NOT_ALLOWED" | "RESOURCE_NOT_ACTIVE" | "RESOURCE_NOT_EMPTY" | "SELF_MANAGED_OPT_OUTS_MISMATCH" | "SUBMIT_REGISTRATION_VERSION_NOT_ALLOWED" | "TWO_WAY_CONFIG_MISMATCH" | "VERIFICATION_CODE_EXPIRED" | "VERIFICATION_ALREADY_COMPLETE" | "PROTECT_CONFIGURATION_IS_ACCOUNT_DEFAULT" | "PROTECT_CONFIGURATION_ASSOCIATED_WITH_CONFIGURATION_SET" | "PROTECT_CONFIGURATION_NOT_ASSOCIATED_WITH_CONFIGURATION_SET" | "DESTINATION_COUNTRY_BLOCKED_BY_PROTECT_CONFIGURATION" | "DESTINATION_PHONE_NUMBER_BLOCKED_BY_PROTECT_NUMBER_OVERRIDE" | "RCS_AGENT_ALREADY_ASSOCIATED_TO_REGISTRATION_TYPE" | "NOTIFY_CONFIGURATION_NOT_ACTIVE")
+      attr_accessor resource_type: ("account" | "phone-number" | "sender-id" | "pool" | "configuration-set" | "opt-out-list" | "event-destination" | "keyword" | "opted-out-number" | "registration" | "registration-attachment" | "verified-destination-number" | "protect-configuration" | "notify-configuration" | "notify-template" | "message-template" | "policy" | "message" | "rcs-agent")
       attr_accessor resource_id: ::String
+      SENSITIVE: []
+    end
+
+    class CountryLaunchStatusFilter
+      attr_accessor name: ("country-launch-status")
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class CountryLaunchStatusInformation
+      attr_accessor iso_country_code: ::String
+      attr_accessor status: ("CREATED" | "PENDING" | "PARTIAL" | "ACTIVE" | "REJECTED")
+      attr_accessor rcs_platform_id: ::String
+      attr_accessor registration_id: ::String
+      attr_accessor carrier_status: ::Array[Types::CarrierStatusInformation]
       SENSITIVE: []
     end
 
@@ -137,6 +158,38 @@ module Aws::PinpointSMSVoiceV2
       attr_accessor configuration_set_arn: ::String
       attr_accessor configuration_set_name: ::String
       attr_accessor event_destination: Types::EventDestination
+      SENSITIVE: []
+    end
+
+    class CreateNotifyConfigurationRequest
+      attr_accessor display_name: ::String
+      attr_accessor use_case: ("CODE_VERIFICATION")
+      attr_accessor default_template_id: ::String
+      attr_accessor pool_id: ::String
+      attr_accessor enabled_countries: ::Array[::String]
+      attr_accessor enabled_channels: ::Array[("SMS" | "VOICE" | "MMS" | "RCS")]
+      attr_accessor deletion_protection_enabled: bool
+      attr_accessor client_token: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateNotifyConfigurationResult
+      attr_accessor notify_configuration_arn: ::String
+      attr_accessor notify_configuration_id: ::String
+      attr_accessor display_name: ::String
+      attr_accessor use_case: ("CODE_VERIFICATION")
+      attr_accessor default_template_id: ::String
+      attr_accessor pool_id: ::String
+      attr_accessor enabled_countries: ::Array[::String]
+      attr_accessor enabled_channels: ::Array[("SMS" | "VOICE" | "MMS" | "RCS")]
+      attr_accessor tier: ("BASIC" | "ADVANCED")
+      attr_accessor tier_upgrade_status: ("BASIC" | "PENDING_UPGRADE" | "ADVANCED" | "REJECTED")
+      attr_accessor status: ("PENDING" | "ACTIVE" | "REJECTED" | "REQUIRES_VERIFICATION")
+      attr_accessor rejection_reason: ::String
+      attr_accessor deletion_protection_enabled: bool
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor created_timestamp: ::Time
       SENSITIVE: []
     end
 
@@ -195,6 +248,29 @@ module Aws::PinpointSMSVoiceV2
       attr_accessor created_timestamp: ::Time
       attr_accessor account_default: bool
       attr_accessor deletion_protection_enabled: bool
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateRcsAgentRequest
+      attr_accessor deletion_protection_enabled: bool
+      attr_accessor opt_out_list_name: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateRcsAgentResult
+      attr_accessor rcs_agent_arn: ::String
+      attr_accessor rcs_agent_id: ::String
+      attr_accessor status: ("CREATED" | "PENDING" | "TESTING" | "PARTIAL" | "ACTIVE" | "DELETED")
+      attr_accessor deletion_protection_enabled: bool
+      attr_accessor opt_out_list_name: ::String
+      attr_accessor created_timestamp: ::Time
+      attr_accessor self_managed_opt_outs_enabled: bool
+      attr_accessor two_way_channel_arn: ::String
+      attr_accessor two_way_channel_role: ::String
+      attr_accessor two_way_enabled: bool
       attr_accessor tags: ::Array[Types::Tag]
       SENSITIVE: []
     end
@@ -262,13 +338,14 @@ module Aws::PinpointSMSVoiceV2
       attr_accessor registration_arn: ::String
       attr_accessor registration_id: ::String
       attr_accessor version_number: ::Integer
-      attr_accessor registration_version_status: ("DRAFT" | "SUBMITTED" | "AWS_REVIEWING" | "REVIEWING" | "REQUIRES_AUTHENTICATION" | "APPROVED" | "DISCARDED" | "DENIED" | "REVOKED" | "ARCHIVED")
+      attr_accessor registration_version_status: ("DRAFT" | "SUBMITTED" | "AWS_REVIEWING" | "REVIEWING" | "REQUIRES_AUTHENTICATION" | "APPROVED" | "DISCARDED" | "DENIED" | "REVOKED" | "ARCHIVED" | "REQUIRES_OFFLINE_REVIEW")
       attr_accessor registration_version_status_history: Types::RegistrationVersionStatusHistory
       SENSITIVE: []
     end
 
     class CreateVerifiedDestinationNumberRequest
       attr_accessor destination_phone_number: ::String
+      attr_accessor rcs_agent_id: ::String
       attr_accessor tags: ::Array[Types::Tag]
       attr_accessor client_token: ::String
       SENSITIVE: []
@@ -278,7 +355,8 @@ module Aws::PinpointSMSVoiceV2
       attr_accessor verified_destination_number_arn: ::String
       attr_accessor verified_destination_number_id: ::String
       attr_accessor destination_phone_number: ::String
-      attr_accessor status: ("PENDING" | "VERIFIED")
+      attr_accessor status: ("PENDING" | "VERIFIED" | "UNSUPPORTED")
+      attr_accessor rcs_agent_id: ::String
       attr_accessor tags: ::Array[Types::Tag]
       attr_accessor created_timestamp: ::Time
       SENSITIVE: []
@@ -369,6 +447,37 @@ module Aws::PinpointSMSVoiceV2
       SENSITIVE: []
     end
 
+    class DeleteNotifyConfigurationRequest
+      attr_accessor notify_configuration_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteNotifyConfigurationResult
+      attr_accessor notify_configuration_arn: ::String
+      attr_accessor notify_configuration_id: ::String
+      attr_accessor display_name: ::String
+      attr_accessor use_case: ("CODE_VERIFICATION")
+      attr_accessor default_template_id: ::String
+      attr_accessor pool_id: ::String
+      attr_accessor enabled_countries: ::Array[::String]
+      attr_accessor enabled_channels: ::Array[("SMS" | "VOICE" | "MMS" | "RCS")]
+      attr_accessor tier: ("BASIC" | "ADVANCED")
+      attr_accessor tier_upgrade_status: ("BASIC" | "PENDING_UPGRADE" | "ADVANCED" | "REJECTED")
+      attr_accessor status: ("PENDING" | "ACTIVE" | "REJECTED" | "REQUIRES_VERIFICATION")
+      attr_accessor rejection_reason: ::String
+      attr_accessor deletion_protection_enabled: bool
+      attr_accessor created_timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class DeleteNotifyMessageSpendLimitOverrideRequest < Aws::EmptyStructure
+    end
+
+    class DeleteNotifyMessageSpendLimitOverrideResult
+      attr_accessor monthly_limit: ::Integer
+      SENSITIVE: []
+    end
+
     class DeleteOptOutListRequest
       attr_accessor opt_out_list_name: ::String
       SENSITIVE: []
@@ -444,6 +553,25 @@ module Aws::PinpointSMSVoiceV2
       attr_accessor action: ("ALLOW" | "BLOCK")
       attr_accessor iso_country_code: ::String
       attr_accessor expiration_timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class DeleteRcsAgentRequest
+      attr_accessor rcs_agent_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteRcsAgentResult
+      attr_accessor rcs_agent_arn: ::String
+      attr_accessor rcs_agent_id: ::String
+      attr_accessor status: ("CREATED" | "PENDING" | "TESTING" | "PARTIAL" | "ACTIVE" | "DELETED")
+      attr_accessor created_timestamp: ::Time
+      attr_accessor deletion_protection_enabled: bool
+      attr_accessor opt_out_list_name: ::String
+      attr_accessor self_managed_opt_outs_enabled: bool
+      attr_accessor two_way_channel_arn: ::String
+      attr_accessor two_way_channel_role: ::String
+      attr_accessor two_way_enabled: bool
       SENSITIVE: []
     end
 
@@ -592,6 +720,34 @@ module Aws::PinpointSMSVoiceV2
       SENSITIVE: []
     end
 
+    class DescribeNotifyConfigurationsRequest
+      attr_accessor notify_configuration_ids: ::Array[::String]
+      attr_accessor filters: ::Array[Types::NotifyConfigurationFilter]
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeNotifyConfigurationsResult
+      attr_accessor notify_configurations: ::Array[Types::NotifyConfigurationInformation]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeNotifyTemplatesRequest
+      attr_accessor template_ids: ::Array[::String]
+      attr_accessor filters: ::Array[Types::NotifyTemplateFilter]
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeNotifyTemplatesResult
+      attr_accessor notify_templates: ::Array[Types::NotifyTemplateInformation]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class DescribeOptOutListsRequest
       attr_accessor opt_out_list_names: ::Array[::String]
       attr_accessor next_token: ::String
@@ -663,6 +819,38 @@ module Aws::PinpointSMSVoiceV2
 
     class DescribeProtectConfigurationsResult
       attr_accessor protect_configurations: ::Array[Types::ProtectConfigurationInformation]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeRcsAgentCountryLaunchStatusRequest
+      attr_accessor rcs_agent_id: ::String
+      attr_accessor iso_country_codes: ::Array[::String]
+      attr_accessor filters: ::Array[Types::CountryLaunchStatusFilter]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeRcsAgentCountryLaunchStatusResult
+      attr_accessor rcs_agent_id: ::String
+      attr_accessor rcs_agent_arn: ::String
+      attr_accessor country_launch_status: ::Array[Types::CountryLaunchStatusInformation]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeRcsAgentsRequest
+      attr_accessor rcs_agent_ids: ::Array[::String]
+      attr_accessor owner: ("SELF" | "SHARED")
+      attr_accessor filters: ::Array[Types::RcsAgentFilter]
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeRcsAgentsResult
+      attr_accessor rcs_agents: ::Array[Types::RcsAgentInformation]
       attr_accessor next_token: ::String
       SENSITIVE: []
     end
@@ -858,7 +1046,7 @@ module Aws::PinpointSMSVoiceV2
       attr_accessor registration_arn: ::String
       attr_accessor registration_id: ::String
       attr_accessor version_number: ::Integer
-      attr_accessor registration_version_status: ("DRAFT" | "SUBMITTED" | "AWS_REVIEWING" | "REVIEWING" | "REQUIRES_AUTHENTICATION" | "APPROVED" | "DISCARDED" | "DENIED" | "REVOKED" | "ARCHIVED")
+      attr_accessor registration_version_status: ("DRAFT" | "SUBMITTED" | "AWS_REVIEWING" | "REVIEWING" | "REQUIRES_AUTHENTICATION" | "APPROVED" | "DISCARDED" | "DENIED" | "REVOKED" | "ARCHIVED" | "REQUIRES_OFFLINE_REVIEW")
       attr_accessor registration_version_status_history: Types::RegistrationVersionStatusHistory
       SENSITIVE: []
     end
@@ -875,14 +1063,14 @@ module Aws::PinpointSMSVoiceV2
 
     class GetProtectConfigurationCountryRuleSetRequest
       attr_accessor protect_configuration_id: ::String
-      attr_accessor number_capability: ("SMS" | "VOICE" | "MMS")
+      attr_accessor number_capability: ("SMS" | "VOICE" | "MMS" | "RCS")
       SENSITIVE: []
     end
 
     class GetProtectConfigurationCountryRuleSetResult
       attr_accessor protect_configuration_arn: ::String
       attr_accessor protect_configuration_id: ::String
-      attr_accessor number_capability: ("SMS" | "VOICE" | "MMS")
+      attr_accessor number_capability: ("SMS" | "VOICE" | "MMS" | "RCS")
       attr_accessor country_rule_set: ::Hash[::String, Types::ProtectConfigurationCountryRuleSetInformation]
       SENSITIVE: []
     end
@@ -921,6 +1109,21 @@ module Aws::PinpointSMSVoiceV2
     class KinesisFirehoseDestination
       attr_accessor iam_role_arn: ::String
       attr_accessor delivery_stream_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListNotifyCountriesRequest
+      attr_accessor channels: ::Array[("SMS" | "VOICE" | "MMS" | "RCS")]
+      attr_accessor use_cases: ::Array[("CODE_VERIFICATION")]
+      attr_accessor tier: ("BASIC" | "ADVANCED")
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListNotifyCountriesResult
+      attr_accessor notify_countries: ::Array[Types::NotifyCountryInformation]
+      attr_accessor next_token: ::String
       SENSITIVE: []
     end
 
@@ -984,6 +1187,62 @@ module Aws::PinpointSMSVoiceV2
       SENSITIVE: []
     end
 
+    class NotifyConfigurationFilter
+      attr_accessor name: ("display-name" | "enabled-countries" | "enabled-channels" | "default-template" | "default-pool" | "use-case" | "status" | "deletion-protection-enabled" | "tier-upgrade-status")
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class NotifyConfigurationInformation
+      attr_accessor notify_configuration_arn: ::String
+      attr_accessor notify_configuration_id: ::String
+      attr_accessor display_name: ::String
+      attr_accessor use_case: ("CODE_VERIFICATION")
+      attr_accessor default_template_id: ::String
+      attr_accessor pool_id: ::String
+      attr_accessor enabled_countries: ::Array[::String]
+      attr_accessor enabled_channels: ::Array[("SMS" | "VOICE" | "MMS" | "RCS")]
+      attr_accessor tier: ("BASIC" | "ADVANCED")
+      attr_accessor tier_upgrade_status: ("BASIC" | "PENDING_UPGRADE" | "ADVANCED" | "REJECTED")
+      attr_accessor status: ("PENDING" | "ACTIVE" | "REJECTED" | "REQUIRES_VERIFICATION")
+      attr_accessor rejection_reason: ::String
+      attr_accessor deletion_protection_enabled: bool
+      attr_accessor created_timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class NotifyCountryInformation
+      attr_accessor iso_country_code: ::String
+      attr_accessor country_name: ::String
+      attr_accessor supported_channels: ::Array[("SMS" | "VOICE" | "MMS" | "RCS")]
+      attr_accessor supported_use_cases: ::Array[("CODE_VERIFICATION")]
+      attr_accessor supported_tiers: ::Array[("BASIC" | "ADVANCED")]
+      attr_accessor customer_owned_identity_required: bool
+      SENSITIVE: []
+    end
+
+    class NotifyTemplateFilter
+      attr_accessor name: ("template-type" | "channels" | "tier-access" | "supported-countries" | "language-code" | "supported-voice-ids")
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class NotifyTemplateInformation
+      attr_accessor template_id: ::String
+      attr_accessor version: ::Integer
+      attr_accessor template_type: ("OTP_VERIFICATION")
+      attr_accessor channels: ::Array[("SMS" | "VOICE" | "MMS" | "RCS")]
+      attr_accessor tier_access: ::Array[("BASIC" | "ADVANCED")]
+      attr_accessor status: ("ACTIVE" | "INACTIVE")
+      attr_accessor supported_countries: ::Array[::String]
+      attr_accessor language_code: ::String
+      attr_accessor content: ::String
+      attr_accessor variables: ::Hash[::String, Types::TemplateVariableMetadata]
+      attr_accessor supported_voice_ids: ::Array[("AMY" | "ASTRID" | "BIANCA" | "BRIAN" | "CAMILA" | "CARLA" | "CARMEN" | "CELINE" | "CHANTAL" | "CONCHITA" | "CRISTIANO" | "DORA" | "EMMA" | "ENRIQUE" | "EWA" | "FILIZ" | "GERAINT" | "GIORGIO" | "GWYNETH" | "HANS" | "INES" | "IVY" | "JACEK" | "JAN" | "JOANNA" | "JOEY" | "JUSTIN" | "KARL" | "KENDRA" | "KIMBERLY" | "LEA" | "LIV" | "LOTTE" | "LUCIA" | "LUPE" | "MADS" | "MAJA" | "MARLENE" | "MATHIEU" | "MATTHEW" | "MAXIM" | "MIA" | "MIGUEL" | "MIZUKI" | "NAJA" | "NICOLE" | "PENELOPE" | "RAVEENA" | "RICARDO" | "RUBEN" | "RUSSELL" | "SALLI" | "SEOYEON" | "TAKUMI" | "TATYANA" | "VICKI" | "VITORIA" | "ZEINA" | "ZHIYU")]
+      attr_accessor created_timestamp: ::Time
+      SENSITIVE: []
+    end
+
     class OptOutListInformation
       attr_accessor opt_out_list_arn: ::String
       attr_accessor opt_out_list_name: ::String
@@ -1008,7 +1267,7 @@ module Aws::PinpointSMSVoiceV2
       attr_accessor origination_identity_arn: ::String
       attr_accessor origination_identity: ::String
       attr_accessor iso_country_code: ::String
-      attr_accessor number_capabilities: ::Array[("SMS" | "VOICE" | "MMS")]
+      attr_accessor number_capabilities: ::Array[("SMS" | "VOICE" | "MMS" | "RCS")]
       attr_accessor phone_number: ::String
       SENSITIVE: []
     end
@@ -1026,7 +1285,7 @@ module Aws::PinpointSMSVoiceV2
       attr_accessor status: ("PENDING" | "ACTIVE" | "ASSOCIATING" | "DISASSOCIATING" | "DELETED")
       attr_accessor iso_country_code: ::String
       attr_accessor message_type: ("TRANSACTIONAL" | "PROMOTIONAL")
-      attr_accessor number_capabilities: ::Array[("SMS" | "VOICE" | "MMS")]
+      attr_accessor number_capabilities: ::Array[("SMS" | "VOICE" | "MMS" | "RCS")]
       attr_accessor number_type: ("SHORT_CODE" | "LONG_CODE" | "TOLL_FREE" | "TEN_DLC" | "SIMULATOR")
       attr_accessor monthly_leasing_price: ::String
       attr_accessor two_way_enabled: bool
@@ -1202,6 +1461,28 @@ module Aws::PinpointSMSVoiceV2
       SENSITIVE: []
     end
 
+    class RcsAgentFilter
+      attr_accessor name: ("status" | "two-way-enabled" | "self-managed-opt-outs-enabled" | "opt-out-list-name" | "deletion-protection-enabled" | "two-way-channel-arn")
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class RcsAgentInformation
+      attr_accessor rcs_agent_arn: ::String
+      attr_accessor rcs_agent_id: ::String
+      attr_accessor status: ("CREATED" | "PENDING" | "TESTING" | "PARTIAL" | "ACTIVE" | "DELETED")
+      attr_accessor created_timestamp: ::Time
+      attr_accessor deletion_protection_enabled: bool
+      attr_accessor opt_out_list_name: ::String
+      attr_accessor self_managed_opt_outs_enabled: bool
+      attr_accessor two_way_channel_arn: ::String
+      attr_accessor two_way_channel_role: ::String
+      attr_accessor two_way_enabled: bool
+      attr_accessor pool_id: ::String
+      attr_accessor testing_agent: Types::TestingAgentInformation
+      SENSITIVE: []
+    end
+
     class RegistrationAssociationFilter
       attr_accessor name: ("resource-type" | "iso-country-code")
       attr_accessor values: ::Array[::String]
@@ -1229,6 +1510,7 @@ module Aws::PinpointSMSVoiceV2
       attr_accessor attachment_status: ("UPLOAD_IN_PROGRESS" | "UPLOAD_COMPLETE" | "UPLOAD_FAILED" | "DELETED")
       attr_accessor attachment_upload_error_reason: ("INTERNAL_ERROR")
       attr_accessor created_timestamp: ::Time
+      attr_accessor attachment_url: ::String
       SENSITIVE: []
     end
 
@@ -1338,7 +1620,7 @@ module Aws::PinpointSMSVoiceV2
 
     class RegistrationVersionInformation
       attr_accessor version_number: ::Integer
-      attr_accessor registration_version_status: ("DRAFT" | "SUBMITTED" | "AWS_REVIEWING" | "REVIEWING" | "REQUIRES_AUTHENTICATION" | "APPROVED" | "DISCARDED" | "DENIED" | "REVOKED" | "ARCHIVED")
+      attr_accessor registration_version_status: ("DRAFT" | "SUBMITTED" | "AWS_REVIEWING" | "REVIEWING" | "REQUIRES_AUTHENTICATION" | "APPROVED" | "DISCARDED" | "DENIED" | "REVOKED" | "ARCHIVED" | "REQUIRES_OFFLINE_REVIEW")
       attr_accessor registration_version_status_history: Types::RegistrationVersionStatusHistory
       attr_accessor denied_reasons: ::Array[Types::RegistrationDeniedReasonInformation]
       attr_accessor feedback: ::String
@@ -1371,7 +1653,7 @@ module Aws::PinpointSMSVoiceV2
       attr_accessor status: ("PENDING" | "ACTIVE" | "ASSOCIATING" | "DISASSOCIATING" | "DELETED")
       attr_accessor iso_country_code: ::String
       attr_accessor message_type: ("TRANSACTIONAL" | "PROMOTIONAL")
-      attr_accessor number_capabilities: ::Array[("SMS" | "VOICE" | "MMS")]
+      attr_accessor number_capabilities: ::Array[("SMS" | "VOICE" | "MMS" | "RCS")]
       attr_accessor number_type: ("SHORT_CODE" | "LONG_CODE" | "TOLL_FREE" | "TEN_DLC" | "SIMULATOR")
       attr_accessor monthly_leasing_price: ::String
       attr_accessor two_way_enabled: bool
@@ -1404,7 +1686,7 @@ module Aws::PinpointSMSVoiceV2
     class RequestPhoneNumberRequest
       attr_accessor iso_country_code: ::String
       attr_accessor message_type: ("TRANSACTIONAL" | "PROMOTIONAL")
-      attr_accessor number_capabilities: ::Array[("SMS" | "VOICE" | "MMS")]
+      attr_accessor number_capabilities: ::Array[("SMS" | "VOICE" | "MMS" | "RCS")]
       attr_accessor number_type: ("LONG_CODE" | "TOLL_FREE" | "TEN_DLC" | "SIMULATOR")
       attr_accessor opt_out_list_name: ::String
       attr_accessor pool_id: ::String
@@ -1423,7 +1705,7 @@ module Aws::PinpointSMSVoiceV2
       attr_accessor status: ("PENDING" | "ACTIVE" | "ASSOCIATING" | "DISASSOCIATING" | "DELETED")
       attr_accessor iso_country_code: ::String
       attr_accessor message_type: ("TRANSACTIONAL" | "PROMOTIONAL")
-      attr_accessor number_capabilities: ::Array[("SMS" | "VOICE" | "MMS")]
+      attr_accessor number_capabilities: ::Array[("SMS" | "VOICE" | "MMS" | "RCS")]
       attr_accessor number_type: ("LONG_CODE" | "TOLL_FREE" | "TEN_DLC" | "SIMULATOR")
       attr_accessor monthly_leasing_price: ::String
       attr_accessor two_way_enabled: bool
@@ -1464,7 +1746,7 @@ module Aws::PinpointSMSVoiceV2
 
     class ResourceNotFoundException
       attr_accessor message: ::String
-      attr_accessor resource_type: ("account" | "phone-number" | "sender-id" | "pool" | "configuration-set" | "opt-out-list" | "event-destination" | "keyword" | "opted-out-number" | "registration" | "registration-attachment" | "verified-destination-number" | "protect-configuration" | "message-template" | "policy" | "message")
+      attr_accessor resource_type: ("account" | "phone-number" | "sender-id" | "pool" | "configuration-set" | "opt-out-list" | "event-destination" | "keyword" | "opted-out-number" | "registration" | "registration-attachment" | "verified-destination-number" | "protect-configuration" | "notify-configuration" | "notify-template" | "message-template" | "policy" | "message" | "rcs-agent")
       attr_accessor resource_id: ::String
       SENSITIVE: []
     end
@@ -1516,6 +1798,47 @@ module Aws::PinpointSMSVoiceV2
 
     class SendMediaMessageResult
       attr_accessor message_id: ::String
+      SENSITIVE: []
+    end
+
+    class SendNotifyTextMessageRequest
+      attr_accessor notify_configuration_id: ::String
+      attr_accessor destination_phone_number: ::String
+      attr_accessor template_id: ::String
+      attr_accessor template_variables: ::Hash[::String, ::String]
+      attr_accessor time_to_live: ::Integer
+      attr_accessor context: ::Hash[::String, ::String]
+      attr_accessor configuration_set_name: ::String
+      attr_accessor dry_run: bool
+      attr_accessor message_feedback_enabled: bool
+      SENSITIVE: []
+    end
+
+    class SendNotifyTextMessageResult
+      attr_accessor message_id: ::String
+      attr_accessor template_id: ::String
+      attr_accessor resolved_message_body: ::String
+      SENSITIVE: []
+    end
+
+    class SendNotifyVoiceMessageRequest
+      attr_accessor notify_configuration_id: ::String
+      attr_accessor destination_phone_number: ::String
+      attr_accessor template_id: ::String
+      attr_accessor template_variables: ::Hash[::String, ::String]
+      attr_accessor voice_id: ("AMY" | "ASTRID" | "BIANCA" | "BRIAN" | "CAMILA" | "CARLA" | "CARMEN" | "CELINE" | "CHANTAL" | "CONCHITA" | "CRISTIANO" | "DORA" | "EMMA" | "ENRIQUE" | "EWA" | "FILIZ" | "GERAINT" | "GIORGIO" | "GWYNETH" | "HANS" | "INES" | "IVY" | "JACEK" | "JAN" | "JOANNA" | "JOEY" | "JUSTIN" | "KARL" | "KENDRA" | "KIMBERLY" | "LEA" | "LIV" | "LOTTE" | "LUCIA" | "LUPE" | "MADS" | "MAJA" | "MARLENE" | "MATHIEU" | "MATTHEW" | "MAXIM" | "MIA" | "MIGUEL" | "MIZUKI" | "NAJA" | "NICOLE" | "PENELOPE" | "RAVEENA" | "RICARDO" | "RUBEN" | "RUSSELL" | "SALLI" | "SEOYEON" | "TAKUMI" | "TATYANA" | "VICKI" | "VITORIA" | "ZEINA" | "ZHIYU")
+      attr_accessor time_to_live: ::Integer
+      attr_accessor context: ::Hash[::String, ::String]
+      attr_accessor configuration_set_name: ::String
+      attr_accessor dry_run: bool
+      attr_accessor message_feedback_enabled: bool
+      SENSITIVE: []
+    end
+
+    class SendNotifyVoiceMessageResult
+      attr_accessor message_id: ::String
+      attr_accessor template_id: ::String
+      attr_accessor resolved_message_body: ::String
       SENSITIVE: []
     end
 
@@ -1588,7 +1911,7 @@ module Aws::PinpointSMSVoiceV2
 
     class ServiceQuotaExceededException
       attr_accessor message: ::String
-      attr_accessor reason: ("ASSOCIATIONS_PER_REGISTRATION" | "CONFIGURATION_SETS_PER_ACCOUNT" | "DAILY_DESTINATION_CALL_LIMIT" | "EVENT_DESTINATIONS_PER_CONFIGURATION_SET" | "KEYWORDS_PER_PHONE_NUMBER" | "KEYWORDS_PER_POOL" | "MONTHLY_SPEND_LIMIT_REACHED_FOR_MEDIA" | "MONTHLY_SPEND_LIMIT_REACHED_FOR_TEXT" | "MONTHLY_SPEND_LIMIT_REACHED_FOR_VOICE" | "OPT_OUT_LISTS_PER_ACCOUNT" | "ORIGINATION_IDENTITIES_PER_POOL" | "PHONE_NUMBERS_PER_ACCOUNT" | "PHONE_NUMBERS_PER_REGISTRATION" | "POOLS_PER_ACCOUNT" | "REGISTRATION_ATTACHMENTS_CREATED_PER_DAY" | "REGISTRATION_ATTACHMENTS_PER_ACCOUNT" | "REGISTRATION_VERSIONS_CREATED_PER_DAY" | "REGISTRATIONS_PER_ACCOUNT" | "SENDER_IDS_PER_ACCOUNT" | "TAGS_PER_RESOURCE" | "VERIFIED_DESTINATION_NUMBERS_PER_ACCOUNT" | "VERIFICATION_ATTEMPTS_PER_DAY" | "PROTECT_CONFIGURATIONS_PER_ACCOUNT")
+      attr_accessor reason: ("ASSOCIATIONS_PER_REGISTRATION" | "CONFIGURATION_SETS_PER_ACCOUNT" | "DAILY_DESTINATION_CALL_LIMIT" | "DAILY_NOTIFY_TIER_MESSAGE_LIMIT" | "EVENT_DESTINATIONS_PER_CONFIGURATION_SET" | "KEYWORDS_PER_PHONE_NUMBER" | "KEYWORDS_PER_POOL" | "MONTHLY_SPEND_LIMIT_REACHED_FOR_MEDIA" | "MONTHLY_SPEND_LIMIT_REACHED_FOR_NOTIFY" | "MONTHLY_SPEND_LIMIT_REACHED_FOR_TEXT" | "MONTHLY_SPEND_LIMIT_REACHED_FOR_VOICE" | "NOTIFY_CONFIGURATIONS_PER_ACCOUNT" | "OPT_OUT_LISTS_PER_ACCOUNT" | "ORIGINATION_IDENTITIES_PER_POOL" | "PHONE_NUMBERS_PER_ACCOUNT" | "PHONE_NUMBERS_PER_REGISTRATION" | "POOLS_PER_ACCOUNT" | "RCS_AGENTS_PER_ACCOUNT" | "REGISTRATION_ATTACHMENTS_CREATED_PER_DAY" | "REGISTRATION_ATTACHMENTS_PER_ACCOUNT" | "REGISTRATION_VERSIONS_CREATED_PER_DAY" | "REGISTRATIONS_PER_ACCOUNT" | "SENDER_IDS_PER_ACCOUNT" | "TAGS_PER_RESOURCE" | "VERIFIED_DESTINATION_NUMBERS_PER_ACCOUNT" | "VERIFICATION_ATTEMPTS_PER_DAY" | "PROTECT_CONFIGURATIONS_PER_ACCOUNT")
       SENSITIVE: []
     end
 
@@ -1652,6 +1975,16 @@ module Aws::PinpointSMSVoiceV2
       SENSITIVE: []
     end
 
+    class SetNotifyMessageSpendLimitOverrideRequest
+      attr_accessor monthly_limit: ::Integer
+      SENSITIVE: []
+    end
+
+    class SetNotifyMessageSpendLimitOverrideResult
+      attr_accessor monthly_limit: ::Integer
+      SENSITIVE: []
+    end
+
     class SetTextMessageSpendLimitOverrideRequest
       attr_accessor monthly_limit: ::Integer
       SENSITIVE: []
@@ -1678,7 +2011,7 @@ module Aws::PinpointSMSVoiceV2
     end
 
     class SpendLimit
-      attr_accessor name: ("TEXT_MESSAGE_MONTHLY_SPEND_LIMIT" | "VOICE_MESSAGE_MONTHLY_SPEND_LIMIT" | "MEDIA_MESSAGE_MONTHLY_SPEND_LIMIT")
+      attr_accessor name: ("TEXT_MESSAGE_MONTHLY_SPEND_LIMIT" | "VOICE_MESSAGE_MONTHLY_SPEND_LIMIT" | "MEDIA_MESSAGE_MONTHLY_SPEND_LIMIT" | "NOTIFY_MESSAGE_MONTHLY_SPEND_LIMIT")
       attr_accessor enforced_limit: ::Integer
       attr_accessor max_limit: ::Integer
       attr_accessor overridden: bool
@@ -1695,7 +2028,7 @@ module Aws::PinpointSMSVoiceV2
       attr_accessor registration_arn: ::String
       attr_accessor registration_id: ::String
       attr_accessor version_number: ::Integer
-      attr_accessor registration_version_status: ("DRAFT" | "SUBMITTED" | "AWS_REVIEWING" | "REVIEWING" | "REQUIRES_AUTHENTICATION" | "APPROVED" | "DISCARDED" | "DENIED" | "REVOKED" | "ARCHIVED")
+      attr_accessor registration_version_status: ("DRAFT" | "SUBMITTED" | "AWS_REVIEWING" | "REVIEWING" | "REQUIRES_AUTHENTICATION" | "APPROVED" | "DISCARDED" | "DENIED" | "REVOKED" | "ARCHIVED" | "REQUIRES_OFFLINE_REVIEW")
       attr_accessor registration_version_status_history: Types::RegistrationVersionStatusHistory
       attr_accessor aws_review: bool
       SENSITIVE: []
@@ -1722,6 +2055,27 @@ module Aws::PinpointSMSVoiceV2
     end
 
     class TagResourceResult < Aws::EmptyStructure
+    end
+
+    class TemplateVariableMetadata
+      attr_accessor type: ("STRING" | "INTEGER" | "BOOLEAN")
+      attr_accessor required: bool
+      attr_accessor description: ::String
+      attr_accessor max_length: ::Integer
+      attr_accessor min_value: ::Integer
+      attr_accessor max_value: ::Integer
+      attr_accessor default_value: ::String
+      attr_accessor pattern: ::String
+      attr_accessor sample: ::String
+      attr_accessor source: ("CUSTOMER" | "SYSTEM")
+      SENSITIVE: []
+    end
+
+    class TestingAgentInformation
+      attr_accessor status: ("CREATED" | "PENDING" | "ACTIVE")
+      attr_accessor testing_agent_id: ::String
+      attr_accessor registration_id: ::String
+      SENSITIVE: []
     end
 
     class TextValidation
@@ -1763,6 +2117,34 @@ module Aws::PinpointSMSVoiceV2
       SENSITIVE: []
     end
 
+    class UpdateNotifyConfigurationRequest
+      attr_accessor notify_configuration_id: ::String
+      attr_accessor default_template_id: ::String
+      attr_accessor pool_id: ::String
+      attr_accessor enabled_countries: ::Array[::String]
+      attr_accessor enabled_channels: ::Array[("SMS" | "VOICE" | "MMS" | "RCS")]
+      attr_accessor deletion_protection_enabled: bool
+      SENSITIVE: []
+    end
+
+    class UpdateNotifyConfigurationResult
+      attr_accessor notify_configuration_arn: ::String
+      attr_accessor notify_configuration_id: ::String
+      attr_accessor display_name: ::String
+      attr_accessor use_case: ("CODE_VERIFICATION")
+      attr_accessor default_template_id: ::String
+      attr_accessor pool_id: ::String
+      attr_accessor enabled_countries: ::Array[::String]
+      attr_accessor enabled_channels: ::Array[("SMS" | "VOICE" | "MMS" | "RCS")]
+      attr_accessor tier: ("BASIC" | "ADVANCED")
+      attr_accessor tier_upgrade_status: ("BASIC" | "PENDING_UPGRADE" | "ADVANCED" | "REJECTED")
+      attr_accessor status: ("PENDING" | "ACTIVE" | "REJECTED" | "REQUIRES_VERIFICATION")
+      attr_accessor rejection_reason: ::String
+      attr_accessor deletion_protection_enabled: bool
+      attr_accessor created_timestamp: ::Time
+      SENSITIVE: []
+    end
+
     class UpdatePhoneNumberRequest
       attr_accessor phone_number_id: ::String
       attr_accessor two_way_enabled: bool
@@ -1782,7 +2164,7 @@ module Aws::PinpointSMSVoiceV2
       attr_accessor status: ("PENDING" | "ACTIVE" | "ASSOCIATING" | "DISASSOCIATING" | "DELETED")
       attr_accessor iso_country_code: ::String
       attr_accessor message_type: ("TRANSACTIONAL" | "PROMOTIONAL")
-      attr_accessor number_capabilities: ::Array[("SMS" | "VOICE" | "MMS")]
+      attr_accessor number_capabilities: ::Array[("SMS" | "VOICE" | "MMS" | "RCS")]
       attr_accessor number_type: ("SHORT_CODE" | "LONG_CODE" | "TOLL_FREE" | "TEN_DLC" | "SIMULATOR")
       attr_accessor monthly_leasing_price: ::String
       attr_accessor two_way_enabled: bool
@@ -1827,7 +2209,7 @@ module Aws::PinpointSMSVoiceV2
 
     class UpdateProtectConfigurationCountryRuleSetRequest
       attr_accessor protect_configuration_id: ::String
-      attr_accessor number_capability: ("SMS" | "VOICE" | "MMS")
+      attr_accessor number_capability: ("SMS" | "VOICE" | "MMS" | "RCS")
       attr_accessor country_rule_set_updates: ::Hash[::String, Types::ProtectConfigurationCountryRuleSetInformation]
       SENSITIVE: []
     end
@@ -1835,7 +2217,7 @@ module Aws::PinpointSMSVoiceV2
     class UpdateProtectConfigurationCountryRuleSetResult
       attr_accessor protect_configuration_arn: ::String
       attr_accessor protect_configuration_id: ::String
-      attr_accessor number_capability: ("SMS" | "VOICE" | "MMS")
+      attr_accessor number_capability: ("SMS" | "VOICE" | "MMS" | "RCS")
       attr_accessor country_rule_set: ::Hash[::String, Types::ProtectConfigurationCountryRuleSetInformation]
       SENSITIVE: []
     end
@@ -1852,6 +2234,31 @@ module Aws::PinpointSMSVoiceV2
       attr_accessor created_timestamp: ::Time
       attr_accessor account_default: bool
       attr_accessor deletion_protection_enabled: bool
+      SENSITIVE: []
+    end
+
+    class UpdateRcsAgentRequest
+      attr_accessor rcs_agent_id: ::String
+      attr_accessor deletion_protection_enabled: bool
+      attr_accessor opt_out_list_name: ::String
+      attr_accessor self_managed_opt_outs_enabled: bool
+      attr_accessor two_way_channel_arn: ::String
+      attr_accessor two_way_channel_role: ::String
+      attr_accessor two_way_enabled: bool
+      SENSITIVE: []
+    end
+
+    class UpdateRcsAgentResult
+      attr_accessor rcs_agent_arn: ::String
+      attr_accessor rcs_agent_id: ::String
+      attr_accessor status: ("CREATED" | "PENDING" | "TESTING" | "PARTIAL" | "ACTIVE" | "DELETED")
+      attr_accessor created_timestamp: ::Time
+      attr_accessor deletion_protection_enabled: bool
+      attr_accessor opt_out_list_name: ::String
+      attr_accessor self_managed_opt_outs_enabled: bool
+      attr_accessor two_way_channel_arn: ::String
+      attr_accessor two_way_channel_role: ::String
+      attr_accessor two_way_enabled: bool
       SENSITIVE: []
     end
 
@@ -1876,7 +2283,7 @@ module Aws::PinpointSMSVoiceV2
 
     class ValidationException
       attr_accessor message: ::String
-      attr_accessor reason: ("CANNOT_ADD_OPTED_OUT_NUMBER" | "CANNOT_PARSE" | "COUNTRY_CODE_MISMATCH" | "DESTINATION_COUNTRY_BLOCKED" | "FIELD_VALIDATION_FAILED" | "ATTACHMENT_TYPE_NOT_SUPPORTED" | "INTERNATIONAL_SENDING_NOT_SUPPORTED" | "INVALID_ARN" | "INVALID_FILTER_VALUES" | "INVALID_IDENTITY_FOR_DESTINATION_COUNTRY" | "INVALID_NEXT_TOKEN" | "INVALID_PARAMETER" | "INVALID_REQUEST" | "INVALID_REGISTRATION_ASSOCIATION" | "MAXIMUM_SIZE_EXCEEDED" | "MEDIA_TYPE_NOT_SUPPORTED" | "MISSING_PARAMETER" | "PARAMETERS_CANNOT_BE_USED_TOGETHER" | "PHONE_NUMBER_CANNOT_BE_OPTED_IN" | "PHONE_NUMBER_CANNOT_BE_RELEASED" | "PRICE_OVER_THRESHOLD" | "RESOURCE_NOT_ACCESSIBLE" | "REQUESTED_SPEND_LIMIT_HIGHER_THAN_SERVICE_LIMIT" | "SENDER_ID_NOT_REGISTERED" | "SENDER_ID_NOT_SUPPORTED" | "SENDER_ID_REQUIRES_REGISTRATION" | "TWO_WAY_TOPIC_NOT_PRESENT" | "TWO_WAY_NOT_ENABLED" | "TWO_WAY_NOT_SUPPORTED_IN_COUNTRY" | "TWO_WAY_NOT_SUPPORTED_IN_REGION" | "TWO_WAY_CHANNEL_NOT_PRESENT" | "UNKNOWN_REGISTRATION_FIELD" | "UNKNOWN_REGISTRATION_SECTION" | "UNKNOWN_REGISTRATION_TYPE" | "UNKNOWN_REGISTRATION_VERSION" | "UNKNOWN_OPERATION" | "REGISTRATION_FIELD_CANNOT_BE_DELETED" | "VERIFICATION_CODE_MISMATCH" | "VOICE_CAPABILITY_NOT_AVAILABLE" | "UNSPECIFIED_PARAMETER_NOT_SUPPORTED" | "OTHER")
+      attr_accessor reason: ("CANNOT_ADD_OPTED_OUT_NUMBER" | "CANNOT_PARSE" | "CHANNEL_NOT_ENABLED" | "COUNTRY_CODE_MISMATCH" | "COUNTRY_NOT_ENABLED" | "DESTINATION_COUNTRY_BLOCKED" | "FIELD_VALIDATION_FAILED" | "ATTACHMENT_TYPE_NOT_SUPPORTED" | "INTERNATIONAL_SENDING_NOT_SUPPORTED" | "INVALID_ARN" | "INVALID_FILTER_VALUES" | "INVALID_IDENTITY_FOR_DESTINATION_COUNTRY" | "INVALID_NEXT_TOKEN" | "INVALID_PARAMETER" | "INVALID_REQUEST" | "INVALID_REGISTRATION_ASSOCIATION" | "MAXIMUM_SIZE_EXCEEDED" | "MEDIA_TYPE_NOT_SUPPORTED" | "MISSING_PARAMETER" | "PARAMETERS_CANNOT_BE_USED_TOGETHER" | "PHONE_NUMBER_CANNOT_BE_OPTED_IN" | "PHONE_NUMBER_CANNOT_BE_RELEASED" | "PRICE_OVER_THRESHOLD" | "RESOURCE_NOT_ACCESSIBLE" | "REQUESTED_SPEND_LIMIT_HIGHER_THAN_SERVICE_LIMIT" | "SENDER_ID_NOT_REGISTERED" | "SENDER_ID_NOT_SUPPORTED" | "SENDER_ID_REQUIRES_REGISTRATION" | "TWO_WAY_TOPIC_NOT_PRESENT" | "TWO_WAY_NOT_ENABLED" | "TWO_WAY_NOT_SUPPORTED_IN_COUNTRY" | "TWO_WAY_NOT_SUPPORTED_IN_REGION" | "TWO_WAY_CHANNEL_NOT_PRESENT" | "UNKNOWN_REGISTRATION_FIELD" | "UNKNOWN_REGISTRATION_SECTION" | "UNKNOWN_REGISTRATION_TYPE" | "UNKNOWN_REGISTRATION_VERSION" | "UNKNOWN_OPERATION" | "REGISTRATION_FIELD_CANNOT_BE_DELETED" | "VERIFICATION_CODE_MISMATCH" | "VOICE_CAPABILITY_NOT_AVAILABLE" | "UNSPECIFIED_PARAMETER_NOT_SUPPORTED" | "OTHER")
       attr_accessor fields: ::Array[Types::ValidationExceptionField]
       SENSITIVE: []
     end
@@ -1888,7 +2295,7 @@ module Aws::PinpointSMSVoiceV2
     end
 
     class VerifiedDestinationNumberFilter
-      attr_accessor name: ("status")
+      attr_accessor name: ("status" | "rcs-agent-id")
       attr_accessor values: ::Array[::String]
       SENSITIVE: []
     end
@@ -1897,7 +2304,8 @@ module Aws::PinpointSMSVoiceV2
       attr_accessor verified_destination_number_arn: ::String
       attr_accessor verified_destination_number_id: ::String
       attr_accessor destination_phone_number: ::String
-      attr_accessor status: ("PENDING" | "VERIFIED")
+      attr_accessor status: ("PENDING" | "VERIFIED" | "UNSUPPORTED")
+      attr_accessor rcs_agent_id: ::String
       attr_accessor created_timestamp: ::Time
       SENSITIVE: []
     end
@@ -1912,7 +2320,7 @@ module Aws::PinpointSMSVoiceV2
       attr_accessor verified_destination_number_arn: ::String
       attr_accessor verified_destination_number_id: ::String
       attr_accessor destination_phone_number: ::String
-      attr_accessor status: ("PENDING" | "VERIFIED")
+      attr_accessor status: ("PENDING" | "VERIFIED" | "UNSUPPORTED")
       attr_accessor created_timestamp: ::Time
       SENSITIVE: []
     end

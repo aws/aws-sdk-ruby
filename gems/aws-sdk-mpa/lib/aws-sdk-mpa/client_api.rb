@@ -28,6 +28,7 @@ module Aws::MPA
     ApprovalTeamRequestApprovers = Shapes::ListShape.new(name: 'ApprovalTeamRequestApprovers')
     ApprovalTeamStatus = Shapes::StringShape.new(name: 'ApprovalTeamStatus')
     ApprovalTeamStatusCode = Shapes::StringShape.new(name: 'ApprovalTeamStatusCode')
+    ApproverLastActivity = Shapes::StringShape.new(name: 'ApproverLastActivity')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     CancelSessionRequest = Shapes::StructureShape.new(name: 'CancelSessionRequest')
     CancelSessionResponse = Shapes::StructureShape.new(name: 'CancelSessionResponse')
@@ -134,6 +135,9 @@ module Aws::MPA
     SessionValue = Shapes::StringShape.new(name: 'SessionValue')
     StartActiveApprovalTeamDeletionRequest = Shapes::StructureShape.new(name: 'StartActiveApprovalTeamDeletionRequest')
     StartActiveApprovalTeamDeletionResponse = Shapes::StructureShape.new(name: 'StartActiveApprovalTeamDeletionResponse')
+    StartApprovalTeamBaselineApproverIds = Shapes::ListShape.new(name: 'StartApprovalTeamBaselineApproverIds')
+    StartApprovalTeamBaselineRequest = Shapes::StructureShape.new(name: 'StartApprovalTeamBaselineRequest')
+    StartApprovalTeamBaselineResponse = Shapes::StructureShape.new(name: 'StartApprovalTeamBaselineResponse')
     String = Shapes::StringShape.new(name: 'String')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
@@ -250,6 +254,9 @@ module Aws::MPA
     GetApprovalTeamResponseApprover.add_member(:primary_identity_id, Shapes::ShapeRef.new(shape: IdentityId, location_name: "PrimaryIdentityId"))
     GetApprovalTeamResponseApprover.add_member(:primary_identity_source_arn, Shapes::ShapeRef.new(shape: String, location_name: "PrimaryIdentitySourceArn"))
     GetApprovalTeamResponseApprover.add_member(:primary_identity_status, Shapes::ShapeRef.new(shape: IdentityStatus, location_name: "PrimaryIdentityStatus"))
+    GetApprovalTeamResponseApprover.add_member(:last_activity, Shapes::ShapeRef.new(shape: ApproverLastActivity, location_name: "LastActivity"))
+    GetApprovalTeamResponseApprover.add_member(:last_activity_time, Shapes::ShapeRef.new(shape: IsoTimestamp, location_name: "LastActivityTime"))
+    GetApprovalTeamResponseApprover.add_member(:pending_baseline_session_arn, Shapes::ShapeRef.new(shape: SessionArn, location_name: "PendingBaselineSessionArn"))
     GetApprovalTeamResponseApprover.add_member(:mfa_methods, Shapes::ShapeRef.new(shape: MfaMethods, location_name: "MfaMethods"))
     GetApprovalTeamResponseApprover.struct_class = Types::GetApprovalTeamResponseApprover
 
@@ -543,6 +550,15 @@ module Aws::MPA
     StartActiveApprovalTeamDeletionResponse.add_member(:deletion_completion_time, Shapes::ShapeRef.new(shape: IsoTimestamp, location_name: "DeletionCompletionTime"))
     StartActiveApprovalTeamDeletionResponse.add_member(:deletion_start_time, Shapes::ShapeRef.new(shape: IsoTimestamp, location_name: "DeletionStartTime"))
     StartActiveApprovalTeamDeletionResponse.struct_class = Types::StartActiveApprovalTeamDeletionResponse
+
+    StartApprovalTeamBaselineApproverIds.member = Shapes::ShapeRef.new(shape: ParticipantId)
+
+    StartApprovalTeamBaselineRequest.add_member(:arn, Shapes::ShapeRef.new(shape: ApprovalTeamArn, required: true, location: "uri", location_name: "Arn"))
+    StartApprovalTeamBaselineRequest.add_member(:approver_ids, Shapes::ShapeRef.new(shape: StartApprovalTeamBaselineApproverIds, location_name: "ApproverIds"))
+    StartApprovalTeamBaselineRequest.struct_class = Types::StartApprovalTeamBaselineRequest
+
+    StartApprovalTeamBaselineResponse.add_member(:baseline_session_arn, Shapes::ShapeRef.new(shape: SessionArn, location_name: "BaselineSessionArn"))
+    StartApprovalTeamBaselineResponse.struct_class = Types::StartApprovalTeamBaselineResponse
 
     TagKeyList.member = Shapes::ShapeRef.new(shape: TagKey)
 
@@ -871,6 +887,19 @@ module Aws::MPA
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:start_approval_team_baseline, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartApprovalTeamBaseline"
+        o.http_method = "POST"
+        o.http_request_uri = "/approval-teams/{Arn}/baseline"
+        o.input = Shapes::ShapeRef.new(shape: StartApprovalTeamBaselineRequest)
+        o.output = Shapes::ShapeRef.new(shape: StartApprovalTeamBaselineResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
       api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|

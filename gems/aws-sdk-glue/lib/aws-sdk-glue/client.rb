@@ -1190,6 +1190,15 @@ module Aws::Glue
     # @option params [required, Array<Types::PartitionValueList>] :partitions_to_get
     #   A list of partition values identifying the partitions to retrieve.
     #
+    # @option params [Types::AuditContext] :audit_context
+    #   A structure containing the Lake Formation audit context.
+    #
+    # @option params [Types::QuerySessionContext] :query_session_context
+    #   A structure used as a protocol between query engines and Lake
+    #   Formation or Glue. Contains both a Lake Formation generated
+    #   authorization identifier and information from the request's
+    #   authorization context.
+    #
     # @return [Types::BatchGetPartitionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::BatchGetPartitionResponse#partitions #partitions} => Array&lt;Types::Partition&gt;
@@ -1206,6 +1215,20 @@ module Aws::Glue
     #         values: ["ValueString"], # required
     #       },
     #     ],
+    #     audit_context: {
+    #       additional_audit_context: "AuditContextString",
+    #       requested_columns: ["ColumnNameString"],
+    #       all_columns_requested: false,
+    #     },
+    #     query_session_context: {
+    #       query_id: "HashString",
+    #       query_start_time: Time.now,
+    #       cluster_id: "NullableString",
+    #       query_authorization_id: "HashString",
+    #       additional_context: {
+    #         "ContextKey" => "ContextValue",
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
@@ -2098,6 +2121,7 @@ module Aws::Glue
     #         },
     #       ],
     #       allow_full_table_external_data_access: "True", # accepts True, False
+    #       overwrite_child_resource_permissions_with_default: "Accept", # accepts Accept, Deny
     #     },
     #     tags: {
     #       "TagKey" => "TagValue",
@@ -3351,7 +3375,7 @@ module Aws::Glue
     #   developer guide.
     #
     #   Jobs that are created without specifying a Glue version default to
-    #   Glue 0.9.
+    #   Glue 5.1.
     #
     #
     #
@@ -16924,6 +16948,7 @@ module Aws::Glue
     #         },
     #       ],
     #       allow_full_table_external_data_access: "True", # accepts True, False
+    #       overwrite_child_resource_permissions_with_default: "Accept", # accepts Accept, Deny
     #     },
     #   })
     #
@@ -18993,7 +19018,7 @@ module Aws::Glue
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.249.0'
+      context[:gem_version] = '1.253.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

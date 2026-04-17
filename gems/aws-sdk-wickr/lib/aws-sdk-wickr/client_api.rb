@@ -91,6 +91,8 @@ module Aws::Wickr
     GetNetworkSettingsResponse = Shapes::StructureShape.new(name: 'GetNetworkSettingsResponse')
     GetOidcInfoRequest = Shapes::StructureShape.new(name: 'GetOidcInfoRequest')
     GetOidcInfoResponse = Shapes::StructureShape.new(name: 'GetOidcInfoResponse')
+    GetOpentdfConfigRequest = Shapes::StructureShape.new(name: 'GetOpentdfConfigRequest')
+    GetOpentdfConfigResponse = Shapes::StructureShape.new(name: 'GetOpentdfConfigResponse')
     GetSecurityGroupRequest = Shapes::StructureShape.new(name: 'GetSecurityGroupRequest')
     GetSecurityGroupResponse = Shapes::StructureShape.new(name: 'GetSecurityGroupResponse')
     GetUserRequest = Shapes::StructureShape.new(name: 'GetUserRequest')
@@ -138,6 +140,8 @@ module Aws::Wickr
     RegisterOidcConfigResponseApplicationIdInteger = Shapes::IntegerShape.new(name: 'RegisterOidcConfigResponseApplicationIdInteger')
     RegisterOidcConfigTestRequest = Shapes::StructureShape.new(name: 'RegisterOidcConfigTestRequest')
     RegisterOidcConfigTestResponse = Shapes::StructureShape.new(name: 'RegisterOidcConfigTestResponse')
+    RegisterOpentdfConfigRequest = Shapes::StructureShape.new(name: 'RegisterOpentdfConfigRequest')
+    RegisterOpentdfConfigResponse = Shapes::StructureShape.new(name: 'RegisterOpentdfConfigResponse')
     ResourceNotFoundError = Shapes::StructureShape.new(name: 'ResourceNotFoundError')
     SecurityGroup = Shapes::StructureShape.new(name: 'SecurityGroup')
     SecurityGroupId = Shapes::StringShape.new(name: 'SecurityGroupId')
@@ -494,6 +498,15 @@ module Aws::Wickr
     GetOidcInfoResponse.add_member(:token_info, Shapes::ShapeRef.new(shape: OidcTokenInfo, location_name: "tokenInfo"))
     GetOidcInfoResponse.struct_class = Types::GetOidcInfoResponse
 
+    GetOpentdfConfigRequest.add_member(:network_id, Shapes::ShapeRef.new(shape: NetworkId, required: true, location: "uri", location_name: "networkId"))
+    GetOpentdfConfigRequest.struct_class = Types::GetOpentdfConfigRequest
+
+    GetOpentdfConfigResponse.add_member(:client_id, Shapes::ShapeRef.new(shape: GenericString, required: true, location_name: "clientId"))
+    GetOpentdfConfigResponse.add_member(:domain, Shapes::ShapeRef.new(shape: GenericString, required: true, location_name: "domain"))
+    GetOpentdfConfigResponse.add_member(:client_secret, Shapes::ShapeRef.new(shape: SensitiveString, required: true, location_name: "clientSecret"))
+    GetOpentdfConfigResponse.add_member(:provider, Shapes::ShapeRef.new(shape: GenericString, required: true, location_name: "provider"))
+    GetOpentdfConfigResponse.struct_class = Types::GetOpentdfConfigResponse
+
     GetSecurityGroupRequest.add_member(:network_id, Shapes::ShapeRef.new(shape: NetworkId, required: true, location: "uri", location_name: "networkId"))
     GetSecurityGroupRequest.add_member(:group_id, Shapes::ShapeRef.new(shape: GenericString, required: true, location: "uri", location_name: "groupId"))
     GetSecurityGroupRequest.struct_class = Types::GetSecurityGroupRequest
@@ -663,6 +676,7 @@ module Aws::Wickr
     NetworkSettings.add_member(:enable_client_metrics, Shapes::ShapeRef.new(shape: Boolean, location_name: "enableClientMetrics"))
     NetworkSettings.add_member(:read_receipt_config, Shapes::ShapeRef.new(shape: ReadReceiptConfig, location_name: "readReceiptConfig"))
     NetworkSettings.add_member(:data_retention, Shapes::ShapeRef.new(shape: Boolean, location_name: "dataRetention"))
+    NetworkSettings.add_member(:enable_trusted_data_format, Shapes::ShapeRef.new(shape: Boolean, location_name: "enableTrustedDataFormat"))
     NetworkSettings.struct_class = Types::NetworkSettings
 
     OidcConfigInfo.add_member(:application_name, Shapes::ShapeRef.new(shape: GenericString, location_name: "applicationName"))
@@ -758,6 +772,20 @@ module Aws::Wickr
     RegisterOidcConfigTestResponse.add_member(:token_endpoint_auth_methods_supported, Shapes::ShapeRef.new(shape: StringList, location_name: "tokenEndpointAuthMethodsSupported"))
     RegisterOidcConfigTestResponse.add_member(:microsoft_multi_refresh_token, Shapes::ShapeRef.new(shape: Boolean, location_name: "microsoftMultiRefreshToken"))
     RegisterOidcConfigTestResponse.struct_class = Types::RegisterOidcConfigTestResponse
+
+    RegisterOpentdfConfigRequest.add_member(:network_id, Shapes::ShapeRef.new(shape: NetworkId, required: true, location: "uri", location_name: "networkId"))
+    RegisterOpentdfConfigRequest.add_member(:client_id, Shapes::ShapeRef.new(shape: GenericString, required: true, location_name: "clientId"))
+    RegisterOpentdfConfigRequest.add_member(:client_secret, Shapes::ShapeRef.new(shape: SensitiveString, required: true, location_name: "clientSecret"))
+    RegisterOpentdfConfigRequest.add_member(:domain, Shapes::ShapeRef.new(shape: GenericString, required: true, location_name: "domain"))
+    RegisterOpentdfConfigRequest.add_member(:provider, Shapes::ShapeRef.new(shape: GenericString, required: true, location_name: "provider"))
+    RegisterOpentdfConfigRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location: "querystring", location_name: "dryRun"))
+    RegisterOpentdfConfigRequest.struct_class = Types::RegisterOpentdfConfigRequest
+
+    RegisterOpentdfConfigResponse.add_member(:client_id, Shapes::ShapeRef.new(shape: GenericString, required: true, location_name: "clientId"))
+    RegisterOpentdfConfigResponse.add_member(:domain, Shapes::ShapeRef.new(shape: GenericString, required: true, location_name: "domain"))
+    RegisterOpentdfConfigResponse.add_member(:client_secret, Shapes::ShapeRef.new(shape: SensitiveString, required: true, location_name: "clientSecret"))
+    RegisterOpentdfConfigResponse.add_member(:provider, Shapes::ShapeRef.new(shape: GenericString, required: true, location_name: "provider"))
+    RegisterOpentdfConfigResponse.struct_class = Types::RegisterOpentdfConfigResponse
 
     ResourceNotFoundError.add_member(:message, Shapes::ShapeRef.new(shape: GenericString, location_name: "message"))
     ResourceNotFoundError.struct_class = Types::ResourceNotFoundError
@@ -948,6 +976,7 @@ module Aws::Wickr
     Users.member = Shapes::ShapeRef.new(shape: User)
 
     ValidationError.add_member(:reasons, Shapes::ShapeRef.new(shape: ErrorDetailList, location_name: "reasons"))
+    ValidationError.add_member(:message, Shapes::ShapeRef.new(shape: GenericString, location_name: "message"))
     ValidationError.struct_class = Types::ValidationError
 
     WickrAwsNetworks.add_member(:region, Shapes::ShapeRef.new(shape: GenericString, required: true, location_name: "region"))
@@ -1305,6 +1334,21 @@ module Aws::Wickr
         o.errors << Shapes::ShapeRef.new(shape: RateLimitError)
       end)
 
+      api.add_operation(:get_opentdf_config, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetOpentdfConfig"
+        o.http_method = "GET"
+        o.http_request_uri = "/networks/{networkId}/tdf"
+        o.input = Shapes::ShapeRef.new(shape: GetOpentdfConfigRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetOpentdfConfigResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationError)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestError)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundError)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenError)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedError)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: RateLimitError)
+      end)
+
       api.add_operation(:get_security_group, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetSecurityGroup"
         o.http_method = "GET"
@@ -1538,6 +1582,21 @@ module Aws::Wickr
         o.http_request_uri = "/networks/{networkId}/oidc/test"
         o.input = Shapes::ShapeRef.new(shape: RegisterOidcConfigTestRequest)
         o.output = Shapes::ShapeRef.new(shape: RegisterOidcConfigTestResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationError)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestError)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundError)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenError)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedError)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: RateLimitError)
+      end)
+
+      api.add_operation(:register_opentdf_config, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "RegisterOpentdfConfig"
+        o.http_method = "POST"
+        o.http_request_uri = "/networks/{networkId}/tdf"
+        o.input = Shapes::ShapeRef.new(shape: RegisterOpentdfConfigRequest)
+        o.output = Shapes::ShapeRef.new(shape: RegisterOpentdfConfigResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationError)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestError)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundError)

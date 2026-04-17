@@ -96,6 +96,75 @@ module Aws::CloudWatch
       include Aws::Structure
     end
 
+    # Summary information about an alarm mute rule, including its name,
+    # status, and configuration details.
+    #
+    # @!attribute [rw] alarm_mute_rule_arn
+    #   The Amazon Resource Name (ARN) of the alarm mute rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] expire_date
+    #   The date and time when the mute rule expires and is no longer
+    #   evaluated. This field is only present if an expiration date was
+    #   configured.
+    #   @return [Time]
+    #
+    # @!attribute [rw] status
+    #   The current status of the alarm mute rule. Valid values are
+    #   `SCHEDULED`, `ACTIVE`, or `EXPIRED`.
+    #   @return [String]
+    #
+    # @!attribute [rw] mute_type
+    #   Indicates whether the mute rule is one-time or recurring. Valid
+    #   values are `ONE_TIME` or `RECURRING`.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_updated_timestamp
+    #   The date and time when the mute rule was last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/AlarmMuteRuleSummary AWS API Documentation
+    #
+    class AlarmMuteRuleSummary < Struct.new(
+      :alarm_mute_rule_arn,
+      :expire_date,
+      :status,
+      :mute_type,
+      :last_updated_timestamp)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the configuration that determines how a PromQL alarm
+    # evaluates its contributors, including the query to run and the
+    # durations that define when contributors transition between states.
+    #
+    # @!attribute [rw] query
+    #   The PromQL query that the alarm evaluates. The query must return a
+    #   result of vector type. Each entry in the vector result represents an
+    #   alarm contributor.
+    #   @return [String]
+    #
+    # @!attribute [rw] pending_period
+    #   The duration, in seconds, that a contributor must be continuously
+    #   breaching before it transitions to the `ALARM` state.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] recovery_period
+    #   The duration, in seconds, that a contributor must continuously not
+    #   be breaching before it transitions back to the `OK` state.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/AlarmPromQLCriteria AWS API Documentation
+    #
+    class AlarmPromQLCriteria < Struct.new(
+      :query,
+      :pending_period,
+      :recovery_period)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An anomaly detection model associated with a particular CloudWatch
     # metric, statistic, or metric math expression. You can use the model to
     # display a band of expected, normal values when the metric is graphed.
@@ -476,6 +545,18 @@ module Aws::CloudWatch
       :maximum,
       :unit,
       :extended_statistics)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] alarm_mute_rule_name
+    #   The name of the alarm mute rule to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/DeleteAlarmMuteRuleInput AWS API Documentation
+    #
+    class DeleteAlarmMuteRuleInput < Struct.new(
+      :alarm_mute_rule_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1243,6 +1324,103 @@ module Aws::CloudWatch
       include Aws::Structure
     end
 
+    # The evaluation criteria for an alarm. This is a union type that
+    # currently supports `PromQLCriteria`.
+    #
+    # @note EvaluationCriteria is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note EvaluationCriteria is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of EvaluationCriteria corresponding to the set member.
+    #
+    # @!attribute [rw] prom_ql_criteria
+    #   The PromQL criteria for the alarm evaluation.
+    #   @return [Types::AlarmPromQLCriteria]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/EvaluationCriteria AWS API Documentation
+    #
+    class EvaluationCriteria < Struct.new(
+      :prom_ql_criteria,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class PromQlCriteria < EvaluationCriteria; end
+      class Unknown < EvaluationCriteria; end
+    end
+
+    # @!attribute [rw] alarm_mute_rule_name
+    #   The name of the alarm mute rule to retrieve.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/GetAlarmMuteRuleInput AWS API Documentation
+    #
+    class GetAlarmMuteRuleInput < Struct.new(
+      :alarm_mute_rule_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
+    #   The name of the alarm mute rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] alarm_mute_rule_arn
+    #   The Amazon Resource Name (ARN) of the alarm mute rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the alarm mute rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] rule
+    #   The configuration that defines when and how long alarms are muted.
+    #   @return [Types::Rule]
+    #
+    # @!attribute [rw] mute_targets
+    #   Specifies which alarms this rule applies to.
+    #   @return [Types::MuteTargets]
+    #
+    # @!attribute [rw] start_date
+    #   The date and time when the mute rule becomes active. If not set, the
+    #   rule is active immediately.
+    #   @return [Time]
+    #
+    # @!attribute [rw] expire_date
+    #   The date and time when the mute rule expires and is no longer
+    #   evaluated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] status
+    #   The current status of the alarm mute rule. Valid values are
+    #   `SCHEDULED`, `ACTIVE`, or `EXPIRED`.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_updated_timestamp
+    #   The date and time when the mute rule was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] mute_type
+    #   Indicates whether the mute rule is one-time or recurring. Valid
+    #   values are `ONE_TIME` or `RECURRING`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/GetAlarmMuteRuleOutput AWS API Documentation
+    #
+    class GetAlarmMuteRuleOutput < Struct.new(
+      :name,
+      :alarm_mute_rule_arn,
+      :description,
+      :rule,
+      :mute_targets,
+      :start_date,
+      :expire_date,
+      :status,
+      :last_updated_timestamp,
+      :mute_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] dashboard_name
     #   The name of the dashboard to be described.
     #   @return [String]
@@ -1862,6 +2040,26 @@ module Aws::CloudWatch
       include Aws::Structure
     end
 
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/GetOTelEnrichmentInput AWS API Documentation
+    #
+    class GetOTelEnrichmentInput < Aws::EmptyStructure; end
+
+    # @!attribute [rw] status
+    #   The status of OTel enrichment for the account. Valid values are
+    #   `Running` (enrichment is enabled) and `Stopped` (enrichment is
+    #   disabled).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/GetOTelEnrichmentOutput AWS API Documentation
+    #
+    class GetOTelEnrichmentOutput < Struct.new(
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # This structure contains the definition for a Contributor Insights
     # rule. For more information about this rule, see[ Using Constributor
     # Insights to analyze high-cardinality data][1] in the *Amazon
@@ -2187,6 +2385,55 @@ module Aws::CloudWatch
     #
     class LimitExceededFault < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] alarm_name
+    #   Filter results to show only mute rules that target the specified
+    #   alarm name.
+    #   @return [String]
+    #
+    # @!attribute [rw] statuses
+    #   Filter results to show only mute rules with the specified statuses.
+    #   Valid values are `SCHEDULED`, `ACTIVE`, or `EXPIRED`.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] max_records
+    #   The maximum number of mute rules to return in one call. The default
+    #   is 50.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token returned from a previous call to indicate where to
+    #   continue retrieving results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/ListAlarmMuteRulesInput AWS API Documentation
+    #
+    class ListAlarmMuteRulesInput < Struct.new(
+      :alarm_name,
+      :statuses,
+      :max_records,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] alarm_mute_rule_summaries
+    #   A list of alarm mute rule summaries.
+    #   @return [Array<Types::AlarmMuteRuleSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use when requesting the next set of results. If this
+    #   field is absent, there are no more results to retrieve.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/ListAlarmMuteRulesOutput AWS API Documentation
+    #
+    class ListAlarmMuteRulesOutput < Struct.new(
+      :alarm_mute_rule_summaries,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2694,6 +2941,10 @@ module Aws::CloudWatch
     #   If this parameter is omitted, the default behavior of `missing` is
     #   used.
     #
+    #   <note markdown="1"> This parameter is not applicable to PromQL alarms.
+    #
+    #    </note>
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html#alarms-and-missing-data
@@ -2746,6 +2997,14 @@ module Aws::CloudWatch
     #   changed.
     #   @return [Time]
     #
+    # @!attribute [rw] evaluation_criteria
+    #   The evaluation criteria for the alarm.
+    #   @return [Types::EvaluationCriteria]
+    #
+    # @!attribute [rw] evaluation_interval
+    #   The frequency, in seconds, at which the alarm is evaluated.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/MetricAlarm AWS API Documentation
     #
     class MetricAlarm < Struct.new(
@@ -2777,7 +3036,9 @@ module Aws::CloudWatch
       :metrics,
       :threshold_metric_id,
       :evaluation_state,
-      :state_transitioned_timestamp)
+      :state_transitioned_timestamp,
+      :evaluation_criteria,
+      :evaluation_interval)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3345,6 +3606,29 @@ module Aws::CloudWatch
       include Aws::Structure
     end
 
+    # Specifies which alarms an alarm mute rule applies to.
+    #
+    # You can target up to 100 specific alarms by name. When a mute rule is
+    # active, the targeted alarms continue to evaluate metrics and
+    # transition between states, but their configured actions are muted.
+    #
+    # @!attribute [rw] alarm_names
+    #   The list of alarm names that this mute rule targets. You can specify
+    #   up to 100 alarm names.
+    #
+    #   Each alarm name must be between 1 and 255 characters in length. The
+    #   alarm names must match existing alarms in your Amazon Web Services
+    #   account and region.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/MuteTargets AWS API Documentation
+    #
+    class MuteTargets < Struct.new(
+      :alarm_names)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # This array is empty if the API operation was successful for all the
     # rules specified in the request. If the operation could not process one
     # of the rules, the following data is returned for each of those rules.
@@ -3372,6 +3656,59 @@ module Aws::CloudWatch
       :exception_type,
       :failure_code,
       :failure_description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
+    #   The name of the alarm mute rule. This name must be unique within
+    #   your Amazon Web Services account and region.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the alarm mute rule that helps you identify its
+    #   purpose.
+    #   @return [String]
+    #
+    # @!attribute [rw] rule
+    #   The configuration that defines when and how long alarms should be
+    #   muted.
+    #   @return [Types::Rule]
+    #
+    # @!attribute [rw] mute_targets
+    #   Specifies which alarms this rule applies to.
+    #   @return [Types::MuteTargets]
+    #
+    # @!attribute [rw] tags
+    #   A list of key-value pairs to associate with the alarm mute rule. You
+    #   can use tags to categorize and manage your mute rules.
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] start_date
+    #   The date and time after which the mute rule takes effect, specified
+    #   as a timestamp in ISO 8601 format (for example,
+    #   `2026-04-15T08:00:00Z`). If not specified, the mute rule takes
+    #   effect immediately upon creation and the mutes are applied as per
+    #   the schedule expression.
+    #   @return [Time]
+    #
+    # @!attribute [rw] expire_date
+    #   The date and time when the mute rule expires and is no longer
+    #   evaluated, specified as a timestamp in ISO 8601 format (for example,
+    #   `2026-12-31T23:59:59Z`). After this time, the rule status becomes
+    #   EXPIRED and will no longer mute the targeted alarms.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/PutAlarmMuteRuleInput AWS API Documentation
+    #
+    class PutAlarmMuteRuleInput < Struct.new(
+      :name,
+      :description,
+      :rule,
+      :mute_targets,
+      :tags,
+      :start_date,
+      :expire_date)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4039,8 +4376,8 @@ module Aws::CloudWatch
     #
     # @!attribute [rw] metric_name
     #   The name for the metric associated with the alarm. For each
-    #   `PutMetricAlarm` operation, you must specify either `MetricName` or
-    #   a `Metrics` array.
+    #   `PutMetricAlarm` operation, you must specify either `MetricName`, a
+    #   `Metrics` array, or an `EvaluationCriteria`.
     #
     #   If you are creating an alarm based on a math expression, you cannot
     #   specify this parameter, or any of the `Namespace`, `Dimensions`,
@@ -4210,6 +4547,10 @@ module Aws::CloudWatch
     #
     #    </note>
     #
+    #   <note markdown="1"> This parameter is not applicable to PromQL alarms.
+    #
+    #    </note>
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html#alarms-and-missing-data
@@ -4234,8 +4575,8 @@ module Aws::CloudWatch
     # @!attribute [rw] metrics
     #   An array of `MetricDataQuery` structures that enable you to create
     #   an alarm based on the result of a metric math expression. For each
-    #   `PutMetricAlarm` operation, you must specify either `MetricName` or
-    #   a `Metrics` array.
+    #   `PutMetricAlarm` operation, you must specify either `MetricName`, a
+    #   `Metrics` array, or an `EvaluationCriteria`.
     #
     #   Each item in the `Metrics` array either retrieves a metric or
     #   performs a math expression.
@@ -4292,6 +4633,32 @@ module Aws::CloudWatch
     #   actions.
     #   @return [String]
     #
+    # @!attribute [rw] evaluation_criteria
+    #   The evaluation criteria for the alarm. For each `PutMetricAlarm`
+    #   operation, you must specify either `MetricName`, a `Metrics` array,
+    #   or an `EvaluationCriteria`.
+    #
+    #   If you use the `EvaluationCriteria` parameter, you cannot include
+    #   the `Namespace`, `MetricName`, `Dimensions`, `Period`, `Unit`,
+    #   `Statistic`, `ExtendedStatistic`, `Metrics`, `Threshold`,
+    #   `ComparisonOperator`, `ThresholdMetricId`, `EvaluationPeriods`, or
+    #   `DatapointsToAlarm` parameters of `PutMetricAlarm` in the same
+    #   operation. Instead, all evaluation parameters are defined within
+    #   this structure.
+    #
+    #   For an example of how to use this parameter, see the **PromQL
+    #   alarm** example on this page.
+    #   @return [Types::EvaluationCriteria]
+    #
+    # @!attribute [rw] evaluation_interval
+    #   The frequency, in seconds, at which the alarm is evaluated. Valid
+    #   values are 10, 20, 30, and any multiple of 60.
+    #
+    #   This parameter is required for alarms that use `EvaluationCriteria`,
+    #   and cannot be specified for alarms configured with `MetricName` or
+    #   `Metrics`.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/PutMetricAlarmInput AWS API Documentation
     #
     class PutMetricAlarmInput < Struct.new(
@@ -4316,7 +4683,9 @@ module Aws::CloudWatch
       :evaluate_low_sample_count_percentile,
       :metrics,
       :tags,
-      :threshold_metric_id)
+      :threshold_metric_id,
+      :evaluation_criteria,
+      :evaluation_interval)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4587,6 +4956,130 @@ module Aws::CloudWatch
       include Aws::Structure
     end
 
+    # Defines the schedule configuration for an alarm mute rule.
+    #
+    # The rule contains a schedule that specifies when and how long alarms
+    # should be muted. The schedule can be a recurring pattern using cron
+    # expressions or a one-time mute window using at expressions.
+    #
+    # @!attribute [rw] schedule
+    #   The schedule configuration that defines when the mute rule activates
+    #   and how long it remains active.
+    #   @return [Types::Schedule]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/Rule AWS API Documentation
+    #
+    class Rule < Struct.new(
+      :schedule)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies when and how long an alarm mute rule is active.
+    #
+    # The schedule uses either a cron expression for recurring mute windows
+    # or an at expression for one-time mute windows. When the schedule
+    # activates, the mute rule mutes alarm actions for the specified
+    # duration.
+    #
+    # @!attribute [rw] expression
+    #   The schedule expression that defines when the mute rule activates.
+    #   The expression must be between 1 and 256 characters in length.
+    #
+    #   You can use one of two expression formats:
+    #
+    #   * **Cron expressions** - For recurring mute windows. Format:
+    #     `cron(Minutes Hours Day-of-month Month Day-of-week)`
+    #
+    #     Examples:
+    #
+    #     * `cron(0 2 * * *)` - Activates daily at 2:00 AM
+    #
+    #     * `cron(0 2 * * SUN)` - Activates every Sunday at 2:00 AM for
+    #       weekly system maintenance
+    #
+    #     * `cron(0 1 1 * *)` - Activates on the first day of each month at
+    #       1:00 AM for monthly database maintenance
+    #
+    #     * `cron(0 18 * * FRI)` - Activates every Friday at 6:00 PM
+    #
+    #     * `cron(0 23 * * *)` - Activates every day at 11:00 PM during
+    #       nightly backup operations
+    #     The characters `*`, `-`, and `,` are supported in all fields.
+    #     English names can be used for the month (JAN-DEC) and day of week
+    #     (SUN-SAT) fields.
+    #
+    #   * **At expressions** - For one-time mute windows. Format:
+    #     `at(yyyy-MM-ddThh:mm)`
+    #
+    #     Examples:
+    #
+    #     * `at(2024-05-10T14:00)` - Activates once on May 10, 2024 at 2:00
+    #       PM during an active incident response session
+    #
+    #     * `at(2024-12-23T00:00)` - Activates once on December 23, 2024 at
+    #       midnight during annual company shutdown
+    #   @return [String]
+    #
+    # @!attribute [rw] duration
+    #   The length of time that alarms remain muted when the schedule
+    #   activates. The duration must be between 1 and 50 characters in
+    #   length.
+    #
+    #   Specify the duration using ISO 8601 duration format with a minimum
+    #   of 1 minute (`PT1M`) and maximum of 15 days (`P15D`).
+    #
+    #   Examples:
+    #
+    #   * `PT4H` - 4 hours for weekly system maintenance
+    #
+    #   * `P2DT12H` - 2 days and 12 hours for weekend muting from Friday
+    #     6:00 PM to Monday 6:00 AM
+    #
+    #   * `PT6H` - 6 hours for monthly database maintenance
+    #
+    #   * `PT2H` - 2 hours for nightly backup operations
+    #
+    #   * `P7D` - 7 days for annual company shutdown
+    #
+    #   The duration begins when the schedule expression time is reached.
+    #   For recurring schedules, the duration applies to each occurrence.
+    #   @return [String]
+    #
+    # @!attribute [rw] timezone
+    #   The time zone to use when evaluating the schedule expression. The
+    #   time zone must be between 1 and 50 characters in length.
+    #
+    #   Specify the time zone using standard timezone identifiers (for
+    #   example, `America/New_York`, `Europe/London`, or `Asia/Tokyo`).
+    #
+    #   If you don't specify a time zone, UTC is used by default. The time
+    #   zone affects how cron and at expressions are interpreted, as well as
+    #   start and expire dates you specify
+    #
+    #   Examples:
+    #
+    #   * `America/New_York` - Eastern Time (US)
+    #
+    #   * `America/Los_Angeles` - Pacific Time (US)
+    #
+    #   * `Europe/London` - British Time
+    #
+    #   * `Asia/Tokyo` - Japan Standard Time
+    #
+    #   * `UTC` - Coordinated Universal Time
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/Schedule AWS API Documentation
+    #
+    class Schedule < Struct.new(
+      :expression,
+      :duration,
+      :timezone)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] alarm_name
     #   The name of the alarm.
     #   @return [String]
@@ -4683,6 +5176,16 @@ module Aws::CloudWatch
     #
     class StartMetricStreamsOutput < Aws::EmptyStructure; end
 
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/StartOTelEnrichmentInput AWS API Documentation
+    #
+    class StartOTelEnrichmentInput < Aws::EmptyStructure; end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/StartOTelEnrichmentOutput AWS API Documentation
+    #
+    class StartOTelEnrichmentOutput < Aws::EmptyStructure; end
+
     # Represents a set of statistics that describes a specific metric.
     #
     # @!attribute [rw] sample_count
@@ -4732,6 +5235,16 @@ module Aws::CloudWatch
     # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/StopMetricStreamsOutput AWS API Documentation
     #
     class StopMetricStreamsOutput < Aws::EmptyStructure; end
+
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/StopOTelEnrichmentInput AWS API Documentation
+    #
+    class StopOTelEnrichmentInput < Aws::EmptyStructure; end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/StopOTelEnrichmentOutput AWS API Documentation
+    #
+    class StopOTelEnrichmentOutput < Aws::EmptyStructure; end
 
     # A key-value pair associated with a CloudWatch resource.
     #

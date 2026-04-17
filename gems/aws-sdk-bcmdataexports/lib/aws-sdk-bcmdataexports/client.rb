@@ -528,30 +528,31 @@ module Aws::BCMDataExports
     #
     #   resp = client.create_export({
     #     export: { # required
+    #       export_arn: "Arn",
+    #       name: "ExportName", # required
+    #       description: "GenericString",
     #       data_query: { # required
     #         query_statement: "QueryStatement", # required
     #         table_configurations: {
     #           "TableName" => {
-    #             "TableProperty" => "GenericString",
+    #             "TableProperty" => "TablePropertyGenericString",
     #           },
     #         },
     #       },
-    #       description: "GenericString",
     #       destination_configurations: { # required
     #         s3_destination: { # required
     #           s3_bucket: "GenericString", # required
-    #           s3_output_configurations: { # required
-    #             compression: "GZIP", # required, accepts GZIP, PARQUET
-    #             format: "TEXT_OR_CSV", # required, accepts TEXT_OR_CSV, PARQUET
-    #             output_type: "CUSTOM", # required, accepts CUSTOM
-    #             overwrite: "CREATE_NEW_REPORT", # required, accepts CREATE_NEW_REPORT, OVERWRITE_REPORT
-    #           },
+    #           s3_bucket_owner: "AccountId",
     #           s3_prefix: "GenericString", # required
     #           s3_region: "GenericString", # required
+    #           s3_output_configurations: { # required
+    #             output_type: "CUSTOM", # required, accepts CUSTOM
+    #             format: "TEXT_OR_CSV", # required, accepts TEXT_OR_CSV, PARQUET
+    #             compression: "GZIP", # required, accepts GZIP, PARQUET
+    #             overwrite: "CREATE_NEW_REPORT", # required, accepts CREATE_NEW_REPORT, OVERWRITE_REPORT
+    #           },
     #         },
     #       },
-    #       export_arn: "Arn",
-    #       name: "ExportName", # required
     #       refresh_cadence: { # required
     #         frequency: "SYNCHRONOUS", # required, accepts SYNCHRONOUS
     #       },
@@ -607,49 +608,50 @@ module Aws::BCMDataExports
 
     # Exports data based on the source data update.
     #
-    # @option params [required, String] :execution_id
-    #   The ID for this specific execution.
-    #
     # @option params [required, String] :export_arn
     #   The Amazon Resource Name (ARN) of the Export object that generated
     #   this specific execution.
     #
+    # @option params [required, String] :execution_id
+    #   The ID for this specific execution.
+    #
     # @return [Types::GetExecutionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetExecutionResponse#execution_id #execution_id} => String
-    #   * {Types::GetExecutionResponse#execution_status #execution_status} => Types::ExecutionStatus
     #   * {Types::GetExecutionResponse#export #export} => Types::Export
+    #   * {Types::GetExecutionResponse#execution_status #execution_status} => Types::ExecutionStatus
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_execution({
-    #     execution_id: "GenericString", # required
     #     export_arn: "Arn", # required
+    #     execution_id: "GenericString", # required
     #   })
     #
     # @example Response structure
     #
     #   resp.execution_id #=> String
-    #   resp.execution_status.completed_at #=> Time
-    #   resp.execution_status.created_at #=> Time
-    #   resp.execution_status.last_updated_at #=> Time
-    #   resp.execution_status.status_code #=> String, one of "INITIATION_IN_PROCESS", "QUERY_QUEUED", "QUERY_IN_PROCESS", "QUERY_FAILURE", "DELIVERY_IN_PROCESS", "DELIVERY_SUCCESS", "DELIVERY_FAILURE"
-    #   resp.execution_status.status_reason #=> String, one of "INSUFFICIENT_PERMISSION", "BILL_OWNER_CHANGED", "INTERNAL_FAILURE"
+    #   resp.export.export_arn #=> String
+    #   resp.export.name #=> String
+    #   resp.export.description #=> String
     #   resp.export.data_query.query_statement #=> String
     #   resp.export.data_query.table_configurations #=> Hash
     #   resp.export.data_query.table_configurations["TableName"] #=> Hash
     #   resp.export.data_query.table_configurations["TableName"]["TableProperty"] #=> String
-    #   resp.export.description #=> String
     #   resp.export.destination_configurations.s3_destination.s3_bucket #=> String
-    #   resp.export.destination_configurations.s3_destination.s3_output_configurations.compression #=> String, one of "GZIP", "PARQUET"
-    #   resp.export.destination_configurations.s3_destination.s3_output_configurations.format #=> String, one of "TEXT_OR_CSV", "PARQUET"
-    #   resp.export.destination_configurations.s3_destination.s3_output_configurations.output_type #=> String, one of "CUSTOM"
-    #   resp.export.destination_configurations.s3_destination.s3_output_configurations.overwrite #=> String, one of "CREATE_NEW_REPORT", "OVERWRITE_REPORT"
+    #   resp.export.destination_configurations.s3_destination.s3_bucket_owner #=> String
     #   resp.export.destination_configurations.s3_destination.s3_prefix #=> String
     #   resp.export.destination_configurations.s3_destination.s3_region #=> String
-    #   resp.export.export_arn #=> String
-    #   resp.export.name #=> String
+    #   resp.export.destination_configurations.s3_destination.s3_output_configurations.output_type #=> String, one of "CUSTOM"
+    #   resp.export.destination_configurations.s3_destination.s3_output_configurations.format #=> String, one of "TEXT_OR_CSV", "PARQUET"
+    #   resp.export.destination_configurations.s3_destination.s3_output_configurations.compression #=> String, one of "GZIP", "PARQUET"
+    #   resp.export.destination_configurations.s3_destination.s3_output_configurations.overwrite #=> String, one of "CREATE_NEW_REPORT", "OVERWRITE_REPORT"
     #   resp.export.refresh_cadence.frequency #=> String, one of "SYNCHRONOUS"
+    #   resp.execution_status.status_code #=> String, one of "INITIATION_IN_PROCESS", "QUERY_QUEUED", "QUERY_IN_PROCESS", "QUERY_FAILURE", "DELIVERY_IN_PROCESS", "DELIVERY_SUCCESS", "DELIVERY_FAILURE"
+    #   resp.execution_status.status_reason #=> String, one of "INSUFFICIENT_PERMISSION", "BILL_OWNER_CHANGED", "INTERNAL_FAILURE"
+    #   resp.execution_status.created_at #=> Time
+    #   resp.execution_status.completed_at #=> Time
+    #   resp.execution_status.last_updated_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bcm-data-exports-2023-11-26/GetExecution AWS API Documentation
     #
@@ -678,26 +680,27 @@ module Aws::BCMDataExports
     #
     # @example Response structure
     #
+    #   resp.export.export_arn #=> String
+    #   resp.export.name #=> String
+    #   resp.export.description #=> String
     #   resp.export.data_query.query_statement #=> String
     #   resp.export.data_query.table_configurations #=> Hash
     #   resp.export.data_query.table_configurations["TableName"] #=> Hash
     #   resp.export.data_query.table_configurations["TableName"]["TableProperty"] #=> String
-    #   resp.export.description #=> String
     #   resp.export.destination_configurations.s3_destination.s3_bucket #=> String
-    #   resp.export.destination_configurations.s3_destination.s3_output_configurations.compression #=> String, one of "GZIP", "PARQUET"
-    #   resp.export.destination_configurations.s3_destination.s3_output_configurations.format #=> String, one of "TEXT_OR_CSV", "PARQUET"
-    #   resp.export.destination_configurations.s3_destination.s3_output_configurations.output_type #=> String, one of "CUSTOM"
-    #   resp.export.destination_configurations.s3_destination.s3_output_configurations.overwrite #=> String, one of "CREATE_NEW_REPORT", "OVERWRITE_REPORT"
+    #   resp.export.destination_configurations.s3_destination.s3_bucket_owner #=> String
     #   resp.export.destination_configurations.s3_destination.s3_prefix #=> String
     #   resp.export.destination_configurations.s3_destination.s3_region #=> String
-    #   resp.export.export_arn #=> String
-    #   resp.export.name #=> String
+    #   resp.export.destination_configurations.s3_destination.s3_output_configurations.output_type #=> String, one of "CUSTOM"
+    #   resp.export.destination_configurations.s3_destination.s3_output_configurations.format #=> String, one of "TEXT_OR_CSV", "PARQUET"
+    #   resp.export.destination_configurations.s3_destination.s3_output_configurations.compression #=> String, one of "GZIP", "PARQUET"
+    #   resp.export.destination_configurations.s3_destination.s3_output_configurations.overwrite #=> String, one of "CREATE_NEW_REPORT", "OVERWRITE_REPORT"
     #   resp.export.refresh_cadence.frequency #=> String, one of "SYNCHRONOUS"
-    #   resp.export_status.created_at #=> Time
-    #   resp.export_status.last_refreshed_at #=> Time
-    #   resp.export_status.last_updated_at #=> Time
     #   resp.export_status.status_code #=> String, one of "HEALTHY", "UNHEALTHY"
     #   resp.export_status.status_reason #=> String, one of "INSUFFICIENT_PERMISSION", "BILL_OWNER_CHANGED", "INTERNAL_FAILURE"
+    #   resp.export_status.created_at #=> Time
+    #   resp.export_status.last_updated_at #=> Time
+    #   resp.export_status.last_refreshed_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bcm-data-exports-2023-11-26/GetExport AWS API Documentation
     #
@@ -724,30 +727,30 @@ module Aws::BCMDataExports
     #
     # @return [Types::GetTableResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::GetTableResponse#description #description} => String
-    #   * {Types::GetTableResponse#schema #schema} => Array&lt;Types::Column&gt;
     #   * {Types::GetTableResponse#table_name #table_name} => String
+    #   * {Types::GetTableResponse#description #description} => String
     #   * {Types::GetTableResponse#table_properties #table_properties} => Hash&lt;String,String&gt;
+    #   * {Types::GetTableResponse#schema #schema} => Array&lt;Types::Column&gt;
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_table({
     #     table_name: "TableName", # required
     #     table_properties: {
-    #       "TableProperty" => "GenericString",
+    #       "TableProperty" => "TablePropertyGenericString",
     #     },
     #   })
     #
     # @example Response structure
     #
-    #   resp.description #=> String
-    #   resp.schema #=> Array
-    #   resp.schema[0].description #=> String
-    #   resp.schema[0].name #=> String
-    #   resp.schema[0].type #=> String
     #   resp.table_name #=> String
+    #   resp.description #=> String
     #   resp.table_properties #=> Hash
     #   resp.table_properties["TableProperty"] #=> String
+    #   resp.schema #=> Array
+    #   resp.schema[0].name #=> String
+    #   resp.schema[0].type #=> String
+    #   resp.schema[0].description #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bcm-data-exports-2023-11-26/GetTable AWS API Documentation
     #
@@ -788,11 +791,11 @@ module Aws::BCMDataExports
     #
     #   resp.executions #=> Array
     #   resp.executions[0].execution_id #=> String
-    #   resp.executions[0].execution_status.completed_at #=> Time
-    #   resp.executions[0].execution_status.created_at #=> Time
-    #   resp.executions[0].execution_status.last_updated_at #=> Time
     #   resp.executions[0].execution_status.status_code #=> String, one of "INITIATION_IN_PROCESS", "QUERY_QUEUED", "QUERY_IN_PROCESS", "QUERY_FAILURE", "DELIVERY_IN_PROCESS", "DELIVERY_SUCCESS", "DELIVERY_FAILURE"
     #   resp.executions[0].execution_status.status_reason #=> String, one of "INSUFFICIENT_PERMISSION", "BILL_OWNER_CHANGED", "INTERNAL_FAILURE"
+    #   resp.executions[0].execution_status.created_at #=> Time
+    #   resp.executions[0].execution_status.completed_at #=> Time
+    #   resp.executions[0].execution_status.last_updated_at #=> Time
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bcm-data-exports-2023-11-26/ListExecutions AWS API Documentation
@@ -831,11 +834,11 @@ module Aws::BCMDataExports
     #   resp.exports #=> Array
     #   resp.exports[0].export_arn #=> String
     #   resp.exports[0].export_name #=> String
-    #   resp.exports[0].export_status.created_at #=> Time
-    #   resp.exports[0].export_status.last_refreshed_at #=> Time
-    #   resp.exports[0].export_status.last_updated_at #=> Time
     #   resp.exports[0].export_status.status_code #=> String, one of "HEALTHY", "UNHEALTHY"
     #   resp.exports[0].export_status.status_reason #=> String, one of "INSUFFICIENT_PERMISSION", "BILL_OWNER_CHANGED", "INTERNAL_FAILURE"
+    #   resp.exports[0].export_status.created_at #=> Time
+    #   resp.exports[0].export_status.last_updated_at #=> Time
+    #   resp.exports[0].export_status.last_refreshed_at #=> Time
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bcm-data-exports-2023-11-26/ListExports AWS API Documentation
@@ -849,38 +852,38 @@ module Aws::BCMDataExports
 
     # Lists all available tables in data exports.
     #
-    # @option params [Integer] :max_results
-    #   The maximum number of objects that are returned for the request.
-    #
     # @option params [String] :next_token
     #   The token to retrieve the next set of results.
     #
+    # @option params [Integer] :max_results
+    #   The maximum number of objects that are returned for the request.
+    #
     # @return [Types::ListTablesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::ListTablesResponse#next_token #next_token} => String
     #   * {Types::ListTablesResponse#tables #tables} => Array&lt;Types::Table&gt;
+    #   * {Types::ListTablesResponse#next_token #next_token} => String
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_tables({
-    #     max_results: 1,
     #     next_token: "NextPageToken",
+    #     max_results: 1,
     #   })
     #
     # @example Response structure
     #
-    #   resp.next_token #=> String
     #   resp.tables #=> Array
-    #   resp.tables[0].description #=> String
     #   resp.tables[0].table_name #=> String
+    #   resp.tables[0].description #=> String
     #   resp.tables[0].table_properties #=> Array
-    #   resp.tables[0].table_properties[0].default_value #=> String
-    #   resp.tables[0].table_properties[0].description #=> String
     #   resp.tables[0].table_properties[0].name #=> String
     #   resp.tables[0].table_properties[0].valid_values #=> Array
     #   resp.tables[0].table_properties[0].valid_values[0] #=> String
+    #   resp.tables[0].table_properties[0].default_value #=> String
+    #   resp.tables[0].table_properties[0].description #=> String
+    #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bcm-data-exports-2023-11-26/ListTables AWS API Documentation
     #
@@ -893,34 +896,34 @@ module Aws::BCMDataExports
 
     # List tags associated with an existing data export.
     #
+    # @option params [required, String] :resource_arn
+    #   The unique identifier for the resource.
+    #
     # @option params [Integer] :max_results
     #   The maximum number of objects that are returned for the request.
     #
     # @option params [String] :next_token
     #   The token to retrieve the next set of results.
     #
-    # @option params [required, String] :resource_arn
-    #   The unique identifier for the resource.
-    #
     # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::ListTagsForResourceResponse#next_token #next_token} => String
     #   * {Types::ListTagsForResourceResponse#resource_tags #resource_tags} => Array&lt;Types::ResourceTag&gt;
+    #   * {Types::ListTagsForResourceResponse#next_token #next_token} => String
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_tags_for_resource({
+    #     resource_arn: "Arn", # required
     #     max_results: 1,
     #     next_token: "NextPageToken",
-    #     resource_arn: "Arn", # required
     #   })
     #
     # @example Response structure
     #
-    #   resp.next_token #=> String
     #   resp.resource_tags #=> Array
     #   resp.resource_tags[0].key #=> String
     #   resp.resource_tags[0].value #=> String
+    #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bcm-data-exports-2023-11-26/ListTagsForResource AWS API Documentation
     #
@@ -992,11 +995,11 @@ module Aws::BCMDataExports
     # Updates an existing data export by overwriting all export parameters.
     # All export parameters must be provided in the UpdateExport request.
     #
-    # @option params [required, Types::Export] :export
-    #   The name and query details for the export.
-    #
     # @option params [required, String] :export_arn
     #   The Amazon Resource Name (ARN) for this export.
+    #
+    # @option params [required, Types::Export] :export
+    #   The name and query details for the export.
     #
     # @return [Types::UpdateExportResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1005,36 +1008,37 @@ module Aws::BCMDataExports
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_export({
+    #     export_arn: "Arn", # required
     #     export: { # required
+    #       export_arn: "Arn",
+    #       name: "ExportName", # required
+    #       description: "GenericString",
     #       data_query: { # required
     #         query_statement: "QueryStatement", # required
     #         table_configurations: {
     #           "TableName" => {
-    #             "TableProperty" => "GenericString",
+    #             "TableProperty" => "TablePropertyGenericString",
     #           },
     #         },
     #       },
-    #       description: "GenericString",
     #       destination_configurations: { # required
     #         s3_destination: { # required
     #           s3_bucket: "GenericString", # required
-    #           s3_output_configurations: { # required
-    #             compression: "GZIP", # required, accepts GZIP, PARQUET
-    #             format: "TEXT_OR_CSV", # required, accepts TEXT_OR_CSV, PARQUET
-    #             output_type: "CUSTOM", # required, accepts CUSTOM
-    #             overwrite: "CREATE_NEW_REPORT", # required, accepts CREATE_NEW_REPORT, OVERWRITE_REPORT
-    #           },
+    #           s3_bucket_owner: "AccountId",
     #           s3_prefix: "GenericString", # required
     #           s3_region: "GenericString", # required
+    #           s3_output_configurations: { # required
+    #             output_type: "CUSTOM", # required, accepts CUSTOM
+    #             format: "TEXT_OR_CSV", # required, accepts TEXT_OR_CSV, PARQUET
+    #             compression: "GZIP", # required, accepts GZIP, PARQUET
+    #             overwrite: "CREATE_NEW_REPORT", # required, accepts CREATE_NEW_REPORT, OVERWRITE_REPORT
+    #           },
     #         },
     #       },
-    #       export_arn: "Arn",
-    #       name: "ExportName", # required
     #       refresh_cadence: { # required
     #         frequency: "SYNCHRONOUS", # required, accepts SYNCHRONOUS
     #       },
     #     },
-    #     export_arn: "Arn", # required
     #   })
     #
     # @example Response structure
@@ -1068,7 +1072,7 @@ module Aws::BCMDataExports
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bcmdataexports'
-      context[:gem_version] = '1.31.0'
+      context[:gem_version] = '1.34.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

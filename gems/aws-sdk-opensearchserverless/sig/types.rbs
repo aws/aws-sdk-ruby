@@ -105,7 +105,7 @@ module Aws::OpenSearchServerless
     class CollectionDetail
       attr_accessor id: ::String
       attr_accessor name: ::String
-      attr_accessor status: ("CREATING" | "DELETING" | "ACTIVE" | "FAILED")
+      attr_accessor status: ("CREATING" | "UPDATING" | "DELETING" | "ACTIVE" | "FAILED" | "UPDATE_FAILED")
       attr_accessor type: ("SEARCH" | "TIMESERIES" | "VECTORSEARCH")
       attr_accessor description: ::String
       attr_accessor arn: ::String
@@ -133,7 +133,7 @@ module Aws::OpenSearchServerless
 
     class CollectionFilters
       attr_accessor name: ::String
-      attr_accessor status: ("CREATING" | "DELETING" | "ACTIVE" | "FAILED")
+      attr_accessor status: ("CREATING" | "UPDATING" | "DELETING" | "ACTIVE" | "FAILED" | "UPDATE_FAILED")
       attr_accessor collection_group_name: ::String
       SENSITIVE: []
     end
@@ -180,7 +180,7 @@ module Aws::OpenSearchServerless
     class CollectionSummary
       attr_accessor id: ::String
       attr_accessor name: ::String
-      attr_accessor status: ("CREATING" | "DELETING" | "ACTIVE" | "FAILED")
+      attr_accessor status: ("CREATING" | "UPDATING" | "DELETING" | "ACTIVE" | "FAILED" | "UPDATE_FAILED")
       attr_accessor arn: ::String
       attr_accessor kms_key_arn: ::String
       attr_accessor collection_group_name: ::String
@@ -209,7 +209,7 @@ module Aws::OpenSearchServerless
     class CreateCollectionDetail
       attr_accessor id: ::String
       attr_accessor name: ::String
-      attr_accessor status: ("CREATING" | "DELETING" | "ACTIVE" | "FAILED")
+      attr_accessor status: ("CREATING" | "UPDATING" | "DELETING" | "ACTIVE" | "FAILED" | "UPDATE_FAILED")
       attr_accessor type: ("SEARCH" | "TIMESERIES" | "VECTORSEARCH")
       attr_accessor description: ::String
       attr_accessor arn: ::String
@@ -362,7 +362,7 @@ module Aws::OpenSearchServerless
     class DeleteCollectionDetail
       attr_accessor id: ::String
       attr_accessor name: ::String
-      attr_accessor status: ("CREATING" | "DELETING" | "ACTIVE" | "FAILED")
+      attr_accessor status: ("CREATING" | "UPDATING" | "DELETING" | "ACTIVE" | "FAILED" | "UPDATE_FAILED")
       SENSITIVE: []
     end
 
@@ -840,9 +840,10 @@ module Aws::OpenSearchServerless
     class UpdateCollectionDetail
       attr_accessor id: ::String
       attr_accessor name: ::String
-      attr_accessor status: ("CREATING" | "DELETING" | "ACTIVE" | "FAILED")
+      attr_accessor status: ("CREATING" | "UPDATING" | "DELETING" | "ACTIVE" | "FAILED" | "UPDATE_FAILED")
       attr_accessor type: ("SEARCH" | "TIMESERIES" | "VECTORSEARCH")
       attr_accessor description: ::String
+      attr_accessor vector_options: Types::VectorOptions
       attr_accessor arn: ::String
       attr_accessor created_date: ::Integer
       attr_accessor last_modified_date: ::Integer
@@ -876,6 +877,7 @@ module Aws::OpenSearchServerless
     class UpdateCollectionRequest
       attr_accessor id: ::String
       attr_accessor description: ::String
+      attr_accessor vector_options: Types::VectorOptions
       attr_accessor client_token: ::String
       SENSITIVE: []
     end

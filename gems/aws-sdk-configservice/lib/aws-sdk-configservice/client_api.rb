@@ -570,7 +570,6 @@ module Aws::ConfigService
     String = Shapes::StringShape.new(name: 'String')
     StringWithCharLimit1024 = Shapes::StringShape.new(name: 'StringWithCharLimit1024')
     StringWithCharLimit128 = Shapes::StringShape.new(name: 'StringWithCharLimit128')
-    StringWithCharLimit2048 = Shapes::StringShape.new(name: 'StringWithCharLimit2048')
     StringWithCharLimit256 = Shapes::StringShape.new(name: 'StringWithCharLimit256')
     StringWithCharLimit256Min0 = Shapes::StringShape.new(name: 'StringWithCharLimit256Min0')
     StringWithCharLimit64 = Shapes::StringShape.new(name: 'StringWithCharLimit64')
@@ -1851,7 +1850,7 @@ module Aws::ConfigService
 
     OrganizationCustomPolicyRuleMetadata.add_member(:description, Shapes::ShapeRef.new(shape: StringWithCharLimit256Min0, location_name: "Description"))
     OrganizationCustomPolicyRuleMetadata.add_member(:organization_config_rule_trigger_types, Shapes::ShapeRef.new(shape: OrganizationConfigRuleTriggerTypeNoSNs, location_name: "OrganizationConfigRuleTriggerTypes"))
-    OrganizationCustomPolicyRuleMetadata.add_member(:input_parameters, Shapes::ShapeRef.new(shape: StringWithCharLimit2048, location_name: "InputParameters"))
+    OrganizationCustomPolicyRuleMetadata.add_member(:input_parameters, Shapes::ShapeRef.new(shape: StringWithCharLimit1024, location_name: "InputParameters"))
     OrganizationCustomPolicyRuleMetadata.add_member(:maximum_execution_frequency, Shapes::ShapeRef.new(shape: MaximumExecutionFrequency, location_name: "MaximumExecutionFrequency"))
     OrganizationCustomPolicyRuleMetadata.add_member(:resource_types_scope, Shapes::ShapeRef.new(shape: ResourceTypesScope, location_name: "ResourceTypesScope"))
     OrganizationCustomPolicyRuleMetadata.add_member(:resource_id_scope, Shapes::ShapeRef.new(shape: StringWithCharLimit768, location_name: "ResourceIdScope"))
@@ -1864,7 +1863,7 @@ module Aws::ConfigService
 
     OrganizationCustomPolicyRuleMetadataNoPolicy.add_member(:description, Shapes::ShapeRef.new(shape: StringWithCharLimit256Min0, location_name: "Description"))
     OrganizationCustomPolicyRuleMetadataNoPolicy.add_member(:organization_config_rule_trigger_types, Shapes::ShapeRef.new(shape: OrganizationConfigRuleTriggerTypeNoSNs, location_name: "OrganizationConfigRuleTriggerTypes"))
-    OrganizationCustomPolicyRuleMetadataNoPolicy.add_member(:input_parameters, Shapes::ShapeRef.new(shape: StringWithCharLimit2048, location_name: "InputParameters"))
+    OrganizationCustomPolicyRuleMetadataNoPolicy.add_member(:input_parameters, Shapes::ShapeRef.new(shape: StringWithCharLimit1024, location_name: "InputParameters"))
     OrganizationCustomPolicyRuleMetadataNoPolicy.add_member(:maximum_execution_frequency, Shapes::ShapeRef.new(shape: MaximumExecutionFrequency, location_name: "MaximumExecutionFrequency"))
     OrganizationCustomPolicyRuleMetadataNoPolicy.add_member(:resource_types_scope, Shapes::ShapeRef.new(shape: ResourceTypesScope, location_name: "ResourceTypesScope"))
     OrganizationCustomPolicyRuleMetadataNoPolicy.add_member(:resource_id_scope, Shapes::ShapeRef.new(shape: StringWithCharLimit768, location_name: "ResourceIdScope"))
@@ -1877,7 +1876,7 @@ module Aws::ConfigService
     OrganizationCustomRuleMetadata.add_member(:description, Shapes::ShapeRef.new(shape: StringWithCharLimit256Min0, location_name: "Description"))
     OrganizationCustomRuleMetadata.add_member(:lambda_function_arn, Shapes::ShapeRef.new(shape: StringWithCharLimit256, required: true, location_name: "LambdaFunctionArn"))
     OrganizationCustomRuleMetadata.add_member(:organization_config_rule_trigger_types, Shapes::ShapeRef.new(shape: OrganizationConfigRuleTriggerTypes, required: true, location_name: "OrganizationConfigRuleTriggerTypes"))
-    OrganizationCustomRuleMetadata.add_member(:input_parameters, Shapes::ShapeRef.new(shape: StringWithCharLimit2048, location_name: "InputParameters"))
+    OrganizationCustomRuleMetadata.add_member(:input_parameters, Shapes::ShapeRef.new(shape: StringWithCharLimit1024, location_name: "InputParameters"))
     OrganizationCustomRuleMetadata.add_member(:maximum_execution_frequency, Shapes::ShapeRef.new(shape: MaximumExecutionFrequency, location_name: "MaximumExecutionFrequency"))
     OrganizationCustomRuleMetadata.add_member(:resource_types_scope, Shapes::ShapeRef.new(shape: ResourceTypesScope, location_name: "ResourceTypesScope"))
     OrganizationCustomRuleMetadata.add_member(:resource_id_scope, Shapes::ShapeRef.new(shape: StringWithCharLimit768, location_name: "ResourceIdScope"))
@@ -1887,7 +1886,7 @@ module Aws::ConfigService
 
     OrganizationManagedRuleMetadata.add_member(:description, Shapes::ShapeRef.new(shape: StringWithCharLimit256Min0, location_name: "Description"))
     OrganizationManagedRuleMetadata.add_member(:rule_identifier, Shapes::ShapeRef.new(shape: StringWithCharLimit256, required: true, location_name: "RuleIdentifier"))
-    OrganizationManagedRuleMetadata.add_member(:input_parameters, Shapes::ShapeRef.new(shape: StringWithCharLimit2048, location_name: "InputParameters"))
+    OrganizationManagedRuleMetadata.add_member(:input_parameters, Shapes::ShapeRef.new(shape: StringWithCharLimit1024, location_name: "InputParameters"))
     OrganizationManagedRuleMetadata.add_member(:maximum_execution_frequency, Shapes::ShapeRef.new(shape: MaximumExecutionFrequency, location_name: "MaximumExecutionFrequency"))
     OrganizationManagedRuleMetadata.add_member(:resource_types_scope, Shapes::ShapeRef.new(shape: ResourceTypesScope, location_name: "ResourceTypesScope"))
     OrganizationManagedRuleMetadata.add_member(:resource_id_scope, Shapes::ShapeRef.new(shape: StringWithCharLimit768, location_name: "ResourceIdScope"))

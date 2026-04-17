@@ -109,8 +109,8 @@ module Aws::PartnerCentralChannel
     RelationshipSummaries = Shapes::ListShape.new(name: 'RelationshipSummaries')
     RelationshipSummary = Shapes::StructureShape.new(name: 'RelationshipSummary')
     ResaleAccountModel = Shapes::StringShape.new(name: 'ResaleAccountModel')
-    ResoldBusiness = Shapes::StructureShape.new(name: 'ResoldBusiness')
     ResoldEnterprise = Shapes::StructureShape.new(name: 'ResoldEnterprise')
+    ResoldUnifiedOperations = Shapes::StructureShape.new(name: 'ResoldUnifiedOperations')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     Revision = Shapes::StringShape.new(name: 'Revision')
     RevokeServicePeriodHandshakeDetail = Shapes::StructureShape.new(name: 'RevokeServicePeriodHandshakeDetail')
@@ -463,13 +463,15 @@ module Aws::PartnerCentralChannel
     RelationshipSummary.add_member(:start_date, Shapes::ShapeRef.new(shape: DateTime, location_name: "startDate"))
     RelationshipSummary.struct_class = Types::RelationshipSummary
 
-    ResoldBusiness.add_member(:coverage, Shapes::ShapeRef.new(shape: Coverage, required: true, location_name: "coverage"))
-    ResoldBusiness.struct_class = Types::ResoldBusiness
-
     ResoldEnterprise.add_member(:coverage, Shapes::ShapeRef.new(shape: Coverage, required: true, location_name: "coverage"))
     ResoldEnterprise.add_member(:tam_location, Shapes::ShapeRef.new(shape: String, required: true, location_name: "tamLocation"))
     ResoldEnterprise.add_member(:charge_account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "chargeAccountId"))
     ResoldEnterprise.struct_class = Types::ResoldEnterprise
+
+    ResoldUnifiedOperations.add_member(:coverage, Shapes::ShapeRef.new(shape: Coverage, required: true, location_name: "coverage"))
+    ResoldUnifiedOperations.add_member(:tam_location, Shapes::ShapeRef.new(shape: String, required: true, location_name: "tamLocation"))
+    ResoldUnifiedOperations.add_member(:charge_account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "chargeAccountId"))
+    ResoldUnifiedOperations.struct_class = Types::ResoldUnifiedOperations
 
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     ResourceNotFoundException.add_member(:resource_id, Shapes::ShapeRef.new(shape: String, location_name: "resourceId"))
@@ -523,13 +525,13 @@ module Aws::PartnerCentralChannel
     StartServicePeriodTypeSort.add_member(:sort_by, Shapes::ShapeRef.new(shape: StartServicePeriodTypeSortName, required: true, location_name: "sortBy"))
     StartServicePeriodTypeSort.struct_class = Types::StartServicePeriodTypeSort
 
-    SupportPlan.add_member(:resold_business, Shapes::ShapeRef.new(shape: ResoldBusiness, location_name: "resoldBusiness"))
     SupportPlan.add_member(:resold_enterprise, Shapes::ShapeRef.new(shape: ResoldEnterprise, location_name: "resoldEnterprise"))
     SupportPlan.add_member(:partner_led_support, Shapes::ShapeRef.new(shape: PartnerLedSupport, location_name: "partnerLedSupport"))
+    SupportPlan.add_member(:resold_unified_operations, Shapes::ShapeRef.new(shape: ResoldUnifiedOperations, location_name: "resoldUnifiedOperations"))
     SupportPlan.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
-    SupportPlan.add_member_subclass(:resold_business, Types::SupportPlan::ResoldBusiness)
     SupportPlan.add_member_subclass(:resold_enterprise, Types::SupportPlan::ResoldEnterprise)
     SupportPlan.add_member_subclass(:partner_led_support, Types::SupportPlan::PartnerLedSupport)
+    SupportPlan.add_member_subclass(:resold_unified_operations, Types::SupportPlan::ResoldUnifiedOperations)
     SupportPlan.add_member_subclass(:unknown, Types::SupportPlan::Unknown)
     SupportPlan.struct_class = Types::SupportPlan
 

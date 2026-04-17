@@ -823,6 +823,7 @@ module Aws::ElastiCache
     CreateServerlessCacheRequest.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: SubnetIdsList, location_name: "SubnetIds"))
     CreateServerlessCacheRequest.add_member(:snapshot_retention_limit, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "SnapshotRetentionLimit"))
     CreateServerlessCacheRequest.add_member(:daily_snapshot_time, Shapes::ShapeRef.new(shape: String, location_name: "DailySnapshotTime"))
+    CreateServerlessCacheRequest.add_member(:network_type, Shapes::ShapeRef.new(shape: NetworkType, location_name: "NetworkType"))
     CreateServerlessCacheRequest.struct_class = Types::CreateServerlessCacheRequest
 
     CreateServerlessCacheResponse.add_member(:serverless_cache, Shapes::ShapeRef.new(shape: ServerlessCache, location_name: "ServerlessCache"))
@@ -1780,6 +1781,7 @@ module Aws::ElastiCache
     ServerlessCache.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: SubnetIdsList, location_name: "SubnetIds"))
     ServerlessCache.add_member(:snapshot_retention_limit, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "SnapshotRetentionLimit"))
     ServerlessCache.add_member(:daily_snapshot_time, Shapes::ShapeRef.new(shape: String, location_name: "DailySnapshotTime"))
+    ServerlessCache.add_member(:network_type, Shapes::ShapeRef.new(shape: NetworkType, location_name: "NetworkType"))
     ServerlessCache.struct_class = Types::ServerlessCache
 
     ServerlessCacheAlreadyExistsFault.struct_class = Types::ServerlessCacheAlreadyExistsFault

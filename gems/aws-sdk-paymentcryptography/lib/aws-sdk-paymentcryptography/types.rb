@@ -917,11 +917,23 @@ module Aws::PaymentCryptography
     #   key block. `RSA_2048` is the only signing key algorithm allowed.
     #   @return [String]
     #
+    # @!attribute [rw] reuse_last_generated_token
+    #   Specifies whether to reuse the existing export token and signing key
+    #   certificate. If set to `true` and a valid export token exists for
+    #   the same key material type and signing key algorithm with at least 7
+    #   days of remaining validity, the existing token and signing key
+    #   certificate are returned. Otherwise, a new export token and signing
+    #   key certificate are generated. The default value is `false`, which
+    #   generates a new export token and signing key certificate on every
+    #   call.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/payment-cryptography-2021-09-14/GetParametersForExportInput AWS API Documentation
     #
     class GetParametersForExportInput < Struct.new(
       :key_material_type,
-      :signing_key_algorithm)
+      :signing_key_algorithm,
+      :reuse_last_generated_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -985,11 +997,23 @@ module Aws::PaymentCryptography
     #   import.
     #   @return [String]
     #
+    # @!attribute [rw] reuse_last_generated_token
+    #   Specifies whether to reuse the existing import token and wrapping
+    #   key certificate. If set to `true` and a valid import token exists
+    #   for the same key material type and wrapping key algorithm with at
+    #   least 7 days of remaining validity, the existing token and wrapping
+    #   key certificate are returned. Otherwise, a new import token and
+    #   wrapping key certificate are generated. The default value is
+    #   `false`, which generates a new import token and wrapping key
+    #   certificate on every call.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/payment-cryptography-2021-09-14/GetParametersForImportInput AWS API Documentation
     #
     class GetParametersForImportInput < Struct.new(
       :key_material_type,
-      :wrapping_key_algorithm)
+      :wrapping_key_algorithm,
+      :reuse_last_generated_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1049,7 +1073,10 @@ module Aws::PaymentCryptography
     # @!attribute [rw] key_certificate
     #   The public key component of the asymmetric key pair in a certificate
     #   PEM format (base64 encoded). It is signed by the root certificate
-    #   authority (CA). The certificate expires in 90 days.
+    #   authority (CA). The certificate is valid for 90 days from the time
+    #   it is issued. The service returns a cached certificate if one exists
+    #   with at least 30 days of remaining validity. Otherwise, a new 90-day
+    #   certificate is issued.
     #   @return [String]
     #
     # @!attribute [rw] key_certificate_chain

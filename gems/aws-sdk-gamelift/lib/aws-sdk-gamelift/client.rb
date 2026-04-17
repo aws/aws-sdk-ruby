@@ -1259,6 +1259,43 @@ module Aws::GameLift
     #
     #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
     #
+    # @option params [String] :player_gateway_mode
+    #   Configures player gateway for your fleet. Player gateway provides
+    #   benefits such as DDoS protection by rate limiting and validating traﬃc
+    #   before it reaches game servers, hiding game server IP addresses from
+    #   players, and providing updated endpoints when relay endpoints become
+    #   unhealthy.
+    #
+    #   **How it works:** When enabled, game clients connect to relay
+    #   endpoints instead of to your game servers. Player gateway validates
+    #   player gateway tokens and routes traffic to the appropriate game
+    #   server. Your game backend calls [GetPlayerConnectionDetails][1] to
+    #   retrieve relay endpoints and player gateway tokens for your game
+    #   clients. To learn more about this topic, see [DDoS protection with
+    #   Amazon GameLift Servers player gateway][2].
+    #
+    #   Possible values include:
+    #
+    #   * `DISABLED` (default) -- Game clients connect to the game server
+    #     endpoint. Use this when you do not intend to integrate your game
+    #     with player gateway.
+    #
+    #   * `ENABLED` -- Player gateway is available in fleet locations where it
+    #     is supported. Your game backend can call
+    #     [GetPlayerConnectionDetails][1] to obtain a player gateway token and
+    #     endpoints for game clients.
+    #
+    #   * `REQUIRED` -- Player gateway is available in fleet locations where
+    #     it is supported, and the fleet can only use locations that support
+    #     this feature. Attempting to add a remote location to your fleet
+    #     which does not support player gateway will result in an
+    #     `InvalidRequestException`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/gamelift/latest/apireference/API_GetPlayerConnectionDetails.html
+    #   [2]: https://docs.aws.amazon.com/gameliftservers/latest/developerguide/ddos-protection-intro.html
+    #
     # @return [Types::CreateContainerFleetOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateContainerFleetOutput#container_fleet #container_fleet} => Types::ContainerFleet
@@ -1307,6 +1344,7 @@ module Aws::GameLift
     #         value: "TagValue", # required
     #       },
     #     ],
+    #     player_gateway_mode: "DISABLED", # accepts DISABLED, ENABLED, REQUIRED
     #   })
     #
     # @example Response structure
@@ -1344,6 +1382,8 @@ module Aws::GameLift
     #   resp.container_fleet.location_attributes #=> Array
     #   resp.container_fleet.location_attributes[0].location #=> String
     #   resp.container_fleet.location_attributes[0].status #=> String, one of "PENDING", "CREATING", "CREATED", "ACTIVATING", "ACTIVE", "UPDATING", "DELETING"
+    #   resp.container_fleet.location_attributes[0].player_gateway_status #=> String, one of "DISABLED", "ENABLED"
+    #   resp.container_fleet.player_gateway_mode #=> String, one of "DISABLED", "ENABLED", "REQUIRED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/CreateContainerFleet AWS API Documentation
     #
@@ -2031,6 +2071,48 @@ module Aws::GameLift
     #
     #   [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-resources.html
     #
+    # @option params [String] :player_gateway_mode
+    #   Configures player gateway for your fleet. Player gateway provides
+    #   benefits such as DDoS protection by rate limiting and validating traﬃc
+    #   before it reaches game servers, hiding game server IP addresses from
+    #   players, and providing updated endpoints when relay endpoints become
+    #   unhealthy. Note, player gateway is only available for fleets using
+    #   server SDK 5.x or later game server builds.
+    #
+    #   **How it works:** When enabled, game clients connect to relay
+    #   endpoints instead of to your game servers. Player gateway validates
+    #   player gateway tokens and routes traffic to the appropriate game
+    #   server. Your game backend calls [GetPlayerConnectionDetails][1] to
+    #   retrieve relay endpoints and player gateway tokens for your game
+    #   clients. To learn more about this topic, see [DDoS protection with
+    #   Amazon GameLift Servers player gateway][2].
+    #
+    #   Possible values include:
+    #
+    #   * `DISABLED` (default) -- Game clients connect to the game server
+    #     endpoint. Use this when you do not intend to integrate your game
+    #     with player gateway.
+    #
+    #   * `ENABLED` -- Player gateway is available in fleet locations where it
+    #     is supported. Your game backend can call
+    #     [GetPlayerConnectionDetails][1] to obtain a player gateway token and
+    #     endpoints for game clients.
+    #
+    #   * `REQUIRED` -- Player gateway is available in fleet locations where
+    #     it is supported, and the fleet can only use locations that support
+    #     this feature. Attempting to add a remote location to your fleet
+    #     which does not support player gateway will result in an
+    #     `InvalidRequestException`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/gamelift/latest/apireference/API_GetPlayerConnectionDetails.html
+    #   [2]: https://docs.aws.amazon.com/gameliftservers/latest/developerguide/ddos-protection-intro.html
+    #
+    # @option params [Types::PlayerGatewayConfiguration] :player_gateway_configuration
+    #   Configuration settings for player gateway. Use this to specify
+    #   advanced options for how player gateway handles connections.
+    #
     # @return [Types::CreateFleetOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateFleetOutput#fleet_attributes #fleet_attributes} => Types::FleetAttributes
@@ -2095,6 +2177,10 @@ module Aws::GameLift
     #       cost: "NonNegativeLimitedLengthDouble", # required
     #     },
     #     instance_role_credentials_provider: "SHARED_CREDENTIAL_FILE", # accepts SHARED_CREDENTIAL_FILE
+    #     player_gateway_mode: "DISABLED", # accepts DISABLED, ENABLED, REQUIRED
+    #     player_gateway_configuration: {
+    #       game_server_ip_protocol_supported: "IPv4", # accepts IPv4, DUAL_STACK
+    #     },
     #   })
     #
     # @example Response structure
@@ -2129,9 +2215,12 @@ module Aws::GameLift
     #   resp.fleet_attributes.compute_type #=> String, one of "EC2", "ANYWHERE"
     #   resp.fleet_attributes.anywhere_configuration.cost #=> String
     #   resp.fleet_attributes.instance_role_credentials_provider #=> String, one of "SHARED_CREDENTIAL_FILE"
+    #   resp.fleet_attributes.player_gateway_mode #=> String, one of "DISABLED", "ENABLED", "REQUIRED"
+    #   resp.fleet_attributes.player_gateway_configuration.game_server_ip_protocol_supported #=> String, one of "IPv4", "DUAL_STACK"
     #   resp.location_states #=> Array
     #   resp.location_states[0].location #=> String
     #   resp.location_states[0].status #=> String, one of "NEW", "DOWNLOADING", "VALIDATING", "BUILDING", "ACTIVATING", "ACTIVE", "DELETING", "ERROR", "TERMINATED", "NOT_FOUND"
+    #   resp.location_states[0].player_gateway_status #=> String, one of "DISABLED", "ENABLED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/CreateFleet AWS API Documentation
     #
@@ -2212,6 +2301,7 @@ module Aws::GameLift
     #   resp.location_states #=> Array
     #   resp.location_states[0].location #=> String
     #   resp.location_states[0].status #=> String, one of "NEW", "DOWNLOADING", "VALIDATING", "BUILDING", "ACTIVATING", "ACTIVE", "DELETING", "ERROR", "TERMINATED", "NOT_FOUND"
+    #   resp.location_states[0].player_gateway_status #=> String, one of "DISABLED", "ENABLED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/CreateFleetLocations AWS API Documentation
     #
@@ -2547,10 +2637,15 @@ module Aws::GameLift
     #   For example: `{"Key": "difficulty", "Value": "novice"}`. For an
     #   example, see [Create a game session with custom properties][1].
     #
-    #   <note markdown="1"> Avoid using periods (".") in property keys if you plan to search for
-    #   game sessions by properties. Property keys containing periods cannot
-    #   be searched and will be filtered out from search results due to search
-    #   index limitations.
+    #   <note markdown="1"> * Avoid using periods (".") in property keys if you plan to search
+    #     for game sessions by properties. Property keys containing periods
+    #     cannot be searched and will be filtered out from search results due
+    #     to search index limitations.
+    #
+    #   * If you use SearchGameSessions API, there is a limit of 500 game
+    #     property keys across all game sessions and all fleets per region. If
+    #     the limit is exceeded, there will potentially be game session
+    #     entries missing from SearchGameSessions API results.
     #
     #    </note>
     #
@@ -2659,6 +2754,8 @@ module Aws::GameLift
     #   resp.game_session.game_session_data #=> String
     #   resp.game_session.matchmaker_data #=> String
     #   resp.game_session.location #=> String
+    #   resp.game_session.compute_name #=> String
+    #   resp.game_session.player_gateway_status #=> String, one of "DISABLED", "ENABLED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/CreateGameSession AWS API Documentation
     #
@@ -3044,10 +3141,15 @@ module Aws::GameLift
     #   for a successful match. This parameter is not used if `FlexMatchMode`
     #   is set to `STANDALONE`.
     #
-    #   <note markdown="1"> Avoid using periods (".") in property keys if you plan to search for
-    #   game sessions by properties. Property keys containing periods cannot
-    #   be searched and will be filtered out from search results due to search
-    #   index limitations.
+    #   <note markdown="1"> * Avoid using periods (".") in property keys if you plan to search
+    #     for game sessions by properties. Property keys containing periods
+    #     cannot be searched and will be filtered out from search results due
+    #     to search index limitations.
+    #
+    #   * If you use SearchGameSessions API, there is a limit of 500 game
+    #     property keys across all game sessions and all fleets per region. If
+    #     the limit is exceeded, there will potentially be game session
+    #     entries missing from SearchGameSessions API results.
     #
     #    </note>
     #
@@ -3527,6 +3629,17 @@ module Aws::GameLift
     #   The Node.js version used for execution of your Realtime script. The
     #   valid values are `10.x | 24.x`. By default, `NodeJsVersion` is `10.x`.
     #   This value cannot be updated later.
+    #
+    #   <note markdown="1"> Node.js 10 will reach end of support on September 30, 2026. See more
+    #   details in the [Node.js 10 FAQs][1]. For migration guidance, see [
+    #   Migrating from Node.js 10 to 24][2].
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: http://aws.amazon.com/gamelift/faq/nodejs10/
+    #   [2]: https://docs.aws.amazon.com/gamelift/latest/realtimeguide/realtime-script.html#realtime-script-nodejs-migration
     #
     # @return [Types::CreateScriptOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4042,6 +4155,7 @@ module Aws::GameLift
     #   resp.location_states #=> Array
     #   resp.location_states[0].location #=> String
     #   resp.location_states[0].status #=> String, one of "NEW", "DOWNLOADING", "VALIDATING", "BUILDING", "ACTIVATING", "ACTIVE", "DELETING", "ERROR", "TERMINATED", "NOT_FOUND"
+    #   resp.location_states[0].player_gateway_status #=> String, one of "DISABLED", "ENABLED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DeleteFleetLocations AWS API Documentation
     #
@@ -4814,6 +4928,8 @@ module Aws::GameLift
     #   resp.container_fleet.location_attributes #=> Array
     #   resp.container_fleet.location_attributes[0].location #=> String
     #   resp.container_fleet.location_attributes[0].status #=> String, one of "PENDING", "CREATING", "CREATED", "ACTIVATING", "ACTIVE", "UPDATING", "DELETING"
+    #   resp.container_fleet.location_attributes[0].player_gateway_status #=> String, one of "DISABLED", "ENABLED"
+    #   resp.container_fleet.player_gateway_mode #=> String, one of "DISABLED", "ENABLED", "REQUIRED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeContainerFleet AWS API Documentation
     #
@@ -5041,8 +5157,7 @@ module Aws::GameLift
       req.send_request(options)
     end
 
-    # **This API works with the following fleet types:** EC2, Anywhere,
-    # Container
+    # **This API works with the following fleet types:** EC2, Anywhere
     #
     # Retrieves core fleet-wide properties for fleets in an Amazon Web
     # Services Region. Properties include the computing hardware and
@@ -5141,6 +5256,8 @@ module Aws::GameLift
     #   resp.fleet_attributes[0].compute_type #=> String, one of "EC2", "ANYWHERE"
     #   resp.fleet_attributes[0].anywhere_configuration.cost #=> String
     #   resp.fleet_attributes[0].instance_role_credentials_provider #=> String, one of "SHARED_CREDENTIAL_FILE"
+    #   resp.fleet_attributes[0].player_gateway_mode #=> String, one of "DISABLED", "ENABLED", "REQUIRED"
+    #   resp.fleet_attributes[0].player_gateway_configuration.game_server_ip_protocol_supported #=> String, one of "IPv4", "DUAL_STACK"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeFleetAttributes AWS API Documentation
@@ -5488,6 +5605,7 @@ module Aws::GameLift
     #   resp.location_attributes #=> Array
     #   resp.location_attributes[0].location_state.location #=> String
     #   resp.location_attributes[0].location_state.status #=> String, one of "NEW", "DOWNLOADING", "VALIDATING", "BUILDING", "ACTIVATING", "ACTIVE", "DELETING", "ERROR", "TERMINATED", "NOT_FOUND"
+    #   resp.location_attributes[0].location_state.player_gateway_status #=> String, one of "DISABLED", "ENABLED"
     #   resp.location_attributes[0].stopped_actions #=> Array
     #   resp.location_attributes[0].stopped_actions[0] #=> String, one of "AUTO_SCALING"
     #   resp.location_attributes[0].update_status #=> String, one of "PENDING_UPDATE"
@@ -6137,6 +6255,8 @@ module Aws::GameLift
     #   resp.game_session_details[0].game_session.game_session_data #=> String
     #   resp.game_session_details[0].game_session.matchmaker_data #=> String
     #   resp.game_session_details[0].game_session.location #=> String
+    #   resp.game_session_details[0].game_session.compute_name #=> String
+    #   resp.game_session_details[0].game_session.player_gateway_status #=> String, one of "DISABLED", "ENABLED"
     #   resp.game_session_details[0].protection_policy #=> String, one of "NoProtection", "FullProtection"
     #   resp.next_token #=> String
     #
@@ -6163,7 +6283,14 @@ module Aws::GameLift
     # Notification Service (SNS) topic to receive notifications from
     # FlexMatch or queues. Continuously polling with
     # `DescribeGameSessionPlacement` should only be used for games in
-    # development with low game session usage.
+    # development with low game session usage. For a reference
+    # implementation of event-based game session placement tracking, see [
+    # Event-based game session placement guidance][1] in the Amazon GameLift
+    # Toolkit.
+    #
+    #
+    #
+    # [1]: https://github.com/amazon-gamelift/amazon-gamelift-toolkit/tree/main/event-based-session-placement
     #
     # @option params [required, String] :placement_id
     #   A unique identifier for a game session placement to retrieve.
@@ -6208,6 +6335,7 @@ module Aws::GameLift
     #   resp.game_session_placement.priority_configuration_override.placement_fallback_strategy #=> String, one of "DEFAULT_AFTER_SINGLE_PASS", "NONE"
     #   resp.game_session_placement.priority_configuration_override.location_order #=> Array
     #   resp.game_session_placement.priority_configuration_override.location_order[0] #=> String
+    #   resp.game_session_placement.player_gateway_status #=> String, one of "DISABLED", "ENABLED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeGameSessionPlacement AWS API Documentation
     #
@@ -6422,6 +6550,8 @@ module Aws::GameLift
     #   resp.game_sessions[0].game_session_data #=> String
     #   resp.game_sessions[0].matchmaker_data #=> String
     #   resp.game_sessions[0].location #=> String
+    #   resp.game_sessions[0].compute_name #=> String
+    #   resp.game_sessions[0].player_gateway_status #=> String, one of "DISABLED", "ENABLED"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeGameSessions AWS API Documentation
@@ -6433,7 +6563,7 @@ module Aws::GameLift
       req.send_request(options)
     end
 
-    # **This API works with the following fleet types:** EC2
+    # **This API works with the following fleet types:**EC2, Container
     #
     # Retrieves information about the EC2 instances in an Amazon GameLift
     # Servers managed fleet, including instance ID, connection data, and
@@ -6615,6 +6745,7 @@ module Aws::GameLift
     #   resp.ticket_list[0].game_session_connection_info.matched_player_sessions #=> Array
     #   resp.ticket_list[0].game_session_connection_info.matched_player_sessions[0].player_id #=> String
     #   resp.ticket_list[0].game_session_connection_info.matched_player_sessions[0].player_session_id #=> String
+    #   resp.ticket_list[0].game_session_connection_info.player_gateway_status #=> String, one of "DISABLED", "ENABLED"
     #   resp.ticket_list[0].estimated_wait_time #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeMatchmaking AWS API Documentation
@@ -7522,6 +7653,78 @@ module Aws::GameLift
       req.send_request(options)
     end
 
+    # **This API works with the following fleet types:** EC2 (server SDK 5.x
+    # or later), Container
+    #
+    # Retrieves connection details for game clients to connect to game
+    # sessions.
+    #
+    # **Player gateway benefits:** DDoS protection with negligible impact to
+    # latency.
+    #
+    # To enable player gateway on your fleet, set `PlayerGatewayMode` to
+    # `ENABLED` or `REQUIRED` when calling [CreateFleet][1] or
+    # [CreateContainerFleet][2].
+    #
+    # **How to use:** After creating a game session and adding players, call
+    # this operation with the game session ID and player IDs. When player
+    # gateway is enabled, the response includes connection endpoints and
+    # player gateway tokens that your game clients can use to connect to the
+    # game session through player gateway. To learn more about player
+    # gateway integration, see [DDoS protection with Amazon GameLift Servers
+    # player gateway][3].
+    #
+    # When player gateway is disabled or in locations where player gateway
+    # is not supported, this operation returns game server connection
+    # information without player gateway tokens, so that your game clients
+    # directly connect to the game server endpoint.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/gamelift/latest/apireference/API_CreateFleet.html
+    # [2]: https://docs.aws.amazon.com/gamelift/latest/apireference/API_CreateContainerFleet.html
+    # [3]: https://docs.aws.amazon.com/gameliftservers/latest/developerguide/ddos-protection-intro.html
+    #
+    # @option params [required, String] :game_session_id
+    #   A unique identifier for the game session for which to retrieve player
+    #   connection details.
+    #
+    # @option params [required, Array<String>] :player_ids
+    #   List of unique identifiers for players. Connection details are
+    #   returned for each player in this list.
+    #
+    # @return [Types::GetPlayerConnectionDetailsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetPlayerConnectionDetailsOutput#game_session_id #game_session_id} => String
+    #   * {Types::GetPlayerConnectionDetailsOutput#player_connection_details #player_connection_details} => Array&lt;Types::PlayerConnectionDetail&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_player_connection_details({
+    #     game_session_id: "ArnStringModel", # required
+    #     player_ids: ["PlayerId"], # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.game_session_id #=> String
+    #   resp.player_connection_details #=> Array
+    #   resp.player_connection_details[0].player_id #=> String
+    #   resp.player_connection_details[0].endpoints #=> Array
+    #   resp.player_connection_details[0].endpoints[0].ip_address #=> String
+    #   resp.player_connection_details[0].endpoints[0].port #=> Integer
+    #   resp.player_connection_details[0].player_gateway_token #=> String
+    #   resp.player_connection_details[0].expiration #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/GetPlayerConnectionDetails AWS API Documentation
+    #
+    # @overload get_player_connection_details(params = {})
+    # @param [Hash] params ({})
+    def get_player_connection_details(params = {}, options = {})
+      req = build_request(:get_player_connection_details, params)
+      req.send_request(options)
+    end
+
     # **This API works with the following fleet types:** EC2, Anywhere,
     # Container
     #
@@ -7910,6 +8113,8 @@ module Aws::GameLift
     #   resp.container_fleets[0].location_attributes #=> Array
     #   resp.container_fleets[0].location_attributes[0].location #=> String
     #   resp.container_fleets[0].location_attributes[0].status #=> String, one of "PENDING", "CREATING", "CREATED", "ACTIVATING", "ACTIVE", "UPDATING", "DELETING"
+    #   resp.container_fleets[0].location_attributes[0].player_gateway_status #=> String, one of "DISABLED", "ENABLED"
+    #   resp.container_fleets[0].player_gateway_mode #=> String, one of "DISABLED", "ENABLED", "REQUIRED"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/ListContainerFleets AWS API Documentation
@@ -8478,18 +8683,14 @@ module Aws::GameLift
       req.send_request(options)
     end
 
-    # **This API works with the following fleet types:** Anywhere
+    # **This API works with the following fleet types:** EC2, Anywhere,
+    # Container
     #
     # Lists all custom and Amazon Web Services locations where Amazon
-    # GameLift Servers can host game servers.
-    #
-    # Note that if you call this API using a location that doesn't have a
-    # service endpoint, such as one that can only be a remote location in a
-    # multi-location fleet, the API returns an error.
-    #
-    # Consult the table of supported locations in [Amazon GameLift Servers
-    # service locations][1] to identify home Regions that support single and
-    # multi-location fleets.
+    # GameLift Servers can host game servers. This operation also returns
+    # UDP ping beacon information for locations, which you can use to
+    # measure network latency between player devices and potential hosting
+    # locations.
     #
     # **Learn more**
     #
@@ -9324,10 +9525,15 @@ module Aws::GameLift
     #   For examples of searching game sessions, see the ones below, and
     #   also see [Search game sessions by game property][3].
     #
-    #   <note markdown="1"> Avoid using periods (".") in property keys if you plan to search
-    #   for game sessions by properties. Property keys containing periods
-    #   cannot be searched and will be filtered out from search results due
-    #   to search index limitations.
+    #   <note markdown="1"> * Avoid using periods (".") in property keys if you plan to search
+    #     for game sessions by properties. Property keys containing periods
+    #     cannot be searched and will be filtered out from search results
+    #     due to search index limitations.
+    #
+    #   * If you use SearchGameSessions API, there is a limit of 500 game
+    #     property keys across all game sessions and all fleets per region.
+    #     If the limit is exceeded, there will potentially be game session
+    #     entries missing from SearchGameSessions API results.
     #
     #    </note>
     #
@@ -9498,6 +9704,8 @@ module Aws::GameLift
     #   resp.game_sessions[0].game_session_data #=> String
     #   resp.game_sessions[0].matchmaker_data #=> String
     #   resp.game_sessions[0].location #=> String
+    #   resp.game_sessions[0].compute_name #=> String
+    #   resp.game_sessions[0].player_gateway_status #=> String, one of "DISABLED", "ENABLED"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/SearchGameSessions AWS API Documentation
@@ -9686,10 +9894,15 @@ module Aws::GameLift
     #   A set of key-value pairs that can store custom data in a game session.
     #   For example: `{"Key": "difficulty", "Value": "novice"}`.
     #
-    #   <note markdown="1"> Avoid using periods (".") in property keys if you plan to search for
-    #   game sessions by properties. Property keys containing periods cannot
-    #   be searched and will be filtered out from search results due to search
-    #   index limitations.
+    #   <note markdown="1"> * Avoid using periods (".") in property keys if you plan to search
+    #     for game sessions by properties. Property keys containing periods
+    #     cannot be searched and will be filtered out from search results due
+    #     to search index limitations.
+    #
+    #   * If you use SearchGameSessions API, there is a limit of 500 game
+    #     property keys across all game sessions and all fleets per region. If
+    #     the limit is exceeded, there will potentially be game session
+    #     entries missing from SearchGameSessions API results.
     #
     #    </note>
     #
@@ -9800,6 +10013,7 @@ module Aws::GameLift
     #   resp.game_session_placement.priority_configuration_override.placement_fallback_strategy #=> String, one of "DEFAULT_AFTER_SINGLE_PASS", "NONE"
     #   resp.game_session_placement.priority_configuration_override.location_order #=> Array
     #   resp.game_session_placement.priority_configuration_override.location_order[0] #=> String
+    #   resp.game_session_placement.player_gateway_status #=> String, one of "DISABLED", "ENABLED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/StartGameSessionPlacement AWS API Documentation
     #
@@ -9951,6 +10165,7 @@ module Aws::GameLift
     #   resp.matchmaking_ticket.game_session_connection_info.matched_player_sessions #=> Array
     #   resp.matchmaking_ticket.game_session_connection_info.matched_player_sessions[0].player_id #=> String
     #   resp.matchmaking_ticket.game_session_connection_info.matched_player_sessions[0].player_session_id #=> String
+    #   resp.matchmaking_ticket.game_session_connection_info.player_gateway_status #=> String, one of "DISABLED", "ENABLED"
     #   resp.matchmaking_ticket.estimated_wait_time #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/StartMatchBackfill AWS API Documentation
@@ -10068,6 +10283,7 @@ module Aws::GameLift
     #   resp.matchmaking_ticket.game_session_connection_info.matched_player_sessions #=> Array
     #   resp.matchmaking_ticket.game_session_connection_info.matched_player_sessions[0].player_id #=> String
     #   resp.matchmaking_ticket.game_session_connection_info.matched_player_sessions[0].player_session_id #=> String
+    #   resp.matchmaking_ticket.game_session_connection_info.player_gateway_status #=> String, one of "DISABLED", "ENABLED"
     #   resp.matchmaking_ticket.estimated_wait_time #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/StartMatchmaking AWS API Documentation
@@ -10217,6 +10433,7 @@ module Aws::GameLift
     #   resp.game_session_placement.priority_configuration_override.placement_fallback_strategy #=> String, one of "DEFAULT_AFTER_SINGLE_PASS", "NONE"
     #   resp.game_session_placement.priority_configuration_override.location_order #=> Array
     #   resp.game_session_placement.priority_configuration_override.location_order[0] #=> String
+    #   resp.game_session_placement.player_gateway_status #=> String, one of "DISABLED", "ENABLED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/StopGameSessionPlacement AWS API Documentation
     #
@@ -10551,6 +10768,8 @@ module Aws::GameLift
     #   resp.game_session.game_session_data #=> String
     #   resp.game_session.matchmaker_data #=> String
     #   resp.game_session.location #=> String
+    #   resp.game_session.compute_name #=> String
+    #   resp.game_session.player_gateway_status #=> String, one of "DISABLED", "ENABLED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/TerminateGameSession AWS API Documentation
     #
@@ -11000,6 +11219,8 @@ module Aws::GameLift
     #   resp.container_fleet.location_attributes #=> Array
     #   resp.container_fleet.location_attributes[0].location #=> String
     #   resp.container_fleet.location_attributes[0].status #=> String, one of "PENDING", "CREATING", "CREATED", "ACTIVATING", "ACTIVE", "UPDATING", "DELETING"
+    #   resp.container_fleet.location_attributes[0].player_gateway_status #=> String, one of "DISABLED", "ENABLED"
+    #   resp.container_fleet.player_gateway_mode #=> String, one of "DISABLED", "ENABLED", "REQUIRED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/UpdateContainerFleet AWS API Documentation
     #
@@ -11867,10 +12088,15 @@ module Aws::GameLift
     #   There is no way to delete properties. For an example, see [Update the
     #   value of a game property][1].
     #
-    #   <note markdown="1"> Avoid using periods (".") in property keys if you plan to search for
-    #   game sessions by properties. Property keys containing periods cannot
-    #   be searched and will be filtered out from search results due to search
-    #   index limitations.
+    #   <note markdown="1"> * Avoid using periods (".") in property keys if you plan to search
+    #     for game sessions by properties. Property keys containing periods
+    #     cannot be searched and will be filtered out from search results due
+    #     to search index limitations.
+    #
+    #   * If you use SearchGameSessions API, there is a limit of 500 game
+    #     property keys across all game sessions and all fleets per region. If
+    #     the limit is exceeded, there will potentially be game session
+    #     entries missing from SearchGameSessions API results.
     #
     #    </note>
     #
@@ -11921,6 +12147,8 @@ module Aws::GameLift
     #   resp.game_session.game_session_data #=> String
     #   resp.game_session.matchmaker_data #=> String
     #   resp.game_session.location #=> String
+    #   resp.game_session.compute_name #=> String
+    #   resp.game_session.player_gateway_status #=> String, one of "DISABLED", "ENABLED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/UpdateGameSession AWS API Documentation
     #
@@ -12149,10 +12377,15 @@ module Aws::GameLift
     #   for a successful match. This parameter is not used if `FlexMatchMode`
     #   is set to `STANDALONE`.
     #
-    #   <note markdown="1"> Avoid using periods (".") in property keys if you plan to search for
-    #   game sessions by properties. Property keys containing periods cannot
-    #   be searched and will be filtered out from search results due to search
-    #   index limitations.
+    #   <note markdown="1"> * Avoid using periods (".") in property keys if you plan to search
+    #     for game sessions by properties. Property keys containing periods
+    #     cannot be searched and will be filtered out from search results due
+    #     to search index limitations.
+    #
+    #   * If you use SearchGameSessions API, there is a limit of 500 game
+    #     property keys across all game sessions and all fleets per region. If
+    #     the limit is exceeded, there will potentially be game session
+    #     entries missing from SearchGameSessions API results.
     #
     #    </note>
     #
@@ -12504,7 +12737,7 @@ module Aws::GameLift
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-gamelift'
-      context[:gem_version] = '1.119.0'
+      context[:gem_version] = '1.124.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

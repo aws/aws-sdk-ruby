@@ -44,6 +44,7 @@ module AwsSdkCodeGenerator
         'eventpayload' => false,
         'exceptionEvent' => false, # internal, exceptions cannot be events
         # other
+        'sparse' => false,
         'synthetic' => false,
         'box' => false,
         'fault' => false,

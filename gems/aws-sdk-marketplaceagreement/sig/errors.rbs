@@ -15,6 +15,12 @@ module Aws
         def request_id: () -> ::String
         def message: () -> ::String
       end
+      class ConflictException < ::Aws::Errors::ServiceError
+        def request_id: () -> ::String
+        def message: () -> ::String
+        def resource_id: () -> ::String
+        def resource_type: () -> ::String
+      end
       class InternalServerException < ::Aws::Errors::ServiceError
         def request_id: () -> ::String
         def message: () -> ::String

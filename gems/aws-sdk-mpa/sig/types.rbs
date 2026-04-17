@@ -138,6 +138,9 @@ module Aws::MPA
       attr_accessor primary_identity_id: ::String
       attr_accessor primary_identity_source_arn: ::String
       attr_accessor primary_identity_status: ("PENDING" | "ACCEPTED" | "REJECTED" | "INVALID")
+      attr_accessor last_activity: ("VOTED" | "BASELINED" | "RESPONDED_TO_INVITATION")
+      attr_accessor last_activity_time: ::Time
+      attr_accessor pending_baseline_session_arn: ::String
       attr_accessor mfa_methods: ::Array[Types::MfaMethod]
       SENSITIVE: []
     end
@@ -202,7 +205,7 @@ module Aws::MPA
       attr_accessor description: ::String
       attr_accessor metadata: ::Hash[::String, ::String]
       attr_accessor status: ("PENDING" | "CANCELLED" | "APPROVED" | "FAILED" | "CREATING")
-      attr_accessor status_code: ("REJECTED" | "EXPIRED" | "CONFIGURATION_CHANGED")
+      attr_accessor status_code: ("REJECTED" | "EXPIRED" | "CONFIGURATION_CHANGED" | "ALL_APPROVERS_IN_SESSION")
       attr_accessor status_message: ::String
       attr_accessor execution_status: ("EXECUTED" | "FAILED" | "PENDING")
       attr_accessor action_name: ::String
@@ -405,7 +408,7 @@ module Aws::MPA
       attr_accessor requester_region: ::String
       attr_accessor requester_account_id: ::String
       attr_accessor status: ("PENDING" | "CANCELLED" | "APPROVED" | "FAILED" | "CREATING")
-      attr_accessor status_code: ("REJECTED" | "EXPIRED" | "CONFIGURATION_CHANGED")
+      attr_accessor status_code: ("REJECTED" | "EXPIRED" | "CONFIGURATION_CHANGED" | "ALL_APPROVERS_IN_SESSION")
       attr_accessor status_message: ::String
       attr_accessor action_completion_strategy: ("AUTO_COMPLETION_UPON_APPROVAL")
       attr_accessor additional_security_requirements: ::Array[("APPROVER_VERIFICATION_REQUIRED")]
@@ -505,6 +508,17 @@ module Aws::MPA
     class StartActiveApprovalTeamDeletionResponse
       attr_accessor deletion_completion_time: ::Time
       attr_accessor deletion_start_time: ::Time
+      SENSITIVE: []
+    end
+
+    class StartApprovalTeamBaselineRequest
+      attr_accessor arn: ::String
+      attr_accessor approver_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class StartApprovalTeamBaselineResponse
+      attr_accessor baseline_session_arn: ::String
       SENSITIVE: []
     end
 

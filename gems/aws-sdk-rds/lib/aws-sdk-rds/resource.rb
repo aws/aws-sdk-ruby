@@ -126,6 +126,7 @@ module Aws::RDS
     #       },
     #     ],
     #     master_user_authentication_type: "password", # accepts password, iam-db-auth
+    #     with_express_configuration: false,
     #     source_region: "String",
     #   })
     # @param [Hash] options ({})
@@ -1016,6 +1017,13 @@ module Aws::RDS
     #
     #   This option is only valid for RDS for PostgreSQL and Aurora PostgreSQL
     #   engines.
+    # @option options [Boolean] :with_express_configuration
+    #   Specifies to create an Aurora DB Cluster with express configuration in
+    #   seconds. Express configuration provides a cluster with a writer
+    #   instance and feature specific values set to all other input parameters
+    #   of this API.
+    #
+    #   Valid for Cluster Type: Aurora DB clusters
     # @option options [String] :source_region
     #   The source region of the snapshot. This is only needed when the
     #   shapshot is encrypted and in a different region.

@@ -1388,6 +1388,8 @@ module Aws::EMR
     #   resp.cluster.monitoring_configuration.cloud_watch_log_configuration.log_types #=> Hash
     #   resp.cluster.monitoring_configuration.cloud_watch_log_configuration.log_types["XmlString"] #=> Array
     #   resp.cluster.monitoring_configuration.cloud_watch_log_configuration.log_types["XmlString"][0] #=> String
+    #   resp.cluster.monitoring_configuration.s3_logging_configuration.log_type_upload_policy #=> Hash
+    #   resp.cluster.monitoring_configuration.s3_logging_configuration.log_type_upload_policy["LogType"] #=> String, one of "emr-managed", "on-customer-s3only", "disabled"
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -3531,6 +3533,20 @@ module Aws::EMR
     # @option params [Array<Types::StepConfig>] :steps
     #   A list of steps to run.
     #
+    # @option params [String] :step_execution_role_arn
+    #   The Amazon Resource Name (ARN) of the runtime role for steps specified
+    #   in the RunJobFlow request. The runtime role can be a cross-account IAM
+    #   role. The runtime role ARN is a combination of account ID, role name,
+    #   and role type using the following format:
+    #   `arn:partition:iam::account-id:role/role-name`.
+    #
+    #   For example, `arn:aws:iam::1234567890:role/ReadOnly` is a correctly
+    #   formatted runtime role ARN.
+    #
+    #   This parameter applies only to steps included in the `Steps` parameter
+    #   of this RunJobFlow request. It does not apply to steps added later to
+    #   the cluster.
+    #
     # @option params [Array<Types::BootstrapActionConfig>] :bootstrap_actions
     #   A list of bootstrap actions to run before Hadoop starts on the cluster
     #   nodes.
@@ -3958,6 +3974,7 @@ module Aws::EMR
     #         },
     #       },
     #     ],
+    #     step_execution_role_arn: "ArnType",
     #     bootstrap_actions: [
     #       {
     #         name: "XmlStringMaxLen256", # required
@@ -4050,6 +4067,11 @@ module Aws::EMR
     #         encryption_key_arn: "XmlString",
     #         log_types: {
     #           "XmlString" => ["XmlString"],
+    #         },
+    #       },
+    #       s3_logging_configuration: {
+    #         log_type_upload_policy: {
+    #           "system-logs" => "emr-managed", # accepts emr-managed, on-customer-s3only, disabled
     #         },
     #       },
     #     },
@@ -4553,7 +4575,7 @@ module Aws::EMR
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-emr'
-      context[:gem_version] = '1.125.0'
+      context[:gem_version] = '1.128.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

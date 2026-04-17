@@ -140,8 +140,8 @@ module Aws
 
       interface _GetBandwidthRateLimitScheduleResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetBandwidthRateLimitScheduleOutput]
-        def bandwidth_rate_limit_intervals: () -> ::Array[Types::BandwidthRateLimitInterval]
         def gateway_arn: () -> ::String
+        def bandwidth_rate_limit_intervals: () -> ::Array[Types::BandwidthRateLimitInterval]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BackupGateway/Client.html#get_bandwidth_rate_limit_schedule-instance_method
       def get_bandwidth_rate_limit_schedule: (
@@ -172,8 +172,8 @@ module Aws
       interface _GetHypervisorPropertyMappingsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetHypervisorPropertyMappingsOutput]
         def hypervisor_arn: () -> ::String
-        def iam_role_arn: () -> ::String
         def vmware_to_aws_tag_mappings: () -> ::Array[Types::VmwareToAwsTagMapping]
+        def iam_role_arn: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BackupGateway/Client.html#get_hypervisor_property_mappings-instance_method
       def get_hypervisor_property_mappings: (
@@ -197,17 +197,17 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BackupGateway/Client.html#import_hypervisor_configuration-instance_method
       def import_hypervisor_configuration: (
-                                             host: ::String,
-                                             ?kms_key_arn: ::String,
                                              name: ::String,
+                                             host: ::String,
+                                             ?username: ::String,
                                              ?password: ::String,
+                                             ?kms_key_arn: ::String,
                                              ?tags: Array[
                                                {
                                                  key: ::String,
                                                  value: ::String
                                                },
-                                             ],
-                                             ?username: ::String
+                                             ]
                                            ) -> _ImportHypervisorConfigurationResponseSuccess
                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ImportHypervisorConfigurationResponseSuccess
 
@@ -248,8 +248,8 @@ module Aws
 
       interface _ListVirtualMachinesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListVirtualMachinesOutput]
-        def next_token: () -> ::String
         def virtual_machines: () -> ::Array[Types::VirtualMachine]
+        def next_token: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BackupGateway/Client.html#list_virtual_machines-instance_method
       def list_virtual_machines: (
@@ -265,17 +265,17 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BackupGateway/Client.html#put_bandwidth_rate_limit_schedule-instance_method
       def put_bandwidth_rate_limit_schedule: (
+                                               gateway_arn: ::String,
                                                bandwidth_rate_limit_intervals: Array[
                                                  {
                                                    average_upload_rate_limit_in_bits_per_sec: ::Integer?,
-                                                   days_of_week: Array[::Integer],
-                                                   end_hour_of_day: ::Integer,
-                                                   end_minute_of_hour: ::Integer,
                                                    start_hour_of_day: ::Integer,
-                                                   start_minute_of_hour: ::Integer
+                                                   end_hour_of_day: ::Integer,
+                                                   start_minute_of_hour: ::Integer,
+                                                   end_minute_of_hour: ::Integer,
+                                                   days_of_week: Array[::Integer]
                                                  },
-                                               ],
-                                               gateway_arn: ::String
+                                               ]
                                              ) -> _PutBandwidthRateLimitScheduleResponseSuccess
                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutBandwidthRateLimitScheduleResponseSuccess
 
@@ -286,15 +286,15 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BackupGateway/Client.html#put_hypervisor_property_mappings-instance_method
       def put_hypervisor_property_mappings: (
                                               hypervisor_arn: ::String,
-                                              iam_role_arn: ::String,
                                               vmware_to_aws_tag_mappings: Array[
                                                 {
-                                                  aws_tag_key: ::String,
-                                                  aws_tag_value: ::String,
                                                   vmware_category: ::String,
-                                                  vmware_tag_name: ::String
+                                                  vmware_tag_name: ::String,
+                                                  aws_tag_key: ::String,
+                                                  aws_tag_value: ::String
                                                 },
-                                              ]
+                                              ],
+                                              iam_role_arn: ::String
                                             ) -> _PutHypervisorPropertyMappingsResponseSuccess
                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutHypervisorPropertyMappingsResponseSuccess
 
@@ -304,11 +304,11 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BackupGateway/Client.html#put_maintenance_start_time-instance_method
       def put_maintenance_start_time: (
-                                        ?day_of_month: ::Integer,
-                                        ?day_of_week: ::Integer,
                                         gateway_arn: ::String,
                                         hour_of_day: ::Integer,
-                                        minute_of_hour: ::Integer
+                                        minute_of_hour: ::Integer,
+                                        ?day_of_week: ::Integer,
+                                        ?day_of_month: ::Integer
                                       ) -> _PutMaintenanceStartTimeResponseSuccess
                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutMaintenanceStartTimeResponseSuccess
 
@@ -345,8 +345,8 @@ module Aws
       def test_hypervisor_configuration: (
                                            gateway_arn: ::String,
                                            host: ::String,
-                                           ?password: ::String,
-                                           ?username: ::String
+                                           ?username: ::String,
+                                           ?password: ::String
                                          ) -> _TestHypervisorConfigurationResponseSuccess
                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TestHypervisorConfigurationResponseSuccess
 
@@ -388,12 +388,12 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BackupGateway/Client.html#update_hypervisor-instance_method
       def update_hypervisor: (
-                               ?host: ::String,
                                hypervisor_arn: ::String,
-                               ?log_group_arn: ::String,
-                               ?name: ::String,
+                               ?host: ::String,
+                               ?username: ::String,
                                ?password: ::String,
-                               ?username: ::String
+                               ?name: ::String,
+                               ?log_group_arn: ::String
                              ) -> _UpdateHypervisorResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateHypervisorResponseSuccess
     end

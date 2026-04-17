@@ -554,22 +554,68 @@ module Aws
       def create_recommender: (
                                 domain_name: ::String,
                                 recommender_name: ::String,
-                                recommender_recipe_name: ("recommended-for-you" | "similar-items" | "frequently-paired-items" | "popular-items" | "trending-now"),
+                                recommender_recipe_name: ("recommended-for-you" | "similar-items" | "frequently-paired-items" | "popular-items" | "trending-now" | "personalized-ranking"),
                                 ?recommender_config: {
                                   events_config: {
                                     event_parameters_list: Array[
                                       {
                                         event_type: ::String,
-                                        event_value_threshold: ::Float?
+                                        event_value_threshold: ::Float?,
+                                        event_weight: ::Float?
                                       },
                                     ]
-                                  },
-                                  training_frequency: ::Integer?
+                                  }?,
+                                  training_frequency: ::Integer?,
+                                  inference_config: {
+                                    min_provisioned_tps: ::Integer?
+                                  }?,
+                                  included_columns: Hash[::String, Array[::String]]?
                                 },
                                 ?description: ::String,
+                                ?recommender_schema_name: ::String,
                                 ?tags: Hash[::String, ::String]
                               ) -> _CreateRecommenderResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateRecommenderResponseSuccess
+
+      interface _CreateRecommenderFilterResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateRecommenderFilterResponse]
+        def recommender_filter_arn: () -> ::String
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CustomerProfiles/Client.html#create_recommender_filter-instance_method
+      def create_recommender_filter: (
+                                       domain_name: ::String,
+                                       recommender_filter_name: ::String,
+                                       recommender_filter_expression: ::String,
+                                       ?recommender_schema_name: ::String,
+                                       ?description: ::String,
+                                       ?tags: Hash[::String, ::String]
+                                     ) -> _CreateRecommenderFilterResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateRecommenderFilterResponseSuccess
+
+      interface _CreateRecommenderSchemaResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateRecommenderSchemaResponse]
+        def recommender_schema_arn: () -> ::String
+        def recommender_schema_name: () -> ::String
+        def fields: () -> ::Hash[::String, ::Array[Types::RecommenderSchemaField]]
+        def created_at: () -> ::Time
+        def status: () -> ("ACTIVE" | "DELETING")
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CustomerProfiles/Client.html#create_recommender_schema-instance_method
+      def create_recommender_schema: (
+                                       domain_name: ::String,
+                                       recommender_schema_name: ::String,
+                                       fields: Hash[::String, Array[
+                                           {
+                                             target_field_name: ::String,
+                                             content_type: ("STRING" | "NUMBER")?,
+                                             feature_type: ("TEXTUAL" | "CATEGORICAL")?
+                                           },
+                                         ]],
+                                       ?tags: Hash[::String, ::String]
+                                     ) -> _CreateRecommenderSchemaResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateRecommenderSchemaResponseSuccess
 
       interface _CreateSegmentDefinitionResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateSegmentDefinitionResponse]
@@ -794,6 +840,16 @@ module Aws
                                          include: ("ALL" | "ANY" | "NONE")?
                                        },
                                        ?segment_sql_query: ::String,
+                                       ?segment_sort: {
+                                         attributes: Array[
+                                           {
+                                             name: ::String,
+                                             data_type: ("STRING" | "NUMBER" | "DATE")?,
+                                             order: ("ASC" | "DESC"),
+                                             type: ("PROFILE" | "CALCULATED")?
+                                           },
+                                         ]
+                                       },
                                        ?tags: Hash[::String, ::String]
                                      ) -> _CreateSegmentDefinitionResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateSegmentDefinitionResponseSuccess
@@ -1182,6 +1238,27 @@ module Aws
                               ) -> _DeleteRecommenderResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteRecommenderResponseSuccess
 
+      interface _DeleteRecommenderFilterResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteRecommenderFilterResponse]
+        def message: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CustomerProfiles/Client.html#delete_recommender_filter-instance_method
+      def delete_recommender_filter: (
+                                       domain_name: ::String,
+                                       recommender_filter_name: ::String
+                                     ) -> _DeleteRecommenderFilterResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteRecommenderFilterResponseSuccess
+
+      interface _DeleteRecommenderSchemaResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteRecommenderSchemaResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CustomerProfiles/Client.html#delete_recommender_schema-instance_method
+      def delete_recommender_schema: (
+                                       domain_name: ::String,
+                                       recommender_schema_name: ::String
+                                     ) -> _DeleteRecommenderSchemaResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteRecommenderSchemaResponseSuccess
+
       interface _DeleteSegmentDefinitionResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteSegmentDefinitionResponse]
         def message: () -> ::String
@@ -1470,6 +1547,7 @@ module Aws
         def source_last_updated_timestamp_format: () -> ::String
         def max_available_profile_object_count: () -> ::Integer
         def max_profile_object_count: () -> ::Integer
+        def source_priority: () -> ::Integer
         def fields: () -> ::Hash[::String, Types::ObjectTypeField]
         def keys: () -> ::Hash[::String, ::Array[Types::ObjectTypeKey]]
         def created_at: () -> ::Time
@@ -1509,14 +1587,33 @@ module Aws
                                          profile_id: ::String,
                                          recommender_name: ::String,
                                          ?context: Hash[::String, ::String],
-                                         ?max_results: ::Integer
+                                         ?recommender_filters: Array[
+                                           {
+                                             name: ::String?,
+                                             values: Hash[::String, ::String]?
+                                           },
+                                         ],
+                                         ?recommender_promotional_filters: Array[
+                                           {
+                                             name: ::String?,
+                                             values: Hash[::String, ::String]?,
+                                             promotion_name: ::String?,
+                                             percent_promoted_items: ::Integer?
+                                           },
+                                         ],
+                                         ?candidate_ids: Array[::String],
+                                         ?max_results: ::Integer,
+                                         ?metadata_config: {
+                                           metadata_columns: Array[::String]?
+                                         }
                                        ) -> _GetProfileRecommendationsResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetProfileRecommendationsResponseSuccess
 
       interface _GetRecommenderResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetRecommenderResponse]
         def recommender_name: () -> ::String
-        def recommender_recipe_name: () -> ("recommended-for-you" | "similar-items" | "frequently-paired-items" | "popular-items" | "trending-now")
+        def recommender_recipe_name: () -> ("recommended-for-you" | "similar-items" | "frequently-paired-items" | "popular-items" | "trending-now" | "personalized-ranking")
+        def recommender_schema_name: () -> ::String
         def recommender_config: () -> Types::RecommenderConfig
         def description: () -> ::String
         def status: () -> ("PENDING" | "IN_PROGRESS" | "ACTIVE" | "FAILED" | "STOPPING" | "INACTIVE" | "STARTING" | "DELETING")
@@ -1535,12 +1632,45 @@ module Aws
                            ) -> _GetRecommenderResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetRecommenderResponseSuccess
 
+      interface _GetRecommenderFilterResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetRecommenderFilterResponse]
+        def recommender_filter_name: () -> ::String
+        def recommender_filter_expression: () -> ::String
+        def recommender_schema_name: () -> ::String
+        def created_at: () -> ::Time
+        def status: () -> ("ACTIVE" | "PENDING" | "IN_PROGRESS" | "FAILED" | "DELETING")
+        def description: () -> ::String
+        def failure_reason: () -> ::String
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CustomerProfiles/Client.html#get_recommender_filter-instance_method
+      def get_recommender_filter: (
+                                    domain_name: ::String,
+                                    recommender_filter_name: ::String
+                                  ) -> _GetRecommenderFilterResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetRecommenderFilterResponseSuccess
+
+      interface _GetRecommenderSchemaResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetRecommenderSchemaResponse]
+        def recommender_schema_name: () -> ::String
+        def fields: () -> ::Hash[::String, ::Array[Types::RecommenderSchemaField]]
+        def created_at: () -> ::Time
+        def status: () -> ("ACTIVE" | "DELETING")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CustomerProfiles/Client.html#get_recommender_schema-instance_method
+      def get_recommender_schema: (
+                                    domain_name: ::String,
+                                    recommender_schema_name: ::String
+                                  ) -> _GetRecommenderSchemaResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetRecommenderSchemaResponseSuccess
+
       interface _GetSegmentDefinitionResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetSegmentDefinitionResponse]
         def segment_definition_name: () -> ::String
         def display_name: () -> ::String
         def description: () -> ::String
         def segment_groups: () -> Types::SegmentGroup
+        def segment_sort: () -> Types::SegmentSort
         def segment_definition_arn: () -> ::String
         def created_at: () -> ::Time
         def tags: () -> ::Hash[::String, ::String]
@@ -1926,6 +2056,19 @@ module Aws
                                 ) -> _ListProfileObjectsResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListProfileObjectsResponseSuccess
 
+      interface _ListRecommenderFiltersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListRecommenderFiltersResponse]
+        def next_token: () -> ::String
+        def recommender_filters: () -> ::Array[Types::RecommenderFilterSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CustomerProfiles/Client.html#list_recommender_filters-instance_method
+      def list_recommender_filters: (
+                                      domain_name: ::String,
+                                      ?max_results: ::Integer,
+                                      ?next_token: ::String
+                                    ) -> _ListRecommenderFiltersResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRecommenderFiltersResponseSuccess
+
       interface _ListRecommenderRecipesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListRecommenderRecipesResponse]
         def next_token: () -> ::String
@@ -1937,6 +2080,19 @@ module Aws
                                       ?next_token: ::String
                                     ) -> _ListRecommenderRecipesResponseSuccess
                                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRecommenderRecipesResponseSuccess
+
+      interface _ListRecommenderSchemasResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListRecommenderSchemasResponse]
+        def next_token: () -> ::String
+        def recommender_schemas: () -> ::Array[Types::RecommenderSchemaSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CustomerProfiles/Client.html#list_recommender_schemas-instance_method
+      def list_recommender_schemas: (
+                                      domain_name: ::String,
+                                      ?max_results: ::Integer,
+                                      ?next_token: ::String
+                                    ) -> _ListRecommenderSchemasResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRecommenderSchemasResponseSuccess
 
       interface _ListRecommendersResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListRecommendersResponse]
@@ -2192,6 +2348,7 @@ module Aws
         def source_last_updated_timestamp_format: () -> ::String
         def max_profile_object_count: () -> ::Integer
         def max_available_profile_object_count: () -> ::Integer
+        def source_priority: () -> ::Integer
         def fields: () -> ::Hash[::String, Types::ObjectTypeField]
         def keys: () -> ::Hash[::String, ::Array[Types::ObjectTypeKey]]
         def created_at: () -> ::Time
@@ -2209,6 +2366,7 @@ module Aws
                                      ?allow_profile_creation: bool,
                                      ?source_last_updated_timestamp_format: ::String,
                                      ?max_profile_object_count: ::Integer,
+                                     ?source_priority: ::Integer,
                                      ?fields: Hash[::String, {
                                          source: ::String?,
                                          target: ::String?,
@@ -2216,7 +2374,7 @@ module Aws
                                        }],
                                      ?keys: Hash[::String, Array[
                                          {
-                                           standard_identifiers: Array[("PROFILE" | "ASSET" | "CASE" | "ORDER" | "COMMUNICATION_RECORD" | "AIR_PREFERENCE" | "HOTEL_PREFERENCE" | "AIR_BOOKING" | "AIR_SEGMENT" | "HOTEL_RESERVATION" | "HOTEL_STAY_REVENUE" | "LOYALTY" | "LOYALTY_TRANSACTION" | "LOYALTY_PROMOTION" | "UNIQUE" | "SECONDARY" | "LOOKUP_ONLY" | "NEW_ONLY")]?,
+                                           standard_identifiers: Array[("PROFILE" | "ASSET" | "CASE" | "DEVICE" | "WEB_ANALYTICS" | "ORDER" | "COMMUNICATION_RECORD" | "AIR_PREFERENCE" | "HOTEL_PREFERENCE" | "AIR_BOOKING" | "AIR_SEGMENT" | "HOTEL_RESERVATION" | "HOTEL_STAY_REVENUE" | "LOYALTY" | "LOYALTY_TRANSACTION" | "LOYALTY_PROMOTION" | "UNIQUE" | "SECONDARY" | "LOOKUP_ONLY" | "NEW_ONLY")]?,
                                            field_names: Array[::String]?
                                          },
                                        ]],
@@ -2611,11 +2769,16 @@ module Aws
                                     event_parameters_list: Array[
                                       {
                                         event_type: ::String,
-                                        event_value_threshold: ::Float?
+                                        event_value_threshold: ::Float?,
+                                        event_weight: ::Float?
                                       },
                                     ]
-                                  },
-                                  training_frequency: ::Integer?
+                                  }?,
+                                  training_frequency: ::Integer?,
+                                  inference_config: {
+                                    min_provisioned_tps: ::Integer?
+                                  }?,
+                                  included_columns: Hash[::String, Array[::String]]?
                                 }
                               ) -> _UpdateRecommenderResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateRecommenderResponseSuccess

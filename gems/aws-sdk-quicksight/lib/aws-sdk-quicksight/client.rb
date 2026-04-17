@@ -1972,7 +1972,7 @@ module Aws::QuickSight
     #   The ID of the Amazon Web Services account that owns the brand.
     #
     # @option params [required, String] :brand_id
-    #   The ID of the Quick Suite brand.
+    #   The ID of the Quick brand.
     #
     # @option params [Types::BrandDefinition] :brand_definition
     #   The definition of the brand.
@@ -2229,6 +2229,7 @@ module Aws::QuickSight
     #       publish_without_approval: "DENY", # accepts DENY
     #       use_bedrock_models: "DENY", # accepts DENY
     #       perform_flow_ui_task: "DENY", # accepts DENY
+    #       approve_flow_share_requests: "DENY", # accepts DENY
     #       use_agent_web_search: "DENY", # accepts DENY
     #       knowledge_base: "DENY", # accepts DENY
     #       action: "DENY", # accepts DENY
@@ -2404,11 +2405,20 @@ module Aws::QuickSight
     #       create_and_update_new_relic_action: "DENY", # accepts DENY
     #       share_new_relic_action: "DENY", # accepts DENY
     #       use_new_relic_action: "DENY", # accepts DENY
+    #       topic: "DENY", # accepts DENY
+    #       edit_visual_with_q: "DENY", # accepts DENY
+    #       build_calculated_field_with_q: "DENY", # accepts DENY
+    #       create_dashboard_executive_summary_with_q: "DENY", # accepts DENY
     #       space: "DENY", # accepts DENY
+    #       create_spaces: "DENY", # accepts DENY
+    #       share_spaces: "DENY", # accepts DENY
     #       chat_agent: "DENY", # accepts DENY
     #       create_chat_agents: "DENY", # accepts DENY
+    #       share_chat_agents: "DENY", # accepts DENY
     #       research: "DENY", # accepts DENY
     #       self_upgrade_user_role: "DENY", # accepts DENY
+    #       extension: "DENY", # accepts DENY
+    #       manage_shared_folders: "DENY", # accepts DENY
     #     },
     #     tags: [
     #       {
@@ -2694,7 +2704,7 @@ module Aws::QuickSight
     #             {
     #               name: "ColumnName", # required
     #               id: "ColumnId",
-    #               type: "STRING", # required, accepts STRING, INTEGER, DECIMAL, DATETIME, BIT, BOOLEAN, JSON
+    #               type: "STRING", # required, accepts STRING, INTEGER, DECIMAL, DATETIME, BIT, BOOLEAN, JSON, SEMISTRUCT
     #               sub_type: "FLOAT", # accepts FLOAT, FIXED
     #             },
     #           ],
@@ -2707,7 +2717,7 @@ module Aws::QuickSight
     #             {
     #               name: "ColumnName", # required
     #               id: "ColumnId",
-    #               type: "STRING", # required, accepts STRING, INTEGER, DECIMAL, DATETIME, BIT, BOOLEAN, JSON
+    #               type: "STRING", # required, accepts STRING, INTEGER, DECIMAL, DATETIME, BIT, BOOLEAN, JSON, SEMISTRUCT
     #               sub_type: "FLOAT", # accepts FLOAT, FIXED
     #             },
     #           ],
@@ -2726,7 +2736,7 @@ module Aws::QuickSight
     #             {
     #               name: "ColumnName", # required
     #               id: "ColumnId",
-    #               type: "STRING", # required, accepts STRING, INTEGER, DECIMAL, DATETIME, BIT, BOOLEAN, JSON
+    #               type: "STRING", # required, accepts STRING, INTEGER, DECIMAL, DATETIME, BIT, BOOLEAN, JSON, SEMISTRUCT
     #               sub_type: "FLOAT", # accepts FLOAT, FIXED
     #             },
     #           ],
@@ -2743,7 +2753,7 @@ module Aws::QuickSight
     #             {
     #               name: "ColumnName", # required
     #               id: "ColumnId",
-    #               type: "STRING", # required, accepts STRING, INTEGER, DECIMAL, DATETIME, BIT, BOOLEAN, JSON
+    #               type: "STRING", # required, accepts STRING, INTEGER, DECIMAL, DATETIME, BIT, BOOLEAN, JSON, SEMISTRUCT
     #               sub_type: "FLOAT", # accepts FLOAT, FIXED
     #             },
     #           ],
@@ -3013,7 +3023,7 @@ module Aws::QuickSight
     #               {
     #                 name: "ColumnName", # required
     #                 id: "ColumnId",
-    #                 type: "STRING", # required, accepts STRING, INTEGER, DECIMAL, DATETIME, BIT, BOOLEAN, JSON
+    #                 type: "STRING", # required, accepts STRING, INTEGER, DECIMAL, DATETIME, BIT, BOOLEAN, JSON, SEMISTRUCT
     #                 sub_type: "FLOAT", # accepts FLOAT, FIXED
     #               },
     #             ],
@@ -3542,7 +3552,7 @@ module Aws::QuickSight
     #         host: "Host", # required
     #         database: "Database", # required
     #         warehouse: "Warehouse", # required
-    #         authentication_type: "PASSWORD", # accepts PASSWORD, TOKEN, X509
+    #         authentication_type: "PASSWORD", # accepts PASSWORD, KEYPAIR, TOKEN, X509
     #         database_access_control_role: "DatabaseAccessControlRole",
     #         o_auth_parameters: {
     #           token_provider_url: "TokenProviderUrl", # required
@@ -3589,7 +3599,7 @@ module Aws::QuickSight
     #         catalog: "Catalog", # required
     #         product_type: "GALAXY", # accepts GALAXY, ENTERPRISE
     #         database_access_control_role: "DatabaseAccessControlRole",
-    #         authentication_type: "PASSWORD", # accepts PASSWORD, TOKEN, X509
+    #         authentication_type: "PASSWORD", # accepts PASSWORD, KEYPAIR, TOKEN, X509
     #         o_auth_parameters: {
     #           token_provider_url: "TokenProviderUrl", # required
     #           o_auth_scope: "OAuthScope",
@@ -3730,7 +3740,7 @@ module Aws::QuickSight
     #               host: "Host", # required
     #               database: "Database", # required
     #               warehouse: "Warehouse", # required
-    #               authentication_type: "PASSWORD", # accepts PASSWORD, TOKEN, X509
+    #               authentication_type: "PASSWORD", # accepts PASSWORD, KEYPAIR, TOKEN, X509
     #               database_access_control_role: "DatabaseAccessControlRole",
     #               o_auth_parameters: {
     #                 token_provider_url: "TokenProviderUrl", # required
@@ -3777,7 +3787,7 @@ module Aws::QuickSight
     #               catalog: "Catalog", # required
     #               product_type: "GALAXY", # accepts GALAXY, ENTERPRISE
     #               database_access_control_role: "DatabaseAccessControlRole",
-    #               authentication_type: "PASSWORD", # accepts PASSWORD, TOKEN, X509
+    #               authentication_type: "PASSWORD", # accepts PASSWORD, KEYPAIR, TOKEN, X509
     #               o_auth_parameters: {
     #                 token_provider_url: "TokenProviderUrl", # required
     #                 o_auth_scope: "OAuthScope",
@@ -3834,6 +3844,11 @@ module Aws::QuickSight
     #       web_proxy_credentials: {
     #         web_proxy_username: "DbUsername", # required
     #         web_proxy_password: "Password", # required
+    #       },
+    #       o_auth_client_credentials: {
+    #         client_id: "OAuthClientId",
+    #         client_secret: "OAuthClientSecret",
+    #         username: "OAuthUsername",
     #       },
     #     },
     #     permissions: [
@@ -5584,7 +5599,7 @@ module Aws::QuickSight
     #   The ID of the Amazon Web Services account that owns the brand.
     #
     # @option params [required, String] :brand_id
-    #   The ID of the Quick Suite brand.
+    #   The ID of the Quick brand.
     #
     # @return [Types::DeleteBrandResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -7483,7 +7498,7 @@ module Aws::QuickSight
     #   resp.override_parameters.data_sources[0].data_source_parameters.snowflake_parameters.host #=> String
     #   resp.override_parameters.data_sources[0].data_source_parameters.snowflake_parameters.database #=> String
     #   resp.override_parameters.data_sources[0].data_source_parameters.snowflake_parameters.warehouse #=> String
-    #   resp.override_parameters.data_sources[0].data_source_parameters.snowflake_parameters.authentication_type #=> String, one of "PASSWORD", "TOKEN", "X509"
+    #   resp.override_parameters.data_sources[0].data_source_parameters.snowflake_parameters.authentication_type #=> String, one of "PASSWORD", "KEYPAIR", "TOKEN", "X509"
     #   resp.override_parameters.data_sources[0].data_source_parameters.snowflake_parameters.database_access_control_role #=> String
     #   resp.override_parameters.data_sources[0].data_source_parameters.snowflake_parameters.o_auth_parameters.token_provider_url #=> String
     #   resp.override_parameters.data_sources[0].data_source_parameters.snowflake_parameters.o_auth_parameters.o_auth_scope #=> String
@@ -7510,7 +7525,7 @@ module Aws::QuickSight
     #   resp.override_parameters.data_sources[0].data_source_parameters.starburst_parameters.catalog #=> String
     #   resp.override_parameters.data_sources[0].data_source_parameters.starburst_parameters.product_type #=> String, one of "GALAXY", "ENTERPRISE"
     #   resp.override_parameters.data_sources[0].data_source_parameters.starburst_parameters.database_access_control_role #=> String
-    #   resp.override_parameters.data_sources[0].data_source_parameters.starburst_parameters.authentication_type #=> String, one of "PASSWORD", "TOKEN", "X509"
+    #   resp.override_parameters.data_sources[0].data_source_parameters.starburst_parameters.authentication_type #=> String, one of "PASSWORD", "KEYPAIR", "TOKEN", "X509"
     #   resp.override_parameters.data_sources[0].data_source_parameters.starburst_parameters.o_auth_parameters.token_provider_url #=> String
     #   resp.override_parameters.data_sources[0].data_source_parameters.starburst_parameters.o_auth_parameters.o_auth_scope #=> String
     #   resp.override_parameters.data_sources[0].data_source_parameters.starburst_parameters.o_auth_parameters.identity_provider_vpc_connection_properties.vpc_connection_arn #=> String
@@ -7665,13 +7680,82 @@ module Aws::QuickSight
       req.send_request(options)
     end
 
+    # Retrieves the status and details of a specified automation job,
+    # including its status and outputs.
+    #
+    # @option params [required, String] :aws_account_id
+    #   The ID of the Amazon Web Services account that contains the automation
+    #   job.
+    #
+    # @option params [required, String] :automation_group_id
+    #   The ID of the automation group that contains the automation.
+    #
+    # @option params [required, String] :automation_id
+    #   The ID of the automation that the job belongs to.
+    #
+    # @option params [Boolean] :include_input_payload
+    #   A Boolean value that indicates whether to include the input payload in
+    #   the response. If set to `true`, the input payload will be included. If
+    #   set to `false`, the input payload will be returned as `null`.
+    #
+    # @option params [Boolean] :include_output_payload
+    #   A Boolean value that indicates whether to include the output payload
+    #   in the response. If set to `true`, the output payload will be
+    #   included. If set to `false`, the output payload will be returned as
+    #   `null`.
+    #
+    # @option params [required, String] :job_id
+    #   The ID of the automation job to describe.
+    #
+    # @return [Types::DescribeAutomationJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeAutomationJobResponse#arn #arn} => String
+    #   * {Types::DescribeAutomationJobResponse#created_at #created_at} => Time
+    #   * {Types::DescribeAutomationJobResponse#started_at #started_at} => Time
+    #   * {Types::DescribeAutomationJobResponse#ended_at #ended_at} => Time
+    #   * {Types::DescribeAutomationJobResponse#job_status #job_status} => String
+    #   * {Types::DescribeAutomationJobResponse#input_payload #input_payload} => String
+    #   * {Types::DescribeAutomationJobResponse#output_payload #output_payload} => String
+    #   * {Types::DescribeAutomationJobResponse#request_id #request_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_automation_job({
+    #     aws_account_id: "AwsAccountId", # required
+    #     automation_group_id: "AutomateId", # required
+    #     automation_id: "AutomateId", # required
+    #     include_input_payload: false,
+    #     include_output_payload: false,
+    #     job_id: "AutomateId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.created_at #=> Time
+    #   resp.started_at #=> Time
+    #   resp.ended_at #=> Time
+    #   resp.job_status #=> String, one of "FAILED", "RUNNING", "SUCCEEDED", "QUEUED", "STOPPED"
+    #   resp.input_payload #=> String
+    #   resp.output_payload #=> String
+    #   resp.request_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeAutomationJob AWS API Documentation
+    #
+    # @overload describe_automation_job(params = {})
+    # @param [Hash] params ({})
+    def describe_automation_job(params = {}, options = {})
+      req = build_request(:describe_automation_job, params)
+      req.send_request(options)
+    end
+
     # Describes a brand.
     #
     # @option params [required, String] :aws_account_id
     #   The ID of the Amazon Web Services account that owns the brand.
     #
     # @option params [required, String] :brand_id
-    #   The ID of the Quick Suite brand.
+    #   The ID of the Quick brand.
     #
     # @option params [String] :version_id
     #   The ID of the specific version. The default value is the latest
@@ -7806,7 +7890,7 @@ module Aws::QuickSight
     #   The ID of the Amazon Web Services account that owns the brand.
     #
     # @option params [required, String] :brand_id
-    #   The ID of the Quick Suite brand.
+    #   The ID of the Quick brand.
     #
     # @return [Types::DescribeBrandPublishedVersionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -7956,6 +8040,7 @@ module Aws::QuickSight
     #   resp.custom_permissions.capabilities.publish_without_approval #=> String, one of "DENY"
     #   resp.custom_permissions.capabilities.use_bedrock_models #=> String, one of "DENY"
     #   resp.custom_permissions.capabilities.perform_flow_ui_task #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.approve_flow_share_requests #=> String, one of "DENY"
     #   resp.custom_permissions.capabilities.use_agent_web_search #=> String, one of "DENY"
     #   resp.custom_permissions.capabilities.knowledge_base #=> String, one of "DENY"
     #   resp.custom_permissions.capabilities.action #=> String, one of "DENY"
@@ -8131,11 +8216,20 @@ module Aws::QuickSight
     #   resp.custom_permissions.capabilities.create_and_update_new_relic_action #=> String, one of "DENY"
     #   resp.custom_permissions.capabilities.share_new_relic_action #=> String, one of "DENY"
     #   resp.custom_permissions.capabilities.use_new_relic_action #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.topic #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.edit_visual_with_q #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.build_calculated_field_with_q #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.create_dashboard_executive_summary_with_q #=> String, one of "DENY"
     #   resp.custom_permissions.capabilities.space #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.create_spaces #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.share_spaces #=> String, one of "DENY"
     #   resp.custom_permissions.capabilities.chat_agent #=> String, one of "DENY"
     #   resp.custom_permissions.capabilities.create_chat_agents #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.share_chat_agents #=> String, one of "DENY"
     #   resp.custom_permissions.capabilities.research #=> String, one of "DENY"
     #   resp.custom_permissions.capabilities.self_upgrade_user_role #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.extension #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.manage_shared_folders #=> String, one of "DENY"
     #   resp.request_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeCustomPermissions AWS API Documentation
@@ -8669,7 +8763,7 @@ module Aws::QuickSight
     #   resp.data_set.physical_table_map["PhysicalTableId"].relational_table.input_columns #=> Array
     #   resp.data_set.physical_table_map["PhysicalTableId"].relational_table.input_columns[0].name #=> String
     #   resp.data_set.physical_table_map["PhysicalTableId"].relational_table.input_columns[0].id #=> String
-    #   resp.data_set.physical_table_map["PhysicalTableId"].relational_table.input_columns[0].type #=> String, one of "STRING", "INTEGER", "DECIMAL", "DATETIME", "BIT", "BOOLEAN", "JSON"
+    #   resp.data_set.physical_table_map["PhysicalTableId"].relational_table.input_columns[0].type #=> String, one of "STRING", "INTEGER", "DECIMAL", "DATETIME", "BIT", "BOOLEAN", "JSON", "SEMISTRUCT"
     #   resp.data_set.physical_table_map["PhysicalTableId"].relational_table.input_columns[0].sub_type #=> String, one of "FLOAT", "FIXED"
     #   resp.data_set.physical_table_map["PhysicalTableId"].custom_sql.data_source_arn #=> String
     #   resp.data_set.physical_table_map["PhysicalTableId"].custom_sql.name #=> String
@@ -8677,7 +8771,7 @@ module Aws::QuickSight
     #   resp.data_set.physical_table_map["PhysicalTableId"].custom_sql.columns #=> Array
     #   resp.data_set.physical_table_map["PhysicalTableId"].custom_sql.columns[0].name #=> String
     #   resp.data_set.physical_table_map["PhysicalTableId"].custom_sql.columns[0].id #=> String
-    #   resp.data_set.physical_table_map["PhysicalTableId"].custom_sql.columns[0].type #=> String, one of "STRING", "INTEGER", "DECIMAL", "DATETIME", "BIT", "BOOLEAN", "JSON"
+    #   resp.data_set.physical_table_map["PhysicalTableId"].custom_sql.columns[0].type #=> String, one of "STRING", "INTEGER", "DECIMAL", "DATETIME", "BIT", "BOOLEAN", "JSON", "SEMISTRUCT"
     #   resp.data_set.physical_table_map["PhysicalTableId"].custom_sql.columns[0].sub_type #=> String, one of "FLOAT", "FIXED"
     #   resp.data_set.physical_table_map["PhysicalTableId"].s3_source.data_source_arn #=> String
     #   resp.data_set.physical_table_map["PhysicalTableId"].s3_source.upload_settings.format #=> String, one of "CSV", "TSV", "CLF", "ELF", "XLSX", "JSON"
@@ -8689,7 +8783,7 @@ module Aws::QuickSight
     #   resp.data_set.physical_table_map["PhysicalTableId"].s3_source.input_columns #=> Array
     #   resp.data_set.physical_table_map["PhysicalTableId"].s3_source.input_columns[0].name #=> String
     #   resp.data_set.physical_table_map["PhysicalTableId"].s3_source.input_columns[0].id #=> String
-    #   resp.data_set.physical_table_map["PhysicalTableId"].s3_source.input_columns[0].type #=> String, one of "STRING", "INTEGER", "DECIMAL", "DATETIME", "BIT", "BOOLEAN", "JSON"
+    #   resp.data_set.physical_table_map["PhysicalTableId"].s3_source.input_columns[0].type #=> String, one of "STRING", "INTEGER", "DECIMAL", "DATETIME", "BIT", "BOOLEAN", "JSON", "SEMISTRUCT"
     #   resp.data_set.physical_table_map["PhysicalTableId"].s3_source.input_columns[0].sub_type #=> String, one of "FLOAT", "FIXED"
     #   resp.data_set.physical_table_map["PhysicalTableId"].saa_s_table.data_source_arn #=> String
     #   resp.data_set.physical_table_map["PhysicalTableId"].saa_s_table.table_path #=> Array
@@ -8698,7 +8792,7 @@ module Aws::QuickSight
     #   resp.data_set.physical_table_map["PhysicalTableId"].saa_s_table.input_columns #=> Array
     #   resp.data_set.physical_table_map["PhysicalTableId"].saa_s_table.input_columns[0].name #=> String
     #   resp.data_set.physical_table_map["PhysicalTableId"].saa_s_table.input_columns[0].id #=> String
-    #   resp.data_set.physical_table_map["PhysicalTableId"].saa_s_table.input_columns[0].type #=> String, one of "STRING", "INTEGER", "DECIMAL", "DATETIME", "BIT", "BOOLEAN", "JSON"
+    #   resp.data_set.physical_table_map["PhysicalTableId"].saa_s_table.input_columns[0].type #=> String, one of "STRING", "INTEGER", "DECIMAL", "DATETIME", "BIT", "BOOLEAN", "JSON", "SEMISTRUCT"
     #   resp.data_set.physical_table_map["PhysicalTableId"].saa_s_table.input_columns[0].sub_type #=> String, one of "FLOAT", "FIXED"
     #   resp.data_set.logical_table_map #=> Hash
     #   resp.data_set.logical_table_map["LogicalTableId"].alias #=> String
@@ -8841,7 +8935,7 @@ module Aws::QuickSight
     #   resp.data_set.data_prep_configuration.source_table_map["DataSetEntityResourceId"].data_set.input_columns #=> Array
     #   resp.data_set.data_prep_configuration.source_table_map["DataSetEntityResourceId"].data_set.input_columns[0].name #=> String
     #   resp.data_set.data_prep_configuration.source_table_map["DataSetEntityResourceId"].data_set.input_columns[0].id #=> String
-    #   resp.data_set.data_prep_configuration.source_table_map["DataSetEntityResourceId"].data_set.input_columns[0].type #=> String, one of "STRING", "INTEGER", "DECIMAL", "DATETIME", "BIT", "BOOLEAN", "JSON"
+    #   resp.data_set.data_prep_configuration.source_table_map["DataSetEntityResourceId"].data_set.input_columns[0].type #=> String, one of "STRING", "INTEGER", "DECIMAL", "DATETIME", "BIT", "BOOLEAN", "JSON", "SEMISTRUCT"
     #   resp.data_set.data_prep_configuration.source_table_map["DataSetEntityResourceId"].data_set.input_columns[0].sub_type #=> String, one of "FLOAT", "FIXED"
     #   resp.data_set.data_prep_configuration.transform_step_map #=> Hash
     #   resp.data_set.data_prep_configuration.transform_step_map["DataSetEntityResourceId"].import_table_step.alias #=> String
@@ -9182,7 +9276,7 @@ module Aws::QuickSight
     #   resp.data_source.data_source_parameters.snowflake_parameters.host #=> String
     #   resp.data_source.data_source_parameters.snowflake_parameters.database #=> String
     #   resp.data_source.data_source_parameters.snowflake_parameters.warehouse #=> String
-    #   resp.data_source.data_source_parameters.snowflake_parameters.authentication_type #=> String, one of "PASSWORD", "TOKEN", "X509"
+    #   resp.data_source.data_source_parameters.snowflake_parameters.authentication_type #=> String, one of "PASSWORD", "KEYPAIR", "TOKEN", "X509"
     #   resp.data_source.data_source_parameters.snowflake_parameters.database_access_control_role #=> String
     #   resp.data_source.data_source_parameters.snowflake_parameters.o_auth_parameters.token_provider_url #=> String
     #   resp.data_source.data_source_parameters.snowflake_parameters.o_auth_parameters.o_auth_scope #=> String
@@ -9209,7 +9303,7 @@ module Aws::QuickSight
     #   resp.data_source.data_source_parameters.starburst_parameters.catalog #=> String
     #   resp.data_source.data_source_parameters.starburst_parameters.product_type #=> String, one of "GALAXY", "ENTERPRISE"
     #   resp.data_source.data_source_parameters.starburst_parameters.database_access_control_role #=> String
-    #   resp.data_source.data_source_parameters.starburst_parameters.authentication_type #=> String, one of "PASSWORD", "TOKEN", "X509"
+    #   resp.data_source.data_source_parameters.starburst_parameters.authentication_type #=> String, one of "PASSWORD", "KEYPAIR", "TOKEN", "X509"
     #   resp.data_source.data_source_parameters.starburst_parameters.o_auth_parameters.token_provider_url #=> String
     #   resp.data_source.data_source_parameters.starburst_parameters.o_auth_parameters.o_auth_scope #=> String
     #   resp.data_source.data_source_parameters.starburst_parameters.o_auth_parameters.identity_provider_vpc_connection_properties.vpc_connection_arn #=> String
@@ -9285,7 +9379,7 @@ module Aws::QuickSight
     #   resp.data_source.alternate_data_source_parameters[0].snowflake_parameters.host #=> String
     #   resp.data_source.alternate_data_source_parameters[0].snowflake_parameters.database #=> String
     #   resp.data_source.alternate_data_source_parameters[0].snowflake_parameters.warehouse #=> String
-    #   resp.data_source.alternate_data_source_parameters[0].snowflake_parameters.authentication_type #=> String, one of "PASSWORD", "TOKEN", "X509"
+    #   resp.data_source.alternate_data_source_parameters[0].snowflake_parameters.authentication_type #=> String, one of "PASSWORD", "KEYPAIR", "TOKEN", "X509"
     #   resp.data_source.alternate_data_source_parameters[0].snowflake_parameters.database_access_control_role #=> String
     #   resp.data_source.alternate_data_source_parameters[0].snowflake_parameters.o_auth_parameters.token_provider_url #=> String
     #   resp.data_source.alternate_data_source_parameters[0].snowflake_parameters.o_auth_parameters.o_auth_scope #=> String
@@ -9312,7 +9406,7 @@ module Aws::QuickSight
     #   resp.data_source.alternate_data_source_parameters[0].starburst_parameters.catalog #=> String
     #   resp.data_source.alternate_data_source_parameters[0].starburst_parameters.product_type #=> String, one of "GALAXY", "ENTERPRISE"
     #   resp.data_source.alternate_data_source_parameters[0].starburst_parameters.database_access_control_role #=> String
-    #   resp.data_source.alternate_data_source_parameters[0].starburst_parameters.authentication_type #=> String, one of "PASSWORD", "TOKEN", "X509"
+    #   resp.data_source.alternate_data_source_parameters[0].starburst_parameters.authentication_type #=> String, one of "PASSWORD", "KEYPAIR", "TOKEN", "X509"
     #   resp.data_source.alternate_data_source_parameters[0].starburst_parameters.o_auth_parameters.token_provider_url #=> String
     #   resp.data_source.alternate_data_source_parameters[0].starburst_parameters.o_auth_parameters.o_auth_scope #=> String
     #   resp.data_source.alternate_data_source_parameters[0].starburst_parameters.o_auth_parameters.identity_provider_vpc_connection_properties.vpc_connection_arn #=> String
@@ -10093,15 +10187,15 @@ module Aws::QuickSight
       req.send_request(options)
     end
 
-    # Describes the self-upgrade configuration for a Quick Suite account.
+    # Describes the self-upgrade configuration for a Quick account.
     #
     # @option params [required, String] :aws_account_id
     #   The ID of the Amazon Web Services account that contains the Quick
-    #   Suite self-upgrade configuration.
+    #   self-upgrade configuration.
     #
     # @option params [required, String] :namespace
-    #   The Quick Suite namespace that you want to describe the Quick Suite
-    #   self-upgrade configuration for.
+    #   The Quick namespace that you want to describe the Quick self-upgrade
+    #   configuration for.
     #
     # @return [Types::DescribeSelfUpgradeConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -11086,7 +11180,7 @@ module Aws::QuickSight
       req.send_request(options)
     end
 
-    # Generates an embed URL that you can use to embed an Amazon Quick Suite
+    # Generates an embed URL that you can use to embed an Amazon Quick
     # dashboard or visual in your website, without having to register any
     # reader users. Before you use this action, make sure that you have
     # configured the dashboards and permissions.
@@ -11104,14 +11198,14 @@ module Aws::QuickSight
     #   session duration is 10 hours.
     #
     # * You are charged only when the URL is used or there is interaction
-    #   with Amazon Quick Suite.
+    #   with Amazon Quick.
     #
     # For more information, see [Embedded Analytics][1] in the *Amazon Quick
-    # Suite User Guide*.
+    # User Guide*.
     #
     # For more information about the high-level steps for embedding and for
     # an interactive demo of the ways you can customize embedding, visit the
-    # [Amazon Quick Suite Developer Portal][2].
+    # [Amazon Quick Developer Portal][2].
     #
     #
     #
@@ -11128,8 +11222,8 @@ module Aws::QuickSight
     #
     # @option params [required, String] :namespace
     #   The Amazon Quick Sight namespace that the anonymous user virtually
-    #   belongs to. If you are not using an Amazon Quick Suite custom
-    #   namespace, set this to `default`.
+    #   belongs to. If you are not using an Amazon Quick custom namespace, set
+    #   this to `default`.
     #
     # @option params [Array<Types::SessionTag>] :session_tags
     #   Session tags are user-specified strings that identify a session in
@@ -11139,17 +11233,27 @@ module Aws::QuickSight
     #   `DataSet$RowLevelPermissionTagConfiguration` parameter so that session
     #   tags can be used to provide row-level security.
     #
-    #   When using session tags, you must call
-    #   `GenerateEmbedUrlForAnonymousUser` from a secure, trusted environment.
-    #   The API call passes session tags that enable server-side data
-    #   redaction by using the row-level security (RLS) rules configured in
-    #   your datasets. A secure, trusted environment has access controls that
-    #   you implement. These controls ensure that only your server or
-    #   authorized users can add or modify session tags.
+    #   When using `SessionTags` in `GenerateEmbedUrlForAnonymousUser`,
+    #
+    #   * Treat `SessionTags` as security credentials. Do not expose
+    #     `SessionTags` to end users or client-side code.
+    #
+    #   * Implement server-side controls. Ensure that `SessionTags` are set
+    #     exclusively by your trusted backend services, not by parameters that
+    #     end users can modify.
+    #
+    #   * Protect `SessionTags` from enumeration. Ensure that users in one
+    #     tenant cannot discover or guess sessionTag values belonging to other
+    #     tenants.
+    #
+    #   * Review your architecture. If downstream customers or partners are
+    #     allowed to call the `GenerateEmbedUrlForAnonymousUser` API directly,
+    #     evaluate whether those parties could specify sessionTag values for
+    #     tenants they should not access.
     #
     #   Besides, these are not the tags used for the Amazon Web Services
     #   resource tagging feature. For more information, see [Using Row-Level
-    #   Security (RLS) with Tags][1] in the *Amazon Quick Suite User Guide*.
+    #   Security (RLS) with Tags][1] in the *Amazon Quick User Guide*.
     #
     #
     #
@@ -11247,11 +11351,11 @@ module Aws::QuickSight
       req.send_request(options)
     end
 
-    # Generates an embed URL that you can use to embed an Amazon Quick Suite
+    # Generates an embed URL that you can use to embed an Amazon Quick
     # experience in your website. This action can be used for any type of
-    # user registered in an Amazon Quick Suite account. Before you use this
+    # user registered in an Amazon Quick account. Before you use this
     # action, make sure that you have configured the relevant Amazon Quick
-    # Suite resource and permissions.
+    # resource and permissions.
     #
     # The following rules apply to the generated URL:
     #
@@ -11267,14 +11371,14 @@ module Aws::QuickSight
     #   hours (maximum). The default session duration is 10 hours.
     #
     # * You are charged only when the URL is used or there is interaction
-    #   with Amazon Quick Suite.
+    #   with Amazon Quick.
     #
     # For more information, see [Embedded Analytics][1] in the *Amazon Quick
-    # Suite User Guide*.
+    # User Guide*.
     #
     # For more information about the high-level steps for embedding and for
     # an interactive demo of the ways you can customize embedding, visit the
-    # [Amazon Quick Suite Developer Portal][2].
+    # [Amazon Quick Developer Portal][2].
     #
     #
     #
@@ -11294,8 +11398,8 @@ module Aws::QuickSight
     #
     # @option params [required, Types::RegisteredUserEmbeddingExperienceConfiguration] :experience_configuration
     #   The experience that you want to embed. For registered users, you can
-    #   embed Quick Suite dashboards, Amazon Quick Sight visuals, the Amazon
-    #   Quick Sight Q search bar, the Amazon Quick Sight Generative Q&amp;A
+    #   embed Quick dashboards, Amazon Quick Sight visuals, the Amazon Quick
+    #   Sight Q search bar, the Amazon Quick Sight Generative Q&amp;A
     #   experience, or the entire Amazon Quick Sight console.
     #
     # @option params [Array<String>] :allowed_domains
@@ -11448,7 +11552,7 @@ module Aws::QuickSight
     #
     # @option params [required, Types::RegisteredUserEmbeddingExperienceConfiguration] :experience_configuration
     #   The type of experience you want to embed. For registered users, you
-    #   can embed Quick Suite dashboards or the Amazon Quick Sight console.
+    #   can embed Quick dashboards or the Amazon Quick Sight console.
     #
     #   <note markdown="1"> Exactly one of the experience configurations is required. You can
     #   choose `Dashboard` or `QuickSightConsole`. You cannot choose more than
@@ -11583,18 +11687,18 @@ module Aws::QuickSight
     # * They are valid for 5 minutes after you run this command.
     #
     # * You are charged only when the URL is used or there is interaction
-    #   with Quick Suite.
+    #   with Quick.
     #
     # * The resulting user session is valid for 15 minutes (default) up to
     #   10 hours (maximum). You can use the optional
     #   `SessionLifetimeInMinutes` parameter to customize session duration.
     #
     # For more information, see [Embedding Analytics Using
-    # GetDashboardEmbedUrl][1] in the *Amazon Quick Suite User Guide*.
+    # GetDashboardEmbedUrl][1] in the *Amazon Quick User Guide*.
     #
     # For more information about the high-level steps for embedding and for
     # an interactive demo of the ways you can customize embedding, visit the
-    # [Amazon Quick Suite Developer Portal][2].
+    # [Amazon Quick Developer Portal][2].
     #
     #
     #
@@ -11635,10 +11739,10 @@ module Aws::QuickSight
     #   the user session is not persisted. The default is `FALSE`.
     #
     # @option params [String] :user_arn
-    #   The Amazon Quick Suite user's Amazon Resource Name (ARN), for use
-    #   with `QUICKSIGHT` identity type. You can use this for any Amazon Quick
-    #   Suite users in your account (readers, authors, or admins)
-    #   authenticated as one of the following:
+    #   The Amazon Quick user's Amazon Resource Name (ARN), for use with
+    #   `QUICKSIGHT` identity type. You can use this for any Amazon Quick
+    #   users in your account (readers, authors, or admins) authenticated as
+    #   one of the following:
     #
     #   * Active Directory (AD) users or group members
     #
@@ -11660,7 +11764,7 @@ module Aws::QuickSight
     #   A list of one or more dashboard IDs that you want anonymous users to
     #   have tempporary access to. Currently, the `IdentityType` parameter
     #   must be set to `ANONYMOUS` because other identity types authenticate
-    #   as Quick Suite or IAM users. For example, if you set "`--dashboard-id
+    #   as Quick or IAM users. For example, if you set "`--dashboard-id
     #   dash_id1 --dashboard-id dash_id2 dash_id3 identity-type ANONYMOUS`",
     #   the session can access all three dashboards.
     #
@@ -11931,11 +12035,11 @@ module Aws::QuickSight
     # permissions profile to the user with the ` UpdateUser ` API operation.
     # Use ` RegisterUser ` API operation to add a new user with a custom
     # permission profile attached. For more information, see the following
-    # sections in the *Amazon Quick Suite User Guide*:
+    # sections in the *Amazon Quick User Guide*:
     #
     # * [Embedding Analytics][1]
     #
-    # * [Customizing Access to the Amazon Quick Suite Console][2]
+    # * [Customizing Access to the Amazon Quick Console][2]
     #
     #
     #
@@ -11969,10 +12073,10 @@ module Aws::QuickSight
     #   15-600 minutes.
     #
     # @option params [String] :user_arn
-    #   The Amazon Quick Suite user's Amazon Resource Name (ARN), for use
-    #   with `QUICKSIGHT` identity type. You can use this for any type of
-    #   Amazon Quick Suite users in your account (readers, authors, or
-    #   admins). They need to be authenticated as one of the following:
+    #   The Amazon Quick user's Amazon Resource Name (ARN), for use with
+    #   `QUICKSIGHT` identity type. You can use this for any type of Amazon
+    #   Quick users in your account (readers, authors, or admins). They need
+    #   to be authenticated as one of the following:
     #
     #   1.  Active Directory (AD) users or group members
     #
@@ -12352,6 +12456,7 @@ module Aws::QuickSight
     #   resp.custom_permissions_list[0].capabilities.publish_without_approval #=> String, one of "DENY"
     #   resp.custom_permissions_list[0].capabilities.use_bedrock_models #=> String, one of "DENY"
     #   resp.custom_permissions_list[0].capabilities.perform_flow_ui_task #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.approve_flow_share_requests #=> String, one of "DENY"
     #   resp.custom_permissions_list[0].capabilities.use_agent_web_search #=> String, one of "DENY"
     #   resp.custom_permissions_list[0].capabilities.knowledge_base #=> String, one of "DENY"
     #   resp.custom_permissions_list[0].capabilities.action #=> String, one of "DENY"
@@ -12527,11 +12632,20 @@ module Aws::QuickSight
     #   resp.custom_permissions_list[0].capabilities.create_and_update_new_relic_action #=> String, one of "DENY"
     #   resp.custom_permissions_list[0].capabilities.share_new_relic_action #=> String, one of "DENY"
     #   resp.custom_permissions_list[0].capabilities.use_new_relic_action #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.topic #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.edit_visual_with_q #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.build_calculated_field_with_q #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.create_dashboard_executive_summary_with_q #=> String, one of "DENY"
     #   resp.custom_permissions_list[0].capabilities.space #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.create_spaces #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.share_spaces #=> String, one of "DENY"
     #   resp.custom_permissions_list[0].capabilities.chat_agent #=> String, one of "DENY"
     #   resp.custom_permissions_list[0].capabilities.create_chat_agents #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.share_chat_agents #=> String, one of "DENY"
     #   resp.custom_permissions_list[0].capabilities.research #=> String, one of "DENY"
     #   resp.custom_permissions_list[0].capabilities.self_upgrade_user_role #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.extension #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.manage_shared_folders #=> String, one of "DENY"
     #   resp.next_token #=> String
     #   resp.request_id #=> String
     #
@@ -12813,7 +12927,7 @@ module Aws::QuickSight
     #   resp.data_sources[0].data_source_parameters.snowflake_parameters.host #=> String
     #   resp.data_sources[0].data_source_parameters.snowflake_parameters.database #=> String
     #   resp.data_sources[0].data_source_parameters.snowflake_parameters.warehouse #=> String
-    #   resp.data_sources[0].data_source_parameters.snowflake_parameters.authentication_type #=> String, one of "PASSWORD", "TOKEN", "X509"
+    #   resp.data_sources[0].data_source_parameters.snowflake_parameters.authentication_type #=> String, one of "PASSWORD", "KEYPAIR", "TOKEN", "X509"
     #   resp.data_sources[0].data_source_parameters.snowflake_parameters.database_access_control_role #=> String
     #   resp.data_sources[0].data_source_parameters.snowflake_parameters.o_auth_parameters.token_provider_url #=> String
     #   resp.data_sources[0].data_source_parameters.snowflake_parameters.o_auth_parameters.o_auth_scope #=> String
@@ -12840,7 +12954,7 @@ module Aws::QuickSight
     #   resp.data_sources[0].data_source_parameters.starburst_parameters.catalog #=> String
     #   resp.data_sources[0].data_source_parameters.starburst_parameters.product_type #=> String, one of "GALAXY", "ENTERPRISE"
     #   resp.data_sources[0].data_source_parameters.starburst_parameters.database_access_control_role #=> String
-    #   resp.data_sources[0].data_source_parameters.starburst_parameters.authentication_type #=> String, one of "PASSWORD", "TOKEN", "X509"
+    #   resp.data_sources[0].data_source_parameters.starburst_parameters.authentication_type #=> String, one of "PASSWORD", "KEYPAIR", "TOKEN", "X509"
     #   resp.data_sources[0].data_source_parameters.starburst_parameters.o_auth_parameters.token_provider_url #=> String
     #   resp.data_sources[0].data_source_parameters.starburst_parameters.o_auth_parameters.o_auth_scope #=> String
     #   resp.data_sources[0].data_source_parameters.starburst_parameters.o_auth_parameters.identity_provider_vpc_connection_properties.vpc_connection_arn #=> String
@@ -12916,7 +13030,7 @@ module Aws::QuickSight
     #   resp.data_sources[0].alternate_data_source_parameters[0].snowflake_parameters.host #=> String
     #   resp.data_sources[0].alternate_data_source_parameters[0].snowflake_parameters.database #=> String
     #   resp.data_sources[0].alternate_data_source_parameters[0].snowflake_parameters.warehouse #=> String
-    #   resp.data_sources[0].alternate_data_source_parameters[0].snowflake_parameters.authentication_type #=> String, one of "PASSWORD", "TOKEN", "X509"
+    #   resp.data_sources[0].alternate_data_source_parameters[0].snowflake_parameters.authentication_type #=> String, one of "PASSWORD", "KEYPAIR", "TOKEN", "X509"
     #   resp.data_sources[0].alternate_data_source_parameters[0].snowflake_parameters.database_access_control_role #=> String
     #   resp.data_sources[0].alternate_data_source_parameters[0].snowflake_parameters.o_auth_parameters.token_provider_url #=> String
     #   resp.data_sources[0].alternate_data_source_parameters[0].snowflake_parameters.o_auth_parameters.o_auth_scope #=> String
@@ -12943,7 +13057,7 @@ module Aws::QuickSight
     #   resp.data_sources[0].alternate_data_source_parameters[0].starburst_parameters.catalog #=> String
     #   resp.data_sources[0].alternate_data_source_parameters[0].starburst_parameters.product_type #=> String, one of "GALAXY", "ENTERPRISE"
     #   resp.data_sources[0].alternate_data_source_parameters[0].starburst_parameters.database_access_control_role #=> String
-    #   resp.data_sources[0].alternate_data_source_parameters[0].starburst_parameters.authentication_type #=> String, one of "PASSWORD", "TOKEN", "X509"
+    #   resp.data_sources[0].alternate_data_source_parameters[0].starburst_parameters.authentication_type #=> String, one of "PASSWORD", "KEYPAIR", "TOKEN", "X509"
     #   resp.data_sources[0].alternate_data_source_parameters[0].starburst_parameters.o_auth_parameters.token_provider_url #=> String
     #   resp.data_sources[0].alternate_data_source_parameters[0].starburst_parameters.o_auth_parameters.o_auth_scope #=> String
     #   resp.data_sources[0].alternate_data_source_parameters[0].starburst_parameters.o_auth_parameters.identity_provider_vpc_connection_properties.vpc_connection_arn #=> String
@@ -13704,14 +13818,14 @@ module Aws::QuickSight
       req.send_request(options)
     end
 
-    # Lists all self-upgrade requests for a Quick Suite account.
+    # Lists all self-upgrade requests for a Quick account.
     #
     # @option params [required, String] :aws_account_id
     #   The ID of the Amazon Web Services account that contains the
     #   self-upgrade requests.
     #
     # @option params [required, String] :namespace
-    #   The Quick Suite namespace for the self-upgrade requests.
+    #   The Quick namespace for the self-upgrade requests.
     #
     # @option params [String] :next_token
     #   The token for the next set of results, or null if there are no more
@@ -14898,9 +15012,9 @@ module Aws::QuickSight
     # user is authenticated and receives the embed URL that is specific to
     # that user. The IAM Identity Center application that the user has
     # logged into needs to have [trusted Identity Propagation enabled for
-    # Quick Suite][2] with the scope value set to `quicksight:read`. Before
-    # you use this action, make sure that you have configured the relevant
-    # Quick Suite resource and permissions.
+    # Quick][2] with the scope value set to `quicksight:read`. Before you
+    # use this action, make sure that you have configured the relevant Quick
+    # resource and permissions.
     #
     # We recommend enabling the `QSearchStatus` API to unlock the full
     # potential of `PredictQnA`. When `QSearchStatus` is enabled, it first
@@ -15841,7 +15955,7 @@ module Aws::QuickSight
       req.send_request(options)
     end
 
-    # Searches for any Q topic that exists in an Quick Suite account.
+    # Searches for any Q topic that exists in an Quick account.
     #
     # @option params [required, String] :aws_account_id
     #   The ID of the Amazon Web Services account that contains the topic that
@@ -16268,7 +16382,7 @@ module Aws::QuickSight
     #               host: "Host", # required
     #               database: "Database", # required
     #               warehouse: "Warehouse", # required
-    #               authentication_type: "PASSWORD", # accepts PASSWORD, TOKEN, X509
+    #               authentication_type: "PASSWORD", # accepts PASSWORD, KEYPAIR, TOKEN, X509
     #               database_access_control_role: "DatabaseAccessControlRole",
     #               o_auth_parameters: {
     #                 token_provider_url: "TokenProviderUrl", # required
@@ -16315,7 +16429,7 @@ module Aws::QuickSight
     #               catalog: "Catalog", # required
     #               product_type: "GALAXY", # accepts GALAXY, ENTERPRISE
     #               database_access_control_role: "DatabaseAccessControlRole",
-    #               authentication_type: "PASSWORD", # accepts PASSWORD, TOKEN, X509
+    #               authentication_type: "PASSWORD", # accepts PASSWORD, KEYPAIR, TOKEN, X509
     #               o_auth_parameters: {
     #                 token_provider_url: "TokenProviderUrl", # required
     #                 o_auth_scope: "OAuthScope",
@@ -16583,6 +16697,54 @@ module Aws::QuickSight
     # @param [Hash] params ({})
     def start_asset_bundle_import_job(params = {}, options = {})
       req = build_request(:start_asset_bundle_import_job, params)
+      req.send_request(options)
+    end
+
+    # Starts a new job for a specified automation. The job runs the
+    # automation with the provided input payload.
+    #
+    # @option params [required, String] :aws_account_id
+    #   The ID of the Amazon Web Services account that contains the
+    #   automation.
+    #
+    # @option params [required, String] :automation_group_id
+    #   The ID of the automation group that contains the automation to run.
+    #
+    # @option params [required, String] :automation_id
+    #   The ID of the automation to run.
+    #
+    # @option params [String] :input_payload
+    #   The input payload for the automation job, provided as a JSON string.
+    #
+    # @return [Types::StartAutomationJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartAutomationJobResponse#arn #arn} => String
+    #   * {Types::StartAutomationJobResponse#job_id #job_id} => String
+    #   * {Types::StartAutomationJobResponse#status #status} => Integer
+    #   * {Types::StartAutomationJobResponse#request_id #request_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_automation_job({
+    #     aws_account_id: "AwsAccountId", # required
+    #     automation_group_id: "AutomateId", # required
+    #     automation_id: "AutomateId", # required
+    #     input_payload: "SensitiveIOPayload",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.job_id #=> String
+    #   resp.status #=> Integer
+    #   resp.request_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/StartAutomationJob AWS API Documentation
+    #
+    # @overload start_automation_job(params = {})
+    # @param [Hash] params ({})
+    def start_automation_job(params = {}, options = {})
+      req = build_request(:start_automation_job, params)
       req.send_request(options)
     end
 
@@ -17502,16 +17664,16 @@ module Aws::QuickSight
       req.send_request(options)
     end
 
-    # Updates an Quick Suite application with a token exchange grant. This
-    # operation only supports Quick Suite applications that are registered
-    # with IAM Identity Center.
+    # Updates an Quick application with a token exchange grant. This
+    # operation only supports Quick applications that are registered with
+    # IAM Identity Center.
     #
     # @option params [required, String] :aws_account_id
     #   The ID of the Amazon Web Services account to be updated with a token
     #   exchange grant.
     #
     # @option params [required, String] :namespace
-    #   The namespace of the Quick Suite application.
+    #   The namespace of the Quick application.
     #
     # @return [Types::UpdateApplicationWithTokenExchangeGrantResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -17545,7 +17707,7 @@ module Aws::QuickSight
     #   The ID of the Amazon Web Services account that owns the brand.
     #
     # @option params [required, String] :brand_id
-    #   The ID of the Quick Suite brand.
+    #   The ID of the Quick brand.
     #
     # @option params [Types::BrandDefinition] :brand_definition
     #   The definition of the brand.
@@ -17777,7 +17939,7 @@ module Aws::QuickSight
     #   The ID of the Amazon Web Services account that owns the brand.
     #
     # @option params [required, String] :brand_id
-    #   The ID of the Quick Suite brand.
+    #   The ID of the Quick brand.
     #
     # @option params [required, String] :version_id
     #   The ID of the published version.
@@ -17863,6 +18025,7 @@ module Aws::QuickSight
     #       publish_without_approval: "DENY", # accepts DENY
     #       use_bedrock_models: "DENY", # accepts DENY
     #       perform_flow_ui_task: "DENY", # accepts DENY
+    #       approve_flow_share_requests: "DENY", # accepts DENY
     #       use_agent_web_search: "DENY", # accepts DENY
     #       knowledge_base: "DENY", # accepts DENY
     #       action: "DENY", # accepts DENY
@@ -18038,11 +18201,20 @@ module Aws::QuickSight
     #       create_and_update_new_relic_action: "DENY", # accepts DENY
     #       share_new_relic_action: "DENY", # accepts DENY
     #       use_new_relic_action: "DENY", # accepts DENY
+    #       topic: "DENY", # accepts DENY
+    #       edit_visual_with_q: "DENY", # accepts DENY
+    #       build_calculated_field_with_q: "DENY", # accepts DENY
+    #       create_dashboard_executive_summary_with_q: "DENY", # accepts DENY
     #       space: "DENY", # accepts DENY
+    #       create_spaces: "DENY", # accepts DENY
+    #       share_spaces: "DENY", # accepts DENY
     #       chat_agent: "DENY", # accepts DENY
     #       create_chat_agents: "DENY", # accepts DENY
+    #       share_chat_agents: "DENY", # accepts DENY
     #       research: "DENY", # accepts DENY
     #       self_upgrade_user_role: "DENY", # accepts DENY
+    #       extension: "DENY", # accepts DENY
+    #       manage_shared_folders: "DENY", # accepts DENY
     #     },
     #   })
     #
@@ -18487,7 +18659,7 @@ module Aws::QuickSight
     #             {
     #               name: "ColumnName", # required
     #               id: "ColumnId",
-    #               type: "STRING", # required, accepts STRING, INTEGER, DECIMAL, DATETIME, BIT, BOOLEAN, JSON
+    #               type: "STRING", # required, accepts STRING, INTEGER, DECIMAL, DATETIME, BIT, BOOLEAN, JSON, SEMISTRUCT
     #               sub_type: "FLOAT", # accepts FLOAT, FIXED
     #             },
     #           ],
@@ -18500,7 +18672,7 @@ module Aws::QuickSight
     #             {
     #               name: "ColumnName", # required
     #               id: "ColumnId",
-    #               type: "STRING", # required, accepts STRING, INTEGER, DECIMAL, DATETIME, BIT, BOOLEAN, JSON
+    #               type: "STRING", # required, accepts STRING, INTEGER, DECIMAL, DATETIME, BIT, BOOLEAN, JSON, SEMISTRUCT
     #               sub_type: "FLOAT", # accepts FLOAT, FIXED
     #             },
     #           ],
@@ -18519,7 +18691,7 @@ module Aws::QuickSight
     #             {
     #               name: "ColumnName", # required
     #               id: "ColumnId",
-    #               type: "STRING", # required, accepts STRING, INTEGER, DECIMAL, DATETIME, BIT, BOOLEAN, JSON
+    #               type: "STRING", # required, accepts STRING, INTEGER, DECIMAL, DATETIME, BIT, BOOLEAN, JSON, SEMISTRUCT
     #               sub_type: "FLOAT", # accepts FLOAT, FIXED
     #             },
     #           ],
@@ -18536,7 +18708,7 @@ module Aws::QuickSight
     #             {
     #               name: "ColumnName", # required
     #               id: "ColumnId",
-    #               type: "STRING", # required, accepts STRING, INTEGER, DECIMAL, DATETIME, BIT, BOOLEAN, JSON
+    #               type: "STRING", # required, accepts STRING, INTEGER, DECIMAL, DATETIME, BIT, BOOLEAN, JSON, SEMISTRUCT
     #               sub_type: "FLOAT", # accepts FLOAT, FIXED
     #             },
     #           ],
@@ -18792,7 +18964,7 @@ module Aws::QuickSight
     #               {
     #                 name: "ColumnName", # required
     #                 id: "ColumnId",
-    #                 type: "STRING", # required, accepts STRING, INTEGER, DECIMAL, DATETIME, BIT, BOOLEAN, JSON
+    #                 type: "STRING", # required, accepts STRING, INTEGER, DECIMAL, DATETIME, BIT, BOOLEAN, JSON, SEMISTRUCT
     #                 sub_type: "FLOAT", # accepts FLOAT, FIXED
     #               },
     #             ],
@@ -19364,7 +19536,7 @@ module Aws::QuickSight
     #         host: "Host", # required
     #         database: "Database", # required
     #         warehouse: "Warehouse", # required
-    #         authentication_type: "PASSWORD", # accepts PASSWORD, TOKEN, X509
+    #         authentication_type: "PASSWORD", # accepts PASSWORD, KEYPAIR, TOKEN, X509
     #         database_access_control_role: "DatabaseAccessControlRole",
     #         o_auth_parameters: {
     #           token_provider_url: "TokenProviderUrl", # required
@@ -19411,7 +19583,7 @@ module Aws::QuickSight
     #         catalog: "Catalog", # required
     #         product_type: "GALAXY", # accepts GALAXY, ENTERPRISE
     #         database_access_control_role: "DatabaseAccessControlRole",
-    #         authentication_type: "PASSWORD", # accepts PASSWORD, TOKEN, X509
+    #         authentication_type: "PASSWORD", # accepts PASSWORD, KEYPAIR, TOKEN, X509
     #         o_auth_parameters: {
     #           token_provider_url: "TokenProviderUrl", # required
     #           o_auth_scope: "OAuthScope",
@@ -19552,7 +19724,7 @@ module Aws::QuickSight
     #               host: "Host", # required
     #               database: "Database", # required
     #               warehouse: "Warehouse", # required
-    #               authentication_type: "PASSWORD", # accepts PASSWORD, TOKEN, X509
+    #               authentication_type: "PASSWORD", # accepts PASSWORD, KEYPAIR, TOKEN, X509
     #               database_access_control_role: "DatabaseAccessControlRole",
     #               o_auth_parameters: {
     #                 token_provider_url: "TokenProviderUrl", # required
@@ -19599,7 +19771,7 @@ module Aws::QuickSight
     #               catalog: "Catalog", # required
     #               product_type: "GALAXY", # accepts GALAXY, ENTERPRISE
     #               database_access_control_role: "DatabaseAccessControlRole",
-    #               authentication_type: "PASSWORD", # accepts PASSWORD, TOKEN, X509
+    #               authentication_type: "PASSWORD", # accepts PASSWORD, KEYPAIR, TOKEN, X509
     #               o_auth_parameters: {
     #                 token_provider_url: "TokenProviderUrl", # required
     #                 o_auth_scope: "OAuthScope",
@@ -19656,6 +19828,11 @@ module Aws::QuickSight
     #       web_proxy_credentials: {
     #         web_proxy_username: "DbUsername", # required
     #         web_proxy_password: "Password", # required
+    #       },
+    #       o_auth_client_credentials: {
+    #         client_id: "OAuthClientId",
+    #         client_secret: "OAuthClientSecret",
+    #         username: "OAuthUsername",
     #       },
     #     },
     #     vpc_connection_properties: {
@@ -20260,8 +20437,8 @@ module Aws::QuickSight
     # Before you can turn on public sharing on your account, make sure to
     # give public sharing permissions to an administrative user in the
     # Identity and Access Management (IAM) console. For more information on
-    # using IAM with Amazon Quick Sight, see [Using Quick Suite with IAM][1]
-    # in the *Amazon Quick Sight User Guide*.
+    # using IAM with Amazon Quick Sight, see [Using Quick with IAM][1] in
+    # the *Amazon Quick Sight User Guide*.
     #
     #
     #
@@ -20273,7 +20450,7 @@ module Aws::QuickSight
     #
     # @option params [Boolean] :public_sharing_enabled
     #   A Boolean value that indicates whether public sharing is turned on for
-    #   an Quick Suite account.
+    #   an Quick account.
     #
     # @return [Types::UpdatePublicSharingSettingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -20522,15 +20699,15 @@ module Aws::QuickSight
       req.send_request(options)
     end
 
-    # Updates a self-upgrade request for a Quick Suite user by approving,
-    # denying, or verifying the request.
+    # Updates a self-upgrade request for a Quick user by approving, denying,
+    # or verifying the request.
     #
     # @option params [required, String] :aws_account_id
     #   The ID of the Amazon Web Services account that contains the
     #   self-upgrade request.
     #
     # @option params [required, String] :namespace
-    #   The Quick Suite namespace for the self-upgrade request.
+    #   The Quick namespace for the self-upgrade request.
     #
     # @option params [required, String] :upgrade_request_id
     #   The ID of the self-upgrade request to update.
@@ -20577,19 +20754,18 @@ module Aws::QuickSight
       req.send_request(options)
     end
 
-    # Updates the self-upgrade configuration for a Quick Suite account.
+    # Updates the self-upgrade configuration for a Quick account.
     #
     # @option params [required, String] :aws_account_id
     #   The ID of the Amazon Web Services account that contains the Quick
-    #   Suite self-upgrade configuration that you want to update.
+    #   self-upgrade configuration that you want to update.
     #
     # @option params [required, String] :namespace
-    #   The Quick Suite namespace that you want to update the Quick Suite
-    #   self-upgrade configuration for.
+    #   The Quick namespace that you want to update the Quick self-upgrade
+    #   configuration for.
     #
     # @option params [required, String] :self_upgrade_status
-    #   The self-upgrade status that you want to set for the Quick Suite
-    #   account.
+    #   The self-upgrade status that you want to set for the Quick account.
     #
     # @return [Types::UpdateSelfUpgradeConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -21853,7 +22029,7 @@ module Aws::QuickSight
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-quicksight'
-      context[:gem_version] = '1.172.0'
+      context[:gem_version] = '1.177.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

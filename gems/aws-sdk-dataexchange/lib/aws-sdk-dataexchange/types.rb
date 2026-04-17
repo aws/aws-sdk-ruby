@@ -176,6 +176,20 @@ module Aws::DataExchange
       include Aws::Structure
     end
 
+    # The configuration for the asset, which can include tags.
+    #
+    # @!attribute [rw] tags
+    #   The tags to be applied to assets created by the job.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/AssetConfiguration AWS API Documentation
+    #
+    class AssetConfiguration < Struct.new(
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The destination for the asset.
     #
     # @!attribute [rw] asset_id
@@ -704,6 +718,11 @@ module Aws::DataExchange
       include Aws::Structure
     end
 
+    # @!attribute [rw] asset_configuration
+    #   The configuration for the asset, including tags to be applied to
+    #   assets created by the job.
+    #   @return [Types::AssetConfiguration]
+    #
     # @!attribute [rw] details
     #   The details for the CreateJob request.
     #   @return [Types::RequestDetails]
@@ -715,6 +734,7 @@ module Aws::DataExchange
     # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/CreateJobRequest AWS API Documentation
     #
     class CreateJobRequest < Struct.new(
+      :asset_configuration,
       :details,
       :type)
       SENSITIVE = []
@@ -724,6 +744,11 @@ module Aws::DataExchange
     # @!attribute [rw] arn
     #   The ARN for the job.
     #   @return [String]
+    #
+    # @!attribute [rw] asset_configuration
+    #   The configuration for the asset, including tags applied to assets
+    #   created by the job.
+    #   @return [Types::AssetConfiguration]
     #
     # @!attribute [rw] created_at
     #   The date and time that the job was created, in ISO 8601 format.
@@ -757,6 +782,7 @@ module Aws::DataExchange
     #
     class CreateJobResponse < Struct.new(
       :arn,
+      :asset_configuration,
       :created_at,
       :details,
       :errors,
@@ -1544,6 +1570,10 @@ module Aws::DataExchange
     #   viewing the entitled copy of its owned asset.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   The tags for the asset.
+    #   @return [Hash<String,String>]
+    #
     # @!attribute [rw] updated_at
     #   The date and time that the asset was last updated, in ISO 8601
     #   format.
@@ -1561,6 +1591,7 @@ module Aws::DataExchange
       :name,
       :revision_id,
       :source_id,
+      :tags,
       :updated_at)
       SENSITIVE = []
       include Aws::Structure
@@ -1811,6 +1842,11 @@ module Aws::DataExchange
     #   The ARN for the job.
     #   @return [String]
     #
+    # @!attribute [rw] asset_configuration
+    #   The configuration for the asset, including tags applied to assets
+    #   created by the job.
+    #   @return [Types::AssetConfiguration]
+    #
     # @!attribute [rw] created_at
     #   The date and time that the job was created, in ISO 8601 format.
     #   @return [Time]
@@ -1843,6 +1879,7 @@ module Aws::DataExchange
     #
     class GetJobResponse < Struct.new(
       :arn,
+      :asset_configuration,
       :created_at,
       :details,
       :errors,
@@ -2460,6 +2497,11 @@ module Aws::DataExchange
     #   The ARN for the job.
     #   @return [String]
     #
+    # @!attribute [rw] asset_configuration
+    #   The configuration for the asset, including tags applied to assets
+    #   created by the job.
+    #   @return [Types::AssetConfiguration]
+    #
     # @!attribute [rw] created_at
     #   The date and time that the job was created, in ISO 8601 format.
     #   @return [Time]
@@ -2493,6 +2535,7 @@ module Aws::DataExchange
     #
     class JobEntry < Struct.new(
       :arn,
+      :asset_configuration,
       :created_at,
       :details,
       :errors,
@@ -3931,6 +3974,26 @@ module Aws::DataExchange
     class TableLFTagPolicyAndPermissions < Struct.new(
       :expression,
       :permissions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A tag consisting of a key-value pair that can be applied to a
+    # resource.
+    #
+    # @!attribute [rw] key
+    #   The key of the tag.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value of the tag.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/Tag AWS API Documentation
+    #
+    class Tag < Struct.new(
+      :key,
+      :value)
       SENSITIVE = []
       include Aws::Structure
     end

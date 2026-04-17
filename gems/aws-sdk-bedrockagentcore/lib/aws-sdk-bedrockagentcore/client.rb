@@ -885,7 +885,7 @@ module Aws::BedrockAgentCore
     # @option params [required, String] :evaluator_id
     #   The unique identifier of the evaluator to use for scoring. Can be a
     #   built-in evaluator (e.g., `Builtin.Helpfulness`,
-    #   `Builtin.Correctness`) or a custom evaluator ARN created through the
+    #   `Builtin.Correctness`) or a custom evaluator Id created through the
     #   control plane API.
     #
     # @option params [required, Types::EvaluationInput] :evaluation_input
@@ -899,6 +899,14 @@ module Aws::BedrockAgentCore
     #   Allows targeting evaluation at different levels: individual tool
     #   calls, single request-response interactions (traces), or entire
     #   conversation sessions.
+    #
+    # @option params [Array<Types::EvaluationReferenceInput>] :evaluation_reference_inputs
+    #   Ground truth data to compare against agent responses during
+    #   evaluation. Allows to provide expected responses, assertions, and
+    #   expected tool trajectories at different evaluation levels.
+    #   Session-level reference inputs apply to the entire conversation, while
+    #   trace-level reference inputs target specific request-response
+    #   interactions identified by trace ID.
     #
     # @return [Types::EvaluateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -918,6 +926,28 @@ module Aws::BedrockAgentCore
     #       span_ids: ["SpanId"],
     #       trace_ids: ["TraceId"],
     #     },
+    #     evaluation_reference_inputs: [
+    #       {
+    #         context: { # required
+    #           span_context: {
+    #             session_id: "String", # required
+    #             trace_id: "String",
+    #             span_id: "String",
+    #           },
+    #         },
+    #         expected_response: {
+    #           text: "EvaluationContentTextString",
+    #         },
+    #         assertions: [
+    #           {
+    #             text: "EvaluationContentTextString",
+    #           },
+    #         ],
+    #         expected_trajectory: {
+    #           tool_names: ["EvaluationToolName"],
+    #         },
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -937,6 +967,8 @@ module Aws::BedrockAgentCore
     #   resp.evaluation_results[0].token_usage.total_tokens #=> Integer
     #   resp.evaluation_results[0].error_message #=> String
     #   resp.evaluation_results[0].error_code #=> String
+    #   resp.evaluation_results[0].ignored_reference_input_fields #=> Array
+    #   resp.evaluation_results[0].ignored_reference_input_fields[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/Evaluate AWS API Documentation
     #
@@ -1029,11 +1061,13 @@ module Aws::BedrockAgentCore
     #   * {Types::GetBrowserSessionResponse#created_at #created_at} => Time
     #   * {Types::GetBrowserSessionResponse#view_port #view_port} => Types::ViewPort
     #   * {Types::GetBrowserSessionResponse#extensions #extensions} => Array&lt;Types::BrowserExtension&gt;
+    #   * {Types::GetBrowserSessionResponse#enterprise_policies #enterprise_policies} => Array&lt;Types::BrowserEnterprisePolicy&gt;
     #   * {Types::GetBrowserSessionResponse#profile_configuration #profile_configuration} => Types::BrowserProfileConfiguration
     #   * {Types::GetBrowserSessionResponse#session_timeout_seconds #session_timeout_seconds} => Integer
     #   * {Types::GetBrowserSessionResponse#status #status} => String
     #   * {Types::GetBrowserSessionResponse#streams #streams} => Types::BrowserSessionStream
     #   * {Types::GetBrowserSessionResponse#proxy_configuration #proxy_configuration} => Types::ProxyConfiguration
+    #   * {Types::GetBrowserSessionResponse#certificates #certificates} => Array&lt;Types::Certificate&gt;
     #   * {Types::GetBrowserSessionResponse#session_replay_artifact #session_replay_artifact} => String
     #   * {Types::GetBrowserSessionResponse#last_updated_at #last_updated_at} => Time
     #
@@ -1056,6 +1090,11 @@ module Aws::BedrockAgentCore
     #   resp.extensions[0].location.s3.bucket #=> String
     #   resp.extensions[0].location.s3.prefix #=> String
     #   resp.extensions[0].location.s3.version_id #=> String
+    #   resp.enterprise_policies #=> Array
+    #   resp.enterprise_policies[0].location.s3.bucket #=> String
+    #   resp.enterprise_policies[0].location.s3.prefix #=> String
+    #   resp.enterprise_policies[0].location.s3.version_id #=> String
+    #   resp.enterprise_policies[0].type #=> String, one of "MANAGED", "RECOMMENDED"
     #   resp.profile_configuration.profile_identifier #=> String
     #   resp.session_timeout_seconds #=> Integer
     #   resp.status #=> String, one of "READY", "TERMINATED"
@@ -1070,6 +1109,8 @@ module Aws::BedrockAgentCore
     #   resp.proxy_configuration.proxies[0].external_proxy.credentials.basic_auth.secret_arn #=> String
     #   resp.proxy_configuration.bypass.domain_patterns #=> Array
     #   resp.proxy_configuration.bypass.domain_patterns[0] #=> String
+    #   resp.certificates #=> Array
+    #   resp.certificates[0].location.secrets_manager.secret_arn #=> String
     #   resp.session_replay_artifact #=> String
     #   resp.last_updated_at #=> Time
     #
@@ -1119,6 +1160,7 @@ module Aws::BedrockAgentCore
     #   * {Types::GetCodeInterpreterSessionResponse#created_at #created_at} => Time
     #   * {Types::GetCodeInterpreterSessionResponse#session_timeout_seconds #session_timeout_seconds} => Integer
     #   * {Types::GetCodeInterpreterSessionResponse#status #status} => String
+    #   * {Types::GetCodeInterpreterSessionResponse#certificates #certificates} => Array&lt;Types::Certificate&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -1135,6 +1177,8 @@ module Aws::BedrockAgentCore
     #   resp.created_at #=> Time
     #   resp.session_timeout_seconds #=> Integer
     #   resp.status #=> String, one of "READY", "TERMINATED"
+    #   resp.certificates #=> Array
+    #   resp.certificates[0].location.secrets_manager.secret_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/GetCodeInterpreterSession AWS API Documentation
     #
@@ -1456,9 +1500,11 @@ module Aws::BedrockAgentCore
     # Sends a request to an agent or tool hosted in an Amazon Bedrock
     # AgentCore Runtime and receives responses in real-time.
     #
-    # To invoke an agent you must specify the AgentCore Runtime ARN and
-    # provide a payload containing your request. You can optionally specify
-    # a qualifier to target a specific version or endpoint of the agent.
+    # To invoke an agent, you can specify either the AgentCore Runtime ARN
+    # or the agent ID with an account ID, and provide a payload containing
+    # your request. When you use the agent ID instead of the full ARN, you
+    # don't need to URL-encode the identifier. You can optionally specify a
+    # qualifier to target a specific endpoint of the agent.
     #
     # This operation supports streaming responses, allowing you to receive
     # partial responses as they become available. We recommend using
@@ -1522,19 +1568,20 @@ module Aws::BedrockAgentCore
     #   Additional context information for distributed tracing.
     #
     # @option params [required, String] :agent_runtime_arn
-    #   The Amazon Web Services Resource Name (ARN) of the agent runtime to
-    #   invoke. The ARN uniquely identifies the agent runtime resource in
-    #   Amazon Bedrock AgentCore.
+    #   The identifier of the agent runtime to invoke. You can specify either
+    #   the full Amazon Web Services Resource Name (ARN) or the agent ID. If
+    #   you use the agent ID, you must also provide the `accountId` query
+    #   parameter.
     #
     # @option params [String] :qualifier
-    #   The qualifier to use for the agent runtime. This can be a version
-    #   number or an endpoint name that points to a specific version. If not
-    #   specified, Amazon Bedrock AgentCore uses the default version of the
-    #   agent runtime.
+    #   The qualifier to use for the agent runtime. This is an endpoint name
+    #   that points to a specific version. If not specified, Amazon Bedrock
+    #   AgentCore uses the default endpoint of the agent runtime.
     #
     # @option params [String] :account_id
     #   The identifier of the Amazon Web Services account for the agent
-    #   runtime resource.
+    #   runtime resource. This parameter is required when you specify an agent
+    #   ID instead of the full ARN for `agentRuntimeArn`.
     #
     # @option params [required, String, StringIO, File] :payload
     #   The input data to send to the agent runtime. The format of this data
@@ -1594,6 +1641,440 @@ module Aws::BedrockAgentCore
     def invoke_agent_runtime(params = {}, options = {}, &block)
       req = build_request(:invoke_agent_runtime, params)
       req.send_request(options, &block)
+    end
+
+    # Executes a command in a runtime session container and streams the
+    # output back to the caller. This operation allows you to run shell
+    # commands within the agent runtime environment and receive real-time
+    # streaming responses including standard output and standard error.
+    #
+    # To invoke a command, you must specify the agent runtime ARN and a
+    # runtime session ID. The command execution supports streaming
+    # responses, allowing you to receive output as it becomes available
+    # through `contentStart`, `contentDelta`, and `contentStop` events.
+    #
+    # To use this operation, you must have the
+    # `bedrock-agentcore:InvokeAgentRuntimeCommand` permission.
+    #
+    # @option params [String] :content_type
+    #   The MIME type of the input data in the request payload. This tells the
+    #   agent runtime how to interpret the payload data. Common values include
+    #   application/json for JSON data.
+    #
+    # @option params [String] :accept
+    #   The desired MIME type for the response from the agent runtime command.
+    #   This tells the agent runtime what format to use for the response data.
+    #   Common values include application/json for JSON data.
+    #
+    # @option params [String] :runtime_session_id
+    #   The unique identifier of the runtime session in which to execute the
+    #   command. This session ID is used to maintain state and context across
+    #   multiple command invocations.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [String] :trace_id
+    #   The trace identifier for request tracking.
+    #
+    # @option params [String] :trace_parent
+    #   The parent trace information for distributed tracing.
+    #
+    # @option params [String] :trace_state
+    #   The trace state information for distributed tracing.
+    #
+    # @option params [String] :baggage
+    #   Additional context information for distributed tracing.
+    #
+    # @option params [required, String] :agent_runtime_arn
+    #   The Amazon Resource Name (ARN) of the agent runtime on which to
+    #   execute the command. This identifies the specific agent runtime
+    #   environment where the command will run.
+    #
+    # @option params [String] :qualifier
+    #   The qualifier to use for the agent runtime. This is an endpoint name
+    #   that points to a specific version. If not specified, Amazon Bedrock
+    #   AgentCore uses the default endpoint of the agent runtime.
+    #
+    # @option params [String] :account_id
+    #   The identifier of the Amazon Web Services account for the agent
+    #   runtime resource. This parameter is required when you specify an agent
+    #   ID instead of the full ARN for `agentRuntimeArn`.
+    #
+    # @option params [required, Types::InvokeAgentRuntimeCommandRequestBody] :body
+    #   The request body containing the command to execute and optional
+    #   configuration parameters such as timeout settings.
+    #
+    # @return [Types::InvokeAgentRuntimeCommandResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::InvokeAgentRuntimeCommandResponse#runtime_session_id #runtime_session_id} => String
+    #   * {Types::InvokeAgentRuntimeCommandResponse#trace_id #trace_id} => String
+    #   * {Types::InvokeAgentRuntimeCommandResponse#trace_parent #trace_parent} => String
+    #   * {Types::InvokeAgentRuntimeCommandResponse#trace_state #trace_state} => String
+    #   * {Types::InvokeAgentRuntimeCommandResponse#baggage #baggage} => String
+    #   * {Types::InvokeAgentRuntimeCommandResponse#content_type #content_type} => String
+    #   * {Types::InvokeAgentRuntimeCommandResponse#status_code #status_code} => Integer
+    #   * {Types::InvokeAgentRuntimeCommandResponse#stream #stream} => Types::InvokeAgentRuntimeCommandStreamOutput
+    #
+    # @example EventStream Operation Example
+    #
+    #   # You can process the event once it arrives immediately, or wait until the
+    #   # full response is complete and iterate through the eventstream enumerator.
+    #
+    #   # To interact with event immediately, you need to register invoke_agent_runtime_command
+    #   # with callbacks. Callbacks can be registered for specific events or for all
+    #   # events, including error events.
+    #
+    #   # Callbacks can be passed into the `:event_stream_handler` option or within a
+    #   # block statement attached to the #invoke_agent_runtime_command call directly. Hybrid
+    #   # pattern of both is also supported.
+    #
+    #   # `:event_stream_handler` option takes in either a Proc object or
+    #   # Aws::BedrockAgentCore::EventStreams::InvokeAgentRuntimeCommandStreamOutput object.
+    #
+    #   # Usage pattern a): Callbacks with a block attached to #invoke_agent_runtime_command
+    #   # Example for registering callbacks for all event types and an error event
+    #   client.invoke_agent_runtime_command(
+    #     # params input
+    #   ) do |stream|
+    #     stream.on_error_event do |event|
+    #       # catch unmodeled error event in the stream
+    #       raise event
+    #       # => Aws::Errors::EventError
+    #       # event.event_type => :error
+    #       # event.error_code => String
+    #       # event.error_message => String
+    #     end
+    #
+    #     stream.on_event do |event|
+    #       # process all events arrive
+    #       puts event.event_type
+    #       # ...
+    #     end
+    #   end
+    #
+    #   # Usage pattern b): Pass in `:event_stream_handler` for #invoke_agent_runtime_command
+    #   #  1) Create a Aws::BedrockAgentCore::EventStreams::InvokeAgentRuntimeCommandStreamOutput object
+    #   #  Example for registering callbacks with specific events
+    #
+    #   handler = Aws::BedrockAgentCore::EventStreams::InvokeAgentRuntimeCommandStreamOutput.new
+    #   handler.on_chunk_event do |event|
+    #     event # => Aws::BedrockAgentCore::Types::chunk
+    #   end
+    #   handler.on_access_denied_exception_event do |event|
+    #     event # => Aws::BedrockAgentCore::Types::accessDeniedException
+    #   end
+    #   handler.on_internal_server_exception_event do |event|
+    #     event # => Aws::BedrockAgentCore::Types::internalServerException
+    #   end
+    #   handler.on_resource_not_found_exception_event do |event|
+    #     event # => Aws::BedrockAgentCore::Types::resourceNotFoundException
+    #   end
+    #   handler.on_service_quota_exceeded_exception_event do |event|
+    #     event # => Aws::BedrockAgentCore::Types::serviceQuotaExceededException
+    #   end
+    #   handler.on_throttling_exception_event do |event|
+    #     event # => Aws::BedrockAgentCore::Types::throttlingException
+    #   end
+    #   handler.on_validation_exception_event do |event|
+    #     event # => Aws::BedrockAgentCore::Types::validationException
+    #   end
+    #   handler.on_runtime_client_error_event do |event|
+    #     event # => Aws::BedrockAgentCore::Types::runtimeClientError
+    #   end
+    #
+    #   client.invoke_agent_runtime_command(
+    #     # params inputs
+    #     event_stream_handler: handler
+    #   )
+    #
+    #   #  2) Use a Ruby Proc object
+    #   #  Example for registering callbacks with specific events
+    #   handler = Proc.new do |stream|
+    #     stream.on_chunk_event do |event|
+    #       event # => Aws::BedrockAgentCore::Types::chunk
+    #     end
+    #     stream.on_access_denied_exception_event do |event|
+    #       event # => Aws::BedrockAgentCore::Types::accessDeniedException
+    #     end
+    #     stream.on_internal_server_exception_event do |event|
+    #       event # => Aws::BedrockAgentCore::Types::internalServerException
+    #     end
+    #     stream.on_resource_not_found_exception_event do |event|
+    #       event # => Aws::BedrockAgentCore::Types::resourceNotFoundException
+    #     end
+    #     stream.on_service_quota_exceeded_exception_event do |event|
+    #       event # => Aws::BedrockAgentCore::Types::serviceQuotaExceededException
+    #     end
+    #     stream.on_throttling_exception_event do |event|
+    #       event # => Aws::BedrockAgentCore::Types::throttlingException
+    #     end
+    #     stream.on_validation_exception_event do |event|
+    #       event # => Aws::BedrockAgentCore::Types::validationException
+    #     end
+    #     stream.on_runtime_client_error_event do |event|
+    #       event # => Aws::BedrockAgentCore::Types::runtimeClientError
+    #     end
+    #   end
+    #
+    #   client.invoke_agent_runtime_command(
+    #     # params inputs
+    #     event_stream_handler: handler
+    #   )
+    #
+    #   #  Usage pattern c): Hybrid pattern of a) and b)
+    #   handler = Aws::BedrockAgentCore::EventStreams::InvokeAgentRuntimeCommandStreamOutput.new
+    #   handler.on_chunk_event do |event|
+    #     event # => Aws::BedrockAgentCore::Types::chunk
+    #   end
+    #   handler.on_access_denied_exception_event do |event|
+    #     event # => Aws::BedrockAgentCore::Types::accessDeniedException
+    #   end
+    #   handler.on_internal_server_exception_event do |event|
+    #     event # => Aws::BedrockAgentCore::Types::internalServerException
+    #   end
+    #   handler.on_resource_not_found_exception_event do |event|
+    #     event # => Aws::BedrockAgentCore::Types::resourceNotFoundException
+    #   end
+    #   handler.on_service_quota_exceeded_exception_event do |event|
+    #     event # => Aws::BedrockAgentCore::Types::serviceQuotaExceededException
+    #   end
+    #   handler.on_throttling_exception_event do |event|
+    #     event # => Aws::BedrockAgentCore::Types::throttlingException
+    #   end
+    #   handler.on_validation_exception_event do |event|
+    #     event # => Aws::BedrockAgentCore::Types::validationException
+    #   end
+    #   handler.on_runtime_client_error_event do |event|
+    #     event # => Aws::BedrockAgentCore::Types::runtimeClientError
+    #   end
+    #
+    #   client.invoke_agent_runtime_command(
+    #     # params input
+    #     event_stream_handler: handler
+    #   ) do |stream|
+    #     stream.on_error_event do |event|
+    #       # catch unmodeled error event in the stream
+    #       raise event
+    #       # => Aws::Errors::EventError
+    #       # event.event_type => :error
+    #       # event.error_code => String
+    #       # event.error_message => String
+    #     end
+    #   end
+    #
+    #   # You can also iterate through events after the response complete.
+    #   # Events are available at
+    #   resp.stream # => Enumerator
+    #   # For parameter input example, please refer to following request syntax.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.invoke_agent_runtime_command({
+    #     content_type: "MimeType",
+    #     accept: "MimeType",
+    #     runtime_session_id: "SessionType",
+    #     trace_id: "InvokeAgentRuntimeCommandRequestTraceIdString",
+    #     trace_parent: "InvokeAgentRuntimeCommandRequestTraceParentString",
+    #     trace_state: "InvokeAgentRuntimeCommandRequestTraceStateString",
+    #     baggage: "InvokeAgentRuntimeCommandRequestBaggageString",
+    #     agent_runtime_arn: "String", # required
+    #     qualifier: "String",
+    #     account_id: "InvokeAgentRuntimeCommandRequestAccountIdString",
+    #     body: { # required
+    #       command: "InvokeAgentRuntimeCommandRequestBodyCommandString", # required
+    #       timeout: 1,
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.runtime_session_id #=> String
+    #   resp.trace_id #=> String
+    #   resp.trace_parent #=> String
+    #   resp.trace_state #=> String
+    #   resp.baggage #=> String
+    #   resp.content_type #=> String
+    #   resp.status_code #=> Integer
+    #   # All events are available at resp.stream:
+    #   resp.stream #=> Enumerator
+    #   resp.stream.event_types #=> [:chunk, :access_denied_exception, :internal_server_exception, :resource_not_found_exception, :service_quota_exceeded_exception, :throttling_exception, :validation_exception, :runtime_client_error]
+    #
+    #   # For :chunk event available at #on_chunk_event callback and response eventstream enumerator:
+    #   event.content_delta.stdout #=> String
+    #   event.content_delta.stderr #=> String
+    #   event.content_stop.exit_code #=> Integer
+    #   event.content_stop.status #=> String, one of "COMPLETED", "TIMED_OUT"
+    #
+    #   # For :access_denied_exception event available at #on_access_denied_exception_event callback and response eventstream enumerator:
+    #   event.message #=> String
+    #
+    #   # For :internal_server_exception event available at #on_internal_server_exception_event callback and response eventstream enumerator:
+    #   event.message #=> String
+    #
+    #   # For :resource_not_found_exception event available at #on_resource_not_found_exception_event callback and response eventstream enumerator:
+    #   event.message #=> String
+    #
+    #   # For :service_quota_exceeded_exception event available at #on_service_quota_exceeded_exception_event callback and response eventstream enumerator:
+    #   event.message #=> String
+    #
+    #   # For :throttling_exception event available at #on_throttling_exception_event callback and response eventstream enumerator:
+    #   event.message #=> String
+    #
+    #   # For :validation_exception event available at #on_validation_exception_event callback and response eventstream enumerator:
+    #   event.message #=> String
+    #   event.reason #=> String, one of "CannotParse", "FieldValidationFailed", "IdempotentParameterMismatchException", "EventInOtherSession", "ResourceConflict"
+    #   event.field_list #=> Array
+    #   event.field_list[0].name #=> String
+    #   event.field_list[0].message #=> String
+    #
+    #   # For :runtime_client_error event available at #on_runtime_client_error_event callback and response eventstream enumerator:
+    #   event.message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/InvokeAgentRuntimeCommand AWS API Documentation
+    #
+    # @overload invoke_agent_runtime_command(params = {})
+    # @param [Hash] params ({})
+    def invoke_agent_runtime_command(params = {}, options = {}, &block)
+      params = params.dup
+      event_stream_handler = case handler = params.delete(:event_stream_handler)
+        when EventStreams::InvokeAgentRuntimeCommandStreamOutput then handler
+        when Proc then EventStreams::InvokeAgentRuntimeCommandStreamOutput.new.tap(&handler)
+        when nil then EventStreams::InvokeAgentRuntimeCommandStreamOutput.new
+        else
+          msg = "expected :event_stream_handler to be a block or "\
+                "instance of Aws::BedrockAgentCore::EventStreams::InvokeAgentRuntimeCommandStreamOutput"\
+                ", got `#{handler.inspect}` instead"
+          raise ArgumentError, msg
+        end
+
+      yield(event_stream_handler) if block_given?
+
+      req = build_request(:invoke_agent_runtime_command, params)
+
+      req.context[:event_stream_handler] = event_stream_handler
+      req.handlers.add(Aws::Binary::DecodeHandler, priority: 95)
+
+      req.send_request(options, &block)
+    end
+
+    # Invokes an operating system-level action on a browser session in
+    # Amazon Bedrock AgentCore. This operation provides direct OS-level
+    # control over browser sessions, enabling mouse actions, keyboard input,
+    # and screenshots that the WebSocket-based Chrome DevTools Protocol
+    # (CDP) cannot handle — such as interacting with print dialogs, context
+    # menus, and JavaScript alerts.
+    #
+    # You send a request with exactly one action in the `BrowserAction`
+    # union, and receive a corresponding result in the `BrowserActionResult`
+    # union.
+    #
+    # The following operations are related to `InvokeBrowser`:
+    #
+    # * [StartBrowserSession][1]
+    #
+    # * [GetBrowserSession][2]
+    #
+    # * [StopBrowserSession][3]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock-agentcore/latest/APIReference/API_StartBrowserSession.html
+    # [2]: https://docs.aws.amazon.com/bedrock-agentcore/latest/APIReference/API_GetBrowserSession.html
+    # [3]: https://docs.aws.amazon.com/bedrock-agentcore/latest/APIReference/API_StopBrowserSession.html
+    #
+    # @option params [required, String] :browser_identifier
+    #   The unique identifier of the browser associated with the session. This
+    #   must match the identifier used when creating the session with
+    #   `StartBrowserSession`.
+    #
+    # @option params [required, String] :session_id
+    #   The unique identifier of the browser session on which to perform the
+    #   action. This must be an active session created with
+    #   `StartBrowserSession`.
+    #
+    # @option params [required, Types::BrowserAction] :action
+    #   The browser action to perform. Exactly one member of the
+    #   `BrowserAction` union must be set per request.
+    #
+    # @return [Types::InvokeBrowserResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::InvokeBrowserResponse#result #result} => Types::BrowserActionResult
+    #   * {Types::InvokeBrowserResponse#session_id #session_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.invoke_browser({
+    #     browser_identifier: "String", # required
+    #     session_id: "BrowserSessionId", # required
+    #     action: { # required
+    #       mouse_click: {
+    #         x: 1, # required
+    #         y: 1, # required
+    #         button: "LEFT", # accepts LEFT, RIGHT, MIDDLE
+    #         click_count: 1,
+    #       },
+    #       mouse_move: {
+    #         x: 1, # required
+    #         y: 1, # required
+    #       },
+    #       mouse_drag: {
+    #         end_x: 1, # required
+    #         end_y: 1, # required
+    #         start_x: 1, # required
+    #         start_y: 1, # required
+    #         button: "LEFT", # accepts LEFT, RIGHT, MIDDLE
+    #       },
+    #       mouse_scroll: {
+    #         x: 1, # required
+    #         y: 1, # required
+    #         delta_x: 1,
+    #         delta_y: 1,
+    #       },
+    #       key_type: {
+    #         text: "KeyTypeArgumentsTextString", # required
+    #       },
+    #       key_press: {
+    #         key: "String", # required
+    #         presses: 1,
+    #       },
+    #       key_shortcut: {
+    #         keys: ["String"], # required
+    #       },
+    #       screenshot: {
+    #         format: "PNG", # accepts PNG
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.result.mouse_click.status #=> String, one of "SUCCESS", "FAILED"
+    #   resp.result.mouse_click.error #=> String
+    #   resp.result.mouse_move.status #=> String, one of "SUCCESS", "FAILED"
+    #   resp.result.mouse_move.error #=> String
+    #   resp.result.mouse_drag.status #=> String, one of "SUCCESS", "FAILED"
+    #   resp.result.mouse_drag.error #=> String
+    #   resp.result.mouse_scroll.status #=> String, one of "SUCCESS", "FAILED"
+    #   resp.result.mouse_scroll.error #=> String
+    #   resp.result.key_type.status #=> String, one of "SUCCESS", "FAILED"
+    #   resp.result.key_type.error #=> String
+    #   resp.result.key_press.status #=> String, one of "SUCCESS", "FAILED"
+    #   resp.result.key_press.error #=> String
+    #   resp.result.key_shortcut.status #=> String, one of "SUCCESS", "FAILED"
+    #   resp.result.key_shortcut.error #=> String
+    #   resp.result.screenshot.status #=> String, one of "SUCCESS", "FAILED"
+    #   resp.result.screenshot.error #=> String
+    #   resp.result.screenshot.data #=> String
+    #   resp.session_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/InvokeBrowser AWS API Documentation
+    #
+    # @overload invoke_browser(params = {})
+    # @param [Hash] params ({})
+    def invoke_browser(params = {}, options = {})
+      req = build_request(:invoke_browser, params)
+      req.send_request(options)
     end
 
     # Executes code within an active code interpreter session in Amazon
@@ -1827,6 +2308,7 @@ module Aws::BedrockAgentCore
     #       ],
     #       directory_path: "MaxLenString",
     #       task_id: "MaxLenString",
+    #       runtime: "nodejs", # accepts nodejs, deno, python
     #     },
     #   })
     #
@@ -2292,9 +2774,13 @@ module Aws::BedrockAgentCore
     #   The identifier of the AgentCore Memory resource for which to list
     #   memory records.
     #
-    # @option params [required, String] :namespace
+    # @option params [String] :namespace
     #   The namespace prefix to filter memory records by. Returns all memory
     #   records in namespaces that start with the provided prefix.
+    #
+    # @option params [String] :namespace_path
+    #   Use namespacePath for hierarchical retrievals. Return all memory
+    #   records where namespace falls under the same parent hierarchy.
     #
     # @option params [String] :memory_strategy_id
     #   The memory strategy identifier to filter memory records by. If
@@ -2320,7 +2806,8 @@ module Aws::BedrockAgentCore
     #
     #   resp = client.list_memory_records({
     #     memory_id: "MemoryId", # required
-    #     namespace: "Namespace", # required
+    #     namespace: "Namespace",
+    #     namespace_path: "Namespace",
     #     memory_strategy_id: "MemoryStrategyId",
     #     max_results: 1,
     #     next_token: "PaginationToken",
@@ -2353,6 +2840,8 @@ module Aws::BedrockAgentCore
     # criteria. We recommend using pagination to ensure that the operation
     # returns quickly and successfully.
     #
+    # Empty sessions are automatically deleted after one day.
+    #
     # To use this operation, you must have the
     # `bedrock-agentcore:ListSessions` permission.
     #
@@ -2372,6 +2861,9 @@ module Aws::BedrockAgentCore
     #   previous response in the next request to retrieve the next set of
     #   results.
     #
+    # @option params [Types::SessionFilter] :filter
+    #   Filter criteria to apply when listing sessions.
+    #
     # @return [Types::ListSessionsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListSessionsOutput#session_summaries #session_summaries} => Array&lt;Types::SessionSummary&gt;
@@ -2386,6 +2878,9 @@ module Aws::BedrockAgentCore
     #     actor_id: "ActorId", # required
     #     max_results: 1,
     #     next_token: "PaginationToken",
+    #     filter: {
+    #       event_filter: "HAS_EVENTS", # accepts HAS_EVENTS
+    #     },
     #   })
     #
     # @example Response structure
@@ -2417,9 +2912,13 @@ module Aws::BedrockAgentCore
     #   The identifier of the AgentCore Memory resource from which to retrieve
     #   memory records.
     #
-    # @option params [required, String] :namespace
+    # @option params [String] :namespace
     #   The namespace prefix to filter memory records by. Searches for memory
     #   records in namespaces that start with the provided prefix.
+    #
+    # @option params [String] :namespace_path
+    #   Use namespacePath for hierarchical retrievals. Return all memory
+    #   records where namespace falls under the same parent hierarchy.
     #
     # @option params [required, Types::SearchCriteria] :search_criteria
     #   The search criteria to use for finding relevant memory records. This
@@ -2446,7 +2945,8 @@ module Aws::BedrockAgentCore
     #
     #   resp = client.retrieve_memory_records({
     #     memory_id: "MemoryId", # required
-    #     namespace: "Namespace", # required
+    #     namespace: "Namespace",
+    #     namespace_path: "Namespace",
     #     search_criteria: { # required
     #       search_query: "SearchCriteriaSearchQueryString", # required
     #       memory_strategy_id: "MemoryStrategyId",
@@ -2582,6 +3082,84 @@ module Aws::BedrockAgentCore
       req.send_request(options)
     end
 
+    # Searches for registry records using semantic, lexical, or hybrid
+    # queries. Returns metadata for matching records ordered by relevance
+    # within the specified registry.
+    #
+    # @option params [required, String] :search_query
+    #   The search query to find matching registry records.
+    #
+    # @option params [required, Array<String>] :registry_ids
+    #   The list of registry identifiers to search within. Currently, you can
+    #   specify exactly one registry identifier. You can provide either the
+    #   full Amazon Web Services Resource Name (ARN) or the 12-character
+    #   alphanumeric registry ID.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of records to return in a single call. Valid values
+    #   are 1 through 20. The default value is 10.
+    #
+    # @option params [Hash,Array,String,Numeric,Boolean] :filters
+    #   A metadata filter expression to narrow search results. Uses structured
+    #   JSON operators including field-level operators (`$eq`, `$ne`, `$in`)
+    #   and logical operators (`$and`, `$or`) on filterable fields (`name`,
+    #   `descriptorType`, `version`). For example, to filter by descriptor
+    #   type: `{"descriptorType": {"$eq": "MCP"}}`. To combine filters:
+    #   `{"$and": [{"descriptorType": {"$eq": "MCP"}}, {"name": {"$eq":
+    #   "my-tool"}}]}`.
+    #
+    #   Document type used to carry open content
+    #   (Hash,Array,String,Numeric,Boolean). A document type value is
+    #   serialized using the same format as its surroundings and requires no
+    #   additional encoding or escaping.
+    #
+    # @return [Types::SearchRegistryRecordsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::SearchRegistryRecordsResponse#registry_records #registry_records} => Array&lt;Types::RegistryRecordSummary&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.search_registry_records({
+    #     search_query: "SearchRegistryRecordsRequestSearchQueryString", # required
+    #     registry_ids: ["RegistryIdentifier"], # required
+    #     max_results: 1,
+    #     filters: {
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.registry_records #=> Array
+    #   resp.registry_records[0].registry_arn #=> String
+    #   resp.registry_records[0].record_arn #=> String
+    #   resp.registry_records[0].record_id #=> String
+    #   resp.registry_records[0].name #=> String
+    #   resp.registry_records[0].description #=> String
+    #   resp.registry_records[0].descriptor_type #=> String, one of "MCP", "A2A", "CUSTOM", "AGENT_SKILLS"
+    #   resp.registry_records[0].descriptors.mcp.server.schema_version #=> String
+    #   resp.registry_records[0].descriptors.mcp.server.inline_content #=> String
+    #   resp.registry_records[0].descriptors.mcp.tools.protocol_version #=> String
+    #   resp.registry_records[0].descriptors.mcp.tools.inline_content #=> String
+    #   resp.registry_records[0].descriptors.a2a.agent_card.schema_version #=> String
+    #   resp.registry_records[0].descriptors.a2a.agent_card.inline_content #=> String
+    #   resp.registry_records[0].descriptors.custom.inline_content #=> String
+    #   resp.registry_records[0].descriptors.agent_skills.skill_md.inline_content #=> String
+    #   resp.registry_records[0].descriptors.agent_skills.skill_definition.schema_version #=> String
+    #   resp.registry_records[0].descriptors.agent_skills.skill_definition.inline_content #=> String
+    #   resp.registry_records[0].version #=> String
+    #   resp.registry_records[0].status #=> String, one of "DRAFT", "PENDING_APPROVAL", "APPROVED", "REJECTED", "DEPRECATED"
+    #   resp.registry_records[0].created_at #=> Time
+    #   resp.registry_records[0].updated_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/SearchRegistryRecords AWS API Documentation
+    #
+    # @overload search_registry_records(params = {})
+    # @param [Hash] params ({})
+    def search_registry_records(params = {}, options = {})
+      req = build_request(:search_registry_records, params)
+      req.send_request(options)
+    end
+
     # Creates and initializes a browser session in Amazon Bedrock AgentCore.
     # The session enables agents to navigate and interact with web content,
     # extract information from websites, and perform web-based tasks as part
@@ -2602,12 +3180,15 @@ module Aws::BedrockAgentCore
     #
     # * [StopBrowserSession][4]
     #
+    # * [InvokeBrowser][5]
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/bedrock-agentcore/latest/APIReference/API_GetBrowserSession.html
     # [2]: https://docs.aws.amazon.com/bedrock-agentcore/latest/APIReference/API_UpdateBrowserStream.html
     # [3]: https://docs.aws.amazon.com/bedrock-agentcore/latest/APIReference/API_SaveBrowserSessionProfile.html
     # [4]: https://docs.aws.amazon.com/bedrock-agentcore/latest/APIReference/API_StopBrowserSession.html
+    # [5]: https://docs.aws.amazon.com/bedrock-agentcore/latest/APIReference/API_InvokeBrowser.html
     #
     # @option params [String] :trace_id
     #   The trace identifier for request tracking.
@@ -2625,10 +3206,10 @@ module Aws::BedrockAgentCore
     #   manage the session. The name does not need to be unique.
     #
     # @option params [Integer] :session_timeout_seconds
-    #   The time in seconds after which the session automatically terminates
-    #   if there is no activity. The default value is 3600 seconds (1 hour).
-    #   The minimum allowed value is 60 seconds, and the maximum allowed value
-    #   is 28800 seconds (8 hours).
+    #   The duration in seconds (time-to-live) after which the session
+    #   automatically terminates, regardless of ongoing activity. Defaults to
+    #   3600 seconds (1 hour). Recommended minimum: 60 seconds. Maximum
+    #   allowed: 28,800 seconds (8 hours).
     #
     # @option params [Types::ViewPort] :view_port
     #   The dimensions of the browser viewport for this session. This
@@ -2653,6 +3234,12 @@ module Aws::BedrockAgentCore
     #   authentication via Amazon Web Services Secrets Manager and
     #   domain-based routing rules. Requires `secretsmanager:GetSecretValue`
     #   IAM permission for the specified secret ARNs.
+    #
+    # @option params [Array<Types::BrowserEnterprisePolicy>] :enterprise_policies
+    #   A list of files containing enterprise policies for the browser.
+    #
+    # @option params [Array<Types::Certificate>] :certificates
+    #   A list of certificates to install in the browser session.
     #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier to ensure that the API request
@@ -2716,6 +3303,27 @@ module Aws::BedrockAgentCore
     #         domain_patterns: ["DomainPattern"],
     #       },
     #     },
+    #     enterprise_policies: [
+    #       {
+    #         location: { # required
+    #           s3: {
+    #             bucket: "S3LocationBucketString", # required
+    #             prefix: "S3LocationPrefixString", # required
+    #             version_id: "S3LocationVersionIdString",
+    #           },
+    #         },
+    #         type: "MANAGED", # accepts MANAGED, RECOMMENDED
+    #       },
+    #     ],
+    #     certificates: [
+    #       {
+    #         location: { # required
+    #           secrets_manager: {
+    #             secret_arn: "SecretArn", # required
+    #           },
+    #         },
+    #       },
+    #     ],
     #     client_token: "ClientToken",
     #   })
     #
@@ -2776,10 +3384,13 @@ module Aws::BedrockAgentCore
     #   and manage the session. The name does not need to be unique.
     #
     # @option params [Integer] :session_timeout_seconds
-    #   The time in seconds after which the session automatically terminates
-    #   if there is no activity. The default value is 900 seconds (15
-    #   minutes). The minimum allowed value is 60 seconds, and the maximum
-    #   allowed value is 28800 seconds (8 hours).
+    #   The duration in seconds (time-to-live) after which the session
+    #   automatically terminates, regardless of ongoing activity. Defaults to
+    #   900 seconds (15 minutes). Recommended minimum: 60 seconds. Maximum
+    #   allowed: 28,800 seconds (8 hours).
+    #
+    # @option params [Array<Types::Certificate>] :certificates
+    #   A list of certificates to install in the code interpreter session.
     #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier to ensure that the API request
@@ -2805,6 +3416,15 @@ module Aws::BedrockAgentCore
     #     code_interpreter_identifier: "String", # required
     #     name: "Name",
     #     session_timeout_seconds: 1,
+    #     certificates: [
+    #       {
+    #         location: { # required
+    #           secrets_manager: {
+    #             secret_arn: "SecretArn", # required
+    #           },
+    #         },
+    #       },
+    #     ],
     #     client_token: "ClientToken",
     #   })
     #
@@ -3142,7 +3762,7 @@ module Aws::BedrockAgentCore
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrockagentcore'
-      context[:gem_version] = '1.19.0'
+      context[:gem_version] = '1.28.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

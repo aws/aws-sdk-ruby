@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.38.0 (2026-03-25)
+------------------
+
+* Feature - This release adds support for creating SLOs on RUM appMonitors, Synthetics canaries and services.
+
+1.37.0 (2026-03-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.36.0 (2026-01-16)
 ------------------
 

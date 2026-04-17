@@ -20,7 +20,9 @@ module Aws::ECS
       SENSITIVE: []
     end
 
-    class AccessDeniedException < Aws::EmptyStructure
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
     end
 
     class AdvancedConfiguration
@@ -53,7 +55,9 @@ module Aws::ECS
       SENSITIVE: []
     end
 
-    class AttributeLimitExceededException < Aws::EmptyStructure
+    class AttributeLimitExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
     end
 
     class AutoScalingGroupProvider
@@ -84,7 +88,9 @@ module Aws::ECS
       SENSITIVE: []
     end
 
-    class BlockedException < Aws::EmptyStructure
+    class BlockedException
+      attr_accessor message: ::String
+      SENSITIVE: []
     end
 
     class CanaryConfiguration
@@ -111,6 +117,12 @@ module Aws::ECS
       attr_accessor capacity_provider: ::String
       attr_accessor weight: ::Integer
       attr_accessor base: ::Integer
+      SENSITIVE: []
+    end
+
+    class CapacityReservationRequest
+      attr_accessor reservation_group_arn: ::String
+      attr_accessor reservation_preference: ("RESERVATIONS_ONLY" | "RESERVATIONS_FIRST" | "RESERVATIONS_EXCLUDED")
       SENSITIVE: []
     end
 
@@ -145,19 +157,29 @@ module Aws::ECS
       SENSITIVE: []
     end
 
-    class ClusterContainsCapacityProviderException < Aws::EmptyStructure
+    class ClusterContainsCapacityProviderException
+      attr_accessor message: ::String
+      SENSITIVE: []
     end
 
-    class ClusterContainsContainerInstancesException < Aws::EmptyStructure
+    class ClusterContainsContainerInstancesException
+      attr_accessor message: ::String
+      SENSITIVE: []
     end
 
-    class ClusterContainsServicesException < Aws::EmptyStructure
+    class ClusterContainsServicesException
+      attr_accessor message: ::String
+      SENSITIVE: []
     end
 
-    class ClusterContainsTasksException < Aws::EmptyStructure
+    class ClusterContainsTasksException
+      attr_accessor message: ::String
+      SENSITIVE: []
     end
 
-    class ClusterNotFoundException < Aws::EmptyStructure
+    class ClusterNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
     end
 
     class ClusterServiceConnectDefaults
@@ -178,6 +200,7 @@ module Aws::ECS
 
     class ConflictException
       attr_accessor resource_ids: ::Array[::String]
+      attr_accessor message: ::String
       SENSITIVE: []
     end
 
@@ -245,7 +268,7 @@ module Aws::ECS
       attr_accessor resource_requirements: ::Array[Types::ResourceRequirement]
       attr_accessor firelens_configuration: Types::FirelensConfiguration
       attr_accessor credential_specs: ::Array[::String]
-      SENSITIVE: []
+      SENSITIVE: [:repository_credentials, :environment]
     end
 
     class ContainerDependency
@@ -298,7 +321,7 @@ module Aws::ECS
       attr_accessor memory: ::Integer
       attr_accessor memory_reservation: ::Integer
       attr_accessor resource_requirements: ::Array[Types::ResourceRequirement]
-      SENSITIVE: []
+      SENSITIVE: [:environment]
     end
 
     class ContainerRestartPolicy
@@ -346,6 +369,28 @@ module Aws::ECS
 
     class CreateClusterResponse
       attr_accessor cluster: Types::Cluster
+      SENSITIVE: []
+    end
+
+    class CreateDaemonRequest
+      attr_accessor daemon_name: ::String
+      attr_accessor cluster_arn: ::String
+      attr_accessor daemon_task_definition_arn: ::String
+      attr_accessor capacity_provider_arns: ::Array[::String]
+      attr_accessor deployment_configuration: Types::DaemonDeploymentConfiguration
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor propagate_tags: ("DAEMON" | "NONE")
+      attr_accessor enable_ecs_managed_tags: bool
+      attr_accessor enable_execute_command: bool
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateDaemonResponse
+      attr_accessor daemon_arn: ::String
+      attr_accessor status: ("ACTIVE" | "DELETE_IN_PROGRESS")
+      attr_accessor created_at: ::Time
+      attr_accessor deployment_arn: ::String
       SENSITIVE: []
     end
 
@@ -441,6 +486,223 @@ module Aws::ECS
       SENSITIVE: []
     end
 
+    class DaemonAlarmConfiguration
+      attr_accessor alarm_names: ::Array[::String]
+      attr_accessor enable: bool
+      SENSITIVE: []
+    end
+
+    class DaemonCapacityProvider
+      attr_accessor arn: ::String
+      attr_accessor running_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class DaemonCircuitBreaker
+      attr_accessor failure_count: ::Integer
+      attr_accessor status: ("TRIGGERED" | "MONITORING" | "MONITORING_COMPLETE" | "DISABLED")
+      attr_accessor threshold: ::Integer
+      SENSITIVE: []
+    end
+
+    class DaemonContainerDefinition
+      attr_accessor name: ::String
+      attr_accessor image: ::String
+      attr_accessor memory: ::Integer
+      attr_accessor memory_reservation: ::Integer
+      attr_accessor repository_credentials: Types::RepositoryCredentials
+      attr_accessor health_check: Types::HealthCheck
+      attr_accessor cpu: ::Integer
+      attr_accessor essential: bool
+      attr_accessor entry_point: ::Array[::String]
+      attr_accessor command: ::Array[::String]
+      attr_accessor working_directory: ::String
+      attr_accessor environment_files: ::Array[Types::EnvironmentFile]
+      attr_accessor environment: ::Array[Types::KeyValuePair]
+      attr_accessor secrets: ::Array[Types::Secret]
+      attr_accessor readonly_root_filesystem: bool
+      attr_accessor mount_points: ::Array[Types::MountPoint]
+      attr_accessor log_configuration: Types::LogConfiguration
+      attr_accessor firelens_configuration: Types::FirelensConfiguration
+      attr_accessor privileged: bool
+      attr_accessor user: ::String
+      attr_accessor ulimits: ::Array[Types::Ulimit]
+      attr_accessor linux_parameters: Types::DaemonLinuxParameters
+      attr_accessor depends_on: ::Array[Types::ContainerDependency]
+      attr_accessor start_timeout: ::Integer
+      attr_accessor stop_timeout: ::Integer
+      attr_accessor system_controls: ::Array[Types::SystemControl]
+      attr_accessor interactive: bool
+      attr_accessor pseudo_terminal: bool
+      attr_accessor restart_policy: Types::ContainerRestartPolicy
+      SENSITIVE: [:repository_credentials, :environment]
+    end
+
+    class DaemonContainerImage
+      attr_accessor container_name: ::String
+      attr_accessor image_digest: ::String
+      attr_accessor image: ::String
+      SENSITIVE: []
+    end
+
+    class DaemonDeployment
+      attr_accessor daemon_deployment_arn: ::String
+      attr_accessor cluster_arn: ::String
+      attr_accessor status: ("PENDING" | "SUCCESSFUL" | "STOPPED" | "STOP_REQUESTED" | "IN_PROGRESS" | "ROLLBACK_IN_PROGRESS" | "ROLLBACK_SUCCESSFUL" | "ROLLBACK_FAILED")
+      attr_accessor status_reason: ::String
+      attr_accessor target_daemon_revision: Types::DaemonDeploymentRevisionDetail
+      attr_accessor source_daemon_revisions: ::Array[Types::DaemonDeploymentRevisionDetail]
+      attr_accessor circuit_breaker: Types::DaemonCircuitBreaker
+      attr_accessor alarms: Types::DaemonDeploymentAlarms
+      attr_accessor rollback: Types::DaemonRollback
+      attr_accessor deployment_configuration: Types::DaemonDeploymentConfiguration
+      attr_accessor created_at: ::Time
+      attr_accessor started_at: ::Time
+      attr_accessor stopped_at: ::Time
+      attr_accessor finished_at: ::Time
+      SENSITIVE: []
+    end
+
+    class DaemonDeploymentAlarms
+      attr_accessor status: ("TRIGGERED" | "MONITORING" | "MONITORING_COMPLETE" | "DISABLED")
+      attr_accessor alarm_names: ::Array[::String]
+      attr_accessor triggered_alarm_names: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DaemonDeploymentCapacityProvider
+      attr_accessor arn: ::String
+      attr_accessor running_instance_count: ::Integer
+      attr_accessor draining_instance_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class DaemonDeploymentConfiguration
+      attr_accessor drain_percent: ::Float
+      attr_accessor alarms: Types::DaemonAlarmConfiguration
+      attr_accessor bake_time_in_minutes: ::Integer
+      SENSITIVE: []
+    end
+
+    class DaemonDeploymentRevisionDetail
+      attr_accessor arn: ::String
+      attr_accessor capacity_providers: ::Array[Types::DaemonDeploymentCapacityProvider]
+      attr_accessor total_running_instance_count: ::Integer
+      attr_accessor total_draining_instance_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class DaemonDeploymentSummary
+      attr_accessor daemon_deployment_arn: ::String
+      attr_accessor daemon_arn: ::String
+      attr_accessor cluster_arn: ::String
+      attr_accessor status: ("PENDING" | "SUCCESSFUL" | "STOPPED" | "STOP_REQUESTED" | "IN_PROGRESS" | "ROLLBACK_IN_PROGRESS" | "ROLLBACK_SUCCESSFUL" | "ROLLBACK_FAILED")
+      attr_accessor status_reason: ::String
+      attr_accessor target_daemon_revision_arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor started_at: ::Time
+      attr_accessor stopped_at: ::Time
+      attr_accessor finished_at: ::Time
+      SENSITIVE: []
+    end
+
+    class DaemonDetail
+      attr_accessor daemon_arn: ::String
+      attr_accessor cluster_arn: ::String
+      attr_accessor status: ("ACTIVE" | "DELETE_IN_PROGRESS")
+      attr_accessor current_revisions: ::Array[Types::DaemonRevisionDetail]
+      attr_accessor deployment_arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class DaemonLinuxParameters
+      attr_accessor capabilities: Types::KernelCapabilities
+      attr_accessor devices: ::Array[Types::Device]
+      attr_accessor init_process_enabled: bool
+      attr_accessor tmpfs: ::Array[Types::Tmpfs]
+      SENSITIVE: []
+    end
+
+    class DaemonNotActiveException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class DaemonNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class DaemonRevision
+      attr_accessor daemon_revision_arn: ::String
+      attr_accessor cluster_arn: ::String
+      attr_accessor daemon_arn: ::String
+      attr_accessor daemon_task_definition_arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor container_images: ::Array[Types::DaemonContainerImage]
+      attr_accessor propagate_tags: ("DAEMON" | "NONE")
+      attr_accessor enable_ecs_managed_tags: bool
+      attr_accessor enable_execute_command: bool
+      SENSITIVE: []
+    end
+
+    class DaemonRevisionDetail
+      attr_accessor arn: ::String
+      attr_accessor capacity_providers: ::Array[Types::DaemonCapacityProvider]
+      attr_accessor total_running_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class DaemonRollback
+      attr_accessor reason: ::String
+      attr_accessor started_at: ::Time
+      attr_accessor rollback_target_daemon_revision_arn: ::String
+      attr_accessor rollback_capacity_providers: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DaemonSummary
+      attr_accessor daemon_arn: ::String
+      attr_accessor status: ("ACTIVE" | "DELETE_IN_PROGRESS")
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class DaemonTaskDefinition
+      attr_accessor daemon_task_definition_arn: ::String
+      attr_accessor family: ::String
+      attr_accessor revision: ::Integer
+      attr_accessor task_role_arn: ::String
+      attr_accessor execution_role_arn: ::String
+      attr_accessor container_definitions: ::Array[Types::DaemonContainerDefinition]
+      attr_accessor volumes: ::Array[Types::DaemonVolume]
+      attr_accessor cpu: ::String
+      attr_accessor memory: ::String
+      attr_accessor status: ("ACTIVE" | "DELETE_IN_PROGRESS" | "DELETED")
+      attr_accessor registered_at: ::Time
+      attr_accessor delete_requested_at: ::Time
+      attr_accessor registered_by: ::String
+      SENSITIVE: []
+    end
+
+    class DaemonTaskDefinitionSummary
+      attr_accessor arn: ::String
+      attr_accessor registered_at: ::Time
+      attr_accessor registered_by: ::String
+      attr_accessor delete_requested_at: ::Time
+      attr_accessor status: ("ACTIVE" | "DELETE_IN_PROGRESS" | "DELETED")
+      SENSITIVE: []
+    end
+
+    class DaemonVolume
+      attr_accessor name: ::String
+      attr_accessor host: Types::HostVolumeProperties
+      SENSITIVE: []
+    end
+
     class DeleteAccountSettingRequest
       attr_accessor name: ("serviceLongArnFormat" | "taskLongArnFormat" | "containerInstanceLongArnFormat" | "awsvpcTrunking" | "containerInsights" | "fargateFIPSMode" | "tagResourceAuthorization" | "fargateTaskRetirementWaitPeriod" | "guardDutyActivate" | "defaultLogDriverMode" | "fargateEventWindows")
       attr_accessor principal_arn: ::String
@@ -481,6 +743,30 @@ module Aws::ECS
 
     class DeleteClusterResponse
       attr_accessor cluster: Types::Cluster
+      SENSITIVE: []
+    end
+
+    class DeleteDaemonRequest
+      attr_accessor daemon_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteDaemonResponse
+      attr_accessor daemon_arn: ::String
+      attr_accessor status: ("ACTIVE" | "DELETE_IN_PROGRESS")
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor deployment_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteDaemonTaskDefinitionRequest
+      attr_accessor daemon_task_definition: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteDaemonTaskDefinitionResponse
+      attr_accessor daemon_task_definition_arn: ::String
       SENSITIVE: []
     end
 
@@ -659,6 +945,48 @@ module Aws::ECS
     class DescribeContainerInstancesResponse
       attr_accessor container_instances: ::Array[Types::ContainerInstance]
       attr_accessor failures: ::Array[Types::Failure]
+      SENSITIVE: []
+    end
+
+    class DescribeDaemonDeploymentsRequest
+      attr_accessor daemon_deployment_arns: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DescribeDaemonDeploymentsResponse
+      attr_accessor failures: ::Array[Types::Failure]
+      attr_accessor daemon_deployments: ::Array[Types::DaemonDeployment]
+      SENSITIVE: []
+    end
+
+    class DescribeDaemonRequest
+      attr_accessor daemon_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeDaemonResponse
+      attr_accessor daemon: Types::DaemonDetail
+      SENSITIVE: []
+    end
+
+    class DescribeDaemonRevisionsRequest
+      attr_accessor daemon_revision_arns: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DescribeDaemonRevisionsResponse
+      attr_accessor daemon_revisions: ::Array[Types::DaemonRevision]
+      attr_accessor failures: ::Array[Types::Failure]
+      SENSITIVE: []
+    end
+
+    class DescribeDaemonTaskDefinitionRequest
+      attr_accessor daemon_task_definition: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeDaemonTaskDefinitionResponse
+      attr_accessor daemon_task_definition: Types::DaemonTaskDefinition
       SENSITIVE: []
     end
 
@@ -875,7 +1203,7 @@ module Aws::ECS
       attr_accessor command: ::Array[::String]
       attr_accessor environment: ::Array[Types::KeyValuePair]
       attr_accessor secrets: ::Array[Types::Secret]
-      SENSITIVE: []
+      SENSITIVE: [:environment]
     end
 
     class ExpressGatewayRepositoryCredentials
@@ -1006,7 +1334,7 @@ module Aws::ECS
     end
 
     class InstanceHealthCheckResult
-      attr_accessor type: ("CONTAINER_RUNTIME")
+      attr_accessor type: ("CONTAINER_RUNTIME" | "ACCELERATED_COMPUTE" | "DAEMON")
       attr_accessor status: ("OK" | "IMPAIRED" | "INSUFFICIENT_DATA" | "INITIALIZING")
       attr_accessor last_updated: ::Time
       attr_accessor last_status_change: ::Time
@@ -1017,10 +1345,13 @@ module Aws::ECS
       attr_accessor ec2_instance_profile_arn: ::String
       attr_accessor network_configuration: Types::ManagedInstancesNetworkConfiguration
       attr_accessor storage_configuration: Types::ManagedInstancesStorageConfiguration
+      attr_accessor local_storage_configuration: Types::ManagedInstancesLocalStorageConfiguration
       attr_accessor monitoring: ("BASIC" | "DETAILED")
-      attr_accessor capacity_option_type: ("ON_DEMAND" | "SPOT")
+      attr_accessor capacity_option_type: ("ON_DEMAND" | "SPOT" | "RESERVED")
+      attr_accessor instance_metadata_tags_propagation: bool
       attr_accessor instance_requirements: Types::InstanceRequirementsRequest
       attr_accessor fips_enabled: bool
+      attr_accessor capacity_reservations: Types::CapacityReservationRequest
       SENSITIVE: []
     end
 
@@ -1028,8 +1359,11 @@ module Aws::ECS
       attr_accessor ec2_instance_profile_arn: ::String
       attr_accessor network_configuration: Types::ManagedInstancesNetworkConfiguration
       attr_accessor storage_configuration: Types::ManagedInstancesStorageConfiguration
+      attr_accessor instance_metadata_tags_propagation: bool
+      attr_accessor local_storage_configuration: Types::ManagedInstancesLocalStorageConfiguration
       attr_accessor monitoring: ("BASIC" | "DETAILED")
       attr_accessor instance_requirements: Types::InstanceRequirementsRequest
+      attr_accessor capacity_reservations: Types::CapacityReservationRequest
       SENSITIVE: []
     end
 
@@ -1061,7 +1395,9 @@ module Aws::ECS
       SENSITIVE: []
     end
 
-    class InvalidParameterException < Aws::EmptyStructure
+    class InvalidParameterException
+      attr_accessor message: ::String
+      SENSITIVE: []
     end
 
     class KernelCapabilities
@@ -1076,7 +1412,9 @@ module Aws::ECS
       SENSITIVE: []
     end
 
-    class LimitExceededException < Aws::EmptyStructure
+    class LimitExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
     end
 
     class LinearConfiguration
@@ -1151,6 +1489,52 @@ module Aws::ECS
 
     class ListContainerInstancesResponse
       attr_accessor container_instance_arns: ::Array[::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDaemonDeploymentsRequest
+      attr_accessor daemon_arn: ::String
+      attr_accessor status: ::Array[("PENDING" | "SUCCESSFUL" | "STOPPED" | "STOP_REQUESTED" | "IN_PROGRESS" | "ROLLBACK_IN_PROGRESS" | "ROLLBACK_SUCCESSFUL" | "ROLLBACK_FAILED")]
+      attr_accessor created_at: Types::CreatedAt
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDaemonDeploymentsResponse
+      attr_accessor next_token: ::String
+      attr_accessor daemon_deployments: ::Array[Types::DaemonDeploymentSummary]
+      SENSITIVE: []
+    end
+
+    class ListDaemonTaskDefinitionsRequest
+      attr_accessor family_prefix: ::String
+      attr_accessor family: ::String
+      attr_accessor revision: ("LAST_REGISTERED")
+      attr_accessor status: ("ACTIVE" | "DELETE_IN_PROGRESS" | "ALL")
+      attr_accessor sort: ("ASC" | "DESC")
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListDaemonTaskDefinitionsResponse
+      attr_accessor daemon_task_definitions: ::Array[Types::DaemonTaskDefinitionSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDaemonsRequest
+      attr_accessor cluster_arn: ::String
+      attr_accessor capacity_provider_arns: ::Array[::String]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDaemonsResponse
+      attr_accessor daemon_summaries_list: ::Array[Types::DaemonSummary]
       attr_accessor next_token: ::String
       SENSITIVE: []
     end
@@ -1249,6 +1633,7 @@ module Aws::ECS
       attr_accessor service_name: ::String
       attr_accessor desired_status: ("RUNNING" | "PENDING" | "STOPPED")
       attr_accessor launch_type: ("EC2" | "FARGATE" | "EXTERNAL" | "MANAGED_INSTANCES")
+      attr_accessor daemon_name: ::String
       SENSITIVE: []
     end
 
@@ -1325,6 +1710,11 @@ module Aws::ECS
       attr_accessor listener: Types::ManagedListener
       attr_accessor rule: Types::ManagedListenerRule
       attr_accessor target_groups: ::Array[Types::ManagedTargetGroup]
+      SENSITIVE: []
+    end
+
+    class ManagedInstancesLocalStorageConfiguration
+      attr_accessor use_local_storage: bool
       SENSITIVE: []
     end
 
@@ -1447,7 +1837,9 @@ module Aws::ECS
       SENSITIVE: []
     end
 
-    class MissingVersionException < Aws::EmptyStructure
+    class MissingVersionException
+      attr_accessor message: ::String
+      SENSITIVE: []
     end
 
     class MountPoint
@@ -1457,7 +1849,9 @@ module Aws::ECS
       SENSITIVE: []
     end
 
-    class NamespaceNotFoundException < Aws::EmptyStructure
+    class NamespaceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
     end
 
     class NetworkBandwidthGbpsRequest
@@ -1494,7 +1888,9 @@ module Aws::ECS
       SENSITIVE: []
     end
 
-    class NoUpdateAvailableException < Aws::EmptyStructure
+    class NoUpdateAvailableException
+      attr_accessor message: ::String
+      SENSITIVE: []
     end
 
     class PlacementConstraint
@@ -1515,10 +1911,14 @@ module Aws::ECS
       SENSITIVE: []
     end
 
-    class PlatformTaskDefinitionIncompatibilityException < Aws::EmptyStructure
+    class PlatformTaskDefinitionIncompatibilityException
+      attr_accessor message: ::String
+      SENSITIVE: []
     end
 
-    class PlatformUnknownException < Aws::EmptyStructure
+    class PlatformUnknownException
+      attr_accessor message: ::String
+      SENSITIVE: []
     end
 
     class PortMapping
@@ -1609,6 +2009,23 @@ module Aws::ECS
       SENSITIVE: []
     end
 
+    class RegisterDaemonTaskDefinitionRequest
+      attr_accessor family: ::String
+      attr_accessor task_role_arn: ::String
+      attr_accessor execution_role_arn: ::String
+      attr_accessor container_definitions: ::Array[Types::DaemonContainerDefinition]
+      attr_accessor cpu: ::String
+      attr_accessor memory: ::String
+      attr_accessor volumes: ::Array[Types::DaemonVolume]
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class RegisterDaemonTaskDefinitionResponse
+      attr_accessor daemon_task_definition_arn: ::String
+      SENSITIVE: []
+    end
+
     class RegisterTaskDefinitionRequest
       attr_accessor family: ::String
       attr_accessor task_role_arn: ::String
@@ -1657,10 +2074,14 @@ module Aws::ECS
       SENSITIVE: []
     end
 
-    class ResourceInUseException < Aws::EmptyStructure
+    class ResourceInUseException
+      attr_accessor message: ::String
+      SENSITIVE: []
     end
 
-    class ResourceNotFoundException < Aws::EmptyStructure
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
     end
 
     class ResourceRequirement
@@ -1708,6 +2129,14 @@ module Aws::ECS
     class RuntimePlatform
       attr_accessor cpu_architecture: ("X86_64" | "ARM64")
       attr_accessor operating_system_family: ("WINDOWS_SERVER_2019_FULL" | "WINDOWS_SERVER_2019_CORE" | "WINDOWS_SERVER_2016_FULL" | "WINDOWS_SERVER_2004_CORE" | "WINDOWS_SERVER_2022_CORE" | "WINDOWS_SERVER_2022_FULL" | "WINDOWS_SERVER_2025_CORE" | "WINDOWS_SERVER_2025_FULL" | "WINDOWS_SERVER_20H2_CORE" | "LINUX")
+      SENSITIVE: []
+    end
+
+    class S3FilesVolumeConfiguration
+      attr_accessor file_system_arn: ::String
+      attr_accessor root_directory: ::String
+      attr_accessor transit_encryption_port: ::Integer
+      attr_accessor access_point_arn: ::String
       SENSITIVE: []
     end
 
@@ -1889,7 +2318,9 @@ module Aws::ECS
       SENSITIVE: []
     end
 
-    class ServiceDeploymentNotFoundException < Aws::EmptyStructure
+    class ServiceDeploymentNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
     end
 
     class ServiceEvent
@@ -1914,10 +2345,14 @@ module Aws::ECS
       SENSITIVE: []
     end
 
-    class ServiceNotActiveException < Aws::EmptyStructure
+    class ServiceNotActiveException
+      attr_accessor message: ::String
+      SENSITIVE: []
     end
 
-    class ServiceNotFoundException < Aws::EmptyStructure
+    class ServiceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
     end
 
     class ServiceRegistry
@@ -2103,10 +2538,14 @@ module Aws::ECS
     class TagResourceResponse < Aws::EmptyStructure
     end
 
-    class TargetNotConnectedException < Aws::EmptyStructure
+    class TargetNotConnectedException
+      attr_accessor message: ::String
+      SENSITIVE: []
     end
 
-    class TargetNotFoundException < Aws::EmptyStructure
+    class TargetNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
     end
 
     class Task
@@ -2173,6 +2612,7 @@ module Aws::ECS
       attr_accessor proxy_configuration: Types::ProxyConfiguration
       attr_accessor registered_at: ::Time
       attr_accessor deregistered_at: ::Time
+      attr_accessor delete_requested_at: ::Time
       attr_accessor registered_by: ::String
       attr_accessor ephemeral_storage: Types::EphemeralStorage
       attr_accessor enable_fault_injection: bool
@@ -2252,7 +2692,9 @@ module Aws::ECS
       SENSITIVE: []
     end
 
-    class TaskSetNotFoundException < Aws::EmptyStructure
+    class TaskSetNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
     end
 
     class TaskVolumeConfiguration
@@ -2287,7 +2729,9 @@ module Aws::ECS
       SENSITIVE: []
     end
 
-    class UnsupportedFeatureException < Aws::EmptyStructure
+    class UnsupportedFeatureException
+      attr_accessor message: ::String
+      SENSITIVE: []
     end
 
     class UntagResourceRequest
@@ -2360,6 +2804,26 @@ module Aws::ECS
       SENSITIVE: []
     end
 
+    class UpdateDaemonRequest
+      attr_accessor daemon_arn: ::String
+      attr_accessor daemon_task_definition_arn: ::String
+      attr_accessor capacity_provider_arns: ::Array[::String]
+      attr_accessor deployment_configuration: Types::DaemonDeploymentConfiguration
+      attr_accessor propagate_tags: ("DAEMON" | "NONE")
+      attr_accessor enable_ecs_managed_tags: bool
+      attr_accessor enable_execute_command: bool
+      SENSITIVE: []
+    end
+
+    class UpdateDaemonResponse
+      attr_accessor daemon_arn: ::String
+      attr_accessor status: ("ACTIVE" | "DELETE_IN_PROGRESS")
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor deployment_arn: ::String
+      SENSITIVE: []
+    end
+
     class UpdateExpressGatewayServiceRequest
       attr_accessor service_arn: ::String
       attr_accessor execution_role_arn: ::String
@@ -2378,7 +2842,9 @@ module Aws::ECS
       SENSITIVE: []
     end
 
-    class UpdateInProgressException < Aws::EmptyStructure
+    class UpdateInProgressException
+      attr_accessor message: ::String
+      SENSITIVE: []
     end
 
     class UpdateManagedInstancesProviderConfiguration
@@ -2488,6 +2954,7 @@ module Aws::ECS
       attr_accessor host: Types::HostVolumeProperties
       attr_accessor docker_volume_configuration: Types::DockerVolumeConfiguration
       attr_accessor efs_volume_configuration: Types::EFSVolumeConfiguration
+      attr_accessor s3files_volume_configuration: Types::S3FilesVolumeConfiguration
       attr_accessor fsx_windows_file_server_volume_configuration: Types::FSxWindowsFileServerVolumeConfiguration
       attr_accessor configured_at_launch: bool
       SENSITIVE: []

@@ -481,7 +481,7 @@ module Aws
       def list_collections: (
                               ?collection_filters: {
                                 name: ::String?,
-                                status: ("CREATING" | "DELETING" | "ACTIVE" | "FAILED")?,
+                                status: ("CREATING" | "UPDATING" | "DELETING" | "ACTIVE" | "FAILED" | "UPDATE_FAILED")?,
                                 collection_group_name: ::String?
                               },
                               ?next_token: ::String,
@@ -616,6 +616,9 @@ module Aws
       def update_collection: (
                                id: ::String,
                                ?description: ::String,
+                               ?vector_options: {
+                                 serverless_vector_acceleration: ("ENABLED" | "DISABLED" | "ALLOWED")
+                               },
                                ?client_token: ::String
                              ) -> _UpdateCollectionResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateCollectionResponseSuccess

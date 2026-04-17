@@ -69,7 +69,6 @@ module Aws::PartnerCentralSelling
     AwsProductIdentifier = Shapes::StringShape.new(name: 'AwsProductIdentifier')
     AwsProductIdentifiers = Shapes::ListShape.new(name: 'AwsProductIdentifiers')
     AwsProductInsights = Shapes::StructureShape.new(name: 'AwsProductInsights')
-    AwsProductInsightsCurrencyCodeEnum = Shapes::StringShape.new(name: 'AwsProductInsightsCurrencyCodeEnum')
     AwsProductOptimization = Shapes::StructureShape.new(name: 'AwsProductOptimization')
     AwsProductOptimizationsList = Shapes::ListShape.new(name: 'AwsProductOptimizationsList')
     AwsProductsList = Shapes::ListShape.new(name: 'AwsProductsList')
@@ -163,7 +162,6 @@ module Aws::PartnerCentralSelling
     EngagementUseCase = Shapes::StringShape.new(name: 'EngagementUseCase')
     EstimationUrl = Shapes::StringShape.new(name: 'EstimationUrl')
     ExpectedCustomerSpend = Shapes::StructureShape.new(name: 'ExpectedCustomerSpend')
-    ExpectedCustomerSpendCurrencyCodeEnum = Shapes::StringShape.new(name: 'ExpectedCustomerSpendCurrencyCodeEnum')
     ExpectedCustomerSpendList = Shapes::ListShape.new(name: 'ExpectedCustomerSpendList')
     ExpectedCustomerSpendTargetCompanyString = Shapes::StringShape.new(name: 'ExpectedCustomerSpendTargetCompanyString')
     GetAwsOpportunitySummaryRequest = Shapes::StructureShape.new(name: 'GetAwsOpportunitySummaryRequest')
@@ -370,6 +368,7 @@ module Aws::PartnerCentralSelling
     TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
     TaggableResourceArn = Shapes::StringShape.new(name: 'TaggableResourceArn')
+    TargetCloseDateFilter = Shapes::StructureShape.new(name: 'TargetCloseDateFilter')
     TaskArn = Shapes::StringShape.new(name: 'TaskArn')
     TaskArnOrIdentifier = Shapes::StringShape.new(name: 'TaskArnOrIdentifier')
     TaskIdentifier = Shapes::StringShape.new(name: 'TaskIdentifier')
@@ -520,7 +519,7 @@ module Aws::PartnerCentralSelling
 
     AwsProductIdentifiers.member = Shapes::ShapeRef.new(shape: AwsProductIdentifier)
 
-    AwsProductInsights.add_member(:currency_code, Shapes::ShapeRef.new(shape: AwsProductInsightsCurrencyCodeEnum, required: true, location_name: "CurrencyCode"))
+    AwsProductInsights.add_member(:currency_code, Shapes::ShapeRef.new(shape: CurrencyCode, required: true, location_name: "CurrencyCode"))
     AwsProductInsights.add_member(:frequency, Shapes::ShapeRef.new(shape: PaymentFrequency, required: true, location_name: "Frequency"))
     AwsProductInsights.add_member(:total_amount, Shapes::ShapeRef.new(shape: MonetaryAmount, location_name: "TotalAmount"))
     AwsProductInsights.add_member(:total_optimized_amount, Shapes::ShapeRef.new(shape: MonetaryAmount, location_name: "TotalOptimizedAmount"))
@@ -766,7 +765,7 @@ module Aws::PartnerCentralSelling
     EngagementSummaryList.member = Shapes::ShapeRef.new(shape: EngagementSummary)
 
     ExpectedCustomerSpend.add_member(:amount, Shapes::ShapeRef.new(shape: Amount, location_name: "Amount"))
-    ExpectedCustomerSpend.add_member(:currency_code, Shapes::ShapeRef.new(shape: ExpectedCustomerSpendCurrencyCodeEnum, required: true, location_name: "CurrencyCode"))
+    ExpectedCustomerSpend.add_member(:currency_code, Shapes::ShapeRef.new(shape: CurrencyCode, required: true, location_name: "CurrencyCode"))
     ExpectedCustomerSpend.add_member(:frequency, Shapes::ShapeRef.new(shape: PaymentFrequency, required: true, location_name: "Frequency"))
     ExpectedCustomerSpend.add_member(:target_company, Shapes::ShapeRef.new(shape: ExpectedCustomerSpendTargetCompanyString, required: true, location_name: "TargetCompany"))
     ExpectedCustomerSpend.add_member(:estimation_url, Shapes::ShapeRef.new(shape: EstimationUrl, location_name: "EstimationUrl"))
@@ -1109,6 +1108,7 @@ module Aws::PartnerCentralSelling
     ListOpportunitiesRequest.add_member(:life_cycle_review_status, Shapes::ShapeRef.new(shape: ListOpportunitiesRequestLifeCycleReviewStatusList, location_name: "LifeCycleReviewStatus"))
     ListOpportunitiesRequest.add_member(:customer_company_name, Shapes::ShapeRef.new(shape: ListOpportunitiesRequestCustomerCompanyNameList, location_name: "CustomerCompanyName"))
     ListOpportunitiesRequest.add_member(:created_date, Shapes::ShapeRef.new(shape: CreatedDateFilter, location_name: "CreatedDate"))
+    ListOpportunitiesRequest.add_member(:target_close_date, Shapes::ShapeRef.new(shape: TargetCloseDateFilter, location_name: "TargetCloseDate"))
     ListOpportunitiesRequest.struct_class = Types::ListOpportunitiesRequest
 
     ListOpportunitiesRequestCustomerCompanyNameList.member = Shapes::ShapeRef.new(shape: String)
@@ -1488,6 +1488,10 @@ module Aws::PartnerCentralSelling
     TagResourceRequest.struct_class = Types::TagResourceRequest
 
     TagResourceResponse.struct_class = Types::TagResourceResponse
+
+    TargetCloseDateFilter.add_member(:after_target_close_date, Shapes::ShapeRef.new(shape: Date, location_name: "AfterTargetCloseDate"))
+    TargetCloseDateFilter.add_member(:before_target_close_date, Shapes::ShapeRef.new(shape: Date, location_name: "BeforeTargetCloseDate"))
+    TargetCloseDateFilter.struct_class = Types::TargetCloseDateFilter
 
     TaskIdentifiers.member = Shapes::ShapeRef.new(shape: TaskArnOrIdentifier)
 

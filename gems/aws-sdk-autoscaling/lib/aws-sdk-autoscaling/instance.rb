@@ -56,6 +56,12 @@ module Aws::AutoScaling
       data[:availability_zone]
     end
 
+    # The Availability Zone ID where the instance is located.
+    # @return [String]
+    def availability_zone_id
+      data[:availability_zone_id]
+    end
+
     # The lifecycle state for the instance. The `Quarantined` state is not
     # used. For more information, see [Amazon EC2 Auto Scaling instance
     # lifecycle][1] in the *Amazon EC2 Auto Scaling User Guide*.
@@ -64,11 +70,13 @@ module Aws::AutoScaling
     # `Quarantined` \| `InService` \| `Terminating` \| `Terminating:Wait` \|
     # `Terminating:Proceed` \| `Terminating:Retained` \| `Terminated` \|
     # `Detaching` \| `Detached` \| `EnteringStandby` \| `Standby` \|
+    # `ReplacingRootVolume` \| `ReplacingRootVolume:Wait` \|
+    # `ReplacingRootVolume:Proceed` \| `RootVolumeReplaced` \|
     # `Warmed:Pending` \| `Warmed:Pending:Wait` \| `Warmed:Pending:Proceed`
     # \| `Warmed:Pending:Retained` \| `Warmed:Terminating` \|
     # `Warmed:Terminating:Wait` \| `Warmed:Terminating:Proceed` \|
     # `Warmed:Terminating:Retained` \| `Warmed:Terminated` \|
-    # `Warmed:Stopped` \| `Warmed:Running`
+    # `Warmed:Stopped` \| `Warmed:Running` \| `Warmed:Hibernated`
     #
     #
     #

@@ -112,7 +112,7 @@ module Aws::PcaConnectorScep
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/C4SCEP_API/pca-connector-scep/latest/APIReference/API_GetChallengeMetadata.html
+    # [1]: https://docs.aws.amazon.com/pca-connector-scep/latest/APIReference/API_GetChallengeMetadata.html
     #
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) of the challenge.
@@ -329,7 +329,7 @@ module Aws::PcaConnectorScep
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/C4SCEP_API/pca-connector-scep/latest/APIReference/API_CreateChallenge.html
+    #   [1]: https://docs.aws.amazon.com/pca-connector-scep/latest/APIReference/API_CreateChallenge.html
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -395,6 +395,13 @@ module Aws::PcaConnectorScep
     #   [2]: https://docs.aws.amazon.com/privateca/latest/userguide/scep-connector.htmlconnector-for-scep-intune.html
     #   @return [Types::MobileDeviceManagement]
     #
+    # @!attribute [rw] vpc_endpoint_id
+    #   If you don't supply a value, by default Connector for SCEP creates
+    #   a connector accessible over the public internet. If you provide a
+    #   VPC endpoint ID, creates a connector accessible only through that
+    #   specific VPC endpoint.
+    #   @return [String]
+    #
     # @!attribute [rw] client_token
     #   Custom string that can be used to distinguish between calls to the
     #   [CreateChallenge][1] action. Client tokens for `CreateChallenge`
@@ -410,7 +417,7 @@ module Aws::PcaConnectorScep
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/C4SCEP_API/pca-connector-scep/latest/APIReference/API_CreateChallenge.html
+    #   [1]: https://docs.aws.amazon.com/pca-connector-scep/latest/APIReference/API_CreateChallenge.html
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -422,6 +429,7 @@ module Aws::PcaConnectorScep
     class CreateConnectorRequest < Struct.new(
       :certificate_authority_arn,
       :mobile_device_management,
+      :vpc_endpoint_id,
       :client_token,
       :tags)
       SENSITIVE = []

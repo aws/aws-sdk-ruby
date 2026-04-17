@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.44.0 (2026-04-01)
+------------------
+
+* Feature - Added new boolean flag to persist metadata updates to all primary image sets in the same study as the requested image set.
+
+1.43.0 (2026-03-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.42.0 (2026-01-16)
 ------------------
 

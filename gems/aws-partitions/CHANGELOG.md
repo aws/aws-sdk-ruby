@@ -1,6 +1,123 @@
 Unreleased Changes
 ------------------
 
+1.1239.0 (2026-04-16)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.1238.0 (2026-04-13)
+------------------
+
+* Feature - Added support for enumerating regions for  `Aws::Interconnect`.
+
+1.1237.0 (2026-04-08)
+------------------
+
+* Feature - Added support for enumerating regions for  `Aws::MarketplaceDiscovery`.
+
+1.1236.0 (2026-04-07)
+------------------
+
+* Feature - Added support for enumerating regions for  `Aws::S3Files`.
+
+1.1235.0 (2026-04-06)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.1234.0 (2026-04-02)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.1233.0 (2026-03-31)
+------------------
+
+* Feature - Added support for enumerating regions for  `Aws::Sustainability`.
+
+* Feature - Added support for enumerating regions for  `Aws::SecurityAgent`.
+
+1.1232.0 (2026-03-30)
+------------------
+
+* Feature - Added support for enumerating regions for  `Aws::DevOpsAgent`.
+
+1.1231.0 (2026-03-26)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.1230.0 (2026-03-25)
+------------------
+
+* Feature - Added support for enumerating regions for  `Aws::Uxc`.
+
+1.1229.0 (2026-03-20)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.1228.0 (2026-03-19)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.1227.0 (2026-03-16)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.1226.0 (2026-03-13)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.1225.0 (2026-03-12)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.1224.0 (2026-03-11)
+------------------
+
+* Feature - Added support for enumerating regions for  `Aws::SimpleDBv2`.
+
+1.1223.0 (2026-03-06)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.1222.0 (2026-03-05)
+------------------
+
+* Feature - Added support for enumerating regions for  `Aws::ConnectHealth`.
+
+1.1221.0 (2026-03-03)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.1220.0 (2026-02-25)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.1219.0 (2026-02-24)
+------------------
+
+* Feature - Added support for enumerating regions for  `Aws::ElementalInference`.
+
+1.1218.0 (2026-02-23)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.1217.0 (2026-02-20)
+------------------
+
+* Feature - Added support for enumerating regions for  `Aws::SignerData`.
+
 1.1216.0 (2026-02-18)
 ------------------
 

@@ -6130,7 +6130,10 @@ module Aws::SESV2
     #
     #   * Can contain any printable ASCII character.
     #
-    #   * Can contain no more than 870 characters.
+    #   * Can contain no more than 995 characters.
+    #
+    #   * The combined length of the header name and value must not exceed
+    #     996 characters.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/MessageHeader AWS API Documentation

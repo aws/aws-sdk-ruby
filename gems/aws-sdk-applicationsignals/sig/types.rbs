@@ -353,9 +353,10 @@ module Aws::ApplicationSignals
       attr_accessor dependency_config: Types::DependencyConfig
       attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
+      attr_accessor metric_source_types: ::Array[("ServiceOperation" | "CloudWatchMetric" | "ServiceDependency" | "AppMonitor" | "Canary" | "Service")]
       attr_accessor include_linked_accounts: bool
       attr_accessor slo_owner_aws_account_id: ::String
-      attr_accessor metric_source_types: ::Array[("ServiceOperation" | "CloudWatchMetric" | "ServiceDependency")]
+      attr_accessor metric_source: Types::MetricSource
       SENSITIVE: []
     end
 
@@ -463,6 +464,12 @@ module Aws::ApplicationSignals
       SENSITIVE: []
     end
 
+    class MetricSource
+      attr_accessor metric_source_key_attributes: ::Hash[::String, ::String]
+      attr_accessor metric_source_attributes: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
     class MetricStat
       attr_accessor metric: Types::Metric
       attr_accessor period: ::Integer
@@ -532,6 +539,7 @@ module Aws::ApplicationSignals
       attr_accessor total_request_count_metric: ::Array[Types::MetricDataQuery]
       attr_accessor monitored_request_count_metric: Types::MonitoredRequestCountMetricDataQueries
       attr_accessor dependency_config: Types::DependencyConfig
+      attr_accessor metric_source: Types::MetricSource
       SENSITIVE: []
     end
 
@@ -542,6 +550,8 @@ module Aws::ApplicationSignals
       attr_accessor total_request_count_metric: ::Array[Types::MetricDataQuery]
       attr_accessor monitored_request_count_metric: Types::MonitoredRequestCountMetricDataQueries
       attr_accessor dependency_config: Types::DependencyConfig
+      attr_accessor metric_source: Types::MetricSource
+      attr_accessor metric_name: ::String
       SENSITIVE: []
     end
 
@@ -619,6 +629,7 @@ module Aws::ApplicationSignals
       attr_accessor metric_type: ("LATENCY" | "AVAILABILITY")
       attr_accessor metric_data_queries: ::Array[Types::MetricDataQuery]
       attr_accessor dependency_config: Types::DependencyConfig
+      attr_accessor metric_source: Types::MetricSource
       SENSITIVE: []
     end
 
@@ -629,6 +640,7 @@ module Aws::ApplicationSignals
       attr_accessor metric_name: ::String
       attr_accessor statistic: ::String
       attr_accessor period_seconds: ::Integer
+      attr_accessor metric_source: Types::MetricSource
       attr_accessor metric_data_queries: ::Array[Types::MetricDataQuery]
       attr_accessor dependency_config: Types::DependencyConfig
       SENSITIVE: []
@@ -645,7 +657,7 @@ module Aws::ApplicationSignals
       attr_accessor evaluation_type: ("PeriodBased" | "RequestBased")
       attr_accessor goal: Types::Goal
       attr_accessor burn_rate_configurations: ::Array[Types::BurnRateConfiguration]
-      attr_accessor metric_source_type: ("ServiceOperation" | "CloudWatchMetric" | "ServiceDependency")
+      attr_accessor metric_source_type: ("ServiceOperation" | "CloudWatchMetric" | "ServiceDependency" | "AppMonitor" | "Canary" | "Service")
       SENSITIVE: []
     end
 
@@ -687,7 +699,8 @@ module Aws::ApplicationSignals
       attr_accessor dependency_config: Types::DependencyConfig
       attr_accessor created_time: ::Time
       attr_accessor evaluation_type: ("PeriodBased" | "RequestBased")
-      attr_accessor metric_source_type: ("ServiceOperation" | "CloudWatchMetric" | "ServiceDependency")
+      attr_accessor metric_source_type: ("ServiceOperation" | "CloudWatchMetric" | "ServiceDependency" | "AppMonitor" | "Canary" | "Service")
+      attr_accessor metric_source: Types::MetricSource
       SENSITIVE: []
     end
 

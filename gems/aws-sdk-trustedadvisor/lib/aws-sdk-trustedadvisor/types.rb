@@ -34,20 +34,8 @@ module Aws::TrustedAdvisor
     #   The Recommendation ARN
     #   @return [String]
     #
-    # @!attribute [rw] last_updated_at
-    #   When the Recommendation was last updated
-    #   @return [Time]
-    #
     # @!attribute [rw] lifecycle_stage
     #   The lifecycle stage from AWS Trusted Advisor Priority
-    #   @return [String]
-    #
-    # @!attribute [rw] update_reason
-    #   Reason for the lifecycle stage change
-    #   @return [String]
-    #
-    # @!attribute [rw] update_reason_code
-    #   Reason code for the lifecycle state change
     #   @return [String]
     #
     # @!attribute [rw] updated_on_behalf_of
@@ -64,17 +52,29 @@ module Aws::TrustedAdvisor
     #   recommendation managed by AWS Trusted Advisor Priority
     #   @return [String]
     #
+    # @!attribute [rw] update_reason
+    #   Reason for the lifecycle stage change
+    #   @return [String]
+    #
+    # @!attribute [rw] update_reason_code
+    #   Reason code for the lifecycle state change
+    #   @return [String]
+    #
+    # @!attribute [rw] last_updated_at
+    #   When the Recommendation was last updated
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/trustedadvisor-2022-09-15/AccountRecommendationLifecycleSummary AWS API Documentation
     #
     class AccountRecommendationLifecycleSummary < Struct.new(
       :account_id,
       :account_recommendation_arn,
-      :last_updated_at,
       :lifecycle_stage,
+      :updated_on_behalf_of,
+      :updated_on_behalf_of_job_title,
       :update_reason,
       :update_reason_code,
-      :updated_on_behalf_of,
-      :updated_on_behalf_of_job_title)
+      :last_updated_at)
       SENSITIVE = [:update_reason]
       include Aws::Structure
     end
@@ -107,28 +107,20 @@ module Aws::TrustedAdvisor
 
     # A summary of an AWS Trusted Advisor Check
     #
-    # @!attribute [rw] arn
-    #   The ARN of the AWS Trusted Advisor Check
-    #   @return [String]
-    #
-    # @!attribute [rw] aws_services
-    #   The AWS Services that the Check applies to
-    #   @return [Array<String>]
-    #
-    # @!attribute [rw] description
-    #   A description of what the AWS Trusted Advisor Check is monitoring
-    #   @return [String]
-    #
     # @!attribute [rw] id
     #   The unique identifier of the AWS Trusted Advisor Check
     #   @return [String]
     #
-    # @!attribute [rw] metadata
-    #   The column headings for the metadata returned in the resource
-    #   @return [Hash<String,String>]
+    # @!attribute [rw] arn
+    #   The ARN of the AWS Trusted Advisor Check
+    #   @return [String]
     #
     # @!attribute [rw] name
     #   The name of the AWS Trusted Advisor Check
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of what the AWS Trusted Advisor Check is monitoring
     #   @return [String]
     #
     # @!attribute [rw] pillars
@@ -136,21 +128,29 @@ module Aws::TrustedAdvisor
     #   under
     #   @return [Array<String>]
     #
+    # @!attribute [rw] aws_services
+    #   The AWS Services that the Check applies to
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] source
     #   The source of the Recommendation
     #   @return [String]
     #
+    # @!attribute [rw] metadata
+    #   The column headings for the metadata returned in the resource
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/trustedadvisor-2022-09-15/CheckSummary AWS API Documentation
     #
     class CheckSummary < Struct.new(
-      :arn,
-      :aws_services,
-      :description,
       :id,
-      :metadata,
+      :arn,
       :name,
+      :description,
       :pillars,
-      :source)
+      :aws_services,
+      :source,
+      :metadata)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -196,10 +196,16 @@ module Aws::TrustedAdvisor
     #   The Recommendation identifier
     #   @return [String]
     #
+    # @!attribute [rw] language
+    #   The ISO 639-1 code for the language that you want your
+    #   recommendations to appear in.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/trustedadvisor-2022-09-15/GetRecommendationRequest AWS API Documentation
     #
     class GetRecommendationRequest < Struct.new(
-      :recommendation_identifier)
+      :recommendation_identifier,
+      :language)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -230,8 +236,26 @@ module Aws::TrustedAdvisor
       include Aws::Structure
     end
 
+    # @!attribute [rw] next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return per page.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] pillar
+    #   The pillar of the check
+    #   @return [String]
+    #
     # @!attribute [rw] aws_service
     #   The aws service associated with the check
+    #   @return [String]
+    #
+    # @!attribute [rw] source
+    #   The source of the check
     #   @return [String]
     #
     # @!attribute [rw] language
@@ -239,145 +263,127 @@ module Aws::TrustedAdvisor
     #   appear in.
     #   @return [String]
     #
-    # @!attribute [rw] max_results
-    #   The maximum number of results to return per page.
-    #   @return [Integer]
+    # @see http://docs.aws.amazon.com/goto/WebAPI/trustedadvisor-2022-09-15/ListChecksRequest AWS API Documentation
     #
+    class ListChecksRequest < Struct.new(
+      :next_token,
+      :max_results,
+      :pillar,
+      :aws_service,
+      :source,
+      :language)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] next_token
     #   The token for the next set of results. Use the value returned in the
     #   previous response in the next request to retrieve the next set of
     #   results.
     #   @return [String]
     #
-    # @!attribute [rw] pillar
-    #   The pillar of the check
-    #   @return [String]
-    #
-    # @!attribute [rw] source
-    #   The source of the check
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/trustedadvisor-2022-09-15/ListChecksRequest AWS API Documentation
-    #
-    class ListChecksRequest < Struct.new(
-      :aws_service,
-      :language,
-      :max_results,
-      :next_token,
-      :pillar,
-      :source)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
     # @!attribute [rw] check_summaries
     #   The list of Checks
     #   @return [Array<Types::CheckSummary>]
     #
-    # @!attribute [rw] next_token
-    #   The token for the next set of results. Use the value returned in the
-    #   previous response in the next request to retrieve the next set of
-    #   results.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/trustedadvisor-2022-09-15/ListChecksResponse AWS API Documentation
     #
     class ListChecksResponse < Struct.new(
-      :check_summaries,
-      :next_token)
+      :next_token,
+      :check_summaries)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # @!attribute [rw] affected_account_id
-    #   An account affected by this organization recommendation
+    # @!attribute [rw] next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
     #   @return [String]
     #
     # @!attribute [rw] max_results
     #   The maximum number of results to return per page.
     #   @return [Integer]
-    #
-    # @!attribute [rw] next_token
-    #   The token for the next set of results. Use the value returned in the
-    #   previous response in the next request to retrieve the next set of
-    #   results.
-    #   @return [String]
     #
     # @!attribute [rw] organization_recommendation_identifier
     #   The Recommendation identifier
     #   @return [String]
     #
+    # @!attribute [rw] affected_account_id
+    #   An account affected by this organization recommendation
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/trustedadvisor-2022-09-15/ListOrganizationRecommendationAccountsRequest AWS API Documentation
     #
     class ListOrganizationRecommendationAccountsRequest < Struct.new(
-      :affected_account_id,
-      :max_results,
       :next_token,
-      :organization_recommendation_identifier)
+      :max_results,
+      :organization_recommendation_identifier,
+      :affected_account_id)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # @!attribute [rw] account_recommendation_lifecycle_summaries
-    #   The account recommendations lifecycles that are applicable to the
-    #   Recommendation
-    #   @return [Array<Types::AccountRecommendationLifecycleSummary>]
-    #
     # @!attribute [rw] next_token
     #   The token for the next set of results. Use the value returned in the
     #   previous response in the next request to retrieve the next set of
     #   results.
     #   @return [String]
     #
+    # @!attribute [rw] account_recommendation_lifecycle_summaries
+    #   The account recommendations lifecycles that are applicable to the
+    #   Recommendation
+    #   @return [Array<Types::AccountRecommendationLifecycleSummary>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/trustedadvisor-2022-09-15/ListOrganizationRecommendationAccountsResponse AWS API Documentation
     #
     class ListOrganizationRecommendationAccountsResponse < Struct.new(
-      :account_recommendation_lifecycle_summaries,
-      :next_token)
+      :next_token,
+      :account_recommendation_lifecycle_summaries)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # @!attribute [rw] affected_account_id
-    #   An account affected by this organization recommendation
+    # @!attribute [rw] next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return per page.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] status
+    #   The status of the resource
     #   @return [String]
     #
     # @!attribute [rw] exclusion_status
     #   The exclusion status of the resource
     #   @return [String]
     #
-    # @!attribute [rw] max_results
-    #   The maximum number of results to return per page.
-    #   @return [Integer]
-    #
-    # @!attribute [rw] next_token
-    #   The token for the next set of results. Use the value returned in the
-    #   previous response in the next request to retrieve the next set of
-    #   results.
+    # @!attribute [rw] region_code
+    #   The AWS Region code of the resource
     #   @return [String]
     #
     # @!attribute [rw] organization_recommendation_identifier
     #   The AWS Organization organization's Recommendation identifier
     #   @return [String]
     #
-    # @!attribute [rw] region_code
-    #   The AWS Region code of the resource
-    #   @return [String]
-    #
-    # @!attribute [rw] status
-    #   The status of the resource
+    # @!attribute [rw] affected_account_id
+    #   An account affected by this organization recommendation
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/trustedadvisor-2022-09-15/ListOrganizationRecommendationResourcesRequest AWS API Documentation
     #
     class ListOrganizationRecommendationResourcesRequest < Struct.new(
-      :affected_account_id,
-      :exclusion_status,
-      :max_results,
       :next_token,
-      :organization_recommendation_identifier,
+      :max_results,
+      :status,
+      :exclusion_status,
       :region_code,
-      :status)
+      :organization_recommendation_identifier,
+      :affected_account_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -401,61 +407,61 @@ module Aws::TrustedAdvisor
       include Aws::Structure
     end
 
-    # @!attribute [rw] after_last_updated_at
-    #   After the last update of the Recommendation
-    #   @return [Time]
-    #
-    # @!attribute [rw] aws_service
-    #   The aws service associated with the Recommendation
-    #   @return [String]
-    #
-    # @!attribute [rw] before_last_updated_at
-    #   Before the last update of the Recommendation
-    #   @return [Time]
-    #
-    # @!attribute [rw] check_identifier
-    #   The check identifier of the Recommendation
-    #   @return [String]
-    #
-    # @!attribute [rw] max_results
-    #   The maximum number of results to return per page.
-    #   @return [Integer]
-    #
     # @!attribute [rw] next_token
     #   The token for the next set of results. Use the value returned in the
     #   previous response in the next request to retrieve the next set of
     #   results.
     #   @return [String]
     #
-    # @!attribute [rw] pillar
-    #   The pillar of the Recommendation
-    #   @return [String]
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return per page.
+    #   @return [Integer]
     #
-    # @!attribute [rw] source
-    #   The source of the Recommendation
+    # @!attribute [rw] type
+    #   The type of the Recommendation
     #   @return [String]
     #
     # @!attribute [rw] status
     #   The status of the Recommendation
     #   @return [String]
     #
-    # @!attribute [rw] type
-    #   The type of the Recommendation
+    # @!attribute [rw] pillar
+    #   The pillar of the Recommendation
     #   @return [String]
+    #
+    # @!attribute [rw] aws_service
+    #   The aws service associated with the Recommendation
+    #   @return [String]
+    #
+    # @!attribute [rw] source
+    #   The source of the Recommendation
+    #   @return [String]
+    #
+    # @!attribute [rw] check_identifier
+    #   The check identifier of the Recommendation
+    #   @return [String]
+    #
+    # @!attribute [rw] after_last_updated_at
+    #   After the last update of the Recommendation
+    #   @return [Time]
+    #
+    # @!attribute [rw] before_last_updated_at
+    #   Before the last update of the Recommendation
+    #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/trustedadvisor-2022-09-15/ListOrganizationRecommendationsRequest AWS API Documentation
     #
     class ListOrganizationRecommendationsRequest < Struct.new(
-      :after_last_updated_at,
-      :aws_service,
-      :before_last_updated_at,
-      :check_identifier,
-      :max_results,
       :next_token,
-      :pillar,
-      :source,
+      :max_results,
+      :type,
       :status,
-      :type)
+      :pillar,
+      :aws_service,
+      :source,
+      :check_identifier,
+      :after_last_updated_at,
+      :before_last_updated_at)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -479,41 +485,47 @@ module Aws::TrustedAdvisor
       include Aws::Structure
     end
 
-    # @!attribute [rw] exclusion_status
-    #   The exclusion status of the resource
-    #   @return [String]
-    #
-    # @!attribute [rw] max_results
-    #   The maximum number of results to return per page.
-    #   @return [Integer]
-    #
     # @!attribute [rw] next_token
     #   The token for the next set of results. Use the value returned in the
     #   previous response in the next request to retrieve the next set of
     #   results.
     #   @return [String]
     #
-    # @!attribute [rw] recommendation_identifier
-    #   The Recommendation identifier
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return per page.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] status
+    #   The status of the resource
+    #   @return [String]
+    #
+    # @!attribute [rw] exclusion_status
+    #   The exclusion status of the resource
     #   @return [String]
     #
     # @!attribute [rw] region_code
     #   The AWS Region code of the resource
     #   @return [String]
     #
-    # @!attribute [rw] status
-    #   The status of the resource
+    # @!attribute [rw] recommendation_identifier
+    #   The Recommendation identifier
+    #   @return [String]
+    #
+    # @!attribute [rw] language
+    #   The ISO 639-1 code for the language that you want your
+    #   recommendations to appear in.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/trustedadvisor-2022-09-15/ListRecommendationResourcesRequest AWS API Documentation
     #
     class ListRecommendationResourcesRequest < Struct.new(
-      :exclusion_status,
-      :max_results,
       :next_token,
-      :recommendation_identifier,
+      :max_results,
+      :status,
+      :exclusion_status,
       :region_code,
-      :status)
+      :recommendation_identifier,
+      :language)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -537,61 +549,67 @@ module Aws::TrustedAdvisor
       include Aws::Structure
     end
 
-    # @!attribute [rw] after_last_updated_at
-    #   After the last update of the Recommendation
-    #   @return [Time]
-    #
-    # @!attribute [rw] aws_service
-    #   The aws service associated with the Recommendation
-    #   @return [String]
-    #
-    # @!attribute [rw] before_last_updated_at
-    #   Before the last update of the Recommendation
-    #   @return [Time]
-    #
-    # @!attribute [rw] check_identifier
-    #   The check identifier of the Recommendation
-    #   @return [String]
-    #
-    # @!attribute [rw] max_results
-    #   The maximum number of results to return per page.
-    #   @return [Integer]
-    #
     # @!attribute [rw] next_token
     #   The token for the next set of results. Use the value returned in the
     #   previous response in the next request to retrieve the next set of
     #   results.
     #   @return [String]
     #
-    # @!attribute [rw] pillar
-    #   The pillar of the Recommendation
-    #   @return [String]
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return per page.
+    #   @return [Integer]
     #
-    # @!attribute [rw] source
-    #   The source of the Recommendation
+    # @!attribute [rw] type
+    #   The type of the Recommendation
     #   @return [String]
     #
     # @!attribute [rw] status
     #   The status of the Recommendation
     #   @return [String]
     #
-    # @!attribute [rw] type
-    #   The type of the Recommendation
+    # @!attribute [rw] pillar
+    #   The pillar of the Recommendation
+    #   @return [String]
+    #
+    # @!attribute [rw] aws_service
+    #   The aws service associated with the Recommendation
+    #   @return [String]
+    #
+    # @!attribute [rw] source
+    #   The source of the Recommendation
+    #   @return [String]
+    #
+    # @!attribute [rw] check_identifier
+    #   The check identifier of the Recommendation
+    #   @return [String]
+    #
+    # @!attribute [rw] after_last_updated_at
+    #   After the last update of the Recommendation
+    #   @return [Time]
+    #
+    # @!attribute [rw] before_last_updated_at
+    #   Before the last update of the Recommendation
+    #   @return [Time]
+    #
+    # @!attribute [rw] language
+    #   The ISO 639-1 code for the language that you want your
+    #   recommendations to appear in.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/trustedadvisor-2022-09-15/ListRecommendationsRequest AWS API Documentation
     #
     class ListRecommendationsRequest < Struct.new(
-      :after_last_updated_at,
-      :aws_service,
-      :before_last_updated_at,
-      :check_identifier,
-      :max_results,
       :next_token,
-      :pillar,
-      :source,
+      :max_results,
+      :type,
       :status,
-      :type)
+      :pillar,
+      :aws_service,
+      :source,
+      :check_identifier,
+      :after_last_updated_at,
+      :before_last_updated_at,
+      :language)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -617,69 +635,8 @@ module Aws::TrustedAdvisor
 
     # A Recommendation for accounts within an Organization
     #
-    # @!attribute [rw] arn
-    #   The ARN of the Recommendation
-    #   @return [String]
-    #
-    # @!attribute [rw] aws_services
-    #   The AWS Services that the Recommendation applies to
-    #   @return [Array<String>]
-    #
-    # @!attribute [rw] check_arn
-    #   The AWS Trusted Advisor Check ARN that relates to the Recommendation
-    #   @return [String]
-    #
-    # @!attribute [rw] created_at
-    #   When the Recommendation was created, if created by AWS Trusted
-    #   Advisor Priority
-    #   @return [Time]
-    #
-    # @!attribute [rw] created_by
-    #   The creator, if created by AWS Trusted Advisor Priority
-    #   @return [String]
-    #
-    # @!attribute [rw] description
-    #   A description for AWS Trusted Advisor recommendations
-    #   @return [String]
-    #
     # @!attribute [rw] id
     #   The ID which identifies where the Recommendation was produced
-    #   @return [String]
-    #
-    # @!attribute [rw] last_updated_at
-    #   When the Recommendation was last updated
-    #   @return [Time]
-    #
-    # @!attribute [rw] lifecycle_stage
-    #   The lifecycle stage from AWS Trusted Advisor Priority
-    #   @return [String]
-    #
-    # @!attribute [rw] name
-    #   The name of the AWS Trusted Advisor Recommendation
-    #   @return [String]
-    #
-    # @!attribute [rw] pillar_specific_aggregates
-    #   The pillar aggregations for cost savings
-    #   @return [Types::RecommendationPillarSpecificAggregates]
-    #
-    # @!attribute [rw] pillars
-    #   The Pillars that the Recommendation is optimizing
-    #   @return [Array<String>]
-    #
-    # @!attribute [rw] resolved_at
-    #   When the Recommendation was resolved
-    #   @return [Time]
-    #
-    # @!attribute [rw] resources_aggregates
-    #   An aggregation of all resources
-    #   @return [Types::RecommendationResourcesAggregates]
-    #
-    # @!attribute [rw] source
-    #   The source of the Recommendation
-    #   @return [String]
-    #
-    # @!attribute [rw] status
-    #   The status of the Recommendation
     #   @return [String]
     #
     # @!attribute [rw] type
@@ -687,12 +644,61 @@ module Aws::TrustedAdvisor
     #   Advisor Priority
     #   @return [String]
     #
-    # @!attribute [rw] update_reason
-    #   Reason for the lifecycle stage change
+    # @!attribute [rw] check_arn
+    #   The AWS Trusted Advisor Check ARN that relates to the Recommendation
     #   @return [String]
     #
-    # @!attribute [rw] update_reason_code
-    #   Reason code for the lifecycle state change
+    # @!attribute [rw] status
+    #   The status of the Recommendation
+    #   @return [String]
+    #
+    # @!attribute [rw] lifecycle_stage
+    #   The lifecycle stage from AWS Trusted Advisor Priority
+    #   @return [String]
+    #
+    # @!attribute [rw] pillars
+    #   The Pillars that the Recommendation is optimizing
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] source
+    #   The source of the Recommendation
+    #   @return [String]
+    #
+    # @!attribute [rw] aws_services
+    #   The AWS Services that the Recommendation applies to
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] name
+    #   The name of the AWS Trusted Advisor Recommendation
+    #   @return [String]
+    #
+    # @!attribute [rw] resources_aggregates
+    #   An aggregation of all resources
+    #   @return [Types::RecommendationResourcesAggregates]
+    #
+    # @!attribute [rw] pillar_specific_aggregates
+    #   The pillar aggregations for cost savings
+    #   @return [Types::RecommendationPillarSpecificAggregates]
+    #
+    # @!attribute [rw] created_at
+    #   When the Recommendation was created, if created by AWS Trusted
+    #   Advisor Priority
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_at
+    #   When the Recommendation was last updated
+    #   @return [Time]
+    #
+    # @!attribute [rw] arn
+    #   The ARN of the Recommendation
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description for AWS Trusted Advisor recommendations
+    #   @return [String]
+    #
+    # @!attribute [rw] created_by
+    #   The creator, if created by AWS Trusted Advisor Priority
     #   @return [String]
     #
     # @!attribute [rw] updated_on_behalf_of
@@ -709,38 +715,50 @@ module Aws::TrustedAdvisor
     #   recommendation managed by AWS Trusted Advisor Priority
     #   @return [String]
     #
+    # @!attribute [rw] update_reason
+    #   Reason for the lifecycle stage change
+    #   @return [String]
+    #
+    # @!attribute [rw] update_reason_code
+    #   Reason code for the lifecycle state change
+    #   @return [String]
+    #
+    # @!attribute [rw] resolved_at
+    #   When the Recommendation was resolved
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/trustedadvisor-2022-09-15/OrganizationRecommendation AWS API Documentation
     #
     class OrganizationRecommendation < Struct.new(
-      :arn,
-      :aws_services,
-      :check_arn,
-      :created_at,
-      :created_by,
-      :description,
       :id,
-      :last_updated_at,
-      :lifecycle_stage,
-      :name,
-      :pillar_specific_aggregates,
-      :pillars,
-      :resolved_at,
-      :resources_aggregates,
-      :source,
-      :status,
       :type,
+      :check_arn,
+      :status,
+      :lifecycle_stage,
+      :pillars,
+      :source,
+      :aws_services,
+      :name,
+      :resources_aggregates,
+      :pillar_specific_aggregates,
+      :created_at,
+      :last_updated_at,
+      :arn,
+      :description,
+      :created_by,
+      :updated_on_behalf_of,
+      :updated_on_behalf_of_job_title,
       :update_reason,
       :update_reason_code,
-      :updated_on_behalf_of,
-      :updated_on_behalf_of_job_title)
+      :resolved_at)
       SENSITIVE = [:update_reason]
       include Aws::Structure
     end
 
     # Organization Recommendation Resource Summary
     #
-    # @!attribute [rw] account_id
-    #   The AWS account ID
+    # @!attribute [rw] id
+    #   The ID of the Recommendation Resource
     #   @return [String]
     #
     # @!attribute [rw] arn
@@ -748,27 +766,8 @@ module Aws::TrustedAdvisor
     #   @return [String]
     #
     # @!attribute [rw] aws_resource_id
-    #   The AWS resource identifier
-    #   @return [String]
-    #
-    # @!attribute [rw] exclusion_status
-    #   The exclusion status of the Recommendation Resource
-    #   @return [String]
-    #
-    # @!attribute [rw] id
-    #   The ID of the Recommendation Resource
-    #   @return [String]
-    #
-    # @!attribute [rw] last_updated_at
-    #   When the Recommendation Resource was last updated
-    #   @return [Time]
-    #
-    # @!attribute [rw] metadata
-    #   Metadata associated with the Recommendation Resource
-    #   @return [Hash<String,String>]
-    #
-    # @!attribute [rw] recommendation_arn
-    #   The Recommendation ARN
+    #   The AWS resource identifier. There are certain checks that generate
+    #   recommendation resources without an awsResourceId.
     #   @return [String]
     #
     # @!attribute [rw] region_code
@@ -779,76 +778,47 @@ module Aws::TrustedAdvisor
     #   The current status of the Recommendation Resource
     #   @return [String]
     #
+    # @!attribute [rw] metadata
+    #   Metadata associated with the Recommendation Resource
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] last_updated_at
+    #   When the Recommendation Resource was last updated
+    #   @return [Time]
+    #
+    # @!attribute [rw] exclusion_status
+    #   The exclusion status of the Recommendation Resource
+    #   @return [String]
+    #
+    # @!attribute [rw] account_id
+    #   The AWS account ID
+    #   @return [String]
+    #
+    # @!attribute [rw] recommendation_arn
+    #   The Recommendation ARN
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/trustedadvisor-2022-09-15/OrganizationRecommendationResourceSummary AWS API Documentation
     #
     class OrganizationRecommendationResourceSummary < Struct.new(
-      :account_id,
+      :id,
       :arn,
       :aws_resource_id,
-      :exclusion_status,
-      :id,
-      :last_updated_at,
-      :metadata,
-      :recommendation_arn,
       :region_code,
-      :status)
+      :status,
+      :metadata,
+      :last_updated_at,
+      :exclusion_status,
+      :account_id,
+      :recommendation_arn)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # Summary of recommendation for accounts within an Organization
     #
-    # @!attribute [rw] arn
-    #   The ARN of the Recommendation
-    #   @return [String]
-    #
-    # @!attribute [rw] aws_services
-    #   The AWS Services that the Recommendation applies to
-    #   @return [Array<String>]
-    #
-    # @!attribute [rw] check_arn
-    #   The AWS Trusted Advisor Check ARN that relates to the Recommendation
-    #   @return [String]
-    #
-    # @!attribute [rw] created_at
-    #   When the Recommendation was created, if created by AWS Trusted
-    #   Advisor Priority
-    #   @return [Time]
-    #
     # @!attribute [rw] id
     #   The ID which identifies where the Recommendation was produced
-    #   @return [String]
-    #
-    # @!attribute [rw] last_updated_at
-    #   When the Recommendation was last updated
-    #   @return [Time]
-    #
-    # @!attribute [rw] lifecycle_stage
-    #   The lifecycle stage from AWS Trusted Advisor Priority
-    #   @return [String]
-    #
-    # @!attribute [rw] name
-    #   The name of the AWS Trusted Advisor Recommendation
-    #   @return [String]
-    #
-    # @!attribute [rw] pillar_specific_aggregates
-    #   The pillar aggregations for cost savings
-    #   @return [Types::RecommendationPillarSpecificAggregates]
-    #
-    # @!attribute [rw] pillars
-    #   The Pillars that the Recommendation is optimizing
-    #   @return [Array<String>]
-    #
-    # @!attribute [rw] resources_aggregates
-    #   An aggregation of all resources
-    #   @return [Types::RecommendationResourcesAggregates]
-    #
-    # @!attribute [rw] source
-    #   The source of the Recommendation
-    #   @return [String]
-    #
-    # @!attribute [rw] status
-    #   The status of the Recommendation
     #   @return [String]
     #
     # @!attribute [rw] type
@@ -856,92 +826,80 @@ module Aws::TrustedAdvisor
     #   Advisor Priority
     #   @return [String]
     #
+    # @!attribute [rw] check_arn
+    #   The AWS Trusted Advisor Check ARN that relates to the Recommendation
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the Recommendation
+    #   @return [String]
+    #
+    # @!attribute [rw] lifecycle_stage
+    #   The lifecycle stage from AWS Trusted Advisor Priority
+    #   @return [String]
+    #
+    # @!attribute [rw] pillars
+    #   The Pillars that the Recommendation is optimizing
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] source
+    #   The source of the Recommendation
+    #   @return [String]
+    #
+    # @!attribute [rw] aws_services
+    #   The AWS Services that the Recommendation applies to
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] name
+    #   The name of the AWS Trusted Advisor Recommendation
+    #   @return [String]
+    #
+    # @!attribute [rw] resources_aggregates
+    #   An aggregation of all resources
+    #   @return [Types::RecommendationResourcesAggregates]
+    #
+    # @!attribute [rw] pillar_specific_aggregates
+    #   The pillar aggregations for cost savings
+    #   @return [Types::RecommendationPillarSpecificAggregates]
+    #
+    # @!attribute [rw] created_at
+    #   When the Recommendation was created, if created by AWS Trusted
+    #   Advisor Priority
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_at
+    #   When the Recommendation was last updated
+    #   @return [Time]
+    #
+    # @!attribute [rw] arn
+    #   The ARN of the Recommendation
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/trustedadvisor-2022-09-15/OrganizationRecommendationSummary AWS API Documentation
     #
     class OrganizationRecommendationSummary < Struct.new(
-      :arn,
-      :aws_services,
-      :check_arn,
-      :created_at,
       :id,
-      :last_updated_at,
-      :lifecycle_stage,
-      :name,
-      :pillar_specific_aggregates,
-      :pillars,
-      :resources_aggregates,
-      :source,
+      :type,
+      :check_arn,
       :status,
-      :type)
+      :lifecycle_stage,
+      :pillars,
+      :source,
+      :aws_services,
+      :name,
+      :resources_aggregates,
+      :pillar_specific_aggregates,
+      :created_at,
+      :last_updated_at,
+      :arn)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # A Recommendation for an Account
     #
-    # @!attribute [rw] arn
-    #   The ARN of the Recommendation
-    #   @return [String]
-    #
-    # @!attribute [rw] aws_services
-    #   The AWS Services that the Recommendation applies to
-    #   @return [Array<String>]
-    #
-    # @!attribute [rw] check_arn
-    #   The AWS Trusted Advisor Check ARN that relates to the Recommendation
-    #   @return [String]
-    #
-    # @!attribute [rw] created_at
-    #   When the Recommendation was created, if created by AWS Trusted
-    #   Advisor Priority
-    #   @return [Time]
-    #
-    # @!attribute [rw] created_by
-    #   The creator, if created by AWS Trusted Advisor Priority
-    #   @return [String]
-    #
-    # @!attribute [rw] description
-    #   A description for AWS Trusted Advisor recommendations
-    #   @return [String]
-    #
     # @!attribute [rw] id
     #   The ID which identifies where the Recommendation was produced
-    #   @return [String]
-    #
-    # @!attribute [rw] last_updated_at
-    #   When the Recommendation was last updated
-    #   @return [Time]
-    #
-    # @!attribute [rw] lifecycle_stage
-    #   The lifecycle stage from AWS Trusted Advisor Priority
-    #   @return [String]
-    #
-    # @!attribute [rw] name
-    #   The name of the AWS Trusted Advisor Recommendation
-    #   @return [String]
-    #
-    # @!attribute [rw] pillar_specific_aggregates
-    #   The pillar aggregations for cost savings
-    #   @return [Types::RecommendationPillarSpecificAggregates]
-    #
-    # @!attribute [rw] pillars
-    #   The Pillars that the Recommendation is optimizing
-    #   @return [Array<String>]
-    #
-    # @!attribute [rw] resolved_at
-    #   When the Recommendation was resolved
-    #   @return [Time]
-    #
-    # @!attribute [rw] resources_aggregates
-    #   An aggregation of all resources
-    #   @return [Types::RecommendationResourcesAggregates]
-    #
-    # @!attribute [rw] source
-    #   The source of the Recommendation
-    #   @return [String]
-    #
-    # @!attribute [rw] status
-    #   The status of the Recommendation
     #   @return [String]
     #
     # @!attribute [rw] type
@@ -949,12 +907,66 @@ module Aws::TrustedAdvisor
     #   Advisor Priority
     #   @return [String]
     #
-    # @!attribute [rw] update_reason
-    #   Reason for the lifecycle stage change
+    # @!attribute [rw] check_arn
+    #   The AWS Trusted Advisor Check ARN that relates to the Recommendation
     #   @return [String]
     #
-    # @!attribute [rw] update_reason_code
-    #   Reason code for the lifecycle state change
+    # @!attribute [rw] status
+    #   The status of the Recommendation
+    #   @return [String]
+    #
+    # @!attribute [rw] lifecycle_stage
+    #   The lifecycle stage from AWS Trusted Advisor Priority
+    #   @return [String]
+    #
+    # @!attribute [rw] pillars
+    #   The Pillars that the Recommendation is optimizing
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] source
+    #   The source of the Recommendation
+    #   @return [String]
+    #
+    # @!attribute [rw] aws_services
+    #   The AWS Services that the Recommendation applies to
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] name
+    #   The name of the AWS Trusted Advisor Recommendation
+    #   @return [String]
+    #
+    # @!attribute [rw] resources_aggregates
+    #   An aggregation of all resources
+    #   @return [Types::RecommendationResourcesAggregates]
+    #
+    # @!attribute [rw] pillar_specific_aggregates
+    #   The pillar aggregations for cost savings
+    #   @return [Types::RecommendationPillarSpecificAggregates]
+    #
+    # @!attribute [rw] created_at
+    #   When the Recommendation was created, if created by AWS Trusted
+    #   Advisor Priority
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_at
+    #   When the Recommendation was last updated
+    #   @return [Time]
+    #
+    # @!attribute [rw] arn
+    #   The ARN of the Recommendation
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reason
+    #   This attribute provides additional details about potential
+    #   discrepancies in check status determination.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description for AWS Trusted Advisor recommendations
+    #   @return [String]
+    #
+    # @!attribute [rw] created_by
+    #   The creator, if created by AWS Trusted Advisor Priority
     #   @return [String]
     #
     # @!attribute [rw] updated_on_behalf_of
@@ -971,30 +983,43 @@ module Aws::TrustedAdvisor
     #   recommendation managed by AWS Trusted Advisor Priority
     #   @return [String]
     #
+    # @!attribute [rw] update_reason
+    #   Reason for the lifecycle stage change
+    #   @return [String]
+    #
+    # @!attribute [rw] update_reason_code
+    #   Reason code for the lifecycle state change
+    #   @return [String]
+    #
+    # @!attribute [rw] resolved_at
+    #   When the Recommendation was resolved
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/trustedadvisor-2022-09-15/Recommendation AWS API Documentation
     #
     class Recommendation < Struct.new(
-      :arn,
-      :aws_services,
-      :check_arn,
-      :created_at,
-      :created_by,
-      :description,
       :id,
-      :last_updated_at,
-      :lifecycle_stage,
-      :name,
-      :pillar_specific_aggregates,
-      :pillars,
-      :resolved_at,
-      :resources_aggregates,
-      :source,
-      :status,
       :type,
+      :check_arn,
+      :status,
+      :lifecycle_stage,
+      :pillars,
+      :source,
+      :aws_services,
+      :name,
+      :resources_aggregates,
+      :pillar_specific_aggregates,
+      :created_at,
+      :last_updated_at,
+      :arn,
+      :status_reason,
+      :description,
+      :created_by,
+      :updated_on_behalf_of,
+      :updated_on_behalf_of_job_title,
       :update_reason,
       :update_reason_code,
-      :updated_on_behalf_of,
-      :updated_on_behalf_of_job_title)
+      :resolved_at)
       SENSITIVE = [:update_reason]
       include Aws::Structure
     end
@@ -1055,32 +1080,17 @@ module Aws::TrustedAdvisor
 
     # Summary of a Recommendation Resource
     #
+    # @!attribute [rw] id
+    #   The ID of the Recommendation Resource
+    #   @return [String]
+    #
     # @!attribute [rw] arn
     #   The ARN of the Recommendation Resource
     #   @return [String]
     #
     # @!attribute [rw] aws_resource_id
-    #   The AWS resource identifier
-    #   @return [String]
-    #
-    # @!attribute [rw] exclusion_status
-    #   The exclusion status of the Recommendation Resource
-    #   @return [String]
-    #
-    # @!attribute [rw] id
-    #   The ID of the Recommendation Resource
-    #   @return [String]
-    #
-    # @!attribute [rw] last_updated_at
-    #   When the Recommendation Resource was last updated
-    #   @return [Time]
-    #
-    # @!attribute [rw] metadata
-    #   Metadata associated with the Recommendation Resource
-    #   @return [Hash<String,String>]
-    #
-    # @!attribute [rw] recommendation_arn
-    #   The Recommendation ARN
+    #   The AWS resource identifier. There are certain checks that generate
+    #   recommendation resources without an awsResourceId.
     #   @return [String]
     #
     # @!attribute [rw] region_code
@@ -1091,28 +1101,39 @@ module Aws::TrustedAdvisor
     #   The current status of the Recommendation Resource
     #   @return [String]
     #
+    # @!attribute [rw] metadata
+    #   Metadata associated with the Recommendation Resource
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] last_updated_at
+    #   When the Recommendation Resource was last updated
+    #   @return [Time]
+    #
+    # @!attribute [rw] exclusion_status
+    #   The exclusion status of the Recommendation Resource
+    #   @return [String]
+    #
+    # @!attribute [rw] recommendation_arn
+    #   The Recommendation ARN
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/trustedadvisor-2022-09-15/RecommendationResourceSummary AWS API Documentation
     #
     class RecommendationResourceSummary < Struct.new(
+      :id,
       :arn,
       :aws_resource_id,
-      :exclusion_status,
-      :id,
-      :last_updated_at,
-      :metadata,
-      :recommendation_arn,
       :region_code,
-      :status)
+      :status,
+      :metadata,
+      :last_updated_at,
+      :exclusion_status,
+      :recommendation_arn)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # Aggregation of Recommendation Resources
-    #
-    # @!attribute [rw] error_count
-    #   The number of AWS resources that were flagged to have errors
-    #   according to the Trusted Advisor check
-    #   @return [Integer]
     #
     # @!attribute [rw] ok_count
     #   The number of AWS resources that were flagged to be OK according to
@@ -1124,69 +1145,31 @@ module Aws::TrustedAdvisor
     #   according to the Trusted Advisor check
     #   @return [Integer]
     #
+    # @!attribute [rw] error_count
+    #   The number of AWS resources that were flagged to have errors
+    #   according to the Trusted Advisor check
+    #   @return [Integer]
+    #
+    # @!attribute [rw] excluded_count
+    #   The number of AWS resources belonging to this Trusted Advisor check
+    #   that were excluded by the customer
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/trustedadvisor-2022-09-15/RecommendationResourcesAggregates AWS API Documentation
     #
     class RecommendationResourcesAggregates < Struct.new(
-      :error_count,
       :ok_count,
-      :warning_count)
+      :warning_count,
+      :error_count,
+      :excluded_count)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # Summary of Recommendation for an Account
     #
-    # @!attribute [rw] arn
-    #   The ARN of the Recommendation
-    #   @return [String]
-    #
-    # @!attribute [rw] aws_services
-    #   The AWS Services that the Recommendation applies to
-    #   @return [Array<String>]
-    #
-    # @!attribute [rw] check_arn
-    #   The AWS Trusted Advisor Check ARN that relates to the Recommendation
-    #   @return [String]
-    #
-    # @!attribute [rw] created_at
-    #   When the Recommendation was created, if created by AWS Trusted
-    #   Advisor Priority
-    #   @return [Time]
-    #
     # @!attribute [rw] id
     #   The ID which identifies where the Recommendation was produced
-    #   @return [String]
-    #
-    # @!attribute [rw] last_updated_at
-    #   When the Recommendation was last updated
-    #   @return [Time]
-    #
-    # @!attribute [rw] lifecycle_stage
-    #   The lifecycle stage from AWS Trusted Advisor Priority
-    #   @return [String]
-    #
-    # @!attribute [rw] name
-    #   The name of the AWS Trusted Advisor Recommendation
-    #   @return [String]
-    #
-    # @!attribute [rw] pillar_specific_aggregates
-    #   The pillar aggregations for cost savings
-    #   @return [Types::RecommendationPillarSpecificAggregates]
-    #
-    # @!attribute [rw] pillars
-    #   The Pillars that the Recommendation is optimizing
-    #   @return [Array<String>]
-    #
-    # @!attribute [rw] resources_aggregates
-    #   An aggregation of all resources
-    #   @return [Types::RecommendationResourcesAggregates]
-    #
-    # @!attribute [rw] source
-    #   The source of the Recommendation
-    #   @return [String]
-    #
-    # @!attribute [rw] status
-    #   The status of the Recommendation
     #   @return [String]
     #
     # @!attribute [rw] type
@@ -1194,23 +1177,78 @@ module Aws::TrustedAdvisor
     #   Advisor Priority
     #   @return [String]
     #
+    # @!attribute [rw] check_arn
+    #   The AWS Trusted Advisor Check ARN that relates to the Recommendation
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the Recommendation
+    #   @return [String]
+    #
+    # @!attribute [rw] lifecycle_stage
+    #   The lifecycle stage from AWS Trusted Advisor Priority
+    #   @return [String]
+    #
+    # @!attribute [rw] pillars
+    #   The Pillars that the Recommendation is optimizing
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] source
+    #   The source of the Recommendation
+    #   @return [String]
+    #
+    # @!attribute [rw] aws_services
+    #   The AWS Services that the Recommendation applies to
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] name
+    #   The name of the AWS Trusted Advisor Recommendation
+    #   @return [String]
+    #
+    # @!attribute [rw] resources_aggregates
+    #   An aggregation of all resources
+    #   @return [Types::RecommendationResourcesAggregates]
+    #
+    # @!attribute [rw] pillar_specific_aggregates
+    #   The pillar aggregations for cost savings
+    #   @return [Types::RecommendationPillarSpecificAggregates]
+    #
+    # @!attribute [rw] created_at
+    #   When the Recommendation was created, if created by AWS Trusted
+    #   Advisor Priority
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_at
+    #   When the Recommendation was last updated
+    #   @return [Time]
+    #
+    # @!attribute [rw] arn
+    #   The ARN of the Recommendation
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reason
+    #   This attribute provides additional details about potential
+    #   discrepancies in check status determination.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/trustedadvisor-2022-09-15/RecommendationSummary AWS API Documentation
     #
     class RecommendationSummary < Struct.new(
-      :arn,
-      :aws_services,
-      :check_arn,
-      :created_at,
       :id,
-      :last_updated_at,
-      :lifecycle_stage,
-      :name,
-      :pillar_specific_aggregates,
-      :pillars,
-      :resources_aggregates,
-      :source,
+      :type,
+      :check_arn,
       :status,
-      :type)
+      :lifecycle_stage,
+      :pillars,
+      :source,
+      :aws_services,
+      :name,
+      :resources_aggregates,
+      :pillar_specific_aggregates,
+      :created_at,
+      :last_updated_at,
+      :arn,
+      :status_reason)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1245,11 +1283,6 @@ module Aws::TrustedAdvisor
     #   The new lifecycle stage
     #   @return [String]
     #
-    # @!attribute [rw] organization_recommendation_identifier
-    #   The Recommendation identifier for AWS Trusted Advisor Priority
-    #   recommendations
-    #   @return [String]
-    #
     # @!attribute [rw] update_reason
     #   Reason for the lifecycle stage change
     #   @return [String]
@@ -1258,13 +1291,18 @@ module Aws::TrustedAdvisor
     #   Reason code for the lifecycle state change
     #   @return [String]
     #
+    # @!attribute [rw] organization_recommendation_identifier
+    #   The Recommendation identifier for AWS Trusted Advisor Priority
+    #   recommendations
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/trustedadvisor-2022-09-15/UpdateOrganizationRecommendationLifecycleRequest AWS API Documentation
     #
     class UpdateOrganizationRecommendationLifecycleRequest < Struct.new(
       :lifecycle_stage,
-      :organization_recommendation_identifier,
       :update_reason,
-      :update_reason_code)
+      :update_reason_code,
+      :organization_recommendation_identifier)
       SENSITIVE = [:update_reason]
       include Aws::Structure
     end
@@ -1273,11 +1311,6 @@ module Aws::TrustedAdvisor
     #   The new lifecycle stage
     #   @return [String]
     #
-    # @!attribute [rw] recommendation_identifier
-    #   The Recommendation identifier for AWS Trusted Advisor Priority
-    #   recommendations
-    #   @return [String]
-    #
     # @!attribute [rw] update_reason
     #   Reason for the lifecycle stage change
     #   @return [String]
@@ -1286,13 +1319,18 @@ module Aws::TrustedAdvisor
     #   Reason code for the lifecycle state change
     #   @return [String]
     #
+    # @!attribute [rw] recommendation_identifier
+    #   The Recommendation identifier for AWS Trusted Advisor Priority
+    #   recommendations
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/trustedadvisor-2022-09-15/UpdateRecommendationLifecycleRequest AWS API Documentation
     #
     class UpdateRecommendationLifecycleRequest < Struct.new(
       :lifecycle_stage,
-      :recommendation_identifier,
       :update_reason,
-      :update_reason_code)
+      :update_reason_code,
+      :recommendation_identifier)
       SENSITIVE = [:update_reason]
       include Aws::Structure
     end

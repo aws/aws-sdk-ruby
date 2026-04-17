@@ -1893,6 +1893,11 @@ module Aws::MediaLive
     #   channel.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] inference_settings
+    #   Include this setting to include Elemental Inference features in this
+    #   channel.
+    #   @return [Types::DescribeInferenceSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/Channel AWS API Documentation
     #
     class Channel < Struct.new(
@@ -1917,7 +1922,8 @@ module Aws::MediaLive
       :anywhere_settings,
       :channel_engine_version,
       :linked_channel_settings,
-      :channel_security_groups)
+      :channel_security_groups,
+      :inference_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2038,6 +2044,11 @@ module Aws::MediaLive
     #   channel.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] inference_settings
+    #   Include this setting to include Elemental Inference features in this
+    #   channel.
+    #   @return [Types::DescribeInferenceSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ChannelSummary AWS API Documentation
     #
     class ChannelSummary < Struct.new(
@@ -2061,7 +2072,8 @@ module Aws::MediaLive
       :channel_engine_version,
       :used_channel_engine_versions,
       :linked_channel_settings,
-      :channel_security_groups)
+      :channel_security_groups,
+      :inference_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2231,6 +2243,11 @@ module Aws::MediaLive
     #   channel.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] inference_settings
+    #   Include this setting to include Elemental Inference features in this
+    #   channel.
+    #   @return [Types::InferenceSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CreateChannel AWS API Documentation
     #
     class CreateChannel < Struct.new(
@@ -2252,7 +2269,8 @@ module Aws::MediaLive
       :channel_engine_version,
       :dry_run,
       :linked_channel_settings,
-      :channel_security_groups)
+      :channel_security_groups,
+      :inference_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2325,6 +2343,10 @@ module Aws::MediaLive
     # @!attribute [rw] channel_security_groups
     #   @return [Array<String>]
     #
+    # @!attribute [rw] inference_settings
+    #   Configures Elemental Inference features in a channel.
+    #   @return [Types::InferenceSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CreateChannelRequest AWS API Documentation
     #
     class CreateChannelRequest < Struct.new(
@@ -2346,7 +2368,8 @@ module Aws::MediaLive
       :channel_engine_version,
       :dry_run,
       :linked_channel_settings,
-      :channel_security_groups)
+      :channel_security_groups,
+      :inference_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2957,6 +2980,10 @@ module Aws::MediaLive
     # @!attribute [rw] channel_security_groups
     #   @return [Array<String>]
     #
+    # @!attribute [rw] inference_settings
+    #   Configures Elemental Inference features in a channel.
+    #   @return [Types::DescribeInferenceSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DeleteChannelResponse AWS API Documentation
     #
     class DeleteChannelResponse < Struct.new(
@@ -2981,7 +3008,8 @@ module Aws::MediaLive
       :anywhere_settings,
       :channel_engine_version,
       :linked_channel_settings,
-      :channel_security_groups)
+      :channel_security_groups,
+      :inference_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3363,6 +3391,10 @@ module Aws::MediaLive
     # @!attribute [rw] channel_security_groups
     #   @return [Array<String>]
     #
+    # @!attribute [rw] inference_settings
+    #   Configures Elemental Inference features in a channel.
+    #   @return [Types::DescribeInferenceSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeChannelResponse AWS API Documentation
     #
     class DescribeChannelResponse < Struct.new(
@@ -3387,7 +3419,8 @@ module Aws::MediaLive
       :anywhere_settings,
       :channel_engine_version,
       :linked_channel_settings,
-      :channel_security_groups)
+      :channel_security_groups,
+      :inference_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10395,6 +10428,11 @@ module Aws::MediaLive
     #   Only applies to on premises channels.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] media_connect_router_settings
+    #   Destination settings for a MediaConnect Router output; one
+    #   destination for each redundant encoder.
+    #   @return [Array<Types::MediaConnectRouterOutputDestinationSettings>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/OutputDestination AWS API Documentation
     #
     class OutputDestination < Struct.new(
@@ -10403,7 +10441,8 @@ module Aws::MediaLive
       :multiplex_settings,
       :settings,
       :srt_settings,
-      :logical_interface_names)
+      :logical_interface_names,
+      :media_connect_router_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10501,6 +10540,10 @@ module Aws::MediaLive
     #   Srt Group Settings
     #   @return [Types::SrtGroupSettings]
     #
+    # @!attribute [rw] media_connect_router_group_settings
+    #   Media Connect Router Group Settings
+    #   @return [Types::MediaConnectRouterGroupSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/OutputGroupSettings AWS API Documentation
     #
     class OutputGroupSettings < Struct.new(
@@ -10513,7 +10556,8 @@ module Aws::MediaLive
       :rtmp_group_settings,
       :udp_group_settings,
       :cmaf_ingest_group_settings,
-      :srt_group_settings)
+      :srt_group_settings,
+      :media_connect_router_group_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10597,6 +10641,10 @@ module Aws::MediaLive
     #   Srt Output Settings
     #   @return [Types::SrtOutputSettings]
     #
+    # @!attribute [rw] media_connect_router_output_settings
+    #   Media Connect Router Output Settings
+    #   @return [Types::MediaConnectRouterOutputSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/OutputSettings AWS API Documentation
     #
     class OutputSettings < Struct.new(
@@ -10609,7 +10657,8 @@ module Aws::MediaLive
       :rtmp_output_settings,
       :udp_output_settings,
       :cmaf_ingest_output_settings,
-      :srt_output_settings)
+      :srt_output_settings,
+      :media_connect_router_output_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11882,6 +11931,10 @@ module Aws::MediaLive
     # @!attribute [rw] channel_security_groups
     #   @return [Array<String>]
     #
+    # @!attribute [rw] inference_settings
+    #   Configures Elemental Inference features in a channel.
+    #   @return [Types::DescribeInferenceSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/StartChannelResponse AWS API Documentation
     #
     class StartChannelResponse < Struct.new(
@@ -11906,7 +11959,8 @@ module Aws::MediaLive
       :anywhere_settings,
       :channel_engine_version,
       :linked_channel_settings,
-      :channel_security_groups)
+      :channel_security_groups,
+      :inference_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -12338,6 +12392,10 @@ module Aws::MediaLive
     # @!attribute [rw] channel_security_groups
     #   @return [Array<String>]
     #
+    # @!attribute [rw] inference_settings
+    #   Configures Elemental Inference features in a channel.
+    #   @return [Types::DescribeInferenceSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/StopChannelResponse AWS API Documentation
     #
     class StopChannelResponse < Struct.new(
@@ -12362,7 +12420,8 @@ module Aws::MediaLive
       :anywhere_settings,
       :channel_engine_version,
       :linked_channel_settings,
-      :channel_security_groups)
+      :channel_security_groups,
+      :inference_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -12977,6 +13036,19 @@ module Aws::MediaLive
     #   channel.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] inference_settings
+    #   Include this setting to include Elemental Inference features in this
+    #   channel.
+    #   @return [Types::InferenceSettings]
+    #
+    # @!attribute [rw] special_router_settings
+    #   When using MediaConnect Router as the source of a MediaLive input
+    #   there's a special handoff that occurs when a router output is
+    #   created. This group of settings is set on your behalf by the
+    #   MediaConnect Router service using this set of settings. This setting
+    #   object can only by used by that service.
+    #   @return [Types::SpecialRouterSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateChannel AWS API Documentation
     #
     class UpdateChannel < Struct.new(
@@ -12993,7 +13065,9 @@ module Aws::MediaLive
       :dry_run,
       :anywhere_settings,
       :linked_channel_settings,
-      :channel_security_groups)
+      :channel_security_groups,
+      :inference_settings,
+      :special_router_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13096,6 +13170,18 @@ module Aws::MediaLive
     # @!attribute [rw] channel_security_groups
     #   @return [Array<String>]
     #
+    # @!attribute [rw] inference_settings
+    #   Configures Elemental Inference features in a channel.
+    #   @return [Types::InferenceSettings]
+    #
+    # @!attribute [rw] special_router_settings
+    #   When using MediaConnect Router as the source of a MediaLive input
+    #   there's a special handoff that occurs when a router output is
+    #   created. This group of settings is set on your behalf by the
+    #   MediaConnect Router service using this set of settings. This setting
+    #   object can only by used by that service.
+    #   @return [Types::SpecialRouterSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateChannelRequest AWS API Documentation
     #
     class UpdateChannelRequest < Struct.new(
@@ -13113,7 +13199,9 @@ module Aws::MediaLive
       :dry_run,
       :anywhere_settings,
       :linked_channel_settings,
-      :channel_security_groups)
+      :channel_security_groups,
+      :inference_settings,
+      :special_router_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13806,11 +13894,14 @@ module Aws::MediaLive
     #   @return [String]
     #
     # @!attribute [rw] scaling_behavior
-    #   STRETCH\_TO\_OUTPUT configures the output position to stretch the
-    #   video to the specified output resolution (height and width). This
-    #   option will override any position value. DEFAULT may insert black
-    #   boxes (pillar boxes or letter boxes) around the video to provide the
-    #   specified output resolution.
+    #   Configures how MediaLive transforms the video picture to match the
+    #   output frame. Use STRETCH\_TO\_OUTPUT to stretch the video to fill
+    #   the output frame. The video might get distorted. Use DEFAULT to
+    #   insert pillar boxes or letter boxes around the video to fill the
+    #   output frame. The video won't get distorted. Use SMART\_CROP to
+    #   enable the smart crop feature that uses the Elemental Inference
+    #   service to crop the frame using AI - see the MediaLive User Guide
+    #   for more information.
     #   @return [String]
     #
     # @!attribute [rw] sharpness
@@ -14200,6 +14291,10 @@ module Aws::MediaLive
     # @!attribute [rw] channel_security_groups
     #   @return [Array<String>]
     #
+    # @!attribute [rw] inference_settings
+    #   Configures Elemental Inference features in a channel.
+    #   @return [Types::DescribeInferenceSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/RestartChannelPipelinesResponse AWS API Documentation
     #
     class RestartChannelPipelinesResponse < Struct.new(
@@ -14225,7 +14320,8 @@ module Aws::MediaLive
       :anywhere_settings,
       :channel_engine_version,
       :linked_channel_settings,
-      :channel_security_groups)
+      :channel_security_groups,
+      :inference_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -18508,13 +18604,18 @@ module Aws::MediaLive
     #   Rec709 Settings
     #   @return [Types::Rec709Settings]
     #
+    # @!attribute [rw] hlg_2020_settings
+    #   Hlg2020 Settings
+    #   @return [Types::Hlg2020Settings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/Av1ColorSpaceSettings AWS API Documentation
     #
     class Av1ColorSpaceSettings < Struct.new(
       :color_space_passthrough_settings,
       :hdr_10_settings,
       :rec_601_settings,
-      :rec_709_settings)
+      :rec_709_settings,
+      :hlg_2020_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -22864,6 +22965,136 @@ module Aws::MediaLive
       :decryption,
       :minimum_latency,
       :stream_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configures Elemental Inference features in a channel.
+    #
+    # @!attribute [rw] feed_arn
+    #   The ARN of the feed resource that is associated with this channel.
+    #   The feed is a resource in the Elemental Inference service.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeInferenceSettings AWS API Documentation
+    #
+    class DescribeInferenceSettings < Struct.new(
+      :feed_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configures Elemental Inference features in a channel.
+    #
+    # @!attribute [rw] feed_arn
+    #   The ARN of the feed resource that is associated with this channel.
+    #   The feed is a resource in the Elemental Inference service.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/InferenceSettings AWS API Documentation
+    #
+    class InferenceSettings < Struct.new(
+      :feed_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Media Connect Router Container Settings
+    #
+    # @!attribute [rw] m2ts_settings
+    #   M2ts Settings
+    #   @return [Types::M2tsSettings]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/MediaConnectRouterContainerSettings AWS API Documentation
+    #
+    class MediaConnectRouterContainerSettings < Struct.new(
+      :m2ts_settings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Media Connect Router Group Settings
+    #
+    # @!attribute [rw] availability_zones
+    #   The names of the Availability Zones in which to write output to
+    #   MediaConnect Router.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/MediaConnectRouterGroupSettings AWS API Documentation
+    #
+    class MediaConnectRouterGroupSettings < Struct.new(
+      :availability_zones)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Map of MediaLive pipeline IDs to the ARNs of the MediaConnect Router
+    # Inputs to which this Output is connected.
+    #
+    # @!attribute [rw] pipeline_0
+    #   The ARN of the MediaConnect Router Input connected to pipeline 0.
+    #   @return [String]
+    #
+    # @!attribute [rw] pipeline_1
+    #   The ARN of the MediaConnect Router Input connected to pipeline 1.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/MediaConnectRouterOutputConnectionMap AWS API Documentation
+    #
+    class MediaConnectRouterOutputConnectionMap < Struct.new(
+      :pipeline_0,
+      :pipeline_1)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # MediaConnect Router Output Destination Settings
+    #
+    # @!attribute [rw] encryption_type
+    #   Encryption configuration for MediaConnect router. When using
+    #   SECRETS\_MANAGER encryption, you must provide the ARN of the secret
+    #   used to encrypt data in transit. When using AUTOMATIC encryption, a
+    #   service-managed secret will be used instead.
+    #   @return [String]
+    #
+    # @!attribute [rw] secret_arn
+    #   ARN of the secret used to encrypt this input. Used only with the
+    #   SECRETS\_MANAGER encryption type.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/MediaConnectRouterOutputDestinationSettings AWS API Documentation
+    #
+    class MediaConnectRouterOutputDestinationSettings < Struct.new(
+      :encryption_type,
+      :secret_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Media Connect Router Output Settings
+    #
+    # @!attribute [rw] connected_router_inputs
+    #   Shows the MediaConnect Router Inputs that are connected to this
+    #   output. This parameter is purely informative, and editing it will
+    #   have no effect. To connect or disconnect MediaConnect Router Inputs,
+    #   go to MediaConnect.
+    #   @return [Types::MediaConnectRouterOutputConnectionMap]
+    #
+    # @!attribute [rw] container_settings
+    #   Media Connect Router Container Settings
+    #   @return [Types::MediaConnectRouterContainerSettings]
+    #
+    # @!attribute [rw] destination
+    #   Destination for this MediaConnect Router Output. The referenced
+    #   OutputDestination must have MediaConnect Router settings configured.
+    #   @return [Types::OutputLocationRef]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/MediaConnectRouterOutputSettings AWS API Documentation
+    #
+    class MediaConnectRouterOutputSettings < Struct.new(
+      :connected_router_inputs,
+      :container_settings,
+      :destination)
       SENSITIVE = []
       include Aws::Structure
     end

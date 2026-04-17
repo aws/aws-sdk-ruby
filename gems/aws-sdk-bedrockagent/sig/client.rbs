@@ -566,7 +566,8 @@ module Aws
                                                    input_schema: {
                                                      json: {
                                                      }?
-                                                   }
+                                                   },
+                                                   strict: bool?
                                                  }?,
                                                  cache_point: {
                                                    type: ("default")
@@ -998,7 +999,8 @@ module Aws
                                            input_schema: {
                                              json: {
                                              }?
-                                           }
+                                           },
+                                           strict: bool?
                                          }?,
                                          cache_point: {
                                            type: ("default")
@@ -2263,7 +2265,8 @@ module Aws
                                                    input_schema: {
                                                      json: {
                                                      }?
-                                                   }
+                                                   },
+                                                   strict: bool?
                                                  }?,
                                                  cache_point: {
                                                    type: ("default")
@@ -2671,7 +2674,8 @@ module Aws
                                            input_schema: {
                                              json: {
                                              }?
-                                           }
+                                           },
+                                           strict: bool?
                                          }?,
                                          cache_point: {
                                            type: ("default")
@@ -2865,7 +2869,8 @@ module Aws
                                                                 input_schema: {
                                                                   json: {
                                                                   }?
-                                                                }
+                                                                },
+                                                                strict: bool?
                                                               }?,
                                                               cache_point: {
                                                                 type: ("default")

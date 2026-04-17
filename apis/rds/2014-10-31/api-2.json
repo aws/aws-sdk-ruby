@@ -1665,6 +1665,19 @@
         {"shape":"ReservedDBInstancesOfferingNotFoundFault"}
       ]
     },
+    "DescribeServerlessV2PlatformVersions":{
+      "name":"DescribeServerlessV2PlatformVersions",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DescribeServerlessV2PlatformVersionsMessage"},
+      "output":{
+        "shape":"ServerlessV2PlatformVersionsMessage",
+        "resultWrapper":"DescribeServerlessV2PlatformVersionsResult"
+      },
+      "errors":[]
+    },
     "DescribeSourceRegions":{
       "name":"DescribeSourceRegions",
       "http":{
@@ -3748,7 +3761,8 @@
         "CACertificateIdentifier":{"shape":"String"},
         "EngineLifecycleSupport":{"shape":"String"},
         "TagSpecifications":{"shape":"TagSpecificationList"},
-        "MasterUserAuthenticationType":{"shape":"MasterUserAuthenticationType"}
+        "MasterUserAuthenticationType":{"shape":"MasterUserAuthenticationType"},
+        "WithExpressConfiguration":{"shape":"BooleanOptional"}
       }
     },
     "CreateDBClusterParameterGroupMessage":{
@@ -4354,7 +4368,9 @@
         "LimitlessDatabase":{"shape":"LimitlessDatabase"},
         "ClusterScalabilityType":{"shape":"ClusterScalabilityType"},
         "CertificateDetails":{"shape":"CertificateDetails"},
-        "EngineLifecycleSupport":{"shape":"String"}
+        "EngineLifecycleSupport":{"shape":"String"},
+        "VPCNetworkingEnabled":{"shape":"BooleanOptional"},
+        "InternetAccessGatewayEnabled":{"shape":"BooleanOptional"}
       },
       "wrapper":true
     },
@@ -6721,6 +6737,18 @@
         "OfferingType":{"shape":"String"},
         "MultiAZ":{"shape":"BooleanOptional"},
         "Filters":{"shape":"FilterList"},
+        "MaxRecords":{"shape":"IntegerOptional"},
+        "Marker":{"shape":"String"}
+      }
+    },
+    "DescribeServerlessV2PlatformVersionsMessage":{
+      "type":"structure",
+      "members":{
+        "ServerlessV2PlatformVersion":{"shape":"String"},
+        "Engine":{"shape":"String"},
+        "Filters":{"shape":"FilterList"},
+        "DefaultOnly":{"shape":"BooleanOptional"},
+        "IncludeAll":{"shape":"BooleanOptional"},
         "MaxRecords":{"shape":"IntegerOptional"},
         "Marker":{"shape":"String"}
       }
@@ -9411,7 +9439,9 @@
         "BackupRetentionPeriod":{"shape":"IntegerOptional"},
         "PreferredBackupWindow":{"shape":"String"},
         "EngineLifecycleSupport":{"shape":"String"},
-        "TagSpecifications":{"shape":"TagSpecificationList"}
+        "TagSpecifications":{"shape":"TagSpecificationList"},
+        "EnableVPCNetworking":{"shape":"BooleanOptional"},
+        "EnableInternetAccessGateway":{"shape":"BooleanOptional"}
       }
     },
     "RestoreDBClusterFromSnapshotResult":{
@@ -9461,7 +9491,9 @@
         "BackupRetentionPeriod":{"shape":"IntegerOptional"},
         "PreferredBackupWindow":{"shape":"String"},
         "EngineLifecycleSupport":{"shape":"String"},
-        "TagSpecifications":{"shape":"TagSpecificationList"}
+        "TagSpecifications":{"shape":"TagSpecificationList"},
+        "EnableVPCNetworking":{"shape":"BooleanOptional"},
+        "EnableInternetAccessGateway":{"shape":"BooleanOptional"}
       }
     },
     "RestoreDBClusterToPointInTimeResult":{
@@ -9759,6 +9791,28 @@
       "members":{
         "MinCapacity":{"shape":"DoubleOptional"},
         "MaxCapacity":{"shape":"DoubleOptional"}
+      }
+    },
+    "ServerlessV2PlatformVersionInfo":{
+      "type":"structure",
+      "members":{
+        "ServerlessV2PlatformVersion":{"shape":"String"},
+        "ServerlessV2PlatformVersionDescription":{"shape":"String"},
+        "Engine":{"shape":"String"},
+        "ServerlessV2FeaturesSupport":{"shape":"ServerlessV2FeaturesSupport"},
+        "Status":{"shape":"String"},
+        "IsDefault":{"shape":"Boolean"}
+      }
+    },
+    "ServerlessV2PlatformVersionList":{
+      "type":"list",
+      "member":{"shape":"ServerlessV2PlatformVersionInfo"}
+    },
+    "ServerlessV2PlatformVersionsMessage":{
+      "type":"structure",
+      "members":{
+        "Marker":{"shape":"String"},
+        "ServerlessV2PlatformVersions":{"shape":"ServerlessV2PlatformVersionList"}
       }
     },
     "ServerlessV2ScalingConfiguration":{

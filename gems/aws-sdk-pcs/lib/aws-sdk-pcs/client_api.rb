@@ -23,6 +23,8 @@ module Aws::PCS
     AmiId = Shapes::StringShape.new(name: 'AmiId')
     Arn = Shapes::StringShape.new(name: 'Arn')
     BootstrapId = Shapes::StringShape.new(name: 'BootstrapId')
+    CgroupCustomSetting = Shapes::StructureShape.new(name: 'CgroupCustomSetting')
+    CgroupCustomSettings = Shapes::ListShape.new(name: 'CgroupCustomSettings')
     Cluster = Shapes::StructureShape.new(name: 'Cluster')
     ClusterIdentifier = Shapes::StringShape.new(name: 'ClusterIdentifier')
     ClusterList = Shapes::ListShape.new(name: 'ClusterList')
@@ -122,6 +124,8 @@ module Aws::PCS
     SlurmRest = Shapes::StructureShape.new(name: 'SlurmRest')
     SlurmRestMode = Shapes::StringShape.new(name: 'SlurmRestMode')
     SlurmRestRequest = Shapes::StructureShape.new(name: 'SlurmRestRequest')
+    SlurmdbdCustomSetting = Shapes::StructureShape.new(name: 'SlurmdbdCustomSetting')
+    SlurmdbdCustomSettings = Shapes::ListShape.new(name: 'SlurmdbdCustomSettings')
     SpotAllocationStrategy = Shapes::StringShape.new(name: 'SpotAllocationStrategy')
     SpotOptions = Shapes::StructureShape.new(name: 'SpotOptions')
     String = Shapes::StringShape.new(name: 'String')
@@ -166,6 +170,12 @@ module Aws::PCS
     AccountingRequest.add_member(:mode, Shapes::ShapeRef.new(shape: AccountingMode, required: true, location_name: "mode"))
     AccountingRequest.struct_class = Types::AccountingRequest
 
+    CgroupCustomSetting.add_member(:parameter_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "parameterName"))
+    CgroupCustomSetting.add_member(:parameter_value, Shapes::ShapeRef.new(shape: String, required: true, location_name: "parameterValue"))
+    CgroupCustomSetting.struct_class = Types::CgroupCustomSetting
+
+    CgroupCustomSettings.member = Shapes::ShapeRef.new(shape: CgroupCustomSetting)
+
     Cluster.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "name"))
     Cluster.add_member(:id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "id"))
     Cluster.add_member(:arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "arn"))
@@ -184,6 +194,8 @@ module Aws::PCS
 
     ClusterSlurmConfiguration.add_member(:scale_down_idle_time_in_seconds, Shapes::ShapeRef.new(shape: ClusterSlurmConfigurationScaleDownIdleTimeInSecondsInteger, location_name: "scaleDownIdleTimeInSeconds"))
     ClusterSlurmConfiguration.add_member(:slurm_custom_settings, Shapes::ShapeRef.new(shape: SlurmCustomSettings, location_name: "slurmCustomSettings"))
+    ClusterSlurmConfiguration.add_member(:slurmdbd_custom_settings, Shapes::ShapeRef.new(shape: SlurmdbdCustomSettings, location_name: "slurmdbdCustomSettings"))
+    ClusterSlurmConfiguration.add_member(:cgroup_custom_settings, Shapes::ShapeRef.new(shape: CgroupCustomSettings, location_name: "cgroupCustomSettings"))
     ClusterSlurmConfiguration.add_member(:auth_key, Shapes::ShapeRef.new(shape: SlurmAuthKey, location_name: "authKey"))
     ClusterSlurmConfiguration.add_member(:jwt_auth, Shapes::ShapeRef.new(shape: JwtAuth, location_name: "jwtAuth"))
     ClusterSlurmConfiguration.add_member(:accounting, Shapes::ShapeRef.new(shape: Accounting, location_name: "accounting"))
@@ -192,6 +204,8 @@ module Aws::PCS
 
     ClusterSlurmConfigurationRequest.add_member(:scale_down_idle_time_in_seconds, Shapes::ShapeRef.new(shape: ClusterSlurmConfigurationRequestScaleDownIdleTimeInSecondsInteger, location_name: "scaleDownIdleTimeInSeconds"))
     ClusterSlurmConfigurationRequest.add_member(:slurm_custom_settings, Shapes::ShapeRef.new(shape: SlurmCustomSettings, location_name: "slurmCustomSettings"))
+    ClusterSlurmConfigurationRequest.add_member(:slurmdbd_custom_settings, Shapes::ShapeRef.new(shape: SlurmdbdCustomSettings, location_name: "slurmdbdCustomSettings"))
+    ClusterSlurmConfigurationRequest.add_member(:cgroup_custom_settings, Shapes::ShapeRef.new(shape: CgroupCustomSettings, location_name: "cgroupCustomSettings"))
     ClusterSlurmConfigurationRequest.add_member(:accounting, Shapes::ShapeRef.new(shape: AccountingRequest, location_name: "accounting"))
     ClusterSlurmConfigurationRequest.add_member(:slurm_rest, Shapes::ShapeRef.new(shape: SlurmRestRequest, location_name: "slurmRest"))
     ClusterSlurmConfigurationRequest.struct_class = Types::ClusterSlurmConfigurationRequest
@@ -497,6 +511,12 @@ module Aws::PCS
     SlurmRestRequest.add_member(:mode, Shapes::ShapeRef.new(shape: SlurmRestMode, required: true, location_name: "mode"))
     SlurmRestRequest.struct_class = Types::SlurmRestRequest
 
+    SlurmdbdCustomSetting.add_member(:parameter_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "parameterName"))
+    SlurmdbdCustomSetting.add_member(:parameter_value, Shapes::ShapeRef.new(shape: String, required: true, location_name: "parameterValue"))
+    SlurmdbdCustomSetting.struct_class = Types::SlurmdbdCustomSetting
+
+    SlurmdbdCustomSettings.member = Shapes::ShapeRef.new(shape: SlurmdbdCustomSetting)
+
     SpotOptions.add_member(:allocation_strategy, Shapes::ShapeRef.new(shape: SpotAllocationStrategy, location_name: "allocationStrategy"))
     SpotOptions.struct_class = Types::SpotOptions
 
@@ -536,6 +556,8 @@ module Aws::PCS
 
     UpdateClusterSlurmConfigurationRequest.add_member(:scale_down_idle_time_in_seconds, Shapes::ShapeRef.new(shape: UpdateClusterSlurmConfigurationRequestScaleDownIdleTimeInSecondsInteger, location_name: "scaleDownIdleTimeInSeconds"))
     UpdateClusterSlurmConfigurationRequest.add_member(:slurm_custom_settings, Shapes::ShapeRef.new(shape: SlurmCustomSettings, location_name: "slurmCustomSettings"))
+    UpdateClusterSlurmConfigurationRequest.add_member(:slurmdbd_custom_settings, Shapes::ShapeRef.new(shape: SlurmdbdCustomSettings, location_name: "slurmdbdCustomSettings"))
+    UpdateClusterSlurmConfigurationRequest.add_member(:cgroup_custom_settings, Shapes::ShapeRef.new(shape: CgroupCustomSettings, location_name: "cgroupCustomSettings"))
     UpdateClusterSlurmConfigurationRequest.add_member(:accounting, Shapes::ShapeRef.new(shape: UpdateAccountingRequest, location_name: "accounting"))
     UpdateClusterSlurmConfigurationRequest.add_member(:slurm_rest, Shapes::ShapeRef.new(shape: UpdateSlurmRestRequest, location_name: "slurmRest"))
     UpdateClusterSlurmConfigurationRequest.struct_class = Types::UpdateClusterSlurmConfigurationRequest

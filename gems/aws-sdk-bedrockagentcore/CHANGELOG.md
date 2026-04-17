@@ -1,6 +1,51 @@
 Unreleased Changes
 ------------------
 
+1.28.0 (2026-04-16)
+------------------
+
+* Feature - Introducing NamespacePath in AgentCore Memory to support hierarchical prefix based memory record retrieval.
+
+1.27.0 (2026-04-09)
+------------------
+
+* Feature - Introducing support for SearchRegistryRecords API on AgentCoreRegistry
+
+1.26.0 (2026-04-07)
+------------------
+
+* Feature - This release includes support for 1) InvokeBrowser API, enabling OS-level control of AgentCore Browser Tool sessions through mouse actions, keyboard input, and screenshots. 2) Added documentation noting that empty sessions are automatically deleted after one day in the ListSessions API.
+
+1.25.0 (2026-04-01)
+------------------
+
+* Feature - Added the ability to filter out empty sessions when listing sessions. Customers can now retrieve only sessions that still contain events, eliminating the need to check each session individually. No changes required for existing integrations.
+
+1.24.0 (2026-03-30)
+------------------
+
+* Feature - Adds Ground Truth support for AgentCore Evaluations (Evaluate)
+
+1.23.0 (2026-03-27)
+------------------
+
+* Feature - Adding AgentCore Code Interpreter Node.js Runtime Support with an optional runtime field
+
+1.22.0 (2026-03-19)
+------------------
+
+* Feature - This release includes SDK support for the following new features on AgentCore Built In Tools.  1. Enterprise Policies for AgentCore Browser Tool. 2. Root CA Configuration Support for AgentCore Browser Tool and Code Interpreter. 3. API changes to AgentCore Browser Profile APIs
+
+1.21.0 (2026-03-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.20.0 (2026-03-16)
+------------------
+
+* Feature - Provide support to perform deterministic operations on agent runtime through shell command executions via the new InvokeAgentRuntimeCommand API
+
 1.19.0 (2026-02-10)
 ------------------
 

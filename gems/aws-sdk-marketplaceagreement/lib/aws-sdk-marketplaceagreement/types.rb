@@ -155,6 +155,104 @@ module Aws::MarketplaceAgreement
       include Aws::Structure
     end
 
+    # Summary view of an agreement cancellation request.
+    #
+    # @!attribute [rw] agreement_cancellation_request_id
+    #   The unique identifier of the cancellation request.
+    #   @return [String]
+    #
+    # @!attribute [rw] agreement_id
+    #   The unique identifier of the agreement associated with this
+    #   cancellation request.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the cancellation request. Possible values
+    #   include `PENDING_APPROVAL`, `APPROVED`, `REJECTED`, `CANCELLED`, and
+    #   `VALIDATION_FAILED`.
+    #   @return [String]
+    #
+    # @!attribute [rw] reason_code
+    #   The reason code provided for the cancellation.
+    #   @return [String]
+    #
+    # @!attribute [rw] agreement_type
+    #   The type of agreement.
+    #   @return [String]
+    #
+    # @!attribute [rw] catalog
+    #   The catalog in which the agreement was created.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The date and time when the cancellation request was created, as a
+    #   POSIX timestamp (Unix epoch seconds).
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The date and time when the cancellation request was last updated, as
+    #   a POSIX timestamp (Unix epoch seconds).
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/AgreementCancellationRequestSummary AWS API Documentation
+    #
+    class AgreementCancellationRequestSummary < Struct.new(
+      :agreement_cancellation_request_id,
+      :agreement_id,
+      :status,
+      :reason_code,
+      :agreement_type,
+      :catalog,
+      :created_at,
+      :updated_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A summary of grouped billing data for an agreement invoice line item.
+    #
+    # @!attribute [rw] agreement_id
+    #   The unique identifier of the agreement.
+    #   @return [String]
+    #
+    # @!attribute [rw] invoice_id
+    #   The identifier of the invoice for this group.
+    #   @return [String]
+    #
+    # @!attribute [rw] pricing_currency_amount
+    #   Monetary amounts for this invoice group.
+    #   @return [Types::PricingCurrencyAmount]
+    #
+    # @!attribute [rw] invoice_billing_period
+    #   The billing period associated with this group.
+    #   @return [Types::InvoiceBillingPeriod]
+    #
+    # @!attribute [rw] issued_time
+    #   The timestamp when the invoice containing this group was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] invoice_type
+    #   The type of invoice. Valid values are `INVOICE` and `CREDIT_MEMO`.
+    #   @return [String]
+    #
+    # @!attribute [rw] invoicing_entity
+    #   The entity that issues the invoice.
+    #   @return [Types::InvoicingEntity]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/AgreementInvoiceLineItemGroupSummary AWS API Documentation
+    #
+    class AgreementInvoiceLineItemGroupSummary < Struct.new(
+      :agreement_id,
+      :invoice_id,
+      :pricing_currency_amount,
+      :invoice_billing_period,
+      :issued_time,
+      :invoice_type,
+      :invoicing_entity)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A summary of the agreement, including top-level attributes (for
     # example, the agreement ID, proposer, and acceptor).
     #
@@ -176,7 +274,7 @@ module Aws::MarketplaceAgreement
     #   @return [Time]
     #
     # @!attribute [rw] agreement_type
-    #   The type of agreement. Value is `PurchaseAgreement`.
+    #   The type of agreement.
     #   @return [String]
     #
     # @!attribute [rw] acceptor
@@ -213,6 +311,196 @@ module Aws::MarketplaceAgreement
       include Aws::Structure
     end
 
+    # An error for a billing adjustment request entry that failed
+    # validation.
+    #
+    # @!attribute [rw] code
+    #   The error code indicating the reason for failure.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   A human-readable message describing the error.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   The client token of the request entry that failed.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/BatchCreateBillingAdjustmentError AWS API Documentation
+    #
+    class BatchCreateBillingAdjustmentError < Struct.new(
+      :code,
+      :message,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A successfully created billing adjustment request item.
+    #
+    # @!attribute [rw] billing_adjustment_request_id
+    #   The unique identifier of the created billing adjustment request.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   The client token provided in the corresponding request entry.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/BatchCreateBillingAdjustmentItem AWS API Documentation
+    #
+    class BatchCreateBillingAdjustmentItem < Struct.new(
+      :billing_adjustment_request_id,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An individual entry in a batch billing adjustment request, specifying
+    # the invoice and adjustment details.
+    #
+    # @!attribute [rw] agreement_id
+    #   The unique identifier of the agreement associated with the invoice.
+    #   @return [String]
+    #
+    # @!attribute [rw] original_invoice_id
+    #   The identifier of the original invoice to adjust.
+    #   @return [String]
+    #
+    # @!attribute [rw] adjustment_amount
+    #   The adjustment amount as a string representation of a decimal number
+    #   in the currency of the invoice.
+    #   @return [String]
+    #
+    # @!attribute [rw] currency_code
+    #   The 3-letter ISO 4217 currency code for the adjustment amount (e.g.,
+    #   `USD`).
+    #   @return [String]
+    #
+    # @!attribute [rw] adjustment_reason_code
+    #   The reason code for the billing adjustment. Valid values include
+    #   `INCORRECT_TERMS_ACCEPTED`, `INCORRECT_METERING`,
+    #   `TEST_ENVIRONMENT_CHARGES`, `ALTERNATIVE_PROCUREMENT_CHANNEL`,
+    #   `UNINTENDED_RENEWAL`, `BUYER_DISSATISFACTION`, and `OTHER`.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   An optional detailed description of the adjustment reason.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/BatchCreateBillingAdjustmentRequestEntry AWS API Documentation
+    #
+    class BatchCreateBillingAdjustmentRequestEntry < Struct.new(
+      :agreement_id,
+      :original_invoice_id,
+      :adjustment_amount,
+      :currency_code,
+      :adjustment_reason_code,
+      :description,
+      :client_token)
+      SENSITIVE = [:description]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] billing_adjustment_request_entries
+    #   A list of billing adjustment request entries. Each entry specifies
+    #   the invoice and adjustment details.
+    #   @return [Array<Types::BatchCreateBillingAdjustmentRequestEntry>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/BatchCreateBillingAdjustmentRequestInput AWS API Documentation
+    #
+    class BatchCreateBillingAdjustmentRequestInput < Struct.new(
+      :billing_adjustment_request_entries)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] items
+    #   A list of successfully created billing adjustment items, each
+    #   containing the `billingAdjustmentRequestId` and `clientToken`.
+    #   @return [Array<Types::BatchCreateBillingAdjustmentItem>]
+    #
+    # @!attribute [rw] errors
+    #   A list of errors for entries that failed validation, each containing
+    #   the `clientToken`, error `code`, and `message`.
+    #   @return [Array<Types::BatchCreateBillingAdjustmentError>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/BatchCreateBillingAdjustmentRequestOutput AWS API Documentation
+    #
+    class BatchCreateBillingAdjustmentRequestOutput < Struct.new(
+      :items,
+      :errors)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Summary view of a billing adjustment request.
+    #
+    # @!attribute [rw] billing_adjustment_request_id
+    #   The unique identifier of the billing adjustment request.
+    #   @return [String]
+    #
+    # @!attribute [rw] original_invoice_id
+    #   The identifier of the original invoice being adjusted.
+    #   @return [String]
+    #
+    # @!attribute [rw] adjustment_amount
+    #   The adjustment amount as a string representation of a decimal
+    #   number.
+    #   @return [String]
+    #
+    # @!attribute [rw] currency_code
+    #   The currency code for the adjustment amount.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the billing adjustment request.
+    #   @return [String]
+    #
+    # @!attribute [rw] agreement_id
+    #   The unique identifier of the agreement associated with this billing
+    #   adjustment request.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The date and time when the billing adjustment request was created,
+    #   as a POSIX timestamp (Unix epoch seconds).
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The date and time when the billing adjustment request was last
+    #   updated, as a POSIX timestamp (Unix epoch seconds).
+    #   @return [Time]
+    #
+    # @!attribute [rw] agreement_type
+    #   The type of agreement.
+    #   @return [String]
+    #
+    # @!attribute [rw] catalog
+    #   The catalog in which the agreement was created.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/BillingAdjustmentSummary AWS API Documentation
+    #
+    class BillingAdjustmentSummary < Struct.new(
+      :billing_adjustment_request_id,
+      :original_invoice_id,
+      :adjustment_amount,
+      :currency_code,
+      :status,
+      :agreement_id,
+      :created_at,
+      :updated_at,
+      :agreement_type,
+      :catalog)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Enables you and your customers to move your existing agreements to AWS
     # Marketplace. The customer won't be charged for product usage in AWS
     # Marketplace because they already paid for the product outside of AWS
@@ -227,6 +515,157 @@ module Aws::MarketplaceAgreement
     class ByolPricingTerm < Struct.new(
       :type)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] agreement_id
+    #   The unique identifier of the agreement associated with the
+    #   cancellation request.
+    #   @return [String]
+    #
+    # @!attribute [rw] agreement_cancellation_request_id
+    #   The unique identifier of the cancellation request to cancel.
+    #   @return [String]
+    #
+    # @!attribute [rw] cancellation_reason
+    #   A required message explaining why the cancellation request is being
+    #   withdrawn (1-2000 characters).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/CancelAgreementCancellationRequestInput AWS API Documentation
+    #
+    class CancelAgreementCancellationRequestInput < Struct.new(
+      :agreement_id,
+      :agreement_cancellation_request_id,
+      :cancellation_reason)
+      SENSITIVE = [:cancellation_reason]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] agreement_cancellation_request_id
+    #   The unique identifier of the cancelled cancellation request.
+    #   @return [String]
+    #
+    # @!attribute [rw] agreement_id
+    #   The unique identifier of the agreement associated with this
+    #   cancellation request.
+    #   @return [String]
+    #
+    # @!attribute [rw] reason_code
+    #   The original reason code provided when the cancellation request was
+    #   created.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The detailed description of the original cancellation reason, if
+    #   provided.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The updated status of the cancellation request, which is
+    #   `CANCELLED`.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_message
+    #   A message providing additional context about the cancellation
+    #   request status.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The date and time when the cancellation request was originally
+    #   created, as a POSIX timestamp (Unix epoch seconds).
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The date and time when the cancellation request was cancelled, as a
+    #   POSIX timestamp (Unix epoch seconds).
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/CancelAgreementCancellationRequestOutput AWS API Documentation
+    #
+    class CancelAgreementCancellationRequestOutput < Struct.new(
+      :agreement_cancellation_request_id,
+      :agreement_id,
+      :reason_code,
+      :description,
+      :status,
+      :status_message,
+      :created_at,
+      :updated_at)
+      SENSITIVE = [:description]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] payment_request_id
+    #   The unique identifier of the payment request to cancel.
+    #   @return [String]
+    #
+    # @!attribute [rw] agreement_id
+    #   The unique identifier of the agreement associated with the payment
+    #   request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/CancelAgreementPaymentRequestInput AWS API Documentation
+    #
+    class CancelAgreementPaymentRequestInput < Struct.new(
+      :payment_request_id,
+      :agreement_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] payment_request_id
+    #   The unique identifier of the cancelled payment request.
+    #   @return [String]
+    #
+    # @!attribute [rw] agreement_id
+    #   The unique identifier of the agreement associated with this payment
+    #   request.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The updated status of the payment request, which is `CANCELLED`.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The descriptive name of the payment request.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The detailed description of the payment request, if provided.
+    #   @return [String]
+    #
+    # @!attribute [rw] charge_amount
+    #   The amount that was requested to be charged.
+    #   @return [String]
+    #
+    # @!attribute [rw] currency_code
+    #   The currency code for the charge amount.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The date and time when the payment request was originally created,
+    #   in ISO 8601 format.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The date and time when the payment request was cancelled, in ISO
+    #   8601 format.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/CancelAgreementPaymentRequestOutput AWS API Documentation
+    #
+    class CancelAgreementPaymentRequestOutput < Struct.new(
+      :payment_request_id,
+      :agreement_id,
+      :status,
+      :name,
+      :description,
+      :charge_amount,
+      :currency_code,
+      :created_at,
+      :updated_at)
+      SENSITIVE = [:description]
       include Aws::Structure
     end
 
@@ -307,6 +746,35 @@ module Aws::MarketplaceAgreement
       :selector,
       :constraints,
       :rate_card)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The request could not be completed due to a conflict with the current
+    # state of the resource.
+    #
+    # @!attribute [rw] request_id
+    #   The unique identifier for the error.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_id
+    #   The unique identifier for the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   The type of resource.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/ConflictException AWS API Documentation
+    #
+    class ConflictException < Struct.new(
+      :request_id,
+      :message,
+      :resource_id,
+      :resource_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -634,6 +1102,178 @@ module Aws::MarketplaceAgreement
       include Aws::Structure
     end
 
+    # @!attribute [rw] agreement_cancellation_request_id
+    #   The unique identifier of the cancellation request.
+    #   @return [String]
+    #
+    # @!attribute [rw] agreement_id
+    #   The unique identifier of the agreement associated with the
+    #   cancellation request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/GetAgreementCancellationRequestInput AWS API Documentation
+    #
+    class GetAgreementCancellationRequestInput < Struct.new(
+      :agreement_cancellation_request_id,
+      :agreement_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] agreement_cancellation_request_id
+    #   The unique identifier of the cancellation request.
+    #   @return [String]
+    #
+    # @!attribute [rw] agreement_id
+    #   The unique identifier of the agreement associated with this
+    #   cancellation request. Use `DescribeAgreement` to retrieve full
+    #   agreement details.
+    #   @return [String]
+    #
+    # @!attribute [rw] reason_code
+    #   The reason code provided for the cancellation.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The detailed description of the cancellation reason, if provided.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the cancellation request. Possible values
+    #   include `PENDING_APPROVAL`, `APPROVED`, `REJECTED`, `CANCELLED`, and
+    #   `VALIDATION_FAILED`.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_message
+    #   A message providing additional context about the cancellation
+    #   request status.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The date and time when the cancellation request was created, as a
+    #   POSIX timestamp (Unix epoch seconds).
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The date and time when the cancellation request was last updated, as
+    #   a POSIX timestamp (Unix epoch seconds).
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/GetAgreementCancellationRequestOutput AWS API Documentation
+    #
+    class GetAgreementCancellationRequestOutput < Struct.new(
+      :agreement_cancellation_request_id,
+      :agreement_id,
+      :reason_code,
+      :description,
+      :status,
+      :status_message,
+      :created_at,
+      :updated_at)
+      SENSITIVE = [:description]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] payment_request_id
+    #   The identifier of the payment request.
+    #   @return [String]
+    #
+    # @!attribute [rw] agreement_id
+    #   The unique identifier of the agreement associated with the payment
+    #   request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/GetAgreementPaymentRequestInput AWS API Documentation
+    #
+    class GetAgreementPaymentRequestInput < Struct.new(
+      :payment_request_id,
+      :agreement_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] payment_request_id
+    #   The unique identifier of the payment request.
+    #   @return [String]
+    #
+    # @!attribute [rw] agreement_id
+    #   The unique identifier of the agreement associated with this payment
+    #   request. Use `DescribeAgreement` to retrieve full agreement details.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the payment request. Possible values include:
+    #
+    #   * `VALIDATING` – The payment request is being validated against
+    #     agreement terms.
+    #
+    #   * `VALIDATION_FAILED` – The payment request failed validation.
+    #
+    #   * `PENDING_APPROVAL` – The payment request is awaiting buyer action.
+    #
+    #   * `APPROVED` – The buyer has approved the payment request.
+    #
+    #   * `REJECTED` – The buyer has rejected the payment request.
+    #
+    #   * `CANCELLED` – The seller has cancelled the payment request.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_message
+    #   An optional message providing additional context about the payment
+    #   request status, such as a rejection reason or validation failure
+    #   details.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The descriptive name of the payment request.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The detailed description of the payment request, if provided.
+    #   @return [String]
+    #
+    # @!attribute [rw] charge_id
+    #   The unique identifier of the charge created after the payment
+    #   request is approved. This field is only present for approved payment
+    #   requests and follows the pattern `ch-[a-zA-Z0-9]+`.
+    #   @return [String]
+    #
+    # @!attribute [rw] charge_amount
+    #   The amount charged or to be charged to the buyer.
+    #   @return [String]
+    #
+    # @!attribute [rw] currency_code
+    #   The currency code for the charge amount.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The date and time when the payment request was created, in ISO 8601
+    #   format.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The date and time when the payment request was last updated, in ISO
+    #   8601 format.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/GetAgreementPaymentRequestOutput AWS API Documentation
+    #
+    class GetAgreementPaymentRequestOutput < Struct.new(
+      :payment_request_id,
+      :agreement_id,
+      :status,
+      :status_message,
+      :name,
+      :description,
+      :charge_id,
+      :charge_amount,
+      :currency_code,
+      :created_at,
+      :updated_at)
+      SENSITIVE = [:description]
+      include Aws::Structure
+    end
+
     # @!attribute [rw] agreement_id
     #   The unique identifier of the agreement.
     #   @return [String]
@@ -670,6 +1310,93 @@ module Aws::MarketplaceAgreement
     class GetAgreementTermsOutput < Struct.new(
       :accepted_terms,
       :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] agreement_id
+    #   The unique identifier of the agreement associated with the billing
+    #   adjustment request.
+    #   @return [String]
+    #
+    # @!attribute [rw] billing_adjustment_request_id
+    #   The unique identifier of the billing adjustment request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/GetBillingAdjustmentRequestInput AWS API Documentation
+    #
+    class GetBillingAdjustmentRequestInput < Struct.new(
+      :agreement_id,
+      :billing_adjustment_request_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] billing_adjustment_request_id
+    #   The unique identifier of the billing adjustment request.
+    #   @return [String]
+    #
+    # @!attribute [rw] agreement_id
+    #   The unique identifier of the agreement associated with this billing
+    #   adjustment request.
+    #   @return [String]
+    #
+    # @!attribute [rw] adjustment_reason_code
+    #   The reason code for the billing adjustment.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The detailed description of the billing adjustment reason, if
+    #   provided.
+    #   @return [String]
+    #
+    # @!attribute [rw] original_invoice_id
+    #   The identifier of the original invoice being adjusted.
+    #   @return [String]
+    #
+    # @!attribute [rw] adjustment_amount
+    #   The adjustment amount as a string representation of a decimal
+    #   number.
+    #   @return [String]
+    #
+    # @!attribute [rw] currency_code
+    #   The currency code for the adjustment amount (e.g., `USD`).
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the billing adjustment request.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_message
+    #   A message providing additional context about the billing adjustment
+    #   request status. This field is populated only when the status is
+    #   `VALIDATION_FAILED`.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The date and time when the billing adjustment request was created,
+    #   as a POSIX timestamp (Unix epoch seconds).
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The date and time when the billing adjustment request was last
+    #   updated, as a POSIX timestamp (Unix epoch seconds).
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/GetBillingAdjustmentRequestOutput AWS API Documentation
+    #
+    class GetBillingAdjustmentRequestOutput < Struct.new(
+      :billing_adjustment_request_id,
+      :agreement_id,
+      :adjustment_reason_code,
+      :description,
+      :original_invoice_id,
+      :adjustment_amount,
+      :currency_code,
+      :status,
+      :status_message,
+      :created_at,
+      :updated_at)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -717,6 +1444,44 @@ module Aws::MarketplaceAgreement
       include Aws::Structure
     end
 
+    # The billing period for an invoice, specified by month and year.
+    #
+    # @!attribute [rw] month
+    #   The billing period month. Valid range: 1-12.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] year
+    #   The billing period year.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/InvoiceBillingPeriod AWS API Documentation
+    #
+    class InvoiceBillingPeriod < Struct.new(
+      :month,
+      :year)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The entity that issues the AWS invoice.
+    #
+    # @!attribute [rw] legal_name
+    #   The legal name of the invoicing entity.
+    #   @return [String]
+    #
+    # @!attribute [rw] branch_name
+    #   The branch name of the invoicing entity.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/InvoicingEntity AWS API Documentation
+    #
+    class InvoicingEntity < Struct.new(
+      :legal_name,
+      :branch_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Defines the list of text agreements proposed to the acceptors. An
     # example is the end user license agreement (EULA).
     #
@@ -734,6 +1499,358 @@ module Aws::MarketplaceAgreement
     class LegalTerm < Struct.new(
       :type,
       :documents)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] party_type
+    #   The party type for the cancellation requests. Required parameter.
+    #   Use `Proposer` to list cancellation requests where you are the
+    #   seller, or `Acceptor` to list cancellation requests where you are
+    #   the buyer.
+    #   @return [String]
+    #
+    # @!attribute [rw] agreement_id
+    #   An optional parameter to filter cancellation requests for a specific
+    #   agreement.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   An optional parameter to filter cancellation requests by status.
+    #   Valid values include `PENDING_APPROVAL`, `APPROVED`, `REJECTED`,
+    #   `CANCELLED`, and `VALIDATION_FAILED`.
+    #   @return [String]
+    #
+    # @!attribute [rw] agreement_type
+    #   An optional parameter to filter cancellation requests by agreement
+    #   type (e.g., `PurchaseAgreement`).
+    #   @return [String]
+    #
+    # @!attribute [rw] catalog
+    #   An optional parameter to filter cancellation requests by catalog
+    #   (e.g., `AWSMarketplace`).
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of cancellation requests to return in the
+    #   response.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   A token to specify where to start pagination. Use the `nextToken`
+    #   value from a previous response to retrieve the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/ListAgreementCancellationRequestsInput AWS API Documentation
+    #
+    class ListAgreementCancellationRequestsInput < Struct.new(
+      :party_type,
+      :agreement_id,
+      :status,
+      :agreement_type,
+      :catalog,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   A token to retrieve the next page of results. If `null`, there are
+    #   no more results to retrieve.
+    #   @return [String]
+    #
+    # @!attribute [rw] items
+    #   An array of `AgreementCancellationRequestSummary` objects containing
+    #   summary information about each cancellation request.
+    #   @return [Array<Types::AgreementCancellationRequestSummary>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/ListAgreementCancellationRequestsOutput AWS API Documentation
+    #
+    class ListAgreementCancellationRequestsOutput < Struct.new(
+      :next_token,
+      :items)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] agreement_id
+    #   The unique identifier of the agreement.
+    #   @return [String]
+    #
+    # @!attribute [rw] group_by
+    #   Specifies a grouping strategy for line items. Currently supports
+    #   `INVOICE_ID`.
+    #   @return [String]
+    #
+    # @!attribute [rw] invoice_id
+    #   An optional filter to retrieve invoice information for a specific
+    #   invoice.
+    #   @return [String]
+    #
+    # @!attribute [rw] invoice_type
+    #   An optional filter for the type of invoice. Valid values are
+    #   `INVOICE` and `CREDIT_MEMO`.
+    #   @return [String]
+    #
+    # @!attribute [rw] invoice_billing_period
+    #   An optional filter for the billing period associated with the
+    #   invoice.
+    #   @return [Types::InvoiceBillingPeriod]
+    #
+    # @!attribute [rw] before_issued_time
+    #   An optional filter for invoices issued before the specified
+    #   timestamp.
+    #   @return [Time]
+    #
+    # @!attribute [rw] after_issued_time
+    #   An optional filter for invoices issued after the specified
+    #   timestamp.
+    #   @return [Time]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in the response.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   A token to specify where to start pagination.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/ListAgreementInvoiceLineItemsInput AWS API Documentation
+    #
+    class ListAgreementInvoiceLineItemsInput < Struct.new(
+      :agreement_id,
+      :group_by,
+      :invoice_id,
+      :invoice_type,
+      :invoice_billing_period,
+      :before_issued_time,
+      :after_issued_time,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] agreement_invoice_line_item_group_summaries
+    #   A list of grouped billing data objects.
+    #   @return [Array<Types::AgreementInvoiceLineItemGroupSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   A token to retrieve the next page of results. If not present, there
+    #   are no more results available.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/ListAgreementInvoiceLineItemsOutput AWS API Documentation
+    #
+    class ListAgreementInvoiceLineItemsOutput < Struct.new(
+      :agreement_invoice_line_item_group_summaries,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] party_type
+    #   The party type for the payment requests. Required parameter. Use
+    #   `Proposer` to list payment requests where you are the seller, or
+    #   `Acceptor` to list payment requests where you are the buyer.
+    #   @return [String]
+    #
+    # @!attribute [rw] agreement_type
+    #   An optional parameter to list payment requests by agreement type
+    #   (e.g., `PurchaseAgreement`).
+    #   @return [String]
+    #
+    # @!attribute [rw] catalog
+    #   An optional parameter to list payment requests by catalog (e.g.,
+    #   `AWSMarketplace`).
+    #   @return [String]
+    #
+    # @!attribute [rw] agreement_id
+    #   An optional parameter to list payment requests for a specific
+    #   agreement.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   An optional parameter to list payment requests by status. Valid
+    #   values include `VALIDATING`, `VALIDATION_FAILED`,
+    #   `PENDING_APPROVAL`, `APPROVED`, `REJECTED`, and `CANCELLED`.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of payment requests to return in a single
+    #   response (1-50). Default is 50.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   A token to specify where to start pagination. Use the `nextToken`
+    #   value from a previous response to retrieve the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/ListAgreementPaymentRequestsInput AWS API Documentation
+    #
+    class ListAgreementPaymentRequestsInput < Struct.new(
+      :party_type,
+      :agreement_type,
+      :catalog,
+      :agreement_id,
+      :status,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   A token to retrieve the next page of results. If `null`, there are
+    #   no more results to retrieve.
+    #   @return [String]
+    #
+    # @!attribute [rw] items
+    #   An array of `PaymentRequestSummary` objects containing summary
+    #   information about each payment request.
+    #   @return [Array<Types::PaymentRequestSummary>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/ListAgreementPaymentRequestsOutput AWS API Documentation
+    #
+    class ListAgreementPaymentRequestsOutput < Struct.new(
+      :next_token,
+      :items)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] agreement_id
+    #   The unique identifier of the agreement to list billing adjustment
+    #   requests for.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   An optional filter to return billing adjustment requests with the
+    #   specified status.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_after
+    #   An optional filter to return billing adjustment requests created
+    #   after the specified POSIX timestamp (Unix epoch seconds).
+    #   @return [Time]
+    #
+    # @!attribute [rw] created_before
+    #   An optional filter to return billing adjustment requests created
+    #   before the specified POSIX timestamp (Unix epoch seconds).
+    #   @return [Time]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of billing adjustment requests to return in the
+    #   response.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] catalog
+    #   An optional filter to return billing adjustment requests by catalog
+    #   (e.g., `AWSMarketplace`).
+    #   @return [String]
+    #
+    # @!attribute [rw] agreement_type
+    #   An optional filter to return billing adjustment requests by
+    #   agreement type (e.g., `PurchaseAgreement`).
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   A token to specify where to start pagination. Use the `nextToken`
+    #   value from a previous response to retrieve the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/ListBillingAdjustmentRequestsInput AWS API Documentation
+    #
+    class ListBillingAdjustmentRequestsInput < Struct.new(
+      :agreement_id,
+      :status,
+      :created_after,
+      :created_before,
+      :max_results,
+      :catalog,
+      :agreement_type,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   A token to retrieve the next page of results. If `null`, there are
+    #   no more results to retrieve.
+    #   @return [String]
+    #
+    # @!attribute [rw] items
+    #   An array of `BillingAdjustmentSummary` objects containing summary
+    #   information about each billing adjustment request.
+    #   @return [Array<Types::BillingAdjustmentSummary>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/ListBillingAdjustmentRequestsOutput AWS API Documentation
+    #
+    class ListBillingAdjustmentRequestsOutput < Struct.new(
+      :next_token,
+      :items)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Summary view of a payment request.
+    #
+    # @!attribute [rw] payment_request_id
+    #   The unique identifier of the payment request.
+    #   @return [String]
+    #
+    # @!attribute [rw] agreement_id
+    #   The unique identifier of the agreement associated with this payment
+    #   request.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the payment request. Possible values include
+    #   `VALIDATING`, `VALIDATION_FAILED`, `PENDING_APPROVAL`, `APPROVED`,
+    #   `REJECTED`, and `CANCELLED`.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The descriptive name of the payment request.
+    #   @return [String]
+    #
+    # @!attribute [rw] charge_id
+    #   The unique identifier of the charge created after the payment
+    #   request is approved. This field is only present for approved payment
+    #   requests.
+    #   @return [String]
+    #
+    # @!attribute [rw] charge_amount
+    #   The amount charged or to be charged to the buyer.
+    #   @return [String]
+    #
+    # @!attribute [rw] currency_code
+    #   The currency code for the charge amount.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The date and time when the payment request was created, in ISO 8601
+    #   format.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The date and time when the payment request was last updated, in ISO
+    #   8601 format.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/PaymentRequestSummary AWS API Documentation
+    #
+    class PaymentRequestSummary < Struct.new(
+      :payment_request_id,
+      :agreement_id,
+      :status,
+      :name,
+      :charge_id,
+      :charge_amount,
+      :currency_code,
+      :created_at,
+      :updated_at)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -762,6 +1879,31 @@ module Aws::MarketplaceAgreement
       :type,
       :currency_code,
       :schedule)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Monetary amounts associated with an invoice line item group.
+    #
+    # @!attribute [rw] amount
+    #   The monetary amount before tax.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_adjustment_amount
+    #   The maximum refundable amount as a string representation of a
+    #   decimal number.
+    #   @return [String]
+    #
+    # @!attribute [rw] currency_code
+    #   The 3-letter ISO 4217 currency code (e.g., `USD`, `EUR`, `JPY`).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/PricingCurrencyAmount AWS API Documentation
+    #
+    class PricingCurrencyAmount < Struct.new(
+      :amount,
+      :max_adjustment_amount,
+      :currency_code)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1083,6 +2225,187 @@ module Aws::MarketplaceAgreement
       :type,
       :value)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] agreement_id
+    #   The unique identifier of the agreement for which the cancellation
+    #   request is being submitted.
+    #   @return [String]
+    #
+    # @!attribute [rw] reason_code
+    #   The reason code for the cancellation request. Valid values include
+    #   `INCORRECT_TERMS_ACCEPTED`, `REPLACING_AGREEMENT`, `TEST_AGREEMENT`,
+    #   `ALTERNATIVE_PROCUREMENT_CHANNEL`, `PRODUCT_DISCONTINUED`,
+    #   `UNINTENDED_RENEWAL`, `BUYER_DISSATISFACTION`, and `OTHER`.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   An optional detailed description of the cancellation reason (1-2000
+    #   characters).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/SendAgreementCancellationRequestInput AWS API Documentation
+    #
+    class SendAgreementCancellationRequestInput < Struct.new(
+      :agreement_id,
+      :reason_code,
+      :client_token,
+      :description)
+      SENSITIVE = [:description]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] agreement_id
+    #   The unique identifier of the agreement.
+    #   @return [String]
+    #
+    # @!attribute [rw] agreement_cancellation_request_id
+    #   The unique identifier for the created cancellation request.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the cancellation request. The initial status
+    #   is `PENDING_APPROVAL`.
+    #   @return [String]
+    #
+    # @!attribute [rw] reason_code
+    #   The reason code provided for the cancellation.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The detailed description of the cancellation reason, if provided.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The time when the cancellation request was created, as a POSIX
+    #   timestamp (Unix epoch seconds).
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The time when the cancellation request was last updated, as a POSIX
+    #   timestamp (Unix epoch seconds).
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/SendAgreementCancellationRequestOutput AWS API Documentation
+    #
+    class SendAgreementCancellationRequestOutput < Struct.new(
+      :agreement_id,
+      :agreement_cancellation_request_id,
+      :status,
+      :reason_code,
+      :description,
+      :created_at,
+      :updated_at)
+      SENSITIVE = [:description]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] agreement_id
+    #   The unique identifier of the agreement for which the payment request
+    #   is being submitted. Use `GetAgreementTerms` to retrieve agreement
+    #   term details.
+    #   @return [String]
+    #
+    # @!attribute [rw] term_id
+    #   The unique identifier of the `VariablePaymentTerm` for the agreement
+    #   that the payment request is being sent for.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   A descriptive name for the payment request (5-64 characters).
+    #   @return [String]
+    #
+    # @!attribute [rw] charge_amount
+    #   The amount requested to be charged to the buyer, positive decimal
+    #   value in the currency of the accepted term.
+    #
+    #   <note markdown="1"> A `ValidationException` is returned if the `chargeAmount` exceeds
+    #   the available balance, if the agreement doesn't have an active
+    #   `VariablePaymentTerm`, or if the `termId` is invalid.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   An optional detailed description of the payment request (1-2000
+    #   characters).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/SendAgreementPaymentRequestInput AWS API Documentation
+    #
+    class SendAgreementPaymentRequestInput < Struct.new(
+      :client_token,
+      :agreement_id,
+      :term_id,
+      :name,
+      :charge_amount,
+      :description)
+      SENSITIVE = [:description]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] payment_request_id
+    #   The unique identifier for the sent payment request.
+    #   @return [String]
+    #
+    # @!attribute [rw] agreement_id
+    #   The agreement identifier for this payment request.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the payment request. The initial status is
+    #   `PENDING_APPROVAL`.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The descriptive name of the payment request.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The detailed description of the payment request, if provided.
+    #   @return [String]
+    #
+    # @!attribute [rw] charge_amount
+    #   The amount being charged to the buyer.
+    #   @return [String]
+    #
+    # @!attribute [rw] currency_code
+    #   The currency code for the charge amount (e.g., `USD`).
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The time when the payment request was created, in ISO 8601 format.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/SendAgreementPaymentRequestOutput AWS API Documentation
+    #
+    class SendAgreementPaymentRequestOutput < Struct.new(
+      :payment_request_id,
+      :agreement_id,
+      :status,
+      :name,
+      :description,
+      :charge_amount,
+      :currency_code,
+      :created_at)
+      SENSITIVE = [:description]
       include Aws::Structure
     end
 

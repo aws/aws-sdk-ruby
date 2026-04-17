@@ -93,8 +93,8 @@ module Aws::QuickSight
     # @!attribute [rw] account_name
     #   The account name that you provided for the Amazon Quick Sight
     #   subscription in your Amazon Web Services account. You create this
-    #   name when you sign up for Quick Suite. It's unique over all of
-    #   Amazon Web Services, and it appears only when users sign in.
+    #   name when you sign up for Quick. It's unique over all of Amazon Web
+    #   Services, and it appears only when users sign in.
     #   @return [String]
     #
     # @!attribute [rw] edition
@@ -158,8 +158,8 @@ module Aws::QuickSight
     #
     # @!attribute [rw] public_sharing_enabled
     #   A Boolean value that indicates whether public sharing is turned on
-    #   for an Quick Suite account. For more information about turning on
-    #   public sharing, see [UpdatePublicSharingSettings][1].
+    #   for an Quick account. For more information about turning on public
+    #   sharing, see [UpdatePublicSharingSettings][1].
     #
     #
     #
@@ -754,6 +754,12 @@ module Aws::QuickSight
     #   this analysis.
     #   @return [Array<Types::SheetDefinition>]
     #
+    # @!attribute [rw] tooltip_sheets
+    #   An array of tooltip sheet definitions for an analysis. Each
+    #   `TooltipSheetDefinition` provides detailed information about a
+    #   tooltip sheet within this analysis.
+    #   @return [Array<Types::TooltipSheetDefinition>]
+    #
     # @!attribute [rw] calculated_fields
     #   An array of calculated field definitions for the analysis.
     #   @return [Array<Types::CalculatedField>]
@@ -810,6 +816,7 @@ module Aws::QuickSight
     class AnalysisDefinition < Struct.new(
       :data_set_identifier_declarations,
       :sheets,
+      :tooltip_sheets,
       :calculated_fields,
       :parameter_declarations,
       :filter_groups,
@@ -1113,7 +1120,7 @@ module Aws::QuickSight
     end
 
     # The type of experience you want to embed. For anonymous users, you can
-    # embed Quick Suite dashboards.
+    # embed Quick dashboards.
     #
     # @!attribute [rw] dashboard
     #   The type of embedding experience. In this case, Amazon Quick Sight
@@ -4300,7 +4307,7 @@ module Aws::QuickSight
     # The details of the brand.
     #
     # @!attribute [rw] brand_id
-    #   The ID of the Quick Suite brand.
+    #   The ID of the Quick brand.
     #   @return [String]
     #
     # @!attribute [rw] arn
@@ -4373,7 +4380,7 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] brand_id
-    #   The ID of the Quick Suite brand.
+    #   The ID of the Quick brand.
     #   @return [String]
     #
     # @!attribute [rw] brand_name
@@ -4651,6 +4658,10 @@ module Aws::QuickSight
     # @!attribute [rw] perform_flow_ui_task
     #   The ability to use UI Agent step to perform tasks on public
     #   websites.
+    #   @return [String]
+    #
+    # @!attribute [rw] approve_flow_share_requests
+    #   The ability to review and approve sharing requests of Flows.
     #   @return [String]
     #
     # @!attribute [rw] use_agent_web_search
@@ -5371,8 +5382,32 @@ module Aws::QuickSight
     #   The ability to use New Relic actions.
     #   @return [String]
     #
+    # @!attribute [rw] topic
+    #   The ability to perform Topic-related actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] edit_visual_with_q
+    #   The ability to Edit Visual with AI
+    #   @return [String]
+    #
+    # @!attribute [rw] build_calculated_field_with_q
+    #   The ability to Build Calculation with AI
+    #   @return [String]
+    #
+    # @!attribute [rw] create_dashboard_executive_summary_with_q
+    #   The ability to Create Executive Summary
+    #   @return [String]
+    #
     # @!attribute [rw] space
     #   The ability to perform space-related actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_spaces
+    #   The ability to create spaces.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_spaces
+    #   The ability to share spaces with other users and groups.
     #   @return [String]
     #
     # @!attribute [rw] chat_agent
@@ -5383,12 +5418,29 @@ module Aws::QuickSight
     #   The ability to create chat agents.
     #   @return [String]
     #
+    # @!attribute [rw] share_chat_agents
+    #   The ability to share chat agents with other users and groups.
+    #   @return [String]
+    #
     # @!attribute [rw] research
     #   The ability to perform research-related actions.
     #   @return [String]
     #
     # @!attribute [rw] self_upgrade_user_role
     #   The ability to enable users to upgrade their user role.
+    #   @return [String]
+    #
+    # @!attribute [rw] extension
+    #   The ability to perform Extension-related actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] manage_shared_folders
+    #   The ability to create, update, delete and view shared folders (both
+    #   restricted and unrestricted), ability to add any asset to shared
+    #   folders, and ability to share the folders.
+    #
+    #   **Note:** This does *not* prevent inheriting access to assets that
+    #   others share with them through folder membership.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/Capabilities AWS API Documentation
@@ -5424,6 +5476,7 @@ module Aws::QuickSight
       :publish_without_approval,
       :use_bedrock_models,
       :perform_flow_ui_task,
+      :approve_flow_share_requests,
       :use_agent_web_search,
       :knowledge_base,
       :action,
@@ -5599,11 +5652,20 @@ module Aws::QuickSight
       :create_and_update_new_relic_action,
       :share_new_relic_action,
       :use_new_relic_action,
+      :topic,
+      :edit_visual_with_q,
+      :build_calculated_field_with_q,
+      :create_dashboard_executive_summary_with_q,
       :space,
+      :create_spaces,
+      :share_spaces,
       :chat_agent,
       :create_chat_agents,
+      :share_chat_agents,
       :research,
-      :self_upgrade_user_role)
+      :self_upgrade_user_role,
+      :extension,
+      :manage_shared_folders)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7755,7 +7817,7 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] brand_id
-    #   The ID of the Quick Suite brand.
+    #   The ID of the Quick brand.
     #   @return [String]
     #
     # @!attribute [rw] brand_definition
@@ -10445,6 +10507,10 @@ module Aws::QuickSight
     #   An array of sheet definitions for a dashboard.
     #   @return [Array<Types::SheetDefinition>]
     #
+    # @!attribute [rw] tooltip_sheets
+    #   An array of tooltip sheet definitions for a dashboard.
+    #   @return [Array<Types::TooltipSheetDefinition>]
+    #
     # @!attribute [rw] calculated_fields
     #   An array of calculated field definitions for the dashboard.
     #   @return [Array<Types::CalculatedField>]
@@ -10496,6 +10562,7 @@ module Aws::QuickSight
     class DashboardVersionDefinition < Struct.new(
       :data_set_identifier_declarations,
       :sheets,
+      :tooltip_sheets,
       :calculated_fields,
       :parameter_declarations,
       :filter_groups,
@@ -10565,7 +10632,7 @@ module Aws::QuickSight
     #   The ID of the dashboard that has the visual that you want to embed.
     #   The `DashboardId` can be found in the `IDs for developers` section
     #   of the `Embed visual` pane of the visual's on-visual menu of the
-    #   Quick Suite console. You can also get the `DashboardId` with a
+    #   Quick console. You can also get the `DashboardId` with a
     #   `ListDashboards` API operation.
     #   @return [String]
     #
@@ -10573,7 +10640,7 @@ module Aws::QuickSight
     #   The ID of the sheet that the has visual that you want to embed. The
     #   `SheetId` can be found in the `IDs for developers` section of the
     #   `Embed visual` pane of the visual's on-visual menu of the Quick
-    #   Suite console.
+    #   console.
     #   @return [String]
     #
     # @!attribute [rw] visual_id
@@ -12020,6 +12087,12 @@ module Aws::QuickSight
     #   The credentials for connecting through a web proxy server.
     #   @return [Types::WebProxyCredentials]
     #
+    # @!attribute [rw] o_auth_client_credentials
+    #   The OAuth client credentials for connecting to a data source using
+    #   OAuth 2.0 client credentials (2LO) authentication. For more
+    #   information, see ` OAuthClientCredentials `.
+    #   @return [Types::OAuthClientCredentials]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DataSourceCredentials AWS API Documentation
     #
     class DataSourceCredentials < Struct.new(
@@ -12027,7 +12100,8 @@ module Aws::QuickSight
       :copy_source_arn,
       :secret_arn,
       :key_pair_credentials,
-      :web_proxy_credentials)
+      :web_proxy_credentials,
+      :o_auth_client_credentials)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13695,7 +13769,7 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] brand_id
-    #   The ID of the Quick Suite brand.
+    #   The ID of the Quick brand.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DeleteBrandRequest AWS API Documentation
@@ -15034,8 +15108,8 @@ module Aws::QuickSight
     #   sometimes referred to as a Quick Sight "account" even though it's
     #   technically not an account by itself. Instead, it's a subscription
     #   to the Amazon Quick Sight service for your Amazon Web Services
-    #   account. The edition that you subscribe to applies to Quick Suite in
-    #   every Amazon Web Services Region where you use it.
+    #   account. The edition that you subscribe to applies to Quick in every
+    #   Amazon Web Services Region where you use it.
     #   @return [Types::AccountSettings]
     #
     # @!attribute [rw] request_id
@@ -15663,6 +15737,101 @@ module Aws::QuickSight
     end
 
     # @!attribute [rw] aws_account_id
+    #   The ID of the Amazon Web Services account that contains the
+    #   automation job.
+    #   @return [String]
+    #
+    # @!attribute [rw] automation_group_id
+    #   The ID of the automation group that contains the automation.
+    #   @return [String]
+    #
+    # @!attribute [rw] automation_id
+    #   The ID of the automation that the job belongs to.
+    #   @return [String]
+    #
+    # @!attribute [rw] include_input_payload
+    #   A Boolean value that indicates whether to include the input payload
+    #   in the response. If set to `true`, the input payload will be
+    #   included. If set to `false`, the input payload will be returned as
+    #   `null`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] include_output_payload
+    #   A Boolean value that indicates whether to include the output payload
+    #   in the response. If set to `true`, the output payload will be
+    #   included. If set to `false`, the output payload will be returned as
+    #   `null`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] job_id
+    #   The ID of the automation job to describe.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeAutomationJobRequest AWS API Documentation
+    #
+    class DescribeAutomationJobRequest < Struct.new(
+      :aws_account_id,
+      :automation_group_id,
+      :automation_id,
+      :include_input_payload,
+      :include_output_payload,
+      :job_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the automation job.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The time that the automation job was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] started_at
+    #   The time that the automation job started running.
+    #   @return [Time]
+    #
+    # @!attribute [rw] ended_at
+    #   The time that the automation job finished running.
+    #   @return [Time]
+    #
+    # @!attribute [rw] job_status
+    #   The current status of the automation job.
+    #   @return [String]
+    #
+    # @!attribute [rw] input_payload
+    #   The input payload that was provided when the automation job was
+    #   started. This field is only included when `IncludeInputPayload` is
+    #   set to `true` in the request.
+    #   @return [String]
+    #
+    # @!attribute [rw] output_payload
+    #   The output payload that was generated by the automation job. This
+    #   field is only included when `IncludeOutputPayload` is set to `true`
+    #   in the request.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The Amazon Web Services request ID for this operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeAutomationJobResponse AWS API Documentation
+    #
+    class DescribeAutomationJobResponse < Struct.new(
+      :arn,
+      :created_at,
+      :started_at,
+      :ended_at,
+      :job_status,
+      :input_payload,
+      :output_payload,
+      :request_id)
+      SENSITIVE = [:input_payload, :output_payload]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] aws_account_id
     #   The ID of the Amazon Web Services account that owns the brand
     #   assignment.
     #   @return [String]
@@ -15697,7 +15866,7 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] brand_id
-    #   The ID of the Quick Suite brand.
+    #   The ID of the Quick brand.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeBrandPublishedVersionRequest AWS API Documentation
@@ -15736,7 +15905,7 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] brand_id
-    #   The ID of the Quick Suite brand.
+    #   The ID of the Quick brand.
     #   @return [String]
     #
     # @!attribute [rw] version_id
@@ -17224,12 +17393,12 @@ module Aws::QuickSight
 
     # @!attribute [rw] aws_account_id
     #   The ID of the Amazon Web Services account that contains the Quick
-    #   Suite self-upgrade configuration.
+    #   self-upgrade configuration.
     #   @return [String]
     #
     # @!attribute [rw] namespace
-    #   The Quick Suite namespace that you want to describe the Quick Suite
-    #   self-upgrade configuration for.
+    #   The Quick namespace that you want to describe the Quick self-upgrade
+    #   configuration for.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeSelfUpgradeConfigurationRequest AWS API Documentation
@@ -17242,7 +17411,7 @@ module Aws::QuickSight
     end
 
     # @!attribute [rw] self_upgrade_configuration
-    #   The self-upgrade configuration for the Quick Suite account.
+    #   The self-upgrade configuration for the Quick account.
     #   @return [Types::SelfUpgradeConfiguration]
     #
     # @!attribute [rw] request_id
@@ -20833,8 +21002,8 @@ module Aws::QuickSight
     #
     # @!attribute [rw] namespace
     #   The Amazon Quick Sight namespace that the anonymous user virtually
-    #   belongs to. If you are not using an Amazon Quick Suite custom
-    #   namespace, set this to `default`.
+    #   belongs to. If you are not using an Amazon Quick custom namespace,
+    #   set this to `default`.
     #   @return [String]
     #
     # @!attribute [rw] session_tags
@@ -20845,17 +21014,27 @@ module Aws::QuickSight
     #   `DataSet$RowLevelPermissionTagConfiguration` parameter so that
     #   session tags can be used to provide row-level security.
     #
-    #   When using session tags, you must call
-    #   `GenerateEmbedUrlForAnonymousUser` from a secure, trusted
-    #   environment. The API call passes session tags that enable
-    #   server-side data redaction by using the row-level security (RLS)
-    #   rules configured in your datasets. A secure, trusted environment has
-    #   access controls that you implement. These controls ensure that only
-    #   your server or authorized users can add or modify session tags.
+    #   When using `SessionTags` in `GenerateEmbedUrlForAnonymousUser`,
+    #
+    #   * Treat `SessionTags` as security credentials. Do not expose
+    #     `SessionTags` to end users or client-side code.
+    #
+    #   * Implement server-side controls. Ensure that `SessionTags` are set
+    #     exclusively by your trusted backend services, not by parameters
+    #     that end users can modify.
+    #
+    #   * Protect `SessionTags` from enumeration. Ensure that users in one
+    #     tenant cannot discover or guess sessionTag values belonging to
+    #     other tenants.
+    #
+    #   * Review your architecture. If downstream customers or partners are
+    #     allowed to call the `GenerateEmbedUrlForAnonymousUser` API
+    #     directly, evaluate whether those parties could specify sessionTag
+    #     values for tenants they should not access.
     #
     #   Besides, these are not the tags used for the Amazon Web Services
     #   resource tagging feature. For more information, see [Using Row-Level
-    #   Security (RLS) with Tags][1] in the *Amazon Quick Suite User Guide*.
+    #   Security (RLS) with Tags][1] in the *Amazon Quick User Guide*.
     #
     #
     #
@@ -20921,7 +21100,7 @@ module Aws::QuickSight
     #
     # @!attribute [rw] anonymous_user_arn
     #   The Amazon Resource Name (ARN) to use for the anonymous Amazon Quick
-    #   Suite user.
+    #   user.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/GenerateEmbedUrlForAnonymousUserResponse AWS API Documentation
@@ -20951,8 +21130,8 @@ module Aws::QuickSight
     #
     # @!attribute [rw] experience_configuration
     #   The experience that you want to embed. For registered users, you can
-    #   embed Quick Suite dashboards, Amazon Quick Sight visuals, the Amazon
-    #   Quick Sight Q search bar, the Amazon Quick Sight Generative Q&amp;A
+    #   embed Quick dashboards, Amazon Quick Sight visuals, the Amazon Quick
+    #   Sight Q search bar, the Amazon Quick Sight Generative Q&amp;A
     #   experience, or the entire Amazon Quick Sight console.
     #   @return [Types::RegisteredUserEmbeddingExperienceConfiguration]
     #
@@ -21014,7 +21193,7 @@ module Aws::QuickSight
     #
     # @!attribute [rw] experience_configuration
     #   The type of experience you want to embed. For registered users, you
-    #   can embed Quick Suite dashboards or the Amazon Quick Sight console.
+    #   can embed Quick dashboards or the Amazon Quick Sight console.
     #
     #   <note markdown="1"> Exactly one of the experience configurations is required. You can
     #   choose `Dashboard` or `QuickSightConsole`. You cannot choose more
@@ -22143,10 +22322,10 @@ module Aws::QuickSight
     #   @return [Boolean]
     #
     # @!attribute [rw] user_arn
-    #   The Amazon Quick Suite user's Amazon Resource Name (ARN), for use
-    #   with `QUICKSIGHT` identity type. You can use this for any Amazon
-    #   Quick Suite users in your account (readers, authors, or admins)
-    #   authenticated as one of the following:
+    #   The Amazon Quick user's Amazon Resource Name (ARN), for use with
+    #   `QUICKSIGHT` identity type. You can use this for any Amazon Quick
+    #   users in your account (readers, authors, or admins) authenticated as
+    #   one of the following:
     #
     #   * Active Directory (AD) users or group members
     #
@@ -22170,10 +22349,9 @@ module Aws::QuickSight
     #   A list of one or more dashboard IDs that you want anonymous users to
     #   have tempporary access to. Currently, the `IdentityType` parameter
     #   must be set to `ANONYMOUS` because other identity types authenticate
-    #   as Quick Suite or IAM users. For example, if you set
-    #   "`--dashboard-id dash_id1 --dashboard-id dash_id2 dash_id3
-    #   identity-type ANONYMOUS`", the session can access all three
-    #   dashboards.
+    #   as Quick or IAM users. For example, if you set "`--dashboard-id
+    #   dash_id1 --dashboard-id dash_id2 dash_id3 identity-type
+    #   ANONYMOUS`", the session can access all three dashboards.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/GetDashboardEmbedUrlRequest AWS API Documentation
@@ -22447,10 +22625,10 @@ module Aws::QuickSight
     #   @return [Integer]
     #
     # @!attribute [rw] user_arn
-    #   The Amazon Quick Suite user's Amazon Resource Name (ARN), for use
-    #   with `QUICKSIGHT` identity type. You can use this for any type of
-    #   Amazon Quick Suite users in your account (readers, authors, or
-    #   admins). They need to be authenticated as one of the following:
+    #   The Amazon Quick user's Amazon Resource Name (ARN), for use with
+    #   `QUICKSIGHT` identity type. You can use this for any type of Amazon
+    #   Quick users in your account (readers, authors, or admins). They need
+    #   to be authenticated as one of the following:
     #
     #   1.  Active Directory (AD) users or group members
     #
@@ -22477,10 +22655,10 @@ module Aws::QuickSight
 
     # @!attribute [rw] embed_url
     #   A single-use URL that you can put into your server-side web page to
-    #   embed your Quick Suite session. This URL is valid for 5 minutes. The
-    #   API operation provides the URL with an `auth_code` value that
-    #   enables one (and only one) sign-on to a user session that is valid
-    #   for 10 hours.
+    #   embed your Quick session. This URL is valid for 5 minutes. The API
+    #   operation provides the URL with an `auth_code` value that enables
+    #   one (and only one) sign-on to a user session that is valid for 10
+    #   hours.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -23765,6 +23943,10 @@ module Aws::QuickSight
     #
     # @!attribute [rw] type
     #   The data type of the column.
+    #
+    #   **Note:** `SEMISTRUCT` represents Athena's map, row, and struct
+    #   data types. It is supported when using the new data preparation
+    #   experience.
     #   @return [String]
     #
     # @!attribute [rw] sub_type
@@ -26718,7 +26900,7 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] namespace
-    #   The Quick Suite namespace for the self-upgrade requests.
+    #   The Quick namespace for the self-upgrade requests.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -28694,6 +28876,37 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # The OAuth 2.0 client credentials used for authenticating a data source
+    # connection. Use this structure to provide a client ID, client secret,
+    # and username directly instead of referencing a secret stored in Amazon
+    # Secrets Manager. This structure supports data sources that use
+    # two-legged OAuth (2LO) authentication, such as Snowflake.
+    #
+    # @!attribute [rw] client_id
+    #   The client ID of the OAuth 2.0 application that is registered with
+    #   the data source provider.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_secret
+    #   The client secret of the OAuth 2.0 application that is registered
+    #   with the data source provider.
+    #   @return [String]
+    #
+    # @!attribute [rw] username
+    #   The username of the account that is used for OAuth 2.0 client
+    #   credentials authentication with the data source provider.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/OAuthClientCredentials AWS API Documentation
+    #
+    class OAuthClientCredentials < Struct.new(
+      :client_id,
+      :client_secret,
+      :username)
+      SENSITIVE = [:client_id, :client_secret, :username]
+      include Aws::Structure
+    end
+
     # An object that contains information needed to create a data source
     # connection that uses OAuth client credentials. This option is
     # available for data source connections that are made with Snowflake and
@@ -29563,8 +29776,8 @@ module Aws::QuickSight
     #
     # @!attribute [rw] principal
     #   The Amazon Resource Name (ARN) of the principal. This can be an
-    #   Amazon Quick Suite user, group or namespace associated with the
-    #   flow. Namespace principal can only be set as a viewer and will grant
+    #   Amazon Quick user, group or namespace associated with the flow.
+    #   Namespace principal can only be set as a viewer and will grant
     #   everyone in the same namespace viewer permissions.
     #   @return [String]
     #
@@ -30026,6 +30239,10 @@ module Aws::QuickSight
     #   The paginated report options for a pivot table visual.
     #   @return [Types::PivotTablePaginatedReportOptions]
     #
+    # @!attribute [rw] tooltip
+    #   The display options for the visual tooltip.
+    #   @return [Types::TooltipOptions]
+    #
     # @!attribute [rw] dashboard_customization_visual_options
     #   The options that define customizations available to dashboard
     #   readers for a specific visual
@@ -30044,6 +30261,7 @@ module Aws::QuickSight
       :total_options,
       :field_options,
       :paginated_report_options,
+      :tooltip,
       :dashboard_customization_visual_options,
       :interactions)
       SENSITIVE = []
@@ -32501,7 +32719,7 @@ module Aws::QuickSight
     end
 
     # The type of experience you want to embed. For registered users, you
-    # can embed Quick Suite dashboards or the Amazon Quick Sight console.
+    # can embed Quick dashboards or the Amazon Quick Sight console.
     #
     # <note markdown="1"> Exactly one of the experience configurations is required. You can
     # choose `Dashboard` or `QuickSightConsole`. You cannot choose more than
@@ -32519,7 +32737,7 @@ module Aws::QuickSight
     #   console embedding experience. This can be used along with custom
     #   permissions to restrict access to certain features. For more
     #   information, see [Customizing Access to the Amazon Quick Sight
-    #   Console][1] in the *Amazon Quick Suite User Guide*.
+    #   Console][1] in the *Amazon Quick User Guide*.
     #
     #   Use ` GenerateEmbedUrlForRegisteredUser ` where you want to provide
     #   an authoring portal that allows users to create data sources,
@@ -32530,16 +32748,16 @@ module Aws::QuickSight
     #   the ` UpdateUser ` API operation. Use the ` RegisterUser ` API
     #   operation to add a new user with a custom permission profile
     #   attached. For more information, see the following sections in the
-    #   *Amazon Quick Suite User Guide*:
+    #   *Amazon Quick User Guide*:
     #
     #   * [Embedding the Full Functionality of the Amazon Quick Sight
     #     Console for Authenticated Users][2]
     #
-    #   * [Customizing Access to the Amazon Quick Suite Console][1]
+    #   * [Customizing Access to the Amazon Quick Console][1]
     #
     #   For more information about the high-level steps for embedding and
     #   for an interactive demo of the ways you can customize embedding,
-    #   visit the [Amazon Quick Suite Developer Portal][3].
+    #   visit the [Amazon Quick Developer Portal][3].
     #
     #
     #
@@ -32600,7 +32818,7 @@ module Aws::QuickSight
     # @!attribute [rw] initial_topic_id
     #   The ID of the new Q reader experience topic that you want to make
     #   the starting topic in the Generative Q&amp;A experience. You can
-    #   find a topic ID by navigating to the Topics pane in the Quick Suite
+    #   find a topic ID by navigating to the Topics pane in the Quick
     #   application and opening a topic. The ID is in the URL for the topic
     #   that you open.
     #
@@ -34639,11 +34857,11 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
-    # The self-upgrade configuration for the Quick Suite account.
+    # The self-upgrade configuration for the Quick account.
     #
     # @!attribute [rw] self_upgrade_status
-    #   Status set for the self-upgrade configuration for the Quick Suite
-    #   account. It can contain the following values:
+    #   Status set for the self-upgrade configuration for the Quick account.
+    #   It can contain the following values:
     #
     #   * `AUTO_APPROVAL`: All the self-upgrade requests will be auto
     #     approved.
@@ -35081,7 +35299,7 @@ module Aws::QuickSight
     #
     # @!attribute [rw] name
     #   The name of the sheet. This name is displayed on the sheet's tab in
-    #   the Quick Suite console.
+    #   the Quick console.
     #   @return [String]
     #
     # @!attribute [rw] parameter_controls
@@ -35442,6 +35660,20 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # The configuration of the sheet tooltip.
+    #
+    # @!attribute [rw] sheet_id
+    #   The sheet ID of the tooltip sheet that is used by the tooltip.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/SheetTooltip AWS API Documentation
+    #
+    class SheetTooltip < Struct.new(
+      :sheet_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The filter that is applied to the options.
     #
     # @!attribute [rw] sheet_id
@@ -35671,7 +35903,7 @@ module Aws::QuickSight
     #   These are not the tags that are used for Amazon Web Services
     #   resource tagging. For more information on row level security in
     #   Amazon Quick Sight, see [Using Row-Level Security (RLS) with
-    #   Tags][1]in the *Amazon Quick Suite User Guide*.
+    #   Tags][1]in the *Amazon Quick User Guide*.
     #
     #
     #
@@ -36110,6 +36342,61 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # The options for sparklines in a table.
+    #
+    # @!attribute [rw] field_id
+    #   The field ID of the value column that the sparkline is applied to.
+    #   @return [String]
+    #
+    # @!attribute [rw] x_axis_field
+    #   The dimension type field.
+    #   @return [Types::DimensionField]
+    #
+    # @!attribute [rw] y_axis_behavior
+    #   Determines whether the Y axis is shared across all sparklines or
+    #   independent for each sparkline.
+    #   @return [String]
+    #
+    # @!attribute [rw] visual_type
+    #   The type of the sparkline. Valid values are `LINE` and `AREA_LINE`.
+    #   @return [String]
+    #
+    # @!attribute [rw] line_color
+    #   The color of the sparkline line.
+    #   @return [String]
+    #
+    # @!attribute [rw] line_interpolation
+    #   The interpolation style for the sparkline line.
+    #   @return [String]
+    #
+    # @!attribute [rw] all_points_marker
+    #   Marker styles options for a line series in `LineChartVisual`.
+    #   @return [Types::LineChartMarkerStyleSettings]
+    #
+    # @!attribute [rw] max_value_marker
+    #   Marker styles options for a line series in `LineChartVisual`.
+    #   @return [Types::LineChartMarkerStyleSettings]
+    #
+    # @!attribute [rw] min_value_marker
+    #   Marker styles options for a line series in `LineChartVisual`.
+    #   @return [Types::LineChartMarkerStyleSettings]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/SparklinesOptions AWS API Documentation
+    #
+    class SparklinesOptions < Struct.new(
+      :field_id,
+      :x_axis_field,
+      :y_axis_behavior,
+      :visual_type,
+      :line_color,
+      :line_interpolation,
+      :all_points_marker,
+      :max_value_marker,
+      :min_value_marker)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A static file that contains the geospatial data.
     #
     # @!attribute [rw] static_file_id
@@ -36432,6 +36719,61 @@ module Aws::QuickSight
       :asset_bundle_import_job_id,
       :request_id,
       :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] aws_account_id
+    #   The ID of the Amazon Web Services account that contains the
+    #   automation.
+    #   @return [String]
+    #
+    # @!attribute [rw] automation_group_id
+    #   The ID of the automation group that contains the automation to run.
+    #   @return [String]
+    #
+    # @!attribute [rw] automation_id
+    #   The ID of the automation to run.
+    #   @return [String]
+    #
+    # @!attribute [rw] input_payload
+    #   The input payload for the automation job, provided as a JSON string.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/StartAutomationJobRequest AWS API Documentation
+    #
+    class StartAutomationJobRequest < Struct.new(
+      :aws_account_id,
+      :automation_group_id,
+      :automation_id,
+      :input_payload)
+      SENSITIVE = [:input_payload]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the automation job.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_id
+    #   The ID of the automation job that was started.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The HTTP status of the request.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] request_id
+    #   The Amazon Web Services request ID for this operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/StartAutomationJobResponse AWS API Documentation
+    #
+    class StartAutomationJobResponse < Struct.new(
+      :arn,
+      :job_id,
+      :status,
+      :request_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -37093,6 +37435,10 @@ module Aws::QuickSight
     #   A collection of inline visualizations to display within a chart.
     #   @return [Array<Types::TableInlineVisualization>]
     #
+    # @!attribute [rw] tooltip
+    #   The display options for the visual tooltip.
+    #   @return [Types::TooltipOptions]
+    #
     # @!attribute [rw] dashboard_customization_visual_options
     #   The options that define customizations available to dashboard
     #   readers for a specific visual
@@ -37112,6 +37458,7 @@ module Aws::QuickSight
       :field_options,
       :paginated_report_options,
       :table_inline_visualizations,
+      :tooltip,
       :dashboard_customization_visual_options,
       :interactions)
       SENSITIVE = []
@@ -37321,10 +37668,16 @@ module Aws::QuickSight
     #   within a chart.
     #   @return [Types::DataBarsOptions]
     #
+    # @!attribute [rw] sparklines
+    #   The configuration of the inline visualization of the sparklines
+    #   within a chart.
+    #   @return [Types::SparklinesOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/TableInlineVisualization AWS API Documentation
     #
     class TableInlineVisualization < Struct.new(
-      :data_bars)
+      :data_bars,
+      :sparklines)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -37929,6 +38282,10 @@ module Aws::QuickSight
     #   An array of sheet definitions for a template.
     #   @return [Array<Types::SheetDefinition>]
     #
+    # @!attribute [rw] tooltip_sheets
+    #   An array of tooltip sheet definitions for a template.
+    #   @return [Array<Types::TooltipSheetDefinition>]
+    #
     # @!attribute [rw] calculated_fields
     #   An array of calculated field definitions for the template.
     #   @return [Array<Types::CalculatedField>]
@@ -37985,6 +38342,7 @@ module Aws::QuickSight
     class TemplateVersionDefinition < Struct.new(
       :data_set_configurations,
       :sheets,
+      :tooltip_sheets,
       :calculated_fields,
       :parameter_declarations,
       :filter_groups,
@@ -38796,12 +39154,66 @@ module Aws::QuickSight
     #   saved. The display type is decided based on the tooltip type.
     #   @return [Types::FieldBasedTooltip]
     #
+    # @!attribute [rw] sheet_tooltip
+    #   The configuration of the sheet tooltip.
+    #   @return [Types::SheetTooltip]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/TooltipOptions AWS API Documentation
     #
     class TooltipOptions < Struct.new(
       :tooltip_visibility,
       :selected_tooltip_type,
-      :field_based_tooltip)
+      :field_based_tooltip,
+      :sheet_tooltip)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A tooltip sheet is an object that contains a set of visuals that are
+    # used as a tooltip. Every analysis and dashboard must contain at least
+    # one non-tooltip sheet.
+    #
+    # @!attribute [rw] sheet_id
+    #   The unique identifier of a tooltip sheet.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the tooltip sheet. This name is displayed on the
+    #   sheet's tab in the Quick console.
+    #   @return [String]
+    #
+    # @!attribute [rw] visuals
+    #   A list of the visuals that are on a tooltip sheet.
+    #   @return [Array<Types::Visual>]
+    #
+    # @!attribute [rw] text_boxes
+    #   The text boxes that are on a tooltip sheet.
+    #   @return [Array<Types::SheetTextBox>]
+    #
+    # @!attribute [rw] images
+    #   A list of images on a tooltip sheet.
+    #   @return [Array<Types::SheetImage>]
+    #
+    # @!attribute [rw] layouts
+    #   Layouts define how the components of a tooltip sheet are arranged.
+    #
+    #   For more information, see [Types of layout][1] in the *Amazon Quick
+    #   Suite User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/quicksight/latest/user/types-of-layout.html
+    #   @return [Array<Types::Layout>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/TooltipSheetDefinition AWS API Documentation
+    #
+    class TooltipSheetDefinition < Struct.new(
+      :sheet_id,
+      :name,
+      :visuals,
+      :text_boxes,
+      :images,
+      :layouts)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -41477,7 +41889,7 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] namespace
-    #   The namespace of the Quick Suite application.
+    #   The namespace of the Quick application.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateApplicationWithTokenExchangeGrantRequest AWS API Documentation
@@ -41546,7 +41958,7 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] brand_id
-    #   The ID of the Quick Suite brand.
+    #   The ID of the Quick brand.
     #   @return [String]
     #
     # @!attribute [rw] version_id
@@ -41585,7 +41997,7 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] brand_id
-    #   The ID of the Quick Suite brand.
+    #   The ID of the Quick brand.
     #   @return [String]
     #
     # @!attribute [rw] brand_definition
@@ -42901,7 +43313,7 @@ module Aws::QuickSight
     #
     # @!attribute [rw] public_sharing_enabled
     #   A Boolean value that indicates whether public sharing is turned on
-    #   for an Quick Suite account.
+    #   for an Quick account.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdatePublicSharingSettingsRequest AWS API Documentation
@@ -43155,17 +43567,16 @@ module Aws::QuickSight
 
     # @!attribute [rw] aws_account_id
     #   The ID of the Amazon Web Services account that contains the Quick
-    #   Suite self-upgrade configuration that you want to update.
+    #   self-upgrade configuration that you want to update.
     #   @return [String]
     #
     # @!attribute [rw] namespace
-    #   The Quick Suite namespace that you want to update the Quick Suite
-    #   self-upgrade configuration for.
+    #   The Quick namespace that you want to update the Quick self-upgrade
+    #   configuration for.
     #   @return [String]
     #
     # @!attribute [rw] self_upgrade_status
-    #   The self-upgrade status that you want to set for the Quick Suite
-    #   account.
+    #   The self-upgrade status that you want to set for the Quick account.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateSelfUpgradeConfigurationRequest AWS API Documentation
@@ -43201,7 +43612,7 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] namespace
-    #   The Quick Suite namespace for the self-upgrade request.
+    #   The Quick namespace for the self-upgrade request.
     #   @return [String]
     #
     # @!attribute [rw] upgrade_request_id

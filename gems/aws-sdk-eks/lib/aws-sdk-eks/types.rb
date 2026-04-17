@@ -1780,7 +1780,7 @@ module Aws::EKS
     #
     # @!attribute [rw] tier
     #   The control plane scaling tier configuration. Available options are
-    #   `standard`, `tier-xl`, `tier-2xl`, or `tier-4xl`. For more
+    #   `standard`, `tier-xl`, `tier-2xl`, `tier-4xl, or tier-8xl`. For more
     #   information, see EKS Provisioned Control Plane in the Amazon EKS
     #   User Guide.
     #   @return [String]
@@ -2797,6 +2797,13 @@ module Aws::EKS
     #   [3]: https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html
     #   @return [String]
     #
+    # @!attribute [rw] warm_pool_config
+    #   The warm pool configuration for the node group. Warm pools maintain
+    #   pre-initialized EC2 instances that can quickly join your cluster
+    #   during scale-out events, improving application scaling performance
+    #   and reducing costs.
+    #   @return [Types::WarmPoolConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/CreateNodegroupRequest AWS API Documentation
     #
     class CreateNodegroupRequest < Struct.new(
@@ -2818,7 +2825,8 @@ module Aws::EKS
       :node_repair_config,
       :capacity_type,
       :version,
-      :release_version)
+      :release_version,
+      :warm_pool_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6177,6 +6185,13 @@ module Aws::EKS
     #   resources.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] warm_pool_config
+    #   The warm pool configuration attached to the node group. Amazon EKS
+    #   manages warm pools throughout the node group lifecycle using the
+    #   `AWSServiceRoleForAmazonEKSNodegroup` service-linked role to create,
+    #   update, and delete warm pool resources.
+    #   @return [Types::WarmPoolConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/Nodegroup AWS API Documentation
     #
     class Nodegroup < Struct.new(
@@ -6203,7 +6218,8 @@ module Aws::EKS
       :update_config,
       :node_repair_config,
       :launch_template,
-      :tags)
+      :tags,
+      :warm_pool_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8191,6 +8207,12 @@ module Aws::EKS
     #   The node auto repair configuration for the node group.
     #   @return [Types::NodeRepairConfig]
     #
+    # @!attribute [rw] warm_pool_config
+    #   The warm pool configuration to apply to the node group. You can use
+    #   this to add a warm pool to an existing node group or modify the
+    #   settings of an existing warm pool.
+    #   @return [Types::WarmPoolConfig]
+    #
     # @!attribute [rw] client_request_token
     #   A unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request.
@@ -8209,6 +8231,7 @@ module Aws::EKS
       :scaling_config,
       :update_config,
       :node_repair_config,
+      :warm_pool_config,
       :client_request_token)
       SENSITIVE = []
       include Aws::Structure
@@ -8732,6 +8755,60 @@ module Aws::EKS
       :endpoint_public_access,
       :endpoint_private_access,
       :public_access_cidrs)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration for an Amazon EC2 Auto Scaling warm pool attached to
+    # an Amazon EKS managed node group. Warm pools maintain pre-initialized
+    # EC2 instances alongside your Auto Scaling group that have already
+    # completed the bootup initialization process and can be kept in a
+    # `Stopped`, `Running`, or `Hibernated` state.
+    #
+    # @!attribute [rw] enabled
+    #   Specifies whether to attach warm pools on the managed node group.
+    #   Set to `true` to enable the warm pool, or `false` to disable and
+    #   remove it. If not specified during an update, the current value is
+    #   preserved.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] min_size
+    #   The minimum number of instances to maintain in the warm pool.
+    #   Default: `0`. Size your warm pool based on scaling patterns to
+    #   balance cost and availability. Start with 10-20% of expected peak
+    #   capacity.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_group_prepared_capacity
+    #   The maximum total number of instances across the warm pool and Auto
+    #   Scaling group combined. This value controls the total prepared
+    #   capacity available for your node group.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] pool_state
+    #   The desired state for warm pool instances. Default: `Stopped`. Valid
+    #   values are `Stopped` (most cost-effective with EBS storage costs
+    #   only), `Running` (fastest transition time with full EC2 costs), and
+    #   `Hibernated` (balance between cost and speed, only supported on
+    #   specific instance types). Warm pool instances in the `Hibernated`
+    #   state are not supported with Bottlerocket AMIs.
+    #   @return [String]
+    #
+    # @!attribute [rw] reuse_on_scale_in
+    #   Indicates whether instances should return to the warm pool during
+    #   scale-in events instead of being terminated. Default: `false`.
+    #   Enable this to reduce costs by reusing instances. This feature is
+    #   not supported for Bottlerocket AMIs.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/WarmPoolConfig AWS API Documentation
+    #
+    class WarmPoolConfig < Struct.new(
+      :enabled,
+      :min_size,
+      :max_group_prepared_capacity,
+      :pool_state,
+      :reuse_on_scale_in)
       SENSITIVE = []
       include Aws::Structure
     end

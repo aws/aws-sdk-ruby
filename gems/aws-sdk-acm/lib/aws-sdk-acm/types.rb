@@ -23,6 +23,176 @@ module Aws::ACM
       include Aws::Structure
     end
 
+    # Contains ACM-specific metadata about a certificate.
+    #
+    # @!attribute [rw] created_at
+    #   The time at which the certificate was requested.
+    #   @return [Time]
+    #
+    # @!attribute [rw] exported
+    #   Indicates whether the certificate has been exported.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] imported_at
+    #   The date and time when the certificate was imported. This value
+    #   exists only when the certificate type is `IMPORTED`.
+    #   @return [Time]
+    #
+    # @!attribute [rw] in_use
+    #   Indicates whether the certificate is currently in use by an Amazon
+    #   Web Services service.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] issued_at
+    #   The time at which the certificate was issued. This value exists only
+    #   when the certificate type is `AMAZON_ISSUED`.
+    #   @return [Time]
+    #
+    # @!attribute [rw] renewal_eligibility
+    #   Specifies whether the certificate is eligible for renewal. At this
+    #   time, only exported private certificates can be renewed with the
+    #   RenewCertificate command.
+    #   @return [String]
+    #
+    # @!attribute [rw] revoked_at
+    #   The time at which the certificate was revoked. This value exists
+    #   only when the certificate status is `REVOKED`.
+    #   @return [Time]
+    #
+    # @!attribute [rw] status
+    #   The status of the certificate.
+    #
+    #   A certificate enters status PENDING\_VALIDATION upon being
+    #   requested, unless it fails for any of the reasons given in the
+    #   troubleshooting topic [Certificate request fails][1]. ACM makes
+    #   repeated attempts to validate a certificate for 72 hours and then
+    #   times out. If a certificate shows status FAILED or
+    #   VALIDATION\_TIMED\_OUT, delete the request, correct the issue with
+    #   [DNS validation][2] or [Email validation][3], and try again. If
+    #   validation succeeds, the certificate enters status ISSUED.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/acm/latest/userguide/troubleshooting-failed.html
+    #   [2]: https://docs.aws.amazon.com/acm/latest/userguide/dns-validation.html
+    #   [3]: https://docs.aws.amazon.com/acm/latest/userguide/email-validation.html
+    #   @return [String]
+    #
+    # @!attribute [rw] renewal_status
+    #   The renewal status of the certificate.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The source of the certificate. For certificates provided by ACM,
+    #   this value is `AMAZON_ISSUED`. For certificates that you imported
+    #   with ImportCertificate, this value is `IMPORTED`. ACM does not
+    #   provide [managed renewal][1] for imported certificates. For more
+    #   information about the differences between certificates that you
+    #   import and those that ACM provides, see [Importing Certificates][2]
+    #   in the *Certificate Manager User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/acm/latest/userguide/acm-renewal.html
+    #   [2]: https://docs.aws.amazon.com/acm/latest/userguide/import-certificate.html
+    #   @return [String]
+    #
+    # @!attribute [rw] export_option
+    #   Indicates whether the certificate can be exported.
+    #   @return [String]
+    #
+    # @!attribute [rw] managed_by
+    #   Identifies the Amazon Web Services service that manages the
+    #   certificate issued by ACM.
+    #   @return [String]
+    #
+    # @!attribute [rw] validation_method
+    #   Specifies the domain validation method.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/AcmCertificateMetadata AWS API Documentation
+    #
+    class AcmCertificateMetadata < Struct.new(
+      :created_at,
+      :exported,
+      :imported_at,
+      :in_use,
+      :issued_at,
+      :renewal_eligibility,
+      :revoked_at,
+      :status,
+      :renewal_status,
+      :type,
+      :export_option,
+      :managed_by,
+      :validation_method)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Filters certificates by ACM metadata.
+    #
+    # @note AcmCertificateMetadataFilter is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @!attribute [rw] status
+    #   Filter by certificate status.
+    #   @return [String]
+    #
+    # @!attribute [rw] renewal_status
+    #   Filter by certificate renewal status.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   Filter by certificate type.
+    #   @return [String]
+    #
+    # @!attribute [rw] in_use
+    #   Filter by whether the certificate is in use.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] exported
+    #   Filter by whether the certificate has been exported.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] export_option
+    #   Filter by certificate export option.
+    #   @return [String]
+    #
+    # @!attribute [rw] managed_by
+    #   Filter by the entity that manages the certificate.
+    #   @return [String]
+    #
+    # @!attribute [rw] validation_method
+    #   Filter by validation method.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/AcmCertificateMetadataFilter AWS API Documentation
+    #
+    class AcmCertificateMetadataFilter < Struct.new(
+      :status,
+      :renewal_status,
+      :type,
+      :in_use,
+      :exported,
+      :export_option,
+      :managed_by,
+      :validation_method,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Status < AcmCertificateMetadataFilter; end
+      class RenewalStatus < AcmCertificateMetadataFilter; end
+      class Type < AcmCertificateMetadataFilter; end
+      class InUse < AcmCertificateMetadataFilter; end
+      class Exported < AcmCertificateMetadataFilter; end
+      class ExportOption < AcmCertificateMetadataFilter; end
+      class ManagedBy < AcmCertificateMetadataFilter; end
+      class ValidationMethod < AcmCertificateMetadataFilter; end
+      class Unknown < AcmCertificateMetadataFilter; end
+    end
+
     # @!attribute [rw] certificate_arn
     #   String that contains the ARN of the ACM certificate to which the tag
     #   is to be applied. This must be of the form:
@@ -272,6 +442,102 @@ module Aws::ACM
       include Aws::Structure
     end
 
+    # Defines a filter for searching certificates by ARN, X.509 attributes,
+    # or ACM metadata.
+    #
+    # @note CertificateFilter is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @!attribute [rw] certificate_arn
+    #   Filter by certificate ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] x509_attribute_filter
+    #   Filter by X.509 certificate attributes.
+    #   @return [Types::X509AttributeFilter]
+    #
+    # @!attribute [rw] acm_certificate_metadata_filter
+    #   Filter by ACM certificate metadata.
+    #   @return [Types::AcmCertificateMetadataFilter]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/CertificateFilter AWS API Documentation
+    #
+    class CertificateFilter < Struct.new(
+      :certificate_arn,
+      :x509_attribute_filter,
+      :acm_certificate_metadata_filter,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class CertificateArn < CertificateFilter; end
+      class X509AttributeFilter < CertificateFilter; end
+      class AcmCertificateMetadataFilter < CertificateFilter; end
+      class Unknown < CertificateFilter; end
+    end
+
+    # A filter statement used to search for certificates. Can contain AND,
+    # OR, NOT logical operators or a single filter.
+    #
+    # @note CertificateFilterStatement is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @!attribute [rw] and
+    #   A list of filter statements that must all be true.
+    #   @return [Array<Types::CertificateFilterStatement>]
+    #
+    # @!attribute [rw] or
+    #   A list of filter statements where at least one must be true.
+    #   @return [Array<Types::CertificateFilterStatement>]
+    #
+    # @!attribute [rw] not
+    #   A filter statement that must not be true.
+    #   @return [Types::CertificateFilterStatement]
+    #
+    # @!attribute [rw] filter
+    #   A single certificate filter.
+    #   @return [Types::CertificateFilter]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/CertificateFilterStatement AWS API Documentation
+    #
+    class CertificateFilterStatement < Struct.new(
+      :and,
+      :or,
+      :not,
+      :filter,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class And < CertificateFilterStatement; end
+      class Or < CertificateFilterStatement; end
+      class Not < CertificateFilterStatement; end
+      class Filter < CertificateFilterStatement; end
+      class Unknown < CertificateFilterStatement; end
+    end
+
+    # Contains metadata about a certificate. Currently supports ACM
+    # certificate metadata.
+    #
+    # @note CertificateMetadata is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of CertificateMetadata corresponding to the set member.
+    #
+    # @!attribute [rw] acm_certificate_metadata
+    #   Metadata for an ACM certificate.
+    #   @return [Types::AcmCertificateMetadata]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/CertificateMetadata AWS API Documentation
+    #
+    class CertificateMetadata < Struct.new(
+      :acm_certificate_metadata,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class AcmCertificateMetadata < CertificateMetadata; end
+      class Unknown < CertificateMetadata; end
+    end
+
     # Structure that contains options for your certificate. You can use this
     # structure to specify whether to opt in to or out of certificate
     # transparency logging and export your certificate.
@@ -300,7 +566,8 @@ module Aws::ACM
     #
     # @!attribute [rw] export
     #   You can opt in to allow the export of your certificates by
-    #   specifying `ENABLED`.
+    #   specifying `ENABLED`. You cannot update the value of `Export` after
+    #   the the certificate is created.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/CertificateOptions AWS API Documentation
@@ -308,6 +575,33 @@ module Aws::ACM
     class CertificateOptions < Struct.new(
       :certificate_transparency_logging_preference,
       :export)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about a certificate returned by the
+    # SearchCertificates action. This structure includes the certificate
+    # ARN, X.509 attributes, and ACM metadata.
+    #
+    # @!attribute [rw] certificate_arn
+    #   The Amazon Resource Name (ARN) of the certificate.
+    #   @return [String]
+    #
+    # @!attribute [rw] x509_attributes
+    #   X.509 certificate attributes such as subject, issuer, and validity
+    #   period.
+    #   @return [Types::X509Attributes]
+    #
+    # @!attribute [rw] certificate_metadata
+    #   ACM-specific metadata about the certificate.
+    #   @return [Types::CertificateMetadata]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/CertificateSearchResult AWS API Documentation
+    #
+    class CertificateSearchResult < Struct.new(
+      :certificate_arn,
+      :x509_attributes,
+      :certificate_metadata)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -348,8 +642,8 @@ module Aws::ACM
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/acm/latestAPIReference/API_ListCertificates.html
-    #   [2]: https://docs.aws.amazon.com/acm/latestAPIReference/API_DescribeCertificate.html
+    #   [1]: https://docs.aws.amazon.com/acm/latest/APIReference/API_ListCertificates.html
+    #   [2]: https://docs.aws.amazon.com/acm/latest/APIReference/API_DescribeCertificate.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] has_additional_subject_alternative_names
@@ -363,8 +657,8 @@ module Aws::ACM
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/acm/latestAPIReference/API_ListCertificates.html
-    #   [2]: https://docs.aws.amazon.com/acm/latestAPIReference/API_DescribeCertificate.html
+    #   [1]: https://docs.aws.amazon.com/acm/latest/APIReference/API_ListCertificates.html
+    #   [2]: https://docs.aws.amazon.com/acm/latest/APIReference/API_DescribeCertificate.html
     #   @return [Boolean]
     #
     # @!attribute [rw] status
@@ -497,6 +791,25 @@ module Aws::ACM
       include Aws::Structure
     end
 
+    # Filters certificates by common name.
+    #
+    # @!attribute [rw] value
+    #   The value to match against.
+    #   @return [String]
+    #
+    # @!attribute [rw] comparison_operator
+    #   The comparison operator to use.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/CommonNameFilter AWS API Documentation
+    #
+    class CommonNameFilter < Struct.new(
+      :value,
+      :comparison_operator)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # You are trying to update a resource or configuration that is already
     # being created or updated. Wait for the previous operation to finish
     # and try again.
@@ -508,6 +821,26 @@ module Aws::ACM
     #
     class ConflictException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Defines the X.500 relative distinguished name (RDN).
+    #
+    # @!attribute [rw] object_identifier
+    #   Specifies the object identifier (OID) of the attribute type of the
+    #   relative distinguished name (RDN).
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   Specifies the attribute value of relative distinguished name (RDN).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/CustomAttribute AWS API Documentation
+    #
+    class CustomAttribute < Struct.new(
+      :object_identifier,
+      :value)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -564,6 +897,116 @@ module Aws::ACM
     #
     class DescribeCertificateResponse < Struct.new(
       :certificate)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains X.500 distinguished name information.
+    #
+    # @!attribute [rw] common_name
+    #   The common name (CN) attribute.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_components
+    #   The domain component attributes.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] country
+    #   The country (C) attribute.
+    #   @return [String]
+    #
+    # @!attribute [rw] custom_attributes
+    #   A list of custom attributes in the distinguished name. Each custom
+    #   attribute contains an object identifier (OID) and its corresponding
+    #   value.
+    #   @return [Array<Types::CustomAttribute>]
+    #
+    # @!attribute [rw] distinguished_name_qualifier
+    #   The distinguished name qualifier attribute.
+    #   @return [String]
+    #
+    # @!attribute [rw] generation_qualifier
+    #   The generation qualifier attribute.
+    #   @return [String]
+    #
+    # @!attribute [rw] given_name
+    #   The given name attribute.
+    #   @return [String]
+    #
+    # @!attribute [rw] initials
+    #   The initials attribute.
+    #   @return [String]
+    #
+    # @!attribute [rw] locality
+    #   The locality (L) attribute.
+    #   @return [String]
+    #
+    # @!attribute [rw] organization
+    #   The organization (O) attribute.
+    #   @return [String]
+    #
+    # @!attribute [rw] organizational_unit
+    #   The organizational unit (OU) attribute.
+    #   @return [String]
+    #
+    # @!attribute [rw] pseudonym
+    #   The pseudonym attribute.
+    #   @return [String]
+    #
+    # @!attribute [rw] serial_number
+    #   The serial number attribute.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The state or province (ST) attribute.
+    #   @return [String]
+    #
+    # @!attribute [rw] surname
+    #   The surname attribute.
+    #   @return [String]
+    #
+    # @!attribute [rw] title
+    #   The title attribute.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/DistinguishedName AWS API Documentation
+    #
+    class DistinguishedName < Struct.new(
+      :common_name,
+      :domain_components,
+      :country,
+      :custom_attributes,
+      :distinguished_name_qualifier,
+      :generation_qualifier,
+      :given_name,
+      :initials,
+      :locality,
+      :organization,
+      :organizational_unit,
+      :pseudonym,
+      :serial_number,
+      :state,
+      :surname,
+      :title)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Filters certificates by DNS name.
+    #
+    # @!attribute [rw] value
+    #   The DNS name value to match against.
+    #   @return [String]
+    #
+    # @!attribute [rw] comparison_operator
+    #   The comparison operator to use.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/DnsNameFilter AWS API Documentation
+    #
+    class DnsNameFilter < Struct.new(
+      :value,
+      :comparison_operator)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -835,6 +1278,78 @@ module Aws::ACM
       :managed_by)
       SENSITIVE = []
       include Aws::Structure
+    end
+
+    # Describes an ASN.1 X.400 `GeneralName` as defined in [RFC 5280][1].
+    # Only one of the following naming options should be provided.
+    #
+    #
+    #
+    # [1]: https://datatracker.ietf.org/doc/html/rfc5280
+    #
+    # @note GeneralName is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of GeneralName corresponding to the set member.
+    #
+    # @!attribute [rw] directory_name
+    #   Contains information about the certificate subject. The `Subject`
+    #   field in the certificate identifies the entity that owns or controls
+    #   the public key in the certificate. The entity can be a user,
+    #   computer, device, or service. The `Subject` must contain an X.500
+    #   distinguished name (DN). A DN is a sequence of relative
+    #   distinguished names (RDNs). The RDNs are separated by commas in the
+    #   certificate.
+    #   @return [Types::DistinguishedName]
+    #
+    # @!attribute [rw] dns_name
+    #   Represents `GeneralName` as a DNS name.
+    #   @return [String]
+    #
+    # @!attribute [rw] ip_address
+    #   Represents `GeneralName` as an IPv4 or IPv6 address.
+    #   @return [String]
+    #
+    # @!attribute [rw] other_name
+    #   Represents `GeneralName` using an `OtherName` object.
+    #   @return [Types::OtherName]
+    #
+    # @!attribute [rw] registered_id
+    #   Represents `GeneralName` as an object identifier (OID).
+    #   @return [String]
+    #
+    # @!attribute [rw] rfc_822_name
+    #   Represents `GeneralName` as an [RFC 822][1] email address.
+    #
+    #
+    #
+    #   [1]: https://datatracker.ietf.org/doc/html/rfc822
+    #   @return [String]
+    #
+    # @!attribute [rw] uniform_resource_identifier
+    #   Represents `GeneralName` as a URI.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/GeneralName AWS API Documentation
+    #
+    class GeneralName < Struct.new(
+      :directory_name,
+      :dns_name,
+      :ip_address,
+      :other_name,
+      :registered_id,
+      :rfc_822_name,
+      :uniform_resource_identifier,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class DirectoryName < GeneralName; end
+      class DnsName < GeneralName; end
+      class IpAddress < GeneralName; end
+      class OtherName < GeneralName; end
+      class RegisteredId < GeneralName; end
+      class Rfc822Name < GeneralName; end
+      class UniformResourceIdentifier < GeneralName; end
+      class Unknown < GeneralName; end
     end
 
     # @!attribute [rw] expiry_events
@@ -1181,6 +1696,31 @@ module Aws::ACM
       include Aws::Structure
     end
 
+    # Defines a custom ASN.1 X.400 `GeneralName` using an object identifier
+    # (OID) and value. For more information, see NIST's definition of
+    # [Object Identifier (OID)][1].
+    #
+    #
+    #
+    # [1]: https://csrc.nist.gov/glossary/term/Object_Identifier
+    #
+    # @!attribute [rw] object_identifier
+    #   Specifies an OID.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   Specifies an OID value.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/OtherName AWS API Documentation
+    #
+    class OtherName < Struct.new(
+      :object_identifier,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] expiry_events
     #   Specifies expiration events associated with an account.
     #   @return [Types::ExpiryEventsConfiguration]
@@ -1452,7 +1992,7 @@ module Aws::ACM
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/acm/latest/userguide/acm-certificate.html#algorithms
+    #   [1]: https://docs.aws.amazon.com/acm/latest/userguide/acm-certificate-characteristics.html#algorithms-term
     #   @return [String]
     #
     # @!attribute [rw] managed_by
@@ -1527,9 +2067,8 @@ module Aws::ACM
     #   the `Domain` value or a superdomain of the `Domain` value. For
     #   example, if you requested a certificate for
     #   `site.subdomain.example.com` and specify a **ValidationDomain** of
-    #   `subdomain.example.com`, ACM sends email to the domain registrant,
-    #   technical contact, and administrative contact in WHOIS and the
-    #   following five addresses:
+    #   `subdomain.example.com`, ACM sends email to the the following five
+    #   addresses:
     #
     #   * admin@subdomain.example.com
     #
@@ -1640,6 +2179,111 @@ module Aws::ACM
       include Aws::Structure
     end
 
+    # @!attribute [rw] filter_statement
+    #   A filter statement that defines the search criteria. You can combine
+    #   multiple filters using AND, OR, and NOT logical operators to create
+    #   complex queries.
+    #   @return [Types::CertificateFilterStatement]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in the response. Default is
+    #   100.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   Use this parameter only when paginating results and only in a
+    #   subsequent request after you receive a response with truncated
+    #   results. Set it to the value of `NextToken` from the response you
+    #   just received.
+    #   @return [String]
+    #
+    # @!attribute [rw] sort_by
+    #   Specifies the field to sort results by. Valid values are
+    #   CREATED\_AT, NOT\_AFTER, STATUS, RENEWAL\_STATUS, EXPORTED, IN\_USE,
+    #   NOT\_BEFORE, KEY\_ALGORITHM, TYPE, CERTIFICATE\_ARN, COMMON\_NAME,
+    #   REVOKED\_AT, RENEWAL\_ELIGIBILITY, ISSUED\_AT, MANAGED\_BY,
+    #   EXPORT\_OPTION, VALIDATION\_METHOD, and IMPORTED\_AT.
+    #   @return [String]
+    #
+    # @!attribute [rw] sort_order
+    #   Specifies the order of sorted results. Valid values are ASCENDING or
+    #   DESCENDING.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/SearchCertificatesRequest AWS API Documentation
+    #
+    class SearchCertificatesRequest < Struct.new(
+      :filter_statement,
+      :max_results,
+      :next_token,
+      :sort_by,
+      :sort_order)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] results
+    #   A list of certificate search results containing certificate ARNs,
+    #   X.509 attributes, and ACM metadata.
+    #   @return [Array<Types::CertificateSearchResult>]
+    #
+    # @!attribute [rw] next_token
+    #   When the list is truncated, this value is present and contains the
+    #   value to use for the `NextToken` parameter in a subsequent
+    #   pagination request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/SearchCertificatesResponse AWS API Documentation
+    #
+    class SearchCertificatesResponse < Struct.new(
+      :results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Filters certificates by subject alternative name attributes.
+    #
+    # @note SubjectAlternativeNameFilter is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @!attribute [rw] dns_name
+    #   Filter by DNS name in subject alternative names.
+    #   @return [Types::DnsNameFilter]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/SubjectAlternativeNameFilter AWS API Documentation
+    #
+    class SubjectAlternativeNameFilter < Struct.new(
+      :dns_name,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class DnsName < SubjectAlternativeNameFilter; end
+      class Unknown < SubjectAlternativeNameFilter; end
+    end
+
+    # Filters certificates by subject attributes.
+    #
+    # @note SubjectFilter is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @!attribute [rw] common_name
+    #   Filter by common name in the subject.
+    #   @return [Types::CommonNameFilter]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/SubjectFilter AWS API Documentation
+    #
+    class SubjectFilter < Struct.new(
+      :common_name,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class CommonName < SubjectFilter; end
+      class Unknown < SubjectFilter; end
+    end
+
     # A key-value pair that identifies or specifies metadata about an ACM
     # resource.
     #
@@ -1679,10 +2323,53 @@ module Aws::ACM
     # @!attribute [rw] message
     #   @return [String]
     #
+    # @!attribute [rw] throttling_reasons
+    #   One or more reasons why the request was throttled.
+    #   @return [Array<Types::ThrottlingReason>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/ThrottlingException AWS API Documentation
     #
     class ThrottlingException < Struct.new(
-      :message)
+      :message,
+      :throttling_reasons)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A description of why a request was throttled.
+    #
+    # @!attribute [rw] reason
+    #   A description of why a request was throttled.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource
+    #   The resource that causes the request to be throttled.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/ThrottlingReason AWS API Documentation
+    #
+    class ThrottlingReason < Struct.new(
+      :reason,
+      :resource)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies a time range for filtering certificates.
+    #
+    # @!attribute [rw] start
+    #   The start of the time range. This value is inclusive.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end
+    #   The end of the time range. This value is inclusive.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/TimestampRange AWS API Documentation
+    #
+    class TimestampRange < Struct.new(
+      :start,
+      :end)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1737,6 +2424,134 @@ module Aws::ACM
     #
     class ValidationException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Filters certificates by X.509 attributes.
+    #
+    # @note X509AttributeFilter is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @!attribute [rw] subject
+    #   Filter by certificate subject.
+    #   @return [Types::SubjectFilter]
+    #
+    # @!attribute [rw] subject_alternative_name
+    #   Filter by subject alternative names.
+    #   @return [Types::SubjectAlternativeNameFilter]
+    #
+    # @!attribute [rw] extended_key_usage
+    #   Filter by extended key usage.
+    #   @return [String]
+    #
+    # @!attribute [rw] key_usage
+    #   Filter by key usage.
+    #   @return [String]
+    #
+    # @!attribute [rw] key_algorithm
+    #   Filter by key algorithm.
+    #   @return [String]
+    #
+    # @!attribute [rw] serial_number
+    #   Filter by serial number.
+    #   @return [String]
+    #
+    # @!attribute [rw] not_after
+    #   Filter by certificate expiration date. The start date is inclusive.
+    #   @return [Types::TimestampRange]
+    #
+    # @!attribute [rw] not_before
+    #   Filter by certificate validity start date. The start date is
+    #   inclusive.
+    #   @return [Types::TimestampRange]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/X509AttributeFilter AWS API Documentation
+    #
+    class X509AttributeFilter < Struct.new(
+      :subject,
+      :subject_alternative_name,
+      :extended_key_usage,
+      :key_usage,
+      :key_algorithm,
+      :serial_number,
+      :not_after,
+      :not_before,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Subject < X509AttributeFilter; end
+      class SubjectAlternativeName < X509AttributeFilter; end
+      class ExtendedKeyUsage < X509AttributeFilter; end
+      class KeyUsage < X509AttributeFilter; end
+      class KeyAlgorithm < X509AttributeFilter; end
+      class SerialNumber < X509AttributeFilter; end
+      class NotAfter < X509AttributeFilter; end
+      class NotBefore < X509AttributeFilter; end
+      class Unknown < X509AttributeFilter; end
+    end
+
+    # Contains X.509 certificate attributes extracted from the certificate.
+    #
+    # @!attribute [rw] issuer
+    #   The distinguished name of the certificate issuer.
+    #   @return [Types::DistinguishedName]
+    #
+    # @!attribute [rw] subject
+    #   The distinguished name of the certificate subject.
+    #   @return [Types::DistinguishedName]
+    #
+    # @!attribute [rw] subject_alternative_names
+    #   One or more domain names (subject alternative names) included in the
+    #   certificate. This list contains the domain names that are bound to
+    #   the public key that is contained in the certificate. The subject
+    #   alternative names include the canonical domain name (CN) of the
+    #   certificate and additional domain names that can be used to connect
+    #   to the website.
+    #   @return [Array<Types::GeneralName>]
+    #
+    # @!attribute [rw] extended_key_usages
+    #   Contains a list of Extended Key Usage X.509 v3 extension objects.
+    #   Each object specifies a purpose for which the certificate public key
+    #   can be used and consists of a name and an object identifier (OID).
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] key_algorithm
+    #   The algorithm that was used to generate the public-private key pair.
+    #   @return [String]
+    #
+    # @!attribute [rw] key_usages
+    #   A list of Key Usage X.509 v3 extension objects. Each object is a
+    #   string value that identifies the purpose of the public key contained
+    #   in the certificate. Possible extension values include
+    #   DIGITAL\_SIGNATURE, KEY\_ENCHIPHERMENT, NON\_REPUDIATION, and more.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] serial_number
+    #   The serial number assigned by the certificate authority.
+    #   @return [String]
+    #
+    # @!attribute [rw] not_after
+    #   The time after which the certificate is not valid.
+    #   @return [Time]
+    #
+    # @!attribute [rw] not_before
+    #   The time before which the certificate is not valid.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/X509Attributes AWS API Documentation
+    #
+    class X509Attributes < Struct.new(
+      :issuer,
+      :subject,
+      :subject_alternative_names,
+      :extended_key_usages,
+      :key_algorithm,
+      :key_usages,
+      :serial_number,
+      :not_after,
+      :not_before)
       SENSITIVE = []
       include Aws::Structure
     end

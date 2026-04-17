@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.43.0 (2026-03-24)
+------------------
+
+* Feature - This release adds support for custom slurmdbd and cgroup configuration in AWS PCS. Customers can now specify slurmdbd and cgroup settings to configure database accounting and reporting for their HPC workloads, and control resource allocation and limits for compute jobs.
+
+1.42.0 (2026-03-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.41.0 (2026-02-09)
 ------------------
 

@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.84.0 (2026-04-16)
+------------------
+
+* Feature - Amazon Connect Customer Profiles adds RecommenderSchema CRUD APIs for custom ML training columns. CreateRecommender and CreateRecommenderFilter now accept optional RecommenderSchemaName.
+
+1.83.0 (2026-04-13)
+------------------
+
+* Feature - This release introduces changes to SegmentDefinition APIs to support sorting by attributes.
+
+1.82.0 (2026-03-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.81.0 (2026-03-11)
+------------------
+
+* Feature - Today, Amazon Connect is announcing the ability to filter (include or exclude) recommendations based on properties of items and interactions.
+
+1.80.0 (2026-02-27)
+------------------
+
+* Feature - This release introduces an optional SourcePriority parameter to the ProfileObjectType APIs, allowing you to control the precedence of object types when ingesting data from multiple sources. Additionally, WebAnalytics and Device have been added as new StandardIdentifier values.
+
 1.79.0 (2026-01-16)
 ------------------
 

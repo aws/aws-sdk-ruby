@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.41.0 (2026-03-31)
+------------------
+
+* Feature - Amazon SES Mail Manager now supports optional TLS policy for accepting unencrypted connections and mTLS authentication for ingress endpoints with configurable trust stores. Two new rule actions are available, Bounce for sending non-delivery reports and Lambda invocation for custom email processing.
+
+1.40.0 (2026-03-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.39.0 (2026-01-16)
 ------------------
 

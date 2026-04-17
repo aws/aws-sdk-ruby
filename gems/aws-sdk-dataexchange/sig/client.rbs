@@ -195,6 +195,7 @@ module Aws
       interface _CreateJobResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateJobResponse]
         def arn: () -> ::String
+        def asset_configuration: () -> Types::AssetConfiguration
         def created_at: () -> ::Time
         def details: () -> Types::ResponseDetails
         def errors: () -> ::Array[Types::JobError]
@@ -205,6 +206,14 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataExchange/Client.html#create_job-instance_method
       def create_job: (
+                        ?asset_configuration: {
+                          tags: Array[
+                            {
+                              key: ::String,
+                              value: ::String
+                            },
+                          ]?
+                        },
                         details: {
                           export_asset_to_signed_url: {
                             asset_id: ::String,
@@ -386,6 +395,7 @@ module Aws
         def name: () -> ::String
         def revision_id: () -> ::String
         def source_id: () -> ::String
+        def tags: () -> ::Hash[::String, ::String]
         def updated_at: () -> ::Time
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataExchange/Client.html#get_asset-instance_method
@@ -459,6 +469,7 @@ module Aws
       interface _GetJobResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetJobResponse]
         def arn: () -> ::String
+        def asset_configuration: () -> Types::AssetConfiguration
         def created_at: () -> ::Time
         def details: () -> Types::ResponseDetails
         def errors: () -> ::Array[Types::JobError]

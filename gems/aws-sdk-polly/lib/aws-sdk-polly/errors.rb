@@ -42,7 +42,6 @@ module Aws::Polly
   # * {MarksNotSupportedForFormatException}
   # * {MaxLexemeLengthExceededException}
   # * {MaxLexiconsNumberExceededException}
-  # * {ServiceFailureException}
   # * {SsmlMarksNotSupportedForTextTypeException}
   # * {SynthesisTaskNotFoundException}
   # * {TextLengthExceededException}
@@ -270,21 +269,6 @@ module Aws::Polly
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::Polly::Types::MaxLexiconsNumberExceededException] data
-      def initialize(context, message, data = Aws::EmptyStructure.new)
-        super(context, message, data)
-      end
-
-      # @return [String]
-      def message
-        @message || @data[:message]
-      end
-    end
-
-    class ServiceFailureException < ServiceError
-
-      # @param [Seahorse::Client::RequestContext] context
-      # @param [String] message
-      # @param [Aws::Polly::Types::ServiceFailureException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

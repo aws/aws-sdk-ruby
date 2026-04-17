@@ -293,6 +293,7 @@ module Aws::Imagebuilder
       attr_accessor schedule: Types::Schedule
       attr_accessor status: ("DISABLED" | "ENABLED")
       attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor image_tags: ::Hash[::String, ::String]
       attr_accessor client_token: ::String
       attr_accessor image_scanning_configuration: Types::ImageScanningConfiguration
       attr_accessor workflows: ::Array[Types::WorkflowConfiguration]
@@ -941,6 +942,7 @@ module Aws::Imagebuilder
       attr_accessor date_next_run: ::String
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor image_scanning_configuration: Types::ImageScanningConfiguration
+      attr_accessor image_tags: ::Hash[::String, ::String]
       attr_accessor execution_role: ::String
       attr_accessor workflows: ::Array[Types::WorkflowConfiguration]
       attr_accessor logging_configuration: Types::PipelineLoggingConfiguration
@@ -2028,6 +2030,7 @@ module Aws::Imagebuilder
       attr_accessor workflows: ::Array[Types::WorkflowConfiguration]
       attr_accessor logging_configuration: Types::PipelineLoggingConfiguration
       attr_accessor execution_role: ::String
+      attr_accessor image_tags: ::Hash[::String, ::String]
       SENSITIVE: []
     end
 

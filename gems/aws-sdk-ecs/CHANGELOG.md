@@ -1,6 +1,46 @@
 Unreleased Changes
 ------------------
 
+1.228.0 (2026-04-10)
+------------------
+
+* Feature - Minor updates to exceptions for completeness
+
+1.227.0 (2026-04-07)
+------------------
+
+* Feature - This release provides the functionality of mounting Amazon S3 Files to Amazon ECS tasks by adding support for the new S3FilesVolumeConfiguration parameter in ECS RegisterTaskDefinition API.
+
+1.226.0 (2026-04-01)
+------------------
+
+* Feature - Amazon ECS now supports Managed Daemons with dedicated APIs for registering daemon task definitions, creating daemons, and managing daemon deployments.
+
+1.225.0 (2026-03-30)
+------------------
+
+* Feature - Adding Local Storage support for ECS Managed Instances by introducing a new field "localStorageConfiguration" for CreateCapacityProvider and UpdateCapacityProvider APIs.
+
+1.224.0 (2026-03-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.223.0 (2026-03-16)
+------------------
+
+* Feature - Amazon ECS now supports configuring whether tags are propagated to the EC2 Instance Metadata Service (IMDS) for instances launched by the Managed Instances capacity provider. This gives customers control over tag visibility in IMDS when using ECS Managed Instances.
+
+1.222.0 (2026-02-26)
+------------------
+
+* Feature - Adding support for Capacity Reservations for ECS Managed Instances by introducing a new "capacityOptionType" value of "RESERVED" and new field "capacityReservations" for CreateCapacityProvider and UpdateCapacityProvider APIs.
+
+1.221.0 (2026-02-20)
+------------------
+
+* Feature - Migrated to Smithy. No functional changes
+
 1.220.0 (2026-01-16)
 ------------------
 

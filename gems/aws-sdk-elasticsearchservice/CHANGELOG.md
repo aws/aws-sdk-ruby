@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.118.0 (2026-04-01)
+------------------
+
+* Feature - Adding Policy-Min-TLS-1-2-RFC9151-FIPS-2024-08 as TLS Policy in Supported Regions
+
+1.117.0 (2026-03-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.116.0 (2026-03-04)
+------------------
+
+* Feature - Adds support for DeploymentStrategyOptions.
+
+1.115.0 (2026-02-24)
+------------------
+
+* Feature - Fixed HTTP binding for DescribeDomainAutoTunes API to correctly pass request parameters as query parameters in the HTTP request.
+
 1.114.0 (2026-01-16)
 ------------------
 

@@ -730,10 +730,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # <zonbook />
-    #
-    # <xhtml />
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/BackupPolicyNotFoundFault AWS API Documentation
     #
     class BackupPolicyNotFoundFault < Aws::EmptyStructure; end
@@ -3423,6 +3419,15 @@ module Aws::RDS
     #   PostgreSQL engines.
     #   @return [String]
     #
+    # @!attribute [rw] with_express_configuration
+    #   Specifies to create an Aurora DB Cluster with express configuration
+    #   in seconds. Express configuration provides a cluster with a writer
+    #   instance and feature specific values set to all other input
+    #   parameters of this API.
+    #
+    #   Valid for Cluster Type: Aurora DB clusters
+    #   @return [Boolean]
+    #
     # @!attribute [rw] source_region
     #   The source region of the snapshot. This is only needed when the
     #   shapshot is encrypted and in a different region.
@@ -3489,6 +3494,7 @@ module Aws::RDS
       :engine_lifecycle_support,
       :tag_specifications,
       :master_user_authentication_type,
+      :with_express_configuration,
       :source_region)
       SENSITIVE = [:master_user_password, :pre_signed_url]
       include Aws::Structure
@@ -7956,6 +7962,21 @@ module Aws::RDS
     #   For more information, see CreateDBCluster.
     #   @return [String]
     #
+    # @!attribute [rw] vpc_networking_enabled
+    #   Indicates whether the DB cluster uses VPC-based networking.
+    #
+    #   This setting is applicable only for Aurora PostgreSQL clusters
+    #   created through express configuration.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] internet_access_gateway_enabled
+    #   Indicates whether the DB cluster has internet-based connectivity
+    #   enabled through an internet access gateway.
+    #
+    #   This setting is applicable only for Aurora PostgreSQL clusters
+    #   created through express configuration.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBCluster AWS API Documentation
     #
     class DBCluster < Struct.new(
@@ -8044,7 +8065,9 @@ module Aws::RDS
       :limitless_database,
       :cluster_scalability_type,
       :certificate_details,
-      :engine_lifecycle_support)
+      :engine_lifecycle_support,
+      :vpc_networking_enabled,
+      :internet_access_gateway_enabled)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -16169,6 +16192,68 @@ module Aws::RDS
       include Aws::Structure
     end
 
+    # @!attribute [rw] serverless_v2_platform_version
+    #   A specific platform version to return details for.
+    #
+    #   Example: `3`
+    #   @return [String]
+    #
+    # @!attribute [rw] engine
+    #   The database engine to return platform version details for.
+    #
+    #   Valid Values:
+    #
+    #   * `aurora-mysql`
+    #
+    #   * `aurora-postgresql`
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   This parameter isn't currently supported.
+    #   @return [Array<Types::Filter>]
+    #
+    # @!attribute [rw] default_only
+    #   Specifies whether to return only the default platform versions for
+    #   each engine. The default platform version is the version used for
+    #   new DB clusters.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] include_all
+    #   Specifies whether to also include platform versions which are no
+    #   longer in use.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] max_records
+    #   The maximum number of records to include in the response. If more
+    #   than the `MaxRecords` value is available, a pagination token called
+    #   a marker is included in the response so you can retrieve the
+    #   remaining results.
+    #
+    #   Default: 20
+    #
+    #   Constraints: Minimum 1, maximum 200.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] marker
+    #   An optional pagination token provided by a previous request. If this
+    #   parameter is specified, the response includes only records beyond
+    #   the marker, up to the value specified by `MaxRecords`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeServerlessV2PlatformVersionsMessage AWS API Documentation
+    #
+    class DescribeServerlessV2PlatformVersionsMessage < Struct.new(
+      :serverless_v2_platform_version,
+      :engine,
+      :filters,
+      :default_only,
+      :include_all,
+      :max_records,
+      :marker)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] region_name
     #   The source Amazon Web Services Region name. For example,
     #   `us-east-1`.
@@ -22571,6 +22656,8 @@ module Aws::RDS
     #
     #   * `os-upgrade`
     #
+    #   * `serverless-platform-version-update`
+    #
     #   * `system-update`
     #
     #   For more information about these actions, see [Maintenance actions
@@ -25238,6 +25325,32 @@ module Aws::RDS
     #   ^
     #   @return [Array<Types::TagSpecification>]
     #
+    # @!attribute [rw] enable_vpc_networking
+    #   Specifies whether to enable VPC networking for the restored DB
+    #   cluster. Set this parameter to `false` to create a cluster without
+    #   the VPC network interface (ENI).
+    #
+    #   This parameter must be used together with
+    #   `EnableInternetAccessGateway`. When both parameters are specified,
+    #   IAM database authentication is required. You must also specify
+    #   `EnableIAMDatabaseAuthentication`.
+    #
+    #   Valid for Cluster Type: Aurora PostgreSQL clusters
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] enable_internet_access_gateway
+    #   Specifies that the restored DB cluster should use internet-based
+    #   connectivity through an internet access gateway. This allows clients
+    #   to connect to the cluster over the internet without requiring a VPC.
+    #
+    #   This parameter must be used together with `EnableVPCNetworking` set
+    #   to `false`. When both parameters are specified, IAM database
+    #   authentication is required. You must also specify
+    #   `EnableIAMDatabaseAuthentication`.
+    #
+    #   Valid for Cluster Type: Aurora PostgreSQL clusters
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterFromSnapshotMessage AWS API Documentation
     #
     class RestoreDBClusterFromSnapshotMessage < Struct.new(
@@ -25278,7 +25391,9 @@ module Aws::RDS
       :backup_retention_period,
       :preferred_backup_window,
       :engine_lifecycle_support,
-      :tag_specifications)
+      :tag_specifications,
+      :enable_vpc_networking,
+      :enable_internet_access_gateway)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -25910,6 +26025,32 @@ module Aws::RDS
     #   ^
     #   @return [Array<Types::TagSpecification>]
     #
+    # @!attribute [rw] enable_vpc_networking
+    #   Specifies whether to enable VPC networking for the restored DB
+    #   cluster. Set this parameter to `false` to create a cluster without
+    #   the VPC network interface (ENI).
+    #
+    #   This parameter must be used together with
+    #   `EnableInternetAccessGateway`. When both parameters are specified,
+    #   IAM database authentication is required. You must also specify
+    #   `EnableIAMDatabaseAuthentication`.
+    #
+    #   Valid for Cluster Type: Aurora PostgreSQL clusters
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] enable_internet_access_gateway
+    #   Specifies that the restored DB cluster should use internet-based
+    #   connectivity through an internet access gateway. This allows clients
+    #   to connect to the cluster over the internet without requiring a VPC.
+    #
+    #   This parameter must be used together with `EnableVPCNetworking` set
+    #   to `false`. When both parameters are specified, IAM database
+    #   authentication is required. You must also specify
+    #   `EnableIAMDatabaseAuthentication`.
+    #
+    #   Valid for Cluster Type: Aurora PostgreSQL clusters
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterToPointInTimeMessage AWS API Documentation
     #
     class RestoreDBClusterToPointInTimeMessage < Struct.new(
@@ -25950,7 +26091,9 @@ module Aws::RDS
       :backup_retention_period,
       :preferred_backup_window,
       :engine_lifecycle_support,
-      :tag_specifications)
+      :tag_specifications,
+      :enable_vpc_networking,
+      :enable_internet_access_gateway)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -28710,6 +28853,79 @@ module Aws::RDS
     class ServerlessV2FeaturesSupport < Struct.new(
       :min_capacity,
       :max_capacity)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # This data type is used as a response element in the action
+    # `DescribeServerlessV2PlatformVersions`.
+    #
+    # @!attribute [rw] serverless_v2_platform_version
+    #   The version number of the serverless platform.
+    #   @return [String]
+    #
+    # @!attribute [rw] serverless_v2_platform_version_description
+    #   The description of the serverless platform.
+    #   @return [String]
+    #
+    # @!attribute [rw] engine
+    #   The name of the database engine.
+    #   @return [String]
+    #
+    # @!attribute [rw] serverless_v2_features_support
+    #   Specifies any Aurora Serverless v2 properties or limits that differ
+    #   between Aurora Serverless v2 platform versions. You can retrieve the
+    #   platform version of an existing DB cluster and check whether that
+    #   version supports certain Aurora Serverless v2 features before you
+    #   attempt to use those features.
+    #   @return [Types::ServerlessV2FeaturesSupport]
+    #
+    # @!attribute [rw] status
+    #   The status of the serverless platform. Valid statuses are the
+    #   following:
+    #
+    #   * `enabled` - The platform version is in use.
+    #
+    #   * `disabled` - The platform version is not in use.
+    #   @return [String]
+    #
+    # @!attribute [rw] is_default
+    #   Indicates whether this platform version is the default version for
+    #   the engine. The default platform version is the version used for new
+    #   DB clusters.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ServerlessV2PlatformVersionInfo AWS API Documentation
+    #
+    class ServerlessV2PlatformVersionInfo < Struct.new(
+      :serverless_v2_platform_version,
+      :serverless_v2_platform_version_description,
+      :engine,
+      :serverless_v2_features_support,
+      :status,
+      :is_default)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the result of a successful invocation of the
+    # `DescribeServerlessV2PlatformVersions` action.
+    #
+    # @!attribute [rw] marker
+    #   An optional pagination token provided by a previous request. If this
+    #   parameter is specified, the response includes only records beyond
+    #   the marker, up to the value specified by `MaxRecords`.
+    #   @return [String]
+    #
+    # @!attribute [rw] serverless_v2_platform_versions
+    #   A list of `ServerlessV2PlatformVersionInfo` elements.
+    #   @return [Array<Types::ServerlessV2PlatformVersionInfo>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ServerlessV2PlatformVersionsMessage AWS API Documentation
+    #
+    class ServerlessV2PlatformVersionsMessage < Struct.new(
+      :marker,
+      :serverless_v2_platform_versions)
       SENSITIVE = []
       include Aws::Structure
     end

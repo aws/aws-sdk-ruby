@@ -68,6 +68,8 @@ module Aws::GameLiftStreams
     Identifier = Shapes::StringShape.new(name: 'Identifier')
     Identifiers = Shapes::ListShape.new(name: 'Identifiers')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
+    Ipv4CidrBlock = Shapes::StringShape.new(name: 'Ipv4CidrBlock')
+    Ipv4CidrBlockList = Shapes::ListShape.new(name: 'Ipv4CidrBlockList')
     ListApplicationsInput = Shapes::StructureShape.new(name: 'ListApplicationsInput')
     ListApplicationsOutput = Shapes::StructureShape.new(name: 'ListApplicationsOutput')
     ListStreamGroupsInput = Shapes::StructureShape.new(name: 'ListStreamGroupsInput')
@@ -135,6 +137,9 @@ module Aws::GameLiftStreams
     UpdateStreamGroupOutput = Shapes::StructureShape.new(name: 'UpdateStreamGroupOutput')
     UserId = Shapes::StringShape.new(name: 'UserId')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
+    VpcId = Shapes::StringShape.new(name: 'VpcId')
+    VpcTransitConfiguration = Shapes::StructureShape.new(name: 'VpcTransitConfiguration')
+    VpcTransitConfigurationResponse = Shapes::StructureShape.new(name: 'VpcTransitConfigurationResponse')
     WebSdkProtocolUrl = Shapes::StringShape.new(name: 'WebSdkProtocolUrl')
 
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Message"))
@@ -334,6 +339,8 @@ module Aws::GameLiftStreams
     InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Message"))
     InternalServerException.struct_class = Types::InternalServerException
 
+    Ipv4CidrBlockList.member = Shapes::ShapeRef.new(shape: Ipv4CidrBlock)
+
     ListApplicationsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "NextToken"))
     ListApplicationsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "MaxResults"))
     ListApplicationsInput.struct_class = Types::ListApplicationsInput
@@ -382,6 +389,7 @@ module Aws::GameLiftStreams
     LocationConfiguration.add_member(:on_demand_capacity, Shapes::ShapeRef.new(shape: OnDemandCapacity, deprecated: true, location_name: "OnDemandCapacity", metadata: {"deprecatedMessage" => "This input field is deprecated in favor of explicit MaximumCapacity values.", "deprecatedSince" => "2025-12-17"}))
     LocationConfiguration.add_member(:target_idle_capacity, Shapes::ShapeRef.new(shape: TargetIdleCapacity, location_name: "TargetIdleCapacity"))
     LocationConfiguration.add_member(:maximum_capacity, Shapes::ShapeRef.new(shape: MaximumCapacity, location_name: "MaximumCapacity"))
+    LocationConfiguration.add_member(:vpc_transit_configuration, Shapes::ShapeRef.new(shape: VpcTransitConfiguration, location_name: "VpcTransitConfiguration"))
     LocationConfiguration.struct_class = Types::LocationConfiguration
 
     LocationConfigurations.member = Shapes::ShapeRef.new(shape: LocationConfiguration)
@@ -397,6 +405,8 @@ module Aws::GameLiftStreams
     LocationState.add_member(:requested_capacity, Shapes::ShapeRef.new(shape: CapacityValue, location_name: "RequestedCapacity"))
     LocationState.add_member(:allocated_capacity, Shapes::ShapeRef.new(shape: CapacityValue, location_name: "AllocatedCapacity"))
     LocationState.add_member(:idle_capacity, Shapes::ShapeRef.new(shape: CapacityValue, location_name: "IdleCapacity"))
+    LocationState.add_member(:internal_vpc_ipv_4_cidr_block, Shapes::ShapeRef.new(shape: Ipv4CidrBlock, location_name: "InternalVpcIpv4CidrBlock"))
+    LocationState.add_member(:vpc_transit_configuration, Shapes::ShapeRef.new(shape: VpcTransitConfigurationResponse, location_name: "VpcTransitConfiguration"))
     LocationState.struct_class = Types::LocationState
 
     LocationStates.member = Shapes::ShapeRef.new(shape: LocationState)
@@ -559,6 +569,16 @@ module Aws::GameLiftStreams
 
     ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Message"))
     ValidationException.struct_class = Types::ValidationException
+
+    VpcTransitConfiguration.add_member(:vpc_id, Shapes::ShapeRef.new(shape: VpcId, required: true, location_name: "VpcId"))
+    VpcTransitConfiguration.add_member(:ipv_4_cidr_blocks, Shapes::ShapeRef.new(shape: Ipv4CidrBlockList, required: true, location_name: "Ipv4CidrBlocks"))
+    VpcTransitConfiguration.struct_class = Types::VpcTransitConfiguration
+
+    VpcTransitConfigurationResponse.add_member(:vpc_id, Shapes::ShapeRef.new(shape: VpcId, location_name: "VpcId"))
+    VpcTransitConfigurationResponse.add_member(:ipv_4_cidr_blocks, Shapes::ShapeRef.new(shape: Ipv4CidrBlockList, location_name: "Ipv4CidrBlocks"))
+    VpcTransitConfigurationResponse.add_member(:transit_gateway_id, Shapes::ShapeRef.new(shape: String, location_name: "TransitGatewayId"))
+    VpcTransitConfigurationResponse.add_member(:transit_gateway_resource_share_arn, Shapes::ShapeRef.new(shape: String, location_name: "TransitGatewayResourceShareArn"))
+    VpcTransitConfigurationResponse.struct_class = Types::VpcTransitConfigurationResponse
 
 
     # @api private

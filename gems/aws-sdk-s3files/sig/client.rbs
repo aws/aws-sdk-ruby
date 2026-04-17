@@ -1,0 +1,417 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module S3Files
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Files/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?account_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?auth_scheme_preference: Array[String],
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_checksum_calculation: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?response_checksum_validation: String,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?sigv4a_signing_region_set: Array[String],
+                      ?stub_responses: untyped,
+                      ?telemetry_provider: Aws::Telemetry::TelemetryProviderBase,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _CreateAccessPointResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateAccessPointResponse]
+        def access_point_arn: () -> ::String
+        def access_point_id: () -> ::String
+        def client_token: () -> ::String
+        def file_system_id: () -> ::String
+        def status: () -> ("available" | "creating" | "deleting" | "deleted" | "error" | "updating")
+        def owner_id: () -> ::String
+        def posix_user: () -> Types::PosixUser
+        def root_directory: () -> Types::RootDirectory
+        def tags: () -> ::Array[Types::Tag]
+        def name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Files/Client.html#create_access_point-instance_method
+      def create_access_point: (
+                                 ?client_token: ::String,
+                                 ?tags: Array[
+                                   {
+                                     key: ::String,
+                                     value: ::String
+                                   },
+                                 ],
+                                 file_system_id: ::String,
+                                 ?posix_user: {
+                                   uid: ::Integer,
+                                   gid: ::Integer,
+                                   secondary_gids: Array[::Integer]?
+                                 },
+                                 ?root_directory: {
+                                   path: ::String?,
+                                   creation_permissions: {
+                                     owner_uid: ::Integer,
+                                     owner_gid: ::Integer,
+                                     permissions: ::String
+                                   }?
+                                 }
+                               ) -> _CreateAccessPointResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAccessPointResponseSuccess
+
+      interface _CreateFileSystemResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateFileSystemResponse]
+        def creation_time: () -> ::Time
+        def file_system_arn: () -> ::String
+        def file_system_id: () -> ::String
+        def bucket: () -> ::String
+        def prefix: () -> ::String
+        def client_token: () -> ::String
+        def kms_key_id: () -> ::String
+        def status: () -> ("available" | "creating" | "deleting" | "deleted" | "error" | "updating")
+        def status_message: () -> ::String
+        def role_arn: () -> ::String
+        def owner_id: () -> ::String
+        def tags: () -> ::Array[Types::Tag]
+        def name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Files/Client.html#create_file_system-instance_method
+      def create_file_system: (
+                                bucket: ::String,
+                                ?prefix: ::String,
+                                ?client_token: ::String,
+                                ?kms_key_id: ::String,
+                                role_arn: ::String,
+                                ?tags: Array[
+                                  {
+                                    key: ::String,
+                                    value: ::String
+                                  },
+                                ],
+                                ?accept_bucket_warning: bool
+                              ) -> _CreateFileSystemResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateFileSystemResponseSuccess
+
+      interface _CreateMountTargetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateMountTargetResponse]
+        def availability_zone_id: () -> ::String
+        def owner_id: () -> ::String
+        def mount_target_id: () -> ::String
+        def file_system_id: () -> ::String
+        def subnet_id: () -> ::String
+        def ipv4_address: () -> ::String
+        def ipv6_address: () -> ::String
+        def network_interface_id: () -> ::String
+        def vpc_id: () -> ::String
+        def security_groups: () -> ::Array[::String]
+        def status: () -> ("available" | "creating" | "deleting" | "deleted" | "error" | "updating")
+        def status_message: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Files/Client.html#create_mount_target-instance_method
+      def create_mount_target: (
+                                 file_system_id: ::String,
+                                 subnet_id: ::String,
+                                 ?ipv4_address: ::String,
+                                 ?ipv6_address: ::String,
+                                 ?ip_address_type: ("IPV4_ONLY" | "IPV6_ONLY" | "DUAL_STACK"),
+                                 ?security_groups: Array[::String]
+                               ) -> _CreateMountTargetResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateMountTargetResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Files/Client.html#delete_access_point-instance_method
+      def delete_access_point: (
+                                 access_point_id: ::String
+                               ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Files/Client.html#delete_file_system-instance_method
+      def delete_file_system: (
+                                file_system_id: ::String,
+                                ?force_delete: bool
+                              ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Files/Client.html#delete_file_system_policy-instance_method
+      def delete_file_system_policy: (
+                                       file_system_id: ::String
+                                     ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Files/Client.html#delete_mount_target-instance_method
+      def delete_mount_target: (
+                                 mount_target_id: ::String
+                               ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _GetAccessPointResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAccessPointResponse]
+        def access_point_arn: () -> ::String
+        def access_point_id: () -> ::String
+        def client_token: () -> ::String
+        def file_system_id: () -> ::String
+        def status: () -> ("available" | "creating" | "deleting" | "deleted" | "error" | "updating")
+        def owner_id: () -> ::String
+        def posix_user: () -> Types::PosixUser
+        def root_directory: () -> Types::RootDirectory
+        def tags: () -> ::Array[Types::Tag]
+        def name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Files/Client.html#get_access_point-instance_method
+      def get_access_point: (
+                              access_point_id: ::String
+                            ) -> _GetAccessPointResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAccessPointResponseSuccess
+
+      interface _GetFileSystemResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetFileSystemResponse]
+        def creation_time: () -> ::Time
+        def file_system_arn: () -> ::String
+        def file_system_id: () -> ::String
+        def bucket: () -> ::String
+        def prefix: () -> ::String
+        def client_token: () -> ::String
+        def kms_key_id: () -> ::String
+        def status: () -> ("available" | "creating" | "deleting" | "deleted" | "error" | "updating")
+        def status_message: () -> ::String
+        def role_arn: () -> ::String
+        def owner_id: () -> ::String
+        def tags: () -> ::Array[Types::Tag]
+        def name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Files/Client.html#get_file_system-instance_method
+      def get_file_system: (
+                             file_system_id: ::String
+                           ) -> _GetFileSystemResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetFileSystemResponseSuccess
+
+      interface _GetFileSystemPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetFileSystemPolicyResponse]
+        def file_system_id: () -> ::String
+        def policy: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Files/Client.html#get_file_system_policy-instance_method
+      def get_file_system_policy: (
+                                    file_system_id: ::String
+                                  ) -> _GetFileSystemPolicyResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetFileSystemPolicyResponseSuccess
+
+      interface _GetMountTargetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetMountTargetResponse]
+        def availability_zone_id: () -> ::String
+        def owner_id: () -> ::String
+        def mount_target_id: () -> ::String
+        def file_system_id: () -> ::String
+        def subnet_id: () -> ::String
+        def ipv4_address: () -> ::String
+        def ipv6_address: () -> ::String
+        def network_interface_id: () -> ::String
+        def vpc_id: () -> ::String
+        def security_groups: () -> ::Array[::String]
+        def status: () -> ("available" | "creating" | "deleting" | "deleted" | "error" | "updating")
+        def status_message: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Files/Client.html#get_mount_target-instance_method
+      def get_mount_target: (
+                              mount_target_id: ::String
+                            ) -> _GetMountTargetResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetMountTargetResponseSuccess
+
+      interface _GetSynchronizationConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetSynchronizationConfigurationResponse]
+        def latest_version_number: () -> ::Integer
+        def import_data_rules: () -> ::Array[Types::ImportDataRule]
+        def expiration_data_rules: () -> ::Array[Types::ExpirationDataRule]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Files/Client.html#get_synchronization_configuration-instance_method
+      def get_synchronization_configuration: (
+                                               file_system_id: ::String
+                                             ) -> _GetSynchronizationConfigurationResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSynchronizationConfigurationResponseSuccess
+
+      interface _ListAccessPointsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAccessPointsResponse]
+        def next_token: () -> ::String
+        def access_points: () -> ::Array[Types::ListAccessPointsDescription]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Files/Client.html#list_access_points-instance_method
+      def list_access_points: (
+                                file_system_id: ::String,
+                                ?max_results: ::Integer,
+                                ?next_token: ::String
+                              ) -> _ListAccessPointsResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAccessPointsResponseSuccess
+
+      interface _ListFileSystemsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListFileSystemsResponse]
+        def next_token: () -> ::String
+        def file_systems: () -> ::Array[Types::ListFileSystemsDescription]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Files/Client.html#list_file_systems-instance_method
+      def list_file_systems: (
+                               ?bucket: ::String,
+                               ?max_results: ::Integer,
+                               ?next_token: ::String
+                             ) -> _ListFileSystemsResponseSuccess
+                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListFileSystemsResponseSuccess
+
+      interface _ListMountTargetsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListMountTargetsResponse]
+        def next_token: () -> ::String
+        def mount_targets: () -> ::Array[Types::ListMountTargetsDescription]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Files/Client.html#list_mount_targets-instance_method
+      def list_mount_targets: (
+                                ?file_system_id: ::String,
+                                ?access_point_id: ::String,
+                                ?max_results: ::Integer,
+                                ?next_token: ::String
+                              ) -> _ListMountTargetsResponseSuccess
+                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListMountTargetsResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Array[Types::Tag]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Files/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_id: ::String,
+                                    ?max_results: ::Integer,
+                                    ?next_token: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _PutFileSystemPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutFileSystemPolicyResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Files/Client.html#put_file_system_policy-instance_method
+      def put_file_system_policy: (
+                                    file_system_id: ::String,
+                                    policy: ::String
+                                  ) -> _PutFileSystemPolicyResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutFileSystemPolicyResponseSuccess
+
+      interface _PutSynchronizationConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutSynchronizationConfigurationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Files/Client.html#put_synchronization_configuration-instance_method
+      def put_synchronization_configuration: (
+                                               file_system_id: ::String,
+                                               ?latest_version_number: ::Integer,
+                                               import_data_rules: Array[
+                                                 {
+                                                   prefix: ::String,
+                                                   trigger: ("ON_DIRECTORY_FIRST_ACCESS" | "ON_FILE_ACCESS"),
+                                                   size_less_than: ::Integer
+                                                 },
+                                               ],
+                                               expiration_data_rules: Array[
+                                                 {
+                                                   days_after_last_access: ::Integer
+                                                 },
+                                               ]
+                                             ) -> _PutSynchronizationConfigurationResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutSynchronizationConfigurationResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Files/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_id: ::String,
+                          tags: Array[
+                            {
+                              key: ::String,
+                              value: ::String
+                            },
+                          ]
+                        ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Files/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_id: ::String,
+                            tag_keys: Array[::String]
+                          ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _UpdateMountTargetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateMountTargetResponse]
+        def availability_zone_id: () -> ::String
+        def owner_id: () -> ::String
+        def mount_target_id: () -> ::String
+        def file_system_id: () -> ::String
+        def subnet_id: () -> ::String
+        def ipv4_address: () -> ::String
+        def ipv6_address: () -> ::String
+        def network_interface_id: () -> ::String
+        def vpc_id: () -> ::String
+        def security_groups: () -> ::Array[::String]
+        def status: () -> ("available" | "creating" | "deleting" | "deleted" | "error" | "updating")
+        def status_message: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Files/Client.html#update_mount_target-instance_method
+      def update_mount_target: (
+                                 mount_target_id: ::String,
+                                 security_groups: Array[::String]
+                               ) -> _UpdateMountTargetResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateMountTargetResponseSuccess
+    end
+  end
+end
+

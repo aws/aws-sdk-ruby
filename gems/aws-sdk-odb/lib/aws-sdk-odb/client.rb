@@ -1149,6 +1149,11 @@ module Aws::Odb
     #   blocks define the IP address ranges that can communicate through the
     #   peering connection.
     #
+    # @option params [Array<String>] :peer_network_route_table_ids
+    #   The unique identifier of the VPC route table for which a route to the
+    #   ODB network is automatically created during peering connection
+    #   establishment.
+    #
     # @option params [String] :client_token
     #   The client token for the ODB peering connection request.
     #
@@ -1178,6 +1183,7 @@ module Aws::Odb
     #     peer_network_id: "ResourceIdOrArn", # required
     #     display_name: "ResourceDisplayName",
     #     peer_network_cidrs_to_be_added: ["PeeredCidr"],
+    #     peer_network_route_table_ids: ["PeerNetworkRouteTableId"],
     #     client_token: "CreateOdbPeeringConnectionInputClientTokenString",
     #     tags: {
     #       "TagKey" => "TagValue",
@@ -1883,6 +1889,8 @@ module Aws::Odb
     #   resp.odb_network.managed_services.cross_region_s3_restore_sources_access[0].ipv4_addresses #=> Array
     #   resp.odb_network.managed_services.cross_region_s3_restore_sources_access[0].ipv4_addresses[0] #=> String
     #   resp.odb_network.managed_services.cross_region_s3_restore_sources_access[0].status #=> String, one of "ENABLED", "ENABLING", "DISABLED", "DISABLING"
+    #   resp.odb_network.ec2_placement_group_ids #=> Array
+    #   resp.odb_network.ec2_placement_group_ids[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/GetOdbNetwork AWS API Documentation
     #
@@ -2675,6 +2683,8 @@ module Aws::Odb
     #   resp.odb_networks[0].managed_services.cross_region_s3_restore_sources_access[0].ipv4_addresses #=> Array
     #   resp.odb_networks[0].managed_services.cross_region_s3_restore_sources_access[0].ipv4_addresses[0] #=> String
     #   resp.odb_networks[0].managed_services.cross_region_s3_restore_sources_access[0].status #=> String, one of "ENABLED", "ENABLING", "DISABLED", "DISABLING"
+    #   resp.odb_networks[0].ec2_placement_group_ids #=> Array
+    #   resp.odb_networks[0].ec2_placement_group_ids[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/ListOdbNetworks AWS API Documentation
     #
@@ -3220,7 +3230,7 @@ module Aws::Odb
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-odb'
-      context[:gem_version] = '1.14.0'
+      context[:gem_version] = '1.17.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

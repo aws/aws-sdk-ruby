@@ -133,11 +133,11 @@ module Aws::BackupGateway
     AssociateGatewayToServerOutput.struct_class = Types::AssociateGatewayToServerOutput
 
     BandwidthRateLimitInterval.add_member(:average_upload_rate_limit_in_bits_per_sec, Shapes::ShapeRef.new(shape: AverageUploadRateLimit, location_name: "AverageUploadRateLimitInBitsPerSec"))
-    BandwidthRateLimitInterval.add_member(:days_of_week, Shapes::ShapeRef.new(shape: DaysOfWeek, required: true, location_name: "DaysOfWeek"))
-    BandwidthRateLimitInterval.add_member(:end_hour_of_day, Shapes::ShapeRef.new(shape: HourOfDay, required: true, location_name: "EndHourOfDay"))
-    BandwidthRateLimitInterval.add_member(:end_minute_of_hour, Shapes::ShapeRef.new(shape: MinuteOfHour, required: true, location_name: "EndMinuteOfHour"))
     BandwidthRateLimitInterval.add_member(:start_hour_of_day, Shapes::ShapeRef.new(shape: HourOfDay, required: true, location_name: "StartHourOfDay"))
+    BandwidthRateLimitInterval.add_member(:end_hour_of_day, Shapes::ShapeRef.new(shape: HourOfDay, required: true, location_name: "EndHourOfDay"))
     BandwidthRateLimitInterval.add_member(:start_minute_of_hour, Shapes::ShapeRef.new(shape: MinuteOfHour, required: true, location_name: "StartMinuteOfHour"))
+    BandwidthRateLimitInterval.add_member(:end_minute_of_hour, Shapes::ShapeRef.new(shape: MinuteOfHour, required: true, location_name: "EndMinuteOfHour"))
+    BandwidthRateLimitInterval.add_member(:days_of_week, Shapes::ShapeRef.new(shape: DaysOfWeek, required: true, location_name: "DaysOfWeek"))
     BandwidthRateLimitInterval.struct_class = Types::BandwidthRateLimitInterval
 
     BandwidthRateLimitIntervals.member = Shapes::ShapeRef.new(shape: BandwidthRateLimitInterval)
@@ -190,6 +190,8 @@ module Aws::BackupGateway
     GatewayDetails.add_member(:maintenance_start_time, Shapes::ShapeRef.new(shape: MaintenanceStartTime, location_name: "MaintenanceStartTime"))
     GatewayDetails.add_member(:next_update_availability_time, Shapes::ShapeRef.new(shape: Time, location_name: "NextUpdateAvailabilityTime"))
     GatewayDetails.add_member(:vpc_endpoint, Shapes::ShapeRef.new(shape: VpcEndpoint, location_name: "VpcEndpoint"))
+    GatewayDetails.add_member(:deprecation_date, Shapes::ShapeRef.new(shape: Time, location_name: "DeprecationDate"))
+    GatewayDetails.add_member(:software_version, Shapes::ShapeRef.new(shape: Name, location_name: "SoftwareVersion"))
     GatewayDetails.struct_class = Types::GatewayDetails
 
     Gateways.member = Shapes::ShapeRef.new(shape: Gateway)
@@ -197,8 +199,8 @@ module Aws::BackupGateway
     GetBandwidthRateLimitScheduleInput.add_member(:gateway_arn, Shapes::ShapeRef.new(shape: GatewayArn, required: true, location_name: "GatewayArn"))
     GetBandwidthRateLimitScheduleInput.struct_class = Types::GetBandwidthRateLimitScheduleInput
 
-    GetBandwidthRateLimitScheduleOutput.add_member(:bandwidth_rate_limit_intervals, Shapes::ShapeRef.new(shape: BandwidthRateLimitIntervals, location_name: "BandwidthRateLimitIntervals"))
     GetBandwidthRateLimitScheduleOutput.add_member(:gateway_arn, Shapes::ShapeRef.new(shape: GatewayArn, location_name: "GatewayArn"))
+    GetBandwidthRateLimitScheduleOutput.add_member(:bandwidth_rate_limit_intervals, Shapes::ShapeRef.new(shape: BandwidthRateLimitIntervals, location_name: "BandwidthRateLimitIntervals"))
     GetBandwidthRateLimitScheduleOutput.struct_class = Types::GetBandwidthRateLimitScheduleOutput
 
     GetGatewayInput.add_member(:gateway_arn, Shapes::ShapeRef.new(shape: GatewayArn, required: true, location_name: "GatewayArn"))
@@ -217,8 +219,8 @@ module Aws::BackupGateway
     GetHypervisorPropertyMappingsInput.struct_class = Types::GetHypervisorPropertyMappingsInput
 
     GetHypervisorPropertyMappingsOutput.add_member(:hypervisor_arn, Shapes::ShapeRef.new(shape: ServerArn, location_name: "HypervisorArn"))
-    GetHypervisorPropertyMappingsOutput.add_member(:iam_role_arn, Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "IamRoleArn"))
     GetHypervisorPropertyMappingsOutput.add_member(:vmware_to_aws_tag_mappings, Shapes::ShapeRef.new(shape: VmwareToAwsTagMappings, location_name: "VmwareToAwsTagMappings"))
+    GetHypervisorPropertyMappingsOutput.add_member(:iam_role_arn, Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "IamRoleArn"))
     GetHypervisorPropertyMappingsOutput.struct_class = Types::GetHypervisorPropertyMappingsOutput
 
     GetVirtualMachineInput.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "ResourceArn"))
@@ -237,22 +239,22 @@ module Aws::BackupGateway
     HypervisorDetails.add_member(:host, Shapes::ShapeRef.new(shape: Host, location_name: "Host"))
     HypervisorDetails.add_member(:hypervisor_arn, Shapes::ShapeRef.new(shape: ServerArn, location_name: "HypervisorArn"))
     HypervisorDetails.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "KmsKeyArn"))
-    HypervisorDetails.add_member(:last_successful_metadata_sync_time, Shapes::ShapeRef.new(shape: Time, location_name: "LastSuccessfulMetadataSyncTime"))
-    HypervisorDetails.add_member(:latest_metadata_sync_status, Shapes::ShapeRef.new(shape: SyncMetadataStatus, location_name: "LatestMetadataSyncStatus"))
-    HypervisorDetails.add_member(:latest_metadata_sync_status_message, Shapes::ShapeRef.new(shape: string, location_name: "LatestMetadataSyncStatusMessage"))
-    HypervisorDetails.add_member(:log_group_arn, Shapes::ShapeRef.new(shape: LogGroupArn, location_name: "LogGroupArn"))
     HypervisorDetails.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "Name"))
+    HypervisorDetails.add_member(:log_group_arn, Shapes::ShapeRef.new(shape: LogGroupArn, location_name: "LogGroupArn"))
     HypervisorDetails.add_member(:state, Shapes::ShapeRef.new(shape: HypervisorState, location_name: "State"))
+    HypervisorDetails.add_member(:last_successful_metadata_sync_time, Shapes::ShapeRef.new(shape: Time, location_name: "LastSuccessfulMetadataSyncTime"))
+    HypervisorDetails.add_member(:latest_metadata_sync_status_message, Shapes::ShapeRef.new(shape: string, location_name: "LatestMetadataSyncStatusMessage"))
+    HypervisorDetails.add_member(:latest_metadata_sync_status, Shapes::ShapeRef.new(shape: SyncMetadataStatus, location_name: "LatestMetadataSyncStatus"))
     HypervisorDetails.struct_class = Types::HypervisorDetails
 
     Hypervisors.member = Shapes::ShapeRef.new(shape: Hypervisor)
 
-    ImportHypervisorConfigurationInput.add_member(:host, Shapes::ShapeRef.new(shape: Host, required: true, location_name: "Host"))
-    ImportHypervisorConfigurationInput.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "KmsKeyArn"))
     ImportHypervisorConfigurationInput.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "Name"))
-    ImportHypervisorConfigurationInput.add_member(:password, Shapes::ShapeRef.new(shape: Password, location_name: "Password"))
-    ImportHypervisorConfigurationInput.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
+    ImportHypervisorConfigurationInput.add_member(:host, Shapes::ShapeRef.new(shape: Host, required: true, location_name: "Host"))
     ImportHypervisorConfigurationInput.add_member(:username, Shapes::ShapeRef.new(shape: Username, location_name: "Username"))
+    ImportHypervisorConfigurationInput.add_member(:password, Shapes::ShapeRef.new(shape: Password, location_name: "Password"))
+    ImportHypervisorConfigurationInput.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "KmsKeyArn"))
+    ImportHypervisorConfigurationInput.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     ImportHypervisorConfigurationInput.struct_class = Types::ImportHypervisorConfigurationInput
 
     ImportHypervisorConfigurationOutput.add_member(:hypervisor_arn, Shapes::ShapeRef.new(shape: ServerArn, location_name: "HypervisorArn"))
@@ -290,8 +292,8 @@ module Aws::BackupGateway
     ListVirtualMachinesInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListVirtualMachinesInput.struct_class = Types::ListVirtualMachinesInput
 
-    ListVirtualMachinesOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListVirtualMachinesOutput.add_member(:virtual_machines, Shapes::ShapeRef.new(shape: VirtualMachines, location_name: "VirtualMachines"))
+    ListVirtualMachinesOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListVirtualMachinesOutput.struct_class = Types::ListVirtualMachinesOutput
 
     MaintenanceStartTime.add_member(:day_of_month, Shapes::ShapeRef.new(shape: DayOfMonth, location_name: "DayOfMonth"))
@@ -300,26 +302,26 @@ module Aws::BackupGateway
     MaintenanceStartTime.add_member(:minute_of_hour, Shapes::ShapeRef.new(shape: MinuteOfHour, required: true, location_name: "MinuteOfHour"))
     MaintenanceStartTime.struct_class = Types::MaintenanceStartTime
 
-    PutBandwidthRateLimitScheduleInput.add_member(:bandwidth_rate_limit_intervals, Shapes::ShapeRef.new(shape: BandwidthRateLimitIntervals, required: true, location_name: "BandwidthRateLimitIntervals"))
     PutBandwidthRateLimitScheduleInput.add_member(:gateway_arn, Shapes::ShapeRef.new(shape: GatewayArn, required: true, location_name: "GatewayArn"))
+    PutBandwidthRateLimitScheduleInput.add_member(:bandwidth_rate_limit_intervals, Shapes::ShapeRef.new(shape: BandwidthRateLimitIntervals, required: true, location_name: "BandwidthRateLimitIntervals"))
     PutBandwidthRateLimitScheduleInput.struct_class = Types::PutBandwidthRateLimitScheduleInput
 
     PutBandwidthRateLimitScheduleOutput.add_member(:gateway_arn, Shapes::ShapeRef.new(shape: GatewayArn, location_name: "GatewayArn"))
     PutBandwidthRateLimitScheduleOutput.struct_class = Types::PutBandwidthRateLimitScheduleOutput
 
     PutHypervisorPropertyMappingsInput.add_member(:hypervisor_arn, Shapes::ShapeRef.new(shape: ServerArn, required: true, location_name: "HypervisorArn"))
-    PutHypervisorPropertyMappingsInput.add_member(:iam_role_arn, Shapes::ShapeRef.new(shape: IamRoleArn, required: true, location_name: "IamRoleArn"))
     PutHypervisorPropertyMappingsInput.add_member(:vmware_to_aws_tag_mappings, Shapes::ShapeRef.new(shape: VmwareToAwsTagMappings, required: true, location_name: "VmwareToAwsTagMappings"))
+    PutHypervisorPropertyMappingsInput.add_member(:iam_role_arn, Shapes::ShapeRef.new(shape: IamRoleArn, required: true, location_name: "IamRoleArn"))
     PutHypervisorPropertyMappingsInput.struct_class = Types::PutHypervisorPropertyMappingsInput
 
     PutHypervisorPropertyMappingsOutput.add_member(:hypervisor_arn, Shapes::ShapeRef.new(shape: ServerArn, location_name: "HypervisorArn"))
     PutHypervisorPropertyMappingsOutput.struct_class = Types::PutHypervisorPropertyMappingsOutput
 
-    PutMaintenanceStartTimeInput.add_member(:day_of_month, Shapes::ShapeRef.new(shape: DayOfMonth, location_name: "DayOfMonth"))
-    PutMaintenanceStartTimeInput.add_member(:day_of_week, Shapes::ShapeRef.new(shape: DayOfWeek, location_name: "DayOfWeek"))
     PutMaintenanceStartTimeInput.add_member(:gateway_arn, Shapes::ShapeRef.new(shape: GatewayArn, required: true, location_name: "GatewayArn"))
     PutMaintenanceStartTimeInput.add_member(:hour_of_day, Shapes::ShapeRef.new(shape: HourOfDay, required: true, location_name: "HourOfDay"))
     PutMaintenanceStartTimeInput.add_member(:minute_of_hour, Shapes::ShapeRef.new(shape: MinuteOfHour, required: true, location_name: "MinuteOfHour"))
+    PutMaintenanceStartTimeInput.add_member(:day_of_week, Shapes::ShapeRef.new(shape: DayOfWeek, location_name: "DayOfWeek"))
+    PutMaintenanceStartTimeInput.add_member(:day_of_month, Shapes::ShapeRef.new(shape: DayOfMonth, location_name: "DayOfMonth"))
     PutMaintenanceStartTimeInput.struct_class = Types::PutMaintenanceStartTimeInput
 
     PutMaintenanceStartTimeOutput.add_member(:gateway_arn, Shapes::ShapeRef.new(shape: GatewayArn, location_name: "GatewayArn"))
@@ -352,8 +354,8 @@ module Aws::BackupGateway
 
     TestHypervisorConfigurationInput.add_member(:gateway_arn, Shapes::ShapeRef.new(shape: GatewayArn, required: true, location_name: "GatewayArn"))
     TestHypervisorConfigurationInput.add_member(:host, Shapes::ShapeRef.new(shape: Host, required: true, location_name: "Host"))
-    TestHypervisorConfigurationInput.add_member(:password, Shapes::ShapeRef.new(shape: Password, location_name: "Password"))
     TestHypervisorConfigurationInput.add_member(:username, Shapes::ShapeRef.new(shape: Username, location_name: "Username"))
+    TestHypervisorConfigurationInput.add_member(:password, Shapes::ShapeRef.new(shape: Password, location_name: "Password"))
     TestHypervisorConfigurationInput.struct_class = Types::TestHypervisorConfigurationInput
 
     TestHypervisorConfigurationOutput.struct_class = Types::TestHypervisorConfigurationOutput
@@ -382,12 +384,12 @@ module Aws::BackupGateway
     UpdateGatewaySoftwareNowOutput.add_member(:gateway_arn, Shapes::ShapeRef.new(shape: GatewayArn, location_name: "GatewayArn"))
     UpdateGatewaySoftwareNowOutput.struct_class = Types::UpdateGatewaySoftwareNowOutput
 
-    UpdateHypervisorInput.add_member(:host, Shapes::ShapeRef.new(shape: Host, location_name: "Host"))
     UpdateHypervisorInput.add_member(:hypervisor_arn, Shapes::ShapeRef.new(shape: ServerArn, required: true, location_name: "HypervisorArn"))
-    UpdateHypervisorInput.add_member(:log_group_arn, Shapes::ShapeRef.new(shape: LogGroupArn, location_name: "LogGroupArn"))
-    UpdateHypervisorInput.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "Name"))
-    UpdateHypervisorInput.add_member(:password, Shapes::ShapeRef.new(shape: Password, location_name: "Password"))
+    UpdateHypervisorInput.add_member(:host, Shapes::ShapeRef.new(shape: Host, location_name: "Host"))
     UpdateHypervisorInput.add_member(:username, Shapes::ShapeRef.new(shape: Username, location_name: "Username"))
+    UpdateHypervisorInput.add_member(:password, Shapes::ShapeRef.new(shape: Password, location_name: "Password"))
+    UpdateHypervisorInput.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "Name"))
+    UpdateHypervisorInput.add_member(:log_group_arn, Shapes::ShapeRef.new(shape: LogGroupArn, location_name: "LogGroupArn"))
     UpdateHypervisorInput.struct_class = Types::UpdateHypervisorInput
 
     UpdateHypervisorOutput.add_member(:hypervisor_arn, Shapes::ShapeRef.new(shape: ServerArn, location_name: "HypervisorArn"))
@@ -399,34 +401,34 @@ module Aws::BackupGateway
 
     VirtualMachine.add_member(:host_name, Shapes::ShapeRef.new(shape: Name, location_name: "HostName"))
     VirtualMachine.add_member(:hypervisor_id, Shapes::ShapeRef.new(shape: string, location_name: "HypervisorId"))
-    VirtualMachine.add_member(:last_backup_date, Shapes::ShapeRef.new(shape: Time, location_name: "LastBackupDate"))
     VirtualMachine.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "Name"))
     VirtualMachine.add_member(:path, Shapes::ShapeRef.new(shape: Path, location_name: "Path"))
     VirtualMachine.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "ResourceArn"))
+    VirtualMachine.add_member(:last_backup_date, Shapes::ShapeRef.new(shape: Time, location_name: "LastBackupDate"))
     VirtualMachine.struct_class = Types::VirtualMachine
 
     VirtualMachineDetails.add_member(:host_name, Shapes::ShapeRef.new(shape: Name, location_name: "HostName"))
     VirtualMachineDetails.add_member(:hypervisor_id, Shapes::ShapeRef.new(shape: string, location_name: "HypervisorId"))
-    VirtualMachineDetails.add_member(:last_backup_date, Shapes::ShapeRef.new(shape: Time, location_name: "LastBackupDate"))
     VirtualMachineDetails.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "Name"))
     VirtualMachineDetails.add_member(:path, Shapes::ShapeRef.new(shape: Path, location_name: "Path"))
     VirtualMachineDetails.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "ResourceArn"))
+    VirtualMachineDetails.add_member(:last_backup_date, Shapes::ShapeRef.new(shape: Time, location_name: "LastBackupDate"))
     VirtualMachineDetails.add_member(:vmware_tags, Shapes::ShapeRef.new(shape: VmwareTags, location_name: "VmwareTags"))
     VirtualMachineDetails.struct_class = Types::VirtualMachineDetails
 
     VirtualMachines.member = Shapes::ShapeRef.new(shape: VirtualMachine)
 
     VmwareTag.add_member(:vmware_category, Shapes::ShapeRef.new(shape: VmwareCategory, location_name: "VmwareCategory"))
-    VmwareTag.add_member(:vmware_tag_description, Shapes::ShapeRef.new(shape: string, location_name: "VmwareTagDescription"))
     VmwareTag.add_member(:vmware_tag_name, Shapes::ShapeRef.new(shape: VmwareTagName, location_name: "VmwareTagName"))
+    VmwareTag.add_member(:vmware_tag_description, Shapes::ShapeRef.new(shape: string, location_name: "VmwareTagDescription"))
     VmwareTag.struct_class = Types::VmwareTag
 
     VmwareTags.member = Shapes::ShapeRef.new(shape: VmwareTag)
 
-    VmwareToAwsTagMapping.add_member(:aws_tag_key, Shapes::ShapeRef.new(shape: TagKey, required: true, location_name: "AwsTagKey"))
-    VmwareToAwsTagMapping.add_member(:aws_tag_value, Shapes::ShapeRef.new(shape: TagValue, required: true, location_name: "AwsTagValue"))
     VmwareToAwsTagMapping.add_member(:vmware_category, Shapes::ShapeRef.new(shape: VmwareCategory, required: true, location_name: "VmwareCategory"))
     VmwareToAwsTagMapping.add_member(:vmware_tag_name, Shapes::ShapeRef.new(shape: VmwareTagName, required: true, location_name: "VmwareTagName"))
+    VmwareToAwsTagMapping.add_member(:aws_tag_key, Shapes::ShapeRef.new(shape: TagKey, required: true, location_name: "AwsTagKey"))
+    VmwareToAwsTagMapping.add_member(:aws_tag_value, Shapes::ShapeRef.new(shape: TagValue, required: true, location_name: "AwsTagValue"))
     VmwareToAwsTagMapping.struct_class = Types::VmwareToAwsTagMapping
 
     VmwareToAwsTagMappings.member = Shapes::ShapeRef.new(shape: VmwareToAwsTagMapping)
@@ -439,9 +441,11 @@ module Aws::BackupGateway
 
       api.metadata = {
         "apiVersion" => "2021-01-01",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "backup-gateway",
         "jsonVersion" => "1.0",
         "protocol" => "json",
+        "protocols" => ["json"],
         "serviceFullName" => "AWS Backup Gateway",
         "serviceId" => "Backup Gateway",
         "signatureVersion" => "v4",

@@ -1,6 +1,46 @@
 Unreleased Changes
 ------------------
 
+1.611.0 (2026-04-07)
+------------------
+
+* Feature - EC2 Capacity Manager adds new dimensions for grouping and filtering capacity metrics, including tag-based dimensions and Account Name.
+
+1.610.0 (2026-03-31)
+------------------
+
+* Feature - This release updates the examples in the documentation for DescribeRegions and DescribeAvailabilityZones.
+
+1.609.0 (2026-03-19)
+------------------
+
+* Feature - Amazon EC2 Fleet instant mode now supports launching instances into Interruptible Capacity Reservations, enabling customers to use spare capacity shared by Capacity Reservation owners within their AWS Organization.
+
+1.608.0 (2026-03-18)
+------------------
+
+* Feature - The DescribeInstanceTypes API now returns default connection tracking timeout values for TCP, UDP, and UDP stream via the new connectionTrackingConfiguration field on NetworkInfo.
+
+1.607.0 (2026-03-05)
+------------------
+
+* Feature - Added metadata field to CapacityAllocation.
+
+1.606.0 (2026-02-26)
+------------------
+
+* Feature - Add c8id, m8id and hpc8a instance types.
+
+1.605.0 (2026-02-25)
+------------------
+
+* Feature - Add support for EC2 Capacity Blocks in Local Zones.
+
+1.604.0 (2026-02-24)
+------------------
+
+* Feature - Adds httpTokensEnforced property to ModifyInstanceMetadataDefaults API. Set per account or manage organization-wide using declarative policies to prevent IMDSv1-enabled instance launch and block attempts to enable IMDSv1 on existing IMDSv2-only instances.
+
 1.603.0 (2026-02-17)
 ------------------
 

@@ -20,6 +20,8 @@ module Aws::DLM
     ArchiveRetainRule = Shapes::StructureShape.new(name: 'ArchiveRetainRule')
     ArchiveRule = Shapes::StructureShape.new(name: 'ArchiveRule')
     AvailabilityZone = Shapes::StringShape.new(name: 'AvailabilityZone')
+    AvailabilityZoneId = Shapes::StringShape.new(name: 'AvailabilityZoneId')
+    AvailabilityZoneIdList = Shapes::ListShape.new(name: 'AvailabilityZoneIdList')
     AvailabilityZoneList = Shapes::ListShape.new(name: 'AvailabilityZoneList')
     AwsAccountId = Shapes::StringShape.new(name: 'AwsAccountId')
     CmkArn = Shapes::StringShape.new(name: 'CmkArn')
@@ -156,6 +158,8 @@ module Aws::DLM
     ArchiveRule.add_member(:retain_rule, Shapes::ShapeRef.new(shape: ArchiveRetainRule, required: true, location_name: "RetainRule"))
     ArchiveRule.struct_class = Types::ArchiveRule
 
+    AvailabilityZoneIdList.member = Shapes::ShapeRef.new(shape: AvailabilityZoneId)
+
     AvailabilityZoneList.member = Shapes::ShapeRef.new(shape: AvailabilityZone)
 
     CreateLifecyclePolicyRequest.add_member(:execution_role_arn, Shapes::ShapeRef.new(shape: ExecutionRoleArn, required: true, location_name: "ExecutionRoleArn"))
@@ -251,7 +255,8 @@ module Aws::DLM
     FastRestoreRule.add_member(:count, Shapes::ShapeRef.new(shape: Count, location_name: "Count"))
     FastRestoreRule.add_member(:interval, Shapes::ShapeRef.new(shape: Interval, location_name: "Interval"))
     FastRestoreRule.add_member(:interval_unit, Shapes::ShapeRef.new(shape: RetentionIntervalUnitValues, location_name: "IntervalUnit"))
-    FastRestoreRule.add_member(:availability_zones, Shapes::ShapeRef.new(shape: AvailabilityZoneList, required: true, location_name: "AvailabilityZones"))
+    FastRestoreRule.add_member(:availability_zones, Shapes::ShapeRef.new(shape: AvailabilityZoneList, location_name: "AvailabilityZones"))
+    FastRestoreRule.add_member(:availability_zone_ids, Shapes::ShapeRef.new(shape: AvailabilityZoneIdList, location_name: "AvailabilityZoneIds"))
     FastRestoreRule.struct_class = Types::FastRestoreRule
 
     GetLifecyclePoliciesRequest.add_member(:policy_ids, Shapes::ShapeRef.new(shape: PolicyIdList, location: "querystring", location_name: "policyIds"))

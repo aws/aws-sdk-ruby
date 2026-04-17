@@ -1,0 +1,99 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::Sustainability
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class DimensionEntry
+      attr_accessor dimension: ("USAGE_ACCOUNT_ID" | "REGION" | "SERVICE")
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class Emissions
+      attr_accessor value: ::Float
+      attr_accessor unit: ("MTCO2e")
+      SENSITIVE: []
+    end
+
+    class EstimatedCarbonEmissions
+      attr_accessor time_period: Types::TimePeriod
+      attr_accessor dimensions_values: ::Hash[("USAGE_ACCOUNT_ID" | "REGION" | "SERVICE"), ::String]
+      attr_accessor model_version: ::String
+      attr_accessor emissions_values: ::Hash[("TOTAL_LBM_CARBON_EMISSIONS" | "TOTAL_MBM_CARBON_EMISSIONS" | "TOTAL_SCOPE_1_CARBON_EMISSIONS" | "TOTAL_SCOPE_2_LBM_CARBON_EMISSIONS" | "TOTAL_SCOPE_2_MBM_CARBON_EMISSIONS" | "TOTAL_SCOPE_3_LBM_CARBON_EMISSIONS" | "TOTAL_SCOPE_3_MBM_CARBON_EMISSIONS"), Types::Emissions]
+      SENSITIVE: []
+    end
+
+    class FilterExpression
+      attr_accessor dimensions: ::Hash[("USAGE_ACCOUNT_ID" | "REGION" | "SERVICE"), ::Array[::String]]
+      SENSITIVE: []
+    end
+
+    class GetEstimatedCarbonEmissionsDimensionValuesRequest
+      attr_accessor time_period: Types::TimePeriod
+      attr_accessor dimensions: ::Array[("USAGE_ACCOUNT_ID" | "REGION" | "SERVICE")]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetEstimatedCarbonEmissionsDimensionValuesResponse
+      attr_accessor results: ::Array[Types::DimensionEntry]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetEstimatedCarbonEmissionsRequest
+      attr_accessor time_period: Types::TimePeriod
+      attr_accessor group_by: ::Array[("USAGE_ACCOUNT_ID" | "REGION" | "SERVICE")]
+      attr_accessor filter_by: Types::FilterExpression
+      attr_accessor emissions_types: ::Array[("TOTAL_LBM_CARBON_EMISSIONS" | "TOTAL_MBM_CARBON_EMISSIONS" | "TOTAL_SCOPE_1_CARBON_EMISSIONS" | "TOTAL_SCOPE_2_LBM_CARBON_EMISSIONS" | "TOTAL_SCOPE_2_MBM_CARBON_EMISSIONS" | "TOTAL_SCOPE_3_LBM_CARBON_EMISSIONS" | "TOTAL_SCOPE_3_MBM_CARBON_EMISSIONS")]
+      attr_accessor granularity: ("YEARLY_CALENDAR" | "YEARLY_FISCAL" | "QUARTERLY_CALENDAR" | "QUARTERLY_FISCAL" | "MONTHLY")
+      attr_accessor granularity_configuration: Types::GranularityConfiguration
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetEstimatedCarbonEmissionsResponse
+      attr_accessor results: ::Array[Types::EstimatedCarbonEmissions]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GranularityConfiguration
+      attr_accessor fiscal_year_start_month: ::Integer
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TimePeriod
+      attr_accessor start: ::Time
+      attr_accessor end: ::Time
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+  end
+end

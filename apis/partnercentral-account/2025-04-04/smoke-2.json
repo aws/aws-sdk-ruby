@@ -1,14 +1,11 @@
 {
   "version" : 2,
   "testCases" : [ {
-    "id" : "TagResourceFailsWithInvalidArn",
-    "operationName" : "TagResource",
+    "id" : "UntagResourceFailsWithInvalidArn",
+    "operationName" : "UntagResource",
     "input" : {
       "ResourceArn" : "arn:aws:partnercentral:us-east-1:123456789012:catalog/AWS/partner-0123456789abc",
-      "Tags" : [ {
-        "Key" : "SmokeTestKey",
-        "Value" : "SmokeTestValue"
-      } ]
+      "TagKeys" : [ "SmokeTestKey" ]
     },
     "expectation" : {
       "failure" : { }
@@ -20,11 +17,14 @@
       "useAccountIdRouting" : true
     }
   }, {
-    "id" : "UntagResourceFailsWithInvalidArn",
-    "operationName" : "UntagResource",
+    "id" : "TagResourceFailsWithInvalidArn",
+    "operationName" : "TagResource",
     "input" : {
       "ResourceArn" : "arn:aws:partnercentral:us-east-1:123456789012:catalog/AWS/partner-0123456789abc",
-      "TagKeys" : [ "SmokeTestKey" ]
+      "Tags" : [ {
+        "Key" : "SmokeTestKey",
+        "Value" : "SmokeTestValue"
+      } ]
     },
     "expectation" : {
       "failure" : { }

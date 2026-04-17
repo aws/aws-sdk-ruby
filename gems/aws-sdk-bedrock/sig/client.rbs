@@ -1020,7 +1020,8 @@ module Aws
                                              key: ::String,
                                              value: ::String
                                            },
-                                         ]
+                                         ],
+                                         ?model_invocation_type: ("InvokeModel" | "Converse")
                                        ) -> _CreateModelInvocationJobResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateModelInvocationJobResponseSuccess
 
@@ -1204,6 +1205,15 @@ module Aws
                                                ) -> _DeleteProvisionedModelThroughputResponseSuccess
                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteProvisionedModelThroughputResponseSuccess
 
+      interface _DeleteResourcePolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteResourcePolicyResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Bedrock/Client.html#delete_resource_policy-instance_method
+      def delete_resource_policy: (
+                                    resource_arn: ::String
+                                  ) -> _DeleteResourcePolicyResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteResourcePolicyResponseSuccess
+
       interface _DeregisterMarketplaceModelEndpointResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeregisterMarketplaceModelEndpointResponse]
       end
@@ -1262,7 +1272,7 @@ module Aws
         def policy_arn: () -> ::String
         def build_workflow_id: () -> ::String
         def status: () -> ("SCHEDULED" | "CANCEL_REQUESTED" | "PREPROCESSING" | "BUILDING" | "TESTING" | "COMPLETED" | "FAILED" | "CANCELLED")
-        def build_workflow_type: () -> ("INGEST_CONTENT" | "REFINE_POLICY" | "IMPORT_POLICY")
+        def build_workflow_type: () -> ("INGEST_CONTENT" | "REFINE_POLICY" | "IMPORT_POLICY" | "GENERATE_FIDELITY_REPORT" | "GENERATE_POLICY_SCENARIOS")
         def document_name: () -> ::String
         def document_content_type: () -> ("pdf" | "txt")
         def document_description: () -> ::String
@@ -1286,7 +1296,8 @@ module Aws
       def get_automated_reasoning_policy_build_workflow_result_assets: (
                                                                          policy_arn: ::String,
                                                                          build_workflow_id: ::String,
-                                                                         asset_type: ("BUILD_LOG" | "QUALITY_REPORT" | "POLICY_DEFINITION" | "GENERATED_TEST_CASES" | "POLICY_SCENARIOS")
+                                                                         asset_type: ("BUILD_LOG" | "QUALITY_REPORT" | "POLICY_DEFINITION" | "GENERATED_TEST_CASES" | "POLICY_SCENARIOS" | "FIDELITY_REPORT" | "ASSET_MANIFEST" | "SOURCE_DOCUMENT"),
+                                                                         ?asset_id: ::String
                                                                        ) -> _GetAutomatedReasoningPolicyBuildWorkflowResultAssetsResponseSuccess
                                                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAutomatedReasoningPolicyBuildWorkflowResultAssetsResponseSuccess
 
@@ -1585,6 +1596,11 @@ module Aws
         def vpc_config: () -> Types::VpcConfig
         def timeout_duration_in_hours: () -> ::Integer
         def job_expiration_time: () -> ::Time
+        def model_invocation_type: () -> ("InvokeModel" | "Converse")
+        def total_record_count: () -> ::Integer
+        def processed_record_count: () -> ::Integer
+        def success_record_count: () -> ::Integer
+        def error_record_count: () -> ::Integer
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Bedrock/Client.html#get_model_invocation_job-instance_method
       def get_model_invocation_job: (
@@ -1641,6 +1657,16 @@ module Aws
                                               provisioned_model_id: ::String
                                             ) -> _GetProvisionedModelThroughputResponseSuccess
                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetProvisionedModelThroughputResponseSuccess
+
+      interface _GetResourcePolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetResourcePolicyResponse]
+        def resource_policy: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Bedrock/Client.html#get_resource_policy-instance_method
+      def get_resource_policy: (
+                                 resource_arn: ::String
+                               ) -> _GetResourcePolicyResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetResourcePolicyResponseSuccess
 
       interface _GetUseCaseForModelAccessResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetUseCaseForModelAccessResponse]
@@ -1983,7 +2009,14 @@ module Aws
                                                   guardrail_inference_config: {
                                                     guardrail_identifier: ::String,
                                                     guardrail_version: ::String,
-                                                    input_tags: ("HONOR" | "IGNORE")
+                                                    selective_content_guarding: {
+                                                      system: ("SELECTIVE" | "COMPREHENSIVE")?,
+                                                      messages: ("SELECTIVE" | "COMPREHENSIVE")?
+                                                    }?,
+                                                    model_enforcement: {
+                                                      included_models: Array[::String],
+                                                      excluded_models: Array[::String]
+                                                    }?
                                                   }
                                                 ) -> _PutEnforcedGuardrailConfigurationResponseSuccess
                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutEnforcedGuardrailConfigurationResponseSuccess
@@ -2015,6 +2048,17 @@ module Aws
                                                       ) -> _PutModelInvocationLoggingConfigurationResponseSuccess
                                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutModelInvocationLoggingConfigurationResponseSuccess
 
+      interface _PutResourcePolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutResourcePolicyResponse]
+        def resource_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Bedrock/Client.html#put_resource_policy-instance_method
+      def put_resource_policy: (
+                                 resource_arn: ::String,
+                                 resource_policy: ::String
+                               ) -> _PutResourcePolicyResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutResourcePolicyResponseSuccess
+
       interface _PutUseCaseForModelAccessResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::PutUseCaseForModelAccessResponse]
       end
@@ -2043,7 +2087,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Bedrock/Client.html#start_automated_reasoning_policy_build_workflow-instance_method
       def start_automated_reasoning_policy_build_workflow: (
                                                              policy_arn: ::String,
-                                                             build_workflow_type: ("INGEST_CONTENT" | "REFINE_POLICY" | "IMPORT_POLICY"),
+                                                             build_workflow_type: ("INGEST_CONTENT" | "REFINE_POLICY" | "IMPORT_POLICY" | "GENERATE_FIDELITY_REPORT" | "GENERATE_POLICY_SCENARIOS"),
                                                              ?client_request_token: ::String,
                                                              source_content: {
                                                                policy_definition: {
@@ -2161,6 +2205,16 @@ module Aws
                                                                        }?
                                                                      },
                                                                    ]
+                                                                 }?,
+                                                                 generate_fidelity_report_content: {
+                                                                   documents: Array[
+                                                                     {
+                                                                       document: ::String,
+                                                                       document_content_type: ("pdf" | "txt"),
+                                                                       document_name: ::String,
+                                                                       document_description: ::String?
+                                                                     },
+                                                                   ]?
                                                                  }?
                                                                }?
                                                              }

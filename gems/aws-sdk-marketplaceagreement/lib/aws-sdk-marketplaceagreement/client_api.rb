@@ -19,19 +19,53 @@ module Aws::MarketplaceAgreement
     AcceptedTermList = Shapes::ListShape.new(name: 'AcceptedTermList')
     Acceptor = Shapes::StructureShape.new(name: 'Acceptor')
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
+    AgreementCancellationRequestCancellationReason = Shapes::StringShape.new(name: 'AgreementCancellationRequestCancellationReason')
+    AgreementCancellationRequestDescription = Shapes::StringShape.new(name: 'AgreementCancellationRequestDescription')
+    AgreementCancellationRequestId = Shapes::StringShape.new(name: 'AgreementCancellationRequestId')
+    AgreementCancellationRequestReasonCode = Shapes::StringShape.new(name: 'AgreementCancellationRequestReasonCode')
+    AgreementCancellationRequestStatus = Shapes::StringShape.new(name: 'AgreementCancellationRequestStatus')
+    AgreementCancellationRequestStatusMessage = Shapes::StringShape.new(name: 'AgreementCancellationRequestStatusMessage')
+    AgreementCancellationRequestSummary = Shapes::StructureShape.new(name: 'AgreementCancellationRequestSummary')
+    AgreementCancellationRequestSummaryList = Shapes::ListShape.new(name: 'AgreementCancellationRequestSummaryList')
+    AgreementId = Shapes::StringShape.new(name: 'AgreementId')
+    AgreementInvoiceLineItemGroupSummaries = Shapes::ListShape.new(name: 'AgreementInvoiceLineItemGroupSummaries')
+    AgreementInvoiceLineItemGroupSummary = Shapes::StructureShape.new(name: 'AgreementInvoiceLineItemGroupSummary')
     AgreementResourceType = Shapes::StringShape.new(name: 'AgreementResourceType')
     AgreementStatus = Shapes::StringShape.new(name: 'AgreementStatus')
     AgreementType = Shapes::StringShape.new(name: 'AgreementType')
     AgreementViewSummary = Shapes::StructureShape.new(name: 'AgreementViewSummary')
     AgreementViewSummaryList = Shapes::ListShape.new(name: 'AgreementViewSummaryList')
+    BatchCreateBillingAdjustmentError = Shapes::StructureShape.new(name: 'BatchCreateBillingAdjustmentError')
+    BatchCreateBillingAdjustmentErrorList = Shapes::ListShape.new(name: 'BatchCreateBillingAdjustmentErrorList')
+    BatchCreateBillingAdjustmentItem = Shapes::StructureShape.new(name: 'BatchCreateBillingAdjustmentItem')
+    BatchCreateBillingAdjustmentItemList = Shapes::ListShape.new(name: 'BatchCreateBillingAdjustmentItemList')
+    BatchCreateBillingAdjustmentRequestEntry = Shapes::StructureShape.new(name: 'BatchCreateBillingAdjustmentRequestEntry')
+    BatchCreateBillingAdjustmentRequestEntryList = Shapes::ListShape.new(name: 'BatchCreateBillingAdjustmentRequestEntryList')
+    BatchCreateBillingAdjustmentRequestInput = Shapes::StructureShape.new(name: 'BatchCreateBillingAdjustmentRequestInput')
+    BatchCreateBillingAdjustmentRequestOutput = Shapes::StructureShape.new(name: 'BatchCreateBillingAdjustmentRequestOutput')
+    BillingAdjustmentDescription = Shapes::StringShape.new(name: 'BillingAdjustmentDescription')
+    BillingAdjustmentErrorCode = Shapes::StringShape.new(name: 'BillingAdjustmentErrorCode')
+    BillingAdjustmentReasonCode = Shapes::StringShape.new(name: 'BillingAdjustmentReasonCode')
+    BillingAdjustmentRequestId = Shapes::StringShape.new(name: 'BillingAdjustmentRequestId')
+    BillingAdjustmentStatus = Shapes::StringShape.new(name: 'BillingAdjustmentStatus')
+    BillingAdjustmentStatusMessage = Shapes::StringShape.new(name: 'BillingAdjustmentStatusMessage')
+    BillingAdjustmentSummary = Shapes::StructureShape.new(name: 'BillingAdjustmentSummary')
+    BillingAdjustmentSummaryList = Shapes::ListShape.new(name: 'BillingAdjustmentSummaryList')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     BoundedString = Shapes::StringShape.new(name: 'BoundedString')
     ByolPricingTerm = Shapes::StructureShape.new(name: 'ByolPricingTerm')
+    CancelAgreementCancellationRequestInput = Shapes::StructureShape.new(name: 'CancelAgreementCancellationRequestInput')
+    CancelAgreementCancellationRequestOutput = Shapes::StructureShape.new(name: 'CancelAgreementCancellationRequestOutput')
+    CancelAgreementPaymentRequestInput = Shapes::StructureShape.new(name: 'CancelAgreementPaymentRequestInput')
+    CancelAgreementPaymentRequestOutput = Shapes::StructureShape.new(name: 'CancelAgreementPaymentRequestOutput')
     Catalog = Shapes::StringShape.new(name: 'Catalog')
+    ChargeId = Shapes::StringShape.new(name: 'ChargeId')
+    ClientToken = Shapes::StringShape.new(name: 'ClientToken')
     ConfigurableUpfrontPricingTerm = Shapes::StructureShape.new(name: 'ConfigurableUpfrontPricingTerm')
     ConfigurableUpfrontPricingTermConfiguration = Shapes::StructureShape.new(name: 'ConfigurableUpfrontPricingTermConfiguration')
     ConfigurableUpfrontRateCardItem = Shapes::StructureShape.new(name: 'ConfigurableUpfrontRateCardItem')
     ConfigurableUpfrontRateCardList = Shapes::ListShape.new(name: 'ConfigurableUpfrontRateCardList')
+    ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     Constraints = Shapes::StructureShape.new(name: 'Constraints')
     CurrencyCode = Shapes::StringShape.new(name: 'CurrencyCode')
     DescribeAgreementInput = Shapes::StructureShape.new(name: 'DescribeAgreementInput')
@@ -49,20 +83,51 @@ module Aws::MarketplaceAgreement
     FilterValueList = Shapes::ListShape.new(name: 'FilterValueList')
     FixedUpfrontPricingTerm = Shapes::StructureShape.new(name: 'FixedUpfrontPricingTerm')
     FreeTrialPricingTerm = Shapes::StructureShape.new(name: 'FreeTrialPricingTerm')
+    GetAgreementCancellationRequestInput = Shapes::StructureShape.new(name: 'GetAgreementCancellationRequestInput')
+    GetAgreementCancellationRequestOutput = Shapes::StructureShape.new(name: 'GetAgreementCancellationRequestOutput')
+    GetAgreementPaymentRequestInput = Shapes::StructureShape.new(name: 'GetAgreementPaymentRequestInput')
+    GetAgreementPaymentRequestOutput = Shapes::StructureShape.new(name: 'GetAgreementPaymentRequestOutput')
     GetAgreementTermsInput = Shapes::StructureShape.new(name: 'GetAgreementTermsInput')
     GetAgreementTermsOutput = Shapes::StructureShape.new(name: 'GetAgreementTermsOutput')
+    GetBillingAdjustmentRequestInput = Shapes::StructureShape.new(name: 'GetBillingAdjustmentRequestInput')
+    GetBillingAdjustmentRequestOutput = Shapes::StructureShape.new(name: 'GetBillingAdjustmentRequestOutput')
     GrantItem = Shapes::StructureShape.new(name: 'GrantItem')
     GrantList = Shapes::ListShape.new(name: 'GrantList')
     ISO8601Duration = Shapes::StringShape.new(name: 'ISO8601Duration')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
+    InvoiceBillingPeriod = Shapes::StructureShape.new(name: 'InvoiceBillingPeriod')
+    InvoiceBillingPeriodMonthInteger = Shapes::IntegerShape.new(name: 'InvoiceBillingPeriodMonthInteger')
+    InvoiceBillingPeriodYearInteger = Shapes::IntegerShape.new(name: 'InvoiceBillingPeriodYearInteger')
+    InvoiceId = Shapes::StringShape.new(name: 'InvoiceId')
+    InvoiceType = Shapes::StringShape.new(name: 'InvoiceType')
+    InvoicingEntity = Shapes::StructureShape.new(name: 'InvoicingEntity')
     LegalTerm = Shapes::StructureShape.new(name: 'LegalTerm')
+    LineItemGroupBy = Shapes::StringShape.new(name: 'LineItemGroupBy')
+    ListAgreementCancellationRequestsInput = Shapes::StructureShape.new(name: 'ListAgreementCancellationRequestsInput')
+    ListAgreementCancellationRequestsOutput = Shapes::StructureShape.new(name: 'ListAgreementCancellationRequestsOutput')
+    ListAgreementInvoiceLineItemsInput = Shapes::StructureShape.new(name: 'ListAgreementInvoiceLineItemsInput')
+    ListAgreementInvoiceLineItemsOutput = Shapes::StructureShape.new(name: 'ListAgreementInvoiceLineItemsOutput')
+    ListAgreementPaymentRequestsInput = Shapes::StructureShape.new(name: 'ListAgreementPaymentRequestsInput')
+    ListAgreementPaymentRequestsOutput = Shapes::StructureShape.new(name: 'ListAgreementPaymentRequestsOutput')
+    ListBillingAdjustmentRequestsInput = Shapes::StructureShape.new(name: 'ListBillingAdjustmentRequestsInput')
+    ListBillingAdjustmentRequestsOutput = Shapes::StructureShape.new(name: 'ListBillingAdjustmentRequestsOutput')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     OfferId = Shapes::StringShape.new(name: 'OfferId')
     OfferSetId = Shapes::StringShape.new(name: 'OfferSetId')
+    PartyType = Shapes::StringShape.new(name: 'PartyType')
     PaymentRequestApprovalStrategy = Shapes::StringShape.new(name: 'PaymentRequestApprovalStrategy')
+    PaymentRequestDescription = Shapes::StringShape.new(name: 'PaymentRequestDescription')
+    PaymentRequestId = Shapes::StringShape.new(name: 'PaymentRequestId')
+    PaymentRequestName = Shapes::StringShape.new(name: 'PaymentRequestName')
+    PaymentRequestStatus = Shapes::StringShape.new(name: 'PaymentRequestStatus')
+    PaymentRequestStatusMessage = Shapes::StringShape.new(name: 'PaymentRequestStatusMessage')
+    PaymentRequestSummary = Shapes::StructureShape.new(name: 'PaymentRequestSummary')
+    PaymentRequestSummaryList = Shapes::ListShape.new(name: 'PaymentRequestSummaryList')
     PaymentScheduleTerm = Shapes::StructureShape.new(name: 'PaymentScheduleTerm')
+    PositiveAmountUpto8Decimals = Shapes::StringShape.new(name: 'PositiveAmountUpto8Decimals')
     PositiveIntegerWithDefaultValueOne = Shapes::IntegerShape.new(name: 'PositiveIntegerWithDefaultValueOne')
+    PricingCurrencyAmount = Shapes::StructureShape.new(name: 'PricingCurrencyAmount')
     ProposalSummary = Shapes::StructureShape.new(name: 'ProposalSummary')
     Proposer = Shapes::StructureShape.new(name: 'Proposer')
     RateCardItem = Shapes::StructureShape.new(name: 'RateCardItem')
@@ -81,10 +146,16 @@ module Aws::MarketplaceAgreement
     SearchAgreementsInput = Shapes::StructureShape.new(name: 'SearchAgreementsInput')
     SearchAgreementsOutput = Shapes::StructureShape.new(name: 'SearchAgreementsOutput')
     Selector = Shapes::StructureShape.new(name: 'Selector')
+    SendAgreementCancellationRequestInput = Shapes::StructureShape.new(name: 'SendAgreementCancellationRequestInput')
+    SendAgreementCancellationRequestOutput = Shapes::StructureShape.new(name: 'SendAgreementCancellationRequestOutput')
+    SendAgreementPaymentRequestInput = Shapes::StructureShape.new(name: 'SendAgreementPaymentRequestInput')
+    SendAgreementPaymentRequestOutput = Shapes::StructureShape.new(name: 'SendAgreementPaymentRequestOutput')
     Sort = Shapes::StructureShape.new(name: 'Sort')
     SortBy = Shapes::StringShape.new(name: 'SortBy')
     SortOrder = Shapes::StringShape.new(name: 'SortOrder')
+    String = Shapes::StringShape.new(name: 'String')
     SupportTerm = Shapes::StructureShape.new(name: 'SupportTerm')
+    TermId = Shapes::StringShape.new(name: 'TermId')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     UnversionedTermType = Shapes::StringShape.new(name: 'UnversionedTermType')
@@ -137,6 +208,29 @@ module Aws::MarketplaceAgreement
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
     AccessDeniedException.struct_class = Types::AccessDeniedException
 
+    AgreementCancellationRequestSummary.add_member(:agreement_cancellation_request_id, Shapes::ShapeRef.new(shape: AgreementCancellationRequestId, location_name: "agreementCancellationRequestId"))
+    AgreementCancellationRequestSummary.add_member(:agreement_id, Shapes::ShapeRef.new(shape: AgreementId, location_name: "agreementId"))
+    AgreementCancellationRequestSummary.add_member(:status, Shapes::ShapeRef.new(shape: AgreementCancellationRequestStatus, location_name: "status"))
+    AgreementCancellationRequestSummary.add_member(:reason_code, Shapes::ShapeRef.new(shape: AgreementCancellationRequestReasonCode, location_name: "reasonCode"))
+    AgreementCancellationRequestSummary.add_member(:agreement_type, Shapes::ShapeRef.new(shape: AgreementType, location_name: "agreementType"))
+    AgreementCancellationRequestSummary.add_member(:catalog, Shapes::ShapeRef.new(shape: Catalog, location_name: "catalog"))
+    AgreementCancellationRequestSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdAt"))
+    AgreementCancellationRequestSummary.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "updatedAt"))
+    AgreementCancellationRequestSummary.struct_class = Types::AgreementCancellationRequestSummary
+
+    AgreementCancellationRequestSummaryList.member = Shapes::ShapeRef.new(shape: AgreementCancellationRequestSummary)
+
+    AgreementInvoiceLineItemGroupSummaries.member = Shapes::ShapeRef.new(shape: AgreementInvoiceLineItemGroupSummary)
+
+    AgreementInvoiceLineItemGroupSummary.add_member(:agreement_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "agreementId"))
+    AgreementInvoiceLineItemGroupSummary.add_member(:invoice_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "invoiceId"))
+    AgreementInvoiceLineItemGroupSummary.add_member(:pricing_currency_amount, Shapes::ShapeRef.new(shape: PricingCurrencyAmount, location_name: "pricingCurrencyAmount"))
+    AgreementInvoiceLineItemGroupSummary.add_member(:invoice_billing_period, Shapes::ShapeRef.new(shape: InvoiceBillingPeriod, location_name: "invoiceBillingPeriod"))
+    AgreementInvoiceLineItemGroupSummary.add_member(:issued_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "issuedTime"))
+    AgreementInvoiceLineItemGroupSummary.add_member(:invoice_type, Shapes::ShapeRef.new(shape: InvoiceType, location_name: "invoiceType"))
+    AgreementInvoiceLineItemGroupSummary.add_member(:invoicing_entity, Shapes::ShapeRef.new(shape: InvoicingEntity, location_name: "invoicingEntity"))
+    AgreementInvoiceLineItemGroupSummary.struct_class = Types::AgreementInvoiceLineItemGroupSummary
+
     AgreementViewSummary.add_member(:agreement_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "agreementId"))
     AgreementViewSummary.add_member(:acceptance_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "acceptanceTime"))
     AgreementViewSummary.add_member(:start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "startTime"))
@@ -150,8 +244,83 @@ module Aws::MarketplaceAgreement
 
     AgreementViewSummaryList.member = Shapes::ShapeRef.new(shape: AgreementViewSummary)
 
+    BatchCreateBillingAdjustmentError.add_member(:code, Shapes::ShapeRef.new(shape: BillingAdjustmentErrorCode, required: true, location_name: "code"))
+    BatchCreateBillingAdjustmentError.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
+    BatchCreateBillingAdjustmentError.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "clientToken"))
+    BatchCreateBillingAdjustmentError.struct_class = Types::BatchCreateBillingAdjustmentError
+
+    BatchCreateBillingAdjustmentErrorList.member = Shapes::ShapeRef.new(shape: BatchCreateBillingAdjustmentError)
+
+    BatchCreateBillingAdjustmentItem.add_member(:billing_adjustment_request_id, Shapes::ShapeRef.new(shape: BillingAdjustmentRequestId, required: true, location_name: "billingAdjustmentRequestId"))
+    BatchCreateBillingAdjustmentItem.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "clientToken"))
+    BatchCreateBillingAdjustmentItem.struct_class = Types::BatchCreateBillingAdjustmentItem
+
+    BatchCreateBillingAdjustmentItemList.member = Shapes::ShapeRef.new(shape: BatchCreateBillingAdjustmentItem)
+
+    BatchCreateBillingAdjustmentRequestEntry.add_member(:agreement_id, Shapes::ShapeRef.new(shape: AgreementId, required: true, location_name: "agreementId"))
+    BatchCreateBillingAdjustmentRequestEntry.add_member(:original_invoice_id, Shapes::ShapeRef.new(shape: InvoiceId, required: true, location_name: "originalInvoiceId"))
+    BatchCreateBillingAdjustmentRequestEntry.add_member(:adjustment_amount, Shapes::ShapeRef.new(shape: PositiveAmountUpto8Decimals, required: true, location_name: "adjustmentAmount"))
+    BatchCreateBillingAdjustmentRequestEntry.add_member(:currency_code, Shapes::ShapeRef.new(shape: CurrencyCode, required: true, location_name: "currencyCode"))
+    BatchCreateBillingAdjustmentRequestEntry.add_member(:adjustment_reason_code, Shapes::ShapeRef.new(shape: BillingAdjustmentReasonCode, required: true, location_name: "adjustmentReasonCode"))
+    BatchCreateBillingAdjustmentRequestEntry.add_member(:description, Shapes::ShapeRef.new(shape: BillingAdjustmentDescription, location_name: "description"))
+    BatchCreateBillingAdjustmentRequestEntry.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "clientToken"))
+    BatchCreateBillingAdjustmentRequestEntry.struct_class = Types::BatchCreateBillingAdjustmentRequestEntry
+
+    BatchCreateBillingAdjustmentRequestEntryList.member = Shapes::ShapeRef.new(shape: BatchCreateBillingAdjustmentRequestEntry)
+
+    BatchCreateBillingAdjustmentRequestInput.add_member(:billing_adjustment_request_entries, Shapes::ShapeRef.new(shape: BatchCreateBillingAdjustmentRequestEntryList, required: true, location_name: "billingAdjustmentRequestEntries"))
+    BatchCreateBillingAdjustmentRequestInput.struct_class = Types::BatchCreateBillingAdjustmentRequestInput
+
+    BatchCreateBillingAdjustmentRequestOutput.add_member(:items, Shapes::ShapeRef.new(shape: BatchCreateBillingAdjustmentItemList, required: true, location_name: "items"))
+    BatchCreateBillingAdjustmentRequestOutput.add_member(:errors, Shapes::ShapeRef.new(shape: BatchCreateBillingAdjustmentErrorList, required: true, location_name: "errors"))
+    BatchCreateBillingAdjustmentRequestOutput.struct_class = Types::BatchCreateBillingAdjustmentRequestOutput
+
+    BillingAdjustmentSummary.add_member(:billing_adjustment_request_id, Shapes::ShapeRef.new(shape: BillingAdjustmentRequestId, required: true, location_name: "billingAdjustmentRequestId"))
+    BillingAdjustmentSummary.add_member(:original_invoice_id, Shapes::ShapeRef.new(shape: InvoiceId, required: true, location_name: "originalInvoiceId"))
+    BillingAdjustmentSummary.add_member(:adjustment_amount, Shapes::ShapeRef.new(shape: PositiveAmountUpto8Decimals, required: true, location_name: "adjustmentAmount"))
+    BillingAdjustmentSummary.add_member(:currency_code, Shapes::ShapeRef.new(shape: CurrencyCode, required: true, location_name: "currencyCode"))
+    BillingAdjustmentSummary.add_member(:status, Shapes::ShapeRef.new(shape: BillingAdjustmentStatus, required: true, location_name: "status"))
+    BillingAdjustmentSummary.add_member(:agreement_id, Shapes::ShapeRef.new(shape: AgreementId, required: true, location_name: "agreementId"))
+    BillingAdjustmentSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createdAt"))
+    BillingAdjustmentSummary.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "updatedAt"))
+    BillingAdjustmentSummary.add_member(:agreement_type, Shapes::ShapeRef.new(shape: AgreementType, required: true, location_name: "agreementType"))
+    BillingAdjustmentSummary.add_member(:catalog, Shapes::ShapeRef.new(shape: Catalog, required: true, location_name: "catalog"))
+    BillingAdjustmentSummary.struct_class = Types::BillingAdjustmentSummary
+
+    BillingAdjustmentSummaryList.member = Shapes::ShapeRef.new(shape: BillingAdjustmentSummary)
+
     ByolPricingTerm.add_member(:type, Shapes::ShapeRef.new(shape: UnversionedTermType, location_name: "type"))
     ByolPricingTerm.struct_class = Types::ByolPricingTerm
+
+    CancelAgreementCancellationRequestInput.add_member(:agreement_id, Shapes::ShapeRef.new(shape: AgreementId, required: true, location_name: "agreementId"))
+    CancelAgreementCancellationRequestInput.add_member(:agreement_cancellation_request_id, Shapes::ShapeRef.new(shape: AgreementCancellationRequestId, required: true, location_name: "agreementCancellationRequestId"))
+    CancelAgreementCancellationRequestInput.add_member(:cancellation_reason, Shapes::ShapeRef.new(shape: AgreementCancellationRequestCancellationReason, required: true, location_name: "cancellationReason"))
+    CancelAgreementCancellationRequestInput.struct_class = Types::CancelAgreementCancellationRequestInput
+
+    CancelAgreementCancellationRequestOutput.add_member(:agreement_cancellation_request_id, Shapes::ShapeRef.new(shape: AgreementCancellationRequestId, location_name: "agreementCancellationRequestId"))
+    CancelAgreementCancellationRequestOutput.add_member(:agreement_id, Shapes::ShapeRef.new(shape: AgreementId, location_name: "agreementId"))
+    CancelAgreementCancellationRequestOutput.add_member(:reason_code, Shapes::ShapeRef.new(shape: AgreementCancellationRequestReasonCode, location_name: "reasonCode"))
+    CancelAgreementCancellationRequestOutput.add_member(:description, Shapes::ShapeRef.new(shape: AgreementCancellationRequestDescription, location_name: "description"))
+    CancelAgreementCancellationRequestOutput.add_member(:status, Shapes::ShapeRef.new(shape: AgreementCancellationRequestStatus, location_name: "status"))
+    CancelAgreementCancellationRequestOutput.add_member(:status_message, Shapes::ShapeRef.new(shape: AgreementCancellationRequestStatusMessage, location_name: "statusMessage"))
+    CancelAgreementCancellationRequestOutput.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdAt"))
+    CancelAgreementCancellationRequestOutput.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "updatedAt"))
+    CancelAgreementCancellationRequestOutput.struct_class = Types::CancelAgreementCancellationRequestOutput
+
+    CancelAgreementPaymentRequestInput.add_member(:payment_request_id, Shapes::ShapeRef.new(shape: PaymentRequestId, required: true, location_name: "paymentRequestId"))
+    CancelAgreementPaymentRequestInput.add_member(:agreement_id, Shapes::ShapeRef.new(shape: AgreementId, required: true, location_name: "agreementId"))
+    CancelAgreementPaymentRequestInput.struct_class = Types::CancelAgreementPaymentRequestInput
+
+    CancelAgreementPaymentRequestOutput.add_member(:payment_request_id, Shapes::ShapeRef.new(shape: PaymentRequestId, location_name: "paymentRequestId"))
+    CancelAgreementPaymentRequestOutput.add_member(:agreement_id, Shapes::ShapeRef.new(shape: AgreementId, location_name: "agreementId"))
+    CancelAgreementPaymentRequestOutput.add_member(:status, Shapes::ShapeRef.new(shape: PaymentRequestStatus, location_name: "status"))
+    CancelAgreementPaymentRequestOutput.add_member(:name, Shapes::ShapeRef.new(shape: PaymentRequestName, location_name: "name"))
+    CancelAgreementPaymentRequestOutput.add_member(:description, Shapes::ShapeRef.new(shape: PaymentRequestDescription, location_name: "description"))
+    CancelAgreementPaymentRequestOutput.add_member(:charge_amount, Shapes::ShapeRef.new(shape: PositiveAmountUpto8Decimals, location_name: "chargeAmount"))
+    CancelAgreementPaymentRequestOutput.add_member(:currency_code, Shapes::ShapeRef.new(shape: CurrencyCode, location_name: "currencyCode"))
+    CancelAgreementPaymentRequestOutput.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdAt"))
+    CancelAgreementPaymentRequestOutput.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "updatedAt"))
+    CancelAgreementPaymentRequestOutput.struct_class = Types::CancelAgreementPaymentRequestOutput
 
     ConfigurableUpfrontPricingTerm.add_member(:type, Shapes::ShapeRef.new(shape: UnversionedTermType, location_name: "type"))
     ConfigurableUpfrontPricingTerm.add_member(:currency_code, Shapes::ShapeRef.new(shape: CurrencyCode, location_name: "currencyCode"))
@@ -169,6 +338,12 @@ module Aws::MarketplaceAgreement
     ConfigurableUpfrontRateCardItem.struct_class = Types::ConfigurableUpfrontRateCardItem
 
     ConfigurableUpfrontRateCardList.member = Shapes::ShapeRef.new(shape: ConfigurableUpfrontRateCardItem)
+
+    ConflictException.add_member(:request_id, Shapes::ShapeRef.new(shape: RequestId, location_name: "requestId"))
+    ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    ConflictException.add_member(:resource_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "resourceId"))
+    ConflictException.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, location_name: "resourceType"))
+    ConflictException.struct_class = Types::ConflictException
 
     Constraints.add_member(:multiple_dimension_selection, Shapes::ShapeRef.new(shape: BoundedString, location_name: "multipleDimensionSelection"))
     Constraints.add_member(:quantity_configuration, Shapes::ShapeRef.new(shape: BoundedString, location_name: "quantityConfiguration"))
@@ -226,6 +401,37 @@ module Aws::MarketplaceAgreement
     FreeTrialPricingTerm.add_member(:grants, Shapes::ShapeRef.new(shape: GrantList, location_name: "grants"))
     FreeTrialPricingTerm.struct_class = Types::FreeTrialPricingTerm
 
+    GetAgreementCancellationRequestInput.add_member(:agreement_cancellation_request_id, Shapes::ShapeRef.new(shape: AgreementCancellationRequestId, required: true, location_name: "agreementCancellationRequestId"))
+    GetAgreementCancellationRequestInput.add_member(:agreement_id, Shapes::ShapeRef.new(shape: AgreementId, required: true, location_name: "agreementId"))
+    GetAgreementCancellationRequestInput.struct_class = Types::GetAgreementCancellationRequestInput
+
+    GetAgreementCancellationRequestOutput.add_member(:agreement_cancellation_request_id, Shapes::ShapeRef.new(shape: AgreementCancellationRequestId, location_name: "agreementCancellationRequestId"))
+    GetAgreementCancellationRequestOutput.add_member(:agreement_id, Shapes::ShapeRef.new(shape: AgreementId, location_name: "agreementId"))
+    GetAgreementCancellationRequestOutput.add_member(:reason_code, Shapes::ShapeRef.new(shape: AgreementCancellationRequestReasonCode, location_name: "reasonCode"))
+    GetAgreementCancellationRequestOutput.add_member(:description, Shapes::ShapeRef.new(shape: AgreementCancellationRequestDescription, location_name: "description"))
+    GetAgreementCancellationRequestOutput.add_member(:status, Shapes::ShapeRef.new(shape: AgreementCancellationRequestStatus, location_name: "status"))
+    GetAgreementCancellationRequestOutput.add_member(:status_message, Shapes::ShapeRef.new(shape: AgreementCancellationRequestStatusMessage, location_name: "statusMessage"))
+    GetAgreementCancellationRequestOutput.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdAt"))
+    GetAgreementCancellationRequestOutput.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "updatedAt"))
+    GetAgreementCancellationRequestOutput.struct_class = Types::GetAgreementCancellationRequestOutput
+
+    GetAgreementPaymentRequestInput.add_member(:payment_request_id, Shapes::ShapeRef.new(shape: PaymentRequestId, required: true, location_name: "paymentRequestId"))
+    GetAgreementPaymentRequestInput.add_member(:agreement_id, Shapes::ShapeRef.new(shape: AgreementId, required: true, location_name: "agreementId"))
+    GetAgreementPaymentRequestInput.struct_class = Types::GetAgreementPaymentRequestInput
+
+    GetAgreementPaymentRequestOutput.add_member(:payment_request_id, Shapes::ShapeRef.new(shape: PaymentRequestId, location_name: "paymentRequestId"))
+    GetAgreementPaymentRequestOutput.add_member(:agreement_id, Shapes::ShapeRef.new(shape: AgreementId, location_name: "agreementId"))
+    GetAgreementPaymentRequestOutput.add_member(:status, Shapes::ShapeRef.new(shape: PaymentRequestStatus, location_name: "status"))
+    GetAgreementPaymentRequestOutput.add_member(:status_message, Shapes::ShapeRef.new(shape: PaymentRequestStatusMessage, location_name: "statusMessage"))
+    GetAgreementPaymentRequestOutput.add_member(:name, Shapes::ShapeRef.new(shape: PaymentRequestName, location_name: "name"))
+    GetAgreementPaymentRequestOutput.add_member(:description, Shapes::ShapeRef.new(shape: PaymentRequestDescription, location_name: "description"))
+    GetAgreementPaymentRequestOutput.add_member(:charge_id, Shapes::ShapeRef.new(shape: ChargeId, location_name: "chargeId"))
+    GetAgreementPaymentRequestOutput.add_member(:charge_amount, Shapes::ShapeRef.new(shape: PositiveAmountUpto8Decimals, location_name: "chargeAmount"))
+    GetAgreementPaymentRequestOutput.add_member(:currency_code, Shapes::ShapeRef.new(shape: CurrencyCode, location_name: "currencyCode"))
+    GetAgreementPaymentRequestOutput.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdAt"))
+    GetAgreementPaymentRequestOutput.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "updatedAt"))
+    GetAgreementPaymentRequestOutput.struct_class = Types::GetAgreementPaymentRequestOutput
+
     GetAgreementTermsInput.add_member(:agreement_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "agreementId"))
     GetAgreementTermsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
     GetAgreementTermsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
@@ -234,6 +440,23 @@ module Aws::MarketplaceAgreement
     GetAgreementTermsOutput.add_member(:accepted_terms, Shapes::ShapeRef.new(shape: AcceptedTermList, location_name: "acceptedTerms"))
     GetAgreementTermsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     GetAgreementTermsOutput.struct_class = Types::GetAgreementTermsOutput
+
+    GetBillingAdjustmentRequestInput.add_member(:agreement_id, Shapes::ShapeRef.new(shape: AgreementId, required: true, location_name: "agreementId"))
+    GetBillingAdjustmentRequestInput.add_member(:billing_adjustment_request_id, Shapes::ShapeRef.new(shape: BillingAdjustmentRequestId, required: true, location_name: "billingAdjustmentRequestId"))
+    GetBillingAdjustmentRequestInput.struct_class = Types::GetBillingAdjustmentRequestInput
+
+    GetBillingAdjustmentRequestOutput.add_member(:billing_adjustment_request_id, Shapes::ShapeRef.new(shape: BillingAdjustmentRequestId, required: true, location_name: "billingAdjustmentRequestId"))
+    GetBillingAdjustmentRequestOutput.add_member(:agreement_id, Shapes::ShapeRef.new(shape: AgreementId, required: true, location_name: "agreementId"))
+    GetBillingAdjustmentRequestOutput.add_member(:adjustment_reason_code, Shapes::ShapeRef.new(shape: BillingAdjustmentReasonCode, required: true, location_name: "adjustmentReasonCode"))
+    GetBillingAdjustmentRequestOutput.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
+    GetBillingAdjustmentRequestOutput.add_member(:original_invoice_id, Shapes::ShapeRef.new(shape: InvoiceId, required: true, location_name: "originalInvoiceId"))
+    GetBillingAdjustmentRequestOutput.add_member(:adjustment_amount, Shapes::ShapeRef.new(shape: PositiveAmountUpto8Decimals, required: true, location_name: "adjustmentAmount"))
+    GetBillingAdjustmentRequestOutput.add_member(:currency_code, Shapes::ShapeRef.new(shape: CurrencyCode, required: true, location_name: "currencyCode"))
+    GetBillingAdjustmentRequestOutput.add_member(:status, Shapes::ShapeRef.new(shape: BillingAdjustmentStatus, required: true, location_name: "status"))
+    GetBillingAdjustmentRequestOutput.add_member(:status_message, Shapes::ShapeRef.new(shape: BillingAdjustmentStatusMessage, location_name: "statusMessage"))
+    GetBillingAdjustmentRequestOutput.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createdAt"))
+    GetBillingAdjustmentRequestOutput.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "updatedAt"))
+    GetBillingAdjustmentRequestOutput.struct_class = Types::GetBillingAdjustmentRequestOutput
 
     GrantItem.add_member(:dimension_key, Shapes::ShapeRef.new(shape: BoundedString, location_name: "dimensionKey"))
     GrantItem.add_member(:max_quantity, Shapes::ShapeRef.new(shape: PositiveIntegerWithDefaultValueOne, location_name: "maxQuantity"))
@@ -245,14 +468,95 @@ module Aws::MarketplaceAgreement
     InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
     InternalServerException.struct_class = Types::InternalServerException
 
+    InvoiceBillingPeriod.add_member(:month, Shapes::ShapeRef.new(shape: InvoiceBillingPeriodMonthInteger, required: true, location_name: "month"))
+    InvoiceBillingPeriod.add_member(:year, Shapes::ShapeRef.new(shape: InvoiceBillingPeriodYearInteger, required: true, location_name: "year"))
+    InvoiceBillingPeriod.struct_class = Types::InvoiceBillingPeriod
+
+    InvoicingEntity.add_member(:legal_name, Shapes::ShapeRef.new(shape: BoundedString, location_name: "legalName"))
+    InvoicingEntity.add_member(:branch_name, Shapes::ShapeRef.new(shape: BoundedString, location_name: "branchName"))
+    InvoicingEntity.struct_class = Types::InvoicingEntity
+
     LegalTerm.add_member(:type, Shapes::ShapeRef.new(shape: UnversionedTermType, location_name: "type"))
     LegalTerm.add_member(:documents, Shapes::ShapeRef.new(shape: DocumentList, location_name: "documents"))
     LegalTerm.struct_class = Types::LegalTerm
+
+    ListAgreementCancellationRequestsInput.add_member(:party_type, Shapes::ShapeRef.new(shape: PartyType, required: true, location_name: "partyType"))
+    ListAgreementCancellationRequestsInput.add_member(:agreement_id, Shapes::ShapeRef.new(shape: AgreementId, location_name: "agreementId"))
+    ListAgreementCancellationRequestsInput.add_member(:status, Shapes::ShapeRef.new(shape: AgreementCancellationRequestStatus, location_name: "status"))
+    ListAgreementCancellationRequestsInput.add_member(:agreement_type, Shapes::ShapeRef.new(shape: AgreementType, location_name: "agreementType"))
+    ListAgreementCancellationRequestsInput.add_member(:catalog, Shapes::ShapeRef.new(shape: Catalog, location_name: "catalog"))
+    ListAgreementCancellationRequestsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
+    ListAgreementCancellationRequestsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListAgreementCancellationRequestsInput.struct_class = Types::ListAgreementCancellationRequestsInput
+
+    ListAgreementCancellationRequestsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListAgreementCancellationRequestsOutput.add_member(:items, Shapes::ShapeRef.new(shape: AgreementCancellationRequestSummaryList, location_name: "items"))
+    ListAgreementCancellationRequestsOutput.struct_class = Types::ListAgreementCancellationRequestsOutput
+
+    ListAgreementInvoiceLineItemsInput.add_member(:agreement_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "agreementId"))
+    ListAgreementInvoiceLineItemsInput.add_member(:group_by, Shapes::ShapeRef.new(shape: LineItemGroupBy, required: true, location_name: "groupBy"))
+    ListAgreementInvoiceLineItemsInput.add_member(:invoice_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "invoiceId"))
+    ListAgreementInvoiceLineItemsInput.add_member(:invoice_type, Shapes::ShapeRef.new(shape: InvoiceType, location_name: "invoiceType"))
+    ListAgreementInvoiceLineItemsInput.add_member(:invoice_billing_period, Shapes::ShapeRef.new(shape: InvoiceBillingPeriod, location_name: "invoiceBillingPeriod"))
+    ListAgreementInvoiceLineItemsInput.add_member(:before_issued_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "beforeIssuedTime"))
+    ListAgreementInvoiceLineItemsInput.add_member(:after_issued_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "afterIssuedTime"))
+    ListAgreementInvoiceLineItemsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
+    ListAgreementInvoiceLineItemsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListAgreementInvoiceLineItemsInput.struct_class = Types::ListAgreementInvoiceLineItemsInput
+
+    ListAgreementInvoiceLineItemsOutput.add_member(:agreement_invoice_line_item_group_summaries, Shapes::ShapeRef.new(shape: AgreementInvoiceLineItemGroupSummaries, location_name: "agreementInvoiceLineItemGroupSummaries"))
+    ListAgreementInvoiceLineItemsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListAgreementInvoiceLineItemsOutput.struct_class = Types::ListAgreementInvoiceLineItemsOutput
+
+    ListAgreementPaymentRequestsInput.add_member(:party_type, Shapes::ShapeRef.new(shape: PartyType, required: true, location_name: "partyType"))
+    ListAgreementPaymentRequestsInput.add_member(:agreement_type, Shapes::ShapeRef.new(shape: AgreementType, location_name: "agreementType"))
+    ListAgreementPaymentRequestsInput.add_member(:catalog, Shapes::ShapeRef.new(shape: Catalog, location_name: "catalog"))
+    ListAgreementPaymentRequestsInput.add_member(:agreement_id, Shapes::ShapeRef.new(shape: AgreementId, location_name: "agreementId"))
+    ListAgreementPaymentRequestsInput.add_member(:status, Shapes::ShapeRef.new(shape: PaymentRequestStatus, location_name: "status"))
+    ListAgreementPaymentRequestsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
+    ListAgreementPaymentRequestsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListAgreementPaymentRequestsInput.struct_class = Types::ListAgreementPaymentRequestsInput
+
+    ListAgreementPaymentRequestsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListAgreementPaymentRequestsOutput.add_member(:items, Shapes::ShapeRef.new(shape: PaymentRequestSummaryList, required: true, location_name: "items"))
+    ListAgreementPaymentRequestsOutput.struct_class = Types::ListAgreementPaymentRequestsOutput
+
+    ListBillingAdjustmentRequestsInput.add_member(:agreement_id, Shapes::ShapeRef.new(shape: AgreementId, location_name: "agreementId"))
+    ListBillingAdjustmentRequestsInput.add_member(:status, Shapes::ShapeRef.new(shape: BillingAdjustmentStatus, location_name: "status"))
+    ListBillingAdjustmentRequestsInput.add_member(:created_after, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdAfter"))
+    ListBillingAdjustmentRequestsInput.add_member(:created_before, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdBefore"))
+    ListBillingAdjustmentRequestsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
+    ListBillingAdjustmentRequestsInput.add_member(:catalog, Shapes::ShapeRef.new(shape: Catalog, location_name: "catalog"))
+    ListBillingAdjustmentRequestsInput.add_member(:agreement_type, Shapes::ShapeRef.new(shape: AgreementType, location_name: "agreementType"))
+    ListBillingAdjustmentRequestsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListBillingAdjustmentRequestsInput.struct_class = Types::ListBillingAdjustmentRequestsInput
+
+    ListBillingAdjustmentRequestsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListBillingAdjustmentRequestsOutput.add_member(:items, Shapes::ShapeRef.new(shape: BillingAdjustmentSummaryList, required: true, location_name: "items"))
+    ListBillingAdjustmentRequestsOutput.struct_class = Types::ListBillingAdjustmentRequestsOutput
+
+    PaymentRequestSummary.add_member(:payment_request_id, Shapes::ShapeRef.new(shape: PaymentRequestId, location_name: "paymentRequestId"))
+    PaymentRequestSummary.add_member(:agreement_id, Shapes::ShapeRef.new(shape: AgreementId, location_name: "agreementId"))
+    PaymentRequestSummary.add_member(:status, Shapes::ShapeRef.new(shape: PaymentRequestStatus, location_name: "status"))
+    PaymentRequestSummary.add_member(:name, Shapes::ShapeRef.new(shape: PaymentRequestName, location_name: "name"))
+    PaymentRequestSummary.add_member(:charge_id, Shapes::ShapeRef.new(shape: ChargeId, location_name: "chargeId"))
+    PaymentRequestSummary.add_member(:charge_amount, Shapes::ShapeRef.new(shape: PositiveAmountUpto8Decimals, location_name: "chargeAmount"))
+    PaymentRequestSummary.add_member(:currency_code, Shapes::ShapeRef.new(shape: CurrencyCode, location_name: "currencyCode"))
+    PaymentRequestSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdAt"))
+    PaymentRequestSummary.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "updatedAt"))
+    PaymentRequestSummary.struct_class = Types::PaymentRequestSummary
+
+    PaymentRequestSummaryList.member = Shapes::ShapeRef.new(shape: PaymentRequestSummary)
 
     PaymentScheduleTerm.add_member(:type, Shapes::ShapeRef.new(shape: UnversionedTermType, location_name: "type"))
     PaymentScheduleTerm.add_member(:currency_code, Shapes::ShapeRef.new(shape: CurrencyCode, location_name: "currencyCode"))
     PaymentScheduleTerm.add_member(:schedule, Shapes::ShapeRef.new(shape: ScheduleList, location_name: "schedule"))
     PaymentScheduleTerm.struct_class = Types::PaymentScheduleTerm
+
+    PricingCurrencyAmount.add_member(:amount, Shapes::ShapeRef.new(shape: BoundedString, location_name: "amount"))
+    PricingCurrencyAmount.add_member(:max_adjustment_amount, Shapes::ShapeRef.new(shape: BoundedString, location_name: "maxAdjustmentAmount"))
+    PricingCurrencyAmount.add_member(:currency_code, Shapes::ShapeRef.new(shape: CurrencyCode, location_name: "currencyCode"))
+    PricingCurrencyAmount.struct_class = Types::PricingCurrencyAmount
 
     ProposalSummary.add_member(:resources, Shapes::ShapeRef.new(shape: Resources, location_name: "resources"))
     ProposalSummary.add_member(:offer_id, Shapes::ShapeRef.new(shape: OfferId, location_name: "offerId"))
@@ -313,6 +617,39 @@ module Aws::MarketplaceAgreement
     Selector.add_member(:type, Shapes::ShapeRef.new(shape: BoundedString, location_name: "type"))
     Selector.add_member(:value, Shapes::ShapeRef.new(shape: BoundedString, location_name: "value"))
     Selector.struct_class = Types::Selector
+
+    SendAgreementCancellationRequestInput.add_member(:agreement_id, Shapes::ShapeRef.new(shape: AgreementId, required: true, location_name: "agreementId"))
+    SendAgreementCancellationRequestInput.add_member(:reason_code, Shapes::ShapeRef.new(shape: AgreementCancellationRequestReasonCode, required: true, location_name: "reasonCode"))
+    SendAgreementCancellationRequestInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
+    SendAgreementCancellationRequestInput.add_member(:description, Shapes::ShapeRef.new(shape: AgreementCancellationRequestDescription, location_name: "description"))
+    SendAgreementCancellationRequestInput.struct_class = Types::SendAgreementCancellationRequestInput
+
+    SendAgreementCancellationRequestOutput.add_member(:agreement_id, Shapes::ShapeRef.new(shape: AgreementId, location_name: "agreementId"))
+    SendAgreementCancellationRequestOutput.add_member(:agreement_cancellation_request_id, Shapes::ShapeRef.new(shape: AgreementCancellationRequestId, location_name: "agreementCancellationRequestId"))
+    SendAgreementCancellationRequestOutput.add_member(:status, Shapes::ShapeRef.new(shape: AgreementCancellationRequestStatus, location_name: "status"))
+    SendAgreementCancellationRequestOutput.add_member(:reason_code, Shapes::ShapeRef.new(shape: AgreementCancellationRequestReasonCode, location_name: "reasonCode"))
+    SendAgreementCancellationRequestOutput.add_member(:description, Shapes::ShapeRef.new(shape: AgreementCancellationRequestDescription, location_name: "description"))
+    SendAgreementCancellationRequestOutput.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdAt"))
+    SendAgreementCancellationRequestOutput.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "updatedAt"))
+    SendAgreementCancellationRequestOutput.struct_class = Types::SendAgreementCancellationRequestOutput
+
+    SendAgreementPaymentRequestInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
+    SendAgreementPaymentRequestInput.add_member(:agreement_id, Shapes::ShapeRef.new(shape: AgreementId, required: true, location_name: "agreementId"))
+    SendAgreementPaymentRequestInput.add_member(:term_id, Shapes::ShapeRef.new(shape: TermId, required: true, location_name: "termId"))
+    SendAgreementPaymentRequestInput.add_member(:name, Shapes::ShapeRef.new(shape: PaymentRequestName, required: true, location_name: "name"))
+    SendAgreementPaymentRequestInput.add_member(:charge_amount, Shapes::ShapeRef.new(shape: PositiveAmountUpto8Decimals, required: true, location_name: "chargeAmount"))
+    SendAgreementPaymentRequestInput.add_member(:description, Shapes::ShapeRef.new(shape: PaymentRequestDescription, location_name: "description"))
+    SendAgreementPaymentRequestInput.struct_class = Types::SendAgreementPaymentRequestInput
+
+    SendAgreementPaymentRequestOutput.add_member(:payment_request_id, Shapes::ShapeRef.new(shape: PaymentRequestId, location_name: "paymentRequestId"))
+    SendAgreementPaymentRequestOutput.add_member(:agreement_id, Shapes::ShapeRef.new(shape: AgreementId, location_name: "agreementId"))
+    SendAgreementPaymentRequestOutput.add_member(:status, Shapes::ShapeRef.new(shape: PaymentRequestStatus, location_name: "status"))
+    SendAgreementPaymentRequestOutput.add_member(:name, Shapes::ShapeRef.new(shape: PaymentRequestName, location_name: "name"))
+    SendAgreementPaymentRequestOutput.add_member(:description, Shapes::ShapeRef.new(shape: PaymentRequestDescription, location_name: "description"))
+    SendAgreementPaymentRequestOutput.add_member(:charge_amount, Shapes::ShapeRef.new(shape: PositiveAmountUpto8Decimals, location_name: "chargeAmount"))
+    SendAgreementPaymentRequestOutput.add_member(:currency_code, Shapes::ShapeRef.new(shape: CurrencyCode, location_name: "currencyCode"))
+    SendAgreementPaymentRequestOutput.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdAt"))
+    SendAgreementPaymentRequestOutput.struct_class = Types::SendAgreementPaymentRequestOutput
 
     Sort.add_member(:sort_by, Shapes::ShapeRef.new(shape: SortBy, location_name: "sortBy"))
     Sort.add_member(:sort_order, Shapes::ShapeRef.new(shape: SortOrder, location_name: "sortOrder"))
@@ -386,12 +723,79 @@ module Aws::MarketplaceAgreement
         "uid" => "marketplace-agreement-2020-03-01",
       }
 
+      api.add_operation(:batch_create_billing_adjustment_request, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "BatchCreateBillingAdjustmentRequest"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: BatchCreateBillingAdjustmentRequestInput)
+        o.output = Shapes::ShapeRef.new(shape: BatchCreateBillingAdjustmentRequestOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:cancel_agreement_cancellation_request, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CancelAgreementCancellationRequest"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CancelAgreementCancellationRequestInput)
+        o.output = Shapes::ShapeRef.new(shape: CancelAgreementCancellationRequestOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:cancel_agreement_payment_request, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CancelAgreementPaymentRequest"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CancelAgreementPaymentRequestInput)
+        o.output = Shapes::ShapeRef.new(shape: CancelAgreementPaymentRequestOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
       api.add_operation(:describe_agreement, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeAgreement"
         o.http_method = "POST"
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeAgreementInput)
         o.output = Shapes::ShapeRef.new(shape: DescribeAgreementOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:get_agreement_cancellation_request, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetAgreementCancellationRequest"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetAgreementCancellationRequestInput)
+        o.output = Shapes::ShapeRef.new(shape: GetAgreementCancellationRequestOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:get_agreement_payment_request, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetAgreementPaymentRequest"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetAgreementPaymentRequestInput)
+        o.output = Shapes::ShapeRef.new(shape: GetAgreementPaymentRequestOutput)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -418,6 +822,92 @@ module Aws::MarketplaceAgreement
         )
       end)
 
+      api.add_operation(:get_billing_adjustment_request, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetBillingAdjustmentRequest"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetBillingAdjustmentRequestInput)
+        o.output = Shapes::ShapeRef.new(shape: GetBillingAdjustmentRequestOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:list_agreement_cancellation_requests, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListAgreementCancellationRequests"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListAgreementCancellationRequestsInput)
+        o.output = Shapes::ShapeRef.new(shape: ListAgreementCancellationRequestsOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_agreement_invoice_line_items, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListAgreementInvoiceLineItems"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListAgreementInvoiceLineItemsInput)
+        o.output = Shapes::ShapeRef.new(shape: ListAgreementInvoiceLineItemsOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_agreement_payment_requests, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListAgreementPaymentRequests"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListAgreementPaymentRequestsInput)
+        o.output = Shapes::ShapeRef.new(shape: ListAgreementPaymentRequestsOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_billing_adjustment_requests, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListBillingAdjustmentRequests"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListBillingAdjustmentRequestsInput)
+        o.output = Shapes::ShapeRef.new(shape: ListBillingAdjustmentRequestsOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:search_agreements, Seahorse::Model::Operation.new.tap do |o|
         o.name = "SearchAgreements"
         o.http_method = "POST"
@@ -434,6 +924,34 @@ module Aws::MarketplaceAgreement
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:send_agreement_cancellation_request, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "SendAgreementCancellationRequest"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: SendAgreementCancellationRequestInput)
+        o.output = Shapes::ShapeRef.new(shape: SendAgreementCancellationRequestOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:send_agreement_payment_request, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "SendAgreementPaymentRequest"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: SendAgreementPaymentRequestInput)
+        o.output = Shapes::ShapeRef.new(shape: SendAgreementPaymentRequestOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
     end
 

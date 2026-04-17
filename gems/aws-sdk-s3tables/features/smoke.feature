@@ -8,12 +8,12 @@
 Feature: Smoke tests for S3Tables
 
   @s3tables @smoke
-  Scenario: ListTables_AccessDeniedException
+  Scenario: GetTableBucket_AccessDeniedException
     Given I create a 'Aws::S3Tables' client with config:
       """
 {"region":"us-east-1","use_fips_endpoint":false,"use_dualstack_endpoint":false}
       """
-    When I call the operation 'list_tables' with params:
+    When I call the operation 'get_table_bucket' with params:
       """
 {"table_bucket_arn":"arn:aws:s3tables:us-east-1:123456789012:bucket/does-not-exist"}
       """
@@ -32,24 +32,24 @@ Feature: Smoke tests for S3Tables
     Then I expect a 'Aws::S3Tables::Errors::AccessDeniedException' was raised
 
   @s3tables @smoke
-  Scenario: GetTableBucket_AccessDeniedException
-    Given I create a 'Aws::S3Tables' client with config:
-      """
-{"region":"us-east-1","use_fips_endpoint":false,"use_dualstack_endpoint":false}
-      """
-    When I call the operation 'get_table_bucket' with params:
-      """
-{"table_bucket_arn":"arn:aws:s3tables:us-east-1:123456789012:bucket/does-not-exist"}
-      """
-    Then I expect a 'Aws::S3Tables::Errors::AccessDeniedException' was raised
-
-  @s3tables @smoke
   Scenario: ListNamespaces_AccessDeniedException
     Given I create a 'Aws::S3Tables' client with config:
       """
 {"region":"us-east-1","use_fips_endpoint":false,"use_dualstack_endpoint":false}
       """
     When I call the operation 'list_namespaces' with params:
+      """
+{"table_bucket_arn":"arn:aws:s3tables:us-east-1:123456789012:bucket/does-not-exist"}
+      """
+    Then I expect a 'Aws::S3Tables::Errors::AccessDeniedException' was raised
+
+  @s3tables @smoke
+  Scenario: ListTables_AccessDeniedException
+    Given I create a 'Aws::S3Tables' client with config:
+      """
+{"region":"us-east-1","use_fips_endpoint":false,"use_dualstack_endpoint":false}
+      """
+    When I call the operation 'list_tables' with params:
       """
 {"table_bucket_arn":"arn:aws:s3tables:us-east-1:123456789012:bucket/does-not-exist"}
       """

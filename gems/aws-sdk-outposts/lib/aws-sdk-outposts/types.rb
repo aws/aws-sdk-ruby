@@ -389,6 +389,9 @@ module Aws::Outposts
     #     Capacity for new compute resources is reduced. Amazon Web Services
     #     sends notifications for resources that must be stopped before the
     #     asset can be replaced.
+    #
+    #   * INSTALLING - The asset is being installed and can't yet provide
+    #     capacity for new compute resources.
     #   @return [String]
     #
     # @!attribute [rw] instance_families
@@ -568,6 +571,69 @@ module Aws::Outposts
     #
     class CreateOutpostOutput < Struct.new(
       :outpost)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] payment_option
+    #   The payment option.
+    #   @return [String]
+    #
+    # @!attribute [rw] payment_term
+    #   The payment term.
+    #   @return [String]
+    #
+    # @!attribute [rw] outpost_identifier
+    #   The ID or ARN of the Outpost.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/CreateRenewalInput AWS API Documentation
+    #
+    class CreateRenewalInput < Struct.new(
+      :payment_option,
+      :payment_term,
+      :outpost_identifier,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] payment_option
+    #   The payment option.
+    #   @return [String]
+    #
+    # @!attribute [rw] payment_term
+    #   The payment term.
+    #   @return [String]
+    #
+    # @!attribute [rw] outpost_id
+    #   The ID of the Outpost.
+    #   @return [String]
+    #
+    # @!attribute [rw] upfront_price
+    #   The upfront price of the renewal.
+    #   @return [Float]
+    #
+    # @!attribute [rw] monthly_recurring_price
+    #   The monthly recurring price of the renewal.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/CreateRenewalOutput AWS API Documentation
+    #
+    class CreateRenewalOutput < Struct.new(
+      :payment_option,
+      :payment_term,
+      :outpost_id,
+      :upfront_price,
+      :monthly_recurring_price)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -932,12 +998,22 @@ module Aws::Outposts
     #   charges.
     #   @return [String]
     #
+    # @!attribute [rw] payment_term
+    #   The payment term.
+    #   @return [String]
+    #
+    # @!attribute [rw] payment_option
+    #   The payment option.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/GetOutpostBillingInformationOutput AWS API Documentation
     #
     class GetOutpostBillingInformationOutput < Struct.new(
       :next_token,
       :subscriptions,
-      :contract_end_date)
+      :contract_end_date,
+      :payment_term,
+      :payment_option)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1061,6 +1137,35 @@ module Aws::Outposts
     class GetOutpostSupportedInstanceTypesOutput < Struct.new(
       :instance_types,
       :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] outpost_identifier
+    #   The ID or ARN of the Outpost.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/GetRenewalPricingInput AWS API Documentation
+    #
+    class GetRenewalPricingInput < Struct.new(
+      :outpost_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] pricing_result
+    #   The result of the pricing request.
+    #   @return [String]
+    #
+    # @!attribute [rw] pricing_options
+    #   The pricing options for the specified Outpost.
+    #   @return [Array<Types::PricingOption>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/GetRenewalPricingOutput AWS API Documentation
+    #
+    class GetRenewalPricingOutput < Struct.new(
+      :pricing_result,
+      :pricing_options)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1376,6 +1481,21 @@ module Aws::Outposts
     #   Filters the results by state.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] asset_type_filter
+    #   Filters the results by asset type.
+    #
+    #   * COMPUTE - Server asset used for customer compute
+    #
+    #   * STORAGE - Server asset used by storage services
+    #
+    #   * POWERSHELF - Powershelf assets
+    #
+    #   * SWITCH - Switch assets
+    #
+    #   * NETWORKING - Asset managed by Amazon Web Services for networking
+    #     purposes
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/ListAssetsInput AWS API Documentation
     #
     class ListAssetsInput < Struct.new(
@@ -1383,7 +1503,8 @@ module Aws::Outposts
       :host_id_filter,
       :max_results,
       :next_token,
-      :status_filter)
+      :status_filter,
+      :asset_type_filter)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1922,6 +2043,25 @@ module Aws::Outposts
       include Aws::Structure
     end
 
+    # A pricing option for the specified Outpost.
+    #
+    # @!attribute [rw] pricing_type
+    #   The type of pricing model.
+    #   @return [String]
+    #
+    # @!attribute [rw] subscription_pricing_details
+    #   The subscription pricing details for this pricing option.
+    #   @return [Types::SubscriptionPricingDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/PricingOption AWS API Documentation
+    #
+    class PricingOption < Struct.new(
+      :pricing_type,
+      :subscription_pricing_details)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information about the physical and logistical details for racks at
     # sites. For more information about hardware requirements for racks, see
     # [Network readiness checklist][1] in the Amazon Web Services Outposts
@@ -2336,6 +2476,10 @@ module Aws::Outposts
     #   * **ACTIVE** - Subscription requests that are in progress and have
     #     an end date in the future.
     #
+    #   * **PENDING** - Subscription has been created but billing has not
+    #     yet commenced because the subscription begin date has not been
+    #     reached.
+    #
     #   * **CANCELLED** - Subscription requests that are cancelled.
     #   @return [String]
     #
@@ -2371,6 +2515,35 @@ module Aws::Outposts
       :end_date,
       :monthly_recurring_price,
       :upfront_price)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The pricing details for a subscription.
+    #
+    # @!attribute [rw] payment_option
+    #   The payment option.
+    #   @return [String]
+    #
+    # @!attribute [rw] payment_term
+    #   The payment term.
+    #   @return [String]
+    #
+    # @!attribute [rw] upfront_price
+    #   The upfront price.
+    #   @return [Float]
+    #
+    # @!attribute [rw] monthly_recurring_price
+    #   The monthly recurring price.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/SubscriptionPricingDetails AWS API Documentation
+    #
+    class SubscriptionPricingDetails < Struct.new(
+      :payment_option,
+      :payment_term,
+      :upfront_price,
+      :monthly_recurring_price)
       SENSITIVE = []
       include Aws::Structure
     end

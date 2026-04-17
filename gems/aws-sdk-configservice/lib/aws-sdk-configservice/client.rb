@@ -5442,7 +5442,7 @@ module Aws::ConfigService
     #     organization_managed_rule_metadata: {
     #       description: "StringWithCharLimit256Min0",
     #       rule_identifier: "StringWithCharLimit256", # required
-    #       input_parameters: "StringWithCharLimit2048",
+    #       input_parameters: "StringWithCharLimit1024",
     #       maximum_execution_frequency: "One_Hour", # accepts One_Hour, Three_Hours, Six_Hours, Twelve_Hours, TwentyFour_Hours
     #       resource_types_scope: ["StringWithCharLimit256"],
     #       resource_id_scope: "StringWithCharLimit768",
@@ -5453,7 +5453,7 @@ module Aws::ConfigService
     #       description: "StringWithCharLimit256Min0",
     #       lambda_function_arn: "StringWithCharLimit256", # required
     #       organization_config_rule_trigger_types: ["ConfigurationItemChangeNotification"], # required, accepts ConfigurationItemChangeNotification, OversizedConfigurationItemChangeNotification, ScheduledNotification
-    #       input_parameters: "StringWithCharLimit2048",
+    #       input_parameters: "StringWithCharLimit1024",
     #       maximum_execution_frequency: "One_Hour", # accepts One_Hour, Three_Hours, Six_Hours, Twelve_Hours, TwentyFour_Hours
     #       resource_types_scope: ["StringWithCharLimit256"],
     #       resource_id_scope: "StringWithCharLimit768",
@@ -5464,7 +5464,7 @@ module Aws::ConfigService
     #     organization_custom_policy_rule_metadata: {
     #       description: "StringWithCharLimit256Min0",
     #       organization_config_rule_trigger_types: ["ConfigurationItemChangeNotification"], # accepts ConfigurationItemChangeNotification, OversizedConfigurationItemChangeNotification
-    #       input_parameters: "StringWithCharLimit2048",
+    #       input_parameters: "StringWithCharLimit1024",
     #       maximum_execution_frequency: "One_Hour", # accepts One_Hour, Three_Hours, Six_Hours, Twelve_Hours, TwentyFour_Hours
     #       resource_types_scope: ["StringWithCharLimit256"],
     #       resource_id_scope: "StringWithCharLimit768",
@@ -6638,7 +6638,7 @@ module Aws::ConfigService
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-configservice'
-      context[:gem_version] = '1.146.0'
+      context[:gem_version] = '1.148.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -136,6 +136,7 @@ module Aws::DLM
       attr_accessor interval: ::Integer
       attr_accessor interval_unit: ("DAYS" | "WEEKS" | "MONTHS" | "YEARS")
       attr_accessor availability_zones: ::Array[::String]
+      attr_accessor availability_zone_ids: ::Array[::String]
       SENSITIVE: []
     end
 

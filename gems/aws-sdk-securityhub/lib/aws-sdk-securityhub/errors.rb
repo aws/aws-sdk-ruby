@@ -34,6 +34,8 @@ module Aws::SecurityHub
   # * {InvalidAccessException}
   # * {InvalidInputException}
   # * {LimitExceededException}
+  # * {OrganizationNotFoundException}
+  # * {OrganizationalUnitNotFoundException}
   # * {ResourceConflictException}
   # * {ResourceInUseException}
   # * {ResourceNotFoundException}
@@ -172,6 +174,46 @@ module Aws::SecurityHub
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::SecurityHub::Types::LimitExceededException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+
+      # @return [String]
+      def code
+        @code || @data[:code]
+      end
+    end
+
+    class OrganizationNotFoundException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::SecurityHub::Types::OrganizationNotFoundException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+
+      # @return [String]
+      def code
+        @code || @data[:code]
+      end
+    end
+
+    class OrganizationalUnitNotFoundException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::SecurityHub::Types::OrganizationalUnitNotFoundException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

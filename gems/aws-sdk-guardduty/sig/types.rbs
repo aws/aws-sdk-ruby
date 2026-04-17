@@ -93,10 +93,10 @@ module Aws::GuardDuty
       attr_accessor network_connection_action: Types::NetworkConnectionAction
       attr_accessor port_probe_action: Types::PortProbeAction
       attr_accessor kubernetes_api_call_action: Types::KubernetesApiCallAction
-      attr_accessor rds_login_attempt_action: Types::RdsLoginAttemptAction
       attr_accessor kubernetes_permission_checked_details: Types::KubernetesPermissionCheckedDetails
       attr_accessor kubernetes_role_binding_details: Types::KubernetesRoleBindingDetails
       attr_accessor kubernetes_role_details: Types::KubernetesRoleDetails
+      attr_accessor rds_login_attempt_action: Types::RdsLoginAttemptAction
       SENSITIVE: []
     end
 
@@ -329,7 +329,7 @@ module Aws::GuardDuty
     end
 
     class CoverageFilterCriterion
-      attr_accessor criterion_key: ("ACCOUNT_ID" | "CLUSTER_NAME" | "RESOURCE_TYPE" | "COVERAGE_STATUS" | "ADDON_VERSION" | "MANAGEMENT_TYPE" | "EKS_CLUSTER_NAME" | "ECS_CLUSTER_NAME" | "AGENT_VERSION" | "INSTANCE_ID" | "CLUSTER_ARN")
+      attr_accessor criterion_key: ("ACCOUNT_ID" | "RESOURCE_TYPE" | "COVERAGE_STATUS" | "ADDON_VERSION" | "CLUSTER_NAME" | "ECS_CLUSTER_NAME" | "MANAGEMENT_TYPE" | "EKS_CLUSTER_NAME" | "AGENT_VERSION" | "INSTANCE_ID" | "CLUSTER_ARN")
       attr_accessor filter_condition: Types::CoverageFilterCondition
       SENSITIVE: []
     end
@@ -347,14 +347,14 @@ module Aws::GuardDuty
 
     class CoverageResourceDetails
       attr_accessor eks_cluster_details: Types::CoverageEksClusterDetails
-      attr_accessor resource_type: ("EKS" | "ECS" | "EC2")
       attr_accessor ecs_cluster_details: Types::CoverageEcsClusterDetails
       attr_accessor ec2_instance_details: Types::CoverageEc2InstanceDetails
+      attr_accessor resource_type: ("EKS" | "ECS" | "EC2")
       SENSITIVE: []
     end
 
     class CoverageSortCriteria
-      attr_accessor attribute_name: ("ACCOUNT_ID" | "CLUSTER_NAME" | "COVERAGE_STATUS" | "ISSUE" | "ADDON_VERSION" | "UPDATED_AT" | "EKS_CLUSTER_NAME" | "ECS_CLUSTER_NAME" | "INSTANCE_ID")
+      attr_accessor attribute_name: ("ACCOUNT_ID" | "COVERAGE_STATUS" | "ISSUE" | "ADDON_VERSION" | "UPDATED_AT" | "CLUSTER_NAME" | "EKS_CLUSTER_NAME" | "ECS_CLUSTER_NAME" | "INSTANCE_ID")
       attr_accessor order_by: ("ASC" | "DESC")
       SENSITIVE: []
     end
@@ -755,14 +755,14 @@ module Aws::GuardDuty
     end
 
     class DetectorFeatureConfiguration
-      attr_accessor name: ("S3_DATA_EVENTS" | "EKS_AUDIT_LOGS" | "EBS_MALWARE_PROTECTION" | "RDS_LOGIN_EVENTS" | "EKS_RUNTIME_MONITORING" | "LAMBDA_NETWORK_LOGS" | "RUNTIME_MONITORING")
+      attr_accessor name: ("S3_DATA_EVENTS" | "EKS_AUDIT_LOGS" | "EBS_MALWARE_PROTECTION" | "RDS_LOGIN_EVENTS" | "LAMBDA_NETWORK_LOGS" | "EKS_RUNTIME_MONITORING" | "RUNTIME_MONITORING")
       attr_accessor status: ("ENABLED" | "DISABLED")
       attr_accessor additional_configuration: ::Array[Types::DetectorAdditionalConfiguration]
       SENSITIVE: []
     end
 
     class DetectorFeatureConfigurationResult
-      attr_accessor name: ("FLOW_LOGS" | "CLOUD_TRAIL" | "DNS_LOGS" | "S3_DATA_EVENTS" | "EKS_AUDIT_LOGS" | "EBS_MALWARE_PROTECTION" | "RDS_LOGIN_EVENTS" | "EKS_RUNTIME_MONITORING" | "LAMBDA_NETWORK_LOGS" | "RUNTIME_MONITORING")
+      attr_accessor name: ("FLOW_LOGS" | "CLOUD_TRAIL" | "DNS_LOGS" | "S3_DATA_EVENTS" | "EKS_AUDIT_LOGS" | "EBS_MALWARE_PROTECTION" | "RDS_LOGIN_EVENTS" | "LAMBDA_NETWORK_LOGS" | "EKS_RUNTIME_MONITORING" | "RUNTIME_MONITORING")
       attr_accessor status: ("ENABLED" | "DISABLED")
       attr_accessor updated_at: ::Time
       attr_accessor additional_configuration: ::Array[Types::DetectorAdditionalConfigurationResult]
@@ -1040,7 +1040,7 @@ module Aws::GuardDuty
     end
 
     class FreeTrialFeatureConfigurationResult
-      attr_accessor name: ("FLOW_LOGS" | "CLOUD_TRAIL" | "DNS_LOGS" | "S3_DATA_EVENTS" | "EKS_AUDIT_LOGS" | "EBS_MALWARE_PROTECTION" | "RDS_LOGIN_EVENTS" | "EKS_RUNTIME_MONITORING" | "LAMBDA_NETWORK_LOGS" | "FARGATE_RUNTIME_MONITORING" | "EC2_RUNTIME_MONITORING")
+      attr_accessor name: ("FLOW_LOGS" | "CLOUD_TRAIL" | "DNS_LOGS" | "S3_DATA_EVENTS" | "EKS_AUDIT_LOGS" | "EBS_MALWARE_PROTECTION" | "RDS_LOGIN_EVENTS" | "LAMBDA_NETWORK_LOGS" | "EKS_RUNTIME_MONITORING" | "EC2_RUNTIME_MONITORING" | "FARGATE_RUNTIME_MONITORING")
       attr_accessor free_trial_days_remaining: ::Integer
       SENSITIVE: []
     end
@@ -1380,7 +1380,7 @@ module Aws::GuardDuty
     end
 
     class Indicator
-      attr_accessor key: ("SUSPICIOUS_USER_AGENT" | "SUSPICIOUS_NETWORK" | "MALICIOUS_IP" | "TOR_IP" | "ATTACK_TACTIC" | "HIGH_RISK_API" | "ATTACK_TECHNIQUE" | "UNUSUAL_API_FOR_ACCOUNT" | "UNUSUAL_ASN_FOR_ACCOUNT" | "UNUSUAL_ASN_FOR_USER" | "SUSPICIOUS_PROCESS" | "MALICIOUS_DOMAIN" | "MALICIOUS_PROCESS" | "CRYPTOMINING_IP" | "CRYPTOMINING_DOMAIN" | "CRYPTOMINING_PROCESS")
+      attr_accessor key: ("SUSPICIOUS_USER_AGENT" | "SUSPICIOUS_NETWORK" | "MALICIOUS_IP" | "TOR_IP" | "ATTACK_TACTIC" | "HIGH_RISK_API" | "ATTACK_TECHNIQUE" | "UNUSUAL_API_FOR_ACCOUNT" | "UNUSUAL_ASN_FOR_ACCOUNT" | "UNUSUAL_ASN_FOR_USER" | "SUSPICIOUS_PROCESS" | "MALICIOUS_DOMAIN" | "MALICIOUS_PROCESS" | "CRYPTOMINING_IP" | "CRYPTOMINING_DOMAIN" | "CRYPTOMINING_PROCESS" | "MALICIOUS_FILE")
       attr_accessor values: ::Array[::String]
       attr_accessor title: ::String
       SENSITIVE: []
@@ -1447,15 +1447,15 @@ module Aws::GuardDuty
     class KubernetesApiCallAction
       attr_accessor request_uri: ::String
       attr_accessor verb: ::String
+      attr_accessor resource: ::String
+      attr_accessor subresource: ::String
+      attr_accessor namespace: ::String
+      attr_accessor resource_name: ::String
       attr_accessor source_ips: ::Array[::String]
       attr_accessor user_agent: ::String
       attr_accessor remote_ip_details: Types::RemoteIpDetails
       attr_accessor status_code: ::Integer
       attr_accessor parameters: ::String
-      attr_accessor resource: ::String
-      attr_accessor subresource: ::String
-      attr_accessor namespace: ::String
-      attr_accessor resource_name: ::String
       SENSITIVE: []
     end
 
@@ -1536,9 +1536,9 @@ module Aws::GuardDuty
       attr_accessor uid: ::String
       attr_accessor namespace: ::String
       attr_accessor host_network: bool
+      attr_accessor service_account_name: ::String
       attr_accessor containers: ::Array[Types::Container]
       attr_accessor volumes: ::Array[Types::Volume]
-      attr_accessor service_account_name: ::String
       attr_accessor host_ipc: bool
       attr_accessor host_pid: bool
       SENSITIVE: []
@@ -1900,14 +1900,14 @@ module Aws::GuardDuty
     end
 
     class MemberFeaturesConfiguration
-      attr_accessor name: ("S3_DATA_EVENTS" | "EKS_AUDIT_LOGS" | "EBS_MALWARE_PROTECTION" | "RDS_LOGIN_EVENTS" | "EKS_RUNTIME_MONITORING" | "LAMBDA_NETWORK_LOGS" | "RUNTIME_MONITORING")
+      attr_accessor name: ("S3_DATA_EVENTS" | "EKS_AUDIT_LOGS" | "EBS_MALWARE_PROTECTION" | "RDS_LOGIN_EVENTS" | "LAMBDA_NETWORK_LOGS" | "EKS_RUNTIME_MONITORING" | "RUNTIME_MONITORING")
       attr_accessor status: ("ENABLED" | "DISABLED")
       attr_accessor additional_configuration: ::Array[Types::MemberAdditionalConfiguration]
       SENSITIVE: []
     end
 
     class MemberFeaturesConfigurationResult
-      attr_accessor name: ("S3_DATA_EVENTS" | "EKS_AUDIT_LOGS" | "EBS_MALWARE_PROTECTION" | "RDS_LOGIN_EVENTS" | "EKS_RUNTIME_MONITORING" | "LAMBDA_NETWORK_LOGS" | "RUNTIME_MONITORING")
+      attr_accessor name: ("S3_DATA_EVENTS" | "EKS_AUDIT_LOGS" | "EBS_MALWARE_PROTECTION" | "RDS_LOGIN_EVENTS" | "LAMBDA_NETWORK_LOGS" | "EKS_RUNTIME_MONITORING" | "RUNTIME_MONITORING")
       attr_accessor status: ("ENABLED" | "DISABLED")
       attr_accessor updated_at: ::Time
       attr_accessor additional_configuration: ::Array[Types::MemberAdditionalConfigurationResult]
@@ -2020,21 +2020,21 @@ module Aws::GuardDuty
     end
 
     class OrganizationFeatureConfiguration
-      attr_accessor name: ("S3_DATA_EVENTS" | "EKS_AUDIT_LOGS" | "EBS_MALWARE_PROTECTION" | "RDS_LOGIN_EVENTS" | "EKS_RUNTIME_MONITORING" | "LAMBDA_NETWORK_LOGS" | "RUNTIME_MONITORING")
+      attr_accessor name: ("S3_DATA_EVENTS" | "EKS_AUDIT_LOGS" | "EBS_MALWARE_PROTECTION" | "RDS_LOGIN_EVENTS" | "LAMBDA_NETWORK_LOGS" | "EKS_RUNTIME_MONITORING" | "RUNTIME_MONITORING")
       attr_accessor auto_enable: ("NEW" | "NONE" | "ALL")
       attr_accessor additional_configuration: ::Array[Types::OrganizationAdditionalConfiguration]
       SENSITIVE: []
     end
 
     class OrganizationFeatureConfigurationResult
-      attr_accessor name: ("S3_DATA_EVENTS" | "EKS_AUDIT_LOGS" | "EBS_MALWARE_PROTECTION" | "RDS_LOGIN_EVENTS" | "EKS_RUNTIME_MONITORING" | "LAMBDA_NETWORK_LOGS" | "RUNTIME_MONITORING")
+      attr_accessor name: ("S3_DATA_EVENTS" | "EKS_AUDIT_LOGS" | "EBS_MALWARE_PROTECTION" | "RDS_LOGIN_EVENTS" | "LAMBDA_NETWORK_LOGS" | "EKS_RUNTIME_MONITORING" | "RUNTIME_MONITORING")
       attr_accessor auto_enable: ("NEW" | "NONE" | "ALL")
       attr_accessor additional_configuration: ::Array[Types::OrganizationAdditionalConfigurationResult]
       SENSITIVE: []
     end
 
     class OrganizationFeatureStatistics
-      attr_accessor name: ("S3_DATA_EVENTS" | "EKS_AUDIT_LOGS" | "EBS_MALWARE_PROTECTION" | "RDS_LOGIN_EVENTS" | "EKS_RUNTIME_MONITORING" | "LAMBDA_NETWORK_LOGS" | "RUNTIME_MONITORING")
+      attr_accessor name: ("S3_DATA_EVENTS" | "EKS_AUDIT_LOGS" | "EBS_MALWARE_PROTECTION" | "RDS_LOGIN_EVENTS" | "LAMBDA_NETWORK_LOGS" | "EKS_RUNTIME_MONITORING" | "RUNTIME_MONITORING")
       attr_accessor enabled_accounts_count: ::Integer
       attr_accessor additional_configuration: ::Array[Types::OrganizationFeatureStatisticsAdditionalConfiguration]
       SENSITIVE: []
@@ -2252,10 +2252,10 @@ module Aws::GuardDuty
       attr_accessor ebs_volume_details: Types::EbsVolumeDetails
       attr_accessor ecs_cluster_details: Types::EcsClusterDetails
       attr_accessor container_details: Types::Container
+      attr_accessor lambda_details: Types::LambdaDetails
       attr_accessor rds_db_instance_details: Types::RdsDbInstanceDetails
       attr_accessor rds_limitless_db_details: Types::RdsLimitlessDbDetails
       attr_accessor rds_db_user_details: Types::RdsDbUserDetails
-      attr_accessor lambda_details: Types::LambdaDetails
       attr_accessor ebs_snapshot_details: Types::EbsSnapshotDetails
       attr_accessor ec2_image_details: Types::Ec2ImageDetails
       attr_accessor recovery_point_details: Types::RecoveryPointDetails
@@ -2917,7 +2917,7 @@ module Aws::GuardDuty
       attr_accessor account_ids: ::Array[::String]
       attr_accessor data_sources: ::Array[("FLOW_LOGS" | "CLOUD_TRAIL" | "DNS_LOGS" | "S3_LOGS" | "KUBERNETES_AUDIT_LOGS" | "EC2_MALWARE_SCAN")]
       attr_accessor resources: ::Array[::String]
-      attr_accessor features: ::Array[("FLOW_LOGS" | "CLOUD_TRAIL" | "DNS_LOGS" | "S3_DATA_EVENTS" | "EKS_AUDIT_LOGS" | "EBS_MALWARE_PROTECTION" | "RDS_LOGIN_EVENTS" | "LAMBDA_NETWORK_LOGS" | "EKS_RUNTIME_MONITORING" | "FARGATE_RUNTIME_MONITORING" | "EC2_RUNTIME_MONITORING" | "RDS_DBI_PROTECTION_PROVISIONED" | "RDS_DBI_PROTECTION_SERVERLESS")]
+      attr_accessor features: ::Array[("FLOW_LOGS" | "CLOUD_TRAIL" | "DNS_LOGS" | "S3_DATA_EVENTS" | "EKS_AUDIT_LOGS" | "EBS_MALWARE_PROTECTION" | "RDS_LOGIN_EVENTS" | "LAMBDA_NETWORK_LOGS" | "EKS_RUNTIME_MONITORING" | "EC2_RUNTIME_MONITORING" | "FARGATE_RUNTIME_MONITORING" | "RDS_DBI_PROTECTION_PROVISIONED" | "RDS_DBI_PROTECTION_SERVERLESS")]
       SENSITIVE: []
     end
 
@@ -2928,7 +2928,7 @@ module Aws::GuardDuty
     end
 
     class UsageFeatureResult
-      attr_accessor feature: ("FLOW_LOGS" | "CLOUD_TRAIL" | "DNS_LOGS" | "S3_DATA_EVENTS" | "EKS_AUDIT_LOGS" | "EBS_MALWARE_PROTECTION" | "RDS_LOGIN_EVENTS" | "LAMBDA_NETWORK_LOGS" | "EKS_RUNTIME_MONITORING" | "FARGATE_RUNTIME_MONITORING" | "EC2_RUNTIME_MONITORING" | "RDS_DBI_PROTECTION_PROVISIONED" | "RDS_DBI_PROTECTION_SERVERLESS")
+      attr_accessor feature: ("FLOW_LOGS" | "CLOUD_TRAIL" | "DNS_LOGS" | "S3_DATA_EVENTS" | "EKS_AUDIT_LOGS" | "EBS_MALWARE_PROTECTION" | "RDS_LOGIN_EVENTS" | "LAMBDA_NETWORK_LOGS" | "EKS_RUNTIME_MONITORING" | "EC2_RUNTIME_MONITORING" | "FARGATE_RUNTIME_MONITORING" | "RDS_DBI_PROTECTION_PROVISIONED" | "RDS_DBI_PROTECTION_SERVERLESS")
       attr_accessor total: Types::Total
       SENSITIVE: []
     end
@@ -2956,7 +2956,7 @@ module Aws::GuardDuty
     end
 
     class UsageTopAccountsResult
-      attr_accessor feature: ("FLOW_LOGS" | "CLOUD_TRAIL" | "DNS_LOGS" | "S3_DATA_EVENTS" | "EKS_AUDIT_LOGS" | "EBS_MALWARE_PROTECTION" | "RDS_LOGIN_EVENTS" | "LAMBDA_NETWORK_LOGS" | "EKS_RUNTIME_MONITORING" | "FARGATE_RUNTIME_MONITORING" | "EC2_RUNTIME_MONITORING" | "RDS_DBI_PROTECTION_PROVISIONED" | "RDS_DBI_PROTECTION_SERVERLESS")
+      attr_accessor feature: ("FLOW_LOGS" | "CLOUD_TRAIL" | "DNS_LOGS" | "S3_DATA_EVENTS" | "EKS_AUDIT_LOGS" | "EBS_MALWARE_PROTECTION" | "RDS_LOGIN_EVENTS" | "LAMBDA_NETWORK_LOGS" | "EKS_RUNTIME_MONITORING" | "EC2_RUNTIME_MONITORING" | "FARGATE_RUNTIME_MONITORING" | "RDS_DBI_PROTECTION_PROVISIONED" | "RDS_DBI_PROTECTION_SERVERLESS")
       attr_accessor accounts: ::Array[Types::UsageTopAccountResult]
       SENSITIVE: []
     end

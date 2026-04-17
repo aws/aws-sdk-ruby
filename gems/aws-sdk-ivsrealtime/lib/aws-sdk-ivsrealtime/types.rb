@@ -413,6 +413,11 @@ module Aws::IVSRealTime
     #   `true`, if `ingestProtocol` is set to `RTMP`. Default: `false`.
     #   @return [Boolean]
     #
+    # @!attribute [rw] redundant_ingest
+    #   Indicates whether redundant ingest is enabled for the ingest
+    #   configuration. Default: `false`.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] tags
     #   Tags attached to the resource. Array of maps, each of the form
     #   `string:string (key:value)`. See [Best practices and strategies][1]
@@ -435,6 +440,7 @@ module Aws::IVSRealTime
       :attributes,
       :ingest_protocol,
       :insecure_ingest,
+      :redundant_ingest,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -1421,6 +1427,21 @@ module Aws::IVSRealTime
     #   information.*
     #   @return [String]
     #
+    # @!attribute [rw] redundant_ingest
+    #   Indicates whether redundant ingest is enabled for the ingest
+    #   configuration.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] redundant_ingest_credentials
+    #   A list of redundant ingest credentials, present only when
+    #   `redundantIngest` is set to `true`. See [Redundant Ingest][1] in
+    #   *IVS RTMP Publishing* for details.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/ivs/latest/RealTimeUserGuide/rt-rtmp-publishing.html#redundant-ingest
+    #   @return [Array<Types::RedundantIngestCredential>]
+    #
     # @!attribute [rw] attributes
     #   Application-provided attributes to to store in the
     #   IngestConfiguration and attach to a stage. Map keys and values can
@@ -1454,6 +1475,8 @@ module Aws::IVSRealTime
       :participant_id,
       :state,
       :user_id,
+      :redundant_ingest,
+      :redundant_ingest_credentials,
       :attributes,
       :tags)
       SENSITIVE = [:stream_key]
@@ -1497,6 +1520,11 @@ module Aws::IVSRealTime
     #   information.*
     #   @return [String]
     #
+    # @!attribute [rw] redundant_ingest
+    #   Indicates whether redundant ingest is enabled for the ingest
+    #   configuration.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/IngestConfigurationSummary AWS API Documentation
     #
     class IngestConfigurationSummary < Struct.new(
@@ -1506,7 +1534,8 @@ module Aws::IVSRealTime
       :stage_arn,
       :participant_id,
       :state,
-      :user_id)
+      :user_id,
+      :redundant_ingest)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2172,6 +2201,14 @@ module Aws::IVSRealTime
     #   `REPLICA`.
     #   @return [String]
     #
+    # @!attribute [rw] redundant_ingest
+    #   Indicates whether redundant ingest is enabled for the participant.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] ingest_configuration_arn
+    #   The participant’s ingest configuration.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/Participant AWS API Documentation
     #
     class Participant < Struct.new(
@@ -2194,7 +2231,9 @@ module Aws::IVSRealTime
       :replication_type,
       :replication_state,
       :source_stage_arn,
-      :source_session_id)
+      :source_session_id,
+      :redundant_ingest,
+      :ingest_configuration_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2313,6 +2352,14 @@ module Aws::IVSRealTime
     #   `REPLICA`.
     #   @return [String]
     #
+    # @!attribute [rw] redundant_ingest
+    #   Indicates whether redundant ingest is enabled for the participant.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] ingest_configuration_arn
+    #   The participant’s ingest configuration.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/ParticipantSummary AWS API Documentation
     #
     class ParticipantSummary < Struct.new(
@@ -2325,7 +2372,9 @@ module Aws::IVSRealTime
       :replication_type,
       :replication_state,
       :source_stage_arn,
-      :source_session_id)
+      :source_session_id,
+      :redundant_ingest,
+      :ingest_configuration_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2688,6 +2737,25 @@ module Aws::IVSRealTime
       :hls_configuration,
       :format)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object representing a redundant ingest credential.
+    #
+    # @!attribute [rw] participant_id
+    #   ID of the participant within the stage.
+    #   @return [String]
+    #
+    # @!attribute [rw] stream_key
+    #   Ingest-key value.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/RedundantIngestCredential AWS API Documentation
+    #
+    class RedundantIngestCredential < Struct.new(
+      :participant_id,
+      :stream_key)
+      SENSITIVE = [:stream_key]
       include Aws::Structure
     end
 
@@ -3128,24 +3196,59 @@ module Aws::IVSRealTime
     end
 
     # @!attribute [rw] access_control_allow_origin
+    #   See [Access-Control-Allow-Origin][1] in the MDN Web Docs.
+    #
+    #
+    #
+    #   [1]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Access-Control-Allow-Origin
     #   @return [String]
     #
     # @!attribute [rw] access_control_expose_headers
+    #   See [Access-Control-Expose-Headers][1] in the MDN Web Docs.
+    #
+    #
+    #
+    #   [1]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Access-Control-Expose-Headers
     #   @return [String]
     #
     # @!attribute [rw] cache_control
+    #   See [Cache-Control][1] in the MDN Web Docs.
+    #
+    #
+    #
+    #   [1]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Cache-Control
     #   @return [String]
     #
     # @!attribute [rw] content_security_policy
+    #   See [Content-Security-Policy][1] in the MDN Web Docs.
+    #
+    #
+    #
+    #   [1]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Content-Security-Policy
     #   @return [String]
     #
     # @!attribute [rw] strict_transport_security
+    #   See [Strict-Transport-Security][1] in the MDN Web Docs.
+    #
+    #
+    #
+    #   [1]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Strict-Transport-Security
     #   @return [String]
     #
     # @!attribute [rw] x_content_type_options
+    #   See [X-Content-Type-Options][1] in the MDN Web Docs.
+    #
+    #
+    #
+    #   [1]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/X-Content-Type-Options
     #   @return [String]
     #
     # @!attribute [rw] x_frame_options
+    #   See [X-Frame-Options][1] in the MDN Web Docs.
+    #
+    #
+    #
+    #   [1]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/X-Frame-Options
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/StartParticipantReplicationResponse AWS API Documentation
@@ -3207,24 +3310,59 @@ module Aws::IVSRealTime
     end
 
     # @!attribute [rw] access_control_allow_origin
+    #   See [Access-Control-Allow-Origin][1] in the MDN Web Docs.
+    #
+    #
+    #
+    #   [1]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Access-Control-Allow-Origin
     #   @return [String]
     #
     # @!attribute [rw] access_control_expose_headers
+    #   See [Access-Control-Expose-Headers][1] in the MDN Web Docs.
+    #
+    #
+    #
+    #   [1]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Access-Control-Expose-Headers
     #   @return [String]
     #
     # @!attribute [rw] cache_control
+    #   See [Cache-Control][1] in the MDN Web Docs.
+    #
+    #
+    #
+    #   [1]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Cache-Control
     #   @return [String]
     #
     # @!attribute [rw] content_security_policy
+    #   See [Content-Security-Policy][1] in the MDN Web Docs.
+    #
+    #
+    #
+    #   [1]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Content-Security-Policy
     #   @return [String]
     #
     # @!attribute [rw] strict_transport_security
+    #   See [Strict-Transport-Security][1] in the MDN Web Docs.
+    #
+    #
+    #
+    #   [1]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Strict-Transport-Security
     #   @return [String]
     #
     # @!attribute [rw] x_content_type_options
+    #   See [X-Content-Type-Options][1] in the MDN Web Docs.
+    #
+    #
+    #
+    #   [1]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/X-Content-Type-Options
     #   @return [String]
     #
     # @!attribute [rw] x_frame_options
+    #   See [X-Frame-Options][1] in the MDN Web Docs.
+    #
+    #
+    #
+    #   [1]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/X-Frame-Options
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/StopParticipantReplicationResponse AWS API Documentation
@@ -3388,11 +3526,17 @@ module Aws::IVSRealTime
     #   Stage ARN that needs to be updated.
     #   @return [String]
     #
+    # @!attribute [rw] redundant_ingest
+    #   Indicates whether redundant ingest is enabled for the ingest
+    #   configuration. Default: `false`.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/UpdateIngestConfigurationRequest AWS API Documentation
     #
     class UpdateIngestConfigurationRequest < Struct.new(
       :arn,
-      :stage_arn)
+      :stage_arn,
+      :redundant_ingest)
       SENSITIVE = []
       include Aws::Structure
     end

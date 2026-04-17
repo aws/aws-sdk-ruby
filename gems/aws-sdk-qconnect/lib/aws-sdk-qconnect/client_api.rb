@@ -533,6 +533,7 @@ module Aws::QConnect
     SemanticChunkingConfigurationBufferSizeInteger = Shapes::IntegerShape.new(name: 'SemanticChunkingConfigurationBufferSizeInteger')
     SemanticChunkingConfigurationMaxTokensInteger = Shapes::IntegerShape.new(name: 'SemanticChunkingConfigurationMaxTokensInteger')
     SendMessageRequest = Shapes::StructureShape.new(name: 'SendMessageRequest')
+    SendMessageRequestOriginRequestIdString = Shapes::StringShape.new(name: 'SendMessageRequestOriginRequestIdString')
     SendMessageResponse = Shapes::StructureShape.new(name: 'SendMessageResponse')
     SensitiveString = Shapes::StringShape.new(name: 'SensitiveString')
     ServerSideEncryptionConfiguration = Shapes::StructureShape.new(name: 'ServerSideEncryptionConfiguration')
@@ -558,6 +559,7 @@ module Aws::QConnect
     SpanMessageList = Shapes::ListShape.new(name: 'SpanMessageList')
     SpanMessageValue = Shapes::UnionShape.new(name: 'SpanMessageValue')
     SpanMessageValueList = Shapes::ListShape.new(name: 'SpanMessageValueList')
+    SpanOriginRequestIdString = Shapes::StringShape.new(name: 'SpanOriginRequestIdString')
     SpanStatus = Shapes::StringShape.new(name: 'SpanStatus')
     SpanTextValue = Shapes::StructureShape.new(name: 'SpanTextValue')
     SpanToolResultValue = Shapes::StructureShape.new(name: 'SpanToolResultValue')
@@ -2786,6 +2788,7 @@ module Aws::QConnect
     SendMessageRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     SendMessageRequest.add_member(:orchestrator_use_case, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "orchestratorUseCase"))
     SendMessageRequest.add_member(:metadata, Shapes::ShapeRef.new(shape: MessageMetadata, location_name: "metadata"))
+    SendMessageRequest.add_member(:origin_request_id, Shapes::ShapeRef.new(shape: SendMessageRequestOriginRequestIdString, location_name: "originRequestId"))
     SendMessageRequest.struct_class = Types::SendMessageRequest
 
     SendMessageResponse.add_member(:request_message_id, Shapes::ShapeRef.new(shape: Uuid, required: true, location_name: "requestMessageId"))
@@ -2847,6 +2850,7 @@ module Aws::QConnect
     Span.add_member(:end_timestamp, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "endTimestamp"))
     Span.add_member(:status, Shapes::ShapeRef.new(shape: SpanStatus, required: true, location_name: "status"))
     Span.add_member(:request_id, Shapes::ShapeRef.new(shape: Uuid, required: true, location_name: "requestId"))
+    Span.add_member(:origin_request_id, Shapes::ShapeRef.new(shape: SpanOriginRequestIdString, location_name: "originRequestId"))
     Span.add_member(:attributes, Shapes::ShapeRef.new(shape: SpanAttributes, required: true, location_name: "attributes"))
     Span.struct_class = Types::Span
 

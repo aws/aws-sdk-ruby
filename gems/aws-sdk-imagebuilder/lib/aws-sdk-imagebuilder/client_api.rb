@@ -736,6 +736,7 @@ module Aws::Imagebuilder
     CreateImagePipelineRequest.add_member(:schedule, Shapes::ShapeRef.new(shape: Schedule, location_name: "schedule"))
     CreateImagePipelineRequest.add_member(:status, Shapes::ShapeRef.new(shape: PipelineStatus, location_name: "status"))
     CreateImagePipelineRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    CreateImagePipelineRequest.add_member(:image_tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "imageTags"))
     CreateImagePipelineRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateImagePipelineRequest.add_member(:image_scanning_configuration, Shapes::ShapeRef.new(shape: ImageScanningConfiguration, location_name: "imageScanningConfiguration"))
     CreateImagePipelineRequest.add_member(:workflows, Shapes::ShapeRef.new(shape: WorkflowConfigurationList, location_name: "workflows"))
@@ -1230,6 +1231,7 @@ module Aws::Imagebuilder
     ImagePipeline.add_member(:date_next_run, Shapes::ShapeRef.new(shape: DateTime, location_name: "dateNextRun"))
     ImagePipeline.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     ImagePipeline.add_member(:image_scanning_configuration, Shapes::ShapeRef.new(shape: ImageScanningConfiguration, location_name: "imageScanningConfiguration"))
+    ImagePipeline.add_member(:image_tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "imageTags"))
     ImagePipeline.add_member(:execution_role, Shapes::ShapeRef.new(shape: RoleNameOrArn, location_name: "executionRole"))
     ImagePipeline.add_member(:workflows, Shapes::ShapeRef.new(shape: WorkflowConfigurationList, location_name: "workflows"))
     ImagePipeline.add_member(:logging_configuration, Shapes::ShapeRef.new(shape: PipelineLoggingConfiguration, location_name: "loggingConfiguration"))
@@ -1492,7 +1494,7 @@ module Aws::Imagebuilder
 
     LaunchTemplateConfiguration.add_member(:launch_template_id, Shapes::ShapeRef.new(shape: LaunchTemplateId, required: true, location_name: "launchTemplateId"))
     LaunchTemplateConfiguration.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "accountId"))
-    LaunchTemplateConfiguration.add_member(:set_default_version, Shapes::ShapeRef.new(shape: Boolean, location_name: "setDefaultVersion"))
+    LaunchTemplateConfiguration.add_member(:set_default_version, Shapes::ShapeRef.new(shape: Boolean, location_name: "setDefaultVersion", metadata: {"box" => true}))
     LaunchTemplateConfiguration.struct_class = Types::LaunchTemplateConfiguration
 
     LaunchTemplateConfigurationList.member = Shapes::ShapeRef.new(shape: LaunchTemplateConfiguration)
@@ -1643,7 +1645,7 @@ module Aws::Imagebuilder
     ListContainerRecipesRequest.add_member(:owner, Shapes::ShapeRef.new(shape: Ownership, location_name: "owner"))
     ListContainerRecipesRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "filters"))
     ListContainerRecipesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: RestrictedInteger, location_name: "maxResults", metadata: {"box" => true}))
-    ListContainerRecipesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "nextToken"))
+    ListContainerRecipesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListContainerRecipesRequest.struct_class = Types::ListContainerRecipesRequest
 
     ListContainerRecipesResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "requestId"))
@@ -2095,6 +2097,7 @@ module Aws::Imagebuilder
     UpdateImagePipelineRequest.add_member(:workflows, Shapes::ShapeRef.new(shape: WorkflowConfigurationList, location_name: "workflows"))
     UpdateImagePipelineRequest.add_member(:logging_configuration, Shapes::ShapeRef.new(shape: PipelineLoggingConfiguration, location_name: "loggingConfiguration"))
     UpdateImagePipelineRequest.add_member(:execution_role, Shapes::ShapeRef.new(shape: RoleNameOrArn, location_name: "executionRole"))
+    UpdateImagePipelineRequest.add_member(:image_tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "imageTags"))
     UpdateImagePipelineRequest.struct_class = Types::UpdateImagePipelineRequest
 
     UpdateImagePipelineResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "requestId"))

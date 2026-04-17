@@ -483,6 +483,231 @@ module Aws::MarketplaceAgreement
 
     # @!group API Operations
 
+    # Allows sellers (proposers) to submit billing adjustment requests for
+    # one or more invoices within an agreement. Each entry in the batch
+    # specifies an invoice and the adjustment amount. The operation returns
+    # successfully created adjustment request IDs and any errors for entries
+    # that failed validation.
+    #
+    # <note markdown="1"> Each entry requires a unique `clientToken` for idempotency. A
+    # `ValidationException` is returned if the adjustment amount exceeds the
+    # maximum refundable amount for the invoice.
+    #
+    #  </note>
+    #
+    # @option params [required, Array<Types::BatchCreateBillingAdjustmentRequestEntry>] :billing_adjustment_request_entries
+    #   A list of billing adjustment request entries. Each entry specifies the
+    #   invoice and adjustment details.
+    #
+    # @return [Types::BatchCreateBillingAdjustmentRequestOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchCreateBillingAdjustmentRequestOutput#items #items} => Array&lt;Types::BatchCreateBillingAdjustmentItem&gt;
+    #   * {Types::BatchCreateBillingAdjustmentRequestOutput#errors #errors} => Array&lt;Types::BatchCreateBillingAdjustmentError&gt;
+    #
+    #
+    # @example Example: Create billing adjustment requests
+    #
+    #   resp = client.batch_create_billing_adjustment_request({
+    #     billing_adjustment_request_entries: [
+    #       {
+    #         adjustment_amount: "500.00", 
+    #         adjustment_reason_code: "OTHER", 
+    #         agreement_id: "agmt-SvIzsqYMyQwI3GWgJAe17URx", 
+    #         client_token: "71a5e82e-a49b-4075-8c7f-52df1d294379", 
+    #         currency_code: "USD", 
+    #         description: "Customer requested adjustment due to service outage during critical business period.", 
+    #         original_invoice_id: "E2E20230929a108cfae", 
+    #       }, 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     errors: [
+    #     ], 
+    #     items: [
+    #       {
+    #         billing_adjustment_request_id: "ba-1a2b3c4d5e6f7g", 
+    #         client_token: "71a5e82e-a49b-4075-8c7f-52df1d294379", 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_create_billing_adjustment_request({
+    #     billing_adjustment_request_entries: [ # required
+    #       {
+    #         agreement_id: "AgreementId", # required
+    #         original_invoice_id: "InvoiceId", # required
+    #         adjustment_amount: "PositiveAmountUpto8Decimals", # required
+    #         currency_code: "CurrencyCode", # required
+    #         adjustment_reason_code: "INCORRECT_TERMS_ACCEPTED", # required, accepts INCORRECT_TERMS_ACCEPTED, INCORRECT_METERING, TEST_ENVIRONMENT_CHARGES, ALTERNATIVE_PROCUREMENT_CHANNEL, UNINTENDED_RENEWAL, BUYER_DISSATISFACTION, OTHER
+    #         description: "BillingAdjustmentDescription",
+    #         client_token: "ClientToken", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.items #=> Array
+    #   resp.items[0].billing_adjustment_request_id #=> String
+    #   resp.items[0].client_token #=> String
+    #   resp.errors #=> Array
+    #   resp.errors[0].code #=> String, one of "CONFLICT_EXCEPTION", "VALIDATION_EXCEPTION", "RESOURCE_NOT_FOUND_EXCEPTION", "INTERNAL_FAILURE"
+    #   resp.errors[0].message #=> String
+    #   resp.errors[0].client_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/BatchCreateBillingAdjustmentRequest AWS API Documentation
+    #
+    # @overload batch_create_billing_adjustment_request(params = {})
+    # @param [Hash] params ({})
+    def batch_create_billing_adjustment_request(params = {}, options = {})
+      req = build_request(:batch_create_billing_adjustment_request, params)
+      req.send_request(options)
+    end
+
+    # Allows sellers (proposers) to withdraw an existing agreement
+    # cancellation request that is in a pending state. Once cancelled, the
+    # cancellation request transitions to `CANCELLED` status and can no
+    # longer be approved or rejected by the buyer.
+    #
+    # <note markdown="1"> Only cancellation requests in `PENDING_APPROVAL` status can be
+    # cancelled. A `ConflictException` is thrown if the cancellation request
+    # is in any other status.
+    #
+    #  </note>
+    #
+    # @option params [required, String] :agreement_id
+    #   The unique identifier of the agreement associated with the
+    #   cancellation request.
+    #
+    # @option params [required, String] :agreement_cancellation_request_id
+    #   The unique identifier of the cancellation request to cancel.
+    #
+    # @option params [required, String] :cancellation_reason
+    #   A required message explaining why the cancellation request is being
+    #   withdrawn (1-2000 characters).
+    #
+    # @return [Types::CancelAgreementCancellationRequestOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CancelAgreementCancellationRequestOutput#agreement_cancellation_request_id #agreement_cancellation_request_id} => String
+    #   * {Types::CancelAgreementCancellationRequestOutput#agreement_id #agreement_id} => String
+    #   * {Types::CancelAgreementCancellationRequestOutput#reason_code #reason_code} => String
+    #   * {Types::CancelAgreementCancellationRequestOutput#description #description} => String
+    #   * {Types::CancelAgreementCancellationRequestOutput#status #status} => String
+    #   * {Types::CancelAgreementCancellationRequestOutput#status_message #status_message} => String
+    #   * {Types::CancelAgreementCancellationRequestOutput#created_at #created_at} => Time
+    #   * {Types::CancelAgreementCancellationRequestOutput#updated_at #updated_at} => Time
+    #
+    #
+    # @example Example: Cancel a cancellation request
+    #
+    #   resp = client.cancel_agreement_cancellation_request({
+    #     agreement_cancellation_request_id: "acr-752jqvg74yo7k4h56cakk6396", 
+    #     agreement_id: "agmt-752jqvg74yo7k4h56cakk6396", 
+    #     cancellation_reason: "Requested agreement cancellation by mistake", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     agreement_cancellation_request_id: "acr-752jqvg74yo7k4h56cakk6396", 
+    #     agreement_id: "agmt-752jqvg74yo7k4h56cakk6396", 
+    #     created_at: Time.parse("2025-01-15T10:30:00Z"), 
+    #     description: "Product is being discontinued and no longer supported", 
+    #     reason_code: "PRODUCT_DISCONTINUED", 
+    #     status: "CANCELLED", 
+    #     status_message: "Cancellation requested by seller", 
+    #     updated_at: Time.parse("2025-01-16T10:30:00Z"), 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.cancel_agreement_cancellation_request({
+    #     agreement_id: "AgreementId", # required
+    #     agreement_cancellation_request_id: "AgreementCancellationRequestId", # required
+    #     cancellation_reason: "AgreementCancellationRequestCancellationReason", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.agreement_cancellation_request_id #=> String
+    #   resp.agreement_id #=> String
+    #   resp.reason_code #=> String, one of "INCORRECT_TERMS_ACCEPTED", "REPLACING_AGREEMENT", "TEST_AGREEMENT", "ALTERNATIVE_PROCUREMENT_CHANNEL", "PRODUCT_DISCONTINUED", "UNINTENDED_RENEWAL", "BUYER_DISSATISFACTION", "OTHER"
+    #   resp.description #=> String
+    #   resp.status #=> String, one of "PENDING_APPROVAL", "APPROVED", "REJECTED", "CANCELLED", "VALIDATION_FAILED"
+    #   resp.status_message #=> String
+    #   resp.created_at #=> Time
+    #   resp.updated_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/CancelAgreementCancellationRequest AWS API Documentation
+    #
+    # @overload cancel_agreement_cancellation_request(params = {})
+    # @param [Hash] params ({})
+    def cancel_agreement_cancellation_request(params = {}, options = {})
+      req = build_request(:cancel_agreement_cancellation_request, params)
+      req.send_request(options)
+    end
+
+    # Allows sellers (proposers) to cancel a payment request that is in
+    # `PENDING_APPROVAL` status. Once cancelled, the payment request
+    # transitions to `CANCELLED` status and can no longer be accepted or
+    # rejected by the buyer.
+    #
+    # <note markdown="1"> Only payment requests in `PENDING_APPROVAL` status can be cancelled. A
+    # `ConflictException` is thrown if the payment request is in any other
+    # status.
+    #
+    #  </note>
+    #
+    # @option params [required, String] :payment_request_id
+    #   The unique identifier of the payment request to cancel.
+    #
+    # @option params [required, String] :agreement_id
+    #   The unique identifier of the agreement associated with the payment
+    #   request.
+    #
+    # @return [Types::CancelAgreementPaymentRequestOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CancelAgreementPaymentRequestOutput#payment_request_id #payment_request_id} => String
+    #   * {Types::CancelAgreementPaymentRequestOutput#agreement_id #agreement_id} => String
+    #   * {Types::CancelAgreementPaymentRequestOutput#status #status} => String
+    #   * {Types::CancelAgreementPaymentRequestOutput#name #name} => String
+    #   * {Types::CancelAgreementPaymentRequestOutput#description #description} => String
+    #   * {Types::CancelAgreementPaymentRequestOutput#charge_amount #charge_amount} => String
+    #   * {Types::CancelAgreementPaymentRequestOutput#currency_code #currency_code} => String
+    #   * {Types::CancelAgreementPaymentRequestOutput#created_at #created_at} => Time
+    #   * {Types::CancelAgreementPaymentRequestOutput#updated_at #updated_at} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.cancel_agreement_payment_request({
+    #     payment_request_id: "PaymentRequestId", # required
+    #     agreement_id: "AgreementId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.payment_request_id #=> String
+    #   resp.agreement_id #=> String
+    #   resp.status #=> String, one of "VALIDATING", "VALIDATION_FAILED", "PENDING_APPROVAL", "APPROVED", "REJECTED", "CANCELLED"
+    #   resp.name #=> String
+    #   resp.description #=> String
+    #   resp.charge_amount #=> String
+    #   resp.currency_code #=> String
+    #   resp.created_at #=> Time
+    #   resp.updated_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/CancelAgreementPaymentRequest AWS API Documentation
+    #
+    # @overload cancel_agreement_payment_request(params = {})
+    # @param [Hash] params ({})
+    def cancel_agreement_payment_request(params = {}, options = {})
+      req = build_request(:cancel_agreement_payment_request, params)
+      req.send_request(options)
+    end
+
     # Provides details about an agreement, such as the proposer, acceptor,
     # start date, and end date.
     #
@@ -532,6 +757,145 @@ module Aws::MarketplaceAgreement
     # @param [Hash] params ({})
     def describe_agreement(params = {}, options = {})
       req = build_request(:describe_agreement, params)
+      req.send_request(options)
+    end
+
+    # Retrieves detailed information about a specific agreement cancellation
+    # request. Both sellers (proposers) and buyers (acceptors) can use this
+    # operation to view cancellation requests associated with their
+    # agreements.
+    #
+    # <note markdown="1"> The calling identity must be either the acceptor or proposer of the
+    # agreement. A `ResourceNotFoundException` is returned if the
+    # cancellation request does not exist.
+    #
+    #  </note>
+    #
+    # @option params [required, String] :agreement_cancellation_request_id
+    #   The unique identifier of the cancellation request.
+    #
+    # @option params [required, String] :agreement_id
+    #   The unique identifier of the agreement associated with the
+    #   cancellation request.
+    #
+    # @return [Types::GetAgreementCancellationRequestOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetAgreementCancellationRequestOutput#agreement_cancellation_request_id #agreement_cancellation_request_id} => String
+    #   * {Types::GetAgreementCancellationRequestOutput#agreement_id #agreement_id} => String
+    #   * {Types::GetAgreementCancellationRequestOutput#reason_code #reason_code} => String
+    #   * {Types::GetAgreementCancellationRequestOutput#description #description} => String
+    #   * {Types::GetAgreementCancellationRequestOutput#status #status} => String
+    #   * {Types::GetAgreementCancellationRequestOutput#status_message #status_message} => String
+    #   * {Types::GetAgreementCancellationRequestOutput#created_at #created_at} => Time
+    #   * {Types::GetAgreementCancellationRequestOutput#updated_at #updated_at} => Time
+    #
+    #
+    # @example Example: Get a cancellation request
+    #
+    #   resp = client.get_agreement_cancellation_request({
+    #     agreement_cancellation_request_id: "acr-sgew33rhsds", 
+    #     agreement_id: "agmt-752jqvg74yo7k", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     agreement_cancellation_request_id: "acr-sgew33rhsds", 
+    #     agreement_id: "agmt-752jqvg74yo7k", 
+    #     created_at: Time.parse("2025-01-15T10:30:00Z"), 
+    #     description: "Product is being discontinued and no longer supported", 
+    #     reason_code: "PRODUCT_DISCONTINUED", 
+    #     status: "VALIDATION_FAILED", 
+    #     status_message: "Agreement is not in an active state", 
+    #     updated_at: Time.parse("2025-01-16T10:30:00Z"), 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_agreement_cancellation_request({
+    #     agreement_cancellation_request_id: "AgreementCancellationRequestId", # required
+    #     agreement_id: "AgreementId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.agreement_cancellation_request_id #=> String
+    #   resp.agreement_id #=> String
+    #   resp.reason_code #=> String, one of "INCORRECT_TERMS_ACCEPTED", "REPLACING_AGREEMENT", "TEST_AGREEMENT", "ALTERNATIVE_PROCUREMENT_CHANNEL", "PRODUCT_DISCONTINUED", "UNINTENDED_RENEWAL", "BUYER_DISSATISFACTION", "OTHER"
+    #   resp.description #=> String
+    #   resp.status #=> String, one of "PENDING_APPROVAL", "APPROVED", "REJECTED", "CANCELLED", "VALIDATION_FAILED"
+    #   resp.status_message #=> String
+    #   resp.created_at #=> Time
+    #   resp.updated_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/GetAgreementCancellationRequest AWS API Documentation
+    #
+    # @overload get_agreement_cancellation_request(params = {})
+    # @param [Hash] params ({})
+    def get_agreement_cancellation_request(params = {}, options = {})
+      req = build_request(:get_agreement_cancellation_request, params)
+      req.send_request(options)
+    end
+
+    # Retrieves detailed information about a specific payment request. Both
+    # sellers (proposers) and buyers (acceptors) can use this operation to
+    # view payment requests associated with their agreements. The response
+    # includes the current status, charge details, timestamps, and the
+    # charge ID if the request has been approved.
+    #
+    # <note markdown="1"> The calling identity must be either the acceptor or proposer of the
+    # payment request. A `ResourceNotFoundException` is returned if the
+    # payment request does not exist.
+    #
+    #  </note>
+    #
+    # @option params [required, String] :payment_request_id
+    #   The identifier of the payment request.
+    #
+    # @option params [required, String] :agreement_id
+    #   The unique identifier of the agreement associated with the payment
+    #   request.
+    #
+    # @return [Types::GetAgreementPaymentRequestOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetAgreementPaymentRequestOutput#payment_request_id #payment_request_id} => String
+    #   * {Types::GetAgreementPaymentRequestOutput#agreement_id #agreement_id} => String
+    #   * {Types::GetAgreementPaymentRequestOutput#status #status} => String
+    #   * {Types::GetAgreementPaymentRequestOutput#status_message #status_message} => String
+    #   * {Types::GetAgreementPaymentRequestOutput#name #name} => String
+    #   * {Types::GetAgreementPaymentRequestOutput#description #description} => String
+    #   * {Types::GetAgreementPaymentRequestOutput#charge_id #charge_id} => String
+    #   * {Types::GetAgreementPaymentRequestOutput#charge_amount #charge_amount} => String
+    #   * {Types::GetAgreementPaymentRequestOutput#currency_code #currency_code} => String
+    #   * {Types::GetAgreementPaymentRequestOutput#created_at #created_at} => Time
+    #   * {Types::GetAgreementPaymentRequestOutput#updated_at #updated_at} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_agreement_payment_request({
+    #     payment_request_id: "PaymentRequestId", # required
+    #     agreement_id: "AgreementId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.payment_request_id #=> String
+    #   resp.agreement_id #=> String
+    #   resp.status #=> String, one of "VALIDATING", "VALIDATION_FAILED", "PENDING_APPROVAL", "APPROVED", "REJECTED", "CANCELLED"
+    #   resp.status_message #=> String
+    #   resp.name #=> String
+    #   resp.description #=> String
+    #   resp.charge_id #=> String
+    #   resp.charge_amount #=> String
+    #   resp.currency_code #=> String
+    #   resp.created_at #=> Time
+    #   resp.updated_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/GetAgreementPaymentRequest AWS API Documentation
+    #
+    # @overload get_agreement_payment_request(params = {})
+    # @param [Hash] params ({})
+    def get_agreement_payment_request(params = {}, options = {})
+      req = build_request(:get_agreement_payment_request, params)
       req.send_request(options)
     end
 
@@ -653,6 +1017,508 @@ module Aws::MarketplaceAgreement
     # @param [Hash] params ({})
     def get_agreement_terms(params = {}, options = {})
       req = build_request(:get_agreement_terms, params)
+      req.send_request(options)
+    end
+
+    # Retrieves detailed information about a specific billing adjustment
+    # request. Sellers (proposers) can use this operation to view the status
+    # and details of a billing adjustment request they submitted.
+    #
+    # <note markdown="1"> A `ResourceNotFoundException` is returned if the billing adjustment
+    # request does not exist or the caller does not have permission to
+    # access it.
+    #
+    #  </note>
+    #
+    # @option params [required, String] :agreement_id
+    #   The unique identifier of the agreement associated with the billing
+    #   adjustment request.
+    #
+    # @option params [required, String] :billing_adjustment_request_id
+    #   The unique identifier of the billing adjustment request.
+    #
+    # @return [Types::GetBillingAdjustmentRequestOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetBillingAdjustmentRequestOutput#billing_adjustment_request_id #billing_adjustment_request_id} => String
+    #   * {Types::GetBillingAdjustmentRequestOutput#agreement_id #agreement_id} => String
+    #   * {Types::GetBillingAdjustmentRequestOutput#adjustment_reason_code #adjustment_reason_code} => String
+    #   * {Types::GetBillingAdjustmentRequestOutput#description #description} => String
+    #   * {Types::GetBillingAdjustmentRequestOutput#original_invoice_id #original_invoice_id} => String
+    #   * {Types::GetBillingAdjustmentRequestOutput#adjustment_amount #adjustment_amount} => String
+    #   * {Types::GetBillingAdjustmentRequestOutput#currency_code #currency_code} => String
+    #   * {Types::GetBillingAdjustmentRequestOutput#status #status} => String
+    #   * {Types::GetBillingAdjustmentRequestOutput#status_message #status_message} => String
+    #   * {Types::GetBillingAdjustmentRequestOutput#created_at #created_at} => Time
+    #   * {Types::GetBillingAdjustmentRequestOutput#updated_at #updated_at} => Time
+    #
+    #
+    # @example Example: Get a billing adjustment request
+    #
+    #   resp = client.get_billing_adjustment_request({
+    #     agreement_id: "agmt-SvIzsqYMyQwI3GWgJAe17URx", 
+    #     billing_adjustment_request_id: "ba-1a2b3c4d5e6f7g", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     adjustment_amount: "500.00", 
+    #     adjustment_reason_code: "OTHER", 
+    #     agreement_id: "agmt-SvIzsqYMyQwI3GWgJAe17URx", 
+    #     billing_adjustment_request_id: "ba-1a2b3c4d5e6f7g", 
+    #     created_at: Time.parse("2025-06-24T19:30:00Z"), 
+    #     currency_code: "USD", 
+    #     description: "Customer requested adjustment", 
+    #     original_invoice_id: "E2E20230929a108cfae", 
+    #     status: "PENDING", 
+    #     updated_at: Time.parse("2025-06-24T19:30:00Z"), 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_billing_adjustment_request({
+    #     agreement_id: "AgreementId", # required
+    #     billing_adjustment_request_id: "BillingAdjustmentRequestId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.billing_adjustment_request_id #=> String
+    #   resp.agreement_id #=> String
+    #   resp.adjustment_reason_code #=> String, one of "INCORRECT_TERMS_ACCEPTED", "INCORRECT_METERING", "TEST_ENVIRONMENT_CHARGES", "ALTERNATIVE_PROCUREMENT_CHANNEL", "UNINTENDED_RENEWAL", "BUYER_DISSATISFACTION", "OTHER"
+    #   resp.description #=> String
+    #   resp.original_invoice_id #=> String
+    #   resp.adjustment_amount #=> String
+    #   resp.currency_code #=> String
+    #   resp.status #=> String, one of "PENDING", "VALIDATION_FAILED", "COMPLETED"
+    #   resp.status_message #=> String
+    #   resp.created_at #=> Time
+    #   resp.updated_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/GetBillingAdjustmentRequest AWS API Documentation
+    #
+    # @overload get_billing_adjustment_request(params = {})
+    # @param [Hash] params ({})
+    def get_billing_adjustment_request(params = {}, options = {})
+      req = build_request(:get_billing_adjustment_request, params)
+      req.send_request(options)
+    end
+
+    # Lists agreement cancellation requests available to you as a seller or
+    # buyer. Both sellers (proposers) and buyers (acceptors) can use this
+    # operation to find cancellation requests by specifying their party type
+    # and applying optional filters.
+    #
+    # <note markdown="1"> `PartyType` is a required parameter. A `ValidationException` is
+    # returned if `PartyType` is not provided. Pagination is supported
+    # through `maxResults` (1-50, default 20) and `nextToken` parameters.
+    #
+    #  </note>
+    #
+    # @option params [required, String] :party_type
+    #   The party type for the cancellation requests. Required parameter. Use
+    #   `Proposer` to list cancellation requests where you are the seller, or
+    #   `Acceptor` to list cancellation requests where you are the buyer.
+    #
+    # @option params [String] :agreement_id
+    #   An optional parameter to filter cancellation requests for a specific
+    #   agreement.
+    #
+    # @option params [String] :status
+    #   An optional parameter to filter cancellation requests by status. Valid
+    #   values include `PENDING_APPROVAL`, `APPROVED`, `REJECTED`,
+    #   `CANCELLED`, and `VALIDATION_FAILED`.
+    #
+    # @option params [String] :agreement_type
+    #   An optional parameter to filter cancellation requests by agreement
+    #   type (e.g., `PurchaseAgreement`).
+    #
+    # @option params [String] :catalog
+    #   An optional parameter to filter cancellation requests by catalog
+    #   (e.g., `AWSMarketplace`).
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of cancellation requests to return in the response.
+    #
+    # @option params [String] :next_token
+    #   A token to specify where to start pagination. Use the `nextToken`
+    #   value from a previous response to retrieve the next page of results.
+    #
+    # @return [Types::ListAgreementCancellationRequestsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListAgreementCancellationRequestsOutput#next_token #next_token} => String
+    #   * {Types::ListAgreementCancellationRequestsOutput#items #items} => Array&lt;Types::AgreementCancellationRequestSummary&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: List cancellation requests
+    #
+    #   resp = client.list_agreement_cancellation_requests({
+    #     max_results: 10, 
+    #     party_type: "Proposer", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     items: [
+    #       {
+    #         agreement_cancellation_request_id: "acr-sgew33rhsds", 
+    #         agreement_id: "agmt-752jqvg74yo7k", 
+    #         agreement_type: "PurchaseAgreement", 
+    #         catalog: "AWSMarketplace", 
+    #         created_at: Time.parse("2025-01-15T10:30:00Z"), 
+    #         reason_code: "OTHER", 
+    #         status: "PENDING_APPROVAL", 
+    #         updated_at: Time.parse("2025-01-16T10:30:00Z"), 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_agreement_cancellation_requests({
+    #     party_type: "PartyType", # required
+    #     agreement_id: "AgreementId",
+    #     status: "PENDING_APPROVAL", # accepts PENDING_APPROVAL, APPROVED, REJECTED, CANCELLED, VALIDATION_FAILED
+    #     agreement_type: "AgreementType",
+    #     catalog: "Catalog",
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.items #=> Array
+    #   resp.items[0].agreement_cancellation_request_id #=> String
+    #   resp.items[0].agreement_id #=> String
+    #   resp.items[0].status #=> String, one of "PENDING_APPROVAL", "APPROVED", "REJECTED", "CANCELLED", "VALIDATION_FAILED"
+    #   resp.items[0].reason_code #=> String, one of "INCORRECT_TERMS_ACCEPTED", "REPLACING_AGREEMENT", "TEST_AGREEMENT", "ALTERNATIVE_PROCUREMENT_CHANNEL", "PRODUCT_DISCONTINUED", "UNINTENDED_RENEWAL", "BUYER_DISSATISFACTION", "OTHER"
+    #   resp.items[0].agreement_type #=> String
+    #   resp.items[0].catalog #=> String
+    #   resp.items[0].created_at #=> Time
+    #   resp.items[0].updated_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/ListAgreementCancellationRequests AWS API Documentation
+    #
+    # @overload list_agreement_cancellation_requests(params = {})
+    # @param [Hash] params ({})
+    def list_agreement_cancellation_requests(params = {}, options = {})
+      req = build_request(:list_agreement_cancellation_requests, params)
+      req.send_request(options)
+    end
+
+    # Allows sellers (proposers) to retrieve aggregated billing data from
+    # AWS Marketplace agreements using flexible grouping. Supports
+    # invoice-level aggregation with filtering by billing period, invoice
+    # type, and issued date.
+    #
+    # <note markdown="1"> The `groupBy` parameter is required and currently supports only
+    # `INVOICE_ID` as a value. The `agreementId` parameter is required.
+    #
+    #  </note>
+    #
+    # @option params [required, String] :agreement_id
+    #   The unique identifier of the agreement.
+    #
+    # @option params [required, String] :group_by
+    #   Specifies a grouping strategy for line items. Currently supports
+    #   `INVOICE_ID`.
+    #
+    # @option params [String] :invoice_id
+    #   An optional filter to retrieve invoice information for a specific
+    #   invoice.
+    #
+    # @option params [String] :invoice_type
+    #   An optional filter for the type of invoice. Valid values are `INVOICE`
+    #   and `CREDIT_MEMO`.
+    #
+    # @option params [Types::InvoiceBillingPeriod] :invoice_billing_period
+    #   An optional filter for the billing period associated with the invoice.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :before_issued_time
+    #   An optional filter for invoices issued before the specified timestamp.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :after_issued_time
+    #   An optional filter for invoices issued after the specified timestamp.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in the response.
+    #
+    # @option params [String] :next_token
+    #   A token to specify where to start pagination.
+    #
+    # @return [Types::ListAgreementInvoiceLineItemsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListAgreementInvoiceLineItemsOutput#agreement_invoice_line_item_group_summaries #agreement_invoice_line_item_group_summaries} => Array&lt;Types::AgreementInvoiceLineItemGroupSummary&gt;
+    #   * {Types::ListAgreementInvoiceLineItemsOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: List agreement invoice line items
+    #
+    #   resp = client.list_agreement_invoice_line_items({
+    #     agreement_id: "agmt-EXAMPLESvIzsqYMyQwI3", 
+    #     group_by: "INVOICE_ID", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     agreement_invoice_line_item_group_summaries: [
+    #       {
+    #         agreement_id: "agmt-EXAMPLESvIzsqYMyQwI3", 
+    #         invoice_billing_period: {
+    #           month: 1, 
+    #           year: 2025, 
+    #         }, 
+    #         invoice_id: "E2E20250105a108cfae", 
+    #         invoice_type: "INVOICE", 
+    #         invoicing_entity: {
+    #           legal_name: "Amazon Web Services, Inc.", 
+    #         }, 
+    #         issued_time: Time.parse("2025-01-05T18:59:09Z"), 
+    #         pricing_currency_amount: {
+    #           amount: "1080.00", 
+    #           currency_code: "USD", 
+    #           max_adjustment_amount: "1000.00", 
+    #         }, 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_agreement_invoice_line_items({
+    #     agreement_id: "ResourceId", # required
+    #     group_by: "INVOICE_ID", # required, accepts INVOICE_ID
+    #     invoice_id: "ResourceId",
+    #     invoice_type: "INVOICE", # accepts INVOICE, CREDIT_MEMO
+    #     invoice_billing_period: {
+    #       month: 1, # required
+    #       year: 1, # required
+    #     },
+    #     before_issued_time: Time.now,
+    #     after_issued_time: Time.now,
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.agreement_invoice_line_item_group_summaries #=> Array
+    #   resp.agreement_invoice_line_item_group_summaries[0].agreement_id #=> String
+    #   resp.agreement_invoice_line_item_group_summaries[0].invoice_id #=> String
+    #   resp.agreement_invoice_line_item_group_summaries[0].pricing_currency_amount.amount #=> String
+    #   resp.agreement_invoice_line_item_group_summaries[0].pricing_currency_amount.max_adjustment_amount #=> String
+    #   resp.agreement_invoice_line_item_group_summaries[0].pricing_currency_amount.currency_code #=> String
+    #   resp.agreement_invoice_line_item_group_summaries[0].invoice_billing_period.month #=> Integer
+    #   resp.agreement_invoice_line_item_group_summaries[0].invoice_billing_period.year #=> Integer
+    #   resp.agreement_invoice_line_item_group_summaries[0].issued_time #=> Time
+    #   resp.agreement_invoice_line_item_group_summaries[0].invoice_type #=> String, one of "INVOICE", "CREDIT_MEMO"
+    #   resp.agreement_invoice_line_item_group_summaries[0].invoicing_entity.legal_name #=> String
+    #   resp.agreement_invoice_line_item_group_summaries[0].invoicing_entity.branch_name #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/ListAgreementInvoiceLineItems AWS API Documentation
+    #
+    # @overload list_agreement_invoice_line_items(params = {})
+    # @param [Hash] params ({})
+    def list_agreement_invoice_line_items(params = {}, options = {})
+      req = build_request(:list_agreement_invoice_line_items, params)
+      req.send_request(options)
+    end
+
+    # Lists payment requests available to you as a seller or buyer. Both
+    # sellers (proposers) and buyers (acceptors) can use this operation to
+    # find payment requests by specifying their party type and applying
+    # optional parameters.
+    #
+    # <note markdown="1"> `PartyType` is a required parameter. A `ValidationException` is
+    # returned if `PartyType` is not provided. Pagination is supported
+    # through `maxResults` (1-50, default 50) and `nextToken` parameters.
+    #
+    #  </note>
+    #
+    # @option params [required, String] :party_type
+    #   The party type for the payment requests. Required parameter. Use
+    #   `Proposer` to list payment requests where you are the seller, or
+    #   `Acceptor` to list payment requests where you are the buyer.
+    #
+    # @option params [String] :agreement_type
+    #   An optional parameter to list payment requests by agreement type
+    #   (e.g., `PurchaseAgreement`).
+    #
+    # @option params [String] :catalog
+    #   An optional parameter to list payment requests by catalog (e.g.,
+    #   `AWSMarketplace`).
+    #
+    # @option params [String] :agreement_id
+    #   An optional parameter to list payment requests for a specific
+    #   agreement.
+    #
+    # @option params [String] :status
+    #   An optional parameter to list payment requests by status. Valid values
+    #   include `VALIDATING`, `VALIDATION_FAILED`, `PENDING_APPROVAL`,
+    #   `APPROVED`, `REJECTED`, and `CANCELLED`.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of payment requests to return in a single response
+    #   (1-50). Default is 50.
+    #
+    # @option params [String] :next_token
+    #   A token to specify where to start pagination. Use the `nextToken`
+    #   value from a previous response to retrieve the next page of results.
+    #
+    # @return [Types::ListAgreementPaymentRequestsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListAgreementPaymentRequestsOutput#next_token #next_token} => String
+    #   * {Types::ListAgreementPaymentRequestsOutput#items #items} => Array&lt;Types::PaymentRequestSummary&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_agreement_payment_requests({
+    #     party_type: "PartyType", # required
+    #     agreement_type: "AgreementType",
+    #     catalog: "Catalog",
+    #     agreement_id: "AgreementId",
+    #     status: "VALIDATING", # accepts VALIDATING, VALIDATION_FAILED, PENDING_APPROVAL, APPROVED, REJECTED, CANCELLED
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.items #=> Array
+    #   resp.items[0].payment_request_id #=> String
+    #   resp.items[0].agreement_id #=> String
+    #   resp.items[0].status #=> String, one of "VALIDATING", "VALIDATION_FAILED", "PENDING_APPROVAL", "APPROVED", "REJECTED", "CANCELLED"
+    #   resp.items[0].name #=> String
+    #   resp.items[0].charge_id #=> String
+    #   resp.items[0].charge_amount #=> String
+    #   resp.items[0].currency_code #=> String
+    #   resp.items[0].created_at #=> Time
+    #   resp.items[0].updated_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/ListAgreementPaymentRequests AWS API Documentation
+    #
+    # @overload list_agreement_payment_requests(params = {})
+    # @param [Hash] params ({})
+    def list_agreement_payment_requests(params = {}, options = {})
+      req = build_request(:list_agreement_payment_requests, params)
+      req.send_request(options)
+    end
+
+    # Lists billing adjustment requests for a specific agreement. Sellers
+    # (proposers) can use this operation to view all billing adjustment
+    # requests associated with an agreement.
+    #
+    # <note markdown="1"> Pagination is supported through `maxResults` and `nextToken`
+    # parameters.
+    #
+    #  </note>
+    #
+    # @option params [String] :agreement_id
+    #   The unique identifier of the agreement to list billing adjustment
+    #   requests for.
+    #
+    # @option params [String] :status
+    #   An optional filter to return billing adjustment requests with the
+    #   specified status.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :created_after
+    #   An optional filter to return billing adjustment requests created after
+    #   the specified POSIX timestamp (Unix epoch seconds).
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :created_before
+    #   An optional filter to return billing adjustment requests created
+    #   before the specified POSIX timestamp (Unix epoch seconds).
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of billing adjustment requests to return in the
+    #   response.
+    #
+    # @option params [String] :catalog
+    #   An optional filter to return billing adjustment requests by catalog
+    #   (e.g., `AWSMarketplace`).
+    #
+    # @option params [String] :agreement_type
+    #   An optional filter to return billing adjustment requests by agreement
+    #   type (e.g., `PurchaseAgreement`).
+    #
+    # @option params [String] :next_token
+    #   A token to specify where to start pagination. Use the `nextToken`
+    #   value from a previous response to retrieve the next page of results.
+    #
+    # @return [Types::ListBillingAdjustmentRequestsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListBillingAdjustmentRequestsOutput#next_token #next_token} => String
+    #   * {Types::ListBillingAdjustmentRequestsOutput#items #items} => Array&lt;Types::BillingAdjustmentSummary&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: List billing adjustment requests
+    #
+    #   resp = client.list_billing_adjustment_requests({
+    #     agreement_id: "agmt-SvIzsqYMyQwI3GWgJAe17URx", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     items: [
+    #       {
+    #         adjustment_amount: "500.00", 
+    #         agreement_id: "agmt-SvIzsqYMyQwI3GWgJAe17URx", 
+    #         agreement_type: "PurchaseAgreement", 
+    #         billing_adjustment_request_id: "ba-1a2b3c4d5e6f7g", 
+    #         catalog: "AWSMarketplace", 
+    #         created_at: Time.parse("2025-06-24T19:30:00Z"), 
+    #         currency_code: "USD", 
+    #         original_invoice_id: "E2E20230929a108cfae", 
+    #         status: "PENDING", 
+    #         updated_at: Time.parse("2025-06-24T19:30:00Z"), 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_billing_adjustment_requests({
+    #     agreement_id: "AgreementId",
+    #     status: "PENDING", # accepts PENDING, VALIDATION_FAILED, COMPLETED
+    #     created_after: Time.now,
+    #     created_before: Time.now,
+    #     max_results: 1,
+    #     catalog: "Catalog",
+    #     agreement_type: "AgreementType",
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.items #=> Array
+    #   resp.items[0].billing_adjustment_request_id #=> String
+    #   resp.items[0].original_invoice_id #=> String
+    #   resp.items[0].adjustment_amount #=> String
+    #   resp.items[0].currency_code #=> String
+    #   resp.items[0].status #=> String, one of "PENDING", "VALIDATION_FAILED", "COMPLETED"
+    #   resp.items[0].agreement_id #=> String
+    #   resp.items[0].created_at #=> Time
+    #   resp.items[0].updated_at #=> Time
+    #   resp.items[0].agreement_type #=> String
+    #   resp.items[0].catalog #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/ListBillingAdjustmentRequests AWS API Documentation
+    #
+    # @overload list_billing_adjustment_requests(params = {})
+    # @param [Hash] params ({})
+    def list_billing_adjustment_requests(params = {}, options = {})
+      req = build_request(:list_billing_adjustment_requests, params)
       req.send_request(options)
     end
 
@@ -847,6 +1713,178 @@ module Aws::MarketplaceAgreement
       req.send_request(options)
     end
 
+    # Allows sellers (proposers) to submit a cancellation request for an
+    # active agreement. The cancellation request is created in
+    # `PENDING_APPROVAL` status, at which point the buyer can review it.
+    #
+    # @option params [required, String] :agreement_id
+    #   The unique identifier of the agreement for which the cancellation
+    #   request is being submitted.
+    #
+    # @option params [required, String] :reason_code
+    #   The reason code for the cancellation request. Valid values include
+    #   `INCORRECT_TERMS_ACCEPTED`, `REPLACING_AGREEMENT`, `TEST_AGREEMENT`,
+    #   `ALTERNATIVE_PROCUREMENT_CHANNEL`, `PRODUCT_DISCONTINUED`,
+    #   `UNINTENDED_RENEWAL`, `BUYER_DISSATISFACTION`, and `OTHER`.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [String] :description
+    #   An optional detailed description of the cancellation reason (1-2000
+    #   characters).
+    #
+    # @return [Types::SendAgreementCancellationRequestOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::SendAgreementCancellationRequestOutput#agreement_id #agreement_id} => String
+    #   * {Types::SendAgreementCancellationRequestOutput#agreement_cancellation_request_id #agreement_cancellation_request_id} => String
+    #   * {Types::SendAgreementCancellationRequestOutput#status #status} => String
+    #   * {Types::SendAgreementCancellationRequestOutput#reason_code #reason_code} => String
+    #   * {Types::SendAgreementCancellationRequestOutput#description #description} => String
+    #   * {Types::SendAgreementCancellationRequestOutput#created_at #created_at} => Time
+    #   * {Types::SendAgreementCancellationRequestOutput#updated_at #updated_at} => Time
+    #
+    #
+    # @example Example: Send a cancellation request
+    #
+    #   resp = client.send_agreement_cancellation_request({
+    #     agreement_id: "agmt-752jqvg74yo7k4h56cakk6396", 
+    #     client_token: "53nQSKWt6AjrsiZPhzQyZT", 
+    #     description: "Due to budget constraints, we are unable to continue with our current subscription", 
+    #     reason_code: "OTHER", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     agreement_cancellation_request_id: "acr-752jqvg74yo7k4h56cakk6396", 
+    #     agreement_id: "agmt-752jqvg74yo7k4h56cakk6396", 
+    #     created_at: Time.parse("2025-01-15T10:30:00Z"), 
+    #     description: "Due to budget constraints, we are unable to continue with our current subscription", 
+    #     reason_code: "OTHER", 
+    #     status: "PENDING_APPROVAL", 
+    #     updated_at: Time.parse("2025-01-15T10:30:00Z"), 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.send_agreement_cancellation_request({
+    #     agreement_id: "AgreementId", # required
+    #     reason_code: "INCORRECT_TERMS_ACCEPTED", # required, accepts INCORRECT_TERMS_ACCEPTED, REPLACING_AGREEMENT, TEST_AGREEMENT, ALTERNATIVE_PROCUREMENT_CHANNEL, PRODUCT_DISCONTINUED, UNINTENDED_RENEWAL, BUYER_DISSATISFACTION, OTHER
+    #     client_token: "ClientToken",
+    #     description: "AgreementCancellationRequestDescription",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.agreement_id #=> String
+    #   resp.agreement_cancellation_request_id #=> String
+    #   resp.status #=> String, one of "PENDING_APPROVAL", "APPROVED", "REJECTED", "CANCELLED", "VALIDATION_FAILED"
+    #   resp.reason_code #=> String, one of "INCORRECT_TERMS_ACCEPTED", "REPLACING_AGREEMENT", "TEST_AGREEMENT", "ALTERNATIVE_PROCUREMENT_CHANNEL", "PRODUCT_DISCONTINUED", "UNINTENDED_RENEWAL", "BUYER_DISSATISFACTION", "OTHER"
+    #   resp.description #=> String
+    #   resp.created_at #=> Time
+    #   resp.updated_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/SendAgreementCancellationRequest AWS API Documentation
+    #
+    # @overload send_agreement_cancellation_request(params = {})
+    # @param [Hash] params ({})
+    def send_agreement_cancellation_request(params = {}, options = {})
+      req = build_request(:send_agreement_cancellation_request, params)
+      req.send_request(options)
+    end
+
+    # Allows sellers (proposers) to submit a payment request to buyers
+    # (acceptors) for a specific charge amount for an agreement that
+    # includes a `VariablePaymentTerm`. The payment request is created in
+    # `PENDING_APPROVAL` status, at which point the buyer can accept or
+    # reject it.
+    #
+    # <note markdown="1"> The agreement must be active and have a `VariablePaymentTerm` to
+    # support payment requests. The `chargeAmount` must not exceed the
+    # remaining available balance under the `VariablePaymentTerm`
+    # `maxTotalChargeAmount`.
+    #
+    #  </note>
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, String] :agreement_id
+    #   The unique identifier of the agreement for which the payment request
+    #   is being submitted. Use `GetAgreementTerms` to retrieve agreement term
+    #   details.
+    #
+    # @option params [required, String] :term_id
+    #   The unique identifier of the `VariablePaymentTerm` for the agreement
+    #   that the payment request is being sent for.
+    #
+    # @option params [required, String] :name
+    #   A descriptive name for the payment request (5-64 characters).
+    #
+    # @option params [required, String] :charge_amount
+    #   The amount requested to be charged to the buyer, positive decimal
+    #   value in the currency of the accepted term.
+    #
+    #   <note markdown="1"> A `ValidationException` is returned if the `chargeAmount` exceeds the
+    #   available balance, if the agreement doesn't have an active
+    #   `VariablePaymentTerm`, or if the `termId` is invalid.
+    #
+    #    </note>
+    #
+    # @option params [String] :description
+    #   An optional detailed description of the payment request (1-2000
+    #   characters).
+    #
+    # @return [Types::SendAgreementPaymentRequestOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::SendAgreementPaymentRequestOutput#payment_request_id #payment_request_id} => String
+    #   * {Types::SendAgreementPaymentRequestOutput#agreement_id #agreement_id} => String
+    #   * {Types::SendAgreementPaymentRequestOutput#status #status} => String
+    #   * {Types::SendAgreementPaymentRequestOutput#name #name} => String
+    #   * {Types::SendAgreementPaymentRequestOutput#description #description} => String
+    #   * {Types::SendAgreementPaymentRequestOutput#charge_amount #charge_amount} => String
+    #   * {Types::SendAgreementPaymentRequestOutput#currency_code #currency_code} => String
+    #   * {Types::SendAgreementPaymentRequestOutput#created_at #created_at} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.send_agreement_payment_request({
+    #     client_token: "ClientToken",
+    #     agreement_id: "AgreementId", # required
+    #     term_id: "TermId", # required
+    #     name: "PaymentRequestName", # required
+    #     charge_amount: "PositiveAmountUpto8Decimals", # required
+    #     description: "PaymentRequestDescription",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.payment_request_id #=> String
+    #   resp.agreement_id #=> String
+    #   resp.status #=> String, one of "VALIDATING", "VALIDATION_FAILED", "PENDING_APPROVAL", "APPROVED", "REJECTED", "CANCELLED"
+    #   resp.name #=> String
+    #   resp.description #=> String
+    #   resp.charge_amount #=> String
+    #   resp.currency_code #=> String
+    #   resp.created_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/SendAgreementPaymentRequest AWS API Documentation
+    #
+    # @overload send_agreement_payment_request(params = {})
+    # @param [Hash] params ({})
+    def send_agreement_payment_request(params = {}, options = {})
+      req = build_request(:send_agreement_payment_request, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -865,7 +1903,7 @@ module Aws::MarketplaceAgreement
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-marketplaceagreement'
-      context[:gem_version] = '1.32.0'
+      context[:gem_version] = '1.35.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

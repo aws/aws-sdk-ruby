@@ -1,6 +1,43 @@
 Unreleased Changes
 ------------------
 
+1.219.0 (2026-04-07)
+------------------
+
+* Feature - Updated list of the valid AWS Region values for the LocationConstraint parameter for general purpose buckets.
+
+1.218.0 (2026-03-31)
+------------------
+
+* Feature - Add Bucket Metrics configuration support to directory buckets
+
+1.217.1 (2026-03-30)
+------------------
+
+* Issue - Fix `require_https_for_sse_cpk` option being ignored; the HTTPS enforcement for SSE-CPK operations now correctly respects the configured value, allowing it to be disabled for local development.
+
+1.217.0 (2026-03-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.216.0 (2026-03-12)
+------------------
+
+* Feature - Adds support for account regional namespaces for general purpose buckets. The account regional namespace is a reserved subdivision of the global bucket namespace where only your account can create general purpose buckets.
+
+1.215.0 (2026-03-05)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+* Issue - Fix `LoadError` when requiring `aws-sdk-s3` due to missing `directory_progress` file. 
+
+1.214.0 (2026-03-04)
+------------------
+
+* Feature - Added `#upload_directory` and `#download_directory` to `Aws::S3::TransferManager` for bulk directory transfers.
+
 1.213.0 (2026-01-28)
 ------------------
 

@@ -71,20 +71,20 @@ module Aws::BackupGateway
     #   The average upload rate limit component of the bandwidth rate limit
     #   interval, in bits per second. This field does not appear in the
     #   response if the upload rate limit is not set.
-    #
-    #   <note markdown="1"> For Backup Gateway, the minimum value is `(Value)`.
-    #
-    #    </note>
     #   @return [Integer]
     #
-    # @!attribute [rw] days_of_week
-    #   The days of the week component of the bandwidth rate limit interval,
-    #   represented as ordinal numbers from 0 to 6, where 0 represents
-    #   Sunday and 6 represents Saturday.
-    #   @return [Array<Integer>]
+    # @!attribute [rw] start_hour_of_day
+    #   The hour of the day to start the bandwidth rate limit interval.
+    #   @return [Integer]
     #
     # @!attribute [rw] end_hour_of_day
     #   The hour of the day to end the bandwidth rate limit interval.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] start_minute_of_hour
+    #   The minute of the hour to start the bandwidth rate limit interval.
+    #   The interval begins at the start of that minute. To begin an
+    #   interval exactly at the start of the hour, use the value `0`.
     #   @return [Integer]
     #
     # @!attribute [rw] end_minute_of_hour
@@ -94,25 +94,21 @@ module Aws::BackupGateway
     #   end an interval at the end of an hour, use the value `59`.
     #   @return [Integer]
     #
-    # @!attribute [rw] start_hour_of_day
-    #   The hour of the day to start the bandwidth rate limit interval.
-    #   @return [Integer]
-    #
-    # @!attribute [rw] start_minute_of_hour
-    #   The minute of the hour to start the bandwidth rate limit interval.
-    #   The interval begins at the start of that minute. To begin an
-    #   interval exactly at the start of the hour, use the value `0`.
-    #   @return [Integer]
+    # @!attribute [rw] days_of_week
+    #   The days of the week component of the bandwidth rate limit interval,
+    #   represented as ordinal numbers from 0 to 6, where 0 represents
+    #   Sunday and 6 represents Saturday.
+    #   @return [Array<Integer>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-gateway-2021-01-01/BandwidthRateLimitInterval AWS API Documentation
     #
     class BandwidthRateLimitInterval < Struct.new(
       :average_upload_rate_limit_in_bits_per_sec,
-      :days_of_week,
-      :end_hour_of_day,
-      :end_minute_of_hour,
       :start_hour_of_day,
-      :start_minute_of_hour)
+      :end_hour_of_day,
+      :start_minute_of_hour,
+      :end_minute_of_hour,
+      :days_of_week)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -326,6 +322,15 @@ module Aws::BackupGateway
     #   gateway uses to connect to the cloud for backup gateway.
     #   @return [String]
     #
+    # @!attribute [rw] deprecation_date
+    #   Date after which this gateway will not receive software updates for
+    #   new features and bug fixes.
+    #   @return [Time]
+    #
+    # @!attribute [rw] software_version
+    #   The version number of the software running on the gateway appliance.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-gateway-2021-01-01/GatewayDetails AWS API Documentation
     #
     class GatewayDetails < Struct.new(
@@ -336,7 +341,9 @@ module Aws::BackupGateway
       :last_seen_time,
       :maintenance_start_time,
       :next_update_availability_time,
-      :vpc_endpoint)
+      :vpc_endpoint,
+      :deprecation_date,
+      :software_version)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -359,12 +366,6 @@ module Aws::BackupGateway
       include Aws::Structure
     end
 
-    # @!attribute [rw] bandwidth_rate_limit_intervals
-    #   An array containing bandwidth rate limit schedule intervals for a
-    #   gateway. When no bandwidth rate limit intervals have been scheduled,
-    #   the array is empty.
-    #   @return [Array<Types::BandwidthRateLimitInterval>]
-    #
     # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the [
     #   `ListGateways` ][1] operation to return a list of gateways for your
@@ -375,11 +376,17 @@ module Aws::BackupGateway
     #   [1]: https://docs.aws.amazon.com/aws-backup/latest/devguide/API_BGW_ListGateways.html
     #   @return [String]
     #
+    # @!attribute [rw] bandwidth_rate_limit_intervals
+    #   An array containing bandwidth rate limit schedule intervals for a
+    #   gateway. When no bandwidth rate limit intervals have been scheduled,
+    #   the array is empty.
+    #   @return [Array<Types::BandwidthRateLimitInterval>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-gateway-2021-01-01/GetBandwidthRateLimitScheduleOutput AWS API Documentation
     #
     class GetBandwidthRateLimitScheduleOutput < Struct.new(
-      :bandwidth_rate_limit_intervals,
-      :gateway_arn)
+      :gateway_arn,
+      :bandwidth_rate_limit_intervals)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -449,21 +456,21 @@ module Aws::BackupGateway
     #   The Amazon Resource Name (ARN) of the hypervisor.
     #   @return [String]
     #
+    # @!attribute [rw] vmware_to_aws_tag_mappings
+    #   This is a display of the mappings of VMware tags to the Amazon Web
+    #   Services tags.
+    #   @return [Array<Types::VmwareToAwsTagMapping>]
+    #
     # @!attribute [rw] iam_role_arn
     #   The Amazon Resource Name (ARN) of the IAM role.
     #   @return [String]
-    #
-    # @!attribute [rw] vmware_to_aws_tag_mappings
-    #   This is a display of the mappings of on-premises VMware tags to the
-    #   Amazon Web Services tags.
-    #   @return [Array<Types::VmwareToAwsTagMapping>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-gateway-2021-01-01/GetHypervisorPropertyMappingsOutput AWS API Documentation
     #
     class GetHypervisorPropertyMappingsOutput < Struct.new(
       :hypervisor_arn,
-      :iam_role_arn,
-      :vmware_to_aws_tag_mappings)
+      :vmware_to_aws_tag_mappings,
+      :iam_role_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -551,26 +558,13 @@ module Aws::BackupGateway
     #   hypervisor.
     #   @return [String]
     #
-    # @!attribute [rw] last_successful_metadata_sync_time
-    #   This is the time when the most recent successful sync of metadata
-    #   occurred.
-    #   @return [Time]
-    #
-    # @!attribute [rw] latest_metadata_sync_status
-    #   This is the most recent status for the indicated metadata sync.
-    #   @return [String]
-    #
-    # @!attribute [rw] latest_metadata_sync_status_message
-    #   This is the most recent status for the indicated metadata sync.
+    # @!attribute [rw] name
+    #   This is the name of the specified hypervisor.
     #   @return [String]
     #
     # @!attribute [rw] log_group_arn
     #   The Amazon Resource Name (ARN) of the group of gateways within the
     #   requested log.
-    #   @return [String]
-    #
-    # @!attribute [rw] name
-    #   This is the name of the specified hypervisor.
     #   @return [String]
     #
     # @!attribute [rw] state
@@ -579,57 +573,70 @@ module Aws::BackupGateway
     #   The possible states are `PENDING`, `ONLINE`, `OFFLINE`, or `ERROR`.
     #   @return [String]
     #
+    # @!attribute [rw] last_successful_metadata_sync_time
+    #   This is the time when the most recent successful sync of metadata
+    #   occurred.
+    #   @return [Time]
+    #
+    # @!attribute [rw] latest_metadata_sync_status_message
+    #   This is the most recent status for the indicated metadata sync.
+    #   @return [String]
+    #
+    # @!attribute [rw] latest_metadata_sync_status
+    #   This is the most recent status for the indicated metadata sync.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-gateway-2021-01-01/HypervisorDetails AWS API Documentation
     #
     class HypervisorDetails < Struct.new(
       :host,
       :hypervisor_arn,
       :kms_key_arn,
-      :last_successful_metadata_sync_time,
-      :latest_metadata_sync_status,
-      :latest_metadata_sync_status_message,
-      :log_group_arn,
       :name,
-      :state)
+      :log_group_arn,
+      :state,
+      :last_successful_metadata_sync_time,
+      :latest_metadata_sync_status_message,
+      :latest_metadata_sync_status)
       SENSITIVE = []
       include Aws::Structure
     end
 
+    # @!attribute [rw] name
+    #   The name of the hypervisor.
+    #   @return [String]
+    #
     # @!attribute [rw] host
     #   The server host of the hypervisor. This can be either an IP address
     #   or a fully-qualified domain name (FQDN).
     #   @return [String]
     #
-    # @!attribute [rw] kms_key_arn
-    #   The Key Management Service for the hypervisor.
-    #   @return [String]
-    #
-    # @!attribute [rw] name
-    #   The name of the hypervisor.
+    # @!attribute [rw] username
+    #   The username for the hypervisor.
     #   @return [String]
     #
     # @!attribute [rw] password
     #   The password for the hypervisor.
     #   @return [String]
     #
+    # @!attribute [rw] kms_key_arn
+    #   The Key Management Service for the hypervisor.
+    #   @return [String]
+    #
     # @!attribute [rw] tags
     #   The tags of the hypervisor configuration to import.
     #   @return [Array<Types::Tag>]
     #
-    # @!attribute [rw] username
-    #   The username for the hypervisor.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-gateway-2021-01-01/ImportHypervisorConfigurationInput AWS API Documentation
     #
     class ImportHypervisorConfigurationInput < Struct.new(
-      :host,
-      :kms_key_arn,
       :name,
+      :host,
+      :username,
       :password,
-      :tags,
-      :username)
-      SENSITIVE = [:password, :username]
+      :kms_key_arn,
+      :tags)
+      SENSITIVE = [:username, :password]
       include Aws::Structure
     end
 
@@ -801,6 +808,11 @@ module Aws::BackupGateway
       include Aws::Structure
     end
 
+    # @!attribute [rw] virtual_machines
+    #   A list of your `VirtualMachine` objects, ordered by their Amazon
+    #   Resource Names (ARNs).
+    #   @return [Array<Types::VirtualMachine>]
+    #
     # @!attribute [rw] next_token
     #   The next item following a partial list of returned resources. For
     #   example, if a request is made to return `maxResults` number of
@@ -808,16 +820,11 @@ module Aws::BackupGateway
     #   starting at the location pointed to by the next token.
     #   @return [String]
     #
-    # @!attribute [rw] virtual_machines
-    #   A list of your `VirtualMachine` objects, ordered by their Amazon
-    #   Resource Names (ARNs).
-    #   @return [Array<Types::VirtualMachine>]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-gateway-2021-01-01/ListVirtualMachinesOutput AWS API Documentation
     #
     class ListVirtualMachinesOutput < Struct.new(
-      :next_token,
-      :virtual_machines)
+      :virtual_machines,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -862,12 +869,6 @@ module Aws::BackupGateway
       include Aws::Structure
     end
 
-    # @!attribute [rw] bandwidth_rate_limit_intervals
-    #   An array containing bandwidth rate limit schedule intervals for a
-    #   gateway. When no bandwidth rate limit intervals have been scheduled,
-    #   the array is empty.
-    #   @return [Array<Types::BandwidthRateLimitInterval>]
-    #
     # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the [
     #   `ListGateways` ][1] operation to return a list of gateways for your
@@ -878,11 +879,17 @@ module Aws::BackupGateway
     #   [1]: https://docs.aws.amazon.com/aws-backup/latest/devguide/API_BGW_ListGateways.html
     #   @return [String]
     #
+    # @!attribute [rw] bandwidth_rate_limit_intervals
+    #   An array containing bandwidth rate limit schedule intervals for a
+    #   gateway. When no bandwidth rate limit intervals have been scheduled,
+    #   the array is empty.
+    #   @return [Array<Types::BandwidthRateLimitInterval>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-gateway-2021-01-01/PutBandwidthRateLimitScheduleInput AWS API Documentation
     #
     class PutBandwidthRateLimitScheduleInput < Struct.new(
-      :bandwidth_rate_limit_intervals,
-      :gateway_arn)
+      :gateway_arn,
+      :bandwidth_rate_limit_intervals)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -909,21 +916,21 @@ module Aws::BackupGateway
     #   The Amazon Resource Name (ARN) of the hypervisor.
     #   @return [String]
     #
+    # @!attribute [rw] vmware_to_aws_tag_mappings
+    #   This action requests the mappings of VMware tags to the Amazon Web
+    #   Services tags.
+    #   @return [Array<Types::VmwareToAwsTagMapping>]
+    #
     # @!attribute [rw] iam_role_arn
     #   The Amazon Resource Name (ARN) of the IAM role.
     #   @return [String]
-    #
-    # @!attribute [rw] vmware_to_aws_tag_mappings
-    #   This action requests the mappings of on-premises VMware tags to the
-    #   Amazon Web Services tags.
-    #   @return [Array<Types::VmwareToAwsTagMapping>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-gateway-2021-01-01/PutHypervisorPropertyMappingsInput AWS API Documentation
     #
     class PutHypervisorPropertyMappingsInput < Struct.new(
       :hypervisor_arn,
-      :iam_role_arn,
-      :vmware_to_aws_tag_mappings)
+      :vmware_to_aws_tag_mappings,
+      :iam_role_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -940,16 +947,6 @@ module Aws::BackupGateway
       include Aws::Structure
     end
 
-    # @!attribute [rw] day_of_month
-    #   The day of the month start maintenance on a gateway.
-    #
-    #   Valid values range from `Sunday` to `Saturday`.
-    #   @return [Integer]
-    #
-    # @!attribute [rw] day_of_week
-    #   The day of the week to start maintenance on a gateway.
-    #   @return [Integer]
-    #
     # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) for the gateway, used to specify its
     #   maintenance start time.
@@ -963,14 +960,24 @@ module Aws::BackupGateway
     #   The minute of the hour to start maintenance on a gateway.
     #   @return [Integer]
     #
+    # @!attribute [rw] day_of_week
+    #   The day of the week to start maintenance on a gateway.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] day_of_month
+    #   The day of the month start maintenance on a gateway.
+    #
+    #   Valid values range from `Sunday` to `Saturday`.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-gateway-2021-01-01/PutMaintenanceStartTimeInput AWS API Documentation
     #
     class PutMaintenanceStartTimeInput < Struct.new(
-      :day_of_month,
-      :day_of_week,
       :gateway_arn,
       :hour_of_day,
-      :minute_of_hour)
+      :minute_of_hour,
+      :day_of_week,
+      :day_of_month)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1031,8 +1038,9 @@ module Aws::BackupGateway
     end
 
     # A key-value pair you can use to manage, filter, and search for your
-    # resources. Allowed characters include UTF-8 letters, numbers, spaces,
-    # and the following characters: + - = . \_ : /.
+    # resources. Allowed characters include UTF-8 letters, numbers, and the
+    # following characters: + - = . \_ : /. Spaces are not allowed in tag
+    # values.
     #
     # @!attribute [rw] key
     #   The key part of a tag's key-value pair. The key can't start with
@@ -1091,12 +1099,12 @@ module Aws::BackupGateway
     #   or a fully-qualified domain name (FQDN).
     #   @return [String]
     #
-    # @!attribute [rw] password
-    #   The password for the hypervisor.
-    #   @return [String]
-    #
     # @!attribute [rw] username
     #   The username for the hypervisor.
+    #   @return [String]
+    #
+    # @!attribute [rw] password
+    #   The password for the hypervisor.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-gateway-2021-01-01/TestHypervisorConfigurationInput AWS API Documentation
@@ -1104,9 +1112,9 @@ module Aws::BackupGateway
     class TestHypervisorConfigurationInput < Struct.new(
       :gateway_arn,
       :host,
-      :password,
-      :username)
-      SENSITIVE = [:password, :username]
+      :username,
+      :password)
+      SENSITIVE = [:username, :password]
       include Aws::Structure
     end
 
@@ -1218,13 +1226,25 @@ module Aws::BackupGateway
       include Aws::Structure
     end
 
+    # @!attribute [rw] hypervisor_arn
+    #   The Amazon Resource Name (ARN) of the hypervisor to update.
+    #   @return [String]
+    #
     # @!attribute [rw] host
     #   The updated host of the hypervisor. This can be either an IP address
     #   or a fully-qualified domain name (FQDN).
     #   @return [String]
     #
-    # @!attribute [rw] hypervisor_arn
-    #   The Amazon Resource Name (ARN) of the hypervisor to update.
+    # @!attribute [rw] username
+    #   The updated username for the hypervisor.
+    #   @return [String]
+    #
+    # @!attribute [rw] password
+    #   The updated password for the hypervisor.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The updated name for the hypervisor
     #   @return [String]
     #
     # @!attribute [rw] log_group_arn
@@ -1232,28 +1252,16 @@ module Aws::BackupGateway
     #   requested log.
     #   @return [String]
     #
-    # @!attribute [rw] name
-    #   The updated name for the hypervisor
-    #   @return [String]
-    #
-    # @!attribute [rw] password
-    #   The updated password for the hypervisor.
-    #   @return [String]
-    #
-    # @!attribute [rw] username
-    #   The updated username for the hypervisor.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-gateway-2021-01-01/UpdateHypervisorInput AWS API Documentation
     #
     class UpdateHypervisorInput < Struct.new(
-      :host,
       :hypervisor_arn,
-      :log_group_arn,
-      :name,
+      :host,
+      :username,
       :password,
-      :username)
-      SENSITIVE = [:password, :username]
+      :name,
+      :log_group_arn)
+      SENSITIVE = [:username, :password]
       include Aws::Structure
     end
 
@@ -1297,11 +1305,6 @@ module Aws::BackupGateway
     #   The ID of the virtual machine's hypervisor.
     #   @return [String]
     #
-    # @!attribute [rw] last_backup_date
-    #   The most recent date a virtual machine was backed up, in Unix format
-    #   and UTC time.
-    #   @return [Time]
-    #
     # @!attribute [rw] name
     #   The name of the virtual machine.
     #   @return [String]
@@ -1315,15 +1318,20 @@ module Aws::BackupGateway
     #   `arn:aws:backup-gateway:us-west-1:0000000000000:vm/vm-0000ABCDEFGIJKL`.
     #   @return [String]
     #
+    # @!attribute [rw] last_backup_date
+    #   The most recent date a virtual machine was backed up, in Unix format
+    #   and UTC time.
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-gateway-2021-01-01/VirtualMachine AWS API Documentation
     #
     class VirtualMachine < Struct.new(
       :host_name,
       :hypervisor_id,
-      :last_backup_date,
       :name,
       :path,
-      :resource_arn)
+      :resource_arn,
+      :last_backup_date)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1339,11 +1347,6 @@ module Aws::BackupGateway
     #   The ID of the virtual machine's hypervisor.
     #   @return [String]
     #
-    # @!attribute [rw] last_backup_date
-    #   The most recent date a virtual machine was backed up, in Unix format
-    #   and UTC time.
-    #   @return [Time]
-    #
     # @!attribute [rw] name
     #   The name of the virtual machine.
     #   @return [String]
@@ -1357,6 +1360,11 @@ module Aws::BackupGateway
     #   `arn:aws:backup-gateway:us-west-1:0000000000000:vm/vm-0000ABCDEFGIJKL`.
     #   @return [String]
     #
+    # @!attribute [rw] last_backup_date
+    #   The most recent date a virtual machine was backed up, in Unix format
+    #   and UTC time.
+    #   @return [Time]
+    #
     # @!attribute [rw] vmware_tags
     #   These are the details of the VMware tags associated with the
     #   specified virtual machine.
@@ -1367,10 +1375,10 @@ module Aws::BackupGateway
     class VirtualMachineDetails < Struct.new(
       :host_name,
       :hypervisor_id,
-      :last_backup_date,
       :name,
       :path,
       :resource_arn,
+      :last_backup_date,
       :vmware_tags)
       SENSITIVE = []
       include Aws::Structure
@@ -1390,34 +1398,26 @@ module Aws::BackupGateway
     #   The is the category of VMware.
     #   @return [String]
     #
-    # @!attribute [rw] vmware_tag_description
-    #   This is a user-defined description of a VMware tag.
-    #   @return [String]
-    #
     # @!attribute [rw] vmware_tag_name
     #   This is the user-defined name of a VMware tag.
+    #   @return [String]
+    #
+    # @!attribute [rw] vmware_tag_description
+    #   This is a user-defined description of a VMware tag.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-gateway-2021-01-01/VmwareTag AWS API Documentation
     #
     class VmwareTag < Struct.new(
       :vmware_category,
-      :vmware_tag_description,
-      :vmware_tag_name)
+      :vmware_tag_name,
+      :vmware_tag_description)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # This displays the mapping of on-premises VMware tags to the
-    # corresponding Amazon Web Services tags.
-    #
-    # @!attribute [rw] aws_tag_key
-    #   The key part of the Amazon Web Services tag's key-value pair.
-    #   @return [String]
-    #
-    # @!attribute [rw] aws_tag_value
-    #   The value part of the Amazon Web Services tag's key-value pair.
-    #   @return [String]
+    # This displays the mapping of VMware tags to the corresponding Amazon
+    # Web Services tags.
     #
     # @!attribute [rw] vmware_category
     #   The is the category of VMware.
@@ -1427,13 +1427,21 @@ module Aws::BackupGateway
     #   This is the user-defined name of a VMware tag.
     #   @return [String]
     #
+    # @!attribute [rw] aws_tag_key
+    #   The key part of the Amazon Web Services tag's key-value pair.
+    #   @return [String]
+    #
+    # @!attribute [rw] aws_tag_value
+    #   The value part of the Amazon Web Services tag's key-value pair.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-gateway-2021-01-01/VmwareToAwsTagMapping AWS API Documentation
     #
     class VmwareToAwsTagMapping < Struct.new(
-      :aws_tag_key,
-      :aws_tag_value,
       :vmware_category,
-      :vmware_tag_name)
+      :vmware_tag_name,
+      :aws_tag_key,
+      :aws_tag_value)
       SENSITIVE = []
       include Aws::Structure
     end

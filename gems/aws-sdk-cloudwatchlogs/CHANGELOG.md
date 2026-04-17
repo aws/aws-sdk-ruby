@@ -1,6 +1,41 @@
 Unreleased Changes
 ------------------
 
+1.145.0 (2026-04-16)
+------------------
+
+* Feature - Endpoint update for CloudWatch Logs Streaming APIs.
+
+1.144.0 (2026-04-03)
+------------------
+
+* Feature - Added queryDuration, bytesScanned, and userIdentity fields to the QueryInfo response object returned by DescribeQueries. Customers can now view detailed query cost information including who ran the query, how long it took, and the volume of data scanned.
+
+1.143.0 (2026-04-02)
+------------------
+
+* Feature - We are pleased to announce that our logs transformation csv processor now has a destination field, allowing you to specify under which parent node parsed columns be placed under.
+
+1.142.0 (2026-03-30)
+------------------
+
+* Feature - Adds Lookup Tables to CloudWatch Logs for log enrichment using CSV key-value data with KMS encryption support.
+
+1.141.0 (2026-03-26)
+------------------
+
+* Feature - This release adds parameter support to saved queries in CloudWatch Logs Insights. Define reusable query templates with named placeholders, invoke them using start query. Available in Console, CLI and SDK
+
+1.140.0 (2026-03-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.139.0 (2026-03-03)
+------------------
+
+* Feature - CloudWatch Logs updates- Added support for the PutBearerTokenAuthentication API to enable or disable bearer token authentication on a log group. For more information, see CloudWatch Logs API documentation.
+
 1.138.0 (2026-01-16)
 ------------------
 

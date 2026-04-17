@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.117.0 (2026-04-06)
+------------------
+
+* Feature - This change adds support for Tagging the resource types Programs and Prefetch Schedules
+
+1.116.0 (2026-03-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.115.0 (2026-02-23)
+------------------
+
+* Feature - Updated endpoint rule set for dualstack endpoints. Added a new opt-in option to log raw ad decision server requests for Playback Configurations.
+
 1.114.0 (2026-01-16)
 ------------------
 

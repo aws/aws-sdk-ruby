@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.56.0 (2026-03-24)
+------------------
+
+* Feature - Adds support for updating the vector options field for existing collections.
+
+1.55.0 (2026-03-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.54.0 (2026-01-16)
 ------------------
 

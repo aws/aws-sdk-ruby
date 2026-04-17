@@ -11120,6 +11120,10 @@ module Aws::CloudFront
     #
     #   * `dualstack` - Allocate a list of both IPv4 and IPv6 addresses
     #
+    # @option params [Array<Types::IpamCidrConfig>] :ipam_cidr_configs
+    #   A list of IPAM CIDR configurations that specify the IP address ranges
+    #   and IPAM pool settings for updating the Anycast static IP list.
+    #
     # @option params [required, String] :if_match
     #   The current version (ETag value) of the Anycast static IP list that
     #   you are updating.
@@ -11134,6 +11138,14 @@ module Aws::CloudFront
     #   resp = client.update_anycast_ip_list({
     #     id: "string", # required
     #     ip_address_type: "ipv4", # accepts ipv4, ipv6, dualstack
+    #     ipam_cidr_configs: [
+    #       {
+    #         cidr: "string", # required
+    #         ipam_pool_arn: "string", # required
+    #         anycast_ip: "string",
+    #         status: "provisioned", # accepts provisioned, failed-provision, provisioning, deprovisioned, failed-deprovision, deprovisioning, advertised, failed-advertise, advertising, withdrawn, failed-withdraw, withdrawing
+    #       },
+    #     ],
     #     if_match: "string", # required
     #   })
     #
@@ -13754,7 +13766,7 @@ module Aws::CloudFront
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-cloudfront'
-      context[:gem_version] = '1.141.0'
+      context[:gem_version] = '1.143.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

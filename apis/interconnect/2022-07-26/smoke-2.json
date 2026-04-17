@@ -1,0 +1,32 @@
+{
+  "version" : 2,
+  "testCases" : [ {
+    "id" : "ListEnvironmentSuccess",
+    "operationName" : "ListEnvironments",
+    "input" : { },
+    "expectation" : {
+      "success" : { }
+    },
+    "config" : {
+      "region" : "us-west-2",
+      "useFips" : false,
+      "useDualstack" : true,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "GetEnvironmentFailure",
+    "operationName" : "GetEnvironment",
+    "input" : {
+      "id" : "mce-nonexistent"
+    },
+    "expectation" : {
+      "failure" : { }
+    },
+    "config" : {
+      "region" : "us-west-2",
+      "useFips" : false,
+      "useDualstack" : true,
+      "useAccountIdRouting" : true
+    }
+  } ]
+}

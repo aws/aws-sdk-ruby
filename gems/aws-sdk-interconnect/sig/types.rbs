@@ -1,0 +1,303 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::Interconnect
+  module Types
+
+    class AcceptConnectionProposalRequest
+      attr_accessor attach_point: Types::AttachPoint
+      attr_accessor activation_key: ::String
+      attr_accessor description: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor client_token: ::String
+      SENSITIVE: [:activation_key]
+    end
+
+    class AcceptConnectionProposalResponse
+      attr_accessor connection: Types::Connection
+      SENSITIVE: []
+    end
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class AttachPoint
+      attr_accessor direct_connect_gateway: ::String
+      attr_accessor arn: ::String
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class DirectConnectGateway < AttachPoint
+      end
+      class Arn < AttachPoint
+      end
+      class Unknown < AttachPoint
+      end
+    end
+
+    class AttachPointDescriptor
+      attr_accessor type: ("DirectConnectGateway")
+      attr_accessor identifier: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class Bandwidths
+      attr_accessor available: ::Array[::String]
+      attr_accessor supported: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class Connection
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor description: ::String
+      attr_accessor bandwidth: ::String
+      attr_accessor attach_point: Types::AttachPoint
+      attr_accessor environment_id: ::String
+      attr_accessor provider: Types::Provider
+      attr_accessor location: ::String
+      attr_accessor type: ::String
+      attr_accessor state: ("available" | "requested" | "pending" | "down" | "deleting" | "deleted" | "failed" | "updating")
+      attr_accessor shared_id: ::String
+      attr_accessor billing_tier: ::Integer
+      attr_accessor owner_account: ::String
+      attr_accessor activation_key: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: [:activation_key]
+    end
+
+    class ConnectionSummary
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor description: ::String
+      attr_accessor bandwidth: ::String
+      attr_accessor attach_point: Types::AttachPoint
+      attr_accessor environment_id: ::String
+      attr_accessor provider: Types::Provider
+      attr_accessor location: ::String
+      attr_accessor type: ::String
+      attr_accessor state: ("available" | "requested" | "pending" | "down" | "deleting" | "deleted" | "failed" | "updating")
+      attr_accessor shared_id: ::String
+      attr_accessor billing_tier: ::Integer
+      SENSITIVE: []
+    end
+
+    class CreateConnectionRequest
+      attr_accessor description: ::String
+      attr_accessor bandwidth: ::String
+      attr_accessor attach_point: Types::AttachPoint
+      attr_accessor environment_id: ::String
+      attr_accessor remote_account: Types::RemoteAccountIdentifier
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateConnectionResponse
+      attr_accessor connection: Types::Connection
+      SENSITIVE: []
+    end
+
+    class DeleteConnectionRequest
+      attr_accessor identifier: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteConnectionResponse
+      attr_accessor connection: Types::Connection
+      SENSITIVE: []
+    end
+
+    class DescribeConnectionProposalRequest
+      attr_accessor activation_key: ::String
+      SENSITIVE: [:activation_key]
+    end
+
+    class DescribeConnectionProposalResponse
+      attr_accessor bandwidth: ::String
+      attr_accessor environment_id: ::String
+      attr_accessor provider: Types::Provider
+      attr_accessor location: ::String
+      SENSITIVE: []
+    end
+
+    class Environment
+      attr_accessor provider: Types::Provider
+      attr_accessor location: ::String
+      attr_accessor environment_id: ::String
+      attr_accessor state: ("available" | "limited" | "unavailable")
+      attr_accessor bandwidths: Types::Bandwidths
+      attr_accessor type: ::String
+      attr_accessor activation_page_url: ::String
+      attr_accessor remote_identifier_type: ("account" | "email")
+      SENSITIVE: []
+    end
+
+    class GetConnectionRequest
+      attr_accessor identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetConnectionResponse
+      attr_accessor connection: Types::Connection
+      SENSITIVE: []
+    end
+
+    class GetEnvironmentRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class GetEnvironmentResponse
+      attr_accessor environment: Types::Environment
+      SENSITIVE: []
+    end
+
+    class InterconnectClientException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InterconnectServerException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InterconnectValidationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListAttachPointsRequest
+      attr_accessor environment_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAttachPointsResponse
+      attr_accessor attach_points: ::Array[Types::AttachPointDescriptor]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListConnectionsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor state: ("available" | "requested" | "pending" | "down" | "deleting" | "deleted" | "failed" | "updating")
+      attr_accessor environment_id: ::String
+      attr_accessor provider: Types::Provider
+      attr_accessor attach_point: Types::AttachPoint
+      SENSITIVE: []
+    end
+
+    class ListConnectionsResponse
+      attr_accessor connections: ::Array[Types::ConnectionSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListEnvironmentsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor provider: Types::Provider
+      attr_accessor location: ::String
+      SENSITIVE: []
+    end
+
+    class ListEnvironmentsResponse
+      attr_accessor environments: ::Array[Types::Environment]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class Provider
+      attr_accessor cloud_service_provider: ::String
+      attr_accessor last_mile_provider: ::String
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class CloudServiceProvider < Provider
+      end
+      class LastMileProvider < Provider
+      end
+      class Unknown < Provider
+      end
+    end
+
+    class RemoteAccountIdentifier
+      attr_accessor identifier: ::String
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Identifier < RemoteAccountIdentifier
+      end
+      class Unknown < RemoteAccountIdentifier
+      end
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceQuotaExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateConnectionRequest
+      attr_accessor identifier: ::String
+      attr_accessor description: ::String
+      attr_accessor bandwidth: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateConnectionResponse
+      attr_accessor connection: Types::Connection
+      SENSITIVE: []
+    end
+  end
+end

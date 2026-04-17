@@ -103,6 +103,7 @@ module Aws::IVSRealTime
       attr_accessor attributes: ::Hash[::String, ::String]
       attr_accessor ingest_protocol: ("RTMP" | "RTMPS")
       attr_accessor insecure_ingest: bool
+      attr_accessor redundant_ingest: bool
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
     end
@@ -384,6 +385,8 @@ module Aws::IVSRealTime
       attr_accessor participant_id: ::String
       attr_accessor state: ("ACTIVE" | "INACTIVE")
       attr_accessor user_id: ::String
+      attr_accessor redundant_ingest: bool
+      attr_accessor redundant_ingest_credentials: ::Array[Types::RedundantIngestCredential]
       attr_accessor attributes: ::Hash[::String, ::String]
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: [:stream_key]
@@ -397,6 +400,7 @@ module Aws::IVSRealTime
       attr_accessor participant_id: ::String
       attr_accessor state: ("ACTIVE" | "INACTIVE")
       attr_accessor user_id: ::String
+      attr_accessor redundant_ingest: bool
       SENSITIVE: []
     end
 
@@ -586,6 +590,8 @@ module Aws::IVSRealTime
       attr_accessor replication_state: ("ACTIVE" | "STOPPED")
       attr_accessor source_stage_arn: ::String
       attr_accessor source_session_id: ::String
+      attr_accessor redundant_ingest: bool
+      attr_accessor ingest_configuration_arn: ::String
       SENSITIVE: []
     end
 
@@ -615,6 +621,8 @@ module Aws::IVSRealTime
       attr_accessor replication_state: ("ACTIVE" | "STOPPED")
       attr_accessor source_stage_arn: ::String
       attr_accessor source_session_id: ::String
+      attr_accessor redundant_ingest: bool
+      attr_accessor ingest_configuration_arn: ::String
       SENSITIVE: []
     end
 
@@ -692,6 +700,12 @@ module Aws::IVSRealTime
       attr_accessor hls_configuration: Types::CompositionRecordingHlsConfiguration
       attr_accessor format: ("HLS")
       SENSITIVE: []
+    end
+
+    class RedundantIngestCredential
+      attr_accessor participant_id: ::String
+      attr_accessor stream_key: ::String
+      SENSITIVE: [:stream_key]
     end
 
     class ResourceNotFoundException
@@ -875,6 +889,7 @@ module Aws::IVSRealTime
     class UpdateIngestConfigurationRequest
       attr_accessor arn: ::String
       attr_accessor stage_arn: ::String
+      attr_accessor redundant_ingest: bool
       SENSITIVE: []
     end
 

@@ -18,31 +18,22 @@ module Aws::BCMDataExports
       end
       if Aws::Endpoints::Matchers.set?(parameters.region)
         if (partition_result = Aws::Endpoints::Matchers.aws_partition(parameters.region))
-          if Aws::Endpoints::Matchers.string_equals?(Aws::Endpoints::Matchers.attr(partition_result, "name"), "aws")
-            if Aws::Endpoints::Matchers.boolean_equals?(parameters.use_fips, true)
-              if Aws::Endpoints::Matchers.boolean_equals?(Aws::Endpoints::Matchers.attr(partition_result, "supportsFIPS"), true)
-                return Aws::Endpoints::Endpoint.new(url: "https://bcm-data-exports-fips.#{parameters.region}.api.aws", headers: {}, properties: {})
-              end
-              raise ArgumentError, "FIPS is enabled but this partition does not support FIPS"
-            end
-            return Aws::Endpoints::Endpoint.new(url: "https://bcm-data-exports.us-east-1.api.aws", headers: {}, properties: {"authSchemes" => [{"name" => "sigv4", "signingName" => "bcm-data-exports", "signingRegion" => "us-east-1"}]})
+          if Aws::Endpoints::Matchers.string_equals?(Aws::Endpoints::Matchers.attr(partition_result, "name"), "aws-iso") && Aws::Endpoints::Matchers.boolean_equals?(parameters.use_fips, false)
+            return Aws::Endpoints::Endpoint.new(url: "https://bcm-data-exports.us-iso-east-1.c2s.ic.gov", headers: {}, properties: {"authSchemes" => [{"name" => "sigv4", "signingRegion" => "us-iso-east-1"}]})
           end
-          if Aws::Endpoints::Matchers.boolean_equals?(true, Aws::Endpoints::Matchers.attr(partition_result, "supportsDualStack"))
-            if Aws::Endpoints::Matchers.boolean_equals?(parameters.use_fips, true)
-              if Aws::Endpoints::Matchers.boolean_equals?(Aws::Endpoints::Matchers.attr(partition_result, "supportsFIPS"), true)
-                return Aws::Endpoints::Endpoint.new(url: "https://bcm-data-exports-fips.#{parameters.region}.#{partition_result['dualStackDnsSuffix']}", headers: {}, properties: {})
-              end
-              raise ArgumentError, "FIPS is enabled but this partition does not support FIPS"
-            end
-            return Aws::Endpoints::Endpoint.new(url: "https://bcm-data-exports.#{parameters.region}.#{partition_result['dualStackDnsSuffix']}", headers: {}, properties: {})
+          if Aws::Endpoints::Matchers.string_equals?(Aws::Endpoints::Matchers.attr(partition_result, "name"), "aws-iso-b") && Aws::Endpoints::Matchers.boolean_equals?(parameters.use_fips, false)
+            return Aws::Endpoints::Endpoint.new(url: "https://bcm-data-exports.us-isob-east-1.sc2s.sgov.gov", headers: {}, properties: {"authSchemes" => [{"name" => "sigv4", "signingRegion" => "us-isob-east-1"}]})
+          end
+          if Aws::Endpoints::Matchers.string_equals?(Aws::Endpoints::Matchers.attr(partition_result, "name"), "aws-iso-e") && Aws::Endpoints::Matchers.boolean_equals?(parameters.use_fips, false)
+            return Aws::Endpoints::Endpoint.new(url: "https://bcm-data-exports.eu-isoe-west-1.cloud.adc-e.uk", headers: {}, properties: {"authSchemes" => [{"name" => "sigv4", "signingRegion" => "eu-isoe-west-1"}]})
+          end
+          if Aws::Endpoints::Matchers.string_equals?(Aws::Endpoints::Matchers.attr(partition_result, "name"), "aws-iso-f") && Aws::Endpoints::Matchers.boolean_equals?(parameters.use_fips, false)
+            return Aws::Endpoints::Endpoint.new(url: "https://bcm-data-exports.us-isof-south-1.csp.hci.ic.gov", headers: {}, properties: {"authSchemes" => [{"name" => "sigv4", "signingRegion" => "us-isof-south-1"}]})
           end
           if Aws::Endpoints::Matchers.boolean_equals?(parameters.use_fips, true)
-            if Aws::Endpoints::Matchers.boolean_equals?(Aws::Endpoints::Matchers.attr(partition_result, "supportsFIPS"), true)
-              return Aws::Endpoints::Endpoint.new(url: "https://bcm-data-exports-fips.#{parameters.region}.#{partition_result['dnsSuffix']}", headers: {}, properties: {})
-            end
-            raise ArgumentError, "FIPS is enabled but this partition does not support FIPS"
+            return Aws::Endpoints::Endpoint.new(url: "https://bcm-data-exports-fips.#{partition_result['implicitGlobalRegion']}.#{partition_result['dualStackDnsSuffix']}", headers: {}, properties: {"authSchemes" => [{"name" => "sigv4", "signingRegion" => "#{partition_result['implicitGlobalRegion']}"}]})
           end
-          return Aws::Endpoints::Endpoint.new(url: "https://bcm-data-exports.#{parameters.region}.#{partition_result['dnsSuffix']}", headers: {}, properties: {})
+          return Aws::Endpoints::Endpoint.new(url: "https://bcm-data-exports.#{partition_result['implicitGlobalRegion']}.#{partition_result['dualStackDnsSuffix']}", headers: {}, properties: {"authSchemes" => [{"name" => "sigv4", "signingRegion" => "#{partition_result['implicitGlobalRegion']}"}]})
         end
       end
       raise ArgumentError, "Invalid Configuration: Missing Region"

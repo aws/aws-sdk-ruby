@@ -174,9 +174,6 @@ module Aws
                                    },
                                  ],
                                  ?requested_support_plan: {
-                                   resold_business: {
-                                     coverage: ("ENTIRE_ORGANIZATION" | "MANAGEMENT_ACCOUNT_ONLY")
-                                   }?,
                                    resold_enterprise: {
                                      coverage: ("ENTIRE_ORGANIZATION" | "MANAGEMENT_ACCOUNT_ONLY"),
                                      tam_location: ::String,
@@ -186,6 +183,11 @@ module Aws
                                      coverage: ("ENTIRE_ORGANIZATION" | "MANAGEMENT_ACCOUNT_ONLY"),
                                      provider: ("DISTRIBUTOR" | "DISTRIBUTION_SELLER")?,
                                      tam_location: ::String
+                                   }?,
+                                   resold_unified_operations: {
+                                     coverage: ("ENTIRE_ORGANIZATION" | "MANAGEMENT_ACCOUNT_ONLY"),
+                                     tam_location: ::String,
+                                     charge_account_id: ::String?
                                    }?
                                  }
                                ) -> _CreateRelationshipResponseSuccess
@@ -381,9 +383,6 @@ module Aws
                                  ?revision: ::String,
                                  ?display_name: ::String,
                                  ?requested_support_plan: {
-                                   resold_business: {
-                                     coverage: ("ENTIRE_ORGANIZATION" | "MANAGEMENT_ACCOUNT_ONLY")
-                                   }?,
                                    resold_enterprise: {
                                      coverage: ("ENTIRE_ORGANIZATION" | "MANAGEMENT_ACCOUNT_ONLY"),
                                      tam_location: ::String,
@@ -393,6 +392,11 @@ module Aws
                                      coverage: ("ENTIRE_ORGANIZATION" | "MANAGEMENT_ACCOUNT_ONLY"),
                                      provider: ("DISTRIBUTOR" | "DISTRIBUTION_SELLER")?,
                                      tam_location: ::String
+                                   }?,
+                                   resold_unified_operations: {
+                                     coverage: ("ENTIRE_ORGANIZATION" | "MANAGEMENT_ACCOUNT_ONLY"),
+                                     tam_location: ::String,
+                                     charge_account_id: ::String?
                                    }?
                                  }
                                ) -> _UpdateRelationshipResponseSuccess

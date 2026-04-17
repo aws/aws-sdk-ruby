@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.134.0 (2026-04-16)
+------------------
+
+* Feature - Update documentation of alarm mute rules start and end date fields
+
+1.133.0 (2026-04-02)
+------------------
+
+* Feature - CloudWatch now supports OTel enrichment to make vended metrics for supported AWS resources queryable via PromQL with resource ARN and tag labels, and PromQL alarms for metrics ingested via the OTLP endpoint with multi-contributor evaluation.
+
+1.132.0 (2026-03-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.131.0 (2026-02-24)
+------------------
+
+* Feature - This release adds the APIs (PutAlarmMuteRule, ListAlarmMuteRules, GetAlarmMuteRule and DeleteAlarmMuteRule) to manage a new Cloudwatch resource, AlarmMuteRules. AlarmMuteRules allow customers to temporarily mute alarm notifications during expected downtime periods.
+
 1.130.0 (2026-02-13)
 ------------------
 

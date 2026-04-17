@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.142.0 (2026-03-31)
+------------------
+
+* Feature - To successfully connect to the IBM DB2 LUW database server, you may need to specify additional security parameters that are passed to the JDBC driver. These parameters are EncryptionAlgorithm and SecurityMechanism. Both parameters accept integer values.
+
+1.141.0 (2026-03-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.140.0 (2026-03-10)
+------------------
+
+* Feature - Not need to include to any release notes. The only change is to correct LoadTimeout unit from milliseconds to seconds in RedshiftSettings
+
 1.139.0 (2026-01-16)
 ------------------
 

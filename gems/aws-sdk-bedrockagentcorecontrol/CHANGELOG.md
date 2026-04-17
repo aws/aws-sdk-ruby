@@ -1,6 +1,71 @@
 Unreleased Changes
 ------------------
 
+1.37.0 (2026-04-09)
+------------------
+
+* Feature - Initial release for CRUDL in AgentCore Registry Service
+
+1.36.0 (2026-04-03)
+------------------
+
+* Feature - Documentation Update for Adds support for three-legged (Authorization Code grant type) OAuth along with predefined MCP tool schema configuration for Amazon Bedrock AgentCore gateway MCP server targets.
+
+1.35.0 (2026-04-02)
+------------------
+
+* Feature - Adds support for three-legged (Authorization Code grant type) OAuth along with predefined MCP tool schema configuration for Amazon Bedrock AgentCore gateway MCP server targets.
+
+1.34.0 (2026-04-01)
+------------------
+
+* Feature - Adds support for VPC egress private endpoints for Amazon Bedrock AgentCore gateway targets, enabling private connectivity through managed VPC Lattice resources. Also adds IAM credential provider for gateway targets, enabling IAM-based authentication to target endpoints
+
+1.33.0 (2026-03-27)
+------------------
+
+* Feature - Adds support for custom code-based evaluators using customer-managed Lambda functions.
+
+1.32.0 (2026-03-24)
+------------------
+
+* Feature - Adds SDK support for 1) Persist session state in AgentCore Runtime via filesystemConfigurations in CreateAgentRuntime, UpdateAgentRuntime, and GetAgentRuntime APIs, 2) Optional name-based filtering on AgentCore ListBrowserProfiles API.
+
+1.31.0 (2026-03-19)
+------------------
+
+* Feature - Adds support for the following new features. 1. Enterprise Policies support for AgentCore Browser Tool. 2. Root CA Configuration support for AgentCore Browser Tool and Code Interpreter.
+
+1.30.0 (2026-03-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.29.0 (2026-03-17)
+------------------
+
+* Feature - Deprecating namespaces field and adding namespaceTemplates.
+
+1.28.0 (2026-03-16)
+------------------
+
+* Feature - Supporting hosting of public ECR Container Images in AgentCore Runtime
+
+1.27.0 (2026-03-10)
+------------------
+
+* Feature - Adding first class support for AG-UI protocol in AgentCore Runtime.
+
+1.26.0 (2026-03-06)
+------------------
+
+* Feature - Adds support for streaming memory records in AgentCore Memory
+
+1.25.0 (2026-03-03)
+------------------
+
+* Feature - Support for AgentCore Policy GA
+
 1.24.0 (2026-02-05)
 ------------------
 

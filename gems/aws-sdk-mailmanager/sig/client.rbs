@@ -175,12 +175,19 @@ module Aws
       def create_ingress_point: (
                                   ?client_token: ::String,
                                   ingress_point_name: ::String,
-                                  type: ("OPEN" | "AUTH"),
+                                  type: ("OPEN" | "AUTH" | "MTLS"),
                                   rule_set_id: ::String,
                                   traffic_policy_id: ::String,
                                   ?ingress_point_configuration: {
                                     smtp_password: ::String?,
-                                    secret_arn: ::String?
+                                    secret_arn: ::String?,
+                                    tls_auth_configuration: {
+                                      trust_store: {
+                                        ca_content: ::String,
+                                        crl_content: ::String?,
+                                        kms_key_arn: ::String?
+                                      }?
+                                    }?
                                   },
                                   ?network_configuration: {
                                     public_network_configuration: {
@@ -190,6 +197,7 @@ module Aws
                                       vpc_endpoint_id: ::String
                                     }?
                                   },
+                                  ?tls_policy: ("REQUIRED" | "OPTIONAL" | "FIPS"),
                                   ?tags: Array[
                                     {
                                       key: ::String,
@@ -257,7 +265,8 @@ module Aws
                                          analysis: {
                                            analyzer: ::String,
                                            result_field: ::String
-                                         }?
+                                         }?,
+                                         client_certificate_attribute: ("CN" | "SAN_RFC822_NAME" | "SAN_DNS_NAME" | "SAN_DIRECTORY_NAME" | "SAN_UNIFORM_RESOURCE_IDENTIFIER" | "SAN_IP_ADDRESS" | "SAN_REGISTERED_ID" | "SERIAL_NUMBER")?
                                        },
                                        operator: ("EQUALS" | "NOT_EQUALS" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS"),
                                        values: Array[::String]
@@ -316,7 +325,8 @@ module Aws
                                          analysis: {
                                            analyzer: ::String,
                                            result_field: ::String
-                                         }?
+                                         }?,
+                                         client_certificate_attribute: ("CN" | "SAN_RFC822_NAME" | "SAN_DNS_NAME" | "SAN_DIRECTORY_NAME" | "SAN_UNIFORM_RESOURCE_IDENTIFIER" | "SAN_IP_ADDRESS" | "SAN_REGISTERED_ID" | "SERIAL_NUMBER")?
                                        },
                                        operator: ("EQUALS" | "NOT_EQUALS" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS"),
                                        values: Array[::String]
@@ -400,6 +410,22 @@ module Aws
                                        role_arn: ::String,
                                        encoding: ("UTF-8" | "BASE64")?,
                                        payload_type: ("HEADERS" | "CONTENT")?
+                                     }?,
+                                     bounce: {
+                                       action_failure_policy: ("CONTINUE" | "DROP")?,
+                                       role_arn: ::String,
+                                       sender: ::String,
+                                       status_code: ::String,
+                                       smtp_reply_code: ::String,
+                                       diagnostic_message: ::String,
+                                       message: ::String?
+                                     }?,
+                                     invoke_lambda: {
+                                       action_failure_policy: ("CONTINUE" | "DROP")?,
+                                       function_arn: ::String,
+                                       invocation_type: ("EVENT" | "REQUEST_RESPONSE"),
+                                       role_arn: ::String,
+                                       retry_time_minutes: ::Integer?
                                      }?
                                    },
                                  ]
@@ -713,19 +739,21 @@ module Aws
         def ingress_point_id: () -> ::String
         def ingress_point_name: () -> ::String
         def ingress_point_arn: () -> ::String
-        def status: () -> ("PROVISIONING" | "DEPROVISIONING" | "UPDATING" | "ACTIVE" | "CLOSED" | "FAILED")
-        def type: () -> ("OPEN" | "AUTH")
+        def status: () -> ("PROVISIONING" | "DEPROVISIONING" | "UPDATING" | "ACTIVE" | "CLOSED" | "FAILED" | "ASSOCIATED_VPC_ENDPOINT_DOES_NOT_EXIST")
+        def type: () -> ("OPEN" | "AUTH" | "MTLS")
         def a_record: () -> ::String
         def rule_set_id: () -> ::String
         def traffic_policy_id: () -> ::String
         def ingress_point_auth_configuration: () -> Types::IngressPointAuthConfiguration
         def network_configuration: () -> Types::NetworkConfiguration
+        def tls_policy: () -> ("REQUIRED" | "OPTIONAL" | "FIPS")
         def created_timestamp: () -> ::Time
         def last_updated_timestamp: () -> ::Time
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MailManager/Client.html#get_ingress_point-instance_method
       def get_ingress_point: (
-                               ingress_point_id: ::String
+                               ingress_point_id: ::String,
+                               ?include_trust_store_contents: ("EXCLUDE" | "INCLUDE")
                              ) -> _GetIngressPointResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetIngressPointResponseSuccess
 
@@ -1151,8 +1179,16 @@ module Aws
                                   ?traffic_policy_id: ::String,
                                   ?ingress_point_configuration: {
                                     smtp_password: ::String?,
-                                    secret_arn: ::String?
-                                  }
+                                    secret_arn: ::String?,
+                                    tls_auth_configuration: {
+                                      trust_store: {
+                                        ca_content: ::String,
+                                        crl_content: ::String?,
+                                        kms_key_arn: ::String?
+                                      }?
+                                    }?
+                                  },
+                                  ?tls_policy: ("REQUIRED" | "OPTIONAL" | "FIPS")
                                 ) -> _UpdateIngressPointResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateIngressPointResponseSuccess
 
@@ -1206,7 +1242,8 @@ module Aws
                                          analysis: {
                                            analyzer: ::String,
                                            result_field: ::String
-                                         }?
+                                         }?,
+                                         client_certificate_attribute: ("CN" | "SAN_RFC822_NAME" | "SAN_DNS_NAME" | "SAN_DIRECTORY_NAME" | "SAN_UNIFORM_RESOURCE_IDENTIFIER" | "SAN_IP_ADDRESS" | "SAN_REGISTERED_ID" | "SERIAL_NUMBER")?
                                        },
                                        operator: ("EQUALS" | "NOT_EQUALS" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS"),
                                        values: Array[::String]
@@ -1265,7 +1302,8 @@ module Aws
                                          analysis: {
                                            analyzer: ::String,
                                            result_field: ::String
-                                         }?
+                                         }?,
+                                         client_certificate_attribute: ("CN" | "SAN_RFC822_NAME" | "SAN_DNS_NAME" | "SAN_DIRECTORY_NAME" | "SAN_UNIFORM_RESOURCE_IDENTIFIER" | "SAN_IP_ADDRESS" | "SAN_REGISTERED_ID" | "SERIAL_NUMBER")?
                                        },
                                        operator: ("EQUALS" | "NOT_EQUALS" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS"),
                                        values: Array[::String]
@@ -1349,6 +1387,22 @@ module Aws
                                        role_arn: ::String,
                                        encoding: ("UTF-8" | "BASE64")?,
                                        payload_type: ("HEADERS" | "CONTENT")?
+                                     }?,
+                                     bounce: {
+                                       action_failure_policy: ("CONTINUE" | "DROP")?,
+                                       role_arn: ::String,
+                                       sender: ::String,
+                                       status_code: ::String,
+                                       smtp_reply_code: ::String,
+                                       diagnostic_message: ::String,
+                                       message: ::String?
+                                     }?,
+                                     invoke_lambda: {
+                                       action_failure_policy: ("CONTINUE" | "DROP")?,
+                                       function_arn: ::String,
+                                       invocation_type: ("EVENT" | "REQUEST_RESPONSE"),
+                                       role_arn: ::String,
+                                       retry_time_minutes: ::Integer?
                                      }?
                                    },
                                  ]

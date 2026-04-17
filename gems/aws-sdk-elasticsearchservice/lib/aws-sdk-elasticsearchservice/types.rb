@@ -955,6 +955,10 @@ module Aws::ElasticsearchService
     #   A list of `Tag` added during domain creation.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] deployment_strategy_options
+    #   Specifies the deployment strategy options.
+    #   @return [Types::DeploymentStrategyOptions]
+    #
     class CreateElasticsearchDomainRequest < Struct.new(
       :domain_name,
       :elasticsearch_version,
@@ -971,7 +975,8 @@ module Aws::ElasticsearchService
       :domain_endpoint_options,
       :advanced_security_options,
       :auto_tune_options,
-      :tag_list)
+      :tag_list,
+      :deployment_strategy_options)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1264,6 +1269,39 @@ module Aws::ElasticsearchService
     #
     class DeleteVpcEndpointResponse < Struct.new(
       :vpc_endpoint_summary)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the deployment strategy options for the domain.
+    #
+    # @!attribute [rw] deployment_strategy
+    #   Specifies the deployment strategy for the domain. Valid values are
+    #   `Default` and `CapacityOptimized`.
+    #   @return [String]
+    #
+    class DeploymentStrategyOptions < Struct.new(
+      :deployment_strategy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the status of deployment strategy options for the specified
+    # Elasticsearch domain.
+    #
+    # @!attribute [rw] options
+    #   Specifies deployment strategy options for the specified
+    #   Elasticsearch domain.
+    #   @return [Types::DeploymentStrategyOptions]
+    #
+    # @!attribute [rw] status
+    #   Specifies the status of the deployment strategy options for the
+    #   specified Elasticsearch domain.
+    #   @return [Types::OptionStatus]
+    #
+    class DeploymentStrategyOptionsStatus < Struct.new(
+      :options,
+      :status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1819,6 +1857,8 @@ module Aws::ElasticsearchService
     #   * <b>Policy-Min-TLS-1-2-PFS-2023-10: </b> TLS security policy that
     #     supports TLS version 1.2 to TLS version 1.3 with perfect forward
     #     secrecy cipher suites
+    #   * <b>Policy-Min-TLS-1-2-RFC9151-FIPS-2024-08: </b> TLS security
+    #     policy that supports TLS version 1.3 with FIPS
     #   @return [String]
     #
     # @!attribute [rw] custom_endpoint_enabled
@@ -2245,6 +2285,10 @@ module Aws::ElasticsearchService
     #   modified.
     #   @return [Array<Types::ModifyingProperties>]
     #
+    # @!attribute [rw] deployment_strategy_options
+    #   Specifies `DeploymentStrategyOptions` for the domain.
+    #   @return [Types::DeploymentStrategyOptionsStatus]
+    #
     class ElasticsearchDomainConfig < Struct.new(
       :elasticsearch_version,
       :elasticsearch_cluster_config,
@@ -2261,7 +2305,8 @@ module Aws::ElasticsearchService
       :advanced_security_options,
       :auto_tune_options,
       :change_progress_details,
-      :modifying_properties)
+      :modifying_properties,
+      :deployment_strategy_options)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2414,6 +2459,11 @@ module Aws::ElasticsearchService
     #   modified.
     #   @return [Array<Types::ModifyingProperties>]
     #
+    # @!attribute [rw] deployment_strategy_options
+    #   The current status of the Elasticsearch domain's deployment
+    #   strategy options.
+    #   @return [Types::DeploymentStrategyOptions]
+    #
     class ElasticsearchDomainStatus < Struct.new(
       :domain_id,
       :domain_name,
@@ -2441,7 +2491,8 @@ module Aws::ElasticsearchService
       :auto_tune_options,
       :change_progress_details,
       :domain_processing_status,
-      :modifying_properties)
+      :modifying_properties,
+      :deployment_strategy_options)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4213,6 +4264,10 @@ module Aws::ElasticsearchService
     #   perform the Update.
     #   @return [Boolean]
     #
+    # @!attribute [rw] deployment_strategy_options
+    #   Specifies the deployment strategy options.
+    #   @return [Types::DeploymentStrategyOptions]
+    #
     class UpdateElasticsearchDomainConfigRequest < Struct.new(
       :domain_name,
       :elasticsearch_cluster_config,
@@ -4228,7 +4283,8 @@ module Aws::ElasticsearchService
       :node_to_node_encryption_options,
       :encryption_at_rest_options,
       :auto_tune_options,
-      :dry_run)
+      :dry_run,
+      :deployment_strategy_options)
       SENSITIVE = []
       include Aws::Structure
     end

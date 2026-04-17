@@ -4996,11 +4996,38 @@ module Aws::EC2
     #   instances is currently in use.
     #   @return [Integer]
     #
+    # @!attribute [rw] allocation_metadata
+    #   Additional metadata associated with the capacity allocation. Each
+    #   entry contains a key-value pair providing context about the
+    #   allocation.
+    #   @return [Array<Types::CapacityAllocationMetadataEntry>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CapacityAllocation AWS API Documentation
     #
     class CapacityAllocation < Struct.new(
       :allocation_type,
-      :count)
+      :count,
+      :allocation_metadata)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A key-value pair that provides additional metadata about a capacity
+    # allocation.
+    #
+    # @!attribute [rw] key
+    #   The key of the metadata entry.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value of the metadata entry.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CapacityAllocationMetadataEntry AWS API Documentation
+    #
+    class CapacityAllocationMetadataEntry < Struct.new(
+      :key,
+      :value)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5148,6 +5175,10 @@ module Aws::EC2
     #   The currency of the payment for the Capacity Block extension.
     #   @return [String]
     #
+    # @!attribute [rw] zone_type
+    #   The type of zone where the Capacity Block extension is located.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CapacityBlockExtension AWS API Documentation
     #
     class CapacityBlockExtension < Struct.new(
@@ -5163,7 +5194,8 @@ module Aws::EC2
       :capacity_block_extension_start_date,
       :capacity_block_extension_end_date,
       :upfront_fee,
-      :currency_code)
+      :currency_code,
+      :zone_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5236,6 +5268,11 @@ module Aws::EC2
     #     account.
     #   @return [String]
     #
+    # @!attribute [rw] zone_type
+    #   The type of zone where the Capacity Block extension offering is
+    #   available.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CapacityBlockExtensionOffering AWS API Documentation
     #
     class CapacityBlockExtensionOffering < Struct.new(
@@ -5250,7 +5287,8 @@ module Aws::EC2
       :capacity_block_extension_duration_hours,
       :upfront_fee,
       :currency_code,
-      :tenancy)
+      :tenancy,
+      :zone_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5315,6 +5353,10 @@ module Aws::EC2
     #   minutes field would be **35**.
     #   @return [Integer]
     #
+    # @!attribute [rw] zone_type
+    #   The type of zone where the Capacity Block offering is available.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CapacityBlockOffering AWS API Documentation
     #
     class CapacityBlockOffering < Struct.new(
@@ -5330,7 +5372,8 @@ module Aws::EC2
       :tenancy,
       :ultraserver_type,
       :ultraserver_count,
-      :capacity_block_duration_minutes)
+      :capacity_block_duration_minutes,
+      :zone_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5488,6 +5531,12 @@ module Aws::EC2
     #   The Amazon Web Services account ID that owns the capacity resource.
     #   @return [String]
     #
+    # @!attribute [rw] account_name
+    #   The name of the Amazon Web Services account that owns the capacity
+    #   resource. This dimension is only available when Organizations access
+    #   is enabled for Capacity Manager.
+    #   @return [String]
+    #
     # @!attribute [rw] instance_family
     #   The EC2 instance family of the capacity resource.
     #   @return [String]
@@ -5559,12 +5608,19 @@ module Aws::EC2
     #   for unused capacity reservation costs.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   The tags associated with the capacity resource, represented as
+    #   key-value pairs. Only tags that have been activated for monitoring
+    #   via `UpdateCapacityManagerMonitoredTagKeys` are included.
+    #   @return [Array<Types::CapacityManagerTagDimension>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CapacityManagerDimension AWS API Documentation
     #
     class CapacityManagerDimension < Struct.new(
       :resource_region,
       :availability_zone_id,
       :account_id,
+      :account_name,
       :instance_family,
       :instance_type,
       :instance_platform,
@@ -5578,7 +5634,67 @@ module Aws::EC2
       :tenancy,
       :reservation_state,
       :reservation_instance_match_criteria,
-      :reservation_unused_financial_owner)
+      :reservation_unused_financial_owner,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes a tag key that is being monitored by Capacity Manager,
+    # including its activation status and the earliest available data point.
+    #
+    # @!attribute [rw] tag_key
+    #   The tag key being monitored.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the monitored tag key. Valid values are
+    #   `activating`, `activated`, `deactivating`, and `suspended`.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_message
+    #   A message providing additional details about the current status of
+    #   the monitored tag key.
+    #   @return [String]
+    #
+    # @!attribute [rw] capacity_manager_provided
+    #   Indicates whether this tag key is provided by Capacity Manager by
+    #   default, rather than being user-activated.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] earliest_datapoint_timestamp
+    #   The earliest timestamp from which tag data is available for queries,
+    #   in UTC ISO 8601 format.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CapacityManagerMonitoredTagKey AWS API Documentation
+    #
+    class CapacityManagerMonitoredTagKey < Struct.new(
+      :tag_key,
+      :status,
+      :status_message,
+      :capacity_manager_provided,
+      :earliest_datapoint_timestamp)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A key-value pair representing a tag associated with a capacity
+    # resource in Capacity Manager.
+    #
+    # @!attribute [rw] key
+    #   The tag key.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The tag value.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CapacityManagerTagDimension AWS API Documentation
+    #
+    class CapacityManagerTagDimension < Struct.new(
+      :key,
+      :value)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9925,8 +10041,9 @@ module Aws::EC2
     #   @return [Types::LaunchTemplateAndOverridesResponse]
     #
     # @!attribute [rw] lifecycle
-    #   Indicates if the instance that could not be launched was a Spot
-    #   Instance or On-Demand Instance.
+    #   Indicates if the instance that could not be launched was a Spot,
+    #   On-Demand, Capacity Block, or Interruptible Capacity Reservation
+    #   instance.
     #   @return [String]
     #
     # @!attribute [rw] error_code
@@ -9969,8 +10086,8 @@ module Aws::EC2
     #   @return [Types::LaunchTemplateAndOverridesResponse]
     #
     # @!attribute [rw] lifecycle
-    #   Indicates if the instance that was launched is a Spot Instance or
-    #   On-Demand Instance.
+    #   Indicates if the instance that was launched is a Spot, On-Demand,
+    #   Capacity Block, or Interruptible Capacity Reservation instance.
     #   @return [String]
     #
     # @!attribute [rw] instance_ids
@@ -10028,6 +10145,13 @@ module Aws::EC2
     # @!attribute [rw] on_demand_options
     #   Describes the configuration of On-Demand Instances in an EC2 Fleet.
     #   @return [Types::OnDemandOptionsRequest]
+    #
+    # @!attribute [rw] reserved_capacity_options
+    #   Defines EC2 Fleet preferences for utilizing reserved capacity when
+    #   DefaultTargetCapacityType is set to `reserved-capacity`.
+    #
+    #   Supported only for fleets of type `instant`.
+    #   @return [Types::ReservedCapacityOptionsRequest]
     #
     # @!attribute [rw] excess_capacity_termination_policy
     #   Indicates whether running instances should be terminated if the
@@ -10126,6 +10250,7 @@ module Aws::EC2
       :client_token,
       :spot_options,
       :on_demand_options,
+      :reserved_capacity_options,
       :excess_capacity_termination_policy,
       :launch_template_configs,
       :target_capacity_specification,
@@ -17517,6 +17642,40 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # Indicates default conntrack information for the instance type. For
+    # more information, see [ Connection tracking timeouts ][1] in the
+    # Amazon EC2 User Guide.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/security-group-connection-tracking.html#connection-tracking-timeouts
+    #
+    # @!attribute [rw] default_tcp_established_timeout
+    #   Default timeout (in seconds) for idle TCP connections in an
+    #   established state.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] default_udp_timeout
+    #   Default timeout (in seconds) for idle UDP flows that have seen
+    #   traffic only in a single direction or a single request-response
+    #   transaction.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] default_udp_stream_timeout
+    #   Default timeout (in seconds) for idle UDP flows classified as
+    #   streams which have seen more than one request-response transaction.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DefaultConnectionTrackingConfiguration AWS API Documentation
+    #
+    class DefaultConnectionTrackingConfiguration < Struct.new(
+      :default_tcp_established_timeout,
+      :default_udp_timeout,
+      :default_udp_stream_timeout)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] capacity_manager_data_export_id
     #   The unique identifier of the data export configuration to delete.
     #   @return [String]
@@ -21856,6 +22015,13 @@ module Aws::EC2
     #   The number of EC2 UltraServers in the offerings.
     #   @return [Integer]
     #
+    # @!attribute [rw] all_availability_zones
+    #   Include all Availability Zones and Local Zones, regardless of your
+    #   opt-in status. If you do not use this parameter, the results include
+    #   available offerings from all Availability Zones in the Amazon Web
+    #   Services Region and Local Zones you are opted into.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeCapacityBlockOfferingsRequest AWS API Documentation
     #
     class DescribeCapacityBlockOfferingsRequest < Struct.new(
@@ -21868,7 +22034,8 @@ module Aws::EC2
       :next_token,
       :max_results,
       :ultraserver_type,
-      :ultraserver_count)
+      :ultraserver_count,
+      :all_availability_zones)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -23764,8 +23931,9 @@ module Aws::EC2
     #   @return [Types::LaunchTemplateAndOverridesResponse]
     #
     # @!attribute [rw] lifecycle
-    #   Indicates if the instance that could not be launched was a Spot
-    #   Instance or On-Demand Instance.
+    #   Indicates if the instance that could not be launched was a Spot,
+    #   On-Demand, Capacity Block, or Interruptible Capacity Reservation
+    #   instance.
     #   @return [String]
     #
     # @!attribute [rw] error_code
@@ -23968,8 +24136,8 @@ module Aws::EC2
     #   @return [Types::LaunchTemplateAndOverridesResponse]
     #
     # @!attribute [rw] lifecycle
-    #   Indicates if the instance that was launched is a Spot Instance or
-    #   On-Demand Instance.
+    #   Indicates if the instance that was launched is a Spot, On-Demand,
+    #   Capacity Block, or Interruptible Capacity Reservation instance.
     #   @return [String]
     #
     # @!attribute [rw] instance_ids
@@ -41752,6 +41920,11 @@ module Aws::EC2
     #   The allocation strategy of On-Demand Instances in an EC2 Fleet.
     #   @return [Types::OnDemandOptions]
     #
+    # @!attribute [rw] reserved_capacity_options
+    #   Defines EC2 Fleet preferences for utilizing reserved capacity when
+    #   DefaultTargetCapacityType is set to `reserved-capacity`.
+    #   @return [Types::ReservedCapacityOptions]
+    #
     # @!attribute [rw] tags
     #   The tags for an EC2 Fleet resource.
     #   @return [Array<Types::Tag>]
@@ -41790,6 +41963,7 @@ module Aws::EC2
       :replace_unhealthy_instances,
       :spot_options,
       :on_demand_options,
+      :reserved_capacity_options,
       :tags,
       :errors,
       :instances,
@@ -43370,6 +43544,54 @@ module Aws::EC2
     #
     class GetCapacityManagerMetricDimensionsResult < Struct.new(
       :metric_dimension_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `NextToken` value. If not specified, up to 1000 results are
+    #   returned.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results. Use the value returned from
+    #   a previous call to retrieve additional results.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetCapacityManagerMonitoredTagKeysRequest AWS API Documentation
+    #
+    class GetCapacityManagerMonitoredTagKeysRequest < Struct.new(
+      :max_results,
+      :next_token,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] capacity_manager_tag_keys
+    #   The list of tag keys being monitored by Capacity Manager, including
+    #   their current status and metadata.
+    #   @return [Array<Types::CapacityManagerMonitoredTagKey>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. This value is
+    #   null when there are no more results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetCapacityManagerMonitoredTagKeysResult AWS API Documentation
+    #
+    class GetCapacityManagerMonitoredTagKeysResult < Struct.new(
+      :capacity_manager_tag_keys,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -50792,6 +51014,13 @@ module Aws::EC2
     #   declarative policy.
     #   @return [String]
     #
+    # @!attribute [rw] http_tokens_enforced
+    #   Indicates whether to enforce the requirement of IMDSv2 on an
+    #   instance at the time of launch. When enforcement is enabled, the
+    #   instance can't launch unless IMDSv2 (`HttpTokens`) is set to
+    #   `required`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceMetadataDefaultsResponse AWS API Documentation
     #
     class InstanceMetadataDefaultsResponse < Struct.new(
@@ -50800,7 +51029,8 @@ module Aws::EC2
       :http_endpoint,
       :instance_metadata_tags,
       :managed_by,
-      :managed_exception_message)
+      :managed_exception_message,
+      :http_tokens_enforced)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -61456,6 +61686,18 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
     #
+    # @!attribute [rw] http_tokens_enforced
+    #   Specifies whether to enforce the requirement of IMDSv2 on an
+    #   instance at the time of launch. When enforcement is enabled, the
+    #   instance can't launch unless IMDSv2 (`HttpTokens`) is set to
+    #   `required`. For more information, see [Enforce IMDSv2 at the account
+    #   level][1] in the *Amazon EC2 User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-IMDS-new-instances.html#enforce-imdsv2-at-the-account-level
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyInstanceMetadataDefaultsRequest AWS API Documentation
     #
     class ModifyInstanceMetadataDefaultsRequest < Struct.new(
@@ -61463,7 +61705,8 @@ module Aws::EC2
       :http_put_response_hop_limit,
       :http_endpoint,
       :instance_metadata_tags,
-      :dry_run)
+      :dry_run,
+      :http_tokens_enforced)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -66420,6 +66663,10 @@ module Aws::EC2
     #   Indicates whether changing the number of ENA queues is supported.
     #   @return [String]
     #
+    # @!attribute [rw] connection_tracking_configuration
+    #   Indicates conntrack information for the instance type
+    #   @return [Types::DefaultConnectionTrackingConfiguration]
+    #
     # @!attribute [rw] secondary_network_supported
     #   Indicates whether secondary interface attachments from secondary
     #   network are supported.
@@ -66451,6 +66698,7 @@ module Aws::EC2
       :ena_srd_supported,
       :bandwidth_weightings,
       :flexible_ena_queues_support,
+      :connection_tracking_configuration,
       :secondary_network_supported,
       :maximum_secondary_network_interfaces,
       :ipv_4_addresses_per_secondary_interface)
@@ -72341,6 +72589,55 @@ module Aws::EC2
       :hourly_price,
       :remaining_total_value,
       :remaining_upfront_value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Defines EC2 Fleet preferences for utilizing reserved capacity when
+    # DefaultTargetCapacityType is set to `reserved-capacity`.
+    #
+    # @!attribute [rw] reservation_types
+    #   The types of Capacity Reservations used for fulfilling the EC2 Fleet
+    #   request.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ReservedCapacityOptions AWS API Documentation
+    #
+    class ReservedCapacityOptions < Struct.new(
+      :reservation_types)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Defines EC2 Fleet preferences for utilizing reserved capacity when
+    # DefaultTargetCapacityType is set to `reserved-capacity`.
+    #
+    # <note markdown="1"> This configuration can only be used if the EC2 Fleet is of type
+    # `instant`.
+    #
+    #  </note>
+    #
+    # When you specify `ReservedCapacityOptions`, you must also set
+    # `DefaultTargetCapacityType` to `reserved-capacity` in the
+    # `TargetCapacitySpecification`.
+    #
+    # For more information about Interruptible Capacity Reservations, see
+    # [Launch instances into an Interruptible Capacity Reservation][1] in
+    # the *Amazon EC2 User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet-launch-instances-interruptible-cr-walkthrough.html
+    #
+    # @!attribute [rw] reservation_types
+    #   The types of Capacity Reservations to use for fulfilling the EC2
+    #   Fleet request.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ReservedCapacityOptionsRequest AWS API Documentation
+    #
+    class ReservedCapacityOptionsRequest < Struct.new(
+      :reservation_types)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -83278,6 +83575,55 @@ module Aws::EC2
     class UnsuccessfulItemError < Struct.new(
       :code,
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] activate_tag_keys
+    #   The tag keys to activate for monitoring. Once activated, these tag
+    #   keys will be included as dimensions in capacity metric data.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] deactivate_tag_keys
+    #   The tag keys to deactivate. Deactivated tag keys will no longer be
+    #   included as dimensions in capacity metric data.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] client_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/UpdateCapacityManagerMonitoredTagKeysRequest AWS API Documentation
+    #
+    class UpdateCapacityManagerMonitoredTagKeysRequest < Struct.new(
+      :activate_tag_keys,
+      :deactivate_tag_keys,
+      :dry_run,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] capacity_manager_tag_keys
+    #   The list of tag keys affected by the update, including their current
+    #   status and metadata.
+    #   @return [Array<Types::CapacityManagerMonitoredTagKey>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/UpdateCapacityManagerMonitoredTagKeysResult AWS API Documentation
+    #
+    class UpdateCapacityManagerMonitoredTagKeysResult < Struct.new(
+      :capacity_manager_tag_keys)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -59,7 +59,7 @@ module Aws::SageMakerRuntimeHTTP2
   autoload :AsyncClient, 'aws-sdk-sagemakerruntimehttp2/async_client'
   autoload :EventStreams, 'aws-sdk-sagemakerruntimehttp2/event_streams'
 
-  GEM_VERSION = '1.3.0'
+  GEM_VERSION = '1.4.0'
 
 end
 

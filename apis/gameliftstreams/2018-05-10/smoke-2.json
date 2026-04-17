@@ -1,23 +1,6 @@
 {
   "version" : 2,
   "testCases" : [ {
-    "id" : "GetStreamGroup",
-    "operationName" : "GetStreamGroup",
-    "input" : {
-      "Identifier" : "12ab34cd5"
-    },
-    "expectation" : {
-      "failure" : {
-        "errorId" : "ResourceNotFoundException"
-      }
-    },
-    "config" : {
-      "region" : "us-west-2",
-      "useFips" : false,
-      "useDualstack" : false,
-      "useAccountIdRouting" : true
-    }
-  }, {
     "id" : "ListStreamSessions",
     "operationName" : "ListStreamSessions",
     "input" : {
@@ -27,19 +10,6 @@
       "failure" : {
         "errorId" : "ResourceNotFoundException"
       }
-    },
-    "config" : {
-      "region" : "us-west-2",
-      "useFips" : false,
-      "useDualstack" : false,
-      "useAccountIdRouting" : true
-    }
-  }, {
-    "id" : "ListStreamGroups",
-    "operationName" : "ListStreamGroups",
-    "input" : { },
-    "expectation" : {
-      "success" : { }
     },
     "config" : {
       "region" : "us-west-2",
@@ -66,11 +36,15 @@
       "useAccountIdRouting" : true
     }
   }, {
-    "id" : "ListApplications",
-    "operationName" : "ListApplications",
-    "input" : { },
+    "id" : "GetStreamGroup",
+    "operationName" : "GetStreamGroup",
+    "input" : {
+      "Identifier" : "12ab34cd5"
+    },
     "expectation" : {
-      "success" : { }
+      "failure" : {
+        "errorId" : "ResourceNotFoundException"
+      }
     },
     "config" : {
       "region" : "us-west-2",
@@ -88,6 +62,32 @@
       "failure" : {
         "errorId" : "ValidationException"
       }
+    },
+    "config" : {
+      "region" : "us-west-2",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "ListStreamGroups",
+    "operationName" : "ListStreamGroups",
+    "input" : { },
+    "expectation" : {
+      "success" : { }
+    },
+    "config" : {
+      "region" : "us-west-2",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "ListApplications",
+    "operationName" : "ListApplications",
+    "input" : { },
+    "expectation" : {
+      "success" : { }
     },
     "config" : {
       "region" : "us-west-2",

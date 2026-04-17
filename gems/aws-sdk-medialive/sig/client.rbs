@@ -356,7 +356,13 @@ module Aws
                                     listener_port: ::Integer?
                                   },
                                 ]?,
-                                logical_interface_names: Array[::String]?
+                                logical_interface_names: Array[::String]?,
+                                media_connect_router_settings: Array[
+                                  {
+                                    encryption_type: ("AUTOMATIC" | "SECRETS_MANAGER")?,
+                                    secret_arn: ::String?
+                                  },
+                                ]?
                               },
                             ],
                             ?encoder_settings: {
@@ -881,6 +887,9 @@ module Aws
                                     }?,
                                     srt_group_settings: {
                                       input_loss_action: ("DROP_PROGRAM" | "DROP_TS" | "EMIT_PROGRAM")?
+                                    }?,
+                                    media_connect_router_group_settings: {
+                                      availability_zones: Array[::String]?
                                     }?
                                   },
                                   outputs: Array[
@@ -1199,6 +1208,78 @@ module Aws
                                           },
                                           encryption_type: ("AES128" | "AES192" | "AES256")?,
                                           latency: ::Integer?
+                                        }?,
+                                        media_connect_router_output_settings: {
+                                          connected_router_inputs: {
+                                            pipeline_0: ::String?,
+                                            pipeline_1: ::String?
+                                          }?,
+                                          container_settings: {
+                                            m2ts_settings: {
+                                              absent_input_audio_behavior: ("DROP" | "ENCODE_SILENCE")?,
+                                              arib: ("DISABLED" | "ENABLED")?,
+                                              arib_captions_pid: ::String?,
+                                              arib_captions_pid_control: ("AUTO" | "USE_CONFIGURED")?,
+                                              audio_buffer_model: ("ATSC" | "DVB")?,
+                                              audio_frames_per_pes: ::Integer?,
+                                              audio_pids: ::String?,
+                                              audio_stream_type: ("ATSC" | "DVB")?,
+                                              bitrate: ::Integer?,
+                                              buffer_model: ("MULTIPLEX" | "NONE")?,
+                                              cc_descriptor: ("DISABLED" | "ENABLED")?,
+                                              dvb_nit_settings: {
+                                                network_id: ::Integer,
+                                                network_name: ::String,
+                                                rep_interval: ::Integer?
+                                              }?,
+                                              dvb_sdt_settings: {
+                                                output_sdt: ("SDT_FOLLOW" | "SDT_FOLLOW_IF_PRESENT" | "SDT_MANUAL" | "SDT_NONE")?,
+                                                rep_interval: ::Integer?,
+                                                service_name: ::String?,
+                                                service_provider_name: ::String?
+                                              }?,
+                                              dvb_sub_pids: ::String?,
+                                              dvb_tdt_settings: {
+                                                rep_interval: ::Integer?
+                                              }?,
+                                              dvb_teletext_pid: ::String?,
+                                              ebif: ("NONE" | "PASSTHROUGH")?,
+                                              ebp_audio_interval: ("VIDEO_AND_FIXED_INTERVALS" | "VIDEO_INTERVAL")?,
+                                              ebp_lookahead_ms: ::Integer?,
+                                              ebp_placement: ("VIDEO_AND_AUDIO_PIDS" | "VIDEO_PID")?,
+                                              ecm_pid: ::String?,
+                                              es_rate_in_pes: ("EXCLUDE" | "INCLUDE")?,
+                                              etv_platform_pid: ::String?,
+                                              etv_signal_pid: ::String?,
+                                              fragment_time: ::Float?,
+                                              klv: ("NONE" | "PASSTHROUGH")?,
+                                              klv_data_pids: ::String?,
+                                              nielsen_id_3_behavior: ("NO_PASSTHROUGH" | "PASSTHROUGH")?,
+                                              null_packet_bitrate: ::Float?,
+                                              pat_interval: ::Integer?,
+                                              pcr_control: ("CONFIGURED_PCR_PERIOD" | "PCR_EVERY_PES_PACKET")?,
+                                              pcr_period: ::Integer?,
+                                              pcr_pid: ::String?,
+                                              pmt_interval: ::Integer?,
+                                              pmt_pid: ::String?,
+                                              program_num: ::Integer?,
+                                              rate_mode: ("CBR" | "VBR")?,
+                                              scte_27_pids: ::String?,
+                                              scte_35_control: ("NONE" | "PASSTHROUGH")?,
+                                              scte_35_pid: ::String?,
+                                              scte_35_preroll_pullup_milliseconds: ::Float?,
+                                              segmentation_markers: ("EBP" | "EBP_LEGACY" | "NONE" | "PSI_SEGSTART" | "RAI_ADAPT" | "RAI_SEGSTART")?,
+                                              segmentation_style: ("MAINTAIN_CADENCE" | "RESET_CADENCE")?,
+                                              segmentation_time: ::Float?,
+                                              timed_metadata_behavior: ("NO_PASSTHROUGH" | "PASSTHROUGH")?,
+                                              timed_metadata_pid: ::String?,
+                                              transport_stream_id: ::Integer?,
+                                              video_pid: ::String?
+                                            }?
+                                          },
+                                          destination: {
+                                            destination_ref_id: ::String?
+                                          }
                                         }?
                                       },
                                       video_description_name: ::String?
@@ -1401,6 +1482,8 @@ module Aws
                                         rec_601_settings: {
                                         }?,
                                         rec_709_settings: {
+                                        }?,
+                                        hlg_2020_settings: {
                                         }?
                                       }?,
                                       fixed_afd: ("AFD_0000" | "AFD_0010" | "AFD_0011" | "AFD_0100" | "AFD_1000" | "AFD_1001" | "AFD_1010" | "AFD_1011" | "AFD_1101" | "AFD_1110" | "AFD_1111")?,
@@ -1433,7 +1516,7 @@ module Aws
                                   height: ::Integer?,
                                   name: ::String,
                                   respond_to_afd: ("NONE" | "PASSTHROUGH" | "RESPOND")?,
-                                  scaling_behavior: ("DEFAULT" | "STRETCH_TO_OUTPUT")?,
+                                  scaling_behavior: ("DEFAULT" | "STRETCH_TO_OUTPUT" | "SMART_CROP")?,
                                   sharpness: ::Integer?,
                                   width: ::Integer?
                                 },
@@ -1625,7 +1708,10 @@ module Aws
                                 linked_channel_type: ("FOLLOWING_CHANNEL" | "PRIMARY_CHANNEL")?
                               }?
                             },
-                            ?channel_security_groups: Array[::String]
+                            ?channel_security_groups: Array[::String],
+                            ?inference_settings: {
+                              feed_arn: ::String?
+                            }
                           ) -> _CreateChannelResponseSuccess
                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateChannelResponseSuccess
 
@@ -1848,6 +1934,7 @@ module Aws
         def channel_engine_version: () -> Types::ChannelEngineVersionResponse
         def linked_channel_settings: () -> Types::DescribeLinkedChannelSettings
         def channel_security_groups: () -> ::Array[::String]
+        def inference_settings: () -> Types::DescribeInferenceSettings
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaLive/Client.html#delete_channel-instance_method
       def delete_channel: (
@@ -1984,6 +2071,7 @@ module Aws
         def channel_engine_version: () -> Types::ChannelEngineVersionResponse
         def linked_channel_settings: () -> Types::DescribeLinkedChannelSettings
         def channel_security_groups: () -> ::Array[::String]
+        def inference_settings: () -> Types::DescribeInferenceSettings
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaLive/Client.html#describe_channel-instance_method
       def describe_channel: (
@@ -2385,6 +2473,7 @@ module Aws
         def channel_engine_version: () -> Types::ChannelEngineVersionResponse
         def linked_channel_settings: () -> Types::DescribeLinkedChannelSettings
         def channel_security_groups: () -> ::Array[::String]
+        def inference_settings: () -> Types::DescribeInferenceSettings
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaLive/Client.html#start_channel-instance_method
       def start_channel: (
@@ -2453,6 +2542,7 @@ module Aws
         def channel_engine_version: () -> Types::ChannelEngineVersionResponse
         def linked_channel_settings: () -> Types::DescribeLinkedChannelSettings
         def channel_security_groups: () -> ::Array[::String]
+        def inference_settings: () -> Types::DescribeInferenceSettings
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaLive/Client.html#stop_channel-instance_method
       def stop_channel: (
@@ -2555,7 +2645,13 @@ module Aws
                                     listener_port: ::Integer?
                                   },
                                 ]?,
-                                logical_interface_names: Array[::String]?
+                                logical_interface_names: Array[::String]?,
+                                media_connect_router_settings: Array[
+                                  {
+                                    encryption_type: ("AUTOMATIC" | "SECRETS_MANAGER")?,
+                                    secret_arn: ::String?
+                                  },
+                                ]?
                               },
                             ],
                             ?encoder_settings: {
@@ -3080,6 +3176,9 @@ module Aws
                                     }?,
                                     srt_group_settings: {
                                       input_loss_action: ("DROP_PROGRAM" | "DROP_TS" | "EMIT_PROGRAM")?
+                                    }?,
+                                    media_connect_router_group_settings: {
+                                      availability_zones: Array[::String]?
                                     }?
                                   },
                                   outputs: Array[
@@ -3398,6 +3497,78 @@ module Aws
                                           },
                                           encryption_type: ("AES128" | "AES192" | "AES256")?,
                                           latency: ::Integer?
+                                        }?,
+                                        media_connect_router_output_settings: {
+                                          connected_router_inputs: {
+                                            pipeline_0: ::String?,
+                                            pipeline_1: ::String?
+                                          }?,
+                                          container_settings: {
+                                            m2ts_settings: {
+                                              absent_input_audio_behavior: ("DROP" | "ENCODE_SILENCE")?,
+                                              arib: ("DISABLED" | "ENABLED")?,
+                                              arib_captions_pid: ::String?,
+                                              arib_captions_pid_control: ("AUTO" | "USE_CONFIGURED")?,
+                                              audio_buffer_model: ("ATSC" | "DVB")?,
+                                              audio_frames_per_pes: ::Integer?,
+                                              audio_pids: ::String?,
+                                              audio_stream_type: ("ATSC" | "DVB")?,
+                                              bitrate: ::Integer?,
+                                              buffer_model: ("MULTIPLEX" | "NONE")?,
+                                              cc_descriptor: ("DISABLED" | "ENABLED")?,
+                                              dvb_nit_settings: {
+                                                network_id: ::Integer,
+                                                network_name: ::String,
+                                                rep_interval: ::Integer?
+                                              }?,
+                                              dvb_sdt_settings: {
+                                                output_sdt: ("SDT_FOLLOW" | "SDT_FOLLOW_IF_PRESENT" | "SDT_MANUAL" | "SDT_NONE")?,
+                                                rep_interval: ::Integer?,
+                                                service_name: ::String?,
+                                                service_provider_name: ::String?
+                                              }?,
+                                              dvb_sub_pids: ::String?,
+                                              dvb_tdt_settings: {
+                                                rep_interval: ::Integer?
+                                              }?,
+                                              dvb_teletext_pid: ::String?,
+                                              ebif: ("NONE" | "PASSTHROUGH")?,
+                                              ebp_audio_interval: ("VIDEO_AND_FIXED_INTERVALS" | "VIDEO_INTERVAL")?,
+                                              ebp_lookahead_ms: ::Integer?,
+                                              ebp_placement: ("VIDEO_AND_AUDIO_PIDS" | "VIDEO_PID")?,
+                                              ecm_pid: ::String?,
+                                              es_rate_in_pes: ("EXCLUDE" | "INCLUDE")?,
+                                              etv_platform_pid: ::String?,
+                                              etv_signal_pid: ::String?,
+                                              fragment_time: ::Float?,
+                                              klv: ("NONE" | "PASSTHROUGH")?,
+                                              klv_data_pids: ::String?,
+                                              nielsen_id_3_behavior: ("NO_PASSTHROUGH" | "PASSTHROUGH")?,
+                                              null_packet_bitrate: ::Float?,
+                                              pat_interval: ::Integer?,
+                                              pcr_control: ("CONFIGURED_PCR_PERIOD" | "PCR_EVERY_PES_PACKET")?,
+                                              pcr_period: ::Integer?,
+                                              pcr_pid: ::String?,
+                                              pmt_interval: ::Integer?,
+                                              pmt_pid: ::String?,
+                                              program_num: ::Integer?,
+                                              rate_mode: ("CBR" | "VBR")?,
+                                              scte_27_pids: ::String?,
+                                              scte_35_control: ("NONE" | "PASSTHROUGH")?,
+                                              scte_35_pid: ::String?,
+                                              scte_35_preroll_pullup_milliseconds: ::Float?,
+                                              segmentation_markers: ("EBP" | "EBP_LEGACY" | "NONE" | "PSI_SEGSTART" | "RAI_ADAPT" | "RAI_SEGSTART")?,
+                                              segmentation_style: ("MAINTAIN_CADENCE" | "RESET_CADENCE")?,
+                                              segmentation_time: ::Float?,
+                                              timed_metadata_behavior: ("NO_PASSTHROUGH" | "PASSTHROUGH")?,
+                                              timed_metadata_pid: ::String?,
+                                              transport_stream_id: ::Integer?,
+                                              video_pid: ::String?
+                                            }?
+                                          },
+                                          destination: {
+                                            destination_ref_id: ::String?
+                                          }
                                         }?
                                       },
                                       video_description_name: ::String?
@@ -3600,6 +3771,8 @@ module Aws
                                         rec_601_settings: {
                                         }?,
                                         rec_709_settings: {
+                                        }?,
+                                        hlg_2020_settings: {
                                         }?
                                       }?,
                                       fixed_afd: ("AFD_0000" | "AFD_0010" | "AFD_0011" | "AFD_0100" | "AFD_1000" | "AFD_1001" | "AFD_1010" | "AFD_1011" | "AFD_1101" | "AFD_1110" | "AFD_1111")?,
@@ -3632,7 +3805,7 @@ module Aws
                                   height: ::Integer?,
                                   name: ::String,
                                   respond_to_afd: ("NONE" | "PASSTHROUGH" | "RESPOND")?,
-                                  scaling_behavior: ("DEFAULT" | "STRETCH_TO_OUTPUT")?,
+                                  scaling_behavior: ("DEFAULT" | "STRETCH_TO_OUTPUT" | "SMART_CROP")?,
                                   sharpness: ::Integer?,
                                   width: ::Integer?
                                 },
@@ -3817,7 +3990,13 @@ module Aws
                                 linked_channel_type: ("FOLLOWING_CHANNEL" | "PRIMARY_CHANNEL")?
                               }?
                             },
-                            ?channel_security_groups: Array[::String]
+                            ?channel_security_groups: Array[::String],
+                            ?inference_settings: {
+                              feed_arn: ::String?
+                            },
+                            ?special_router_settings: {
+                              router_arn: ::String?
+                            }
                           ) -> _UpdateChannelResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateChannelResponseSuccess
 
@@ -3862,7 +4041,13 @@ module Aws
                                           listener_port: ::Integer?
                                         },
                                       ]?,
-                                      logical_interface_names: Array[::String]?
+                                      logical_interface_names: Array[::String]?,
+                                      media_connect_router_settings: Array[
+                                        {
+                                          encryption_type: ("AUTOMATIC" | "SECRETS_MANAGER")?,
+                                          secret_arn: ::String?
+                                        },
+                                      ]?
                                     },
                                   ]
                                 ) -> _UpdateChannelClassResponseSuccess
@@ -4153,6 +4338,7 @@ module Aws
         def channel_engine_version: () -> Types::ChannelEngineVersionResponse
         def linked_channel_settings: () -> Types::DescribeLinkedChannelSettings
         def channel_security_groups: () -> ::Array[::String]
+        def inference_settings: () -> Types::DescribeInferenceSettings
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaLive/Client.html#restart_channel_pipelines-instance_method
       def restart_channel_pipelines: (

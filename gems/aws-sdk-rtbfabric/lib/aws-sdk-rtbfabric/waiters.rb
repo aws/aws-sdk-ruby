@@ -67,16 +67,19 @@ module Aws::RTBFabric
   # The following table lists the valid waiter names, the operations they call,
   # and the default `:delay` and `:max_attempts` values.
   #
-  # | waiter_name                   | params                              | :delay   | :max_attempts |
-  # | ----------------------------- | ----------------------------------- | -------- | ------------- |
-  # | inbound_external_link_active  | {Client#get_inbound_external_link}  | 30       | 5             |
-  # | link_accepted                 | {Client#get_link}                   | 30       | 5             |
-  # | link_active                   | {Client#get_link}                   | 30       | 5             |
-  # | outbound_external_link_active | {Client#get_outbound_external_link} | 30       | 5             |
-  # | requester_gateway_active      | {Client#get_requester_gateway}      | 30       | 5             |
-  # | requester_gateway_deleted     | {Client#get_requester_gateway}      | 30       | 5             |
-  # | responder_gateway_active      | {Client#get_responder_gateway}      | 30       | 5             |
-  # | responder_gateway_deleted     | {Client#get_responder_gateway}      | 30       | 5             |
+  # | waiter_name                    | params                              | :delay   | :max_attempts |
+  # | ------------------------------ | ----------------------------------- | -------- | ------------- |
+  # | inbound_external_link_active   | {Client#get_inbound_external_link}  | 30       | 5             |
+  # | inbound_external_link_deleted  | {Client#get_inbound_external_link}  | 30       | 5             |
+  # | link_accepted                  | {Client#get_link}                   | 30       | 5             |
+  # | link_active                    | {Client#get_link}                   | 30       | 5             |
+  # | link_deleted                   | {Client#get_link}                   | 30       | 5             |
+  # | outbound_external_link_active  | {Client#get_outbound_external_link} | 30       | 5             |
+  # | outbound_external_link_deleted | {Client#get_outbound_external_link} | 30       | 5             |
+  # | requester_gateway_active       | {Client#get_requester_gateway}      | 30       | 5             |
+  # | requester_gateway_deleted      | {Client#get_requester_gateway}      | 30       | 5             |
+  # | responder_gateway_active       | {Client#get_responder_gateway}      | 30       | 5             |
+  # | responder_gateway_deleted      | {Client#get_responder_gateway}      | 30       | 5             |
   #
   module Waiters
 
@@ -125,6 +128,56 @@ module Aws::RTBFabric
                 "argument" => "status",
                 "state" => "failure",
                 "expected" => "ISOLATED"
+              }
+            ]
+          )
+        }.merge(options))
+      end
+
+      # @option (see Client#get_inbound_external_link)
+      # @return (see Client#get_inbound_external_link)
+      def wait(params = {})
+        @waiter.wait(client: @client, params: params)
+      end
+
+      # @api private
+      attr_reader :waiter
+
+    end
+
+    class InboundExternalLinkDeleted
+
+      # @param [Hash] options
+      # @option options [required, Client] :client
+      # @option options [Integer] :max_attempts (5)
+      # @option options [Integer] :delay (30)
+      # @option options [Proc] :before_attempt
+      # @option options [Proc] :before_wait
+      def initialize(options)
+        @client = options.fetch(:client)
+        @waiter = Aws::Waiters::Waiter.new({
+          max_attempts: 5,
+          delay: 30,
+          poller: Aws::Waiters::Poller.new(
+            operation_name: :get_inbound_external_link,
+            acceptors: [
+              {
+                "matcher" => "path",
+                "argument" => "status",
+                "state" => "success",
+                "expected" => "DELETED"
+              },
+              {
+                "matcher" => "path",
+                "argument" => "status",
+                "state" => "failure",
+                "expected" => "FAILED"
+              },
+              {
+                "matcher" => "path",
+                "argument" => "status",
+                "state" => "failure",
+                "expected" => "REJECTED"
               }
             ]
           )
@@ -254,6 +307,56 @@ module Aws::RTBFabric
 
     end
 
+    class LinkDeleted
+
+      # @param [Hash] options
+      # @option options [required, Client] :client
+      # @option options [Integer] :max_attempts (5)
+      # @option options [Integer] :delay (30)
+      # @option options [Proc] :before_attempt
+      # @option options [Proc] :before_wait
+      def initialize(options)
+        @client = options.fetch(:client)
+        @waiter = Aws::Waiters::Waiter.new({
+          max_attempts: 5,
+          delay: 30,
+          poller: Aws::Waiters::Poller.new(
+            operation_name: :get_link,
+            acceptors: [
+              {
+                "matcher" => "path",
+                "argument" => "status",
+                "state" => "success",
+                "expected" => "DELETED"
+              },
+              {
+                "matcher" => "path",
+                "argument" => "status",
+                "state" => "failure",
+                "expected" => "FAILED"
+              },
+              {
+                "matcher" => "path",
+                "argument" => "status",
+                "state" => "failure",
+                "expected" => "REJECTED"
+              }
+            ]
+          )
+        }.merge(options))
+      end
+
+      # @option (see Client#get_link)
+      # @return (see Client#get_link)
+      def wait(params = {})
+        @waiter.wait(client: @client, params: params)
+      end
+
+      # @api private
+      attr_reader :waiter
+
+    end
+
     class OutboundExternalLinkActive
 
       # @param [Hash] options
@@ -299,6 +402,56 @@ module Aws::RTBFabric
                 "argument" => "status",
                 "state" => "failure",
                 "expected" => "ISOLATED"
+              }
+            ]
+          )
+        }.merge(options))
+      end
+
+      # @option (see Client#get_outbound_external_link)
+      # @return (see Client#get_outbound_external_link)
+      def wait(params = {})
+        @waiter.wait(client: @client, params: params)
+      end
+
+      # @api private
+      attr_reader :waiter
+
+    end
+
+    class OutboundExternalLinkDeleted
+
+      # @param [Hash] options
+      # @option options [required, Client] :client
+      # @option options [Integer] :max_attempts (5)
+      # @option options [Integer] :delay (30)
+      # @option options [Proc] :before_attempt
+      # @option options [Proc] :before_wait
+      def initialize(options)
+        @client = options.fetch(:client)
+        @waiter = Aws::Waiters::Waiter.new({
+          max_attempts: 5,
+          delay: 30,
+          poller: Aws::Waiters::Poller.new(
+            operation_name: :get_outbound_external_link,
+            acceptors: [
+              {
+                "matcher" => "path",
+                "argument" => "status",
+                "state" => "success",
+                "expected" => "DELETED"
+              },
+              {
+                "matcher" => "path",
+                "argument" => "status",
+                "state" => "failure",
+                "expected" => "FAILED"
+              },
+              {
+                "matcher" => "path",
+                "argument" => "status",
+                "state" => "failure",
+                "expected" => "REJECTED"
               }
             ]
           )
@@ -387,6 +540,11 @@ module Aws::RTBFabric
                 "argument" => "status",
                 "state" => "success",
                 "expected" => "DELETED"
+              },
+              {
+                "matcher" => "error",
+                "state" => "success",
+                "expected" => "ResourceNotFoundException"
               },
               {
                 "matcher" => "path",
@@ -481,6 +639,11 @@ module Aws::RTBFabric
                 "argument" => "status",
                 "state" => "success",
                 "expected" => "DELETED"
+              },
+              {
+                "matcher" => "error",
+                "state" => "success",
+                "expected" => "ResourceNotFoundException"
               },
               {
                 "matcher" => "path",

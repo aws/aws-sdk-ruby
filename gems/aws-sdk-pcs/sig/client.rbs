@@ -104,6 +104,18 @@ module Aws
                                   parameter_value: ::String
                                 },
                               ]?,
+                              slurmdbd_custom_settings: Array[
+                                {
+                                  parameter_name: ::String,
+                                  parameter_value: ::String
+                                },
+                              ]?,
+                              cgroup_custom_settings: Array[
+                                {
+                                  parameter_name: ::String,
+                                  parameter_value: ::String
+                                },
+                              ]?,
                               accounting: {
                                 default_purge_time_in_days: ::Integer?,
                                 mode: ("STANDARD" | "NONE")
@@ -340,6 +352,18 @@ module Aws
                             ?slurm_configuration: {
                               scale_down_idle_time_in_seconds: ::Integer?,
                               slurm_custom_settings: Array[
+                                {
+                                  parameter_name: ::String,
+                                  parameter_value: ::String
+                                },
+                              ]?,
+                              slurmdbd_custom_settings: Array[
+                                {
+                                  parameter_name: ::String,
+                                  parameter_value: ::String
+                                },
+                              ]?,
+                              cgroup_custom_settings: Array[
                                 {
                                   parameter_name: ::String,
                                   parameter_value: ::String

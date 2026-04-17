@@ -384,6 +384,7 @@ module Aws::RDS
     DescribePendingMaintenanceActionsMessage = Shapes::StructureShape.new(name: 'DescribePendingMaintenanceActionsMessage')
     DescribeReservedDBInstancesMessage = Shapes::StructureShape.new(name: 'DescribeReservedDBInstancesMessage')
     DescribeReservedDBInstancesOfferingsMessage = Shapes::StructureShape.new(name: 'DescribeReservedDBInstancesOfferingsMessage')
+    DescribeServerlessV2PlatformVersionsMessage = Shapes::StructureShape.new(name: 'DescribeServerlessV2PlatformVersionsMessage')
     DescribeSourceRegionsMessage = Shapes::StructureShape.new(name: 'DescribeSourceRegionsMessage')
     DescribeTenantDatabasesMessage = Shapes::StructureShape.new(name: 'DescribeTenantDatabasesMessage')
     DescribeValidDBInstanceModificationsMessage = Shapes::StructureShape.new(name: 'DescribeValidDBInstanceModificationsMessage')
@@ -693,6 +694,9 @@ module Aws::RDS
     ScalingConfigurationInfo = Shapes::StructureShape.new(name: 'ScalingConfigurationInfo')
     SensitiveString = Shapes::StringShape.new(name: 'SensitiveString')
     ServerlessV2FeaturesSupport = Shapes::StructureShape.new(name: 'ServerlessV2FeaturesSupport')
+    ServerlessV2PlatformVersionInfo = Shapes::StructureShape.new(name: 'ServerlessV2PlatformVersionInfo')
+    ServerlessV2PlatformVersionList = Shapes::ListShape.new(name: 'ServerlessV2PlatformVersionList')
+    ServerlessV2PlatformVersionsMessage = Shapes::StructureShape.new(name: 'ServerlessV2PlatformVersionsMessage')
     ServerlessV2ScalingConfiguration = Shapes::StructureShape.new(name: 'ServerlessV2ScalingConfiguration')
     ServerlessV2ScalingConfigurationInfo = Shapes::StructureShape.new(name: 'ServerlessV2ScalingConfigurationInfo')
     SharedSnapshotQuotaExceededFault = Shapes::StructureShape.new(name: 'SharedSnapshotQuotaExceededFault', error: {"code" => "SharedSnapshotQuotaExceeded", "httpStatusCode" => 400, "senderFault" => true})
@@ -1165,6 +1169,7 @@ module Aws::RDS
     CreateDBClusterMessage.add_member(:engine_lifecycle_support, Shapes::ShapeRef.new(shape: String, location_name: "EngineLifecycleSupport"))
     CreateDBClusterMessage.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecifications"))
     CreateDBClusterMessage.add_member(:master_user_authentication_type, Shapes::ShapeRef.new(shape: MasterUserAuthenticationType, location_name: "MasterUserAuthenticationType"))
+    CreateDBClusterMessage.add_member(:with_express_configuration, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "WithExpressConfiguration"))
     CreateDBClusterMessage.add_member(:source_region, Shapes::ShapeRef.new(shape: String, location_name: "SourceRegion"))
     CreateDBClusterMessage.struct_class = Types::CreateDBClusterMessage
 
@@ -1546,6 +1551,8 @@ module Aws::RDS
     DBCluster.add_member(:cluster_scalability_type, Shapes::ShapeRef.new(shape: ClusterScalabilityType, location_name: "ClusterScalabilityType"))
     DBCluster.add_member(:certificate_details, Shapes::ShapeRef.new(shape: CertificateDetails, location_name: "CertificateDetails"))
     DBCluster.add_member(:engine_lifecycle_support, Shapes::ShapeRef.new(shape: String, location_name: "EngineLifecycleSupport"))
+    DBCluster.add_member(:vpc_networking_enabled, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "VPCNetworkingEnabled"))
+    DBCluster.add_member(:internet_access_gateway_enabled, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "InternetAccessGatewayEnabled"))
     DBCluster.struct_class = Types::DBCluster
 
     DBClusterAlreadyExistsFault.struct_class = Types::DBClusterAlreadyExistsFault
@@ -2770,6 +2777,15 @@ module Aws::RDS
     DescribeReservedDBInstancesOfferingsMessage.add_member(:max_records, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxRecords"))
     DescribeReservedDBInstancesOfferingsMessage.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
     DescribeReservedDBInstancesOfferingsMessage.struct_class = Types::DescribeReservedDBInstancesOfferingsMessage
+
+    DescribeServerlessV2PlatformVersionsMessage.add_member(:serverless_v2_platform_version, Shapes::ShapeRef.new(shape: String, location_name: "ServerlessV2PlatformVersion"))
+    DescribeServerlessV2PlatformVersionsMessage.add_member(:engine, Shapes::ShapeRef.new(shape: String, location_name: "Engine"))
+    DescribeServerlessV2PlatformVersionsMessage.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filters"))
+    DescribeServerlessV2PlatformVersionsMessage.add_member(:default_only, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "DefaultOnly"))
+    DescribeServerlessV2PlatformVersionsMessage.add_member(:include_all, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "IncludeAll"))
+    DescribeServerlessV2PlatformVersionsMessage.add_member(:max_records, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxRecords"))
+    DescribeServerlessV2PlatformVersionsMessage.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
+    DescribeServerlessV2PlatformVersionsMessage.struct_class = Types::DescribeServerlessV2PlatformVersionsMessage
 
     DescribeSourceRegionsMessage.add_member(:region_name, Shapes::ShapeRef.new(shape: String, location_name: "RegionName"))
     DescribeSourceRegionsMessage.add_member(:max_records, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxRecords"))
@@ -3999,6 +4015,8 @@ module Aws::RDS
     RestoreDBClusterFromSnapshotMessage.add_member(:preferred_backup_window, Shapes::ShapeRef.new(shape: String, location_name: "PreferredBackupWindow"))
     RestoreDBClusterFromSnapshotMessage.add_member(:engine_lifecycle_support, Shapes::ShapeRef.new(shape: String, location_name: "EngineLifecycleSupport"))
     RestoreDBClusterFromSnapshotMessage.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecifications"))
+    RestoreDBClusterFromSnapshotMessage.add_member(:enable_vpc_networking, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "EnableVPCNetworking"))
+    RestoreDBClusterFromSnapshotMessage.add_member(:enable_internet_access_gateway, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "EnableInternetAccessGateway"))
     RestoreDBClusterFromSnapshotMessage.struct_class = Types::RestoreDBClusterFromSnapshotMessage
 
     RestoreDBClusterFromSnapshotResult.add_member(:db_cluster, Shapes::ShapeRef.new(shape: DBCluster, location_name: "DBCluster"))
@@ -4042,6 +4060,8 @@ module Aws::RDS
     RestoreDBClusterToPointInTimeMessage.add_member(:preferred_backup_window, Shapes::ShapeRef.new(shape: String, location_name: "PreferredBackupWindow"))
     RestoreDBClusterToPointInTimeMessage.add_member(:engine_lifecycle_support, Shapes::ShapeRef.new(shape: String, location_name: "EngineLifecycleSupport"))
     RestoreDBClusterToPointInTimeMessage.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecifications"))
+    RestoreDBClusterToPointInTimeMessage.add_member(:enable_vpc_networking, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "EnableVPCNetworking"))
+    RestoreDBClusterToPointInTimeMessage.add_member(:enable_internet_access_gateway, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "EnableInternetAccessGateway"))
     RestoreDBClusterToPointInTimeMessage.struct_class = Types::RestoreDBClusterToPointInTimeMessage
 
     RestoreDBClusterToPointInTimeResult.add_member(:db_cluster, Shapes::ShapeRef.new(shape: DBCluster, location_name: "DBCluster"))
@@ -4258,6 +4278,20 @@ module Aws::RDS
     ServerlessV2FeaturesSupport.add_member(:min_capacity, Shapes::ShapeRef.new(shape: DoubleOptional, location_name: "MinCapacity"))
     ServerlessV2FeaturesSupport.add_member(:max_capacity, Shapes::ShapeRef.new(shape: DoubleOptional, location_name: "MaxCapacity"))
     ServerlessV2FeaturesSupport.struct_class = Types::ServerlessV2FeaturesSupport
+
+    ServerlessV2PlatformVersionInfo.add_member(:serverless_v2_platform_version, Shapes::ShapeRef.new(shape: String, location_name: "ServerlessV2PlatformVersion"))
+    ServerlessV2PlatformVersionInfo.add_member(:serverless_v2_platform_version_description, Shapes::ShapeRef.new(shape: String, location_name: "ServerlessV2PlatformVersionDescription"))
+    ServerlessV2PlatformVersionInfo.add_member(:engine, Shapes::ShapeRef.new(shape: String, location_name: "Engine"))
+    ServerlessV2PlatformVersionInfo.add_member(:serverless_v2_features_support, Shapes::ShapeRef.new(shape: ServerlessV2FeaturesSupport, location_name: "ServerlessV2FeaturesSupport"))
+    ServerlessV2PlatformVersionInfo.add_member(:status, Shapes::ShapeRef.new(shape: String, location_name: "Status"))
+    ServerlessV2PlatformVersionInfo.add_member(:is_default, Shapes::ShapeRef.new(shape: Boolean, location_name: "IsDefault"))
+    ServerlessV2PlatformVersionInfo.struct_class = Types::ServerlessV2PlatformVersionInfo
+
+    ServerlessV2PlatformVersionList.member = Shapes::ShapeRef.new(shape: ServerlessV2PlatformVersionInfo)
+
+    ServerlessV2PlatformVersionsMessage.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
+    ServerlessV2PlatformVersionsMessage.add_member(:serverless_v2_platform_versions, Shapes::ShapeRef.new(shape: ServerlessV2PlatformVersionList, location_name: "ServerlessV2PlatformVersions"))
+    ServerlessV2PlatformVersionsMessage.struct_class = Types::ServerlessV2PlatformVersionsMessage
 
     ServerlessV2ScalingConfiguration.add_member(:min_capacity, Shapes::ShapeRef.new(shape: DoubleOptional, location_name: "MinCapacity"))
     ServerlessV2ScalingConfiguration.add_member(:max_capacity, Shapes::ShapeRef.new(shape: DoubleOptional, location_name: "MaxCapacity"))
@@ -5911,6 +5945,20 @@ module Aws::RDS
         o.input = Shapes::ShapeRef.new(shape: DescribeReservedDBInstancesOfferingsMessage)
         o.output = Shapes::ShapeRef.new(shape: ReservedDBInstancesOfferingMessage)
         o.errors << Shapes::ShapeRef.new(shape: ReservedDBInstancesOfferingNotFoundFault)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_records",
+          tokens: {
+            "marker" => "marker"
+          }
+        )
+      end)
+
+      api.add_operation(:describe_serverless_v2_platform_versions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeServerlessV2PlatformVersions"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeServerlessV2PlatformVersionsMessage)
+        o.output = Shapes::ShapeRef.new(shape: ServerlessV2PlatformVersionsMessage)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_records",
           tokens: {

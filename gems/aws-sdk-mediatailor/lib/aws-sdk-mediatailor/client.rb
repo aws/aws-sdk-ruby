@@ -571,7 +571,7 @@ module Aws::MediaTailor
     #     playback_configuration_name: "__string", # required
     #     enabled_logging_strategies: ["VENDED_LOGS"], # accepts VENDED_LOGS, LEGACY_CLOUDWATCH
     #     ads_interaction_log: {
-    #       publish_opt_in_event_types: ["RAW_ADS_RESPONSE"], # accepts RAW_ADS_RESPONSE
+    #       publish_opt_in_event_types: ["RAW_ADS_RESPONSE"], # accepts RAW_ADS_RESPONSE, RAW_ADS_REQUEST
     #       exclude_event_types: ["AD_MARKER_FOUND"], # accepts AD_MARKER_FOUND, NON_AD_MARKER_FOUND, MAKING_ADS_REQUEST, MODIFIED_TARGET_URL, VAST_REDIRECT, EMPTY_VAST_RESPONSE, EMPTY_VMAP_RESPONSE, VAST_RESPONSE, REDIRECTED_VAST_RESPONSE, FILLED_AVAIL, FILLED_OVERLAY_AVAIL, BEACON_FIRED, WARNING_NO_ADVERTISEMENTS, WARNING_VPAID_AD_DROPPED, WARNING_URL_VARIABLE_SUBSTITUTION_FAILED, ERROR_UNKNOWN, ERROR_UNKNOWN_HOST, ERROR_DISALLOWED_HOST, ERROR_ADS_IO, ERROR_ADS_TIMEOUT, ERROR_ADS_RESPONSE_PARSE, ERROR_ADS_RESPONSE_UNKNOWN_ROOT_ELEMENT, ERROR_ADS_INVALID_RESPONSE, ERROR_VAST_REDIRECT_EMPTY_RESPONSE, ERROR_VAST_REDIRECT_MULTIPLE_VAST, ERROR_VAST_REDIRECT_FAILED, ERROR_VAST_MISSING_MEDIAFILES, ERROR_VAST_MISSING_CREATIVES, ERROR_VAST_MISSING_OVERLAYS, ERROR_VAST_MISSING_IMPRESSION, ERROR_VAST_INVALID_VAST_AD_TAG_URI, ERROR_VAST_MULTIPLE_TRACKING_EVENTS, ERROR_VAST_MULTIPLE_LINEAR, ERROR_VAST_INVALID_MEDIA_FILE, ERROR_FIRING_BEACON_FAILED, ERROR_PERSONALIZATION_DISABLED, VOD_TIME_BASED_AVAIL_PLAN_VAST_RESPONSE_FOR_OFFSET, VOD_TIME_BASED_AVAIL_PLAN_SUCCESS, VOD_TIME_BASED_AVAIL_PLAN_WARNING_NO_ADVERTISEMENTS, INTERSTITIAL_VOD_SUCCESS, INTERSTITIAL_VOD_FAILURE
     #     },
     #     manifest_service_interaction_log: {
@@ -586,7 +586,7 @@ module Aws::MediaTailor
     #   resp.enabled_logging_strategies #=> Array
     #   resp.enabled_logging_strategies[0] #=> String, one of "VENDED_LOGS", "LEGACY_CLOUDWATCH"
     #   resp.ads_interaction_log.publish_opt_in_event_types #=> Array
-    #   resp.ads_interaction_log.publish_opt_in_event_types[0] #=> String, one of "RAW_ADS_RESPONSE"
+    #   resp.ads_interaction_log.publish_opt_in_event_types[0] #=> String, one of "RAW_ADS_RESPONSE", "RAW_ADS_REQUEST"
     #   resp.ads_interaction_log.exclude_event_types #=> Array
     #   resp.ads_interaction_log.exclude_event_types[0] #=> String, one of "AD_MARKER_FOUND", "NON_AD_MARKER_FOUND", "MAKING_ADS_REQUEST", "MODIFIED_TARGET_URL", "VAST_REDIRECT", "EMPTY_VAST_RESPONSE", "EMPTY_VMAP_RESPONSE", "VAST_RESPONSE", "REDIRECTED_VAST_RESPONSE", "FILLED_AVAIL", "FILLED_OVERLAY_AVAIL", "BEACON_FIRED", "WARNING_NO_ADVERTISEMENTS", "WARNING_VPAID_AD_DROPPED", "WARNING_URL_VARIABLE_SUBSTITUTION_FAILED", "ERROR_UNKNOWN", "ERROR_UNKNOWN_HOST", "ERROR_DISALLOWED_HOST", "ERROR_ADS_IO", "ERROR_ADS_TIMEOUT", "ERROR_ADS_RESPONSE_PARSE", "ERROR_ADS_RESPONSE_UNKNOWN_ROOT_ELEMENT", "ERROR_ADS_INVALID_RESPONSE", "ERROR_VAST_REDIRECT_EMPTY_RESPONSE", "ERROR_VAST_REDIRECT_MULTIPLE_VAST", "ERROR_VAST_REDIRECT_FAILED", "ERROR_VAST_MISSING_MEDIAFILES", "ERROR_VAST_MISSING_CREATIVES", "ERROR_VAST_MISSING_OVERLAYS", "ERROR_VAST_MISSING_IMPRESSION", "ERROR_VAST_INVALID_VAST_AD_TAG_URI", "ERROR_VAST_MULTIPLE_TRACKING_EVENTS", "ERROR_VAST_MULTIPLE_LINEAR", "ERROR_VAST_INVALID_MEDIA_FILE", "ERROR_FIRING_BEACON_FAILED", "ERROR_PERSONALIZATION_DISABLED", "VOD_TIME_BASED_AVAIL_PLAN_VAST_RESPONSE_FOR_OFFSET", "VOD_TIME_BASED_AVAIL_PLAN_SUCCESS", "VOD_TIME_BASED_AVAIL_PLAN_WARNING_NO_ADVERTISEMENTS", "INTERSTITIAL_VOD_SUCCESS", "INTERSTITIAL_VOD_FAILURE"
     #   resp.manifest_service_interaction_log.exclude_event_types #=> Array
@@ -862,6 +862,16 @@ module Aws::MediaTailor
     #   MediaTailor returns all of the prefetch schedules for the playback
     #   configuration, regardless of `StreamId`.
     #
+    # @option params [Hash<String,String>] :tags
+    #   The tags to assign to the prefetch schedule. Tags are key-value pairs
+    #   that you can associate with Amazon resources to help with
+    #   organization, access control, and cost tracking. For more information,
+    #   see [Tagging AWS Elemental MediaTailor Resources][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html
+    #
     # @return [Types::CreatePrefetchScheduleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreatePrefetchScheduleResponse#arn #arn} => String
@@ -872,6 +882,7 @@ module Aws::MediaTailor
     #   * {Types::CreatePrefetchScheduleResponse#recurring_prefetch_configuration #recurring_prefetch_configuration} => Types::RecurringPrefetchConfiguration
     #   * {Types::CreatePrefetchScheduleResponse#schedule_type #schedule_type} => String
     #   * {Types::CreatePrefetchScheduleResponse#stream_id #stream_id} => String
+    #   * {Types::CreatePrefetchScheduleResponse#tags #tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -932,6 +943,9 @@ module Aws::MediaTailor
     #     },
     #     schedule_type: "SINGLE", # accepts SINGLE, RECURRING
     #     stream_id: "__string",
+    #     tags: {
+    #       "__string" => "__string",
+    #     },
     #   })
     #
     # @example Response structure
@@ -967,6 +981,8 @@ module Aws::MediaTailor
     #   resp.recurring_prefetch_configuration.recurring_retrieval.traffic_shaping_tps_configuration.peak_concurrent_users #=> Integer
     #   resp.schedule_type #=> String, one of "SINGLE", "RECURRING"
     #   resp.stream_id #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["__string"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/CreatePrefetchSchedule AWS API Documentation
     #
@@ -1008,6 +1024,16 @@ module Aws::MediaTailor
     # @option params [Array<Types::AudienceMedia>] :audience_media
     #   The list of AudienceMedia defined in program.
     #
+    # @option params [Hash<String,String>] :tags
+    #   The tags to assign to the program. Tags are key-value pairs that you
+    #   can associate with Amazon resources to help with organization, access
+    #   control, and cost tracking. For more information, see [Tagging AWS
+    #   Elemental MediaTailor Resources][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html
+    #
     # @return [Types::CreateProgramResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateProgramResponse#ad_breaks #ad_breaks} => Array&lt;Types::AdBreak&gt;
@@ -1022,6 +1048,7 @@ module Aws::MediaTailor
     #   * {Types::CreateProgramResponse#clip_range #clip_range} => Types::ClipRange
     #   * {Types::CreateProgramResponse#duration_millis #duration_millis} => Integer
     #   * {Types::CreateProgramResponse#audience_media #audience_media} => Array&lt;Types::AudienceMedia&gt;
+    #   * {Types::CreateProgramResponse#tags #tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -1134,6 +1161,9 @@ module Aws::MediaTailor
     #         ],
     #       },
     #     ],
+    #     tags: {
+    #       "__string" => "__string",
+    #     },
     #   })
     #
     # @example Response structure
@@ -1201,6 +1231,8 @@ module Aws::MediaTailor
     #   resp.audience_media[0].alternate_media[0].ad_breaks[0].ad_break_metadata[0].key #=> String
     #   resp.audience_media[0].alternate_media[0].ad_breaks[0].ad_break_metadata[0].value #=> String
     #   resp.audience_media[0].alternate_media[0].duration_millis #=> Integer
+    #   resp.tags #=> Hash
+    #   resp.tags["__string"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/CreateProgram AWS API Documentation
     #
@@ -1754,6 +1786,7 @@ module Aws::MediaTailor
     #   * {Types::DescribeProgramResponse#clip_range #clip_range} => Types::ClipRange
     #   * {Types::DescribeProgramResponse#duration_millis #duration_millis} => Integer
     #   * {Types::DescribeProgramResponse#audience_media #audience_media} => Array&lt;Types::AudienceMedia&gt;
+    #   * {Types::DescribeProgramResponse#tags #tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -1827,6 +1860,8 @@ module Aws::MediaTailor
     #   resp.audience_media[0].alternate_media[0].ad_breaks[0].ad_break_metadata[0].key #=> String
     #   resp.audience_media[0].alternate_media[0].ad_breaks[0].ad_break_metadata[0].value #=> String
     #   resp.audience_media[0].alternate_media[0].duration_millis #=> Integer
+    #   resp.tags #=> Hash
+    #   resp.tags["__string"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/DescribeProgram AWS API Documentation
     #
@@ -2118,7 +2153,7 @@ module Aws::MediaTailor
     #   resp.log_configuration.enabled_logging_strategies #=> Array
     #   resp.log_configuration.enabled_logging_strategies[0] #=> String, one of "VENDED_LOGS", "LEGACY_CLOUDWATCH"
     #   resp.log_configuration.ads_interaction_log.publish_opt_in_event_types #=> Array
-    #   resp.log_configuration.ads_interaction_log.publish_opt_in_event_types[0] #=> String, one of "RAW_ADS_RESPONSE"
+    #   resp.log_configuration.ads_interaction_log.publish_opt_in_event_types[0] #=> String, one of "RAW_ADS_RESPONSE", "RAW_ADS_REQUEST"
     #   resp.log_configuration.ads_interaction_log.exclude_event_types #=> Array
     #   resp.log_configuration.ads_interaction_log.exclude_event_types[0] #=> String, one of "AD_MARKER_FOUND", "NON_AD_MARKER_FOUND", "MAKING_ADS_REQUEST", "MODIFIED_TARGET_URL", "VAST_REDIRECT", "EMPTY_VAST_RESPONSE", "EMPTY_VMAP_RESPONSE", "VAST_RESPONSE", "REDIRECTED_VAST_RESPONSE", "FILLED_AVAIL", "FILLED_OVERLAY_AVAIL", "BEACON_FIRED", "WARNING_NO_ADVERTISEMENTS", "WARNING_VPAID_AD_DROPPED", "WARNING_URL_VARIABLE_SUBSTITUTION_FAILED", "ERROR_UNKNOWN", "ERROR_UNKNOWN_HOST", "ERROR_DISALLOWED_HOST", "ERROR_ADS_IO", "ERROR_ADS_TIMEOUT", "ERROR_ADS_RESPONSE_PARSE", "ERROR_ADS_RESPONSE_UNKNOWN_ROOT_ELEMENT", "ERROR_ADS_INVALID_RESPONSE", "ERROR_VAST_REDIRECT_EMPTY_RESPONSE", "ERROR_VAST_REDIRECT_MULTIPLE_VAST", "ERROR_VAST_REDIRECT_FAILED", "ERROR_VAST_MISSING_MEDIAFILES", "ERROR_VAST_MISSING_CREATIVES", "ERROR_VAST_MISSING_OVERLAYS", "ERROR_VAST_MISSING_IMPRESSION", "ERROR_VAST_INVALID_VAST_AD_TAG_URI", "ERROR_VAST_MULTIPLE_TRACKING_EVENTS", "ERROR_VAST_MULTIPLE_LINEAR", "ERROR_VAST_INVALID_MEDIA_FILE", "ERROR_FIRING_BEACON_FAILED", "ERROR_PERSONALIZATION_DISABLED", "VOD_TIME_BASED_AVAIL_PLAN_VAST_RESPONSE_FOR_OFFSET", "VOD_TIME_BASED_AVAIL_PLAN_SUCCESS", "VOD_TIME_BASED_AVAIL_PLAN_WARNING_NO_ADVERTISEMENTS", "INTERSTITIAL_VOD_SUCCESS", "INTERSTITIAL_VOD_FAILURE"
     #   resp.log_configuration.manifest_service_interaction_log.exclude_event_types #=> Array
@@ -2181,6 +2216,7 @@ module Aws::MediaTailor
     #   * {Types::GetPrefetchScheduleResponse#schedule_type #schedule_type} => String
     #   * {Types::GetPrefetchScheduleResponse#recurring_prefetch_configuration #recurring_prefetch_configuration} => Types::RecurringPrefetchConfiguration
     #   * {Types::GetPrefetchScheduleResponse#stream_id #stream_id} => String
+    #   * {Types::GetPrefetchScheduleResponse#tags #tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -2222,6 +2258,8 @@ module Aws::MediaTailor
     #   resp.recurring_prefetch_configuration.recurring_retrieval.traffic_shaping_tps_configuration.peak_tps #=> Integer
     #   resp.recurring_prefetch_configuration.recurring_retrieval.traffic_shaping_tps_configuration.peak_concurrent_users #=> Integer
     #   resp.stream_id #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["__string"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/GetPrefetchSchedule AWS API Documentation
     #
@@ -2519,7 +2557,7 @@ module Aws::MediaTailor
     #   resp.items[0].log_configuration.enabled_logging_strategies #=> Array
     #   resp.items[0].log_configuration.enabled_logging_strategies[0] #=> String, one of "VENDED_LOGS", "LEGACY_CLOUDWATCH"
     #   resp.items[0].log_configuration.ads_interaction_log.publish_opt_in_event_types #=> Array
-    #   resp.items[0].log_configuration.ads_interaction_log.publish_opt_in_event_types[0] #=> String, one of "RAW_ADS_RESPONSE"
+    #   resp.items[0].log_configuration.ads_interaction_log.publish_opt_in_event_types[0] #=> String, one of "RAW_ADS_RESPONSE", "RAW_ADS_REQUEST"
     #   resp.items[0].log_configuration.ads_interaction_log.exclude_event_types #=> Array
     #   resp.items[0].log_configuration.ads_interaction_log.exclude_event_types[0] #=> String, one of "AD_MARKER_FOUND", "NON_AD_MARKER_FOUND", "MAKING_ADS_REQUEST", "MODIFIED_TARGET_URL", "VAST_REDIRECT", "EMPTY_VAST_RESPONSE", "EMPTY_VMAP_RESPONSE", "VAST_RESPONSE", "REDIRECTED_VAST_RESPONSE", "FILLED_AVAIL", "FILLED_OVERLAY_AVAIL", "BEACON_FIRED", "WARNING_NO_ADVERTISEMENTS", "WARNING_VPAID_AD_DROPPED", "WARNING_URL_VARIABLE_SUBSTITUTION_FAILED", "ERROR_UNKNOWN", "ERROR_UNKNOWN_HOST", "ERROR_DISALLOWED_HOST", "ERROR_ADS_IO", "ERROR_ADS_TIMEOUT", "ERROR_ADS_RESPONSE_PARSE", "ERROR_ADS_RESPONSE_UNKNOWN_ROOT_ELEMENT", "ERROR_ADS_INVALID_RESPONSE", "ERROR_VAST_REDIRECT_EMPTY_RESPONSE", "ERROR_VAST_REDIRECT_MULTIPLE_VAST", "ERROR_VAST_REDIRECT_FAILED", "ERROR_VAST_MISSING_MEDIAFILES", "ERROR_VAST_MISSING_CREATIVES", "ERROR_VAST_MISSING_OVERLAYS", "ERROR_VAST_MISSING_IMPRESSION", "ERROR_VAST_INVALID_VAST_AD_TAG_URI", "ERROR_VAST_MULTIPLE_TRACKING_EVENTS", "ERROR_VAST_MULTIPLE_LINEAR", "ERROR_VAST_INVALID_MEDIA_FILE", "ERROR_FIRING_BEACON_FAILED", "ERROR_PERSONALIZATION_DISABLED", "VOD_TIME_BASED_AVAIL_PLAN_VAST_RESPONSE_FOR_OFFSET", "VOD_TIME_BASED_AVAIL_PLAN_SUCCESS", "VOD_TIME_BASED_AVAIL_PLAN_WARNING_NO_ADVERTISEMENTS", "INTERSTITIAL_VOD_SUCCESS", "INTERSTITIAL_VOD_FAILURE"
     #   resp.items[0].log_configuration.manifest_service_interaction_log.exclude_event_types #=> Array
@@ -2644,6 +2682,8 @@ module Aws::MediaTailor
     #   resp.items[0].recurring_prefetch_configuration.recurring_retrieval.traffic_shaping_tps_configuration.peak_tps #=> Integer
     #   resp.items[0].recurring_prefetch_configuration.recurring_retrieval.traffic_shaping_tps_configuration.peak_concurrent_users #=> Integer
     #   resp.items[0].stream_id #=> String
+    #   resp.items[0].tags #=> Hash
+    #   resp.items[0].tags["__string"] #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/ListPrefetchSchedules AWS API Documentation
@@ -3087,7 +3127,7 @@ module Aws::MediaTailor
     #   resp.log_configuration.enabled_logging_strategies #=> Array
     #   resp.log_configuration.enabled_logging_strategies[0] #=> String, one of "VENDED_LOGS", "LEGACY_CLOUDWATCH"
     #   resp.log_configuration.ads_interaction_log.publish_opt_in_event_types #=> Array
-    #   resp.log_configuration.ads_interaction_log.publish_opt_in_event_types[0] #=> String, one of "RAW_ADS_RESPONSE"
+    #   resp.log_configuration.ads_interaction_log.publish_opt_in_event_types[0] #=> String, one of "RAW_ADS_RESPONSE", "RAW_ADS_REQUEST"
     #   resp.log_configuration.ads_interaction_log.exclude_event_types #=> Array
     #   resp.log_configuration.ads_interaction_log.exclude_event_types[0] #=> String, one of "AD_MARKER_FOUND", "NON_AD_MARKER_FOUND", "MAKING_ADS_REQUEST", "MODIFIED_TARGET_URL", "VAST_REDIRECT", "EMPTY_VAST_RESPONSE", "EMPTY_VMAP_RESPONSE", "VAST_RESPONSE", "REDIRECTED_VAST_RESPONSE", "FILLED_AVAIL", "FILLED_OVERLAY_AVAIL", "BEACON_FIRED", "WARNING_NO_ADVERTISEMENTS", "WARNING_VPAID_AD_DROPPED", "WARNING_URL_VARIABLE_SUBSTITUTION_FAILED", "ERROR_UNKNOWN", "ERROR_UNKNOWN_HOST", "ERROR_DISALLOWED_HOST", "ERROR_ADS_IO", "ERROR_ADS_TIMEOUT", "ERROR_ADS_RESPONSE_PARSE", "ERROR_ADS_RESPONSE_UNKNOWN_ROOT_ELEMENT", "ERROR_ADS_INVALID_RESPONSE", "ERROR_VAST_REDIRECT_EMPTY_RESPONSE", "ERROR_VAST_REDIRECT_MULTIPLE_VAST", "ERROR_VAST_REDIRECT_FAILED", "ERROR_VAST_MISSING_MEDIAFILES", "ERROR_VAST_MISSING_CREATIVES", "ERROR_VAST_MISSING_OVERLAYS", "ERROR_VAST_MISSING_IMPRESSION", "ERROR_VAST_INVALID_VAST_AD_TAG_URI", "ERROR_VAST_MULTIPLE_TRACKING_EVENTS", "ERROR_VAST_MULTIPLE_LINEAR", "ERROR_VAST_INVALID_MEDIA_FILE", "ERROR_FIRING_BEACON_FAILED", "ERROR_PERSONALIZATION_DISABLED", "VOD_TIME_BASED_AVAIL_PLAN_VAST_RESPONSE_FOR_OFFSET", "VOD_TIME_BASED_AVAIL_PLAN_SUCCESS", "VOD_TIME_BASED_AVAIL_PLAN_WARNING_NO_ADVERTISEMENTS", "INTERSTITIAL_VOD_SUCCESS", "INTERSTITIAL_VOD_FAILURE"
     #   resp.log_configuration.manifest_service_interaction_log.exclude_event_types #=> Array
@@ -3439,6 +3479,7 @@ module Aws::MediaTailor
     #   * {Types::UpdateProgramResponse#duration_millis #duration_millis} => Integer
     #   * {Types::UpdateProgramResponse#scheduled_start_time #scheduled_start_time} => Time
     #   * {Types::UpdateProgramResponse#audience_media #audience_media} => Array&lt;Types::AudienceMedia&gt;
+    #   * {Types::UpdateProgramResponse#tags #tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -3612,6 +3653,8 @@ module Aws::MediaTailor
     #   resp.audience_media[0].alternate_media[0].ad_breaks[0].ad_break_metadata[0].key #=> String
     #   resp.audience_media[0].alternate_media[0].ad_breaks[0].ad_break_metadata[0].value #=> String
     #   resp.audience_media[0].alternate_media[0].duration_millis #=> Integer
+    #   resp.tags #=> Hash
+    #   resp.tags["__string"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/UpdateProgram AWS API Documentation
     #
@@ -3789,7 +3832,7 @@ module Aws::MediaTailor
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-mediatailor'
-      context[:gem_version] = '1.114.0'
+      context[:gem_version] = '1.117.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

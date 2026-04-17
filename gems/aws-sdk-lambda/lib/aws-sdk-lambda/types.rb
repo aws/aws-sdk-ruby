@@ -1769,7 +1769,8 @@ module Aws::Lambda
     #   @return [Array<String>]
     #
     # @!attribute [rw] file_system_configs
-    #   Connection settings for an Amazon EFS file system.
+    #   Connection settings for an Amazon EFS file system or an Amazon S3
+    #   Files file system.
     #   @return [Array<Types::FileSystemConfig>]
     #
     # @!attribute [rw] image_config
@@ -3408,15 +3409,15 @@ module Aws::Lambda
     end
 
     # Details about the connection between a Lambda function and an [Amazon
-    # EFS file system][1].
+    # EFS file system][1] or an [Amazon S3 Files file system][1].
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-filesystem.html
     #
     # @!attribute [rw] arn
-    #   The Amazon Resource Name (ARN) of the Amazon EFS access point that
-    #   provides access to the file system.
+    #   The Amazon Resource Name (ARN) of the Amazon EFS or Amazon S3 Files
+    #   access point that provides access to the file system.
     #   @return [String]
     #
     # @!attribute [rw] local_mount_path
@@ -3757,7 +3758,8 @@ module Aws::Lambda
     #   @return [String]
     #
     # @!attribute [rw] file_system_configs
-    #   Connection settings for an [Amazon EFS file system][1].
+    #   Connection settings for an [Amazon EFS file system][1] or an [Amazon
+    #   S3 Files file system][1].
     #
     #
     #
@@ -6255,7 +6257,7 @@ module Aws::Lambda
     #   @return [String]
     #
     # @!attribute [rw] durable_execution_name
-    #   Filter executions by name. Only executions with names that contain
+    #   Filter executions by name. Only executions with names that matches
     #   this string are returned.
     #   @return [String]
     #
@@ -8265,6 +8267,66 @@ module Aws::Lambda
       include Aws::Structure
     end
 
+    # The Lambda function couldn't make a network connection to the
+    # configured S3 Files access point.
+    #
+    # @!attribute [rw] type
+    #   The exception type.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   The exception message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/S3FilesMountConnectivityException AWS API Documentation
+    #
+    class S3FilesMountConnectivityException < Struct.new(
+      :type,
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The Lambda function couldn't mount the configured S3 Files access
+    # point due to a permission or configuration issue.
+    #
+    # @!attribute [rw] type
+    #   The exception type.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   The exception message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/S3FilesMountFailureException AWS API Documentation
+    #
+    class S3FilesMountFailureException < Struct.new(
+      :type,
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The Lambda function made a network connection to the configured S3
+    # Files access point, but the mount operation timed out.
+    #
+    # @!attribute [rw] type
+    #   The exception type.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   The exception message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/S3FilesMountTimeoutException AWS API Documentation
+    #
+    class S3FilesMountTimeoutException < Struct.new(
+      :type,
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # (Amazon SQS only) The scaling configuration for the event source. To
     # remove the configuration, pass an empty value.
     #
@@ -9528,7 +9590,8 @@ module Aws::Lambda
     #   @return [Array<String>]
     #
     # @!attribute [rw] file_system_configs
-    #   Connection settings for an Amazon EFS file system.
+    #   Connection settings for an Amazon EFS file system or an Amazon S3
+    #   Files file system.
     #   @return [Array<Types::FileSystemConfig>]
     #
     # @!attribute [rw] image_config

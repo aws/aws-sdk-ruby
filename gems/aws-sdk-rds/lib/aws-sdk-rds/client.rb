@@ -2735,6 +2735,12 @@ module Aws::RDS
     # clusters, see [Multi-AZ DB cluster deployments][3] in the *Amazon RDS
     # User Guide*.
     #
+    # You can use the `WithExpressConfiguration` parameter to create an
+    # Aurora DB Cluster with express configuration and create cluster in
+    # seconds. Express configuration provides a cluster with a writer
+    # instance and feature specific values set to all other input parameters
+    # of this API.
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html
@@ -3686,6 +3692,14 @@ module Aws::RDS
     #   This option is only valid for RDS for PostgreSQL and Aurora PostgreSQL
     #   engines.
     #
+    # @option params [Boolean] :with_express_configuration
+    #   Specifies to create an Aurora DB Cluster with express configuration in
+    #   seconds. Express configuration provides a cluster with a writer
+    #   instance and feature specific values set to all other input parameters
+    #   of this API.
+    #
+    #   Valid for Cluster Type: Aurora DB clusters
+    #
     # @option params [String] :source_region
     #   The source region of the snapshot. This is only needed when the
     #   shapshot is encrypted and in a different region.
@@ -3822,6 +3836,78 @@ module Aws::RDS
     #     }, 
     #   }
     #
+    # @example Example: To create a Aurora DB cluster with express configuration
+    #
+    #   # The following example creates a Aurora DB cluster with express configuration.
+    #
+    #   resp = client.create_db_cluster({
+    #     db_cluster_identifier: "sample-cluster", 
+    #     engine: "aurora-postgresql", 
+    #     with_express_configuration: true, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     db_cluster: {
+    #       allocated_storage: 1, 
+    #       associated_roles: [
+    #       ], 
+    #       auto_minor_version_upgrade: true, 
+    #       availability_zones: [
+    #         "us-east-1c", 
+    #         "us-east-1a", 
+    #         "us-east-1b", 
+    #       ], 
+    #       backup_retention_period: 7, 
+    #       cluster_create_time: Time.parse("2026-01-10T22:14:02Z"), 
+    #       copy_tags_to_snapshot: false, 
+    #       cross_account_clone: false, 
+    #       db_cluster_arn: "arn:aws:rds:us-east-1:654654253058:cluster:sample-cluster", 
+    #       db_cluster_identifier: "sample-cluster", 
+    #       db_cluster_members: [
+    #         {
+    #           db_cluster_parameter_group_status: "in-sync", 
+    #           db_instance_identifier: "sample-cluster-instance-1", 
+    #           is_cluster_writer: false, 
+    #           promotion_tier: 1, 
+    #         }, 
+    #       ], 
+    #       db_cluster_parameter_group: "default.aurora-postgresql17", 
+    #       database_insights_mode: "standard", 
+    #       db_cluster_resource_id: "cluster-OWV7DRHS2W7R4LXZRYNXCHZST4", 
+    #       deletion_protection: false, 
+    #       domain_memberships: [
+    #       ], 
+    #       engine: "aurora-postgresql", 
+    #       engine_lifecycle_support: "open-source-rds-extended-support", 
+    #       engine_mode: "provisioned", 
+    #       engine_version: "17.7", 
+    #       http_endpoint_enabled: false, 
+    #       iam_database_authentication_enabled: true, 
+    #       local_write_forwarding_status: "disabled", 
+    #       master_username: "postgres", 
+    #       multi_az: false, 
+    #       performance_insights_enabled: false, 
+    #       port: 5432, 
+    #       preferred_backup_window: "06:15-06:45", 
+    #       preferred_maintenance_window: "sat:03:44-sat:04:14", 
+    #       read_replica_identifiers: [
+    #       ], 
+    #       serverless_v2_platform_version: "3", 
+    #       serverless_v2_scaling_configuration: {
+    #         max_capacity: 16.0, 
+    #         min_capacity: 0.0, 
+    #         seconds_until_auto_pause: 300, 
+    #       }, 
+    #       status: "creating", 
+    #       storage_encrypted: false, 
+    #       tag_list: [
+    #       ], 
+    #       vpc_security_groups: [
+    #       ], 
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_db_cluster({
@@ -3913,6 +3999,7 @@ module Aws::RDS
     #       },
     #     ],
     #     master_user_authentication_type: "password", # accepts password, iam-db-auth
+    #     with_express_configuration: false,
     #     source_region: "String",
     #   })
     #
@@ -4062,6 +4149,8 @@ module Aws::RDS
     #   resp.db_cluster.certificate_details.ca_identifier #=> String
     #   resp.db_cluster.certificate_details.valid_till #=> Time
     #   resp.db_cluster.engine_lifecycle_support #=> String
+    #   resp.db_cluster.vpc_networking_enabled #=> Boolean
+    #   resp.db_cluster.internet_access_gateway_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBCluster AWS API Documentation
     #
@@ -9785,6 +9874,8 @@ module Aws::RDS
     #   resp.db_cluster.certificate_details.ca_identifier #=> String
     #   resp.db_cluster.certificate_details.valid_till #=> Time
     #   resp.db_cluster.engine_lifecycle_support #=> String
+    #   resp.db_cluster.vpc_networking_enabled #=> Boolean
+    #   resp.db_cluster.internet_access_gateway_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBCluster AWS API Documentation
     #
@@ -13140,6 +13231,79 @@ module Aws::RDS
     #     ], 
     #   }
     #
+    # @example Example: To describe an Aurora DB cluster without VPC networking
+    #
+    #   # The following example retrieves the details of the specified Aurora PostgreSQL DB cluster configured without VPC
+    #   # networking and with internet access gateway enabled. IAM database authentication is required when VPC networking is
+    #   # disabled and internet access gateway is enabled.
+    #
+    #   resp = client.describe_db_clusters({
+    #     db_cluster_identifier: "my-vpcless-cluster", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     db_clusters: [
+    #       {
+    #         activity_stream_status: "stopped", 
+    #         allocated_storage: 1, 
+    #         associated_roles: [
+    #         ], 
+    #         auto_minor_version_upgrade: true, 
+    #         availability_zones: [
+    #           "us-east-1d", 
+    #           "us-east-1a", 
+    #           "us-east-1c", 
+    #         ], 
+    #         backup_retention_period: 1, 
+    #         cluster_create_time: Time.parse("2026-03-09T20:53:24.054Z"), 
+    #         copy_tags_to_snapshot: false, 
+    #         cross_account_clone: false, 
+    #         db_cluster_arn: "arn:aws:rds:us-east-1:123456789012:cluster:my-vpcless-cluster", 
+    #         db_cluster_identifier: "my-vpcless-cluster", 
+    #         db_cluster_members: [
+    #         ], 
+    #         db_cluster_parameter_group: "default.aurora-postgresql17", 
+    #         database_insights_mode: "standard", 
+    #         db_cluster_resource_id: "cluster-AHX35HFI2YV26F3XVXVVO3MEHU", 
+    #         deletion_protection: false, 
+    #         domain_memberships: [
+    #         ], 
+    #         earliest_restorable_time: Time.parse("2026-03-09T20:53:39.652Z"), 
+    #         engine: "aurora-postgresql", 
+    #         engine_lifecycle_support: "open-source-rds-extended-support", 
+    #         engine_mode: "provisioned", 
+    #         engine_version: "17.4", 
+    #         http_endpoint_enabled: false, 
+    #         iam_database_authentication_enabled: true, 
+    #         internet_access_gateway_enabled: true, 
+    #         latest_restorable_time: Time.parse("2026-03-09T20:53:39.652Z"), 
+    #         local_write_forwarding_status: "disabled", 
+    #         master_username: "postgres", 
+    #         multi_az: false, 
+    #         port: 5432, 
+    #         preferred_backup_window: "07:13-07:43", 
+    #         preferred_maintenance_window: "mon:07:55-mon:08:25", 
+    #         read_replica_identifiers: [
+    #         ], 
+    #         serverless_v2_platform_version: "3", 
+    #         serverless_v2_scaling_configuration: {
+    #           max_capacity: 128.0, 
+    #           min_capacity: 1.0, 
+    #         }, 
+    #         status: "available", 
+    #         storage_encrypted: false, 
+    #         storage_encryption_type: "sse-rds", 
+    #         tag_list: [
+    #         ], 
+    #         upgrade_rollout_order: "second", 
+    #         vpc_networking_enabled: false, 
+    #         vpc_security_groups: [
+    #         ], 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_db_clusters({
@@ -13303,6 +13467,8 @@ module Aws::RDS
     #   resp.db_clusters[0].certificate_details.ca_identifier #=> String
     #   resp.db_clusters[0].certificate_details.valid_till #=> Time
     #   resp.db_clusters[0].engine_lifecycle_support #=> String
+    #   resp.db_clusters[0].vpc_networking_enabled #=> Boolean
+    #   resp.db_clusters[0].internet_access_gateway_enabled #=> Boolean
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -17962,6 +18128,154 @@ module Aws::RDS
       req.send_request(options)
     end
 
+    # Describes the properties of specific platform versions for Aurora
+    # Serverless v2.
+    #
+    # @option params [String] :serverless_v2_platform_version
+    #   A specific platform version to return details for.
+    #
+    #   Example: `3`
+    #
+    # @option params [String] :engine
+    #   The database engine to return platform version details for.
+    #
+    #   Valid Values:
+    #
+    #   * `aurora-mysql`
+    #
+    #   * `aurora-postgresql`
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   This parameter isn't currently supported.
+    #
+    # @option params [Boolean] :default_only
+    #   Specifies whether to return only the default platform versions for
+    #   each engine. The default platform version is the version used for new
+    #   DB clusters.
+    #
+    # @option params [Boolean] :include_all
+    #   Specifies whether to also include platform versions which are no
+    #   longer in use.
+    #
+    # @option params [Integer] :max_records
+    #   The maximum number of records to include in the response. If more than
+    #   the `MaxRecords` value is available, a pagination token called a
+    #   marker is included in the response so you can retrieve the remaining
+    #   results.
+    #
+    #   Default: 20
+    #
+    #   Constraints: Minimum 1, maximum 200.
+    #
+    # @option params [String] :marker
+    #   An optional pagination token provided by a previous request. If this
+    #   parameter is specified, the response includes only records beyond the
+    #   marker, up to the value specified by `MaxRecords`.
+    #
+    # @return [Types::ServerlessV2PlatformVersionsMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ServerlessV2PlatformVersionsMessage#marker #marker} => String
+    #   * {Types::ServerlessV2PlatformVersionsMessage#serverless_v2_platform_versions #serverless_v2_platform_versions} => Array&lt;Types::ServerlessV2PlatformVersionInfo&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: To describe the serverless platform versions for the Aurora MySQL DB engine
+    #
+    #   # The following example displays details about each of the serverless platform versions for the specified DB engine.
+    #
+    #   resp = client.describe_serverless_v2_platform_versions({
+    #     engine: "aurora-mysql", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     serverless_v2_platform_versions: [
+    #       {
+    #         engine: "aurora-mysql", 
+    #         is_default: true, 
+    #         serverless_v2_features_support: {
+    #           max_capacity: 256.0, 
+    #           min_capacity: 0.0, 
+    #         }, 
+    #         serverless_v2_platform_version: "4", 
+    #         serverless_v2_platform_version_description: "Version 4 offering scaling up to 256 ACUs, and performance improvement up to 30% compared to version 3", 
+    #         status: "enabled", 
+    #       }, 
+    #       {
+    #         engine: "aurora-mysql", 
+    #         is_default: false, 
+    #         serverless_v2_features_support: {
+    #           max_capacity: 256.0, 
+    #           min_capacity: 0.0, 
+    #         }, 
+    #         serverless_v2_platform_version: "3", 
+    #         serverless_v2_platform_version_description: "Version 3 offering scaling up to 256 ACUs, and performance improvement up to 30% compared to version 2", 
+    #         status: "enabled", 
+    #       }, 
+    #       {
+    #         engine: "aurora-mysql", 
+    #         is_default: false, 
+    #         serverless_v2_features_support: {
+    #           max_capacity: 256.0, 
+    #           min_capacity: 0.0, 
+    #         }, 
+    #         serverless_v2_platform_version: "2", 
+    #         serverless_v2_platform_version_description: "Version 2 offering scaling up to 256 ACUs", 
+    #         status: "enabled", 
+    #       }, 
+    #       {
+    #         engine: "aurora-mysql", 
+    #         is_default: false, 
+    #         serverless_v2_features_support: {
+    #           max_capacity: 128.0, 
+    #           min_capacity: 0.0, 
+    #         }, 
+    #         serverless_v2_platform_version: "1", 
+    #         serverless_v2_platform_version_description: "Version 1 offering scaling up to 128 ACUs", 
+    #         status: "enabled", 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_serverless_v2_platform_versions({
+    #     serverless_v2_platform_version: "String",
+    #     engine: "String",
+    #     filters: [
+    #       {
+    #         name: "String", # required
+    #         values: ["String"], # required
+    #       },
+    #     ],
+    #     default_only: false,
+    #     include_all: false,
+    #     max_records: 1,
+    #     marker: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.marker #=> String
+    #   resp.serverless_v2_platform_versions #=> Array
+    #   resp.serverless_v2_platform_versions[0].serverless_v2_platform_version #=> String
+    #   resp.serverless_v2_platform_versions[0].serverless_v2_platform_version_description #=> String
+    #   resp.serverless_v2_platform_versions[0].engine #=> String
+    #   resp.serverless_v2_platform_versions[0].serverless_v2_features_support.min_capacity #=> Float
+    #   resp.serverless_v2_platform_versions[0].serverless_v2_features_support.max_capacity #=> Float
+    #   resp.serverless_v2_platform_versions[0].status #=> String
+    #   resp.serverless_v2_platform_versions[0].is_default #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeServerlessV2PlatformVersions AWS API Documentation
+    #
+    # @overload describe_serverless_v2_platform_versions(params = {})
+    # @param [Hash] params ({})
+    def describe_serverless_v2_platform_versions(params = {}, options = {})
+      req = build_request(:describe_serverless_v2_platform_versions, params)
+      req.send_request(options)
+    end
+
     # Returns a list of the source Amazon Web Services Regions where the
     # current Amazon Web Services Region can create a read replica, copy a
     # DB snapshot from, or replicate automated backups from.
@@ -18832,6 +19146,8 @@ module Aws::RDS
     #   resp.db_cluster.certificate_details.ca_identifier #=> String
     #   resp.db_cluster.certificate_details.valid_till #=> Time
     #   resp.db_cluster.engine_lifecycle_support #=> String
+    #   resp.db_cluster.vpc_networking_enabled #=> Boolean
+    #   resp.db_cluster.internet_access_gateway_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/FailoverDBCluster AWS API Documentation
     #
@@ -20599,6 +20915,8 @@ module Aws::RDS
     #   resp.db_cluster.certificate_details.ca_identifier #=> String
     #   resp.db_cluster.certificate_details.valid_till #=> Time
     #   resp.db_cluster.engine_lifecycle_support #=> String
+    #   resp.db_cluster.vpc_networking_enabled #=> Boolean
+    #   resp.db_cluster.internet_access_gateway_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBCluster AWS API Documentation
     #
@@ -24648,6 +24966,8 @@ module Aws::RDS
     #   resp.db_cluster.certificate_details.ca_identifier #=> String
     #   resp.db_cluster.certificate_details.valid_till #=> Time
     #   resp.db_cluster.engine_lifecycle_support #=> String
+    #   resp.db_cluster.vpc_networking_enabled #=> Boolean
+    #   resp.db_cluster.internet_access_gateway_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/PromoteReadReplicaDBCluster AWS API Documentation
     #
@@ -24955,6 +25275,8 @@ module Aws::RDS
     #   resp.db_cluster.certificate_details.ca_identifier #=> String
     #   resp.db_cluster.certificate_details.valid_till #=> Time
     #   resp.db_cluster.engine_lifecycle_support #=> String
+    #   resp.db_cluster.vpc_networking_enabled #=> Boolean
+    #   resp.db_cluster.internet_access_gateway_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RebootDBCluster AWS API Documentation
     #
@@ -26600,6 +26922,8 @@ module Aws::RDS
     #   resp.db_cluster.certificate_details.ca_identifier #=> String
     #   resp.db_cluster.certificate_details.valid_till #=> Time
     #   resp.db_cluster.engine_lifecycle_support #=> String
+    #   resp.db_cluster.vpc_networking_enabled #=> Boolean
+    #   resp.db_cluster.internet_access_gateway_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterFromS3 AWS API Documentation
     #
@@ -26615,6 +26939,18 @@ module Aws::RDS
     # The target DB cluster is created from the source snapshot with a
     # default configuration. If you don't specify a security group, the new
     # DB cluster is associated with the default security group.
+    #
+    # You can use the `EnableVPCNetworking` and
+    # `EnableInternetAccessGateway` parameters together to restore an Aurora
+    # PostgreSQL cluster without VPC networking and with internet-based
+    # connectivity. These two parameters must always be specified together.
+    # Set `EnableVPCNetworking` to `false` to disable the VPC network
+    # interface (ENI) for the cluster. `EnableInternetAccessGateway` enables
+    # internet-based connectivity through an internet access gateway. IAM
+    # database authentication is required and must be enabled using
+    # `EnableIAMDatabaseAuthentication`. Once the cluster is restored, you
+    # need to modify the DB cluster to update `MasterUserAuthenticationType`
+    # to `iam-db-auth`.
     #
     # <note markdown="1"> This operation only restores the DB cluster, not the DB instances for
     # that DB cluster. You must invoke the `CreateDBInstance` operation to
@@ -27201,6 +27537,30 @@ module Aws::RDS
     #
     #   ^
     #
+    # @option params [Boolean] :enable_vpc_networking
+    #   Specifies whether to enable VPC networking for the restored DB
+    #   cluster. Set this parameter to `false` to create a cluster without the
+    #   VPC network interface (ENI).
+    #
+    #   This parameter must be used together with
+    #   `EnableInternetAccessGateway`. When both parameters are specified, IAM
+    #   database authentication is required. You must also specify
+    #   `EnableIAMDatabaseAuthentication`.
+    #
+    #   Valid for Cluster Type: Aurora PostgreSQL clusters
+    #
+    # @option params [Boolean] :enable_internet_access_gateway
+    #   Specifies that the restored DB cluster should use internet-based
+    #   connectivity through an internet access gateway. This allows clients
+    #   to connect to the cluster over the internet without requiring a VPC.
+    #
+    #   This parameter must be used together with `EnableVPCNetworking` set to
+    #   `false`. When both parameters are specified, IAM database
+    #   authentication is required. You must also specify
+    #   `EnableIAMDatabaseAuthentication`.
+    #
+    #   Valid for Cluster Type: Aurora PostgreSQL clusters
+    #
     # @return [Types::RestoreDBClusterFromSnapshotResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RestoreDBClusterFromSnapshotResult#db_cluster #db_cluster} => Types::DBCluster
@@ -27267,6 +27627,66 @@ module Aws::RDS
     #           status: "active", 
     #           vpc_security_group_id: "sg-########", 
     #         }, 
+    #       ], 
+    #     }, 
+    #   }
+    #
+    # @example Example: To restore a DB cluster from a snapshot without VPC networking
+    #
+    #   # The following example restores an Aurora DB cluster from a DB cluster snapshot named sample-cluster-snapshot without VPC
+    #   # networking and with internet-based connectivity enabled through an internet access gateway. The EnableVPCNetworking and
+    #   # EnableInternetAccessGateway parameters must always be specified together. IAM database authentication is required when
+    #   # both parameters are specified.
+    #
+    #   resp = client.restore_db_cluster_from_snapshot({
+    #     db_cluster_identifier: "restored-cluster", 
+    #     enable_iam_database_authentication: true, 
+    #     enable_internet_access_gateway: true, 
+    #     enable_vpc_networking: false, 
+    #     engine: "aurora-postgresql", 
+    #     snapshot_identifier: "sample-cluster-snapshot", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     db_cluster: {
+    #       allocated_storage: 1, 
+    #       associated_roles: [
+    #       ], 
+    #       availability_zones: [
+    #         "us-west-2c", 
+    #         "us-west-2a", 
+    #         "us-west-2b", 
+    #       ], 
+    #       backup_retention_period: 7, 
+    #       cluster_create_time: Time.parse("2020-06-05T15:06:58.634Z"), 
+    #       copy_tags_to_snapshot: false, 
+    #       cross_account_clone: false, 
+    #       db_cluster_arn: "arn:aws:rds:us-west-2:123456789012:cluster:restored-cluster", 
+    #       db_cluster_identifier: "restored-cluster", 
+    #       db_cluster_members: [
+    #       ], 
+    #       db_cluster_parameter_group: "default.aurora-postgresql17", 
+    #       database_name: "", 
+    #       db_cluster_resource_id: "cluster-5DSB5IFQDDUVAWOUWM1EXAMPLE", 
+    #       deletion_protection: false, 
+    #       domain_memberships: [
+    #       ], 
+    #       engine: "aurora-postgresql", 
+    #       engine_mode: "provisioned", 
+    #       engine_version: "17.7", 
+    #       http_endpoint_enabled: false, 
+    #       iam_database_authentication_enabled: true, 
+    #       master_username: "postgres", 
+    #       multi_az: false, 
+    #       port: 5432, 
+    #       preferred_backup_window: "09:33-10:03", 
+    #       preferred_maintenance_window: "sun:12:22-sun:12:52", 
+    #       read_replica_identifiers: [
+    #       ], 
+    #       status: "creating", 
+    #       storage_encrypted: false, 
+    #       vpc_security_groups: [
     #       ], 
     #     }, 
     #   }
@@ -27342,6 +27762,8 @@ module Aws::RDS
     #         ],
     #       },
     #     ],
+    #     enable_vpc_networking: false,
+    #     enable_internet_access_gateway: false,
     #   })
     #
     # @example Response structure
@@ -27490,6 +27912,8 @@ module Aws::RDS
     #   resp.db_cluster.certificate_details.ca_identifier #=> String
     #   resp.db_cluster.certificate_details.valid_till #=> Time
     #   resp.db_cluster.engine_lifecycle_support #=> String
+    #   resp.db_cluster.vpc_networking_enabled #=> Boolean
+    #   resp.db_cluster.internet_access_gateway_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterFromSnapshot AWS API Documentation
     #
@@ -27509,6 +27933,18 @@ module Aws::RDS
     # the restore may occur in a different Availability Zone (AZ) from the
     # original DB cluster. The AZ where RDS restores the DB cluster depends
     # on the AZs in the specified subnet group.
+    #
+    # You can use the `EnableVPCNetworking` and
+    # `EnableInternetAccessGateway` parameters together to restore an Aurora
+    # PostgreSQL cluster without VPC networking and with internet-based
+    # connectivity. These two parameters must always be specified together.
+    # Set `EnableVPCNetworking` to `false` to disable the VPC network
+    # interface (ENI) for the cluster. `EnableInternetAccessGateway` enables
+    # internet-based connectivity through an internet access gateway. IAM
+    # database authentication is required and must be enabled using
+    # `EnableIAMDatabaseAuthentication`. Once the cluster is restored, you
+    # need to modify the DB cluster to update `MasterUserAuthenticationType`
+    # to `iam-db-auth`.
     #
     # <note markdown="1"> For Aurora, this operation only restores the DB cluster, not the DB
     # instances for that DB cluster. You must invoke the `CreateDBInstance`
@@ -28075,6 +28511,30 @@ module Aws::RDS
     #
     #   ^
     #
+    # @option params [Boolean] :enable_vpc_networking
+    #   Specifies whether to enable VPC networking for the restored DB
+    #   cluster. Set this parameter to `false` to create a cluster without the
+    #   VPC network interface (ENI).
+    #
+    #   This parameter must be used together with
+    #   `EnableInternetAccessGateway`. When both parameters are specified, IAM
+    #   database authentication is required. You must also specify
+    #   `EnableIAMDatabaseAuthentication`.
+    #
+    #   Valid for Cluster Type: Aurora PostgreSQL clusters
+    #
+    # @option params [Boolean] :enable_internet_access_gateway
+    #   Specifies that the restored DB cluster should use internet-based
+    #   connectivity through an internet access gateway. This allows clients
+    #   to connect to the cluster over the internet without requiring a VPC.
+    #
+    #   This parameter must be used together with `EnableVPCNetworking` set to
+    #   `false`. When both parameters are specified, IAM database
+    #   authentication is required. You must also specify
+    #   `EnableIAMDatabaseAuthentication`.
+    #
+    #   Valid for Cluster Type: Aurora PostgreSQL clusters
+    #
     # @return [Types::RestoreDBClusterToPointInTimeResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RestoreDBClusterToPointInTimeResult#db_cluster #db_cluster} => Types::DBCluster
@@ -28140,6 +28600,65 @@ module Aws::RDS
     #           status: "active", 
     #           vpc_security_group_id: "sg-########", 
     #         }, 
+    #       ], 
+    #     }, 
+    #   }
+    #
+    # @example Example: To restore an Aurora DB cluster to a point in time without VPC networking
+    #
+    #   # The following example restores an Aurora DB cluster to the latest possible time without VPC networking and with
+    #   # internet-based connectivity enabled through an internet access gateway. The EnableVPCNetworking and
+    #   # EnableInternetAccessGateway parameters must always be specified together. IAM database authentication is required when
+    #   # both parameters are specified.
+    #
+    #   resp = client.restore_db_cluster_to_point_in_time({
+    #     db_cluster_identifier: "sample-cluster-restored", 
+    #     enable_iam_database_authentication: true, 
+    #     enable_internet_access_gateway: true, 
+    #     enable_vpc_networking: false, 
+    #     restore_type: "copy-on-write", 
+    #     source_db_cluster_identifier: "sample-cluster", 
+    #     use_latest_restorable_time: true, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     db_cluster: {
+    #       allocated_storage: 1, 
+    #       associated_roles: [
+    #       ], 
+    #       availability_zones: [
+    #         "us-east-1c", 
+    #         "us-east-1a", 
+    #         "us-east-1b", 
+    #       ], 
+    #       backup_retention_period: 7, 
+    #       cluster_create_time: Time.parse("2026-01-15T22:14:02.000Z"), 
+    #       copy_tags_to_snapshot: false, 
+    #       cross_account_clone: false, 
+    #       db_cluster_arn: "arn:aws:rds:us-east-1:654654253058:cluster:sample-cluster-restored", 
+    #       db_cluster_identifier: "sample-cluster-restored", 
+    #       db_cluster_members: [
+    #       ], 
+    #       db_cluster_parameter_group: "default.aurora-postgresql17", 
+    #       database_name: "", 
+    #       db_cluster_resource_id: "cluster-ABCDEFGHIJKLMNOPQRSTUVWXYZ1234", 
+    #       deletion_protection: false, 
+    #       engine: "aurora-postgresql", 
+    #       engine_mode: "provisioned", 
+    #       engine_version: "17.7", 
+    #       http_endpoint_enabled: false, 
+    #       iam_database_authentication_enabled: true, 
+    #       master_username: "postgres", 
+    #       multi_az: false, 
+    #       port: 5432, 
+    #       preferred_backup_window: "06:15-06:45", 
+    #       preferred_maintenance_window: "sat:03:44-sat:04:14", 
+    #       read_replica_identifiers: [
+    #       ], 
+    #       status: "creating", 
+    #       storage_encrypted: false, 
+    #       vpc_security_groups: [
     #       ], 
     #     }, 
     #   }
@@ -28215,6 +28734,8 @@ module Aws::RDS
     #         ],
     #       },
     #     ],
+    #     enable_vpc_networking: false,
+    #     enable_internet_access_gateway: false,
     #   })
     #
     # @example Response structure
@@ -28363,6 +28884,8 @@ module Aws::RDS
     #   resp.db_cluster.certificate_details.ca_identifier #=> String
     #   resp.db_cluster.certificate_details.valid_till #=> Time
     #   resp.db_cluster.engine_lifecycle_support #=> String
+    #   resp.db_cluster.vpc_networking_enabled #=> Boolean
+    #   resp.db_cluster.internet_access_gateway_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterToPointInTime AWS API Documentation
     #
@@ -31817,6 +32340,8 @@ module Aws::RDS
     #   resp.db_cluster.certificate_details.ca_identifier #=> String
     #   resp.db_cluster.certificate_details.valid_till #=> Time
     #   resp.db_cluster.engine_lifecycle_support #=> String
+    #   resp.db_cluster.vpc_networking_enabled #=> Boolean
+    #   resp.db_cluster.internet_access_gateway_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StartDBCluster AWS API Documentation
     #
@@ -32694,6 +33219,8 @@ module Aws::RDS
     #   resp.db_cluster.certificate_details.ca_identifier #=> String
     #   resp.db_cluster.certificate_details.valid_till #=> Time
     #   resp.db_cluster.engine_lifecycle_support #=> String
+    #   resp.db_cluster.vpc_networking_enabled #=> Boolean
+    #   resp.db_cluster.internet_access_gateway_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StopDBCluster AWS API Documentation
     #
@@ -33605,7 +34132,7 @@ module Aws::RDS
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.308.0'
+      context[:gem_version] = '1.311.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -131,6 +131,7 @@ module Aws::SSM
       attr_accessor target_maps: ::Array[::Hash[::String, ::Array[::String]]]
       attr_accessor alarm_configuration: Types::AlarmConfiguration
       attr_accessor triggered_alarms: ::Array[Types::AlarmStateInformation]
+      attr_accessor association_dispatch_assume_role: ::String
       SENSITIVE: [:parameters]
     end
 
@@ -229,6 +230,7 @@ module Aws::SSM
       attr_accessor schedule_offset: ::Integer
       attr_accessor duration: ::Integer
       attr_accessor target_maps: ::Array[::Hash[::String, ::Array[::String]]]
+      attr_accessor association_dispatch_assume_role: ::String
       SENSITIVE: [:parameters]
     end
 
@@ -570,6 +572,7 @@ module Aws::SSM
 
     class CreateAssociationBatchRequest
       attr_accessor entries: ::Array[Types::CreateAssociationBatchRequestEntry]
+      attr_accessor association_dispatch_assume_role: ::String
       SENSITIVE: []
     end
 
@@ -625,6 +628,7 @@ module Aws::SSM
       attr_accessor target_maps: ::Array[::Hash[::String, ::Array[::String]]]
       attr_accessor tags: ::Array[Types::Tag]
       attr_accessor alarm_configuration: Types::AlarmConfiguration
+      attr_accessor association_dispatch_assume_role: ::String
       SENSITIVE: [:parameters]
     end
 
@@ -4295,6 +4299,7 @@ module Aws::SSM
       attr_accessor duration: ::Integer
       attr_accessor target_maps: ::Array[::Hash[::String, ::Array[::String]]]
       attr_accessor alarm_configuration: Types::AlarmConfiguration
+      attr_accessor association_dispatch_assume_role: ::String
       SENSITIVE: [:parameters]
     end
 

@@ -1700,6 +1700,7 @@ module Aws::BedrockAgent
     #                                 json: {
     #                                 },
     #                               },
+    #                               strict: false,
     #                             },
     #                             cache_point: {
     #                               type: "default", # required, accepts default
@@ -1886,6 +1887,7 @@ module Aws::BedrockAgent
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.tool_configuration.tools #=> Array
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.tool_configuration.tools[0].tool_spec.name #=> String
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.tool_configuration.tools[0].tool_spec.description #=> String
+    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.tool_configuration.tools[0].tool_spec.strict #=> Boolean
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.tool_configuration.tools[0].cache_point.type #=> String, one of "default"
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.tool_configuration.tool_choice.tool.name #=> String
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.model_id #=> String
@@ -2147,6 +2149,7 @@ module Aws::BedrockAgent
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.tool_configuration.tools #=> Array
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.tool_configuration.tools[0].tool_spec.name #=> String
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.tool_configuration.tools[0].tool_spec.description #=> String
+    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.tool_configuration.tools[0].tool_spec.strict #=> Boolean
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.tool_configuration.tools[0].cache_point.type #=> String, one of "default"
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.tool_configuration.tool_choice.tool.name #=> String
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.model_id #=> String
@@ -2703,6 +2706,7 @@ module Aws::BedrockAgent
     #                       json: {
     #                       },
     #                     },
+    #                     strict: false,
     #                   },
     #                   cache_point: {
     #                     type: "default", # required, accepts default
@@ -2777,6 +2781,7 @@ module Aws::BedrockAgent
     #   resp.variants[0].template_configuration.chat.tool_configuration.tools #=> Array
     #   resp.variants[0].template_configuration.chat.tool_configuration.tools[0].tool_spec.name #=> String
     #   resp.variants[0].template_configuration.chat.tool_configuration.tools[0].tool_spec.description #=> String
+    #   resp.variants[0].template_configuration.chat.tool_configuration.tools[0].tool_spec.strict #=> Boolean
     #   resp.variants[0].template_configuration.chat.tool_configuration.tools[0].cache_point.type #=> String, one of "default"
     #   resp.variants[0].template_configuration.chat.tool_configuration.tool_choice.tool.name #=> String
     #   resp.variants[0].model_id #=> String
@@ -2890,6 +2895,7 @@ module Aws::BedrockAgent
     #   resp.variants[0].template_configuration.chat.tool_configuration.tools #=> Array
     #   resp.variants[0].template_configuration.chat.tool_configuration.tools[0].tool_spec.name #=> String
     #   resp.variants[0].template_configuration.chat.tool_configuration.tools[0].tool_spec.description #=> String
+    #   resp.variants[0].template_configuration.chat.tool_configuration.tools[0].tool_spec.strict #=> Boolean
     #   resp.variants[0].template_configuration.chat.tool_configuration.tools[0].cache_point.type #=> String, one of "default"
     #   resp.variants[0].template_configuration.chat.tool_configuration.tool_choice.tool.name #=> String
     #   resp.variants[0].model_id #=> String
@@ -3984,6 +3990,7 @@ module Aws::BedrockAgent
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.tool_configuration.tools #=> Array
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.tool_configuration.tools[0].tool_spec.name #=> String
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.tool_configuration.tools[0].tool_spec.description #=> String
+    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.tool_configuration.tools[0].tool_spec.strict #=> Boolean
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.tool_configuration.tools[0].cache_point.type #=> String, one of "default"
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.tool_configuration.tool_choice.tool.name #=> String
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.model_id #=> String
@@ -4239,6 +4246,7 @@ module Aws::BedrockAgent
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.tool_configuration.tools #=> Array
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.tool_configuration.tools[0].tool_spec.name #=> String
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.tool_configuration.tools[0].tool_spec.description #=> String
+    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.tool_configuration.tools[0].tool_spec.strict #=> Boolean
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.tool_configuration.tools[0].cache_point.type #=> String, one of "default"
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.tool_configuration.tool_choice.tool.name #=> String
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.model_id #=> String
@@ -4593,6 +4601,7 @@ module Aws::BedrockAgent
     #   resp.variants[0].template_configuration.chat.tool_configuration.tools #=> Array
     #   resp.variants[0].template_configuration.chat.tool_configuration.tools[0].tool_spec.name #=> String
     #   resp.variants[0].template_configuration.chat.tool_configuration.tools[0].tool_spec.description #=> String
+    #   resp.variants[0].template_configuration.chat.tool_configuration.tools[0].tool_spec.strict #=> Boolean
     #   resp.variants[0].template_configuration.chat.tool_configuration.tools[0].cache_point.type #=> String, one of "default"
     #   resp.variants[0].template_configuration.chat.tool_configuration.tool_choice.tool.name #=> String
     #   resp.variants[0].model_id #=> String
@@ -6929,6 +6938,7 @@ module Aws::BedrockAgent
     #                                 json: {
     #                                 },
     #                               },
+    #                               strict: false,
     #                             },
     #                             cache_point: {
     #                               type: "default", # required, accepts default
@@ -7112,6 +7122,7 @@ module Aws::BedrockAgent
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.tool_configuration.tools #=> Array
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.tool_configuration.tools[0].tool_spec.name #=> String
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.tool_configuration.tools[0].tool_spec.description #=> String
+    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.tool_configuration.tools[0].tool_spec.strict #=> Boolean
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.tool_configuration.tools[0].cache_point.type #=> String, one of "default"
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.tool_configuration.tool_choice.tool.name #=> String
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.model_id #=> String
@@ -7688,6 +7699,7 @@ module Aws::BedrockAgent
     #                       json: {
     #                       },
     #                     },
+    #                     strict: false,
     #                   },
     #                   cache_point: {
     #                     type: "default", # required, accepts default
@@ -7759,6 +7771,7 @@ module Aws::BedrockAgent
     #   resp.variants[0].template_configuration.chat.tool_configuration.tools #=> Array
     #   resp.variants[0].template_configuration.chat.tool_configuration.tools[0].tool_spec.name #=> String
     #   resp.variants[0].template_configuration.chat.tool_configuration.tools[0].tool_spec.description #=> String
+    #   resp.variants[0].template_configuration.chat.tool_configuration.tools[0].tool_spec.strict #=> Boolean
     #   resp.variants[0].template_configuration.chat.tool_configuration.tools[0].cache_point.type #=> String, one of "default"
     #   resp.variants[0].template_configuration.chat.tool_configuration.tool_choice.tool.name #=> String
     #   resp.variants[0].model_id #=> String
@@ -7944,6 +7957,7 @@ module Aws::BedrockAgent
     #                                 json: {
     #                                 },
     #                               },
+    #                               strict: false,
     #                             },
     #                             cache_point: {
     #                               type: "default", # required, accepts default
@@ -8143,7 +8157,7 @@ module Aws::BedrockAgent
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrockagent'
-      context[:gem_version] = '1.72.0'
+      context[:gem_version] = '1.74.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

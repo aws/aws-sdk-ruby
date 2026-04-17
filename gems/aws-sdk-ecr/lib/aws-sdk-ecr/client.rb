@@ -911,7 +911,7 @@ module Aws::ECR
     #     ecr_repository_prefix: "PullThroughCacheRuleRepositoryPrefix", # required
     #     upstream_registry_url: "Url", # required
     #     registry_id: "RegistryId",
-    #     upstream_registry: "ecr", # accepts ecr, ecr-public, quay, k8s, docker-hub, github-container-registry, azure-container-registry, gitlab-container-registry
+    #     upstream_registry: "ecr", # accepts ecr, ecr-public, quay, k8s, docker-hub, github-container-registry, azure-container-registry, gitlab-container-registry, chainguard
     #     credential_arn: "CredentialArn",
     #     custom_role_arn: "CustomRoleArn",
     #     upstream_repository_prefix: "PullThroughCacheRuleRepositoryPrefix",
@@ -923,7 +923,7 @@ module Aws::ECR
     #   resp.upstream_registry_url #=> String
     #   resp.created_at #=> Time
     #   resp.registry_id #=> String
-    #   resp.upstream_registry #=> String, one of "ecr", "ecr-public", "quay", "k8s", "docker-hub", "github-container-registry", "azure-container-registry", "gitlab-container-registry"
+    #   resp.upstream_registry #=> String, one of "ecr", "ecr-public", "quay", "k8s", "docker-hub", "github-container-registry", "azure-container-registry", "gitlab-container-registry", "chainguard"
     #   resp.credential_arn #=> String
     #   resp.custom_role_arn #=> String
     #   resp.upstream_repository_prefix #=> String
@@ -2093,7 +2093,7 @@ module Aws::ECR
     #   resp.pull_through_cache_rules[0].credential_arn #=> String
     #   resp.pull_through_cache_rules[0].custom_role_arn #=> String
     #   resp.pull_through_cache_rules[0].upstream_repository_prefix #=> String
-    #   resp.pull_through_cache_rules[0].upstream_registry #=> String, one of "ecr", "ecr-public", "quay", "k8s", "docker-hub", "github-container-registry", "azure-container-registry", "gitlab-container-registry"
+    #   resp.pull_through_cache_rules[0].upstream_registry #=> String, one of "ecr", "ecr-public", "quay", "k8s", "docker-hub", "github-container-registry", "azure-container-registry", "gitlab-container-registry", "chainguard"
     #   resp.pull_through_cache_rules[0].updated_at #=> Time
     #   resp.next_token #=> String
     #
@@ -2892,7 +2892,7 @@ module Aws::ECR
     #   of the initial request can be seen by sending another
     #   `ListImageReferrers` request with the returned `nextToken` value. This
     #   value can be between 1 and 50. If this parameter is not used, then
-    #   `ListImageReferrers` returns up to 50 results and a `nextToken` value,
+    #   `ListImageReferrers` returns up to 20 results and a `nextToken` value,
     #   if applicable.
     #
     # @return [Types::ListImageReferrersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -4527,7 +4527,7 @@ module Aws::ECR
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-ecr'
-      context[:gem_version] = '1.120.0'
+      context[:gem_version] = '1.125.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

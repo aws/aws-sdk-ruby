@@ -63,6 +63,9 @@ module Aws::Lambda
   # * {ResourceInUseException}
   # * {ResourceNotFoundException}
   # * {ResourceNotReadyException}
+  # * {S3FilesMountConnectivityException}
+  # * {S3FilesMountFailureException}
+  # * {S3FilesMountTimeoutException}
   # * {SerializedRequestEntityTooLargeException}
   # * {ServiceException}
   # * {SnapStartException}
@@ -788,6 +791,66 @@ module Aws::Lambda
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::Lambda::Types::ResourceNotReadyException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def type
+        @data[:type]
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class S3FilesMountConnectivityException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Lambda::Types::S3FilesMountConnectivityException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def type
+        @data[:type]
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class S3FilesMountFailureException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Lambda::Types::S3FilesMountFailureException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def type
+        @data[:type]
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class S3FilesMountTimeoutException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Lambda::Types::S3FilesMountTimeoutException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

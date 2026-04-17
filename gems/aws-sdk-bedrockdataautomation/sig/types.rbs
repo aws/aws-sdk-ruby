@@ -161,6 +161,21 @@ module Aws::BedrockDataAutomation
       SENSITIVE: []
     end
 
+    class CreateDataAutomationLibraryRequest
+      attr_accessor library_name: ::String
+      attr_accessor library_description: ::String
+      attr_accessor client_token: ::String
+      attr_accessor encryption_configuration: Types::EncryptionConfiguration
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: [:library_name, :library_description]
+    end
+
+    class CreateDataAutomationLibraryResponse
+      attr_accessor library_arn: ::String
+      attr_accessor status: ("ACTIVE" | "DELETING")
+      SENSITIVE: []
+    end
+
     class CreateDataAutomationProjectRequest
       attr_accessor project_name: ::String
       attr_accessor project_description: ::String
@@ -169,6 +184,7 @@ module Aws::BedrockDataAutomation
       attr_accessor standard_output_configuration: Types::StandardOutputConfiguration
       attr_accessor custom_output_configuration: Types::CustomOutputConfiguration
       attr_accessor override_configuration: Types::OverrideConfiguration
+      attr_accessor data_automation_library_configuration: Types::DataAutomationLibraryConfiguration
       attr_accessor client_token: ::String
       attr_accessor encryption_configuration: Types::EncryptionConfiguration
       attr_accessor tags: ::Array[Types::Tag]
@@ -187,6 +203,74 @@ module Aws::BedrockDataAutomation
       SENSITIVE: []
     end
 
+    class DataAutomationLibrary
+      attr_accessor library_arn: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor library_name: ::String
+      attr_accessor library_description: ::String
+      attr_accessor status: ("ACTIVE" | "DELETING")
+      attr_accessor entity_types: ::Array[Types::EntityTypeInfo]
+      attr_accessor kms_key_id: ::String
+      attr_accessor kms_encryption_context: ::Hash[::String, ::String]
+      SENSITIVE: [:library_name, :library_description]
+    end
+
+    class DataAutomationLibraryConfiguration
+      attr_accessor libraries: ::Array[Types::DataAutomationLibraryItem]
+      SENSITIVE: []
+    end
+
+    class DataAutomationLibraryEntitySummary
+      attr_accessor vocabulary: Types::VocabularyEntitySummary
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Vocabulary < DataAutomationLibraryEntitySummary
+      end
+      class Unknown < DataAutomationLibraryEntitySummary
+      end
+    end
+
+    class DataAutomationLibraryFilter
+      attr_accessor library_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DataAutomationLibraryIngestionJob
+      attr_accessor job_arn: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor entity_type: ("VOCABULARY")
+      attr_accessor operation_type: ("UPSERT" | "DELETE")
+      attr_accessor job_status: ("IN_PROGRESS" | "COMPLETED" | "COMPLETED_WITH_ERRORS" | "FAILED")
+      attr_accessor output_configuration: Types::OutputConfiguration
+      attr_accessor completion_time: ::Time
+      attr_accessor error_message: ::String
+      attr_accessor error_type: ::String
+      SENSITIVE: []
+    end
+
+    class DataAutomationLibraryIngestionJobSummary
+      attr_accessor job_arn: ::String
+      attr_accessor job_status: ("IN_PROGRESS" | "COMPLETED" | "COMPLETED_WITH_ERRORS" | "FAILED")
+      attr_accessor entity_type: ("VOCABULARY")
+      attr_accessor operation_type: ("UPSERT" | "DELETE")
+      attr_accessor creation_time: ::Time
+      attr_accessor completion_time: ::Time
+      SENSITIVE: []
+    end
+
+    class DataAutomationLibraryItem
+      attr_accessor library_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DataAutomationLibrarySummary
+      attr_accessor library_arn: ::String
+      attr_accessor library_name: ::String
+      attr_accessor creation_time: ::Time
+      SENSITIVE: [:library_name]
+    end
+
     class DataAutomationProject
       attr_accessor project_arn: ::String
       attr_accessor creation_time: ::Time
@@ -198,6 +282,7 @@ module Aws::BedrockDataAutomation
       attr_accessor standard_output_configuration: Types::StandardOutputConfiguration
       attr_accessor custom_output_configuration: Types::CustomOutputConfiguration
       attr_accessor override_configuration: Types::OverrideConfiguration
+      attr_accessor data_automation_library_configuration: Types::DataAutomationLibraryConfiguration
       attr_accessor status: ("COMPLETED" | "IN_PROGRESS" | "FAILED")
       attr_accessor kms_key_id: ::String
       attr_accessor kms_encryption_context: ::Hash[::String, ::String]
@@ -228,6 +313,17 @@ module Aws::BedrockDataAutomation
     class DeleteBlueprintResponse < Aws::EmptyStructure
     end
 
+    class DeleteDataAutomationLibraryRequest
+      attr_accessor library_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteDataAutomationLibraryResponse
+      attr_accessor library_arn: ::String
+      attr_accessor status: ("ACTIVE" | "DELETING")
+      SENSITIVE: []
+    end
+
     class DeleteDataAutomationProjectRequest
       attr_accessor project_arn: ::String
       SENSITIVE: []
@@ -236,6 +332,11 @@ module Aws::BedrockDataAutomation
     class DeleteDataAutomationProjectResponse
       attr_accessor project_arn: ::String
       attr_accessor status: ("COMPLETED" | "IN_PROGRESS" | "FAILED")
+      SENSITIVE: []
+    end
+
+    class DeleteEntitiesInfo
+      attr_accessor entity_ids: ::Array[::String]
       SENSITIVE: []
     end
 
@@ -296,6 +397,28 @@ module Aws::BedrockDataAutomation
       SENSITIVE: []
     end
 
+    class EntityDetails
+      attr_accessor vocabulary: Types::VocabularyEntity
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Vocabulary < EntityDetails
+      end
+      class Unknown < EntityDetails
+      end
+    end
+
+    class EntityTypeInfo
+      attr_accessor entity_type: ("VOCABULARY")
+      attr_accessor entity_metadata: ::String
+      SENSITIVE: []
+    end
+
+    class EventBridgeConfiguration
+      attr_accessor event_bridge_enabled: bool
+      SENSITIVE: []
+    end
+
     class GetBlueprintOptimizationStatusRequest
       attr_accessor invocation_arn: ::String
       SENSITIVE: []
@@ -318,6 +441,39 @@ module Aws::BedrockDataAutomation
 
     class GetBlueprintResponse
       attr_accessor blueprint: Types::Blueprint
+      SENSITIVE: []
+    end
+
+    class GetDataAutomationLibraryEntityRequest
+      attr_accessor library_arn: ::String
+      attr_accessor entity_type: ("VOCABULARY")
+      attr_accessor entity_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetDataAutomationLibraryEntityResponse
+      attr_accessor entity: Types::EntityDetails
+      SENSITIVE: []
+    end
+
+    class GetDataAutomationLibraryIngestionJobRequest
+      attr_accessor library_arn: ::String
+      attr_accessor job_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetDataAutomationLibraryIngestionJobResponse
+      attr_accessor job: Types::DataAutomationLibraryIngestionJob
+      SENSITIVE: []
+    end
+
+    class GetDataAutomationLibraryRequest
+      attr_accessor library_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetDataAutomationLibraryResponse
+      attr_accessor library: Types::DataAutomationLibrary
       SENSITIVE: []
     end
 
@@ -367,6 +523,26 @@ module Aws::BedrockDataAutomation
       SENSITIVE: []
     end
 
+    class InlinePayload
+      attr_accessor upsert_entities_info: ::Array[Types::UpsertEntityInfo]
+      attr_accessor delete_entities_info: Types::DeleteEntitiesInfo
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class UpsertEntitiesInfo < InlinePayload
+      end
+      class DeleteEntitiesInfo < InlinePayload
+      end
+      class Unknown < InlinePayload
+      end
+    end
+
+    class InputConfiguration
+      attr_accessor s3_object: Types::S3Object
+      attr_accessor inline_payload: Types::InlinePayload
+      SENSITIVE: []
+    end
+
     class InternalServerException
       attr_accessor message: ::String
       SENSITIVE: []
@@ -387,6 +563,23 @@ module Aws::BedrockDataAutomation
       SENSITIVE: []
     end
 
+    class InvokeDataAutomationLibraryIngestionJobRequest
+      attr_accessor library_arn: ::String
+      attr_accessor client_token: ::String
+      attr_accessor input_configuration: Types::InputConfiguration
+      attr_accessor entity_type: ("VOCABULARY")
+      attr_accessor operation_type: ("UPSERT" | "DELETE")
+      attr_accessor output_configuration: Types::OutputConfiguration
+      attr_accessor notification_configuration: Types::NotificationConfiguration
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class InvokeDataAutomationLibraryIngestionJobResponse
+      attr_accessor job_arn: ::String
+      SENSITIVE: []
+    end
+
     class ListBlueprintsRequest
       attr_accessor blueprint_arn: ::String
       attr_accessor resource_owner: ("SERVICE" | "ACCOUNT")
@@ -403,12 +596,53 @@ module Aws::BedrockDataAutomation
       SENSITIVE: []
     end
 
+    class ListDataAutomationLibrariesRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor project_filter: Types::DataAutomationProjectFilter
+      SENSITIVE: []
+    end
+
+    class ListDataAutomationLibrariesResponse
+      attr_accessor libraries: ::Array[Types::DataAutomationLibrarySummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDataAutomationLibraryEntitiesRequest
+      attr_accessor library_arn: ::String
+      attr_accessor entity_type: ("VOCABULARY")
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDataAutomationLibraryEntitiesResponse
+      attr_accessor entities: ::Array[Types::DataAutomationLibraryEntitySummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDataAutomationLibraryIngestionJobsRequest
+      attr_accessor library_arn: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDataAutomationLibraryIngestionJobsResponse
+      attr_accessor jobs: ::Array[Types::DataAutomationLibraryIngestionJobSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class ListDataAutomationProjectsRequest
       attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
       attr_accessor project_stage_filter: ("DEVELOPMENT" | "LIVE" | "ALL")
       attr_accessor blueprint_filter: Types::BlueprintFilter
       attr_accessor resource_owner: ("SERVICE" | "ACCOUNT")
+      attr_accessor library_filter: Types::DataAutomationLibraryFilter
       SENSITIVE: []
     end
 
@@ -441,6 +675,16 @@ module Aws::BedrockDataAutomation
       SENSITIVE: []
     end
 
+    class NotificationConfiguration
+      attr_accessor event_bridge_configuration: Types::EventBridgeConfiguration
+      SENSITIVE: []
+    end
+
+    class OutputConfiguration
+      attr_accessor s3_uri: ::String
+      SENSITIVE: []
+    end
+
     class OverrideConfiguration
       attr_accessor document: Types::DocumentOverrideConfiguration
       attr_accessor image: Types::ImageOverrideConfiguration
@@ -454,6 +698,12 @@ module Aws::BedrockDataAutomation
       attr_accessor pii_entity_types: ::Array[("ALL" | "ADDRESS" | "AGE" | "NAME" | "EMAIL" | "PHONE" | "USERNAME" | "PASSWORD" | "DRIVER_ID" | "LICENSE_PLATE" | "VEHICLE_IDENTIFICATION_NUMBER" | "CREDIT_DEBIT_CARD_CVV" | "CREDIT_DEBIT_CARD_EXPIRY" | "CREDIT_DEBIT_CARD_NUMBER" | "PIN" | "INTERNATIONAL_BANK_ACCOUNT_NUMBER" | "SWIFT_CODE" | "IP_ADDRESS" | "MAC_ADDRESS" | "URL" | "AWS_ACCESS_KEY" | "AWS_SECRET_KEY" | "US_BANK_ACCOUNT_NUMBER" | "US_BANK_ROUTING_NUMBER" | "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER" | "US_PASSPORT_NUMBER" | "US_SOCIAL_SECURITY_NUMBER" | "CA_HEALTH_NUMBER" | "CA_SOCIAL_INSURANCE_NUMBER" | "UK_NATIONAL_HEALTH_SERVICE_NUMBER" | "UK_NATIONAL_INSURANCE_NUMBER" | "UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER")]
       attr_accessor redaction_mask_mode: ("PII" | "ENTITY_TYPE")
       SENSITIVE: []
+    end
+
+    class Phrase
+      attr_accessor text: ::String
+      attr_accessor display_as_text: ::String
+      SENSITIVE: [:text, :display_as_text]
     end
 
     class ResourceNotFoundException
@@ -545,6 +795,19 @@ module Aws::BedrockDataAutomation
       SENSITIVE: []
     end
 
+    class UpdateDataAutomationLibraryRequest
+      attr_accessor library_arn: ::String
+      attr_accessor library_description: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: [:library_description]
+    end
+
+    class UpdateDataAutomationLibraryResponse
+      attr_accessor library_arn: ::String
+      attr_accessor status: ("ACTIVE" | "DELETING")
+      SENSITIVE: []
+    end
+
     class UpdateDataAutomationProjectRequest
       attr_accessor project_arn: ::String
       attr_accessor project_stage: ("DEVELOPMENT" | "LIVE")
@@ -552,6 +815,7 @@ module Aws::BedrockDataAutomation
       attr_accessor standard_output_configuration: Types::StandardOutputConfiguration
       attr_accessor custom_output_configuration: Types::CustomOutputConfiguration
       attr_accessor override_configuration: Types::OverrideConfiguration
+      attr_accessor data_automation_library_configuration: Types::DataAutomationLibraryConfiguration
       attr_accessor encryption_configuration: Types::EncryptionConfiguration
       SENSITIVE: [:project_description]
     end
@@ -561,6 +825,17 @@ module Aws::BedrockDataAutomation
       attr_accessor project_stage: ("DEVELOPMENT" | "LIVE")
       attr_accessor status: ("COMPLETED" | "IN_PROGRESS" | "FAILED")
       SENSITIVE: []
+    end
+
+    class UpsertEntityInfo
+      attr_accessor vocabulary: Types::VocabularyEntityInfo
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Vocabulary < UpsertEntityInfo
+      end
+      class Unknown < UpsertEntityInfo
+      end
     end
 
     class ValidationException
@@ -608,6 +883,32 @@ module Aws::BedrockDataAutomation
       attr_accessor extraction: Types::VideoStandardExtraction
       attr_accessor generative_field: Types::VideoStandardGenerativeField
       SENSITIVE: []
+    end
+
+    class VocabularyEntity
+      attr_accessor entity_id: ::String
+      attr_accessor description: ::String
+      attr_accessor language: ("EN" | "DE" | "ES" | "FR" | "IT" | "PT" | "JA" | "KO" | "CN" | "TW" | "HK")
+      attr_accessor phrases: ::Array[Types::Phrase]
+      attr_accessor last_modified_time: ::Time
+      SENSITIVE: [:description]
+    end
+
+    class VocabularyEntityInfo
+      attr_accessor entity_id: ::String
+      attr_accessor description: ::String
+      attr_accessor language: ("EN" | "DE" | "ES" | "FR" | "IT" | "PT" | "JA" | "KO" | "CN" | "TW" | "HK")
+      attr_accessor phrases: ::Array[Types::Phrase]
+      SENSITIVE: [:description]
+    end
+
+    class VocabularyEntitySummary
+      attr_accessor entity_id: ::String
+      attr_accessor description: ::String
+      attr_accessor language: ("EN" | "DE" | "ES" | "FR" | "IT" | "PT" | "JA" | "KO" | "CN" | "TW" | "HK")
+      attr_accessor num_of_phrases: ::Integer
+      attr_accessor last_modified_time: ::Time
+      SENSITIVE: [:description]
     end
   end
 end

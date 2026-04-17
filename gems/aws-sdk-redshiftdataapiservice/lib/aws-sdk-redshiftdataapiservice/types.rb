@@ -97,6 +97,11 @@ module Aws::RedshiftDataAPIService
     #   you create them to identify the query.
     #   @return [String]
     #
+    # @!attribute [rw] parameters
+    #   The parameters for the SQL statements. The parameters are shared
+    #   across all SQL statements in the batch.
+    #   @return [Array<Types::SqlParameter>]
+    #
     # @!attribute [rw] workgroup_name
     #   The serverless workgroup name or Amazon Resource Name (ARN). This
     #   parameter is required when connecting to a serverless workgroup and
@@ -138,6 +143,7 @@ module Aws::RedshiftDataAPIService
       :database,
       :with_event,
       :statement_name,
+      :parameters,
       :workgroup_name,
       :client_token,
       :result_format,
@@ -259,7 +265,8 @@ module Aws::RedshiftDataAPIService
     #   @return [Integer]
     #
     # @!attribute [rw] precision
-    #   The precision value of a decimal number column.
+    #   The precision value of a decimal number column, or the column length
+    #   for a non-numeric column.
     #   @return [Integer]
     #
     # @!attribute [rw] scale

@@ -3864,6 +3864,7 @@ module Aws::CloudFront
 
     UpdateAnycastIpListRequest.add_member(:id, Shapes::ShapeRef.new(shape: string, required: true, location: "uri", location_name: "Id"))
     UpdateAnycastIpListRequest.add_member(:ip_address_type, Shapes::ShapeRef.new(shape: IpAddressType, location_name: "IpAddressType"))
+    UpdateAnycastIpListRequest.add_member(:ipam_cidr_configs, Shapes::ShapeRef.new(shape: IpamCidrConfigList, location_name: "IpamCidrConfigs"))
     UpdateAnycastIpListRequest.add_member(:if_match, Shapes::ShapeRef.new(shape: string, required: true, location: "header", location_name: "If-Match"))
     UpdateAnycastIpListRequest.struct_class = Types::UpdateAnycastIpListRequest
 
