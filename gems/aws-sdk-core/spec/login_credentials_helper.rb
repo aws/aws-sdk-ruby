@@ -20,7 +20,7 @@ module LoginCredentialsHelper
   end
 
   def expect_token_write_back(expected_token)
-    actual_token = JSON.parse(File.read(token_file.path))
+    actual_token = JSON.load_file(token_file.path)
     expect(actual_token).to eq(JSON.parse(JSON.dump(expected_token)))
     expect(File.stat(token_file.path).mode & 0o777).to eq(0o600)
   end
