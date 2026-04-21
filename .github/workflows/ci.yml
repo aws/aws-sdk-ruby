@@ -18,7 +18,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        ruby: [3.4]
+        ruby: ['4.0']
 
     steps:
       - name: Setup Ruby
@@ -48,17 +48,8 @@ jobs:
       fail-fast: false
       matrix:
         # Supported ruby versions
-        # Jruby 10 is expected to fail until fix is live: https://github.com/jruby/jruby/issues/8847
         ruby: [2.7, '3.0', 3.1, 3.2, 3.3, 3.4, '4.0', jruby-9.4, jruby-10.0]
         env: [KITCHEN_SINK, CRT]
-
-        exclude:
-          # Jruby 10 is expected to fail until fix is live: https://github.com/jruby/jruby/issues/8847
-          - ruby: jruby-10.0
-            env: CRT
-          - ruby: jruby-10.0
-            env: KITCHEN_SINK
-
     steps:
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
