@@ -20,8 +20,7 @@ gem 'rdoc'
 
 # protocol parsers
 
-# Pinning to 2.7.6 to avoid Encoding::InvalidByteSequenceError in recent gem versions
-gem 'json', '2.7.6' # due to load_file support, see: https://github.com/ruby/json/issues/696
+gem 'json'
 gem 'nokogiri'
 gem 'oga'
 gem 'rexml'
