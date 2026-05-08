@@ -1,5 +1,6 @@
 Unreleased Changes
 ------------------
+* Feature - Add YJIT & ZJIT tracking to user agent.
 
 3.246.0 (2026-04-23)
 ------------------
