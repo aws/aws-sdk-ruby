@@ -89,6 +89,66 @@ module Aws
         end
       end
 
+      def stub_jit(name, enabled:)
+        if enabled
+          jit_module = double(enabled?: true)
+          stub_const("RubyVM::#{name}", jit_module)
+        else
+          hide_const("RubyVM::#{name}")
+        end
+      end
+
+      # Added tests manually instead of modifying cross-SDK test JSON since JIT info is specific to Ruby.
+      context 'JIT metadata' do
+        before do
+          allow(RbConfig::CONFIG).to receive(:[]).with('host_os').and_return('linux')
+          allow(RbConfig::CONFIG).to receive(:[]).with('host_cpu').and_return('x86_64')
+          allow(Gem::Platform).to receive(:local).and_return(double(version: '1.0'))
+        end
+
+        def user_agent_for(client)
+          resp = client.example_operation
+          resp.context.http_request.headers['User-Agent']
+        end
+
+        it 'includes md/yjit when YJIT is enabled', skip: (RUBY_ENGINE != 'ruby') do
+          stub_jit(:YJIT, enabled: true)
+          stub_jit(:ZJIT, enabled: false)
+
+          expect(user_agent_for(client)).to include('md/yjit')
+          expect(user_agent_for(client)).not_to include('md/zjit')
+        end
+
+        it 'includes md/zjit when ZJIT is enabled', skip: (RUBY_ENGINE != 'ruby') do
+          stub_jit(:YJIT, enabled: false)
+          stub_jit(:ZJIT, enabled: true)
+
+          expect(user_agent_for(client)).to include('md/zjit')
+          expect(user_agent_for(client)).not_to include('md/yjit')
+        end
+
+        it 'includes neither when both are disabled' do
+          stub_jit(:YJIT, enabled: false)
+          stub_jit(:ZJIT, enabled: false)
+
+          ua = user_agent_for(client)
+          expect(ua).not_to include('md/yjit')
+          expect(ua).not_to include('md/zjit')
+        end
+
+        it 'includes neither on non-CRuby engines' do
+          stub_const('RUBY_ENGINE', 'jruby')
+          stub_const('RUBY_ENGINE_VERSION', '9.4.0.0')
+          stub_jit(:YJIT, enabled: false)
+          stub_jit(:ZJIT, enabled: false)
+
+          ua = user_agent_for(client)
+          expect(ua).to include('lang/jruby#9.4.0.0')
+          expect(ua).not_to include('md/yjit')
+          expect(ua).not_to include('md/zjit')
+        end
+      end
+
       context 'test runner' do
         tests = JSON.load_file(
           File.join(File.dirname(__FILE__), 'user_agent_tests.json')
