@@ -331,7 +331,7 @@ module Aws
 
           # Hard-coded failback until the trait is enabled
           service_id = context.config.api.metadata['serviceId']
-          LONG_POLLING_OPERATIONS.include?([service_id, context.operation_name])
+          LONG_POLLING_OPERATIONS[service_id]&.include?(context.operation_name)
         end
 
         def backoff(context, error_inspector, service_id)
@@ -356,7 +356,7 @@ module Aws
         end
 
         def parse_retry_after(context)
-          retry_after = context.http_response.headers['x-amx-retry-after']
+          retry_after = context.http_response.headers['x-amz-retry-after']
           return nil unless retry_after
 
           Integer(retry_after) / 1000.0

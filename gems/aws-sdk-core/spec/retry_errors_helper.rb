@@ -119,6 +119,10 @@ def setup_next_response(test_case)
     resp.context.http_response.headers['date'] = Time.now.utc + response[:clock_skew]
   end
 
+  if response[:retry_after]
+    resp.context.http_response.headers['x-amz-retry-after'] = response[:retry_after].to_s
+  end
+
   if response[:endpoint_discovery]
     allow(resp.context.operation).to receive(:endpoint_discovery).and_return(true)
   end

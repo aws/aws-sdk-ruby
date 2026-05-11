@@ -10,7 +10,7 @@ module Aws
         INITIAL_RETRY_TOKENS = 500
         RETRY_COST = 14
         NO_RETRY_INCREMENT = 1
-        THROTTLING_RETRY_COST = 10
+        THROTTLING_RETRY_COST = 5
 
         def initialize(opts = {})
           @mutex              = Mutex.new

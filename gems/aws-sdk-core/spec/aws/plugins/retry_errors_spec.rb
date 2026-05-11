@@ -8,6 +8,10 @@ module Aws
     describe RetryErrors do
       let(:client) { RetryErrorsSvc::Client.new(stub_responses: true) }
 
+      it 'defaults config.retry_mode to standard' do
+        expect(client.config.retry_mode).to eq('standard')
+      end
+
       it 'can configure retry_mode with shared config' do
         allow_any_instance_of(Aws::SharedConfig)
           .to receive(:retry_mode).and_return('standard')
@@ -120,6 +124,7 @@ module Aws
         cfg.add_option(:credentials, credentials)
         cfg.add_option(:endpoint_cache, cache)
         cfg.add_option(:api, api)
+        cfg.add_option(:logger, nil)
         cfg.add_option(:profile, nil)
         RetryErrors.new.add_options(cfg)
         cfg.build!
@@ -132,6 +137,8 @@ module Aws
       let(:handler) { RetryErrors::Handler.new }
 
       let(:service_error) { RetryErrorsSvc::Errors::ServiceError.new(nil, nil) }
+
+      let(:throttling_error) { RetryErrorsSvc::Errors::Throttling.new(nil, nil) }
 
       before(:each) do
         resp.context.config = config
@@ -149,15 +156,15 @@ module Aws
           test_case_def = [
             {
               response: { status_code: 500, error: service_error },
-              expect: { available_capacity: 495, retries: 1, delay: 1 }
+              expect: { available_capacity: 486, retries: 1, delay: 0.05 }
             },
             {
               response: { status_code: 500, error: service_error },
-              expect: { available_capacity: 490, retries: 2, delay: 2 }
+              expect: { available_capacity: 472, retries: 2, delay: 0.1 }
             },
             {
               response: { status_code: 200, error: nil },
-              expect: { available_capacity: 495, retries: 2 }
+              expect: { available_capacity: 486, retries: 2 }
             } # success
           ]
 
@@ -168,15 +175,15 @@ module Aws
           test_case_def = [
             {
               response: { status_code: 500, error: service_error },
-              expect: { available_capacity: 495, retries: 1, delay: 1 }
+              expect: { available_capacity: 486, retries: 1, delay: 0.05 }
             },
             {
               response: { status_code: 500, error: service_error },
-              expect: { available_capacity: 490, retries: 2, delay: 2 }
+              expect: { available_capacity: 472, retries: 2, delay: 0.1 }
             },
             {
               response: { status_code: 500, error: service_error },
-              expect: { available_capacity: 490, retries: 2 }
+              expect: { available_capacity: 472, retries: 2 }
             } # failure
           ]
 
@@ -184,12 +191,12 @@ module Aws
         end
 
         it 'fails due to retry quota reached after a single retry' do
-          config.retry_quota.instance_variable_set(:@available_capacity, 5)
+          config.retry_quota.instance_variable_set(:@available_capacity, 14)
 
           test_case_def = [
             {
               response: { status_code: 500, error: service_error },
-              expect: { available_capacity: 0, retries: 1, delay: 1 }
+              expect: { available_capacity: 0, retries: 1, delay: 0.05 }
             },
             {
               response: { status_code: 500, error: service_error },
@@ -219,23 +226,23 @@ module Aws
           test_case_def = [
             {
               response: { status_code: 500, error: service_error },
-              expect: { available_capacity: 495, retries: 1, delay: 1 }
+              expect: { available_capacity: 486, retries: 1, delay: 0.05 }
             },
             {
               response: { status_code: 500, error: service_error },
-              expect: { available_capacity: 490, retries: 2, delay: 2 }
+              expect: { available_capacity: 472, retries: 2, delay: 0.1 }
             },
             {
               response: { status_code: 500, error: service_error },
-              expect: { available_capacity: 485, retries: 3, delay: 4 }
+              expect: { available_capacity: 458, retries: 3, delay: 0.2 }
             },
             {
               response: { status_code: 500, error: service_error },
-              expect: { available_capacity: 480, retries: 4, delay: 8 }
+              expect: { available_capacity: 444, retries: 4, delay: 0.4 }
             },
             {
               response: { status_code: 500, error: service_error },
-              expect: { available_capacity: 480, retries: 4 }
+              expect: { available_capacity: 444, retries: 4 }
             }
           ]
 
@@ -244,28 +251,28 @@ module Aws
 
         it 'does not exceed the max backoff time' do
           config.max_attempts = 5
-          stub_const('Aws::Plugins::RetryErrors::Handler::MAX_BACKOFF', 3)
+          stub_const('Aws::Plugins::RetryErrors::Handler::MAX_BACKOFF', 0.2)
 
           test_case_def = [
             {
               response: { status_code: 500, error: service_error },
-              expect: { available_capacity: 495, retries: 1, delay: 1 }
+              expect: { available_capacity: 486, retries: 1, delay: 0.05 }
             },
             {
               response: { status_code: 500, error: service_error },
-              expect: { available_capacity: 490, retries: 2, delay: 2 }
+              expect: { available_capacity: 472, retries: 2, delay: 0.1 }
             },
             {
               response: { status_code: 500, error: service_error },
-              expect: { available_capacity: 485, retries: 3, delay: 3 }
+              expect: { available_capacity: 458, retries: 3, delay: 0.2 }
             },
             {
               response: { status_code: 500, error: service_error },
-              expect: { available_capacity: 480, retries: 4, delay: 3 }
+              expect: { available_capacity: 444, retries: 4, delay: 0.2 }
             },
             {
               response: { status_code: 500, error: service_error },
-              expect: { available_capacity: 480, retries: 4 }
+              expect: { available_capacity: 444, retries: 4 }
             }
           ]
 
@@ -274,20 +281,16 @@ module Aws
 
         it 'fails due to retry quota bucket exhaustion' do
           config.max_attempts = 5
-          config.retry_quota.instance_variable_set(:@available_capacity, 10)
+          config.retry_quota.instance_variable_set(:@available_capacity, 20)
 
           test_case_def = [
             {
               response: { status_code: 500, error: service_error },
-              expect: { available_capacity: 5, retries: 1, delay: 1 }
+              expect: { available_capacity: 6, retries: 1, delay: 0.05 }
             },
             {
               response: { status_code: 502, error: service_error },
-              expect: { available_capacity: 0, retries: 2, delay: 2 }
-            },
-            {
-              response: { status_code: 503, error: service_error },
-              expect: { available_capacity: 0, retries: 2 }
+              expect: { available_capacity: 6, retries: 1 }
             }
           ]
 
@@ -296,20 +299,20 @@ module Aws
 
         it 'recovers after successful responses' do
           config.max_attempts = 5
-          config.retry_quota.instance_variable_set(:@available_capacity, 15)
+          config.retry_quota.instance_variable_set(:@available_capacity, 30)
 
           test_case_def = [
             {
               response: { status_code: 500, error: service_error },
-              expect: { available_capacity: 10, retries: 1, delay: 1 }
+              expect: { available_capacity: 16, retries: 1, delay: 0.05 }
             },
             {
               response: { status_code: 502, error: service_error },
-              expect: { available_capacity: 5, retries: 2, delay: 2 }
+              expect: { available_capacity: 2, retries: 2, delay: 0.1 }
             },
             {
               response: { status_code: 200, error: nil },
-              expect: { available_capacity: 10, retries: 2 }
+              expect: { available_capacity: 16, retries: 2 }
             }
           ]
           handle_with_retry(test_case_def)
@@ -317,15 +320,146 @@ module Aws
           test_case_post_success = [
             {
               response: { status_code: 500, error: service_error },
-              expect: { available_capacity: 5, retries: 1, delay: 1 }
+              expect: { available_capacity: 2, retries: 1, delay: 0.05 }
             },
             {
               response: { status_code: 200, error: nil },
-              expect: { available_capacity: 10, retries: 1 }
+              expect: { available_capacity: 16, retries: 1 }
             }
           ]
           reset_request
           handle_with_retry(test_case_post_success)
+        end
+
+        it 'retries for throttling errors' do
+          test_case_def = [
+            {
+              response: { status_code: 400, error: throttling_error },
+              expect: { available_capacity: 495, retries: 1, delay: 1 }
+            },
+            {
+              response: { status_code: 200, error: nil },
+              expect: { available_capacity: 500, retries: 1 }
+            }
+          ]
+
+          handle_with_retry(test_case_def)
+        end
+
+        context 'DynamoDB base backoff and increased retries' do
+          let(:api) do
+            api = Seahorse::Model::Api.new
+            api.metadata['serviceId'] = 'DynamoDB'
+            api
+          end
+
+          it 'retries errors' do
+            test_case_def = [
+              {
+                response: { status_code: 500, error: service_error },
+                expect: { available_capacity: 486, retries: 1, delay: 0.025 }
+              },
+              {
+                response: { status_code: 500, error: service_error },
+                expect: { available_capacity: 472, retries: 2, delay: 0.05 }
+              },
+              {
+                response: { status_code: 500, error: service_error },
+                expect: { available_capacity: 458, retries: 3, delay: 0.1 }
+              },
+              {
+                response: { status_code: 500, error: service_error },
+                expect: { available_capacity: 458, retries: 3 }
+              }
+            ]
+
+            handle_with_retry(test_case_def)
+          end
+        end
+
+        # TODO: update with generic long-polling service once trait is supported
+        context 'long-polling' do
+          let(:api) do
+            api = Seahorse::Model::Api.new
+            api.metadata['serviceId'] = 'SQS'
+            api
+          end
+
+          it 'backs off even with depleted token bucket' do
+            resp.context.operation_name = :receive_message
+            config.retry_quota.instance_variable_set(:@available_capacity, 0)
+
+            test_case_def = [
+              {
+                response: { status_code: 500, error: service_error },
+                expect: { available_capacity: 0, retries: 0, delay: 0.05 }
+              }
+            ]
+
+            handle_with_retry(test_case_def)
+          end
+        end
+
+        context 'x-amz-retry-after' do
+          it 'honors the header' do
+            test_case_def = [
+              {
+                response: { status_code: 500, error: service_error, retry_after: '1500' },
+                expect: { available_capacity: 486, retries: 1, delay: 1.5 }
+              },
+              {
+                response: { status_code: 200, error: nil },
+                expect: { available_capacity: 500, retries: 1 }
+              }
+            ]
+
+            handle_with_retry(test_case_def)
+          end
+
+          it 'delays for at least the exponential backoff duration' do
+            test_case_def = [
+              {
+                response: { status_code: 500, error: service_error, retry_after: '0' },
+                expect: { available_capacity: 486, retries: 1, delay: 0.05 }
+              },
+              {
+                response: { status_code: 200, error: nil },
+                expect: { available_capacity: 500, retries: 1 }
+              }
+            ]
+
+            handle_with_retry(test_case_def)
+          end
+
+          it 'delays for at most 5 plus the exponential backoff duration' do
+            test_case_def = [
+              {
+                response: { status_code: 500, error: service_error, retry_after: '10000' },
+                expect: { available_capacity: 486, retries: 1, delay: 5.05 }
+              },
+              {
+                response: { status_code: 200, error: nil },
+                expect: { available_capacity: 500, retries: 1 }
+              }
+            ]
+
+            handle_with_retry(test_case_def)
+          end
+
+          it 'falls back to exponential backoff for invalid headers' do
+            test_case_def = [
+              {
+                response: { status_code: 500, error: service_error, retry_after: 'invalid' },
+                expect: { available_capacity: 486, retries: 1, delay: 0.05 }
+              },
+              {
+                response: { status_code: 200, error: nil },
+                expect: { available_capacity: 500, retries: 1 }
+              }
+            ]
+
+            handle_with_retry(test_case_def)
+          end
         end
 
         it 'corrects and retries clock skew errors' do
